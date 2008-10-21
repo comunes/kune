@@ -10,19 +10,19 @@ public class SiteProgressPresenter implements SiteProgress {
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void hideProgress() {
-	view.hideProgress();
+        view.hideProgress();
     }
 
     public void init(final SiteProgressView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void showProgress(final String text) {
-	view.showProgress(text);
+        view.showProgress(text);
     }
 
 }

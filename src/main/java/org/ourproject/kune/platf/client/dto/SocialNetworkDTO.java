@@ -28,28 +28,28 @@ public class SocialNetworkDTO implements IsSerializable {
     GroupListDTO pendingCollaborators;
 
     public SocialNetworkDTO() {
-	accessLists = new AccessListsDTO();
-	pendingCollaborators = new GroupListDTO();
+        accessLists = new AccessListsDTO();
+        pendingCollaborators = new GroupListDTO();
     }
 
     public AccessListsDTO getAccessLists() {
-	return accessLists;
+        return accessLists;
     }
 
     public GroupListDTO getPendingCollaborators() {
-	return pendingCollaborators;
+        return pendingCollaborators;
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {
-	this.accessLists = accessLists;
+        this.accessLists = accessLists;
     }
 
     public void setPendingCollaborators(final GroupListDTO pendingCollaborators) {
-	this.pendingCollaborators = pendingCollaborators;
+        this.pendingCollaborators = pendingCollaborators;
     }
 
     public String toString() {
-	return "SocialNetworkDTO[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators + "]";
+        return "SocialNetworkDTO[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators + "]";
     }
 
 }

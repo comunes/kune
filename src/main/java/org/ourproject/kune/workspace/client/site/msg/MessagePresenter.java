@@ -24,8 +24,8 @@ import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
 public interface MessagePresenter {
 
-    public abstract void resetMessage();
+    void resetMessage();
 
-    public abstract void setMessage(final String message, final SiteErrorType type);
+    void setMessage(final String message, final SiteErrorType type);
 
 }

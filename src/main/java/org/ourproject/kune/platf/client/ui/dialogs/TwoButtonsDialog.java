@@ -32,6 +32,13 @@ public class TwoButtonsDialog {
     private final Window dialog;
 
     public TwoButtonsDialog(final String caption, final String firstButton, final String secondButton,
+            final boolean modal, final boolean minimizable, final int width, final int height,
+            final FormListener listener) {
+        this(caption, firstButton, secondButton, modal, minimizable, width, height, width, height, listener);
+
+    }
+
+    public TwoButtonsDialog(final String caption, final String firstButton, final String secondButton,
             final boolean modal, final boolean minimizable, final int width, final int height, final int minWidth,
             final int minHeight, final FormListener listener) {
 
@@ -47,9 +54,7 @@ public class TwoButtonsDialog {
         dialog.setCollapsible(minimizable);
 
         // Def values
-        dialog.
-
-        setShadow(true);
+        dialog.setShadow(true);
 
         dialog.addButton(new CustomButton(firstButton, new ClickListener() {
             public void onClick(final Widget sender) {
@@ -57,27 +62,17 @@ public class TwoButtonsDialog {
             }
         }).getButton());
 
-        dialog.addButton(new CustomButton(secondButton, new ClickListener() {
+        CustomButton button = new CustomButton(secondButton, new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onCancel();
             }
-        }).getButton());
-
-    }
-
-    public TwoButtonsDialog(final String caption, final String firstButton, final String secondButton,
-            final boolean modal, final boolean minimizable, final int width, final int height,
-            final FormListener listener) {
-        this(caption, firstButton, secondButton, modal, minimizable, width, height, width, height, listener);
+        });
+        dialog.addButton(button.getButton());
 
     }
 
     public void add(final Widget widget) {
         dialog.add(widget);
-    }
-
-    public void show() {
-        dialog.show();
     }
 
     public void center() {
@@ -86,5 +81,9 @@ public class TwoButtonsDialog {
 
     public void hide() {
         dialog.hide();
+    }
+
+    public void show() {
+        dialog.show();
     }
 }

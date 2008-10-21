@@ -28,10 +28,10 @@ public class ChatInfoPanel extends VerticalPanel implements ChatInfo {
     private final VerticalPanel stateArea;
 
     public ChatInfoPanel() {
-	final FlowPanel flow = new FlowPanel();
-	add(flow);
-	stateArea = new VerticalPanel();
-	add(stateArea);
+        final FlowPanel flow = new FlowPanel();
+        add(flow);
+        stateArea = new VerticalPanel();
+        add(stateArea);
     }
 
     public void show() {

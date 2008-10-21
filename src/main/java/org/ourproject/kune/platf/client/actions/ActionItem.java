@@ -12,20 +12,20 @@ public class ActionItem<T> {
     T item;
 
     public ActionItem(final ActionDescriptor<T> action, final T item) {
-	this.action = action;
-	this.item = item;
+        this.action = action;
+        this.item = item;
     }
 
     public boolean checkEnabling() {
-	final ActionEnableCondition<T> enableCondition = action.getEnableCondition();
-	return enableCondition != null ? enableCondition.mustBeEnabled(getItem()) : true;
+        final ActionEnableCondition<T> enableCondition = action.getEnableCondition();
+        return enableCondition != null ? enableCondition.mustBeEnabled(getItem()) : true;
     }
 
     public ActionDescriptor<T> getAction() {
-	return action;
+        return action;
     }
 
     public T getItem() {
-	return item;
+        return item;
     }
 }

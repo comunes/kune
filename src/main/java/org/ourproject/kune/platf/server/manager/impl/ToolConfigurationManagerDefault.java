@@ -31,11 +31,11 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ToolConfigurationManagerDefault extends DefaultManager<ToolConfiguration, Long> implements
-	ToolConfigurationManager {
+        ToolConfigurationManager {
 
     @Inject
     public ToolConfigurationManagerDefault(final Provider<EntityManager> provider) {
-	super(provider, ToolConfiguration.class);
+        super(provider, ToolConfiguration.class);
     }
 
 }

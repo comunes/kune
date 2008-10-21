@@ -15,81 +15,81 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test
     public void contentWithLoggedUserIsEditable() throws Exception {
-	final String userHash = doLogin();
-	final StateDTO response = contentService.getContent(userHash, new StateToken());
-	assertNotNull(response.getContentRights());
-	assertTrue(response.getContentRights().isEditable());
-	// assertTrue(response.getAccessLists().getAdmin().size() == 1);
+        final String userHash = doLogin();
+        final StateDTO response = contentService.getContent(userHash, new StateToken());
+        assertNotNull(response.getContentRights());
+        assertTrue(response.getContentRights().isEditable());
+        // assertTrue(response.getAccessLists().getAdmin().size() == 1);
     }
 
     @Before
     public void create() {
-	new IntegrationTestHelper(this);
+        new IntegrationTestHelper(this);
     }
 
     @Test
     public void defaultCountentShouldExist() throws Exception {
-	final StateDTO content = contentService.getContent(null, new StateToken());
-	assertNotNull(content);
-	assertNotNull(content.getGroup());
-	assertNotNull(content.getContainer());
-	assertNotNull(content.getContainer().getId());
-	assertNotNull(content.getToolName());
-	assertNotNull(content.getDocumentId());
-	assertNotNull(content.getRateByUsers());
-	assertNotNull(content.getRate());
+        final StateDTO content = contentService.getContent(null, new StateToken());
+        assertNotNull(content);
+        assertNotNull(content.getGroup());
+        assertNotNull(content.getContainer());
+        assertNotNull(content.getContainer().getId());
+        assertNotNull(content.getToolName());
+        assertNotNull(content.getDocumentId());
+        assertNotNull(content.getRateByUsers());
+        assertNotNull(content.getRate());
     }
 
     @Test
     public void noContentNotLogged() throws Exception {
-	final StateDTO response = contentService.getContent(null, new StateToken());
-	assertNotNull(response);
+        final StateDTO response = contentService.getContent(null, new StateToken());
+        assertNotNull(response);
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent() throws Exception {
-	contentService.getContent(null, new StateToken("foo foo foo"));
+        contentService.getContent(null, new StateToken("foo foo foo"));
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent2() throws Exception {
-	contentService.getContent(null, new StateToken("site.foofoo"));
+        contentService.getContent(null, new StateToken("site.foofoo"));
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent3() throws Exception {
-	contentService.getContent(null, new StateToken("site.docs.foofoo"));
+        contentService.getContent(null, new StateToken("site.docs.foofoo"));
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent4() throws Exception {
-	final StateDTO stateDTO = getDefaultContent();
-	contentService.getContent(null, stateDTO.getStateToken().clone().setDocument("dadaas"));
+        final StateDTO stateDTO = getDefaultContent();
+        contentService.getContent(null, stateDTO.getStateToken().clone().setDocument("dadaas"));
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent5() throws Exception {
-	contentService.getContent(null, new StateToken("comm3.docs.19"));
+        contentService.getContent(null, new StateToken("comm3.docs.19"));
     }
 
     @Test
     public void notLoggedUserShouldNotEditDefaultDoc() throws Exception {
-	final StateDTO content = contentService.getContent(null, new StateToken());
-	assertFalse(content.getContentRights().isAdministrable());
-	assertFalse(content.getContentRights().isEditable());
-	assertTrue(content.getContentRights().isVisible());
-	assertFalse(content.getContainerRights().isAdministrable());
-	assertFalse(content.getContainerRights().isEditable());
-	assertTrue(content.getContainerRights().isVisible());
+        final StateDTO content = contentService.getContent(null, new StateToken());
+        assertFalse(content.getContentRights().isAdministrable());
+        assertFalse(content.getContentRights().isEditable());
+        assertTrue(content.getContentRights().isVisible());
+        assertFalse(content.getContainerRights().isAdministrable());
+        assertFalse(content.getContainerRights().isEditable());
+        assertTrue(content.getContainerRights().isVisible());
     }
 
     @Test
     public void unknownContent() throws Exception {
-	final StateDTO content = contentService.getContent(null, new StateToken("site.docs"));
-	assertNotNull(content);
-	assertNotNull(content.getGroup());
-	assertNotNull(content.getContainer());
-	assertNotNull(content.getContainer().getId());
-	assertNotNull(content.getToolName());
+        final StateDTO content = contentService.getContent(null, new StateToken("site.docs"));
+        assertNotNull(content);
+        assertNotNull(content.getGroup());
+        assertNotNull(content.getContainer());
+        assertNotNull(content.getContainer().getId());
+        assertNotNull(content.getToolName());
     }
 }

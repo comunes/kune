@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -123,7 +124,8 @@ public class DocumentClientModule extends AbstractModule {
         register(Singleton.class, new Factory<DocumentReader>(DocumentReader.class) {
             @Override
             public DocumentReader create() {
-                final DocumentReaderView view = new DocumentReaderPanel($(WorkspaceSkeleton.class));
+                final DocumentReaderView view = new DocumentReaderPanel($(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
                 final DocumentReaderPresenter presenter = new DocumentReaderPresenter(view, $$(FileDownloadUtils.class));
                 return presenter;
             }

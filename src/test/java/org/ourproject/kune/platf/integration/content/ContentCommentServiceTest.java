@@ -17,27 +17,27 @@ public class ContentCommentServiceTest extends ContentServiceIntegrationTest {
 
     @Test
     public void commentDefaultContent() throws Exception {
-	doLogin();
-	final String commentText = "Some comment";
-	final CommentDTO commentDTO = contentService.addComment(session.getHash(), defaultContent.getStateToken(),
-		commentText);
-	assertEquals(commentDTO.getText(), commentText);
-	assertEquals(commentDTO.getPositiveVotersCount(), 0);
-	assertEquals(commentDTO.getNegativeVotersCount(), 0);
-	assertEquals(commentDTO.getAbuseInformersCount(), 0);
+        doLogin();
+        final String commentText = "Some comment";
+        final CommentDTO commentDTO = contentService.addComment(session.getHash(), defaultContent.getStateToken(),
+                                                                commentText);
+        assertEquals(commentDTO.getText(), commentText);
+        assertEquals(commentDTO.getPositiveVotersCount(), 0);
+        assertEquals(commentDTO.getNegativeVotersCount(), 0);
+        assertEquals(commentDTO.getAbuseInformersCount(), 0);
     }
 
     @Test(expected = UserMustBeLoggedException.class)
     public void commentWithoutLoginMustFail() throws DefaultException {
-	final String commentText = "Some comment";
-	contentService.addComment(session.getHash(), defaultContent.getStateToken(), commentText);
+        final String commentText = "Some comment";
+        contentService.addComment(session.getHash(), defaultContent.getStateToken(), commentText);
     }
 
     @Before
     public void init() throws Exception {
-	new IntegrationTestHelper(this);
-	groupName = getDefSiteGroupName();
-	defaultContent = getDefaultContent();
+        new IntegrationTestHelper(this);
+        groupName = getDefSiteGroupName();
+        defaultContent = getDefaultContent();
     }
 
 }

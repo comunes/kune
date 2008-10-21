@@ -29,24 +29,24 @@ public class RoomDTO {
     }
 
     public RoomDTO(final String name) {
-	this();
-	this.name = name;
+        this();
+        this.name = name;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getSubject() {
-	return subject;
+        return subject;
     }
 
     public void setSubject(final String subject) {
-	this.subject = subject;
+        this.subject = subject;
     }
 
 }

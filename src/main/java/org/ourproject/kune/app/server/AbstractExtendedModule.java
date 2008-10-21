@@ -42,7 +42,8 @@ import com.google.inject.matcher.Matcher;
 
 /*
  * See:
- * http://tembrel.blogspot.com/2007/09/injecting-method-interceptors-in-guice.html
+ * http://tembrel.blogspot.com/2007/09/injecting-method-interceptors-in-guice
+ * .html
  */
 
 public abstract class AbstractExtendedModule extends AbstractModule {
@@ -99,7 +100,7 @@ public abstract class AbstractExtendedModule extends AbstractModule {
      * Hack to ensure unique Keys for binding different instances of
      * ExtendedModule. The prefix is chosen to reduce the chances of a conflict
      * with some other use of
-     *
+     * 
      * @Named. A better solution would be to invent an Annotation for just this
      *         purpose.
      */

@@ -26,40 +26,40 @@ public class AccessRights {
     boolean isVisible;
 
     public AccessRights() {
-	this(false, false, false);
+        this(false, false, false);
     }
 
     public AccessRights(final boolean isAdministrable, final boolean isEditable, final boolean isVisible) {
-	this.isAdministrable = isAdministrable;
-	this.isEditable = isEditable;
-	this.isVisible = isVisible;
+        this.isAdministrable = isAdministrable;
+        this.isEditable = isEditable;
+        this.isVisible = isVisible;
     }
 
     public boolean isAdministrable() {
-	return isAdministrable;
+        return isAdministrable;
     }
 
     public boolean isEditable() {
-	return isEditable;
+        return isEditable;
     }
 
     public boolean isVisible() {
-	return isVisible;
+        return isVisible;
     }
 
     public void setAdministrable(final boolean isAdministrable) {
-	this.isAdministrable = isAdministrable;
+        this.isAdministrable = isAdministrable;
     }
 
     public void setEditable(final boolean isEditable) {
-	this.isEditable = isEditable;
+        this.isEditable = isEditable;
     }
 
     public void setVisible(final boolean isVisible) {
-	this.isVisible = isVisible;
+        this.isVisible = isVisible;
     }
 
     public String toString() {
-	return "AccessRights[a: " + isAdministrable + ", e: " + isEditable + ", v: " + isVisible + "]";
+        return "AccessRights[a: " + isAdministrable + ", e: " + isEditable + ", v: " + isVisible + "]";
     }
 }

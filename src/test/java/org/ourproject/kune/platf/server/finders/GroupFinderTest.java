@@ -16,18 +16,18 @@ public class GroupFinderTest extends PersistenceTest {
 
     @Before
     public void insertData() {
-	openTransaction();
-	persist(new Group("shortname1", "name1"));
-	persist(new Group("shortname2", "name2"));
+        openTransaction();
+        persist(new Group("shortname1", "name1"));
+        persist(new Group("shortname2", "name2"));
     }
 
     @Test
     public void testGetAll() {
-	assertEquals(2, groupFinder.getAll().size());
+        assertEquals(2, groupFinder.getAll().size());
     }
 
     @After
     public void close() {
-	closeTransaction();
+        closeTransaction();
     }
 }

@@ -21,10 +21,10 @@ package org.ourproject.kune.platf.client.ui.rate;
 
 public interface RateView {
 
-    public void setByUsers(Integer byUsers);
+    void setByUsers(Integer byUsers);
 
-    public void setRate(Double rate);
+    void setRate(Double rate);
 
-    public void setVisible(boolean visible);
+    void setVisible(boolean visible);
 
 }

@@ -37,43 +37,43 @@ public class EntityLicensePanel implements EntityLicenseView {
     private final I18nTranslationService i18n;
 
     public EntityLicensePanel(final EntityLicensePresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws) {
-	this.i18n = i18n;
-	copyright = new Label();
-	image = new Image();
-	license = new Label();
-	final SimpleToolbar bottomTitle = ws.getEntityWorkspace().getBottomTitle();
-	bottomTitle.add(copyright);
-	bottomTitle.add(license);
-	bottomTitle.addSpacer();
-	bottomTitle.addSpacer();
-	bottomTitle.add(image);
-	final ClickListener clickListener = new ClickListener() {
-	    public void onClick(Widget arg0) {
-		presenter.onLicenseClick();
-	    }
-	};
+            final WorkspaceSkeleton ws) {
+        this.i18n = i18n;
+        copyright = new Label();
+        image = new Image();
+        license = new Label();
+        final SimpleToolbar bottomTitle = ws.getEntityWorkspace().getBottomTitle();
+        bottomTitle.add(copyright);
+        bottomTitle.add(license);
+        bottomTitle.addSpacer();
+        bottomTitle.addSpacer();
+        bottomTitle.add(image);
+        final ClickListener clickListener = new ClickListener() {
+            public void onClick(Widget arg0) {
+                presenter.onLicenseClick();
+            }
+        };
 
-	license.addClickListener(clickListener);
-	image.addClickListener(clickListener);
-	copyright.setVisible(false);
-	license.setVisible(false);
-	image.setVisible(false);
+        license.addClickListener(clickListener);
+        image.addClickListener(clickListener);
+        copyright.setVisible(false);
+        license.setVisible(false);
+        image.setVisible(false);
 
-	copyright.addStyleName("kune-Margin-Large-l");
-	license.setStyleName("k-entitylicensepanel-licensetext");
+        copyright.addStyleName("kune-Margin-Large-l");
+        license.setStyleName("k-entitylicensepanel-licensetext");
     }
 
     public void openWindow(final String url) {
-	Window.open(url, "_blank", "");
+        Window.open(url, "_blank", "");
     }
 
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
-	copyright.setText(i18n.t("© [%s], under license: ", groupName));
-	license.setText(licenseDTO.getLongName());
-	copyright.setVisible(true);
-	license.setVisible(true);
-	image.setVisible(true);
-	image.setUrl(licenseDTO.getImageUrl());
+        copyright.setText(i18n.t("© [%s], under license: ", groupName));
+        license.setText(licenseDTO.getLongName());
+        copyright.setVisible(true);
+        license.setVisible(true);
+        image.setVisible(true);
+        image.setUrl(licenseDTO.getImageUrl());
     }
 }

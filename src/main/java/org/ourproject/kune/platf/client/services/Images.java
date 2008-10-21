@@ -27,14 +27,14 @@ import com.google.gwt.user.client.ui.ImageBundle;
 public interface Images extends ImageBundle {
 
     public static class App {
-	private static Images ourInstance = null;
+        private static Images ourInstance = null;
 
-	public static synchronized Images getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (Images) GWT.create(Images.class);
-	    }
-	    return ourInstance;
-	}
+        public static synchronized Images getInstance() {
+            if (ourInstance == null) {
+                ourInstance = (Images) GWT.create(Images.class);
+            }
+            return ourInstance;
+        }
     }
 
     @Resource("org/ourproject/kune/platf/public/images/accept.png")

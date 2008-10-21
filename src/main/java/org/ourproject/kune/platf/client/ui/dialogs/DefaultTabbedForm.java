@@ -14,39 +14,39 @@ public class DefaultTabbedForm {
     private final TabPanel tabPanel;
 
     public DefaultTabbedForm(final int width, final int labelWidth) {
-	formPanel = new FormPanel();
-	formPanel.setFrame(true);
-	formPanel.setLabelWidth(labelWidth);
-	formPanel.setBorder(false);
-	formPanel.setWidth(width);
-	formPanel.setButtonAlign(Position.RIGHT);
+        formPanel = new FormPanel();
+        formPanel.setFrame(true);
+        formPanel.setLabelWidth(labelWidth);
+        formPanel.setBorder(false);
+        formPanel.setWidth(width);
+        formPanel.setButtonAlign(Position.RIGHT);
 
-	tabPanel = new TabPanel();
-	tabPanel.setActiveTab(0);
-	formPanel.add(tabPanel);
+        tabPanel = new TabPanel();
+        tabPanel.setActiveTab(0);
+        formPanel.add(tabPanel);
     }
 
     public void addButton(final Button button) {
-	formPanel.addButton(button);
+        formPanel.addButton(button);
     }
 
     public void addTab(final String title, final Panel tab) {
-	tab.setTitle(title);
-	tab.setLayout(new FormLayout());
-	tab.setAutoHeight(true);
-	tab.setPaddings(10);
-	tabPanel.add(tab);
-	if (formPanel.isRendered()) {
-	    formPanel.doLayout();
-	}
+        tab.setTitle(title);
+        tab.setLayout(new FormLayout());
+        tab.setAutoHeight(true);
+        tab.setPaddings(10);
+        tabPanel.add(tab);
+        if (formPanel.isRendered()) {
+            formPanel.doLayout();
+        }
     }
 
     public Form getForm() {
-	return formPanel.getForm();
+        return formPanel.getForm();
     }
 
     public Component getPanel() {
-	return formPanel;
+        return formPanel;
     }
 
 }

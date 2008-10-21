@@ -32,16 +32,16 @@ import com.google.gwt.user.client.ui.Widget;
 public class RoomViewPanel extends VerticalPanel implements View {
 
     public RoomViewPanel(final RoomViewListener listener) {
-	FlowPanel flow = new FlowPanel();
-	Button btnEnter = new Button("entrar", new ClickListener() {
-	    public void onClick(Widget arg0) {
-		listener.onEnterRoom();
-	    }
-	});
-	flow.add(btnEnter);
-	Label label = new Label("panel del chat: contenido por defecto");
+        FlowPanel flow = new FlowPanel();
+        Button btnEnter = new Button("entrar", new ClickListener() {
+            public void onClick(Widget arg0) {
+                listener.onEnterRoom();
+            }
+        });
+        flow.add(btnEnter);
+        Label label = new Label("panel del chat: contenido por defecto");
 
-	add(flow);
-	add(label);
+        add(flow);
+        add(label);
     }
 }

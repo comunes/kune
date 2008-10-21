@@ -21,10 +21,10 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The <code>RoundedPanel</code> class adds similar rounded corners, as seen
- * in other Google applications, to a widget. This is done by adding several
- * <code>div</code> Elements around a Widget. The HTML code roughly for a
- * corner height 2 looks as follows:
+ * The <code>RoundedPanel</code> class adds similar rounded corners, as seen in
+ * other Google applications, to a widget. This is done by adding several
+ * <code>div</code> Elements around a Widget. The HTML code roughly for a corner
+ * height 2 looks as follows:
  * 
  * <pre>
  * &lt;div&gt;
@@ -90,15 +90,14 @@ import com.google.gwt.user.client.ui.Widget;
  * .selected .my-RP { background-color:#c3d9ff; }
  * </pre>
  * 
- * <h3>Adding rounded corners to DialogBox widgets</h3>
- * Adding rounded corners to a <code>DialogBox</code> is somewhat more
- * complicated. The problem with <code>DialogBox</code> is that it uses a
- * private panel and the <code>RoundedPanel</code> should be applied to this
- * private <code>Panel</code>. To add the rounded corners to a
- * <code>DialogBox</code> you have to rewrite the implementation of the
- * <code>DialogBox</code>. For the <code>DialogBox</code> widget this can
- * be done as follows. First create a new class like
- * <code>RoundedDialogBox</code> and copy the code from the original
+ * <h3>Adding rounded corners to DialogBox widgets</h3> Adding rounded corners
+ * to a <code>DialogBox</code> is somewhat more complicated. The problem with
+ * <code>DialogBox</code> is that it uses a private panel and the
+ * <code>RoundedPanel</code> should be applied to this private
+ * <code>Panel</code>. To add the rounded corners to a <code>DialogBox</code>
+ * you have to rewrite the implementation of the <code>DialogBox</code>. For the
+ * <code>DialogBox</code> widget this can be done as follows. First create a new
+ * class like <code>RoundedDialogBox</code> and copy the code from the original
  * <code>DialogBox</code> (Please take the copyright of this class into
  * account). Next make the following changes to the code:
  * 
@@ -156,8 +155,8 @@ import com.google.gwt.user.client.ui.Widget;
  * </pre>
  * 
  * Now by extending your own dialog class on this <code>RoundedDialogBox</code>
- * instead of the original <code>DialogBox</code> you will have rounded
- * corners around your dialog.
+ * instead of the original <code>DialogBox</code> you will have rounded corners
+ * around your dialog.
  * 
  * 
  * @author Hilbrand Bouwkamp(hs@bouwkamp.com)
@@ -219,28 +218,28 @@ public class RoundedPanel extends SimplePanel {
      * Lookup table for corner border width
      */
     private final static String[][] CORNERBORDER = { { "1px" }, { "1px", "1px" }, { "1px", "1px", "1px" },
-	    { "1px", "1px", "1px", "1px" }, { "1px", "1px", "1px", "2px", "1px" },
-	    { "1px", "1px", "1px", "1px", "2px", "1px" }, { "1px", "1px", "1px", "1px", "1px", "2px", "1px" },
-	    { "1px", "1px", "1px", "1px", "1px", "2px", "2px", "1px" },
-	    { "1px", "1px", "1px", "1px", "1px", "1px", "2px", "3px", "1px" } };
+            { "1px", "1px", "1px", "1px" }, { "1px", "1px", "1px", "2px", "1px" },
+            { "1px", "1px", "1px", "1px", "2px", "1px" }, { "1px", "1px", "1px", "1px", "1px", "2px", "1px" },
+            { "1px", "1px", "1px", "1px", "1px", "2px", "2px", "1px" },
+            { "1px", "1px", "1px", "1px", "1px", "1px", "2px", "3px", "1px" } };
 
     /**
      * Lookup table for corner height
      */
     private final static String[][] CORNERHEIGHT = { { "1px" }, { "1px", "1px" }, { "1px", "1px", "1px" },
-	    { "1px", "1px", "1px", "1px" }, { "2px", "1px", "1px", "1px", "1px" },
-	    { "2px", "1px", "1px", "1px", "1px", "1px" }, { "2px", "1px", "1px", "1px", "1px", "1px", "1px" },
-	    { "2px", "1px", "1px", "1px", "1px", "1px", "1px", "1px" },
-	    { "3px", "2px", "1px", "1px", "1px", "1px", "1px", "1px", "1px" } };
+            { "1px", "1px", "1px", "1px" }, { "2px", "1px", "1px", "1px", "1px" },
+            { "2px", "1px", "1px", "1px", "1px", "1px" }, { "2px", "1px", "1px", "1px", "1px", "1px", "1px" },
+            { "2px", "1px", "1px", "1px", "1px", "1px", "1px", "1px" },
+            { "3px", "2px", "1px", "1px", "1px", "1px", "1px", "1px", "1px" } };
 
     /**
      * Lookup table for corner margin
      */
     private final static String[][] CORNERMARGIN = { { "1px" }, { "1px", "2px" }, { "1px", "2px", "3px" },
-	    { "1px", "2px", "3px", "4px" }, { "1px", "2px", "3px", "4px", "6px" },
-	    { "1px", "2px", "3px", "4px", "5px", "7px" }, { "1px", "2px", "3px", "4px", "5px", "6px", "8px" },
-	    { "1px", "2px", "3px", "4px", "5px", "6px", "8px", "10px" },
-	    { "1px", "2px", "3px", "4px", "5px", "6px", "7px", "9px", "12px" }, };
+            { "1px", "2px", "3px", "4px" }, { "1px", "2px", "3px", "4px", "6px" },
+            { "1px", "2px", "3px", "4px", "5px", "7px" }, { "1px", "2px", "3px", "4px", "5px", "6px", "8px" },
+            { "1px", "2px", "3px", "4px", "5px", "6px", "8px", "10px" },
+            { "1px", "2px", "3px", "4px", "5px", "6px", "7px", "9px", "12px" }, };
 
     /**
      * Element array containing all div elements of the top corner div's.
@@ -270,25 +269,25 @@ public class RoundedPanel extends SimplePanel {
      * height of corners 2px. Use <code>setWidget</code> to add the widget.
      */
     public RoundedPanel() {
-	this(ALL, 2);
+        this(ALL, 2);
     }
 
     /**
      * Creates a new <code>RoundedPanel</code> with custom rounding and height
-     * of corners 2px but with no widget set. Use <code>setWidget</code> to
-     * add widget.
+     * of corners 2px but with no widget set. Use <code>setWidget</code> to add
+     * widget.
      * 
-     * Every combination of corners can be set via <code>corners</code>. Use
-     * the static constants to set the corners. For example, to create a panel
-     * with only rounded corners at the left, use:
+     * Every combination of corners can be set via <code>corners</code>. Use the
+     * static constants to set the corners. For example, to create a panel with
+     * only rounded corners at the left, use:
      * 
      * <code>new RoundedPanel(yourWidget, RoundedPanel.LEFT);</code>
      * 
      * @param corners
-     *                set custom rounded corners
+     *            set custom rounded corners
      */
     public RoundedPanel(final int corners) {
-	this(corners, 2);
+        this(corners, 2);
     }
 
     /**
@@ -298,39 +297,39 @@ public class RoundedPanel extends SimplePanel {
      * the height is 6px. Use {@link #setWidget(Widget)} to add widget.
      * 
      * @param corners
-     *                set custom rounded corners
+     *            set custom rounded corners
      * @param cornerHeight
-     *                height index between and including 1 and 9
+     *            height index between and including 1 and 9
      * @throws IndexOutOfBoundsException
-     *                 when cornerHeight below 1 or above 9
+     *             when cornerHeight below 1 or above 9
      */
     public RoundedPanel(final int corners, final int cornerHeight) {
-	super(DOM.createDiv());
-	body = getElement();
-	if (cornerHeight < 1 || cornerHeight > 9) {
-	    throw new IndexOutOfBoundsException("RoundedPanel height range between and including 1 and 9");
-	}
-	this.cornerHeight = cornerHeight;
-	divt = new Element[cornerHeight];
-	divb = new Element[cornerHeight];
-	this.corners = corners;
-	if (inMask(corners, TOP)) {
-	    final int ct = corners & TOP;
+        super(DOM.createDiv());
+        body = getElement();
+        if (cornerHeight < 1 || cornerHeight > 9) {
+            throw new IndexOutOfBoundsException("RoundedPanel height range between and including 1 and 9");
+        }
+        this.cornerHeight = cornerHeight;
+        divt = new Element[cornerHeight];
+        divb = new Element[cornerHeight];
+        this.corners = corners;
+        if (inMask(corners, TOP)) {
+            final int ct = corners & TOP;
 
-	    for (int i = 0; i < cornerHeight; ++i) {
-		divt[i] = addLine(ct, cornerHeight - (i + 1));
-	    }
-	}
-	divElement = DOM.createDiv();
-	DOM.appendChild(body, divElement);
-	if (inMask(corners, BOTTOM)) {
-	    final int cb = corners & BOTTOM;
+            for (int i = 0; i < cornerHeight; ++i) {
+                divt[i] = addLine(ct, cornerHeight - (i + 1));
+            }
+        }
+        divElement = DOM.createDiv();
+        DOM.appendChild(body, divElement);
+        if (inMask(corners, BOTTOM)) {
+            final int cb = corners & BOTTOM;
 
-	    for (int i = cornerHeight - 1; i >= 0; --i) {
-		divb[i] = addLine(cb, cornerHeight - (i + 1));
-	    }
-	}
-	setCornerStyleName(RPSTYLE);
+            for (int i = cornerHeight - 1; i >= 0; --i) {
+                divb[i] = addLine(cb, cornerHeight - (i + 1));
+            }
+        }
+        setCornerStyleName(RPSTYLE);
     }
 
     /**
@@ -338,10 +337,10 @@ public class RoundedPanel extends SimplePanel {
      * height 2px on the widget <code>w</code>.
      * 
      * @param w
-     *                widget to add corners to
+     *            widget to add corners to
      */
     public RoundedPanel(final Widget w) {
-	this(w, ALL);
+        this(w, ALL);
     }
 
     /**
@@ -349,12 +348,12 @@ public class RoundedPanel extends SimplePanel {
      * height 2px on the widget <code>w</code>.
      * 
      * @param w
-     *                widget to add corners to
+     *            widget to add corners to
      * @param corners
-     *                set custom rounded corners
+     *            set custom rounded corners
      */
     public RoundedPanel(final Widget w, final int corners) {
-	this(w, corners, 2);
+        this(w, corners, 2);
     }
 
     /**
@@ -362,15 +361,15 @@ public class RoundedPanel extends SimplePanel {
      * custom height on widget <code>w</code>.
      * 
      * @param w
-     *                widget to add corners to
+     *            widget to add corners to
      * @param corners
-     *                set custom rounded corners
+     *            set custom rounded corners
      * @param cornerHeight
-     *                height index between and including 1 and 9
+     *            height index between and including 1 and 9
      */
     public RoundedPanel(final Widget w, final int corners, final int cornerHeight) {
-	this(corners, cornerHeight);
-	setWidget(w);
+        this(corners, cornerHeight);
+        setWidget(w);
     }
 
     /**
@@ -380,47 +379,47 @@ public class RoundedPanel extends SimplePanel {
      * </p>
      * 
      * @param borderColor
-     *                border color
+     *            border color
      */
     public void setCornerColor(final String borderColor) {
-	if (null != divt[0]) {
-	    for (int i = 0; i < cornerHeight; ++i) {
-		DOM.setStyleAttribute(divt[i], "backgroundColor", borderColor);
-	    }
-	}
-	if (null != divb[0]) {
-	    for (int i = 0; i < cornerHeight; ++i) {
-		DOM.setStyleAttribute(divb[i], "backgroundColor", borderColor);
-	    }
-	}
+        if (null != divt[0]) {
+            for (int i = 0; i < cornerHeight; ++i) {
+                DOM.setStyleAttribute(divt[i], "backgroundColor", borderColor);
+            }
+        }
+        if (null != divb[0]) {
+            for (int i = 0; i < cornerHeight; ++i) {
+                DOM.setStyleAttribute(divb[i], "backgroundColor", borderColor);
+            }
+        }
     }
 
     /**
      * Set the css style name of the rounded corners div's. Default the css
-     * stylename is <code>cbg-RP</code>. Use it to set the colors of the
-     * corner. For example: <code>.cbg-RP { background-color:#c3d9ff; }</code>.
+     * stylename is <code>cbg-RP</code>. Use it to set the colors of the corner.
+     * For example: <code>.cbg-RP { background-color:#c3d9ff; }</code>.
      * 
      * A custom style might be needed when the corners are visible only when a
      * panel is selected. Use this method to set the custom style name and add
      * something like the following to the stylesheet:
      * 
-     * <code>.selected .cbg-RP { background-color:#c3d9ff; }</code> Setting
-     * the color is also possible via the method {@link #setCornerColor(String)}.
+     * <code>.selected .cbg-RP { background-color:#c3d9ff; }</code> Setting the
+     * color is also possible via the method {@link #setCornerColor(String)}.
      * 
      * @param style
-     *                css style name
+     *            css style name
      */
     public void setCornerStyleName(final String style) {
-	if (null != divt[0]) {
-	    for (int i = 0; i < cornerHeight; ++i) {
-		DOM.setElementProperty(divt[i], "className", style);
-	    }
-	}
-	if (null != divb[0]) {
-	    for (int i = 0; i < cornerHeight; ++i) {
-		DOM.setElementProperty(divb[i], "className", style);
-	    }
-	}
+        if (null != divt[0]) {
+            for (int i = 0; i < cornerHeight; ++i) {
+                DOM.setElementProperty(divt[i], "className", style);
+            }
+        }
+        if (null != divb[0]) {
+            for (int i = 0; i < cornerHeight; ++i) {
+                DOM.setElementProperty(divb[i], "className", style);
+            }
+        }
     }
 
     /**
@@ -430,17 +429,17 @@ public class RoundedPanel extends SimplePanel {
      * using the <code>RoundedPanel</code>
      * 
      * @param style
-     *                css style name
+     *            css style name
      */
     public void setStyleName(final String style) {
-	DOM.setElementProperty(body, "className", style);
+        DOM.setElementProperty(body, "className", style);
     }
 
     /**
      * Overwrite of parent getContainerElement()
      */
     protected Element getContainerElement() {
-	return divElement;
+        return divElement;
     }
 
     /**
@@ -448,39 +447,39 @@ public class RoundedPanel extends SimplePanel {
      * <code>mask</code>.
      * 
      * @param input
-     *                input to check
+     *            input to check
      * @param mask
-     *                mask to check against
+     *            mask to check against
      * @return true if input within mask
      */
     protected boolean inMask(final int input, final int mask) {
-	return (input & mask) > 0;
+        return (input & mask) > 0;
     }
 
     /**
      * Creates div element representing part of the rounded corner.
      * 
      * @param corner
-     *                corner mask to set rounded corner
+     *            corner mask to set rounded corner
      * @param heightIndex
-     *                margin width for line
+     *            margin width for line
      */
     private Element addLine(final int corner, final int heightIndex) {
-	// margin 2 fields : top/bottom right/left => "0 <width>px"
-	// margin 4 fields : top right bottom left => "0 <width>px 0 <width>px"
-	final String margin = corner == TOP || corner == BOTTOM ? "0 "
-		+ RoundedPanel.CORNERMARGIN[cornerHeight - 1][heightIndex] : inMask(corner, LEFT) ? "0 0 0 "
-		+ RoundedPanel.CORNERMARGIN[cornerHeight - 1][heightIndex] : "0 "
-		+ RoundedPanel.CORNERMARGIN[cornerHeight - 1][heightIndex] + " 0 0";
-	final Element div = DOM.createDiv();
+        // margin 2 fields : top/bottom right/left => "0 <width>px"
+        // margin 4 fields : top right bottom left => "0 <width>px 0 <width>px"
+        final String margin = corner == TOP || corner == BOTTOM ? "0 "
+                + RoundedPanel.CORNERMARGIN[cornerHeight - 1][heightIndex] : inMask(corner, LEFT) ? "0 0 0 "
+                + RoundedPanel.CORNERMARGIN[cornerHeight - 1][heightIndex] : "0 "
+                + RoundedPanel.CORNERMARGIN[cornerHeight - 1][heightIndex] + " 0 0";
+        final Element div = DOM.createDiv();
 
-	DOM.setStyleAttribute(div, "fontSize", "0px");
-	DOM.setStyleAttribute(div, "height", RoundedPanel.CORNERHEIGHT[cornerHeight - 1][heightIndex]);
-	DOM.setStyleAttribute(div, "borderWidth", "0 " + RoundedPanel.CORNERBORDER[cornerHeight - 1][heightIndex]);
-	DOM.setStyleAttribute(div, "lineHeight", RoundedPanel.CORNERHEIGHT[cornerHeight - 1][heightIndex]);
-	DOM.setStyleAttribute(div, "margin", margin);
-	DOM.setInnerHTML(div, "&nbsp;");
-	DOM.appendChild(body, div);
-	return div;
+        DOM.setStyleAttribute(div, "fontSize", "0px");
+        DOM.setStyleAttribute(div, "height", RoundedPanel.CORNERHEIGHT[cornerHeight - 1][heightIndex]);
+        DOM.setStyleAttribute(div, "borderWidth", "0 " + RoundedPanel.CORNERBORDER[cornerHeight - 1][heightIndex]);
+        DOM.setStyleAttribute(div, "lineHeight", RoundedPanel.CORNERHEIGHT[cornerHeight - 1][heightIndex]);
+        DOM.setStyleAttribute(div, "margin", margin);
+        DOM.setInnerHTML(div, "&nbsp;");
+        DOM.appendChild(body, div);
+        return div;
     }
 }

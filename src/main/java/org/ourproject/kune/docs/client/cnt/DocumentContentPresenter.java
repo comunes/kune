@@ -47,71 +47,71 @@ public class DocumentContentPresenter implements DocumentContent {
     private final ActionRegistry<StateToken> actionRegistry;
 
     public DocumentContentPresenter(final StateManager stateManager, final Session session,
-	    final Provider<DocumentReader> docReaderProvider, final Provider<TextEditor> textEditorProvider,
-	    final Provider<FolderViewer> folderViewerProvider, final ActionToolbar<StateToken> toolbar,
-	    final ActionRegistry<StateToken> actionRegistry) {
-	this.session = session;
-	this.docReaderProvider = docReaderProvider;
-	this.textEditorProvider = textEditorProvider;
-	this.folderViewerProvider = folderViewerProvider;
-	this.toolbar = toolbar;
-	this.actionRegistry = actionRegistry;
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		if (state.getToolName().equals(DocumentClientTool.NAME)) {
-		    setState(state);
-		}
-	    }
-	});
-	stateManager.onToolChanged(new Listener2<String, String>() {
-	    public void onEvent(final String oldTool, final String newTool) {
-		if (oldTool != null && oldTool.equals(DocumentClientTool.NAME)) {
-		    toolbar.detach();
-		}
-	    }
-	});
+            final Provider<DocumentReader> docReaderProvider, final Provider<TextEditor> textEditorProvider,
+            final Provider<FolderViewer> folderViewerProvider, final ActionToolbar<StateToken> toolbar,
+            final ActionRegistry<StateToken> actionRegistry) {
+        this.session = session;
+        this.docReaderProvider = docReaderProvider;
+        this.textEditorProvider = textEditorProvider;
+        this.folderViewerProvider = folderViewerProvider;
+        this.toolbar = toolbar;
+        this.actionRegistry = actionRegistry;
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                if (state.getToolName().equals(DocumentClientTool.NAME)) {
+                    setState(state);
+                }
+            }
+        });
+        stateManager.onToolChanged(new Listener2<String, String>() {
+            public void onEvent(final String oldTool, final String newTool) {
+                if (oldTool != null && oldTool.equals(DocumentClientTool.NAME)) {
+                    toolbar.detach();
+                }
+            }
+        });
     }
 
     public void detach() {
-	toolbar.detach();
+        toolbar.detach();
     }
 
     public void init(final DocumentContentView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void refreshState() {
-	setState(session.getCurrentState());
+        setState(session.getCurrentState());
     }
 
     private void setState(final StateDTO state) {
-	content = state;
-	final String typeId = content.getTypeId();
-	ActionItemCollection<StateToken> collection;
-	if (content.hasDocument()) {
-	    collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(), content
-		    .getContentRights(), true);
-	} else {
-	    collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(), content
-		    .getContainerRights(), true);
-	}
-	toolbar.disableMenusAndClearButtons();
-	toolbar.setActions(collection);
-	toolbar.attach();
-	showContent();
+        content = state;
+        final String typeId = content.getTypeId();
+        ActionItemCollection<StateToken> collection;
+        if (content.hasDocument()) {
+            collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(),
+                                                          content.getContentRights(), true);
+        } else {
+            collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(),
+                                                          content.getContainerRights(), true);
+        }
+        toolbar.disableMenusAndClearButtons();
+        toolbar.setActions(collection);
+        toolbar.attach();
+        showContent();
     }
 
     private void showContent() {
-	// textEditorProvider.get().setToolbarVisible(false);
-	if (content.hasDocument()) {
-	    docReaderProvider.get().showDocument(content.getStateToken(), content.getContent(), content.getTypeId(),
-		    content.getMimeType());
-	    textEditorProvider.get().reset();
-	} else {
-	    final FolderViewer viewer = folderViewerProvider.get();
-	    viewer.setFolder(content.getContainer());
-	    view.setContent(viewer.getView());
-	}
+        // textEditorProvider.get().setToolbarVisible(false);
+        if (content.hasDocument()) {
+            docReaderProvider.get().showDocument(content.getStateToken(), content.getContent(), content.getTypeId(),
+                                                 content.getMimeType());
+            textEditorProvider.get().reset();
+        } else {
+            final FolderViewer viewer = folderViewerProvider.get();
+            viewer.setFolder(content.getContainer());
+            view.setContent(viewer.getView());
+        }
     }
 
 }

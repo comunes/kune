@@ -5,9 +5,21 @@ import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 public interface EntityLogoView {
 
-    void setLogo(StateToken stateToken, boolean clipped);
+    int LOGO_ICON_DEFAULT_HEIGHT = 60;
+    int LOGO_ICON_DEFAULT_WIDTH = 468;
 
-    void setLogo(final String groupName);
+    int LOGO_ICON_MIN_HEIGHT = 28;
+    int LOGO_ICON_MIN_WIDTH = 468;
+
+    String LOGO_FORM_FIELD = "k-elv-ff";
+
+    void setFullLogo(StateToken stateToken, boolean clipped);
+
+    void setLogoImage(StateToken stateToken);
+
+    void setLogoImageVisible(boolean visible);
+
+    void setLogoText(final String groupName);
 
     void setPutYourLogoVisible(final boolean visible);
 

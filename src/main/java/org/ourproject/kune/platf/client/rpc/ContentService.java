@@ -39,7 +39,7 @@ public interface ContentService extends RemoteService {
     void addAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
 
     CommentDTO addComment(String userHash, StateToken token, Long parentCommentId, String commentText)
-	    throws DefaultException;
+            throws DefaultException;
 
     CommentDTO addComment(String userHash, StateToken token, String commentText) throws DefaultException;
 
@@ -80,5 +80,5 @@ public interface ContentService extends RemoteService {
     List<TagResultDTO> setTags(String userHash, StateToken token, String tags) throws DefaultException;
 
     CommentDTO voteComment(String userHash, StateToken token, Long commentId, boolean votePositive)
-	    throws DefaultException;
+            throws DefaultException;
 }

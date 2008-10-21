@@ -179,8 +179,7 @@ public class I18nCountry implements HasId {
     }
 
     @Finder(query = "FROM I18nCountry WHERE code = :country")
-    public I18nCountry findByCode(@Named("country")
-    final String country) {
+    public I18nCountry findByCode(@Named("country") final String country) {
         return null;
     }
 

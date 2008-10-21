@@ -84,8 +84,8 @@ public class SiteRPC implements RPC, SiteService {
         data.setLanguages(languageManager.getAll());
         data.setCountries(countryManager.getAll());
         data.setTimezones(TimeZone.getAvailableIDs());
-        data.setUserInfo(userInfoService.buildInfo(userManager.find(userSession.getUser().getId()), userSession
-                .getHash()));
+        data.setUserInfo(userInfoService.buildInfo(userManager.find(userSession.getUser().getId()),
+                                                   userSession.getHash()));
         data.setChatHttpBase(chatProperties.getHttpBase());
         data.setChatDomain(chatProperties.getDomain());
         data.setSiteDomain(kuneProperties.get(KuneProperties.SITE_DOMAIN));

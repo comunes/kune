@@ -35,54 +35,54 @@ public class Site {
     private static Provider<SiteMessage> siteMessageProvider;
 
     public static void error(final String value) {
-	getSiteMessage().setMessage(value, SiteErrorType.error);
+        getSiteMessage().setMessage(value, SiteErrorType.error);
     }
 
     public static void hideProgress() {
-	progress.hideProgress();
+        progress.hideProgress();
     }
 
     public static void important(final String value) {
-	getSiteMessage().setMessage(value, SiteErrorType.imp);
+        getSiteMessage().setMessage(value, SiteErrorType.imp);
     }
 
     public static void info(final String value) {
-	getSiteMessage().setMessage(value, SiteErrorType.info);
+        getSiteMessage().setMessage(value, SiteErrorType.info);
     }
 
     public static void showProgress(final String text) {
-	progress.showProgress(text);
+        progress.showProgress(text);
     }
 
     public static void showProgressLoading() {
-	progress.showProgress(i18n.t("Loading"));
+        progress.showProgress(i18n.t("Loading"));
     }
 
     public static void showProgressProcessing() {
-	progress.showProgress(i18n.t("Processing"));
+        progress.showProgress(i18n.t("Processing"));
     }
 
     public static void showProgressSaving() {
-	progress.showProgress(i18n.t("Saving"));
+        progress.showProgress(i18n.t("Saving"));
     }
 
     public static void showProgressStarting() {
-	progress.showProgress(i18n.t("Starting"));
+        progress.showProgress(i18n.t("Starting"));
     }
 
     public static void veryImportant(final String value) {
-	getSiteMessage().setMessage(value, SiteErrorType.veryimp);
+        getSiteMessage().setMessage(value, SiteErrorType.veryimp);
     }
 
     private static SiteMessage getSiteMessage() {
-	return siteMessageProvider.get();
+        return siteMessageProvider.get();
     }
 
     public Site(final I18nUITranslationService i18n, final SiteProgress progress,
-	    final Provider<SiteMessage> siteMessageProvider) {
-	Site.i18n = i18n;
-	Site.progress = progress;
-	Site.siteMessageProvider = siteMessageProvider;
+            final Provider<SiteMessage> siteMessageProvider) {
+        Site.i18n = i18n;
+        Site.progress = progress;
+        Site.siteMessageProvider = siteMessageProvider;
     }
 
 }

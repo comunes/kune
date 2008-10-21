@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.platf.server.domain;
 
-
 public class TagResult {
     private String name;
     private Long count;

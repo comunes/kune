@@ -28,8 +28,10 @@ import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
-import org.ourproject.kune.platf.server.manager.impl.FileDownloadManager;
-import org.ourproject.kune.platf.server.manager.impl.FileUploadManager;
+import org.ourproject.kune.platf.server.manager.file.EntityLogoDownloadManager;
+import org.ourproject.kune.platf.server.manager.file.EntityLogoUploadManager;
+import org.ourproject.kune.platf.server.manager.file.FileDownloadManager;
+import org.ourproject.kune.platf.server.manager.file.FileUploadManager;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.platf.server.rest.ContentJSONService;
 import org.ourproject.kune.platf.server.rest.GroupJSONService;
@@ -59,56 +61,57 @@ public class KuneRackModule implements RackModule {
     private final Module configModule;
 
     public KuneRackModule() {
-	this("development", "kune.properties", null);
+        this("development", "kune.properties", null);
     }
 
     public KuneRackModule(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
-	configModule = new AbstractModule() {
-	    @Override
-	    public void configure() {
-		bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
-		bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
-		bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
-		if (sessionScope != null) {
-		    bindScope(SessionScoped.class, sessionScope);
-		}
-	    }
-	};
+        configModule = new AbstractModule() {
+            @Override
+            public void configure() {
+                bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
+                bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
+                bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
+                if (sessionScope != null) {
+                    bindScope(SessionScoped.class, sessionScope);
+                }
+            }
+        };
     }
 
     @SuppressWarnings("unchecked")
     public void configure(final RackBuilder builder) {
-	installGuiceModules(builder);
+        installGuiceModules(builder);
 
-	builder.add(KuneContainerListener.class);
+        builder.add(KuneContainerListener.class);
 
-	builder.exclude("/http-bind.*");
-	builder.exclude("/services/fileupload.*");
-	builder.at(".*").install(new LogFilter());
-	builder.at(".*").install(new GuiceFilter());
+        builder.exclude("/http-bind.*");
+        builder.exclude("/services/fileupload.*");
+        builder.at(".*").install(new LogFilter());
+        builder.at(".*").install(new GuiceFilter());
 
-	builder.at("^/$").install(new RedirectFilter("/kune/"));
-	builder.at("^/kune$").install(new RedirectFilter("/kune/"));
+        builder.at("^/$").install(new RedirectFilter("/kune/"));
+        builder.at("^/kune$").install(new RedirectFilter("/kune/"));
 
-	builder.at("^/kune/$").install(new ListenerFilter(KuneApplicationListener.class),
-		new ForwardFilter("/gwt/org.ourproject.kune.app.Kune/Kune.html"));
+        builder.at("^/kune/$").install(new ListenerFilter(KuneApplicationListener.class),
+                                       new ForwardFilter("/gwt/org.ourproject.kune.app.Kune/Kune.html"));
 
-	builder.installGWTServices("^/kune/", SiteService.class, GroupService.class, ContentService.class,
-		UserService.class, SocialNetworkService.class, I18nService.class);
-	builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class,
-		UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
-	builder.installServlet("^/kune/servlets/", FileUploadManager.class, FileDownloadManager.class);
+        builder.installGWTServices("^/kune/", SiteService.class, GroupService.class, ContentService.class,
+                                   UserService.class, SocialNetworkService.class, I18nService.class);
+        builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class,
+                                    UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
+        builder.installServlet("^/kune/servlets/", FileUploadManager.class, FileDownloadManager.class,
+                               EntityLogoUploadManager.class, EntityLogoDownloadManager.class);
 
-	builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
+        builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
     }
 
     private void installGuiceModules(final RackBuilder builder) {
-	builder.use(new ServletModule());
-	builder.use(new PlatformServerModule());
-	builder.use(new DocumentServerModule());
-	builder.use(new ChatServerModule());
-	builder.use(new RESTServicesModule());
-	builder.use(configModule);
+        builder.use(new ServletModule());
+        builder.use(new PlatformServerModule());
+        builder.use(new DocumentServerModule());
+        builder.use(new ChatServerModule());
+        builder.use(new RESTServicesModule());
+        builder.use(configModule);
     }
 
 }

@@ -15,61 +15,61 @@ public class FileUploaderPresenter implements FileUploader {
     private final Provider<ContextNavigator> navProvider;
 
     public FileUploaderPresenter(final Session session, final Provider<ContextNavigator> navProvider) {
-	this.session = session;
-	this.navProvider = navProvider;
+        this.session = session;
+        this.navProvider = navProvider;
     }
 
     public boolean checkFolderChange() {
-	final StateToken currentFolderStateToken = session.getCurrentStateToken().clone().clearDocument();
-	if (sameContainer()) {
-	    view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString());
-	    return true;
-	}
-	if (view.hasUploadingFiles()) {
-	    return false;
-	} else {
-	    currentUploadStateToken = currentFolderStateToken;
-	    view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString());
-	    return true;
-	}
+        final StateToken currentFolderStateToken = session.getCurrentStateToken().clone().clearDocument();
+        if (sameContainer()) {
+            view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString());
+            return true;
+        }
+        if (view.hasUploadingFiles()) {
+            return false;
+        } else {
+            currentUploadStateToken = currentFolderStateToken;
+            view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString());
+            return true;
+        }
     }
 
     public boolean hasUploadingFiles() {
-	return view.hasUploadingFiles();
+        return view.hasUploadingFiles();
     }
 
     public void hide() {
-	view.hide();
+        view.hide();
     }
 
     public void init(final FileUploaderView view) {
-	this.view = view;
-	session.onUserSignOut(new Listener0() {
-	    public void onEvent() {
-		view.destroy();
-	    }
-	});
+        this.view = view;
+        session.onUserSignOut(new Listener0() {
+            public void onEvent() {
+                view.destroy();
+            }
+        });
     }
 
     public void onUploadComplete() {
-	navProvider.get().refresh(currentUploadStateToken);
+        navProvider.get().refresh(currentUploadStateToken);
     }
 
     public void resetPermittedExtensions() {
-	view.resetPermittedExtensions();
+        view.resetPermittedExtensions();
     }
 
     public void setPermittedExtensions(final String extensions) {
-	view.setPermittedExtensions(extensions);
+        view.setPermittedExtensions(extensions);
     }
 
     public void show() {
-	view.show();
+        view.show();
     }
 
     private boolean sameContainer() {
-	final StateToken currentStateToken = session.getCurrentStateToken();
-	currentUploadStateToken = currentUploadStateToken == null ? currentStateToken : currentUploadStateToken;
-	return currentUploadStateToken.equals(currentStateToken);
+        final StateToken currentStateToken = session.getCurrentStateToken();
+        currentUploadStateToken = currentUploadStateToken == null ? currentStateToken : currentUploadStateToken;
+        return currentUploadStateToken.equals(currentStateToken);
     }
 }

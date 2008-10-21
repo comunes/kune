@@ -32,7 +32,7 @@ public class SplitterListenerCollection extends ArrayList<SplitterListener> {
      * Fires a event to all listeners.
      * 
      * @param sender
-     *                the widget sending the event.
+     *            the widget sending the event.
      */
     public void fireStartResizing(final Widget sender) {
         for (Iterator<SplitterListener> it = iterator(); it.hasNext();) {
@@ -45,7 +45,7 @@ public class SplitterListenerCollection extends ArrayList<SplitterListener> {
      * Fires a event to all listeners.
      * 
      * @param sender
-     *                the widget sending the event.
+     *            the widget sending the event.
      */
     public void fireStopResizing(final Widget sender) {
         for (Iterator<SplitterListener> it = iterator(); it.hasNext();) {

@@ -13,34 +13,34 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
     private SitePublicSpaceLinkView view;
 
     public SitePublicSpaceLinkPresenter(final StateManager stateManager) {
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		setState(state);
-	    }
-	});
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                setState(state);
+            }
+        });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final SitePublicSpaceLinkView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void setVisible(final boolean visible) {
-	view.setVisible(visible);
+        view.setVisible(visible);
     }
 
     private void setState(final StateDTO state) {
-	final StateToken token = state.getStateToken();
-	if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
-	    final String publicUrl = token.getPublicUrl();
-	    view.setContentGotoPublicUrl(publicUrl);
-	    view.setContentPublic(true);
-	} else {
-	    view.setContentPublic(false);
-	}
+        final StateToken token = state.getStateToken();
+        if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
+            final String publicUrl = token.getPublicUrl();
+            view.setContentGotoPublicUrl(publicUrl);
+            view.setContentPublic(true);
+        } else {
+            view.setContentPublic(false);
+        }
     }
 
 }

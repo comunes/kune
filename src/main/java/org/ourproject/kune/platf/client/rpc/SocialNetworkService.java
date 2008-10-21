@@ -30,23 +30,23 @@ import com.google.gwt.user.client.rpc.RemoteService;
 
 public interface SocialNetworkService extends RemoteService {
 
-    SocialNetworkResultDTO AcceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName)
-	    throws DefaultException;
+    SocialNetworkResultDTO acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName)
+            throws DefaultException;
 
     SocialNetworkResultDTO addAdminMember(String hash, StateToken groupToken, String groupToAddShortName)
-	    throws DefaultException;
+            throws DefaultException;
 
     SocialNetworkResultDTO addCollabMember(String hash, StateToken groupToken, String groupToAddShortName)
-	    throws DefaultException;
+            throws DefaultException;
 
     SocialNetworkResultDTO addViewerMember(String hash, StateToken groupToken, String groupToAddShortName)
-	    throws DefaultException;
+            throws DefaultException;
 
     SocialNetworkResultDTO deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName)
-	    throws DefaultException;
+            throws DefaultException;
 
     SocialNetworkResultDTO denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName)
-	    throws DefaultException;
+            throws DefaultException;
 
     SocialNetworkDTO getGroupMembers(String hash, StateToken groupToken) throws DefaultException;
 
@@ -55,10 +55,10 @@ public interface SocialNetworkService extends RemoteService {
     SocialNetworkRequestResult requestJoinGroup(String hash, StateToken groupToken) throws DefaultException;
 
     SocialNetworkResultDTO setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName)
-	    throws DefaultException;
+            throws DefaultException;
 
     SocialNetworkResultDTO setCollabAsAdmin(String hash, StateToken groupToken, String groupToSetAdminShortName)
-	    throws DefaultException;
+            throws DefaultException;
 
     SocialNetworkResultDTO unJoinGroup(String hash, StateToken groupToken) throws DefaultException;
 }

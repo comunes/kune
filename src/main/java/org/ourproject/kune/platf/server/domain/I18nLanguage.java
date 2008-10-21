@@ -103,184 +103,183 @@ public class I18nLanguage implements HasId {
     private String scope;
 
     public I18nLanguage() {
-	this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     // Only for tests
     public I18nLanguage(final Long id, final String englishName, final String nativeName, final String code) {
-	this.id = id;
-	this.englishName = englishName;
-	this.nativeName = nativeName;
-	this.code = code;
+        this.id = id;
+        this.englishName = englishName;
+        this.nativeName = nativeName;
+        this.code = code;
     }
 
     // code is iso6391 || iso6392 || rfc3306 (see DatabaInicializer)
     public I18nLanguage(final Long id, final String code, final String direction, final String englishName,
-	    final String englishNameLocale, final String englishNameModifier, final String iso6391,
-	    final String iso6392, final String iso6393, final Boolean macroLanguage, final String nativeName,
-	    final String nativeNameLocale, final String nativeNameModifier, final String pluralization,
-	    final String rfc3066, final String scope) {
-	this.id = id;
-	this.iso6391 = iso6391;
-	this.iso6392 = iso6392;
-	this.iso6393 = iso6393;
-	this.rfc3066 = rfc3066;
-	this.englishName = englishName;
-	this.englishNameLocale = englishNameLocale;
-	this.englishNameModifier = englishNameModifier;
-	this.nativeName = nativeName;
-	this.nativeNameLocale = nativeNameLocale;
-	this.nativeNameModifier = nativeNameModifier;
-	this.macroLanguage = macroLanguage;
-	this.direction = direction;
-	this.pluralization = pluralization;
-	this.scope = scope;
-	this.code = code;
+            final String englishNameLocale, final String englishNameModifier, final String iso6391,
+            final String iso6392, final String iso6393, final Boolean macroLanguage, final String nativeName,
+            final String nativeNameLocale, final String nativeNameModifier, final String pluralization,
+            final String rfc3066, final String scope) {
+        this.id = id;
+        this.iso6391 = iso6391;
+        this.iso6392 = iso6392;
+        this.iso6393 = iso6393;
+        this.rfc3066 = rfc3066;
+        this.englishName = englishName;
+        this.englishNameLocale = englishNameLocale;
+        this.englishNameModifier = englishNameModifier;
+        this.nativeName = nativeName;
+        this.nativeNameLocale = nativeNameLocale;
+        this.nativeNameModifier = nativeNameModifier;
+        this.macroLanguage = macroLanguage;
+        this.direction = direction;
+        this.pluralization = pluralization;
+        this.scope = scope;
+        this.code = code;
     }
 
     @Finder(query = "FROM I18nLanguage l WHERE code = :language")
-    public I18nLanguage findByCode(@Named("language")
-    final String language) {
-	return null;
+    public I18nLanguage findByCode(@Named("language") final String language) {
+        return null;
     }
 
     @Finder(query = "FROM I18nLanguage")
     public List<I18nLanguage> getAll() {
-	return null;
+        return null;
     }
 
     public String getCode() {
-	return code;
+        return code;
     }
 
     public String getDirection() {
-	return this.direction;
+        return this.direction;
     }
 
     public String getEnglishName() {
-	return this.englishName;
+        return this.englishName;
     }
 
     public String getEnglishNameLocale() {
-	return this.englishNameLocale;
+        return this.englishNameLocale;
     }
 
     public String getEnglishNameModifier() {
-	return this.englishNameModifier;
+        return this.englishNameModifier;
     }
 
     public Long getId() {
-	return this.id;
+        return this.id;
     }
 
     public String getIso6391() {
-	return this.iso6391;
+        return this.iso6391;
     }
 
     public String getIso6392() {
-	return this.iso6392;
+        return this.iso6392;
     }
 
     public String getIso6393() {
-	return this.iso6393;
+        return this.iso6393;
     }
 
     public Boolean getMacroLanguage() {
-	return this.macroLanguage;
+        return this.macroLanguage;
     }
 
     public String getNativeName() {
-	return this.nativeName;
+        return this.nativeName;
     }
 
     public String getNativeNameLocale() {
-	return this.nativeNameLocale;
+        return this.nativeNameLocale;
     }
 
     public String getNativeNameModifier() {
-	return this.nativeNameModifier;
+        return this.nativeNameModifier;
     }
 
     public String getPluralization() {
-	return this.pluralization;
+        return this.pluralization;
     }
 
     public String getRfc3066() {
-	return this.rfc3066;
+        return this.rfc3066;
     }
 
     public String getScope() {
-	return this.scope;
+        return this.scope;
     }
 
     @Column(unique = true)
     public void setCode(final String code) {
-	this.code = code;
+        this.code = code;
     }
 
     public void setDirection(final String direction) {
-	this.direction = direction;
+        this.direction = direction;
     }
 
     public void setEnglishName(final String englishName) {
-	this.englishName = englishName;
+        this.englishName = englishName;
     }
 
     public void setEnglishNameLocale(final String englishNameLocale) {
-	this.englishNameLocale = englishNameLocale;
+        this.englishNameLocale = englishNameLocale;
     }
 
     public void setEnglishNameModifier(final String englishNameModifier) {
-	this.englishNameModifier = englishNameModifier;
+        this.englishNameModifier = englishNameModifier;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void setIso6391(final String iso6391) {
-	this.iso6391 = iso6391;
+        this.iso6391 = iso6391;
     }
 
     public void setIso6392(final String iso6392) {
-	this.iso6392 = iso6392;
+        this.iso6392 = iso6392;
     }
 
     public void setIso6393(final String iso6393) {
-	this.iso6393 = iso6393;
+        this.iso6393 = iso6393;
     }
 
     public void setMacroLanguage(final Boolean macroLanguage) {
-	this.macroLanguage = macroLanguage;
+        this.macroLanguage = macroLanguage;
     }
 
     public void setNativeName(final String nativeName) {
-	this.nativeName = nativeName;
+        this.nativeName = nativeName;
     }
 
     public void setNativeNameLocale(final String nativeNameLocale) {
-	this.nativeNameLocale = nativeNameLocale;
+        this.nativeNameLocale = nativeNameLocale;
     }
 
     public void setNativeNameModifier(final String nativeNameModifier) {
-	this.nativeNameModifier = nativeNameModifier;
+        this.nativeNameModifier = nativeNameModifier;
     }
 
     public void setPluralization(final String pluralization) {
-	this.pluralization = pluralization;
+        this.pluralization = pluralization;
     }
 
     public void setRfc3066(final String rfc3066) {
-	this.rfc3066 = rfc3066;
+        this.rfc3066 = rfc3066;
     }
 
     public void setScope(final String scope) {
-	this.scope = scope;
+        this.scope = scope;
     }
 
     @Override
     public String toString() {
-	return "I18nLanguage[" + englishName + "]";
+        return "I18nLanguage[" + englishName + "]";
     }
 
 }

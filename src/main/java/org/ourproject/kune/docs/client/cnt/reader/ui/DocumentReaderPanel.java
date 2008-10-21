@@ -21,6 +21,8 @@
 package org.ourproject.kune.docs.client.cnt.reader.ui;
 
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -31,9 +33,11 @@ import com.google.gwt.user.client.ui.Widget;
 public class DocumentReaderPanel implements DocumentReaderView {
 
     private final WorkspaceSkeleton ws;
+    private final I18nTranslationService i18n;
 
-    public DocumentReaderPanel(final WorkspaceSkeleton ws) {
+    public DocumentReaderPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
         this.ws = ws;
+        this.i18n = i18n;
     }
 
     public void setContent(final String content) {
@@ -45,6 +49,8 @@ public class DocumentReaderPanel implements DocumentReaderView {
     public void showImage(String imageUrl, String imageResizedUrl) {
         final Image imgOrig = new Image(imageUrl);
         final Image imgResized = new Image(imageResizedUrl);
+        KuneUiUtils.setQuickTip(imgOrig, i18n.t("Click to zoom out"));
+        KuneUiUtils.setQuickTip(imgResized, i18n.t("Click to zoom in"));
         setDefStyle(imgOrig);
         setDefStyle(imgResized);
         imgOrig.addStyleName("kune-pointer");

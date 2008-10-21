@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.manager.impl;
+package org.ourproject.kune.platf.server.manager.file;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,28 +16,16 @@ public class FileUploadManagerTest extends ContentServiceIntegrationTest {
 
     @Before
     public void create() {
-	new IntegrationTestHelper(this);
-    }
-
-    // @Test
-    public void testMimeTypePersist() throws Exception {
-	// doLogin();
-	// final FileItem fileItem = Mockito.mock(FileItem.class);
-	// file = File.createTempFile("test", ".txt");
-	// final Content cnt = fileUploadManager.createFile(super.getHash(),
-	// getDefaultContent().getContainer()
-	// .getStateToken(), "somefilename", fileItem);
-	// final StateDTO state = contentService.getContent(getHash(),
-	// cnt.getStateToken());
+        new IntegrationTestHelper(this);
     }
 
     @Test(expected = SessionExpiredException.class)
     public void testSessionExp() throws Exception {
-	fileUploadManager.createUploadedFile("otherhash", null, null, null);
+        fileUploadManager.createUploadedFile("otherhash", null, null, null);
     }
 
     @Test(expected = UserMustBeLoggedException.class)
     public void testUserMustBeAuth() throws Exception {
-	fileUploadManager.createUploadedFile(null, null, null, null);
+        fileUploadManager.createUploadedFile(null, null, null, null);
     }
 }

@@ -65,23 +65,23 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         final String collabsTitle = i18n.t("Collaborators");
         final String pendingTitle = i18n.t("Pending");
         adminCategory = new GridGroup(adminsTitle, adminsTitle, i18n.t("People that can admin this group"), true);
-        collabCategory = new GridGroup(collabsTitle, collabsTitle, i18n
-                .t("Other people that collaborate with this group"), true);
-        pendigCategory = new GridGroup(pendingTitle, pendingTitle, i18n
-                .t("People pending to be accepted in this group by the admins"), imageUtils
-                .getImageHtml(ImageDescriptor.alert), true);
+        collabCategory = new GridGroup(collabsTitle, collabsTitle,
+                i18n.t("Other people that collaborate with this group"), true);
+        pendigCategory = new GridGroup(pendingTitle, pendingTitle,
+                i18n.t("People pending to be accepted in this group by the admins"),
+                imageUtils.getImageHtml(ImageDescriptor.alert), true);
         // i18n.t("Add member")
-        addMember = new GridButton("images/add-green.gif", "", i18n
-                .t("Add a group or a person as member of this group"), new Listener<String>() {
-            public void onEvent(final String parameter) {
-                liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
-                    public void onEvent(final LinkDTO link) {
-                        view.confirmAddCollab(link.getShortName(), link.getLongName());
+        addMember = new GridButton("images/add-green.gif", "",
+                i18n.t("Add a group or a person as member of this group"), new Listener<String>() {
+                    public void onEvent(final String parameter) {
+                        liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
+                            public void onEvent(final LinkDTO link) {
+                                view.confirmAddCollab(link.getShortName(), link.getLongName());
+                            }
+                        });
+                        liveSearcherProvider.get().show();
                     }
                 });
-                liveSearcherProvider.get().show();
-            }
-        });
         super.addGroupOperation(gotoGroupMenuItem, false);
         super.addUserOperation(gotoMemberMenuItem, false);
     }
@@ -89,14 +89,14 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     public void addCollab(final String groupShortName) {
         Site.showProgressProcessing();
         snServiceProvider.get().addCollabMember(session.getUserHash(), session.getCurrentState().getStateToken(),
-                groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                    public void onSuccess(final SocialNetworkResultDTO result) {
-                        Site.hideProgress();
-                        Site.info(i18n.t("Member added as collaborator"));
-                        stateManager.setSocialNetwork(result);
-                    }
+                                                groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
+                                                    public void onSuccess(final SocialNetworkResultDTO result) {
+                                                        Site.hideProgress();
+                                                        Site.info(i18n.t("Member added as collaborator"));
+                                                        stateManager.setSocialNetwork(result);
+                                                    }
 
-                });
+                                                });
     }
 
     public void init(final GroupMembersSummaryView view) {
@@ -139,19 +139,15 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
         if (userCanView) {
             for (final GroupDTO admin : adminsList) {
-                view
-                        .addItem(createGridItem(adminCategory, admin, rights, changeToCollabMenuItem,
-                                removeMemberMenuItem));
+                view.addItem(createGridItem(adminCategory, admin, rights, changeToCollabMenuItem, removeMemberMenuItem));
             }
             for (final GroupDTO collab : collabList) {
-                view
-                        .addItem(createGridItem(collabCategory, collab, rights, changeToAdminMenuItem,
-                                removeMemberMenuItem));
+                view.addItem(createGridItem(collabCategory, collab, rights, changeToAdminMenuItem, removeMemberMenuItem));
             }
             if (userIsAdmin) {
                 for (final GroupDTO pendingCollab : pendingCollabsList) {
                     view.addItem(createGridItem(pendigCategory, pendingCollab, rights, acceptJoinGroupMenuItem,
-                            denyJoinGroupMenuItem));
+                                                denyJoinGroupMenuItem));
                 }
             }
         }
@@ -159,7 +155,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     }
 
     private void setState(final StateDTO state) {
-        if (state.getGroup().getType().equals(GroupType.PERSONAL)) {
+        if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
             view.setVisible(false);
         } else {
             setGroupMembers(state.getGroupMembers(), state.getGroupRights());

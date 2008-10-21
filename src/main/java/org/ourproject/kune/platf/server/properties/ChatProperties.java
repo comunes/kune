@@ -31,19 +31,19 @@ public class ChatProperties {
 
     @Inject
     public ChatProperties(final KuneProperties properties) {
-	this.properties = properties;
+        this.properties = properties;
     }
 
     public String getHttpBase() {
-	return properties.get(KuneProperties.CHAT_HTTP_BASE);
+        return properties.get(KuneProperties.CHAT_HTTP_BASE);
     }
 
     public String getDomain() {
-	return properties.get(KuneProperties.CHAT_DOMAIN);
+        return properties.get(KuneProperties.CHAT_DOMAIN);
     }
 
     public String getRoomHost() {
-	return properties.get(KuneProperties.CHAT_ROOM_HOST);
+        return properties.get(KuneProperties.CHAT_ROOM_HOST);
     }
 
 }

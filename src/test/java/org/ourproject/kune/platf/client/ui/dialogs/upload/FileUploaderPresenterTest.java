@@ -20,55 +20,55 @@ public class FileUploaderPresenterTest {
 
     @Before
     public void before() {
-	session = Mockito.mock(Session.class);
-	view = Mockito.mock(FileUploaderView.class);
-	presenter = new FileUploaderPresenter(session, null);
-	presenter.init(view);
-	Mockito.stub(session.getUserHash()).toReturn(SOMEUSER_HASH);
+        session = Mockito.mock(Session.class);
+        view = Mockito.mock(FileUploaderView.class);
+        presenter = new FileUploaderPresenter(session, null);
+        presenter.init(view);
+        Mockito.stub(session.getUserHash()).toReturn(SOMEUSER_HASH);
     }
 
     @Test
     public void testFirstAddFromDocInSameContainer() {
-	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1.1"));
-	assertTrue(presenter.checkFolderChange());
-	Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
+        Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1.1"));
+        assertTrue(presenter.checkFolderChange());
+        Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
     }
 
     @Test
     public void testFirstAddInSameContainer() {
-	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
-	assertTrue(presenter.checkFolderChange());
-	Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
+        Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
+        assertTrue(presenter.checkFolderChange());
+        Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
     }
 
     @Test
     public void testSomeAddsInDiffContainersButNotUploading() {
-	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
-	assertTrue(presenter.checkFolderChange());
-	Mockito.stub(view.hasUploadingFiles()).toReturn(false);
-	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.2"));
-	assertTrue(presenter.checkFolderChange());
-	Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
-	Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.2");
+        Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
+        assertTrue(presenter.checkFolderChange());
+        Mockito.stub(view.hasUploadingFiles()).toReturn(false);
+        Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.2"));
+        assertTrue(presenter.checkFolderChange());
+        Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
+        Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.2");
     }
 
     @Test
     public void testSomeAddsInDiffContainersButUploading() {
-	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
-	assertTrue(presenter.checkFolderChange());
-	Mockito.stub(view.hasUploadingFiles()).toReturn(true);
-	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.2"));
-	assertFalse(presenter.checkFolderChange());
-	Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
-	Mockito.verify(view, Mockito.never()).setUploadParams(SOMEUSER_HASH, "group.tool.2");
+        Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
+        assertTrue(presenter.checkFolderChange());
+        Mockito.stub(view.hasUploadingFiles()).toReturn(true);
+        Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.2"));
+        assertFalse(presenter.checkFolderChange());
+        Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
+        Mockito.verify(view, Mockito.never()).setUploadParams(SOMEUSER_HASH, "group.tool.2");
     }
 
     @Test
     public void testSomeAddsInSameContainer() {
-	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
-	assertTrue(presenter.checkFolderChange());
-	Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
-	assertTrue(presenter.checkFolderChange());
-	Mockito.verify(view, Mockito.times(2)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
+        Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
+        assertTrue(presenter.checkFolderChange());
+        Mockito.stub(session.getCurrentStateToken()).toReturn(new StateToken("group.tool.1"));
+        assertTrue(presenter.checkFolderChange());
+        Mockito.verify(view, Mockito.times(2)).setUploadParams(SOMEUSER_HASH, "group.tool.1");
     }
 }

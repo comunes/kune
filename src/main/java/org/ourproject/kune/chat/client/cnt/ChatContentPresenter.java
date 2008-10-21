@@ -41,31 +41,31 @@ public class ChatContentPresenter implements ChatContent {
     private final Provider<ChatRoom> chatRoomProvider;
 
     public ChatContentPresenter(final EmiteUIDialog emiteUIDialog, final WorkspaceDeckView view,
-	    final Provider<ChatInfo> chatInfoProvider, final Provider<ChatRoom> chatRoomProvider) {
-	this.emiteUIDialog = emiteUIDialog;
-	this.view = view;
-	this.chatInfoProvider = chatInfoProvider;
-	this.chatRoomProvider = chatRoomProvider;
+            final Provider<ChatInfo> chatInfoProvider, final Provider<ChatRoom> chatRoomProvider) {
+        this.emiteUIDialog = emiteUIDialog;
+        this.view = view;
+        this.chatInfoProvider = chatInfoProvider;
+        this.chatRoomProvider = chatRoomProvider;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void onEnterRoom() {
-	final String roomName = state.getContainer().getName();
-	emiteUIDialog.joinRoom(XmppURI.uri(roomName));
+        final String roomName = state.getContainer().getName();
+        emiteUIDialog.joinRoom(XmppURI.uri(roomName));
     }
 
     public void setState(final StateDTO state) {
-	this.state = state;
-	final String typeId = state.getTypeId();
-	if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
-	    chatInfoProvider.get().show();
-	} else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
-	    chatRoomProvider.get().show();
-	} else {
-	    Log.error("Programming error: unknown component!! please contact kune-devel@lists-ourproject.org");
-	}
+        this.state = state;
+        final String typeId = state.getTypeId();
+        if (typeId.equals(ChatClientTool.TYPE_ROOT)) {
+            chatInfoProvider.get().show();
+        } else if (typeId.equals(ChatClientTool.TYPE_ROOM)) {
+            chatRoomProvider.get().show();
+        } else {
+            Log.error("Programming error: unknown component!! please contact kune-devel@lists-ourproject.org");
+        }
     }
 }

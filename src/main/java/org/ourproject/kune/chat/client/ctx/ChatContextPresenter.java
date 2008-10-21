@@ -33,17 +33,17 @@ public class ChatContextPresenter implements ChatContext {
     private final Provider<RoomsAdmin> roomAdminsProvider;
 
     public ChatContextPresenter(final WorkspaceDeckView view, final Provider<RoomsAdmin> roomAdminsProvider) {
-	this.view = view;
-	this.roomAdminsProvider = roomAdminsProvider;
+        this.view = view;
+        this.roomAdminsProvider = roomAdminsProvider;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void setState(final StateDTO state) {
-	final RoomsAdmin rooms = roomAdminsProvider.get();
-	rooms.showRoom(state.getStateToken(), state.getContainer(), state.getContainerRights());
-	view.show(rooms.getView());
+        final RoomsAdmin rooms = roomAdminsProvider.get();
+        rooms.showRoom(state.getStateToken(), state.getContainer(), state.getContainerRights());
+        view.show(rooms.getView());
     }
 }

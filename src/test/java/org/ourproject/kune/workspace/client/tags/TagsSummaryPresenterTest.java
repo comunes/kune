@@ -19,29 +19,29 @@ public class TagsSummaryPresenterTest {
     @SuppressWarnings("unchecked")
     @Before
     public void before() {
-	final Session session = Mockito.mock(Session.class);
-	final StateManager stateManager = Mockito.mock(StateManager.class);
-	final WsThemePresenter theme = Mockito.mock(WsThemePresenter.class);
-	final SiteSearcher searcher = Mockito.mock(SiteSearcher.class);
-	final Provider searcherProvider = Mockito.mock(Provider.class);
-	Mockito.stub(searcherProvider.get()).toReturn(searcher);
-	view = Mockito.mock(TagsSummaryView.class);
-	tagsSummaryPresenter = new TagsSummaryPresenter(session, searcherProvider, stateManager, theme);
-	tagsSummaryPresenter.init(view);
+        final Session session = Mockito.mock(Session.class);
+        final StateManager stateManager = Mockito.mock(StateManager.class);
+        final WsThemePresenter theme = Mockito.mock(WsThemePresenter.class);
+        final SiteSearcher searcher = Mockito.mock(SiteSearcher.class);
+        final Provider searcherProvider = Mockito.mock(Provider.class);
+        Mockito.stub(searcherProvider.get()).toReturn(searcher);
+        view = Mockito.mock(TagsSummaryView.class);
+        tagsSummaryPresenter = new TagsSummaryPresenter(session, searcherProvider, stateManager, theme);
+        tagsSummaryPresenter.init(view);
     }
 
     @Test
     public void noTagsViewNotVisible() {
-	final StateDTO state = new StateDTO();
-	tagsSummaryPresenter.setState(state);
-	Mockito.verify(view).setVisible(false);
+        final StateDTO state = new StateDTO();
+        tagsSummaryPresenter.setState(state);
+        Mockito.verify(view).setVisible(false);
     }
 
     @Test
     public void withTagsViewVisible() {
-	final StateDTO state = new StateDTO();
-	state.setTags("test test1");
-	tagsSummaryPresenter.setState(state);
-	Mockito.verify(view).setVisible(true);
+        final StateDTO state = new StateDTO();
+        state.setTags("test test1");
+        tagsSummaryPresenter.setState(state);
+        Mockito.verify(view).setVisible(true);
     }
 }

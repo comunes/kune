@@ -14,55 +14,55 @@ public class SiteMessagePresenterTest {
 
     @Before
     public void createObjects() {
-	view = EasyMock.createStrictMock(SiteMessageView.class);
-	presenter = new SiteMessagePresenter();
+        view = EasyMock.createStrictMock(SiteMessageView.class);
+        presenter = new SiteMessagePresenter();
     }
 
     @Test
     public void testMessage() {
-	view.hide();
-	view.setMessage("test 1", SiteErrorType.info, SiteErrorType.error);
-	view.show();
-	EasyMock.replay(view);
-	presenter.init(view);
-	presenter.setMessage("test 1", SiteErrorType.error);
-	EasyMock.verify(view);
+        view.hide();
+        view.setMessage("test 1", SiteErrorType.info, SiteErrorType.error);
+        view.show();
+        EasyMock.replay(view);
+        presenter.init(view);
+        presenter.setMessage("test 1", SiteErrorType.error);
+        EasyMock.verify(view);
     }
 
     @Test
     public void testTwoMessagesDifTypes() {
-	view.hide();
-	view.setMessage("test 1", SiteErrorType.info, SiteErrorType.veryimp);
-	view.show();
-	view.setMessage("test 1<br>test 2", SiteErrorType.veryimp, SiteErrorType.error);
-	view.show();
-	EasyMock.replay(view);
-	presenter.init(view);
-	presenter.setMessage("test 1", SiteErrorType.veryimp);
-	presenter.setMessage("test 2", SiteErrorType.error);
-	EasyMock.verify(view);
+        view.hide();
+        view.setMessage("test 1", SiteErrorType.info, SiteErrorType.veryimp);
+        view.show();
+        view.setMessage("test 1<br>test 2", SiteErrorType.veryimp, SiteErrorType.error);
+        view.show();
+        EasyMock.replay(view);
+        presenter.init(view);
+        presenter.setMessage("test 1", SiteErrorType.veryimp);
+        presenter.setMessage("test 2", SiteErrorType.error);
+        EasyMock.verify(view);
     }
 
     @Test
     public void testTwoMessagesSameType() {
-	view.hide();
-	view.setMessage("test 1", SiteErrorType.info, SiteErrorType.error);
-	view.show();
-	view.setMessage("test 1<br>test 2");
-	view.show();
-	EasyMock.replay(view);
-	presenter.init(view);
-	presenter.setMessage("test 1", SiteErrorType.error);
-	presenter.setMessage("test 2", SiteErrorType.error);
-	EasyMock.verify(view);
+        view.hide();
+        view.setMessage("test 1", SiteErrorType.info, SiteErrorType.error);
+        view.show();
+        view.setMessage("test 1<br>test 2");
+        view.show();
+        EasyMock.replay(view);
+        presenter.init(view);
+        presenter.setMessage("test 1", SiteErrorType.error);
+        presenter.setMessage("test 2", SiteErrorType.error);
+        EasyMock.verify(view);
     }
 
     @Test
     public void testViewInitialization() {
-	view.hide();
-	EasyMock.replay(view);
-	presenter.init(view);
-	EasyMock.verify(view);
+        view.hide();
+        EasyMock.replay(view);
+        presenter.init(view);
+        EasyMock.verify(view);
     }
 
 }

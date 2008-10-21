@@ -26,11 +26,11 @@ public class ChatRoomPresenter implements ChatRoom {
     private final ChatRoomView view;
 
     public ChatRoomPresenter(final ChatRoomView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void show() {

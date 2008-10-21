@@ -10,11 +10,11 @@ public class SiteOptionsPresenter implements SiteOptions {
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final SiteOptionsView view) {
-	this.view = view;
+        this.view = view;
     }
 
 }

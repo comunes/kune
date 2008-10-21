@@ -12,33 +12,33 @@ public class GroupListTest {
 
     @Before
     public void createList() {
-	list = new GroupList();
-	includedGroup = new Group("one", "group");
-	list.add(includedGroup);
+        list = new GroupList();
+        includedGroup = new Group("one", "group");
+        list.add(includedGroup);
     }
 
     @Test
     public void testModeNormal() {
-	list.setMode(GroupListMode.NORMAL);
-	assertTrue(list.includes(includedGroup));
-	assertFalse(list.includes(new Group("other", "group")));
-	assertFalse(list.includes(Group.NO_GROUP));
+        list.setMode(GroupListMode.NORMAL);
+        assertTrue(list.includes(includedGroup));
+        assertFalse(list.includes(new Group("other", "group")));
+        assertFalse(list.includes(Group.NO_GROUP));
     }
 
     @Test
     public void testModeNobody() {
-	list.setMode(GroupListMode.NOBODY);
-	assertFalse(list.includes(includedGroup));
-	assertFalse(list.includes(new Group("other", "group")));
-	assertFalse(list.includes(Group.NO_GROUP));
+        list.setMode(GroupListMode.NOBODY);
+        assertFalse(list.includes(includedGroup));
+        assertFalse(list.includes(new Group("other", "group")));
+        assertFalse(list.includes(Group.NO_GROUP));
     }
 
     @Test
     public void testModeEverybody() {
-	list.setMode(GroupListMode.EVERYONE);
-	assertTrue(list.includes(includedGroup));
-	assertTrue(list.includes(new Group("other", "group")));
-	assertTrue(list.includes(Group.NO_GROUP));
+        list.setMode(GroupListMode.EVERYONE);
+        assertTrue(list.includes(includedGroup));
+        assertTrue(list.includes(new Group("other", "group")));
+        assertTrue(list.includes(Group.NO_GROUP));
     }
 
 }

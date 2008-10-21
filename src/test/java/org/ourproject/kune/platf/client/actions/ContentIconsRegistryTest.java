@@ -17,65 +17,65 @@ public class ContentIconsRegistryTest {
 
     @Before
     public void before() {
-	reg = new ContentIconsRegistry();
+        reg = new ContentIconsRegistry();
     }
 
     @Test
     public void testBasic() {
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, ICON);
-	assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, ICON);
+        assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
     }
 
     @Test
     public void testBasicMimeType() {
-	final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, mimeType, ICON);
-	assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
-	assertEquals("", reg.getContentTypeIcon(CONTENT_TYPE_TEST));
+        final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, mimeType, ICON);
+        assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
+        assertEquals("", reg.getContentTypeIcon(CONTENT_TYPE_TEST));
     }
 
     @Test
     public void testBasicMimeTypeWithDef() {
-	final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, mimeType, ICON);
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, OTHERICON);
-	assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
-	assertEquals(OTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
+        final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, mimeType, ICON);
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, OTHERICON);
+        assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
+        assertEquals(OTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
     }
 
     @Test
     public void testBasicMimeTypeWithDefType() {
-	final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
-	final BasicMimeTypeDTO genericMimeType = new BasicMimeTypeDTO("image");
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, mimeType, ICON);
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, genericMimeType, OTHERICON);
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, JUSTANOTHERICON);
-	assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
-	assertEquals(OTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, genericMimeType));
-	assertEquals(JUSTANOTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
+        final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
+        final BasicMimeTypeDTO genericMimeType = new BasicMimeTypeDTO("image");
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, mimeType, ICON);
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, genericMimeType, OTHERICON);
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, JUSTANOTHERICON);
+        assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
+        assertEquals(OTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, genericMimeType));
+        assertEquals(JUSTANOTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
     }
 
     @Test
     public void testBasicMimeTypeWithOnlyDefType() {
-	final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
-	final BasicMimeTypeDTO genericMimeType = new BasicMimeTypeDTO("image");
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, genericMimeType, OTHERICON);
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, JUSTANOTHERICON);
-	assertEquals(OTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
-	assertEquals(OTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, genericMimeType));
-	assertEquals(JUSTANOTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
+        final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
+        final BasicMimeTypeDTO genericMimeType = new BasicMimeTypeDTO("image");
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, genericMimeType, OTHERICON);
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, JUSTANOTHERICON);
+        assertEquals(OTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
+        assertEquals(OTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, genericMimeType));
+        assertEquals(JUSTANOTHERICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
     }
 
     @Test
     public void testNoResult() {
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, new BasicMimeTypeDTO("text", "plain"), ICON);
-	assertEquals("", reg.getContentTypeIcon(CONTENT_TYPE_TEST, new BasicMimeTypeDTO("text", "rtf")));
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, new BasicMimeTypeDTO("text", "plain"), ICON);
+        assertEquals("", reg.getContentTypeIcon(CONTENT_TYPE_TEST, new BasicMimeTypeDTO("text", "rtf")));
     }
 
     @Test
     public void testNullBasicMimeType() {
-	final BasicMimeTypeDTO mimeType = null;
-	reg.registerContentTypeIcon(CONTENT_TYPE_TEST, ICON);
-	assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
+        final BasicMimeTypeDTO mimeType = null;
+        reg.registerContentTypeIcon(CONTENT_TYPE_TEST, ICON);
+        assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
     }
 }

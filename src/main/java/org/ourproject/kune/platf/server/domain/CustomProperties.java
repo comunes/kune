@@ -25,36 +25,36 @@ public class CustomProperties implements HasId {
     private HashMap<Class<?>, Object> data;
 
     public CustomProperties() {
-	data = new HashMap<Class<?>, Object>();
+        data = new HashMap<Class<?>, Object>();
     }
 
     public HashMap<Class<?>, Object> getData() {
-	return data;
+        return data;
     }
 
     @SuppressWarnings("unchecked")
     public <T> T getData(final Class<T> type) {
-	return (T) data.get(type);
+        return (T) data.get(type);
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public <T> boolean hasPropertie(final Class<T> type) {
-	return data.containsKey(type);
+        return data.containsKey(type);
     }
 
     @SuppressWarnings("unchecked")
     public <T> T setData(final Class<T> type, final T value) {
-	return (T) data.put(type, value);
+        return (T) data.put(type, value);
     }
 
     public void setData(final HashMap<Class<?>, Object> data) {
-	this.data = data;
+        this.data = data;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 }

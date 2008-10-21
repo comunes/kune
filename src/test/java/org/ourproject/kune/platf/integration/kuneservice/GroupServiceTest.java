@@ -44,7 +44,7 @@ public class GroupServiceTest extends IntegrationTest {
         assertEquals(groupCreated.getLongName(), group.getLongName());
 
         assertEquals(groupCreated.getAdmissionType(), AdmissionType.Open);
-        assertEquals(groupCreated.getType(), GroupType.COMMUNITY);
+        assertEquals(groupCreated.getGroupType(), GroupType.COMMUNITY);
     }
 
     @Test(expected = Exception.class)
@@ -76,7 +76,7 @@ public class GroupServiceTest extends IntegrationTest {
         assertEquals(groupCreated.getLongName(), group.getLongName());
 
         assertEquals(groupCreated.getAdmissionType(), AdmissionType.Moderated);
-        assertEquals(groupCreated.getType(), GroupType.PROJECT);
+        assertEquals(groupCreated.getGroupType(), GroupType.PROJECT);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class GroupServiceTest extends IntegrationTest {
         assertEquals(groupCreated.getShortName(), group.getShortName());
         assertEquals(groupCreated.getLongName(), group.getLongName());
         assertEquals(groupCreated.getAdmissionType(), AdmissionType.Moderated);
-        assertEquals(groupCreated.getType(), GroupType.ORGANIZATION);
+        assertEquals(groupCreated.getGroupType(), GroupType.ORGANIZATION);
     }
 
     @Test
@@ -113,7 +113,7 @@ public class GroupServiceTest extends IntegrationTest {
         assertEquals(groupCreated.getShortName(), group.getShortName());
         assertEquals(groupCreated.getLongName(), group.getLongName());
         assertEquals(groupCreated.getAdmissionType(), AdmissionType.Open);
-        assertEquals(groupCreated.getType(), GroupType.ORPHANED_PROJECT);
+        assertEquals(groupCreated.getGroupType(), GroupType.ORPHANED_PROJECT);
         assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getAdmins().getList().size());
         assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getEditors().getList().size());
     }

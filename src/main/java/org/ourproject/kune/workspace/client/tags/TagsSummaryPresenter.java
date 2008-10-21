@@ -43,46 +43,46 @@ public class TagsSummaryPresenter implements TagsSummary {
     private final Session session;
 
     public TagsSummaryPresenter(final Session session, final Provider<SiteSearcher> searcherProvider,
-	    final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
-	this.session = session;
-	this.searcherProvider = searcherProvider;
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		setState(state);
-	    }
-	});
-	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
-	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-		view.setTheme(oldTheme, newTheme);
-	    }
-	});
+            final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
+        this.session = session;
+        this.searcherProvider = searcherProvider;
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                setState(state);
+            }
+        });
+        wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
+            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+                view.setTheme(oldTheme, newTheme);
+            }
+        });
     }
 
     public void doSearchTag(final String name) {
-	searcherProvider.get().doSearchOfType(
-		"group:" + session.getCurrentState().getGroup().getShortName() + " tag:" + name,
-		SiteSearcherType.content);
+        searcherProvider.get().doSearchOfType(
+                                              "group:" + session.getCurrentState().getGroup().getShortName() + " tag:"
+                                                      + name, SiteSearcherType.content);
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final TagsSummaryView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void setGroupTags(final List<TagResultDTO> groupTags) {
-	view.setTags(groupTags);
+        view.setTags(groupTags);
     }
 
     void setState(final StateDTO state) {
-	if (state.getTags() != null && state.getTags().length() > 0) {
-	    view.setVisible(true);
-	    view.setTags(state.getGroupTags());
-	} else {
-	    view.setVisible(false);
-	}
+        if (state.getTags() != null && state.getTags().length() > 0) {
+            view.setVisible(true);
+            view.setTags(state.getGroupTags());
+        } else {
+            view.setVisible(false);
+        }
     }
 
 }

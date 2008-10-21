@@ -7,14 +7,14 @@ public class DefaultException extends StatusCodeException implements IsSerializa
     private static final long serialVersionUID = 1L;
 
     public DefaultException() {
-	this(0, "");
+        this(0, "");
     }
 
     public DefaultException(final int statusCode, final String message) {
-	super(statusCode, message);
+        super(statusCode, message);
     }
 
     public DefaultException(final String message) {
-	this(0, message);
+        this(0, message);
     }
 }

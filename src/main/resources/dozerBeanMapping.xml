@@ -48,6 +48,10 @@
   <mapping>
     <class-a>org.ourproject.kune.platf.client.dto.GroupDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.domain.Group</class-b>
+    <field>
+      <a get-method="hasLogo">hasLogo</a>
+      <b>hasLogo</b>
+    </field>
   </mapping>
 
   <mapping>

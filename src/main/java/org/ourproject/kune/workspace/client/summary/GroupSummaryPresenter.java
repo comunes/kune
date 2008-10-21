@@ -33,28 +33,28 @@ public class GroupSummaryPresenter implements GroupSummary {
     private GroupSummaryView view;
 
     public GroupSummaryPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		setState(state);
-	    }
-	});
-	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
-	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-		view.setTheme(oldTheme, newTheme);
-	    }
-	});
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                setState(state);
+            }
+        });
+        wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
+            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+                view.setTheme(oldTheme, newTheme);
+            }
+        });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final GroupSummaryView view) {
-	this.view = view;
+        this.view = view;
     }
 
     private void setState(final StateDTO state) {
-	view.setComment("Summary about this group (in development)");
+        view.setComment("Summary about this group (in development)");
     }
 
 }

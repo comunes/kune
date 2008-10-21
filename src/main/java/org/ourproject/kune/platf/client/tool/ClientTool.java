@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.platf.client.tool;
 
-
 public interface ClientTool {
 
     String getName();

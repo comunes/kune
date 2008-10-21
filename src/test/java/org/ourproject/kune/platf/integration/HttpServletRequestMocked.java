@@ -17,213 +17,213 @@ import javax.servlet.http.HttpSession;
 public class HttpServletRequestMocked implements HttpServletRequest {
 
     public Object getAttribute(final String arg0) {
-	return null;
+        return null;
     }
 
     @SuppressWarnings("unchecked")
     public Enumeration getAttributeNames() {
-	return null;
+        return null;
     }
 
     public String getAuthType() {
-	return null;
+        return null;
     }
 
     public String getCharacterEncoding() {
-	return null;
+        return null;
     }
 
     public int getContentLength() {
-	return 0;
+        return 0;
     }
 
     public String getContentType() {
-	return null;
+        return null;
     }
 
     public String getContextPath() {
-	return null;
+        return null;
     }
 
     public Cookie[] getCookies() {
-	return null;
+        return null;
     }
 
     public long getDateHeader(final String arg0) {
-	return 0;
+        return 0;
     }
 
     public String getHeader(final String arg0) {
-	return null;
+        return null;
     }
 
     @SuppressWarnings("unchecked")
     public Enumeration getHeaderNames() {
-	return null;
+        return null;
     }
 
     @SuppressWarnings("unchecked")
     public Enumeration getHeaders(final String arg0) {
-	return null;
+        return null;
     }
 
     public ServletInputStream getInputStream() throws IOException {
-	return null;
+        return null;
     }
 
     public int getIntHeader(final String arg0) {
-	return 0;
+        return 0;
     }
 
     public String getLocalAddr() {
-	return null;
+        return null;
     }
 
     public Locale getLocale() {
-	return null;
+        return null;
     }
 
     @SuppressWarnings("unchecked")
     public Enumeration getLocales() {
-	return null;
+        return null;
     }
 
     public String getLocalName() {
-	return null;
+        return null;
     }
 
     public int getLocalPort() {
-	return 0;
+        return 0;
     }
 
     public String getMethod() {
-	return null;
+        return null;
     }
 
     public String getParameter(final String arg0) {
-	return null;
+        return null;
     }
 
     @SuppressWarnings("unchecked")
     public Map getParameterMap() {
-	return null;
+        return null;
     }
 
     @SuppressWarnings("unchecked")
     public Enumeration getParameterNames() {
-	return null;
+        return null;
     }
 
     public String[] getParameterValues(final String arg0) {
-	return null;
+        return null;
     }
 
     public String getPathInfo() {
-	return null;
+        return null;
     }
 
     public String getPathTranslated() {
-	return null;
+        return null;
     }
 
     public String getProtocol() {
-	return null;
+        return null;
     }
 
     public String getQueryString() {
-	return null;
+        return null;
     }
 
     public BufferedReader getReader() throws IOException {
-	return null;
+        return null;
     }
 
     public String getRealPath(final String arg0) {
-	return null;
+        return null;
     }
 
     public String getRemoteAddr() {
-	return null;
+        return null;
     }
 
     public String getRemoteHost() {
-	return null;
+        return null;
     }
 
     public int getRemotePort() {
-	return 0;
+        return 0;
     }
 
     public String getRemoteUser() {
-	return null;
+        return null;
     }
 
     public RequestDispatcher getRequestDispatcher(final String arg0) {
-	return null;
+        return null;
     }
 
     public String getRequestedSessionId() {
-	return null;
+        return null;
     }
 
     public String getRequestURI() {
-	return null;
+        return null;
     }
 
     public StringBuffer getRequestURL() {
-	return null;
+        return null;
     }
 
     public String getScheme() {
-	return null;
+        return null;
     }
 
     public String getServerName() {
-	return null;
+        return null;
     }
 
     public int getServerPort() {
-	return 0;
+        return 0;
     }
 
     public String getServletPath() {
-	return null;
+        return null;
     }
 
     public HttpSession getSession() {
-	return null;
+        return null;
     }
 
     public HttpSession getSession(final boolean arg0) {
-	return null;
+        return null;
     }
 
     public Principal getUserPrincipal() {
-	return null;
+        return null;
     }
 
     public boolean isRequestedSessionIdFromCookie() {
-	return false;
+        return false;
     }
 
     public boolean isRequestedSessionIdFromUrl() {
-	return false;
+        return false;
     }
 
     public boolean isRequestedSessionIdFromURL() {
-	return false;
+        return false;
     }
 
     public boolean isRequestedSessionIdValid() {
-	return false;
+        return false;
     }
 
     public boolean isSecure() {
-	return false;
+        return false;
     }
 
     public boolean isUserInRole(final String arg0) {
-	return false;
+        return false;
     }
 
     public void removeAttribute(final String arg0) {

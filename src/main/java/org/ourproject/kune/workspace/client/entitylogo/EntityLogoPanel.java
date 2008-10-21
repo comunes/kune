@@ -22,7 +22,6 @@ package org.ourproject.kune.workspace.client.entitylogo;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
@@ -43,83 +42,90 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
     class EntityTextLogo extends VerticalPanel {
 
         private static final int GROUP_NAME_LIMIT_SIZE = 90;
-        private static final String LOGO_SMALL_FONT_SIZE = "108%";
         private static final String LOGO_DEFAULT_FONT_SIZE = "167%";
-        private final Label defTextLogoLabel;
+        private static final String LOGO_SMALL_FONT_SIZE = "108%";
+        private final Label logoLabel;
         private final Hyperlink defTextPutYourLogoHL;
         private final HorizontalPanel putYourLogoHP;
+        private final Image logoImage;
 
-        public EntityTextLogo() {
+        public EntityTextLogo(final Provider<EntityLogoSelector> entityLogoSelectorProvider) {
             // Initialize
             super();
-            defTextLogoLabel = new Label();
+            HorizontalPanel logoHP = new HorizontalPanel();
+            logoImage = new Image();
+            logoLabel = new Label();
+            logoHP.add(logoImage);
+            logoHP.add(logoLabel);
             final HTML expandCell = new HTML("<b></b>");
             putYourLogoHP = new HorizontalPanel();
             defTextPutYourLogoHL = new Hyperlink();
 
             // Layout
-            add(defTextLogoLabel);
+            add(logoHP);
             add(putYourLogoHP);
             putYourLogoHP.add(expandCell);
             putYourLogoHP.add(defTextPutYourLogoHL);
 
             // Set properties
             defTextPutYourLogoHL.setText(i18n.t("Put Your Logo Here"));
+            defTextPutYourLogoHL.addStyleName("kune-pointer");
             defTextPutYourLogoHL.addClickListener(new ClickListener() {
                 public void onClick(final Widget sender) {
-                    final InfoDialog infoDialog = new InfoDialog(
-                            "Configure your group logo",
-                            "Howto configure your group logo",
-                            "For configure your group's logo just add an image to your group contents and select it as your group's logo (see menu 'File'). Whe are working into a more direct way to do that.",
-                            i18n.t("Ok"), false, false, 300, 200);
-                    infoDialog.show();
+                    entityLogoSelectorProvider.get().show();
                 }
             });
             expandCell.setWidth("100%");
             putYourLogoHP.setCellWidth(expandCell, "100%");
             // TODO: link to configure the logo
             setStylePrimaryName("k-entitytextlogo");
-            setDefaultText("");
+            logoImage.setVisible(false);
+            setLogoText("");
         }
 
-        public void setDefaultText(final String text) {
-            if (text.length() > GROUP_NAME_LIMIT_SIZE) {
-                DOM.setStyleAttribute(defTextLogoLabel.getElement(), "fontSize", LOGO_SMALL_FONT_SIZE);
-            } else {
-                DOM.setStyleAttribute(defTextLogoLabel.getElement(), "fontSize", LOGO_DEFAULT_FONT_SIZE);
-            }
-            defTextLogoLabel.setText(text);
+        public void setLogoImage(final String url) {
+            logoImage.setUrl(url);
+        }
 
+        public void setLogoText(final String text) {
+            if (text.length() > GROUP_NAME_LIMIT_SIZE) {
+                DOM.setStyleAttribute(logoLabel.getElement(), "fontSize", LOGO_SMALL_FONT_SIZE);
+            } else {
+                DOM.setStyleAttribute(logoLabel.getElement(), "fontSize", LOGO_DEFAULT_FONT_SIZE);
+            }
+            logoLabel.setText(text);
+        }
+
+        public void setLogoVisible(final boolean visible) {
+            logoImage.setVisible(visible);
         }
 
         public void setPutYourLogoVisible(final boolean visible) {
             putYourLogoHP.setVisible(visible);
         }
-
     }
 
-    private static final int LOGO_ICON_DEFAULT_WIDTH = 468;
-    private static final int LOGO_ICON_DEFAULT_HEIGHT = 60;
-
+    private final Provider<FileDownloadUtils> downloadProvider;
+    private final Provider<EntityLogoSelector> entityLogoSelectorProvider;
     private EntityTextLogo entityTextLogo;
     private final I18nTranslationService i18n;
-    private final Provider<FileDownloadUtils> downloadProvider;
 
     public EntityLogoPanel(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
-            final Provider<FileDownloadUtils> dowloadProvider) {
+            final Provider<FileDownloadUtils> dowloadProvider,
+            final Provider<EntityLogoSelector> entityLogoSelectorProvider) {
         this.i18n = i18n;
         this.downloadProvider = dowloadProvider;
+        this.entityLogoSelectorProvider = entityLogoSelectorProvider;
         ws.addToEntityMainHeader(this);
     }
 
-    public void setLogo(final StateToken stateToken, final boolean clipped) {
+    public void setFullLogo(final StateToken stateToken, final boolean clipped) {
         clear();
         final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
         Image logo;
         if (clipped) {
             logo = new Image(imageUrl, 0, 0, LOGO_ICON_DEFAULT_WIDTH, LOGO_ICON_DEFAULT_HEIGHT);
         } else {
-
             logo = new Image(imageUrl);
             logo.setWidth("" + LOGO_ICON_DEFAULT_WIDTH);
             logo.setHeight("" + LOGO_ICON_DEFAULT_HEIGHT);
@@ -127,10 +133,18 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
         add(logo);
     }
 
-    public void setLogo(final String groupName) {
+    public void setLogoImage(StateToken stateToken) {
+        entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(stateToken));
+    }
+
+    public void setLogoImageVisible(boolean visible) {
+        entityTextLogo.setLogoVisible(visible);
+    }
+
+    public void setLogoText(final String groupName) {
         clear();
         add(getEntityTextLogo());
-        entityTextLogo.setDefaultText(groupName);
+        entityTextLogo.setLogoText(groupName);
     }
 
     public void setPutYourLogoVisible(final boolean visible) {
@@ -146,9 +160,8 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
 
     private EntityTextLogo getEntityTextLogo() {
         if (entityTextLogo == null) {
-            this.entityTextLogo = new EntityTextLogo();
+            this.entityTextLogo = new EntityTextLogo(entityLogoSelectorProvider);
         }
         return entityTextLogo;
     }
-
 }

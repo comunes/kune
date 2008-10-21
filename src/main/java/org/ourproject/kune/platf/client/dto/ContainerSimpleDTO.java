@@ -37,43 +37,43 @@ public class ContainerSimpleDTO implements IsSerializable {
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public Long getParentFolderId() {
-	return parentFolderId;
+        return parentFolderId;
     }
 
     public StateToken getStateToken() {
-	return stateToken;
+        return stateToken;
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public void setParentFolderId(final Long parentFolderId) {
-	this.parentFolderId = parentFolderId;
+        this.parentFolderId = parentFolderId;
     }
 
     public void setStateToken(final StateToken stateToken) {
-	this.stateToken = stateToken;
+        this.stateToken = stateToken;
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
 }

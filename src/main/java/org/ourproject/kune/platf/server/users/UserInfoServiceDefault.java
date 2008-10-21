@@ -37,34 +37,34 @@ public class UserInfoServiceDefault implements UserInfoService {
 
     @Inject
     public UserInfoServiceDefault(final SocialNetworkManager socialNetwork) {
-	this.socialNetworkManager = socialNetwork;
+        this.socialNetworkManager = socialNetwork;
     }
 
     public UserInfo buildInfo(final User user, final String userHash) throws DefaultException {
-	UserInfo info = null;
-	if (User.isKnownUser(user)) {
-	    info = new UserInfo();
+        UserInfo info = null;
+        if (User.isKnownUser(user)) {
+            info = new UserInfo();
 
-	    info.setShortName(user.getShortName());
-	    info.setName(user.getName());
-	    info.setChatName(user.getShortName());
-	    info.setChatPassword(user.getPassword());
-	    final I18nLanguage language = user.getLanguage();
-	    info.setLanguage(language);
-	    info.setCountry(user.getCountry());
-	    info.setUserHash(userHash);
+            info.setShortName(user.getShortName());
+            info.setName(user.getName());
+            info.setChatName(user.getShortName());
+            info.setChatPassword(user.getPassword());
+            final I18nLanguage language = user.getLanguage();
+            info.setLanguage(language);
+            info.setCountry(user.getCountry());
+            info.setUserHash(userHash);
 
-	    final Group userGroup = user.getUserGroup();
+            final Group userGroup = user.getUserGroup();
 
-	    final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
-	    info.setGroupsIsAdmin(participation.getGroupsIsAdmin());
-	    info.setGroupsIsCollab(participation.getGroupsIsCollab());
+            final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
+            info.setGroupsIsAdmin(participation.getGroupsIsAdmin());
+            info.setGroupsIsCollab(participation.getGroupsIsCollab());
 
-	    final Content defaultContent = userGroup.getDefaultContent();
-	    if (defaultContent != null) {
-		info.setHomePage(defaultContent.getStateToken().toString());
-	    }
-	}
-	return info;
+            final Content defaultContent = userGroup.getDefaultContent();
+            if (defaultContent != null) {
+                info.setHomePage(defaultContent.getStateToken().toString());
+            }
+        }
+        return info;
     }
 }

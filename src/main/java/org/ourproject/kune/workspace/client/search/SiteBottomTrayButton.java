@@ -13,25 +13,25 @@ public class SiteBottomTrayButton {
     private final ToolbarButton traybarButton;
 
     public SiteBottomTrayButton(final String icon, final String tooltip, final Window dialog, final WorkspaceSkeleton ws) {
-	traybarButton = new ToolbarButton();
-	traybarButton.setTooltip(tooltip);
-	traybarButton.setIcon(icon);
-	traybarButton.addListener(new ButtonListenerAdapter() {
-	    @Override
-	    public void onClick(final Button button, final EventObject e) {
-		if (dialog.isVisible()) {
-		    dialog.hide();
-		} else {
-		    dialog.show();
-		}
-	    }
+        traybarButton = new ToolbarButton();
+        traybarButton.setTooltip(tooltip);
+        traybarButton.setIcon(icon);
+        traybarButton.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(final Button button, final EventObject e) {
+                if (dialog.isVisible()) {
+                    dialog.hide();
+                } else {
+                    dialog.show();
+                }
+            }
 
-	});
-	ws.getSiteTraybar().addButton(traybarButton);
+        });
+        ws.getSiteTraybar().addButton(traybarButton);
     }
 
     public void destroy() {
-	traybarButton.destroy();
+        traybarButton.destroy();
     }
 
 }

@@ -1,5 +1,4 @@
 /*
- *
  * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -43,6 +42,11 @@ public class Rack {
         this.listeners = new ArrayList<Class<? extends ContainerListener>>();
     }
 
+    public void add(final Class<? extends ContainerListener> listenerType) {
+        listeners.add(listenerType);
+
+    }
+
     public void add(final Dock dock) {
         log.debug("INSTALLING: " + dock.toString());
         docks.add(dock);
@@ -52,28 +56,24 @@ public class Rack {
         modules.add(module);
     }
 
+    public void addExclusion(RequestMatcher matcher) {
+        excludes.add(matcher);
+    }
+
     public List<Dock> getDocks() {
         return docks;
+    }
+
+    public List<RequestMatcher> getExcludes() {
+        return excludes;
     }
 
     public List<Module> getGuiceModules() {
         return modules;
     }
 
-    public void add(final Class<? extends ContainerListener> listenerType) {
-        listeners.add(listenerType);
-    }
-
     public List<Class<? extends ContainerListener>> getListeners() {
         return listeners;
     }
-
-	public void addExclusion(RequestMatcher matcher) {
-		excludes.add(matcher);
-	}
-
-	public List<RequestMatcher> getExcludes() {
-		return excludes;
-	}
 
 }

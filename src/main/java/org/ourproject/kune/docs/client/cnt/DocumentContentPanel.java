@@ -10,10 +10,10 @@ public class DocumentContentPanel implements DocumentContentView {
     private final WorkspaceSkeleton ws;
 
     public DocumentContentPanel(final WorkspaceSkeleton ws) {
-	this.ws = ws;
+        this.ws = ws;
     }
 
     public void setContent(final View view) {
-	ws.getEntityWorkspace().setContent((Widget) view);
+        ws.getEntityWorkspace().setContent((Widget) view);
     }
 }

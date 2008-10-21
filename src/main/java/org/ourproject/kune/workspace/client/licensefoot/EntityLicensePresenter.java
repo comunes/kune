@@ -32,27 +32,27 @@ public class EntityLicensePresenter {
     private LicenseDTO license;
 
     public EntityLicensePresenter(final StateManager stateManager) {
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		setLicense(state);
-	    }
-	});
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                setLicense(state);
+            }
+        });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final EntityLicenseView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void onLicenseClick() {
-	view.openWindow(license.getUrl());
+        view.openWindow(license.getUrl());
     }
 
     private void setLicense(final StateDTO state) {
-	this.license = state.getLicense();
-	view.showLicense(state.getGroup().getLongName(), license);
+        this.license = state.getLicense();
+        view.showLicense(state.getGroup().getLongName(), license);
     }
 }

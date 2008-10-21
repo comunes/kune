@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.skel.EntityWorkspace;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -41,6 +42,7 @@ import com.calclab.suco.client.listener.Event0;
 import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
+import com.google.gwt.user.client.ui.Label;
 
 public class KuneErrorHandler {
     private final Session session;
@@ -61,7 +63,7 @@ public class KuneErrorHandler {
     public void doSessionExpired() {
         onSessionExpired.fire();
         getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
-                i18n.t("Your session has expired. Please login again."));
+                                                i18n.t("Your session has expired. Please login again."));
     }
 
     public WorkspaceSkeleton getWorkspaceSkeleton() {
@@ -83,8 +85,15 @@ public class KuneErrorHandler {
             logException(e);
             doSessionExpired();
         } catch (final NoDefaultContentException e) {
-            Site.info("This user don't have a homepage");
-            stateManagerProvider.get().restorePreviousState();
+            EntityWorkspace ws = wsProvider.get().getEntityWorkspace();
+            ws.setContent(new Label(i18n.t("This user don't have a homepage")));
+            ws.setContext(new Label(""));
+            ws.getSubTitle().removeAll();
+            ws.getTitleComponent().removeAll();
+            ws.getContentTopBar().removeAll();
+            ws.getContextTopBar().removeAll();
+            ws.getContentBottomBar().removeAll();
+            ws.getContextBottomBar().removeAll();
         } catch (final UserMustBeLoggedException e) {
             logException(e);
             if (session.isLogged()) {
@@ -109,9 +118,9 @@ public class KuneErrorHandler {
         } catch (final LastAdminInGroupException e) {
             logException(e);
             getWorkspaceSkeleton().showAlertMessage(
-                    i18n.t("Warning"),
-                    i18n.t("Sorry, you are the last admin of this group."
-                            + " Look for someone to substitute you appropriately as admin before unjoin this group."));
+                                                    i18n.t("Warning"),
+                                                    i18n.t("Sorry, you are the last admin of this group."
+                                                            + " Look for someone to substitute you appropriately as admin before unjoin this group."));
         } catch (final AlreadyGroupMemberException e) {
             logException(e);
             Site.error(i18n.t("This group is already a group member"));

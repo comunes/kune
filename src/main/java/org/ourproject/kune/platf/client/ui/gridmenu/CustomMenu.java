@@ -41,42 +41,42 @@ public class CustomMenu<T> {
     /**
      * 
      * @param param
-     *                the uniq id (for instance a group short name, a xmpp uri
-     *                of the object asociated with this menu
+     *            the uniq id (for instance a group short name, a xmpp uri of
+     *            the object asociated with this menu
      * 
      */
     public CustomMenu(final T param) {
-	this.param = param;
-	menu = new Menu();
+        this.param = param;
+        menu = new Menu();
     }
 
     public void addMenuItem(final MenuItem<T> menuItem) {
-	final Item item = new Item(menuItem.getTitle());
-	item.setIcon(menuItem.getIcon());
-	menu.addItem(item);
-	item.addListener(new BaseItemListenerAdapter() {
-	    public void onClick(final BaseItem item, final EventObject e) {
-		DeferredCommand.addCommand(new Command() {
-		    public void execute() {
-			menuItem.fire(param);
-		    }
-		});
-	    }
-	});
+        final Item item = new Item(menuItem.getTitle());
+        item.setIcon(menuItem.getIcon());
+        menu.addItem(item);
+        item.addListener(new BaseItemListenerAdapter() {
+            public void onClick(final BaseItem item, final EventObject e) {
+                DeferredCommand.addCommand(new Command() {
+                    public void execute() {
+                        menuItem.fire(param);
+                    }
+                });
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
     public void addMenuItemList(final MenuItemCollection list) {
-	for (final Iterator iterator = list.iterator(); iterator.hasNext();) {
-	    final MenuItem item = (MenuItem) iterator.next();
-	    addMenuItem(item);
-	}
+        for (final Iterator iterator = list.iterator(); iterator.hasNext();) {
+            final MenuItem item = (MenuItem) iterator.next();
+            addMenuItem(item);
+        }
     }
 
     public void showMenu(final EventObject e) {
-	if (menu.getItems().length > 0) {
-	    menu.showAt(e.getXY());
-	}
+        if (menu.getItems().length > 0) {
+            menu.showAt(e.getXY());
+        }
     }
 
 }

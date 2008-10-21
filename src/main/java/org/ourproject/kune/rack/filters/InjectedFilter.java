@@ -35,16 +35,16 @@ public abstract class InjectedFilter implements Filter {
     }
 
     public <T> T getInstance(final Class<T> type) {
-	return getInjector().getInstance(type);
+        return getInjector().getInstance(type);
     }
 
     public void init(final FilterConfig filterConfig) throws ServletException {
-	this.ctx = filterConfig.getServletContext();
-	getInjector().injectMembers(this);
+        this.ctx = filterConfig.getServletContext();
+        getInjector().injectMembers(this);
     }
 
     private Injector getInjector() {
-	return (Injector) ctx.getAttribute(RackServletFilter.INJECTOR_ATTRIBUTE);
+        return (Injector) ctx.getAttribute(RackServletFilter.INJECTOR_ATTRIBUTE);
     }
 
 }

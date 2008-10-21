@@ -30,15 +30,15 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 public interface SiteService extends RemoteService {
 
     public class App {
-	private static SiteServiceAsync ourInstance = null;
+        private static SiteServiceAsync ourInstance = null;
 
-	public static synchronized SiteServiceAsync getInstance() {
-	    if (ourInstance == null) {
-		ourInstance = (SiteServiceAsync) GWT.create(SiteService.class);
-		((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteService");
-	    }
-	    return ourInstance;
-	}
+        public static synchronized SiteServiceAsync getInstance() {
+            if (ourInstance == null) {
+                ourInstance = (SiteServiceAsync) GWT.create(SiteService.class);
+                ((ServiceDefTarget) ourInstance).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteService");
+            }
+            return ourInstance;
+        }
 
     }
 

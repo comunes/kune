@@ -26,109 +26,109 @@ public abstract class ActionDescriptor<T> {
     private ActionEnableCondition<T> enableCondition;
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall) {
-	this.accessRol = accessRolDTO;
-	this.onPerformCall = onPerformCall;
-	this.mustBeConfirmed = false;
-	this.onNotConfirmed = null;
-	this.mustBeAuthenticated = true;
+        this.accessRol = accessRolDTO;
+        this.onPerformCall = onPerformCall;
+        this.mustBeConfirmed = false;
+        this.onNotConfirmed = null;
+        this.mustBeAuthenticated = true;
     }
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall,
-	    final ActionEnableCondition<T> enableCondition) {
-	this(accessRolDTO, onPerformCall);
-	this.enableCondition = enableCondition;
+            final ActionEnableCondition<T> enableCondition) {
+        this(accessRolDTO, onPerformCall);
+        this.enableCondition = enableCondition;
     }
 
     @SuppressWarnings("unchecked")
     public void fireOnNotConfirmed(final Object parameter) {
-	if (onNotConfirmed != null) {
-	    onNotConfirmed.onEvent((T) parameter);
-	}
+        if (onNotConfirmed != null) {
+            onNotConfirmed.onEvent((T) parameter);
+        }
     }
 
     @SuppressWarnings("unchecked")
     public void fireOnPerformCall(final Object parameter) {
-	onPerformCall.onEvent((T) parameter);
+        onPerformCall.onEvent((T) parameter);
     }
 
     public AccessRolDTO getAccessRol() {
-	return accessRol;
+        return accessRol;
     }
 
     public String getConfirmationText() {
-	return confirmationText;
+        return confirmationText;
     }
 
     public String getConfirmationTitle() {
-	return confirmationTitle;
+        return confirmationTitle;
     }
 
     public ActionEnableCondition<T> getEnableCondition() {
-	return enableCondition;
+        return enableCondition;
     }
 
     public ImageDescriptor getIconDescriptor() {
-	return iconDescriptor;
+        return iconDescriptor;
     }
 
     public String getIconUrl() {
-	return iconUrl;
+        return iconUrl;
     }
 
     public String getText() {
-	return textDescription;
+        return textDescription;
     }
 
     public String getToolTip() {
-	return toolTip;
+        return toolTip;
     }
 
     public boolean isMustBeConfirmed() {
-	return mustBeConfirmed;
+        return mustBeConfirmed;
     }
 
     public boolean mustBeAuthenticated() {
-	return mustBeAuthenticated;
+        return mustBeAuthenticated;
     }
 
     public void setAccessRol(final AccessRolDTO accessRol) {
-	this.accessRol = accessRol;
+        this.accessRol = accessRol;
     }
 
     public void setConfirmationText(final String confirmationText) {
-	this.confirmationText = confirmationText;
+        this.confirmationText = confirmationText;
     }
 
     public void setConfirmationTitle(final String confirmationTitle) {
-	this.confirmationTitle = confirmationTitle;
+        this.confirmationTitle = confirmationTitle;
     }
 
     public void setEnableCondition(final ActionEnableCondition<T> enableCondition) {
-	this.enableCondition = enableCondition;
+        this.enableCondition = enableCondition;
     }
 
     public void setIconDescriptor(final ImageDescriptor iconDescriptor) {
-	this.iconDescriptor = iconDescriptor;
+        this.iconDescriptor = iconDescriptor;
     }
 
     public void setIconUrl(final String iconUrl) {
-	this.iconUrl = iconUrl;
+        this.iconUrl = iconUrl;
     }
 
     public void setMustBeAuthenticated(final boolean mustBeAuthenticated) {
-	this.mustBeAuthenticated = mustBeAuthenticated;
+        this.mustBeAuthenticated = mustBeAuthenticated;
     }
 
     public void setMustBeConfirmed(final boolean mustBeConfirmed) {
-	this.mustBeConfirmed = mustBeConfirmed;
+        this.mustBeConfirmed = mustBeConfirmed;
     }
 
     public void setTextDescription(final String textDescription) {
-	this.textDescription = textDescription;
+        this.textDescription = textDescription;
     }
 
     public void setToolTip(final String toolTip) {
-	this.toolTip = toolTip;
+        this.toolTip = toolTip;
     }
 
 }

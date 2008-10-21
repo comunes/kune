@@ -88,11 +88,11 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
                 child.setTooltip(tooltip);
             }
             menuItemsContainer.createItemMenu(nodeId, item.getActionCollection(),
-                    new Listener<ActionItem<StateToken>>() {
-                        public void onEvent(ActionItem<StateToken> actionItem) {
-                            doAction(actionItem);
-                        }
-                    });
+                                              new Listener<ActionItem<StateToken>>() {
+                                                  public void onEvent(ActionItem<StateToken> actionItem) {
+                                                      doAction(actionItem);
+                                                  }
+                                              });
             final TreeNode parent = treePanel.getNodeById(item.getParentId());
             if (parent != null) {
                 child.addListener(new TreeNodeListenerAdapter() {

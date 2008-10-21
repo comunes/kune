@@ -11,19 +11,19 @@ public class SiteLogoPresenter implements SiteLogo {
     private SiteLogoView view;
 
     public SiteLogoPresenter(final Session session) {
-	session.onInitDataReceived(new Listener<InitDataDTO>() {
-	    public void onEvent(final InitDataDTO initData) {
-		view.setSiteLogoUrl(initData.getSiteLogoUrl());
-	    }
-	});
+        session.onInitDataReceived(new Listener<InitDataDTO>() {
+            public void onEvent(final InitDataDTO initData) {
+                view.setSiteLogoUrl(initData.getSiteLogoUrl());
+            }
+        });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final SiteLogoView view) {
-	this.view = view;
+        this.view = view;
     }
 
 }

@@ -18,7 +18,7 @@ public interface ImageChooserCallback {
      * This method will be called by the dialog upon an image been selected
      * 
      * @param data
-     *                is the data information of the selected image
+     *            is the data information of the selected image
      */
-    public void onImageSelection(ImageData data);
+    void onImageSelection(ImageData data);
 }

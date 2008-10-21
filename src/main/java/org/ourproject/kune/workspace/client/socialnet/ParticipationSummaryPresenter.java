@@ -47,62 +47,62 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
     private final GridGroup collabOnlyCategory;
 
     public ParticipationSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
-	    final ImageUtils imageUtils, final Session session,
-	    final Provider<SocialNetworkServiceAsync> snServiceProvider, final WsThemePresenter wsThemePresenter) {
-	super(i18n, stateManager, imageUtils, session, snServiceProvider);
-	adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",
-		"talking about a person"), false);
-	collabCategory = new GridGroup(i18n.t("and as collaborator in:"), " ", i18n.t("Collaborate in these groups"),
-		false);
-	collabOnlyCategory = new GridGroup(i18n.t("collaborator in:"), " ", i18n.t("Collaborate in these groups"),
-		false);
-	super.addGroupOperation(gotoGroupMenuItem, false);
-	final Listener<StateDTO> setStateListener = new Listener<StateDTO>() {
-	    public void onEvent(StateDTO state) {
-		setState(state);
-	    }
-	};
-	stateManager.onStateChanged(setStateListener);
-	stateManager.onSocialNetworkChanged(setStateListener);
-	wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
-	    public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-		view.setTheme(oldTheme, newTheme);
-	    }
-	});
+            final ImageUtils imageUtils, final Session session,
+            final Provider<SocialNetworkServiceAsync> snServiceProvider, final WsThemePresenter wsThemePresenter) {
+        super(i18n, stateManager, imageUtils, session, snServiceProvider);
+        adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",
+                                                                     "talking about a person"), false);
+        collabCategory = new GridGroup(i18n.t("and as collaborator in:"), " ", i18n.t("Collaborate in these groups"),
+                false);
+        collabOnlyCategory = new GridGroup(i18n.t("collaborator in:"), " ", i18n.t("Collaborate in these groups"),
+                false);
+        super.addGroupOperation(gotoGroupMenuItem, false);
+        final Listener<StateDTO> setStateListener = new Listener<StateDTO>() {
+            public void onEvent(StateDTO state) {
+                setState(state);
+            }
+        };
+        stateManager.onStateChanged(setStateListener);
+        stateManager.onSocialNetworkChanged(setStateListener);
+        wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
+            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
+                view.setTheme(oldTheme, newTheme);
+            }
+        });
     }
 
     public void init(final ParticipationSummaryView view) {
-	this.view = view;
+        this.view = view;
     }
 
     private void hide() {
-	view.hide();
+        view.hide();
     }
 
     @SuppressWarnings("unchecked")
     private void setState(final StateDTO state) {
-	final ParticipationDataDTO participation = state.getParticipation();
-	final AccessRightsDTO rights = state.getGroupRights();
-	view.clear();
-	final List<GroupDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
-	final List<GroupDTO> groupsIsCollab = participation.getGroupsIsCollab();
-	Log.info(participation.toString());
-	final int numAdmins = groupsIsAdmin.size();
-	final int numCollaborators = groupsIsCollab.size();
-	if (numAdmins == 0) {
-	    collabCategory = collabOnlyCategory;
-	}
-	for (final GroupDTO group : groupsIsAdmin) {
-	    view.addItem(createGridItem(adminCategory, group, rights, unJoinMenuItem));
-	}
-	for (final GroupDTO group : groupsIsCollab) {
-	    view.addItem(createGridItem(collabCategory, group, rights, unJoinMenuItem));
-	}
-	if (numAdmins > 0 || numCollaborators > 0) {
-	    view.show();
-	} else {
-	    hide();
-	}
+        final ParticipationDataDTO participation = state.getParticipation();
+        final AccessRightsDTO rights = state.getGroupRights();
+        view.clear();
+        final List<GroupDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
+        final List<GroupDTO> groupsIsCollab = participation.getGroupsIsCollab();
+        Log.info(participation.toString());
+        final int numAdmins = groupsIsAdmin.size();
+        final int numCollaborators = groupsIsCollab.size();
+        if (numAdmins == 0) {
+            collabCategory = collabOnlyCategory;
+        }
+        for (final GroupDTO group : groupsIsAdmin) {
+            view.addItem(createGridItem(adminCategory, group, rights, unJoinMenuItem));
+        }
+        for (final GroupDTO group : groupsIsCollab) {
+            view.addItem(createGridItem(collabCategory, group, rights, unJoinMenuItem));
+        }
+        if (numAdmins > 0 || numCollaborators > 0) {
+            view.show();
+        } else {
+            hide();
+        }
 
     }
 

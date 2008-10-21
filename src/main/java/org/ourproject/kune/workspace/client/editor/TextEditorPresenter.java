@@ -47,137 +47,137 @@ public class TextEditorPresenter implements TextEditor {
     private final I18nUITranslationService i18n;
 
     public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> toolbar,
-	    final I18nUITranslationService i18n) {
-	this.toolbar = toolbar;
-	autoSave = isAutoSave;
-	this.i18n = i18n;
-	savePending = false;
-	editingHtml = false;
-	saveAndCloseConfirmed = false;
-	createActions();
+            final I18nUITranslationService i18n) {
+        this.toolbar = toolbar;
+        autoSave = isAutoSave;
+        this.i18n = i18n;
+        savePending = false;
+        editingHtml = false;
+        saveAndCloseConfirmed = false;
+        createActions();
     }
 
     public void editContent(final String content, final Listener<String> onSave, final Listener0 onEditCancelled) {
-	this.onSave = onSave;
-	this.onEditCancelled = onEditCancelled;
-	toolbar.attach();
-	view.attach();
-	setContent(content);
+        this.onSave = onSave;
+        this.onEditCancelled = onEditCancelled;
+        toolbar.attach();
+        view.attach();
+        setContent(content);
     }
 
     public String getContent() {
-	return view.getHTML();
+        return view.getHTML();
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final TextEditorView view) {
-	this.view = view;
-	toolbar.setEnableAction(save, false);
-	this.view.setEnabled(true);
+        this.view = view;
+        toolbar.setEnableAction(save, false);
+        this.view.setEnabled(true);
     }
 
     public void onEdit() {
-	if (!savePending) {
-	    savePending = true;
-	    toolbar.setEnableAction(save, true);
-	    if (autoSave) {
-		view.scheduleSave(10000);
-	    }
-	}
+        if (!savePending) {
+            savePending = true;
+            toolbar.setEnableAction(save, true);
+            if (autoSave) {
+                view.scheduleSave(10000);
+            }
+        }
     }
 
     public void onSaveAndClose() {
-	saveAndCloseConfirmed = true;
-	onSave();
+        saveAndCloseConfirmed = true;
+        onSave();
     }
 
     public void onSaved() {
-	if (saveAndCloseConfirmed) {
-	    onCancelConfirmed();
-	} else {
-	    reset();
-	}
+        if (saveAndCloseConfirmed) {
+            onCancelConfirmed();
+        } else {
+            reset();
+        }
     }
 
     public void onSaveFailed() {
-	view.scheduleSave(20000);
-	if (saveAndCloseConfirmed) {
-	    saveAndCloseConfirmed = false;
-	}
+        view.scheduleSave(20000);
+        if (saveAndCloseConfirmed) {
+            saveAndCloseConfirmed = false;
+        }
     }
 
     public void reset() {
-	view.saveTimerCancel();
-	savePending = false;
-	saveAndCloseConfirmed = false;
-	toolbar.setEnableAction(save, false);
+        view.saveTimerCancel();
+        savePending = false;
+        saveAndCloseConfirmed = false;
+        toolbar.setEnableAction(save, false);
     }
 
     protected void onCancel() {
-	if (savePending) {
-	    view.saveTimerCancel();
-	    view.showSaveBeforeDialog();
-	} else {
-	    onCancelConfirmed();
-	}
+        if (savePending) {
+            view.saveTimerCancel();
+            view.showSaveBeforeDialog();
+        } else {
+            onCancelConfirmed();
+        }
     }
 
     protected void onCancelConfirmed() {
-	reset();
-	view.detach();
-	toolbar.detach();
-	onEditCancelled.onEvent();
+        reset();
+        view.detach();
+        toolbar.detach();
+        onEditCancelled.onEvent();
     }
 
     protected void onEditHTML() {
-	if (editingHtml) {
-	    // normal editor
-	    final String html = view.getText();
-	    view.setHTML(html);
-	    view.editHTML(false);
-	    editingHtml = false;
-	} else {
-	    // html editor
-	    final String html = view.getHTML();
-	    view.setText(html);
-	    view.editHTML(true);
-	    editingHtml = true;
-	}
+        if (editingHtml) {
+            // normal editor
+            final String html = view.getText();
+            view.setHTML(html);
+            view.editHTML(false);
+            editingHtml = false;
+        } else {
+            // html editor
+            final String html = view.getHTML();
+            view.setText(html);
+            view.editHTML(true);
+            editingHtml = true;
+        }
     }
 
     protected void onSave() {
-	onSave.onEvent(view.getHTML());
+        onSave.onEvent(view.getHTML());
     }
 
     private void createActions() {
-	save = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
-		new Listener<StateToken>() {
-		    public void onEvent(final StateToken token) {
-			onSave();
-		    }
-		});
-	save.setTextDescription(i18n.tWithNT("Save", "used in button"));
-	// save.setIconUrl("images/");
+        save = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
+                new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        onSave();
+                    }
+                });
+        save.setTextDescription(i18n.tWithNT("Save", "used in button"));
+        // save.setIconUrl("images/");
 
-	close = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
-		new Listener<StateToken>() {
-		    public void onEvent(final StateToken token) {
-			onCancel();
-		    }
-		});
-	close.setTextDescription(i18n.tWithNT("Close", "used in button"));
-	// close.setIconUrl("images/");
+        close = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
+                new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        onCancel();
+                    }
+                });
+        close.setTextDescription(i18n.tWithNT("Close", "used in button"));
+        // close.setIconUrl("images/");
 
-	final ActionItemCollection<StateToken> collection = new ActionItemCollection<StateToken>();
-	collection.add(new ActionItem<StateToken>(save, null));
-	collection.add(new ActionItem<StateToken>(close, null));
-	toolbar.setActions(collection);
+        final ActionItemCollection<StateToken> collection = new ActionItemCollection<StateToken>();
+        collection.add(new ActionItem<StateToken>(save, null));
+        collection.add(new ActionItem<StateToken>(close, null));
+        toolbar.setActions(collection);
     }
 
     private void setContent(final String html) {
-	this.view.setHTML(html);
+        this.view.setHTML(html);
     }
 }

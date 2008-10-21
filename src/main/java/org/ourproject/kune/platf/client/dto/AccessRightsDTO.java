@@ -28,61 +28,72 @@ public class AccessRightsDTO implements IsSerializable {
     private boolean isVisible;
 
     public AccessRightsDTO() {
-	this(false, false, false);
+        this(false, false, false);
     }
 
     public AccessRightsDTO(final boolean isAdministrable, final boolean isEditable, final boolean isVisible) {
-	this.isAdministrable = isAdministrable;
-	this.isEditable = isEditable;
-	this.isVisible = isVisible;
+        this.isAdministrable = isAdministrable;
+        this.isEditable = isEditable;
+        this.isVisible = isVisible;
     }
 
     @Override
     public boolean equals(final Object obj) {
-	if (this == obj) {
-	    return true;
-	}
-	if (obj == null) {
-	    return false;
-	}
-	final AccessRightsDTO other = (AccessRightsDTO) obj;
-	if (isAdministrable != other.isAdministrable) {
-	    return false;
-	}
-	if (isEditable != other.isEditable) {
-	    return false;
-	}
-	if (isVisible != other.isVisible) {
-	    return false;
-	}
-	return true;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        final AccessRightsDTO other = (AccessRightsDTO) obj;
+        if (isAdministrable != other.isAdministrable) {
+            return false;
+        }
+        if (isEditable != other.isEditable) {
+            return false;
+        }
+        if (isVisible != other.isVisible) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (isAdministrable ? 1231 : 1237);
+        result = prime * result + (isEditable ? 1231 : 1237);
+        result = prime * result + (isVisible ? 1231 : 1237);
+        return result;
     }
 
     public boolean isAdministrable() {
-	return isAdministrable;
+        return isAdministrable;
     }
 
     public boolean isEditable() {
-	return isEditable;
+        return isEditable;
     }
 
     public boolean isVisible() {
-	return isVisible;
+        return isVisible;
     }
 
     public void setAdministrable(final boolean isAdministrable) {
-	this.isAdministrable = isAdministrable;
+        this.isAdministrable = isAdministrable;
     }
 
     public void setEditable(final boolean isEditable) {
-	this.isEditable = isEditable;
+        this.isEditable = isEditable;
     }
 
     public void setVisible(final boolean isVisible) {
-	this.isVisible = isVisible;
+        this.isVisible = isVisible;
     }
 
+    @Override
     public String toString() {
-	return "AccessRightsDTO[a: " + isAdministrable + ", e: " + isEditable + ", v: " + isVisible + "]";
+        return "AccessRightsDTO[a: " + isAdministrable + ", e: " + isEditable + ", v: " + isVisible + "]";
     }
 }

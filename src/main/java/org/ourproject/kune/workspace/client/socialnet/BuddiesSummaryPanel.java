@@ -26,6 +26,8 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         private final Label nick;
 
         public BuddieWidget(String nickName, ClickListener clickListener) {
+            // For Drag& drop, see gwt-ext-ux image:
+            // http://www.gwt-ext.com:8080/demo-ux/#imageDDSample
             VerticalPanel vp = new VerticalPanel();
             icon = new Image("images/persons/person2-32.png");
             nick = new Label(nickName);
@@ -80,11 +82,11 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
             }
         };
         menuItemsContainer.createItemMenu(user.getShortName(), actionCollection,
-                new Listener<ActionItem<UserSimpleDTO>>() {
-                    public void onEvent(ActionItem<UserSimpleDTO> actionItem) {
-                        doAction(actionItem);
-                    }
-                });
+                                          new Listener<ActionItem<UserSimpleDTO>>() {
+                                              public void onEvent(ActionItem<UserSimpleDTO> actionItem) {
+                                                  doAction(actionItem);
+                                              }
+                                          });
         flowPanel.add(new BuddieWidget(user.getShortName(), listener));
     }
 

@@ -27,16 +27,16 @@ public class GridDragConfiguration {
     private final String dragMessage;
 
     public GridDragConfiguration(final String ddGroupId, final String dragMessage) {
-	this.ddGroupId = ddGroupId;
-	this.dragMessage = dragMessage;
+        this.ddGroupId = ddGroupId;
+        this.dragMessage = dragMessage;
     }
 
     public String getDdGroupId() {
-	return ddGroupId;
+        return ddGroupId;
     }
 
     public String getDragMessage() {
-	return dragMessage;
+        return dragMessage;
     }
 
 }

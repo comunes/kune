@@ -62,155 +62,155 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
     @Inject
     public ContentManagerDefault(final Provider<EntityManager> provider, final FinderService finder,
-	    final User userFinder, final I18nLanguage languageFinder, final TagManager tagManager) {
-	super(provider, Content.class);
-	this.finder = finder;
-	this.userFinder = userFinder;
-	this.languageFinder = languageFinder;
-	this.tagManager = tagManager;
+            final User userFinder, final I18nLanguage languageFinder, final TagManager tagManager) {
+        super(provider, Content.class);
+        this.finder = finder;
+        this.userFinder = userFinder;
+        this.languageFinder = languageFinder;
+        this.tagManager = tagManager;
     }
 
     public void addAuthor(final User user, final Long contentId, final String authorShortName) throws DefaultException {
-	final Content content = finder.getContent(contentId);
-	final User author = userFinder.getByShortName(authorShortName);
-	if (author == null) {
-	    throw new UserNotFoundException();
-	}
-	content.addAuthor(author);
+        final Content content = finder.getContent(contentId);
+        final User author = userFinder.getByShortName(authorShortName);
+        if (author == null) {
+            throw new UserNotFoundException();
+        }
+        content.addAuthor(author);
     }
 
     public Content createContent(final String title, final String body, final User author, final Container container) {
-	final Content descriptor = new Content();
-	descriptor.addAuthor(author);
-	descriptor.setLanguage(author.getLanguage());
-	// FIXME: remove this when UI take publishing into account
-	descriptor.setPublishedOn(new Date());
-	container.addContent(descriptor);
-	descriptor.setContainer(container);
-	final Revision revision = new Revision(descriptor);
-	revision.setTitle(title);
-	revision.setBody(body);
-	descriptor.addRevision(revision);
-	return persist(descriptor);
+        final Content descriptor = new Content();
+        descriptor.addAuthor(author);
+        descriptor.setLanguage(author.getLanguage());
+        // FIXME: remove this when UI take publishing into account
+        descriptor.setPublishedOn(new Date());
+        container.addContent(descriptor);
+        descriptor.setContainer(container);
+        final Revision revision = new Revision(descriptor);
+        revision.setTitle(title);
+        revision.setBody(body);
+        descriptor.addRevision(revision);
+        return persist(descriptor);
     }
 
     public void delContent(final User user, final Long contentId) throws DefaultException {
-	final Content content = finder.getContent(contentId);
-	content.setStatus(ContentStatus.inTheDustbin);
-	content.setDeletedOn(new Date());
+        final Content content = finder.getContent(contentId);
+        content.setStatus(ContentStatus.inTheDustbin);
+        content.setDeletedOn(new Date());
     }
 
     public Double getRateAvg(final Content content) {
-	return finder.getRateAvg(content);
+        return finder.getRateAvg(content);
     }
 
     public Long getRateByUsers(final Content content) {
-	return finder.getRateByUsers(content);
+        return finder.getRateByUsers(content);
     }
 
     public Double getRateContent(final User rater, final Content content) {
-	final Rate rate = finder.getRate(rater, content);
-	if (rate != null) {
-	    return rate.getValue();
-	} else {
-	    return null;
-	}
+        final Rate rate = finder.getRate(rater, content);
+        if (rate != null) {
+            return rate.getValue();
+        } else {
+            return null;
+        }
     }
 
     public void rateContent(final User rater, final Long contentId, final Double value) throws DefaultException {
-	final Content content = finder.getContent(contentId);
-	final Rate oldRate = finder.getRate(rater, content);
-	if (oldRate == null) {
-	    final Rate rate = new Rate(rater, content, value);
-	    super.persist(rate, Rate.class);
-	} else {
-	    oldRate.setValue(value);
-	    super.persist(oldRate, Rate.class);
-	}
+        final Content content = finder.getContent(contentId);
+        final Rate oldRate = finder.getRate(rater, content);
+        if (oldRate == null) {
+            final Rate rate = new Rate(rater, content, value);
+            super.persist(rate, Rate.class);
+        } else {
+            oldRate.setValue(value);
+            super.persist(oldRate, Rate.class);
+        }
 
     }
 
     public void removeAuthor(final User user, final Long contentId, final String authorShortName)
-	    throws DefaultException {
-	final Content content = finder.getContent(contentId);
-	final User author = userFinder.getByShortName(authorShortName);
-	if (author == null) {
-	    throw new UserNotFoundException();
-	}
-	content.removeAuthor(author);
+            throws DefaultException {
+        final Content content = finder.getContent(contentId);
+        final User author = userFinder.getByShortName(authorShortName);
+        if (author == null) {
+            throw new UserNotFoundException();
+        }
+        content.removeAuthor(author);
     }
 
     public String renameContent(final User user, final Long contentId, final String newTitle) throws DefaultException {
-	final Content content = finder.getContent(contentId);
-	content.getLastRevision().setTitle(newTitle);
-	return newTitle;
+        final Content content = finder.getContent(contentId);
+        content.getLastRevision().setTitle(newTitle);
+        return newTitle;
     }
 
     public Content save(final User editor, final Content descriptor, final String content) {
-	final Revision revision = new Revision(descriptor);
-	revision.setEditor(editor);
-	revision.setTitle(descriptor.getTitle());
-	revision.setBody(content);
-	descriptor.addRevision(revision);
-	return persist(descriptor);
+        final Revision revision = new Revision(descriptor);
+        revision.setEditor(editor);
+        revision.setTitle(descriptor.getTitle());
+        revision.setBody(content);
+        descriptor.addRevision(revision);
+        return persist(descriptor);
     }
 
     public SearchResult<Content> search(final String search) {
-	return this.search(search, null, null);
+        return this.search(search, null, null);
     }
 
     public SearchResult<Content> search(final String search, final Integer firstResult, final Integer maxResults) {
-	final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "authors.name",
-		"authors.shortName", "container.name", "language.code", "language.englishName", "language.nativeName",
-		"lastRevision.body", "lastRevision.title", "tags.name" }, new StandardAnalyzer());
-	Query query;
-	try {
-	    query = parser.parse(search);
-	} catch (final ParseException e) {
-	    throw new RuntimeException("Error parsing search");
-	}
-	return super.search(query, firstResult, maxResults);
+        final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "authors.name",
+                "authors.shortName", "container.name", "language.code", "language.englishName", "language.nativeName",
+                "lastRevision.body", "lastRevision.title", "tags.name" }, new StandardAnalyzer());
+        Query query;
+        try {
+            query = parser.parse(search);
+        } catch (final ParseException e) {
+            throw new RuntimeException("Error parsing search");
+        }
+        return super.search(query, firstResult, maxResults);
     }
 
     public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
-	    throws DefaultException {
-	final Content content = finder.getContent(contentId);
-	final I18nLanguage language = languageFinder.findByCode(languageCode);
-	if (language == null) {
-	    throw new I18nNotFoundException();
-	}
-	content.setLanguage(language);
-	return language;
+            throws DefaultException {
+        final Content content = finder.getContent(contentId);
+        final I18nLanguage language = languageFinder.findByCode(languageCode);
+        if (language == null) {
+            throw new I18nNotFoundException();
+        }
+        content.setLanguage(language);
+        return language;
     }
 
     public void setPublishedOn(final User user, final Long contentId, final Date publishedOn) throws DefaultException {
-	final Content content = finder.getContent(contentId);
-	content.setPublishedOn(publishedOn);
+        final Content content = finder.getContent(contentId);
+        content.setPublishedOn(publishedOn);
     }
 
     public void setStatus(final Long contentId, final ContentStatus status) {
-	final Content content = finder.getContent(contentId);
-	content.setStatus(status);
+        final Content content = finder.getContent(contentId);
+        content.setStatus(status);
     }
 
     public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
-	final Content content = finder.getContent(contentId);
-	final ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
-	final ArrayList<Tag> tagList = new ArrayList<Tag>();
-	for (final Iterator<String> i = tagsStripped.iterator(); i.hasNext();) {
-	    final String tagString = i.next();
-	    Tag tag;
-	    try {
-		tag = tagManager.findByTagName(tagString);
-	    } catch (final NoResultException e) {
-		tag = new Tag(tagString);
-		tagManager.persist(tag);
-	    }
-	    if (!tagList.contains(tag)) {
-		tagList.add(tag);
-	    }
-	}
-	content.setTags(tagList);
+        final Content content = finder.getContent(contentId);
+        final ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
+        final ArrayList<Tag> tagList = new ArrayList<Tag>();
+        for (final Iterator<String> i = tagsStripped.iterator(); i.hasNext();) {
+            final String tagString = i.next();
+            Tag tag;
+            try {
+                tag = tagManager.findByTagName(tagString);
+            } catch (final NoResultException e) {
+                tag = new Tag(tagString);
+                tagManager.persist(tag);
+            }
+            if (!tagList.contains(tag)) {
+                tagList.add(tag);
+            }
+        }
+        content.setTags(tagList);
     }
 
 }

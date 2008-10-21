@@ -39,43 +39,35 @@ public interface Session {
     /**
      * Duration remembering login: 2 weeks
      */
-    public static int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
+    int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
 
-    public void check(AsyncCallbackSimple<?> callback);
+    void check(AsyncCallbackSimple<?> callback);
 
-    public List<I18nCountryDTO> getCountries();
+    List<I18nCountryDTO> getCountries();
 
-    public Object[][] getCountriesArray();
+    Object[][] getCountriesArray();
 
-    public I18nLanguageDTO getCurrentLanguage();
+    I18nLanguageDTO getCurrentLanguage();
 
-    public StateDTO getCurrentState();
+    StateDTO getCurrentState();
 
-    public StateToken getCurrentStateToken();
-
-    public List<I18nLanguageSimpleDTO> getLanguages();
-
-    public Object[][] getLanguagesArray();
-
-    public List<LicenseDTO> getLicenses();
-
-    public Object[][] getTimezones();
-
-    public boolean isLogged();
-
-    public void setCurrent(final StateDTO currentState);
-
-    public void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
-
-    public void setCurrentState(final StateDTO currentState);
-
-    public void setInitData(InitDataDTO initData);
+    StateToken getCurrentStateToken();
 
     UserInfoDTO getCurrentUserInfo();
 
     String getGalleryPermittedExtensions();
 
+    List<I18nLanguageSimpleDTO> getLanguages();
+
+    Object[][] getLanguagesArray();
+
+    List<LicenseDTO> getLicenses();
+
+    Object[][] getTimezones();
+
     String getUserHash();
+
+    boolean isLogged();
 
     void onInitDataReceived(Listener<InitDataDTO> listener);
 
@@ -83,7 +75,15 @@ public interface Session {
 
     void onUserSignOut(Listener0 listener);
 
+    void setCurrent(final StateDTO currentState);
+
+    void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
+
+    void setCurrentState(final StateDTO currentState);
+
     void setCurrentUserInfo(UserInfoDTO currentUserInfo);
+
+    void setInitData(InitDataDTO initData);
 
     void setUserHash(String userHash);
 

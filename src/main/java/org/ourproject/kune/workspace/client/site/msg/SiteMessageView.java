@@ -24,14 +24,14 @@ import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
 public interface SiteMessageView extends View {
 
-    public void adjustWidth(int windowWidth);
+    void adjustWidth(int windowWidth);
 
-    public void hide();
+    void hide();
 
-    public void setMessage(String message);
+    void setMessage(String message);
 
-    public void setMessage(String message, SiteErrorType oldStyle, SiteErrorType newStyle);
+    void setMessage(String message, SiteErrorType oldStyle, SiteErrorType newStyle);
 
-    public void show();
+    void show();
 
 }

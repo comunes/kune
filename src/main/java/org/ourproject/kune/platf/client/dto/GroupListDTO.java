@@ -31,30 +31,30 @@ public class GroupListDTO implements IsSerializable {
     private String mode;
 
     public GroupListDTO() {
-	this(null);
+        this(null);
     }
 
     public GroupListDTO(final List<GroupDTO> list) {
-	this.list = list;
+        this.list = list;
     }
 
     public List<GroupDTO> getList() {
-	return list;
+        return list;
     }
 
     public String getMode() {
-	return mode;
+        return mode;
     }
 
     public void setList(final List<GroupDTO> list) {
-	this.list = list;
+        this.list = list;
     }
 
     public void setMode(final String mode) {
-	this.mode = mode;
+        this.mode = mode;
     }
 
     public String toString() {
-	return "GroupListDTO[(" + mode + "): " + list + "]";
+        return "GroupListDTO[(" + mode + "): " + list + "]";
     }
 }

@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.workspace.client.summary;
 
-
 public interface GroupSummary {
 
 }

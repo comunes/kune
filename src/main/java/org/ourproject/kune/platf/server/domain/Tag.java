@@ -81,8 +81,7 @@ public class Tag implements HasId {
     }
 
     @Finder(query = "FROM Tag g WHERE g.name = :name")
-    public Tag findByTagName(@Named("name")
-    final String tag) {
+    public Tag findByTagName(@Named("name") final String tag) {
         return null;
     }
 

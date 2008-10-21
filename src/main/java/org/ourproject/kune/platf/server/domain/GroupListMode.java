@@ -25,13 +25,13 @@ public enum GroupListMode {
     NORMAL, NOBODY, EVERYONE;
 
     public boolean checkIfIncludes(Group group, List<Group> list) {
-	switch (this) {
-	case NOBODY:
-	    return false;
-	case EVERYONE:
-	    return true;
-	default:
-	    return list.contains(group);
-	}
+        switch (this) {
+        case NOBODY:
+            return false;
+        case EVERYONE:
+            return true;
+        default:
+            return list.contains(group);
+        }
     }
 }

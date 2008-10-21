@@ -33,59 +33,59 @@ public class ContentSimpleDTO implements IsSerializable {
     private BasicMimeTypeDTO mimeType;
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public BasicMimeTypeDTO getMimeType() {
-	return mimeType;
+        return mimeType;
     }
 
     public AccessRightsDTO getRights() {
-	return rights;
+        return rights;
     }
 
     public StateToken getStateToken() {
-	return stateToken;
+        return stateToken;
     }
 
     public ContentStatusDTO getStatus() {
-	return status;
+        return status;
     }
 
     public String getTitle() {
-	return title;
+        return title;
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void setMimeType(final BasicMimeTypeDTO mimeType) {
-	this.mimeType = mimeType;
+        this.mimeType = mimeType;
     }
 
     public void setRights(final AccessRightsDTO rights) {
-	this.rights = rights;
+        this.rights = rights;
     }
 
     public void setStateToken(final StateToken stateToken) {
-	this.stateToken = stateToken;
+        this.stateToken = stateToken;
     }
 
     public void setStatus(final ContentStatusDTO status) {
-	this.status = status;
+        this.status = status;
     }
 
     public void setTitle(final String title) {
-	this.title = title;
+        this.title = title;
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
 }

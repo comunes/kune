@@ -27,16 +27,16 @@ public class XmppConnection implements ChatConnection {
     private final String userName;
 
     public XmppConnection(final String userName, final XMPPConnection conn) {
-	this.userName = userName;
-	this.conn = conn;
+        this.userName = userName;
+        this.conn = conn;
     }
 
     public XMPPConnection getConn() {
-	return conn;
+        return conn;
     }
 
     public String getUserName() {
-	return userName;
+        return userName;
     }
 
 }

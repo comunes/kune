@@ -31,16 +31,16 @@ public class WorkspaceDeckPanel extends SimplePanel implements WorkspaceDeckView
 
     @Deprecated
     public WorkspaceDeckPanel() {
-	current = new Label("Nothing");
-	add(current);
+        current = new Label("Nothing");
+        add(current);
     }
 
     public void show(final View view) {
-	if (current != null) {
-	    remove(current);
-	}
-	current = (Widget) view;
-	add(current);
+        if (current != null) {
+            remove(current);
+        }
+        current = (Widget) view;
+        add(current);
     }
 
 }

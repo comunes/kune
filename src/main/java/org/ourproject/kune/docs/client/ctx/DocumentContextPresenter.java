@@ -35,34 +35,34 @@ public class DocumentContextPresenter implements DocumentContext {
     private final Provider<AdminContext> adminContextProvider;
 
     public DocumentContextPresenter(final StateManager stateManager,
-	    final Provider<ContextNavigator> contextNavigatorProvider, final Provider<AdminContext> adminContextProvider) {
-	this.contextNavigatorProvider = contextNavigatorProvider;
-	this.adminContextProvider = adminContextProvider;
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		if (DocumentClientTool.NAME.equals(state.getToolName())) {
-		    setState(state);
-		}
-	    }
-	});
+            final Provider<ContextNavigator> contextNavigatorProvider, final Provider<AdminContext> adminContextProvider) {
+        this.contextNavigatorProvider = contextNavigatorProvider;
+        this.adminContextProvider = adminContextProvider;
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                if (DocumentClientTool.NAME.equals(state.getToolName())) {
+                    setState(state);
+                }
+            }
+        });
     }
 
     public void init(final DocumentContextView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void showAdmin() {
-	final AdminContext adminContext = adminContextProvider.get();
-	view.setContainer(adminContext.getView());
+        final AdminContext adminContext = adminContextProvider.get();
+        view.setContainer(adminContext.getView());
     }
 
     public void showFolders() {
-	view.setContainer(contextNavigatorProvider.get().getView());
+        view.setContainer(contextNavigatorProvider.get().getView());
     }
 
     private void setState(final StateDTO state) {
-	contextNavigatorProvider.get().setState(state, true);
-	adminContextProvider.get().setState(state);
-	showFolders();
+        contextNavigatorProvider.get().setState(state, true);
+        adminContextProvider.get().setState(state);
+        showFolders();
     }
 }

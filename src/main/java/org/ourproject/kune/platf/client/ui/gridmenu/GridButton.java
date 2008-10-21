@@ -10,26 +10,26 @@ public class GridButton {
     private final Listener<String> listener;
 
     public GridButton(final String icon, final String title, final String tooltip, final Listener<String> listener) {
-	this.icon = icon;
-	this.title = title;
-	this.tooltip = tooltip;
-	this.listener = listener;
+        this.icon = icon;
+        this.title = title;
+        this.tooltip = tooltip;
+        this.listener = listener;
     }
 
     public String getIcon() {
-	return icon;
+        return icon;
     }
 
     public Listener<String> getListener() {
-	return listener;
+        return listener;
     }
 
     public String getTitle() {
-	return title;
+        return title;
     }
 
     public String getTooltip() {
-	return tooltip;
+        return tooltip;
     }
 
 }

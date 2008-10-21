@@ -27,22 +27,22 @@ public class SocialNetworkMembersTest extends IntegrationTest {
 
     @Before
     public void init() {
-	new IntegrationTestHelper(this);
-	group = groupFinder.findByShortName(getSiteAdminShortName());
+        new IntegrationTestHelper(this);
+        group = groupFinder.findByShortName(getSiteAdminShortName());
     }
 
     @Test
     public void testAdminMembersOfGroupFinder() throws Exception {
-	doLogin();
-	final List<Group> result = groupFinder.findAdminInGroups(group.getId());
-	assertEquals(2, result.size());
+        doLogin();
+        final List<Group> result = groupFinder.findAdminInGroups(group.getId());
+        assertEquals(2, result.size());
     }
 
     @Test
     public void testCollabMembersOfGroupFinder() throws Exception {
-	doLogin();
-	final List<Group> result = groupFinder.findCollabInGroups(group.getId());
-	assertEquals(0, result.size());
+        doLogin();
+        final List<Group> result = groupFinder.findCollabInGroups(group.getId());
+        assertEquals(0, result.size());
     }
 
 }

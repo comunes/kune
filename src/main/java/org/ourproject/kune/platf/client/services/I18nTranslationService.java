@@ -142,11 +142,14 @@ public abstract class I18nTranslationService {
         // [month]".t(::Date::MONTHNAMES[mon])
         // when '%b'; o << "#{::Date::ABBR_MONTHNAMES[mon]} [abbreviated
         // month]".t(::Date::ABBR_MONTHNAMES[mon])
-        // when '%c'; o << ((Locale.active? && !Locale.active.date_format.nil?) ?
+        // when '%c'; o << ((Locale.active? && !Locale.active.date_format.nil?)
+        // ?
         // localize(Locale.active.date_format) : strftime('%Y-%m-%d'))
-        // when '%p'; o << if hour < 12 then 'AM [Ante Meridiem]'.t("am") else 'PM [Post
+        // when '%p'; o << if hour < 12 then 'AM [Ante Meridiem]'.t("am") else
+        // 'PM [Post
         // Meridiem]'.t("am") end
-        // when '%P'; o << if hour < 12 then 'AM [Ante Meridiem]'.t("AM") else 'PM [Post
+        // when '%P'; o << if hour < 12 then 'AM [Ante Meridiem]'.t("AM") else
+        // 'PM [Post
         // Meridiem]'.t("PM") end
         // else; o << c
     }

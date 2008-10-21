@@ -7,16 +7,16 @@ public class SocialNetworkOperator {
     private final SocialNetwork socialNetwork;
 
     public SocialNetworkOperator(final DomainContext ctx, final SocialNetwork socialNetwork) {
-	this.ctx = ctx;
-	this.socialNetwork = socialNetwork;
-    }
-
-    public void addAsCollaborator(final String userName) {
-	socialNetwork.addCollaborator(ctx.getGroupOf(userName));
+        this.ctx = ctx;
+        this.socialNetwork = socialNetwork;
     }
 
     public void addAsAdministrator(final String userName) {
-	socialNetwork.addAdmin(ctx.getGroupOf(userName));
+        socialNetwork.addAdmin(ctx.getGroupOf(userName));
+    }
+
+    public void addAsCollaborator(final String userName) {
+        socialNetwork.addCollaborator(ctx.getGroupOf(userName));
     }
 
 }

@@ -22,10 +22,10 @@ package org.ourproject.kune.platf.server.manager;
 
 public interface Manager<T, X> {
 
-    public T find(X id);
+    T find(X id);
 
-    public T persist(T entity);
+    T merge(T entity);
 
-    public T merge(T entity);
+    T persist(T entity);
 
 }

@@ -28,28 +28,28 @@ public class ParticipationData {
     private List<Group> groupsIsCollab;
 
     public ParticipationData() {
-	this(null, null);
+        this(null, null);
     }
 
     public ParticipationData(final List<Group> groupsIsAdmin, final List<Group> groupsIsCollab) {
-	this.groupsIsAdmin = groupsIsAdmin;
-	this.groupsIsCollab = groupsIsCollab;
+        this.groupsIsAdmin = groupsIsAdmin;
+        this.groupsIsCollab = groupsIsCollab;
     }
 
     public List<Group> getGroupsIsAdmin() {
-	return groupsIsAdmin;
+        return groupsIsAdmin;
     }
 
     public List<Group> getGroupsIsCollab() {
-	return groupsIsCollab;
+        return groupsIsCollab;
     }
 
     public void setGroupsIsAdmin(final List<Group> groupsIsAdmin) {
-	this.groupsIsAdmin = groupsIsAdmin;
+        this.groupsIsAdmin = groupsIsAdmin;
     }
 
     public void setGroupsIsCollab(final List<Group> groupsIsCollab) {
-	this.groupsIsCollab = groupsIsCollab;
+        this.groupsIsCollab = groupsIsCollab;
     }
 
 }

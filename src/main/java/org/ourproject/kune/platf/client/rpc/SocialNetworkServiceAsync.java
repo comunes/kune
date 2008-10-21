@@ -27,23 +27,23 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SocialNetworkServiceAsync {
 
-    void AcceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName,
-	    AsyncCallback<SocialNetworkResultDTO> callback);
+    void acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName,
+            AsyncCallback<SocialNetworkResultDTO> callback);
 
     void addAdminMember(String hash, StateToken groupToken, String groupToAddShortName,
-	    AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkResultDTO> callback);
 
     void addCollabMember(String hash, StateToken groupToken, String groupToAddShortName,
-	    AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkResultDTO> callback);
 
     void addViewerMember(String hash, StateToken groupToken, String groupToAddShortName,
-	    AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkResultDTO> callback);
 
     void deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName,
-	    AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkResultDTO> callback);
 
     void denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName,
-	    AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkResultDTO> callback);
 
     void getGroupMembers(String hash, StateToken groupToken, AsyncCallback<SocialNetworkResultDTO> callback);
 
@@ -52,10 +52,10 @@ public interface SocialNetworkServiceAsync {
     void requestJoinGroup(String hash, StateToken groupToken, AsyncCallback<?> callback);
 
     void setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName,
-	    AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkResultDTO> callback);
 
     void setCollabAsAdmin(String hash, StateToken groupToken, String groupToSetAdminShortName,
-	    AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkResultDTO> callback);
 
     void unJoinGroup(String hash, StateToken groupToken, AsyncCallback<SocialNetworkResultDTO> callback);
 }

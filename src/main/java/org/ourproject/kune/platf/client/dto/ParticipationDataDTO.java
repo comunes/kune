@@ -29,33 +29,33 @@ public class ParticipationDataDTO implements IsSerializable {
     private List<GroupDTO> groupsIsCollab;
 
     public ParticipationDataDTO() {
-	this(null, null);
+        this(null, null);
     }
 
     public ParticipationDataDTO(final List<GroupDTO> groupsIsAdmin, final List<GroupDTO> groupsIsCollab) {
-	this.groupsIsAdmin = groupsIsAdmin;
-	this.groupsIsCollab = groupsIsCollab;
+        this.groupsIsAdmin = groupsIsAdmin;
+        this.groupsIsCollab = groupsIsCollab;
     }
 
     public List<GroupDTO> getGroupsIsAdmin() {
-	return groupsIsAdmin;
+        return groupsIsAdmin;
     }
 
     public List<GroupDTO> getGroupsIsCollab() {
-	return groupsIsCollab;
+        return groupsIsCollab;
     }
 
     public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {
-	this.groupsIsAdmin = groupsIsAdmin;
+        this.groupsIsAdmin = groupsIsAdmin;
     }
 
     public void setGroupsIsCollab(final List<GroupDTO> groupsIsCollab) {
-	this.groupsIsCollab = groupsIsCollab;
+        this.groupsIsCollab = groupsIsCollab;
     }
 
     @Override
     public String toString() {
-	return "ParticipationDataDTO[admin in: " + groupsIsAdmin.toString() + ", collab in: "
-		+ groupsIsCollab.toString() + "]";
+        return "ParticipationDataDTO[admin in: " + groupsIsAdmin.toString() + ", collab in: "
+                + groupsIsCollab.toString() + "]";
     }
 }

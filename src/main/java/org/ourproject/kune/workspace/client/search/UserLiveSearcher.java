@@ -20,6 +20,5 @@
 
 package org.ourproject.kune.workspace.client.search;
 
-
 public interface UserLiveSearcher extends EntityLiveSearcher {
 }

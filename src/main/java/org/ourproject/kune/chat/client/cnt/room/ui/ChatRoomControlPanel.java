@@ -33,17 +33,17 @@ public class ChatRoomControlPanel extends HorizontalPanel implements ChatRoomCon
     private final CustomPushButton enterRoomBtn;
 
     public ChatRoomControlPanel(final I18nTranslationService i18n, final ChatRoomControlPresenter presenter) {
-	enterRoomBtn = new CustomPushButton(i18n.t("Enter room"), new ClickListener() {
-	    public void onClick(final Widget sender) {
-		presenter.onEnterRoom();
-	    }
-	});
-	add(enterRoomBtn);
-	setEnterRoomEnabled(true);
+        enterRoomBtn = new CustomPushButton(i18n.t("Enter room"), new ClickListener() {
+            public void onClick(final Widget sender) {
+                presenter.onEnterRoom();
+            }
+        });
+        add(enterRoomBtn);
+        setEnterRoomEnabled(true);
     }
 
     public void setEnterRoomEnabled(final boolean isEnabled) {
-	enterRoomBtn.setEnabled(isEnabled);
+        enterRoomBtn.setEnabled(isEnabled);
     }
 
 }

@@ -36,84 +36,84 @@ public class UserInfoDTO implements IsSerializable {
     private List<GroupDTO> groupsIsCollab;
 
     public String getChatName() {
-	return chatName;
+        return chatName;
     }
 
     public String getChatPassword() {
-	return chatPassword;
+        return chatPassword;
     }
 
     public I18nCountryDTO getCountry() {
-	return country;
+        return country;
     }
 
     public List<GroupDTO> getGroupsIsAdmin() {
-	return groupsIsAdmin;
+        return groupsIsAdmin;
     }
 
     public List<GroupDTO> getGroupsIsCollab() {
-	return groupsIsCollab;
+        return groupsIsCollab;
     }
 
     public String getHomePage() {
-	return homePage;
+        return homePage;
     }
 
     public I18nLanguageDTO getLanguage() {
-	return language;
+        return language;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public String getShortName() {
-	return shortName;
+        return shortName;
     }
 
     public String getUserHash() {
-	return userHash;
+        return userHash;
     }
 
     public void setChatName(final String chatName) {
-	this.chatName = chatName;
+        this.chatName = chatName;
     }
 
     public void setChatPassword(final String password) {
-	this.chatPassword = password;
+        this.chatPassword = password;
 
     }
 
     public void setCountry(final I18nCountryDTO country) {
-	this.country = country;
+        this.country = country;
     }
 
     public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {
-	this.groupsIsAdmin = groupsIsAdmin;
+        this.groupsIsAdmin = groupsIsAdmin;
     }
 
     public void setGroupsIsCollab(final List<GroupDTO> groupsIsCollab) {
-	this.groupsIsCollab = groupsIsCollab;
+        this.groupsIsCollab = groupsIsCollab;
     }
 
     public void setHomePage(final String homePage) {
-	this.homePage = homePage;
+        this.homePage = homePage;
     }
 
     public void setLanguage(final I18nLanguageDTO language) {
-	this.language = language;
+        this.language = language;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public void setShortName(final String shortName) {
-	this.shortName = shortName;
+        this.shortName = shortName;
     }
 
     public void setUserHash(final String userHash) {
-	this.userHash = userHash;
+        this.userHash = userHash;
     }
 
 }

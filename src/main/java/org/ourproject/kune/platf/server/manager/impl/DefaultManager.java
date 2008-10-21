@@ -36,71 +36,70 @@ public abstract class DefaultManager<T, K> {
     private final Class<T> entityClass;
 
     public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
-	this.provider = provider;
-	this.entityClass = entityClass;
+        this.provider = provider;
+        this.entityClass = entityClass;
     }
 
     public T find(final Long primaryKey) {
-	return getEntityManager().find(entityClass, primaryKey);
+        return getEntityManager().find(entityClass, primaryKey);
     }
 
     public <E> E merge(final E entity, final Class<E> entityClass) {
-	getEntityManager().merge(entity);
-	return entity;
+        getEntityManager().merge(entity);
+        return entity;
     }
 
     public T merge(final T entity) {
-	return getEntityManager().merge(entity);
+        return getEntityManager().merge(entity);
     }
 
     public <E> E persist(final E entity, final Class<E> entityClass) {
-	getEntityManager().persist(entity);
-	return entity;
+        getEntityManager().persist(entity);
+        return entity;
     }
 
     public T persist(final T entity) {
-	return persist(entity, entityClass);
+        return persist(entity, entityClass);
     }
 
     @SuppressWarnings("unchecked")
     public void reIndex() {
-	// Inject this?
-	final FullTextEntityManager fullTextEm = Search.createFullTextEntityManager(getEntityManager());
-	fullTextEm.purgeAll(entityClass);
-	fullTextEm.getTransaction().commit();
-	fullTextEm.getTransaction().begin();
-	final List<T> entities = fullTextEm.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " AS e")
-		.getResultList();
-	for (final T e : entities) {
-	    fullTextEm.index(e);
-	}
-	fullTextEm.getSearchFactory().optimize(entityClass);
+        // Inject this?
+        final FullTextEntityManager fullTextEm = Search.createFullTextEntityManager(getEntityManager());
+        fullTextEm.purgeAll(entityClass);
+        fullTextEm.getTransaction().commit();
+        fullTextEm.getTransaction().begin();
+        final List<T> entities = fullTextEm.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " AS e").getResultList();
+        for (final T e : entities) {
+            fullTextEm.index(e);
+        }
+        fullTextEm.getSearchFactory().optimize(entityClass);
     }
 
     public SearchResult<T> search(final Query query) {
-	return search(query, null, null);
+        return search(query, null, null);
     }
 
     @SuppressWarnings("unchecked")
     public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
-	final FullTextQuery emQuery = Search.createFullTextEntityManager(getEntityManager()).createFullTextQuery(query,
-		entityClass);
-	if (firstResult != null && maxResults != null) {
-	    emQuery.setFirstResult(firstResult);
-	    emQuery.setMaxResults(maxResults);
-	}
-	return new SearchResult<T>(new Long(emQuery.getResultSize()), emQuery.getResultList());
+        final FullTextQuery emQuery = Search.createFullTextEntityManager(getEntityManager()).createFullTextQuery(query,
+                                                                                                                 entityClass);
+        if (firstResult != null && maxResults != null) {
+            emQuery.setFirstResult(firstResult);
+            emQuery.setMaxResults(maxResults);
+        }
+        return new SearchResult<T>(new Long(emQuery.getResultSize()), emQuery.getResultList());
     }
 
     /**
      * use carefully!!!
      */
     protected <X> X find(final Class<X> entityClass, final Long primaryKey) {
-	return getEntityManager().find(entityClass, primaryKey);
+        return getEntityManager().find(entityClass, primaryKey);
     }
 
     private EntityManager getEntityManager() {
-	return provider.get();
+        return provider.get();
     }
 
 }

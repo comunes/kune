@@ -50,17 +50,17 @@ public class TitledPanel extends SimplePanel {
      * Implementation class for TitledPanel.
      */
     public static class TitledPanelImpl {
-	/**
-	 * Set the title of a fieldset element.
-	 */
-	public void setTitle(final Element fieldset, final Element legend, final String title) {
-	    if (title != "" && title != null) {
-		DOM.setInnerHTML(legend, title);
-		DOM.insertChild(fieldset, legend, 0);
-	    } else if (DOM.getParent(legend) != null) {
-		DOM.removeChild(fieldset, legend);
-	    }
-	}
+        /**
+         * Set the title of a fieldset element.
+         */
+        public void setTitle(final Element fieldset, final Element legend, final String title) {
+            if (title != "" && title != null) {
+                DOM.setInnerHTML(legend, title);
+                DOM.insertChild(fieldset, legend, 0);
+            } else if (DOM.getParent(legend) != null) {
+                DOM.removeChild(fieldset, legend);
+            }
+        }
     }
 
     /**
@@ -68,11 +68,11 @@ public class TitledPanel extends SimplePanel {
      * issues.
      */
     public static class TitledPanelImplMozilla extends TitledPanelImpl {
-	public void setTitle(final Element fieldset, final Element legend, final String title) {
-	    DOM.setStyleAttribute(fieldset, "display", "none");
-	    super.setTitle(fieldset, legend, title);
-	    DOM.setStyleAttribute(fieldset, "display", "");
-	}
+        public void setTitle(final Element fieldset, final Element legend, final String title) {
+            DOM.setStyleAttribute(fieldset, "display", "none");
+            super.setTitle(fieldset, legend, title);
+            DOM.setStyleAttribute(fieldset, "display", "");
+        }
     }
 
     /**
@@ -94,26 +94,26 @@ public class TitledPanel extends SimplePanel {
      * Constructor.
      * 
      * @param title
-     *                the title to display
+     *            the title to display
      */
     public TitledPanel(final String title) {
-	super(DOM.createElement("fieldset"));
-	legend = DOM.createElement("legend");
-	DOM.appendChild(getElement(), legend);
-	setTitle(title);
+        super(DOM.createElement("fieldset"));
+        legend = DOM.createElement("legend");
+        DOM.appendChild(getElement(), legend);
+        setTitle(title);
     }
 
     /**
      * Constructor.
      * 
      * @param title
-     *                the title to display
+     *            the title to display
      * @param w
-     *                the widget to add to the panel
+     *            the widget to add to the panel
      */
     public TitledPanel(final String title, final Widget w) {
-	this(title);
-	setWidget(w);
+        this(title);
+        setWidget(w);
     }
 
     /**
@@ -122,7 +122,7 @@ public class TitledPanel extends SimplePanel {
      * @return the title of the panel
      */
     public String getTitle() {
-	return this.title;
+        return this.title;
     }
 
     /**
@@ -130,11 +130,11 @@ public class TitledPanel extends SimplePanel {
      * the title completely, leaving just a box.
      * 
      * @param title
-     *                the new title
+     *            the new title
      */
     public void setTitle(final String title) {
-	this.title = title;
-	impl.setTitle(getElement(), legend, title);
+        this.title = title;
+        impl.setTitle(getElement(), legend, title);
     }
 
 }

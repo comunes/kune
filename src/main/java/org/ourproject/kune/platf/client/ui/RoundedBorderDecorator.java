@@ -66,14 +66,14 @@ import com.google.gwt.user.client.ui.Widget;
  * <p>
  * By default the classname assigned to the rounded corners is "rp". You need
  * this to set the color of the rounded corners to match the rest of you widget.
- * e.g. <code>.rp { background-color:#c3d9ff; }</code> If you want another
- * class name, use the method <code>setLineStyleName</code>.
+ * e.g. <code>.rp { background-color:#c3d9ff; }</code> If you want another class
+ * name, use the method <code>setLineStyleName</code>.
  * </p>
  * 
  * @author Hilbrand Bouwkamp(hs@bouwkamp.com)
  * @version 1.2
  * 
- * adapted by Vicente J. Ruiz Jurado and danigb for kune
+ *          adapted by Vicente J. Ruiz Jurado and danigb for kune
  */
 
 public class RoundedBorderDecorator extends ComplexPanel implements HasColor {
@@ -136,48 +136,48 @@ public class RoundedBorderDecorator extends ComplexPanel implements HasColor {
     /**
      * <p>
      * Creates a new <code>RoundedPanel</code> with custom rounded corners on
-     * the given widget <code>w</code>. Every combination of corners can be
-     * set via the <code>corners</code> argument. Use the static constants to
-     * set the corners. For example if you want to create a panel with only
-     * rounded corners at the left, use:<br>
+     * the given widget <code>w</code>. Every combination of corners can be set
+     * via the <code>corners</code> argument. Use the static constants to set
+     * the corners. For example if you want to create a panel with only rounded
+     * corners at the left, use:<br>
      * <code>new RoundedPanel(yourWidget, RoundedPanel.LEFT);</code>
      * </p>
      * 
      * @param corners
-     *                set custom rounded corners.
+     *            set custom rounded corners.
      * @param decorated
-     *                widget to add corners to.
+     *            widget to add corners to.
      * 
      * @param size
-     *                size of the corners: DOUBLE (2px) or SIMPLE (1px)
+     *            size of the corners: DOUBLE (2px) or SIMPLE (1px)
      */
     public RoundedBorderDecorator(final Widget decorated, final int corners, final int size) {
-	body = DOM.createDiv();
-	if (is(corners, TOP)) {
-	    if (is(size, DOUBLE)) {
-		div2t = createLine(corners & TOP, '2');
-		DOM.appendChild(body, div2t);
-	    }
-	    div1t = createLine(corners & TOP, '1');
-	    DOM.appendChild(body, div1t);
-	}
-	divElement = DOM.createDiv();
-	DOM.appendChild(body, divElement);
-	if (is(corners, BOTTOM)) {
-	    div1b = createLine(corners & BOTTOM, '1');
-	    DOM.appendChild(body, div1b);
-	    if (is(size, DOUBLE)) {
-		div2b = createLine(corners & BOTTOM, '2');
-		DOM.appendChild(body, div2b);
-	    }
-	}
-	setElement(body);
-	add(decorated, divElement);
-	setColor("CCC");
+        body = DOM.createDiv();
+        if (is(corners, TOP)) {
+            if (is(size, DOUBLE)) {
+                div2t = createLine(corners & TOP, '2');
+                DOM.appendChild(body, div2t);
+            }
+            div1t = createLine(corners & TOP, '1');
+            DOM.appendChild(body, div1t);
+        }
+        divElement = DOM.createDiv();
+        DOM.appendChild(body, divElement);
+        if (is(corners, BOTTOM)) {
+            div1b = createLine(corners & BOTTOM, '1');
+            DOM.appendChild(body, div1b);
+            if (is(size, DOUBLE)) {
+                div2b = createLine(corners & BOTTOM, '2');
+                DOM.appendChild(body, div2b);
+            }
+        }
+        setElement(body);
+        add(decorated, divElement);
+        setColor("CCC");
     }
 
     public RoundedBorderDecorator(final Widget decorated, final int corners) {
-	this(decorated, corners, DOUBLE);
+        this(decorated, corners, DOUBLE);
     }
 
     /**
@@ -186,28 +186,28 @@ public class RoundedBorderDecorator extends ComplexPanel implements HasColor {
      * </p>
      * 
      * @param corner
-     *                corner mask to set rounded corner.
+     *            corner mask to set rounded corner.
      * @param width
-     *                margin width for line.
+     *            margin width for line.
      */
     private Element createLine(final int corner, final char width) {
-	// margin 2 fields : top/bottom right/left => "0 <width>px"
-	// margin 4 fields : top right bottom left => "0 <width>px 0
-	// <width>px"
-	final String margin = corner == TOP || corner == BOTTOM ? "0 " + width + "px" : is(corner, LEFT) ? "0 0 0 "
-		+ width + "px" : "0 " + width + "px 0 0";
-	final Element div = DOM.createDiv();
-	DOM.setStyleAttribute(div, "fontSize", "0px");
-	DOM.setStyleAttribute(div, "height", "1px");
-	DOM.setStyleAttribute(div, "lineHeight", "1px");
-	DOM.setStyleAttribute(div, "margin", margin);
-	DOM.setInnerHTML(div, "&nbsp;");
-	return div;
+        // margin 2 fields : top/bottom right/left => "0 <width>px"
+        // margin 4 fields : top right bottom left => "0 <width>px 0
+        // <width>px"
+        final String margin = corner == TOP || corner == BOTTOM ? "0 " + width + "px" : is(corner, LEFT) ? "0 0 0 "
+                + width + "px" : "0 " + width + "px 0 0";
+        final Element div = DOM.createDiv();
+        DOM.setStyleAttribute(div, "fontSize", "0px");
+        DOM.setStyleAttribute(div, "height", "1px");
+        DOM.setStyleAttribute(div, "lineHeight", "1px");
+        DOM.setStyleAttribute(div, "margin", margin);
+        DOM.setInnerHTML(div, "&nbsp;");
+        return div;
     }
 
     // convience method for mask test
     private boolean is(final int input, final int mask) {
-	return (input & mask) > 0;
+        return (input & mask) > 0;
     }
 
     /**
@@ -219,17 +219,17 @@ public class RoundedBorderDecorator extends ComplexPanel implements HasColor {
      * </p>
      * 
      * @param style
-     *                css style name
+     *            css style name
      */
     public void setStyleName(final String style) {
-	DOM.setElementProperty(body, "className", style);
+        DOM.setElementProperty(body, "className", style);
     }
 
     /**
      * <p>
      * Set the css style name of the rounded corners div's. Default the css
-     * stylename is <code>rp</code>. Use it to set the colors of the corner.
-     * For example: <code>.rp { background-color:#c3d9ff; }</code>.
+     * stylename is <code>rp</code>. Use it to set the colors of the corner. For
+     * example: <code>.rp { background-color:#c3d9ff; }</code>.
      * </p>
      * <p>
      * A custom style might be needed when the corners are visible only when a
@@ -239,47 +239,47 @@ public class RoundedBorderDecorator extends ComplexPanel implements HasColor {
      * </p>
      * 
      * @param style
-     *                css style name.
+     *            css style name.
      */
     public void setCornerStyleName(final String style) {
-	if (null != div2t) {
-	    DOM.setElementProperty(div2t, "className", style);
-	}
-	if (null != div1t) {
-	    DOM.setElementProperty(div1t, "className", style);
-	}
-	if (null != div1b) {
-	    DOM.setElementProperty(div1b, "className", style);
-	}
-	if (null != div2b) {
-	    DOM.setElementProperty(div2b, "className", style);
-	}
-	if (null != divElement) {
-	    DOM.setElementProperty(divElement, "className", style);
-	}
+        if (null != div2t) {
+            DOM.setElementProperty(div2t, "className", style);
+        }
+        if (null != div1t) {
+            DOM.setElementProperty(div1t, "className", style);
+        }
+        if (null != div1b) {
+            DOM.setElementProperty(div1b, "className", style);
+        }
+        if (null != div2b) {
+            DOM.setElementProperty(div2b, "className", style);
+        }
+        if (null != divElement) {
+            DOM.setElementProperty(divElement, "className", style);
+        }
     }
 
     public void setColor(final String color) {
-	this.color = color;
-	if (null != div2t) {
-	    DOM.setStyleAttribute(div2t, "backgroundColor", color);
-	}
-	if (null != div1t) {
-	    DOM.setStyleAttribute(div1t, "backgroundColor", color);
-	}
-	if (null != div1b) {
-	    DOM.setStyleAttribute(div1b, "backgroundColor", color);
-	}
-	if (null != div2b) {
-	    DOM.setStyleAttribute(div2b, "backgroundColor", color);
-	}
-	if (null != divElement) {
-	    DOM.setStyleAttribute(divElement, "backgroundColor", color);
-	}
+        this.color = color;
+        if (null != div2t) {
+            DOM.setStyleAttribute(div2t, "backgroundColor", color);
+        }
+        if (null != div1t) {
+            DOM.setStyleAttribute(div1t, "backgroundColor", color);
+        }
+        if (null != div1b) {
+            DOM.setStyleAttribute(div1b, "backgroundColor", color);
+        }
+        if (null != div2b) {
+            DOM.setStyleAttribute(div2b, "backgroundColor", color);
+        }
+        if (null != divElement) {
+            DOM.setStyleAttribute(divElement, "backgroundColor", color);
+        }
     }
 
     public String getColor() {
-	return color;
+        return color;
     }
 
 }

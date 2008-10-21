@@ -25,14 +25,14 @@ package org.ourproject.kune.rack.filters.rest;
 import javax.servlet.ServletRequest;
 
 public class ParametersAdapter implements Parameters {
-	private final ServletRequest request;
+    private final ServletRequest request;
 
-	public ParametersAdapter(ServletRequest request) {
-		this.request = request;
-	}
+    public ParametersAdapter(ServletRequest request) {
+        this.request = request;
+    }
 
-	public String get(String name) {
-		return request.getParameter(name);
-	}
-	
+    public String get(String name) {
+        return request.getParameter(name);
+    }
+
 }

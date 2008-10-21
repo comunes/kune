@@ -31,21 +31,21 @@ public class GridDropConfiguration {
     private final Event<String> onDrop;
 
     public GridDropConfiguration(final String ddGroupId, final Listener<String> listener) {
-	this.ddGroupId = ddGroupId;
-	this.onDrop = Events.create(String.class, "onDrop");
-	this.onDrop(listener);
+        this.ddGroupId = ddGroupId;
+        this.onDrop = Events.create(String.class, "onDrop");
+        this.onDrop(listener);
     }
 
     public void fire(final String id) {
-	onDrop.fire(id);
+        onDrop.fire(id);
     }
 
     public String getDdGroupId() {
-	return ddGroupId;
+        return ddGroupId;
     }
 
     public void onDrop(final Listener<String> listener) {
-	onDrop.add(listener);
+        onDrop.add(listener);
     }
 
 }

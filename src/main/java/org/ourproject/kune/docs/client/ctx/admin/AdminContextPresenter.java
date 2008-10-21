@@ -51,121 +51,121 @@ public class AdminContextPresenter implements AdminContext {
     private final StateManager stateManager;
 
     public AdminContextPresenter(final Session session, final StateManager stateManager,
-	    final Provider<TagsSummary> tagsSummaryProvider,
-	    final Provider<ContentServiceAsync> contentServiceProvider, final EntityTitle entityTitle,
-	    final EntitySubTitle entitySubTitle) {
-	this.session = session;
-	this.stateManager = stateManager;
-	this.tagsSummaryProvider = tagsSummaryProvider;
-	this.contentServiceProvider = contentServiceProvider;
-	this.entityTitle = entityTitle;
-	this.entitySubTitle = entitySubTitle;
+            final Provider<TagsSummary> tagsSummaryProvider,
+            final Provider<ContentServiceAsync> contentServiceProvider, final EntityTitle entityTitle,
+            final EntitySubTitle entitySubTitle) {
+        this.session = session;
+        this.stateManager = stateManager;
+        this.tagsSummaryProvider = tagsSummaryProvider;
+        this.contentServiceProvider = contentServiceProvider;
+        this.entityTitle = entityTitle;
+        this.entitySubTitle = entitySubTitle;
     }
 
     public void addAuthor(final String authorShortName) {
-	Site.showProgressProcessing();
-	final StateDTO currentState = session.getCurrentState();
-	contentServiceProvider.get().addAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
-		new AsyncCallbackSimple<Object>() {
-		    public void onSuccess(final Object result) {
-			Site.hideProgress();
-			stateManager.reload();
-		    }
-		});
+        Site.showProgressProcessing();
+        final StateDTO currentState = session.getCurrentState();
+        contentServiceProvider.get().addAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
+                                               new AsyncCallbackSimple<Object>() {
+                                                   public void onSuccess(final Object result) {
+                                                       Site.hideProgress();
+                                                       stateManager.reload();
+                                                   }
+                                               });
     }
 
     public void delAuthor(final String authorShortName) {
-	Site.showProgressProcessing();
-	final StateDTO currentState = session.getCurrentState();
-	contentServiceProvider.get().removeAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
-		new AsyncCallbackSimple<Object>() {
-		    public void onSuccess(final Object result) {
-			Site.hideProgress();
-			stateManager.reload();
-		    }
-		});
+        Site.showProgressProcessing();
+        final StateDTO currentState = session.getCurrentState();
+        contentServiceProvider.get().removeAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
+                                                  new AsyncCallbackSimple<Object>() {
+                                                      public void onSuccess(final Object result) {
+                                                          Site.hideProgress();
+                                                          stateManager.reload();
+                                                      }
+                                                  });
     }
 
     public void doChangeLanguage(final String langCode) {
-	Site.showProgressProcessing();
-	final StateDTO currentState = session.getCurrentState();
-	contentServiceProvider.get().setLanguage(session.getUserHash(), currentState.getStateToken(), langCode,
-		new AsyncCallbackSimple<I18nLanguageDTO>() {
-		    public void onSuccess(final I18nLanguageDTO lang) {
-			Site.hideProgress();
-			entitySubTitle.setContentLanguage(lang.getEnglishName());
-		    }
-		});
+        Site.showProgressProcessing();
+        final StateDTO currentState = session.getCurrentState();
+        contentServiceProvider.get().setLanguage(session.getUserHash(), currentState.getStateToken(), langCode,
+                                                 new AsyncCallbackSimple<I18nLanguageDTO>() {
+                                                     public void onSuccess(final I18nLanguageDTO lang) {
+                                                         Site.hideProgress();
+                                                         entitySubTitle.setContentLanguage(lang.getEnglishName());
+                                                     }
+                                                 });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final AdminContextView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void setPublishedOn(final Date publishedOn) {
-	Site.showProgressProcessing();
-	final StateDTO currentState = session.getCurrentState();
-	contentServiceProvider.get().setPublishedOn(session.getUserHash(), currentState.getStateToken(), publishedOn,
-		new AsyncCallbackSimple<Object>() {
-		    public void onSuccess(final Object result) {
-			Site.hideProgress();
-			entityTitle.setContentDate(publishedOn);
-		    }
-		});
+        Site.showProgressProcessing();
+        final StateDTO currentState = session.getCurrentState();
+        contentServiceProvider.get().setPublishedOn(session.getUserHash(), currentState.getStateToken(), publishedOn,
+                                                    new AsyncCallbackSimple<Object>() {
+                                                        public void onSuccess(final Object result) {
+                                                            Site.hideProgress();
+                                                            entityTitle.setContentDate(publishedOn);
+                                                        }
+                                                    });
 
     }
 
     public void setState(final StateDTO content) {
-	// In the future check the use of these components by each tool
-	final I18nLanguageDTO language = content.getLanguage();
-	final AccessListsDTO accessLists = content.getAccessLists();
-	final Date publishedOn = content.getPublishedOn();
-	final String tags = content.getTags();
-	final List<UserSimpleDTO> authors = content.getAuthors();
+        // In the future check the use of these components by each tool
+        final I18nLanguageDTO language = content.getLanguage();
+        final AccessListsDTO accessLists = content.getAccessLists();
+        final Date publishedOn = content.getPublishedOn();
+        final String tags = content.getTags();
+        final List<UserSimpleDTO> authors = content.getAuthors();
 
-	if (content.hasDocument()) {
-	    if (tags != null) {
-		view.setTags(tags);
-	    } else {
-		view.removeTagsComponent();
-	    }
-	    if (language != null) {
-		view.setLanguage(language);
-	    } else {
-		view.removeLangComponent();
-	    }
-	    if (authors != null) {
-		view.setAuthors(authors);
-	    } else {
-		view.removeAuthorsComponent();
-	    }
-	    if (publishedOn != null) {
-		view.setPublishedOn(publishedOn);
-	    } else {
-		view.removePublishedOnComponent();
-	    }
-	    if (accessLists != null) {
-		view.setAccessLists(accessLists);
-	    } else {
-		view.removeAccessListComponent();
-	    }
-	}
+        if (content.hasDocument()) {
+            if (tags != null) {
+                view.setTags(tags);
+            } else {
+                view.removeTagsComponent();
+            }
+            if (language != null) {
+                view.setLanguage(language);
+            } else {
+                view.removeLangComponent();
+            }
+            if (authors != null) {
+                view.setAuthors(authors);
+            } else {
+                view.removeAuthorsComponent();
+            }
+            if (publishedOn != null) {
+                view.setPublishedOn(publishedOn);
+            } else {
+                view.removePublishedOnComponent();
+            }
+            if (accessLists != null) {
+                view.setAccessLists(accessLists);
+            } else {
+                view.removeAccessListComponent();
+            }
+        }
     }
 
     public void setTags(final String tagsString) {
-	Site.showProgressProcessing();
-	final StateDTO currentState = session.getCurrentState();
-	contentServiceProvider.get().setTags(session.getUserHash(), currentState.getStateToken(), tagsString,
-		new AsyncCallbackSimple<List<TagResultDTO>>() {
-		    public void onSuccess(final List<TagResultDTO> result) {
-			tagsSummaryProvider.get().setGroupTags(result);
-			Site.hideProgress();
-		    }
-		});
+        Site.showProgressProcessing();
+        final StateDTO currentState = session.getCurrentState();
+        contentServiceProvider.get().setTags(session.getUserHash(), currentState.getStateToken(), tagsString,
+                                             new AsyncCallbackSimple<List<TagResultDTO>>() {
+                                                 public void onSuccess(final List<TagResultDTO> result) {
+                                                     tagsSummaryProvider.get().setGroupTags(result);
+                                                     Site.hideProgress();
+                                                 }
+                                             });
     }
 
 }

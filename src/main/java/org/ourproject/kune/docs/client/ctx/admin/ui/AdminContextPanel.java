@@ -57,140 +57,140 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     // private final String tags_item;
 
     public AdminContextPanel(final AdminContextPresenter presenter, final I18nTranslationService i18n) {
-	// this.presenter = presenter;
-	// this.i18n = i18n;
-	// //options = new IndexedStackPanelWithSubItems();
-	// //options.addStyleName("kune-AdminContextPanel");
-	//
-	// //add(options);
-	// //setCellWidth(options, "100%");
-	// setWidth("100%");
-	// authors_item = i18n.t("Authors");
-	// publication_item = i18n.t("Publication");
-	// perms_item = i18n.t("Permissions");
-	// language_item = i18n.t("Language");
-	// tags_item = i18n.t("Tags");
+        // this.presenter = presenter;
+        // this.i18n = i18n;
+        // //options = new IndexedStackPanelWithSubItems();
+        // //options.addStyleName("kune-AdminContextPanel");
+        //
+        // //add(options);
+        // //setCellWidth(options, "100%");
+        // setWidth("100%");
+        // authors_item = i18n.t("Authors");
+        // publication_item = i18n.t("Publication");
+        // perms_item = i18n.t("Permissions");
+        // language_item = i18n.t("Language");
+        // tags_item = i18n.t("Tags");
     }
 
     public void removeAccessListComponent() {
-	// if (options.containsItem(perms_item)) {
-	// removeComponent(perms_item);
-	// }
+        // if (options.containsItem(perms_item)) {
+        // removeComponent(perms_item);
+        // }
     }
 
     public void removeAuthorsComponent() {
-	// if (options.containsItem(authors_item)) {
-	// removeComponent(authors_item);
-	// }
+        // if (options.containsItem(authors_item)) {
+        // removeComponent(authors_item);
+        // }
     }
 
     public void removeLangComponent() {
-	// if (options.containsItem(language_item)) {
-	// removeComponent(language_item);
-	// }
+        // if (options.containsItem(language_item)) {
+        // removeComponent(language_item);
+        // }
     }
 
     public void removePublishedOnComponent() {
-	// if (options.containsItem(publication_item)) {
-	// removeComponent(publication_item);
-	// }
+        // if (options.containsItem(publication_item)) {
+        // removeComponent(publication_item);
+        // }
     }
 
     public void removeTagsComponent() {
-	// if (options.containsItem(tags_item)) {
-	// removeComponent(tags_item);
-	// }
+        // if (options.containsItem(tags_item)) {
+        // removeComponent(tags_item);
+        // }
     }
 
     public void reset() {
-	// options.clear();
+        // options.clear();
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {
-	// if (accessListsPanel == null) {
-	// accessListsPanel = new AccessListsPanel(i18n);
-	// }
-	// if (!options.containsItem(perms_item)) {
-	// addComponent(perms_item, i18n.t("Who can admin/edit/view this work"),
-	// accessListsPanel);
-	// }
-	// accessListsPanel.setAccessLists(accessLists);
+        // if (accessListsPanel == null) {
+        // accessListsPanel = new AccessListsPanel(i18n);
+        // }
+        // if (!options.containsItem(perms_item)) {
+        // addComponent(perms_item, i18n.t("Who can admin/edit/view this work"),
+        // accessListsPanel);
+        // }
+        // accessListsPanel.setAccessLists(accessLists);
     }
 
     public void setAuthors(final List<UserSimpleDTO> authors) {
-	// if (authorsComponent == null) {
-	// authorsComponent = new VerticalPanel();
-	// addAuthorLabel = new IconLabel(IMG.addGreen(), i18n.t("Add author"));
-	// addAuthorLabel.addClickListener(new ClickListener() {
-	// public void onClick(final Widget sender) {
-	// presenter.doAction(DocsEvents.ADD_AUTHOR, null);
-	// }
-	// });
-	// } else {
-	// if (options.containsItem(authors_item)) {
-	// options.removeStackItem(authors_item);
-	// }
-	// authorsComponent.clear();
-	// }
-	// if (!options.containsItem(authors_item)) {
-	// addComponent(authors_item, i18n.t("Authors of this work"),
-	// authorsComponent);
-	// }
-	// for (final Iterator<UserSimpleDTO> iterator = authors.iterator();
-	// iterator.hasNext();) {
-	// final UserSimpleDTO author = iterator.next();
-	// final StackSubItemAction[] authorActions = { new
-	// StackSubItemAction(IMG.del(), i18n.t("Remove author"),
-	// DocsEvents.REMOVE_AUTHOR) };
-	// options.addStackSubItem(authors_item, IMG.personDef(),
-	// author.getShortName(), author.getName(),
-	// authorActions, presenter);
-	// }
-	// authorsComponent.add(addAuthorLabel);
+        // if (authorsComponent == null) {
+        // authorsComponent = new VerticalPanel();
+        // addAuthorLabel = new IconLabel(IMG.addGreen(), i18n.t("Add author"));
+        // addAuthorLabel.addClickListener(new ClickListener() {
+        // public void onClick(final Widget sender) {
+        // presenter.doAction(DocsEvents.ADD_AUTHOR, null);
+        // }
+        // });
+        // } else {
+        // if (options.containsItem(authors_item)) {
+        // options.removeStackItem(authors_item);
+        // }
+        // authorsComponent.clear();
+        // }
+        // if (!options.containsItem(authors_item)) {
+        // addComponent(authors_item, i18n.t("Authors of this work"),
+        // authorsComponent);
+        // }
+        // for (final Iterator<UserSimpleDTO> iterator = authors.iterator();
+        // iterator.hasNext();) {
+        // final UserSimpleDTO author = iterator.next();
+        // final StackSubItemAction[] authorActions = { new
+        // StackSubItemAction(IMG.del(), i18n.t("Remove author"),
+        // DocsEvents.REMOVE_AUTHOR) };
+        // options.addStackSubItem(authors_item, IMG.personDef(),
+        // author.getShortName(), author.getName(),
+        // authorActions, presenter);
+        // }
+        // authorsComponent.add(addAuthorLabel);
     }
 
     public void setLanguage(final I18nLanguageDTO language) {
-	// if (langComponent == null) {
-	// langPresenter = WorkspaceFactory.createLanguageSelectorComponent();
-	// langComponent = new VerticalPanel();
-	// final LanguageSelectorPanel view = (LanguageSelectorPanel)
-	// langPresenter.getView();
-	// view.setWidth("" + FORMS_WIDTH);
-	// langComponent.add(view);
-	// view.addChangeListener(new ComboBoxListenerAdapter() {
-	// public void onSelect(final ComboBox comboBox, final Record record,
-	// final int index) {
-	// presenter.doChangeLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
-	// }
-	// });
-	// }
-	// if (!options.containsItem(language_item)) {
-	// addComponent(language_item, i18n.t("The language of this work"),
-	// langComponent);
-	// }
-	// langPresenter.setLanguage(language);
+        // if (langComponent == null) {
+        // langPresenter = WorkspaceFactory.createLanguageSelectorComponent();
+        // langComponent = new VerticalPanel();
+        // final LanguageSelectorPanel view = (LanguageSelectorPanel)
+        // langPresenter.getView();
+        // view.setWidth("" + FORMS_WIDTH);
+        // langComponent.add(view);
+        // view.addChangeListener(new ComboBoxListenerAdapter() {
+        // public void onSelect(final ComboBox comboBox, final Record record,
+        // final int index) {
+        // presenter.doChangeLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
+        // }
+        // });
+        // }
+        // if (!options.containsItem(language_item)) {
+        // addComponent(language_item, i18n.t("The language of this work"),
+        // langComponent);
+        // }
+        // langPresenter.setLanguage(language);
     }
 
     public void setPublishedOn(final Date publishedOn) {
-	// if (publishedOnField == null) {
-	// publishedOnComponent = createPublicationComponent();
-	// }
-	// if (!options.containsItem(publication_item)) {
-	// addComponent(publication_item, i18n.t("Date of publication of this
-	// work"), publishedOnComponent);
-	// }
-	// // publishedOnField.setValue(publishedOn);
+        // if (publishedOnField == null) {
+        // publishedOnComponent = createPublicationComponent();
+        // }
+        // if (!options.containsItem(publication_item)) {
+        // addComponent(publication_item, i18n.t("Date of publication of this
+        // work"), publishedOnComponent);
+        // }
+        // // publishedOnField.setValue(publishedOn);
     }
 
     public void setTags(final String tags) {
-	// if (tagsComponent == null) {
-	// tagsComponent = createTagsComponent();
-	// }
-	// if (!options.containsItem(tags_item)) {
-	// addComponent(tags_item, i18n.t("Keywords or terms associated with
-	// this work"), tagsComponent);
-	// }
-	// tagsField.setValue(tags);
+        // if (tagsComponent == null) {
+        // tagsComponent = createTagsComponent();
+        // }
+        // if (!options.containsItem(tags_item)) {
+        // addComponent(tags_item, i18n.t("Keywords or terms associated with
+        // this work"), tagsComponent);
+        // }
+        // tagsField.setValue(tags);
     }
 
     // private void addComponent(final String header, final String headerTitle,

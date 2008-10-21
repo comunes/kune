@@ -91,21 +91,17 @@ public class Rate {
     }
 
     @Finder(query = "SELECT r FROM Rate r WHERE r.rater = :user AND r.content = :content")
-    public Rate find(@Named("user")
-    final User user, @Named("content")
-    final Content content) {
+    public Rate find(@Named("user") final User user, @Named("content") final Content content) {
         return null;
     }
 
     @Finder(query = "SELECT AVG(r.value) FROM Rate r WHERE r.content = :content")
-    public Double calculateRate(@Named("content")
-    final Content content) {
+    public Double calculateRate(@Named("content") final Content content) {
         return null;
     }
 
     @Finder(query = "SELECT count(*) FROM Rate r WHERE r.content = :content")
-    public Long calculateRateNumberOfUsers(@Named("content")
-    final Content content) {
+    public Long calculateRateNumberOfUsers(@Named("content") final Content content) {
         return null;
     }
 

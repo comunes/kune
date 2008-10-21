@@ -63,9 +63,11 @@ import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
-import org.ourproject.kune.platf.server.manager.impl.FileDownloadManager;
-import org.ourproject.kune.platf.server.manager.impl.FileManagerDefault;
-import org.ourproject.kune.platf.server.manager.impl.FileUploadManager;
+import org.ourproject.kune.platf.server.manager.file.EntityLogoDownloadManager;
+import org.ourproject.kune.platf.server.manager.file.EntityLogoUploadManager;
+import org.ourproject.kune.platf.server.manager.file.FileDownloadManager;
+import org.ourproject.kune.platf.server.manager.file.FileManagerDefault;
+import org.ourproject.kune.platf.server.manager.file.FileUploadManager;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nCountryManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nLanguageManagerDefault;
@@ -100,59 +102,61 @@ import com.wideplay.warp.persist.UnitOfWork;
 public class PlatformServerModule extends AbstractExtendedModule {
     @Override
     protected void configure() {
-	install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
-	bind(KunePersistenceService.class);
+        install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
+        bind(KunePersistenceService.class);
 
-	bindManagers();
-	bindRPC();
-	bindServices();
-	bind(KuneProperties.class).to(KunePropertiesDefault.class);
-	bind(Mapper.class).to(DozerMapper.class);
-	bind(ServerToolRegistry.class);
-	bind(FileUploadManager.class);
-	bind(FileDownloadManager.class);
+        bindManagers();
+        bindRPC();
+        bindServices();
+        bind(KuneProperties.class).to(KunePropertiesDefault.class);
+        bind(Mapper.class).to(DozerMapper.class);
+        bind(ServerToolRegistry.class);
+        bind(FileUploadManager.class);
+        bind(FileDownloadManager.class);
+        bind(EntityLogoUploadManager.class);
+        bind(EntityLogoDownloadManager.class);
 
-	bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
-		outermostCall(new AuthenticatedMethodInterceptor()));
-	bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
-		outermostCall(new AuthorizatedMethodInterceptor()));
+        bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
+                        outermostCall(new AuthenticatedMethodInterceptor()));
+        bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
+                        outermostCall(new AuthorizatedMethodInterceptor()));
     }
 
     private void bindManagers() {
-	bind(UserManager.class).to(UserManagerDefault.class);
-	bind(GroupManager.class).to(GroupManagerDefault.class);
-	bind(ContentManager.class).to(ContentManagerDefault.class);
-	bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
-	bind(ContainerManager.class).to(ContainerManagerDefault.class);
-	bind(LicenseManager.class).to(LicenseManagerDefault.class);
-	bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
-	bind(XmppManager.class).to(XmppManagerDefault.class);
-	bind(RateManager.class).to(RateManagerDefault.class);
-	bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
-	bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
-	bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
-	bind(TagManager.class).to(TagManagerDefault.class);
-	bind(CommentManager.class).to(CommentManagerDefault.class);
-	bind(FileManager.class).to(FileManagerDefault.class);
+        bind(UserManager.class).to(UserManagerDefault.class);
+        bind(GroupManager.class).to(GroupManagerDefault.class);
+        bind(ContentManager.class).to(ContentManagerDefault.class);
+        bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
+        bind(ContainerManager.class).to(ContainerManagerDefault.class);
+        bind(LicenseManager.class).to(LicenseManagerDefault.class);
+        bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
+        bind(XmppManager.class).to(XmppManagerDefault.class);
+        bind(RateManager.class).to(RateManagerDefault.class);
+        bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
+        bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
+        bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
+        bind(TagManager.class).to(TagManagerDefault.class);
+        bind(CommentManager.class).to(CommentManagerDefault.class);
+        bind(FileManager.class).to(FileManagerDefault.class);
     }
 
     private void bindRPC() {
-	bind(SiteService.class).to(SiteRPC.class);
-	bind(GroupService.class).to(GroupRPC.class);
-	bind(ContentService.class).to(ContentRPC.class);
-	bind(UserService.class).to(UserRPC.class);
-	bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
-	bind(I18nService.class).to(I18nRPC.class);
+        bind(SiteService.class).to(SiteRPC.class);
+        bind(GroupService.class).to(GroupRPC.class);
+        bind(ContentService.class).to(ContentRPC.class);
+        bind(UserService.class).to(UserRPC.class);
+        bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
+        bind(I18nService.class).to(I18nRPC.class);
     }
 
     private void bindServices() {
-	bind(UserInfoService.class).to(UserInfoServiceDefault.class);
-	bind(CreationService.class).to(CreationServiceDefault.class);
-	bind(AccessRightsService.class).to(AccessRightsServiceDefault.class);
-	bind(AccessService.class).to(AccessServiceDefault.class);
-	bind(FinderService.class).to(FinderServiceDefault.class);
-	bind(StateService.class).to(StateServiceDefault.class);
-	bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
-	bind(SessionService.class).to(SessionServiceDefault.class);
+        bind(UserInfoService.class).to(UserInfoServiceDefault.class);
+        bind(CreationService.class).to(CreationServiceDefault.class);
+        bind(AccessRightsService.class).to(AccessRightsServiceDefault.class);
+        bind(AccessService.class).to(AccessServiceDefault.class);
+        bind(FinderService.class).to(FinderServiceDefault.class);
+        bind(StateService.class).to(StateServiceDefault.class);
+        bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
+        bind(SessionService.class).to(SessionServiceDefault.class);
     }
 }

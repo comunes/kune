@@ -10,7 +10,7 @@ public class DocumentContextPanel implements DocumentContextView {
 
     @Deprecated
     public void setContainer(final View view) {
-	// ws.getEntityWorkspace().setContext((Widget) view);
+        // ws.getEntityWorkspace().setContext((Widget) view);
     }
 
 }

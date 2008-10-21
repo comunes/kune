@@ -27,32 +27,32 @@ public class TagResultDTO implements IsSerializable {
     private Long count;
 
     public TagResultDTO() {
-	this(null, null);
+        this(null, null);
     }
 
     public TagResultDTO(final String name, final Long count) {
-	this.name = name;
-	this.count = count;
+        this.name = name;
+        this.count = count;
     }
 
     public Long getCount() {
-	return count;
+        return count;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setCount(final Long count) {
-	this.count = count;
+        this.count = count;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String toString() {
-	return name + "(" + count + ")";
+        return name + "(" + count + ")";
     }
 
 }

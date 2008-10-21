@@ -32,24 +32,24 @@ public class GroupSummaryPanel extends DropDownPanel implements GroupSummaryView
     private final VerticalPanel vp;
 
     public GroupSummaryPanel(final GroupSummaryPresenter presenter, final I18nTranslationService i18n,
-	    final WorkspaceSkeleton ws) {
-	super(i18n.t("Group Summary"), true);
-	setHeaderTitle(i18n.t("Some summarized information about current project" + Site.IN_DEVELOPMENT));
-	vp = new VerticalPanel();
-	vp.setWidth("100%");
-	super.setContent(vp);
-	super.setContentVisible(true);
-	super.setBorderStylePrimaryName("k-dropdownouter-summary");
-	addStyleName("kune-Margin-Medium-t");
-	// Disabled while in development
-	// ws.getEntitySummary().addInSummary(this);
+            final WorkspaceSkeleton ws) {
+        super(i18n.t("Group Summary"), true);
+        setHeaderTitle(i18n.t("Some summarized information about current project" + Site.IN_DEVELOPMENT));
+        vp = new VerticalPanel();
+        vp.setWidth("100%");
+        super.setContent(vp);
+        super.setContentVisible(true);
+        super.setBorderStylePrimaryName("k-dropdownouter-summary");
+        addStyleName("kune-Margin-Medium-t");
+        // Disabled while in development
+        // ws.getEntitySummary().addInSummary(this);
     }
 
     public void setComment(final String comment) {
-	final Label label = new Label(comment);
-	label.addStyleName("kune-Margin-Small-trbl");
-	vp.clear();
-	vp.add(label);
+        final Label label = new Label(comment);
+        label.addStyleName("kune-Margin-Small-trbl");
+        vp.clear();
+        vp.add(label);
     }
 
 }

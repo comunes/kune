@@ -44,67 +44,67 @@ public class AccessLists {
     private Long id;
 
     public AccessLists() {
-	this.admins = new GroupList();
-	this.editors = new GroupList();
-	this.viewers = new GroupList();
+        this.admins = new GroupList();
+        this.editors = new GroupList();
+        this.viewers = new GroupList();
     }
 
     public void addAdmin(final Group group) {
-	admins.add(group);
+        admins.add(group);
     }
 
     public void addEditor(final Group group) {
-	editors.add(group);
+        editors.add(group);
     }
 
     public void addViewer(final Group group) {
-	viewers.add(group);
+        viewers.add(group);
     }
 
     public GroupList getAdmins() {
-	return admins;
+        return admins;
     }
 
     public GroupList getEditors() {
-	return editors;
+        return editors;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public GroupList getList(final AccessRol rol) {
-	if (rol == AccessRol.Administrator) {
-	    return getAdmins();
-	} else if (rol == AccessRol.Editor) {
-	    return getEditors();
-	} else {
-	    return getViewers();
-	}
+        if (rol == AccessRol.Administrator) {
+            return getAdmins();
+        } else if (rol == AccessRol.Editor) {
+            return getEditors();
+        } else {
+            return getViewers();
+        }
     }
 
     public GroupList getViewers() {
-	return viewers;
+        return viewers;
     }
 
     public void removeAdmin(final Group group) {
-	admins.remove(group);
+        admins.remove(group);
     }
 
     public void removeEditor(final Group group) {
-	editors.remove(group);
+        editors.remove(group);
     }
 
     public void removeViewer(final Group group) {
-	viewers.remove(group);
+        viewers.remove(group);
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     @Override
     public String toString() {
-	return "AccessList[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";
+        return "AccessList[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";
     }
 }

@@ -9,37 +9,38 @@ public class ActionToolbarButtonDescriptor<T> extends ActionToolbarDescriptor<T>
     private ActionToolbarButtonSeparator leftSeparator;
     private ActionToolbarButtonSeparator rightSeparator;
 
-    public ActionToolbarButtonDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
-	    final Listener<T> onPerformCall) {
-	super(accessRolDTO, actionToolbarPosition, onPerformCall);
+    public ActionToolbarButtonDescriptor(final AccessRolDTO accessRolDTO,
+            final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall) {
+        super(accessRolDTO, actionToolbarPosition, onPerformCall);
     }
 
-    public ActionToolbarButtonDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
-	    final Listener<T> onPerformCall, final ActionEnableCondition<T> enableCondition) {
-	super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
+    public ActionToolbarButtonDescriptor(final AccessRolDTO accessRolDTO,
+            final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
+            final ActionEnableCondition<T> enableCondition) {
+        super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
 
     public ActionToolbarButtonSeparator getLeftSeparator() {
-	return leftSeparator;
+        return leftSeparator;
     }
 
     public ActionToolbarButtonSeparator getRightSeparator() {
-	return rightSeparator;
+        return rightSeparator;
     }
 
     public boolean hasLeftSeparator() {
-	return leftSeparator != null;
+        return leftSeparator != null;
     }
 
     public boolean hasRightSeparator() {
-	return rightSeparator != null;
+        return rightSeparator != null;
     }
 
     public void setLeftSeparator(final ActionToolbarButtonSeparator leftSeparator) {
-	this.leftSeparator = leftSeparator;
+        this.leftSeparator = leftSeparator;
     }
 
     public void setRightSeparator(final ActionToolbarButtonSeparator rightSeparator) {
-	this.rightSeparator = rightSeparator;
+        this.rightSeparator = rightSeparator;
     }
 }

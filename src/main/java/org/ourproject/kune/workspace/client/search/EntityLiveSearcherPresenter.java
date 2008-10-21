@@ -33,23 +33,23 @@ public class EntityLiveSearcherPresenter implements EntityLiveSearcher {
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final EntityLiveSearcherView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void onSelection(final LinkDTO link) {
-	listener.onEvent(link);
-	view.hide();
+        listener.onEvent(link);
+        view.hide();
     }
 
     public void onSelection(final Listener<LinkDTO> listener) {
-	this.listener = listener;
+        this.listener = listener;
     }
 
     public void show() {
-	view.show();
+        view.show();
     }
 }

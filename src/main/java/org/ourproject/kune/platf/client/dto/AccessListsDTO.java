@@ -28,42 +28,42 @@ public class AccessListsDTO implements IsSerializable {
     private GroupListDTO viewers;
 
     public AccessListsDTO() {
-	this(null, null, null);
+        this(null, null, null);
     }
 
     public AccessListsDTO(final GroupListDTO admins, final GroupListDTO editors, final GroupListDTO viewers) {
-	this.admins = admins;
-	this.editors = editors;
-	this.viewers = viewers;
+        this.admins = admins;
+        this.editors = editors;
+        this.viewers = viewers;
     }
 
     public GroupListDTO getAdmins() {
-	return admins;
+        return admins;
     }
 
     public GroupListDTO getEditors() {
-	return editors;
+        return editors;
     }
 
     public GroupListDTO getViewers() {
-	return viewers;
+        return viewers;
     }
 
     public void setAdmins(final GroupListDTO admins) {
-	this.admins = admins;
+        this.admins = admins;
     }
 
     public void setEditors(final GroupListDTO editors) {
-	this.editors = editors;
+        this.editors = editors;
     }
 
     public void setViewers(final GroupListDTO viewers) {
-	this.viewers = viewers;
+        this.viewers = viewers;
     }
 
     @Override
     public String toString() {
-	return "AccessListDTO[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";
+        return "AccessListDTO[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";
     }
 
 }

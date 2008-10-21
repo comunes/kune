@@ -42,6 +42,10 @@ import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelector;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelectorPanel;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
@@ -118,8 +122,7 @@ public class KuneModule extends AbstractModule {
         }, new Factory<SocialNetworkServiceAsync>(SocialNetworkServiceAsync.class) {
             @Override
             public SocialNetworkServiceAsync create() {
-                final SocialNetworkServiceAsync snServiceAsync = (SocialNetworkServiceAsync) GWT
-                        .create(SocialNetworkService.class);
+                final SocialNetworkServiceAsync snServiceAsync = (SocialNetworkServiceAsync) GWT.create(SocialNetworkService.class);
                 ((ServiceDefTarget) snServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL()
                         + "SocialNetworkService");
                 return snServiceAsync;
@@ -135,8 +138,7 @@ public class KuneModule extends AbstractModule {
             @Override
             public ContentServiceAsync create() {
                 final ContentServiceAsync contentServiceAsync = (ContentServiceAsync) GWT.create(ContentService.class);
-                ((ServiceDefTarget) contentServiceAsync)
-                        .setServiceEntryPoint(GWT.getModuleBaseURL() + "ContentService");
+                ((ServiceDefTarget) contentServiceAsync).setServiceEntryPoint(GWT.getModuleBaseURL() + "ContentService");
                 return contentServiceAsync;
             }
         });
@@ -424,6 +426,18 @@ public class KuneModule extends AbstractModule {
         $(StateManager.class).addSiteToken(SiteToken.translate.toString(), new Listener<StateToken>() {
             public void onEvent(final StateToken previousStateToken) {
                 $(I18nTranslator.class).doShowTranslator();
+            }
+        });
+
+        register(Singleton.class, new Factory<EntityLogoSelector>(EntityLogoSelector.class) {
+            @Override
+            public EntityLogoSelector create() {
+                final EntityLogoSelectorPresenter presenter = new EntityLogoSelectorPresenter($(Session.class),
+                        $(EntityLogo.class));
+                final EntityLogoSelectorPanel panel = new EntityLogoSelectorPanel(presenter,
+                        $(WorkspaceSkeleton.class), $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
             }
         });
 

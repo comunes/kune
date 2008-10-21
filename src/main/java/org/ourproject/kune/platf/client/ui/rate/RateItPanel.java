@@ -41,90 +41,90 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
     private final I18nTranslationService i18n;
 
     public RateItPanel(final RateItPresenter presenter, final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
-	this.presenter = presenter;
-	this.i18n = i18n;
-	initialize();
-	layout();
-	setProperties();
-	ws.getEntityWorkspace().getContentBottomBar().add(this);
+        this.presenter = presenter;
+        this.i18n = i18n;
+        initialize();
+        layout();
+        setProperties();
+        ws.getEntityWorkspace().getContentBottomBar().add(this);
     }
 
     public void clearRate() {
-	for (int i = 0; i < 5; i++) {
-	    img.starGrey().applyTo(starImg[i]);
-	}
+        for (int i = 0; i < 5; i++) {
+            img.starGrey().applyTo(starImg[i]);
+        }
     }
 
     public void onClick(final Widget sender) {
-	for (int i = 0; i < 5; i++) {
-	    if (sender == starImg[i]) {
-		presenter.starClicked(i);
-	    }
-	}
+        for (int i = 0; i < 5; i++) {
+            if (sender == starImg[i]) {
+                presenter.starClicked(i);
+            }
+        }
     }
 
     public void setDesc(final String desc) {
-	rateDesc.setText(desc);
+        rateDesc.setText(desc);
     }
 
     public void setRate(final Star stars[]) {
-	for (int i = 0; i < 5; i++) {
-	    stars[i].getImage().applyTo(starImg[i]);
-	}
+        for (int i = 0; i < 5; i++) {
+            stars[i].getImage().applyTo(starImg[i]);
+        }
     }
 
     public void setStars(final Double rate) {
-	setRate(Star.genStars(rate.doubleValue()));
+        setRate(Star.genStars(rate.doubleValue()));
     }
 
     private void initialize() {
-	rateItLabel = new Label(i18n.t("Rate it:"));
-	rateGrid = new Grid(1, 7);
-	starImg = new Image[5];
-	rateDesc = new Label();
-	for (int i = 0; i < 5; i++) {
-	    starImg[i] = new Image();
-	    img.starGrey().applyTo(starImg[i]);
-	    starImg[i].addStyleName("rateit-star");
-	    starImg[i].setStyleName("rateit-star");
-	    starImg[i].setTitle(i18n.t("Click to rate this"));
-	    starImg[i].addClickListener(this);
-	    starImg[i].addMouseListener(new MouseListenerAdapter() {
-		public void onMouseEnter(final Widget sender) {
-		    for (int j = 0; j < 5; j++) {
-			if (sender == starImg[j]) {
-			    presenter.starOver(j);
-			}
-		    }
+        rateItLabel = new Label(i18n.t("Rate it:"));
+        rateGrid = new Grid(1, 7);
+        starImg = new Image[5];
+        rateDesc = new Label();
+        for (int i = 0; i < 5; i++) {
+            starImg[i] = new Image();
+            img.starGrey().applyTo(starImg[i]);
+            starImg[i].addStyleName("rateit-star");
+            starImg[i].setStyleName("rateit-star");
+            starImg[i].setTitle(i18n.t("Click to rate this"));
+            starImg[i].addClickListener(this);
+            starImg[i].addMouseListener(new MouseListenerAdapter() {
+                public void onMouseEnter(final Widget sender) {
+                    for (int j = 0; j < 5; j++) {
+                        if (sender == starImg[j]) {
+                            presenter.starOver(j);
+                        }
+                    }
 
-		}
+                }
 
-		public void onMouseLeave(final Widget sender) {
-		    presenter.revertCurrentRate();
-		}
-	    });
-	}
+                public void onMouseLeave(final Widget sender) {
+                    presenter.revertCurrentRate();
+                }
+            });
+        }
     }
 
     private void layout() {
-	initWidget(rateGrid);
-	rateGrid.setWidget(0, 0, rateItLabel);
-	for (int i = 0; i < 5; i++) {
-	    rateGrid.setWidget(0, i + 1, starImg[i]);
-	}
-	rateGrid.setWidget(0, 6, rateDesc);
+        initWidget(rateGrid);
+        rateGrid.setWidget(0, 0, rateItLabel);
+        for (int i = 0; i < 5; i++) {
+            rateGrid.setWidget(0, i + 1, starImg[i]);
+        }
+        rateGrid.setWidget(0, 6, rateDesc);
     }
 
     private void setProperties() {
-	rateGrid.setCellPadding(0);
-	rateGrid.setCellSpacing(0);
-	rateGrid.setBorderWidth(0);
-	rateItLabel.addStyleName("kune-Margin-Medium-r");
-	// rateItLabel.addStyleName("kune-Margin-Medium-l");
-	rateItLabel.addStyleName("kune-RatePanel-Label");
-	rateGrid.addStyleName("kune-RatePanel-Stars");
-	rateGrid.addStyleName("kune-RatePanel-Stars-RateIt");
-	rateDesc.addStyleName("kune-RatePanel-Label");
-	rateDesc.addStyleName("kune-Margin-Medium-l");
+        rateGrid.setCellPadding(0);
+        rateGrid.setCellSpacing(0);
+        rateGrid.setBorderWidth(0);
+        rateItLabel.addStyleName("kune-Margin-Medium-r");
+        // rateItLabel.addStyleName("kune-Margin-Medium-l");
+        rateItLabel.addStyleName("kune-RatePanel-Label");
+        rateGrid.addStyleName("kune-RatePanel-Stars");
+        rateGrid.addStyleName("kune-RatePanel-Stars-RateIt");
+        rateDesc.addStyleName("kune-RatePanel-Label");
+        rateDesc.addStyleName("kune-Margin-Medium-l");
     }
 }

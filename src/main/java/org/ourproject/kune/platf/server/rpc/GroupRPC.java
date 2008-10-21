@@ -85,9 +85,16 @@ public class GroupRPC implements RPC, GroupService {
     }
 
     @Authenticated
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
+    public GroupDTO getGroup(String userHash, StateToken groupToken) {
+        final Group group = groupManager.findByShortName(groupToken.getGroup());
+        return mapper.map(group, GroupDTO.class);
+    }
+
+    @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public GroupDTO setGroupLogo(final String userHash, final StateToken token) {
+    public GroupDTO setGroupFullLogo(final String userHash, final StateToken token) {
         final Group group = groupManager.findByShortName(token.getGroup());
         final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
         groupManager.setGroupLogo(group, content);

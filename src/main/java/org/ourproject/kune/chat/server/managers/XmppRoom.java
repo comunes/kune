@@ -31,30 +31,30 @@ public class XmppRoom implements Room, PacketListener {
     private final MultiUserChat muc;
 
     public XmppRoom(final MultiUserChat muc, final String alias) {
-	this.muc = muc;
-	this.alias = alias;
+        this.muc = muc;
+        this.alias = alias;
     }
 
     public String getAlias() {
-	return alias;
+        return alias;
     }
 
     public void processPacket(final Packet packet) {
-	if (packet instanceof Message) {
-	    processMessage((Message) packet);
-	}
+        if (packet instanceof Message) {
+            processMessage((Message) packet);
+        }
     }
 
     private void processMessage(final Message message) {
-	listener.onMessage(message.getFrom(), message.getTo(), message.getBody());
+        listener.onMessage(message.getFrom(), message.getTo(), message.getBody());
     }
 
     public void setListener(final RoomListener listener) {
-	this.listener = listener;
+        this.listener = listener;
     }
 
     public MultiUserChat getMuc() {
-	return muc;
+        return muc;
     }
 
 }

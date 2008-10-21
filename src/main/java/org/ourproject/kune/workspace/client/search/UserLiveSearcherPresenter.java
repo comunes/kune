@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.workspace.client.search;
 
-
 public class UserLiveSearcherPresenter extends EntityLiveSearcherPresenter implements UserLiveSearcher {
 
 }

@@ -34,61 +34,61 @@ public class EntityTitlePanel implements EntityTitleView {
     private final Image icon;
 
     public EntityTitlePanel(final WorkspaceSkeleton ws, final EntityTitlePresenter presenter) {
-	icon = new Image();
-	titleLabel = new EditableIconLabel(new EditableClickListener() {
-	    public void onEdited(final String text) {
-		presenter.onTitleRename(text);
-	    }
-	});
-	dateLabel = new Label();
+        icon = new Image();
+        titleLabel = new EditableIconLabel(new EditableClickListener() {
+            public void onEdited(final String text) {
+                presenter.onTitleRename(text);
+            }
+        });
+        dateLabel = new Label();
 
-	final SimpleToolbar wsTitle = ws.getEntityWorkspace().getTitleComponent();
-	wsTitle.add(icon);
-	wsTitle.add(titleLabel);
-	wsTitle.addFill();
-	wsTitle.add(dateLabel);
-	icon.addStyleName("kune-Margin-Large-l");
-	titleLabel.addStyleName("kune-Margin-Medium-l");
-	titleLabel.addStyleName("kune-ft17px");
-	titleLabel.ensureDebugId("k-entity-title-title");
-	dateLabel.addStyleName("kune-Margin-Large-r");
-	dateLabel.addStyleName("kune-ft12px");
-	dateLabel.ensureDebugId("k-entity-title-date");
+        final SimpleToolbar wsTitle = ws.getEntityWorkspace().getTitleComponent();
+        wsTitle.add(icon);
+        wsTitle.add(titleLabel);
+        wsTitle.addFill();
+        wsTitle.add(dateLabel);
+        icon.addStyleName("kune-Margin-Large-l");
+        titleLabel.addStyleName("kune-Margin-Medium-l");
+        titleLabel.addStyleName("kune-ft17px");
+        titleLabel.ensureDebugId("k-entity-title-title");
+        dateLabel.addStyleName("kune-Margin-Large-r");
+        dateLabel.addStyleName("kune-ft12px");
+        dateLabel.ensureDebugId("k-entity-title-date");
     }
 
     public void restoreOldTitle() {
-	titleLabel.restoreOldText();
+        titleLabel.restoreOldText();
     }
 
     public void setContentDate(final String date) {
-	dateLabel.setText(date);
+        dateLabel.setText(date);
     }
 
     public void setContentIcon(final String iconUrl) {
-	icon.setUrl(iconUrl);
+        icon.setUrl(iconUrl);
     }
 
     public void setContentIconVisible(final boolean visible) {
-	icon.setVisible(visible);
-	if (visible) {
-	    titleLabel.removeStyleName("kune-Margin-Large-l");
-	    titleLabel.addStyleName("kune-Margin-Medium-l");
-	} else {
-	    titleLabel.removeStyleName("kune-Margin-Medium-l");
-	    titleLabel.addStyleName("kune-Margin-Large-l");
-	}
+        icon.setVisible(visible);
+        if (visible) {
+            titleLabel.removeStyleName("kune-Margin-Large-l");
+            titleLabel.addStyleName("kune-Margin-Medium-l");
+        } else {
+            titleLabel.removeStyleName("kune-Margin-Medium-l");
+            titleLabel.addStyleName("kune-Margin-Large-l");
+        }
     }
 
     public void setContentTitle(final String title) {
-	titleLabel.setText(title);
+        titleLabel.setText(title);
     }
 
     public void setContentTitleEditable(final boolean editable) {
-	titleLabel.setEditable(editable);
+        titleLabel.setEditable(editable);
     }
 
     public void setDateVisible(final boolean visible) {
-	dateLabel.setVisible(visible);
+        dateLabel.setVisible(visible);
     }
 
 }

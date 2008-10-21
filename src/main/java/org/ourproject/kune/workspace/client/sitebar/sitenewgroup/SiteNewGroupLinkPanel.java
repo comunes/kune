@@ -9,12 +9,12 @@ import com.google.gwt.user.client.ui.Hyperlink;
 public class SiteNewGroupLinkPanel implements SiteNewGroupLinkView {
 
     public SiteNewGroupLinkPanel(final SiteNewGroupLinkPresenter presenter, final WorkspaceSkeleton ws,
-	    final I18nUITranslationService i18n) {
-	final Hyperlink newGroupHyperlink = new Hyperlink();
-	newGroupHyperlink.setText(i18n.t("Create New Group"));
-	newGroupHyperlink.setTargetHistoryToken(SiteToken.newgroup.toString());
-	ws.getSiteBar().addSeparator();
-	ws.getSiteBar().add(newGroupHyperlink);
-	ws.getSiteBar().addSpacer();
+            final I18nUITranslationService i18n) {
+        final Hyperlink newGroupHyperlink = new Hyperlink();
+        newGroupHyperlink.setText(i18n.t("Create New Group"));
+        newGroupHyperlink.setTargetHistoryToken(SiteToken.newgroup.toString());
+        ws.getSiteBar().addSeparator();
+        ws.getSiteBar().add(newGroupHyperlink);
+        ws.getSiteBar().addSpacer();
     }
 }

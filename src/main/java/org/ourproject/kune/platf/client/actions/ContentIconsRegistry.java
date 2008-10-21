@@ -8,12 +8,12 @@ public class ContentIconsRegistry {
     private final HashMap<String, String> contentTypesIcons;
 
     public ContentIconsRegistry() {
-	contentTypesIcons = new HashMap<String, String>();
+        contentTypesIcons = new HashMap<String, String>();
     }
 
     public String getContentTypeIcon(final String typeId) {
-	final String icon = contentTypesIcons.get(typeId);
-	return icon == null ? "" : icon;
+        final String icon = contentTypesIcons.get(typeId);
+        return icon == null ? "" : icon;
     }
 
     /**
@@ -21,39 +21,39 @@ public class ContentIconsRegistry {
      * icon in defect
      * 
      * @param typeId
-     *                the kune typeId (see *ClientTool)
+     *            the kune typeId (see *ClientTool)
      * @param mimeType
      * @return
      */
     public String getContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType) {
-	String icon = getContentTypeIcon(concatenate(typeId, mimeType));
-	if (icon.equals("")) {
-	    if (mimeType == null) {
-		return getContentTypeIcon(typeId);
-	    }
-	} else {
-	    return icon;
-	}
-	final String subtype = mimeType.getSubtype();
-	if (subtype != null && subtype.length() > 0) {
-	    icon = getContentTypeIcon(typeId, new BasicMimeTypeDTO(mimeType.getType()));
-	}
-	return icon.equals("") ? getContentTypeIcon(typeId) : icon;
+        String icon = getContentTypeIcon(concatenate(typeId, mimeType));
+        if (icon.equals("")) {
+            if (mimeType == null) {
+                return getContentTypeIcon(typeId);
+            }
+        } else {
+            return icon;
+        }
+        final String subtype = mimeType.getSubtype();
+        if (subtype != null && subtype.length() > 0) {
+            icon = getContentTypeIcon(typeId, new BasicMimeTypeDTO(mimeType.getType()));
+        }
+        return icon.equals("") ? getContentTypeIcon(typeId) : icon;
     }
 
     public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType, final String iconUrl) {
-	registerContentTypeIcon(concatenate(typeId, mimeType), iconUrl);
+        registerContentTypeIcon(concatenate(typeId, mimeType), iconUrl);
     }
 
     public void registerContentTypeIcon(final String contentTypeId, final String iconUrl) {
-	contentTypesIcons.put(contentTypeId, iconUrl);
+        contentTypesIcons.put(contentTypeId, iconUrl);
     }
 
     private String concatenate(final String typeId, final BasicMimeTypeDTO mimeType) {
-	if (mimeType != null) {
-	    return typeId + "|" + mimeType;
-	} else {
-	    return typeId;
-	}
+        if (mimeType != null) {
+            return typeId + "|" + mimeType;
+        } else {
+            return typeId;
+        }
     }
 }

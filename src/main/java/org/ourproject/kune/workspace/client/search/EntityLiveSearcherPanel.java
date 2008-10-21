@@ -54,102 +54,103 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
     private final I18nTranslationService i18n;
 
     public EntityLiveSearcherPanel(final EntityLiveSearcherPresenter presenter,
-	    final EntityLiveSearcherType searchType, final I18nTranslationService i18n) {
-	this.presenter = presenter;
-	this.searchType = searchType;
-	this.i18n = i18n;
+            final EntityLiveSearcherType searchType, final I18nTranslationService i18n) {
+        this.presenter = presenter;
+        this.searchType = searchType;
+        this.i18n = i18n;
     }
 
     public void center() {
-	dialog.center();
+        dialog.center();
     }
 
     public void hide() {
-	dialog.hide();
-	searchForm.getForm().reset();
+        dialog.hide();
+        searchForm.getForm().reset();
     }
 
     public void show() {
-	if (dialog == null) {
-	    createGroupSearchDialog(searchType);
-	}
-	dialog.show();
-	dialog.center();
+        if (dialog == null) {
+            createGroupSearchDialog(searchType);
+        }
+        dialog.show();
+        dialog.center();
     }
 
     private void createGroupSearchDialog(final EntityLiveSearcherType searchType) {
-	String title;
-	if (searchType.equals(EntityLiveSearcherType.groups)) {
-	    title = i18n.t("Search existing users and groups");
-	} else {
-	    title = i18n.t("Search existing users");
-	}
-	dialog = new BasicDialog(title, true, false, 285, 55);
-	dialog.setClosable(true);
-	dialog.setCollapsible(false);
+        String title;
+        if (searchType.equals(EntityLiveSearcherType.groups)) {
+            title = i18n.t("Search existing users and groups");
+        } else {
+            title = i18n.t("Search existing users");
+        }
+        dialog = new BasicDialog(title, true, false, 285, 55);
+        dialog.setClosable(true);
+        dialog.setCollapsible(false);
 
-	DataProxy dataProxy = null;
-	switch (searchType) {
-	case groups:
-	    dataProxy = new HttpProxy("/kune/json/GroupJSONService/search", Connection.POST);
-	    break;
-	case users:
-	    dataProxy = new HttpProxy("/kune/json/UserJSONService/search", Connection.POST);
-	    break;
-	default:
-	    break;
-	}
+        DataProxy dataProxy = null;
+        switch (searchType) {
+        case groups:
+            dataProxy = new HttpProxy("/kune/json/GroupJSONService/search", Connection.POST);
+            break;
+        case users:
+            dataProxy = new HttpProxy("/kune/json/UserJSONService/search", Connection.POST);
+            break;
+        default:
+            break;
+        }
 
-	final JsonReader reader = new JsonReader(new RecordDef(
-		new FieldDef[] { new StringFieldDef(SHORT_NAME_FIELD), new StringFieldDef(LONG_NAME_FIELD),
-			new StringFieldDef(LINK_FIELD), new StringFieldDef(ICON_URL_FIELD) }));
-	reader.setRoot("list");
-	reader.setTotalProperty("size");
-	reader.setId(SHORT_NAME_FIELD);
+        final JsonReader reader = new JsonReader(new RecordDef(
+                new FieldDef[] { new StringFieldDef(SHORT_NAME_FIELD), new StringFieldDef(LONG_NAME_FIELD),
+                        new StringFieldDef(LINK_FIELD), new StringFieldDef(ICON_URL_FIELD) }));
+        reader.setRoot("list");
+        reader.setTotalProperty("size");
+        reader.setId(SHORT_NAME_FIELD);
 
-	final Store store = new Store(dataProxy, reader);
+        final Store store = new Store(dataProxy, reader);
 
-	store.load(new UrlParam[] { new UrlParam("query", "."), new UrlParam("first", 1),
-		new UrlParam("max", PAGINATION_SIZE) });
+        store.load(new UrlParam[] { new UrlParam("query", "."), new UrlParam("first", 1),
+                new UrlParam("max", PAGINATION_SIZE) });
 
-	searchForm = new FormPanel();
-	searchForm.setBorder(false);
-	searchForm.setWidth(275);
-	searchForm.setHideLabels(true);
+        searchForm = new FormPanel();
+        searchForm.setBorder(false);
+        searchForm.setWidth(275);
+        searchForm.setHideLabels(true);
 
-	final Template resultTpl = new Template(
-		"<div class=\"search-item\"><span class=\"kune-IconHyperlink\"><img alt=\"group logo\" src=\"images/group-def-icon.png\" style=\"height: 16px; width: 16px;\" />{shortName}:&nbsp;{longName}</span></div>");
-	final ComboBox cb = new ComboBox();
-	cb.setStore(store);
-	cb.setEmptyText(i18n.t("Write here to search"));
-	cb.setDisplayField(LONG_NAME_FIELD);
-	cb.setTypeAhead(true);
-	cb.setLoadingText(i18n.t("Searching..."));
-	cb.setWidth(268);
-	cb.setPageSize(PAGINATION_SIZE);
-	cb.setTpl(resultTpl);
-	cb.setMode(ComboBox.REMOTE);
-	cb.setMinChars(2);
-	cb.setSelectOnFocus(false);
-	cb.setHideTrigger(true);
-	cb.setHideLabel(true);
-	// setTitle(i18n.t("User or group"));
-	cb.setItemSelector("div.search-item");
+        final Template resultTpl = new Template(
+                "<div class=\"search-item\"><span class=\"kune-IconHyperlink\"><img alt=\"group logo\" src=\"images/group-def-icon.png\" style=\"height: 16px; width: 16px;\" />{shortName}:&nbsp;{longName}</span></div>");
+        final ComboBox cb = new ComboBox();
+        cb.setStore(store);
+        cb.setEmptyText(i18n.t("Write here to search"));
+        cb.setDisplayField(LONG_NAME_FIELD);
+        cb.setTypeAhead(true);
+        cb.setLoadingText(i18n.t("Searching..."));
+        cb.setWidth(268);
+        cb.setPageSize(PAGINATION_SIZE);
+        cb.setTpl(resultTpl);
+        cb.setMode(ComboBox.REMOTE);
+        cb.setMinChars(2);
+        cb.setSelectOnFocus(false);
+        cb.setHideTrigger(true);
+        cb.setHideLabel(true);
+        // setTitle(i18n.t("User or group"));
+        cb.setItemSelector("div.search-item");
 
-	cb.addListener(new ComboBoxListenerAdapter() {
-	    public void onSelect(final ComboBox comboBox, final Record record, final int index) {
-		DeferredCommand.addCommand(new Command() {
-		    public void execute() {
-			final LinkDTO link = new LinkDTO(record.getAsString(SHORT_NAME_FIELD), record
-				.getAsString(LONG_NAME_FIELD), record.getAsString(ICON_URL_FIELD), record
-				.getAsString(LINK_FIELD));
-			presenter.onSelection(link);
-		    }
-		});
-	    }
-	});
+        cb.addListener(new ComboBoxListenerAdapter() {
+            @Override
+            public void onSelect(final ComboBox comboBox, final Record record, final int index) {
+                DeferredCommand.addCommand(new Command() {
+                    public void execute() {
+                        final LinkDTO link = new LinkDTO(record.getAsString(SHORT_NAME_FIELD),
+                                record.getAsString(LONG_NAME_FIELD), record.getAsString(ICON_URL_FIELD),
+                                record.getAsString(LINK_FIELD));
+                        presenter.onSelection(link);
+                    }
+                });
+            }
+        });
 
-	searchForm.add(cb);
-	dialog.add(searchForm);
+        searchForm.add(cb);
+        dialog.add(searchForm);
     }
 }

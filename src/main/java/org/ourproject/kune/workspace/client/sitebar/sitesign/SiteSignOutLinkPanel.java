@@ -15,21 +15,21 @@ public class SiteSignOutLinkPanel implements SiteSignOutLinkView {
     private final Label signOutLabel;
 
     public SiteSignOutLinkPanel(final SiteSignOutLinkPresenter presenter, final I18nUITranslationService i18n,
-	    final WorkspaceSkeleton ws) {
-	signOutLabel = new Label();
-	signOutLabel.setText(i18n.t("Sign out"));
-	signOutLabel.addStyleName("k-sitebar-labellink");
-	signOutLabel.ensureDebugId(SITE_SIGN_OUT);
-	ws.getSiteBar().add(signOutLabel);
-	signOutLabel.addClickListener(new ClickListener() {
-	    public void onClick(final Widget arg0) {
-		Site.showProgressProcessing();
-		presenter.doSignOut();
-	    }
-	});
+            final WorkspaceSkeleton ws) {
+        signOutLabel = new Label();
+        signOutLabel.setText(i18n.t("Sign out"));
+        signOutLabel.addStyleName("k-sitebar-labellink");
+        signOutLabel.ensureDebugId(SITE_SIGN_OUT);
+        ws.getSiteBar().add(signOutLabel);
+        signOutLabel.addClickListener(new ClickListener() {
+            public void onClick(final Widget arg0) {
+                Site.showProgressProcessing();
+                presenter.doSignOut();
+            }
+        });
     }
 
     public void setVisible(final boolean visible) {
-	signOutLabel.setVisible(visible);
+        signOutLabel.setVisible(visible);
     }
 }

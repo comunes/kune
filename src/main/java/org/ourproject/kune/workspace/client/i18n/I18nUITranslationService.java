@@ -47,77 +47,77 @@ public class I18nUITranslationService extends I18nTranslationService {
      * direction, for instance.
      */
     public void addI18nChangeListener(final I18nChangeListener listener) {
-	if (i18nChangeListeners == null) {
-	    i18nChangeListeners = new I18nChangeListenerCollection();
-	}
-	i18nChangeListeners.add(listener);
+        if (i18nChangeListeners == null) {
+            i18nChangeListeners = new I18nChangeListenerCollection();
+        }
+        i18nChangeListeners.add(listener);
     }
 
     public void changeCurrentLanguage(final String newLanguage) {
-	if (!newLanguage.equals(this.currentLanguageCode)) {
-	    setCurrentLanguage(newLanguage);
-	    changeLocale(newLanguage);
-	}
+        if (!newLanguage.equals(this.currentLanguageCode)) {
+            setCurrentLanguage(newLanguage);
+            changeLocale(newLanguage);
+        }
     }
 
     public String getCurrentLanguage() {
-	return currentLanguageCode;
+        return currentLanguageCode;
     }
 
     public I18nLanguageDTO getInitialLang() {
-	return initialLang;
+        return initialLang;
     }
 
     public HashMap<String, String> getLexicon() {
-	return lexicon;
+        return lexicon;
     }
 
     public void init(final I18nServiceAsync i18nService, final Session session, final Listener0 onReady) {
-	this.i18nService = i18nService;
-	this.session = session;
-	final Location loc = WindowUtils.getLocation();
-	final String locale = loc.getParameter("locale");
-	i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
-	    public void onFailure(final Throwable caught) {
-		Log.error("Workspace adaptation to your language failed");
-	    }
+        this.i18nService = i18nService;
+        this.session = session;
+        final Location loc = WindowUtils.getLocation();
+        final String locale = loc.getParameter("locale");
+        i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
+            public void onFailure(final Throwable caught) {
+                Log.error("Workspace adaptation to your language failed");
+            }
 
-	    public void onSuccess(final I18nLanguageDTO result) {
-		initialLang = result;
-		currentLanguageCode = initialLang.getCode();
-		session.setCurrentLanguage(initialLang);
-		i18nService.getLexicon(initialLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
-		    public void onFailure(final Throwable caught) {
-			Log.error("Workspace adaptation to your language failed");
-		    }
+            public void onSuccess(final I18nLanguageDTO result) {
+                initialLang = result;
+                currentLanguageCode = initialLang.getCode();
+                session.setCurrentLanguage(initialLang);
+                i18nService.getLexicon(initialLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
+                    public void onFailure(final Throwable caught) {
+                        Log.error("Workspace adaptation to your language failed");
+                    }
 
-		    public void onSuccess(final HashMap<String, String> result) {
-			lexicon = result;
-			onReady.onEvent();
-		    }
-		});
-	    }
-	});
+                    public void onSuccess(final HashMap<String, String> result) {
+                        lexicon = result;
+                        onReady.onEvent();
+                    }
+                });
+            }
+        });
     }
 
     public void removeI18nChangeListener(final I18nChangeListener listener) {
-	if (i18nChangeListeners != null) {
-	    i18nChangeListeners.remove(listener);
-	}
+        if (i18nChangeListeners != null) {
+            i18nChangeListeners.remove(listener);
+        }
     }
 
     public void setCurrentLanguage(final String newLanguage) {
-	this.currentLanguageCode = newLanguage;
+        this.currentLanguageCode = newLanguage;
     }
 
     public void setLexicon(final HashMap<String, String> lexicon) {
-	this.lexicon = lexicon;
-	fireI18nLanguageChange();
+        this.lexicon = lexicon;
+        fireI18nLanguageChange();
     }
 
     public void setTranslationAfterSave(final String text, final String translation) {
-	lexicon.put(text, translation);
-	fireI18nLanguageChange();
+        lexicon.put(text, translation);
+        fireI18nLanguageChange();
     }
 
     /**
@@ -131,37 +131,39 @@ public class I18nUITranslationService extends I18nTranslationService {
      * @param text
      * @return text translated in the current language
      */
+    @Override
     public String t(final String text) {
-	final String encodeText = KuneStringUtils.escapeHtmlLight(text);
-	String translation = lexicon.get(encodeText);
-	if (lexicon.containsKey(encodeText)) {
-	    if (translation == UNTRANSLATED_VALUE) {
-		// Not translated but in db, return text
-		translation = removeNT(encodeText);
-	    }
-	} else {
-	    // Not translated and not in db, make a petition for translation
-	    if (session.isLogged()) {
-		i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text,
-			new AsyncCallback<String>() {
-			    public void onFailure(final Throwable caught) {
-			    }
+        final String encodeText = KuneStringUtils.escapeHtmlLight(text);
+        String translation = lexicon.get(encodeText);
+        if (lexicon.containsKey(encodeText)) {
+            if (translation == UNTRANSLATED_VALUE) {
+                // Not translated but in db, return text
+                translation = removeNT(encodeText);
+            }
+        } else {
+            // Not translated and not in db, make a petition for translation
+            if (session.isLogged()) {
+                i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text,
+                                           new AsyncCallback<String>() {
+                                               public void onFailure(final Throwable caught) {
+                                               }
 
-			    public void onSuccess(final String result) {
-			    }
-			});
-		Log.debug("Registering in db '" + text + "' as pending translation");
-		lexicon.put(encodeText, UNTRANSLATED_VALUE);
-	    }
-	    translation = removeNT(encodeText);
-	}
-	return decodeHtml(translation);
+                                               public void onSuccess(final String result) {
+                                               }
+                                           });
+                Log.debug("Registering in db '" + text + "' as pending translation");
+                lexicon.put(encodeText, UNTRANSLATED_VALUE);
+            }
+            translation = removeNT(encodeText);
+        }
+        return decodeHtml(translation);
     }
 
     /**
      * 
      * See in:
-     * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
+     * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread
+     * /5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
      * 
      * JSNI method to change the locale of the application - it effectively
      * parses the existing URL and creates a new one for the chosen locale.
@@ -171,14 +173,14 @@ public class I18nUITranslationService extends I18nTranslationService {
      * the "debugger" line.
      * 
      * @param newLocale
-     *                String value of the new locale to go to.
+     *            String value of the new locale to go to.
      */
     private native void changeLocale(String newLocale)
     /*-{
        // Uncomment the "debugger;" line to see how to set debug statements in JSNI code
        // When in web mode, if your browser has a JavaScript debugger attached, it will
        // launch at this point in the code (when the user changes locale through the menu system).
-       //debugger;
+       // debugger;
 
        // Get the current location
        var currLocation = $wnd.location.toString();
@@ -195,18 +197,18 @@ public class I18nUITranslationService extends I18nTranslationService {
        // extjs part:
        // commented because the error: "Ext is not defined"
        // we have to try other way
-       //var head = document.getElementsByTagName("head")[0];
-       //var script = document.createElement('script');
-       //script.id = 'localScript';
-       //script.type = 'text/javascript';
-       //script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
-       //head.appendChild(script);
+       // var head = document.getElementsByTagName("head")[0];
+       // var script = document.createElement('script');
+       // script.id = 'localScript';
+       // script.type = 'text/javascript';
+       // script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
+       // head.appendChild(script);
        }-*/;
 
     private void fireI18nLanguageChange() {
-	if (i18nChangeListeners != null) {
-	    i18nChangeListeners.fireI18nLanguageChange();
-	}
+        if (i18nChangeListeners != null) {
+            i18nChangeListeners.fireI18nLanguageChange();
+        }
     }
 
 }

@@ -38,63 +38,63 @@ public class LicenseChoosePresenter implements LicenseChoose, View {
     private final List<LicenseDTO> licensesNonCCList;
 
     public LicenseChoosePresenter(final Session session) {
-	licensesNonCCList = new ArrayList<LicenseDTO>();
-	licenses = session.getLicenses();
-	for (final Iterator<LicenseDTO> iterator = licenses.iterator(); iterator.hasNext();) {
-	    final LicenseDTO license = iterator.next();
-	    if (!license.isCC()) {
-		licensesNonCCList.add(license);
-	    }
-	}
+        licensesNonCCList = new ArrayList<LicenseDTO>();
+        licenses = session.getLicenses();
+        for (final Iterator<LicenseDTO> iterator = licenses.iterator(); iterator.hasNext();) {
+            final LicenseDTO license = iterator.next();
+            if (!license.isCC()) {
+                licensesNonCCList.add(license);
+            }
+        }
     }
 
     public LicenseDTO getLicense() {
-	String licenseShortName;
+        String licenseShortName;
 
-	if (view.isCCselected()) {
-	    if (view.permitComercial()) {
-		licenseShortName = view.isAllowModif() ? "by" : view.isAllowModifShareAlike() ? "by-sa" : "by-nd";
-	    } else {
-		licenseShortName = view.isAllowModif() ? "by-nc" : view.isAllowModifShareAlike() ? "by-nc-sa"
-			: "by-nc-nd";
-	    }
-	} else {
-	    licenseShortName = licensesNonCCList.get(view.getSelectedNonCCLicenseIndex()).getShortName();
-	}
-	return getLicenseFromShortName(licenseShortName);
+        if (view.isCCselected()) {
+            if (view.permitComercial()) {
+                licenseShortName = view.isAllowModif() ? "by" : view.isAllowModifShareAlike() ? "by-sa" : "by-nd";
+            } else {
+                licenseShortName = view.isAllowModif() ? "by-nc" : view.isAllowModifShareAlike() ? "by-nc-sa"
+                        : "by-nc-nd";
+            }
+        } else {
+            licenseShortName = licensesNonCCList.get(view.getSelectedNonCCLicenseIndex()).getShortName();
+        }
+        return getLicenseFromShortName(licenseShortName);
     }
 
     public List<LicenseDTO> getNonCCLicenses() {
-	return licensesNonCCList;
+        return licensesNonCCList;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final LicenseChooseView view) {
-	this.view = view;
-	this.view.reset();
+        this.view = view;
+        this.view.reset();
     }
 
     public void onChange() {
-	final LicenseDTO licenseDTO = getLicense();
-	if (licenseDTO.isCopyleft()) {
-	    view.showIsCopyleft();
-	} else {
-	    view.showIsNotCopyleft();
-	}
+        final LicenseDTO licenseDTO = getLicense();
+        if (licenseDTO.isCopyleft()) {
+            view.showIsCopyleft();
+        } else {
+            view.showIsNotCopyleft();
+        }
     }
 
     private LicenseDTO getLicenseFromShortName(final String shortName) {
-	for (int i = 0; i < licenses.size(); i++) {
-	    final LicenseDTO licenseDTO = licenses.get(i);
-	    if (licenseDTO.getShortName().equals(shortName)) {
-		return licenseDTO;
-	    }
-	}
-	Log.error("Internal error: License not found");
-	throw new IndexOutOfBoundsException("License not found");
+        for (int i = 0; i < licenses.size(); i++) {
+            final LicenseDTO licenseDTO = licenses.get(i);
+            if (licenseDTO.getShortName().equals(shortName)) {
+                return licenseDTO;
+            }
+        }
+        Log.error("Internal error: License not found");
+        throw new IndexOutOfBoundsException("License not found");
     }
 
 }

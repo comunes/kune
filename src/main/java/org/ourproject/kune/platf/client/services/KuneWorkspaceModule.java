@@ -21,6 +21,7 @@ import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPresenter;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelector;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
@@ -230,9 +231,9 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntityLogo create() {
                 final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
-                        $(WsThemePresenter.class), $(Session.class));
+                        $(WsThemePresenter.class), $(Session.class), $$(GroupServiceAsync.class));
                 final EntityLogoPanel panel = new EntityLogoPanel($(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class), $$(FileDownloadUtils.class));
+                        $(WorkspaceSkeleton.class), $$(FileDownloadUtils.class), $$(EntityLogoSelector.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -370,6 +371,5 @@ public class KuneWorkspaceModule extends AbstractModule {
                 return presenter;
             }
         });
-
     }
 }

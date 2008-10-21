@@ -26,31 +26,31 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 
     @Before
     public void init() {
-	new IntegrationTestHelper(this);
-	groupToken = new StateToken(getDefSiteGroupName());
+        new IntegrationTestHelper(this);
+        groupToken = new StateToken(getDefSiteGroupName());
     }
 
     @Test
     public void testGetGroupMembersNotLogged() throws Exception {
-	final SocialNetworkDTO groupMembers = socialNetworkService.getGroupMembers(null, groupToken);
-	assertNotNull(groupMembers);
+        final SocialNetworkDTO groupMembers = socialNetworkService.getGroupMembers(null, groupToken);
+        assertNotNull(groupMembers);
     }
 
     @Test
     public void testGetParticipationNotLogged() throws Exception {
-	final ParticipationDataDTO participation = socialNetworkService.getParticipation(null, groupToken);
-	assertNotNull(participation);
+        final ParticipationDataDTO participation = socialNetworkService.getParticipation(null, groupToken);
+        assertNotNull(participation);
     }
 
     @Test(expected = UserMustBeLoggedException.class)
     public void testRequestJoinNoLogged() throws Exception {
-	socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
+        socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
     }
 
     @Test(expected = AlreadyUserMemberException.class)
     public void testRequestJoinPersonalGroup() throws Exception {
-	doLogin();
-	socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
+        doLogin();
+        socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
     }
 
 }

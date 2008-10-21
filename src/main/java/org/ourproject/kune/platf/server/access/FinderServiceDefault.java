@@ -92,17 +92,17 @@ public class FinderServiceDefault implements FinderService {
         final Long contentId = checkAndParse(token.getDocument());
         final Long folderId = checkAndParse(token.getFolder());
 
+        String group = token.getGroup();
         if (token.hasAll()) {
-            return findByContentReference(token.getGroup(), token.getTool(), folderId, contentId);
+            return findByContentReference(group, token.getTool(), folderId, contentId);
         } else if (token.hasGroupToolAndFolder()) {
-            return findByFolderReference(token.getGroup(), token.getTool(), folderId);
+            return findByFolderReference(group, token.getTool(), folderId);
         } else if (token.hasGroupAndTool()) {
-            return findByRootOnGroup(token.getGroup(), token.getTool());
+            return findByRootOnGroup(group, token.getTool());
         } else if (token.hasGroup()) {
-            Content defaultOfGroup = findDefaultOfGroup(token.getGroup());
-            return defaultOfGroup == null ? Content.NO_CONTENT : defaultOfGroup;
+            return findDefaultContentOfGroup(group);
         } else if (token.hasNothing()) {
-            return findDefaultOfGroup(defaultGroup);
+            return findDefaultContentOfGroup(defaultGroup);
         } else {
             throw new ContentNotFoundException();
         }
@@ -164,14 +164,14 @@ public class FinderServiceDefault implements FinderService {
         }
     }
 
-    private Content findDefaultOfGroup(final Group group) {
+    private Content findDefaultContentOfGroup(final Group group) {
         final Content defaultContent = group.getDefaultContent();
-        return defaultContent;
+        return defaultContent == null ? Content.NO_CONTENT : defaultContent;
     }
 
-    private Content findDefaultOfGroup(final String groupName) throws GroupNotFoundException {
+    private Content findDefaultContentOfGroup(final String groupName) throws GroupNotFoundException {
         final Group group = groupManager.findByShortName(groupName);
-        return findDefaultOfGroup(group);
+        return findDefaultContentOfGroup(group);
     }
 
     private Content generateFolderFakeContent(final Container container) {

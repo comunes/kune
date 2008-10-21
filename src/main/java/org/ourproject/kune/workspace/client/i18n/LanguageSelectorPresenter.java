@@ -29,26 +29,26 @@ public class LanguageSelectorPresenter implements LanguageSelector {
     private final Session session;
 
     public LanguageSelectorPresenter(final Session session) {
-	this.session = session;
+        this.session = session;
     }
 
     public Object[][] getLanguages() {
-	return session.getLanguagesArray();
+        return session.getLanguagesArray();
     }
 
     public String getSelectedLanguage() {
-	return view.getLanguage();
+        return view.getLanguage();
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final LanguageSelectorView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void setLanguage(final I18nLanguageDTO language) {
-	view.setLanguage(language.getCode());
+        view.setLanguage(language.getCode());
     }
 }

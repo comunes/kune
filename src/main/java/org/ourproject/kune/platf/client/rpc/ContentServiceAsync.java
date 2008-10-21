@@ -38,7 +38,7 @@ public interface ContentServiceAsync {
     void addAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<?> asyncCallback);
 
     void addComment(String userHash, StateToken token, Long parentCommentId, String commentText,
-	    AsyncCallback<CommentDTO> asyncCallback);
+            AsyncCallback<CommentDTO> asyncCallback);
 
     void addComment(String userHash, StateToken token, String commentText, AsyncCallback<CommentDTO> asyncCallback);
 
@@ -69,17 +69,17 @@ public interface ContentServiceAsync {
     void setAsDefaultContent(String userHash, StateToken token, AsyncCallback<ContentSimpleDTO> asyncCallback);
 
     void setLanguage(String userHash, StateToken token, String languageCode,
-	    AsyncCallback<I18nLanguageDTO> asyncCallback);
+            AsyncCallback<I18nLanguageDTO> asyncCallback);
 
     void setPublishedOn(String userHash, StateToken token, Date publishedOn, AsyncCallback<?> asyncCallback);
 
     void setStatus(String userHash, StateToken stateToken, ContentStatusDTO status, AsyncCallback<?> asyncCallback);
 
     void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatusDTO status,
-	    AsyncCallback<?> asyncCallback);
+            AsyncCallback<?> asyncCallback);
 
     void setTags(String userHash, StateToken token, String tags, AsyncCallback<List<TagResultDTO>> asyncCallback);
 
     void voteComment(String userHash, StateToken token, Long commentId, boolean votePositive,
-	    AsyncCallback<CommentDTO> asyncCallback);
+            AsyncCallback<CommentDTO> asyncCallback);
 }

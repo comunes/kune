@@ -12,9 +12,9 @@ public abstract class ContentServiceIntegrationTest extends IntegrationTest {
     protected ContentService contentService;
 
     protected StateDTO getDefaultContent() throws Exception {
-	final StateToken stateToken = new StateToken(getDefSiteGroupName());
-	final StateDTO content = contentService.getContent(session.getHash(), stateToken);
-	return content;
+        final StateToken stateToken = new StateToken(getDefSiteGroupName());
+        final StateDTO content = contentService.getContent(session.getHash(), stateToken);
+        return content;
     }
 
 }

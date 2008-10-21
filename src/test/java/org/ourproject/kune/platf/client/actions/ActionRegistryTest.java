@@ -23,78 +23,79 @@ public class ActionRegistryTest {
 
     @Test
     public void actionsEmptyButNeverNull() {
-	Mockito.stub(session.isLogged()).toReturn(true);
-	checkActionLists(0, new AccessRightsDTO(true, true, true), true);
-	checkActionLists(0, new AccessRightsDTO(true, true, true), false);
-	checkActionLists(0, new AccessRightsDTO(false, true, true), true);
-	checkActionLists(0, new AccessRightsDTO(false, true, true), false);
-	checkActionLists(0, new AccessRightsDTO(false, false, true), true);
-	checkActionLists(0, new AccessRightsDTO(false, false, true), false);
+        Mockito.stub(session.isLogged()).toReturn(true);
+        checkActionLists(0, new AccessRightsDTO(true, true, true), true);
+        checkActionLists(0, new AccessRightsDTO(true, true, true), false);
+        checkActionLists(0, new AccessRightsDTO(false, true, true), true);
+        checkActionLists(0, new AccessRightsDTO(false, true, true), false);
+        checkActionLists(0, new AccessRightsDTO(false, false, true), true);
+        checkActionLists(0, new AccessRightsDTO(false, false, true), false);
     }
 
     @Before
     public void before() {
-	session = Mockito.mock(Session.class);
-	registry = new ActionRegistry<StateToken>();
-	adminAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Administrator,
-		ActionToolbarPosition.topbar, new Listener<StateToken>() {
-		    public void onEvent(final StateToken parameter) {
-		    }
-		});
-	editorAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
-		ActionToolbarPosition.topbar, new Listener<StateToken>() {
-		    public void onEvent(final StateToken parameter) {
-		    }
-		});
+        session = Mockito.mock(Session.class);
+        registry = new ActionRegistry<StateToken>();
+        adminAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Administrator,
+                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken parameter) {
+                    }
+                });
+        editorAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
+                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken parameter) {
+                    }
+                });
 
-	viewerAction = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer, new Listener<StateToken>() {
-	    public void onEvent(final StateToken parameter) {
-	    }
-	});
-	viewerAction.setMustBeAuthenticated(false);
+        viewerAction = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer, new Listener<StateToken>() {
+            public void onEvent(final StateToken parameter) {
+            }
+        });
+        viewerAction.setMustBeAuthenticated(false);
     }
 
     @Test
     public void mustBeAuthFalse() {
-	Mockito.stub(session.isLogged()).toReturn(false);
-	addDefActions();
-	checkActionLists(0, new AccessRightsDTO(false, true, true), true);
-	checkActionLists(1, new AccessRightsDTO(false, true, true), false);
+        Mockito.stub(session.isLogged()).toReturn(false);
+        addDefActions();
+        checkActionLists(0, new AccessRightsDTO(false, true, true), true);
+        checkActionLists(1, new AccessRightsDTO(false, true, true), false);
     }
 
     @Test
     public void testAddWhenAdmin() {
-	Mockito.stub(session.isLogged()).toReturn(true);
-	addDefActions();
-	checkActionLists(2, new AccessRightsDTO(true, true, true), true);
-	checkActionLists(3, new AccessRightsDTO(true, true, true), false);
+        Mockito.stub(session.isLogged()).toReturn(true);
+        addDefActions();
+        checkActionLists(2, new AccessRightsDTO(true, true, true), true);
+        checkActionLists(3, new AccessRightsDTO(true, true, true), false);
     }
 
     @Test
     public void testAddWhenEditor() {
-	Mockito.stub(session.isLogged()).toReturn(true);
-	addDefActions();
-	checkActionLists(1, new AccessRightsDTO(false, true, true), true);
-	checkActionLists(2, new AccessRightsDTO(false, true, true), false);
+        Mockito.stub(session.isLogged()).toReturn(true);
+        addDefActions();
+        checkActionLists(1, new AccessRightsDTO(false, true, true), true);
+        checkActionLists(2, new AccessRightsDTO(false, true, true), false);
     }
 
     @Test
     public void testAddWhenViewer() {
-	Mockito.stub(session.isLogged()).toReturn(true);
-	addDefActions();
-	checkActionLists(0, new AccessRightsDTO(false, false, true), true);
-	checkActionLists(1, new AccessRightsDTO(false, false, true), false);
+        Mockito.stub(session.isLogged()).toReturn(true);
+        addDefActions();
+        checkActionLists(0, new AccessRightsDTO(false, false, true), true);
+        checkActionLists(1, new AccessRightsDTO(false, false, true), false);
     }
 
     private void addDefActions() {
-	registry.addAction(adminAction, DEF_CONTENT_TYPE_ID);
-	registry.addAction(editorAction, DEF_CONTENT_TYPE_ID);
-	registry.addAction(viewerAction, DEF_CONTENT_TYPE_ID);
+        registry.addAction(adminAction, DEF_CONTENT_TYPE_ID);
+        registry.addAction(editorAction, DEF_CONTENT_TYPE_ID);
+        registry.addAction(viewerAction, DEF_CONTENT_TYPE_ID);
     }
 
     private void checkActionLists(final int expectedActions, final AccessRightsDTO accessRightsDTO,
-	    final boolean toolbarActions) {
-	assertEquals(expectedActions, registry.getCurrentActions(new StateToken(), DEF_CONTENT_TYPE_ID,
-		session.isLogged(), accessRightsDTO, toolbarActions).size());
+            final boolean toolbarActions) {
+        assertEquals(expectedActions,
+                     registry.getCurrentActions(new StateToken(), DEF_CONTENT_TYPE_ID, session.isLogged(),
+                                                accessRightsDTO, toolbarActions).size());
     }
 }

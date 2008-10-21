@@ -48,118 +48,118 @@ public class DropDownPanel extends Composite implements ClickListener {
     private String stylePrimaryName;
 
     public DropDownPanel() {
-	vp = new VerticalPanel();
-	outerBorder = new RoundedPanel(vp, RoundedPanel.ALL);
-	titleHP = new HorizontalPanel();
-	arrowImage = new Image();
-	titleLabel = new Label();
-	contentPanel = new SimplePanel();
+        vp = new VerticalPanel();
+        outerBorder = new RoundedPanel(vp, RoundedPanel.ALL);
+        titleHP = new HorizontalPanel();
+        arrowImage = new Image();
+        titleLabel = new Label();
+        contentPanel = new SimplePanel();
 
-	initWidget(outerBorder);
-	vp.add(titleHP);
-	vp.add(contentPanel);
-	titleHP.add(arrowImage);
-	titleHP.add(titleLabel);
+        initWidget(outerBorder);
+        vp.add(titleHP);
+        vp.add(contentPanel);
+        titleHP.add(arrowImage);
+        titleHP.add(titleLabel);
 
-	this.stylePrimaryName = "k-dropdownouter";
-	outerBorder.setCornerStyleName(stylePrimaryName);
-	vp.setStylePrimaryName(stylePrimaryName);
-	vp.setWidth("100%");
-	vp.setCellWidth(contentPanel, "100%");
-	vp.setCellWidth(titleHP, "100%");
-	titleHP.setStylePrimaryName("k-dropdownlabel");
-	img = Images.App.getInstance();
-	img.arrowDownWhite().applyTo(arrowImage);
-	titleLabel.setText("");
-	contentPanel.setStylePrimaryName("k-dropdowninner");
+        this.stylePrimaryName = "k-dropdownouter";
+        outerBorder.setCornerStyleName(stylePrimaryName);
+        vp.setStylePrimaryName(stylePrimaryName);
+        vp.setWidth("100%");
+        vp.setCellWidth(contentPanel, "100%");
+        vp.setCellWidth(titleHP, "100%");
+        titleHP.setStylePrimaryName("k-dropdownlabel");
+        img = Images.App.getInstance();
+        img.arrowDownWhite().applyTo(arrowImage);
+        titleLabel.setText("");
+        contentPanel.setStylePrimaryName("k-dropdowninner");
 
-	setContentVisible(false);
-	arrowImage.addClickListener(this);
-	titleLabel.addClickListener(this);
+        setContentVisible(false);
+        arrowImage.addClickListener(this);
+        titleLabel.addClickListener(this);
     }
 
     public DropDownPanel(final boolean visible) {
-	this();
-	setContentVisible(visible);
+        this();
+        setContentVisible(visible);
     }
 
     public DropDownPanel(final String headerText, final boolean visible) {
-	this();
-	setContentVisible(visible);
-	setHeaderText(headerText);
+        this();
+        setContentVisible(visible);
+        setHeaderText(headerText);
     }
 
     public boolean isContentVisible() {
-	return contentPanel.isVisible();
+        return contentPanel.isVisible();
     }
 
     public void onClick(final Widget sender) {
-	if (sender == titleHP | sender == arrowImage | sender == titleLabel) {
-	    setContentVisible(!isContentVisible());
-	}
+        if (sender == titleHP | sender == arrowImage | sender == titleLabel) {
+            setContentVisible(!isContentVisible());
+        }
     }
 
     public void setBorderStylePrimaryName(final String stylePrimaryName) {
-	this.stylePrimaryName = stylePrimaryName;
-	outerBorder.setCornerStyleName(stylePrimaryName);
-	vp.setStylePrimaryName(stylePrimaryName);
+        this.stylePrimaryName = stylePrimaryName;
+        outerBorder.setCornerStyleName(stylePrimaryName);
+        vp.setStylePrimaryName(stylePrimaryName);
     }
 
     public void setContent(final Widget widget) {
-	contentPanel.setWidget(widget);
-	// refresh panel
-	setContentVisible(isContentVisible());
+        contentPanel.setWidget(widget);
+        // refresh panel
+        setContentVisible(isContentVisible());
     }
 
     public void setContentHeight(final String height) {
-	contentPanel.setHeight(height);
+        contentPanel.setHeight(height);
     }
 
     public void setContentVisible(final boolean visible) {
-	if (visible) {
-	    img.arrowDownWhite().applyTo(arrowImage);
-	    contentPanel.setVisible(true);
+        if (visible) {
+            img.arrowDownWhite().applyTo(arrowImage);
+            contentPanel.setVisible(true);
 
-	} else {
-	    img.arrowRightWhite().applyTo(arrowImage);
-	    contentPanel.setVisible(false);
-	}
+        } else {
+            img.arrowRightWhite().applyTo(arrowImage);
+            contentPanel.setVisible(false);
+        }
     }
 
     public void setHeaderText(final String text) {
-	titleLabel.setText(text);
+        titleLabel.setText(text);
     }
 
     public void setHeaderTitle(final String title) {
-	// QuickTips size problems with images
-	KuneUiUtils.setQuickTip(arrowImage, title);
-	KuneUiUtils.setQuickTip(titleLabel, title);
+        // QuickTips size problems with images
+        KuneUiUtils.setQuickTip(arrowImage, title);
+        KuneUiUtils.setQuickTip(titleLabel, title);
     }
 
     public void setHeight(final String height) {
-	super.setHeight(height);
-	outerBorder.setHeight(height);
+        super.setHeight(height);
+        outerBorder.setHeight(height);
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-	if (oldTheme != null) {
-	    final String oldThemeS = oldTheme.toString();
-	    // outerBorder.removeStyleDependentName(oldThemeS);
-	    vp.removeStyleDependentName(oldThemeS);
-	    titleHP.removeStyleDependentName(oldThemeS);
-	    contentPanel.removeStyleDependentName(oldThemeS);
-	}
-	final String newThemeS = newTheme.toString();
-	outerBorder.setCornerStyleName(stylePrimaryName + "-" + newThemeS);
-	// outerBorder.addStyleDependentName(newThemeS);
-	vp.addStyleDependentName(newThemeS);
-	titleHP.addStyleDependentName(newThemeS);
-	contentPanel.addStyleDependentName(newThemeS);
+        if (oldTheme != null) {
+            final String oldThemeS = oldTheme.toString();
+            // outerBorder.removeStyleDependentName(oldThemeS);
+            vp.removeStyleDependentName(oldThemeS);
+            titleHP.removeStyleDependentName(oldThemeS);
+            contentPanel.removeStyleDependentName(oldThemeS);
+        }
+        final String newThemeS = newTheme.toString();
+        outerBorder.setCornerStyleName(stylePrimaryName + "-" + newThemeS);
+        // outerBorder.addStyleDependentName(newThemeS);
+        vp.addStyleDependentName(newThemeS);
+        titleHP.addStyleDependentName(newThemeS);
+        contentPanel.addStyleDependentName(newThemeS);
     }
 
     public void setWidth(final String width) {
-	super.setWidth(width);
-	outerBorder.setWidth(width);
+        super.setWidth(width);
+        outerBorder.setWidth(width);
     }
 
 }

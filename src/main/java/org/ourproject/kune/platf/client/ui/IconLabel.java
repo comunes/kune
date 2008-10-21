@@ -58,10 +58,7 @@ import com.google.gwt.user.client.ui.Widget;
  * A widget that contains a icon and arbitrary text, <i>not</i> interpreted as
  * HTML.
  * 
- * <h3>CSS Style Rules</h3>
- * <ul class='css'>
- * <li>.kune-IconLabel { }</li>
- * </ul>
+ * <h3>CSS Style Rules</h3> <ul class='css'> <li>.kune-IconLabel { }</li> </ul>
  * 
  * <p>
  * <h3>Example</h3>
@@ -84,7 +81,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      * Creates an empty label with a icon.
      * 
      * @param image
-     *                the icon to add
+     *            the icon to add
      */
     private IconLabel(final AbstractImagePrototype image, final boolean leftIcon) {
         setElement(DOM.createDiv());
@@ -105,9 +102,9 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      * Creates a label with the specified text and a icon in the left.
      * 
      * @param image
-     *                the icon to add
+     *            the icon to add
      * @param text
-     *                the new label's text
+     *            the new label's text
      */
     public IconLabel(final AbstractImagePrototype image, final String text) {
         this(image, true);
@@ -118,9 +115,9 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      * Creates a label with the specified text and a icon in the right.
      * 
      * @param image
-     *                the icon to add
+     *            the icon to add
      * @param text
-     *                the new label's text
+     *            the new label's text
      */
     public IconLabel(final String text, final AbstractImagePrototype image) {
         this(image, false);
@@ -131,11 +128,11 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      * Creates a label with the specified text and a icon in the right.
      * 
      * @param image
-     *                the icon to add
+     *            the icon to add
      * @param text
-     *                the new label's text
+     *            the new label's text
      * @param wordWrap
-     *                <code>false</code> to disable word wrapping
+     *            <code>false</code> to disable word wrapping
      */
     public IconLabel(final String text, final AbstractImagePrototype image, final boolean wordWrap) {
         this(text, image);
@@ -146,11 +143,11 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      * Creates a label with the specified text and a icon in the left.
      * 
      * @param image
-     *                the icon to add
+     *            the icon to add
      * @param text
-     *                the new label's text
+     *            the new label's text
      * @param wordWrap
-     *                <code>false</code> to disable word wrapping
+     *            <code>false</code> to disable word wrapping
      */
     public IconLabel(final AbstractImagePrototype image, final String text, final boolean wordWrap) {
         this(image, text);

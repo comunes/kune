@@ -222,8 +222,8 @@ public class SignInPanel implements SignInView {
 
     public void showWelcolmeDialog() {
         if (welcomeDialog == null) {
-            welcomeDialog = new InfoDialog(i18n.t("Welcome"), i18n.t("Thanks for registering"), i18n
-                    .t("Now you can participate more actively in this site with other people and groups. "
+            welcomeDialog = new InfoDialog(i18n.t("Welcome"), i18n.t("Thanks for registering"),
+                    i18n.t("Now you can participate more actively in this site with other people and groups. "
                             + "You can also use your personal space to publish contents. "
                             + "Your email is not verified, please follow the instructions you will receive by email."),
                     i18n.t("Ok"), true, true, 400, 270);

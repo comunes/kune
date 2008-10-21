@@ -27,11 +27,12 @@ public class GroupDTO implements IsSerializable {
     private Long id;
     private String shortName;
     private String longName;
-    private GroupType type;
+    private GroupType groupType;
     private ContentSimpleDTO defaultContent;
-    private ContentSimpleDTO groupLogo;
+    private ContentSimpleDTO groupFullLogo;
     private LicenseDTO defaultLicense;
     private String workspaceTheme;
+    private boolean hasLogo;
 
     public GroupDTO() {
         this(null, null, GroupType.ORGANIZATION);
@@ -40,7 +41,7 @@ public class GroupDTO implements IsSerializable {
     public GroupDTO(final String shortName, final String longName, final GroupType type) {
         this.shortName = shortName;
         this.longName = longName;
-        this.type = type;
+        this.groupType = type;
     }
 
     @Override
@@ -70,8 +71,16 @@ public class GroupDTO implements IsSerializable {
         return defaultLicense;
     }
 
-    public ContentSimpleDTO getGroupLogo() {
-        return groupLogo;
+    public ContentSimpleDTO getGroupFullLogo() {
+        return groupFullLogo;
+    }
+
+    public GroupType getGroupType() {
+        return groupType;
+    }
+
+    public boolean getHasLogo() {
+        return hasLogo;
     }
 
     public Long getId() {
@@ -86,10 +95,6 @@ public class GroupDTO implements IsSerializable {
         return shortName;
     }
 
-    public GroupType getType() {
-        return type;
-    }
-
     public String getWorkspaceTheme() {
         return workspaceTheme;
     }
@@ -102,8 +107,12 @@ public class GroupDTO implements IsSerializable {
         result = prime * result + (id == null ? 0 : id.hashCode());
         result = prime * result + (longName == null ? 0 : longName.hashCode());
         result = prime * result + (shortName == null ? 0 : shortName.hashCode());
-        result = prime * result + (type == null ? 0 : type.hashCode());
+        result = prime * result + (groupType == null ? 0 : groupType.hashCode());
         return result;
+    }
+
+    public boolean hasLogo() {
+        return getHasLogo();
     }
 
     public void setDefaultContent(final ContentSimpleDTO defaultContent) {
@@ -114,8 +123,16 @@ public class GroupDTO implements IsSerializable {
         this.defaultLicense = defaultLicense;
     }
 
-    public void setGroupLogo(final ContentSimpleDTO groupLogo) {
-        this.groupLogo = groupLogo;
+    public void setGroupFullLogo(final ContentSimpleDTO groupFullLogo) {
+        this.groupFullLogo = groupFullLogo;
+    }
+
+    public void setGroupType(final GroupType groupType) {
+        this.groupType = groupType;
+    }
+
+    public void setHasLogo(boolean hasLogo) {
+        this.hasLogo = hasLogo;
     }
 
     public void setId(final Long id) {
@@ -128,10 +145,6 @@ public class GroupDTO implements IsSerializable {
 
     public void setShortName(final String shortName) {
         this.shortName = shortName;
-    }
-
-    public void setType(final GroupType type) {
-        this.type = type;
     }
 
     public void setWorkspaceTheme(final String workspaceTheme) {

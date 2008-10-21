@@ -38,54 +38,54 @@ public class ColorWebSafePalettePanel implements WebSafePaletteView {
     private PopupPanel popupPalette;
 
     public ColorWebSafePalettePanel(final ColorWebSafePalettePresenter initPresenter) {
-	this.presenter = initPresenter;
+        this.presenter = initPresenter;
     }
 
     public void hide() {
-	if (popupPalette != null) {
-	    popupPalette.hide();
-	}
+        if (popupPalette != null) {
+            popupPalette.hide();
+        }
     }
 
     public void show(final int left, final int top) {
-	if (paletteGrid == null) {
-	    createPalette();
-	}
-	popupPalette = new PopupPanel(true, true);
-	popupPalette.setVisible(false);
-	popupPalette.show();
-	popupPalette.setPopupPosition(left, top);
-	popupPalette.setWidget(paletteGrid);
-	popupPalette.setVisible(true);
+        if (paletteGrid == null) {
+            createPalette();
+        }
+        popupPalette = new PopupPanel(true, true);
+        popupPalette.setVisible(false);
+        popupPalette.show();
+        popupPalette.setPopupPosition(left, top);
+        popupPalette.setWidget(paletteGrid);
+        popupPalette.setVisible(true);
     }
 
     private void createPalette() {
-	paletteGrid = new Grid(ROWS, COLS);
+        paletteGrid = new Grid(ROWS, COLS);
 
-	paletteGrid.setCellSpacing(1);
-	// Put color values in the grid cells
+        paletteGrid.setCellSpacing(1);
+        // Put color values in the grid cells
 
-	int row;
-	int col;
-	int n = 0;
-	for (int a = 0; a < COLORS.length; a++) {
-	    for (int b = 0; b < COLORS.length; b++) {
-		for (int c = 0; c < COLORS.length; c++) {
-		    row = n / COLS;
-		    col = n % COLS;
-		    final String currentColor = "#" + COLORS[c] + COLORS[a] + COLORS[b];
-		    paletteGrid.setText(row, col, " ");
-		    DOM.setStyleAttribute(paletteGrid.getCellFormatter().getElement(row, col), "backgroundColor",
-			    currentColor);
-		    n++;
-		}
-	    }
-	}
-	paletteGrid.addStyleName("kune-WebSafePalette");
-	paletteGrid.addTableListener(new TableListener() {
-	    public void onCellClicked(final SourcesTableEvents sender, final int row, final int col) {
-		presenter.onColorSelected(row, col);
-	    }
-	});
+        int row;
+        int col;
+        int n = 0;
+        for (int a = 0; a < COLORS.length; a++) {
+            for (int b = 0; b < COLORS.length; b++) {
+                for (int c = 0; c < COLORS.length; c++) {
+                    row = n / COLS;
+                    col = n % COLS;
+                    final String currentColor = "#" + COLORS[c] + COLORS[a] + COLORS[b];
+                    paletteGrid.setText(row, col, " ");
+                    DOM.setStyleAttribute(paletteGrid.getCellFormatter().getElement(row, col), "backgroundColor",
+                                          currentColor);
+                    n++;
+                }
+            }
+        }
+        paletteGrid.addStyleName("kune-WebSafePalette");
+        paletteGrid.addTableListener(new TableListener() {
+            public void onCellClicked(final SourcesTableEvents sender, final int row, final int col) {
+                presenter.onColorSelected(row, col);
+            }
+        });
     }
 }

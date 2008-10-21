@@ -1,8 +1,9 @@
-package org.ourproject.kune.platf.server.manager.impl;
+package org.ourproject.kune.platf.server.manager.file;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.ourproject.kune.platf.server.manager.file.FileUtils;
 
 public class FileUtilsTest {
 
@@ -87,7 +88,7 @@ public class FileUtilsTest {
     @Test
     public void testIfSeq1WithExtreturn2WithExt() {
         assertEquals(SIMPLE_FILE_NAME + " 2" + EXT, FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME + " 1" + EXT,
-                true));
+                                                                                        true));
     }
 
     @Test

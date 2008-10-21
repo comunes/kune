@@ -54,71 +54,72 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
     private Provider<AccessService> accessServiceProvider;
 
     public Object invoke(final MethodInvocation invocation) throws Throwable {
-	final Object[] arguments = invocation.getArguments();
-	final StateToken token = (StateToken) arguments[1];
+        final Object[] arguments = invocation.getArguments();
+        final StateToken token = (StateToken) arguments[1];
 
-	final UserSession userSession = userSessionProvider.get();
-	final GroupManager groupManager = groupManagerProvider.get();
-	final AccessService accessService = accessServiceProvider.get();
+        final UserSession userSession = userSessionProvider.get();
+        final GroupManager groupManager = groupManagerProvider.get();
+        final AccessService accessService = accessServiceProvider.get();
 
-	final Authorizated authoAnnotation = invocation.getStaticPart().getAnnotation(Authorizated.class);
-	final AccessRol accessRol = authoAnnotation.accessRolRequired();
-	final ActionLevel actionLevel = authoAnnotation.actionLevel();
+        final Authorizated authoAnnotation = invocation.getStaticPart().getAnnotation(Authorizated.class);
+        final AccessRol accessRol = authoAnnotation.accessRolRequired();
+        final ActionLevel actionLevel = authoAnnotation.actionLevel();
 
-	final User user = userSession.getUser();
-	Group group = Group.NO_GROUP;
-	try {
-	    group = groupManager.findByShortName(token.getGroup());
-	} catch (final NoResultException e) {
-	    // continue, and check later
-	}
+        final User user = userSession.getUser();
+        Group group = Group.NO_GROUP;
+        try {
+            group = groupManager.findByShortName(token.getGroup());
+        } catch (final NoResultException e) {
+            // continue, and check later
+        }
 
-	switch (actionLevel) {
-	case content:
-	default:
-	    final Content content = accessService.accessToContent(ContentUtils.parseId(token.getDocument()), user,
-		    accessRol);
-	    if (!content.getContainer().getOwner().equals(group)) {
-		throw new AccessViolationException();
-	    }
-	    if (!content.getContainer().getId().equals(ContentUtils.parseId(token.getFolder()))) {
-		throw new AccessViolationException();
-	    }
-	    if (!content.getContainer().getToolName().equals(token.getTool())) {
-		throw new AccessViolationException();
-	    }
-	case container:
-	    final Container container = accessService.accessToContainer(ContentUtils.parseId(token.getFolder()), user,
-		    accessRol);
-	    if (!container.getOwner().equals(group)) {
-		throw new AccessViolationException();
-	    }
-	case tool:
-	case group:
-	    break;
-	}
+        switch (actionLevel) {
+        case content:
+        default:
+            final Content content = accessService.accessToContent(ContentUtils.parseId(token.getDocument()), user,
+                                                                  accessRol);
+            if (!content.getContainer().getOwner().equals(group)) {
+                throw new AccessViolationException();
+            }
+            if (!content.getContainer().getId().equals(ContentUtils.parseId(token.getFolder()))) {
+                throw new AccessViolationException();
+            }
+            if (!content.getContainer().getToolName().equals(token.getTool())) {
+                throw new AccessViolationException();
+            }
+        case container:
+            final Container container = accessService.accessToContainer(ContentUtils.parseId(token.getFolder()), user,
+                                                                        accessRol);
+            if (!container.getOwner().equals(group)) {
+                throw new AccessViolationException();
+            }
+        case tool:
+        case group:
+            break;
+        }
 
-	if (!correctMember(user, group, accessRol)) {
-	    throw new AccessViolationException();
-	}
+        if (!correctMember(user, group, accessRol)) {
+            throw new AccessViolationException();
+        }
 
-	return invocation.proceed();
+        return invocation.proceed();
     }
 
     private boolean correctMember(final User user, final Group group, final AccessRol memberType)
-	    throws AccessViolationException {
+            throws AccessViolationException {
 
-	final AccessRights accessRights = accessRightsServiceProvider.get().get(user,
-		group.getSocialNetwork().getAccessLists());
+        final AccessRights accessRights = accessRightsServiceProvider.get().get(
+                                                                                user,
+                                                                                group.getSocialNetwork().getAccessLists());
 
-	switch (memberType) {
-	case Administrator:
-	    return accessRights.isAdministrable();
-	case Editor:
-	    return accessRights.isEditable();
-	default:
-	    return accessRights.isVisible();
-	}
+        switch (memberType) {
+        case Administrator:
+            return accessRights.isAdministrable();
+        case Editor:
+            return accessRights.isEditable();
+        default:
+            return accessRights.isVisible();
+        }
     }
 
 }

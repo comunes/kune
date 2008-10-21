@@ -24,52 +24,52 @@ import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
 public interface SignInView extends View {
 
-    public void center();
+    void center();
 
-    public String getCountry();
+    String getCountry();
 
-    public String getEmail();
+    String getEmail();
 
-    public String getLanguage();
+    String getLanguage();
 
-    public String getLoginPassword();
+    String getLoginPassword();
 
-    public String getLongName();
+    String getLongName();
 
-    public String getNickOrEmail();
+    String getNickOrEmail();
 
-    public String getRegisterPassword();
+    String getRegisterPassword();
 
-    public String getRegisterPasswordDup();
+    String getRegisterPasswordDup();
 
-    public String getShortName();
+    String getShortName();
 
-    public String getTimezone();
+    String getTimezone();
 
-    public void hide();
+    void hide();
 
-    public void hideMessages();
+    void hideMessages();
 
-    public boolean isRegisterFormValid();
+    boolean isRegisterFormValid();
 
-    public boolean isSignInFormValid();
+    boolean isSignInFormValid();
 
-    public void maskProcessing();
+    void maskProcessing();
 
-    public void reset();
-
-    public void show();
-
-    public void showWelcolmeDialog();
-
-    public void unMask();
-
-    public boolean wantPersonalHomepage();
+    void reset();
 
     void setCookie(String userHash);
 
     void setRegisterMessage(String message, SiteErrorType type);
 
     void setSignInMessage(String message, SiteErrorType type);
+
+    void show();
+
+    void showWelcolmeDialog();
+
+    void unMask();
+
+    boolean wantPersonalHomepage();
 
 }

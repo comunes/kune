@@ -36,7 +36,7 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
         descriptor.setContainer(container);
-        expect(contentManager.find(1l)).andReturn(descriptor);
+        expect(contentManager.find(1L)).andReturn(descriptor);
         replay(contentManager);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
@@ -48,7 +48,7 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
         descriptor.setContainer(container);
-        expect(contentManager.find(1l)).andReturn(descriptor);
+        expect(contentManager.find(1L)).andReturn(descriptor);
         replay(contentManager);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
@@ -60,7 +60,7 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithId(1);
         descriptor.setContainer(container);
-        expect(contentManager.find(1l)).andReturn(descriptor);
+        expect(contentManager.find(1L)).andReturn(descriptor);
         replay(contentManager);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
@@ -95,10 +95,10 @@ public class FinderTest {
     public void testCompleteToken() throws Exception {
         final Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName", "toolName");
         final Content descriptor = new Content();
-        descriptor.setId(1l);
+        descriptor.setId(1L);
         descriptor.setContainer(container);
 
-        expect(contentManager.find(2l)).andReturn(descriptor);
+        expect(contentManager.find(2L)).andReturn(descriptor);
         replay(contentManager);
 
         final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", "2"), null);
@@ -109,7 +109,7 @@ public class FinderTest {
     @Test
     public void testDefaultGroupContent() throws Exception {
         final Group userGroup = new Group();
-        final Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
+        final Content descriptor = TestDomainHelper.createDescriptor(1L, "title", "content");
         userGroup.setDefaultContent(descriptor);
 
         final Content content = finder.getContent(new StateToken(), userGroup);
@@ -119,7 +119,7 @@ public class FinderTest {
     @Test
     public void testDefaultGroupContentHasDefLicense() throws Exception {
         final Group userGroup = new Group();
-        final Content descriptor = TestDomainHelper.createDescriptor(1l, "title", "content");
+        final Content descriptor = TestDomainHelper.createDescriptor(1L, "title", "content");
         userGroup.setDefaultContent(descriptor);
 
         final Content content = finder.getContent(new StateToken(), userGroup);
@@ -138,7 +138,7 @@ public class FinderTest {
     @Test
     public void testDocMissing() throws Exception {
         final Container container = new Container();
-        expect(containerManager.find(1l)).andReturn(container);
+        expect(containerManager.find(1L)).andReturn(container);
 
         replay(containerManager);
         final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", null), null);
@@ -166,7 +166,7 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
         descriptor.setContainer(container);
-        expect(contentManager.find(1l)).andReturn(descriptor);
+        expect(contentManager.find(1L)).andReturn(descriptor);
         replay(contentManager);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);

@@ -36,111 +36,111 @@ public class Access {
     private AccessRights groupRights;
 
     public Access(final Content descriptor, final Container container) {
-	setContent(descriptor);
-	setContainer(container);
+        setContent(descriptor);
+        setContainer(container);
     }
 
     public Container getContainer() {
-	return container;
+        return container;
     }
 
     public AccessLists getContainerAccessLists() {
-	return containerAccessLists;
+        return containerAccessLists;
     }
 
     public AccessRights getContainerRights() {
-	return containerRights;
+        return containerRights;
     }
 
     public Content getContent() {
-	return content;
+        return content;
     }
 
     public AccessLists getContentAccessLists() {
-	return contentAccessLists;
+        return contentAccessLists;
     }
 
     public AccessRights getContentRights() {
-	return contentRights;
+        return contentRights;
     }
 
     public AccessLists getGroupAccessLists() {
-	return groupAccessLists;
+        return groupAccessLists;
     }
 
     public AccessRights getGroupRights() {
-	return groupRights;
+        return groupRights;
     }
 
     public boolean hasContainerRights() {
-	return containerRights != null;
+        return containerRights != null;
     }
 
     public boolean hasContentRights() {
-	return contentRights != null;
+        return contentRights != null;
     }
 
     public boolean hasGroupRights() {
-	return groupRights != null;
+        return groupRights != null;
     }
 
     public void setContainer(final Container container) {
-	this.container = container;
-	containerAccessLists = container != null ? getContainerAccessLists(container) : null;
-	groupAccessLists = containerAccessLists;
+        this.container = container;
+        containerAccessLists = container != null ? getContainerAccessLists(container) : null;
+        groupAccessLists = containerAccessLists;
     }
 
     public void setContainerRights(final AccessRights accessRights) {
-	this.containerRights = accessRights;
-	if (equalsAccessLists()) {
-	    this.contentRights = accessRights;
-	}
+        this.containerRights = accessRights;
+        if (equalsAccessLists()) {
+            this.contentRights = accessRights;
+        }
     }
 
     public void setContent(final Content descriptor) {
-	this.content = descriptor;
-	contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
+        this.content = descriptor;
+        contentAccessLists = descriptor != null ? getContentAccessList(descriptor) : null;
     }
 
     public void setContentRights(final AccessRights accessRights) {
-	this.contentRights = accessRights;
-	if (equalsAccessLists()) {
-	    this.containerRights = accessRights;
-	}
+        this.contentRights = accessRights;
+        if (equalsAccessLists()) {
+            this.containerRights = accessRights;
+        }
     }
 
     public void setContentWidthFolderRights(final Content content) {
-	setContent(content);
-	this.contentRights = containerRights;
+        setContent(content);
+        this.contentRights = containerRights;
     }
 
     public void setGroupRights(final AccessRights accessRights) {
-	this.groupRights = accessRights;
+        this.groupRights = accessRights;
     }
 
     private boolean equalsAccessLists() {
-	if (contentAccessLists == containerAccessLists) {
-	    return true;
-	} else if (contentAccessLists != null) {
-	    return contentAccessLists.equals(containerAccessLists);
-	} else {
-	    return containerAccessLists.equals(contentAccessLists);
-	}
+        if (contentAccessLists == containerAccessLists) {
+            return true;
+        } else if (contentAccessLists != null) {
+            return contentAccessLists.equals(containerAccessLists);
+        } else {
+            return containerAccessLists.equals(contentAccessLists);
+        }
     }
 
     private AccessLists getContentAccessList(final Content descriptor) {
-	AccessLists accessLists;
-	if (descriptor.hasAccessList()) {
-	    accessLists = descriptor.getAccessLists();
-	} else {
-	    final SocialNetwork socialNetwork = descriptor.getContainer().getOwner().getSocialNetwork();
-	    accessLists = socialNetwork.getAccessLists();
-	}
-	return accessLists;
+        AccessLists accessLists;
+        if (descriptor.hasAccessList()) {
+            accessLists = descriptor.getAccessLists();
+        } else {
+            final SocialNetwork socialNetwork = descriptor.getContainer().getOwner().getSocialNetwork();
+            accessLists = socialNetwork.getAccessLists();
+        }
+        return accessLists;
     }
 
     private AccessLists getContainerAccessLists(final Container container) {
-	return container.getOwner().getSocialNetwork().getAccessLists();
+        return container.getOwner().getSocialNetwork().getAccessLists();
     }
 
 }

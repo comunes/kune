@@ -41,79 +41,79 @@ public class SiteMessagePanel extends SimpleMessagePanel implements SiteMessageV
     private final ExtElement extElem;
 
     public SiteMessagePanel(final MessagePresenter presenter, final boolean closable,
-	    final I18nUITranslationService i18n) {
-	final Images images = Images.App.getInstance();
-	timer = new Timer() {
-	    public void run() {
-		hide();
-		if (presenter != null) {
-		    presenter.resetMessage();
-		}
-	    }
-	};
+            final I18nUITranslationService i18n) {
+        final Images images = Images.App.getInstance();
+        timer = new Timer() {
+            public void run() {
+                hide();
+                if (presenter != null) {
+                    presenter.resetMessage();
+                }
+            }
+        };
 
-	if (closable) {
-	    final PushButton closeIcon = new PushButton(images.cross().createImage(), images.crossDark().createImage());
-	    KuneUiUtils.setQuickTip(closeIcon, i18n.t("Click to close"));
-	    add(closeIcon);
-	    closeIcon.addClickListener(new ClickListener() {
-		public void onClick(final Widget sender) {
-		    if (sender == closeIcon) {
-			setVisible(false);
-			hide();
-			if (presenter != null) {
-			    presenter.resetMessage();
-			}
-		    }
-		}
-	    });
-	    setCellVerticalAlignment(closeIcon, VerticalPanel.ALIGN_BOTTOM);
-	}
-	extElem = new ExtElement(this.getElement());
-	final int clientWidth = Window.getClientWidth();
-	adjustWidth(clientWidth);
-	Window.addWindowResizeListener(new WindowResizeListener() {
-	    public void onWindowResized(final int width, final int height) {
-		// Log.debug("Window width: " + width + ", height: " + height);
-		setXY(width);
-		adjustWidth(width);
-	    }
-	});
-	super.reset();
-	super.show();
-	extElem.setVisible(false, false);
-	RootPanel.get().add(this, calculateX(clientWidth), calculateY());
+        if (closable) {
+            final PushButton closeIcon = new PushButton(images.cross().createImage(), images.crossDark().createImage());
+            KuneUiUtils.setQuickTip(closeIcon, i18n.t("Click to close"));
+            add(closeIcon);
+            closeIcon.addClickListener(new ClickListener() {
+                public void onClick(final Widget sender) {
+                    if (sender == closeIcon) {
+                        setVisible(false);
+                        hide();
+                        if (presenter != null) {
+                            presenter.resetMessage();
+                        }
+                    }
+                }
+            });
+            setCellVerticalAlignment(closeIcon, VerticalPanel.ALIGN_BOTTOM);
+        }
+        extElem = new ExtElement(this.getElement());
+        final int clientWidth = Window.getClientWidth();
+        adjustWidth(clientWidth);
+        Window.addWindowResizeListener(new WindowResizeListener() {
+            public void onWindowResized(final int width, final int height) {
+                // Log.debug("Window width: " + width + ", height: " + height);
+                setXY(width);
+                adjustWidth(width);
+            }
+        });
+        super.reset();
+        super.show();
+        extElem.setVisible(false, false);
+        RootPanel.get().add(this, calculateX(clientWidth), calculateY());
     }
 
     @Override
     public void adjustWidth(final int windowWidth) {
-	super.adjustWidth(windowWidth);
+        super.adjustWidth(windowWidth);
     }
 
     public void hide() {
-	extElem.hide(true);
-	super.reset();
-	timer.cancel();
+        extElem.hide(true);
+        super.reset();
+        timer.cancel();
     }
 
     public void show() {
-	extElem.show(false);
-	// super.show();
-	timer.schedule(TIMEVISIBLE);
+        extElem.show(false);
+        // super.show();
+        timer.schedule(TIMEVISIBLE);
     }
 
     private int calculateX(final int clientWidth) {
-	final int x = clientWidth * 20 / 100 - 10;
-	// Log.debug("X: " + x);
-	return x;
+        final int x = clientWidth * 20 / 100 - 10;
+        // Log.debug("X: " + x);
+        return x;
     }
 
     private int calculateY() {
-	return 2;
+        return 2;
     }
 
     private void setXY(final int clientWidth) {
-	extElem.setXY(calculateX(clientWidth), calculateY(), false);
+        extElem.setXY(calculateX(clientWidth), calculateY(), false);
     }
 
 }

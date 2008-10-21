@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.Label;
 public class ChatRoomPanel implements ChatRoomView {
 
     public ChatRoomPanel(final WorkspaceSkeleton ws) {
-	ws.getEntityWorkspace().setContent(new Label("History of room conversations." + Site.IN_DEVELOPMENT));
+        ws.getEntityWorkspace().setContent(new Label("History of room conversations." + Site.IN_DEVELOPMENT));
     }
 
 }

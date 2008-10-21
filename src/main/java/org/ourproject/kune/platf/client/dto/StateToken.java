@@ -29,20 +29,20 @@ public class StateToken implements IsSerializable {
     private static final String[] EMPTY = new String[0];
 
     public static String encode(final String group, final String tool, final String folder, final String document) {
-	String encoded = "";
-	if (group != null) {
-	    encoded += group;
-	}
-	if (tool != null) {
-	    encoded += SEPARATOR + tool;
-	}
-	if (folder != null) {
-	    encoded += SEPARATOR + folder;
-	}
-	if (document != null) {
-	    encoded += SEPARATOR + document;
-	}
-	return encoded;
+        String encoded = "";
+        if (group != null) {
+            encoded += group;
+        }
+        if (tool != null) {
+            encoded += SEPARATOR + tool;
+        }
+        if (folder != null) {
+            encoded += SEPARATOR + folder;
+        }
+        if (document != null) {
+            encoded += SEPARATOR + document;
+        }
+        return encoded;
     }
     private String group;
     private String tool;
@@ -52,202 +52,202 @@ public class StateToken implements IsSerializable {
     private String encoded;
 
     public StateToken() {
-	this(null, null, null, null);
+        this(null, null, null, null);
     }
 
     public StateToken(final String encoded) {
-	parse(encoded);
+        parse(encoded);
     }
 
     public StateToken(final String group, final String tool) {
-	this(group, tool, null, null);
+        this(group, tool, null, null);
     }
 
     public StateToken(final String group, final String tool, final Long folder) {
-	this(group, tool, folder == null ? null : folder.toString(), null);
+        this(group, tool, folder == null ? null : folder.toString(), null);
     }
 
     public StateToken(final String group, final String tool, final String folder, final String document) {
-	this.setGroup(group);
-	this.setTool(tool);
-	this.setFolder(folder);
-	this.setDocument(document);
-	encoded = null;
+        this.setGroup(group);
+        this.setTool(tool);
+        this.setFolder(folder);
+        this.setDocument(document);
+        encoded = null;
     }
 
     public StateToken clearDocument() {
-	this.document = null;
-	encoded = null;
-	return this;
+        this.document = null;
+        encoded = null;
+        return this;
     }
 
     public StateToken clearFolder() {
-	this.folder = null;
-	encoded = null;
-	return this;
+        this.folder = null;
+        encoded = null;
+        return this;
     }
 
     public StateToken clone() {
-	return new StateToken(this.getEncoded());
+        return new StateToken(this.getEncoded());
     }
 
     @Override
     public boolean equals(final Object obj) {
-	if (this == obj) {
-	    return true;
-	}
-	if (obj == null) {
-	    return false;
-	}
-	final StateToken other = (StateToken) obj;
-	if (getEncoded() == null) {
-	    if (other.getEncoded() != null) {
-		return false;
-	    }
-	} else if (!getEncoded().equals(other.getEncoded())) {
-	    return false;
-	}
-	return true;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        final StateToken other = (StateToken) obj;
+        if (getEncoded() == null) {
+            if (other.getEncoded() != null) {
+                return false;
+            }
+        } else if (!getEncoded().equals(other.getEncoded())) {
+            return false;
+        }
+        return true;
     }
 
     public String getDocument() {
-	return document;
+        return document;
     }
 
     public String getEncoded() {
-	if (encoded == null) {
-	    encoded = StateToken.encode(getGroup(), getTool(), getFolder(), getDocument());
-	}
-	return encoded;
+        if (encoded == null) {
+            encoded = StateToken.encode(getGroup(), getTool(), getFolder(), getDocument());
+        }
+        return encoded;
     }
 
     public String getFolder() {
-	return folder;
+        return folder;
     }
 
     public String getGroup() {
-	return group;
+        return group;
     }
 
     public String getPublicUrl() {
-	String publicUrl = "http://";
+        String publicUrl = "http://";
 
-	if (group != null) {
-	    publicUrl += group + SEPARATOR;
-	}
+        if (group != null) {
+            publicUrl += group + SEPARATOR;
+        }
 
-	// FIXME: Maybe get from InitData the site.domain
-	publicUrl += WindowUtils.getLocation().getHostName() + "/";
+        // FIXME: Maybe get from InitData the site.domain
+        publicUrl += WindowUtils.getLocation().getHostName() + "/";
 
-	if (tool != null) {
-	    publicUrl += tool;
-	}
-	if (folder != null) {
-	    publicUrl += SEPARATOR + folder;
-	}
-	if (document != null) {
-	    publicUrl += SEPARATOR + document;
-	}
+        if (tool != null) {
+            publicUrl += tool;
+        }
+        if (folder != null) {
+            publicUrl += SEPARATOR + folder;
+        }
+        if (document != null) {
+            publicUrl += SEPARATOR + document;
+        }
 
-	return publicUrl;
+        return publicUrl;
     }
 
     public String getTool() {
-	return tool;
+        return tool;
     }
 
     public boolean hasAll() {
-	return getGroup() != null && getTool() != null && getFolder() != null && getDocument() != null;
+        return getGroup() != null && getTool() != null && getFolder() != null && getDocument() != null;
     }
 
     public boolean hasGroup() {
-	return getGroup() != null;
+        return getGroup() != null;
     }
 
     public boolean hasGroupAndTool() {
-	return getGroup() != null && getTool() != null;
+        return getGroup() != null && getTool() != null;
     }
 
     public boolean hasGroupToolAndFolder() {
-	return getGroup() != null && getTool() != null && getFolder() != null;
+        return getGroup() != null && getTool() != null && getFolder() != null;
     }
 
     @Override
     public int hashCode() {
-	return getEncoded().hashCode();
+        return getEncoded().hashCode();
     }
 
     public boolean hasNothing() {
-	return getGroup() == null && getTool() == null && getFolder() == null && getDocument() == null;
+        return getGroup() == null && getTool() == null && getFolder() == null && getDocument() == null;
     }
 
     public boolean isComplete() {
-	return getDocument() != null;
+        return getDocument() != null;
     }
 
     public StateToken setDocument(final Long document) {
-	this.document = document == null ? null : document.toString();
-	encoded = null;
-	return this;
+        this.document = document == null ? null : document.toString();
+        encoded = null;
+        return this;
     }
 
     public StateToken setDocument(final String document) {
-	this.document = document;
-	encoded = null;
-	return this;
+        this.document = document;
+        encoded = null;
+        return this;
     }
 
     public void setEncoded(final String encoded) {
-	parse(encoded);
+        parse(encoded);
     }
 
     public StateToken setFolder(final Long folder) {
-	this.folder = folder == null ? null : folder.toString();
-	encoded = null;
-	return this;
+        this.folder = folder == null ? null : folder.toString();
+        encoded = null;
+        return this;
     }
 
     public StateToken setFolder(final String folder) {
-	this.folder = folder;
-	encoded = null;
-	return this;
+        this.folder = folder;
+        encoded = null;
+        return this;
     }
 
     public StateToken setGroup(final String group) {
-	this.group = group;
-	encoded = null;
-	return this;
+        this.group = group;
+        encoded = null;
+        return this;
     }
 
     public StateToken setTool(final String tool) {
-	this.tool = tool;
-	encoded = null;
-	return this;
+        this.tool = tool;
+        encoded = null;
+        return this;
     }
 
     public String toString() {
-	return getEncoded();
+        return getEncoded();
     }
 
     private String conditionalAssign(final int index, final String[] splitted) {
-	if (splitted.length > index) {
-	    return splitted[index];
-	} else {
-	    return null;
-	}
+        if (splitted.length > index) {
+            return splitted[index];
+        } else {
+            return null;
+        }
     }
 
     private void parse(final String encoded) {
-	String[] splitted;
-	if (encoded != null && encoded.length() > 0) {
-	    splitted = encoded.split("\\.");
-	} else {
-	    splitted = EMPTY;
-	}
-	setGroup(conditionalAssign(0, splitted));
-	setTool(conditionalAssign(1, splitted));
-	setFolder(conditionalAssign(2, splitted));
-	setDocument(conditionalAssign(3, splitted));
+        String[] splitted;
+        if (encoded != null && encoded.length() > 0) {
+            splitted = encoded.split("\\.");
+        } else {
+            splitted = EMPTY;
+        }
+        setGroup(conditionalAssign(0, splitted));
+        setTool(conditionalAssign(1, splitted));
+        setFolder(conditionalAssign(2, splitted));
+        setDocument(conditionalAssign(3, splitted));
     }
 
 }

@@ -26,34 +26,34 @@ import com.google.gwt.user.client.ui.MouseListener;
 
 public interface AbstractLabel {
 
-    public void addClickListener(final ClickListener listener);
+    void addClickListener(final ClickListener listener);
 
-    public void addMouseListener(final MouseListener listener);
+    void addDoubleClickListener(ClickListener listener);
 
-    public String getText();
+    void addMouseListener(final MouseListener listener);
 
-    public Element getElement();
+    void addStyleDependentName(String string);
 
-    public void onBrowserEvent(final Event event);
+    Element getElement();
 
-    public void removeClickListener(final ClickListener listener);
+    String getText();
 
-    public void removeMouseListener(final MouseListener listener);
+    void onBrowserEvent(final Event event);
 
-    public void setText(final String text);
+    void removeClickListener(final ClickListener listener);
 
-    public void setColor(final String color);
+    void removeDoubleClickListener(ClickListener listener);
 
-    public void setTitle(final String title);
+    void removeMouseListener(final MouseListener listener);
 
-    public void addStyleDependentName(String string);
+    void removeStyleDependentName(String string);
 
-    public void removeStyleDependentName(String string);
+    void setColor(final String color);
 
-    public void setStylePrimaryName(String string);
+    void setStylePrimaryName(String string);
 
-    public void addDoubleClickListener(ClickListener listener);
+    void setText(final String text);
 
-    public void removeDoubleClickListener(ClickListener listener);
+    void setTitle(final String title);
 
 }

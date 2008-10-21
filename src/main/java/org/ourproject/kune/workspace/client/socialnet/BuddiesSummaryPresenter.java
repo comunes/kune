@@ -55,13 +55,14 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
     }
 
     protected void setState(StateDTO state) {
-        if (state.getGroup().getType().equals(GroupType.PERSONAL)) {
+        if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
             view.clear();
             UserBuddiesDataDTO userBuddies = state.getUserBuddies();
             List<UserSimpleDTO> buddies = userBuddies.getBuddies();
             for (UserSimpleDTO user : buddies) {
-                view.addBuddie(user, actionRegistry.getCurrentActions(user, UserActionRegistry.GENERAL, session
-                        .isLogged(), new AccessRightsDTO(true, true, true), false));
+                view.addBuddie(user, actionRegistry.getCurrentActions(user, UserActionRegistry.GENERAL,
+                                                                      session.isLogged(), new AccessRightsDTO(true,
+                                                                              true, true), false));
             }
             boolean hasLocalBuddies = buddies.size() > 0;
             int numExtBuddies = userBuddies.getOtherExternalBuddies();
@@ -69,10 +70,11 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
                 if (hasLocalBuddies) {
                     // i18n: plural
                     view.setOtherUsers(i18n.t(
-                            numExtBuddies == 1 ? "and [%d] external user" : "and [%d] external users", numExtBuddies));
+                                              numExtBuddies == 1 ? "and [%d] external user" : "and [%d] external users",
+                                              numExtBuddies));
                 } else {
                     view.setOtherUsers(i18n.t(numExtBuddies == 1 ? "[%d] external user" : "[%d] external users",
-                            numExtBuddies));
+                                              numExtBuddies));
                 }
             } else {
                 if (hasLocalBuddies) {

@@ -21,8 +21,8 @@ package org.ourproject.kune.workspace.client.search;
 
 public interface SiteSearcher {
 
-    public void doSearch(String termToSearch);
+    void doSearch(String termToSearch);
 
-    public void doSearchOfType(String termToSearch, SiteSearcherType type);
+    void doSearchOfType(String termToSearch, SiteSearcherType type);
 
 }

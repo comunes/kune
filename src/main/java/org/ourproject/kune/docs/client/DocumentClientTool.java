@@ -52,69 +52,69 @@ public class DocumentClientTool extends AbstractClientTool {
     private final ContentIconsRegistry contentIconsRegistry;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-	    final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-	    final Provider<DocumentContext> documentContextProvider,
-	    final Provider<ContentServiceAsync> contentServiceProvider,
-	    final ContentActionRegistry contentActionRegistry, final DragDropContentRegistry dragDropContentRegistry,
-	    final ContentIconsRegistry contentIconsRegistry) {
-	super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws);
-	this.documentContextProvider = documentContextProvider;
-	this.dragDropContentRegistry = dragDropContentRegistry;
-	this.contentIconsRegistry = contentIconsRegistry;
-	registerDragDropTypes();
-	registerIcons();
+            final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
+            final Provider<DocumentContext> documentContextProvider,
+            final Provider<ContentServiceAsync> contentServiceProvider,
+            final ContentActionRegistry contentActionRegistry, final DragDropContentRegistry dragDropContentRegistry,
+            final ContentIconsRegistry contentIconsRegistry) {
+        super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws);
+        this.documentContextProvider = documentContextProvider;
+        this.dragDropContentRegistry = dragDropContentRegistry;
+        this.contentIconsRegistry = contentIconsRegistry;
+        registerDragDropTypes();
+        registerIcons();
     }
 
     public String getName() {
-	return NAME;
+        return NAME;
     }
 
     @Deprecated
     public void onCancel() {
-	documentContextProvider.get().showFolders();
+        documentContextProvider.get().showFolders();
     }
 
     @Deprecated
     public void onEdit() {
-	documentContextProvider.get().showAdmin();
+        documentContextProvider.get().showAdmin();
     }
 
     private void registerDragDropTypes() {
-	dragDropContentRegistry.registerDraggableType(TYPE_DOCUMENT);
-	dragDropContentRegistry.registerDraggableType(TYPE_FOLDER);
-	dragDropContentRegistry.registerDraggableType(TYPE_UPLOADEDFILE);
+        dragDropContentRegistry.registerDraggableType(TYPE_DOCUMENT);
+        dragDropContentRegistry.registerDraggableType(TYPE_FOLDER);
+        dragDropContentRegistry.registerDraggableType(TYPE_UPLOADEDFILE);
 
-	dragDropContentRegistry.registerDroppableType(TYPE_ROOT);
-	dragDropContentRegistry.registerDroppableType(TYPE_FOLDER);
-	dragDropContentRegistry.registerDroppableType(TYPE_GALLERY);
+        dragDropContentRegistry.registerDroppableType(TYPE_ROOT);
+        dragDropContentRegistry.registerDroppableType(TYPE_FOLDER);
+        dragDropContentRegistry.registerDroppableType(TYPE_GALLERY);
     }
 
     private void registerIcons() {
-	contentIconsRegistry.registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_WIKI, "images/nav/wiki.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("image"),
-		"images/nav/picture.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("video"),
-		"images/nav/film.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "pdf"),
-		"images/nav/page_pdf.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
-		"images/nav/page_zip.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
-		"images/nav/page_zip.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("text"),
-		"images/nav/page_text.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "msword"),
-		"images/nav/page_word.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "excel"),
-		"images/nav/page_excel.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application",
-		"mspowerpoint"), "images/nav/page_pps.png");
-	contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, "images/nav/page.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_WIKI, "images/nav/wiki.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("image"),
+                                                     "images/nav/picture.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("video"),
+                                                     "images/nav/film.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "pdf"),
+                                                     "images/nav/page_pdf.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
+                                                     "images/nav/page_zip.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
+                                                     "images/nav/page_zip.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("text"),
+                                                     "images/nav/page_text.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "msword"),
+                                                     "images/nav/page_word.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "excel"),
+                                                     "images/nav/page_excel.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application",
+                "mspowerpoint"), "images/nav/page_pps.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, "images/nav/page.png");
     }
 }

@@ -17,10 +17,6 @@ public class ImageData {
     private String keyword[] = null;
     private String lastModified = null;
 
-    public String getName() {
-        return name;
-    }
-
     public void clear() {
         name = null;
         url = null;
@@ -31,66 +27,71 @@ public class ImageData {
         keyword = null;
     }
 
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(final String url) {
-        this.url = url;
-    }
-
     public String getFileName() {
         return fileName;
-    }
-
-    public void setFileName(final String fileName) {
-        this.fileName = fileName;
-    }
-
-    public long getSize() {
-        return size;
-    }
-
-    public void setSize(final long size) {
-        this.size = size;
-    }
-
-    public String getSearchString() {
-        return searchString;
-    }
-
-    public void setSearchString(final String searchString) {
-        this.searchString = searchString;
     }
 
     public String getFoundLocation() {
         return foundLocation;
     }
 
-    public void setFoundLocation(final String foundLocation) {
-        this.foundLocation = foundLocation;
-    }
-
     public String[] getKeyword() {
         return keyword;
-    }
-
-    public void setKeyword(final String[] keyword) {
-        this.keyword = keyword;
     }
 
     public String getLastModified() {
         return lastModified;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setFileName(final String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setFoundLocation(final String foundLocation) {
+        this.foundLocation = foundLocation;
+    }
+
+    public void setKeyword(final String[] keyword) {
+        this.keyword = keyword;
+    }
+
     public void setLastModified(final String lastModified) {
         this.lastModified = lastModified;
     }
 
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public void setSearchString(final String searchString) {
+        this.searchString = searchString;
+    }
+
+    public void setSize(final long size) {
+        this.size = size;
+    }
+
+    public void setUrl(final String url) {
+        this.url = url;
+    }
+
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("ImageData[");

@@ -24,8 +24,8 @@ import org.ourproject.kune.platf.client.View;
 
 public interface DocumentReaderView extends View {
 
-    public void setContent(String content);
+    void setContent(String content);
 
-    public void showImage(String imageUrl, String imageResizedUrl);
+    void showImage(String imageUrl, String imageResizedUrl);
 
 }

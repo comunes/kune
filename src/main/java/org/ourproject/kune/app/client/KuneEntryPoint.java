@@ -39,20 +39,20 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoad() {
-	Log.setUncaughtExceptionHandler();
+        Log.setUncaughtExceptionHandler();
 
-	// At the moment, in runtime:
-	Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
+        // At the moment, in runtime:
+        Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
 
-	DeferredCommand.addCommand(new Command() {
-	    public void execute() {
-		onModuleLoadCont();
-	    }
-	});
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                onModuleLoadCont();
+            }
+        });
     }
 
     public void onModuleLoadCont() {
-	Suco.install(new KuneCoreModule(), new KunePlatformModule(), new KuneWorkspaceModule(), new EmiteUIModule(),
-		new DocumentClientModule(), new ChatClientModule(), new KuneModule());
+        Suco.install(new KuneCoreModule(), new KunePlatformModule(), new KuneWorkspaceModule(), new EmiteUIModule(),
+                     new DocumentClientModule(), new ChatClientModule(), new KuneModule());
     }
 }

@@ -28,11 +28,11 @@ public class FolderViewerPresenter implements FolderViewer {
     private final FolderViewerView view;
 
     public FolderViewerPresenter(final FolderViewerView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void setFolder(final ContainerDTO folder) {

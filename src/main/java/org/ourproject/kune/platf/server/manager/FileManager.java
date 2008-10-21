@@ -9,9 +9,9 @@ public interface FileManager {
      * Create a new file adding a numeric sequence if the file already exists
      * 
      * @param dir
-     *                the directory (use File.separator for dir delimiters)
+     *            the directory (use File.separator for dir delimiters)
      * @param fileName
-     *                (the new file name)
+     *            (the new file name)
      * @return if 'file.txt' exists it creates 'file 1.txt' and if 'file 1.txt'
      *         exists it creates 'file 2.txt' and so on
      * @throws IOException
@@ -20,7 +20,7 @@ public interface FileManager {
 
     /**
      * @param dir
-     *                the directory (use File.separator for dir delimiters)
+     *            the directory (use File.separator for dir delimiters)
      * @return true if and only if the directory was created, along with all
      *         necessary parent directories; false otherwise
      */
@@ -28,7 +28,7 @@ public interface FileManager {
 
     /**
      * @param dir
-     *                the directory (use File.separator for dir delimiters)
+     *            the directory (use File.separator for dir delimiters)
      */
     void rmdir(String dir);
 

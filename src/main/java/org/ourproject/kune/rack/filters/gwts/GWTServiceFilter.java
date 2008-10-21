@@ -43,23 +43,23 @@ public class GWTServiceFilter extends InjectedFilter {
     private final DelegatedRemoteServlet servlet;
 
     public GWTServiceFilter(final Class<? extends RemoteService> serviceClass) {
-	this.serviceClass = serviceClass;
-	this.servlet = new DelegatedRemoteServlet();
+        this.serviceClass = serviceClass;
+        this.servlet = new DelegatedRemoteServlet();
     }
 
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
-	    throws IOException, ServletException {
-	log.info("--------------------------------------------------------------------------------");
-	log.debug("SERVICE: " + RackHelper.getURI(request) + " - " + serviceClass.getSimpleName());
-	final RemoteService service = getInstance(serviceClass);
-	servlet.setService(service);
-	servlet.doPost((HttpServletRequest) request, (HttpServletResponse) response);
+            throws IOException, ServletException {
+        log.info("--------------------------------------------------------------------------------");
+        log.debug("SERVICE: " + RackHelper.getURI(request) + " - " + serviceClass.getSimpleName());
+        final RemoteService service = getInstance(serviceClass);
+        servlet.setService(service);
+        servlet.doPost((HttpServletRequest) request, (HttpServletResponse) response);
     }
 
     @Override
     public void init(final FilterConfig filterConfig) throws ServletException {
-	super.init(filterConfig);
-	servlet.setServletContext(filterConfig.getServletContext());
+        super.init(filterConfig);
+        servlet.setServletContext(filterConfig.getServletContext());
     }
 
 }

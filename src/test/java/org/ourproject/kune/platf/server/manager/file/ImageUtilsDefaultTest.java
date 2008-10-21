@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.manager.impl;
+package org.ourproject.kune.platf.server.manager.file;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -24,7 +24,7 @@ import org.junit.Test;
  */
 public class ImageUtilsDefaultTest {
 
-    private static final String IMG_PATH = "src/test/java/org/ourproject/kune/platf/server/manager/impl/";
+    private static final String IMG_PATH = "src/test/java/org/ourproject/kune/platf/server/manager/file/";
     private static String[] images = { "orig.png", "orig.gif", "orig.jpg", "orig.tiff" };
     private static String imageDest;
 

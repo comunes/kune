@@ -8,8 +8,8 @@ public class KunePropertiesTest {
 
     @Test
     public void testLoading() {
-	KunePropertiesDefault properties = new KunePropertiesDefault("test.file.properties");
-	assertEquals("value", properties.get("key"));
+        KunePropertiesDefault properties = new KunePropertiesDefault("test.file.properties");
+        assertEquals("value", properties.get("key"));
     }
 
 }

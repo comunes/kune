@@ -26,14 +26,17 @@ import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -62,7 +65,7 @@ public class Group implements HasId {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    GroupType type;
+    GroupType groupType;
 
     @Id
     @DocumentId
@@ -84,7 +87,7 @@ public class Group implements HasId {
     private Content defaultContent;
 
     @OneToOne
-    private Content groupLogo;
+    private Content groupFullLogo;
 
     @OneToOne(cascade = CascadeType.ALL)
     private SocialNetwork socialNetwork;
@@ -96,6 +99,12 @@ public class Group implements HasId {
     private final Map<String, ToolConfiguration> toolsConfig;
 
     private String workspaceTheme;
+
+    @Lob
+    private byte[] logo;
+
+    @Embedded
+    private BasicMimeType logoMime;
 
     public Group() {
         this(null, null, null, null);
@@ -111,7 +120,7 @@ public class Group implements HasId {
         this.toolsConfig = new HashMap<String, ToolConfiguration>();
         this.socialNetwork = new SocialNetwork();
         this.defaultLicense = defaultLicense;
-        this.type = type;
+        this.groupType = type;
         this.admissionType = AdmissionType.Moderated;
     }
 
@@ -178,12 +187,28 @@ public class Group implements HasId {
         return defaultLicense;
     }
 
-    public Content getGroupLogo() {
-        return groupLogo;
+    public Content getGroupFullLogo() {
+        return groupFullLogo;
+    }
+
+    public GroupType getGroupType() {
+        return groupType;
+    }
+
+    public boolean getHasLogo() {
+        return hasLogo();
     }
 
     public Long getId() {
         return id;
+    }
+
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public BasicMimeType getLogoMime() {
+        return logoMime;
     }
 
     public String getLongName() {
@@ -210,10 +235,6 @@ public class Group implements HasId {
         return toolsConfig;
     }
 
-    public GroupType getType() {
-        return type;
-    }
-
     public String getWorkspaceTheme() {
         return workspaceTheme;
     }
@@ -224,6 +245,11 @@ public class Group implements HasId {
         int result = 1;
         result = prime * result + (shortName == null ? 0 : shortName.hashCode());
         return result;
+    }
+
+    @Transient
+    public boolean hasLogo() {
+        return (logo != null && logo.length > 0 && logoMime != null);
     }
 
     public void setAdmissionType(final AdmissionType admissionType) {
@@ -238,12 +264,24 @@ public class Group implements HasId {
         this.defaultLicense = defaultLicense;
     }
 
-    public void setGroupLogo(final Content groupLogo) {
-        this.groupLogo = groupLogo;
+    public void setGroupFullLogo(final Content groupFullLogo) {
+        this.groupFullLogo = groupFullLogo;
+    }
+
+    public void setGroupType(final GroupType groupType) {
+        this.groupType = groupType;
     }
 
     public void setId(final Long id) {
         this.id = id;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    public void setLogoMime(BasicMimeType logoMime) {
+        this.logoMime = logoMime;
     }
 
     public void setLongName(final String longName) {
@@ -261,10 +299,6 @@ public class Group implements HasId {
     public ToolConfiguration setToolConfig(final String name, final ToolConfiguration config) {
         toolsConfig.put(name, config);
         return config;
-    }
-
-    public void setType(final GroupType type) {
-        this.type = type;
     }
 
     public void setWorkspaceTheme(final String workspaceTheme) {

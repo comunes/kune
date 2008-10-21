@@ -21,23 +21,23 @@
 package org.ourproject.kune.platf.server.properties;
 
 public interface KuneProperties {
-    public String DEFAULT_SITE_SHORT_NAME = "kune.default.site.shortName";
-    public String SITE_DOMAIN = "kune.site.domain";
-    public String CHAT_HTTP_BASE = "kune.chat.httpbase";
-    public String CHAT_DOMAIN = "kune.chat.domain";
-    public String CHAT_ROOM_HOST = "kune.chat.roomHost";
-    public String WS_THEMES_DEF = "kune.wsthemes.default";
-    public String WS_THEMES = "kune.wsthemes";
-    public String SITE_LOGO_URL = "kune.sitelogourl";
-    public String UPLOAD_GALLERY_PERMITTED_EXTS = "kune.upload.gallerypermittedextensions";
-    public String UPLOAD_MAX_FILE_SIZE = "kune.upload.maxfilesizeinmegas";
-    public String UPLOAD_LOCATION = "kune.upload.location";
-    public String IMAGES_RESIZEWIDTH = "kune.images.resizewidth";
-    public String IMAGES_THUMBSIZE = "kune.images.thumbsize";
-    public String IMAGES_CROPSIZE = "kune.images.cropsize";
-    public String IMAGES_ICONSIZE = "kune.images.iconsize";
+    String DEFAULT_SITE_SHORT_NAME = "kune.default.site.shortName";
+    String SITE_DOMAIN = "kune.site.domain";
+    String CHAT_HTTP_BASE = "kune.chat.httpbase";
+    String CHAT_DOMAIN = "kune.chat.domain";
+    String CHAT_ROOM_HOST = "kune.chat.roomHost";
+    String WS_THEMES_DEF = "kune.wsthemes.default";
+    String WS_THEMES = "kune.wsthemes";
+    String SITE_LOGO_URL = "kune.sitelogourl";
+    String UPLOAD_GALLERY_PERMITTED_EXTS = "kune.upload.gallerypermittedextensions";
+    String UPLOAD_MAX_FILE_SIZE = "kune.upload.maxfilesizeinmegas";
+    String UPLOAD_LOCATION = "kune.upload.location";
+    String IMAGES_RESIZEWIDTH = "kune.images.resizewidth";
+    String IMAGES_THUMBSIZE = "kune.images.thumbsize";
+    String IMAGES_CROPSIZE = "kune.images.cropsize";
+    String IMAGES_ICONSIZE = "kune.images.iconsize";
 
-    public String get(String key);
+    String get(String key);
 
-    public String get(String key, String defaultValue);
+    String get(String key, String defaultValue);
 }

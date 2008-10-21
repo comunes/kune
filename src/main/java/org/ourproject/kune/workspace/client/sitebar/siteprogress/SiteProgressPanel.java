@@ -18,29 +18,29 @@ public class SiteProgressPanel implements SiteProgressView {
     private final Provider<SitePublicSpaceLink> publicLinkProvider;
 
     public SiteProgressPanel(final SiteProgressPresenter presenter,
-	    final Provider<SitePublicSpaceLink> publicLinkProvider) {
-	this.publicLinkProvider = publicLinkProvider;
-	progressPanel = RootPanel.get("kuneprogresspanel");
-	progressText = RootPanel.get("kuneprogresstext");
+            final Provider<SitePublicSpaceLink> publicLinkProvider) {
+        this.publicLinkProvider = publicLinkProvider;
+        progressPanel = RootPanel.get("kuneprogresspanel");
+        progressText = RootPanel.get("kuneprogresstext");
     }
 
     public void hideProgress() {
-	timeProgressMaxTime.cancel();
-	progressPanel.setVisible(false);
-	publicLinkProvider.get().setVisible(true);
+        timeProgressMaxTime.cancel();
+        progressPanel.setVisible(false);
+        publicLinkProvider.get().setVisible(true);
     }
 
     public void showProgress(final String text) {
-	if (timeProgressMaxTime == null) {
-	    timeProgressMaxTime = new Timer() {
-		public void run() {
-		    hideProgress();
-		}
-	    };
-	}
-	timeProgressMaxTime.schedule(MAX_TIME_PROGRESS_BAR);
-	publicLinkProvider.get().setVisible(false);
-	progressPanel.setVisible(true);
-	DOM.setInnerText(progressText.getElement(), text);
+        if (timeProgressMaxTime == null) {
+            timeProgressMaxTime = new Timer() {
+                public void run() {
+                    hideProgress();
+                }
+            };
+        }
+        timeProgressMaxTime.schedule(MAX_TIME_PROGRESS_BAR);
+        publicLinkProvider.get().setVisible(false);
+        progressPanel.setVisible(true);
+        DOM.setInnerText(progressText.getElement(), text);
     }
 }

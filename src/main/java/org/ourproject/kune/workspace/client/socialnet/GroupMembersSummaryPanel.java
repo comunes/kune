@@ -37,9 +37,9 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         this.presenter = presenter;
         this.i18n = i18n;
 
-        final GridDragConfiguration dragConf = new GridDragConfiguration(UserGridPanel.USER_GROUP_DD, i18n
-                .t("Drop in the chat area to start a chat.")
-                + "<br/>" + i18n.t("Drop into a room to invite the user to join the chat room"));
+        final GridDragConfiguration dragConf = new GridDragConfiguration(UserGridPanel.USER_GROUP_DD,
+                i18n.t("Drop in the chat area to start a chat.") + "<br/>"
+                        + i18n.t("Drop into a room to invite the user to join the chat room"));
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
                 + "please request to join to work on it"), dragConf, true, true, false, true, false);
         gridMenuPanel.setBorder(true);
@@ -112,17 +112,17 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     public void confirmAddCollab(final String groupShortName, final String groupLongName) {
         final String groupName = groupLongName + " (" + groupShortName + ")";
         MessageBox.confirm(i18n.t("Confirm addition of member"), i18n.t("Add [%s] as member?", groupName),
-                new MessageBox.ConfirmCallback() {
-                    public void execute(final String btnID) {
-                        if (btnID.equals("yes")) {
-                            DeferredCommand.addCommand(new Command() {
-                                public void execute() {
-                                    presenter.addCollab(groupShortName);
-                                }
-                            });
-                        }
-                    }
-                });
+                           new MessageBox.ConfirmCallback() {
+                               public void execute(final String btnID) {
+                                   if (btnID.equals("yes")) {
+                                       DeferredCommand.addCommand(new Command() {
+                                           public void execute() {
+                                               presenter.addCollab(groupShortName);
+                                           }
+                                       });
+                                   }
+                               }
+                           });
     }
 
     @Override

@@ -26,38 +26,38 @@ public class KuneStringUtils {
      * This method escape only some dangerous html chars
      */
     public static String escapeHtmlLight(final String textOrig) {
-	String text = textOrig;
-	text = text.replaceAll("&", "&amp;");
-	text = text.replaceAll("\"", "&quot;");
-	// text = text.replaceAll("\'", "&#039;");
-	text = text.replaceAll("<", "&lt;");
-	text = text.replaceAll(">", "&gt;");
-	return text;
+        String text = textOrig;
+        text = text.replaceAll("&", "&amp;");
+        text = text.replaceAll("\"", "&quot;");
+        // text = text.replaceAll("\'", "&#039;");
+        text = text.replaceAll("<", "&lt;");
+        text = text.replaceAll(">", "&gt;");
+        return text;
     }
 
     public static String generateHtmlLink(final String href, final String text) {
-	return "<a href=\"" + href + "\" target=\"_blank\">" + text + "</a>";
+        return "<a href=\"" + href + "\" target=\"_blank\">" + text + "</a>";
     }
 
     public static ArrayList<String> splitTags(final String tagsString) {
-	final ArrayList<String> tagsList = new ArrayList<String>();
-	String tagsCopy = tagsString;
-	// remove commas and quotes
-	if (tagsString == null) {
-	    return tagsList;
-	}
-	tagsCopy = tagsCopy.replaceAll(",", " ");
-	tagsCopy = tagsCopy.replaceAll("\"", "");
-	tagsCopy = tagsCopy.replaceAll("\'", "");
-	final String[] splitted = tagsCopy.split("\\s+");
-	for (int i = 0; i < splitted.length; i++) {
-	    String tag = splitted[i];
-	    tag = tag.replaceAll("\\s$", "");
-	    if (tag.length() > 0) {
-		tagsList.add(tag);
-	    }
-	}
-	return tagsList;
+        final ArrayList<String> tagsList = new ArrayList<String>();
+        String tagsCopy = tagsString;
+        // remove commas and quotes
+        if (tagsString == null) {
+            return tagsList;
+        }
+        tagsCopy = tagsCopy.replaceAll(",", " ");
+        tagsCopy = tagsCopy.replaceAll("\"", "");
+        tagsCopy = tagsCopy.replaceAll("\'", "");
+        final String[] splitted = tagsCopy.split("\\s+");
+        for (int i = 0; i < splitted.length; i++) {
+            String tag = splitted[i];
+            tag = tag.replaceAll("\\s$", "");
+            if (tag.length() > 0) {
+                tagsList.add(tag);
+            }
+        }
+        return tagsList;
     }
 
     /*
@@ -65,13 +65,13 @@ public class KuneStringUtils {
      * widget for instance
      */
     public static String unescapeHtmlLight(final String textOrig) {
-	String text = textOrig;
-	text = text.replaceAll("&amp;", "&");
-	text = text.replaceAll("&quot;", "\"");
-	text = text.replaceAll("&#039;", "\'");
-	text = text.replaceAll("&lt;", "<");
-	text = text.replaceAll("&gt;", ">");
-	return text;
+        String text = textOrig;
+        text = text.replaceAll("&amp;", "&");
+        text = text.replaceAll("&quot;", "\"");
+        text = text.replaceAll("&#039;", "\'");
+        text = text.replaceAll("&lt;", "<");
+        text = text.replaceAll("&gt;", ">");
+        return text;
     }
 
     public KuneStringUtils() {

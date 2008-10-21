@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.server.manager.impl;
+package org.ourproject.kune.platf.server.manager.file;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;

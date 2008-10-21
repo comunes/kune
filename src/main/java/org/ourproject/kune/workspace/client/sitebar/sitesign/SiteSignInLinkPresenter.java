@@ -12,25 +12,25 @@ public class SiteSignInLinkPresenter implements SiteSignInLink {
     private SiteSignInLinkView view;
 
     public SiteSignInLinkPresenter(final Session session) {
-	session.onUserSignIn(new Listener<UserInfoDTO>() {
-	    public void onEvent(final UserInfoDTO user) {
-		view.setVisible(false);
-	    }
-	});
-	session.onUserSignOut(new Listener0() {
-	    public void onEvent() {
-		view.setVisible(true);
-	    }
-	});
+        session.onUserSignIn(new Listener<UserInfoDTO>() {
+            public void onEvent(final UserInfoDTO user) {
+                view.setVisible(false);
+            }
+        });
+        session.onUserSignOut(new Listener0() {
+            public void onEvent() {
+                view.setVisible(true);
+            }
+        });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final SiteSignInLinkView view) {
-	this.view = view;
-	view.setVisible(false);
+        this.view = view;
+        view.setVisible(false);
     }
 
 }

@@ -4,19 +4,17 @@ import org.ourproject.kune.platf.client.View;
 
 public class SiteNewGroupLinkPresenter implements SiteNewGroupLink {
 
-private SiteNewGroupLinkView view;
+    private SiteNewGroupLinkView view;
 
-public SiteNewGroupLinkPresenter() {
-}
+    public SiteNewGroupLinkPresenter() {
+    }
 
-public void init(SiteNewGroupLinkView view) {
-this.view = view;
-}
-
+    public void init(SiteNewGroupLinkView view) {
+        this.view = view;
+    }
 
     public View getView() {
         return view;
     }
 
 }
-

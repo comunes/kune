@@ -32,6 +32,8 @@ public interface GroupServiceAsync {
     void createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags, String[] enabledTools,
             AsyncCallback<StateToken> callback);
 
-    void setGroupLogo(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
+    void getGroup(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
+
+    void setGroupFullLogo(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
 }

@@ -25,6 +25,6 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public interface AccessRightsService {
 
-    public AccessRights get(User user, AccessLists lists);
+    AccessRights get(User user, AccessLists lists);
 
 }

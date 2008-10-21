@@ -50,96 +50,96 @@ public class EntityTitlePresenter implements EntityTitle {
     private final ContentIconsRegistry iconsRegistry;
 
     public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler,
-	    final StateManager stateManager, final Session session,
-	    final Provider<ContentServiceAsync> contentServiceProvider,
-	    final Provider<ContextNavigator> contextNavigatorProvider, final ContentIconsRegistry iconsRegistry) {
-	this.i18n = i18n;
-	this.errorHandler = errorHandler;
-	this.session = session;
-	this.contentServiceProvider = contentServiceProvider;
-	this.contextNavigatorProvider = contextNavigatorProvider;
-	this.iconsRegistry = iconsRegistry;
-	stateManager.onStateChanged(new Listener<StateDTO>() {
-	    public void onEvent(final StateDTO state) {
-		setState(state);
-	    }
-	});
+            final StateManager stateManager, final Session session,
+            final Provider<ContentServiceAsync> contentServiceProvider,
+            final Provider<ContextNavigator> contextNavigatorProvider, final ContentIconsRegistry iconsRegistry) {
+        this.i18n = i18n;
+        this.errorHandler = errorHandler;
+        this.session = session;
+        this.contentServiceProvider = contentServiceProvider;
+        this.contextNavigatorProvider = contextNavigatorProvider;
+        this.iconsRegistry = iconsRegistry;
+        stateManager.onStateChanged(new Listener<StateDTO>() {
+            public void onEvent(final StateDTO state) {
+                setState(state);
+            }
+        });
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final EntityTitleView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void setContentDate(final Date publishedOn) {
-	final DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
-	view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
+        final DateTimeFormat fmt = DateTimeFormat.getFormat("MM/dd/yyyy, Z");
+        view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
     }
 
     /**
      * Used renaming from context
      */
     public void setContentTitle(final String title) {
-	view.setContentTitle(title);
+        view.setContentTitle(title);
     }
 
     public void setContentTitle(final String title, final boolean editable) {
-	setContentTitle(title);
-	view.setContentTitleEditable(editable);
+        setContentTitle(title);
+        view.setContentTitleEditable(editable);
     }
 
     protected void onTitleRename(final String newName) {
-	Site.showProgressSaving();
-	final StateToken stateToken = session.getCurrentState().getStateToken();
-	final AsyncCallback<String> asyncCallback = new AsyncCallback<String>() {
-	    public void onFailure(final Throwable caught) {
-		view.restoreOldTitle();
-		errorHandler.process(caught);
-	    }
+        Site.showProgressSaving();
+        final StateToken stateToken = session.getCurrentState().getStateToken();
+        final AsyncCallback<String> asyncCallback = new AsyncCallback<String>() {
+            public void onFailure(final Throwable caught) {
+                view.restoreOldTitle();
+                errorHandler.process(caught);
+            }
 
-	    public void onSuccess(final String result) {
-		Site.hideProgress();
-		view.setContentTitle(result);
-		contextNavigatorProvider.get().setItemText(stateToken, newName);
-	    }
-	};
-	if (stateToken.isComplete()) {
-	    contentServiceProvider.get().renameContent(session.getUserHash(), stateToken, newName, asyncCallback);
-	} else {
-	    contentServiceProvider.get().renameContainer(session.getUserHash(), stateToken, newName, asyncCallback);
-	}
-	Site.hideProgress();
+            public void onSuccess(final String result) {
+                Site.hideProgress();
+                view.setContentTitle(result);
+                contextNavigatorProvider.get().setItemText(stateToken, newName);
+            }
+        };
+        if (stateToken.isComplete()) {
+            contentServiceProvider.get().renameContent(session.getUserHash(), stateToken, newName, asyncCallback);
+        } else {
+            contentServiceProvider.get().renameContainer(session.getUserHash(), stateToken, newName, asyncCallback);
+        }
+        Site.hideProgress();
     }
 
     private void setContentDateVisible(final boolean visible) {
-	view.setDateVisible(visible);
+        view.setDateVisible(visible);
     }
 
     private void setState(final StateDTO state) {
-	if (state.hasDocument()) {
-	    setContentTitle(state.getTitle(), state.getContentRights().isEditable());
-	    setContentDateVisible(true);
-	    setContentDate(state.getPublishedOn());
-	} else {
-	    if (state.getContainer().getParentFolderId() == null) {
-		// We translate root folder names (documents, chat room,
-		// etcetera)
-		setContentTitle(i18n.t(state.getTitle()), false);
-	    } else {
-		setContentTitle(state.getTitle(), state.getContentRights().isEditable());
-	    }
-	    setContentDateVisible(false);
-	}
-	final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
-	if (contentTypeIcon.length() > 0) {
-	    view.setContentIcon(contentTypeIcon);
-	    view.setContentIconVisible(true);
-	} else {
-	    view.setContentIconVisible(false);
-	}
+        if (state.hasDocument()) {
+            setContentTitle(state.getTitle(), state.getContentRights().isEditable());
+            setContentDateVisible(true);
+            setContentDate(state.getPublishedOn());
+        } else {
+            if (state.getContainer().getParentFolderId() == null) {
+                // We translate root folder names (documents, chat room,
+                // etcetera)
+                setContentTitle(i18n.t(state.getTitle()), false);
+            } else {
+                setContentTitle(state.getTitle(), state.getContentRights().isEditable());
+            }
+            setContentDateVisible(false);
+        }
+        final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
+        if (contentTypeIcon.length() > 0) {
+            view.setContentIcon(contentTypeIcon);
+            view.setContentIconVisible(true);
+        } else {
+            view.setContentIconVisible(false);
+        }
     }
 
 }

@@ -46,40 +46,40 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
     Provider<SessionService> sessionServiceProvider;
 
     public Object invoke(final MethodInvocation invocation) throws Throwable {
-	final Object[] arguments = invocation.getArguments();
-	// Some browsers getCookie returns "null" as String instead of null
-	final String userHash = arguments[0] == null || arguments[0].equals("null") ? null : (String) arguments[0];
+        final Object[] arguments = invocation.getArguments();
+        // Some browsers getCookie returns "null" as String instead of null
+        final String userHash = arguments[0] == null || arguments[0].equals("null") ? null : (String) arguments[0];
 
-	log.info("Method: " + invocation.getMethod().getName());
-	log.info("Userhash received: " + userHash);
-	log.info("--------------------------------------------------------------------------------");
-	final UserSession userSession = userSessionProvider.get();
-	final SessionService sessionService = sessionServiceProvider.get();
+        log.info("Method: " + invocation.getMethod().getName());
+        log.info("Userhash received: " + userHash);
+        log.info("--------------------------------------------------------------------------------");
+        final UserSession userSession = userSessionProvider.get();
+        final SessionService sessionService = sessionServiceProvider.get();
 
-	final Authenticated authAnnotation = invocation.getStaticPart().getAnnotation(Authenticated.class);
-	final boolean mandatory = authAnnotation.mandatory();
+        final Authenticated authAnnotation = invocation.getStaticPart().getAnnotation(Authenticated.class);
+        final boolean mandatory = authAnnotation.mandatory();
 
-	if (userHash == null && mandatory) {
-	    sessionService.getNewSession();
-	    throw new UserMustBeLoggedException();
-	} else if (userSession.isUserNotLoggedIn() && mandatory) {
-	    sessionService.getNewSession();
-	    log.info("Session expired (not logged in server and mandatory)");
-	    throw new SessionExpiredException();
-	} else if (userSession.isUserNotLoggedIn() && userHash == null) {
-	    // Ok, do nothing
-	} else if (userSession.isUserNotLoggedIn() && userHash != null) {
-	    sessionService.getNewSession();
-	    log.info("Session expired (not logged in server)");
-	    throw new SessionExpiredException();
-	} else if (!userSession.getHash().equals(userHash)) {
-	    userSession.logout();
-	    sessionService.getNewSession();
-	    log.info("Session expired (userHash different in server)");
-	    throw new SessionExpiredException();
-	}
-	final Object result = invocation.proceed();
-	return result;
+        if (userHash == null && mandatory) {
+            sessionService.getNewSession();
+            throw new UserMustBeLoggedException();
+        } else if (userSession.isUserNotLoggedIn() && mandatory) {
+            sessionService.getNewSession();
+            log.info("Session expired (not logged in server and mandatory)");
+            throw new SessionExpiredException();
+        } else if (userSession.isUserNotLoggedIn() && userHash == null) {
+            // Ok, do nothing
+        } else if (userSession.isUserNotLoggedIn() && userHash != null) {
+            sessionService.getNewSession();
+            log.info("Session expired (not logged in server)");
+            throw new SessionExpiredException();
+        } else if (!userSession.getHash().equals(userHash)) {
+            userSession.logout();
+            sessionService.getNewSession();
+            log.info("Session expired (userHash different in server)");
+            throw new SessionExpiredException();
+        }
+        final Object result = invocation.proceed();
+        return result;
     }
 
 }

@@ -36,48 +36,48 @@ public class RoomsAdminPresenter implements RoomsAdmin {
     private final ContextNavigator contextNavigator;
 
     public RoomsAdminPresenter(final ContextNavigator contextNavigator, final I18nTranslationService i18n,
-	    final Provider<StateManager> stateManagerProvider, final Session session,
-	    final Provider<ContentServiceAsync> contentServiceProvider) {
-	this.contextNavigator = contextNavigator;
-	// final ContextNavigatorImages images =
-	// ContextNavigatorImages.App.getInstance();
-	// contextNavigator.registerType(ChatClientTool.TYPE_CHAT,
-	// images.page());
-	// contextNavigator.registerType(ChatClientTool.TYPE_ROOM,
-	// images.chatGreen());
-	// contextNavigator.canCreate(i18n.t("New chat room"), i18n.t("Add a
-	// chat room"), new Listener<String>() {
-	// public void onEvent(final String name) {
-	// Site.showProgressProcessing();
-	// final String groupShortName =
-	// session.getCurrentState().getGroup().getShortName();
-	// final Long containerId =
-	// session.getCurrentState().getFolder().getId();
-	// contentServiceProvider.get().addRoom(session.getUserHash(),
-	// groupShortName, containerId,
-	// groupShortName + "-" + name, new AsyncCallbackSimple<StateDTO>() {
-	// public void onSuccess(final StateDTO state) {
-	// final StateManager stateManager = stateManagerProvider.get();
-	// stateManager.setRetrievedState(state);
-	// // FIXME: Isn't using cache (same in Add folder)
-	// stateManager.reloadContextAndTitles();
-	// Site.hideProgress();
-	// }
-	// });
-	// }
-	// });
+            final Provider<StateManager> stateManagerProvider, final Session session,
+            final Provider<ContentServiceAsync> contentServiceProvider) {
+        this.contextNavigator = contextNavigator;
+        // final ContextNavigatorImages images =
+        // ContextNavigatorImages.App.getInstance();
+        // contextNavigator.registerType(ChatClientTool.TYPE_CHAT,
+        // images.page());
+        // contextNavigator.registerType(ChatClientTool.TYPE_ROOM,
+        // images.chatGreen());
+        // contextNavigator.canCreate(i18n.t("New chat room"), i18n.t("Add a
+        // chat room"), new Listener<String>() {
+        // public void onEvent(final String name) {
+        // Site.showProgressProcessing();
+        // final String groupShortName =
+        // session.getCurrentState().getGroup().getShortName();
+        // final Long containerId =
+        // session.getCurrentState().getFolder().getId();
+        // contentServiceProvider.get().addRoom(session.getUserHash(),
+        // groupShortName, containerId,
+        // groupShortName + "-" + name, new AsyncCallbackSimple<StateDTO>() {
+        // public void onSuccess(final StateDTO state) {
+        // final StateManager stateManager = stateManagerProvider.get();
+        // stateManager.setRetrievedState(state);
+        // // FIXME: Isn't using cache (same in Add folder)
+        // stateManager.reloadContextAndTitles();
+        // Site.hideProgress();
+        // }
+        // });
+        // }
+        // });
     }
 
     public View getView() {
-	return contextNavigator.getView();
+        return contextNavigator.getView();
     }
 
     public void showRoom(final StateToken token, final ContainerDTO container, final AccessRightsDTO rights) {
-	// contextNavigator.showContainer(token, container, rights);
-	// final String type = container.getTypeId();
-	// if (type.equals(ChatClientTool.TYPE_ROOM)) {
-	// contextNavigator.setControlsVisible(false);
-	// }
+        // contextNavigator.showContainer(token, container, rights);
+        // final String type = container.getTypeId();
+        // if (type.equals(ChatClientTool.TYPE_ROOM)) {
+        // contextNavigator.setControlsVisible(false);
+        // }
     }
 
 }

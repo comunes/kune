@@ -1,15 +1,11 @@
-package org.ourproject.kune.platf.server.manager.impl;
+package org.ourproject.kune.platf.server.manager.file;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,7 +30,7 @@ import com.google.inject.Inject;
  * http://www.onjava.com/pub/a/onjava/excerpt/jebp_3/index1.html?page=1
  * 
  */
-public class FileDownloadManager extends HttpServlet {
+public class FileDownloadManager extends FileDownloadManagerAbstract {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,22 +38,6 @@ public class FileDownloadManager extends HttpServlet {
     ContentManager contentManager;
     @Inject
     KuneProperties kuneProperties;
-
-    public void returnFile(final String filename, final OutputStream out) throws FileNotFoundException, IOException {
-        InputStream in = null;
-        try {
-            in = new BufferedInputStream(new FileInputStream(filename));
-            final byte[] buf = new byte[4 * 1024]; // 4K buffer
-            int bytesRead;
-            while ((bytesRead = in.read(buf)) != -1) {
-                out.write(buf, 0, bytesRead);
-            }
-        } finally {
-            if (in != null) {
-                in.close();
-            }
-        }
-    }
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,

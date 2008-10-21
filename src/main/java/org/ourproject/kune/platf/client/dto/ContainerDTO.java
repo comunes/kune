@@ -38,67 +38,67 @@ public class ContainerDTO implements IsSerializable {
     }
 
     public ContainerSimpleDTO[] getAbsolutePath() {
-	return absolutePath;
+        return absolutePath;
     }
 
     public List<ContainerSimpleDTO> getChilds() {
-	return childs;
+        return childs;
     }
 
     public List<ContentSimpleDTO> getContents() {
-	return contents;
+        return contents;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public Long getParentFolderId() {
-	return parentFolderId;
+        return parentFolderId;
     }
 
     public StateToken getStateToken() {
-	return stateToken;
+        return stateToken;
     }
 
     public String getTypeId() {
-	return typeId;
+        return typeId;
     }
 
     public void setAbsolutePath(final ContainerSimpleDTO[] absolutePath) {
-	this.absolutePath = absolutePath;
+        this.absolutePath = absolutePath;
     }
 
     public void setChilds(final List<ContainerSimpleDTO> childs) {
-	this.childs = childs;
+        this.childs = childs;
     }
 
     public void setContents(final List<ContentSimpleDTO> contents) {
-	this.contents = contents;
+        this.contents = contents;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public void setParentFolderId(final Long parentFolderId) {
-	this.parentFolderId = parentFolderId;
+        this.parentFolderId = parentFolderId;
     }
 
     public void setStateToken(final StateToken stateToken) {
-	this.stateToken = stateToken;
+        this.stateToken = stateToken;
     }
 
     public void setTypeId(final String typeId) {
-	this.typeId = typeId;
+        this.typeId = typeId;
     }
 
 }

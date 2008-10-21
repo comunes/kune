@@ -17,76 +17,76 @@ public class ToolSelectorPresenterTest {
 
     @Test
     public void addFirstToolMustNotSelect() {
-	setToolNames();
-	toolSelector.addTool(toolSelectorItem1);
-	Mockito.verify(toolSelectorItem1).setSelected(false);
+        setToolNames();
+        toolSelector.addTool(toolSelectorItem1);
+        Mockito.verify(toolSelectorItem1).setSelected(false);
     }
 
     @Test(expected = RuntimeException.class)
     public void addToolWithoutNameMustGiveException() {
-	toolSelector.addTool(toolSelectorItem1);
+        toolSelector.addTool(toolSelectorItem1);
     }
 
     @Test
     public void addTwoToolsMustSelectNothing() {
-	setToolNames();
-	toolSelector.addTool(toolSelectorItem1);
-	toolSelector.addTool(toolSelectorItem2);
-	Mockito.verify(toolSelectorItem1).setSelected(false);
-	Mockito.verify(toolSelectorItem2).setSelected(false);
+        setToolNames();
+        toolSelector.addTool(toolSelectorItem1);
+        toolSelector.addTool(toolSelectorItem2);
+        Mockito.verify(toolSelectorItem1).setSelected(false);
+        Mockito.verify(toolSelectorItem2).setSelected(false);
     }
 
     @Test(expected = RuntimeException.class)
     public void addTwoToolsWithSameNameMustGiveException() {
-	setToolNames();
-	final ToolSelectorItem toolSelectorItemCopy = Mockito.mock(ToolSelectorItem.class);
-	Mockito.stub(toolSelectorItemCopy.getShortName()).toReturn(TOOL1_NAME);
-	toolSelector.addTool(toolSelectorItem1);
-	toolSelector.addTool(toolSelectorItemCopy);
+        setToolNames();
+        final ToolSelectorItem toolSelectorItemCopy = Mockito.mock(ToolSelectorItem.class);
+        Mockito.stub(toolSelectorItemCopy.getShortName()).toReturn(TOOL1_NAME);
+        toolSelector.addTool(toolSelectorItem1);
+        toolSelector.addTool(toolSelectorItemCopy);
     }
 
     @Before
     public void begin() {
-	final StateManager stateManager = Mockito.mock(StateManager.class);
-	final WsThemePresenter themePresenter = Mockito.mock(WsThemePresenter.class);
-	toolSelector = new ToolSelectorPresenter(stateManager, themePresenter);
-	toolSelectorItem1 = Mockito.mock(ToolSelectorItem.class);
-	toolSelectorItem2 = Mockito.mock(ToolSelectorItem.class);
+        final StateManager stateManager = Mockito.mock(StateManager.class);
+        final WsThemePresenter themePresenter = Mockito.mock(WsThemePresenter.class);
+        toolSelector = new ToolSelectorPresenter(stateManager, themePresenter);
+        toolSelectorItem1 = Mockito.mock(ToolSelectorItem.class);
+        toolSelectorItem2 = Mockito.mock(ToolSelectorItem.class);
     }
 
     @Test
     public void setStateFirstMustSelect() {
-	setToolNames();
-	toolSelector.addTool(toolSelectorItem1);
-	toolSelector.onToolChanged(null, TOOL1_NAME);
-	Mockito.verify(toolSelectorItem1, Mockito.times(1)).setSelected(false);
-	Mockito.verify(toolSelectorItem1, Mockito.times(1)).setSelected(true);
+        setToolNames();
+        toolSelector.addTool(toolSelectorItem1);
+        toolSelector.onToolChanged(null, TOOL1_NAME);
+        Mockito.verify(toolSelectorItem1, Mockito.times(1)).setSelected(false);
+        Mockito.verify(toolSelectorItem1, Mockito.times(1)).setSelected(true);
     }
 
     @Test
     public void setStateWithADifferentGroupMustSetLink() {
-	setToolNames();
-	toolSelector.addTool(toolSelectorItem1);
-	toolSelector.addTool(toolSelectorItem2);
-	toolSelector.onGroupChanged(GROUP1_NAME);
-	Mockito.verify(toolSelectorItem1, Mockito.times(1)).setGroupShortName(GROUP1_NAME);
-	Mockito.verify(toolSelectorItem2, Mockito.times(1)).setGroupShortName(GROUP1_NAME);
+        setToolNames();
+        toolSelector.addTool(toolSelectorItem1);
+        toolSelector.addTool(toolSelectorItem2);
+        toolSelector.onGroupChanged(GROUP1_NAME);
+        Mockito.verify(toolSelectorItem1, Mockito.times(1)).setGroupShortName(GROUP1_NAME);
+        Mockito.verify(toolSelectorItem2, Mockito.times(1)).setGroupShortName(GROUP1_NAME);
     }
 
     @Test
     public void setStateWithADifferentToolNameMustSelectAndUnSelectTheOlder() {
-	setToolNames();
-	toolSelector.addTool(toolSelectorItem1);
-	toolSelector.addTool(toolSelectorItem2);
-	toolSelector.onToolChanged(TOOL1_NAME, TOOL2_NAME);
-	Mockito.verify(toolSelectorItem2, Mockito.times(1)).setSelected(false);
-	Mockito.verify(toolSelectorItem1, Mockito.times(2)).setSelected(false);
-	Mockito.verify(toolSelectorItem2, Mockito.times(1)).setSelected(true);
+        setToolNames();
+        toolSelector.addTool(toolSelectorItem1);
+        toolSelector.addTool(toolSelectorItem2);
+        toolSelector.onToolChanged(TOOL1_NAME, TOOL2_NAME);
+        Mockito.verify(toolSelectorItem2, Mockito.times(1)).setSelected(false);
+        Mockito.verify(toolSelectorItem1, Mockito.times(2)).setSelected(false);
+        Mockito.verify(toolSelectorItem2, Mockito.times(1)).setSelected(true);
     }
 
     public void setToolNames() {
-	Mockito.stub(toolSelectorItem1.getShortName()).toReturn(TOOL1_NAME);
-	Mockito.stub(toolSelectorItem2.getShortName()).toReturn(TOOL2_NAME);
+        Mockito.stub(toolSelectorItem1.getShortName()).toReturn(TOOL1_NAME);
+        Mockito.stub(toolSelectorItem2.getShortName()).toReturn(TOOL2_NAME);
     }
 
 }

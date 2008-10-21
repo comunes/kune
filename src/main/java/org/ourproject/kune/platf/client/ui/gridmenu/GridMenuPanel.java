@@ -131,11 +131,10 @@ public class GridMenuPanel<T> extends Panel {
 
     public void addItem(final GridItem<T> gridItem) {
         final String id = gridItem.getId();
-        final Record newRecord = recordDef
-                .createRecord(id, new Object[] { gridItem.getGroup().getName(), gridItem.getGroup().getTooltipTitle(),
-                        gridItem.getGroup().getTooltip(), gridItem.getGroup().getEndIconHtml(), id,
-                        gridItem.getIconHtml(), gridItem.getTitle(), gridItem.getTitleHtml(),
-                        gridItem.getEndIconHtml(), gridItem.getTooltipTitle(), gridItem.getTooltip() });
+        final Record newRecord = recordDef.createRecord(id, new Object[] { gridItem.getGroup().getName(),
+                gridItem.getGroup().getTooltipTitle(), gridItem.getGroup().getTooltip(),
+                gridItem.getGroup().getEndIconHtml(), id, gridItem.getIconHtml(), gridItem.getTitle(),
+                gridItem.getTitleHtml(), gridItem.getEndIconHtml(), gridItem.getTooltipTitle(), gridItem.getTooltip() });
         recordMap.put(gridItem.getItem(), newRecord);
         store.addSorted(newRecord);
         menuMap.put(id, gridItem.getMenu());

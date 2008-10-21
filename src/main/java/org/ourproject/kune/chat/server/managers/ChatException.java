@@ -27,10 +27,10 @@ public class ChatException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     public ChatException(final XMPPException cause) {
-	super(cause);
+        super(cause);
     }
 
     public ChatException() {
-	super("");
+        super("");
     }
 }

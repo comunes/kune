@@ -8,12 +8,12 @@ import com.calclab.suco.client.ioc.decorator.Singleton;
 public class ToolGroup extends ProviderCollection {
 
     public ToolGroup(final Container container) {
-	super(container, Singleton.instance);
+        super(container, Singleton.instance);
     }
 
     public void createAll() {
-	for (final Provider<?> p : getProviders()) {
-	    p.get();
-	}
+        for (final Provider<?> p : getProviders()) {
+            p.get();
+        }
     }
 }

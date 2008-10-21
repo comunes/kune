@@ -20,7 +20,6 @@
 
 package org.ourproject.kune.platf.client.errors;
 
-
 public class ContentNotFoundException extends DefaultException {
     private static final long serialVersionUID = 1L;
 }

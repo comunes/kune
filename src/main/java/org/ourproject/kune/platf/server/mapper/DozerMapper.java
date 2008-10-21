@@ -36,34 +36,34 @@ public class DozerMapper implements Mapper {
     private final MapperIF mapper;
 
     public DozerMapper() {
-	mapper = DozerBeanMapperSingletonWrapper.getInstance();
+        mapper = DozerBeanMapperSingletonWrapper.getInstance();
     }
 
     @SuppressWarnings("unchecked")
     public <T> T map(final Object source, final Class<T> type) {
-	return (T) mapper.map(source, type);
+        return (T) mapper.map(source, type);
     }
 
     @SuppressWarnings("unchecked")
     public <T> List<T> mapList(final List<?> list, final Class<T> type) {
-	final ArrayList<T> dest = new ArrayList<T>(list.size());
-	for (final Object o : list) {
-	    dest.add((T) mapper.map(o, type));
-	}
-	return dest;
+        final ArrayList<T> dest = new ArrayList<T>(list.size());
+        for (final Object o : list) {
+            dest.add((T) mapper.map(o, type));
+        }
+        return dest;
     }
 
     @SuppressWarnings("unchecked")
     public <K, T> SearchResultDTO<T> mapSearchResult(final SearchResult<K> result, final Class<T> type) {
-	final SearchResultDTO<T> resultDTO = new SearchResultDTO<T>();
-	final List<K> list = result.getList();
-	final ArrayList<T> dest = new ArrayList<T>(list.size());
-	for (final Object o : list) {
-	    dest.add((T) mapper.map(o, type));
-	}
-	resultDTO.setList(dest);
-	resultDTO.setSize(result.getSize());
-	return resultDTO;
+        final SearchResultDTO<T> resultDTO = new SearchResultDTO<T>();
+        final List<K> list = result.getList();
+        final ArrayList<T> dest = new ArrayList<T>(list.size());
+        for (final Object o : list) {
+            dest.add((T) mapper.map(o, type));
+        }
+        resultDTO.setList(dest);
+        resultDTO.setSize(result.getSize());
+        return resultDTO;
     }
 
 }

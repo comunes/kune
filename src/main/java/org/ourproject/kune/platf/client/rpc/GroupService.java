@@ -33,6 +33,8 @@ public interface GroupService extends RemoteService {
     StateToken createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags, String[] enabledTools)
             throws DefaultException;
 
-    GroupDTO setGroupLogo(String userHash, StateToken token);
+    GroupDTO getGroup(String userHash, StateToken token);
+
+    GroupDTO setGroupFullLogo(String userHash, StateToken token);
 
 }

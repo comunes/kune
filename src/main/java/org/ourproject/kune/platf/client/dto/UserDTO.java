@@ -37,124 +37,124 @@ public class UserDTO implements IsSerializable {
     private String chatColor;
 
     public UserDTO() {
-	this(null, null, null, null, null, null, null, null, true, null, null);
+        this(null, null, null, null, null, null, null, null, true, null, null);
     }
 
     public UserDTO(final String name, final String shortName, final String password, final String email,
-	    final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone,
-	    final String avatar, final boolean publishRoster, final SubscriptionMode subscriptionMode,
-	    final String chatColor) {
-	this.name = name;
-	this.shortName = shortName;
-	this.password = password;
-	this.email = email;
-	this.language = language;
-	this.country = country;
-	this.timezone = timezone;
-	this.avatar = avatar;
-	this.publishRoster = publishRoster;
-	this.subscriptionMode = subscriptionMode;
-	this.chatColor = chatColor;
+            final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone,
+            final String avatar, final boolean publishRoster, final SubscriptionMode subscriptionMode,
+            final String chatColor) {
+        this.name = name;
+        this.shortName = shortName;
+        this.password = password;
+        this.email = email;
+        this.language = language;
+        this.country = country;
+        this.timezone = timezone;
+        this.avatar = avatar;
+        this.publishRoster = publishRoster;
+        this.subscriptionMode = subscriptionMode;
+        this.chatColor = chatColor;
     }
 
     public String getAvatar() {
-	return avatar;
+        return avatar;
     }
 
     public String getChatColor() {
-	return chatColor;
+        return chatColor;
     }
 
     public I18nCountryDTO getCountry() {
-	return country;
+        return country;
     }
 
     public String getEmail() {
-	return email;
+        return email;
     }
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public I18nLanguageDTO getLanguage() {
-	return language;
+        return language;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public String getPassword() {
-	return password;
+        return password;
     }
 
     public String getShortName() {
-	return shortName;
+        return shortName;
     }
 
     public SubscriptionMode getSubscriptionMode() {
-	return subscriptionMode;
+        return subscriptionMode;
     }
 
     public TimeZoneDTO getTimezone() {
-	return timezone;
+        return timezone;
     }
 
     public boolean isPublishRoster() {
-	return publishRoster;
+        return publishRoster;
     }
 
     public void setAvatar(final String avatar) {
-	this.avatar = avatar;
+        this.avatar = avatar;
     }
 
     public void setChatColor(final String chatColor) {
-	this.chatColor = chatColor;
+        this.chatColor = chatColor;
     }
 
     public void setCountry(final I18nCountryDTO country) {
-	this.country = country;
+        this.country = country;
     }
 
     public void setEmail(final String email) {
-	this.email = email;
+        this.email = email;
     }
 
     public void setId(final Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public void setLanguage(final I18nLanguageDTO language) {
-	this.language = language;
+        this.language = language;
     }
 
     public void setName(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public void setPassword(final String password) {
-	this.password = password;
+        this.password = password;
     }
 
     public void setPublishRoster(final boolean publishRoster) {
-	this.publishRoster = publishRoster;
+        this.publishRoster = publishRoster;
     }
 
     public void setShortName(final String shortName) {
-	this.shortName = shortName;
+        this.shortName = shortName;
     }
 
     public void setSubscriptionMode(final SubscriptionMode subscriptionMode) {
-	this.subscriptionMode = subscriptionMode;
+        this.subscriptionMode = subscriptionMode;
     }
 
     public void setTimezone(final TimeZoneDTO timezone) {
-	this.timezone = timezone;
+        this.timezone = timezone;
     }
 
     public String toString() {
-	return "UserDTO[" + shortName + "]";
+        return "UserDTO[" + shortName + "]";
     }
 
 }

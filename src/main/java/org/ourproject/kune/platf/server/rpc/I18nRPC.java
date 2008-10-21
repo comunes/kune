@@ -52,69 +52,69 @@ public class I18nRPC implements RPC, I18nService {
 
     @Inject
     public I18nRPC(final Provider<HttpServletRequest> requestProvider, final Provider<UserSession> userSessionProvider,
-	    final I18nTranslationManager i18nTranslationManager, final I18nLanguageManager languageManager,
-	    final Mapper mapper) {
-	this.requestProvider = requestProvider;
-	this.userSessionProvider = userSessionProvider;
-	this.i18nTranslationManager = i18nTranslationManager;
-	this.languageManager = languageManager;
-	this.mapper = mapper;
+            final I18nTranslationManager i18nTranslationManager, final I18nLanguageManager languageManager,
+            final Mapper mapper) {
+        this.requestProvider = requestProvider;
+        this.userSessionProvider = userSessionProvider;
+        this.i18nTranslationManager = i18nTranslationManager;
+        this.languageManager = languageManager;
+        this.mapper = mapper;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public I18nLanguageDTO getInitialLanguage(final String localeParam) {
-	String initLanguage;
-	I18nLanguage lang;
-	final UserSession userSession = getUserSession();
-	if (localeParam != null) {
-	    initLanguage = localeParam;
-	} else {
-	    if (userSession.isUserLoggedIn()) {
-		initLanguage = userSession.getUser().getLanguage().getCode();
-	    } else {
-		final String browserLang = requestProvider.get().getLocale().getLanguage();
-		if (browserLang != null) {
-		    // Not logged, use browser language if possible
-		    final String country = requestProvider.get().getLocale().getCountry();
-		    if (browserLang.equals("pt") && country != null && country.equals("BR")) {
-			// FIXME: the only supported rfc 3066 lang supported
-			initLanguage = "pt-br";
-		    } else {
-			initLanguage = browserLang;
-		    }
-		} else {
-		    initLanguage = I18nTranslation.DEFAULT_LANG;
-		}
-	    }
-	}
-	try {
-	    lang = languageManager.findByCode(initLanguage);
-	} catch (final NoResultException e) {
-	    lang = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
-	}
-	return mapper.map(lang, I18nLanguageDTO.class);
+        String initLanguage;
+        I18nLanguage lang;
+        final UserSession userSession = getUserSession();
+        if (localeParam != null) {
+            initLanguage = localeParam;
+        } else {
+            if (userSession.isUserLoggedIn()) {
+                initLanguage = userSession.getUser().getLanguage().getCode();
+            } else {
+                final String browserLang = requestProvider.get().getLocale().getLanguage();
+                if (browserLang != null) {
+                    // Not logged, use browser language if possible
+                    final String country = requestProvider.get().getLocale().getCountry();
+                    if (browserLang.equals("pt") && country != null && country.equals("BR")) {
+                        // FIXME: the only supported rfc 3066 lang supported
+                        initLanguage = "pt-br";
+                    } else {
+                        initLanguage = browserLang;
+                    }
+                } else {
+                    initLanguage = I18nTranslation.DEFAULT_LANG;
+                }
+            }
+        }
+        try {
+            lang = languageManager.findByCode(initLanguage);
+        } catch (final NoResultException e) {
+            lang = languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
+        }
+        return mapper.map(lang, I18nLanguageDTO.class);
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
     public HashMap<String, String> getLexicon(final String language) {
-	return i18nTranslationManager.getLexicon(language);
+        return i18nTranslationManager.getLexicon(language);
     }
 
     @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public String getTranslation(final String userHash, final String language, final String text) {
-	return i18nTranslationManager.getTranslation(language, text);
+        return i18nTranslationManager.getTranslation(language, text);
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
     public String setTranslation(final String userHash, final String id, final String translation)
-	    throws DefaultException {
-	return i18nTranslationManager.setTranslation(id, translation);
+            throws DefaultException {
+        return i18nTranslationManager.setTranslation(id, translation);
     }
 
     private UserSession getUserSession() {
-	return userSessionProvider.get();
+        return userSessionProvider.get();
     }
 
 }

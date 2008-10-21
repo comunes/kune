@@ -89,13 +89,13 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
             UserMustBeLoggedException {
         final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
         if (User.isKnownUser(user)) {
-            if (group.getType().equals(GroupType.COMMUNITY)) {
+            if (group.getGroupType().equals(GroupType.COMMUNITY)) {
                 group.setAdmissionType(AdmissionType.Open);
-            } else if (group.getType().equals(GroupType.ORGANIZATION)) {
+            } else if (group.getGroupType().equals(GroupType.ORGANIZATION)) {
                 group.setAdmissionType(AdmissionType.Moderated);
-            } else if (group.getType().equals(GroupType.PROJECT)) {
+            } else if (group.getGroupType().equals(GroupType.PROJECT)) {
                 group.setAdmissionType(AdmissionType.Moderated);
-            } else if (group.getType().equals(GroupType.ORPHANED_PROJECT)) {
+            } else if (group.getGroupType().equals(GroupType.ORPHANED_PROJECT)) {
                 group.setAdmissionType(AdmissionType.Open);
             }
             final String licName = group.getDefaultLicense().getShortName();
@@ -192,7 +192,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
     public void setGroupLogo(final Group group, final Content content) {
         if (content.getMimeType().getType().equals("image")) {
-            group.setGroupLogo(content);
+            group.setGroupFullLogo(content);
         } else {
             new DefaultException("Trying to set not a image as group logo");
         }
@@ -217,7 +217,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         final AccessLists lists = network.getAccessLists();
         lists.getEditors().setMode(GroupListMode.NOBODY);
         lists.getViewers().setMode(GroupListMode.EVERYONE);
-        if (!group.getType().equals(GroupType.ORPHANED_PROJECT)) {
+        if (!group.getGroupType().equals(GroupType.ORPHANED_PROJECT)) {
             network.addAdmin(userGroup);
         }
     }

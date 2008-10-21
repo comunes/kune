@@ -35,64 +35,64 @@ public class I18nTranslatorPresenter implements I18nTranslator {
     private final I18nUITranslationService i18n;
 
     public I18nTranslatorPresenter(final Session session, final I18nServiceAsync i18nService,
-	    final I18nUITranslationService i18n) {
-	this.session = session;
-	this.i18nService = i18nService;
-	this.i18n = i18n;
-	session.onUserSignOut(new Listener0() {
-	    public void onEvent() {
-		view.hideTranslatorAndIcon();
-	    }
-	});
+            final I18nUITranslationService i18n) {
+        this.session = session;
+        this.i18nService = i18nService;
+        this.i18n = i18n;
+        session.onUserSignOut(new Listener0() {
+            public void onEvent() {
+                view.hideTranslatorAndIcon();
+            }
+        });
     }
 
     public void doClose() {
-	view.hide();
+        view.hide();
     }
 
     public void doShowTranslator() {
-	Site.showProgressLoading();
-	if (session.isLogged()) {
-	    view.show();
-	} else {
-	    Site.info(i18n.t("Sign in or register to help with translation"));
-	}
-	Site.hideProgress();
+        Site.showProgressLoading();
+        if (session.isLogged()) {
+            view.show();
+        } else {
+            Site.info(i18n.t("Sign in or register to help with translation"));
+        }
+        Site.hideProgress();
     }
 
     public void doTranslation(final String id, final String trKey, final String translation) {
-	Site.showProgressSaving();
-	i18nService.setTranslation(session.getUserHash(), id, translation, new AsyncCallback<String>() {
-	    public void onFailure(final Throwable caught) {
-		Site.hideProgress();
-		Site.error(i18n.t("Server error saving translation"));
-	    }
+        Site.showProgressSaving();
+        i18nService.setTranslation(session.getUserHash(), id, translation, new AsyncCallback<String>() {
+            public void onFailure(final Throwable caught) {
+                Site.hideProgress();
+                Site.error(i18n.t("Server error saving translation"));
+            }
 
-	    public void onSuccess(final String result) {
-		Site.hideProgress();
-		i18n.setTranslationAfterSave(trKey, result);
-	    }
-	});
+            public void onSuccess(final String result) {
+                Site.hideProgress();
+                i18n.setTranslationAfterSave(trKey, result);
+            }
+        });
     }
 
     public I18nLanguageDTO getLanguage() {
-	return session.getCurrentLanguage();
+        return session.getCurrentLanguage();
     }
 
     public Object[][] getLanguages() {
-	return session.getLanguagesArray();
+        return session.getLanguagesArray();
     }
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void hide() {
-	view.hide();
+        view.hide();
     }
 
     public void init(final I18nTranslatorView view) {
-	this.view = view;
+        this.view = view;
     }
 
 }

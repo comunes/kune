@@ -31,34 +31,34 @@ public class ColorWebSafePalettePresenter implements ColorWebSafePalette {
     }
 
     public void hide() {
-	this.view.hide();
+        this.view.hide();
     }
 
     public void init(final WebSafePaletteView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void show(final int left, final int top, final Listener<String> onColorSelected) {
-	view.show(left, top);
-	this.onColorSelected = onColorSelected;
+        view.show(left, top);
+        this.onColorSelected = onColorSelected;
     }
 
     protected void onColorSelected(final int row, final int col) {
-	final String color = getColor(row, col);
-	onColorSelected.onEvent(color);
+        final String color = getColor(row, col);
+        onColorSelected.onEvent(color);
     }
 
     private String getColor(final int row, final int col) {
-	String color = null;
-	final int pd = row * WebSafePaletteView.COLS + col;
-	final int da = pd / 6;
-	final int ra = pd % 6;
-	final int aa = da - ra / 6;
-	final int db = aa / 6;
-	final int rb = aa % 6;
-	final int rc = (db - rb / 6) % 6;
-	color = "rgb(" + ra * 51 + ", " + rc * 51 + ", " + rb * 51 + ")";
-	return color;
+        String color = null;
+        final int pd = row * WebSafePaletteView.COLS + col;
+        final int da = pd / 6;
+        final int ra = pd % 6;
+        final int aa = da - ra / 6;
+        final int db = aa / 6;
+        final int rb = aa % 6;
+        final int rc = (db - rb / 6) % 6;
+        color = "rgb(" + ra * 51 + ", " + rc * 51 + ", " + rb * 51 + ")";
+        return color;
     }
 
 }

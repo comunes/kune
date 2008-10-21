@@ -54,75 +54,78 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
     private final Provider<ChatContent> chatContentProvider;
 
     public ChatClientTool(final Session session, final Application application, final I18nTranslationService i18n,
-	    final EmiteUIDialog emiteUIDialog, final WorkspaceSkeleton ws,
-	    final Provider<GroupMembersSummary> groupMembersSummaryProvider, final ToolSelector toolSelector,
-	    final WsThemePresenter wsThemePresenter, final Provider<ChatContent> chatContentProvider,
-	    final Provider<ChatContext> chatContextProvider) {
-	super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws);
-	this.chatContentProvider = chatContentProvider;
-	this.chatContextProvider = chatContextProvider;
-	session.onInitDataReceived(new Listener<InitDataDTO>() {
-	    public void onEvent(final InitDataDTO initData) {
-		checkChatDomain(initData.getChatDomain());
-		final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),
-			initData.getChatRoomHost());
-		chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
-		groupMembersSummaryProvider.get().addUserOperation(
-			new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),
-				new Listener<GroupDTO>() {
-				    public void onEvent(final GroupDTO group) {
-					emiteUIDialog.show();
-					if (emiteUIDialog.isLoggedIn()) {
-					    emiteUIDialog.chat(XmppURI.jid(group.getShortName() + "@"
-						    + initData.getChatDomain()));
-					} else {
-					    ws.showAlertMessage(i18n.t("Error"), i18n
-						    .t("To start a chat you need to be 'online'."));
-					}
-				    }
-				}), true);
-	    }
+            final EmiteUIDialog emiteUIDialog, final WorkspaceSkeleton ws,
+            final Provider<GroupMembersSummary> groupMembersSummaryProvider, final ToolSelector toolSelector,
+            final WsThemePresenter wsThemePresenter, final Provider<ChatContent> chatContentProvider,
+            final Provider<ChatContext> chatContextProvider) {
+        super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws);
+        this.chatContentProvider = chatContentProvider;
+        this.chatContextProvider = chatContextProvider;
+        session.onInitDataReceived(new Listener<InitDataDTO>() {
+            public void onEvent(final InitDataDTO initData) {
+                checkChatDomain(initData.getChatDomain());
+                final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),
+                        initData.getChatRoomHost());
+                chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
+                groupMembersSummaryProvider.get().addUserOperation(
+                                                                   new MenuItem<GroupDTO>("images/new-chat.gif",
+                                                                           i18n.t("Start a chat with this member"),
+                                                                           new Listener<GroupDTO>() {
+                                                                               public void onEvent(final GroupDTO group) {
+                                                                                   emiteUIDialog.show();
+                                                                                   if (emiteUIDialog.isLoggedIn()) {
+                                                                                       emiteUIDialog.chat(XmppURI.jid(group.getShortName()
+                                                                                               + "@"
+                                                                                               + initData.getChatDomain()));
+                                                                                   } else {
+                                                                                       ws.showAlertMessage(
+                                                                                                           i18n.t("Error"),
+                                                                                                           i18n.t("To start a chat you need to be 'online'."));
+                                                                                   }
+                                                                               }
+                                                                           }), true);
+            }
 
-	    private void checkChatDomain(final String chatDomain) {
-		final String httpDomain = WindowUtils.getLocation().getHostName();
-		if (!chatDomain.equals(httpDomain)) {
-		    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
-			    + "). This will produce problems with the chat functionality. "
-			    + "Check kune.properties on the server.");
-		}
-	    }
-	});
-	application.onApplicationStop(new Listener0() {
-	    public void onEvent() {
-		chat.stop();
-	    }
-	});
-	session.onUserSignOut(new Listener0() {
-	    public void onEvent() {
-		chat.logout();
-	    }
-	});
-	session.onUserSignIn(new Listener<UserInfoDTO>() {
-	    public void onEvent(final UserInfoDTO user) {
-		chat.login(user.getChatName(), user.getChatPassword());
-	    }
-	});
+            private void checkChatDomain(final String chatDomain) {
+                final String httpDomain = WindowUtils.getLocation().getHostName();
+                if (!chatDomain.equals(httpDomain)) {
+                    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+                            + "). This will produce problems with the chat functionality. "
+                            + "Check kune.properties on the server.");
+                }
+            }
+        });
+        application.onApplicationStop(new Listener0() {
+            public void onEvent() {
+                chat.stop();
+            }
+        });
+        session.onUserSignOut(new Listener0() {
+            public void onEvent() {
+                chat.logout();
+            }
+        });
+        session.onUserSignIn(new Listener<UserInfoDTO>() {
+            public void onEvent(final UserInfoDTO user) {
+                chat.login(user.getChatName(), user.getChatPassword());
+            }
+        });
     }
 
     public ChatEngine getChat() {
-	return chat;
+        return chat;
     }
 
     public String getName() {
-	return NAME;
+        return NAME;
     }
 
     public void setContent(final StateDTO state) {
-	chatContentProvider.get().setState(state);
+        chatContentProvider.get().setState(state);
     }
 
     public void setContext(final StateDTO state) {
-	chatContextProvider.get().setState(state);
+        chatContextProvider.get().setState(state);
     }
 
 }

@@ -20,16 +20,6 @@ public class DomainContext {
         this.groups = new HashMap<String, Group>();
     }
 
-    public void createUsers(final String... userNames) {
-        User user;
-        for (String name : userNames) {
-            user = new User(name, "long" + name, name + "@email.com", "password" + name, new I18nLanguage(),
-                    new I18nCountry(), TimeZone.getDefault());
-            user.setUserGroup(new Group(name, "groupLong" + name));
-            users.put(name, user);
-        }
-    }
-
     public void createGroups(final String... groupNames) {
         Group group;
         for (String name : groupNames) {
@@ -42,9 +32,37 @@ public class DomainContext {
         Group group;
         for (String name : groupNames) {
             group = new Group("name", "Some group: " + name);
-            group.setType(GroupType.ORPHANED_PROJECT);
+            group.setGroupType(GroupType.ORPHANED_PROJECT);
             groups.put(name, group);
         }
+    }
+
+    public void createUsers(final String... userNames) {
+        User user;
+        for (String name : userNames) {
+            user = new User(name, "long" + name, name + "@email.com", "password" + name, new I18nLanguage(),
+                    new I18nCountry(), TimeZone.getDefault());
+            user.setUserGroup(new Group(name, "groupLong" + name));
+            users.put(name, user);
+        }
+    }
+
+    public AccessLists getDefaultAccessListOf(final String userName) {
+        return getSocialNetworkOf(userName).getAccessLists();
+    }
+
+    public Group getGroup(final String groupName) {
+        return groups.get(groupName);
+    }
+
+    public Group getGroupOf(final String userName) {
+        User user = getUser(userName);
+        Group userGroup = user.getUserGroup();
+        return userGroup;
+    }
+
+    public User getUser(final String userName) {
+        return users.get(userName);
     }
 
     public SocialNetworkOperator inSocialNetworkOf(final String userName) {
@@ -55,24 +73,6 @@ public class DomainContext {
         Group userGroup = getGroupOf(userName);
         SocialNetwork socialNetwork = userGroup.getSocialNetwork();
         return socialNetwork;
-    }
-
-    public User getUser(final String userName) {
-        return users.get(userName);
-    }
-
-    public AccessLists getDefaultAccessListOf(final String userName) {
-        return getSocialNetworkOf(userName).getAccessLists();
-    }
-
-    public Group getGroupOf(final String userName) {
-        User user = getUser(userName);
-        Group userGroup = user.getUserGroup();
-        return userGroup;
-    }
-
-    public Group getGroup(final String groupName) {
-        return groups.get(groupName);
     }
 
 }

@@ -34,35 +34,35 @@ public class AbstractFormPanel extends VerticalPanel implements FormView {
     protected final VerticalPanel content;
 
     public AbstractFormPanel(final FormListener listener) {
-	content = new VerticalPanel();
-	add(content);
+        content = new VerticalPanel();
+        add(content);
 
-	btnOk = new Button("", new ClickListener() {
-	    public void onClick(final Widget sender) {
-		listener.onAccept();
-	    }
-	});
-	btnCancel = new Button("", new ClickListener() {
-	    public void onClick(final Widget sender) {
-		listener.onCancel();
-	    }
-	});
+        btnOk = new Button("", new ClickListener() {
+            public void onClick(final Widget sender) {
+                listener.onAccept();
+            }
+        });
+        btnCancel = new Button("", new ClickListener() {
+            public void onClick(final Widget sender) {
+                listener.onCancel();
+            }
+        });
 
-	FlowPanel controls = new FlowPanel();
-	controls.add(btnOk);
-	controls.add(btnCancel);
-	add(controls);
+        FlowPanel controls = new FlowPanel();
+        controls.add(btnOk);
+        controls.add(btnCancel);
+        add(controls);
     }
 
     public void addRow(final String label, final Widget widget) {
-	HorizontalPanel panel = new HorizontalPanel();
-	panel.add(new Label(label));
-	panel.add(widget);
-	content.add(panel);
+        HorizontalPanel panel = new HorizontalPanel();
+        panel.add(new Label(label));
+        panel.add(widget);
+        content.add(panel);
     }
 
     public void setCommandLabels(final String acceptLabel, final String cancelLabel) {
-	btnOk.setText(acceptLabel);
-	btnCancel.setText(cancelLabel);
+        btnOk.setText(acceptLabel);
+        btnCancel.setText(cancelLabel);
     }
 }

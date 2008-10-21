@@ -60,8 +60,8 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
 
     private void setState(final StateDTO state) {
         if (state.hasDocument()) {
-            view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors", state.getAuthors().get(0)
-                    .getName()));
+            view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors",
+                                                     state.getAuthors().get(0).getName()));
             view.setContentSubTitleLeftVisible(true);
         } else {
             view.setContentSubTitleLeftVisible(false);

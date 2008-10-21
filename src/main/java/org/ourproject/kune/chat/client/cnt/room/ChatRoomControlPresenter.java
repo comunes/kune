@@ -26,15 +26,15 @@ public class ChatRoomControlPresenter implements ChatRoomControl {
     private ChatRoomControlView view;
 
     public View getView() {
-	return view;
+        return view;
     }
 
     public void init(final ChatRoomControlView view) {
-	this.view = view;
+        this.view = view;
     }
 
     public void onEnterRoom() {
-	// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
 
     }
 
