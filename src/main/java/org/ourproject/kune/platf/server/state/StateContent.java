@@ -23,12 +23,16 @@ import org.ourproject.kune.platf.server.domain.I18nLanguage;
 
 public abstract class StateContent extends StateAbstract {
 
-    private String typeId;
     private I18nLanguage language;
+    private String typeId;
     private String toolName;
 
     public I18nLanguage getLanguage() {
         return language;
+    }
+
+    public String getToolName() {
+        return toolName;
     }
 
     public String getTypeId() {
@@ -39,16 +43,12 @@ public abstract class StateContent extends StateAbstract {
         this.language = language;
     }
 
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
-
-    public String getToolName() {
-        return toolName;
-    }
-
     public void setToolName(final String toolName) {
         this.toolName = toolName;
+    }
+
+    public void setTypeId(final String typeId) {
+        this.typeId = typeId;
     }
 
 }

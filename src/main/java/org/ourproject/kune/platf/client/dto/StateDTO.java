@@ -44,38 +44,26 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class StateDTO implements IsSerializable {
+public class StateDTO extends StateContentDTO implements IsSerializable {
     private String documentId;
     private int version;
     private String content;
-    private String title;
-    private String toolName;
-    private GroupDTO group;
     private ContainerDTO container;
     private ContainerDTO rootContainer;
     private SocialNetworkDTO socialNetwork;
-    private AccessListsDTO accessLists;
     private AccessRightsDTO contentRights;
     private AccessRightsDTO containerRights;
-    private AccessRightsDTO groupRights;
     private ContentStatusDTO status;
     private boolean isRateable;
     private Double rate;
     private Integer rateByUsers;
     private Double currentUserRate;
-    private String typeId;
     private BasicMimeTypeDTO mimeType;
     private LicenseDTO license;
-    private I18nLanguageDTO language;
     private Date publishedOn;
     private String tags;
     private List<UserSimpleDTO> authors;
     private List<TagResultDTO> groupTags;
-    private SocialNetworkDTO groupMembers;
-    private ParticipationDataDTO participation;
-    private StateToken stateToken;
-    private List<String> enabledTools;
-    private UserBuddiesDataDTO userBuddies;
 
     public StateDTO() {
         this(null, null, null);
@@ -83,12 +71,8 @@ public class StateDTO implements IsSerializable {
 
     public StateDTO(final String docRef, final String title, final String content) {
         this.documentId = docRef;
-        this.title = title;
         this.content = content;
-    }
-
-    public AccessListsDTO getAccessLists() {
-        return accessLists;
+        setTitle(title);
     }
 
     public List<UserSimpleDTO> getAuthors() {
@@ -119,28 +103,8 @@ public class StateDTO implements IsSerializable {
         return documentId;
     }
 
-    public List<String> getEnabledTools() {
-        return enabledTools;
-    }
-
-    public GroupDTO getGroup() {
-        return this.group;
-    }
-
-    public SocialNetworkDTO getGroupMembers() {
-        return groupMembers;
-    }
-
-    public AccessRightsDTO getGroupRights() {
-        return groupRights;
-    }
-
     public List<TagResultDTO> getGroupTags() {
         return groupTags;
-    }
-
-    public I18nLanguageDTO getLanguage() {
-        return language;
     }
 
     public LicenseDTO getLicense() {
@@ -149,10 +113,6 @@ public class StateDTO implements IsSerializable {
 
     public BasicMimeTypeDTO getMimeType() {
         return mimeType;
-    }
-
-    public ParticipationDataDTO getParticipation() {
-        return participation;
     }
 
     public Date getPublishedOn() {
@@ -175,32 +135,12 @@ public class StateDTO implements IsSerializable {
         return socialNetwork;
     }
 
-    public StateToken getStateToken() {
-        return stateToken;
-    }
-
     public ContentStatusDTO getStatus() {
         return status;
     }
 
     public String getTags() {
         return tags;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getToolName() {
-        return toolName;
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public UserBuddiesDataDTO getUserBuddies() {
-        return userBuddies;
     }
 
     public int getVersion() {
@@ -214,10 +154,6 @@ public class StateDTO implements IsSerializable {
 
     public boolean isRateable() {
         return isRateable;
-    }
-
-    public void setAccessLists(final AccessListsDTO accessLists) {
-        this.accessLists = accessLists;
     }
 
     public void setAuthors(final List<UserSimpleDTO> authors) {
@@ -248,28 +184,8 @@ public class StateDTO implements IsSerializable {
         this.documentId = docRef;
     }
 
-    public void setEnabledTools(List<String> enabledTools) {
-        this.enabledTools = enabledTools;
-    }
-
-    public void setGroup(final GroupDTO group) {
-        this.group = group;
-    }
-
-    public void setGroupMembers(final SocialNetworkDTO groupMembers) {
-        this.groupMembers = groupMembers;
-    }
-
-    public void setGroupRights(final AccessRightsDTO groupRights) {
-        this.groupRights = groupRights;
-    }
-
     public void setGroupTags(final List<TagResultDTO> groupTags) {
         this.groupTags = groupTags;
-    }
-
-    public void setLanguage(final I18nLanguageDTO language) {
-        this.language = language;
     }
 
     public void setLicense(final LicenseDTO license) {
@@ -278,10 +194,6 @@ public class StateDTO implements IsSerializable {
 
     public void setMimeType(final BasicMimeTypeDTO mimeType) {
         this.mimeType = mimeType;
-    }
-
-    public void setParticipation(final ParticipationDataDTO participation) {
-        this.participation = participation;
     }
 
     public void setPublishedOn(final Date publishedOn) {
@@ -308,10 +220,6 @@ public class StateDTO implements IsSerializable {
         this.socialNetwork = socialNetwork;
     }
 
-    public void setStateToken(final StateToken stateToken) {
-        this.stateToken = stateToken;
-    }
-
     public void setStatus(final ContentStatusDTO status) {
         this.status = status;
     }
@@ -320,29 +228,13 @@ public class StateDTO implements IsSerializable {
         this.tags = tags;
     }
 
-    public void setTitle(final String title) {
-        this.title = title;
-    }
-
-    public void setToolName(final String toolName) {
-        this.toolName = toolName;
-    }
-
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
-
-    public void setUserBuddies(UserBuddiesDataDTO userBuddies) {
-        this.userBuddies = userBuddies;
-    }
-
     public void setVersion(final int version) {
         this.version = version;
     }
 
     @Override
     public String toString() {
-        return "StateDTO[" + stateToken + "/" + typeId + (mimeType != null ? "-" + mimeType : "") + "]";
+        return "StateDTO[" + getStateToken() + "/" + getTypeId() + (mimeType != null ? "-" + mimeType : "") + "]";
     }
 
 }

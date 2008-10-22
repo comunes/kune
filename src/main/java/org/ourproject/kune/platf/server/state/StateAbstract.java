@@ -31,15 +31,15 @@ import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 public abstract class StateAbstract {
 
-    private String title;
-    private Group group;
     private AccessLists accessLists;
-    private AccessRights groupRights;
-    private SocialNetwork groupMembers;
     private List<String> enabledTools;
+    private Group group;
+    private SocialNetwork groupMembers;
+    private AccessRights groupRights;
     private ParticipationData participation;
     private UserBuddiesData userBuddies;
     private StateToken stateToken;
+    private String title;
 
     public AccessLists getAccessLists() {
         return accessLists;
