@@ -77,7 +77,7 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
         case content:
         default:
             final Content content = accessService.accessToContent(ContentUtils.parseId(token.getDocument()), user,
-                                                                  accessRol);
+                    accessRol);
             if (!content.getContainer().getOwner().equals(group)) {
                 throw new AccessViolationException();
             }
@@ -89,7 +89,7 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
             }
         case container:
             final Container container = accessService.accessToContainer(ContentUtils.parseId(token.getFolder()), user,
-                                                                        accessRol);
+                    accessRol);
             if (!container.getOwner().equals(group)) {
                 throw new AccessViolationException();
             }
@@ -108,9 +108,8 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
     private boolean correctMember(final User user, final Group group, final AccessRol memberType)
             throws AccessViolationException {
 
-        final AccessRights accessRights = accessRightsServiceProvider.get().get(
-                                                                                user,
-                                                                                group.getSocialNetwork().getAccessLists());
+        final AccessRights accessRights = accessRightsServiceProvider.get().get(user,
+                group.getSocialNetwork().getAccessLists());
 
         switch (memberType) {
         case Administrator:

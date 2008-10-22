@@ -76,7 +76,7 @@ public class ColorWebSafePalettePanel implements WebSafePaletteView {
                     final String currentColor = "#" + COLORS[c] + COLORS[a] + COLORS[b];
                     paletteGrid.setText(row, col, " ");
                     DOM.setStyleAttribute(paletteGrid.getCellFormatter().getElement(row, col), "backgroundColor",
-                                          currentColor);
+                            currentColor);
                     n++;
                 }
             }

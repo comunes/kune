@@ -189,10 +189,10 @@ public class RegisterForm extends DefaultForm {
         noPersonalHomePage = new Radio();
         personalSpaceFieldSet.setCollapsible(false);
         createRadio(personalSpaceFieldSet, wantPersonalHomePage,
-                    i18n.t("Yes, I want a homepage for publish my contents."), WANNAPERSONALHOMEPAGE_FIELD);
+                i18n.t("Yes, I want a homepage for publish my contents."), WANNAPERSONALHOMEPAGE_FIELD);
         wantPersonalHomePage.setChecked(true);
         createRadio(personalSpaceFieldSet, noPersonalHomePage, i18n.t("No, I don't want. Maybe in the future."),
-                    NOPERSONALHOMEPAGE_FIELD);
+                NOPERSONALHOMEPAGE_FIELD);
         add(personalSpaceFieldSet);
     }
 

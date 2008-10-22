@@ -36,6 +36,7 @@ import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -62,6 +63,14 @@ public class EntityTitlePresenter implements EntityTitle {
         stateManager.onStateChanged(new Listener<StateDTO>() {
             public void onEvent(final StateDTO state) {
                 setState(state);
+            }
+        });
+        errorHandler.onNotDefaultContent(new Listener0() {
+            public void onEvent() {
+                view.setDateVisible(false);
+                view.setContentIconVisible(false);
+                view.setContentTitleEditable(false);
+                view.setContentTitle("");
             }
         });
     }

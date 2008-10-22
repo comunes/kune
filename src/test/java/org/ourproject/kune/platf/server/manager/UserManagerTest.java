@@ -109,10 +109,10 @@ public class UserManagerTest extends PersistenceTest {
     @Test(expected = EntityExistsException.class)
     public void testUserExist() throws I18nNotFoundException {
         final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-                                                  "GB", "GMT");
+                "GB", "GMT");
         persist(user1);
         final User user2 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-                                                  "GB", "GMT");
+                "GB", "GMT");
         persist(user2);
     }
 

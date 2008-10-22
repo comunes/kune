@@ -35,33 +35,33 @@ public class WrappedRichTextAreaImplIE6 extends RichTextAreaImplIE6 {
 
     @Override
     public native void initElement() /*-{
-                   var _this = this;
-                   _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::initializing = true;
+                      var _this = this;
+                      _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::initializing = true;
 
-                   setTimeout(function() {
-                     if (_this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::initializing == false) {
-                       return;
-                     }
+                      setTimeout(function() {
+                        if (_this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::initializing == false) {
+                          return;
+                        }
 
-                     // Attempt to set the iframe document's body to 'contentEditable' mode.
-                     // There's no way to know when the body will actually be available, so
-                     // keep trying every so often until it is.
-                     // Note: The body seems to be missing only rarely, so please don't remove
-                     // this retry loop just because it's hard to reproduce.
-                     var elem = _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
-                     var doc = elem.contentWindow.document;
-                     if (!doc.body) {
-                         // Retry in 50 ms. Faster would run the risk of pegging the CPU. Slower
-                         // would increase the probability of a user-visible delay.
-                       setTimeout(arguments.callee, 50);
-                       return;
-                     }
-                     var ct = "<html><head><style>@import url('" + "css/richtext.css" + "');</style></head><body CONTENTEDITABLE='true'></body></html>" ;
-                     doc.write( ct );
-                     doc.body.contentEditable = true;
+                        // Attempt to set the iframe document's body to 'contentEditable' mode.
+                        // There's no way to know when the body will actually be available, so
+                        // keep trying every so often until it is.
+                        // Note: The body seems to be missing only rarely, so please don't remove
+                        // this retry loop just because it's hard to reproduce.
+                        var elem = _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImpl::elem;
+                        var doc = elem.contentWindow.document;
+                        if (!doc.body) {
+                            // Retry in 50 ms. Faster would run the risk of pegging the CPU. Slower
+                            // would increase the probability of a user-visible delay.
+                          setTimeout(arguments.callee, 50);
+                          return;
+                        }
+                        var ct = "<html><head><style>@import url('" + "css/richtext.css" + "');</style></head><body CONTENTEDITABLE='true'></body></html>" ;
+                        doc.write( ct );
+                        doc.body.contentEditable = true;
 
-                     // Send notification that the iframe has reached design mode.
-                     _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitialized()();
-                   }, 1);
-                 }-*/;
+                        // Send notification that the iframe has reached design mode.
+                        _this.@com.google.gwt.user.client.ui.impl.RichTextAreaImplStandard::onElementInitialized()();
+                      }, 1);
+                    }-*/;
 }

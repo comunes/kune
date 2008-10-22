@@ -35,19 +35,24 @@ public class EntityLicensePanel implements EntityLicenseView {
     private final Image image;
     private final Label license;
     private final I18nTranslationService i18n;
+    private final SimpleToolbar licenseBar;
+    private final WorkspaceSkeleton ws;
 
     public EntityLicensePanel(final EntityLicensePresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws) {
         this.i18n = i18n;
+        this.ws = ws;
         copyright = new Label();
         image = new Image();
         license = new Label();
-        final SimpleToolbar bottomTitle = ws.getEntityWorkspace().getBottomTitle();
-        bottomTitle.add(copyright);
-        bottomTitle.add(license);
-        bottomTitle.addSpacer();
-        bottomTitle.addSpacer();
-        bottomTitle.add(image);
+
+        licenseBar = new SimpleToolbar();
+        licenseBar.add(copyright);
+        licenseBar.add(license);
+        licenseBar.addSpacer();
+        licenseBar.addSpacer();
+        licenseBar.add(image);
+
         final ClickListener clickListener = new ClickListener() {
             public void onClick(Widget arg0) {
                 presenter.onLicenseClick();
@@ -62,6 +67,18 @@ public class EntityLicensePanel implements EntityLicenseView {
 
         copyright.addStyleName("kune-Margin-Large-l");
         license.setStyleName("k-entitylicensepanel-licensetext");
+    }
+
+    public void attach() {
+        if (!licenseBar.isAttached()) {
+            ws.getEntityWorkspace().getBottomTitle().add(licenseBar);
+        }
+    }
+
+    public void detach() {
+        if (licenseBar.isAttached()) {
+            ws.getEntityWorkspace().getBottomTitle().remove(licenseBar);
+        }
     }
 
     public void openWindow(final String url) {

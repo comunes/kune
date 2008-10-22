@@ -167,7 +167,7 @@ public class MapperTest {
         assertTrue(dto.getContents().get(0) instanceof ContentSimpleDTO);
         assertTrue(dto.getChilds().get(0) instanceof ContainerSimpleDTO);
         assertEquals(new StateToken(TESTGROUPSHORTNAME, TESTTOOL),
-                     dto.getChilds().get(0).getStateToken().clone().clearFolder());
+                dto.getChilds().get(0).getStateToken().clone().clearFolder());
         assertEquals(expectedToken, dto.getContents().get(0).getStateToken().clone().clearDocument());
         assertEquals(expectedToken, dto.getStateToken());
 

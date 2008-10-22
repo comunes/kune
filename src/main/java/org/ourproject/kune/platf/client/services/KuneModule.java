@@ -303,7 +303,7 @@ public class KuneModule extends AbstractModule {
             @Override
             public ToolSelector create() {
                 final ToolSelectorPresenter presenter = new ToolSelectorPresenter($(StateManager.class),
-                        $(WsThemePresenter.class));
+                        $(WsThemePresenter.class), $(KuneErrorHandler.class));
                 return presenter;
             }
         });
@@ -393,8 +393,8 @@ public class KuneModule extends AbstractModule {
                         contextNavigatorToolbar);
 
                 final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
-                        $(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
-                        $(ContentIconsRegistry.class), $(DragDropContentRegistry.class), toolbar,
+                        $(Session.class), $(KuneErrorHandler.class), $$(ContentServiceAsync.class), i18n,
+                        $(EntityTitle.class), $(ContentIconsRegistry.class), $(DragDropContentRegistry.class), toolbar,
                         $(ContextActionRegistry.class), $$(FileDownloadUtils.class), true);
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
                         $(WorkspaceSkeleton.class), $(ActionManager.class));

@@ -43,6 +43,11 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
                 setState(state);
             }
         });
+        stateManager.onSocialNetworkChanged(new Listener<StateDTO>() {
+            public void onEvent(StateDTO state) {
+                setState(state);
+            }
+        });
         registerActions();
     }
 
@@ -58,32 +63,34 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
             view.clear();
             UserBuddiesDataDTO userBuddies = state.getUserBuddies();
-            List<UserSimpleDTO> buddies = userBuddies.getBuddies();
-            for (UserSimpleDTO user : buddies) {
-                view.addBuddie(user, actionRegistry.getCurrentActions(user, UserActionRegistry.GENERAL,
-                                                                      session.isLogged(), new AccessRightsDTO(true,
-                                                                              true, true), false));
-            }
-            boolean hasLocalBuddies = buddies.size() > 0;
-            int numExtBuddies = userBuddies.getOtherExternalBuddies();
-            if (numExtBuddies > 0) {
-                if (hasLocalBuddies) {
-                    // i18n: plural
-                    view.setOtherUsers(i18n.t(
-                                              numExtBuddies == 1 ? "and [%d] external user" : "and [%d] external users",
-                                              numExtBuddies));
-                } else {
-                    view.setOtherUsers(i18n.t(numExtBuddies == 1 ? "[%d] external user" : "[%d] external users",
-                                              numExtBuddies));
+            if (userBuddies != UserBuddiesDataDTO.NO_BUDDIES) {
+                List<UserSimpleDTO> buddies = userBuddies.getBuddies();
+                for (UserSimpleDTO user : buddies) {
+                    view.addBuddie(user, actionRegistry.getCurrentActions(user, UserActionRegistry.GENERAL,
+                            session.isLogged(), new AccessRightsDTO(true, true, true), false));
                 }
+                boolean hasLocalBuddies = buddies.size() > 0;
+                int numExtBuddies = userBuddies.getOtherExternalBuddies();
+                if (numExtBuddies > 0) {
+                    if (hasLocalBuddies) {
+                        // i18n: plural
+                        view.setOtherUsers(i18n.t(numExtBuddies == 1 ? "and [%d] external user"
+                                : "and [%d] external users", numExtBuddies));
+                    } else {
+                        view.setOtherUsers(i18n.t(numExtBuddies == 1 ? "[%d] external user" : "[%d] external users",
+                                numExtBuddies));
+                    }
+                } else {
+                    if (hasLocalBuddies) {
+                        view.clearOtherUsers();
+                    } else {
+                        view.setNoBuddies();
+                    }
+                }
+                view.show();
             } else {
-                if (hasLocalBuddies) {
-                    view.clearOtherUsers();
-                } else {
-                    view.setNoBuddies();
-                }
+                view.hide();
             }
-            view.show();
         } else {
             view.hide();
         }
@@ -117,5 +124,4 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         go.setIconUrl("images/group-home.gif");
         actionRegistry.addAction(go, UserActionRegistry.GENERAL);
     }
-
 }

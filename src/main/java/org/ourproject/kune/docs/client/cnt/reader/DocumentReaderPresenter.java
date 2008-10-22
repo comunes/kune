@@ -48,8 +48,8 @@ public class DocumentReaderPresenter implements DocumentReader {
             if (mimeType != null) {
                 FileDownloadUtils fileDownloadUtils = downloadProvider.get();
                 if (mimeType.getType().equals("image")) {
-                    view.showImage(fileDownloadUtils.getImageUrl(token),
-                                   fileDownloadUtils.getImageResizedUrl(token, ImageSize.sized));
+                    view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
+                            ImageSize.sized));
                 } else if (mimeType.toString().equals("text/plain") || mimeType.toString().equals("application/pdf")) {
                     view.setContent(text);
                 } else {

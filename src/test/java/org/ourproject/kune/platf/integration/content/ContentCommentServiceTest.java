@@ -20,7 +20,7 @@ public class ContentCommentServiceTest extends ContentServiceIntegrationTest {
         doLogin();
         final String commentText = "Some comment";
         final CommentDTO commentDTO = contentService.addComment(session.getHash(), defaultContent.getStateToken(),
-                                                                commentText);
+                commentText);
         assertEquals(commentDTO.getText(), commentText);
         assertEquals(commentDTO.getPositiveVotersCount(), 0);
         assertEquals(commentDTO.getNegativeVotersCount(), 0);

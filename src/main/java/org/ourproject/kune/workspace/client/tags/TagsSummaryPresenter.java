@@ -60,8 +60,8 @@ public class TagsSummaryPresenter implements TagsSummary {
 
     public void doSearchTag(final String name) {
         searcherProvider.get().doSearchOfType(
-                                              "group:" + session.getCurrentState().getGroup().getShortName() + " tag:"
-                                                      + name, SiteSearcherType.content);
+                "group:" + session.getCurrentState().getGroup().getShortName() + " tag:" + name,
+                SiteSearcherType.content);
     }
 
     public View getView() {

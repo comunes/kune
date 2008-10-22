@@ -117,9 +117,9 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(EntityLogoDownloadManager.class);
 
         bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
-                        outermostCall(new AuthenticatedMethodInterceptor()));
+                outermostCall(new AuthenticatedMethodInterceptor()));
         bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
-                        outermostCall(new AuthorizatedMethodInterceptor()));
+                outermostCall(new AuthorizatedMethodInterceptor()));
     }
 
     private void bindManagers() {

@@ -128,10 +128,10 @@ public class SignInPresenter implements SignIn {
                         throw caught;
                     } catch (final EmailAddressInUseException e) {
                         view.setRegisterMessage(i18n.t("This email in in use by other person, try with another."),
-                                                SiteErrorType.error);
+                                SiteErrorType.error);
                     } catch (final GroupNameInUseException e) {
                         view.setRegisterMessage(i18n.t("This name in already in use, try with a different name."),
-                                                SiteErrorType.error);
+                                SiteErrorType.error);
                     } catch (final Throwable e) {
                         view.setRegisterMessage(i18n.t("Error during registration."), SiteErrorType.error);
                         GWT.log("Other kind of exception in user registration" + e.getMessage() + ", "

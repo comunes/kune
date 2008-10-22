@@ -82,11 +82,11 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
             }
         };
         menuItemsContainer.createItemMenu(user.getShortName(), actionCollection,
-                                          new Listener<ActionItem<UserSimpleDTO>>() {
-                                              public void onEvent(ActionItem<UserSimpleDTO> actionItem) {
-                                                  doAction(actionItem);
-                                              }
-                                          });
+                new Listener<ActionItem<UserSimpleDTO>>() {
+                    public void onEvent(ActionItem<UserSimpleDTO> actionItem) {
+                        doAction(actionItem);
+                    }
+                });
         flowPanel.add(new BuddieWidget(user.getShortName(), listener));
     }
 

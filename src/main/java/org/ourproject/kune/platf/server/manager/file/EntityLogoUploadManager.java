@@ -37,7 +37,6 @@ public class EntityLogoUploadManager extends FileJsonUploadManagerAbstract {
         JSONObject response = null;
         try {
             response = new JSONObject();
-            response.put("success", success);
             JSONObject[] jsonError = new JSONObject[1];
             jsonError[0] = new JSONObject();
             if (!success) {
@@ -45,6 +44,7 @@ public class EntityLogoUploadManager extends FileJsonUploadManagerAbstract {
                 jsonError[0].put("msg", message);
             }
             response.put("errors", jsonError);
+            response.put("success", success);
         } catch (final Exception e) {
             log.error("Error building response");
         }
@@ -72,8 +72,7 @@ public class EntityLogoUploadManager extends FileJsonUploadManagerAbstract {
         File tmpDestFile = File.createTempFile("logoDest", "");
 
         boolean result = ImageUtilsDefault.scaleImageToMax(tmpOrigFile.getAbsolutePath(),
-                                                           tmpDestFile.getAbsolutePath(),
-                                                           EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT);
+                tmpDestFile.getAbsolutePath(), EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT);
         if (result) {
             group.setLogo(FileUtils.getBytesFromFile(tmpDestFile));
             group.setLogoMime(mimeType);

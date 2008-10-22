@@ -63,7 +63,7 @@ class KuneContainerListener implements ContainerListener {
         try {
             Properties properties = new Properties();
             InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                                                                                                   "log4j.dev.properties");
+                    "log4j.dev.properties");
             properties.load(input);
             PropertyConfigurator.configure(properties);
         } catch (IOException e) {

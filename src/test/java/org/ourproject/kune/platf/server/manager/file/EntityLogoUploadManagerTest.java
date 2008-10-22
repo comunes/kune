@@ -30,7 +30,7 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
     public void testCreateLogo() throws Exception {
         super.doLogin();
         FileItem fileItem = Mockito.mock(FileItem.class);
-        Mockito.stub(fileItem.getContentType()).toReturn("image/jpeg");
+        Mockito.stub(fileItem.getContentType()).toReturn("image/png");
         Mockito.stub(fileItem.getName()).toReturn(TEST_FILE);
         manager.createUploadedFile(super.getHash(), super.getDefaultContent().getStateToken(), "file", fileItem);
     }

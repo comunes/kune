@@ -54,6 +54,7 @@ public class EntityTitlePanel implements EntityTitleView {
         dateLabel.addStyleName("kune-Margin-Large-r");
         dateLabel.addStyleName("kune-ft12px");
         dateLabel.ensureDebugId("k-entity-title-date");
+        icon.setVisible(false);
     }
 
     public void restoreOldTitle() {

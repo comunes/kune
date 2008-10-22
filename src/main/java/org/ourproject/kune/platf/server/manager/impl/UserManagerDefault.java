@@ -113,9 +113,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
                 int index = entry.getUser().indexOf(domain);
                 if (index > 0) {
                     // local user
-                    User buddie = finder.getByShortName(entry.getUser().substring(0, index));
-                    if (buddie != null) {
+                    try {
+                        User buddie = finder.getByShortName(entry.getUser().substring(0, index));
                         buddiesData.getBuddies().add(buddie);
+                    } catch (NoResultException e) {
+                        // No existent buddie, skip
                     }
                 } else {
                     // ext user (only count)

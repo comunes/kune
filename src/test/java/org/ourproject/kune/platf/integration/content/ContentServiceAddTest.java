@@ -46,7 +46,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
         final String title = "New Content Title";
         final StateDTO added = contentService.addContent(session.getHash(),
-                                                         defaultContent.getContainer().getStateToken(), title);
+                defaultContent.getContainer().getStateToken(), title);
         assertNotNull(added);
         final List<ContentSimpleDTO> contents = added.getContainer().getContents();
         assertEquals(title, added.getTitle());
@@ -72,7 +72,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         final ContainerDTO parent = defaultContent.getContainer();
         final String title = "folder name";
         final StateDTO newState = contentService.addFolder(session.getHash(), parent.getStateToken(), title,
-                                                           DocumentClientTool.TYPE_FOLDER);
+                DocumentClientTool.TYPE_FOLDER);
         assertNotNull(newState);
         assertNotNull(newState.getGroupMembers());
         assertNotNull(newState.getParticipation());
@@ -106,11 +106,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         final ContainerDTO parent = defaultContent.getContainer();
         final String title = "folder name";
         final StateDTO newState = contentService.addFolder(session.getHash(), parent.getStateToken(), title,
-                                                           DocumentClientTool.TYPE_FOLDER);
+                DocumentClientTool.TYPE_FOLDER);
         assertNotNull(newState);
 
         final StateDTO newState2 = contentService.addFolder(session.getHash(), parent.getStateToken(), title,
-                                                            DocumentClientTool.TYPE_FOLDER);
+                DocumentClientTool.TYPE_FOLDER);
         assertNotNull(newState2);
 
         final ContainerDTO parentAgain = getDefaultContent().getContainer();

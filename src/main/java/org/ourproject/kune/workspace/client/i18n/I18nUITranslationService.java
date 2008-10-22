@@ -144,13 +144,13 @@ public class I18nUITranslationService extends I18nTranslationService {
             // Not translated and not in db, make a petition for translation
             if (session.isLogged()) {
                 i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text,
-                                           new AsyncCallback<String>() {
-                                               public void onFailure(final Throwable caught) {
-                                               }
+                        new AsyncCallback<String>() {
+                            public void onFailure(final Throwable caught) {
+                            }
 
-                                               public void onSuccess(final String result) {
-                                               }
-                                           });
+                            public void onSuccess(final String result) {
+                            }
+                        });
                 Log.debug("Registering in db '" + text + "' as pending translation");
                 lexicon.put(encodeText, UNTRANSLATED_VALUE);
             }

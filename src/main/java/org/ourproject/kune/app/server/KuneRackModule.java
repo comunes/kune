@@ -93,14 +93,14 @@ public class KuneRackModule implements RackModule {
         builder.at("^/kune$").install(new RedirectFilter("/kune/"));
 
         builder.at("^/kune/$").install(new ListenerFilter(KuneApplicationListener.class),
-                                       new ForwardFilter("/gwt/org.ourproject.kune.app.Kune/Kune.html"));
+                new ForwardFilter("/gwt/org.ourproject.kune.app.Kune/Kune.html"));
 
         builder.installGWTServices("^/kune/", SiteService.class, GroupService.class, ContentService.class,
-                                   UserService.class, SocialNetworkService.class, I18nService.class);
+                UserService.class, SocialNetworkService.class, I18nService.class);
         builder.installRESTServices("^/kune/json/", TestJSONService.class, GroupJSONService.class,
-                                    UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
+                UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
         builder.installServlet("^/kune/servlets/", FileUploadManager.class, FileDownloadManager.class,
-                               EntityLogoUploadManager.class, EntityLogoDownloadManager.class);
+                EntityLogoUploadManager.class, EntityLogoDownloadManager.class);
 
         builder.at("^/kune/(.*)$").install(new ForwardFilter("^/kune/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
     }

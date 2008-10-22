@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -162,8 +163,10 @@ public class StateManagerDefault implements StateManager {
             // to avoid to reload() again the state
             final SocialNetworkDTO groupMembers = socialNet.getGroupMembers();
             final ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
+            final UserBuddiesDataDTO userBuddies = socialNet.getUserBuddies();
             state.setGroupMembers(groupMembers);
             state.setParticipation(userParticipation);
+            state.setUserBuddies(userBuddies);
             onSocialNetworkChanged.fire(state);
         }
     }
@@ -190,7 +193,7 @@ public class StateManagerDefault implements StateManager {
     }
 
     private void setState(final StateDTO newState) {
-        session.setCurrent(newState);
+        session.setCurrentState(newState);
         onStateChanged.fire(newState);
         Site.hideProgress();
         checkGroupAndToolChange(oldState, newState);

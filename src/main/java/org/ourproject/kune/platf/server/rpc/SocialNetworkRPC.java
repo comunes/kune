@@ -19,14 +19,19 @@
  */
 package org.ourproject.kune.platf.server.rpc;
 
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.access.AccessRights;
+import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -35,6 +40,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.inject.Inject;
@@ -50,14 +56,19 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     private final GroupManager groupManager;
     private final SocialNetworkManager socialNetworkManager;
     private final Mapper mapper;
+    private final UserManager userManager;
+    private final AccessRightsService accessRightsService;
 
     @Inject
-    public SocialNetworkRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
-            final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
+    public SocialNetworkRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
+            final GroupManager groupManager, final SocialNetworkManager socialNetworkManager, final Mapper mapper,
+            AccessRightsService accessRightsService) {
         this.userSessionProvider = userSessionProvider;
+        this.userManager = userManager;
         this.groupManager = groupManager;
         this.socialNetworkManager = socialNetworkManager;
         this.mapper = mapper;
+        this.accessRightsService = accessRightsService;
     }
 
     @Authenticated
@@ -70,7 +81,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         final Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
         socialNetworkManager.acceptJoinGroup(userLogged, groupToAccept, group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
     }
 
     @Authenticated
@@ -83,7 +94,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToAdmins(userLogged, groupToAdd, group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
     }
 
     @Authenticated
@@ -96,7 +107,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToCollabs(userLogged, groupToAdd, group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
     }
 
     @Authenticated
@@ -109,7 +120,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToViewers(userLogged, groupToAdd, group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
     }
 
     @Authenticated
@@ -122,7 +133,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         final Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
         socialNetworkManager.deleteMember(userLogged, groupToDelete, group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
     }
 
     @Authenticated
@@ -135,30 +146,19 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         final Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
         socialNetworkManager.denyJoinGroup(userLogged, groupToDenyJoin, group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
     }
 
     @Authenticated(mandatory = false)
     // At least you can access as Viewer to the Group
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_ONLY)
-    public SocialNetworkDTO getGroupMembers(final String hash, final StateToken groupToken) throws DefaultException {
-        final UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        final Group group = groupManager.findByShortName(groupToken.getGroup());
-        return getGroupMembers(user, group);
-    }
-
-    @Authenticated(mandatory = false)
-    // At least you can access as Viewer to the Group
-    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
-    @Transactional(type = TransactionType.READ_ONLY)
-    public ParticipationDataDTO getParticipation(final String hash, final StateToken groupToken)
+    public SocialNetworkResultDTO getSocialNetwork(final String hash, final StateToken groupToken)
             throws DefaultException {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
-        return getParticipation(user, group);
+        return generateResponse(user, group);
     }
 
     @Authenticated
@@ -181,7 +181,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         final Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
         socialNetworkManager.setAdminAsCollab(userLogged, groupToSetCollab, group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
     }
 
     @Authenticated
@@ -194,7 +194,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         final Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
         socialNetworkManager.setCollabAsAdmin(userLogged, groupToSetAdmin, group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
     }
 
     @Authenticated
@@ -204,7 +204,18 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         socialNetworkManager.unJoinGroup(userLogged.getUserGroup(), group);
-        return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group));
+        return generateResponse(userLogged, group);
+    }
+
+    private SocialNetworkResultDTO generateResponse(final User userLogged, final Group group) {
+        AccessRights groupRights = accessRightsService.get(userLogged, group.getSocialNetwork().getAccessLists());
+        if (group.getGroupType().equals(GroupType.PERSONAL)) {
+            return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group),
+                    getUserBuddies(group), mapper.map(groupRights, AccessRightsDTO.class));
+        } else {
+            return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group),
+                    UserBuddiesDataDTO.NO_BUDDIES, mapper.map(groupRights, AccessRightsDTO.class));
+        }
     }
 
     private SocialNetworkDTO getGroupMembers(final User user, final Group group) throws DefaultException {
@@ -213,6 +224,10 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     private ParticipationDataDTO getParticipation(final User user, final Group group) throws DefaultException {
         return mapper.map(socialNetworkManager.findParticipation(user, group), ParticipationDataDTO.class);
+    }
+
+    private UserBuddiesDataDTO getUserBuddies(final Group group) {
+        return mapper.map(userManager.getUserBuddies(group.getShortName()), UserBuddiesDataDTO.class);
     }
 
     private UserSession getUserSession() {

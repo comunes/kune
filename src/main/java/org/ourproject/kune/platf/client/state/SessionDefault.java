@@ -142,10 +142,6 @@ public class SessionDefault implements Session {
         onUserSignOut.add(listener);
     }
 
-    public void setCurrent(final StateDTO currentState) {
-        this.currentState = currentState;
-    }
-
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
         this.currentLanguage = currentLanguage;
     }

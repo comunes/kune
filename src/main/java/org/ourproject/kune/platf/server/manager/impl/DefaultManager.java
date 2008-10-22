@@ -83,7 +83,7 @@ public abstract class DefaultManager<T, K> {
     @SuppressWarnings("unchecked")
     public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
         final FullTextQuery emQuery = Search.createFullTextEntityManager(getEntityManager()).createFullTextQuery(query,
-                                                                                                                 entityClass);
+                entityClass);
         if (firstResult != null && maxResults != null) {
             emQuery.setFirstResult(firstResult);
             emQuery.setMaxResults(maxResults);

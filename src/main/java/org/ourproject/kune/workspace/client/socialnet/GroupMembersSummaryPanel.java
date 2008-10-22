@@ -112,17 +112,17 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     public void confirmAddCollab(final String groupShortName, final String groupLongName) {
         final String groupName = groupLongName + " (" + groupShortName + ")";
         MessageBox.confirm(i18n.t("Confirm addition of member"), i18n.t("Add [%s] as member?", groupName),
-                           new MessageBox.ConfirmCallback() {
-                               public void execute(final String btnID) {
-                                   if (btnID.equals("yes")) {
-                                       DeferredCommand.addCommand(new Command() {
-                                           public void execute() {
-                                               presenter.addCollab(groupShortName);
-                                           }
-                                       });
-                                   }
-                               }
-                           });
+                new MessageBox.ConfirmCallback() {
+                    public void execute(final String btnID) {
+                        if (btnID.equals("yes")) {
+                            DeferredCommand.addCommand(new Command() {
+                                public void execute() {
+                                    presenter.addCollab(groupShortName);
+                                }
+                            });
+                        }
+                    }
+                });
     }
 
     @Override

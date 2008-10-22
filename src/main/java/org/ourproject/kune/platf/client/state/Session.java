@@ -75,8 +75,6 @@ public interface Session {
 
     void onUserSignOut(Listener0 listener);
 
-    void setCurrent(final StateDTO currentState);
-
     void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
 
     void setCurrentState(final StateDTO currentState);

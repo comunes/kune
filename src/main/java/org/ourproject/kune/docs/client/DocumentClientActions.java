@@ -92,39 +92,27 @@ public class DocumentClientActions {
     }
 
     private void createActions() {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder = createFolderAction(
-                                                                                            TYPE_FOLDER,
-                                                                                            "images/nav/folder_add.png",
-                                                                                            i18n.t("New folder"),
-                                                                                            i18n.t("Folder"),
-                                                                                            i18n.t("New"),
-                                                                                            i18n.t("New folder"));
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addGallery = createFolderAction(
-                                                                                             TYPE_GALLERY,
-                                                                                             "images/nav/gallery_add.png",
-                                                                                             i18n.t("New gallery"),
-                                                                                             i18n.t("Folder"),
-                                                                                             i18n.t("New"),
-                                                                                             i18n.t("New gallery"));
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder = createFolderAction(TYPE_FOLDER,
+                "images/nav/folder_add.png", i18n.t("New folder"), i18n.t("Folder"), i18n.t("New"),
+                i18n.t("New folder"));
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addGallery = createFolderAction(TYPE_GALLERY,
+                "images/nav/gallery_add.png", i18n.t("New gallery"), i18n.t("Folder"), i18n.t("New"),
+                i18n.t("New gallery"));
         final ActionToolbarMenuAndItemDescriptor<StateToken> addWiki = createFolderAction(TYPE_WIKI,
-                                                                                          "images/nav/wiki_add.png",
-                                                                                          i18n.t("New wiki"),
-                                                                                          i18n.t("Folder"),
-                                                                                          i18n.t("New"), i18n.t("wiki"));
+                "images/nav/wiki_add.png", i18n.t("New wiki"), i18n.t("Folder"), i18n.t("New"), i18n.t("wiki"));
 
         final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         Site.showProgressProcessing();
                         contentServiceProvider.get().addContent(session.getUserHash(),
-                                                                session.getCurrentState().getStateToken(),
-                                                                i18n.t("New document"),
-                                                                new AsyncCallbackSimple<StateDTO>() {
-                                                                    public void onSuccess(final StateDTO state) {
-                                                                        contextNavigator.setEditOnNextStateChange(true);
-                                                                        stateManager.setRetrievedState(state);
-                                                                    }
-                                                                });
+                                session.getCurrentState().getStateToken(), i18n.t("New document"),
+                                new AsyncCallbackSimple<StateDTO>() {
+                                    public void onSuccess(final StateDTO state) {
+                                        contextNavigator.setEditOnNextStateChange(true);
+                                        stateManager.setRetrievedState(state);
+                                    }
+                                });
                     }
                 });
         addDoc.setTextDescription(i18n.t("New document"));
@@ -148,12 +136,12 @@ public class DocumentClientActions {
                 AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         contentServiceProvider.get().delContent(session.getUserHash(), token,
-                                                                new AsyncCallbackSimple<String>() {
-                                                                    public void onSuccess(final String result) {
-                                                                        final StateToken parent = token.clone().clearDocument();
-                                                                        stateManager.gotoToken(parent);
-                                                                    }
-                                                                });
+                                new AsyncCallbackSimple<String>() {
+                                    public void onSuccess(final String result) {
+                                        final StateToken parent = token.clone().clearDocument();
+                                        stateManager.gotoToken(parent);
+                                    }
+                                });
                     }
                 });
         delContent.setParentMenuTitle(i18n.t("File"));
@@ -248,19 +236,14 @@ public class DocumentClientActions {
         refreshCnt.setTextDescription(i18n.t("Refresh"));
         refreshCnt.setIconUrl("images/nav/refresh.png");
 
-        final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile = createUploadAction(
-                                                                                               i18n.t("Upload file"),
-                                                                                               "images/nav/upload.png",
-                                                                                               i18n.t("Upload some files (images, PDFs, ...)"),
-                                                                                               null);
+        final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
+                "images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
 
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO parameter) {
                 final ActionToolbarButtonAndItemDescriptor<StateToken> uploadMedia = createUploadAction(
-                                                                                                        i18n.t("Upload media"),
-                                                                                                        "images/nav/upload.png",
-                                                                                                        i18n.t("Upload some media (images, videos)"),
-                                                                                                        session.getGalleryPermittedExtensions());
+                        i18n.t("Upload media"), "images/nav/upload.png", i18n.t("Upload some media (images, videos)"),
+                        session.getGalleryPermittedExtensions());
                 contextActionRegistry.addAction(uploadMedia, TYPE_GALLERY);
             }
         });
@@ -290,17 +273,16 @@ public class DocumentClientActions {
                 AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         groupServiceProvider.get().setGroupFullLogo(session.getUserHash(), token,
-                                                                    new AsyncCallbackSimple<GroupDTO>() {
-                                                                        public void onSuccess(GroupDTO newGroup) {
-                                                                            Site.info("Logo selected");
-                                                                            if (session.getCurrentState().getGroup().getShortName().equals(
-                                                                                                                                           newGroup.getShortName())) {
-                                                                                session.getCurrentState().setGroup(
-                                                                                                                   newGroup);
-                                                                            }
-                                                                            entityLogo.refreshGroupLogo();
-                                                                        }
-                                                                    });
+                                new AsyncCallbackSimple<GroupDTO>() {
+                                    public void onSuccess(GroupDTO newGroup) {
+                                        Site.info("Logo selected");
+                                        if (session.getCurrentState().getGroup().getShortName().equals(
+                                                newGroup.getShortName())) {
+                                            session.getCurrentState().setGroup(newGroup);
+                                        }
+                                        entityLogo.refreshGroupLogo();
+                                    }
+                                });
                     }
                 });
         setGroupLogo.setParentMenuTitle(i18n.t("File"));
@@ -314,25 +296,15 @@ public class DocumentClientActions {
         });
 
         final ActionToolbarMenuDescriptor<StateToken> setPublishStatus = createSetStatusAction(
-                                                                                               AccessRolDTO.Administrator,
-                                                                                               i18n.t("Published online"),
-                                                                                               ContentStatusDTO.publishedOnline);
+                AccessRolDTO.Administrator, i18n.t("Published online"), ContentStatusDTO.publishedOnline);
         final ActionToolbarMenuDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
-                                                                                                         AccessRolDTO.Administrator,
-                                                                                                         i18n.t("Editing in progress"),
-                                                                                                         ContentStatusDTO.editingInProgress);
+                AccessRolDTO.Administrator, i18n.t("Editing in progress"), ContentStatusDTO.editingInProgress);
         final ActionToolbarMenuDescriptor<StateToken> setRejectStatus = createSetStatusAction(
-                                                                                              AccessRolDTO.Administrator,
-                                                                                              i18n.t("Rejected"),
-                                                                                              ContentStatusDTO.rejected);
+                AccessRolDTO.Administrator, i18n.t("Rejected"), ContentStatusDTO.rejected);
         final ActionToolbarMenuDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
-                                                                                                           AccessRolDTO.Administrator,
-                                                                                                           i18n.t("Submitted for publish"),
-                                                                                                           ContentStatusDTO.publishedOnline);
+                AccessRolDTO.Administrator, i18n.t("Submitted for publish"), ContentStatusDTO.publishedOnline);
         final ActionToolbarMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
-                                                                                                    AccessRolDTO.Administrator,
-                                                                                                    i18n.t("In the dustbin"),
-                                                                                                    ContentStatusDTO.inTheDustbin);
+                AccessRolDTO.Administrator, i18n.t("In the dustbin"), ContentStatusDTO.inTheDustbin);
 
         final ActionToolbarButtonDescriptor<StateToken> translateContent = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
@@ -356,31 +328,27 @@ public class DocumentClientActions {
                                     public void onEvent(final String html) {
                                         Site.showProgressSaving();
                                         contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
-                                                                          new AsyncCallback<Integer>() {
-                                                                              public void onFailure(
-                                                                                      final Throwable caught) {
-                                                                                  Site.hideProgress();
-                                                                                  try {
-                                                                                      throw caught;
-                                                                                  } catch (final SessionExpiredException e) {
-                                                                                      errorHandler.doSessionExpired();
-                                                                                  } catch (final Throwable e) {
-                                                                                      Site.error(i18n.t("Error saving document. Retrying..."));
-                                                                                      errorHandler.process(caught);
-                                                                                      editor.onSaveFailed();
-                                                                                  }
-                                                                              }
+                                                new AsyncCallback<Integer>() {
+                                                    public void onFailure(final Throwable caught) {
+                                                        Site.hideProgress();
+                                                        try {
+                                                            throw caught;
+                                                        } catch (final SessionExpiredException e) {
+                                                            errorHandler.doSessionExpired();
+                                                        } catch (final Throwable e) {
+                                                            Site.error(i18n.t("Error saving document. Retrying..."));
+                                                            errorHandler.process(caught);
+                                                            editor.onSaveFailed();
+                                                        }
+                                                    }
 
-                                                                              public void onSuccess(
-                                                                                      final Integer newVersion) {
-                                                                                  Site.hideProgress();
-                                                                                  session.getCurrentState().setVersion(
-                                                                                                                       newVersion);
-                                                                                  session.getCurrentState().setContent(
-                                                                                                                       html);
-                                                                                  editor.onSaved();
-                                                                              }
-                                                                          });
+                                                    public void onSuccess(final Integer newVersion) {
+                                                        Site.hideProgress();
+                                                        session.getCurrentState().setVersion(newVersion);
+                                                        session.getCurrentState().setContent(html);
+                                                        editor.onSaved();
+                                                    }
+                                                });
                                     }
                                 }, new Listener0() {
                                     public void onEvent() {
@@ -430,7 +398,7 @@ public class DocumentClientActions {
         contextActionRegistry.addAction(downloadCtx, TYPE_UPLOADEDFILE);
         contentActionRegistry.addAction(editContent, TYPE_DOCUMENT, TYPE_POST, TYPE_WIKIPAGE);
         contentActionRegistry.addAction(translateContent, TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE,
-                                        TYPE_WIKI, TYPE_WIKIPAGE);
+                TYPE_WIKI, TYPE_WIKIPAGE);
     }
 
     private ActionToolbarMenuAndItemDescriptor<StateToken> createFolderAction(final String contentTypeId,
@@ -442,12 +410,12 @@ public class DocumentClientActions {
                     public void onEvent(final StateToken stateToken) {
                         Site.showProgressProcessing();
                         contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
-                                                               contentTypeId, new AsyncCallbackSimple<StateDTO>() {
-                                                                   public void onSuccess(final StateDTO state) {
-                                                                       contextNavigator.setEditOnNextStateChange(true);
-                                                                       stateManager.setRetrievedState(state);
-                                                                   }
-                                                               });
+                                contentTypeId, new AsyncCallbackSimple<StateDTO>() {
+                                    public void onSuccess(final StateDTO state) {
+                                        contextNavigator.setEditOnNextStateChange(true);
+                                        stateManager.setRetrievedState(state);
+                                    }
+                                });
                     }
                 });
         addFolder.setTextDescription(textDescription);
@@ -464,15 +432,13 @@ public class DocumentClientActions {
                     public void onEvent(final StateToken token) {
                         Site.showProgressProcessing();
                         contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
-                                                                         new AsyncCallbackSimple<ContentSimpleDTO>() {
-                                                                             public void onSuccess(
-                                                                                     final ContentSimpleDTO defContent) {
-                                                                                 session.getCurrentState().getGroup().setDefaultContent(
-                                                                                                                                        defContent);
-                                                                                 Site.hideProgress();
-                                                                                 Site.info(i18n.t("Document selected as the group homepage"));
-                                                                             }
-                                                                         });
+                                new AsyncCallbackSimple<ContentSimpleDTO>() {
+                                    public void onSuccess(final ContentSimpleDTO defContent) {
+                                        session.getCurrentState().getGroup().setDefaultContent(defContent);
+                                        Site.hideProgress();
+                                        Site.info(i18n.t("Document selected as the group homepage"));
+                                    }
+                                });
                     }
                 });
         setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
@@ -498,7 +464,7 @@ public class DocumentClientActions {
                         };
                         if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
                             contentServiceProvider.get().setStatusAsAdmin(session.getUserHash(), stateToken, status,
-                                                                          callback);
+                                    callback);
                         } else {
                             contentServiceProvider.get().setStatus(session.getUserHash(), stateToken, status, callback);
                         }

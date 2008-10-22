@@ -50,8 +50,7 @@ public class StateManagerTest {
     public void getDefGroup() {
         stateManager.onHistoryChanged("site.docs");
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                                                                     (StateToken) Mockito.anyObject(),
-                                                                     (AsyncCallback<StateDTO>) Mockito.anyObject());
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
     }
 
     @Before
@@ -72,8 +71,7 @@ public class StateManagerTest {
         Mockito.stub(history.getToken()).toReturn("");
         stateManager.reload();
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                                                                     (StateToken) Mockito.anyObject(),
-                                                                     (AsyncCallback<StateDTO>) Mockito.anyObject());
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
     }
 
     @SuppressWarnings("unchecked")
@@ -85,7 +83,6 @@ public class StateManagerTest {
         stateManager.onHistoryChanged(token);
         Mockito.verify(listener, Mockito.times(1)).onEvent(Mockito.anyObject());
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                                                                     (StateToken) Mockito.anyObject(),
-                                                                     (AsyncCallback<StateDTO>) Mockito.anyObject());
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
     }
 }

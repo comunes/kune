@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
+import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
@@ -26,6 +27,9 @@ import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePresenter;
+import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
+import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
+import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -243,7 +247,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public WsThemePresenter create() {
                 final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $$(GroupServiceAsync.class),
-                        $(StateManager.class));
+                        $(StateManager.class), $(KuneErrorHandler.class));
                 final WsThemePanel panel = new WsThemePanel($(WorkspaceSkeleton.class), presenter,
                         $(I18nUITranslationService.class));
                 presenter.init(panel);
@@ -267,7 +271,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntitySubTitle create() {
                 final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(
-                        $(I18nUITranslationService.class), $(StateManager.class), false);
+                        $(I18nUITranslationService.class), $(StateManager.class), false, $(KuneErrorHandler.class));
                 final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, $(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
@@ -277,7 +281,8 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
             @Override
             public EntityLicensePresenter create() {
-                final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class));
+                final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class),
+                        $(KuneErrorHandler.class));
                 final EntityLicensePanel panel = new EntityLicensePanel(presenter, $(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class));
                 presenter.init(panel);
@@ -371,5 +376,19 @@ public class KuneWorkspaceModule extends AbstractModule {
                 return presenter;
             }
         });
+
+        register(ApplicationComponentGroup.class, new Factory<NoHomePage>(NoHomePage.class) {
+            @Override
+            public NoHomePage create() {
+                final NoHomePagePresenter presenter = new NoHomePagePresenter($(Session.class), $(StateManager.class),
+                        $(KuneErrorHandler.class), $(EntityLogo.class), $$(GroupServiceAsync.class),
+                        $$(EntityLogo.class), $$(SocialNetworkServiceAsync.class), $(HistoryWrapper.class));
+                final NoHomePagePanel panel = new NoHomePagePanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
     }
 }

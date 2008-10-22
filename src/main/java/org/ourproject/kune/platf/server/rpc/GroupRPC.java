@@ -84,7 +84,7 @@ public class GroupRPC implements RPC, GroupService {
         return newGroup.getDefaultContent().getStateToken();
     }
 
-    @Authenticated
+    @Authenticated(mandatory = false)
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
     public GroupDTO getGroup(String userHash, StateToken groupToken) {
         final Group group = groupManager.findByShortName(groupToken.getGroup());

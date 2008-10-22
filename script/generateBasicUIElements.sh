@@ -38,18 +38,16 @@ public class ${NAME}Presenter implements $NAME {
 
 private ${NAME}View view;
 
-public ${NAME}Presenter() {
-}
+   public ${NAME}Presenter() {
+   }
 
-public void init(${NAME}View view) {
-this.view = view;
-}
-
+   public void init(${NAME}View view) {
+      this.view = view;
+   }
 
     public View getView() {
         return view;
     }
-
 }
 
 EOF
@@ -88,7 +86,7 @@ import $PACKAGE.${NAME};
 register(Singleton.class, new Factory<${NAME}>(${NAME}.class) {
     public ${NAME} create() {
 	final ${NAME}Presenter presenter = new ${NAME}Presenter();
-	final ${NAME}Panel panel = new ${NAME}Panel(presenter, $(WorkspaceSkeleton.class));
+	final ${NAME}Panel panel = new ${NAME}Panel(presenter, \$(WorkspaceSkeleton.class));
 	presenter.init(panel);
 	return presenter;
     }

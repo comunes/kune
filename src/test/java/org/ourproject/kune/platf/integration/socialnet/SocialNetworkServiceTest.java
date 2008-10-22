@@ -4,8 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
@@ -32,14 +31,14 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 
     @Test
     public void testGetGroupMembersNotLogged() throws Exception {
-        final SocialNetworkDTO groupMembers = socialNetworkService.getGroupMembers(null, groupToken);
-        assertNotNull(groupMembers);
+        final SocialNetworkResultDTO sn = socialNetworkService.getSocialNetwork(null, groupToken);
+        assertNotNull(sn.getGroupMembers());
     }
 
     @Test
     public void testGetParticipationNotLogged() throws Exception {
-        final ParticipationDataDTO participation = socialNetworkService.getParticipation(null, groupToken);
-        assertNotNull(participation);
+        final SocialNetworkResultDTO sn = socialNetworkService.getSocialNetwork(null, groupToken);
+        assertNotNull(sn.getUserParticipation());
     }
 
     @Test(expected = UserMustBeLoggedException.class)

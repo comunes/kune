@@ -86,13 +86,13 @@ public class RateItPresenter implements RateIt {
         Site.showProgressProcessing();
         final StateDTO currentState = session.getCurrentState();
         contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getStateToken(), newValue,
-                                                 new AsyncCallbackSimple<Object>() {
-                                                     public void onSuccess(final Object result) {
-                                                         Site.hideProgress();
-                                                         Site.info(i18n.t("Content rated"));
-                                                         stateManager.reload();
-                                                     }
-                                                 });
+                new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        Site.info(i18n.t("Content rated"));
+                        stateManager.reload();
+                    }
+                });
     }
 
     protected void starOver(final int starMouseOver) {

@@ -50,7 +50,7 @@ public class GroupListModeConverter implements CustomConverter {
             return enumToString.get(source);
         } else {
             final String msg = MessageFormat.format("couldn't map {0} ({1}) to {2} ({3})", source, sourceClass,
-                                                    destination, destinationClass);
+                    destination, destinationClass);
             throw new MappingException(msg);
         }
 

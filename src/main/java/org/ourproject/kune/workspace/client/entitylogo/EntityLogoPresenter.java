@@ -3,6 +3,7 @@ package org.ourproject.kune.workspace.client.entitylogo;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
@@ -15,6 +16,9 @@ import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
 
 public class EntityLogoPresenter implements EntityLogo {
+    int GROUP_MEDIUM_NAME_LIMIT_SIZE = 90;
+    int GROUP_LARGE_NAME_LIMIT_SIZE = 20;
+
     private EntityLogoView view;
     private final Session session;
     private final Provider<GroupServiceAsync> groupServiceProvider;
@@ -32,7 +36,13 @@ public class EntityLogoPresenter implements EntityLogo {
         stateManager.onStateChanged(new Listener<StateDTO>() {
             public void onEvent(final StateDTO state) {
                 final boolean isAdmin = state.getGroupRights().isAdministrable();
-                view.setPutYourLogoVisible(isAdmin);
+                if (state.getGroup().hasLogo()) {
+                    view.setChangeYourLogoText();
+                    view.setSetYourLogoVisible(isAdmin);
+                } else {
+                    view.setPutYourLogoText();
+                    view.setSetYourLogoVisible(isAdmin);
+                }
             }
         });
         theme.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
@@ -51,20 +61,22 @@ public class EntityLogoPresenter implements EntityLogo {
     }
 
     public void reloadGroupLogo() {
-        groupServiceProvider.get().getGroup(session.getUserHash(), session.getCurrentStateToken(),
-                                            new AsyncCallbackSimple<GroupDTO>() {
-                                                public void onSuccess(GroupDTO group) {
-                                                    StateDTO currentState = session.getCurrentState();
-                                                    if (currentState.getGroup().getShortName().equals(
-                                                                                                      group.getShortName())) {
-                                                        // only if we are in the
-                                                        // same group
-                                                        view.reloadImage(group);
-                                                        currentState.setGroup(group);
-                                                        setGroupLogo(group);
-                                                    }
-                                                }
-                                            });
+        reloadGroupLogo(session.getCurrentStateToken());
+    }
+
+    public void reloadGroupLogo(StateToken groupToken) {
+        groupServiceProvider.get().getGroup(session.getUserHash(), groupToken, new AsyncCallbackSimple<GroupDTO>() {
+            public void onSuccess(GroupDTO group) {
+                StateDTO currentState = session.getCurrentState();
+                if (currentState.getGroup().getShortName().equals(group.getShortName())) {
+                    // only if we are in the
+                    // same group
+                    view.reloadImage(group);
+                    currentState.setGroup(group);
+                    setGroupLogo(group);
+                }
+            }
+        });
     }
 
     private void setGroupLogo(final GroupDTO group) {
@@ -73,11 +85,23 @@ public class EntityLogoPresenter implements EntityLogo {
             view.setFullLogo(groupFullLogo.getStateToken(), true);
         } else if (group.hasLogo()) {
             view.setLogoImage(group.getStateToken());
-            view.setLogoText(group.getLongName());
+            setLogoText(group.getLongName());
             view.setLogoImageVisible(true);
         } else {
-            view.setLogoText(group.getLongName());
+            setLogoText(group.getLongName());
             view.setLogoImageVisible(false);
         }
+    }
+
+    private void setLogoText(String name) {
+        int length = name.length();
+        if (length <= GROUP_LARGE_NAME_LIMIT_SIZE) {
+            view.setLargeFont();
+        } else if (length <= GROUP_MEDIUM_NAME_LIMIT_SIZE) {
+            view.setMediumFont();
+        } else {
+            view.setSmallFont();
+        }
+        view.setLogoText(name);
     }
 }

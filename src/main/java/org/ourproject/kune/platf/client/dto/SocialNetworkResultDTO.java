@@ -27,17 +27,32 @@ public class SocialNetworkResultDTO implements IsSerializable {
 
     ParticipationDataDTO userParticipation;
 
+    UserBuddiesDataDTO userBuddies;
+
+    AccessRightsDTO groupRights;
+
     public SocialNetworkResultDTO() {
-        this(null, null);
+        this(null, null, null, null);
     }
 
-    public SocialNetworkResultDTO(final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation) {
+    public SocialNetworkResultDTO(final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation,
+            final UserBuddiesDataDTO userBuddies, AccessRightsDTO groupRights) {
         this.groupMembers = groupMembers;
         this.userParticipation = userParticipation;
+        this.userBuddies = userBuddies;
+        this.groupRights = groupRights;
     }
 
     public SocialNetworkDTO getGroupMembers() {
         return groupMembers;
+    }
+
+    public AccessRightsDTO getGroupRights() {
+        return groupRights;
+    }
+
+    public UserBuddiesDataDTO getUserBuddies() {
+        return userBuddies;
     }
 
     public ParticipationDataDTO getUserParticipation() {
@@ -48,10 +63,19 @@ public class SocialNetworkResultDTO implements IsSerializable {
         this.groupMembers = groupMembers;
     }
 
+    public void setGroupRights(AccessRightsDTO groupRights) {
+        this.groupRights = groupRights;
+    }
+
+    public void setUserBuddies(UserBuddiesDataDTO userBuddies) {
+        this.userBuddies = userBuddies;
+    }
+
     public void setUserParticipation(final ParticipationDataDTO userParticipation) {
         this.userParticipation = userParticipation;
     }
 
+    @Override
     public String toString() {
         return "SocialNetworkResultDTO[members: " + groupMembers + "; participation: " + userParticipation + "]";
     }

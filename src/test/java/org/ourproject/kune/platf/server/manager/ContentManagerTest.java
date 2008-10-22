@@ -69,7 +69,7 @@ public class ContentManagerTest extends PersistenceTest {
                 "western", ",");
         countryManager.persist(gb);
         user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB",
-                                      TimeZone.getDefault().getID());
+                TimeZone.getDefault().getID());
         defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
         licenseManager.persist(defLicense);

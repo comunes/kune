@@ -120,10 +120,10 @@ public class GroupManagerTest extends PersistenceTest {
     public void createUserExistingEmail() throws I18nNotFoundException, GroupNameInUseException,
             EmailAddressInUseException {
         final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-                                                  "GB", "GMT");
+                "GB", "GMT");
         groupManager.createUserGroup(user1);
         final User user2 = userManager.createUser("test2", "test 2 name", "test1@example.com", "some password", "en",
-                                                  "GB", "GMT");
+                "GB", "GMT");
         groupManager.createUserGroup(user2);
     }
 
@@ -131,10 +131,10 @@ public class GroupManagerTest extends PersistenceTest {
     public void createUserExistingLongName() throws I18nNotFoundException, GroupNameInUseException,
             EmailAddressInUseException {
         final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-                                                  "GB", "GMT");
+                "GB", "GMT");
         groupManager.createUserGroup(user1);
         final User user2 = userManager.createUser("test2", "test 1 name", "test2@example.com", "some password", "en",
-                                                  "GB", "GMT");
+                "GB", "GMT");
         groupManager.createUserGroup(user2);
     }
 
@@ -142,17 +142,17 @@ public class GroupManagerTest extends PersistenceTest {
     public void createUserExistingShortName() throws I18nNotFoundException, GroupNameInUseException,
             EmailAddressInUseException {
         final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
-                                                  "GB", "GMT");
+                "GB", "GMT");
         groupManager.createUserGroup(user1);
         final User user2 = userManager.createUser("test", "test 2 name", "test2@example.com", "some password", "en",
-                                                  "GB", "GMT");
+                "GB", "GMT");
         groupManager.createUserGroup(user2);
     }
 
     @Test(expected = EmailAddressInUseException.class)
     public void createUserWithExistingEmail() throws Exception {
         final User user2 = userManager.createUser("username2", "the user name 2", "email@example.com", "userPassword",
-                                                  "en", "GB", TimeZone.getDefault().getID());
+                "en", "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
@@ -160,7 +160,7 @@ public class GroupManagerTest extends PersistenceTest {
     @Test(expected = GroupNameInUseException.class)
     public void createUserWithExistingLongName() throws Exception {
         final User user2 = userManager.createUser("username2", "the user name", "email2@example.com", "userPassword",
-                                                  "en", "GB", TimeZone.getDefault().getID());
+                "en", "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
@@ -168,7 +168,7 @@ public class GroupManagerTest extends PersistenceTest {
     @Test(expected = GroupNameInUseException.class)
     public void createUserWithExistingShortName() throws Exception {
         final User user2 = userManager.createUser("username", "the user name 2", "email2@example.com", "userPassword",
-                                                  "en", "GB", TimeZone.getDefault().getID());
+                "en", "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
@@ -200,7 +200,7 @@ public class GroupManagerTest extends PersistenceTest {
                 "western", ",");
         countryManager.persist(gb);
         user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB",
-                                      TimeZone.getDefault().getID());
+                TimeZone.getDefault().getID());
         defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
         licenseManager.persist(defLicense);

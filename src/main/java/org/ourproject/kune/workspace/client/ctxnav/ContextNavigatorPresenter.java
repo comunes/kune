@@ -41,6 +41,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
@@ -71,15 +72,17 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final ActionToolbar<StateToken> toolbar;
     private final Provider<FileDownloadUtils> downloadUtilsProvider;
     private final boolean useGenericImageIcon;
+    private final KuneErrorHandler errorHandler;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
-            final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
-            final EntityTitle entityTitle, final ContentIconsRegistry contentIconsRegistry,
-            final DragDropContentRegistry dragDropContentRegistry, final ActionToolbar<StateToken> toolbar,
-            final ActionRegistry<StateToken> actionRegistry, Provider<FileDownloadUtils> downloadUtilsProvider,
-            boolean useGenericImageIcon) {
+            final KuneErrorHandler errorHandler, final Provider<ContentServiceAsync> contentServiceProvider,
+            final I18nUITranslationService i18n, final EntityTitle entityTitle,
+            final ContentIconsRegistry contentIconsRegistry, final DragDropContentRegistry dragDropContentRegistry,
+            final ActionToolbar<StateToken> toolbar, final ActionRegistry<StateToken> actionRegistry,
+            Provider<FileDownloadUtils> downloadUtilsProvider, boolean useGenericImageIcon) {
         this.stateManager = stateManager;
         this.session = session;
+        this.errorHandler = errorHandler;
         this.contentServiceProvider = contentServiceProvider;
         this.i18n = i18n;
         this.entityTitle = entityTitle;
@@ -117,6 +120,11 @@ public class ContextNavigatorPresenter implements ContextNavigator {
             }
         });
         session.onUserSignOut(new Listener0() {
+            public void onEvent() {
+                clear();
+            }
+        });
+        errorHandler.onNotDefaultContent(new Listener0() {
             public void onEvent() {
                 clear();
             }
@@ -211,29 +219,17 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         if (state.hasDocument()) {
             rights = state.getContentRights();
             final ActionItemCollection<StateToken> contentActions = addItem(state.getTitle(), state.getTypeId(),
-                                                                            state.getMimeType(), state.getStatus(),
-                                                                            stateToken, container.getStateToken(),
-                                                                            rights, false);
+                    state.getMimeType(), state.getStatus(), stateToken, container.getStateToken(), rights, false);
             final ActionItemCollection<StateToken> containerActions = actionRegistry.getCurrentActions(
-                                                                                                       container.getStateToken(),
-                                                                                                       container.getTypeId(),
-                                                                                                       session.isLogged(),
-                                                                                                       containerRights,
-                                                                                                       true);
+                    container.getStateToken(), container.getTypeId(), session.isLogged(), containerRights, true);
             actionItems.addAll(containerActions);
             actionItems.addAll(contentActions);
 
         } else {
             rights = containerRights;
-            final ActionItemCollection<StateToken> containerActions = addItem(
-                                                                              container.getName(),
-                                                                              container.getTypeId(),
-                                                                              null,
-                                                                              ContentStatusDTO.publishedOnline,
-                                                                              container.getStateToken(),
-                                                                              container.getStateToken().clone().setFolder(
-                                                                                                                          container.getParentFolderId()),
-                                                                              containerRights, false);
+            final ActionItemCollection<StateToken> containerActions = addItem(container.getName(),
+                    container.getTypeId(), null, ContentStatusDTO.publishedOnline, container.getStateToken(),
+                    container.getStateToken().clone().setFolder(container.getParentFolderId()), containerRights, false);
             actionItems.addAll(containerActions);
         }
 
@@ -266,17 +262,15 @@ public class ContextNavigatorPresenter implements ContextNavigator {
             final StateToken parentStateToken, final AccessRightsDTO rights, final boolean isNodeSelected) {
 
         final ActionItemCollection<StateToken> toolbarActions = actionRegistry.getCurrentActions(stateToken,
-                                                                                                 contentTypeId,
-                                                                                                 session.isLogged(),
-                                                                                                 rights, true);
+                contentTypeId, session.isLogged(), rights, true);
 
         final String contentTypeIcon = getIcon(stateToken, contentTypeId, mimeType);
         final String tooltip = getTooltip(stateToken, mimeType);
         final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
-                contentTypeIcon, title, tooltip, status, stateToken,
-                dragDropContentRegistry.isDraggable(contentTypeId, rights.isAdministrable()),
-                dragDropContentRegistry.isDroppable(contentTypeId, rights.isAdministrable()),
-                actionRegistry.getCurrentActions(stateToken, contentTypeId, session.isLogged(), rights, false));
+                contentTypeIcon, title, tooltip, status, stateToken, dragDropContentRegistry.isDraggable(contentTypeId,
+                        rights.isAdministrable()), dragDropContentRegistry.isDroppable(contentTypeId,
+                        rights.isAdministrable()), actionRegistry.getCurrentActions(stateToken, contentTypeId,
+                        session.isLogged(), rights, false));
         view.addItem(item);
         return toolbarActions;
     }
@@ -290,9 +284,8 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
         for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
             addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatusDTO.publishedOnline,
-                    siblingFolder.getStateToken(),
-                    siblingFolder.getStateToken().clone().setFolder(siblingFolder.getParentFolderId()),
-                    containerRights, false);
+                    siblingFolder.getStateToken(), siblingFolder.getStateToken().clone().setFolder(
+                            siblingFolder.getParentFolderId()), containerRights, false);
         }
     }
 
@@ -328,7 +321,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private String getTooltip(StateToken token, BasicMimeTypeDTO mimeType) {
         if (mimeType != null && mimeType.getType().equals("image")) {
             return KuneUiUtils.genQuickTipWithImage(downloadUtilsProvider.get().getImageResizedUrl(token,
-                                                                                                   ImageSize.thumb));
+                    ImageSize.thumb));
         } else {
             return null;
         }

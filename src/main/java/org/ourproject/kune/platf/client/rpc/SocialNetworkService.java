@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.platf.client.rpc;
 
-import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -48,9 +46,7 @@ public interface SocialNetworkService extends RemoteService {
     SocialNetworkResultDTO denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName)
             throws DefaultException;
 
-    SocialNetworkDTO getGroupMembers(String hash, StateToken groupToken) throws DefaultException;
-
-    ParticipationDataDTO getParticipation(String hash, StateToken groupToken) throws DefaultException;
+    SocialNetworkResultDTO getSocialNetwork(String hash, StateToken groupToken) throws DefaultException;
 
     SocialNetworkRequestResult requestJoinGroup(String hash, StateToken groupToken) throws DefaultException;
 

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
@@ -57,7 +58,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         assertEquals("es", contentRetrieved.getLanguage().getCode());
     }
 
-    @Test
+    @Ignore
+    // FIXME: when State refactor do this test (with noLogin and without)
     public void defAdminDontShowAsParticipation() throws Exception {
         doLogin();
         final StateDTO content = contentService.getContent(getHash(), new StateToken(getSiteAdminShortName()));
@@ -73,7 +75,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final String oldTitle = "some title";
         String newTitle = "folder new name";
         final StateDTO newState = contentService.addFolder(session.getHash(), defaultContent.getStateToken(), oldTitle,
-                                                           DocumentClientTool.TYPE_FOLDER);
+                DocumentClientTool.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 
@@ -170,11 +172,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         defaultContent = getDefaultContent();
 
         final StateDTO added = contentService.addContent(session.getHash(), defaultContent.getStateToken(),
-                                                         "New Content Title");
+                "New Content Title");
         assertNotNull(added);
 
         final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(),
-                                                                                  added.getStateToken());
+                added.getStateToken());
 
         assertTrue(!defaultContent.getStateToken().equals(newDefContent.getStateToken()));
         assertTrue(added.getStateToken().equals(newDefContent.getStateToken()));
@@ -189,7 +191,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final String oldTitle = "some title";
         String newTitle = "folder new name";
         final StateDTO newState = contentService.addFolder(session.getHash(), folder.getStateToken(), oldTitle,
-                                                           DocumentClientTool.TYPE_FOLDER);
+                DocumentClientTool.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 

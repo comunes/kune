@@ -46,6 +46,10 @@ public class SimpleToolbar extends Composite {
         return emptyLabel;
     }
 
+    public void remove(final Widget widget) {
+        childPanel.remove(widget);
+    }
+
     public void removeAll() {
         childPanel.clear();
     }

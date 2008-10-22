@@ -19,21 +19,19 @@ public class IntegrationTestHelper {
 
     public static Injector createInjector() {
         final Injector injector = Guice.createInjector(new PlatformServerModule(), new DocumentServerModule(),
-                                                       new ChatServerModule(), new AbstractModule() {
-                                                           @Override
-                                                           protected void configure() {
-                                                               bindScope(SessionScoped.class, Scopes.SINGLETON);
-                                                               // test: use
-                                                               // memory
-                                                               // test_db: use
-                                                               // mysql
-                                                               bindConstant().annotatedWith(JpaUnit.class).to("test");
-                                                               bindConstant().annotatedWith(PropertiesFileName.class).to(
-                                                                                                                         "kune.properties");
-                                                               bind(HttpServletRequest.class).to(
-                                                                                                 HttpServletRequestMocked.class);
-                                                           }
-                                                       });
+                new ChatServerModule(), new AbstractModule() {
+                    @Override
+                    protected void configure() {
+                        bindScope(SessionScoped.class, Scopes.SINGLETON);
+                        // test: use
+                        // memory
+                        // test_db: use
+                        // mysql
+                        bindConstant().annotatedWith(JpaUnit.class).to("test");
+                        bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
+                        bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+                    }
+                });
         return injector;
     }
 

@@ -162,7 +162,7 @@ public class ContentRPC implements ContentService, RPC {
         final User user = userSession.getUser();
         final boolean userIsLoggedIn = userSession.isUserLoggedIn();
         final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
-                                                                    user, AccessRol.Editor);
+                user, AccessRol.Editor);
         final Content addedContent = creationService.createContent(title, "", user, container);
         final Access access = accessService.getAccess(user, addedContent.getStateToken(), group, AccessRol.Editor);
         final State state = stateService.create(access);
@@ -180,7 +180,7 @@ public class ContentRPC implements ContentService, RPC {
         final User user = userSession.getUser();
         final boolean userIsLoggedIn = userSession.isUserLoggedIn();
         final State state = createFolder(parentToken.getGroup(), ContentUtils.parseId(parentToken.getFolder()), title,
-                                         contentTypeId);
+                contentTypeId);
         completeState(user, userIsLoggedIn, group, state);
         return mapState(state, user, group);
     }
@@ -197,12 +197,12 @@ public class ContentRPC implements ContentService, RPC {
         final boolean userIsLoggedIn = userSession.isUserLoggedIn();
         final String userShortName = user.getShortName();
         final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
-                                                            userHash);
+                userHash);
         xmppManager.createRoom(connection, roomName, userShortName + userHash);
         xmppManager.disconnect(connection);
         try {
             final State state = createFolder(groupShortName, ContentUtils.parseId(parentToken.getFolder()), roomName,
-                                             ChatServerTool.TYPE_ROOM);
+                    ChatServerTool.TYPE_ROOM);
             completeState(user, userIsLoggedIn, group, state);
             return mapState(state, user, group);
         } catch (final ContentNotFoundException e) {
@@ -443,7 +443,7 @@ public class ContentRPC implements ContentService, RPC {
         accessService.accessToContainer(parentFolderId, user, AccessRol.Editor);
 
         final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage(),
-                                                                 typeId);
+                typeId);
         final Access access = accessService.getAccess(user, container.getStateToken(), group, AccessRol.Editor);
         final State state = stateService.create(access);
         return state;

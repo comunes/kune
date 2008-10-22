@@ -78,6 +78,16 @@ public class EntitySummary {
             @Override
             public void onHide(Component component) {
                 super.onHide(component);
+                openFirst();
+            }
+
+            @Override
+            public void onShow(Component component) {
+                super.onShow(component);
+                openFirst();
+            }
+
+            private void openFirst() {
                 if (accordionLayout.getActiveItem() != null && accordionLayout.getActiveItem().isHidden()) {
                     Panel firstComponent = null;
                     for (Component compo : entitySummary.getComponents()) {
@@ -87,7 +97,6 @@ public class EntitySummary {
                         }
                     }
                 }
-
             }
         });
         doLayoutIfNeeded();

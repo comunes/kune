@@ -24,8 +24,12 @@ import org.ourproject.kune.platf.client.dto.LicenseDTO;
 
 public interface EntityLicenseView extends View {
 
-    void showLicense(String groupName, LicenseDTO licenseDTO);
+    void attach();
+
+    void detach();
 
     void openWindow(String url);
+
+    void showLicense(String groupName, LicenseDTO licenseDTO);
 
 }

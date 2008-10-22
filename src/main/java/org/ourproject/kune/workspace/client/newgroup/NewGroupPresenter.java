@@ -136,7 +136,7 @@ public class NewGroupPresenter implements NewGroup {
             }
         };
         groupServiceProvider.get().createNewGroup(session.getUserHash(), group, publicDesc, view.getTags(), null,
-                                                  callback);
+                callback);
     }
 
     public void onNext() {

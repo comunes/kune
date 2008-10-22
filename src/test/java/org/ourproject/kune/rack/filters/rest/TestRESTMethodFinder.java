@@ -29,7 +29,7 @@ public class TestRESTMethodFinder {
     @Test
     public void simpleTest() {
         RESTMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName"),
-                                              MyTestService.class);
+                MyTestService.class);
         assertNotNull(method);
         assertTrue(method.invoke(service));
         assertEquals("the name: theName", method.getResponse().toString());
@@ -38,8 +38,7 @@ public class TestRESTMethodFinder {
     @Test
     public void shouldTakeMoreParamsMethod() {
         RESTMethod method = finder.findMethod("simpleMethod",
-                                              new TestParameters("name", "theName", "value", "theValue"),
-                                              MyTestService.class);
+                new TestParameters("name", "theName", "value", "theValue"), MyTestService.class);
         assertNotNull(method);
         assertTrue(method.invoke(service));
         assertEquals("more params: theName: theValue", method.getResponse().toString());
@@ -48,7 +47,7 @@ public class TestRESTMethodFinder {
     @Test
     public void conversionTest() {
         RESTMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12", "stamp", "13"),
-                                              MyTestService.class);
+                MyTestService.class);
         assertNotNull(method);
         assertTrue(method.invoke(service));
         assertEquals("the data: 12 13", method.getResponse().toString());

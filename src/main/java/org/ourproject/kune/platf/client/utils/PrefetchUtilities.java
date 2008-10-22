@@ -83,9 +83,13 @@ public class PrefetchUtilities {
     public static void preFetchImpImages() {
         final String[] imgs = { "images/spin-kune-thund-green.gif", "css/img/button-bg-hard.gif",
                 "css/img/button-bg-soft.gif", "css/img/arrow-down-white.gif", "css/img/arrow-right-white.gif",
-                "images/lic/bysa80x15.png" };
-        for (int i = 0; i < imgs.length; i++) {
-            final String img = imgs[i];
+                "images/lic/bysa80x15.png", "images/nav/blog.png", "images/nav/download.png", "images/nav/film.png",
+                "images/nav/folder.png", "images/nav/gallery.png", "images/nav/go.png", "images/nav/page_pdf.png",
+                "images/nav/page.png", "images/nav/page_pps.png", "images/nav/page_text.png",
+                "images/nav/page_word.png", "images/nav/page_zip.png", "images/nav/picture.png", "images/nav/post.png",
+                "images/nav/refresh.png", "images/nav/room_add.png", "images/nav/room.png", "images/nav/upload.png",
+                "images/nav/wikipage.png", "images/nav/wiki.png" };
+        for (final String img : imgs) {
             Image.prefetch(img);
         }
     }

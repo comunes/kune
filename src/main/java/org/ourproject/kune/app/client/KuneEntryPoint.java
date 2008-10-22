@@ -53,6 +53,6 @@ public class KuneEntryPoint implements EntryPoint {
 
     public void onModuleLoadCont() {
         Suco.install(new KuneCoreModule(), new KunePlatformModule(), new KuneWorkspaceModule(), new EmiteUIModule(),
-                     new DocumentClientModule(), new ChatClientModule(), new KuneModule());
+                new DocumentClientModule(), new ChatClientModule(), new KuneModule());
     }
 }

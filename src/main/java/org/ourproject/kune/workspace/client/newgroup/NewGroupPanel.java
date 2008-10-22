@@ -114,10 +114,9 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         newGroupInitialDataVP.add(newGroupInitialDataHP);
         newGroupInitialDataVP.add(newGroupInitialDataForm);
         chooseLicenseHP.add(img.step2().createImage());
-        final HTML step2Label = new HTML(
-                i18n.t("Select a license to share your group contents with other people. "
-                        + "We recomend [%s] licenses for practical works.",
-                       KuneStringUtils.generateHtmlLink("http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
+        final HTML step2Label = new HTML(i18n.t("Select a license to share your group contents with other people. "
+                + "We recomend [%s] licenses for practical works.", KuneStringUtils.generateHtmlLink(
+                "http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
         chooseLicenseHP.add(step2Label);
         final Label licenseTypeLabel = new Label(i18n.t("Choose a license type:"));
         chooseLicenseVP.add(chooseLicenseHP);
@@ -276,10 +275,10 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         projectRadio = new Radio();
         createRadio(groupTypeFieldSet, projectRadio, "Project",
-                    "A project is a kind of group in which new members inclusion "
-                            + "is moderated by the project administrators. "
-                            + "An administrator is the person who creates the project "
-                            + "and other people she/he choose in the future as administrator too.");
+                "A project is a kind of group in which new members inclusion "
+                        + "is moderated by the project administrators. "
+                        + "An administrator is the person who creates the project "
+                        + "and other people she/he choose in the future as administrator too.");
         projectRadio.setChecked(true);
 
         orgRadio = new Radio();
@@ -294,8 +293,8 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         orphanedProjectRadio = new Radio();
         createRadio(groupTypeFieldSet, orphanedProjectRadio, "Orphaned Project",
-                    "If you have an idea but you don't have " + "capacity/possibilities/resources to work on it, "
-                            + "just register a orphaned project, and permit others to work and develop it.");
+                "If you have an idea but you don't have " + "capacity/possibilities/resources to work on it, "
+                        + "just register a orphaned project, and permit others to work and develop it.");
 
         groupTypeFieldSet.setCollapsible(false);
 

@@ -34,7 +34,7 @@ public class ChatClientActions {
                 AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         chatClientToolProvider.get().getChat().joinRoom(token.toString().replaceAll("\\.", "-"),
-                                                                        session.getCurrentUserInfo().getShortName());
+                                session.getCurrentUserInfo().getShortName());
                         chatClientToolProvider.get().getChat().show();
                     }
                 });

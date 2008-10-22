@@ -127,8 +127,8 @@ public class Location {
     }
 
     private native String unescape(String val) /*-{
-                                return unescape(val);
-                            }-*/;
+                                   return unescape(val);
+                               }-*/;
 
     public String getParameter(final String name) {
         return paramMap.get(name);

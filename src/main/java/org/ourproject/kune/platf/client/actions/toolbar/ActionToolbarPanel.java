@@ -238,7 +238,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 
     private String genMenuKey(final ActionToolbarMenuDescriptor<T> action) {
         return genMenuKey(action.getActionPosition(), action.getParentMenuTitle(), action.getParentSubMenuTitle(),
-                          action.getText());
+                action.getText());
     }
 
     private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuSubTitle,

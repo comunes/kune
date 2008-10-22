@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.platf.client.rpc;
 
-import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
@@ -45,9 +44,7 @@ public interface SocialNetworkServiceAsync {
     void denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName,
             AsyncCallback<SocialNetworkResultDTO> callback);
 
-    void getGroupMembers(String hash, StateToken groupToken, AsyncCallback<SocialNetworkResultDTO> callback);
-
-    void getParticipation(String hash, StateToken groupToken, AsyncCallback<ParticipationDataDTO> callback);
+    void getSocialNetwork(String hash, StateToken groupToken, AsyncCallback<SocialNetworkResultDTO> callback);
 
     void requestJoinGroup(String hash, StateToken groupToken, AsyncCallback<?> callback);
 

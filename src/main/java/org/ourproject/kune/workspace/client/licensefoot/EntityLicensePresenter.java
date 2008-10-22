@@ -22,19 +22,26 @@ package org.ourproject.kune.workspace.client.licensefoot;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 
 public class EntityLicensePresenter {
 
     private EntityLicenseView view;
     private LicenseDTO license;
 
-    public EntityLicensePresenter(final StateManager stateManager) {
+    public EntityLicensePresenter(final StateManager stateManager, KuneErrorHandler errorHandler) {
         stateManager.onStateChanged(new Listener<StateDTO>() {
             public void onEvent(final StateDTO state) {
                 setLicense(state);
+            }
+        });
+        errorHandler.onNotDefaultContent(new Listener0() {
+            public void onEvent() {
+                view.detach();
             }
         });
     }
@@ -52,6 +59,7 @@ public class EntityLicensePresenter {
     }
 
     private void setLicense(final StateDTO state) {
+        view.attach();
         this.license = state.getLicense();
         view.showLicense(state.getGroup().getLongName(), license);
     }

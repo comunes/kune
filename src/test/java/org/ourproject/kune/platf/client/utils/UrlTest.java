@@ -31,8 +31,8 @@ public class UrlTest {
     @Test
     public void testThreeParams() {
         assertEquals("test?param1=value1&param2=value2&param3=value3",
-                     new Url("test", new UrlParam("param1", "value1"), new UrlParam("param2", "value2"), new UrlParam(
-                             "param3", "value3")).toString());
+                new Url("test", new UrlParam("param1", "value1"), new UrlParam("param2", "value2"), new UrlParam(
+                        "param3", "value3")).toString());
     }
 
     @Test

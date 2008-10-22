@@ -16,7 +16,11 @@ public interface EntityLogoView {
 
     void reloadImage(GroupDTO group);
 
+    void setChangeYourLogoText();
+
     void setFullLogo(StateToken stateToken, boolean clipped);
+
+    void setLargeFont();
 
     void setLogoImage(StateToken stateToken);
 
@@ -24,7 +28,13 @@ public interface EntityLogoView {
 
     void setLogoText(final String groupName);
 
-    void setPutYourLogoVisible(final boolean visible);
+    void setMediumFont();
+
+    void setPutYourLogoText();
+
+    void setSetYourLogoVisible(final boolean visible);
+
+    void setSmallFont();
 
     void setTheme(final WsTheme oldTheme, WsTheme newTheme);
 }

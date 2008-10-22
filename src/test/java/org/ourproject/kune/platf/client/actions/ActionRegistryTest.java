@@ -94,8 +94,7 @@ public class ActionRegistryTest {
 
     private void checkActionLists(final int expectedActions, final AccessRightsDTO accessRightsDTO,
             final boolean toolbarActions) {
-        assertEquals(expectedActions,
-                     registry.getCurrentActions(new StateToken(), DEF_CONTENT_TYPE_ID, session.isLogged(),
-                                                accessRightsDTO, toolbarActions).size());
+        assertEquals(expectedActions, registry.getCurrentActions(new StateToken(), DEF_CONTENT_TYPE_ID,
+                session.isLogged(), accessRightsDTO, toolbarActions).size());
     }
 }

@@ -88,7 +88,7 @@ public class FileUtilsTest {
     @Test
     public void testIfSeq1WithExtreturn2WithExt() {
         assertEquals(SIMPLE_FILE_NAME + " 2" + EXT, FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME + " 1" + EXT,
-                                                                                        true));
+                true));
     }
 
     @Test

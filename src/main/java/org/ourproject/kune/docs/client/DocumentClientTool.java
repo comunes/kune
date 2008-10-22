@@ -98,21 +98,21 @@ public class DocumentClientTool extends AbstractClientTool {
         contentIconsRegistry.registerContentTypeIcon(TYPE_WIKI, "images/nav/wiki.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("image"),
-                                                     "images/nav/picture.png");
+                "images/nav/picture.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("video"),
-                                                     "images/nav/film.png");
+                "images/nav/film.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "pdf"),
-                                                     "images/nav/page_pdf.png");
+                "images/nav/page_pdf.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
-                                                     "images/nav/page_zip.png");
+                "images/nav/page_zip.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
-                                                     "images/nav/page_zip.png");
+                "images/nav/page_zip.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("text"),
-                                                     "images/nav/page_text.png");
+                "images/nav/page_text.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "msword"),
-                                                     "images/nav/page_word.png");
+                "images/nav/page_word.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "excel"),
-                                                     "images/nav/page_excel.png");
+                "images/nav/page_excel.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application",
                 "mspowerpoint"), "images/nav/page_pps.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, "images/nav/page.png");

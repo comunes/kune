@@ -90,10 +90,10 @@ public class DocumentContentPresenter implements DocumentContent {
         ActionItemCollection<StateToken> collection;
         if (content.hasDocument()) {
             collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(),
-                                                          content.getContentRights(), true);
+                    content.getContentRights(), true);
         } else {
             collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(),
-                                                          content.getContainerRights(), true);
+                    content.getContainerRights(), true);
         }
         toolbar.disableMenusAndClearButtons();
         toolbar.setActions(collection);
@@ -105,7 +105,7 @@ public class DocumentContentPresenter implements DocumentContent {
         // textEditorProvider.get().setToolbarVisible(false);
         if (content.hasDocument()) {
             docReaderProvider.get().showDocument(content.getStateToken(), content.getContent(), content.getTypeId(),
-                                                 content.getMimeType());
+                    content.getMimeType());
             textEditorProvider.get().reset();
         } else {
             final FolderViewer viewer = folderViewerProvider.get();

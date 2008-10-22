@@ -66,36 +66,36 @@ public class AdminContextPresenter implements AdminContext {
         Site.showProgressProcessing();
         final StateDTO currentState = session.getCurrentState();
         contentServiceProvider.get().addAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
-                                               new AsyncCallbackSimple<Object>() {
-                                                   public void onSuccess(final Object result) {
-                                                       Site.hideProgress();
-                                                       stateManager.reload();
-                                                   }
-                                               });
+                new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        stateManager.reload();
+                    }
+                });
     }
 
     public void delAuthor(final String authorShortName) {
         Site.showProgressProcessing();
         final StateDTO currentState = session.getCurrentState();
         contentServiceProvider.get().removeAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
-                                                  new AsyncCallbackSimple<Object>() {
-                                                      public void onSuccess(final Object result) {
-                                                          Site.hideProgress();
-                                                          stateManager.reload();
-                                                      }
-                                                  });
+                new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        stateManager.reload();
+                    }
+                });
     }
 
     public void doChangeLanguage(final String langCode) {
         Site.showProgressProcessing();
         final StateDTO currentState = session.getCurrentState();
         contentServiceProvider.get().setLanguage(session.getUserHash(), currentState.getStateToken(), langCode,
-                                                 new AsyncCallbackSimple<I18nLanguageDTO>() {
-                                                     public void onSuccess(final I18nLanguageDTO lang) {
-                                                         Site.hideProgress();
-                                                         entitySubTitle.setContentLanguage(lang.getEnglishName());
-                                                     }
-                                                 });
+                new AsyncCallbackSimple<I18nLanguageDTO>() {
+                    public void onSuccess(final I18nLanguageDTO lang) {
+                        Site.hideProgress();
+                        entitySubTitle.setContentLanguage(lang.getEnglishName());
+                    }
+                });
     }
 
     public View getView() {
@@ -110,12 +110,12 @@ public class AdminContextPresenter implements AdminContext {
         Site.showProgressProcessing();
         final StateDTO currentState = session.getCurrentState();
         contentServiceProvider.get().setPublishedOn(session.getUserHash(), currentState.getStateToken(), publishedOn,
-                                                    new AsyncCallbackSimple<Object>() {
-                                                        public void onSuccess(final Object result) {
-                                                            Site.hideProgress();
-                                                            entityTitle.setContentDate(publishedOn);
-                                                        }
-                                                    });
+                new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        Site.hideProgress();
+                        entityTitle.setContentDate(publishedOn);
+                    }
+                });
 
     }
 
@@ -160,12 +160,12 @@ public class AdminContextPresenter implements AdminContext {
         Site.showProgressProcessing();
         final StateDTO currentState = session.getCurrentState();
         contentServiceProvider.get().setTags(session.getUserHash(), currentState.getStateToken(), tagsString,
-                                             new AsyncCallbackSimple<List<TagResultDTO>>() {
-                                                 public void onSuccess(final List<TagResultDTO> result) {
-                                                     tagsSummaryProvider.get().setGroupTags(result);
-                                                     Site.hideProgress();
-                                                 }
-                                             });
+                new AsyncCallbackSimple<List<TagResultDTO>>() {
+                    public void onSuccess(final List<TagResultDTO> result) {
+                        tagsSummaryProvider.get().setGroupTags(result);
+                        Site.hideProgress();
+                    }
+                });
     }
 
 }

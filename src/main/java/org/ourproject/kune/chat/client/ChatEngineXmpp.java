@@ -83,7 +83,7 @@ class ChatEngineXmpp implements ChatEngine {
         chatOptions.userOptions = userChatOptions;
         if (emiteDialog.isDialogNotStarted()) {
             emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, initialWindowTitle,
-                              avatarProvider, i18n.t("Chat"));
+                    avatarProvider, i18n.t("Chat"));
         } else {
             emiteDialog.setEnableStatusUI(true);
             emiteDialog.refreshUserInfo(chatOptions.userOptions);

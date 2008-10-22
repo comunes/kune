@@ -68,22 +68,19 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
                         initData.getChatRoomHost());
                 chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
                 groupMembersSummaryProvider.get().addUserOperation(
-                                                                   new MenuItem<GroupDTO>("images/new-chat.gif",
-                                                                           i18n.t("Start a chat with this member"),
-                                                                           new Listener<GroupDTO>() {
-                                                                               public void onEvent(final GroupDTO group) {
-                                                                                   emiteUIDialog.show();
-                                                                                   if (emiteUIDialog.isLoggedIn()) {
-                                                                                       emiteUIDialog.chat(XmppURI.jid(group.getShortName()
-                                                                                               + "@"
-                                                                                               + initData.getChatDomain()));
-                                                                                   } else {
-                                                                                       ws.showAlertMessage(
-                                                                                                           i18n.t("Error"),
-                                                                                                           i18n.t("To start a chat you need to be 'online'."));
-                                                                                   }
-                                                                               }
-                                                                           }), true);
+                        new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),
+                                new Listener<GroupDTO>() {
+                                    public void onEvent(final GroupDTO group) {
+                                        emiteUIDialog.show();
+                                        if (emiteUIDialog.isLoggedIn()) {
+                                            emiteUIDialog.chat(XmppURI.jid(group.getShortName() + "@"
+                                                    + initData.getChatDomain()));
+                                        } else {
+                                            ws.showAlertMessage(i18n.t("Error"),
+                                                    i18n.t("To start a chat you need to be 'online'."));
+                                        }
+                                    }
+                                }), true);
             }
 
             private void checkChatDomain(final String chatDomain) {

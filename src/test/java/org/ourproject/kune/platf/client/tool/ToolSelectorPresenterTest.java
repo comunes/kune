@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.tool;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
@@ -49,7 +50,8 @@ public class ToolSelectorPresenterTest {
     public void begin() {
         final StateManager stateManager = Mockito.mock(StateManager.class);
         final WsThemePresenter themePresenter = Mockito.mock(WsThemePresenter.class);
-        toolSelector = new ToolSelectorPresenter(stateManager, themePresenter);
+        KuneErrorHandler errorHandler = Mockito.mock(KuneErrorHandler.class);
+        toolSelector = new ToolSelectorPresenter(stateManager, themePresenter, errorHandler);
         toolSelectorItem1 = Mockito.mock(ToolSelectorItem.class);
         toolSelectorItem2 = Mockito.mock(ToolSelectorItem.class);
     }

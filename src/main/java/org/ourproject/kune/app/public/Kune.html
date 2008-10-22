@@ -33,7 +33,15 @@
   white-space: nowrap;
   height: 16px;
   padding: 0 3px;
-  font-family: arial,sans;
+}
+
+#kuneprogresstext {
+font-family:arial,helvetica,clean,sans-serif;
+font-size-adjust:none;
+font-style:normal;
+font-variant:normal;
+font-weight:normal;
+line-height:1.22;
 }
 
 </style>
@@ -48,20 +56,16 @@
     src="org.ourproject.kune.app.Kune.nocache.js"></script>
 <iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
 <iframe src="" id="__download" style="width:0;height:0;border:0"></iframe>
-<div id="kuneprogresspanel" class="">
-<table cellspacing="0" summary="Starting" cellpadding="0" border="0"
-    style="height: 16px; margin-top: 5px; margin-left: 5px;">
+
+<div class="" id="kuneprogresspanel" style="">
+<table cellspacing="0" cellpadding="0" border="0" style="height: 16px; margin-top: 5px; margin-left: 5px;" summary="Starting">
     <tbody>
         <tr>
-            <td height="16" align="left" style="vertical-align: top;"
-                class="kune-Progress"><img alt="progress spin"
-                src="images/spin-kune-thund-green.gif"
-                style="height: 16px; width: 16px;" /></td>
-            <td align="left" style="vertical-align: top;" class="kune-Progress">
-            <div class="gwt-Label" id="kuneprogresstext">Starting</div>
+            <td height="16" align="left" class="kune-Progress" style="vertical-align: top;"><img style="height: 16px; width: 16px;" src="images/spin-kune-thund-green.gif" alt="progress spin"/></td>
+            <td align="left" class="kune-Progress" style="vertical-align: top;">
+            <div id="kuneprogresstext" class="gwt-Label">Loading</div>
             </td>
-            <td width="100%" height="16" align="left"
-                style="vertical-align: top;"></td>
+            <td height="16" width="100%" align="left" style="vertical-align: top;"/>
         </tr>
     </tbody>
 </table>

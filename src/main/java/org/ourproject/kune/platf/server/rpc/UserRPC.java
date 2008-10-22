@@ -69,8 +69,8 @@ public class UserRPC implements RPC, UserService {
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
     public UserInfoDTO createUser(final UserDTO userDTO, boolean wantPersonalHomepage) throws DefaultException {
         final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(),
-                                                 userDTO.getPassword(), userDTO.getLanguage().getCode(),
-                                                 userDTO.getCountry().getCode(), userDTO.getTimezone().getId());
+                userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
+                userDTO.getTimezone().getId());
         groupManager.createUserGroup(user, wantPersonalHomepage);
         return loginUser(user);
     }
