@@ -179,7 +179,7 @@ public class StateManagerDefault implements StateManager {
         if (oldState == null || !oldGroup.equals(newGroup)) {
             onGroupChanged.fire(oldGroup, newGroup);
         }
-        if (oldState == null || !oldToolName.equals(newToolName)) {
+        if (oldState == null || oldToolName == null || !oldToolName.equals(newToolName)) {
             onToolChanged.fire(oldToolName, newToolName);
         }
     }

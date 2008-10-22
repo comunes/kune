@@ -1,7 +1,10 @@
 package org.ourproject.kune.platf.server.manager.file;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import magick.MagickException;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
@@ -51,15 +54,11 @@ public class EntityLogoUploadManager extends FileJsonUploadManagerAbstract {
         return response;
     }
 
-    @Override
-    @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-    @Transactional(type = TransactionType.READ_WRITE)
-    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file)
-            throws Exception {
-        BasicMimeType mimeType = new BasicMimeType(file.getContentType());
+    protected void createUploadedFile(StateToken stateToken, String mimeTypeS, File origFile) throws Exception,
+            IOException, MagickException, FileNotFoundException {
+        BasicMimeType mimeType = new BasicMimeType(mimeTypeS);
         if (!mimeType.getType().equals("image")) {
-            throw new Exception("Trying to set a non image (" + file.getContentType() + ") as group logo");
+            throw new Exception("Trying to set a non image (" + mimeTypeS + ") as group logo");
         }
         Group group = groupManager.findByShortName(stateToken.getGroup());
 
@@ -67,18 +66,31 @@ public class EntityLogoUploadManager extends FileJsonUploadManagerAbstract {
             throw new Exception("Group not found trying to set the logo");
         }
 
-        File tmpOrigFile = File.createTempFile("logoOrig", "");
-        file.write(tmpOrigFile);
         File tmpDestFile = File.createTempFile("logoDest", "");
 
-        boolean result = ImageUtilsDefault.scaleImageToMax(tmpOrigFile.getAbsolutePath(),
-                tmpDestFile.getAbsolutePath(), EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT);
+        boolean result = ImageUtilsDefault.scaleImageToMax(origFile.getAbsolutePath(), tmpDestFile.getAbsolutePath(),
+                EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT);
         if (result) {
             group.setLogo(FileUtils.getBytesFromFile(tmpDestFile));
             group.setLogoMime(mimeType);
+            tmpDestFile.delete();
         } else {
+            tmpDestFile.delete();
             throw new Exception("Cannot create group logo thumb");
         }
+    }
+
+    @Override
+    @Authenticated
+    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+    @Transactional(type = TransactionType.READ_WRITE)
+    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file)
+            throws Exception {
+        String mimeTypeS = file.getContentType();
+        File tmpOrigFile = File.createTempFile("logoOrig", "");
+        file.write(tmpOrigFile);
+        createUploadedFile(stateToken, mimeTypeS, tmpOrigFile);
+        tmpOrigFile.delete();
     }
 
 }

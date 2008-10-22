@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Dimension;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import magick.MagickException;
 
@@ -40,7 +41,7 @@ public class ImageUtilsDefaultTest {
     }
 
     @Test
-    public void generateIcon() throws MagickException {
+    public void generateIcon() throws MagickException, FileNotFoundException {
         for (String image : images) {
             ImageUtilsDefault.createThumb(IMG_PATH + image, imageDest, 16, 16);
             Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
@@ -50,7 +51,7 @@ public class ImageUtilsDefaultTest {
     }
 
     @Test
-    public void generateThumb() throws MagickException {
+    public void generateThumb() throws MagickException, FileNotFoundException {
         for (String image : images) {
             ImageUtilsDefault.createThumb(IMG_PATH + image, imageDest, 100, 85);
             Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
@@ -151,7 +152,7 @@ public class ImageUtilsDefaultTest {
     }
 
     @Test
-    public void testResize() throws MagickException {
+    public void testResize() throws MagickException, FileNotFoundException {
         for (String image : images) {
             assertTrue(ImageUtilsDefault.scaleImage(IMG_PATH + image, imageDest, 100, 100));
             Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
@@ -170,7 +171,7 @@ public class ImageUtilsDefaultTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void thumbSmallerThanCropMustFail() throws MagickException {
+    public void thumbSmallerThanCropMustFail() throws MagickException, FileNotFoundException {
         ImageUtilsDefault.createThumb(IMG_PATH + images[0], imageDest, 100, 200);
     }
 }

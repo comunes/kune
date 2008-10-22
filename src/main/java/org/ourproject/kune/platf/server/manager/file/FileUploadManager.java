@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.server.manager.file;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import magick.MagickException;
 import net.sf.json.JSONObject;
@@ -144,6 +145,8 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             e.printStackTrace();
         } catch (MagickException e) {
             log.info("Problem generating image thumb for " + filename);
+        } catch (FileNotFoundException e) {
+            log.info("Original image not found generating image thumb for " + filename);
         }
     }
 }

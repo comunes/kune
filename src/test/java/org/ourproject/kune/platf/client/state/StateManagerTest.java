@@ -85,4 +85,5 @@ public class StateManagerTest {
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
     }
+
 }

@@ -1,12 +1,15 @@
 package org.ourproject.kune.platf.server.manager.file;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+
 import net.sf.json.JSONObject;
 
-import org.apache.commons.fileupload.FileItem;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.ourproject.kune.platf.client.dto.StateDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
@@ -28,11 +31,9 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
     @Test
     public void testCreateLogo() throws Exception {
-        super.doLogin();
-        FileItem fileItem = Mockito.mock(FileItem.class);
-        Mockito.stub(fileItem.getContentType()).toReturn("image/png");
-        Mockito.stub(fileItem.getName()).toReturn(TEST_FILE);
-        manager.createUploadedFile(super.getHash(), super.getDefaultContent().getStateToken(), "file", fileItem);
+        manager.createUploadedFile(super.getDefaultContent().getStateToken(), "image/png", new File(TEST_FILE));
+        StateDTO defaultContent = super.getDefaultContent();
+        assertTrue(defaultContent.getGroup().hasLogo());
     }
 
     @Test

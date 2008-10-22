@@ -2,6 +2,8 @@ package org.ourproject.kune.platf.server.manager.file;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 import magick.ImageInfo;
 import magick.MagickException;
@@ -12,13 +14,17 @@ public class ImageUtilsDefault {
     /**
      * http://en.wikipedia.org/wiki/Thumbnail
      * 
+     * @throws FileNotFoundException
+     * 
      */
-    public static void createThumb(String fileOrig, String fileDest, int cropDimension) throws MagickException {
+    public static void createThumb(String fileOrig, String fileDest, int cropDimension) throws MagickException,
+            FileNotFoundException {
         createThumb(fileOrig, fileDest, cropDimension, cropDimension);
     }
 
     public static void createThumb(String fileOrig, String fileDest, int thumbDimension, int cropDimension)
-            throws MagickException {
+            throws MagickException, FileNotFoundException {
+        checkExist(fileOrig);
         if (thumbDimension < cropDimension) {
             throw new IndexOutOfBoundsException("Thumb dimension must be bigger than crop dimension");
         }
@@ -34,12 +40,14 @@ public class ImageUtilsDefault {
     }
 
     public static boolean cropImage(String fileOrig, String fileDest, int x, int y, int width, int height)
-            throws MagickException {
+            throws MagickException, FileNotFoundException {
         Rectangle rectangle = new Rectangle(x, y, width, height);
         return cropImage(fileOrig, fileDest, rectangle);
     }
 
-    public static boolean cropImage(String fileOrig, String fileDest, Rectangle rectangle) throws MagickException {
+    public static boolean cropImage(String fileOrig, String fileDest, Rectangle rectangle) throws MagickException,
+            FileNotFoundException {
+        checkExist(fileOrig);
         return cropImage(createImage(fileOrig), fileDest, rectangle);
     }
 
@@ -48,17 +56,23 @@ public class ImageUtilsDefault {
         return imageOrig.getDimension();
     }
 
-    public static boolean scaleImage(String fileOrig, String fileDest, Dimension dimension) throws MagickException {
+    public static boolean scaleImage(String fileOrig, String fileDest, Dimension dimension) throws MagickException,
+            FileNotFoundException {
+        checkExist(fileOrig);
         MagickImage imageOrig = createImage(fileOrig);
         return scaleImage(imageOrig, fileDest, (int) dimension.getWidth(), (int) dimension.getHeight());
     }
 
-    public static boolean scaleImage(String fileOrig, String fileDest, int width, int height) throws MagickException {
+    public static boolean scaleImage(String fileOrig, String fileDest, int width, int height) throws MagickException,
+            FileNotFoundException {
+        checkExist(fileOrig);
         MagickImage imageOrig = createImage(fileOrig);
         return scaleImage(imageOrig, fileDest, width, height);
     }
 
-    public static boolean scaleImageToMax(String fileOrig, String fileDest, int maxSize) throws MagickException {
+    public static boolean scaleImageToMax(String fileOrig, String fileDest, int maxSize) throws MagickException,
+            FileNotFoundException {
+        checkExist(fileOrig);
         MagickImage imageOrig = createImage(fileOrig);
         Dimension origDimension = imageOrig.getDimension();
         int origHeight = origDimension.height;
@@ -88,6 +102,13 @@ public class ImageUtilsDefault {
             return new Dimension(origWidth, origHeight);
         }
         return new Dimension((int) width, (int) height);
+    }
+
+    private static void checkExist(String fileOrig) throws FileNotFoundException {
+        File file = new File(fileOrig);
+        if (!file.exists()) {
+            throw new FileNotFoundException();
+        }
     }
 
     private static ImageInfo createEmptyImageInfo() throws MagickException {

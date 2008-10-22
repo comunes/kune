@@ -23,57 +23,34 @@ package org.ourproject.kune.platf.server.state;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.BasicMimeType;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.TagResult;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.sn.ParticipationData;
-import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
-public class State {
+public class State extends StateContent {
     private String documentId;
     private String content;
-    private String title;
-    private String toolName;
-    private Group group;
     private Container container;
     private Container rootContainer;
-    private AccessLists accessLists;
     private AccessRights contentRights;
     private AccessRights containerRights;
-    private AccessRights groupRights;
     private ContentStatus status;
     private boolean isRateable;
     private Double rate;
     private Integer rateByUsers;
     private Double currentUserRate;
-    private String typeId;
     private BasicMimeType mimeType;
     private License license;
-    private I18nLanguage language;
     private List<User> authors;
     private Date publishedOn;
     private String tags;
     private List<TagResult> groupTags;
-    private SocialNetwork groupMembers;
-    private ParticipationData participation;
-    private StateToken stateToken;
-    private List<String> enabledTools;
-    private UserBuddiesData userBuddies;
 
     public State() {
-    }
-
-    public AccessLists getAccessLists() {
-        return accessLists;
     }
 
     public List<User> getAuthors() {
@@ -104,28 +81,8 @@ public class State {
         return documentId;
     }
 
-    public List<String> getEnabledTools() {
-        return enabledTools;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public SocialNetwork getGroupMembers() {
-        return groupMembers;
-    }
-
-    public AccessRights getGroupRights() {
-        return groupRights;
-    }
-
     public List<TagResult> getGroupTags() {
         return groupTags;
-    }
-
-    public I18nLanguage getLanguage() {
-        return language;
     }
 
     public License getLicense() {
@@ -134,10 +91,6 @@ public class State {
 
     public BasicMimeType getMimeType() {
         return mimeType;
-    }
-
-    public ParticipationData getParticipation() {
-        return participation;
     }
 
     public Date getPublishedOn() {
@@ -156,10 +109,6 @@ public class State {
         return rootContainer;
     }
 
-    public StateToken getStateToken() {
-        return stateToken;
-    }
-
     public ContentStatus getStatus() {
         return status;
     }
@@ -168,28 +117,8 @@ public class State {
         return tags;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getToolName() {
-        return toolName;
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public UserBuddiesData getUserBuddies() {
-        return userBuddies;
-    }
-
     public boolean isRateable() {
         return isRateable;
-    }
-
-    public void setAccessLists(final AccessLists accessLists) {
-        this.accessLists = accessLists;
     }
 
     public void setAuthors(final List<User> authors) {
@@ -220,22 +149,6 @@ public class State {
         this.documentId = docRef;
     }
 
-    public void setEnabledTools(List<String> enabledTools) {
-        this.enabledTools = enabledTools;
-    }
-
-    public void setGroup(final Group group) {
-        this.group = group;
-    }
-
-    public void setGroupMembers(final SocialNetwork groupMembers) {
-        this.groupMembers = groupMembers;
-    }
-
-    public void setGroupRights(final AccessRights groupRights) {
-        this.groupRights = groupRights;
-    }
-
     public void setGroupTags(final List<TagResult> groupTags) {
         this.groupTags = groupTags;
     }
@@ -244,20 +157,12 @@ public class State {
         this.isRateable = isRateable;
     }
 
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
-
     public void setLicense(final License license) {
         this.license = license;
     }
 
     public void setMimeType(final BasicMimeType mimeType) {
         this.mimeType = mimeType;
-    }
-
-    public void setParticipation(final ParticipationData participation) {
-        this.participation = participation;
     }
 
     public void setPublishedOn(final Date publishedOn) {
@@ -284,10 +189,6 @@ public class State {
         this.rootContainer = rootContainer;
     }
 
-    public void setStateToken(final StateToken stateToken) {
-        this.stateToken = stateToken;
-    }
-
     public void setStatus(final ContentStatus status) {
         this.status = status;
     }
@@ -296,24 +197,8 @@ public class State {
         this.tags = tags;
     }
 
-    public void setTitle(final String title) {
-        this.title = title;
-    }
-
-    public void setToolName(final String toolName) {
-        this.toolName = toolName;
-    }
-
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
-
-    public void setUserBuddies(UserBuddiesData userBuddies) {
-        this.userBuddies = userBuddies;
-    }
-
     @Override
     public String toString() {
-        return "State[" + stateToken + "/" + typeId + "]";
+        return "State[" + getStateToken() + "/" + getTypeId() + "]";
     }
 }
