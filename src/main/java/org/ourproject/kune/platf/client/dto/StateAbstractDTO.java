@@ -2,20 +2,20 @@ package org.ourproject.kune.platf.client.dto;
 
 import java.util.List;
 
-public abstract class StateAbstractDTO {
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-    private AccessListsDTO accessLists;
+public abstract class StateAbstractDTO implements IsSerializable {
+
     private List<String> enabledTools;
     private GroupDTO group;
     private SocialNetworkDTO groupMembers;
+    private AccessRightsDTO groupRights;
     private ParticipationDataDTO participation;
     private UserBuddiesDataDTO userBuddies;
     private StateToken stateToken;
     private String title;
-    private AccessRightsDTO groupRights;
 
-    public AccessListsDTO getAccessLists() {
-        return accessLists;
+    public StateAbstractDTO() {
     }
 
     public List<String> getEnabledTools() {
@@ -23,7 +23,7 @@ public abstract class StateAbstractDTO {
     }
 
     public GroupDTO getGroup() {
-        return this.group;
+        return group;
     }
 
     public SocialNetworkDTO getGroupMembers() {
@@ -50,40 +50,41 @@ public abstract class StateAbstractDTO {
         return userBuddies;
     }
 
-    public void setAccessLists(final AccessListsDTO accessLists) {
-        this.accessLists = accessLists;
-    }
-
     public void setEnabledTools(List<String> enabledTools) {
         this.enabledTools = enabledTools;
     }
 
-    public void setGroup(final GroupDTO group) {
+    public void setGroup(GroupDTO group) {
         this.group = group;
     }
 
-    public void setGroupMembers(final SocialNetworkDTO groupMembers) {
+    public void setGroupMembers(SocialNetworkDTO groupMembers) {
         this.groupMembers = groupMembers;
     }
 
-    public void setGroupRights(final AccessRightsDTO groupRights) {
+    public void setGroupRights(AccessRightsDTO groupRights) {
         this.groupRights = groupRights;
     }
 
-    public void setParticipation(final ParticipationDataDTO participation) {
+    public void setParticipation(ParticipationDataDTO participation) {
         this.participation = participation;
     }
 
-    public void setStateToken(final StateToken stateToken) {
+    public void setStateToken(StateToken stateToken) {
         this.stateToken = stateToken;
     }
 
-    public void setTitle(final String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
     public void setUserBuddies(UserBuddiesDataDTO userBuddies) {
         this.userBuddies = userBuddies;
+    }
+
+    @Override
+    public String toString() {
+        return "StateDTO[" + getStateToken() + "]";
     }
 
 }

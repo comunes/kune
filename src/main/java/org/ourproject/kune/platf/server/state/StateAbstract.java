@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
@@ -31,7 +30,6 @@ import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 public abstract class StateAbstract {
 
-    private AccessLists accessLists;
     private List<String> enabledTools;
     private Group group;
     private SocialNetwork groupMembers;
@@ -41,8 +39,7 @@ public abstract class StateAbstract {
     private StateToken stateToken;
     private String title;
 
-    public AccessLists getAccessLists() {
-        return accessLists;
+    public StateAbstract() {
     }
 
     public List<String> getEnabledTools() {
@@ -77,40 +74,41 @@ public abstract class StateAbstract {
         return userBuddies;
     }
 
-    public void setAccessLists(final AccessLists accessLists) {
-        this.accessLists = accessLists;
-    }
-
     public void setEnabledTools(List<String> enabledTools) {
         this.enabledTools = enabledTools;
     }
 
-    public void setGroup(final Group group) {
+    public void setGroup(Group group) {
         this.group = group;
     }
 
-    public void setGroupMembers(final SocialNetwork groupMembers) {
+    public void setGroupMembers(SocialNetwork groupMembers) {
         this.groupMembers = groupMembers;
     }
 
-    public void setGroupRights(final AccessRights groupRights) {
+    public void setGroupRights(AccessRights groupRights) {
         this.groupRights = groupRights;
     }
 
-    public void setParticipation(final ParticipationData participation) {
+    public void setParticipation(ParticipationData participation) {
         this.participation = participation;
     }
 
-    public void setStateToken(final StateToken stateToken) {
+    public void setStateToken(StateToken stateToken) {
         this.stateToken = stateToken;
     }
 
-    public void setTitle(final String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
     public void setUserBuddies(UserBuddiesData userBuddies) {
         this.userBuddies = userBuddies;
+    }
+
+    @Override
+    public String toString() {
+        return "State[" + getStateToken() + "]";
     }
 
 }

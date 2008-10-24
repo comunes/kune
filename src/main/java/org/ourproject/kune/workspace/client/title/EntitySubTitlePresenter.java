@@ -40,13 +40,13 @@
 package org.ourproject.kune.workspace.client.title;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
 
 public class EntitySubTitlePresenter implements EntitySubTitle {
 
@@ -55,18 +55,16 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
     private final boolean showLanguage;
 
     public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager,
-            boolean showLanguage, KuneErrorHandler errorHandler) {
+            boolean showLanguage) {
         this.i18n = i18n;
         this.showLanguage = showLanguage;
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
-                setState(state);
-            }
-        });
-        errorHandler.onNotDefaultContent(new Listener0() {
-            public void onEvent() {
-                view.setContentSubTitleLeftVisible(false);
-                view.setContentSubTitleRightVisible(false);
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
+                if (state instanceof StateContainerDTO) {
+                    setState((StateContainerDTO) state);
+                } else if (state instanceof StateContentDTO) {
+                    setState((StateContentDTO) state);
+                }
             }
         });
     }
@@ -85,14 +83,7 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
         }
     }
 
-    private void setState(final StateDTO state) {
-        if (state.hasDocument()) {
-            view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors",
-                    state.getAuthors().get(0).getName()));
-            view.setContentSubTitleLeftVisible(true);
-        } else {
-            view.setContentSubTitleLeftVisible(false);
-        }
+    private void setLanguage(final StateContainerDTO state) {
         if (state.getLanguage() != null && showLanguage) {
             final String langName = state.getLanguage().getEnglishName();
             setContentLanguage(langName);
@@ -100,6 +91,18 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
         } else {
             view.setContentSubTitleRightVisible(false);
         }
+    }
+
+    private void setState(final StateContainerDTO state) {
+        view.setContentSubTitleLeftVisible(false);
+        setLanguage(state);
+    }
+
+    private void setState(final StateContentDTO state) {
+        view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors",
+                state.getAuthors().get(0).getName()));
+        view.setContentSubTitleLeftVisible(true);
+        setLanguage(state);
     }
 
 }

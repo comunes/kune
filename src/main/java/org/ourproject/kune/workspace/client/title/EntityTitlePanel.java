@@ -107,6 +107,10 @@ public class EntityTitlePanel implements EntityTitleView {
         titleLabel.setEditable(editable);
     }
 
+    public void setContentTitleVisible(final boolean visible) {
+        titleLabel.setVisible(visible);
+    }
+
     public void setDateVisible(final boolean visible) {
         dateLabel.setVisible(visible);
     }

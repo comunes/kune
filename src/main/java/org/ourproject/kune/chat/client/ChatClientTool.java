@@ -44,7 +44,7 @@ import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
@@ -136,11 +136,11 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
         return NAME;
     }
 
-    public void setContent(final StateDTO state) {
+    public void setContent(final StateContainerDTO state) {
         chatContentProvider.get().setState(state);
     }
 
-    public void setContext(final StateDTO state) {
+    public void setContext(final StateContainerDTO state) {
         chatContextProvider.get().setState(state);
     }
 

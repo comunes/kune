@@ -12,7 +12,8 @@ import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
@@ -21,7 +22,7 @@ import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
-    private StateDTO defaultContent;
+    private StateContentDTO defaultContent;
     private String groupShortName;
 
     @Test
@@ -44,7 +45,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void contentRateAndRetrieve() throws Exception {
         contentService.rateContent(getHash(), defaultContent.getStateToken(), 4.5);
-        final StateDTO again = contentService.getContent(getHash(), defaultContent.getStateToken());
+        final StateContentDTO again = (StateContentDTO) contentService.getContent(getHash(),
+                defaultContent.getStateToken());
         assertEquals(true, again.isRateable());
         assertEquals(new Double(4.5), again.getCurrentUserRate());
         assertEquals(new Double(4.5), again.getRate());
@@ -54,7 +56,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void contentSetLanguage() throws Exception {
         contentService.setLanguage(getHash(), defaultContent.getStateToken(), "es");
-        final StateDTO contentRetrieved = contentService.getContent(getHash(), defaultContent.getStateToken());
+        final StateContentDTO contentRetrieved = (StateContentDTO) contentService.getContent(getHash(),
+                defaultContent.getStateToken());
         assertEquals("es", contentRetrieved.getLanguage().getCode());
     }
 
@@ -62,7 +65,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     // FIXME: when State refactor do this test (with noLogin and without)
     public void defAdminDontShowAsParticipation() throws Exception {
         doLogin();
-        final StateDTO content = contentService.getContent(getHash(), new StateToken(getSiteAdminShortName()));
+        final StateContentDTO content = (StateContentDTO) contentService.getContent(getHash(), new StateToken(
+                getSiteAdminShortName()));
         assertEquals(0, content.getParticipation().getGroupsIsCollab().size());
         assertEquals(1, content.getParticipation().getGroupsIsAdmin().size());
     }
@@ -74,8 +78,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         final String oldTitle = "some title";
         String newTitle = "folder new name";
-        final StateDTO newState = contentService.addFolder(session.getHash(), defaultContent.getStateToken(), oldTitle,
-                DocumentClientTool.TYPE_FOLDER);
+        final StateContainerDTO newState = contentService.addFolder(session.getHash(),
+                defaultContent.getStateToken(), oldTitle, DocumentClientTool.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 
@@ -89,7 +93,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
                 newFolder.getId().toString(), null);
-        StateDTO folderAgain = contentService.getContent(getHash(), newFolderToken);
+        StateContainerDTO folderAgain = (StateContainerDTO) contentService.getContent(getHash(),
+                newFolderToken);
 
         assertEquals(newTitle, folderAgain.getContainer().getName());
 
@@ -97,7 +102,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         result = contentService.renameContainer(getHash(), newFolderToken, newTitle);
 
-        folderAgain = contentService.getContent(getHash(), newFolderToken);
+        folderAgain = (StateContainerDTO) contentService.getContent(getHash(), newFolderToken);
 
         assertEquals(newTitle, folderAgain.getContainer().getName());
     }
@@ -171,8 +176,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         doLogin();
         defaultContent = getDefaultContent();
 
-        final StateDTO added = contentService.addContent(session.getHash(), defaultContent.getStateToken(),
-                "New Content Title");
+        final StateContainerDTO added = contentService.addContent(session.getHash(),
+                defaultContent.getStateToken(), "New Content Title");
         assertNotNull(added);
 
         final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(),
@@ -190,8 +195,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         final String oldTitle = "some title";
         String newTitle = "folder new name";
-        final StateDTO newState = contentService.addFolder(session.getHash(), folder.getStateToken(), oldTitle,
-                DocumentClientTool.TYPE_FOLDER);
+        final StateContainerDTO newState = contentService.addFolder(session.getHash(), folder.getStateToken(),
+                oldTitle, DocumentClientTool.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 
@@ -203,7 +208,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         assertEquals(newTitle, result);
 
-        final StateDTO folderAgain = contentService.getContent(getHash(), newState.getStateToken());
+        final StateContainerDTO folderAgain = (StateContainerDTO) contentService.getContent(getHash(),
+                newState.getStateToken());
 
         assertEquals(newTitle, folderAgain.getContainer().getName());
     }

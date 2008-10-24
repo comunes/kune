@@ -19,7 +19,8 @@
  */
 package org.ourproject.kune.platf.client.ui.rate;
 
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.listener.Listener;
@@ -29,9 +30,13 @@ public class RatePresenter {
     private RateView view;
 
     public RatePresenter(final StateManager stateManager) {
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
-                setState(state);
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
+                if (state instanceof StateContentDTO) {
+                    setState((StateContentDTO) state);
+                } else {
+                    view.setVisible(false);
+                }
             }
         });
     }
@@ -44,14 +49,11 @@ public class RatePresenter {
         view.setVisible(visible);
     }
 
-    private void setState(final StateDTO state) {
+    private void setState(final StateContentDTO state) {
         if (state.isRateable()) {
             view.setVisible(true);
             view.setRate(state.getRate());
             view.setByUsers(state.getRateByUsers());
-        } else {
-            view.setVisible(false);
         }
-
     }
 }

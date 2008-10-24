@@ -41,7 +41,7 @@ package org.ourproject.kune.platf.client.state;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -51,20 +51,20 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class ContentProviderDefault implements ContentProvider {
 
     private final ContentServiceAsync server;
-    private final HashMap<StateToken, StateDTO> cache;
+    private final HashMap<StateToken, StateAbstractDTO> cache;
 
     public ContentProviderDefault(final ContentServiceAsync server) {
         this.server = server;
-        this.cache = new HashMap<StateToken, StateDTO>();
+        this.cache = new HashMap<StateToken, StateAbstractDTO>();
     }
 
-    public void cache(final StateToken encodeState, final StateDTO content) {
+    public void cache(final StateToken encodeState, final StateAbstractDTO content) {
         cache.put(encodeState, content);
     }
 
-    public void getContent(final String user, final StateToken newState, final AsyncCallback<StateDTO> callback) {
+    public void getContent(final String user, final StateToken newState, final AsyncCallback<StateAbstractDTO> callback) {
         Site.showProgressLoading();
-        final StateDTO catched = getCached(newState);
+        final StateAbstractDTO catched = getCached(newState);
         if (catched != null) {
             callback.onSuccess(catched);
         } else {
@@ -72,7 +72,7 @@ public class ContentProviderDefault implements ContentProvider {
         }
     }
 
-    private StateDTO getCached(final StateToken newState) {
+    private StateAbstractDTO getCached(final StateToken newState) {
         return cache.remove(newState);
     }
 

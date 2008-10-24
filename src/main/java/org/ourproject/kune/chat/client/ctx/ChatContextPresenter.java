@@ -41,7 +41,7 @@ package org.ourproject.kune.chat.client.ctx;
 
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -60,7 +60,7 @@ public class ChatContextPresenter implements ChatContext {
         return view;
     }
 
-    public void setState(final StateDTO state) {
+    public void setState(final StateContainerDTO state) {
         final RoomsAdmin rooms = roomAdminsProvider.get();
         rooms.showRoom(state.getStateToken(), state.getContainer(), state.getContainerRights());
         view.show(rooms.getView());

@@ -43,7 +43,9 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -55,7 +57,6 @@ import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -79,17 +80,17 @@ public class EntityTitlePresenter implements EntityTitle {
         this.contentServiceProvider = contentServiceProvider;
         this.contextNavigatorProvider = contextNavigatorProvider;
         this.iconsRegistry = iconsRegistry;
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
-                setState(state);
-            }
-        });
-        errorHandler.onNotDefaultContent(new Listener0() {
-            public void onEvent() {
-                view.setDateVisible(false);
-                view.setContentIconVisible(false);
-                view.setContentTitleEditable(false);
-                view.setContentTitle("");
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
+                if (state instanceof StateContainerDTO) {
+                    setState((StateContainerDTO) state);
+                } else if (state instanceof StateContentDTO) {
+                    setState((StateContentDTO) state);
+                } else {
+                    view.setContentIconVisible(false);
+                    view.setContentTitleVisible(false);
+                    view.setDateVisible(false);
+                }
             }
         });
     }
@@ -112,11 +113,13 @@ public class EntityTitlePresenter implements EntityTitle {
      */
     public void setContentTitle(final String title) {
         view.setContentTitle(title);
+        view.setContentTitleVisible(true);
     }
 
     public void setContentTitle(final String title, final boolean editable) {
         setContentTitle(title);
         view.setContentTitleEditable(editable);
+        view.setContentTitleVisible(true);
     }
 
     protected void onTitleRename(final String newName) {
@@ -146,28 +149,36 @@ public class EntityTitlePresenter implements EntityTitle {
         view.setDateVisible(visible);
     }
 
-    private void setState(final StateDTO state) {
-        if (state.hasDocument()) {
-            setContentTitle(state.getTitle(), state.getContentRights().isEditable());
-            setContentDateVisible(true);
-            setContentDate(state.getPublishedOn());
-        } else {
-            if (state.getContainer().getParentFolderId() == null) {
-                // We translate root folder names (documents, chat room,
-                // etcetera)
-                setContentTitle(i18n.t(state.getTitle()), false);
-            } else {
-                setContentTitle(state.getTitle(), state.getContentRights().isEditable());
-            }
-            setContentDateVisible(false);
-        }
-        final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
+    private void setIcon(final String contentTypeIcon) {
         if (contentTypeIcon.length() > 0) {
             view.setContentIcon(contentTypeIcon);
             view.setContentIconVisible(true);
         } else {
             view.setContentIconVisible(false);
         }
+    }
+
+    private void setState(final StateContainerDTO state) {
+        if (state.getContainer().getParentFolderId() == null) {
+            // We translate root folder names (documents, chat room,
+            // etcetera)
+            setContentTitle(i18n.t(state.getTitle()), false);
+        } else {
+            setContentTitle(state.getTitle(), state.getContainerRights().isEditable());
+        }
+        setContentDateVisible(false);
+        final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), null);
+        setIcon(contentTypeIcon);
+        view.setContentTitleVisible(true);
+    }
+
+    private void setState(final StateContentDTO state) {
+        setContentTitle(state.getTitle(), state.getContentRights().isEditable());
+        setContentDateVisible(true);
+        setContentDate(state.getPublishedOn());
+        final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
+        setIcon(contentTypeIcon);
+        view.setContentTitleVisible(true);
     }
 
 }

@@ -51,22 +51,25 @@ import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
-import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
+import org.ourproject.kune.platf.client.dto.StateNoContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.client.errors.NoDefaultContentException;
 import org.ourproject.kune.platf.client.errors.ToolNotFoundException;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.access.Access;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.access.AccessService;
+import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
@@ -83,11 +86,10 @@ import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
-import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
-import org.ourproject.kune.platf.server.state.State;
+import org.ourproject.kune.platf.server.state.StateContainer;
+import org.ourproject.kune.platf.server.state.StateContent;
 import org.ourproject.kune.platf.server.state.StateService;
 
 import com.google.inject.Inject;
@@ -108,30 +110,28 @@ public class ContentRPC implements ContentService, RPC {
     private final ContentManager contentManager;
     private final ContainerManager containerManager;
     private final TagManager tagManager;
-    private final SocialNetworkManager socialNetworkManager;
     private final CommentManager commentManager;
     private final AccessRightsService rightsService;
-    private final UserManager userManager;
+    private final FinderService finderService;
 
     @Inject
-    public ContentRPC(final Provider<UserSession> userSessionProvider, final AccessService accessService,
-            final AccessRightsService rightsService, final StateService stateService,
-            final CreationService creationService, final UserManager userManager, final GroupManager groupManager,
+    public ContentRPC(FinderService finderService, final Provider<UserSession> userSessionProvider,
+            final AccessService accessService, final AccessRightsService rightsService,
+            final StateService stateService, final CreationService creationService, final GroupManager groupManager,
             final XmppManager xmppManager, final ContentManager contentManager,
-            final ContainerManager containerManager, final TagManager tagManager,
-            final SocialNetworkManager socialNetworkManager, final CommentManager commentManager, final Mapper mapper) {
+            final ContainerManager containerManager, final TagManager tagManager, final CommentManager commentManager,
+            final Mapper mapper) {
+        this.finderService = finderService;
         this.userSessionProvider = userSessionProvider;
         this.accessService = accessService;
         this.rightsService = rightsService;
         this.stateService = stateService;
         this.creationService = creationService;
-        this.userManager = userManager;
         this.groupManager = groupManager;
         this.xmppManager = xmppManager;
         this.contentManager = contentManager;
         this.containerManager = containerManager;
         this.tagManager = tagManager;
-        this.socialNetworkManager = socialNetworkManager;
         this.commentManager = commentManager;
         this.mapper = mapper;
     }
@@ -174,56 +174,51 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateDTO addContent(final String userHash, final StateToken parentToken, final String title)
+    public StateContentDTO addContent(final String userHash, final StateToken parentToken, final String title)
             throws DefaultException {
         final Group group = groupManager.findByShortName(parentToken.getGroup());
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
-        final boolean userIsLoggedIn = userSession.isUserLoggedIn();
         final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
                 user, AccessRol.Editor);
         final Content addedContent = creationService.createContent(title, "", user, container);
-        final Access access = accessService.getAccess(user, addedContent.getStateToken(), group, AccessRol.Editor);
-        final State state = stateService.create(access);
-        completeState(user, userIsLoggedIn, group, state);
-        return mapState(state, user, group);
+        final StateContent state = stateService.create(user, addedContent);
+        return mapStateSiblings(state, user, group);
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateDTO addFolder(final String userHash, final StateToken parentToken, final String title,
+    public StateContainerDTO addFolder(final String userHash, final StateToken parentToken, final String title,
             final String contentTypeId) throws DefaultException {
         final Group group = groupManager.findByShortName(parentToken.getGroup());
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
-        final boolean userIsLoggedIn = userSession.isUserLoggedIn();
-        final State state = createFolder(parentToken.getGroup(), ContentUtils.parseId(parentToken.getFolder()), title,
-                contentTypeId);
-        completeState(user, userIsLoggedIn, group, state);
-        return mapState(state, user, group);
+        final Container container = createFolder(parentToken.getGroup(), ContentUtils.parseId(parentToken.getFolder()),
+                title, contentTypeId);
+        StateContainer state = stateService.create(user, container);
+        return mapStateSiblings(state, user, group);
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateDTO addRoom(final String userHash, final StateToken parentToken, final String roomName)
+    public StateContainerDTO addRoom(final String userHash, final StateToken parentToken, final String roomName)
             throws DefaultException {
         final String groupShortName = parentToken.getGroup();
         final Group group = groupManager.findByShortName(groupShortName);
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
-        final boolean userIsLoggedIn = userSession.isUserLoggedIn();
         final String userShortName = user.getShortName();
         final ChatConnection connection = xmppManager.login(userShortName, userSession.getUser().getPassword(),
                 userHash);
         xmppManager.createRoom(connection, roomName, userShortName + userHash);
         xmppManager.disconnect(connection);
         try {
-            final State state = createFolder(groupShortName, ContentUtils.parseId(parentToken.getFolder()), roomName,
-                    ChatServerTool.TYPE_ROOM);
-            completeState(user, userIsLoggedIn, group, state);
-            return mapState(state, user, group);
+            final Container container = createFolder(groupShortName, ContentUtils.parseId(parentToken.getFolder()),
+                    roomName, ChatServerTool.TYPE_ROOM);
+            StateContainer state = stateService.create(user, container);
+            return mapStateSiblings(state, user, group);
         } catch (final ContentNotFoundException e) {
             xmppManager.destroyRoom(connection, roomName);
             throw new ContentNotFoundException();
@@ -251,31 +246,41 @@ public class ContentRPC implements ContentService, RPC {
     // contents for instance)
     @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_ONLY)
-    public StateDTO getContent(final String userHash, final StateToken token) throws DefaultException {
+    public StateAbstractDTO getContent(final String userHash, final StateToken token) throws DefaultException {
         Group defaultGroup;
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final boolean userIsLoggedIn = userSession.isUserLoggedIn();
         if (userIsLoggedIn) {
             defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
-            if (groupManager.findEnabledTools(defaultGroup.getId()).size() == 0) {
-                defaultGroup = groupManager.getDefaultGroup();
-            }
+            // if (groupManager.findEnabledTools(defaultGroup.getId()).size() ==
+            // 0) {
+            // defaultGroup = groupManager.getDefaultGroup();
+            // }
         } else {
             defaultGroup = groupManager.getDefaultGroup();
         }
-        Access access;
         try {
-            access = accessService.getAccess(user, token, defaultGroup, AccessRol.Viewer);
+            final Content content = finderService.getContent(token, defaultGroup);
+            Long id = content.getId();
+            if (id != null) {
+                // Content
+                accessService.accessToContent(id, user, AccessRol.Viewer);
+                return mapStateSiblings(stateService.create(user, content), user, content.getContainer().getOwner());
+            } else {
+                // Container
+                final Container container = content.getContainer();
+                accessService.accessToContainer(container.getId(), user, AccessRol.Viewer);
+                // this getContainer....
+                return mapStateSiblings(stateService.create(user, container), user, container.getOwner());
+            }
         } catch (final NoResultException e) {
             throw new ContentNotFoundException();
         } catch (final ToolNotFoundException e) {
             throw new ContentNotFoundException();
+        } catch (final NoDefaultContentException e) {
+            return mapper.map(stateService.createNoHome(user, token.getGroup()), StateNoContentDTO.class);
         }
-        final State state = stateService.create(access);
-        final Group group = state.getGroup();
-        completeState(user, userIsLoggedIn, group, state);
-        return mapState(state, user, group);
     }
 
     @Authenticated(mandatory = false)
@@ -434,38 +439,14 @@ public class ContentRPC implements ContentService, RPC {
         return mapper.map(comment, CommentDTO.class);
     }
 
-    private void completeState(final User user, final boolean userIsLoggedIn, final Group group, final State state) {
-        if (state.isRateable()) {
-            final Long contentId = ContentUtils.parseId(state.getDocumentId());
-            final Content content = contentManager.find(contentId);
-            if (userIsLoggedIn) {
-                state.setCurrentUserRate(contentManager.getRateContent(user, content));
-            }
-            state.setRate(contentManager.getRateAvg(content));
-            state.setRateByUsers(contentManager.getRateByUsers(content));
-        }
-        state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
-        state.setGroupTags(tagManager.getSummaryByGroup(group));
-        state.setGroupMembers(socialNetworkManager.get(user, group));
-        state.setParticipation(socialNetworkManager.findParticipation(user, group));
-        if (group.getGroupType().equals(GroupType.PERSONAL)) {
-            state.setUserBuddies(userManager.getUserBuddies(group.getShortName()));
-        }
-    }
-
-    private State createFolder(final String groupShortName, final Long parentFolderId, final String title,
+    private Container createFolder(final String groupShortName, final Long parentFolderId, final String title,
             final String typeId) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Group group = groupManager.findByShortName(groupShortName);
-
-        accessService.accessToContainer(parentFolderId, user, AccessRol.Editor);
-
         final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage(),
                 typeId);
-        final Access access = accessService.getAccess(user, container.getStateToken(), group, AccessRol.Editor);
-        final State state = stateService.create(access);
-        return state;
+        return container;
     }
 
     private List<TagResultDTO> getSummaryTags(final Group group) {
@@ -483,8 +464,20 @@ public class ContentRPC implements ContentService, RPC {
         siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRightsDTO.class));
     }
 
-    private StateDTO mapState(final State state, final User user, final Group group) {
-        final StateDTO stateDTO = mapper.map(state, StateDTO.class);
+    private StateContainerDTO mapStateSiblings(final StateContainer state, final User user, final Group group) {
+        final StateContainerDTO stateDTO = mapper.map(state, StateContainerDTO.class);
+        final AccessLists groupAccessList = group.getSocialNetwork().getAccessLists();
+        for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
+            mapContentRightsInstate(user, groupAccessList, siblingDTO);
+        }
+        for (final ContentSimpleDTO siblingDTO : stateDTO.getContainer().getContents()) {
+            mapContentRightsInstate(user, groupAccessList, siblingDTO);
+        }
+        return stateDTO;
+    }
+
+    private StateContentDTO mapStateSiblings(final StateContent state, final User user, final Group group) {
+        final StateContentDTO stateDTO = mapper.map(state, StateContentDTO.class);
         final AccessLists groupAccessList = group.getSocialNetwork().getAccessLists();
         for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
             mapContentRightsInstate(user, groupAccessList, siblingDTO);

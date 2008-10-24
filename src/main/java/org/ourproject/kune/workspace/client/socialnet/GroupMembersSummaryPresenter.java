@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
@@ -68,8 +68,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         this.stateManager = stateManager;
         this.session = session;
         this.snServiceProvider = snServiceProvider;
-        final Listener<StateDTO> setStateListener = new Listener<StateDTO>() {
-            public void onEvent(StateDTO state) {
+        final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
+            public void onEvent(StateAbstractDTO state) {
                 setState(state);
             }
         };
@@ -173,7 +173,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         view.setVisible(true);
     }
 
-    private void setState(final StateDTO state) {
+    private void setState(final StateAbstractDTO state) {
         if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
             view.setVisible(false);
         } else {

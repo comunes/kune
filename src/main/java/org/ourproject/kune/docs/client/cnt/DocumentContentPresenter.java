@@ -45,7 +45,9 @@ import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -57,7 +59,6 @@ import com.calclab.suco.client.listener.Listener2;
 
 public class DocumentContentPresenter implements DocumentContent {
     private DocumentContentView view;
-    private StateDTO content;
     private final Session session;
     private final Provider<DocumentReader> docReaderProvider;
     private final Provider<TextEditor> textEditorProvider;
@@ -75,11 +76,9 @@ public class DocumentContentPresenter implements DocumentContent {
         this.folderViewerProvider = folderViewerProvider;
         this.toolbar = toolbar;
         this.actionRegistry = actionRegistry;
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
-                if (state.getToolName().equals(DocumentClientTool.NAME)) {
-                    setState(state);
-                }
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
+                setState(state);
             }
         });
         stateManager.onToolChanged(new Listener2<String, String>() {
@@ -103,34 +102,41 @@ public class DocumentContentPresenter implements DocumentContent {
         setState(session.getCurrentState());
     }
 
-    private void setState(final StateDTO state) {
-        content = state;
-        final String typeId = content.getTypeId();
-        ActionItemCollection<StateToken> collection;
-        if (content.hasDocument()) {
-            collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(),
-                    content.getContentRights(), true);
-        } else {
-            collection = actionRegistry.getCurrentActions(content.getStateToken(), typeId, session.isLogged(),
-                    content.getContainerRights(), true);
+    private void setState(final StateAbstractDTO state) {
+        if (state instanceof StateContainerDTO) {
+            StateContainerDTO stateCntCtx = (StateContainerDTO) state;
+            if (stateCntCtx.getToolName().equals(DocumentClientTool.NAME)) {
+                // This tool
+                if (stateCntCtx instanceof StateContentDTO) {
+                    setState((StateContentDTO) stateCntCtx);
+                } else if (stateCntCtx instanceof StateContainerDTO) {
+                    setState(stateCntCtx);
+                }
+            }
         }
+    }
+
+    private void setState(final StateContainerDTO state) {
+        ActionItemCollection<StateToken> collection = actionRegistry.getCurrentActions(state.getStateToken(),
+                state.getTypeId(), session.isLogged(), state.getContainerRights(), true);
+        setToolbar(collection);
+        final FolderViewer viewer = folderViewerProvider.get();
+        viewer.setFolder(state.getContainer());
+        view.setContent(viewer.getView());
+    }
+
+    private void setState(final StateContentDTO state) {
+        ActionItemCollection<StateToken> collection = actionRegistry.getCurrentActions(state.getStateToken(),
+                state.getTypeId(), session.isLogged(), state.getContentRights(), true);
+        setToolbar(collection);
+        docReaderProvider.get().showDocument(state.getStateToken(), state.getContent(), state.getTypeId(),
+                state.getMimeType());
+        textEditorProvider.get().reset();
+    }
+
+    private void setToolbar(ActionItemCollection<StateToken> collection) {
         toolbar.disableMenusAndClearButtons();
         toolbar.setActions(collection);
         toolbar.attach();
-        showContent();
     }
-
-    private void showContent() {
-        // textEditorProvider.get().setToolbarVisible(false);
-        if (content.hasDocument()) {
-            docReaderProvider.get().showDocument(content.getStateToken(), content.getContent(), content.getTypeId(),
-                    content.getMimeType());
-            textEditorProvider.get().reset();
-        } else {
-            final FolderViewer viewer = folderViewerProvider.get();
-            viewer.setFolder(content.getContainer());
-            view.setContent(viewer.getView());
-        }
-    }
-
 }

@@ -46,7 +46,9 @@ import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 
@@ -61,15 +63,16 @@ public interface ContentServiceAsync {
 
     void addComment(String userHash, StateToken token, String commentText, AsyncCallback<CommentDTO> asyncCallback);
 
-    void addContent(String user, StateToken parentToken, String name, AsyncCallback<StateDTO> callback);
+    void addContent(String user, StateToken parentToken, String name, AsyncCallback<StateContentDTO> callback);
 
-    void addFolder(String hash, StateToken parentToken, String title, String typeId, AsyncCallback<StateDTO> callback);
+    void addFolder(String hash, StateToken parentToken, String title, String typeId,
+            AsyncCallback<StateContainerDTO> callback);
 
-    void addRoom(String user, StateToken parentToken, String name, AsyncCallback<StateDTO> callback);
+    void addRoom(String user, StateToken parentToken, String name, AsyncCallback<StateContainerDTO> callback);
 
     void delContent(String userHash, StateToken token, AsyncCallback<?> asyncCallback);
 
-    void getContent(String user, StateToken newState, AsyncCallback<StateDTO> callback);
+    void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
     void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<List<TagResultDTO>> asyncCallback);
 

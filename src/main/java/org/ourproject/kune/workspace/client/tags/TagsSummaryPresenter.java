@@ -42,7 +42,8 @@ package org.ourproject.kune.workspace.client.tags;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -65,9 +66,13 @@ public class TagsSummaryPresenter implements TagsSummary {
             final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
         this.session = session;
         this.searcherProvider = searcherProvider;
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
-                setState(state);
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
+                if (state instanceof StateContainerDTO) {
+                    setState((StateContainerDTO) state);
+                } else {
+                    view.setVisible(false);
+                }
             }
         });
         wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
@@ -95,8 +100,8 @@ public class TagsSummaryPresenter implements TagsSummary {
         view.setTags(groupTags);
     }
 
-    void setState(final StateDTO state) {
-        if (state.getTags() != null && state.getTags().length() > 0) {
+    void setState(final StateContainerDTO state) {
+        if (state.getGroupTags() != null && state.getGroupTags().size() > 0) {
             view.setVisible(true);
             view.setTags(state.getGroupTags());
         } else {

@@ -45,7 +45,9 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -62,13 +64,17 @@ public interface Session {
 
     void check(AsyncCallbackSimple<?> callback);
 
+    StateContainerDTO getContainerState();
+
+    StateContentDTO getContentState();
+
     List<I18nCountryDTO> getCountries();
 
     Object[][] getCountriesArray();
 
     I18nLanguageDTO getCurrentLanguage();
 
-    StateDTO getCurrentState();
+    StateAbstractDTO getCurrentState();
 
     StateToken getCurrentStateToken();
 
@@ -96,7 +102,7 @@ public interface Session {
 
     void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
 
-    void setCurrentState(final StateDTO currentState);
+    void setCurrentState(final StateAbstractDTO currentState);
 
     void setCurrentUserInfo(UserInfoDTO currentUserInfo);
 

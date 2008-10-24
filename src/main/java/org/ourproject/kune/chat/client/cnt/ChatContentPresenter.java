@@ -43,7 +43,7 @@ import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.workspace.client.component.WorkspaceDeckView;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -54,7 +54,7 @@ import com.calclab.suco.client.ioc.Provider;
 public class ChatContentPresenter implements ChatContent {
 
     private final WorkspaceDeckView view;
-    private StateDTO state;
+    private StateContainerDTO state;
     private final EmiteUIDialog emiteUIDialog;
     private final Provider<ChatInfo> chatInfoProvider;
     private final Provider<ChatRoom> chatRoomProvider;
@@ -76,7 +76,7 @@ public class ChatContentPresenter implements ChatContent {
         emiteUIDialog.joinRoom(XmppURI.uri(roomName));
     }
 
-    public void setState(final StateDTO state) {
+    public void setState(final StateContainerDTO state) {
         this.state = state;
         final String typeId = state.getTypeId();
         if (typeId.equals(ChatClientTool.TYPE_ROOT)) {

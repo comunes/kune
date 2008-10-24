@@ -4,13 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 
 public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
-    private StateDTO defaultContent;
+    private StateContentDTO defaultContent;
 
     @Before
     public void init() throws Exception {
@@ -25,10 +25,12 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
         final String text = "Lorem ipsum dolor sit amet";
         final int version = defaultContent.getVersion();
         final int currentVersion = contentService.save(getHash(), defaultContent.getStateToken(), text);
-        assertEquals(version + 2, currentVersion);
-        final StateDTO again = contentService.getContent(getHash(), defaultContent.getStateToken());
+        assertEquals(version + 1, currentVersion);
+        final StateContentDTO again = (StateContentDTO) contentService.getContent(getHash(),
+                defaultContent.getStateToken());
         assertEquals(text, again.getContent());
-        assertEquals(0, (int) again.getRateByUsers());
+        assertEquals(version + 1, again.getVersion());
+        assertEquals(0, again.getRateByUsers().intValue());
         assertEquals(new Double(0), again.getRate());
     }
 
@@ -38,8 +40,10 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
         ;
         final int version = defaultContent.getVersion();
         final int currentVersion = contentService.save(getHash(), defaultContent.getStateToken(), text);
-        assertEquals(version + 2, currentVersion);
-        final StateDTO again = contentService.getContent(getHash(), defaultContent.getStateToken());
+        assertEquals(version + 1, currentVersion);
+        final StateContentDTO again = (StateContentDTO) contentService.getContent(getHash(),
+                defaultContent.getStateToken());
+        assertEquals(version + 1, again.getVersion());
         assertEquals(text, again.getContent());
     }
 

@@ -127,8 +127,8 @@
   </mapping>
 
   <mapping>
-    <class-a>org.ourproject.kune.platf.client.dto.StateDTO</class-a>
-    <class-b>org.ourproject.kune.platf.server.state.State</class-b>
+    <class-a>org.ourproject.kune.platf.client.dto.StateContentDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.state.StateContent</class-b>
     <field>
       <a>authors</a>
       <b>authors</b>
@@ -139,7 +139,12 @@
         org.ourproject.kune.platf.server.domain.User
       </b-hint>
     </field>
-    <field>
+  </mapping>
+
+   <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.StateContainerDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.state.StateContainer</class-b>
+     <field>
       <a>groupTags</a>
       <b>groupTags</b>
       <a-hint>
@@ -149,6 +154,11 @@
         org.ourproject.kune.platf.server.domain.TagResult
       </b-hint>
     </field>
+  </mapping>
+
+  <mapping>
+    <class-a>org.ourproject.kune.platf.client.dto.StateAbstractDTO</class-a>
+    <class-b>org.ourproject.kune.platf.server.state.StateAbstract</class-b>
   </mapping>
 
   <mapping>

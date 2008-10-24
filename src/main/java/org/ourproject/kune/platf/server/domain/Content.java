@@ -181,8 +181,9 @@ public class Content implements HasStateToken {
         }
     }
 
+    @Transient
     public AccessLists getAccessLists() {
-        return accessLists;
+        return hasAccessList() ? accessLists : getContainer().getAccessLists();
     }
 
     public List<User> getAuthors() {

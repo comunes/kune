@@ -19,36 +19,140 @@
  */
 package org.ourproject.kune.platf.server.state;
 
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import java.util.Date;
+import java.util.List;
 
-public abstract class StateContent extends StateAbstract {
+import org.ourproject.kune.platf.server.access.AccessRights;
+import org.ourproject.kune.platf.server.domain.BasicMimeType;
+import org.ourproject.kune.platf.server.domain.ContentStatus;
+import org.ourproject.kune.platf.server.domain.User;
 
-    private I18nLanguage language;
-    private String typeId;
-    private String toolName;
+public class StateContent extends StateContainer {
 
-    public I18nLanguage getLanguage() {
-        return language;
+    private String documentId;
+    private int version;
+    private String content;
+    private AccessRights contentRights;
+    private ContentStatus status;
+    private boolean isRateable;
+    private Double rate;
+    private Integer rateByUsers;
+    private Double currentUserRate;
+    private BasicMimeType mimeType;
+    private Date publishedOn;
+    private String tags;
+    private List<User> authors;
+
+    public StateContent() {
     }
 
-    public String getToolName() {
-        return toolName;
+    public List<User> getAuthors() {
+        return authors;
     }
 
-    public String getTypeId() {
-        return typeId;
+    public String getContent() {
+        return content;
     }
 
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
+    public AccessRights getContentRights() {
+        return contentRights;
     }
 
-    public void setToolName(final String toolName) {
-        this.toolName = toolName;
+    public Double getCurrentUserRate() {
+        return currentUserRate;
     }
 
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public BasicMimeType getMimeType() {
+        return mimeType;
+    }
+
+    public Date getPublishedOn() {
+        return publishedOn;
+    }
+
+    public Double getRate() {
+        return rate;
+    }
+
+    public Integer getRateByUsers() {
+        return rateByUsers;
+    }
+
+    public ContentStatus getStatus() {
+        return status;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public boolean isRateable() {
+        return isRateable;
+    }
+
+    public void setAuthors(List<User> authors) {
+        this.authors = authors;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setContentRights(AccessRights contentRights) {
+        this.contentRights = contentRights;
+    }
+
+    public void setCurrentUserRate(Double currentUserRate) {
+        this.currentUserRate = currentUserRate;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
+
+    public void setMimeType(BasicMimeType mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    public void setPublishedOn(Date publishedOn) {
+        this.publishedOn = publishedOn;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+
+    public void setRateable(boolean isRateable) {
+        this.isRateable = isRateable;
+    }
+
+    public void setRateByUsers(Integer rateByUsers) {
+        this.rateByUsers = rateByUsers;
+    }
+
+    public void setStatus(ContentStatus status) {
+        this.status = status;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "State[" + getStateToken() + "/" + getTypeId() + (mimeType != null ? "-" + mimeType : "") + "]";
     }
 
 }

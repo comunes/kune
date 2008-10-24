@@ -20,10 +20,9 @@
 package org.ourproject.kune.workspace.client.themes;
 
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -32,7 +31,6 @@ import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Event2;
 import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
 import com.calclab.suco.client.listener.Listener2;
 
 public class WsThemePresenter {
@@ -45,7 +43,7 @@ public class WsThemePresenter {
     private WsTheme defTheme;
 
     public WsThemePresenter(final Session session, final Provider<GroupServiceAsync> groupServiceProvider,
-            final StateManager stateManager, final KuneErrorHandler errorHandler) {
+            final StateManager stateManager) {
         this.session = session;
         this.groupServiceProvider = groupServiceProvider;
         this.onThemeChanged = Events.create(WsTheme.class, WsTheme.class, "onThemeChanged");
@@ -56,14 +54,9 @@ public class WsThemePresenter {
                 setTheme(defTheme);
             }
         });
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
                 setState(state);
-            }
-        });
-        errorHandler.onNotDefaultContent(new Listener0() {
-            public void onEvent() {
-                setTheme(defTheme);
             }
         });
     }
@@ -91,7 +84,7 @@ public class WsThemePresenter {
         defTheme = new WsTheme(initData.getWsThemes()[0]);
     }
 
-    private void setState(final StateDTO state) {
+    private void setState(final StateAbstractDTO state) {
         setTheme(new WsTheme(state.getGroup().getWorkspaceTheme()));
         if (state.getGroupRights().isAdministrable()) {
             view.setVisible(true);

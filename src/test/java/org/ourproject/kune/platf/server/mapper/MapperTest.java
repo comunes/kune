@@ -18,7 +18,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
@@ -34,7 +34,7 @@ import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.state.State;
+import org.ourproject.kune.platf.server.state.StateContent;
 
 import com.google.inject.Inject;
 
@@ -123,17 +123,17 @@ public class MapperTest {
 
     @Test
     public void testContentMapping() {
-        final State c = new State();
+        final StateContent c = new StateContent();
         c.setContentRights(new AccessRights(true, true, true));
         final Group groupAdmins = TestDomainHelper.createGroup(1);
         final Group groupEdit = TestDomainHelper.createGroup(2);
         final Group groupView = TestDomainHelper.createGroup(3);
         c.setAccessLists(TestDomainHelper.createAccessLists(groupAdmins, groupEdit, groupView));
         c.setRate(10.2D);
-        c.setRateByUsers(3L);
+        c.setRateByUsers(3);
         c.setCurrentUserRate(null);
 
-        final StateDTO dto = mapper.map(c, StateDTO.class);
+        final StateContentDTO dto = mapper.map(c, StateContentDTO.class);
         assertEquals(c.getContentRights().isAdministrable(), dto.getContentRights().isAdministrable());
 
         assertValidAccessListsMapping(c.getAccessLists().getAdmins(), dto.getAccessLists().getAdmins());
@@ -234,9 +234,9 @@ public class MapperTest {
         final StateToken stateToken = new StateToken(TESTGROUPSHORTNAME, TESTTOOL, "1", "2");
         final StateToken stateTokenMapped = mapper.map(stateToken, StateToken.class);
         assertEquals(stateToken, stateTokenMapped);
-        final State state = new State();
+        final StateContent state = new StateContent();
         state.setStateToken(stateToken);
-        final StateDTO stateDTO = mapper.map(state, StateDTO.class);
+        final StateContentDTO stateDTO = mapper.map(state, StateContentDTO.class);
         assertEquals(stateToken, stateDTO.getStateToken());
     }
 

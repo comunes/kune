@@ -46,7 +46,8 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
@@ -63,12 +64,12 @@ import com.calclab.suco.client.listener.Listener2;
 
 public class StateManagerDefault implements StateManager {
     private final ContentProvider contentProvider;
-    private StateDTO oldState;
+    private StateAbstractDTO oldState;
     private final Session session;
     private final HistoryWrapper history;
     private final HashMap<String, Listener<StateToken>> siteTokens;
-    private final Event<StateDTO> onStateChanged;
-    private final Event<StateDTO> onSocialNetworkChanged;
+    private final Event<StateAbstractDTO> onStateChanged;
+    private final Event<StateAbstractDTO> onSocialNetworkChanged;
     private final Event2<String, String> onToolChanged;
     private final Event2<GroupDTO, GroupDTO> onGroupChanged;
 
@@ -78,10 +79,10 @@ public class StateManagerDefault implements StateManager {
         this.session = session;
         this.history = history;
         this.oldState = null;
-        this.onStateChanged = Events.create(StateDTO.class, "onStateChanged");
+        this.onStateChanged = Events.create(StateAbstractDTO.class, "onStateChanged");
         this.onGroupChanged = Events.create(GroupDTO.class, GroupDTO.class, "onGroupChanged");
         this.onToolChanged = Events.create(String.class, String.class, "onToolChanged");
-        this.onSocialNetworkChanged = Events.create(StateDTO.class, "onSocialNetworkChanged");
+        this.onSocialNetworkChanged = Events.create(StateAbstractDTO.class, "onSocialNetworkChanged");
         session.onUserSignIn(new Listener<UserInfoDTO>() {
             public void onEvent(final UserInfoDTO parameter) {
                 if (oldState != null) {
@@ -134,11 +135,11 @@ public class StateManagerDefault implements StateManager {
         }
     }
 
-    public void onSocialNetworkChanged(final Listener<StateDTO> listener) {
+    public void onSocialNetworkChanged(final Listener<StateAbstractDTO> listener) {
         onSocialNetworkChanged.add(listener);
     }
 
-    public void onStateChanged(final Listener<StateDTO> listener) {
+    public void onStateChanged(final Listener<StateAbstractDTO> listener) {
         onStateChanged.add(listener);
     }
 
@@ -163,19 +164,19 @@ public class StateManagerDefault implements StateManager {
         if (oldState == null) {
             onHistoryChanged(new StateToken());
         } else {
-            final StateDTO newState = oldState;
+            final StateAbstractDTO newState = oldState;
             oldState = session.getCurrentState();
             setState(newState);
         }
     }
 
-    public void setRetrievedState(final StateDTO newState) {
+    public void setRetrievedState(final StateAbstractDTO newState) {
         contentProvider.cache(newState.getStateToken(), newState);
         setState(newState);
     }
 
     public void setSocialNetwork(final SocialNetworkResultDTO socialNet) {
-        StateDTO state;
+        StateAbstractDTO state;
         if (session != null && (state = session.getCurrentState()) != null) {
             // After a SN operation, usually returns a SocialNetworkResultDTO
             // with new SN data and we refresh the state
@@ -190,13 +191,20 @@ public class StateManagerDefault implements StateManager {
         }
     }
 
-    private void checkGroupAndToolChange(final StateDTO oldState, final StateDTO newState) {
+    private void checkGroupAndToolChange(final StateAbstractDTO oldState, final StateAbstractDTO newState) {
         final GroupDTO oldGroup = oldState != null ? oldState.getGroup() : null;
         final GroupDTO newGroup = newState.getGroup();
-        final String oldToolName = oldState != null ? oldState.getToolName() : null;
-        final String newToolName = newState.getToolName();
         if (oldState == null || !oldGroup.equals(newGroup)) {
             onGroupChanged.fire(oldGroup, newGroup);
+        }
+        // TODO field with oldToolName
+        String oldToolName = null;
+        String newToolName = null;
+        if (oldState instanceof StateContainerDTO) {
+            oldToolName = oldState != null ? ((StateContainerDTO) oldState).getToolName() : null;
+        }
+        if (newState instanceof StateContainerDTO) {
+            newToolName = ((StateContainerDTO) newState).getToolName();
         }
         if (oldState == null || oldToolName == null || !oldToolName.equals(newToolName)) {
             onToolChanged.fire(oldToolName, newToolName);
@@ -204,14 +212,14 @@ public class StateManagerDefault implements StateManager {
     }
 
     private void onHistoryChanged(final StateToken newState) {
-        contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateDTO>() {
-            public void onSuccess(final StateDTO newState) {
+        contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateAbstractDTO>() {
+            public void onSuccess(final StateAbstractDTO newState) {
                 setState(newState);
             }
         });
     }
 
-    private void setState(final StateDTO newState) {
+    private void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
         onStateChanged.fire(newState);
         Site.hideProgress();

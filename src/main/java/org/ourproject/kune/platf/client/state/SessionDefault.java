@@ -46,7 +46,9 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -67,7 +69,7 @@ public class SessionDefault implements Session {
     private Object[][] languagesArray;
     private Object[][] countriesArray;
     private Object[][] timezonesArray;
-    private StateDTO currentState;
+    private StateAbstractDTO currentState;
     private I18nLanguageDTO currentLanguage;
     private final Event<InitDataDTO> onInitDataReceived;
     private final Event<UserInfoDTO> onUserSignIn;
@@ -88,6 +90,14 @@ public class SessionDefault implements Session {
         userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
     }
 
+    public StateContainerDTO getContainerState() {
+        return (StateContainerDTO) currentState;
+    }
+
+    public StateContentDTO getContentState() {
+        return (StateContentDTO) currentState;
+    }
+
     public List<I18nCountryDTO> getCountries() {
         return initData.getCountries();
     }
@@ -103,7 +113,7 @@ public class SessionDefault implements Session {
         return currentLanguage;
     }
 
-    public StateDTO getCurrentState() {
+    public StateAbstractDTO getCurrentState() {
         return currentState;
     }
 
@@ -165,7 +175,7 @@ public class SessionDefault implements Session {
         this.currentLanguage = currentLanguage;
     }
 
-    public void setCurrentState(final StateDTO currentState) {
+    public void setCurrentState(final StateAbstractDTO currentState) {
         this.currentState = currentState;
     }
 

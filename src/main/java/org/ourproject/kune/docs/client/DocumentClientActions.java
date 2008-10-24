@@ -46,7 +46,8 @@ import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -126,8 +127,8 @@ public class DocumentClientActions {
                         Site.showProgressProcessing();
                         contentServiceProvider.get().addContent(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), i18n.t("New document"),
-                                new AsyncCallbackSimple<StateDTO>() {
-                                    public void onSuccess(final StateDTO state) {
+                                new AsyncCallbackSimple<StateContentDTO>() {
+                                    public void onSuccess(final StateContentDTO state) {
                                         contextNavigator.setEditOnNextStateChange(true);
                                         stateManager.setRetrievedState(state);
                                     }
@@ -309,7 +310,7 @@ public class DocumentClientActions {
         setGroupLogo.setIconUrl("images/nav/picture.png");
         setGroupLogo.setEnableCondition(new ActionEnableCondition<StateToken>() {
             public boolean mustBeEnabled(final StateToken itemToken) {
-                final BasicMimeTypeDTO mime = session.getCurrentState().getMimeType();
+                final BasicMimeTypeDTO mime = session.getContentState().getMimeType();
                 return mime != null && mime.getType().equals("image");
             }
         });
@@ -343,7 +344,7 @@ public class DocumentClientActions {
                             public void onSuccess(final Object result) {
                                 final TextEditor editor = textEditorProvider.get();
                                 documentContent.detach();
-                                editor.editContent(session.getCurrentState().getContent(), new Listener<String>() {
+                                editor.editContent(session.getContentState().getContent(), new Listener<String>() {
                                     public void onEvent(final String html) {
                                         Site.showProgressSaving();
                                         contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
@@ -363,8 +364,8 @@ public class DocumentClientActions {
 
                                                     public void onSuccess(final Integer newVersion) {
                                                         Site.hideProgress();
-                                                        session.getCurrentState().setVersion(newVersion);
-                                                        session.getCurrentState().setContent(html);
+                                                        session.getContentState().setVersion(newVersion);
+                                                        session.getContentState().setContent(html);
                                                         editor.onSaved();
                                                     }
                                                 });
@@ -429,8 +430,8 @@ public class DocumentClientActions {
                     public void onEvent(final StateToken stateToken) {
                         Site.showProgressProcessing();
                         contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
-                                contentTypeId, new AsyncCallbackSimple<StateDTO>() {
-                                    public void onSuccess(final StateDTO state) {
+                                contentTypeId, new AsyncCallbackSimple<StateContainerDTO>() {
+                                    public void onSuccess(final StateContainerDTO state) {
                                         contextNavigator.setEditOnNextStateChange(true);
                                         stateManager.setRetrievedState(state);
                                     }
@@ -478,7 +479,7 @@ public class DocumentClientActions {
                     public void onEvent(final StateToken stateToken) {
                         final AsyncCallbackSimple<Object> callback = new AsyncCallbackSimple<Object>() {
                             public void onSuccess(final Object result) {
-                                session.getCurrentState().setStatus(status);
+                                session.getContentState().setStatus(status);
                             }
                         };
                         if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {

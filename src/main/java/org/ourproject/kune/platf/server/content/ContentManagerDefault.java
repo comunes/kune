@@ -41,7 +41,6 @@ package org.ourproject.kune.platf.server.content;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -99,18 +98,18 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public Content createContent(final String title, final String body, final User author, final Container container) {
-        final Content descriptor = new Content();
-        descriptor.addAuthor(author);
-        descriptor.setLanguage(author.getLanguage());
+        final Content newContent = new Content();
+        newContent.addAuthor(author);
+        newContent.setLanguage(author.getLanguage());
         // FIXME: remove this when UI take publishing into account
-        descriptor.setPublishedOn(new Date());
-        container.addContent(descriptor);
-        descriptor.setContainer(container);
-        final Revision revision = new Revision(descriptor);
+        newContent.setPublishedOn(new Date());
+        container.addContent(newContent);
+        newContent.setContainer(container);
+        final Revision revision = new Revision(newContent);
         revision.setTitle(title);
         revision.setBody(body);
-        descriptor.addRevision(revision);
-        return persist(descriptor);
+        newContent.addRevision(revision);
+        return persist(newContent);
     }
 
     public void delContent(final User user, final Long contentId) throws DefaultException {
@@ -216,8 +215,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         final Content content = finder.getContent(contentId);
         final ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
         final ArrayList<Tag> tagList = new ArrayList<Tag>();
-        for (final Iterator<String> i = tagsStripped.iterator(); i.hasNext();) {
-            final String tagString = i.next();
+        for (String tagString : tagsStripped) {
             Tag tag;
             try {
                 tag = tagManager.findByTagName(tagString);

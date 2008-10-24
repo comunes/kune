@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.entitylogo;
 
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -52,8 +52,8 @@ public class EntityLogoPresenter implements EntityLogo {
                 setGroupLogo(newGroup);
             }
         });
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
                 final boolean isAdmin = state.getGroupRights().isAdministrable();
                 if (state.getGroup().hasLogo()) {
                     view.setChangeYourLogoText();
@@ -86,7 +86,7 @@ public class EntityLogoPresenter implements EntityLogo {
     public void reloadGroupLogo(StateToken groupToken) {
         groupServiceProvider.get().getGroup(session.getUserHash(), groupToken, new AsyncCallbackSimple<GroupDTO>() {
             public void onSuccess(GroupDTO group) {
-                StateDTO currentState = session.getCurrentState();
+                StateAbstractDTO currentState = session.getCurrentState();
                 if (currentState.getGroup().getShortName().equals(group.getShortName())) {
                     // only if we are in the
                     // same group

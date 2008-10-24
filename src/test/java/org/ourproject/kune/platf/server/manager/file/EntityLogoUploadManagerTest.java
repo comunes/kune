@@ -9,7 +9,7 @@ import net.sf.json.JSONObject;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
@@ -32,7 +32,7 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
     @Test
     public void testCreateLogo() throws Exception {
         manager.createUploadedFile(super.getDefaultContent().getStateToken(), "image/png", new File(TEST_FILE));
-        StateDTO defaultContent = super.getDefaultContent();
+        StateContainerDTO defaultContent = super.getDefaultContent();
         assertTrue(defaultContent.getGroup().hasLogo());
     }
 

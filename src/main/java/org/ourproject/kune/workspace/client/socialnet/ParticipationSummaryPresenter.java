@@ -43,7 +43,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
@@ -76,8 +76,8 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
         collabOnlyCategory = new GridGroup(i18n.t("collaborator in:"), " ", i18n.t("Collaborate in these groups"),
                 false);
         super.addGroupOperation(gotoGroupMenuItem, false);
-        final Listener<StateDTO> setStateListener = new Listener<StateDTO>() {
-            public void onEvent(StateDTO state) {
+        final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
+            public void onEvent(StateAbstractDTO state) {
                 setState(state);
             }
         };
@@ -99,7 +99,7 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
     }
 
     @SuppressWarnings("unchecked")
-    private void setState(final StateDTO state) {
+    private void setState(final StateAbstractDTO state) {
         final ParticipationDataDTO participation = state.getParticipation();
         final AccessRightsDTO rights = state.getGroupRights();
         view.clear();

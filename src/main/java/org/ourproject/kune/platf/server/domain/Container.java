@@ -138,6 +138,12 @@ public class Container implements HasId, HasStateToken {
         return absolutePath;
     }
 
+    @Transient
+    public AccessLists getAccessLists() {
+        // TODO like in Content, do store specific accesslist
+        return getOwner().getAccessLists();
+    }
+
     public List<ContainerTranslation> getAliases() {
         return containerTranslations;
     }

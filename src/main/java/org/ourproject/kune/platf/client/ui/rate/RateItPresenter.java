@@ -38,7 +38,8 @@
  */
 package org.ourproject.kune.platf.client.ui.rate;
 
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -66,9 +67,13 @@ public class RateItPresenter implements RateIt {
         this.session = session;
         this.contentServiceProvider = contentServiceProvider;
         this.stateManager = stateManager;
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
-                setState(state);
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
+                if (state instanceof StateContentDTO) {
+                    setState((StateContentDTO) state);
+                } else {
+                    view.setVisible(false);
+                }
             }
         });
     }
@@ -103,7 +108,7 @@ public class RateItPresenter implements RateIt {
         final Double newValue = starClicked + 1d == currentRate ? currentRate - 0.5d : starClicked + 1d;
         setRatePanel(newValue);
         Site.showProgressProcessing();
-        final StateDTO currentState = session.getCurrentState();
+        final StateAbstractDTO currentState = session.getCurrentState();
         contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getStateToken(), newValue,
                 new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
@@ -152,7 +157,7 @@ public class RateItPresenter implements RateIt {
         }
     }
 
-    private void setState(final StateDTO state) {
+    private void setState(final StateContentDTO state) {
         if (state.isRateable()) {
             if (session.isLogged()) {
                 setRate(state.getCurrentUserRate());
@@ -160,8 +165,6 @@ public class RateItPresenter implements RateIt {
             } else {
                 view.setVisible(false);
             }
-        } else {
-            view.setVisible(false);
         }
     }
 }

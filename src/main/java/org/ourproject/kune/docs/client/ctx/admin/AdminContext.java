@@ -40,10 +40,12 @@
 package org.ourproject.kune.docs.client.ctx.admin;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 
 public interface AdminContext {
+    void clear();
+
     View getView();
 
-    void setState(StateDTO content);
+    void setState(StateContentDTO content);
 }

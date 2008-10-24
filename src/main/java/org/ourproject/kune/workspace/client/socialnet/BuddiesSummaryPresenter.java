@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -57,13 +57,13 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         this.actionRegistry = actionRegistry;
         this.i18n = i18n;
         this.chatClientToolProvider = chatClientToolProvider;
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(StateDTO state) {
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(StateAbstractDTO state) {
                 setState(state);
             }
         });
-        stateManager.onSocialNetworkChanged(new Listener<StateDTO>() {
-            public void onEvent(StateDTO state) {
+        stateManager.onSocialNetworkChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(StateAbstractDTO state) {
                 setState(state);
             }
         });
@@ -78,7 +78,7 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         this.view = view;
     }
 
-    protected void setState(StateDTO state) {
+    protected void setState(StateAbstractDTO state) {
         if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
             view.clear();
             UserBuddiesDataDTO userBuddies = state.getUserBuddies();

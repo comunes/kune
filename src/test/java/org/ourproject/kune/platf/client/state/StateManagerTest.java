@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
@@ -50,7 +50,7 @@ public class StateManagerTest {
     public void getDefGroup() {
         stateManager.onHistoryChanged("site.docs");
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                (StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
 
     @Before
@@ -71,7 +71,7 @@ public class StateManagerTest {
         Mockito.stub(history.getToken()).toReturn("");
         stateManager.reload();
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                (StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
 
     @SuppressWarnings("unchecked")
@@ -83,7 +83,7 @@ public class StateManagerTest {
         stateManager.onHistoryChanged(token);
         Mockito.verify(listener, Mockito.times(1)).onEvent(Mockito.anyObject());
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                (StateToken) Mockito.anyObject(), (AsyncCallback<StateDTO>) Mockito.anyObject());
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
 
 }

@@ -40,10 +40,12 @@
 package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ContextNavigator {
+
+    void clear();
 
     void editItem(StateToken stateToken);
 
@@ -59,6 +61,6 @@ public interface ContextNavigator {
 
     void setItemText(StateToken stateToken, String name);
 
-    void setState(StateDTO state, boolean selectItem);
+    void setState(StateContainerDTO state, boolean selectItem);
 
 }

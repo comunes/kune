@@ -46,6 +46,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
+import org.ourproject.kune.platf.client.errors.NoDefaultContentException;
 import org.ourproject.kune.platf.client.errors.ToolNotFoundException;
 import org.ourproject.kune.platf.server.content.CommentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
@@ -115,7 +116,7 @@ public class FinderServiceDefault implements FinderService {
         if (token.hasAll()) {
             return findByContentReference(group, token.getTool(), folderId, contentId);
         } else if (token.hasGroupToolAndFolder()) {
-            return findByFolderReference(group, token.getTool(), folderId);
+            return findByFolderReference(group, folderId);
         } else if (token.hasGroupAndTool()) {
             return findByRootOnGroup(group, token.getTool());
         } else if (token.hasGroup()) {
@@ -165,9 +166,13 @@ public class FinderServiceDefault implements FinderService {
         return descriptor;
     }
 
-    private Content findByFolderReference(final String groupName, final String toolName, final Long folderId) {
+    private Content findByFolderReference(final String groupName, final Long folderId) {
         final Container container = containerManager.find(folderId);
-        return generateFolderFakeContent(container);
+        if (container == null) {
+            throw new ContentNotFoundException();
+        } else {
+            return generateFolderFakeContent(container);
+        }
     }
 
     private Content findByRootOnGroup(final String groupName, final String toolName) throws DefaultException {
@@ -185,7 +190,11 @@ public class FinderServiceDefault implements FinderService {
 
     private Content findDefaultContentOfGroup(final Group group) {
         final Content defaultContent = group.getDefaultContent();
-        return defaultContent == null ? Content.NO_CONTENT : defaultContent;
+        if (defaultContent == null) {
+            throw new NoDefaultContentException();
+        } else {
+            return defaultContent;
+        }
     }
 
     private Content findDefaultContentOfGroup(final String groupName) throws GroupNotFoundException {

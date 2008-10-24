@@ -41,7 +41,9 @@ package org.ourproject.kune.docs.client.ctx;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
@@ -57,10 +59,17 @@ public class DocumentContextPresenter implements DocumentContext {
             final Provider<ContextNavigator> contextNavigatorProvider, final Provider<AdminContext> adminContextProvider) {
         this.contextNavigatorProvider = contextNavigatorProvider;
         this.adminContextProvider = adminContextProvider;
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
-                if (DocumentClientTool.NAME.equals(state.getToolName())) {
-                    setState(state);
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
+                if (state instanceof StateContainerDTO) {
+                    StateContainerDTO stateCntCtx = (StateContainerDTO) state;
+                    if (DocumentClientTool.NAME.equals(stateCntCtx.getToolName())) {
+                        setState(stateCntCtx);
+                    }
+                } else {
+                    // TODO detach
+                    contextNavigatorProvider.get().clear();
+                    adminContextProvider.get().clear();
                 }
             }
         });
@@ -79,9 +88,11 @@ public class DocumentContextPresenter implements DocumentContext {
         view.setContainer(contextNavigatorProvider.get().getView());
     }
 
-    private void setState(final StateDTO state) {
+    private void setState(final StateContainerDTO state) {
         contextNavigatorProvider.get().setState(state, true);
-        adminContextProvider.get().setState(state);
+        if (state instanceof StateContentDTO) {
+            adminContextProvider.get().setState((StateContentDTO) state);
+        }
         showFolders();
     }
 }

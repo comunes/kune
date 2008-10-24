@@ -6,7 +6,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
+import org.ourproject.kune.platf.client.dto.StateNoContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
@@ -14,12 +17,20 @@ import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test
+    public void contentOfUserWithNoHomePage() throws Exception {
+        final String userHash = doLogin();
+        final StateAbstractDTO response = contentService.getContent(userHash, new StateToken());
+        assertTrue(response instanceof StateNoContentDTO);
+    }
+
+    @Test
     public void contentWithLoggedUserIsEditable() throws Exception {
         final String userHash = doLogin();
-        final StateDTO response = contentService.getContent(userHash, new StateToken());
+        final StateContentDTO response = (StateContentDTO) contentService.getContent(userHash,
+                getDefaultContent().getStateToken());
         assertNotNull(response.getContentRights());
         assertTrue(response.getContentRights().isEditable());
-        // assertTrue(response.getAccessLists().getAdmin().size() == 1);
+        assertTrue(response.getAccessLists().getAdmins().getList().size() == 1);
     }
 
     @Before
@@ -29,7 +40,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test
     public void defaultCountentShouldExist() throws Exception {
-        final StateDTO content = contentService.getContent(null, new StateToken());
+        final StateContentDTO content = (StateContentDTO) contentService.getContent(null, new StateToken());
         assertNotNull(content);
         assertNotNull(content.getGroup());
         assertNotNull(content.getContainer());
@@ -42,7 +53,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test
     public void noContentNotLogged() throws Exception {
-        final StateDTO response = contentService.getContent(null, new StateToken());
+        final StateContentDTO response = (StateContentDTO) contentService.getContent(null, new StateToken());
         assertNotNull(response);
     }
 
@@ -63,7 +74,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent4() throws Exception {
-        final StateDTO stateDTO = getDefaultContent();
+        final StateContainerDTO stateDTO = getDefaultContent();
         contentService.getContent(null, stateDTO.getStateToken().clone().setDocument("dadaas"));
     }
 
@@ -74,7 +85,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test
     public void notLoggedUserShouldNotEditDefaultDoc() throws Exception {
-        final StateDTO content = contentService.getContent(null, new StateToken());
+        final StateContentDTO content = (StateContentDTO) contentService.getContent(null, new StateToken());
         assertFalse(content.getContentRights().isAdministrable());
         assertFalse(content.getContentRights().isEditable());
         assertTrue(content.getContentRights().isVisible());
@@ -85,7 +96,8 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test
     public void unknownContent() throws Exception {
-        final StateDTO content = contentService.getContent(null, new StateToken("site.docs"));
+        final StateContainerDTO content = (StateContainerDTO) contentService.getContent(null, new StateToken(
+                "site.docs"));
         assertNotNull(content);
         assertNotNull(content.getGroup());
         assertNotNull(content.getContainer());

@@ -39,68 +39,130 @@
 
 package org.ourproject.kune.platf.server.state;
 
-import org.ourproject.kune.platf.server.access.Access;
+import org.ourproject.kune.platf.client.dto.GroupType;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.server.access.AccessRightsService;
+import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
+import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
+import org.ourproject.kune.platf.server.manager.TagManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 public class StateServiceDefault implements StateService {
 
-    public State create(final Access access) {
-        final Content content = access.getContent();
-        final Container container = access.getContainer();
-        final State state = new State();
+    private final AccessRightsService rightsService;
+    private final UserManager userManager;
+    private final SocialNetworkManager socialNetworkManager;
+    private final GroupManager groupManager;
+    private final TagManager tagManager;
+    private final ContentManager contentManager;
+    private final I18nTranslationService i18n;
 
-        final Long documentId = content.getId();
-        if (documentId != null) {
-            state.setTypeId(content.getTypeId());
-            state.setMimeType(content.getMimeType());
-            state.setDocumentId(documentId.toString());
-            state.setIsRateable(true);
-            state.setLanguage(content.getLanguage());
-            state.setPublishedOn(content.getPublishedOn());
-            state.setAuthors(content.getAuthors());
-            state.setTags(content.getTagsAsString());
-            state.setStatus(content.getStatus());
-            state.setStateToken(content.getStateToken());
-        } else {
-            state.setTypeId(container.getTypeId());
-            state.setDocumentId(null);
-            state.setIsRateable(false);
-            state.setLanguage(container.getLanguage());
-            state.setStateToken(container.getStateToken());
-        }
-        if (!container.isRoot()) {
-            state.setRootContainer(container.getAbsolutePath().get(0));
-        } else {
-            state.setRootContainer(container);
-        }
-        final Revision revision = content.getLastRevision();
-        final char[] text = revision.getBody();
-        state.setContent(text == null ? null : new String(text));
-        if (documentId != null) {
-            state.setTitle(revision.getTitle());
-        } else {
-            state.setTitle(container.getName());
-        }
-        state.setToolName(container.getToolName());
+    @Inject
+    public StateServiceDefault(UserManager userManager, GroupManager groupManager,
+            SocialNetworkManager socialNetworkManager, ContentManager contentManager, TagManager tagManager,
+            AccessRightsService rightsService, I18nTranslationService i18n) {
+        this.userManager = userManager;
+        this.groupManager = groupManager;
+        this.socialNetworkManager = socialNetworkManager;
+        this.contentManager = contentManager;
+        this.tagManager = tagManager;
+        this.rightsService = rightsService;
+        this.i18n = i18n;
+    }
+
+    public StateContainer create(User userLogged, Container container) {
+        final StateContainer state = new StateContainer();
+        state.setTitle(container.getName());
+        state.setTypeId(container.getTypeId());
+        state.setLanguage(container.getLanguage());
+        state.setStateToken(container.getStateToken());
+        state.setRootContainer(calculateRootContainer(container));
+        state.setLicense(container.getOwner().getDefaultLicense());
+        state.setAccessLists(container.getAccessLists());
         Group group = container.getOwner();
+        setCommon(state, userLogged, group, container);
+        return state;
+    }
+
+    public StateContent create(User userLogged, Content content) {
+        StateContent state = new StateContent();
+        state.setTypeId(content.getTypeId());
+        state.setMimeType(content.getMimeType());
+        state.setDocumentId(content.getId().toString());
+        state.setRateable(true);
+        state.setLanguage(content.getLanguage());
+        state.setPublishedOn(content.getPublishedOn());
+        state.setAuthors(content.getAuthors());
+        state.setTags(content.getTagsAsString());
+        state.setStatus(content.getStatus());
+        state.setStateToken(content.getStateToken());
+        Revision revision = content.getLastRevision();
+        state.setTitle(revision.getTitle());
+        state.setVersion(content.getVersion());
+        char[] text = revision.getBody();
+        state.setContent(text == null ? null : new String(text));
+        Container container = content.getContainer();
+        state.setRootContainer(calculateRootContainer(container));
+        License license = content.getLicense();
+        Group group = container.getOwner();
+        state.setLicense(license == null ? group.getDefaultLicense() : license);
+        state.setContentRights(rightsService.get(userLogged, content.getAccessLists()));
+        state.setAccessLists(content.getAccessLists());
+        setCommon(state, userLogged, group, container);
+        if (userLogged != User.UNKNOWN_USER) {
+            state.setCurrentUserRate(contentManager.getRateContent(userLogged, content));
+        }
+        Double rateAvg = contentManager.getRateAvg(content);
+        state.setRate(rateAvg != null ? rateAvg : 0D);
+        Long rateByUsers = contentManager.getRateByUsers(content);
+        state.setRateByUsers(rateByUsers != null ? rateByUsers.intValue() : 0);
+        return state;
+    }
+
+    public StateNoContent createNoHome(User userLogged, String groupShortName) {
+        Group group = groupManager.findByShortName(groupShortName);
+        assert (group.getGroupType().equals(GroupType.PERSONAL));
+        StateNoContent state = new StateNoContent();
+        state.setGroup(group);
+        state.setGroupRights(rightsService.get(userLogged, group.getAccessLists()));
+        state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
+        setSocialNetwork(state, userLogged, group);
+        state.setStateToken(group.getStateToken());
+        state.setTitle(i18n.t("This user doesn't have a homepage"));
+        return state;
+    }
+
+    private Container calculateRootContainer(Container container) {
+        return container.isRoot() ? container : container.getAbsolutePath().get(0);
+    }
+
+    private void setCommon(StateContainer state, User userLogged, Group group, Container container) {
+        state.setToolName(container.getToolName());
         state.setGroup(group);
         state.setContainer(container);
-        state.setAccessLists(access.getContentAccessLists());
-        state.setContentRights(access.getContentRights());
-        state.setContainerRights(access.getContainerRights());
-        state.setGroupRights(access.getGroupRights());
-        License contentLicense = content.getLicense();
-        if (contentLicense == null) {
-            contentLicense = group.getDefaultLicense();
+        state.setGroupRights(rightsService.get(userLogged, group.getAccessLists()));
+        state.setContainerRights(rightsService.get(userLogged, container.getAccessLists()));
+        state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
+        state.setGroupTags(tagManager.getSummaryByGroup(group));
+        setSocialNetwork(state, userLogged, group);
+    }
+
+    private void setSocialNetwork(StateAbstract state, User userLogged, Group group) {
+        state.setGroupMembers(socialNetworkManager.get(userLogged, group));
+        state.setParticipation(socialNetworkManager.findParticipation(userLogged, group));
+        if (group.getGroupType().equals(GroupType.PERSONAL)) {
+            state.setUserBuddies(userManager.getUserBuddies(group.getShortName()));
         }
-        state.setLicense(contentLicense);
-        return state;
     }
 }

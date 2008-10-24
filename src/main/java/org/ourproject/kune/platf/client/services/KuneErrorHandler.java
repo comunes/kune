@@ -45,7 +45,6 @@ import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
-import org.ourproject.kune.platf.client.errors.NoDefaultContentException;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.state.Session;
@@ -67,7 +66,6 @@ public class KuneErrorHandler {
     private final Provider<WorkspaceSkeleton> wsProvider;
     private final Event0 onSessionExpired;
     private final Provider<StateManager> stateManagerProvider;
-    private final Event0 onNotDefaultContent;
 
     public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
             final Provider<WorkspaceSkeleton> wsProvider, final Provider<StateManager> stateManagerProvider) {
@@ -76,7 +74,6 @@ public class KuneErrorHandler {
         this.wsProvider = wsProvider;
         this.stateManagerProvider = stateManagerProvider;
         this.onSessionExpired = Events.create("onSessionExpired");
-        onNotDefaultContent = new Event0("onNotDefaultContent");
     }
 
     public void doSessionExpired() {
@@ -87,10 +84,6 @@ public class KuneErrorHandler {
 
     public WorkspaceSkeleton getWorkspaceSkeleton() {
         return wsProvider.get();
-    }
-
-    public void onNotDefaultContent(final Listener0 listener) {
-        onNotDefaultContent.add(listener);
     }
 
     public void onSessionExpired(final Listener0 listener) {
@@ -107,8 +100,6 @@ public class KuneErrorHandler {
         } catch (final SessionExpiredException e) {
             logException(e);
             doSessionExpired();
-        } catch (final NoDefaultContentException e) {
-            onNotDefaultContent.fire();
         } catch (final UserMustBeLoggedException e) {
             logException(e);
             if (session.isLogged()) {

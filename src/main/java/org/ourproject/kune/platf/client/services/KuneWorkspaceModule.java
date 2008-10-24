@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
-import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
@@ -266,7 +265,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public WsThemePresenter create() {
                 final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $$(GroupServiceAsync.class),
-                        $(StateManager.class), $(KuneErrorHandler.class));
+                        $(StateManager.class));
                 final WsThemePanel panel = new WsThemePanel($(WorkspaceSkeleton.class), presenter,
                         $(I18nUITranslationService.class));
                 presenter.init(panel);
@@ -290,7 +289,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntitySubTitle create() {
                 final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(
-                        $(I18nUITranslationService.class), $(StateManager.class), false, $(KuneErrorHandler.class));
+                        $(I18nUITranslationService.class), $(StateManager.class), false);
                 final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, $(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
@@ -300,8 +299,7 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
             @Override
             public EntityLicensePresenter create() {
-                final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class),
-                        $(KuneErrorHandler.class));
+                final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class));
                 final EntityLicensePanel panel = new EntityLicensePanel(presenter, $(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class));
                 presenter.init(panel);
@@ -399,9 +397,7 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<NoHomePage>(NoHomePage.class) {
             @Override
             public NoHomePage create() {
-                final NoHomePagePresenter presenter = new NoHomePagePresenter($(Session.class), $(StateManager.class),
-                        $(KuneErrorHandler.class), $(EntityLogo.class), $$(GroupServiceAsync.class),
-                        $$(EntityLogo.class), $$(SocialNetworkServiceAsync.class), $(HistoryWrapper.class));
+                final NoHomePagePresenter presenter = new NoHomePagePresenter($(StateManager.class), $$(EntityLogo.class));
                 final NoHomePagePanel panel = new NoHomePagePanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(panel);

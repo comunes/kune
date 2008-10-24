@@ -41,7 +41,7 @@ package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.calclab.suco.client.listener.Listener;
@@ -58,9 +58,9 @@ public interface StateManager extends HistoryListener {
 
     void onGroupChanged(Listener2<GroupDTO, GroupDTO> listener);
 
-    void onSocialNetworkChanged(Listener<StateDTO> listener);
+    void onSocialNetworkChanged(Listener<StateAbstractDTO> listener);
 
-    void onStateChanged(Listener<StateDTO> listener);
+    void onStateChanged(Listener<StateAbstractDTO> listener);
 
     void onToolChanged(Listener2<String, String> listener);
 
@@ -70,7 +70,7 @@ public interface StateManager extends HistoryListener {
 
     void restorePreviousState();
 
-    void setRetrievedState(StateDTO state);
+    void setRetrievedState(StateAbstractDTO state);
 
     void setSocialNetwork(SocialNetworkResultDTO socialNet);
 

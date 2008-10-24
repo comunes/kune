@@ -46,7 +46,9 @@ import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
@@ -62,15 +64,16 @@ public interface ContentService extends RemoteService {
 
     CommentDTO addComment(String userHash, StateToken token, String commentText) throws DefaultException;
 
-    StateDTO addContent(String user, StateToken parentToken, String name) throws DefaultException;
+    StateContentDTO addContent(String user, StateToken parentToken, String name) throws DefaultException;
 
-    StateDTO addFolder(String hash, StateToken parentToken, String typeId, String title) throws DefaultException;
+    StateContainerDTO addFolder(String hash, StateToken parentToken, String typeId, String title)
+            throws DefaultException;
 
-    StateDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
+    StateContainerDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
 
     void delContent(String userHash, StateToken token) throws DefaultException;
 
-    StateDTO getContent(String userHash, StateToken token) throws DefaultException;
+    StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 
     List<TagResultDTO> getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
 

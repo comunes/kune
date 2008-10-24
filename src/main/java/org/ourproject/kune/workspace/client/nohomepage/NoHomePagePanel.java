@@ -43,9 +43,7 @@ public class NoHomePagePanel implements NoHomePageView {
         EntityWorkspace ew = ws.getEntityWorkspace();
         ew.setContent(noHomepageCtnLabel);
         ew.setContext(noHomepageCtxLabel);
-        ew.getContentTopBar().removeAll();
         ew.getContextTopBar().removeAll();
-        ew.getContentBottomBar().removeAll();
         ew.getContextBottomBar().removeAll();
     }
 }

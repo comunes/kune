@@ -39,8 +39,15 @@
 
 package org.ourproject.kune.platf.server.state;
 
-import org.ourproject.kune.platf.server.access.Access;
+import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.Content;
+import org.ourproject.kune.platf.server.domain.User;
 
 public interface StateService {
-    State create(Access access);
+
+    StateContainer create(User userLogged, Container container);
+
+    StateContent create(User userLogged, Content content);
+
+    StateNoContent createNoHome(User user, String groupShortName);
 }

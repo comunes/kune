@@ -1,9 +1,12 @@
 package org.ourproject.kune.workspace.client.tags;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
@@ -32,15 +35,26 @@ public class TagsSummaryPresenterTest {
 
     @Test
     public void noTagsViewNotVisible() {
-        final StateDTO state = new StateDTO();
+        final StateContainerDTO state = new StateContainerDTO();
+        tagsSummaryPresenter.setState(state);
+        Mockito.verify(view).setVisible(false);
+    }
+
+    @Test
+    public void withTagsViewFalse() {
+        final StateContainerDTO state = new StateContainerDTO();
+        ArrayList<TagResultDTO> list = new ArrayList<TagResultDTO>();
+        state.setGroupTags(list);
         tagsSummaryPresenter.setState(state);
         Mockito.verify(view).setVisible(false);
     }
 
     @Test
     public void withTagsViewVisible() {
-        final StateDTO state = new StateDTO();
-        state.setTags("test test1");
+        final StateContainerDTO state = new StateContainerDTO();
+        ArrayList<TagResultDTO> list = new ArrayList<TagResultDTO>();
+        list.add(new TagResultDTO("abc", 1L));
+        state.setGroupTags(list);
         tagsSummaryPresenter.setState(state);
         Mockito.verify(view).setVisible(true);
     }

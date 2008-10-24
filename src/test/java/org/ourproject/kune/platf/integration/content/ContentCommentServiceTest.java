@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.CommentDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
@@ -13,7 +13,7 @@ import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 public class ContentCommentServiceTest extends ContentServiceIntegrationTest {
 
     String groupName;
-    private StateDTO defaultContent;
+    private StateContainerDTO defaultContent;
 
     @Test
     public void commentDefaultContent() throws Exception {

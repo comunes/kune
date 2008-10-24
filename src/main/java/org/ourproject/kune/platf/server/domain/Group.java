@@ -65,6 +65,7 @@ import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.Pattern;
 import org.ourproject.kune.platf.client.dto.GroupType;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
@@ -189,6 +190,11 @@ public class Group implements HasId {
         return null;
     }
 
+    @Transient
+    public AccessLists getAccessLists() {
+        return getSocialNetwork().getAccessLists();
+    }
+
     public AdmissionType getAdmissionType() {
         return admissionType;
     }
@@ -244,6 +250,11 @@ public class Group implements HasId {
 
     public SocialNetwork getSocialNetwork() {
         return socialNetwork;
+    }
+
+    @Transient
+    public StateToken getStateToken() {
+        return new StateToken(shortName);
     }
 
     public ToolConfiguration getToolConfiguration(final String name) {
@@ -328,5 +339,4 @@ public class Group implements HasId {
     public String toString() {
         return "Group[" + shortName + "]";
     }
-
 }

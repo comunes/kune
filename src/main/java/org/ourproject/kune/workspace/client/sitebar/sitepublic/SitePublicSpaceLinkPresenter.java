@@ -21,7 +21,8 @@ package org.ourproject.kune.workspace.client.sitebar.sitepublic;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.StateManager;
 
@@ -32,9 +33,13 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
     private SitePublicSpaceLinkView view;
 
     public SitePublicSpaceLinkPresenter(final StateManager stateManager) {
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
-                setState(state);
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
+                if (state instanceof StateContainerDTO) {
+                    setState((StateContainerDTO) state);
+                } else {
+                    view.setVisible(false);
+                }
             }
         });
     }
@@ -51,7 +56,7 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
         view.setVisible(visible);
     }
 
-    private void setState(final StateDTO state) {
+    private void setState(final StateContainerDTO state) {
         final StateToken token = state.getStateToken();
         if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
             final String publicUrl = token.getPublicUrl();
@@ -60,6 +65,7 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
         } else {
             view.setContentPublic(false);
         }
+        view.setVisible(true);
     }
 
 }

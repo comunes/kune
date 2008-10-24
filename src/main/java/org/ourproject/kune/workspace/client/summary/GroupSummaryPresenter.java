@@ -39,7 +39,7 @@
 package org.ourproject.kune.workspace.client.summary;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
@@ -52,8 +52,8 @@ public class GroupSummaryPresenter implements GroupSummary {
     private GroupSummaryView view;
 
     public GroupSummaryPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
-        stateManager.onStateChanged(new Listener<StateDTO>() {
-            public void onEvent(final StateDTO state) {
+        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            public void onEvent(final StateAbstractDTO state) {
                 setState(state);
             }
         });
@@ -72,7 +72,7 @@ public class GroupSummaryPresenter implements GroupSummary {
         this.view = view;
     }
 
-    private void setState(final StateDTO state) {
+    private void setState(final StateAbstractDTO state) {
         view.setComment("Summary about this group (in development)");
     }
 

@@ -45,7 +45,8 @@ import java.util.List;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.StateDTO;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -83,7 +84,7 @@ public class AdminContextPresenter implements AdminContext {
 
     public void addAuthor(final String authorShortName) {
         Site.showProgressProcessing();
-        final StateDTO currentState = session.getCurrentState();
+        final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().addAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
                 new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
@@ -93,9 +94,13 @@ public class AdminContextPresenter implements AdminContext {
                 });
     }
 
+    public void clear() {
+        // TODO Auto-generated method stub
+    }
+
     public void delAuthor(final String authorShortName) {
         Site.showProgressProcessing();
-        final StateDTO currentState = session.getCurrentState();
+        final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().removeAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
                 new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
@@ -107,7 +112,7 @@ public class AdminContextPresenter implements AdminContext {
 
     public void doChangeLanguage(final String langCode) {
         Site.showProgressProcessing();
-        final StateDTO currentState = session.getCurrentState();
+        final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setLanguage(session.getUserHash(), currentState.getStateToken(), langCode,
                 new AsyncCallbackSimple<I18nLanguageDTO>() {
                     public void onSuccess(final I18nLanguageDTO lang) {
@@ -127,7 +132,7 @@ public class AdminContextPresenter implements AdminContext {
 
     public void setPublishedOn(final Date publishedOn) {
         Site.showProgressProcessing();
-        final StateDTO currentState = session.getCurrentState();
+        final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setPublishedOn(session.getUserHash(), currentState.getStateToken(), publishedOn,
                 new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
@@ -138,7 +143,7 @@ public class AdminContextPresenter implements AdminContext {
 
     }
 
-    public void setState(final StateDTO content) {
+    public void setState(final StateContentDTO content) {
         // In the future check the use of these components by each tool
         final I18nLanguageDTO language = content.getLanguage();
         final AccessListsDTO accessLists = content.getAccessLists();
@@ -146,38 +151,36 @@ public class AdminContextPresenter implements AdminContext {
         final String tags = content.getTags();
         final List<UserSimpleDTO> authors = content.getAuthors();
 
-        if (content.hasDocument()) {
-            if (tags != null) {
-                view.setTags(tags);
-            } else {
-                view.removeTagsComponent();
-            }
-            if (language != null) {
-                view.setLanguage(language);
-            } else {
-                view.removeLangComponent();
-            }
-            if (authors != null) {
-                view.setAuthors(authors);
-            } else {
-                view.removeAuthorsComponent();
-            }
-            if (publishedOn != null) {
-                view.setPublishedOn(publishedOn);
-            } else {
-                view.removePublishedOnComponent();
-            }
-            if (accessLists != null) {
-                view.setAccessLists(accessLists);
-            } else {
-                view.removeAccessListComponent();
-            }
+        if (tags != null) {
+            view.setTags(tags);
+        } else {
+            view.removeTagsComponent();
+        }
+        if (language != null) {
+            view.setLanguage(language);
+        } else {
+            view.removeLangComponent();
+        }
+        if (authors != null) {
+            view.setAuthors(authors);
+        } else {
+            view.removeAuthorsComponent();
+        }
+        if (publishedOn != null) {
+            view.setPublishedOn(publishedOn);
+        } else {
+            view.removePublishedOnComponent();
+        }
+        if (accessLists != null) {
+            view.setAccessLists(accessLists);
+        } else {
+            view.removeAccessListComponent();
         }
     }
 
     public void setTags(final String tagsString) {
         Site.showProgressProcessing();
-        final StateDTO currentState = session.getCurrentState();
+        final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setTags(session.getUserHash(), currentState.getStateToken(), tagsString,
                 new AsyncCallbackSimple<List<TagResultDTO>>() {
                     public void onSuccess(final List<TagResultDTO> result) {

@@ -55,6 +55,8 @@ public interface EntityTitleView extends View {
 
     void setContentTitleEditable(boolean editable);
 
+    void setContentTitleVisible(boolean visible);
+
     void setDateVisible(boolean visible);
 
 }
