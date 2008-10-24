@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.site;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessage;
+import org.ourproject.kune.workspace.client.site.msg.SiteToastMessage;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -32,10 +32,10 @@ public class Site {
     public static final String IN_DEVELOPMENT = " (in development)";
     private static I18nTranslationService i18n;
     private static SiteProgress progress;
-    private static Provider<SiteMessage> siteMessageProvider;
+    private static Provider<SiteToastMessage> siteMessageProvider;
 
     public static void error(final String value) {
-        getSiteMessage().setMessage(value, SiteErrorType.error);
+        getSiteMessage().showMessage(i18n.t("Error"), value, SiteErrorType.error);
     }
 
     public static void hideProgress() {
@@ -43,11 +43,11 @@ public class Site {
     }
 
     public static void important(final String value) {
-        getSiteMessage().setMessage(value, SiteErrorType.imp);
+        getSiteMessage().showMessage(i18n.t("Important"), value, SiteErrorType.imp);
     }
 
     public static void info(final String value) {
-        getSiteMessage().setMessage(value, SiteErrorType.info);
+        getSiteMessage().showMessage(i18n.t("Info"), value, SiteErrorType.info);
     }
 
     public static void showProgress(final String text) {
@@ -71,15 +71,15 @@ public class Site {
     }
 
     public static void veryImportant(final String value) {
-        getSiteMessage().setMessage(value, SiteErrorType.veryimp);
+        getSiteMessage().showMessage(i18n.t("Alert"), value, SiteErrorType.veryimp);
     }
 
-    private static SiteMessage getSiteMessage() {
+    private static SiteToastMessage getSiteMessage() {
         return siteMessageProvider.get();
     }
 
     public Site(final I18nUITranslationService i18n, final SiteProgress progress,
-            final Provider<SiteMessage> siteMessageProvider) {
+            final Provider<SiteToastMessage> siteMessageProvider) {
         Site.i18n = i18n;
         Site.progress = progress;
         Site.siteMessageProvider = siteMessageProvider;

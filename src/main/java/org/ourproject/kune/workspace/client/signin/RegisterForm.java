@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
@@ -58,7 +59,7 @@ public class RegisterForm extends DefaultForm {
     private final Radio noPersonalHomePage;
     private final I18nUITranslationService i18n;
 
-    public RegisterForm(final SignInPresenter presenter, final I18nUITranslationService i18n) {
+    public RegisterForm(final I18nUITranslationService i18n, Session session) {
         this.i18n = i18n;
         super.addStyleName("kune-Margin-Large-l");
 
@@ -126,7 +127,7 @@ public class RegisterForm extends DefaultForm {
         emailRegField.setId(EMAIL_FIELD);
         add(emailRegField);
 
-        final Store langStore = new SimpleStore(new String[] { "abbr", "language" }, presenter.getLanguages());
+        final Store langStore = new SimpleStore(new String[] { "abbr", "language" }, session.getLanguagesArray());
         langStore.load();
 
         languageCombo = new ComboBox();
@@ -145,14 +146,14 @@ public class RegisterForm extends DefaultForm {
         languageCombo.setWidth(DEF_MEDIUM_FIELD_WIDTH);
         languageCombo.setAllowBlank(false);
         languageCombo.setValueField("abbr");
-        languageCombo.setValue(presenter.getCurrentLanguage().getCode());
+        languageCombo.setValue(session.getCurrentLanguage().getCode());
         languageCombo.setPageSize(7);
         languageCombo.setForceSelection(true);
         languageCombo.setValidationEvent(false);
         languageCombo.setId(LANG_FIELD);
         add(languageCombo);
 
-        final Store countryStore = new SimpleStore(new String[] { "abbr", "country" }, presenter.getCountries());
+        final Store countryStore = new SimpleStore(new String[] { "abbr", "country" }, session.getCountriesArray());
         countryStore.load();
 
         countryCombo = new ComboBox();
@@ -177,7 +178,7 @@ public class RegisterForm extends DefaultForm {
         countryCombo.setId(COUNTRY_FIELD);
         add(countryCombo);
 
-        final Store timezoneStore = new SimpleStore(new String[] { "id" }, presenter.getTimezones());
+        final Store timezoneStore = new SimpleStore(new String[] { "id" }, session.getTimezones());
         timezoneStore.load();
 
         timezoneCombo = new ComboBox();
@@ -203,6 +204,7 @@ public class RegisterForm extends DefaultForm {
         add(timezoneCombo);
 
         final FieldSet personalSpaceFieldSet = new FieldSet(i18n.t("Do you want a personal homepage?"));
+        personalSpaceFieldSet.setWidth(DEF_FIELD_WIDTH + DEF_FIELD_LABEL_WITH);
         wantPersonalHomePage = new Radio();
         noPersonalHomePage = new Radio();
         personalSpaceFieldSet.setCollapsible(false);

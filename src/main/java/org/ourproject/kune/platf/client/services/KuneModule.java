@@ -90,9 +90,14 @@ import org.ourproject.kune.workspace.client.search.SiteSearcherView;
 import org.ourproject.kune.workspace.client.search.UserLiveSearcher;
 import org.ourproject.kune.workspace.client.search.UserLiveSearcherPanel;
 import org.ourproject.kune.workspace.client.search.UserLiveSearcherPresenter;
+import org.ourproject.kune.workspace.client.signin.Register;
+import org.ourproject.kune.workspace.client.signin.RegisterPanel;
+import org.ourproject.kune.workspace.client.signin.RegisterPresenter;
+import org.ourproject.kune.workspace.client.signin.RegisterView;
 import org.ourproject.kune.workspace.client.signin.SignIn;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
 import org.ourproject.kune.workspace.client.signin.SignInPresenter;
+import org.ourproject.kune.workspace.client.signin.SignInView;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.site.rpc.UserService;
@@ -266,9 +271,21 @@ public class KuneModule extends AbstractModule {
             @Override
             public SignIn create() {
                 final SignInPresenter presenter = new SignInPresenter($(Session.class), $(StateManager.class), i18n,
-                        $(UserServiceAsync.class));
-                final SignInPanel view = new SignInPanel(presenter, i18n, $(WorkspaceSkeleton.class));
-                presenter.init(view);
+                        $$(UserServiceAsync.class), $$(Register.class));
+                final SignInView panel = new SignInPanel(presenter, i18n, $(WorkspaceSkeleton.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(Singleton.class, new Factory<Register>(Register.class) {
+            @Override
+            public Register create() {
+                final RegisterPresenter presenter = new RegisterPresenter($(Session.class), $(StateManager.class),
+                        i18n, $$(UserServiceAsync.class), $$(SignIn.class));
+                final RegisterView panel = new RegisterPanel(presenter, i18n, $(WorkspaceSkeleton.class),
+                        $(Session.class));
+                presenter.init(panel);
                 return presenter;
             }
         });
@@ -432,6 +449,12 @@ public class KuneModule extends AbstractModule {
             }
         });
 
+        $(StateManager.class).addSiteToken(SiteToken.register.toString(), new Listener<StateToken>() {
+            public void onEvent(final StateToken previousStateToken) {
+                $(Register.class).doRegister(previousStateToken);
+            }
+        });
+
         $(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Listener<StateToken>() {
             public void onEvent(final StateToken previousStateToken) {
                 $(NewGroup.class).doNewGroup(previousStateToken);
@@ -459,6 +482,5 @@ public class KuneModule extends AbstractModule {
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();
         $(Application.class).start();
-
     }
 }

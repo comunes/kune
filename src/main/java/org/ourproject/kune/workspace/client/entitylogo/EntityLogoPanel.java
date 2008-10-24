@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.entitylogo;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -158,7 +160,8 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
     }
 
     public void reloadImage(GroupDTO group) {
-        Image.prefetch(downloadProvider.get().getLogoImageUrl(group.getStateToken()));
+        entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "?nocache="
+                + new Date().getTime());
     }
 
     public void setChangeYourLogoText() {

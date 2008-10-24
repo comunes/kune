@@ -66,6 +66,16 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
         contentNoPublic.addStyleName("k-sitebar-labellink");
     }
 
+    public void attach() {
+        publicHP.add(gotoPublic);
+        publicHP.add(contentNoPublic);
+    }
+
+    public void detach() {
+        publicHP.remove(gotoPublic);
+        publicHP.remove(contentNoPublic);
+    }
+
     public void setContentGotoPublicUrl(final String publicUrl) {
         this.publicUrl = publicUrl;
     }
@@ -77,6 +87,7 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
 
     public void setVisible(final boolean visible) {
         publicHP.setVisible(visible);
+
     }
 
     private void gotoPublic() {

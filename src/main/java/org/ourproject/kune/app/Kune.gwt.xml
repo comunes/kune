@@ -22,6 +22,7 @@
 
     <inherits name="com.gwtextux.GwtExtUx" />
     <inherits name="com.gwtextux.UploadDialog"/>
+    <inherits name="com.gwtextux.ToastWindow"/>
     <script src="js/UploadDialog/Ext.ux.UploadDialog.packed.js" />
     <stylesheet src="js/UploadDialog/css/Ext.ux.UploadDialog.css" />
     <script src="js/ext-ux-all-min.js" />

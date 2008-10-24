@@ -40,10 +40,10 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
         this.showLanguage = showLanguage;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
-                if (state instanceof StateContainerDTO) {
-                    setState((StateContainerDTO) state);
-                } else if (state instanceof StateContentDTO) {
+                if (state instanceof StateContentDTO) {
                     setState((StateContentDTO) state);
+                } else if (state instanceof StateContainerDTO) {
+                    setState((StateContainerDTO) state);
                 }
             }
         });

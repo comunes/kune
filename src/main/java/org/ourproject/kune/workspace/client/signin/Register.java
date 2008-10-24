@@ -2,9 +2,9 @@ package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface SignIn {
+public interface Register {
 
-    void doSignIn(StateToken previousStateToken);
+    void doRegister(StateToken previousStateToken);
 
     void hide();
 

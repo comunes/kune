@@ -24,7 +24,12 @@ import com.gwtext.client.widgets.Window;
 
 public class BasicDialog extends Window {
 
+    public BasicDialog(final String caption, final boolean modal) {
+        this(caption, modal, false);
+    }
+
     public BasicDialog(final String caption, final boolean modal, final boolean autoScroll) {
+        setBorder(false);
         setAutoWidth(true);
         // Param values
         setTitle(caption);
@@ -40,8 +45,9 @@ public class BasicDialog extends Window {
         setButtonAlign(Position.RIGHT);
     }
 
-    public BasicDialog(final String caption, final boolean modal) {
-        this(caption, modal, false);
+    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
+            final int height) {
+        this(caption, modal, autoScroll, width, height, width, height);
     }
 
     public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
@@ -53,11 +59,6 @@ public class BasicDialog extends Window {
         setHeight(height);
         setMinWidth(minWidth);
         setMinHeight(minHeight);
-    }
-
-    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
-            final int height) {
-        this(caption, modal, autoScroll, width, height, width, height);
     }
 
 }

@@ -64,5 +64,4 @@ public class SignInForm extends DefaultForm {
     public String getNickOrEmail() {
         return loginNickOrEmailField.getValueAsString();
     }
-
 }

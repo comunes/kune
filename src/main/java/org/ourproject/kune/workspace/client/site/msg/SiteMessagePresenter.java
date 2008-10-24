@@ -31,11 +31,6 @@ public class SiteMessagePresenter implements SiteMessage, MessagePresenter {
     public SiteMessagePresenter() {
     }
 
-    @Deprecated
-    public void adjustWidth(final int windowWidth) {
-        view.adjustWidth(windowWidth);
-    }
-
     public View getView() {
         return view;
     }

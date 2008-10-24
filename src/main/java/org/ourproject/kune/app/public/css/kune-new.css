@@ -722,3 +722,21 @@
     border-right: 1px #D0D0D0 solid;
     border-left: 1px #D0D0D0 solid;
 }
+
+/* SiteToastMessages */
+
+.k-stm-info-icon {
+  background-image: url(img/info.gif) !important;
+}
+
+.k-stm-imp-icon {
+  background-image: url(img/alert.gif) !important;
+}
+
+.k-stm-verimp-icon {
+  background-image: url(img/important.gif) !important;
+}
+
+.k-stm-error-icon {
+  background-image: url(img/error.gif) !important;
+}

@@ -119,5 +119,4 @@ public class DocumentServerTool implements ServerTool {
             throw new ContainerNotPermittedException();
         }
     }
-
 }

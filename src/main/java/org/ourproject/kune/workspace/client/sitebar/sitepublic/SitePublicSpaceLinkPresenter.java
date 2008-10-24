@@ -37,7 +37,7 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
                 if (state instanceof StateContainerDTO) {
                     setState((StateContainerDTO) state);
                 } else {
-                    view.setVisible(false);
+                    view.detach();
                 }
             }
         });
@@ -64,6 +64,7 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
         } else {
             view.setContentPublic(false);
         }
+        view.attach();
         view.setVisible(true);
     }
 

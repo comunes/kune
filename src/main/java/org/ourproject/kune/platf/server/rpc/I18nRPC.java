@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
+import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -99,10 +100,14 @@ public class I18nRPC implements RPC, I18nService {
         return i18nTranslationManager.getLexicon(language);
     }
 
-    @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public String getTranslation(final String userHash, final String language, final String text) {
-        return i18nTranslationManager.getTranslation(language, text);
+        String translation = null;
+        try {
+            translation = getTranslationWrapper(language, text);
+        } catch (SessionExpiredException e) {
+        }
+        return translation;
     }
 
     @Authenticated
@@ -110,6 +115,11 @@ public class I18nRPC implements RPC, I18nService {
     public String setTranslation(final String userHash, final String id, final String translation)
             throws DefaultException {
         return i18nTranslationManager.setTranslation(id, translation);
+    }
+
+    @Authenticated(mandatory = false)
+    private String getTranslationWrapper(final String language, final String text) {
+        return i18nTranslationManager.getTranslation(language, text);
     }
 
     private UserSession getUserSession() {

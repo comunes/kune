@@ -16,19 +16,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.workspace.client.sitebar.sitepublic;
+ */
+package org.ourproject.kune.workspace.client.signin;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface SitePublicSpaceLinkView extends View {
+public interface SignInOld {
 
-    void attach();
+    void doSignIn(StateToken previousStateToken);
 
-    void detach();
-
-    void setContentGotoPublicUrl(String publicUrl);
-
-    void setContentPublic(boolean visible);
-
-    void setVisible(boolean visible);
 }

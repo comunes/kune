@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.dialogs;
 
-import com.calclab.emiteuimodule.client.dialog.BasicDialogListener;
+import com.calclab.suco.client.listener.Listener0;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.Position;
@@ -31,14 +31,15 @@ public class BasicDialogExtended extends BasicDialog {
 
     public BasicDialogExtended(final String title, final boolean modal, final boolean autoscroll, final int width,
             final int heigth, final String icon, final String firstButtonTitle, final String cancelButtonTitle,
-            final BasicDialogListener listener) {
+            final Listener0 onFirstButtonClick, Listener0 onCancelButtonClick) {
         this(title, modal, autoscroll, width, heigth, icon, firstButtonTitle, Ext.generateId(), cancelButtonTitle,
-                Ext.generateId(), listener);
+                Ext.generateId(), onFirstButtonClick, onCancelButtonClick);
     }
 
     public BasicDialogExtended(final String title, final boolean modal, final boolean autoscroll, final int width,
             final int heigth, final String icon, final String firstButtonTitle, final String firstButtonId,
-            final String cancelButtonTitle, final String cancelButtonId, final BasicDialogListener listener) {
+            final String cancelButtonTitle, final String cancelButtonId, final Listener0 onFirstButtonClick,
+            final Listener0 onCancelButtonClick) {
         super(title, modal, autoscroll, width, heigth);
         setLayout(new FitLayout());
         setCollapsible(false);
@@ -49,7 +50,7 @@ public class BasicDialogExtended extends BasicDialog {
         firstButton.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
-                listener.onFirstButtonClick();
+                onFirstButtonClick.onEvent();
             }
         });
 
@@ -60,7 +61,7 @@ public class BasicDialogExtended extends BasicDialog {
         cancel.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
-                listener.onCancelButtonClick();
+                onCancelButtonClick.onEvent();
             }
         });
         cancel.setTabIndex(4);

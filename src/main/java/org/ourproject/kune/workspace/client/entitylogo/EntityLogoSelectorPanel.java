@@ -19,44 +19,57 @@
  */package org.ourproject.kune.workspace.client.entitylogo;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
+import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.platf.client.ui.download.FileParams;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.calclab.suco.client.listener.Listener0;
 import com.gwtext.client.core.Connection;
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Hidden;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.event.FormListener;
 
 public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
 
     private static final String ICON_UPLOAD_SERVLET = "/kune/servlets/EntityLogoUploadManager";
-    private final BasicDialog dialog;
-    private final FormPanel form;
+    private static final String SUBID = "k-elogoselp-subb";
+    private static final String CANCELID = "k-elogoselp-canb";
+    private final BasicDialogExtended dialog;
+    private final FormPanel formPanel;
     private final Hidden userhashField;
     private final Hidden tokenField;
 
     public EntityLogoSelectorPanel(final EntityLogoSelectorPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
-        dialog = new BasicDialog(i18n.t("Select an logo for your group"), true, true, 300, 120);
+        dialog = new BasicDialogExtended(i18n.t("Select an logo for your group"), true, true, 320, 180, "",
+                i18n.t("Select"), SUBID, i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
+                    public void onEvent() {
+                        formPanel.getForm().submit();
+                    }
+                }, new Listener0() {
+                    public void onEvent() {
+                        presenter.onCancel();
+                    }
+                });
         dialog.setCollapsible(false);
+        dialog.setBorder(false);
 
-        form = new FormPanel();
-        form.setBorder(false);
-        form.setFrame(false);
-        form.setFileUpload(true);
-        form.setMethod(Connection.POST);
-        form.setUrl(ICON_UPLOAD_SERVLET);
-        form.setWaitMsgTarget(true);
-        form.setHideLabels(true);
-        dialog.setMargins(10);
-        form.addFormListener(new FormListener() {
+        formPanel = new FormPanel();
+        formPanel.setFrame(true);
+        formPanel.setAutoScroll(false);
+        formPanel.setBorder(false);
+        formPanel.setFileUpload(true);
+        formPanel.setWidth(320);
+        formPanel.setMethod(Connection.POST);
+        formPanel.setUrl(ICON_UPLOAD_SERVLET);
+        formPanel.setWaitMsgTarget(true);
+        formPanel.setHideLabels(true);
+        formPanel.setPaddings(10);
+        formPanel.addFormListener(new FormListener() {
             public boolean doBeforeAction(Form form) {
                 return true;
             }
@@ -72,36 +85,24 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
             }
         });
 
+        Label label = new Label(i18n.t(
+                "Select an image in your computer as the logo for this group. Recomended size [%d]x[%d] pixels",
+                EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT));
+        formPanel.add(label);
         final TextField file = new TextField("File", EntityLogoView.LOGO_FORM_FIELD);
+        file.setId(EntityLogoView.LOGO_FORM_FIELD);
         file.setInputType("file");
         userhashField = new Hidden(FileParams.HASH, FileParams.HASH);
         tokenField = new Hidden(FileParams.TOKEN, FileParams.TOKEN);
-        form.add(userhashField);
-        form.add(tokenField);
-        form.add(file);
-
-        Button submit = new Button(i18n.t("Select"));
-        submit.addListener(new ButtonListenerAdapter() {
-            @Override
-            public void onClick(Button button, EventObject e) {
-                form.getForm().submit();
-            }
-        });
-        Button cancel = new Button(i18n.t("Cancel"));
-        cancel.addListener(new ButtonListenerAdapter() {
-            @Override
-            public void onClick(Button button, EventObject e) {
-                presenter.onCancel();
-            }
-        });
-        dialog.addButton(submit);
-        dialog.addButton(cancel);
-        dialog.add(form);
+        formPanel.add(userhashField);
+        formPanel.add(tokenField);
+        formPanel.add(file);
+        dialog.add(formPanel);
     }
 
     public void hide() {
         dialog.hide();
-        form.getForm().reset();
+        formPanel.getForm().reset();
     }
 
     public void setUploadParams(String userHash, String token) {

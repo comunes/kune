@@ -50,10 +50,9 @@ import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.site.Site;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessage;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessagePanel;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessagePresenter;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessageView;
+import org.ourproject.kune.workspace.client.site.msg.SiteToastMessage;
+import org.ourproject.kune.workspace.client.site.msg.SiteToastMessagePanel;
+import org.ourproject.kune.workspace.client.site.msg.SiteToastMessagePresenter;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogo;
 import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogoPanel;
@@ -144,7 +143,7 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<Site>(Site.class) {
             @Override
             public Site create() {
-                return new Site($(I18nUITranslationService.class), $(SiteProgress.class), $$(SiteMessage.class));
+                return new Site($(I18nUITranslationService.class), $(SiteProgress.class), $$(SiteToastMessage.class));
             }
         });
 
@@ -159,14 +158,13 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<SiteMessage>(SiteMessage.class) {
+        register(ApplicationComponentGroup.class, new Factory<SiteToastMessage>(SiteToastMessage.class) {
             @Override
-            public SiteMessage create() {
-                final SiteMessagePresenter siteMessagePresenter = new SiteMessagePresenter();
-                final SiteMessageView siteMessageView = new SiteMessagePanel(siteMessagePresenter, true,
-                        $(I18nUITranslationService.class));
-                siteMessagePresenter.init(siteMessageView);
-                return siteMessagePresenter;
+            public SiteToastMessage create() {
+                final SiteToastMessagePresenter presenter = new SiteToastMessagePresenter();
+                final SiteToastMessagePanel panel = new SiteToastMessagePanel();
+                presenter.init(panel);
+                return presenter;
             }
         });
 
@@ -396,7 +394,8 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<NoHomePage>(NoHomePage.class) {
             @Override
             public NoHomePage create() {
-                final NoHomePagePresenter presenter = new NoHomePagePresenter($(StateManager.class), $$(EntityLogo.class));
+                final NoHomePagePresenter presenter = new NoHomePagePresenter($(StateManager.class),
+                        $$(EntityLogo.class));
                 final NoHomePagePanel panel = new NoHomePagePanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(panel);

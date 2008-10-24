@@ -28,12 +28,13 @@ public class DefaultForm {
     protected static final int DEF_FIELD_WIDTH = 200;
     protected static final int DEF_SMALL_FIELD_WIDTH = 100;
     protected static final int DEF_MEDIUM_FIELD_WIDTH = 150;
-    private static final int DEF_FIELD_LABEL_WITH = 75;
+    protected static final int DEF_FIELD_LABEL_WITH = 75;
 
     private final FormPanel form;
 
     public DefaultForm() {
         form = new FormPanel();
+        form.setFrame(true);
         form.setPaddings(10);
         form.setBorder(false);
         form.setLabelWidth(DEF_FIELD_LABEL_WITH);
@@ -76,6 +77,10 @@ public class DefaultForm {
 
     public void setAutoWidth(final boolean autoWidth) {
         form.setAutoWidth(autoWidth);
+    }
+
+    public void setWidth(int width) {
+        form.setWidth(width);
     }
 
     public void validate() {

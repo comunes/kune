@@ -21,7 +21,9 @@
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -45,12 +47,17 @@ public class SiteProgressPanel implements SiteProgressView {
     public void hideProgress() {
         timeProgressMaxTime.cancel();
         progressPanel.setVisible(false);
-        publicLinkProvider.get().setVisible(true);
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                publicLinkProvider.get().setVisible(true);
+            }
+        });
     }
 
     public void showProgress(final String text) {
         if (timeProgressMaxTime == null) {
             timeProgressMaxTime = new Timer() {
+                @Override
                 public void run() {
                     hideProgress();
                 }

@@ -1,20 +1,15 @@
 package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
-public interface SignInView extends SignInAbstractView {
+public interface SignInAbstractView extends View {
 
     void center();
-
-    String getLoginPassword();
-
-    String getNickOrEmail();
 
     void hide();
 
     void hideMessages();
-
-    boolean isSignInFormValid();
 
     void mask(final String message);
 
@@ -22,7 +17,7 @@ public interface SignInView extends SignInAbstractView {
 
     void reset();
 
-    void setCookie(final String userHash);
+    void setCookie(String userHash);
 
     void setErrorMessage(final String message, final SiteErrorType type);
 
