@@ -241,9 +241,6 @@ public class ContentRPC implements ContentService, RPC {
         contentManager.delContent(user, contentId);
     }
 
-    // Not using @Authorizated because accessService is doing this job and is
-    // more complex than other access checks (we use getContent to get default
-    // contents for instance)
     @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_ONLY)
     public StateAbstractDTO getContent(final String userHash, final StateToken token) throws DefaultException {
@@ -253,27 +250,16 @@ public class ContentRPC implements ContentService, RPC {
         final boolean userIsLoggedIn = userSession.isUserLoggedIn();
         if (userIsLoggedIn) {
             defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
-            // if (groupManager.findEnabledTools(defaultGroup.getId()).size() ==
-            // 0) {
-            // defaultGroup = groupManager.getDefaultGroup();
-            // }
+            if (groupManager.findEnabledTools(defaultGroup.getId()).size() == 0) {
+                // Groups with no homepage
+                defaultGroup = groupManager.getSiteDefaultGroup();
+            }
         } else {
-            defaultGroup = groupManager.getDefaultGroup();
+            defaultGroup = groupManager.getSiteDefaultGroup();
         }
         try {
             final Content content = finderService.getContent(token, defaultGroup);
-            Long id = content.getId();
-            if (id != null) {
-                // Content
-                accessService.accessToContent(id, user, AccessRol.Viewer);
-                return mapStateSiblings(stateService.create(user, content), user, content.getContainer().getOwner());
-            } else {
-                // Container
-                final Container container = content.getContainer();
-                accessService.accessToContainer(container.getId(), user, AccessRol.Viewer);
-                // this getContainer....
-                return mapStateSiblings(stateService.create(user, container), user, container.getOwner());
-            }
+            return getContentOrDefContent(userHash, content.getStateToken(), user, content);
         } catch (final NoResultException e) {
             throw new ContentNotFoundException();
         } catch (final ToolNotFoundException e) {
@@ -362,8 +348,8 @@ public class ContentRPC implements ContentService, RPC {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
-        final Content descriptor = creationService.saveContent(user, content, textContent);
-        return descriptor.getVersion();
+        final Content saved = creationService.saveContent(user, content, textContent);
+        return saved.getVersion();
     }
 
     @Authenticated
@@ -447,6 +433,21 @@ public class ContentRPC implements ContentService, RPC {
         final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage(),
                 typeId);
         return container;
+    }
+
+    @Authenticated(mandatory = false)
+    @Authorizated(accessRolRequired = AccessRol.Viewer)
+    private StateAbstractDTO getContentOrDefContent(String userHash, StateToken stateToken, final User user,
+            final Content content) {
+        Long id = content.getId();
+        if (id != null) {
+            // Content
+            return mapStateSiblings(stateService.create(user, content), user, content.getContainer().getOwner());
+        } else {
+            // Container
+            final Container container = content.getContainer();
+            return mapStateSiblings(stateService.create(user, container), user, container.getOwner());
+        }
     }
 
     private List<TagResultDTO> getSummaryTags(final Group group) {

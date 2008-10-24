@@ -79,8 +79,8 @@ public class CreationServiceDefault implements CreationService {
         return child;
     }
 
-    public Content saveContent(final User editor, final Content descriptor, final String content) {
-        return contentManager.save(editor, descriptor, content);
+    public Content saveContent(final User editor, final Content content, final String body) {
+        return contentManager.save(editor, content, body);
     }
 
 }

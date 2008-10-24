@@ -69,7 +69,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
     List<String> findEnabledTools(Long id);
 
-    Group getDefaultGroup();
+    Group getSiteDefaultGroup();
 
     /**
      * IMPORTANT: returns null if userId is null

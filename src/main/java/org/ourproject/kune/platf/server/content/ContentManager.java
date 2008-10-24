@@ -70,7 +70,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
     String renameContent(User user, Long contentId, String newName) throws DefaultException;
 
-    Content save(User editor, Content descriptor, String content);
+    Content save(User editor, Content content, String body);
 
     SearchResult<Content> search(String search);
 

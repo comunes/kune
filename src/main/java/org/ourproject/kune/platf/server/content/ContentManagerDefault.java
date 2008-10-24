@@ -145,7 +145,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             oldRate.setValue(value);
             super.persist(oldRate, Rate.class);
         }
-
     }
 
     public void removeAuthor(final User user, final Long contentId, final String authorShortName)
@@ -164,13 +163,13 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return newTitle;
     }
 
-    public Content save(final User editor, final Content descriptor, final String content) {
-        final Revision revision = new Revision(descriptor);
+    public Content save(final User editor, final Content content, final String body) {
+        final Revision revision = new Revision(content);
         revision.setEditor(editor);
-        revision.setTitle(descriptor.getTitle());
-        revision.setBody(content);
-        descriptor.addRevision(revision);
-        return persist(descriptor);
+        revision.setTitle(content.getTitle());
+        revision.setBody(body);
+        content.addRevision(revision);
+        return persist(content);
     }
 
     public SearchResult<Content> search(final String search) {

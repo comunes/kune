@@ -179,7 +179,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         return finder.findEnabledTools(id);
     }
 
-    public Group getDefaultGroup() {
+    public Group getSiteDefaultGroup() {
         final String shortName = properties.getDefaultSiteShortName();
         return findByShortName(shortName);
     }

@@ -107,7 +107,7 @@ public class DatabaseInitializer {
 
     public void initConditional() throws Exception {
         try {
-            groupManager.getDefaultGroup();
+            groupManager.getSiteDefaultGroup();
         } catch (final NoResultException e) {
             initDatabase();
         }
