@@ -55,7 +55,7 @@
     <dependency>
       <groupId>com.gwtextux</groupId>
       <artifactId>gwtextux</artifactId>
-      <version>0.3.0b</version>
+      <version>0.4.0.924</version>
     </dependency>
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
@@ -82,7 +82,7 @@
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>suco</artifactId>
-      <version>0.5.11</version>
+      <version>0.5.13</version>
     </dependency>
 <dependency>
   <groupId>jmagick</groupId>

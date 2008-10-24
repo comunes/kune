@@ -23,8 +23,7 @@
  * licensing@gwt-ext.com
  *
  * http://www.gwt-ext.com/license
- */
-package org.ourproject.kune.platf.client.ui.imgchooser;
+ */package org.ourproject.kune.platf.client.ui.imgchooser;
 
 import java.util.HashMap;
 

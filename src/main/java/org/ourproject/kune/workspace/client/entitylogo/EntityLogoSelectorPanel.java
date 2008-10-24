@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.workspace.client.entitylogo;
+ */package org.ourproject.kune.workspace.client.entitylogo;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
@@ -46,6 +45,7 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
     public EntityLogoSelectorPanel(final EntityLogoSelectorPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
         dialog = new BasicDialog(i18n.t("Select an logo for your group"), true, true, 300, 120);
+        dialog.setCollapsible(false);
 
         form = new FormPanel();
         form.setBorder(false);
@@ -97,7 +97,6 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
         dialog.addButton(submit);
         dialog.addButton(cancel);
         dialog.add(form);
-        dialog.show();
     }
 
     public void hide() {

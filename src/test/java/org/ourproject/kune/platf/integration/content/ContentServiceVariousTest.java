@@ -32,13 +32,13 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final UserSimpleDTO author = authors.get(0);
         final String authorShortName = author.getShortName();
         contentService.removeAuthor(getHash(), defaultContent.getStateToken(), authorShortName);
-        final List<UserSimpleDTO> authors2 = getDefaultContent().getAuthors();
+        final List<UserSimpleDTO> authors2 = getSiteDefaultContent().getAuthors();
         assertEquals(0, authors2.size());
         contentService.addAuthor(getHash(), defaultContent.getStateToken(), authorShortName);
-        final List<UserSimpleDTO> authors3 = getDefaultContent().getAuthors();
+        final List<UserSimpleDTO> authors3 = getSiteDefaultContent().getAuthors();
         assertEquals(1, authors3.size());
         contentService.addAuthor(getHash(), defaultContent.getStateToken(), authorShortName);
-        final List<UserSimpleDTO> authors4 = getDefaultContent().getAuthors();
+        final List<UserSimpleDTO> authors4 = getSiteDefaultContent().getAuthors();
         assertEquals(1, authors4.size());
     }
 
@@ -74,7 +74,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void folderRename() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
 
         final String oldTitle = "some title";
         String newTitle = "folder new name";
@@ -110,7 +110,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test(expected = AccessViolationException.class)
     public void folderRenameOtherGroupFails() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         final ContainerDTO folder = defaultContent.getContainer();
         final StateToken folderToken = new StateToken("otherGroup", defaultContent.getStateToken().getTool(),
                 folder.getId().toString(), null);
@@ -122,7 +122,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test(expected = RuntimeException.class)
     public void folderRootRenameMustFail() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         final ContainerDTO folder = defaultContent.getContainer();
 
         final String newTitle = "folder new name";
@@ -132,7 +132,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         assertEquals(newTitle, result);
 
-        final ContainerDTO folderAgain = getDefaultContent().getContainer();
+        final ContainerDTO folderAgain = getSiteDefaultContent().getContainer();
 
         assertEquals(newTitle, folderAgain.getName());
     }
@@ -141,7 +141,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     public void init() throws Exception {
         new IntegrationTestHelper(this);
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         groupShortName = defaultContent.getStateToken().getGroup();
     }
 
@@ -167,14 +167,14 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void setTagsAndRetrieve() throws Exception {
         contentService.setTags(getHash(), defaultContent.getStateToken(), "foo foa foo");
-        final String tagsRetrieved = getDefaultContent().getTags();
+        final String tagsRetrieved = getSiteDefaultContent().getTags();
         assertEquals("foo foa", tagsRetrieved);
     }
 
     @Test
     public void testSetAsDefContent() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
 
         final StateContainerDTO added = contentService.addContent(session.getHash(),
                 defaultContent.getStateToken(), "New Content Title");
@@ -190,7 +190,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void tokenRename() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         final ContainerDTO folder = defaultContent.getContainer();
 
         final String oldTitle = "some title";

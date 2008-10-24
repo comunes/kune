@@ -15,8 +15,7 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
     @Before
     public void init() throws Exception {
         new IntegrationTestHelper(this);
-
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         doLogin();
     }
 
@@ -24,8 +23,8 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
     public void testSaveAndRetrieve() throws Exception {
         final String text = "Lorem ipsum dolor sit amet";
         final int version = defaultContent.getVersion();
-        final int currentVersion = contentService.save(getHash(), defaultContent.getStateToken(), text);
-        assertEquals(version + 1, currentVersion);
+        final int versionRetrieved = contentService.save(getHash(), defaultContent.getStateToken(), text);
+        assertEquals(version + 1, versionRetrieved);
         final StateContentDTO again = (StateContentDTO) contentService.getContent(getHash(),
                 defaultContent.getStateToken());
         assertEquals(text, again.getContent());

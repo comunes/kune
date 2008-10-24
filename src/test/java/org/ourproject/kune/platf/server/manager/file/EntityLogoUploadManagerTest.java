@@ -31,8 +31,8 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
     @Test
     public void testCreateLogo() throws Exception {
-        manager.createUploadedFile(super.getDefaultContent().getStateToken(), "image/png", new File(TEST_FILE));
-        StateContainerDTO defaultContent = super.getDefaultContent();
+        manager.createUploadedFile(super.getSiteDefaultContent().getStateToken(), "image/png", new File(TEST_FILE));
+        StateContainerDTO defaultContent = super.getSiteDefaultContent();
         assertTrue(defaultContent.getGroup().hasLogo());
     }
 

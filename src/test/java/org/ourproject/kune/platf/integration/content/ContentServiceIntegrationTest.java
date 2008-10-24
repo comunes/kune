@@ -11,7 +11,7 @@ public abstract class ContentServiceIntegrationTest extends IntegrationTest {
     @Inject
     protected ContentService contentService;
 
-    protected StateContentDTO getDefaultContent() throws Exception {
+    protected StateContentDTO getSiteDefaultContent() throws Exception {
         final StateToken stateToken = new StateToken(getDefSiteGroupName());
         final StateContentDTO content = (StateContentDTO) contentService.getContent(session.getHash(), stateToken);
         return content;

@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.workspace.client.socialnet;
+ */package org.ourproject.kune.workspace.client.socialnet;
 
 import java.util.HashMap;
 
@@ -61,7 +60,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
                         + i18n.t("Drop into a room to invite the user to join the chat room"));
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
                 + "please request to join to work on it"), dragConf, true, true, false, true, false);
-        gridMenuPanel.setBorder(true);
+        gridMenuPanel.addStyleName("k-border-openbox");
         Listener<String> go = new Listener<String>() {
             public void onEvent(final String groupShortName) {
                 presenter.onDoubleClick(groupShortName);

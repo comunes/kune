@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.workspace.client.sitebar.sitenewgroup;
+ */package org.ourproject.kune.workspace.client.sitebar.sitenewgroup;
 
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.SiteToken;

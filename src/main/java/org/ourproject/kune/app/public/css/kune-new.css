@@ -716,3 +716,9 @@
 .x-tool-kmenu-over {
     background-position: -15px -75px;
 }
+
+.k-border-openbox {
+    border-bottom: 1px #D0D0D0 solid;
+    border-right: 1px #D0D0D0 solid;
+    border-left: 1px #D0D0D0 solid;
+}

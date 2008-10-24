@@ -9,8 +9,6 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
-import com.calclab.suco.client.event.DirectEventFactory;
-import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -55,7 +53,6 @@ public class StateManagerTest {
 
     @Before
     public void init() {
-        Events.setEventFactory(new DirectEventFactory());
         contentProvider = Mockito.mock(ContentProvider.class);
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);

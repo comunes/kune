@@ -16,14 +16,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.ui.gridmenu;
+ */package org.ourproject.kune.platf.client.ui.gridmenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.listener.Event;
 import com.calclab.suco.client.listener.Listener;
 import com.gwtext.client.core.EventObject;
@@ -112,8 +110,8 @@ public class GridMenuPanel<T> extends Panel {
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration,
             final GridDropConfiguration gridDropConfiguration, final boolean grouped, final boolean withCounters,
             final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
-        this.onClick = Events.create(String.class, "onClick");
-        this.onDoubleClick = Events.create(String.class, "onDoubleClick");
+        this.onClick = new Event<String>("onClick");
+        this.onDoubleClick = new Event<String>("onDoubleClick");
         this.grouped = grouped;
         this.withCounters = withCounters;
         this.withEndIcon = withEndIcon;

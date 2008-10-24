@@ -23,8 +23,7 @@
  * licensing@gwt-ext.com
  *
  * http://www.gwt-ext.com/license
- */
-package org.ourproject.kune.platf.client.ui.imgchooser;
+ */package org.ourproject.kune.platf.client.ui.imgchooser;
 
 /**
  * Interface that provides the callback name so that it can be called once the

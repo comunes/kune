@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.services;
+ */package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
@@ -102,8 +101,6 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
 
-import com.calclab.suco.client.event.DirectEventFactory;
-import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -118,7 +115,6 @@ public class KuneModule extends AbstractModule {
 
     @Override
     public void onInstall() {
-        Events.setEventFactory(new DirectEventFactory());
         register(Singleton.class, new Factory<Session>(Session.class) {
             @Override
             public Session create() {
@@ -413,8 +409,8 @@ public class KuneModule extends AbstractModule {
 
                 final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
                         $(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
-                        $(ContentIconsRegistry.class), $(DragDropContentRegistry.class), toolbar, $(ContextActionRegistry.class),
-                        $$(FileDownloadUtils.class), true);
+                        $(ContentIconsRegistry.class), $(DragDropContentRegistry.class), toolbar,
+                        $(ContextActionRegistry.class), $$(FileDownloadUtils.class), true);
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
                         $(WorkspaceSkeleton.class), $(ActionManager.class));
                 presenter.init(panel);

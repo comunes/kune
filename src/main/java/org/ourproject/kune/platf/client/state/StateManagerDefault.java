@@ -17,26 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-/*
- *
- * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
- * This file is part of kune.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 package org.ourproject.kune.platf.client.state;
 
 import java.util.HashMap;
@@ -55,7 +35,6 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.listener.Event;
 import com.calclab.suco.client.listener.Event2;
 import com.calclab.suco.client.listener.Listener;
@@ -79,10 +58,10 @@ public class StateManagerDefault implements StateManager {
         this.session = session;
         this.history = history;
         this.oldState = null;
-        this.onStateChanged = Events.create(StateAbstractDTO.class, "onStateChanged");
-        this.onGroupChanged = Events.create(GroupDTO.class, GroupDTO.class, "onGroupChanged");
-        this.onToolChanged = Events.create(String.class, String.class, "onToolChanged");
-        this.onSocialNetworkChanged = Events.create(StateAbstractDTO.class, "onSocialNetworkChanged");
+        this.onStateChanged = new Event<StateAbstractDTO>("onStateChanged");
+        this.onGroupChanged = new Event2<GroupDTO, GroupDTO>("onGroupChanged");
+        this.onToolChanged = new Event2<String, String>("onToolChanged");
+        this.onSocialNetworkChanged = new Event<StateAbstractDTO>("onSocialNetworkChanged");
         session.onUserSignIn(new Listener<UserInfoDTO>() {
             public void onEvent(final UserInfoDTO parameter) {
                 if (oldState != null) {

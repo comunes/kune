@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.services;
+ */package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;

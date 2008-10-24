@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.workspace.client.themes;
+ */package org.ourproject.kune.workspace.client.themes;
 
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
@@ -27,7 +26,6 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Event2;
 import com.calclab.suco.client.listener.Listener;
@@ -46,7 +44,7 @@ public class WsThemePresenter {
             final StateManager stateManager) {
         this.session = session;
         this.groupServiceProvider = groupServiceProvider;
-        this.onThemeChanged = Events.create(WsTheme.class, WsTheme.class, "onThemeChanged");
+        this.onThemeChanged = new Event2<WsTheme, WsTheme>("onThemeChanged");
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO initData) {
                 view.setThemes(initData.getWsThemes());

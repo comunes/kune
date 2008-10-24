@@ -39,7 +39,7 @@ public class DatabaseInitializationTest {
     @Before
     public void init() {
         new IntegrationTestHelper(this);
-        defaultGroup = groupManager.getDefaultGroup();
+        defaultGroup = groupManager.getSiteDefaultGroup();
     }
 
     @Test

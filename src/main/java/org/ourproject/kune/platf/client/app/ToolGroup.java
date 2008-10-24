@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.app;
+ */package org.ourproject.kune.platf.client.app;
 
 import com.calclab.suco.client.ioc.Container;
 import com.calclab.suco.client.ioc.Provider;

@@ -37,10 +37,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.ui.gridmenu;
+ */package org.ourproject.kune.platf.client.ui.gridmenu;
 
-import com.calclab.suco.client.event.Events;
 import com.calclab.suco.client.listener.Event;
 import com.calclab.suco.client.listener.Listener;
 
@@ -51,7 +49,7 @@ public class GridDropConfiguration {
 
     public GridDropConfiguration(final String ddGroupId, final Listener<String> listener) {
         this.ddGroupId = ddGroupId;
-        this.onDrop = Events.create(String.class, "onDrop");
+        this.onDrop = new Event<String>("onDrop");
         this.onDrop(listener);
     }
 

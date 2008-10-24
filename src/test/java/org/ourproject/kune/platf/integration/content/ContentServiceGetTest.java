@@ -19,7 +19,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     @Test
     public void contentOfUserWithNoHomePage() throws Exception {
         final String userHash = doLogin();
-        final StateAbstractDTO response = contentService.getContent(userHash, new StateToken());
+        final StateAbstractDTO response = contentService.getContent(userHash, new StateToken(getSiteAdminShortName()));
         assertTrue(response instanceof StateNoContentDTO);
     }
 
@@ -27,7 +27,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     public void contentWithLoggedUserIsEditable() throws Exception {
         final String userHash = doLogin();
         final StateContentDTO response = (StateContentDTO) contentService.getContent(userHash,
-                getDefaultContent().getStateToken());
+                getSiteDefaultContent().getStateToken());
         assertNotNull(response.getContentRights());
         assertTrue(response.getContentRights().isEditable());
         assertTrue(response.getAccessLists().getAdmins().getList().size() == 1);
@@ -49,6 +49,13 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
         assertNotNull(content.getDocumentId());
         assertNotNull(content.getRateByUsers());
         assertNotNull(content.getRate());
+    }
+
+    @Test
+    public void defContentOfUserWithNoHomePage() throws Exception {
+        final String userHash = doLogin();
+        final StateAbstractDTO response = contentService.getContent(userHash, new StateToken());
+        assertTrue(response.getStateToken().equals(getSiteDefaultContent().getStateToken()));
     }
 
     @Test
@@ -74,7 +81,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent4() throws Exception {
-        final StateContainerDTO stateDTO = getDefaultContent();
+        final StateContainerDTO stateDTO = getSiteDefaultContent();
         contentService.getContent(null, stateDTO.getStateToken().clone().setDocument("dadaas"));
     }
 

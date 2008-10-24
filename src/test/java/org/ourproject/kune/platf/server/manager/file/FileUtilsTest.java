@@ -3,7 +3,6 @@ package org.ourproject.kune.platf.server.manager.file;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.ourproject.kune.platf.server.manager.file.FileUtils;
 
 public class FileUtilsTest {
 

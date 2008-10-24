@@ -32,14 +32,14 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
     @Test(expected = UserMustBeLoggedException.class)
     public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, Exception {
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         contentService.addContent(session.getHash(), defaultContent.getContainer().getStateToken(), "a name");
     }
 
     @Test
     public void testAddContent() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         assertEquals(1, defaultContent.getContainer().getContents().size());
         final AccessRightsDTO cntRights = defaultContent.getContentRights();
         final AccessRightsDTO ctxRights = defaultContent.getContainerRights();
@@ -69,7 +69,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     @Test
     public void testAddFolder() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         final ContainerDTO parent = defaultContent.getContainer();
         final String title = "folder name";
         final StateContainerDTO newState = contentService.addFolder(session.getHash(), parent.getStateToken(),
@@ -82,7 +82,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         assertNotNull(newState.getGroupRights());
         assertNotNull(newState.getRootContainer().getContents().get(0).getRights());
 
-        final ContainerDTO parentAgain = getDefaultContent().getContainer();
+        final ContainerDTO parentAgain = getSiteDefaultContent().getContainer();
         final ContainerSimpleDTO child = parentAgain.getChilds().get(0);
         assertEquals(parent.getId(), child.getParentFolderId());
 
@@ -93,7 +93,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     // @Test
     public void testAddRoom() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         final ContainerDTO parent = defaultContent.getContainer();
         final String roomName = "testroom";
         final StateContainerDTO newState = contentService.addRoom(session.getHash(), parent.getStateToken(),
@@ -104,7 +104,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     @Test
     public void testAddTwoFolders() throws Exception {
         doLogin();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
         final ContainerDTO parent = defaultContent.getContainer();
         final String title = "folder name";
         final StateContainerDTO newState = contentService.addFolder(session.getHash(), parent.getStateToken(),
@@ -115,7 +115,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
                 title, DocumentClientTool.TYPE_FOLDER);
         assertNotNull(newState2);
 
-        final ContainerDTO parentAgain = getDefaultContent().getContainer();
+        final ContainerDTO parentAgain = getSiteDefaultContent().getContainer();
 
         assertEquals(parent.getId(), parentAgain.getId());
         assertEquals(2, parentAgain.getChilds().size());

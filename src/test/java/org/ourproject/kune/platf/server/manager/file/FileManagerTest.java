@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.manager.FileManager;
-import org.ourproject.kune.platf.server.manager.file.FileUtils;
 
 import com.google.inject.Inject;
 

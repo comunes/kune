@@ -37,7 +37,7 @@ public class ContentCommentServiceTest extends ContentServiceIntegrationTest {
     public void init() throws Exception {
         new IntegrationTestHelper(this);
         groupName = getDefSiteGroupName();
-        defaultContent = getDefaultContent();
+        defaultContent = getSiteDefaultContent();
     }
 
 }
