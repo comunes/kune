@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.BasicMimeType;
@@ -95,14 +96,18 @@ public class ContentManagerTest extends PersistenceTest {
     @Test
     public void testUTF8Persist() {
         final Container container = Mockito.mock(Container.class);
-        final Content cnt = contentManager.createContent("汉语/漢語", "汉语/漢語", user, container);
+        Mockito.stub(container.getTypeId()).toReturn(DocumentServerTool.TYPE_FOLDER);
+        final Content cnt = contentManager.createContent("汉语/漢語", "汉语/漢語", user, container,
+                DocumentServerTool.TYPE_DOCUMENT);
         final Content newCnt = contentManager.find(cnt.getId());
         assertEquals("汉语/漢語", newCnt.getTitle());
     }
 
     private void createContentWithMime(final String mimetype) {
         final Container container = Mockito.mock(Container.class);
-        final Content cnt = contentManager.createContent("title", "body", user, container);
+        Mockito.stub(container.getTypeId()).toReturn(DocumentServerTool.TYPE_FOLDER);
+        final Content cnt = contentManager.createContent("title", "body", user, container,
+                DocumentServerTool.TYPE_UPLOADEDFILE);
         cnt.setMimeType(new BasicMimeType(mimetype));
         persist(cnt);
         final Content newCnt = contentManager.find(cnt.getId());

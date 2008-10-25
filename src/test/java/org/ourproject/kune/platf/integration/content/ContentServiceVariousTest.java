@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
+import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
@@ -78,8 +79,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         final String oldTitle = "some title";
         String newTitle = "folder new name";
-        final StateContainerDTO newState = contentService.addFolder(session.getHash(),
-                defaultContent.getStateToken(), oldTitle, DocumentClientTool.TYPE_FOLDER);
+        final StateContainerDTO newState = contentService.addFolder(session.getHash(), defaultContent.getStateToken(),
+                oldTitle, DocumentClientTool.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 
@@ -93,8 +94,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
                 newFolder.getId().toString(), null);
-        StateContainerDTO folderAgain = (StateContainerDTO) contentService.getContent(getHash(),
-                newFolderToken);
+        StateContainerDTO folderAgain = (StateContainerDTO) contentService.getContent(getHash(), newFolderToken);
 
         assertEquals(newTitle, folderAgain.getContainer().getName());
 
@@ -176,8 +176,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         doLogin();
         defaultContent = getSiteDefaultContent();
 
-        final StateContainerDTO added = contentService.addContent(session.getHash(),
-                defaultContent.getStateToken(), "New Content Title");
+        final StateContainerDTO added = contentService.addContent(session.getHash(), defaultContent.getStateToken(),
+                "New Content Title", DocumentServerTool.TYPE_DOCUMENT);
         assertNotNull(added);
 
         final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(),

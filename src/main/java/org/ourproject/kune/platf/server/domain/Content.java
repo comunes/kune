@@ -87,7 +87,7 @@ public class Content implements HasStateToken {
     @Basic(optional = true)
     private Date deletedOn;
 
-    @Basic(optional = false)
+    @Basic(optional = true)
     private Date publishedOn;
 
     private String typeId;
@@ -264,6 +264,7 @@ public class Content implements HasStateToken {
         return version;
     }
 
+    @Transient
     public boolean hasAccessList() {
         return accessLists != null;
     }

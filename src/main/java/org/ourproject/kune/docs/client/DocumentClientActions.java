@@ -119,25 +119,15 @@ public class DocumentClientActions {
                 i18n.t("New gallery"));
         final ActionToolbarMenuAndItemDescriptor<StateToken> addWiki = createFolderAction(TYPE_WIKI,
                 "images/nav/wiki_add.png", i18n.t("New wiki"), i18n.t("Folder"), i18n.t("New"), i18n.t("wiki"));
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addBlog = createFolderAction(TYPE_BLOG,
+                "images/nav/blog_add.png", i18n.t("New blog"), i18n.t("Folder"), i18n.t("New"), i18n.t("New blog"));
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        Site.showProgressProcessing();
-                        contentServiceProvider.get().addContent(session.getUserHash(),
-                                session.getCurrentState().getStateToken(), i18n.t("New document"),
-                                new AsyncCallbackSimple<StateContentDTO>() {
-                                    public void onSuccess(final StateContentDTO state) {
-                                        contextNavigator.setEditOnNextStateChange(true);
-                                        stateManager.setRetrievedState(state);
-                                    }
-                                });
-                    }
-                });
-        addDoc.setTextDescription(i18n.t("New document"));
-        addDoc.setParentMenuTitle(i18n.t("Folder"));
-        addDoc.setParentSubMenuTitle(i18n.t("New"));
-        addDoc.setIconUrl("images/nav/page_add.png");
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = createDocAction("images/nav/page_add.png",
+                i18n.t("New document"), TYPE_DOCUMENT);
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addWikiPage = createDocAction(
+                "images/nav/wikipage_add.png", i18n.t("New wikipage"), TYPE_WIKIPAGE);
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addPost = createDocAction("images/nav/post_add.png",
+                i18n.t("New post"), TYPE_POST);
 
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
@@ -347,7 +337,7 @@ public class DocumentClientActions {
                                     public void onEvent(final String html) {
                                         Site.showProgressSaving();
                                         contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
-                                                new AsyncCallback<Integer>() {
+                                                new AsyncCallback<Object>() {
                                                     public void onFailure(final Throwable caught) {
                                                         Site.hideProgress();
                                                         try {
@@ -361,9 +351,8 @@ public class DocumentClientActions {
                                                         }
                                                     }
 
-                                                    public void onSuccess(final Integer newVersion) {
+                                                    public void onSuccess(Object param) {
                                                         Site.hideProgress();
-                                                        session.getContentState().setVersion(newVersion);
                                                         session.getContentState().setContent(html);
                                                         editor.onSaved();
                                                     }
@@ -398,9 +387,12 @@ public class DocumentClientActions {
         contentActionRegistry.addAction(setSubmittedForPublishStatus, contentsModerated);
         contentActionRegistry.addAction(setInTheDustBinStatus, contentsModerated);
         contextActionRegistry.addAction(addDoc, TYPE_ROOT, TYPE_FOLDER);
+        contextActionRegistry.addAction(addPost, TYPE_BLOG);
+        contextActionRegistry.addAction(addWikiPage, TYPE_WIKI);
         contextActionRegistry.addAction(addFolder, TYPE_ROOT, TYPE_FOLDER);
-        contextActionRegistry.addAction(addGallery, TYPE_ROOT);
+        contextActionRegistry.addAction(addBlog, TYPE_ROOT);
         contextActionRegistry.addAction(addWiki, TYPE_ROOT);
+        contextActionRegistry.addAction(addGallery, TYPE_ROOT);
         contextActionRegistry.addAction(go, all);
         contentActionRegistry.addAction(renameCtn, contents);
         contextActionRegistry.addAction(renameCtx, containersNoRoot);
@@ -418,6 +410,29 @@ public class DocumentClientActions {
         contentActionRegistry.addAction(editContent, TYPE_DOCUMENT, TYPE_POST, TYPE_WIKIPAGE);
         contentActionRegistry.addAction(translateContent, TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE,
                 TYPE_WIKI, TYPE_WIKIPAGE);
+    }
+
+    private ActionToolbarMenuAndItemDescriptor<StateToken> createDocAction(String iconUrl, final String description,
+            final String typeId) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        Site.showProgressProcessing();
+                        contentServiceProvider.get().addContent(session.getUserHash(),
+                                session.getCurrentState().getStateToken(), description, typeId,
+                                new AsyncCallbackSimple<StateContentDTO>() {
+                                    public void onSuccess(final StateContentDTO state) {
+                                        contextNavigator.setEditOnNextStateChange(true);
+                                        stateManager.setRetrievedState(state);
+                                    }
+                                });
+                    }
+                });
+        addDoc.setTextDescription(description);
+        addDoc.setParentMenuTitle(i18n.t("Folder"));
+        addDoc.setParentSubMenuTitle(i18n.t("New"));
+        addDoc.setIconUrl(iconUrl);
+        return addDoc;
     }
 
     private ActionToolbarMenuAndItemDescriptor<StateToken> createFolderAction(final String contentTypeId,
@@ -479,6 +494,7 @@ public class DocumentClientActions {
                         final AsyncCallbackSimple<Object> callback = new AsyncCallbackSimple<Object>() {
                             public void onSuccess(final Object result) {
                                 session.getContentState().setStatus(status);
+                                contextNavigator.setItemStatus(stateToken, status);
                             }
                         };
                         if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {

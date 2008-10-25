@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
@@ -38,6 +39,8 @@ public interface ContextNavigator {
     void selectItem(StateToken stateToken);
 
     void setEditOnNextStateChange(boolean edit);
+
+    void setItemStatus(StateToken stateToken, ContentStatusDTO status);
 
     void setItemText(StateToken stateToken, String name);
 

@@ -127,8 +127,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
                     user, AccessRol.Editor);
             final String preview = "Preview of this file (in development)";
             final Content content = contentManager.createContent(FileUtils.getFileNameWithoutExtension(file.getName(),
-                    extension), preview, user, container);
-            content.setTypeId(DocumentServerTool.TYPE_UPLOADEDFILE);
+                    extension), preview, user, container, DocumentServerTool.TYPE_UPLOADEDFILE);
             content.setMimeType(basicMimeType);
             content.setFilename(file.getName());
             return content;

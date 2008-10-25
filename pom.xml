@@ -34,13 +34,13 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>1.5.2</version>
+      <version>1.5.3</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
-      <version>1.5.2</version>
+      <version>1.5.3</version>
     </dependency>
     <!--
       <dependency> <groupId>com.extjs</groupId>

@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 public interface ContainerManager {
 
-    Container createFolder(Group group, Container parent, String name, I18nLanguage language);
+    Container createFolder(Group group, Container parent, String name, I18nLanguage language, String typeId);
 
     Container createRootFolder(Group group, String toolName, String name, String type);
 

@@ -32,17 +32,21 @@ import org.ourproject.kune.platf.server.domain.User;
  */
 public interface ServerTool {
 
+    void checkTypesBeforeContainerCreation(String parentTypeId, String typeId);
+
+    void checkTypesBeforeContentCreation(String parentTypeId, String typeId);
+
     String getName();
 
     String getRootName();
 
+    ServerToolTarget getTarget();
+
     Group initGroup(User user, Group group);
 
-    void onCreateContainer(Container container, Container parent, String typeId);
+    void onCreateContainer(Container container, Container parent);
 
     void onCreateContent(Content content, Container parent);
 
     void register(ServerToolRegistry registry);
-
-    ServerToolTarget getTarget();
 }

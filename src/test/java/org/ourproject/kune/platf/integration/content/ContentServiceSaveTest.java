@@ -23,8 +23,7 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
     public void testSaveAndRetrieve() throws Exception {
         final String text = "Lorem ipsum dolor sit amet";
         final int version = defaultContent.getVersion();
-        final int versionRetrieved = contentService.save(getHash(), defaultContent.getStateToken(), text);
-        assertEquals(version + 1, versionRetrieved);
+        contentService.save(getHash(), defaultContent.getStateToken(), text);
         final StateContentDTO again = (StateContentDTO) contentService.getContent(getHash(),
                 defaultContent.getStateToken());
         assertEquals(text, again.getContent());
@@ -36,10 +35,8 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
     @Test
     public void testSaveAndRetrieveBig() throws Exception {
         final String text = TestDomainHelper.createBigText();
-        ;
         final int version = defaultContent.getVersion();
-        final int currentVersion = contentService.save(getHash(), defaultContent.getStateToken(), text);
-        assertEquals(version + 1, currentVersion);
+        contentService.save(getHash(), defaultContent.getStateToken(), text);
         final StateContentDTO again = (StateContentDTO) contentService.getContent(getHash(),
                 defaultContent.getStateToken());
         assertEquals(version + 1, again.getVersion());

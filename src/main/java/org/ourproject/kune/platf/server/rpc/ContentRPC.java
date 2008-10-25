@@ -154,14 +154,14 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateContentDTO addContent(final String userHash, final StateToken parentToken, final String title)
-            throws DefaultException {
+    public StateContentDTO addContent(final String userHash, final StateToken parentToken, final String title,
+            final String typeId) throws DefaultException {
         final Group group = groupManager.findByShortName(parentToken.getGroup());
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
                 user, AccessRol.Editor);
-        final Content addedContent = creationService.createContent(title, "", user, container);
+        final Content addedContent = creationService.createContent(title, "", user, container, typeId);
         final StateContent state = stateService.create(user, addedContent);
         return mapStateSiblings(state, user, group);
     }
@@ -321,15 +321,13 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
-    public Integer save(final String userHash, final StateToken token, final String textContent)
-            throws DefaultException {
+    public void save(final String userHash, final StateToken token, final String textContent) throws DefaultException {
 
         final Long contentId = ContentUtils.parseId(token.getDocument());
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Content content = accessService.accessToContent(contentId, user, AccessRol.Editor);
-        final Content saved = creationService.saveContent(user, content, textContent);
-        return saved.getVersion();
+        creationService.saveContent(user, content, textContent);
     }
 
     @Authenticated

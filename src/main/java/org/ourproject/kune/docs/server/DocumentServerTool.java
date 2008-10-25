@@ -20,13 +20,16 @@
 package org.ourproject.kune.docs.server;
 
 import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
+import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
+import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
@@ -64,6 +67,14 @@ public class DocumentServerTool implements ServerTool {
         this.i18n = translationService;
     }
 
+    public void checkTypesBeforeContainerCreation(String parentTypeId, String typeId) {
+        checkContainerTypeId(parentTypeId, typeId);
+    }
+
+    public void checkTypesBeforeContentCreation(String parentTypeId, String typeId) {
+        checkContentTypeId(parentTypeId, typeId);
+    }
+
     public String getName() {
         return NAME;
     }
@@ -83,7 +94,8 @@ public class DocumentServerTool implements ServerTool {
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
         final String longName = group.getLongName();
-        final Content descriptor = contentManager.createContent(i18n.t("About [%s]", longName), "", user, container);
+        final Content descriptor = contentManager.createContent(i18n.t("About [%s]", longName), "", user, container,
+                DocumentServerTool.TYPE_DOCUMENT);
         descriptor.addAuthor(user);
         descriptor.setLanguage(user.getLanguage());
         descriptor.setTypeId(TYPE_DOCUMENT);
@@ -92,13 +104,20 @@ public class DocumentServerTool implements ServerTool {
         return group;
     }
 
-    public void onCreateContainer(final Container container, final Container parent, final String typeId) {
-        checkTypeId(parent.getTypeId(), typeId);
+    public void onCreateContainer(final Container container, final Container parent) {
+        String typeId = container.getTypeId();
         container.setTypeId(typeId);
+        if (typeId.equals(TYPE_WIKI)) {
+            AccessLists wikiAcl = new AccessLists();
+            wikiAcl.getAdmins().setMode(GroupListMode.NORMAL);
+            wikiAcl.getAdmins().add(container.getOwner());
+            wikiAcl.getEditors().setMode(GroupListMode.EVERYONE);
+            wikiAcl.getViewers().setMode(GroupListMode.EVERYONE);
+            container.setAccessLists(wikiAcl);
+        }
     }
 
     public void onCreateContent(final Content content, final Container parent) {
-        content.setTypeId(TYPE_DOCUMENT);
     }
 
     @Inject
@@ -106,17 +125,39 @@ public class DocumentServerTool implements ServerTool {
         registry.register(this);
     }
 
-    private void checkTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY) || typeId.equals(TYPE_WIKI)) {
+    void checkContainerTypeId(final String parentTypeId, final String typeId) {
+        if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY) || typeId.equals(TYPE_WIKI)
+                || typeId.equals(TYPE_BLOG)) {
             // ok valid container
-            if (typeId.equals(TYPE_GALLERY) && !parentTypeId.equals(TYPE_ROOT)) {
-                throw new ContainerNotPermittedException();
-            }
-            if (typeId.equals(TYPE_WIKI) && !parentTypeId.equals(TYPE_ROOT)) {
+            if ((typeId.equals(TYPE_FOLDER) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
+                    || (typeId.equals(TYPE_GALLERY) && (parentTypeId.equals(TYPE_ROOT)))
+                    || (typeId.equals(TYPE_WIKI) && parentTypeId.equals(TYPE_ROOT))
+                    || (typeId.equals(TYPE_BLOG) && parentTypeId.equals(TYPE_ROOT))) {
+                // ok
+            } else {
                 throw new ContainerNotPermittedException();
             }
         } else {
             throw new ContainerNotPermittedException();
+        }
+    }
+
+    void checkContentTypeId(final String parentTypeId, final String typeId) {
+        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_WIKIPAGE) || typeId.equals(TYPE_UPLOADEDFILE)
+                || typeId.equals(TYPE_POST)) {
+            // ok valid container
+            if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
+                    || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT)
+                            || parentTypeId.equals(TYPE_FOLDER) || parentTypeId.equals(TYPE_GALLERY)))
+                    || (typeId.equals(TYPE_WIKIPAGE) && parentTypeId.equals(TYPE_WIKI))
+                    || (typeId.equals(TYPE_POST) && parentTypeId.equals(TYPE_BLOG))) {
+                // ok
+            } else {
+                throw new ContentNotPermittedException();
+            }
+
+        } else {
+            throw new ContentNotPermittedException();
         }
     }
 }

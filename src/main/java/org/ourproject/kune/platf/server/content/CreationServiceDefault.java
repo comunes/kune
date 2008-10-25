@@ -43,9 +43,11 @@ public class CreationServiceDefault implements CreationService {
         this.tools = toolRegistry;
     }
 
-    public Content createContent(final String title, final String body, final User user, final Container container) {
+    public Content createContent(final String title, final String body, final User user, final Container container,
+            final String typeId) {
         final String toolName = container.getToolName();
-        final Content content = contentManager.createContent(title, body, user, container);
+        tools.get(toolName).checkTypesBeforeContentCreation(container.getTypeId(), typeId);
+        final Content content = contentManager.createContent(title, body, user, container, typeId);
         tools.get(toolName).onCreateContent(content, container);
         return content;
     }
@@ -54,8 +56,9 @@ public class CreationServiceDefault implements CreationService {
             final I18nLanguage language, final String typeId) {
         final Container parent = containerManager.find(parentFolderId);
         final String toolName = parent.getToolName();
-        final Container child = containerManager.createFolder(group, parent, name, language);
-        tools.get(toolName).onCreateContainer(child, parent, typeId);
+        tools.get(toolName).checkTypesBeforeContainerCreation(parent.getTypeId(), typeId);
+        final Container child = containerManager.createFolder(group, parent, name, language, typeId);
+        tools.get(toolName).onCreateContainer(child, parent);
         return child;
     }
 

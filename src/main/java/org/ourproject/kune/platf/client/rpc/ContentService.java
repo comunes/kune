@@ -44,7 +44,7 @@ public interface ContentService extends RemoteService {
 
     CommentDTO addComment(String userHash, StateToken token, String commentText) throws DefaultException;
 
-    StateContentDTO addContent(String user, StateToken parentToken, String name) throws DefaultException;
+    StateContentDTO addContent(String user, StateToken parentToken, String name, String typeId) throws DefaultException;
 
     StateContainerDTO addFolder(String hash, StateToken parentToken, String typeId, String title)
             throws DefaultException;
@@ -67,7 +67,7 @@ public interface ContentService extends RemoteService {
 
     String renameContent(String userHash, StateToken token, String newName) throws DefaultException;
 
-    Integer save(String user, StateToken token, String content) throws DefaultException;
+    void save(String user, StateToken token, String content) throws DefaultException;
 
     ContentSimpleDTO setAsDefaultContent(String userHash, StateToken token);
 

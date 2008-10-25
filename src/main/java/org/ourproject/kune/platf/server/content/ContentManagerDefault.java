@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.platf.server.content;
 
+import static org.ourproject.kune.docs.server.DocumentServerTool.TYPE_WIKIPAGE;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -77,12 +79,16 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.addAuthor(author);
     }
 
-    public Content createContent(final String title, final String body, final User author, final Container container) {
+    public Content createContent(final String title, final String body, final User author, final Container container,
+            String typeId) {
         final Content newContent = new Content();
         newContent.addAuthor(author);
         newContent.setLanguage(author.getLanguage());
-        // FIXME: remove this when UI take publishing into account
-        newContent.setPublishedOn(new Date());
+        newContent.setTypeId(typeId);
+        if (typeId.equals(TYPE_WIKIPAGE)) {
+            newContent.setStatus(ContentStatus.publishedOnline);
+            newContent.setPublishedOn(new Date());
+        }
         container.addContent(newContent);
         newContent.setContainer(container);
         final Revision revision = new Revision(newContent);
@@ -188,6 +194,13 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     public void setStatus(final Long contentId, final ContentStatus status) {
         final Content content = finder.getContent(contentId);
         content.setStatus(status);
+        switch (status) {
+        case publishedOnline:
+            content.setPublishedOn(new Date());
+            break;
+        default:
+            break;
+        }
     }
 
     public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
@@ -208,5 +221,4 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         }
         content.setTags(tagList);
     }
-
 }

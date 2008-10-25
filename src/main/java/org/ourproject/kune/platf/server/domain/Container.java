@@ -89,6 +89,9 @@ public class Container implements HasId, HasStateToken {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ContainerTranslation> containerTranslations;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private AccessLists accessLists;
+
     public Container() {
         this(null, null, null);
     }
@@ -120,8 +123,7 @@ public class Container implements HasId, HasStateToken {
 
     @Transient
     public AccessLists getAccessLists() {
-        // TODO like in Content, do store specific accesslist
-        return getOwner().getAccessLists();
+        return hasAccessList() ? accessLists : isLeaf() ? getParent().getAccessLists() : getOwner().getAccessLists();
     }
 
     public List<ContainerTranslation> getAliases() {
@@ -183,6 +185,11 @@ public class Container implements HasId, HasStateToken {
     }
 
     @Transient
+    public boolean hasAccessList() {
+        return accessLists != null;
+    }
+
+    @Transient
     public boolean isLeaf() {
         return childs.size() == 0 && contents.size() == 0;
     }
@@ -194,6 +201,10 @@ public class Container implements HasId, HasStateToken {
 
     public void setAbsolutePath(final List<Container> absolutePath) {
         this.absolutePath = absolutePath;
+    }
+
+    public void setAccessLists(AccessLists accessLists) {
+        this.accessLists = accessLists;
     }
 
     public void setAliases(final List<ContainerTranslation> containerTranslations) {

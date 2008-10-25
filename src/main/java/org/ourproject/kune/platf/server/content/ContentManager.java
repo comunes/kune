@@ -34,7 +34,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
     void addAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
-    Content createContent(String title, String body, User author, Container container);
+    Content createContent(String title, String body, User author, Container container, String typeId);
 
     void delContent(User user, Long contentId) throws DefaultException;
 

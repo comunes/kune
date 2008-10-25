@@ -154,8 +154,13 @@ public class EntityTitlePresenter implements EntityTitle {
 
     private void setState(final StateContentDTO state) {
         setContentTitle(state.getTitle(), state.getContentRights().isEditable());
-        setContentDateVisible(true);
-        setContentDate(state.getPublishedOn());
+        Date publishedOn = state.getPublishedOn();
+        if (publishedOn != null) {
+            setContentDateVisible(true);
+            setContentDate(publishedOn);
+        } else {
+            setContentDateVisible(false);
+        }
         final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
         setIcon(contentTypeIcon);
         view.setContentTitleVisible(true);

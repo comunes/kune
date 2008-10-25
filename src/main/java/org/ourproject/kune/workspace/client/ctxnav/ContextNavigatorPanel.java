@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.ctxnav;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
+import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -72,7 +73,8 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
     public void addItem(final ContextNavigatorItem item) {
         final String nodeId = item.getId();
-        if (treePanel.getNodeById(nodeId) == null) {
+        TreeNode node = treePanel.getNodeById(nodeId);
+        if (node == null) {
             final TreeNode child = new TreeNode(item.getText());
             child.setId(nodeId);
             final String icon = item.getIconUrl();
@@ -124,26 +126,14 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
                     }
                 });
                 parent.appendChild(child);
-                switch (item.getContentStatus()) {
-                case publishedOnline:
-                    child.setCls("k-textnormal");
-                    break;
-                case inTheDustbin:
-                case rejected:
-                    child.setCls("k-textlinethrough");
-                    break;
-                case editingInProgress:
-                case submittedForEvaluation:
-                    child.setCls("k-textunderline");
-                    break;
-                }
+                ContentStatusDTO status = item.getContentStatus();
+                setNodeStatus(child, status);
             } else {
                 Log.error("Error building file tree, parent folder not found");
             }
         } else {
             // the node already created
         }
-
     }
 
     public void clear() {
@@ -189,6 +179,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
     public void setFireOnTextChange(final boolean fireOnTextChange) {
         this.fireOnTextChange = fireOnTextChange;
+    }
+
+    public void setItemStatus(final String id, ContentStatusDTO status) {
+        setNodeStatus(getNode(id), status);
     }
 
     public void setItemText(final String genId, final String text) {
@@ -294,6 +288,22 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
     private String getToken(final Node node) {
         return node.getAttribute("href").substring(1);
+    }
+
+    private void setNodeStatus(final TreeNode node, ContentStatusDTO status) {
+        switch (status) {
+        case publishedOnline:
+            node.setCls("k-textnormal");
+            break;
+        case inTheDustbin:
+        case rejected:
+            node.setCls("k-textlinethrough");
+            break;
+        case editingInProgress:
+        case submittedForEvaluation:
+            node.setCls("k-textunderline");
+            break;
+        }
     }
 
 }

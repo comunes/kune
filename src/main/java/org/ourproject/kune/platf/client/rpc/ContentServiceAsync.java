@@ -43,7 +43,8 @@ public interface ContentServiceAsync {
 
     void addComment(String userHash, StateToken token, String commentText, AsyncCallback<CommentDTO> asyncCallback);
 
-    void addContent(String user, StateToken parentToken, String name, AsyncCallback<StateContentDTO> callback);
+    void addContent(String user, StateToken parentToken, String name, String typeId,
+            AsyncCallback<StateContentDTO> callback);
 
     void addFolder(String hash, StateToken parentToken, String title, String typeId,
             AsyncCallback<StateContainerDTO> callback);
@@ -66,7 +67,7 @@ public interface ContentServiceAsync {
 
     void renameContent(String userHash, StateToken token, String newName, AsyncCallback<String> asyncCallback);
 
-    void save(String user, StateToken token, String content, AsyncCallback<Integer> asyncCallback);
+    void save(String user, StateToken token, String content, AsyncCallback<?> asyncCallback);
 
     void setAsDefaultContent(String userHash, StateToken token, AsyncCallback<ContentSimpleDTO> asyncCallback);
 

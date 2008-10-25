@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public interface CreationService {
 
-    Content createContent(String title, String body, User user, Container container);
+    Content createContent(String title, String body, User user, Container container, String typeId);
 
     Container createFolder(Group group, Long parentFolderId, String name, I18nLanguage language, String contentTypeId);
 

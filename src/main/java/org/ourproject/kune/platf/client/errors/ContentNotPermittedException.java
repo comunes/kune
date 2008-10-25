@@ -17,32 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.ctxnav;
+package org.ourproject.kune.platf.client.errors;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-
-public interface ContextNavigatorView extends View {
-
-    void addItem(ContextNavigatorItem contextNavigatorItem);
-
-    void clear();
-
-    void editItem(String id);
-
-    boolean isSelected(String id);
-
-    void selectItem(String id);
-
-    void setEditable(boolean editable);
-
-    void setFireOnTextChange(boolean fire);
-
-    void setItemStatus(String id, ContentStatusDTO status);
-
-    void setItemText(String id, String text);
-
-    void setRootItem(String id, String text, StateToken stateToken);
-
+public class ContentNotPermittedException extends DefaultException {
+    private static final long serialVersionUID = 1L;
 }

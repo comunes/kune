@@ -4,7 +4,7 @@ INSTALL
 For development: 
 
 - Install java-jdk (>= 1.5), maven2, mysql (>= 5.0) and for example eclipse
-- Install gwt 1.5.2 and follow Appendix A for maven+gwt configuration
+- Install gwt 1.5.3 and follow Appendix A for maven+gwt configuration
 - Compile with maven:
   # (in the trunk directory)
   mvn compile
@@ -88,9 +88,9 @@ Example of .m2/settings.xml:
       </properties>
      </profile>
      <profile>
-       <id>gwt-1.5.2</id>
+       <id>gwt-1.5.3</id>
        <properties>
-         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.5.2</google.webtoolkit.home>
+         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.5.3</google.webtoolkit.home>
          <!-- <google.webtoolkit.devjar>gwt-dev-linux</google.webtoolkit.devjar> -->
          <!-- you only need this is you are on a mac -->
         <google.webtoolkit.extrajvmargs>-Xmx256M</google.webtoolkit.extrajvmargs>
@@ -98,7 +98,7 @@ Example of .m2/settings.xml:
      </profile>
    </profiles>
    <activeProfiles>
-     <activeProfile>gwt-1.5.2</activeProfile>
+     <activeProfile>gwt-1.5.3</activeProfile>
    </activeProfiles>
 </settings>  
 

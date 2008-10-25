@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.server.content;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -49,20 +48,19 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     }
 
     public Container createFolder(final Group group, final Container parent, final String name,
-            final I18nLanguage language) {
+            final I18nLanguage language, String typeId) {
         final List<Container> parentAbsolutePath = parent.getAbsolutePath();
         final List<Container> childAbsolutePath = new ArrayList<Container>();
 
-        for (final Iterator<Container> iterator = parentAbsolutePath.iterator(); iterator.hasNext();) {
-            final Container parentRef = iterator.next();
+        for (Container parentRef : parentAbsolutePath) {
             childAbsolutePath.add(parentRef);
         }
         final Container child = new Container(name, group, parent.getToolName());
         childAbsolutePath.add(child);
         child.setLanguage(language);
         child.setAbsolutePath(childAbsolutePath);
+        child.setTypeId(typeId);
         parent.addChild(child);
-        // child.setParent(parent);
         persist(child);
         return child;
     }

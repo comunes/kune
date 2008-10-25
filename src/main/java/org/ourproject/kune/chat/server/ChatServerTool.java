@@ -49,12 +49,27 @@ public class ChatServerTool implements ServerTool {
         this.containerManager = containerManager;
     }
 
+    public void checkTypesBeforeContainerCreation(String parentTypeId, String typeId) {
+        checkContainerTypeId(parentTypeId, typeId);
+    }
+
+    public void checkTypesBeforeContentCreation(String parentTypeId, String typeId) {
+        if (!parentTypeId.equals(TYPE_ROOM)) {
+            throw new ContainerNotPermittedException();
+        }
+        // in the future chat history checks
+    }
+
     public String getName() {
         return NAME;
     }
 
     public String getRootName() {
         return ROOT_NAME;
+    }
+
+    public ServerToolTarget getTarget() {
+        return ServerToolTarget.forGroups;
     }
 
     public Group initGroup(final User user, final Group group) {
@@ -66,16 +81,11 @@ public class ChatServerTool implements ServerTool {
         return group;
     }
 
-    public void onCreateContainer(final Container container, final Container parent, final String typeId) {
-        checkTypeId(parent.getTypeId(), typeId);
-        container.setTypeId(typeId);
+    public void onCreateContainer(final Container container, final Container parent) {
     }
 
     public void onCreateContent(final Content content, final Container parent) {
-        if (parent.getTypeId().equals(TYPE_ROOM)) {
-            throw new RuntimeException();
-        }
-        content.setTypeId(TYPE_CHAT);
+
     }
 
     @Inject
@@ -83,11 +93,7 @@ public class ChatServerTool implements ServerTool {
         registry.register(this);
     }
 
-    public ServerToolTarget getTarget() {
-        return ServerToolTarget.forGroups;
-    }
-
-    private void checkTypeId(final String parentTypeId, final String typeId) {
+    private void checkContainerTypeId(final String parentTypeId, final String typeId) {
         if (typeId.equals(TYPE_ROOM)) {
             if (!parentTypeId.equals(TYPE_ROOT)) {
                 throw new ContainerNotPermittedException();

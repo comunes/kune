@@ -184,6 +184,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         editOnNextStateChange = edit;
     }
 
+    public void setItemStatus(final StateToken stateToken, ContentStatusDTO status) {
+        view.setItemStatus(genId(stateToken), status);
+    }
+
     public void setItemText(final StateToken stateToken, final String name) {
         view.setItemText(genId(stateToken), name);
     }
