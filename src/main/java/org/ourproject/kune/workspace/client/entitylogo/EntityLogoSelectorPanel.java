@@ -26,11 +26,15 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.listener.Listener0;
 import com.gwtext.client.core.Connection;
+import com.gwtext.client.core.EventCallback;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Hidden;
 import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 import com.gwtext.client.widgets.form.event.FormListener;
 
 public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
@@ -42,13 +46,17 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
     private final FormPanel formPanel;
     private final Hidden userhashField;
     private final Hidden tokenField;
+    private final TextField file;
 
     public EntityLogoSelectorPanel(final EntityLogoSelectorPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
         dialog = new BasicDialogExtended(i18n.t("Select an logo for your group"), true, true, 320, 180, "",
                 i18n.t("Select"), SUBID, i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
                     public void onEvent() {
-                        formPanel.getForm().submit();
+                        String filename = file.getValueAsString();
+                        if (filename != null && filename.length() > 0) {
+                            formPanel.getForm().submit();
+                        }
                     }
                 }, new Listener0() {
                     public void onEvent() {
@@ -57,6 +65,7 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 });
         dialog.setCollapsible(false);
         dialog.setBorder(false);
+        //dialog.getFirstButton().disable();
 
         formPanel = new FormPanel();
         formPanel.setFrame(true);
@@ -89,7 +98,13 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 "Select an image in your computer as the logo for this group. Recomended size [%d]x[%d] pixels",
                 EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT));
         formPanel.add(label);
-        final TextField file = new TextField("File", EntityLogoView.LOGO_FORM_FIELD);
+        file = new TextField("File", EntityLogoView.LOGO_FORM_FIELD);
+        EventCallback keyListener = new EventCallback() {
+            public void execute(EventObject e) {
+                // setEnableFileField();
+            }
+        };
+        file.addKeyPressListener(keyListener);
         file.setId(EntityLogoView.LOGO_FORM_FIELD);
         file.setInputType("file");
         userhashField = new Hidden(FileParams.HASH, FileParams.HASH);
@@ -97,8 +112,26 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
         formPanel.add(userhashField);
         formPanel.add(tokenField);
         formPanel.add(file);
+        FieldListenerAdapter changeListener = new FieldListenerAdapter() {
+            @Override
+            public void onChange(Field field, Object newVal, Object oldVal) {
+                Site.info("change");
+                // setEnableFileField();
+            }
+        };
+        // Don't works:
+        file.addListener(changeListener);
         dialog.add(formPanel);
     }
+
+    // BrowseButton browseButton = new BrowseButton("SelectIcon");
+    // browseButton.addListener(new BrowseButtonListenerAdapter() {
+    // @Override
+    // public void onInputFileChange(BrowseButton browseButton, String filename)
+    // {
+    // // TODO Auto-generated method stub
+    // }
+    // });
 
     public void hide() {
         dialog.hide();
@@ -112,5 +145,14 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
 
     public void show() {
         dialog.show();
+    }
+
+    @SuppressWarnings("unused")
+    private void setEnableFileField() {
+        if (file.getValueAsString().length() > 0) {
+            dialog.getFirstButton().enable();
+        } else {
+            dialog.getFirstButton().disable();
+        }
     }
 }

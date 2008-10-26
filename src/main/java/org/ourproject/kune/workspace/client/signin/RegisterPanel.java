@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -12,13 +13,15 @@ import com.gwtext.client.widgets.Panel;
 
 public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
+    public static final String ERRMSG = "k-regp-errmsg";
+
     static RegisterForm registerForm;
 
     private static final String CANCEL_BUTTON_ID = "kune-regp-cb";
     private static final String REGISTER_BUTTON_ID = "kune-regp-rb";
 
     public RegisterPanel(final RegisterPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
-            Session session) {
+            Session session, Images images) {
         super(i18n, i18n.t("Register"), true, true, 390, 450, "", i18n.t("Register"), REGISTER_BUTTON_ID, i18n.tWithNT(
                 "Cancel", "used in button"), CANCEL_BUTTON_ID, new Listener0() {
             public void onEvent() {
@@ -31,7 +34,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
             public void onEvent() {
                 presenter.onCancel();
             }
-        });
+        }, images, ERRMSG);
 
         Panel panel = new Panel();
         panel.setBorder(false);

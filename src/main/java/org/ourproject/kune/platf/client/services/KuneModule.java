@@ -272,7 +272,7 @@ public class KuneModule extends AbstractModule {
             public SignIn create() {
                 final SignInPresenter presenter = new SignInPresenter($(Session.class), $(StateManager.class), i18n,
                         $$(UserServiceAsync.class), $$(Register.class));
-                final SignInView panel = new SignInPanel(presenter, i18n, $(WorkspaceSkeleton.class));
+                final SignInView panel = new SignInPanel(presenter, i18n, $(WorkspaceSkeleton.class), $(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -284,7 +284,7 @@ public class KuneModule extends AbstractModule {
                 final RegisterPresenter presenter = new RegisterPresenter($(Session.class), $(StateManager.class),
                         i18n, $$(UserServiceAsync.class), $$(SignIn.class));
                 final RegisterView panel = new RegisterPanel(presenter, i18n, $(WorkspaceSkeleton.class),
-                        $(Session.class));
+                        $(Session.class), $(Images.class));
                 presenter.init(panel);
                 return presenter;
             }

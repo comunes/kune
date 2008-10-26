@@ -1,26 +1,29 @@
 package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.listener.Listener0;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
-    private static final String CANCEL_BUTTON_ID = "kune-signinp-cb";
-    private static final String SIGN_IN_BUTTON_ID = "kune-signinp-sib";
+    public static final String ERROR_MSG = "k-sigp-errmsg";
+    public static final String CANCEL_BUTTON_ID = "kune-signinp-cb";
+    public static final String SIGN_IN_BUTTON_ID = "kune-signinp-sib";
     static SignInForm signInForm;
     private final SignInPresenter presenter;
 
-    public SignInPanel(final SignInPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws) {
-        super(i18n, i18n.t("Sign in"), true, true, 330, 240, "", i18n.t("Sign in"), SIGN_IN_BUTTON_ID, i18n.tWithNT(
+    public SignInPanel(final SignInPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
+            Images images) {
+        super(i18n, i18n.t("Sign in"), true, true, 340, 240, "", i18n.t("Sign in"), SIGN_IN_BUTTON_ID, i18n.tWithNT(
                 "Cancel", "used in button"), CANCEL_BUTTON_ID, new Listener0() {
             public void onEvent() {
                 signInForm.validate();
@@ -32,13 +35,20 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
             public void onEvent() {
                 presenter.onCancel();
             }
-        });
+        }, images, ERROR_MSG);
         this.presenter = presenter;
+
+        super.addListener(new WindowListenerAdapter() {
+            @Override
+            public void onHide(Component component) {
+                presenter.onClose();
+            }
+        });
 
         Panel panel = new Panel();
         panel.setBorder(false);
         signInForm = new SignInForm(i18n);
-        signInForm.setWidth(300);
+        signInForm.setWidth(310);
         panel.add(signInForm.getForm());
         panel.add(createNoAccountRegister());
         add(panel);
@@ -57,11 +67,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     }
 
     public void reset() {
-        DeferredCommand.addCommand(new Command() {
-            public void execute() {
-                signInForm.reset();
-            }
-        });
+        signInForm.reset();
     }
 
     private Panel createNoAccountRegister() {

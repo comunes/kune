@@ -740,3 +740,8 @@
 .k-stm-error-icon {
   background-image: url(img/error.gif) !important;
 }
+
+.k-error-tb {
+    background: #FFB380 none repeat scroll 0% 50%;
+    color: #250;
+}

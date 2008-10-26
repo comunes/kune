@@ -29,6 +29,9 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class BasicDialogExtended extends BasicDialog {
 
+    private final Button cancel;
+    private final Button firstButton;
+
     public BasicDialogExtended(final String title, final boolean modal, final boolean autoscroll, final int width,
             final int heigth, final String icon, final String firstButtonTitle, final String cancelButtonTitle,
             final Listener0 onFirstButtonClick, Listener0 onCancelButtonClick) {
@@ -46,7 +49,7 @@ public class BasicDialogExtended extends BasicDialog {
         setButtonAlign(Position.RIGHT);
         setIconCls(icon);
 
-        final Button firstButton = new Button(firstButtonTitle);
+        firstButton = new Button(firstButtonTitle);
         firstButton.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
@@ -57,7 +60,7 @@ public class BasicDialogExtended extends BasicDialog {
         firstButton.setTabIndex(3);
         firstButton.setId(firstButtonId);
 
-        final Button cancel = new Button(cancelButtonTitle);
+        cancel = new Button(cancelButtonTitle);
         cancel.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
@@ -68,5 +71,13 @@ public class BasicDialogExtended extends BasicDialog {
         cancel.setId(cancelButtonId);
         addButton(firstButton);
         addButton(cancel);
+    }
+
+    public Button getCancel() {
+        return cancel;
+    }
+
+    public Button getFirstButton() {
+        return firstButton;
     }
 }

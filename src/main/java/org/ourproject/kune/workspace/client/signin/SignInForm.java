@@ -24,8 +24,8 @@ import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import com.gwtext.client.widgets.form.TextField;
 
 public class SignInForm extends DefaultForm {
-    private static final String NICKOREMAIL_FIELD = "kune-sif-nkf";
-    private static final String PASSWORD_FIELD = "kune-sif-psf";
+    public static final String NICKOREMAIL_FIELD = "kune-sif-nkf";
+    public static final String PASSWORD_FIELD = "kune-sif-psf";
 
     private final TextField loginNickOrEmailField;
     private final TextField loginPassField;

@@ -32,9 +32,18 @@ public class SignInAbstractPresenter {
         stateManager.gotoToken(previousStateToken);
     }
 
+    public void onClose() {
+        view.reset();
+        view.hideMessages();
+        if (!session.isLogged()) {
+            stateManager.gotoToken(previousStateToken);
+        }
+    }
+
     protected void onSignIn(final UserInfoDTO userInfoDTO) {
         final String userHash = userInfoDTO.getUserHash();
         view.setCookie(userHash);
+        view.reset();
         session.setUserHash(userHash);
         session.setCurrentUserInfo(userInfoDTO);
         final I18nLanguageDTO language = userInfoDTO.getLanguage();

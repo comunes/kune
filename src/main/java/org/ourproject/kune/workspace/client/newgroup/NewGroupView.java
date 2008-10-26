@@ -48,8 +48,6 @@ public interface NewGroupView extends View {
 
     boolean isOrganization();
 
-    boolean isOrphanedProject();
-
     boolean isProject();
 
     void maskProcessing();

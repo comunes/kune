@@ -28,6 +28,7 @@ public interface Images extends ImageBundle {
     public static class App {
         private static Images ourInstance = null;
 
+        @Deprecated
         public static synchronized Images getInstance() {
             if (ourInstance == null) {
                 ourInstance = (Images) GWT.create(Images.class);

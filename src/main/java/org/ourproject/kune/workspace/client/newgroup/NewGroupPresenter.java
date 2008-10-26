@@ -155,8 +155,6 @@ public class NewGroupPresenter implements NewGroup {
     private GroupType getTypeOfGroup() {
         if (view.isProject()) {
             return GroupType.PROJECT;
-        } else if (view.isOrphanedProject()) {
-            return GroupType.ORPHANED_PROJECT;
         } else if (view.isOrganization()) {
             return GroupType.ORGANIZATION;
         } else {

@@ -2,6 +2,7 @@ package org.ourproject.kune.workspace.client.signin;
 
 import java.util.Date;
 
+import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -11,6 +12,7 @@ import org.ourproject.kune.workspace.client.site.Site;
 import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.Toolbar;
@@ -19,24 +21,38 @@ public abstract class SignInAbstractPanel extends BasicDialogExtended {
 
     protected final I18nUITranslationService i18n;
     protected Label errorLabel;
+    private final Image errorIcon;
+    private final Toolbar messageToolbar;
 
     public SignInAbstractPanel(I18nUITranslationService i18n, String title, boolean modal, boolean autoscroll,
             int width, int heigth, String icon, String firstButtonTitle, String cancelButtonTitle,
-            Listener0 onFirstButtonClick, Listener0 onCancelButtonClick) {
+            Listener0 onFirstButtonClick, Listener0 onCancelButtonClick, Images images, String errorLabelId) {
         this(i18n, title, modal, autoscroll, width, heigth, icon, firstButtonTitle, Ext.generateId(),
-                cancelButtonTitle, Ext.generateId(), onFirstButtonClick, onCancelButtonClick);
+                cancelButtonTitle, Ext.generateId(), onFirstButtonClick, onCancelButtonClick, images, errorLabelId);
     }
 
     public SignInAbstractPanel(I18nUITranslationService i18n, final String title, final boolean modal,
             final boolean autoscroll, final int width, final int heigth, final String icon,
             final String firstButtonTitle, final String firstButtonId, final String cancelButtonTitle,
-            final String cancelButtonId, final Listener0 onFirstButtonClick, final Listener0 onCancelButtonClick) {
+            final String cancelButtonId, final Listener0 onFirstButtonClick, final Listener0 onCancelButtonClick,
+            Images images, String errorLabelId) {
         super(title, modal, autoscroll, width, heigth, icon, firstButtonTitle, firstButtonId, cancelButtonTitle,
                 cancelButtonId, onFirstButtonClick, onCancelButtonClick);
         this.i18n = i18n;
         errorLabel = new Label("");
-        Toolbar messageToolbar = new Toolbar();
+        errorLabel.ensureDebugId(errorLabelId);
+        messageToolbar = new Toolbar();
+        errorIcon = new Image();
+        Images.App.getInstance().error().applyTo(errorIcon);
+        messageToolbar.addSpacer();
+        messageToolbar.addElement(errorIcon.getElement());
+        messageToolbar.setCls("k-error-tb");
+        messageToolbar.addSpacer();
+        messageToolbar.addSpacer();
         messageToolbar.addElement(errorLabel.getElement());
+        errorIcon.setVisible(false);
+        messageToolbar.setVisible(false);
+
         super.setBottomToolbar(messageToolbar);
     }
 
@@ -48,8 +64,9 @@ public abstract class SignInAbstractPanel extends BasicDialogExtended {
     }
 
     public void hideMessages() {
+        errorIcon.setVisible(false);
         errorLabel.setText("");
-        // renderDialogIfNeeded();
+        messageToolbar.setVisible(false);
     }
 
     public void mask(final String message) {
@@ -70,11 +87,11 @@ public abstract class SignInAbstractPanel extends BasicDialogExtended {
 
     public void setErrorMessage(final String message, final SiteErrorType type) {
         errorLabel.setText(message);
-        // renderDialogIfNeeded();
+        errorIcon.setVisible(true);
+        messageToolbar.setVisible(true);
     }
 
     public void unMask() {
         getEl().unmask();
     }
-
 }

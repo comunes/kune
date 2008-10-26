@@ -62,7 +62,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private Radio projectRadio;
     private Radio orgRadio;
     private Radio communityRadio;
-    private Radio orphanedProjectRadio;
+
     private TextField shortNameField;
     private TextField longNameField;
     private TextArea publicDescField;
@@ -193,10 +193,6 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         return orgRadio.getValue();
     }
 
-    public boolean isOrphanedProject() {
-        return orphanedProjectRadio.getValue();
-    }
-
     public boolean isProject() {
         return projectRadio.getValue();
     }
@@ -290,11 +286,6 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                 + "with shared interests and they are open to new members "
                 + "(for instance the environmental community or the LGBT community). "
                 + "Normally they aren't a legal entity.");
-
-        orphanedProjectRadio = new Radio();
-        createRadio(groupTypeFieldSet, orphanedProjectRadio, "Orphaned Project",
-                "If you have an idea but you don't have " + "capacity/possibilities/resources to work on it, "
-                        + "just register a orphaned project, and permit others to work and develop it.");
 
         groupTypeFieldSet.setCollapsible(false);
 

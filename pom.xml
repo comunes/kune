@@ -379,7 +379,8 @@
         <version>2.0-beta23</version>
         <configuration>
           <logLevel>INFO</logLevel>
-          <style>PRETTY</style>
+          <style>OBF</style>
+          <!-- <style>PRETTY</style> -->
           <runTarget>
             org.ourproject.kune.app.Kune/Kune.html
           </runTarget>
@@ -526,7 +527,7 @@
         </executions>
       </plugin>
 
-          <plugin>
+      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>selenium-maven-plugin</artifactId>
         <configuration>

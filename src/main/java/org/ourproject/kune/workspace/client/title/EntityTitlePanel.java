@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 
 public class EntityTitlePanel implements EntityTitleView {
+    public static final String ENTITY_TITLE_RIGHT_TITLE = "k-entity-title-title";
     private final EditableIconLabel titleLabel;
     private final Label dateLabel;
     private final Image icon;
@@ -49,7 +50,7 @@ public class EntityTitlePanel implements EntityTitleView {
         icon.addStyleName("kune-Margin-Large-l");
         titleLabel.addStyleName("kune-Margin-Medium-l");
         titleLabel.addStyleName("kune-ft17px");
-        titleLabel.ensureDebugId("k-entity-title-title");
+        titleLabel.ensureDebugId(ENTITY_TITLE_RIGHT_TITLE);
         dateLabel.addStyleName("kune-Margin-Large-r");
         dateLabel.addStyleName("kune-ft12px");
         dateLabel.ensureDebugId("k-entity-title-date");

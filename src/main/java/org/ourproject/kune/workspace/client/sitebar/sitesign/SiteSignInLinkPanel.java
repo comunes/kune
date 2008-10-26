@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.Hyperlink;
 
 public class SiteSignInLinkPanel implements SiteSignInLinkView {
 
-    private static final String SITE_SIGN_IN = "kune-ssilp-hy";
+    public static final String SITE_SIGN_IN = "kune-ssilp-hy";
 
     private final Hyperlink signInHyperlink;
 
