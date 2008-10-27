@@ -30,11 +30,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class SimpleMessagePanel extends HorizontalPanel implements SiteMessageView {
     HTML message = null;
     Image messageIcon = null;
+    private final Images images;
 
-    public SimpleMessagePanel() {
+    public SimpleMessagePanel(Images images) {
+        this.images = images;
         message = new HTML();
         messageIcon = new Image();
-        final Images images = Images.App.getInstance();
         add(messageIcon);
         add(message);
         setCellVerticalAlignment(messageIcon, VerticalPanel.ALIGN_MIDDLE);
@@ -66,7 +67,6 @@ public class SimpleMessagePanel extends HorizontalPanel implements SiteMessageVi
     }
 
     public void setMessage(final String text, final SiteErrorType lastMessageType, final SiteErrorType type) {
-        final Images images = Images.App.getInstance();
         AbstractImagePrototype imagePrototype = null;
         switch (type) {
         case error:

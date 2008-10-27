@@ -35,14 +35,16 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
     private Grid rateGrid;
     private Image[] starImg;
     private Label rateDesc;
-    private final Images img = Images.App.getInstance();
+    private final Images img;
     private final RateItPresenter presenter;
     private Label rateItLabel;
     private final I18nTranslationService i18n;
 
-    public RateItPanel(final RateItPresenter presenter, final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
+    public RateItPanel(final RateItPresenter presenter, final I18nTranslationService i18n, final WorkspaceSkeleton ws,
+            Images img) {
         this.presenter = presenter;
         this.i18n = i18n;
+        this.img = img;
         initialize();
         layout();
         setProperties();
@@ -90,6 +92,7 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
             starImg[i].setTitle(i18n.t("Click to rate this"));
             starImg[i].addClickListener(this);
             starImg[i].addMouseListener(new MouseListenerAdapter() {
+                @Override
                 public void onMouseEnter(final Widget sender) {
                     for (int j = 0; j < 5; j++) {
                         if (sender == starImg[j]) {
@@ -99,6 +102,7 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
 
                 }
 
+                @Override
                 public void onMouseLeave(final Widget sender) {
                     presenter.revertCurrentRate();
                 }

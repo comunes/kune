@@ -22,8 +22,13 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class ImageUtils {
 
+    private final Images img;
+
+    public ImageUtils(Images img) {
+        this.img = img;
+    }
+
     public AbstractImagePrototype getImage(final ImageDescriptor imageDescriptor) {
-        final Images img = Images.App.getInstance();
         switch (imageDescriptor) {
         case accept: {
             return img.accept();

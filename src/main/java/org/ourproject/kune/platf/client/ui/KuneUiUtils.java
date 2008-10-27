@@ -28,20 +28,51 @@ import com.gwtext.client.widgets.ToolTip;
 
 public class KuneUiUtils {
 
-    public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText,
-            final AbstractImagePrototype icon) {
-        // FIXME: get this from emite
+    public enum IconPosition {
+        left, right
+    }
+
+    public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText) {
         String tipHtml = "<span style=\"vertical-align: middle;\" ext:qtip=\"" + tipText + "\"";
         if (tipTitle != null && tipTitle.length() > 0) {
             tipHtml += " ext:qtitle=\"" + tipTitle + "\"";
         }
         tipHtml += ">";
         tipHtml += labelText;
-        tipHtml += "&nbsp;";
-        Image iconImg = new Image();
+        tipHtml += "</span>";
+        return tipHtml;
+    }
+
+    public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText,
+            final AbstractImagePrototype icon, IconPosition iconPosition) {
+        String tipHtml = "<span style=\"vertical-align: middle;\" ext:qtip=\"" + tipText + "\"";
+        if (tipTitle != null && tipTitle.length() > 0) {
+            tipHtml += " ext:qtitle=\"" + tipTitle + "\"";
+        }
+        tipHtml += ">";
+        final Image iconImg = new Image();
         icon.applyTo(iconImg);
-        setQuickTip(iconImg, tipText, tipTitle);
-        tipHtml += iconImg.toString();
+        iconImg.setStyleName("vamiddle");
+        // setQuickTip(iconImg, tipText, tipTitle);
+
+        ToolTip tooltip = new ToolTip();
+        tooltip.setHtml(tipText);
+        tooltip.setWidth(250);
+        tooltip.applyTo(iconImg.getElement());
+
+        switch (iconPosition) {
+        case left:
+            tipHtml += iconImg.toString();
+            tipHtml += "&nbsp;";
+            tipHtml += labelText;
+            break;
+        case right:
+            tipHtml += labelText;
+            tipHtml += "&nbsp;";
+            tipHtml += iconImg.toString();
+            break;
+        }
+
         tipHtml += "</span>";
         return tipHtml;
     }

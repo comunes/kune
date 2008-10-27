@@ -228,7 +228,7 @@ public class KuneModule extends AbstractModule {
         }, new Factory<ImageUtils>(ImageUtils.class) {
             @Override
             public ImageUtils create() {
-                return new ImageUtils();
+                return new ImageUtils($(Images.class));
             }
         });
 
@@ -261,7 +261,7 @@ public class KuneModule extends AbstractModule {
                 final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter($(Session.class),
                         $(I18nServiceAsync.class), i18n);
                 final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i18n, $(LanguageSelector.class),
-                        $(WorkspaceSkeleton.class));
+                        $(WorkspaceSkeleton.class), $(Images.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -294,7 +294,7 @@ public class KuneModule extends AbstractModule {
             @Override
             public LicenseChoose create() {
                 final LicenseChoosePresenter presenter = new LicenseChoosePresenter($(Session.class));
-                final LicenseChoosePanel view = new LicenseChoosePanel(presenter, i18n);
+                final LicenseChoosePanel view = new LicenseChoosePanel(presenter, i18n, $(Images.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -305,7 +305,7 @@ public class KuneModule extends AbstractModule {
             public NewGroup create() {
                 final NewGroupPresenter presenter = new NewGroupPresenter(i18n, $(Session.class),
                         $(StateManager.class), $$(GroupServiceAsync.class));
-                final NewGroupPanel view = new NewGroupPanel(presenter, i18n, $$(LicenseChoose.class));
+                final NewGroupPanel view = new NewGroupPanel(presenter, i18n, $$(LicenseChoose.class), $(Images.class));
                 presenter.init(view);
                 return presenter;
             }

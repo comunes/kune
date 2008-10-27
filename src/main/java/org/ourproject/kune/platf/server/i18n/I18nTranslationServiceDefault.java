@@ -20,7 +20,7 @@
 package org.ourproject.kune.platf.server.i18n;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.KuneStringUtils;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
@@ -62,7 +62,7 @@ public class I18nTranslationServiceDefault extends I18nTranslationService {
         // } else {
         language = I18nTranslation.DEFAULT_LANG;
         // }
-        String encodeText = KuneStringUtils.escapeHtmlLight(text);
+        String encodeText = TextUtils.escapeHtmlLight(text);
         String translation = translationManager.getTranslation(language, text);
         if (translation == UNTRANSLATED_VALUE) {
             // Not translated but in db, return text

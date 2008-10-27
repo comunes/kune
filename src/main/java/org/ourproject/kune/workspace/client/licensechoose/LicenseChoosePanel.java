@@ -57,9 +57,8 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
     private final RadioButton nonCommercialRB;
     private final I18nTranslationService i18n;
 
-    public LicenseChoosePanel(final LicenseChoosePresenter presenter, final I18nTranslationService i18n) {
+    public LicenseChoosePanel(final LicenseChoosePresenter presenter, final I18nTranslationService i18n, Images img) {
         this.i18n = i18n;
-        final Images img = Images.App.getInstance();
 
         final VerticalPanel generalVP = new VerticalPanel();
         initWidget(generalVP);

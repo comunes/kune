@@ -18,7 +18,7 @@
  *
  */package org.ourproject.kune.platf.client.ui.upload;
 
-import org.ourproject.kune.platf.client.ui.KuneStringUtils;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -84,7 +84,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
     }
 
     public void setPermittedExtensions(final String extensions) {
-        final Object[] objs = KuneStringUtils.splitTags(extensions).toArray();
+        final Object[] objs = TextUtils.splitTags(extensions).toArray();
         final String[] exts = new String[objs.length];
         for (int i = 0; i < objs.length; i++) {
             exts[i] = (String) objs[i];

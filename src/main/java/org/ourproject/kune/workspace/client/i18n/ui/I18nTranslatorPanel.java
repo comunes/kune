@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
-import org.ourproject.kune.platf.client.ui.KuneStringUtils;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
@@ -63,8 +63,6 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTranslatorView {
 
-    private static final String NOTE_FOR_TRANSLATORS_IMAGE_HTML = Images.App.getInstance().nt().getHTML();
-
     private Window dialog;
     private final I18nTranslatorPresenter presenter;
     private LanguageSelectorPanel languageSelectorPanel;
@@ -75,13 +73,15 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
     private final LanguageSelector languageSelector;
     private final WorkspaceSkeleton ws;
     private SiteBottomTrayButton traybarButton;
+    private final Images img;
 
     public I18nTranslatorPanel(final I18nTranslatorPresenter initPresenter, final I18nTranslationService i18n,
-            final LanguageSelector languageSelector, final WorkspaceSkeleton ws) {
+            final LanguageSelector languageSelector, final WorkspaceSkeleton ws, Images img) {
         super(i18n);
         this.presenter = initPresenter;
         this.languageSelector = languageSelector;
         this.ws = ws;
+        this.img = img;
     }
 
     public void close() {
@@ -136,6 +136,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         final Button close = new Button();
         close.setText(i18n.tWithNT("Close", "used in button"));
         close.addListener(new ButtonListenerAdapter() {
+            @Override
             public void onClick(final Button button, final EventObject e) {
                 presenter.doClose();
             }
@@ -159,6 +160,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         final HorizontalPanel hp = new HorizontalPanel();
         languageSelectorPanel = (LanguageSelectorPanel) languageSelector.getView();
         languageSelectorPanel.addChangeListener(new ComboBoxListenerAdapter() {
+            @Override
             public void onSelect(final ComboBox comboBox, final Record record, final int index) {
                 setLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
                 dialog.setTitle(i18n.t("Help to translate kune to [%s]", record.getAsString("language")));
@@ -193,7 +195,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
                 String renderer;
                 String[] splitted = splitNT((String) value);
                 if (splitted.length > 1) {
-                    renderer = "{0} " + NOTE_FOR_TRANSLATORS_IMAGE_HTML;
+                    renderer = "{0} " + img.nt().getHTML();
                     String tip = "<div style='min-width: 75px'>" + splitted[1] + "</div>";
                     cellMetadata.setHtmlAttribute("ext:qtip=\"" + tip + "\" ext:qtitle=\"Note for translators\"");
                 } else {
@@ -273,16 +275,18 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         // grid.setSelectionModel(new RowSelectionModel());
 
         grid.addEditorGridListener(new EditorGridListenerAdapter() {
+            @Override
             public void onAfterEdit(final GridPanel grid, final Record record, final String field,
                     final Object newValue, final Object oldValue, final int rowIndex, final int colIndex) {
                 final String idValue = record.getAsString(id);
                 final String trKey = record.getAsString("trKey");
                 presenter.doTranslation(idValue, trKey, (String) newValue);
-                record.set(field, KuneStringUtils.escapeHtmlLight((String) newValue));
+                record.set(field, TextUtils.escapeHtmlLight((String) newValue));
             }
         });
 
         grid.addGridCellListener(new GridCellListenerAdapter() {
+            @Override
             public void onCellDblClick(final GridPanel grid, final int rowIndex, final int colIndex, final EventObject e) {
                 final Record record = unTransStore.getRecordAt(rowIndex);
                 final String idValue = record.getAsString(id);

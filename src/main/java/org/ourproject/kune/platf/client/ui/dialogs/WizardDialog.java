@@ -26,20 +26,22 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.Toolbar;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public class WizardDialog {
 
-    private final BasicDialog dialog;
     private final Button backButton;
-    private final Button nextButton;
     private final Button cancelButton;
+    private final BasicDialog dialog;
     private final Button finishButton;
     private final I18nTranslationService i18n;
+    private final Button nextButton;
 
     public WizardDialog(final String caption, final boolean modal, final boolean minimizable, final int width,
             final int height, final int minWidth, final int minHeight, final WizardListener listener,
-            final I18nTranslationService i18n) {
+            final I18nTranslationService i18n, String dialogId, final String backId, final String nextId,
+            final String finishId, final String cancelId, final String closeId) {
         dialog = new BasicDialog(caption, modal, false, width, height, minWidth, minHeight);
         this.i18n = i18n;
         dialog.setCollapsible(minimizable);
@@ -47,12 +49,14 @@ public class WizardDialog {
         dialog.setPlain(true);
         dialog.setCollapsible(false);
         dialog.setResizable(false);
+        dialog.setId(dialogId);
 
         backButton = new CustomButton(i18n.tWithNT("« Back", "used in button"), new ClickListener() {
             public void onClick(final Widget sender) {
                 listener.onBack();
             }
         }).getButton();
+        backButton.setId(backId);
         dialog.addButton(backButton);
 
         nextButton = new CustomButton(i18n.tWithNT("Next »", "used in button"), new ClickListener() {
@@ -60,6 +64,7 @@ public class WizardDialog {
                 listener.onNext();
             }
         }).getButton();
+        nextButton.setId(nextId);
         dialog.addButton(nextButton);
 
         cancelButton = new CustomButton(i18n.tWithNT("Cancel", "used in button"), new ClickListener() {
@@ -67,6 +72,7 @@ public class WizardDialog {
                 listener.onCancel();
             }
         }).getButton();
+        cancelButton.setId(cancelId);
         dialog.addButton(cancelButton);
 
         finishButton = new CustomButton(i18n.tWithNT("Finish", "used in button"), new ClickListener() {
@@ -74,9 +80,11 @@ public class WizardDialog {
                 listener.onFinish();
             }
         }).getButton();
+        finishButton.setId(finishId);
         dialog.addButton(finishButton);
 
         dialog.addListener(new WindowListenerAdapter() {
+            @Override
             public void onClose(final Panel panel) {
                 listener.onClose();
             }
@@ -84,8 +92,10 @@ public class WizardDialog {
     }
 
     public WizardDialog(final String caption, final boolean modal, final boolean minimizable, final int width,
-            final int height, final WizardListener listener, final I18nTranslationService i18n) {
-        this(caption, modal, minimizable, width, height, width, height, listener, i18n);
+            final int height, final WizardListener listener, final I18nTranslationService i18n, String dialogId,
+            final String backId, final String nextId, final String finishId, final String cancelId, final String closeId) {
+        this(caption, modal, minimizable, width, height, width, height, listener, i18n, dialogId, backId, nextId,
+                finishId, cancelId, closeId);
     }
 
     public void add(final Widget widget) {
@@ -106,6 +116,10 @@ public class WizardDialog {
 
     public void maskProcessing() {
         mask(i18n.t("Processing"));
+    }
+
+    public void setBottomToolbar(Toolbar toolbar) {
+        dialog.setBottomToolbar(toolbar);
     }
 
     public void setEnabledBackButton(final boolean enabled) {
@@ -167,5 +181,4 @@ public class WizardDialog {
     public void unMask() {
         dialog.getEl().unmask();
     }
-
 }

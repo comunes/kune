@@ -13,6 +13,7 @@ import com.gwtext.client.widgets.Panel;
 
 public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
+    public static final String REGISTER_TITLE = "Register";
     public static final String ERRMSG = "k-regp-errmsg";
 
     static RegisterForm registerForm;
@@ -22,22 +23,23 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     public static final String REGISTER_FORM = "k-regp-p";
 
     public static final String WELCOME_OK_BUTTON = "k-regp-okbt";
+    public static final String WELCOME_DIALOG = "k-regp-wdiag";
 
     public RegisterPanel(final RegisterPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
             Session session, Images images) {
-        super(i18n, i18n.t("Register"), true, true, 390, 450, "", i18n.t("Register"), REGISTER_BUTTON_ID, i18n.tWithNT(
-                "Cancel", "used in button"), CANCEL_BUTTON_ID, new Listener0() {
-            public void onEvent() {
-                registerForm.validate();
-                if (registerForm.isValid()) {
-                    presenter.onFormRegister();
-                }
-            }
-        }, new Listener0() {
-            public void onEvent() {
-                presenter.onCancel();
-            }
-        }, images, ERRMSG);
+        super(i18n, i18n.t(REGISTER_TITLE), true, true, 390, 450, "", i18n.t(REGISTER_TITLE), REGISTER_BUTTON_ID,
+                i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, new Listener0() {
+                    public void onEvent() {
+                        registerForm.validate();
+                        if (registerForm.isValid()) {
+                            presenter.onFormRegister();
+                        }
+                    }
+                }, new Listener0() {
+                    public void onEvent() {
+                        presenter.onCancel();
+                    }
+                }, images, ERRMSG);
 
         Panel panel = new Panel();
         panel.setBorder(false);
@@ -106,6 +108,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
                 i18n.t("Now you can participate more actively in this site with other people and groups. "
                         + "Your email is not verified, please follow the instructions you will receive by email."),
                 i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 400, 210);
+        welcomeDialog.setId(WELCOME_DIALOG);
         welcomeDialog.show();
     }
 

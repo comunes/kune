@@ -34,7 +34,7 @@ import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.client.errors.UserNotFoundException;
-import org.ourproject.kune.platf.client.ui.KuneStringUtils;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -205,7 +205,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
     public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
         final Content content = finder.getContent(contentId);
-        final ArrayList<String> tagsStripped = KuneStringUtils.splitTags(tags);
+        final ArrayList<String> tagsStripped = TextUtils.splitTags(tags);
         final ArrayList<Tag> tagList = new ArrayList<Tag>();
         for (String tagString : tagsStripped) {
             Tag tag;

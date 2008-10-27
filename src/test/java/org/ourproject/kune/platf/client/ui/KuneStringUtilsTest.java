@@ -11,14 +11,14 @@ public class KuneStringUtilsTest {
     @Test
     public void testTagNull() {
         final String tagsString = null;
-        final ArrayList<String> tags = KuneStringUtils.splitTags(tagsString);
+        final ArrayList<String> tags = TextUtils.splitTags(tagsString);
         assertEquals(0, tags.size());
     }
 
     @Test
     public void testTagStripsSimple() {
         final String tagsString = "ab cd";
-        final ArrayList<String> tags = KuneStringUtils.splitTags(tagsString);
+        final ArrayList<String> tags = TextUtils.splitTags(tagsString);
         assertEquals("ab", tags.get(0));
         assertEquals("cd", tags.get(1));
     }
@@ -26,7 +26,7 @@ public class KuneStringUtilsTest {
     @Test
     public void testTagStripsWithCommas() {
         final String tagsString = "ab,cd";
-        final ArrayList<String> tags = KuneStringUtils.splitTags(tagsString);
+        final ArrayList<String> tags = TextUtils.splitTags(tagsString);
         assertEquals("ab", tags.get(0));
         assertEquals("cd", tags.get(1));
     }
@@ -34,7 +34,7 @@ public class KuneStringUtilsTest {
     @Test
     public void testTagStripsWithCommasAndSpaces() {
         final String tagsString = "ab, cd";
-        final ArrayList<String> tags = KuneStringUtils.splitTags(tagsString);
+        final ArrayList<String> tags = TextUtils.splitTags(tagsString);
         assertEquals("ab", tags.get(0));
         assertEquals("cd", tags.get(1));
     }
@@ -42,7 +42,7 @@ public class KuneStringUtilsTest {
     @Test
     public void testTagStripsWithQuotes() {
         final String tagsString = "ab \"cd\"";
-        final ArrayList<String> tags = KuneStringUtils.splitTags(tagsString);
+        final ArrayList<String> tags = TextUtils.splitTags(tagsString);
         assertEquals("ab", tags.get(0));
         assertEquals("cd", tags.get(1));
     }
@@ -50,7 +50,7 @@ public class KuneStringUtilsTest {
     @Test
     public void testTagStripsWithSpaces() {
         final String tagsString = "    ab       cd    ";
-        final ArrayList<String> tags = KuneStringUtils.splitTags(tagsString);
+        final ArrayList<String> tags = TextUtils.splitTags(tagsString);
         assertEquals("ab", tags.get(0));
         assertEquals("cd", tags.get(1));
     }

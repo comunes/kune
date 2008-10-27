@@ -230,7 +230,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             public SiteSearch create() {
                 final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class));
                 final SiteSearchPanel panel = new SiteSearchPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nUITranslationService.class));
+                        $(I18nUITranslationService.class), $(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -310,7 +310,7 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final RateItPresenter presenter = new RateItPresenter($(I18nUITranslationService.class),
                         $(Session.class), $$(ContentServiceAsync.class), $(StateManager.class));
                 final RateItPanel panel = new RateItPanel(presenter, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                        $(WorkspaceSkeleton.class), $(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -346,8 +346,8 @@ public class KuneWorkspaceModule extends AbstractModule {
             public GroupSummary create() {
                 final GroupSummaryPresenter presenter = new GroupSummaryPresenter($(StateManager.class),
                         $(WsThemePresenter.class));
-                final GroupSummaryView view = new GroupSummaryPanel(presenter, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                final GroupSummaryView view = new GroupSummaryPanel($(Images.class), presenter,
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
                 presenter.init(view);
                 return presenter;
             }

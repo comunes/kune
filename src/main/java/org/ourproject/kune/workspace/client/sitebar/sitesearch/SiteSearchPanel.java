@@ -42,9 +42,8 @@ public class SiteSearchPanel implements SiteSearchView {
     private final I18nUITranslationService i18n;
 
     public SiteSearchPanel(final SiteSearchPresenter presenter, final WorkspaceSkeleton ws,
-            final I18nUITranslationService i18n) {
+            final I18nUITranslationService i18n, Images img) {
         this.i18n = i18n;
-        final Images img = Images.App.getInstance();
         final SimpleToolbar siteBar = ws.getSiteBar();
         siteBar.addSpacer();
         siteBar.addSpacer();

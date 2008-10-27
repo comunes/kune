@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.ui.KuneStringUtils;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
@@ -77,7 +77,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
     public String getTranslation(final String language, final String text) {
         final HashMap<String, String> lexicon = getLexicon(language);
-        final String escapedText = KuneStringUtils.escapeHtmlLight(text);
+        final String escapedText = TextUtils.escapeHtmlLight(text);
         if (lexicon.containsKey(escapedText)) {
             final String translation = lexicon.get(escapedText);
             return translation;
@@ -123,7 +123,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     public String setTranslation(final String id, final String translation) throws DefaultException {
         final I18nTranslation trans = super.find(new Long(id));
         if (trans != null) {
-            final String escapedTranslation = KuneStringUtils.escapeHtmlLight(translation);
+            final String escapedTranslation = TextUtils.escapeHtmlLight(translation);
             trans.setText(escapedTranslation);
             persist(trans);
             return escapedTranslation;

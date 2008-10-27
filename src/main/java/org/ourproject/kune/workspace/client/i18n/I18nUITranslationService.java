@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.ui.KuneStringUtils;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.Location;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 
@@ -133,7 +133,7 @@ public class I18nUITranslationService extends I18nTranslationService {
      */
     @Override
     public String t(final String text) {
-        final String encodeText = KuneStringUtils.escapeHtmlLight(text);
+        final String encodeText = TextUtils.escapeHtmlLight(text);
         String translation = lexicon.get(encodeText);
         if (lexicon.containsKey(encodeText)) {
             if (translation == UNTRANSLATED_VALUE) {

@@ -47,7 +47,8 @@ public class DropDownPanel extends Composite implements ClickListener {
     private final RoundedPanel outerBorder;
     private String stylePrimaryName;
 
-    public DropDownPanel() {
+    public DropDownPanel(Images img) {
+        this.img = img;
         vp = new VerticalPanel();
         outerBorder = new RoundedPanel(vp, RoundedPanel.ALL);
         titleHP = new HorizontalPanel();
@@ -68,7 +69,6 @@ public class DropDownPanel extends Composite implements ClickListener {
         vp.setCellWidth(contentPanel, "100%");
         vp.setCellWidth(titleHP, "100%");
         titleHP.setStylePrimaryName("k-dropdownlabel");
-        img = Images.App.getInstance();
         img.arrowDownWhite().applyTo(arrowImage);
         titleLabel.setText("");
         contentPanel.setStylePrimaryName("k-dropdowninner");
@@ -78,13 +78,13 @@ public class DropDownPanel extends Composite implements ClickListener {
         titleLabel.addClickListener(this);
     }
 
-    public DropDownPanel(final boolean visible) {
-        this();
+    public DropDownPanel(Images img, final boolean visible) {
+        this(img);
         setContentVisible(visible);
     }
 
-    public DropDownPanel(final String headerText, final boolean visible) {
-        this();
+    public DropDownPanel(Images img, final String headerText, final boolean visible) {
+        this(img);
         setContentVisible(visible);
         setHeaderText(headerText);
     }
@@ -136,6 +136,7 @@ public class DropDownPanel extends Composite implements ClickListener {
         KuneUiUtils.setQuickTip(titleLabel, title);
     }
 
+    @Override
     public void setHeight(final String height) {
         super.setHeight(height);
         outerBorder.setHeight(height);
@@ -157,6 +158,7 @@ public class DropDownPanel extends Composite implements ClickListener {
         contentPanel.addStyleDependentName(newThemeS);
     }
 
+    @Override
     public void setWidth(final String width) {
         super.setWidth(width);
         outerBorder.setWidth(width);

@@ -41,9 +41,10 @@ public class SiteMessagePanel extends SimpleMessagePanel implements SiteMessageV
     private final ExtElement extElem;
 
     public SiteMessagePanel(final MessagePresenter presenter, final boolean closable,
-            final I18nUITranslationService i18n) {
-        final Images images = Images.App.getInstance();
+            final I18nUITranslationService i18n, Images images) {
+        super(images);
         timer = new Timer() {
+            @Override
             public void run() {
                 hide();
                 if (presenter != null) {
@@ -90,12 +91,14 @@ public class SiteMessagePanel extends SimpleMessagePanel implements SiteMessageV
         super.adjustWidth(windowWidth);
     }
 
+    @Override
     public void hide() {
         extElem.hide(true);
         super.reset();
         timer.cancel();
     }
 
+    @Override
     public void show() {
         extElem.show(false);
         // super.show();

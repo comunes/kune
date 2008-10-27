@@ -21,17 +21,16 @@ package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.KuneStringUtils;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.platf.client.ui.TextUtils;
+import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardListener;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
-import org.ourproject.kune.workspace.client.site.msg.SiteMessagePanel;
 
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -50,13 +49,23 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class NewGroupPanel extends WizardDialog implements NewGroupView {
-    private static final AbstractImagePrototype INFO_IMAGE = Images.App.getInstance().info();
-    private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
-    private static final String SHORTNAME_FIELD = "short_name";
-    private static final String LONGNAME_FIELD = "long_name";
-    private static final String PUBLICDESC_FIELD = "public_desc";
-    private static final String TYPEOFGROUP_FIELD = "type_of_group";
-    private static final String TAGS_FIELD = "tags";
+    public static final String REGISTER_A_NEW_GROUP_TITLE = "Register a new Group";
+    public static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
+    public static final String SHORTNAME_FIELD = "k-ngp-short_name";
+    public static final String LONGNAME_FIELD = "k-ngp-long_name";
+    public static final String PUBLICDESC_FIELD = "k-ngp-public_desc";
+    public static final String TYPEOFGROUP_FIELD = "k-ngp-type_of_group";
+    public static final String PROJ_GROUP_TYPE_ID = "k-ngp-type_of_group_proj";
+    public static final String ORG_GROUP_TYPE_ID = "k-ngp-type_of_group_org";
+    public static final String COMM_GROUP_TYPE_ID = "k-ngp-type_of_group_comm";
+    public static final String TAGS_FIELD = "tags";
+    public static final String NEWGROUP_WIZARD = "k-ngp-wiz";
+    public static final String CANCEL_BUTTON = "k-ngp-cancel-bt";
+    public static final String CLOSE_BUTTON = "k-ngp-close-bt";
+    public static final String FINISH_BUTTON = "k-ngp-finish-bt";
+    public static final String NEXT_BUTTON = "k-ngp-next-bt";
+    public static final String BACK_BUTTON = "k-ngp-back-bt";
+    public static final String ERROR_MSG_BAR = "k-ngp-error-mb";
 
     private final FormPanel newGroupInitialDataForm;
     private Radio projectRadio;
@@ -68,13 +77,13 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private TextArea publicDescField;
     private final DeckPanel deck;
     private final LicenseChoose licenseChoosePanel;
-    private final SiteMessagePanel messagesPanel;
     private final I18nUITranslationService i18n;
     private TextField tags;
+    private final MessageToolbar messageErrorBar;
 
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n,
-            final Provider<LicenseChoose> licenseChooseProvider) {
-        super(i18n.t("Register a new Group"), true, false, 460, 480, new WizardListener() {
+            final Provider<LicenseChoose> licenseChooseProvider, Images img) {
+        super(i18n.t(REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 480, new WizardListener() {
             public void onBack() {
                 presenter.onBack();
             }
@@ -94,10 +103,11 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
             public void onNext() {
                 presenter.onNext();
             }
-        }, i18n);
+        }, i18n, NEWGROUP_WIZARD, BACK_BUTTON, NEXT_BUTTON, FINISH_BUTTON, CANCEL_BUTTON, CLOSE_BUTTON);
         this.i18n = i18n;
         Field.setMsgTarget("side");
         final Panel centerPanel = new Panel();
+        centerPanel.setPaddings(10);
         centerPanel.setLayout(new FitLayout());
         deck = new DeckPanel();
         newGroupInitialDataForm = createNewGroupInitialDataForm(presenter);
@@ -106,7 +116,6 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         final HorizontalPanel newGroupInitialDataHP = new HorizontalPanel();
         final VerticalPanel chooseLicenseVP = new VerticalPanel();
         final HorizontalPanel chooseLicenseHP = new HorizontalPanel();
-        final Images img = Images.App.getInstance();
         newGroupInitialDataHP.add(img.step1().createImage());
         final Label step1Label = new Label(
                 i18n.t("Please fill this form and follow the next steps to register a new group:"));
@@ -115,7 +124,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         newGroupInitialDataVP.add(newGroupInitialDataForm);
         chooseLicenseHP.add(img.step2().createImage());
         final HTML step2Label = new HTML(i18n.t("Select a license to share your group contents with other people. "
-                + "We recomend [%s] licenses for practical works.", KuneStringUtils.generateHtmlLink(
+                + "We recomend [%s] licenses for practical works.", TextUtils.generateHtmlLink(
                 "http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
         chooseLicenseHP.add(step2Label);
         final Label licenseTypeLabel = new Label(i18n.t("Choose a license type:"));
@@ -128,10 +137,8 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         step1Label.addStyleName("kune-Margin-Medium-b");
         step2Label.addStyleName("kune-Margin-Medium-b");
 
-        messagesPanel = new SiteMessagePanel(null, false, i18n);
-        messagesPanel.setWidth("425");
-        messagesPanel.setMessage("", SiteErrorType.info, SiteErrorType.error);
-        newGroupInitialDataVP.add(messagesPanel);
+        messageErrorBar = new MessageToolbar(img, ERROR_MSG_BAR);
+        super.setBottomToolbar(messageErrorBar.getToolbar());
 
         chooseLicenseVP.add((Widget) licenseChoosePanel.getView());
         deck.add(newGroupInitialDataVP);
@@ -178,7 +185,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     }
 
     public void hideMessage() {
-        messagesPanel.hide();
+        messageErrorBar.hideErrorMessage();
     }
 
     public boolean isCommunity() {
@@ -198,8 +205,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     }
 
     public void setMessage(final String message, final SiteErrorType type) {
-        messagesPanel.setMessage(message, type, type);
-        messagesPanel.show();
+        messageErrorBar.setErrorMessage(message, type);
     }
 
     public void showLicenseForm() {
@@ -266,6 +272,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         final FieldSet groupTypeFieldSet = new FieldSet(i18n.t("Type of group"));
         groupTypeFieldSet.setStyle("margin-left: 105px");
+        groupTypeFieldSet.setWidth(300);
 
         form.add(groupTypeFieldSet);
 
@@ -274,55 +281,37 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                 "A project is a kind of group in which new members inclusion "
                         + "is moderated by the project administrators. "
                         + "An administrator is the person who creates the project "
-                        + "and other people she/he choose in the future as administrator too.");
+                        + "and other people she/he choose in the future as administrator too.", PROJ_GROUP_TYPE_ID);
         projectRadio.setChecked(true);
 
         orgRadio = new Radio();
         createRadio(groupTypeFieldSet, orgRadio, "Organization", "An organization is like a project, "
-                + "but organizations must be a legal entity.");
+                + "but organizations must be a legal entity.", ORG_GROUP_TYPE_ID);
 
         communityRadio = new Radio();
         createRadio(groupTypeFieldSet, communityRadio, "Community", "Communities are social group of persons "
                 + "with shared interests and they are open to new members "
                 + "(for instance the environmental community or the LGBT community). "
-                + "Normally they aren't a legal entity.");
+                + "Normally they aren't a legal entity.", COMM_GROUP_TYPE_ID);
 
         groupTypeFieldSet.setCollapsible(false);
 
         return form;
     }
 
-    private void createRadio(final FieldSet fieldSet, final Radio radio, final String radioLabel, final String radioTip) {
+    private void createRadio(final FieldSet fieldSet, final Radio radio, final String radioLabel,
+            final String radioTip, final String id) {
         radio.setName(TYPEOFGROUP_FIELD);
-        radio.setBoxLabel(KuneUiUtils.genQuickTipLabel(i18n.t(radioLabel), null, i18n.t(radioTip), INFO_IMAGE));
+        radio.setBoxLabel(KuneUiUtils.genQuickTipLabel(i18n.t(radioLabel), null, i18n.t(radioTip)));
         radio.setAutoCreate(true);
         radio.setHideLabel(true);
+        radio.setId(id);
         fieldSet.add(radio);
-        // ToolTip fieldToolTip = new ToolTip("Tooltip on a Field.");
-        // fieldToolTip.applyTo(captchaField);
-        // Image info = new Image("images/silk/information.gif");
-        //
-        // ToolTip tooltip = new ToolTip();
-        // tooltip.setHtml("A <b>CAPTCHA</b> is a challenge-response test to
-        // determine whether " +
-        // "the user is human.");
-        // tooltip.setWidth(150);
-        // tooltip.applyTo(info.getElement());
 
-        // Tested:
-        // Set tooltip
-        // Image info = new Image();
-        // ChatIcons.App.getInstance().info().applyTo(info);
-        // ToolTip tooltip = new ToolTip();
-        // tooltip.setHtml(i18n.t("Note that the 'Jabber Id' sometimes is the
-        // same as the email "
-        // + "(in gmail accounts for instance)."));
-        // tooltip.setWidth(250);
-        // tooltip.applyTo(info.getElement());
-        // jidPanel.addToRow(info, new ColumnLayoutData(1));
-        //
-        // formPanel.add(jidPanel);
-
+        ToolTip tooltip = new ToolTip();
+        tooltip.setHtml(radioTip);
+        tooltip.setWidth(250);
+        tooltip.applyTo(radio);
     }
 
     private void initBottomButtons() {

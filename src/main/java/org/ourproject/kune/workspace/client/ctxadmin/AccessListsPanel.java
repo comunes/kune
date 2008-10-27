@@ -34,14 +34,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class AccessListsPanel extends VerticalPanel implements View {
 
-    private static final Images img = Images.App.getInstance();
     private final VerticalPanel adminsVP;
     private final VerticalPanel editorsVP;
     private final VerticalPanel viewersVP;
     private final I18nTranslationService i18n;
+    private final Images img;
 
-    public AccessListsPanel(final I18nTranslationService i18n) {
+    public AccessListsPanel(final I18nTranslationService i18n, Images img) {
         this.i18n = i18n;
+        this.img = img;
         final Label adminsLabel = new Label(i18n.t("Who can admin this:"));
         adminsVP = new VerticalPanel();
         final Label editorsLabel = new Label(i18n.t("Who more can edit:"));

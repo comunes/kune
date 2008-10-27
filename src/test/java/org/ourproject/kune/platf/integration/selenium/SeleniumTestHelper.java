@@ -9,10 +9,13 @@ import com.thoughtworks.selenium.DefaultSelenium;
 public class SeleniumTestHelper {
 
     protected static DefaultSelenium selenium;
+    private static boolean mustStopFinally = true;
 
     @AfterClass
     public static void afterClass() throws Exception {
-        selenium.stop();
+        if (mustStopFinally) {
+            selenium.stop();
+        }
     }
 
     /**
@@ -46,8 +49,18 @@ public class SeleniumTestHelper {
         selenium.start();
     }
 
+    public static void setMustStopFinally(boolean mustStopFinally) {
+        SeleniumTestHelper.mustStopFinally = mustStopFinally;
+    }
+
     protected void click(String id) {
         selenium.click(id);
+    }
+
+    protected void clickOnPushButton(String id) {
+        selenium.mouseOver(id);
+        selenium.mouseDown(id);
+        selenium.mouseUp(id);
     }
 
     protected void fail(String message) throws Exception {

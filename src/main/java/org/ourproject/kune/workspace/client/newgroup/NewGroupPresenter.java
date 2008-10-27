@@ -39,6 +39,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class NewGroupPresenter implements NewGroup {
+    public static final String REGISTER_TO_CREATE_A_GROUP = "Sign in or register to create a group";
     private NewGroupView view;
     private final I18nTranslationService i18n;
     private StateToken previousToken;
@@ -70,7 +71,7 @@ public class NewGroupPresenter implements NewGroup {
                     Site.hideProgress();
                 } else {
                     stateManager.gotoToken(previousToken);
-                    Site.info(i18n.t("Sign in or register to create a group"));
+                    Site.info(i18n.t(REGISTER_TO_CREATE_A_GROUP));
                 }
             }
         });

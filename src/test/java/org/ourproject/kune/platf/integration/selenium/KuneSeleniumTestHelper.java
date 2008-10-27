@@ -1,16 +1,21 @@
 package org.ourproject.kune.platf.integration.selenium;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.ourproject.kune.workspace.client.signin.RegisterForm;
 import org.ourproject.kune.workspace.client.signin.RegisterPanel;
 import org.ourproject.kune.workspace.client.signin.SignInForm;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
+import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPanel;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPanel;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 
 public class KuneSeleniumTestHelper extends SeleniumTestHelper {
+
+    protected static final String KUNE_BASE_URL = "/kune/?locale=en#";
 
     @Before
     public void before() {
@@ -78,5 +83,21 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
 
     protected void verifyLoggedUserShorName(String userShortName) throws Exception {
         waitForTextInside(gid(SiteUserMenuPanel.LOGGED_USER_MENU), userShortName);
+    }
+
+    protected long genPrefix() {
+        long prefix = new Date().getTime();
+        return prefix;
+    }
+
+    protected void open(SiteToken token) {
+        open(KUNE_BASE_URL + token.toString());
+    }
+
+    protected String registerValidUser(boolean wantHomepage) {
+        String shortName = "u" + genPrefix();
+        register(shortName, "some name " + genPrefix(), "somepasswd", "somepasswd", genPrefix() + "@example.com",
+                "Andorra", "English", "MET", wantHomepage);
+        return shortName;
     }
 }
