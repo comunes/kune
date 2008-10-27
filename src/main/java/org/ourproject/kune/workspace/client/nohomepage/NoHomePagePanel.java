@@ -26,13 +26,16 @@ import com.google.gwt.user.client.ui.Label;
 
 public class NoHomePagePanel implements NoHomePageView {
 
+    public static final String USER_DON_T_HAVE_A_HOMEPAGE = "This user don't have a homepage";
+    public static final String NO_HOME_PAGE_LABEL = "k-nhpp-l";
     private final Label noHomepageCtnLabel;
     private final Label noHomepageCtxLabel;
     private final WorkspaceSkeleton ws;
 
     public NoHomePagePanel(final NoHomePagePresenter presenter, final WorkspaceSkeleton ws, I18nTranslationService i18n) {
         this.ws = ws;
-        noHomepageCtnLabel = new Label(i18n.t("This user don't have a homepage"));
+        noHomepageCtnLabel = new Label(i18n.t(USER_DON_T_HAVE_A_HOMEPAGE));
+        noHomepageCtnLabel.ensureDebugId(NO_HOME_PAGE_LABEL);
         noHomepageCtnLabel.setStyleName("kune-Content-Main");
         noHomepageCtnLabel.addStyleName("kune-Margin-7-trbl");
         noHomepageCtxLabel = new Label("");

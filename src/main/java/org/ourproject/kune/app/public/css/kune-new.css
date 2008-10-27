@@ -745,3 +745,8 @@
     background: #FFB380 none repeat scroll 0% 50%;
     color: #250;
 }
+
+.k-infod-head {
+    font-size: 108%;
+    margin-bottom: 10px;
+}

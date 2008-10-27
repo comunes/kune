@@ -227,7 +227,7 @@ public class SignInPanelOld implements SignInViewOld {
                     i18n.t("Now you can participate more actively in this site with other people and groups. "
                             + "You can also use your personal space to publish contents. "
                             + "Your email is not verified, please follow the instructions you will receive by email."),
-                    i18n.t("Ok"), true, true, 400, 270);
+                    i18n.t("Ok"), "asdfasdfa", true, true, 400, 270);
         }
         welcomeDialog.show();
     }

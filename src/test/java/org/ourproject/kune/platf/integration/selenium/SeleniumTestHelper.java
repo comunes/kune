@@ -46,6 +46,10 @@ public class SeleniumTestHelper {
         selenium.start();
     }
 
+    protected void click(String id) {
+        selenium.click(id);
+    }
+
     protected void fail(String message) throws Exception {
         throw new Exception(message);
     }
@@ -60,12 +64,24 @@ public class SeleniumTestHelper {
         return UIObject.DEBUG_ID_PREFIX + id;
     }
 
+    protected String linkId(String link) {
+        return "link=" + link;
+    }
+
     protected void open(String url) {
         try {
             selenium.open(url);
         } catch (final UnsupportedOperationException e) {
             System.err.println("Seems that selenium server is not running; run before: 'mvn selenium:start-server' ");
         }
+    }
+
+    protected void setSpeed(int milliseconds) {
+        selenium.setSpeed("" + milliseconds);
+    }
+
+    protected void type(String id, String text) {
+        selenium.type(id, text);
     }
 
     protected void wait(int milliseconds) {
@@ -83,7 +99,8 @@ public class SeleniumTestHelper {
                 fail("timeout");
             }
             try {
-                if (selenium.getText(id).indexOf(text) < 0) {
+                String selText = selenium.getText(id);
+                if (selText.indexOf(text) >= 0) {
                     break;
                 }
             } catch (Exception e) {

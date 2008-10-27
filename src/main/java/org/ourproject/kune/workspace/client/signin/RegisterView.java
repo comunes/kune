@@ -22,6 +22,8 @@ public interface RegisterView extends SignInAbstractView {
 
     void showWelcolmeDialog();
 
+    void showWelcolmeDialogNoHomepage();
+
     boolean wantPersonalHomepage();
 
 }

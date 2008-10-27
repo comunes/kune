@@ -17,8 +17,11 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
     static RegisterForm registerForm;
 
-    private static final String CANCEL_BUTTON_ID = "kune-regp-cb";
-    private static final String REGISTER_BUTTON_ID = "kune-regp-rb";
+    public static final String CANCEL_BUTTON_ID = "k-regp-cb";
+    public static final String REGISTER_BUTTON_ID = "k-regp-rb";
+    public static final String REGISTER_FORM = "k-regp-p";
+
+    public static final String WELCOME_OK_BUTTON = "k-regp-okbt";
 
     public RegisterPanel(final RegisterPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
             Session session, Images images) {
@@ -42,6 +45,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
         registerForm.setWidth(360);
         panel.add(registerForm.getForm());
         add(panel);
+        panel.setId(REGISTER_FORM);
     }
 
     public String getCountry() {
@@ -93,7 +97,15 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
                 i18n.t("Now you can participate more actively in this site with other people and groups. "
                         + "You can also use your personal space to publish contents. "
                         + "Your email is not verified, please follow the instructions you will receive by email."),
-                i18n.t("Ok"), true, true, 400, 270);
+                i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 400, 210);
+        welcomeDialog.show();
+    }
+
+    public void showWelcolmeDialogNoHomepage() {
+        InfoDialog welcomeDialog = new InfoDialog(i18n.t("Welcome"), i18n.t("Thanks for registering"),
+                i18n.t("Now you can participate more actively in this site with other people and groups. "
+                        + "Your email is not verified, please follow the instructions you will receive by email."),
+                i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 400, 210);
         welcomeDialog.show();
     }
 

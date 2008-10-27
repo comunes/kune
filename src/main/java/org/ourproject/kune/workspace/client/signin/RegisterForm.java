@@ -36,16 +36,17 @@ public class RegisterForm extends DefaultForm {
 
     private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
 
-    private static final String NICK_FIELD = "kune-urf-nick-f";
-    private static final String EMAIL_FIELD = "kune-urf-email-f";
-    private static final String LONGNAME_FIELD = "kune-urf-long_name-f";
-    private static final String PASSWORD_FIELD = "kune-urf-password-f";
-    private static final String PASSWORD_FIELD_DUP = "kune-urf-passwordDup-f";
-    private static final String LANG_FIELD = "kune-urf-lang-f";
-    private static final String COUNTRY_FIELD = "kune-urf-country-f";
-    private static final String TIMEZONE_FIELD = "kune-urf-timezone-f";
-    private static final String WANNAPERSONALHOMEPAGE_FIELD = "kune-urf-wphp-f";
-    private static final String NOPERSONALHOMEPAGE_FIELD = "kune-urf-nphp-f";
+    public static final String NICK_FIELD = "k-urf-nick-f";
+    public static final String EMAIL_FIELD = "k-urf-email-f";
+    public static final String LONGNAME_FIELD = "k-urf-long_name-f";
+    public static final String PASSWORD_FIELD = "k-urf-password-f";
+    public static final String PASSWORD_FIELD_DUP = "k-urf-passwordDup-f";
+    public static final String LANG_FIELD = "k-urf-lang-f";
+    public static final String COUNTRY_FIELD = "k-urf-country-f";
+    public static final String TIMEZONE_FIELD = "k-urf-timezone-f";
+    public static final String WANNAPERSONALHOMEPAGE_ID = "k-urf-wphp-id";
+    public static final String NOPERSONALHOMEPAGE_ID = "k-urf-nphp-id";
+    public static final String WANTHOMEPAGE_FIELD = "k-urf-wphp-f";
 
     private final TextField shortNameRegField;
     private final TextField longNameRegField;
@@ -101,7 +102,7 @@ public class RegisterForm extends DefaultForm {
 
         passwdRegFieldDup = new TextField();
         passwdRegFieldDup.setFieldLabel(i18n.t("Retype password"));
-        passwdRegField.setName(PASSWORD_FIELD_DUP);
+        passwdRegFieldDup.setName(PASSWORD_FIELD_DUP);
         passwdRegFieldDup.setPassword(true);
         passwdRegFieldDup.setAllowBlank(false);
         passwdRegFieldDup.setMinLength(6);
@@ -114,7 +115,7 @@ public class RegisterForm extends DefaultForm {
             }
         });
         passwdRegFieldDup.setValidationEvent(false);
-        passwdRegField.setId(PASSWORD_FIELD_DUP);
+        passwdRegFieldDup.setId(PASSWORD_FIELD_DUP);
         add(passwdRegFieldDup);
 
         emailRegField = new TextField();
@@ -131,6 +132,7 @@ public class RegisterForm extends DefaultForm {
         langStore.load();
 
         languageCombo = new ComboBox();
+        languageCombo.setLazyRender(true);
         languageCombo.setName(LANG_FIELD);
         languageCombo.setMinChars(1);
         languageCombo.setFieldLabel(i18n.t("Language"));
@@ -150,13 +152,14 @@ public class RegisterForm extends DefaultForm {
         languageCombo.setPageSize(7);
         languageCombo.setForceSelection(true);
         languageCombo.setValidationEvent(false);
-        languageCombo.setId(LANG_FIELD);
+        // languageCombo.setId(LANG_FIELD);
         add(languageCombo);
 
         final Store countryStore = new SimpleStore(new String[] { "abbr", "country" }, session.getCountriesArray());
         countryStore.load();
 
         countryCombo = new ComboBox();
+        countryCombo.setLazyRender(true);
         countryCombo.setName(COUNTRY_FIELD);
         countryCombo.setMinChars(1);
         countryCombo.setFieldLabel(i18n.t("Country"));
@@ -175,13 +178,14 @@ public class RegisterForm extends DefaultForm {
         countryCombo.setPageSize(7);
         countryCombo.setForceSelection(true);
         countryCombo.setValidationEvent(false);
-        countryCombo.setId(COUNTRY_FIELD);
+        // countryCombo.setId(COUNTRY_FIELD);
         add(countryCombo);
 
         final Store timezoneStore = new SimpleStore(new String[] { "id" }, session.getTimezones());
         timezoneStore.load();
 
         timezoneCombo = new ComboBox();
+        timezoneCombo.setLazyRender(true);
         timezoneCombo.setName(TIMEZONE_FIELD);
         timezoneCombo.setMinChars(1);
         timezoneCombo.setFieldLabel(i18n.t("Timezone"));
@@ -200,7 +204,7 @@ public class RegisterForm extends DefaultForm {
         timezoneCombo.setPageSize(7);
         timezoneCombo.setForceSelection(true);
         timezoneCombo.setValidationEvent(false);
-        timezoneCombo.setId(TIMEZONE_FIELD);
+        // timezoneCombo.setId(TIMEZONE_FIELD);
         add(timezoneCombo);
 
         final FieldSet personalSpaceFieldSet = new FieldSet(i18n.t("Do you want a personal homepage?"));
@@ -209,10 +213,10 @@ public class RegisterForm extends DefaultForm {
         noPersonalHomePage = new Radio();
         personalSpaceFieldSet.setCollapsible(false);
         createRadio(personalSpaceFieldSet, wantPersonalHomePage,
-                i18n.t("Yes, I want a homepage for publish my contents."), WANNAPERSONALHOMEPAGE_FIELD);
+                i18n.t("Yes, I want a homepage for publish my contents."), WANNAPERSONALHOMEPAGE_ID);
         wantPersonalHomePage.setChecked(true);
         createRadio(personalSpaceFieldSet, noPersonalHomePage, i18n.t("No, I don't want. Maybe in the future."),
-                NOPERSONALHOMEPAGE_FIELD);
+                NOPERSONALHOMEPAGE_ID);
         add(personalSpaceFieldSet);
     }
 
@@ -253,7 +257,7 @@ public class RegisterForm extends DefaultForm {
     }
 
     private void createRadio(final FieldSet fieldSet, final Radio radio, final String radioLabel, final String radioId) {
-        radio.setName(radioId);
+        radio.setName(WANTHOMEPAGE_FIELD);
         radio.setBoxLabel(i18n.t(radioLabel));
         radio.setAutoCreate(true);
         radio.setHideLabel(true);

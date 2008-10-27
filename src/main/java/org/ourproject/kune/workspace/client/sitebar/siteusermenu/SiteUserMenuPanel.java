@@ -35,10 +35,11 @@ import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
 public class SiteUserMenuPanel implements SiteUserMenuView {
 
-    private static final String LOGGED_USER_MENU = "kune-sump-lum";
-    private static final String USER_PREFERENCES_MENU_ITEM = "kune-sump-uprmi";
-    private static final String USER_HOME_PAGE_MENU_ITEM = "kune-sump-hpmi";
-    private static final String USER_PARTICIPATION_MENU_ITEM = "kune-sump-upami";
+    public static final String YOUR_HOMEPAGE = "Your homepage";
+    public static final String LOGGED_USER_MENU = "kune-sump-lum";
+    public static final String USER_PREFERENCES_MENU_ITEM = "kune-sump-uprmi";
+    public static final String USER_HOME_PAGE_MENU_ITEM = "kune-sump-hpmi";
+    public static final String USER_PARTICIPATION_MENU_ITEM = "kune-sump-upami";
     private final PushButton loggedUserMenu;
     private final Widget separator;
     private final Menu userMenu;
@@ -57,7 +58,8 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
                 userMenu.showAt(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 10);
             }
         });
-        final Item userHomePage = new Item(i18n.t("Your homepage"));
+        final Item userHomePage = new Item(i18n.t(YOUR_HOMEPAGE));
+        userHomePage.setId(USER_HOME_PAGE_MENU_ITEM);
         userHomePage.setIcon("images/group-home.gif");
         userHomePage.addListener(new BaseItemListenerAdapter() {
             @Override
@@ -66,7 +68,6 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
                 presenter.onUserHomePage();
             }
         });
-        userHomePage.setId(USER_HOME_PAGE_MENU_ITEM);
         userMenu.addItem(userHomePage);
         final Item userPreferences = new Item(i18n.t("Your preferences"));
         userPreferences.setId(USER_PREFERENCES_MENU_ITEM);

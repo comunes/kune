@@ -16,8 +16,9 @@ import com.gwtext.client.widgets.event.WindowListenerAdapter;
 public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
     public static final String ERROR_MSG = "k-sigp-errmsg";
-    public static final String CANCEL_BUTTON_ID = "kune-signinp-cb";
-    public static final String SIGN_IN_BUTTON_ID = "kune-signinp-sib";
+    public static final String CANCEL_BUTTON_ID = "k-signinp-cb";
+    public static final String SIGN_IN_BUTTON_ID = "k-signinp-sib";
+    public static final String CREATE_ONE = "k-signinp-create";
     static SignInForm signInForm;
     private final SignInPresenter presenter;
 
@@ -77,6 +78,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
         HorizontalPanel hp = new HorizontalPanel();
         final Label dontHaveAccountLabel = new Label(i18n.t("Don't have an account?"));
         final Label registerLabel = new Label(i18n.t("Create one."));
+        registerLabel.ensureDebugId(CREATE_ONE);
         registerLabel.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
                 presenter.onAccountRegister();

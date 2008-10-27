@@ -23,6 +23,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class RegisterPresenter extends SignInAbstractPresenter implements Register {
 
+    public static final String EMAIL_IN_USE = "This email in in use by other person, try with another.";
+    public static final String NAME_IN_USE = "This name in already in use, try with a different name.";
     private RegisterView view;
     private final Provider<UserServiceAsync> userServiceProvider;
     private final Provider<SignIn> signInProvider;
@@ -69,7 +71,7 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
             final TimeZoneDTO timezone = new TimeZoneDTO();
             timezone.setId(view.getTimezone());
 
-            boolean wantPersonalHomepage = view.wantPersonalHomepage();
+            final boolean wantPersonalHomepage = view.wantPersonalHomepage();
 
             final UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view.getRegisterPassword(),
                     view.getEmail(), language, country, timezone, null, true, SubscriptionMode.manual, "blue");
@@ -79,11 +81,9 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
                     try {
                         throw caught;
                     } catch (final EmailAddressInUseException e) {
-                        view.setErrorMessage(i18n.t("This email in in use by other person, try with another."),
-                                SiteErrorType.error);
+                        view.setErrorMessage(i18n.t(EMAIL_IN_USE), SiteErrorType.error);
                     } catch (final GroupNameInUseException e) {
-                        view.setErrorMessage(i18n.t("This name in already in use, try with a different name."),
-                                SiteErrorType.error);
+                        view.setErrorMessage(i18n.t(NAME_IN_USE), SiteErrorType.error);
                     } catch (final Throwable e) {
                         view.setErrorMessage(i18n.t("Error during registration."), SiteErrorType.error);
                         GWT.log("Other kind of exception in user registration" + e.getMessage() + ", "
@@ -94,11 +94,15 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
                 }
 
                 public void onSuccess(final UserInfoDTO userInfoDTO) {
-                    stateManager.gotoToken(userInfoDTO.getHomePage());
                     onSignIn(userInfoDTO);
+                    stateManager.gotoToken(userInfoDTO.getHomePage());
                     view.hide();
                     view.unMask();
-                    view.showWelcolmeDialog();
+                    if (wantPersonalHomepage) {
+                        view.showWelcolmeDialog();
+                    } else {
+                        view.showWelcolmeDialogNoHomepage();
+                    }
                 }
             };
             userServiceProvider.get().createUser(user, wantPersonalHomepage, callback);

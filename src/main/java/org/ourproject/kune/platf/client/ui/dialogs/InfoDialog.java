@@ -26,10 +26,12 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 public class InfoDialog extends BasicDialog {
     public InfoDialog(final String title, final String header, final String text, final String okButtonText,
-            final boolean modal, final boolean autoScroll, final int width, final int height) {
+            String okButtonId, final boolean modal, final boolean autoScroll, final int width, final int height) {
         super(title, modal, autoScroll, width, height);
         final Button okButton = new Button(okButtonText);
+        okButton.setId(okButtonId);
         okButton.addListener(new ButtonListenerAdapter() {
+            @Override
             public void onClick(final Button button, final EventObject e) {
                 hide();
             }
@@ -43,10 +45,12 @@ public class InfoDialog extends BasicDialog {
         final Label textLabel = new Label(text);
 
         panel.add(headerLabel);
-        panel.add(new Label());
         panel.add(textLabel);
+        super.add(panel);
 
-        add(okButton);
+        headerLabel.addStyleName("k-infod-head");
+
+        addButton(okButton);
         show();
     }
 }
