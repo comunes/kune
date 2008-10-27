@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
 import org.ourproject.kune.workspace.client.signin.SignInPresenter;
 
-public class SignInSeleniumTest extends SeleniumTestHelper {
+public class SignInSeleniumTest extends KuneSeleniumTestHelper {
 
     @Test
     public void testSignInAndOut() throws Exception {
