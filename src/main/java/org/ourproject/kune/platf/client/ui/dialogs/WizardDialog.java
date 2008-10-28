@@ -20,13 +20,13 @@
 package org.ourproject.kune.platf.client.ui.dialogs;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.CustomButton;
 
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Toolbar;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public class WizardDialog {
@@ -51,35 +51,39 @@ public class WizardDialog {
         dialog.setResizable(false);
         dialog.setId(dialogId);
 
-        backButton = new CustomButton(i18n.tWithNT("« Back", "used in button"), new ClickListener() {
-            public void onClick(final Widget sender) {
+        backButton = new Button(i18n.tWithNT("« Back", "used in button"), new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
                 listener.onBack();
             }
-        }).getButton();
+        });
         backButton.setId(backId);
         dialog.addButton(backButton);
 
-        nextButton = new CustomButton(i18n.tWithNT("Next »", "used in button"), new ClickListener() {
-            public void onClick(final Widget sender) {
+        nextButton = new Button(i18n.tWithNT("Next »", "used in button"), new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
                 listener.onNext();
             }
-        }).getButton();
+        });
         nextButton.setId(nextId);
         dialog.addButton(nextButton);
 
-        cancelButton = new CustomButton(i18n.tWithNT("Cancel", "used in button"), new ClickListener() {
-            public void onClick(final Widget sender) {
+        cancelButton = new Button(i18n.tWithNT("Cancel", "used in button"), new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
                 listener.onCancel();
             }
-        }).getButton();
+        });
         cancelButton.setId(cancelId);
         dialog.addButton(cancelButton);
 
-        finishButton = new CustomButton(i18n.tWithNT("Finish", "used in button"), new ClickListener() {
-            public void onClick(final Widget sender) {
+        finishButton = new Button(i18n.tWithNT("Finish", "used in button"), new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
                 listener.onFinish();
             }
-        }).getButton();
+        });
         finishButton.setId(finishId);
         dialog.addButton(finishButton);
 

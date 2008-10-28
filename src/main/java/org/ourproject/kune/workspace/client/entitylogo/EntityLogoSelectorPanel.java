@@ -50,7 +50,7 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
 
     public EntityLogoSelectorPanel(final EntityLogoSelectorPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
-        dialog = new BasicDialogExtended(i18n.t("Select an logo for your group"), true, true, 320, 180, "",
+        dialog = new BasicDialogExtended(i18n.t("Select a logo for your group"), true, true, 400, 200, "",
                 i18n.t("Select"), SUBID, i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
                     public void onEvent() {
                         String filename = file.getValueAsString();
@@ -65,14 +65,14 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 });
         dialog.setCollapsible(false);
         dialog.setBorder(false);
-        //dialog.getFirstButton().disable();
+        // dialog.getFirstButton().disable();
 
         formPanel = new FormPanel();
         formPanel.setFrame(true);
         formPanel.setAutoScroll(false);
         formPanel.setBorder(false);
         formPanel.setFileUpload(true);
-        formPanel.setWidth(320);
+        formPanel.setWidth(400);
         formPanel.setMethod(Connection.POST);
         formPanel.setUrl(ICON_UPLOAD_SERVLET);
         formPanel.setWaitMsgTarget(true);
@@ -93,10 +93,15 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 presenter.onSubmitFailed(httpStatus, responseText);
             }
         });
+        // We will automatically resize images to 64x64 pixels. For good
+        // results, start with a square image. For best results, use a 64x64
+        // pixel image.
+        String text = i18n.t("Select an image in your computer as the logo for this group. "
+                + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
+                EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT);
+        Label label = new Label();
+        label.setHtml(text + "<br/><br/>");
 
-        Label label = new Label(i18n.t(
-                "Select an image in your computer as the logo for this group. Recomended size [%d]x[%d] pixels",
-                EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT));
         formPanel.add(label);
         file = new TextField("File", EntityLogoView.LOGO_FORM_FIELD);
         EventCallback keyListener = new EventCallback() {

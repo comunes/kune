@@ -39,6 +39,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class NewGroupPresenter implements NewGroup {
+    public static final String NAME_IN_ALREADY_IN_USE = "This name in already in use, try with a different name.";
     public static final String REGISTER_TO_CREATE_A_GROUP = "Sign in or register to create a group";
     private NewGroupView view;
     private final I18nTranslationService i18n;
@@ -119,7 +120,7 @@ public class NewGroupPresenter implements NewGroup {
                 } catch (final GroupNameInUseException e) {
                     onBack();
                     view.unMask();
-                    setMessage(i18n.t("This name in already in use, try with a different name."), SiteErrorType.error);
+                    setMessage(i18n.t(NAME_IN_ALREADY_IN_USE), SiteErrorType.error);
                 } catch (final Throwable e) {
                     onBack(); // The messageP is in first page of wizard :-/
                     view.unMask();

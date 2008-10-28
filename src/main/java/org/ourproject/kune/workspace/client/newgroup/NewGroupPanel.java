@@ -58,7 +58,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     public static final String PROJ_GROUP_TYPE_ID = "k-ngp-type_of_group_proj";
     public static final String ORG_GROUP_TYPE_ID = "k-ngp-type_of_group_org";
     public static final String COMM_GROUP_TYPE_ID = "k-ngp-type_of_group_comm";
-    public static final String TAGS_FIELD = "tags";
+    public static final String TAGS_FIELD = "k-ngp-tags";
     public static final String NEWGROUP_WIZARD = "k-ngp-wiz";
     public static final String CANCEL_BUTTON = "k-ngp-cancel-bt";
     public static final String CLOSE_BUTTON = "k-ngp-close-bt";
@@ -66,6 +66,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     public static final String NEXT_BUTTON = "k-ngp-next-bt";
     public static final String BACK_BUTTON = "k-ngp-back-bt";
     public static final String ERROR_MSG_BAR = "k-ngp-error-mb";
+    private static final int BIG_FIELD_WIDTH = 280;
 
     private final FormPanel newGroupInitialDataForm;
     private Radio projectRadio;
@@ -83,7 +84,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n,
             final Provider<LicenseChoose> licenseChooseProvider, Images img) {
-        super(i18n.t(REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 480, new WizardListener() {
+        super(i18n.t(REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 430, new WizardListener() {
             public void onBack() {
                 presenter.onBack();
             }
@@ -242,7 +243,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         longNameField = new TextField();
         longNameField.setFieldLabel(i18n.t("Long name"));
         longNameField.setName(LONGNAME_FIELD);
-        longNameField.setWidth(300);
+        longNameField.setWidth(BIG_FIELD_WIDTH);
         longNameField.setAllowBlank(false);
 
         longNameField.setMinLength(3);
@@ -253,7 +254,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         publicDescField = new TextArea();
         publicDescField.setFieldLabel(i18n.t("Public description"));
         publicDescField.setName(PUBLICDESC_FIELD);
-        publicDescField.setWidth(300);
+        publicDescField.setWidth(BIG_FIELD_WIDTH);
         publicDescField.setAllowBlank(false);
         publicDescField.setMinLength(10);
         publicDescField.setMaxLength(255);
@@ -263,7 +264,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         tags = new TextField();
         tags.setFieldLabel(i18n.t("Group tags"));
         tags.setName(TAGS_FIELD);
-        tags.setWidth(300);
+        tags.setWidth(BIG_FIELD_WIDTH);
         tags.setAllowBlank(false);
         final ToolTip fieldToolTip = new ToolTip(i18n.t("Some words related to this group (separated with spaces)."));
         fieldToolTip.applyTo(tags);
@@ -272,7 +273,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         final FieldSet groupTypeFieldSet = new FieldSet(i18n.t("Type of group"));
         groupTypeFieldSet.setStyle("margin-left: 105px");
-        groupTypeFieldSet.setWidth(300);
+        groupTypeFieldSet.setWidth(BIG_FIELD_WIDTH);
 
         form.add(groupTypeFieldSet);
 

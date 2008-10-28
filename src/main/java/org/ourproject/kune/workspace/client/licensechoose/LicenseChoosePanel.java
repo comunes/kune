@@ -42,6 +42,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 
     protected static final String CC_LIC_FIELD = "cc-lic";
     protected static final String OTHER_LIC_FIELD = "other-lic";
+    private static final String BIG_FIELD_WIDTH = "280";
 
     private final RadioButton ccRB;
     private final RadioButton allowModifRB;
@@ -94,6 +95,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
         // Options
 
         optionsBox = new TitledPanel(i18n.t("Options"), options);
+        optionsBox.setWidth(BIG_FIELD_WIDTH);
         generalVP.add(optionsBox);
         generalVP.add(nonCopyleft);
         generalVP.add(copyleft);

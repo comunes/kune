@@ -36,7 +36,6 @@ MIND-TERM:
 http://extjs.com/forum/showthread.php?t=9659
 http://cssjanus.commoner.com/
 <vjrj> Study the possibility to include in SN something similar to "Member since <date>".
-<vjrj> upgrade warp-persist to 1.0
 <samer,vjrj> Add in license choose a free/non-free indicator [3]
 <vjrj> think about more secure login, SRP protocol thread, and:
 http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/97623347b448e16e
@@ -346,5 +345,22 @@ Samer comment:
 >       mucho caos a la hora de compartir cosas de distintos proyectos...
 >       de hecho a los flipados de la licencia de ayer a lo mejor habría
 >       que comentarles esto. ¿Opiniones?
+
+Propuesta:
+------
+Selecciona una licencia para compartir los contenidos de este grupo con el resto de gente:
+
+[X] Usar la licencia <href>copyleft recomendada
+[ ] Quiero elegir otra licencia (uso avanzado) 
+
+Notas:
+* <href>¿Porqué necesito una licencia?
+* <href>¿Qué significa copyleft?
+* Nosotros recomendamos licencias copyleft, sobre todo para trabajos prácticos.
+
+------
+
+esta última sacaría el widget actual con alguna nota adicional, como
+<href>Porque no usar una licencia no comercial.
 
 [?] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

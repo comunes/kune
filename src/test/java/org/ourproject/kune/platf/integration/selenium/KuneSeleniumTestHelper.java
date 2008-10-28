@@ -13,6 +13,8 @@ import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPane
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 
+import com.thoughtworks.selenium.SeleniumException;
+
 public class KuneSeleniumTestHelper extends SeleniumTestHelper {
 
     protected static final String KUNE_BASE_URL = "/kune/?locale=en#";
@@ -23,9 +25,29 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         selenium.refresh();
     }
 
+    protected long genPrefix() {
+        long prefix = new Date().getTime();
+        return prefix;
+    }
+
     protected void ifLoggedSigOut() {
         if (selenium.getText(gid(SiteSignOutLinkPanel.SITE_SIGN_OUT)).indexOf("admin") > 0) {
             signOut();
+        }
+    }
+
+    protected void open(SiteToken token) {
+        open(KUNE_BASE_URL + token.toString());
+    }
+
+    @Override
+    protected void open(String url) {
+        try {
+            selenium.setTimeout("0");
+            super.open(url);
+            selenium.setTimeout("30");
+        } catch (SeleniumException e) {
+            // TODO Auto-generated method stub
         }
     }
 
@@ -66,6 +88,13 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         click(RegisterPanel.REGISTER_BUTTON_ID);
     }
 
+    protected String registerValidUser(boolean wantHomepage) {
+        String shortName = "u" + genPrefix();
+        register(shortName, "some name " + genPrefix(), "somepasswd", "somepasswd", genPrefix() + "@example.com",
+                "Andorra", "English", "MET", wantHomepage);
+        return shortName;
+    }
+
     protected void signIn() {
         signIn("admin", "easyeasy");
     }
@@ -83,21 +112,5 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
 
     protected void verifyLoggedUserShorName(String userShortName) throws Exception {
         waitForTextInside(gid(SiteUserMenuPanel.LOGGED_USER_MENU), userShortName);
-    }
-
-    protected long genPrefix() {
-        long prefix = new Date().getTime();
-        return prefix;
-    }
-
-    protected void open(SiteToken token) {
-        open(KUNE_BASE_URL + token.toString());
-    }
-
-    protected String registerValidUser(boolean wantHomepage) {
-        String shortName = "u" + genPrefix();
-        register(shortName, "some name " + genPrefix(), "somepasswd", "somepasswd", genPrefix() + "@example.com",
-                "Andorra", "English", "MET", wantHomepage);
-        return shortName;
     }
 }
