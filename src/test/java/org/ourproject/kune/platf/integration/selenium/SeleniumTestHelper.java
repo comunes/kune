@@ -44,7 +44,7 @@ public class SeleniumTestHelper {
         // "*firefox /usr/lib/firefox-3.0.3/firefox", url);
 
         // this is a problem... platform dependence ...
-        selenium = new DefaultSelenium("localhost", 4441, "*firefox /usr/lib/firefox/firefox-2-bin",
+        selenium = new DefaultSelenium("localhost", 4441, "*chrome /usr/lib/firefox/firefox-2-bin",
                 "http://localhost:8080/");
         selenium.start();
     }

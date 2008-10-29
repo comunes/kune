@@ -31,7 +31,6 @@ import org.ourproject.kune.workspace.client.themes.WsTheme;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -46,7 +45,7 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
         private static final String LOGO_SMALL_FONT_STYLE = "k-elogo-l-s";
         private static final String LOGO_LARGE_FONT_STYLE = "k-elogo-l-l";
         private final Label logoLabel;
-        private final Hyperlink putYourLogoHL;
+        private final Label putYourLogoHL;
         private final HorizontalPanel putYourLogoHP;
         private final Image logoImage;
 
@@ -59,7 +58,11 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
             logoLabel = new Label();
             final Label expandCell = new Label("");
             putYourLogoHP = new HorizontalPanel();
-            putYourLogoHL = new Hyperlink();
+            putYourLogoHL = new Label();
+
+            logoImage.ensureDebugId(LOGO_IMAGE);
+            logoLabel.ensureDebugId(LOGO_NAME);
+            putYourLogoHL.ensureDebugId(PUT_YOUR_LOGO_LINK);
 
             // Layout
             add(generalHP);
@@ -74,6 +77,7 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
 
             setPutYourLogo();
             expandCell.setStyleName("k-elogop-expand");
+            putYourLogoHL.setStyleName("k-elogo-plink");
             putYourLogoHL.addStyleName("kune-pointer");
             putYourLogoHL.addClickListener(new ClickListener() {
                 public void onClick(final Widget sender) {
@@ -144,6 +148,9 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
             logoLabel.removeStyleName(LOGO_MEDIUM_FONT_STYLE);
         }
     }
+    public static final String LOGO_NAME = "k-elogop-ln";
+    public static final String LOGO_IMAGE = "k-elogop-image";
+    public static final String PUT_YOUR_LOGO_LINK = "k-elogop-pyll";
 
     private final Provider<FileDownloadUtils> downloadProvider;
     private final Provider<EntityLogoSelector> entityLogoSelectorProvider;

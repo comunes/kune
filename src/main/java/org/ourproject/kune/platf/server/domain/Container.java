@@ -123,7 +123,7 @@ public class Container implements HasId, HasStateToken {
 
     @Transient
     public AccessLists getAccessLists() {
-        return hasAccessList() ? accessLists : isLeaf() ? getParent().getAccessLists() : getOwner().getAccessLists();
+        return hasAccessList() ? accessLists : isRoot() ? getOwner().getAccessLists() : getParent().getAccessLists();
     }
 
     public List<ContainerTranslation> getAliases() {

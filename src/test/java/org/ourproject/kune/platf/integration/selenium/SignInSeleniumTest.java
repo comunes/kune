@@ -38,7 +38,8 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
     @Test
     public void registerSomeUser() throws Exception {
         openDefPage();
-        registerValidUser(true);
+        String user = registerValidUser(true);
+        verifyLoggedUserShorName(user);
     }
 
     @Test
@@ -50,6 +51,15 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
         clickOnPushButton(gid(SiteUserMenuPanel.LOGGED_USER_MENU));
         click(linkId(SiteUserMenuPanel.YOUR_HOMEPAGE));
         waitForTextInside(gid(NoHomePagePanel.NO_HOME_PAGE_LABEL), NoHomePagePanel.USER_DON_T_HAVE_A_HOMEPAGE);
+    }
+
+    @Test
+    public void registerUserWithNonOccidentalChars() throws Exception {
+        openDefPage();
+        String user = "u" + genPrefix();
+        register(user, "漢語 中文 华语 汉语" + genPrefix() + genPrefix(), "somepasswd", "somepasswd", genPrefix()
+                + "@example.com", "Andorra", "English", "MET", true);
+        verifyLoggedUserShorName(user);
     }
 
     @Test

@@ -129,7 +129,7 @@
     color: #800000;
 }
 
-.k-entitytextlogo .gwt-Hyperlink a {
+.k-elogo-plink {
     color: #CCC;
     font-size: 85%;
     margin: 5px;
@@ -142,8 +142,7 @@
     background-color: transparent;
 }
 
-.k-entity-default .x-layout-split,.k-entity-default .x-layout-collapsed
-    {
+.k-entity-default .x-layout-split,.k-entity-default .x-layout-collapsed {
     background: #DD8A3D none repeat scroll 0% 50%;
 }
 

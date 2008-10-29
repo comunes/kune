@@ -1,8 +1,12 @@
 package org.ourproject.kune.platf.integration.selenium;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.ourproject.kune.workspace.client.signin.RegisterForm;
 import org.ourproject.kune.workspace.client.signin.RegisterPanel;
 import org.ourproject.kune.workspace.client.signin.SignInForm;
@@ -19,10 +23,39 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
 
     protected static final String KUNE_BASE_URL = "/kune/?locale=en#";
 
+    private static File dirCaptures;
+
+    @BeforeClass
+    public static void beforeKuneClass() {
+        dirCaptures = new File("img/captures/");
+        if (!dirCaptures.exists()) {
+            dirCaptures.mkdir();
+        }
+    }
+
+    private boolean mustCapture;
+
+    @After
+    public void after() throws IOException {
+        if (mustCapture) {
+            selenium.captureEntirePageScreenshot(File.createTempFile("kune", "capture.png", dirCaptures).getAbsolutePath());
+        }
+    }
+
     @Before
     public void before() {
-        selenium.deleteAllVisibleCookies();
-        selenium.refresh();
+        mustCapture = false;
+        try {
+            selenium.deleteAllVisibleCookies();
+            selenium.refresh();
+            selenium.windowMaximize();
+        } catch (final UnsupportedOperationException e) {
+            System.err.println("Seems that selenium server is not running; run before: 'mvn selenium:start-server' ");
+        }
+    }
+
+    public void setMustCapture(boolean mustCapture) {
+        this.mustCapture = mustCapture;
     }
 
     protected long genPrefix() {

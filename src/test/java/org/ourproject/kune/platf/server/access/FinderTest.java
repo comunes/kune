@@ -106,6 +106,11 @@ public class FinderTest {
         verify(contentManager);
     }
 
+    @Test(expected = ContentNotFoundException.class)
+    public void testContainerExistsButContentNotFound() throws Exception {
+        finder.getContent(new StateToken("groupShortName", "toolName", "1", "999"), null);
+    }
+
     @Test
     public void testDefaultGroupContent() throws Exception {
         final Group userGroup = new Group();

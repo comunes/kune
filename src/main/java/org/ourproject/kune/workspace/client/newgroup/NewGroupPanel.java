@@ -50,7 +50,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class NewGroupPanel extends WizardDialog implements NewGroupView {
     public static final String REGISTER_A_NEW_GROUP_TITLE = "Register a new Group";
-    public static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
+    public static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain occidental characters, numbers, and dashes";
     public static final String SHORTNAME_FIELD = "k-ngp-short_name";
     public static final String LONGNAME_FIELD = "k-ngp-long_name";
     public static final String PUBLICDESC_FIELD = "k-ngp-public_desc";

@@ -132,6 +132,9 @@ public class FinderServiceDefault implements FinderService {
     private Content findByContentReference(final String groupName, final String toolName, final Long folderId,
             final Long contentId) throws ContentNotFoundException {
         final Content descriptor = contentManager.find(contentId);
+        if (descriptor == null) {
+            throw new ContentNotFoundException();
+        }
         final Container container = descriptor.getContainer();
 
         if (!container.getId().equals(folderId)) {
