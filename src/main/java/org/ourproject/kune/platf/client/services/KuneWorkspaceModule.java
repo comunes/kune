@@ -309,7 +309,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public RateIt create() {
                 final RateItPresenter presenter = new RateItPresenter($(I18nUITranslationService.class),
-                        $(Session.class), $$(ContentServiceAsync.class), $(StateManager.class));
+                        $(Session.class), $$(ContentServiceAsync.class), $(StateManager.class), $$(RatePresenter.class));
                 final RateItPanel panel = new RateItPanel(presenter, $(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class), $(Images.class));
                 presenter.init(panel);

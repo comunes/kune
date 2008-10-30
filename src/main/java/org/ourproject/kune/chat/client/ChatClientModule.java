@@ -40,7 +40,6 @@ import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
-import org.ourproject.kune.workspace.client.component.WorkspaceDeckPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -78,8 +77,7 @@ public class ChatClientModule extends AbstractModule {
         register(Singleton.class, new Factory<ChatContent>(ChatContent.class) {
             @Override
             public ChatContent create() {
-                final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-                final ChatContentPresenter presenter = new ChatContentPresenter($(EmiteUIDialog.class), panel,
+                final ChatContentPresenter presenter = new ChatContentPresenter($(EmiteUIDialog.class),
                         $$(ChatInfo.class), $$(ChatRoom.class));
                 return presenter;
             }
@@ -88,8 +86,7 @@ public class ChatClientModule extends AbstractModule {
         register(Singleton.class, new Factory<ChatContext>(ChatContext.class) {
             @Override
             public ChatContext create() {
-                final WorkspaceDeckPanel panel = new WorkspaceDeckPanel();
-                final ChatContextPresenter presenter = new ChatContextPresenter(panel, $$(RoomsAdmin.class));
+                final ChatContextPresenter presenter = new ChatContextPresenter($$(RoomsAdmin.class));
                 return presenter;
             }
         });

@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.RateResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
@@ -64,6 +65,7 @@ import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.RateResult;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
@@ -272,13 +274,15 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void rateContent(final String userHash, final StateToken token, final Double value) throws DefaultException {
+    public RateResultDTO rateContent(final String userHash, final StateToken token, final Double value)
+            throws DefaultException {
         final UserSession userSession = getUserSession();
         final User rater = userSession.getUser();
         final Long contentId = ContentUtils.parseId(token.getDocument());
 
         if (userSession.isUserLoggedIn()) {
-            contentManager.rateContent(rater, contentId, value);
+            RateResult result = contentManager.rateContent(rater, contentId, value);
+            return mapper.map(result, RateResultDTO.class);
         } else {
             throw new AccessViolationException();
         }

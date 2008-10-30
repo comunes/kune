@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.platf.client.ui.rate;
 
+import org.ourproject.kune.platf.client.dto.RateResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -44,15 +45,25 @@ public class RatePresenter {
         this.view = view;
     }
 
+    public void setRate(RateResultDTO result) {
+        setRate(result.getRateByUsers(), result.getRate());
+    }
+
     public void setVisible(final boolean visible) {
         view.setVisible(visible);
     }
 
+    private void setRate(Integer rateByUsers, Double rate) {
+        view.setVisible(true);
+        view.setRate(rate);
+        view.setByUsers(rateByUsers);
+    }
+
     private void setState(final StateContentDTO state) {
+        Integer rateByUsers = state.getRateByUsers();
+        Double rate = state.getRate();
         if (state.isRateable()) {
-            view.setVisible(true);
-            view.setRate(state.getRate());
-            view.setByUsers(state.getRateByUsers());
+            setRate(rateByUsers, rate);
         }
     }
 }

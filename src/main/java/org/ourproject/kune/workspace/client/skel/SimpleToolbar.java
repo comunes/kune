@@ -71,4 +71,9 @@ public class SimpleToolbar extends Composite {
     public void removeAll() {
         childPanel.clear();
     }
+
+    public void setHeight(int height) {
+        mainPanel.setHeight("" + height);
+        mainPanel.setCellHeight(childPanel, "" + height);
+    }
 }

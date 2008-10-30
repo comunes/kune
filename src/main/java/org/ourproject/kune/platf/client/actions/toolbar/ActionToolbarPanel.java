@@ -81,6 +81,10 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         if (text != null) {
             button.setText(text);
         }
+        final String id = action.getId();
+        if (id != null) {
+            button.setId(id);
+        }
         button.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
@@ -112,7 +116,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final String itemKey = genMenuKey(pos, menuTitle, menuSubTitle, action.getText());
         Item item = menuItems.get(itemKey);
         if (item == null) {
-            item = createToolbarMenu(pos, menuTitle, menuSubTitle, actionItem);
+            item = createToolbarMenu(pos, menuTitle, menuSubTitle, actionItem, action.getId());
             menuItems.put(itemKey, item);
         }
         setEnableMenuItem(item, enable);
@@ -200,7 +204,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     private Item createToolbarMenu(final ActionToolbarPosition toolBarPos, final String menuTitle,
-            final String menuSubTitle, final ActionItem<T> actionItem) {
+            final String menuSubTitle, final ActionItem<T> actionItem, String id) {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
         final Item item = new Item(action.getText(), new BaseItemListenerAdapter() {
             @Override
@@ -209,6 +213,9 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             }
         });
         item.setIcon(action.getIconUrl());
+        if (id != null) {
+            item.setId(id);
+        }
 
         final String menuKey = genMenuKey(toolBarPos, menuTitle, null, null);
         final String subMenuKey = genMenuKey(toolBarPos, menuTitle, menuSubTitle, null);

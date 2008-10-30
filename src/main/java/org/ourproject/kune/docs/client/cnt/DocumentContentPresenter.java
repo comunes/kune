@@ -70,6 +70,10 @@ public class DocumentContentPresenter implements DocumentContent {
         });
     }
 
+    public void attach() {
+        toolbar.attach();
+    }
+
     public void detach() {
         toolbar.detach();
     }

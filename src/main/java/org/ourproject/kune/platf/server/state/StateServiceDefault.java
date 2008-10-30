@@ -103,6 +103,7 @@ public class StateServiceDefault implements StateService {
         if (userLogged != User.UNKNOWN_USER) {
             state.setCurrentUserRate(contentManager.getRateContent(userLogged, content));
         }
+        // FIXME: user RateResult
         Double rateAvg = contentManager.getRateAvg(content);
         state.setRate(rateAvg != null ? rateAvg : 0D);
         Long rateByUsers = contentManager.getRateByUsers(content);

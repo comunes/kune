@@ -21,6 +21,8 @@ package org.ourproject.kune.docs.client.cnt;
 
 public interface DocumentContent {
 
+    void attach();
+
     void detach();
 
     void refreshState();

@@ -73,6 +73,54 @@ public class StateManagerTest {
 
     @SuppressWarnings("unchecked")
     @Test
+    public void oneBeforeStateChangeListenerAddAndRemove() {
+        BeforeStateChangeListener listener1 = Mockito.mock(BeforeStateChangeListener.class);
+        BeforeStateChangeListener listener2 = Mockito.mock(BeforeStateChangeListener.class);
+        String newToken = "something";
+        Mockito.stub(listener1.beforeChange(newToken)).toReturn(false);
+        Mockito.stub(listener2.beforeChange(newToken)).toReturn(false);
+        stateManager.addBeforeStateChangeListener(listener1);
+        stateManager.addBeforeStateChangeListener(listener2);
+        stateManager.removeBeforeStateChangeListener(listener1);
+        stateManager.removeBeforeStateChangeListener(listener2);
+        stateManager.onHistoryChanged(newToken);
+        Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void oneBeforeStateChangeListenerReturnFalse() {
+        BeforeStateChangeListener listener1 = Mockito.mock(BeforeStateChangeListener.class);
+        BeforeStateChangeListener listener2 = Mockito.mock(BeforeStateChangeListener.class);
+        String newToken = "something";
+        Mockito.stub(listener1.beforeChange(newToken)).toReturn(true);
+        Mockito.stub(listener2.beforeChange(newToken)).toReturn(false);
+        stateManager.addBeforeStateChangeListener(listener1);
+        stateManager.addBeforeStateChangeListener(listener2);
+        stateManager.onHistoryChanged(newToken);
+        Mockito.verify(contentProvider, Mockito.never()).getContent(Mockito.anyString(),
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void oneBeforeStateChangeListenerReturnTrue() {
+        BeforeStateChangeListener listener1 = Mockito.mock(BeforeStateChangeListener.class);
+        BeforeStateChangeListener listener2 = Mockito.mock(BeforeStateChangeListener.class);
+        String newToken = "something";
+        Mockito.stub(listener1.beforeChange(newToken)).toReturn(true);
+        Mockito.stub(listener2.beforeChange(newToken)).toReturn(true);
+        stateManager.addBeforeStateChangeListener(listener1);
+        stateManager.addBeforeStateChangeListener(listener2);
+        stateManager.onHistoryChanged(newToken);
+        Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
     public void siteTokenFirstLoadDefContentAndFireListener() {
         final Listener listener = Mockito.mock(Listener.class);
         final String token = SiteToken.signin.toString();

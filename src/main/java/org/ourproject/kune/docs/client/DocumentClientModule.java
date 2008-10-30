@@ -30,12 +30,11 @@ import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderPresenter;
 import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
 import org.ourproject.kune.docs.client.cnt.reader.ui.DocumentReaderPanel;
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
-import org.ourproject.kune.docs.client.ctx.DocumentContextPanel;
 import org.ourproject.kune.docs.client.ctx.DocumentContextPresenter;
 import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
+import org.ourproject.kune.docs.client.ctx.admin.AdminContextPanel;
 import org.ourproject.kune.docs.client.ctx.admin.AdminContextPresenter;
 import org.ourproject.kune.docs.client.ctx.admin.AdminContextView;
-import org.ourproject.kune.docs.client.ctx.admin.ui.AdminContextPanel;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
@@ -82,9 +81,8 @@ public class DocumentClientModule extends AbstractModule {
             public DocumentClientTool create() {
                 $(DocumentClientActions.class);
                 return new DocumentClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
-                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $$(DocumentContext.class),
-                        $$(ContentServiceAsync.class), $(ContentActionRegistry.class),
-                        $(DragDropContentRegistry.class), $(ContentIconsRegistry.class));
+                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(DragDropContentRegistry.class),
+                        $(ContentIconsRegistry.class));
             }
         });
 
@@ -95,7 +93,8 @@ public class DocumentClientModule extends AbstractModule {
                         $(Session.class), $(StateManager.class), $$(ContentServiceAsync.class),
                         $$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
                         $(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
-                        $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentContent.class));
+                        $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentContent.class),
+                        $$(AdminContext.class));
             }
         });
 
@@ -122,7 +121,8 @@ public class DocumentClientModule extends AbstractModule {
                 final AdminContextPresenter presenter = new AdminContextPresenter($(Session.class),
                         $(StateManager.class), $$(TagsSummary.class), $$(ContentServiceAsync.class),
                         $(EntityTitle.class), $(EntitySubTitle.class));
-                final AdminContextView view = new AdminContextPanel(presenter, $(I18nUITranslationService.class));
+                final AdminContextView view = new AdminContextPanel(presenter, $(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -133,8 +133,6 @@ public class DocumentClientModule extends AbstractModule {
             public DocumentContext create() {
                 final DocumentContextPresenter presenter = new DocumentContextPresenter($(StateManager.class),
                         $$(ContextNavigator.class), $$(AdminContext.class));
-                final DocumentContextPanel panel = new DocumentContextPanel($(WorkspaceSkeleton.class));
-                presenter.init(panel);
                 return presenter;
             }
         });

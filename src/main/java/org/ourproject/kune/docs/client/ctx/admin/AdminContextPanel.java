@@ -17,18 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.ctx.admin.ui;
+package org.ourproject.kune.docs.client.ctx.admin;
 
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.docs.client.ctx.admin.AdminContextPresenter;
-import org.ourproject.kune.docs.client.ctx.admin.AdminContextView;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class AdminContextPanel extends VerticalPanel implements AdminContextView {
@@ -55,10 +55,16 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     // private final String language_item;
     // private final String tags_item;
 
-    public AdminContextPanel(final AdminContextPresenter presenter, final I18nTranslationService i18n) {
+    private final WorkspaceSkeleton ws;
+    private final Label testLabel;
+
+    public AdminContextPanel(final AdminContextPresenter presenter, final I18nTranslationService i18n,
+            WorkspaceSkeleton ws) {
+        this.ws = ws;
+        testLabel = new Label("Admin ctx");
         // this.presenter = presenter;
         // this.i18n = i18n;
-        // //options = new IndexedStackPanelWithSubItems();
+        // options = new IndexedStackPanelWithSubItems();
         // //options.addStyleName("kune-AdminContextPanel");
         //
         // //add(options);
@@ -69,6 +75,18 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
         // perms_item = i18n.t("Permissions");
         // language_item = i18n.t("Language");
         // tags_item = i18n.t("Tags");
+    }
+
+    public void attach() {
+        if (!testLabel.isAttached()) {
+            ws.getEntityWorkspace().setContext(testLabel);
+        }
+    }
+
+    public void detach() {
+        if (testLabel.isAttached()) {
+            testLabel.removeFromParent();
+        }
     }
 
     public void removeAccessListComponent() {
@@ -186,22 +204,24 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
         // tagsComponent = createTagsComponent();
         // }
         // if (!options.containsItem(tags_item)) {
-        // addComponent(tags_item, i18n.t("Keywords or terms associated with
-        // this work"), tagsComponent);
+        // addComponent(tags_item,
+        // i18n.t("Keywords or terms associated with this work"),
+        // tagsComponent);
         // }
         // tagsField.setValue(tags);
+        // }
+        //
+        // private void addComponent(final String header, final String
+        // headerTitle,
+        // final VerticalPanel panel) {
+        // panel.addStyleName("kune-AdminContextPanel-inner-wrap");
+        // final VerticalPanel vp = options.addStackItem(header, headerTitle,
+        // false);
+        // vp.setStyleName("kune-AdminContextPanel-inner");
+        // vp.add(panel);
+        // vp.setCellWidth(panel, "100%");
+        // vp.setWidth("100%");
     }
-
-    // private void addComponent(final String header, final String headerTitle,
-    // final VerticalPanel panel) {
-    // panel.addStyleName("kune-AdminContextPanel-inner-wrap");
-    // final VerticalPanel vp = options.addStackItem(header, headerTitle,
-    // false);
-    // vp.setStyleName("kune-AdminContextPanel-inner");
-    // vp.add(panel);
-    // vp.setCellWidth(panel, "100%");
-    // vp.setWidth("100%");
-    // }
 
     // private FormPanel createDefaultForm() {
     // final FormPanel form = new FormPanel();

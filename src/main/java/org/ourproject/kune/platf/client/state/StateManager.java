@@ -30,11 +30,13 @@ import com.google.gwt.user.client.HistoryListener;
 
 public interface StateManager extends HistoryListener {
 
+    void addBeforeStateChangeListener(BeforeStateChangeListener listener);
+
     void addSiteToken(String token, Listener<StateToken> whenToken);
 
-    void gotoToken(StateToken state);
+    void gotoToken(StateToken newToken);
 
-    void gotoToken(String token);
+    void gotoToken(String newToken);
 
     void onGroupChanged(Listener2<GroupDTO, GroupDTO> listener);
 
@@ -45,6 +47,8 @@ public interface StateManager extends HistoryListener {
     void onToolChanged(Listener2<String, String> listener);
 
     void reload();
+
+    void removeBeforeStateChangeListener(BeforeStateChangeListener listener);
 
     void removeSiteToken(String token);
 

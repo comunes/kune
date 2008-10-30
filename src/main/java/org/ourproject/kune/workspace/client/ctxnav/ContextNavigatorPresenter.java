@@ -23,7 +23,6 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
@@ -94,18 +93,27 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         editOnNextStateChange = false;
     }
 
+    public void attach() {
+        // FIXME At the moment detach (removeFromParent) destroy the gwt-eext
+        // TreePanel and the widget must be recreated (cannot be attached again
+        // like in gwt)
+        setState(session.getCurrentState(), true);
+        toolbar.attach();
+    }
+
     public void clear() {
         toolbar.clear();
         view.clear();
         actionsByItem.clear();
     }
 
-    public void editItem(final StateToken stateToken) {
-        view.editItem(genId(stateToken));
+    public void detach() {
+        view.detach();
+        toolbar.detach();
     }
 
-    public View getView() {
-        return view;
+    public void editItem(final StateToken stateToken) {
+        view.editItem(genId(stateToken));
     }
 
     public void gotoToken(final String token) {
@@ -167,9 +175,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         contentServiceProvider.get().getContent(session.getUserHash(), stateToken,
                 new AsyncCallbackSimple<StateAbstractDTO>() {
                     public void onSuccess(final StateAbstractDTO state) {
-                        if (state instanceof StateContainerDTO) {
-                            setState((StateContainerDTO) state, false);
-                        }
+                        setState(state, false);
                     }
                 });
     }
@@ -331,6 +337,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
                     ImageSize.thumb));
         } else {
             return null;
+        }
+    }
+
+    private void setState(final StateAbstractDTO state, boolean select) {
+        if (state instanceof StateContainerDTO) {
+            setState((StateContainerDTO) state, select);
         }
     }
 

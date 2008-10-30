@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.rate;
 
+import org.ourproject.kune.platf.client.dto.RateResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -40,18 +41,20 @@ public class RateItPresenter implements RateIt {
     private final I18nTranslationService i18n;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final Session session;
-    private final StateManager stateManager;
+    private final Provider<RatePresenter> ratePresenterProv;
 
     public RateItPresenter(final I18nTranslationService i18n, final Session session,
-            final Provider<ContentServiceAsync> contentServiceProvider, final StateManager stateManager) {
+            final Provider<ContentServiceAsync> contentServiceProvider, final StateManager stateManager,
+            Provider<RatePresenter> ratePresenterProvider) {
         this.i18n = i18n;
         this.session = session;
         this.contentServiceProvider = contentServiceProvider;
-        this.stateManager = stateManager;
+        this.ratePresenterProv = ratePresenterProvider;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 if (state instanceof StateContentDTO) {
-                    setState((StateContentDTO) state);
+                    StateContentDTO stateContentDTO = (StateContentDTO) state;
+                    setState(stateContentDTO.isRateable(), stateContentDTO.getCurrentUserRate());
                 } else {
                     view.setVisible(false);
                 }
@@ -91,11 +94,15 @@ public class RateItPresenter implements RateIt {
         Site.showProgressProcessing();
         final StateAbstractDTO currentState = session.getCurrentState();
         contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getStateToken(), newValue,
-                new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
+                new AsyncCallbackSimple<RateResultDTO>() {
+                    public void onSuccess(final RateResultDTO result) {
                         Site.hideProgress();
                         Site.info(i18n.t("Content rated"));
-                        stateManager.reload();
+                        if (currentState.getStateToken().equals(session.getCurrentStateToken())) {
+                            session.getContentState().setRate(result);
+                            setState(true, result.getCurrentUserRate());
+                            ratePresenterProv.get().setRate(result);
+                        }
                     }
                 });
     }
@@ -138,14 +145,16 @@ public class RateItPresenter implements RateIt {
         }
     }
 
-    private void setState(final StateContentDTO state) {
-        if (state.isRateable()) {
+    private void setState(boolean isRateable, Double currentUserRate) {
+        if (isRateable) {
             if (session.isLogged()) {
-                setRate(state.getCurrentUserRate());
+                setRate(currentUserRate);
                 view.setVisible(true);
             } else {
                 view.setVisible(false);
             }
+        } else {
+            view.setVisible(false);
         }
     }
 }

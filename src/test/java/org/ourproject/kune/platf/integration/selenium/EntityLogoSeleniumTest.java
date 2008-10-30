@@ -12,7 +12,6 @@ public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
 
     @Test
     public void testEntityLogoUpload() throws Exception {
-        setMustStopFinally(false);
         openDefPage();
         signIn();
         setLogo("kune-logo-400px.png");

@@ -51,6 +51,7 @@ public class StateManagerDefault implements StateManager {
     private final Event<StateAbstractDTO> onSocialNetworkChanged;
     private final Event2<String, String> onToolChanged;
     private final Event2<GroupDTO, GroupDTO> onGroupChanged;
+    private final BeforeStateChangeCollection beforeStateChangeCollection;
 
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
             final HistoryWrapper history) {
@@ -77,15 +78,21 @@ public class StateManagerDefault implements StateManager {
             }
         });
         siteTokens = new HashMap<String, Listener<StateToken>>();
+        beforeStateChangeCollection = new BeforeStateChangeCollection();
+    }
+
+    public void addBeforeStateChangeListener(BeforeStateChangeListener listener) {
+        beforeStateChangeCollection.add(listener);
     }
 
     public void addSiteToken(final String token, final Listener<StateToken> listener) {
         siteTokens.put(token, listener);
     }
 
-    public void gotoToken(final StateToken state) {
-        Log.debug("StateManager: history goto-token newItem (" + state + ")");
-        history.newItem(state.getEncoded());
+    public void gotoToken(final StateToken newToken) {
+        Log.debug("StateManager: history goto-token newItem (" + newToken + ")");
+
+        history.newItem(newToken.getEncoded());
     }
 
     public void gotoToken(final String token) {
@@ -97,20 +104,23 @@ public class StateManagerDefault implements StateManager {
     }
 
     public void onHistoryChanged(final String historyToken) {
-        final Listener<StateToken> tokenListener = siteTokens.get(historyToken);
-        Log.debug("StateManager: history token changed (" + historyToken + ")");
-        if (tokenListener == null) {
-            onHistoryChanged(new StateToken(historyToken));
-        } else {
-            StateToken stateToken;
-            if (oldState == null) {
-                // Starting with some token like "signin": load defContent also
-                stateToken = new StateToken();
-                onHistoryChanged(stateToken);
+        if (beforeStateListenersAllowChange(historyToken)) {
+            final Listener<StateToken> tokenListener = siteTokens.get(historyToken);
+            Log.debug("StateManager: history token changed (" + historyToken + ")");
+            if (tokenListener == null) {
+                onHistoryChanged(new StateToken(historyToken));
             } else {
-                stateToken = oldState.getStateToken();
+                StateToken stateToken;
+                if (oldState == null) {
+                    // Starting with some token like "signin": load defContent
+                    // also
+                    stateToken = new StateToken();
+                    onHistoryChanged(stateToken);
+                } else {
+                    stateToken = oldState.getStateToken();
+                }
+                tokenListener.onEvent(stateToken);
             }
-            tokenListener.onEvent(stateToken);
         }
     }
 
@@ -133,6 +143,10 @@ public class StateManagerDefault implements StateManager {
      */
     public void reload() {
         onHistoryChanged(history.getToken());
+    }
+
+    public void removeBeforeStateChangeListener(BeforeStateChangeListener listener) {
+        beforeStateChangeCollection.remove(listener);
     }
 
     public void removeSiteToken(final String token) {
@@ -168,6 +182,15 @@ public class StateManagerDefault implements StateManager {
             state.setUserBuddies(userBuddies);
             onSocialNetworkChanged.fire(state);
         }
+    }
+
+    private boolean beforeStateListenersAllowChange(String newToken) {
+        for (BeforeStateChangeListener listener : beforeStateChangeCollection) {
+            if (!listener.beforeChange(newToken)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void checkGroupAndToolChange(final StateAbstractDTO oldState, final StateAbstractDTO newState) {

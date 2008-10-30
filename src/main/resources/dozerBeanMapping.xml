@@ -366,6 +366,15 @@
 
   <mapping>
     <class-a>
+      org.ourproject.kune.platf.client.dto.RateResultDTO
+    </class-a>
+    <class-b>
+      org.ourproject.kune.platf.server.domain.RateResult
+    </class-b>
+  </mapping>
+
+  <mapping>
+    <class-a>
       org.ourproject.kune.platf.server.domain.Comment
     </class-a>
     <class-b>

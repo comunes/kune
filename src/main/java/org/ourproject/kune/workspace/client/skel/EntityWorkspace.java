@@ -32,11 +32,11 @@ import com.gwtext.client.widgets.layout.BorderLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class EntityWorkspace {
-    private static final String ENTITY_TITLE = "k-entity-title";
-    private static final String ENTITY_SUBTITLE = "k-entity-subtitle";
-    private static final String ENTITY_BOTTOM = "k-entity-bottom";
-    private static final String ENTITY_CONTENT = "k-entity-content";
-    private static final String ENTITY_CONTEXT = "k-entity-context";
+    public static final String ENTITY_TITLE = "k-entity-title";
+    public static final String ENTITY_SUBTITLE = "k-entity-subtitle";
+    public static final String ENTITY_BOTTOM = "k-entity-bottom";
+    public static final String ENTITY_CONTENT = "k-entity-content";
+    public static final String ENTITY_CONTEXT = "k-entity-context";
     private final Panel content;
     private final Panel context;
     private final SimpleToolbar title;
@@ -71,14 +71,14 @@ public class EntityWorkspace {
         bottomPanel.setLayout(new AnchorLayout());
 
         title = new SimpleToolbar();
-        title.setHeight("" + (WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2));
+        title.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2);
         title.setStylePrimaryName(ENTITY_TITLE);
         // title.ensureDebugId(ENTITY_TITLE);
         subTitle = new SimpleToolbar();
         subTitle.setStylePrimaryName(ENTITY_SUBTITLE);
         // subTitle.ensureDebugId(ENTITY_SUBTITLE);
         bottom = new SimpleToolbar();
-        bottom.setHeight("" + (WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2));
+        bottom.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2);
         bottom.setStylePrimaryName(ENTITY_BOTTOM);
         bottom.ensureDebugId(ENTITY_BOTTOM);
 
@@ -89,7 +89,6 @@ public class EntityWorkspace {
         titles.add(subTitle, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
         bottomPanel.add(roundedBottom, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
         titles.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 2);
-        bottomPanel.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT + 2);
 
         final Panel contentWrap = new Panel();
         final Panel contextWrap = new Panel();
@@ -136,7 +135,7 @@ public class EntityWorkspace {
 
         mainAnchorLayout.add(titles, new AnchorLayoutData("100%"));
         mainAnchorLayout.add(cntCtxBorderLayout, new AnchorLayoutData("100% -"
-                + ((WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 3) + 2)));
+                + ((WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 3))));
         mainAnchorLayout.add(bottomPanel, new AnchorLayoutData("100%"));
         mainFitPanel.add(mainAnchorLayout);
     }

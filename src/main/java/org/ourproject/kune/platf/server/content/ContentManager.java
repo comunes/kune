@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import org.ourproject.kune.platf.server.domain.RateResult;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.Manager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
@@ -44,7 +45,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
     Double getRateContent(User user, Content content);
 
-    void rateContent(User rater, Long contentId, Double value) throws DefaultException;
+    RateResult rateContent(User rater, Long contentId, Double value) throws DefaultException;
 
     void removeAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 

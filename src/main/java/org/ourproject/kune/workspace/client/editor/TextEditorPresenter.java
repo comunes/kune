@@ -27,12 +27,18 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.state.BeforeStateChangeListener;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
 
 public class TextEditorPresenter implements TextEditor {
+    public static final int AUTOSAVE_AFTER_FAILS_IN_MILLISECONS = 20000;
+    public static final int AUTOSAVE_IN_MILLISECONDS = 10000;
+    public static final String CLOSE_ID = "k-teditc-close";
+    public static final String SAVE_ID = "k-teditp-save";
     private boolean editingHtml;
     private TextEditorView view;
     private boolean savePending;
@@ -44,16 +50,26 @@ public class TextEditorPresenter implements TextEditor {
     private ActionToolbarButtonDescriptor<StateToken> save;
     private ActionToolbarButtonDescriptor<StateToken> close;
     private final I18nUITranslationService i18n;
+    private final BeforeStateChangeListener beforeStateChangeListener;
+    private String newTokenAfterSave;
+    private final StateManager stateManager;
 
     public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> toolbar,
-            final I18nUITranslationService i18n) {
+            final I18nUITranslationService i18n, StateManager stateManager) {
         this.toolbar = toolbar;
         autoSave = isAutoSave;
         this.i18n = i18n;
+        this.stateManager = stateManager;
         savePending = false;
         editingHtml = false;
         saveAndCloseConfirmed = false;
         createActions();
+
+        beforeStateChangeListener = new BeforeStateChangeListener() {
+            public boolean beforeChange(String newToken) {
+                return beforeTokenChange(newToken);
+            }
+        };
     }
 
     public void editContent(final String content, final Listener<String> onSave, final Listener0 onEditCancelled) {
@@ -62,6 +78,8 @@ public class TextEditorPresenter implements TextEditor {
         toolbar.attach();
         view.attach();
         setContent(content);
+        stateManager.addBeforeStateChangeListener(beforeStateChangeListener);
+        newTokenAfterSave = null;
     }
 
     public String getContent() {
@@ -83,7 +101,7 @@ public class TextEditorPresenter implements TextEditor {
             savePending = true;
             toolbar.setEnableAction(save, true);
             if (autoSave) {
-                view.scheduleSave(10000);
+                view.scheduleSave(AUTOSAVE_IN_MILLISECONDS);
             }
         }
     }
@@ -102,7 +120,7 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     public void onSaveFailed() {
-        view.scheduleSave(20000);
+        view.scheduleSave(AUTOSAVE_AFTER_FAILS_IN_MILLISECONS);
         if (saveAndCloseConfirmed) {
             saveAndCloseConfirmed = false;
         }
@@ -113,6 +131,7 @@ public class TextEditorPresenter implements TextEditor {
         savePending = false;
         saveAndCloseConfirmed = false;
         toolbar.setEnableAction(save, false);
+        newTokenAfterSave = null;
     }
 
     protected void onCancel() {
@@ -125,6 +144,8 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     protected void onCancelConfirmed() {
+        stateManager.removeBeforeStateChangeListener(beforeStateChangeListener);
+        gotoNewTokenIfNecessary();
         reset();
         view.detach();
         toolbar.detach();
@@ -151,6 +172,17 @@ public class TextEditorPresenter implements TextEditor {
         onSave.onEvent(view.getHTML());
     }
 
+    boolean beforeTokenChange(String newToken) {
+        if (savePending) {
+            newTokenAfterSave = newToken;
+            onCancel();
+            return false;
+        } else {
+            onCancelConfirmed();
+            return true;
+        }
+    }
+
     private void createActions() {
         save = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
                 new Listener<StateToken>() {
@@ -159,6 +191,7 @@ public class TextEditorPresenter implements TextEditor {
                     }
                 });
         save.setTextDescription(i18n.tWithNT("Save", "used in button"));
+        save.setId(SAVE_ID);
         // save.setIconUrl("images/");
 
         close = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
@@ -168,12 +201,20 @@ public class TextEditorPresenter implements TextEditor {
                     }
                 });
         close.setTextDescription(i18n.tWithNT("Close", "used in button"));
+        close.setId(CLOSE_ID);
         // close.setIconUrl("images/");
 
         final ActionItemCollection<StateToken> collection = new ActionItemCollection<StateToken>();
         collection.add(new ActionItem<StateToken>(save, null));
         collection.add(new ActionItem<StateToken>(close, null));
         toolbar.setActions(collection);
+    }
+
+    private void gotoNewTokenIfNecessary() {
+        if (newTokenAfterSave != null) {
+            stateManager.reload();
+            stateManager.gotoToken(newTokenAfterSave);
+        }
     }
 
     private void setContent(final String html) {

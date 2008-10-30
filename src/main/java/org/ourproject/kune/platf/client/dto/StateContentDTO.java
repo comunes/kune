@@ -127,6 +127,12 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
         this.rate = rate;
     }
 
+    public void setRate(RateResultDTO result) {
+        setRate(result.getRate());
+        setRateByUsers(result.getRateByUsers());
+        setCurrentUserRate(result.getCurrentUserRate());
+    }
+
     public void setRateable(boolean isRateable) {
         this.isRateable = isRateable;
     }

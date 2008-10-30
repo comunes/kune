@@ -22,7 +22,6 @@ package org.ourproject.kune.docs.client.ctx.admin;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
@@ -74,8 +73,12 @@ public class AdminContextPresenter implements AdminContext {
                 });
     }
 
+    public void attach() {
+        view.attach();
+    }
+
     public void clear() {
-        // TODO Auto-generated method stub
+        view.reset();
     }
 
     public void delAuthor(final String authorShortName) {
@@ -90,6 +93,10 @@ public class AdminContextPresenter implements AdminContext {
                 });
     }
 
+    public void detach() {
+        view.detach();
+    }
+
     public void doChangeLanguage(final String langCode) {
         Site.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
@@ -100,10 +107,6 @@ public class AdminContextPresenter implements AdminContext {
                         entitySubTitle.setContentLanguage(lang.getEnglishName());
                     }
                 });
-    }
-
-    public View getView() {
-        return view;
     }
 
     public void init(final AdminContextView view) {

@@ -29,24 +29,30 @@ import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 
 public interface AdminContextView extends View {
 
-    void setAccessLists(AccessListsDTO accessLists);
+    void attach();
 
-    void setTags(String tags);
-
-    void setLanguage(I18nLanguageDTO language);
-
-    void setAuthors(List<UserSimpleDTO> authors);
-
-    void setPublishedOn(Date publishedOn);
-
-    void removeLangComponent();
+    void detach();
 
     void removeAccessListComponent();
+
+    void removeAuthorsComponent();
+
+    void removeLangComponent();
 
     void removePublishedOnComponent();
 
     void removeTagsComponent();
 
-    void removeAuthorsComponent();
+    void reset();
+
+    void setAccessLists(AccessListsDTO accessLists);
+
+    void setAuthors(List<UserSimpleDTO> authors);
+
+    void setLanguage(I18nLanguageDTO language);
+
+    void setPublishedOn(Date publishedOn);
+
+    void setTags(String tags);
 
 }

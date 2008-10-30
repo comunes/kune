@@ -127,15 +127,16 @@ public class TextEditorPanel implements TextEditorView {
     }
 
     public void showSaveBeforeDialog() {
-        MessageBox.confirm(i18n.t("Save confirmation"), i18n.t("Save before close?"), new MessageBox.ConfirmCallback() {
-            public void execute(final String btnID) {
-                if (btnID.equals("yes")) {
-                    presenter.onSaveAndClose();
-                } else {
-                    presenter.onCancelConfirmed();
-                }
-            }
-        });
+        MessageBox.confirm(i18n.t("Save confirmation"), i18n.t("Save before closing the editor?"),
+                new MessageBox.ConfirmCallback() {
+                    public void execute(final String btnID) {
+                        if (btnID.equals("yes")) {
+                            presenter.onSaveAndClose();
+                        } else {
+                            presenter.onCancelConfirmed();
+                        }
+                    }
+                });
 
     }
 

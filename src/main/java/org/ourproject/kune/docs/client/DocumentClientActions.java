@@ -29,6 +29,7 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentContent;
+import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
@@ -66,6 +67,8 @@ import org.ourproject.kune.workspace.client.site.Site;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class DocumentClientActions {
@@ -84,6 +87,7 @@ public class DocumentClientActions {
     private final Provider<TextEditor> textEditorProvider;
     private final KuneErrorHandler errorHandler;
     private final DocumentContent documentContent;
+    private final Provider<AdminContext> adminContextProvider;
 
     public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager,
@@ -92,7 +96,7 @@ public class DocumentClientActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
             final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
-            final DocumentContent documentContent) {
+            final DocumentContent documentContent, final Provider<AdminContext> adminContextProvider) {
         this.i18n = i18n;
         this.contextNavigator = contextNavigator;
         this.session = session;
@@ -107,6 +111,7 @@ public class DocumentClientActions {
         this.textEditorProvider = textEditorProvider;
         this.errorHandler = errorHandler;
         this.documentContent = documentContent;
+        this.adminContextProvider = adminContextProvider;
         createActions();
     }
 
@@ -333,6 +338,8 @@ public class DocumentClientActions {
                             public void onSuccess(final Object result) {
                                 final TextEditor editor = textEditorProvider.get();
                                 documentContent.detach();
+                                contextNavigator.detach();
+                                adminContextProvider.get().attach();
                                 editor.editContent(session.getContentState().getContent(), new Listener<String>() {
                                     public void onEvent(final String html) {
                                         Site.showProgressSaving();
@@ -361,9 +368,16 @@ public class DocumentClientActions {
                                 }, new Listener0() {
                                     public void onEvent() {
                                         // onClose
-                                        if (session.getCurrentStateToken().equals(stateToken)) {
-                                            documentContent.refreshState();
-                                        }
+                                        DeferredCommand.addCommand(new Command() {
+                                            public void execute() {
+                                                documentContent.attach();
+                                                adminContextProvider.get().detach();
+                                                contextNavigator.attach();
+                                                if (session.getCurrentStateToken().equals(stateToken)) {
+                                                    documentContent.refreshState();
+                                                }
+                                            }
+                                        });
                                     }
                                 });
                             }

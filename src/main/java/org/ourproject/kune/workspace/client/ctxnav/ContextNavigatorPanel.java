@@ -60,6 +60,8 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     private final ContextNavigatorPresenter presenter;
     private final MenuItemsContainer<StateToken> menuItemsContainer;
 
+    // private final Panel generalPanel;
+
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws, final ActionManager actionManager) {
         this.presenter = presenter;
@@ -69,6 +71,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         fireOnTextChange = true;
         isEditable = false;
         menuItemsContainer = new MenuItemsContainer<StateToken>();
+        // generalPanel = new Panel();
+        // generalPanel.setLayout(new FitLayout());
+        // generalPanel.setAutoScroll(false);
+        // generalPanel.setBorder(false);
     }
 
     public void addItem(final ContextNavigatorItem item) {
@@ -143,6 +149,31 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         }
         menuItemsContainer.clear();
     }
+
+    // public void attach() {
+    // if (!generalPanel.isRendered()) {
+    // Site.info("attach");
+    // ws.getEntityWorkspace().setContext(generalPanel);
+    // generalPanel.doLayout();
+    // }
+    // if (!treePanel.isRendered()) {
+    // Site.info("added");
+    // generalPanel.add(treePanel);
+    // generalPanel.doLayout();
+    // treePanel.doLayout();
+    // }
+    // }
+
+    public void detach() {
+        clear();
+    }
+
+    // public void detach() {
+    // if (generalPanel.isRendered()) {
+    // Site.info("detach");
+    // generalPanel.removeFromParent();
+    // }
+    // }
 
     public void editItem(final String id) {
         treeEditor.startEdit(getNode(id));
@@ -261,16 +292,16 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
                 treePanel.doLayout(false);
             }
         });
-
-        ws.getEntityWorkspace().addContextListener(new ContainerListenerAdapter() {
-            @Override
-            public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
-                    final int rawWidth, final int rawHeight) {
-                // Log.debug("-------w: " + adjWidth + " h: " + adjHeight);
-                // Log.debug("---r---w: " + rawWidth + " h: " + rawHeight);
-            }
-        });
-
+        // ws.getEntityWorkspace().addContextListener(new
+        // ContainerListenerAdapter() {
+        // @Override
+        // public void onResize(final BoxComponent component, final int
+        // adjWidth, final int adjHeight,
+        // final int rawWidth, final int rawHeight) {
+        // // Log.debug("-------w: " + adjWidth + " h: " + adjHeight);
+        // // Log.debug("---r---w: " + rawWidth + " h: " + rawHeight);
+        // }
+        // });
         ws.getEntityWorkspace().setContext(treePanel);
     }
 

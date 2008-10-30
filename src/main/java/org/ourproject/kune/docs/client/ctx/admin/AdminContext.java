@@ -19,13 +19,14 @@
  */
 package org.ourproject.kune.docs.client.ctx.admin;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 
 public interface AdminContext {
+    void attach();
+
     void clear();
 
-    View getView();
+    void detach();
 
     void setState(StateContentDTO content);
 }

@@ -31,7 +31,6 @@ import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 
 public class DocumentContextPresenter implements DocumentContext {
-    private DocumentContextView view;
     private final Provider<ContextNavigator> contextNavigatorProvider;
     private final Provider<AdminContext> adminContextProvider;
 
@@ -45,9 +44,11 @@ public class DocumentContextPresenter implements DocumentContext {
                     StateContainerDTO stateCntCtx = (StateContainerDTO) state;
                     if (DocumentClientTool.NAME.equals(stateCntCtx.getToolName())) {
                         setState(stateCntCtx);
+                        contextNavigatorProvider.get().attach();
                     }
                 } else {
-                    // TODO detach
+                    contextNavigatorProvider.get().detach();
+                    adminContextProvider.get().detach();
                     contextNavigatorProvider.get().clear();
                     adminContextProvider.get().clear();
                 }
@@ -55,24 +56,10 @@ public class DocumentContextPresenter implements DocumentContext {
         });
     }
 
-    public void init(final DocumentContextView view) {
-        this.view = view;
-    }
-
-    public void showAdmin() {
-        final AdminContext adminContext = adminContextProvider.get();
-        view.setContainer(adminContext.getView());
-    }
-
-    public void showFolders() {
-        view.setContainer(contextNavigatorProvider.get().getView());
-    }
-
     private void setState(final StateContainerDTO state) {
         contextNavigatorProvider.get().setState(state, true);
         if (state instanceof StateContentDTO) {
             adminContextProvider.get().setState((StateContentDTO) state);
         }
-        showFolders();
     }
 }

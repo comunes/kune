@@ -32,8 +32,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class EntityLicensePanel implements EntityLicenseView {
     private final Label copyright;
-    private final Image image;
-    private final Label license;
+    private final Image licenseImage;
+    private final Label licenseLabel;
     private final I18nTranslationService i18n;
     private final SimpleToolbar licenseBar;
     private final WorkspaceSkeleton ws;
@@ -43,15 +43,15 @@ public class EntityLicensePanel implements EntityLicenseView {
         this.i18n = i18n;
         this.ws = ws;
         copyright = new Label();
-        image = new Image();
-        license = new Label();
+        licenseImage = new Image();
+        licenseLabel = new Label();
 
         licenseBar = new SimpleToolbar();
         licenseBar.add(copyright);
-        licenseBar.add(license);
+        licenseBar.add(licenseLabel);
         licenseBar.addSpacer();
         licenseBar.addSpacer();
-        licenseBar.add(image);
+        licenseBar.add(licenseImage);
 
         final ClickListener clickListener = new ClickListener() {
             public void onClick(Widget arg0) {
@@ -59,14 +59,14 @@ public class EntityLicensePanel implements EntityLicenseView {
             }
         };
 
-        license.addClickListener(clickListener);
-        image.addClickListener(clickListener);
+        licenseLabel.addClickListener(clickListener);
+        licenseImage.addClickListener(clickListener);
         copyright.setVisible(false);
-        license.setVisible(false);
-        image.setVisible(false);
+        licenseLabel.setVisible(false);
+        licenseImage.setVisible(false);
 
         copyright.addStyleName("kune-Margin-Large-l");
-        license.setStyleName("k-entitylicensepanel-licensetext");
+        licenseLabel.setStyleName("k-entitylicensepanel-licensetext");
     }
 
     public void attach() {
@@ -87,10 +87,10 @@ public class EntityLicensePanel implements EntityLicenseView {
 
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
         copyright.setText(i18n.t("© [%s], under license: ", groupName));
-        license.setText(licenseDTO.getLongName());
+        licenseLabel.setText(licenseDTO.getLongName());
         copyright.setVisible(true);
-        license.setVisible(true);
-        image.setVisible(true);
-        image.setUrl(licenseDTO.getImageUrl());
+        licenseLabel.setVisible(true);
+        licenseImage.setVisible(true);
+        licenseImage.setUrl(licenseDTO.getImageUrl());
     }
 }

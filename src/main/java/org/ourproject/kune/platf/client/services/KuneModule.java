@@ -349,7 +349,7 @@ public class KuneModule extends AbstractModule {
                         contentNavigatorToolbar);
 
                 final TextEditorPresenter presenter = new TextEditorPresenter(true, toolbar,
-                        $(I18nUITranslationService.class));
+                        $(I18nUITranslationService.class), $(StateManager.class));
                 final TextEditorPanel panel = new TextEditorPanel(presenter, $(I18nTranslationService.class),
                         $(WorkspaceSkeleton.class), $(ColorWebSafePalette.class));
                 presenter.init(panel);

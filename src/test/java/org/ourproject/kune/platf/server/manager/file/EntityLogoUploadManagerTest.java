@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import net.sf.json.JSONObject;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -14,7 +12,6 @@ import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.integration.content.ContentServiceIntegrationTest;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoView;
 
 import com.google.inject.Inject;
 
@@ -38,8 +35,9 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
     @Ignore
     public void testErrorResponse() {
-        JSONObject expected = JSONObject.fromObject("{\"success\":false,\"errors\":[{\"id\":\""
-                + EntityLogoView.LOGO_FORM_FIELD + "\",\"msg\":\"Some message\"}]}");
+        // JSONObject expected =
+        // JSONObject.fromObject("{\"success\":false,\"errors\":[{\"id\":\""
+        // + EntityLogoView.LOGO_FORM_FIELD + "\",\"msg\":\"Some message\"}]}");
         // assertEquals(expected, manager.createJsonResponse(false,
         // "Some message"));
     }
@@ -51,7 +49,8 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
     @Ignore
     public void testSuccessResponse() {
-        JSONObject expected = JSONObject.fromObject("{\"success\":true,\"errors\":[{}]}");
+        // JSONObject expected =
+        // JSONObject.fromObject("{\"success\":true,\"errors\":[{}]}");
         // assertEquals(expected, manager.createJsonResponse(true, null));
     }
 

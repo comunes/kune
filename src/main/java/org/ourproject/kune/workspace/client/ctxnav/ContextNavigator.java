@@ -19,18 +19,19 @@
  */
 package org.ourproject.kune.workspace.client.ctxnav;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface ContextNavigator {
 
+    void attach();
+
     void clear();
 
-    void editItem(StateToken stateToken);
+    void detach();
 
-    View getView();
+    void editItem(StateToken stateToken);
 
     boolean isSelected(StateToken stateToken);
 

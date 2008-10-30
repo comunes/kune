@@ -21,7 +21,4 @@ package org.ourproject.kune.docs.client.ctx;
 
 public interface DocumentContext {
 
-    void showAdmin();
-
-    void showFolders();
 }

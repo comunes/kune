@@ -41,6 +41,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.Rate;
+import org.ourproject.kune.platf.server.domain.RateResult;
 import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.Tag;
 import org.ourproject.kune.platf.server.domain.User;
@@ -121,7 +122,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         }
     }
 
-    public void rateContent(final User rater, final Long contentId, final Double value) throws DefaultException {
+    public RateResult rateContent(final User rater, final Long contentId, final Double value) throws DefaultException {
         final Content content = finder.getContent(contentId);
         final Rate oldRate = finder.getRate(rater, content);
         if (oldRate == null) {
@@ -131,6 +132,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             oldRate.setValue(value);
             super.persist(oldRate, Rate.class);
         }
+        Double rateAvg = getRateAvg(content);
+        Long rateByUsers = getRateByUsers(content);
+        return new RateResult(rateAvg != null ? rateAvg : 0D, rateByUsers != null ? rateByUsers.intValue() : 0, value);
     }
 
     public void removeAuthor(final User user, final Long contentId, final String authorShortName)

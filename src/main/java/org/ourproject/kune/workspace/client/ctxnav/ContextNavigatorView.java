@@ -29,6 +29,8 @@ public interface ContextNavigatorView extends View {
 
     void clear();
 
+    void detach();
+
     void editItem(String id);
 
     boolean isSelected(String id);

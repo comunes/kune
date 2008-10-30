@@ -19,19 +19,15 @@
  */
 package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.docs.client.ctx.DocumentContext;
-import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.tool.AbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.ioc.Provider;
 
 public class DocumentClientTool extends AbstractClientTool {
     public static final String TYPE_ROOT = "docs.root";
@@ -46,18 +42,14 @@ public class DocumentClientTool extends AbstractClientTool {
 
     public static final String NAME = "docs";
 
-    private final Provider<DocumentContext> documentContextProvider;
     private final DragDropContentRegistry dragDropContentRegistry;
     private final ContentIconsRegistry contentIconsRegistry;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-            final Provider<DocumentContext> documentContextProvider,
-            final Provider<ContentServiceAsync> contentServiceProvider,
-            final ContentActionRegistry contentActionRegistry, final DragDropContentRegistry dragDropContentRegistry,
+            final DragDropContentRegistry dragDropContentRegistry,
             final ContentIconsRegistry contentIconsRegistry) {
         super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws);
-        this.documentContextProvider = documentContextProvider;
         this.dragDropContentRegistry = dragDropContentRegistry;
         this.contentIconsRegistry = contentIconsRegistry;
         registerDragDropTypes();
@@ -66,16 +58,6 @@ public class DocumentClientTool extends AbstractClientTool {
 
     public String getName() {
         return NAME;
-    }
-
-    @Deprecated
-    public void onCancel() {
-        documentContextProvider.get().showFolders();
-    }
-
-    @Deprecated
-    public void onEdit() {
-        documentContextProvider.get().showAdmin();
     }
 
     private void registerDragDropTypes() {

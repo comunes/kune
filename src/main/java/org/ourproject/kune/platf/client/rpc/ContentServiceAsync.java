@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.RateResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
@@ -59,7 +60,7 @@ public interface ContentServiceAsync {
 
     void markCommentAsAbuse(String userHash, StateToken token, Long commentId, AsyncCallback<CommentDTO> asyncCallback);
 
-    void rateContent(String userHash, StateToken token, Double value, AsyncCallback<?> asyncCallback);
+    void rateContent(String userHash, StateToken token, Double value, AsyncCallback<RateResultDTO> asyncCallback);
 
     void removeAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<?> asyncCallback);
 

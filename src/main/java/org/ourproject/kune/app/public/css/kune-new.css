@@ -416,7 +416,7 @@
 }
 
 .k-entity-bottom div {
-    line-height: 2em;
+    line-height: 24px;
     color: #FFF;
 }
 
@@ -693,6 +693,15 @@
 }
 
 /* others */
+
+/*
+.x-tree-node a span, .x-dd-drag-ghost a span {
+    color:#000000;
+    padding: 1px 0px 1px 1px;
+    text-decoration:none;
+}
+*/
+
 .k-textlinethrough {
     text-decoration: line-through;
     color: red;
