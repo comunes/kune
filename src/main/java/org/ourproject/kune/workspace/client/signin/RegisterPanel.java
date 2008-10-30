@@ -39,7 +39,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
                     public void onEvent() {
                         presenter.onCancel();
                     }
-                }, images, ERRMSG);
+                }, images, ERRMSG, 11);
 
         Panel panel = new Panel();
         panel.setBorder(false);

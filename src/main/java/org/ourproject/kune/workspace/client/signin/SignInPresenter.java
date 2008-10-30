@@ -39,6 +39,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
             view.show();
             view.center();
             Site.hideProgress();
+            view.focusOnNickname();
         } else {
             stateManager.gotoToken(previousStateToken);
         }

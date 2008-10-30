@@ -118,12 +118,17 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     }
 
     protected void doResponse(final HttpServletResponse response, String additionalResponse) throws IOException {
+        doResponse(response, additionalResponse, HttpServletResponse.SC_OK);
+    }
+
+    protected void doResponse(final HttpServletResponse response, String additionalResponse, int responseCode)
+            throws IOException {
         final Writer w = new OutputStreamWriter(response.getOutputStream());
         if (additionalResponse != null) {
             w.write(additionalResponse);
         }
         w.close();
-        response.setStatus(HttpServletResponse.SC_OK);
+        response.setStatus(responseCode);
     }
 
     protected void onFileUploadException(final HttpServletResponse response) throws IOException {

@@ -34,15 +34,15 @@ public class BasicDialogExtended extends BasicDialog {
 
     public BasicDialogExtended(final String title, final boolean modal, final boolean autoscroll, final int width,
             final int heigth, final String icon, final String firstButtonTitle, final String cancelButtonTitle,
-            final Listener0 onFirstButtonClick, Listener0 onCancelButtonClick) {
+            final Listener0 onFirstButtonClick, Listener0 onCancelButtonClick, int tabIndexStart) {
         this(title, modal, autoscroll, width, heigth, icon, firstButtonTitle, Ext.generateId(), cancelButtonTitle,
-                Ext.generateId(), onFirstButtonClick, onCancelButtonClick);
+                Ext.generateId(), onFirstButtonClick, onCancelButtonClick, tabIndexStart);
     }
 
     public BasicDialogExtended(final String title, final boolean modal, final boolean autoscroll, final int width,
             final int heigth, final String icon, final String firstButtonTitle, final String firstButtonId,
             final String cancelButtonTitle, final String cancelButtonId, final Listener0 onFirstButtonClick,
-            final Listener0 onCancelButtonClick) {
+            final Listener0 onCancelButtonClick, int tabIndexStart) {
         super(title, modal, autoscroll, width, heigth);
         setLayout(new FitLayout());
         setCollapsible(false);
@@ -50,6 +50,7 @@ public class BasicDialogExtended extends BasicDialog {
         setIconCls(icon);
 
         firstButton = new Button(firstButtonTitle);
+        firstButton.setId(firstButtonId);
         firstButton.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
@@ -57,18 +58,17 @@ public class BasicDialogExtended extends BasicDialog {
             }
         });
 
-        firstButton.setTabIndex(3);
-        firstButton.setId(firstButtonId);
+        firstButton.setTabIndex(tabIndexStart);
 
         cancel = new Button(cancelButtonTitle);
+        cancel.setId(cancelButtonId);
         cancel.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
                 onCancelButtonClick.onEvent();
             }
         });
-        cancel.setTabIndex(4);
-        cancel.setId(cancelButtonId);
+        cancel.setTabIndex(tabIndexStart + 1);
         addButton(firstButton);
         addButton(cancel);
     }

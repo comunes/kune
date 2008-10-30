@@ -28,6 +28,6 @@ public interface EntityLogo {
     /**
      * Reload the logo from the group reloaded from the server
      */
-    void reloadGroupLogo();
+    void reloadGroupLogoImage();
 
 }

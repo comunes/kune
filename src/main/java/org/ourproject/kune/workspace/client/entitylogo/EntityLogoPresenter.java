@@ -21,15 +21,11 @@
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
 
@@ -39,12 +35,9 @@ public class EntityLogoPresenter implements EntityLogo {
 
     private EntityLogoView view;
     private final Session session;
-    private final Provider<GroupServiceAsync> groupServiceProvider;
 
-    public EntityLogoPresenter(final StateManager stateManager, final WsThemePresenter theme, final Session session,
-            Provider<GroupServiceAsync> groupServiceProvider) {
+    public EntityLogoPresenter(final StateManager stateManager, final WsThemePresenter theme, final Session session) {
         this.session = session;
-        this.groupServiceProvider = groupServiceProvider;
 
         stateManager.onGroupChanged(new Listener2<GroupDTO, GroupDTO>() {
             public void onEvent(final GroupDTO oldGroup, final GroupDTO newGroup) {
@@ -78,23 +71,8 @@ public class EntityLogoPresenter implements EntityLogo {
         setGroupLogo(session.getCurrentState().getGroup());
     }
 
-    public void reloadGroupLogo() {
-        reloadGroupLogo(session.getCurrentStateToken());
-    }
-
-    public void reloadGroupLogo(StateToken groupToken) {
-        groupServiceProvider.get().getGroup(session.getUserHash(), groupToken, new AsyncCallbackSimple<GroupDTO>() {
-            public void onSuccess(GroupDTO group) {
-                StateAbstractDTO currentState = session.getCurrentState();
-                if (currentState.getGroup().getShortName().equals(group.getShortName())) {
-                    // only if we are in the
-                    // same group
-                    view.reloadImage(group);
-                    currentState.setGroup(group);
-                    setGroupLogo(group);
-                }
-            }
-        });
+    public void reloadGroupLogoImage() {
+        view.reloadImage(session.getCurrentState().getGroup());
     }
 
     private void setGroupLogo(final GroupDTO group) {

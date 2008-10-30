@@ -113,6 +113,7 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
         }
 
         public void setLogoImage(final String url) {
+            Image.prefetch(url);
             logoImage.setUrl(url);
         }
 
@@ -167,7 +168,7 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
     }
 
     public void reloadImage(GroupDTO group) {
-        entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "?nocache="
+        entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "&nocache="
                 + new Date().getTime());
     }
 

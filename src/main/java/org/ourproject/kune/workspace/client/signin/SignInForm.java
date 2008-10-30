@@ -21,7 +21,10 @@
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 
 public class SignInForm extends DefaultForm {
     public static final String NICKOREMAIL_FIELD = "kune-sif-nkf";
@@ -30,7 +33,7 @@ public class SignInForm extends DefaultForm {
     private final TextField loginNickOrEmailField;
     private final TextField loginPassField;
 
-    public SignInForm(final I18nTranslationService i18n) {
+    public SignInForm(final SignInPresenter presenter, final I18nTranslationService i18n) {
         super.addStyleName("kune-Margin-Large-trbl");
 
         loginNickOrEmailField = new TextField();
@@ -40,6 +43,7 @@ public class SignInForm extends DefaultForm {
         loginNickOrEmailField.setAllowBlank(false);
         loginNickOrEmailField.setValidationEvent(false);
         loginNickOrEmailField.setId(NICKOREMAIL_FIELD);
+        loginNickOrEmailField.setTabIndex(1);
         super.add(loginNickOrEmailField);
 
         loginPassField = new TextField();
@@ -50,6 +54,16 @@ public class SignInForm extends DefaultForm {
         loginPassField.setAllowBlank(false);
         loginPassField.setValidationEvent(false);
         loginPassField.setId(PASSWORD_FIELD);
+        loginPassField.setTabIndex(2);
+        loginPassField.addListener(new FieldListenerAdapter() {
+            @Override
+            public void onSpecialKey(final Field field, final EventObject e) {
+                if (e.getKey() == 13) {
+                    presenter.onFormSignIn();
+                }
+            }
+        });
+
         super.add(loginPassField);
     }
 

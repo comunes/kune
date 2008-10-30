@@ -8,10 +8,12 @@ import org.junit.Test;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.signin.RegisterPanel;
 import org.ourproject.kune.workspace.client.signin.RegisterPresenter;
+import org.ourproject.kune.workspace.client.signin.SignInForm;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
 import org.ourproject.kune.workspace.client.signin.SignInPresenter;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
+import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPanel;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 
@@ -60,6 +62,20 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
         register(user, "漢語 中文 华语 汉语" + genPrefix() + genPrefix(), "somepasswd", "somepasswd", genPrefix()
                 + "@example.com", "Andorra", "English", "MET", true);
         verifyLoggedUserShorName(user);
+    }
+
+    @Test
+    public void testFocusOnNickAndSignInWithIntro() throws Exception {
+        openDefPage();
+        click(gid(SiteSignInLinkPanel.SITE_SIGN_IN));
+        selenium.keyPress(SignInForm.NICKOREMAIL_FIELD, "\\97");
+        selenium.keyPress(SignInForm.NICKOREMAIL_FIELD, "\\100");
+        selenium.keyPress(SignInForm.NICKOREMAIL_FIELD, "\\109");
+        selenium.keyPress(SignInForm.NICKOREMAIL_FIELD, "\\105");
+        selenium.keyPress(SignInForm.NICKOREMAIL_FIELD, "\\110");
+        type(SignInForm.PASSWORD_FIELD, "easyeasy");
+        selenium.keyPress(SignInForm.PASSWORD_FIELD, "\\13");
+        verifyLoggedUserShorName("admin");
     }
 
     @Test

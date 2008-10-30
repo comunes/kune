@@ -37,7 +37,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
                     public void onEvent() {
                         presenter.onCancel();
                     }
-                }, images, ERROR_MSG);
+                }, images, ERROR_MSG, 3);
         this.presenter = presenter;
 
         super.addListener(new WindowListenerAdapter() {
@@ -49,11 +49,15 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
         Panel panel = new Panel();
         panel.setBorder(false);
-        signInForm = new SignInForm(i18n);
+        signInForm = new SignInForm(presenter, i18n);
         signInForm.setWidth(310);
         panel.add(signInForm.getForm());
         panel.add(createNoAccountRegister());
         add(panel);
+    }
+
+    public void focusOnNickname() {
+        signInForm.focusLogin();
     }
 
     public String getLoginPassword() {

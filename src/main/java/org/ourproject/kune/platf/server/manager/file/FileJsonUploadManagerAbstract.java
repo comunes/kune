@@ -56,7 +56,7 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
     protected void onOtherException(HttpServletResponse response, Exception e) throws IOException {
         super.onOtherException(response, e);
         log.info("Exception: " + e.getCause());
-        e.printStackTrace();
+        // e.printStackTrace();
         doResponse(response, createJsonResponse(false, i18n.t("Error uploading file")).toString());
     }
 
@@ -64,5 +64,4 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
     protected void onSuccess(HttpServletResponse response) throws IOException {
         doResponse(response, createJsonResponse(true, i18n.t("Success uploading")).toString());
     }
-
 }

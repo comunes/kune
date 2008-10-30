@@ -6,14 +6,11 @@ import com.gwtextux.client.widgets.window.ToastWindow;
 
 public class SiteToastMessagePanel implements SiteToastMessageView {
 
-    public static final String MESSAGE = "k-stmess-m";
-
     public SiteToastMessagePanel() {
     }
 
     public void showMessage(String title, String message, SiteErrorType type) {
         ToastWindow toastWindow = new ToastWindow(title, message);
-        toastWindow.setId(MESSAGE);
         String iconCls = "";
         switch (type) {
         case info:

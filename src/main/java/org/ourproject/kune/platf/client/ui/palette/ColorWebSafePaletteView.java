@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.palette;
 
-public interface WebSafePaletteView {
+public interface ColorWebSafePaletteView {
 
     int ROWS = 18;
 

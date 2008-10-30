@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.integration.selenium;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.GroupType;
@@ -8,7 +9,6 @@ import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.site.SiteToken;
-import org.ourproject.kune.workspace.client.site.msg.SiteToastMessagePanel;
 
 public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
 
@@ -24,9 +24,12 @@ public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
 
     @Test
     public void newGroupNotLogged() throws Exception {
+        openDefPage();
         assertFalse(selenium.isTextPresent(NewGroupPanel.NEWGROUP_WIZARD));
+        assertFalse(selenium.isTextPresent(NewGroupPresenter.REGISTER_TO_CREATE_A_GROUP));
         open(SiteToken.newgroup);
-        waitForTextInside(SiteToastMessagePanel.MESSAGE, NewGroupPresenter.REGISTER_TO_CREATE_A_GROUP);
+        wait(1000);
+        assertTrue(selenium.isTextPresent(NewGroupPresenter.REGISTER_TO_CREATE_A_GROUP));
     }
 
     @Test

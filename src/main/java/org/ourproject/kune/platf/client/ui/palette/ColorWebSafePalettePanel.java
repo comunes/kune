@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.TableListener;
  * http://en.wikipedia.org/wiki/Web_colors#Web-safe_colors
  * 
  */
-public class ColorWebSafePalettePanel implements WebSafePaletteView {
+public class ColorWebSafePalettePanel implements ColorWebSafePaletteView {
 
     Grid paletteGrid;
     private final ColorWebSafePalettePresenter presenter;

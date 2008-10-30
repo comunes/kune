@@ -19,6 +19,7 @@
  */package org.ourproject.kune.workspace.client.entitylogo;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.site.Site;
 
@@ -47,7 +48,7 @@ public class EntityLogoSelectorPresenter implements EntityLogoSelector {
 
     public void onSubmitComplete(int httpStatus, String responseText) {
         view.hide();
-        entityLogo.reloadGroupLogo();
+        entityLogo.reloadGroupLogoImage();
     }
 
     public void onSubmitFailed(int httpStatus, String responseText) {
@@ -55,7 +56,11 @@ public class EntityLogoSelectorPresenter implements EntityLogoSelector {
     }
 
     public void show() {
-        view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
-        view.show();
+        session.check(new AsyncCallbackSimple<Object>() {
+            public void onSuccess(Object result) {
+                view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
+                view.show();
+            }
+        });
     }
 }

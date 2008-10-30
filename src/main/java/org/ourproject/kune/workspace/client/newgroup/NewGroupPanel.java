@@ -226,6 +226,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         form.setButtonAlign(Position.RIGHT);
 
         shortNameField = new TextField();
+        shortNameField.setTabIndex(1);
         shortNameField.setFieldLabel(i18n.t("Short name"));
         shortNameField.setName(SHORTNAME_FIELD);
         shortNameField.setWidth(175);
@@ -241,17 +242,18 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         form.add(shortNameField);
 
         longNameField = new TextField();
+        longNameField.setTabIndex(2);
         longNameField.setFieldLabel(i18n.t("Long name"));
         longNameField.setName(LONGNAME_FIELD);
         longNameField.setWidth(BIG_FIELD_WIDTH);
         longNameField.setAllowBlank(false);
-
         longNameField.setMinLength(3);
         longNameField.setMaxLength(50);
         longNameField.setValidationDelay(1000);
         form.add(longNameField);
 
         publicDescField = new TextArea();
+        publicDescField.setTabIndex(3);
         publicDescField.setFieldLabel(i18n.t("Public description"));
         publicDescField.setName(PUBLICDESC_FIELD);
         publicDescField.setWidth(BIG_FIELD_WIDTH);
@@ -262,6 +264,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         form.add(publicDescField);
 
         tags = new TextField();
+        tags.setTabIndex(4);
         tags.setFieldLabel(i18n.t("Group tags"));
         tags.setName(TAGS_FIELD);
         tags.setWidth(BIG_FIELD_WIDTH);
@@ -278,6 +281,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         form.add(groupTypeFieldSet);
 
         projectRadio = new Radio();
+        projectRadio.setTabIndex(5);
         createRadio(groupTypeFieldSet, projectRadio, "Project",
                 "A project is a kind of group in which new members inclusion "
                         + "is moderated by the project administrators. "
@@ -286,10 +290,12 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         projectRadio.setChecked(true);
 
         orgRadio = new Radio();
+        orgRadio.setTabIndex(6);
         createRadio(groupTypeFieldSet, orgRadio, "Organization", "An organization is like a project, "
                 + "but organizations must be a legal entity.", ORG_GROUP_TYPE_ID);
 
         communityRadio = new Radio();
+        communityRadio.setTabIndex(7);
         createRadio(groupTypeFieldSet, communityRadio, "Community", "Communities are social group of persons "
                 + "with shared interests and they are open to new members "
                 + "(for instance the environmental community or the LGBT community). "

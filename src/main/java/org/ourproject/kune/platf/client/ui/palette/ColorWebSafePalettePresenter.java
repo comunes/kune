@@ -24,7 +24,7 @@ import com.calclab.suco.client.listener.Listener;
 public class ColorWebSafePalettePresenter implements ColorWebSafePalette {
 
     private Listener<String> onColorSelected;
-    private WebSafePaletteView view;
+    private ColorWebSafePaletteView view;
 
     public ColorWebSafePalettePresenter() {
     }
@@ -33,7 +33,7 @@ public class ColorWebSafePalettePresenter implements ColorWebSafePalette {
         this.view.hide();
     }
 
-    public void init(final WebSafePaletteView view) {
+    public void init(final ColorWebSafePaletteView view) {
         this.view = view;
     }
 
@@ -49,7 +49,7 @@ public class ColorWebSafePalettePresenter implements ColorWebSafePalette {
 
     private String getColor(final int row, final int col) {
         String color = null;
-        final int pd = row * WebSafePaletteView.COLS + col;
+        final int pd = row * ColorWebSafePaletteView.COLS + col;
         final int da = pd / 6;
         final int ra = pd % 6;
         final int aa = da - ra / 6;

@@ -6,6 +6,8 @@ public interface SignInView extends SignInAbstractView {
 
     void center();
 
+    void focusOnNickname();
+
     String getLoginPassword();
 
     String getNickOrEmail();

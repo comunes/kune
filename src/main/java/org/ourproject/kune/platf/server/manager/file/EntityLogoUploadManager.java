@@ -21,12 +21,15 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Writer;
+
+import javax.servlet.http.HttpServletResponse;
 
 import magick.MagickException;
-import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -40,36 +43,21 @@ import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
-public class EntityLogoUploadManager extends FileJsonUploadManagerAbstract {
+public class EntityLogoUploadManager extends FileUploadManagerAbstract {
 
     private static final long serialVersionUID = 1L;
 
     @Inject
     GroupManager groupManager;
 
-    @Override
-    protected JSONObject createJsonResponse(final boolean success, final String message) {
-        /**
-         * Expect result with this format:
-         * {"success":false,"errors":[{"id":"email","msg":"Already exists"},
-         * {"id":"username","msg":"Already taken"}]}
-         */
+    @Inject
+    I18nTranslationService i18n;
 
-        JSONObject response = null;
-        try {
-            response = new JSONObject();
-            JSONObject[] jsonError = new JSONObject[1];
-            jsonError[0] = new JSONObject();
-            if (!success) {
-                jsonError[0].put("id", EntityLogoView.LOGO_FORM_FIELD);
-                jsonError[0].put("msg", message);
-            }
-            response.put("errors", jsonError);
-            response.put("success", success);
-        } catch (final Exception e) {
-            log.error("Error building response");
-        }
-        return response;
+    @Override
+    protected void beforeRespond(HttpServletResponse response, Writer w) throws IOException {
+        super.beforeRespond(response, w);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/xml");
     }
 
     protected void createUploadedFile(StateToken stateToken, String mimeTypeS, File origFile) throws Exception,
@@ -109,6 +97,58 @@ public class EntityLogoUploadManager extends FileJsonUploadManagerAbstract {
         file.write(tmpOrigFile);
         createUploadedFile(stateToken, mimeTypeS, tmpOrigFile);
         tmpOrigFile.delete();
+    }
+
+    /**
+     * Expect result with this format:
+     * 
+     * <pre>
+     *  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+     *  &lt;response success=&quot;false&quot;&gt;
+     *     &lt;errors&gt;
+     *         &lt;field&gt;
+     *             &lt;id&gt;first&lt;/id&gt;
+     *             &lt;msg&gt;&lt;![CDATA[
+     *             Invalid name. &lt;br /&gt;&lt;i&gt;This is a test validation message from the server &lt;/i&gt;
+     *          ]]&gt;&lt;/msg&gt;
+     *         &lt;/field&gt;
+     *         &lt;field&gt;
+     *             &lt;id&gt;dob&lt;/id&gt;
+     *             &lt;msg&gt;&lt;![CDATA[
+     *             Invalid Date of Birth. &lt;br /&gt;&lt;i&gt;This is a test validation message from the server &lt;/i&gt;
+     *          ]]&gt;&lt;/msg&gt;
+     *         &lt;/field&gt;
+     *     &lt;/errors&gt;
+     * &lt;/response&gt;
+     * </pre>
+     **/
+    protected String createXmlResponse(final boolean success, final String message) {
+        String error = "";
+        if (!success) {
+            error = "<errors><field><id>" + EntityLogoView.LOGO_FORM_FIELD + "</id><msg><![CDATA[" + message
+                    + "]]></msg></field></errors>";
+        }
+        return "<response success=\"" + success + "\">" + error + "</response>";
+    }
+
+    @Override
+    protected void onFileUploadException(HttpServletResponse response) throws IOException {
+        doResponse(response, createXmlResponse(false, i18n.t("Error: File too large")).toString(),
+                HttpServletResponse.SC_BAD_REQUEST);
+    }
+
+    @Override
+    protected void onOtherException(HttpServletResponse response, Exception e) throws IOException {
+        super.onOtherException(response, e);
+        log.info("Exception: " + e.getCause());
+        // e.printStackTrace();
+        doResponse(response, createXmlResponse(false, i18n.t("Error uploading file")).toString(),
+                HttpServletResponse.SC_BAD_REQUEST);
+    }
+
+    @Override
+    protected void onSuccess(HttpServletResponse response) throws IOException {
+        doResponse(response, createXmlResponse(true, i18n.t("Success uploading")).toString());
     }
 
 }

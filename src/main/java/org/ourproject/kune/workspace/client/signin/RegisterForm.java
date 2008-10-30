@@ -65,6 +65,7 @@ public class RegisterForm extends DefaultForm {
         super.addStyleName("kune-Margin-Large-l");
 
         shortNameRegField = new TextField();
+        shortNameRegField.setTabIndex(1);
         shortNameRegField.setFieldLabel(i18n.t("Nickname"));
         shortNameRegField.setName(NICK_FIELD);
         shortNameRegField.setWidth(DEF_SMALL_FIELD_WIDTH);
@@ -79,6 +80,7 @@ public class RegisterForm extends DefaultForm {
         add(shortNameRegField);
 
         longNameRegField = new TextField();
+        longNameRegField.setTabIndex(2);
         longNameRegField.setFieldLabel(i18n.t("Full Name"));
         longNameRegField.setName(LONGNAME_FIELD);
         longNameRegField.setWidth(DEF_FIELD_WIDTH);
@@ -90,6 +92,7 @@ public class RegisterForm extends DefaultForm {
         add(longNameRegField);
 
         passwdRegField = new TextField();
+        passwdRegField.setTabIndex(3);
         passwdRegField.setFieldLabel(i18n.t("Password"));
         passwdRegField.setName(PASSWORD_FIELD);
         passwdRegField.setPassword(true);
@@ -101,6 +104,7 @@ public class RegisterForm extends DefaultForm {
         add(passwdRegField);
 
         passwdRegFieldDup = new TextField();
+        passwdRegFieldDup.setTabIndex(4);
         passwdRegFieldDup.setFieldLabel(i18n.t("Retype password"));
         passwdRegFieldDup.setName(PASSWORD_FIELD_DUP);
         passwdRegFieldDup.setPassword(true);
@@ -119,6 +123,7 @@ public class RegisterForm extends DefaultForm {
         add(passwdRegFieldDup);
 
         emailRegField = new TextField();
+        emailRegField.setTabIndex(5);
         emailRegField.setFieldLabel(i18n.t("Email"));
         emailRegField.setName(EMAIL_FIELD);
         emailRegField.setVtype(VType.EMAIL);
@@ -132,6 +137,7 @@ public class RegisterForm extends DefaultForm {
         langStore.load();
 
         languageCombo = new ComboBox();
+        languageCombo.setTabIndex(6);
         languageCombo.setLazyRender(true);
         languageCombo.setName(LANG_FIELD);
         languageCombo.setMinChars(1);
@@ -159,6 +165,7 @@ public class RegisterForm extends DefaultForm {
         countryStore.load();
 
         countryCombo = new ComboBox();
+        countryCombo.setTabIndex(7);
         countryCombo.setLazyRender(true);
         countryCombo.setName(COUNTRY_FIELD);
         countryCombo.setMinChars(1);
@@ -185,6 +192,7 @@ public class RegisterForm extends DefaultForm {
         timezoneStore.load();
 
         timezoneCombo = new ComboBox();
+        timezoneCombo.setTabIndex(8);
         timezoneCombo.setLazyRender(true);
         timezoneCombo.setName(TIMEZONE_FIELD);
         timezoneCombo.setMinChars(1);
@@ -210,7 +218,9 @@ public class RegisterForm extends DefaultForm {
         final FieldSet personalSpaceFieldSet = new FieldSet(i18n.t("Do you want a personal homepage?"));
         personalSpaceFieldSet.setWidth(DEF_FIELD_WIDTH + DEF_FIELD_LABEL_WITH);
         wantPersonalHomePage = new Radio();
+        wantPersonalHomePage.setTabIndex(9);
         noPersonalHomePage = new Radio();
+        noPersonalHomePage.setTabIndex(10);
         personalSpaceFieldSet.setCollapsible(false);
         createRadio(personalSpaceFieldSet, wantPersonalHomePage,
                 i18n.t("Yes, I want a homepage for publish my contents."), WANNAPERSONALHOMEPAGE_ID);

@@ -39,9 +39,11 @@ import com.gwtext.client.widgets.form.event.FormListener;
 
 public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
 
-    private static final String ICON_UPLOAD_SERVLET = "/kune/servlets/EntityLogoUploadManager";
-    private static final String SUBID = "k-elogoselp-subb";
-    private static final String CANCELID = "k-elogoselp-canb";
+    public static final String TITLE = "Select a logo for your group";
+    public static final String ICON_UPLOAD_SERVLET = "/kune/servlets/EntityLogoUploadManager";
+    public static final String SUBID = "k-elogoselp-subb";
+    public static final String CANCELID = "k-elogoselp-canb";
+    public static final String DIALOG_ID = "k-elogoselp";
     private final BasicDialogExtended dialog;
     private final FormPanel formPanel;
     private final Hidden userhashField;
@@ -50,8 +52,8 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
 
     public EntityLogoSelectorPanel(final EntityLogoSelectorPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
-        dialog = new BasicDialogExtended(i18n.t("Select a logo for your group"), true, true, 400, 200, "",
-                i18n.t("Select"), SUBID, i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
+        dialog = new BasicDialogExtended(i18n.t(TITLE), true, true, 400, 200, "", i18n.t("Select"), SUBID,
+                i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
                     public void onEvent() {
                         String filename = file.getValueAsString();
                         if (filename != null && filename.length() > 0) {
@@ -62,7 +64,8 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                     public void onEvent() {
                         presenter.onCancel();
                     }
-                });
+                }, 2);
+        dialog.setId(DIALOG_ID);
         dialog.setCollapsible(false);
         dialog.setBorder(false);
         // dialog.getFirstButton().disable();
@@ -84,7 +87,6 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
             }
 
             public void onActionComplete(Form form, int httpStatus, String responseText) {
-                Site.important(responseText);
                 presenter.onSubmitComplete(httpStatus, responseText);
             }
 

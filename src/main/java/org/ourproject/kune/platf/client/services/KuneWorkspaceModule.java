@@ -109,6 +109,7 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
 
+import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
@@ -158,7 +159,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<SiteToastMessage>(SiteToastMessage.class) {
+        register(NoDecoration.class, new Factory<SiteToastMessage>(SiteToastMessage.class) {
             @Override
             public SiteToastMessage create() {
                 final SiteToastMessagePresenter presenter = new SiteToastMessagePresenter();
@@ -250,7 +251,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntityLogo create() {
                 final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
-                        $(WsThemePresenter.class), $(Session.class), $$(GroupServiceAsync.class));
+                        $(WsThemePresenter.class), $(Session.class));
                 final EntityLogoPanel panel = new EntityLogoPanel($(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class), $$(FileDownloadUtils.class), $$(EntityLogoSelector.class));
                 presenter.init(panel);
