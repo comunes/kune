@@ -44,7 +44,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
 
     @Before
     public void before() {
-        mustCapture = false;
+        mustCapture = true;
         try {
             selenium.deleteAllVisibleCookies();
             selenium.refresh();

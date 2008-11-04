@@ -43,7 +43,7 @@ import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
 
-public class ChatClientTool extends AbstractClientTool implements ChatProvider {
+public class ChatClientTool extends AbstractClientTool {
     public static final String NAME = "chats";
     public static final String TYPE_ROOT = "chat.root";
     public static final String TYPE_ROOM = "chat.room";
@@ -63,8 +63,8 @@ public class ChatClientTool extends AbstractClientTool implements ChatProvider {
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO initData) {
                 checkChatDomain(initData.getChatDomain());
-                final ChatOptions chatOptions = new ChatOptions(initData.getChatHttpBase(), initData.getChatDomain(),
-                        initData.getChatRoomHost());
+                final ChatConnectionOptions chatOptions = new ChatConnectionOptions(initData.getChatHttpBase(),
+                        initData.getChatDomain(), initData.getChatRoomHost());
                 chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
                 groupMembersSummaryProvider.get().addUserOperation(
                         new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),

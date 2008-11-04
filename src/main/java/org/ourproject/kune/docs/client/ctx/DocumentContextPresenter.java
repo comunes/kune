@@ -20,7 +20,7 @@
 package org.ourproject.kune.docs.client.ctx;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
@@ -32,10 +32,10 @@ import com.calclab.suco.client.listener.Listener;
 
 public class DocumentContextPresenter implements DocumentContext {
     private final Provider<ContextNavigator> contextNavigatorProvider;
-    private final Provider<AdminContext> adminContextProvider;
+    private final Provider<DocContextEditor> adminContextProvider;
 
     public DocumentContextPresenter(final StateManager stateManager,
-            final Provider<ContextNavigator> contextNavigatorProvider, final Provider<AdminContext> adminContextProvider) {
+            final Provider<ContextNavigator> contextNavigatorProvider, final Provider<DocContextEditor> adminContextProvider) {
         this.contextNavigatorProvider = contextNavigatorProvider;
         this.adminContextProvider = adminContextProvider;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {

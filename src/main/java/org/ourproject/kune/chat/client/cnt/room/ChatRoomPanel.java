@@ -17,18 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt.folder.viewer.ui;
+package org.ourproject.kune.chat.client.cnt.room;
 
-import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerView;
 import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Label;
 
-public class FolderViewerPanel extends Label implements FolderViewerView {
+public class ChatRoomPanel implements ChatRoomView {
 
-    public FolderViewerPanel() {
-        super("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
-        super.setStyleName("kune-Content-Main");
-        super.addStyleName("kune-Margin-7-trbl");
+    public ChatRoomPanel(final WorkspaceSkeleton ws) {
+        ws.getEntityWorkspace().setContent(new Label("History of room conversations." + Site.IN_DEVELOPMENT));
     }
+
 }

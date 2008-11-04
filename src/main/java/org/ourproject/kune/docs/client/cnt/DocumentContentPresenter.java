@@ -21,7 +21,7 @@ package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentViewer;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
@@ -40,14 +40,14 @@ import com.calclab.suco.client.listener.Listener2;
 public class DocumentContentPresenter implements DocumentContent {
     private DocumentContentView view;
     private final Session session;
-    private final Provider<DocumentReader> docReaderProvider;
+    private final Provider<DocumentViewer> docReaderProvider;
     private final Provider<TextEditor> textEditorProvider;
     private final Provider<FolderViewer> folderViewerProvider;
     private final ActionToolbar<StateToken> toolbar;
     private final ActionRegistry<StateToken> actionRegistry;
 
     public DocumentContentPresenter(final StateManager stateManager, final Session session,
-            final Provider<DocumentReader> docReaderProvider, final Provider<TextEditor> textEditorProvider,
+            final Provider<DocumentViewer> docReaderProvider, final Provider<TextEditor> textEditorProvider,
             final Provider<FolderViewer> folderViewerProvider, final ActionToolbar<StateToken> toolbar,
             final ActionRegistry<StateToken> actionRegistry) {
         this.session = session;

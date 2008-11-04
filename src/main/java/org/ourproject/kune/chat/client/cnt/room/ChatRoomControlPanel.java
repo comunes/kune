@@ -17,10 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.cnt.room.ui;
+package org.ourproject.kune.chat.client.cnt.room;
 
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomControlPresenter;
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomControlView;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.CustomPushButton;
 

@@ -87,7 +87,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         beforeStateChangeCollection = new BeforeStateChangeCollection();
     }
 
-    public void addBeforeStateChangeListener(BeforeStateChangeListener listener) {
+    public void addBeforeStateChangeListener(BeforeActionListener listener) {
         beforeStateChangeCollection.add(listener);
     }
 
@@ -109,7 +109,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
     }
 
     public void onHistoryChanged(final String historyToken) {
-        if (beforeStateListenersAllowChange(historyToken)) {
+        if (beforeStateListenersAllowChange()) {
             final Listener0 tokenListener = siteTokens.get(historyToken);
             Log.debug("StateManager: history token changed (" + historyToken + ")");
             if (tokenListener == null) {
@@ -125,7 +125,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
                 tokenListener.onEvent();
             }
         } else {
-            resumedToken = previousToken;
+            resumedToken = new StateToken(historyToken);
         }
     }
 
@@ -150,7 +150,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         onHistoryChanged(history.getToken());
     }
 
-    public void removeBeforeStateChangeListener(BeforeStateChangeListener listener) {
+    public void removeBeforeStateChangeListener(BeforeActionListener listener) {
         beforeStateChangeCollection.remove(listener);
     }
 
@@ -199,9 +199,9 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         previousToken = newState.getStateToken();
     }
 
-    private boolean beforeStateListenersAllowChange(String newToken) {
-        for (BeforeStateChangeListener listener : beforeStateChangeCollection) {
-            if (!listener.beforeChange(newToken)) {
+    private boolean beforeStateListenersAllowChange() {
+        for (BeforeActionListener listener : beforeStateChangeCollection) {
+            if (!listener.beforeAction()) {
                 return false;
             }
         }

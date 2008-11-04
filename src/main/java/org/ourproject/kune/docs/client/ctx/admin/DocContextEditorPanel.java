@@ -31,7 +31,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class AdminContextPanel extends VerticalPanel implements AdminContextView {
+public class DocContextEditorPanel extends VerticalPanel implements DocContextEditorView {
     // private static final Images IMG = Images.App.getInstance();
 
     // private static final int FORMS_WIDTH = 145;
@@ -58,7 +58,7 @@ public class AdminContextPanel extends VerticalPanel implements AdminContextView
     private final WorkspaceSkeleton ws;
     private final Label testLabel;
 
-    public AdminContextPanel(final AdminContextPresenter presenter, final I18nTranslationService i18n,
+    public DocContextEditorPanel(final DocContextEditorPresenter presenter, final I18nTranslationService i18n,
             WorkspaceSkeleton ws) {
         this.ws = ws;
         testLabel = new Label("Admin ctx");

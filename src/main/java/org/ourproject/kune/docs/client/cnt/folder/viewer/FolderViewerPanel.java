@@ -17,15 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt.reader;
+package org.ourproject.kune.docs.client.cnt.folder.viewer;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.workspace.client.site.Site;
 
-public interface DocumentReader {
+import com.google.gwt.user.client.ui.Label;
 
-    View getView();
+public class FolderViewerPanel extends Label implements FolderViewerView {
 
-    void showDocument(StateToken token, String text, String typeId, BasicMimeTypeDTO mimeType);
+    public FolderViewerPanel() {
+        super("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
+        super.setStyleName("kune-Content-Main");
+        super.addStyleName("kune-Margin-7-trbl");
+    }
 }

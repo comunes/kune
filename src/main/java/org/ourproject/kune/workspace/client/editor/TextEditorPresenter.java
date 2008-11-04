@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.BeforeStateChangeListener;
+import org.ourproject.kune.platf.client.state.BeforeActionListener;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
@@ -50,7 +50,7 @@ public class TextEditorPresenter implements TextEditor {
     private ActionToolbarButtonDescriptor<StateToken> save;
     private ActionToolbarButtonDescriptor<StateToken> close;
     private final I18nUITranslationService i18n;
-    private final BeforeStateChangeListener beforeStateChangeListener;
+    private final BeforeActionListener beforeStateChangeListener;
     private final StateManager stateManager;
 
     public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> toolbar,
@@ -64,8 +64,8 @@ public class TextEditorPresenter implements TextEditor {
         saveAndCloseConfirmed = false;
         createActions();
 
-        beforeStateChangeListener = new BeforeStateChangeListener() {
-            public boolean beforeChange(String newToken) {
+        beforeStateChangeListener = new BeforeActionListener() {
+            public boolean beforeAction() {
                 return beforeTokenChange();
             }
         };

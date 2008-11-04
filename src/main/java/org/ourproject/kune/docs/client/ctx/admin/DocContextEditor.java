@@ -21,7 +21,7 @@ package org.ourproject.kune.docs.client.ctx.admin;
 
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 
-public interface AdminContext {
+public interface DocContextEditor {
     void attach();
 
     void clear();

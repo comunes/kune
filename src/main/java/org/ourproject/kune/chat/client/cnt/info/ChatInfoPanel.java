@@ -17,8 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client;
+package org.ourproject.kune.chat.client.cnt.info;
 
-public interface Document {
 
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+
+@Deprecated
+public class ChatInfoPanel extends VerticalPanel implements ChatInfo {
+    private final VerticalPanel stateArea;
+
+    public ChatInfoPanel() {
+        final FlowPanel flow = new FlowPanel();
+        add(flow);
+        stateArea = new VerticalPanel();
+        add(stateArea);
+    }
+
+    public void show() {
+    }
 }

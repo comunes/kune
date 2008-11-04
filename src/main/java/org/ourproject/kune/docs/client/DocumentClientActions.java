@@ -29,7 +29,7 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentContent;
-import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
@@ -87,7 +87,7 @@ public class DocumentClientActions {
     private final Provider<TextEditor> textEditorProvider;
     private final KuneErrorHandler errorHandler;
     private final DocumentContent documentContent;
-    private final Provider<AdminContext> adminContextProvider;
+    private final Provider<DocContextEditor> adminContextProvider;
 
     public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager,
@@ -96,7 +96,7 @@ public class DocumentClientActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
             final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
-            final DocumentContent documentContent, final Provider<AdminContext> adminContextProvider) {
+            final DocumentContent documentContent, final Provider<DocContextEditor> adminContextProvider) {
         this.i18n = i18n;
         this.contextNavigator = contextNavigator;
         this.session = session;

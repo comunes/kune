@@ -17,18 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.cnt.room.ui;
+package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomView;
-import org.ourproject.kune.workspace.client.site.Site;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import com.calclab.emiteuimodule.client.UserChatOptions;
 
-import com.google.gwt.user.client.ui.Label;
+public class ChatConnectionOptions {
+    public UserChatOptions userOptions;
+    public final String httpBase;
+    public final String domain;
+    public final String roomHost;
 
-public class ChatRoomPanel implements ChatRoomView {
-
-    public ChatRoomPanel(final WorkspaceSkeleton ws) {
-        ws.getEntityWorkspace().setContent(new Label("History of room conversations." + Site.IN_DEVELOPMENT));
+    public ChatConnectionOptions(final String httpBase, final String domain, final String roomHost) {
+        this.httpBase = httpBase;
+        this.domain = domain;
+        this.roomHost = roomHost;
+        userOptions = null;
     }
-
 }

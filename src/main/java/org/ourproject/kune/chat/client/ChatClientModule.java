@@ -21,13 +21,13 @@
 import org.ourproject.kune.chat.client.cnt.ChatContent;
 import org.ourproject.kune.chat.client.cnt.ChatContentPresenter;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
-import org.ourproject.kune.chat.client.cnt.info.ui.ChatInfoPanel;
+import org.ourproject.kune.chat.client.cnt.info.ChatInfoPanel;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomControl;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomControlPanel;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomControlPresenter;
+import org.ourproject.kune.chat.client.cnt.room.ChatRoomPanel;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomPresenter;
-import org.ourproject.kune.chat.client.cnt.room.ui.ChatRoomControlPanel;
-import org.ourproject.kune.chat.client.cnt.room.ui.ChatRoomPanel;
 import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
@@ -53,24 +53,30 @@ import com.calclab.suco.client.ioc.module.Factory;
 
 public class ChatClientModule extends AbstractModule {
 
-    public ChatClientModule() {
-    }
-
     @Override
     public void onInstall() {
-
-        register(Singleton.class, new Factory<ChatInfo>(ChatInfo.class) {
-            @Override
-            public ChatInfo create() {
-                return new ChatInfoPanel();
-            }
-        });
 
         register(ToolGroup.class, new Factory<ChatClientActions>(ChatClientActions.class) {
             @Override
             public ChatClientActions create() {
                 return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatClientTool.class));
+            }
+        });
+
+        register(ToolGroup.class, new Factory<ChatClientTool>(ChatClientTool.class) {
+            @Override
+            public ChatClientTool create() {
+                return new ChatClientTool($(Session.class), $(Application.class), $(I18nUITranslationService.class),
+                        $(EmiteUIDialog.class), $(WorkspaceSkeleton.class), $$(GroupMembersSummary.class),
+                        $(ToolSelector.class), $(WsThemePresenter.class), $$(ChatContent.class), $$(ChatContext.class));
+            }
+        });
+
+        register(Singleton.class, new Factory<ChatInfo>(ChatInfo.class) {
+            @Override
+            public ChatInfo create() {
+                return new ChatInfoPanel();
             }
         });
 
@@ -110,6 +116,7 @@ public class ChatClientModule extends AbstractModule {
                 return presenter;
             }
         });
+
         register(Singleton.class, new Factory<RoomsAdmin>(RoomsAdmin.class) {
             @Override
             public RoomsAdmin create() {
@@ -117,15 +124,6 @@ public class ChatClientModule extends AbstractModule {
                         $(I18nUITranslationService.class), $$(StateManager.class), $(Session.class),
                         $$(ContentServiceAsync.class));
                 return presenter;
-            }
-        });
-
-        register(ToolGroup.class, new Factory<ChatClientTool>(ChatClientTool.class) {
-            @Override
-            public ChatClientTool create() {
-                return new ChatClientTool($(Session.class), $(Application.class), $(I18nUITranslationService.class),
-                        $(EmiteUIDialog.class), $(WorkspaceSkeleton.class), $$(GroupMembersSummary.class),
-                        $(ToolSelector.class), $(WsThemePresenter.class), $$(ChatContent.class), $$(ChatContext.class));
             }
         });
 

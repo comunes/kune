@@ -29,8 +29,8 @@ public class StateManagerTest {
     private MockListener2<String, String> groupChangeListener;
     private MockListener<StateAbstractDTO> stateChangeListener;
     private StateAbstractDTO state;
-    private BeforeStateChangeListener beforeChangeListener1;
-    private BeforeStateChangeListener beforeChangeListener2;
+    private BeforeActionListener beforeChangeListener1;
+    private BeforeActionListener beforeChangeListener2;
 
     @Before
     public void before() {
@@ -43,8 +43,8 @@ public class StateManagerTest {
         stateChangeListener = new MockListener<StateAbstractDTO>();
         groupChangeListener = new MockListener2<String, String>();
         toolChangeListener = new MockListener2<String, String>();
-        beforeChangeListener1 = Mockito.mock(BeforeStateChangeListener.class);
-        beforeChangeListener2 = Mockito.mock(BeforeStateChangeListener.class);
+        beforeChangeListener1 = Mockito.mock(BeforeActionListener.class);
+        beforeChangeListener2 = Mockito.mock(BeforeActionListener.class);
         stateManager.onStateChanged(stateChangeListener);
         stateManager.onGroupChanged(groupChangeListener);
         stateManager.onToolChanged(toolChangeListener);
@@ -197,8 +197,8 @@ public class StateManagerTest {
         stateManager.addBeforeStateChangeListener(beforeChangeListener1);
         stateManager.addBeforeStateChangeListener(beforeChangeListener2);
         String newToken = "something";
-        Mockito.stub(beforeChangeListener1.beforeChange(newToken)).toReturn(value);
-        Mockito.stub(beforeChangeListener2.beforeChange(newToken)).toReturn(value2);
+        Mockito.stub(beforeChangeListener1.beforeAction()).toReturn(value);
+        Mockito.stub(beforeChangeListener2.beforeAction()).toReturn(value2);
         return newToken;
     }
 

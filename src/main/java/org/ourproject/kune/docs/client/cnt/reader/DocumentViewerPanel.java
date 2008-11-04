@@ -17,9 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt.reader.ui;
+package org.ourproject.kune.docs.client.cnt.reader;
 
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -29,12 +28,12 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DocumentReaderPanel implements DocumentReaderView {
+public class DocumentViewerPanel implements DocumentViewerView {
 
     private final WorkspaceSkeleton ws;
     private final I18nTranslationService i18n;
 
-    public DocumentReaderPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
+    public DocumentViewerPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
         this.ws = ws;
         this.i18n = i18n;
     }

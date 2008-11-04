@@ -39,13 +39,13 @@ import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 class ChatEngineXmpp implements ChatEngine {
-    private final ChatOptions chatOptions;
+    private final ChatConnectionOptions chatOptions;
     private final EmiteUIDialog emiteDialog;
     private final I18nTranslationService i18n;
     private final WorkspaceSkeleton ws;
     private ToolbarButton traybarButton;
 
-    public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatOptions chatOptions,
+    public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatConnectionOptions chatOptions,
             final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
         this.emiteDialog = emiteUIDialog;
         this.chatOptions = chatOptions;
@@ -57,7 +57,7 @@ class ChatEngineXmpp implements ChatEngine {
         Site.important("In development (emite)");
     }
 
-    public ChatOptions getChatOptions() {
+    public ChatConnectionOptions getChatOptions() {
         return chatOptions;
     }
 

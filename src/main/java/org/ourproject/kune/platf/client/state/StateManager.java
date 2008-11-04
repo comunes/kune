@@ -29,7 +29,7 @@ import com.calclab.suco.client.listener.Listener2;
 
 public interface StateManager {
 
-    void addBeforeStateChangeListener(BeforeStateChangeListener listener);
+    void addBeforeStateChangeListener(BeforeActionListener listener);
 
     void addSiteToken(String token, Listener0 whenToken);
 
@@ -47,7 +47,7 @@ public interface StateManager {
 
     void reload();
 
-    void removeBeforeStateChangeListener(BeforeStateChangeListener listener);
+    void removeBeforeStateChangeListener(BeforeActionListener listener);
 
     void removeSiteToken(String token);
 

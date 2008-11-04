@@ -39,9 +39,9 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class AdminContextPresenter implements AdminContext {
+public class DocContextEditorPresenter implements DocContextEditor {
 
-    private AdminContextView view;
+    private DocContextEditorView view;
     private final Session session;
     private final Provider<TagsSummary> tagsSummaryProvider;
     private final Provider<ContentServiceAsync> contentServiceProvider;
@@ -49,7 +49,7 @@ public class AdminContextPresenter implements AdminContext {
     private final EntityTitle entityTitle;
     private final StateManager stateManager;
 
-    public AdminContextPresenter(final Session session, final StateManager stateManager,
+    public DocContextEditorPresenter(final Session session, final StateManager stateManager,
             final Provider<TagsSummary> tagsSummaryProvider,
             final Provider<ContentServiceAsync> contentServiceProvider, final EntityTitle entityTitle,
             final EntitySubTitle entitySubTitle) {
@@ -109,7 +109,7 @@ public class AdminContextPresenter implements AdminContext {
                 });
     }
 
-    public void init(final AdminContextView view) {
+    public void init(final DocContextEditorView view) {
         this.view = view;
     }
 

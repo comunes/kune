@@ -22,19 +22,19 @@ import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.cnt.DocumentContentPanel;
 import org.ourproject.kune.docs.client.cnt.DocumentContentPresenter;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
+import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerPanel;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerPresenter;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerView;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.ui.FolderViewerPanel;
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReader;
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderPresenter;
-import org.ourproject.kune.docs.client.cnt.reader.DocumentReaderView;
-import org.ourproject.kune.docs.client.cnt.reader.ui.DocumentReaderPanel;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentViewer;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentViewerPanel;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentViewerPresenter;
+import org.ourproject.kune.docs.client.cnt.reader.DocumentViewerView;
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
 import org.ourproject.kune.docs.client.ctx.DocumentContextPresenter;
-import org.ourproject.kune.docs.client.ctx.admin.AdminContext;
-import org.ourproject.kune.docs.client.ctx.admin.AdminContextPanel;
-import org.ourproject.kune.docs.client.ctx.admin.AdminContextPresenter;
-import org.ourproject.kune.docs.client.ctx.admin.AdminContextView;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorPanel;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorPresenter;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorView;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
@@ -70,9 +70,6 @@ import com.calclab.suco.client.ioc.module.Factory;
 
 public class DocumentClientModule extends AbstractModule {
 
-    public DocumentClientModule() {
-    }
-
     @Override
     public void onInstall() {
 
@@ -94,7 +91,7 @@ public class DocumentClientModule extends AbstractModule {
                         $$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
                         $(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
                         $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentContent.class),
-                        $$(AdminContext.class));
+                        $$(DocContextEditor.class));
             }
         });
 
@@ -107,7 +104,7 @@ public class DocumentClientModule extends AbstractModule {
                         contentNavigatorToolbar);
 
                 final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),
-                        $(Session.class), $$(DocumentReader.class), $$(TextEditor.class), $$(FolderViewer.class),
+                        $(Session.class), $$(DocumentViewer.class), $$(TextEditor.class), $$(FolderViewer.class),
                         toolbar, $(ContentActionRegistry.class));
                 final DocumentContentPanel panel = new DocumentContentPanel($(WorkspaceSkeleton.class));
                 presenter.init(panel);
@@ -115,13 +112,13 @@ public class DocumentClientModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<AdminContext>(AdminContext.class) {
+        register(Singleton.class, new Factory<DocContextEditor>(DocContextEditor.class) {
             @Override
-            public AdminContext create() {
-                final AdminContextPresenter presenter = new AdminContextPresenter($(Session.class),
+            public DocContextEditor create() {
+                final DocContextEditorPresenter presenter = new DocContextEditorPresenter($(Session.class),
                         $(StateManager.class), $$(TagsSummary.class), $$(ContentServiceAsync.class),
                         $(EntityTitle.class), $(EntitySubTitle.class));
-                final AdminContextView view = new AdminContextPanel(presenter, $(I18nUITranslationService.class),
+                final DocContextEditorView view = new DocContextEditorPanel(presenter, $(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class));
                 presenter.init(view);
                 return presenter;
@@ -132,17 +129,17 @@ public class DocumentClientModule extends AbstractModule {
             @Override
             public DocumentContext create() {
                 final DocumentContextPresenter presenter = new DocumentContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class), $$(AdminContext.class));
+                        $$(ContextNavigator.class), $$(DocContextEditor.class));
                 return presenter;
             }
         });
 
-        register(Singleton.class, new Factory<DocumentReader>(DocumentReader.class) {
+        register(Singleton.class, new Factory<DocumentViewer>(DocumentViewer.class) {
             @Override
-            public DocumentReader create() {
-                final DocumentReaderView view = new DocumentReaderPanel($(WorkspaceSkeleton.class),
+            public DocumentViewer create() {
+                final DocumentViewerView view = new DocumentViewerPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
-                final DocumentReaderPresenter presenter = new DocumentReaderPresenter(view, $$(FileDownloadUtils.class));
+                final DocumentViewerPresenter presenter = new DocumentViewerPresenter(view, $$(FileDownloadUtils.class));
                 return presenter;
             }
         });

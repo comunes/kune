@@ -28,11 +28,11 @@ import org.ourproject.kune.platf.client.ui.download.ImageSize;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class DocumentReaderPresenter implements DocumentReader {
-    private final DocumentReaderView view;
+public class DocumentViewerPresenter implements DocumentViewer {
+    private final DocumentViewerView view;
     private final Provider<FileDownloadUtils> downloadProvider;
 
-    public DocumentReaderPresenter(final DocumentReaderView view, final Provider<FileDownloadUtils> downloadProvider) {
+    public DocumentViewerPresenter(final DocumentViewerView view, final Provider<FileDownloadUtils> downloadProvider) {
         this.view = view;
         this.downloadProvider = downloadProvider;
     }

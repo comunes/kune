@@ -17,8 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client;
+package org.ourproject.kune.docs.client.cnt.reader;
 
-public interface ChatProvider {
-    ChatEngine getChat();
+import org.ourproject.kune.platf.client.View;
+
+public interface DocumentViewerView extends View {
+
+    void setContent(String content);
+
+    void showImage(String imageUrl, String imageResizedUrl);
+
 }

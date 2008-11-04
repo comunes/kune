@@ -20,11 +20,12 @@
 package org.ourproject.kune.docs.client.cnt.reader;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface DocumentReaderView extends View {
+public interface DocumentViewer {
 
-    void setContent(String content);
+    View getView();
 
-    void showImage(String imageUrl, String imageResizedUrl);
-
+    void showDocument(StateToken token, String text, String typeId, BasicMimeTypeDTO mimeType);
 }
