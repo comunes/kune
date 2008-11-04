@@ -1,7 +1,6 @@
 package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
@@ -31,8 +30,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
         this.registerProvider = registerProvider;
     }
 
-    public void doSignIn(StateToken previousStateToken) {
-        this.previousStateToken = previousStateToken;
+    public void doSignIn() {
         registerProvider.get().hide();
         if (!session.isLogged()) {
             Site.showProgressProcessing();
@@ -41,7 +39,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
             Site.hideProgress();
             view.focusOnNickname();
         } else {
-            stateManager.gotoToken(previousStateToken);
+            stateManager.restorePreviousToken();
         }
     }
 
@@ -88,7 +86,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
 
                 public void onSuccess(final UserInfoDTO userInfoDTO) {
                     onSignIn(userInfoDTO);
-                    stateManager.gotoToken(previousStateToken);
+                    stateManager.restorePreviousToken();
                     view.hide();
                     view.unMask();
                 }

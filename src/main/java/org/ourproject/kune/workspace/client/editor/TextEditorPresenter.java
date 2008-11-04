@@ -51,7 +51,6 @@ public class TextEditorPresenter implements TextEditor {
     private ActionToolbarButtonDescriptor<StateToken> close;
     private final I18nUITranslationService i18n;
     private final BeforeStateChangeListener beforeStateChangeListener;
-    private String newTokenAfterSave;
     private final StateManager stateManager;
 
     public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> toolbar,
@@ -67,7 +66,7 @@ public class TextEditorPresenter implements TextEditor {
 
         beforeStateChangeListener = new BeforeStateChangeListener() {
             public boolean beforeChange(String newToken) {
-                return beforeTokenChange(newToken);
+                return beforeTokenChange();
             }
         };
     }
@@ -79,7 +78,6 @@ public class TextEditorPresenter implements TextEditor {
         view.attach();
         setContent(content);
         stateManager.addBeforeStateChangeListener(beforeStateChangeListener);
-        newTokenAfterSave = null;
     }
 
     public String getContent() {
@@ -131,7 +129,6 @@ public class TextEditorPresenter implements TextEditor {
         savePending = false;
         saveAndCloseConfirmed = false;
         toolbar.setEnableAction(save, false);
-        newTokenAfterSave = null;
     }
 
     protected void onCancel() {
@@ -145,7 +142,7 @@ public class TextEditorPresenter implements TextEditor {
 
     protected void onCancelConfirmed() {
         stateManager.removeBeforeStateChangeListener(beforeStateChangeListener);
-        gotoNewTokenIfNecessary();
+        stateManager.resumeTokenChange();
         reset();
         view.detach();
         toolbar.detach();
@@ -172,9 +169,8 @@ public class TextEditorPresenter implements TextEditor {
         onSave.onEvent(view.getHTML());
     }
 
-    boolean beforeTokenChange(String newToken) {
+    boolean beforeTokenChange() {
         if (savePending) {
-            newTokenAfterSave = newToken;
             onCancel();
             return false;
         } else {
@@ -208,13 +204,6 @@ public class TextEditorPresenter implements TextEditor {
         collection.add(new ActionItem<StateToken>(save, null));
         collection.add(new ActionItem<StateToken>(close, null));
         toolbar.setActions(collection);
-    }
-
-    private void gotoNewTokenIfNecessary() {
-        if (newTokenAfterSave != null) {
-            stateManager.reload();
-            stateManager.gotoToken(newTokenAfterSave);
-        }
     }
 
     private void setContent(final String html) {

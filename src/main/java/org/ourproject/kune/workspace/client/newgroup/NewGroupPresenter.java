@@ -34,7 +34,7 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -43,7 +43,6 @@ public class NewGroupPresenter implements NewGroup {
     public static final String REGISTER_TO_CREATE_A_GROUP = "Sign in or register to create a group";
     private NewGroupView view;
     private final I18nTranslationService i18n;
-    private StateToken previousToken;
     private final Session session;
     private final StateManager stateManager;
     private final Provider<GroupServiceAsync> groupServiceProvider;
@@ -54,15 +53,14 @@ public class NewGroupPresenter implements NewGroup {
         this.session = session;
         this.stateManager = stateManager;
         this.groupServiceProvider = groupServiceProvider;
-        stateManager.addSiteToken(SiteToken.newgroup.toString(), new Listener<StateToken>() {
-            public void onEvent(final StateToken previousStateToken) {
-                doNewGroup(previousStateToken);
+        stateManager.addSiteToken(SiteToken.newgroup.toString(), new Listener0() {
+            public void onEvent() {
+                doNewGroup();
             }
         });
     }
 
-    public void doNewGroup(final StateToken previousToken) {
-        this.previousToken = previousToken;
+    public void doNewGroup() {
         session.check(new AsyncCallbackSimple<Object>() {
             public void onSuccess(final Object result) {
                 if (session.isLogged()) {
@@ -71,7 +69,7 @@ public class NewGroupPresenter implements NewGroup {
                     view.center();
                     Site.hideProgress();
                 } else {
-                    stateManager.gotoToken(previousToken);
+                    stateManager.restorePreviousToken();
                     Site.info(i18n.t(REGISTER_TO_CREATE_A_GROUP));
                 }
             }
@@ -96,12 +94,12 @@ public class NewGroupPresenter implements NewGroup {
     public void onCancel() {
         view.hide();
         reset();
-        stateManager.gotoToken(previousToken);
+        stateManager.restorePreviousToken();
     }
 
     public void onClose() {
         reset();
-        stateManager.gotoToken(previousToken);
+        stateManager.restorePreviousToken();
     }
 
     public void onFinish() {

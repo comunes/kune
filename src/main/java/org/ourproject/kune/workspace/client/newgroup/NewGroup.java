@@ -19,10 +19,9 @@
  */
 package org.ourproject.kune.workspace.client.newgroup;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface NewGroup {
 
-    void doNewGroup(StateToken previousToken);
+    void doNewGroup();
 
 }

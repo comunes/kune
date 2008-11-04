@@ -39,9 +39,9 @@ public class EntityLogoPresenter implements EntityLogo {
     public EntityLogoPresenter(final StateManager stateManager, final WsThemePresenter theme, final Session session) {
         this.session = session;
 
-        stateManager.onGroupChanged(new Listener2<GroupDTO, GroupDTO>() {
-            public void onEvent(final GroupDTO oldGroup, final GroupDTO newGroup) {
-                setGroupLogo(newGroup);
+        stateManager.onGroupChanged(new Listener2<String, String>() {
+            public void onEvent(final String oldGroup, final String newGroup) {
+                setGroupLogo(session.getCurrentState().getGroup());
             }
         });
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {

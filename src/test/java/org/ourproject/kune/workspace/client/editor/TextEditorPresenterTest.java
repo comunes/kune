@@ -38,7 +38,7 @@ public class TextEditorPresenterTest {
     @Test
     public void historyChangeWithoutPendingMustAccept() {
         presenter.editContent("Text to edit", saveListener, cancelListener);
-        boolean change = presenter.beforeTokenChange("somegroup");
+        boolean change = presenter.beforeTokenChange();
         assertTrue(change);
         Mockito.verify(view, Mockito.never()).showSaveBeforeDialog();
         Mockito.verify(toolbar, Mockito.times(1)).detach();
@@ -46,19 +46,19 @@ public class TextEditorPresenterTest {
 
     @Test
     public void historyChangeWithPendingSaveAndCancelMustPosponeIt() {
-        String newToken = editAndChangeHistoryToken();
+        editAndChangeHistoryToken();
         presenter.onCancelConfirmed();
         assertTrue(saveListener.isNotCalled());
-        Mockito.verify(stateManager, Mockito.times(1)).gotoToken(newToken);
+        Mockito.verify(stateManager, Mockito.times(1)).resumeTokenChange();
     }
 
     @Test
     public void historyChangeWithPendingSaveMustPosponeIt() {
-        String newToken = editAndChangeHistoryToken();
+        editAndChangeHistoryToken();
         presenter.onSaveAndClose();
         presenter.onSaved();
         assertTrue(saveListener.isCalledOnce());
-        Mockito.verify(stateManager, Mockito.times(1)).gotoToken(newToken);
+        Mockito.verify(stateManager, Mockito.times(1)).resumeTokenChange();
     }
 
     @Test
@@ -118,7 +118,7 @@ public class TextEditorPresenterTest {
         presenter.editContent("Text to edit", saveListener, cancelListener);
         presenter.onEdit();
         String newToken = "somegroup";
-        boolean change = presenter.beforeTokenChange(newToken);
+        boolean change = presenter.beforeTokenChange();
         assertFalse(change);
         Mockito.verify(view, Mockito.times(1)).showSaveBeforeDialog();
         return newToken;

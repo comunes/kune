@@ -21,7 +21,6 @@
 import java.util.HashMap;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
@@ -47,9 +46,9 @@ public class ToolSelectorPresenter implements ToolSelector {
                 }
             }
         });
-        stateManager.onGroupChanged(new Listener2<GroupDTO, GroupDTO>() {
-            public void onEvent(final GroupDTO oldGroup, final GroupDTO newGroup) {
-                onGroupChanged(newGroup.getShortName());
+        stateManager.onGroupChanged(new Listener2<String, String>() {
+            public void onEvent(final String oldGroup, final String newGroup) {
+                onGroupChanged(newGroup);
             }
         });
         stateManager.onToolChanged(new Listener2<String, String>() {
@@ -78,10 +77,10 @@ public class ToolSelectorPresenter implements ToolSelector {
     }
 
     void onToolChanged(final String oldTool, final String newTool) {
-        if (oldTool != null) {
+        if (!oldTool.equals("")) {
             tools.get(oldTool).setSelected(false);
         }
-        if (newTool != null) {
+        if (!newTool.equals("")) {
             tools.get(newTool).setSelected(true);
         }
     }

@@ -19,26 +19,25 @@
  */
 package org.ourproject.kune.platf.client.state;
 
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 import com.calclab.suco.client.listener.Listener2;
-import com.google.gwt.user.client.HistoryListener;
 
-public interface StateManager extends HistoryListener {
+public interface StateManager {
 
     void addBeforeStateChangeListener(BeforeStateChangeListener listener);
 
-    void addSiteToken(String token, Listener<StateToken> whenToken);
+    void addSiteToken(String token, Listener0 whenToken);
 
     void gotoToken(StateToken newToken);
 
     void gotoToken(String newToken);
 
-    void onGroupChanged(Listener2<GroupDTO, GroupDTO> listener);
+    void onGroupChanged(Listener2<String, String> listener);
 
     void onSocialNetworkChanged(Listener<StateAbstractDTO> listener);
 
@@ -52,7 +51,9 @@ public interface StateManager extends HistoryListener {
 
     void removeSiteToken(String token);
 
-    void restorePreviousState();
+    void restorePreviousToken();
+
+    void resumeTokenChange();
 
     void setRetrievedState(StateAbstractDTO state);
 

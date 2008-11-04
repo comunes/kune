@@ -58,7 +58,7 @@ public class ToolSelectorPresenterTest {
     public void setStateFirstMustSelect() {
         setToolNames();
         toolSelector.addTool(toolSelectorItem1);
-        toolSelector.onToolChanged(null, TOOL1_NAME);
+        toolSelector.onToolChanged("", TOOL1_NAME);
         Mockito.verify(toolSelectorItem1, Mockito.times(1)).setSelected(false);
         Mockito.verify(toolSelectorItem1, Mockito.times(1)).setSelected(true);
     }
@@ -89,7 +89,7 @@ public class ToolSelectorPresenterTest {
         setToolNames();
         toolSelector.addTool(toolSelectorItem1);
         toolSelector.addTool(toolSelectorItem2);
-        toolSelector.onToolChanged(TOOL1_NAME, null);
+        toolSelector.onToolChanged(TOOL1_NAME, "");
         Mockito.verify(toolSelectorItem2, Mockito.times(1)).setSelected(false);
         Mockito.verify(toolSelectorItem1, Mockito.times(2)).setSelected(false);
         Mockito.verify(toolSelectorItem2, Mockito.never()).setSelected(true);

@@ -35,6 +35,7 @@ import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 public class TextEditorPanel implements TextEditorView {
     private static final String BACKCOLOR_ENABLED = "#FFF";
     private static final String BACKCOLOR_DISABLED = "#CCC";
+    public static final String TEXT_AREA = "k-tep-ta";
     private final RichTextArea gwtRTarea;
     private final TextEditorToolbar textEditorToolbar;
     private final TextEditorPresenter presenter;
@@ -54,6 +55,7 @@ public class TextEditorPanel implements TextEditorView {
         gwtRTarea = new RichTextArea();
         gwtRTarea.setWidth("97%");
         gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
+        gwtRTarea.ensureDebugId(TEXT_AREA);
 
         final Toolbar editorTopBar = new Toolbar();
         editorTopBar.getPanel().setWidth("auto");

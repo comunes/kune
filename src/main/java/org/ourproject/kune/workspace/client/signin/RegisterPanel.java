@@ -99,7 +99,8 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
                 i18n.t("Now you can participate more actively in this site with other people and groups. "
                         + "You can also use your personal space to publish contents. "
                         + "Your email is not verified, please follow the instructions you will receive by email."),
-                i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 400, 210);
+                i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 380, 210);
+        welcomeDialog.setId(WELCOME_DIALOG);
         welcomeDialog.show();
     }
 
@@ -107,7 +108,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
         InfoDialog welcomeDialog = new InfoDialog(i18n.t("Welcome"), i18n.t("Thanks for registering"),
                 i18n.t("Now you can participate more actively in this site with other people and groups. "
                         + "Your email is not verified, please follow the instructions you will receive by email."),
-                i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 400, 210);
+                i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 380, 210);
         welcomeDialog.setId(WELCOME_DIALOG);
         welcomeDialog.show();
     }

@@ -3,7 +3,6 @@ package org.ourproject.kune.workspace.client.signin;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.TimeZoneDTO;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
@@ -36,8 +35,7 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
         this.signInProvider = signInProvider;
     }
 
-    public void doRegister(StateToken previousStateToken) {
-        this.previousStateToken = previousStateToken;
+    public void doRegister() {
         signInProvider.get().hide();
         if (!session.isLogged()) {
             Site.showProgressProcessing();
@@ -45,7 +43,7 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
             view.center();
             Site.hideProgress();
         } else {
-            stateManager.gotoToken(previousStateToken);
+            stateManager.restorePreviousToken();
         }
     }
 

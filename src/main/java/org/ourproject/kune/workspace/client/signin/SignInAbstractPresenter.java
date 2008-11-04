@@ -1,7 +1,6 @@
 package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -12,7 +11,6 @@ public class SignInAbstractPresenter {
     protected final Session session;
     protected final StateManager stateManager;
     protected final I18nUITranslationService i18n;
-    protected StateToken previousStateToken;
     protected SignInAbstractView view;
 
     public SignInAbstractPresenter(Session session, StateManager stateManager, I18nUITranslationService i18n) {
@@ -29,14 +27,14 @@ public class SignInAbstractPresenter {
         view.reset();
         view.hideMessages();
         view.hide();
-        stateManager.gotoToken(previousStateToken);
+        stateManager.restorePreviousToken();
     }
 
     public void onClose() {
         view.reset();
         view.hideMessages();
         if (!session.isLogged()) {
-            stateManager.gotoToken(previousStateToken);
+            stateManager.restorePreviousToken();
         }
     }
 
@@ -49,6 +47,7 @@ public class SignInAbstractPresenter {
         final I18nLanguageDTO language = userInfoDTO.getLanguage();
         i18n.changeCurrentLanguage(language.getCode());
         session.setCurrentLanguage(language);
+        stateManager.restorePreviousToken();
     }
 
 }

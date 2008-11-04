@@ -109,7 +109,6 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
-import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
@@ -443,26 +442,26 @@ public class KuneModule extends AbstractModule {
         });
 
         // Register of tokens like "signin", "newgroup", "translate" etcetera
-        $(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Listener<StateToken>() {
-            public void onEvent(final StateToken previousStateToken) {
-                $(SignIn.class).doSignIn(previousStateToken);
+        $(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Listener0() {
+            public void onEvent() {
+                $(SignIn.class).doSignIn();
             }
         });
 
-        $(StateManager.class).addSiteToken(SiteToken.register.toString(), new Listener<StateToken>() {
-            public void onEvent(final StateToken previousStateToken) {
-                $(Register.class).doRegister(previousStateToken);
+        $(StateManager.class).addSiteToken(SiteToken.register.toString(), new Listener0() {
+            public void onEvent() {
+                $(Register.class).doRegister();
             }
         });
 
-        $(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Listener<StateToken>() {
-            public void onEvent(final StateToken previousStateToken) {
-                $(NewGroup.class).doNewGroup(previousStateToken);
+        $(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Listener0() {
+            public void onEvent() {
+                $(NewGroup.class).doNewGroup();
             }
         });
 
-        $(StateManager.class).addSiteToken(SiteToken.translate.toString(), new Listener<StateToken>() {
-            public void onEvent(final StateToken previousStateToken) {
+        $(StateManager.class).addSiteToken(SiteToken.translate.toString(), new Listener0() {
+            public void onEvent() {
                 $(I18nTranslator.class).doShowTranslator();
             }
         });
