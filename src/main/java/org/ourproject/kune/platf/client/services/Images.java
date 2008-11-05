@@ -255,9 +255,6 @@ public interface Images extends ImageBundle {
     @Resource("org/ourproject/kune/platf/public/images/cancel.png")
     AbstractImagePrototype cancel();
 
-    @Resource("org/ourproject/kune/platf/public/images/chat.png")
-    AbstractImagePrototype chat();
-
     @Resource("org/ourproject/kune/platf/public/images/clear.png")
     AbstractImagePrototype clear();
 

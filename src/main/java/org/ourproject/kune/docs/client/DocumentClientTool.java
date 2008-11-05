@@ -22,14 +22,13 @@ package org.ourproject.kune.docs.client;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
-import org.ourproject.kune.platf.client.tool.AbstractClientTool;
+import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-
-public class DocumentClientTool extends AbstractClientTool {
+public class DocumentClientTool extends FoldableAbstractClientTool {
     public static final String TYPE_ROOT = "docs.root";
     public static final String TYPE_FOLDER = "docs.folder";
     public static final String TYPE_DOCUMENT = "docs.doc";
@@ -39,28 +38,21 @@ public class DocumentClientTool extends AbstractClientTool {
     public static final String TYPE_WIKI = "docs.wiki";
     public static final String TYPE_WIKIPAGE = "docs.wikipage";
     public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
-
     public static final String NAME = "docs";
-
-    private final DragDropContentRegistry dragDropContentRegistry;
-    private final ContentIconsRegistry contentIconsRegistry;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-            final DragDropContentRegistry dragDropContentRegistry,
-            final ContentIconsRegistry contentIconsRegistry) {
-        super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws);
-        this.dragDropContentRegistry = dragDropContentRegistry;
-        this.contentIconsRegistry = contentIconsRegistry;
-        registerDragDropTypes();
-        registerIcons();
+            final DragDropContentRegistry dragDropContentRegistry, final ContentIconsRegistry contentIconsRegistry) {
+        super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws, contentIconsRegistry,
+                dragDropContentRegistry);
     }
 
     public String getName() {
         return NAME;
     }
 
-    private void registerDragDropTypes() {
+    @Override
+    protected void registerDragDropTypes() {
         dragDropContentRegistry.registerDraggableType(TYPE_DOCUMENT);
         dragDropContentRegistry.registerDraggableType(TYPE_FOLDER);
         dragDropContentRegistry.registerDraggableType(TYPE_UPLOADEDFILE);
@@ -70,7 +62,8 @@ public class DocumentClientTool extends AbstractClientTool {
         dragDropContentRegistry.registerDroppableType(TYPE_GALLERY);
     }
 
-    private void registerIcons() {
+    @Override
+    protected void registerIcons() {
         contentIconsRegistry.registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");

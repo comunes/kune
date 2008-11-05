@@ -18,6 +18,12 @@
  *
  */package org.ourproject.kune.workspace.client.sitebar.sitesign;
 
+import org.ourproject.kune.platf.client.actions.BeforeActionListener;
+
 public interface SiteSignOutLink {
+
+    void addBeforeSignOut(BeforeActionListener listener);
+
+    void removeBeforeSignOut(BeforeActionListener listener);
 
 }

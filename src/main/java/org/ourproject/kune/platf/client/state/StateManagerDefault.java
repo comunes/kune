@@ -21,6 +21,8 @@ package org.ourproject.kune.platf.client.state;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.actions.BeforeActionCollection;
+import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
@@ -55,7 +57,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
     private final Event<StateAbstractDTO> onSocialNetworkChanged;
     private final Event2<String, String> onToolChanged;
     private final Event2<String, String> onGroupChanged;
-    private final BeforeStateChangeCollection beforeStateChangeCollection;
+    private final BeforeActionCollection beforeStateChangeCollection;
 
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
             final HistoryWrapper history) {
@@ -84,7 +86,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
             }
         });
         siteTokens = new HashMap<String, Listener0>();
-        beforeStateChangeCollection = new BeforeStateChangeCollection();
+        beforeStateChangeCollection = new BeforeActionCollection();
     }
 
     public void addBeforeStateChangeListener(BeforeActionListener listener) {
@@ -109,7 +111,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
     }
 
     public void onHistoryChanged(final String historyToken) {
-        if (beforeStateListenersAllowChange()) {
+        if (beforeStateChangeCollection.checkBeforeAction()) {
             final Listener0 tokenListener = siteTokens.get(historyToken);
             Log.debug("StateManager: history token changed (" + historyToken + ")");
             if (tokenListener == null) {
@@ -197,15 +199,6 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         Site.hideProgress();
         checkGroupAndToolChange(newState);
         previousToken = newState.getStateToken();
-    }
-
-    private boolean beforeStateListenersAllowChange() {
-        for (BeforeActionListener listener : beforeStateChangeCollection) {
-            if (!listener.beforeAction()) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private void checkGroupAndToolChange(final StateAbstractDTO newState) {

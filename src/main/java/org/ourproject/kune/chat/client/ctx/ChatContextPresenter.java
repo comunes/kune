@@ -19,21 +19,21 @@
  */
 package org.ourproject.kune.chat.client.ctx;
 
-import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
+import org.ourproject.kune.chat.client.ctx.room.RoomAdmin;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 
 import com.calclab.suco.client.ioc.Provider;
 
 public class ChatContextPresenter implements ChatContext {
 
-    private final Provider<RoomsAdmin> roomAdminsProvider;
+    private final Provider<RoomAdmin> roomAdminsProvider;
 
-    public ChatContextPresenter(final Provider<RoomsAdmin> roomAdminsProvider) {
+    public ChatContextPresenter(final Provider<RoomAdmin> roomAdminsProvider) {
         this.roomAdminsProvider = roomAdminsProvider;
     }
 
     public void setState(final StateContainerDTO state) {
-        final RoomsAdmin rooms = roomAdminsProvider.get();
+        final RoomAdmin rooms = roomAdminsProvider.get();
         rooms.showRoom(state.getStateToken(), state.getContainer(), state.getContainerRights());
     }
 }

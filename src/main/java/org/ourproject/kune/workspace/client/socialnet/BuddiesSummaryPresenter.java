@@ -20,7 +20,7 @@
 
 import java.util.List;
 
-import org.ourproject.kune.chat.client.ChatClientTool;
+import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
@@ -46,16 +46,16 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
     private final StateManager stateManager;
     private final UserActionRegistry actionRegistry;
     private final I18nTranslationService i18n;
-    private final Provider<ChatClientTool> chatClientToolProvider;
+    private final Provider<ChatEngine> chatEngineProvider;
     private final Session session;
 
     public BuddiesSummaryPresenter(StateManager stateManager, final Session session, UserActionRegistry actionRegistry,
-            I18nTranslationService i18n, final Provider<ChatClientTool> chatClientToolProvider) {
+            I18nTranslationService i18n, final Provider<ChatEngine> chatEngineProvider) {
         this.stateManager = stateManager;
         this.session = session;
         this.actionRegistry = actionRegistry;
         this.i18n = i18n;
-        this.chatClientToolProvider = chatClientToolProvider;
+        this.chatEngineProvider = chatEngineProvider;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(StateAbstractDTO state) {
                 setState(state);
@@ -118,7 +118,7 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         final ActionToolbarButtonAndItemDescriptor<UserSimpleDTO> addAsBuddie = new ActionToolbarButtonAndItemDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Viewer, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
                     public void onEvent(final UserSimpleDTO group) {
-                        chatClientToolProvider.get().getChat().addNewBuddie(group.getShortName());
+                        chatEngineProvider.get().addNewBuddie(group.getShortName());
                     }
                 });
         addAsBuddie.setMustBeAuthenticated(true);

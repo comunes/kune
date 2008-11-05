@@ -249,9 +249,6 @@ public class ImageUtils {
         case cancel: {
             return img.cancel();
         }
-        case chat: {
-            return img.chat();
-        }
         case clear: {
             return img.clear();
         }

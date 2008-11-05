@@ -21,6 +21,8 @@
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.BeforeActionCollection;
+import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
@@ -41,6 +43,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
     private SiteSignOutLinkView view;
     private final Session session;
     private final Provider<UserServiceAsync> userServiceProvider;
+    private final BeforeActionCollection beforeSignOutCollection;
 
     public SiteSignOutLinkPresenter(final Session session, final Provider<UserServiceAsync> userServiceProvider,
             final Provider<KuneErrorHandler> kuneErrorHandlerProvider) {
@@ -61,31 +64,39 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
                 clientUIsignOut();
             }
         });
+        beforeSignOutCollection = new BeforeActionCollection();
+    }
+
+    public void addBeforeSignOut(BeforeActionListener listener) {
+        beforeSignOutCollection.add(listener);
     }
 
     public void doSignOut() {
-        final AsyncCallback<Object> callback = new AsyncCallback<Object>() {
-            public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-                try {
-                    throw caught;
-                } catch (final SessionExpiredException e) {
-                    clientUIsignOut();
-                } catch (final UserMustBeLoggedException e) {
-                    clientUIsignOut();
-                } catch (final Throwable e) {
-                    GWT.log("Other kind of exception in doLogout", null);
-                    throw new RuntimeException();
+        if (beforeSignOutCollection.checkBeforeAction()) {
+            userServiceProvider.get().logout(session.getUserHash(), new AsyncCallback<Object>() {
+                public void onFailure(final Throwable caught) {
+                    Site.hideProgress();
+                    try {
+                        throw caught;
+                    } catch (final SessionExpiredException e) {
+                        clientUIsignOut();
+                    } catch (final UserMustBeLoggedException e) {
+                        clientUIsignOut();
+                    } catch (final Throwable e) {
+                        GWT.log("Other kind of exception in doLogout", null);
+                        throw new RuntimeException();
+                    }
                 }
-            }
 
-            public void onSuccess(final Object arg0) {
-                Site.hideProgress();
-                clientUIsignOut();
-            }
+                public void onSuccess(final Object arg0) {
+                    Site.hideProgress();
+                    clientUIsignOut();
+                }
 
-        };
-        userServiceProvider.get().logout(session.getUserHash(), callback);
+            });
+        } else {
+            Site.hideProgress();
+        }
     }
 
     public View getView() {
@@ -95,6 +106,10 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
     public void init(final SiteSignOutLinkView view) {
         this.view = view;
         view.setVisible(false);
+    }
+
+    public void removeBeforeSignOut(BeforeActionListener listener) {
+        beforeSignOutCollection.remove(listener);
     }
 
     private void clientUIsignOut() {

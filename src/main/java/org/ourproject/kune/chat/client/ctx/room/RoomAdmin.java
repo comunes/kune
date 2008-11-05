@@ -17,15 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt.reader;
+package org.ourproject.kune.chat.client.ctx.room;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface DocumentViewer {
-
-    View getView();
-
-    void showDocument(StateToken token, String text, String typeId, BasicMimeTypeDTO mimeType);
+public interface RoomAdmin {
+    void showRoom(final StateToken token, final ContainerDTO container, final AccessRightsDTO rights);
 }

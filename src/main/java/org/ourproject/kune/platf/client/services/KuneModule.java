@@ -102,6 +102,7 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.site.rpc.UserService;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
+import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
@@ -348,7 +349,7 @@ public class KuneModule extends AbstractModule {
                         contentNavigatorToolbar);
 
                 final TextEditorPresenter presenter = new TextEditorPresenter(true, toolbar,
-                        $(I18nUITranslationService.class), $(StateManager.class));
+                        $(I18nUITranslationService.class), $(StateManager.class), $(SiteSignOutLink.class));
                 final TextEditorPanel panel = new TextEditorPanel(presenter, $(I18nTranslationService.class),
                         $(WorkspaceSkeleton.class), $(ColorWebSafePalette.class));
                 presenter.init(panel);

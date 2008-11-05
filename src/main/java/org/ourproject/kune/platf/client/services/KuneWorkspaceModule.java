@@ -18,7 +18,7 @@
  *
  */package org.ourproject.kune.platf.client.services;
 
-import org.ourproject.kune.chat.client.ChatClientTool;
+import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
@@ -334,7 +334,7 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(
                         $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
                         $(Session.class), $$(SocialNetworkServiceAsync.class), $$(GroupLiveSearcher.class),
-                        $(WsThemePresenter.class));
+                        $(WsThemePresenter.class), $$(ChatEngine.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
                 presenter.init(view);
@@ -359,7 +359,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             public BuddiesSummary create() {
                 final BuddiesSummaryPresenter presenter = new BuddiesSummaryPresenter($(StateManager.class),
                         $(Session.class), $(UserActionRegistry.class), $(I18nTranslationService.class),
-                        $$(ChatClientTool.class));
+                        $$(ChatEngine.class));
                 final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class), $(ActionManager.class));
                 presenter.init(panel);

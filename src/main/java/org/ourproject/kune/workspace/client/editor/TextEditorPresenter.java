@@ -24,12 +24,13 @@ import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.BeforeActionListener;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
@@ -52,13 +53,15 @@ public class TextEditorPresenter implements TextEditor {
     private final I18nUITranslationService i18n;
     private final BeforeActionListener beforeStateChangeListener;
     private final StateManager stateManager;
+    private final SiteSignOutLink siteSignOutLink;
 
     public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> toolbar,
-            final I18nUITranslationService i18n, StateManager stateManager) {
+            final I18nUITranslationService i18n, StateManager stateManager, SiteSignOutLink siteSignOutLink) {
         this.toolbar = toolbar;
         autoSave = isAutoSave;
         this.i18n = i18n;
         this.stateManager = stateManager;
+        this.siteSignOutLink = siteSignOutLink;
         savePending = false;
         editingHtml = false;
         saveAndCloseConfirmed = false;
@@ -78,6 +81,7 @@ public class TextEditorPresenter implements TextEditor {
         view.attach();
         setContent(content);
         stateManager.addBeforeStateChangeListener(beforeStateChangeListener);
+        siteSignOutLink.addBeforeSignOut(beforeStateChangeListener);
     }
 
     public String getContent() {
@@ -142,6 +146,7 @@ public class TextEditorPresenter implements TextEditor {
 
     protected void onCancelConfirmed() {
         stateManager.removeBeforeStateChangeListener(beforeStateChangeListener);
+        siteSignOutLink.removeBeforeSignOut(beforeStateChangeListener);
         stateManager.resumeTokenChange();
         reset();
         view.detach();

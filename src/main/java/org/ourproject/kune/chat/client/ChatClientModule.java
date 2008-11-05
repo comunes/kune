@@ -23,17 +23,16 @@ import org.ourproject.kune.chat.client.cnt.ChatContentPresenter;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfo;
 import org.ourproject.kune.chat.client.cnt.info.ChatInfoPanel;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomControl;
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomControlPanel;
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomControlPresenter;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomPanel;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomPresenter;
 import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
-import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdmin;
-import org.ourproject.kune.chat.client.ctx.rooms.RoomsAdminPresenter;
+import org.ourproject.kune.chat.client.ctx.room.RoomAdmin;
+import org.ourproject.kune.chat.client.ctx.room.RoomAdminPresenter;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
+import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
+import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -43,7 +42,6 @@ import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
@@ -60,16 +58,16 @@ public class ChatClientModule extends AbstractModule {
             @Override
             public ChatClientActions create() {
                 return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
-                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatClientTool.class));
+                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatEngine.class));
             }
         });
 
         register(ToolGroup.class, new Factory<ChatClientTool>(ChatClientTool.class) {
             @Override
             public ChatClientTool create() {
-                return new ChatClientTool($(Session.class), $(Application.class), $(I18nUITranslationService.class),
-                        $(EmiteUIDialog.class), $(WorkspaceSkeleton.class), $$(GroupMembersSummary.class),
-                        $(ToolSelector.class), $(WsThemePresenter.class), $$(ChatContent.class), $$(ChatContext.class));
+                return new ChatClientTool($(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
+                        $(ToolSelector.class), $(WsThemePresenter.class), $(ContentIconsRegistry.class),
+                        $(DragDropContentRegistry.class));
             }
         });
 
@@ -92,19 +90,16 @@ public class ChatClientModule extends AbstractModule {
         register(Singleton.class, new Factory<ChatContext>(ChatContext.class) {
             @Override
             public ChatContext create() {
-                final ChatContextPresenter presenter = new ChatContextPresenter($$(RoomsAdmin.class));
+                final ChatContextPresenter presenter = new ChatContextPresenter($$(RoomAdmin.class));
                 return presenter;
             }
         });
 
-        register(Singleton.class, new Factory<ChatRoomControl>(ChatRoomControl.class) {
+        register(Singleton.class, new Factory<ChatEngine>(ChatEngine.class) {
             @Override
-            public ChatRoomControl create() {
-                final ChatRoomControlPresenter presenter = new ChatRoomControlPresenter();
-                final ChatRoomControlPanel panel = new ChatRoomControlPanel($(I18nUITranslationService.class),
-                        presenter);
-                presenter.init(panel);
-                return presenter;
+            public ChatEngine create() {
+                return new ChatEngineDefault($(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
+                        $(Application.class), $(Session.class), $$(EmiteUIDialog.class));
             }
         });
 
@@ -117,10 +112,10 @@ public class ChatClientModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<RoomsAdmin>(RoomsAdmin.class) {
+        register(Singleton.class, new Factory<RoomAdmin>(RoomAdmin.class) {
             @Override
-            public RoomsAdmin create() {
-                final RoomsAdminPresenter presenter = new RoomsAdminPresenter($(ContextNavigator.class),
+            public RoomAdmin create() {
+                final RoomAdminPresenter presenter = new RoomAdminPresenter($(ContextNavigator.class),
                         $(I18nUITranslationService.class), $$(StateManager.class), $(Session.class),
                         $$(ContentServiceAsync.class));
                 return presenter;

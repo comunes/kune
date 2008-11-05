@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
 import com.calclab.suco.testing.listener.MockListener;
 import com.calclab.suco.testing.listener.MockListener0;
@@ -21,6 +22,7 @@ public class TextEditorPresenterTest {
     @SuppressWarnings("unchecked")
     private ActionToolbar toolbar;
     private StateManager stateManager;
+    private SiteSignOutLink signOutLink;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -28,7 +30,8 @@ public class TextEditorPresenterTest {
         I18nUITranslationService i18n = Mockito.mock(I18nUITranslationService.class);
         stateManager = Mockito.mock(StateManager.class);
         toolbar = Mockito.mock(ActionToolbar.class);
-        presenter = new TextEditorPresenter(true, toolbar, i18n, stateManager);
+        signOutLink = Mockito.mock(SiteSignOutLink.class);
+        presenter = new TextEditorPresenter(true, toolbar, i18n, stateManager, signOutLink);
         view = Mockito.mock(TextEditorView.class);
         presenter.init(view);
         saveListener = new MockListener<String>();

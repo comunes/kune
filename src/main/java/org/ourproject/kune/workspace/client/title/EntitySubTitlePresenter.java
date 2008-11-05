@@ -44,6 +44,9 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
                     setState((StateContentDTO) state);
                 } else if (state instanceof StateContainerDTO) {
                     setState((StateContainerDTO) state);
+                } else {
+                    view.setContentSubTitleLeftVisible(false);
+                    view.setContentSubTitleRightVisible(false);
                 }
             }
         });

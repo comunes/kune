@@ -19,10 +19,17 @@
  */
 package org.ourproject.kune.chat.client;
 
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+
 public interface ChatEngine {
+
     void addNewBuddie(String shortName);
 
+    void chat(XmppURI jid);
+
     ChatConnectionOptions getChatOptions();
+
+    boolean isLoggedIn();
 
     void joinRoom(String roomName, String userAlias);
 
@@ -33,4 +40,5 @@ public interface ChatEngine {
     void show();
 
     void stop();
+
 }

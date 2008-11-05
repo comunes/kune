@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.ctx.rooms;
+package org.ourproject.kune.chat.client.ctx.room;
 
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
@@ -30,10 +30,10 @@ import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class RoomsAdminPresenter implements RoomsAdmin {
+public class RoomAdminPresenter implements RoomAdmin {
     private final ContextNavigator contextNavigator;
 
-    public RoomsAdminPresenter(final ContextNavigator contextNavigator, final I18nTranslationService i18n,
+    public RoomAdminPresenter(final ContextNavigator contextNavigator, final I18nTranslationService i18n,
             final Provider<StateManager> stateManagerProvider, final Session session,
             final Provider<ContentServiceAsync> contentServiceProvider) {
         this.contextNavigator = contextNavigator;

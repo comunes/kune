@@ -21,51 +21,97 @@ package org.ourproject.kune.chat.client;
 
 import java.util.Date;
 
+import org.ourproject.kune.platf.client.app.Application;
+import org.ourproject.kune.platf.client.dto.InitDataDTO;
+import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.emiteuimodule.client.UserChatOptions;
 import com.calclab.emiteuimodule.client.params.AvatarProvider;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
+import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.Window;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-class ChatEngineXmpp implements ChatEngine {
-    private final ChatConnectionOptions chatOptions;
-    private final EmiteUIDialog emiteDialog;
+class ChatEngineDefault implements ChatEngine {
+    private ChatConnectionOptions chatOptions;
     private final I18nTranslationService i18n;
     private final WorkspaceSkeleton ws;
     private ToolbarButton traybarButton;
+    private final Provider<EmiteUIDialog> emiteUIProvider;
 
-    public ChatEngineXmpp(final EmiteUIDialog emiteUIDialog, final ChatConnectionOptions chatOptions,
-            final I18nTranslationService i18n, final WorkspaceSkeleton ws) {
-        this.emiteDialog = emiteUIDialog;
-        this.chatOptions = chatOptions;
+    public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws, Application application,
+            Session session, final Provider<EmiteUIDialog> emiteUIProvider) {
         this.i18n = i18n;
         this.ws = ws;
+        this.emiteUIProvider = emiteUIProvider;
+        session.onInitDataReceived(new Listener<InitDataDTO>() {
+            public void onEvent(final InitDataDTO initData) {
+                checkChatDomain(initData.getChatDomain());
+                chatOptions = new ChatConnectionOptions(initData.getChatHttpBase(), initData.getChatDomain(),
+                        initData.getChatRoomHost());
+            }
+
+            private void checkChatDomain(final String chatDomain) {
+                final String httpDomain = WindowUtils.getLocation().getHostName();
+                if (!chatDomain.equals(httpDomain)) {
+                    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+                            + "). This will produce problems with the chat functionality. "
+                            + "Check kune.properties on the server.");
+                }
+            }
+        });
+        session.onUserSignOut(new Listener0() {
+            public void onEvent() {
+                logout();
+            }
+        });
+        session.onUserSignIn(new Listener<UserInfoDTO>() {
+            public void onEvent(final UserInfoDTO user) {
+                login(user.getChatName(), user.getChatPassword());
+            }
+        });
+        application.onApplicationStop(new Listener0() {
+            public void onEvent() {
+                stop();
+            }
+        });
     }
 
     public void addNewBuddie(String shortName) {
         Site.important("In development (emite)");
     }
 
+    public void chat(XmppURI jid) {
+        emiteUIProvider.get().chat(jid);
+    }
+
     public ChatConnectionOptions getChatOptions() {
         return chatOptions;
     }
 
+    public boolean isLoggedIn() {
+        return emiteUIProvider.get().isLoggedIn();
+    }
+
     public void joinRoom(final String roomName, final String userAlias) {
-        if (emiteDialog.isLoggedIn()) {
+        if (emiteUIProvider.get().isLoggedIn()) {
             final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
                     + chatOptions.userOptions.getUserJid().getNode());
-            emiteDialog.joinRoom(roomURI);
+            emiteUIProvider.get().joinRoom(roomURI);
         } else {
             ws.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'."));
         }
@@ -81,14 +127,14 @@ class ChatEngineXmpp implements ChatEngine {
         };
         final String initialWindowTitle = Window.getTitle();
         chatOptions.userOptions = userChatOptions;
-        if (emiteDialog.isDialogNotStarted()) {
-            emiteDialog.start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost, initialWindowTitle,
-                    avatarProvider, i18n.t("Chat"));
+        if (emiteUIProvider.get().isDialogNotStarted()) {
+            emiteUIProvider.get().start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost,
+                    initialWindowTitle, avatarProvider, i18n.t("Chat"));
         } else {
-            emiteDialog.setEnableStatusUI(true);
-            emiteDialog.refreshUserInfo(chatOptions.userOptions);
+            emiteUIProvider.get().setEnableStatusUI(true);
+            emiteUIProvider.get().refreshUserInfo(chatOptions.userOptions);
         }
-        emiteDialog.show(OwnStatus.online);
+        emiteUIProvider.get().show(OwnStatus.online);
         if (traybarButton == null) {
             traybarButton = new ToolbarButton();
             traybarButton.setTooltip(i18n.t("Show/hide the chat window"));
@@ -97,32 +143,32 @@ class ChatEngineXmpp implements ChatEngine {
             traybarButton.addListener(new ButtonListenerAdapter() {
                 @Override
                 public void onClick(final Button button, final EventObject e) {
-                    if (emiteDialog.isVisible()) {
-                        emiteDialog.hide();
+                    if (emiteUIProvider.get().isVisible()) {
+                        emiteUIProvider.get().hide();
                     } else {
-                        emiteDialog.show();
+                        emiteUIProvider.get().show();
                     }
                 }
             });
             ws.getSiteTraybar().addButton(traybarButton);
-            emiteDialog.onChatAttended(new Listener<String>() {
+            emiteUIProvider.get().onChatAttended(new Listener<String>() {
                 public void onEvent(final String parameter) {
                     traybarButton.setIcon("images/e-icon.gif");
                 }
             });
-            emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
+            emiteUIProvider.get().onChatUnattendedWithActivity(new Listener<String>() {
                 public void onEvent(final String parameter) {
                     traybarButton.setIcon("images/e-icon-a.gif");
                 }
             });
         }
-        emiteDialog.hide();
-        emiteDialog.onChatAttended(new Listener<String>() {
+        emiteUIProvider.get().hide();
+        emiteUIProvider.get().onChatAttended(new Listener<String>() {
             public void onEvent(final String parameter) {
                 Window.setTitle(initialWindowTitle);
             }
         });
-        emiteDialog.onChatUnattendedWithActivity(new Listener<String>() {
+        emiteUIProvider.get().onChatUnattendedWithActivity(new Listener<String>() {
             public void onEvent(final String chatTitle) {
                 Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
             }
@@ -130,24 +176,24 @@ class ChatEngineXmpp implements ChatEngine {
     }
 
     public void logout() {
-        if (!emiteDialog.isDialogNotStarted()) {
-            emiteDialog.setOwnPresence(OwnStatus.offline);
+        if (!emiteUIProvider.get().isDialogNotStarted()) {
+            emiteUIProvider.get().setOwnPresence(OwnStatus.offline);
             chatOptions.userOptions = getUserChatOptions("reset@example.com", "");
-            emiteDialog.refreshUserInfo(chatOptions.userOptions);
-            emiteDialog.setEnableStatusUI(false);
+            emiteUIProvider.get().refreshUserInfo(chatOptions.userOptions);
+            emiteUIProvider.get().setEnableStatusUI(false);
         }
     }
 
     public void show() {
-        emiteDialog.show();
+        emiteUIProvider.get().show();
     }
 
     public void stop() {
-        if (!emiteDialog.isDialogNotStarted()) {
-            emiteDialog.destroy();
+        if (!emiteUIProvider.get().isDialogNotStarted()) {
+            emiteUIProvider.get().destroy();
         }
-        if (emiteDialog.getSession().isLoggedIn()) {
-            emiteDialog.getSession().logout();
+        if (emiteUIProvider.get().getSession().isLoggedIn()) {
+            emiteUIProvider.get().getSession().logout();
         }
     }
 

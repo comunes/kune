@@ -19,109 +19,33 @@
  */
 package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.chat.client.cnt.ChatContent;
-import org.ourproject.kune.chat.client.ctx.ChatContext;
-import org.ourproject.kune.platf.client.app.Application;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.tool.AbstractClientTool;
+import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
-import org.ourproject.kune.platf.client.ui.MenuItem;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emiteuimodule.client.EmiteUIDialog;
-import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
-
-public class ChatClientTool extends AbstractClientTool {
+public class ChatClientTool extends FoldableAbstractClientTool {
     public static final String NAME = "chats";
     public static final String TYPE_ROOT = "chat.root";
     public static final String TYPE_ROOM = "chat.room";
     public static final String TYPE_CHAT = "chat.chat";
-    private ChatEngine chat;
-    private final Provider<ChatContext> chatContextProvider;
-    private final Provider<ChatContent> chatContentProvider;
 
-    public ChatClientTool(final Session session, final Application application, final I18nTranslationService i18n,
-            final EmiteUIDialog emiteUIDialog, final WorkspaceSkeleton ws,
-            final Provider<GroupMembersSummary> groupMembersSummaryProvider, final ToolSelector toolSelector,
-            final WsThemePresenter wsThemePresenter, final Provider<ChatContent> chatContentProvider,
-            final Provider<ChatContext> chatContextProvider) {
-        super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws);
-        this.chatContentProvider = chatContentProvider;
-        this.chatContextProvider = chatContextProvider;
-        session.onInitDataReceived(new Listener<InitDataDTO>() {
-            public void onEvent(final InitDataDTO initData) {
-                checkChatDomain(initData.getChatDomain());
-                final ChatConnectionOptions chatOptions = new ChatConnectionOptions(initData.getChatHttpBase(),
-                        initData.getChatDomain(), initData.getChatRoomHost());
-                chat = new ChatEngineXmpp(emiteUIDialog, chatOptions, i18n, ws);
-                groupMembersSummaryProvider.get().addUserOperation(
-                        new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),
-                                new Listener<GroupDTO>() {
-                                    public void onEvent(final GroupDTO group) {
-                                        emiteUIDialog.show();
-                                        if (emiteUIDialog.isLoggedIn()) {
-                                            emiteUIDialog.chat(XmppURI.jid(group.getShortName() + "@"
-                                                    + initData.getChatDomain()));
-                                        } else {
-                                            ws.showAlertMessage(i18n.t("Error"),
-                                                    i18n.t("To start a chat you need to be 'online'."));
-                                        }
-                                    }
-                                }), true);
-            }
-
-            private void checkChatDomain(final String chatDomain) {
-                final String httpDomain = WindowUtils.getLocation().getHostName();
-                if (!chatDomain.equals(httpDomain)) {
-                    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
-                            + "). This will produce problems with the chat functionality. "
-                            + "Check kune.properties on the server.");
-                }
-            }
-        });
-        application.onApplicationStop(new Listener0() {
-            public void onEvent() {
-                chat.stop();
-            }
-        });
-        session.onUserSignOut(new Listener0() {
-            public void onEvent() {
-                chat.logout();
-            }
-        });
-        session.onUserSignIn(new Listener<UserInfoDTO>() {
-            public void onEvent(final UserInfoDTO user) {
-                chat.login(user.getChatName(), user.getChatPassword());
-            }
-        });
-    }
-
-    public ChatEngine getChat() {
-        return chat;
+    public ChatClientTool(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
+            final ToolSelector toolSelector, final WsThemePresenter wsThemePresenter,
+            final ContentIconsRegistry contentIconsRegistry, final DragDropContentRegistry dragDropContentRegistry) {
+        super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws, contentIconsRegistry,
+                dragDropContentRegistry);
     }
 
     public String getName() {
         return NAME;
     }
 
-    public void setContent(final StateContainerDTO state) {
-        chatContentProvider.get().setState(state);
+    @Override
+    protected void registerIcons() {
+        contentIconsRegistry.registerContentTypeIcon(TYPE_ROOM, "public/images/emite-room.png");
     }
-
-    public void setContext(final StateContainerDTO state) {
-        chatContextProvider.get().setState(state);
-    }
-
 }

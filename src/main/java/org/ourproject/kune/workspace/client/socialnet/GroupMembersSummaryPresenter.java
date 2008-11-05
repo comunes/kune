@@ -20,10 +20,12 @@
 
 import java.util.List;
 
+import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
+import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
@@ -34,6 +36,7 @@ import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -42,6 +45,7 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
+import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
@@ -61,7 +65,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     public GroupMembersSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
             final Provider<SocialNetworkServiceAsync> snServiceProvider,
-            final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter) {
+            final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter,
+            final Provider<ChatEngine> chatEngineProvider) {
         super(i18n, stateManager, imageUtils, session, snServiceProvider);
         this.i18n = i18n;
         this.stateManager = stateManager;
@@ -77,6 +82,22 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
             public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
                 view.setTheme(oldTheme, newTheme);
+            }
+        });
+        session.onInitDataReceived(new Listener<InitDataDTO>() {
+            public void onEvent(final InitDataDTO initData) {
+                addUserOperation(new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),
+                        new Listener<GroupDTO>() {
+                            public void onEvent(final GroupDTO group) {
+                                chatEngineProvider.get().show();
+                                if (chatEngineProvider.get().isLoggedIn()) {
+                                    chatEngineProvider.get().chat(
+                                            XmppURI.jid(group.getShortName() + "@" + initData.getChatDomain()));
+                                } else {
+                                    Site.important(i18n.t("To start a chat you need to be 'online'."));
+                                }
+                            }
+                        }), true);
             }
         });
         final String adminsTitle = i18n.t("Admins");

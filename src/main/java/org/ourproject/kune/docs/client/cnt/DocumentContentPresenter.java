@@ -21,7 +21,7 @@ package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
-import org.ourproject.kune.docs.client.cnt.reader.DocumentViewer;
+import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewer;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;

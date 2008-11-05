@@ -17,30 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.cnt;
+package org.ourproject.kune.docs.client.cnt.viewer;
 
 import org.ourproject.kune.platf.client.View;
 
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
+public interface DocumentViewerView extends View {
 
-public class RoomViewPanel extends VerticalPanel implements View {
+    void setContent(String content);
 
-    public RoomViewPanel(final RoomViewListener listener) {
-        FlowPanel flow = new FlowPanel();
-        Button btnEnter = new Button("entrar", new ClickListener() {
-            public void onClick(Widget arg0) {
-                listener.onEnterRoom();
-            }
-        });
-        flow.add(btnEnter);
-        Label label = new Label("panel del chat: contenido por defecto");
+    void showImage(String imageUrl, String imageResizedUrl);
 
-        add(flow);
-        add(label);
-    }
 }

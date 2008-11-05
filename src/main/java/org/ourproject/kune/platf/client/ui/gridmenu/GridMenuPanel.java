@@ -244,15 +244,13 @@ public class GridMenuPanel<T> extends Panel {
     @Override
     public void setHeight(final int height) {
         super.setHeight(height);
-        // grid.setHeight(height);
         doLayoutIfNeeded();
     }
 
     @Override
     public void setWidth(final int width) {
         // grid.setWidth(width - 27);
-        grid.setWidth(width - 27);
-        // super.setWidth(width - 11);
+        super.setWidth(width);
         doLayoutIfNeeded();
     }
 
