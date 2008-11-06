@@ -17,9 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.cnt.info;
+package org.ourproject.kune.docs.client.cnt.folder.viewer;
 
-public interface ChatInfo {
+import org.ourproject.kune.workspace.client.cnt.AbstractContentPanel;
+import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-    void show();
+import com.google.gwt.user.client.ui.Label;
+
+public class DocFolderContentPanel extends AbstractContentPanel implements DocFolderContentView {
+
+    public DocFolderContentPanel(WorkspaceSkeleton ws) {
+        super(ws);
+        Label label = new Label("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
+        label.setStyleName("kune-Content-Main");
+        label.addStyleName("kune-Margin-7-trbl");
+        initWidget(label);
+    }
 }

@@ -25,6 +25,10 @@ import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionContextToolbar;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionContextToolbarPresenter;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
@@ -107,6 +111,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
 
+import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -416,17 +421,32 @@ public class KuneModule extends AbstractModule {
             }
         });
 
+        register(NoDecoration.class, new Factory<ActionContentToolbar>(ActionContentToolbar.class) {
+            @Override
+            public ActionContentToolbar create() {
+                final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
+                        ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionContentToolbar toolbar = new ActionContentToolbarPresenter(contentNavigatorToolbar);
+                return toolbar;
+            }
+        });
+
+        register(NoDecoration.class, new Factory<ActionContextToolbar>(ActionContextToolbar.class) {
+            @Override
+            public ActionContextToolbar create() {
+                final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
+                        ActionToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionContextToolbar toolbar = new ActionContextToolbarPresenter(contentNavigatorToolbar);
+                return toolbar;
+            }
+        });
+
         register(Singleton.class, new Factory<ContextNavigator>(ContextNavigator.class) {
             @Override
             public ContextNavigator create() {
-                final ActionToolbarPanel<StateToken> contextNavigatorToolbar = new ActionToolbarPanel<StateToken>(
-                        ActionToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class));
-                final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
-                        contextNavigatorToolbar);
-
                 final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
                         $(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
-                        $(ContentIconsRegistry.class), $(DragDropContentRegistry.class), toolbar,
+                        $(ContentIconsRegistry.class), $(DragDropContentRegistry.class), $(ActionContextToolbar.class),
                         $(ContextActionRegistry.class), $$(FileDownloadUtils.class), true);
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
                         $(WorkspaceSkeleton.class), $(ActionManager.class));

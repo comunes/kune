@@ -126,11 +126,13 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         if (!topbar.isAttached()) {
             switch (position) {
             case content:
+                ws.getEntityWorkspace().getContentTopBar().removeAll();
                 ws.getEntityWorkspace().getContentTopBar().add(topbar);
                 ws.getEntityWorkspace().getContentBottomBar().add(bottombar);
                 break;
             case context:
             default:
+                ws.getEntityWorkspace().getContextTopBar().removeAll();
                 ws.getEntityWorkspace().getContextTopBar().add(topbar);
                 ws.getEntityWorkspace().getContextBottomBar().add(bottombar);
             }

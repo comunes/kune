@@ -19,8 +19,9 @@
  */
 package org.ourproject.kune.chat.client.cnt.room;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
-public interface ChatRoomView extends View {
+public interface ChatRoomView extends AbstractContentView {
 
+    void setInfo(String info);
 }

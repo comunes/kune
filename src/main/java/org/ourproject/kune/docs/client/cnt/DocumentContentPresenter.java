@@ -20,7 +20,6 @@
 package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
 import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewer;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
@@ -42,18 +41,15 @@ public class DocumentContentPresenter implements DocumentContent {
     private final Session session;
     private final Provider<DocumentViewer> docReaderProvider;
     private final Provider<TextEditor> textEditorProvider;
-    private final Provider<FolderViewer> folderViewerProvider;
     private final ActionToolbar<StateToken> toolbar;
     private final ActionRegistry<StateToken> actionRegistry;
 
     public DocumentContentPresenter(final StateManager stateManager, final Session session,
             final Provider<DocumentViewer> docReaderProvider, final Provider<TextEditor> textEditorProvider,
-            final Provider<FolderViewer> folderViewerProvider, final ActionToolbar<StateToken> toolbar,
-            final ActionRegistry<StateToken> actionRegistry) {
+            final ActionToolbar<StateToken> toolbar, final ActionRegistry<StateToken> actionRegistry) {
         this.session = session;
         this.docReaderProvider = docReaderProvider;
         this.textEditorProvider = textEditorProvider;
-        this.folderViewerProvider = folderViewerProvider;
         this.toolbar = toolbar;
         this.actionRegistry = actionRegistry;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
@@ -94,19 +90,10 @@ public class DocumentContentPresenter implements DocumentContent {
                 if (stateCntCtx instanceof StateContentDTO) {
                     setState((StateContentDTO) stateCntCtx);
                 } else if (stateCntCtx instanceof StateContainerDTO) {
-                    setState(stateCntCtx);
+                    // FIXME setState(stateCntCtx);
                 }
             }
         }
-    }
-
-    private void setState(final StateContainerDTO state) {
-        ActionItemCollection<StateToken> collection = actionRegistry.getCurrentActions(state.getStateToken(),
-                state.getTypeId(), session.isLogged(), state.getContainerRights(), true);
-        setToolbar(collection);
-        final FolderViewer viewer = folderViewerProvider.get();
-        viewer.setFolder(state.getContainer());
-        view.setContent(viewer.getView());
     }
 
     private void setState(final StateContentDTO state) {

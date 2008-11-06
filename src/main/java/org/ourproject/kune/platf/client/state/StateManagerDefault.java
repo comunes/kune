@@ -204,9 +204,6 @@ public class StateManagerDefault implements StateManager, HistoryListener {
     private void checkGroupAndToolChange(final StateAbstractDTO newState) {
         final String previousGroup = previousToken == null ? "" : previousToken.getGroup();
         final String newGroup = newState.getStateToken().getGroup();
-        if (previousToken == null || !previousGroup.equals(newGroup)) {
-            onGroupChanged.fire(previousGroup, newGroup);
-        }
         String previousTokenTool = previousToken == null ? "" : previousToken.getTool();
         String newTokenTool = newState.getStateToken().getTool();
         String previousToolName = previousTokenTool == null ? "" : previousTokenTool;
@@ -214,6 +211,9 @@ public class StateManagerDefault implements StateManager, HistoryListener {
 
         if (previousToken == null || previousToolName == null || !previousToolName.equals(newToolName)) {
             onToolChanged.fire(previousToolName, newToolName);
+        }
+        if (previousToken == null || !previousGroup.equals(newGroup)) {
+            onGroupChanged.fire(previousGroup, newGroup);
         }
     }
 

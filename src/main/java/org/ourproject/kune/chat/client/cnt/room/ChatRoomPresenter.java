@@ -19,21 +19,44 @@
  */
 package org.ourproject.kune.chat.client.cnt.room;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.chat.client.ChatClientTool;
+import org.ourproject.kune.platf.client.actions.ActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
+import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.site.Site;
 
-public class ChatRoomPresenter implements ChatRoom {
+public class ChatRoomPresenter extends FoldableContentPresenter implements ChatRoom {
 
-    private final ChatRoomView view;
+    private ChatRoomView view;
+    private final I18nUITranslationService i18n;
 
-    public ChatRoomPresenter(final ChatRoomView view) {
+    public ChatRoomPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
+            ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry) {
+        super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry);
+        this.i18n = i18n;
+    }
+
+    public void init(final ChatRoomView view) {
+        super.init(view);
         this.view = view;
     }
 
-    public View getView() {
-        return view;
+    @Override
+    protected void setState(StateContainerDTO state) {
+        if (state.getTypeId().equals(ChatClientTool.TYPE_ROOT)) {
+            if (state.getRootContainer().getChilds().size() == 0) {
+                view.setInfo(i18n.t("This group has no chat rooms."));
+            } else {
+                view.setInfo("");
+            }
+        } else {
+            view.setInfo("History of room conversations ..." + Site.IN_DEVELOPMENT);
+        }
+        super.setState(state);
     }
-
-    public void show() {
-    }
-
 }

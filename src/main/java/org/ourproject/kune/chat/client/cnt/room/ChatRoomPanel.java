@@ -19,15 +19,24 @@
  */
 package org.ourproject.kune.chat.client.cnt.room;
 
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.cnt.AbstractContentPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Label;
 
-public class ChatRoomPanel implements ChatRoomView {
+public class ChatRoomPanel extends AbstractContentPanel implements ChatRoomView {
+
+    private final Label label;
 
     public ChatRoomPanel(final WorkspaceSkeleton ws) {
-        ws.getEntityWorkspace().setContent(new Label("History of room conversations." + Site.IN_DEVELOPMENT));
+        super(ws);
+        label = new Label();
+        label.setStyleName("kune-Content-Main");
+        label.addStyleName("kune-Margin-7-trbl");
+        initWidget(label);
     }
 
+    public void setInfo(String info) {
+        label.setText(info);
+    }
 }

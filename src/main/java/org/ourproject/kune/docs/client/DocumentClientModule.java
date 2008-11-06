@@ -21,10 +21,10 @@
 import org.ourproject.kune.docs.client.cnt.DocumentContent;
 import org.ourproject.kune.docs.client.cnt.DocumentContentPanel;
 import org.ourproject.kune.docs.client.cnt.DocumentContentPresenter;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewer;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerPanel;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerPresenter;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.FolderViewerView;
+import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContent;
+import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContentPanel;
+import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContentPresenter;
+import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContentView;
 import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewer;
 import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewerPanel;
 import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewerPresenter;
@@ -35,16 +35,12 @@ import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
 import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorPanel;
 import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorPresenter;
 import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorView;
-import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.ToolGroup;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -98,14 +94,9 @@ public class DocumentClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<DocumentContent>(DocumentContent.class) {
             @Override
             public DocumentContent create() {
-                final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
-                        ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
-                final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
-                        contentNavigatorToolbar);
-
                 final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),
-                        $(Session.class), $$(DocumentViewer.class), $$(TextEditor.class), $$(FolderViewer.class),
-                        toolbar, $(ContentActionRegistry.class));
+                        $(Session.class), $$(DocumentViewer.class), $$(TextEditor.class),
+                        $(ActionContentToolbar.class), $(ContentActionRegistry.class));
                 final DocumentContentPanel panel = new DocumentContentPanel($(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
@@ -118,8 +109,8 @@ public class DocumentClientModule extends AbstractModule {
                 final DocContextEditorPresenter presenter = new DocContextEditorPresenter($(Session.class),
                         $(StateManager.class), $$(TagsSummary.class), $$(ContentServiceAsync.class),
                         $(EntityTitle.class), $(EntitySubTitle.class));
-                final DocContextEditorView view = new DocContextEditorPanel(presenter, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                final DocContextEditorView view = new DocContextEditorPanel(presenter,
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -144,11 +135,13 @@ public class DocumentClientModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<FolderViewer>(FolderViewer.class) {
+        register(ToolGroup.class, new Factory<DocFolderContent>(DocFolderContent.class) {
             @Override
-            public FolderViewer create() {
-                final FolderViewerView view = new FolderViewerPanel();
-                final FolderViewerPresenter presenter = new FolderViewerPresenter(view);
+            public DocFolderContent create() {
+                final DocFolderContentPresenter presenter = new DocFolderContentPresenter($(StateManager.class),
+                        $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class));
+                final DocFolderContentView view = new DocFolderContentPanel($(WorkspaceSkeleton.class));
+                presenter.init(view);
                 return presenter;
             }
         });
