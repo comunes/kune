@@ -23,6 +23,10 @@ import org.ourproject.kune.platf.client.View;
 public interface EntityLogoSelectorView extends View {
     void hide();
 
+    void setNormalGroupsLabels();
+
+    void setPersonalGroupsLabels();
+
     void setUploadParams(String userHash, String token);
 
     void show();

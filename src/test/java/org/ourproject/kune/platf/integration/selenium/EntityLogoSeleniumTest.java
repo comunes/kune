@@ -20,7 +20,7 @@ public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
 
     private void setLogo(String filename) throws Exception, IOException {
         click(gid(EntityLogoPanel.PUT_YOUR_LOGO_LINK));
-        waitForTextInside(EntityLogoSelectorPanel.DIALOG_ID, EntityLogoSelectorPanel.TITLE);
+        waitForTextInside(EntityLogoSelectorPanel.DIALOG_ID, EntityLogoSelectorPanel.NORMAL_TITLE);
         File dir = new File(".");
         type(EntityLogoView.LOGO_FORM_FIELD, dir.getCanonicalPath() + File.separator + "img" + File.separator
                 + filename);

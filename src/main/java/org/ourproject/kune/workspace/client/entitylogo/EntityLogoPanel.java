@@ -24,11 +24,13 @@ import java.util.Date;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -103,6 +105,10 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
             setLogoText("");
         }
 
+        public void setChangeYourAvatarText() {
+            putYourLogoHL.setText(i18n.t("Change Your Avatar"));
+        }
+
         public void setChangeYourLogo() {
             putYourLogoHL.setText(i18n.t("Change Your Logo"));
         }
@@ -110,6 +116,10 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
         public void setLargeFont() {
             resetFontSize();
             logoLabel.addStyleName(LOGO_LARGE_FONT_STYLE);
+        }
+
+        public void setLogoImage(AbstractImagePrototype imageProto) {
+            imageProto.applyTo(logoImage);
         }
 
         public void setLogoImage(final String url) {
@@ -128,6 +138,10 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
         public void setMediumFont() {
             resetFontSize();
             logoLabel.addStyleName(LOGO_MEDIUM_FONT_STYLE);
+        }
+
+        public void setPutYourAvatarText() {
+            putYourLogoHL.setText(i18n.t("Put Your Avatar Here"));
         }
 
         public void setPutYourLogo() {
@@ -157,19 +171,25 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
     private final Provider<EntityLogoSelector> entityLogoSelectorProvider;
     private EntityTextLogo entityTextLogo;
     private final I18nTranslationService i18n;
+    private final Images images;
 
     public EntityLogoPanel(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
             final Provider<FileDownloadUtils> dowloadProvider,
-            final Provider<EntityLogoSelector> entityLogoSelectorProvider) {
+            final Provider<EntityLogoSelector> entityLogoSelectorProvider, Images images) {
         this.i18n = i18n;
         this.downloadProvider = dowloadProvider;
         this.entityLogoSelectorProvider = entityLogoSelectorProvider;
+        this.images = images;
         ws.addToEntityMainHeader(this);
     }
 
     public void reloadImage(GroupDTO group) {
-        entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "&nocache="
-                + new Date().getTime());
+        getEntityTextLogo().setLogoImage(
+                downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "&nocache=" + new Date().getTime());
+    }
+
+    public void setChangeYourAvatarText() {
+        getEntityTextLogo().setChangeYourAvatarText();
     }
 
     public void setChangeYourLogoText() {
@@ -213,6 +233,10 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
         getEntityTextLogo().setMediumFont();
     }
 
+    public void setPutYourAvatarText() {
+        getEntityTextLogo().setPutYourAvatarText();
+    }
+
     public void setPutYourLogoText() {
         getEntityTextLogo().setPutYourLogo();
     }
@@ -230,6 +254,10 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
             getEntityTextLogo().removeStyleDependentName(oldTheme.toString());
         }
         getEntityTextLogo().addStyleDependentName(newTheme.toString());
+    }
+
+    public void showDefUserLogo() {
+        getEntityTextLogo().setLogoImage(images.personAvatarDef());
     }
 
     private EntityTextLogo getEntityTextLogo() {

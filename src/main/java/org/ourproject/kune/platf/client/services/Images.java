@@ -339,6 +339,9 @@ public interface Images extends ImageBundle {
     @Resource("org/ourproject/kune/platf/public/images/opentriangle.gif")
     AbstractImagePrototype opentriangle();
 
+    @Resource("org/ourproject/kune/platf/public/images/persons/person2-60.png")
+    AbstractImagePrototype personAvatarDef();
+
     @Resource("org/ourproject/kune/platf/public/images/person-def.png")
     AbstractImagePrototype personDef();
 

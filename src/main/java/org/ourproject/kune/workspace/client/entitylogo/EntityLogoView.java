@@ -34,6 +34,8 @@ public interface EntityLogoView {
 
     void reloadImage(GroupDTO group);
 
+    void setChangeYourAvatarText();
+
     void setChangeYourLogoText();
 
     void setFullLogo(StateToken stateToken, boolean clipped);
@@ -48,6 +50,8 @@ public interface EntityLogoView {
 
     void setMediumFont();
 
+    void setPutYourAvatarText();
+
     void setPutYourLogoText();
 
     void setSetYourLogoVisible(final boolean visible);
@@ -55,4 +59,6 @@ public interface EntityLogoView {
     void setSmallFont();
 
     void setTheme(final WsTheme oldTheme, WsTheme newTheme);
+
+    void showDefUserLogo();
 }

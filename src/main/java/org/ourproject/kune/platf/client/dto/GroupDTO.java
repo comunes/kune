@@ -122,6 +122,10 @@ public class GroupDTO implements IsSerializable {
         return getHasLogo();
     }
 
+    public boolean isPersonalGroup() {
+        return groupType.equals(GroupType.PERSONAL);
+    }
+
     public void setDefaultContent(final ContentSimpleDTO defaultContent) {
         this.defaultContent = defaultContent;
     }

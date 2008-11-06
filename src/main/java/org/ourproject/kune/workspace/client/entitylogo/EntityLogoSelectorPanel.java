@@ -39,7 +39,8 @@ import com.gwtext.client.widgets.form.event.FormListener;
 
 public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
 
-    public static final String TITLE = "Select a logo for your group";
+    public static final String NORMAL_TITLE = "Select a logo for your group";
+    public static final String PERSON_TITLE = "Select your avatar";
     public static final String ICON_UPLOAD_SERVLET = "/kune/servlets/EntityLogoUploadManager";
     public static final String SUBID = "k-elogoselp-subb";
     public static final String CANCELID = "k-elogoselp-canb";
@@ -49,10 +50,13 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
     private final Hidden userhashField;
     private final Hidden tokenField;
     private final TextField file;
+    private final Label dialogInfoLabel;
+    private final I18nTranslationService i18n;
 
     public EntityLogoSelectorPanel(final EntityLogoSelectorPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
-        dialog = new BasicDialogExtended(i18n.t(TITLE), true, true, 400, 200, "", i18n.t("Select"), SUBID,
+        this.i18n = i18n;
+        dialog = new BasicDialogExtended(i18n.t(NORMAL_TITLE), true, true, 400, 200, "", i18n.t("Select"), SUBID,
                 i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
                     public void onEvent() {
                         String filename = file.getValueAsString();
@@ -95,16 +99,8 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 presenter.onSubmitFailed(httpStatus, responseText);
             }
         });
-        // We will automatically resize images to 64x64 pixels. For good
-        // results, start with a square image. For best results, use a 64x64
-        // pixel image.
-        String text = i18n.t("Select an image in your computer as the logo for this group. "
-                + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
-                EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT);
-        Label label = new Label();
-        label.setHtml(text + "<br/><br/>");
-
-        formPanel.add(label);
+        dialogInfoLabel = new Label();
+        formPanel.add(dialogInfoLabel);
         file = new TextField("File", EntityLogoView.LOGO_FORM_FIELD);
         EventCallback keyListener = new EventCallback() {
             public void execute(EventObject e) {
@@ -143,6 +139,22 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
     public void hide() {
         dialog.hide();
         formPanel.getForm().reset();
+    }
+
+    public void setNormalGroupsLabels() {
+        dialogInfoLabel.setHtml(i18n.t("Select an image in your computer as the logo for this group. "
+                + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
+                EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT)
+                + "<br/><br/>");
+        dialog.setTitle(NORMAL_TITLE);
+    }
+
+    public void setPersonalGroupsLabels() {
+        dialogInfoLabel.setHtml(i18n.t("Select an image in your computer as your avatar. "
+                + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
+                EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT)
+                + "<br/><br/>");
+        dialog.setTitle(PERSON_TITLE);
     }
 
     public void setUploadParams(String userHash, String token) {

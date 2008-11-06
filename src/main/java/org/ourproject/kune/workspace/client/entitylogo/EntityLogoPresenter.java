@@ -20,6 +20,7 @@
 
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -46,14 +47,7 @@ public class EntityLogoPresenter implements EntityLogo {
         });
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
-                final boolean isAdmin = state.getGroupRights().isAdministrable();
-                if (state.getGroup().hasLogo()) {
-                    view.setChangeYourLogoText();
-                    view.setSetYourLogoVisible(isAdmin);
-                } else {
-                    view.setPutYourLogoText();
-                    view.setSetYourLogoVisible(isAdmin);
-                }
+                setEntityLogoLink(state);
             }
         });
         theme.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
@@ -75,21 +69,47 @@ public class EntityLogoPresenter implements EntityLogo {
         view.reloadImage(session.getCurrentState().getGroup());
     }
 
-    private void setGroupLogo(final GroupDTO group) {
+    void setEntityLogoLink(final StateAbstractDTO state) {
+        final boolean isAdmin = state.getGroupRights().isAdministrable();
+        switch (state.getGroup().getGroupType()) {
+        case PERSONAL:
+            if (state.getGroup().hasLogo()) {
+                view.setChangeYourAvatarText();
+            } else {
+                view.setPutYourAvatarText();
+            }
+            break;
+        default:
+            if (state.getGroup().hasLogo()) {
+                view.setChangeYourLogoText();
+            } else {
+                view.setPutYourLogoText();
+            }
+            break;
+        }
+        view.setSetYourLogoVisible(isAdmin);
+    }
+
+    void setGroupLogo(final GroupDTO group) {
         final ContentSimpleDTO groupFullLogo = group.getGroupFullLogo();
         if (groupFullLogo != null) {
             view.setFullLogo(groupFullLogo.getStateToken(), true);
         } else if (group.hasLogo()) {
-            view.setLogoImage(group.getStateToken());
             setLogoText(group.getLongName());
+            view.setLogoImage(group.getStateToken());
             view.setLogoImageVisible(true);
         } else {
             setLogoText(group.getLongName());
-            view.setLogoImageVisible(false);
+            if (group.getGroupType().equals(GroupType.PERSONAL)) {
+                view.showDefUserLogo();
+                view.setLogoImageVisible(true);
+            } else {
+                view.setLogoImageVisible(false);
+            }
         }
     }
 
-    private void setLogoText(String name) {
+    void setLogoText(String name) {
         int length = name.length();
         if (length <= GROUP_LARGE_NAME_LIMIT_SIZE) {
             view.setLargeFont();

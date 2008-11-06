@@ -59,6 +59,11 @@ public class EntityLogoSelectorPresenter implements EntityLogoSelector {
         session.check(new AsyncCallbackSimple<Object>() {
             public void onSuccess(Object result) {
                 view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
+                if (session.getCurrentState().getGroup().isPersonalGroup()) {
+                    view.setPersonalGroupsLabels();
+                } else {
+                    view.setNormalGroupsLabels();
+                }
                 view.show();
             }
         });
