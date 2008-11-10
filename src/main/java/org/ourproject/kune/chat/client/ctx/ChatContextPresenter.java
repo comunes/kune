@@ -19,24 +19,23 @@
  */
 package org.ourproject.kune.chat.client.ctx;
 
-import org.ourproject.kune.chat.client.ctx.room.RoomAdmin;
+import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+import org.ourproject.kune.workspace.client.cxt.FoldableContextPresenter;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class ChatContextPresenter implements ChatContext {
-
-    private final Provider<RoomAdmin> roomAdminsProvider;
+public class ChatContextPresenter extends FoldableContextPresenter implements ChatContext {
 
     public ChatContextPresenter(final StateManager stateManager,
-            final Provider<ContextNavigator> contextNavigatorProvider, final Provider<RoomAdmin> roomAdminsProvider) {
-        this.roomAdminsProvider = roomAdminsProvider;
+            final Provider<ContextNavigator> contextNavigatorProvider) {
+        super(ChatClientTool.NAME, stateManager, contextNavigatorProvider);
     }
 
-    public void setState(final StateContainerDTO state) {
-        final RoomAdmin rooms = roomAdminsProvider.get();
-        rooms.showRoom(state.getStateToken(), state.getContainer(), state.getContainerRights());
+    @Override
+    protected void setState(final StateContainerDTO state) {
+        super.setState(state);
     }
 }

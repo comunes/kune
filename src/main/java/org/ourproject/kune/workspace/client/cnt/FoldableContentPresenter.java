@@ -13,7 +13,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.listener.Listener;
 
-public class FoldableContentPresenter extends AbstractContentPresenter {
+public abstract class FoldableContentPresenter extends AbstractContentPresenter {
 
     private final String toolName;
     private final ActionRegistry<StateToken> actionRegistry;

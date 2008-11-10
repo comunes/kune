@@ -21,43 +21,34 @@ package org.ourproject.kune.docs.client.ctx;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+import org.ourproject.kune.workspace.client.cxt.FoldableContextPresenter;
 
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
 
-public class DocumentContextPresenter implements DocumentContext {
-    private final Provider<ContextNavigator> contextNavigatorProvider;
+public class DocumentContextPresenter extends FoldableContextPresenter implements DocumentContext {
     private final Provider<DocContextEditor> adminContextProvider;
 
     public DocumentContextPresenter(final StateManager stateManager,
-            final Provider<ContextNavigator> contextNavigatorProvider, final Provider<DocContextEditor> adminContextProvider) {
-        this.contextNavigatorProvider = contextNavigatorProvider;
+            final Provider<ContextNavigator> contextNavigatorProvider,
+            final Provider<DocContextEditor> adminContextProvider) {
+        super(DocumentClientTool.NAME, stateManager, contextNavigatorProvider);
         this.adminContextProvider = adminContextProvider;
-        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-            public void onEvent(final StateAbstractDTO state) {
-                if (state instanceof StateContainerDTO) {
-                    StateContainerDTO stateCntCtx = (StateContainerDTO) state;
-                    if (DocumentClientTool.NAME.equals(stateCntCtx.getToolName())) {
-                        setState(stateCntCtx);
-                        contextNavigatorProvider.get().attach();
-                    }
-                } else {
-                    contextNavigatorProvider.get().detach();
-                    adminContextProvider.get().detach();
-                    contextNavigatorProvider.get().clear();
-                    adminContextProvider.get().clear();
-                }
-            }
-        });
     }
 
-    private void setState(final StateContainerDTO state) {
-        contextNavigatorProvider.get().setState(state, true);
+    @Override
+    protected void detach() {
+        super.detach();
+        adminContextProvider.get().detach();
+        adminContextProvider.get().clear();
+    }
+
+    @Override
+    protected void setState(final StateContainerDTO state) {
+        super.setState(state);
         if (state instanceof StateContentDTO) {
             adminContextProvider.get().setState((StateContentDTO) state);
         }

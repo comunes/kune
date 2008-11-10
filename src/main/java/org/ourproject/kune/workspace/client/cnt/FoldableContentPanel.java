@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class FoldableContentPanel extends AbstractContentPanel {
+public abstract class FoldableContentPanel extends AbstractContentPanel {
 
     private final I18nTranslationService i18n;
 

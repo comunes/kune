@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.chat.client;
 
+import org.ourproject.kune.chat.client.ctx.room.AddRoom;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
@@ -39,15 +40,17 @@ public class ChatClientActions {
     private final ContentActionRegistry contentActionRegistry;
     private final I18nUITranslationService i18n;
     private final ContextActionRegistry contextActionRegistry;
+    private final Provider<AddRoom> addRoomProvider;
 
     public ChatClientActions(final I18nUITranslationService i18n, final Session session,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
-            final Provider<ChatEngine> chatEngine) {
+            final Provider<ChatEngine> chatEngine, Provider<AddRoom> addRoomProvider) {
         this.i18n = i18n;
         this.session = session;
         this.contentActionRegistry = contentActionRegistry;
         this.contextActionRegistry = contextActionRegistry;
         this.chatEngineProvider = chatEngine;
+        this.addRoomProvider = addRoomProvider;
         createActions();
     }
 
@@ -68,8 +71,10 @@ public class ChatClientActions {
         ActionToolbarButtonDescriptor<StateToken> joinRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(StateToken token) {
-                        chatEngineProvider.get().joinRoom(session.getContainerState().getContainer().getName(),
+                        ChatEngine chatEngine = chatEngineProvider.get();
+                        chatEngine.joinRoom(session.getContainerState().getContainer().getName(),
                                 session.getCurrentUserInfo().getShortName());
+                        chatEngine.show();
                     }
                 });
         joinRoom.setTextDescription(i18n.t("Enter room"));
@@ -79,7 +84,7 @@ public class ChatClientActions {
         ActionToolbarButtonDescriptor<StateToken> addRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(StateToken token) {
-
+                        addRoomProvider.get().show();
                     }
                 });
         addRoom.setTextDescription(i18n.t("New room"));
@@ -92,6 +97,7 @@ public class ChatClientActions {
         contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_POST);
         contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_UPLOADEDFILE);
 
-        contextActionRegistry.addAction(joinRoom, ChatClientTool.TYPE_ROOT);
+        contextActionRegistry.addAction(addRoom, ChatClientTool.TYPE_ROOT, ChatClientTool.TYPE_ROOM);
+        contentActionRegistry.addAction(joinRoom, ChatClientTool.TYPE_ROOM);
     }
 }

@@ -19,10 +19,6 @@
  */
 package org.ourproject.kune.chat.client.ctx;
 
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 
 public interface ChatContext {
-
-    void setState(StateContainerDTO state);
-
 }

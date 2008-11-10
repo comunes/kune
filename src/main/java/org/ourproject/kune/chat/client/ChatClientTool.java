@@ -46,6 +46,6 @@ public class ChatClientTool extends FoldableAbstractClientTool {
 
     @Override
     protected void registerIcons() {
-        contentIconsRegistry.registerContentTypeIcon(TYPE_ROOM, "public/images/emite-room.png");
+        contentIconsRegistry.registerContentTypeIcon(TYPE_ROOM, "images/emite-room.png");
     }
 }

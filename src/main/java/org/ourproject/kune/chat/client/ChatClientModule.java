@@ -23,8 +23,9 @@ import org.ourproject.kune.chat.client.cnt.room.ChatRoomPanel;
 import org.ourproject.kune.chat.client.cnt.room.ChatRoomPresenter;
 import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
-import org.ourproject.kune.chat.client.ctx.room.RoomAdmin;
-import org.ourproject.kune.chat.client.ctx.room.RoomAdminPresenter;
+import org.ourproject.kune.chat.client.ctx.room.AddRoom;
+import org.ourproject.kune.chat.client.ctx.room.AddRoomPanel;
+import org.ourproject.kune.chat.client.ctx.room.AddRoomPresenter;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
@@ -56,7 +57,7 @@ public class ChatClientModule extends AbstractModule {
             @Override
             public ChatClientActions create() {
                 return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
-                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatEngine.class));
+                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatEngine.class), $$(AddRoom.class));
             }
         });
 
@@ -69,11 +70,11 @@ public class ChatClientModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<ChatContext>(ChatContext.class) {
+        register(ToolGroup.class, new Factory<ChatContext>(ChatContext.class) {
             @Override
             public ChatContext create() {
                 final ChatContextPresenter presenter = new ChatContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class), $$(RoomAdmin.class));
+                        $$(ContextNavigator.class));
                 return presenter;
             }
         });
@@ -99,12 +100,13 @@ public class ChatClientModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<RoomAdmin>(RoomAdmin.class) {
+        register(Singleton.class, new Factory<AddRoom>(AddRoom.class) {
             @Override
-            public RoomAdmin create() {
-                final RoomAdminPresenter presenter = new RoomAdminPresenter($(ContextNavigator.class),
-                        $(I18nUITranslationService.class), $$(StateManager.class), $(Session.class),
-                        $$(ContentServiceAsync.class));
+            public AddRoom create() {
+                final AddRoomPresenter presenter = new AddRoomPresenter($(Session.class),
+                        $$(ContentServiceAsync.class), $(StateManager.class));
+                final AddRoomPanel panel = new AddRoomPanel(presenter, $(I18nTranslationService.class));
+                presenter.init(panel);
                 return presenter;
             }
         });

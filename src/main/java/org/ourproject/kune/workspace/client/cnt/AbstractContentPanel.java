@@ -4,7 +4,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Widget;
 
-public class AbstractContentPanel {
+public abstract class AbstractContentPanel {
     private final WorkspaceSkeleton ws;
     private Widget widget;
 

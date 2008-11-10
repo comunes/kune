@@ -28,6 +28,8 @@ public class TextUtils {
     // Original regexp from http://www.regular-expressions.info/email.html
     public static final String EMAIL_REGEXP = "[-!#$%&\'*+/=?_`{|}~a-z0-9^]+(\\.[-!#$%&\'*+/=?_`{|}~a-z0-9^]+)*@(localhost|([a-z0-9]([-a-z0-9]*[a-z0-9])?\\.)+[a-z0-9]([-a-z0-9]*[a-z0-9]))?";
 
+    public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
+
     /*
      * This method escape only some dangerous html chars
      */
