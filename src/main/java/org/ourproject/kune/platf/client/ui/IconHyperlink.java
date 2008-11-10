@@ -83,10 +83,22 @@ public class IconHyperlink extends Widget implements SourcesClickEvents, Abstrac
         doubleClickListeners.add(listener);
     }
 
+    public void addMouseListener(final MouseListener listener) {
+        if (mouseListeners == null) {
+            mouseListeners = new MouseListenerCollection();
+        }
+        mouseListeners.add(listener);
+    }
+
     public String getTargetHistoryToken() {
         return targetHistoryToken;
     }
 
+    public String getText() {
+        return DOM.getInnerText(link);
+    }
+
+    @Override
     public void onBrowserEvent(final Event event) {
         switch (DOM.eventGetType(event)) {
         case Event.ONDBLCLICK:
@@ -126,41 +138,6 @@ public class IconHyperlink extends Widget implements SourcesClickEvents, Abstrac
         }
     }
 
-    public void setLabelHTML(final String html) {
-        DOM.setInnerHTML(link, html);
-    }
-
-    public void setTargetHistoryToken(final String targetHistoryToken) {
-        this.targetHistoryToken = targetHistoryToken;
-        DOM.setElementProperty(anchorElem, "href", "#" + targetHistoryToken);
-    }
-
-    public void setLabelText(final String text) {
-        DOM.setInnerText(link, text);
-    }
-
-    public void setImage(final AbstractImagePrototype image) {
-        DOM.setInnerHTML(icon, image.getHTML());
-    }
-
-    public void setTitle(final String title) {
-        // DOM.setElementAttribute(anchorElem, "ext:qtip", title);
-        KuneUiUtils.setQuickTip(icon, title);
-        KuneUiUtils.setQuickTip(anchorElem, title);
-        // KuneUiUtils.setQuickTip(getElement(), title);
-    }
-
-    public void addMouseListener(final MouseListener listener) {
-        if (mouseListeners == null) {
-            mouseListeners = new MouseListenerCollection();
-        }
-        mouseListeners.add(listener);
-    }
-
-    public String getText() {
-        return DOM.getInnerText(link);
-    }
-
     public void removeMouseListener(final MouseListener listener) {
         if (mouseListeners != null) {
             mouseListeners.remove(listener);
@@ -171,7 +148,30 @@ public class IconHyperlink extends Widget implements SourcesClickEvents, Abstrac
         DOM.setStyleAttribute(link, "color", color);
     }
 
+    public void setImage(final AbstractImagePrototype image) {
+        DOM.setInnerHTML(icon, image.getHTML());
+    }
+
+    public void setLabelHTML(final String html) {
+        DOM.setInnerHTML(link, html);
+    }
+
+    public void setLabelText(final String text) {
+        DOM.setInnerText(link, text);
+    }
+
+    public void setTargetHistoryToken(final String targetHistoryToken) {
+        this.targetHistoryToken = targetHistoryToken;
+        DOM.setElementProperty(anchorElem, "href", "#" + targetHistoryToken);
+    }
+
     public void setText(final String text) {
         setLabelText(text);
+    }
+
+    @Override
+    public void setTitle(final String title) {
+        KuneUiUtils.setQuickTip(icon, title);
+        KuneUiUtils.setQuickTip(anchorElem, title);
     }
 }

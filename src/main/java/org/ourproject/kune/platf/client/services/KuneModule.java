@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
+import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbarPresenter;
@@ -411,6 +412,13 @@ public class KuneModule extends AbstractModule {
             @Override
             public DragDropContentRegistry create() {
                 return new DragDropContentRegistry();
+            }
+        });
+
+        register(Singleton.class, new Factory<RenamableContentRegistry>(RenamableContentRegistry.class) {
+            @Override
+            public RenamableContentRegistry create() {
+                return new RenamableContentRegistry();
             }
         });
 

@@ -23,6 +23,7 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
@@ -49,23 +50,26 @@ public class EntityTitlePresenter implements EntityTitle {
     private final Session session;
     private final Provider<ContextNavigator> contextNavigatorProvider;
     private final ContentIconsRegistry iconsRegistry;
+    private final RenamableContentRegistry renamableContentRegistry;
 
     public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler,
             final StateManager stateManager, final Session session,
             final Provider<ContentServiceAsync> contentServiceProvider,
-            final Provider<ContextNavigator> contextNavigatorProvider, final ContentIconsRegistry iconsRegistry) {
+            final Provider<ContextNavigator> contextNavigatorProvider, final ContentIconsRegistry iconsRegistry,
+            RenamableContentRegistry renamableContentRegistry) {
         this.i18n = i18n;
         this.errorHandler = errorHandler;
         this.session = session;
         this.contentServiceProvider = contentServiceProvider;
         this.contextNavigatorProvider = contextNavigatorProvider;
         this.iconsRegistry = iconsRegistry;
+        this.renamableContentRegistry = renamableContentRegistry;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
-                if (state instanceof StateContainerDTO) {
-                    setState((StateContainerDTO) state);
-                } else if (state instanceof StateContentDTO) {
+                if (state instanceof StateContentDTO) {
                     setState((StateContentDTO) state);
+                } else if (state instanceof StateContainerDTO) {
+                    setState((StateContainerDTO) state);
                 } else {
                     view.setContentIconVisible(false);
                     view.setContentTitleVisible(false);
@@ -96,12 +100,6 @@ public class EntityTitlePresenter implements EntityTitle {
         view.setContentTitleVisible(true);
     }
 
-    public void setContentTitle(final String title, final boolean editable) {
-        setContentTitle(title);
-        view.setContentTitleEditable(editable);
-        view.setContentTitleVisible(true);
-    }
-
     protected void onTitleRename(final String newName) {
         Site.showProgressSaving();
         final StateToken stateToken = session.getCurrentState().getStateToken();
@@ -129,6 +127,12 @@ public class EntityTitlePresenter implements EntityTitle {
         view.setDateVisible(visible);
     }
 
+    private void setContentTitle(final String title, final boolean editable) {
+        setContentTitle(title);
+        view.setContentTitleEditable(editable);
+        view.setContentTitleVisible(true);
+    }
+
     private void setIcon(final String contentTypeIcon) {
         if (contentTypeIcon.length() > 0) {
             view.setContentIcon(contentTypeIcon);
@@ -139,13 +143,8 @@ public class EntityTitlePresenter implements EntityTitle {
     }
 
     private void setState(final StateContainerDTO state) {
-        if (state.getContainer().getParentFolderId() == null) {
-            // We translate root folder names (documents, chat room,
-            // etcetera)
-            setContentTitle(i18n.t(state.getTitle()), false);
-        } else {
-            setContentTitle(state.getTitle(), state.getContainerRights().isEditable());
-        }
+        setContentTitle(state.getTitle(), state.getContainerRights().isEditable()
+                && renamableContentRegistry.contains(state.getContainer().getTypeId()));
         setContentDateVisible(false);
         final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), null);
         setIcon(contentTypeIcon);
@@ -153,7 +152,8 @@ public class EntityTitlePresenter implements EntityTitle {
     }
 
     private void setState(final StateContentDTO state) {
-        setContentTitle(state.getTitle(), state.getContentRights().isEditable());
+        setContentTitle(state.getTitle(), state.getContentRights().isEditable()
+                && renamableContentRegistry.contains(state.getTypeId()));
         Date publishedOn = state.getPublishedOn();
         if (publishedOn != null) {
             setContentDateVisible(true);

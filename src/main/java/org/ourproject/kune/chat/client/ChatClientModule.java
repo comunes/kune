@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
+import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ToolGroup;
@@ -57,7 +58,8 @@ public class ChatClientModule extends AbstractModule {
             @Override
             public ChatClientActions create() {
                 return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
-                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatEngine.class), $$(AddRoom.class));
+                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatEngine.class),
+                        $$(AddRoom.class));
             }
         });
 
@@ -66,7 +68,7 @@ public class ChatClientModule extends AbstractModule {
             public ChatClientTool create() {
                 return new ChatClientTool($(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
                         $(ToolSelector.class), $(WsThemePresenter.class), $(ContentIconsRegistry.class),
-                        $(DragDropContentRegistry.class));
+                        $(DragDropContentRegistry.class), $(RenamableContentRegistry.class));
             }
         });
 

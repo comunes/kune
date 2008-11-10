@@ -107,7 +107,7 @@ public class EditableIconLabel extends Composite {
             // label.addDoubleClickListener(listener);
             label.addMouseListener(mouseOverListener);
         } else {
-            label.setTitle("");
+            label.setTitle(null);
             label.addStyleDependentName("noneditable");
         }
     }
@@ -146,10 +146,12 @@ public class EditableIconLabel extends Composite {
             }
         };
         mouseOverListener = new MouseListenerAdapter() {
+            @Override
             public void onMouseEnter(final Widget sender) {
                 label.addStyleDependentName("high");
             }
 
+            @Override
             public void onMouseLeave(final Widget sender) {
                 label.removeStyleDependentName("high");
             }

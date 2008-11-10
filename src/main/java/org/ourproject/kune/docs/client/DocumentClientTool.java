@@ -21,6 +21,7 @@ package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
+import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
@@ -42,9 +43,10 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-            final DragDropContentRegistry dragDropContentRegistry, final ContentIconsRegistry contentIconsRegistry) {
+            final DragDropContentRegistry dragDropContentRegistry, final ContentIconsRegistry contentIconsRegistry,
+            RenamableContentRegistry renamableContentRegistry) {
         super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws, contentIconsRegistry,
-                dragDropContentRegistry);
+                dragDropContentRegistry, renamableContentRegistry);
     }
 
     public String getName() {
@@ -90,5 +92,11 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application",
                 "mspowerpoint"), "images/nav/page_pps.png");
         contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, "images/nav/page.png");
+    }
+
+    @Override
+    protected void registerRenamableTypes() {
+        renamableContentRegistry.register(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_BLOG, TYPE_GALLERY, TYPE_POST,
+                TYPE_UPLOADEDFILE, TYPE_WIKI, TYPE_WIKIPAGE);
     }
 }

@@ -36,6 +36,7 @@ import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
+import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -72,7 +73,7 @@ public class DocumentClientModule extends AbstractModule {
                 $(DocumentClientActions.class);
                 return new DocumentClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
                         $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(DragDropContentRegistry.class),
-                        $(ContentIconsRegistry.class));
+                        $(ContentIconsRegistry.class), $(RenamableContentRegistry.class));
             }
         });
 
