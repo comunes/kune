@@ -19,19 +19,15 @@
  */
 package org.ourproject.kune.docs.client.cnt.folder.viewer;
 
-import org.ourproject.kune.workspace.client.cnt.AbstractContentPanel;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.Label;
+public class DocFolderContentPanel extends FoldableContentPanel implements DocFolderContentView {
 
-public class DocFolderContentPanel extends AbstractContentPanel implements DocFolderContentView {
-
-    public DocFolderContentPanel(WorkspaceSkeleton ws) {
-        super(ws);
-        Label label = new Label("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
-        label.setStyleName("kune-Content-Main");
-        label.addStyleName("kune-Margin-7-trbl");
-        initWidget(label);
+    public DocFolderContentPanel(WorkspaceSkeleton ws, I18nTranslationService i18n) {
+        super(ws, i18n);
+        super.setLabel("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
     }
 }

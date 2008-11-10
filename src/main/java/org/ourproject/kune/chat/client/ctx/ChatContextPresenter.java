@@ -21,6 +21,8 @@ package org.ourproject.kune.chat.client.ctx;
 
 import org.ourproject.kune.chat.client.ctx.room.RoomAdmin;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -28,7 +30,8 @@ public class ChatContextPresenter implements ChatContext {
 
     private final Provider<RoomAdmin> roomAdminsProvider;
 
-    public ChatContextPresenter(final Provider<RoomAdmin> roomAdminsProvider) {
+    public ChatContextPresenter(final StateManager stateManager,
+            final Provider<ContextNavigator> contextNavigatorProvider, final Provider<RoomAdmin> roomAdminsProvider) {
         this.roomAdminsProvider = roomAdminsProvider;
     }
 

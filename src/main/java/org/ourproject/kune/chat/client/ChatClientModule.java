@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
@@ -71,7 +72,8 @@ public class ChatClientModule extends AbstractModule {
         register(Singleton.class, new Factory<ChatContext>(ChatContext.class) {
             @Override
             public ChatContext create() {
-                final ChatContextPresenter presenter = new ChatContextPresenter($$(RoomAdmin.class));
+                final ChatContextPresenter presenter = new ChatContextPresenter($(StateManager.class),
+                        $$(ContextNavigator.class), $$(RoomAdmin.class));
                 return presenter;
             }
         });
@@ -90,7 +92,8 @@ public class ChatClientModule extends AbstractModule {
                 final ChatRoomPresenter presenter = new ChatRoomPresenter($(StateManager.class), $(Session.class),
                         $(I18nUITranslationService.class), $(ActionContentToolbar.class),
                         $(ContentActionRegistry.class));
-                final ChatRoomPanel panel = new ChatRoomPanel($(WorkspaceSkeleton.class));
+                final ChatRoomPanel panel = new ChatRoomPanel($(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }

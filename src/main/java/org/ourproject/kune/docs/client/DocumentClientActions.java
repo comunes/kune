@@ -28,7 +28,7 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFI
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
-import org.ourproject.kune.docs.client.cnt.DocumentContent;
+import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewer;
 import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
@@ -86,7 +86,7 @@ public class DocumentClientActions {
     private final EntityLogo entityLogo;
     private final Provider<TextEditor> textEditorProvider;
     private final KuneErrorHandler errorHandler;
-    private final DocumentContent documentContent;
+    private final DocumentViewer documentViewer;
     private final Provider<DocContextEditor> adminContextProvider;
 
     public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
@@ -96,7 +96,7 @@ public class DocumentClientActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
             final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
-            final DocumentContent documentContent, final Provider<DocContextEditor> adminContextProvider) {
+            final DocumentViewer documentViewer, final Provider<DocContextEditor> adminContextProvider) {
         this.i18n = i18n;
         this.contextNavigator = contextNavigator;
         this.session = session;
@@ -110,7 +110,7 @@ public class DocumentClientActions {
         this.entityLogo = entityLogo;
         this.textEditorProvider = textEditorProvider;
         this.errorHandler = errorHandler;
-        this.documentContent = documentContent;
+        this.documentViewer = documentViewer;
         this.adminContextProvider = adminContextProvider;
         createActions();
     }
@@ -337,7 +337,7 @@ public class DocumentClientActions {
                         session.check(new AsyncCallbackSimple<Object>() {
                             public void onSuccess(final Object result) {
                                 final TextEditor editor = textEditorProvider.get();
-                                documentContent.detach();
+                                documentViewer.detach();
                                 contextNavigator.detach();
                                 adminContextProvider.get().attach();
                                 editor.editContent(session.getContentState().getContent(), new Listener<String>() {
@@ -370,11 +370,11 @@ public class DocumentClientActions {
                                         // onClose
                                         DeferredCommand.addCommand(new Command() {
                                             public void execute() {
-                                                documentContent.attach();
+                                                documentViewer.attach();
                                                 adminContextProvider.get().detach();
                                                 contextNavigator.attach();
                                                 if (session.getCurrentStateToken().equals(stateToken)) {
-                                                    documentContent.refreshState();
+                                                    documentViewer.refreshState();
                                                 }
                                             }
                                         });

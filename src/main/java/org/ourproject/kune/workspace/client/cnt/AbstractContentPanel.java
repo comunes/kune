@@ -13,18 +13,18 @@ public class AbstractContentPanel {
     }
 
     public void attach() {
-        if (!widget.isAttached()) {
+        if (widget != null && !widget.isAttached()) {
             ws.getEntityWorkspace().setContent(widget);
         }
     }
 
     public void detach() {
-        if (widget.isAttached()) {
+        if (widget != null && widget.isAttached()) {
             widget.removeFromParent();
         }
     }
 
-    public void initWidget(Widget widget) {
+    public void setWidget(Widget widget) {
         this.widget = widget;
     }
 }

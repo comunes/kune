@@ -19,9 +19,9 @@
  */
 package org.ourproject.kune.docs.client.cnt.viewer;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
-public interface DocumentViewerView extends View {
+public interface DocumentViewerView extends AbstractContentView {
 
     void setContent(String content);
 

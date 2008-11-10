@@ -19,13 +19,12 @@
  */
 package org.ourproject.kune.docs.client.cnt.viewer;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-
 public interface DocumentViewer {
 
-    View getView();
+    void attach();
 
-    void showDocument(StateToken token, String text, String typeId, BasicMimeTypeDTO mimeType);
+    void detach();
+
+    void refreshState();
+
 }

@@ -20,29 +20,47 @@
 package org.ourproject.kune.docs.client.cnt.viewer;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
+import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class DocumentViewerPresenter implements DocumentViewer {
-    private final DocumentViewerView view;
+public class DocumentViewerPresenter extends FoldableContentPresenter implements DocumentViewer {
+    private DocumentViewerView view;
     private final Provider<FileDownloadUtils> downloadProvider;
 
-    public DocumentViewerPresenter(final DocumentViewerView view, final Provider<FileDownloadUtils> downloadProvider) {
-        this.view = view;
+    public DocumentViewerPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
+            ActionContentToolbar toolbar, ContentActionRegistry actionRegistry,
+            Provider<FileDownloadUtils> downloadProvider) {
+        super(DocumentClientTool.NAME, stateManager, session, toolbar, actionRegistry);
         this.downloadProvider = downloadProvider;
     }
 
-    public View getView() {
-        return view;
+    public void init(DocumentViewerView view) {
+        super.init(view);
+        this.view = view;
     }
 
-    public void showDocument(final StateToken token, final String text, final String typeId,
-            final BasicMimeTypeDTO mimeType) {
+    public void refreshState() {
+        setState(session.getContentState());
+    }
+
+    @Override
+    protected void setState(StateContentDTO state) {
+        super.setState(state);
+        String typeId = state.getTypeId();
+        String text = state.getContent();
+        StateToken token = state.getStateToken();
+        BasicMimeTypeDTO mimeType = state.getMimeType();
         if (typeId.equals(DocumentClientTool.TYPE_UPLOADEDFILE)) {
             if (mimeType != null) {
                 FileDownloadUtils fileDownloadUtils = downloadProvider.get();
@@ -58,5 +76,6 @@ public class DocumentViewerPresenter implements DocumentViewer {
         } else {
             view.setContent(text);
         }
+        view.attach();
     }
 }

@@ -253,7 +253,8 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
                         $(WsThemePresenter.class), $(Session.class));
                 final EntityLogoPanel panel = new EntityLogoPanel($(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class), $$(FileDownloadUtils.class), $$(EntityLogoSelector.class), $(Images.class));
+                        $(WorkspaceSkeleton.class), $$(FileDownloadUtils.class), $$(EntityLogoSelector.class),
+                        $(Images.class));
                 presenter.init(panel);
                 return presenter;
             }

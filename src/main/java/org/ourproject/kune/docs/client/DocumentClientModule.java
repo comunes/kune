@@ -18,9 +18,6 @@
  *
  */package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.docs.client.cnt.DocumentContent;
-import org.ourproject.kune.docs.client.cnt.DocumentContentPanel;
-import org.ourproject.kune.docs.client.cnt.DocumentContentPresenter;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContent;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContentPanel;
 import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContentPresenter;
@@ -86,20 +83,8 @@ public class DocumentClientModule extends AbstractModule {
                         $(Session.class), $(StateManager.class), $$(ContentServiceAsync.class),
                         $$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
                         $(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
-                        $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentContent.class),
+                        $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentViewer.class),
                         $$(DocContextEditor.class));
-            }
-        });
-
-        register(ToolGroup.class, new Factory<DocumentContent>(DocumentContent.class) {
-            @Override
-            public DocumentContent create() {
-                final DocumentContentPresenter presenter = new DocumentContentPresenter($(StateManager.class),
-                        $(Session.class), $$(DocumentViewer.class), $$(TextEditor.class),
-                        $(ActionContentToolbar.class), $(ContentActionRegistry.class));
-                final DocumentContentPanel panel = new DocumentContentPanel($(WorkspaceSkeleton.class));
-                presenter.init(panel);
-                return presenter;
             }
         });
 
@@ -128,9 +113,12 @@ public class DocumentClientModule extends AbstractModule {
         register(Singleton.class, new Factory<DocumentViewer>(DocumentViewer.class) {
             @Override
             public DocumentViewer create() {
+                final DocumentViewerPresenter presenter = new DocumentViewerPresenter($(StateManager.class),
+                        $(Session.class), $(I18nUITranslationService.class), $(ActionContentToolbar.class),
+                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class));
                 final DocumentViewerView view = new DocumentViewerPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
-                final DocumentViewerPresenter presenter = new DocumentViewerPresenter(view, $$(FileDownloadUtils.class));
+                presenter.init(view);
                 return presenter;
             }
         });
@@ -140,7 +128,8 @@ public class DocumentClientModule extends AbstractModule {
             public DocFolderContent create() {
                 final DocFolderContentPresenter presenter = new DocFolderContentPresenter($(StateManager.class),
                         $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class));
-                final DocFolderContentView view = new DocFolderContentPanel($(WorkspaceSkeleton.class));
+                final DocFolderContentView view = new DocFolderContentPanel($(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }

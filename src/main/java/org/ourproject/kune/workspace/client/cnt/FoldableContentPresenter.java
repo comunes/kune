@@ -3,6 +3,7 @@ package org.ourproject.kune.workspace.client.cnt;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
+import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
@@ -16,7 +17,7 @@ public class FoldableContentPresenter extends AbstractContentPresenter {
 
     private final String toolName;
     private final ActionRegistry<StateToken> actionRegistry;
-    private final Session session;
+    protected final Session session;
     private final ActionContentToolbar toolbar;
 
     public FoldableContentPresenter(final String toolName, StateManager stateManager, Session session,
@@ -52,13 +53,19 @@ public class FoldableContentPresenter extends AbstractContentPresenter {
     }
 
     protected void setState(StateContainerDTO state) {
-        ActionItemCollection<StateToken> collection = actionRegistry.getCurrentActions(state.getStateToken(),
-                state.getTypeId(), session.isLogged(), state.getContainerRights(), true);
+        ActionItemCollection<StateToken> collection = getActionCollection(state, state.getContainerRights());
         setToolbar(collection);
         attach();
     }
 
     protected void setState(StateContentDTO state) {
+        ActionItemCollection<StateToken> collection = getActionCollection(state, state.getContentRights());
+        setToolbar(collection);
+    }
+
+    private ActionItemCollection<StateToken> getActionCollection(StateContainerDTO state, AccessRightsDTO rights) {
+        return actionRegistry.getCurrentActions(state.getStateToken(), state.getTypeId(), session.isLogged(), rights,
+                true);
     }
 
     private void setToolbar(ActionItemCollection<StateToken> collection) {
