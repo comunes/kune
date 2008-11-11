@@ -17,11 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.i18n.ui;
+package org.ourproject.kune.workspace.client.i18n;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
-import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
 
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
@@ -33,13 +31,10 @@ import com.gwtext.client.widgets.form.event.ComboBoxListener;
 public class LanguageSelectorPanel extends FormPanel implements LanguageSelectorView {
 
     public static final String LANG_ID = "abbr";
-
-    private static final String LANG_FIELD = "lang";
+    public static final String LANG_FIELD = "k-langsp-lf";
 
     private ComboBox langCombo;
-
     private final LanguageSelectorPresenter presenter;
-
     private final I18nTranslationService i18n;
 
     public LanguageSelectorPanel(final LanguageSelectorPresenter presenter, final I18nTranslationService i18n) {
@@ -95,7 +90,7 @@ public class LanguageSelectorPanel extends FormPanel implements LanguageSelector
         langCombo.setTypeAhead(true);
         langCombo.setTypeAheadDelay(1000);
         langCombo.setSelectOnFocus(false);
-        langCombo.setWidth(150);
+        langCombo.setWidth(140);
         langCombo.setValueField(LANG_ID);
         langCombo.setPageSize(7);
         langCombo.setForceSelection(true);

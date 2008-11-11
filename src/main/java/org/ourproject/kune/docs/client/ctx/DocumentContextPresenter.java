@@ -20,7 +20,7 @@
 package org.ourproject.kune.docs.client.ctx;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditor;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -30,11 +30,11 @@ import org.ourproject.kune.workspace.client.cxt.FoldableContextPresenter;
 import com.calclab.suco.client.ioc.Provider;
 
 public class DocumentContextPresenter extends FoldableContextPresenter implements DocumentContext {
-    private final Provider<DocContextEditor> adminContextProvider;
+    private final Provider<DocContextPropEditor> adminContextProvider;
 
     public DocumentContextPresenter(final StateManager stateManager,
             final Provider<ContextNavigator> contextNavigatorProvider,
-            final Provider<DocContextEditor> adminContextProvider) {
+            final Provider<DocContextPropEditor> adminContextProvider) {
         super(DocumentClientTool.NAME, stateManager, contextNavigatorProvider);
         this.adminContextProvider = adminContextProvider;
     }

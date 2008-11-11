@@ -5,7 +5,7 @@
   <groupId>org.ourproject</groupId>
   <artifactId>kune</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.4</version>
+  <version>0.0.5</version>
   <description>
     kune free/open/libre collaboration platform
   </description>

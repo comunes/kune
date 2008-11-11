@@ -17,14 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt.viewer;
+package org.ourproject.kune.docs.client.cnt;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-
-public class DocumentViewerPanel extends FoldableContentPanel implements DocumentViewerView {
-    public DocumentViewerPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
-        super(ws, i18n);
-    }
+public interface DocFolderContent {
 }

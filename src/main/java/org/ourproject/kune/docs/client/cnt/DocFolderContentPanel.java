@@ -17,16 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.ctx.admin;
+package org.ourproject.kune.docs.client.cnt;
 
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
+import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-public interface DocContextEditor {
-    void attach();
+public class DocFolderContentPanel extends FoldableContentPanel implements DocFolderContentView {
 
-    void clear();
-
-    void detach();
-
-    void setState(StateContentDTO content);
+    public DocFolderContentPanel(WorkspaceSkeleton ws, I18nTranslationService i18n) {
+        super(ws, i18n);
+        super.setLabel("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
+    }
 }

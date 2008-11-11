@@ -28,8 +28,8 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFI
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
-import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewer;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
+import org.ourproject.kune.docs.client.cnt.DocumentViewer;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
@@ -87,7 +87,7 @@ public class DocumentClientActions {
     private final Provider<TextEditor> textEditorProvider;
     private final KuneErrorHandler errorHandler;
     private final DocumentViewer documentViewer;
-    private final Provider<DocContextEditor> adminContextProvider;
+    private final Provider<DocContextPropEditor> contextPropEditorProvider;
 
     public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager,
@@ -96,7 +96,7 @@ public class DocumentClientActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
             final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
-            final DocumentViewer documentViewer, final Provider<DocContextEditor> adminContextProvider) {
+            final DocumentViewer documentViewer, final Provider<DocContextPropEditor> contextProvEditorProvider) {
         this.i18n = i18n;
         this.contextNavigator = contextNavigator;
         this.session = session;
@@ -111,7 +111,7 @@ public class DocumentClientActions {
         this.textEditorProvider = textEditorProvider;
         this.errorHandler = errorHandler;
         this.documentViewer = documentViewer;
-        this.adminContextProvider = adminContextProvider;
+        this.contextPropEditorProvider = contextProvEditorProvider;
         createActions();
     }
 
@@ -339,7 +339,7 @@ public class DocumentClientActions {
                                 final TextEditor editor = textEditorProvider.get();
                                 documentViewer.detach();
                                 contextNavigator.detach();
-                                adminContextProvider.get().attach();
+                                contextPropEditorProvider.get().attach();
                                 editor.editContent(session.getContentState().getContent(), new Listener<String>() {
                                     public void onEvent(final String html) {
                                         Site.showProgressSaving();
@@ -371,7 +371,7 @@ public class DocumentClientActions {
                                         DeferredCommand.addCommand(new Command() {
                                             public void execute() {
                                                 documentViewer.attach();
-                                                adminContextProvider.get().detach();
+                                                contextPropEditorProvider.get().detach();
                                                 contextNavigator.attach();
                                                 if (session.getCurrentStateToken().equals(stateToken)) {
                                                     documentViewer.refreshState();

@@ -6,10 +6,6 @@ TODO-list for kune
 SHORT-TERM (URGENT):
 --------------------------------------------------------------------------------
 <vjrj> IconHyperlink.java and IconLabel.java to gwt1.5
-<vjrj> chat add new room name validation (do a form with validation)
---> vjrj
-<vjrj> Double click issue:
-http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/147f09153c4752d2/4caf0ac41c4625d3?lnk=gst&q=timer+double+click&rnum=1#4caf0ac41c4625d3
 <vjrj> Injection problem [2]
 <vjrj> BUG: Duplicate Keys in group/user creation different exception [1]
 ---> vjrj
@@ -351,7 +347,7 @@ Propuesta:
 Selecciona una licencia para compartir los contenidos de este grupo con el resto de gente:
 
 [X] Usar la licencia <href>copyleft recomendada
-[ ] Quiero elegir otra licencia (uso avanzado) 
+[ ] Quiero elegir otra licencia (uso avanzado)
 
 Notas:
 * <href>¿Porqué necesito una licencia?

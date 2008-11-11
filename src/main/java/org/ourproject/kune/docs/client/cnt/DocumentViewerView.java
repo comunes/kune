@@ -17,17 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt.folder.viewer;
+package org.ourproject.kune.docs.client.cnt;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
-import org.ourproject.kune.workspace.client.site.Site;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
-public class DocFolderContentPanel extends FoldableContentPanel implements DocFolderContentView {
+public interface DocumentViewerView extends AbstractContentView {
 
-    public DocFolderContentPanel(WorkspaceSkeleton ws, I18nTranslationService i18n) {
-        super(ws, i18n);
-        super.setLabel("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
-    }
+    void setContent(String content);
+
+    void showImage(String imageUrl, String imageResizedUrl);
+
 }

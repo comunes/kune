@@ -26,50 +26,46 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.ContextPropertyPanel;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.Label;
+import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.gwtext.client.data.Record;
+import com.gwtext.client.widgets.form.ComboBox;
+import com.gwtext.client.widgets.form.Field;
+import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.TextArea;
+import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
+import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 
-public class DocContextEditorPanel extends VerticalPanel implements DocContextEditorView {
-    // private static final Images IMG = Images.App.getInstance();
+public class DocContextPropEditorPanel extends ScrollPanel implements DocContextPropEditorView {
 
-    // private static final int FORMS_WIDTH = 145;
+    private static final int FORMS_WIDTH = 150;
+    public static final String TAGS_PROP = "k-dcpep-tagsp-dis";
+    public static final String LANG_PROP = "k-dcpep-tagsp-dis";
 
-    // private final IndexedStackPanelWithSubItems options;
-    // private final AdminContextPresenter presenter;
-    //
-    // private AccessListsPanel accessListsPanel;
-    // private DateField publishedOnField;
-    // private TextArea tagsField;
-    // private VerticalPanel tagsComponent;
-    // private VerticalPanel publishedOnComponent;
-    // private LanguageSelectorComponent langPresenter;
-    // private VerticalPanel authorsComponent;
-    // private VerticalPanel langComponent;
-    // private IconLabel addAuthorLabel;
-    // private final I18nTranslationService i18n;
-    // private final String authors_item;
-    // private final String publication_item;
-    // private final String perms_item;
-    // private final String language_item;
-    // private final String tags_item;
-
+    private final DocContextPropEditorPresenter presenter;
     private final WorkspaceSkeleton ws;
-    private final Label testLabel;
+    private final I18nTranslationService i18n;
+    private TextArea tagsField;
+    private ContextPropertyPanel tagsComponent;
+    private final Provider<LanguageSelector> langSelectorProv;
+    private ContextPropertyPanel langComponent;
+    private final VerticalPanel vp;
 
-    public DocContextEditorPanel(final DocContextEditorPresenter presenter, final I18nTranslationService i18n,
-            WorkspaceSkeleton ws) {
+    public DocContextPropEditorPanel(final DocContextPropEditorPresenter presenter, final I18nTranslationService i18n,
+            WorkspaceSkeleton ws, Provider<LanguageSelector> langSelectorProv) {
+        this.i18n = i18n;
         this.ws = ws;
-        testLabel = new Label("Admin ctx");
-        // this.presenter = presenter;
-        // this.i18n = i18n;
-        // options = new IndexedStackPanelWithSubItems();
-        // //options.addStyleName("kune-AdminContextPanel");
-        //
-        // //add(options);
-        // //setCellWidth(options, "100%");
-        // setWidth("100%");
+        this.presenter = presenter;
+        this.langSelectorProv = langSelectorProv;
+        super.addStyleName("kune-Margin-Medium-trbl");
+        vp = new VerticalPanel();
+        super.add(vp);
         // authors_item = i18n.t("Authors");
         // publication_item = i18n.t("Publication");
         // perms_item = i18n.t("Permissions");
@@ -78,14 +74,14 @@ public class DocContextEditorPanel extends VerticalPanel implements DocContextEd
     }
 
     public void attach() {
-        if (!testLabel.isAttached()) {
-            ws.getEntityWorkspace().setContext(testLabel);
+        if (!super.isAttached()) {
+            ws.getEntityWorkspace().setContext(this);
         }
     }
 
     public void detach() {
-        if (testLabel.isAttached()) {
-            testLabel.removeFromParent();
+        if (super.isAttached()) {
+            super.removeFromParent();
         }
     }
 
@@ -102,9 +98,9 @@ public class DocContextEditorPanel extends VerticalPanel implements DocContextEd
     }
 
     public void removeLangComponent() {
-        // if (options.containsItem(language_item)) {
-        // removeComponent(language_item);
-        // }
+        if (langComponent != null) {
+            langComponent.removeFromParent();
+        }
     }
 
     public void removePublishedOnComponent() {
@@ -114,13 +110,13 @@ public class DocContextEditorPanel extends VerticalPanel implements DocContextEd
     }
 
     public void removeTagsComponent() {
-        // if (options.containsItem(tags_item)) {
-        // removeComponent(tags_item);
-        // }
+        if (tagsComponent != null) {
+            tagsComponent.removeFromParent();
+        }
     }
 
     public void reset() {
-        // options.clear();
+        tagsField.reset();
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {
@@ -167,25 +163,20 @@ public class DocContextEditorPanel extends VerticalPanel implements DocContextEd
     }
 
     public void setLanguage(final I18nLanguageDTO language) {
-        // if (langComponent == null) {
-        // langPresenter = WorkspaceFactory.createLanguageSelectorComponent();
-        // langComponent = new VerticalPanel();
-        // final LanguageSelectorPanel view = (LanguageSelectorPanel)
-        // langPresenter.getView();
-        // view.setWidth("" + FORMS_WIDTH);
-        // langComponent.add(view);
-        // view.addChangeListener(new ComboBoxListenerAdapter() {
-        // public void onSelect(final ComboBox comboBox, final Record record,
-        // final int index) {
-        // presenter.doChangeLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
-        // }
-        // });
-        // }
-        // if (!options.containsItem(language_item)) {
-        // addComponent(language_item, i18n.t("The language of this work"),
-        // langComponent);
-        // }
-        // langPresenter.setLanguage(language);
+        if (langComponent == null) {
+            final LanguageSelectorPanel view = (LanguageSelectorPanel) langSelectorProv.get().getView();
+            view.setWidth(FORMS_WIDTH);
+            langComponent = new ContextPropertyPanel(i18n.t("What language is this in?"), null, true, LANG_PROP, view);
+            view.addChangeListener(new ComboBoxListenerAdapter() {
+                @Override
+                public void onSelect(final ComboBox comboBox, final Record record, final int index) {
+                    presenter.doChangeLanguage(record.getAsString(LanguageSelectorPanel.LANG_ID));
+                }
+            });
+            // angComponent.addStyleName("kune-Margin-Medium-t");
+            addComponent(langComponent);
+        }
+        langSelectorProv.get().setLanguage(language);
     }
 
     public void setPublishedOn(final Date publishedOn) {
@@ -200,36 +191,24 @@ public class DocContextEditorPanel extends VerticalPanel implements DocContextEd
     }
 
     public void setTags(final String tags) {
-        // if (tagsComponent == null) {
-        // tagsComponent = createTagsComponent();
-        // }
-        // if (!options.containsItem(tags_item)) {
-        // addComponent(tags_item,
-        // i18n.t("Keywords or terms associated with this work"),
-        // tagsComponent);
-        // }
-        // tagsField.setValue(tags);
-        // }
-        //
-        // private void addComponent(final String header, final String
-        // headerTitle,
-        // final VerticalPanel panel) {
-        // panel.addStyleName("kune-AdminContextPanel-inner-wrap");
-        // final VerticalPanel vp = options.addStackItem(header, headerTitle,
-        // false);
-        // vp.setStyleName("kune-AdminContextPanel-inner");
-        // vp.add(panel);
-        // vp.setCellWidth(panel, "100%");
-        // vp.setWidth("100%");
+        if (tagsComponent == null) {
+            tagsComponent = createTagsComponent();
+            addComponent(tagsComponent);
+        }
+        tagsField.setValue(tags);
     }
 
-    // private FormPanel createDefaultForm() {
-    // final FormPanel form = new FormPanel();
-    // form.setHideLabels(true);
-    // form.setWidth(FORMS_WIDTH);
-    // form.setBorder(false);
-    // return form;
-    // }
+    private void addComponent(ContextPropertyPanel prop) {
+        vp.add(prop);
+    }
+
+    private FormPanel createDefaultForm() {
+        final FormPanel form = new FormPanel();
+        form.setHideLabels(true);
+        form.setWidth(FORMS_WIDTH);
+        form.setBorder(false);
+        return form;
+    }
 
     // private VerticalPanel createPublicationComponent() {
     // // final FormPanel form = createDefaultForm();
@@ -252,23 +231,22 @@ public class DocContextEditorPanel extends VerticalPanel implements DocContextEd
     // // return vp;
     // //// }
     //
-    // private VerticalPanel createTagsComponent() {
-    // final FormPanel form = createDefaultForm();
-    // tagsField = new TextArea();
-    // tagsField.setWidth("" + FORMS_WIDTH);
-    // tagsField.setHeight("3em");
-    // tagsField.addListener(new FieldListenerAdapter() {
-    // public void onChange(final Field field, final Object newVal, final
-    // Object oldVal) {
-    // presenter.setTags((String) newVal);
-    // }
-    // });
-    //
-    // form.add(tagsField);
-    // final VerticalPanel vp = new VerticalPanel();
-    // vp.add(form);
-    // return vp;
-    // }
+    private ContextPropertyPanel createTagsComponent() {
+        final FormPanel form = createDefaultForm();
+        tagsField = new TextArea();
+        tagsField.setWidth(FORMS_WIDTH - 10);
+        tagsField.setHeight("3em");
+        tagsField.addListener(new FieldListenerAdapter() {
+            @Override
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
+                presenter.setTags((String) newVal);
+            }
+        });
+        form.add(tagsField);
+        ContextPropertyPanel propertyPanel = new ContextPropertyPanel(i18n.t("Tags"),
+                i18n.t("Keywords or terms associated with this work"), true, TAGS_PROP, form);
+        return propertyPanel;
+    }
 
     // private void removeComponent(final String header) {
     // options.removeStackItem(header);

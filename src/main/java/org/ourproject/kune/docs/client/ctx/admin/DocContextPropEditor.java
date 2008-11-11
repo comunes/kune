@@ -17,14 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt.viewer;
+package org.ourproject.kune.docs.client.ctx.admin;
 
-import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 
-public interface DocumentViewerView extends AbstractContentView {
+public interface DocContextPropEditor {
+    void attach();
 
-    void setContent(String content);
+    void clear();
 
-    void showImage(String imageUrl, String imageResizedUrl);
+    void detach();
 
+    void setState(StateContentDTO content);
 }

@@ -57,6 +57,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
+import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
@@ -70,14 +71,14 @@ import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelector;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelectorPanel;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
+import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
-import org.ourproject.kune.workspace.client.i18n.ui.I18nTranslatorPanel;
-import org.ourproject.kune.workspace.client.i18n.ui.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePresenter;
@@ -182,7 +183,15 @@ public class KuneModule extends AbstractModule {
             }
         });
 
+        register(Singleton.class, new Factory<QuickTipsHelper>(QuickTipsHelper.class) {
+            @Override
+            public QuickTipsHelper create() {
+                return new QuickTipsHelper();
+            }
+        });
+
         $(I18nUITranslationService.class);
+        $(QuickTipsHelper.class);
     }
 
     private void onI18nReady() {

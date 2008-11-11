@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt.viewer;
+package org.ourproject.kune.docs.client.cnt;
 
 public interface DocumentViewer {
 

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.i18n.ui;
+package org.ourproject.kune.workspace.client.i18n;
 
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -25,9 +25,6 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
-import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
-import org.ourproject.kune.workspace.client.i18n.I18nTranslatorView;
-import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.search.SiteBottomTrayButton;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;

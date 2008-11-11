@@ -29,7 +29,6 @@ import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rate.RateIt;
 import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
@@ -122,13 +121,6 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public WorkspaceSkeleton create() {
                 return new WorkspaceSkeleton();
-            }
-        });
-
-        register(ApplicationComponentGroup.class, new Factory<QuickTipsHelper>(QuickTipsHelper.class) {
-            @Override
-            public QuickTipsHelper create() {
-                return new QuickTipsHelper();
             }
         });
 

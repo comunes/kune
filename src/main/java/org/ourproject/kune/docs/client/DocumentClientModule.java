@@ -18,20 +18,20 @@
  *
  */package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContent;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContentPanel;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContentPresenter;
-import org.ourproject.kune.docs.client.cnt.folder.viewer.DocFolderContentView;
-import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewer;
-import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewerPanel;
-import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewerPresenter;
-import org.ourproject.kune.docs.client.cnt.viewer.DocumentViewerView;
+import org.ourproject.kune.docs.client.cnt.DocFolderContent;
+import org.ourproject.kune.docs.client.cnt.DocFolderContentPanel;
+import org.ourproject.kune.docs.client.cnt.DocFolderContentPresenter;
+import org.ourproject.kune.docs.client.cnt.DocFolderContentView;
+import org.ourproject.kune.docs.client.cnt.DocumentViewer;
+import org.ourproject.kune.docs.client.cnt.DocumentViewerPanel;
+import org.ourproject.kune.docs.client.cnt.DocumentViewerPresenter;
+import org.ourproject.kune.docs.client.cnt.DocumentViewerView;
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
 import org.ourproject.kune.docs.client.ctx.DocumentContextPresenter;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextEditor;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorPanel;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorPresenter;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextEditorView;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditor;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorPanel;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorPresenter;
+import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorView;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
@@ -52,6 +52,7 @@ import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
@@ -85,18 +86,18 @@ public class DocumentClientModule extends AbstractModule {
                         $$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
                         $(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
                         $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentViewer.class),
-                        $$(DocContextEditor.class));
+                        $$(DocContextPropEditor.class));
             }
         });
 
-        register(Singleton.class, new Factory<DocContextEditor>(DocContextEditor.class) {
+        register(Singleton.class, new Factory<DocContextPropEditor>(DocContextPropEditor.class) {
             @Override
-            public DocContextEditor create() {
-                final DocContextEditorPresenter presenter = new DocContextEditorPresenter($(Session.class),
+            public DocContextPropEditor create() {
+                final DocContextPropEditorPresenter presenter = new DocContextPropEditorPresenter($(Session.class),
                         $(StateManager.class), $$(TagsSummary.class), $$(ContentServiceAsync.class),
                         $(EntityTitle.class), $(EntitySubTitle.class));
-                final DocContextEditorView view = new DocContextEditorPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
+                final DocContextPropEditorView view = new DocContextPropEditorPanel(presenter,
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -106,7 +107,7 @@ public class DocumentClientModule extends AbstractModule {
             @Override
             public DocumentContext create() {
                 final DocumentContextPresenter presenter = new DocumentContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class), $$(DocContextEditor.class));
+                        $$(ContextNavigator.class), $$(DocContextPropEditor.class));
                 return presenter;
             }
         });

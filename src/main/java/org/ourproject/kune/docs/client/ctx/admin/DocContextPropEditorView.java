@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 
-public interface DocContextEditorView extends View {
+public interface DocContextPropEditorView extends View {
 
     void attach();
 
