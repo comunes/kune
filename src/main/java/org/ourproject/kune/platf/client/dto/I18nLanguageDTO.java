@@ -28,9 +28,23 @@ public class I18nLanguageDTO implements IsSerializable {
     private String nativeName;
     private String direction;
     private String pluralization;
+    private String dateFormat;
+    private String dateFormatShort;
 
     public String getCode() {
         return code;
+    }
+
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+    public String getDateFormatShort() {
+        return dateFormatShort;
+    }
+
+    public String getDirection() {
+        return direction;
     }
 
     public String getEnglishName() {
@@ -41,10 +55,6 @@ public class I18nLanguageDTO implements IsSerializable {
         return nativeName;
     }
 
-    public String getDirection() {
-        return direction;
-    }
-
     public String getPluralization() {
         return pluralization;
     }
@@ -53,16 +63,24 @@ public class I18nLanguageDTO implements IsSerializable {
         this.code = code;
     }
 
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public void setDateFormatShort(String dateFormatShort) {
+        this.dateFormatShort = dateFormatShort;
+    }
+
+    public void setDirection(final String direction) {
+        this.direction = direction;
+    }
+
     public void setEnglishName(final String englishName) {
         this.englishName = englishName;
     }
 
     public void setNativeName(final String nativeName) {
         this.nativeName = nativeName;
-    }
-
-    public void setDirection(final String direction) {
-        this.direction = direction;
     }
 
     public void setPluralization(final String pluralization) {

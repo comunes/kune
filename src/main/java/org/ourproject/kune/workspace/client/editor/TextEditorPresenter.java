@@ -48,6 +48,7 @@ public class TextEditorPresenter implements TextEditor {
     private final boolean autoSave;
     private boolean saveAndCloseConfirmed;
     private Listener<String> onSave;
+    private Listener0 onEditCancelled;
     private final ActionToolbar<StateToken> toolbar;
     private ActionToolbarButtonDescriptor<StateToken> save;
     private ActionToolbarButtonDescriptor<StateToken> close;
@@ -77,6 +78,7 @@ public class TextEditorPresenter implements TextEditor {
 
     public void editContent(final String content, final Listener<String> onSave, final Listener0 onEditCancelled) {
         this.onSave = onSave;
+        this.onEditCancelled = onEditCancelled;
         toolbar.attach();
         view.attach();
         setContent(content);
@@ -151,6 +153,7 @@ public class TextEditorPresenter implements TextEditor {
         reset();
         view.detach();
         toolbar.detach();
+        onEditCancelled.onEvent();
     }
 
     protected void onEditHTML() {

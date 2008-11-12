@@ -134,15 +134,15 @@ public class DocContextPropEditorPresenter implements DocContextPropEditor {
         final String tags = content.getTags();
         final List<UserSimpleDTO> authors = content.getAuthors();
 
-        if (tags != null) {
-            view.setTags(tags);
-        } else {
-            view.removeTagsComponent();
-        }
         if (language != null) {
             view.setLanguage(language);
         } else {
             view.removeLangComponent();
+        }
+        if (tags != null) {
+            view.setTags(tags);
+        } else {
+            view.removeTagsComponent();
         }
         if (authors != null) {
             view.setAuthors(authors);
@@ -150,7 +150,19 @@ public class DocContextPropEditorPresenter implements DocContextPropEditor {
             view.removeAuthorsComponent();
         }
         if (publishedOn != null) {
-            view.setPublishedOn(publishedOn);
+            String dateFormat = session.getCurrentLanguage().getDateFormatShort();
+            if (dateFormat != null) {
+                dateFormat = dateFormat.replace("yyyy", "Y");
+                dateFormat = dateFormat.replace("yy", "y");
+                dateFormat = dateFormat.replace("MM", "m");
+                dateFormat = dateFormat.replace("M", "n");
+                dateFormat = dateFormat.replace("dd", "xxx");
+                dateFormat = dateFormat.replace("d", "j");
+                dateFormat = dateFormat.replace("xxx", "d");
+                view.setPublishedOn(publishedOn, dateFormat);
+            } else {
+                view.setPublishedOn(publishedOn, "M/d/yy def");
+            }
         } else {
             view.removePublishedOnComponent();
         }

@@ -101,8 +101,14 @@ public class I18nLanguage implements HasId {
     @Column(name = "scope", length = 1)
     private String scope;
 
+    @Column(name = "date_format")
+    private String dateFormat;
+
+    @Column(name = "date_format_short")
+    private String dateFormatShort;
+
     public I18nLanguage() {
-        this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     // Only for tests
@@ -118,7 +124,7 @@ public class I18nLanguage implements HasId {
             final String englishNameLocale, final String englishNameModifier, final String iso6391,
             final String iso6392, final String iso6393, final Boolean macroLanguage, final String nativeName,
             final String nativeNameLocale, final String nativeNameModifier, final String pluralization,
-            final String rfc3066, final String scope) {
+            final String rfc3066, final String scope, final String dateFormat) {
         this.id = id;
         this.iso6391 = iso6391;
         this.iso6392 = iso6392;
@@ -135,6 +141,7 @@ public class I18nLanguage implements HasId {
         this.pluralization = pluralization;
         this.scope = scope;
         this.code = code;
+        this.dateFormat = dateFormat;
     }
 
     @Finder(query = "FROM I18nLanguage l WHERE code = :language")
@@ -149,6 +156,14 @@ public class I18nLanguage implements HasId {
 
     public String getCode() {
         return code;
+    }
+
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+    public String getDateFormatShort() {
+        return dateFormatShort;
     }
 
     public String getDirection() {
@@ -214,6 +229,14 @@ public class I18nLanguage implements HasId {
     @Column(unique = true)
     public void setCode(final String code) {
         this.code = code;
+    }
+
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public void setDateFormatShort(String dateFormatShort) {
+        this.dateFormatShort = dateFormatShort;
     }
 
     public void setDirection(final String direction) {

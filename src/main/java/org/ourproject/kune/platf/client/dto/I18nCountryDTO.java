@@ -25,17 +25,26 @@ public class I18nCountryDTO implements IsSerializable {
 
     private String code;
     private String englishName;
+    private String dateFormat;
 
     public String getCode() {
         return code;
+    }
+
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+    public String getEnglishName() {
+        return englishName;
     }
 
     public void setCode(final String code) {
         this.code = code;
     }
 
-    public String getEnglishName() {
-        return englishName;
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
     }
 
     public void setEnglishName(final String englishName) {

@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.widgets.form.ComboBox;
+import com.gwtext.client.widgets.form.DateField;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextArea;
@@ -46,16 +47,19 @@ public class DocContextPropEditorPanel extends ScrollPanel implements DocContext
 
     private static final int FORMS_WIDTH = 150;
     public static final String TAGS_PROP = "k-dcpep-tagsp-dis";
-    public static final String LANG_PROP = "k-dcpep-tagsp-dis";
+    public static final String LANG_PROP = "k-dcpep-langsp-dis";
+    public static final String PUBLI_PROP = "k-dcpep-publisp-dis";
 
     private final DocContextPropEditorPresenter presenter;
     private final WorkspaceSkeleton ws;
     private final I18nTranslationService i18n;
-    private TextArea tagsField;
-    private ContextPropertyPanel tagsComponent;
     private final Provider<LanguageSelector> langSelectorProv;
-    private ContextPropertyPanel langComponent;
     private final VerticalPanel vp;
+    private ContextPropertyPanel tagsComponent;
+    private ContextPropertyPanel langComponent;
+    private ContextPropertyPanel publishedOnComponent;
+    private TextArea tagsField;
+    private DateField publishedOnField;
 
     public DocContextPropEditorPanel(final DocContextPropEditorPresenter presenter, final I18nTranslationService i18n,
             WorkspaceSkeleton ws, Provider<LanguageSelector> langSelectorProv) {
@@ -67,10 +71,7 @@ public class DocContextPropEditorPanel extends ScrollPanel implements DocContext
         vp = new VerticalPanel();
         super.add(vp);
         // authors_item = i18n.t("Authors");
-        // publication_item = i18n.t("Publication");
         // perms_item = i18n.t("Permissions");
-        // language_item = i18n.t("Language");
-        // tags_item = i18n.t("Tags");
     }
 
     public void attach() {
@@ -104,9 +105,9 @@ public class DocContextPropEditorPanel extends ScrollPanel implements DocContext
     }
 
     public void removePublishedOnComponent() {
-        // if (options.containsItem(publication_item)) {
-        // removeComponent(publication_item);
-        // }
+        if (publishedOnComponent != null) {
+            publishedOnComponent.removeFromParent();
+        }
     }
 
     public void removeTagsComponent() {
@@ -179,15 +180,13 @@ public class DocContextPropEditorPanel extends ScrollPanel implements DocContext
         langSelectorProv.get().setLanguage(language);
     }
 
-    public void setPublishedOn(final Date publishedOn) {
-        // if (publishedOnField == null) {
-        // publishedOnComponent = createPublicationComponent();
-        // }
-        // if (!options.containsItem(publication_item)) {
-        // addComponent(publication_item, i18n.t("Date of publication of this
-        // work"), publishedOnComponent);
-        // }
-        // // publishedOnField.setValue(publishedOn);
+    public void setPublishedOn(final Date publishedOn, String dateFormat) {
+        if (publishedOnField == null) {
+            publishedOnComponent = createPublicationComponent();
+        }
+        addComponent(publishedOnComponent);
+        publishedOnField.setValue(publishedOn);
+        publishedOnField.setFormat(dateFormat);
     }
 
     public void setTags(final String tags) {
@@ -210,27 +209,22 @@ public class DocContextPropEditorPanel extends ScrollPanel implements DocContext
         return form;
     }
 
-    // private VerticalPanel createPublicationComponent() {
-    // // final FormPanel form = createDefaultForm();
-    // //
-    // // publishedOnField = new DateField();
-    // // publishedOnField.setWidth("140");
-    // // publishedOnField.setFormat("Y-m-d");
-    // //
-    // // publishedOnField.addListener(new FieldListenerAdapter() {
-    // // public void onChange(final Field field, final Object newVal, final
-    // // Object oldVal) {
-    // // presenter.setPublishedOn((Date) newVal);
-    // // }
-    // // });
-    // //
-    // // form.add(publishedOnField);
-    // //
-    // // final VerticalPanel vp = new VerticalPanel();
-    // // vp.add(form);
-    // // return vp;
-    // //// }
-    //
+    private ContextPropertyPanel createPublicationComponent() {
+        final FormPanel form = createDefaultForm();
+
+        publishedOnField = new DateField();
+        publishedOnField.setWidth("140");
+
+        publishedOnField.addListener(new FieldListenerAdapter() {
+            @Override
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
+                presenter.setPublishedOn((Date) newVal);
+            }
+        });
+        form.add(publishedOnField);
+        return new ContextPropertyPanel(i18n.t("Publication"), i18n.t("Date of publication"), true, PUBLI_PROP, form);
+    }
+
     private ContextPropertyPanel createTagsComponent() {
         final FormPanel form = createDefaultForm();
         tagsField = new TextArea();
@@ -243,9 +237,8 @@ public class DocContextPropEditorPanel extends ScrollPanel implements DocContext
             }
         });
         form.add(tagsField);
-        ContextPropertyPanel propertyPanel = new ContextPropertyPanel(i18n.t("Tags"),
-                i18n.t("Keywords or terms associated with this work"), true, TAGS_PROP, form);
-        return propertyPanel;
+        return new ContextPropertyPanel(i18n.t("Tags"), i18n.t("Keywords or terms associated with this work"), true,
+                TAGS_PROP, form);
     }
 
     // private void removeComponent(final String header) {

@@ -51,7 +51,7 @@ public interface DocContextPropEditorView extends View {
 
     void setLanguage(I18nLanguageDTO language);
 
-    void setPublishedOn(Date publishedOn);
+    void setPublishedOn(Date publishedOn, String dateFormat);
 
     void setTags(String tags);
 
