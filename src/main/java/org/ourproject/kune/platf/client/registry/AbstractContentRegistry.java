@@ -1,8 +1,6 @@
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.platf.client.registry;
 
 import java.util.ArrayList;
-
-import com.allen_sauer.gwt.log.client.Log;
 
 public abstract class AbstractContentRegistry {
     private final ArrayList<String> registry;
@@ -12,7 +10,6 @@ public abstract class AbstractContentRegistry {
     }
 
     public boolean contains(String typeId) {
-        Log.debug("Renables: " + registry + " checking: " + typeId);
         return registry.contains(typeId);
     }
 
@@ -22,10 +19,14 @@ public abstract class AbstractContentRegistry {
         }
     }
 
+    @Override
+    public String toString() {
+        return "registry: " + registry;
+    }
+
     public void unregister(String... typeIds) {
         for (String typeId : typeIds) {
             registry.remove(typeId);
         }
     }
-
 }

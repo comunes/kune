@@ -29,11 +29,10 @@ import org.ourproject.kune.chat.client.ctx.room.AddRoomPresenter;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
-import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ToolGroup;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
@@ -68,7 +67,7 @@ public class ChatClientModule extends AbstractModule {
             public ChatClientTool create() {
                 return new ChatClientTool($(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
                         $(ToolSelector.class), $(WsThemePresenter.class), $(ContentIconsRegistry.class),
-                        $(DragDropContentRegistry.class), $(RenamableContentRegistry.class));
+                        $(ContentCapabilitiesRegistry.class));
             }
         });
 

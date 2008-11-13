@@ -20,9 +20,8 @@
 package org.ourproject.kune.docs.client;
 
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
-import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
-import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -43,10 +42,9 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-            final DragDropContentRegistry dragDropContentRegistry, final ContentIconsRegistry contentIconsRegistry,
-            RenamableContentRegistry renamableContentRegistry) {
+            final ContentIconsRegistry contentIconsRegistry, ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
         super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws, contentIconsRegistry,
-                dragDropContentRegistry, renamableContentRegistry);
+                contentCapabilitiesRegistry);
     }
 
     public String getName() {
@@ -55,13 +53,8 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
 
     @Override
     protected void registerDragDropTypes() {
-        dragDropContentRegistry.registerDraggableType(TYPE_DOCUMENT);
-        dragDropContentRegistry.registerDraggableType(TYPE_FOLDER);
-        dragDropContentRegistry.registerDraggableType(TYPE_UPLOADEDFILE);
-
-        dragDropContentRegistry.registerDroppableType(TYPE_ROOT);
-        dragDropContentRegistry.registerDroppableType(TYPE_FOLDER);
-        dragDropContentRegistry.registerDroppableType(TYPE_GALLERY);
+        contentCapabilitiesRegistry.getDragable().register(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
+        contentCapabilitiesRegistry.getDropable().register(TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY);
     }
 
     @Override
@@ -96,7 +89,7 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
 
     @Override
     protected void registerRenamableTypes() {
-        renamableContentRegistry.register(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_BLOG, TYPE_GALLERY, TYPE_POST,
-                TYPE_UPLOADEDFILE, TYPE_WIKI, TYPE_WIKIPAGE);
+        contentCapabilitiesRegistry.getRenamableContent().register(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_BLOG, TYPE_GALLERY,
+                TYPE_POST, TYPE_UPLOADEDFILE, TYPE_WIKI, TYPE_WIKIPAGE);
     }
 }

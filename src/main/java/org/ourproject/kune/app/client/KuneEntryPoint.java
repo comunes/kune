@@ -24,6 +24,7 @@ import org.ourproject.kune.docs.client.DocumentClientModule;
 import org.ourproject.kune.platf.client.services.KuneCoreModule;
 import org.ourproject.kune.platf.client.services.KuneModule;
 import org.ourproject.kune.platf.client.services.KunePlatformModule;
+import org.ourproject.kune.platf.client.services.KuneRegistryModule;
 import org.ourproject.kune.platf.client.services.KuneWorkspaceModule;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -52,7 +53,8 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoadCont() {
-        Suco.install(new KuneCoreModule(), new KunePlatformModule(), new KuneWorkspaceModule(), new EmiteUIModule(),
-                new DocumentClientModule(), new ChatClientModule(), new KuneModule());
+        Suco.install(new KuneCoreModule(), new KuneRegistryModule(), new KunePlatformModule(),
+                new KuneWorkspaceModule(), new EmiteUIModule(), new DocumentClientModule(), new ChatClientModule(),
+                new KuneModule());
     }
 }

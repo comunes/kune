@@ -35,10 +35,9 @@ import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorView;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
-import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.ToolGroup;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -73,8 +72,8 @@ public class DocumentClientModule extends AbstractModule {
             public DocumentClientTool create() {
                 $(DocumentClientActions.class);
                 return new DocumentClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
-                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(DragDropContentRegistry.class),
-                        $(ContentIconsRegistry.class), $(RenamableContentRegistry.class));
+                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(ContentIconsRegistry.class),
+                        $(ContentCapabilitiesRegistry.class));
             }
         });
 

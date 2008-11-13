@@ -23,11 +23,11 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
-import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.registry.RenamableRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -50,13 +50,13 @@ public class EntityTitlePresenter implements EntityTitle {
     private final Session session;
     private final Provider<ContextNavigator> contextNavigatorProvider;
     private final ContentIconsRegistry iconsRegistry;
-    private final RenamableContentRegistry renamableContentRegistry;
+    private final RenamableRegistry renamableContentRegistry;
 
     public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler,
             final StateManager stateManager, final Session session,
             final Provider<ContentServiceAsync> contentServiceProvider,
             final Provider<ContextNavigator> contextNavigatorProvider, final ContentIconsRegistry iconsRegistry,
-            RenamableContentRegistry renamableContentRegistry) {
+            RenamableRegistry renamableContentRegistry) {
         this.i18n = i18n;
         this.errorHandler = errorHandler;
         this.session = session;

@@ -26,7 +26,6 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
-import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
@@ -39,6 +38,7 @@ import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
@@ -66,16 +66,16 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final EntityTitle entityTitle;
     private boolean editOnNextStateChange;
     private final ContentIconsRegistry contentIconsRegistry;
-    private final DragDropContentRegistry dragDropContentRegistry;
     private final ActionRegistry<StateToken> actionRegistry;
     private final ActionToolbar<StateToken> toolbar;
     private final Provider<FileDownloadUtils> downloadUtilsProvider;
     private final boolean useGenericImageIcon;
+    private final ContentCapabilitiesRegistry capabilitiesRegistry;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
             final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
             final EntityTitle entityTitle, final ContentIconsRegistry contentIconsRegistry,
-            final DragDropContentRegistry dragDropContentRegistry, final ActionToolbar<StateToken> toolbar,
+            ContentCapabilitiesRegistry capabilitiesRegistry, final ActionToolbar<StateToken> toolbar,
             final ActionRegistry<StateToken> actionRegistry, Provider<FileDownloadUtils> downloadUtilsProvider,
             boolean useGenericImageIcon) {
         this.stateManager = stateManager;
@@ -84,7 +84,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         this.i18n = i18n;
         this.entityTitle = entityTitle;
         this.contentIconsRegistry = contentIconsRegistry;
-        this.dragDropContentRegistry = dragDropContentRegistry;
+        this.capabilitiesRegistry = capabilitiesRegistry;
         this.actionRegistry = actionRegistry;
         this.toolbar = toolbar;
         this.downloadUtilsProvider = downloadUtilsProvider;
@@ -280,9 +280,9 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         final String contentTypeIcon = getIcon(stateToken, contentTypeId, mimeType);
         final String tooltip = getTooltip(stateToken, mimeType);
         final ContextNavigatorItem item = new ContextNavigatorItem(genId(stateToken), genId(parentStateToken),
-                contentTypeIcon, title, tooltip, status, stateToken, dragDropContentRegistry.isDraggable(contentTypeId,
-                        rights.isAdministrable()), dragDropContentRegistry.isDroppable(contentTypeId,
-                        rights.isAdministrable()), actionRegistry.getCurrentActions(stateToken, contentTypeId,
+                contentTypeIcon, title, tooltip, status, stateToken, capabilitiesRegistry.isDragable(contentTypeId)
+                        && rights.isAdministrable(), capabilitiesRegistry.isDropable(contentTypeId)
+                        && rights.isAdministrable(), actionRegistry.getCurrentActions(stateToken, contentTypeId,
                         session.isLogged(), rights, false));
         view.addItem(item);
         return toolbarActions;

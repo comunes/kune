@@ -20,8 +20,7 @@
 package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
-import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
-import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
@@ -36,10 +35,9 @@ public class ChatClientTool extends FoldableAbstractClientTool {
 
     public ChatClientTool(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
             final ToolSelector toolSelector, final WsThemePresenter wsThemePresenter,
-            final ContentIconsRegistry contentIconsRegistry, final DragDropContentRegistry dragDropContentRegistry,
-            RenamableContentRegistry renamablesContentRegistry) {
+            final ContentIconsRegistry contentIconsRegistry, ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
         super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws, contentIconsRegistry,
-                dragDropContentRegistry, renamablesContentRegistry);
+                contentCapabilitiesRegistry);
     }
 
     public String getName() {

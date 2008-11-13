@@ -2,6 +2,7 @@ package org.ourproject.kune.workspace.client.site.msg;
 
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.gwtextux.client.widgets.window.ToastWindow;
 
 public class SiteToastMessagePanel implements SiteToastMessageView {
@@ -10,7 +11,9 @@ public class SiteToastMessagePanel implements SiteToastMessageView {
     }
 
     public void showMessage(String title, String message, SiteErrorType type) {
-        ToastWindow toastWindow = new ToastWindow(title, message);
+        HTML html = new HTML(message);
+        html.addStyleName("kune-Margin-Medium-trbl");
+        ToastWindow toastWindow = new ToastWindow(title, html.toString());
         String iconCls = "";
         switch (type) {
         case info:

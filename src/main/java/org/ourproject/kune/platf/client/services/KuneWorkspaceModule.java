@@ -21,9 +21,9 @@
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
-import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
+import org.ourproject.kune.platf.client.registry.RenamableRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
@@ -271,7 +271,7 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final EntityTitlePresenter presenter = new EntityTitlePresenter($(I18nUITranslationService.class),
                         $(KuneErrorHandler.class), $(StateManager.class), $(Session.class),
                         $$(ContentServiceAsync.class), $$(ContextNavigator.class), $(ContentIconsRegistry.class),
-                        $(RenamableContentRegistry.class));
+                        $(RenamableRegistry.class));
                 final EntityTitlePanel panel = new EntityTitlePanel($(WorkspaceSkeleton.class), presenter);
                 presenter.init(panel);
                 return presenter;

@@ -22,9 +22,7 @@ import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.actions.DragDropContentRegistry;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
-import org.ourproject.kune.platf.client.actions.RenamableContentRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbarPresenter;
@@ -40,6 +38,7 @@ import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperDefault;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -417,27 +416,6 @@ public class KuneModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<DragDropContentRegistry>(DragDropContentRegistry.class) {
-            @Override
-            public DragDropContentRegistry create() {
-                return new DragDropContentRegistry();
-            }
-        });
-
-        register(Singleton.class, new Factory<RenamableContentRegistry>(RenamableContentRegistry.class) {
-            @Override
-            public RenamableContentRegistry create() {
-                return new RenamableContentRegistry();
-            }
-        });
-
-        register(Singleton.class, new Factory<ContentIconsRegistry>(ContentIconsRegistry.class) {
-            @Override
-            public ContentIconsRegistry create() {
-                return new ContentIconsRegistry();
-            }
-        });
-
         register(NoDecoration.class, new Factory<ActionContentToolbar>(ActionContentToolbar.class) {
             @Override
             public ActionContentToolbar create() {
@@ -463,8 +441,9 @@ public class KuneModule extends AbstractModule {
             public ContextNavigator create() {
                 final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
                         $(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
-                        $(ContentIconsRegistry.class), $(DragDropContentRegistry.class), $(ActionContextToolbar.class),
-                        $(ContextActionRegistry.class), $$(FileDownloadUtils.class), true);
+                        $(ContentIconsRegistry.class), $(ContentCapabilitiesRegistry.class),
+                        $(ActionContextToolbar.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
+                        true);
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
                         $(WorkspaceSkeleton.class), $(ActionManager.class));
                 presenter.init(panel);
