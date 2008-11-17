@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.cnt.room;
+package org.ourproject.kune.chat.client.cnt;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;

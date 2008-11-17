@@ -17,11 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.cnt.room;
+package org.ourproject.kune.chat.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
-
-public interface ChatRoomView extends AbstractContentView {
-
-    void setInfo(String info);
+public interface ChatRoom {
 }

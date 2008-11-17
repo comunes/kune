@@ -17,19 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.cnt.room;
+package org.ourproject.kune.chat.client.cnt;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
-public class ChatRoomPanel extends FoldableContentPanel implements ChatRoomView {
+public interface ChatRoomView extends AbstractContentView {
 
-    public ChatRoomPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
-        super(ws, i18n);
-    }
-
-    public void setInfo(String info) {
-        setLabel(info);
-    }
+    void setInfo(String info);
 }

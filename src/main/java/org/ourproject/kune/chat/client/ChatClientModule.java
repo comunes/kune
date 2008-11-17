@@ -18,9 +18,9 @@
  *
  */package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.chat.client.cnt.room.ChatRoom;
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomPanel;
-import org.ourproject.kune.chat.client.cnt.room.ChatRoomPresenter;
+import org.ourproject.kune.chat.client.cnt.ChatRoom;
+import org.ourproject.kune.chat.client.cnt.ChatRoomPanel;
+import org.ourproject.kune.chat.client.cnt.ChatRoomPresenter;
 import org.ourproject.kune.chat.client.ctx.ChatContext;
 import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ctx.room.AddRoom;
