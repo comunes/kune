@@ -20,7 +20,6 @@
 package org.ourproject.kune.docs.client.ctx;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditor;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;

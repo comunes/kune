@@ -29,7 +29,7 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentViewer;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditor;
+import org.ourproject.kune.docs.client.ctx.DocContextPropEditor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;

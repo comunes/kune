@@ -22,8 +22,8 @@ package org.ourproject.kune.workspace.client.cxt;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorPresenter;
-import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorView;
+import org.ourproject.kune.docs.client.ctx.DocContextPropEditorPresenter;
+import org.ourproject.kune.docs.client.ctx.DocContextPropEditorView;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
