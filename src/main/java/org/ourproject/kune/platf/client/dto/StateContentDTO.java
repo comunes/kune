@@ -31,7 +31,6 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
     private String content;
     private AccessRightsDTO contentRights;
     private ContentStatusDTO status;
-    private boolean isRateable;
     private Double rate;
     private Integer rateByUsers;
     private Double currentUserRate;
@@ -91,10 +90,6 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
         return version;
     }
 
-    public boolean isRateable() {
-        return isRateable;
-    }
-
     public void setAuthors(List<UserSimpleDTO> authors) {
         this.authors = authors;
     }
@@ -131,10 +126,6 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
         setRate(result.getRate());
         setRateByUsers(result.getRateByUsers());
         setCurrentUserRate(result.getCurrentUserRate());
-    }
-
-    public void setRateable(boolean isRateable) {
-        this.isRateable = isRateable;
     }
 
     public void setRateByUsers(Integer rateByUsers) {

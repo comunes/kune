@@ -1,6 +1,8 @@
 package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.platf.client.registry.AclEditableRegistry;
+import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
 import org.ourproject.kune.platf.client.registry.CanBeHomepageRegistry;
 import org.ourproject.kune.platf.client.registry.ComentableRegistry;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
@@ -26,6 +28,18 @@ public class KuneRegistryModule extends AbstractModule {
     @Override
     protected void onInstall() {
 
+        register(Singleton.class, new Factory<AclEditableRegistry>(AclEditableRegistry.class) {
+            @Override
+            public AclEditableRegistry create() {
+                return new AclEditableRegistry();
+            }
+        });
+        register(Singleton.class, new Factory<AuthorableRegistry>(AuthorableRegistry.class) {
+            @Override
+            public AuthorableRegistry create() {
+                return new AuthorableRegistry();
+            }
+        });
         register(Singleton.class, new Factory<CanBeHomepageRegistry>(CanBeHomepageRegistry.class) {
             @Override
             public CanBeHomepageRegistry create() {
@@ -134,7 +148,8 @@ public class KuneRegistryModule extends AbstractModule {
         register(Singleton.class, new Factory<ContentCapabilitiesRegistry>(ContentCapabilitiesRegistry.class) {
             @Override
             public ContentCapabilitiesRegistry create() {
-                return new ContentCapabilitiesRegistry($(CanBeHomepageRegistry.class), $(ComentableRegistry.class),
+                return new ContentCapabilitiesRegistry($(AuthorableRegistry.class), $(AclEditableRegistry.class),
+                        $(ContentIconsRegistry.class), $(CanBeHomepageRegistry.class), $(ComentableRegistry.class),
                         $(DragableRegistry.class), $(DropableRegistry.class), $(EmailSubscribeAbleRegistry.class),
                         $(LicensableRegistry.class), $(PublishModerableRegistry.class), $(RateableRegistry.class),
                         $(TageableRegistry.class), $(RenamableRegistry.class), $(TranslatableRegistry.class),

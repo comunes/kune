@@ -33,7 +33,6 @@ import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorPanel;
 import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorPresenter;
 import org.ourproject.kune.docs.client.ctx.admin.DocContextPropEditorView;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
-import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.ToolGroup;
@@ -41,6 +40,7 @@ import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -72,8 +72,7 @@ public class DocumentClientModule extends AbstractModule {
             public DocumentClientTool create() {
                 $(DocumentClientActions.class);
                 return new DocumentClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
-                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(ContentIconsRegistry.class),
-                        $(ContentCapabilitiesRegistry.class));
+                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(ContentCapabilitiesRegistry.class));
             }
         });
 
@@ -93,10 +92,11 @@ public class DocumentClientModule extends AbstractModule {
             @Override
             public DocContextPropEditor create() {
                 final DocContextPropEditorPresenter presenter = new DocContextPropEditorPresenter($(Session.class),
-                        $(StateManager.class), $$(TagsSummary.class), $$(ContentServiceAsync.class),
-                        $(EntityTitle.class), $(EntitySubTitle.class));
+                        $(StateManager.class), $(ContentCapabilitiesRegistry.class), $$(TagsSummary.class),
+                        $$(ContentServiceAsync.class), $(EntityTitle.class), $(EntitySubTitle.class));
                 final DocContextPropEditorView view = new DocContextPropEditorPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class));
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class),
+                        $(Images.class));
                 presenter.init(view);
                 return presenter;
             }

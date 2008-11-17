@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.ui.rate;
 import org.ourproject.kune.platf.client.dto.RateResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -45,7 +46,7 @@ public class RateItPresenter implements RateIt {
 
     public RateItPresenter(final I18nTranslationService i18n, final Session session,
             final Provider<ContentServiceAsync> contentServiceProvider, final StateManager stateManager,
-            Provider<RatePresenter> ratePresenterProvider) {
+            Provider<RatePresenter> ratePresenterProvider, final ContentCapabilitiesRegistry capabilitiesRegistry) {
         this.i18n = i18n;
         this.session = session;
         this.contentServiceProvider = contentServiceProvider;
@@ -54,7 +55,8 @@ public class RateItPresenter implements RateIt {
             public void onEvent(final StateAbstractDTO state) {
                 if (state instanceof StateContentDTO) {
                     StateContentDTO stateContentDTO = (StateContentDTO) state;
-                    setState(stateContentDTO.isRateable(), stateContentDTO.getCurrentUserRate());
+                    setState(capabilitiesRegistry.isRateable(stateContentDTO.getTypeId()),
+                            stateContentDTO.getCurrentUserRate());
                 } else {
                     view.setVisible(false);
                 }

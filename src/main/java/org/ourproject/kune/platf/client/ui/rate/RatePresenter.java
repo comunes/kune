@@ -21,6 +21,7 @@
 import org.ourproject.kune.platf.client.dto.RateResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.listener.Listener;
@@ -28,8 +29,10 @@ import com.calclab.suco.client.listener.Listener;
 public class RatePresenter {
 
     private RateView view;
+    private final ContentCapabilitiesRegistry capabilitiesRegistry;
 
-    public RatePresenter(final StateManager stateManager) {
+    public RatePresenter(final StateManager stateManager, ContentCapabilitiesRegistry capabilitiesRegistry) {
+        this.capabilitiesRegistry = capabilitiesRegistry;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 if (state instanceof StateContentDTO) {
@@ -62,8 +65,10 @@ public class RatePresenter {
     private void setState(final StateContentDTO state) {
         Integer rateByUsers = state.getRateByUsers();
         Double rate = state.getRate();
-        if (state.isRateable()) {
+        if (capabilitiesRegistry.isRateable(state.getTypeId())) {
             setRate(rateByUsers, rate);
+        } else {
+            view.setVisible(false);
         }
     }
 }

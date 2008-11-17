@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
@@ -42,54 +41,51 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-            final ContentIconsRegistry contentIconsRegistry, ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
-        super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws, contentIconsRegistry,
-                contentCapabilitiesRegistry);
+            ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
+        super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
+
+        // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+        registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+        registerDragableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
+        registerDropableTypes(TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY);
+        registerPublishModerableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+        registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE, TYPE_POST);
+        registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_BLOG, TYPE_GALLERY, TYPE_POST, TYPE_UPLOADEDFILE,
+                TYPE_WIKI, TYPE_WIKIPAGE);
+        registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE, TYPE_POST);
+        registerTranslatableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
+
+        registerIcons();
     }
 
     public String getName() {
         return NAME;
     }
 
-    @Override
-    protected void registerDragDropTypes() {
-        contentCapabilitiesRegistry.getDragable().register(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
-        contentCapabilitiesRegistry.getDropable().register(TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY);
-    }
-
-    @Override
     protected void registerIcons() {
-        contentIconsRegistry.registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_WIKI, "images/nav/wiki.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("image"),
-                "images/nav/picture.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("video"),
-                "images/nav/film.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "pdf"),
+        registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
+        registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
+        registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
+        registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
+        registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
+        registerContentTypeIcon(TYPE_WIKI, "images/nav/wiki.png");
+        registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("image"), "images/nav/picture.png");
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("video"), "images/nav/film.png");
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "pdf"),
                 "images/nav/page_pdf.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
                 "images/nav/page_zip.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
                 "images/nav/page_zip.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("text"),
-                "images/nav/page_text.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "msword"),
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("text"), "images/nav/page_text.png");
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "msword"),
                 "images/nav/page_word.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "excel"),
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "excel"),
                 "images/nav/page_excel.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application",
-                "mspowerpoint"), "images/nav/page_pps.png");
-        contentIconsRegistry.registerContentTypeIcon(TYPE_UPLOADEDFILE, "images/nav/page.png");
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "mspowerpoint"),
+                "images/nav/page_pps.png");
+        registerContentTypeIcon(TYPE_UPLOADEDFILE, "images/nav/page.png");
     }
 
-    @Override
-    protected void registerRenamableTypes() {
-        contentCapabilitiesRegistry.getRenamableContent().register(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_BLOG, TYPE_GALLERY,
-                TYPE_POST, TYPE_UPLOADEDFILE, TYPE_WIKI, TYPE_WIKIPAGE);
-    }
 }

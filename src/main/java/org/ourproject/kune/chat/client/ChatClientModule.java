@@ -27,7 +27,6 @@ import org.ourproject.kune.chat.client.ctx.room.AddRoom;
 import org.ourproject.kune.chat.client.ctx.room.AddRoomPanel;
 import org.ourproject.kune.chat.client.ctx.room.AddRoomPresenter;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
-import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.Application;
@@ -66,8 +65,7 @@ public class ChatClientModule extends AbstractModule {
             @Override
             public ChatClientTool create() {
                 return new ChatClientTool($(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
-                        $(ToolSelector.class), $(WsThemePresenter.class), $(ContentIconsRegistry.class),
-                        $(ContentCapabilitiesRegistry.class));
+                        $(ToolSelector.class), $(WsThemePresenter.class), $(ContentCapabilitiesRegistry.class));
             }
         });
 

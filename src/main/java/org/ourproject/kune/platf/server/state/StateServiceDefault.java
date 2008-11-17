@@ -80,7 +80,6 @@ public class StateServiceDefault implements StateService {
         state.setTypeId(content.getTypeId());
         state.setMimeType(content.getMimeType());
         state.setDocumentId(content.getId().toString());
-        state.setRateable(true);
         state.setLanguage(content.getLanguage());
         state.setPublishedOn(content.getPublishedOn());
         state.setAuthors(content.getAuthors());

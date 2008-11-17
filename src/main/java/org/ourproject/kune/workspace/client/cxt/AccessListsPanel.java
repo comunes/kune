@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.ctxadmin;
+package org.ourproject.kune.workspace.client.cxt;
 
 import java.util.Iterator;
 
@@ -74,7 +74,6 @@ public class AccessListsPanel extends VerticalPanel implements View {
         adminsLabel.addStyleName("kune-AccessListSubLabel");
         editorsLabel.addStyleName("kune-AccessListSubLabel");
         viewersLabel.addStyleName("kune-AccessListSubLabel");
-
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {

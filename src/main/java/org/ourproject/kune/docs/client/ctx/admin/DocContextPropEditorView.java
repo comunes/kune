@@ -19,40 +19,8 @@
  */
 package org.ourproject.kune.docs.client.ctx.admin;
 
-import java.util.Date;
-import java.util.List;
+import org.ourproject.kune.workspace.client.cxt.AbstractContextPropEditorView;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.AccessListsDTO;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 
-public interface DocContextPropEditorView extends View {
-
-    void attach();
-
-    void detach();
-
-    void removeAccessListComponent();
-
-    void removeAuthorsComponent();
-
-    void removeLangComponent();
-
-    void removePublishedOnComponent();
-
-    void removeTagsComponent();
-
-    void reset();
-
-    void setAccessLists(AccessListsDTO accessLists);
-
-    void setAuthors(List<UserSimpleDTO> authors);
-
-    void setLanguage(I18nLanguageDTO language);
-
-    void setPublishedOn(Date publishedOn, String dateFormat);
-
-    void setTags(String tags);
-
+public interface DocContextPropEditorView extends AbstractContextPropEditorView {
 }

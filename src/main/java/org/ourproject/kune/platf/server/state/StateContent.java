@@ -33,7 +33,6 @@ public class StateContent extends StateContainer {
     private String content;
     private AccessRights contentRights;
     private ContentStatus status;
-    private boolean isRateable;
     private Double rate;
     private Integer rateByUsers;
     private Double currentUserRate;
@@ -93,10 +92,6 @@ public class StateContent extends StateContainer {
         return version;
     }
 
-    public boolean isRateable() {
-        return isRateable;
-    }
-
     public void setAuthors(List<User> authors) {
         this.authors = authors;
     }
@@ -127,10 +122,6 @@ public class StateContent extends StateContainer {
 
     public void setRate(Double rate) {
         this.rate = rate;
-    }
-
-    public void setRateable(boolean isRateable) {
-        this.isRateable = isRateable;
     }
 
     public void setRateByUsers(Integer rateByUsers) {

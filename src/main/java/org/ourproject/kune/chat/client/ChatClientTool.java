@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
@@ -35,18 +34,12 @@ public class ChatClientTool extends FoldableAbstractClientTool {
 
     public ChatClientTool(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
             final ToolSelector toolSelector, final WsThemePresenter wsThemePresenter,
-            final ContentIconsRegistry contentIconsRegistry, ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
-        super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws, contentIconsRegistry,
-                contentCapabilitiesRegistry);
+            ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
+        super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
+        registerContentTypeIcon(TYPE_ROOM, "images/emite-room.png");
     }
 
     public String getName() {
         return NAME;
     }
-
-    @Override
-    protected void registerIcons() {
-        contentIconsRegistry.registerContentTypeIcon(TYPE_ROOM, "images/emite-room.png");
-    }
-
 }

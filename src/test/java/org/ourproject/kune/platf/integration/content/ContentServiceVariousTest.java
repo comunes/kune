@@ -48,7 +48,6 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         contentService.rateContent(getHash(), defaultContent.getStateToken(), 4.5);
         final StateContentDTO again = (StateContentDTO) contentService.getContent(getHash(),
                 defaultContent.getStateToken());
-        assertEquals(true, again.isRateable());
         assertEquals(new Double(4.5), again.getCurrentUserRate());
         assertEquals(new Double(4.5), again.getRate());
         assertEquals(new Integer(1), again.getRateByUsers());

@@ -1,7 +1,11 @@
 package org.ourproject.kune.platf.client.registry;
 
+import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+
 public class ContentCapabilitiesRegistry {
 
+    private final AclEditableRegistry aclEditable;
+    private final AuthorableRegistry authorable;
     private final CanBeHomepageRegistry canBeHomepage;
     private final ComentableRegistry comentable;
     private final DragableRegistry dragable;
@@ -16,14 +20,19 @@ public class ContentCapabilitiesRegistry {
     private final VersionableRegistry versionable;
     private final XmppComentableRegistry xmppComentable;
     private final XmppNotifyCapableRegistry xmppNotifyCapable;
+    private final ContentIconsRegistry iconsRegistry;
 
-    public ContentCapabilitiesRegistry(final CanBeHomepageRegistry canBeHomepage, final ComentableRegistry comentable,
-            final DragableRegistry dragable, final DropableRegistry dropable,
+    public ContentCapabilitiesRegistry(AuthorableRegistry authorableRegistry, AclEditableRegistry aclEditableRegistry,
+            ContentIconsRegistry iconsRegistry, final CanBeHomepageRegistry canBeHomepage,
+            final ComentableRegistry comentable, final DragableRegistry dragable, final DropableRegistry dropable,
             final EmailSubscribeAbleRegistry emailSubscribeAble, final LicensableRegistry licensable,
             final PublishModerableRegistry publishModerable, final RateableRegistry rateable,
             final TageableRegistry tageable, final RenamableRegistry renamable,
             final TranslatableRegistry translatable, final VersionableRegistry versionable,
             final XmppComentableRegistry xmppComentable, final XmppNotifyCapableRegistry xmppNotifyCapable) {
+        this.authorable = authorableRegistry;
+        this.aclEditable = aclEditableRegistry;
+        this.iconsRegistry = iconsRegistry;
         this.canBeHomepage = canBeHomepage;
         this.comentable = comentable;
         this.dragable = dragable;
@@ -42,6 +51,14 @@ public class ContentCapabilitiesRegistry {
 
     public boolean canBeHomepage(String typeId) {
         return canBeHomepage.contains(typeId);
+    }
+
+    public AclEditableRegistry getAclEditable() {
+        return aclEditable;
+    }
+
+    public AuthorableRegistry getAuthorable() {
+        return authorable;
     }
 
     public CanBeHomepageRegistry getCanBeHomepage() {
@@ -64,6 +81,10 @@ public class ContentCapabilitiesRegistry {
         return emailSubscribeAble;
     }
 
+    public ContentIconsRegistry getIconsRegistry() {
+        return iconsRegistry;
+    }
+
     public LicensableRegistry getLicensable() {
         return licensable;
     }
@@ -76,7 +97,7 @@ public class ContentCapabilitiesRegistry {
         return rateable;
     }
 
-    public RenamableRegistry getRenamableContent() {
+    public RenamableRegistry getRenamable() {
         return renamable;
     }
 
@@ -98,6 +119,14 @@ public class ContentCapabilitiesRegistry {
 
     public XmppNotifyCapableRegistry getXmppNotificyCapable() {
         return xmppNotifyCapable;
+    }
+
+    public boolean isAclEditable(String typeId) {
+        return aclEditable.contains(typeId);
+    }
+
+    public boolean isAuthorable(String typeId) {
+        return authorable.contains(typeId);
     }
 
     public boolean isComentable(String typeId) {

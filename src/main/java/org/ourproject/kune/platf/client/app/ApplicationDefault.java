@@ -83,6 +83,7 @@ public class ApplicationDefault implements Application {
         server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
             public void onFailure(final Throwable error) {
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
+                RootPanel.get("kuneloading").setVisible(false);
                 Site.error("Error fetching initial data");
                 Log.debug(error.getMessage());
             }
@@ -93,6 +94,7 @@ public class ApplicationDefault implements Application {
                 DeferredCommand.addCommand(new Command() {
                     public void execute() {
                         RootPanel.get("kuneinitialcurtain").setVisible(false);
+                        RootPanel.get("kuneloading").setVisible(false);
                     }
                 });
             }

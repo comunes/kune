@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.registry.RenamableRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -304,7 +305,8 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public RateIt create() {
                 final RateItPresenter presenter = new RateItPresenter($(I18nUITranslationService.class),
-                        $(Session.class), $$(ContentServiceAsync.class), $(StateManager.class), $$(RatePresenter.class));
+                        $(Session.class), $$(ContentServiceAsync.class), $(StateManager.class),
+                        $$(RatePresenter.class), $(ContentCapabilitiesRegistry.class));
                 final RateItPanel panel = new RateItPanel(presenter, $(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class), $(Images.class));
                 presenter.init(panel);
@@ -315,7 +317,8 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<RatePresenter>(RatePresenter.class) {
             @Override
             public RatePresenter create() {
-                final RatePresenter presenter = new RatePresenter($(StateManager.class));
+                final RatePresenter presenter = new RatePresenter($(StateManager.class),
+                        $(ContentCapabilitiesRegistry.class));
                 final RatePanel panel = new RatePanel(null, null, $(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class));
                 presenter.init(panel);
