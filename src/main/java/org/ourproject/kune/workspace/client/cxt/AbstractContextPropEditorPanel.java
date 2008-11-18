@@ -131,7 +131,9 @@ public abstract class AbstractContextPropEditorPanel extends ScrollPanel impleme
     }
 
     public void reset() {
-        tagsField.reset();
+        if (tagsField != null) {
+            tagsField.reset();
+        }
     }
 
     public void setAccessLists(final AccessListsDTO accessLists) {

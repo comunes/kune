@@ -54,6 +54,7 @@ public class TextEditorPanel implements TextEditorView {
 
         gwtRTarea = new RichTextArea();
         gwtRTarea.setWidth("97%");
+        gwtRTarea.setHeight("100%");
         gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
         gwtRTarea.ensureDebugId(TEXT_AREA);
 
@@ -66,6 +67,7 @@ public class TextEditorPanel implements TextEditorView {
         mainPanel.add(editorTopBar.getPanel());
         mainPanel.add(gwtRTarea);
 
+        adjustSize(ws.getEntityWorkspace().getContentHeight());
         ws.getEntityWorkspace().addContentListener(new ContainerListenerAdapter() {
             @Override
             public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
@@ -143,6 +145,8 @@ public class TextEditorPanel implements TextEditorView {
     }
 
     private void adjustSize(final int height) {
-        gwtRTarea.setHeight("" + (height - WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
+        int newHeight = height - WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 27;
+        gwtRTarea.setHeight("" + newHeight);
+        mainPanel.setCellHeight(gwtRTarea, "" + newHeight);
     }
 }

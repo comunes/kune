@@ -29,27 +29,27 @@ import org.ourproject.kune.workspace.client.cxt.FoldableContextPresenter;
 import com.calclab.suco.client.ioc.Provider;
 
 public class DocumentContextPresenter extends FoldableContextPresenter implements DocumentContext {
-    private final Provider<DocContextPropEditor> adminContextProvider;
+    private final Provider<DocContextPropEditor> contextPropEditorProvider;
 
     public DocumentContextPresenter(final StateManager stateManager,
             final Provider<ContextNavigator> contextNavigatorProvider,
-            final Provider<DocContextPropEditor> adminContextProvider) {
+            final Provider<DocContextPropEditor> contextPropEditorProvider) {
         super(DocumentClientTool.NAME, stateManager, contextNavigatorProvider);
-        this.adminContextProvider = adminContextProvider;
+        this.contextPropEditorProvider = contextPropEditorProvider;
     }
 
     @Override
     protected void detach() {
         super.detach();
-        adminContextProvider.get().detach();
-        adminContextProvider.get().clear();
+        contextPropEditorProvider.get().detach();
+        contextPropEditorProvider.get().clear();
     }
 
     @Override
     protected void setState(final StateContainerDTO state) {
         super.setState(state);
         if (state instanceof StateContentDTO) {
-            adminContextProvider.get().setState((StateContentDTO) state);
+            contextPropEditorProvider.get().setState((StateContentDTO) state);
         }
     }
 }

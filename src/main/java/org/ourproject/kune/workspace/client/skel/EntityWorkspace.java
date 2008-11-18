@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.ContainerListener;
+import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 import com.gwtext.client.widgets.layout.AnchorLayout;
 import com.gwtext.client.widgets.layout.AnchorLayoutData;
 import com.gwtext.client.widgets.layout.BorderLayout;
@@ -148,12 +149,20 @@ public class EntityWorkspace {
         context.addListener(listener);
     }
 
+    public void addListener(ContainerListenerAdapter containerListenerAdapter) {
+        cntCtxBorderLayout.addListener(containerListenerAdapter);
+    }
+
     public SimpleToolbar getBottomTitle() {
         return bottom;
     }
 
     public Toolbar getContentBottomBar() {
         return contentBottomBar;
+    }
+
+    public int getContentHeight() {
+        return content.getHeight();
     }
 
     public Toolbar getContentTopBar() {
@@ -166,6 +175,10 @@ public class EntityWorkspace {
 
     public Toolbar getContextTopBar() {
         return contextTopBar;
+    }
+
+    public int getHeight() {
+        return cntCtxBorderLayout.getHeight();
     }
 
     public Panel getPanel() {

@@ -57,24 +57,30 @@ public class DocumentViewerPresenter extends FoldableContentPresenter implements
     @Override
     protected void setState(StateContentDTO state) {
         super.setState(state);
+        setContent(state, DocumentClientTool.TYPE_UPLOADEDFILE);
+    }
+
+    private void setContent(StateContentDTO state, String uploadedfileType) {
         String typeId = state.getTypeId();
-        String text = state.getContent();
+        String contentBody = state.getContent();
         StateToken token = state.getStateToken();
         BasicMimeTypeDTO mimeType = state.getMimeType();
-        if (typeId.equals(DocumentClientTool.TYPE_UPLOADEDFILE)) {
+        if (typeId.equals(uploadedfileType)) {
             if (mimeType != null) {
                 FileDownloadUtils fileDownloadUtils = downloadProvider.get();
                 if (mimeType.getType().equals("image")) {
                     view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
                             ImageSize.sized));
                 } else if (mimeType.toString().equals("text/plain") || mimeType.toString().equals("application/pdf")) {
-                    view.setContent(text);
+                    view.setContent(contentBody);
                 } else {
                     view.setContent("");
                 }
+            } else {
+                view.setContent("");
             }
         } else {
-            view.setContent(text);
+            view.setContent(contentBody);
         }
         view.attach();
     }
