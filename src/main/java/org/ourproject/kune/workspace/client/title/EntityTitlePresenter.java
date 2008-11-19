@@ -91,12 +91,12 @@ public class EntityTitlePresenter implements EntityTitle {
         String dateFormat = session.getCurrentLanguage().getDateFormat();
         final DateTimeFormat fmt;
         if (dateFormat == null) {
-            fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm vvvv");
+            fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
         } else {
             String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(publishedOn);
             String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
             dateFormat = dateFormat.replaceFirst("MMM", "'" + i18n.t(monthToTranslate) + "'");
-            fmt = DateTimeFormat.getFormat(dateFormat + " h:mm vvvv");
+            fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
         }
         view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
     }

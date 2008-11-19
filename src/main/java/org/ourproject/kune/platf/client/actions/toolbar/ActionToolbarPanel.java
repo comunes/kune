@@ -119,6 +119,16 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         }
     }
 
+    public SimpleToolbar getToolbar(final ActionToolbarPosition pos) {
+        switch (pos) {
+        case bottombar:
+            return bottombar;
+        case topbar:
+        default:
+            return topbar;
+        }
+    }
+
     public void setButtonEnable(final ActionDescriptor<T> action, final boolean enable) {
         final ActionToolbarPosition pos = ((ActionToolbarDescriptor<T>) action).getActionPosition();
         final ToolbarButton button = toolbarButtons.get(genButtonKey(pos, action.getText()));
@@ -224,16 +234,6 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final String subMenuPart = menuSubTitle != null ? "-subm-" + menuSubTitle : "";
         final String itemPart = actionText != null ? "-item-" + actionText : "";
         return basePart + subMenuPart + itemPart;
-    }
-
-    private SimpleToolbar getToolbar(final ActionToolbarPosition pos) {
-        switch (pos) {
-        case bottombar:
-            return bottombar;
-        case topbar:
-        default:
-            return topbar;
-        }
     }
 
     private void setEnableButton(final ToolbarButton button, final boolean enable) {

@@ -56,9 +56,10 @@ public class EntitySummary {
         entityTools.setId(ENTITY_TOOLS);
 
         entitySummary = new Panel();
-        entitySummary.setBorder(false);
+        entitySummary.setBorder(true);
         accordionLayout = new AccordionLayout(true);
         accordionLayout.setTitleCollapse(true);
+        accordionLayout.setHideCollapseTool(true);
         // accordionLayout.setHideCollapseTool(true);
         // accordionLayout.setAnimate(true);
         // accordionLayout.setActiveOnTop(false);

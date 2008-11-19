@@ -88,7 +88,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         vp.add(flowPanel);
         vp.add(otherBuddiesLabel);
         super.add(vp);
-        ws.addInSummary(this);
+        addInSummary();
         clear();
     }
 

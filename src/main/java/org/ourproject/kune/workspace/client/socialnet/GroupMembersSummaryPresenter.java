@@ -21,10 +21,13 @@
 import java.util.List;
 
 import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
@@ -32,6 +35,7 @@ import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
@@ -39,7 +43,6 @@ import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
-import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
@@ -54,7 +57,6 @@ import com.calclab.suco.client.listener.Listener2;
 
 public class GroupMembersSummaryPresenter extends SocialNetworkPresenter implements GroupMembersSummary {
 
-    protected GridButton addMember;
     private GroupMembersSummaryView view;
     private final I18nUITranslationService i18n;
     private final GridGroup adminCategory;
@@ -68,8 +70,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             final ImageUtils imageUtils, final Session session,
             final Provider<SocialNetworkServiceAsync> snServiceProvider,
             final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter,
-            final Provider<ChatEngine> chatEngineProvider, GroupActionRegistry groupActionRegistry,
-            ActionGroupSummaryToolbar actionGroupSummaryToolbar) {
+            final Provider<ChatEngine> chatEngineProvider, final GroupActionRegistry groupActionRegistry,
+            final ActionGroupSummaryToolbar toolbar) {
         super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry);
         this.i18n = i18n;
         this.stateManager = stateManager;
@@ -78,6 +80,10 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
             public void onEvent(StateAbstractDTO state) {
                 setState(state);
+                toolbar.disableMenusAndClearButtons();
+                toolbar.setActions(groupActionRegistry.getCurrentActions(state.getGroup().getStateToken(),
+                        GroupActionRegistry.GENERAL, session.isLogged(), state.getGroupRights(), true));
+                toolbar.attach();
             }
         };
         stateManager.onStateChanged(setStateListener);
@@ -112,10 +118,11 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         pendigCategory = new GridGroup(pendingTitle, pendingTitle,
                 i18n.t("People pending to be accepted in this group by the admins"),
                 imageUtils.getImageHtml(ImageDescriptor.alert), true);
-        // i18n.t("Add member")
-        addMember = new GridButton("images/add-green.gif", "",
-                i18n.t("Add a group or a person as member of this group"), new Listener<String>() {
-                    public void onEvent(final String parameter) {
+        super.addGroupOperation(gotoGroupMenuItem, false);
+        super.addUserOperation(gotoMemberMenuItem, false);
+        ActionToolbarMenuDescriptor<StateToken> addMember = new ActionToolbarMenuDescriptor<StateToken>(
+                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                    public void onEvent(StateToken parameter) {
                         liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
                             public void onEvent(final LinkDTO link) {
                                 view.confirmAddCollab(link.getShortName(), link.getLongName());
@@ -124,8 +131,11 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                         liveSearcherProvider.get().show();
                     }
                 });
-        super.addGroupOperation(gotoGroupMenuItem, false);
-        super.addUserOperation(gotoMemberMenuItem, false);
+        addMember.setIconUrl("images/add-green.gif");
+        addMember.setTextDescription(i18n.t("Add member"));
+        // addMemberButton.setToolTip(i18n.t("Add a group or a person as member of this group"));
+        addMember.setParentMenuTitle(i18n.t("Options"));
+        groupActionRegistry.addAction(addMember, GroupActionRegistry.GENERAL);
     }
 
     public void addCollab(final String groupShortName) {
@@ -166,17 +176,12 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
         view.clear();
 
-        if (userIsAdmin) {
-            view.addButton(addMember);
-            view.addToolbarFill();
-        }
-
         view.setDraggable(session.isLogged());
 
         if (!userIsMember) {
-            view.addButton(requestJoin);
+
         } else if (userIsAdmin && numAdmins > 1 || userIsCollab) {
-            view.addButton(unJoinButton);
+            // FIXME: view.addButton(unJoinButton);
         }
 
         if (userCanView) {

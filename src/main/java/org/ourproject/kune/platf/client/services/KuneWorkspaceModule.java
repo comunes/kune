@@ -339,7 +339,8 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $(WsThemePresenter.class), $$(ChatEngine.class), $(GroupActionRegistry.class),
                         $(ActionGroupSummaryToolbar.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $(
+                                ActionGroupSummaryToolbar.class).getView());
                 presenter.init(view);
                 return presenter;
             }

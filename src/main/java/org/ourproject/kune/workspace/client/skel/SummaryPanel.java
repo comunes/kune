@@ -18,17 +18,42 @@
  *
  */package org.ourproject.kune.workspace.client.skel;
 
+import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils.IconPosition;
+
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.event.PanelListenerAdapter;
 
 public class SummaryPanel extends Panel {
 
     private final WorkspaceSkeleton ws;
 
-    public SummaryPanel(String title, String titleTooltip, WorkspaceSkeleton ws) {
+    public SummaryPanel(final String title, final String titleTooltip, WorkspaceSkeleton ws) {
         this.ws = ws;
         super.setBorder(false);
-        super.setTitle("<span ext:qtip=\"" + titleTooltip + "\">" + title + "</span>");
         super.setAutoScroll(true);
+        final String collapsedTitle = KuneUiUtils.genQuickTipLabel(title, null, titleTooltip,
+                Images.App.getInstance().arrowRightWhite(), IconPosition.left);
+        final String expandedTitle = KuneUiUtils.genQuickTipLabel(title, null, titleTooltip,
+                Images.App.getInstance().arrowDownWhite(), IconPosition.left);
+        setTitle(collapsedTitle);
+        super.addListener(new PanelListenerAdapter() {
+            @Override
+            public void onCollapse(Panel panel) {
+                setTitle(collapsedTitle);
+            }
+
+            @Override
+            public void onExpand(Panel panel) {
+                setTitle(expandedTitle);
+            }
+        });
+    }
+
+    public void addInSummary() {
+        ws.addInSummary(this);
+        this.expand();
     }
 
     public void doLayoutIfNeeded() {

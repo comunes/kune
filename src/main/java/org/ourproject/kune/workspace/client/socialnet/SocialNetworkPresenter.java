@@ -18,8 +18,12 @@
  *
  */package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
@@ -34,7 +38,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
 import org.ourproject.kune.platf.client.ui.gridmenu.CustomMenu;
-import org.ourproject.kune.platf.client.ui.gridmenu.GridButton;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -45,8 +48,6 @@ import com.calclab.suco.client.listener.Listener;
 
 public class SocialNetworkPresenter {
 
-    protected GridButton requestJoin;
-    protected GridButton unJoinButton;
     protected MenuItem<GroupDTO> changeToCollabMenuItem;
     protected MenuItem<GroupDTO> removeMemberMenuItem;
     protected MenuItem<GroupDTO> changeToAdminMenuItem;
@@ -125,9 +126,9 @@ public class SocialNetworkPresenter {
     }
 
     private void createButtons() {
-        requestJoin = new GridButton("images/add-green.gif", i18n.t("Participate"),
-                i18n.t("Request to participate in this group"), new Listener<String>() {
-                    public void onEvent(final String parameter) {
+        ActionToolbarButtonDescriptor<StateToken> participate = new ActionToolbarButtonDescriptor<StateToken>(
+                AccessRolDTO.Viewer, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                    public void onEvent(StateToken parameter) {
                         Site.showProgressProcessing();
                         snServiceProvider.get().requestJoinGroup(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), new AsyncCallbackSimple<Object>() {
@@ -150,13 +151,23 @@ public class SocialNetworkPresenter {
                                 });
                     }
                 });
+        participate.setIconUrl("images/add-green.gif");
+        participate.setTextDescription(i18n.t("Participate"));
+        participate.setToolTip(i18n.t("Request to participate in this group"));
+        participate.setMustBeAuthenticated(false);
 
-        unJoinButton = new GridButton("images/del.gif", i18n.t("Unjoin"),
-                i18n.t("Don't participate more in this group"), new Listener<String>() {
-                    public void onEvent(final String parameter) {
+        ActionToolbarMenuDescriptor<StateToken> unJoin = new ActionToolbarMenuDescriptor<StateToken>(
+                AccessRolDTO.Editor, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                    public void onEvent(StateToken parameter) {
                         removeMemberAction();
                     }
                 });
+        unJoin.setIconUrl("images/del.gif");
+        unJoin.setTextDescription(i18n.t("Unjoin"));
+        unJoin.setToolTip(i18n.t("Don't participate more in this group"));
+        unJoin.setParentMenuTitle(i18n.t("Options"));
+        groupActionRegistry.addAction(participate, GroupActionRegistry.GENERAL);
+        groupActionRegistry.addAction(unJoin, GroupActionRegistry.GENERAL);
     }
 
     private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {

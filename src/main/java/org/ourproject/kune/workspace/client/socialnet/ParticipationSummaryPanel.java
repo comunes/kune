@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -40,11 +42,8 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
     public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws, ActionToolbarView<StateToken> actionToolbarView) {
         super(i18n.t("Participates in"), i18n.t("Groups in which participates"), ws);
-        // super.setBorderStylePrimaryName("k-dropdownouter-part"); //
-        // super.addStyleName("kune-Margin-Medium-t");
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), false, false,
                 false, false, false);
-        gridMenuPanel.addStyleName("k-border-openbox");
         Listener<String> go = new Listener<String>() {
             public void onEvent(final String groupShortName) {
                 presenter.onDoubleClick(groupShortName);
@@ -53,7 +52,8 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
         // gridMenuPanel.onClick(go);
         gridMenuPanel.onDoubleClick(go);
         super.add(gridMenuPanel);
-        ws.addInSummary(this);
+        super.add(((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar(ActionToolbarPosition.bottombar));
+        addInSummary();
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {
             @Override
             public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
