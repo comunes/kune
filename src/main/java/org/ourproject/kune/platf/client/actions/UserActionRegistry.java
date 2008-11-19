@@ -20,6 +20,12 @@
 
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 
+/**
+ * The Class UserActionRegistry.
+ * 
+ * List of actions over a user (initially used for buddies actions)
+ * 
+ */
 public class UserActionRegistry extends ActionRegistry<UserSimpleDTO> {
 
     public static final String GENERAL = "genActions";

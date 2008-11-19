@@ -20,5 +20,10 @@
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 
+/**
+ * The Class GroupActionRegistry stores actions over groups (mainly used in SN)
+ */
 public class GroupActionRegistry extends ActionRegistry<GroupDTO> {
+
+    public static final String GENERAL = "genActions";
 }

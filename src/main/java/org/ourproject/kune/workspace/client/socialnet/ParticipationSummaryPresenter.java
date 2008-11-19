@@ -21,6 +21,8 @@ package org.ourproject.kune.workspace.client.socialnet;
 
 import java.util.List;
 
+import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
@@ -48,8 +50,9 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 
     public ParticipationSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
-            final Provider<SocialNetworkServiceAsync> snServiceProvider, final WsThemePresenter wsThemePresenter) {
-        super(i18n, stateManager, imageUtils, session, snServiceProvider);
+            final Provider<SocialNetworkServiceAsync> snServiceProvider, final WsThemePresenter wsThemePresenter,
+            GroupActionRegistry groupActionRegistry, ActionParticipationToolbar actionParticipationToolbar) {
+        super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry);
         adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",
                 "talking about a person"), false);
         collabCategory = new GridGroup(i18n.t("and as collaborator in:"), " ", i18n.t("Collaborate in these groups"),
@@ -103,7 +106,5 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
         } else {
             hide();
         }
-
     }
-
 }

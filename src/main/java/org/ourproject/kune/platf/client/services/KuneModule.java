@@ -24,10 +24,17 @@ import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionCntCtxToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbarPresenter;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContextToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContextToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationSummaryToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
@@ -357,8 +364,8 @@ public class KuneModule extends AbstractModule {
         register(Singleton.class, new Factory<TextEditor>(TextEditor.class) {
             @Override
             public TextEditor create() {
-                final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
-                        ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
+                        ActionCntCtxToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
                 final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
                         contentNavigatorToolbar);
 
@@ -419,8 +426,8 @@ public class KuneModule extends AbstractModule {
         register(NoDecoration.class, new Factory<ActionContentToolbar>(ActionContentToolbar.class) {
             @Override
             public ActionContentToolbar create() {
-                final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
-                        ActionToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
+                        ActionCntCtxToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
                 final ActionContentToolbar toolbar = new ActionContentToolbarPresenter(contentNavigatorToolbar);
                 return toolbar;
             }
@@ -429,9 +436,36 @@ public class KuneModule extends AbstractModule {
         register(NoDecoration.class, new Factory<ActionContextToolbar>(ActionContextToolbar.class) {
             @Override
             public ActionContextToolbar create() {
-                final ActionToolbarPanel<StateToken> contentNavigatorToolbar = new ActionToolbarPanel<StateToken>(
-                        ActionToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
+                        ActionCntCtxToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class));
                 final ActionContextToolbar toolbar = new ActionContextToolbarPresenter(contentNavigatorToolbar);
+                return toolbar;
+            }
+        });
+
+        register(Singleton.class, new Factory<ActionGroupSummaryToolbar>(ActionGroupSummaryToolbar.class) {
+            @Override
+            public ActionGroupSummaryToolbar create() {
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
+                        $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionGroupSummaryToolbarPresenter toolbar = new ActionGroupSummaryToolbarPresenter(panel);
+                return toolbar;
+            }
+        }, new Factory<ActionParticipationToolbar>(ActionParticipationToolbar.class) {
+            @Override
+            public ActionParticipationToolbar create() {
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
+                        $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionParticipationSummaryToolbarPresenter toolbar = new ActionParticipationSummaryToolbarPresenter(
+                        panel);
+                return toolbar;
+            }
+        }, new Factory<ActionBuddiesSummaryToolbar>(ActionBuddiesSummaryToolbar.class) {
+            @Override
+            public ActionBuddiesSummaryToolbar create() {
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
+                        $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionBuddiesSummaryToolbarPresenter toolbar = new ActionBuddiesSummaryToolbarPresenter(panel);
                 return toolbar;
             }
         });

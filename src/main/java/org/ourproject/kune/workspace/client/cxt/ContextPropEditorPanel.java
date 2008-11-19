@@ -22,8 +22,6 @@ package org.ourproject.kune.workspace.client.cxt;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.docs.client.ctx.DocContextPropEditorPresenter;
-import org.ourproject.kune.docs.client.ctx.DocContextPropEditorView;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
@@ -46,7 +44,7 @@ import com.gwtext.client.widgets.form.TextArea;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 
-public abstract class AbstractContextPropEditorPanel extends ScrollPanel implements DocContextPropEditorView {
+public class ContextPropEditorPanel extends ScrollPanel implements ContextPropEditorView {
 
     private static final int FORMS_WIDTH = 150;
     public static final String TAGS_PROP = "k-dcpep-tagsp-dis";
@@ -54,7 +52,7 @@ public abstract class AbstractContextPropEditorPanel extends ScrollPanel impleme
     public static final String PUBLI_PROP = "k-dcpep-publisp-dis";
     private static final String ACL_PROP = "";
 
-    private final DocContextPropEditorPresenter presenter;
+    private final ContextPropEditorPresenter presenter;
     private final WorkspaceSkeleton ws;
     private final I18nTranslationService i18n;
     private final Provider<LanguageSelector> langSelectorProv;
@@ -68,7 +66,7 @@ public abstract class AbstractContextPropEditorPanel extends ScrollPanel impleme
     private ContextPropertyPanel aclComponent;
     private AccessListsPanel accessListsPanel;
 
-    public AbstractContextPropEditorPanel(final DocContextPropEditorPresenter presenter,
+    public ContextPropEditorPanel(final ContextPropEditorPresenter presenter,
             final I18nTranslationService i18n, WorkspaceSkeleton ws, Provider<LanguageSelector> langSelectorProv,
             Images images) {
         this.i18n = i18n;

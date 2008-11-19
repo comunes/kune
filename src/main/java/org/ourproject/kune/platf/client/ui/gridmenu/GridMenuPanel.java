@@ -193,14 +193,14 @@ public class GridMenuPanel<T> extends Panel {
     @Override
     public void doLayout(final boolean shallow) {
         // Grid rendered problems with shallow false
-        grid.doLayout(false);
-        super.doLayout(false);
+        grid.doLayout(true);
+        super.doLayout(true);
     }
 
     public void doLayoutIfNeeded() {
         if (super.isRendered()) {
-            grid.doLayout(false);
-            super.doLayout(false);
+            grid.doLayout(true);
+            super.doLayout(true);
         }
     }
 
@@ -249,8 +249,8 @@ public class GridMenuPanel<T> extends Panel {
 
     @Override
     public void setWidth(final int width) {
-        // grid.setWidth(width - 27);
-        super.setWidth(width);
+        grid.setWidth(width - 27);
+        // super.setWidth(width);
         doLayoutIfNeeded();
     }
 
@@ -396,7 +396,7 @@ public class GridMenuPanel<T> extends Panel {
 
         grid.addGridRowListener(new GridRowListener() {
             public void onRowClick(final GridPanel grid, final int rowIndex, final EventObject e) {
-                // showMenu(rowIndex, e);
+                showMenu(rowIndex, e);
                 onClick(rowIndex);
             }
 

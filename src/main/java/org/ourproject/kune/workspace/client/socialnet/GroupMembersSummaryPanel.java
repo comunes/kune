@@ -66,7 +66,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
                 presenter.onDoubleClick(groupShortName);
             }
         };
-        gridMenuPanel.onClick(go);
+        // gridMenuPanel.onClick(go);
         gridMenuPanel.onDoubleClick(go);
         gridMenuPanel.getBottomBar().setCls("k-blank-toolbar");
         super.add(gridMenuPanel);

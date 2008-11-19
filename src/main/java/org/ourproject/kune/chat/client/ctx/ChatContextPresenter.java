@@ -20,7 +20,6 @@
 package org.ourproject.kune.chat.client.ctx;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.FoldableContextPresenter;
@@ -32,10 +31,5 @@ public class ChatContextPresenter extends FoldableContextPresenter implements Ch
     public ChatContextPresenter(final StateManager stateManager,
             final Provider<ContextNavigator> contextNavigatorProvider) {
         super(ChatClientTool.NAME, stateManager, contextNavigatorProvider);
-    }
-
-    @Override
-    protected void setState(final StateContainerDTO state) {
-        super.setState(state);
     }
 }

@@ -22,6 +22,7 @@ import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
@@ -74,7 +75,8 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
     private final ActionManager actionManager;
 
     public BuddiesSummaryPanel(final BuddiesSummaryPresenter presenter, final WorkspaceSkeleton ws,
-            I18nTranslationService i18n, ActionManager actionManager) {
+            I18nTranslationService i18n, ActionManager actionManager,
+            ActionBuddiesSummaryToolbar actionBuddiesSummaryToolbar) {
         super(i18n.t("Buddies"), i18n.t("Buddies of this user"), ws);
         this.actionManager = actionManager;
         menuItemsContainer = new MenuItemsContainer<UserSimpleDTO>();

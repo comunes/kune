@@ -23,7 +23,6 @@ import org.ourproject.kune.platf.client.services.ImageDescriptor;
 
 import com.calclab.suco.client.listener.Listener;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ActionDescriptor.
  */
@@ -332,5 +331,4 @@ public abstract class ActionDescriptor<T> {
     public void setToolTip(final String toolTip) {
         this.toolTip = toolTip;
     }
-
 }

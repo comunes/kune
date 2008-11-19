@@ -33,7 +33,7 @@ public class SummaryPanel extends Panel {
 
     public void doLayoutIfNeeded() {
         if (super.isRendered()) {
-            super.doLayout(false);
+            super.doLayout();
         }
     }
 

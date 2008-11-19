@@ -31,6 +31,8 @@ public interface ActionToolbar<T> {
 
     void disableMenusAndClearButtons();
 
+    ActionToolbarView<T> getView();
+
     void setActions(ActionItemCollection<T> actionItemCollection);
 
     void setEnableAction(ActionToolbarDescriptor<T> action, boolean enable);

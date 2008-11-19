@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
@@ -63,15 +64,17 @@ public class SocialNetworkPresenter {
     private final ImageUtils imageUtils;
     private final MenuItemCollection<GroupDTO> otherOperationsUsers;
     private final MenuItemCollection<GroupDTO> otherLoggedOperationsUsers;
+    private final GroupActionRegistry groupActionRegistry;
 
     public SocialNetworkPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
-            final Provider<SocialNetworkServiceAsync> snServiceProvider) {
+            final Provider<SocialNetworkServiceAsync> snServiceProvider, GroupActionRegistry groupActionRegistry) {
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.imageUtils = imageUtils;
         this.session = session;
         this.snServiceProvider = snServiceProvider;
+        this.groupActionRegistry = groupActionRegistry;
         createButtons();
         createMenuActions();
         otherOperationsUsers = new MenuItemCollection<GroupDTO>();

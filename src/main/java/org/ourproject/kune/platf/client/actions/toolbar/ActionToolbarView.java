@@ -18,10 +18,11 @@
  *
  */package org.ourproject.kune.platf.client.actions.toolbar;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 
-public interface ActionToolbarView<T> {
+public interface ActionToolbarView<T> extends View {
 
     void addButtonAction(ActionItem<T> actionItem, boolean enable);
 

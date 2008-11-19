@@ -20,36 +20,17 @@
 package org.ourproject.kune.docs.client.ctx;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.cxt.FoldableContextPresenter;
 
 import com.calclab.suco.client.ioc.Provider;
 
 public class DocumentContextPresenter extends FoldableContextPresenter implements DocumentContext {
-    private final Provider<DocContextPropEditor> contextPropEditorProvider;
-
     public DocumentContextPresenter(final StateManager stateManager,
             final Provider<ContextNavigator> contextNavigatorProvider,
-            final Provider<DocContextPropEditor> contextPropEditorProvider) {
-        super(DocumentClientTool.NAME, stateManager, contextNavigatorProvider);
-        this.contextPropEditorProvider = contextPropEditorProvider;
-    }
-
-    @Override
-    protected void detach() {
-        super.detach();
-        contextPropEditorProvider.get().detach();
-        contextPropEditorProvider.get().clear();
-    }
-
-    @Override
-    protected void setState(final StateContainerDTO state) {
-        super.setState(state);
-        if (state instanceof StateContentDTO) {
-            contextPropEditorProvider.get().setState((StateContentDTO) state);
-        }
+            final Provider<ContextPropEditor> contextPropEditorProvider) {
+        super(DocumentClientTool.NAME, stateManager, contextNavigatorProvider, contextPropEditorProvider);
     }
 }

@@ -52,6 +52,10 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         view.clear();
     }
 
+    public ActionToolbarView<T> getView() {
+        return view;
+    }
+
     public void setActions(final ActionItemCollection<T> actions) {
         for (final ActionItem<T> actionItem : actions) {
             final ActionDescriptor<T> action = actionItem.getAction();

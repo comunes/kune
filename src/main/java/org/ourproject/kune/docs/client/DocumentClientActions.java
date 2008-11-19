@@ -29,7 +29,6 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentViewer;
-import org.ourproject.kune.docs.client.ctx.DocContextPropEditor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
@@ -59,6 +58,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -87,7 +87,7 @@ public class DocumentClientActions {
     private final Provider<TextEditor> textEditorProvider;
     private final KuneErrorHandler errorHandler;
     private final DocumentViewer documentViewer;
-    private final Provider<DocContextPropEditor> contextPropEditorProvider;
+    private final Provider<ContextPropEditor> contextPropEditorProvider;
 
     public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager,
@@ -96,7 +96,7 @@ public class DocumentClientActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
             final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
-            final DocumentViewer documentViewer, final Provider<DocContextPropEditor> contextProvEditorProvider) {
+            final DocumentViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider) {
         this.i18n = i18n;
         this.contextNavigator = contextNavigator;
         this.session = session;

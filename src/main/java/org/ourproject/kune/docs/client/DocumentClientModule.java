@@ -26,10 +26,6 @@ import org.ourproject.kune.docs.client.cnt.DocumentViewer;
 import org.ourproject.kune.docs.client.cnt.DocumentViewerPanel;
 import org.ourproject.kune.docs.client.cnt.DocumentViewerPresenter;
 import org.ourproject.kune.docs.client.cnt.DocumentViewerView;
-import org.ourproject.kune.docs.client.ctx.DocContextPropEditor;
-import org.ourproject.kune.docs.client.ctx.DocContextPropEditorPanel;
-import org.ourproject.kune.docs.client.ctx.DocContextPropEditorPresenter;
-import org.ourproject.kune.docs.client.ctx.DocContextPropEditorView;
 import org.ourproject.kune.docs.client.ctx.DocumentContext;
 import org.ourproject.kune.docs.client.ctx.DocumentContextPresenter;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
@@ -48,6 +44,10 @@ import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPanel;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPresenter;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditorView;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -84,17 +84,17 @@ public class DocumentClientModule extends AbstractModule {
                         $$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
                         $(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
                         $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentViewer.class),
-                        $$(DocContextPropEditor.class));
+                        $$(ContextPropEditor.class));
             }
         });
 
-        register(Singleton.class, new Factory<DocContextPropEditor>(DocContextPropEditor.class) {
+        register(Singleton.class, new Factory<ContextPropEditor>(ContextPropEditor.class) {
             @Override
-            public DocContextPropEditor create() {
-                final DocContextPropEditorPresenter presenter = new DocContextPropEditorPresenter($(Session.class),
+            public ContextPropEditor create() {
+                final ContextPropEditorPresenter presenter = new ContextPropEditorPresenter($(Session.class),
                         $(StateManager.class), $(ContentCapabilitiesRegistry.class), $$(TagsSummary.class),
                         $$(ContentServiceAsync.class), $(EntityTitle.class), $(EntitySubTitle.class));
-                final DocContextPropEditorView view = new DocContextPropEditorPanel(presenter,
+                final ContextPropEditorView view = new ContextPropEditorPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class),
                         $(Images.class));
                 presenter.init(view);
@@ -106,7 +106,7 @@ public class DocumentClientModule extends AbstractModule {
             @Override
             public DocumentContext create() {
                 final DocumentContextPresenter presenter = new DocumentContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class), $$(DocContextPropEditor.class));
+                        $$(ContextNavigator.class), $$(ContextPropEditor.class));
                 return presenter;
             }
         });

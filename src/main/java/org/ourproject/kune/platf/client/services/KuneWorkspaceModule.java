@@ -21,7 +21,11 @@
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.registry.RenamableRegistry;
@@ -332,7 +336,8 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(
                         $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
                         $(Session.class), $$(SocialNetworkServiceAsync.class), $$(GroupLiveSearcher.class),
-                        $(WsThemePresenter.class), $$(ChatEngine.class));
+                        $(WsThemePresenter.class), $$(ChatEngine.class), $(GroupActionRegistry.class),
+                        $(ActionGroupSummaryToolbar.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
                 presenter.init(view);
@@ -359,7 +364,7 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $(Session.class), $(UserActionRegistry.class), $(I18nTranslationService.class),
                         $$(ChatEngine.class));
                 final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class), $(ActionManager.class));
+                        $(I18nTranslationService.class), $(ActionManager.class), $(ActionBuddiesSummaryToolbar.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -370,9 +375,11 @@ public class KuneWorkspaceModule extends AbstractModule {
             public ParticipationSummary create() {
                 final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(
                         $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
-                        $(Session.class), $$(SocialNetworkServiceAsync.class), $(WsThemePresenter.class));
+                        $(Session.class), $$(SocialNetworkServiceAsync.class), $(WsThemePresenter.class),
+                        $(GroupActionRegistry.class), $(ActionParticipationToolbar.class));
                 final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
+                        ($(ActionParticipationToolbar.class).getView()));
                 presenter.init(view);
                 return presenter;
             }

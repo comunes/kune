@@ -22,7 +22,6 @@ package org.ourproject.kune.workspace.client.cxt;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.docs.client.ctx.DocContextPropEditorView;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
@@ -41,9 +40,9 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public abstract class AbstractContextPropEditorPresenter {
+public class ContextPropEditorPresenter implements ContextPropEditor {
 
-    private DocContextPropEditorView view;
+    private ContextPropEditorView view;
     private final Session session;
     private final Provider<TagsSummary> tagsSummaryProvider;
     private final Provider<ContentServiceAsync> contentServiceProvider;
@@ -52,7 +51,7 @@ public abstract class AbstractContextPropEditorPresenter {
     private final StateManager stateManager;
     private final ContentCapabilitiesRegistry capabilitiesRegistry;
 
-    public AbstractContextPropEditorPresenter(final Session session, final StateManager stateManager,
+    public ContextPropEditorPresenter(final Session session, final StateManager stateManager,
             ContentCapabilitiesRegistry capabilitiesRegistry, final Provider<TagsSummary> tagsSummaryProvider,
             final Provider<ContentServiceAsync> contentServiceProvider, final EntityTitle entityTitle,
             final EntitySubTitle entitySubTitle) {
@@ -113,7 +112,7 @@ public abstract class AbstractContextPropEditorPresenter {
                 });
     }
 
-    public void init(final DocContextPropEditorView view) {
+    public void init(final ContextPropEditorView view) {
         this.view = view;
     }
 

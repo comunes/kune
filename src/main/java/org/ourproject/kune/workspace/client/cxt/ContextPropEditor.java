@@ -17,10 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.ctx;
+package org.ourproject.kune.workspace.client.cxt;
 
-import org.ourproject.kune.workspace.client.cxt.AbstractContextPropEditorView;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 
+public interface ContextPropEditor {
+    void attach();
 
-public interface DocContextPropEditorView extends AbstractContextPropEditorView {
+    void clear();
+
+    void detach();
+
+    void setState(StateContentDTO content);
 }

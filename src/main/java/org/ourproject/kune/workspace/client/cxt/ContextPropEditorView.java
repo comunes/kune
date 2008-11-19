@@ -19,14 +19,39 @@
  */
 package org.ourproject.kune.workspace.client.cxt;
 
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
+import java.util.Date;
+import java.util.List;
 
-public interface AbstractContextPropEditor {
+import org.ourproject.kune.platf.client.dto.AccessListsDTO;
+import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+
+public interface ContextPropEditorView {
+
     void attach();
-
-    void clear();
 
     void detach();
 
-    void setState(StateContentDTO content);
+    void removeAccessListComponent();
+
+    void removeAuthorsComponent();
+
+    void removeLangComponent();
+
+    void removePublishedOnComponent();
+
+    void removeTagsComponent();
+
+    void reset();
+
+    void setAccessLists(AccessListsDTO accessLists);
+
+    void setAuthors(List<UserSimpleDTO> authors);
+
+    void setLanguage(I18nLanguageDTO language);
+
+    void setPublishedOn(Date publishedOn, String dateFormat);
+
+    void setTags(String tags);
+
 }

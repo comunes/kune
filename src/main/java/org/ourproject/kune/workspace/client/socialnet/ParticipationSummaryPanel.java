@@ -19,7 +19,9 @@
  */
 package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
@@ -36,7 +38,7 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
 
     public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
-            final WorkspaceSkeleton ws) {
+            final WorkspaceSkeleton ws, ActionToolbarView<StateToken> actionToolbarView) {
         super(i18n.t("Participates in"), i18n.t("Groups in which participates"), ws);
         // super.setBorderStylePrimaryName("k-dropdownouter-part"); //
         // super.addStyleName("kune-Margin-Medium-t");
@@ -48,7 +50,7 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
                 presenter.onDoubleClick(groupShortName);
             }
         };
-        gridMenuPanel.onClick(go);
+        // gridMenuPanel.onClick(go);
         gridMenuPanel.onDoubleClick(go);
         super.add(gridMenuPanel);
         ws.addInSummary(this);

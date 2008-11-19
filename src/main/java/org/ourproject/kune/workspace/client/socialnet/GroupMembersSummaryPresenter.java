@@ -21,6 +21,8 @@
 import java.util.List;
 
 import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
@@ -66,8 +68,9 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             final ImageUtils imageUtils, final Session session,
             final Provider<SocialNetworkServiceAsync> snServiceProvider,
             final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter,
-            final Provider<ChatEngine> chatEngineProvider) {
-        super(i18n, stateManager, imageUtils, session, snServiceProvider);
+            final Provider<ChatEngine> chatEngineProvider, GroupActionRegistry groupActionRegistry,
+            ActionGroupSummaryToolbar actionGroupSummaryToolbar) {
+        super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry);
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.session = session;
