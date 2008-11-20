@@ -145,13 +145,13 @@
     <class-a>org.ourproject.kune.platf.client.dto.StateContainerDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.state.StateContainer</class-b>
      <field>
-      <a>groupTags</a>
-      <b>groupTags</b>
+      <a>tagCloudResult</a>
+      <b>tagCloudResult</b>
       <a-hint>
-        org.ourproject.kune.platf.client.dto.TagResultDTO
+        org.ourproject.kune.platf.client.dto.TagCloudResultDTO
       </a-hint>
       <b-hint>
-        org.ourproject.kune.platf.server.domain.TagResult
+        org.ourproject.kune.platf.server.domain.TagCloudResult
       </b-hint>
     </field>
   </mapping>
@@ -355,12 +355,21 @@
     <class-b>org.ourproject.kune.platf.server.domain.Tag</class-b>
   </mapping>
 
-  <mapping>
+<mapping>
     <class-a>
-      org.ourproject.kune.platf.client.dto.TagResultDTO
+      org.ourproject.kune.platf.client.dto.TagCloudResultDTO
     </class-a>
     <class-b>
-      org.ourproject.kune.platf.server.domain.TagResult
+      org.ourproject.kune.platf.server.domain.TagCloudResult
+    </class-b>
+  </mapping>
+
+  <mapping>
+    <class-a>
+      org.ourproject.kune.platf.client.dto.TagCountDTO
+    </class-a>
+    <class-b>
+      org.ourproject.kune.platf.server.domain.TagCount
     </class-b>
   </mapping>
 

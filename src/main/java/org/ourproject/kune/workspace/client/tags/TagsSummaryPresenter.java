@@ -19,12 +19,11 @@
  */
 package org.ourproject.kune.workspace.client.tags;
 
-import java.util.List;
-
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCountDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
@@ -32,11 +31,15 @@ import org.ourproject.kune.workspace.client.search.SiteSearcherType;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
 
 public class TagsSummaryPresenter implements TagsSummary {
+
+    private static final int MINSIZE = 12;
+    private static final int MAXSIZE = 26;
 
     private TagsSummaryView view;
     private final Provider<SiteSearcher> searcherProvider;
@@ -76,17 +79,30 @@ public class TagsSummaryPresenter implements TagsSummary {
         this.view = view;
     }
 
-    public void setGroupTags(final List<TagResultDTO> groupTags) {
-        view.setTags(groupTags);
+    public void setGroupTags(final TagCloudResultDTO tagCloud) {
+        setCloud(tagCloud);
     }
 
     void setState(final StateContainerDTO state) {
-        if (state.getGroupTags() != null && state.getGroupTags().size() > 0) {
+        Log.debug(state.getTagCloudResult().toString());
+        if (state.getTagCloudResult() != null && state.getTagCloudResult().getTagCountList().size() > 0) {
             view.setVisible(true);
-            view.setTags(state.getGroupTags());
+            setCloud(state.getTagCloudResult());
         } else {
             view.setVisible(false);
         }
     }
 
+    private void setCloud(TagCloudResultDTO tagCloudResult) {
+        // Inspired in snippet http://www.bytemycode.com/snippets/snippet/415/
+        view.clear();
+        int max = tagCloudResult.getMaxValue();
+        int min = tagCloudResult.getMinValue();
+        int diff = max - min;
+        int step = (MAXSIZE - MINSIZE) / (diff == 0 ? 1 : diff);
+        for (TagCountDTO tagCount : tagCloudResult.getTagCountList()) {
+            int size = Math.round((MINSIZE + (tagCount.getCount() - min) * step));
+            view.addTag(tagCount.getName(), tagCount.getCount(), "kune-ft" + size + "px");
+        }
+    }
 }

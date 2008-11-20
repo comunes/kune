@@ -17,21 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.server.domain;
+package org.ourproject.kune.platf.client.dto;
 
-public class TagResult {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class TagCountDTO implements IsSerializable {
     private String name;
     private Long count;
 
-    public TagResult() {
+    public TagCountDTO() {
         this(null, null);
     }
 
-    public TagResult(final String name) {
-        this(name, null);
-    }
-
-    public TagResult(final String name, final Long count) {
+    public TagCountDTO(final String name, final Long count) {
         this.name = name;
         this.count = count;
     }
@@ -40,16 +38,21 @@ public class TagResult {
         return count;
     }
 
-    public void setCount(final Long count) {
-        this.count = count;
-    }
-
     public String getName() {
         return name;
     }
 
+    public void setCount(final Long count) {
+        this.count = count;
+    }
+
     public void setName(final String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name + "(" + count + ")";
     }
 
 }

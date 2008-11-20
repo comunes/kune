@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -156,19 +156,20 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
             view.removeAuthorsComponent();
         }
         if (capabilitiesRegistry.isPublishModerable(typeId)) {
-            assert (publishedOn != null);
-            String dateFormat = session.getCurrentLanguage().getDateFormatShort();
-            if (dateFormat != null) {
-                dateFormat = dateFormat.replace("yyyy", "Y");
-                dateFormat = dateFormat.replace("yy", "y");
-                dateFormat = dateFormat.replace("MM", "m");
-                dateFormat = dateFormat.replace("M", "n");
-                dateFormat = dateFormat.replace("dd", "xxx");
-                dateFormat = dateFormat.replace("d", "j");
-                dateFormat = dateFormat.replace("xxx", "d");
-                view.setPublishedOn(publishedOn, dateFormat);
-            } else {
-                view.setPublishedOn(publishedOn, "M/d/yy def");
+            if (publishedOn != null) {
+                String dateFormat = session.getCurrentLanguage().getDateFormatShort();
+                if (dateFormat != null) {
+                    dateFormat = dateFormat.replace("yyyy", "Y");
+                    dateFormat = dateFormat.replace("yy", "y");
+                    dateFormat = dateFormat.replace("MM", "m");
+                    dateFormat = dateFormat.replace("M", "n");
+                    dateFormat = dateFormat.replace("dd", "xxx");
+                    dateFormat = dateFormat.replace("d", "j");
+                    dateFormat = dateFormat.replace("xxx", "d");
+                    view.setPublishedOn(publishedOn, dateFormat);
+                } else {
+                    view.setPublishedOn(publishedOn, "M/d/yy def");
+                }
             }
         } else {
             view.removePublishedOnComponent();
@@ -185,8 +186,8 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
         Site.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setTags(session.getUserHash(), currentState.getStateToken(), tagsString,
-                new AsyncCallbackSimple<List<TagResultDTO>>() {
-                    public void onSuccess(final List<TagResultDTO> result) {
+                new AsyncCallbackSimple<TagCloudResultDTO>() {
+                    public void onSuccess(final TagCloudResultDTO result) {
                         tagsSummaryProvider.get().setGroupTags(result);
                         Site.hideProgress();
                     }

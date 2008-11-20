@@ -166,6 +166,9 @@ public class SocialNetworkPresenter {
         unJoin.setTextDescription(i18n.t("Unjoin"));
         unJoin.setToolTip(i18n.t("Don't participate more in this group"));
         unJoin.setParentMenuTitle(i18n.t("Options"));
+        unJoin.setMustBeConfirmed(true);
+        unJoin.setConfirmationTitle(i18n.t("Unjoin this group"));
+        unJoin.setConfirmationText(i18n.t("Are you sure?"));
         groupActionRegistry.addAction(participate, GroupActionRegistry.GENERAL);
         groupActionRegistry.addAction(unJoin, GroupActionRegistry.GENERAL);
     }

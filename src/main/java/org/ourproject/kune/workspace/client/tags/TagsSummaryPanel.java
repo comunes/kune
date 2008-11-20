@@ -19,17 +19,12 @@
  */
 package org.ourproject.kune.workspace.client.tags;
 
-import java.util.List;
-
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -40,7 +35,6 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
 
     private final FlowPanel flowPanel;
     private final TagsSummaryPresenter presenter;
-    private final Label noTagsLabel;
     private final I18nTranslationService i18n;
 
     public TagsSummaryPanel(final TagsSummaryPresenter presenter, final I18nTranslationService i18n,
@@ -50,7 +44,6 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
         this.presenter = presenter;
         flowPanel = new FlowPanel();
         final VerticalPanel vp = new VerticalPanel();
-        noTagsLabel = new Label(i18n.t("The contents of this group don't have any tag"));
         vp.add(flowPanel);
         vp.setWidth("100%");
         vp.setCellWidth(flowPanel, "100%");
@@ -60,32 +53,27 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
         ws.addInSummary(this);
     }
 
-    public void setTags(final List<TagResultDTO> groupTags) {
-        DeferredCommand.addCommand(new Command() {
-            public void execute() {
-                flowPanel.clear();
-                if (groupTags.size() == 0) {
-                    flowPanel.add(noTagsLabel);
-                } else {
-                    for (final TagResultDTO tagResult : groupTags) {
-                        final Label label = new Label(tagResult.getName());
-                        // i18n pluralization
-                        if (tagResult.getCount().intValue() > 1) {
-                            KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", tagResult.getCount()));
-                        } else {
-                            KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", tagResult.getCount()));
-                        }
-                        label.addClickListener(new ClickListener() {
-                            public void onClick(final Widget sender) {
-                                presenter.doSearchTag(tagResult.getName());
-                            }
-                        });
-                        label.addStyleName("kune-TagsPanel-tag");
-                        flowPanel.add(label);
-                    }
-                }
+    public void addTag(final String name, Long count, String style) {
+        final Label label = new Label(name);
+        // i18n pluralization
+        if (count > 1) {
+            KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", count));
+        } else {
+            KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", count));
+        }
+        label.addClickListener(new ClickListener() {
+            public void onClick(final Widget sender) {
+                presenter.doSearchTag(name);
             }
         });
+        label.addStyleName("k-tp-tag");
+        label.addStyleName(style);
+        flowPanel.add(label);
+    }
+
+    @Override
+    public void clear() {
+        flowPanel.clear();
     }
 
     public void setTheme(WsTheme oldTheme, WsTheme newTheme) {

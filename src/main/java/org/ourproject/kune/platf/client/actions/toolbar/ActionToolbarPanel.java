@@ -174,6 +174,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             }
         });
         item.setIcon(action.getIconUrl());
+        item.setTitle(action.getToolTip());
         if (id != null) {
             item.setId(id);
         }

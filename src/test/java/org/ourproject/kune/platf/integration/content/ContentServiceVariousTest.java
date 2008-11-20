@@ -16,7 +16,8 @@ import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCountDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
@@ -147,20 +148,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void setTagsAndResults() throws Exception {
         contentService.setTags(getHash(), defaultContent.getStateToken(), "bfoo cfoa afoo2");
-        final List<TagResultDTO> summaryTags = contentService.getSummaryTags(getHash(), defaultContent.getStateToken());
-        assertEquals(3, summaryTags.size());
-
-        TagResultDTO tagResultDTO = summaryTags.get(0);
-        assertEquals("afoo2", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
-
-        tagResultDTO = summaryTags.get(1);
-        assertEquals("bfoo", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
-
-        tagResultDTO = summaryTags.get(2);
-        assertEquals("cfoa", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
+        TagCloudResultDTO cloudResultDTO = contentService.getSummaryTags(getHash(), defaultContent.getStateToken());
+        checkResult(cloudResultDTO);
+        checkResult(((StateContentDTO) contentService.getContent(getHash(), defaultContent.getStateToken())).getTagCloudResult());
     }
 
     @Test
@@ -211,6 +201,24 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
                 newState.getStateToken());
 
         assertEquals(newTitle, folderAgain.getContainer().getName());
+    }
+
+    private void checkResult(TagCloudResultDTO cloudResultDTO) {
+        assertNotNull(cloudResultDTO.getTagCountList());
+        List<TagCountDTO> summaryTags = cloudResultDTO.getTagCountList();
+        assertEquals(3, summaryTags.size());
+
+        TagCountDTO tagResultDTO = summaryTags.get(0);
+        assertEquals("afoo2", tagResultDTO.getName());
+        assertEquals(1, (long) tagResultDTO.getCount());
+
+        tagResultDTO = summaryTags.get(1);
+        assertEquals("bfoo", tagResultDTO.getName());
+        assertEquals(1, (long) tagResultDTO.getCount());
+
+        tagResultDTO = summaryTags.get(2);
+        assertEquals("cfoa", tagResultDTO.getName());
+        assertEquals(1, (long) tagResultDTO.getCount());
     }
 
 }

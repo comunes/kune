@@ -20,6 +20,13 @@ public class TagManagerTest extends PersistenceTest {
     Tag tagFinder;
     private Tag tag;
 
+    @After
+    public void close() {
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
+    }
+
     @Before
     public void insertData() {
         openTransaction();
@@ -30,15 +37,6 @@ public class TagManagerTest extends PersistenceTest {
     @Test
     public void testTagCreation() {
         assertNotNull(tag.getId());
-        ;
-
         assertNotNull(tagFinder.findByTagName("foo1"));
-    }
-
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
     }
 }

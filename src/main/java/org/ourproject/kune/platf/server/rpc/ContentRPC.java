@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.server.rpc;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.NoResultException;
 
@@ -38,7 +37,8 @@ import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateNoContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCountDTO;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
@@ -66,6 +66,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.RateResult;
+import org.ourproject.kune.platf.server.domain.TagCloudResult;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
@@ -254,7 +255,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated(mandatory = false)
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_ONLY)
-    public List<TagResultDTO> getSummaryTags(final String userHash, final StateToken groupToken) {
+    public TagCloudResultDTO getSummaryTags(final String userHash, final StateToken groupToken) {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         return getSummaryTags(group);
     }
@@ -385,7 +386,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
-    public List<TagResultDTO> setTags(final String userHash, final StateToken token, final String tags)
+    public TagCloudResultDTO setTags(final String userHash, final StateToken token, final String tags)
             throws DefaultException {
         final Long contentId = ContentUtils.parseId(token.getDocument());
         final UserSession userSession = getUserSession();
@@ -432,8 +433,10 @@ public class ContentRPC implements ContentService, RPC {
         }
     }
 
-    private List<TagResultDTO> getSummaryTags(final Group group) {
-        return mapper.mapList(tagManager.getSummaryByGroup(group), TagResultDTO.class);
+    private TagCloudResultDTO getSummaryTags(final Group group) {
+        TagCloudResult result = tagManager.getTagCloudResultByGroup(group);
+        return new TagCloudResultDTO(mapper.mapList(result.getTagCountList(), TagCountDTO.class), result.getMaxValue(),
+                result.getMinValue());
     }
 
     private UserSession getUserSession() {

@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import java.util.Date;
-import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
@@ -31,7 +30,7 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -56,7 +55,7 @@ public interface ContentServiceAsync {
 
     void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
-    void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<List<TagResultDTO>> asyncCallback);
+    void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<TagCloudResultDTO> asyncCallback);
 
     void markCommentAsAbuse(String userHash, StateToken token, Long commentId, AsyncCallback<CommentDTO> asyncCallback);
 
@@ -82,7 +81,7 @@ public interface ContentServiceAsync {
     void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatusDTO status,
             AsyncCallback<?> asyncCallback);
 
-    void setTags(String userHash, StateToken token, String tags, AsyncCallback<List<TagResultDTO>> asyncCallback);
+    void setTags(String userHash, StateToken token, String tags, AsyncCallback<TagCloudResultDTO> asyncCallback);
 
     void voteComment(String userHash, StateToken token, Long commentId, boolean votePositive,
             AsyncCallback<CommentDTO> asyncCallback);

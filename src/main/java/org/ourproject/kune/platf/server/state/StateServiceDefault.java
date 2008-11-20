@@ -134,7 +134,7 @@ public class StateServiceDefault implements StateService {
         state.setGroupRights(rightsService.get(userLogged, group.getAccessLists()));
         state.setContainerRights(rightsService.get(userLogged, container.getAccessLists()));
         state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
-        state.setGroupTags(tagManager.getSummaryByGroup(group));
+        state.setTagCloudResult(tagManager.getTagCloudResultByGroup(group));
         setSocialNetwork(state, userLogged, group);
     }
 

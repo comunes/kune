@@ -6,7 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCountDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
@@ -43,8 +44,8 @@ public class TagsSummaryPresenterTest {
     @Test
     public void withTagsViewFalse() {
         final StateContainerDTO state = new StateContainerDTO();
-        ArrayList<TagResultDTO> list = new ArrayList<TagResultDTO>();
-        state.setGroupTags(list);
+        ArrayList<TagCountDTO> list = new ArrayList<TagCountDTO>();
+        state.setTagCloudResult(new TagCloudResultDTO(list, 0, 0));
         tagsSummaryPresenter.setState(state);
         Mockito.verify(view).setVisible(false);
     }
@@ -52,9 +53,9 @@ public class TagsSummaryPresenterTest {
     @Test
     public void withTagsViewVisible() {
         final StateContainerDTO state = new StateContainerDTO();
-        ArrayList<TagResultDTO> list = new ArrayList<TagResultDTO>();
-        list.add(new TagResultDTO("abc", 1L));
-        state.setGroupTags(list);
+        ArrayList<TagCountDTO> list = new ArrayList<TagCountDTO>();
+        list.add(new TagCountDTO("abc", 1L));
+        state.setTagCloudResult(new TagCloudResultDTO(list, 0, 0));
         tagsSummaryPresenter.setState(state);
         Mockito.verify(view).setVisible(true);
     }

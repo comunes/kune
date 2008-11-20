@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.platf.client.dto;
 
-import java.util.List;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateContainerDTO extends StateAbstractDTO implements IsSerializable {
@@ -32,10 +30,14 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
     private ContainerDTO rootContainer;
     private AccessRightsDTO containerRights;
     private LicenseDTO license;
-    private List<TagResultDTO> groupTags;
+    private TagCloudResultDTO tagCloudResult;
     private AccessListsDTO accessLists;
 
     public StateContainerDTO() {
+    }
+
+    public AccessListsDTO getAccessLists() {
+        return accessLists;
     }
 
     public ContainerDTO getContainer() {
@@ -44,10 +46,6 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
 
     public AccessRightsDTO getContainerRights() {
         return containerRights;
-    }
-
-    public List<TagResultDTO> getGroupTags() {
-        return groupTags;
     }
 
     public I18nLanguageDTO getLanguage() {
@@ -62,6 +60,10 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         return rootContainer;
     }
 
+    public TagCloudResultDTO getTagCloudResult() {
+        return tagCloudResult;
+    }
+
     public String getToolName() {
         return toolName;
     }
@@ -70,16 +72,16 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         return typeId;
     }
 
+    public void setAccessLists(AccessListsDTO accessLists) {
+        this.accessLists = accessLists;
+    }
+
     public void setContainer(ContainerDTO container) {
         this.container = container;
     }
 
     public void setContainerRights(AccessRightsDTO containerRights) {
         this.containerRights = containerRights;
-    }
-
-    public void setGroupTags(List<TagResultDTO> groupTags) {
-        this.groupTags = groupTags;
     }
 
     public void setLanguage(I18nLanguageDTO language) {
@@ -94,6 +96,10 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         this.rootContainer = rootContainer;
     }
 
+    public void setTagCloudResult(TagCloudResultDTO tagCloudResult) {
+        this.tagCloudResult = tagCloudResult;
+    }
+
     public void setToolName(String toolName) {
         this.toolName = toolName;
     }
@@ -105,14 +111,6 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
     @Override
     public String toString() {
         return "StateDTO[" + getStateToken() + "/" + getTypeId() + "]";
-    }
-
-    public AccessListsDTO getAccessLists() {
-        return accessLists;
-    }
-
-    public void setAccessLists(AccessListsDTO accessLists) {
-        this.accessLists = accessLists;
     }
 
 }

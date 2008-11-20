@@ -135,8 +135,10 @@ public class EntitySummary {
 
     public void doLayoutIfNeeded() {
         if (mainFitPanel.isRendered()) {
-            mainFitPanel.doLayout(false);
-            entitySummary.doLayout(false);
+            mainFitPanel.doLayout();
+            entityTools.doLayout();
+            entitySummary.syncSize();
+            entitySummary.doLayout();
         }
     }
 

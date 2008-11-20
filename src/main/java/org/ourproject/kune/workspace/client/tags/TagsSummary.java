@@ -19,12 +19,10 @@
  */
 package org.ourproject.kune.workspace.client.tags;
 
-import java.util.List;
-
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
 
 public interface TagsSummary {
 
-    void setGroupTags(List<TagResultDTO> result);
+    void setGroupTags(TagCloudResultDTO tagCloud);
 
 }

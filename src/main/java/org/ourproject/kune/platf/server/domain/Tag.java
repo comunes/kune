@@ -41,10 +41,15 @@ import com.wideplay.warp.persist.dao.Finder;
 @Table(name = "tags")
 // See:
 // http://openjpa.apache.org/docs/latest/manual/manual.html#jpa_langref_resulttype
-@NamedQueries( { @NamedQuery(name = "tagsgrouped", query = "SELECT NEW org.ourproject.kune.platf.server.domain.TagResult(t.name, COUNT(c.id)) "
-        + "FROM Content c JOIN c.tags t WHERE c.container.owner = :group " + "GROUP BY t.name ORDER BY t.name") })
+@NamedQueries( {
+        @NamedQuery(name = "tagsgrouped", query = "SELECT NEW org.ourproject.kune.platf.server.domain.TagCount(t.name, COUNT(c.id)) "
+                + "FROM Content c JOIN c.tags t WHERE c.container.owner = :group " + "GROUP BY t.name ORDER BY t.name"),
+        @NamedQuery(name = "tagsmaxgrouped", query = "SELECT Count(c.id) FROM Content c JOIN c.tags t WHERE c.container.owner = :group GROUP BY t.name ORDER BY count(*) DESC LIMIT 0,1"),
+        @NamedQuery(name = "tagsmingrouped", query = "SELECT Count(c.id) FROM Content c JOIN c.tags t WHERE c.container.owner = :group GROUP BY t.name ORDER BY count(*) ASC LIMIT 0,1") })
 public class Tag implements HasId {
     public static final String TAGSGROUPED = "tagsgrouped";
+    public static final String TAGSMINGROUPED = "tagsmingrouped";
+    public static final String TAGSMAXGROUPED = "tagsmaxgrouped";
 
     @Id
     @GeneratedValue
@@ -63,25 +68,25 @@ public class Tag implements HasId {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    @Finder(query = "FROM Tag g WHERE g.name = :name")
+    public Tag findByTagName(@Named("name") final String tag) {
+        return null;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public void setId(final Long id) {
+        this.id = id;
     }
 
-    @Finder(query = "FROM Tag g WHERE g.name = :name")
-    public Tag findByTagName(@Named("name") final String tag) {
-        return null;
+    public void setName(final String name) {
+        this.name = name;
     }
 
 }

@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import java.util.Date;
-import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.CommentDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
@@ -31,7 +30,7 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.TagResultDTO;
+import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -56,7 +55,7 @@ public interface ContentService extends RemoteService {
 
     StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 
-    List<TagResultDTO> getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
+    TagCloudResultDTO getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
 
     CommentDTO markCommentAsAbuse(String userHash, StateToken token, Long commentId) throws DefaultException;
 
@@ -80,7 +79,7 @@ public interface ContentService extends RemoteService {
 
     void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatusDTO status);
 
-    List<TagResultDTO> setTags(String userHash, StateToken token, String tags) throws DefaultException;
+    TagCloudResultDTO setTags(String userHash, StateToken token, String tags) throws DefaultException;
 
     CommentDTO voteComment(String userHash, StateToken token, Long commentId, boolean votePositive)
             throws DefaultException;
