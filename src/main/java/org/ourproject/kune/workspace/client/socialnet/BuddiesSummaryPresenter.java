@@ -84,8 +84,8 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
             if (userBuddies != UserBuddiesDataDTO.NO_BUDDIES) {
                 List<UserSimpleDTO> buddies = userBuddies.getBuddies();
                 for (UserSimpleDTO user : buddies) {
-                    view.addBuddie(user, actionRegistry.getCurrentActions(user, UserActionRegistry.GENERAL,
-                            session.isLogged(), new AccessRightsDTO(true, true, true), false));
+                    view.addBuddie(user, actionRegistry.getCurrentActions(user, session.isLogged(),
+                            new AccessRightsDTO(true, true, true), false));
                 }
                 boolean hasLocalBuddies = buddies.size() > 0;
                 int numExtBuddies = userBuddies.getOtherExternalBuddies();
@@ -129,7 +129,7 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
                 return !session.getCurrentUserInfo().getShortName().equals(item.getShortName());
             }
         });
-        actionRegistry.addAction(addAsBuddie, UserActionRegistry.GENERAL);
+        actionRegistry.addAction(addAsBuddie);
 
         final ActionMenuItemDescriptor<UserSimpleDTO> go = new ActionMenuItemDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Viewer, new Listener<UserSimpleDTO>() {
@@ -140,6 +140,6 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         go.setMustBeAuthenticated(false);
         go.setTextDescription(i18n.t("Visit this user homepage"));
         go.setIconUrl("images/group-home.gif");
-        actionRegistry.addAction(go, UserActionRegistry.GENERAL);
+        actionRegistry.addAction(go);
     }
 }

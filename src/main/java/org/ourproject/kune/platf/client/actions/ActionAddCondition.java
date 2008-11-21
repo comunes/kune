@@ -18,13 +18,6 @@
  *
  */package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
-
-/**
- * The Class UserActionRegistry.
- * 
- * List of actions over a user (initially used for buddies actions)
- * 
- */
-public class UserActionRegistry extends ActionRegistry<UserSimpleDTO> {
+public interface ActionAddCondition<T> {
+    boolean mustBeAdded(T item);
 }

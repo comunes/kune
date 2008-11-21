@@ -59,13 +59,16 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
     public void setActions(final ActionItemCollection<T> actions) {
         for (final ActionItem<T> actionItem : actions) {
             final ActionDescriptor<T> action = actionItem.getAction();
-            if (isToolbarMenu(action)) {
-                view.addMenuAction(actionItem, actionItem.checkEnabling());
-            } else {
-                if (isToolbarButton(action)) {
-                    view.addButtonAction(actionItem, actionItem.checkEnabling());
+            if (actionItem.checkAdded()) {
+                if (isToolbarMenu(action)) {
+                    view.addMenuAction(actionItem, actionItem.checkEnabling());
                 } else {
-                    Log.error("Code error: Not an ActionMenuDescriptor or ActionButtonDescriptor: " + action.getText());
+                    if (isToolbarButton(action)) {
+                        view.addButtonAction(actionItem, actionItem.checkEnabling());
+                    } else {
+                        Log.error("Code error: Not an ActionMenuDescriptor or ActionButtonDescriptor: "
+                                + action.getText());
+                    }
                 }
             }
         }

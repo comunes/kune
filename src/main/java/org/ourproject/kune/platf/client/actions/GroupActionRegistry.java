@@ -24,7 +24,4 @@ import org.ourproject.kune.platf.client.dto.StateToken;
  * The Class GroupActionRegistry stores actions over groups (mainly used in SN)
  */
 public class GroupActionRegistry extends ActionRegistry<StateToken> {
-
-    @Deprecated
-    public static final String GENERAL = "genActions";
 }

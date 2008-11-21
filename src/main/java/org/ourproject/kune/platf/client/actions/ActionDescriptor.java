@@ -64,6 +64,9 @@ public abstract class ActionDescriptor<T> {
     /** The enable condition. */
     private ActionEnableCondition<T> enableCondition;
 
+    /** The must be added condition. */
+    private ActionAddCondition<T> addCondition;
+
     /** The id. */
     private String id;
 
@@ -130,6 +133,15 @@ public abstract class ActionDescriptor<T> {
      */
     public AccessRolDTO getAccessRol() {
         return accessRol;
+    }
+
+    /**
+     * Gets the add condition.
+     * 
+     * @return the add condition
+     */
+    public ActionAddCondition<T> getAddCondition() {
+        return addCondition;
     }
 
     /**
@@ -230,6 +242,16 @@ public abstract class ActionDescriptor<T> {
      */
     public void setAccessRol(final AccessRolDTO accessRol) {
         this.accessRol = accessRol;
+    }
+
+    /**
+     * Sets the add condition.
+     * 
+     * @param addCondition
+     *            the new add condition
+     */
+    public void setAddCondition(final ActionAddCondition<T> addCondition) {
+        this.addCondition = addCondition;
     }
 
     /**

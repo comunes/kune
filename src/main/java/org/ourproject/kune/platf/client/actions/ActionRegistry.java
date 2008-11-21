@@ -23,6 +23,7 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 
 public class ActionRegistry<T> {
+    private static final String GENERIC = "kgenacts";
 
     private final HashMap<String, ActionCollection<T>> actions;
 
@@ -30,11 +31,20 @@ public class ActionRegistry<T> {
         actions = new HashMap<String, ActionCollection<T>>();
     }
 
-    public void addAction(final ActionDescriptor<T> action, final String... typeIds) {
+    public void addAction(final ActionDescriptor<T> action) {
+        addAction(action, GENERIC);
+    }
+
+    public void addAction(final ActionDescriptor<T> action, String... typeIds) {
         for (final String contentTypeId : typeIds) {
             final ActionCollection<T> actionColl = getActions(contentTypeId);
             actionColl.add(action);
         }
+    }
+
+    public ActionItemCollection<T> getCurrentActions(final T item, final boolean isLogged,
+            final AccessRightsDTO rights, final boolean toolbarItems) {
+        return getCurrentActions(item, GENERIC, isLogged, rights, toolbarItems);
     }
 
     public ActionItemCollection<T> getCurrentActions(final T item, final String typeId, final boolean isLogged,
@@ -60,8 +70,16 @@ public class ActionRegistry<T> {
         return collection;
     }
 
+    public void removeAction(final ActionDescriptor<T> action) {
+        removeAction(GENERIC, action);
+    }
+
     public void removeAction(final String typeId, final ActionDescriptor<T> action) {
         actions.get(typeId).remove(action);
+    }
+
+    public int size() {
+        return actions.size();
     }
 
     private ActionCollection<T> getActions(final String typeId) {

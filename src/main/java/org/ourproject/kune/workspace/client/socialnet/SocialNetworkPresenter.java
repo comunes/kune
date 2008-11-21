@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
@@ -65,7 +66,9 @@ public class SocialNetworkPresenter {
     private final ImageUtils imageUtils;
     private final MenuItemCollection<GroupDTO> otherOperationsUsers;
     private final MenuItemCollection<GroupDTO> otherLoggedOperationsUsers;
-    private final GroupActionRegistry groupActionRegistry;
+
+    protected ActionToolbarMenuDescriptor<StateToken> unJoin;
+    protected ActionToolbarButtonDescriptor<StateToken> participate;
 
     public SocialNetworkPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
@@ -75,7 +78,6 @@ public class SocialNetworkPresenter {
         this.imageUtils = imageUtils;
         this.session = session;
         this.snServiceProvider = snServiceProvider;
-        this.groupActionRegistry = groupActionRegistry;
         createButtons();
         createMenuActions();
         otherOperationsUsers = new MenuItemCollection<GroupDTO>();
@@ -125,9 +127,15 @@ public class SocialNetworkPresenter {
         return gridItem;
     }
 
+    protected boolean isMember(AccessRightsDTO rights) {
+        boolean userIsAdmin = rights.isAdministrable();
+        final boolean userIsCollab = !userIsAdmin && rights.isEditable();
+        return isMember(userIsAdmin, userIsCollab);
+    }
+
     private void createButtons() {
-        ActionToolbarButtonDescriptor<StateToken> participate = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+        participate = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer,
+                ActionToolbarPosition.bottombar, new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         Site.showProgressProcessing();
                         snServiceProvider.get().requestJoinGroup(session.getUserHash(),
@@ -155,9 +163,14 @@ public class SocialNetworkPresenter {
         participate.setTextDescription(i18n.t("Participate"));
         participate.setToolTip(i18n.t("Request to participate in this group"));
         participate.setMustBeAuthenticated(false);
+        participate.setAddCondition(new ActionAddCondition<StateToken>() {
+            public boolean mustBeAdded(StateToken token) {
+                return !isMember(session.getCurrentState().getGroupRights());
+            }
+        });
 
-        ActionToolbarMenuDescriptor<StateToken> unJoin = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+        unJoin = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Editor, ActionToolbarPosition.bottombar,
+                new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         removeMemberAction();
                     }
@@ -169,8 +182,6 @@ public class SocialNetworkPresenter {
         unJoin.setMustBeConfirmed(true);
         unJoin.setConfirmationTitle(i18n.t("Unjoin this group"));
         unJoin.setConfirmationText(i18n.t("Are you sure?"));
-        groupActionRegistry.addAction(participate, GroupActionRegistry.GENERAL);
-        groupActionRegistry.addAction(unJoin, GroupActionRegistry.GENERAL);
     }
 
     private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
@@ -301,6 +312,10 @@ public class SocialNetworkPresenter {
                                 });
                     }
                 });
+    }
+
+    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
+        return userIsAdmin || userIsCollab;
     }
 
     private void removeMemberAction() {

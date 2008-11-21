@@ -65,6 +65,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     private final Session session;
     private final Provider<SocialNetworkServiceAsync> snServiceProvider;
     private final StateManager stateManager;
+    private final GroupActionRegistry groupActionRegistry;
+    private final Provider<GroupLiveSearcher> liveSearcherProvider;
 
     public GroupMembersSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
@@ -77,12 +79,14 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         this.stateManager = stateManager;
         this.session = session;
         this.snServiceProvider = snServiceProvider;
+        this.liveSearcherProvider = liveSearcherProvider;
+        this.groupActionRegistry = groupActionRegistry;
         final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
             public void onEvent(StateAbstractDTO state) {
                 setState(state);
                 toolbar.disableMenusAndClearButtons();
                 toolbar.setActions(groupActionRegistry.getCurrentActions(state.getGroup().getStateToken(),
-                        GroupActionRegistry.GENERAL, session.isLogged(), state.getGroupRights(), true));
+                        session.isLogged(), state.getGroupRights(), true));
                 toolbar.attach();
             }
         };
@@ -120,22 +124,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                 imageUtils.getImageHtml(ImageDescriptor.alert), true);
         super.addGroupOperation(gotoGroupMenuItem, false);
         super.addUserOperation(gotoMemberMenuItem, false);
-        ActionToolbarMenuDescriptor<StateToken> addMember = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
-                    public void onEvent(StateToken parameter) {
-                        liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
-                            public void onEvent(final LinkDTO link) {
-                                view.confirmAddCollab(link.getShortName(), link.getLongName());
-                            }
-                        });
-                        liveSearcherProvider.get().show();
-                    }
-                });
-        addMember.setIconUrl("images/add-green.gif");
-        addMember.setTextDescription(i18n.t("Add member"));
-        addMember.setToolTip(i18n.t("Add a group or a person as member of this group"));
-        addMember.setParentMenuTitle(i18n.t("Options"));
-        groupActionRegistry.addAction(addMember, GroupActionRegistry.GENERAL);
+        createActions();
     }
 
     public void addCollab(final String groupShortName) {
@@ -155,8 +144,45 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         this.view = view;
     }
 
-    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-        return userIsAdmin || userIsCollab;
+    private void createActions() {
+        ActionToolbarMenuDescriptor<StateToken> addMember = new ActionToolbarMenuDescriptor<StateToken>(
+                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                    public void onEvent(StateToken parameter) {
+                        liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
+                            public void onEvent(final LinkDTO link) {
+                                view.confirmAddCollab(link.getShortName(), link.getLongName());
+                            }
+                        });
+                        liveSearcherProvider.get().show();
+                    }
+                });
+        addMember.setIconUrl("images/add-green.gif");
+        addMember.setTextDescription(i18n.t("Add member"));
+        addMember.setToolTip(i18n.t("Add a group or a person as member of this group"));
+        addMember.setParentMenuTitle(i18n.t("Options"));
+
+        groupActionRegistry.addAction(addMember);
+        groupActionRegistry.addAction(unJoin);
+
+        groupActionRegistry.addAction(participate);
+        createShowAction(i18n.t("anyone"));
+        createShowAction(i18n.t("only members"));
+        createShowAction(i18n.t("only admins"));
+    }
+
+    private void createShowAction(String textDescription) {
+        ActionToolbarMenuDescriptor<StateToken> showMembersToAll = new ActionToolbarMenuDescriptor<StateToken>(
+                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                    public void onEvent(StateToken parameter) {
+                        Site.info("In development");
+                    }
+                });
+        // showMembersToAll.setIconUrl("images/add-green.gif");
+        showMembersToAll.setTextDescription(textDescription);
+        // showMembersToAll.setToolTip(i18n.t("Add a group or a person as member of this group"));
+        showMembersToAll.setParentMenuTitle(i18n.t("Options"));
+        showMembersToAll.setParentSubMenuTitle(i18n.t("Who can view this member list"));
+        groupActionRegistry.addAction(showMembersToAll);
     }
 
     @SuppressWarnings("unchecked")
@@ -167,22 +193,14 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         final List<GroupDTO> collabList = accessLists.getEditors().getList();
         final List<GroupDTO> pendingCollabsList = socialNetwork.getPendingCollaborators().getList();
 
-        final int numAdmins = adminsList.size();
+        // final int numAdmins = adminsList.size();
 
         boolean userIsAdmin = rights.isAdministrable();
-        final boolean userIsCollab = !userIsAdmin && rights.isEditable();
         final boolean userCanView = rights.isVisible();
-        boolean userIsMember = isMember(userIsAdmin, userIsCollab);
 
         view.clear();
 
         view.setDraggable(session.isLogged());
-
-        if (!userIsMember) {
-
-        } else if (userIsAdmin && numAdmins > 1 || userIsCollab) {
-            // FIXME: view.addButton(unJoinButton);
-        }
 
         if (userCanView) {
             for (final GroupDTO admin : adminsList) {

@@ -21,5 +21,4 @@
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public class ContextActionRegistry extends ActionRegistry<StateToken> {
-
 }

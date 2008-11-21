@@ -38,7 +38,7 @@ import com.calclab.suco.client.listener.Listener2;
 
 public class TagsSummaryPresenter implements TagsSummary {
 
-    private static final int MINSIZE = 12;
+    private static final int MINSIZE = 11;
     private static final int MAXSIZE = 26;
 
     private TagsSummaryView view;
