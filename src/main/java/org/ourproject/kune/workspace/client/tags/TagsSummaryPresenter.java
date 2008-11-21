@@ -84,8 +84,8 @@ public class TagsSummaryPresenter implements TagsSummary {
     }
 
     void setState(final StateContainerDTO state) {
-        Log.debug(state.getTagCloudResult().toString());
         if (state.getTagCloudResult() != null && state.getTagCloudResult().getTagCountList().size() > 0) {
+            Log.debug(state.getTagCloudResult().toString());
             view.setVisible(true);
             setCloud(state.getTagCloudResult());
         } else {

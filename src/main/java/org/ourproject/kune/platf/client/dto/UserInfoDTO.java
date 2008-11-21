@@ -24,14 +24,11 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserInfoDTO implements IsSerializable {
-    private String shortName;
-    private String name;
+    private UserSimpleDTO user;
     private String chatName;
     private String chatPassword;
     private String homePage;
     private String userHash;
-    private I18nLanguageDTO language;
-    private I18nCountryDTO country;
     private List<GroupDTO> groupsIsAdmin;
     private List<GroupDTO> groupsIsCollab;
 
@@ -44,7 +41,7 @@ public class UserInfoDTO implements IsSerializable {
     }
 
     public I18nCountryDTO getCountry() {
-        return country;
+        return user.getCountry();
     }
 
     public List<GroupDTO> getGroupsIsAdmin() {
@@ -60,15 +57,19 @@ public class UserInfoDTO implements IsSerializable {
     }
 
     public I18nLanguageDTO getLanguage() {
-        return language;
+        return user.getLanguage();
     }
 
     public String getName() {
-        return name;
+        return user.getName();
     }
 
     public String getShortName() {
-        return shortName;
+        return user.getShortName();
+    }
+
+    public UserSimpleDTO getUser() {
+        return user;
     }
 
     public String getUserHash() {
@@ -84,10 +85,6 @@ public class UserInfoDTO implements IsSerializable {
 
     }
 
-    public void setCountry(final I18nCountryDTO country) {
-        this.country = country;
-    }
-
     public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {
         this.groupsIsAdmin = groupsIsAdmin;
     }
@@ -100,16 +97,8 @@ public class UserInfoDTO implements IsSerializable {
         this.homePage = homePage;
     }
 
-    public void setLanguage(final I18nLanguageDTO language) {
-        this.language = language;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
+    public void setUser(UserSimpleDTO user) {
+        this.user = user;
     }
 
     public void setUserHash(final String userHash) {

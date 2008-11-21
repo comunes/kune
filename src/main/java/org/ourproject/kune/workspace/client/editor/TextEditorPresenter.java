@@ -29,13 +29,12 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 
 public class TextEditorPresenter implements TextEditor {
     public static final int AUTOSAVE_AFTER_FAILS_IN_MILLISECONS = 20000;
@@ -56,14 +55,17 @@ public class TextEditorPresenter implements TextEditor {
     private final BeforeActionListener beforeStateChangeListener;
     private final StateManager stateManager;
     private final SiteSignOutLink siteSignOutLink;
+    private final DeferredCommandWrapper deferredCommandWrapper;
 
     public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> toolbar,
-            final I18nUITranslationService i18n, StateManager stateManager, SiteSignOutLink siteSignOutLink) {
+            final I18nUITranslationService i18n, StateManager stateManager, SiteSignOutLink siteSignOutLink,
+            DeferredCommandWrapper deferredCommandWrapper) {
         this.toolbar = toolbar;
         autoSave = isAutoSave;
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.siteSignOutLink = siteSignOutLink;
+        this.deferredCommandWrapper = deferredCommandWrapper;
         savePending = false;
         editingHtml = false;
         saveAndCloseConfirmed = false;
@@ -181,8 +183,8 @@ public class TextEditorPresenter implements TextEditor {
             onCancel();
             return false;
         } else {
-            DeferredCommand.addCommand(new Command() {
-                public void execute() {
+            deferredCommandWrapper.addCommand(new Listener0() {
+                public void onEvent() {
                     onCancelConfirmed();
                 }
             });

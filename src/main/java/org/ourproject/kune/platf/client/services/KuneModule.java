@@ -45,6 +45,7 @@ import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperDefault;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -66,6 +67,7 @@ import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
+import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
@@ -361,6 +363,13 @@ public class KuneModule extends AbstractModule {
             }
         });
 
+        register(Singleton.class, new Factory<DeferredCommandWrapper>(DeferredCommandWrapper.class) {
+            @Override
+            public DeferredCommandWrapper create() {
+                return new DeferredCommandWrapper();
+            }
+        });
+
         register(Singleton.class, new Factory<TextEditor>(TextEditor.class) {
             @Override
             public TextEditor create() {
@@ -370,7 +379,8 @@ public class KuneModule extends AbstractModule {
                         contentNavigatorToolbar);
 
                 final TextEditorPresenter presenter = new TextEditorPresenter(true, toolbar,
-                        $(I18nUITranslationService.class), $(StateManager.class), $(SiteSignOutLink.class));
+                        $(I18nUITranslationService.class), $(StateManager.class), $(SiteSignOutLink.class),
+                        $(DeferredCommandWrapper.class));
                 final TextEditorPanel panel = new TextEditorPanel(presenter, $(I18nTranslationService.class),
                         $(WorkspaceSkeleton.class), $(ColorWebSafePalette.class));
                 presenter.init(panel);
@@ -463,7 +473,7 @@ public class KuneModule extends AbstractModule {
         }, new Factory<ActionBuddiesSummaryToolbar>(ActionBuddiesSummaryToolbar.class) {
             @Override
             public ActionBuddiesSummaryToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
+                final ActionToolbarPanel<UserSimpleDTO> panel = new ActionToolbarPanel<UserSimpleDTO>(
                         $$(ActionManager.class), $(WorkspaceSkeleton.class));
                 final ActionBuddiesSummaryToolbarPresenter toolbar = new ActionBuddiesSummaryToolbarPresenter(panel);
                 return toolbar;

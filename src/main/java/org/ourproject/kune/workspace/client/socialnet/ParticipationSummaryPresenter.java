@@ -36,7 +36,6 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
@@ -89,7 +88,6 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
         view.clear();
         final List<GroupDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
         final List<GroupDTO> groupsIsCollab = participation.getGroupsIsCollab();
-        Log.info(participation.toString());
         final int numAdmins = groupsIsAdmin.size();
         final int numCollaborators = groupsIsCollab.size();
         if (numAdmins == 0) {

@@ -295,23 +295,13 @@
       org.ourproject.kune.platf.server.users.UserInfo
     </class-b>
     <field>
-      <a>language</a>
-      <b>language</b>
+      <a>user</a>
+      <b>user</b>
       <a-hint>
-        org.ourproject.kune.platf.client.dto.I18nLanguageDTO
+        org.ourproject.kune.platf.client.dto.UserSimpleDTO
       </a-hint>
       <b-hint>
-        org.ourproject.kune.platf.server.domain.I18nLanguage
-      </b-hint>
-    </field>
-    <field>
-      <a>country</a>
-      <b>country</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.I18nCountryDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.I18nCountry
+        org.ourproject.kune.platf.server.domain.User
       </b-hint>
     </field>
   </mapping>

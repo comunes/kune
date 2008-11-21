@@ -22,7 +22,6 @@ package org.ourproject.kune.platf.server.users;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
@@ -45,13 +44,9 @@ public class UserInfoServiceDefault implements UserInfoService {
         if (User.isKnownUser(user)) {
             info = new UserInfo();
 
-            info.setShortName(user.getShortName());
-            info.setName(user.getName());
+            info.setUser(user);
             info.setChatName(user.getShortName());
             info.setChatPassword(user.getPassword());
-            final I18nLanguage language = user.getLanguage();
-            info.setLanguage(language);
-            info.setCountry(user.getCountry());
             info.setUserHash(userHash);
 
             final Group userGroup = user.getUserGroup();

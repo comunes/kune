@@ -65,12 +65,10 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         };
         // gridMenuPanel.onClick(go);
         gridMenuPanel.onDoubleClick(go);
+        gridMenuPanel.getBottomBar().setCls("k-blank-toolbar");
         super.add(gridMenuPanel);
         toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar(ActionToolbarPosition.bottombar);
-        toolbar.setStyleName("x-toolbar");
-        toolbar.addStyleName("x-panel");
-        toolbar.addStyleName("k-blank-toolbar");
-        // toolbar.addStyleName("k-site-traybar");
+        toolbar.setCleanStyle();
         super.add(toolbar);
         super.addInSummary();
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {

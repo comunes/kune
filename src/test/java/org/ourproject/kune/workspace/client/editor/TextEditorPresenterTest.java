@@ -8,9 +8,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
+import com.calclab.suco.client.listener.Listener0;
 import com.calclab.suco.testing.listener.MockListener;
 import com.calclab.suco.testing.listener.MockListener0;
 
@@ -23,6 +25,7 @@ public class TextEditorPresenterTest {
     private ActionToolbar toolbar;
     private StateManager stateManager;
     private SiteSignOutLink signOutLink;
+    private DeferredCommandWrapper deferredCommandWrapper;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -31,7 +34,8 @@ public class TextEditorPresenterTest {
         stateManager = Mockito.mock(StateManager.class);
         toolbar = Mockito.mock(ActionToolbar.class);
         signOutLink = Mockito.mock(SiteSignOutLink.class);
-        presenter = new TextEditorPresenter(true, toolbar, i18n, stateManager, signOutLink);
+        deferredCommandWrapper = Mockito.mock(DeferredCommandWrapper.class);
+        presenter = new TextEditorPresenter(true, toolbar, i18n, stateManager, signOutLink, deferredCommandWrapper);
         view = Mockito.mock(TextEditorView.class);
         presenter.init(view);
         saveListener = new MockListener<String>();
@@ -44,7 +48,7 @@ public class TextEditorPresenterTest {
         boolean change = presenter.beforeTokenChange();
         assertTrue(change);
         Mockito.verify(view, Mockito.never()).showSaveBeforeDialog();
-        Mockito.verify(toolbar, Mockito.times(1)).detach();
+        Mockito.verify(deferredCommandWrapper, Mockito.times(1)).addCommand((Listener0) Mockito.anyObject());
     }
 
     @Test

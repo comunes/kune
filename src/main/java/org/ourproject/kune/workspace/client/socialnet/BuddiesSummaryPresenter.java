@@ -22,11 +22,13 @@ import java.util.List;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
+import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
@@ -36,6 +38,7 @@ import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
@@ -48,14 +51,17 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
     private final I18nTranslationService i18n;
     private final Provider<ChatEngine> chatEngineProvider;
     private final Session session;
+    private final ActionBuddiesSummaryToolbar toolbar;
 
     public BuddiesSummaryPresenter(StateManager stateManager, final Session session, UserActionRegistry actionRegistry,
-            I18nTranslationService i18n, final Provider<ChatEngine> chatEngineProvider) {
+            I18nTranslationService i18n, final Provider<ChatEngine> chatEngineProvider,
+            final ActionBuddiesSummaryToolbar toolbar) {
         this.stateManager = stateManager;
         this.session = session;
         this.actionRegistry = actionRegistry;
         this.i18n = i18n;
         this.chatEngineProvider = chatEngineProvider;
+        this.toolbar = toolbar;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(StateAbstractDTO state) {
                 setState(state);
@@ -105,6 +111,10 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
                         view.setNoBuddies();
                     }
                 }
+                toolbar.disableMenusAndClearButtons();
+                toolbar.setActions(actionRegistry.getCurrentActions(session.getCurrentUser(), session.isLogged(),
+                        state.getGroupRights(), true));
+                toolbar.attach();
                 view.show();
             } else {
                 view.hide();
@@ -112,6 +122,19 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         } else {
             view.hide();
         }
+    }
+
+    private void createShowAction(String textDescription) {
+        ActionToolbarMenuDescriptor<UserSimpleDTO> showBuddies = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
+                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
+                    public void onEvent(UserSimpleDTO parameter) {
+                        Site.info("In development");
+                    }
+                });
+        showBuddies.setTextDescription(textDescription);
+        showBuddies.setParentMenuTitle(i18n.t("Options"));
+        showBuddies.setParentSubMenuTitle(i18n.t("Who can view your buddies list"));
+        actionRegistry.addAction(showBuddies);
     }
 
     private void registerActions() {
@@ -124,8 +147,8 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         addAsBuddie.setMustBeAuthenticated(true);
         addAsBuddie.setTextDescription(i18n.t("Add as buddie"));
         addAsBuddie.setIconUrl("images/add-green.png");
-        addAsBuddie.setEnableCondition(new ActionEnableCondition<UserSimpleDTO>() {
-            public boolean mustBeEnabled(UserSimpleDTO item) {
+        addAsBuddie.setAddCondition(new ActionAddCondition<UserSimpleDTO>() {
+            public boolean mustBeAdded(UserSimpleDTO item) {
                 return !session.getCurrentUserInfo().getShortName().equals(item.getShortName());
             }
         });
@@ -141,5 +164,10 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         go.setTextDescription(i18n.t("Visit this user homepage"));
         go.setIconUrl("images/group-home.gif");
         actionRegistry.addAction(go);
+
+        createShowAction(i18n.t("anyone"));
+        createShowAction(i18n.t("only your buddies"));
+        createShowAction(i18n.t("only you"));
     }
+
 }

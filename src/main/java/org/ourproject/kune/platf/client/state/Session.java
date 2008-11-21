@@ -49,6 +49,7 @@ import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 
 import com.calclab.suco.client.listener.Listener;
@@ -76,6 +77,8 @@ public interface Session {
     StateAbstractDTO getCurrentState();
 
     StateToken getCurrentStateToken();
+
+    UserSimpleDTO getCurrentUser();
 
     UserInfoDTO getCurrentUserInfo();
 

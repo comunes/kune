@@ -171,18 +171,16 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     }
 
     private void createShowAction(String textDescription) {
-        ActionToolbarMenuDescriptor<StateToken> showMembersToAll = new ActionToolbarMenuDescriptor<StateToken>(
+        ActionToolbarMenuDescriptor<StateToken> showMembers = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         Site.info("In development");
                     }
                 });
-        // showMembersToAll.setIconUrl("images/add-green.gif");
-        showMembersToAll.setTextDescription(textDescription);
-        // showMembersToAll.setToolTip(i18n.t("Add a group or a person as member of this group"));
-        showMembersToAll.setParentMenuTitle(i18n.t("Options"));
-        showMembersToAll.setParentSubMenuTitle(i18n.t("Who can view this member list"));
-        groupActionRegistry.addAction(showMembersToAll);
+        showMembers.setTextDescription(textDescription);
+        showMembers.setParentMenuTitle(i18n.t("Options"));
+        showMembers.setParentSubMenuTitle(i18n.t("Who can view this member list"));
+        groupActionRegistry.addAction(showMembers);
     }
 
     @SuppressWarnings("unchecked")

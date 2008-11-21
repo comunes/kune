@@ -21,10 +21,13 @@
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -73,10 +76,10 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
     private final Label otherBuddiesLabel;
     private final I18nTranslationService i18n;
     private final ActionManager actionManager;
+    private final SimpleToolbar toolbar;
 
     public BuddiesSummaryPanel(final BuddiesSummaryPresenter presenter, final WorkspaceSkeleton ws,
-            I18nTranslationService i18n, ActionManager actionManager,
-            ActionBuddiesSummaryToolbar actionBuddiesSummaryToolbar) {
+            I18nTranslationService i18n, ActionManager actionManager, ActionToolbarView<UserSimpleDTO> actionToolbarView) {
         super(i18n.t("Buddies"), i18n.t("Buddies of this user"), ws);
         this.actionManager = actionManager;
         menuItemsContainer = new MenuItemsContainer<UserSimpleDTO>();
@@ -87,9 +90,11 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         otherBuddiesLabel.addStyleName("kune-Margin-Small-trbl");
         vp.add(flowPanel);
         vp.add(otherBuddiesLabel);
+        toolbar = ((ActionToolbarPanel<UserSimpleDTO>) actionToolbarView).getToolbar(ActionToolbarPosition.bottombar);
+        toolbar.setCleanStyle();
+        vp.add(toolbar);
         super.add(vp);
         addInSummary();
-        clear();
     }
 
     public void addBuddie(final UserSimpleDTO user, ActionItemCollection<UserSimpleDTO> actionCollection) {
@@ -115,6 +120,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         flowPanel.clear();
         clearOtherUsers();
         menuItemsContainer.clear();
+        toolbar.removeAll();
         super.doLayoutIfNeeded();
     }
 

@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
+import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
@@ -38,6 +39,7 @@ import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 public class ParticipationSummaryPanel extends SummaryPanel implements ParticipationSummaryView {
 
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
+    private final SimpleToolbar toolbar;
 
     public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws, ActionToolbarView<StateToken> actionToolbarView) {
@@ -52,7 +54,9 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
         // gridMenuPanel.onClick(go);
         gridMenuPanel.onDoubleClick(go);
         super.add(gridMenuPanel);
-        super.add(((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar(ActionToolbarPosition.bottombar));
+        toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar(ActionToolbarPosition.bottombar);
+        toolbar.setCleanStyle();
+        super.add(toolbar);
         addInSummary();
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {
             @Override
@@ -70,6 +74,7 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
     @Override
     public void clear() {
         gridMenuPanel.removeAll();
+        toolbar.removeAll();
     }
 
     public void setTheme(WsTheme oldTheme, WsTheme newTheme) {

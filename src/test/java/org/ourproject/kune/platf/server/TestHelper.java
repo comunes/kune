@@ -12,10 +12,6 @@ import com.google.inject.Module;
 import com.wideplay.warp.jpa.JpaUnit;
 
 public abstract class TestHelper {
-    public static void inject(final Object target) {
-        TestHelper.create(new PlatformServerModule(), "test", "kune.properties").injectMembers(target);
-    }
-
     public static Injector create(final Module module, final String persistenceUnit, final String propetiesFileName) {
         Injector injector = Guice.createInjector(module, new Module() {
             public void configure(Binder binder) {
@@ -25,6 +21,12 @@ public abstract class TestHelper {
             }
         });
         return injector;
+    }
+
+    public static void inject(final Object target) {
+        // test: use memory
+        // test_db: use mysql
+        TestHelper.create(new PlatformServerModule(), "test", "kune.properties").injectMembers(target);
     }
 
 }

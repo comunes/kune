@@ -24,18 +24,16 @@ import java.util.List;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import org.ourproject.kune.platf.server.domain.User;
 
 public class UserInfo {
-    private String shortName;
-    private String name;
+    private User user;
     private String chatName;
     private String chatPassword;
     private String homePage;
     private List<Group> groupsIsAdmin;
     private List<Group> groupsIsCollab;
     private String userHash;
-    private I18nLanguage language;
-    private I18nCountry country;
 
     public String getChatName() {
         return chatName;
@@ -46,7 +44,7 @@ public class UserInfo {
     }
 
     public I18nCountry getCountry() {
-        return country;
+        return user.getCountry();
     }
 
     public List<Group> getGroupsIsAdmin() {
@@ -62,15 +60,19 @@ public class UserInfo {
     }
 
     public I18nLanguage getLanguage() {
-        return language;
+        return user.getLanguage();
     }
 
     public String getName() {
-        return name;
+        return user.getName();
     }
 
     public String getShortName() {
-        return shortName;
+        return user.getShortName();
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public String getUserHash() {
@@ -85,10 +87,6 @@ public class UserInfo {
         this.chatPassword = chatPassword;
     }
 
-    public void setCountry(final I18nCountry country) {
-        this.country = country;
-    }
-
     public void setGroupsIsAdmin(final List<Group> groupsIsAdmin) {
         this.groupsIsAdmin = groupsIsAdmin;
     }
@@ -101,16 +99,8 @@ public class UserInfo {
         this.homePage = homePage;
     }
 
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setUserHash(final String userHash) {
