@@ -53,12 +53,14 @@ public class SummaryPanel extends Panel {
 
     public void addInSummary() {
         ws.addInSummary(this);
-        this.expand();
+        // this.expand();
+        doLayoutIfNeeded();
     }
 
     public void doLayoutIfNeeded() {
         if (super.isRendered()) {
             super.doLayout();
+            ws.refreshSummary();
         }
     }
 
@@ -66,6 +68,5 @@ public class SummaryPanel extends Panel {
     public void setVisible(final boolean visible) {
         super.setVisible(visible);
         doLayoutIfNeeded();
-        ws.refreshSummary();
     }
 }

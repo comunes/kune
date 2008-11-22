@@ -77,10 +77,6 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
         this.view = view;
     }
 
-    private void hide() {
-        view.hide();
-    }
-
     @SuppressWarnings("unchecked")
     private void setState(final StateAbstractDTO state) {
         final ParticipationDataDTO participation = state.getParticipation();
@@ -100,9 +96,9 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
             view.addItem(createGridItem(collabCategory, group, rights, unJoinMenuItem));
         }
         if (numAdmins > 0 || numCollaborators > 0) {
-            view.show();
+            view.setVisible(true);
         } else {
-            hide();
+            view.setVisible(false);
         }
     }
 }

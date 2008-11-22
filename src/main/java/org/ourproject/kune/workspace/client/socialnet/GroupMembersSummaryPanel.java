@@ -132,6 +132,6 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     public void showMembersNotVisible() {
         noMembersPublic.setVisible(true);
         gridMenuPanel.setVisible(false);
+        doLayoutIfNeeded();
     }
-
 }

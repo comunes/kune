@@ -86,7 +86,6 @@ public class TagsSummaryPresenter implements TagsSummary {
     void setState(final StateContainerDTO state) {
         if (state.getTagCloudResult() != null && state.getTagCloudResult().getTagCountList().size() > 0) {
             Log.debug(state.getTagCloudResult().toString());
-            view.setVisible(true);
             setCloud(state.getTagCloudResult());
         } else {
             view.setVisible(false);
@@ -104,5 +103,6 @@ public class TagsSummaryPresenter implements TagsSummary {
             int size = Math.round((MINSIZE + (tagCount.getCount() - min) * step));
             view.addTag(tagCount.getName(), tagCount.getCount(), "kune-ft" + size + "px");
         }
+        view.setVisible(true);
     }
 }

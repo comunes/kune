@@ -155,6 +155,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
 
     public void showBuddiesNotVisible() {
         flowPanel.add(noBuddiesPublic);
+        super.doLayoutIfNeeded();
     }
 
     private void doAction(final ActionItem<UserSimpleDTO> actionItem) {

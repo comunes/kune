@@ -237,8 +237,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             } else {
                 view.clear();
                 view.showMembersNotVisible();
+                view.setVisible(true);
             }
         }
     }
-
 }

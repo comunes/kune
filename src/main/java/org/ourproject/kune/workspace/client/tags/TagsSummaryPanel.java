@@ -50,7 +50,7 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
         super.add(vp);
         // super.setBorderStylePrimaryName("k-dropdownouter-tags");
         flowPanel.addStyleName("kune-Margin-Small-trbl");
-        ws.addInSummary(this);
+        addInSummary();
     }
 
     public void addTag(final String name, Long count, String style) {

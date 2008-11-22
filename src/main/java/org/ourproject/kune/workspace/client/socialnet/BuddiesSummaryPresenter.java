@@ -130,6 +130,7 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
                 view.show();
             } else {
                 view.showBuddiesNotVisible();
+                view.show();
             }
         } else {
             view.hide();
