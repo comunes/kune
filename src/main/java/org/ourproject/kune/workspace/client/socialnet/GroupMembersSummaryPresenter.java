@@ -33,7 +33,7 @@ import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -135,8 +135,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     public void addCollab(final String groupShortName) {
         Site.showProgressProcessing();
         snServiceProvider.get().addCollabMember(session.getUserHash(), session.getCurrentState().getStateToken(),
-                groupShortName, new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                    public void onSuccess(final SocialNetworkResultDTO result) {
+                groupShortName, new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                    public void onSuccess(final SocialNetworkDataDTO result) {
                         Site.hideProgress();
                         Site.info(i18n.t("Member added as collaborator"));
                         stateManager.setSocialNetwork(result);
@@ -232,7 +232,12 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
             view.setVisible(false);
         } else {
-            setGroupMembers(state.getGroupMembers(), state.getGroupRights());
+            if (state.getSocialNetworkData().isMembersVisible()) {
+                setGroupMembers(state.getGroupMembers(), state.getGroupRights());
+            } else {
+                view.clear();
+                view.showMembersNotVisible();
+            }
         }
     }
 

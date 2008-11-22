@@ -25,12 +25,23 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public class UserBuddiesData {
 
+    public static UserBuddiesData EMPTY = new UserBuddiesData();
+
     private List<User> buddies;
     int otherExternalBuddies;
 
     public UserBuddiesData() {
         otherExternalBuddies = 0;
         buddies = new ArrayList<User>();
+    }
+
+    public boolean contains(String shortName) {
+        for (User buddie : buddies) {
+            if (buddie.getShortName().equals(shortName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<User> getBuddies() {

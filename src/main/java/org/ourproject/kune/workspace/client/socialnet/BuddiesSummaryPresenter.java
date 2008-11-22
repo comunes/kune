@@ -23,6 +23,7 @@ import java.util.List;
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionAddCondition;
+import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
@@ -96,7 +97,7 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
             view.clear();
             UserBuddiesDataDTO userBuddies = state.getUserBuddies();
-            if (userBuddies != UserBuddiesDataDTO.NO_BUDDIES) {
+            if (state.getSocialNetworkData().isBuddiesVisible()) {
                 List<UserSimpleDTO> buddies = userBuddies.getBuddies();
                 for (UserSimpleDTO user : buddies) {
                     String avatarUrl = user.hasLogo() ? fileDownUtilsProvider.get().getLogoImageUrl(
@@ -128,7 +129,7 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
                 toolbar.attach();
                 view.show();
             } else {
-                view.hide();
+                view.showBuddiesNotVisible();
             }
         } else {
             view.hide();
@@ -136,7 +137,7 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
     }
 
     private void createSetBuddiesVisibilityAction(String textDescription, final UserBuddiesVisibilityDTO visibility) {
-        ActionToolbarMenuDescriptor<UserSimpleDTO> showBuddies = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
+        ActionToolbarMenuDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
                     public void onEvent(UserSimpleDTO parameter) {
                         userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
@@ -148,10 +149,10 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
                                 });
                     }
                 });
-        showBuddies.setTextDescription(textDescription);
-        showBuddies.setParentMenuTitle(i18n.t("Options"));
-        showBuddies.setParentSubMenuTitle(i18n.t("Who can view your buddies list"));
-        actionRegistry.addAction(showBuddies);
+        buddiesVisibilityAction.setTextDescription(textDescription);
+        buddiesVisibilityAction.setParentMenuTitle(i18n.t("Options"));
+        buddiesVisibilityAction.setParentSubMenuTitle(i18n.t("Who can view your buddies list"));
+        actionRegistry.addAction(buddiesVisibilityAction);
     }
 
     private void registerActions() {
@@ -166,6 +167,11 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         addAsBuddie.setIconUrl("images/add-green.png");
         addAsBuddie.setAddCondition(new ActionAddCondition<UserSimpleDTO>() {
             public boolean mustBeAdded(UserSimpleDTO item) {
+                return !session.getCurrentUserInfo().getShortName().equals(item.getShortName());
+            }
+        });
+        addAsBuddie.setEnableCondition(new ActionEnableCondition<UserSimpleDTO>() {
+            public boolean mustBeEnabled(UserSimpleDTO item) {
                 return !session.getCurrentUserInfo().getShortName().equals(item.getShortName());
             }
         });

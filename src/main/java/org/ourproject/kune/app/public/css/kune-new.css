@@ -794,3 +794,7 @@
 .k-bsp-buddie td {
   padding: 2px 3px 2px 3px;
 }
+
+.k-text-gray {
+    color: gray;
+}

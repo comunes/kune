@@ -19,32 +19,20 @@
  */
 package org.ourproject.kune.platf.server.rpc;
 
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
-import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
-import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.domain.UserBuddiesVisibility;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
-import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import com.google.inject.Inject;
@@ -60,25 +48,20 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     private final GroupManager groupManager;
     private final SocialNetworkManager socialNetworkManager;
     private final Mapper mapper;
-    private final UserManager userManager;
-    private final AccessRightsService accessRightsService;
 
     @Inject
-    public SocialNetworkRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
-            final GroupManager groupManager, final SocialNetworkManager socialNetworkManager, final Mapper mapper,
-            AccessRightsService accessRightsService) {
+    public SocialNetworkRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
+            final SocialNetworkManager socialNetworkManager, final Mapper mapper) {
         this.userSessionProvider = userSessionProvider;
-        this.userManager = userManager;
         this.groupManager = groupManager;
         this.socialNetworkManager = socialNetworkManager;
         this.mapper = mapper;
-        this.accessRightsService = accessRightsService;
     }
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO acceptJoinGroup(final String hash, final StateToken groupToken,
+    public SocialNetworkDataDTO acceptJoinGroup(final String hash, final StateToken groupToken,
             final String groupToAcceptShortName) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
@@ -91,7 +74,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO addAdminMember(final String hash, final StateToken groupToken,
+    public SocialNetworkDataDTO addAdminMember(final String hash, final StateToken groupToken,
             final String groupToAddShortName) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
@@ -104,7 +87,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO addCollabMember(final String hash, final StateToken groupToken,
+    public SocialNetworkDataDTO addCollabMember(final String hash, final StateToken groupToken,
             final String groupToAddShortName) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
@@ -117,7 +100,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO addViewerMember(final String hash, final StateToken groupToken,
+    public SocialNetworkDataDTO addViewerMember(final String hash, final StateToken groupToken,
             final String groupToAddShortName) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
@@ -130,7 +113,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO deleteMember(final String hash, final StateToken groupToken,
+    public SocialNetworkDataDTO deleteMember(final String hash, final StateToken groupToken,
             final String groupToDeleleShortName) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
@@ -143,7 +126,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO denyJoinGroup(final String hash, final StateToken groupToken,
+    public SocialNetworkDataDTO denyJoinGroup(final String hash, final StateToken groupToken,
             final String groupToDenyShortName) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
@@ -157,7 +140,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     // At least you can access as Viewer to the Group
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_ONLY)
-    public SocialNetworkResultDTO getSocialNetwork(final String hash, final StateToken groupToken)
+    public SocialNetworkDataDTO getSocialNetwork(final String hash, final StateToken groupToken)
             throws DefaultException {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
@@ -178,7 +161,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO setAdminAsCollab(final String hash, final StateToken groupToken,
+    public SocialNetworkDataDTO setAdminAsCollab(final String hash, final StateToken groupToken,
             final String groupToSetCollabShortName) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
@@ -191,7 +174,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO setCollabAsAdmin(final String hash, final StateToken groupToken,
+    public SocialNetworkDataDTO setCollabAsAdmin(final String hash, final StateToken groupToken,
             final String groupToSetAdminShortName) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
@@ -203,7 +186,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE)
-    public SocialNetworkResultDTO unJoinGroup(final String hash, final StateToken groupToken) throws DefaultException {
+    public SocialNetworkDataDTO unJoinGroup(final String hash, final StateToken groupToken) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
@@ -211,63 +194,8 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         return generateResponse(userLogged, group);
     }
 
-    private SocialNetworkResultDTO generateResponse(final User userLogged, final Group group) {
-        AccessRights groupRights = accessRightsService.get(userLogged, group.getSocialNetwork().getAccessLists());
-        if (group.getGroupType().equals(GroupType.PERSONAL)) {
-            UserBuddiesDataDTO userBuddies = getUserBuddies(group);
-            SocialNetworkResultDTO result = new SocialNetworkResultDTO(getGroupMembers(userLogged, group),
-                    getParticipation(userLogged, group), userBuddies, mapper.map(groupRights, AccessRightsDTO.class));
-            UserBuddiesVisibility buddiesVisibility = userLogged.getBuddiesVisibility();
-            switch (buddiesVisibility) {
-            case anyone:
-                break;
-            case onlyyou:
-                if (userLogged == null || !userLogged.getUserGroup().equals(group)) {
-                    result.setUserBuddies(null);
-                }
-                break;
-            case yourbuddies:
-                if (!userBuddies.contains(userLogged.getShortName())) {
-                    result.setUserBuddies(null);
-                }
-                break;
-            }
-            result.setUserBuddiesVisibilityDTO(mapper.map(buddiesVisibility, UserBuddiesVisibilityDTO.class));
-            return result;
-        } else {
-            SocialNetworkResultDTO result = new SocialNetworkResultDTO(getGroupMembers(userLogged, group),
-                    getParticipation(userLogged, group), UserBuddiesDataDTO.NO_BUDDIES, mapper.map(groupRights,
-                            AccessRightsDTO.class));
-            SocialNetworkVisibility visibility = group.getSocialNetwork().getVisibility();
-            switch (visibility) {
-            case anyone:
-                break;
-            case onlyadmins:
-                if (!groupRights.isAdministrable()) {
-                    result.setGroupMembers(null);
-                }
-                break;
-            case onlymembers:
-                if (!groupRights.isEditable()) {
-                    result.setGroupMembers(null);
-                }
-                break;
-            }
-            result.setSocialNetworkVisibilityDTO(mapper.map(visibility, SocialNetworkVisibilityDTO.class));
-            return result;
-        }
-    }
-
-    private SocialNetworkDTO getGroupMembers(final User user, final Group group) throws DefaultException {
-        return mapper.map(socialNetworkManager.get(user, group), SocialNetworkDTO.class);
-    }
-
-    private ParticipationDataDTO getParticipation(final User user, final Group group) throws DefaultException {
-        return mapper.map(socialNetworkManager.findParticipation(user, group), ParticipationDataDTO.class);
-    }
-
-    private UserBuddiesDataDTO getUserBuddies(final Group group) {
-        return mapper.map(userManager.getUserBuddies(group.getShortName()), UserBuddiesDataDTO.class);
+    private SocialNetworkDataDTO generateResponse(final User userLogged, final Group group) {
+        return mapper.map(socialNetworkManager.getSocialNetworkData(userLogged, group), SocialNetworkDataDTO.class);
     }
 
     private UserSession getUserSession() {

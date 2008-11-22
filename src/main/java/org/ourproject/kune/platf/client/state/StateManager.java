@@ -20,7 +20,7 @@
 package org.ourproject.kune.platf.client.state;
 
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
-import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
@@ -58,6 +58,6 @@ public interface StateManager {
 
     void setRetrievedState(StateAbstractDTO state);
 
-    void setSocialNetwork(SocialNetworkResultDTO socialNet);
+    void setSocialNetwork(SocialNetworkDataDTO socialNet);
 
 }

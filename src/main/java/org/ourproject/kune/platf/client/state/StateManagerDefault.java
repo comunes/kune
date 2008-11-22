@@ -24,12 +24,9 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.actions.BeforeActionCollection;
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
-import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -177,18 +174,13 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         setState(newState);
     }
 
-    public void setSocialNetwork(final SocialNetworkResultDTO socialNet) {
+    public void setSocialNetwork(final SocialNetworkDataDTO socialNet) {
         StateAbstractDTO state;
         if (session != null && (state = session.getCurrentState()) != null) {
             // After a SN operation, usually returns a SocialNetworkResultDTO
             // with new SN data and we refresh the state
             // to avoid to reload() again the state
-            final SocialNetworkDTO groupMembers = socialNet.getGroupMembers();
-            final ParticipationDataDTO userParticipation = socialNet.getUserParticipation();
-            final UserBuddiesDataDTO userBuddies = socialNet.getUserBuddies();
-            state.setGroupMembers(groupMembers);
-            state.setParticipation(userParticipation);
-            state.setUserBuddies(userBuddies);
+            state.setSocialNetworkData(socialNet);
             onSocialNetworkChanged.fire(state);
         }
     }

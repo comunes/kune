@@ -40,4 +40,6 @@ public interface BuddiesSummaryView extends View {
     void setOtherUsers(String text);
 
     void show();
+
+    void showBuddiesNotVisible();
 }

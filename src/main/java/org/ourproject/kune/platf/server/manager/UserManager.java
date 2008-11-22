@@ -50,6 +50,8 @@ public interface UserManager {
      */
     User find(Long userId);
 
+    User findByShortname(String shortName);
+
     UserBuddiesData getUserBuddies(String shortName);
 
     User login(String nickOrEmail, String passwd);

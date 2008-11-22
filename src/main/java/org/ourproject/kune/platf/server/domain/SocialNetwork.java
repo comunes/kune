@@ -29,6 +29,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "social_networks")
 public class SocialNetwork {
+    public static final SocialNetwork EMPTY = new SocialNetwork(SocialNetworkVisibility.onlyadmins);
+
     @Id
     @GeneratedValue
     Long id;
@@ -45,6 +47,12 @@ public class SocialNetwork {
         accessLists = new AccessLists();
         pendingCollaborators = new GroupList();
         visibility = SocialNetworkVisibility.anyone;
+    }
+
+    public SocialNetwork(SocialNetworkVisibility visibility) {
+        accessLists = new AccessLists();
+        pendingCollaborators = new GroupList();
+        this.visibility = visibility;
     }
 
     public void addAdmin(final Group group) {

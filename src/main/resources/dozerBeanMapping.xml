@@ -500,4 +500,13 @@
       org.ourproject.kune.platf.server.sn.UserBuddiesData
     </class-b>
   </mapping>
+
+    <mapping>
+    <class-a>
+      org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO
+    </class-a>
+    <class-b>
+      org.ourproject.kune.platf.server.domain.SocialNetworkData
+    </class-b>
+  </mapping>
 </mappings>

@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
-import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
@@ -235,8 +235,8 @@ public class SocialNetworkPresenter {
                         Site.showProgressProcessing();
                         snServiceProvider.get().setAdminAsCollab(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
-                                new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                                    public void onSuccess(final SocialNetworkResultDTO result) {
+                                new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                                    public void onSuccess(final SocialNetworkDataDTO result) {
                                         Site.hideProgress();
                                         Site.info(i18n.t("Type of member changed"));
                                         stateManager.setSocialNetwork(result);
@@ -250,8 +250,8 @@ public class SocialNetworkPresenter {
                         Site.showProgressProcessing();
                         snServiceProvider.get().deleteMember(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
-                                new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                                    public void onSuccess(final SocialNetworkResultDTO result) {
+                                new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                                    public void onSuccess(final SocialNetworkDataDTO result) {
                                         Site.hideProgress();
                                         Site.info(i18n.t("Member removed"));
                                         stateManager.reload();
@@ -273,8 +273,8 @@ public class SocialNetworkPresenter {
                         Site.showProgressProcessing();
                         snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
-                                new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                                    public void onSuccess(final SocialNetworkResultDTO result) {
+                                new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                                    public void onSuccess(final SocialNetworkDataDTO result) {
                                         Site.hideProgress();
                                         Site.info(i18n.t("Type of member changed"));
                                         stateManager.setSocialNetwork(result);
@@ -288,8 +288,8 @@ public class SocialNetworkPresenter {
                         Site.showProgressProcessing();
                         snServiceProvider.get().acceptJoinGroup(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
-                                new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                                    public void onSuccess(final SocialNetworkResultDTO result) {
+                                new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                                    public void onSuccess(final SocialNetworkDataDTO result) {
                                         Site.hideProgress();
                                         Site.info(i18n.t("Member accepted"));
                                         stateManager.setSocialNetwork(result);
@@ -303,8 +303,8 @@ public class SocialNetworkPresenter {
                         Site.showProgressProcessing();
                         snServiceProvider.get().denyJoinGroup(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
-                                new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                                    public void onSuccess(final SocialNetworkResultDTO result) {
+                                new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                                    public void onSuccess(final SocialNetworkDataDTO result) {
                                         Site.hideProgress();
                                         Site.info(i18n.t("Member rejected"));
                                         stateManager.setSocialNetwork(result);
@@ -325,8 +325,8 @@ public class SocialNetworkPresenter {
     private void removeMemberAction(final GroupDTO groupDTO) {
         Site.showProgressProcessing();
         snServiceProvider.get().unJoinGroup(session.getUserHash(), new StateToken(groupDTO.getShortName()),
-                new AsyncCallbackSimple<SocialNetworkResultDTO>() {
-                    public void onSuccess(final SocialNetworkResultDTO result) {
+                new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                    public void onSuccess(final SocialNetworkDataDTO result) {
                         Site.hideProgress();
                         Site.info(i18n.t("Removed as member"));
                         stateManager.reload();

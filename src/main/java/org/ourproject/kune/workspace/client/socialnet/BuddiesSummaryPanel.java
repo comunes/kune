@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -54,7 +53,8 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
             VerticalPanel vp = new VerticalPanel();
             avatar = new Image();
             if (avatarUrl.equals(NOAVATAR)) {
-                Images.App.getInstance().personAvatarDef().applyTo(avatar);
+                // Images.App.getInstance().personAvatarDef().applyTo(avatar);
+                avatar.setUrl("images/persons/person2-32.png");
             } else {
                 avatar.setUrl(avatarUrl);
             }
@@ -80,12 +80,15 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
             nick.setText(nickName);
         }
     }
+
+    public static final String NOT_PUBLIC = "The buddies of this user are not public";
     private final MenuItemsContainer<UserSimpleDTO> menuItemsContainer;
     private final FlowPanel flowPanel;
     private final Label otherBuddiesLabel;
     private final I18nTranslationService i18n;
     private final ActionManager actionManager;
     private final SimpleToolbar toolbar;
+    private final Label noBuddiesPublic;
 
     public BuddiesSummaryPanel(final BuddiesSummaryPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n, ActionManager actionManager, ActionToolbarView<UserSimpleDTO> actionToolbarView) {
@@ -104,6 +107,9 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         vp.add(toolbar);
         super.add(vp);
         addInSummary();
+        noBuddiesPublic = new Label(i18n.t(NOT_PUBLIC));
+        noBuddiesPublic.addStyleName("kune-Margin-7-trbl");
+        noBuddiesPublic.addStyleName("k-text-gray");
     }
 
     public void addBuddie(final UserSimpleDTO user, ActionItemCollection<UserSimpleDTO> actionCollection,
@@ -145,6 +151,10 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
 
     public void setOtherUsers(String text) {
         otherBuddiesLabel.setText(text);
+    }
+
+    public void showBuddiesNotVisible() {
+        flowPanel.add(noBuddiesPublic);
     }
 
     private void doAction(final ActionItem<UserSimpleDTO> actionItem) {

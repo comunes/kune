@@ -85,12 +85,16 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         return userId != null ? super.find(userId) : User.UNKNOWN_USER;
     }
 
-    public List<User> getAll() {
-        return finder.getAll();
+    public User findByShortname(String shortName) {
+        return finder.getByShortName(shortName);
     }
 
-    public User getByShortName(final String shortName) {
+    public User findByShortName(final String shortName) {
         return finder.getByShortName(shortName);
+    }
+
+    public List<User> getAll() {
+        return finder.getAll();
     }
 
     public UserBuddiesData getUserBuddies(final String shortName) {

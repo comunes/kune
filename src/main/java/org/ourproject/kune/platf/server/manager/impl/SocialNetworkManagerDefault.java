@@ -31,14 +31,20 @@ import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
+import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
+import org.ourproject.kune.platf.server.domain.SocialNetworkData;
+import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.domain.UserBuddiesVisibility;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
+import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
+import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -49,13 +55,15 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
 
     private final Group finder;
     private final AccessRightsService accessRightsService;
+    private final UserManager userManager;
 
     @Inject
     public SocialNetworkManagerDefault(final Provider<EntityManager> provider, final Group finder,
-            final AccessRightsService accessRightsService) {
+            final AccessRightsService accessRightsService, final UserManager userManager) {
         super(provider, SocialNetwork.class);
         this.finder = finder;
         this.accessRightsService = accessRightsService;
+        this.userManager = userManager;
     }
 
     public void acceptJoinGroup(final User userLogged, final Group group, final Group inGroup) throws DefaultException,
@@ -145,6 +153,61 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
             throw new AccessViolationException();
         }
         return sn;
+    }
+
+    public SocialNetworkData getSocialNetworkData(User userLogged, Group group) {
+        SocialNetworkData socialNetData = new SocialNetworkData();
+        socialNetData.setGroupMembers(get(userLogged, group));
+        AccessRights groupRights = accessRightsService.get(userLogged, group.getAccessLists());
+        socialNetData.setGroupRights(groupRights);
+        socialNetData.setUserParticipation(findParticipation(userLogged, group));
+        socialNetData.setGroupMembers(get(userLogged, group));
+        if (group.getGroupType().equals(GroupType.PERSONAL)) {
+            UserBuddiesData userBuddies = userManager.getUserBuddies(group.getShortName());
+            User userGroup = userManager.findByShortname(group.getShortName());
+            socialNetData.setUserBuddies(userBuddies);
+            UserBuddiesVisibility buddiesVisibility = userGroup.getBuddiesVisibility();
+            socialNetData.setIsBuddiesVisible(true);
+            switch (buddiesVisibility) {
+            case anyone:
+                break;
+            case onlyyou:
+                if (userLogged == User.UNKNOWN_USER || !userLogged.getUserGroup().equals(group)) {
+                    socialNetData.setIsBuddiesVisible(false);
+                    socialNetData.setUserBuddies(UserBuddiesData.EMPTY);
+                }
+                break;
+            case yourbuddies:
+                if (!userBuddies.contains(userLogged.getShortName())) {
+                    socialNetData.setIsBuddiesVisible(false);
+                    socialNetData.setUserBuddies(UserBuddiesData.EMPTY);
+                }
+                break;
+            }
+            socialNetData.setUserBuddiesVisibility(buddiesVisibility);
+        } else {
+            SocialNetworkVisibility visibility = group.getSocialNetwork().getVisibility();
+            socialNetData.setIsMembersVisible(true);
+            switch (visibility) {
+            case anyone:
+                break;
+            case onlyadmins:
+                if (!groupRights.isAdministrable()) {
+                    socialNetData.setIsMembersVisible(false);
+                    socialNetData.setGroupMembers(SocialNetwork.EMPTY);
+                }
+                break;
+            case onlymembers:
+                if (!groupRights.isEditable()) {
+                    socialNetData.setIsMembersVisible(false);
+                    socialNetData.setGroupMembers(SocialNetwork.EMPTY);
+                }
+                break;
+            }
+            socialNetData.setSocialNetworkVisibility(visibility);
+            socialNetData.setUserBuddies(UserBuddiesData.EMPTY);
+        }
+        return socialNetData;
     }
 
     public SocialNetworkRequestResult requestToJoin(final User userLogged, final Group inGroup)

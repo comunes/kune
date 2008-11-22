@@ -36,4 +36,6 @@ public interface GroupMembersSummaryView {
 
     void setVisible(boolean visible);
 
+    void showMembersNotVisible();
+
 }

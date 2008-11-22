@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
+import org.ourproject.kune.platf.server.domain.SocialNetworkData;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
@@ -31,12 +32,9 @@ public abstract class StateAbstract {
 
     private List<String> enabledTools;
     private Group group;
-    private SocialNetwork groupMembers;
-    private AccessRights groupRights;
-    private ParticipationData participation;
-    private UserBuddiesData userBuddies;
     private StateToken stateToken;
     private String title;
+    private SocialNetworkData socialNetworkData;
 
     public StateAbstract() {
     }
@@ -50,15 +48,19 @@ public abstract class StateAbstract {
     }
 
     public SocialNetwork getGroupMembers() {
-        return groupMembers;
+        return socialNetworkData.getGroupMembers();
     }
 
     public AccessRights getGroupRights() {
-        return groupRights;
+        return socialNetworkData.getGroupRights();
     }
 
     public ParticipationData getParticipation() {
-        return participation;
+        return socialNetworkData.getUserParticipation();
+    }
+
+    public SocialNetworkData getSocialNetworkData() {
+        return socialNetworkData;
     }
 
     public StateToken getStateToken() {
@@ -70,7 +72,7 @@ public abstract class StateAbstract {
     }
 
     public UserBuddiesData getUserBuddies() {
-        return userBuddies;
+        return socialNetworkData.getUserBuddies();
     }
 
     public void setEnabledTools(List<String> enabledTools) {
@@ -81,16 +83,8 @@ public abstract class StateAbstract {
         this.group = group;
     }
 
-    public void setGroupMembers(SocialNetwork groupMembers) {
-        this.groupMembers = groupMembers;
-    }
-
-    public void setGroupRights(AccessRights groupRights) {
-        this.groupRights = groupRights;
-    }
-
-    public void setParticipation(ParticipationData participation) {
-        this.participation = participation;
+    public void setSocialNetworkData(SocialNetworkData socialNetworkData) {
+        this.socialNetworkData = socialNetworkData;
     }
 
     public void setStateToken(StateToken stateToken) {
@@ -99,10 +93,6 @@ public abstract class StateAbstract {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setUserBuddies(UserBuddiesData userBuddies) {
-        this.userBuddies = userBuddies;
     }
 
     @Override

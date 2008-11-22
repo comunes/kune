@@ -36,16 +36,19 @@ import com.calclab.emiteuimodule.client.users.UserGridPanel;
 import com.calclab.suco.client.listener.Listener;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.ui.Label;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
 public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembersSummaryView {
+    public static final String NOT_PUBLIC = "The members of this group are not public";
     // private static final int MAX_HEIGHT = 110;
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
     private final I18nUITranslationService i18n;
     private final GroupMembersSummaryPresenter presenter;
     private final SimpleToolbar toolbar;
+    private final Label noMembersPublic;
 
     public GroupMembersSummaryPanel(final GroupMembersSummaryPresenter presenter, final I18nUITranslationService i18n,
             final WorkspaceSkeleton ws, ActionToolbarView<StateToken> actionToolbarView) {
@@ -67,6 +70,13 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         gridMenuPanel.onDoubleClick(go);
         gridMenuPanel.getBottomBar().setCls("k-blank-toolbar");
         super.add(gridMenuPanel);
+
+        noMembersPublic = new Label(i18n.t(NOT_PUBLIC));
+        noMembersPublic.addStyleName("kune-Margin-7-trbl");
+        noMembersPublic.addStyleName("k-text-gray");
+        noMembersPublic.setVisible(false);
+        super.add(noMembersPublic);
+
         toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar(ActionToolbarPosition.bottombar);
         toolbar.setCleanStyle();
         super.add(toolbar);
@@ -81,6 +91,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     }
 
     public void addItem(final GridItem<GroupDTO> gridItem) {
+        gridMenuPanel.setVisible(true);
         gridMenuPanel.addItem(gridItem);
         doLayoutIfNeeded();
     }
@@ -89,6 +100,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     public void clear() {
         gridMenuPanel.removeAll();
         toolbar.removeAll();
+        noMembersPublic.setVisible(false);
         doLayoutIfNeeded();
     }
 
@@ -116,4 +128,10 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
         // super.setTheme(oldTheme, newTheme);
     }
+
+    public void showMembersNotVisible() {
+        noMembersPublic.setVisible(true);
+        gridMenuPanel.setVisible(false);
+    }
+
 }

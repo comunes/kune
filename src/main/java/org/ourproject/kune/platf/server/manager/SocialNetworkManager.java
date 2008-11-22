@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
+import org.ourproject.kune.platf.server.domain.SocialNetworkData;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 
@@ -44,6 +45,8 @@ public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
     ParticipationData findParticipation(User user, Group group) throws DefaultException;
 
     SocialNetwork get(User userLogged, Group group) throws DefaultException;
+
+    SocialNetworkData getSocialNetworkData(User userLogged, Group group);
 
     SocialNetworkRequestResult requestToJoin(User user, Group inGroup) throws DefaultException;
 

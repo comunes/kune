@@ -32,7 +32,6 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
-import org.ourproject.kune.platf.server.manager.UserManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -41,7 +40,6 @@ import com.google.inject.Singleton;
 public class StateServiceDefault implements StateService {
 
     private final AccessRightsService rightsService;
-    private final UserManager userManager;
     private final SocialNetworkManager socialNetworkManager;
     private final GroupManager groupManager;
     private final TagManager tagManager;
@@ -49,10 +47,9 @@ public class StateServiceDefault implements StateService {
     private final I18nTranslationService i18n;
 
     @Inject
-    public StateServiceDefault(UserManager userManager, GroupManager groupManager,
-            SocialNetworkManager socialNetworkManager, ContentManager contentManager, TagManager tagManager,
-            AccessRightsService rightsService, I18nTranslationService i18n) {
-        this.userManager = userManager;
+    public StateServiceDefault(GroupManager groupManager, SocialNetworkManager socialNetworkManager,
+            ContentManager contentManager, TagManager tagManager, AccessRightsService rightsService,
+            I18nTranslationService i18n) {
         this.groupManager = groupManager;
         this.socialNetworkManager = socialNetworkManager;
         this.contentManager = contentManager;
@@ -115,7 +112,6 @@ public class StateServiceDefault implements StateService {
         assert (group.getGroupType().equals(GroupType.PERSONAL));
         StateNoContent state = new StateNoContent();
         state.setGroup(group);
-        state.setGroupRights(rightsService.get(userLogged, group.getAccessLists()));
         state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
         setSocialNetwork(state, userLogged, group);
         state.setStateToken(group.getStateToken());
@@ -131,7 +127,6 @@ public class StateServiceDefault implements StateService {
         state.setToolName(container.getToolName());
         state.setGroup(group);
         state.setContainer(container);
-        state.setGroupRights(rightsService.get(userLogged, group.getAccessLists()));
         state.setContainerRights(rightsService.get(userLogged, container.getAccessLists()));
         state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
         state.setTagCloudResult(tagManager.getTagCloudResultByGroup(group));
@@ -139,10 +134,6 @@ public class StateServiceDefault implements StateService {
     }
 
     private void setSocialNetwork(StateAbstract state, User userLogged, Group group) {
-        state.setGroupMembers(socialNetworkManager.get(userLogged, group));
-        state.setParticipation(socialNetworkManager.findParticipation(userLogged, group));
-        if (group.getGroupType().equals(GroupType.PERSONAL)) {
-            state.setUserBuddies(userManager.getUserBuddies(group.getShortName()));
-        }
+        state.setSocialNetworkData(socialNetworkManager.getSocialNetworkData(userLogged, group));
     }
 }

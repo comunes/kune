@@ -18,8 +18,11 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
@@ -32,8 +35,14 @@ import org.ourproject.kune.platf.server.domain.GroupList;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.Revision;
+import org.ourproject.kune.platf.server.domain.SocialNetwork;
+import org.ourproject.kune.platf.server.domain.SocialNetworkData;
+import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.domain.UserBuddiesVisibility;
 import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.sn.ParticipationData;
+import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 import org.ourproject.kune.platf.server.state.StateContent;
 
 import com.google.inject.Inject;
@@ -227,6 +236,36 @@ public class MapperTest {
         d.setMimeType(new BasicMimeType("application/pdf"));
         final ContentSimpleDTO contentSimpleDTO = mapper.map(d, ContentSimpleDTO.class);
         assertEquals("application/pdf", contentSimpleDTO.getMimeType().toString());
+    }
+
+    @Test
+    public void testSnResultMap() {
+        Group group = new Group("test", "this is a test");
+        SocialNetwork sn = new SocialNetwork();
+        sn.addAdmin(group);
+        ParticipationData part = new ParticipationData();
+        part.setGroupsIsAdmin(sn.getAccessLists().getAdmins().getList());
+        UserBuddiesData budData = new UserBuddiesData();
+        ArrayList<User> buddies = new ArrayList<User>();
+        final User user = new User();
+        user.setShortName("usertest");
+        user.setUserGroup(new Group("test2", "this is test2"));
+        buddies.add(user);
+        budData.setBuddies(buddies);
+        SocialNetworkData snResult = new SocialNetworkData(SocialNetworkVisibility.onlymembers, sn, part,
+                UserBuddiesVisibility.onlyyou, budData, new AccessRights(false, false, true), true, true);
+        SocialNetworkDataDTO map = mapper.map(snResult, SocialNetworkDataDTO.class);
+        assertNotNull(map);
+        assertEquals(SocialNetworkVisibilityDTO.onlymembers, map.getSocialNetworkVisibility());
+        assertEquals(UserBuddiesVisibilityDTO.onlyyou, map.getUserBuddiesVisibility());
+        assertEquals("test", map.getGroupMembers().getAccessLists().getAdmins().getList().get(0).getShortName());
+        assertEquals("test", map.getUserParticipation().getGroupsIsAdmin().get(0).getShortName());
+        assertEquals("usertest", map.getUserBuddies().getBuddies().get(0).getShortName());
+        assertFalse(map.getGroupRights().isAdministrable());
+        assertFalse(map.getGroupRights().isEditable());
+        assertTrue(map.getGroupRights().isVisible());
+        assertTrue(map.isMembersVisible());
+        assertTrue(map.isBuddiesVisible());
     }
 
     @Test

@@ -20,7 +20,7 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
-import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 
@@ -28,33 +28,33 @@ import com.google.gwt.user.client.rpc.RemoteService;
 
 public interface SocialNetworkService extends RemoteService {
 
-    SocialNetworkResultDTO acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName)
+    SocialNetworkDataDTO acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName)
             throws DefaultException;
 
-    SocialNetworkResultDTO addAdminMember(String hash, StateToken groupToken, String groupToAddShortName)
+    SocialNetworkDataDTO addAdminMember(String hash, StateToken groupToken, String groupToAddShortName)
             throws DefaultException;
 
-    SocialNetworkResultDTO addCollabMember(String hash, StateToken groupToken, String groupToAddShortName)
+    SocialNetworkDataDTO addCollabMember(String hash, StateToken groupToken, String groupToAddShortName)
             throws DefaultException;
 
-    SocialNetworkResultDTO addViewerMember(String hash, StateToken groupToken, String groupToAddShortName)
+    SocialNetworkDataDTO addViewerMember(String hash, StateToken groupToken, String groupToAddShortName)
             throws DefaultException;
 
-    SocialNetworkResultDTO deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName)
+    SocialNetworkDataDTO deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName)
             throws DefaultException;
 
-    SocialNetworkResultDTO denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName)
+    SocialNetworkDataDTO denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName)
             throws DefaultException;
 
-    SocialNetworkResultDTO getSocialNetwork(String hash, StateToken groupToken) throws DefaultException;
+    SocialNetworkDataDTO getSocialNetwork(String hash, StateToken groupToken) throws DefaultException;
 
     SocialNetworkRequestResult requestJoinGroup(String hash, StateToken groupToken) throws DefaultException;
 
-    SocialNetworkResultDTO setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName)
+    SocialNetworkDataDTO setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName)
             throws DefaultException;
 
-    SocialNetworkResultDTO setCollabAsAdmin(String hash, StateToken groupToken, String groupToSetAdminShortName)
+    SocialNetworkDataDTO setCollabAsAdmin(String hash, StateToken groupToken, String groupToSetAdminShortName)
             throws DefaultException;
 
-    SocialNetworkResultDTO unJoinGroup(String hash, StateToken groupToken) throws DefaultException;
+    SocialNetworkDataDTO unJoinGroup(String hash, StateToken groupToken) throws DefaultException;
 }

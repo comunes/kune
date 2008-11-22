@@ -27,12 +27,9 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
     private List<String> enabledTools;
     private GroupDTO group;
-    private SocialNetworkDTO groupMembers;
-    private AccessRightsDTO groupRights;
-    private ParticipationDataDTO participation;
-    private UserBuddiesDataDTO userBuddies;
     private StateToken stateToken;
     private String title;
+    private SocialNetworkDataDTO socialNetworkData;
 
     public StateAbstractDTO() {
     }
@@ -46,15 +43,19 @@ public abstract class StateAbstractDTO implements IsSerializable {
     }
 
     public SocialNetworkDTO getGroupMembers() {
-        return groupMembers;
+        return socialNetworkData.getGroupMembers();
     }
 
     public AccessRightsDTO getGroupRights() {
-        return groupRights;
+        return socialNetworkData.getGroupRights();
     }
 
     public ParticipationDataDTO getParticipation() {
-        return participation;
+        return socialNetworkData.getUserParticipation();
+    }
+
+    public SocialNetworkDataDTO getSocialNetworkData() {
+        return socialNetworkData;
     }
 
     public StateToken getStateToken() {
@@ -66,7 +67,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
     }
 
     public UserBuddiesDataDTO getUserBuddies() {
-        return userBuddies;
+        return socialNetworkData.getUserBuddies();
     }
 
     public void setEnabledTools(List<String> enabledTools) {
@@ -77,16 +78,8 @@ public abstract class StateAbstractDTO implements IsSerializable {
         this.group = group;
     }
 
-    public void setGroupMembers(SocialNetworkDTO groupMembers) {
-        this.groupMembers = groupMembers;
-    }
-
-    public void setGroupRights(AccessRightsDTO groupRights) {
-        this.groupRights = groupRights;
-    }
-
-    public void setParticipation(ParticipationDataDTO participation) {
-        this.participation = participation;
+    public void setSocialNetworkData(SocialNetworkDataDTO socialNetworkData) {
+        this.socialNetworkData = socialNetworkData;
     }
 
     public void setStateToken(StateToken stateToken) {
@@ -95,10 +88,6 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setUserBuddies(UserBuddiesDataDTO userBuddies) {
-        this.userBuddies = userBuddies;
     }
 
     @Override

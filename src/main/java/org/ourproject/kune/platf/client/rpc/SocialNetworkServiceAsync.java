@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.rpc;
 
-import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -27,32 +27,32 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface SocialNetworkServiceAsync {
 
     void acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName,
-            AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkDataDTO> callback);
 
     void addAdminMember(String hash, StateToken groupToken, String groupToAddShortName,
-            AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkDataDTO> callback);
 
     void addCollabMember(String hash, StateToken groupToken, String groupToAddShortName,
-            AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkDataDTO> callback);
 
     void addViewerMember(String hash, StateToken groupToken, String groupToAddShortName,
-            AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkDataDTO> callback);
 
     void deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName,
-            AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkDataDTO> callback);
 
     void denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName,
-            AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void getSocialNetwork(String hash, StateToken groupToken, AsyncCallback<SocialNetworkResultDTO> callback);
+    void getSocialNetwork(String hash, StateToken groupToken, AsyncCallback<SocialNetworkDataDTO> callback);
 
     void requestJoinGroup(String hash, StateToken groupToken, AsyncCallback<?> callback);
 
     void setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName,
-            AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkDataDTO> callback);
 
     void setCollabAsAdmin(String hash, StateToken groupToken, String groupToSetAdminShortName,
-            AsyncCallback<SocialNetworkResultDTO> callback);
+            AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void unJoinGroup(String hash, StateToken groupToken, AsyncCallback<SocialNetworkResultDTO> callback);
+    void unJoinGroup(String hash, StateToken groupToken, AsyncCallback<SocialNetworkDataDTO> callback);
 }
