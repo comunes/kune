@@ -194,7 +194,6 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
 
     public void setChangeYourLogoText() {
         getEntityTextLogo().setChangeYourLogo();
-
     }
 
     public void setFullLogo(final StateToken stateToken, final boolean clipped) {

@@ -35,6 +35,15 @@ public class UserBuddiesDataDTO implements IsSerializable {
         otherExternalBuddies = 0;
     }
 
+    public boolean contains(String shortName) {
+        for (UserSimpleDTO buddie : buddies) {
+            if (buddie.getShortName().equals(shortName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<UserSimpleDTO> getBuddies() {
         return buddies;
     }

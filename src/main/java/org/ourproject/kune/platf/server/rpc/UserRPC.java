@@ -21,14 +21,21 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.UUID;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.access.AccessRol;
+import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
+import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.auth.SessionService;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.domain.UserBuddiesVisibility;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -102,6 +109,18 @@ public class UserRPC implements RPC, UserService {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         return loadUserInfo(user);
+    }
+
+    @Authenticated(mandatory = true)
+    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setBuddiesVisibility(final String userHash, StateToken groupToken, UserBuddiesVisibilityDTO visibility) {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        if (groupToken.getGroup() != user.getShortName()) {
+            new AccessViolationException();
+        }
+        user.setBuddiesVisibility(UserBuddiesVisibility.valueOf(visibility.toString()));
     };
 
     private UserSession getUserSession() {

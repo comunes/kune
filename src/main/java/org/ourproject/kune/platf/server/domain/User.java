@@ -30,6 +30,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -40,6 +41,7 @@ import org.hibernate.validator.Email;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Pattern;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
@@ -100,6 +102,8 @@ public class User implements HasId {
     @OneToOne(cascade = CascadeType.ALL)
     private final CustomProperties customProperties;
 
+    private UserBuddiesVisibility buddiesVisibility;
+
     public User() {
         this(null, null, null, null, null, null, null);
     }
@@ -115,11 +119,16 @@ public class User implements HasId {
         this.country = country;
         this.timezone = timezone;
         customProperties = new CustomProperties();
+        buddiesVisibility = UserBuddiesVisibility.anyone;
     }
 
     @Finder(query = "from User")
     public List<User> getAll() {
         return null;
+    }
+
+    public UserBuddiesVisibility getBuddiesVisibility() {
+        return buddiesVisibility;
     }
 
     @Finder(query = "from User where email = :email")
@@ -144,6 +153,10 @@ public class User implements HasId {
         return email;
     }
 
+    public boolean getHasLogo() {
+        return hasLogo();
+    }
+
     public Long getId() {
         return id;
     }
@@ -164,12 +177,26 @@ public class User implements HasId {
         return shortName;
     }
 
+    @Transient
+    public StateToken getStateToken() {
+        return userGroup.getStateToken();
+    }
+
     public TimeZone getTimezone() {
         return timezone;
     }
 
     public Group getUserGroup() {
         return userGroup;
+    }
+
+    @Transient
+    public boolean hasLogo() {
+        return getUserGroup().hasLogo();
+    }
+
+    public void setBuddiesVisibility(UserBuddiesVisibility buddiesVisibility) {
+        this.buddiesVisibility = buddiesVisibility;
     }
 
     public void setCountry(final I18nCountry country) {

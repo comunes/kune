@@ -28,6 +28,8 @@ public class UserSimpleDTO implements IsSerializable {
     private I18nLanguageDTO language;
     private I18nCountryDTO country;
     private TimeZoneDTO timezone;
+    private boolean hasLogo;
+    private StateToken stateToken;
 
     public UserSimpleDTO() {
         this(null, null, null, null, null);
@@ -72,6 +74,10 @@ public class UserSimpleDTO implements IsSerializable {
         return country;
     }
 
+    public boolean getHasLogo() {
+        return hasLogo;
+    }
+
     public Long getId() {
         return id;
     }
@@ -88,6 +94,10 @@ public class UserSimpleDTO implements IsSerializable {
         return shortName;
     }
 
+    public StateToken getStateToken() {
+        return stateToken;
+    }
+
     public TimeZoneDTO getTimezone() {
         return timezone;
     }
@@ -101,8 +111,16 @@ public class UserSimpleDTO implements IsSerializable {
         return result;
     }
 
+    public boolean hasLogo() {
+        return hasLogo;
+    }
+
     public void setCountry(final I18nCountryDTO country) {
         this.country = country;
+    }
+
+    public void setHasLogo(boolean hasLogo) {
+        this.hasLogo = hasLogo;
     }
 
     public void setId(final Long id) {
@@ -121,10 +139,15 @@ public class UserSimpleDTO implements IsSerializable {
         this.shortName = shortName;
     }
 
+    public void setStateToken(StateToken stateToken) {
+        this.stateToken = stateToken;
+    }
+
     public void setTimezone(final TimeZoneDTO timezone) {
         this.timezone = timezone;
     }
 
+    @Override
     public String toString() {
         return "UserSimpleDTO(" + shortName + ")";
     }

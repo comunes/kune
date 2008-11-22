@@ -335,9 +335,9 @@ public class KuneWorkspaceModule extends AbstractModule {
             public GroupMembersSummary create() {
                 final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(
                         $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
-                        $(Session.class), $$(SocialNetworkServiceAsync.class), $$(GroupLiveSearcher.class),
-                        $(WsThemePresenter.class), $$(ChatEngine.class), $(GroupActionRegistry.class),
-                        $(ActionGroupSummaryToolbar.class));
+                        $(Session.class), $$(SocialNetworkServiceAsync.class), $$(GroupServiceAsync.class),
+                        $$(GroupLiveSearcher.class), $(WsThemePresenter.class), $$(ChatEngine.class),
+                        $(GroupActionRegistry.class), $(ActionGroupSummaryToolbar.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $(
                                 ActionGroupSummaryToolbar.class).getView());
@@ -362,8 +362,9 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public BuddiesSummary create() {
                 final BuddiesSummaryPresenter presenter = new BuddiesSummaryPresenter($(StateManager.class),
-                        $(Session.class), $(UserActionRegistry.class), $(I18nTranslationService.class),
-                        $$(ChatEngine.class), $(ActionBuddiesSummaryToolbar.class));
+                        $(Session.class), $$(UserServiceAsync.class), $(UserActionRegistry.class),
+                        $(I18nTranslationService.class), $$(ChatEngine.class), $(ActionBuddiesSummaryToolbar.class),
+                        $$(FileDownloadUtils.class));
                 final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class), $(ActionManager.class),
                         $(ActionBuddiesSummaryToolbar.class).getView());

@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.site.rpc;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
@@ -36,4 +38,7 @@ public interface UserService extends RemoteService {
     void onlyCheckSession(String userHash) throws DefaultException;
 
     UserInfoDTO reloadUserInfo(String userHash) throws DefaultException;
+
+    void setBuddiesVisibility(String userHash, StateToken groupToken, UserBuddiesVisibilityDTO visibility);
+
 }

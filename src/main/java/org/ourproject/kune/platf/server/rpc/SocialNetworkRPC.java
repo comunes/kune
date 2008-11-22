@@ -25,8 +25,10 @@ import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
+import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.UserSession;
@@ -37,7 +39,9 @@ import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.domain.UserBuddiesVisibility;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
@@ -210,11 +214,47 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
     private SocialNetworkResultDTO generateResponse(final User userLogged, final Group group) {
         AccessRights groupRights = accessRightsService.get(userLogged, group.getSocialNetwork().getAccessLists());
         if (group.getGroupType().equals(GroupType.PERSONAL)) {
-            return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group),
-                    getUserBuddies(group), mapper.map(groupRights, AccessRightsDTO.class));
+            UserBuddiesDataDTO userBuddies = getUserBuddies(group);
+            SocialNetworkResultDTO result = new SocialNetworkResultDTO(getGroupMembers(userLogged, group),
+                    getParticipation(userLogged, group), userBuddies, mapper.map(groupRights, AccessRightsDTO.class));
+            UserBuddiesVisibility buddiesVisibility = userLogged.getBuddiesVisibility();
+            switch (buddiesVisibility) {
+            case anyone:
+                break;
+            case onlyyou:
+                if (userLogged == null || !userLogged.getUserGroup().equals(group)) {
+                    result.setUserBuddies(null);
+                }
+                break;
+            case yourbuddies:
+                if (!userBuddies.contains(userLogged.getShortName())) {
+                    result.setUserBuddies(null);
+                }
+                break;
+            }
+            result.setUserBuddiesVisibilityDTO(mapper.map(buddiesVisibility, UserBuddiesVisibilityDTO.class));
+            return result;
         } else {
-            return new SocialNetworkResultDTO(getGroupMembers(userLogged, group), getParticipation(userLogged, group),
-                    UserBuddiesDataDTO.NO_BUDDIES, mapper.map(groupRights, AccessRightsDTO.class));
+            SocialNetworkResultDTO result = new SocialNetworkResultDTO(getGroupMembers(userLogged, group),
+                    getParticipation(userLogged, group), UserBuddiesDataDTO.NO_BUDDIES, mapper.map(groupRights,
+                            AccessRightsDTO.class));
+            SocialNetworkVisibility visibility = group.getSocialNetwork().getVisibility();
+            switch (visibility) {
+            case anyone:
+                break;
+            case onlyadmins:
+                if (!groupRights.isAdministrable()) {
+                    result.setGroupMembers(null);
+                }
+                break;
+            case onlymembers:
+                if (!groupRights.isEditable()) {
+                    result.setGroupMembers(null);
+                }
+                break;
+            }
+            result.setSocialNetworkVisibilityDTO(mapper.map(visibility, SocialNetworkVisibilityDTO.class));
+            return result;
         }
     }
 

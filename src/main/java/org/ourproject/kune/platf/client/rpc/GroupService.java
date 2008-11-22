@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 
@@ -35,5 +36,7 @@ public interface GroupService extends RemoteService {
     GroupDTO getGroup(String userHash, StateToken token);
 
     GroupDTO setGroupFullLogo(String userHash, StateToken token);
+
+    void setSocialNetworkVisibility(String userHash, StateToken groupToken, SocialNetworkVisibilityDTO visibility);
 
 }

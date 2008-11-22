@@ -64,34 +64,6 @@ public class AbstractSearcherPanel {
         grid.setStripeRows(true);
     }
 
-    // protected void createPagingToolbar(final Store store, final GridPanel
-    // grid) {
-    // final PagingToolbar pag = new PagingToolbar(store);
-    // pag.setPageSize(PAGINATION_SIZE);
-    // pag.setDisplayInfo(true);
-    // pag.setDisplayMsg(i18n.tWithNT("Displaying results {0} - {1} of
-    // {2}",
-    // "Respect {} values in translations, "
-    // + "these will produce: 'Displaying results 1 - 25 of 95465' for
-    // instance"));
-    // pag.setEmptyMsg(i18n.t("No results to display"));
-    // pag.setAfterPageText(i18n.tWithNT("of {0}", "Used to show multiple
-    // results: '1 of 30'"));
-    // pag.setBeforePageText(i18n.t("Page"));
-    // pag.setFirstText(i18n.t("First Page"));
-    // pag.setLastText(i18n.t("Last Page"));
-    // pag.setNextText(i18n.t("Next Page"));
-    // pag.setPrevText(i18n.t("Previous Page"));
-    // pag.setRefreshText(i18n.t("Refresh"));
-    // grid.setBottomToolbar(pag);
-    //
-    // grid.addListener(new PanelListenerAdapter() {
-    // public void onRender(final Component component) {
-    // store.load(0, PAGINATION_SIZE);
-    // }
-    // });
-    // }
-
     protected Store createStore(final FieldDef[] fieldDefs, final String url, final String id) {
         final JsonReader reader = new JsonReader(new RecordDef(fieldDefs));
         reader.setRoot("list");
@@ -102,8 +74,7 @@ public class AbstractSearcherPanel {
     }
 
     protected void query(final Store store, final GridPanel grid, final String query) {
-        final UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query), new UrlParam("start", 0),
-                new UrlParam("limit", PAGINATION_SIZE) };
+        final UrlParam[] newParams = new UrlParam[] { new UrlParam("query", query) };
         store.setBaseParams(newParams);
         store.load(0, PAGINATION_SIZE);
         // see bind/unbind in:

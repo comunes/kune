@@ -34,9 +34,11 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkResultDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
@@ -67,10 +69,12 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     private final StateManager stateManager;
     private final GroupActionRegistry groupActionRegistry;
     private final Provider<GroupLiveSearcher> liveSearcherProvider;
+    private final Provider<GroupServiceAsync> groupServiceProvider;
 
     public GroupMembersSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
             final Provider<SocialNetworkServiceAsync> snServiceProvider,
+            final Provider<GroupServiceAsync> groupServiceProvider,
             final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter,
             final Provider<ChatEngine> chatEngineProvider, final GroupActionRegistry groupActionRegistry,
             final ActionGroupSummaryToolbar toolbar) {
@@ -79,6 +83,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         this.stateManager = stateManager;
         this.session = session;
         this.snServiceProvider = snServiceProvider;
+        this.groupServiceProvider = groupServiceProvider;
         this.liveSearcherProvider = liveSearcherProvider;
         this.groupActionRegistry = groupActionRegistry;
         final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
@@ -165,16 +170,22 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         groupActionRegistry.addAction(unJoin);
 
         groupActionRegistry.addAction(participate);
-        createShowAction(i18n.t("anyone"));
-        createShowAction(i18n.t("only members"));
-        createShowAction(i18n.t("only admins"));
+        createSetMembersVisibilityAction(i18n.t("anyone"), SocialNetworkVisibilityDTO.anyone);
+        createSetMembersVisibilityAction(i18n.t("only members"), SocialNetworkVisibilityDTO.onlymembers);
+        createSetMembersVisibilityAction(i18n.t("only admins"), SocialNetworkVisibilityDTO.onlyadmins);
     }
 
-    private void createShowAction(String textDescription) {
+    private void createSetMembersVisibilityAction(String textDescription, final SocialNetworkVisibilityDTO visibility) {
         ActionToolbarMenuDescriptor<StateToken> showMembers = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
-                        Site.info("In development");
+                        groupServiceProvider.get().setSocialNetworkVisibility(session.getUserHash(),
+                                session.getCurrentState().getGroup().getStateToken(), visibility,
+                                new AsyncCallbackSimple<Object>() {
+                                    public void onSuccess(Object result) {
+                                        Site.info(i18n.t("Members visibility changed"));
+                                    }
+                                });
                     }
                 });
         showMembers.setTextDescription(textDescription);

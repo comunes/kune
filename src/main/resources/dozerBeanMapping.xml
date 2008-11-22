@@ -334,10 +334,16 @@
   </mapping>
 
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.UserSimpleDTO
-    </class-a>
-    <class-b>org.ourproject.kune.platf.server.domain.User</class-b>
+    <class-a>org.ourproject.kune.platf.server.domain.User</class-a>
+    <class-b>org.ourproject.kune.platf.client.dto.UserSimpleDTO</class-b>
+    <field type="one-way">
+      <a>hasLogo</a>
+      <b>hasLogo</b>
+    </field>
+    <field>
+      <a get-method="getStateToken">stateToken</a>
+      <b>stateToken</b>
+    </field>
   </mapping>
 
   <mapping>
@@ -438,6 +444,24 @@
     </class-a>
     <class-b>
       org.ourproject.kune.platf.server.domain.ChatUserParams
+    </class-b>
+  </mapping>
+
+  <mapping>
+    <class-a>
+      org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO
+    </class-a>
+    <class-b>
+      org.ourproject.kune.platf.server.domain.SocialNetworkVisibility
+    </class-b>
+  </mapping>
+
+  <mapping>
+    <class-a>
+      org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO
+    </class-a>
+    <class-b>
+      org.ourproject.kune.platf.server.domain.UserBuddiesVisibility
     </class-b>
   </mapping>
 

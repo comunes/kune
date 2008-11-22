@@ -24,10 +24,12 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class SocialNetworkResultDTO implements IsSerializable {
 
     SocialNetworkDTO groupMembers;
+    SocialNetworkVisibilityDTO socialNetworkVisibilityDTO;
 
     ParticipationDataDTO userParticipation;
 
     UserBuddiesDataDTO userBuddies;
+    UserBuddiesVisibilityDTO userBuddiesVisibilityDTO;
 
     AccessRightsDTO groupRights;
 
@@ -51,8 +53,16 @@ public class SocialNetworkResultDTO implements IsSerializable {
         return groupRights;
     }
 
+    public SocialNetworkVisibilityDTO getSocialNetworkVisibilityDTO() {
+        return socialNetworkVisibilityDTO;
+    }
+
     public UserBuddiesDataDTO getUserBuddies() {
         return userBuddies;
+    }
+
+    public UserBuddiesVisibilityDTO getUserBuddiesVisibilityDTO() {
+        return userBuddiesVisibilityDTO;
     }
 
     public ParticipationDataDTO getUserParticipation() {
@@ -67,8 +77,16 @@ public class SocialNetworkResultDTO implements IsSerializable {
         this.groupRights = groupRights;
     }
 
+    public void setSocialNetworkVisibilityDTO(SocialNetworkVisibilityDTO socialNetworkVisibilityDTO) {
+        this.socialNetworkVisibilityDTO = socialNetworkVisibilityDTO;
+    }
+
     public void setUserBuddies(UserBuddiesDataDTO userBuddies) {
         this.userBuddies = userBuddies;
+    }
+
+    public void setUserBuddiesVisibilityDTO(UserBuddiesVisibilityDTO userBuddiesVisibilityDTO) {
+        this.userBuddiesVisibilityDTO = userBuddiesVisibilityDTO;
     }
 
     public void setUserParticipation(final ParticipationDataDTO userParticipation) {

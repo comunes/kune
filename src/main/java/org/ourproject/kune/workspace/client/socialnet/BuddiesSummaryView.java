@@ -24,7 +24,10 @@ import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 
 public interface BuddiesSummaryView extends View {
 
-    void addBuddie(UserSimpleDTO user, ActionItemCollection<UserSimpleDTO> actionCollection);
+    String NOAVATAR = "";
+    int AVATARSIZE = 32;
+
+    void addBuddie(UserSimpleDTO user, ActionItemCollection<UserSimpleDTO> actionCollection, String avatarUrl);
 
     void clear();
 

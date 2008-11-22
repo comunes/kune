@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.site.rpc;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 
@@ -28,12 +30,15 @@ public interface UserServiceAsync {
 
     void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<UserInfoDTO> asyncCallback);
 
-    void login(String nickOrEmail, String passwd, AsyncCallback<UserInfoDTO> callback);
+    void login(String nickOrEmail, String passwd, AsyncCallback<UserInfoDTO> asyncCallback);
 
-    void logout(String userHash, AsyncCallback<?> callback);
+    void logout(String userHash, AsyncCallback<?> asyncCallback);
 
     void onlyCheckSession(String userHash, AsyncCallback<?> asyncCallback);
 
     void reloadUserInfo(String userHash, AsyncCallback<UserInfoDTO> asyncCallback);
+
+    void setBuddiesVisibility(String userHash, StateToken groupToken, UserBuddiesVisibilityDTO visibility,
+            AsyncCallback<?> asyncCallback);
 
 }

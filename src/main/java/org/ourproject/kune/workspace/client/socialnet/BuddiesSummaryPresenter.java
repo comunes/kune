@@ -34,11 +34,15 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
+import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
@@ -52,16 +56,21 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
     private final Provider<ChatEngine> chatEngineProvider;
     private final Session session;
     private final ActionBuddiesSummaryToolbar toolbar;
+    private final Provider<UserServiceAsync> userServiceAsync;
+    private final Provider<FileDownloadUtils> fileDownUtilsProvider;
 
-    public BuddiesSummaryPresenter(StateManager stateManager, final Session session, UserActionRegistry actionRegistry,
+    public BuddiesSummaryPresenter(StateManager stateManager, final Session session,
+            Provider<UserServiceAsync> userServiceAsync, UserActionRegistry actionRegistry,
             I18nTranslationService i18n, final Provider<ChatEngine> chatEngineProvider,
-            final ActionBuddiesSummaryToolbar toolbar) {
+            final ActionBuddiesSummaryToolbar toolbar, Provider<FileDownloadUtils> fileDownUtilsProvider) {
         this.stateManager = stateManager;
         this.session = session;
+        this.userServiceAsync = userServiceAsync;
         this.actionRegistry = actionRegistry;
         this.i18n = i18n;
         this.chatEngineProvider = chatEngineProvider;
         this.toolbar = toolbar;
+        this.fileDownUtilsProvider = fileDownUtilsProvider;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(StateAbstractDTO state) {
                 setState(state);
@@ -90,8 +99,10 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
             if (userBuddies != UserBuddiesDataDTO.NO_BUDDIES) {
                 List<UserSimpleDTO> buddies = userBuddies.getBuddies();
                 for (UserSimpleDTO user : buddies) {
+                    String avatarUrl = user.hasLogo() ? fileDownUtilsProvider.get().getLogoImageUrl(
+                            user.getStateToken()) : BuddiesSummaryView.NOAVATAR;
                     view.addBuddie(user, actionRegistry.getCurrentActions(user, session.isLogged(),
-                            new AccessRightsDTO(true, true, true), false));
+                            new AccessRightsDTO(true, true, true), false), avatarUrl);
                 }
                 boolean hasLocalBuddies = buddies.size() > 0;
                 int numExtBuddies = userBuddies.getOtherExternalBuddies();
@@ -124,11 +135,17 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         }
     }
 
-    private void createShowAction(String textDescription) {
+    private void createSetBuddiesVisibilityAction(String textDescription, final UserBuddiesVisibilityDTO visibility) {
         ActionToolbarMenuDescriptor<UserSimpleDTO> showBuddies = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
                     public void onEvent(UserSimpleDTO parameter) {
-                        Site.info("In development");
+                        userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
+                                session.getCurrentState().getGroup().getStateToken(), visibility,
+                                new AsyncCallbackSimple<Object>() {
+                                    public void onSuccess(Object result) {
+                                        Site.info(i18n.t("Buddies visibility changed"));
+                                    }
+                                });
                     }
                 });
         showBuddies.setTextDescription(textDescription);
@@ -165,9 +182,9 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
         go.setIconUrl("images/group-home.gif");
         actionRegistry.addAction(go);
 
-        createShowAction(i18n.t("anyone"));
-        createShowAction(i18n.t("only your buddies"));
-        createShowAction(i18n.t("only you"));
+        createSetBuddiesVisibilityAction(i18n.t("anyone"), UserBuddiesVisibilityDTO.anyone);
+        createSetBuddiesVisibilityAction(i18n.t("only your buddies"), UserBuddiesVisibilityDTO.yourbuddies);
+        createSetBuddiesVisibilityAction(i18n.t("only you"), UserBuddiesVisibilityDTO.onlyyou);
     }
 
 }

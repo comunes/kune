@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.server.rpc;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.rpc.GroupService;
@@ -32,6 +33,7 @@ import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContentUtils;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
+import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -67,7 +69,7 @@ public class GroupRPC implements RPC, GroupService {
         final User user = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         groupManager.changeWsTheme(user, group, theme);
-    }
+    };
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
@@ -98,6 +100,15 @@ public class GroupRPC implements RPC, GroupService {
         final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
         groupManager.setGroupLogo(group, content);
         return mapper.map(group, GroupDTO.class);
+    }
+
+    @Authenticated(mandatory = true)
+    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setSocialNetworkVisibility(final String userHash, StateToken token,
+            SocialNetworkVisibilityDTO visibility) {
+        final Group group = groupManager.findByShortName(token.getGroup());
+        group.getSocialNetwork().setVisibility(SocialNetworkVisibility.valueOf(visibility.toString()));
     }
 
     private UserSession getUserSession() {

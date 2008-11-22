@@ -246,30 +246,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
                 180, store, columnModel);
         createPagingToolbar(store, grid);
 
-        // final PagingToolbar pag = new PagingToolbar(store);
-        // pag.setPageSize(PAGINATION_SIZE);
-        // pag.setDisplayInfo(true);
-        // pag.setDisplayMsg(i18n.tWithNT("Displaying results {0} - {1} of
-        // {2}",
-        // "Respect {} values in translations, "
-        // + "these will produce: 'Displaying results 1 - 25 of 95465' for
-        // instance"));
-        // pag.setEmptyMsg(i18n.t("No results to display"));
-        // pag.setAfterPageText(i18n.tWithNT("of {0}", "Used to show
-        // multiple results: '1 of 30'"));
-        // pag.setBeforePageText(i18n.t("Page"));
-        // pag.setFirstText(i18n.t("First Page"));
-        // pag.setLastText(i18n.t("Last Page"));
-        // pag.setNextText(i18n.t("Next Page"));
-        // pag.setPrevText(i18n.t("Previous Page"));
-        // pag.setRefreshText(i18n.t("Refresh"));
-        // grid.setBottomToolbar(pag);
-        // grid.setLoadMask(true);
-        // grid.setLoadMask(i18n.t("Loading"));
         grid.setClicksToEdit(1);
-        // grid.setStripeRows(true);
-        // grid.setFrame(true);
-        // grid.setSelectionModel(new RowSelectionModel());
 
         grid.addEditorGridListener(new EditorGridListenerAdapter() {
             @Override

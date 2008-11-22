@@ -687,5 +687,46 @@
          id="path2503"
          sodipodi:nodetypes="csssc" />
     </g>
+    <g
+       id="g2476"
+       transform="translate(12.331755,43.161141)">
+      <rect
+         transform="scale(-1,-1)"
+         y="-21.428276"
+         x="-645.06616"
+         height="55.132187"
+         width="45.132187"
+         id="rect2474"
+         style="opacity:0.8;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#e6e6e6;stroke-width:0.86781228;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/persons/person2-32.png"
+         transform="matrix(0.3764923,0,0,0.3764923,460.38508,-48.779868)"
+         id="g2466">
+        <path
+           inkscape:export-ydpi="90"
+           inkscape:export-xdpi="90"
+           inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
+           sodipodi:type="arc"
+           style="opacity:1;fill:#eeaaff;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:1.63299322;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="path2468"
+           sodipodi:cx="-55.5"
+           sodipodi:cy="242.36218"
+           sodipodi:rx="12.5"
+           sodipodi:ry="12"
+           d="M -43,242.36218 A 12.5,12 0 1 1 -68,242.36218 A 12.5,12 0 1 1 -43,242.36218 z"
+           transform="matrix(3.1844753,0,0,3.3202165,608.65933,-692.76155)" />
+        <path
+           id="path2470"
+           d="M 431.92095,72.158845 C 421.73175,72.158845 411.49371,76.003865 403.72508,83.779605 C 388.30176,99.217125 388.19614,124.14781 403.39336,139.72526 C 401.23073,130.24809 403.98472,119.87609 411.35455,112.49948 C 422.75019,101.09333 441.09171,101.09333 452.48735,112.49948 C 459.85713,119.87609 462.61117,130.24809 460.44854,139.72526 C 475.64581,124.14776 475.54025,99.217125 460.11683,83.779605 C 452.34825,76.003865 442.11016,72.158845 431.92095,72.158845 z"
+           style="fill:#dbdee3;fill-opacity:1;fill-rule:nonzero;stroke:#954f2c;stroke-width:5.30990267;stroke-linecap:butt;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+        <path
+           style="fill:#ff9955;fill-opacity:1;fill-rule:nonzero;stroke:#784421;stroke-width:5.30990171;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 454.05116,106.46307 C 449.38897,113.33396 426.14686,121.7791 418.78848,114.45323 C 411.51844,107.21527 411.5378,95.415805 418.78848,88.158448 C 426.03916,80.901092 437.80837,80.901094 445.05905,88.158453 C 452.30973,95.415815 449.3126,98.760105 454.05116,106.46307 z"
+           id="path2472"
+           sodipodi:nodetypes="csssc" />
+      </g>
+    </g>
   </g>
 </svg>

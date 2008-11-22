@@ -39,9 +39,12 @@ public class SocialNetwork {
     @OneToOne(cascade = CascadeType.ALL)
     GroupList pendingCollaborators;
 
+    SocialNetworkVisibility visibility;
+
     public SocialNetwork() {
         accessLists = new AccessLists();
         pendingCollaborators = new GroupList();
+        visibility = SocialNetworkVisibility.anyone;
     }
 
     public void addAdmin(final Group group) {
@@ -70,6 +73,10 @@ public class SocialNetwork {
 
     public GroupList getPendingCollaborators() {
         return pendingCollaborators;
+    }
+
+    public SocialNetworkVisibility getVisibility() {
+        return visibility;
     }
 
     public boolean isAdmin(final Group group) {
@@ -116,6 +123,11 @@ public class SocialNetwork {
         this.pendingCollaborators = pendingCollaborators;
     }
 
+    public void setVisibility(SocialNetworkVisibility visibility) {
+        this.visibility = visibility;
+    }
+
+    @Override
     public String toString() {
         return "SocialNetwork[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators + "]";
     }
