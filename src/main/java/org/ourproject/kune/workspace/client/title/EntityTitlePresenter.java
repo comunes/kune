@@ -88,17 +88,22 @@ public class EntityTitlePresenter implements EntityTitle {
     }
 
     public void setContentDate(final Date publishedOn) {
-        String dateFormat = session.getCurrentLanguage().getDateFormat();
-        final DateTimeFormat fmt;
-        if (dateFormat == null) {
-            fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
+        if (publishedOn != null) {
+            String dateFormat = session.getCurrentLanguage().getDateFormat();
+            final DateTimeFormat fmt;
+            if (dateFormat == null) {
+                fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
+            } else {
+                String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(publishedOn);
+                String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
+                dateFormat = dateFormat.replaceFirst("MMM", "'" + i18n.t(monthToTranslate) + "'");
+                fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
+            }
+            view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
+            setContentDateVisible(true);
         } else {
-            String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(publishedOn);
-            String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
-            dateFormat = dateFormat.replaceFirst("MMM", "'" + i18n.t(monthToTranslate) + "'");
-            fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
+            setContentDateVisible(false);
         }
-        view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
     }
 
     /**
@@ -164,12 +169,7 @@ public class EntityTitlePresenter implements EntityTitle {
         setContentTitle(state.getTitle(), state.getContentRights().isEditable()
                 && renamableContentRegistry.contains(state.getTypeId()));
         Date publishedOn = state.getPublishedOn();
-        if (publishedOn != null) {
-            setContentDateVisible(true);
-            setContentDate(publishedOn);
-        } else {
-            setContentDateVisible(false);
-        }
+        setContentDate(publishedOn);
         final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
         setIcon(contentTypeIcon);
         view.setContentTitleVisible(true);

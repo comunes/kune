@@ -81,6 +81,7 @@ public class TagsSummaryPresenter implements TagsSummary {
 
     public void setGroupTags(final TagCloudResultDTO tagCloud) {
         setCloud(tagCloud);
+        view.expand();
     }
 
     void setState(final StateContainerDTO state) {

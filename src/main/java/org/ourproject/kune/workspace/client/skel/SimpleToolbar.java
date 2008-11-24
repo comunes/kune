@@ -72,6 +72,10 @@ public class SimpleToolbar extends Composite {
         childPanel.clear();
     }
 
+    public void setCellWidth(Widget widget, String width) {
+        childPanel.setCellWidth(widget, width);
+    }
+
     public void setCleanStyle() {
         setStyleName("x-toolbar");
         addStyleName("x-panel");

@@ -35,6 +35,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.DateField;
@@ -66,9 +67,8 @@ public class ContextPropEditorPanel extends ScrollPanel implements ContextPropEd
     private ContextPropertyPanel aclComponent;
     private AccessListsPanel accessListsPanel;
 
-    public ContextPropEditorPanel(final ContextPropEditorPresenter presenter,
-            final I18nTranslationService i18n, WorkspaceSkeleton ws, Provider<LanguageSelector> langSelectorProv,
-            Images images) {
+    public ContextPropEditorPanel(final ContextPropEditorPresenter presenter, final I18nTranslationService i18n,
+            WorkspaceSkeleton ws, Provider<LanguageSelector> langSelectorProv, Images images) {
         this.i18n = i18n;
         this.ws = ws;
         this.presenter = presenter;
@@ -243,19 +243,24 @@ public class ContextPropEditorPanel extends ScrollPanel implements ContextPropEd
         tagsField = new TextArea();
         tagsField.setWidth(FORMS_WIDTH - 10);
         tagsField.setHeight("3em");
+        tagsField.setEnterIsSpecial(true);
         tagsField.addListener(new FieldListenerAdapter() {
             @Override
             public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 presenter.setTags((String) newVal);
             }
         });
+        tagsField.addListener(new FieldListenerAdapter() {
+            @Override
+            public void onSpecialKey(final Field field, final EventObject e) {
+                if (e.getKey() == 13) {
+                    presenter.setTags(tagsField.getRawValue());
+                    e.stopEvent();
+                }
+            }
+        });
         form.add(tagsField);
         return new ContextPropertyPanel(i18n.t("Tags"), i18n.t("Keywords or terms associated with this work"), true,
                 TAGS_PROP, form);
     }
-
-    // private void removeComponent(final String header) {
-    // options.removeStackItem(header);
-    // }
-
 }

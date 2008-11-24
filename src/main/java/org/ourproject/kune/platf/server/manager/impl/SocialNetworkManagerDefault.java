@@ -178,7 +178,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
                 }
                 break;
             case yourbuddies:
-                if (!userBuddies.contains(userLogged.getShortName())) {
+                if (userLogged != userGroup && !userBuddies.contains(userLogged.getShortName())) {
                     socialNetData.setIsBuddiesVisible(false);
                     socialNetData.setUserBuddies(UserBuddiesData.EMPTY);
                 }

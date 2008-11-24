@@ -32,19 +32,21 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class SiteSearchPanel implements SiteSearchView {
-    private static final String SEARCH_TEXT_WIDTH_SMALL = "120";
-    private static final String SEARCH_TEXT_WIDTH_BIG = "180";
-    private static final String SITE_SEARCH_BUTTON = "kune-ssp-bt";
-    private static final String SITE_SEARCH_TEXTBOX = "kune-ssp-tb";
+    private static final int SEARCH_TEXT_HEIGHT = 15;
+    private static final int SEARCH_TEXT_WIDTH_SMALL = 120;
+    private static final int SEARCH_TEXT_WIDTH_BIG = 180;
+    public static final String SITE_SEARCH_BUTTON = "kune-ssp-searchbt";
+    public static final String SITE_SEARCH_TEXTBOX = "kune-ssp-tbox";
 
     private final PushButton searchButton;
     private final TextBox searchTextBox;
     private final I18nUITranslationService i18n;
+    private final SimpleToolbar siteBar;
 
     public SiteSearchPanel(final SiteSearchPresenter presenter, final WorkspaceSkeleton ws,
             final I18nUITranslationService i18n, Images img) {
         this.i18n = i18n;
-        final SimpleToolbar siteBar = ws.getSiteBar();
+        siteBar = ws.getSiteBar();
         siteBar.addSpacer();
         siteBar.addSpacer();
         searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
@@ -98,6 +100,10 @@ public class SiteSearchPanel implements SiteSearchView {
         searchTextBox.setText("");
     }
 
+    public void selectSearchText() {
+        searchTextBox.selectAll();
+    }
+
     public void setDefaultTextSearch() {
         searchTextBox.setText(i18n.t("Search"));
     }
@@ -107,10 +113,10 @@ public class SiteSearchPanel implements SiteSearchView {
     }
 
     public void setTextSearchBig() {
-        searchTextBox.setWidth(SEARCH_TEXT_WIDTH_BIG);
+        searchTextBox.setPixelSize(SEARCH_TEXT_WIDTH_BIG, 15);
     }
 
     public void setTextSearchSmall() {
-        searchTextBox.setWidth(SEARCH_TEXT_WIDTH_SMALL);
+        searchTextBox.setPixelSize(SEARCH_TEXT_WIDTH_SMALL, SEARCH_TEXT_HEIGHT);
     }
 }

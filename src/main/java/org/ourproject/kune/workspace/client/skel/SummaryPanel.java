@@ -53,7 +53,6 @@ public class SummaryPanel extends Panel {
 
     public void addInSummary() {
         ws.addInSummary(this);
-        // this.expand();
         doLayoutIfNeeded();
     }
 
@@ -62,6 +61,11 @@ public class SummaryPanel extends Panel {
             super.doLayout();
             ws.refreshSummary();
         }
+    }
+
+    @Override
+    public void expand() {
+        super.expand();
     }
 
     @Override

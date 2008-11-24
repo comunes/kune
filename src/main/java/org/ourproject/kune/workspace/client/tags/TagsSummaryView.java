@@ -28,6 +28,8 @@ public interface TagsSummaryView extends View {
 
     void clear();
 
+    void expand();
+
     void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
     void setVisible(boolean visible);

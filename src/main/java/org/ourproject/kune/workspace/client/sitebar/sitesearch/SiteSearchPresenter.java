@@ -34,6 +34,7 @@ public class SiteSearchPresenter implements SiteSearch {
 
     public void doSearch(final String termToSearch) {
         provider.get().doSearch(termToSearch);
+        view.setTextSearchSmall();
     }
 
     public View getView() {
@@ -46,7 +47,7 @@ public class SiteSearchPresenter implements SiteSearch {
 
     public void onSearchFocus() {
         view.setTextSearchBig();
-        view.clearSearchText();
+        view.selectSearchText();
     }
 
     public void onSearchLostFocus(final String search) {
