@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
 
@@ -77,6 +78,7 @@ public class ToolSelectorPresenter implements ToolSelector {
     }
 
     void onToolChanged(final String oldTool, final String newTool) {
+        Log.debug("Registered tools: " + tools.keySet().toString());
         if (!oldTool.equals("")) {
             tools.get(oldTool).setSelected(false);
         }

@@ -105,6 +105,53 @@ public abstract class AbstractFoldableContentActions {
     protected void createActions() {
     }
 
+    protected ActionToolbarMenuAndItemDescriptor<StateToken> createContainerAction(final String contentTypeId,
+            final String iconUrl, final String textDescription, final String parentMenuTitle,
+            final String parentMenuSubtitle, final String defaultName) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder;
+        addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
+                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken stateToken) {
+                        Site.showProgressProcessing();
+                        contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
+                                contentTypeId, new AsyncCallbackSimple<StateContainerDTO>() {
+                                    public void onSuccess(final StateContainerDTO state) {
+                                        contextNavigator.setEditOnNextStateChange(true);
+                                        stateManager.setRetrievedState(state);
+                                    }
+                                });
+                    }
+                });
+        addFolder.setTextDescription(textDescription);
+        addFolder.setParentMenuTitle(parentMenuTitle);
+        addFolder.setParentSubMenuTitle(parentMenuSubtitle);
+        addFolder.setIconUrl(iconUrl);
+        return addFolder;
+    }
+
+    protected ActionToolbarMenuAndItemDescriptor<StateToken> createContentAction(String iconUrl,
+            final String description, final String parentMenuTitle, final String typeId) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        Site.showProgressProcessing();
+                        contentServiceProvider.get().addContent(session.getUserHash(),
+                                session.getCurrentState().getStateToken(), description, typeId,
+                                new AsyncCallbackSimple<StateContentDTO>() {
+                                    public void onSuccess(final StateContentDTO state) {
+                                        contextNavigator.setEditOnNextStateChange(true);
+                                        stateManager.setRetrievedState(state);
+                                    }
+                                });
+                    }
+                });
+        addDoc.setTextDescription(description);
+        addDoc.setParentMenuTitle(parentMenuTitle);
+        addDoc.setParentSubMenuTitle(i18n.t("New"));
+        addDoc.setIconUrl(iconUrl);
+        return addDoc;
+    }
+
     protected ActionToolbarMenuAndItemDescriptor<StateToken> createContentRenameAction(String parentMenuTitle,
             String textDescription) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtn = new ActionToolbarMenuAndItemDescriptor<StateToken>(
@@ -160,53 +207,6 @@ public abstract class AbstractFoldableContentActions {
             }
         });
         return delContent;
-    }
-
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createDocAction(String iconUrl, final String description,
-            final String typeId) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        Site.showProgressProcessing();
-                        contentServiceProvider.get().addContent(session.getUserHash(),
-                                session.getCurrentState().getStateToken(), description, typeId,
-                                new AsyncCallbackSimple<StateContentDTO>() {
-                                    public void onSuccess(final StateContentDTO state) {
-                                        contextNavigator.setEditOnNextStateChange(true);
-                                        stateManager.setRetrievedState(state);
-                                    }
-                                });
-                    }
-                });
-        addDoc.setTextDescription(description);
-        addDoc.setParentMenuTitle(i18n.t("Folder"));
-        addDoc.setParentSubMenuTitle(i18n.t("New"));
-        addDoc.setIconUrl(iconUrl);
-        return addDoc;
-    }
-
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createFolderAction(final String contentTypeId,
-            final String iconUrl, final String textDescription, final String parentMenuTitle,
-            final String parentMenuSubtitle, final String defaultName) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder;
-        addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
-                ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken stateToken) {
-                        Site.showProgressProcessing();
-                        contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
-                                contentTypeId, new AsyncCallbackSimple<StateContainerDTO>() {
-                                    public void onSuccess(final StateContainerDTO state) {
-                                        contextNavigator.setEditOnNextStateChange(true);
-                                        stateManager.setRetrievedState(state);
-                                    }
-                                });
-                    }
-                });
-        addFolder.setTextDescription(textDescription);
-        addFolder.setParentMenuTitle(parentMenuTitle);
-        addFolder.setParentSubMenuTitle(parentMenuSubtitle);
-        addFolder.setIconUrl(iconUrl);
-        return addFolder;
     }
 
     protected void createPostSessionInitActions() {
@@ -266,7 +266,7 @@ public abstract class AbstractFoldableContentActions {
                                     public void onSuccess(final ContentSimpleDTO defContent) {
                                         session.getCurrentState().getGroup().setDefaultContent(defContent);
                                         Site.hideProgress();
-                                        Site.info(i18n.t("Document selected as the group homepage"));
+                                        Site.info(i18n.t("Content selected as the group homepage"));
                                     }
                                 });
                     }
@@ -284,7 +284,7 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected ActionToolbarMenuAndItemDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
-            final String textDescription, final ContentStatusDTO status) {
+            final String textDescription, String parentMenuTitle, final ContentStatusDTO status) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> action = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
@@ -303,7 +303,7 @@ public abstract class AbstractFoldableContentActions {
                     }
                 });
         action.setTextDescription(textDescription);
-        action.setParentMenuTitle(i18n.t("File"));
+        action.setParentMenuTitle(parentMenuTitle);
         action.setParentSubMenuTitle(i18n.t("Change the status"));
         return action;
     }

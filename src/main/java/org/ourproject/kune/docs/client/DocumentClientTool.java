@@ -32,8 +32,6 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
     public static final String TYPE_FOLDER = "docs.folder";
     public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String TYPE_GALLERY = "docs.gallery";
-    public static final String TYPE_BLOG = "docs.blog";
-    public static final String TYPE_POST = "docs.post";
     public static final String TYPE_WIKI = "docs.wiki";
     public static final String TYPE_WIKIPAGE = "docs.wikipage";
     public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
@@ -49,10 +47,9 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
         registerDragableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
         registerDropableTypes(TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY);
         registerPublishModerableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE, TYPE_POST);
-        registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_BLOG, TYPE_GALLERY, TYPE_POST, TYPE_UPLOADEDFILE,
-                TYPE_WIKI, TYPE_WIKIPAGE);
-        registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE, TYPE_POST);
+        registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
+        registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE, TYPE_WIKI, TYPE_WIKIPAGE);
+        registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
         registerTranslatableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
 
         registerIcons();
@@ -64,10 +61,8 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
 
     protected void registerIcons() {
         registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
-        registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
         registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
         registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
-        registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
         registerContentTypeIcon(TYPE_WIKI, "images/nav/wiki.png");
         registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
         registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("image"), "images/nav/picture.png");

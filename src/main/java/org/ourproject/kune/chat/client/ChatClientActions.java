@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.chat.client;
 
+import org.ourproject.kune.blogs.client.BlogClientTool;
 import org.ourproject.kune.chat.client.ctx.room.AddRoom;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
@@ -94,7 +95,7 @@ public class ChatClientActions {
         contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_DOCUMENT);
         contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_GALLERY);
         contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_WIKIPAGE);
-        contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_POST);
+        contentActionRegistry.addAction(chatAbout, BlogClientTool.TYPE_POST);
         contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_UPLOADEDFILE);
 
         contextActionRegistry.addAction(addRoom, ChatClientTool.TYPE_ROOT, ChatClientTool.TYPE_ROOM);

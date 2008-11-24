@@ -78,7 +78,9 @@ public class EntitySummary {
         mainFitPanel.setBottomToolbar(trayBar);
 
         anchorLayoutPanel.add(entityTools, new AnchorLayoutData("100%"));
-        anchorLayoutPanel.add(entitySummary, new AnchorLayoutData("100% -50"));
+        // height: is 25 * number of tools :-( finding a way to make this
+        // automatic
+        anchorLayoutPanel.add(entitySummary, new AnchorLayoutData("100% -75"));
         mainFitPanel.add(anchorLayoutPanel);
     }
 

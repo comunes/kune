@@ -49,8 +49,6 @@ public interface GroupManager extends Manager<Group, Long> {
 
     List<String> findEnabledTools(Long id);
 
-    Group getSiteDefaultGroup();
-
     /**
      * IMPORTANT: returns null if userId is null
      * 
@@ -58,6 +56,8 @@ public interface GroupManager extends Manager<Group, Long> {
      * @return
      */
     Group getGroupOfUserWithId(Long userId);
+
+    Group getSiteDefaultGroup();
 
     void reIndex();
 

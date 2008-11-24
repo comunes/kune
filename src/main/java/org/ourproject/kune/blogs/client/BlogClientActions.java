@@ -16,17 +16,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.docs.client;
+ */package org.ourproject.kune.blogs.client;
 
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_GALLERY;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_ROOT;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
+import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_BLOG;
+import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_POST;
+import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_ROOT;
+import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_UPLOADEDFILE;
 
-import org.ourproject.kune.docs.client.cnt.DocumentViewer;
+import org.ourproject.kune.blogs.client.cnt.BlogViewer;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
@@ -52,8 +49,8 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class DocumentClientActions extends AbstractFoldableContentActions {
-    public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
+public class BlogClientActions extends AbstractFoldableContentActions {
+    public BlogClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager,
             final DeferredCommandWrapper deferredCommandWrapper,
             final Provider<ContentServiceAsync> contentServiceProvider,
@@ -61,7 +58,7 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
             final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
-            final DocumentViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider) {
+            final BlogViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
                 contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
                 contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
@@ -70,24 +67,15 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
     @Override
     protected void createActions() {
-        String parentMenuTitle = i18n.t("File");
-        String parentMenuTitleCtx = i18n.t("Folder");
+        String parentMenuTitle = i18n.t("Post");
+        String parentMenuTitleCtx = i18n.t("Blog");
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder = createContainerAction(TYPE_FOLDER,
-                "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx, i18n.t("New"),
-                i18n.t("New folder"));
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addGallery = createContainerAction(TYPE_GALLERY,
-                "images/nav/gallery_add.png", i18n.t("New gallery"), parentMenuTitleCtx, i18n.t("New"),
-                i18n.t("New gallery"));
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addWiki = createContainerAction(TYPE_WIKI,
-                "images/nav/wiki_add.png", i18n.t("New wiki"), parentMenuTitleCtx, i18n.t("New"), i18n.t("wiki"));
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addBlog = createContainerAction(TYPE_BLOG,
+                "images/nav/blog_add.png", i18n.t("New blog"), parentMenuTitleCtx, i18n.t("New"), i18n.t("New blog"));
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addPost = createContentAction("images/nav/post_add.png",
+                i18n.t("New post"), parentMenuTitleCtx, TYPE_POST);
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = createContentAction("images/nav/page_add.png",
-                i18n.t("New document"), parentMenuTitleCtx, TYPE_DOCUMENT);
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addWikiPage = createContentAction(
-                "images/nav/wikipage_add.png", parentMenuTitleCtx, i18n.t("New wikipage"), TYPE_WIKIPAGE);
-
-        final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = createDelContainerAction("Delete folder",
+        final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = createDelContainerAction("Delete blog",
                 parentMenuTitleCtx);
 
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContent = createDelContentAction(parentMenuTitle,
@@ -125,43 +113,39 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         final ActionToolbarMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("In the dustbin"), parentMenuTitle, ContentStatusDTO.inTheDustbin);
 
-        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_GALLERY, TYPE_WIKI, TYPE_WIKIPAGE,
-                TYPE_UPLOADEDFILE };
-        final String[] containersNoRoot = { TYPE_FOLDER, TYPE_GALLERY, TYPE_WIKI };
-        final String[] containers = { TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY, TYPE_WIKI };
-        final String[] contents = { TYPE_DOCUMENT, TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
-        final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+        final String[] all = { TYPE_ROOT, TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
+        final String[] containersNoRoot = { TYPE_BLOG };
+        final String[] containers = { TYPE_ROOT, TYPE_BLOG };
+        final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
+        final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
 
         contentActionRegistry.addAction(setPublishStatus, contentsModerated);
         contentActionRegistry.addAction(setEditionInProgressStatus, contentsModerated);
         contentActionRegistry.addAction(setRejectStatus, contentsModerated);
         contentActionRegistry.addAction(setSubmittedForPublishStatus, contentsModerated);
         contentActionRegistry.addAction(setInTheDustBinStatus, contentsModerated);
-        contextActionRegistry.addAction(addDoc, TYPE_ROOT, TYPE_FOLDER);
-        contextActionRegistry.addAction(addWikiPage, TYPE_WIKI);
-        contextActionRegistry.addAction(addFolder, TYPE_ROOT, TYPE_FOLDER);
-        contextActionRegistry.addAction(addWiki, TYPE_ROOT);
-        contextActionRegistry.addAction(addGallery, TYPE_ROOT);
+        contextActionRegistry.addAction(addBlog, TYPE_ROOT);
+        contextActionRegistry.addAction(addPost, TYPE_BLOG);
         contextActionRegistry.addAction(go, all);
         contentActionRegistry.addAction(renameCtn, contents);
         contextActionRegistry.addAction(renameCtx, containersNoRoot);
         contextActionRegistry.addAction(refreshCtx, containers);
         contentActionRegistry.addAction(refreshCnt, contents);
-        contextActionRegistry.addAction(uploadFile, TYPE_ROOT, TYPE_FOLDER);
+        contextActionRegistry.addAction(uploadFile, TYPE_BLOG);
         contentActionRegistry.addAction(download, TYPE_UPLOADEDFILE);
         contentActionRegistry.addAction(delContent, contents);
         contextActionRegistry.addAction(delContainer, containersNoRoot);
-        contentActionRegistry.addAction(setAsDefGroupCnt, TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        // contentActionRegistry.addAction(setAsDefGroupCxt,);
+        contentActionRegistry.addAction(setAsDefGroupCnt, TYPE_POST, TYPE_UPLOADEDFILE);
+        // ContentRPC Authorized must permit folders
+        // contentActionRegistry.addAction(setAsDefGroupCxt, TYPE_BLOG);
         contextActionRegistry.addAction(goGroupHome, containers);
         contextActionRegistry.addAction(downloadCtx, TYPE_UPLOADEDFILE);
-        contentActionRegistry.addAction(editContent, TYPE_DOCUMENT, TYPE_WIKIPAGE);
-        contentActionRegistry.addAction(translateContent, TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE,
-                TYPE_WIKI, TYPE_WIKIPAGE);
+        contentActionRegistry.addAction(editContent, TYPE_POST);
+        // contentActionRegistry.addAction(translateContent, );
     }
 
     @Override
     protected void createPostSessionInitActions() {
-        contextActionRegistry.addAction(uploadMedia, TYPE_GALLERY);
+        // contextActionRegistry.addAction(uploadMedia, TYPE_GALLERY);
     }
 }

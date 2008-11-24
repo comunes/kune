@@ -13,6 +13,7 @@
 
     <inherits name='org.ourproject.kune.platf.Kune-Platform' />
     <inherits name='org.ourproject.kune.docs.Kune-Docs' />
+    <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
     <inherits name='org.ourproject.kune.chat.Kune-Chat' />
 
     <!-- gwt-ext -->

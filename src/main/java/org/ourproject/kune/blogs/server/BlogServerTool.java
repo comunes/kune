@@ -17,19 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.server;
+package org.ourproject.kune.blogs.server;
 
 import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
-import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.GroupListMode;
+import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
@@ -39,19 +38,14 @@ import org.ourproject.kune.platf.server.tool.ServerToolTarget;
 
 import com.google.inject.Inject;
 
-public class DocumentServerTool implements ServerTool {
-    public static final String TYPE_ROOT = "docs.root";
-    public static final String TYPE_FOLDER = "docs.folder";
-    public static final String TYPE_DOCUMENT = "docs.doc";
-    public static final String TYPE_GALLERY = "docs.gallery";
-    public static final String TYPE_BLOG = "docs.blog";
-    public static final String TYPE_POST = "docs.post";
-    public static final String TYPE_WIKI = "docs.wiki";
-    public static final String TYPE_WIKIPAGE = "docs.wikipage";
-    public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
+public class BlogServerTool implements ServerTool {
+    public static final String TYPE_ROOT = "blogs.root";
+    public static final String TYPE_BLOG = "blogs.blog";
+    public static final String TYPE_POST = "blogs.post";
+    public static final String TYPE_UPLOADEDFILE = "blogs.uploaded";
 
-    public static final String NAME = "docs";
-    public static final String ROOT_NAME = "documents";
+    public static final String NAME = "blogs";
+    public static final String ROOT_NAME = "blogs";
 
     private final ContentManager contentManager;
     private final ToolConfigurationManager configurationManager;
@@ -59,7 +53,7 @@ public class DocumentServerTool implements ServerTool {
     private final I18nTranslationService i18n;
 
     @Inject
-    public DocumentServerTool(final ContentManager contentManager, final ContainerManager containerManager,
+    public BlogServerTool(final ContentManager contentManager, final ContainerManager containerManager,
             final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
         this.contentManager = contentManager;
         this.containerManager = containerManager;
@@ -93,26 +87,24 @@ public class DocumentServerTool implements ServerTool {
         config.setRoot(rootFolder);
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
-        final String longName = group.getLongName();
-        final Content descriptor = contentManager.createContent(i18n.t("About [%s]", longName), "", user, rootFolder,
-                DocumentServerTool.TYPE_DOCUMENT);
+
+        I18nLanguage language = user.getLanguage();
+        final Container blog = containerManager.createFolder(group, rootFolder, i18n.t("Blog sample"), language,
+                TYPE_BLOG);
+
+        final Content descriptor = contentManager.createContent(i18n.t("A post sample"), "", user, blog,
+                BlogServerTool.TYPE_POST);
         descriptor.addAuthor(user);
-        descriptor.setLanguage(user.getLanguage());
-        descriptor.setTypeId(TYPE_DOCUMENT);
+        descriptor.setLanguage(language);
+        descriptor.setTypeId(TYPE_POST);
         descriptor.setStatus(ContentStatus.publishedOnline);
-        group.setDefaultContent(descriptor);
+
+        contentManager.save(user, descriptor,
+                i18n.t("This is only a post sample. You can edit it, and rename this post and this blog"));
         return group;
     }
 
     public void onCreateContainer(final Container container, final Container parent) {
-        if (container.getTypeId().equals(TYPE_WIKI)) {
-            AccessLists wikiAcl = new AccessLists();
-            wikiAcl.getAdmins().setMode(GroupListMode.NORMAL);
-            wikiAcl.getAdmins().add(container.getOwner());
-            wikiAcl.getEditors().setMode(GroupListMode.EVERYONE);
-            wikiAcl.getViewers().setMode(GroupListMode.EVERYONE);
-            container.setAccessLists(wikiAcl);
-        }
     }
 
     public void onCreateContent(final Content content, final Container parent) {
@@ -124,13 +116,9 @@ public class DocumentServerTool implements ServerTool {
     }
 
     void checkContainerTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY) || typeId.equals(TYPE_WIKI)
-                || typeId.equals(TYPE_BLOG)) {
+        if (typeId.equals(TYPE_BLOG)) {
             // ok valid container
-            if ((typeId.equals(TYPE_FOLDER) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
-                    || (typeId.equals(TYPE_GALLERY) && (parentTypeId.equals(TYPE_ROOT)))
-                    || (typeId.equals(TYPE_WIKI) && parentTypeId.equals(TYPE_ROOT))
-                    || (typeId.equals(TYPE_BLOG) && parentTypeId.equals(TYPE_ROOT))) {
+            if ((typeId.equals(TYPE_BLOG) && parentTypeId.equals(TYPE_ROOT))) {
                 // ok
             } else {
                 throw new ContainerNotPermittedException();
@@ -141,13 +129,9 @@ public class DocumentServerTool implements ServerTool {
     }
 
     void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_WIKIPAGE) || typeId.equals(TYPE_UPLOADEDFILE)
-                || typeId.equals(TYPE_POST)) {
+        if (typeId.equals(TYPE_UPLOADEDFILE) || typeId.equals(TYPE_POST)) {
             // ok valid content
-            if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
-                    || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT)
-                            || parentTypeId.equals(TYPE_FOLDER) || parentTypeId.equals(TYPE_GALLERY)))
-                    || (typeId.equals(TYPE_WIKIPAGE) && parentTypeId.equals(TYPE_WIKI))
+            if ((typeId.equals(TYPE_UPLOADEDFILE) && parentTypeId.equals(TYPE_BLOG))
                     || (typeId.equals(TYPE_POST) && parentTypeId.equals(TYPE_BLOG))) {
                 // ok
             } else {

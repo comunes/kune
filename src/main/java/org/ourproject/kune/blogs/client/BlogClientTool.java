@@ -1,0 +1,62 @@
+/*
+ *
+ * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
+ * This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+package org.ourproject.kune.blogs.client;
+
+import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
+import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
+import org.ourproject.kune.platf.client.tool.ToolSelector;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+
+public class BlogClientTool extends FoldableAbstractClientTool {
+    public static final String TYPE_ROOT = "blogs.root";
+    public static final String TYPE_BLOG = "blogs.blog";
+    public static final String TYPE_POST = "blogs.post";
+    public static final String TYPE_UPLOADEDFILE = "blogs.uploaded";
+    public static final String NAME = "blogs";
+
+    public BlogClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+            final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
+            ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
+        super(NAME, i18n.t("blogs"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
+
+        // registerAclEditableTypes();
+        registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
+        registerDragableTypes(TYPE_UPLOADEDFILE);
+        registerDropableTypes(TYPE_ROOT);
+        registerPublishModerableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
+        registerRateableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
+        registerRenamableTypes(TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE);
+        registerTageableTypes(TYPE_BLOG, TYPE_UPLOADEDFILE, TYPE_POST);
+        // registerTranslatableTypes();
+
+        registerIcons();
+    }
+
+    public String getName() {
+        return NAME;
+    }
+
+    protected void registerIcons() {
+        registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
+        registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
+    }
+}

@@ -344,6 +344,18 @@ public class ContentRPC implements ContentService, RPC {
         return mapper.map(content, ContentSimpleDTO.class);
     }
 
+    // @Authenticated
+    // @Authorizated(accessRolRequired = AccessRol.Administrator,
+    // actionLevel=ActionLevel.container)
+    // @Transactional(type = TransactionType.READ_WRITE)
+    // public ContentSimpleDTO setFolderAsDefaultContent(final String userHash,
+    // final StateToken token) {
+    // Container container =
+    // containerManager.find(ContentUtils.parseId(token.getFolder()));
+    // groupManager.setDefaultContent(token.getGroup(), container);
+    // return mapper.map(content, ContentSimpleDTO.class);
+    // }
+
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)

@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.app.server;
 
+import org.ourproject.kune.blogs.server.BlogServerModule;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.client.rpc.ContentService;
@@ -109,6 +110,7 @@ public class KuneRackModule implements RackModule {
         builder.use(new ServletModule());
         builder.use(new PlatformServerModule());
         builder.use(new DocumentServerModule());
+        builder.use(new BlogServerModule());
         builder.use(new ChatServerModule());
         builder.use(new RESTServicesModule());
         builder.use(configModule);

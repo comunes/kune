@@ -26,6 +26,10 @@ public abstract class FoldableContentPanel extends AbstractContentPanel {
         attach();
     }
 
+    public void setInfo(String info) {
+        setLabel(info);
+    }
+
     public void setLabel(String text) {
         Label label = new Label(text);
         setDefStyle(label);

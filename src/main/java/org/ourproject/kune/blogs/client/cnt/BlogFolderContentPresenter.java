@@ -17,31 +17,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.client.cnt;
+package org.ourproject.kune.blogs.client.cnt;
 
+import org.ourproject.kune.blogs.client.BlogClientTool;
 import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.site.Site;
 
-public class ChatRoomPresenter extends FoldableContentPresenter implements ChatRoom {
+public class BlogFolderContentPresenter extends FoldableContentPresenter implements BlogFolderContent {
 
-    private ChatRoomView view;
-    private final I18nUITranslationService i18n;
+    private BlogFolderContentView view;
+    private final I18nTranslationService i18n;
 
-    public ChatRoomPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
-            ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry) {
-        super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry);
+    public BlogFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
+            final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n) {
+        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry);
         this.i18n = i18n;
     }
 
-    public void init(final ChatRoomView view) {
+    public void init(final BlogFolderContentView view) {
         super.init(view);
         this.view = view;
     }
@@ -50,12 +50,12 @@ public class ChatRoomPresenter extends FoldableContentPresenter implements ChatR
     protected void setState(StateContainerDTO state) {
         if (state.getTypeId().equals(ChatClientTool.TYPE_ROOT)) {
             if (state.getRootContainer().getChilds().size() == 0) {
-                view.setInfo(i18n.t("This group has no chat rooms."));
+                view.setInfo(i18n.t("This group has no blogs."));
             } else {
-                view.setInfo(i18n.t("Select a chat room"));
+                view.setInfo("");
             }
         } else {
-            view.setInfo("History of room conversations ..." + Site.IN_DEVELOPMENT);
+            view.setInfo("");
         }
         super.setState(state);
     }
