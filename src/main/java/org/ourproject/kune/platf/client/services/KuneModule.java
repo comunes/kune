@@ -71,6 +71,10 @@ import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPanel;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPresenter;
+import org.ourproject.kune.workspace.client.cxt.ContextPropEditorView;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
@@ -118,7 +122,9 @@ import org.ourproject.kune.workspace.client.site.rpc.UserService;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.title.EntitySubTitle;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
@@ -491,6 +497,20 @@ public class KuneModule extends AbstractModule {
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
                         $(WorkspaceSkeleton.class), $(ActionManager.class));
                 presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(Singleton.class, new Factory<ContextPropEditor>(ContextPropEditor.class) {
+            @Override
+            public ContextPropEditor create() {
+                final ContextPropEditorPresenter presenter = new ContextPropEditorPresenter($(Session.class),
+                        $(StateManager.class), $(ContentCapabilitiesRegistry.class), $$(TagsSummary.class),
+                        $$(ContentServiceAsync.class), $(EntityTitle.class), $(EntitySubTitle.class));
+                final ContextPropEditorView view = new ContextPropEditorPanel(presenter,
+                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class),
+                        $(Images.class));
+                presenter.init(view);
                 return presenter;
             }
         });

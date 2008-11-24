@@ -22,6 +22,8 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 
+import com.allen_sauer.gwt.log.client.Log;
+
 public class ActionRegistry<T> {
     private static final String GENERIC = "kgenacts";
 
@@ -36,8 +38,10 @@ public class ActionRegistry<T> {
     }
 
     public void addAction(final ActionDescriptor<T> action, String... typeIds) {
-        for (final String contentTypeId : typeIds) {
-            final ActionCollection<T> actionColl = getActions(contentTypeId);
+        assert (action != null);
+        for (final String typeId : typeIds) {
+            Log.debug("Registering action '" + action.getText() + "' for " + typeId);
+            final ActionCollection<T> actionColl = getActions(typeId);
             actionColl.add(action);
         }
     }

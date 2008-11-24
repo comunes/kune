@@ -40,6 +40,8 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         this.ws = ws;
         topbar = new SimpleToolbar();
         bottombar = new SimpleToolbar();
+        topbar.setWidth("100%");
+        bottombar.setWidth("100%");
         this.actionManagerProvider = actionManagerProvider;
 
         toolbarMenus = new HashMap<String, Menu>();

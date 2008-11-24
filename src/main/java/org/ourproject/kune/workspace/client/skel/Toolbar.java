@@ -42,6 +42,10 @@ public class Toolbar {
 
     public void add(final Widget widget) {
         childPanel.add(widget);
+        if (widget instanceof SimpleToolbar) {
+            widget.setWidth("100%");
+            childPanel.setCellWidth(widget, "100%");
+        }
         doLayoutIfNeeded();
     }
 

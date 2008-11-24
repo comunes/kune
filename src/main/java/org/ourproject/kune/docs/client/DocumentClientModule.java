@@ -36,27 +36,20 @@ import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
+import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
-import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPanel;
-import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPresenter;
-import org.ourproject.kune.workspace.client.cxt.ContextPropEditorView;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
-import org.ourproject.kune.workspace.client.title.EntitySubTitle;
-import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
@@ -80,25 +73,11 @@ public class DocumentClientModule extends AbstractModule {
             @Override
             public DocumentClientActions create() {
                 return new DocumentClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
-                        $(Session.class), $(StateManager.class), $$(ContentServiceAsync.class),
-                        $$(GroupServiceAsync.class), $$(FileUploader.class), $(ContentActionRegistry.class),
-                        $(ContextActionRegistry.class), $$(FileDownloadUtils.class), $(EntityLogo.class),
-                        $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentViewer.class),
+                        $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
+                        $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
+                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
+                        $(EntityLogo.class), $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentViewer.class),
                         $$(ContextPropEditor.class));
-            }
-        });
-
-        register(Singleton.class, new Factory<ContextPropEditor>(ContextPropEditor.class) {
-            @Override
-            public ContextPropEditor create() {
-                final ContextPropEditorPresenter presenter = new ContextPropEditorPresenter($(Session.class),
-                        $(StateManager.class), $(ContentCapabilitiesRegistry.class), $$(TagsSummary.class),
-                        $$(ContentServiceAsync.class), $(EntityTitle.class), $(EntitySubTitle.class));
-                final ContextPropEditorView view = new ContextPropEditorPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class),
-                        $(Images.class));
-                presenter.init(view);
-                return presenter;
             }
         });
 

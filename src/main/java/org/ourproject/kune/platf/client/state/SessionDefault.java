@@ -182,6 +182,7 @@ public class SessionDefault implements Session {
     }
 
     private Object[][] mapCountries() {
+        assert (initData != null);
         final Object[][] objs = new Object[initData.getCountries().size()][1];
         int i = 0;
         for (I18nCountryDTO country : initData.getCountries()) {
@@ -192,6 +193,7 @@ public class SessionDefault implements Session {
     }
 
     private Object[][] mapLangs() {
+        assert (initData != null);
         final Object[][] objs = new Object[initData.getLanguages().size()][1];
         int i = 0;
         for (I18nLanguageSimpleDTO language : initData.getLanguages()) {
@@ -202,6 +204,7 @@ public class SessionDefault implements Session {
     }
 
     private void mapTimezones() {
+        assert (initData != null);
         timezonesArray = new Object[initData.getTimezones().length][1];
         for (int i = 0; i < getTimezones().length; i++) {
             final Object[] obj = new Object[] { initData.getTimezones()[i] };

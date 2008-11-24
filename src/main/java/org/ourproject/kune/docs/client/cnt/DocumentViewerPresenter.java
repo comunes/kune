@@ -50,10 +50,6 @@ public class DocumentViewerPresenter extends FoldableContentPresenter implements
         this.view = view;
     }
 
-    public void refreshState() {
-        setState(session.getContentState());
-    }
-
     @Override
     protected void setState(StateContentDTO state) {
         super.setState(state);

@@ -19,12 +19,7 @@
  */
 package org.ourproject.kune.docs.client.cnt;
 
-public interface DocumentViewer {
+import org.ourproject.kune.workspace.client.cnt.FoldableContent;
 
-    void attach();
-
-    void detach();
-
-    void refreshState();
-
+public interface DocumentViewer extends FoldableContent {
 }
