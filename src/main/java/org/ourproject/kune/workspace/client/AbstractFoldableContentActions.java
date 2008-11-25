@@ -66,11 +66,6 @@ public abstract class AbstractFoldableContentActions {
     protected final FoldableContent foldableContent;
     protected final DeferredCommandWrapper deferredCommandWrapper;
     protected final EntityLogo entityLogo;
-    protected ActionMenuItemDescriptor<StateToken> go;
-    protected ActionToolbarButtonDescriptor<StateToken> goGroupHome;
-    protected ActionToolbarButtonAndItemDescriptor<StateToken> uploadMedia;
-    protected ActionToolbarButtonDescriptor<StateToken> translateContent;
-    protected ActionToolbarButtonDescriptor<StateToken> editContent;
 
     public AbstractFoldableContentActions(Session session, StateManager stateManager, I18nUITranslationService i18n,
             KuneErrorHandler errorHandler, DeferredCommandWrapper deferredCommandWrapper,
@@ -96,11 +91,9 @@ public abstract class AbstractFoldableContentActions {
         this.contextPropEditorProvider = contextPropEditorProvider;
         this.foldableContent = foldableContent;
         this.entityLogo = entityLogo;
-        createCommonActions();
         createActions();
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(InitDataDTO parameter) {
-                createCommonPostSessionInitActions();
                 createPostSessionInitActions();
             }
         });
@@ -130,8 +123,7 @@ public abstract class AbstractFoldableContentActions {
         contentActionRegistry.addAction(setInTheDustBinStatus, contentsModerated);
     }
 
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createContentRenameAction(String parentMenuTitle,
-            String textDescription) {
+    protected void createContentRenameAction(String parentMenuTitle, String textDescription, String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtn = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
@@ -140,11 +132,10 @@ public abstract class AbstractFoldableContentActions {
                 });
         renameCtn.setTextDescription(textDescription);
         renameCtn.setParentMenuTitle(parentMenuTitle);
-        return renameCtn;
+        contentActionRegistry.addAction(renameCtn, registerInTypes);
     }
 
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createDelContainerAction(String text,
-            String parentMenuTitle) {
+    protected void createDelContainerAction(String text, String parentMenuTitle, String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
@@ -156,11 +147,10 @@ public abstract class AbstractFoldableContentActions {
         delContainer.setMustBeConfirmed(true);
         delContainer.setConfirmationTitle(i18n.t("Please confirm"));
         delContainer.setConfirmationText(i18n.t("You will delete it and also all its contents. Are you sure?"));
-        return delContainer;
+        contextActionRegistry.addAction(delContainer, registerInTypes);
     }
 
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createDelContentAction(String parentMenuTitle,
-            String textDescription) {
+    protected void createDelContentAction(String parentMenuTitle, String textDescription, String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
@@ -184,7 +174,7 @@ public abstract class AbstractFoldableContentActions {
                 return !itemToken.equals(defContentToken);
             }
         });
-        return delContent;
+        contentActionRegistry.addAction(delContent, registerInTypes);
     }
 
     protected void createDownloadActions(String typeUploadedfile) {
@@ -213,222 +203,9 @@ public abstract class AbstractFoldableContentActions {
         contextActionRegistry.addAction(downloadCtx, TYPE_UPLOADEDFILE);
     }
 
-    protected void createNewContainerAction(final String contentTypeId, final String iconUrl,
-            final String textDescription, final String parentMenuTitle, final String parentMenuSubtitle,
-            final String defaultName, Position position, String... registerInTypes) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder;
-        addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
-                ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken stateToken) {
-                        Site.showProgressProcessing();
-                        contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
-                                contentTypeId, new AsyncCallbackSimple<StateContainerDTO>() {
-                                    public void onSuccess(final StateContainerDTO state) {
-                                        contextNavigator.setEditOnNextStateChange(true);
-                                        stateManager.setRetrievedState(state);
-                                    }
-                                });
-                    }
-                });
-        addFolder.setTextDescription(textDescription);
-        addFolder.setParentMenuTitle(parentMenuTitle);
-        addFolder.setParentSubMenuTitle(parentMenuSubtitle);
-        addFolder.setIconUrl(iconUrl);
-        register(addFolder, position, registerInTypes);
-    }
-
-    protected void createNewContentAction(final String typeId, String iconUrl, final String description,
-            final String parentMenuTitle, Position position, String... registerInTypes) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+    protected ActionToolbarButtonDescriptor<StateToken> createEditAction(String... registerInTypes) {
+        ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        Site.showProgressProcessing();
-                        contentServiceProvider.get().addContent(session.getUserHash(),
-                                session.getCurrentState().getStateToken(), description, typeId,
-                                new AsyncCallbackSimple<StateContentDTO>() {
-                                    public void onSuccess(final StateContentDTO state) {
-                                        contextNavigator.setEditOnNextStateChange(true);
-                                        stateManager.setRetrievedState(state);
-                                    }
-                                });
-                    }
-                });
-        addContent.setTextDescription(description);
-        addContent.setParentMenuTitle(parentMenuTitle);
-        addContent.setParentSubMenuTitle(i18n.t("New"));
-        addContent.setIconUrl(iconUrl);
-        register(addContent, position, registerInTypes);
-    }
-
-    protected void createPostSessionInitActions() {
-    }
-
-    protected ActionToolbarMenuDescriptor<StateToken> createRefreshCntAction(String parentMenuTitle) {
-        final ActionToolbarMenuDescriptor<StateToken> refreshCnt = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken stateToken) {
-                        stateManager.reload();
-                        contextNavigator.selectItem(stateToken);
-                    }
-                });
-        refreshCnt.setMustBeAuthenticated(false);
-        refreshCnt.setParentMenuTitle(parentMenuTitle);
-        refreshCnt.setTextDescription(i18n.t("Refresh"));
-        refreshCnt.setIconUrl("images/nav/refresh.png");
-        return refreshCnt;
-    }
-
-    protected ActionToolbarMenuDescriptor<StateToken> createRefreshCxtAction(String parentMenuTitleCtx) {
-        final ActionToolbarMenuDescriptor<StateToken> refreshCtx = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken stateToken) {
-                        stateManager.reload();
-                        contextNavigator.selectItem(stateToken);
-                    }
-                });
-        refreshCtx.setMustBeAuthenticated(false);
-        refreshCtx.setParentMenuTitle(parentMenuTitleCtx);
-        refreshCtx.setTextDescription(i18n.t("Refresh"));
-        refreshCtx.setIconUrl("images/nav/refresh.png");
-        return refreshCtx;
-    }
-
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createRenameContentInCtxAction(String parentMenuTitleCtx,
-            String textDescription) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtx = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken stateToken) {
-                        contextNavigator.editItem(stateToken);
-                    }
-                });
-        renameCtx.setTextDescription(textDescription);
-        renameCtx.setParentMenuTitle(parentMenuTitleCtx);
-        return renameCtx;
-    }
-
-    protected ActionToolbarMenuDescriptor<StateToken> createSetAsDefContent(String parentMenuTitle) {
-        final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupContent;
-        setAsDefGroupContent = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Administrator,
-                ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        Site.showProgressProcessing();
-                        contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
-                                new AsyncCallbackSimple<ContentSimpleDTO>() {
-                                    public void onSuccess(final ContentSimpleDTO defContent) {
-                                        session.getCurrentState().getGroup().setDefaultContent(defContent);
-                                        Site.hideProgress();
-                                        Site.info(i18n.t("Content selected as the group homepage"));
-                                    }
-                                });
-                    }
-                });
-        setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
-        setAsDefGroupContent.setIconUrl("images/group-home.png");
-        setAsDefGroupContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
-                final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent().getStateToken();
-                return !itemToken.equals(defContentToken);
-            }
-        });
-        setAsDefGroupContent.setParentMenuTitle(parentMenuTitle);
-        return setAsDefGroupContent;
-    }
-
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
-            final String textDescription, String parentMenuTitle, final ContentStatusDTO status) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> action = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken stateToken) {
-                        final AsyncCallbackSimple<Object> callback = new AsyncCallbackSimple<Object>() {
-                            public void onSuccess(final Object result) {
-                                session.getContentState().setStatus(status);
-                                contextNavigator.setItemStatus(stateToken, status);
-                            }
-                        };
-                        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
-                            contentServiceProvider.get().setStatusAsAdmin(session.getUserHash(), stateToken, status,
-                                    callback);
-                        } else {
-                            contentServiceProvider.get().setStatus(session.getUserHash(), stateToken, status, callback);
-                        }
-                    }
-                });
-        action.setTextDescription(textDescription);
-        action.setParentMenuTitle(parentMenuTitle);
-        action.setParentSubMenuTitle(i18n.t("Change the status"));
-        return action;
-    }
-
-    protected ActionToolbarButtonAndItemDescriptor<StateToken> createUploadAction(final String textDescription,
-            final String iconUrl, final String toolTip, final String permitedExtensions) {
-        final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile;
-        uploadFile = new ActionToolbarButtonAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
-                ActionToolbarPosition.bottombar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        if (permitedExtensions != null) {
-                            // FIXME: can't be reset ...
-                            // fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
-                        } else {
-                            // FIXME: can't be reset ...
-                            // fileUploaderProvider.get().resetPermittedExtensions();
-                        }
-                        fileUploaderProvider.get().show();
-                    }
-                });
-        uploadFile.setTextDescription(textDescription);
-        uploadFile.setIconUrl(iconUrl);
-        uploadFile.setToolTip(toolTip);
-        return uploadFile;
-    }
-
-    protected void downloadContent(final StateToken token) {
-        fileDownloadProvider.get().downloadFile(token);
-    }
-
-    private void createCommonActions() {
-        go = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer, new Listener<StateToken>() {
-            public void onEvent(final StateToken token) {
-                stateManager.gotoToken(token);
-            }
-        });
-        go.setMustBeAuthenticated(false);
-        go.setTextDescription(i18n.t("Open"));
-        go.setIconUrl("images/nav/go.png");
-        go.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
-                return !contextNavigator.isSelected(itemToken);
-            }
-        });
-
-        goGroupHome = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
-                new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        stateManager.gotoToken(token.getGroup());
-                    }
-                });
-        goGroupHome.setMustBeAuthenticated(false);
-        goGroupHome.setIconUrl("images/group-home.png");
-        goGroupHome.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
-                final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent().getStateToken();
-                return !itemToken.equals(defContentToken);
-            }
-        });
-        goGroupHome.setLeftSeparator(ActionToolbarButtonSeparator.fill);
-
-        translateContent = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Editor,
-                ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken stateToken) {
-                        Site.important(i18n.t("Sorry, this functionality is currently in development"));
-                    }
-                });
-        translateContent.setTextDescription(i18n.tWithNT("Translate", "used in button"));
-        translateContent.setToolTip(i18n.t("Translate this document to other languages"));
-        translateContent.setIconUrl("images/language.gif");
-        translateContent.setLeftSeparator(ActionToolbarButtonSeparator.spacer);
-
-        editContent = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Editor, ActionToolbarPosition.topbar,
-                new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         session.check(new AsyncCallbackSimple<Object>() {
                             public void onSuccess(final Object result) {
@@ -483,12 +260,250 @@ public abstract class AbstractFoldableContentActions {
         editContent.setTextDescription(i18n.tWithNT("Edit", "used in button"));
         editContent.setIconUrl("images/content_edit.png");
         editContent.setLeftSeparator(ActionToolbarButtonSeparator.spacer);
-
+        contentActionRegistry.addAction(editContent, registerInTypes);
+        return editContent;
     }
 
-    private void createCommonPostSessionInitActions() {
-        uploadMedia = createUploadAction(i18n.t("Upload media"), "images/nav/upload.png",
-                i18n.t("Upload some media (images, videos)"), session.getGalleryPermittedExtensions());
+    protected ActionMenuItemDescriptor<StateToken> createGoAction(String... registerInTypes) {
+        ActionMenuItemDescriptor<StateToken> go = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer,
+                new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        stateManager.gotoToken(token);
+                    }
+                });
+        go.setMustBeAuthenticated(false);
+        go.setTextDescription(i18n.t("Open"));
+        go.setIconUrl("images/nav/go.png");
+        go.setEnableCondition(new ActionEnableCondition<StateToken>() {
+            public boolean mustBeEnabled(final StateToken itemToken) {
+                return !contextNavigator.isSelected(itemToken);
+            }
+        });
+        contextActionRegistry.addAction(go, registerInTypes);
+        return go;
+    }
+
+    protected ActionToolbarButtonDescriptor<StateToken> createGoHomeAction(String... registerInTypes) {
+        ActionToolbarButtonDescriptor<StateToken> goGroupHome = new ActionToolbarButtonDescriptor<StateToken>(
+                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        stateManager.gotoToken(token.getGroup());
+                    }
+                });
+        goGroupHome.setMustBeAuthenticated(false);
+        goGroupHome.setIconUrl("images/group-home.png");
+        goGroupHome.setEnableCondition(new ActionEnableCondition<StateToken>() {
+            public boolean mustBeEnabled(final StateToken itemToken) {
+                final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent().getStateToken();
+                return !itemToken.equals(defContentToken);
+            }
+        });
+        goGroupHome.setLeftSeparator(ActionToolbarButtonSeparator.fill);
+        contextActionRegistry.addAction(goGroupHome, registerInTypes);
+        return goGroupHome;
+    }
+
+    protected void createNewContainerAction(final String contentTypeId, final String iconUrl,
+            final String textDescription, final String parentMenuTitle, final String parentMenuSubtitle,
+            final String defaultName, Position position, String... registerInTypes) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder;
+        addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
+                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken stateToken) {
+                        Site.showProgressProcessing();
+                        contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
+                                contentTypeId, new AsyncCallbackSimple<StateContainerDTO>() {
+                                    public void onSuccess(final StateContainerDTO state) {
+                                        contextNavigator.setEditOnNextStateChange(true);
+                                        stateManager.setRetrievedState(state);
+                                    }
+                                });
+                    }
+                });
+        addFolder.setTextDescription(textDescription);
+        addFolder.setParentMenuTitle(parentMenuTitle);
+        addFolder.setParentSubMenuTitle(parentMenuSubtitle);
+        addFolder.setIconUrl(iconUrl);
+        register(addFolder, position, registerInTypes);
+    }
+
+    protected void createNewContentAction(final String typeId, String iconUrl, final String description,
+            final String parentMenuTitle, Position position, String... registerInTypes) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        Site.showProgressProcessing();
+                        contentServiceProvider.get().addContent(session.getUserHash(),
+                                session.getCurrentState().getStateToken(), description, typeId,
+                                new AsyncCallbackSimple<StateContentDTO>() {
+                                    public void onSuccess(final StateContentDTO state) {
+                                        contextNavigator.setEditOnNextStateChange(true);
+                                        stateManager.setRetrievedState(state);
+                                    }
+                                });
+                    }
+                });
+        addContent.setTextDescription(description);
+        addContent.setParentMenuTitle(parentMenuTitle);
+        addContent.setParentSubMenuTitle(i18n.t("New"));
+        addContent.setIconUrl(iconUrl);
+        register(addContent, position, registerInTypes);
+    }
+
+    protected void createPostSessionInitActions() {
+    }
+
+    protected ActionToolbarMenuDescriptor<StateToken> createRefreshCntAction(String parentMenuTitle,
+            String... registerInTypes) {
+        final ActionToolbarMenuDescriptor<StateToken> refreshCnt = new ActionToolbarMenuDescriptor<StateToken>(
+                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken stateToken) {
+                        stateManager.reload();
+                        contextNavigator.selectItem(stateToken);
+                    }
+                });
+        refreshCnt.setMustBeAuthenticated(false);
+        refreshCnt.setParentMenuTitle(parentMenuTitle);
+        refreshCnt.setTextDescription(i18n.t("Refresh"));
+        refreshCnt.setIconUrl("images/nav/refresh.png");
+        contentActionRegistry.addAction(refreshCnt, registerInTypes);
+        return refreshCnt;
+    }
+
+    protected ActionToolbarMenuDescriptor<StateToken> createRefreshCxtAction(String parentMenuTitleCtx,
+            String... registerInTypes) {
+        final ActionToolbarMenuDescriptor<StateToken> refreshCtx = new ActionToolbarMenuDescriptor<StateToken>(
+                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken stateToken) {
+                        stateManager.reload();
+                        contextNavigator.selectItem(stateToken);
+                    }
+                });
+        refreshCtx.setMustBeAuthenticated(false);
+        refreshCtx.setParentMenuTitle(parentMenuTitleCtx);
+        refreshCtx.setTextDescription(i18n.t("Refresh"));
+        refreshCtx.setIconUrl("images/nav/refresh.png");
+        contextActionRegistry.addAction(refreshCtx, registerInTypes);
+        return refreshCtx;
+    }
+
+    protected ActionToolbarMenuAndItemDescriptor<StateToken> createRenameContentInCtxAction(String parentMenuTitleCtx,
+            String textDescription, String... registerInTypes) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtx = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken stateToken) {
+                        contextNavigator.editItem(stateToken);
+                    }
+                });
+        renameCtx.setTextDescription(textDescription);
+        renameCtx.setParentMenuTitle(parentMenuTitleCtx);
+        contextActionRegistry.addAction(renameCtx, registerInTypes);
+        return renameCtx;
+    }
+
+    protected ActionToolbarMenuDescriptor<StateToken> createSetAsDefContent(String parentMenuTitle,
+            String... registerInTypes) {
+        final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupContent;
+        setAsDefGroupContent = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Administrator,
+                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        Site.showProgressProcessing();
+                        contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
+                                new AsyncCallbackSimple<ContentSimpleDTO>() {
+                                    public void onSuccess(final ContentSimpleDTO defContent) {
+                                        session.getCurrentState().getGroup().setDefaultContent(defContent);
+                                        Site.hideProgress();
+                                        Site.info(i18n.t("Content selected as the group homepage"));
+                                    }
+                                });
+                    }
+                });
+        setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
+        setAsDefGroupContent.setIconUrl("images/group-home.png");
+        setAsDefGroupContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
+            public boolean mustBeEnabled(final StateToken itemToken) {
+                final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent().getStateToken();
+                return !itemToken.equals(defContentToken);
+            }
+        });
+        setAsDefGroupContent.setParentMenuTitle(parentMenuTitle);
+        contentActionRegistry.addAction(setAsDefGroupContent, registerInTypes);
+        return setAsDefGroupContent;
+    }
+
+    protected ActionToolbarMenuAndItemDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
+            final String textDescription, String parentMenuTitle, final ContentStatusDTO status) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> action = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+                rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken stateToken) {
+                        final AsyncCallbackSimple<Object> callback = new AsyncCallbackSimple<Object>() {
+                            public void onSuccess(final Object result) {
+                                session.getContentState().setStatus(status);
+                                contextNavigator.setItemStatus(stateToken, status);
+                            }
+                        };
+                        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
+                            contentServiceProvider.get().setStatusAsAdmin(session.getUserHash(), stateToken, status,
+                                    callback);
+                        } else {
+                            contentServiceProvider.get().setStatus(session.getUserHash(), stateToken, status, callback);
+                        }
+                    }
+                });
+        action.setTextDescription(textDescription);
+        action.setParentMenuTitle(parentMenuTitle);
+        action.setParentSubMenuTitle(i18n.t("Change the status"));
+        return action;
+    }
+
+    protected ActionToolbarButtonDescriptor<StateToken> createTranslateAction(String... registerInTypes) {
+        ActionToolbarButtonDescriptor<StateToken> translateContent = new ActionToolbarButtonDescriptor<StateToken>(
+                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken stateToken) {
+                        Site.important(i18n.t("Sorry, this functionality is currently in development"));
+                    }
+                });
+        translateContent.setTextDescription(i18n.tWithNT("Translate", "used in button"));
+        translateContent.setToolTip(i18n.t("Translate this document to other languages"));
+        translateContent.setIconUrl("images/language.gif");
+        translateContent.setLeftSeparator(ActionToolbarButtonSeparator.spacer);
+        contentActionRegistry.addAction(translateContent, registerInTypes);
+        return translateContent;
+    }
+
+    protected ActionToolbarButtonAndItemDescriptor<StateToken> createUploadAction(final String textDescription,
+            final String iconUrl, final String toolTip, final String permitedExtensions, String... registerInTypes) {
+        final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile;
+        uploadFile = new ActionToolbarButtonAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
+                ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        if (permitedExtensions != null) {
+                            // FIXME: can't be reset ...
+                            // fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
+                        } else {
+                            // FIXME: can't be reset ...
+                            // fileUploaderProvider.get().resetPermittedExtensions();
+                        }
+                        fileUploaderProvider.get().show();
+                    }
+                });
+        uploadFile.setTextDescription(textDescription);
+        uploadFile.setIconUrl(iconUrl);
+        uploadFile.setToolTip(toolTip);
+        contextActionRegistry.addAction(uploadFile, registerInTypes);
+        return uploadFile;
+    }
+
+    protected ActionToolbarButtonAndItemDescriptor<StateToken> createUploadMediaAction(String... registerInTypes) {
+        ActionToolbarButtonAndItemDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
+                "images/nav/upload.png", i18n.t("Upload some media (images, videos)"),
+                session.getGalleryPermittedExtensions());
+        contextActionRegistry.addAction(uploadMedia, registerInTypes);
+        return uploadMedia;
+    }
+
+    protected void downloadContent(final StateToken token) {
+        fileDownloadProvider.get().downloadFile(token);
     }
 
     /**
@@ -529,11 +544,12 @@ public abstract class AbstractFoldableContentActions {
             String... registerInTypes) {
         switch (position) {
         case ctx:
-            contentActionRegistry.addAction(action, registerInTypes);
+            contextActionRegistry.addAction(action, registerInTypes);
             break;
         case cnt:
-            contextActionRegistry.addAction(action, registerInTypes);
+            contentActionRegistry.addAction(action, registerInTypes);
             break;
         }
     }
+
 }

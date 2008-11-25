@@ -24,12 +24,8 @@ import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_ROOT;
 import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_UPLOADEDFILE;
 
 import org.ourproject.kune.blogs.client.cnt.BlogViewer;
-import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -65,6 +61,12 @@ public class BlogClientActions extends AbstractFoldableContentActions {
 
     @Override
     protected void createActions() {
+        final String[] all = { TYPE_ROOT, TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
+        final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
+        final String[] containers = { TYPE_ROOT, TYPE_BLOG };
+        final String[] containersNoRoot = { TYPE_BLOG };
+        final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
+
         String parentMenuTitle = i18n.t("Post");
         String parentMenuTitleCtx = i18n.t("Blog");
 
@@ -73,56 +75,30 @@ public class BlogClientActions extends AbstractFoldableContentActions {
         createNewContentAction(TYPE_POST, "images/nav/post_add.png", i18n.t("New post"), parentMenuTitleCtx,
                 Position.ctx, TYPE_BLOG);
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = createDelContainerAction("Delete blog",
-                parentMenuTitleCtx);
+        createContentModeratedActions(parentMenuTitle, contentsModerated);
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> delContent = createDelContentAction(parentMenuTitle,
-                i18n.t("Delete"));
-
-        final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtn = createContentRenameAction(parentMenuTitle,
-                i18n.t("Rename"));
-
-        final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtx = createRenameContentInCtxAction(
-                parentMenuTitleCtx, i18n.t("Rename"));
-
-        final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCnt = createSetAsDefContent(parentMenuTitle);
+        createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+        createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
 
         // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =
         // createSetAsDefContent(parentMenuTitleCtx);
 
-        final ActionToolbarMenuDescriptor<StateToken> refreshCnt = createRefreshCntAction(parentMenuTitle);
+        createRefreshCntAction(parentMenuTitle, contents);
+        createRefreshCxtAction(parentMenuTitleCtx, containers);
 
-        final ActionToolbarMenuDescriptor<StateToken> refreshCtx = createRefreshCxtAction(parentMenuTitleCtx);
-        final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
-                "images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
+        createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
+                i18n.t("Upload some files (images, PDFs, ...)"), null, containersNoRoot);
 
-        final String[] all = { TYPE_ROOT, TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
-        final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
-        final String[] containersNoRoot = { TYPE_BLOG };
-        final String[] containers = { TYPE_ROOT, TYPE_BLOG };
-        final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
+        createSetAsDefContent(parentMenuTitle, contents);
 
-        createContentModeratedActions(parentMenuTitle, contentsModerated);
+        createGoAction(all);
+        createGoHomeAction(containers);
+        createEditAction(TYPE_POST);
 
-        contextActionRegistry.addAction(go, all);
-        contentActionRegistry.addAction(renameCtn, contents);
-        contextActionRegistry.addAction(renameCtx, containersNoRoot);
-        contextActionRegistry.addAction(refreshCtx, containers);
-        contentActionRegistry.addAction(refreshCnt, contents);
-        contextActionRegistry.addAction(uploadFile, TYPE_BLOG);
-        contentActionRegistry.addAction(delContent, contents);
-        contextActionRegistry.addAction(delContainer, containersNoRoot);
-        contentActionRegistry.addAction(setAsDefGroupCnt, TYPE_POST, TYPE_UPLOADEDFILE);
         // ContentRPC Authorized must permit folders
         // contentActionRegistry.addAction(setAsDefGroupCxt, TYPE_BLOG);
 
-        contextActionRegistry.addAction(goGroupHome, containers);
-        contentActionRegistry.addAction(editContent, TYPE_POST);
-        // contentActionRegistry.addAction(translateContent, );
-    }
-
-    @Override
-    protected void createPostSessionInitActions() {
-        // contextActionRegistry.addAction(uploadMedia, TYPE_GALLERY);
+        createDelContainerAction("Delete blog", parentMenuTitleCtx, containersNoRoot);
+        createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
     }
 }

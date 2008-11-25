@@ -30,6 +30,9 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.Ext;
+import com.gwtext.client.core.Function;
+import com.gwtext.client.core.FxConfig;
 
 public class EntityLicensePanel implements EntityLicenseView {
     private final Label copyright;
@@ -48,11 +51,10 @@ public class EntityLicensePanel implements EntityLicenseView {
         licenseLabel = new Label();
 
         licenseBar = new SimpleToolbar();
-        licenseBar.add(copyright);
-        licenseBar.add(licenseLabel);
-        licenseBar.addSpacer();
         licenseBar.addSpacer();
         licenseBar.add(licenseImage);
+        licenseBar.add(copyright);
+        licenseBar.add(licenseLabel);
 
         final ClickListener clickListener = new ClickListener() {
             public void onClick(Widget arg0) {
@@ -68,15 +70,18 @@ public class EntityLicensePanel implements EntityLicenseView {
         MouseListenerAdapter mouseListenerAdapter = new MouseListenerAdapter() {
             @Override
             public void onMouseEnter(Widget sender) {
-                copyright.setVisible(true);
-                licenseLabel.setVisible(true);
+                fade(true);
             }
 
             @Override
             public void onMouseLeave(Widget sender) {
+                fade(false);
             }
         };
+
         licenseImage.addMouseListener(mouseListenerAdapter);
+        copyright.addMouseListener(mouseListenerAdapter);
+        licenseLabel.addMouseListener(mouseListenerAdapter);
 
         copyright.addStyleName("kune-Margin-Large-l");
         licenseLabel.setStyleName("k-entitylicensepanel-licensetext");
@@ -102,8 +107,31 @@ public class EntityLicensePanel implements EntityLicenseView {
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
         copyright.setText(i18n.t("© [%s], under license: ", groupName));
         licenseLabel.setText(licenseDTO.getLongName());
-        copyright.setVisible(false);
-        licenseLabel.setVisible(false);
         licenseImage.setUrl(licenseDTO.getImageUrl());
+        fade(false);
+    }
+
+    private void fade(final boolean in) {
+        if (copyright.isVisible() != in) {
+            FxConfig fxConfig = new FxConfig(2);
+            FxConfig fxConfigVisible = new FxConfig(2);
+            fxConfigVisible.setAfterStyle(new Function() {
+                public void execute() {
+                    setVisible(in);
+                }
+            });
+            if (in) {
+                Ext.get(copyright.getElement()).fadeIn(fxConfig);
+                Ext.get(licenseLabel.getElement()).fadeIn(fxConfigVisible);
+            } else {
+                Ext.get(copyright.getElement()).fadeOut(fxConfig);
+                Ext.get(licenseLabel.getElement()).fadeOut(fxConfigVisible);
+            }
+        }
+    }
+
+    private void setVisible(boolean visible) {
+        copyright.setVisible(visible);
+        licenseLabel.setVisible(visible);
     }
 }

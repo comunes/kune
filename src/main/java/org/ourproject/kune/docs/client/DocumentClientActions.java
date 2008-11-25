@@ -27,12 +27,8 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKI;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WIKIPAGE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentViewer;
-import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -68,11 +64,18 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
     @Override
     protected void createActions() {
+        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_GALLERY, TYPE_WIKI, TYPE_WIKIPAGE,
+                TYPE_UPLOADEDFILE };
+        final String[] containers = { TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY, TYPE_WIKI };
+        final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+        final String[] containersNoRoot = { TYPE_FOLDER, TYPE_GALLERY, TYPE_WIKI };
+        final String[] contents = { TYPE_DOCUMENT, TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
+
         String parentMenuTitle = i18n.t("File");
         String parentMenuTitleCtx = i18n.t("Folder");
 
         createNewContainerAction(TYPE_FOLDER, "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx,
-                i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_FOLDER);
+                i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_ROOT, TYPE_FOLDER);
         createNewContainerAction(TYPE_GALLERY, "images/nav/gallery_add.png", i18n.t("New gallery"), parentMenuTitleCtx,
                 i18n.t("New"), i18n.t("New gallery"), Position.ctx, TYPE_ROOT);
         createNewContainerAction(TYPE_WIKI, "images/nav/wiki_add.png", i18n.t("New wiki"), parentMenuTitleCtx,
@@ -83,58 +86,35 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         createNewContentAction(TYPE_WIKIPAGE, "images/nav/wikipage_add.png", parentMenuTitleCtx,
                 i18n.t("New wikipage"), Position.ctx, TYPE_WIKI);
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = createDelContainerAction("Delete folder",
-                parentMenuTitleCtx);
+        createContentModeratedActions(parentMenuTitle, contentsModerated);
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> delContent = createDelContentAction(parentMenuTitle,
-                i18n.t("Delete"));
-
-        final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtn = createContentRenameAction(parentMenuTitle,
-                i18n.t("Rename"));
-
-        final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtx = createRenameContentInCtxAction(
-                parentMenuTitleCtx, i18n.t("Rename"));
-
-        final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCnt = createSetAsDefContent(parentMenuTitle);
+        createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+        createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
 
         // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =
         // createSetAsDefContent(parentMenuTitleCtx);
 
-        final ActionToolbarMenuDescriptor<StateToken> refreshCnt = createRefreshCntAction(parentMenuTitle);
+        createRefreshCntAction(parentMenuTitle, contents);
+        createRefreshCxtAction(parentMenuTitleCtx, containers);
 
-        final ActionToolbarMenuDescriptor<StateToken> refreshCtx = createRefreshCxtAction(parentMenuTitleCtx);
+        createSetAsDefContent(parentMenuTitle, contents);
 
-        final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
-                "images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
+        createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
+                i18n.t("Upload some files (images, PDFs, ...)"), null, containers);
 
-        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_GALLERY, TYPE_WIKI, TYPE_WIKIPAGE,
-                TYPE_UPLOADEDFILE };
-        final String[] containersNoRoot = { TYPE_FOLDER, TYPE_GALLERY, TYPE_WIKI };
-        final String[] containers = { TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY, TYPE_WIKI };
-        final String[] contents = { TYPE_DOCUMENT, TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
-        final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-
-        createContentModeratedActions(parentMenuTitle, contentsModerated);
         createDownloadActions(TYPE_UPLOADEDFILE);
 
-        contextActionRegistry.addAction(go, all);
-        contentActionRegistry.addAction(renameCtn, contents);
-        contextActionRegistry.addAction(renameCtx, containersNoRoot);
-        contextActionRegistry.addAction(refreshCtx, containers);
-        contentActionRegistry.addAction(refreshCnt, contents);
-        contextActionRegistry.addAction(uploadFile, TYPE_ROOT, TYPE_FOLDER);
-        contentActionRegistry.addAction(delContent, contents);
-        contextActionRegistry.addAction(delContainer, containersNoRoot);
-        contentActionRegistry.addAction(setAsDefGroupCnt, TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        // contentActionRegistry.addAction(setAsDefGroupCxt,);
-        contextActionRegistry.addAction(goGroupHome, containers);
-        contentActionRegistry.addAction(editContent, TYPE_DOCUMENT, TYPE_WIKIPAGE);
-        contentActionRegistry.addAction(translateContent, TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE,
-                TYPE_WIKI, TYPE_WIKIPAGE);
+        createGoAction(all);
+        createGoHomeAction(containers);
+        createEditAction(TYPE_DOCUMENT, TYPE_WIKIPAGE);
+        createTranslateAction(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE, TYPE_WIKI, TYPE_WIKIPAGE);
+
+        createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
+        createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
     }
 
     @Override
     protected void createPostSessionInitActions() {
-        contextActionRegistry.addAction(uploadMedia, TYPE_GALLERY);
+        super.createUploadMediaAction(TYPE_GALLERY);
     }
 }
