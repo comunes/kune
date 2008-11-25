@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
@@ -32,8 +31,6 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
     public static final String TYPE_FOLDER = "docs.folder";
     public static final String TYPE_DOCUMENT = "docs.doc";
     public static final String TYPE_GALLERY = "docs.gallery";
-    public static final String TYPE_WIKI = "docs.wiki";
-    public static final String TYPE_WIKIPAGE = "docs.wikipage";
     public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
     public static final String NAME = "docs";
 
@@ -47,10 +44,10 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
         registerDragableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
         registerDropableTypes(TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY);
         registerPublishModerableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
-        registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE, TYPE_WIKI, TYPE_WIKIPAGE);
-        registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
-        registerTranslatableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
+        registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+        registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE);
+        registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+        registerTranslatableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
 
         registerIcons();
     }
@@ -63,24 +60,7 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
         registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
         registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
         registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
-        registerContentTypeIcon(TYPE_WIKI, "images/nav/wiki.png");
-        registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("image"), "images/nav/picture.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("video"), "images/nav/film.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "pdf"),
-                "images/nav/page_pdf.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
-                "images/nav/page_zip.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "zip"),
-                "images/nav/page_zip.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("text"), "images/nav/page_text.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "msword"),
-                "images/nav/page_word.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "excel"),
-                "images/nav/page_excel.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, new BasicMimeTypeDTO("application", "mspowerpoint"),
-                "images/nav/page_pps.png");
-        registerContentTypeIcon(TYPE_UPLOADEDFILE, "images/nav/page.png");
+        registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     }
 
 }

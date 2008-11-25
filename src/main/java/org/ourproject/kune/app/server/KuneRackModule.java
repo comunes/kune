@@ -46,6 +46,7 @@ import org.ourproject.kune.rack.filters.ListenerFilter;
 import org.ourproject.kune.rack.filters.LogFilter;
 import org.ourproject.kune.rack.filters.RedirectFilter;
 import org.ourproject.kune.rack.filters.rest.RESTServicesModule;
+import org.ourproject.kune.wiki.server.WikiServerModule;
 import org.ourproject.kune.workspace.client.site.rpc.UserService;
 
 import com.google.inject.AbstractModule;
@@ -111,6 +112,7 @@ public class KuneRackModule implements RackModule {
         builder.use(new PlatformServerModule());
         builder.use(new DocumentServerModule());
         builder.use(new BlogServerModule());
+        builder.use(new WikiServerModule());
         builder.use(new ChatServerModule());
         builder.use(new RESTServicesModule());
         builder.use(configModule);

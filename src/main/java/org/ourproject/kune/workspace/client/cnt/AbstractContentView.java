@@ -6,4 +6,6 @@ public interface AbstractContentView {
 
     void detach();
 
+    void setInfo(String info);
+
 }

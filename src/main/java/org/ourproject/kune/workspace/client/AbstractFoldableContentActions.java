@@ -327,8 +327,9 @@ public abstract class AbstractFoldableContentActions {
         register(addFolder, position, registerInTypes);
     }
 
-    protected void createNewContentAction(final String typeId, String iconUrl, final String description,
-            final String parentMenuTitle, Position position, String... registerInTypes) {
+    protected ActionToolbarMenuAndItemDescriptor<StateToken> createNewContentAction(final String typeId,
+            String iconUrl, final String description, final String parentMenuTitle, Position position,
+            String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
@@ -348,6 +349,7 @@ public abstract class AbstractFoldableContentActions {
         addContent.setParentSubMenuTitle(i18n.t("New"));
         addContent.setIconUrl(iconUrl);
         register(addContent, position, registerInTypes);
+        return addContent;
     }
 
     protected void createPostSessionInitActions() {

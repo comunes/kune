@@ -377,12 +377,6 @@
     background: #D40000;
 }
 
-.k-entitylicensepanel-licensetext {
-    cursor: pointer;
-    margin-left: 5px;
-    text-decoration: underline;
-}
-
 .k-entity-context-default div,.k-entity-context-default .x-tree .x-panel-body
     {
     background: #FFD09D none repeat scroll 0% 50%;
@@ -417,7 +411,7 @@
 }
 
 .k-entity-bottom div {
-    line-height: 24px;
+    /* line-height: 24px; */
     color: #FFF;
 }
 
@@ -802,4 +796,5 @@
 .k-elp-limg {
   margin-top: 4px;
   margin-left: 5px;
+  cursor: pointer;
 }

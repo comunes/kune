@@ -16,15 +16,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.docs.client;
+ */package org.ourproject.kune.wiki.client;
 
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_GALLERY;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_ROOT;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
+import static org.ourproject.kune.wiki.client.WikiClientTool.TYPE_FOLDER;
+import static org.ourproject.kune.wiki.client.WikiClientTool.TYPE_ROOT;
+import static org.ourproject.kune.wiki.client.WikiClientTool.TYPE_UPLOADEDFILE;
+import static org.ourproject.kune.wiki.client.WikiClientTool.TYPE_WIKIPAGE;
 
-import org.ourproject.kune.docs.client.cnt.DocumentViewer;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -35,6 +33,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
+import org.ourproject.kune.wiki.client.cnt.WikiViewer;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
@@ -44,8 +43,8 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class DocumentClientActions extends AbstractFoldableContentActions {
-    public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
+public class WikiClientActions extends AbstractFoldableContentActions {
+    public WikiClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager,
             final DeferredCommandWrapper deferredCommandWrapper,
             final Provider<ContentServiceAsync> contentServiceProvider,
@@ -53,7 +52,7 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
             final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
-            final DocumentViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider) {
+            final WikiViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
                 contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
                 contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
@@ -62,24 +61,22 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
     @Override
     protected void createActions() {
-        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_GALLERY, TYPE_UPLOADEDFILE };
-        final String[] containers = { TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY };
-        final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-        final String[] containersNoRoot = { TYPE_FOLDER, TYPE_GALLERY };
-        final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
+        final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
+        // final String[] contentsModerated = { };
+        final String[] containersNoRoot = { TYPE_FOLDER };
+        final String[] contents = { TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
 
-        String parentMenuTitle = i18n.t("File");
-        String parentMenuTitleCtx = i18n.t("Folder");
+        String parentMenuTitle = i18n.t("Wikipage");
+        String parentMenuTitleCtx = i18n.t("Wiki");
 
         createNewContainerAction(TYPE_FOLDER, "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx,
                 i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_ROOT, TYPE_FOLDER);
-        createNewContainerAction(TYPE_GALLERY, "images/nav/gallery_add.png", i18n.t("New gallery"), parentMenuTitleCtx,
-                i18n.t("New"), i18n.t("New gallery"), Position.ctx, TYPE_ROOT);
 
-        createNewContentAction(TYPE_DOCUMENT, "images/nav/page_add.png", i18n.t("New document"), parentMenuTitleCtx,
-                Position.ctx, TYPE_ROOT, TYPE_FOLDER);
+        createNewContentAction(TYPE_WIKIPAGE, "images/nav/wikipage_add.png", i18n.t("New wikipage"),
+                parentMenuTitleCtx, Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
-        createContentModeratedActions(parentMenuTitle, contentsModerated);
+        // createContentModeratedActions(parentMenuTitle, contentsModerated);
 
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
         createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
@@ -101,9 +98,9 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
         createGoHomeAction(containers);
 
-        createEditAction(TYPE_DOCUMENT);
+        createEditAction(TYPE_WIKIPAGE);
 
-        createTranslateAction(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE);
+        createTranslateAction(TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
 
         createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
         createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
@@ -111,6 +108,6 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
     @Override
     protected void createPostSessionInitActions() {
-        super.createUploadMediaAction(TYPE_GALLERY);
+        // super.createUploadMediaAction();
     }
 }

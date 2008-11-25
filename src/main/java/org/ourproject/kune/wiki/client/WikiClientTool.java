@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.blogs.client;
+package org.ourproject.kune.wiki.client;
 
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
@@ -26,27 +26,27 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-public class BlogClientTool extends FoldableAbstractClientTool {
-    public static final String TYPE_ROOT = "blogs.root";
-    public static final String TYPE_BLOG = "blogs.blog";
-    public static final String TYPE_POST = "blogs.post";
-    public static final String TYPE_UPLOADEDFILE = "blogs.uploaded";
-    public static final String NAME = "blogs";
+public class WikiClientTool extends FoldableAbstractClientTool {
+    public static final String TYPE_ROOT = "wiki.root";
+    public static final String TYPE_FOLDER = "wiki.folder";
+    public static final String TYPE_WIKIPAGE = "wiki.wikipage";
+    public static final String TYPE_UPLOADEDFILE = "wiki.uploaded";
+    public static final String NAME = "wiki";
 
-    public BlogClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+    public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
             ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
-        super(NAME, i18n.t("blogs"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
+        super(NAME, i18n.t("wiki"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
 
-        // registerAclEditableTypes();
-        registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-        registerDragableTypes(TYPE_UPLOADEDFILE);
-        registerDropableTypes(TYPE_ROOT);
-        registerPublishModerableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-        registerRateableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
-        registerRenamableTypes(TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE);
-        registerTageableTypes(TYPE_BLOG, TYPE_UPLOADEDFILE, TYPE_POST);
-        // registerTranslatableTypes();
+        // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
+        registerAuthorableTypes(TYPE_WIKIPAGE, TYPE_UPLOADEDFILE);
+        registerDragableTypes(TYPE_WIKIPAGE, TYPE_FOLDER, TYPE_UPLOADEDFILE);
+        registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
+        // registerPublishModerableTypes();
+        registerRateableTypes(TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
+        registerRenamableTypes(TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
+        registerTageableTypes(TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
+        registerTranslatableTypes(TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
 
         registerIcons();
     }
@@ -56,8 +56,10 @@ public class BlogClientTool extends FoldableAbstractClientTool {
     }
 
     protected void registerIcons() {
-        registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
-        registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
+        registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
+        // registerContentTypeIcon(TYPE_FOLDER, "images/nav/wiki.png");
+        registerContentTypeIcon(TYPE_WIKIPAGE, "images/nav/wikipage.png");
         registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     }
+
 }

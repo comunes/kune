@@ -82,4 +82,20 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     protected void registerXmppNotifyCapableTypes(String... typeIds) {
         contentCapabilitiesRegistry.getXmppNotificyCapable().register(typeIds);
     }
+
+    protected void registerUploadTypesAndMimes(String typeUploadedfile) {
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("image"), "images/nav/picture.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("video"), "images/nav/film.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "pdf"), "images/nav/page_pdf.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "zip"), "images/nav/page_zip.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "zip"), "images/nav/page_zip.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("text"), "images/nav/page_text.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "msword"),
+                "images/nav/page_word.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "excel"),
+                "images/nav/page_excel.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "mspowerpoint"),
+                "images/nav/page_pps.png");
+        registerContentTypeIcon(typeUploadedfile, "images/nav/page.png");
+    }
 }

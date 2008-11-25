@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 
 public class SimpleToolbar extends Composite {
 
@@ -40,6 +41,11 @@ public class SimpleToolbar extends Composite {
     public void add(final Widget widget) {
         childPanel.add(widget);
         childPanel.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
+    }
+
+    public void add(final Widget widget, VerticalAlignmentConstant valign) {
+        childPanel.add(widget);
+        childPanel.setCellVerticalAlignment(widget, valign);
     }
 
     public Widget addFill() {

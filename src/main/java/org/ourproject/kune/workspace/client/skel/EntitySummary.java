@@ -80,7 +80,7 @@ public class EntitySummary {
         anchorLayoutPanel.add(entityTools, new AnchorLayoutData("100%"));
         // height: is 25 * number of tools :-( finding a way to make this
         // automatic
-        anchorLayoutPanel.add(entitySummary, new AnchorLayoutData("100% -75"));
+        anchorLayoutPanel.add(entitySummary, new AnchorLayoutData("100% -" + 4 * 25));
         mainFitPanel.add(anchorLayoutPanel);
     }
 
