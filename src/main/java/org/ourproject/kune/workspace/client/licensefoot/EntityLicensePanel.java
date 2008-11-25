@@ -28,6 +28,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EntityLicensePanel implements EntityLicenseView {
@@ -63,10 +64,23 @@ public class EntityLicensePanel implements EntityLicenseView {
         licenseImage.addClickListener(clickListener);
         copyright.setVisible(false);
         licenseLabel.setVisible(false);
-        licenseImage.setVisible(false);
+
+        MouseListenerAdapter mouseListenerAdapter = new MouseListenerAdapter() {
+            @Override
+            public void onMouseEnter(Widget sender) {
+                copyright.setVisible(true);
+                licenseLabel.setVisible(true);
+            }
+
+            @Override
+            public void onMouseLeave(Widget sender) {
+            }
+        };
+        licenseImage.addMouseListener(mouseListenerAdapter);
 
         copyright.addStyleName("kune-Margin-Large-l");
         licenseLabel.setStyleName("k-entitylicensepanel-licensetext");
+        licenseImage.setStyleName("k-elp-limg");
     }
 
     public void attach() {
@@ -88,9 +102,8 @@ public class EntityLicensePanel implements EntityLicenseView {
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
         copyright.setText(i18n.t("© [%s], under license: ", groupName));
         licenseLabel.setText(licenseDTO.getLongName());
-        copyright.setVisible(true);
-        licenseLabel.setVisible(true);
-        licenseImage.setVisible(true);
+        copyright.setVisible(false);
+        licenseLabel.setVisible(false);
         licenseImage.setUrl(licenseDTO.getImageUrl());
     }
 }

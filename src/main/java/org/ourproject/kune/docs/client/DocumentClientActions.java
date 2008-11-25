@@ -32,8 +32,6 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescript
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -73,19 +71,17 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         String parentMenuTitle = i18n.t("File");
         String parentMenuTitleCtx = i18n.t("Folder");
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder = createContainerAction(TYPE_FOLDER,
-                "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx, i18n.t("New"),
-                i18n.t("New folder"));
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addGallery = createContainerAction(TYPE_GALLERY,
-                "images/nav/gallery_add.png", i18n.t("New gallery"), parentMenuTitleCtx, i18n.t("New"),
-                i18n.t("New gallery"));
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addWiki = createContainerAction(TYPE_WIKI,
-                "images/nav/wiki_add.png", i18n.t("New wiki"), parentMenuTitleCtx, i18n.t("New"), i18n.t("wiki"));
+        createNewContainerAction(TYPE_FOLDER, "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx,
+                i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_FOLDER);
+        createNewContainerAction(TYPE_GALLERY, "images/nav/gallery_add.png", i18n.t("New gallery"), parentMenuTitleCtx,
+                i18n.t("New"), i18n.t("New gallery"), Position.ctx, TYPE_ROOT);
+        createNewContainerAction(TYPE_WIKI, "images/nav/wiki_add.png", i18n.t("New wiki"), parentMenuTitleCtx,
+                i18n.t("New"), i18n.t("wiki"), Position.ctx, TYPE_ROOT);
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addDoc = createContentAction("images/nav/page_add.png",
-                i18n.t("New document"), parentMenuTitleCtx, TYPE_DOCUMENT);
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addWikiPage = createContentAction(
-                "images/nav/wikipage_add.png", parentMenuTitleCtx, i18n.t("New wikipage"), TYPE_WIKIPAGE);
+        createNewContentAction(TYPE_DOCUMENT, "images/nav/page_add.png", i18n.t("New document"), parentMenuTitleCtx,
+                Position.ctx, TYPE_ROOT, TYPE_FOLDER);
+        createNewContentAction(TYPE_WIKIPAGE, "images/nav/wikipage_add.png", parentMenuTitleCtx,
+                i18n.t("New wikipage"), Position.ctx, TYPE_WIKI);
 
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = createDelContainerAction("Delete folder",
                 parentMenuTitleCtx);
@@ -111,20 +107,6 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
                 "images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
 
-        final ActionToolbarMenuDescriptor<StateToken> setPublishStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Published online"), parentMenuTitle,
-                ContentStatusDTO.publishedOnline);
-        final ActionToolbarMenuDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Editing in progress"), parentMenuTitle,
-                ContentStatusDTO.editingInProgress);
-        final ActionToolbarMenuDescriptor<StateToken> setRejectStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Rejected"), parentMenuTitle, ContentStatusDTO.rejected);
-        final ActionToolbarMenuDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Submitted for publish"), parentMenuTitle,
-                ContentStatusDTO.publishedOnline);
-        final ActionToolbarMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("In the dustbin"), parentMenuTitle, ContentStatusDTO.inTheDustbin);
-
         final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_GALLERY, TYPE_WIKI, TYPE_WIKIPAGE,
                 TYPE_UPLOADEDFILE };
         final String[] containersNoRoot = { TYPE_FOLDER, TYPE_GALLERY, TYPE_WIKI };
@@ -132,29 +114,20 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         final String[] contents = { TYPE_DOCUMENT, TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
         final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
 
-        contentActionRegistry.addAction(setPublishStatus, contentsModerated);
-        contentActionRegistry.addAction(setEditionInProgressStatus, contentsModerated);
-        contentActionRegistry.addAction(setRejectStatus, contentsModerated);
-        contentActionRegistry.addAction(setSubmittedForPublishStatus, contentsModerated);
-        contentActionRegistry.addAction(setInTheDustBinStatus, contentsModerated);
-        contextActionRegistry.addAction(addDoc, TYPE_ROOT, TYPE_FOLDER);
-        contextActionRegistry.addAction(addWikiPage, TYPE_WIKI);
-        contextActionRegistry.addAction(addFolder, TYPE_ROOT, TYPE_FOLDER);
-        contextActionRegistry.addAction(addWiki, TYPE_ROOT);
-        contextActionRegistry.addAction(addGallery, TYPE_ROOT);
+        createContentModeratedActions(parentMenuTitle, contentsModerated);
+        createDownloadActions(TYPE_UPLOADEDFILE);
+
         contextActionRegistry.addAction(go, all);
         contentActionRegistry.addAction(renameCtn, contents);
         contextActionRegistry.addAction(renameCtx, containersNoRoot);
         contextActionRegistry.addAction(refreshCtx, containers);
         contentActionRegistry.addAction(refreshCnt, contents);
         contextActionRegistry.addAction(uploadFile, TYPE_ROOT, TYPE_FOLDER);
-        contentActionRegistry.addAction(download, TYPE_UPLOADEDFILE);
         contentActionRegistry.addAction(delContent, contents);
         contextActionRegistry.addAction(delContainer, containersNoRoot);
         contentActionRegistry.addAction(setAsDefGroupCnt, TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         // contentActionRegistry.addAction(setAsDefGroupCxt,);
         contextActionRegistry.addAction(goGroupHome, containers);
-        contextActionRegistry.addAction(downloadCtx, TYPE_UPLOADEDFILE);
         contentActionRegistry.addAction(editContent, TYPE_DOCUMENT, TYPE_WIKIPAGE);
         contentActionRegistry.addAction(translateContent, TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE,
                 TYPE_WIKI, TYPE_WIKIPAGE);

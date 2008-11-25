@@ -29,8 +29,6 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescript
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -70,10 +68,10 @@ public class BlogClientActions extends AbstractFoldableContentActions {
         String parentMenuTitle = i18n.t("Post");
         String parentMenuTitleCtx = i18n.t("Blog");
 
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addBlog = createContainerAction(TYPE_BLOG,
-                "images/nav/blog_add.png", i18n.t("New blog"), parentMenuTitleCtx, i18n.t("New"), i18n.t("New blog"));
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addPost = createContentAction("images/nav/post_add.png",
-                i18n.t("New post"), parentMenuTitleCtx, TYPE_POST);
+        createNewContainerAction(TYPE_BLOG, "images/nav/blog_add.png", i18n.t("New blog"), parentMenuTitleCtx,
+                i18n.t("New"), i18n.t("New blog"), Position.ctx, TYPE_ROOT);
+        createNewContentAction(TYPE_POST, "images/nav/post_add.png", i18n.t("New post"), parentMenuTitleCtx,
+                Position.ctx, TYPE_BLOG);
 
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = createDelContainerAction("Delete blog",
                 parentMenuTitleCtx);
@@ -95,51 +93,30 @@ public class BlogClientActions extends AbstractFoldableContentActions {
         final ActionToolbarMenuDescriptor<StateToken> refreshCnt = createRefreshCntAction(parentMenuTitle);
 
         final ActionToolbarMenuDescriptor<StateToken> refreshCtx = createRefreshCxtAction(parentMenuTitleCtx);
-
         final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile = createUploadAction(i18n.t("Upload file"),
                 "images/nav/upload.png", i18n.t("Upload some files (images, PDFs, ...)"), null);
 
-        final ActionToolbarMenuDescriptor<StateToken> setPublishStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Published online"), parentMenuTitle,
-                ContentStatusDTO.publishedOnline);
-        final ActionToolbarMenuDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Editing in progress"), parentMenuTitle,
-                ContentStatusDTO.editingInProgress);
-        final ActionToolbarMenuDescriptor<StateToken> setRejectStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Rejected"), parentMenuTitle, ContentStatusDTO.rejected);
-        final ActionToolbarMenuDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Submitted for publish"), parentMenuTitle,
-                ContentStatusDTO.publishedOnline);
-        final ActionToolbarMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("In the dustbin"), parentMenuTitle, ContentStatusDTO.inTheDustbin);
-
         final String[] all = { TYPE_ROOT, TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
+        final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
         final String[] containersNoRoot = { TYPE_BLOG };
         final String[] containers = { TYPE_ROOT, TYPE_BLOG };
         final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
-        final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
 
-        contentActionRegistry.addAction(setPublishStatus, contentsModerated);
-        contentActionRegistry.addAction(setEditionInProgressStatus, contentsModerated);
-        contentActionRegistry.addAction(setRejectStatus, contentsModerated);
-        contentActionRegistry.addAction(setSubmittedForPublishStatus, contentsModerated);
-        contentActionRegistry.addAction(setInTheDustBinStatus, contentsModerated);
-        contextActionRegistry.addAction(addBlog, TYPE_ROOT);
-        contextActionRegistry.addAction(addPost, TYPE_BLOG);
+        createContentModeratedActions(parentMenuTitle, contentsModerated);
+
         contextActionRegistry.addAction(go, all);
         contentActionRegistry.addAction(renameCtn, contents);
         contextActionRegistry.addAction(renameCtx, containersNoRoot);
         contextActionRegistry.addAction(refreshCtx, containers);
         contentActionRegistry.addAction(refreshCnt, contents);
         contextActionRegistry.addAction(uploadFile, TYPE_BLOG);
-        contentActionRegistry.addAction(download, TYPE_UPLOADEDFILE);
         contentActionRegistry.addAction(delContent, contents);
         contextActionRegistry.addAction(delContainer, containersNoRoot);
         contentActionRegistry.addAction(setAsDefGroupCnt, TYPE_POST, TYPE_UPLOADEDFILE);
         // ContentRPC Authorized must permit folders
         // contentActionRegistry.addAction(setAsDefGroupCxt, TYPE_BLOG);
+
         contextActionRegistry.addAction(goGroupHome, containers);
-        contextActionRegistry.addAction(downloadCtx, TYPE_UPLOADEDFILE);
         contentActionRegistry.addAction(editContent, TYPE_POST);
         // contentActionRegistry.addAction(translateContent, );
     }
