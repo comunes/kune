@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.docs.server;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -40,17 +42,18 @@ import org.ourproject.kune.platf.server.tool.ServerToolTarget;
 import com.google.inject.Inject;
 
 public class DocumentServerTool implements ServerTool {
-    public static final String TYPE_ROOT = "docs.root";
-    public static final String TYPE_FOLDER = "docs.folder";
-    public static final String TYPE_DOCUMENT = "docs.doc";
-    public static final String TYPE_GALLERY = "docs.gallery";
+    public static final String NAME = "docs";
+    public static final String TYPE_ROOT = NAME + "." + "root";
+    public static final String TYPE_FOLDER = NAME + "." + "folder";
+    public static final String TYPE_DOCUMENT = NAME + "." + "doc";
+    public static final String TYPE_GALLERY = NAME + "." + "gallery";
+    public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
+
     public static final String TYPE_BLOG = "docs.blog";
     public static final String TYPE_POST = "docs.post";
     public static final String TYPE_WIKI = "docs.wiki";
     public static final String TYPE_WIKIPAGE = "docs.wikipage";
-    public static final String TYPE_UPLOADEDFILE = "docs.uploaded";
 
-    public static final String NAME = "docs";
     public static final String ROOT_NAME = "documents";
 
     private final ContentManager contentManager;
@@ -94,13 +97,14 @@ public class DocumentServerTool implements ServerTool {
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
         final String longName = group.getLongName();
-        final Content descriptor = contentManager.createContent(i18n.t("About [%s]", longName), "", user, rootFolder,
+        final Content content = contentManager.createContent(i18n.t("About [%s]", longName), "", user, rootFolder,
                 DocumentServerTool.TYPE_DOCUMENT);
-        descriptor.addAuthor(user);
-        descriptor.setLanguage(user.getLanguage());
-        descriptor.setTypeId(TYPE_DOCUMENT);
-        descriptor.setStatus(ContentStatus.publishedOnline);
-        group.setDefaultContent(descriptor);
+        content.addAuthor(user);
+        content.setLanguage(user.getLanguage());
+        content.setTypeId(TYPE_DOCUMENT);
+        content.setStatus(ContentStatus.publishedOnline);
+        content.setPublishedOn(new Date());
+        group.setDefaultContent(content);
         return group;
     }
 

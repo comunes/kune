@@ -17,18 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.blogs.server;
+package org.ourproject.kune.gallery.server;
 
 import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.content.ContainerManager;
-import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
@@ -38,24 +35,21 @@ import org.ourproject.kune.platf.server.tool.ServerToolTarget;
 
 import com.google.inject.Inject;
 
-public class BlogServerTool implements ServerTool {
-    public static final String NAME = "blogs";
+public class GalleryServerTool implements ServerTool {
+    public static final String NAME = "gallery";
     public static final String TYPE_ROOT = NAME + "." + "root";
-    public static final String TYPE_BLOG = NAME + "." + "blog";
-    public static final String TYPE_POST = NAME + "." + "post";
+    public static final String TYPE_ALBUM = NAME + "." + "album";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
 
-    public static final String ROOT_NAME = "blogs";
+    public static final String ROOT_NAME = "gallery";
 
-    private final ContentManager contentManager;
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;
     private final I18nTranslationService i18n;
 
     @Inject
-    public BlogServerTool(final ContentManager contentManager, final ContainerManager containerManager,
+    public GalleryServerTool(final ContainerManager containerManager,
             final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
-        this.contentManager = contentManager;
         this.containerManager = containerManager;
         this.configurationManager = configurationManager;
         this.i18n = translationService;
@@ -88,19 +82,7 @@ public class BlogServerTool implements ServerTool {
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
 
-        I18nLanguage language = user.getLanguage();
-        final Container blog = containerManager.createFolder(group, rootFolder, i18n.t("Blog sample"), language,
-                TYPE_BLOG);
-
-        final Content content = contentManager.createContent(i18n.t("A post sample"), "", user, blog,
-                BlogServerTool.TYPE_POST);
-        content.addAuthor(user);
-        content.setLanguage(language);
-        content.setTypeId(TYPE_POST);
-        content.setStatus(ContentStatus.publishedOnline);
-
-        contentManager.save(user, content,
-                i18n.t("This is only a post sample. You can edit it, and rename this post and this blog"));
+        containerManager.createFolder(group, rootFolder, i18n.t("Album sample"), user.getLanguage(), TYPE_ALBUM);
         return group;
     }
 
@@ -116,9 +98,9 @@ public class BlogServerTool implements ServerTool {
     }
 
     void checkContainerTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_BLOG)) {
+        if (typeId.equals(TYPE_ALBUM)) {
             // ok valid container
-            if ((typeId.equals(TYPE_BLOG) && parentTypeId.equals(TYPE_ROOT))) {
+            if ((typeId.equals(TYPE_ALBUM) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_ALBUM)))) {
                 // ok
             } else {
                 throw new ContainerNotPermittedException();
@@ -129,15 +111,13 @@ public class BlogServerTool implements ServerTool {
     }
 
     void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_UPLOADEDFILE) || typeId.equals(TYPE_POST)) {
+        if (typeId.equals(TYPE_UPLOADEDFILE)) {
             // ok valid content
-            if ((typeId.equals(TYPE_UPLOADEDFILE) && parentTypeId.equals(TYPE_BLOG))
-                    || (typeId.equals(TYPE_POST) && parentTypeId.equals(TYPE_BLOG))) {
+            if (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_ALBUM))) {
                 // ok
             } else {
                 throw new ContentNotPermittedException();
             }
-
         } else {
             throw new ContentNotPermittedException();
         }

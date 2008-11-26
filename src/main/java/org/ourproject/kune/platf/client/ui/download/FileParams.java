@@ -24,4 +24,5 @@ public interface FileParams {
     String DOWNLOAD = "download";
     String IMGSIZE = "imgsize";
     String FILENAME = "filename";
+    String TYPE_ID = "typeid";
 }

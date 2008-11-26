@@ -59,8 +59,8 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     protected void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException {
     }
 
-    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file)
-            throws Exception {
+    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file,
+            String typeId) throws Exception {
     }
 
     @Override
@@ -88,6 +88,7 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
             final List fileItems = upload.parseRequest(req);
             String userHash = null;
             StateToken stateToken = null;
+            String typeId = null;
             String fileName = null;
             FileItem file = null;
             for (final Iterator iterator = fileItems.iterator(); iterator.hasNext();) {
@@ -102,13 +103,17 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
                     if (name.equals(FileParams.TOKEN)) {
                         stateToken = new StateToken(value);
                     }
+                    if (name.equals(FileParams.TYPE_ID)) {
+                        typeId = value;
+                    }
                 } else {
                     fileName = item.getName();
-                    log.info("file: " + fileName + " fieldName: " + item.getFieldName() + " size: " + item.getSize());
+                    log.info("file: " + fileName + " fieldName: " + item.getFieldName() + " size: " + item.getSize()
+                            + " typeId: " + typeId);
                     file = item;
                 }
             }
-            createUploadedFile(userHash, stateToken, fileName, file);
+            createUploadedFile(userHash, stateToken, fileName, file, typeId);
             onSuccess(response);
         } catch (final FileUploadException e) {
             onFileUploadException(response);

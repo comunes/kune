@@ -16,22 +16,15 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.platf.client.ui.upload;
+ */
+package org.ourproject.kune.gallery.client.cnt;
 
-public interface FileUploaderView {
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-    void destroy();
-
-    boolean hasUploadingFiles();
-
-    void hide();
-
-    void resetPermittedExtensions();
-
-    void setPermittedExtensions(String extensions);
-
-    void setUploadParams(String userhash, String currentUploadStateToken, String typeId);
-
-    void show();
-
+public class GalleryViewerPanel extends FoldableContentPanel implements GalleryViewerView {
+    public GalleryViewerPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
+        super(ws, i18n);
+    }
 }

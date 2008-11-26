@@ -22,6 +22,7 @@ package org.ourproject.kune.app.server;
 import org.ourproject.kune.blogs.server.BlogServerModule;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
+import org.ourproject.kune.gallery.server.GalleryServerModule;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.I18nService;
@@ -114,6 +115,7 @@ public class KuneRackModule implements RackModule {
         builder.use(new BlogServerModule());
         builder.use(new WikiServerModule());
         builder.use(new ChatServerModule());
+        builder.use(new GalleryServerModule());
         builder.use(new RESTServicesModule());
         builder.use(configModule);
     }

@@ -17,8 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.wiki.client.cnt;
+package org.ourproject.kune.gallery.client.cnt;
 
+import org.ourproject.kune.gallery.client.GalleryClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
@@ -27,31 +28,30 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
-public class WikiFolderContentPresenter extends FoldableContentPresenter implements WikiFolderContent {
+public class GalleryFolderContentPresenter extends FoldableContentPresenter implements GalleryFolderContent {
 
-    private WikiFolderContentView view;
+    private GalleryFolderContentView view;
     private final I18nTranslationService i18n;
 
-    public WikiFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
+    public GalleryFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
             final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n) {
-        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry);
+        super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry);
         this.i18n = i18n;
     }
 
-    public void init(final WikiFolderContentView view) {
+    public void init(final GalleryFolderContentView view) {
         super.init(view);
         this.view = view;
     }
 
     @Override
     protected void setState(StateContainerDTO state) {
-        if (state.getTypeId().equals(WikiClientTool.TYPE_ROOT)) {
+        if (state.getTypeId().equals(GalleryClientTool.TYPE_ROOT)) {
             ContainerDTO rootContainer = state.getRootContainer();
             if (rootContainer.getChilds().size() == 0 && rootContainer.getContents().size() == 0) {
-                view.setInfo(i18n.t("This wiki has no pages."));
+                view.setInfo(i18n.t("This gallery has no content"));
             } else {
                 view.setInfo("");
             }

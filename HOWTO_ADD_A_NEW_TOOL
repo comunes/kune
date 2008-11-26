@@ -1,0 +1,32 @@
+Here we try to describe a easy way to add a new Tool of type "Foldeable", that is, a tool with a folder/files structure. For other kind of tools (like, for instance a rich Web Calendar tool), better start from scratch creating the NewTool{ClientTool|ClientActions|ServerTool} classes and implementing the specific functionality.
+
+The stpes (substitute 'wiki' and 'Wiki' for the new tool name):
+
+cd src/main/java/org/ourproject/kune/
+rsync -r -C docs/ wiki
+cd wiki/
+find . -name '*.java' | xargs rename 's/Document/Wiki/g'
+find . -name '*.java' | xargs rename 's/Docs/Wiki/g'
+find . -name '*.java' | xargs rename 's/Doc/Wiki/g'
+find . -name '*.xml' | xargs rename 's/Docs/Wiki/g'
+find  . -name *java | xargs perl -p -i -e 's/Documents/Wiki/g'
+find  . -name *java | xargs perl -p -i -e 's/Document/Wiki/g'
+find  . -name *java | xargs perl -p -i -e 's/Docs/Wiki/g'
+find  . -name *java | xargs perl -p -i -e 's/Doc/Wiki/g'
+find  . -name *java | xargs perl -p -i -e 's/\.docs\./\.wiki\./g'
+find  . -name *java | xargs perl -p -i -e 's/documents/wiki/g'
+find  . -name *java | xargs perl -p -i -e 's/docs/wiki/g'
+
+Edit WikiClientTool and WikiServerTool and WikiClientActions with the specific actions and types the tool will have.
+
+Add
+  <inherits name='org.ourproject.kune.wiki.Kune-Wiki' />
+to Kune.gwt.xml
+
+Add 
+  builder.use(new WikiServerModule()); 
+to KuneRackModule.java.
+
+Add the WikiClientModule to KuneEntryPoint.
+
+

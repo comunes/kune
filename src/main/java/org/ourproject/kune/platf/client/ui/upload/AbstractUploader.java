@@ -24,11 +24,12 @@ import com.gwtext.client.core.UrlParam;
 
 public class AbstractUploader {
 
-    public UrlParam[] genUploadParams(final String userhash, final String currentStateToken) {
+    public UrlParam[] genUploadParams(final String userhash, final String currentStateToken, final String typeId) {
         // Warning take into account param[size]
-        final UrlParam param[] = new UrlParam[2];
+        final UrlParam param[] = new UrlParam[3];
         param[0] = new UrlParam(FileParams.HASH, userhash);
         param[1] = new UrlParam(FileParams.TOKEN, currentStateToken);
+        param[2] = new UrlParam(FileParams.TYPE_ID, typeId);
         return param;
     }
 }

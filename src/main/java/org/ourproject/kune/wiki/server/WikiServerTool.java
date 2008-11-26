@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.wiki.server;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
@@ -40,12 +42,12 @@ import org.ourproject.kune.platf.server.tool.ServerToolTarget;
 import com.google.inject.Inject;
 
 public class WikiServerTool implements ServerTool {
-    public static final String TYPE_ROOT = "wiki.root";
-    public static final String TYPE_FOLDER = "wiki.folder";
-    public static final String TYPE_WIKIPAGE = "wiki.wikipage";
-    public static final String TYPE_UPLOADEDFILE = "wiki.uploaded";
-
     public static final String NAME = "wiki";
+    public static final String TYPE_ROOT = NAME + "." + "root";
+    public static final String TYPE_FOLDER = NAME + "." + "folder";
+    public static final String TYPE_WIKIPAGE = NAME + "." + "wikipage";
+    public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
+
     public static final String ROOT_NAME = "wiki";
 
     private final ContentManager contentManager;
@@ -111,6 +113,8 @@ public class WikiServerTool implements ServerTool {
     }
 
     public void onCreateContent(final Content content, final Container parent) {
+        content.setStatus(ContentStatus.publishedOnline);
+        content.setPublishedOn(new Date());
     }
 
     @Inject

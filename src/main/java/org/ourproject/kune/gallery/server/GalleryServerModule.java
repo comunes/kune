@@ -16,22 +16,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.platf.client.ui.upload;
+ */
+package org.ourproject.kune.gallery.server;
 
-public interface FileUploaderView {
+import com.google.inject.Binder;
+import com.google.inject.Module;
 
-    void destroy();
-
-    boolean hasUploadingFiles();
-
-    void hide();
-
-    void resetPermittedExtensions();
-
-    void setPermittedExtensions(String extensions);
-
-    void setUploadParams(String userhash, String currentUploadStateToken, String typeId);
-
-    void show();
-
+public class GalleryServerModule implements Module {
+    public void configure(final Binder binder) {
+        binder.bind(GalleryServerTool.class).asEagerSingleton();
+    }
 }

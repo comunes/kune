@@ -92,8 +92,8 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
         setPermittedExtensions(exts);
     }
 
-    public void setUploadParams(final String userhash, final String currentStateToken) {
-        dialog.setBaseParams(genUploadParams(userhash, currentStateToken));
+    public void setUploadParams(final String userhash, final String currentStateToken, final String typeId) {
+        dialog.setBaseParams(genUploadParams(userhash, currentStateToken, typeId));
     }
 
     public void show() {

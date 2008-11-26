@@ -27,11 +27,11 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 public class WikiClientTool extends FoldableAbstractClientTool {
-    public static final String TYPE_ROOT = "wiki.root";
-    public static final String TYPE_FOLDER = "wiki.folder";
-    public static final String TYPE_WIKIPAGE = "wiki.wikipage";
-    public static final String TYPE_UPLOADEDFILE = "wiki.uploaded";
     public static final String NAME = "wiki";
+    public static final String TYPE_ROOT = NAME + "." + "root";
+    public static final String TYPE_FOLDER = NAME + "." + "folder";
+    public static final String TYPE_WIKIPAGE = NAME + "." + "wikipage";
+    public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
 
     public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,

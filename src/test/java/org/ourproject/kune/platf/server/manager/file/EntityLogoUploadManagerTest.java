@@ -44,7 +44,7 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
     @Test(expected = SessionExpiredException.class)
     public void testSessionExp() throws Exception {
-        manager.createUploadedFile("otherhash", null, null, null);
+        manager.createUploadedFile("otherhash", null, null, null, null);
     }
 
     @Ignore
@@ -56,6 +56,6 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
     @Test(expected = UserMustBeLoggedException.class)
     public void testUserMustBeAuth() throws Exception {
-        manager.createUploadedFile(null, null, null, null);
+        manager.createUploadedFile(null, null, null, null, null);
     }
 }

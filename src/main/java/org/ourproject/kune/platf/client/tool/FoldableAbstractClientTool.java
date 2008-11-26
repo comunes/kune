@@ -6,6 +6,8 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 public abstract class FoldableAbstractClientTool extends AbstractClientTool {
+    public static final String UPLOADEDFILE_SUFFIX = "uploaded";
+
     protected final ContentCapabilitiesRegistry contentCapabilitiesRegistry;
 
     public FoldableAbstractClientTool(String shortName, String longName, ToolSelector toolSelector,
@@ -71,18 +73,6 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
         contentCapabilitiesRegistry.getTranslatable().register(typeIds);
     }
 
-    protected void registerVersionableTypes(String... typeIds) {
-        contentCapabilitiesRegistry.getVersionable().register(typeIds);
-    }
-
-    protected void registerXmppComentableTypes(String... typeIds) {
-        contentCapabilitiesRegistry.getXmppComentable().register(typeIds);
-    }
-
-    protected void registerXmppNotifyCapableTypes(String... typeIds) {
-        contentCapabilitiesRegistry.getXmppNotificyCapable().register(typeIds);
-    }
-
     protected void registerUploadTypesAndMimes(String typeUploadedfile) {
         registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("image"), "images/nav/picture.png");
         registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("video"), "images/nav/film.png");
@@ -97,5 +87,17 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
         registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "mspowerpoint"),
                 "images/nav/page_pps.png");
         registerContentTypeIcon(typeUploadedfile, "images/nav/page.png");
+    }
+
+    protected void registerVersionableTypes(String... typeIds) {
+        contentCapabilitiesRegistry.getVersionable().register(typeIds);
+    }
+
+    protected void registerXmppComentableTypes(String... typeIds) {
+        contentCapabilitiesRegistry.getXmppComentable().register(typeIds);
+    }
+
+    protected void registerXmppNotifyCapableTypes(String... typeIds) {
+        contentCapabilitiesRegistry.getXmppNotificyCapable().register(typeIds);
     }
 }

@@ -20,6 +20,7 @@
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -40,14 +41,16 @@ public class FileUploaderPresenter implements FileUploader {
     public boolean checkFolderChange() {
         final StateToken currentFolderStateToken = session.getCurrentStateToken().clone().clearDocument();
         if (sameContainer()) {
-            view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString());
+            view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString(),
+                    currentFolderStateToken.getTool() + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX);
             return true;
         }
         if (view.hasUploadingFiles()) {
             return false;
         } else {
             currentUploadStateToken = currentFolderStateToken;
-            view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString());
+            view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString(),
+                    currentFolderStateToken.getTool() + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX);
             return true;
         }
     }

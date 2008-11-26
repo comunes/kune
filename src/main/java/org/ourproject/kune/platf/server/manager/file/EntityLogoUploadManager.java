@@ -90,8 +90,8 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
     @Transactional(type = TransactionType.READ_WRITE)
-    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file)
-            throws Exception {
+    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file,
+            String typeId) throws Exception {
         String mimeTypeS = file.getContentType();
         File tmpOrigFile = File.createTempFile("logoOrig", "");
         file.write(tmpOrigFile);

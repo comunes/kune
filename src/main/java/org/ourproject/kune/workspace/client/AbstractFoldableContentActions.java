@@ -1,7 +1,5 @@
 package org.ourproject.kune.workspace.client;
 
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
-
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
@@ -199,8 +197,8 @@ public abstract class AbstractFoldableContentActions {
         downloadCtx.setTextDescription(i18n.t("Download"));
         downloadCtx.setIconUrl("images/nav/download.png");
 
-        contentActionRegistry.addAction(download, TYPE_UPLOADEDFILE);
-        contextActionRegistry.addAction(downloadCtx, TYPE_UPLOADEDFILE);
+        contentActionRegistry.addAction(download, typeUploadedfile);
+        contextActionRegistry.addAction(downloadCtx, typeUploadedfile);
     }
 
     protected ActionToolbarButtonDescriptor<StateToken> createEditAction(String... registerInTypes) {

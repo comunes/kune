@@ -20,7 +20,6 @@
 package org.ourproject.kune.blogs.client.cnt;
 
 import org.ourproject.kune.blogs.client.BlogClientTool;
-import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
@@ -48,7 +47,7 @@ public class BlogFolderContentPresenter extends FoldableContentPresenter impleme
 
     @Override
     protected void setState(StateContainerDTO state) {
-        if (state.getTypeId().equals(ChatClientTool.TYPE_ROOT)) {
+        if (state.getTypeId().equals(BlogClientTool.TYPE_ROOT)) {
             if (state.getRootContainer().getChilds().size() == 0) {
                 view.setInfo(i18n.t("This group has no blogs."));
             } else {

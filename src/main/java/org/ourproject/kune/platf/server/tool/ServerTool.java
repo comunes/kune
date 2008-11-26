@@ -32,6 +32,9 @@ import org.ourproject.kune.platf.server.domain.User;
  */
 public interface ServerTool {
 
+    /* Same constant in client */
+    public static final String UPLOADEDFILE_SUFFIX = "uploaded";
+
     void checkTypesBeforeContainerCreation(String parentTypeId, String typeId);
 
     void checkTypesBeforeContentCreation(String parentTypeId, String typeId);

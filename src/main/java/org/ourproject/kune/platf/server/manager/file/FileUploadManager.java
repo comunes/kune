@@ -25,7 +25,6 @@ import magick.MagickException;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
-import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
@@ -92,16 +91,16 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
     }
 
     @Override
-    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file)
-            throws Exception {
-        createUploadedFileWrapped(userHash, stateToken, fileName, file);
+    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file,
+            String typeId) throws Exception {
+        createUploadedFileWrapped(userHash, stateToken, fileName, file, typeId);
     }
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container)
     @Transactional(type = TransactionType.READ_WRITE)
     Content createUploadedFileWrapped(final String userHash, final StateToken stateToken, final String fileName,
-            final FileItem fileUploadItem) throws Exception {
+            final FileItem fileUploadItem, String typeId) throws Exception {
         final String relDir = FileUtils.toDir(stateToken);
         final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + relDir;
         fileManager.mkdir(absDir);
@@ -127,7 +126,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
                     user, AccessRol.Editor);
             final String preview = "Preview of this file (in development)";
             final Content content = contentManager.createContent(FileUtils.getFileNameWithoutExtension(file.getName(),
-                    extension), preview, user, container, DocumentServerTool.TYPE_UPLOADEDFILE);
+                    extension), preview, user, container, typeId);
             content.setMimeType(basicMimeType);
             content.setFilename(file.getName());
             return content;

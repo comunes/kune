@@ -22,6 +22,7 @@ package org.ourproject.kune.app.client;
 import org.ourproject.kune.blogs.client.BlogClientModule;
 import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocumentClientModule;
+import org.ourproject.kune.gallery.client.GalleryClientModule;
 import org.ourproject.kune.platf.client.services.KuneCoreModule;
 import org.ourproject.kune.platf.client.services.KuneModule;
 import org.ourproject.kune.platf.client.services.KunePlatformModule;
@@ -57,6 +58,6 @@ public class KuneEntryPoint implements EntryPoint {
     public void onModuleLoadCont() {
         Suco.install(new KuneCoreModule(), new KuneRegistryModule(), new KunePlatformModule(),
                 new KuneWorkspaceModule(), new EmiteUIModule(), new DocumentClientModule(), new BlogClientModule(),
-                new WikiClientModule(), new ChatClientModule(), new KuneModule());
+                new WikiClientModule(), new ChatClientModule(), new GalleryClientModule(), new KuneModule());
     }
 }
