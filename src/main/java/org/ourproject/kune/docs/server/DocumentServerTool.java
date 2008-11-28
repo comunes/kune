@@ -26,12 +26,10 @@ import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
-import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
@@ -46,13 +44,7 @@ public class DocumentServerTool implements ServerTool {
     public static final String TYPE_ROOT = NAME + "." + "root";
     public static final String TYPE_FOLDER = NAME + "." + "folder";
     public static final String TYPE_DOCUMENT = NAME + "." + "doc";
-    public static final String TYPE_GALLERY = NAME + "." + "gallery";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
-
-    public static final String TYPE_BLOG = "docs.blog";
-    public static final String TYPE_POST = "docs.post";
-    public static final String TYPE_WIKI = "docs.wiki";
-    public static final String TYPE_WIKIPAGE = "docs.wikipage";
 
     public static final String ROOT_NAME = "documents";
 
@@ -109,14 +101,6 @@ public class DocumentServerTool implements ServerTool {
     }
 
     public void onCreateContainer(final Container container, final Container parent) {
-        if (container.getTypeId().equals(TYPE_WIKI)) {
-            AccessLists wikiAcl = new AccessLists();
-            wikiAcl.getAdmins().setMode(GroupListMode.NORMAL);
-            wikiAcl.getAdmins().add(container.getOwner());
-            wikiAcl.getEditors().setMode(GroupListMode.EVERYONE);
-            wikiAcl.getViewers().setMode(GroupListMode.EVERYONE);
-            container.setAccessLists(wikiAcl);
-        }
     }
 
     public void onCreateContent(final Content content, final Container parent) {
@@ -128,13 +112,9 @@ public class DocumentServerTool implements ServerTool {
     }
 
     void checkContainerTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_FOLDER) || typeId.equals(TYPE_GALLERY) || typeId.equals(TYPE_WIKI)
-                || typeId.equals(TYPE_BLOG)) {
+        if (typeId.equals(TYPE_FOLDER)) {
             // ok valid container
-            if ((typeId.equals(TYPE_FOLDER) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
-                    || (typeId.equals(TYPE_GALLERY) && (parentTypeId.equals(TYPE_ROOT)))
-                    || (typeId.equals(TYPE_WIKI) && parentTypeId.equals(TYPE_ROOT))
-                    || (typeId.equals(TYPE_BLOG) && parentTypeId.equals(TYPE_ROOT))) {
+            if ((typeId.equals(TYPE_FOLDER) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
                 // ok
             } else {
                 throw new ContainerNotPermittedException();
@@ -145,14 +125,10 @@ public class DocumentServerTool implements ServerTool {
     }
 
     void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_WIKIPAGE) || typeId.equals(TYPE_UPLOADEDFILE)
-                || typeId.equals(TYPE_POST)) {
+        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE)) {
             // ok valid content
             if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
-                    || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT)
-                            || parentTypeId.equals(TYPE_FOLDER) || parentTypeId.equals(TYPE_GALLERY)))
-                    || (typeId.equals(TYPE_WIKIPAGE) && parentTypeId.equals(TYPE_WIKI))
-                    || (typeId.equals(TYPE_POST) && parentTypeId.equals(TYPE_BLOG))) {
+                    || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
                 // ok
             } else {
                 throw new ContentNotPermittedException();

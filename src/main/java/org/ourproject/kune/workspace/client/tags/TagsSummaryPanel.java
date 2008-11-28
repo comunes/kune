@@ -50,6 +50,7 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
         super.add(vp);
         // super.setBorderStylePrimaryName("k-dropdownouter-tags");
         flowPanel.addStyleName("kune-Margin-Small-trbl");
+        flowPanel.addStyleName("k-tsp-cloud");
         addInSummary();
     }
 
@@ -66,7 +67,7 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
                 presenter.doSearchTag(name);
             }
         });
-        label.addStyleName("k-tp-tag");
+        label.addStyleName("k-tsp-tag");
         label.addStyleName(style);
         flowPanel.add(label);
     }

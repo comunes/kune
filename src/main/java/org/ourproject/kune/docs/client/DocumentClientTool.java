@@ -31,7 +31,6 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
     public static final String TYPE_ROOT = NAME + "." + "root";
     public static final String TYPE_FOLDER = NAME + "." + "folder";
     public static final String TYPE_DOCUMENT = NAME + "." + "doc";
-    public static final String TYPE_GALLERY = NAME + "." + "gallery";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
@@ -42,10 +41,10 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
         // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         registerDragableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
-        registerDropableTypes(TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY);
+        registerDropableTypes(TYPE_ROOT, TYPE_FOLDER);
         registerPublishModerableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         registerRateableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
-        registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE);
+        registerRenamableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
         registerTageableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         registerTranslatableTypes(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
 
@@ -58,7 +57,6 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
 
     protected void registerIcons() {
         registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
-        registerContentTypeIcon(TYPE_GALLERY, "images/nav/gallery.png");
         registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
         registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     }

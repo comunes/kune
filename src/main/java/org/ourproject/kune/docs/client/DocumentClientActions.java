@@ -20,7 +20,6 @@
 
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_GALLERY;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_ROOT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
 
@@ -62,10 +61,10 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
     @Override
     protected void createActions() {
-        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_GALLERY, TYPE_UPLOADEDFILE };
-        final String[] containers = { TYPE_ROOT, TYPE_FOLDER, TYPE_GALLERY };
+        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+        final String[] containers = { TYPE_ROOT, TYPE_FOLDER, };
         final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-        final String[] containersNoRoot = { TYPE_FOLDER, TYPE_GALLERY };
+        final String[] containersNoRoot = { TYPE_FOLDER };
         final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
 
         String parentMenuTitle = i18n.t("File");
@@ -73,8 +72,6 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
         createNewContainerAction(TYPE_FOLDER, "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx,
                 i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_ROOT, TYPE_FOLDER);
-        createNewContainerAction(TYPE_GALLERY, "images/nav/gallery_add.png", i18n.t("New gallery"), parentMenuTitleCtx,
-                i18n.t("New"), i18n.t("New gallery"), Position.ctx, TYPE_ROOT);
 
         createNewContentAction(TYPE_DOCUMENT, "images/nav/page_add.png", i18n.t("New document"), parentMenuTitleCtx,
                 Position.ctx, TYPE_ROOT, TYPE_FOLDER);
@@ -103,7 +100,7 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
         createEditAction(TYPE_DOCUMENT);
 
-        createTranslateAction(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_GALLERY, TYPE_UPLOADEDFILE);
+        createTranslateAction(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
 
         createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
         createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
@@ -111,6 +108,6 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
     @Override
     protected void createPostSessionInitActions() {
-        super.createUploadMediaAction(TYPE_GALLERY);
+        // super.createUploadMediaAction(TYPE_GALLERY);
     }
 }

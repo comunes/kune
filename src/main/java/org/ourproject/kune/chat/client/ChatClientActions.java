@@ -21,6 +21,7 @@
 import org.ourproject.kune.blogs.client.BlogClientTool;
 import org.ourproject.kune.chat.client.ctx.room.AddRoom;
 import org.ourproject.kune.docs.client.DocumentClientTool;
+import org.ourproject.kune.gallery.client.GalleryClientTool;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
@@ -94,10 +95,12 @@ public class ChatClientActions {
         addRoom.setMustBeAuthenticated(true);
 
         contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_DOCUMENT);
-        contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_GALLERY);
+        contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_UPLOADEDFILE);
         contentActionRegistry.addAction(chatAbout, WikiClientTool.TYPE_WIKIPAGE);
         contentActionRegistry.addAction(chatAbout, BlogClientTool.TYPE_POST);
-        contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_UPLOADEDFILE);
+        contentActionRegistry.addAction(chatAbout, WikiClientTool.TYPE_UPLOADEDFILE);
+        contentActionRegistry.addAction(chatAbout, GalleryClientTool.TYPE_UPLOADEDFILE);
+        contentActionRegistry.addAction(chatAbout, BlogClientTool.TYPE_UPLOADEDFILE);
 
         contextActionRegistry.addAction(addRoom, ChatClientTool.TYPE_ROOT, ChatClientTool.TYPE_ROOM);
         contentActionRegistry.addAction(joinRoom, ChatClientTool.TYPE_ROOM);

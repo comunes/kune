@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.platf.server.content;
 
-import static org.ourproject.kune.docs.server.DocumentServerTool.TYPE_WIKIPAGE;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -86,10 +84,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         newContent.addAuthor(author);
         newContent.setLanguage(author.getLanguage());
         newContent.setTypeId(typeId);
-        if (typeId.equals(TYPE_WIKIPAGE)) {
-            newContent.setStatus(ContentStatus.publishedOnline);
-            newContent.setPublishedOn(new Date());
-        }
         container.addContent(newContent);
         newContent.setContainer(container);
         final Revision revision = new Revision(newContent);

@@ -96,7 +96,7 @@ public class GalleryClientActions extends AbstractFoldableContentActions {
 
         createGoHomeAction(containers);
 
-        createTranslateAction(TYPE_ALBUM, TYPE_UPLOADEDFILE);
+        // createTranslateAction(TYPE_ALBUM, TYPE_UPLOADEDFILE);
 
         createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
         createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
