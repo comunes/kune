@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
@@ -80,8 +81,6 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
             nick.setText(nickName);
         }
     }
-
-    public static final String NOT_PUBLIC = "The buddies of this user are not public";
     private final MenuItemsContainer<UserSimpleDTO> menuItemsContainer;
     private final FlowPanel flowPanel;
     private final Label otherBuddiesLabel;
@@ -107,7 +106,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         vp.add(toolbar);
         super.add(vp);
         addInSummary();
-        noBuddiesPublic = new Label(i18n.t(NOT_PUBLIC));
+        noBuddiesPublic = new Label(i18n.t(PlatfMessages.BUDDIES_NOT_PUBLIC));
         noBuddiesPublic.addStyleName("kune-Margin-7-trbl");
         noBuddiesPublic.addStyleName("k-text-gray");
     }

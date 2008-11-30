@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
@@ -18,7 +19,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
 
-    public static final String INCORRECT_NICKNAME_EMAIL_OR_PASSWORD = "Incorrect nickname/email or password";
     SignInView view;
     private final Provider<UserServiceAsync> userServiceProvider;
     private final Provider<Register> registerProvider;
@@ -77,7 +77,8 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
                     try {
                         throw caught;
                     } catch (final UserAuthException e) {
-                        view.setErrorMessage(i18n.t(INCORRECT_NICKNAME_EMAIL_OR_PASSWORD), SiteErrorType.error);
+                        view.setErrorMessage(i18n.t(PlatfMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD),
+                                SiteErrorType.error);
                     } catch (final Throwable e) {
                         view.setErrorMessage("Error in login", SiteErrorType.error);
                         Log.error("Other kind of exception in LoginFormPresenter/doLogin");

@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.socialnet;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
@@ -42,7 +43,6 @@ import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
 public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembersSummaryView {
-    public static final String NOT_PUBLIC = "The members of this group are not public";
     // private static final int MAX_HEIGHT = 110;
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
     private final I18nUITranslationService i18n;
@@ -71,7 +71,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         gridMenuPanel.getBottomBar().setCls("k-blank-toolbar");
         super.add(gridMenuPanel);
 
-        noMembersPublic = new Label(i18n.t(NOT_PUBLIC));
+        noMembersPublic = new Label(i18n.t(PlatfMessages.MEMBERS_NOT_PUBLIC));
         noMembersPublic.addStyleName("kune-Margin-7-trbl");
         noMembersPublic.addStyleName("k-text-gray");
         noMembersPublic.setVisible(false);

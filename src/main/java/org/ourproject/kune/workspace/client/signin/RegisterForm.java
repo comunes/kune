@@ -20,6 +20,7 @@
 
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
+import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.gwtext.client.data.SimpleStore;
@@ -33,8 +34,6 @@ import com.gwtext.client.widgets.form.ValidationException;
 import com.gwtext.client.widgets.form.Validator;
 
 public class RegisterForm extends DefaultForm {
-
-    private static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes";
 
     public static final String NICK_FIELD = "k-urf-nick-f";
     public static final String EMAIL_FIELD = "k-urf-email-f";
@@ -73,9 +72,9 @@ public class RegisterForm extends DefaultForm {
         shortNameRegField.setMinLength(3);
         shortNameRegField.setMaxLength(15);
         shortNameRegField.setRegex("^[a-z0-9_\\-]+$");
-        shortNameRegField.setMinLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
-        shortNameRegField.setMaxLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
-        shortNameRegField.setRegexText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setMinLengthText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setMaxLengthText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setRegexText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
         shortNameRegField.setValidationEvent(false);
         add(shortNameRegField);
 

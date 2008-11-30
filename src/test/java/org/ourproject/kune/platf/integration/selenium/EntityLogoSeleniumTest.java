@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelectorPanel;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoView;
@@ -20,7 +21,7 @@ public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
 
     private void setLogo(String filename) throws Exception, IOException {
         click(gid(EntityLogoPanel.PUT_YOUR_LOGO_LINK));
-        waitForTextInside(EntityLogoSelectorPanel.DIALOG_ID, EntityLogoSelectorPanel.NORMAL_TITLE);
+        waitForTextInside(EntityLogoSelectorPanel.DIALOG_ID, PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
         File dir = new File(".");
         type(EntityLogoView.LOGO_FORM_FIELD, dir.getCanonicalPath() + File.separator + "img" + File.separator
                 + filename);

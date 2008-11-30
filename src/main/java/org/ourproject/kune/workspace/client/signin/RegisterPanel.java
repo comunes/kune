@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
@@ -13,7 +14,6 @@ import com.gwtext.client.widgets.Panel;
 
 public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
-    public static final String REGISTER_TITLE = "Register";
     public static final String ERRMSG = "k-regp-errmsg";
 
     static RegisterForm registerForm;
@@ -27,8 +27,9 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
     public RegisterPanel(final RegisterPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
             Session session, Images images) {
-        super(i18n, i18n.t(REGISTER_TITLE), true, true, 390, 450, "", i18n.t(REGISTER_TITLE), REGISTER_BUTTON_ID,
-                i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, new Listener0() {
+        super(i18n, i18n.t(PlatfMessages.REGISTER_TITLE), true, true, 390, 450, "",
+                i18n.t(PlatfMessages.REGISTER_TITLE), REGISTER_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
+                CANCEL_BUTTON_ID, new Listener0() {
                     public void onEvent() {
                         registerForm.validate();
                         if (registerForm.isValid()) {

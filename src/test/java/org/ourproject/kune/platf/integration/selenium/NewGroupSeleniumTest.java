@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.GroupType;
+import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
-import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
 public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
@@ -19,17 +19,17 @@ public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
         click(NewGroupPanel.CANCEL_BUTTON);
         assertFalse(selenium.isTextPresent(NewGroupPanel.NEWGROUP_WIZARD));
         open(SiteToken.newgroup);
-        waitForTextInside(NewGroupPanel.NEWGROUP_WIZARD, NewGroupPanel.REGISTER_A_NEW_GROUP_TITLE);
+        waitForTextInside(NewGroupPanel.NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE);
     }
 
     @Test
     public void newGroupNotLogged() throws Exception {
         openDefPage();
         assertFalse(selenium.isTextPresent(NewGroupPanel.NEWGROUP_WIZARD));
-        assertFalse(selenium.isTextPresent(NewGroupPresenter.REGISTER_TO_CREATE_A_GROUP));
+        assertFalse(selenium.isTextPresent(WorkspaceMessages.REGISTER_TO_CREATE_A_GROUP));
         open(SiteToken.newgroup);
         wait(1000);
-        assertTrue(selenium.isTextPresent(NewGroupPresenter.REGISTER_TO_CREATE_A_GROUP));
+        assertTrue(selenium.isTextPresent(WorkspaceMessages.REGISTER_TO_CREATE_A_GROUP));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
                 GroupType.ORGANIZATION);
         click(NewGroupPanel.NEXT_BUTTON);
         click(NewGroupPanel.FINISH_BUTTON);
-        waitForTextInside(gid(NewGroupPanel.ERROR_MSG_BAR), NewGroupPresenter.NAME_IN_ALREADY_IN_USE);
+        waitForTextInside(gid(NewGroupPanel.ERROR_MSG_BAR), WorkspaceMessages.NAME_IN_ALREADY_IN_USE);
     }
 
     @Test
@@ -87,6 +87,6 @@ public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
         signIn();
         open(SiteToken.newgroup);
         verifyLoggedUserShorName("admin");
-        waitForTextInside(NewGroupPanel.NEWGROUP_WIZARD, NewGroupPanel.REGISTER_A_NEW_GROUP_TITLE);
+        waitForTextInside(NewGroupPanel.NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE);
     }
 }

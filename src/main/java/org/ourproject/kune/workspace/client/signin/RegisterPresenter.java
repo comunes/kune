@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
@@ -22,8 +23,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class RegisterPresenter extends SignInAbstractPresenter implements Register {
 
-    public static final String EMAIL_IN_USE = "This email in in use by other person, try with another.";
-    public static final String NAME_IN_USE = "This name in already in use, try with a different name.";
     private RegisterView view;
     private final Provider<UserServiceAsync> userServiceProvider;
     private final Provider<SignIn> signInProvider;
@@ -79,9 +78,9 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
                     try {
                         throw caught;
                     } catch (final EmailAddressInUseException e) {
-                        view.setErrorMessage(i18n.t(EMAIL_IN_USE), SiteErrorType.error);
+                        view.setErrorMessage(i18n.t(PlatfMessages.EMAIL_IN_USE), SiteErrorType.error);
                     } catch (final GroupNameInUseException e) {
-                        view.setErrorMessage(i18n.t(NAME_IN_USE), SiteErrorType.error);
+                        view.setErrorMessage(i18n.t(PlatfMessages.NAME_IN_USE), SiteErrorType.error);
                     } catch (final Throwable e) {
                         view.setErrorMessage(i18n.t("Error during registration."), SiteErrorType.error);
                         GWT.log("Other kind of exception in user registration" + e.getMessage() + ", "

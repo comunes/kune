@@ -5,12 +5,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.signin.RegisterPanel;
-import org.ourproject.kune.workspace.client.signin.RegisterPresenter;
 import org.ourproject.kune.workspace.client.signin.SignInForm;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
-import org.ourproject.kune.workspace.client.signin.SignInPresenter;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPanel;
@@ -24,7 +23,7 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
         openDefPage();
         register("u" + genPrefix(), "Site Administrator", "somepasswd", "somepasswd", "some" + genPrefix()
                 + "@example.com", "Andorra", "Afrikaans", "MIT", true);
-        waitForTextInside(gid(RegisterPanel.ERRMSG), RegisterPresenter.NAME_IN_USE);
+        waitForTextInside(gid(RegisterPanel.ERRMSG), PlatfMessages.NAME_IN_USE);
         click(RegisterPanel.CANCEL_BUTTON_ID);
     }
 
@@ -33,7 +32,7 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
         openDefPage();
         register("admin", "some name" + genPrefix(), "somepasswd", "somepasswd", "some" + genPrefix() + "@example.com",
                 "Andorra", "Afrikaans", "MIT", true);
-        waitForTextInside(gid(RegisterPanel.ERRMSG), RegisterPresenter.NAME_IN_USE);
+        waitForTextInside(gid(RegisterPanel.ERRMSG), PlatfMessages.NAME_IN_USE);
         click(RegisterPanel.CANCEL_BUTTON_ID);
     }
 
@@ -51,8 +50,8 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
         selenium.isTextPresent("Welcome");
         click(RegisterPanel.WELCOME_OK_BUTTON);
         clickOnPushButton(gid(SiteUserMenuPanel.LOGGED_USER_MENU));
-        click(linkId(SiteUserMenuPanel.YOUR_HOMEPAGE));
-        waitForTextInside(gid(NoHomePagePanel.NO_HOME_PAGE_LABEL), NoHomePagePanel.USER_DON_T_HAVE_A_HOMEPAGE);
+        click(linkId(PlatfMessages.YOUR_HOMEPAGE));
+        waitForTextInside(gid(NoHomePagePanel.NO_HOME_PAGE_LABEL), PlatfMessages.USER_DON_T_HAVE_A_HOMEPAGE);
     }
 
     @Test
@@ -81,9 +80,9 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
     @Test
     public void testRegisterToken() throws Exception {
         open(SiteToken.register);
-        assertFalse(selenium.isTextPresent(RegisterPanel.REGISTER_TITLE));
+        assertFalse(selenium.isTextPresent(PlatfMessages.REGISTER_TITLE));
         waitForTextInside(gid(EntityTitlePanel.ENTITY_TITLE_RIGHT_TITLE), "Welcome to kune");
-        assertTrue(selenium.isTextPresent(RegisterPanel.REGISTER_TITLE));
+        assertTrue(selenium.isTextPresent(PlatfMessages.REGISTER_TITLE));
     }
 
     @Test
@@ -107,7 +106,7 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
     public void testSignInFailed() throws Exception {
         openDefPage();
         signIn("something", "wrong");
-        waitForTextInside(gid(SignInPanel.ERROR_MSG), SignInPresenter.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD);
+        waitForTextInside(gid(SignInPanel.ERROR_MSG), PlatfMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD);
         signOut();
     }
 
@@ -135,8 +134,8 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
     @Test
     public void testSignInToken() throws Exception {
         open(SiteToken.signin);
-        assertFalse(selenium.isTextPresent(SignInPanel.SIGN_IN_TITLE));
+        assertFalse(selenium.isTextPresent(PlatfMessages.SIGN_IN_TITLE));
         waitForTextInside(gid(EntityTitlePanel.ENTITY_TITLE_RIGHT_TITLE), "Welcome to kune");
-        assertTrue(selenium.isTextPresent(SignInPanel.SIGN_IN_TITLE));
+        assertTrue(selenium.isTextPresent(PlatfMessages.SIGN_IN_TITLE));
     }
 }

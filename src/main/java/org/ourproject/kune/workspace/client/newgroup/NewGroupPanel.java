@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardListener;
+import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
@@ -49,8 +50,6 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class NewGroupPanel extends WizardDialog implements NewGroupView {
-    public static final String REGISTER_A_NEW_GROUP_TITLE = "Register a new Group";
-    public static final String MUST_BE_BETWEEN_3_AND_15 = "Must be between 3 and 15 lowercase characters. Can only contain occidental characters, numbers, and dashes";
     public static final String SHORTNAME_FIELD = "k-ngp-short_name";
     public static final String LONGNAME_FIELD = "k-ngp-long_name";
     public static final String PUBLICDESC_FIELD = "k-ngp-public_desc";
@@ -84,7 +83,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n,
             final Provider<LicenseChoose> licenseChooseProvider, Images img) {
-        super(i18n.t(REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 430, new WizardListener() {
+        super(i18n.t(WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 430, new WizardListener() {
             public void onBack() {
                 presenter.onBack();
             }
@@ -234,9 +233,9 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         shortNameField.setMaxLength(15);
         shortNameField.setAllowBlank(false);
         shortNameField.setRegex("^[a-z0-9_\\-]+$");
-        shortNameField.setMinLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setMaxLengthText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setRegexText(i18n.t(MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setMinLengthText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setMaxLengthText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setRegexText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
         shortNameField.setValidationDelay(1000);
 
         form.add(shortNameField);

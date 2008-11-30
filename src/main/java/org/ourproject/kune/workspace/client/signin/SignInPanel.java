@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -15,7 +16,6 @@ import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
-    public static final String SIGN_IN_TITLE = "Sign in";
     public static final String ERROR_MSG = "k-sigp-errmsg";
     public static final String CANCEL_BUTTON_ID = "k-signinp-cb";
     public static final String SIGN_IN_BUTTON_ID = "k-signinp-sib";
@@ -25,8 +25,8 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
     public SignInPanel(final SignInPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
             Images images) {
-        super(i18n, i18n.t(SIGN_IN_TITLE), true, true, 340, 240, "", i18n.t(SIGN_IN_TITLE), SIGN_IN_BUTTON_ID,
-                i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, new Listener0() {
+        super(i18n, i18n.t(PlatfMessages.SIGN_IN_TITLE), true, true, 340, 240, "", i18n.t(PlatfMessages.SIGN_IN_TITLE),
+                SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, new Listener0() {
                     public void onEvent() {
                         signInForm.validate();
                         if (signInForm.isValid()) {

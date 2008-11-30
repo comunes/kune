@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.sitebar.siteusermenu;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
@@ -35,7 +36,6 @@ import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
 public class SiteUserMenuPanel implements SiteUserMenuView {
 
-    public static final String YOUR_HOMEPAGE = "Your homepage";
     public static final String LOGGED_USER_MENU = "kune-sump-lum";
     public static final String USER_PREFERENCES_MENU_ITEM = "kune-sump-uprmi";
     public static final String USER_HOME_PAGE_MENU_ITEM = "kune-sump-hpmi";
@@ -58,7 +58,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
                 userMenu.showAt(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 10);
             }
         });
-        final Item userHomePage = new Item(i18n.t(YOUR_HOMEPAGE));
+        final Item userHomePage = new Item(i18n.t(PlatfMessages.YOUR_HOMEPAGE));
         userHomePage.setId(USER_HOME_PAGE_MENU_ITEM);
         userHomePage.setIcon("images/group-home.gif");
         userHomePage.addListener(new BaseItemListenerAdapter() {

@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.entitylogo;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.platf.client.ui.download.FileParams;
@@ -39,8 +40,6 @@ import com.gwtext.client.widgets.form.event.FormListener;
 
 public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
 
-    public static final String NORMAL_TITLE = "Select a logo for your group";
-    public static final String PERSON_TITLE = "Select your avatar";
     public static final String ICON_UPLOAD_SERVLET = "/kune/servlets/EntityLogoUploadManager";
     public static final String SUBID = "k-elogoselp-subb";
     public static final String CANCELID = "k-elogoselp-canb";
@@ -56,8 +55,8 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
     public EntityLogoSelectorPanel(final EntityLogoSelectorPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
         this.i18n = i18n;
-        dialog = new BasicDialogExtended(i18n.t(NORMAL_TITLE), true, true, 400, 200, "", i18n.t("Select"), SUBID,
-                i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
+        dialog = new BasicDialogExtended(i18n.t(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE), true, true, 400, 200,
+                "", i18n.t("Select"), SUBID, i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
                     public void onEvent() {
                         String filename = file.getValueAsString();
                         if (filename != null && filename.length() > 0) {
@@ -146,7 +145,7 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
                 EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT)
                 + "<br/><br/>");
-        dialog.setTitle(NORMAL_TITLE);
+        dialog.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
     }
 
     public void setPersonalGroupsLabels() {
@@ -154,7 +153,7 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
                 EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT)
                 + "<br/><br/>");
-        dialog.setTitle(PERSON_TITLE);
+        dialog.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
     }
 
     public void setUploadParams(String userHash, String token) {
