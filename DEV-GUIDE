@@ -6,7 +6,11 @@ Development Environment
 
 Install kune (see INSTALL file).
 
-mvn eclipse:eclipse generates .project and download necessary code jars.
+Running (in the trunk directory)
+  mvn eclipse:eclipse 
+generates .project and download necessary code jars. Then you can import the project in eclipse (File > Import > Existing Projects into Workspace). 
+
+Also you have to set the variable M2_REPO (Eclipse Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/ouruser/.m2/repository).
 
 GWT Hosted Mode:
 
