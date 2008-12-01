@@ -273,6 +273,9 @@ public interface Images extends ImageBundle {
     @Resource("org/ourproject/kune/platf/public/images/emblem-important.png")
     AbstractImagePrototype emblemImportant();
 
+    @Resource("org/ourproject/kune/platf/public/images/emblem-system.png")
+    AbstractImagePrototype emblemSystem();
+
     @Resource("org/ourproject/kune/platf/public/images/error.png")
     AbstractImagePrototype error();
 

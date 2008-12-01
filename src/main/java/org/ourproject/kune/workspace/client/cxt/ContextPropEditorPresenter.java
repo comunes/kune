@@ -36,7 +36,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
-import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -47,20 +46,17 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     private final Provider<TagsSummary> tagsSummaryProvider;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final EntitySubTitle entitySubTitle;
-    private final EntityTitle entityTitle;
     private final StateManager stateManager;
     private final ContentCapabilitiesRegistry capabilitiesRegistry;
 
     public ContextPropEditorPresenter(final Session session, final StateManager stateManager,
             ContentCapabilitiesRegistry capabilitiesRegistry, final Provider<TagsSummary> tagsSummaryProvider,
-            final Provider<ContentServiceAsync> contentServiceProvider, final EntityTitle entityTitle,
-            final EntitySubTitle entitySubTitle) {
+            final Provider<ContentServiceAsync> contentServiceProvider, final EntitySubTitle entitySubTitle) {
         this.session = session;
         this.stateManager = stateManager;
         this.capabilitiesRegistry = capabilitiesRegistry;
         this.tagsSummaryProvider = tagsSummaryProvider;
         this.contentServiceProvider = contentServiceProvider;
-        this.entityTitle = entityTitle;
         this.entitySubTitle = entitySubTitle;
     }
 
@@ -107,7 +103,6 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
                 new AsyncCallbackSimple<I18nLanguageDTO>() {
                     public void onSuccess(final I18nLanguageDTO lang) {
                         Site.hideProgress();
-                        entitySubTitle.setContentLanguage(lang.getEnglishName());
                     }
                 });
     }
@@ -123,7 +118,7 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
                 new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
                         Site.hideProgress();
-                        entityTitle.setContentDate(publishedOn);
+                        entitySubTitle.setContentDate(publishedOn);
                     }
                 });
     }

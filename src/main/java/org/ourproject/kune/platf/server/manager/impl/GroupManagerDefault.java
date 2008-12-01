@@ -43,6 +43,7 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
+import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
@@ -159,13 +160,13 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         return finder.findEnabledTools(id);
     }
 
+    public Group getGroupOfUserWithId(final Long userId) {
+        return userId != null ? find(User.class, userId).getUserGroup() : null;
+    }
+
     public Group getSiteDefaultGroup() {
         final String shortName = properties.getDefaultSiteShortName();
         return findByShortName(shortName);
-    }
-
-    public Group getGroupOfUserWithId(final Long userId) {
-        return userId != null ? find(User.class, userId).getUserGroup() : null;
     }
 
     public SearchResult<Group> search(final String search) {
@@ -195,6 +196,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         } else {
             new DefaultException("Trying to set not a image as group logo");
         }
+    }
+
+    public void setToolEnabled(User userLogged, String groupShortName, String tool, boolean enabled) {
+        final Group group = findByShortName(groupShortName);
+        ToolConfiguration toolConfiguration = group.getToolConfiguration(tool);
+        if (toolConfiguration == null) {
+            toolConfiguration = serverToolRegistry.get(tool).initGroup(userLogged, group).getToolConfiguration(tool);
+        }
+        toolConfiguration.setEnabled(enabled);
     }
 
     private void initGroup(final User user, final Group group, Collection<String> toolsToEnable)

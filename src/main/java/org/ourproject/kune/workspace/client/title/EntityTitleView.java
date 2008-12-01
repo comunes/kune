@@ -25,8 +25,6 @@ public interface EntityTitleView extends View {
 
     void restoreOldTitle();
 
-    void setContentDate(String date);
-
     void setContentIcon(String iconUrl);
 
     void setContentIconVisible(boolean visible);
@@ -36,7 +34,5 @@ public interface EntityTitleView extends View {
     void setContentTitleEditable(boolean editable);
 
     void setContentTitleVisible(boolean visible);
-
-    void setDateVisible(boolean visible);
 
 }

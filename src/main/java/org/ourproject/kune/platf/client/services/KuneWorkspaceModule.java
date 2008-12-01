@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryTool
 import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
+import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.registry.RenamableRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -52,6 +53,12 @@ import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
+import org.ourproject.kune.workspace.client.options.EntityOptions;
+import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
+import org.ourproject.kune.workspace.client.options.EntityOptionsPresenter;
+import org.ourproject.kune.workspace.client.options.EntityOptionsToolsConf;
+import org.ourproject.kune.workspace.client.options.EntityOptionsToolsConfPanel;
+import org.ourproject.kune.workspace.client.options.EntityOptionsToolsConfPresenter;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -273,10 +280,9 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<EntityTitle>(EntityTitle.class) {
             @Override
             public EntityTitle create() {
-                final EntityTitlePresenter presenter = new EntityTitlePresenter($(I18nUITranslationService.class),
-                        $(KuneErrorHandler.class), $(StateManager.class), $(Session.class),
-                        $$(ContentServiceAsync.class), $$(ContextNavigator.class), $(ContentIconsRegistry.class),
-                        $(RenamableRegistry.class));
+                final EntityTitlePresenter presenter = new EntityTitlePresenter($(KuneErrorHandler.class),
+                        $(StateManager.class), $(Session.class), $$(ContentServiceAsync.class),
+                        $$(ContextNavigator.class), $(ContentIconsRegistry.class), $(RenamableRegistry.class));
                 final EntityTitlePanel panel = new EntityTitlePanel($(WorkspaceSkeleton.class), presenter);
                 presenter.init(panel);
                 return presenter;
@@ -287,7 +293,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntitySubTitle create() {
                 final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(
-                        $(I18nUITranslationService.class), $(StateManager.class), false);
+                        $(I18nUITranslationService.class), $(StateManager.class), $(Session.class), false);
                 final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, $(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
@@ -407,6 +413,30 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $$(EntityLogo.class));
                 final NoHomePagePanel panel = new NoHomePagePanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(ApplicationComponentGroup.class, new Factory<EntityOptions>(EntityOptions.class) {
+            @Override
+            public EntityOptions create() {
+                final EntityOptionsPresenter presenter = new EntityOptionsPresenter($(StateManager.class));
+                final EntityOptionsPanel panel = new EntityOptionsPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class), $(Images.class), $(EntityOptionsGroup.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(EntityOptionsGroup.class, new Factory<EntityOptionsToolsConf>(EntityOptionsToolsConf.class) {
+            @Override
+            public EntityOptionsToolsConf create() {
+                final EntityOptionsToolsConfPresenter presenter = new EntityOptionsToolsConfPresenter(
+                        $(StateManager.class), $(Session.class), $(I18nTranslationService.class),
+                        $(EntityOptions.class), $$(GroupServiceAsync.class));
+                final EntityOptionsToolsConfPanel panel = new EntityOptionsToolsConfPanel(presenter,
+                        $(WorkspaceSkeleton.class), $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }

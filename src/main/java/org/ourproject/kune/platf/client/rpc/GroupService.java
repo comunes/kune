@@ -39,4 +39,6 @@ public interface GroupService extends RemoteService {
 
     void setSocialNetworkVisibility(String userHash, StateToken groupToken, SocialNetworkVisibilityDTO visibility);
 
+    void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled);
+
 }

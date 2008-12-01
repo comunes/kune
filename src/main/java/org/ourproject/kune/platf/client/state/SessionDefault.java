@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.client.state;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
@@ -30,6 +31,7 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -113,6 +115,10 @@ public class SessionDefault implements Session {
         return initData.getGalleryPermittedExtensions();
     }
 
+    public Collection<ToolSimpleDTO> getGroupTools() {
+        return initData.getGroupTools();
+    }
+
     public List<I18nLanguageSimpleDTO> getLanguages() {
         return initData.getLanguages();
     }
@@ -137,6 +143,10 @@ public class SessionDefault implements Session {
 
     public String getUserHash() {
         return userHash;
+    }
+
+    public Collection<ToolSimpleDTO> getUserTools() {
+        return initData.getUserTools();
     }
 
     public boolean isLogged() {

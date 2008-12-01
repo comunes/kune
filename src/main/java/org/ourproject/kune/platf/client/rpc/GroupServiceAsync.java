@@ -39,4 +39,7 @@ public interface GroupServiceAsync {
     void setSocialNetworkVisibility(String userHash, StateToken token, SocialNetworkVisibilityDTO visibility,
             AsyncCallback<?> asyncCallback);
 
+    void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled,
+            AsyncCallback<?> asyncCallback);
+
 }

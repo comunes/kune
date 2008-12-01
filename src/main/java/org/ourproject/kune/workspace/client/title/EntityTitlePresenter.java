@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.workspace.client.title;
 
-import java.util.Date;
-
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
@@ -29,7 +27,6 @@ import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.registry.RenamableRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -38,13 +35,11 @@ import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class EntityTitlePresenter implements EntityTitle {
 
     private EntityTitleView view;
-    private final I18nTranslationService i18n;
     private final KuneErrorHandler errorHandler;
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final Session session;
@@ -52,12 +47,10 @@ public class EntityTitlePresenter implements EntityTitle {
     private final ContentIconsRegistry iconsRegistry;
     private final RenamableRegistry renamableContentRegistry;
 
-    public EntityTitlePresenter(final I18nTranslationService i18n, final KuneErrorHandler errorHandler,
-            final StateManager stateManager, final Session session,
-            final Provider<ContentServiceAsync> contentServiceProvider,
+    public EntityTitlePresenter(final KuneErrorHandler errorHandler, final StateManager stateManager,
+            final Session session, final Provider<ContentServiceAsync> contentServiceProvider,
             final Provider<ContextNavigator> contextNavigatorProvider, final ContentIconsRegistry iconsRegistry,
             RenamableRegistry renamableContentRegistry) {
-        this.i18n = i18n;
         this.errorHandler = errorHandler;
         this.session = session;
         this.contentServiceProvider = contentServiceProvider;
@@ -73,7 +66,6 @@ public class EntityTitlePresenter implements EntityTitle {
                 } else {
                     view.setContentIconVisible(false);
                     view.setContentTitleVisible(false);
-                    view.setDateVisible(false);
                 }
             }
         });
@@ -85,25 +77,6 @@ public class EntityTitlePresenter implements EntityTitle {
 
     public void init(final EntityTitleView view) {
         this.view = view;
-    }
-
-    public void setContentDate(final Date publishedOn) {
-        if (publishedOn != null) {
-            String dateFormat = session.getCurrentLanguage().getDateFormat();
-            final DateTimeFormat fmt;
-            if (dateFormat == null) {
-                fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
-            } else {
-                String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(publishedOn);
-                String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
-                dateFormat = dateFormat.replaceFirst("MMM", "'" + i18n.t(monthToTranslate) + "'");
-                fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
-            }
-            view.setContentDate(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
-            setContentDateVisible(true);
-        } else {
-            setContentDateVisible(false);
-        }
     }
 
     /**
@@ -137,10 +110,6 @@ public class EntityTitlePresenter implements EntityTitle {
         Site.hideProgress();
     }
 
-    private void setContentDateVisible(final boolean visible) {
-        view.setDateVisible(visible);
-    }
-
     private void setContentTitle(final String title, final boolean editable) {
         setContentTitle(title);
         view.setContentTitleEditable(editable);
@@ -159,7 +128,6 @@ public class EntityTitlePresenter implements EntityTitle {
     private void setState(final StateContainerDTO state) {
         setContentTitle(state.getTitle(), state.getContainerRights().isEditable()
                 && renamableContentRegistry.contains(state.getContainer().getTypeId()));
-        setContentDateVisible(false);
         final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), null);
         setIcon(contentTypeIcon);
         view.setContentTitleVisible(true);
@@ -168,8 +136,6 @@ public class EntityTitlePresenter implements EntityTitle {
     private void setState(final StateContentDTO state) {
         setContentTitle(state.getTitle(), state.getContentRights().isEditable()
                 && renamableContentRegistry.contains(state.getTypeId()));
-        Date publishedOn = state.getPublishedOn();
-        setContentDate(publishedOn);
         final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
         setIcon(contentTypeIcon);
         view.setContentTitleVisible(true);

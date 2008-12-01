@@ -65,18 +65,16 @@ public class GroupRPC implements RPC, GroupService {
     @Transactional(type = TransactionType.READ_WRITE)
     public void changeGroupWsTheme(final String userHash, final StateToken groupToken, final String theme)
             throws DefaultException {
-        final UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
+        final User user = getUserLogged();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         groupManager.changeWsTheme(user, group, theme);
-    };
+    }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
     public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO, String publicDesc, String tags,
             String[] enabledTools) throws DefaultException {
-        final UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
+        final User user = getUserLogged();
         final Group group = mapper.map(groupDTO, Group.class);
         final Group newGroup = groupManager.createGroup(group, user);
         final Long defContentId = newGroup.getDefaultContent().getId();
@@ -90,7 +88,7 @@ public class GroupRPC implements RPC, GroupService {
     public GroupDTO getGroup(String userHash, StateToken groupToken) {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         return mapper.map(group, GroupDTO.class);
-    }
+    };
 
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -109,6 +107,20 @@ public class GroupRPC implements RPC, GroupService {
             SocialNetworkVisibilityDTO visibility) {
         final Group group = groupManager.findByShortName(token.getGroup());
         group.getSocialNetwork().setVisibility(SocialNetworkVisibility.valueOf(visibility.toString()));
+    }
+
+    @Authenticated
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setToolEnabled(final String userHash, final StateToken groupToken, final String toolName,
+            final boolean enabled) {
+        groupManager.setToolEnabled(getUserLogged(), groupToken.getGroup(), toolName, enabled);
+    }
+
+    private User getUserLogged() {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        return user;
     }
 
     private UserSession getUserSession() {

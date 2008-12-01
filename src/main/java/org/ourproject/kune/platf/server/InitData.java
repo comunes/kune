@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.server;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ourproject.kune.platf.server.domain.I18nCountry;
@@ -43,8 +43,8 @@ public class InitData {
     private String siteLogoUrl;
     private String galleryPermittedExtensions;
     private String maxFileSizeInMb;
-    private Collection<ToolSimple> userTools;
-    private Collection<ToolSimple> groupTools;
+    private ArrayList<ToolSimple> userTools;
+    private ArrayList<ToolSimple> groupTools;
 
     public String getChatDomain() {
         return chatDomain;
@@ -70,7 +70,7 @@ public class InitData {
         return galleryPermittedExtensions;
     }
 
-    public Collection<ToolSimple> getGroupTools() {
+    public ArrayList<ToolSimple> getGroupTools() {
         return groupTools;
     }
 
@@ -102,7 +102,7 @@ public class InitData {
         return userInfo;
     }
 
-    public Collection<ToolSimple> getUserTools() {
+    public ArrayList<ToolSimple> getUserTools() {
         return userTools;
     }
 
@@ -134,7 +134,7 @@ public class InitData {
         this.galleryPermittedExtensions = galleryPermittedExtensions;
     }
 
-    public void setGroupTools(Collection<ToolSimple> groupTools) {
+    public void setGroupTools(ArrayList<ToolSimple> groupTools) {
         this.groupTools = groupTools;
     }
 
@@ -166,7 +166,7 @@ public class InitData {
         this.userInfo = currentUserInfo;
     }
 
-    public void setUserTools(Collection<ToolSimple> userTools) {
+    public void setUserTools(ArrayList<ToolSimple> userTools) {
         this.userTools = userTools;
     }
 

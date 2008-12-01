@@ -267,6 +267,9 @@ public class ImageUtils {
         case emblemImportant: {
             return img.emblemImportant();
         }
+        case emblemSystem: {
+            return img.emblemSystem();
+        }
         case error: {
             return img.error();
         }

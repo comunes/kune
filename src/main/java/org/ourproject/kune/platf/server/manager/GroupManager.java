@@ -69,4 +69,6 @@ public interface GroupManager extends Manager<Group, Long> {
 
     void setGroupLogo(Group group, Content content);
 
+    void setToolEnabled(User userLogged, String groupShortName, String toolName, boolean enabled);
+
 }

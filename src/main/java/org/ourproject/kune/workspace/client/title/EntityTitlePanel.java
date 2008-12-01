@@ -25,12 +25,10 @@ import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 
 public class EntityTitlePanel implements EntityTitleView {
     public static final String ENTITY_TITLE_RIGHT_TITLE = "k-entity-title-title";
     private final EditableIconLabel titleLabel;
-    private final Label dateLabel;
     private final Image icon;
 
     public EntityTitlePanel(final WorkspaceSkeleton ws, final EntityTitlePresenter presenter) {
@@ -40,29 +38,21 @@ public class EntityTitlePanel implements EntityTitleView {
                 presenter.onTitleRename(text);
             }
         });
-        dateLabel = new Label();
 
         final SimpleToolbar wsTitle = ws.getEntityWorkspace().getTitleComponent();
         wsTitle.add(icon);
         wsTitle.add(titleLabel);
         wsTitle.addFill();
-        wsTitle.add(dateLabel);
+        // wsTitle.add(dateLabel);
         icon.addStyleName("kune-Margin-Large-l");
         titleLabel.addStyleName("kune-Margin-Medium-l");
         titleLabel.addStyleName("kune-ft17px");
         titleLabel.ensureDebugId(ENTITY_TITLE_RIGHT_TITLE);
-        dateLabel.addStyleName("kune-Margin-Large-r");
-        dateLabel.addStyleName("kune-ft12px");
-        dateLabel.ensureDebugId("k-entity-title-date");
         icon.setVisible(false);
     }
 
     public void restoreOldTitle() {
         titleLabel.restoreOldText();
-    }
-
-    public void setContentDate(final String date) {
-        dateLabel.setText(date);
     }
 
     public void setContentIcon(final String iconUrl) {
@@ -90,10 +80,6 @@ public class EntityTitlePanel implements EntityTitleView {
 
     public void setContentTitleVisible(final boolean visible) {
         titleLabel.setVisible(visible);
-    }
-
-    public void setDateVisible(final boolean visible) {
-        dateLabel.setVisible(visible);
     }
 
 }

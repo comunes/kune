@@ -40,7 +40,8 @@ public class ActionRegistry<T> {
     public void addAction(final ActionDescriptor<T> action, String... typeIds) {
         assert (action != null);
         for (final String typeId : typeIds) {
-            Log.debug("Registering action '" + action.getText() + "' for " + typeId);
+            String text = action.getText();
+            Log.debug("Registering action " + (text == null ? "with icon" : "'" + text + "'") + " for " + typeId);
             final ActionCollection<T> actionColl = getActions(typeId);
             actionColl.add(action);
         }

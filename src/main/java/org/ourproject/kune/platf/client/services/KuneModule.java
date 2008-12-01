@@ -506,7 +506,7 @@ public class KuneModule extends AbstractModule {
             public ContextPropEditor create() {
                 final ContextPropEditorPresenter presenter = new ContextPropEditorPresenter($(Session.class),
                         $(StateManager.class), $(ContentCapabilitiesRegistry.class), $$(TagsSummary.class),
-                        $$(ContentServiceAsync.class), $(EntityTitle.class), $(EntitySubTitle.class));
+                        $$(ContentServiceAsync.class), $(EntitySubTitle.class));
                 final ContextPropEditorView view = new ContextPropEditorPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class),
                         $(Images.class));

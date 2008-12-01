@@ -22,6 +22,7 @@ import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.Label;
 
 public class DefaultForm {
 
@@ -43,6 +44,11 @@ public class DefaultForm {
         form.setHeader(false);
     }
 
+    public DefaultForm(String title) {
+        this();
+        form.setTitle(title);
+    }
+
     public void add(final Field field) {
         form.add(field);
     }
@@ -51,8 +57,16 @@ public class DefaultForm {
         form.add(fieldset);
     }
 
+    public void add(Label label) {
+        form.add(label);
+    }
+
     public void addStyleName(final String cls) {
         form.addStyleName(cls);
+    }
+
+    public Field findField(String id) {
+        return form.getForm().findField(id);
     }
 
     public FormPanel getForm() {
@@ -79,6 +93,10 @@ public class DefaultForm {
         form.setAutoWidth(autoWidth);
     }
 
+    public void setHeight(int height) {
+        form.setHeight(height);
+    }
+
     public void setWidth(int width) {
         form.setWidth(width);
     }
@@ -89,5 +107,4 @@ public class DefaultForm {
             field.validate();
         }
     }
-
 }

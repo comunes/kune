@@ -44,6 +44,10 @@ public class SiteServiceTest extends IntegrationTest {
         assertTrue(initData.getCountries().size() > 0);
         assertNotNull(initData.getLanguages().get(0).getCode());
         assertNotNull(initData.getCountries().get(0).getCode());
+        assertNotNull(initData.getGroupTools());
+        assertNotNull(initData.getUserTools());
+        assertTrue(initData.getGroupTools().size() > 0);
+        assertTrue(initData.getUserTools().size() > 0);
     }
 
     private void assertValidLicenseDTOList(final ArrayList<LicenseDTO> licenseList) {

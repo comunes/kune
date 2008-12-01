@@ -18,8 +18,10 @@
  *
  */package org.ourproject.kune.workspace.client.title;
 
+import java.util.Date;
+
 public interface EntitySubTitle {
 
-    void setContentLanguage(String langName);
+    void setContentDate(Date publishedOn);
 
 }

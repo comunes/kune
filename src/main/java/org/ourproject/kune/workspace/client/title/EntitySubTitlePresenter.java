@@ -19,24 +19,30 @@
  */
 package org.ourproject.kune.workspace.client.title;
 
+import java.util.Date;
+
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.listener.Listener;
+import com.google.gwt.i18n.client.DateTimeFormat;
 
 public class EntitySubTitlePresenter implements EntitySubTitle {
 
     private EntitySubTitleView view;
     private final I18nTranslationService i18n;
     private final boolean showLanguage;
+    private final Session session;
 
-    public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager,
+    public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager, Session session,
             boolean showLanguage) {
         this.i18n = i18n;
+        this.session = session;
         this.showLanguage = showLanguage;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
@@ -60,10 +66,33 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
         this.view = view;
     }
 
+    public void setContentDate(final Date publishedOn) {
+        if (publishedOn != null) {
+            String dateFormat = session.getCurrentLanguage().getDateFormat();
+            final DateTimeFormat fmt;
+            if (dateFormat == null) {
+                fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
+            } else {
+                String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(publishedOn);
+                String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
+                dateFormat = dateFormat.replaceFirst("MMM", "'" + i18n.t(monthToTranslate) + "'");
+                fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
+            }
+            view.setContentSubTitleRight(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
+            setContentDateVisible(true);
+        } else {
+            setContentDateVisible(false);
+        }
+    }
+
     public void setContentLanguage(final String langName) {
         if (showLanguage) {
             view.setContentSubTitleRight(i18n.t("Language: [%s]", langName));
         }
+    }
+
+    private void setContentDateVisible(final boolean visible) {
+        view.setContentSubTitleRightVisible(visible);
     }
 
     private void setLanguage(final StateContainerDTO state) {
@@ -77,8 +106,9 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
     }
 
     private void setState(final StateContainerDTO state) {
-        view.setContentSubTitleLeftVisible(false);
+        view.setContentSubTitleRightVisible(false);
         setLanguage(state);
+        setContentDateVisible(false);
     }
 
     private void setState(final StateContentDTO state) {
@@ -86,6 +116,8 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
                 state.getAuthors().get(0).getName()));
         view.setContentSubTitleLeftVisible(true);
         setLanguage(state);
+        Date publishedOn = state.getPublishedOn();
+        setContentDate(publishedOn);
     }
 
 }

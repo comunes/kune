@@ -25,9 +25,10 @@ public interface EntitySubTitleView extends View {
 
     void setContentSubTitleLeft(String subTitle);
 
-    void setContentSubTitleRight(String subTitle);
-
     void setContentSubTitleLeftVisible(boolean visible);
 
+    void setContentSubTitleRight(String subTitle);
+
     void setContentSubTitleRightVisible(boolean visible);
+
 }

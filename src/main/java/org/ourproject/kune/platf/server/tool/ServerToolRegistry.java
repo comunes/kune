@@ -35,8 +35,6 @@ public class ServerToolRegistry {
     public static Collection<String> emptyToolList = new ArrayList<String>();
 
     private final HashMap<String, ServerTool> tools;
-    // private final List<ToolSimple> toolsForGroupsList;
-    // private final List<ToolSimple> toolsForUsersList;
     private final HashMap<String, ToolSimple> toolsForUsersMap;
     private final HashMap<String, ToolSimple> toolsForGroupsMap;
 
@@ -44,8 +42,6 @@ public class ServerToolRegistry {
         tools = new HashMap<String, ServerTool>();
         toolsForUsersMap = new HashMap<String, ToolSimple>();
         toolsForGroupsMap = new HashMap<String, ToolSimple>();
-        // toolsForGroupsList = new ArrayList<ToolSimple>();
-        // toolsForUsersList = new ArrayList<ToolSimple>();
     }
 
     public Collection<ServerTool> all() {
@@ -56,13 +52,8 @@ public class ServerToolRegistry {
         return tools.get(toolName);
     }
 
-    //
-    // public List<ToolSimple> getToolsForGroupsList() {
-    // return toolsForGroupsList;
-    // }
-
-    public Collection<ToolSimple> getToolsForGroups() {
-        return toolsForGroupsMap.values();
+    public ArrayList<ToolSimple> getToolsForGroups() {
+        return new ArrayList<ToolSimple>(toolsForGroupsMap.values());
     }
 
     public Collection<String> getToolsForGroupsKeys() {
@@ -73,13 +64,9 @@ public class ServerToolRegistry {
         return toolsForUsersMap.keySet();
     }
 
-    public Collection<ToolSimple> getToolsForUsers() {
-        return toolsForUsersMap.values();
+    public ArrayList<ToolSimple> getToolsForUsers() {
+        return new ArrayList<ToolSimple>(toolsForUsersMap.values());
     }
-
-    // public List<ToolSimple> getToolsForUsersList() {
-    // return toolsForUsersList;
-    // }
 
     public void register(final ServerTool tool) {
         String name = tool.getName();
@@ -90,13 +77,11 @@ public class ServerToolRegistry {
             toolsForGroupsMap.put(name, new ToolSimple(name, rootName));
             break;
         case forUsers:
-            // toolsForUsersList.add(new ToolSimple(name, rootName));
             toolsForUsersMap.put(name, new ToolSimple(name, rootName));
             break;
         case forBoth:
             toolsForGroupsMap.put(name, new ToolSimple(name, rootName));
             toolsForUsersMap.put(name, new ToolSimple(name, rootName));
-            // toolsForUsersList.add(new ToolSimple(name, rootName));
             break;
         }
     }

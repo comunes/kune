@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.client.dto;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -39,8 +38,8 @@ public class InitDataDTO implements IsSerializable {
     private String siteLogoUrl;
     private String galleryPermittedExtensions;
     private String maxFileSizeInMb;
-    private Collection<ToolSimpleDTO> userTools;
-    private Collection<ToolSimpleDTO> groupTools;
+    private ArrayList<ToolSimpleDTO> userTools;
+    private ArrayList<ToolSimpleDTO> groupTools;
 
     public String getChatDomain() {
         return chatDomain;
@@ -66,7 +65,7 @@ public class InitDataDTO implements IsSerializable {
         return galleryPermittedExtensions;
     }
 
-    public Collection<ToolSimpleDTO> getGroupTools() {
+    public ArrayList<ToolSimpleDTO> getGroupTools() {
         return groupTools;
     }
 
@@ -98,7 +97,7 @@ public class InitDataDTO implements IsSerializable {
         return userInfo;
     }
 
-    public Collection<ToolSimpleDTO> getUserTools() {
+    public ArrayList<ToolSimpleDTO> getUserTools() {
         return userTools;
     }
 
@@ -134,7 +133,7 @@ public class InitDataDTO implements IsSerializable {
         this.galleryPermittedExtensions = galleryPermittedExtensions;
     }
 
-    public void setGroupTools(Collection<ToolSimpleDTO> groupTools) {
+    public void setGroupTools(ArrayList<ToolSimpleDTO> groupTools) {
         this.groupTools = groupTools;
     }
 
@@ -166,7 +165,7 @@ public class InitDataDTO implements IsSerializable {
         this.userInfo = currentUser;
     }
 
-    public void setUserTools(Collection<ToolSimpleDTO> userTools) {
+    public void setUserTools(ArrayList<ToolSimpleDTO> userTools) {
         this.userTools = userTools;
     }
 
