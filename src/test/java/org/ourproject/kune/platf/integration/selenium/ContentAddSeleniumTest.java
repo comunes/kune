@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.integration.selenium;
 
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
+import org.ourproject.kune.workspace.client.entitylogo.EntityTextLogo;
 
 public class ContentAddSeleniumTest extends KuneSeleniumTestHelper {
     @Test
@@ -10,9 +10,9 @@ public class ContentAddSeleniumTest extends KuneSeleniumTestHelper {
         String shortname = "g" + genPrefix();
         String longName = "testing" + genPrefix();
         newGroupRegistrationDefLicense(shortname, longName, "some description", "tag1 tag2");
-        waitForTextInside(gid(EntityLogoPanel.LOGO_NAME), longName);
+        waitForTextInside(gid(EntityTextLogo.LOGO_NAME), longName);
         open(new StateToken(shortname, ""));
         signOut();
-        wait(120000);
+        // TODO: need to add more ids
     }
 }

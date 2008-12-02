@@ -12,7 +12,7 @@ public abstract class AbstractOptionsPanel {
     private BasicDialog dialog;
     private MessageToolbar messageErrorBar;
     private TabPanel tabPanel;
-    private final String title;
+    private String title;
     private final int width;
     private final int height;
     private final int minWidth;
@@ -20,9 +20,11 @@ public abstract class AbstractOptionsPanel {
     private final Images images;
     private final String errorLabelId;
     private String iconCls;
+    private final String id;
 
     public AbstractOptionsPanel(String title, int width, int height, int minWidth, int minHeight, Images images,
-            String errorLabelId) {
+            String id, String errorLabelId) {
+        this.id = id;
         this.title = title;
         this.width = width;
         this.height = height;
@@ -44,12 +46,15 @@ public abstract class AbstractOptionsPanel {
     }
 
     public void hide() {
-        createDialogIfNecessary();
-        dialog.hide();
+        if (dialog != null) {
+            dialog.hide();
+        }
     }
 
     public void hideMessages() {
-        messageErrorBar.hideErrorMessage();
+        if (dialog != null) {
+            messageErrorBar.hideErrorMessage();
+        }
     }
 
     public boolean isVisible() {
@@ -72,6 +77,13 @@ public abstract class AbstractOptionsPanel {
         }
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+        if (dialog != null) {
+            dialog.setTitle(title);
+        }
+    }
+
     public void show() {
         createDialogIfNecessary();
         dialog.show();
@@ -79,6 +91,7 @@ public abstract class AbstractOptionsPanel {
 
     private void createDialog() {
         dialog = new BasicDialog(title, false, true, width, height, minWidth, minHeight);
+        dialog.setId(id);
         messageErrorBar = new MessageToolbar(images, errorLabelId);
         dialog.setBottomToolbar(messageErrorBar.getToolbar());
         tabPanel = new TabPanel();

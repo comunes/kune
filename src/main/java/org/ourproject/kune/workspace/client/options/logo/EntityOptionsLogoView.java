@@ -16,8 +16,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.workspace.client.entitylogo;
+ */package org.ourproject.kune.workspace.client.options.logo;
 
-public interface EntityLogoSelector {
-    void show();
+import org.ourproject.kune.platf.client.View;
+
+public interface EntityOptionsLogoView extends View {
+
+    void setNormalGroupsLabels();
+
+    void setPersonalGroupsLabels();
+
+    void setUploadParams(String userHash, String token);
+
 }

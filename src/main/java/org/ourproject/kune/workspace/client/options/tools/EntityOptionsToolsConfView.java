@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.options;
+package org.ourproject.kune.workspace.client.options.tools;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;

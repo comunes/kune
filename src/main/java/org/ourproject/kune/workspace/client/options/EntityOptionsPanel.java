@@ -1,33 +1,41 @@
 package org.ourproject.kune.workspace.client.options;
 
+import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
 
 public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOptionsView {
 
-    public static final String GROUP_OPTIONS_ERROR_ID = "gop-err-mess";
+    class EntityOptionPushButton extends IconLabel implements View {
+        public EntityOptionPushButton(String text, AbstractImagePrototype icon) {
+            super(text, icon);
+        }
+    }
+    public static final String GROUP_OPTIONS_ERROR_ID = "k-gop-err-mess";
+    public static final String GROUP_OPTIONS_ID = "k-gop-panel";
+    public static final String GROUP_OPTIONS_ICON = "k-gop-icon";
     private final I18nTranslationService i18n;
-    private final WorkspaceSkeleton ws;
-    private PushButton optionsButton;
+    private final EntityLogo entityHeader;
+    private EntityOptionPushButton optionsButton;
     private final Images images;
+
     private final EntityOptionsGroup entityPreferencesGroup;
 
-    public EntityOptionsPanel(final EntityOptionsPresenter presenter, final WorkspaceSkeleton ws,
+    public EntityOptionsPanel(final EntityOptionsPresenter presenter, final EntityLogo entityHeader,
             I18nTranslationService i18n, Images images, EntityOptionsGroup entityOptionsGroup) {
-        super(i18n.t("Group options"), 400, 250, 400, 250, images, GROUP_OPTIONS_ERROR_ID);
-        this.ws = ws;
+        super("", 400, 250, 400, 250, images, GROUP_OPTIONS_ID, GROUP_OPTIONS_ERROR_ID);
+        this.entityHeader = entityHeader;
         this.i18n = i18n;
         this.images = images;
         this.entityPreferencesGroup = entityOptionsGroup;
@@ -46,26 +54,37 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
         doLayoutIfNeeded();
     }
 
+    public void createAndShow() {
+        entityPreferencesGroup.createAll();
+        show();
+        setFirstTabActive();
+    }
+
     public void setButtonVisible(boolean visible) {
         optionsButton.setVisible(visible);
     }
 
+    public void setGroupTitle() {
+        super.setTitle(i18n.t(PlatfMessages.ENT_OPTIONS_GROUP_TITLE));
+        optionsButton.setTitle(i18n.t("Configure this group preferences"));
+    }
+
+    public void setPersonalTitle() {
+        super.setTitle(i18n.t(PlatfMessages.ENT_OPTIONS_USER_TITLE));
+        optionsButton.setTitle(i18n.t("Configure your preferences"));
+    }
+
     private void createOptionsButton() {
-        optionsButton = new PushButton(images.emblemSystem().createImage(), new ClickListener() {
+        optionsButton = new EntityOptionPushButton(i18n.t("Configure"), images.emblemSystem());
+        optionsButton.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
-                if (isVisible()) {
-                    hide();
-                } else {
-                    entityPreferencesGroup.createAll();
-                    show();
-                    setFirstTabActive();
-                }
+                createAndShow();
             }
         });
-        KuneUiUtils.setQuickTip(optionsButton, i18n.t("Show/hide the group options dialog"));
+        optionsButton.ensureDebugId(GROUP_OPTIONS_ICON);
+        optionsButton.addStyleName("kune-Margin-Medium-t");
+        optionsButton.addStyleName("kune-pointer");
 
-        optionsButton.addStyleName("kune-Margin-Medium-r");
-        final SimpleToolbar wsTitle = ws.getEntityWorkspace().getTitleComponent();
-        wsTitle.add(optionsButton);
+        entityHeader.addWidget(optionsButton);
     }
 }

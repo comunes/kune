@@ -18,7 +18,11 @@
  *
  */package org.ourproject.kune.workspace.client.entitylogo;
 
+import org.ourproject.kune.platf.client.View;
+
 public interface EntityLogo {
+
+    void addWidget(View widget);
 
     /**
      * Refresh the logo from the group info in the client session

@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.options;
+package org.ourproject.kune.workspace.client.options.tools;
 
 import java.util.Collection;
 
@@ -11,6 +11,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.workspace.client.options.EntityOptions;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener2;
@@ -73,7 +74,6 @@ public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
     }
 
     private void reset() {
-        // TODO Auto-generated method stub
         view.clear();
         entityOptions.hideMessages();
     }

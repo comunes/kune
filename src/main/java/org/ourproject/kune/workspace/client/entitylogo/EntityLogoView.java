@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.entitylogo;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
@@ -32,11 +33,9 @@ public interface EntityLogoView {
 
     String LOGO_FORM_FIELD = "k-elogov-ff";
 
+    void addWidget(View view);
+
     void reloadImage(GroupDTO group);
-
-    void setChangeYourAvatarText();
-
-    void setChangeYourLogoText();
 
     void setFullLogo(StateToken stateToken, boolean clipped);
 
@@ -49,12 +48,6 @@ public interface EntityLogoView {
     void setLogoText(final String groupName);
 
     void setMediumFont();
-
-    void setPutYourAvatarText();
-
-    void setPutYourLogoText();
-
-    void setSetYourLogoVisible(final boolean visible);
 
     void setSmallFont();
 

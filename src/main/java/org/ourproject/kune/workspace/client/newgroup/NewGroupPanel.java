@@ -31,6 +31,7 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
 import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -93,6 +94,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
             }
 
             public void onClose() {
+                Log.info("close pressed");
                 presenter.onClose();
             }
 

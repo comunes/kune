@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
+import org.ourproject.kune.workspace.client.entitylogo.EntityTextLogo;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
@@ -47,6 +47,6 @@ public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
         String longName = "漢語 中文 华语 汉语" + genPrefix();
         newGroupRegistrationDefLicense("g" + genPrefix(), longName,
                 "吗 台湾 六种辅音韵尾 中国政府要求在中国出售的软件必须使用编码 过 国标 名词的复数形式只在代词及多音节", "漢語 中文 华语 汉语");
-        waitForTextInside(gid(EntityLogoPanel.LOGO_NAME), longName);
+        waitForTextInside(gid(EntityTextLogo.LOGO_NAME), longName);
     }
 }

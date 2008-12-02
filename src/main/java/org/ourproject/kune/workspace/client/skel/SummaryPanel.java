@@ -28,14 +28,16 @@ import com.gwtext.client.widgets.event.PanelListenerAdapter;
 public class SummaryPanel extends Panel {
 
     private final WorkspaceSkeleton ws;
+    private final String collapsedTitle;
+    private final String expandedTitle;
 
     public SummaryPanel(final String title, final String titleTooltip, WorkspaceSkeleton ws) {
         this.ws = ws;
         super.setBorder(false);
         super.setAutoScroll(true);
-        final String collapsedTitle = KuneUiUtils.genQuickTipLabel(title, null, titleTooltip,
+        collapsedTitle = KuneUiUtils.genQuickTipLabel(title, null, titleTooltip,
                 Images.App.getInstance().arrowRightWhite(), IconPosition.left);
-        final String expandedTitle = KuneUiUtils.genQuickTipLabel(title, null, titleTooltip,
+        expandedTitle = KuneUiUtils.genQuickTipLabel(title, null, titleTooltip,
                 Images.App.getInstance().arrowDownWhite(), IconPosition.left);
         setTitle(collapsedTitle);
         super.addListener(new PanelListenerAdapter() {
@@ -66,6 +68,7 @@ public class SummaryPanel extends Panel {
     @Override
     public void expand() {
         super.expand();
+        setTitle(expandedTitle);
     }
 
     @Override

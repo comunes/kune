@@ -13,11 +13,17 @@ public class EntityOptionsPresenter implements EntityOptions {
 
     public EntityOptionsPresenter(StateManager stateManager) {
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-            public void onEvent(StateAbstractDTO parameter) {
-                if (parameter.getGroupRights().isAdministrable()) {
+            public void onEvent(StateAbstractDTO state) {
+                if (state.getGroup().isPersonalGroup()) {
+                    view.setPersonalTitle();
+                } else {
+                    view.setGroupTitle();
+                }
+                if (state.getGroupRights().isAdministrable()) {
                     view.setButtonVisible(true);
                 } else {
                     view.setButtonVisible(false);
+                    view.hide();
                 }
             }
         });
@@ -41,5 +47,9 @@ public class EntityOptionsPresenter implements EntityOptions {
 
     public void setErrorMessage(String message, SiteErrorType type) {
         view.setErrorMessage(message, type);
+    }
+
+    public void show() {
+        view.createAndShow();
     }
 }

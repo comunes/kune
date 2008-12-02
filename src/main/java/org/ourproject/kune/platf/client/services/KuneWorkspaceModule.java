@@ -46,7 +46,6 @@ import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPresenter;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelector;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
@@ -57,9 +56,12 @@ import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPresenter;
-import org.ourproject.kune.workspace.client.options.EntityOptionsToolsConf;
-import org.ourproject.kune.workspace.client.options.EntityOptionsToolsConfPanel;
-import org.ourproject.kune.workspace.client.options.EntityOptionsToolsConfPresenter;
+import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogo;
+import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
+import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPresenter;
+import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConf;
+import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPanel;
+import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPresenter;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -179,7 +181,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public SiteUserMenu create() {
                 final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class),
-                        $(StateManager.class));
+                        $(StateManager.class), $$(EntityOptions.class));
                 final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nUITranslationService.class));
                 presenter.init(panel);
@@ -258,9 +260,8 @@ public class KuneWorkspaceModule extends AbstractModule {
             public EntityLogo create() {
                 final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
                         $(WsThemePresenter.class), $(Session.class));
-                final EntityLogoPanel panel = new EntityLogoPanel($(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class), $$(FileDownloadUtils.class), $$(EntityLogoSelector.class),
-                        $(Images.class));
+                final EntityLogoPanel panel = new EntityLogoPanel($(WorkspaceSkeleton.class),
+                        $$(FileDownloadUtils.class), $(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -424,7 +425,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntityOptions create() {
                 final EntityOptionsPresenter presenter = new EntityOptionsPresenter($(StateManager.class));
-                final EntityOptionsPanel panel = new EntityOptionsPanel(presenter, $(WorkspaceSkeleton.class),
+                final EntityOptionsPanel panel = new EntityOptionsPanel(presenter, $(EntityLogo.class),
                         $(I18nTranslationService.class), $(Images.class), $(EntityOptionsGroup.class));
                 presenter.init(panel);
                 return presenter;
@@ -439,6 +440,18 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $(EntityOptions.class), $$(GroupServiceAsync.class));
                 final EntityOptionsToolsConfPanel panel = new EntityOptionsToolsConfPanel(presenter,
                         $(WorkspaceSkeleton.class), $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(EntityOptionsGroup.class, new Factory<EntityOptionsLogo>(EntityOptionsLogo.class) {
+            @Override
+            public EntityOptionsLogo create() {
+                final EntityOptionsLogoPresenter presenter = new EntityOptionsLogoPresenter($(Session.class),
+                        $(EntityLogo.class), $(EntityOptions.class), $(StateManager.class));
+                final EntityOptionsLogoPanel panel = new EntityOptionsLogoPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }

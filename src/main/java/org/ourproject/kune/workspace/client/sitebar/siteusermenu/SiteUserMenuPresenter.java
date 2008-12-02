@@ -25,7 +25,9 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
+import org.ourproject.kune.workspace.client.options.EntityOptions;
 
+import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
 
@@ -35,10 +37,13 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
     private final MenuItemCollection<GroupDTO> participateInGroups;
     private final StateManager stateManager;
     private final Session session;
+    private final Provider<EntityOptions> entityOptions;
 
-    public SiteUserMenuPresenter(final Session session, final StateManager stateManager) {
+    public SiteUserMenuPresenter(final Session session, final StateManager stateManager,
+            final Provider<EntityOptions> entityOptions) {
         this.session = session;
         this.stateManager = stateManager;
+        this.entityOptions = entityOptions;
         participateInGroups = new MenuItemCollection<GroupDTO>();
         session.onUserSignIn(new Listener<UserInfoDTO>() {
             public void onEvent(final UserInfoDTO userInfoDTO) {
@@ -67,7 +72,8 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
     }
 
     public void onUserPreferences() {
-        // TODO Auto-generated method stub
+        onUserHomePage();
+        entityOptions.get().show();
     }
 
     private void addPartipation(final GroupDTO group) {

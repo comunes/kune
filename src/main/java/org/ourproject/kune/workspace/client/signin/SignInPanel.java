@@ -37,13 +37,18 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
                     public void onEvent() {
                         presenter.onCancel();
                     }
-                }, images, ERROR_MSG, 3);
+                }, images, ERROR_MSG, 102);
         this.presenter = presenter;
 
         super.addListener(new WindowListenerAdapter() {
             @Override
             public void onHide(Component component) {
                 presenter.onClose();
+            }
+
+            @Override
+            public void onShow(Component component) {
+                focusOnNickname();
             }
         });
 

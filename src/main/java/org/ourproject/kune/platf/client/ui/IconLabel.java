@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2007 Google Inc.
  *
@@ -59,27 +58,6 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     private final Element textLabel;
 
     /**
-     * Creates an empty label with a icon.
-     * 
-     * @param image
-     *            the icon to add
-     */
-    private IconLabel(final AbstractImagePrototype image, final boolean leftIcon) {
-        setElement(DOM.createDiv());
-        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
-        setStyleName("kune-IconLabel");
-        icon = image.createImage().getElement();
-        textLabel = DOM.createSpan();
-        if (leftIcon) {
-            DOM.appendChild(getElement(), icon);
-            DOM.appendChild(getElement(), textLabel);
-        } else {
-            DOM.appendChild(getElement(), textLabel);
-            DOM.appendChild(getElement(), icon);
-        }
-    }
-
-    /**
      * Creates a label with the specified text and a icon in the left.
      * 
      * @param image
@@ -90,6 +68,21 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     public IconLabel(final AbstractImagePrototype image, final String text) {
         this(image, true);
         setText(text);
+    }
+
+    /**
+     * Creates a label with the specified text and a icon in the left.
+     * 
+     * @param image
+     *            the icon to add
+     * @param text
+     *            the new label's text
+     * @param wordWrap
+     *            <code>false</code> to disable word wrapping
+     */
+    public IconLabel(final AbstractImagePrototype image, final String text, final boolean wordWrap) {
+        this(image, text);
+        setWordWrap(wordWrap);
     }
 
     /**
@@ -121,18 +114,25 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     }
 
     /**
-     * Creates a label with the specified text and a icon in the left.
+     * Creates an empty label with a icon.
      * 
      * @param image
      *            the icon to add
-     * @param text
-     *            the new label's text
-     * @param wordWrap
-     *            <code>false</code> to disable word wrapping
      */
-    public IconLabel(final AbstractImagePrototype image, final String text, final boolean wordWrap) {
-        this(image, text);
-        setWordWrap(wordWrap);
+    private IconLabel(final AbstractImagePrototype image, final boolean leftIcon) {
+        setElement(DOM.createDiv());
+        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
+        icon = image.createImage().getElement();
+        textLabel = DOM.createSpan();
+        if (leftIcon) {
+            setStyleName("kune-IconLabel-l");
+            DOM.appendChild(getElement(), icon);
+            DOM.appendChild(getElement(), textLabel);
+        } else {
+            setStyleName("kune-IconLabel-r");
+            DOM.appendChild(getElement(), textLabel);
+            DOM.appendChild(getElement(), icon);
+        }
     }
 
     public void addClickListener(final ClickListener listener) {
@@ -175,6 +175,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         return !DOM.getStyleAttribute(textLabel, "whiteSpace").equals("nowrap");
     }
 
+    @Override
     public void onBrowserEvent(final Event event) {
         switch (DOM.eventGetType(event)) {
         case Event.ONCLICK:
@@ -229,6 +230,10 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         }
     }
 
+    public void setColor(final String color) {
+        DOM.setStyleAttribute(textLabel, "color", color);
+    }
+
     public void setHorizontalAlignment(final HorizontalAlignmentConstant align) {
         horzAlign = align;
         DOM.setStyleAttribute(textLabel, "textAlign", align.getTextAlignString());
@@ -238,17 +243,14 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         DOM.setInnerText(textLabel, text);
     }
 
-    public void setWordWrap(final boolean wrap) {
-        DOM.setStyleAttribute(textLabel, "whiteSpace", wrap ? "normal" : "nowrap");
-    }
-
-    public void setColor(final String color) {
-        DOM.setStyleAttribute(textLabel, "color", color);
-    }
-
+    @Override
     public void setTitle(final String title) {
         KuneUiUtils.setQuickTip(icon, title);
         KuneUiUtils.setQuickTip(textLabel, title);
+    }
+
+    public void setWordWrap(final boolean wrap) {
+        DOM.setStyleAttribute(textLabel, "whiteSpace", wrap ? "normal" : "nowrap");
     }
 
 }

@@ -16,56 +16,60 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.workspace.client.entitylogo;
+ */package org.ourproject.kune.workspace.client.options.logo;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.site.Site;
 
-public class EntityLogoSelectorPresenter implements EntityLogoSelector {
+import com.calclab.suco.client.listener.Listener2;
 
-    private EntityLogoSelectorView view;
+public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
+
+    private EntityOptionsLogoView view;
     private final Session session;
     private final EntityLogo entityLogo;
+    private final EntityOptions entityOptions;
 
-    public EntityLogoSelectorPresenter(Session session, EntityLogo entityLogo) {
+    public EntityOptionsLogoPresenter(Session session, EntityLogo entityLogo, EntityOptions entityOptions,
+            StateManager stateManager) {
         this.session = session;
         this.entityLogo = entityLogo;
+        this.entityOptions = entityOptions;
+        stateManager.onGroupChanged(new Listener2<String, String>() {
+            public void onEvent(String group1, String group2) {
+                setState();
+            }
+        });
     }
 
     public View getView() {
         return view;
     }
 
-    public void init(EntityLogoSelectorView view) {
+    public void init(EntityOptionsLogoView view) {
         this.view = view;
-    }
-
-    public void onCancel() {
-        view.hide();
+        entityOptions.addOptionTab(view);
+        setState();
     }
 
     public void onSubmitComplete(int httpStatus, String responseText) {
-        view.hide();
         entityLogo.reloadGroupLogoImage();
     }
 
     public void onSubmitFailed(int httpStatus, String responseText) {
-        Site.error("Error setting the group logo");
+        Site.error("Error setting the group logo: " + responseText);
     }
 
-    public void show() {
-        session.check(new AsyncCallbackSimple<Object>() {
-            public void onSuccess(Object result) {
-                view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
-                if (session.getCurrentState().getGroup().isPersonalGroup()) {
-                    view.setPersonalGroupsLabels();
-                } else {
-                    view.setNormalGroupsLabels();
-                }
-                view.show();
-            }
-        });
+    private void setState() {
+        view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
+        if (session.getCurrentState().getGroup().isPersonalGroup()) {
+            view.setPersonalGroupsLabels();
+        } else {
+            view.setNormalGroupsLabels();
+        }
     }
 }

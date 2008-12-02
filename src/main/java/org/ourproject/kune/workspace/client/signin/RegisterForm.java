@@ -64,7 +64,7 @@ public class RegisterForm extends DefaultForm {
         super.addStyleName("kune-Margin-Large-l");
 
         shortNameRegField = new TextField();
-        shortNameRegField.setTabIndex(1);
+        shortNameRegField.setTabIndex(0);
         shortNameRegField.setFieldLabel(i18n.t("Nickname"));
         shortNameRegField.setName(NICK_FIELD);
         shortNameRegField.setWidth(DEF_SMALL_FIELD_WIDTH);
@@ -79,7 +79,7 @@ public class RegisterForm extends DefaultForm {
         add(shortNameRegField);
 
         longNameRegField = new TextField();
-        longNameRegField.setTabIndex(2);
+        longNameRegField.setTabIndex(1);
         longNameRegField.setFieldLabel(i18n.t("Full Name"));
         longNameRegField.setName(LONGNAME_FIELD);
         longNameRegField.setWidth(DEF_FIELD_WIDTH);
@@ -91,7 +91,7 @@ public class RegisterForm extends DefaultForm {
         add(longNameRegField);
 
         passwdRegField = new TextField();
-        passwdRegField.setTabIndex(3);
+        passwdRegField.setTabIndex(2);
         passwdRegField.setFieldLabel(i18n.t("Password"));
         passwdRegField.setName(PASSWORD_FIELD);
         passwdRegField.setPassword(true);
@@ -103,7 +103,7 @@ public class RegisterForm extends DefaultForm {
         add(passwdRegField);
 
         passwdRegFieldDup = new TextField();
-        passwdRegFieldDup.setTabIndex(4);
+        passwdRegFieldDup.setTabIndex(3);
         passwdRegFieldDup.setFieldLabel(i18n.t("Retype password"));
         passwdRegFieldDup.setName(PASSWORD_FIELD_DUP);
         passwdRegFieldDup.setPassword(true);
@@ -122,7 +122,7 @@ public class RegisterForm extends DefaultForm {
         add(passwdRegFieldDup);
 
         emailRegField = new TextField();
-        emailRegField.setTabIndex(5);
+        emailRegField.setTabIndex(4);
         emailRegField.setFieldLabel(i18n.t("Email"));
         emailRegField.setName(EMAIL_FIELD);
         emailRegField.setVtype(VType.EMAIL);
@@ -136,7 +136,7 @@ public class RegisterForm extends DefaultForm {
         langStore.load();
 
         languageCombo = new ComboBox();
-        languageCombo.setTabIndex(6);
+        languageCombo.setTabIndex(5);
         languageCombo.setLazyRender(true);
         languageCombo.setName(LANG_FIELD);
         languageCombo.setMinChars(1);
@@ -154,7 +154,7 @@ public class RegisterForm extends DefaultForm {
         languageCombo.setAllowBlank(false);
         languageCombo.setValueField("abbr");
         languageCombo.setValue(session.getCurrentLanguage().getCode());
-        languageCombo.setPageSize(7);
+        languageCombo.setPageSize(6);
         languageCombo.setForceSelection(true);
         languageCombo.setValidationEvent(false);
         // languageCombo.setId(LANG_FIELD);

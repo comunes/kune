@@ -18,16 +18,15 @@
  *
  */package org.ourproject.kune.workspace.client.entitylogo;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
 
 public class EntityLogoPresenter implements EntityLogo {
@@ -45,16 +44,15 @@ public class EntityLogoPresenter implements EntityLogo {
                 setGroupLogo(session.getCurrentState().getGroup());
             }
         });
-        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-            public void onEvent(final StateAbstractDTO state) {
-                setEntityLogoLink(state);
-            }
-        });
         theme.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
             public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
                 view.setTheme(oldTheme, newTheme);
             }
         });
+    }
+
+    public void addWidget(View widget) {
+        view.addWidget(widget);
     }
 
     public void init(final EntityLogoView view) {
@@ -67,27 +65,6 @@ public class EntityLogoPresenter implements EntityLogo {
 
     public void reloadGroupLogoImage() {
         view.reloadImage(session.getCurrentState().getGroup());
-    }
-
-    void setEntityLogoLink(final StateAbstractDTO state) {
-        final boolean isAdmin = state.getGroupRights().isAdministrable();
-        switch (state.getGroup().getGroupType()) {
-        case PERSONAL:
-            if (state.getGroup().hasLogo()) {
-                view.setChangeYourAvatarText();
-            } else {
-                view.setPutYourAvatarText();
-            }
-            break;
-        default:
-            if (state.getGroup().hasLogo()) {
-                view.setChangeYourLogoText();
-            } else {
-                view.setPutYourLogoText();
-            }
-            break;
-        }
-        view.setSetYourLogoVisible(isAdmin);
     }
 
     void setGroupLogo(final GroupDTO group) {

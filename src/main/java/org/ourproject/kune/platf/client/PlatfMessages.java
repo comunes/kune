@@ -10,7 +10,8 @@ public interface PlatfMessages {
     String INCORRECT_NICKNAME_EMAIL_OR_PASSWORD = "Incorrect nickname/email or password";
     String YOUR_HOMEPAGE = "Your homepage";
     String USER_DON_T_HAVE_A_HOMEPAGE = "This user don't have a homepage";
-    String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Select a logo for your group";
-    String ENT_LOGO_SELECTOR_PERSON_TITLE = "Select your avatar";
-
+    String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Logo";
+    String ENT_LOGO_SELECTOR_PERSON_TITLE = "Avatar";
+    String ENT_OPTIONS_GROUP_TITLE = "Group options";
+    String ENT_OPTIONS_USER_TITLE = "User options";
 }

@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
-import org.ourproject.kune.platf.client.PlatfMessages;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoSelectorPanel;
 import org.ourproject.kune.workspace.client.entitylogo.EntityLogoView;
+import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
+import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
 
 public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
 
@@ -20,11 +19,13 @@ public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
     }
 
     private void setLogo(String filename) throws Exception, IOException {
-        click(gid(EntityLogoPanel.PUT_YOUR_LOGO_LINK));
-        waitForTextInside(EntityLogoSelectorPanel.DIALOG_ID, PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
+        click(gid(EntityOptionsPanel.GROUP_OPTIONS_ICON));
+        // waitForTextInside(EntityOptionsLogoPanel.PANEL_ID,
+        // PlatfMessages.ENT_OPTIONS_GROUP_TITLE);
+        click(EntityOptionsLogoPanel.SET_LOGO_ID);
         File dir = new File(".");
         type(EntityLogoView.LOGO_FORM_FIELD, dir.getCanonicalPath() + File.separator + "img" + File.separator
                 + filename);
-        click(EntityLogoSelectorPanel.SUBID);
+        click(EntityOptionsLogoPanel.SET_LOGO_ID);
     }
 }

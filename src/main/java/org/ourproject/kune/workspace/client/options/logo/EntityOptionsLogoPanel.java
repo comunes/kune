@@ -16,19 +16,20 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.workspace.client.entitylogo;
+ */package org.ourproject.kune.workspace.client.options.logo;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.platf.client.ui.download.FileParams;
+import org.ourproject.kune.workspace.client.entitylogo.EntityLogoView;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.listener.Listener0;
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.EventCallback;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.Form;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -38,53 +39,31 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 import com.gwtext.client.widgets.form.event.FormListener;
 
-public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
+public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLogoView {
 
     public static final String ICON_UPLOAD_SERVLET = "/kune/servlets/EntityLogoUploadManager";
-    public static final String SUBID = "k-elogoselp-subb";
-    public static final String CANCELID = "k-elogoselp-canb";
-    public static final String DIALOG_ID = "k-elogoselp";
-    private final BasicDialogExtended dialog;
-    private final FormPanel formPanel;
+    public static final String SET_LOGO_ID = "k-eolp-sendb";
+    public static final String PANEL_ID = "k-eolp-pan";
     private final Hidden userhashField;
     private final Hidden tokenField;
     private final TextField file;
     private final Label dialogInfoLabel;
     private final I18nTranslationService i18n;
 
-    public EntityLogoSelectorPanel(final EntityLogoSelectorPresenter presenter, final WorkspaceSkeleton ws,
+    public EntityOptionsLogoPanel(final EntityOptionsLogoPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
         this.i18n = i18n;
-        dialog = new BasicDialogExtended(i18n.t(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE), true, true, 400, 200,
-                "", i18n.t("Select"), SUBID, i18n.tWithNT("Cancel", "used in button"), CANCELID, new Listener0() {
-                    public void onEvent() {
-                        String filename = file.getValueAsString();
-                        if (filename != null && filename.length() > 0) {
-                            formPanel.getForm().submit();
-                        }
-                    }
-                }, new Listener0() {
-                    public void onEvent() {
-                        presenter.onCancel();
-                    }
-                }, 2);
-        dialog.setId(DIALOG_ID);
-        dialog.setCollapsible(false);
-        dialog.setBorder(false);
-        // dialog.getFirstButton().disable();
-
-        formPanel = new FormPanel();
-        formPanel.setFrame(true);
-        formPanel.setAutoScroll(false);
-        formPanel.setBorder(false);
-        formPanel.setFileUpload(true);
-        formPanel.setWidth(400);
-        formPanel.setMethod(Connection.POST);
-        formPanel.setUrl(ICON_UPLOAD_SERVLET);
-        formPanel.setWaitMsgTarget(true);
-        formPanel.setHideLabels(true);
-        formPanel.setPaddings(10);
-        formPanel.addFormListener(new FormListener() {
+        super.setFrame(true);
+        super.setAutoScroll(false);
+        super.setBorder(false);
+        super.setFileUpload(true);
+        super.setWidth(400);
+        super.setMethod(Connection.POST);
+        super.setUrl(ICON_UPLOAD_SERVLET);
+        super.setWaitMsgTarget(true);
+        super.setHideLabels(true);
+        super.setPaddings(10);
+        super.addFormListener(new FormListener() {
             public boolean doBeforeAction(Form form) {
                 return true;
             }
@@ -94,12 +73,11 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
             }
 
             public void onActionFailed(Form form, int httpStatus, String responseText) {
-                Site.important(responseText);
                 presenter.onSubmitFailed(httpStatus, responseText);
             }
         });
         dialogInfoLabel = new Label();
-        formPanel.add(dialogInfoLabel);
+        super.add(dialogInfoLabel);
         file = new TextField("File", EntityLogoView.LOGO_FORM_FIELD);
         EventCallback keyListener = new EventCallback() {
             public void execute(EventObject e) {
@@ -111,9 +89,9 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
         file.setInputType("file");
         userhashField = new Hidden(FileParams.HASH, FileParams.HASH);
         tokenField = new Hidden(FileParams.TOKEN, FileParams.TOKEN);
-        formPanel.add(userhashField);
-        formPanel.add(tokenField);
-        formPanel.add(file);
+        super.add(userhashField);
+        super.add(tokenField);
+        super.add(file);
         FieldListenerAdapter changeListener = new FieldListenerAdapter() {
             @Override
             public void onChange(Field field, Object newVal, Object oldVal) {
@@ -123,7 +101,20 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
         };
         // Don't works:
         file.addListener(changeListener);
-        dialog.add(formPanel);
+        setId(PANEL_ID);
+
+        Button sendButton = new Button(i18n.t("Send"), new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
+                String filename = file.getValueAsString();
+                if (filename != null && filename.length() > 0) {
+                    getForm().submit();
+                }
+            }
+        });
+        sendButton.setId(SET_LOGO_ID);
+        super.addButton(sendButton);
+        super.setHeight(170);
     }
 
     // BrowseButton browseButton = new BrowseButton("SelectIcon");
@@ -131,13 +122,12 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
     // @Override
     // public void onInputFileChange(BrowseButton browseButton, String filename)
     // {
-    // // TODO Auto-generated method stub
+    // //
     // }
     // });
 
-    public void hide() {
-        dialog.hide();
-        formPanel.getForm().reset();
+    public void reset() {
+        super.getForm().reset();
     }
 
     public void setNormalGroupsLabels() {
@@ -145,7 +135,8 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
                 EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT)
                 + "<br/><br/>");
-        dialog.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
+        super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
+        doLayoutIfNeeded();
     }
 
     public void setPersonalGroupsLabels() {
@@ -153,7 +144,8 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
                 EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT, EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT)
                 + "<br/><br/>");
-        dialog.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
+        super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
+        doLayoutIfNeeded();
     }
 
     public void setUploadParams(String userHash, String token) {
@@ -161,16 +153,10 @@ public class EntityLogoSelectorPanel implements EntityLogoSelectorView {
         tokenField.setValue(token);
     }
 
-    public void show() {
-        dialog.show();
-    }
-
-    @SuppressWarnings("unused")
-    private void setEnableFileField() {
-        if (file.getValueAsString().length() > 0) {
-            dialog.getFirstButton().enable();
-        } else {
-            dialog.getFirstButton().disable();
+    private void doLayoutIfNeeded() {
+        if (super.isRendered()) {
+            doLayout(false);
         }
     }
+
 }

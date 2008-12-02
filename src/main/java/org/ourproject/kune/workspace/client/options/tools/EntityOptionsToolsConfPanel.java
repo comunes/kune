@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.options;
+package org.ourproject.kune.workspace.client.options.tools;
 
 import java.util.HashMap;
 

@@ -21,179 +21,49 @@ package org.ourproject.kune.workspace.client.entitylogo;
 
 import java.util.Date;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
-    class EntityTextLogo extends VerticalPanel {
-
-        private static final String _100 = "100%";
-        private static final String LOGO_MEDIUM_FONT_STYLE = "k-elogo-l-m";
-        private static final String LOGO_SMALL_FONT_STYLE = "k-elogo-l-s";
-        private static final String LOGO_LARGE_FONT_STYLE = "k-elogo-l-l";
-        private final Label logoLabel;
-        private final Label putYourLogoHL;
-        private final HorizontalPanel putYourLogoHP;
-        private final Image logoImage;
-
-        public EntityTextLogo(final Provider<EntityLogoSelector> entityLogoSelectorProvider) {
-            // Initialize
-            super();
-            HorizontalPanel generalHP = new HorizontalPanel();
-            VerticalPanel logoTextVP = new VerticalPanel();
-            logoImage = new Image();
-            logoLabel = new Label();
-            final Label expandCell = new Label("");
-            putYourLogoHP = new HorizontalPanel();
-            putYourLogoHL = new Label();
-
-            logoImage.ensureDebugId(LOGO_IMAGE);
-            logoLabel.ensureDebugId(LOGO_NAME);
-            putYourLogoHL.ensureDebugId(PUT_YOUR_LOGO_LINK);
-
-            // Layout
-            add(generalHP);
-            generalHP.add(logoImage);
-            generalHP.add(logoTextVP);
-            logoTextVP.add(logoLabel);
-            logoTextVP.add(putYourLogoHP);
-            putYourLogoHP.add(expandCell);
-            putYourLogoHP.add(putYourLogoHL);
-
-            // Set properties
-
-            setPutYourLogo();
-            expandCell.setStyleName("k-elogop-expand");
-            putYourLogoHL.setStyleName("k-elogo-plink");
-            putYourLogoHL.addStyleName("kune-pointer");
-            putYourLogoHL.addClickListener(new ClickListener() {
-                public void onClick(final Widget sender) {
-                    entityLogoSelectorProvider.get().show();
-                }
-            });
-            generalHP.setWidth(_100);
-            generalHP.setHeight(_100);
-            generalHP.setCellWidth(logoTextVP, _100);
-            generalHP.setCellHeight(logoTextVP, _100);
-            logoTextVP.setWidth(_100);
-            logoTextVP.setCellWidth(logoLabel, _100);
-            super.setVerticalAlignment(ALIGN_MIDDLE);
-            logoTextVP.setVerticalAlignment(ALIGN_MIDDLE);
-            generalHP.setVerticalAlignment(ALIGN_MIDDLE);
-            logoTextVP.setCellWidth(putYourLogoHP, _100);
-            logoTextVP.setHeight(_100);
-            expandCell.setWidth(_100);
-            putYourLogoHP.setCellWidth(expandCell, _100);
-            setStylePrimaryName("k-entitytextlogo");
-            addStyleName("k-entitytextlogo-no-border");
-            logoImage.setVisible(false);
-            setLogoText("");
-        }
-
-        public void setChangeYourAvatarText() {
-            putYourLogoHL.setText(i18n.t("Change Your Avatar"));
-        }
-
-        public void setChangeYourLogo() {
-            putYourLogoHL.setText(i18n.t("Change Your Logo"));
-        }
-
-        public void setLargeFont() {
-            resetFontSize();
-            logoLabel.addStyleName(LOGO_LARGE_FONT_STYLE);
-        }
-
-        public void setLogoImage(AbstractImagePrototype imageProto) {
-            imageProto.applyTo(logoImage);
-        }
-
-        public void setLogoImage(final String url) {
-            Image.prefetch(url);
-            logoImage.setUrl(url);
-        }
-
-        public void setLogoText(final String text) {
-            logoLabel.setText(text);
-        }
-
-        public void setLogoVisible(final boolean visible) {
-            logoImage.setVisible(visible);
-        }
-
-        public void setMediumFont() {
-            resetFontSize();
-            logoLabel.addStyleName(LOGO_MEDIUM_FONT_STYLE);
-        }
-
-        public void setPutYourAvatarText() {
-            putYourLogoHL.setText(i18n.t("Put Your Avatar Here"));
-        }
-
-        public void setPutYourLogo() {
-            putYourLogoHL.setText(i18n.t("Put Your Logo Here"));
-        }
-
-        public void setPutYourLogoVisible(final boolean visible) {
-            putYourLogoHP.setVisible(visible);
-        }
-
-        public void setSmallFont() {
-            resetFontSize();
-            logoLabel.addStyleName(LOGO_SMALL_FONT_STYLE);
-        }
-
-        private void resetFontSize() {
-            logoLabel.removeStyleName(LOGO_LARGE_FONT_STYLE);
-            logoLabel.removeStyleName(LOGO_SMALL_FONT_STYLE);
-            logoLabel.removeStyleName(LOGO_MEDIUM_FONT_STYLE);
-        }
-    }
-    public static final String LOGO_NAME = "k-elogop-ln";
-    public static final String LOGO_IMAGE = "k-elogop-image";
-    public static final String PUT_YOUR_LOGO_LINK = "k-elogop-pyll";
+public class EntityLogoPanel extends HorizontalPanel implements EntityLogoView {
 
     private final Provider<FileDownloadUtils> downloadProvider;
-    private final Provider<EntityLogoSelector> entityLogoSelectorProvider;
-    private EntityTextLogo entityTextLogo;
-    private final I18nTranslationService i18n;
+    private final EntityTextLogo entityTextLogo;
     private final Images images;
+    private final VerticalPanel vp;
 
-    public EntityLogoPanel(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
-            final Provider<FileDownloadUtils> dowloadProvider,
-            final Provider<EntityLogoSelector> entityLogoSelectorProvider, Images images) {
-        this.i18n = i18n;
+    public EntityLogoPanel(final WorkspaceSkeleton ws, final Provider<FileDownloadUtils> dowloadProvider, Images images) {
         this.downloadProvider = dowloadProvider;
-        this.entityLogoSelectorProvider = entityLogoSelectorProvider;
         this.images = images;
+        vp = new VerticalPanel();
+        vp.setWidth("100%");
+        super.setWidth("100%");
+        vp.setHorizontalAlignment(ALIGN_RIGHT);
+        entityTextLogo = new EntityTextLogo();
+        add(entityTextLogo);
+        add(vp);
         ws.addToEntityMainHeader(this);
     }
 
+    public void addWidget(View view) {
+        Widget widget = (Widget) view;
+        vp.add(widget);
+        vp.setCellWidth(widget, "100%");
+    }
+
     public void reloadImage(GroupDTO group) {
-        getEntityTextLogo().setLogoImage(
-                downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "&nocache=" + new Date().getTime());
-    }
-
-    public void setChangeYourAvatarText() {
-        getEntityTextLogo().setChangeYourAvatarText();
-    }
-
-    public void setChangeYourLogoText() {
-        getEntityTextLogo().setChangeYourLogo();
+        entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "&nocache="
+                + new Date().getTime());
     }
 
     public void setFullLogo(final StateToken stateToken, final boolean clipped) {
@@ -211,7 +81,7 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
     }
 
     public void setLargeFont() {
-        getEntityTextLogo().setLargeFont();
+        entityTextLogo.setLargeFont();
     }
 
     public void setLogoImage(StateToken stateToken) {
@@ -223,46 +93,25 @@ public class EntityLogoPanel extends SimplePanel implements EntityLogoView {
     }
 
     public void setLogoText(final String groupName) {
-        clear();
-        add(getEntityTextLogo());
         entityTextLogo.setLogoText(groupName);
     }
 
     public void setMediumFont() {
-        getEntityTextLogo().setMediumFont();
-    }
-
-    public void setPutYourAvatarText() {
-        getEntityTextLogo().setPutYourAvatarText();
-    }
-
-    public void setPutYourLogoText() {
-        getEntityTextLogo().setPutYourLogo();
-    }
-
-    public void setSetYourLogoVisible(final boolean visible) {
-        getEntityTextLogo().setPutYourLogoVisible(visible);
+        entityTextLogo.setMediumFont();
     }
 
     public void setSmallFont() {
-        getEntityTextLogo().setSmallFont();
+        entityTextLogo.setSmallFont();
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
         if (oldTheme != null) {
-            getEntityTextLogo().removeStyleDependentName(oldTheme.toString());
+            entityTextLogo.removeStyleDependentName(oldTheme.toString());
         }
-        getEntityTextLogo().addStyleDependentName(newTheme.toString());
+        entityTextLogo.addStyleDependentName(newTheme.toString());
     }
 
     public void showDefUserLogo() {
-        getEntityTextLogo().setLogoImage(images.personAvatarDef());
-    }
-
-    private EntityTextLogo getEntityTextLogo() {
-        if (entityTextLogo == null) {
-            this.entityTextLogo = new EntityTextLogo(entityLogoSelectorProvider);
-        }
-        return entityTextLogo;
+        entityTextLogo.setLogoImage(images.personAvatarDef());
     }
 }

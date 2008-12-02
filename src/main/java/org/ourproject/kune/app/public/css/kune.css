@@ -249,14 +249,22 @@ legend {
   vertical-align: middle;
 }
 
-.kune-IconLabel {
-
+.kune-IconLabel-l {
 }
 
-.kune-IconLabel img {
+.kune-IconLabel-l img {
   margin-right: 4px;
   vertical-align: middle;
 }
+
+.kune-IconLabel-r {
+}
+
+.kune-IconLabel-r img {
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
 
 .kune-link {
   text-decoration: underline;
@@ -289,15 +297,6 @@ legend {
 
 .kune-DropDownLabel img {
   margin: 0 3px 0 1px;
-}
-
-.kune-IconLabel {
-  color: green;
-}
-
-.kune-IconLabel img {
-  margin-right: 4px;
-  vertical-align: middle;
 }
 
 /* Used in multi chat panel status change */

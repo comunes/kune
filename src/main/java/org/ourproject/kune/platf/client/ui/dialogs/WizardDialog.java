@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Toolbar;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
@@ -89,7 +89,7 @@ public class WizardDialog {
 
         dialog.addListener(new WindowListenerAdapter() {
             @Override
-            public void onClose(final Panel panel) {
+            public void onHide(Component component) {
                 listener.onClose();
             }
         });

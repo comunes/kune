@@ -43,7 +43,7 @@ public class SignInForm extends DefaultForm {
         loginNickOrEmailField.setAllowBlank(false);
         loginNickOrEmailField.setValidationEvent(false);
         loginNickOrEmailField.setId(NICKOREMAIL_FIELD);
-        loginNickOrEmailField.setTabIndex(1);
+        loginNickOrEmailField.setTabIndex(100);
         super.add(loginNickOrEmailField);
 
         loginPassField = new TextField();
@@ -54,7 +54,7 @@ public class SignInForm extends DefaultForm {
         loginPassField.setAllowBlank(false);
         loginPassField.setValidationEvent(false);
         loginPassField.setId(PASSWORD_FIELD);
-        loginPassField.setTabIndex(2);
+        loginPassField.setTabIndex(101);
         loginPassField.addListener(new FieldListenerAdapter() {
             @Override
             public void onSpecialKey(final Field field, final EventObject e) {

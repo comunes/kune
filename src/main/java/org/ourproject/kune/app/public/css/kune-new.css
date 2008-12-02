@@ -799,14 +799,12 @@
   cursor: pointer;
 }
 
-
 .k-tsp-tag {
   float: right;
   margin-right: 5px;
   cursor: pointer;
   color: #0000FF;
 }
-
 
 .k-tsp-cloud {
   vertical-align: bottom;
