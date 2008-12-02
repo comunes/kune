@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
+import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -38,12 +39,14 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
     private final I18nTranslationService i18n;
     private final boolean showLanguage;
     private final Session session;
+    private final AuthorableRegistry authorableRegistry;
 
     public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager, Session session,
-            boolean showLanguage) {
+            boolean showLanguage, AuthorableRegistry authorableRegistry) {
         this.i18n = i18n;
         this.session = session;
         this.showLanguage = showLanguage;
+        this.authorableRegistry = authorableRegistry;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 if (state instanceof StateContentDTO) {
@@ -106,15 +109,19 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
     }
 
     private void setState(final StateContainerDTO state) {
-        view.setContentSubTitleRightVisible(false);
+        view.setContentSubTitleLeftVisible(false);
         setLanguage(state);
         setContentDateVisible(false);
     }
 
     private void setState(final StateContentDTO state) {
-        view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors",
-                state.getAuthors().get(0).getName()));
-        view.setContentSubTitleLeftVisible(true);
+        if (authorableRegistry.contains(state.getTypeId())) {
+            view.setContentSubTitleLeft(i18n.tWithNT("by: [%s]", "used in a list of authors",
+                    state.getAuthors().get(0).getName()));
+            view.setContentSubTitleLeftVisible(true);
+        } else {
+            view.setContentSubTitleLeftVisible(false);
+        }
         setLanguage(state);
         Date publishedOn = state.getPublishedOn();
         setContentDate(publishedOn);

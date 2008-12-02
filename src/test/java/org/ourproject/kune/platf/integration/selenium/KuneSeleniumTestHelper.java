@@ -7,6 +7,10 @@ import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.ourproject.kune.platf.client.dto.GroupType;
+import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.workspace.client.WorkspaceMessages;
+import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
 import org.ourproject.kune.workspace.client.signin.RegisterForm;
 import org.ourproject.kune.workspace.client.signin.RegisterPanel;
 import org.ourproject.kune.workspace.client.signin.SignInForm;
@@ -58,6 +62,28 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         this.mustCapture = mustCapture;
     }
 
+    protected void fillNewGroup1stPage(String shortname, String longName, String description, String tags,
+            GroupType groupType) throws Exception {
+        type(NewGroupPanel.SHORTNAME_FIELD, shortname);
+        type(NewGroupPanel.LONGNAME_FIELD, longName);
+        type(NewGroupPanel.PUBLICDESC_FIELD, description);
+        type(NewGroupPanel.TAGS_FIELD, tags);
+        switch (groupType) {
+        case COMMUNITY:
+            click(NewGroupPanel.COMM_GROUP_TYPE_ID);
+            break;
+        case ORGANIZATION:
+            click(NewGroupPanel.ORG_GROUP_TYPE_ID);
+            break;
+        case PROJECT:
+            click(NewGroupPanel.PROJ_GROUP_TYPE_ID);
+            break;
+        default:
+            fail("Invalid group type");
+            break;
+        }
+    }
+
     protected long genPrefix() {
         long prefix = new Date().getTime();
         return prefix;
@@ -69,7 +95,20 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         }
     }
 
+    protected void newGroupRegistrationDefLicense(String shortname, String longName, String description, String tags)
+            throws Exception {
+        GroupType organization = GroupType.ORGANIZATION;
+        signInAndNewGroup();
+        fillNewGroup1stPage(shortname, longName, description, tags, organization);
+        click(NewGroupPanel.NEXT_BUTTON);
+        click(NewGroupPanel.FINISH_BUTTON);
+    }
+
     protected void open(SiteToken token) {
+        open(KUNE_BASE_URL + token.toString());
+    }
+
+    protected void open(StateToken token) {
         open(KUNE_BASE_URL + token.toString());
     }
 
@@ -137,6 +176,14 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         type(SignInForm.NICKOREMAIL_FIELD, nick);
         type(SignInForm.PASSWORD_FIELD, passwd);
         click(SignInPanel.SIGN_IN_BUTTON_ID);
+    }
+
+    protected void signInAndNewGroup() throws Exception {
+        openDefPage();
+        signIn();
+        open(SiteToken.newgroup);
+        verifyLoggedUserShorName("admin");
+        waitForTextInside(NewGroupPanel.NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE);
     }
 
     protected void signOut() {

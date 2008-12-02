@@ -19,6 +19,7 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
+import org.ourproject.kune.wiki.server.WikiServerTool;
 
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
@@ -65,7 +66,6 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         final StateContentDTO sameAgain = (StateContentDTO) contentService.getContent(session.getHash(), newState);
         assertNotNull(sameAgain);
         assertEquals(2, sameAgain.getContainer().getContents().size());
-
     }
 
     @Test
@@ -122,4 +122,30 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         assertEquals(2, parentAgain.getChilds().size());
     }
 
+    @Test
+    public void testAddWikiContent() throws Exception {
+        doLogin();
+
+        StateToken wikiToken = new StateToken(super.getDefSiteGroupName(), WikiServerTool.NAME);
+        StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(session.getHash(), wikiToken);
+
+        final String title = "New wikipage";
+        final StateContentDTO added = contentService.addContent(session.getHash(), wiki.getStateToken(), title,
+                WikiServerTool.TYPE_WIKIPAGE);
+        assertNotNull(added);
+        ContainerDTO wikiContainer = added.getContainer();
+        final List<ContentSimpleDTO> contents = wikiContainer.getContents();
+        assertEquals(title, added.getTitle());
+        assertEquals(2, contents.size());
+        doLogout();
+
+        doLoginWithDummyUser();
+        contentService.save(getHash(), added.getStateToken(), "some new test");
+        // assertEquals(cntRights, added.getContentRights());
+        // assertEquals(ctxRights, added.getContainerRights());
+        // assertEquals(groupRights, added.getGroupRights());
+        // assertNotNull(added.getGroupMembers());
+        // assertNotNull(added.getParticipation());
+        // assertNotNull(added.getAccessLists());
+    }
 }

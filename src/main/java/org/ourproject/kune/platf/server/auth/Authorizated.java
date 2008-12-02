@@ -48,4 +48,6 @@ public @interface Authorizated {
      */
     ActionLevel actionLevel() default ActionLevel.content;
 
+    boolean mustCheckMembership() default true;
+
 }

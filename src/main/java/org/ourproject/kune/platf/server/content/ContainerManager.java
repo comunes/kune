@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.server.content;
 
 import org.ourproject.kune.platf.client.errors.DefaultException;
+import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
@@ -38,4 +39,6 @@ public interface ContainerManager {
     SearchResult<Container> search(String search);
 
     SearchResult<Container> search(String search, Integer firstResult, Integer maxResults);
+
+    void setAccessList(Container container, AccessLists accessList);
 }

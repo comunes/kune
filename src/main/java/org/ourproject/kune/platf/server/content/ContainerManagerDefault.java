@@ -29,6 +29,7 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.errors.DefaultException;
+import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
@@ -97,6 +98,11 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
             throw new RuntimeException("Error parsing search");
         }
         return super.search(query, firstResult, maxResults);
+    }
+
+    public void setAccessList(Container container, AccessLists accessList) {
+        container.setAccessLists(accessList);
+        persist(container);
     }
 
 }

@@ -120,7 +120,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Editor)
+    @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public void addAuthor(final String userHash, final StateToken token, final String authorShortName)
             throws DefaultException {
@@ -155,7 +155,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
+    @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateContentDTO addContent(final String userHash, final StateToken parentToken, final String title,
             final String typeId) throws DefaultException {
@@ -170,7 +170,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
+    @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public StateContainerDTO addFolder(final String userHash, final StateToken parentToken, final String title,
             final String contentTypeId) throws DefaultException {
@@ -290,7 +290,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Editor)
+    @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public void removeAuthor(final String userHash, final StateToken token, final String authorShortName)
             throws DefaultException {
@@ -301,7 +301,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
+    @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public String renameContainer(final String userHash, final StateToken token, final String newName)
             throws DefaultException {
@@ -309,7 +309,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Editor)
+    @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public String renameContent(final String userHash, final StateToken token, final String newName)
             throws DefaultException {
@@ -324,7 +324,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Editor)
+    @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public void save(final String userHash, final StateToken token, final String textContent) throws DefaultException {
 
@@ -357,7 +357,7 @@ public class ContentRPC implements ContentService, RPC {
     // }
 
     @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Editor)
+    @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public I18nLanguageDTO setLanguage(final String userHash, final StateToken token, final String languageCode)
             throws DefaultException {
@@ -368,7 +368,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Editor)
+    @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setPublishedOn(final String userHash, final StateToken token, final Date publishedOn)
             throws DefaultException {
@@ -396,7 +396,7 @@ public class ContentRPC implements ContentService, RPC {
     }
 
     @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Editor)
+    @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     public TagCloudResultDTO setTags(final String userHash, final StateToken token, final String tags)
             throws DefaultException {

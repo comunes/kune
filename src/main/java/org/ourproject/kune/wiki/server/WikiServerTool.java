@@ -87,6 +87,7 @@ public class WikiServerTool implements ServerTool {
     public Group initGroup(final User user, final Group group) {
         final ToolConfiguration config = new ToolConfiguration();
         final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+        setContainerWikiAcl(rootFolder);
         config.setRoot(rootFolder);
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
@@ -102,14 +103,7 @@ public class WikiServerTool implements ServerTool {
     }
 
     public void onCreateContainer(final Container container, final Container parent) {
-        if (container.getTypeId().equals(TYPE_FOLDER)) {
-            AccessLists wikiAcl = new AccessLists();
-            wikiAcl.getAdmins().setMode(GroupListMode.NORMAL);
-            wikiAcl.getAdmins().add(container.getOwner());
-            wikiAcl.getEditors().setMode(GroupListMode.EVERYONE);
-            wikiAcl.getViewers().setMode(GroupListMode.EVERYONE);
-            container.setAccessLists(wikiAcl);
-        }
+        setContainerWikiAcl(container);
     }
 
     public void onCreateContent(final Content content, final Container parent) {
@@ -148,5 +142,14 @@ public class WikiServerTool implements ServerTool {
         } else {
             throw new ContentNotPermittedException();
         }
+    }
+
+    private void setContainerWikiAcl(final Container container) {
+        AccessLists wikiAcl = new AccessLists();
+        wikiAcl.getAdmins().setMode(GroupListMode.NORMAL);
+        wikiAcl.getAdmins().add(container.getOwner());
+        wikiAcl.getEditors().setMode(GroupListMode.EVERYONE);
+        wikiAcl.getViewers().setMode(GroupListMode.EVERYONE);
+        containerManager.setAccessList(container, wikiAcl);
     }
 }

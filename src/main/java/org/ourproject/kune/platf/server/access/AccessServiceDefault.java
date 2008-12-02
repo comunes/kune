@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.server.access;
 
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
+import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.User;
@@ -50,7 +51,8 @@ public class AccessServiceDefault implements AccessService {
     public Content accessToContent(final Long contentId, final User user, final AccessRol accessRol)
             throws DefaultException {
         final Content content = finder.getContent(contentId);
-        check(accessRightsService.get(user, content.getAccessLists()), accessRol);
+        AccessLists accessLists = content.getAccessLists();
+        check(accessRightsService.get(user, accessLists), accessRol);
         return content;
     }
 

@@ -90,6 +90,9 @@ public class DatabaseInitializer {
         final User user = new User(adminShortName, adminName, adminEmail, adminPassword,
                 languageManager.findByCode("en"), countryManager.findByCode("GB"), TimeZone.getDefault());
         groupManager.createUserGroup(user, false);
+        final User dummyUser = new User("dummy", "dummy user", "example@example.com", adminPassword,
+                languageManager.findByCode("en"), countryManager.findByCode("GB"), TimeZone.getDefault());
+        groupManager.createUserGroup(dummyUser, false);
 
         final String siteName = properties.getDefaultSiteName();
         final String siteShortName = properties.getDefaultSiteShortName();

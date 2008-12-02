@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolba
 import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
+import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.registry.RenamableRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
@@ -293,7 +294,8 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntitySubTitle create() {
                 final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(
-                        $(I18nUITranslationService.class), $(StateManager.class), $(Session.class), false);
+                        $(I18nUITranslationService.class), $(StateManager.class), $(Session.class), false,
+                        $(AuthorableRegistry.class));
                 final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, $(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;

@@ -7,6 +7,7 @@ import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
+import org.ourproject.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -19,7 +20,7 @@ public class IntegrationTestHelper {
 
     public static Injector createInjector() {
         final Injector injector = Guice.createInjector(new PlatformServerModule(), new DocumentServerModule(),
-                new ChatServerModule(), new AbstractModule() {
+                new ChatServerModule(), new WikiServerModule(), new AbstractModule() {
                     @Override
                     protected void configure() {
                         bindScope(SessionScoped.class, Scopes.SINGLETON);

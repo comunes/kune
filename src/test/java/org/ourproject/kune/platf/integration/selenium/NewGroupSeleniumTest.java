@@ -44,49 +44,9 @@ public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
 
     @Test
     public void newGroupWithNonOccidentalChars() throws Exception {
-        setMustCapture(true);
         String longName = "漢語 中文 华语 汉语" + genPrefix();
         newGroupRegistrationDefLicense("g" + genPrefix(), longName,
                 "吗 台湾 六种辅音韵尾 中国政府要求在中国出售的软件必须使用编码 过 国标 名词的复数形式只在代词及多音节", "漢語 中文 华语 汉语");
         waitForTextInside(gid(EntityLogoPanel.LOGO_NAME), longName);
-    }
-
-    private void fillNewGroup1stPage(String shortname, String longName, String description, String tags,
-            GroupType groupType) throws Exception {
-        type(NewGroupPanel.SHORTNAME_FIELD, shortname);
-        type(NewGroupPanel.LONGNAME_FIELD, longName);
-        type(NewGroupPanel.PUBLICDESC_FIELD, description);
-        type(NewGroupPanel.TAGS_FIELD, tags);
-        switch (groupType) {
-        case COMMUNITY:
-            click(NewGroupPanel.COMM_GROUP_TYPE_ID);
-            break;
-        case ORGANIZATION:
-            click(NewGroupPanel.ORG_GROUP_TYPE_ID);
-            break;
-        case PROJECT:
-            click(NewGroupPanel.PROJ_GROUP_TYPE_ID);
-            break;
-        default:
-            fail("Invalid group type");
-            break;
-        }
-    }
-
-    private void newGroupRegistrationDefLicense(String shortname, String longName, String description, String tags)
-            throws Exception {
-        GroupType organization = GroupType.ORGANIZATION;
-        signInAndNewGroup();
-        fillNewGroup1stPage(shortname, longName, description, tags, organization);
-        click(NewGroupPanel.NEXT_BUTTON);
-        click(NewGroupPanel.FINISH_BUTTON);
-    }
-
-    private void signInAndNewGroup() throws Exception {
-        openDefPage();
-        signIn();
-        open(SiteToken.newgroup);
-        verifyLoggedUserShorName("admin");
-        waitForTextInside(NewGroupPanel.NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE);
     }
 }

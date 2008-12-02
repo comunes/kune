@@ -97,7 +97,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
     }
 
     @Authenticated
-    @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container)
+    @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     Content createUploadedFileWrapped(final String userHash, final StateToken stateToken, final String fileName,
             final FileItem fileUploadItem, String typeId) throws Exception {

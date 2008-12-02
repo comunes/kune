@@ -64,6 +64,7 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
         final Authorizated authoAnnotation = invocation.getStaticPart().getAnnotation(Authorizated.class);
         final AccessRol accessRol = authoAnnotation.accessRolRequired();
         final ActionLevel actionLevel = authoAnnotation.actionLevel();
+        final boolean mustBeMember = authoAnnotation.mustCheckMembership();
 
         final User user = userSession.getUser();
         Group group = Group.NO_GROUP;
@@ -98,8 +99,10 @@ public class AuthorizatedMethodInterceptor implements MethodInterceptor {
             break;
         }
 
-        if (!correctMember(user, group, accessRol)) {
-            throw new AccessViolationException();
+        if (mustBeMember) {
+            if (!correctMember(user, group, accessRol)) {
+                throw new AccessViolationException();
+            }
         }
 
         return invocation.proceed();

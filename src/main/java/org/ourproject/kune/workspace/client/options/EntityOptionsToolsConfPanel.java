@@ -49,7 +49,7 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
         super.getForm().removeAll(true);
         fields.clear();
         Label label = new Label();
-        label.setHtml(i18n.t("Here you can select the tools used in this group:") + "<br/><br/>");
+        label.setHtml(i18n.t("Here you can select the tools used:") + "<br/><br/>");
         super.add(label);
     }
 

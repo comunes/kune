@@ -3,6 +3,7 @@ package org.ourproject.kune.workspace.client.options;
 import java.util.Collection;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -93,11 +94,14 @@ public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
         for (String tool : state.getEnabledTools()) {
             view.setChecked(tool, true);
         }
-        String defContentTool = session.getCurrentState().getGroup().getDefaultContent().getStateToken().getTool();
-        view.setEnabled(defContentTool, false);
-        view.setTooltip(
-                defContentTool,
-                i18n.t("You cannot disable this tool because it's where the current group home page is located. To do that you have to select other content as the default group home page but in another tool."));
+        ContentSimpleDTO defaultContent = session.getCurrentState().getGroup().getDefaultContent();
+        if (defaultContent != null) {
+            String defContentTool = defaultContent.getStateToken().getTool();
+            view.setEnabled(defContentTool, false);
+            view.setTooltip(
+                    defContentTool,
+                    i18n.t("You cannot disable this tool because it's where the current group home page is located. To do that you have to select other content as the default group home page but in another tool."));
+        }
     }
 
     private void setToolCheckedInServer(final boolean checked, final String toolName) {

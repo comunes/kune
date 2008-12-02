@@ -24,6 +24,14 @@ public abstract class IntegrationTest {
         return userService.login(getSiteAdminShortName(), properties.getAdminPassword()).getUserHash();
     }
 
+    protected String doLoginWithDummyUser() throws DefaultException {
+        return userService.login("dummy", properties.getAdminPassword()).getUserHash();
+    }
+
+    protected void doLogout() throws DefaultException {
+        userService.logout(getHash());
+    }
+
     protected String getDefLicense() {
         return properties.getDefaultLicense();
     }
