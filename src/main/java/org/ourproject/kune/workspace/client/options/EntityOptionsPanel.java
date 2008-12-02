@@ -7,7 +7,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -26,13 +26,13 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
     public static final String GROUP_OPTIONS_ID = "k-gop-panel";
     public static final String GROUP_OPTIONS_ICON = "k-gop-icon";
     private final I18nTranslationService i18n;
-    private final EntityLogo entityHeader;
+    private final EntityHeader entityHeader;
     private EntityOptionPushButton optionsButton;
     private final Images images;
 
     private final EntityOptionsGroup entityPreferencesGroup;
 
-    public EntityOptionsPanel(final EntityOptionsPresenter presenter, final EntityLogo entityHeader,
+    public EntityOptionsPanel(final EntityOptionsPresenter presenter, final EntityHeader entityHeader,
             I18nTranslationService i18n, Images images, EntityOptionsGroup entityOptionsGroup) {
         super("", 400, 250, 400, 250, images, GROUP_OPTIONS_ID, GROUP_OPTIONS_ERROR_ID);
         this.entityHeader = entityHeader;

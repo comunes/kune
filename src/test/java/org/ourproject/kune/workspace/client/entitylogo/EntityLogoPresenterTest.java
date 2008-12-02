@@ -14,16 +14,16 @@ public class EntityLogoPresenterTest {
 
     private StateManager stateManager;
     private Session session;
-    private EntityLogoPresenter entityLogoPresenter;
-    private EntityLogoView view;
+    private EntityHeaderPresenter entityLogoPresenter;
+    private EntityHeaderView view;
 
     @Before
     public void before() {
         stateManager = Mockito.mock(StateManager.class);
         session = Mockito.mock(Session.class);
         WsThemePresenter theme = Mockito.mock(WsThemePresenter.class);
-        entityLogoPresenter = new EntityLogoPresenter(stateManager, theme, session);
-        view = Mockito.mock(EntityLogoView.class);
+        entityLogoPresenter = new EntityHeaderPresenter(stateManager, theme, session);
+        view = Mockito.mock(EntityHeaderView.class);
         entityLogoPresenter.init(view);
     }
 

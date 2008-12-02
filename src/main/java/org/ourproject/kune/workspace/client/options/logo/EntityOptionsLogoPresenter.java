@@ -21,7 +21,7 @@
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.site.Site;
 
@@ -31,10 +31,10 @@ public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
 
     private EntityOptionsLogoView view;
     private final Session session;
-    private final EntityLogo entityLogo;
+    private final EntityHeader entityLogo;
     private final EntityOptions entityOptions;
 
-    public EntityOptionsLogoPresenter(Session session, EntityLogo entityLogo, EntityOptions entityOptions,
+    public EntityOptionsLogoPresenter(Session session, EntityHeader entityLogo, EntityOptions entityOptions,
             StateManager stateManager) {
         this.session = session;
         this.entityLogo = entityLogo;

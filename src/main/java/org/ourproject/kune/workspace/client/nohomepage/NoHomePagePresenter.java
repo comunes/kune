@@ -22,7 +22,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateNoContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
@@ -31,7 +31,7 @@ public class NoHomePagePresenter implements NoHomePage {
 
     private NoHomePageView view;
 
-    public NoHomePagePresenter(final StateManager stateManager, final Provider<EntityLogo> entityLogoProvider) {
+    public NoHomePagePresenter(final StateManager stateManager, final Provider<EntityHeader> entityLogoProvider) {
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(StateAbstractDTO state) {
                 if (state instanceof StateNoContentDTO) {

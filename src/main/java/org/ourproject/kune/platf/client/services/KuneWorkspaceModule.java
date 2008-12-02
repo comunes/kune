@@ -43,9 +43,9 @@ import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
 import org.ourproject.kune.platf.client.ui.rate.RatePanel;
 import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPanel;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoPresenter;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeaderPanel;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeaderPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
@@ -255,12 +255,12 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<EntityLogo>(EntityLogo.class) {
+        register(ApplicationComponentGroup.class, new Factory<EntityHeader>(EntityHeader.class) {
             @Override
-            public EntityLogo create() {
-                final EntityLogoPresenter presenter = new EntityLogoPresenter($(StateManager.class),
+            public EntityHeader create() {
+                final EntityHeaderPresenter presenter = new EntityHeaderPresenter($(StateManager.class),
                         $(WsThemePresenter.class), $(Session.class));
-                final EntityLogoPanel panel = new EntityLogoPanel($(WorkspaceSkeleton.class),
+                final EntityHeaderPanel panel = new EntityHeaderPanel($(WorkspaceSkeleton.class),
                         $$(FileDownloadUtils.class), $(Images.class));
                 presenter.init(panel);
                 return presenter;
@@ -413,7 +413,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public NoHomePage create() {
                 final NoHomePagePresenter presenter = new NoHomePagePresenter($(StateManager.class),
-                        $$(EntityLogo.class));
+                        $$(EntityHeader.class));
                 final NoHomePagePanel panel = new NoHomePagePanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(panel);
@@ -425,7 +425,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntityOptions create() {
                 final EntityOptionsPresenter presenter = new EntityOptionsPresenter($(StateManager.class));
-                final EntityOptionsPanel panel = new EntityOptionsPanel(presenter, $(EntityLogo.class),
+                final EntityOptionsPanel panel = new EntityOptionsPanel(presenter, $(EntityHeader.class),
                         $(I18nTranslationService.class), $(Images.class), $(EntityOptionsGroup.class));
                 presenter.init(panel);
                 return presenter;
@@ -449,7 +449,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntityOptionsLogo create() {
                 final EntityOptionsLogoPresenter presenter = new EntityOptionsLogoPresenter($(Session.class),
-                        $(EntityLogo.class), $(EntityOptions.class), $(StateManager.class));
+                        $(EntityHeader.class), $(EntityOptions.class), $(StateManager.class));
                 final EntityOptionsLogoPanel panel = new EntityOptionsLogoPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(panel);

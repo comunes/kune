@@ -37,7 +37,7 @@ import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.domain.BasicMimeType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogoView;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeaderView;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;
@@ -75,7 +75,7 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
         File tmpDestFile = File.createTempFile("logoDest", "");
 
         boolean result = ImageUtilsDefault.scaleImageToMax(origFile.getAbsolutePath(), tmpDestFile.getAbsolutePath(),
-                EntityLogoView.LOGO_ICON_DEFAULT_HEIGHT);
+                EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT);
         if (result) {
             group.setLogo(FileUtils.getBytesFromFile(tmpDestFile));
             group.setLogoMime(mimeType);
@@ -125,7 +125,7 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     protected String createXmlResponse(final boolean success, final String message) {
         String error = "";
         if (!success) {
-            error = "<errors><field><id>" + EntityLogoView.LOGO_FORM_FIELD + "</id><msg><![CDATA[" + message
+            error = "<errors><field><id>" + EntityHeaderView.LOGO_FORM_FIELD + "</id><msg><![CDATA[" + message
                     + "]]></msg></field></errors>";
         }
         return "<response success=\"" + success + "\">" + error + "</response>";

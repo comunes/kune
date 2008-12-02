@@ -35,14 +35,14 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class EntityLogoPanel extends HorizontalPanel implements EntityLogoView {
+public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderView {
 
     private final Provider<FileDownloadUtils> downloadProvider;
     private final EntityTextLogo entityTextLogo;
     private final Images images;
     private final VerticalPanel vp;
 
-    public EntityLogoPanel(final WorkspaceSkeleton ws, final Provider<FileDownloadUtils> dowloadProvider, Images images) {
+    public EntityHeaderPanel(final WorkspaceSkeleton ws, final Provider<FileDownloadUtils> dowloadProvider, Images images) {
         this.downloadProvider = dowloadProvider;
         this.images = images;
         vp = new VerticalPanel();

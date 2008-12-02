@@ -67,7 +67,7 @@ public abstract class AbstractOptionsPanel {
     }
 
     public void setFirstTabActive() {
-        tabPanel.setActiveTab(1);
+        tabPanel.setActiveTab(0);
     }
 
     public void setIconCls(String iconCls) {

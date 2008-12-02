@@ -37,7 +37,7 @@ import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -49,7 +49,7 @@ public class GalleryClientActions extends AbstractFoldableContentActions {
             final Provider<ContentServiceAsync> contentServiceProvider,
             final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
-            final Provider<FileDownloadUtils> fileDownloadProvider, final EntityLogo entityLogo,
+            final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
             final Provider<TextEditor> textEditorProvider, final KuneErrorHandler errorHandler,
             final GalleryViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,

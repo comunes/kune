@@ -46,7 +46,7 @@ import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
@@ -76,7 +76,7 @@ public class DocumentClientModule extends AbstractModule {
                         $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
                         $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityLogo.class), $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentViewer.class),
+                        $(EntityHeader.class), $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentViewer.class),
                         $$(ContextPropEditor.class));
             }
         });

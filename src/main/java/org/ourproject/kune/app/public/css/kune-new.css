@@ -814,3 +814,7 @@
   background-image: url(img/emblem-system.gif) !important;
 }
 
+.x-toolbar-body table {
+    width: 100%;
+}
+

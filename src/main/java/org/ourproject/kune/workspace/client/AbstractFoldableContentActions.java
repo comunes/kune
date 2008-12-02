@@ -33,7 +33,7 @@ import org.ourproject.kune.workspace.client.cnt.FoldableContent;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
-import org.ourproject.kune.workspace.client.entitylogo.EntityLogo;
+import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 
@@ -63,7 +63,7 @@ public abstract class AbstractFoldableContentActions {
     protected final Provider<ContextPropEditor> contextPropEditorProvider;
     protected final FoldableContent foldableContent;
     protected final DeferredCommandWrapper deferredCommandWrapper;
-    protected final EntityLogo entityLogo;
+    protected final EntityHeader entityLogo;
 
     public AbstractFoldableContentActions(Session session, StateManager stateManager, I18nUITranslationService i18n,
             KuneErrorHandler errorHandler, DeferredCommandWrapper deferredCommandWrapper,
@@ -72,7 +72,7 @@ public abstract class AbstractFoldableContentActions {
             ContentActionRegistry contentActionRegistry, ContextActionRegistry contextActionRegistry,
             Provider<FileDownloadUtils> fileDownloadProvider, Provider<TextEditor> textEditorProvider,
             Provider<ContextPropEditor> contextPropEditorProvider, FoldableContent foldableContent,
-            EntityLogo entityLogo) {
+            EntityHeader entityLogo) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;

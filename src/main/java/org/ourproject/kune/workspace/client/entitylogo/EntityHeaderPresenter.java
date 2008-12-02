@@ -29,14 +29,14 @@ import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.suco.client.listener.Listener2;
 
-public class EntityLogoPresenter implements EntityLogo {
+public class EntityHeaderPresenter implements EntityHeader {
     int GROUP_MEDIUM_NAME_LIMIT_SIZE = 90;
     int GROUP_LARGE_NAME_LIMIT_SIZE = 20;
 
-    private EntityLogoView view;
+    private EntityHeaderView view;
     private final Session session;
 
-    public EntityLogoPresenter(final StateManager stateManager, final WsThemePresenter theme, final Session session) {
+    public EntityHeaderPresenter(final StateManager stateManager, final WsThemePresenter theme, final Session session) {
         this.session = session;
 
         stateManager.onGroupChanged(new Listener2<String, String>() {
@@ -55,7 +55,7 @@ public class EntityLogoPresenter implements EntityLogo {
         view.addWidget(widget);
     }
 
-    public void init(final EntityLogoView view) {
+    public void init(final EntityHeaderView view) {
         this.view = view;
     }
 
