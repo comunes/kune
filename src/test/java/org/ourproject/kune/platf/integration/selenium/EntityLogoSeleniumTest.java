@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
-import org.ourproject.kune.workspace.client.entitylogo.EntityHeaderView;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
 

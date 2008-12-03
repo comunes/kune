@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.integration.selenium;
 
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.entitylogo.EntityTextLogo;
+import org.ourproject.kune.workspace.client.entityheader.EntityTextLogo;
 
 public class ContentAddSeleniumTest extends KuneSeleniumTestHelper {
     @Test

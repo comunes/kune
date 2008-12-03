@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
-import org.ourproject.kune.workspace.client.entitylogo.EntityTextLogo;
+import org.ourproject.kune.workspace.client.entityheader.EntityTextLogo;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
