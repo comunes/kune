@@ -7,7 +7,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;

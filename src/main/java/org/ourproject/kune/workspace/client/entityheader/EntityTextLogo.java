@@ -1,4 +1,4 @@
-package org.ourproject.kune.workspace.client.entitylogo;
+package org.ourproject.kune.workspace.client.entityheader;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;

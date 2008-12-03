@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.entitylogo;
+package org.ourproject.kune.workspace.client.entityheader;
 
 import java.util.Date;
 

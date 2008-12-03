@@ -37,7 +37,7 @@ import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.domain.BasicMimeType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.workspace.client.entitylogo.EntityHeaderView;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;

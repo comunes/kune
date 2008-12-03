@@ -21,7 +21,7 @@
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.entitylogo.EntityHeader;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.site.Site;
 

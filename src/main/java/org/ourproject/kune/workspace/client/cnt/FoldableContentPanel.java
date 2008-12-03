@@ -61,6 +61,7 @@ public abstract class FoldableContentPanel extends AbstractContentPanel {
         });
         setWidget(imgResized);
         attach();
+        Image.prefetch(imageUrl);
     }
 
     private void setDefStyle(final Widget widget) {

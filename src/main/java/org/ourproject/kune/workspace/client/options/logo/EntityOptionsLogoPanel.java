@@ -21,7 +21,7 @@
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.download.FileParams;
-import org.ourproject.kune.workspace.client.entitylogo.EntityHeaderView;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
