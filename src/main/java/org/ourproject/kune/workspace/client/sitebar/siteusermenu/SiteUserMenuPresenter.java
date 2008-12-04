@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -38,12 +39,14 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
     private final StateManager stateManager;
     private final Session session;
     private final Provider<EntityOptions> entityOptions;
+    private final Provider<FileDownloadUtils> downloadProvider;
 
     public SiteUserMenuPresenter(final Session session, final StateManager stateManager,
-            final Provider<EntityOptions> entityOptions) {
+            final Provider<EntityOptions> entityOptions, final Provider<FileDownloadUtils> downloadProvider) {
         this.session = session;
         this.stateManager = stateManager;
         this.entityOptions = entityOptions;
+        this.downloadProvider = downloadProvider;
         participateInGroups = new MenuItemCollection<GroupDTO>();
         session.onUserSignIn(new Listener<UserInfoDTO>() {
             public void onEvent(final UserInfoDTO userInfoDTO) {
@@ -77,12 +80,13 @@ public class SiteUserMenuPresenter implements SiteUserMenu {
     }
 
     private void addPartipation(final GroupDTO group) {
-        participateInGroups.add(new MenuItem<GroupDTO>("images/group-def-icon.gif", group.getShortName(),
-                new Listener<GroupDTO>() {
-                    public void onEvent(final GroupDTO param) {
-                        stateManager.gotoToken(group.getShortName());
-                    }
-                }));
+        String logoImageUrl = group.hasLogo() ? downloadProvider.get().getLogoImageUrl(group.getStateToken())
+                : "images/group-def-icon.gif";
+        participateInGroups.add(new MenuItem<GroupDTO>(logoImageUrl, group.getShortName(), new Listener<GroupDTO>() {
+            public void onEvent(final GroupDTO param) {
+                stateManager.gotoToken(group.getShortName());
+            }
+        }));
     }
 
     private void onUserSignIn(final UserInfoDTO userInfoDTO) {

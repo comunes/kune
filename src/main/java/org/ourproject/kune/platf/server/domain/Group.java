@@ -262,6 +262,10 @@ public class Group implements HasId {
         return (logo != null && logo.length > 0 && logoMime != null);
     }
 
+    public boolean isPersonal() {
+        return getGroupType().equals(GroupType.PERSONAL);
+    }
+
     public void setAdmissionType(final AdmissionType admissionType) {
         this.admissionType = admissionType;
     }

@@ -14,7 +14,7 @@ public class EntityOptionsPresenter implements EntityOptions {
     public EntityOptionsPresenter(StateManager stateManager) {
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(StateAbstractDTO state) {
-                if (state.getGroup().isPersonalGroup()) {
+                if (state.getGroup().isPersonal()) {
                     view.setPersonalTitle();
                 } else {
                     view.setGroupTitle();

@@ -21,7 +21,6 @@
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
@@ -77,7 +76,7 @@ public class EntityHeaderPresenter implements EntityHeader {
             view.setLogoImageVisible(true);
         } else {
             setLogoText(group.getLongName());
-            if (group.getGroupType().equals(GroupType.PERSONAL)) {
+            if (group.isPersonal()) {
                 view.showDefUserLogo();
                 view.setLogoImageVisible(true);
             } else {

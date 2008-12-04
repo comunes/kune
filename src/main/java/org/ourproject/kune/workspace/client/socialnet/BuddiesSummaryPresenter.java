@@ -32,7 +32,6 @@ import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
 import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
@@ -94,7 +93,7 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
     }
 
     protected void setState(StateAbstractDTO state) {
-        if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
+        if (state.getGroup().isPersonal()) {
             view.clear();
             UserBuddiesDataDTO userBuddies = state.getUserBuddies();
             if (state.getSocialNetworkData().isBuddiesVisible()) {

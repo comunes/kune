@@ -19,7 +19,7 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
 
     class EntityOptionPushButton extends IconLabel implements View {
         public EntityOptionPushButton(String text, AbstractImagePrototype icon) {
-            super(text, icon);
+            super(text, icon, false);
         }
     }
     public static final String GROUP_OPTIONS_ERROR_ID = "k-gop-err-mess";
@@ -66,16 +66,18 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
 
     public void setGroupTitle() {
         super.setTitle(i18n.t(PlatfMessages.ENT_OPTIONS_GROUP_TITLE));
-        optionsButton.setTitle(i18n.t("Configure this group preferences"));
+        optionsButton.setText(i18n.t(PlatfMessages.ENT_OPTIONS_GROUP_TITLE));
+        // optionsButton.setTitle(i18n.t("Configure this group preferences"));
     }
 
     public void setPersonalTitle() {
         super.setTitle(i18n.t(PlatfMessages.ENT_OPTIONS_USER_TITLE));
-        optionsButton.setTitle(i18n.t("Configure your preferences"));
+        optionsButton.setText(i18n.t(PlatfMessages.ENT_OPTIONS_USER_TITLE));
+        // optionsButton.setTitle(i18n.t("Configure your preferences"));
     }
 
     private void createOptionsButton() {
-        optionsButton = new EntityOptionPushButton(i18n.t("Configure"), images.emblemSystem());
+        optionsButton = new EntityOptionPushButton("", images.emblemSystem());
         optionsButton.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
                 createAndShow();

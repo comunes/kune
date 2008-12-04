@@ -29,7 +29,6 @@ import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDTO;
@@ -45,6 +44,7 @@ import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
@@ -77,8 +77,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             final Provider<GroupServiceAsync> groupServiceProvider,
             final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter,
             final Provider<ChatEngine> chatEngineProvider, final GroupActionRegistry groupActionRegistry,
-            final ActionGroupSummaryToolbar toolbar) {
-        super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry);
+            final ActionGroupSummaryToolbar toolbar, final Provider<FileDownloadUtils> downloadProvider) {
+        super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry, downloadProvider);
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.session = session;
@@ -229,7 +229,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     }
 
     private void setState(final StateAbstractDTO state) {
-        if (state.getGroup().getGroupType().equals(GroupType.PERSONAL)) {
+        if (state.getGroup().isPersonal()) {
             view.setVisible(false);
         } else {
             if (state.getSocialNetworkData().isMembersVisible()) {

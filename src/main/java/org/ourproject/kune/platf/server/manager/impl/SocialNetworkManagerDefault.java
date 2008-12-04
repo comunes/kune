@@ -139,7 +139,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         final Long groupId = group.getId();
         final List<Group> adminInGroups = finder.findAdminInGroups(groupId);
         // Don't show self user group
-        if (group.getGroupType().equals(GroupType.PERSONAL)) {
+        if (group.isPersonal()) {
             adminInGroups.remove(group);
         }
         // adminInGroups.remove(userLogged.getUserGroup());
@@ -162,7 +162,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         socialNetData.setGroupRights(groupRights);
         socialNetData.setUserParticipation(findParticipation(userLogged, group));
         socialNetData.setGroupMembers(get(userLogged, group));
-        if (group.getGroupType().equals(GroupType.PERSONAL)) {
+        if (group.isPersonal()) {
             UserBuddiesData userBuddies = userManager.getUserBuddies(group.getShortName());
             User userGroup = userManager.findByShortname(group.getShortName());
             socialNetData.setUserBuddies(userBuddies);
@@ -327,7 +327,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
 
     private void throwGroupMemberException(final Group group) throws DefaultException {
-        if (group.getGroupType().equals(GroupType.PERSONAL)) {
+        if (group.isPersonal()) {
             throw new AlreadyUserMemberException();
         } else {
             throw new AlreadyGroupMemberException();

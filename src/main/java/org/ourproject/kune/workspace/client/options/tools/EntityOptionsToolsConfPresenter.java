@@ -82,7 +82,7 @@ public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
         StateAbstractDTO state = session.getCurrentState();
         reset();
         Collection<ToolSimpleDTO> toolCollection;
-        if (state.getGroup().isPersonalGroup()) {
+        if (state.getGroup().isPersonal()) {
             toolCollection = session.getUserTools();
         } else {
             toolCollection = session.getGroupTools();

@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.platf.server.state;
 
-import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.content.ContentManager;
@@ -109,7 +108,7 @@ public class StateServiceDefault implements StateService {
 
     public StateNoContent createNoHome(User userLogged, String groupShortName) {
         Group group = groupManager.findByShortName(groupShortName);
-        assert (group.getGroupType().equals(GroupType.PERSONAL));
+        assert (group.isPersonal());
         StateNoContent state = new StateNoContent();
         state.setGroup(group);
         state.setEnabledTools(groupManager.findEnabledTools(group.getId()));

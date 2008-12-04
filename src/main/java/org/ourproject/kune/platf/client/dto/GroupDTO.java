@@ -122,7 +122,7 @@ public class GroupDTO implements IsSerializable {
         return getHasLogo();
     }
 
-    public boolean isPersonalGroup() {
+    public boolean isPersonal() {
         return groupType.equals(GroupType.PERSONAL);
     }
 

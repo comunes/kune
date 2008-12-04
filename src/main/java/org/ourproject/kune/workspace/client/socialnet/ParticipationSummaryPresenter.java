@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
@@ -50,8 +51,9 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
     public ParticipationSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
             final Provider<SocialNetworkServiceAsync> snServiceProvider, final WsThemePresenter wsThemePresenter,
-            GroupActionRegistry groupActionRegistry, ActionParticipationToolbar actionParticipationToolbar) {
-        super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry);
+            GroupActionRegistry groupActionRegistry, ActionParticipationToolbar actionParticipationToolbar,
+            final Provider<FileDownloadUtils> downloadProvider) {
+        super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry, downloadProvider);
         adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",
                 "talking about a person"), false);
         collabCategory = new GridGroup(i18n.t("and as collaborator in:"), " ", i18n.t("Collaborate in these groups"),

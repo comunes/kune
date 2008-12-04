@@ -26,9 +26,8 @@ import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
@@ -38,6 +37,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.CustomMenu;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
@@ -49,6 +49,8 @@ import com.calclab.suco.client.listener.Listener;
 
 public class SocialNetworkPresenter {
 
+    private static final int ICOSIZE = 16;
+    private static final int THUMBSIZE = 50;
     protected MenuItem<GroupDTO> changeToCollabMenuItem;
     protected MenuItem<GroupDTO> removeMemberMenuItem;
     protected MenuItem<GroupDTO> changeToAdminMenuItem;
@@ -69,22 +71,24 @@ public class SocialNetworkPresenter {
 
     protected ActionToolbarMenuDescriptor<StateToken> unJoin;
     protected ActionToolbarButtonDescriptor<StateToken> participate;
+    private final Provider<FileDownloadUtils> downloadProvider;
 
     public SocialNetworkPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
-            final Provider<SocialNetworkServiceAsync> snServiceProvider, GroupActionRegistry groupActionRegistry) {
+            final Provider<SocialNetworkServiceAsync> snServiceProvider, GroupActionRegistry groupActionRegistry,
+            final Provider<FileDownloadUtils> downloadProvider) {
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.imageUtils = imageUtils;
         this.session = session;
         this.snServiceProvider = snServiceProvider;
+        this.downloadProvider = downloadProvider;
         createButtons();
         createMenuActions();
         otherOperationsUsers = new MenuItemCollection<GroupDTO>();
         otherLoggedOperationsUsers = new MenuItemCollection<GroupDTO>();
         otherOperations = new MenuItemCollection<GroupDTO>();
         otherLoggedOperations = new MenuItemCollection<GroupDTO>();
-
     }
 
     public void addGroupOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {
@@ -187,27 +191,44 @@ public class SocialNetworkPresenter {
     private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
         final CustomMenu<GroupDTO> menu = new CustomMenu<GroupDTO>(group);
         final String longName = group.getLongName();
-        boolean isPersonal = group.getGroupType().equals(GroupType.PERSONAL);
-        final String toolTip = i18n.t(isPersonal ? "User nickname: [%s]" : "Group short name: [%s]",
-                group.getShortName());
-        final String imageHtml = isPersonal ? imageUtils.getImageHtml(ImageDescriptor.personDef)
-                : imageUtils.getImageHtml(ImageDescriptor.groupDefIcon);
+        boolean hasLogo = group.hasLogo();
+        final String toolTip = createTooltipWithLogo(group, hasLogo);
+        final String imageHtml = createLogoAvatar(group.getStateToken(), hasLogo, group.isPersonal(), ICOSIZE, 0);
         final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageHtml,
                 longName, longName, " ", longName, toolTip, menu);
-        if (!isPersonal) {
+        if (!group.isPersonal()) {
             menu.addMenuItemList(otherOperations);
         }
-        if (session.isLogged() && !isPersonal) {
+        if (session.isLogged() && !group.isPersonal()) {
             menu.addMenuItemList(otherLoggedOperations);
         }
-        if (isPersonal) {
+        if (group.isPersonal()) {
             menu.addMenuItemList(otherOperationsUsers);
         }
-        if (session.isLogged() && isPersonal) {
+        if (session.isLogged() && group.isPersonal()) {
             menu.addMenuItemList(otherLoggedOperationsUsers);
         }
 
         return gridItem;
+    }
+
+    private String createTooltipWithLogo(final GroupDTO group, boolean hasLogo) {
+        return "<table><tr><td>"
+                + (hasLogo ? createLogoAvatar(group.getStateToken(), hasLogo, group.isPersonal(), THUMBSIZE, 3) : "")
+                + "</td><td>"
+                + i18n.t(group.isPersonal() ? "Nickname: [%s]" : "Group short name: [%s]", group.getShortName())
+                + "</td></tr></table>";
+    }
+
+    private String createLogoAvatar(StateToken groupToken, boolean groupHasLogo, boolean isPersonal, int size,
+            int hvspace) {
+        if (groupHasLogo) {
+            return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
+                    + "px; height: " + size + "px;' src='" + downloadProvider.get().getLogoImageUrl(groupToken) + "'>";
+        } else {
+            return isPersonal ? imageUtils.getImageHtml(ImageDescriptor.personDef)
+                    : imageUtils.getImageHtml(ImageDescriptor.groupDefIcon);
+        }
     }
 
     private void createMenuActions() {

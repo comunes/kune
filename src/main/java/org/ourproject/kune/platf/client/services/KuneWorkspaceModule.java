@@ -181,7 +181,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public SiteUserMenu create() {
                 final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class),
-                        $(StateManager.class), $$(EntityOptions.class));
+                        $(StateManager.class), $$(EntityOptions.class), $$(FileDownloadUtils.class));
                 final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nUITranslationService.class));
                 presenter.init(panel);
@@ -346,7 +346,7 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
                         $(Session.class), $$(SocialNetworkServiceAsync.class), $$(GroupServiceAsync.class),
                         $$(GroupLiveSearcher.class), $(WsThemePresenter.class), $$(ChatEngine.class),
-                        $(GroupActionRegistry.class), $(ActionGroupSummaryToolbar.class));
+                        $(GroupActionRegistry.class), $(ActionGroupSummaryToolbar.class), $$(FileDownloadUtils.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $(
                                 ActionGroupSummaryToolbar.class).getView());
@@ -388,7 +388,7 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(
                         $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
                         $(Session.class), $$(SocialNetworkServiceAsync.class), $(WsThemePresenter.class),
-                        $(GroupActionRegistry.class), $(ActionParticipationToolbar.class));
+                        $(GroupActionRegistry.class), $(ActionParticipationToolbar.class), $$(FileDownloadUtils.class));
                 final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
                         ($(ActionParticipationToolbar.class).getView()));

@@ -66,7 +66,7 @@ public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
 
     private void setState() {
         view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
-        if (session.getCurrentState().getGroup().isPersonalGroup()) {
+        if (session.getCurrentState().getGroup().isPersonal()) {
             view.setPersonalGroupsLabels();
         } else {
             view.setNormalGroupsLabels();
