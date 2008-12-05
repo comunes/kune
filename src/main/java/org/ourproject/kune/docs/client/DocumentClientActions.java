@@ -100,7 +100,7 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
         createEditAction(TYPE_DOCUMENT);
 
-        createTranslateAction(TYPE_DOCUMENT, TYPE_FOLDER, TYPE_UPLOADEDFILE);
+        createTranslateAction(TYPE_DOCUMENT, TYPE_FOLDER);
 
         createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
         createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);

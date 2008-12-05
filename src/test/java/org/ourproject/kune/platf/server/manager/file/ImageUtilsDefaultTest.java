@@ -26,8 +26,9 @@ import org.junit.Test;
 public class ImageUtilsDefaultTest {
 
     private static final String IMG_PATH = "src/test/java/org/ourproject/kune/platf/server/manager/file/";
-    private static String[] images = { "orig.png", "orig.gif", "orig.jpg", "orig.tiff" };
+    private static String[] images = { "orig.png", "orig.gif", "orig.jpg", "orig.tiff", "orig.pdf" };
     private static String imageDest;
+    private static String pdf = "orig.pdf";
 
     @AfterClass
     public static void after() {
@@ -37,7 +38,12 @@ public class ImageUtilsDefaultTest {
 
     @BeforeClass
     public static void before() {
-        imageDest = IMG_PATH + "output";
+        imageDest = IMG_PATH + "output.png";
+    }
+
+    @Test
+    public void convertPdfToPng() throws MagickException {
+        ImageUtilsDefault.createThumbFromPdf(IMG_PATH + pdf, imageDest);
     }
 
     @Test
@@ -164,9 +170,11 @@ public class ImageUtilsDefaultTest {
     @Test
     public void testSize() throws MagickException {
         for (String image : images) {
-            Dimension dimension = ImageUtilsDefault.getDimension(IMG_PATH + image);
-            assertEquals(400, (int) dimension.getHeight());
-            assertEquals(300, (int) dimension.getWidth());
+            if (!image.equals(pdf)) {
+                Dimension dimension = ImageUtilsDefault.getDimension(IMG_PATH + image);
+                assertEquals(400, (int) dimension.getHeight());
+                assertEquals(300, (int) dimension.getWidth());
+            }
         }
     }
 

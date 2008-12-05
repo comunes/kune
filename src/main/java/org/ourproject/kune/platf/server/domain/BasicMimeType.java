@@ -53,6 +53,33 @@ public class BasicMimeType {
         return type;
     }
 
+    /**
+     * Duplicate code in BMTDTO
+     * 
+     * @return
+     */
+    public boolean isImage() {
+        return type != null && type.equals("image");
+    }
+
+    /**
+     * Duplicate code in BMTDTO
+     * 
+     * @return
+     */
+    public boolean isPdf() {
+        return type != null && subtype != null && type.equals("application") && subtype.equals("pdf");
+    }
+
+    /**
+     * Duplicate code in BMTDTO
+     * 
+     * @return
+     */
+    public boolean isText() {
+        return type != null && subtype != null && type.equals("text") && subtype.equals("plain");
+    }
+
     public void setSubtype(final String subtype) {
         this.subtype = subtype;
     }
@@ -61,6 +88,7 @@ public class BasicMimeType {
         this.type = type;
     }
 
+    @Override
     public String toString() {
         return subtype == null ? type : type + "/" + subtype;
     }

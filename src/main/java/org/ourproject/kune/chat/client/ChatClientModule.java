@@ -37,6 +37,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.tool.ToolSelector;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -91,7 +92,7 @@ public class ChatClientModule extends AbstractModule {
             public ChatRoom create() {
                 final ChatRoomPresenter presenter = new ChatRoomPresenter($(StateManager.class), $(Session.class),
                         $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class));
+                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class));
                 final ChatRoomPanel panel = new ChatRoomPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(panel);

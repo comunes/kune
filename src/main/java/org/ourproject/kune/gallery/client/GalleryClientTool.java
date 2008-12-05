@@ -45,7 +45,7 @@ public class GalleryClientTool extends FoldableAbstractClientTool {
         registerRateableTypes(TYPE_UPLOADEDFILE);
         registerRenamableTypes(TYPE_ALBUM, TYPE_UPLOADEDFILE);
         registerTageableTypes(TYPE_UPLOADEDFILE);
-        registerTranslatableTypes(TYPE_ALBUM, TYPE_UPLOADEDFILE);
+        // registerTranslatableTypes();
 
         registerIcons();
     }

@@ -384,7 +384,7 @@ public class KuneModule extends AbstractModule {
                         $(I18nUITranslationService.class), $(StateManager.class), $(SiteSignOutLink.class),
                         $(DeferredCommandWrapper.class));
                 final TextEditorPanel panel = new TextEditorPanel(presenter, $(I18nTranslationService.class),
-                        $(WorkspaceSkeleton.class), $(ColorWebSafePalette.class));
+                        $(WorkspaceSkeleton.class), $(ColorWebSafePalette.class), false);
                 presenter.init(panel);
                 return presenter;
             }

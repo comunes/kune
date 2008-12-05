@@ -26,9 +26,12 @@ import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
+
+import com.calclab.suco.client.ioc.Provider;
 
 public class ChatRoomPresenter extends FoldableContentPresenter implements ChatRoom {
 
@@ -36,8 +39,9 @@ public class ChatRoomPresenter extends FoldableContentPresenter implements ChatR
     private final I18nUITranslationService i18n;
 
     public ChatRoomPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
-            ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry) {
-        super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry);
+            ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
+            Provider<FileDownloadUtils> downloadProvider) {
+        super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
         this.i18n = i18n;
     }
 

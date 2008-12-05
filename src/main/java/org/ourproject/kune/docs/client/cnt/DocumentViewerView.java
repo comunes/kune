@@ -22,9 +22,4 @@ package org.ourproject.kune.docs.client.cnt;
 import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
 public interface DocumentViewerView extends AbstractContentView {
-
-    void setContent(String content);
-
-    void showImage(String imageUrl, String imageResizedUrl);
-
 }

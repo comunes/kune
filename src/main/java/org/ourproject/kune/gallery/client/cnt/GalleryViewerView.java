@@ -22,9 +22,4 @@ package org.ourproject.kune.gallery.client.cnt;
 import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
 public interface GalleryViewerView extends AbstractContentView {
-
-    void setContent(String content);
-
-    void showImage(String imageUrl, String imageResizedUrl);
-
 }

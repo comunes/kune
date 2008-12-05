@@ -23,8 +23,4 @@ import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
 public interface BlogViewerView extends AbstractContentView {
 
-    void setContent(String content);
-
-    void showImage(String imageUrl, String imageResizedUrl);
-
 }

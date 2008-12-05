@@ -75,14 +75,22 @@ public class FileDownloadManager extends FileDownloadManagerAbstract {
         String extension = FileUtils.getFileNameExtension(filename, true);
         BasicMimeType mimeType = cnt.getMimeType();
 
-        if (mimeType.getType().equals("image")) {
+        boolean isPdfAndNotDownload = mimeType.isPdf() && !download;
+        if (mimeType.isImage() || isPdfAndNotDownload) {
             String imgsizePrefix = imgsize == null ? "" : "." + imgsize;
             String filenameWithoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
-            String filenameResized = filenameWithoutExtension + imgsizePrefix + extension;
+            String filenameResized = filenameWithoutExtension + imgsizePrefix
+                    + (isPdfAndNotDownload ? ".png" : extension);
             if (new File(absDir + filenameResized).exists()) {
                 // thumb can fail
                 filename = filenameResized;
             }
+        }
+
+        // We will send the pdf thumb not the real pdf
+        if (isPdfAndNotDownload) {
+            extension = ".png";
+            mimeType = new BasicMimeType("image", "png");
         }
 
         final String absFilename = absDir + filename;
@@ -98,7 +106,7 @@ public class FileDownloadManager extends FileDownloadManagerAbstract {
         resp.setContentLength((int) file.length());
         if (mimeType == null || download) {
             resp.setContentType("application/x-download");
-        } else if (mimeType.getType().equals("image")) {
+        } else if (mimeType.isImage()) {
             resp.setContentType(mimeType.toString());
         } else {
             resp.setContentType("application/x-download");

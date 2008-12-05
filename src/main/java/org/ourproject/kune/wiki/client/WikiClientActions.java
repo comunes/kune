@@ -100,7 +100,7 @@ public class WikiClientActions extends AbstractFoldableContentActions {
 
         createEditAction(TYPE_WIKIPAGE);
 
-        createTranslateAction(TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
+        createTranslateAction(TYPE_FOLDER, TYPE_WIKIPAGE);
 
         createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
         createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);

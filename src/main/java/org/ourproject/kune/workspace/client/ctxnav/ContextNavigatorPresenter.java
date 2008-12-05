@@ -332,9 +332,9 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     private String getTooltip(StateToken token, BasicMimeTypeDTO mimeType) {
-        if (mimeType != null && mimeType.getType().equals("image")) {
+        if (mimeType != null && (mimeType.isImage() || mimeType.isPdf())) {
             return KuneUiUtils.genQuickTipWithImage(downloadUtilsProvider.get().getImageResizedUrl(token,
-                    ImageSize.thumb));
+                    ImageSize.thumb), session.getImgCropsize());
         } else {
             return null;
         }

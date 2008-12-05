@@ -42,6 +42,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.FileManager;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
+import org.ourproject.kune.platf.server.utils.StringW;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
@@ -116,15 +117,21 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             log.info("Mimetype: " + basicMimeType);
             final String extension = FileUtils.getFileNameExtension(file.getName(), false);
 
-            if (basicMimeType.getType().equals("image")) {
-                generateThumbs(absDir, file.getName(), extension);
+            String preview = "";
+
+            if (basicMimeType.isImage()) {
+                generateThumbs(absDir, file.getName(), extension, false);
+            } else if (basicMimeType.isPdf()) {
+                generateThumbs(absDir, file.getName(), "png", true);
+            } else if (basicMimeType.isText()) {
+                String textPreview = new String(FileUtils.getBytesFromFile(file));
+                preview = "<pre>" + StringW.wordWrap(textPreview) + "</pre>";
             }
 
             // Persist
             final User user = userSession.getUser();
             final Container container = accessService.accessToContainer(ContentUtils.parseId(stateToken.getFolder()),
                     user, AccessRol.Editor);
-            final String preview = "Preview of this file (in development)";
             final Content content = contentManager.createContent(FileUtils.getFileNameWithoutExtension(file.getName(),
                     extension), preview, user, container, typeId);
             content.setMimeType(basicMimeType);
@@ -138,7 +145,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
         }
     }
 
-    private void generateThumbs(String absDir, String filename, String extension) {
+    private void generateThumbs(String absDir, String filename, String extension, boolean isPdf) {
         try {
             String fileOrig = absDir + filename;
             String withoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
@@ -146,6 +153,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             String resizeName = absDir + withoutExtension + "." + ImageSize.sized + "." + extension;
             String thumbName = absDir + withoutExtension + "." + ImageSize.thumb + "." + extension;
             String iconName = absDir + withoutExtension + "." + ImageSize.ico + "." + extension;
+            String previewName = absDir + withoutExtension + "." + extension;
 
             int resizeWidth = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH));
             int thumbSize = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE));
@@ -155,6 +163,9 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             ImageUtilsDefault.scaleImageToMax(fileOrig, resizeName, resizeWidth);
             ImageUtilsDefault.createThumb(fileOrig, thumbName, thumbSize, cropSize);
             ImageUtilsDefault.createThumb(fileOrig, iconName, iconSize);
+            if (isPdf) {
+                ImageUtilsDefault.createThumbFromPdf(fileOrig, previewName);
+            }
 
         } catch (NumberFormatException e) {
             log.error("Image sizes in kune.properties are not integers");

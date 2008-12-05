@@ -52,8 +52,31 @@ public class BasicMimeTypeDTO implements IsSerializable {
         return type;
     }
 
+    /**
+     * Duplicate code in BMT
+     * 
+     * @return
+     */
     public boolean isImage() {
-        return getType().equals("image");
+        return type != null && type.equals("image");
+    }
+
+    /**
+     * Duplicate code in BMT
+     * 
+     * @return
+     */
+    public boolean isPdf() {
+        return type != null && subtype != null && type.equals("application") && subtype.equals("pdf");
+    }
+
+    /**
+     * Duplicate code in BMTDTO
+     * 
+     * @return
+     */
+    public boolean isText() {
+        return type != null && subtype != null && type.equals("text") && subtype.equals("plain");
     }
 
     public void setSubtype(final String subtype) {

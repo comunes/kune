@@ -22,62 +22,31 @@ package org.ourproject.kune.blogs.client.cnt;
 import org.ourproject.kune.blogs.client.BlogClientTool;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 
 public class BlogViewerPresenter extends FoldableContentPresenter implements BlogViewer {
-    private BlogViewerView view;
-    private final Provider<FileDownloadUtils> downloadProvider;
 
     public BlogViewerPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
             ActionContentToolbar toolbar, ContentActionRegistry actionRegistry,
             Provider<FileDownloadUtils> downloadProvider) {
-        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry);
-        this.downloadProvider = downloadProvider;
+        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
     }
 
     public void init(BlogViewerView view) {
         super.init(view);
-        this.view = view;
     }
 
     @Override
     protected void setState(StateContentDTO state) {
         super.setState(state);
-        setContent(state, BlogClientTool.TYPE_UPLOADEDFILE);
+        super.setContent(state, BlogClientTool.TYPE_UPLOADEDFILE);
     }
 
-    private void setContent(StateContentDTO state, String uploadedfileType) {
-        String typeId = state.getTypeId();
-        String contentBody = state.getContent();
-        StateToken token = state.getStateToken();
-        BasicMimeTypeDTO mimeType = state.getMimeType();
-        if (typeId.equals(uploadedfileType)) {
-            if (mimeType != null) {
-                FileDownloadUtils fileDownloadUtils = downloadProvider.get();
-                if (mimeType.getType().equals("image")) {
-                    view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
-                            ImageSize.sized));
-                } else if (mimeType.toString().equals("text/plain") || mimeType.toString().equals("application/pdf")) {
-                    view.setContent(contentBody);
-                } else {
-                    view.setContent("");
-                }
-            } else {
-                view.setContent("");
-            }
-        } else {
-            view.setContent(contentBody);
-        }
-        view.attach();
-    }
 }

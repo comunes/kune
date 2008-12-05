@@ -115,6 +115,8 @@ public class TextEditorToolbar extends Composite {
                         colorPalette.hide();
                     }
                 });
+            } else if (sender == editHtml) {
+                presenter.onEditHTML();
             } else if (sender == fontColor) {
                 colorPalette.show(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 20, new Listener<String>() {
                     public void onEvent(final String color) {
@@ -264,6 +266,7 @@ public class TextEditorToolbar extends Composite {
     private ToggleButton subscript;
     private ToggleButton superscript;
     private ToggleButton strikethrough;
+    private ToggleButton editHtml;
     private PushButton indent;
     private PushButton outdent;
     private PushButton justifyLeft;
@@ -291,7 +294,7 @@ public class TextEditorToolbar extends Composite {
      *            the rich text area to be controlled
      */
     public TextEditorToolbar(final RichTextArea richText, final TextEditorPresenter presenter,
-            final ColorWebSafePalette colorPalette, final I18nTranslationService i18n) {
+            final ColorWebSafePalette colorPalette, final I18nTranslationService i18n, boolean permitEditHtml) {
         this.richText = richText;
         this.colorPalette = colorPalette;
         this.i18n = i18n;
@@ -348,10 +351,9 @@ public class TextEditorToolbar extends Composite {
             richText.addClickListener(listener);
         }
 
-        // if (basic != null) {
-        // topPanel.add(editHtml = createToggleButton(images.editHtml(),
-        // i18n.t("Edit HTML")));
-        // }
+        if (basic != null && permitEditHtml) {
+            topPanel.add(editHtml = createToggleButton(images.edithtml(), i18n.t("Edit HTML")));
+        }
 
         // super.setVisible(false);
     }
@@ -359,28 +361,28 @@ public class TextEditorToolbar extends Composite {
     public void editHTML(final boolean edit) {
         final boolean enable = !edit;
         if (basic != null) {
-            bold.setEnabled(enable);
-            italic.setEnabled(enable);
-            underline.setEnabled(enable);
-            subscript.setEnabled(enable);
-            superscript.setEnabled(enable);
-            justifyLeft.setEnabled(enable);
-            justifyCenter.setEnabled(enable);
-            justifyRight.setEnabled(enable);
-            backColor.setEnabled(enable);
-            fontColor.setEnabled(enable);
+            bold.setVisible(enable);
+            italic.setVisible(enable);
+            underline.setVisible(enable);
+            subscript.setVisible(enable);
+            superscript.setVisible(enable);
+            justifyLeft.setVisible(enable);
+            justifyCenter.setVisible(enable);
+            justifyRight.setVisible(enable);
+            backColor.setVisible(enable);
+            fontColor.setVisible(enable);
         }
         if (extended != null) {
-            strikethrough.setEnabled(enable);
-            indent.setEnabled(enable);
-            outdent.setEnabled(enable);
-            insertImage.setEnabled(enable);
-            createLink.setEnabled(enable);
-            removeLink.setEnabled(enable);
-            ol.setEnabled(enable);
-            ul.setEnabled(enable);
-            hr.setEnabled(enable);
-            removeFormat.setEnabled(enable);
+            strikethrough.setVisible(enable);
+            indent.setVisible(enable);
+            outdent.setVisible(enable);
+            insertImage.setVisible(enable);
+            createLink.setVisible(enable);
+            removeLink.setVisible(enable);
+            ol.setVisible(enable);
+            ul.setVisible(enable);
+            hr.setVisible(enable);
+            removeFormat.setVisible(enable);
             fonts.setVisible(enable);
             fontSizes.setVisible(enable);
         }
@@ -416,8 +418,7 @@ public class TextEditorToolbar extends Composite {
 
         KuneUiUtils.setQuickTip(menu, i18n.t("Font Type"));
         menu.addItem(images.charfontname().getHTML(), true, submenu);
-        for (int i = 0; i < fontName.length; i++) {
-            final String f = fontName[i];
+        for (final String f : fontName) {
             submenu.addItem("<span style=\"font-family: " + f + "\">" + f + "</span>", true, new Command() {
                 public void execute() {
                     basic.setFontName(f);

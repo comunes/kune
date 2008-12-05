@@ -2,7 +2,7 @@ package org.ourproject.kune.workspace.client.cnt;
 
 public abstract class AbstractContentPresenter {
 
-    private AbstractContentView view;
+    protected AbstractContentView view;
 
     public AbstractContentPresenter() {
     }

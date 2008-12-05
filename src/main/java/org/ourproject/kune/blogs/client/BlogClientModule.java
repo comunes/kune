@@ -108,7 +108,7 @@ public class BlogClientModule extends AbstractModule {
             public BlogFolderContent create() {
                 final BlogFolderContentPresenter presenter = new BlogFolderContentPresenter($(StateManager.class),
                         $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $(I18nTranslationService.class));
+                        $(I18nTranslationService.class), $$(FileDownloadUtils.class));
                 final BlogFolderContentView view = new BlogFolderContentPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);

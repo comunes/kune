@@ -45,7 +45,7 @@ public class TextEditorPanel implements TextEditorView {
     private final WorkspaceSkeleton ws;
 
     public TextEditorPanel(final TextEditorPresenter presenter, final I18nTranslationService i18n,
-            final WorkspaceSkeleton ws, final ColorWebSafePalette colorPalette) {
+            final WorkspaceSkeleton ws, final ColorWebSafePalette colorPalette, boolean permitHtmlButton) {
         this.presenter = presenter;
         this.i18n = i18n;
         this.ws = ws;
@@ -53,14 +53,14 @@ public class TextEditorPanel implements TextEditorView {
         mainPanel.setWidth("100%");
 
         gwtRTarea = new RichTextArea();
-        gwtRTarea.setWidth("97%");
+        gwtRTarea.setWidth("96%");
         gwtRTarea.setHeight("100%");
         gwtRTarea.addStyleName("kune-TexEditorPanel-TextArea");
         gwtRTarea.ensureDebugId(TEXT_AREA);
 
         final Toolbar editorTopBar = new Toolbar();
         editorTopBar.getPanel().setWidth("auto");
-        textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, colorPalette, i18n);
+        textEditorToolbar = new TextEditorToolbar(gwtRTarea, presenter, colorPalette, i18n, permitHtmlButton);
         editorTopBar.add(textEditorToolbar);
         editorTopBar.addStyleName("k-toolbar-bottom-line");
 

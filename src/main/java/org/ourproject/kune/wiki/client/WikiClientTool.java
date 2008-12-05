@@ -46,7 +46,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
         registerRateableTypes(TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
         registerRenamableTypes(TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
         registerTageableTypes(TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
-        registerTranslatableTypes(TYPE_FOLDER, TYPE_UPLOADEDFILE, TYPE_WIKIPAGE);
+        registerTranslatableTypes(TYPE_FOLDER, TYPE_WIKIPAGE);
 
         registerIcons();
     }

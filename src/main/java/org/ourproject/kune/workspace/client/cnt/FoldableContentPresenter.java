@@ -4,13 +4,17 @@ import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.download.ImageSize;
 
+import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 
 public abstract class FoldableContentPresenter extends AbstractContentPresenter implements FoldableContent {
@@ -19,13 +23,16 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     private final ActionRegistry<StateToken> actionRegistry;
     protected final Session session;
     private final ActionContentToolbar toolbar;
+    private final Provider<FileDownloadUtils> downloadProvider;
 
     public FoldableContentPresenter(final String toolName, StateManager stateManager, Session session,
-            final ActionContentToolbar toolbar, ActionRegistry<StateToken> actionRegistry) {
+            final ActionContentToolbar toolbar, ActionRegistry<StateToken> actionRegistry,
+            Provider<FileDownloadUtils> downloadProvider) {
         this.toolName = toolName;
         this.session = session;
         this.toolbar = toolbar;
         this.actionRegistry = actionRegistry;
+        this.downloadProvider = downloadProvider;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
@@ -39,6 +46,34 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
 
     public void refreshState() {
         setState(session.getContentState());
+    }
+
+    protected void setContent(StateContentDTO state, String uploadedfileType) {
+        String typeId = state.getTypeId();
+        String contentBody = state.getContent();
+        StateToken token = state.getStateToken();
+        BasicMimeTypeDTO mimeType = state.getMimeType();
+        if (typeId.equals(uploadedfileType)) {
+            if (mimeType != null) {
+                FileDownloadUtils fileDownloadUtils = downloadProvider.get();
+                if (mimeType.isImage()) {
+                    view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
+                            ImageSize.sized), false);
+                } else if (mimeType.isPdf()) {
+                    view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
+                            ImageSize.sized), true);
+                } else if (mimeType.isText()) {
+                    view.setContent(contentBody, true);
+                } else {
+                    view.setNoPreview();
+                }
+            } else {
+                view.setNoPreview();
+            }
+        } else {
+            view.setRawContent(contentBody);
+        }
+        view.attach();
     }
 
     protected void setState(StateAbstractDTO state) {

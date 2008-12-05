@@ -76,8 +76,8 @@ public class DocumentClientModule extends AbstractModule {
                         $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
                         $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(TextEditor.class), $(KuneErrorHandler.class), $(DocumentViewer.class),
-                        $$(ContextPropEditor.class));
+                        $(EntityHeader.class), $$(TextEditor.class), $(KuneErrorHandler.class),
+                        $(DocumentViewer.class), $$(ContextPropEditor.class));
             }
         });
 
@@ -107,7 +107,8 @@ public class DocumentClientModule extends AbstractModule {
             @Override
             public DocFolderContent create() {
                 final DocFolderContentPresenter presenter = new DocFolderContentPresenter($(StateManager.class),
-                        $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class));
+                        $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
+                        $$(FileDownloadUtils.class));
                 final DocFolderContentView view = new DocFolderContentPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);

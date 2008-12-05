@@ -816,6 +816,15 @@
 }
 
 .x-toolbar-body table {
-    width: 100%;
+    /* width: 100%; */
 }
 
+.k-preview-msg
+    {
+    background: #FFCCAA;
+}
+.k-preview-msg-lab
+    {
+    background: #FFCCAA;
+    padding: 0 5px;
+}

@@ -77,7 +77,7 @@ public class KuneUiUtils {
         return tipHtml;
     }
 
-    public static String genQuickTipWithImage(String imageResizedUrl) {
+    public static String genQuickTipWithImage(String imageResizedUrl, int size) {
         return new Image(imageResizedUrl).toString();
     }
 

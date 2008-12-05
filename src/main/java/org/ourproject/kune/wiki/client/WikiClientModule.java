@@ -108,7 +108,7 @@ public class WikiClientModule extends AbstractModule {
             public WikiFolderContent create() {
                 final WikiFolderContentPresenter presenter = new WikiFolderContentPresenter($(StateManager.class),
                         $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $(I18nTranslationService.class));
+                        $(I18nTranslationService.class), $$(FileDownloadUtils.class));
                 final WikiFolderContentView view = new WikiFolderContentPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);

@@ -27,7 +27,10 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
+
+import com.calclab.suco.client.ioc.Provider;
 
 public class BlogFolderContentPresenter extends FoldableContentPresenter implements BlogFolderContent {
 
@@ -35,8 +38,9 @@ public class BlogFolderContentPresenter extends FoldableContentPresenter impleme
     private final I18nTranslationService i18n;
 
     public BlogFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
-            final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n) {
-        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry);
+            final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n,
+            Provider<FileDownloadUtils> downloadProvider) {
+        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
         this.i18n = i18n;
     }
 

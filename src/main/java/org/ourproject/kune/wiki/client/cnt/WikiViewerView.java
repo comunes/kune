@@ -22,9 +22,4 @@ package org.ourproject.kune.wiki.client.cnt;
 import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
 public interface WikiViewerView extends AbstractContentView {
-
-    void setContent(String content);
-
-    void showImage(String imageUrl, String imageResizedUrl);
-
 }
