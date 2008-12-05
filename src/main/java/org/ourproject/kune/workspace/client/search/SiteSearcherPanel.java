@@ -104,7 +104,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
         dialog.expand();
         dialog.center();
         if (traybarButton == null) {
-            traybarButton = new SiteBottomTrayButton("images/kune-search-ico-push.gif", i18n.t("Show/hide searcher"),
+            traybarButton = new SiteBottomTrayButton("images/kune-search-ico-push.gif", i18n.t("Show/hide search engine"),
                     dialog, ws);
         }
     }

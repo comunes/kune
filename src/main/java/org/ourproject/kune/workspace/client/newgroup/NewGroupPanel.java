@@ -270,12 +270,12 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         tags.setName(TAGS_FIELD);
         tags.setWidth(BIG_FIELD_WIDTH);
         tags.setAllowBlank(false);
-        final ToolTip fieldToolTip = new ToolTip(i18n.t("Some words related to this group (separated with spaces)."));
+        final ToolTip fieldToolTip = new ToolTip(i18n.t("Please, write some keywords for this group (separated with spaces)."));
         fieldToolTip.applyTo(tags);
         tags.setValidationDelay(1000);
         form.add(tags);
 
-        final FieldSet groupTypeFieldSet = new FieldSet(i18n.t("Type of group"));
+        final FieldSet groupTypeFieldSet = new FieldSet(i18n.t("Group type"));
         groupTypeFieldSet.setStyle("margin-left: 105px");
         groupTypeFieldSet.setWidth(BIG_FIELD_WIDTH);
 
@@ -284,23 +284,23 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         projectRadio = new Radio();
         projectRadio.setTabIndex(5);
         createRadio(groupTypeFieldSet, projectRadio, "Project",
-                "A project is a kind of group in which new members inclusion "
+                "A project is a kind of group in which new members joining "
                         + "is moderated by the project administrators. "
                         + "An administrator is the person who creates the project "
-                        + "and other people she/he choose in the future as administrator too.", PROJ_GROUP_TYPE_ID);
+                        + "and other people she/he chooses to be administrator as well.", PROJ_GROUP_TYPE_ID);
         projectRadio.setChecked(true);
 
         orgRadio = new Radio();
         orgRadio.setTabIndex(6);
-        createRadio(groupTypeFieldSet, orgRadio, "Organization", "An organization is like a project, "
+        createRadio(groupTypeFieldSet, orgRadio, "Organization", "An organization works as a project, "
                 + "but organizations must be a legal entity.", ORG_GROUP_TYPE_ID);
 
         communityRadio = new Radio();
         communityRadio.setTabIndex(7);
-        createRadio(groupTypeFieldSet, communityRadio, "Community", "Communities are social group of persons "
-                + "with shared interests and they are open to new members "
+        createRadio(groupTypeFieldSet, communityRadio, "Community", "Communities are social groups of persons "
+                + "with shared interests, which are open to new members "
                 + "(for instance the environmental community or the LGBT community). "
-                + "Normally they aren't a legal entity.", COMM_GROUP_TYPE_ID);
+                + "They rarely are a legal entity.", COMM_GROUP_TYPE_ID);
 
         groupTypeFieldSet.setCollapsible(false);
 

@@ -53,7 +53,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
 
     public BuddiesSummaryPanel(final BuddiesSummaryPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n, ActionManager actionManager, ActionToolbarView<UserSimpleDTO> actionToolbarView) {
-        super(i18n.t("Buddies"), i18n.t("Buddies of this user"), ws);
+        super(i18n.t("Buddies"), i18n.t("This user buddies"), ws);
         this.actionManager = actionManager;
         menuItemsContainer = new MenuItemsContainer<UserSimpleDTO>();
         this.i18n = i18n;

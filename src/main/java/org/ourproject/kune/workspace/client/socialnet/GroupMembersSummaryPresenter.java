@@ -112,7 +112,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                                     chatEngineProvider.get().chat(
                                             XmppURI.jid(group.getShortName() + "@" + initData.getChatDomain()));
                                 } else {
-                                    Site.important(i18n.t("To start a chat you need to be 'online'."));
+                                    Site.important(i18n.t("To start a chat you need to be 'online'"));
                                 }
                             }
                         }), true);
@@ -163,7 +163,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                 });
         addMember.setIconUrl("images/add-green.gif");
         addMember.setTextDescription(i18n.t("Add member"));
-        addMember.setToolTip(i18n.t("Add a group or a person as member of this group"));
+        addMember.setToolTip(i18n.t("Add an user or a group as member of this group"));
         addMember.setParentMenuTitle(i18n.t("Options"));
 
         groupActionRegistry.addAction(addMember);

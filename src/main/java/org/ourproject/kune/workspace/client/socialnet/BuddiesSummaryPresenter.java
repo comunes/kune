@@ -171,7 +171,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                     }
                 });
         addAsBuddie.setMustBeAuthenticated(true);
-        addAsBuddie.setTextDescription(i18n.t("Add as buddie"));
+        addAsBuddie.setTextDescription(i18n.t("Add as a buddie"));
         addAsBuddie.setIconUrl("images/add-green.png");
         addAsBuddie.setAddCondition(new ActionAddCondition<UserSimpleDTO>() {
             public boolean mustBeAdded(UserSimpleDTO item) {
@@ -192,7 +192,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                     }
                 });
         go.setMustBeAuthenticated(false);
-        go.setTextDescription(i18n.t("Visit this user homepage"));
+        go.setTextDescription(i18n.t("Visit this user's homepage"));
         go.setIconUrl("images/group-home.gif");
         actionRegistry.addAction(go);
 

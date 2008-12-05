@@ -162,7 +162,7 @@ public class SocialNetworkPresenter {
                                             Site.important(i18n.t("Sorry this is a closed group"));
                                             break;
                                         case moderated:
-                                            Site.info(i18n.t("Requested. Waiting for admins decision"));
+                                            Site.info(i18n.t("Membership requested. Waiting for admins decision"));
                                             break;
                                         }
                                     }
@@ -186,11 +186,11 @@ public class SocialNetworkPresenter {
                     }
                 });
         unJoin.setIconUrl("images/del.gif");
-        unJoin.setTextDescription(i18n.t("Unjoin"));
-        unJoin.setToolTip(i18n.t("Don't participate more in this group"));
+        unJoin.setTextDescription(i18n.t("Leave"));
+        unJoin.setToolTip(i18n.t("Do not participate anymore in this group"));
         unJoin.setParentMenuTitle(i18n.t("Options"));
         unJoin.setMustBeConfirmed(true);
-        unJoin.setConfirmationTitle(i18n.t("Unjoin this group"));
+        unJoin.setConfirmationTitle(i18n.t("Leave this group"));
         unJoin.setConfirmationText(i18n.t("Are you sure?"));
     }
 
@@ -244,7 +244,7 @@ public class SocialNetworkPresenter {
                         stateManager.gotoToken(groupDTO.getShortName());
                     }
                 });
-        unJoinMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n.t("Don't participate more in this group"),
+        unJoinMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n.t("Do not participate anymore in this group"),
                 new Listener<GroupDTO>() {
                     public void onEvent(final GroupDTO groupDTO) {
                         removeMemberAction(groupDTO);
@@ -259,7 +259,7 @@ public class SocialNetworkPresenter {
                                 new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                                     public void onSuccess(final SocialNetworkDataDTO result) {
                                         Site.hideProgress();
-                                        Site.info(i18n.t("Type of member changed"));
+                                        Site.info(i18n.t("Member type changed"));
                                         stateManager.setSocialNetwork(result);
                                     }
                                 });
@@ -297,7 +297,7 @@ public class SocialNetworkPresenter {
                                 new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                                     public void onSuccess(final SocialNetworkDataDTO result) {
                                         Site.hideProgress();
-                                        Site.info(i18n.t("Type of member changed"));
+                                        Site.info(i18n.t("Member type changed"));
                                         stateManager.setSocialNetwork(result);
                                     }
                                 });
@@ -318,7 +318,7 @@ public class SocialNetworkPresenter {
                                 });
                     }
                 });
-        denyJoinGroupMenuItem = new MenuItem<GroupDTO>("images/cancel.gif", i18n.t("Don't accept this member"),
+        denyJoinGroupMenuItem = new MenuItem<GroupDTO>("images/cancel.gif", i18n.t("Reject this member"),
                 new Listener<GroupDTO>() {
                     public void onEvent(final GroupDTO group) {
                         Site.showProgressProcessing();

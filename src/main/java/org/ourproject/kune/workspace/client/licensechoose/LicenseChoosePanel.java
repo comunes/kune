@@ -66,7 +66,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 
         final VerticalPanel licenseTypesVP = new VerticalPanel();
         ccRB = new RadioButton("ccOrNot", i18n.t("Creative Commons"));
-        final RadioButton notCcRB = new RadioButton("ccOrNot", i18n.t("Others licenses"));
+        final RadioButton notCcRB = new RadioButton("ccOrNot", i18n.t("Other licenses"));
         options = new DeckPanel();
         ccIntro = new Label(
                 i18n.t("With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?"));
@@ -75,10 +75,10 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
         final VerticalPanel ccOptionsVP = new VerticalPanel();
         final VerticalPanel nonCcOptionsVP = new VerticalPanel();
 
-        final Label comercialLabel = new Label(i18n.t("Allow commercial uses of your work?"));
-        commercialRB = new RadioButton("comercial", i18n.t("Yes"));
-        nonCommercialRB = new RadioButton("comercial", i18n.t("No"));
-        final Label allowModifLabel = new Label(i18n.t("Allow modifications of your work?"));
+        final Label comercialLabel = new Label(i18n.t("Do you want to allow commercial uses of your work?"));
+        commercialRB = new RadioButton("commercial", i18n.t("Yes"));
+        nonCommercialRB = new RadioButton("commercial", i18n.t("No"));
+        final Label allowModifLabel = new Label(i18n.t("Do you want to allow modifications of your work?"));
         allowModifRB = new RadioButton("allowModif", i18n.t("Yes"));
         allowModifShareAlikeRB = new RadioButton("allowModif", i18n.t("Yes, as long as others share alike"));
         noModifRB = new RadioButton("allowModif", i18n.t("No"));
@@ -201,7 +201,7 @@ public class LicenseChoosePanel extends Composite implements LicenseChooseView {
 
     public void showNotCCoptions() {
         options.showWidget(1);
-        optionsBox.setTitle(i18n.t("Select one of these licenses:"));
+        optionsBox.setTitle(i18n.t("Please, select one of these licenses:"));
     }
 
     private void configureListeners(final LicenseChoosePresenter presenter) {

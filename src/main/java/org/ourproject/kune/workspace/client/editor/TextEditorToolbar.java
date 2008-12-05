@@ -391,7 +391,7 @@ public class TextEditorToolbar extends Composite {
     private MenuBar createFontSizesMenu() {
         final MenuBar menu = new MenuBar();
         final MenuBar submenu = new MenuBar(true);
-        final String fontSizes[] = { i18n.t("Extra small"), i18n.t("Very small"), i18n.t("small"), i18n.t("Medium"),
+        final String fontSizes[] = { i18n.t("Extra small"), i18n.t("Very small"), i18n.t("Small"), i18n.t("Medium"),
                 i18n.t("Large"), i18n.t("Very large"), i18n.t("Extra large") };
 
         KuneUiUtils.setQuickTip(menu, i18n.t("Font Size"));

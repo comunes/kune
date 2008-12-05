@@ -43,8 +43,8 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
 
     public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws, ActionToolbarView<StateToken> actionToolbarView) {
-        super(i18n.t("Participates in"), i18n.t("Groups in which participates"), ws);
-        gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user is not member of any group"), false, false,
+        super(i18n.t("Participates in"), i18n.t("Groups in which the user participates"), ws);
+        gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user does not belong to any group"), false, false,
                 false, false, false);
         Listener<String> go = new Listener<String>() {
             public void onEvent(final String groupShortName) {

@@ -58,9 +58,9 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
         final Label label = new Label(name);
         // i18n pluralization
         if (count > 1) {
-            KuneUiUtils.setQuickTip(label, i18n.t("[%d] items with this tag", count));
+            KuneUiUtils.setQuickTip(label, i18n.t("There are [%d] items with this tag", count));
         } else {
-            KuneUiUtils.setQuickTip(label, i18n.t("[%d] item with this tag", count));
+            KuneUiUtils.setQuickTip(label, i18n.t("There are [%d] item with this tag", count));
         }
         label.addClickListener(new ClickListener() {
             public void onClick(final Widget sender) {
