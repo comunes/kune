@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
@@ -41,7 +42,7 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.CustomMenu;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -49,8 +50,6 @@ import com.calclab.suco.client.listener.Listener;
 
 public class SocialNetworkPresenter {
 
-    private static final int ICOSIZE = 16;
-    private static final int THUMBSIZE = 50;
     protected MenuItem<GroupDTO> changeToCollabMenuItem;
     protected MenuItem<GroupDTO> removeMemberMenuItem;
     protected MenuItem<GroupDTO> changeToAdminMenuItem;
@@ -59,7 +58,7 @@ public class SocialNetworkPresenter {
     protected MenuItem<GroupDTO> gotoMemberMenuItem;
     protected MenuItem<GroupDTO> gotoGroupMenuItem;
     protected MenuItem<GroupDTO> unJoinMenuItem;
-    private final I18nUITranslationService i18n;
+    private final I18nTranslationService i18n;
     private final StateManager stateManager;
     private final Provider<SocialNetworkServiceAsync> snServiceProvider;
     private final Session session;
@@ -73,7 +72,7 @@ public class SocialNetworkPresenter {
     protected ActionToolbarButtonDescriptor<StateToken> participate;
     private final Provider<FileDownloadUtils> downloadProvider;
 
-    public SocialNetworkPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
+    public SocialNetworkPresenter(final I18nTranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
             final Provider<SocialNetworkServiceAsync> snServiceProvider, GroupActionRegistry groupActionRegistry,
             final Provider<FileDownloadUtils> downloadProvider) {
@@ -129,6 +128,13 @@ public class SocialNetworkPresenter {
             }
         }
         return gridItem;
+    }
+
+    protected String createTooltipWithLogo(String shortName, StateToken token, boolean hasLogo, boolean isPersonal) {
+        return "<table><tr><td>"
+                + (hasLogo ? createLogoAvatar(token, hasLogo, isPersonal, EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT, 3)
+                        : "") + "</td><td>"
+                + i18n.t(isPersonal ? "Nickname: [%s]" : "Group short name: [%s]", shortName) + "</td></tr></table>";
     }
 
     protected boolean isMember(AccessRightsDTO rights) {
@@ -192,8 +198,10 @@ public class SocialNetworkPresenter {
         final CustomMenu<GroupDTO> menu = new CustomMenu<GroupDTO>(group);
         final String longName = group.getLongName();
         boolean hasLogo = group.hasLogo();
-        final String toolTip = createTooltipWithLogo(group, hasLogo);
-        final String imageHtml = createLogoAvatar(group.getStateToken(), hasLogo, group.isPersonal(), ICOSIZE, 0);
+        final String toolTip = createTooltipWithLogo(group.getShortName(), group.getStateToken(), hasLogo,
+                group.isPersonal());
+        final String imageHtml = createLogoAvatar(group.getStateToken(), hasLogo, group.isPersonal(),
+                session.getImgIconsize(), 0);
         final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageHtml,
                 longName, longName, " ", longName, toolTip, menu);
         if (!group.isPersonal()) {
@@ -210,14 +218,6 @@ public class SocialNetworkPresenter {
         }
 
         return gridItem;
-    }
-
-    private String createTooltipWithLogo(final GroupDTO group, boolean hasLogo) {
-        return "<table><tr><td>"
-                + (hasLogo ? createLogoAvatar(group.getStateToken(), hasLogo, group.isPersonal(), THUMBSIZE, 3) : "")
-                + "</td><td>"
-                + i18n.t(group.isPersonal() ? "Nickname: [%s]" : "Group short name: [%s]", group.getShortName())
-                + "</td></tr></table>";
     }
 
     private String createLogoAvatar(StateToken groupToken, boolean groupHasLogo, boolean isPersonal, int size,

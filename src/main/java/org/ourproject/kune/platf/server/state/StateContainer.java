@@ -77,6 +77,10 @@ public class StateContainer extends StateAbstract {
         return typeId;
     }
 
+    public boolean isType(String type) {
+        return getTypeId().equals(type);
+    }
+
     public void setAccessLists(AccessLists accessLists) {
         this.accessLists = accessLists;
     }

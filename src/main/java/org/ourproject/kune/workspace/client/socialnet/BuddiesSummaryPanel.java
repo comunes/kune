@@ -28,15 +28,14 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.BasicThumb;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.listener.Listener;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -44,43 +43,6 @@ import com.gwtext.client.widgets.menu.Menu;
 
 public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryView {
 
-    public class BuddieWidget extends Composite {
-        private final Image avatar;
-        private final Label nick;
-
-        public BuddieWidget(String nickName, String avatarUrl, ClickListener clickListener) {
-            // For Drag& drop, see gwt-ext-ux image:
-            // http://www.gwt-ext.com:8080/demo-ux/#imageDDSample
-            VerticalPanel vp = new VerticalPanel();
-            avatar = new Image();
-            if (avatarUrl.equals(NOAVATAR)) {
-                // Images.App.getInstance().personAvatarDef().applyTo(avatar);
-                avatar.setUrl("images/persons/person2-32.png");
-            } else {
-                avatar.setUrl(avatarUrl);
-            }
-            avatar.setPixelSize(AVATARSIZE, AVATARSIZE);
-            nick = new Label(nickName);
-            vp.add(avatar);
-            vp.add(nick);
-            vp.addStyleName("k-bsp-buddie");
-            vp.addStyleName("kune-Margin-Small-trbl");
-            vp.addStyleName("kune-pointer");
-            vp.addStyleName("kune-floatleft");
-            nick.addClickListener(clickListener);
-            vp.setCellHorizontalAlignment(nick, VerticalPanel.ALIGN_CENTER);
-            avatar.addClickListener(clickListener);
-            initWidget(vp);
-        }
-
-        public void setAvatarUrl(String url) {
-            avatar.setUrl(url);
-        }
-
-        public void setNick(String nickName) {
-            nick.setText(nickName);
-        }
-    }
     private final MenuItemsContainer<UserSimpleDTO> menuItemsContainer;
     private final FlowPanel flowPanel;
     private final Label otherBuddiesLabel;
@@ -112,7 +74,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
     }
 
     public void addBuddie(final UserSimpleDTO user, ActionItemCollection<UserSimpleDTO> actionCollection,
-            String avatarUrl) {
+            String avatarUrl, String tooltipTitle, String tooltip) {
         ClickListener listener = new ClickListener() {
             public void onClick(Widget sender) {
                 Menu menu = menuItemsContainer.get(user.getShortName());
@@ -128,7 +90,10 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
                     }
                 });
 
-        flowPanel.add(new BuddieWidget(user.getShortName(), avatarUrl, listener));
+        BasicThumb thumb = new BasicThumb(avatarUrl.equals(NOAVATAR) ? "images/persons/person2-32.png" : avatarUrl,
+                AVATARSIZE, user.getShortName(), AVATARLABELMAXSIZE, false, listener);
+        thumb.setTooltip(tooltipTitle, tooltip);
+        flowPanel.add(thumb);
     }
 
     @Override

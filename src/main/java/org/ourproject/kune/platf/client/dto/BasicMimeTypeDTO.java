@@ -52,6 +52,10 @@ public class BasicMimeTypeDTO implements IsSerializable {
         return type;
     }
 
+    public boolean isImage() {
+        return getType().equals("image");
+    }
+
     public void setSubtype(final String subtype) {
         this.subtype = subtype;
     }
@@ -60,6 +64,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
         this.type = type;
     }
 
+    @Override
     public String toString() {
         return subtype == null ? type : type + "/" + subtype;
     }

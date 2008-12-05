@@ -43,6 +43,10 @@ public class InitData {
     private String siteLogoUrl;
     private String galleryPermittedExtensions;
     private String maxFileSizeInMb;
+    private int imgResizewidth;
+    private int imgThumbsize;
+    private int imgCropsize;
+    private int imgIconsize;
     private ArrayList<ToolSimple> userTools;
     private ArrayList<ToolSimple> groupTools;
 
@@ -72,6 +76,22 @@ public class InitData {
 
     public ArrayList<ToolSimple> getGroupTools() {
         return groupTools;
+    }
+
+    public int getImgCropsize() {
+        return imgCropsize;
+    }
+
+    public int getImgIconsize() {
+        return imgIconsize;
+    }
+
+    public int getImgResizewidth() {
+        return imgResizewidth;
+    }
+
+    public int getImgThumbsize() {
+        return imgThumbsize;
     }
 
     public List<I18nLanguage> getLanguages() {
@@ -136,6 +156,22 @@ public class InitData {
 
     public void setGroupTools(ArrayList<ToolSimple> groupTools) {
         this.groupTools = groupTools;
+    }
+
+    public void setImgCropsize(int imgCropsize) {
+        this.imgCropsize = imgCropsize;
+    }
+
+    public void setImgIconsize(int imgIconsize) {
+        this.imgIconsize = imgIconsize;
+    }
+
+    public void setImgResizewidth(int imgResizewidth) {
+        this.imgResizewidth = imgResizewidth;
+    }
+
+    public void setImgThumbsize(int imgThumbsize) {
+        this.imgThumbsize = imgThumbsize;
     }
 
     public void setLanguages(final List<I18nLanguage> languages) {

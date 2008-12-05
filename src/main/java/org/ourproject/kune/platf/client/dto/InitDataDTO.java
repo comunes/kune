@@ -38,6 +38,10 @@ public class InitDataDTO implements IsSerializable {
     private String siteLogoUrl;
     private String galleryPermittedExtensions;
     private String maxFileSizeInMb;
+    private int imgResizewidth;
+    private int imgThumbsize;
+    private int imgCropsize;
+    private int imgIconsize;
     private ArrayList<ToolSimpleDTO> userTools;
     private ArrayList<ToolSimpleDTO> groupTools;
 
@@ -67,6 +71,22 @@ public class InitDataDTO implements IsSerializable {
 
     public ArrayList<ToolSimpleDTO> getGroupTools() {
         return groupTools;
+    }
+
+    public int getImgCropsize() {
+        return imgCropsize;
+    }
+
+    public int getImgIconsize() {
+        return imgIconsize;
+    }
+
+    public int getImgResizewidth() {
+        return imgResizewidth;
+    }
+
+    public int getImgThumbsize() {
+        return imgThumbsize;
     }
 
     public ArrayList<I18nLanguageSimpleDTO> getLanguages() {
@@ -135,6 +155,22 @@ public class InitDataDTO implements IsSerializable {
 
     public void setGroupTools(ArrayList<ToolSimpleDTO> groupTools) {
         this.groupTools = groupTools;
+    }
+
+    public void setImgCropsize(int imgCropsize) {
+        this.imgCropsize = imgCropsize;
+    }
+
+    public void setImgIconsize(int imgIconsize) {
+        this.imgIconsize = imgIconsize;
+    }
+
+    public void setImgResizewidth(int imgResizewidth) {
+        this.imgResizewidth = imgResizewidth;
+    }
+
+    public void setImgThumbsize(int imgThumbsize) {
+        this.imgThumbsize = imgThumbsize;
     }
 
     public void setLanguages(final ArrayList<I18nLanguageSimpleDTO> languages) {

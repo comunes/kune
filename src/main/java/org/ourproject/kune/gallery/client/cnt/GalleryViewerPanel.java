@@ -24,6 +24,7 @@ import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 public class GalleryViewerPanel extends FoldableContentPanel implements GalleryViewerView {
+
     public GalleryViewerPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
         super(ws, i18n);
     }

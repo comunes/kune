@@ -778,15 +778,16 @@
   margin-left: 6px;
 }
 
-.k-bsp-buddie {
+.k-basic-thumb {
     background: #FAFAFA none repeat scroll 0% 50%;
     border: 1px solid #EBEBEB;
     padding: 3px;
     margin: 3px;
 }
 
-.k-bsp-buddie td {
+.k-basic-thumb td {
   padding: 2px 3px 2px 3px;
+  border: none;
 }
 
 .k-text-gray {

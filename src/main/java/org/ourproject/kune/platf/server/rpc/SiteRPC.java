@@ -96,6 +96,10 @@ public class SiteRPC implements RPC, SiteService {
         data.setMaxFileSizeInMb(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE));
         data.setUserTools(serverToolRegistry.getToolsForUsers());
         data.setGroupTools(serverToolRegistry.getToolsForGroups());
+        data.setImgResizewidth(new Integer(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH)));
+        data.setImgThumbsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE)));
+        data.setImgCropsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE)));
+        data.setImgIconsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE)));
         return mapper.map(data, InitDataDTO.class);
     }
 

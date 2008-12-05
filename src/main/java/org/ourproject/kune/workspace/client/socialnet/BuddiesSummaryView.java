@@ -26,8 +26,10 @@ public interface BuddiesSummaryView extends View {
 
     String NOAVATAR = "";
     int AVATARSIZE = 32;
+    int AVATARLABELMAXSIZE = 15;
 
-    void addBuddie(UserSimpleDTO user, ActionItemCollection<UserSimpleDTO> actionCollection, String avatarUrl);
+    void addBuddie(UserSimpleDTO user, ActionItemCollection<UserSimpleDTO> actionCollection, String avatarUrl,
+            String tooltipTitle, String tooltip);
 
     void clear();
 

@@ -19,15 +19,54 @@
  */
 package org.ourproject.kune.gallery.client.cnt;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.BasicThumb;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class GalleryFolderContentPanel extends FoldableContentPanel implements GalleryFolderContentView {
 
-    public GalleryFolderContentPanel(WorkspaceSkeleton ws, I18nTranslationService i18n) {
+    private static final int TEXT_MAX_LENGHT = 15;
+    private FlowPanel flowPanel;
+    private final StateManager stateManager;
+
+    public GalleryFolderContentPanel(WorkspaceSkeleton ws, I18nTranslationService i18n, StateManager stateManager) {
         super(ws, i18n);
-        super.setLabel("Folder properties, translations ..." + Site.IN_DEVELOPMENT);
+        this.stateManager = stateManager;
+    }
+
+    public void addThumb(final StateToken token, final String title, final String imgUrl) {
+        DeferredCommand.addCommand(new Command() {
+            public void execute() {
+                BasicThumb thumb = new BasicThumb(imgUrl, 85, title, TEXT_MAX_LENGHT, true, new ClickListener() {
+                    public void onClick(Widget sender) {
+                        stateManager.gotoToken(token);
+                    }
+                });
+                thumb.setHeight("100");
+                thumb.setWidth("100");
+                if (title.length() > TEXT_MAX_LENGHT) {
+                    thumb.setTooltip(title);
+                }
+                flowPanel.add(thumb);
+            }
+        });
+    }
+
+    public void setThumbPanel() {
+        if (flowPanel == null) {
+            flowPanel = new FlowPanel();
+        } else {
+            flowPanel.clear();
+        }
+        super.setContent(flowPanel);
     }
 }

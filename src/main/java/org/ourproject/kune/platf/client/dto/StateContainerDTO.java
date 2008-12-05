@@ -72,6 +72,10 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         return typeId;
     }
 
+    public boolean isType(String type) {
+        return getTypeId().equals(type);
+    }
+
     public void setAccessLists(AccessListsDTO accessLists) {
         this.accessLists = accessLists;
     }

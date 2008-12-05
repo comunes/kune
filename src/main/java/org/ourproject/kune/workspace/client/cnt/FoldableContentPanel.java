@@ -21,8 +21,12 @@ public abstract class FoldableContentPanel extends AbstractContentPanel {
 
     public void setContent(final String content) {
         final HTML html = new HTML(content);
-        setDefStyle(html);
-        setWidget(html);
+        setContent(html);
+    }
+
+    public void setContent(final Widget widget) {
+        setDefStyle(widget);
+        setWidget(widget);
         attach();
     }
 

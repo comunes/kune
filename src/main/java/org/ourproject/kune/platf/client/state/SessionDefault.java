@@ -46,7 +46,7 @@ import com.calclab.suco.client.listener.Listener0;
 
 public class SessionDefault implements Session {
     private String userHash;
-    private InitDataDTO initData;
+    InitDataDTO initData;
     private UserInfoDTO currentUserInfo;
     private Object[][] languagesArray;
     private Object[][] countriesArray;
@@ -117,6 +117,22 @@ public class SessionDefault implements Session {
 
     public Collection<ToolSimpleDTO> getGroupTools() {
         return initData.getGroupTools();
+    }
+
+    public int getImgCropsize() {
+        return initData.getImgCropsize();
+    }
+
+    public int getImgIconsize() {
+        return initData.getImgIconsize();
+    }
+
+    public int getImgResizewidth() {
+        return initData.getImgResizewidth();
+    }
+
+    public int getImgThumbsize() {
+        return initData.getImgThumbsize();
     }
 
     public List<I18nLanguageSimpleDTO> getLanguages() {

@@ -23,22 +23,30 @@ import org.ourproject.kune.gallery.client.GalleryClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
+
+import com.calclab.suco.client.ioc.Provider;
 
 public class GalleryFolderContentPresenter extends FoldableContentPresenter implements GalleryFolderContent {
 
     private GalleryFolderContentView view;
     private final I18nTranslationService i18n;
+    private final Provider<FileDownloadUtils> downloadUtils;
 
     public GalleryFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
-            final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n) {
+            final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n,
+            Provider<FileDownloadUtils> downloadUtils) {
         super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry);
         this.i18n = i18n;
+        this.downloadUtils = downloadUtils;
     }
 
     public void init(final GalleryFolderContentView view) {
@@ -54,6 +62,15 @@ public class GalleryFolderContentPresenter extends FoldableContentPresenter impl
                 view.setInfo(i18n.t("This gallery has no content"));
             } else {
                 view.setInfo("");
+            }
+        } else if (state.isType(GalleryClientTool.TYPE_ALBUM) && (state.getContainer().getContents().size() > 0)) {
+            view.setThumbPanel();
+            for (ContentSimpleDTO content : state.getContainer().getContents()) {
+                if (content.getMimeType().isImage()) {
+                    StateToken token = content.getStateToken();
+                    String imgUrl = downloadUtils.get().getImageResizedUrl(token, ImageSize.thumb);
+                    view.addThumb(token, content.getTitle(), imgUrl);
+                }
             }
         } else {
             view.setInfo("");

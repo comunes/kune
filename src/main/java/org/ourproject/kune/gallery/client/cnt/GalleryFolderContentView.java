@@ -19,7 +19,12 @@
  */
 package org.ourproject.kune.gallery.client.cnt;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
 public interface GalleryFolderContentView extends AbstractContentView {
+
+    void addThumb(StateToken token, String title, String imgUrl);
+
+    void setThumbPanel();
 }

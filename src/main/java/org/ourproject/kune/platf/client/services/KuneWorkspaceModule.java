@@ -373,7 +373,8 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final BuddiesSummaryPresenter presenter = new BuddiesSummaryPresenter($(StateManager.class),
                         $(Session.class), $$(UserServiceAsync.class), $(UserActionRegistry.class),
                         $(I18nTranslationService.class), $$(ChatEngine.class), $(ActionBuddiesSummaryToolbar.class),
-                        $$(FileDownloadUtils.class));
+                        $$(FileDownloadUtils.class), $(ImageUtils.class), $$(SocialNetworkServiceAsync.class),
+                        $(GroupActionRegistry.class));
                 final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class), $(ActionManager.class),
                         $(ActionBuddiesSummaryToolbar.class).getView());

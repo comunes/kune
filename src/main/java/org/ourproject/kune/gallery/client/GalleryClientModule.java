@@ -108,9 +108,9 @@ public class GalleryClientModule extends AbstractModule {
             public GalleryFolderContent create() {
                 final GalleryFolderContentPresenter presenter = new GalleryFolderContentPresenter(
                         $(StateManager.class), $(Session.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $(I18nTranslationService.class));
+                        $(ContentActionRegistry.class), $(I18nTranslationService.class), $$(FileDownloadUtils.class));
                 final GalleryFolderContentView view = new GalleryFolderContentPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                        $(I18nTranslationService.class), $(StateManager.class));
                 presenter.init(view);
                 return presenter;
             }

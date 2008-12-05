@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
@@ -37,7 +38,9 @@ import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
 import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -47,7 +50,7 @@ import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 
-public class BuddiesSummaryPresenter implements BuddiesSummary {
+public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements BuddiesSummary {
 
     private BuddiesSummaryView view;
     private final StateManager stateManager;
@@ -62,7 +65,10 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
     public BuddiesSummaryPresenter(StateManager stateManager, final Session session,
             Provider<UserServiceAsync> userServiceAsync, UserActionRegistry actionRegistry,
             I18nTranslationService i18n, final Provider<ChatEngine> chatEngineProvider,
-            final ActionBuddiesSummaryToolbar toolbar, Provider<FileDownloadUtils> fileDownUtilsProvider) {
+            final ActionBuddiesSummaryToolbar toolbar, Provider<FileDownloadUtils> fileDownUtilsProvider,
+            ImageUtils imageUtils, Provider<SocialNetworkServiceAsync> snServiceAsync,
+            GroupActionRegistry groupActionRegistry) {
+        super(i18n, stateManager, imageUtils, session, snServiceAsync, groupActionRegistry, fileDownUtilsProvider);
         this.stateManager = stateManager;
         this.session = session;
         this.userServiceAsync = userServiceAsync;
@@ -101,8 +107,10 @@ public class BuddiesSummaryPresenter implements BuddiesSummary {
                 for (UserSimpleDTO user : buddies) {
                     String avatarUrl = user.hasLogo() ? fileDownUtilsProvider.get().getLogoImageUrl(
                             user.getStateToken()) : BuddiesSummaryView.NOAVATAR;
+                    String tooltip = super.createTooltipWithLogo(user.getShortName(), user.getStateToken(),
+                            user.hasLogo(), true);
                     view.addBuddie(user, actionRegistry.getCurrentActions(user, session.isLogged(),
-                            new AccessRightsDTO(true, true, true), false), avatarUrl);
+                            new AccessRightsDTO(true, true, true), false), avatarUrl, user.getName(), tooltip);
                 }
                 boolean hasLocalBuddies = buddies.size() > 0;
                 int numExtBuddies = userBuddies.getOtherExternalBuddies();
