@@ -180,7 +180,7 @@ public class ContextPropEditorPanel extends ScrollPanel implements ContextPropEd
         if (langComponent == null) {
             final LanguageSelectorPanel view = (LanguageSelectorPanel) langSelectorProv.get().getView();
             view.setWidth(FORMS_WIDTH);
-            langComponent = new ContextPropertyPanel(i18n.t("What language is this in?"), null, true, LANG_PROP, view);
+            langComponent = new ContextPropertyPanel(i18n.t("In which language is this written?"), null, true, LANG_PROP, view);
             view.addChangeListener(new ComboBoxListenerAdapter() {
                 @Override
                 public void onSelect(final ComboBox comboBox, final Record record, final int index) {

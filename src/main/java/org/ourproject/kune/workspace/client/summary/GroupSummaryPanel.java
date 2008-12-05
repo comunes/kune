@@ -35,7 +35,7 @@ public class GroupSummaryPanel extends DropDownPanel implements GroupSummaryView
     public GroupSummaryPanel(Images img, final GroupSummaryPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws) {
         super(img, i18n.t("Group Summary"), true);
-        setHeaderTitle(i18n.t("Some summarized information about current project" + Site.IN_DEVELOPMENT));
+        setHeaderTitle(i18n.t("Summarized information about current project" + Site.IN_DEVELOPMENT));
         vp = new VerticalPanel();
         vp.setWidth("100%");
         super.setContent(vp);

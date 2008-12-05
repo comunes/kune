@@ -113,7 +113,7 @@ public abstract class AbstractFoldableContentActions {
                 AccessRolDTO.Administrator, i18n.t("Submitted for publish"), parentMenuTitle,
                 ContentStatusDTO.publishedOnline);
         final ActionToolbarMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("In the dustbin"), parentMenuTitle, ContentStatusDTO.inTheDustbin);
+                AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), parentMenuTitle, ContentStatusDTO.inTheDustbin);
         contentActionRegistry.addAction(setPublishStatus, contentsModerated);
         contentActionRegistry.addAction(setEditionInProgressStatus, contentsModerated);
         contentActionRegistry.addAction(setRejectStatus, contentsModerated);
@@ -144,7 +144,7 @@ public abstract class AbstractFoldableContentActions {
         delContainer.setTextDescription(i18n.t(text));
         delContainer.setMustBeConfirmed(true);
         delContainer.setConfirmationTitle(i18n.t("Please confirm"));
-        delContainer.setConfirmationText(i18n.t("You will delete it and also all its contents. Are you sure?"));
+        delContainer.setConfirmationText(i18n.t("You will delete it with all its contents. Are you sure?"));
         contextActionRegistry.addAction(delContainer, registerInTypes);
     }
 
@@ -418,7 +418,7 @@ public abstract class AbstractFoldableContentActions {
                                 });
                     }
                 });
-        setAsDefGroupContent.setTextDescription(i18n.t("Set this as the group default page"));
+        setAsDefGroupContent.setTextDescription(i18n.t("Set this as the default group page"));
         setAsDefGroupContent.setIconUrl("images/group-home.png");
         setAsDefGroupContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
             public boolean mustBeEnabled(final StateToken itemToken) {
@@ -496,7 +496,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected ActionToolbarButtonAndItemDescriptor<StateToken> createUploadMediaAction(String... registerInTypes) {
         ActionToolbarButtonAndItemDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
-                "images/nav/upload.png", i18n.t("Upload some media (images, videos)"),
+                "images/nav/upload.png", i18n.t("Upload some media (images, videos...)"),
                 session.getGalleryPermittedExtensions());
         contextActionRegistry.addAction(uploadMedia, registerInTypes);
         return uploadMedia;

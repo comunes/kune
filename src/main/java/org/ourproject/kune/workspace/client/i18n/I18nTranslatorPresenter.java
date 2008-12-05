@@ -55,7 +55,7 @@ public class I18nTranslatorPresenter implements I18nTranslator {
         if (session.isLogged()) {
             view.show();
         } else {
-            Site.info(i18n.t("Sign in or register to help with translation"));
+            Site.info(i18n.t("Sign in or register to help with the translation"));
         }
         Site.hideProgress();
     }
@@ -65,7 +65,7 @@ public class I18nTranslatorPresenter implements I18nTranslator {
         i18nService.setTranslation(session.getUserHash(), id, translation, new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
                 Site.hideProgress();
-                Site.error(i18n.t("Server error saving translation"));
+                Site.error(i18n.t("Server error saving the translation"));
             }
 
             public void onSuccess(final String result) {

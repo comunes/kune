@@ -86,7 +86,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
         noAccRegisterPanel.setBorder(false);
         noAccRegisterPanel.setMargins(0, 20, 0, 0);
         HorizontalPanel hp = new HorizontalPanel();
-        final Label dontHaveAccountLabel = new Label(i18n.t("Don't have an account?"));
+        final Label dontHaveAccountLabel = new Label(i18n.t("Don't you have an account?"));
         final Label registerLabel = new Label(i18n.t("Create one."));
         registerLabel.ensureDebugId(CREATE_ONE);
         registerLabel.addClickListener(new ClickListener() {

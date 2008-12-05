@@ -224,7 +224,7 @@ public class RegisterForm extends DefaultForm {
         createRadio(personalSpaceFieldSet, wantPersonalHomePage,
                 i18n.t("Yes, I want a homepage for publish my contents."), WANNAPERSONALHOMEPAGE_ID);
         wantPersonalHomePage.setChecked(true);
-        createRadio(personalSpaceFieldSet, noPersonalHomePage, i18n.t("No, I don't want. Maybe in the future."),
+        createRadio(personalSpaceFieldSet, noPersonalHomePage, i18n.t("No, I do not want. Maybe in the future i will."),
                 NOPERSONALHOMEPAGE_ID);
         add(personalSpaceFieldSet);
     }
