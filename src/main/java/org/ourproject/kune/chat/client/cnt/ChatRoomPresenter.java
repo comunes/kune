@@ -59,7 +59,7 @@ public class ChatRoomPresenter extends FoldableContentPresenter implements ChatR
                 view.setInfo(i18n.t("Select a chat room"));
             }
         } else {
-            view.setInfo("History of room conversations ..." + Site.IN_DEVELOPMENT);
+            view.setInfo("History of room conversations..." + Site.IN_DEVELOPMENT);
         }
         super.setState(state);
     }

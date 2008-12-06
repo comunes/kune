@@ -60,7 +60,7 @@ public class KuneErrorHandler {
     public void doSessionExpired() {
         onSessionExpired.fire();
         getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
-                i18n.t("Your session has expired. Please login again."));
+                i18n.t("Your session has expired. Please log in again."));
     }
 
     public WorkspaceSkeleton getWorkspaceSkeleton() {
@@ -77,7 +77,7 @@ public class KuneErrorHandler {
             throw caught;
         } catch (final AccessViolationException e) {
             logException(e);
-            Site.error(i18n.t("You don't have rights to do that"));
+            Site.error(i18n.t("You do not have rights to perform that action"));
         } catch (final SessionExpiredException e) {
             logException(e);
             doSessionExpired();
@@ -111,13 +111,13 @@ public class KuneErrorHandler {
             getWorkspaceSkeleton().showAlertMessage(
                     i18n.t("Warning"),
                     i18n.t("Sorry, you are the last admin of this group."
-                            + " Look for someone to substitute you appropriately as admin before unjoin this group."));
+                            + " Look for someone to substitute you appropriately as admin before leaving this group."));
         } catch (final AlreadyGroupMemberException e) {
             logException(e);
             Site.error(i18n.t("This group is already a group member"));
         } catch (final AlreadyUserMemberException e) {
             logException(e);
-            Site.error(i18n.t("This user is already a member of this group"));
+            Site.error(i18n.t("This user is already a group member"));
         } catch (final Throwable e) {
             logException(e, true);
             Site.error(i18n.t("Error performing operation"));

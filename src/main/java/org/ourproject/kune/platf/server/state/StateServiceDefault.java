@@ -114,7 +114,7 @@ public class StateServiceDefault implements StateService {
         state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
         setSocialNetwork(state, userLogged, group);
         state.setStateToken(group.getStateToken());
-        state.setTitle("<h2>" + i18n.t("This user doesn't have a homepage") + "</h2>");
+        state.setTitle("<h2>" + i18n.t("This user does not have a homepage") + "</h2>");
         return state;
     }
 

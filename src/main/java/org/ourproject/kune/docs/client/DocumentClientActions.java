@@ -90,7 +90,7 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         createSetAsDefContent(parentMenuTitle, contents);
 
         createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
-                i18n.t("Upload some files (images, PDFs, ...)"), null, containers);
+                i18n.t("Upload files (images, PDFs...)"), null, containers);
 
         createDownloadActions(TYPE_UPLOADEDFILE);
 

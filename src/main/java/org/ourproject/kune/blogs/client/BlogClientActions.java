@@ -87,7 +87,7 @@ public class BlogClientActions extends AbstractFoldableContentActions {
         createRefreshCxtAction(parentMenuTitleCtx, containers);
 
         createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
-                i18n.t("Upload some files (images, PDFs, ...)"), null, containersNoRoot);
+                i18n.t("Upload files (images, PDFs...)"), null, containersNoRoot);
 
         createSetAsDefContent(parentMenuTitle, contents);
 

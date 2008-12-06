@@ -62,6 +62,6 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
 
     @Override
     protected void onSuccess(HttpServletResponse response) throws IOException {
-        doResponse(response, createJsonResponse(true, i18n.t("Success uploading")).toString());
+        doResponse(response, createJsonResponse(true, i18n.t("Uploading was successful")).toString());
     }
 }

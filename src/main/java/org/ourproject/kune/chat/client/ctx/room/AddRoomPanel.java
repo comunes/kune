@@ -82,7 +82,7 @@ public class AddRoomPanel implements AddRoomView {
         roomName.setAllowBlank(false);
         roomName.setValidationEvent(false);
         roomName.setRegex(TextUtils.UNIX_NAME);
-        roomName.setRegexText(i18n.t("Can only contain characters, numbers, and dashes"));
+        roomName.setRegexText(i18n.t("The name must contain only characters, numbers and dashes"));
         roomName.setId(ROOM_NAME_ID);
         formPanel.add(roomName);
 

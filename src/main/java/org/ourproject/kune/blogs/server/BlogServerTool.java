@@ -100,7 +100,7 @@ public class BlogServerTool implements ServerTool {
         content.setStatus(ContentStatus.publishedOnline);
 
         contentManager.save(user, content,
-                i18n.t("This is only a post sample. You can edit it, and rename this post and this blog"));
+                i18n.t("This is only a post sample. You can edit it, rename the post and this blog"));
         return group;
     }
 

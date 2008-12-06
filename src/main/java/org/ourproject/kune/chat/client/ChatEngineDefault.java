@@ -69,8 +69,8 @@ class ChatEngineDefault implements ChatEngine {
                 final String httpDomain = WindowUtils.getLocation().getHostName();
                 if (!chatDomain.equals(httpDomain)) {
                     Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
-                            + "). This will produce problems with the chat functionality. "
-                            + "Check kune.properties on the server.");
+                            + "). This will cause problems with the chat functionality. "
+                            + "Please check kune.properties on the server.");
                 }
             }
         });
@@ -113,7 +113,7 @@ class ChatEngineDefault implements ChatEngine {
                     + chatOptions.userOptions.getUserJid().getNode());
             emiteUIProvider.get().joinRoom(roomURI);
         } else {
-            ws.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'."));
+            ws.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"));
         }
     }
 

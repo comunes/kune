@@ -53,7 +53,7 @@ public class BlogFolderContentPresenter extends FoldableContentPresenter impleme
     protected void setState(StateContainerDTO state) {
         if (state.getTypeId().equals(BlogClientTool.TYPE_ROOT)) {
             if (state.getRootContainer().getChilds().size() == 0) {
-                view.setInfo(i18n.t("This group has no blogs."));
+                view.setInfo(i18n.t("This group has no blogs"));
             } else {
                 view.setInfo("");
             }

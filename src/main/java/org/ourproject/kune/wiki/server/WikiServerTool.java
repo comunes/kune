@@ -98,7 +98,7 @@ public class WikiServerTool implements ServerTool {
         descriptor.setTypeId(TYPE_WIKIPAGE);
         descriptor.setStatus(ContentStatus.publishedOnline);
         contentManager.save(user, descriptor,
-                i18n.t("This is only a wiki page sample. You can edit or rename it but also any other user."));
+                i18n.t("This is only a wiki page sample. You can edit or rename it, as any other user."));
         return group;
     }
 

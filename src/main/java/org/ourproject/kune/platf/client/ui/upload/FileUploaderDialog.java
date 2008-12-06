@@ -58,7 +58,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
     public void destroy() {
         if (hasUploadingFiles()) {
             dialog.stopUpload();
-            Site.important(i18n.t("Upload canceled after sign out"));
+            Site.important(i18n.t("Upload cancelled after signing out"));
         }
         if (dialog != null) {
             dialog.destroy();
@@ -135,7 +135,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
             public boolean onBeforeAdd(final UploadDialog source, final String filename) {
                 boolean mustAdd = presenter.checkFolderChange();
                 if (!mustAdd) {
-                    Site.important(i18n.t("Wait until current uploads finish to upload files in other location"));
+                    Site.important(i18n.t("Please, wait until current uploads are finished to upload new files into another location"));
                 }
                 return mustAdd;
             }

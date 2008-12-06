@@ -45,8 +45,8 @@ public class AbstractSearcherPanel {
         final PagingToolbar pag = new PagingToolbar(store);
         pag.setPageSize(PAGINATION_SIZE);
         pag.setDisplayInfo(true);
-        pag.setDisplayMsg(i18n.tWithNT("Displaying results {0} - {1} of {2}", "Respect {} values in translations, "
-                + "this will produce: 'Displaying results 1 - 25 of 95465' for instance"));
+        pag.setDisplayMsg(i18n.tWithNT("Displaying results {0} - {1} of {2}", "Respect {} values in translations. "
+                + "This will produce: 'Displaying results 1 - 25 of 95465' for instance"));
         pag.setEmptyMsg(i18n.t("No results to display"));
         pag.setAfterPageText(i18n.tWithNT("of {0}", "Used to show multiple results: '1 of 30'"));
         pag.setBeforePageText(i18n.t("Page"));
