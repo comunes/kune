@@ -26,13 +26,14 @@ import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO;
 import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
@@ -51,6 +52,8 @@ import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 
 public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements BuddiesSummary {
+
+    public static final String BUDDIES_VISIBILITY_GROUP = "k-bsp-bud-visib";
 
     private BuddiesSummaryView view;
     private final StateManager stateManager;
@@ -145,7 +148,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
     }
 
     private void createSetBuddiesVisibilityAction(String textDescription, final UserBuddiesVisibilityDTO visibility) {
-        ActionToolbarMenuDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
+        ActionToolbarMenuRadioDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuRadioDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
                     public void onEvent(UserSimpleDTO parameter) {
                         userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
@@ -155,6 +158,15 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                                         Site.info(i18n.t("Buddies visibility changed"));
                                     }
                                 });
+                    }
+                }, BUDDIES_VISIBILITY_GROUP, new RadioMustBeChecked() {
+                    public boolean mustBeChecked() {
+                        StateAbstractDTO currentState = session.getCurrentState();
+                        if (currentState.getGroup().isPersonal()) {
+                            SocialNetworkDataDTO socialNetworkData = currentState.getSocialNetworkData();
+                            return socialNetworkData.getUserBuddiesVisibility().equals(visibility);
+                        }
+                        return false;
                     }
                 });
         buddiesVisibilityAction.setTextDescription(textDescription);

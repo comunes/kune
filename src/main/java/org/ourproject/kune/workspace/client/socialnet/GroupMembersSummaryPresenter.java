@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
@@ -58,6 +59,8 @@ import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener2;
 
 public class GroupMembersSummaryPresenter extends SocialNetworkPresenter implements GroupMembersSummary {
+
+    public static final String MEMBERS_VISIBILITY_GROUP = "k-gmsp-memb-visib";
 
     private GroupMembersSummaryView view;
     private final I18nUITranslationService i18n;
@@ -176,7 +179,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     }
 
     private void createSetMembersVisibilityAction(String textDescription, final SocialNetworkVisibilityDTO visibility) {
-        ActionToolbarMenuDescriptor<StateToken> showMembers = new ActionToolbarMenuDescriptor<StateToken>(
+        ActionToolbarMenuRadioDescriptor<StateToken> showMembers = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         groupServiceProvider.get().setSocialNetworkVisibility(session.getUserHash(),
@@ -186,6 +189,15 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                                         Site.info(i18n.t("Members visibility changed"));
                                     }
                                 });
+                    }
+                }, MEMBERS_VISIBILITY_GROUP, new RadioMustBeChecked() {
+                    public boolean mustBeChecked() {
+                        StateAbstractDTO currentState = session.getCurrentState();
+                        if (!currentState.getGroup().isPersonal()) {
+                            SocialNetworkDataDTO socialNetworkData = currentState.getSocialNetworkData();
+                            return socialNetworkData.getSocialNetworkVisibility().equals(visibility);
+                        }
+                        return false;
                     }
                 });
         showMembers.setTextDescription(textDescription);

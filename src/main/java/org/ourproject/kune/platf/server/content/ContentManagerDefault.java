@@ -31,6 +31,7 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
+import org.ourproject.kune.platf.client.errors.NameInUseException;
 import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.server.access.FinderService;
@@ -44,8 +45,10 @@ import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.Tag;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.TagManager;
+import org.ourproject.kune.platf.server.manager.file.FileUtils;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+import org.ourproject.kune.platf.server.utils.FilenameUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -58,11 +61,16 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     private final User userFinder;
     private final I18nLanguage languageFinder;
     private final TagManager tagManager;
+    private final Content contentFinder;
+    private final Container containerFinder;
 
     @Inject
-    public ContentManagerDefault(final Provider<EntityManager> provider, final FinderService finder,
-            final User userFinder, final I18nLanguage languageFinder, final TagManager tagManager) {
+    public ContentManagerDefault(final Content contentFinder, final Container containerFinder,
+            final Provider<EntityManager> provider, final FinderService finder, final User userFinder,
+            final I18nLanguage languageFinder, final TagManager tagManager) {
         super(provider, Content.class);
+        this.contentFinder = contentFinder;
+        this.containerFinder = containerFinder;
         this.finder = finder;
         this.userFinder = userFinder;
         this.languageFinder = languageFinder;
@@ -80,6 +88,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
     public Content createContent(final String title, final String body, final User author, final Container container,
             String typeId) {
+        FilenameUtils.checkBasicFilename(title);
+        String newtitle = findInexistentTitle(container, title);
         final Content newContent = new Content();
         newContent.addAuthor(author);
         newContent.setLanguage(author.getLanguage());
@@ -87,7 +97,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         container.addContent(newContent);
         newContent.setContainer(container);
         final Revision revision = new Revision(newContent);
-        revision.setTitle(title);
+        revision.setTitle(newtitle);
         revision.setBody(body);
         newContent.addRevision(revision);
         return persist(newContent);
@@ -142,8 +152,13 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public String renameContent(final User user, final Long contentId, final String newTitle) throws DefaultException {
+        String newTitleWithoutNL = FilenameUtils.chomp(newTitle);
+        FilenameUtils.checkBasicFilename(newTitleWithoutNL);
         final Content content = finder.getContent(contentId);
-        content.getLastRevision().setTitle(newTitle);
+        if (findIfExistsTitle(content.getContainer(), newTitleWithoutNL)) {
+            throw new NameInUseException();
+        }
+        content.getLastRevision().setTitle(newTitleWithoutNL);
         return newTitle;
     }
 
@@ -218,5 +233,18 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             }
         }
         content.setTags(tagList);
+    }
+
+    private boolean findIfExistsTitle(Container container, String title) {
+        return (contentFinder.findIfExistsTitle(container, title) > 0)
+                || (containerFinder.findIfExistsTitle(container, title) > 0);
+    }
+
+    private String findInexistentTitle(Container container, String title) {
+        String initialTitle = new String(title);
+        while (findIfExistsTitle(container, initialTitle)) {
+            initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
+        }
+        return initialTitle;
     }
 }

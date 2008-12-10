@@ -121,7 +121,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
-import org.ourproject.kune.workspace.client.title.EntityTitle;
+import org.ourproject.kune.workspace.client.title.RenameAction;
 
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
@@ -486,10 +486,9 @@ public class KuneModule extends AbstractModule {
             @Override
             public ContextNavigator create() {
                 final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
-                        $(Session.class), $$(ContentServiceAsync.class), i18n, $(EntityTitle.class),
-                        $(ContentIconsRegistry.class), $(ContentCapabilitiesRegistry.class),
-                        $(ActionContextToolbar.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        true);
+                        $(Session.class), $$(ContentServiceAsync.class), i18n, $(ContentIconsRegistry.class),
+                        $(ContentCapabilitiesRegistry.class), $(ActionContextToolbar.class),
+                        $(ContextActionRegistry.class), $$(FileDownloadUtils.class), true, $(RenameAction.class));
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
                         $(WorkspaceSkeleton.class), $(ActionManager.class));
                 presenter.init(panel);

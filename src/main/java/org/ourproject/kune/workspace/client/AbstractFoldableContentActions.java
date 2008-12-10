@@ -7,6 +7,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
@@ -36,6 +37,7 @@ import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.socialnet.RadioMustBeChecked;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
@@ -101,18 +103,18 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected void createContentModeratedActions(String parentMenuTitle, final String... contentsModerated) {
-        final ActionToolbarMenuDescriptor<StateToken> setPublishStatus = createSetStatusAction(
+        final ActionToolbarMenuRadioDescriptor<StateToken> setPublishStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("Published online"), parentMenuTitle,
                 ContentStatusDTO.publishedOnline);
-        final ActionToolbarMenuDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
+        final ActionToolbarMenuRadioDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("Editing in progress"), parentMenuTitle,
                 ContentStatusDTO.editingInProgress);
-        final ActionToolbarMenuDescriptor<StateToken> setRejectStatus = createSetStatusAction(
+        final ActionToolbarMenuRadioDescriptor<StateToken> setRejectStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("Rejected"), parentMenuTitle, ContentStatusDTO.rejected);
-        final ActionToolbarMenuDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
+        final ActionToolbarMenuRadioDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("Submitted for publish"), parentMenuTitle,
                 ContentStatusDTO.publishedOnline);
-        final ActionToolbarMenuDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
+        final ActionToolbarMenuRadioDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), parentMenuTitle, ContentStatusDTO.inTheDustbin);
         contentActionRegistry.addAction(setPublishStatus, contentsModerated);
         contentActionRegistry.addAction(setEditionInProgressStatus, contentsModerated);
@@ -431,9 +433,9 @@ public abstract class AbstractFoldableContentActions {
         return setAsDefGroupContent;
     }
 
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
+    protected ActionToolbarMenuRadioDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
             final String textDescription, String parentMenuTitle, final ContentStatusDTO status) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> action = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+        final ActionToolbarMenuRadioDescriptor<StateToken> action = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         final AsyncCallbackSimple<Object> callback = new AsyncCallbackSimple<Object>() {
@@ -448,6 +450,14 @@ public abstract class AbstractFoldableContentActions {
                         } else {
                             contentServiceProvider.get().setStatus(session.getUserHash(), stateToken, status, callback);
                         }
+                    }
+                }, "ContentRadioStatus", new RadioMustBeChecked() {
+                    public boolean mustBeChecked() {
+                        if (session.getContainerState() instanceof StateContentDTO) {
+                            ContentStatusDTO currentStatus = session.getContentState().getStatus();
+                            return status.equals(currentStatus);
+                        }
+                        return false;
                     }
                 });
         action.setTextDescription(textDescription);

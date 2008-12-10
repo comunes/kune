@@ -47,13 +47,12 @@ import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.site.Site;
-import org.ourproject.kune.workspace.client.title.EntityTitle;
+import org.ourproject.kune.workspace.client.title.RenameAction;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.calclab.suco.client.listener.Listener2;
 
 public class ContextNavigatorPresenter implements ContextNavigator {
 
@@ -63,7 +62,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
     private final HashMap<StateToken, ActionItemCollection<StateToken>> actionsByItem;
-    private final EntityTitle entityTitle;
     private boolean editOnNextStateChange;
     private final ContentIconsRegistry contentIconsRegistry;
     private final ActionRegistry<StateToken> actionRegistry;
@@ -71,30 +69,31 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final Provider<FileDownloadUtils> downloadUtilsProvider;
     private final boolean useGenericImageIcon;
     private final ContentCapabilitiesRegistry capabilitiesRegistry;
+    private final RenameAction renameAction;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
             final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
-            final EntityTitle entityTitle, final ContentIconsRegistry contentIconsRegistry,
-            ContentCapabilitiesRegistry capabilitiesRegistry, final ActionToolbar<StateToken> toolbar,
-            final ActionRegistry<StateToken> actionRegistry, Provider<FileDownloadUtils> downloadUtilsProvider,
-            boolean useGenericImageIcon) {
+            final ContentIconsRegistry contentIconsRegistry, ContentCapabilitiesRegistry capabilitiesRegistry,
+            final ActionToolbar<StateToken> toolbar, final ActionRegistry<StateToken> actionRegistry,
+            Provider<FileDownloadUtils> downloadUtilsProvider, boolean useGenericImageIcon, RenameAction renameAction) {
         this.stateManager = stateManager;
         this.session = session;
         this.contentServiceProvider = contentServiceProvider;
         this.i18n = i18n;
-        this.entityTitle = entityTitle;
         this.contentIconsRegistry = contentIconsRegistry;
         this.capabilitiesRegistry = capabilitiesRegistry;
         this.actionRegistry = actionRegistry;
         this.toolbar = toolbar;
         this.downloadUtilsProvider = downloadUtilsProvider;
         this.useGenericImageIcon = useGenericImageIcon;
+        this.renameAction = renameAction;
         actionsByItem = new HashMap<StateToken, ActionItemCollection<StateToken>>();
         editOnNextStateChange = false;
+        confRenameListener();
     }
 
     public void attach() {
-        // FIXME At the moment detach (removeFromParent) destroy the gwt-eext
+        // FIXME At the moment detach (removeFromParent) destroy the gwt-ext
         // TreePanel and the widget must be recreated (cannot be attached again
         // like in gwt)
         setState(session.getCurrentState(), true);
@@ -143,32 +142,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     public void onItemRename(final String token, final String newName, final String oldName) {
-        if (!newName.equals(oldName)) {
-            Site.showProgress(i18n.t("Renaming"));
-            final StateToken stateToken = new StateToken(token);
-            final AsyncCallback<String> asyncCallback = new AsyncCallback<String>() {
-                public void onFailure(final Throwable caught) {
-                    view.setFireOnTextChange(false);
-                    setItemText(stateToken, oldName);
-                    view.setFireOnTextChange(true);
-                    Site.error(i18n.t("Error renaming"));
-                    Site.hideProgress();
-                }
-
-                public void onSuccess(final String result) {
-                    Site.hideProgress();
-                    if (session.getCurrentState().getStateToken().getEncoded().equals(token)) {
-                        // I have to update EntityTitle
-                        entityTitle.setContentTitle(newName);
-                    }
-                }
-            };
-            if (stateToken.isComplete()) {
-                contentServiceProvider.get().renameContent(session.getUserHash(), stateToken, newName, asyncCallback);
-            } else {
-                contentServiceProvider.get().renameContainer(session.getUserHash(), stateToken, newName, asyncCallback);
-            }
-        }
+        renameAction.rename(new StateToken(token), oldName, newName);
     }
 
     public void refresh(final StateToken stateToken) {
@@ -190,12 +164,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         editOnNextStateChange = edit;
     }
 
-    public void setItemStatus(final StateToken stateToken, ContentStatusDTO status) {
-        view.setItemStatus(genId(stateToken), status);
+    public void setFireOnTextChange(boolean visible) {
+        view.setFireOnTextChange(visible);
     }
 
-    public void setItemText(final StateToken stateToken, final String name) {
-        view.setItemText(genId(stateToken), name);
+    public void setItemStatus(final StateToken stateToken, ContentStatusDTO status) {
+        view.setItemStatus(genId(stateToken), status);
     }
 
     public void setState(final StateContainerDTO state, final boolean select) {
@@ -288,6 +262,25 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         return toolbarActions;
     }
 
+    private void confRenameListener() {
+        Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
+            public void onEvent(StateToken token, String newName) {
+                view.setFireOnTextChange(false);
+                setItemText(token, newName);
+                view.setFireOnTextChange(true);
+            }
+        };
+        renameAction.onSuccess(onSuccess);
+        Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
+            public void onEvent(StateToken token, String oldName) {
+                view.setFireOnTextChange(false);
+                setItemText(token, oldName);
+                view.setFireOnTextChange(true);
+            }
+        };
+        renameAction.onFail(onFail);
+    }
+
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
         for (final ContentSimpleDTO content : container.getContents()) {
             addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
@@ -338,6 +331,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         } else {
             return null;
         }
+    }
+
+    private void setItemText(final StateToken stateToken, final String name) {
+        view.setItemText(genId(stateToken), name);
     }
 
     private void setState(final StateAbstractDTO state, boolean select) {

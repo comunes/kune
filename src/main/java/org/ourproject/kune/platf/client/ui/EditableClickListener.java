@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.client.ui;
 
 public interface EditableClickListener {
 
+    @Deprecated
     void onEdited(String text);
 
 }

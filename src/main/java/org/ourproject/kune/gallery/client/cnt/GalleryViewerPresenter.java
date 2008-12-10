@@ -36,7 +36,7 @@ public class GalleryViewerPresenter extends FoldableContentPresenter implements 
     public GalleryViewerPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
             ActionContentToolbar toolbar, ContentActionRegistry actionRegistry,
             Provider<FileDownloadUtils> downloadProvider) {
-        super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+        super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
     }
 
     public void init(GalleryViewerView view) {

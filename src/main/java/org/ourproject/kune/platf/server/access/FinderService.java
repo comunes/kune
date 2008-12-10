@@ -30,13 +30,13 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public interface FinderService {
 
+    Comment getComment(Long commentId) throws DefaultException;
+
     Content getContent(Long contentId) throws DefaultException;
 
     Content getContent(StateToken token, Group defaultGroup) throws DefaultException;
 
     Container getFolder(Long folderId) throws DefaultException;
-
-    Comment getComment(Long commentId) throws DefaultException;
 
     Rate getRate(User user, Content content);
 

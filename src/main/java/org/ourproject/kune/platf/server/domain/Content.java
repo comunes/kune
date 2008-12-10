@@ -54,6 +54,9 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.validator.NotNull;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
+import com.google.inject.name.Named;
+import com.wideplay.warp.persist.dao.Finder;
+
 @Entity
 @Table(name = "contents")
 @Indexed
@@ -159,6 +162,11 @@ public class Content implements HasStateToken {
             revision.setPrevious(lastRevision);
             lastRevision = revision;
         }
+    }
+
+    @Finder(query = "select count(*) from Container ctx, Content ctn where ctn.container.id = ctx.id and ctx = :container and ctn.lastRevision.title = :title")
+    public Long findIfExistsTitle(@Named("container") Container container, @Named("title") String title) {
+        return null;
     }
 
     @Transient

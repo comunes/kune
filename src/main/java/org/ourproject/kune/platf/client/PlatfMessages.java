@@ -9,7 +9,7 @@ public interface PlatfMessages {
     String NAME_IN_USE = "This name in already in use. Please try with a different name";
     String INCORRECT_NICKNAME_EMAIL_OR_PASSWORD = "The nickname/email or password is incorrect";
     String YOUR_HOMEPAGE = "Your homepage";
-    String USER_DON_T_HAVE_A_HOMEPAGE = "This user does not have a homepage";
+    String USER_DOESN_T_HAVE_A_HOMEPAGE = "This user does not have a homepage";
     String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Logo";
     String ENT_LOGO_SELECTOR_PERSON_TITLE = "Avatar";
     String ENT_OPTIONS_GROUP_TITLE = "Group options";

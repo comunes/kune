@@ -131,11 +131,11 @@ public class FinderServiceDefault implements FinderService {
 
     private Content findByContentReference(final String groupName, final String toolName, final Long folderId,
             final Long contentId) throws ContentNotFoundException {
-        final Content descriptor = contentManager.find(contentId);
-        if (descriptor == null) {
+        final Content content = contentManager.find(contentId);
+        if (content == null) {
             throw new ContentNotFoundException();
         }
-        final Container container = descriptor.getContainer();
+        final Container container = content.getContainer();
 
         if (!container.getId().equals(folderId)) {
             throw new ContentNotFoundException();
@@ -146,7 +146,7 @@ public class FinderServiceDefault implements FinderService {
         if (!container.getOwner().getShortName().equals(groupName)) {
             throw new ContentNotFoundException();
         }
-        return descriptor;
+        return content;
     }
 
     private Content findByFolderReference(final String groupName, final Long folderId) {
@@ -186,9 +186,9 @@ public class FinderServiceDefault implements FinderService {
     }
 
     private Content generateFolderFakeContent(final Container container) {
-        final Content descriptor = new Content();
-        descriptor.setContainer(container);
-        return descriptor;
+        final Content content = new Content();
+        content.setContainer(container);
+        return content;
     }
 
 }

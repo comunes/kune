@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,7 +49,13 @@ import com.google.inject.Inject;
  * http://www.onjava.com/pub/a/onjava/excerpt/jebp_3/index1.html?page=1
  * 
  */
-public class FileDownloadManager extends FileDownloadManagerAbstract {
+public class FileDownloadManager extends HttpServlet {
+
+    static final String RESP_HEADER_ATTACHMENT_FILENAME = "attachment; filename=\"";
+    static final String RESP_HEADER_CONTEND_DISP = "Content-Disposition";
+    static final String RESP_HEADER_END = "\"";
+
+    static final String APPLICATION_X_DOWNLOAD = "application/x-download";
 
     private static final long serialVersionUID = 1L;
 
@@ -56,6 +63,8 @@ public class FileDownloadManager extends FileDownloadManagerAbstract {
     ContentManager contentManager;
     @Inject
     KuneProperties kuneProperties;
+    @Inject
+    FileUtils fileUtils;
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
@@ -65,24 +74,31 @@ public class FileDownloadManager extends FileDownloadManagerAbstract {
         final StateToken stateToken = new StateToken(req.getParameter(FileParams.TOKEN));
         final String downloadS = req.getParameter(FileParams.DOWNLOAD);
         String imageSizeS = req.getParameter(FileParams.IMGSIZE);
-        final ImageSize imgsize = imageSizeS == null ? null : ImageSize.valueOf(imageSizeS);
-        final boolean download = downloadS != null && downloadS.equals("true") ? true : false;
 
         final Content cnt = getContentForDownload(userHash, stateToken);
 
+        String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
+        final OutputStream out = resp.getOutputStream();
+        FileDownloadManagerUtils.returnFile(absFilename, out);
+    }
+
+    String buildResponse(final Content cnt, final StateToken stateToken, final String downloadS, String imageSizeS,
+            final HttpServletResponse resp, FileUtils fileUtils) throws FileNotFoundException, IOException {
+        final ImageSize imgsize = imageSizeS == null ? null : ImageSize.valueOf(imageSizeS);
+        final boolean download = downloadS != null && downloadS.equals("true") ? true : false;
         final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + FileUtils.toDir(stateToken);
         String filename = cnt.getFilename();
+        String title = cnt.getTitle();
         String extension = FileUtils.getFileNameExtension(filename, true);
         BasicMimeType mimeType = cnt.getMimeType();
 
-        boolean isPdfAndNotDownload = mimeType.isPdf() && !download;
-        if (mimeType.isImage() || isPdfAndNotDownload) {
+        boolean isPdfAndNotDownload = mimeType != null && mimeType.isPdf() && !download;
+        if (mimeType != null && (mimeType.isImage() || isPdfAndNotDownload)) {
             String imgsizePrefix = imgsize == null ? "" : "." + imgsize;
             String filenameWithoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
             String filenameResized = filenameWithoutExtension + imgsizePrefix
                     + (isPdfAndNotDownload ? ".png" : extension);
-            if (new File(absDir + filenameResized).exists()) {
-                // thumb can fail
+            if (fileUtils.exist(absDir + filenameResized)) {
                 filename = filenameResized;
             }
         }
@@ -95,26 +111,18 @@ public class FileDownloadManager extends FileDownloadManagerAbstract {
 
         final String absFilename = absDir + filename;
 
-        doBuildResp(resp, absFilename, cnt.getTitle(), mimeType, extension, download);
-    }
-
-    private void doBuildResp(final HttpServletResponse resp, final String filename, final String otherName,
-            final BasicMimeType mimeType, final String extension, final boolean download) throws FileNotFoundException,
-            IOException {
-        final File file = new File(filename);
+        final File file = new File(absFilename);
 
         resp.setContentLength((int) file.length());
         if (mimeType == null || download) {
-            resp.setContentType("application/x-download");
+            resp.setContentType(APPLICATION_X_DOWNLOAD);
         } else if (mimeType.isImage()) {
             resp.setContentType(mimeType.toString());
         } else {
-            resp.setContentType("application/x-download");
+            resp.setContentType(APPLICATION_X_DOWNLOAD);
         }
-        resp.setHeader("Content-Disposition", "attachment; filename=\"" + otherName + extension + "\"");
-
-        final OutputStream out = resp.getOutputStream();
-        returnFile(filename, out);
+        resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + title + extension + RESP_HEADER_END);
+        return absFilename;
     }
 
     @Authenticated(mandatory = false)

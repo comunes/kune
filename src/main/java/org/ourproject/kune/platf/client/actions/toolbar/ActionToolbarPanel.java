@@ -9,6 +9,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -21,6 +22,7 @@ import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.menu.BaseItem;
+import com.gwtext.client.widgets.menu.CheckItem;
 import com.gwtext.client.widgets.menu.Item;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.MenuItem;
@@ -169,12 +171,23 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     private Item createToolbarMenu(final ActionToolbarPosition toolBarPos, final String menuTitle,
             final String menuSubTitle, final ActionItem<T> actionItem, String id) {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
-        final Item item = new Item(action.getText(), new BaseItemListenerAdapter() {
+        final Item item;
+        if (action instanceof ActionToolbarMenuRadioDescriptor) {
+            CheckItem checkItem = new CheckItem(action.getText());
+            ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
+            checkItem.setGroup(radioDescriptor.getGroup());
+            checkItem.setChecked(radioDescriptor.mustBeChecked());
+            item = checkItem;
+        } else {
+            item = new Item(action.getText());
+        }
+        BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override
             public void onClick(BaseItem item, EventObject e) {
                 actionManagerProvider.get().doAction(actionItem);
             }
-        });
+        };
+        item.addListener(clickListener);
         item.setIcon(action.getIconUrl());
         item.setTitle(action.getToolTip());
         if (id != null) {

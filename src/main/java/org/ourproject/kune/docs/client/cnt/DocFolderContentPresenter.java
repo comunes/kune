@@ -23,6 +23,7 @@ import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -33,8 +34,9 @@ import com.calclab.suco.client.ioc.Provider;
 public class DocFolderContentPresenter extends FoldableContentPresenter implements DocFolderContent {
 
     public DocFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
-            final ActionRegistry<StateToken> actionRegistry, Provider<FileDownloadUtils> downloadProvider) {
-        super(DocumentClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+            final ActionRegistry<StateToken> actionRegistry, Provider<FileDownloadUtils> downloadProvider,
+            I18nTranslationService i18n) {
+        super(DocumentClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
     }
 
     public void init(final DocFolderContentView view) {

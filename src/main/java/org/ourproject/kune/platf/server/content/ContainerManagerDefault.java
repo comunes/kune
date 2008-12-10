@@ -29,12 +29,16 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.ourproject.kune.platf.client.errors.DefaultException;
+import org.ourproject.kune.platf.client.errors.NameInUseException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
+import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import org.ourproject.kune.platf.server.manager.file.FileUtils;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+import org.ourproject.kune.platf.server.utils.FilenameUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -43,13 +47,20 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContainerManagerDefault extends DefaultManager<Container, Long> implements ContainerManager {
 
+    private final Container containerFinder;
+    private final Content contentFinder;
+
     @Inject
-    public ContainerManagerDefault(final Provider<EntityManager> provider) {
+    public ContainerManagerDefault(Content contentFinder, Container containerFinder,
+            final Provider<EntityManager> provider) {
         super(provider, Container.class);
+        this.contentFinder = contentFinder;
+        this.containerFinder = containerFinder;
     }
 
     public Container createFolder(final Group group, final Container parent, final String name,
             final I18nLanguage language, String typeId) {
+        findInexistentName(parent, name);
         final List<Container> parentAbsolutePath = parent.getAbsolutePath();
         final List<Container> childAbsolutePath = new ArrayList<Container>();
 
@@ -77,12 +88,17 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
     public String renameFolder(final Group group, final Container container, final String newName)
             throws DefaultException {
+        FilenameUtils.checkBasicFilename(newName);
+        String newNameWithoutNT = FilenameUtils.chomp(newName);
         if (container.isRoot()) {
             throw new RuntimeException("Root folder cannot be renamed");
         }
-        container.setName(newName);
+        if (findIfExistsTitle(container.getParent(), newNameWithoutNT)) {
+            throw new NameInUseException();
+        }
+        container.setName(newNameWithoutNT);
         persist(container);
-        return newName;
+        return newNameWithoutNT;
     }
 
     public SearchResult<Container> search(final String search) {
@@ -103,6 +119,21 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     public void setAccessList(Container container, AccessLists accessList) {
         container.setAccessLists(accessList);
         persist(container);
+    }
+
+    /** Duplicate code in ContentMD **/
+    private boolean findIfExistsTitle(Container container, String title) {
+        return (contentFinder.findIfExistsTitle(container, title) > 0)
+                || (containerFinder.findIfExistsTitle(container, title) > 0);
+    }
+
+    /** Duplicate code in ContentMD **/
+    private String findInexistentName(Container container, String title) {
+        String initialTitle = new String(title);
+        while (findIfExistsTitle(container, initialTitle)) {
+            initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
+        }
+        return initialTitle;
     }
 
 }

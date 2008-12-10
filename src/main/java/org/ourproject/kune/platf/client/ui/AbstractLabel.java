@@ -56,4 +56,6 @@ public interface AbstractLabel {
 
     void setTitle(final String title);
 
+    void setVisible(boolean visible);
+
 }

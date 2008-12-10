@@ -36,7 +36,7 @@ public class DocumentViewerPresenter extends FoldableContentPresenter implements
     public DocumentViewerPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
             ActionContentToolbar toolbar, ContentActionRegistry actionRegistry,
             Provider<FileDownloadUtils> downloadProvider) {
-        super(DocumentClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+        super(DocumentClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
     }
 
     public void init(DocumentViewerView view) {

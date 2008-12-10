@@ -36,7 +36,7 @@ public class BlogViewerPresenter extends FoldableContentPresenter implements Blo
     public BlogViewerPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
             ActionContentToolbar toolbar, ContentActionRegistry actionRegistry,
             Provider<FileDownloadUtils> downloadProvider) {
-        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
     }
 
     public void init(BlogViewerView view) {

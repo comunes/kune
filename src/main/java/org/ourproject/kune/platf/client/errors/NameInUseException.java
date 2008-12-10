@@ -17,33 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.ctxnav;
+package org.ourproject.kune.platf.client.errors;
 
-import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-
-public interface ContextNavigator {
-
-    void attach();
-
-    void clear();
-
-    void detach();
-
-    void editItem(StateToken stateToken);
-
-    boolean isSelected(StateToken stateToken);
-
-    void refresh(StateToken stateToken);
-
-    void selectItem(StateToken stateToken);
-
-    void setEditOnNextStateChange(boolean edit);
-
-    void setFireOnTextChange(boolean visible);
-
-    void setItemStatus(StateToken stateToken, ContentStatusDTO status);
-
-    void setState(StateContainerDTO state, boolean selectItem);
+public class NameInUseException extends DefaultException {
+    private static final long serialVersionUID = 1L;
 }

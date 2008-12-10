@@ -41,7 +41,7 @@ public class ChatRoomPresenter extends FoldableContentPresenter implements ChatR
     public ChatRoomPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
             ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
             Provider<FileDownloadUtils> downloadProvider) {
-        super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+        super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
         this.i18n = i18n;
     }
 

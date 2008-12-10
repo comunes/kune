@@ -9,6 +9,7 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -24,15 +25,17 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     protected final Session session;
     private final ActionContentToolbar toolbar;
     private final Provider<FileDownloadUtils> downloadProvider;
+    private final I18nTranslationService i18n;
 
     public FoldableContentPresenter(final String toolName, StateManager stateManager, Session session,
             final ActionContentToolbar toolbar, ActionRegistry<StateToken> actionRegistry,
-            Provider<FileDownloadUtils> downloadProvider) {
+            Provider<FileDownloadUtils> downloadProvider, I18nTranslationService i18n) {
         this.toolName = toolName;
         this.session = session;
         this.toolbar = toolbar;
         this.actionRegistry = actionRegistry;
         this.downloadProvider = downloadProvider;
+        this.i18n = i18n;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
@@ -71,7 +74,11 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
                 view.setNoPreview();
             }
         } else {
-            view.setRawContent(contentBody);
+            if ((contentBody == null || contentBody.length() == 0) && state.getContentRights().isEditable()) {
+                view.setInfoMessage(i18n.t("There is currently no text in this page, you can edit this page"));
+            } else {
+                view.setRawContent(contentBody);
+            }
         }
         view.attach();
     }

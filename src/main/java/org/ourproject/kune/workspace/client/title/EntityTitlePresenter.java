@@ -26,37 +26,27 @@ import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.registry.RenamableRegistry;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
-import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.calclab.suco.client.listener.Listener2;
 
 public class EntityTitlePresenter implements EntityTitle {
 
     private EntityTitleView view;
-    private final KuneErrorHandler errorHandler;
-    private final Provider<ContentServiceAsync> contentServiceProvider;
     private final Session session;
-    private final Provider<ContextNavigator> contextNavigatorProvider;
     private final ContentIconsRegistry iconsRegistry;
     private final RenamableRegistry renamableContentRegistry;
+    private final RenameAction renameAction;
 
-    public EntityTitlePresenter(final KuneErrorHandler errorHandler, final StateManager stateManager,
-            final Session session, final Provider<ContentServiceAsync> contentServiceProvider,
-            final Provider<ContextNavigator> contextNavigatorProvider, final ContentIconsRegistry iconsRegistry,
-            RenamableRegistry renamableContentRegistry) {
-        this.errorHandler = errorHandler;
+    public EntityTitlePresenter(final StateManager stateManager, final Session session,
+            final ContentIconsRegistry iconsRegistry, RenamableRegistry renamableContentRegistry,
+            RenameAction renameAction) {
         this.session = session;
-        this.contentServiceProvider = contentServiceProvider;
-        this.contextNavigatorProvider = contextNavigatorProvider;
         this.iconsRegistry = iconsRegistry;
         this.renamableContentRegistry = renamableContentRegistry;
+        this.renameAction = renameAction;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 if (state instanceof StateContentDTO) {
@@ -69,6 +59,7 @@ public class EntityTitlePresenter implements EntityTitle {
                 }
             }
         });
+        createRenameListeners();
     }
 
     public View getView() {
@@ -87,27 +78,24 @@ public class EntityTitlePresenter implements EntityTitle {
         view.setContentTitleVisible(true);
     }
 
-    protected void onTitleRename(final String newName) {
-        Site.showProgressSaving();
-        final StateToken stateToken = session.getCurrentState().getStateToken();
-        final AsyncCallback<String> asyncCallback = new AsyncCallback<String>() {
-            public void onFailure(final Throwable caught) {
-                view.restoreOldTitle();
-                errorHandler.process(caught);
-            }
+    protected void onTitleRename(final String oldName, final String newName) {
+        final StateToken token = session.getCurrentState().getStateToken();
+        renameAction.rename(token, oldName, newName);
+    }
 
-            public void onSuccess(final String result) {
-                Site.hideProgress();
-                view.setContentTitle(result);
-                contextNavigatorProvider.get().setItemText(stateToken, newName);
+    private void createRenameListeners() {
+        Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
+            public void onEvent(StateToken token, String newName) {
+                view.setContentTitle(newName);
             }
         };
-        if (stateToken.isComplete()) {
-            contentServiceProvider.get().renameContent(session.getUserHash(), stateToken, newName, asyncCallback);
-        } else {
-            contentServiceProvider.get().renameContainer(session.getUserHash(), stateToken, newName, asyncCallback);
-        }
-        Site.hideProgress();
+        renameAction.onSuccess(onSuccess);
+        Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
+            public void onEvent(StateToken token, String oldName) {
+                view.setContentTitle(oldName);
+            }
+        };
+        renameAction.onFail(onFail);
     }
 
     private void setContentTitle(final String title, final boolean editable) {
@@ -140,5 +128,4 @@ public class EntityTitlePresenter implements EntityTitle {
         setIcon(contentTypeIcon);
         view.setContentTitleVisible(true);
     }
-
 }

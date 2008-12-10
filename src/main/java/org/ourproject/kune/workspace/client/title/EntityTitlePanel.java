@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.ui.EditableIconLabel;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.ui.Image;
 
 public class EntityTitlePanel implements EntityTitleView {
@@ -34,8 +35,13 @@ public class EntityTitlePanel implements EntityTitleView {
     public EntityTitlePanel(final WorkspaceSkeleton ws, final EntityTitlePresenter presenter) {
         icon = new Image();
         titleLabel = new EditableIconLabel(new EditableClickListener() {
-            public void onEdited(final String text) {
-                presenter.onTitleRename(text);
+            public void onEdited(final String newName) {
+            }
+        });
+
+        titleLabel.onEdit(new Listener2<String, String>() {
+            public void onEvent(String oldName, String newName) {
+                presenter.onTitleRename(oldName, newName);
             }
         });
 

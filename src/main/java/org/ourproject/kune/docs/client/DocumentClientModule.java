@@ -108,7 +108,7 @@ public class DocumentClientModule extends AbstractModule {
             public DocFolderContent create() {
                 final DocFolderContentPresenter presenter = new DocFolderContentPresenter($(StateManager.class),
                         $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $$(FileDownloadUtils.class));
+                        $$(FileDownloadUtils.class), $(I18nTranslationService.class));
                 final DocFolderContentView view = new DocFolderContentPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);

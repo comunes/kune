@@ -41,7 +41,7 @@ public class WikiFolderContentPresenter extends FoldableContentPresenter impleme
     public WikiFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
             final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n,
             Provider<FileDownloadUtils> downloadProvider) {
-        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
         this.i18n = i18n;
     }
 

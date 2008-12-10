@@ -27,5 +27,6 @@ public class DocFolderContentPanel extends FoldableContentPanel implements DocFo
 
     public DocFolderContentPanel(WorkspaceSkeleton ws, I18nTranslationService i18n) {
         super(ws, i18n);
+        setInfo("");
     }
 }

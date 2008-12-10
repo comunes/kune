@@ -51,7 +51,7 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
         click(RegisterPanel.WELCOME_OK_BUTTON);
         clickOnPushButton(gid(SiteUserMenuPanel.LOGGED_USER_MENU));
         click(linkId(PlatfMessages.YOUR_HOMEPAGE));
-        waitForTextInside(gid(NoHomePagePanel.NO_HOME_PAGE_LABEL), PlatfMessages.USER_DON_T_HAVE_A_HOMEPAGE);
+        waitForTextInside(gid(NoHomePagePanel.NO_HOME_PAGE_LABEL), PlatfMessages.USER_DOESN_T_HAVE_A_HOMEPAGE);
     }
 
     @Test

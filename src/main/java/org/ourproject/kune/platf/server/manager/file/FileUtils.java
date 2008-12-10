@@ -128,4 +128,8 @@ public class FileUtils {
     public static String toDir(final StateToken stateToken) {
         return SLASH + stateToken.getGroup() + SLASH + stateToken.getTool() + SLASH + stateToken.getFolder() + SLASH;
     }
+
+    public boolean exist(String file) {
+        return new File(file).exists();
+    }
 }

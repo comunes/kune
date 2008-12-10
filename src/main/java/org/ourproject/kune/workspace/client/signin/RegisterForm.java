@@ -72,9 +72,9 @@ public class RegisterForm extends DefaultForm {
         shortNameRegField.setMinLength(3);
         shortNameRegField.setMaxLength(15);
         shortNameRegField.setRegex("^[a-z0-9_\\-]+$");
-        shortNameRegField.setMinLengthText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
-        shortNameRegField.setMaxLengthText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
-        shortNameRegField.setRegexText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setMinLengthText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setMaxLengthText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
+        shortNameRegField.setRegexText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
         shortNameRegField.setValidationEvent(false);
         add(shortNameRegField);
 

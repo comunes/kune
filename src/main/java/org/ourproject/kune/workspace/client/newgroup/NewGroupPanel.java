@@ -235,9 +235,9 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         shortNameField.setMaxLength(15);
         shortNameField.setAllowBlank(false);
         shortNameField.setRegex("^[a-z0-9_\\-]+$");
-        shortNameField.setMinLengthText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setMaxLengthText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setRegexText(i18n.t(WorkspaceMessages.MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setMinLengthText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setMaxLengthText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setRegexText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
         shortNameField.setValidationDelay(1000);
 
         form.add(shortNameField);

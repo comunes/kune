@@ -42,7 +42,6 @@ import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
 import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
 import org.ourproject.kune.platf.client.ui.rate.RatePanel;
 import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
-import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
@@ -123,8 +122,10 @@ import org.ourproject.kune.workspace.client.title.EntitySubTitlePresenter;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
+import org.ourproject.kune.workspace.client.title.RenameAction;
 
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
+import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
@@ -282,9 +283,9 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<EntityTitle>(EntityTitle.class) {
             @Override
             public EntityTitle create() {
-                final EntityTitlePresenter presenter = new EntityTitlePresenter($(KuneErrorHandler.class),
-                        $(StateManager.class), $(Session.class), $$(ContentServiceAsync.class),
-                        $$(ContextNavigator.class), $(ContentIconsRegistry.class), $(RenamableRegistry.class));
+                final EntityTitlePresenter presenter = new EntityTitlePresenter($(StateManager.class),
+                        $(Session.class), $(ContentIconsRegistry.class), $(RenamableRegistry.class),
+                        $(RenameAction.class));
                 final EntityTitlePanel panel = new EntityTitlePanel($(WorkspaceSkeleton.class), presenter);
                 presenter.init(panel);
                 return presenter;
@@ -455,6 +456,14 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
+            }
+        });
+
+        register(Singleton.class, new Factory<RenameAction>(RenameAction.class) {
+            @Override
+            public RenameAction create() {
+                return new RenameAction($(I18nTranslationService.class), $(Session.class),
+                        $$(ContentServiceAsync.class));
             }
         });
 

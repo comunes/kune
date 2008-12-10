@@ -40,7 +40,7 @@ public class BlogFolderContentPresenter extends FoldableContentPresenter impleme
     public BlogFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
             final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n,
             Provider<FileDownloadUtils> downloadProvider) {
-        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
         this.i18n = i18n;
     }
 

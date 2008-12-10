@@ -36,7 +36,7 @@ public class WikiViewerPresenter extends FoldableContentPresenter implements Wik
     public WikiViewerPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
             ActionContentToolbar toolbar, ContentActionRegistry actionRegistry,
             Provider<FileDownloadUtils> downloadProvider) {
-        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
     }
 
     public void init(WikiViewerView view) {

@@ -18,21 +18,21 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
 
     private static final String DEF_CONTENT_MARGINS_STYLE = "kune-Margin-7-trbl";
     private final I18nTranslationService i18n;
-    private final RoundedPanel previewPanel;
-    private final IconLabel previewLabel;
+    private final RoundedPanel messagePanel;
+    private final IconLabel messageLabel;
 
     public FoldableContentPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
         super(ws);
         this.i18n = i18n;
-        previewLabel = new IconLabel(Images.App.getInstance().info(), "");
-        previewLabel.addStyleName("k-preview-msg-lab");
-        previewPanel = new RoundedPanel(previewLabel, RoundedPanel.ALL, 2);
-        previewPanel.setCornerStyleName("k-preview-msg");
-        previewPanel.addStyleName("kune-Margin-7-b");
+        messageLabel = new IconLabel(Images.App.getInstance().info(), "");
+        messageLabel.addStyleName("k-preview-msg-lab");
+        messagePanel = new RoundedPanel(messageLabel, RoundedPanel.ALL, 2);
+        messagePanel.setCornerStyleName("k-preview-msg");
+        messagePanel.addStyleName("kune-Margin-7-b");
     }
 
     public void setContent(String content, boolean showPreviewMsg) {
-        final VerticalPanel vp = createPreviewVp(showPreviewMsg);
+        final VerticalPanel vp = createMessageVp(showPreviewMsg);
         final HTML html = new HTML(content);
         vp.add(html);
         setWidgetAsContent(vp, true);
@@ -42,6 +42,12 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         setLabel(info);
     }
 
+    public void setInfoMessage(String text) {
+        VerticalPanel vp = createMessageVp(true);
+        messageLabel.setText(text);
+        setWidgetAsContent(vp, true);
+    }
+
     public void setLabel(String text) {
         Label label = new Label(text);
         setDefStyle(label);
@@ -49,7 +55,7 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
     }
 
     public void setNoPreview() {
-        VerticalPanel vp = createPreviewVp(true);
+        VerticalPanel vp = createMessageVp(true);
         setNoPreviewLabelMsg();
         setWidgetAsContent(vp, true);
     }
@@ -68,7 +74,7 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
     }
 
     public void showImage(String imageUrl, String imageResizedUrl, boolean showPreviewMsg) {
-        final VerticalPanel vp = createPreviewVp(showPreviewMsg);
+        final VerticalPanel vp = createMessageVp(showPreviewMsg);
         final Image imgOrig = new Image(imageUrl);
         final Image imgResized = new Image(imageResizedUrl);
         KuneUiUtils.setQuickTip(imgOrig, i18n.t("Click to zoom out"));
@@ -94,11 +100,11 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         Image.prefetch(imageUrl);
     }
 
-    private VerticalPanel createPreviewVp(boolean showPreviewMsg) {
+    private VerticalPanel createMessageVp(boolean showMsg) {
         final VerticalPanel vp = new VerticalPanel();
-        if (showPreviewMsg) {
+        if (showMsg) {
             setDefPreviewMsg();
-            vp.add(previewPanel);
+            vp.add(messagePanel);
         }
         return vp;
     }
@@ -109,7 +115,7 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
     }
 
     private void setDefPreviewMsg() {
-        previewLabel.setText(i18n.t("This is only a preview, download it to get the complete file"));
+        messageLabel.setText(i18n.t("This is only a preview, download it to get the complete file"));
     }
 
     private void setDefStyle(final Widget widget) {
@@ -118,6 +124,6 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
     }
 
     private void setNoPreviewLabelMsg() {
-        previewLabel.setText(i18n.t("Preview not available"));
+        messageLabel.setText(i18n.t("Preview not available"));
     }
 }

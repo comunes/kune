@@ -14,6 +14,8 @@ public interface AbstractContentView {
 
     void setInfo(String info);
 
+    void setInfoMessage(String text);
+
     void setNoPreview();
 
     void setWidgetAsContent(final Widget widget, boolean setDefMargins);

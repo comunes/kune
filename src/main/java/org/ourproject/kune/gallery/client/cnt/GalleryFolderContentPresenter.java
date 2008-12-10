@@ -44,7 +44,7 @@ public class GalleryFolderContentPresenter extends FoldableContentPresenter impl
     public GalleryFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
             final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n,
             Provider<FileDownloadUtils> downloadUtils, Provider<FileDownloadUtils> downloadProvider) {
-        super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider);
+        super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
         this.i18n = i18n;
         this.downloadUtils = downloadUtils;
     }

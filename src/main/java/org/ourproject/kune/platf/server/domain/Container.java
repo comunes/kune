@@ -46,6 +46,9 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
+import com.google.inject.name.Named;
+import com.wideplay.warp.persist.dao.Finder;
+
 @Entity
 @Indexed
 @Table(name = "containers")
@@ -115,6 +118,11 @@ public class Container implements HasId, HasStateToken {
         // size())
         contents.size();
         contents.add(descriptor);
+    }
+
+    @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.parent = :container AND c.name = :title")
+    public Long findIfExistsTitle(@Named("container") Container container, @Named("title") String title) {
+        return null;
     }
 
     public List<Container> getAbsolutePath() {

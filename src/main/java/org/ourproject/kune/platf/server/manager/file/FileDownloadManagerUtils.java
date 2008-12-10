@@ -25,13 +25,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.servlet.http.HttpServlet;
-
-public abstract class FileDownloadManagerAbstract extends HttpServlet {
+public class FileDownloadManagerUtils {
 
     private static final long serialVersionUID = 1L;
 
-    public void returnFile(final String filename, final OutputStream out) throws FileNotFoundException, IOException {
+    public static void returnFile(final String filename, final OutputStream out) throws FileNotFoundException,
+            IOException {
         InputStream in = null;
         try {
             in = new BufferedInputStream(new FileInputStream(filename));

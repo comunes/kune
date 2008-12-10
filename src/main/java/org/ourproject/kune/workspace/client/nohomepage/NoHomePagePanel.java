@@ -33,7 +33,7 @@ public class NoHomePagePanel implements NoHomePageView {
 
     public NoHomePagePanel(final NoHomePagePresenter presenter, final WorkspaceSkeleton ws, I18nTranslationService i18n) {
         this.ws = ws;
-        noHomepageCtnLabel = new Label(i18n.t(PlatfMessages.USER_DON_T_HAVE_A_HOMEPAGE));
+        noHomepageCtnLabel = new Label(i18n.t(PlatfMessages.USER_DOESN_T_HAVE_A_HOMEPAGE));
         noHomepageCtnLabel.ensureDebugId(NO_HOME_PAGE_LABEL);
         noHomepageCtnLabel.setStyleName("kune-Content-Main");
         noHomepageCtnLabel.addStyleName("kune-Margin-7-trbl");
