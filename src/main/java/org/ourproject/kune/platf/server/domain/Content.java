@@ -164,7 +164,7 @@ public class Content implements HasStateToken {
         }
     }
 
-    @Finder(query = "select count(*) from Container ctx, Content ctn where ctn.container.id = ctx.id and ctx = :container and ctn.lastRevision.title = :title")
+    @Finder(query = "select count(*) from Container ctx, Content ctn where ctn.container.id = ctx.id and ctx = :container and ctn.lastRevision.title LIKE :title")
     public Long findIfExistsTitle(@Named("container") Container container, @Named("title") String title) {
         return null;
     }

@@ -86,6 +86,12 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         return persist(container);
     }
 
+    /** Duplicate code in ContentMD **/
+    public boolean findIfExistsTitle(Container container, String title) {
+        return (contentFinder.findIfExistsTitle(container, title) > 0)
+                || (containerFinder.findIfExistsTitle(container, title) > 0);
+    }
+
     public String renameFolder(final Group group, final Container container, final String newName)
             throws DefaultException {
         FilenameUtils.checkBasicFilename(newName);
@@ -119,12 +125,6 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     public void setAccessList(Container container, AccessLists accessList) {
         container.setAccessLists(accessList);
         persist(container);
-    }
-
-    /** Duplicate code in ContentMD **/
-    private boolean findIfExistsTitle(Container container, String title) {
-        return (contentFinder.findIfExistsTitle(container, title) > 0)
-                || (containerFinder.findIfExistsTitle(container, title) > 0);
     }
 
     /** Duplicate code in ContentMD **/

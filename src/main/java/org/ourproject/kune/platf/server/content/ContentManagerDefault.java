@@ -109,6 +109,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.setDeletedOn(new Date());
     }
 
+    public boolean findIfExistsTitle(Container container, String title) {
+        return (contentFinder.findIfExistsTitle(container, title) > 0)
+                || (containerFinder.findIfExistsTitle(container, title) > 0);
+    }
+
     public Double getRateAvg(final Content content) {
         return finder.getRateAvg(content);
     }
@@ -233,11 +238,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             }
         }
         content.setTags(tagList);
-    }
-
-    private boolean findIfExistsTitle(Container container, String title) {
-        return (contentFinder.findIfExistsTitle(container, title) > 0)
-                || (containerFinder.findIfExistsTitle(container, title) > 0);
     }
 
     private String findInexistentTitle(Container container, String title) {

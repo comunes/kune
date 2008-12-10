@@ -151,6 +151,7 @@ public class EditableIconLabel extends Composite {
         String text = editor.getText();
         onEdit.fire(currentText, text);
         editor.setVisible(false);
+        editor.setReadOnly(true);
         label.setVisible(true);
         label.removeStyleDependentName("high");
     }
@@ -203,6 +204,7 @@ public class EditableIconLabel extends Composite {
         label.setVisible(false);
         if (editor == null) {
             editor = new TextBox();
+            editor.setStyleName("k-eil-edit");
             hp.add(editor);
             editor.addFocusListener(new FocusListener() {
                 public void onFocus(Widget sender) {
@@ -218,7 +220,8 @@ public class EditableIconLabel extends Composite {
                 }
             });
         }
-        editor.setPixelSize(hpWidth, 22);
+        editor.setReadOnly(false);
+        editor.setPixelSize(hpWidth < 40 ? 40 : hpWidth, 21);
         editor.setText(currentText);
         editor.setVisible(true);
         editor.setFocus(true);

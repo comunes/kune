@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -58,6 +59,7 @@ public class Container implements HasId, HasStateToken {
     @DocumentId
     Long id;
 
+    @Column
     @Field(index = Index.TOKENIZED, store = Store.NO)
     private String name;
 
@@ -120,7 +122,7 @@ public class Container implements HasId, HasStateToken {
         contents.add(descriptor);
     }
 
-    @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.parent = :container AND c.name = :title")
+    @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.parent = :container AND c.name LIKE :title")
     public Long findIfExistsTitle(@Named("container") Container container, @Named("title") String title) {
         return null;
     }

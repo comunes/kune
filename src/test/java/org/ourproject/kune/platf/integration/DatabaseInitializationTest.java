@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.chat.server.ChatServerTool;
 import org.ourproject.kune.docs.server.DocumentServerTool;
+import org.ourproject.kune.platf.server.content.ContainerManager;
+import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -33,8 +35,28 @@ public class DatabaseInitializationTest {
     I18nLanguageManager languageManager;
     @Inject
     I18nCountryManager countryManager;
+    @Inject
+    ContentManager contentManager;
+    @Inject
+    ContainerManager containerManager;
 
     private Group defaultGroup;
+
+    /**
+     * If this test fails, see database configuration in INSTALL (the collation
+     * part) and http://dev.mysql.com/doc/refman/5.0/en/case-sensitivity.html
+     * 
+     * Title must be created as something like `title` varchar(255) collate
+     * utf8_bin default NULL
+     * 
+     */
+    @Test
+    public void caseSensitive() {
+        Content defaultContent = defaultGroup.getDefaultContent();
+        assertTrue(contentManager.findIfExistsTitle(defaultContent.getContainer(), "Welcome to kune demo"));
+        assertTrue(!contentManager.findIfExistsTitle(defaultContent.getContainer(), "welcome to kune Demo"));
+        assertTrue(!contentManager.findIfExistsTitle(defaultContent.getContainer(), "Welcome to kune demo "));
+    }
 
     @Before
     public void init() {

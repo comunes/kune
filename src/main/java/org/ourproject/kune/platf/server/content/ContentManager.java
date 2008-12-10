@@ -39,6 +39,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
     void delContent(User user, Long contentId) throws DefaultException;
 
+    boolean findIfExistsTitle(Container container, String title);
+
     Double getRateAvg(Content content);
 
     Long getRateByUsers(Content content);

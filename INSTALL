@@ -31,6 +31,7 @@ FLUSH PRIVILEGES;
 You have to configure mysql to support UTF8 by editing your c:\Windows\my.ini or /etc/my.cnf (on Unix) file:
 [mysqld]
 default-character-set=utf8
+default-collation=utf8_general_ci
 
 Or do it per table:
 

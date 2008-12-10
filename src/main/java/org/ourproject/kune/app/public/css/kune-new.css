@@ -828,3 +828,7 @@
     background: #FFCCAA;
     padding: 0 5px;
 }
+
+.k-eil-edit {
+    border: thin solid black;
+}
