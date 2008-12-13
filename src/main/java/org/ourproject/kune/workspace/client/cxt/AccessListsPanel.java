@@ -43,11 +43,11 @@ public class AccessListsPanel extends VerticalPanel implements View {
     public AccessListsPanel(final I18nTranslationService i18n, Images img) {
         this.i18n = i18n;
         this.img = img;
-        final Label adminsLabel = new Label(i18n.t("Who can admin this:"));
+        final Label adminsLabel = new Label(i18n.t("Those who can admin this:"));
         adminsVP = new VerticalPanel();
-        final Label editorsLabel = new Label(i18n.t("Who more can edit:"));
+        final Label editorsLabel = new Label(i18n.t("Those who can edit as well:"));
         editorsVP = new VerticalPanel();
-        final Label viewersLabel = new Label(i18n.t("Who more can view:"));
+        final Label viewersLabel = new Label(i18n.t("Those who can view as well:"));
         viewersVP = new VerticalPanel();
 
         // Layout

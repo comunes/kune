@@ -75,7 +75,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
             }
         } else {
             if ((contentBody == null || contentBody.length() == 0) && state.getContentRights().isEditable()) {
-                view.setInfoMessage(i18n.t("There is currently no text in this page, you can edit this page"));
+                view.setInfoMessage(i18n.t("There is no text in this page. Feel free to edit this page"));
             } else {
                 view.setRawContent(contentBody);
             }

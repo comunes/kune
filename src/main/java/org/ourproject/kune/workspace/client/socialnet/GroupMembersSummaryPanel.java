@@ -57,7 +57,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         this.i18n = i18n;
 
         final GridDragConfiguration dragConf = new GridDragConfiguration(UserGridPanel.USER_GROUP_DD,
-                i18n.t("Drop in the chat area to start a chat.") + "<br/>"
+                i18n.t("Drop into the chat area to start a chat.") + "<br/>"
                         + i18n.t("Drop into a room to invite the user to join the chat room"));
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
                 + "please request to join to work on it"), dragConf, true, true, false, true, false);

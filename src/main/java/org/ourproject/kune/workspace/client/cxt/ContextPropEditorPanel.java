@@ -137,7 +137,7 @@ public class ContextPropEditorPanel extends ScrollPanel implements ContextPropEd
     public void setAccessLists(final AccessListsDTO accessLists) {
         if (aclComponent == null) {
             accessListsPanel = new AccessListsPanel(i18n, images);
-            aclComponent = new ContextPropertyPanel(i18n.t("Permissions"), i18n.t("Who can admin/edit/view this work"),
+            aclComponent = new ContextPropertyPanel(i18n.t("Permissions"), i18n.t("Those who can admin/edit/view this work"),
                     true, ACL_PROP, accessListsPanel);
             addComponent(aclComponent);
         }

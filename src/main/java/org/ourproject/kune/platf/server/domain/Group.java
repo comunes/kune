@@ -74,13 +74,13 @@ public class Group implements HasId {
 
     @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(unique = true)
-    @Length(min = 3, max = 15, message = "Shortname between 3 and 15 chars of lenght")
-    @Pattern(regex = "^[a-z0-9_\\-]+$", message = "Must be between 3 and 15 lowercase characters. Can only contain characters, numbers, and dashes")
+    @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
+    @Pattern(regex = "^[a-z0-9_\\-]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
     private String shortName;
 
     @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(unique = true)
-    @Length(min = 3, max = 50, message = "longName between 3 and 50 chars of lenght")
+    @Length(min = 3, max = 50, message = "The longName must be between 3 and 50 characters of length")
     private String longName;
 
     @OneToOne

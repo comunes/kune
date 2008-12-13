@@ -93,7 +93,7 @@ public class KuneErrorHandler {
             Site.veryImportant(i18n.t("Group not found"));
             stateManagerProvider.get().gotoToken("");
         } catch (final IncompatibleRemoteServiceException e) {
-            Site.error(i18n.t("Your browser is outdated from the server software. Please reload this page."));
+            Site.error(i18n.t("Your browser is outdated with the server software. Please reload this page."));
         } catch (final ContentNotFoundException e) {
             logException(e);
             Site.veryImportant(i18n.t("Content not found"));

@@ -202,7 +202,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                 });
         showMembers.setTextDescription(textDescription);
         showMembers.setParentMenuTitle(i18n.t("Options"));
-        showMembers.setParentSubMenuTitle(i18n.t("Who can view this member list"));
+        showMembers.setParentSubMenuTitle(i18n.t("Those who can view this member list"));
         groupActionRegistry.addAction(showMembers);
     }
 

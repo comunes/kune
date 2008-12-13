@@ -46,10 +46,10 @@ public class RenameAction {
                         throw caught;
                     } catch (final NameInUseException e) {
                         Site.error(i18n.tWithNT("This name already exists",
-                                "Used when a file or a folder with the same name already exists"));
+                                "It is used when a file or a folder with the same name already exists"));
                     } catch (final NameNotPermittedException e) {
                         Site.error(i18n.tWithNT("This name is not permitted",
-                                "Used when a file or a folder has a not permitted name"));
+                                "It is uUsed when a file or a folder does not have a permitted name"));
                     } catch (final Throwable e) {
                         Site.error(i18n.t("Error renaming"));
                     }

@@ -171,7 +171,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                 });
         buddiesVisibilityAction.setTextDescription(textDescription);
         buddiesVisibilityAction.setParentMenuTitle(i18n.t("Options"));
-        buddiesVisibilityAction.setParentSubMenuTitle(i18n.t("Who can view your buddies list"));
+        buddiesVisibilityAction.setParentSubMenuTitle(i18n.t("Those who can view your buddies list"));
         actionRegistry.addAction(buddiesVisibilityAction);
     }
 
