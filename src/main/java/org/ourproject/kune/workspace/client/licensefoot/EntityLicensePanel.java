@@ -21,6 +21,7 @@ package org.ourproject.kune.workspace.client.licensefoot;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -32,20 +33,17 @@ import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.Ext;
-import com.gwtext.client.core.Function;
-import com.gwtext.client.core.FxConfig;
+import com.gwtext.client.core.ExtElement;
 
 public class EntityLicensePanel implements EntityLicenseView {
     private final Image licenseImage;
     private final Label licenseLabel;
     private final I18nTranslationService i18n;
     private final SimpleToolbar licenseBar;
-    private final WorkspaceSkeleton ws;
 
     public EntityLicensePanel(final EntityLicensePresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws) {
         this.i18n = i18n;
-        this.ws = ws;
         licenseImage = new Image();
         licenseLabel = new Label();
 
@@ -62,7 +60,6 @@ public class EntityLicensePanel implements EntityLicenseView {
 
         licenseLabel.addClickListener(clickListener);
         licenseImage.addClickListener(clickListener);
-        licenseLabel.setVisible(false);
 
         MouseListenerAdapter mouseListenerAdapter = new MouseListenerAdapter() {
             @Override
@@ -82,18 +79,15 @@ public class EntityLicensePanel implements EntityLicenseView {
         licenseLabel.addStyleName("kune-Margin-Large-l");
         licenseLabel.setStyleName("k-elp-limg");
         licenseImage.setStyleName("k-elp-limg");
+        ws.getEntityWorkspace().getBottomTitle().add(licenseBar);
     }
 
     public void attach() {
-        if (!licenseBar.isAttached()) {
-            ws.getEntityWorkspace().getBottomTitle().add(licenseBar);
-        }
+        Ext.get(licenseBar.getElement()).setOpacity(1, false);
     }
 
     public void detach() {
-        if (licenseBar.isAttached()) {
-            ws.getEntityWorkspace().getBottomTitle().remove(licenseBar);
-        }
+        Ext.get(licenseBar.getElement()).setOpacity(0, false);
     }
 
     public void openWindow(final String url) {
@@ -101,24 +95,15 @@ public class EntityLicensePanel implements EntityLicenseView {
     }
 
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
-        licenseLabel.setText(i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName()));
+        String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
+        licenseLabel.setText(licenseText);
+        KuneUiUtils.setQuickTip(licenseLabel, licenseText);
         licenseImage.setUrl(licenseDTO.getImageUrl());
         fade(false);
     }
 
     private void fade(final boolean in) {
-        if (licenseLabel.isVisible() != in) {
-            FxConfig fxConfigVisible = new FxConfig(1);
-            fxConfigVisible.setAfterStyle(new Function() {
-                public void execute() {
-                    licenseLabel.setVisible(in);
-                }
-            });
-            if (in) {
-                Ext.get(licenseLabel.getElement()).fadeIn(fxConfigVisible);
-            } else {
-                Ext.get(licenseLabel.getElement()).fadeOut(fxConfigVisible);
-            }
-        }
+        ExtElement element = Ext.get(licenseLabel.getElement());
+        element.setOpacity(in ? 1 : 0, true);
     }
 }

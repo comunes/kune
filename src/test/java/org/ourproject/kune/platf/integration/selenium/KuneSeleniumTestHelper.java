@@ -181,8 +181,8 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
     protected void signInAndNewGroup() throws Exception {
         openDefPage();
         signIn();
-        open(SiteToken.newgroup);
         verifyLoggedUserShorName("admin");
+        open(SiteToken.newgroup);
         waitForTextInside(NewGroupPanel.NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE);
     }
 

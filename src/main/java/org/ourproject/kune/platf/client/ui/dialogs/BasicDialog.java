@@ -19,16 +19,32 @@
  */
 package org.ourproject.kune.platf.client.ui.dialogs;
 
+import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Window;
 
 public class BasicDialog extends Window {
 
     public BasicDialog(final String caption, final boolean modal) {
-        this(caption, modal, false);
+        this(Ext.generateId(), caption, modal, false);
     }
 
-    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll) {
+    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
+            final int height) {
+        this(Ext.generateId(), caption, modal, autoScroll, width, height, width, height);
+    }
+
+    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
+            final int height, final int minWidth, final int minHeight) {
+        this(Ext.generateId(), caption, modal, autoScroll, width, height, minWidth, minHeight);
+    }
+
+    public BasicDialog(final String id, final String caption, final boolean modal) {
+        this(id, caption, modal, false);
+    }
+
+    public BasicDialog(final String id, final String caption, final boolean modal, final boolean autoScroll) {
+        setId(id);
         setBorder(false);
         setAutoWidth(true);
         // Param values
@@ -45,14 +61,14 @@ public class BasicDialog extends Window {
         setButtonAlign(Position.RIGHT);
     }
 
-    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
-            final int height) {
-        this(caption, modal, autoScroll, width, height, width, height);
+    public BasicDialog(final String id, final String caption, final boolean modal, final boolean autoScroll,
+            final int width, final int height) {
+        this(id, caption, modal, autoScroll, width, height, width, height);
     }
 
-    public BasicDialog(final String caption, final boolean modal, final boolean autoScroll, final int width,
-            final int height, final int minWidth, final int minHeight) {
-        this(caption, modal, autoScroll);
+    public BasicDialog(final String id, final String caption, final boolean modal, final boolean autoScroll,
+            final int width, final int height, final int minWidth, final int minHeight) {
+        this(id, caption, modal, autoScroll);
         setAutoWidth(false);
         // Param values
         setWidth(width);

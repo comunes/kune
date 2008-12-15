@@ -43,7 +43,7 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
     public SitePublicSpaceLinkPanel(final SitePublicSpaceLinkPresenter presenter, final WorkspaceSkeleton ws,
             final I18nUITranslationService i18n, final Images img) {
         publicHP = new HorizontalPanel();
-        gotoPublic = new IconLabel(img.anybody(), i18n.t("Go to Public Space"), false);
+        gotoPublic = new IconLabel(img.anybody(), i18n.t("Public Space"), false);
         gotoPublic.ensureDebugId(SITE_GOTO_PUBLIC);
         contentNoPublic = new IconLabel(img.anybody(), i18n.t("This content is not public"));
         contentNoPublic.ensureDebugId(SITE_CONTENT_NO_PUBLIC);
@@ -60,8 +60,7 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
                 gotoPublic();
             }
         });
-        gotoPublic.setTitle(i18n.t("Leave the workspace and go to this group public space")
-                + Site.IN_DEVELOPMENT);
+        gotoPublic.setTitle(i18n.t("Leave the workspace and go to this group public space") + Site.IN_DEVELOPMENT);
         gotoPublic.addStyleName("k-sitebar-labellink");
         contentNoPublic.addStyleName("k-sitebar-labellink");
     }

@@ -54,7 +54,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSearcherView {
 
-    private static final String SITE_SEARCHER_DIALOG = "k-site-searcher-dialog";
+    public static final String SITE_SEARCHER_DIALOG = "k-site-searcher-dialog";
     private final Window dialog;
     private final SiteSearcherPresenter presenter;
     private Store groupStore;
@@ -104,8 +104,8 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
         dialog.expand();
         dialog.center();
         if (traybarButton == null) {
-            traybarButton = new SiteBottomTrayButton("images/kune-search-ico-push.gif", i18n.t("Show/hide search engine"),
-                    dialog, ws);
+            traybarButton = new SiteBottomTrayButton("images/kune-search-ico-push.gif",
+                    i18n.t("Show/hide search engine"), dialog, ws);
         }
     }
 
@@ -120,7 +120,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
         centerPanel.setClosable(false);
         centerPanel.setBorder(false);
 
-        final BasicDialog dialog = new BasicDialog(i18n.t("Search"), false, false, 500, 400);
+        final BasicDialog dialog = new BasicDialog(SITE_SEARCHER_DIALOG, i18n.t("Search"), false, false, 500, 400);
         // dialog.setResizable(false);
         dialog.setIconCls("search-icon");
         final Button closeButton = new Button(i18n.tWithNT("Close", "used in button"));
@@ -167,7 +167,6 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
         centerPanel.setActiveItemID(panelId);
 
         dialog.setCloseAction(Window.HIDE);
-        dialog.ensureDebugId(SITE_SEARCHER_DIALOG);
 
         return dialog;
     }

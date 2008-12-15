@@ -59,8 +59,8 @@ public class UserServiceTest extends IntegrationTest {
     @Test(expected = GroupNameInUseException.class)
     public void createUserExistingNameFails() throws Exception {
         assertNull(session.getUser().getId());
-        final UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456", "example@example.com", lang,
-                country, timezone, null, true, SubscriptionMode.manual, "blue");
+        final UserDTO user = new UserDTO("test", properties.getAdminShortName(), "123456", "example1234@example.com",
+                lang, country, timezone, null, true, SubscriptionMode.manual, "blue");
         userService.createUser(user, false);
     }
 

@@ -20,13 +20,15 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     public static final String CANCEL_BUTTON_ID = "k-signinp-cb";
     public static final String SIGN_IN_BUTTON_ID = "k-signinp-sib";
     public static final String CREATE_ONE = "k-signinp-create";
+    public static final String SIGNIN_DIALOG = "k-signinp-dialog";
     static SignInForm signInForm;
     private final SignInPresenter presenter;
 
     public SignInPanel(final SignInPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
             Images images) {
-        super(i18n, i18n.t(PlatfMessages.SIGN_IN_TITLE), true, true, 340, 240, "", i18n.t(PlatfMessages.SIGN_IN_TITLE),
-                SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"), CANCEL_BUTTON_ID, new Listener0() {
+        super(SIGNIN_DIALOG, i18n, i18n.t(PlatfMessages.SIGN_IN_TITLE), true, true, 340, 240, "",
+                i18n.t(PlatfMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
+                CANCEL_BUTTON_ID, new Listener0() {
                     public void onEvent() {
                         signInForm.validate();
                         if (signInForm.isValid()) {
@@ -56,7 +58,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
         panel.setBorder(false);
         signInForm = new SignInForm(presenter, i18n);
         signInForm.setWidth(310);
-        panel.add(signInForm.getForm());
+        panel.add(signInForm.getFormPanel());
         panel.add(createNoAccountRegister());
         add(panel);
     }

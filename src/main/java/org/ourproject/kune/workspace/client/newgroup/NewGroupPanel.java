@@ -84,7 +84,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n,
             final Provider<LicenseChoose> licenseChooseProvider, Images img) {
-        super(i18n.t(WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 430, new WizardListener() {
+        super(NEWGROUP_WIZARD, i18n.t(WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 430, new WizardListener() {
             public void onBack() {
                 presenter.onBack();
             }
@@ -105,7 +105,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
             public void onNext() {
                 presenter.onNext();
             }
-        }, i18n, NEWGROUP_WIZARD, BACK_BUTTON, NEXT_BUTTON, FINISH_BUTTON, CANCEL_BUTTON, CLOSE_BUTTON);
+        }, i18n, BACK_BUTTON, NEXT_BUTTON, FINISH_BUTTON, CANCEL_BUTTON, CLOSE_BUTTON);
         this.i18n = i18n;
         Field.setMsgTarget("side");
         final Panel centerPanel = new Panel();

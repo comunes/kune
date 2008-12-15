@@ -46,6 +46,7 @@ public class NewGroupPresenter implements NewGroup {
     private final Session session;
     private final StateManager stateManager;
     private final Provider<GroupServiceAsync> groupServiceProvider;
+    private boolean mustGoToPrevious;
 
     public NewGroupPresenter(final I18nTranslationService i18n, final Session session, final StateManager stateManager,
             final Provider<GroupServiceAsync> groupServiceProvider) {
@@ -58,6 +59,7 @@ public class NewGroupPresenter implements NewGroup {
                 doNewGroup();
             }
         });
+        mustGoToPrevious = true;
     }
 
     public void doNewGroup() {
@@ -98,8 +100,10 @@ public class NewGroupPresenter implements NewGroup {
     }
 
     public void onClose() {
+        if (mustGoToPrevious) {
+            stateManager.restorePreviousToken();
+        }
         reset();
-        stateManager.restorePreviousToken();
     }
 
     public void onFinish() {
@@ -129,8 +133,9 @@ public class NewGroupPresenter implements NewGroup {
             }
 
             public void onSuccess(final StateToken token) {
-                stateManager.gotoToken(token);
+                mustGoToPrevious = false;
                 view.hide();
+                stateManager.gotoToken(token);
                 reset();
                 view.unMask();
             }
@@ -164,5 +169,6 @@ public class NewGroupPresenter implements NewGroup {
 
     private void reset() {
         view.clearData();
+        mustGoToPrevious = true;
     }
 }

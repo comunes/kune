@@ -60,6 +60,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTranslatorView {
 
+    public static final String TRANSLATOR_DIALOG = "k-i18n-trans";
     private Window dialog;
     private final I18nTranslatorPresenter presenter;
     private LanguageSelectorPanel languageSelectorPanel;
@@ -126,7 +127,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         center.setClosable(false);
         center.setBorder(false);
 
-        final Window dialog = new BasicDialog("", false, false, 720, 330);
+        final Window dialog = new BasicDialog(TRANSLATOR_DIALOG, "", false, false, 720, 330);
         // dialog.setResizable(false);
         dialog.setIconCls("i18n-icon");
 

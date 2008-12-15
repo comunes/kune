@@ -1,11 +1,18 @@
 package org.ourproject.kune.workspace.client.options;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
-public interface EntityOptions extends AbstractOptionsView {
+public interface EntityOptions extends AbstractOptions {
 
-    void addOptionTab(View view);
+    public void addOptionTab(View tab);
 
-    void show();
+    public View getView();
+
+    public void hideMessages();
+
+    public void setErrorMessage(String message, SiteErrorType type);
+
+    public void show();
 
 }

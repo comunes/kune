@@ -88,8 +88,9 @@ public class SimpleToolbar extends Composite {
         addStyleName("k-blank-toolbar");
     }
 
-    public void setHeight(int height) {
-        mainPanel.setHeight("" + height);
-        mainPanel.setCellHeight(childPanel, "" + height);
+    @Override
+    public void setHeight(String height) {
+        mainPanel.setHeight(height);
+        mainPanel.setCellHeight(childPanel, height);
     }
 }

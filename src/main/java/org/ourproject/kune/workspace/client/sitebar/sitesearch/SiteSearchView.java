@@ -26,7 +26,7 @@ public interface SiteSearchView extends View {
 
     void selectSearchText();
 
-    void setDefaultTextSearch();
+    void setTextSearch(String text);
 
     void setTextSearchBig();
 

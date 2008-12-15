@@ -20,44 +20,29 @@
 package org.ourproject.kune.workspace.client.search;
 
 import org.ourproject.kune.platf.client.dto.LinkDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
-import com.gwtext.client.core.Connection;
-import com.gwtext.client.core.Template;
-import com.gwtext.client.core.UrlParam;
-import com.gwtext.client.data.DataProxy;
-import com.gwtext.client.data.FieldDef;
-import com.gwtext.client.data.HttpProxy;
-import com.gwtext.client.data.JsonReader;
-import com.gwtext.client.data.Record;
-import com.gwtext.client.data.RecordDef;
-import com.gwtext.client.data.Store;
-import com.gwtext.client.data.StringFieldDef;
-import com.gwtext.client.widgets.form.ComboBox;
-import com.gwtext.client.widgets.form.FormPanel;
-import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
+import com.calclab.suco.client.listener.Listener;
 
 public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
 
-    private static final String LONG_NAME_FIELD = "longName";
-    private static final String SHORT_NAME_FIELD = "shortName";
-    private static final String ICON_URL_FIELD = "iconUrl";
-    private static final String LINK_FIELD = "link";
-    private static final int PAGINATION_SIZE = 10;
+    public static final String ENT_LIVE_SEARCH_DIALOG = "k-elivesp-dialog";
     private final EntityLiveSearcherPresenter presenter;
     private BasicDialog dialog;
     private final EntityLiveSearcherType searchType;
-    private FormPanel searchForm;
     private final I18nTranslationService i18n;
+    private AbstractLiveSearcherPanel liveSearcher;
+    private final FileDownloadUtils downloadUtils;
 
     public EntityLiveSearcherPanel(final EntityLiveSearcherPresenter presenter,
-            final EntityLiveSearcherType searchType, final I18nTranslationService i18n) {
+            final EntityLiveSearcherType searchType, final I18nTranslationService i18n, FileDownloadUtils downloadUtils) {
         this.presenter = presenter;
         this.searchType = searchType;
         this.i18n = i18n;
+        this.downloadUtils = downloadUtils;
     }
 
     public void center() {
@@ -66,7 +51,7 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
 
     public void hide() {
         dialog.hide();
-        searchForm.getForm().reset();
+        liveSearcher.reset();
     }
 
     public void show() {
@@ -84,73 +69,32 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
         } else {
             title = i18n.t("Search existing users");
         }
-        dialog = new BasicDialog(title, true, false, 285, 55);
+        dialog = new BasicDialog(ENT_LIVE_SEARCH_DIALOG, title, true, false, 285, 55);
         dialog.setClosable(true);
         dialog.setCollapsible(false);
 
-        DataProxy dataProxy = null;
+        String dataProxyUrl = "";
         switch (searchType) {
         case groups:
-            dataProxy = new HttpProxy("/kune/json/GroupJSONService/search", Connection.POST);
+            dataProxyUrl = "/kune/json/GroupJSONService/search";
             break;
         case users:
-            dataProxy = new HttpProxy("/kune/json/UserJSONService/search", Connection.POST);
+            dataProxyUrl = "/kune/json/UserJSONService/search";
             break;
         default:
             break;
         }
 
-        final JsonReader reader = new JsonReader(new RecordDef(
-                new FieldDef[] { new StringFieldDef(SHORT_NAME_FIELD), new StringFieldDef(LONG_NAME_FIELD),
-                        new StringFieldDef(LINK_FIELD), new StringFieldDef(ICON_URL_FIELD) }));
-        reader.setRoot("list");
-        reader.setTotalProperty("size");
-        reader.setId(SHORT_NAME_FIELD);
+        String templateText = AbstractLiveSearcherPanel.TEMPLATE_TEXT_PREFIX
+                + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
+                + AbstractLiveSearcherPanel.TEMPLATE_TEXT_SUFFIX;
 
-        final Store store = new Store(dataProxy, reader);
-
-        store.load(new UrlParam[] { new UrlParam("query", "."), new UrlParam("first", 1),
-                new UrlParam("max", PAGINATION_SIZE) });
-
-        searchForm = new FormPanel();
-        searchForm.setBorder(false);
-        searchForm.setWidth(275);
-        searchForm.setHideLabels(true);
-
-        final Template resultTpl = new Template(
-                "<div class=\"search-item\"><span class=\"kune-IconHyperlink\"><img alt=\"group logo\" src=\"images/group-def-icon.png\" style=\"height: 16px; width: 16px;\" />{shortName}:&nbsp;{longName}</span></div>");
-        final ComboBox cb = new ComboBox();
-        cb.setStore(store);
-        cb.setEmptyText(i18n.t("Write here to search"));
-        cb.setDisplayField(LONG_NAME_FIELD);
-        cb.setTypeAhead(true);
-        cb.setLoadingText(i18n.t("Searching..."));
-        cb.setWidth(268);
-        cb.setPageSize(PAGINATION_SIZE);
-        cb.setTpl(resultTpl);
-        cb.setMode(ComboBox.REMOTE);
-        cb.setMinChars(2);
-        cb.setSelectOnFocus(false);
-        cb.setHideTrigger(true);
-        cb.setHideLabel(true);
-        // setTitle(i18n.t("User or group"));
-        cb.setItemSelector("div.search-item");
-
-        cb.addListener(new ComboBoxListenerAdapter() {
-            @Override
-            public void onSelect(final ComboBox comboBox, final Record record, final int index) {
-                DeferredCommand.addCommand(new Command() {
-                    public void execute() {
-                        final LinkDTO link = new LinkDTO(record.getAsString(SHORT_NAME_FIELD),
-                                record.getAsString(LONG_NAME_FIELD), record.getAsString(ICON_URL_FIELD),
-                                record.getAsString(LINK_FIELD));
-                        presenter.onSelection(link);
-                    }
-                });
+        liveSearcher = new AbstractLiveSearcherPanel(i18n, templateText, dataProxyUrl, new Listener<LinkDTO>() {
+            public void onEvent(LinkDTO link) {
+                presenter.onSelection(link);
             }
         });
 
-        searchForm.add(cb);
-        dialog.add(searchForm);
+        dialog.add(liveSearcher);
     }
 }

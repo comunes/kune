@@ -32,18 +32,20 @@ public class BasicDialogExtended extends BasicDialog {
     private final Button cancel;
     private final Button firstButton;
 
-    public BasicDialogExtended(final String title, final boolean modal, final boolean autoscroll, final int width,
-            final int heigth, final String icon, final String firstButtonTitle, final String cancelButtonTitle,
-            final Listener0 onFirstButtonClick, Listener0 onCancelButtonClick, int tabIndexStart) {
-        this(title, modal, autoscroll, width, heigth, icon, firstButtonTitle, Ext.generateId(), cancelButtonTitle,
-                Ext.generateId(), onFirstButtonClick, onCancelButtonClick, tabIndexStart);
+    public BasicDialogExtended(final String dialogId, final String title, final boolean modal,
+            final boolean autoscroll, final int width, final int heigth, final String icon,
+            final String firstButtonTitle, final String cancelButtonTitle, final Listener0 onFirstButtonClick,
+            Listener0 onCancelButtonClick, int tabIndexStart) {
+        this(dialogId, title, modal, autoscroll, width, heigth, icon, firstButtonTitle, Ext.generateId(),
+                cancelButtonTitle, Ext.generateId(), onFirstButtonClick, onCancelButtonClick, tabIndexStart);
     }
 
-    public BasicDialogExtended(final String title, final boolean modal, final boolean autoscroll, final int width,
-            final int heigth, final String icon, final String firstButtonTitle, final String firstButtonId,
-            final String cancelButtonTitle, final String cancelButtonId, final Listener0 onFirstButtonClick,
-            final Listener0 onCancelButtonClick, int tabIndexStart) {
-        super(title, modal, autoscroll, width, heigth);
+    public BasicDialogExtended(final String dialogId, final String title, final boolean modal,
+            final boolean autoscroll, final int width, final int heigth, final String icon,
+            final String firstButtonTitle, final String firstButtonId, final String cancelButtonTitle,
+            final String cancelButtonId, final Listener0 onFirstButtonClick, final Listener0 onCancelButtonClick,
+            int tabIndexStart) {
+        super(dialogId, title, modal, autoscroll, width, heigth);
         setLayout(new FitLayout());
         setCollapsible(false);
         setButtonAlign(Position.RIGHT);

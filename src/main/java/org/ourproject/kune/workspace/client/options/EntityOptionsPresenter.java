@@ -1,15 +1,13 @@
 package org.ourproject.kune.workspace.client.options;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
 import com.calclab.suco.client.listener.Listener;
 
-public class EntityOptionsPresenter implements EntityOptions {
+public class EntityOptionsPresenter extends AbstractOptionsPresenter implements EntityOptions {
 
-    private EntityOptionsView view;
+    EntityOptionsView view;
 
     public EntityOptionsPresenter(StateManager stateManager) {
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
@@ -29,27 +27,8 @@ public class EntityOptionsPresenter implements EntityOptions {
         });
     }
 
-    public void addOptionTab(View tab) {
-        view.addOptionTab(tab);
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void hideMessages() {
-        view.hideMessages();
-    }
-
     public void init(EntityOptionsView view) {
+        super.init(view);
         this.view = view;
-    }
-
-    public void setErrorMessage(String message, SiteErrorType type) {
-        view.setErrorMessage(message, type);
-    }
-
-    public void show() {
-        view.createAndShow();
     }
 }

@@ -1,12 +1,18 @@
 package org.ourproject.kune.workspace.client.options;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
+import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
+import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.listener.Listener0;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
+import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public abstract class AbstractOptionsPanel {
     private BasicDialog dialog;
@@ -20,11 +26,12 @@ public abstract class AbstractOptionsPanel {
     private final Images images;
     private final String errorLabelId;
     private String iconCls;
-    private final String id;
+    private final String dialogId;
+    private Listener0 onHideListener;
 
-    public AbstractOptionsPanel(String title, int width, int height, int minWidth, int minHeight, Images images,
-            String id, String errorLabelId) {
-        this.id = id;
+    public AbstractOptionsPanel(String dialogId, String title, int width, int height, int minWidth, int minHeight,
+            Images images, String errorLabelId) {
+        this.dialogId = dialogId;
         this.title = title;
         this.width = width;
         this.height = height;
@@ -34,9 +41,27 @@ public abstract class AbstractOptionsPanel {
         this.errorLabelId = errorLabelId;
     }
 
-    public void addTab(Panel newTab) {
-        createDialogIfNecessary();
-        tabPanel.add(newTab);
+    public void addHideListener(final Listener0 onHideListener) {
+        this.onHideListener = onHideListener;
+        if (dialog != null) {
+            addHideListener();
+        }
+    }
+
+    public void addOptionTab(View view) {
+        if (view instanceof Panel) {
+            addTab((Panel) view);
+        } else if (view instanceof DefaultForm) {
+            addTab(((DefaultForm) view).getFormPanel());
+        } else {
+            Log.error("Programatic error: Unexpected element added to GroupOptions");
+        }
+        doLayoutIfNeeded();
+    }
+
+    public void createAndShow() {
+        show();
+        setFirstTabActive();
     }
 
     public void doLayoutIfNeeded() {
@@ -89,9 +114,27 @@ public abstract class AbstractOptionsPanel {
         dialog.show();
     }
 
+    private void addHideListener() {
+        dialog.addListener(new WindowListenerAdapter() {
+            @Override
+            public void onClose(Panel panel) {
+                onHideListener.onEvent();
+            }
+
+            @Override
+            public void onHide(Component component) {
+                onHideListener.onEvent();
+            }
+        });
+    }
+
+    private void addTab(Panel newTab) {
+        createDialogIfNecessary();
+        tabPanel.add(newTab);
+    }
+
     private void createDialog() {
-        dialog = new BasicDialog(title, false, true, width, height, minWidth, minHeight);
-        dialog.setId(id);
+        dialog = new BasicDialog(dialogId, title, false, true, width, height, minWidth, minHeight);
         messageErrorBar = new MessageToolbar(images, errorLabelId);
         dialog.setBottomToolbar(messageErrorBar.getToolbar());
         tabPanel = new TabPanel();
@@ -99,6 +142,9 @@ public abstract class AbstractOptionsPanel {
         dialog.add(tabPanel);
         if (iconCls != null) {
             dialog.setIconCls(iconCls);
+        }
+        if (onHideListener != null) {
+            addHideListener();
         }
     }
 

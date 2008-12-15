@@ -57,8 +57,8 @@ public class EntityLicensePresenter {
     }
 
     private void setLicense(final StateContainerDTO state) {
-        view.attach();
         this.license = state.getLicense();
         view.showLicense(state.getGroup().getLongName(), license);
+        view.attach();
     }
 }

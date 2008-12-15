@@ -19,7 +19,6 @@
  */package org.ourproject.kune.workspace.client.sitebar.sitesearch;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -40,14 +39,10 @@ public class SiteSearchPanel implements SiteSearchView {
 
     private final PushButton searchButton;
     private final TextBox searchTextBox;
-    private final I18nUITranslationService i18n;
     private final SimpleToolbar siteBar;
 
-    public SiteSearchPanel(final SiteSearchPresenter presenter, final WorkspaceSkeleton ws,
-            final I18nUITranslationService i18n, Images img) {
-        this.i18n = i18n;
+    public SiteSearchPanel(final SiteSearchPresenter presenter, final WorkspaceSkeleton ws, Images img) {
         siteBar = ws.getSiteBar();
-        siteBar.addSpacer();
         siteBar.addSpacer();
         searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
         searchButton.ensureDebugId(SITE_SEARCH_BUTTON);
@@ -57,10 +52,8 @@ public class SiteSearchPanel implements SiteSearchView {
         siteBar.add(searchButton);
         siteBar.addSpacer();
         siteBar.add(searchTextBox);
-        siteBar.addSpacer();
 
         setTextSearchSmall();
-        setDefaultTextSearch();
         searchTextBox.addFocusListener(new FocusListener() {
             public void onFocus(final Widget arg0) {
                 presenter.onSearchFocus();
@@ -104,11 +97,11 @@ public class SiteSearchPanel implements SiteSearchView {
         searchTextBox.selectAll();
     }
 
-    public void setDefaultTextSearch() {
-        searchTextBox.setText(i18n.t("Search"));
+    public void setSearchText(final String text) {
+        searchTextBox.setText(text);
     }
 
-    public void setSearchText(final String text) {
+    public void setTextSearch(String text) {
         searchTextBox.setText(text);
     }
 

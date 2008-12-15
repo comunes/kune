@@ -27,7 +27,7 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
         super.setAutoWidth(true);
         super.setAutoHeight(true);
         super.add(new Hidden());
-        super.getForm().setLabelWidth(20);
+        super.getFormPanel().setLabelWidth(20);
         this.presenter = presenter;
         fields = new HashMap<String, Checkbox>();
     }
@@ -46,7 +46,7 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
     }
 
     public void clear() {
-        super.getForm().removeAll(true);
+        super.getFormPanel().removeAll(true);
         fields.clear();
         Label label = new Label();
         label.setHtml(i18n.t("Here you can select the tools used:") + "<br/><br/>");
@@ -78,8 +78,8 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
     }
 
     private void doLayoutIfNeeded() {
-        if (super.getForm().isRendered()) {
-            super.getForm().doLayout();
+        if (super.getFormPanel().isRendered()) {
+            super.getFormPanel().doLayout();
         }
     }
 

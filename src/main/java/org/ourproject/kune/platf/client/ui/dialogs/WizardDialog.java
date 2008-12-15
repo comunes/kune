@@ -38,11 +38,11 @@ public class WizardDialog {
     private final I18nTranslationService i18n;
     private final Button nextButton;
 
-    public WizardDialog(final String caption, final boolean modal, final boolean minimizable, final int width,
-            final int height, final int minWidth, final int minHeight, final WizardListener listener,
-            final I18nTranslationService i18n, String dialogId, final String backId, final String nextId,
-            final String finishId, final String cancelId, final String closeId) {
-        dialog = new BasicDialog(caption, modal, false, width, height, minWidth, minHeight);
+    public WizardDialog(String dialogId, final String caption, final boolean modal, final boolean minimizable,
+            final int width, final int height, final int minWidth, final int minHeight, final WizardListener listener,
+            final I18nTranslationService i18n, final String backId, final String nextId, final String finishId,
+            final String cancelId, final String closeId) {
+        dialog = new BasicDialog(dialogId, caption, modal, false, width, height, minWidth, minHeight);
         this.i18n = i18n;
         dialog.setCollapsible(minimizable);
         dialog.setShadow(true);
@@ -95,10 +95,10 @@ public class WizardDialog {
         });
     }
 
-    public WizardDialog(final String caption, final boolean modal, final boolean minimizable, final int width,
-            final int height, final WizardListener listener, final I18nTranslationService i18n, String dialogId,
+    public WizardDialog(String dialogId, final String caption, final boolean modal, final boolean minimizable,
+            final int width, final int height, final WizardListener listener, final I18nTranslationService i18n,
             final String backId, final String nextId, final String finishId, final String cancelId, final String closeId) {
-        this(caption, modal, minimizable, width, height, width, height, listener, i18n, dialogId, backId, nextId,
+        this(dialogId, caption, modal, minimizable, width, height, width, height, listener, i18n, backId, nextId,
                 finishId, cancelId, closeId);
     }
 

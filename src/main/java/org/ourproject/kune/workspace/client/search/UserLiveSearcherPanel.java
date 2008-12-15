@@ -20,11 +20,13 @@
 package org.ourproject.kune.workspace.client.search;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 
 public class UserLiveSearcherPanel extends EntityLiveSearcherPanel {
 
-    public UserLiveSearcherPanel(final EntityLiveSearcherPresenter presenter, final I18nTranslationService i18n) {
-        super(presenter, EntityLiveSearcherType.users, i18n);
+    public UserLiveSearcherPanel(final EntityLiveSearcherPresenter presenter, final I18nTranslationService i18n,
+            FileDownloadUtils downloadUtils) {
+        super(presenter, EntityLiveSearcherType.users, i18n, downloadUtils);
     }
 
 }

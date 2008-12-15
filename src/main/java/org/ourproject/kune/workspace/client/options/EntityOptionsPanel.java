@@ -6,14 +6,11 @@ import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
-import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.widgets.Panel;
 
 public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOptionsView {
 
@@ -22,9 +19,9 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
             super(text, icon, false);
         }
     }
-    public static final String GROUP_OPTIONS_ERROR_ID = "k-gop-err-mess";
-    public static final String GROUP_OPTIONS_ID = "k-gop-panel";
-    public static final String GROUP_OPTIONS_ICON = "k-gop-icon";
+    public static final String ENTITY_OP_PANEL_ID = "k-eop-diag";
+    public static final String GROUP_OPTIONS_ERROR_ID = "k-eop-err-mess";
+    public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
     private final I18nTranslationService i18n;
     private final EntityHeader entityHeader;
     private EntityOptionPushButton optionsButton;
@@ -32,9 +29,9 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
 
     private final EntityOptionsGroup entityPreferencesGroup;
 
-    public EntityOptionsPanel(final EntityOptionsPresenter presenter, final EntityHeader entityHeader,
+    public EntityOptionsPanel(final EntityOptions presenter, final EntityHeader entityHeader,
             I18nTranslationService i18n, Images images, EntityOptionsGroup entityOptionsGroup) {
-        super("", 400, 250, 400, 250, images, GROUP_OPTIONS_ID, GROUP_OPTIONS_ERROR_ID);
+        super(ENTITY_OP_PANEL_ID, "", 400, 250, 400, 250, images, GROUP_OPTIONS_ERROR_ID);
         this.entityHeader = entityHeader;
         this.i18n = i18n;
         this.images = images;
@@ -43,21 +40,10 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
         createOptionsButton();
     }
 
-    public void addOptionTab(View view) {
-        if (view instanceof Panel) {
-            super.addTab((Panel) view);
-        } else if (view instanceof DefaultForm) {
-            super.addTab(((DefaultForm) view).getForm());
-        } else {
-            Log.error("Programatic error: Unexpected element added to GroupOptions");
-        }
-        doLayoutIfNeeded();
-    }
-
+    @Override
     public void createAndShow() {
         entityPreferencesGroup.createAll();
-        show();
-        setFirstTabActive();
+        super.createAndShow();
     }
 
     public void setButtonVisible(boolean visible) {

@@ -238,9 +238,10 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<SiteSearch>(SiteSearch.class) {
             @Override
             public SiteSearch create() {
-                final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class));
+                final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class),
+                        $(I18nTranslationService.class));
                 final SiteSearchPanel panel = new SiteSearchPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nUITranslationService.class), $(Images.class));
+                        $(Images.class));
                 presenter.init(panel);
                 return presenter;
             }

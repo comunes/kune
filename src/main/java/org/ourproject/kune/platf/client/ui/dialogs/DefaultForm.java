@@ -18,7 +18,9 @@
  *
  */package org.ourproject.kune.platf.client.ui.dialogs;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.gwtext.client.core.Position;
+import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -61,6 +63,10 @@ public class DefaultForm {
         form.add(label);
     }
 
+    public void addButton(final Button button) {
+        form.addButton(button);
+    }
+
     public void addStyleName(final String cls) {
         form.addStyleName(cls);
     }
@@ -69,7 +75,7 @@ public class DefaultForm {
         return form.getForm().findField(id);
     }
 
-    public FormPanel getForm() {
+    public FormPanel getFormPanel() {
         return form;
     }
 
@@ -82,6 +88,7 @@ public class DefaultForm {
     }
 
     public void reset() {
+        Log.info("Reset------------------");
         form.getForm().reset();
     }
 

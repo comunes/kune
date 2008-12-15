@@ -72,14 +72,14 @@ public class EntityWorkspace {
         bottomPanel.setLayout(new AnchorLayout());
 
         title = new SimpleToolbar();
-        title.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2);
+        title.setHeight("" + (WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2));
         title.setStylePrimaryName(ENTITY_TITLE);
         // title.ensureDebugId(ENTITY_TITLE);
         subTitle = new SimpleToolbar();
         subTitle.setStylePrimaryName(ENTITY_SUBTITLE);
         // subTitle.ensureDebugId(ENTITY_SUBTITLE);
         bottom = new SimpleToolbar();
-        bottom.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2);
+        bottom.setHeight("" + (WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2));
         bottom.setStylePrimaryName(ENTITY_BOTTOM);
         bottom.ensureDebugId(ENTITY_BOTTOM);
 

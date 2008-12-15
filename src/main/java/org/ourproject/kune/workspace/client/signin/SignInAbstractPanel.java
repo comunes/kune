@@ -20,22 +20,22 @@ public abstract class SignInAbstractPanel extends BasicDialogExtended {
     protected final I18nUITranslationService i18n;
     private final MessageToolbar messageErrorBar;
 
-    public SignInAbstractPanel(I18nUITranslationService i18n, String title, boolean modal, boolean autoscroll,
-            int width, int heigth, String icon, String firstButtonTitle, String cancelButtonTitle,
+    public SignInAbstractPanel(String dialogId, I18nUITranslationService i18n, String title, boolean modal,
+            boolean autoscroll, int width, int heigth, String icon, String firstButtonTitle, String cancelButtonTitle,
             Listener0 onFirstButtonClick, Listener0 onCancelButtonClick, Images images, String errorLabelId,
             int tabIndexStart) {
-        this(i18n, title, modal, autoscroll, width, heigth, icon, firstButtonTitle, Ext.generateId(),
+        this(dialogId, i18n, title, modal, autoscroll, width, heigth, icon, firstButtonTitle, Ext.generateId(),
                 cancelButtonTitle, Ext.generateId(), onFirstButtonClick, onCancelButtonClick, images, errorLabelId,
                 tabIndexStart);
     }
 
-    public SignInAbstractPanel(I18nUITranslationService i18n, final String title, final boolean modal,
+    public SignInAbstractPanel(String dialogId, I18nUITranslationService i18n, final String title, final boolean modal,
             final boolean autoscroll, final int width, final int heigth, final String icon,
             final String firstButtonTitle, final String firstButtonId, final String cancelButtonTitle,
             final String cancelButtonId, final Listener0 onFirstButtonClick, final Listener0 onCancelButtonClick,
             Images images, String errorLabelId, int tabIndexStart) {
-        super(title, modal, autoscroll, width, heigth, icon, firstButtonTitle, firstButtonId, cancelButtonTitle,
-                cancelButtonId, onFirstButtonClick, onCancelButtonClick, tabIndexStart);
+        super(dialogId, title, modal, autoscroll, width, heigth, icon, firstButtonTitle, firstButtonId,
+                cancelButtonTitle, cancelButtonId, onFirstButtonClick, onCancelButtonClick, tabIndexStart);
         this.i18n = i18n;
 
         messageErrorBar = new MessageToolbar(images, errorLabelId);
