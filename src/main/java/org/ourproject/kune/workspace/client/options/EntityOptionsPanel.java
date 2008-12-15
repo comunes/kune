@@ -31,7 +31,7 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
 
     public EntityOptionsPanel(final EntityOptions presenter, final EntityHeader entityHeader,
             I18nTranslationService i18n, Images images, EntityOptionsGroup entityOptionsGroup) {
-        super(ENTITY_OP_PANEL_ID, "", 400, 250, 400, 250, images, GROUP_OPTIONS_ERROR_ID);
+        super(ENTITY_OP_PANEL_ID, "", 400, 250, 400, 250, false, images, GROUP_OPTIONS_ERROR_ID);
         this.entityHeader = entityHeader;
         this.i18n = i18n;
         this.images = images;

@@ -16,7 +16,7 @@ public class TextEditorInsertElementPanel extends AbstractOptionsPanel implement
     public TextEditorInsertElementPanel(final TextEditorInsertElementPresenter presenter, final WorkspaceSkeleton ws,
             Images images, I18nTranslationService i18n, final TextEditorInsertElementGroup textEditorInsertElementGroup) {
         super(TEXT_EDT_INSERT_DIALOG, i18n.tWithNT("Insert an element",
-                "Option in a text editor to insert links and other elements"), 380, 170, 380, 170, images,
+                "Option in a text editor to insert links and other elements"), 380, 170, 380, 170, true, images,
                 TEXT_EDT_INSERT_DIALOG_ERROR_ID);
         // super.setIconCls("k-options-icon");
         this.textEditorInsertElementGroup = textEditorInsertElementGroup;

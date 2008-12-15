@@ -28,15 +28,17 @@ public abstract class AbstractOptionsPanel {
     private String iconCls;
     private final String dialogId;
     private Listener0 onHideListener;
+    private final boolean modal;
 
     public AbstractOptionsPanel(String dialogId, String title, int width, int height, int minWidth, int minHeight,
-            Images images, String errorLabelId) {
+            boolean modal, Images images, String errorLabelId) {
         this.dialogId = dialogId;
         this.title = title;
         this.width = width;
         this.height = height;
         this.minWidth = minWidth;
         this.minHeight = minHeight;
+        this.modal = modal;
         this.images = images;
         this.errorLabelId = errorLabelId;
     }
@@ -134,7 +136,7 @@ public abstract class AbstractOptionsPanel {
     }
 
     private void createDialog() {
-        dialog = new BasicDialog(dialogId, title, false, true, width, height, minWidth, minHeight);
+        dialog = new BasicDialog(dialogId, title, modal, true, width, height, minWidth, minHeight);
         messageErrorBar = new MessageToolbar(images, errorLabelId);
         dialog.setBottomToolbar(messageErrorBar.getToolbar());
         tabPanel = new TabPanel();
