@@ -37,6 +37,8 @@ public interface ChatEngine {
 
     void logout();
 
+    void setAvatar(String photoBinary);
+
     void show();
 
     void stop();

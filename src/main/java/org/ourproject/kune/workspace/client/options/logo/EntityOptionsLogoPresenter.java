@@ -18,13 +18,18 @@
  *
  */package org.ourproject.kune.workspace.client.options.logo;
 
+import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
+import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener2;
 
 public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
@@ -33,12 +38,16 @@ public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
     private final Session session;
     private final EntityHeader entityLogo;
     private final EntityOptions entityOptions;
+    private final Provider<UserServiceAsync> userService;
+    private final Provider<ChatEngine> chatEngine;
 
     public EntityOptionsLogoPresenter(Session session, EntityHeader entityLogo, EntityOptions entityOptions,
-            StateManager stateManager) {
+            StateManager stateManager, Provider<UserServiceAsync> userService, Provider<ChatEngine> chatEngine) {
         this.session = session;
         this.entityLogo = entityLogo;
         this.entityOptions = entityOptions;
+        this.userService = userService;
+        this.chatEngine = chatEngine;
         stateManager.onGroupChanged(new Listener2<String, String>() {
             public void onEvent(String group1, String group2) {
                 setState();
@@ -56,8 +65,17 @@ public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
         setState();
     }
 
-    public void onSubmitComplete(int httpStatus, String responseText) {
+    public void onSubmitComplete(int httpStatus, String photoBinary) {
         entityLogo.reloadGroupLogoImage();
+        GroupDTO group = session.getCurrentState().getGroup();
+        if (session.getCurrentUser().getShortName().equals(group.getShortName())) {
+            userService.get().getUserAvatarBaser64(session.getUserHash(), group.getStateToken(),
+                    new AsyncCallbackSimple<String>() {
+                        public void onSuccess(String photoBinary) {
+                            chatEngine.get().setAvatar(photoBinary);
+                        }
+                    });
+        }
     }
 
     public void onSubmitFailed(int httpStatus, String responseText) {

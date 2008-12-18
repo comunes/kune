@@ -21,6 +21,7 @@
 import com.allen_sauer.gwt.log.client.Log;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.PaddedPanel;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -61,6 +62,10 @@ public class DefaultForm {
 
     public void add(Label label) {
         form.add(label);
+    }
+
+    public void add(PaddedPanel paddedPanel) {
+        form.add(paddedPanel);
     }
 
     public void addButton(final Button button) {

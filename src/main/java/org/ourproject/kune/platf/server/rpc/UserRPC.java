@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.UUID;
 
+import org.jivesoftware.smack.util.Base64;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.UserDTO;
@@ -34,6 +35,7 @@ import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.auth.SessionService;
+import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.domain.UserBuddiesVisibility;
 import org.ourproject.kune.platf.server.manager.GroupManager;
@@ -79,6 +81,23 @@ public class UserRPC implements RPC, UserService {
                 userDTO.getTimezone().getId());
         groupManager.createUserGroup(user, wantPersonalHomepage);
         return loginUser(user);
+    }
+
+    @Authenticated
+    @Transactional(type = TransactionType.READ_ONLY)
+    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+    public String getUserAvatarBaser64(final String userHash, StateToken userToken) throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        Group userGroup = user.getUserGroup();
+        if (!userGroup.getShortName().equals(userToken.getGroup())) {
+            throw new AccessViolationException();
+        }
+        if (userGroup.hasLogo()) {
+            return Base64.encodeBytes(userGroup.getLogo());
+        } else {
+            throw new DefaultException("Unexpected programatic exception (user has no logo)");
+        }
     }
 
     @Transactional(type = TransactionType.READ_ONLY)

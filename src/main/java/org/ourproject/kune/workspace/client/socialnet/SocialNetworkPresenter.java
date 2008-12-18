@@ -220,6 +220,7 @@ public class SocialNetworkPresenter {
         return gridItem;
     }
 
+    // FIXME: Code smell: create a Utility with this
     private String createLogoAvatar(StateToken groupToken, boolean groupHasLogo, boolean isPersonal, int size,
             int hvspace) {
         if (groupHasLogo) {

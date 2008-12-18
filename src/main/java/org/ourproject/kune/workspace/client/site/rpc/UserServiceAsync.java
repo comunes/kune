@@ -30,6 +30,8 @@ public interface UserServiceAsync {
 
     void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<UserInfoDTO> asyncCallback);
 
+    void getUserAvatarBaser64(String userHash, StateToken userToken, AsyncCallback<?> asyncCallback);
+
     void login(String nickOrEmail, String passwd, AsyncCallback<UserInfoDTO> asyncCallback);
 
     void logout(String userHash, AsyncCallback<?> asyncCallback);

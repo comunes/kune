@@ -23,10 +23,12 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
+import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -52,12 +54,15 @@ class ChatEngineDefault implements ChatEngine {
     private final WorkspaceSkeleton ws;
     private ToolbarButton traybarButton;
     private final Provider<EmiteUIDialog> emiteUIProvider;
+    private final Provider<FileDownloadUtils> downloadUtils;
 
     public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws, Application application,
-            Session session, final Provider<EmiteUIDialog> emiteUIProvider) {
+            Session session, final Provider<EmiteUIDialog> emiteUIProvider,
+            final Provider<FileDownloadUtils> downloadUtils) {
         this.i18n = i18n;
         this.ws = ws;
         this.emiteUIProvider = emiteUIProvider;
+        this.downloadUtils = downloadUtils;
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO initData) {
                 checkChatDomain(initData.getChatDomain());
@@ -122,7 +127,12 @@ class ChatEngineDefault implements ChatEngine {
         // FIXME: Avatar provider
         final AvatarProvider avatarProvider = new AvatarProvider() {
             public String getAvatarURL(XmppURI userURI) {
-                return "images/person-def.gif";
+                if (userURI.getHost().equals(chatOptions.domain)) {
+                    return downloadUtils.get().getLogoImageUrl(new StateToken(userURI.getNode()));
+                } else {
+                    return "";
+                    // return "images/person-def.gif";
+                }
             }
         };
         final String initialWindowTitle = Window.getTitle();
@@ -138,7 +148,6 @@ class ChatEngineDefault implements ChatEngine {
         if (traybarButton == null) {
             traybarButton = new ToolbarButton();
             traybarButton.setTooltip(i18n.t("Show/hide the chat window"));
-            // traybarButton.setIcon("images/emite-chat.gif");
             traybarButton.setIcon("images/e-icon.gif");
             traybarButton.addListener(new ButtonListenerAdapter() {
                 @Override
@@ -182,6 +191,10 @@ class ChatEngineDefault implements ChatEngine {
             emiteUIProvider.get().refreshUserInfo(chatOptions.userOptions);
             emiteUIProvider.get().setEnableStatusUI(false);
         }
+    }
+
+    public void setAvatar(String photoBinary) {
+        emiteUIProvider.get().setOwnVCardAvatar(photoBinary);
     }
 
     public void show() {

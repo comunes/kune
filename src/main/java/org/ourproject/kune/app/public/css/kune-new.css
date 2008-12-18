@@ -816,6 +816,14 @@
   background-image: url(img/emblem-system.gif) !important;
 }
 
+.k-deflicense-icon {
+  background-image: url(img/copyleft.png) !important;
+}
+
+.k-info-icon {
+  background-image: url(img/info.gif) !important;
+}
+
 .x-toolbar-body table {
     /* width: 100%; */
 }

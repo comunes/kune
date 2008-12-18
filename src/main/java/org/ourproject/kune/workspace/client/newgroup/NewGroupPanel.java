@@ -21,8 +21,8 @@ package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.TextUtils;
+import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardListener;
@@ -84,28 +84,29 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n,
             final Provider<LicenseChoose> licenseChooseProvider, Images img) {
-        super(NEWGROUP_WIZARD, i18n.t(WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 430, new WizardListener() {
-            public void onBack() {
-                presenter.onBack();
-            }
+        super(NEWGROUP_WIZARD, i18n.t(WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 430,
+                new WizardListener() {
+                    public void onBack() {
+                        presenter.onBack();
+                    }
 
-            public void onCancel() {
-                presenter.onCancel();
-            }
+                    public void onCancel() {
+                        presenter.onCancel();
+                    }
 
-            public void onClose() {
-                Log.info("close pressed");
-                presenter.onClose();
-            }
+                    public void onClose() {
+                        Log.info("close pressed");
+                        presenter.onClose();
+                    }
 
-            public void onFinish() {
-                presenter.onFinish();
-            }
+                    public void onFinish() {
+                        presenter.onFinish();
+                    }
 
-            public void onNext() {
-                presenter.onNext();
-            }
-        }, i18n, BACK_BUTTON, NEXT_BUTTON, FINISH_BUTTON, CANCEL_BUTTON, CLOSE_BUTTON);
+                    public void onNext() {
+                        presenter.onNext();
+                    }
+                }, i18n, BACK_BUTTON, NEXT_BUTTON, FINISH_BUTTON, CANCEL_BUTTON, CLOSE_BUTTON);
         this.i18n = i18n;
         Field.setMsgTarget("side");
         final Panel centerPanel = new Panel();
@@ -270,7 +271,8 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         tags.setName(TAGS_FIELD);
         tags.setWidth(BIG_FIELD_WIDTH);
         tags.setAllowBlank(false);
-        final ToolTip fieldToolTip = new ToolTip(i18n.t("Please, write some keywords for this group (separated with spaces)."));
+        final ToolTip fieldToolTip = new ToolTip(
+                i18n.t("Please, write some keywords for this group (separated with spaces)."));
         fieldToolTip.applyTo(tags);
         tags.setValidationDelay(1000);
         form.add(tags);
@@ -281,45 +283,29 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         form.add(groupTypeFieldSet);
 
-        projectRadio = new Radio();
-        projectRadio.setTabIndex(5);
-        createRadio(groupTypeFieldSet, projectRadio, "Project",
-                "A project is a kind of group in which new members joining "
+        projectRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Project"),
+                i18n.t("A project is a kind of group in which new members joining "
                         + "is moderated by the project administrators. "
                         + "An administrator is the person who creates the project "
-                        + "and other people she/he chooses to be administrator as well.", PROJ_GROUP_TYPE_ID);
+                        + "and other people she/he chooses to be administrator as well."), PROJ_GROUP_TYPE_ID);
+        projectRadio.setTabIndex(5);
         projectRadio.setChecked(true);
 
-        orgRadio = new Radio();
+        orgRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Organization"),
+                i18n.t("An organization works as a project, " + "but organizations must be a legal entity."),
+                ORG_GROUP_TYPE_ID);
         orgRadio.setTabIndex(6);
-        createRadio(groupTypeFieldSet, orgRadio, "Organization", "An organization works as a project, "
-                + "but organizations must be a legal entity.", ORG_GROUP_TYPE_ID);
 
-        communityRadio = new Radio();
+        communityRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Community"),
+                i18n.t("Communities are social groups of persons "
+                        + "with shared interests, which are open to new members "
+                        + "(for instance the environmental community or the LGBT community). "
+                        + "They rarely are a legal entity."), COMM_GROUP_TYPE_ID);
         communityRadio.setTabIndex(7);
-        createRadio(groupTypeFieldSet, communityRadio, "Community", "Communities are social groups of persons "
-                + "with shared interests, which are open to new members "
-                + "(for instance the environmental community or the LGBT community). "
-                + "They rarely are a legal entity.", COMM_GROUP_TYPE_ID);
 
         groupTypeFieldSet.setCollapsible(false);
 
         return form;
-    }
-
-    private void createRadio(final FieldSet fieldSet, final Radio radio, final String radioLabel,
-            final String radioTip, final String id) {
-        radio.setName(TYPEOFGROUP_FIELD);
-        radio.setBoxLabel(KuneUiUtils.genQuickTipLabel(i18n.t(radioLabel), null, i18n.t(radioTip)));
-        radio.setAutoCreate(true);
-        radio.setHideLabel(true);
-        radio.setId(id);
-        fieldSet.add(radio);
-
-        ToolTip tooltip = new ToolTip();
-        tooltip.setHtml(radioTip);
-        tooltip.setWidth(250);
-        tooltip.applyTo(radio);
     }
 
     private void initBottomButtons() {

@@ -19,17 +19,20 @@
  */
 package org.ourproject.kune.platf.client.ui.dialogs;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Component;
+import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Toolbar;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
-public class WizardDialog {
+public class WizardDialog implements WizardDialogView {
 
     private final Button backButton;
     private final Button cancelButton;
@@ -39,9 +42,9 @@ public class WizardDialog {
     private final Button nextButton;
 
     public WizardDialog(String dialogId, final String caption, final boolean modal, final boolean minimizable,
-            final int width, final int height, final int minWidth, final int minHeight, final WizardListener listener,
-            final I18nTranslationService i18n, final String backId, final String nextId, final String finishId,
-            final String cancelId, final String closeId) {
+            final int width, final int height, final int minWidth, final int minHeight, final String backId,
+            final String nextId, final String finishId, final String cancelId, final String closeId,
+            final I18nTranslationService i18n, final WizardListener listener) {
         dialog = new BasicDialog(dialogId, caption, modal, false, width, height, minWidth, minHeight);
         this.i18n = i18n;
         dialog.setCollapsible(minimizable);
@@ -98,16 +101,34 @@ public class WizardDialog {
     public WizardDialog(String dialogId, final String caption, final boolean modal, final boolean minimizable,
             final int width, final int height, final WizardListener listener, final I18nTranslationService i18n,
             final String backId, final String nextId, final String finishId, final String cancelId, final String closeId) {
-        this(dialogId, caption, modal, minimizable, width, height, width, height, listener, i18n, backId, nextId,
-                finishId, cancelId, closeId);
+        this(dialogId, caption, modal, minimizable, width, height, width, height, backId, nextId, finishId, cancelId,
+                closeId, i18n, listener);
     }
 
+    public void add(View view) {
+        if (view instanceof Widget) {
+            dialog.add((Widget) view);
+        } else if (view instanceof Panel) {
+            dialog.add((Panel) view);
+        } else if (view instanceof DefaultForm) {
+            dialog.add(((DefaultForm) view).getFormPanel());
+        } else {
+            Log.error("Trying to add a unknown element in WizardDialog");
+        }
+        doLayoutIfNeeded();
+    }
+
+    @Deprecated
     public void add(final Widget widget) {
         dialog.add(widget);
     }
 
     public void center() {
         dialog.center();
+    }
+
+    public void clear() {
+        dialog.clear();
     }
 
     public void hide() {
@@ -122,8 +143,19 @@ public class WizardDialog {
         mask(i18n.t("Processing"));
     }
 
+    public void remove(View view) {
+        dialog.remove((Widget) view);
+    }
+
     public void setBottomToolbar(Toolbar toolbar) {
         dialog.setBottomToolbar(toolbar);
+    }
+
+    public void setEnabled(boolean back, boolean next, boolean cancel, boolean finish) {
+        setEnabledBackButton(back);
+        setEnabledNextButton(next);
+        setEnabledCancelButton(cancel);
+        setEnabledFinishButton(finish);
     }
 
     public void setEnabledBackButton(final boolean enabled) {
@@ -162,6 +194,17 @@ public class WizardDialog {
         finishButton.setText(text);
     }
 
+    public void setIconCls(String iconCls) {
+        dialog.setIconCls(iconCls);
+    }
+
+    public void setVisible(boolean back, boolean next, boolean cancel, boolean finish) {
+        setVisibleBackButton(back);
+        setVisibleNextButton(next);
+        setVisibleCancelButton(cancel);
+        setVisibleFinishButton(finish);
+    }
+
     public void setVisibleBackButton(final boolean visible) {
         backButton.setVisible(visible);
     }
@@ -184,5 +227,11 @@ public class WizardDialog {
 
     public void unMask() {
         dialog.getEl().unmask();
+    }
+
+    private void doLayoutIfNeeded() {
+        if (dialog.isRendered()) {
+            dialog.doLayout();
+        }
     }
 }

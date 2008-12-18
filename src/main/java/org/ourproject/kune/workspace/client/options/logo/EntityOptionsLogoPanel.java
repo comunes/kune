@@ -20,6 +20,7 @@
 
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.download.FileParams;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 import org.ourproject.kune.workspace.client.site.Site;
@@ -134,7 +135,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         dialogInfoLabel.setHtml(i18n.t("Select an image in your computer as the logo for this group. "
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
                 EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT, EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT)
-                + "<br/><br/>");
+                + DefaultFormUtils.brbr());
         super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
         doLayoutIfNeeded();
     }

@@ -49,12 +49,22 @@ import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePresenter;
+import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
+import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPanel;
+import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPresenter;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstForm;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstFormView;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndForm;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPresenter;
+import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicense;
+import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicensePanel;
+import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicensePresenter;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogo;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPresenter;
@@ -452,9 +462,22 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntityOptionsLogo create() {
                 final EntityOptionsLogoPresenter presenter = new EntityOptionsLogoPresenter($(Session.class),
-                        $(EntityHeader.class), $(EntityOptions.class), $(StateManager.class));
+                        $(EntityHeader.class), $(EntityOptions.class), $(StateManager.class),
+                        $$(UserServiceAsync.class), $$(ChatEngine.class));
                 final EntityOptionsLogoPanel panel = new EntityOptionsLogoPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(EntityOptionsGroup.class, new Factory<EntityOptionsDefLicense>(EntityOptionsDefLicense.class) {
+            @Override
+            public EntityOptionsDefLicense create() {
+                final EntityOptionsDefLicensePresenter presenter = new EntityOptionsDefLicensePresenter(
+                        $(EntityOptions.class), $(StateManager.class), $(Session.class), $$(LicenseWizard.class));
+                final EntityOptionsDefLicensePanel panel = new EntityOptionsDefLicensePanel(presenter,
+                        $(WorkspaceSkeleton.class), $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -468,5 +491,31 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
+        register(Singleton.class, new Factory<LicenseWizard>(LicenseWizard.class) {
+            @Override
+            public LicenseWizard create() {
+                final LicenseWizardPresenter presenter = new LicenseWizardPresenter(
+                        $(LicenseWizardFirstFormView.class), $(LicenseWizardSndFormView.class),
+                        $$(GroupServiceAsync.class));
+                final LicenseWizardPanel panel = new LicenseWizardPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(Singleton.class, new Factory<LicenseWizardFirstFormView>(LicenseWizardFirstFormView.class) {
+            @Override
+            public LicenseWizardFirstFormView create() {
+                return new LicenseWizardFirstForm($(I18nTranslationService.class));
+            }
+        });
+
+        register(Singleton.class, new Factory<LicenseWizardSndFormView>(LicenseWizardSndFormView.class) {
+            @Override
+            public LicenseWizardSndFormView create() {
+                return new LicenseWizardSndForm($(I18nTranslationService.class));
+            }
+        });
     }
 }

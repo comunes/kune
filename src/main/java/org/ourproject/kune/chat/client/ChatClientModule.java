@@ -83,7 +83,7 @@ public class ChatClientModule extends AbstractModule {
             @Override
             public ChatEngine create() {
                 return new ChatEngineDefault($(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
-                        $(Application.class), $(Session.class), $$(EmiteUIDialog.class));
+                        $(Application.class), $(Session.class), $$(EmiteUIDialog.class), $$(FileDownloadUtils.class));
             }
         });
 
