@@ -709,7 +709,12 @@
 
 .k-textunderline {
     text-decoration: underline;
-    color: gray;
+}
+
+.k-info-links {
+    text-decoration: underline;
+    color:gray;
+    cursor: pointer;
 }
 
 .x-tool-kmenu {

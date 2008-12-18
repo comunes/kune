@@ -283,7 +283,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
 
         form.add(groupTypeFieldSet);
 
-        projectRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Project"),
+        projectRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Project"), TYPEOFGROUP_FIELD,
                 i18n.t("A project is a kind of group in which new members joining "
                         + "is moderated by the project administrators. "
                         + "An administrator is the person who creates the project "
@@ -291,12 +291,12 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         projectRadio.setTabIndex(5);
         projectRadio.setChecked(true);
 
-        orgRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Organization"),
+        orgRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Organization"), TYPEOFGROUP_FIELD,
                 i18n.t("An organization works as a project, " + "but organizations must be a legal entity."),
                 ORG_GROUP_TYPE_ID);
         orgRadio.setTabIndex(6);
 
-        communityRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Community"),
+        communityRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Community"), TYPEOFGROUP_FIELD,
                 i18n.t("Communities are social groups of persons "
                         + "with shared interests, which are open to new members "
                         + "(for instance the environmental community or the LGBT community). "

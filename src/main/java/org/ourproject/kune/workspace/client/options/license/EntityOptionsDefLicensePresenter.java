@@ -1,6 +1,7 @@
 package org.ourproject.kune.workspace.client.options.license;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
@@ -42,7 +43,15 @@ public class EntityOptionsDefLicensePresenter implements EntityOptionsDefLicense
         licenseWizard.get().show();
     }
 
+    public void onLicenseClick() {
+        view.openWindow(getCurrentDefLicense().getUrl());
+    }
+
+    private LicenseDTO getCurrentDefLicense() {
+        return session.getCurrentState().getGroup().getDefaultLicense();
+    }
+
     private void setState() {
-        view.setLicense(session.getCurrentState().getGroup().getDefaultLicense());
+        view.setLicense(getCurrentDefLicense());
     }
 }

@@ -12,6 +12,8 @@ public interface WizardDialogView extends View {
 
     void hide();
 
+    boolean isCurrentPage(View view);
+
     void mask(final String message);
 
     void maskProcessing();
@@ -41,6 +43,8 @@ public interface WizardDialogView extends View {
     void setVisibleNextButton(final boolean visible);
 
     void show();
+
+    void show(View view);
 
     void unMask();
 

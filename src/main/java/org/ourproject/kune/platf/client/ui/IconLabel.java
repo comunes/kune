@@ -163,6 +163,10 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         mouseWheelListeners.add(listener);
     }
 
+    public void setStyleNameToText(final String styleName) {
+        DOM.setElementProperty(textLabel.<com.google.gwt.user.client.Element> cast(), "className", styleName);
+    }
+
     public HorizontalAlignmentConstant getHorizontalAlignment() {
         return horzAlign;
     }

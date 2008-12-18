@@ -3,12 +3,16 @@ package org.ourproject.kune.workspace.client.options.license;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.PaddedPanel;
 import com.gwtext.client.widgets.Panel;
@@ -24,14 +28,21 @@ public class EntityOptionsDefLicensePanel extends DefaultForm implements EntityO
         super(i18n.t("License"));
         super.setAutoWidth(true);
         super.setAutoHeight(true);
+        super.getFormPanel().setButtonAlign(Position.LEFT);
         Label intro = new Label();
-        intro.setHtml(i18n.t("This is the default license of all the contents of this group (you can also select another different license per content).")
+        intro.setHtml(i18n.t("This is the default license of all the contents of this group (you can also select another different license per content):")
                 + DefaultFormUtils.brbr());
 
         licenseImage = new Image();
         Panel imagePanel = new Panel();
         imagePanel.setBorder(false);
         imagePanel.add(licenseImage);
+        licenseImage.addClickListener(new ClickListener() {
+            public void onClick(Widget arg0) {
+                presenter.onLicenseClick();
+            }
+        });
+        licenseImage.addStyleName("kune-pointer");
 
         Button change = new Button(i18n.t("Change"));
         change.addListener(new ButtonListenerAdapter() {
@@ -42,8 +53,12 @@ public class EntityOptionsDefLicensePanel extends DefaultForm implements EntityO
         });
 
         add(intro);
-        add(new PaddedPanel(imagePanel, 0, 110, 0, 5));
+        add(new PaddedPanel(imagePanel, 0, 0, 0, 5));
         addButton(change);
+    }
+
+    public void openWindow(final String url) {
+        WindowUtils.open(url);
     }
 
     public void setLicense(LicenseDTO defaultLicense) {

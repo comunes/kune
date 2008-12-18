@@ -21,8 +21,9 @@ package org.ourproject.kune.platf.client.ui.dialogs;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.workspace.client.site.Site;
 
-import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -31,6 +32,7 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Toolbar;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
+import com.gwtext.client.widgets.layout.FitLayout;
 
 public class WizardDialog implements WizardDialogView {
 
@@ -40,6 +42,8 @@ public class WizardDialog implements WizardDialogView {
     private final Button finishButton;
     private final I18nTranslationService i18n;
     private final Button nextButton;
+    private final DeckPanel deck;
+    private final Panel mainPanel;
 
     public WizardDialog(String dialogId, final String caption, final boolean modal, final boolean minimizable,
             final int width, final int height, final int minWidth, final int minHeight, final String backId,
@@ -96,6 +100,10 @@ public class WizardDialog implements WizardDialogView {
                 listener.onClose();
             }
         });
+        mainPanel = new Panel();
+        mainPanel.setLayout(new FitLayout());
+        deck = new DeckPanel();
+        mainPanel.add(deck);
     }
 
     public WizardDialog(String dialogId, final String caption, final boolean modal, final boolean minimizable,
@@ -106,15 +114,7 @@ public class WizardDialog implements WizardDialogView {
     }
 
     public void add(View view) {
-        if (view instanceof Widget) {
-            dialog.add((Widget) view);
-        } else if (view instanceof Panel) {
-            dialog.add((Panel) view);
-        } else if (view instanceof DefaultForm) {
-            dialog.add(((DefaultForm) view).getFormPanel());
-        } else {
-            Log.error("Trying to add a unknown element in WizardDialog");
-        }
+        deck.add(toWidget(view));
         doLayoutIfNeeded();
     }
 
@@ -135,6 +135,15 @@ public class WizardDialog implements WizardDialogView {
         dialog.hide();
     }
 
+    public boolean isCurrentPage(View view) {
+        int visibleWidgetIndex = deck.getVisibleWidget();
+        if (visibleWidgetIndex == -1) {
+            return false;
+        } else {
+            return deck.getWidget(visibleWidgetIndex).equals(toWidget(view));
+        }
+    }
+
     public void mask(final String message) {
         dialog.getEl().mask(message, "x-mask-loading");
     }
@@ -144,7 +153,10 @@ public class WizardDialog implements WizardDialogView {
     }
 
     public void remove(View view) {
-        dialog.remove((Widget) view);
+        int count = getWidgetCount(view);
+        if (count != -1) {
+            deck.remove(count);
+        }
     }
 
     public void setBottomToolbar(Toolbar toolbar) {
@@ -225,6 +237,18 @@ public class WizardDialog implements WizardDialogView {
         dialog.show();
     }
 
+    public void show(View view) {
+        int count = getWidgetCount(view);
+        if (count != -1) {
+            deck.showWidget(count);
+            dialog.add(mainPanel);
+            doLayoutIfNeeded();
+        } else {
+            Site.error("Widget not found in deck of WizardDialog");
+        }
+
+    }
+
     public void unMask() {
         dialog.getEl().unmask();
     }
@@ -232,6 +256,28 @@ public class WizardDialog implements WizardDialogView {
     private void doLayoutIfNeeded() {
         if (dialog.isRendered()) {
             dialog.doLayout();
+            mainPanel.syncSize();
+            mainPanel.doLayout();
+        }
+    }
+
+    private int getWidgetCount(View view) {
+        if (view instanceof Widget) {
+            return deck.getWidgetIndex((Widget) view);
+        } else if (view instanceof DefaultForm) {
+            return deck.getWidgetIndex(((DefaultForm) view).getFormPanel());
+        }
+        return -1;
+    }
+
+    private Widget toWidget(View view) {
+        if (view instanceof Widget) {
+            return (Widget) view;
+        } else if (view instanceof DefaultForm) {
+            return ((DefaultForm) view).getFormPanel();
+        } else {
+            Site.error("Trying to add a unknown element in WizardDialog");
+            return null;
         }
     }
 }

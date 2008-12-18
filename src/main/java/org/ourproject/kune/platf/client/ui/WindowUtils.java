@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2006 Robert Hanson <iamroberthanson AT gmail.com>
  *
@@ -15,6 +14,8 @@
  * limitations under the License.
  */package org.ourproject.kune.platf.client.ui;
 
+import com.google.gwt.user.client.Window;
+
 public class WindowUtils {
     public static Location getLocation() {
         Location result = new Location();
@@ -29,36 +30,40 @@ public class WindowUtils {
         return result;
     }
 
-    private static native String getQueryString() /*-{
-                                   return $wnd.location.search;
-                               }-*/;
-
-    private static native String getProtocol() /*-{
-                                   return $wnd.location.protocol;
-                               }-*/;
-
-    private static native String getPort() /*-{
-                                   return $wnd.location.port;
-                               }-*/;
-
-    private static native String getPath() /*-{
-                                   return $wnd.location.pathname;
-                               }-*/;
-
-    private static native String getHref() /*-{
-                                   return $wnd.location.href;
-                               }-*/;
-
-    private static native String getHostName() /*-{
-                                   return $wnd.location.hostname;
-                               }-*/;
-
-    private static native String getHost() /*-{
-                                   return $wnd.location.host;
-                               }-*/;
+    public static void open(String url) {
+        Window.open(url, "_blank", "");
+    }
 
     private static native String getHash() /*-{
-                                   return $wnd.location.hash;
-                               }-*/;
+                                      return $wnd.location.hash;
+                                  }-*/;
+
+    private static native String getHost() /*-{
+                                      return $wnd.location.host;
+                                  }-*/;
+
+    private static native String getHostName() /*-{
+                                      return $wnd.location.hostname;
+                                  }-*/;
+
+    private static native String getHref() /*-{
+                                      return $wnd.location.href;
+                                  }-*/;
+
+    private static native String getPath() /*-{
+                                      return $wnd.location.pathname;
+                                  }-*/;
+
+    private static native String getPort() /*-{
+                                      return $wnd.location.port;
+                                  }-*/;
+
+    private static native String getProtocol() /*-{
+                                      return $wnd.location.protocol;
+                                  }-*/;
+
+    private static native String getQueryString() /*-{
+                                      return $wnd.location.search;
+                                  }-*/;
 
 }

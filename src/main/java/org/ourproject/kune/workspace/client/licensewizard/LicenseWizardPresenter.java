@@ -4,7 +4,9 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdFormView;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.listener.Listener0;
 
@@ -14,11 +16,13 @@ public class LicenseWizardPresenter implements LicenseWizard {
     private final LicenseWizardFirstFormView firstForm;
     private final LicenseWizardSndFormView sndForm;
     private final Provider<GroupServiceAsync> groupService;
+    private final LicenseWizardTrdFormView trdForm;
 
     public LicenseWizardPresenter(LicenseWizardFirstFormView firstForm, LicenseWizardSndFormView sndForm,
-            Provider<GroupServiceAsync> groupService) {
+            LicenseWizardTrdFormView trdForm, Provider<GroupServiceAsync> groupService) {
         this.firstForm = firstForm;
         this.sndForm = sndForm;
+        this.trdForm = trdForm;
         this.groupService = groupService;
     }
 
@@ -38,12 +42,24 @@ public class LicenseWizardPresenter implements LicenseWizard {
                 onAnotherLicenseSelecterd();
             }
         });
+        trdForm.onChange(new Listener0() {
+            public void onEvent() {
+                onCreativeCommonsChanged();
+            }
+        });
+        view.add(firstForm);
+        view.add(sndForm);
+        view.add(trdForm);
     }
 
     public void onBack() {
-        view.clear();
-        view.add(firstForm);
-        view.setEnabled(false, true, true, true);
+        if (view.isCurrentPage(sndForm)) {
+            showFst();
+        } else if (view.isCurrentPage(trdForm)) {
+            showSnd();
+        } else {
+            Log.error("Programatic error in LicenseWizardPresenter");
+        }
     }
 
     public void onCancel() {
@@ -60,9 +76,14 @@ public class LicenseWizardPresenter implements LicenseWizard {
     }
 
     public void onNext() {
-        view.clear();
-        view.add(sndForm);
-        view.setEnabled(true, false, true, true);
+        if (view.isCurrentPage(firstForm)) {
+            view.clear();
+            showSnd();
+        } else if (view.isCurrentPage(sndForm)) {
+            showTrd();
+        } else {
+            Log.error("Programatic error in LicenseWizardPresenter");
+        }
     }
 
     public void show() {
@@ -79,10 +100,35 @@ public class LicenseWizardPresenter implements LicenseWizard {
         view.setEnabled(false, false, true, true);
     }
 
+    private void onCreativeCommonsChanged() {
+        boolean isCopyleft = trdForm.isAllowComercial() && trdForm.isAllowModifShareAlike();
+        boolean isAppropiateForCulturalWorks = trdForm.isAllowComercial()
+                && (trdForm.isAllowModif() || trdForm.isAllowModifShareAlike());
+        trdForm.setFlags(isCopyleft, isAppropiateForCulturalWorks, !trdForm.isAllowComercial());
+    }
+
     private void reset() {
         view.clear();
         view.setEnabled(false, false, true, true);
-        view.add(firstForm);
+        view.show(firstForm);
         firstForm.reset();
+        sndForm.reset();
+        trdForm.reset();
+    }
+
+    private void showFst() {
+        view.clear();
+        view.show(firstForm);
+        view.setEnabled(false, true, true, true);
+    }
+
+    private void showSnd() {
+        view.show(sndForm);
+        view.setEnabled(true, true, true, false);
+    }
+
+    private void showTrd() {
+        view.show(trdForm);
+        view.setEnabled(true, false, true, true);
     }
 }

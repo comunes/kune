@@ -16,10 +16,10 @@ public class DefaultFormUtils {
         return "<br/><br/>";
     }
 
-    public static Radio createRadio(final FieldSet fieldSet, final String radioLabel, final String radioTip,
-            final String id) {
+    public static Radio createRadio(final FieldSet fieldSet, final String radioLabel, final String radioFieldName,
+            final String radioTip, final String id) {
         Radio radio = new Radio();
-        radio.setName("k-def-radio-field");
+        radio.setName(radioFieldName);
         radio.setAutoCreate(true);
         radio.setHideLabel(true);
         radio.setId(id);

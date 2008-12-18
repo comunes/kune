@@ -56,6 +56,8 @@ import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFir
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndForm;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdForm;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdFormView;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
@@ -496,7 +498,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             public LicenseWizard create() {
                 final LicenseWizardPresenter presenter = new LicenseWizardPresenter(
                         $(LicenseWizardFirstFormView.class), $(LicenseWizardSndFormView.class),
-                        $$(GroupServiceAsync.class));
+                        $(LicenseWizardTrdFormView.class), $$(GroupServiceAsync.class));
                 final LicenseWizardPanel panel = new LicenseWizardPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(panel);
@@ -515,6 +517,13 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public LicenseWizardSndFormView create() {
                 return new LicenseWizardSndForm($(I18nTranslationService.class));
+            }
+        });
+
+        register(Singleton.class, new Factory<LicenseWizardTrdFormView>(LicenseWizardTrdFormView.class) {
+            @Override
+            public LicenseWizardTrdFormView create() {
+                return new LicenseWizardTrdForm($(Images.class), $(I18nTranslationService.class));
             }
         });
     }

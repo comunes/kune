@@ -105,8 +105,16 @@ public class DefaultForm {
         form.setAutoWidth(autoWidth);
     }
 
+    public void setFrame(boolean frame) {
+        form.setFrame(frame);
+    }
+
     public void setHeight(int height) {
         form.setHeight(height);
+    }
+
+    public void setPaddings(int padding) {
+        form.setPaddings(padding);
     }
 
     public void setWidth(int width) {

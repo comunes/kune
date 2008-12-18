@@ -16,8 +16,8 @@ public class LicenseWizardPanel extends WizardDialog implements LicenseWizardVie
 
     public LicenseWizardPanel(final LicenseWizardPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
-        super(LIC_WIZ_DIALOG, i18n.t("License wizard"), true, false, 400, 300, 400, 300, BACK_BTN_ID, NEXT_BTN_ID,
-                FINISH_BTN_ID, CANCEL_BTN_ID, CLOSE_BTN_ID, i18n, new WizardListener() {
+        super(LIC_WIZ_DIALOG, i18n.t("License wizard"), true, false, WIDTH, HEIGHT, WIDTH, HEIGHT, BACK_BTN_ID,
+                NEXT_BTN_ID, FINISH_BTN_ID, CANCEL_BTN_ID, CLOSE_BTN_ID, i18n, new WizardListener() {
                     public void onBack() {
                         presenter.onBack();
                     }
@@ -38,8 +38,7 @@ public class LicenseWizardPanel extends WizardDialog implements LicenseWizardVie
                         presenter.onNext();
                     }
                 });
-        super.setFinishText(i18n.t("Change"));
+        super.setFinishText(i18n.t("Select"));
         super.setIconCls("k-deflicense-icon");
-
     }
 }
