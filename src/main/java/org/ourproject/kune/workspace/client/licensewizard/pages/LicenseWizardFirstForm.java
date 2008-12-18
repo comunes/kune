@@ -38,10 +38,10 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
         final FieldSet fieldSet = new FieldSet("license recommended");
         fieldSet.setStyle("margin-left: 105px");
         fieldSet.setWidth(250);
-        copyleftRadio = DefaultFormUtils.createRadio(fieldSet, i18n.t("Use a copyleft license (recommended)."),
+        copyleftRadio = DefaultFormUtils.createRadio(fieldSet, i18n.t("Use a copyleft license (recommended)"),
                 RADIO_FIELD_NAME, null, RADIO_COPYLEFT_ID);
         anotherLicenseRadio = DefaultFormUtils.createRadio(fieldSet,
-                i18n.t("Use another kind of license (advanced use)."), RADIO_FIELD_NAME, null, RADIO_ANOTHER_ID);
+                i18n.t("Use another kind of license (advanced)"), RADIO_FIELD_NAME, null, RADIO_ANOTHER_ID);
         copyleftRadio.addListener(new CheckboxListenerAdapter() {
             @Override
             public void onCheck(Checkbox field, boolean checked) {
@@ -69,14 +69,14 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
         Label whyALicense = new Label();
         Label youCanChangeTheLicenseLater = new Label();
         recommendCopyleft.setHtml(POINT
-                + i18n.t("We recommend [%s] licenses, specially for practical works.", TextUtils.generateHtmlLink(
+                + i18n.t("We recommend [%s] licenses, specially for practical works", TextUtils.generateHtmlLink(
                         "http://en.wikipedia.org/wiki/Copyleft", i18n.t("copyleft"))) + DefaultFormUtils.br());
         // FIXME
         whyALicense.setHtml(POINT
                 + TextUtils.generateHtmlLink("http://mirrors.creativecommons.org/getcreative/",
-                        i18n.t("Do we need a license?")) + DefaultFormUtils.br());
+                        i18n.t("Why do we need a license?")) + DefaultFormUtils.br());
         youCanChangeTheLicenseLater.setHtml(POINT
-                + i18n.t("You can change this license later or select a per content license.") + DefaultFormUtils.br());
+                + i18n.t("You can change this license later") + DefaultFormUtils.br());
 
         add(intro);
         add(copyleftRadio);

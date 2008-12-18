@@ -30,18 +30,18 @@ public class LicenseWizardSndForm extends DefaultForm implements LicenseWizardSn
         super.setHeight(LicenseWizardView.HEIGHT);
 
         Label intro = new Label();
-        intro.setHtml(i18n.t("Select the type of license:") + DefaultFormUtils.brbr());
+        intro.setHtml(i18n.t("Select the license type:") + DefaultFormUtils.brbr());
 
         final FieldSet fieldSet = new FieldSet("license type");
         fieldSet.setStyle("margin-left: 105px");
         fieldSet.setWidth(250);
-        commonLicensesRadio = DefaultFormUtils.createRadio(fieldSet, i18n.t("Common licenses"), RADIO_FIELD_NAME,
+        commonLicensesRadio = DefaultFormUtils.createRadio(fieldSet, i18n.t("Common licenses for cultural works"), RADIO_FIELD_NAME,
                 i18n.t("Select a Creative Commons license (recommended for cultural works)"), COMMON_LICENSES_ID);
         otherLicensesRadio = DefaultFormUtils.createRadio(
                 fieldSet,
                 i18n.t("Other kind of licenses"),
                 RADIO_FIELD_NAME,
-                i18n.t("Use other kind of licenses like the FSF licenses (recommended for free software works) and other kind of licenses"),
+                i18n.t("Use the GNU licenses (recommended for free software works) and other kind of licenses"),
                 OTHER_LICENSES_ID);
         commonLicensesRadio.addListener(new CheckboxListenerAdapter() {
             @Override

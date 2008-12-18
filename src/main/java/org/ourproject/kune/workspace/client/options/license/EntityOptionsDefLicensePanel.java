@@ -30,7 +30,7 @@ public class EntityOptionsDefLicensePanel extends DefaultForm implements EntityO
         super.setAutoHeight(true);
         super.getFormPanel().setButtonAlign(Position.LEFT);
         Label intro = new Label();
-        intro.setHtml(i18n.t("This is the default license of all the contents of this group (you can also select another different license per content):")
+        intro.setHtml(i18n.t("This is the default license for all the contents of this group (you can also select another different license per content):")
                 + DefaultFormUtils.brbr());
 
         licenseImage = new Image();
