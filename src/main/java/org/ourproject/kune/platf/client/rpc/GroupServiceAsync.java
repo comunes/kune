@@ -20,12 +20,16 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface GroupServiceAsync {
+
+    void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license,
+            AsyncCallback<?> asyncCallback);
 
     void changeGroupWsTheme(String userHash, StateToken groupToken, String theme, AsyncCallback<?> callback);
 

@@ -32,6 +32,8 @@ import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 public interface GroupManager extends Manager<Group, Long> {
 
+    void changeDefLicense(User user, Group group, String licenseShortName);
+
     void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
 
     Group createGroup(Group group, User user) throws GroupNameInUseException, UserMustBeLoggedException;

@@ -46,6 +46,7 @@ import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
+import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.tool.ServerTool;
@@ -65,19 +66,30 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     private final KuneProperties kuneProperties;
     private final User userFinder;
     private final ServerToolRegistry serverToolRegistry;
+    private final LicenseManager licenseManager;
 
     @Inject
     public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder, final User userFinder,
             final KuneProperties kuneProperties, final DatabaseProperties properties,
-            final ServerToolRegistry registry, final License licenseFinder, ServerToolRegistry serverToolRegistry) {
+            final ServerToolRegistry registry, final LicenseManager licenseManager, final License licenseFinder,
+            ServerToolRegistry serverToolRegistry) {
         super(provider, Group.class);
         this.finder = finder;
         this.userFinder = userFinder;
         this.kuneProperties = kuneProperties;
         this.properties = properties;
         this.registry = registry;
+        this.licenseManager = licenseManager;
         this.licenseFinder = licenseFinder;
         this.serverToolRegistry = serverToolRegistry;
+    }
+
+    public void changeDefLicense(User user, Group group, String licName) {
+        final License license = licenseFinder.findByShortName(licName);
+        if (license == null) {
+            throw new RuntimeException("Unknown license");
+        }
+        group.setDefaultLicense(license);
     }
 
     public void changeWsTheme(final User user, final Group group, final String theme) throws AccessViolationException {
@@ -117,8 +129,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     public Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupNameInUseException,
             EmailAddressInUseException {
         final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
-        final String licenseDefId = properties.getDefaultLicense();
-        final License licenseDef = licenseFinder.findByShortName(licenseDefId);
+        final License licenseDef = licenseManager.getDefLicense();
         final Group userGroup = new Group(user.getShortName(), user.getName(), licenseDef, GroupType.PERSONAL);
         User userSameEmail = null;
         try {

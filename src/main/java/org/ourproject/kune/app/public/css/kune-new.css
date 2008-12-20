@@ -829,6 +829,10 @@
   background-image: url(img/info.gif) !important;
 }
 
+.k-newgroup-icon {
+  background-image: url(img/kune-icon16.png) !important;
+}
+
 .x-toolbar-body table {
     /* width: 100%; */
 }

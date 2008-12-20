@@ -21,36 +21,40 @@ package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.TextUtils;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
+import org.ourproject.kune.platf.client.ui.WindowUtils;
+import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
-import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
-import org.ourproject.kune.platf.client.ui.dialogs.WizardListener;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
-import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
+import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.listener.Listener0;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.PaddedPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.ToolTip;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.Radio;
 import com.gwtext.client.widgets.form.TextArea;
 import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.layout.FitLayout;
+import com.gwtext.client.widgets.layout.HorizontalLayout;
 
-public class NewGroupPanel extends WizardDialog implements NewGroupView {
+public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
+    private static final String MARGIN_LEFT_105PX = "margin-left: 105px";
+    private static final int LABEL_WIDTH = 100;
     public static final String SHORTNAME_FIELD = "k-ngp-short_name";
     public static final String LONGNAME_FIELD = "k-ngp-long_name";
     public static final String PUBLICDESC_FIELD = "k-ngp-public_desc";
@@ -60,15 +64,12 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     public static final String COMM_GROUP_TYPE_ID = "k-ngp-type_of_group_comm";
     public static final String TAGS_FIELD = "k-ngp-tags";
     public static final String NEWGROUP_WIZARD = "k-ngp-wiz";
+    public static final String REGISTER_BUTTON = "k-ngp-finish-bt";
     public static final String CANCEL_BUTTON = "k-ngp-cancel-bt";
-    public static final String CLOSE_BUTTON = "k-ngp-close-bt";
-    public static final String FINISH_BUTTON = "k-ngp-finish-bt";
-    public static final String NEXT_BUTTON = "k-ngp-next-bt";
-    public static final String BACK_BUTTON = "k-ngp-back-bt";
     public static final String ERROR_MSG_BAR = "k-ngp-error-mb";
     private static final int BIG_FIELD_WIDTH = 280;
 
-    private final FormPanel newGroupInitialDataForm;
+    private final FormPanel form;
     private Radio projectRadio;
     private Radio orgRadio;
     private Radio communityRadio;
@@ -76,99 +77,43 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     private TextField shortNameField;
     private TextField longNameField;
     private TextArea publicDescField;
-    private final DeckPanel deck;
-    private final LicenseChoose licenseChoosePanel;
-    private final I18nUITranslationService i18n;
     private TextField tags;
     private final MessageToolbar messageErrorBar;
+    private final Provider<LicenseWizard> licenseWizard;
+    private final I18nUITranslationService i18n;
+    private Image licenseImage;
+    private LicenseDTO license;
 
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n,
-            final Provider<LicenseChoose> licenseChooseProvider, Images img) {
-        super(NEWGROUP_WIZARD, i18n.t(WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE), true, false, 460, 430,
-                new WizardListener() {
-                    public void onBack() {
-                        presenter.onBack();
-                    }
-
-                    public void onCancel() {
+            final Provider<LicenseWizard> licenseWizard, Images img) {
+        super(NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, 450, 430, "k-newgroup-icon",
+                i18n.t("Cancel"), CANCEL_BUTTON, i18n.t("Register"), REGISTER_BUTTON, new Listener0() {
+                    public void onEvent() {
                         presenter.onCancel();
                     }
-
-                    public void onClose() {
-                        Log.info("close pressed");
-                        presenter.onClose();
+                }, new Listener0() {
+                    public void onEvent() {
+                        presenter.onRegister();
                     }
-
-                    public void onFinish() {
-                        presenter.onFinish();
-                    }
-
-                    public void onNext() {
-                        presenter.onNext();
-                    }
-                }, i18n, BACK_BUTTON, NEXT_BUTTON, FINISH_BUTTON, CANCEL_BUTTON, CLOSE_BUTTON);
+                }, 0);
         this.i18n = i18n;
+        this.licenseWizard = licenseWizard;
         Field.setMsgTarget("side");
-        final Panel centerPanel = new Panel();
-        centerPanel.setPaddings(10);
-        centerPanel.setLayout(new FitLayout());
-        deck = new DeckPanel();
-        newGroupInitialDataForm = createNewGroupInitialDataForm(presenter);
-        licenseChoosePanel = licenseChooseProvider.get();
-        final VerticalPanel newGroupInitialDataVP = new VerticalPanel();
-        final HorizontalPanel newGroupInitialDataHP = new HorizontalPanel();
-        final VerticalPanel chooseLicenseVP = new VerticalPanel();
-        final HorizontalPanel chooseLicenseHP = new HorizontalPanel();
-        newGroupInitialDataHP.add(img.step1().createImage());
-        final Label step1Label = new Label(
-                i18n.t("Please fill this form and follow the next steps to register a new group:"));
-        newGroupInitialDataHP.add(step1Label);
-        newGroupInitialDataVP.add(newGroupInitialDataHP);
-        newGroupInitialDataVP.add(newGroupInitialDataForm);
-        chooseLicenseHP.add(img.step2().createImage());
-        final HTML step2Label = new HTML(i18n.t("Select a license to share your group contents with other people. "
-                + "We recomend [%s] licenses for practical works.", TextUtils.generateHtmlLink(
-                "http://en.wikipedia.org/wiki/Copyleft", "copyleft")));
-        chooseLicenseHP.add(step2Label);
-        final Label licenseTypeLabel = new Label(i18n.t("Choose a license type:"));
-        chooseLicenseVP.add(chooseLicenseHP);
-        chooseLicenseVP.add(licenseTypeLabel);
-
-        newGroupInitialDataHP.addStyleName("kune-Margin-Medium-b");
-        step1Label.addStyleName("kune-Margin-Large-l");
-        step2Label.addStyleName("kune-Margin-Large-l");
-        step1Label.addStyleName("kune-Margin-Medium-b");
-        step2Label.addStyleName("kune-Margin-Medium-b");
+        form = createNewGroupInitialDataForm(presenter);
 
         messageErrorBar = new MessageToolbar(img, ERROR_MSG_BAR);
         super.setBottomToolbar(messageErrorBar.getToolbar());
 
-        chooseLicenseVP.add((Widget) licenseChoosePanel.getView());
-        deck.add(newGroupInitialDataVP);
-        deck.add(chooseLicenseVP);
-        centerPanel.add(deck);
-        super.add(centerPanel);
-        deck.showWidget(0);
-        initBottomButtons();
-        // newGroupInitialDataVP.addStyleName("kune-Default-Form");
-        deck.addStyleName("kune-Default-Form");
-        licenseTypeLabel.addStyleName("kune-License-CC-Header");
-        newGroupInitialDataVP.setHeight("10"); // Ext set this to 100% ...
-        chooseLicenseVP.setHeight("10"); // (same here)
-        super.setFinishText(i18n.t("Register"));
+        super.add(form);
     }
 
     public void clearData() {
-        deck.showWidget(0);
-        newGroupInitialDataForm.getForm().reset();
-        ((LicenseChoosePanel) licenseChoosePanel.getView()).reset();
-        showNewGroupInitialDataForm();
-        initBottomButtons();
+        form.getForm().reset();
         shortNameField.focus(false);
     }
 
     public LicenseDTO getLicense() {
-        return licenseChoosePanel.getLicense();
+        return license;
     }
 
     public String getLongName() {
@@ -196,7 +141,7 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
     }
 
     public boolean isFormValid() {
-        return newGroupInitialDataForm.getForm().isValid();
+        return form.getForm().isValid();
     }
 
     public boolean isOrganization() {
@@ -207,25 +152,33 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         return projectRadio.getValue();
     }
 
+    public void maskProcessing() {
+        mask(i18n.t("Processing"));
+    }
+
+    public void setLicense(LicenseDTO license) {
+        this.license = license;
+        licenseImage.setUrl(license.getImageUrl());
+        KuneUiUtils.setQuickTip(licenseImage, license.getLongName());
+    }
+
     public void setMessage(final String message, final SiteErrorType type) {
         messageErrorBar.setErrorMessage(message, type);
     }
 
-    public void showLicenseForm() {
-        deck.showWidget(1);
-    }
-
-    public void showNewGroupInitialDataForm() {
-        deck.showWidget(0);
-    }
-
     private FormPanel createNewGroupInitialDataForm(final NewGroupPresenter presenter) {
         final FormPanel form = new FormPanel();
+        form.setFrame(true);
+        form.setPaddings(10);
         form.setBorder(false);
         form.setWidth(420);
-        form.setLabelWidth(100);
+        form.setLabelWidth(LABEL_WIDTH);
         form.setLabelAlign(Position.RIGHT);
         form.setButtonAlign(Position.RIGHT);
+
+        final Label intro = new Label();
+        intro.setHtml(i18n.t("Please fill this form to register a new group:") + DefaultFormUtils.brbr());
+        form.add(intro);
 
         shortNameField = new TextField();
         shortNameField.setTabIndex(1);
@@ -277,9 +230,49 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
         tags.setValidationDelay(1000);
         form.add(tags);
 
+        licenseImage = new Image("images/lic/bysa80x15.png");
+        licenseImage.addClickListener(new ClickListener() {
+            public void onClick(Widget arg0) {
+                WindowUtils.open(license.getUrl());
+            }
+        });
+        licenseImage.addStyleName("kune-pointer");
+        Panel licenseImagePanel = new Panel();
+        // licenseImagePanel.setLayout(new FitLayout());
+        // licenseImagePanel.setWidth(80);
+        licenseImagePanel.add(licenseImage);
+
+        Button changeLicenseButton = new Button(i18n.t("Change"));
+        changeLicenseButton.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
+                licenseWizard.get().start(new Listener<LicenseDTO>() {
+                    public void onEvent(LicenseDTO license) {
+                        setLicense(license);
+                    }
+                });
+            }
+        });
+        changeLicenseButton.addClass("kune-Margin-Medium-trbl");
+
+        Label licenseLabel = new Label();
+        licenseLabel.setHtml(i18n.t("Default license for this group:") + DefaultFormUtils.br());
+        form.add(licenseLabel);
+        licenseLabel.setStyle(MARGIN_LEFT_105PX);
+
+        Panel licPanel = new Panel();
+        licPanel.setBorder(false);
+        licPanel.setLayout(new HorizontalLayout(5));
+        licPanel.add(licenseImagePanel);
+        licPanel.add(changeLicenseButton);
+        form.add(new PaddedPanel(licPanel, 0, 105, 0, 0));
+
         final FieldSet groupTypeFieldSet = new FieldSet(i18n.t("Group type"));
-        groupTypeFieldSet.setStyle("margin-left: 105px");
+        groupTypeFieldSet.setStyle(MARGIN_LEFT_105PX);
         groupTypeFieldSet.setWidth(BIG_FIELD_WIDTH);
+        groupTypeFieldSet.setFrame(false);
+        groupTypeFieldSet.setCollapsible(false);
+        groupTypeFieldSet.setAutoHeight(true);
 
         form.add(groupTypeFieldSet);
 
@@ -303,14 +296,6 @@ public class NewGroupPanel extends WizardDialog implements NewGroupView {
                         + "They rarely are a legal entity."), COMM_GROUP_TYPE_ID);
         communityRadio.setTabIndex(7);
 
-        groupTypeFieldSet.setCollapsible(false);
-
         return form;
-    }
-
-    private void initBottomButtons() {
-        super.setEnabledBackButton(false);
-        super.setEnabledFinishButton(false);
-        super.setEnabledNextButton(true);
     }
 }

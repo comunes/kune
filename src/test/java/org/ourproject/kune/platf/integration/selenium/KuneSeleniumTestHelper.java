@@ -100,8 +100,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         GroupType organization = GroupType.ORGANIZATION;
         signInAndNewGroup();
         fillNewGroup1stPage(shortname, longName, description, tags, organization);
-        click(NewGroupPanel.NEXT_BUTTON);
-        click(NewGroupPanel.FINISH_BUTTON);
+        click(NewGroupPanel.REGISTER_BUTTON);
     }
 
     protected void open(SiteToken token) {

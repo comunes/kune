@@ -25,16 +25,18 @@ import org.ourproject.kune.platf.server.domain.License;
 
 public interface LicenseManager {
 
+    License findByShortName(String licenseDef);
+
     List<License> getAll();
+
+    List<License> getCC();
+
+    License getDefLicense();
+
+    List<License> getNotCC();
 
     License persist(final License license);
 
     void setLicenseFinder(final License licenseFinder);
-
-    List<License> getCC();
-
-    List<License> getNotCC();
-
-    License findByShortName(String licenseDef);
 
 }

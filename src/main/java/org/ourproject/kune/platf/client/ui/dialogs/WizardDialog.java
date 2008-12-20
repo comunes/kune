@@ -118,11 +118,6 @@ public class WizardDialog implements WizardDialogView {
         doLayoutIfNeeded();
     }
 
-    @Deprecated
-    public void add(final Widget widget) {
-        dialog.add(widget);
-    }
-
     public void center() {
         dialog.center();
     }

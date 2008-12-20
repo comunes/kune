@@ -57,6 +57,14 @@ public class ImageUtilsDefault {
         cropImage(scaled, fileDest, x, y, cropDimension, cropDimension);
     }
 
+    /**
+     * convert -density 300 -quality 100 -resize 720x file.pdf result.png
+     * 
+     * @param pdfFile
+     * @param newPngFile
+     * @return
+     * @throws MagickException
+     */
     static public boolean createThumbFromPdf(String pdfFile, String newPngFile) throws MagickException {
         MagickImage pdf = readImage(pdfFile);
         MagickImage pdf1 = pdf.breakFrames()[0];

@@ -166,7 +166,6 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             if (isPdf) {
                 ImageUtilsDefault.createThumbFromPdf(fileOrig, previewName);
             }
-
         } catch (NumberFormatException e) {
             log.error("Image sizes in kune.properties are not integers");
             e.printStackTrace();

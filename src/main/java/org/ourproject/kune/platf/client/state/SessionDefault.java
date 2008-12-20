@@ -111,6 +111,10 @@ public class SessionDefault implements Session {
         return currentUserInfo;
     }
 
+    public LicenseDTO getDefLicense() {
+        return initData.getDefaultLicense();
+    }
+
     public String getGalleryPermittedExtensions() {
         return initData.getGalleryPermittedExtensions();
     }

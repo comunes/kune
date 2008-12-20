@@ -37,8 +37,7 @@ public class NewGroupSeleniumTest extends KuneSeleniumTestHelper {
         signInAndNewGroup();
         fillNewGroup1stPage("admin", "some long name" + genPrefix(), "some public description", "tag1 tag2 tag3",
                 GroupType.ORGANIZATION);
-        click(NewGroupPanel.NEXT_BUTTON);
-        click(NewGroupPanel.FINISH_BUTTON);
+        click(NewGroupPanel.REGISTER_BUTTON);
         waitForTextInside(gid(NewGroupPanel.ERROR_MSG_BAR), WorkspaceMessages.NAME_IN_ALREADY_IN_USE);
     }
 

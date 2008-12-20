@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.server.rpc;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
@@ -58,6 +59,15 @@ public class GroupRPC implements RPC, GroupService {
         this.groupManager = groupManager;
         this.contentManager = contentManager;
         this.mapper = mapper;
+    }
+
+    @Authenticated
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license) {
+        final User user = getUserLogged();
+        final Group group = groupManager.findByShortName(groupToken.getGroup());
+        groupManager.changeDefLicense(user, group, license.getShortName());
     }
 
     @Authenticated

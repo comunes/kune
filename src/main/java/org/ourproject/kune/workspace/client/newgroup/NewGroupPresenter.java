@@ -69,6 +69,7 @@ public class NewGroupPresenter implements NewGroup {
                     Site.showProgressProcessing();
                     view.show();
                     view.center();
+                    view.setLicense(session.getDefLicense());
                     Site.hideProgress();
                 } else {
                     stateManager.restorePreviousToken();
@@ -86,13 +87,6 @@ public class NewGroupPresenter implements NewGroup {
         this.view = view;
     }
 
-    public void onBack() {
-        view.setEnabledBackButton(false);
-        view.setEnabledFinishButton(false);
-        view.setEnabledNextButton(true);
-        view.showNewGroupInitialDataForm();
-    }
-
     public void onCancel() {
         view.hide();
         reset();
@@ -106,50 +100,41 @@ public class NewGroupPresenter implements NewGroup {
         reset();
     }
 
-    public void onFinish() {
-        view.maskProcessing();
-        final String shortName = view.getShortName();
-        final String longName = view.getLongName();
-        final String publicDesc = view.getPublicDesc();
-        final LicenseDTO license = view.getLicense();
-        final GroupDTO group = new GroupDTO(shortName, longName, getTypeOfGroup());
-        group.setDefaultLicense(license);
-
-        final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
-            public void onFailure(final Throwable caught) {
-                try {
-                    throw caught;
-                } catch (final GroupNameInUseException e) {
-                    onBack();
-                    view.unMask();
-                    setMessage(i18n.t(WorkspaceMessages.NAME_IN_ALREADY_IN_USE), SiteErrorType.error);
-                } catch (final Throwable e) {
-                    onBack(); // The messageP is in first page of wizard :-/
-                    view.unMask();
-                    setMessage(i18n.t("Error creating group"), SiteErrorType.error);
-                    GWT.log("Other kind of exception in group registration", null);
-                    throw new RuntimeException();
-                }
-            }
-
-            public void onSuccess(final StateToken token) {
-                mustGoToPrevious = false;
-                view.hide();
-                stateManager.gotoToken(token);
-                reset();
-                view.unMask();
-            }
-        };
-        groupServiceProvider.get().createNewGroup(session.getUserHash(), group, publicDesc, view.getTags(), null,
-                callback);
-    }
-
-    public void onNext() {
+    public void onRegister() {
         if (view.isFormValid()) {
-            view.setEnabledBackButton(true);
-            view.setEnabledFinishButton(true);
-            view.setEnabledNextButton(false);
-            view.showLicenseForm();
+            view.maskProcessing();
+            final String shortName = view.getShortName();
+            final String longName = view.getLongName();
+            final String publicDesc = view.getPublicDesc();
+            final LicenseDTO license = view.getLicense();
+            final GroupDTO group = new GroupDTO(shortName, longName, getTypeOfGroup());
+            group.setDefaultLicense(license);
+
+            final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
+                public void onFailure(final Throwable caught) {
+                    try {
+                        throw caught;
+                    } catch (final GroupNameInUseException e) {
+                        view.unMask();
+                        setMessage(i18n.t(WorkspaceMessages.NAME_IN_ALREADY_IN_USE), SiteErrorType.error);
+                    } catch (final Throwable e) {
+                        view.unMask();
+                        setMessage(i18n.t("Error creating group"), SiteErrorType.error);
+                        GWT.log("Other kind of exception in group registration", null);
+                        throw new RuntimeException();
+                    }
+                }
+
+                public void onSuccess(final StateToken token) {
+                    mustGoToPrevious = false;
+                    view.hide();
+                    stateManager.gotoToken(token);
+                    reset();
+                    view.unMask();
+                }
+            };
+            groupServiceProvider.get().createNewGroup(session.getUserHash(), group, publicDesc, view.getTags(), null,
+                    callback);
         }
     }
 

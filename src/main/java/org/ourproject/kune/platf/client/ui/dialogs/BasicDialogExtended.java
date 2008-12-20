@@ -82,4 +82,12 @@ public class BasicDialogExtended extends BasicDialog {
     public Button getFirstButton() {
         return firstButton;
     }
+
+    public void mask(final String message) {
+        getEl().mask(message, "x-mask-loading");
+    }
+
+    public void unMask() {
+        getEl().unmask();
+    }
 }

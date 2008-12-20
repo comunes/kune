@@ -3,7 +3,6 @@ package org.ourproject.kune.workspace.client.options.license;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -58,7 +57,7 @@ public class EntityOptionsDefLicensePanel extends DefaultForm implements EntityO
     }
 
     public void openWindow(final String url) {
-        WindowUtils.open(url);
+
     }
 
     public void setLicense(LicenseDTO defaultLicense) {

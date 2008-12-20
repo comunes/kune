@@ -100,9 +100,7 @@ import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
-import org.ourproject.kune.workspace.client.licensechoose.LicenseChoose;
-import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePanel;
-import org.ourproject.kune.workspace.client.licensechoose.LicenseChoosePresenter;
+import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 import org.ourproject.kune.workspace.client.newgroup.NewGroup;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
@@ -328,22 +326,12 @@ public class KuneModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<LicenseChoose>(LicenseChoose.class) {
-            @Override
-            public LicenseChoose create() {
-                final LicenseChoosePresenter presenter = new LicenseChoosePresenter($(Session.class));
-                final LicenseChoosePanel view = new LicenseChoosePanel(presenter, i18n, $(Images.class));
-                presenter.init(view);
-                return presenter;
-            }
-        });
-
         register(Singleton.class, new Factory<NewGroup>(NewGroup.class) {
             @Override
             public NewGroup create() {
                 final NewGroupPresenter presenter = new NewGroupPresenter(i18n, $(Session.class),
                         $(StateManager.class), $$(GroupServiceAsync.class));
-                final NewGroupPanel view = new NewGroupPanel(presenter, i18n, $$(LicenseChoose.class), $(Images.class));
+                final NewGroupPanel view = new NewGroupPanel(presenter, i18n, $$(LicenseWizard.class), $(Images.class));
                 presenter.init(view);
                 return presenter;
             }

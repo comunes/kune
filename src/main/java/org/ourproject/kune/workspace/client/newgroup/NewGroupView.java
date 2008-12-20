@@ -52,19 +52,11 @@ public interface NewGroupView extends View {
 
     void maskProcessing();
 
-    void setEnabledBackButton(boolean enabled);
-
-    void setEnabledFinishButton(boolean enabled);
-
-    void setEnabledNextButton(boolean enabled);
+    void setLicense(LicenseDTO license);
 
     void setMessage(String message, SiteErrorType type);
 
     void show();
-
-    void showLicenseForm();
-
-    void showNewGroupInitialDataForm();
 
     void unMask();
 

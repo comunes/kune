@@ -113,6 +113,10 @@ public class DefaultForm {
         form.setHeight(height);
     }
 
+    public void setHideLabels(boolean hide) {
+        form.setHideLabels(hide);
+    }
+
     public void setPaddings(int padding) {
         form.setPaddings(padding);
     }

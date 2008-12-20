@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.GroupDTO;
+import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.DefaultException;
@@ -27,6 +28,8 @@ import org.ourproject.kune.platf.client.errors.DefaultException;
 import com.google.gwt.user.client.rpc.RemoteService;
 
 public interface GroupService extends RemoteService {
+
+    void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license);
 
     void changeGroupWsTheme(String userHash, StateToken groupToken, String theme) throws DefaultException;
 

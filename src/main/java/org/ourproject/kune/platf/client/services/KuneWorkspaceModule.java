@@ -49,11 +49,14 @@ import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePresenter;
+import org.ourproject.kune.workspace.client.licensewizard.LicenseChangeAction;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPanel;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPresenter;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstForm;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstFormView;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFrdForm;
+import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFrdFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndForm;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdForm;
@@ -477,11 +480,20 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntityOptionsDefLicense create() {
                 final EntityOptionsDefLicensePresenter presenter = new EntityOptionsDefLicensePresenter(
-                        $(EntityOptions.class), $(StateManager.class), $(Session.class), $$(LicenseWizard.class));
+                        $(EntityOptions.class), $(StateManager.class), $(Session.class), $$(LicenseWizard.class),
+                        $$(LicenseChangeAction.class));
                 final EntityOptionsDefLicensePanel panel = new EntityOptionsDefLicensePanel(presenter,
                         $(WorkspaceSkeleton.class), $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
+            }
+        });
+
+        register(Singleton.class, new Factory<LicenseChangeAction>(LicenseChangeAction.class) {
+            @Override
+            public LicenseChangeAction create() {
+                return new LicenseChangeAction($$(GroupServiceAsync.class), $(Session.class),
+                        $(I18nTranslationService.class), $(StateManager.class));
             }
         });
 
@@ -498,7 +510,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             public LicenseWizard create() {
                 final LicenseWizardPresenter presenter = new LicenseWizardPresenter(
                         $(LicenseWizardFirstFormView.class), $(LicenseWizardSndFormView.class),
-                        $(LicenseWizardTrdFormView.class), $$(GroupServiceAsync.class));
+                        $(LicenseWizardTrdFormView.class), $(LicenseWizardFrdFormView.class), $(Session.class));
                 final LicenseWizardPanel panel = new LicenseWizardPanel(presenter, $(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(panel);
@@ -524,6 +536,13 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public LicenseWizardTrdFormView create() {
                 return new LicenseWizardTrdForm($(Images.class), $(I18nTranslationService.class));
+            }
+        });
+
+        register(Singleton.class, new Factory<LicenseWizardFrdFormView>(LicenseWizardFrdFormView.class) {
+            @Override
+            public LicenseWizardFrdFormView create() {
+                return new LicenseWizardFrdForm($(I18nTranslationService.class), $(Session.class));
             }
         });
     }

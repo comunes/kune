@@ -53,10 +53,6 @@ public abstract class SignInAbstractPanel extends BasicDialogExtended {
         messageErrorBar.hideErrorMessage();
     }
 
-    public void mask(final String message) {
-        getEl().mask(message, "x-mask-loading");
-    }
-
     public void maskProcessing() {
         mask(i18n.t("Processing"));
     }
@@ -71,9 +67,5 @@ public abstract class SignInAbstractPanel extends BasicDialogExtended {
 
     public void setErrorMessage(final String message, final SiteErrorType type) {
         messageErrorBar.setErrorMessage(message, type);
-    }
-
-    public void unMask() {
-        getEl().unmask();
     }
 }

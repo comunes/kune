@@ -40,8 +40,8 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
         fieldSet.setWidth(250);
         copyleftRadio = DefaultFormUtils.createRadio(fieldSet, i18n.t("Use a copyleft license (recommended)"),
                 RADIO_FIELD_NAME, null, RADIO_COPYLEFT_ID);
-        anotherLicenseRadio = DefaultFormUtils.createRadio(fieldSet,
-                i18n.t("Use another kind of license (advanced)"), RADIO_FIELD_NAME, null, RADIO_ANOTHER_ID);
+        anotherLicenseRadio = DefaultFormUtils.createRadio(fieldSet, i18n.t("Use another kind of license (advanced)"),
+                RADIO_FIELD_NAME, null, RADIO_ANOTHER_ID);
         copyleftRadio.addListener(new CheckboxListenerAdapter() {
             @Override
             public void onCheck(Checkbox field, boolean checked) {
@@ -71,13 +71,12 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
         recommendCopyleft.setHtml(POINT
                 + i18n.t("We recommend [%s] licenses, specially for practical works", TextUtils.generateHtmlLink(
                         "http://en.wikipedia.org/wiki/Copyleft", i18n.t("copyleft"))) + DefaultFormUtils.br());
-        // FIXME
         whyALicense.setHtml(POINT
                 + TextUtils.generateHtmlLink("http://mirrors.creativecommons.org/getcreative/",
                         i18n.t("Why do we need a license?")) + DefaultFormUtils.br());
-        youCanChangeTheLicenseLater.setHtml(POINT
-                + i18n.t("You can change this license later") + DefaultFormUtils.br());
+        youCanChangeTheLicenseLater.setHtml(POINT + i18n.t("You can change this license later") + DefaultFormUtils.br());
 
+        infoFS.addStyleName("kune-Margin-20-t");
         add(intro);
         add(copyleftRadio);
         add(anotherLicenseRadio);
