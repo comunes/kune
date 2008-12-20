@@ -1,0 +1,4 @@
+<h1>Los contenidos</h1>
+<% for doc in @contents %>
+  <%= doc.last_revision.title %><br/>
+<% end %>

@@ -1,6 +1,7 @@
 INSTALL
 --------------------------------------------------------------------------------
 
+
 For development:
 
 * MYSQL configuration:
@@ -45,6 +46,11 @@ ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE u
 
   (if you're using windows as dev plaftorm... you will have to write your own script ;). the idea is to
   copy everything from target/kune-0.0.VERSIONHERE/org.ourproject.kune.app.Kune to src/main/webapp/gwt/org.ourproject.kune.app.Kune)
+
+
+FIXME:
+Caution! windows users: you should have a symbolic link from <trunk>/src/main/rails/publicspace to <trunk>/src/main/webapp/WEB-INF/publicspace
+
 
 
 - Configure upload directory:

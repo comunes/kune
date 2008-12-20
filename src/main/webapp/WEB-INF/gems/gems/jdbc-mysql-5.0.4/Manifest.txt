@@ -1,0 +1,7 @@
+Manifest.txt
+Rakefile
+README.txt
+LICENSE.txt
+lib/jdbc
+lib/jdbc/mysql.rb
+lib/mysql-connector-java-5.0.4-bin.jar
