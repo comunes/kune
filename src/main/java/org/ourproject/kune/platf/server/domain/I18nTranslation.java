@@ -48,10 +48,10 @@ import com.wideplay.warp.persist.dao.MaxResults;
 @Indexed
 @Table(name = "globalize_translations")
 @NamedQueries( {
-        @NamedQuery(name = "untranslated", query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text=null"),
-        @NamedQuery(name = "translated", query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text!=null"),
-        @NamedQuery(name = "untranslatedcount", query = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text=null"),
-        @NamedQuery(name = "translatedcount", query = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text!=null") })
+	@NamedQuery(name = "untranslated", query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text=null"),
+	@NamedQuery(name = "translated", query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :language and text!=null"),
+	@NamedQuery(name = "untranslatedcount", query = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text=null"),
+	@NamedQuery(name = "translatedcount", query = "SELECT COUNT(gt.id) FROM I18nTranslation gt WHERE gt.language = :language and text!=null") })
 public class I18nTranslation implements HasId {
 
     public static final String DEF_NAMESPACE = "kune_core";
@@ -69,7 +69,7 @@ public class I18nTranslation implements HasId {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "type")
+    @Column(name = "gtype")
     private String type;
 
     @Column(name = "tr_key")
@@ -95,157 +95,157 @@ public class I18nTranslation implements HasId {
     private String text;
 
     public I18nTranslation() {
-        this(null, null, null, null, null, null, null, null);
+	this(null, null, null, null, null, null, null, null);
     }
 
     public I18nTranslation(final String trKey, final I18nLanguage language, final String text) {
-        this("", null, DEF_PLUR_INDEX, "", text, trKey, DEF_NAMESPACE, language);
+	this("", null, DEF_PLUR_INDEX, "", text, trKey, DEF_NAMESPACE, language);
     }
 
     public I18nTranslation(final String facet, final Integer itemId, final Integer pluralizationIndex,
-            final String tableName, final String text, final String trKey, final String type,
-            final I18nLanguage language) {
-        this.type = type;
-        this.trKey = trKey;
-        this.tableName = tableName;
-        this.itemId = itemId;
-        this.facet = facet;
-        this.language = language;
-        this.pluralizationIndex = pluralizationIndex;
-        this.text = text;
+	    final String tableName, final String text, final String trKey, final String type,
+	    final I18nLanguage language) {
+	this.type = type;
+	this.trKey = trKey;
+	this.tableName = tableName;
+	this.itemId = itemId;
+	this.facet = facet;
+	this.language = language;
+	this.pluralizationIndex = pluralizationIndex;
+	this.text = text;
     }
 
     public I18nTranslation cloneForNewLanguage() {
-        final I18nTranslation clone = new I18nTranslation();
-        clone.type = type;
-        clone.trKey = trKey;
-        clone.tableName = tableName;
-        clone.itemId = itemId;
-        clone.facet = facet;
-        clone.language = null;
-        clone.pluralizationIndex = pluralizationIndex;
-        clone.text = null;
-        return clone;
+	final I18nTranslation clone = new I18nTranslation();
+	clone.type = type;
+	clone.trKey = trKey;
+	clone.tableName = tableName;
+	clone.itemId = itemId;
+	clone.facet = facet;
+	clone.language = null;
+	clone.pluralizationIndex = pluralizationIndex;
+	clone.text = null;
+	return clone;
     }
 
     @Finder(query = "SELECT gt FROM I18nTranslation gt JOIN gt.language gl WHERE gl.code = :language")
     public List<I18nTranslation> findByLanguage(@Named("language") final String language) {
-        return null;
+	return null;
     }
 
     public String getFacet() {
-        return this.facet;
+	return this.facet;
     }
 
     public Long getId() {
-        return this.id;
+	return this.id;
     }
 
     public Integer getItemId() {
-        return this.itemId;
+	return this.itemId;
     }
 
     public I18nLanguage getLanguage() {
-        return language;
+	return language;
     }
 
     @Finder(query = "SELECT gt FROM I18nTranslation gt WHERE gt.language = :deflanguage AND gt.trKey NOT IN (SELECT gt.trKey FROM I18nTranslation gt WHERE gt.language = :language)")
     public List<I18nTranslation> getNonExistentFromDefault(@Named("deflanguage") final I18nLanguage deflanguage,
-            @Named("language") final I18nLanguage language) {
-        return null;
+	    @Named("language") final I18nLanguage language) {
+	return null;
     }
 
     public Integer getPluralizationIndex() {
-        return this.pluralizationIndex;
+	return this.pluralizationIndex;
     }
 
     public String getTableName() {
-        return this.tableName;
+	return this.tableName;
     }
 
     public String getText() {
-        return this.text;
+	return this.text;
     }
 
     @Finder(namedQuery = TRANSLATED_QUERY)
     public List<I18nTranslation> getTranslatedLexicon(@Named("language") final I18nLanguage language) {
-        return null;
+	return null;
     }
 
     @Finder(namedQuery = TRANSLATED_QUERY)
     public List<I18nTranslation> getTranslatedLexicon(@Named("language") final I18nLanguage language,
-            @FirstResult final int first, @MaxResults final int max) {
-        return null;
+	    @FirstResult final int first, @MaxResults final int max) {
+	return null;
     }
 
     @Finder(namedQuery = TRANSLATED_COUNT_QUERY)
     public Long getTranslatedLexiconCount(@Named("language") final I18nLanguage language) {
-        return null;
+	return null;
     }
 
     public String getTrKey() {
-        return this.trKey;
+	return this.trKey;
     }
 
     public String getType() {
-        return this.type;
+	return this.type;
     }
 
     @Finder(namedQuery = UNTRANSLATED_QUERY)
     public List<I18nTranslation> getUnstranslatedLexicon(@Named("language") final I18nLanguage language) {
-        return null;
+	return null;
     }
 
     @Finder(namedQuery = UNTRANSLATED_QUERY)
     public List<I18nTranslation> getUnstranslatedLexicon(@Named("language") final I18nLanguage language,
-            @FirstResult final int first, @MaxResults final int max) {
-        return null;
+	    @FirstResult final int first, @MaxResults final int max) {
+	return null;
     }
 
     @Finder(namedQuery = UNTRANSLATED_COUNT_QUERY)
     public Long getUnstranslatedLexiconCount(@Named("language") final I18nLanguage language) {
-        return null;
+	return null;
     }
 
     public void setFacet(final String facet) {
-        this.facet = facet;
+	this.facet = facet;
     }
 
     public void setId(final Long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public void setItemId(final Integer itemId) {
-        this.itemId = itemId;
+	this.itemId = itemId;
     }
 
     public void setLanguage(final I18nLanguage language) {
-        this.language = language;
+	this.language = language;
     }
 
     public void setPluralizationIndex(final Integer pluralizationIndex) {
-        this.pluralizationIndex = pluralizationIndex;
+	this.pluralizationIndex = pluralizationIndex;
     }
 
     public void setTableName(final String tableName) {
-        this.tableName = tableName;
+	this.tableName = tableName;
     }
 
     public void setText(final String text) {
-        this.text = text;
+	this.text = text;
     }
 
     public void setTrKey(final String trKey) {
-        this.trKey = trKey;
+	this.trKey = trKey;
     }
 
     public void setType(final String type) {
-        this.type = type;
+	this.type = type;
     }
 
     @Override
     public String toString() {
-        return "I18nTranslation[" + trKey + " (" + language + ") " + text + "]";
+	return "I18nTranslation[" + trKey + " (" + language + ") " + text + "]";
     }
 
 }
