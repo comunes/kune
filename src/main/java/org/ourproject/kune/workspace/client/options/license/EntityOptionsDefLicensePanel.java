@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
+import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -25,8 +26,9 @@ public class EntityOptionsDefLicensePanel extends DefaultForm implements EntityO
     public EntityOptionsDefLicensePanel(final EntityOptionsDefLicensePresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
         super(i18n.t("License"));
-        super.setAutoWidth(true);
-        super.setAutoHeight(true);
+        super.setIconCls("k-copyleft-icon");
+        super.setHeight(EntityOptionsView.HEIGHT);
+        super.setFrame(true);
         super.getFormPanel().setButtonAlign(Position.LEFT);
         Label intro = new Label();
         intro.setHtml(i18n.t("This is the default license for all the contents of this group (you can also select another different license per content):")

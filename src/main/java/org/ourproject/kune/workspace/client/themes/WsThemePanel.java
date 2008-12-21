@@ -45,7 +45,7 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
         super.setMenu(menu);
         super.setIcon("images/colors.gif");
         super.setTooltip(i18n.t("Select Workspace theme for this group"));
-        ws.getSiteTraybar().addButton(this);
+        // ws.getSiteTraybar().addButton(this);
         presenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
             public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
                 ws.setTheme(oldTheme, newTheme);
@@ -54,8 +54,8 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
     }
 
     public void setThemes(final String[] themes) {
-        for (int i = 0; i < themes.length; i++) {
-            final WsTheme theme = new WsTheme(themes[i]);
+        for (String theme2 : themes) {
+            final WsTheme theme = new WsTheme(theme2);
             final MenuItem item = new MenuItem();
             final String name = theme.getName();
             item.setIconCls("k-wstheme-icon-" + name);
@@ -70,6 +70,7 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
         }
     }
 
+    @Override
     public void setVisible(final boolean visible) {
         super.setVisible(visible);
     }

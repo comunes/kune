@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.download.FileParams;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
+import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -54,11 +55,13 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
     public EntityOptionsLogoPanel(final EntityOptionsLogoPresenter presenter, final WorkspaceSkeleton ws,
             I18nTranslationService i18n) {
         this.i18n = i18n;
+        super.setHeight(EntityOptionsView.HEIGHT);
         super.setFrame(true);
         super.setAutoScroll(false);
         super.setBorder(false);
         super.setFileUpload(true);
         super.setWidth(400);
+        super.setIconCls("k-picture-icon");
         super.setMethod(Connection.POST);
         super.setUrl(ICON_UPLOAD_SERVLET);
         super.setWaitMsgTarget(true);
@@ -115,7 +118,6 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         });
         sendButton.setId(SET_LOGO_ID);
         super.addButton(sendButton);
-        super.setHeight(170);
     }
 
     // BrowseButton browseButton = new BrowseButton("SelectIcon");

@@ -18,6 +18,7 @@
  *
  */package org.ourproject.kune.workspace.client.themes;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
@@ -57,6 +58,10 @@ public class WsThemePresenter {
                 setState(state);
             }
         });
+    }
+
+    public View getView() {
+        return view;
     }
 
     public void init(final WsThemeView view) {

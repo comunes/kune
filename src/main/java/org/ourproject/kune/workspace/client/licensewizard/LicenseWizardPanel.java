@@ -39,6 +39,6 @@ public class LicenseWizardPanel extends WizardDialog implements LicenseWizardVie
                     }
                 });
         super.setFinishText(i18n.t("Select"));
-        super.setIconCls("k-deflicense-icon");
+        super.setIconCls("k-copyleft-icon");
     }
 }

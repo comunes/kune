@@ -821,8 +821,12 @@
   background-image: url(img/emblem-system.gif) !important;
 }
 
-.k-deflicense-icon {
+.k-copyleft-icon {
   background-image: url(img/copyleft.png) !important;
+}
+
+.k-picture-icon {
+  background-image: url(img/picture.png) !important;
 }
 
 .k-info-icon {
@@ -831,6 +835,10 @@
 
 .k-newgroup-icon {
   background-image: url(img/kune-icon16.png) !important;
+}
+
+.k-colors-icon {
+  background-image: url(img/colors.gif) !important;
 }
 
 .x-toolbar-body table {

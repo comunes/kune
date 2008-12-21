@@ -73,6 +73,9 @@ import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLice
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogo;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPresenter;
+import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSpaceConf;
+import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSpaceConfPanel;
+import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSpaceConfPresenter;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConf;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPanel;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPresenter;
@@ -488,6 +491,20 @@ public class KuneWorkspaceModule extends AbstractModule {
                 return presenter;
             }
         });
+
+        register(EntityOptionsGroup.class,
+                new Factory<EntityOptionsPublicSpaceConf>(EntityOptionsPublicSpaceConf.class) {
+                    @Override
+                    public EntityOptionsPublicSpaceConf create() {
+                        final EntityOptionsPublicSpaceConfPresenter presenter = new EntityOptionsPublicSpaceConfPresenter(
+                                $(EntityOptions.class));
+                        final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(
+                                presenter, $(WorkspaceSkeleton.class), $(I18nTranslationService.class),
+                                $(WsThemePresenter.class));
+                        presenter.init(panel);
+                        return presenter;
+                    }
+                });
 
         register(Singleton.class, new Factory<LicenseChangeAction>(LicenseChangeAction.class) {
             @Override

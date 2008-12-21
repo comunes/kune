@@ -31,7 +31,7 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
 
     public EntityOptionsPanel(final EntityOptions presenter, final EntityHeader entityHeader,
             I18nTranslationService i18n, Images images, EntityOptionsGroup entityOptionsGroup) {
-        super(ENTITY_OP_PANEL_ID, "", 400, 250, 400, 250, false, images, GROUP_OPTIONS_ERROR_ID);
+        super(ENTITY_OP_PANEL_ID, "", 400, HEIGHT + 80, 400, HEIGHT + 80, false, images, GROUP_OPTIONS_ERROR_ID);
         this.entityHeader = entityHeader;
         this.i18n = i18n;
         this.images = images;
@@ -53,13 +53,11 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
     public void setGroupTitle() {
         super.setTitle(i18n.t(PlatfMessages.ENT_OPTIONS_GROUP_TITLE));
         optionsButton.setText(i18n.t(PlatfMessages.ENT_OPTIONS_GROUP_TITLE));
-        // optionsButton.setTitle(i18n.t("Configure this group preferences"));
     }
 
     public void setPersonalTitle() {
         super.setTitle(i18n.t(PlatfMessages.ENT_OPTIONS_USER_TITLE));
         optionsButton.setText(i18n.t(PlatfMessages.ENT_OPTIONS_USER_TITLE));
-        // optionsButton.setTitle(i18n.t("Configure your preferences"));
     }
 
     private void createOptionsButton() {

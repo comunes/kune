@@ -21,6 +21,7 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+
   <context-param>
     <param-name>jruby.standalone</param-name>
     <param-value>true</param-value>

@@ -18,7 +18,9 @@
  *
  */package org.ourproject.kune.workspace.client.themes;
 
-public interface WsThemeView {
+import org.ourproject.kune.platf.client.View;
+
+public interface WsThemeView extends View {
 
     void setThemes(String[] themes);
 

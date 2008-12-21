@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
+import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -24,8 +25,8 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
             I18nTranslationService i18n) {
         super(i18n.t("Tools"));
         this.i18n = i18n;
-        super.setAutoWidth(true);
-        super.setAutoHeight(true);
+        super.setHeight(EntityOptionsView.HEIGHT);
+        super.setFrame(true);
         super.add(new Hidden());
         super.getFormPanel().setLabelWidth(20);
         this.presenter = presenter;

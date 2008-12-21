@@ -117,6 +117,10 @@ public class DefaultForm {
         form.setHideLabels(hide);
     }
 
+    public void setIconCls(String iconCls) {
+        form.setIconCls(iconCls);
+    }
+
     public void setPaddings(int padding) {
         form.setPaddings(padding);
     }
