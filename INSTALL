@@ -85,8 +85,17 @@ in Windows you need to do something similar (copy the jmagick .dll of the same v
 )
 
 - Run jetty: mvn jetty:run -Dliquibase.should.run=false
-- Once started (and initialized the db), you should stop a run jetty with de db migrator to insert initial data and migrate:
-  mvn jetty:run
+- Once started (and initialized the db), you should stop
+  (next restart of jetty the db migrator will run and insert the initial data)
+
+  you can start the server using the script:
+  ./script/server
+
+  or directly (windows):
+  mvn jetty:run -Dorg.mortbay.util.FileResource.checkAliases=False
+
+    (TODO: put the aliases stuff into a jetty config file)
+
 
 - And connect to http://yourIP:8080/kune
 

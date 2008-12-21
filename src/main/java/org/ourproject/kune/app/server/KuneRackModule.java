@@ -90,6 +90,9 @@ public class KuneRackModule implements RackModule {
 	builder.exclude("/http-bind.*");
 	builder.exclude("/services/fileupload.*");
 	builder.exclude("/public/.*");
+	// builder.exclude("/images/.*");
+	// builder.exclude("/stylesheets/.*");
+	// builder.exclude("/javascripts/.*");
 	builder.at(".*").install(new LogFilter());
 	builder.at(".*").install(new GuiceFilter());
 
