@@ -1,11 +1,20 @@
 class KunedbgController < ApplicationController
   layout 'kunedbg'
-  
+
+  helper_method :model_types
+
+  MODELS = {:groups => Group, :content => Content, :revisions => Revision, :users => Kuser }
+
   def index
-    render :text => 'hola', :layout => true
+    render :text => '', :layout => true
   end
 
+  def model_types
+    MODELS.keys
+  end
+  
   def list
-    @models = Group.find :all
+    @mclass = MODELS[params[:model].to_sym]
+    @models = @mclass.find :all
   end
 end
