@@ -27,6 +27,7 @@
         <% for mtype in  model_types -%>
           <li><%= link_to mtype, :action => 'list', :model => mtype %></li>
         <% end -%>
+        <li>contenido por id:<br/><% form_tag :action => 'find' do  -%><%= text_field_tag 'id' %><% end -%></li>
       </ul>
       <div class="content">
         <%= yield %>

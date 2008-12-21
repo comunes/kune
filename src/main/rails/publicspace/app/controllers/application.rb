@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
+
+  def template(template, tool, ctx)
+    @templater ||= Templater.new
+    render :text => @templater.render(template, tool, ctx)
+  end
 end
