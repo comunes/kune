@@ -1,8 +1,8 @@
 
 defaults: &defaults
   encoding: utf8
-  username: root
-  password: db4root
+  username: kune
+  password: db4kune
 
 production:
   adapter: jdbcmysql

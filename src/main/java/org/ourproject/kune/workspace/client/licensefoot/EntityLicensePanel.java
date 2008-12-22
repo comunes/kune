@@ -47,7 +47,7 @@ public class EntityLicensePanel implements EntityLicenseView {
         this.i18n = i18n;
         this.ws = ws;
         licenseImage = new Image();
-        licenseLabel = new Label();
+        licenseLabel = new Label("", false);
 
         licenseBar = new SimpleToolbar();
         licenseBar.addSpacer();
