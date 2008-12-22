@@ -40,10 +40,12 @@ public class EntityLicensePanel implements EntityLicenseView {
     private final Label licenseLabel;
     private final I18nTranslationService i18n;
     private final SimpleToolbar licenseBar;
+    private final WorkspaceSkeleton ws;
 
     public EntityLicensePanel(final EntityLicensePresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws) {
         this.i18n = i18n;
+        this.ws = ws;
         licenseImage = new Image();
         licenseLabel = new Label();
 
@@ -83,11 +85,13 @@ public class EntityLicensePanel implements EntityLicenseView {
     }
 
     public void attach() {
-        Ext.get(licenseBar.getElement()).setOpacity(1, false);
+        licenseBar.setVisible(true);
+        // Ext.get(licenseBar.getElement()).setOpacity(1, false);
     }
 
     public void detach() {
-        Ext.get(licenseBar.getElement()).setOpacity(0, false);
+        licenseBar.setVisible(false);
+        // Ext.get(licenseBar.getElement()).setOpacity(0, false);
     }
 
     public void openWindow(final String url) {
@@ -105,5 +109,6 @@ public class EntityLicensePanel implements EntityLicenseView {
     private void fade(final boolean in) {
         ExtElement element = Ext.get(licenseLabel.getElement());
         element.setOpacity(in ? 1 : 0, true);
+        ws.getEntityWorkspace().refreshBottomTitle();
     }
 }

@@ -75,11 +75,15 @@ public class FileDownloadManager extends HttpServlet {
         final String downloadS = req.getParameter(FileParams.DOWNLOAD);
         String imageSizeS = req.getParameter(FileParams.IMGSIZE);
 
-        final Content cnt = getContentForDownload(userHash, stateToken);
-
-        String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
-        final OutputStream out = resp.getOutputStream();
-        FileDownloadManagerUtils.returnFile(absFilename, out);
+        try {
+            Content cnt = getContentForDownload(userHash, stateToken);
+            String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
+            final OutputStream out = resp.getOutputStream();
+            FileDownloadManagerUtils.returnFile(absFilename, out);
+        } catch (ContentNotFoundException e) {
+            FileDownloadManagerUtils.returnNotFound(resp);
+            return;
+        }
     }
 
     String buildResponse(final Content cnt, final StateToken stateToken, final String downloadS, String imageSizeS,
@@ -127,13 +131,8 @@ public class FileDownloadManager extends HttpServlet {
 
     @Authenticated(mandatory = false)
     @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.content)
-    private Content getContentForDownload(final String userHash, final StateToken stateToken) throws ServletException {
-        try {
-            return contentManager.find(ContentUtils.parseId(stateToken.getDocument()));
-        } catch (final ContentNotFoundException e) {
-            // what response to send in this case ?
-            throw new ServletException();
-        }
-
+    private Content getContentForDownload(final String userHash, final StateToken stateToken)
+            throws ContentNotFoundException {
+        return contentManager.find(ContentUtils.parseId(stateToken.getDocument()));
     }
 }

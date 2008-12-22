@@ -30,6 +30,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.EventCallback;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.Field;
@@ -56,6 +57,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
             I18nTranslationService i18n) {
         this.i18n = i18n;
         super.setHeight(EntityOptionsView.HEIGHT);
+        super.setButtonAlign(Position.LEFT);
         super.setFrame(true);
         super.setAutoScroll(false);
         super.setBorder(false);

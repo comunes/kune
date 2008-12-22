@@ -2,6 +2,7 @@ package org.ourproject.kune.workspace.client.editor.insert.linkemail;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
+import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementView;
 
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -16,8 +17,9 @@ public class TextEditorInsertLinkEmailPanel extends DefaultForm implements TextE
 
     public TextEditorInsertLinkEmailPanel(final TextEditorInsertLinkEmailPresenter presenter,
             I18nTranslationService i18n) {
+        super(i18n.t("Email link"));
         super.setAutoWidth(true);
-        super.setAutoHeight(true);
+        super.setHeight(TextEditorInsertElementView.HEIGHT);
         emailField = new TextField();
         emailField.setTabIndex(4);
         emailField.setFieldLabel(i18n.t("Email"));

@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.servlet.http.HttpServletResponse;
+
 public class FileDownloadManagerUtils {
 
     private static final long serialVersionUID = 1L;
@@ -44,5 +46,10 @@ public class FileDownloadManagerUtils {
                 in.close();
             }
         }
+    }
+
+    public static void returnNotFound(HttpServletResponse resp) throws IOException {
+        resp.getWriter().println("Content not found");
+        resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 }

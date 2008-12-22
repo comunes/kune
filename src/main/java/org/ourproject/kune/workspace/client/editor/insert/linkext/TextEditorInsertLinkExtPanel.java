@@ -2,6 +2,7 @@ package org.ourproject.kune.workspace.client.editor.insert.linkext;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
+import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementView;
 
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -16,8 +17,9 @@ public class TextEditorInsertLinkExtPanel extends DefaultForm implements TextEdi
 
     public TextEditorInsertLinkExtPanel(final TextEditorInsertLinkExtPresenter presenter,
             final I18nTranslationService i18n) {
+        super(i18n.t("External link"));
         super.setAutoWidth(true);
-        super.setAutoHeight(true);
+        super.setHeight(TextEditorInsertElementView.HEIGHT);
         linkField = new TextField();
         linkField.setTabIndex(1);
         linkField.setFieldLabel(i18n.t("External link (URL)"));

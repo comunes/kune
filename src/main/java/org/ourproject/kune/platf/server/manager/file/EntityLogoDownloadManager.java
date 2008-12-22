@@ -20,6 +20,7 @@
 
 import java.io.IOException;
 
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,14 +47,19 @@ public class EntityLogoDownloadManager extends HttpServlet {
         // final String userHash = req.getParameter(FileParams.HASH);
         final StateToken stateToken = new StateToken(req.getParameter(FileParams.TOKEN));
 
-        Group group = groupManager.findByShortName(stateToken.getGroup());
+        Group group = Group.NO_GROUP;
+        try {
+            group = groupManager.findByShortName(stateToken.getGroup());
+            if (group == Group.NO_GROUP) {
+                throw new NoResultException("Group not found trying to get the logo");
+            }
 
-        if (group == Group.NO_GROUP) {
-            throw new ServletException("Group not found trying to get the logo");
-        }
-
-        if (!group.hasLogo()) {
-            throw new ServletException("This Group has no logo");
+            if (!group.hasLogo()) {
+                throw new NoResultException("This Group has no logo");
+            }
+        } catch (NoResultException e) {
+            FileDownloadManagerUtils.returnNotFound(resp);
+            return;
         }
 
         byte[] logo = group.getLogo();

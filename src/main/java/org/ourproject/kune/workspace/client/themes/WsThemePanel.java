@@ -44,7 +44,7 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
         menu.setDefaultAlign("br-tr");
         super.setMenu(menu);
         super.setIcon("images/colors.gif");
-        super.setTooltip(i18n.t("Select Workspace theme for this group"));
+        // super.setTooltip(i18n.t("Select Workspace theme for this group"));
         // ws.getSiteTraybar().addButton(this);
         presenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
             public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {

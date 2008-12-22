@@ -51,6 +51,7 @@ public class EntityWorkspace {
     private final RoundedPanel roundedBottom;
     private final Panel cntCtxBorderLayout;
     private final Panel mainFitPanel;
+    private final Panel bottomPanel;
 
     public EntityWorkspace() {
         mainFitPanel = new Panel();
@@ -67,7 +68,7 @@ public class EntityWorkspace {
         final Panel titles = new Panel();
         titles.setBorder(false);
         titles.setLayout(new AnchorLayout());
-        final Panel bottomPanel = new Panel();
+        bottomPanel = new Panel();
         bottomPanel.setBorder(false);
         bottomPanel.setLayout(new AnchorLayout());
 
@@ -81,7 +82,7 @@ public class EntityWorkspace {
         bottom = new SimpleToolbar();
         bottom.setHeight("" + (WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2));
         bottom.setStylePrimaryName(ENTITY_BOTTOM);
-        bottom.ensureDebugId(ENTITY_BOTTOM);
+        // bottom.ensureDebugId(ENTITY_BOTTOM);
 
         roundedTitle = new RoundedPanel(title, RoundedPanel.TOPLEFT, 2);
         roundedBottom = new RoundedPanel(bottom, RoundedPanel.BOTTOMLEFT, 2);
@@ -90,6 +91,7 @@ public class EntityWorkspace {
         titles.add(subTitle, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
         bottomPanel.add(roundedBottom, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
         titles.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 2);
+        bottomPanel.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
 
         final Panel contentWrap = new Panel();
         final Panel contextWrap = new Panel();
@@ -137,7 +139,7 @@ public class EntityWorkspace {
         mainAnchorLayout.add(titles, new AnchorLayoutData("100%"));
         mainAnchorLayout.add(cntCtxBorderLayout, new AnchorLayoutData("100% -"
                 + ((WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 3))));
-        mainAnchorLayout.add(bottomPanel, new AnchorLayoutData("100%"));
+        mainAnchorLayout.add(bottomPanel, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 3));
         mainFitPanel.add(mainAnchorLayout);
     }
 
@@ -191,6 +193,12 @@ public class EntityWorkspace {
 
     public SimpleToolbar getTitleComponent() {
         return title;
+    }
+
+    public void refreshBottomTitle() {
+        if (bottomPanel.isRendered()) {
+            // bottomPanel.doLayout(false);
+        }
     }
 
     public void setContent(final Widget widget) {

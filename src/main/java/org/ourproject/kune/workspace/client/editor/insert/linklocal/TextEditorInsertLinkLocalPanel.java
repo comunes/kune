@@ -4,6 +4,7 @@ import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementView;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -21,7 +22,8 @@ public class TextEditorInsertLinkLocalPanel extends AbstractLiveSearcherPanel im
             }
         });
         super.setTitle(i18n.t("Local link"));
-        super.setHeight(110);
+        super.setFrame(true);
+        super.setHeight(TextEditorInsertElementView.HEIGHT);
         super.setPaddings(20);
     }
 }
