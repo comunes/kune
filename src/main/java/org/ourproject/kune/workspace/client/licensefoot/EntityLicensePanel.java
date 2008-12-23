@@ -76,7 +76,6 @@ public class EntityLicensePanel implements EntityLicenseView {
         };
 
         licenseImage.addMouseListener(mouseListenerAdapter);
-        licenseLabel.addMouseListener(mouseListenerAdapter);
 
         licenseLabel.addStyleName("kune-Margin-Large-l");
         licenseLabel.setStyleName("k-elp-limg");

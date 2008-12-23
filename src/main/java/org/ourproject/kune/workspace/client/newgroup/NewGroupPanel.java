@@ -39,10 +39,12 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.PaddedPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.ToolTip;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.event.WindowListenerAdapter;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -95,7 +97,18 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
                     public void onEvent() {
                         presenter.onRegister();
                     }
-                }, 0);
+                }, 9);
+        super.addListener(new WindowListenerAdapter() {
+            @Override
+            public void onHide(Component component) {
+                presenter.onClose();
+            }
+
+            @Override
+            public void onShow(Component component) {
+                KuneUiUtils.focusOnField(shortNameField);
+            }
+        });
         this.i18n = i18n;
         this.licenseWizard = licenseWizard;
         Field.setMsgTarget("side");
@@ -181,6 +194,7 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         form.add(intro);
 
         shortNameField = new TextField();
+        shortNameField.setValidationEvent(false);
         shortNameField.setTabIndex(1);
         shortNameField.setFieldLabel(i18n.t("Short name"));
         shortNameField.setName(SHORTNAME_FIELD);
@@ -243,6 +257,7 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         licenseImagePanel.add(licenseImage);
 
         Button changeLicenseButton = new Button(i18n.t("Change"));
+        changeLicenseButton.setTabIndex(5);
         changeLicenseButton.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(Button button, EventObject e) {
@@ -281,20 +296,20 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
                         + "is moderated by the project administrators. "
                         + "An administrator is the person who creates the project "
                         + "and other people she/he chooses to be administrator as well."), PROJ_GROUP_TYPE_ID);
-        projectRadio.setTabIndex(5);
+        projectRadio.setTabIndex(6);
         projectRadio.setChecked(true);
 
         orgRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Organization"), TYPEOFGROUP_FIELD,
                 i18n.t("An organization works as a project, " + "but organizations must be a legal entity."),
                 ORG_GROUP_TYPE_ID);
-        orgRadio.setTabIndex(6);
+        orgRadio.setTabIndex(7);
 
         communityRadio = DefaultFormUtils.createRadio(groupTypeFieldSet, i18n.t("Community"), TYPEOFGROUP_FIELD,
                 i18n.t("Communities are social groups of persons "
                         + "with shared interests, which are open to new members "
                         + "(for instance the environmental community or the LGBT community). "
                         + "They rarely are a legal entity."), COMM_GROUP_TYPE_ID);
-        communityRadio.setTabIndex(7);
+        communityRadio.setTabIndex(8);
 
         return form;
     }

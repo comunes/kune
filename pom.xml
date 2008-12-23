@@ -273,18 +273,6 @@
       -->
     </dependency>
     <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymock</artifactId>
-      <version>2.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <version>1.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.openqa.selenium.client-drivers</groupId>
       <artifactId>selenium-java-client-driver</artifactId>
       <version>1.0-beta-1</version>
@@ -392,8 +380,8 @@
         <version>2.0-beta26</version>
         <configuration>
           <logLevel>INFO</logLevel>
-          <style>OBF</style>
-          <!-- <style>PRETTY</style> -->
+          <style>PRETTY</style>
+          <!-- <style>OBF PRETTY</style> -->
           <runTarget>
             org.ourproject.kune.app.Kune/Kune.html
           </runTarget>

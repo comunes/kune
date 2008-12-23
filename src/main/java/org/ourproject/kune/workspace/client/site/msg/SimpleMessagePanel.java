@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class SimpleMessagePanel extends HorizontalPanel implements SiteMessageView {
+public class SimpleMessagePanel extends HorizontalPanel {
     HTML message = null;
     Image messageIcon = null;
     private final Images images;

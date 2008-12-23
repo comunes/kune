@@ -21,15 +21,26 @@ package org.ourproject.kune.platf.client.ui;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.ToolTip;
+import com.gwtext.client.widgets.form.Field;
 
 public class KuneUiUtils {
 
     public enum IconPosition {
         left, right
+    }
+
+    public static void focusOnField(final Field field) {
+        new Timer() {
+            @Override
+            public void run() {
+                field.focus(true);
+            }
+        }.schedule(50);
     }
 
     public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText) {

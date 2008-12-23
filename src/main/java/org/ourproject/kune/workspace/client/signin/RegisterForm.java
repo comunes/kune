@@ -26,6 +26,7 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.form.ComboBox;
+import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.Radio;
 import com.gwtext.client.widgets.form.TextField;
@@ -224,8 +225,8 @@ public class RegisterForm extends DefaultForm {
         createRadio(personalSpaceFieldSet, wantPersonalHomePage,
                 i18n.t("Yes, I want a homepage for publish my contents."), WANNAPERSONALHOMEPAGE_ID);
         wantPersonalHomePage.setChecked(true);
-        createRadio(personalSpaceFieldSet, noPersonalHomePage, i18n.t("No, I do not want. Maybe in the future i will."),
-                NOPERSONALHOMEPAGE_ID);
+        createRadio(personalSpaceFieldSet, noPersonalHomePage,
+                i18n.t("No, I do not want. Maybe in the future i will."), NOPERSONALHOMEPAGE_ID);
         add(personalSpaceFieldSet);
     }
 
@@ -255,6 +256,10 @@ public class RegisterForm extends DefaultForm {
 
     public String getShortName() {
         return shortNameRegField.getValueAsString();
+    }
+
+    public Field getShortNameField() {
+        return shortNameRegField;
     }
 
     public String getTimezone() {

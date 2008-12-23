@@ -221,7 +221,7 @@ public class EditableIconLabel extends Composite {
             });
         }
         editor.setReadOnly(false);
-        editor.setPixelSize(hpWidth < 40 ? 40 : hpWidth, 21);
+        editor.setPixelSize(hpWidth < 100 ? 100 : hpWidth, 21);
         editor.setText(currentText);
         editor.setVisible(true);
         editor.setFocus(true);

@@ -1,14 +1,11 @@
 package org.ourproject.kune.platf.server.access;
 
-import static org.easymock.EasyMock.createStrictMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
@@ -36,11 +33,9 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
         descriptor.setContainer(container);
-        expect(contentManager.find(1L)).andReturn(descriptor);
-        replay(contentManager);
+        Mockito.stub(contentManager.find(1L)).toReturn(descriptor);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
-        verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
@@ -48,11 +43,9 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
         descriptor.setContainer(container);
-        expect(contentManager.find(1L)).andReturn(descriptor);
-        replay(contentManager);
+        Mockito.stub(contentManager.find(1L)).toReturn(descriptor);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
-        verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
@@ -60,20 +53,18 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithId(1);
         descriptor.setContainer(container);
-        expect(contentManager.find(1L)).andReturn(descriptor);
-        replay(contentManager);
+        Mockito.stub(contentManager.find(1L)).toReturn(descriptor);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
-        verify(contentManager);
     }
 
     @Before
     public void createSession() {
-        this.groupManager = createStrictMock(GroupManager.class);
-        this.containerManager = createStrictMock(ContainerManager.class);
-        this.contentManager = createStrictMock(ContentManager.class);
-        this.rateManager = createStrictMock(RateManager.class);
-        this.commentManager = createStrictMock(CommentManager.class);
+        this.groupManager = Mockito.mock(GroupManager.class);
+        this.containerManager = Mockito.mock(ContainerManager.class);
+        this.contentManager = Mockito.mock(ContentManager.class);
+        this.rateManager = Mockito.mock(RateManager.class);
+        this.commentManager = Mockito.mock(CommentManager.class);
         this.finder = new FinderServiceDefault(groupManager, containerManager, contentManager, rateManager,
                 commentManager);
     }
@@ -83,12 +74,10 @@ public class FinderTest {
         final Group group = new Group();
         final Content descriptor = new Content();
         group.setDefaultContent(descriptor);
-        expect(groupManager.findByShortName("groupShortName")).andReturn(group);
-        replay(groupManager);
+        Mockito.stub(groupManager.findByShortName("groupShortName")).toReturn(group);
 
         final Content content = finder.getContent(new StateToken("groupShortName", null, null, null), null);
         assertSame(descriptor, content);
-        verify(groupManager);
     }
 
     @Test
@@ -98,12 +87,10 @@ public class FinderTest {
         descriptor.setId(1L);
         descriptor.setContainer(container);
 
-        expect(contentManager.find(2L)).andReturn(descriptor);
-        replay(contentManager);
+        Mockito.stub(contentManager.find(2L)).toReturn(descriptor);
 
         final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", "2"), null);
         assertSame(descriptor, content);
-        verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
@@ -143,13 +130,11 @@ public class FinderTest {
     @Test
     public void testDocMissing() throws Exception {
         final Container container = new Container();
-        expect(containerManager.find(1L)).andReturn(container);
+        Mockito.stub(containerManager.find(1L)).toReturn(container);
 
-        replay(containerManager);
         final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", null), null);
         assertNotNull(content);
         assertSame(container, content.getContainer());
-        verify(containerManager);
     }
 
     @Test
@@ -157,13 +142,11 @@ public class FinderTest {
         final Group group = new Group();
         final ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
         final Container container = config.setRoot(new Container());
-        expect(groupManager.findByShortName("groupShortName")).andReturn(group);
-        replay(groupManager);
+        Mockito.stub(groupManager.findByShortName("groupShortName")).toReturn(group);
 
         final StateToken token = new StateToken("groupShortName", "toolName", null, null);
         final Content content = finder.getContent(token, null);
         assertSame(container, content.getContainer());
-        verify(groupManager);
     }
 
     @Test(expected = ContentNotFoundException.class)
@@ -171,11 +154,9 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
         descriptor.setContainer(container);
-        expect(contentManager.find(1L)).andReturn(descriptor);
-        replay(contentManager);
+        Mockito.stub(contentManager.find(1L)).toReturn(descriptor);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);
-        verify(contentManager);
     }
 
     @Test(expected = ContentNotFoundException.class)

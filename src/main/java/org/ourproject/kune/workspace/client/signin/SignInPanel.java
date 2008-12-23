@@ -2,6 +2,7 @@ package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -13,6 +14,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
+import com.gwtext.client.widgets.form.Field;
 
 public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
@@ -50,7 +52,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
             @Override
             public void onShow(Component component) {
-                focusOnNickname();
+                KuneUiUtils.focusOnField(getNickname());
             }
         });
 
@@ -102,6 +104,10 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
         hp.add(registerLabel);
         noAccRegisterPanel.add(hp);
         return noAccRegisterPanel;
+    }
+
+    private Field getNickname() {
+        return signInForm.getNickOrEmailField();
     }
 
 }

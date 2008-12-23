@@ -3,6 +3,7 @@ package org.ourproject.kune.workspace.client.signin;
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -45,8 +46,18 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
                 }, images, ERRMSG, 11);
         super.addListener(new WindowListenerAdapter() {
             @Override
+            public void onActivate(Panel panel) {
+                KuneUiUtils.focusOnField(registerForm.getShortNameField());
+            }
+
+            @Override
             public void onHide(Component component) {
                 presenter.onClose();
+            }
+
+            @Override
+            public void onShow(Component component) {
+                KuneUiUtils.focusOnField(registerForm.getShortNameField());
             }
         });
 
