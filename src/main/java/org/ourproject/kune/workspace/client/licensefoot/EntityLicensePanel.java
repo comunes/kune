@@ -60,7 +60,7 @@ public class EntityLicensePanel implements EntityLicenseView {
             }
         };
 
-        licenseLabel.addClickListener(clickListener);
+        // licenseLabel.addClickListener(clickListener);
         licenseImage.addClickListener(clickListener);
 
         MouseListenerAdapter mouseListenerAdapter = new MouseListenerAdapter() {

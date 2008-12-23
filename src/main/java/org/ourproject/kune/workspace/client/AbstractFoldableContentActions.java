@@ -115,7 +115,8 @@ public abstract class AbstractFoldableContentActions {
                 AccessRolDTO.Administrator, i18n.t("Submitted for publish"), parentMenuTitle,
                 ContentStatusDTO.publishedOnline);
         final ActionToolbarMenuRadioDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), parentMenuTitle, ContentStatusDTO.inTheDustbin);
+                AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), parentMenuTitle,
+                ContentStatusDTO.inTheDustbin);
         contentActionRegistry.addAction(setPublishStatus, contentsModerated);
         contentActionRegistry.addAction(setEditionInProgressStatus, contentsModerated);
         contentActionRegistry.addAction(setRejectStatus, contentsModerated);
@@ -157,7 +158,7 @@ public abstract class AbstractFoldableContentActions {
                         contentServiceProvider.get().delContent(session.getUserHash(), token,
                                 new AsyncCallbackSimple<String>() {
                                     public void onSuccess(final String result) {
-                                        final StateToken parent = token.clone().clearDocument();
+                                        final StateToken parent = token.copy().clearDocument();
                                         stateManager.gotoToken(parent);
                                     }
                                 });

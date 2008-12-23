@@ -86,7 +86,7 @@ public class StateToken implements IsSerializable {
         return this;
     }
 
-    public StateToken clone() {
+    public StateToken copy() {
         return new StateToken(this.getEncoded());
     }
 
@@ -131,21 +131,23 @@ public class StateToken implements IsSerializable {
     public String getPublicUrl() {
         String publicUrl = "http://";
 
-        if (group != null) {
-            publicUrl += group + SEPARATOR;
-        }
+        String separator = "/";
 
         // FIXME: Maybe get from InitData the site.domain
-        publicUrl += WindowUtils.getLocation().getHostName() + "/";
+        String port = WindowUtils.getLocation().getPort();
+        publicUrl += WindowUtils.getLocation().getHostName() + (port == null ? "" : ":" + port) + "/public";
 
+        if (group != null) {
+            publicUrl += separator + group;
+        }
         if (tool != null) {
-            publicUrl += tool;
+            publicUrl += separator + tool;
         }
         if (folder != null) {
-            publicUrl += SEPARATOR + folder;
+            publicUrl += separator + folder;
         }
         if (document != null) {
-            publicUrl += SEPARATOR + document;
+            publicUrl += separator + document;
         }
 
         return publicUrl;
@@ -224,6 +226,7 @@ public class StateToken implements IsSerializable {
         return this;
     }
 
+    @Override
     public String toString() {
         return getEncoded();
     }
@@ -248,5 +251,4 @@ public class StateToken implements IsSerializable {
         setFolder(conditionalAssign(2, splitted));
         setDocument(conditionalAssign(3, splitted));
     }
-
 }

@@ -222,7 +222,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
             rights = containerRights;
             final ActionItemCollection<StateToken> containerActions = addItem(container.getName(),
                     container.getTypeId(), null, ContentStatusDTO.publishedOnline, container.getStateToken(),
-                    container.getStateToken().clone().setFolder(container.getParentFolderId()), containerRights, false);
+                    container.getStateToken().copy().setFolder(container.getParentFolderId()), containerRights, false);
             actionItems.addAll(containerActions);
         }
 
@@ -284,13 +284,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
         for (final ContentSimpleDTO content : container.getContents()) {
             addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
-                    content.getStateToken(), content.getStateToken().clone().clearDocument(), content.getRights(),
-                    false);
+                    content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights(), false);
         }
 
         for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
             addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatusDTO.publishedOnline,
-                    siblingFolder.getStateToken(), siblingFolder.getStateToken().clone().setFolder(
+                    siblingFolder.getStateToken(), siblingFolder.getStateToken().copy().setFolder(
                             siblingFolder.getParentFolderId()), containerRights, false);
         }
     }
@@ -299,7 +298,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
             final AccessRightsDTO rights) {
         for (final ContainerSimpleDTO folder : absolutePath) {
             final StateToken folderStateToken = folder.getStateToken();
-            final StateToken parentStateToken = state.clone().clearDocument().setFolder(folder.getParentFolderId());
+            final StateToken parentStateToken = state.copy().clearDocument().setFolder(folder.getParentFolderId());
 
             if (folder.getParentFolderId() != null) {
                 addItem(folder.getName(), folder.getTypeId(), null, ContentStatusDTO.publishedOnline, folderStateToken,

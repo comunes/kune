@@ -4,6 +4,6 @@ import org.ourproject.kune.platf.client.View;
 
 public interface TextEditorInsertAbstractView extends View {
 
-    void clear();
+    void reset();
 
 }

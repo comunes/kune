@@ -82,7 +82,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     @Test(expected = ContentNotFoundException.class)
     public void nonExistentContent4() throws Exception {
         final StateContainerDTO stateDTO = getSiteDefaultContent();
-        contentService.getContent(null, stateDTO.getStateToken().clone().setDocument("dadaas"));
+        contentService.getContent(null, stateDTO.getStateToken().copy().setDocument("dadaas"));
     }
 
     @Test(expected = ContentNotFoundException.class)

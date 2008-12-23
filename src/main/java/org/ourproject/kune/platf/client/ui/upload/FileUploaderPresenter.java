@@ -39,7 +39,7 @@ public class FileUploaderPresenter implements FileUploader {
     }
 
     public boolean checkFolderChange() {
-        final StateToken currentFolderStateToken = session.getCurrentStateToken().clone().clearDocument();
+        final StateToken currentFolderStateToken = session.getCurrentStateToken().copy().clearDocument();
         if (sameContainer()) {
             view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString(),
                     currentFolderStateToken.getTool() + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX);

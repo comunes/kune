@@ -127,7 +127,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         center.setClosable(false);
         center.setBorder(false);
 
-        final Window dialog = new BasicDialog(TRANSLATOR_DIALOG, "", false, false, 720, 330);
+        final Window dialog = new BasicDialog(TRANSLATOR_DIALOG, "", false, false, 620, 330);
         // dialog.setResizable(false);
         dialog.setIconCls("i18n-icon");
 
@@ -222,7 +222,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
             {
                 setHeader(i18n.t("Text to translate"));
                 setDataIndex("trKey");
-                setWidth(335);
+                setWidth(285);
                 setTooltip(i18n.t("Click to sort"));
                 setRenderer(renderNT);
             }
@@ -234,7 +234,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
             {
                 setHeader(i18n.t("Translation (click to edit)"));
                 setDataIndex("text");
-                setWidth(335);
+                setWidth(285);
                 setEditor(textColumnEditor);
             }
         };
@@ -243,7 +243,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
 
         columnModel.setDefaultSortable(true);
 
-        final EditorGridPanel grid = new EditorGridPanel((translated ? "grid-translated" : "grid-untranslated"), 695,
+        final EditorGridPanel grid = new EditorGridPanel((translated ? "grid-translated" : "grid-untranslated"), 595,
                 180, store, columnModel);
         createPagingToolbar(store, grid);
 

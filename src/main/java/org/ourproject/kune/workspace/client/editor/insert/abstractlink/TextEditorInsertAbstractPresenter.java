@@ -23,6 +23,6 @@ public class TextEditorInsertAbstractPresenter {
 
     public void onInsert(String name, String link) {
         editorInsertElement.fireOnInsert(name, link);
-        view.clear();
+        view.reset();
     }
 }
