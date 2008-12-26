@@ -41,8 +41,6 @@ public interface ContextNavigator {
 
     void setEditOnNextStateChange(boolean edit);
 
-    void setFireOnTextChange(boolean visible);
-
     void setItemStatus(StateToken stateToken, ContentStatusDTO status);
 
     void setState(StateContainerDTO state, boolean selectItem);

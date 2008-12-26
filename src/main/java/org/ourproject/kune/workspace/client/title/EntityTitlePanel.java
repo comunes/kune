@@ -19,8 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.title;
 
-import org.ourproject.kune.platf.client.ui.EditableClickListener;
-import org.ourproject.kune.platf.client.ui.EditableIconLabel;
+import org.ourproject.kune.platf.client.ui.IconLabelEditable;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -29,16 +28,12 @@ import com.google.gwt.user.client.ui.Image;
 
 public class EntityTitlePanel implements EntityTitleView {
     public static final String ENTITY_TITLE_RIGHT_TITLE = "k-entity-title-title";
-    private final EditableIconLabel titleLabel;
+    private final IconLabelEditable titleLabel;
     private final Image icon;
 
     public EntityTitlePanel(final WorkspaceSkeleton ws, final EntityTitlePresenter presenter) {
         icon = new Image();
-        titleLabel = new EditableIconLabel(new EditableClickListener() {
-            public void onEdited(final String newName) {
-            }
-        });
-
+        titleLabel = new IconLabelEditable();
         titleLabel.onEdit(new Listener2<String, String>() {
             public void onEvent(String oldName, String newName) {
                 presenter.onTitleRename(oldName, newName);

@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
@@ -49,7 +50,7 @@ public class TextEditorPresenter implements TextEditor {
     private Listener<String> onSave;
     private Listener0 onEditCancelled;
     private final ActionToolbar<StateToken> toolbar;
-    private ActionToolbarButtonDescriptor<StateToken> save;
+    private ActionToolbarMenuDescriptor<StateToken> save;
     private ActionToolbarButtonDescriptor<StateToken> close;
     private final I18nUITranslationService i18n;
     private final BeforeActionListener beforeStateChangeListener;
@@ -193,13 +194,14 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     private void createActions() {
-        save = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
+        save = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
                 new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         onSave();
                     }
                 });
         save.setTextDescription(i18n.tWithNT("Save", "used in button"));
+        save.setParentMenuTitle(i18n.t("File"));
         save.setId(SAVE_ID);
         // save.setIconUrl("images/");
 

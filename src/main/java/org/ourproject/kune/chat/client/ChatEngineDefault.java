@@ -138,8 +138,8 @@ class ChatEngineDefault implements ChatEngine {
         final String initialWindowTitle = Window.getTitle();
         chatOptions.userOptions = userChatOptions;
         if (emiteUIProvider.get().isDialogNotStarted()) {
-            emiteUIProvider.get().start(userChatOptions, chatOptions.httpBase, chatOptions.roomHost,
-                    initialWindowTitle, avatarProvider, i18n.t("Chat"));
+            emiteUIProvider.get().start(userChatOptions, chatOptions.httpBase, chatOptions.domain,
+                    chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
         } else {
             emiteUIProvider.get().setEnableStatusUI(true);
             emiteUIProvider.get().refreshUserInfo(chatOptions.userOptions);

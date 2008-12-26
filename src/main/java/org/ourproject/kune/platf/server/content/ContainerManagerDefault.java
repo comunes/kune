@@ -60,14 +60,15 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
     public Container createFolder(final Group group, final Container parent, final String name,
             final I18nLanguage language, String typeId) {
-        findInexistentName(parent, name);
+        FilenameUtils.checkBasicFilename(name);
+        String newtitle = findInexistentName(parent, name);
         final List<Container> parentAbsolutePath = parent.getAbsolutePath();
         final List<Container> childAbsolutePath = new ArrayList<Container>();
 
         for (Container parentRef : parentAbsolutePath) {
             childAbsolutePath.add(parentRef);
         }
-        final Container child = new Container(name, group, parent.getToolName());
+        final Container child = new Container(newtitle, group, parent.getToolName());
         childAbsolutePath.add(child);
         child.setLanguage(language);
         child.setAbsolutePath(childAbsolutePath);

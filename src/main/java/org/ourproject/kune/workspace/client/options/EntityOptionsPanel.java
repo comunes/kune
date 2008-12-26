@@ -42,6 +42,7 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
 
     @Override
     public void createAndShow() {
+        // FIXME: use onAfterCreate in Factory/Module
         entityPreferencesGroup.createAll();
         super.createAndShow();
     }

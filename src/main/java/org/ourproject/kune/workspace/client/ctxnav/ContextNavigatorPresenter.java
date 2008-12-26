@@ -141,10 +141,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         return editOnNextStateChange;
     }
 
-    public void onItemRename(final String token, final String newName, final String oldName) {
-        renameAction.rename(new StateToken(token), oldName, newName);
-    }
-
     public void refresh(final StateToken stateToken) {
         contentServiceProvider.get().getContent(session.getUserHash(), stateToken,
                 new AsyncCallbackSimple<StateAbstractDTO>() {
@@ -162,10 +158,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public void setEditOnNextStateChange(final boolean edit) {
         editOnNextStateChange = edit;
-    }
-
-    public void setFireOnTextChange(boolean visible) {
-        view.setFireOnTextChange(visible);
     }
 
     public void setItemStatus(final StateToken stateToken, ContentStatusDTO status) {
@@ -244,6 +236,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         toolbar.attach();
     }
 
+    protected void onItemRename(final String token, final String newName, final String oldName) {
+        renameAction.rename(new StateToken(token), oldName, newName);
+    }
+
     private ActionItemCollection<StateToken> addItem(final String title, final String contentTypeId,
             final BasicMimeTypeDTO mimeType, final ContentStatusDTO status, final StateToken stateToken,
             final StateToken parentStateToken, final AccessRightsDTO rights, final boolean isNodeSelected) {
@@ -265,17 +261,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private void confRenameListener() {
         Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
             public void onEvent(StateToken token, String newName) {
-                view.setFireOnTextChange(false);
                 setItemText(token, newName);
-                view.setFireOnTextChange(true);
             }
         };
         renameAction.onSuccess(onSuccess);
         Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
             public void onEvent(StateToken token, String oldName) {
-                view.setFireOnTextChange(false);
                 setItemText(token, oldName);
-                view.setFireOnTextChange(true);
             }
         };
         renameAction.onFail(onFail);

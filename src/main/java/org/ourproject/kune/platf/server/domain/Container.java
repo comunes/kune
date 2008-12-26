@@ -20,10 +20,12 @@
 package org.ourproject.kune.platf.server.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +37,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -81,13 +84,16 @@ public class Container implements HasId, HasStateToken {
     @JoinColumn
     private Container parent;
 
+    @OrderBy("createdOn DESC")
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Container> childs;
 
     @ContainedIn
+    @OrderBy("createdOn DESC")
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Content> contents;
 
+    @OrderBy("createdOn DESC")
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Container> absolutePath;
 
@@ -96,6 +102,12 @@ public class Container implements HasId, HasStateToken {
 
     @OneToOne(cascade = CascadeType.ALL)
     private AccessLists accessLists;
+
+    @Basic(optional = false)
+    private Long createdOn;
+
+    @Basic(optional = true)
+    private Date deletedOn;
 
     public Container() {
         this(null, null, null);
@@ -108,6 +120,7 @@ public class Container implements HasId, HasStateToken {
         this.contents = new HashSet<Content>();
         this.childs = new HashSet<Container>();
         this.absolutePath = new ArrayList<Container>();
+        this.createdOn = System.currentTimeMillis();
     }
 
     public void addChild(final Container child) {
@@ -150,6 +163,14 @@ public class Container implements HasId, HasStateToken {
 
     public Set<Content> getContents() {
         return contents;
+    }
+
+    public Long getCreatedOn() {
+        return createdOn;
+    }
+
+    public Date getDeletedOn() {
+        return deletedOn;
     }
 
     public Long getId() {
@@ -231,6 +252,14 @@ public class Container implements HasId, HasStateToken {
 
     public void setContents(final HashSet<Content> contents) {
         this.contents = contents;
+    }
+
+    public void setCreatedOn(Long createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public void setDeletedOn(Date deletedOn) {
+        this.deletedOn = deletedOn;
     }
 
     public void setId(final Long id) {

@@ -19,66 +19,66 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
+import com.calclab.suco.client.listener.Event2;
+import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FocusListener;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.widgets.MessageBox;
-import com.gwtext.client.widgets.MessageBoxConfig;
 
-@Deprecated
-public class EditableIconLabel extends Composite {
+public class IconLabelEditable extends Composite {
 
     private boolean useDoubleClick;
     private ClickListener listener;
     private String currentText;
     private String oldText;
-    private EditableClickListener editableListener;
     private MouseListenerAdapter mouseOverListener;
     private final AbstractLabel label;
-    private String renameDialogTitle;
-    private String renameDialogLabel;
     private String doubleClickToRenameLabel;
     private String clickToRenameLabel;
+    private Event2<String, String> onEdit;
+    private TextBox editor;
+    private HorizontalPanel hp;
 
-    public EditableIconLabel(final AbstractImagePrototype icon, final String text, final boolean useDoubleClick,
-            final EditableClickListener editableListenerOrig) {
+    public IconLabelEditable() {
+        this("");
+    }
+
+    public IconLabelEditable(final AbstractImagePrototype icon, final String text, final boolean useDoubleClick) {
         label = new IconLabel(icon, text);
-        init(text, useDoubleClick, editableListenerOrig);
+        init(text, useDoubleClick);
     }
 
-    public EditableIconLabel(final AbstractImagePrototype icon, final String text, final String targetHistoryToken,
-            final boolean useDoubleClick, final EditableClickListener editableListenerOrig) {
+    public IconLabelEditable(final AbstractImagePrototype icon, final String text, final String targetHistoryToken,
+            final boolean useDoubleClick) {
         label = new IconHyperlink(icon, text, targetHistoryToken);
-        init(text, useDoubleClick, editableListenerOrig);
+        init(text, useDoubleClick);
     }
 
-    public EditableIconLabel(final EditableClickListener editableListener) {
-        this("", editableListener);
+    public IconLabelEditable(final String text) {
+        this(text, false);
     }
 
-    public EditableIconLabel(final String text, final boolean wordWrap, final boolean useDoubleClick,
-            final EditableClickListener editableListenerOrig) {
+    public IconLabelEditable(final String text, final boolean useDoubleClick) {
+        this(text, false, false);
+    }
+
+    public IconLabelEditable(final String text, final boolean wordWrap, final boolean useDoubleClick) {
         label = new LabelWrapper(text, wordWrap);
-        init(text, useDoubleClick, editableListenerOrig);
-    }
-
-    public EditableIconLabel(final String text, final boolean useDoubleClick,
-            final EditableClickListener editableListener) {
-        this(text, false, false, editableListener);
-    }
-
-    public EditableIconLabel(final String text, final EditableClickListener editableListener) {
-        this(text, false, editableListener);
-    }
-
-    public EditableClickListener getEditableListener() {
-        return editableListener;
+        init(text, useDoubleClick);
     }
 
     public String getText() {
         return label.getText();
+    }
+
+    public void onEdit(final Listener2<String, String> slot) {
+        onEdit.add(slot);
     }
 
     public void restoreOldText() {
@@ -113,39 +113,37 @@ public class EditableIconLabel extends Composite {
         }
     }
 
-    public void setEditableListener(final EditableClickListener editableListener) {
-        this.editableListener = editableListener;
-    }
-
-    public void setRenameDialogLabel(final String renameDialogLabel) {
-        this.renameDialogLabel = renameDialogLabel;
-    }
-
-    public void setRenameDialogTitle(final String renameDialogTitle) {
-        this.renameDialogTitle = renameDialogTitle;
-    }
-
     public void setText(final String text) {
         this.oldText = this.currentText;
         this.currentText = text;
         label.setText(text);
     }
 
-    private void init(final String text, final boolean useDoubleClick, final EditableClickListener editableListenerOrig) {
+    private void afterEdit() {
+        String text = editor.getText();
+        onEdit.fire(currentText, text);
+        editor.setVisible(false);
+        editor.setReadOnly(true);
+        label.setVisible(true);
+        label.removeStyleDependentName("high");
+    }
+
+    private void init(final String text, final boolean useDoubleClick) {
+        this.onEdit = new Event2<String, String>("onEdit");
         doubleClickToRenameLabel = "Double click to rename";
         clickToRenameLabel = "Click to rename";
-        renameDialogLabel = "Write a new name:";
-        renameDialogTitle = "Rename";
-        initWidget((Widget) label);
+        hp = new HorizontalPanel();
+        hp.add((Widget) label);
+        initWidget(hp);
         this.currentText = text;
         this.oldText = text;
         this.useDoubleClick = useDoubleClick;
-        this.editableListener = editableListenerOrig;
         this.listener = new ClickListener() {
             public void onClick(final Widget sender) {
-                showEditableDialog();
+                showEditor();
             }
         };
+
         mouseOverListener = new MouseListenerAdapter() {
             @Override
             public void onMouseEnter(final Widget sender) {
@@ -170,30 +168,32 @@ public class EditableIconLabel extends Composite {
         label.removeMouseListener(mouseOverListener);
     }
 
-    private void showEditableDialog() {
-        MessageBox.show(new MessageBoxConfig() {
-            {
-                // i18n
-                setClosable(true);
-                setModal(true);
-                setWidth(300);
-                setDefaultTextHeight(2);
-                setButtons(MessageBox.OKCANCEL);
-                setTitle(renameDialogTitle);
-                setMsg(renameDialogLabel);
-                setCallback(new MessageBox.PromptCallback() {
-                    public void execute(final String btnID, final String text) {
-                        if (btnID.equals("ok") && text != null) {
-                            editableListener.onEdited(text);
-                        } else {
-                            // Do nothing
-                        }
-                    }
-                });
-                setMultiline(true);
-                setValue(currentText);
-            }
-        });
+    private void showEditor() {
+        int hpWidth = hp.getParent().getOffsetWidth();
+        label.setVisible(false);
+        if (editor == null) {
+            editor = new TextBox();
+            editor.setStyleName("k-eil-edit");
+            hp.add(editor);
+            editor.addFocusListener(new FocusListener() {
+                public void onFocus(Widget sender) {
+                }
+
+                public void onLostFocus(Widget sender) {
+                    afterEdit();
+                }
+            });
+            editor.addChangeListener(new ChangeListener() {
+                public void onChange(Widget sender) {
+                    editor.setFocus(false);
+                }
+            });
+        }
+        editor.setReadOnly(false);
+        editor.setPixelSize(hpWidth < 100 ? 100 : hpWidth, 21);
+        editor.setText(currentText);
+        editor.setVisible(true);
+        editor.setFocus(true);
     }
 
 }

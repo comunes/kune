@@ -39,8 +39,6 @@ public interface ContextNavigatorView extends View {
 
     void setEditable(boolean editable);
 
-    void setFireOnTextChange(boolean fire);
-
     void setItemStatus(String id, ContentStatusDTO status);
 
     void setItemText(String id, String text);

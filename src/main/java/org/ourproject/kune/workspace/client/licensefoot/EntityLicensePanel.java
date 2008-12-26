@@ -21,7 +21,6 @@ package org.ourproject.kune.workspace.client.licensefoot;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -100,7 +99,7 @@ public class EntityLicensePanel implements EntityLicenseView {
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
         String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
         licenseLabel.setText(licenseText);
-        KuneUiUtils.setQuickTip(licenseLabel, licenseText);
+        // KuneUiUtils.setQuickTip(licenseLabel, licenseText);
         licenseImage.setUrl(licenseDTO.getImageUrl());
         fade(false);
     }

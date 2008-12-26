@@ -59,8 +59,7 @@ public class KuneErrorHandler {
 
     public void doSessionExpired() {
         onSessionExpired.fire();
-        getWorkspaceSkeleton().showAlertMessage(i18n.t("Session expired"),
-                i18n.t("Your session has expired. Please log in again."));
+        Site.info("Your session has expired. Please log in again.");
     }
 
     public WorkspaceSkeleton getWorkspaceSkeleton() {

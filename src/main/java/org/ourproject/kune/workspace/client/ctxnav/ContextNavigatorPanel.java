@@ -208,17 +208,15 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         this.isEditable = editable;
     }
 
-    public void setFireOnTextChange(final boolean fireOnTextChange) {
-        this.fireOnTextChange = fireOnTextChange;
-    }
-
     public void setItemStatus(final String id, ContentStatusDTO status) {
         setNodeStatus(getNode(id), status);
     }
 
     public void setItemText(final String genId, final String text) {
         final TreeNode node = getNode(genId);
+        setFireOnTextChange(false);
         node.setText(text);
+        setFireOnTextChange(true);
     }
 
     public void setRootItem(final String id, final String text, final StateToken stateToken) {
@@ -321,18 +319,23 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         return node.getAttribute("href").substring(1);
     }
 
+    private void setFireOnTextChange(final boolean fireOnTextChange) {
+        this.fireOnTextChange = fireOnTextChange;
+    }
+
     private void setNodeStatus(final TreeNode node, ContentStatusDTO status) {
         switch (status) {
+        // FIXME: while not finished
         case publishedOnline:
-            node.setCls("k-textnormal");
+            // node.setCls("k-textnormal");
             break;
         case inTheDustbin:
         case rejected:
-            node.setCls("k-textlinethrough");
+            // node.setCls("k-textlinethrough");
             break;
         case editingInProgress:
         case submittedForEvaluation:
-            node.setCls("k-textunderline");
+            // node.setCls("k-textunderline");
             break;
         }
     }
