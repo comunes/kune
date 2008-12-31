@@ -154,83 +154,15 @@ public class TextEditorToolbar extends Composite {
             if (sender == richText) {
                 // We use the RichTextArea's onKeyUp event to update the
                 // toolbar status.
-                // This will catch any cases where the user moves the cursur
-                // using the
-                // keyboard, or uses one of the browser's built-in keyboard
-                // shortcuts.
+                // This will catch any cases where the user moves the cursor
+                // using the keyboard, or uses one of the browser's built-in
+                // keyboard shortcuts.
                 updateStatus();
                 fireEdit();
             }
         }
 
-        // private Object[][] getData() {
-        // return new Object[][] {
-        // new Object[]{"Pirates of the Caribbean", new Integer(2120), new
-        // Long(1180231870000l), "images/view/carribean.jpg"},
-        // new Object[]{"Resident Evil", new Integer(2120), new
-        // Long(1180231870000l), "images/view/resident_evil.jpg"},
-        // new Object[]{"Blood Diamond", new Integer(2120), new
-        // Long(1180231870000l), "images/view/blood_diamond.jpg"},
-        // new Object[]{"No Reservations", new Integer(2120), new
-        // Long(1180231870000l), "images/view/no_reservations.jpg"},
-        // new Object[]{"Casino Royale", new Integer(2120), new
-        // Long(1180231870000l), "images/view/casino_royale.jpg"},
-        // new Object[]{"Good Shepherd", new Integer(2120), new
-        // Long(1180231870000l), "images/view/good_shepherd.jpg"},
-        // new Object[]{"Ghost Rider", new Integer(2120), new
-        // Long(1180231870000l), "images/view/ghost_rider.jpg"},
-        // new Object[]{"Batman Begins", new Integer(2120), new
-        // Long(1180231870000l), "images/view/batman_begins.jpg"},
-        // new Object[]{"Last Samurai", new Integer(2120), new
-        // Long(1180231870000l), "images/view/last_samurai.jpg"},
-        // new Object[]{"Italian Job", new Integer(2120), new
-        // Long(1180231870000l), "images/view/italian_job.jpg"},
-        // new Object[]{"Mission Impossible III", new Integer(2120), new
-        // Long(1180231870000l), "images/view/mi3.jpg"},
-        // new Object[]{"Mr & Mrs Smith", new Integer(2120), new
-        // Long(1180231870000l), "images/view/smith.jpg"},
-        // new Object[]{"Inside Man", new Integer(2120), new
-        // Long(1180231870000l), "images/view/inside_man.jpg"},
-        // new Object[]{"The Island", new Integer(2120), new
-        // Long(1180231870000l), "images/view/island.jpg"}
-        // };
-        // }
-
         private void showImagePanel() {
-            // // i18n:
-            // final FileUploadFormSample fileUploadFormSample = new
-            // FileUploadFormSample();
-            // final BasicDialog dialog = new
-            // BasicDialog(TEXT_EDITOR_TOOLBAR_INS_IMG, "Insert image", false,
-            // true, 400,
-            // 400);
-            // dialog.add(fileUploadFormSample);
-            // dialog.show();
-            //
-            // if (ic == null) {
-            // final MemoryProxy dataProxy = new MemoryProxy(getData());
-            // final RecordDef recordDef = new RecordDef(new FieldDef[] { new
-            // StringFieldDef("name"),
-            // new IntegerFieldDef("size"), new DateFieldDef("lastmod",
-            // "timestamp"),
-            // new StringFieldDef("url") });
-            // final ArrayReader reader = new ArrayReader(recordDef);
-            // final Store store = new Store(dataProxy, reader, true);
-            // store.load();
-            //
-            // ic = new ImageChooser("Image Chooser", 515, 400, store);
-            // }
-            // Site.important("This is in development and very experimental...");
-            // ic.show(new ImageChooserCallback() {
-            // public void onImageSelection(final ImageData data) {
-            // // Element el = DomHelper.append("images",
-            // // Format.format("<img src='{0}'
-            // // style='margin:20px;visibility:hidden;'/>",
-            // // data.getUrl()));
-            // // ExtElement extEl = new ExtElement(el);
-            // // extEl.show(true).frame();
-            // }
-            // });
             MessageBox.prompt("Insert image", "Enter an image URL:", new PromptCallback() {
                 public void execute(final String btnID, final String text) {
                     if (btnID.equals("ok") && text != null) {
@@ -315,8 +247,10 @@ public class TextEditorToolbar extends Composite {
         }
 
         if (basic != null) {
-            topPanel.add(subscript = createToggleButton(images.subscript(), i18n.t("Toggle Subscript")));
-            topPanel.add(superscript = createToggleButton(images.superscript(), i18n.t("Toggle Superscript")));
+            subscript = createToggleButton(images.subscript(), i18n.t("Toggle Subscript"));
+            superscript = createToggleButton(images.superscript(), i18n.t("Toggle Superscript"));
+            // topPanel.add(subscript);
+            // topPanel.add(superscript);
             topPanel.add(justifyLeft = createPushButton(images.alignleft(), i18n.t("Left Justify")));
             topPanel.add(justifyCenter = createPushButton(images.centerpara(), i18n.t("Center")));
             topPanel.add(justifyRight = createPushButton(images.alignright(), i18n.t("Right Justify")));
@@ -325,13 +259,15 @@ public class TextEditorToolbar extends Composite {
         if (extended != null) {
             topPanel.add(indent = createPushButton(images.incrementindent(), i18n.t("Indent Right")));
             topPanel.add(outdent = createPushButton(images.decrementindent(), i18n.t("Indent Left")));
-            topPanel.add(hr = createPushButton(images.hfixedline(), i18n.t("Insert Horizontal Rule")));
+            hr = createPushButton(images.hfixedline(), i18n.t("Insert Horizontal Rule"));
+            // topPanel.add(hr);
             topPanel.add(ol = createPushButton(images.defaultnumbering(), i18n.t("Insert Ordered List")));
             topPanel.add(ul = createPushButton(images.defaultbullet(), i18n.t("Insert Unordered List")));
             topPanel.add(insertImage = createPushButton(images.images(), i18n.t("Insert Image")));
             topPanel.add(createLink = createPushButton(images.link(), i18n.t("Create Link")));
             topPanel.add(removeLink = createPushButton(images.linkBreak(), i18n.t("Remove Link")));
-            topPanel.add(removeFormat = createPushButton(images.removeFormat(), i18n.t("Remove Formatting")));
+            removeFormat = createPushButton(images.removeFormat(), i18n.t("Remove Formatting"));
+            // topPanel.add(removeFormat);
         }
 
         if (basic != null) {
@@ -341,8 +277,7 @@ public class TextEditorToolbar extends Composite {
             topPanel.add(fontSizes = createFontSizesMenu());
 
             // We only use these listeners for updating status, so don't
-            // hook them up
-            // unless at least basic editing is supported.
+            // hook them up unless at least basic editing is supported.
             richText.addKeyboardListener(listener);
             richText.addClickListener(listener);
         }

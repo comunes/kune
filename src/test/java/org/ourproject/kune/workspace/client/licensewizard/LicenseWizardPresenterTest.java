@@ -3,13 +3,11 @@ package org.ourproject.kune.workspace.client.licensewizard;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFrdFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdFormView;
-
-import com.calclab.suco.client.ioc.Provider;
 
 public class LicenseWizardPresenterTest {
 
@@ -17,7 +15,6 @@ public class LicenseWizardPresenterTest {
     private LicenseWizardPresenter licenseWizard;
     private LicenseWizardFirstFormView firstForm;
     private LicenseWizardSndFormView sndForm;
-    private Provider<GroupServiceAsync> groupService;
     private LicenseWizardTrdFormView trdForm;
     private LicenseWizardFrdFormView frdForm;
 
@@ -28,8 +25,8 @@ public class LicenseWizardPresenterTest {
         sndForm = Mockito.mock(LicenseWizardSndFormView.class);
         trdForm = Mockito.mock(LicenseWizardTrdFormView.class);
         frdForm = Mockito.mock(LicenseWizardFrdFormView.class);
-        groupService = MockProvider.mock(GroupServiceAsync.class);
-        licenseWizard = new LicenseWizardPresenter(firstForm, sndForm, trdForm, frdForm, null);
+        Session session = Mockito.mock(Session.class);
+        licenseWizard = new LicenseWizardPresenter(firstForm, sndForm, trdForm, frdForm, session);
         licenseWizard.init(view);
     }
 
@@ -37,9 +34,11 @@ public class LicenseWizardPresenterTest {
     public void onAnotherSelected() {
         licenseWizard.onAnotherLicenseSelecterd();
         Mockito.verify(view).setEnabled(false, true, true, false);
+        Mockito.stub(view.isCurrentPage(firstForm)).toReturn(true);
         licenseWizard.onNext();
         Mockito.verify(view).show(sndForm);
-        Mockito.verify(view).setEnabled(true, false, true, true);
+        Mockito.verify(view).setEnabled(true, true, true, false);
+        Mockito.stub(view.isCurrentPage(sndForm)).toReturn(true);
         licenseWizard.onBack();
         Mockito.verify(view).show(firstForm);
         Mockito.verify(view).setEnabled(false, true, true, true);

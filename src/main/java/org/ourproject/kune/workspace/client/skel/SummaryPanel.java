@@ -39,7 +39,7 @@ public class SummaryPanel extends Panel {
                 Images.App.getInstance().arrowRightWhite(), IconPosition.left);
         expandedTitle = KuneUiUtils.genQuickTipLabel(title, null, titleTooltip,
                 Images.App.getInstance().arrowDownWhite(), IconPosition.left);
-        setTitle(collapsedTitle);
+        setTitle(expandedTitle);
         super.addListener(new PanelListenerAdapter() {
             @Override
             public void onCollapse(Panel panel) {

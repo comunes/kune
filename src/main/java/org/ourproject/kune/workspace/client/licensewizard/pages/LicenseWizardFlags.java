@@ -3,7 +3,7 @@ package org.ourproject.kune.workspace.client.licensewizard.pages;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
+import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Widget;
@@ -61,7 +61,7 @@ public class LicenseWizardFlags extends Panel {
             }
 
             private void openWindow(String url) {
-                WindowUtils.open(url);
+                KuneWindowUtils.open(url);
             }
         });
         label.setStyleNameToText("k-info-links");

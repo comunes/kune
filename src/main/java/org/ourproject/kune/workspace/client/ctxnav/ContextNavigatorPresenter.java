@@ -145,6 +145,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         contentServiceProvider.get().getContent(session.getUserHash(), stateToken,
                 new AsyncCallbackSimple<StateAbstractDTO>() {
                     public void onSuccess(final StateAbstractDTO state) {
+                        clear();
                         setState(state, false);
                     }
                 });
@@ -198,6 +199,9 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         // Do the path to our current content
         createTreePath(stateToken, container.getAbsolutePath(), containerRights);
 
+        // Process container childs
+        createChildItems(container, containerRights);
+
         // Process our current content/container
         final ActionItemCollection<StateToken> actionItems = new ActionItemCollection<StateToken>();
         if (isContent) {
@@ -219,8 +223,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         }
 
         actionsByItem.put(stateToken, actionItems);
-        // Process container childs
-        createChildItems(container, containerRights);
 
         // Finaly
         if (mustEditOnNextStateChange()) {
@@ -274,15 +276,14 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
-        for (final ContentSimpleDTO content : container.getContents()) {
-            addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
-                    content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights(), false);
-        }
-
         for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
             addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatusDTO.publishedOnline,
                     siblingFolder.getStateToken(), siblingFolder.getStateToken().copy().setFolder(
                             siblingFolder.getParentFolderId()), containerRights, false);
+        }
+        for (final ContentSimpleDTO content : container.getContents()) {
+            addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
+                    content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights(), false);
         }
     }
 

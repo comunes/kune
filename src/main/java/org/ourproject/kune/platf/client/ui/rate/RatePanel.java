@@ -90,7 +90,7 @@ public class RatePanel extends Composite implements RateView {
         rateGrid.setBorderWidth(0);
         rateGrid.addStyleName("kune-RatePanel-Stars");
         rateDesc.addStyleName("kune-RatePanel-Label");
-        rateDesc.addStyleName("kune-Margin-Medium-lr");
+        rateDesc.addStyleName("kune-Margin-Small-lr");
     }
 
     private void setRate(final Star stars[]) {

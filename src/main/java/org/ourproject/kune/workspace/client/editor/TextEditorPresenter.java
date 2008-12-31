@@ -62,14 +62,14 @@ public class TextEditorPresenter implements TextEditor {
             final I18nUITranslationService i18n, StateManager stateManager, SiteSignOutLink siteSignOutLink,
             DeferredCommandWrapper deferredCommandWrapper) {
         this.toolbar = toolbar;
-        autoSave = isAutoSave;
+        this.autoSave = isAutoSave;
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.siteSignOutLink = siteSignOutLink;
         this.deferredCommandWrapper = deferredCommandWrapper;
-        savePending = false;
-        editingHtml = false;
-        saveAndCloseConfirmed = false;
+        this.savePending = false;
+        this.editingHtml = false;
+        this.saveAndCloseConfirmed = false;
         createActions();
 
         beforeStateChangeListener = new BeforeActionListener() {

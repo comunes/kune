@@ -18,6 +18,8 @@
  *
  */package org.ourproject.kune.workspace.client.skel;
 
+import org.ourproject.kune.workspace.client.site.Site;
+
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
@@ -90,11 +92,6 @@ public class EntitySummary {
         // Site.info("lalalal");
         // }
         // }, "Bla, bla, bla"));
-        entitySummary.add(panel);
-        if (entitySummary.isRendered()) {
-            panel.doLayout(false);
-            entitySummary.doLayout(false);
-        }
         panel.addListener(new ContainerListenerAdapter() {
             @Override
             public void onHide(Component component) {
@@ -110,16 +107,27 @@ public class EntitySummary {
 
             private void openFirst() {
                 if (accordionLayout.getActiveItem() != null && accordionLayout.getActiveItem().isHidden()) {
-                    Panel firstComponent = null;
                     for (Component compo : entitySummary.getComponents()) {
-                        if (compo.isVisible() && firstComponent == null) {
-                            firstComponent = (Panel) compo;
-                            firstComponent.expand(true);
+                        Panel panel = (Panel) compo;
+                        if (panel.isVisible()) {
+                            // First visible
+                            if (panel.isCollapsed()) {
+                                // And not expanded
+                                panel.expand(false);
+                                Site.info("expanding: " + panel.getTitle());
+                            }
+                            // Don't continue
+                            break;
                         }
                     }
                 }
             }
         });
+        entitySummary.add(panel);
+        if (entitySummary.isRendered()) {
+            panel.doLayout(false);
+            entitySummary.doLayout(false);
+        }
         doLayoutIfNeeded();
     }
 

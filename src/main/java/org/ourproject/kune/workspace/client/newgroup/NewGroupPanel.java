@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.newgroup;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
+import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
@@ -247,7 +247,7 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         licenseImage = new Image("images/lic/bysa80x15.png");
         licenseImage.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
-                WindowUtils.open(license.getUrl());
+                KuneWindowUtils.open(license.getUrl());
             }
         });
         licenseImage.addStyleName("kune-pointer");
