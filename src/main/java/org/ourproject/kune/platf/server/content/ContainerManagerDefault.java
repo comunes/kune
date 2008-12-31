@@ -68,6 +68,8 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         for (Container parentRef : parentAbsolutePath) {
             childAbsolutePath.add(parentRef);
         }
+        // FIXME: use
+        // childAbsolutePath.addAll(parentAbsolutePath);
         final Container child = new Container(newtitle, group, parent.getToolName());
         childAbsolutePath.add(child);
         child.setLanguage(language);

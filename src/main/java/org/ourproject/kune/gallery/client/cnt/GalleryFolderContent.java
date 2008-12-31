@@ -20,4 +20,5 @@
 package org.ourproject.kune.gallery.client.cnt;
 
 public interface GalleryFolderContent {
+
 }

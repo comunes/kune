@@ -171,7 +171,8 @@ public class StateManagerDefault implements StateManager, HistoryListener {
 
     public void setRetrievedState(final StateAbstractDTO newState) {
         contentProvider.cache(newState.getStateToken(), newState);
-        setState(newState);
+        // setState(newState);
+        history.newItem(newState.getStateToken().toString());
     }
 
     public void setSocialNetwork(final SocialNetworkDataDTO socialNet) {

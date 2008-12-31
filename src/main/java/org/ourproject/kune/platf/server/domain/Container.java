@@ -93,7 +93,6 @@ public class Container implements HasId, HasStateToken {
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Content> contents;
 
-    @OrderBy("createdOn DESC")
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Container> absolutePath;
 

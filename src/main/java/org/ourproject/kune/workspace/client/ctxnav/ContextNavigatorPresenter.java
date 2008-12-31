@@ -39,13 +39,13 @@ import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
+import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 
@@ -92,11 +92,21 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         confRenameListener();
     }
 
+    public void addFileUploaderListener(FileUploader uploader) {
+        uploader.addOnUploadCompleteListener(new Listener<StateToken>() {
+            public void onEvent(StateToken currentUploadStateToken) {
+                if (currentUploadStateToken.hasSameContainer(session.getCurrentStateToken())) {
+                    stateManager.reload();
+                }
+            }
+        });
+    }
+
     public void attach() {
         // FIXME At the moment detach (removeFromParent) destroy the gwt-ext
         // TreePanel and the widget must be recreated (cannot be attached again
         // like in gwt)
-        setState(session.getCurrentState(), true);
+        // setState(session.getCurrentState(), true);
         toolbar.attach();
     }
 
@@ -139,16 +149,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public boolean mustEditOnNextStateChange() {
         return editOnNextStateChange;
-    }
-
-    public void refresh(final StateToken stateToken) {
-        contentServiceProvider.get().getContent(session.getUserHash(), stateToken,
-                new AsyncCallbackSimple<StateAbstractDTO>() {
-                    public void onSuccess(final StateAbstractDTO state) {
-                        clear();
-                        setState(state, false);
-                    }
-                });
     }
 
     public void selectItem(final StateToken stateToken) {
@@ -199,9 +199,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         // Do the path to our current content
         createTreePath(stateToken, container.getAbsolutePath(), containerRights);
 
-        // Process container childs
-        createChildItems(container, containerRights);
-
         // Process our current content/container
         final ActionItemCollection<StateToken> actionItems = new ActionItemCollection<StateToken>();
         if (isContent) {
@@ -223,6 +220,9 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         }
 
         actionsByItem.put(stateToken, actionItems);
+
+        // Process container childs
+        createChildItems(container, containerRights);
 
         // Finaly
         if (mustEditOnNextStateChange()) {

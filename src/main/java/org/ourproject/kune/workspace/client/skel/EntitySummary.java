@@ -18,8 +18,6 @@
  *
  */package org.ourproject.kune.workspace.client.skel;
 
-import org.ourproject.kune.workspace.client.site.Site;
-
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
@@ -96,16 +94,16 @@ public class EntitySummary {
             @Override
             public void onHide(Component component) {
                 super.onHide(component);
-                openFirst();
+                openFirstIfActiveNotVisible();
             }
 
             @Override
             public void onShow(Component component) {
                 super.onShow(component);
-                openFirst();
+                openFirstIfActiveNotVisible();
             }
 
-            private void openFirst() {
+            private void openFirstIfActiveNotVisible() {
                 if (accordionLayout.getActiveItem() != null && accordionLayout.getActiveItem().isHidden()) {
                     for (Component compo : entitySummary.getComponents()) {
                         Panel panel = (Panel) compo;
@@ -114,7 +112,6 @@ public class EntitySummary {
                             if (panel.isCollapsed()) {
                                 // And not expanded
                                 panel.expand(false);
-                                Site.info("expanding: " + panel.getTitle());
                             }
                             // Don't continue
                             break;

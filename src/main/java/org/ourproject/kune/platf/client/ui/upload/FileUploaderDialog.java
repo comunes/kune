@@ -121,15 +121,17 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
     }
 
     private void createDialog(final boolean show) {
-        dialog = new UploadDialog(i18n.t("File uploader"), false, true);
-        dialog.setId(SITE_FILE_UPLOADER);
-        dialog.setAllowCloseOnUpload(true);
-        dialog.setResetOnHide(false);
-        dialog.setClosable(true);
-        dialog.setCloseAction(Window.HIDE);
-        dialog.setMinimizable(true);
-        dialog.setUploadAutostart(false);
-
+        dialog = new UploadDialog(i18n.t("File uploader"), false, true) {
+            {
+                setAllowCloseOnUpload(true);
+                setResetOnHide(false);
+                setClosable(true);
+                setCloseAction(Window.HIDE);
+                setMinimizable(true);
+                setUploadAutostart(false);
+            }
+        };
+        // dialog.setId(SITE_FILE_UPLOADER);
         dialog.addListener(new UploadDialogListenerAdapter() {
             @Override
             public boolean onBeforeAdd(final UploadDialog source, final String filename) {

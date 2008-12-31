@@ -182,6 +182,13 @@ public class StateToken implements IsSerializable {
         return getGroup() == null && getTool() == null && getFolder() == null && getDocument() == null;
     }
 
+    public boolean hasSameContainer(StateToken currentStateToken) {
+        if (copy().clearDocument().getEncoded().equals(currentStateToken.copy().clearDocument().getEncoded())) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean isComplete() {
         return getDocument() != null;
     }

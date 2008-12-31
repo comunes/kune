@@ -22,8 +22,11 @@ package org.ourproject.kune.workspace.client.ctxnav;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 
 public interface ContextNavigator {
+
+    void addFileUploaderListener(FileUploader uploader);
 
     void attach();
 
@@ -34,8 +37,6 @@ public interface ContextNavigator {
     void editItem(StateToken stateToken);
 
     boolean isSelected(StateToken stateToken);
-
-    void refresh(StateToken stateToken);
 
     void selectItem(StateToken stateToken);
 

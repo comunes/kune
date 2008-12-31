@@ -21,9 +21,9 @@
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
-import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
-import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.listener.Event;
+import com.calclab.suco.client.listener.Listener;
 import com.calclab.suco.client.listener.Listener0;
 
 public class FileUploaderPresenter implements FileUploader {
@@ -31,11 +31,15 @@ public class FileUploaderPresenter implements FileUploader {
     private FileUploaderView view;
     private final Session session;
     private StateToken currentUploadStateToken;
-    private final Provider<ContextNavigator> navProvider;
+    private final Event<StateToken> onUploadComplete;
 
-    public FileUploaderPresenter(final Session session, final Provider<ContextNavigator> navProvider) {
+    public FileUploaderPresenter(final Session session) {
         this.session = session;
-        this.navProvider = navProvider;
+        this.onUploadComplete = new Event<StateToken>("onUploadComplete");
+    }
+
+    public void addOnUploadCompleteListener(final Listener<StateToken> slot) {
+        onUploadComplete.add(slot);
     }
 
     public boolean checkFolderChange() {
@@ -73,7 +77,7 @@ public class FileUploaderPresenter implements FileUploader {
     }
 
     public void onUploadComplete() {
-        navProvider.get().refresh(currentUploadStateToken);
+        onUploadComplete.fire(currentUploadStateToken);
     }
 
     public void resetPermittedExtensions() {

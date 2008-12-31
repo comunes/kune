@@ -18,7 +18,13 @@
  *
  */package org.ourproject.kune.platf.client.ui.upload;
 
+import org.ourproject.kune.platf.client.dto.StateToken;
+
+import com.calclab.suco.client.listener.Listener;
+
 public interface FileUploader {
+
+    void addOnUploadCompleteListener(Listener<StateToken> listener);
 
     boolean hasUploadingFiles();
 

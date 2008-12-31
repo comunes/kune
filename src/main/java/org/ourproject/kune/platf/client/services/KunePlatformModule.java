@@ -50,12 +50,16 @@ public class KunePlatformModule extends AbstractModule {
         register(Singleton.class, new Factory<FileUploader>(FileUploader.class) {
             @Override
             public FileUploader create() {
-                final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class),
-                        $$(ContextNavigator.class));
+                final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class));
                 final FileUploaderDialog panel = new FileUploaderDialog(presenter, $(I18nUITranslationService.class),
                         $(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
+            }
+
+            @Override
+            public void onAfterCreated(FileUploader uploader) {
+                $(ContextNavigator.class).addFileUploaderListener(uploader);
             }
         });
 

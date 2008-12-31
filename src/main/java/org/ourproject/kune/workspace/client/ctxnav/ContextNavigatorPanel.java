@@ -54,13 +54,12 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     private TreePanel treePanel;
     private TreeEditor treeEditor;
     private final WorkspaceSkeleton ws;
-    private boolean fireOnTextChange;
+    private boolean mustFireOnTextChange;
     private boolean isEditable;
     private final ActionManager actionManager;
     private final ContextNavigatorPresenter presenter;
     private final MenuItemsContainer<StateToken> menuItemsContainer;
-
-    // private final Panel generalPanel;
+    private boolean mustFireOnExpand;
 
     public ContextNavigatorPanel(final ContextNavigatorPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws, final ActionManager actionManager) {
@@ -68,19 +67,17 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         this.ws = ws;
         this.actionManager = actionManager;
 
-        fireOnTextChange = true;
+        mustFireOnTextChange = true;
+        mustFireOnExpand = true;
         isEditable = false;
         menuItemsContainer = new MenuItemsContainer<StateToken>();
-        // generalPanel = new Panel();
-        // generalPanel.setLayout(new FitLayout());
-        // generalPanel.setAutoScroll(false);
-        // generalPanel.setBorder(false);
     }
 
     public void addItem(final ContextNavigatorItem item) {
         final String nodeId = item.getId();
         TreeNode node = treePanel.getNodeById(nodeId);
         if (node == null) {
+            // Log.info("Adding tree node " + nodeId);
             final TreeNode child = new TreeNode(item.getText());
             child.setId(nodeId);
             final String icon = item.getIconUrl();
@@ -105,20 +102,22 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
                 child.addListener(new TreeNodeListenerAdapter() {
                     @Override
                     public void onTextChange(final Node node, final String text, final String oldText) {
-                        if (fireOnTextChange) {
+                        if (mustFireOnTextChange) {
                             presenter.onItemRename(getToken(node), text, oldText);
                         }
                     }
                 });
-                if (!item.getStateToken().hasAll()) {
-                    // is a container
+                boolean isContainer = !item.getStateToken().hasAll();
+                if (isContainer) {
                     child.setExpandable(true);
                     child.setSingleClickExpand(true);
                     child.addListener(new TreeNodeListenerAdapter() {
                         @Override
                         public void onExpand(final Node node) {
-                            treePanel.getNodeById(node.getId()).select();
-                            presenter.gotoToken(getToken(node));
+                            if (mustFireOnExpand) {
+                                treePanel.getNodeById(node.getId()).select();
+                                presenter.gotoToken(getToken(node));
+                            }
                         }
                     });
                 } else {
@@ -135,7 +134,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
                 ContentStatusDTO status = item.getContentStatus();
                 setNodeStatus(child, status);
             } else {
-                Log.error("Error building file tree, parent folder not found");
+                Log.error("Error building file tree, parent folder " + item.getParentId() + " not found");
             }
         } else {
             // the node already created
@@ -150,30 +149,9 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         menuItemsContainer.clear();
     }
 
-    // public void attach() {
-    // if (!generalPanel.isRendered()) {
-    // Site.info("attach");
-    // ws.getEntityWorkspace().setContext(generalPanel);
-    // generalPanel.doLayout();
-    // }
-    // if (!treePanel.isRendered()) {
-    // Site.info("added");
-    // generalPanel.add(treePanel);
-    // generalPanel.doLayout();
-    // treePanel.doLayout();
-    // }
-    // }
-
     public void detach() {
         clear();
     }
-
-    // public void detach() {
-    // if (generalPanel.isRendered()) {
-    // Site.info("detach");
-    // generalPanel.removeFromParent();
-    // }
-    // }
 
     public void editItem(final String id) {
         treeEditor.startEdit(getNode(id));
@@ -190,17 +168,19 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     public void selectItem(final String id) {
         final TreeNode item = getNode(id);
         if (item != null) {
-            item.select();
             if (item.getParentNode() != null) {
                 if (treePanel.isRendered()) {
+                    mustFireOnExpand = false;
                     item.ensureVisible();
+                    mustFireOnExpand = true;
                 }
             }
             if (item.getChildNodes().length > 0) {
                 item.expand();
             }
+            item.select();
         } else {
-            Log.error("Error building file tree, current token not found");
+            Log.error("Error building file tree, current token " + id + " not found");
         }
     }
 
@@ -320,7 +300,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
     }
 
     private void setFireOnTextChange(final boolean fireOnTextChange) {
-        this.fireOnTextChange = fireOnTextChange;
+        this.mustFireOnTextChange = fireOnTextChange;
     }
 
     private void setNodeStatus(final TreeNode node, ContentStatusDTO status) {
