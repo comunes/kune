@@ -458,6 +458,15 @@
 
   <mapping>
     <class-a>
+      org.ourproject.kune.platf.client.dto.AdmissionTypeDTO
+    </class-a>
+    <class-b>
+      org.ourproject.kune.platf.server.domain.AdmissionType
+    </class-b>
+  </mapping>
+
+  <mapping>
+    <class-a>
       org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO
     </class-a>
     <class-b>

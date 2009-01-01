@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.client.rpc;
 
+import org.ourproject.kune.platf.client.dto.AdmissionTypeDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
@@ -39,6 +40,8 @@ public interface GroupService extends RemoteService {
     GroupDTO getGroup(String userHash, StateToken token);
 
     GroupDTO setGroupFullLogo(String userHash, StateToken token);
+
+    void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionTypeDTO admissionPolicy);
 
     void setSocialNetworkVisibility(String userHash, StateToken groupToken, SocialNetworkVisibilityDTO visibility);
 

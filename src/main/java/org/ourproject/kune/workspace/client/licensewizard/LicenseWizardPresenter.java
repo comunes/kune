@@ -24,6 +24,7 @@ public class LicenseWizardPresenter implements LicenseWizard {
     private final LicenseWizardFrdFormView frdForm;
     private final Session session;
     private Listener<LicenseDTO> selectLicenseListener;
+    private final String ccVers;
 
     public LicenseWizardPresenter(LicenseWizardFirstFormView firstForm, LicenseWizardSndFormView sndForm,
             LicenseWizardTrdFormView trdForm, LicenseWizardFrdFormView frdForm, Session session) {
@@ -32,6 +33,7 @@ public class LicenseWizardPresenter implements LicenseWizard {
         this.trdForm = trdForm;
         this.frdForm = frdForm;
         this.session = session;
+        ccVers = "-" + session.getCurrentCCversion();
     }
 
     public View getView() {
@@ -87,16 +89,17 @@ public class LicenseWizardPresenter implements LicenseWizard {
     public void onChange() {
         String licenseShortName;
         if (in(fstForm)) {
-            licenseShortName = "by-sa";
+            licenseShortName = "by-sa" + ccVers;
         } else if (in(trdForm)) {
             if (trdForm.isAllowComercial()) {
-                licenseShortName = trdForm.isAllowModif() ? "by" : trdForm.isAllowModifShareAlike() ? "by-sa" : "by-nd";
+                licenseShortName = trdForm.isAllowModif() ? "by" + ccVers : trdForm.isAllowModifShareAlike() ? "by-sa"
+                        + ccVers : "by-nd" + ccVers;
             } else {
-                licenseShortName = trdForm.isAllowModif() ? "by-nc" : trdForm.isAllowModifShareAlike() ? "by-nc-sa"
-                        : "by-nc-nd";
+                licenseShortName = trdForm.isAllowModif() ? "by-nc" + ccVers
+                        : trdForm.isAllowModifShareAlike() ? "by-nc-sa" + ccVers : "by-nc-nd" + ccVers;
             }
         } else if (in(sndForm)) {
-            licenseShortName = "by-sa";
+            licenseShortName = "by-sa" + ccVers;
             Site.error("Programatic error in LicenseWizardPresenter");
         } else {
             licenseShortName = frdForm.getSelectedLicense();

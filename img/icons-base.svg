@@ -2,7 +2,7 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@
    height="297mm"
    id="svg21019"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
+   inkscape:version="0.46"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
    sodipodi:docname="icons-base.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
@@ -22,6 +22,13 @@
    inkscape:export-ydpi="90">
   <defs
      id="defs21021">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective511" />
     <linearGradient
        inkscape:collect="always"
        id="linearGradient14785">
@@ -1776,21 +1783,33 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.65756829"
-     inkscape:cx="372.04724"
-     inkscape:cy="526.18109"
+     inkscape:zoom="2.1179816"
+     inkscape:cx="383.58499"
+     inkscape:cy="841.23548"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="1377"
-     inkscape:window-height="885"
-     inkscape:window-x="61"
+     inkscape:window-width="1280"
+     inkscape:window-height="777"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      showgrid="false"
      showguides="false"
      inkscape:guide-bbox="true"
      inkscape:grid-points="true"
-     inkscape:guide-points="true"
-     gridempspacing="1" />
+     inkscape:guide-points="true">
+    <inkscape:grid
+       id="GridFromPre046Settings"
+       type="xygrid"
+       originx="0px"
+       originy="0px"
+       spacingx="1px"
+       spacingy="1px"
+       color="#0000ff"
+       empcolor="#0000ff"
+       opacity="0.2"
+       empopacity="0.4"
+       empspacing="1" />
+  </sodipodi:namedview>
   <metadata
      id="metadata21024">
     <rdf:RDF>
@@ -4534,5 +4553,16 @@
        width="16"
        sodipodi:absref="/usr/share/icons/Tango/16x16/actions/contact-new.png"
        xlink:href="/usr/share/icons/Tango/16x16/actions/contact-new.png" />
+    <rect
+       style="opacity:1;fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect2884"
+       width="14"
+       height="13.999999"
+       x="208.21712"
+       y="225.32394"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/group-def-icon.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>

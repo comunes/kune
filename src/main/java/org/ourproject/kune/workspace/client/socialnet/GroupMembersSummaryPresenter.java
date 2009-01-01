@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolba
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import org.ourproject.kune.platf.client.dto.AdmissionTypeDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
@@ -61,6 +62,7 @@ import com.calclab.suco.client.listener.Listener2;
 public class GroupMembersSummaryPresenter extends SocialNetworkPresenter implements GroupMembersSummary {
 
     public static final String MEMBERS_VISIBILITY_GROUP = "k-gmsp-memb-visib";
+    public static final String NEW_MEMBERS_POLICY_GROUP = "k-gmsp-new-memb-pol";
 
     private GroupMembersSummaryView view;
     private final I18nUITranslationService i18n;
@@ -81,7 +83,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter,
             final Provider<ChatEngine> chatEngineProvider, final GroupActionRegistry groupActionRegistry,
             final ActionGroupSummaryToolbar toolbar, final Provider<FileDownloadUtils> downloadProvider) {
-        super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry, downloadProvider);
+        super(i18n, stateManager, session, snServiceProvider, groupActionRegistry, downloadProvider);
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.session = session;
@@ -176,6 +178,32 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         createSetMembersVisibilityAction(i18n.t("anyone"), SocialNetworkVisibilityDTO.anyone);
         createSetMembersVisibilityAction(i18n.t("only members"), SocialNetworkVisibilityDTO.onlymembers);
         createSetMembersVisibilityAction(i18n.t("only admins"), SocialNetworkVisibilityDTO.onlyadmins);
+        createNewMembersPolicyAction(i18n.t("moderate request to join"), AdmissionTypeDTO.Moderated);
+        createNewMembersPolicyAction(i18n.t("auto accept request to join"), AdmissionTypeDTO.Open);
+    }
+
+    private void createNewMembersPolicyAction(String textDescription, final AdmissionTypeDTO admissionPolicy) {
+        ActionToolbarMenuRadioDescriptor<StateToken> newMembersPolicy = new ActionToolbarMenuRadioDescriptor<StateToken>(
+                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                    public void onEvent(StateToken parameter) {
+                        groupServiceProvider.get().setGroupNewMembersJoiningPolicy(session.getUserHash(),
+                                session.getCurrentState().getGroup().getStateToken(), admissionPolicy,
+                                new AsyncCallbackSimple<Object>() {
+                                    public void onSuccess(Object result) {
+                                        Site.info(i18n.t("Members joining policy changed"));
+                                    }
+                                });
+                    }
+                }, NEW_MEMBERS_POLICY_GROUP, new RadioMustBeChecked() {
+                    public boolean mustBeChecked() {
+                        StateAbstractDTO currentState = session.getCurrentState();
+                        return currentState.getGroup().getAdmissionType().equals(admissionPolicy);
+                    }
+                });
+        newMembersPolicy.setTextDescription(textDescription);
+        newMembersPolicy.setParentMenuTitle(i18n.t("Options"));
+        newMembersPolicy.setParentSubMenuTitle(i18n.t("New members policy"));
+        groupActionRegistry.addAction(newMembersPolicy);
     }
 
     private void createSetMembersVisibilityAction(String textDescription, final SocialNetworkVisibilityDTO visibility) {

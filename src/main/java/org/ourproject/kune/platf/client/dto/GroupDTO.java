@@ -33,6 +33,7 @@ public class GroupDTO implements IsSerializable {
     private String workspaceTheme;
     private boolean hasLogo;
     private StateToken stateToken;
+    AdmissionTypeDTO admissionType;
 
     public GroupDTO() {
         this(null, null, GroupType.ORGANIZATION);
@@ -61,6 +62,10 @@ public class GroupDTO implements IsSerializable {
             return false;
         }
         return true;
+    }
+
+    public AdmissionTypeDTO getAdmissionType() {
+        return admissionType;
     }
 
     public ContentSimpleDTO getDefaultContent() {
@@ -124,6 +129,10 @@ public class GroupDTO implements IsSerializable {
 
     public boolean isPersonal() {
         return groupType.equals(GroupType.PERSONAL);
+    }
+
+    public void setAdmissionType(AdmissionTypeDTO admissionType) {
+        this.admissionType = admissionType;
     }
 
     public void setDefaultContent(final ContentSimpleDTO defaultContent) {

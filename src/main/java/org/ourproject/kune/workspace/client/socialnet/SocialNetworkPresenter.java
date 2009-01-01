@@ -32,8 +32,6 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.services.ImageDescriptor;
-import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
@@ -64,7 +62,6 @@ public class SocialNetworkPresenter {
     private final Session session;
     private final MenuItemCollection<GroupDTO> otherOperations;
     private final MenuItemCollection<GroupDTO> otherLoggedOperations;
-    private final ImageUtils imageUtils;
     private final MenuItemCollection<GroupDTO> otherOperationsUsers;
     private final MenuItemCollection<GroupDTO> otherLoggedOperationsUsers;
 
@@ -73,12 +70,10 @@ public class SocialNetworkPresenter {
     private final Provider<FileDownloadUtils> downloadProvider;
 
     public SocialNetworkPresenter(final I18nTranslationService i18n, final StateManager stateManager,
-            final ImageUtils imageUtils, final Session session,
-            final Provider<SocialNetworkServiceAsync> snServiceProvider, GroupActionRegistry groupActionRegistry,
-            final Provider<FileDownloadUtils> downloadProvider) {
+            final Session session, final Provider<SocialNetworkServiceAsync> snServiceProvider,
+            GroupActionRegistry groupActionRegistry, final Provider<FileDownloadUtils> downloadProvider) {
         this.i18n = i18n;
         this.stateManager = stateManager;
-        this.imageUtils = imageUtils;
         this.session = session;
         this.snServiceProvider = snServiceProvider;
         this.downloadProvider = downloadProvider;
@@ -132,8 +127,8 @@ public class SocialNetworkPresenter {
 
     protected String createTooltipWithLogo(String shortName, StateToken token, boolean hasLogo, boolean isPersonal) {
         return "<table><tr><td>"
-                + (hasLogo ? createLogoAvatar(token, hasLogo, isPersonal, EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT, 3)
-                        : "") + "</td><td>"
+                + (hasLogo ? downloadProvider.get().getLogoAvatarHtml(token, hasLogo, isPersonal,
+                        EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT, 3) : "") + "</td><td>"
                 + i18n.t(isPersonal ? "Nickname: [%s]" : "Group short name: [%s]", shortName) + "</td></tr></table>";
     }
 
@@ -186,7 +181,7 @@ public class SocialNetworkPresenter {
                     }
                 });
         unJoin.setIconUrl("images/del.gif");
-        unJoin.setTextDescription(i18n.t("Leave"));
+        unJoin.setTextDescription(i18n.t("Leave this group"));
         unJoin.setToolTip(i18n.t("Do not participate anymore in this group"));
         unJoin.setParentMenuTitle(i18n.t("Options"));
         unJoin.setMustBeConfirmed(true);
@@ -200,8 +195,8 @@ public class SocialNetworkPresenter {
         boolean hasLogo = group.hasLogo();
         final String toolTip = createTooltipWithLogo(group.getShortName(), group.getStateToken(), hasLogo,
                 group.isPersonal());
-        final String imageHtml = createLogoAvatar(group.getStateToken(), hasLogo, group.isPersonal(),
-                session.getImgIconsize(), 0);
+        final String imageHtml = downloadProvider.get().getLogoAvatarHtml(group.getStateToken(), hasLogo,
+                group.isPersonal(), session.getImgIconsize(), 0);
         final GridItem<GroupDTO> gridItem = new GridItem<GroupDTO>(group, gridGroup, group.getShortName(), imageHtml,
                 longName, longName, " ", longName, toolTip, menu);
         if (!group.isPersonal()) {
@@ -218,18 +213,6 @@ public class SocialNetworkPresenter {
         }
 
         return gridItem;
-    }
-
-    // FIXME: Code smell: create a Utility with this
-    private String createLogoAvatar(StateToken groupToken, boolean groupHasLogo, boolean isPersonal, int size,
-            int hvspace) {
-        if (groupHasLogo) {
-            return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
-                    + "px; height: " + size + "px;' src='" + downloadProvider.get().getLogoImageUrl(groupToken) + "'>";
-        } else {
-            return isPersonal ? imageUtils.getImageHtml(ImageDescriptor.personDef)
-                    : imageUtils.getImageHtml(ImageDescriptor.groupDefIcon);
-        }
     }
 
     private void createMenuActions() {

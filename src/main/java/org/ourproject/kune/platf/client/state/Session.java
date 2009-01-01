@@ -64,6 +64,8 @@ public interface Session {
      */
     int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
 
+    public String getCurrentCCversion();
+
     public LicenseDTO getDefLicense();
 
     public int getImgCropsize();

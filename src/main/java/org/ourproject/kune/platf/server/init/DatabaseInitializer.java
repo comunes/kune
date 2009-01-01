@@ -137,38 +137,46 @@ public class DatabaseInitializer {
     }
 
     private void createLicenses() {
-        // FIXME: add version to name
-        License license = new License("by", "Creative Commons Attribution", "None",
-                "http://creativecommons.org/licenses/by/3.0/", true, false, false, "FIXME: Here CC RDF",
-                "images/lic/by80x15.png");
+        // FIXME: Add CC RDF info (seems CC is working on new forms to add
+        // license metadata)
+        License license = new License("by-v3.0", "Creative Commons Attribution", "None",
+                "http://creativecommons.org/licenses/by/3.0/", true, false, false, "", "images/lic/by80x15.png");
         licenseManager.persist(license);
-        license = new License("by-sa", "Creative Commons Attribution-ShareAlike", "None",
-                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "FIXME: Here CC RDF",
-                "images/lic/bysa80x15.png");
+        license = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "None",
+                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "images/lic/bysa80x15.png");
         licenseManager.persist(license);
-        license = new License("by-nd", "Creative Commons Attribution-NoDerivs", "None",
-                "http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "FIXME: Here CC RDF",
-                "images/lic/bynd80x15.png");
+        license = new License("by-nd-v3.0", "Creative Commons Attribution-NoDerivs", "None",
+                "http://creativecommons.org/licenses/by-nd/3.0/", true, false, false, "", "images/lic/bynd80x15.png");
         licenseManager.persist(license);
-        license = new License("by-nc", "Creative Commons Attribution-NonCommercial", "None",
-                "http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "FIXME: Here CC RDF",
-                "images/lic/bync80x15.png");
+        license = new License("by-nc-v3.0", "Creative Commons Attribution-NonCommercial", "None",
+                "http://creativecommons.org/licenses/by-nc/3.0/", true, false, false, "", "images/lic/bync80x15.png");
         licenseManager.persist(license);
-        license = new License("by-nc-sa", "Creative Commons Attribution-NonCommercial-ShareAlike", "None",
-                "http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "FIXME: Here CC RDF",
+        license = new License("by-nc-sa-v3.0", "Creative Commons Attribution-NonCommercial-ShareAlike", "None",
+                "http://creativecommons.org/licenses/by-nc-sa/3.0/", true, false, false, "",
                 "images/lic/byncsa80x15.png");
         licenseManager.persist(license);
-        license = new License("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "None",
-                "http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "FIXME: Here CC RDF",
+        license = new License("by-nc-nd-v3.0", "Creative Commons Attribution-NonCommercial-NoDerivs", "None",
+                "http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "",
                 "images/lic/byncnd80x15.png");
         licenseManager.persist(license);
-        license = new License("gfdl", "GNU Free Documentation License", "None", "http://www.gnu.org/copyleft/fdl.html",
-                false, true, false, "", "images/lic/gnu-fdl.gif");
+        license = new License(
+                "gfdl-v1-3",
+                "GNU Free Documentation License",
+                "The GNU Free Documentation License (GNU FDL or simply GFDL) is a copyleft license for free documentation, giving readers the rights to copy, redistribute and modify a work and requires all copies and derivatives to be available under the same license.",
+                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", "images/lic/gnu-fdl.gif");
         licenseManager.persist(license);
-        license = new License("fal", "Free Art License", "None", "http://artlibre.org/licence/lal/en/", false, true,
-                false, "", "images/lic/fal-license.gif");
+        license = new License(
+                "fal",
+                "Free Art License",
+                "The Free Art license is a French copyleft license for works of art. It authorises the user to freely copy, spread, and transform creative works while respecting the author's rights.",
+                "http://artlibre.org/licence/lal/en/", false, true, false, "", "images/lic/fal-license.gif");
         licenseManager.persist(license);
-
+        license = new License(
+                "gpl-v3",
+                "GNU General Public License",
+                "This license grant the recipients of a computer program the rights of the free software definition and uses copyleft to ensure the freedoms are preserved, even when the work is changed or added to.",
+                "http://www.gnu.org/licenses/gpl.html", false, true, false, "", "images/lic/gnu-gpl.gif");
+        licenseManager.persist(license);
     }
 
 }

@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.client.rpc;
 
+import org.ourproject.kune.platf.client.dto.AdmissionTypeDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
@@ -39,6 +40,9 @@ public interface GroupServiceAsync {
     void getGroup(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
     void setGroupFullLogo(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
+
+    void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionTypeDTO admissionPolicy,
+            AsyncCallback<?> asyncCallback);
 
     void setSocialNetworkVisibility(String userHash, StateToken token, SocialNetworkVisibilityDTO visibility,
             AsyncCallback<?> asyncCallback);

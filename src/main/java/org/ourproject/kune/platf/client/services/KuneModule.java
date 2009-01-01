@@ -541,9 +541,9 @@ public class KuneModule extends AbstractModule {
             @Override
             public ContextNavigator create() {
                 final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
-                        $(Session.class), $$(ContentServiceAsync.class), i18n, $(ContentIconsRegistry.class),
-                        $(ContentCapabilitiesRegistry.class), $(ActionContextToolbar.class),
-                        $(ContextActionRegistry.class), $$(FileDownloadUtils.class), true, $(RenameAction.class));
+                        $(Session.class), i18n, $(ContentIconsRegistry.class), $(ContentCapabilitiesRegistry.class),
+                        $(ActionContextToolbar.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
+                        true, $(RenameAction.class));
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter, i18n,
                         $(WorkspaceSkeleton.class), $(ActionManager.class));
                 presenter.init(panel);
@@ -568,7 +568,7 @@ public class KuneModule extends AbstractModule {
         register(Singleton.class, new Factory<FileDownloadUtils>(FileDownloadUtils.class) {
             @Override
             public FileDownloadUtils create() {
-                return new FileDownloadUtils($(Session.class));
+                return new FileDownloadUtils($(Session.class), $(ImageUtils.class));
             }
         });
 

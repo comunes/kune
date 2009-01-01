@@ -33,13 +33,11 @@ import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
@@ -59,7 +57,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private ContextNavigatorView view;
     private final StateManager stateManager;
     private final Session session;
-    private final Provider<ContentServiceAsync> contentServiceProvider;
     private final I18nUITranslationService i18n;
     private final HashMap<StateToken, ActionItemCollection<StateToken>> actionsByItem;
     private boolean editOnNextStateChange;
@@ -72,13 +69,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final RenameAction renameAction;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
-            final Provider<ContentServiceAsync> contentServiceProvider, final I18nUITranslationService i18n,
-            final ContentIconsRegistry contentIconsRegistry, ContentCapabilitiesRegistry capabilitiesRegistry,
-            final ActionToolbar<StateToken> toolbar, final ActionRegistry<StateToken> actionRegistry,
-            Provider<FileDownloadUtils> downloadUtilsProvider, boolean useGenericImageIcon, RenameAction renameAction) {
+            final I18nUITranslationService i18n, final ContentIconsRegistry contentIconsRegistry,
+            ContentCapabilitiesRegistry capabilitiesRegistry, final ActionToolbar<StateToken> toolbar,
+            final ActionRegistry<StateToken> actionRegistry, Provider<FileDownloadUtils> downloadUtilsProvider,
+            boolean useGenericImageIcon, RenameAction renameAction) {
         this.stateManager = stateManager;
         this.session = session;
-        this.contentServiceProvider = contentServiceProvider;
         this.i18n = i18n;
         this.contentIconsRegistry = contentIconsRegistry;
         this.capabilitiesRegistry = capabilitiesRegistry;
@@ -328,11 +324,4 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private void setItemText(final StateToken stateToken, final String name) {
         view.setItemText(genId(stateToken), name);
     }
-
-    private void setState(final StateAbstractDTO state, boolean select) {
-        if (state instanceof StateContainerDTO) {
-            setState((StateContainerDTO) state, select);
-        }
-    }
-
 }

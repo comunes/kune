@@ -71,7 +71,7 @@ public class ContentManagerTest extends PersistenceTest {
         countryManager.persist(gb);
         user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB",
                 TimeZone.getDefault().getID());
-        defLicense = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
+        defLicense = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "",
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
         licenseManager.persist(defLicense);
         groupManager.createUserGroup(user, true);

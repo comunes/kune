@@ -35,7 +35,7 @@ public class GroupServiceTest extends IntegrationTest {
         final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", GroupType.COMMUNITY);
 
         final LicenseDTO license = new LicenseDTO();
-        license.setShortName("by-sa");
+        license.setShortName("by-sa-v3.0");
         group.setDefaultLicense(license);
         service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
 
@@ -67,7 +67,7 @@ public class GroupServiceTest extends IntegrationTest {
         final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", GroupType.PROJECT);
 
         final LicenseDTO license = new LicenseDTO();
-        license.setShortName("by-sa");
+        license.setShortName("by-sa-v3.0");
         group.setDefaultLicense(license);
         service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
 
@@ -86,7 +86,7 @@ public class GroupServiceTest extends IntegrationTest {
         final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative", GroupType.ORGANIZATION);
 
         final LicenseDTO license = new LicenseDTO();
-        license.setShortName("by-sa");
+        license.setShortName("by-sa-v3.0");
         group.setDefaultLicense(license);
         service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
 
@@ -105,7 +105,7 @@ public class GroupServiceTest extends IntegrationTest {
                 GroupType.ORPHANED_PROJECT);
 
         final LicenseDTO license = new LicenseDTO();
-        license.setShortName("by-sa");
+        license.setShortName("by-sa-v3.0");
         group.setDefaultLicense(license);
         service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
 

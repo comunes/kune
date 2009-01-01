@@ -19,6 +19,8 @@
  */package org.ourproject.kune.platf.client.ui.download;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.services.ImageDescriptor;
+import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.utils.Url;
 import org.ourproject.kune.platf.client.utils.UrlParam;
@@ -32,9 +34,11 @@ public class FileDownloadUtils {
     private static final String LOGODOWNLOADSERVLET = "/kune/servlets/EntityLogoDownloadManager";
 
     private final Session session;
+    private final ImageUtils imageUtils;
 
-    public FileDownloadUtils(final Session session) {
+    public FileDownloadUtils(final Session session, final ImageUtils imageUtils) {
         this.session = session;
+        this.imageUtils = imageUtils;
     }
 
     public void downloadFile(final StateToken token) {
@@ -48,6 +52,17 @@ public class FileDownloadUtils {
 
     public String getImageUrl(final StateToken token) {
         return calculateUrl(token, false);
+    }
+
+    public String getLogoAvatarHtml(StateToken groupToken, boolean groupHasLogo, boolean isPersonal, int size,
+            int hvspace) {
+        if (groupHasLogo) {
+            return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
+                    + "px; height: " + size + "px;' src='" + getLogoImageUrl(groupToken) + "'>";
+        } else {
+            return isPersonal ? imageUtils.getImageHtml(ImageDescriptor.personDef)
+                    : imageUtils.getImageHtml(ImageDescriptor.groupDefIcon);
+        }
     }
 
     public String getLogoImageUrl(StateToken token) {

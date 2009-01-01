@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.server.rpc;
 
+import org.ourproject.kune.platf.client.dto.AdmissionTypeDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
@@ -32,6 +33,7 @@ import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContentUtils;
+import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
@@ -108,6 +110,15 @@ public class GroupRPC implements RPC, GroupService {
         final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
         groupManager.setGroupLogo(group, content);
         return mapper.map(group, GroupDTO.class);
+    }
+
+    @Authenticated(mandatory = true)
+    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void setGroupNewMembersJoiningPolicy(final String userHash, StateToken token,
+            AdmissionTypeDTO admissionPolicy) {
+        final Group group = groupManager.findByShortName(token.getGroup());
+        group.setAdmissionType(AdmissionType.valueOf(admissionPolicy.toString()));
     }
 
     @Authenticated(mandatory = true)

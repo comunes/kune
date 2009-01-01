@@ -35,10 +35,9 @@ public class InitDataDTO implements IsSerializable {
     private String chatRoomHost;
     private String defaultWsTheme;
     private LicenseDTO defaultLicense;
+    private String currentCCversion;
     private String[] wsThemes;
-
     private String siteLogoUrl;
-
     private String galleryPermittedExtensions;
     private String maxFileSizeInMb;
     private int imgResizewidth;
@@ -62,6 +61,10 @@ public class InitDataDTO implements IsSerializable {
 
     public ArrayList<I18nCountryDTO> getCountries() {
         return countries;
+    }
+
+    public String getCurrentCCversion() {
+        return currentCCversion;
     }
 
     public LicenseDTO getDefaultLicense() {
@@ -150,6 +153,10 @@ public class InitDataDTO implements IsSerializable {
 
     public void setCountries(final ArrayList<I18nCountryDTO> countries) {
         this.countries = countries;
+    }
+
+    public void setCurrentCCversion(String currentCCversion) {
+        this.currentCCversion = currentCCversion;
     }
 
     public void setDefaultLicense(LicenseDTO defaultLicense) {

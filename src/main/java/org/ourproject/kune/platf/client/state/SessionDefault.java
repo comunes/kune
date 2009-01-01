@@ -91,6 +91,10 @@ public class SessionDefault implements Session {
         return countriesArray;
     }
 
+    public String getCurrentCCversion() {
+        return initData.getCurrentCCversion();
+    }
+
     public I18nLanguageDTO getCurrentLanguage() {
         return currentLanguage;
     }

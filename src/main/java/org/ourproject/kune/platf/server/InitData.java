@@ -39,11 +39,9 @@ public class InitData {
     private String chatDomain;
     private String chatRoomHost;
     private License defaultLicense;
-
+    private String currentCCversion;
     private String defaultWsTheme;
-
     private String[] wsThemes;
-
     private String siteLogoUrl;
     private String galleryPermittedExtensions;
     private String maxFileSizeInMb;
@@ -68,6 +66,10 @@ public class InitData {
 
     public List<I18nCountry> getCountries() {
         return countries;
+    }
+
+    public String getCurrentCCversion() {
+        return currentCCversion;
     }
 
     public License getDefaultLicense() {
@@ -152,6 +154,10 @@ public class InitData {
 
     public void setCountries(final List<I18nCountry> countries) {
         this.countries = countries;
+    }
+
+    public void setCurrentCCversion(String currentCCversion) {
+        this.currentCCversion = currentCCversion;
     }
 
     public void setDefaultLicense(License defaultLicense) {

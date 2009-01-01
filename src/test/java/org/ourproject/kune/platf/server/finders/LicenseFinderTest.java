@@ -26,33 +26,28 @@ public class LicenseFinderTest extends PersistenceTest {
     @Before
     public void addData() {
         openTransaction();
-        licenseDef = new License("by-sa", "Creative Commons Attribution-ShareAlike", "",
+        licenseDef = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "",
                 "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
         persist(licenseDef);
-        license1 = new License("by-nc-nd", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
+        license1 = new License("by-nc-nd-v3.0", "Creative Commons Attribution-NonCommercial-NoDerivs", "",
                 "http://creativecommons.org/licenses/by-nc-nd/3.0/", true, false, false, "", "");
         persist(license1);
-        license2 = new License("gfdl", "GNU Free Documentation License", "", "http://www.gnu.org/copyleft/fdl.html",
-                false, true, false, "", "");
+        license2 = new License("gfdl-v1.3", "GNU Free Documentation License", "",
+                "http://www.gnu.org/copyleft/fdl.html", false, true, false, "", "");
         persist(license2);
+    }
+
+    @After
+    public void close() {
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
     }
 
     @Test
     public void findAll() {
         List<License> all = finder.getAll();
         assertEquals(3, all.size());
-    }
-
-    @Test
-    public void findCC() {
-        List<License> cc = finder.getCC();
-        assertEquals(2, cc.size());
-    }
-
-    @Test
-    public void findNotCC() {
-        List<License> notCc = finder.getNotCC();
-        assertEquals(1, notCc.size());
     }
 
     @Test
@@ -64,6 +59,12 @@ public class LicenseFinderTest extends PersistenceTest {
     }
 
     @Test
+    public void findCC() {
+        List<License> cc = finder.getCC();
+        assertEquals(2, cc.size());
+    }
+
+    @Test
     public void findDefaultLicense() {
         String licenseDefId = properties.getDefaultLicense();
         License lic = finder.findByShortName(licenseDefId);
@@ -72,11 +73,10 @@ public class LicenseFinderTest extends PersistenceTest {
         assertEquals(licenseDef.getLongName(), lic.getLongName());
     }
 
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
+    @Test
+    public void findNotCC() {
+        List<License> notCc = finder.getNotCC();
+        assertEquals(1, notCc.size());
     }
 
 }

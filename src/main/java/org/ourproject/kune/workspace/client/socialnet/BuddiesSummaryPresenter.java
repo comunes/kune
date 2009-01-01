@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
@@ -71,7 +72,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
             final ActionBuddiesSummaryToolbar toolbar, Provider<FileDownloadUtils> fileDownUtilsProvider,
             ImageUtils imageUtils, Provider<SocialNetworkServiceAsync> snServiceAsync,
             GroupActionRegistry groupActionRegistry) {
-        super(i18n, stateManager, imageUtils, session, snServiceAsync, groupActionRegistry, fileDownUtilsProvider);
+        super(i18n, stateManager, session, snServiceAsync, groupActionRegistry, fileDownUtilsProvider);
         this.stateManager = stateManager;
         this.session = session;
         this.userServiceAsync = userServiceAsync;
@@ -147,6 +148,19 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         }
     }
 
+    private void createAddNewBuddiesAction() {
+        ActionToolbarMenuDescriptor<UserSimpleDTO> addNewBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
+                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
+                    public void onEvent(UserSimpleDTO parameter) {
+                        Site.info("In development");
+                    }
+                });
+        addNewBuddiesAction.setTextDescription(i18n.t("Add a new buddy"));
+        addNewBuddiesAction.setParentMenuTitle(i18n.t("Options"));
+        addNewBuddiesAction.setIconUrl("images/add-green.gif");
+        actionRegistry.addAction(addNewBuddiesAction);
+    }
+
     private void createSetBuddiesVisibilityAction(String textDescription, final UserBuddiesVisibilityDTO visibility) {
         ActionToolbarMenuRadioDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuRadioDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
@@ -208,6 +222,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         go.setIconUrl("images/group-home.gif");
         actionRegistry.addAction(go);
 
+        createAddNewBuddiesAction();
         createSetBuddiesVisibilityAction(i18n.t("anyone"), UserBuddiesVisibilityDTO.anyone);
         createSetBuddiesVisibilityAction(i18n.t("only your buddies"), UserBuddiesVisibilityDTO.yourbuddies);
         createSetBuddiesVisibilityAction(i18n.t("only you"), UserBuddiesVisibilityDTO.onlyyou);

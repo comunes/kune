@@ -53,7 +53,7 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
             final Provider<SocialNetworkServiceAsync> snServiceProvider, final WsThemePresenter wsThemePresenter,
             GroupActionRegistry groupActionRegistry, ActionParticipationToolbar actionParticipationToolbar,
             final Provider<FileDownloadUtils> downloadProvider) {
-        super(i18n, stateManager, imageUtils, session, snServiceProvider, groupActionRegistry, downloadProvider);
+        super(i18n, stateManager, session, snServiceProvider, groupActionRegistry, downloadProvider);
         adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",
                 "talking about a person"), false);
         collabCategory = new GridGroup(i18n.t("and as collaborator in:"), " ", i18n.t("Collaborate in these groups"),
