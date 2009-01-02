@@ -38,6 +38,8 @@ public interface ContextNavigator {
 
     boolean isSelected(StateToken stateToken);
 
+    void refreshState();
+
     void selectItem(StateToken stateToken);
 
     void setEditOnNextStateChange(boolean edit);

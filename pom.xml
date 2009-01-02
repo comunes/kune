@@ -368,10 +368,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.0</version>
         <configuration>
           <source>1.5</source>
           <target>1.5</target>
+					<!-- Uncomment and run mvn with -X -e if we have same compile problems
+          <compilerArgument>-verbose</compilerArgument>
+          <fork>true</fork> 
+					<verbose>true</verbose>
+					-->
         </configuration>
       </plugin>
       <plugin>
@@ -380,7 +384,7 @@
         <version>2.0-beta26</version>
         <configuration>
           <logLevel>INFO</logLevel>
-          <style>PRETTY</style>
+          <style>OBF</style>
           <!-- <style>OBF PRETTY</style> -->
           <runTarget>
             org.ourproject.kune.app.Kune/Kune.html

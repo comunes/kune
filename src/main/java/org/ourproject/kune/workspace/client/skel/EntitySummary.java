@@ -93,13 +93,11 @@ public class EntitySummary {
         panel.addListener(new ContainerListenerAdapter() {
             @Override
             public void onHide(Component component) {
-                super.onHide(component);
                 openFirstIfActiveNotVisible();
             }
 
             @Override
             public void onShow(Component component) {
-                super.onShow(component);
                 openFirstIfActiveNotVisible();
             }
 

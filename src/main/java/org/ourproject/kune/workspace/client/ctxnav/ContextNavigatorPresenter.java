@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -102,7 +103,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         // FIXME At the moment detach (removeFromParent) destroy the gwt-ext
         // TreePanel and the widget must be recreated (cannot be attached again
         // like in gwt)
-        // setState(session.getCurrentState(), true);
         toolbar.attach();
     }
 
@@ -145,6 +145,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public boolean mustEditOnNextStateChange() {
         return editOnNextStateChange;
+    }
+
+    public void refreshState() {
+        StateAbstractDTO currentState = session.getCurrentState();
+        if (currentState instanceof StateContainerDTO) {
+            setState((StateContainerDTO) currentState, true);
+        }
     }
 
     public void selectItem(final StateToken stateToken) {

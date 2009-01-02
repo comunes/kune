@@ -248,6 +248,7 @@ public abstract class AbstractFoldableContentActions {
                                                 contextPropEditorProvider.get().detach();
                                                 contextNavigator.attach();
                                                 if (session.getCurrentStateToken().equals(stateToken)) {
+                                                    contextNavigator.refreshState();
                                                     foldableContent.refreshState();
                                                 }
                                             }
