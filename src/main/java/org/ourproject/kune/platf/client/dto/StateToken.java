@@ -23,6 +23,17 @@ import org.ourproject.kune.platf.client.ui.WindowUtils;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+/**
+ * <pre>
+ * http://en.wikipedia.org/wiki/Fragment_identifier
+ * http://www.w3.org/DesignIssues/Fragment.html
+ * </pre>
+ * 
+ * <pre>
+ * When an agent (such as a Web browser) requests a resource from a Web server, the agent sends the URI to the server, but does not send the fragment.
+ * </pre>
+ * 
+ */
 public class StateToken implements IsSerializable {
     public static final String SEPARATOR = ".";
     private static final String[] EMPTY = new String[0];
@@ -131,14 +142,14 @@ public class StateToken implements IsSerializable {
     public String getPublicUrl() {
         String publicUrl = "http://";
 
-        String separator = "/";
+        String separator = ".";
 
         // FIXME: Maybe get from InitData the site.domain
         String port = WindowUtils.getLocation().getPort();
         publicUrl += WindowUtils.getLocation().getHostName() + (port == null ? "" : ":" + port) + "/public";
 
         if (group != null) {
-            publicUrl += separator + group;
+            publicUrl += "/" + group;
         }
         if (tool != null) {
             publicUrl += separator + tool;

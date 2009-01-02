@@ -96,7 +96,7 @@ public class ContentManagerTest extends PersistenceTest {
     @Test
     public void testUTF8Persist() {
         final Container container = Mockito.mock(Container.class);
-        Mockito.stub(container.getTypeId()).toReturn(DocumentServerTool.TYPE_FOLDER);
+        Mockito.when(container.getTypeId()).thenReturn(DocumentServerTool.TYPE_FOLDER);
         final Content cnt = contentManager.createContent("汉语/漢語", "汉语/漢語", user, container,
                 DocumentServerTool.TYPE_DOCUMENT);
         final Content newCnt = contentManager.find(cnt.getId());
@@ -105,7 +105,7 @@ public class ContentManagerTest extends PersistenceTest {
 
     private void createContentWithMime(final String mimetype) {
         final Container container = Mockito.mock(Container.class);
-        Mockito.stub(container.getTypeId()).toReturn(DocumentServerTool.TYPE_FOLDER);
+        Mockito.when(container.getTypeId()).thenReturn(DocumentServerTool.TYPE_FOLDER);
         final Content cnt = contentManager.createContent("title", "body", user, container,
                 DocumentServerTool.TYPE_UPLOADEDFILE);
         cnt.setMimeType(new BasicMimeType(mimetype));

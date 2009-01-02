@@ -47,15 +47,15 @@ public class FileDownloadManagerTest {
         resp = Mockito.mock(HttpServletResponse.class);
         ServletOutputStream oStream = Mockito.mock(ServletOutputStream.class);
 
-        Mockito.stub(resp.getOutputStream()).toReturn(oStream);
+        Mockito.when(resp.getOutputStream()).thenReturn(oStream);
         uploadLocation = kuneProperties.get(KuneProperties.UPLOAD_LOCATION);
 
         fileUtils = Mockito.mock(FileUtils.class);
-        Mockito.stub(fileUtils.exist(Mockito.anyString())).toReturn(true);
+        Mockito.when(fileUtils.exist(Mockito.anyString())).thenReturn(true);
         stateToken = new StateToken("test.test.1.1");
         filename = "somefile";
 
-        Mockito.stub(content.getTitle()).toReturn(SOMETITLE);
+        Mockito.when(content.getTitle()).thenReturn(SOMETITLE);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class FileDownloadManagerTest {
     @Test
     public void testJpgThumbDownload() throws IOException {
         String extension = ".jpg";
-        contentStub(new BasicMimeType("image", "jpg"), filename, extension);
+        contentwhen(new BasicMimeType("image", "jpg"), filename, extension);
         String subExt = ImageSize.thumb.toString();
         String absFile = fileDownloadManager.buildResponse(content, stateToken, "false", subExt, resp, fileUtils);
         assertEquals(uploadLocation + FileUtils.toDir(stateToken) + filename + "." + subExt + extension, absFile);
@@ -80,7 +80,7 @@ public class FileDownloadManagerTest {
     @Test
     public void testPdfDownload1() throws IOException {
         String extension = ".pdf";
-        contentStub(new BasicMimeType("application", "pdf"), filename, extension);
+        contentwhen(new BasicMimeType("application", "pdf"), filename, extension);
         String absFile = fileDownloadManager.buildResponse(content, stateToken, "true", ImageSize.ico.toString(), resp,
                 fileUtils);
         assertEquals(uploadLocation + FileUtils.toDir(stateToken) + filename + extension, absFile);
@@ -94,7 +94,7 @@ public class FileDownloadManagerTest {
     @Test
     public void testPdfDownload2() throws IOException {
         String pngExtension = ".png";
-        contentStub(new BasicMimeType("application", "pdf"), filename, ".pdf");
+        contentwhen(new BasicMimeType("application", "pdf"), filename, ".pdf");
         String subExt = ImageSize.ico.toString();
         String absFile = fileDownloadManager.buildResponse(content, stateToken, "false", subExt, resp, fileUtils);
         assertEquals(uploadLocation + FileUtils.toDir(stateToken) + filename + "." + subExt + pngExtension, absFile);
@@ -108,7 +108,7 @@ public class FileDownloadManagerTest {
     @Test
     public void testPdfDownload3() throws IOException {
         String pngExtension = ".png";
-        contentStub(new BasicMimeType("application", "pdf"), filename, ".pdf");
+        contentwhen(new BasicMimeType("application", "pdf"), filename, ".pdf");
         String subExt = ImageSize.sized.toString();
         String absFile = fileDownloadManager.buildResponse(content, stateToken, "false", subExt, resp, fileUtils);
         assertEquals(uploadLocation + FileUtils.toDir(stateToken) + filename + "." + subExt + pngExtension, absFile);
@@ -122,7 +122,7 @@ public class FileDownloadManagerTest {
     @Test
     public void testPdfDownload4() throws IOException {
         String pngExtension = ".png";
-        contentStub(new BasicMimeType("application", "pdf"), filename, ".pdf");
+        contentwhen(new BasicMimeType("application", "pdf"), filename, ".pdf");
         String subExt = ImageSize.thumb.toString();
         String absFile = fileDownloadManager.buildResponse(content, stateToken, "false", subExt, resp, fileUtils);
         assertEquals(uploadLocation + FileUtils.toDir(stateToken) + filename + "." + subExt + pngExtension, absFile);
@@ -136,7 +136,7 @@ public class FileDownloadManagerTest {
     @Test
     public void testPdfDownloadNullMime() throws IOException {
         String extension = ".pdf";
-        contentStub(null, filename, extension);
+        contentwhen(null, filename, extension);
         String absFile = fileDownloadManager.buildResponse(content, stateToken, "true", ImageSize.ico.toString(), resp,
                 fileUtils);
         assertEquals(uploadLocation + FileUtils.toDir(stateToken) + filename + extension, absFile);
@@ -150,7 +150,7 @@ public class FileDownloadManagerTest {
     @Test
     public void testPngDownload1() throws IOException {
         String extension = ".png";
-        contentStub(new BasicMimeType("image", "png"), filename, extension);
+        contentwhen(new BasicMimeType("image", "png"), filename, extension);
         String absFile = fileDownloadManager.buildResponse(content, stateToken, "true", null, resp, fileUtils);
         assertEquals(uploadLocation + FileUtils.toDir(stateToken) + filename + extension, absFile);
         Mockito.verify(resp).setContentType(FileDownloadManager.APPLICATION_X_DOWNLOAD);
@@ -163,7 +163,7 @@ public class FileDownloadManagerTest {
     @Test
     public void testPngDownload2() throws IOException {
         String extension = ".png";
-        contentStub(new BasicMimeType("image", "png"), filename, extension);
+        contentwhen(new BasicMimeType("image", "png"), filename, extension);
         String subExt = ImageSize.thumb.toString();
         String absFile = fileDownloadManager.buildResponse(content, stateToken, "false", subExt, resp, fileUtils);
         assertEquals(uploadLocation + FileUtils.toDir(stateToken) + filename + "." + subExt + extension, absFile);
@@ -174,8 +174,8 @@ public class FileDownloadManagerTest {
                         + FileDownloadManager.RESP_HEADER_END);
     }
 
-    private void contentStub(BasicMimeType mimeType, String filename, String extension) {
-        Mockito.stub(content.getMimeType()).toReturn(mimeType);
-        Mockito.stub(content.getFilename()).toReturn(filename + extension);
+    private void contentwhen(BasicMimeType mimeType, String filename, String extension) {
+        Mockito.when(content.getMimeType()).thenReturn(mimeType);
+        Mockito.when(content.getFilename()).thenReturn(filename + extension);
     }
 }

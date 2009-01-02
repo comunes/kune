@@ -28,7 +28,7 @@ public class TagsSummaryPresenterTest {
         final WsThemePresenter theme = Mockito.mock(WsThemePresenter.class);
         final SiteSearcher searcher = Mockito.mock(SiteSearcher.class);
         final Provider searcherProvider = Mockito.mock(Provider.class);
-        Mockito.stub(searcherProvider.get()).toReturn(searcher);
+        Mockito.when(searcherProvider.get()).thenReturn(searcher);
         view = Mockito.mock(TagsSummaryView.class);
         tagsSummaryPresenter = new TagsSummaryPresenter(session, searcherProvider, stateManager, theme);
         tagsSummaryPresenter.init(view);

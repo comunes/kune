@@ -39,7 +39,7 @@ public class StateManagerTest {
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);
         stateManager = new StateManagerDefault(contentProvider, session, history);
-        Mockito.stub(session.getUserHash()).toReturn(HASH);
+        Mockito.when(session.getUserHash()).thenReturn(HASH);
         state = Mockito.mock(StateAbstractDTO.class);
         stateChangeListener = new MockListener<StateAbstractDTO>();
         groupChangeListener = new MockListener2<String, String>();
@@ -116,7 +116,7 @@ public class StateManagerTest {
     public void normalStartLoggedUser() {
         // When a user enter reload state, also if the application is starting
         // (and the user was logged)
-        Mockito.stub(history.getToken()).toReturn("");
+        Mockito.when(history.getToken()).thenReturn("");
         stateManager.reload();
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
@@ -189,7 +189,7 @@ public class StateManagerTest {
 
     private void changeState(String... tokens) {
         for (String token : tokens) {
-            Mockito.stub(state.getStateToken()).toReturn(new StateToken(token));
+            Mockito.when(state.getStateToken()).thenReturn(new StateToken(token));
             stateManager.setState(state);
         }
     }
@@ -198,8 +198,8 @@ public class StateManagerTest {
         stateManager.addBeforeStateChangeListener(beforeChangeListener1);
         stateManager.addBeforeStateChangeListener(beforeChangeListener2);
         String newToken = "something";
-        Mockito.stub(beforeChangeListener1.beforeAction()).toReturn(value);
-        Mockito.stub(beforeChangeListener2.beforeAction()).toReturn(value2);
+        Mockito.when(beforeChangeListener1.beforeAction()).thenReturn(value);
+        Mockito.when(beforeChangeListener2.beforeAction()).thenReturn(value2);
         return newToken;
     }
 

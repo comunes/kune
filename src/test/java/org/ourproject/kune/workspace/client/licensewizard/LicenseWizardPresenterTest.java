@@ -34,11 +34,11 @@ public class LicenseWizardPresenterTest {
     public void onAnotherSelected() {
         licenseWizard.onAnotherLicenseSelecterd();
         Mockito.verify(view).setEnabled(false, true, true, false);
-        Mockito.stub(view.isCurrentPage(firstForm)).toReturn(true);
+        Mockito.when(view.isCurrentPage(firstForm)).thenReturn(true);
         licenseWizard.onNext();
         Mockito.verify(view).show(sndForm);
         Mockito.verify(view).setEnabled(true, true, true, false);
-        Mockito.stub(view.isCurrentPage(sndForm)).toReturn(true);
+        Mockito.when(view.isCurrentPage(sndForm)).thenReturn(true);
         licenseWizard.onBack();
         Mockito.verify(view).show(firstForm);
         Mockito.verify(view).setEnabled(false, true, true, true);

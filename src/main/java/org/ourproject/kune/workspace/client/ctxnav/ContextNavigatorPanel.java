@@ -78,6 +78,14 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         TreeNode node = treePanel.getNodeById(nodeId);
         if (node == null) {
             // Log.info("Adding tree node " + nodeId);
+
+            // FIXME: maybe to solve the length issues with items, we can store
+            // a truncated title also and use something similar to:
+            // String nodeText = Format.ellipsis(item.getText(),
+            // ws.getEntityWorkspace().getContextTopBar().getPanel().getOffsetWidth()
+            // / 8);
+            // the problem is that editor uses this value, then we have to
+            // restore the real value before edit
             final TreeNode child = new TreeNode(item.getText());
             child.setId(nodeId);
             final String icon = item.getIconUrl();
@@ -258,6 +266,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
             public boolean doBeforeStartEdit(final Editor source, final ExtElement boundEl, final Object value) {
                 return isEditable;
             }
+
         });
         // test !?
         treeEditor.setAutosize(false);

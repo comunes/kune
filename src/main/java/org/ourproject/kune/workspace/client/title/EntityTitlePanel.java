@@ -52,10 +52,6 @@ public class EntityTitlePanel implements EntityTitleView {
         icon.setVisible(false);
     }
 
-    public void restoreOldTitle() {
-        titleLabel.restoreOldText();
-    }
-
     public void setContentIcon(final String iconUrl) {
         icon.setUrl(iconUrl);
     }

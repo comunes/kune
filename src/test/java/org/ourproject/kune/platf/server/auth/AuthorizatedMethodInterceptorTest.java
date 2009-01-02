@@ -25,37 +25,37 @@ public class AuthorizatedMethodInterceptorTest extends IntegrationTest {
         new IntegrationTestHelper(auth, this);
         invocation = Mockito.mock(MethodInvocation.class);
         final AccessibleObject accessibleObject = Mockito.mock(AccessibleObject.class);
-        Mockito.stub(invocation.getMethod()).toReturn(this.getClass().getMethods()[0]);
-        Mockito.stub(invocation.getStaticPart()).toReturn(accessibleObject);
+        Mockito.when(invocation.getMethod()).thenReturn(this.getClass().getMethods()[0]);
+        Mockito.when(invocation.getStaticPart()).thenReturn(accessibleObject);
         authAnnotation = Mockito.mock(Authorizated.class);
-        Mockito.stub(accessibleObject.getAnnotation(Authorizated.class)).toReturn(authAnnotation);
+        Mockito.when(accessibleObject.getAnnotation(Authorizated.class)).thenReturn(authAnnotation);
 
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void tesHashNullContainer() throws Throwable {
-        // Mockito.stub(authAnnotation.accessRolRequired()).toReturn(AccessRol.Administrator);
-        Mockito.stub(authAnnotation.actionLevel()).toReturn(ActionLevel.content);
+        // Mockito.when(authAnnotation.accessRolRequired()).thenReturn(AccessRol.Administrator);
+        Mockito.when(authAnnotation.actionLevel()).thenReturn(ActionLevel.content);
         final Object[] arguments = { getHash(), new StateToken("group.docs") };
-        Mockito.stub(invocation.getArguments()).toReturn(arguments);
+        Mockito.when(invocation.getArguments()).thenReturn(arguments);
         auth.invoke(invocation);
     }
 
     @Test(expected = ContentNotFoundException.class)
     public void testHashNullContent() throws Throwable {
-        Mockito.stub(authAnnotation.actionLevel()).toReturn(ActionLevel.content);
+        Mockito.when(authAnnotation.actionLevel()).thenReturn(ActionLevel.content);
         final Object[] arguments = { getHash(), new StateToken("group.docs.1") };
-        Mockito.stub(invocation.getArguments()).toReturn(arguments);
+        Mockito.when(invocation.getArguments()).thenReturn(arguments);
         auth.invoke(invocation);
     }
 
     @Test(expected = AccessViolationException.class)
     public void wrongGroupNameThrowsExcep() throws Throwable {
         doLogin();
-        Mockito.stub(authAnnotation.accessRolRequired()).toReturn(AccessRol.Administrator);
-        Mockito.stub(authAnnotation.actionLevel()).toReturn(ActionLevel.content);
+        Mockito.when(authAnnotation.accessRolRequired()).thenReturn(AccessRol.Administrator);
+        Mockito.when(authAnnotation.actionLevel()).thenReturn(ActionLevel.content);
         final Object[] arguments = { getHash(), new StateToken("groupWRONG.docs.1.1") };
-        Mockito.stub(invocation.getArguments()).toReturn(arguments);
+        Mockito.when(invocation.getArguments()).thenReturn(arguments);
         auth.invoke(invocation);
     }
 

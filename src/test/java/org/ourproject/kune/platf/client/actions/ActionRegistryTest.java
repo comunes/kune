@@ -23,7 +23,7 @@ public class ActionRegistryTest {
 
     @Test
     public void actionsEmptyButNeverNull() {
-        Mockito.stub(session.isLogged()).toReturn(true);
+        Mockito.when(session.isLogged()).thenReturn(true);
         checkActionLists(0, new AccessRightsDTO(true, true, true), true);
         checkActionLists(0, new AccessRightsDTO(true, true, true), false);
         checkActionLists(0, new AccessRightsDTO(false, true, true), true);
@@ -56,7 +56,7 @@ public class ActionRegistryTest {
 
     @Test
     public void mustBeAuthFalse() {
-        Mockito.stub(session.isLogged()).toReturn(false);
+        Mockito.when(session.isLogged()).thenReturn(false);
         addDefActions();
         checkActionLists(0, new AccessRightsDTO(false, true, true), true);
         checkActionLists(1, new AccessRightsDTO(false, true, true), false);
@@ -64,7 +64,7 @@ public class ActionRegistryTest {
 
     @Test
     public void testAddWhenAdmin() {
-        Mockito.stub(session.isLogged()).toReturn(true);
+        Mockito.when(session.isLogged()).thenReturn(true);
         addDefActions();
         checkActionLists(2, new AccessRightsDTO(true, true, true), true);
         checkActionLists(3, new AccessRightsDTO(true, true, true), false);
@@ -72,7 +72,7 @@ public class ActionRegistryTest {
 
     @Test
     public void testAddWhenEditor() {
-        Mockito.stub(session.isLogged()).toReturn(true);
+        Mockito.when(session.isLogged()).thenReturn(true);
         addDefActions();
         checkActionLists(1, new AccessRightsDTO(false, true, true), true);
         checkActionLists(2, new AccessRightsDTO(false, true, true), false);
@@ -80,7 +80,7 @@ public class ActionRegistryTest {
 
     @Test
     public void testAddWhenViewer() {
-        Mockito.stub(session.isLogged()).toReturn(true);
+        Mockito.when(session.isLogged()).thenReturn(true);
         addDefActions();
         checkActionLists(0, new AccessRightsDTO(false, false, true), true);
         checkActionLists(1, new AccessRightsDTO(false, false, true), false);

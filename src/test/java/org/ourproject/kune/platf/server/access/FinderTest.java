@@ -33,7 +33,7 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName2");
         descriptor.setContainer(container);
-        Mockito.stub(contentManager.find(1L)).toReturn(descriptor);
+        Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
     }
@@ -43,7 +43,7 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(5, "groupOther", "toolName");
         descriptor.setContainer(container);
-        Mockito.stub(contentManager.find(1L)).toReturn(descriptor);
+        Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
     }
@@ -53,7 +53,7 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithId(1);
         descriptor.setContainer(container);
-        Mockito.stub(contentManager.find(1L)).toReturn(descriptor);
+        Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
     }
@@ -74,7 +74,7 @@ public class FinderTest {
         final Group group = new Group();
         final Content descriptor = new Content();
         group.setDefaultContent(descriptor);
-        Mockito.stub(groupManager.findByShortName("groupShortName")).toReturn(group);
+        Mockito.when(groupManager.findByShortName("groupShortName")).thenReturn(group);
 
         final Content content = finder.getContent(new StateToken("groupShortName", null, null, null), null);
         assertSame(descriptor, content);
@@ -87,7 +87,7 @@ public class FinderTest {
         descriptor.setId(1L);
         descriptor.setContainer(container);
 
-        Mockito.stub(contentManager.find(2L)).toReturn(descriptor);
+        Mockito.when(contentManager.find(2L)).thenReturn(descriptor);
 
         final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", "2"), null);
         assertSame(descriptor, content);
@@ -130,7 +130,7 @@ public class FinderTest {
     @Test
     public void testDocMissing() throws Exception {
         final Container container = new Container();
-        Mockito.stub(containerManager.find(1L)).toReturn(container);
+        Mockito.when(containerManager.find(1L)).thenReturn(container);
 
         final Content content = finder.getContent(new StateToken("groupShortName", "toolName", "1", null), null);
         assertNotNull(content);
@@ -142,7 +142,7 @@ public class FinderTest {
         final Group group = new Group();
         final ToolConfiguration config = group.setToolConfig("toolName", new ToolConfiguration());
         final Container container = config.setRoot(new Container());
-        Mockito.stub(groupManager.findByShortName("groupShortName")).toReturn(group);
+        Mockito.when(groupManager.findByShortName("groupShortName")).thenReturn(group);
 
         final StateToken token = new StateToken("groupShortName", "toolName", null, null);
         final Content content = finder.getContent(token, null);
@@ -154,7 +154,7 @@ public class FinderTest {
         final Content descriptor = new Content();
         final Container container = TestDomainHelper.createFolderWithIdAndToolName(5, "toolName");
         descriptor.setContainer(container);
-        Mockito.stub(contentManager.find(1L)).toReturn(descriptor);
+        Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
         finder.getContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);
     }

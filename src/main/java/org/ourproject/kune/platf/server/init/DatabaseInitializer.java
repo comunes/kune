@@ -178,5 +178,4 @@ public class DatabaseInitializer {
                 "http://www.gnu.org/licenses/gpl.html", false, true, false, "", "images/lic/gnu-gpl.gif");
         licenseManager.persist(license);
     }
-
 }

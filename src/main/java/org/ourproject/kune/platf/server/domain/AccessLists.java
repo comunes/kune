@@ -31,13 +31,16 @@ import org.ourproject.kune.platf.server.access.AccessRol;
 @Entity
 @Table(name = "access_lists")
 public class AccessLists {
+
     @OneToOne(cascade = CascadeType.ALL)
     protected GroupList admins;
 
     @OneToOne(cascade = CascadeType.ALL)
     protected GroupList editors;
+
     @OneToOne(cascade = CascadeType.ALL)
     protected GroupList viewers;
+
     @Id
     @GeneratedValue
     private Long id;

@@ -80,7 +80,7 @@ public class TextEditorPresenterTest {
     public void initialEditWithEditionAndSave() {
         presenter.editContent("Text to edit", saveListener, cancelListener);
         String textModified = "Text modified";
-        Mockito.stub(view.getHTML()).toReturn(textModified);
+        Mockito.when(view.getHTML()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onSave();
         assertTrue(saveListener.isCalledWithEquals(textModified));
@@ -99,7 +99,7 @@ public class TextEditorPresenterTest {
     public void testSavePendingAndCancel() {
         presenter.editContent("Text to edit", saveListener, cancelListener);
         String textModified = "Text modified";
-        Mockito.stub(view.getHTML()).toReturn(textModified);
+        Mockito.when(view.getHTML()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onCancel();
         presenter.onCancelConfirmed();
@@ -111,7 +111,7 @@ public class TextEditorPresenterTest {
     public void testSavePendingAndSaveFails() {
         presenter.editContent("Text to edit", saveListener, cancelListener);
         String textModified = "Text modified";
-        Mockito.stub(view.getHTML()).toReturn(textModified);
+        Mockito.when(view.getHTML()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onSave();
         presenter.onSaveFailed();

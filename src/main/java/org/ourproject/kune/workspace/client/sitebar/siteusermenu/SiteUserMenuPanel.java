@@ -73,7 +73,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
         userMenu.addItem(userHomePage);
         final Item userPreferences = new Item(i18n.t("Your preferences"));
         userPreferences.setId(USER_PREFERENCES_MENU_ITEM);
-        userPreferences.setIcon("images/kune-preferences.gif");
+        userPreferences.setIcon("images/emblem-system.png");
         userPreferences.addListener(new BaseItemListenerAdapter() {
             @Override
             public void onClick(final BaseItem item, final EventObject e) {

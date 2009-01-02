@@ -43,6 +43,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -73,6 +74,7 @@ public class Content implements HasStateToken {
     @Version
     private int version;
 
+    @OrderBy("name DESC")
     @IndexedEmbedded
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Tag> tags;

@@ -36,7 +36,6 @@ public class IconLabelEditable extends Composite {
     private boolean useDoubleClick;
     private ClickListener listener;
     private String currentText;
-    private String oldText;
     private MouseListenerAdapter mouseOverListener;
     private final AbstractLabel label;
     private String doubleClickToRenameLabel;
@@ -81,11 +80,6 @@ public class IconLabelEditable extends Composite {
         onEdit.add(slot);
     }
 
-    public void restoreOldText() {
-        label.setText(oldText);
-        this.currentText = this.oldText;
-    }
-
     public void setClickToRenameLabel(final String clickToRenameLabel) {
         this.clickToRenameLabel = clickToRenameLabel;
     }
@@ -114,7 +108,6 @@ public class IconLabelEditable extends Composite {
     }
 
     public void setText(final String text) {
-        this.oldText = this.currentText;
         this.currentText = text;
         label.setText(text);
     }
@@ -122,6 +115,7 @@ public class IconLabelEditable extends Composite {
     private void afterEdit() {
         String text = editor.getText();
         onEdit.fire(currentText, text);
+        setText(text);
         editor.setVisible(false);
         editor.setReadOnly(true);
         label.setVisible(true);
@@ -136,7 +130,6 @@ public class IconLabelEditable extends Composite {
         hp.add((Widget) label);
         initWidget(hp);
         this.currentText = text;
-        this.oldText = text;
         this.useDoubleClick = useDoubleClick;
         this.listener = new ClickListener() {
             public void onClick(final Widget sender) {

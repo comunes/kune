@@ -239,14 +239,19 @@
     <!-- jetty dependencies -->
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
-      <artifactId>jetty-util</artifactId>
-      <version>6.1.5</version>
-      <scope>provided</scope>
+       <artifactId>jetty-util</artifactId>
+        <version>6.1.5</version>
+        <!-- <version>7.0.0.pre5</version> -->
+        <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
-      <artifactId>jetty</artifactId>
+      <artifactId>maven-jetty-plugin</artifactId>
       <version>6.1.5</version>
+      <!--
+      <artifactId>jetty-maven-plugin</artifactId>
+      <version>7.0.0.pre5</version>
+       -->
       <scope>provided</scope>
     </dependency>
 
@@ -258,6 +263,11 @@
     </dependency>
 
     <!-- testing dependencies -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.6</version>
+    </dependency>
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
@@ -371,11 +381,11 @@
         <configuration>
           <source>1.5</source>
           <target>1.5</target>
-					<!-- Uncomment and run mvn with -X -e if we have same compile problems
+                    <!-- Uncomment and run mvn with -X -e if we have same compile problems
           <compilerArgument>-verbose</compilerArgument>
-          <fork>true</fork> 
-					<verbose>true</verbose>
-					-->
+          <fork>true</fork>
+                    <verbose>true</verbose>
+                    -->
         </configuration>
       </plugin>
       <plugin>
@@ -437,8 +447,13 @@
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>maven-jetty-plugin</artifactId>
         <version>6.1.5</version>
+        <!--
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>7.0.0.pre5</version>
+        -->
         <configuration>
           <contextPath>/</contextPath>
+          <reload>manual</reload>
           <scanIntervalSeconds>0</scanIntervalSeconds>
         </configuration>
       </plugin>

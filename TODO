@@ -52,6 +52,8 @@ Now using maven jetty from eclipse with debugger, hot reload the new class, but 
   http://mojo.codehaus.org/exec-maven-plugin/introduction.html
 <vjrj> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
   http://agilewebdevelopment.com/plugins/request_routing
+  http://wiki.rubyonrails.org/rails/pages/Request+Routing
+  http://svn.danwebb.net/external/rails/plugins/request_routing/trunk/README
 <vjrj> Strip html better in RTE, I18nTranslator, Chat
   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
 <vjrj> RTE right to left writing
