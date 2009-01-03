@@ -25,6 +25,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * <pre>
+ * http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
  * http://en.wikipedia.org/wiki/Fragment_identifier
  * http://www.w3.org/DesignIssues/Fragment.html
  * </pre>

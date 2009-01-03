@@ -41,6 +41,17 @@ http://code.google.com/webtoolkit/makinggwtbetter.html#codestyle
 and the code conventions for the JavaTM Programming Language:
 http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html
 
+==Use of mylyn in eclipse==
+
+To use mylyn and to track the kune issues from eclipse, you have to add a "Web Repository" and select "ASM (gforge" with server: http://ourproject.org. 
+In additional settings, put:
+* group_id: 407 
+* atid: 139. 
+Add a Repository Query with:
+* Query URL: ${serverUrl}/tracker/?bfunc=downloadcsv&group_id=${group_id}&atid=${atid}
+* Query Pattern: ({Id}[0-9]+?),[0-9]+,"({Type}.+?)",[0-9]+,[0-9]+,"[^"]+",[0-9]+,"({Owner}.+?)","[^"]+","[^"]+","[^"]+","({Description}.+?)","[^"]+"*
+Syncro your tasks.
+
 ==License==
 
 Attach the following notices to each source of the program at the begining:

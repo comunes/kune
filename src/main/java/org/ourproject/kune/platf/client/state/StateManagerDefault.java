@@ -108,6 +108,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
     }
 
     public void onHistoryChanged(final String historyToken) {
+        // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
         if (beforeStateChangeCollection.checkBeforeAction()) {
             final Listener0 tokenListener = siteTokens.get(historyToken);
             Log.debug("StateManager: history token changed (" + historyToken + ")");

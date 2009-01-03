@@ -11,13 +11,20 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** TODO <v> User preferences storing
+   We need a way to store (in db) User preferences (like emite chat configurations) in a extensible way.
+   Something similar to java.util.prefs.Preferences or Mozilla about:config
+   http://java.sun.com/developer/technicalArticles/releases/preferences/
+   "Because the Preferences API is back-end neutral, you need not care whether the data are stored in files, database tables, or a platform-specific storage such as the Windows Registry. In fact, you don't want to care, because the situation may differ across varying platforms, or even across implementations on the same platform."
+   More links:
+   http://stackoverflow.com/questions/194349/what-is-the-proper-way-to-store-apps-conf-data-in-java
 ** vjrj Styling braimstorming
 *** layouts
 *** screenshot
 *** html+css+variables
 *** logos
 *** caching
-** vjrj URLs public/workspace braimstorming
+** danigb,vjrj URLs public/workspace braimstorming
    Nowadays:
    - ws: #group.tool.container.content
    - public (prov): /public/group.tool.container.content.
@@ -35,6 +42,8 @@ TODO-list for kune -*- mode: org; -*-
    - how to point to some content comment, or to some revision (for example)
      examples: #a.b.c.d-c4 for a comment of #a.b.c.d-r2 for a rev.
      Solution: to extend StateToken
+   - Readable URLs
+     Posible solution: use #a.b.c.d-ln-some-readable-title /p/a.b.c.d-ln-some-readable-title and parse only a.b.c.d
    Some links:
    http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
    http://en.wikipedia.org/wiki/Fragment_identifier
@@ -323,6 +332,8 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    CLOSED: [2009-01-03 sáb 01:37]
 
 * LONG-TERM
+** Think about recommendations/suggestions
+   http://taste.sourceforge.net/
 * IDEAS
 ** <d> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
 

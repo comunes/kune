@@ -64,7 +64,7 @@ public class SiteOptionsPanel implements SiteOptionsView {
             @Override
             public void onClick(BaseItem item, EventObject e) {
                 super.onClick(item, e);
-                Window.open("http://code.google.com/p/kune/issues/list", "_blank", null);
+                Window.open("http://ourproject.org/tracker/?group_id=407", "_blank", null);
             }
         }, "images/kuneicon16.gif");
         optionsMenu.addItem(linkHelpInTrans);
