@@ -1,9 +1,7 @@
-#+TITLE: TODO-list for kune
+TODO-list for kune -*- mode: org; -*-
+
 #+STARTUP: hidestars
 #+SEQ_TODO: TODO danigb samer vjrj FEEDBACK VERIFY | FIXED CANCELED WONTFIX
-
-TODO-list for kune
---------------------------------------------------------------------------------
 
 * Intro
 ** Symbols
@@ -13,6 +11,34 @@ TODO-list for kune
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** vjrj Styling braimstorming
+*** layouts
+*** screenshot
+*** html+css+variables
+*** logos
+*** caching
+** vjrj URLs public/workspace braimstorming
+   Nowadays:
+   - ws: #group.tool.container.content
+   - public (prov): /public/group.tool.container.content.
+     We are looking to: http://group.kunedomain/p/tool.container.content/
+   The problem: When an agent (such as a Web browser) requests a resource from a Web server, the agent sends the URI to the server, but does not send the #fragment.
+   This is good for gwt (history support), but if we use the same url #a.b.c.d in public these links don't work.
+   Posible solutions:
+   1) use also of #a.b.c.d in public and do a gwt small module to make a redirect in the client to /public/
+      Problem: this kind of links are not followed by spiders.
+   2) replace #a.b.c.d with /p/a.b.c.d before show in public
+      Problem: parse/replace/cache every doc showed in public
+   Other problems:
+   - how to support #fragments different than #a.b.c.d in contents in ws
+     Solution: Maybe use <div id> and ensure visible that id
+   - how to point to some content comment, or to some revision (for example)
+     examples: #a.b.c.d-c4 for a comment of #a.b.c.d-r2 for a rev.
+     Solution: to extend StateToken
+   Some links:
+   http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
+   http://en.wikipedia.org/wiki/Fragment_identifier
+   http://www.w3.org/DesignIssues/Fragment.html
 ** vjrj <v> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
    http://agilewebdevelopment.com/plugins/request_routing
    http://wiki.rubyonrails.org/rails/pages/Request+Routing
