@@ -1,5 +1,19 @@
+=TROUBLESHOOTING=
+
+==Server debug==
+
 Server: debug with jetty in eclipse:
 http://docs.codehaus.org/display/JETTY/Debugging+with+the+Maven+Jetty+Plugin+inside+Eclipse
 
+==Client debug==
+
 Client code: you can debug with gwt hosted mode in eclipse (see DEV-GUIDE for hosted mode instructions).
 
+==Firebug and client log levels==
+
+To increase client logging add ?log_level=DEBUG# to the url and use firebug firefox extension to see the output.
+
+==Emite troubleshooting==
+
+See:
+http://code.google.com/p/emite/wiki/Troubleshooting

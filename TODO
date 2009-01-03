@@ -1,88 +1,41 @@
+#+TITLE: TODO-list for kune
+#+STARTUP: hidestars
+#+SEQ_TODO: TODO danigb samer vjrj FEEDBACK VERIFY | FIXED CANCELED WONTFIX
+
 TODO-list for kune
 --------------------------------------------------------------------------------
-<nick>  == reported by
--->nick == assigned to
 
-SHORT-TERM (URGENT):
---------------------------------------------------------------------------------
-<vjrj> IconHyperlink.java and IconLabel.java to gwt1.5
-<vjrj> Injection problem [2]
-<vjrj> BUG: Duplicate Keys in group/user creation different exception [1]
----> vjrj
-<vjrj> Interceptors also useful for translation of db fields
-<vjrj> login session. Follow incubation recomendations. See:
-http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/e8e14b16e57b266f
-Now there are problems if client was started before server, and with server restart
---> vjrj
---> vjrj
-<vjrj> explorer specific problems: fonts antialiasing problem? please if you have a ie, report problems (with screenshots if possible)
-<vjrj> Ext localization (see I18nUiTranslation):
-  http://extjs.com/deploy/ext/examples/locale/dutch-form.js
-  http://groups.google.com/group/gwt-ext/browse_thread/thread/ebec316effea2b80/bfbdadc7239b4e5d?lnk=gst&q=i18n#bfbdadc7239b4e5d
-  http://extjs.com/forum/showthread.php?t=20160&highlight=localization
-<vjrj> i18n changes:
-  - Remove pagination i18n's
-  - Chat rooms --> Chats
-  - Confirmation of chat close (see code)
-  -  Participates as ... --> Participates in
+* Intro
+** Symbols
+   <nick> or <n> == reported by / commented by
+   nick == assigned to
+** Notes
+   Use org-mode in emacs to easy manage this file
 
-MIND-TERM:
---------------------------------------------------------------------------------
-<vjrj> RTL (BiDi support). The problem will be extjs (gwt will support bidi in 1.5):
-http://extjs.com/forum/showthread.php?t=9659
-http://cssjanus.commoner.com/
-<vjrj> Study the possibility to include in SN something similar to "Member since <date>".
-<samer,vjrj> Add in license choose a free/non-free indicator [3]
-<vjrj> think about more secure login, SRP protocol thread, and:
-http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/97623347b448e16e
-http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56dd4e5ad1
-<vjrj> Build better our maven repo
-  http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-<vjrj> browser font size (different from default) issues (scroll in dialogs, buttons background, etc)
---> vjrj
-<danigb> click in new group, reload sn innecessary
---> vjrj
-<vjrj> for dev, study jetty hot deploy (if scanIntervalSeconds > 0 also reload with client changes ... ). It will be nice to send a signal or something like that. See:
-  http://jetty.mortbay.org/jetty5/faq/faq_s_200-General_t_HotDeploy.html
-See, I think is what we are looking for:
-  http://www.opensymphony.com/webwork/wikidocs/QuickStart.html
-Now using maven jetty from eclipse with debugger, hot reload the new class, but other things like hibernate (or cache/session) still reference the old copy of the class.
+* SHORT-TERM (URGENT)
+** vjrj <v> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
+   http://agilewebdevelopment.com/plugins/request_routing
+   http://wiki.rubyonrails.org/rails/pages/Request+Routing
+   http://svn.danwebb.net/external/rails/plugins/request_routing/trunk/README
+** vjrj <v> Duplicate Keys in group/user creation different exception  
+   2007-12-21 10:35:16,193 [btpool0-5] ERROR - Duplicate entry 'vjrj' for key 3
+   2007-12-21 10:35:16,195 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
+   2007-12-21 10:35:16,196 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
+   2007-12-21 10:35:16,197 [btpool0-5] DEBUG - ContentManagerDefault.createContent EXCEPTION => javax.persistence.Entity
+** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5 
 
-<vjrj> Use of maven-exec plugin to exec scripts (to css tidy, etcetera)
-  http://mojo.codehaus.org/exec-maven-plugin/introduction.html
-<vjrj> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
-  http://agilewebdevelopment.com/plugins/request_routing
-  http://wiki.rubyonrails.org/rails/pages/Request+Routing
-  http://svn.danwebb.net/external/rails/plugins/request_routing/trunk/README
-<vjrj> Strip html better in RTE, I18nTranslator, Chat
-  http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
-<vjrj> RTE right to left writing
-<vjrj> Restarting server don't affect client session
-<vjrj> See css utilities in http://code.google.com/p/cobogw/
-<vjrj> RTE css style: http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f64c0024d8676a66/d5f26a54145fc5d4?lnk=gst&q=richtextarea++css#d5f26a54145fc5d4
-
-LONG-TERM:
---------------------------------------------------------------------------------
-
-IDEAS:
---------------------------------------------------------------------------------
-<danigb> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
-
-DO-NOT-IMPLEMENT (stuff that was rejected):
---------------------------------------------------------------------------------
-
-BACKTRACES/DEBUG/VALGRIND/EXCEPTIONS:
---------------------------------------------------------------------------------
-
-[1] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-2007-12-21 10:35:16,193 [btpool0-5] ERROR - Duplicate entry 'vjrj' for key 3
-2007-12-21 10:35:16,195 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
-2007-12-21 10:35:16,196 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
-2007-12-21 10:35:16,197 [btpool0-5] DEBUG - ContentManagerDefault.createContent EXCEPTION => javax.persistence.Entity
-
-[2] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+* MIND-TERM
+** vjrj <v> Login: Follow incubation recomendations. See:
+   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/e8e14b16e57b266f
+** TODO <v> extjs i18n
+   http://extjs.com/deploy/ext/examples/locale/dutch-form.js
+   http://groups.google.com/group/gwt-ext/browse_thread/thread/ebec316effea2b80/bfbdadc7239b4e5d?lnk=gst&q=i18n#bfbdadc7239b4e5d
+   http://extjs.com/forum/showthread.php?t=20160&highlight=localization
+** TODO <v> Restarting server don't affect client session
+   Now there are problems if client was started before server, when server restart (session persist)
+** TODO <v> Interceptors also useful for translation of db fields
+** vjrj <d> click in new group, reload sn innecessary
+** TODO <v> Injection problem
 2008-01-03 23:17:57.575::WARN:  failed rack
 java.lang.RuntimeException: java.lang.RuntimeException: Please apply com.google.inject.servlet.GuiceFilter to any request which uses servlet scopes.
         at org.ourproject.kune.platf.server.KunePersistenceService.start(KunePersistenceService.java:41)
@@ -324,41 +277,26 @@ Caused by: java.lang.RuntimeException: Please apply com.google.inject.servlet.Gu
         at org.ourproject.kune.platf.server.KunePersistenceService.start(KunePersistenceService.java:39)
         ... 58 more
 2008-01-03 23:17:57.697::INFO:  Started SelectChannelConnector@0.0.0.0:8080
+** TODO <v> RTL (BiDi support). The problem will be extjs (gwt support bidi in 1.5):
+   http://extjs.com/forum/showthread.php?t=9659
+   http://cssjanus.commoner.com/
+** TODO <v> Study the possibility to include in SN something similar to "Member since <date>".
+** TODO <v> think about more secure login, SRP protocol thread, and:
+http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/97623347b448e16e
+http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56dd4e5ad1
+** TODO <v> Build better our maven repo
+  http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+** TODO <v> for dev, study jetty hot deploy (manual mode in >=7.0.0). 
+** TODO <v> Use of maven-exec plugin to exec scripts (to css tidy, etcetera)
+  http://mojo.codehaus.org/exec-maven-plugin/introduction.html
+** TODO <v> Strip html better in RTE, I18nTranslator, Chat
+   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
+** TODO <v> See css utilities in http://code.google.com/p/cobogw/
+** FIXED <s,v> Add in license choose a free/non-free indicator [3]
+** FIXED <v> browser font size (different from default) issues (scroll in dialogs, buttons background, etc)
+   CLOSED: [2009-01-03 sáb 01:37]
 
-[3] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* LONG-TERM
+* IDEAS
+** <d> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
 
-(sorry only in Spanish)ç
-Samer comment:
->     * No libre, no copyleft: explicación de lo que es libre, qué es
->       copyleft, básico. Citar proyectos libres conocidos.
->     * Libre, no copyleft: explicación de qué es copyleft, sin que deje
->       de ser libre. ¿Enlace a GNU?
->     * No libre, copyleft: explicación de las puñeteras no-comerciales
->       jejeje. Creo que en estos casos lo de citar que la famosa
->       wikipedia no acepta contenido así es un argumento de peso.
->     * Libre y Copyleft...  si no es GPL o compatible con GPL (o GFDL)
->       debería explicarse las ventajas de tener una licencia compatible
->       al menos con la GPLv3 y tal, ¿no créeis? ¿O pasando y con que
->       tengan una libre rara ya vale? Es que la no normalización conlleva
->       mucho caos a la hora de compartir cosas de distintos proyectos...
->       de hecho a los flipados de la licencia de ayer a lo mejor habría
->       que comentarles esto. ¿Opiniones?
-
-Propuesta:
-------
-Selecciona una licencia para compartir los contenidos de este grupo con el resto de gente:
-
-[X] Usar la licencia <href>copyleft recomendada
-[ ] Quiero elegir otra licencia (uso avanzado)
-
-Notas:
-* <href>¿Porqué necesito una licencia?
-* <href>¿Qué significa copyleft?
-* Nosotros recomendamos licencias copyleft, sobre todo para trabajos prácticos.
-
-------
-
-esta última sacaría el widget actual con alguna nota adicional, como
-<href>Porque no usar una licencia no comercial.
-
-[?] - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

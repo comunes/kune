@@ -1,108 +1,124 @@
-INSTALL
---------------------------------------------------------------------------------
+=INSTALL=
 
+==Production instructions==
 
-For development:
+FIXME
 
-* MYSQL configuration:
+==Development instructions==
 
-Make two databases in your mysql:
+===MYSQL configuration===
 
-CREATE DATABASE kune_dev;
-GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'db4kune';
-FLUSH PRIVILEGES;
+====Before db creation====	
 
-CREATE DATABASE kune_test;
-GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
-FLUSH PRIVILEGES;
+You have to configure mysql to support UTF8 by editing your c:\Windows\my.ini or /etc/mysql/my.cnf (on Unix) file and adding something like:
 
-CREATE DATABASE kune_openfire;
-GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
-FLUSH PRIVILEGES;
-
-You have to configure mysql to support UTF8 by editing your c:\Windows\my.ini or /etc/mysql/my.cnf (on Unix) file:
 [mysqld]
 default-character-set=utf8
 default-collation=utf8_general_ci
 
-(you have to restart the mysql database if you configure the settings for all databases)
+After this modification you have to restart the mysql database.
 
-Or do it per table:
+Optionalilly, you can also configure this per table (do it after the db creation) :
 
 ALTER DATABASE kune_dev CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT COLLATE utf8_general_ci;
 ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT COLLATE utf8_general_ci;
 
+====Db creation====
 
-* Source code
-- Install java-jdk (>= 1.5), maven2, mysql (>= 5.0) and for example eclipse
+Make two databases in your mysql:
+
+CREATE DATABASE kune_dev;
+GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'PUT_HERE_A_DB_PASSWD';
+FLUSH PRIVILEGES;
+
+CREATE DATABASE kune_test;
+GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'PUT_HERE_A_DB_PASSWD';
+FLUSH PRIVILEGES;
+
+CREATE DATABASE kune_openfire;
+GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'PUT_HERE_A_DB_PASSWD';
+FLUSH PRIVILEGES;
+
+===Source code===
+
+- Install java-jdk (>=5), maven2, mysql (> 5.0) and for example eclipse
 - Install gwt 1.5.3 and follow Appendix A for maven+gwt configuration
 - Compile with maven:
-  # (in the trunk directory)
-  mvn compile -Dliquibase.should.run=false
-  mvn gwt:compile
+ # (in the trunk directory)
+ mvn compile -Dliquibase.should.run=false
+ mvn gwt:compile
 
 - Copy the target to src directory (only for test):
-  ./script/deploy_gwt.sh
+ ./script/deploy_gwt.sh
 
-  (if you're using windows as dev plaftorm... you will have to write your own script ;). the idea is to
-  copy everything from target/kune-0.0.VERSIONHERE/org.ourproject.kune.app.Kune to src/main/webapp/gwt/org.ourproject.kune.app.Kune)
+====Aditional info for W$ users====
 
+If you're using windows as dev plaftorm... you will have to write your own script ;). the idea is to copy everything from target/kune-0.0.VERSIONHERE/org.ourproject.kune.app.Kune to src/main/webapp/gwt/org.ourproject.kune.app.Kune)
 
-FIXME:
+FIXME
 Caution! windows users: you should have a symbolic link from <trunk>/src/main/rails/publicspace to <trunk>/src/main/webapp/WEB-INF/publicspace
 
+===Configure upload directory===
 
+ sudo mkdir -p /var/lib/kune/uploads/
+ sudo chown yourUser:yourUser /var/lib/kune/uploads
 
-- Configure upload directory:
+You can use other location (see kune.properties).
 
-  sudo mkdir -p /var/lib/kune/uploads/
-  sudo chown yourUser:yourUser /var/lib/kune/uploads
+Configurate hibernate-search (GNU/Linux instructions, look persistence.xml if you want to change indexes destination):
+ # yourUser is the user you are using to develop/run the application
+ sudo mkdir -p /var/lib/kune/lucene/kune_dev/indexes
+ sudo mkdir -p /var/lib/kune/lucene/kune_test/indexes
+ sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_dev/indexes
+ sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_test/indexes
 
-you can use other location (see kune.properties)
+====Aditional info for W$ users====
 
-- Configurate hibernate-search (GNU/Linux instructions, look persistence.xml if you want to change indexes destination):
-  # yourUser is the user you are using to develop/run the application
-  sudo mkdir -p /var/lib/kune/lucene/kune_dev/indexes
-  sudo mkdir -p /var/lib/kune/lucene/kune_test/indexes
-  sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_dev/indexes
-  sudo chown yourUser:yourUser /var/lib/kune/lucene/kune_test/indexes
+Not verified:  In case you are using windows as dev platform you only have to create a couple of folders anywhere you like and then specify them in persistence.xml, as follows:
+ <property name="hibernate.search.default.indexBase" value="C:\kune\kune-index"/>
+do the same with every persistence unit defined inside.
 
-(not verified:
- In case you are using windows as dev platform you only have to create a couple of folders anywhere you like and then specify them in persistence.xml, as follows:
-   <property name="hibernate.search.default.indexBase" value="C:\kune\kune-index"/>
- do the same with every persistence unit defined inside.
-)
+=== Run openfire jabber server===
 
-- Install and run a openfire jabber server (see Appendix B for proper configuration of openfire) or ejabberd.
+Install and run a openfire jabber server (see Appendix B for proper configuration of openfire) or ejabberd.
 
-- Install jmagick-jni. In debian: apt-get install libjmagick6-jni (version 6.2.6-0) also you need or:
-  sudo ln -s /usr/lib/jni/libJMagick.so /usr/lib/libJMagick.so
+=== Install jmagick===
+
+Install jmagick-jni. In debian: apt-get install libjmagick6-jni (version 6.2.6-0) also you need or:
+ sudo ln -s /usr/lib/jni/libJMagick.so /usr/lib/libJMagick.so
 or
-  set LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jni in your test and in your webserver.
+ set LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jni in your test and in your webserver.
 
-(not verified:
-in Windows you need to do something similar (copy the jmagick .dll of the same version in the Windows directory)
-)
+====Aditional info for W$ users====
 
-- Run jetty: mvn jetty:run -Dliquibase.should.run=false
-- Once started (and initialized the db), you should stop
-  (next restart of jetty the db migrator will run and insert the initial data)
+Not verified: in Windows you need to do something similar (copy the jmagick .dll of the same version in the Windows directory)
 
-  you can start the server using the script:
-  ./script/server
+===Run jetty server===
 
-  or directly (windows):
-  mvn jetty:run -Dorg.mortbay.util.FileResource.checkAliases=False
+Run jetty:
 
-    (TODO: put the aliases stuff into a jetty config file)
+ mvn jetty:run -Dliquibase.should.run=false
 
+Once started (and initialized the db), you should stop (Ctrl-C). In the next start the db migrator will run and insert the initial data.
 
-- And connect to http://yourIP:8080/kune
+After that, as a norma, you can start the server using the script:
+ ./script/server.sh
 
-Appendix A: Configuration of maven
---------------------------------------------------------------------------------
+or directly (w$):
+
+ mvn jetty:run -Dorg.mortbay.util.FileResource.checkAliases=False
+
+TODO: put the aliases stuff into a jetty config file
+
+===Connecting to the server===
+
+Open your browser and connect to http://yourIP:8080/kune
+
+===Appendix A: Configuration of maven===
+
 Example of .m2/settings.xml:
 
+<pre>
 <?xml version="1.0" encoding="UTF-8"?>
  <settings>
    <profiles>
@@ -129,42 +145,53 @@ Example of .m2/settings.xml:
      <activeProfile>gwt-1.5.3</activeProfile>
    </activeProfiles>
 </settings>
+</pre>
 
-Appendix B: Configuration of Openfire xmpp server
---------------------------------------------------------------------------------
-- Install openfire in your system.
+===Appendix B: Configuration of Openfire xmpp server===
 
-  Currently only openfire xmpp server is supported (due database dependencies). Ejabberd support in progress.
-  Works in most of the openfire server versions after 3.5.1.
-  See emite (our xmpp software) Server Compatibility: http://code.google.com/p/emite/wiki/ServerCompatibility
+Install openfire in your system.
 
-  Connect to openfire administration: http://localhost:9090/
-  If you dont want to change the settings and use kune only for developing, use "localhost" as domain name. (Change kune.chat.domain in <trunk>/src/main/resources/kune.properties if you want to use other values).
-  Select "Standard Database Connection"
-- Select "MySQL" drivers. And configure the mysql connection. This is an example:
+Currently only openfire xmpp server is supported (due database dependencies). Ejabberd support in progress.
+
+Works in most of the openfire server versions after 3.5.1.
+See emite (our xmpp software) Server Compatibility: http://code.google.com/p/emite/wiki/ServerCompatibility
+
+Connect to openfire administration: http://localhost:9090/
+
+If you dont want to change the settings and use kune only for developing, use "localhost" as domain name. (Change kune.chat.domain in <trunk>/src/main/resources/kune.properties if you want to use other values).
+
+Select "Standard Database Connection"
+
+Select "MySQL" drivers. And configure the mysql connection. This is an example:
     Database Driver Presets:        MySQL
     JDBC Driver Class:              com.myrootsql.jdbc.Driver
     Database URL:                   jdbc:mysql://localhost:3306/kune_openfire
     Username:                       kune
-    Password:                       db4kune
-- Select "Default" in Profile Settings
-- Create the Administration Account. Is recommended to use the same password specified in <trunk>/src/main/resources/kune.properties
-- Configure the 'Group chat service' (in Group chat tab) with "rooms" additionally or instead of "conference" (or change kune.chat.roomHost in <trunk>/src/main/resources/kune.properties)
-- Change in 'System Properties':
+    Password:                       PUT_HERE_THE_SAME_DB_PASSWD
+
+Select "Default" in Profile Settings
+
+Create the Administration Account. Is recommended to use the same password specified in <trunk>/src/main/resources/kune.properties
+
+Configure the 'Group chat service' (in Group chat tab) with "rooms" additionally or instead of "conference" (or change kune.chat.roomHost in <trunk>/src/main/resources/kune.properties)
+
+Change in 'System Properties':
   provider.auth.className to org.jivesoftware.openfire.auth.JDBCAuthProvider
   provider.user.className to org.jivesoftware.openfire.user.JDBCUserProvider
-- Enable "HTTP Bind Settings" and check the port is not used by other service in your machine (we use 5280 as default, if not change the <trunk>/src/main/webapp/WEB-INF/web.xml accordly)
 
-- Edit the openfire.xml
-  In debian (with a .deb installation) you can to edit the configuration in /etc/openfire...
-  In Mac: /usr/local/openfire/conf
+Enable "HTTP Bind Settings" and check the port is not used by other service in your machine (we use 5280 as default, if not change the <trunk>/src/main/webapp/WEB-INF/web.xml accordly)
+
+Edit the openfire.xml
+* In debian (with a .deb installation) you can to edit the configuration in /etc/openfire...
+* In Mac: /usr/local/openfire/conf
 Add this lines to conf/openfire.xml and check that the user/passwd of the db is the same here and in the persistence.xml:
 
+<pre>
 <jive>
   ...
   <jdbcProvider>
     <driver>com.mysql.jdbc.Driver</driver>
-    <connectionString>jdbc:mysql://localhost/kune_dev?user=kune&amp;password=db4kune&amp;useUnicode=true&amp;characterEncoding=utf-8</connectionString>
+    <connectionString>jdbc:mysql://localhost/kune_dev?user=kune&amp;password=PUT_HERE_THE_SAME_DB_PASSWD&amp;useUnicode=true&amp;characterEncoding=utf-8</connectionString>
   </jdbcProvider>
   <provider>
     <auth>
@@ -189,8 +216,11 @@ Add this lines to conf/openfire.xml and check that the user/passwd of the db is 
   </jdbcUserProvider>
   ...
 </jive>
+</pre>
 
 You'll most likely want to change which usernames are authorized to login to the admin console.
+
+<pre>
 <jive>
 ...
 <admin>
@@ -198,13 +228,16 @@ You'll most likely want to change which usernames are authorized to login to the
 </admin>
 ...
 </jive>
+</pre>
 
-- Restart openfire
+Restart openfire.
 
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
 
-Appendix C: jar generation (kune-core is the base for plugin development)
---------------------------------------------------------------------------------
+===Appendix C: jar generation===
 
-mvn package -Dmaven.test.skip=true -o
+Note: kune-core is the base for modules extension development
+
+ mvn package -Dmaven.test.skiprue -o
+

@@ -1,13 +1,13 @@
-DEVELOPMENT GUIDE
---------------------------------------------------------------------------------
+=DEVELOPMENT GUIDE=
 
-Development Environment
---------------------------------------------------------------------------------
+==Development Environment==
 
 Install kune (see INSTALL file).
 
 Running (in the trunk directory)
-  mvn eclipse:eclipse 
+
+ mvn eclipse:eclipse 
+
 generates .project and download necessary code jars. Then you can import the project in eclipse (File > Import > Existing Projects into Workspace). 
 
 Also you have to set the variable M2_REPO (Eclipse Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/ouruser/.m2/repository).
@@ -15,21 +15,24 @@ Also you have to set the variable M2_REPO (Eclipse Preferences > Java > Build Pa
 GWT Hosted Mode:
 
 We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /kune/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
- - gwt-dev-[linux|mac|windows].jar
- - java - /org.ourproject.kune/src/main
- - org.ourproject.kune (default classpath)
+* gwt-dev-[linux|mac|windows].jar (Add External Jar and select it from your gwt installation directory)
+* java - /kune/src/main
+* kune (default classpath)
+
+If you have memory problems running the hosted mode, increase it in VM arguments:
+  -Xmx512M
 
 before run hosted mode compile once with:
-  mvn gwt:compile
+ mvn gwt:compile
 and deploy with:
-  script/deploy_gwt.sh 
-and then we run jetty (with "mvn jetty:run" also you can run server in debug mode, see TROUBLESHOOT).
+ script/deploy_gwt.sh 
+and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT).
 
-Code
---------------------------------------------------------------------------------
+==Code preferences==
+
 We use some eclipse code preferences for kune project:
-  dev-utils/kune.cleanup.eclipse.preferences.xml
-  dev-utils/kune.formatter.eclipse.preferences.xml
+ dev-utils/kune.cleanup.eclipse.preferences.xml
+ dev-utils/kune.formatter.eclipse.preferences.xml
 please use it if you want to contribute.
 
 We will (try) to follow:
@@ -38,10 +41,10 @@ http://code.google.com/webtoolkit/makinggwtbetter.html#codestyle
 and the code conventions for the JavaTM Programming Language:
 http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html
 
-License
---------------------------------------------------------------------------------
-Attach the following notices to each source of the program at the begining:
+==License==
 
+Attach the following notices to each source of the program at the begining:
+<pre>
     (c) 2007-2008 The kune development team (see CREDITS for details)
 
     This program is free software: you can redistribute it and/or modify
@@ -56,9 +59,11 @@ Attach the following notices to each source of the program at the begining:
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+</pre>
 
 In Java, something like this (also you can use your name):
 
+<pre>
 /*
  *
  * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
@@ -78,3 +83,4 @@ In Java, something like this (also you can use your name):
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+</pre> 

@@ -3,18 +3,3 @@ Known bugs in Kune
 
 For reports please use:
   http://code.google.com/p/kune/issues/list
-
-- Text areas oversize in chat dialog (gwt-ext related).
-- Return event in chat input area doesn't works (gwt-ext related).
-- Pagination in translation and search dialog doesn't works (gwt-ext related).
-- Search combobox in search dialog problems (gwt-ext related).
-- Publish date combobox issue (gwt-ext related).
-- Confirmation when closing a room has zindex/modal problems (gwt-ext related).
-- "Enter room" active when you are not logged.
-- Rooms in UI can be renamed.
-- Oversized conversation area in chat room (gwt-ext related).
-- Oversized user registration tab (gwt-ext related).
-- OK button in new users welcome wrong identation (gwt-ext related).
-- User logout in rooms problem (gwt-jsjac or openfire related).
-- Problem entering rooms with an existing alias (gwt-jsjac related).
-- Rename of a doc title while editing, reload context.
