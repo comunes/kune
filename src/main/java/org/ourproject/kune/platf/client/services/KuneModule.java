@@ -19,11 +19,8 @@
  */package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
-import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbarPresenter;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionCntCtxToolbarPanel;
@@ -91,6 +88,7 @@ import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInse
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocal;
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocalPresenter;
+import org.ourproject.kune.workspace.client.hello.HelloWorldModule.HelloWorld;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
@@ -462,34 +460,6 @@ public class KuneModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<ContextActionRegistry>(ContextActionRegistry.class) {
-            @Override
-            public ContextActionRegistry create() {
-                return new ContextActionRegistry();
-            }
-        });
-
-        register(Singleton.class, new Factory<ContentActionRegistry>(ContentActionRegistry.class) {
-            @Override
-            public ContentActionRegistry create() {
-                return new ContentActionRegistry();
-            }
-        });
-
-        register(Singleton.class, new Factory<GroupActionRegistry>(GroupActionRegistry.class) {
-            @Override
-            public GroupActionRegistry create() {
-                return new GroupActionRegistry();
-            }
-        });
-
-        register(Singleton.class, new Factory<UserActionRegistry>(UserActionRegistry.class) {
-            @Override
-            public UserActionRegistry create() {
-                return new UserActionRegistry();
-            }
-        });
-
         register(NoDecoration.class, new Factory<ActionContentToolbar>(ActionContentToolbar.class) {
             @Override
             public ActionContentToolbar create() {
@@ -600,5 +570,6 @@ public class KuneModule extends AbstractModule {
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();
         $(Application.class).start();
+        $(HelloWorld.class);
     }
 }
