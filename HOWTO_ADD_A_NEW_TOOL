@@ -1,6 +1,6 @@
 Here we try to describe a easy way to add a new Tool of type "Foldeable", that is, a tool with a folder/files structure. For other kind of tools (like, for instance a rich Web Calendar tool), better start from scratch creating the NewTool{ClientTool|ClientActions|ServerTool} classes and implementing the specific functionality.
 
-The stpes (substitute 'wiki' and 'Wiki' for the new tool name):
+The steps (substitute 'wiki' and 'Wiki' for the new tool name):
 
 cd src/main/java/org/ourproject/kune/
 rsync -r -C docs/ wiki

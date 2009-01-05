@@ -239,5 +239,5 @@ http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integ
 
 Note: kune-core is the base for modules extension development
 
- mvn package -Dmaven.test.skiprue -o
+ mvn package -Dmaven.test.skip=true -o
 

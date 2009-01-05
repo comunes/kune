@@ -88,7 +88,6 @@ import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInse
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocal;
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocalPresenter;
-import org.ourproject.kune.workspace.client.hello.HelloWorldModule.HelloWorld;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
@@ -570,6 +569,6 @@ public class KuneModule extends AbstractModule {
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();
         $(Application.class).start();
-        $(HelloWorld.class);
+        // $(HelloWorld.class);
     }
 }

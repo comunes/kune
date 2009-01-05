@@ -44,6 +44,7 @@ TODO-list for kune -*- mode: org; -*-
      Solution: to extend StateToken
    - Readable URLs
      Posible solution: use #a.b.c.d-ln-some-readable-title /p/a.b.c.d-ln-some-readable-title and parse only a.b.c.d
+     This can be abused if we don't check and store the readable title: #a.b.c.d-some-nasty-text
    Some links:
    http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
    http://en.wikipedia.org/wiki/Fragment_identifier
@@ -62,6 +63,17 @@ TODO-list for kune -*- mode: org; -*-
 * MIND-TERM
 ** vjrj <v> Login: Follow incubation recomendations. See:
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/e8e14b16e57b266f
+** vjrj <v> kune debian package:
+   Currently we are testing this snapshot:
+   http://mojo.codehaus.org/deb-maven-plugin/
+   with: mvn package -Dmaven.test.skip=true
+   generates a deb with big (and not very accute) dependencies:
+   dpkg -X trunk/org.ourproject-kune-0.0.5-0.deb
+   dpkg -I trunk/org.ourproject-kune-0.0.5-0.deb
+   Other possibility:
+   http://vafer.org/blog/20070918215154
+   Related info:
+   http://java.debian.net/building.html
 ** TODO <d> Inform to translators when original content changes
 ** TODO <v> extjs i18n
    http://extjs.com/deploy/ext/examples/locale/dutch-form.js

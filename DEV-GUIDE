@@ -52,6 +52,18 @@ Add a Repository Query with:
 * Query Pattern: ({Id}[0-9]+?),[0-9]+,"({Type}.+?)",[0-9]+,[0-9]+,"[^"]+",[0-9]+,"({Owner}.+?)","[^"]+","[^"]+","[^"]+","({Description}.+?)","[^"]+"*
 Syncro your tasks.
 
+==Code samples==
+
+See HelloWorldModule.java to a small sample of how to extend the gwt UI. 
+
+Check also trunk/HOWTO_ADD_A_NEW_TOOL to instructions of how to add a new tool in kune.
+
+==Changelog==
+
+Periodically update the Changelog using svn2cl:
+
+ svn2cl -i --authors=dev-utils/authors.xml -o ChangeLog
+
 ==License==
 
 Attach the following notices to each source of the program at the begining:

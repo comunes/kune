@@ -305,8 +305,29 @@
       <id>gwt-maven</id>
       <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
     </pluginRepository>
+    <pluginRepository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>  <!-- Workaround for MNG-2974, see note below -->
+      </releases>
+    </pluginRepository>
   </pluginRepositories>
+
   <repositories>
+    <repository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
     <repository>
       <id>repository.jboss.org</id>
       <name>JBoss Maven Repository</name>
@@ -457,7 +478,25 @@
           <scanIntervalSeconds>0</scanIntervalSeconds>
         </configuration>
       </plugin>
-
+     <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>deb-maven-plugin</artifactId>
+	<version>1.0-SNAPSHOT</version>
+        <configuration>
+          <description>kune free/open/libre collaboration platform</description>
+              <maintainer>Kune Development Team &lt;kune-devel@lists.ourproject.org&gt;</maintainer>
+              <section>web</section>
+              <priority>optional</priority>     
+              <architecture>all</architecture>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>deb</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-plugin</artifactId>
