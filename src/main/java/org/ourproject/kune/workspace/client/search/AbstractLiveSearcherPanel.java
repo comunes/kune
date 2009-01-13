@@ -3,7 +3,7 @@ package org.ourproject.kune.workspace.client.search;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.gwtext.client.core.Connection;

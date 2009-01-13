@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nTranslatorPresenter implements I18nTranslator {

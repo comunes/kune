@@ -34,8 +34,8 @@ import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public class TextEditorPresenter implements TextEditor {
     public static final int AUTOSAVE_AFTER_FAILS_IN_MILLISECONS = 20000;

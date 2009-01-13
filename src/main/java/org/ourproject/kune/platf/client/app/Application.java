@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.app;
 
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener0;
 
 public interface Application {
 

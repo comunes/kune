@@ -131,11 +131,11 @@ import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 
+import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
-import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;

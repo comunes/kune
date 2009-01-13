@@ -6,8 +6,8 @@ import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardView;
 
-import com.calclab.suco.client.listener.Event0;
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Event0;
+import com.calclab.suco.client.events.Listener0;
 import com.gwtext.client.widgets.form.Checkbox;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.Label;

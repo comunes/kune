@@ -12,8 +12,8 @@ import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrd
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public class LicenseWizardPresenter implements LicenseWizard {
 

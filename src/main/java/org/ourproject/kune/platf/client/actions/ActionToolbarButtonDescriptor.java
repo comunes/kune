@@ -20,7 +20,7 @@
 
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 
 public class ActionToolbarButtonDescriptor<T> extends ActionToolbarDescriptor<T> {
 

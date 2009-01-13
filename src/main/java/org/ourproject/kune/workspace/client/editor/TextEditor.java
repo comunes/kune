@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.editor;
 
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public interface TextEditor {
 

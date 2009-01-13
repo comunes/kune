@@ -13,8 +13,8 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
+import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {

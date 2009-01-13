@@ -22,8 +22,8 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.Session;
 
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public class SiteSignInLinkPresenter implements SiteSignInLink {
 

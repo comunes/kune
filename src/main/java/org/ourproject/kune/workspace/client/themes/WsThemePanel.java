@@ -21,7 +21,7 @@
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Listener2;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.menu.BaseItem;

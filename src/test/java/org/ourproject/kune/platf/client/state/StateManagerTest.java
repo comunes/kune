@@ -14,9 +14,9 @@ import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
 
-import com.calclab.suco.testing.listener.MockListener;
-import com.calclab.suco.testing.listener.MockListener0;
-import com.calclab.suco.testing.listener.MockListener2;
+import com.calclab.suco.testing.events.MockedListener;
+import com.calclab.suco.testing.events.MockedListener0;
+import com.calclab.suco.testing.events.MockedListener2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class StateManagerTest {
@@ -26,9 +26,9 @@ public class StateManagerTest {
     private HistoryWrapper history;
     private ContentProvider contentProvider;
     private Session session;
-    private MockListener2<String, String> toolChangeListener;
-    private MockListener2<String, String> groupChangeListener;
-    private MockListener<StateAbstractDTO> stateChangeListener;
+    private MockedListener2<String, String> toolChangeListener;
+    private MockedListener2<String, String> groupChangeListener;
+    private MockedListener<StateAbstractDTO> stateChangeListener;
     private StateAbstractDTO state;
     private BeforeActionListener beforeChangeListener1;
     private BeforeActionListener beforeChangeListener2;
@@ -41,9 +41,9 @@ public class StateManagerTest {
         stateManager = new StateManagerDefault(contentProvider, session, history);
         Mockito.when(session.getUserHash()).thenReturn(HASH);
         state = Mockito.mock(StateAbstractDTO.class);
-        stateChangeListener = new MockListener<StateAbstractDTO>();
-        groupChangeListener = new MockListener2<String, String>();
-        toolChangeListener = new MockListener2<String, String>();
+        stateChangeListener = new MockedListener<StateAbstractDTO>();
+        groupChangeListener = new MockedListener2<String, String>();
+        toolChangeListener = new MockedListener2<String, String>();
         beforeChangeListener1 = Mockito.mock(BeforeActionListener.class);
         beforeChangeListener2 = Mockito.mock(BeforeActionListener.class);
         stateManager.onStateChanged(stateChangeListener);
@@ -170,7 +170,7 @@ public class StateManagerTest {
     @SuppressWarnings("unchecked")
     @Test
     public void siteTokenFirstLoadDefContentAndFireListener() {
-        final MockListener0 listener = new MockListener0();
+        final MockedListener0 listener = new MockedListener0();
         final String token = SiteToken.signin.toString();
         stateManager.addSiteToken(token, listener);
         stateManager.onHistoryChanged(token);
@@ -181,7 +181,7 @@ public class StateManagerTest {
 
     @Test
     public void siteTokenTest() {
-        MockListener0 siteTokenListener = new MockListener0();
+        MockedListener0 siteTokenListener = new MockedListener0();
         stateManager.addSiteToken("signin", siteTokenListener);
         stateManager.onHistoryChanged("signIn");
         siteTokenListener.isCalledOnce();

@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.actions;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.workspace.client.socialnet.RadioMustBeChecked;
 
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 
 public class ActionToolbarMenuRadioDescriptor<T> extends ActionToolbarMenuDescriptor<T> {
     private final String group;

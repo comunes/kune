@@ -18,7 +18,7 @@
  *
  */package org.ourproject.kune.platf.client.ui;
 
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 
 public class MenuItem<T> {
 

@@ -30,9 +30,9 @@ import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;

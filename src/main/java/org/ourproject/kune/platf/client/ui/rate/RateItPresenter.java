@@ -30,8 +30,8 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
 
+import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
 
 public class RateItPresenter implements RateIt {
 

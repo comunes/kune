@@ -34,7 +34,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.emiteuimodule.client.users.UserGridPanel;
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.Label;

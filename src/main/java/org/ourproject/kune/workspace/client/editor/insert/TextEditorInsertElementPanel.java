@@ -6,7 +6,7 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.options.AbstractOptionsPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener0;
 
 public class TextEditorInsertElementPanel extends AbstractOptionsPanel implements TextEditorInsertElementView {
     public static final String TEXT_EDT_INSERT_DIALOG = "k-ted-iep-dialog";

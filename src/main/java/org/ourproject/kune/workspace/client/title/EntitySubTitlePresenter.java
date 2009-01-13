@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 import com.google.gwt.i18n.client.DateTimeFormat;
 
 public class EntitySubTitlePresenter implements EntitySubTitle {

@@ -9,7 +9,7 @@ import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElemen
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 
 public class TextEditorInsertLinkLocalPanel extends AbstractLiveSearcherPanel implements TextEditorInsertLinkLocalView {
 

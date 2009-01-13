@@ -55,9 +55,9 @@ import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener2;
 
 public class GroupMembersSummaryPresenter extends SocialNetworkPresenter implements GroupMembersSummary {
 

@@ -39,8 +39,8 @@
  *
  */package org.ourproject.kune.platf.client.ui.gridmenu;
 
-import com.calclab.suco.client.listener.Event;
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Event;
+import com.calclab.suco.client.events.Listener;
 
 public class GridDropConfiguration {
 

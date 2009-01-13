@@ -27,8 +27,8 @@ import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.listener.Event0;
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Event0;
+import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Timer;

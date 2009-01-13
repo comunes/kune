@@ -21,7 +21,7 @@
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 
 public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 

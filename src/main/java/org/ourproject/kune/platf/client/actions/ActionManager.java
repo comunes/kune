@@ -20,7 +20,7 @@
 
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener0;
 
 public class ActionManager {
 

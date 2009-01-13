@@ -8,7 +8,7 @@ import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener0;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;

@@ -1,6 +1,5 @@
 TODO-list for kune -*- mode: org; -*-
 
-#+STARTUP: hidestars
 #+SEQ_TODO: TODO danigb samer vjrj FEEDBACK VERIFY | FIXED CANCELED WONTFIX
 
 * Intro
@@ -64,6 +63,8 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> Login: Follow incubation recomendations. See:
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/e8e14b16e57b266f
 ** vjrj <v> kune debian package:
+   Study fat jar + deb package:
+   http://anydoby.com/fatjar/
    Currently we are testing this snapshot:
    http://mojo.codehaus.org/deb-maven-plugin/
    with: mvn package -Dmaven.test.skip=true
@@ -74,6 +75,9 @@ TODO-list for kune -*- mode: org; -*-
    http://vafer.org/blog/20070918215154
    Related info:
    http://java.debian.net/building.html
+** TODO <v> study different embeded video solutions
+   - for ogg :: http://www.flumotion.net/cortado/
+   - for mp3+ogg :: flowplayer
 ** TODO <d> Inform to translators when original content changes
 ** TODO <v> extjs i18n
    http://extjs.com/deploy/ext/examples/locale/dutch-form.js

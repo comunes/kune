@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
-import com.calclab.suco.client.listener.Event2;
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Event2;
+import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;

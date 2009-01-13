@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.listener.Event;
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Event;
+import com.calclab.suco.client.events.Listener;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.SortDir;

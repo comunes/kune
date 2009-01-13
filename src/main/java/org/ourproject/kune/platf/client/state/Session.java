@@ -54,8 +54,8 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public interface Session {
 

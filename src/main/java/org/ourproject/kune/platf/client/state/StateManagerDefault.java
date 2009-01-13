@@ -32,11 +32,11 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.listener.Event;
-import com.calclab.suco.client.listener.Event2;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Event;
+import com.calclab.suco.client.events.Event2;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
+import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.user.client.HistoryListener;
 
 public class StateManagerDefault implements StateManager, HistoryListener {

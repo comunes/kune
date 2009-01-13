@@ -10,7 +10,7 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 import org.ourproject.kune.workspace.client.site.Site;
 
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.gwtext.client.core.Ext;

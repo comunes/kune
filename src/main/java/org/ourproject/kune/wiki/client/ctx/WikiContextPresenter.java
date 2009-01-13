@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.wiki.client.ctx;
 
-import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.cxt.FoldableContextPresenter;

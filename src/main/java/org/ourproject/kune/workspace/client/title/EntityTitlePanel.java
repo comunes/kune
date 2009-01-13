@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.ui.IconLabelEditable;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.user.client.ui.Image;
 
 public class EntityTitlePanel implements EntityTitleView {

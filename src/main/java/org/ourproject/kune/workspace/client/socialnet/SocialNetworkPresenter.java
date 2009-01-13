@@ -43,8 +43,8 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 import org.ourproject.kune.workspace.client.site.Site;
 
+import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
 
 public class SocialNetworkPresenter {
 

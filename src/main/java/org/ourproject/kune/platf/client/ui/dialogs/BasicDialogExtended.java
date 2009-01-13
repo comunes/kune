@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.dialogs;
 
-import com.calclab.suco.client.listener.Listener0;
+import com.calclab.suco.client.events.Listener0;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.Position;

@@ -39,9 +39,9 @@ import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.socialnet.RadioMustBeChecked;
 
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public abstract class AbstractFoldableContentActions {

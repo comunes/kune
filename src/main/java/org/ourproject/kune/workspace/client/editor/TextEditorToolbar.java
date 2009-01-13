@@ -24,8 +24,8 @@ import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
 
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;

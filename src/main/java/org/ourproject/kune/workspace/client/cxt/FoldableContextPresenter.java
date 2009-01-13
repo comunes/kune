@@ -6,8 +6,8 @@ import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 
+import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
 
 public abstract class FoldableContextPresenter {
     private final Provider<ContextNavigator> contextNavigatorProvider;

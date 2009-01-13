@@ -28,9 +28,9 @@ import org.ourproject.kune.platf.client.ui.MenuItemCollection;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
 
 public class SiteUserMenuPresenter implements SiteUserMenu {
 

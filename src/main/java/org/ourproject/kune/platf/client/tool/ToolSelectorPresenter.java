@@ -26,8 +26,8 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener2;
 
 public class ToolSelectorPresenter implements ToolSelector {
 

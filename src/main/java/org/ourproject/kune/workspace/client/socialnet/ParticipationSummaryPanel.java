@@ -32,7 +32,7 @@ import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 

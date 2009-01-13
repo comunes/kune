@@ -15,8 +15,8 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 
+import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
 
 public abstract class FoldableContentPresenter extends AbstractContentPresenter implements FoldableContent {
 

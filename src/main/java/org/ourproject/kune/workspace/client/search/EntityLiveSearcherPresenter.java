@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.search;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 
-import com.calclab.suco.client.listener.Listener;
+import com.calclab.suco.client.events.Listener;
 
 public class EntityLiveSearcherPresenter implements EntityLiveSearcher {
 

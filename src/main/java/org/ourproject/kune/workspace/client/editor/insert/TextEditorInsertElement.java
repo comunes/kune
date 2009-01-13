@@ -2,7 +2,7 @@ package org.ourproject.kune.workspace.client.editor.insert;
 
 import org.ourproject.kune.workspace.client.options.AbstractOptions;
 
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Listener2;
 
 public interface TextEditorInsertElement extends AbstractOptions {
 

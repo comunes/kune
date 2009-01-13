@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Listener2;
 
 public class EntityHeaderPresenter implements EntityHeader {
     int GROUP_MEDIUM_NAME_LIMIT_SIZE = 90;

@@ -38,11 +38,11 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.events.Event;
+import com.calclab.suco.client.events.Event0;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Event;
-import com.calclab.suco.client.listener.Event0;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
 
 public class SessionDefault implements Session {
     private String userHash;

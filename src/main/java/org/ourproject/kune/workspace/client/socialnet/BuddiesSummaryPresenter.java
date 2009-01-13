@@ -49,8 +49,8 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
+import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
 
 public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements BuddiesSummary {
 

@@ -12,15 +12,15 @@ import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
-import com.calclab.suco.client.listener.Listener0;
-import com.calclab.suco.testing.listener.MockListener;
-import com.calclab.suco.testing.listener.MockListener0;
+import com.calclab.suco.client.events.Listener0;
+import com.calclab.suco.testing.events.MockedListener;
+import com.calclab.suco.testing.events.MockedListener0;
 
 public class TextEditorPresenterTest {
     private TextEditorPresenter presenter;
     private TextEditorView view;
-    private MockListener<String> saveListener;
-    private MockListener0 cancelListener;
+    private MockedListener<String> saveListener;
+    private MockedListener0 cancelListener;
     @SuppressWarnings("unchecked")
     private ActionToolbar toolbar;
     private StateManager stateManager;
@@ -38,8 +38,8 @@ public class TextEditorPresenterTest {
         presenter = new TextEditorPresenter(true, toolbar, i18n, stateManager, signOutLink, deferredCommandWrapper);
         view = Mockito.mock(TextEditorView.class);
         presenter.init(view);
-        saveListener = new MockListener<String>();
-        cancelListener = new MockListener0();
+        saveListener = new MockedListener<String>();
+        cancelListener = new MockedListener0();
     }
 
     @Test

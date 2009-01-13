@@ -24,9 +24,9 @@ import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
-import com.calclab.suco.client.listener.Listener2;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
+import com.calclab.suco.client.events.Listener2;
 
 public interface StateManager {
 

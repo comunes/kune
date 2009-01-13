@@ -29,8 +29,8 @@ import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
+import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener2;
 
 public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
 

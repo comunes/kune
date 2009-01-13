@@ -48,10 +48,10 @@ import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
+import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
-import com.calclab.suco.client.listener.Listener;
-import com.calclab.suco.client.listener.Listener0;
-import com.calclab.suco.client.listener.Listener2;
 
 public class ContextNavigatorPresenter implements ContextNavigator {
 
