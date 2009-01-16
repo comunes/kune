@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.chat.client;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.app.Application;
@@ -29,11 +30,11 @@ import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.emiteuimodule.client.UserChatOptions;
@@ -55,6 +56,7 @@ class ChatEngineDefault implements ChatEngine {
     private ToolbarButton traybarButton;
     private final Provider<EmiteUIDialog> emiteUIProvider;
     private final Provider<FileDownloadUtils> downloadUtils;
+    private Collection<RosterItem> roster;
 
     public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws, Application application,
             Session session, final Provider<EmiteUIDialog> emiteUIProvider,
@@ -97,7 +99,7 @@ class ChatEngineDefault implements ChatEngine {
     }
 
     public void addNewBuddie(String shortName) {
-        Site.important("In development (emite)");
+        emiteUIProvider.get().addBuddie(getLocalUserJid(shortName), shortName, "");
     }
 
     public void chat(XmppURI jid) {
@@ -106,6 +108,21 @@ class ChatEngineDefault implements ChatEngine {
 
     public ChatConnectionOptions getChatOptions() {
         return chatOptions;
+    }
+
+    public boolean isBuddie(String shortName) {
+        return isBuddie(getLocalUserJid(shortName));
+    }
+
+    public boolean isBuddie(XmppURI jid) {
+        if (roster != null) {
+            for (RosterItem item : roster) {
+                if (item.getJID().equalsNoResource(jid)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean isLoggedIn() {
@@ -138,6 +155,11 @@ class ChatEngineDefault implements ChatEngine {
         final String initialWindowTitle = Window.getTitle();
         chatOptions.userOptions = userChatOptions;
         if (emiteUIProvider.get().isDialogNotStarted()) {
+            emiteUIProvider.get().onRosterChanged(new Listener<Collection<RosterItem>>() {
+                public void onEvent(Collection<RosterItem> rosterChanged) {
+                    roster = rosterChanged;
+                }
+            });
             emiteUIProvider.get().start(userChatOptions, chatOptions.httpBase, chatOptions.domain,
                     chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
         } else {
@@ -208,6 +230,10 @@ class ChatEngineDefault implements ChatEngine {
         if (emiteUIProvider.get().getSession().isLoggedIn()) {
             emiteUIProvider.get().getSession().logout();
         }
+    }
+
+    private XmppURI getLocalUserJid(String shortName) {
+        return XmppURI.jid(shortName + "@" + chatOptions.domain);
     }
 
     private UserChatOptions getUserChatOptions(final String jid, final String passwd) {

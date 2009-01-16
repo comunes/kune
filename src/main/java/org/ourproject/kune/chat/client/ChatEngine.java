@@ -29,6 +29,10 @@ public interface ChatEngine {
 
     ChatConnectionOptions getChatOptions();
 
+    boolean isBuddie(String localUserName);
+
+    boolean isBuddie(XmppURI jid);
+
     boolean isLoggedIn();
 
     void joinRoom(String roomName, String userAlias);

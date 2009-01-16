@@ -192,8 +192,8 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
     private void registerActions() {
         final ActionToolbarButtonAndItemDescriptor<UserSimpleDTO> addAsBuddie = new ActionToolbarButtonAndItemDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Viewer, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
-                    public void onEvent(final UserSimpleDTO group) {
-                        chatEngineProvider.get().addNewBuddie(group.getShortName());
+                    public void onEvent(final UserSimpleDTO user) {
+                        chatEngineProvider.get().addNewBuddie(user.getShortName());
                     }
                 });
         addAsBuddie.setMustBeAuthenticated(true);
