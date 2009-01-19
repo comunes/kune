@@ -23,4 +23,21 @@ public class TextUtilsTest {
         assertTrue(email.matches(TextUtils.EMAIL_REGEXP));
     }
 
+    @Test
+    public void matchUrlWithHttp() {
+        String gnuUrl = "http://gnu.org";
+        assertTrue(gnuUrl.matches(TextUtils.URL_REGEXP));
+    }
+
+    @Test
+    public void matchUrlWithoutHttp() {
+        String gnuUrl = "gnu.org";
+        assertTrue(!gnuUrl.matches(TextUtils.URL_REGEXP));
+    }
+
+    @Test
+    public void notMatchWrongUrl() {
+        String someWrong = "some@email.com";
+        assertTrue(!someWrong.matches(TextUtils.URL_REGEXP));
+    }
 }

@@ -137,6 +137,7 @@ public abstract class AbstractOptionsPanel {
 
     private void createDialog() {
         dialog = new BasicDialog(dialogId, title, modal, true, width, height, minWidth, minHeight);
+        dialog.setCollapsible(false);
         messageErrorBar = new MessageToolbar(images, errorLabelId);
         dialog.setBottomToolbar(messageErrorBar.getToolbar());
         tabPanel = new TabPanel();

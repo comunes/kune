@@ -10,7 +10,4 @@ public class TextEditorInsertLinkEmailPresenter extends TextEditorInsertAbstract
         super(editorInsertElement);
     }
 
-    public void init(TextEditorInsertLinkEmailView view) {
-        super.init(view);
-    }
 }

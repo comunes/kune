@@ -1,5 +1,7 @@
 package org.ourproject.kune.workspace.client.editor.insert.linkemail;
 
-public interface TextEditorInsertLinkEmail {
+import org.ourproject.kune.workspace.client.editor.insert.abstractlink.TextEditorInsertAbstract;
+
+public interface TextEditorInsertLinkEmail extends TextEditorInsertAbstract {
 
 }

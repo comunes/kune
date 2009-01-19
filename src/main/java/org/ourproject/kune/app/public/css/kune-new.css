@@ -817,6 +817,10 @@
   vertical-align: bottom;
 }
 
+.k-link-icon {
+  background-image: url(img/link.gif) !important;
+}
+
 .k-options-icon {
   background-image: url(img/emblem-system.gif) !important;
 }

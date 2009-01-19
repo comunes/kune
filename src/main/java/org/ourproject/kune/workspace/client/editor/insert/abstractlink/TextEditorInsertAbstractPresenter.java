@@ -3,7 +3,7 @@ package org.ourproject.kune.workspace.client.editor.insert.abstractlink;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
 
-public class TextEditorInsertAbstractPresenter {
+public class TextEditorInsertAbstractPresenter implements TextEditorInsertAbstract {
 
     private TextEditorInsertAbstractView view;
     private final TextEditorInsertElement editorInsertElement;
@@ -23,6 +23,10 @@ public class TextEditorInsertAbstractPresenter {
 
     public void onInsert(String name, String link) {
         editorInsertElement.fireOnInsert(name, link);
+        reset();
+    }
+
+    public void reset() {
         view.reset();
     }
 }

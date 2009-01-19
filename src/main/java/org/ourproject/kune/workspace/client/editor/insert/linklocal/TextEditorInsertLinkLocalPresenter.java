@@ -10,7 +10,4 @@ public class TextEditorInsertLinkLocalPresenter extends TextEditorInsertAbstract
         super(editorInsertElement);
     }
 
-    public void init(TextEditorInsertLinkLocalView view) {
-        super.init(view);
-    }
 }

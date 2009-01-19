@@ -85,6 +85,7 @@ import org.ourproject.kune.workspace.client.editor.insert.linkemail.TextEditorIn
 import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInsertLinkExt;
 import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInsertLinkExtPanel;
 import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInsertLinkExtPresenter;
+import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInsertLinkExtView;
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocal;
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocalPresenter;
@@ -403,7 +404,7 @@ public class KuneModule extends AbstractModule {
                     public TextEditorInsertLinkExt create() {
                         final TextEditorInsertLinkExtPresenter presenter = new TextEditorInsertLinkExtPresenter(
                                 $(TextEditorInsertElement.class));
-                        final TextEditorInsertLinkExtPanel panel = new TextEditorInsertLinkExtPanel(presenter,
+                        final TextEditorInsertLinkExtView panel = new TextEditorInsertLinkExtPanel(presenter,
                                 $(I18nTranslationService.class));
                         presenter.init(panel);
                         return presenter;

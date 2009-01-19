@@ -18,7 +18,6 @@
  *
  */package org.ourproject.kune.platf.client.ui.dialogs;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.PaddedPanel;
@@ -93,7 +92,6 @@ public class DefaultForm {
     }
 
     public void reset() {
-        Log.info("Reset------------------");
         form.getForm().reset();
     }
 

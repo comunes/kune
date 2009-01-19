@@ -18,6 +18,8 @@
  *
  */package org.ourproject.kune.platf.client.app;
 
+import org.ourproject.kune.workspace.client.editor.insert.abstractlink.TextEditorInsertAbstract;
+
 import com.calclab.suco.client.ioc.Container;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.ioc.decorator.ProviderCollection;
@@ -37,7 +39,7 @@ public class TextEditorInsertElementGroup extends ProviderCollection {
 
     public void resetAll() {
         for (final Provider<?> p : getProviders()) {
-            // (TextEditorInsertAbstractView) p.get().get).clear();
+            ((TextEditorInsertAbstract) p.get()).reset();
         }
     }
 }
