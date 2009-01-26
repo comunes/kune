@@ -48,6 +48,7 @@ import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
@@ -77,7 +78,7 @@ public class WikiClientModule extends AbstractModule {
                         $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
                         $(EntityHeader.class), $$(TextEditor.class), $(KuneErrorHandler.class), $(WikiViewer.class),
-                        $$(ContextPropEditor.class));
+                        $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
             }
         });
 

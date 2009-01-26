@@ -59,7 +59,7 @@ public class EntityTitlePresenter implements EntityTitle {
                 }
             }
         });
-        createRenameListeners();
+        addRenameListeners();
     }
 
     public View getView() {
@@ -83,18 +83,18 @@ public class EntityTitlePresenter implements EntityTitle {
         renameAction.rename(token, oldName, newName);
     }
 
-    private void createRenameListeners() {
+    private void addRenameListeners() {
         Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
             public void onEvent(StateToken token, String newName) {
                 view.setContentTitle(newName);
             }
         };
-        renameAction.onSuccess(onSuccess);
         Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
             public void onEvent(StateToken token, String oldName) {
                 view.setContentTitle(oldName);
             }
         };
+        renameAction.onSuccess(onSuccess);
         renameAction.onFail(onFail);
     }
 

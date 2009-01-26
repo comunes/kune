@@ -36,7 +36,7 @@ public interface ContainerManager {
 
     boolean findIfExistsTitle(Container container, String title);
 
-    String renameFolder(Group group, Container container, String newName) throws DefaultException;
+    Container renameFolder(Group group, Container container, String newName) throws DefaultException;
 
     SearchResult<Container> search(String search);
 

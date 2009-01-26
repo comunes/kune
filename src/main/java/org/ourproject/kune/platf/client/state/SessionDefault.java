@@ -173,6 +173,10 @@ public class SessionDefault implements Session {
         return initData.getUserTools();
     }
 
+    public boolean inSameToken(StateToken token) {
+        return getCurrentStateToken().equals(token);
+    }
+
     public boolean isLogged() {
         return userHash != null;
     }

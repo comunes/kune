@@ -78,5 +78,4 @@ public class EntityTitlePanel implements EntityTitleView {
     public void setContentTitleVisible(final boolean visible) {
         titleLabel.setVisible(visible);
     }
-
 }

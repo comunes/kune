@@ -138,9 +138,8 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
                         presenter.gotoToken(getToken(node));
                     }
                 });
+                setNodeStatus(child, item.getContentStatus());
                 parent.appendChild(child);
-                ContentStatusDTO status = item.getContentStatus();
-                setNodeStatus(child, status);
             } else {
                 Log.error("Error building file tree, parent folder " + item.getParentId() + " not found");
             }
@@ -314,17 +313,18 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
     private void setNodeStatus(final TreeNode node, ContentStatusDTO status) {
         switch (status) {
-        // FIXME: while not finished
         case publishedOnline:
-            // node.setCls("k-textnormal");
+            node.setCls("k-ctn-status-normal");
             break;
         case inTheDustbin:
         case rejected:
-            // node.setCls("k-textlinethrough");
+            node.setCls("k-ctn-status-rejdel");
             break;
         case editingInProgress:
+            node.setCls("k-ctn-status-editing");
+            break;
         case submittedForEvaluation:
-            // node.setCls("k-textunderline");
+            node.setCls("k-ctn-status-submitted");
             break;
         }
     }

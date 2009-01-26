@@ -76,6 +76,8 @@ public interface Session {
 
     public int getImgThumbsize();
 
+    public boolean inSameToken(StateToken token);
+
     void check(AsyncCallbackSimple<?> callback);
 
     StateContainerDTO getContainerState();

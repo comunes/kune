@@ -697,18 +697,21 @@
 }
 */
 
-.k-textlinethrough {
+.x-tree-node .k-ctn-status-normal a span {
+}
+
+.x-tree-node .k-ctn-status-rejdel a span {
     text-decoration: line-through;
-    color: red;
+    color: gray;
 }
 
-.k-textnormal {
-    text-decoration: inherit;
+.x-tree-node .k-ctn-status-editing a span {
+    font-style: italic;
+    color: gray;
+}
+
+.x-tree-node .k-ctn-status-submitted a span {
     color: green;
-}
-
-.k-textunderline {
-    text-decoration: underline;
 }
 
 .k-info-links {

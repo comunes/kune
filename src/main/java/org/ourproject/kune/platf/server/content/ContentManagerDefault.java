@@ -156,7 +156,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.removeAuthor(author);
     }
 
-    public String renameContent(final User user, final Long contentId, final String newTitle) throws DefaultException {
+    public Content renameContent(final User user, final Long contentId, final String newTitle) throws DefaultException {
         String newTitleWithoutNL = FilenameUtils.chomp(newTitle);
         FilenameUtils.checkBasicFilename(newTitleWithoutNL);
         final Content content = finder.getContent(contentId);
@@ -164,7 +164,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             throw new NameInUseException();
         }
         content.getLastRevision().setTitle(newTitleWithoutNL);
-        return newTitle;
+        return content;
     }
 
     public Content save(final User editor, final Content content, final String body) {
@@ -209,7 +209,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.setPublishedOn(publishedOn);
     }
 
-    public void setStatus(final Long contentId, final ContentStatus status) {
+    public Content setStatus(final Long contentId, final ContentStatus status) {
         final Content content = finder.getContent(contentId);
         content.setStatus(status);
         switch (status) {
@@ -219,6 +219,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         default:
             break;
         }
+        return content;
     }
 
     public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {

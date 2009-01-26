@@ -309,10 +309,10 @@
       <id>Codehaus Snapshots</id>
       <url>http://snapshots.repository.codehaus.org/</url>
       <snapshots>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
       </snapshots>
       <releases>
-        <enabled>true</enabled>  <!-- Workaround for MNG-2974, see note below -->
+        <enabled>false</enabled>  <!-- Workaround for MNG-2974, see note below -->
       </releases>
     </pluginRepository>
   </pluginRepositories>
@@ -478,6 +478,7 @@
           <scanIntervalSeconds>0</scanIntervalSeconds>
         </configuration>
       </plugin>
+     <!--
      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>deb-maven-plugin</artifactId>
@@ -497,6 +498,7 @@
           </execution>
         </executions>
       </plugin>
+      -->
       <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-plugin</artifactId>

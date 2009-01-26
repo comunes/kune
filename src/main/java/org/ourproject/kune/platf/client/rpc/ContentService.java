@@ -63,9 +63,9 @@ public interface ContentService extends RemoteService {
 
     void removeAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
 
-    String renameContainer(String userHash, StateToken token, String newName) throws DefaultException;
+    StateAbstractDTO renameContainer(String userHash, StateToken token, String newName) throws DefaultException;
 
-    String renameContent(String userHash, StateToken token, String newName) throws DefaultException;
+    StateAbstractDTO renameContent(String userHash, StateToken token, String newName) throws DefaultException;
 
     void save(String user, StateToken token, String content) throws DefaultException;
 
@@ -75,9 +75,9 @@ public interface ContentService extends RemoteService {
 
     void setPublishedOn(String userHash, StateToken token, Date date) throws DefaultException;
 
-    void setStatus(String userHash, StateToken stateToken, ContentStatusDTO status);
+    StateAbstractDTO setStatus(String userHash, StateToken stateToken, ContentStatusDTO status);
 
-    void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatusDTO status);
+    StateAbstractDTO setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatusDTO status);
 
     TagCloudResultDTO setTags(String userHash, StateToken token, String tags) throws DefaultException;
 

@@ -18,7 +18,11 @@
  *
  */package org.ourproject.kune.workspace.client.sitebar.sitepublic;
 
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+
 public interface SitePublicSpaceLink {
+
+    void setState(StateAbstractDTO state);
 
     void setVisible(boolean visible);
 

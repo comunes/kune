@@ -86,7 +86,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         this.renameAction = renameAction;
         actionsByItem = new HashMap<StateToken, ActionItemCollection<StateToken>>();
         editOnNextStateChange = false;
-        confRenameListener();
+        addRenameListener();
     }
 
     public void addFileUploaderListener(FileUploader uploader) {
@@ -121,30 +121,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         view.editItem(genId(stateToken));
     }
 
-    public void gotoToken(final String token) {
-        stateManager.gotoToken(token);
-    }
-
     public void init(final ContextNavigatorView view) {
         this.view = view;
-        session.onUserSignIn(new Listener<UserInfoDTO>() {
-            public void onEvent(final UserInfoDTO parameter) {
-                clear();
-            }
-        });
-        session.onUserSignOut(new Listener0() {
-            public void onEvent() {
-                clear();
-            }
-        });
+        addListeners();
     }
 
     public boolean isSelected(final StateToken stateToken) {
         return view.isSelected(genId(stateToken));
-    }
-
-    public boolean mustEditOnNextStateChange() {
-        return editOnNextStateChange;
     }
 
     public void refreshState() {
@@ -165,80 +148,16 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     public void setItemStatus(final StateToken stateToken, ContentStatusDTO status) {
-        view.setItemStatus(genId(stateToken), status);
+        clear();
+        refreshState();
     }
 
     public void setState(final StateContainerDTO state, final boolean select) {
         setStateContainer(state, select);
     }
 
-    public void setStateContainer(final StateContainerDTO state, final boolean select) {
-        // TODO: separate in two methods for stateConent and stateContainer
-
-        final StateToken stateToken = state.getStateToken();
-        boolean isContent = (state instanceof StateContentDTO);
-        StateContentDTO stateContent = null;
-
-        final ContainerDTO container = state.getContainer();
-        final AccessRightsDTO containerRights = state.getContainerRights();
-        AccessRightsDTO rights;
-
-        if (isContent) {
-            stateContent = (StateContentDTO) state;
-            rights = stateContent.getContentRights();
-        } else {
-            rights = containerRights;
-        }
-        view.setEditable(rights.isEditable());
-
-        // If root sended (container is not a root folder) process root (add
-        // childs to view)
-        final ContainerDTO root = state.getRootContainer();
-        if (root != null) {
-            view.setRootItem(genId(root.getStateToken()), i18n.t(root.getName()), root.getStateToken());
-            createChildItems(root, containerRights);
-        }
-
-        // Do the path to our current content
-        createTreePath(stateToken, container.getAbsolutePath(), containerRights);
-
-        // Process our current content/container
-        final ActionItemCollection<StateToken> actionItems = new ActionItemCollection<StateToken>();
-        if (isContent) {
-            rights = stateContent.getContentRights();
-            final ActionItemCollection<StateToken> contentActions = addItem(state.getTitle(), state.getTypeId(),
-                    stateContent.getMimeType(), stateContent.getStatus(), stateToken, container.getStateToken(),
-                    rights, false);
-            final ActionItemCollection<StateToken> containerActions = actionRegistry.getCurrentActions(
-                    container.getStateToken(), container.getTypeId(), session.isLogged(), containerRights, true);
-            actionItems.addAll(containerActions);
-            actionItems.addAll(contentActions);
-
-        } else {
-            rights = containerRights;
-            final ActionItemCollection<StateToken> containerActions = addItem(container.getName(),
-                    container.getTypeId(), null, ContentStatusDTO.publishedOnline, container.getStateToken(),
-                    container.getStateToken().copy().setFolder(container.getParentFolderId()), containerRights, false);
-            actionItems.addAll(containerActions);
-        }
-
-        actionsByItem.put(stateToken, actionItems);
-
-        // Process container childs
-        createChildItems(container, containerRights);
-
-        // Finaly
-        if (mustEditOnNextStateChange()) {
-            // Code smell
-            selectItem(stateToken);
-            editItem(stateToken);
-            setEditOnNextStateChange(false);
-        } else {
-            if (select) {
-                selectItem(stateToken);
-            }
-        }
-        toolbar.attach();
+    protected void gotoToken(final String token) {
+        stateManager.gotoToken(token);
     }
 
     protected void onItemRename(final String token, final String newName, final String oldName) {
@@ -263,18 +182,31 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         return toolbarActions;
     }
 
-    private void confRenameListener() {
+    private void addListeners() {
+        session.onUserSignIn(new Listener<UserInfoDTO>() {
+            public void onEvent(final UserInfoDTO parameter) {
+                clear();
+            }
+        });
+        session.onUserSignOut(new Listener0() {
+            public void onEvent() {
+                clear();
+            }
+        });
+    }
+
+    private void addRenameListener() {
         Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
             public void onEvent(StateToken token, String newName) {
                 setItemText(token, newName);
             }
         };
-        renameAction.onSuccess(onSuccess);
         Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
             public void onEvent(StateToken token, String oldName) {
                 setItemText(token, oldName);
             }
         };
+        renameAction.onSuccess(onSuccess);
         renameAction.onFail(onFail);
     }
 
@@ -306,7 +238,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     private String genId(final StateToken token) {
-        return "k-" + token.toString().replace(StateToken.SEPARATOR, "-");
+        return "k-cnav-" + token.toString().replace(StateToken.SEPARATOR, "-");
     }
 
     private String getIcon(final StateToken token, final String contentTypeId, final BasicMimeTypeDTO mimeType) {
@@ -328,7 +260,78 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         }
     }
 
+    private void selectOrEditNode(final boolean select, final StateToken stateToken) {
+        // Finaly
+        if (editOnNextStateChange) {
+            // Code smell
+            selectItem(stateToken);
+            editItem(stateToken);
+            setEditOnNextStateChange(false);
+        } else {
+            if (select) {
+                selectItem(stateToken);
+            }
+        }
+    }
+
     private void setItemText(final StateToken stateToken, final String name) {
         view.setItemText(genId(stateToken), name);
+    }
+
+    private void setStateContainer(final StateContainerDTO state, final boolean select) {
+        final StateToken stateToken = state.getStateToken();
+        boolean isContent = (state instanceof StateContentDTO);
+        StateContentDTO stateContent = null;
+
+        final ContainerDTO container = state.getContainer();
+        final AccessRightsDTO containerRights = state.getContainerRights();
+        AccessRightsDTO rights;
+
+        showRootFolder(state, containerRights);
+
+        // Do the path to our current content
+        createTreePath(stateToken, container.getAbsolutePath(), containerRights);
+
+        // Process our current content/container
+        final ActionItemCollection<StateToken> actionItems = new ActionItemCollection<StateToken>();
+
+        if (isContent) {
+            stateContent = (StateContentDTO) state;
+            rights = stateContent.getContentRights();
+            final ActionItemCollection<StateToken> contentActions = addItem(state.getTitle(), state.getTypeId(),
+                    stateContent.getMimeType(), stateContent.getStatus(), stateToken, container.getStateToken(),
+                    rights, false);
+            final ActionItemCollection<StateToken> containerActions = actionRegistry.getCurrentActions(
+                    container.getStateToken(), container.getTypeId(), session.isLogged(), containerRights, true);
+            actionItems.addAll(containerActions);
+            actionItems.addAll(contentActions);
+        } else {
+            rights = containerRights;
+            final ActionItemCollection<StateToken> containerActions = addItem(container.getName(),
+                    container.getTypeId(), null, ContentStatusDTO.publishedOnline, container.getStateToken(),
+                    container.getStateToken().copy().setFolder(container.getParentFolderId()), containerRights, false);
+            actionItems.addAll(containerActions);
+        }
+        view.setEditable(rights.isEditable());
+
+        actionsByItem.put(stateToken, actionItems);
+
+        // Process container childs
+        createChildItems(container, containerRights);
+
+        selectOrEditNode(select, stateToken);
+
+        toolbar.attach();
+    }
+
+    private void showRootFolder(final StateContainerDTO state, final AccessRightsDTO containerRights) {
+        // If container is not a root folder process root (add
+        // childs to view)
+        final ContainerDTO root = state.getRootContainer();
+        if (root != null) {
+            // container is not root
+            view.setRootItem(genId(root.getStateToken()), i18n.t(root.getName()), root.getStateToken());
+            createChildItems(root, containerRights);
+        }
     }
 }

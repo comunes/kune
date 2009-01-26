@@ -1,5 +1,6 @@
 package org.ourproject.kune.workspace.client.title;
 
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.NameInUseException;
 import org.ourproject.kune.platf.client.errors.NameNotPermittedException;
@@ -39,7 +40,7 @@ public class RenameAction {
     public void rename(final StateToken token, final String oldName, final String newName) {
         if (!newName.equals(oldName)) {
             Site.showProgress(i18n.t("Renaming"));
-            final AsyncCallback<String> asyncCallback = new AsyncCallback<String>() {
+            final AsyncCallback<StateAbstractDTO> asyncCallback = new AsyncCallback<StateAbstractDTO>() {
                 public void onFailure(final Throwable caught) {
                     Site.hideProgress();
                     try {
@@ -56,9 +57,10 @@ public class RenameAction {
                     onFail.fire(token, oldName);
                 }
 
-                public void onSuccess(final String finalNewName) {
+                public void onSuccess(final StateAbstractDTO state) {
                     Site.hideProgress();
-                    onSuccess.fire(token, finalNewName);
+                    session.setCurrentState(state);
+                    onSuccess.fire(token, state.getTitle());
                 }
             };
             if (token.isComplete()) {

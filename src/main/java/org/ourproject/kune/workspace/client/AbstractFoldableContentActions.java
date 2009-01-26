@@ -17,6 +17,7 @@ import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -37,6 +38,7 @@ import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.socialnet.RadioMustBeChecked;
 
 import com.calclab.suco.client.events.Listener;
@@ -66,6 +68,7 @@ public abstract class AbstractFoldableContentActions {
     protected final FoldableContent foldableContent;
     protected final DeferredCommandWrapper deferredCommandWrapper;
     protected final EntityHeader entityLogo;
+    private final SitePublicSpaceLink publicLink;
 
     public AbstractFoldableContentActions(Session session, StateManager stateManager, I18nUITranslationService i18n,
             KuneErrorHandler errorHandler, DeferredCommandWrapper deferredCommandWrapper,
@@ -74,7 +77,7 @@ public abstract class AbstractFoldableContentActions {
             ContentActionRegistry contentActionRegistry, ContextActionRegistry contextActionRegistry,
             Provider<FileDownloadUtils> fileDownloadProvider, Provider<TextEditor> textEditorProvider,
             Provider<ContextPropEditor> contextPropEditorProvider, FoldableContent foldableContent,
-            EntityHeader entityLogo) {
+            EntityHeader entityLogo, SitePublicSpaceLink publicLink) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
@@ -91,6 +94,7 @@ public abstract class AbstractFoldableContentActions {
         this.contextPropEditorProvider = contextPropEditorProvider;
         this.foldableContent = foldableContent;
         this.entityLogo = entityLogo;
+        this.publicLink = publicLink;
         createActions();
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(InitDataDTO parameter) {
@@ -113,7 +117,7 @@ public abstract class AbstractFoldableContentActions {
                 AccessRolDTO.Administrator, i18n.t("Rejected"), parentMenuTitle, ContentStatusDTO.rejected);
         final ActionToolbarMenuRadioDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("Submitted for publish"), parentMenuTitle,
-                ContentStatusDTO.publishedOnline);
+                ContentStatusDTO.submittedForEvaluation);
         final ActionToolbarMenuRadioDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), parentMenuTitle,
                 ContentStatusDTO.inTheDustbin);
@@ -247,7 +251,7 @@ public abstract class AbstractFoldableContentActions {
                                                 foldableContent.attach();
                                                 contextPropEditorProvider.get().detach();
                                                 contextNavigator.attach();
-                                                if (session.getCurrentStateToken().equals(stateToken)) {
+                                                if (session.inSameToken(stateToken)) {
                                                     contextNavigator.refreshState();
                                                     foldableContent.refreshState();
                                                 }
@@ -440,13 +444,17 @@ public abstract class AbstractFoldableContentActions {
         final ActionToolbarMenuRadioDescriptor<StateToken> action = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
-                        final AsyncCallbackSimple<Object> callback = new AsyncCallbackSimple<Object>() {
-                            public void onSuccess(final Object result) {
-                                session.getContentState().setStatus(status);
+                        final AsyncCallbackSimple<StateAbstractDTO> callback = new AsyncCallbackSimple<StateAbstractDTO>() {
+                            public void onSuccess(final StateAbstractDTO state) {
+                                if (session.inSameToken(stateToken)) {
+                                    session.setCurrentState(state);
+                                    publicLink.setState(state);
+                                }
                                 contextNavigator.setItemStatus(stateToken, status);
                             }
                         };
-                        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)) {
+                        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)
+                                || status.equals(ContentStatusDTO.inTheDustbin)) {
                             contentServiceProvider.get().setStatusAsAdmin(session.getUserHash(), stateToken, status,
                                     callback);
                         } else {

@@ -63,9 +63,10 @@ public interface ContentServiceAsync {
 
     void removeAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<?> asyncCallback);
 
-    void renameContainer(String userHash, StateToken token, String newName, AsyncCallback<String> asyncCallback);
+    void renameContainer(String userHash, StateToken token, String newName,
+            AsyncCallback<StateAbstractDTO> asyncCallback);
 
-    void renameContent(String userHash, StateToken token, String newName, AsyncCallback<String> asyncCallback);
+    void renameContent(String userHash, StateToken token, String newName, AsyncCallback<StateAbstractDTO> asyncCallback);
 
     void save(String user, StateToken token, String content, AsyncCallback<?> asyncCallback);
 
@@ -76,10 +77,11 @@ public interface ContentServiceAsync {
 
     void setPublishedOn(String userHash, StateToken token, Date publishedOn, AsyncCallback<?> asyncCallback);
 
-    void setStatus(String userHash, StateToken stateToken, ContentStatusDTO status, AsyncCallback<?> asyncCallback);
+    void setStatus(String userHash, StateToken stateToken, ContentStatusDTO status,
+            AsyncCallback<StateAbstractDTO> asyncCallback);
 
     void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatusDTO status,
-            AsyncCallback<?> asyncCallback);
+            AsyncCallback<StateAbstractDTO> asyncCallback);
 
     void setTags(String userHash, StateToken token, String tags, AsyncCallback<TagCloudResultDTO> asyncCallback);
 

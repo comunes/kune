@@ -13,6 +13,7 @@ import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.client.dto.ContainerDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
+import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -88,9 +89,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
                 newFolder.getId().toString(), null);
-        String result = contentService.renameContainer(getHash(), folderToken, newTitle);
+        StateAbstractDTO result = contentService.renameContainer(getHash(), folderToken, newTitle);
 
-        assertEquals(newTitle, result);
+        assertEquals(newTitle, result.getTitle());
 
         final StateToken newFolderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
                 newFolder.getId().toString(), null);
@@ -128,9 +129,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final String newTitle = "folder new name";
         final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
                 folder.getId().toString(), null);
-        final String result = contentService.renameContainer(getHash(), folderToken, newTitle);
+        final StateAbstractDTO result = contentService.renameContainer(getHash(), folderToken, newTitle);
 
-        assertEquals(newTitle, result);
+        assertEquals(newTitle, result.getTitle());
 
         final ContainerDTO folderAgain = getSiteDefaultContent().getContainer();
 
@@ -193,9 +194,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         newTitle = "folder last name";
 
-        final String result = contentService.renameContainer(getHash(), newState.getStateToken(), newTitle);
+        final StateAbstractDTO result = contentService.renameContainer(getHash(), newState.getStateToken(), newTitle);
 
-        assertEquals(newTitle, result);
+        assertEquals(newTitle, result.getTitle());
 
         final StateContainerDTO folderAgain = (StateContainerDTO) contentService.getContent(getHash(),
                 newState.getStateToken());

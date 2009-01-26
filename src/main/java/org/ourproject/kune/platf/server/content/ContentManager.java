@@ -51,7 +51,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
     void removeAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
-    String renameContent(User user, Long contentId, String newName) throws DefaultException;
+    Content renameContent(User user, Long contentId, String newName) throws DefaultException;
 
     Content save(User editor, Content content, String body);
 
@@ -63,7 +63,7 @@ public interface ContentManager extends Manager<Content, Long> {
 
     void setPublishedOn(User user, Long contentId, Date publishedOn) throws DefaultException;
 
-    void setStatus(Long contentId, ContentStatus contentStatus);
+    Content setStatus(Long contentId, ContentStatus contentStatus);
 
     void setTags(User user, Long contentId, String tags) throws DefaultException;
 

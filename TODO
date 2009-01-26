@@ -11,6 +11,7 @@ TODO-list for kune -*- mode: org; -*-
 
 * SHORT-TERM (URGENT)
 ** TODO <v> User preferences storing
+   (See also variables in 'Styling braimstorming')
    We need a way to store (in db) User preferences (like emite chat configurations) in a extensible way.
    Something similar to java.util.prefs.Preferences or Mozilla about:config
    http://java.sun.com/developer/technicalArticles/releases/preferences/
@@ -19,8 +20,33 @@ TODO-list for kune -*- mode: org; -*-
    http://stackoverflow.com/questions/194349/what-is-the-proper-way-to-store-apps-conf-data-in-java
 ** vjrj Styling braimstorming
 *** layouts
-*** screenshot
+    - name :: greenforrest 
+    - screenshot :: images/greenforrest.png
+    - varsgroupname :: layout.greenforrest
 *** html+css+variables
+**** css:
+     
+**** variables
+     prefgroups
+     - id :: 1
+     - groupname :: emite.ui
+     
+     pref
+     - id :: 1
+     - group :: 1
+     - name :: usercolor
+     - description :: (optional) The color of the self alias color in chat conversations
+     - vartype :: (int/boolean/String) red
+     - defvalue :: ?? #000000
+
+     userpref
+     - id :: 1
+     - userid :: 123
+     - varid :: 1
+     - group :: 1
+     - name :: usercolor
+     - status :: (setted|def) setted
+     - value :: red
 *** logos
 *** caching
 ** danigb,vjrj URLs public/workspace braimstorming
@@ -75,6 +101,9 @@ TODO-list for kune -*- mode: org; -*-
    http://vafer.org/blog/20070918215154
    Related info:
    http://java.debian.net/building.html
+** <v> implement pubsub in emite
+   http://xmpp.org/extensions/attic/jep-0060-1.6.html
+   see:  svn checkout svn://anonsvn.it.su.se/su-smack su-smack
 ** TODO <v> study different embeded video solutions
    - for ogg :: http://www.flumotion.net/cortado/
    - for mp3+ogg :: flowplayer

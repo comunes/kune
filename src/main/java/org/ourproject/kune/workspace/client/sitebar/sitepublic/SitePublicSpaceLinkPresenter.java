@@ -19,9 +19,11 @@
  */package org.ourproject.kune.workspace.client.sitebar.sitepublic;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.GroupListDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
+import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.StateManager;
 
@@ -34,11 +36,7 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
     public SitePublicSpaceLinkPresenter(final StateManager stateManager) {
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
-                if (state instanceof StateContainerDTO) {
-                    setState((StateContainerDTO) state);
-                } else {
-                    view.detach();
-                }
+                setState(state);
             }
         });
     }
@@ -51,21 +49,34 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
         this.view = view;
     }
 
-    public void setVisible(final boolean visible) {
-        view.setVisible(visible);
+    public void setState(final StateAbstractDTO state) {
+        if (state instanceof StateContainerDTO) {
+            final StateToken token = state.getStateToken();
+            if (((StateContainerDTO) state).getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
+                final String publicUrl = token.getPublicUrl();
+                view.setContentGotoPublicUrl(publicUrl);
+                if (state instanceof StateContentDTO) {
+                    StateContentDTO content = (StateContentDTO) state;
+                    if (content.getStatus().equals(ContentStatusDTO.publishedOnline)) {
+                        view.setContentPublic(true);
+                    } else {
+                        view.setContentPublic(false);
+                    }
+                } else {
+                    view.setContentPublic(true);
+                }
+            } else {
+                view.setContentPublic(false);
+            }
+            view.attach();
+            view.setVisible(true);
+        } else {
+            view.detach();
+        }
     }
 
-    private void setState(final StateContainerDTO state) {
-        final StateToken token = state.getStateToken();
-        if (state.getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
-            final String publicUrl = token.getPublicUrl();
-            view.setContentGotoPublicUrl(publicUrl);
-            view.setContentPublic(true);
-        } else {
-            view.setContentPublic(false);
-        }
-        view.attach();
-        view.setVisible(true);
+    public void setVisible(final boolean visible) {
+        view.setVisible(visible);
     }
 
 }

@@ -95,7 +95,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
                 || (containerFinder.findIfExistsTitle(container, title) > 0);
     }
 
-    public String renameFolder(final Group group, final Container container, final String newName)
+    public Container renameFolder(final Group group, final Container container, final String newName)
             throws DefaultException {
         FilenameUtils.checkBasicFilename(newName);
         String newNameWithoutNT = FilenameUtils.chomp(newName);
@@ -107,7 +107,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         }
         container.setName(newNameWithoutNT);
         persist(container);
-        return newNameWithoutNT;
+        return container;
     }
 
     public SearchResult<Container> search(final String search) {
