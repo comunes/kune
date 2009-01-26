@@ -249,8 +249,8 @@ public class TextEditorToolbar extends Composite {
         if (basic != null) {
             subscript = createToggleButton(images.subscript(), i18n.t("Toggle Subscript"));
             superscript = createToggleButton(images.superscript(), i18n.t("Toggle Superscript"));
-            // topPanel.add(subscript);
-            // topPanel.add(superscript);
+            topPanel.add(subscript);
+            topPanel.add(superscript);
             topPanel.add(justifyLeft = createPushButton(images.alignleft(), i18n.t("Left Justify")));
             topPanel.add(justifyCenter = createPushButton(images.centerpara(), i18n.t("Center")));
             topPanel.add(justifyRight = createPushButton(images.alignright(), i18n.t("Right Justify")));
@@ -260,14 +260,14 @@ public class TextEditorToolbar extends Composite {
             topPanel.add(indent = createPushButton(images.incrementindent(), i18n.t("Indent Right")));
             topPanel.add(outdent = createPushButton(images.decrementindent(), i18n.t("Indent Left")));
             hr = createPushButton(images.hfixedline(), i18n.t("Insert Horizontal Rule"));
-            // topPanel.add(hr);
+            topPanel.add(hr);
             topPanel.add(ol = createPushButton(images.defaultnumbering(), i18n.t("Insert Ordered List")));
             topPanel.add(ul = createPushButton(images.defaultbullet(), i18n.t("Insert Unordered List")));
             topPanel.add(insertImage = createPushButton(images.images(), i18n.t("Insert Image")));
             topPanel.add(createLink = createPushButton(images.link(), i18n.t("Create Link")));
             topPanel.add(removeLink = createPushButton(images.linkBreak(), i18n.t("Remove Link")));
             removeFormat = createPushButton(images.removeFormat(), i18n.t("Remove Formatting"));
-            // topPanel.add(removeFormat);
+            topPanel.add(removeFormat);
         }
 
         if (basic != null) {

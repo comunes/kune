@@ -90,6 +90,6 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
     }
 
     private void gotoPublic() {
-        Window.open(publicUrl, "_blank", "");
+        Window.open(publicUrl, "_kunepublic", "");
     }
 }

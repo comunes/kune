@@ -22,4 +22,13 @@ class ContentDrop < Liquid::Drop
   def body
     @content.last_revision.body
   end
+
+  def group_short_name
+    @content.container.owner.shortName
+  end
+
+  def statetoken
+    @content.container.owner.shortName + "." + @content.container.toolName + "." + @content.container.id.to_s + "." +  @content.id.to_s
+  end
+
 end

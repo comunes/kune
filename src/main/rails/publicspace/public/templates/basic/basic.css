@@ -1,7 +1,7 @@
 
-html {background-color: #D6FF2F;}
+html {background-color: #DD8A3D;}
 
-.page {width: 60em; margin: 2em auto; padding: 1em; background-color: #fff; overflow: hidden;}
-h1 { color: black; font-size:3em; letter-spacing:-0.05em; line-height:1em; margin:1em 0 0.5em 4em; }
+.page {width: 60em; height: 30em; margin: 2em auto; padding: 1em; background-color: #fff; overflow: hidden;}
+.page h1 {color: black; letter-spacing:-0.05em; line-height:1em; margin:1em 0 0.5em 4em; }
 .page .menu {float: left; padding: 1em; width: 9em; background-color: #efefef; margin-right: 1em;}
 .page .content {}
