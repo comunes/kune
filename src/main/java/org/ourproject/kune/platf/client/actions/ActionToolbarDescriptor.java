@@ -33,6 +33,12 @@ public abstract class ActionToolbarDescriptor<T> extends ActionDescriptor<T> {
     }
 
     public ActionToolbarDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
+            final Listener<T> onPerformCall, final ActionAddCondition<T> addCondition) {
+        super(accessRolDTO, onPerformCall, addCondition);
+        this.actionToolbarPosition = actionToolbarPosition;
+    }
+
+    public ActionToolbarDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
             final Listener<T> onPerformCall, final ActionEnableCondition<T> enableCondition) {
         super(accessRolDTO, onPerformCall, enableCondition);
         this.actionToolbarPosition = actionToolbarPosition;

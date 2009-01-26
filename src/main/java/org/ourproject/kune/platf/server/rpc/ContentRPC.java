@@ -204,10 +204,9 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void delContent(final String userHash, final StateToken token) throws DefaultException {
+    public StateContentDTO delContent(final String userHash, final StateToken token) throws DefaultException {
         final Long contentId = ContentUtils.parseId(token.getDocument());
-        final User user = getCurrentUser();
-        contentManager.delContent(user, contentId);
+        return getState(getCurrentUser(), contentManager.setStatus(contentId, ContentStatus.inTheDustbin));
     }
 
     @Authenticated(mandatory = false)

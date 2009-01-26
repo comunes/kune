@@ -22,12 +22,14 @@ import org.ourproject.kune.blogs.client.BlogClientTool;
 import org.ourproject.kune.chat.client.ctx.room.AddRoom;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.gallery.client.GalleryClientTool;
+import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.wiki.client.WikiClientTool;
@@ -70,6 +72,7 @@ public class ChatClientActions {
         chatAbout.setIconUrl("images/emite-room.png");
         chatAbout.setToolTip("Chat and comment this");
         chatAbout.setLeftSeparator(ActionToolbarButtonSeparator.fill);
+        chatAbout.setEnableCondition(notDeleted());
 
         ActionToolbarButtonDescriptor<StateToken> joinRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
@@ -104,5 +107,15 @@ public class ChatClientActions {
 
         contextActionRegistry.addAction(addRoom, ChatClientTool.TYPE_ROOT, ChatClientTool.TYPE_ROOM);
         contentActionRegistry.addAction(joinRoom, ChatClientTool.TYPE_ROOM);
+    }
+
+    private ActionEnableCondition<StateToken> notDeleted() {
+        return new ActionEnableCondition<StateToken>() {
+            public boolean mustBeEnabled(final StateToken itemToken) {
+                final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
+                        ContentStatusDTO.inTheDustbin));
+                return isNotDeleted;
+            }
+        };
     }
 }

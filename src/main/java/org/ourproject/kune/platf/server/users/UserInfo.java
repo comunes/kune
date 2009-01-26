@@ -34,6 +34,7 @@ public class UserInfo {
     private List<Group> groupsIsAdmin;
     private List<Group> groupsIsCollab;
     private String userHash;
+    private boolean showDeletedContent;
 
     public String getChatName() {
         return chatName;
@@ -71,6 +72,10 @@ public class UserInfo {
         return user.getShortName();
     }
 
+    public boolean getShowDeletedContent() {
+        return showDeletedContent;
+    }
+
     public User getUser() {
         return user;
     }
@@ -97,6 +102,10 @@ public class UserInfo {
 
     public void setHomePage(final String homePage) {
         this.homePage = homePage;
+    }
+
+    public void setShowDeletedContent(boolean showDeletedContent) {
+        this.showDeletedContent = showDeletedContent;
     }
 
     public void setUser(User user) {

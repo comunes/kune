@@ -700,9 +700,16 @@
 .x-tree-node .k-ctn-status-normal a span {
 }
 
-.x-tree-node .k-ctn-status-rejdel a span {
+.x-tree-node .k-ctn-status-deleted a span {
     text-decoration: line-through;
     color: gray;
+}
+
+.x-tree-node .k-ctn-status-rejected a span {
+    text-decoration: line-through;
+    /* color: #FF6633; */
+    color: #FF3300;
+
 }
 
 .x-tree-node .k-ctn-status-editing a span {

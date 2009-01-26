@@ -31,6 +31,7 @@ public class UserInfoDTO implements IsSerializable {
     private String userHash;
     private List<GroupDTO> groupsIsAdmin;
     private List<GroupDTO> groupsIsCollab;
+    private boolean showDeletedContent;
 
     public String getChatName() {
         return chatName;
@@ -68,6 +69,10 @@ public class UserInfoDTO implements IsSerializable {
         return user.getShortName();
     }
 
+    public boolean getShowDeletedContent() {
+        return showDeletedContent;
+    }
+
     public UserSimpleDTO getUser() {
         return user;
     }
@@ -95,6 +100,10 @@ public class UserInfoDTO implements IsSerializable {
 
     public void setHomePage(final String homePage) {
         this.homePage = homePage;
+    }
+
+    public void setShowDeletedContent(boolean showDeletedContent) {
+        this.showDeletedContent = showDeletedContent;
     }
 
     public void setUser(UserSimpleDTO user) {

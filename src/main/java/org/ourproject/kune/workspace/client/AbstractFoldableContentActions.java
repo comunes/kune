@@ -1,11 +1,14 @@
 package org.ourproject.kune.workspace.client;
 
+import org.ourproject.kune.platf.client.actions.ActionAddCondition;
+import org.ourproject.kune.platf.client.actions.ActionCheckedCondition;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
@@ -111,12 +114,11 @@ public abstract class AbstractFoldableContentActions {
                 AccessRolDTO.Administrator, i18n.t("Published online"), parentMenuTitle,
                 ContentStatusDTO.publishedOnline);
         final ActionToolbarMenuRadioDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Editing in progress"), parentMenuTitle,
-                ContentStatusDTO.editingInProgress);
+                AccessRolDTO.Editor, i18n.t("Editing in progress"), parentMenuTitle, ContentStatusDTO.editingInProgress);
         final ActionToolbarMenuRadioDescriptor<StateToken> setRejectStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("Rejected"), parentMenuTitle, ContentStatusDTO.rejected);
         final ActionToolbarMenuRadioDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Submitted for publish"), parentMenuTitle,
+                AccessRolDTO.Editor, i18n.t("Submitted for publish"), parentMenuTitle,
                 ContentStatusDTO.submittedForEvaluation);
         final ActionToolbarMenuRadioDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
                 AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), parentMenuTitle,
@@ -126,6 +128,10 @@ public abstract class AbstractFoldableContentActions {
         contentActionRegistry.addAction(setRejectStatus, contentsModerated);
         contentActionRegistry.addAction(setSubmittedForPublishStatus, contentsModerated);
         contentActionRegistry.addAction(setInTheDustBinStatus, contentsModerated);
+        createPublishAction("images/accept.png", i18n.t("Publish online"), ContentStatusDTO.publishedOnline,
+                contentsModerated);
+        createPublishAction("images/cancel.png", i18n.t("Reject publication"), ContentStatusDTO.rejected,
+                contentsModerated);
     }
 
     protected void createContentRenameAction(String parentMenuTitle, String textDescription, String... registerInTypes) {
@@ -137,6 +143,7 @@ public abstract class AbstractFoldableContentActions {
                 });
         renameCtn.setTextDescription(textDescription);
         renameCtn.setParentMenuTitle(parentMenuTitle);
+        renameCtn.setEnableCondition(notDeleted());
         contentActionRegistry.addAction(renameCtn, registerInTypes);
     }
 
@@ -160,10 +167,13 @@ public abstract class AbstractFoldableContentActions {
                 AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         contentServiceProvider.get().delContent(session.getUserHash(), token,
-                                new AsyncCallbackSimple<String>() {
-                                    public void onSuccess(final String result) {
+                                new AsyncCallbackSimple<StateContentDTO>() {
+                                    public void onSuccess(final StateContentDTO state) {
+                                        session.setCurrentState(state);
                                         final StateToken parent = token.copy().clearDocument();
                                         stateManager.gotoToken(parent);
+                                        contextNavigator.clear();
+                                        contextNavigator.refreshState();
                                     }
                                 });
                     }
@@ -173,12 +183,7 @@ public abstract class AbstractFoldableContentActions {
         delContent.setMustBeConfirmed(true);
         delContent.setConfirmationTitle(i18n.t("Please confirm"));
         delContent.setConfirmationText(i18n.t("Are you sure?"));
-        delContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
-                final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent().getStateToken();
-                return !itemToken.equals(defContentToken);
-            }
-        });
+        delContent.setEnableCondition(notDefAndNotDeleted());
         contentActionRegistry.addAction(delContent, registerInTypes);
     }
 
@@ -266,6 +271,7 @@ public abstract class AbstractFoldableContentActions {
         editContent.setTextDescription(i18n.tWithNT("Edit", "used in button"));
         editContent.setIconUrl("images/content_edit.png");
         editContent.setLeftSeparator(ActionToolbarButtonSeparator.spacer);
+        editContent.setEnableCondition(notDeleted());
         contentActionRegistry.addAction(editContent, registerInTypes);
         return editContent;
     }
@@ -361,6 +367,28 @@ public abstract class AbstractFoldableContentActions {
     protected void createPostSessionInitActions() {
     }
 
+    protected void createPublishAction(String icon, String tooltip, final ContentStatusDTO status,
+            String... registerInTypes) {
+        ActionToolbarButtonDescriptor<StateToken> pubAction = new ActionToolbarButtonDescriptor<StateToken>(
+                AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(StateToken stateToken) {
+                        setContentStatus(status, stateToken);
+                    }
+                }, new ActionAddCondition<StateToken>() {
+                    public boolean mustBeAdded(StateToken param) {
+                        if (session.isCurrentStateAContent()
+                                && session.getContentState().getStatus().equals(ContentStatusDTO.submittedForEvaluation)) {
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+        pubAction.setMustBeAuthenticated(true);
+        pubAction.setToolTip(tooltip);
+        pubAction.setIconUrl(icon);
+        contentActionRegistry.addAction(pubAction, registerInTypes);
+    }
+
     protected ActionToolbarMenuDescriptor<StateToken> createRefreshCntAction(String parentMenuTitle,
             String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> refreshCnt = new ActionToolbarMenuDescriptor<StateToken>(
@@ -428,12 +456,7 @@ public abstract class AbstractFoldableContentActions {
                 });
         setAsDefGroupContent.setTextDescription(i18n.t("Set this as the default group page"));
         setAsDefGroupContent.setIconUrl("images/group-home.png");
-        setAsDefGroupContent.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
-                final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent().getStateToken();
-                return !itemToken.equals(defContentToken);
-            }
-        });
+        setAsDefGroupContent.setEnableCondition(notDefAndNotDeleted());
         setAsDefGroupContent.setParentMenuTitle(parentMenuTitle);
         contentActionRegistry.addAction(setAsDefGroupContent, registerInTypes);
         return setAsDefGroupContent;
@@ -444,22 +467,7 @@ public abstract class AbstractFoldableContentActions {
         final ActionToolbarMenuRadioDescriptor<StateToken> action = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
-                        final AsyncCallbackSimple<StateAbstractDTO> callback = new AsyncCallbackSimple<StateAbstractDTO>() {
-                            public void onSuccess(final StateAbstractDTO state) {
-                                if (session.inSameToken(stateToken)) {
-                                    session.setCurrentState(state);
-                                    publicLink.setState(state);
-                                }
-                                contextNavigator.setItemStatus(stateToken, status);
-                            }
-                        };
-                        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)
-                                || status.equals(ContentStatusDTO.inTheDustbin)) {
-                            contentServiceProvider.get().setStatusAsAdmin(session.getUserHash(), stateToken, status,
-                                    callback);
-                        } else {
-                            contentServiceProvider.get().setStatus(session.getUserHash(), stateToken, status, callback);
-                        }
+                        setContentStatus(status, stateToken);
                     }
                 }, "ContentRadioStatus", new RadioMustBeChecked() {
                     public boolean mustBeChecked() {
@@ -476,6 +484,30 @@ public abstract class AbstractFoldableContentActions {
         return action;
     }
 
+    protected void createShowDeletedItems(String parentMenuTitle, String... registerInTypes) {
+        ActionToolbarMenuCheckItemDescriptor<StateToken> showDeletedItems = new ActionToolbarMenuCheckItemDescriptor<StateToken>(
+                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                    public void onEvent(StateToken parameter) {
+                        boolean mustShow = !session.getCurrentUserInfo().getShowDeletedContent();
+                        session.getCurrentUserInfo().setShowDeletedContent(mustShow);
+                        if (!mustShow && session.isCurrentStateAContent()
+                                && session.getContentState().getStatus().equals(ContentStatusDTO.inTheDustbin)) {
+                            stateManager.gotoToken(session.getCurrentStateToken().getGroup());
+                        }
+                        contextNavigator.clear();
+                        contextNavigator.refreshState();
+                    }
+                }, new ActionCheckedCondition() {
+                    public boolean mustBeChecked() {
+                        return session.getShowDeletedContent();
+                    }
+                });
+        showDeletedItems.setParentMenuTitle(parentMenuTitle);
+        showDeletedItems.setTextDescription("Show deleted items");
+        showDeletedItems.setMustBeAuthenticated(true);
+        contextActionRegistry.addAction(showDeletedItems, registerInTypes);
+    }
+
     protected ActionToolbarButtonDescriptor<StateToken> createTranslateAction(String... registerInTypes) {
         ActionToolbarButtonDescriptor<StateToken> translateContent = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
@@ -487,6 +519,7 @@ public abstract class AbstractFoldableContentActions {
         translateContent.setToolTip(i18n.t("Translate this document to other languages"));
         translateContent.setIconUrl("images/language.gif");
         translateContent.setLeftSeparator(ActionToolbarButtonSeparator.spacer);
+        translateContent.setEnableCondition(notDeleted());
         contentActionRegistry.addAction(translateContent, registerInTypes);
         return translateContent;
     }
@@ -560,6 +593,28 @@ public abstract class AbstractFoldableContentActions {
         return setGroupLogo;
     }
 
+    private ActionEnableCondition<StateToken> notDefAndNotDeleted() {
+        return new ActionEnableCondition<StateToken>() {
+            public boolean mustBeEnabled(final StateToken itemToken) {
+                final boolean isNotDefContentToken = !session.getCurrentState().getGroup().getDefaultContent().getStateToken().equals(
+                        itemToken);
+                final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
+                        ContentStatusDTO.inTheDustbin));
+                return isNotDefContentToken && isNotDeleted;
+            }
+        };
+    }
+
+    private ActionEnableCondition<StateToken> notDeleted() {
+        return new ActionEnableCondition<StateToken>() {
+            public boolean mustBeEnabled(final StateToken itemToken) {
+                final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
+                        ContentStatusDTO.inTheDustbin));
+                return isNotDeleted;
+            }
+        };
+    }
+
     private void register(ActionToolbarMenuAndItemDescriptor<StateToken> action, Position position,
             String... registerInTypes) {
         switch (position) {
@@ -569,6 +624,25 @@ public abstract class AbstractFoldableContentActions {
         case cnt:
             contentActionRegistry.addAction(action, registerInTypes);
             break;
+        }
+    }
+
+    private void setContentStatus(final ContentStatusDTO status, final StateToken stateToken) {
+        final AsyncCallbackSimple<StateAbstractDTO> callback = new AsyncCallbackSimple<StateAbstractDTO>() {
+            public void onSuccess(final StateAbstractDTO state) {
+                if (session.inSameToken(stateToken)) {
+                    session.setCurrentState(state);
+                    publicLink.setState(state);
+                    foldableContent.refreshState();
+                }
+                contextNavigator.setItemStatus(stateToken, status);
+            }
+        };
+        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)
+                || status.equals(ContentStatusDTO.inTheDustbin)) {
+            contentServiceProvider.get().setStatusAsAdmin(session.getUserHash(), stateToken, status, callback);
+        } else {
+            contentServiceProvider.get().setStatus(session.getUserHash(), stateToken, status, callback);
         }
     }
 

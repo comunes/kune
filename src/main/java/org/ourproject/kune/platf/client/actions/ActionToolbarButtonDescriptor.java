@@ -34,6 +34,12 @@ public class ActionToolbarButtonDescriptor<T> extends ActionToolbarDescriptor<T>
 
     public ActionToolbarButtonDescriptor(final AccessRolDTO accessRolDTO,
             final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
+            final ActionAddCondition<T> addCondition) {
+        super(accessRolDTO, actionToolbarPosition, onPerformCall, addCondition);
+    }
+
+    public ActionToolbarButtonDescriptor(final AccessRolDTO accessRolDTO,
+            final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
             final ActionEnableCondition<T> enableCondition) {
         super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }

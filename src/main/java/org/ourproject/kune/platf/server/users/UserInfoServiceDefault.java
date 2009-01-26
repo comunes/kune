@@ -48,6 +48,8 @@ public class UserInfoServiceDefault implements UserInfoService {
             info.setChatName(user.getShortName());
             info.setChatPassword(user.getPassword());
             info.setUserHash(userHash);
+            // FIXME: save this in user properties
+            info.setShowDeletedContent(false);
 
             final Group userGroup = user.getUserGroup();
 

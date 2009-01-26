@@ -51,7 +51,7 @@ public interface ContentService extends RemoteService {
 
     StateContainerDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
 
-    void delContent(String userHash, StateToken token) throws DefaultException;
+    StateContentDTO delContent(String userHash, StateToken token) throws DefaultException;
 
     StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 

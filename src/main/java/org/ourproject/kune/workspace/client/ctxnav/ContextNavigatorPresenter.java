@@ -167,7 +167,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private ActionItemCollection<StateToken> addItem(final String title, final String contentTypeId,
             final BasicMimeTypeDTO mimeType, final ContentStatusDTO status, final StateToken stateToken,
             final StateToken parentStateToken, final AccessRightsDTO rights, final boolean isNodeSelected) {
-
         final ActionItemCollection<StateToken> toolbarActions = actionRegistry.getCurrentActions(stateToken,
                 contentTypeId, session.isLogged(), rights, true);
 
@@ -178,7 +177,11 @@ public class ContextNavigatorPresenter implements ContextNavigator {
                         && rights.isAdministrable(), capabilitiesRegistry.isDropable(contentTypeId)
                         && rights.isAdministrable(), actionRegistry.getCurrentActions(stateToken, contentTypeId,
                         session.isLogged(), rights, false));
-        view.addItem(item);
+        if (status.equals(ContentStatusDTO.inTheDustbin) && !session.getShowDeletedContent()) {
+            // Don't show
+        } else {
+            view.addItem(item);
+        }
         return toolbarActions;
     }
 

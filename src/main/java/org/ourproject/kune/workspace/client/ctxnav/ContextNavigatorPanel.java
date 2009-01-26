@@ -317,8 +317,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
             node.setCls("k-ctn-status-normal");
             break;
         case inTheDustbin:
+            node.setCls("k-ctn-status-deleted");
+            break;
         case rejected:
-            node.setCls("k-ctn-status-rejdel");
+            node.setCls("k-ctn-status-rejected");
             break;
         case editingInProgress:
             node.setCls("k-ctn-status-editing");

@@ -158,6 +158,10 @@ public class SessionDefault implements Session {
         return initData.getLicenses();
     }
 
+    public boolean getShowDeletedContent() {
+        return currentUserInfo == null ? false : currentUserInfo.getShowDeletedContent();
+    }
+
     public Object[][] getTimezones() {
         if (timezonesArray == null) {
             mapTimezones();
@@ -175,6 +179,10 @@ public class SessionDefault implements Session {
 
     public boolean inSameToken(StateToken token) {
         return getCurrentStateToken().equals(token);
+    }
+
+    public boolean isCurrentStateAContent() {
+        return currentState instanceof StateContentDTO;
     }
 
     public boolean isLogged() {

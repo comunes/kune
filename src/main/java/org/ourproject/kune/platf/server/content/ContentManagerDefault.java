@@ -103,12 +103,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return persist(newContent);
     }
 
-    public void delContent(final User user, final Long contentId) throws DefaultException {
-        final Content content = finder.getContent(contentId);
-        content.setStatus(ContentStatus.inTheDustbin);
-        content.setDeletedOn(new Date());
-    }
-
     public boolean findIfExistsTitle(Container container, String title) {
         return (contentFinder.findIfExistsTitle(container, title) > 0)
                 || (containerFinder.findIfExistsTitle(container, title) > 0);
@@ -215,6 +209,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         switch (status) {
         case publishedOnline:
             content.setPublishedOn(new Date());
+            content.setDeletedOn(null);
+            break;
+        case inTheDustbin:
+            content.setDeletedOn(new Date());
+            content.setPublishedOn(null);
             break;
         default:
             break;

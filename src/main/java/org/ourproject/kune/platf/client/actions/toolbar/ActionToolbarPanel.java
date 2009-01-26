@@ -8,6 +8,7 @@ import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
@@ -177,6 +178,11 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
             checkItem.setGroup(radioDescriptor.getGroup());
             checkItem.setChecked(radioDescriptor.mustBeChecked());
+            item = checkItem;
+        } else if (action instanceof ActionToolbarMenuCheckItemDescriptor) {
+            CheckItem checkItem = new CheckItem(action.getText());
+            ActionToolbarMenuCheckItemDescriptor<T> checkItemDescriptor = (ActionToolbarMenuCheckItemDescriptor<T>) action;
+            checkItem.setChecked(checkItemDescriptor.getMustBeChecked().mustBeChecked());
             item = checkItem;
         } else {
             item = new Item(action.getText());

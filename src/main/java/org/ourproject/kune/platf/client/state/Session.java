@@ -64,20 +64,6 @@ public interface Session {
      */
     int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
 
-    public String getCurrentCCversion();
-
-    public LicenseDTO getDefLicense();
-
-    public int getImgCropsize();
-
-    public int getImgIconsize();
-
-    public int getImgResizewidth();
-
-    public int getImgThumbsize();
-
-    public boolean inSameToken(StateToken token);
-
     void check(AsyncCallbackSimple<?> callback);
 
     StateContainerDTO getContainerState();
@@ -87,6 +73,8 @@ public interface Session {
     List<I18nCountryDTO> getCountries();
 
     Object[][] getCountriesArray();
+
+    String getCurrentCCversion();
 
     I18nLanguageDTO getCurrentLanguage();
 
@@ -98,9 +86,19 @@ public interface Session {
 
     UserInfoDTO getCurrentUserInfo();
 
+    LicenseDTO getDefLicense();
+
     String getGalleryPermittedExtensions();
 
     Collection<ToolSimpleDTO> getGroupTools();
+
+    int getImgCropsize();
+
+    int getImgIconsize();
+
+    int getImgResizewidth();
+
+    int getImgThumbsize();
 
     List<I18nLanguageSimpleDTO> getLanguages();
 
@@ -108,11 +106,17 @@ public interface Session {
 
     List<LicenseDTO> getLicenses();
 
+    boolean getShowDeletedContent();
+
     Object[][] getTimezones();
 
     String getUserHash();
 
     Collection<ToolSimpleDTO> getUserTools();
+
+    boolean inSameToken(StateToken token);
+
+    boolean isCurrentStateAContent();
 
     boolean isLogged();
 

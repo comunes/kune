@@ -37,8 +37,6 @@ public interface ContentManager extends Manager<Content, Long> {
 
     Content createContent(String title, String body, User author, Container container, String typeId);
 
-    void delContent(User user, Long contentId) throws DefaultException;
-
     boolean findIfExistsTitle(Container container, String title);
 
     Double getRateAvg(Content content);

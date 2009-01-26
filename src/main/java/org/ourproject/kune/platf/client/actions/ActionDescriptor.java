@@ -86,6 +86,12 @@ public abstract class ActionDescriptor<T> {
         this.mustBeAuthenticated = true;
     }
 
+    public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall,
+            final ActionAddCondition<T> addCondition) {
+        this(accessRolDTO, onPerformCall);
+        this.addCondition = addCondition;
+    }
+
     /**
      * Instantiates a new action descriptor.
      * 

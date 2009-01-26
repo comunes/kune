@@ -51,7 +51,7 @@ public interface ContentServiceAsync {
 
     void addRoom(String user, StateToken parentToken, String name, AsyncCallback<StateContainerDTO> callback);
 
-    void delContent(String userHash, StateToken token, AsyncCallback<?> asyncCallback);
+    void delContent(String userHash, StateToken token, AsyncCallback<StateContentDTO> asyncCallback);
 
     void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
