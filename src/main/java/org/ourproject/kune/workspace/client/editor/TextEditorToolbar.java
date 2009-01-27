@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.editor;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
 
 import com.calclab.suco.client.events.Listener;
@@ -36,7 +37,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.PushButton;
-import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -62,7 +62,7 @@ public class TextEditorToolbar extends Composite {
 
         public EventListener(TextEditorInsertElement insertElement) {
             this.insertElement = insertElement;
-            insertElement.onInsert(new Listener2<String, String>() {
+            insertElement.addOnCreateLink(new Listener2<String, String>() {
                 public void onEvent(String name, String url) {
                     extended.createLink(url);
                 }

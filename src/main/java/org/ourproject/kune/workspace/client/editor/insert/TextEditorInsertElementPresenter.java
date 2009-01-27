@@ -7,22 +7,27 @@ import com.calclab.suco.client.events.Listener2;
 
 public class TextEditorInsertElementPresenter extends AbstractOptionsPresenter implements TextEditorInsertElement {
 
-    private final Event2<String, String> onInsert;
+    private final Event2<String, String> onCreateLink;
 
     public TextEditorInsertElementPresenter() {
-        this.onInsert = new Event2<String, String>("onInsert");
+        this.onCreateLink = new Event2<String, String>("onCreateLink");
     }
 
-    public void fireOnInsert(String name, String link) {
-        onInsert.fire(name, link);
+    public void addOnCreateLink(final Listener2<String, String> slot) {
+        onCreateLink.add(slot);
+    }
+
+    public void fireOnCreateLink(String name, String link) {
+        onCreateLink.fire(name, link);
+        super.hide();
+    }
+
+    public void fireOnInsertHtml(String name, String link) {
+        onCreateLink.fire(name, link);
         super.hide();
     }
 
     public void init(TextEditorInsertElementView view) {
         super.init(view);
-    }
-
-    public void onInsert(final Listener2<String, String> slot) {
-        onInsert.add(slot);
     }
 }

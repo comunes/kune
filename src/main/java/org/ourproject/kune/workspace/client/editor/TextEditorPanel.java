@@ -21,13 +21,13 @@ package org.ourproject.kune.workspace.client.editor;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.MessageBox;

@@ -6,8 +6,8 @@ import com.calclab.suco.client.events.Listener2;
 
 public interface TextEditorInsertElement extends AbstractOptions {
 
-    void fireOnInsert(String name, String link);
+    void addOnCreateLink(Listener2<String, String> slot);
 
-    void onInsert(Listener2<String, String> slot);
+    void fireOnCreateLink(String name, String link);
 
 }

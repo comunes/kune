@@ -22,7 +22,7 @@ public class TextEditorInsertAbstractPresenter implements TextEditorInsertAbstra
     }
 
     public void onInsert(String name, String link) {
-        editorInsertElement.fireOnInsert(name, link);
+        editorInsertElement.fireOnCreateLink(name, link);
         reset();
     }
 
