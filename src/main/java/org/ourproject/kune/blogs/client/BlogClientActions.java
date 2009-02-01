@@ -16,7 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.blogs.client;
+ \*/
+package org.ourproject.kune.blogs.client;
 
 import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_BLOG;
 import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_POST;

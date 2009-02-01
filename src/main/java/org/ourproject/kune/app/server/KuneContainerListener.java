@@ -20,7 +20,8 @@
 
 /**
  * 
- */package org.ourproject.kune.app.server;
+ \*/
+package org.ourproject.kune.app.server;
 
 import java.io.IOException;
 import java.io.InputStream;

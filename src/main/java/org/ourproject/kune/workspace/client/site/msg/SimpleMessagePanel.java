@@ -16,7 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.workspace.client.site.msg;
+ \*/
+package org.ourproject.kune.workspace.client.site.msg;
 
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;

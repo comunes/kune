@@ -14,7 +14,8 @@
  * the License.
  *
  * Adapted by Vicente J. Ruiz Jurado for kune
- */package org.ourproject.kune.platf.client.ui;
+ \*/
+package org.ourproject.kune.platf.client.ui;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;

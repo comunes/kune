@@ -16,7 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */package org.ourproject.kune.platf.client.actions;
+ \*/
+package org.ourproject.kune.platf.client.actions;
 
 /**
  * And action description and a item (for instance a StateToken, a XmmpURI) over

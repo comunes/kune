@@ -20,7 +20,8 @@
 
 /**
  * 
- */package org.ourproject.kune.rack.filters.rest;
+ \*/
+package org.ourproject.kune.rack.filters.rest;
 
 import javax.servlet.ServletRequest;
 

@@ -10,6 +10,10 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** TODO <s> tag refactorization
+   [Tag]  <-1--m->   [TagUserContent (fecha)]  <-m--1->  [Content]                             ^--m-------1-> [User]
+   Think agout wikipedia suggestions:
+   http://www.mediawiki.org/wiki/API
 ** TODO <v> User preferences storing
    (See also variables in 'Styling braimstorming')
    We need a way to store (in db) User preferences (like emite chat configurations) in a extensible way.
@@ -20,17 +24,17 @@ TODO-list for kune -*- mode: org; -*-
    http://stackoverflow.com/questions/194349/what-is-the-proper-way-to-store-apps-conf-data-in-java
 ** vjrj Styling braimstorming
 *** layouts
-    - name :: greenforrest 
+    - name :: greenforrest
     - screenshot :: images/greenforrest.png
     - varsgroupname :: layout.greenforrest
 *** html+css+variables
 **** css:
-     
+
 **** variables
      prefgroups
      - id :: 1
      - groupname :: emite.ui
-     
+
      pref
      - id :: 1
      - group :: 1
@@ -74,18 +78,75 @@ TODO-list for kune -*- mode: org; -*-
    http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
    http://en.wikipedia.org/wiki/Fragment_identifier
    http://www.w3.org/DesignIssues/Fragment.html
+** vjrj <v> better RTE
+*** Functionality
+    + We can have several RTE in use 
+      - with different save/close actions
+      - with different capabilities depending on:
+        - the browser
+        - the functionality
+    + bidi support
+    + shortcuts (for insert comments, italic, bold, and soon).
+    + Add new capabilities (based on InsertHTML):
+      - Insert tables
+      - Insert special chars (for table or from unicode).
+      - youtube videos
+    + Edit HTML
+    + Easy extensible for new actions
+    + Try to be a reausable module (like emite)
+    + autosave on/off
+*** Charactericts 
+    + Builded over gwt RTE (or any similar RTE) and based in gwt mouse/keyboard events
+*** Menus
+**** File
+     + Save (Ctrl+S) [Always active?]
+     + Save as new copy ...
+     + Rename... (F2)
+     + Delete...
+**** Edit
+     + Undo (Ctrl+Z)
+     + Redo (Ctrl+Y)
+     ---------------
+     + Copy
+     + Cut
+     + Paste
+     ---------------
+     + Select all (Ctrl+A)
+     + Edit HTML
+**** Insert
+     + Picture...
+     + Link... (Ctrl+K)
+     + Table...
+     ----------------
+     + Comment...(Ctrl+M)
+     + Special char
+     + Horizontal line
+     + Page break (for printing)
+*** Buttons
+*** Elements
+    + A register of actions (menus/buttons)
+    + Every RTE instance selects the actions to use
+    + Two topbars, one for menus, other for buttons, font/color selections      
+*** Links
+   http://www.ongwt.com/post/2009/01/08/XWiki-:-Wysiwyg-editor-based-on-GWT
+   http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/samples/internet/ie55/EditRegions/default.asp
+   http://mozilla.org/editor/midasdemo/
 ** vjrj <v> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
    http://agilewebdevelopment.com/plugins/request_routing
    http://wiki.rubyonrails.org/rails/pages/Request+Routing
    http://svn.danwebb.net/external/rails/plugins/request_routing/trunk/README
-** vjrj <v> Duplicate Keys in group/user creation different exception  
+** vjrj <v> Duplicate Keys in group/user creation different exception
    2007-12-21 10:35:16,193 [btpool0-5] ERROR - Duplicate entry 'vjrj' for key 3
    2007-12-21 10:35:16,195 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
    2007-12-21 10:35:16,196 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
    2007-12-21 10:35:16,197 [btpool0-5] DEBUG - ContentManagerDefault.createContent EXCEPTION => javax.persistence.Entity
-** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5 
+** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** <s> Sammer suggests to implement a CBR system for suggests :)
+   http://en.wikipedia.org/wiki/Case-based_reasoning
+   linked with
+   http://www.mediawiki.org/wiki/API
 ** <s> Bastien's extension to emite, for assemblies:
 Possible extension of the Chat utility: make it a tool to take notes
 during a meeting.   Something where someone can define topics, where
@@ -373,7 +434,7 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/97623347b
 http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56dd4e5ad1
 ** TODO <v> Build better our maven repo
   http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-** TODO <v> for dev, study jetty hot deploy (manual mode in >=7.0.0). 
+** TODO <v> for dev, study jetty hot deploy (manual mode in >=7.0.0).
 ** TODO <v> Use of maven-exec plugin to exec scripts (to css tidy, etcetera)
   http://mojo.codehaus.org/exec-maven-plugin/introduction.html
 ** TODO <v> Strip html better in RTE, I18nTranslator, Chat
@@ -383,6 +444,13 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
 ** FIXED <v> browser font size (different from default) issues (scroll in dialogs, buttons background, etc)
    CLOSED: [2009-01-03 sáb 01:37]
 
+** W3C Range support in RTE (selection)
+   As an intro:
+   http://www.quirksmode.org/dom/range_intro.html
+   http://maven.xwiki.org/site/xwiki-web/xwiki-web-wysiwyg/apidocs/com/xpn/xwiki/wysiwyg/client/dom/internal/AbstractRange.html
+   other links:
+   http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
+   http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
 * LONG-TERM
 ** <s> integrate some blog/wiki converter:
    http://code.google.com/p/google-blog-converters-appengine/
@@ -391,4 +459,3 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    http://taste.sourceforge.net/
 * IDEAS
 ** <d> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
-

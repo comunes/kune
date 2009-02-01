@@ -57,7 +57,6 @@ public class TextEditorToolbar extends Composite {
     private class EventListener implements ClickListener, ChangeListener, KeyboardListener {
 
         public static final String TEXT_EDITOR_TOOLBAR_INS_IMG = "k-textedtol-img";
-        // private ImageChooser ic;
         private final TextEditorInsertElement insertElement;
 
         public EventListener(TextEditorInsertElement insertElement) {

@@ -60,12 +60,12 @@ public class RichTextAreaImpl {
     }
 
     public native void setFocus(boolean focused) /*-{
-       if (focused) {
-         this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.focus();
-       } else {
-         this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.blur();
-       }
-     }-*/;
+          if (focused) {
+            this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.focus();
+          } else {
+            this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.blur();
+          }
+        }-*/;
 
     public void setHTML(String html) {
         DOM.setElementProperty(elem, "value", html);
