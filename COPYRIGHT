@@ -17,7 +17,7 @@ headings and other identifying marks.
 kune software
 --------------------------------------------------------------------------------
 Copyright:
-    (c) 2007-2008 The kune development team (see CREDITS for details)
+    (c) 2007-2009 The kune development team (see CREDITS for details)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -74,6 +74,16 @@ some xmpp icons from pidgin
 
 others
 --------------------------------------------------------------------------------
+suco
+	 http://suco.googlecode.com
+	 Copyright: under GNU Lesser General Public License
+   http://www.gnu.org/licenses/lgpl.html
+
+emite
+	 http://emite.googlecode.com
+	 Copyright: under GNU Lesser General Public License
+   http://www.gnu.org/licenses/lgpl.html
+
 fonts-min.css and reset.css
    Copyright (c) 2007, Yahoo! Inc. All rights reserved.
    Code licensed under the BSD License:

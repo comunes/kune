@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 /*
  *
  * This file is part of kune.
- * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as

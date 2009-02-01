@@ -143,7 +143,7 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
-** <s> Sammer suggests to implement a CBR system for suggests :)
+** <s,v> Samer suggests to implement a CBR system for suggests :)
    http://en.wikipedia.org/wiki/Case-based_reasoning
    linked with
    http://www.mediawiki.org/wiki/API
