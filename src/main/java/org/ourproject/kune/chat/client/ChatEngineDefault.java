@@ -40,6 +40,7 @@ import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.emiteuimodule.client.UserChatOptions;
 import com.calclab.emiteuimodule.client.params.AvatarProvider;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
+import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
@@ -57,6 +58,7 @@ class ChatEngineDefault implements ChatEngine {
     private final Provider<EmiteUIDialog> emiteUIProvider;
     private final Provider<FileDownloadUtils> downloadUtils;
     private Collection<RosterItem> roster;
+    private final Event0 onRosterChanged;
 
     public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws, Application application,
             Session session, final Provider<EmiteUIDialog> emiteUIProvider,
@@ -65,6 +67,7 @@ class ChatEngineDefault implements ChatEngine {
         this.ws = ws;
         this.emiteUIProvider = emiteUIProvider;
         this.downloadUtils = downloadUtils;
+        this.onRosterChanged = new Event0("onRosterChanged");
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO initData) {
                 checkChatDomain(initData.getChatDomain());
@@ -100,6 +103,10 @@ class ChatEngineDefault implements ChatEngine {
 
     public void addNewBuddie(String shortName) {
         emiteUIProvider.get().addBuddie(getLocalUserJid(shortName), shortName, "");
+    }
+
+    public void addOnRosterChanged(final Listener0 slot) {
+        onRosterChanged.add(slot);
     }
 
     public void chat(XmppURI jid) {
@@ -158,6 +165,7 @@ class ChatEngineDefault implements ChatEngine {
             emiteUIProvider.get().onRosterChanged(new Listener<Collection<RosterItem>>() {
                 public void onEvent(Collection<RosterItem> rosterChanged) {
                     roster = rosterChanged;
+                    onRosterChanged.fire();
                 }
             });
             emiteUIProvider.get().start(userChatOptions, chatOptions.httpBase, chatOptions.domain,

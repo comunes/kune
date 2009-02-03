@@ -20,30 +20,23 @@
 package org.ourproject.kune.workspace.client.options;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeaderButton;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOptionsView {
 
-    class EntityOptionPushButton extends IconLabel implements View {
-        public EntityOptionPushButton(String text, AbstractImagePrototype icon) {
-            super(text, icon, false);
-        }
-    }
     public static final String ENTITY_OP_PANEL_ID = "k-eop-diag";
     public static final String GROUP_OPTIONS_ERROR_ID = "k-eop-err-mess";
     public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
     private final I18nTranslationService i18n;
     private final EntityHeader entityHeader;
-    private EntityOptionPushButton optionsButton;
+    private EntityHeaderButton optionsButton;
     private final Images images;
 
     private final EntityOptionsGroup entityPreferencesGroup;
@@ -81,7 +74,7 @@ public class EntityOptionsPanel extends AbstractOptionsPanel implements EntityOp
     }
 
     private void createOptionsButton() {
-        optionsButton = new EntityOptionPushButton("", images.emblemSystem());
+        optionsButton = new EntityHeaderButton("", images.emblemSystem());
         optionsButton.addClickListener(new ClickListener() {
             public void onClick(Widget arg0) {
                 createAndShow();

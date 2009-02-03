@@ -20,10 +20,13 @@
 package org.ourproject.kune.chat.client;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.suco.client.events.Listener0;
 
 public interface ChatEngine {
 
     void addNewBuddie(String shortName);
+
+    void addOnRosterChanged(Listener0 slot);
 
     void chat(XmppURI jid);
 

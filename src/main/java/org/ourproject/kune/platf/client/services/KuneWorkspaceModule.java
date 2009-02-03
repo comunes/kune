@@ -126,6 +126,9 @@ import org.ourproject.kune.workspace.client.socialnet.ParticipationSummary;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
+import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddie;
+import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddiePanel;
+import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddiePresenter;
 import org.ourproject.kune.workspace.client.summary.GroupSummary;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryPanel;
 import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
@@ -383,6 +386,18 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final GroupSummaryView view = new GroupSummaryPanel($(Images.class), presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
                 presenter.init(view);
+                return presenter;
+            }
+        });
+
+        register(ApplicationComponentGroup.class, new Factory<AddAsBuddie>(AddAsBuddie.class) {
+            @Override
+            public AddAsBuddie create() {
+                final AddAsBuddiePresenter presenter = new AddAsBuddiePresenter($$(ChatEngine.class),
+                        $(StateManager.class), $(Session.class));
+                final AddAsBuddiePanel panel = new AddAsBuddiePanel(presenter, $(EntityHeader.class), $(Images.class),
+                        $(I18nTranslationService.class));
+                presenter.init(panel);
                 return presenter;
             }
         });
