@@ -19,10 +19,14 @@
  \*/
 package org.ourproject.kune.platf.client.services;
 
+import org.ourproject.kune.platf.client.actions.ContentEditorActionRegistry;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePresenter;
+import org.ourproject.kune.platf.client.ui.rte.RTEditor;
+import org.ourproject.kune.platf.client.ui.rte.RTEditorPanel;
+import org.ourproject.kune.platf.client.ui.rte.RTEditorPresenter;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.platf.client.ui.upload.FileUploaderDialog;
 import org.ourproject.kune.platf.client.ui.upload.FileUploaderPresenter;
@@ -64,5 +68,15 @@ public class KunePlatformModule extends AbstractModule {
             }
         });
 
+        register(Singleton.class, new Factory<RTEditor>(RTEditor.class) {
+            @Override
+            public RTEditor create() {
+                final RTEditorPresenter presenter = new RTEditorPresenter($(ContentEditorActionRegistry.class),
+                        $(I18nTranslationService.class), $(Session.class));
+                final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
     }
 }

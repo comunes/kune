@@ -26,25 +26,21 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.i18n.client.DateTimeFormat;
 
 public class EntitySubTitlePresenter implements EntitySubTitle {
 
     private EntitySubTitleView view;
-    private final I18nTranslationService i18n;
+    private final I18nUITranslationService i18n;
     private final boolean showLanguage;
-    private final Session session;
     private final AuthorableRegistry authorableRegistry;
 
-    public EntitySubTitlePresenter(final I18nTranslationService i18n, final StateManager stateManager, Session session,
+    public EntitySubTitlePresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             boolean showLanguage, AuthorableRegistry authorableRegistry) {
         this.i18n = i18n;
-        this.session = session;
         this.showLanguage = showLanguage;
         this.authorableRegistry = authorableRegistry;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
@@ -71,17 +67,8 @@ public class EntitySubTitlePresenter implements EntitySubTitle {
 
     public void setContentDate(final Date publishedOn) {
         if (publishedOn != null) {
-            String dateFormat = session.getCurrentLanguage().getDateFormat();
-            final DateTimeFormat fmt;
-            if (dateFormat == null) {
-                fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
-            } else {
-                String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(publishedOn);
-                String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
-                dateFormat = dateFormat.replaceFirst("MMM", "'" + i18n.t(monthToTranslate) + "'");
-                fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
-            }
-            view.setContentSubTitleRight(i18n.t("Published on: [%s]", fmt.format(publishedOn)));
+            String dateFormated = i18n.formatDateWithLocale(publishedOn);
+            view.setContentSubTitleRight(i18n.t("Published on: [%s]", dateFormated));
             setContentDateVisible(true);
         } else {
             setContentDateVisible(false);

@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 
@@ -60,12 +59,12 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
     public void setActions(final ActionItemCollection<T> actions) {
         for (final ActionItem<T> actionItem : actions) {
             final ActionDescriptor<T> action = actionItem.getAction();
-            if (actionItem.checkAdded()) {
+            if (actionItem.mustBeAdded()) {
                 if (isToolbarMenu(action)) {
-                    view.addMenuAction(actionItem, actionItem.checkEnabling());
+                    view.addMenuAction(actionItem, actionItem.mustBeEnabled());
                 } else {
                     if (isToolbarButton(action)) {
-                        view.addButtonAction(actionItem, actionItem.checkEnabling());
+                        view.addButtonAction(actionItem, actionItem.mustBeEnabled());
                     } else {
                         Log.error("Code error: Not an ActionMenuDescriptor or ActionButtonDescriptor: "
                                 + action.getText());
@@ -73,17 +72,6 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
                 }
             }
         }
-    }
-
-    public void setEnableAction(final ActionToolbarDescriptor<T> action, final boolean enable) {
-        if (isToolbarMenu(action)) {
-            view.setMenuEnable(action, enable);
-        } else {
-            if (isToolbarButton(action)) {
-                view.setButtonEnable(action, enable);
-            }
-        }
-
     }
 
     private boolean isToolbarButton(final ActionDescriptor<T> action) {

@@ -163,15 +163,6 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         }
     }
 
-    public void setMenuEnable(final ActionDescriptor<T> action, final boolean enable) {
-        final Item item = menuItems.get(genMenuKey((ActionToolbarMenuDescriptor<T>) action));
-        if (item != null) {
-            setEnableMenuItem(item, enable);
-        } else {
-            Log.error("Tryng to enable/disable a non existent toolbar menu item");
-        }
-    }
-
     private void add(final ActionToolbarPosition toolbar, final Widget widget) {
         getToolbar(toolbar).add(widget);
     }
@@ -193,18 +184,18 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
         final Item item;
         if (action instanceof ActionToolbarMenuRadioDescriptor) {
-            CheckItem checkItem = new CheckItem(action.getText());
+            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcut());
             ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
             checkItem.setGroup(radioDescriptor.getGroup());
             checkItem.setChecked(radioDescriptor.mustBeChecked());
             item = checkItem;
         } else if (action instanceof ActionToolbarMenuCheckItemDescriptor) {
-            CheckItem checkItem = new CheckItem(action.getText());
+            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcut());
             ActionToolbarMenuCheckItemDescriptor<T> checkItemDescriptor = (ActionToolbarMenuCheckItemDescriptor<T>) action;
             checkItem.setChecked(checkItemDescriptor.getMustBeChecked().mustBeChecked());
             item = checkItem;
         } else {
-            item = new Item(action.getText());
+            item = new Item(action.getText() + action.getShortcut());
         }
         BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override
@@ -259,19 +250,14 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     private String genButtonKey(final ActionToolbarPosition pos, final String actionText) {
-        final String basePart = "km-ctx-btn-" + pos.toString().substring(0, 2) + "-" + actionText;
+        final String basePart = "km-act-btn-" + pos.toString().substring(0, 2) + "-" + actionText;
         return basePart;
-    }
-
-    private String genMenuKey(final ActionToolbarMenuDescriptor<T> action) {
-        return genMenuKey(action.getActionPosition(), action.getParentMenuTitle(), action.getParentSubMenuTitle(),
-                action.getText());
     }
 
     private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuSubTitle,
             final String actionText) {
 
-        final String basePart = "km-ctx-menu-" + pos.toString().substring(0, 2) + "-" + menuTitle;
+        final String basePart = "km-atp-menu-" + pos.toString().substring(0, 2) + "-" + menuTitle;
         final String subMenuPart = menuSubTitle != null ? "-subm-" + menuSubTitle : "";
         final String itemPart = actionText != null ? "-item-" + actionText : "";
         return basePart + subMenuPart + itemPart;

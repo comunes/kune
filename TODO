@@ -81,6 +81,7 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> better RTE
 *** Functionality
     + We can have several RTE in use 
+      - with different menus (File/Blog ...)
       - with different save/close actions
       - with different capabilities depending on:
         - the browser
@@ -93,7 +94,7 @@ TODO-list for kune -*- mode: org; -*-
       - youtube videos
     + Edit HTML
     + Easy extensible for new actions
-    + Try to be a reausable module (like emite)
+    + Try to be a reusable module (like emite)
     + autosave on/off
 *** Charactericts 
     + Builded over gwt RTE (or any similar RTE) and based in gwt mouse/keyboard events

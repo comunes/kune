@@ -26,10 +26,8 @@ public interface TextEditor {
 
     void editContent(String content, Listener<String> onSave, Listener0 onEditCancelled);
 
-    void onSaved();
+    void onSavedSuccessful();
 
     void onSaveFailed();
-
-    void reset();
 
 }

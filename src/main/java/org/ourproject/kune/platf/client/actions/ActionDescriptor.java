@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 
 import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 /**
  * The Class ActionDescriptor.
@@ -71,14 +72,8 @@ public abstract class ActionDescriptor<T> {
     /** The id. */
     private String id;
 
-    /**
-     * Instantiates a new action descriptor.
-     * 
-     * @param accessRolDTO
-     *            the access rol dto
-     * @param onPerformCall
-     *            the on perform call
-     */
+    private ActionShortcut shortcut;
+
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall) {
         this.accessRol = accessRolDTO;
         this.onPerformCall = onPerformCall;
@@ -104,6 +99,35 @@ public abstract class ActionDescriptor<T> {
      *            the enable condition
      */
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall,
+            final ActionEnableCondition<T> enableCondition) {
+        this(accessRolDTO, onPerformCall);
+        this.enableCondition = enableCondition;
+    }
+
+    /**
+     * Instantiates a new action descriptor.
+     * 
+     * @param accessRolDTO
+     *            the access rol dto
+     * @param onPerformCall
+     *            the on perform call
+     */
+
+    public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener0 onPerformCall) {
+        this(accessRolDTO, new Listener<T>() {
+            public void onEvent(T parameter) {
+                onPerformCall.onEvent();
+            }
+        });
+    }
+
+    public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener0 onPerformCall,
+            final ActionAddCondition<T> addCondition) {
+        this(accessRolDTO, onPerformCall);
+        this.addCondition = addCondition;
+    }
+
+    public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener0 onPerformCall,
             final ActionEnableCondition<T> enableCondition) {
         this(accessRolDTO, onPerformCall);
         this.enableCondition = enableCondition;
@@ -143,15 +167,6 @@ public abstract class ActionDescriptor<T> {
     }
 
     /**
-     * Gets the add condition.
-     * 
-     * @return the add condition
-     */
-    public ActionAddCondition<T> getAddCondition() {
-        return addCondition;
-    }
-
-    /**
      * Gets the confirmation text.
      * 
      * @return the confirmation text
@@ -167,15 +182,6 @@ public abstract class ActionDescriptor<T> {
      */
     public String getConfirmationTitle() {
         return confirmationTitle;
-    }
-
-    /**
-     * Gets the enable condition.
-     * 
-     * @return the enable condition
-     */
-    public ActionEnableCondition<T> getEnableCondition() {
-        return enableCondition;
     }
 
     /**
@@ -205,6 +211,10 @@ public abstract class ActionDescriptor<T> {
         return id;
     }
 
+    public ActionShortcut getShortcut() {
+        return shortcut;
+    }
+
     /**
      * Gets the text.
      * 
@@ -232,6 +242,10 @@ public abstract class ActionDescriptor<T> {
         return mustBeConfirmed;
     }
 
+    public boolean mustBeAdded(T item) {
+        return addCondition != null ? addCondition.mustBeAdded(item) : true;
+    }
+
     /**
      * Must be authenticated.
      * 
@@ -239,6 +253,10 @@ public abstract class ActionDescriptor<T> {
      */
     public boolean mustBeAuthenticated() {
         return mustBeAuthenticated;
+    }
+
+    public boolean mustBeEnabled(T item) {
+        return enableCondition != null ? enableCondition.mustBeEnabled(item) : true;
     }
 
     /**
@@ -339,6 +357,10 @@ public abstract class ActionDescriptor<T> {
      */
     public void setMustBeConfirmed(final boolean mustBeConfirmed) {
         this.mustBeConfirmed = mustBeConfirmed;
+    }
+
+    public void setShortcut(ActionShortcut shortcut) {
+        this.shortcut = shortcut;
     }
 
     /**

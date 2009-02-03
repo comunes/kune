@@ -112,7 +112,7 @@ public class ChatClientActions {
 
     private ActionEnableCondition<StateToken> notDeleted() {
         return new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
+            public boolean mustBeEnabled(StateToken token) {
                 final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
                         ContentStatusDTO.inTheDustbin));
                 return isNotDeleted;

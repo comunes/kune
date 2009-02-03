@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.i18n;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
@@ -31,13 +32,14 @@ import org.ourproject.kune.platf.client.ui.WindowUtils;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class I18nUITranslationService extends I18nTranslationService {
     private HashMap<String, String> lexicon;
     private String currentLanguageCode;
     private I18nChangeListenerCollection i18nChangeListeners;
-    private I18nLanguageDTO initialLang;
+    private I18nLanguageDTO currentLang;
     private I18nServiceAsync i18nService;
     private Session session;
 
@@ -60,12 +62,23 @@ public class I18nUITranslationService extends I18nTranslationService {
         }
     }
 
-    public String getCurrentLanguage() {
-        return currentLanguageCode;
+    public String formatDateWithLocale(final Date date) {
+        String dateFormat = currentLang.getDateFormat();
+        final DateTimeFormat fmt;
+        if (dateFormat == null) {
+            fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
+        } else {
+            String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(date);
+            String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
+            dateFormat = dateFormat.replaceFirst("MMM", "'" + t(monthToTranslate) + "'");
+            fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
+        }
+        String dateFormated = fmt.format(date);
+        return dateFormated;
     }
 
-    public I18nLanguageDTO getInitialLang() {
-        return initialLang;
+    public String getCurrentLanguage() {
+        return currentLanguageCode;
     }
 
     public HashMap<String, String> getLexicon() {
@@ -83,10 +96,10 @@ public class I18nUITranslationService extends I18nTranslationService {
             }
 
             public void onSuccess(final I18nLanguageDTO result) {
-                initialLang = result;
-                currentLanguageCode = initialLang.getCode();
-                session.setCurrentLanguage(initialLang);
-                i18nService.getLexicon(initialLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
+                currentLang = result;
+                currentLanguageCode = currentLang.getCode();
+                session.setCurrentLanguage(currentLang);
+                i18nService.getLexicon(currentLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
                     public void onFailure(final Throwable caught) {
                         Log.error("Workspace adaptation to your language failed");
                     }

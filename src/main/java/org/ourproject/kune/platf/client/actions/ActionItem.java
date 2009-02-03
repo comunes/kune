@@ -35,21 +35,19 @@ public class ActionItem<T> {
         this.item = item;
     }
 
-    public boolean checkAdded() {
-        final ActionAddCondition<T> addCondition = action.getAddCondition();
-        return addCondition != null ? addCondition.mustBeAdded(getItem()) : true;
-    }
-
-    public boolean checkEnabling() {
-        final ActionEnableCondition<T> enableCondition = action.getEnableCondition();
-        return enableCondition != null ? enableCondition.mustBeEnabled(getItem()) : true;
-    }
-
     public ActionDescriptor<T> getAction() {
         return action;
     }
 
     public T getItem() {
         return item;
+    }
+
+    public boolean mustBeAdded() {
+        return action.mustBeAdded(getItem());
+    }
+
+    public boolean mustBeEnabled() {
+        return action.mustBeEnabled(getItem());
     }
 }

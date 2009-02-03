@@ -51,7 +51,7 @@ public class MenuItemsContainer<T> {
                     // Remove if when retrieved rights of siblings
                     for (final ActionItem<T> actionItem : actionCollection) {
                         final ActionDescriptor<T> action = actionItem.getAction();
-                        if (actionItem.checkEnabling()) {
+                        if (actionItem.mustBeEnabled()) {
                             final Item item = new Item(action.getText());
                             item.setIcon(action.getIconUrl());
                             menu.addItem(item);

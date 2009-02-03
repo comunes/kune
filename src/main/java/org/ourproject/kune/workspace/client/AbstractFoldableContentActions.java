@@ -263,7 +263,7 @@ public abstract class AbstractFoldableContentActions {
                                                     public void onSuccess(Object param) {
                                                         Site.hideProgress();
                                                         session.getContentState().setContent(html);
-                                                        editor.onSaved();
+                                                        editor.onSavedSuccessful();
                                                     }
                                                 });
                                     }
@@ -305,11 +305,6 @@ public abstract class AbstractFoldableContentActions {
         go.setMustBeAuthenticated(false);
         go.setTextDescription(i18n.t("Open"));
         go.setIconUrl("images/nav/go.png");
-        go.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
-                return !contextNavigator.isSelected(itemToken);
-            }
-        });
         contextActionRegistry.addAction(go, registerInTypes);
         return go;
     }
@@ -324,9 +319,9 @@ public abstract class AbstractFoldableContentActions {
         goGroupHome.setMustBeAuthenticated(false);
         goGroupHome.setIconUrl("images/group-home.png");
         goGroupHome.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
+            public boolean mustBeEnabled(StateToken token) {
                 final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent().getStateToken();
-                return !itemToken.equals(defContentToken);
+                return !session.getCurrentStateToken().equals(defContentToken);
             }
         });
         goGroupHome.setLeftSeparator(ActionToolbarButtonSeparator.fill);
@@ -362,8 +357,8 @@ public abstract class AbstractFoldableContentActions {
             String iconUrl, final String description, final String parentMenuTitle, Position position,
             String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
+                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
                         Site.showProgressProcessing();
                         contentServiceProvider.get().addContent(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), description, typeId,
@@ -394,7 +389,7 @@ public abstract class AbstractFoldableContentActions {
                         setContentStatus(status, stateToken);
                     }
                 }, new ActionAddCondition<StateToken>() {
-                    public boolean mustBeAdded(StateToken param) {
+                    public boolean mustBeAdded(StateToken token) {
                         if (session.isCurrentStateAContent()
                                 && session.getContentState().getStatus().equals(ContentStatusDTO.submittedForEvaluation)) {
                             return true;
@@ -505,8 +500,8 @@ public abstract class AbstractFoldableContentActions {
 
     protected void createShowDeletedItems(String parentMenuTitle, String... registerInTypes) {
         ActionToolbarMenuCheckItemDescriptor<StateToken> showDeletedItems = new ActionToolbarMenuCheckItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(StateToken parameter) {
+                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
                         boolean mustShow = !session.getCurrentUserInfo().getShowDeletedContent();
                         session.getCurrentUserInfo().setShowDeletedContent(mustShow);
                         if (!mustShow && session.isCurrentStateAContent()
@@ -547,8 +542,8 @@ public abstract class AbstractFoldableContentActions {
             final String iconUrl, final String toolTip, final String permitedExtensions, String... registerInTypes) {
         final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile;
         uploadFile = new ActionToolbarButtonAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
-                ActionToolbarPosition.bottombar, new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
+                ActionToolbarPosition.bottombar, new Listener0() {
+                    public void onEvent() {
                         if (permitedExtensions != null) {
                             // FIXME: can't be reset ...
                             // fileUploaderProvider.get().setPermittedExtensions(permitedExtensions);
@@ -604,7 +599,7 @@ public abstract class AbstractFoldableContentActions {
         setGroupLogo.setTextDescription(i18n.t("Set this as the group logo"));
         setGroupLogo.setIconUrl("images/nav/picture.png");
         setGroupLogo.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
+            public boolean mustBeEnabled(StateToken token) {
                 final BasicMimeTypeDTO mime = session.getContentState().getMimeType();
                 return mime != null && mime.getType().equals("image");
             }
@@ -614,19 +609,17 @@ public abstract class AbstractFoldableContentActions {
 
     private ActionEnableCondition<StateToken> notDefAndNotDeleted() {
         return new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
+            public boolean mustBeEnabled(StateToken token) {
                 final boolean isNotDefContentToken = !session.getCurrentState().getGroup().getDefaultContent().getStateToken().equals(
-                        itemToken);
-                final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
-                        ContentStatusDTO.inTheDustbin));
-                return isNotDefContentToken && isNotDeleted;
+                        session.getCurrentStateToken());
+                return isNotDefContentToken && notDeleted().mustBeEnabled(token);
             }
         };
     }
 
     private ActionEnableCondition<StateToken> notDeleted() {
         return new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken itemToken) {
+            public boolean mustBeEnabled(StateToken token) {
                 final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
                         ContentStatusDTO.inTheDustbin));
                 return isNotDeleted;

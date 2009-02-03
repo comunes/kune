@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.actions;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
 import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public abstract class ActionToolbarDescriptor<T> extends ActionDescriptor<T> {
 
@@ -41,6 +42,24 @@ public abstract class ActionToolbarDescriptor<T> extends ActionDescriptor<T> {
 
     public ActionToolbarDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
             final Listener<T> onPerformCall, final ActionEnableCondition<T> enableCondition) {
+        super(accessRolDTO, onPerformCall, enableCondition);
+        this.actionToolbarPosition = actionToolbarPosition;
+    }
+
+    public ActionToolbarDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
+            final Listener0 onPerformCall) {
+        super(accessRolDTO, onPerformCall);
+        this.actionToolbarPosition = actionToolbarPosition;
+    }
+
+    public ActionToolbarDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
+            final Listener0 onPerformCall, final ActionAddCondition<T> addCondition) {
+        super(accessRolDTO, onPerformCall, addCondition);
+        this.actionToolbarPosition = actionToolbarPosition;
+    }
+
+    public ActionToolbarDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
+            final Listener0 onPerformCall, final ActionEnableCondition<T> enableCondition) {
         super(accessRolDTO, onPerformCall, enableCondition);
         this.actionToolbarPosition = actionToolbarPosition;
     }

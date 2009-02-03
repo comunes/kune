@@ -316,8 +316,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public EntitySubTitle create() {
                 final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(
-                        $(I18nUITranslationService.class), $(StateManager.class), $(Session.class), false,
-                        $(AuthorableRegistry.class));
+                        $(I18nUITranslationService.class), $(StateManager.class), false, $(AuthorableRegistry.class));
                 final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, $(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;

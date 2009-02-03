@@ -170,7 +170,7 @@ public class SocialNetworkPresenter {
         participate.setToolTip(i18n.t("Request to participate in this group"));
         participate.setMustBeAuthenticated(false);
         participate.setAddCondition(new ActionAddCondition<StateToken>() {
-            public boolean mustBeAdded(StateToken param) {
+            public boolean mustBeAdded(StateToken token) {
                 return !isMember(session.getCurrentState().getGroupRights());
             }
         });

@@ -23,10 +23,8 @@ import java.util.List;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
@@ -191,8 +189,8 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
     }
 
     private void registerActions() {
-        final ActionToolbarButtonAndItemDescriptor<UserSimpleDTO> addAsBuddie = new ActionToolbarButtonAndItemDescriptor<UserSimpleDTO>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
+        final ActionMenuItemDescriptor<UserSimpleDTO> addAsBuddie = new ActionMenuItemDescriptor<UserSimpleDTO>(
+                AccessRolDTO.Viewer, new Listener<UserSimpleDTO>() {
                     public void onEvent(final UserSimpleDTO user) {
                         chatEngineProvider.get().addNewBuddie(user.getShortName());
                     }
@@ -200,14 +198,9 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         addAsBuddie.setMustBeAuthenticated(true);
         addAsBuddie.setTextDescription(i18n.t("Add as a buddie"));
         addAsBuddie.setIconUrl("images/add-green.png");
-        addAsBuddie.setAddCondition(new ActionAddCondition<UserSimpleDTO>() {
-            public boolean mustBeAdded(UserSimpleDTO item) {
-                return !session.getCurrentUserInfo().getShortName().equals(item.getShortName());
-            }
-        });
         addAsBuddie.setEnableCondition(new ActionEnableCondition<UserSimpleDTO>() {
-            public boolean mustBeEnabled(UserSimpleDTO item) {
-                return !session.getCurrentUserInfo().getShortName().equals(item.getShortName());
+            public boolean mustBeEnabled(UserSimpleDTO user) {
+                return !chatEngineProvider.get().isBuddie(user.getShortName());
             }
         });
         actionRegistry.addAction(addAsBuddie);

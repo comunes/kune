@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
@@ -37,6 +38,17 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
     public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
             final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
+            final ActionEnableCondition<T> enableCondition) {
+        super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
+    }
+
+    public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
+            final ActionToolbarPosition actionToolbarPosition, final Listener0 onPerformCall) {
+        super(accessRolDTO, actionToolbarPosition, onPerformCall);
+    }
+
+    public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
+            final ActionToolbarPosition actionToolbarPosition, final Listener0 onPerformCall,
             final ActionEnableCondition<T> enableCondition) {
         super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }

@@ -39,6 +39,4 @@ public interface ActionToolbarView<T> extends View {
 
     void setButtonEnable(ActionDescriptor<T> action, boolean enable);
 
-    void setMenuEnable(ActionDescriptor<T> action, boolean enable);
-
 }

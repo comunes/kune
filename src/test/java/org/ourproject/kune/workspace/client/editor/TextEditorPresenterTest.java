@@ -63,7 +63,7 @@ public class TextEditorPresenterTest {
     public void historyChangeWithPendingSaveMustPosponeIt() {
         editAndChangeHistoryToken();
         presenter.onSaveAndClose();
-        presenter.onSaved();
+        presenter.onSavedSuccessful();
         assertTrue(saveListener.isCalledOnce());
         Mockito.verify(stateManager, Mockito.times(1)).resumeTokenChange();
     }

@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.actions;
 
 public interface ActionAddCondition<T> {
-    boolean mustBeAdded(T item);
+    boolean mustBeAdded(T param);
 }

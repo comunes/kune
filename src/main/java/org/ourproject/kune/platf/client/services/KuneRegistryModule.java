@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
+import org.ourproject.kune.platf.client.actions.ContentEditorActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
@@ -185,6 +186,13 @@ public class KuneRegistryModule extends AbstractModule {
             @Override
             public ContextActionRegistry create() {
                 return new ContextActionRegistry();
+            }
+        });
+
+        register(Singleton.class, new Factory<ContentEditorActionRegistry>(ContentEditorActionRegistry.class) {
+            @Override
+            public ContentEditorActionRegistry create() {
+                return new ContentEditorActionRegistry();
             }
         });
 
