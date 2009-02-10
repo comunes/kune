@@ -1,10 +1,117 @@
-=DEVELOPMENT GUIDE=
+=Kune developer's guide=
+
+''This is the trunk/DEV-GUIDE file (must have the same content as the [http://kune.ourproject.org/wiki/index.php?title=Kune_developer's_guide wiki page])''
+
+==Some other relevant docs for kune development==
+
+* trunk/img/kune-arch.png          # architecture diagram
+* trunk/INSTALL
+* trunk/TROUBLESHOOT
+* trunk/FAQ
+* trunk/HOWTO_ADD_A_NEW_TOOL
+
+If you are interested in the db schema:
+* trunk/img/kune-hibernate-diagram-oct-08.png
+but is more easy to look in the Java classes of package org.ourproject.kune.platf.server.domain.
+
+* [http://kune.ourproject.org/spip.php?article15 Video/presentation of kune]
+* trunk/kune-diagram-part1-0.1.png # old diagrams but a good brief
+* trunk/kune-diagram-part2-0.1.png 
+* trunk/kune-diagram-part3-0.1.png 
+
+==Languages and frameworks used in kune development==
+
+===Java===
+
+The 2/3 main parts of kune are developed in Java. The server code, and the desktop client code.
+
+===GWT===
+
+[ GWT] is used for the client workspace. For some dev 
+
+===Rails===
+
+GWT is used for the public more static front-end.
+
+===HTML/CSS/JavaScript===
+
+All the HTML/JavaScript code of the client workspace is generated from the Java code using GWT. We use some minimal html/css (see kune.css, doc.css, workspace.css, Kune.html) plus this generated js.
+
+All the workspace css are concatenated and compressed using csstidy (see script/css-compact-and-tidy.css if you want to know how).
+
+==Notable dependencies==
+
+For a more detailed list of dependences see trunk/pom.xml file.
+
+===Server side===
+
+====guice====
+
+[http://code.google.com/p/google-guice/ Guice] is used in server code for [http://en.wikipedia.org/wiki/Inversion_of_Control IoC]. As they describe «Put simply, Guice alleviates the need for factories and the use of new in your Java code. Think of Guice's @Inject as the new new.».
+
+As we cannot use guice in client code, we use our other project [http://suco.googlecode.com suco] that is inspired in guice.
+
+For use details see the [http://google-guice.googlecode.com/files/Guice%201.0%20User%27s%20Guide.pdf Guice User's Guide].
+
+====Apache OpenJPA====
+
+For persistence, we use [http://openjpa.apache.org/ OpenJPA]. See the [http://openjpa.apache.org/docs/openjpa-0.9.0-incubating/manual/manual.html openjpa manual] for dev info.
+
+====Warp persist====
+
+We use [http://www.wideplay.com/guicewebextensions2 warp-persist] and [http://www.wideplay.com/dynamicfinders dynamic finders]. That is Guice + Persistence.
+
+====lucene====
+
+For content indexing, we use lucene.
+
+===client side (GWT)===
+
+====Suco====
+
+[http://suco.googlecode.com suco] is our IoC library for GWT. For more documentation see [http://code.google.com/p/suco/w/list the suco wiki] or our HelloWorldModule class.
+
+====Emite====
+
+[http://emite.google.code emite] is our xmpp library a client. See [http://code.google.com/p/emite/w/list the wiki] for more documentation about emite.
+
+====gwt-ext====
+
+[http://gwt-ext.com/ gwt-ext] is used for our gwt UI. See the [http://www.gwt-ext.com/demo showcase demo] for sample codes.
+
+====gwt-ext-ux====
+
+We use some widgets from the [http://code.google.com/p/gwt-ext-ux/ gwt-ext-ux] project (mainly the File Uploader).
+
+====gwt-log====
+
+We use [http://gwt-log.googlecode.com/ gwt-log] as the log library for our GWT code. Also gwt-log is used in emite and suco. See [http://code.google.com/p/gwt-log/wiki/GettingStarted GettingStarted] for more details.
+
+===client side (Rails)===
+
+====jruby====
+
+====rack====
+
+==Some recomendations==
+
+===Designs patterns===
+
+* MVC: We use a lot the [http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC pattern] in our GWT code. See our HelloWorldModule class for a simple sample. We used to auto generate some MVC classes with the script script/generateBasicUIElements.sh.
+
+* IoC: as we described before we use guice and suco for IoC. See HelloWorldModule class for a very simple sample of gwt module using suco.
+
+===Usability===
 
 ==Development Environment==
 
-Install kune (see INSTALL file).
+===Prerequisite: Install kune===
 
-Running (in the trunk directory)
+Install kune (see trunk/INSTALL file) and run kune for the first time.
+
+===Eclipse configuration===
+
+Running (in the trunk directory):
 
  mvn eclipse:eclipse 
 
@@ -12,21 +119,25 @@ generates .project and download necessary code jars. Then you can import the pro
 
 Also you have to set the variable M2_REPO (Eclipse Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/ouruser/.m2/repository).
 
-GWT Hosted Mode:
+===GWT's Hosted Mode===
 
-We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /kune/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
-* gwt-dev-[linux|mac|windows].jar (Add External Jar and select it from your gwt installation directory)
+For start the hosted mode, you can both execute from command line:
+
+ mvn gwt:gwt
+
+Also, you can generate a hosted mode launch configuration in eclipse. We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /kune/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
+* gwt-dev-[linux|mac|windows].jar (Add External Jar and choose it from your gwt installation directory)
 * java - /kune/src/main
 * kune (default classpath)
 
 If you have memory problems running the hosted mode, increase it in VM arguments:
-  -Xmx512M
+ -Xmx512M
 
 before run hosted mode compile once with:
  mvn gwt:compile
 and deploy with:
  script/deploy_gwt.sh 
-and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT).
+and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT). This is quite useful to put breakpoints in the server coe.
 
 ==Code preferences==
 
@@ -36,10 +147,16 @@ We use some eclipse code preferences for kune project:
 please use it if you want to contribute.
 
 We will (try) to follow:
+
 http://code.google.com/webtoolkit/makinggwtbetter.html#codestyle
 
 and the code conventions for the JavaTM Programming Language:
+
 http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html
+
+also we try to be a "Good Java Citizen":
+
+http://docs.codehaus.org/display/PICO/Good+Citizen
 
 ==Use of mylyn in eclipse==
 
@@ -54,14 +171,15 @@ Syncro your tasks.
 
 ==Code samples==
 
-See HelloWorldModule.java to a small sample of how to extend the gwt UI. 
+See HelloWorldModule.java to a small sample of how to extend the gwt workspace UI. 
 
 Check also trunk/HOWTO_ADD_A_NEW_TOOL to instructions of how to add a new tool in kune.
 
 ==Changelog==
 
 Periodically update the Changelog using svn2cl:
-
+ 
+ # In debian a related distros: 'apt-get install svn2cl' and do:
  svn2cl -i --authors=dev-utils/authors.xml -o ChangeLog
 
 ==License==
@@ -84,7 +202,7 @@ Attach the following notices to each source of the program at the begining:
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 </pre>
 
-In Java, something like this (also you can use your name):
+In Java, something like this (you can put your name instead of "kune team" if you create new files):
 
 <pre>
 /*
