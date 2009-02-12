@@ -2,7 +2,7 @@
 
 ''This is the trunk/DEV-GUIDE file (must have the same content as the [http://kune.ourproject.org/wiki/index.php?title=Kune_developer's_guide wiki page])''
 
-==Some other relevant docs for kune development==
+==Some relevant docs for kune development==
 
 * trunk/img/kune-arch.png          # architecture diagram
 * trunk/INSTALL
@@ -15,65 +15,71 @@ If you are interested in the db schema:
 but is more easy to look in the Java classes of package org.ourproject.kune.platf.server.domain.
 
 * [http://kune.ourproject.org/spip.php?article15 Video/presentation of kune]
-* trunk/kune-diagram-part1-0.1.png # old diagrams but a good brief
-* trunk/kune-diagram-part2-0.1.png 
-* trunk/kune-diagram-part3-0.1.png 
+* trunk/img/kune-diagram-part1-0.1.png # old diagrams but a good summary
+* trunk/img/kune-diagram-part2-0.1.png 
+* trunk/img/kune-diagram-part3-0.1.png 
 
 ==Languages and frameworks used in kune development==
 
 ===Java===
 
-The 2/3 main parts of kune are developed in Java. The server code, and the desktop client code.
+The 2/3 main parts of Kune are developed in Java. The server code, and the workspace client code.
 
 ===GWT===
 
-[ GWT] is used for the client workspace. For some dev 
+[http://code.google.com/webtoolkit/ GWT] is used for the client workspace. See the [http://code.google.com/intl/en/webtoolkit/gettingstarted.html Getting Started - Quick Start] or the [http://code.google.com/intl/es-ES/webtoolkit/makinggwtbetter.html Making GWT Better]. 
+
+GWT is the key of our Kune workspace UI. As the GWT team says: «GWT's mission is to radically improve the web experience for users by enabling developers to use existing Java tools to build no-compromise AJAX for any modern browser.» and we think they achieved it.
 
 ===Rails===
 
-GWT is used for the public more static front-end.
+[http://rubyonrails.org/ Ruby on Rails] is used for the public and more static front-end, but sharing the db schema with the Java client/server side.
 
 ===HTML/CSS/JavaScript===
 
-All the HTML/JavaScript code of the client workspace is generated from the Java code using GWT. We use some minimal html/css (see kune.css, doc.css, workspace.css, Kune.html) plus this generated js.
+All the HTML/JavaScript code of the client workspace is generated from the Java code using GWT. We use some minimal html/css (see kune.css, doc.css, workspace.css, Kune.html) plus the generated js (compiling the java code with GWT).
 
 All the workspace css are concatenated and compressed using csstidy (see script/css-compact-and-tidy.css if you want to know how).
 
 ==Notable dependencies==
 
-For a more detailed list of dependences see trunk/pom.xml file.
+Here some notable dependencies of Kune. For a more detailed list of dependences see trunk/pom.xml file.
 
 ===Server side===
+
+----
 
 ====guice====
 
 [http://code.google.com/p/google-guice/ Guice] is used in server code for [http://en.wikipedia.org/wiki/Inversion_of_Control IoC]. As they describe «Put simply, Guice alleviates the need for factories and the use of new in your Java code. Think of Guice's @Inject as the new new.».
 
-As we cannot use guice in client code, we use our other project [http://suco.googlecode.com suco] that is inspired in guice.
+As we cannot use guice in client code, we use our other project [http://suco.googlecode.com suco] that is heavily inspired in guice.
 
 For use details see the [http://google-guice.googlecode.com/files/Guice%201.0%20User%27s%20Guide.pdf Guice User's Guide].
 
 ====Apache OpenJPA====
 
-For persistence, we use [http://openjpa.apache.org/ OpenJPA]. See the [http://openjpa.apache.org/docs/openjpa-0.9.0-incubating/manual/manual.html openjpa manual] for dev info.
+For db persistence, we use [http://openjpa.apache.org/ OpenJPA]. See the [http://openjpa.apache.org/docs/openjpa-0.9.0-incubating/manual/manual.html openjpa manual] for dev info.
 
 ====Warp persist====
 
-We use [http://www.wideplay.com/guicewebextensions2 warp-persist] and [http://www.wideplay.com/dynamicfinders dynamic finders]. That is Guice + Persistence.
+We use [http://www.wideplay.com/guicewebextensions2 warp-persist] and [http://www.wideplay.com/dynamicfinders dynamic finders]. That is Guice + Persistence + easy db query.
 
-====lucene====
+====Lucene====
 
-For content indexing, we use lucene.
+For content indexing, we use Lucene. We usually use [http://www.hibernate.org/hib_docs/search/reference/en/html/ Hibernate Search - Apache Lucene Integration] documentation.
 
 ===client side (GWT)===
 
+----
+
 ====Suco====
 
-[http://suco.googlecode.com suco] is our IoC library for GWT. For more documentation see [http://code.google.com/p/suco/w/list the suco wiki] or our HelloWorldModule class.
+[http://suco.googlecode.com suco] is our IoC library for GWT. For more documentation see [http://code.google.com/p/suco/w/list the suco wiki] or our HelloWorldModule class. See also our Guice section above.
 
 ====Emite====
 
-[http://emite.google.code emite] is our xmpp library a client. See [http://code.google.com/p/emite/w/list the wiki] for more documentation about emite.
+[http://emite.google.code emite] is our xmpp extensible library and client. See [http://code.google.com/p/emite/w/list the wiki] for more documentation about emite. It's a module totally independent of Kune, then you can also use emite in your website or project. Emite also uses suco for easy modularity and event handling.
 
 ====gwt-ext====
 
@@ -81,25 +87,42 @@ For content indexing, we use lucene.
 
 ====gwt-ext-ux====
 
-We use some widgets from the [http://code.google.com/p/gwt-ext-ux/ gwt-ext-ux] project (mainly the File Uploader).
+We use some widgets from the [http://code.google.com/p/gwt-ext-ux/ gwt-ext-ux] project (mainly the File Uploader). See the [http://www.gwt-ext.com:8080/demo-ux/ gwt-ext-ux showcase] for sample codes.
 
 ====gwt-log====
 
-We use [http://gwt-log.googlecode.com/ gwt-log] as the log library for our GWT code. Also gwt-log is used in emite and suco. See [http://code.google.com/p/gwt-log/wiki/GettingStarted GettingStarted] for more details.
+We use [http://gwt-log.googlecode.com/ gwt-log] as the log library for our GWT code. Also gwt-log is used in emite and suco. See [http://code.google.com/p/gwt-log/wiki/GettingStarted GettingStarted] for more details or simple use Log.info("") Log.debug("") Log.error("") etcetera in your GWT code when needed.
 
 ===client side (Rails)===
 
-====jruby====
+----
 
-====rack====
+====JRuby-Rack====
 
-==Some recomendations==
+We use Rails via [http://kenai.com/projects/jruby-rack/pages/Home JRuby-Rack]. Ruby on Rails + Plugins + Gems are installed in trunk/src/main/webapp/WEB-INF/. Jetty uses these gems when running, but if you run ruby directly with script/server, take into account that you are using your installed local gems.
+
+To install gems inside this directory:
+ sudo gem install <name of the gem> -i src/main/webapp/WEB-INF/gems --no-rdoc --no-ri
+and if you want to use gems locally in you system use a normal use the normal:
+ sudo gem install <name of the gem>
+it's recommended to have the same gems in your local installation and in jruby.
+
+The rails plugins must be installed in src/main/webapp/WEB-INF/publicspace/ then when installed will work with your local ruby and with jruby via jetty.
+
+For install rail plugins:
+ cd src/main/webapp/WEB-INF/publicspace/
+ ./script/plugin install (pluginName|http://...)
+
+==Some recommendations==
 
 ===Designs patterns===
 
-* MVC: We use a lot the [http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC pattern] in our GWT code. See our HelloWorldModule class for a simple sample. We used to auto generate some MVC classes with the script script/generateBasicUIElements.sh.
-
-* IoC: as we described before we use guice and suco for IoC. See HelloWorldModule class for a very simple sample of gwt module using suco.
+* MVC: We use a lot the [http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC pattern] in our GWT code. See our HelloWorldModule class for a simple sample. We used to auto generate some MVC classes with the script script/generateBasicUIElements.sh:
+ bin/generateBasicUIElements.sh <packageDirDest> <ClassName>
+for instance:
+ bin/generateBasicUIElements.sh src/main/java/org/ourproject/kune/workspace/client/options/ GroupOptions
+this generates four classes GroupOptions (the external interface), GroupOptionsPresenter (the Presenter with the business logic, the part you must test well), the GroupOptionsView (the interface to the panel, the UI code), the GroupOptionsPanel (the UI code, here all the gwt UI stuff). Also gives you in the standard output a sample code to use suco in a module to build these objects.
+* IoC: as we described before we use guice and suco for IoC. Again, see HelloWorldModule class for a very simple sample of gwt module using suco.
 
 ===Usability===
 
@@ -137,7 +160,7 @@ before run hosted mode compile once with:
  mvn gwt:compile
 and deploy with:
  script/deploy_gwt.sh 
-and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT). This is quite useful to put breakpoints in the server coe.
+and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT). This is quite useful to put breakpoints in the server code.
 
 ==Code preferences==
 
@@ -167,13 +190,13 @@ In additional settings, put:
 Add a Repository Query with:
 * Query URL: ${serverUrl}/tracker/?bfunc=downloadcsv&group_id=${group_id}&atid=${atid}
 * Query Pattern: ({Id}[0-9]+?),[0-9]+,"({Type}.+?)",[0-9]+,[0-9]+,"[^"]+",[0-9]+,"({Owner}.+?)","[^"]+","[^"]+","[^"]+","({Description}.+?)","[^"]+"*
-Syncro your tasks.
+Sync your tasks.
 
 ==Code samples==
 
 See HelloWorldModule.java to a small sample of how to extend the gwt workspace UI. 
 
-Check also trunk/HOWTO_ADD_A_NEW_TOOL to instructions of how to add a new tool in kune.
+Check also trunk/HOWTO_ADD_A_NEW_TOOL to instructions of how to add a new tool in Kune.
 
 ==Changelog==
 
@@ -181,6 +204,8 @@ Periodically update the Changelog using svn2cl:
  
  # In debian a related distros: 'apt-get install svn2cl' and do:
  svn2cl -i --authors=dev-utils/authors.xml -o ChangeLog
+
+then, put good descriptions on your changes in svn commit comments.
 
 ==License==
 
