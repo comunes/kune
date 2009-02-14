@@ -38,6 +38,12 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
     public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
             final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
+            final ActionAddCondition<T> addCondition) {
+        super(accessRolDTO, actionToolbarPosition, onPerformCall, addCondition);
+    }
+
+    public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
+            final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
             final ActionEnableCondition<T> enableCondition) {
         super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
@@ -45,6 +51,12 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
     public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
             final ActionToolbarPosition actionToolbarPosition, final Listener0 onPerformCall) {
         super(accessRolDTO, actionToolbarPosition, onPerformCall);
+    }
+
+    public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
+            final ActionToolbarPosition actionToolbarPosition, final Listener0 onPerformCall,
+            final ActionAddCondition<T> addCondition) {
+        super(accessRolDTO, actionToolbarPosition, onPerformCall, addCondition);
     }
 
     public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,

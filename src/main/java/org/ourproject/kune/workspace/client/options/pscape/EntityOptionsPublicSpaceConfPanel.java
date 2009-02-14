@@ -38,7 +38,7 @@ public class EntityOptionsPublicSpaceConfPanel extends Panel implements EntityOp
 
     public EntityOptionsPublicSpaceConfPanel(final EntityOptionsPublicSpaceConfPresenter presenter,
             final WorkspaceSkeleton ws, I18nTranslationService i18n, WsThemePresenter wsPresenter) {
-        super.setTitle(i18n.t("Styling"));
+        super.setTitle(i18n.t("Style"));
         super.setIconCls("k-colors-icon");
         super.setAutoScroll(true);
         super.setBorder(false);

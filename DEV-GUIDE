@@ -115,6 +115,12 @@ For install rail plugins:
 
 ==Some recommendations==
 
+===Usability===
+
+We try to make Kune very usable. Then please think like a human and use a human language in the UI messages, not techie language or Klingon or an alien language ;). 
+
+Your mother/father must understand and be capable of use Kune if they are capable of use yahoo/gmail/hotmail email accounts. It he/she are not capable of use Kune, we are not doing well our work, and we must do more usable our UI.
+
 ===Designs patterns===
 
 * MVC: We use a lot the [http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC pattern] in our GWT code. See our HelloWorldModule class for a simple sample. We used to auto generate some MVC classes with the script script/generateBasicUIElements.sh:
@@ -123,8 +129,6 @@ for instance:
  bin/generateBasicUIElements.sh src/main/java/org/ourproject/kune/workspace/client/options/ GroupOptions
 this generates four classes GroupOptions (the external interface), GroupOptionsPresenter (the Presenter with the business logic, the part you must test well), the GroupOptionsView (the interface to the panel, the UI code), the GroupOptionsPanel (the UI code, here all the gwt UI stuff). Also gives you in the standard output a sample code to use suco in a module to build these objects.
 * IoC: as we described before we use guice and suco for IoC. Again, see HelloWorldModule class for a very simple sample of gwt module using suco.
-
-===Usability===
 
 ==Development Environment==
 

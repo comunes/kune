@@ -184,18 +184,18 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
         final Item item;
         if (action instanceof ActionToolbarMenuRadioDescriptor) {
-            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcut());
+            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcutToS());
             ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
             checkItem.setGroup(radioDescriptor.getGroup());
             checkItem.setChecked(radioDescriptor.mustBeChecked());
             item = checkItem;
         } else if (action instanceof ActionToolbarMenuCheckItemDescriptor) {
-            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcut());
+            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcutToS());
             ActionToolbarMenuCheckItemDescriptor<T> checkItemDescriptor = (ActionToolbarMenuCheckItemDescriptor<T>) action;
             checkItem.setChecked(checkItemDescriptor.getMustBeChecked().mustBeChecked());
             item = checkItem;
         } else {
-            item = new Item(action.getText() + action.getShortcut());
+            item = new Item(action.getText() + action.getShortcutToS());
         }
         BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override
@@ -205,6 +205,9 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         };
         item.addListener(clickListener);
         item.setIcon(action.getIconUrl());
+        // ToolTip tip = new ToolTip();
+        // tip.setHtml(action.getToolTip());
+        // tip.setShowDelay(5000);
         item.setTitle(action.getToolTip());
         if (id != null) {
             item.setId(id);

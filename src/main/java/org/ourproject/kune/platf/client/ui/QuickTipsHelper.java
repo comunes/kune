@@ -31,6 +31,6 @@ public class QuickTipsHelper {
         quickTipInstance.setDismissDelay(7000);
         quickTipInstance.setHideDelay(400);
         quickTipInstance.setMinWidth(100);
-        quickTipInstance.setShowDelay(750);
+        quickTipInstance.setShowDelay(1500);
     }
 }

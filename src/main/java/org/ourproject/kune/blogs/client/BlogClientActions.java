@@ -78,9 +78,8 @@ public class BlogClientActions extends AbstractFoldableContentActions {
         createNewContentAction(TYPE_POST, "images/nav/post_add.png", i18n.t("New post"), parentMenuTitleCtx,
                 Position.ctx, TYPE_BLOG);
 
-        createContentModeratedActions(parentMenuTitle, contentsModerated);
-
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+        createContentModeratedActions(parentMenuTitle, contentsModerated);
         createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
 
         // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =

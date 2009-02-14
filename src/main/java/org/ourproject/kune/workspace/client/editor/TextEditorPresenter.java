@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.workspace.client.editor;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
@@ -87,14 +86,6 @@ public class TextEditorPresenter implements TextEditor {
         setContent(content);
         stateManager.addBeforeStateChangeListener(beforeStateChangeListener);
         siteSignOutLink.addBeforeSignOut(beforeStateChangeListener);
-    }
-
-    public String getContent() {
-        return view.getHTML();
-    }
-
-    public View getView() {
-        return view;
     }
 
     public void init(final TextEditorView view) {

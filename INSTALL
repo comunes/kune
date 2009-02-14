@@ -6,6 +6,11 @@ FIXME
 
 ==Development instructions==
 
+===Prerrequisites===
+
+- Install java-jdk (>=5), maven2, mysql (> 5.0) and for example eclipse
+- Install gwt 1.5.3 and follow Appendix A for maven+gwt configuration
+
 ===MYSQL configuration===
 
 ====Before db creation====	
@@ -41,8 +46,6 @@ FLUSH PRIVILEGES;
 
 ===Source code===
 
-- Install java-jdk (>=5), maven2, mysql (> 5.0) and for example eclipse
-- Install gwt 1.5.3 and follow Appendix A for maven+gwt configuration
 - Compile with maven:
  # (in the trunk directory)
  mvn compile -Dliquibase.should.run=false
@@ -78,11 +81,11 @@ Not verified:  In case you are using windows as dev platform you only have to cr
  <property name="hibernate.search.default.indexBase" value="C:\kune\kune-index"/>
 do the same with every persistence unit defined inside.
 
-=== Run openfire jabber server===
+===Run openfire jabber server===
 
 Install and run a openfire jabber server (see Appendix B for proper configuration of openfire) or ejabberd.
 
-=== Install jmagick===
+===Install jmagick===
 
 Install jmagick-jni. In debian: apt-get install libjmagick6-jni (version 6.2.6-0) also you need or:
  sudo ln -s /usr/lib/jni/libJMagick.so /usr/lib/libJMagick.so

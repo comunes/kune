@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.workspace.client;
 
-import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionCheckedCondition;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
@@ -73,6 +72,8 @@ public abstract class AbstractFoldableContentActions {
     protected enum Position {
         cnt, ctx
     }
+
+    private static final String PUBLICATION_MENU = "Publication";
 
     protected final Session session;
     protected final StateManager stateManager;
@@ -129,27 +130,15 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected void createContentModeratedActions(String parentMenuTitle, final String... contentsModerated) {
-        final ActionToolbarMenuRadioDescriptor<StateToken> setPublishStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Published online"), parentMenuTitle,
-                ContentStatusDTO.publishedOnline);
-        final ActionToolbarMenuRadioDescriptor<StateToken> setEditionInProgressStatus = createSetStatusAction(
-                AccessRolDTO.Editor, i18n.t("Editing in progress"), parentMenuTitle, ContentStatusDTO.editingInProgress);
-        final ActionToolbarMenuRadioDescriptor<StateToken> setRejectStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("Rejected"), parentMenuTitle, ContentStatusDTO.rejected);
-        final ActionToolbarMenuRadioDescriptor<StateToken> setSubmittedForPublishStatus = createSetStatusAction(
-                AccessRolDTO.Editor, i18n.t("Submitted for publish"), parentMenuTitle,
-                ContentStatusDTO.submittedForEvaluation);
-        final ActionToolbarMenuRadioDescriptor<StateToken> setInTheDustBinStatus = createSetStatusAction(
-                AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), parentMenuTitle,
-                ContentStatusDTO.inTheDustbin);
-        contentActionRegistry.addAction(setPublishStatus, contentsModerated);
-        contentActionRegistry.addAction(setEditionInProgressStatus, contentsModerated);
-        contentActionRegistry.addAction(setRejectStatus, contentsModerated);
-        contentActionRegistry.addAction(setSubmittedForPublishStatus, contentsModerated);
-        contentActionRegistry.addAction(setInTheDustBinStatus, contentsModerated);
-        createPublishAction("images/accept.png", i18n.t("Publish online"), ContentStatusDTO.publishedOnline,
+        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("Published online"), ContentStatusDTO.publishedOnline,
                 contentsModerated);
-        createPublishAction("images/cancel.png", i18n.t("Reject publication"), ContentStatusDTO.rejected,
+        createSetStatusAction(AccessRolDTO.Editor, i18n.t("Editing in progress"), ContentStatusDTO.editingInProgress,
+                contentsModerated);
+        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("Rejected"), ContentStatusDTO.rejected,
+                contentsModerated);
+        createSetStatusAction(AccessRolDTO.Editor, i18n.t("Submitted for publish"),
+                ContentStatusDTO.submittedForEvaluation, contentsModerated);
+        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), ContentStatusDTO.inTheDustbin,
                 contentsModerated);
     }
 
@@ -381,28 +370,6 @@ public abstract class AbstractFoldableContentActions {
     protected void createPostSessionInitActions() {
     }
 
-    protected void createPublishAction(String icon, String tooltip, final ContentStatusDTO status,
-            String... registerInTypes) {
-        ActionToolbarButtonDescriptor<StateToken> pubAction = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
-                    public void onEvent(StateToken stateToken) {
-                        setContentStatus(status, stateToken);
-                    }
-                }, new ActionAddCondition<StateToken>() {
-                    public boolean mustBeAdded(StateToken token) {
-                        if (session.isCurrentStateAContent()
-                                && session.getContentState().getStatus().equals(ContentStatusDTO.submittedForEvaluation)) {
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-        pubAction.setMustBeAuthenticated(true);
-        pubAction.setToolTip(tooltip);
-        pubAction.setIconUrl(icon);
-        contentActionRegistry.addAction(pubAction, registerInTypes);
-    }
-
     protected ActionToolbarMenuDescriptor<StateToken> createRefreshCntAction(String parentMenuTitle,
             String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> refreshCnt = new ActionToolbarMenuDescriptor<StateToken>(
@@ -476,8 +443,8 @@ public abstract class AbstractFoldableContentActions {
         return setAsDefGroupContent;
     }
 
-    protected ActionToolbarMenuRadioDescriptor<StateToken> createSetStatusAction(final AccessRolDTO rol,
-            final String textDescription, String parentMenuTitle, final ContentStatusDTO status) {
+    protected void createSetStatusAction(final AccessRolDTO rol, final String textDescription,
+            final ContentStatusDTO status, String[] contentsModerated) {
         final ActionToolbarMenuRadioDescriptor<StateToken> action = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
@@ -493,9 +460,9 @@ public abstract class AbstractFoldableContentActions {
                     }
                 });
         action.setTextDescription(textDescription);
-        action.setParentMenuTitle(parentMenuTitle);
-        action.setParentSubMenuTitle(i18n.t("Change the status"));
-        return action;
+        action.setParentMenuTitle(PUBLICATION_MENU);
+        // action.setParentSubMenuTitle(i18n.t("Change the status"));
+        contentActionRegistry.addAction(action, contentsModerated);
     }
 
     protected void createShowDeletedItems(String parentMenuTitle, String... registerInTypes) {

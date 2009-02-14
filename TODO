@@ -144,10 +144,13 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
-** <s,v> Samer suggests to implement a CBR system for suggests :)
-   http://en.wikipedia.org/wiki/Case-based_reasoning
-   linked with
-   http://www.mediawiki.org/wiki/API
+** <s,v> Integrate recommendations/suggestions subsystem
+*** Samer suggests to implement a CBR system for suggests :)
+    http://en.wikipedia.org/wiki/Case-based_reasoning
+    linked with
+    http://www.mediawiki.org/wiki/API
+*** links
+    http://taste.sourceforge.net/
 ** <s> Bastien's extension to emite, for assemblies:
 Possible extension of the Chat utility: make it a tool to take notes
 during a meeting.   Something where someone can define topics, where
@@ -441,6 +444,9 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
 ** TODO <v> Strip html better in RTE, I18nTranslator, Chat
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
 ** TODO <v> See css utilities in http://code.google.com/p/cobogw/
+** TODO <v> kune & accessibility
+   http://googlewebtoolkit.blogspot.com/2008/09/built-in-accessibility-in-gwt-15.html
+   http://extjs.com/forum/showthread.php?t=12999
 ** FIXED <s,v> Add in license choose a free/non-free indicator [3]
 ** FIXED <v> browser font size (different from default) issues (scroll in dialogs, buttons background, etc)
    CLOSED: [2009-01-03 sáb 01:37]
@@ -456,7 +462,5 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
 ** <s> integrate some blog/wiki converter:
    http://code.google.com/p/google-blog-converters-appengine/
    http://toolserver.org/~merphant/wiki2html/
-** Think about recommendations/suggestions
-   http://taste.sourceforge.net/
 * IDEAS
 ** <d> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)

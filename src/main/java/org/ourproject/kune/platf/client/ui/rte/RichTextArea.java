@@ -181,6 +181,8 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
      */
     public interface ExtendedFormatter extends BasicFormatter {
 
+        void copy();
+
         /**
          * Creates a link to the supplied URL.
          * 
@@ -188,6 +190,8 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
          *            the URL to be linked to
          */
         void createLink(String url);
+
+        void cut();
 
         /**
          * Inserts a horizontal rule.
@@ -229,6 +233,10 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
          */
         void leftIndent();
 
+        void paste();
+
+        void redo();
+
         /**
          * Removes all formatting on the selected text.
          */
@@ -248,6 +256,8 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
          * Toggles strikethrough.
          */
         void toggleStrikethrough();
+
+        void undo();
     }
 
     /**

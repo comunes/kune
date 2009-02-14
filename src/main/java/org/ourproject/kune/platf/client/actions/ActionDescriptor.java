@@ -215,6 +215,10 @@ public abstract class ActionDescriptor<T> {
         return shortcut;
     }
 
+    public String getShortcutToS() {
+        return shortcut == null ? "" : shortcut.toString();
+    }
+
     /**
      * Gets the text.
      * 

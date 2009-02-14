@@ -77,9 +77,8 @@ public class GalleryClientActions extends AbstractFoldableContentActions {
         createNewContainerAction(TYPE_ALBUM, "images/nav/gallery_add.png", i18n.t("New album"), parentMenuTitleCtx,
                 i18n.t("New"), i18n.t("New album"), Position.ctx, TYPE_ROOT);
 
-        createContentModeratedActions(parentMenuTitle, contentsModerated);
-
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+        createContentModeratedActions(parentMenuTitle, contentsModerated);
         createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
 
         // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =

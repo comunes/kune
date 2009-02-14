@@ -82,7 +82,7 @@
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>suco</artifactId>
-      <version>0.5.2.2</version>
+      <version>0.6.0</version>
     </dependency>
     <dependency>
       <groupId>jmagick</groupId>
@@ -94,7 +94,7 @@
     <dependency>
       <groupId>com.calclab.emite</groupId>
       <artifactId>emite</artifactId>
-      <version>0.4.4</version>
+      <version>0.4.5</version>
     </dependency>
     <dependency>
       <groupId>org.jivesoftware.smack</groupId>
@@ -380,9 +380,24 @@
     </repository>
   </repositories>
   <issueManagement>
-    <system>google code issues list</system>
-    <url>http://code.google.com/p/kune/issues/list</url>
+    <system>kune issues list at ourproject.org</system>
+    <url>http://ourproject.org/tracker/?group_id=407</url>
   </issueManagement>
+  <developers>
+  	<developer>
+  		<id>dani</id>
+  		<name>Daniel Gómez Blasco</name>
+  		<email>danigb@gmail.com</email>
+  	</developer>
+  	<developer>
+  		<name>Samer Hassan</name>
+  		<email>samer2004@gmail.com</email>
+  	</developer>
+  	<developer>
+  		<name>Vicente J. Ruiz Jurado</name>
+  		<email>vjrj@ourproject.org</email>
+  	</developer>
+  </developers>
   <scm>
     <url>svn://scm.ourproject.org/svnroot/kune/trunk</url>
   </scm>

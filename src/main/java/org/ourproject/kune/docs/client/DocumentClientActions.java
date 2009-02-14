@@ -79,9 +79,8 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         createNewContentAction(TYPE_DOCUMENT, "images/nav/page_add.png", i18n.t("New document"), parentMenuTitleCtx,
                 Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
-        createContentModeratedActions(parentMenuTitle, contentsModerated);
-
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+        createContentModeratedActions(parentMenuTitle, contentsModerated);
         createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
 
         // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =
