@@ -19,11 +19,9 @@
  */
 package org.ourproject.kune.platf.server.content;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
@@ -33,7 +31,6 @@ import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.client.errors.NameInUseException;
 import org.ourproject.kune.platf.client.errors.UserNotFoundException;
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -42,9 +39,8 @@ import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.RateResult;
 import org.ourproject.kune.platf.server.domain.Revision;
-import org.ourproject.kune.platf.server.domain.Tag;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.TagManager;
+import org.ourproject.kune.platf.server.manager.TagUserContentManager;
 import org.ourproject.kune.platf.server.manager.file.FileUtils;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
@@ -60,17 +56,19 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     private final FinderService finder;
     private final User userFinder;
     private final I18nLanguage languageFinder;
-    private final TagManager tagManager;
     private final Content contentFinder;
     private final Container containerFinder;
+    private final TagUserContentManager tagManager;
+    private final Provider<EntityManager> provider;
 
     @Inject
     public ContentManagerDefault(final Content contentFinder, final Container containerFinder,
             final Provider<EntityManager> provider, final FinderService finder, final User userFinder,
-            final I18nLanguage languageFinder, final TagManager tagManager) {
+            final I18nLanguage languageFinder, final TagUserContentManager tagManager) {
         super(provider, Content.class);
         this.contentFinder = contentFinder;
         this.containerFinder = containerFinder;
+        this.provider = provider;
         this.finder = finder;
         this.userFinder = userFinder;
         this.languageFinder = languageFinder;
@@ -223,21 +221,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
     public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
         final Content content = finder.getContent(contentId);
-        final ArrayList<String> tagsStripped = TextUtils.splitTags(tags);
-        final ArrayList<Tag> tagList = new ArrayList<Tag>();
-        for (String tagString : tagsStripped) {
-            Tag tag;
-            try {
-                tag = tagManager.findByTagName(tagString);
-            } catch (final NoResultException e) {
-                tag = new Tag(tagString);
-                tagManager.persist(tag);
-            }
-            if (!tagList.contains(tag)) {
-                tagList.add(tag);
-            }
-        }
-        content.setTags(tagList);
+        tagManager.setTags(user, content, tags);
     }
 
     private String findInexistentTitle(Container container, String title) {

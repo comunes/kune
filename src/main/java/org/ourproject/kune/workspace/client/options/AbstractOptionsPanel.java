@@ -35,19 +35,19 @@ import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public abstract class AbstractOptionsPanel {
     private BasicDialog dialog;
-    private MessageToolbar messageErrorBar;
+    private final String dialogId;
     private TabPanel tabPanel;
+    private MessageToolbar messageErrorBar;
     private String title;
     private final int width;
     private final int height;
     private final int minWidth;
     private final int minHeight;
+    private final boolean modal;
     private final Images images;
     private final String errorLabelId;
     private String iconCls;
-    private final String dialogId;
     private Listener0 onHideListener;
-    private final boolean modal;
 
     public AbstractOptionsPanel(String dialogId, String title, int width, int height, int minWidth, int minHeight,
             boolean modal, Images images, String errorLabelId) {

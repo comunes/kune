@@ -69,7 +69,7 @@ import org.ourproject.kune.platf.server.domain.RateResult;
 import org.ourproject.kune.platf.server.domain.TagCloudResult;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.manager.TagManager;
+import org.ourproject.kune.platf.server.manager.TagUserContentManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.state.StateContainer;
 import org.ourproject.kune.platf.server.state.StateContent;
@@ -92,7 +92,7 @@ public class ContentRPC implements ContentService, RPC {
     private final XmppManager xmppManager;
     private final ContentManager contentManager;
     private final ContainerManager containerManager;
-    private final TagManager tagManager;
+    private final TagUserContentManager tagManager;
     private final CommentManager commentManager;
     private final AccessRightsService rightsService;
     private final FinderService finderService;
@@ -102,8 +102,8 @@ public class ContentRPC implements ContentService, RPC {
             final AccessService accessService, final AccessRightsService rightsService,
             final StateService stateService, final CreationService creationService, final GroupManager groupManager,
             final XmppManager xmppManager, final ContentManager contentManager,
-            final ContainerManager containerManager, final TagManager tagManager, final CommentManager commentManager,
-            final Mapper mapper) {
+            final ContainerManager containerManager, final TagUserContentManager tagManager,
+            final CommentManager commentManager, final Mapper mapper) {
         this.finderService = finderService;
         this.userSessionProvider = userSessionProvider;
         this.accessService = accessService;

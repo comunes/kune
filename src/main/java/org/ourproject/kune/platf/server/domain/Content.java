@@ -22,7 +22,6 @@ package org.ourproject.kune.platf.server.domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -43,7 +42,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -73,11 +71,6 @@ public class Content implements HasStateToken {
 
     @Version
     private int version;
-
-    @OrderBy("name DESC")
-    @IndexedEmbedded
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    private List<Tag> tags;
 
     @OneToOne
     private License license;
@@ -136,7 +129,6 @@ public class Content implements HasStateToken {
     public Content() {
         translations = new ArrayList<ContentTranslation>();
         authors = new ArrayList<User>();
-        tags = new ArrayList<Tag>();
         comments = new HashSet<Comment>();
         this.createdOn = System.currentTimeMillis();
         this.lastRevision = new Revision(this);
@@ -242,22 +234,6 @@ public class Content implements HasStateToken {
         return status;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public String getTagsAsString() {
-        String tagConcatenated = "";
-        for (final Iterator<Tag> iterator = tags.iterator(); iterator.hasNext();) {
-            final Tag tag = iterator.next();
-            tagConcatenated = tagConcatenated + tag.getName();
-            if (iterator.hasNext()) {
-                tagConcatenated = tagConcatenated + " ";
-            }
-        }
-        return tagConcatenated;
-    }
-
     public String getTitle() {
         return lastRevision.getTitle();
     }
@@ -337,10 +313,6 @@ public class Content implements HasStateToken {
 
     public void setStatus(final ContentStatus status) {
         this.status = status;
-    }
-
-    public void setTags(final List<Tag> tags) {
-        this.tags = tags;
     }
 
     public void setTranslations(final List<ContentTranslation> translations) {

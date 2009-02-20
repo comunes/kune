@@ -24,9 +24,10 @@ import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import org.ourproject.kune.platf.server.manager.Manager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
-public interface ContainerManager {
+public interface ContainerManager extends Manager<Container, Long> {
 
     Container createFolder(Group group, Container parent, String name, I18nLanguage language, String typeId);
 

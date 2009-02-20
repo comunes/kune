@@ -61,7 +61,7 @@ public abstract class PersistenceTest {
         getManager().getTransaction().rollback();
     }
 
-    private EntityManager getManager() {
+    protected EntityManager getManager() {
         return provider.get();
     }
 

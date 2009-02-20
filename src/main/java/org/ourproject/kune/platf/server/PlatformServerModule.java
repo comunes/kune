@@ -60,6 +60,8 @@ import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
+import org.ourproject.kune.platf.server.manager.TagUserContentManager;
+import org.ourproject.kune.platf.server.manager.TagUserContentManagerDefault;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.manager.file.EntityLogoDownloadManager;
@@ -135,6 +137,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
         bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
         bind(TagManager.class).to(TagManagerDefault.class);
+        bind(TagUserContentManager.class).to(TagUserContentManagerDefault.class);
         bind(CommentManager.class).to(CommentManagerDefault.class);
         bind(FileManager.class).to(FileManagerDefault.class);
     }

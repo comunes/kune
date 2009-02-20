@@ -10,46 +10,20 @@ import javax.persistence.EntityExistsException;
 
 import org.apache.lucene.queryParser.ParseException;
 import org.hibernate.validator.InvalidStateException;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
-import org.ourproject.kune.platf.server.PersistenceTest;
+import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import com.google.inject.Inject;
 
-public class UserManagerTest extends PersistenceTest {
-    private static final String USER_SHORT_NAME = "user-shortname";
-    private static final String USER_LONG_NAME = "the user long name";
-    private static final String USER_PASSWORD = "userPassword";
-    private static final String USER_EMAIL = "useremail@example.com";
+public class UserManagerTest extends PersistencePreLoadedDataTest {
 
-    @Inject
-    UserManager userManager;
-    @Inject
     User userFinder;
     @Inject
     Group groupFinder;
-    @Inject
-    I18nLanguageManager languageManager;
-    @Inject
-    I18nCountryManager countryManager;
-
-    private User user;
-    private I18nCountry gb;
-    private I18nLanguage english;
-
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
-    }
 
     @Test
     public void emailCorrect() {
@@ -66,19 +40,6 @@ public class UserManagerTest extends PersistenceTest {
     @Test(expected = InvalidStateException.class)
     public void emailIncorrect() {
         user = new User("test1", "test1 name", "falseEmail@", "some passwd", english, gb, getTimeZone());
-        persist(user);
-    }
-
-    @Before
-    public void insertData() throws Exception {
-        openTransaction();
-        assertEquals(0, userFinder.getAll().size());
-        assertEquals(0, groupFinder.getAll().size());
-        english = new I18nLanguage(new Long(1819), "English", "English", "en");
-        languageManager.persist(english);
-        gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western", ",");
-        countryManager.persist(gb);
-        user = new User(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, english, gb, getTimeZone());
         persist(user);
     }
 

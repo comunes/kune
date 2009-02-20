@@ -19,15 +19,9 @@
  */
 package org.ourproject.kune.platf.server.manager.impl;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
-import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Tag;
-import org.ourproject.kune.platf.server.domain.TagCloudResult;
-import org.ourproject.kune.platf.server.domain.TagCount;
 import org.ourproject.kune.platf.server.manager.TagManager;
 
 import com.google.inject.Inject;
@@ -38,44 +32,14 @@ import com.google.inject.Singleton;
 public class TagManagerDefault extends DefaultManager<Tag, Long> implements TagManager {
 
     private final Tag tagFinder;
-    private final Provider<EntityManager> provider;
 
     @Inject
     public TagManagerDefault(final Provider<EntityManager> provider, final Tag tagFinder) {
         super(provider, Tag.class);
-        this.provider = provider;
         this.tagFinder = tagFinder;
     }
 
     public Tag findByTagName(final String tag) {
         return tagFinder.findByTagName(tag);
-    }
-
-    public TagCloudResult getTagCloudResultByGroup(Group group) {
-        return new TagCloudResult(getSummaryByGroup(group), getMaxCount(group), getMinCount(group));
-    }
-
-    @SuppressWarnings("unchecked")
-    private int getMaxCount(Group group) {
-        Query q = provider.get().createNamedQuery(Tag.TAGSMAXGROUPED);
-        q.setParameter("group", group);
-        List resultList = q.getResultList();
-        return (resultList.size() == 0 ? 0 : ((Long) resultList.get(0)).intValue());
-    }
-
-    @SuppressWarnings("unchecked")
-    private int getMinCount(Group group) {
-        Query q = provider.get().createNamedQuery(Tag.TAGSMINGROUPED);
-        q.setParameter("group", group);
-        List resultList = q.getResultList();
-        return (resultList.size() == 0 ? 0 : ((Long) resultList.get(0)).intValue());
-    }
-
-    @SuppressWarnings("unchecked")
-    private List<TagCount> getSummaryByGroup(final Group group) {
-        Query q = provider.get().createNamedQuery(Tag.TAGSGROUPED);
-        q.setParameter("group", group);
-        List<TagCount> results = q.getResultList();
-        return results;
     }
 }

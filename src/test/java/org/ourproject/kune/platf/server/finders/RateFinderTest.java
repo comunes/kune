@@ -6,55 +6,33 @@ import java.util.Date;
 
 import javax.persistence.EntityManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.server.PersistenceTest;
+import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.manager.I18nCountryManager;
-import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 
 import com.google.inject.Inject;
 
-public class RateFinderTest extends PersistenceTest {
+public class RateFinderTest extends PersistencePreLoadedDataTest {
 
     @Inject
     Rate rateFinder;
-    @Inject
-    I18nLanguageManager languageManager;
-    @Inject
-    I18nCountryManager countryManager;
-    private I18nLanguage english;
-    private I18nCountry gb;
-
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
-    }
+    private EntityManager entityManager;
 
     @Before
-    public void insertData() throws Exception {
-        english = new I18nLanguage(new Long(1819), "English", "English", "en");
-        languageManager.persist(english);
-        gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western", ",");
-        countryManager.persist(gb);
+    public void before() {
+        entityManager = getManager();
     }
 
     @Test
     public void testContentNotRated() {
-        final EntityManager manager = openTransaction();
-
         final Content cd = new Content();
         cd.setLanguage(english);
         cd.setPublishedOn(new Date());
-        manager.persist(cd);
+        entityManager.persist(cd);
 
         closeTransaction();
         final Double rate = rateFinder.calculateRate(cd);
@@ -67,8 +45,6 @@ public class RateFinderTest extends PersistenceTest {
 
     @Test
     public void testContentRateAverage() {
-        final EntityManager manager = openTransaction();
-
         final User user1 = TestDomainHelper.createUser(1);
         final User user2 = TestDomainHelper.createUser(2);
 
@@ -78,20 +54,20 @@ public class RateFinderTest extends PersistenceTest {
         user1.setCountry(gb);
         user2.setCountry(gb);
 
-        manager.persist(user1);
-        manager.persist(user2);
+        entityManager.persist(user1);
+        entityManager.persist(user2);
 
         final Content cd = new Content();
         cd.setLanguage(english);
         cd.setPublishedOn(new Date());
-        manager.persist(cd);
+        entityManager.persist(cd);
 
-        manager.persist(new Rate(user1, cd, 1.3));
-        manager.persist(new Rate(user2, cd, 3.3));
+        entityManager.persist(new Rate(user1, cd, 1.3));
+        entityManager.persist(new Rate(user2, cd, 3.3));
         // same user and content other rate
         final Rate rateFinded = rateFinder.find(user2, cd);
         rateFinded.setValue(4.3);
-        manager.persist(rateFinded);
+        entityManager.persist(rateFinded);
 
         closeTransaction();
         final Double rate = rateFinder.calculateRate(cd);

@@ -19,14 +19,10 @@
  */
 package org.ourproject.kune.platf.server.manager;
 
-import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Tag;
-import org.ourproject.kune.platf.server.domain.TagCloudResult;
 
 public interface TagManager extends Manager<Tag, Long> {
 
     Tag findByTagName(String tag);
-
-    TagCloudResult getTagCloudResultByGroup(Group group);
 
 }

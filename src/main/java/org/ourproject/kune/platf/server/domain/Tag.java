@@ -23,8 +23,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
@@ -39,17 +37,7 @@ import com.wideplay.warp.persist.dao.Finder;
 @Entity
 @Indexed
 @Table(name = "tags")
-// See:
-// http://openjpa.apache.org/docs/latest/manual/manual.html#jpa_langref_resulttype
-@NamedQueries( {
-        @NamedQuery(name = "tagsgrouped", query = "SELECT NEW org.ourproject.kune.platf.server.domain.TagCount(t.name, COUNT(c.id)) "
-                + "FROM Content c JOIN c.tags t WHERE c.container.owner = :group " + "GROUP BY t.name ORDER BY t.name"),
-        @NamedQuery(name = "tagsmaxgrouped", query = "SELECT Count(c.id) FROM Content c JOIN c.tags t WHERE c.container.owner = :group GROUP BY t.name ORDER BY count(*) DESC LIMIT 0,1"),
-        @NamedQuery(name = "tagsmingrouped", query = "SELECT Count(c.id) FROM Content c JOIN c.tags t WHERE c.container.owner = :group GROUP BY t.name ORDER BY count(*) ASC LIMIT 0,1") })
 public class Tag implements HasId {
-    public static final String TAGSGROUPED = "tagsgrouped";
-    public static final String TAGSMINGROUPED = "tagsmingrouped";
-    public static final String TAGSMAXGROUPED = "tagsmaxgrouped";
 
     @Id
     @GeneratedValue

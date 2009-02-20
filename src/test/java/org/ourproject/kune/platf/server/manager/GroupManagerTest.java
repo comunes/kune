@@ -6,52 +6,19 @@ import static org.junit.Assert.assertTrue;
 import java.util.TimeZone;
 
 import org.apache.lucene.queryParser.ParseException;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
-import org.ourproject.kune.platf.server.PersistenceTest;
+import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
-import com.google.inject.Inject;
-
-public class GroupManagerTest extends PersistenceTest {
-    @Inject
-    User userFinder;
-    @Inject
-    Group groupFinder;
-    @Inject
-    License licenseFinder;
-    @Inject
-    GroupManager groupManager;
-    @Inject
-    UserManager userManager;
-    @Inject
-    LicenseManager licenseManager;
-    @Inject
-    I18nLanguageManager languageManager;
-    @Inject
-    I18nCountryManager countryManager;
-
-    private User user;
-    private License defLicense;
-
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
-    }
+public class GroupManagerTest extends PersistencePreLoadedDataTest {
 
     @Test
     public void createdGroupShoudHaveValidSocialNetwork() throws Exception {
@@ -151,15 +118,15 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test(expected = EmailAddressInUseException.class)
     public void createUserWithExistingEmail() throws Exception {
-        final User user2 = userManager.createUser("username2", "the user name 2", "email@example.com", "userPassword",
-                "en", "GB", TimeZone.getDefault().getID());
+        final User user2 = userManager.createUser("username2", "the user name 2", USER_EMAIL, "userPassword", "en",
+                "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
 
     @Test(expected = GroupNameInUseException.class)
     public void createUserWithExistingLongName() throws Exception {
-        final User user2 = userManager.createUser("username2", "the user name", "email2@example.com", "userPassword",
+        final User user2 = userManager.createUser("username2", USER_LONG_NAME, "email2@example.com", "userPassword",
                 "en", "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
@@ -167,8 +134,8 @@ public class GroupManagerTest extends PersistenceTest {
 
     @Test(expected = GroupNameInUseException.class)
     public void createUserWithExistingShortName() throws Exception {
-        final User user2 = userManager.createUser("username", "the user name 2", "email2@example.com", "userPassword",
-                "en", "GB", TimeZone.getDefault().getID());
+        final User user2 = userManager.createUser(USER_SHORT_NAME, "the user name 2", "email2@example.com",
+                "userPassword", "en", "GB", TimeZone.getDefault().getID());
         groupManager.createUserGroup(user2);
         rollbackTransaction();
     }
@@ -186,25 +153,6 @@ public class GroupManagerTest extends PersistenceTest {
         assertEquals(9, (long) result2.getSize());
         assertEquals(4, result2.getList().size());
         rollbackTransaction();
-    }
-
-    @Before
-    public void insertData() throws Exception {
-        openTransaction();
-        assertEquals(0, userFinder.getAll().size());
-        assertEquals(0, groupFinder.getAll().size());
-        assertEquals(0, licenseFinder.getAll().size());
-        final I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
-        languageManager.persist(english);
-        final I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
-                "western", ",");
-        countryManager.persist(gb);
-        user = userManager.createUser("username", "the user name", "email@example.com", "userPassword", "en", "GB",
-                TimeZone.getDefault().getID());
-        defLicense = new License("by-sa-v3.0", "Creative Commons Attribution-ShareAlike", "",
-                "http://creativecommons.org/licenses/by-sa/3.0/", true, true, false, "", "");
-        licenseManager.persist(defLicense);
-        groupManager.createUserGroup(user);
     }
 
     private void createTestGroup(final int number) throws Exception {

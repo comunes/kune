@@ -464,3 +464,4 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    http://toolserver.org/~merphant/wiki2html/
 * IDEAS
 ** <d> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
+ 

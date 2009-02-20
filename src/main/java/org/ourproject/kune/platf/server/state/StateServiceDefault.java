@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.server.domain.Revision;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
-import org.ourproject.kune.platf.server.manager.TagManager;
+import org.ourproject.kune.platf.server.manager.TagUserContentManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -41,13 +41,13 @@ public class StateServiceDefault implements StateService {
     private final AccessRightsService rightsService;
     private final SocialNetworkManager socialNetworkManager;
     private final GroupManager groupManager;
-    private final TagManager tagManager;
+    private final TagUserContentManager tagManager;
     private final ContentManager contentManager;
     private final I18nTranslationService i18n;
 
     @Inject
     public StateServiceDefault(GroupManager groupManager, SocialNetworkManager socialNetworkManager,
-            ContentManager contentManager, TagManager tagManager, AccessRightsService rightsService,
+            ContentManager contentManager, TagUserContentManager tagManager, AccessRightsService rightsService,
             I18nTranslationService i18n) {
         this.groupManager = groupManager;
         this.socialNetworkManager = socialNetworkManager;
@@ -79,7 +79,7 @@ public class StateServiceDefault implements StateService {
         state.setLanguage(content.getLanguage());
         state.setPublishedOn(content.getPublishedOn());
         state.setAuthors(content.getAuthors());
-        state.setTags(content.getTagsAsString());
+        state.setTags(tagManager.getTagsAsString(userLogged, content));
         state.setStatus(content.getStatus());
         state.setStateToken(content.getStateToken());
         Revision revision = content.getLastRevision();
