@@ -3,14 +3,14 @@ package org.ourproject.kune.platf.integration.selenium;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.Ignore;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
 
 public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
 
-    @Test
+    @Ignore
     public void testEntityLogoUpload() throws Exception {
         openDefPage();
         signIn();

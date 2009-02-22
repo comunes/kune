@@ -10,10 +10,6 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
-** TODO <s> tag refactorization
-   [Tag]  <-1--m->   [TagUserContent (fecha)]  <-m--1->  [Content]                             ^--m-------1-> [User]
-   Think agout wikipedia suggestions:
-   http://www.mediawiki.org/wiki/API
 ** TODO <v> User preferences storing
    (See also variables in 'Styling braimstorming')
    We need a way to store (in db) User preferences (like emite chat configurations) in a extensible way.
@@ -144,6 +140,9 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO <s> tag UI refactorization
+   Think about wikipedia suggestions:
+   http://www.mediawiki.org/wiki/API
 ** <s,v> Integrate recommendations/suggestions subsystem
 *** Samer suggests to implement a CBR system for suggests :)
     http://en.wikipedia.org/wiki/Case-based_reasoning

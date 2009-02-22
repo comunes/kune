@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.server.domain;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -47,51 +48,18 @@ public class Rate {
     @Range(min = 0, max = 5)
     Double value;
 
-    public Rate(final User rater, final Content content, final Double value) {
-        this.rater = rater;
-        this.content = content;
-        this.value = value;
-    }
+    @Basic(optional = false)
+    private final Long createdOn;
 
     public Rate() {
         this(null, null, null);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public Content getContent() {
-        return content;
-    }
-
-    public void setContent(final Content content) {
-        this.content = content;
-    }
-
-    public User getRater() {
-        return rater;
-    }
-
-    public void setRater(final User rater) {
+    public Rate(final User rater, final Content content, final Double value) {
         this.rater = rater;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(final Double value) {
+        this.content = content;
         this.value = value;
-    }
-
-    @Finder(query = "SELECT r FROM Rate r WHERE r.rater = :user AND r.content = :content")
-    public Rate find(@Named("user") final User user, @Named("content") final Content content) {
-        return null;
+        this.createdOn = System.currentTimeMillis();
     }
 
     @Finder(query = "SELECT AVG(r.value) FROM Rate r WHERE r.content = :content")
@@ -102,6 +70,47 @@ public class Rate {
     @Finder(query = "SELECT count(*) FROM Rate r WHERE r.content = :content")
     public Long calculateRateNumberOfUsers(@Named("content") final Content content) {
         return null;
+    }
+
+    @Finder(query = "SELECT r FROM Rate r WHERE r.rater = :user AND r.content = :content")
+    public Rate find(@Named("user") final User user, @Named("content") final Content content) {
+        return null;
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
+    public Long getCreatedOn() {
+        return createdOn;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getRater() {
+        return rater;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setContent(final Content content) {
+        this.content = content;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
+    public void setRater(final User rater) {
+        this.rater = rater;
+    }
+
+    public void setValue(final Double value) {
+        this.value = value;
     }
 
 }

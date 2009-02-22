@@ -43,9 +43,9 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
     public SitePublicSpaceLinkPanel(final SitePublicSpaceLinkPresenter presenter, final WorkspaceSkeleton ws,
             final I18nUITranslationService i18n, final Images img) {
         publicHP = new HorizontalPanel();
-        gotoPublic = new IconLabel(img.anybody(), i18n.t("Public Space"), false);
+        gotoPublic = new IconLabel(img.anybody(), i18n.t("Go to Public Space"), false);
         gotoPublic.ensureDebugId(SITE_GOTO_PUBLIC);
-        contentNoPublic = new IconLabel(img.anybody(), i18n.t("This is not public"));
+        contentNoPublic = new IconLabel(img.nobody(), i18n.t("Not published"));
         contentNoPublic.ensureDebugId(SITE_CONTENT_NO_PUBLIC);
         publicHP.add(gotoPublic);
         publicHP.add(contentNoPublic);

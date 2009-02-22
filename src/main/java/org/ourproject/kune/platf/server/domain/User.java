@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.server.domain;
 import java.util.List;
 import java.util.TimeZone;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -104,6 +105,9 @@ public class User implements HasId {
 
     private UserBuddiesVisibility buddiesVisibility;
 
+    @Basic(optional = false)
+    private final Long createdOn;
+
     public User() {
         this(null, null, null, null, null, null, null);
     }
@@ -120,6 +124,7 @@ public class User implements HasId {
         this.timezone = timezone;
         customProperties = new CustomProperties();
         buddiesVisibility = UserBuddiesVisibility.anyone;
+        this.createdOn = System.currentTimeMillis();
     }
 
     @Finder(query = "from User")
@@ -143,6 +148,10 @@ public class User implements HasId {
 
     public I18nCountry getCountry() {
         return country;
+    }
+
+    public Long getCreatedOn() {
+        return createdOn;
     }
 
     public CustomProperties getCustomProperties() {

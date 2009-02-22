@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.server.domain;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,17 +49,25 @@ public class Tag implements HasId {
     @Column(unique = true)
     private String name;
 
+    @Basic(optional = false)
+    private final Long createdOn;
+
     public Tag() {
         this(null);
     }
 
     public Tag(final String name) {
         this.name = name;
+        this.createdOn = System.currentTimeMillis();
     }
 
     @Finder(query = "FROM Tag g WHERE g.name = :name")
     public Tag findByTagName(@Named("name") final String tag) {
         return null;
+    }
+
+    public Long getCreatedOn() {
+        return createdOn;
     }
 
     public Long getId() {

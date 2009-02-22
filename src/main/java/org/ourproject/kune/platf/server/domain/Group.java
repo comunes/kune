@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -106,6 +107,9 @@ public class Group implements HasId {
     @Embedded
     private BasicMimeType logoMime;
 
+    @Basic(optional = false)
+    private final Long createdOn;
+
     public Group() {
         this(null, null, null, null);
     }
@@ -122,6 +126,7 @@ public class Group implements HasId {
         this.defaultLicense = defaultLicense;
         this.groupType = type;
         this.admissionType = AdmissionType.Moderated;
+        this.createdOn = System.currentTimeMillis();
     }
 
     @Override
@@ -182,6 +187,10 @@ public class Group implements HasId {
     @Finder(query = "FROM Group")
     public List<Group> getAll() {
         return null;
+    }
+
+    public Long getCreatedOn() {
+        return createdOn;
     }
 
     public Content getDefaultContent() {

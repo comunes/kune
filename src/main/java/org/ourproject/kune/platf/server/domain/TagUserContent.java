@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -55,6 +56,9 @@ public class TagUserContent implements HasId {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @Basic(optional = false)
+    private final Long createdOn;
+
     public TagUserContent() {
         this(null, null, null);
     }
@@ -63,6 +67,7 @@ public class TagUserContent implements HasId {
         this.tag = tag;
         this.user = user;
         this.content = content;
+        this.createdOn = System.currentTimeMillis();
     }
 
     @Finder(query = "FROM TagUserContent t WHERE t.user = :user AND t.content = :content")
@@ -77,6 +82,10 @@ public class TagUserContent implements HasId {
 
     public Content getContent() {
         return content;
+    }
+
+    public Long getCreatedOn() {
+        return createdOn;
     }
 
     public Long getId() {
