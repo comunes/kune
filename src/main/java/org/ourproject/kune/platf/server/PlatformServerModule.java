@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
+import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.access.AccessRightsServiceDefault;
@@ -94,7 +95,6 @@ import org.ourproject.kune.platf.server.state.StateServiceDefault;
 import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserInfoServiceDefault;
-import org.ourproject.kune.workspace.client.site.rpc.UserService;
 
 import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;

@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuCheckItemDescri
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescriptor;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -73,16 +74,23 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 
     public void addButtonAction(final ActionItem<T> actionItem, final boolean enable) {
         final ActionToolbarButtonDescriptor<T> action = (ActionToolbarButtonDescriptor<T>) actionItem.getAction();
+        T item = actionItem.getItem();
         final ActionToolbarPosition pos = action.getActionPosition();
         final ToolbarButton button = new ToolbarButton();
         final String text = action.getText();
+        final String id = action.getId();
         final String iconUrl = action.getIconUrl();
+        final String iconCls = action.getIconCls();
         if (text != null) {
             button.setText(text);
         }
-        final String id = action.getId();
         if (id != null) {
             button.setId(id);
+        }
+        if (action instanceof ActionToolbarPushButtonDescriptor) {
+            button.setEnableToggle(true);
+            button.setPressed(((ActionToolbarPushButtonDescriptor<T>) action).getMustInitialyPressed().mustBePressed(
+                    item));
         }
         button.addListener(new ButtonListenerAdapter() {
             @Override
@@ -92,6 +100,9 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         });
         if (iconUrl != null) {
             button.setIcon(iconUrl);
+        }
+        if (iconCls != null) {
+            button.setIconCls(iconCls);
         }
         button.setTooltip(action.getToolTip());
 
@@ -204,7 +215,12 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             }
         };
         item.addListener(clickListener);
-        item.setIcon(action.getIconUrl());
+        if (action.getIconCls() != null) {
+            item.setIconCls(action.getIconCls());
+        }
+        if (action.getIconUrl() != null) {
+            item.setIcon(action.getIconUrl());
+        }
         // ToolTip tip = new ToolTip();
         // tip.setHtml(action.getToolTip());
         // tip.setShowDelay(5000);

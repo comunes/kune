@@ -24,11 +24,10 @@ import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocumentClientModule;
 import org.ourproject.kune.gallery.client.GalleryClientModule;
 import org.ourproject.kune.platf.client.services.KuneCoreModule;
-import org.ourproject.kune.platf.client.services.KuneModule;
 import org.ourproject.kune.platf.client.services.KunePlatformModule;
-import org.ourproject.kune.platf.client.services.KuneRegistryModule;
-import org.ourproject.kune.platf.client.services.KuneWorkspaceModule;
 import org.ourproject.kune.wiki.client.WikiClientModule;
+import org.ourproject.kune.workspace.client.KuneRegistryModule;
+import org.ourproject.kune.workspace.client.KuneWorkspaceModule;
 import org.ourproject.kune.workspace.client.hello.HelloWorldModule;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -64,9 +63,9 @@ public class KuneEntryPoint implements EntryPoint {
     }
 
     public void onModuleLoadCont() {
-        Suco.install(new KuneCoreModule(), new KuneRegistryModule(), new KunePlatformModule(),
-                new KuneWorkspaceModule(), new EmiteUIModule(), new DocumentClientModule(), new BlogClientModule(),
-                new WikiClientModule(), new GalleryClientModule(), new ChatClientModule(), new KuneModule());
+        Suco.install(new KuneCoreModule(), new KuneRegistryModule(), new KunePlatformModule(), new EmiteUIModule(),
+                new DocumentClientModule(), new BlogClientModule(), new WikiClientModule(), new GalleryClientModule(),
+                new ChatClientModule(), new KuneWorkspaceModule());
 
         // We install our HelloWorldModule
         Suco.install(new HelloWorldModule());

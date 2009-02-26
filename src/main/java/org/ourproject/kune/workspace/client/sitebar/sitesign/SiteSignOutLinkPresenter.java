@@ -27,10 +27,10 @@ import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
+import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.site.Site;
-import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -118,9 +118,9 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
         // issue:
         // http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/ded86778ee56690/515dc513c7d085eb?lnk=st&q=remove+cookie#515dc513c7d085eb
         // http://code.google.com/p/google-web-toolkit/issues/detail?id=1735&q=removeCookie
-        Cookies.removeCookie(Site.USERHASH);
+        Cookies.removeCookie(Session.USERHASH);
         // Workaround:
-        Cookies.setCookie(Site.USERHASH, null, new Date(0), null, "/", false);
+        Cookies.setCookie(Session.USERHASH, null, new Date(0), null, "/", false);
         session.setUserHash(null);
         session.setCurrentUserInfo(null);
     }

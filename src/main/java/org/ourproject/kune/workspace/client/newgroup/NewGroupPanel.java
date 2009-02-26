@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
@@ -27,7 +28,6 @@ import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 
 import com.calclab.suco.client.events.Listener;
@@ -82,11 +82,11 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
     private TextField tags;
     private final MessageToolbar messageErrorBar;
     private final Provider<LicenseWizard> licenseWizard;
-    private final I18nUITranslationService i18n;
+    private final I18nTranslationService i18n;
     private Image licenseImage;
     private LicenseDTO license;
 
-    public NewGroupPanel(final NewGroupPresenter presenter, final I18nUITranslationService i18n,
+    public NewGroupPanel(final NewGroupPresenter presenter, final I18nTranslationService i18n,
             final Provider<LicenseWizard> licenseWizard, Images img) {
         super(NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, 450, 430, "k-newgroup-icon",
                 i18n.t("Cancel"), CANCEL_BUTTON, i18n.t("Register"), REGISTER_BUTTON, new Listener0() {

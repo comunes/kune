@@ -59,7 +59,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     private final Content contentFinder;
     private final Container containerFinder;
     private final TagUserContentManager tagManager;
-    private final Provider<EntityManager> provider;
 
     @Inject
     public ContentManagerDefault(final Content contentFinder, final Container containerFinder,
@@ -68,7 +67,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         super(provider, Content.class);
         this.contentFinder = contentFinder;
         this.containerFinder = containerFinder;
-        this.provider = provider;
         this.finder = finder;
         this.userFinder = userFinder;
         this.languageFinder = languageFinder;

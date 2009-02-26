@@ -65,6 +65,8 @@ public interface Session {
      */
     int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
 
+    String USERHASH = "userHash";
+
     void check(AsyncCallbackSimple<?> callback);
 
     StateContainerDTO getContainerState();

@@ -5,6 +5,10 @@
   <inherits name='com.google.gwt.i18n.I18N' />
   <inherits name="com.google.gwt.user.UserAgent" />
   <inherits name="org.ourproject.kune.platf.RichText" />
+
+  <inherits name="com.google.gwt.libideas.ImmutableResources" />
+  <inherits name="com.google.gwt.libideas.StyleInjector" />
+
   <public path="public" />
 
 </module>

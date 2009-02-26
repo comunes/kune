@@ -39,13 +39,13 @@ import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 
 import com.calclab.suco.client.events.Listener;
@@ -58,7 +58,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private ContextNavigatorView view;
     private final StateManager stateManager;
     private final Session session;
-    private final I18nUITranslationService i18n;
+    private final I18nTranslationService i18n;
     private final HashMap<StateToken, ActionItemCollection<StateToken>> actionsByItem;
     private boolean editOnNextStateChange;
     private final ContentIconsRegistry contentIconsRegistry;
@@ -70,7 +70,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private final RenameAction renameAction;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
-            final I18nUITranslationService i18n, final ContentIconsRegistry contentIconsRegistry,
+            final I18nTranslationService i18n, final ContentIconsRegistry contentIconsRegistry,
             ContentCapabilitiesRegistry capabilitiesRegistry, final ActionToolbar<StateToken> toolbar,
             final ActionRegistry<StateToken> actionRegistry, Provider<FileDownloadUtils> downloadUtilsProvider,
             boolean useGenericImageIcon, RenameAction renameAction) {

@@ -4,13 +4,16 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
+import org.ourproject.kune.platf.client.actions.ActionPressedCondition;
 import org.ourproject.kune.platf.client.actions.ActionShortcut;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ContentEditorActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.events.Listener0;
@@ -24,28 +27,39 @@ public class RTEditorPresenter implements RTEditor {
     private AccessRolDTO accessRol;
     private final I18nTranslationService i18n;
     private final Session session;
-    private final ActionCollection<Object> actions;
+    private final ActionCollection<Object> extendedActions;
+    private final ActionCollection<Object> basicActions;
+    private final RTEImgResources imgResources;
 
     public RTEditorPresenter(ContentEditorActionRegistry contentEditorActionRegistry, I18nTranslationService i18n,
-            Session session) {
+            Session session, RTEImgResources imgResources) {
         this.i18n = i18n;
         this.session = session;
+        this.imgResources = imgResources;
         extended = true;
         accessRol = AccessRolDTO.Editor;
-        actions = createDefActions();
+        extendedActions = createDefExtendedActions();
+        basicActions = createDefBasicActions();
     }
 
-    public void addAction(ActionDescriptor<Object> action) {
-        actions.add(action);
+    public void addBasicAction(ActionDescriptor<Object> action) {
+        basicActions.add(action);
     }
 
-    public void addActions(ActionCollection<Object> actions) {
-        this.actions.addAll(actions);
+    public void addBasicActions(ActionCollection<Object> actions) {
+        basicActions.addAll(actions);
+    }
+
+    public void addExtendedAction(ActionDescriptor<Object> action) {
+        extendedActions.add(action);
+    }
+
+    public void addExtendedActions(ActionCollection<Object> actions) {
+        extendedActions.addAll(actions);
     }
 
     public void editContent(String content) {
-        view.setActions(actions);
-
+        view.setActions(extendedActions);
     }
 
     public View getView() {
@@ -64,8 +78,71 @@ public class RTEditorPresenter implements RTEditor {
         this.extended = extended;
     }
 
-    private ActionCollection<Object> createDefActions() {
-        ActionCollection<Object> defActions = new ActionCollection<Object>();
+    private ActionCollection<Object> createDefBasicActions() {
+        ActionCollection<Object> actions = new ActionCollection<Object>();
+
+        ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.selectAll();
+                    }
+                });
+        selectAll.setShortcut(new ActionShortcut(true, 'A'));
+        selectAll.setTextDescription(i18n.t("Select all"));
+        selectAll.setParentMenuTitle(i18n.t(EDIT_MENU));
+
+        ActionToolbarPushButtonDescriptor<Object> bold = new ActionToolbarPushButtonDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.toggleBold();
+                    }
+                });
+        bold.setIconCls(imgResources.bold().getName());
+        bold.setToolTip(i18n.t("Toggle Bold"));
+        bold.setMustInitialyPressed(new ActionPressedCondition<Object>() {
+            public boolean mustBePressed(Object param) {
+                return view.isBold();
+            }
+        });
+
+        ActionToolbarPushButtonDescriptor<Object> italic = new ActionToolbarPushButtonDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.toggleItalic();
+                    }
+                });
+        italic.setIconCls(imgResources.italic().getName());
+        italic.setToolTip(i18n.t("Toggle Italic"));
+        italic.setMustInitialyPressed(new ActionPressedCondition<Object>() {
+            public boolean mustBePressed(Object param) {
+                return view.isItalic();
+            }
+        });
+
+        ActionToolbarPushButtonDescriptor<Object> underline = new ActionToolbarPushButtonDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.toggleUnderline();
+                    }
+                });
+        underline.setIconCls(imgResources.underline().getName());
+        underline.setToolTip(i18n.t("Toggle Underline"));
+        underline.setMustInitialyPressed(new ActionPressedCondition<Object>() {
+            public boolean mustBePressed(Object param) {
+                return view.isUnderlined();
+            }
+        });
+
+        actions.add(bold);
+        actions.add(italic);
+        actions.add(underline);
+        actions.add(selectAll);
+
+        return actions;
+    }
+
+    private ActionCollection<Object> createDefExtendedActions() {
+        ActionCollection<Object> actions = new ActionCollection<Object>();
 
         ActionToolbarMenuDescriptor<Object> undo = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -117,16 +194,6 @@ public class RTEditorPresenter implements RTEditor {
         paste.setTextDescription(i18n.t("Paste"));
         paste.setParentMenuTitle(i18n.t(EDIT_MENU));
 
-        ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                ActionToolbarPosition.topbar, new Listener0() {
-                    public void onEvent() {
-                        view.selectall();
-                    }
-                });
-        selectAll.setShortcut(new ActionShortcut(true, 'A'));
-        selectAll.setTextDescription(i18n.t("Select all"));
-        selectAll.setParentMenuTitle(i18n.t(EDIT_MENU));
-
         ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
@@ -150,7 +217,7 @@ public class RTEditorPresenter implements RTEditor {
         ActionToolbarMenuDescriptor<Object> hr = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
-                        view.inserthorizontalrule();
+                        view.insertHorizontalRule();
                     }
                 });
         hr.setShortcut(new ActionShortcut(true, 'M'));
@@ -158,16 +225,31 @@ public class RTEditorPresenter implements RTEditor {
         hr.setParentMenuTitle(i18n.t(INSERT_MENU));
         hr.setEnableCondition(isExtended());
 
-        defActions.add(undo);
-        defActions.add(redo);
-        defActions.add(copy);
-        defActions.add(cut);
-        defActions.add(paste);
-        defActions.add(selectAll);
-        defActions.add(editHtml);
-        defActions.add(comment);
-        defActions.add(hr);
-        return defActions;
+        ActionToolbarPushButtonDescriptor<Object> strikethrough = new ActionToolbarPushButtonDescriptor<Object>(
+                accessRol, ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.toggleStrikethrough();
+                    }
+                });
+        strikethrough.setIconCls(imgResources.strikeout().getName());
+        strikethrough.setToolTip(i18n.t("Toggle Strikethrough"));
+        strikethrough.setMustInitialyPressed(new ActionPressedCondition<Object>() {
+            public boolean mustBePressed(Object param) {
+                return view.isStrikethrough();
+            }
+        });
+
+        actions.add(undo);
+        actions.add(redo);
+        actions.add(copy);
+        actions.add(cut);
+        actions.add(paste);
+        actions.add(editHtml);
+        actions.add(comment);
+        actions.add(hr);
+        actions.add(strikethrough);
+
+        return actions;
     }
 
     private ActionEnableCondition<Object> isExtended() {

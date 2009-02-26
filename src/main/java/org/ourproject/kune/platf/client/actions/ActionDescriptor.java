@@ -33,6 +33,9 @@ public abstract class ActionDescriptor<T> {
     /** The icon url. */
     private String iconUrl;
 
+    /** The icon cls. */
+    private String iconCls;
+
     /** The icon descriptor. */
     private ImageDescriptor iconDescriptor;
 
@@ -184,6 +187,10 @@ public abstract class ActionDescriptor<T> {
         return confirmationTitle;
     }
 
+    public String getIconCls() {
+        return iconCls;
+    }
+
     /**
      * Gets the icon descriptor.
      * 
@@ -311,6 +318,10 @@ public abstract class ActionDescriptor<T> {
      */
     public void setEnableCondition(final ActionEnableCondition<T> enableCondition) {
         this.enableCondition = enableCondition;
+    }
+
+    public void setIconCls(String iconCls) {
+        this.iconCls = iconCls;
     }
 
     /**

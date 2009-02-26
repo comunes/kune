@@ -20,9 +20,9 @@
 package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener0;
@@ -45,7 +45,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     static SignInForm signInForm;
     private final SignInPresenter presenter;
 
-    public SignInPanel(final SignInPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
+    public SignInPanel(final SignInPresenter presenter, I18nTranslationService i18n, final WorkspaceSkeleton ws,
             Images images) {
         super(SIGNIN_DIALOG, i18n, i18n.t(PlatfMessages.SIGN_IN_TITLE), true, true, 340, 240, "",
                 i18n.t(PlatfMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),

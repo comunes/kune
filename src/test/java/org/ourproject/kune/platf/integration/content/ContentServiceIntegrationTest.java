@@ -3,8 +3,8 @@ package org.ourproject.kune.platf.integration.content;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentService;
+import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
-import org.ourproject.kune.workspace.client.site.rpc.UserService;
 
 import com.google.inject.Inject;
 

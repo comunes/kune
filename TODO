@@ -10,6 +10,9 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** vjrj <v> GWT 1.6
+   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/3e7e6cc3b35ad98a
+   http://code.google.com/p/google-web-toolkit/wiki/WAR_Design_1_6
 ** TODO <v> User preferences storing
    (See also variables in 'Styling braimstorming')
    We need a way to store (in db) User preferences (like emite chat configurations) in a extensible way.
@@ -90,7 +93,7 @@ TODO-list for kune -*- mode: org; -*-
       - youtube videos
     + Edit HTML
     + Easy extensible for new actions
-    + Try to be a reusable module (like emite)
+    + Try (yes, only try) to be a reusable module (like emite)
     + autosave on/off
 *** Charactericts 
     + Builded over gwt RTE (or any similar RTE) and based in gwt mouse/keyboard events
@@ -127,6 +130,7 @@ TODO-list for kune -*- mode: org; -*-
 *** Links
    http://www.ongwt.com/post/2009/01/08/XWiki-:-Wysiwyg-editor-based-on-GWT
    http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/samples/internet/ie55/EditRegions/default.asp
+   http://www.mozilla.org/editor/midas-spec.html
    http://mozilla.org/editor/midasdemo/
 ** vjrj <v> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
    http://agilewebdevelopment.com/plugins/request_routing
@@ -457,10 +461,11 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    other links:
    http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
    http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
+** <v> P2P downloads for bigg uploads (the server acts as seeder).
 * LONG-TERM
 ** <s> integrate some blog/wiki converter:
    http://code.google.com/p/google-blog-converters-appengine/
    http://toolserver.org/~merphant/wiki2html/
 * IDEAS
 ** <d> Try to find a way dozer maps directly without use getters/setters (less js code and better performance)
- 
+

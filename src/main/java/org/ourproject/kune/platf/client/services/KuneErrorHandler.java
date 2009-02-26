@@ -32,7 +32,6 @@ import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.site.Site;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event0;
@@ -44,15 +43,13 @@ import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 public class KuneErrorHandler {
     private final Session session;
     private final I18nTranslationService i18n;
-    private final Provider<WorkspaceSkeleton> wsProvider;
     private final Event0 onSessionExpired;
     private final Provider<StateManager> stateManagerProvider;
 
     public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
-            final Provider<WorkspaceSkeleton> wsProvider, final Provider<StateManager> stateManagerProvider) {
+            final Provider<StateManager> stateManagerProvider) {
         this.session = session;
         this.i18n = i18n;
-        this.wsProvider = wsProvider;
         this.stateManagerProvider = stateManagerProvider;
         this.onSessionExpired = new Event0("onSessionExpired");
     }
@@ -60,10 +57,6 @@ public class KuneErrorHandler {
     public void doSessionExpired() {
         onSessionExpired.fire();
         Site.info("Your session has expired. Please log in again.");
-    }
-
-    public WorkspaceSkeleton getWorkspaceSkeleton() {
-        return wsProvider.get();
     }
 
     public void onSessionExpired(final Listener0 listener) {
@@ -107,10 +100,8 @@ public class KuneErrorHandler {
             stateManagerProvider.get().gotoToken("");
         } catch (final LastAdminInGroupException e) {
             logException(e);
-            getWorkspaceSkeleton().showAlertMessage(
-                    i18n.t("Warning"),
-                    i18n.t("Sorry, you are the last admin of this group."
-                            + " Look for someone to substitute you appropriately as admin before leaving this group."));
+            Site.showAlertMessage(i18n.t("Warning"), i18n.t("Sorry, you are the last admin of this group."
+                    + " Look for someone to substitute you appropriately as admin before leaving this group."));
         } catch (final AlreadyGroupMemberException e) {
             logException(e);
             Site.error(i18n.t("This group is already a group member"));

@@ -35,7 +35,7 @@ import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.workspace.client.site.rpc.UserServiceAsync;
+import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event;

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.i18n;
+package org.ourproject.kune.platf.client.services;
 
 import com.google.gwt.user.client.EventListener;
 

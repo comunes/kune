@@ -11,61 +11,71 @@ public interface RTEditorView extends View {
 
     void copy();
 
-    void createlink(String url);
+    void createLink(String url);
 
     void cut();
 
     void delete();
 
-    void fontname(String name);
+    void insertHorizontalRule();
 
-    void fontsize(String size);
+    void insertHtml(String html);
 
-    void forecolor(String color);
+    void insertImage(String url);
 
-    void indent();
+    void insertOrderedList();
 
-    void inserthorizontalrule();
+    void insertUnorderedList();
 
-    void inserthtml(String html);
+    boolean isBold();
 
-    void insertimage(String url);
+    boolean isItalic();
 
-    void insertorderedlist();
+    boolean isStrikethrough();
 
-    void insertparagraph();
+    boolean isSubscript();
 
-    void insertunorderedlist();
+    boolean isSuperscript();
 
-    void italic();
+    boolean isUnderlined();
 
-    void justifycenter();
+    void justifyCenter();
 
-    void justifyfull();
+    void justifyLeft();
 
-    void justifyleft();
+    void justifyRight();
 
-    void justifyright();
-
-    void outdent();
+    void leftIndent();
 
     void paste();
 
     void redo();
 
-    void removeformat();
+    void removeFormat();
 
-    void selectall();
+    void rightIndent();
+
+    void selectAll();
 
     void setActions(ActionCollection<Object> actions);
 
-    void strikethrough();
+    void setFontName(String name);
 
-    void subscript();
+    void setFontSize(int size);
 
-    void superscript();
+    void setForeColor(String color);
 
-    void underline();
+    void toggleBold();
+
+    void toggleItalic();
+
+    void toggleStrikethrough();
+
+    void toggleSubscript();
+
+    void toggleSuperscript();
+
+    void toggleUnderline();
 
     void undo();
 

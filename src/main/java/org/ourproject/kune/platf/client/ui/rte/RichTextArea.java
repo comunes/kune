@@ -193,6 +193,11 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
 
         void cut();
 
+        /*
+         * delete all text and objects that are selected.
+         */
+        void delete();
+
         /**
          * Inserts a horizontal rule.
          */

@@ -39,6 +39,11 @@
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-incubator</artifactId>
+      <version>1.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
       <version>1.5.3</version>
     </dependency>

@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.themes;
 
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener2;

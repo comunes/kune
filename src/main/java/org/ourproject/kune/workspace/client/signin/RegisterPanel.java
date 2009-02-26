@@ -20,11 +20,11 @@
 package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener0;
@@ -47,7 +47,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     public static final String WELCOME_DIALOG = "k-regp-wdiag";
     public static final String REGISTER_DIALOG = "k-regp-dialog";
 
-    public RegisterPanel(final RegisterPresenter presenter, I18nUITranslationService i18n, final WorkspaceSkeleton ws,
+    public RegisterPanel(final RegisterPresenter presenter, I18nTranslationService i18n, final WorkspaceSkeleton ws,
             Session session, Images images) {
         super(REGISTER_DIALOG, i18n, i18n.t(PlatfMessages.REGISTER_TITLE), true, true, 390, 450, "",
                 i18n.t(PlatfMessages.REGISTER_TITLE), REGISTER_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),

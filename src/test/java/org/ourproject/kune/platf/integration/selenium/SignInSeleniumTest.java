@@ -6,11 +6,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.ourproject.kune.platf.client.PlatfMessages;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.signin.RegisterPanel;
 import org.ourproject.kune.workspace.client.signin.SignInForm;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPanel;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
@@ -97,7 +97,7 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
     public void testSignInAndOutRemovingCookie() throws Exception {
         openDefPage();
         signIn();
-        assertNotNull(selenium.getCookieByName(Site.USERHASH));
+        assertNotNull(selenium.getCookieByName(Session.USERHASH));
         verifyLoggedUserShorName("admin");
         signOut();
     }

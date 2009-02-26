@@ -21,9 +21,9 @@ package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
+import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 public class SignInAbstractPresenter {
 

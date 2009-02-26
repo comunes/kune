@@ -3,12 +3,17 @@ package org.ourproject.kune.platf.client.ui.rte;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.actions.ActionCollection;
+import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.BasicFormatter;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.ExtendedFormatter;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Justification;
+import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.libideas.client.StyleInjector;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Widget;
 
 public class RTEditorPanel implements RTEditorView {
 
@@ -22,6 +27,7 @@ public class RTEditorPanel implements RTEditorView {
         rta = new RichTextArea();
         basic = rta.getBasicFormatter();
         extended = rta.getExtendedFormatter();
+        StyleInjector.injectStylesheet(RTEImgResources.INSTANCE.css().getText());
     }
 
     public void addComment(String userName) {
@@ -29,8 +35,8 @@ public class RTEditorPanel implements RTEditorView {
         Element span = DOM.createSpan();
         span.setInnerText(i18n.t("type here") + " -" + userName + time);
         DOM.setElementAttribute((com.google.gwt.user.client.Element) span, "backgroundColor", "rgb(255,255,215");
-        // addCustomStyle
-        // insertHtml
+        // FIXME: addCustomStyle
+        insertHtml(span.getString());
     }
 
     public boolean canBeExtended() {
@@ -38,148 +44,168 @@ public class RTEditorPanel implements RTEditorView {
     }
 
     public void copy() {
-        extended.undo();
+        extended.copy();
     }
 
-    public void createlink(String url) {
-        // TODO Auto-generated method stub
-
+    public void createLink(String url) {
+        extended.createLink(url);
     }
 
     public void cut() {
-        extended.undo();
+        extended.cut();
     }
 
     public void delete() {
-        // TODO Auto-generated method stub
-
+        extended.delete();
     }
 
-    public void fontname(String name) {
-        // TODO Auto-generated method stub
-
+    public Widget getRTE() {
+        return rta;
     }
 
-    public void fontsize(String size) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public void forecolor(String color) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public void indent() {
-        // TODO Auto-generated method stub
-
-    }
-
-    public void inserthorizontalrule() {
-        // TODO Auto-generated method stub
-
+    public void insertHorizontalRule() {
+        extended.insertHorizontalRule();
     }
 
     public void insertHR() {
         extended.insertHorizontalRule();
     }
 
-    public void inserthtml(String html) {
-        // TODO Auto-generated method stub
-
+    public void insertHtml(String html) {
+        extended.insertHtml(html);
     }
 
-    public void insertimage(String url) {
-        // TODO Auto-generated method stub
-
+    public void insertImage(String url) {
+        extended.insertImage(url);
     }
 
-    public void insertorderedlist() {
-        // TODO Auto-generated method stub
-
+    public void insertOrderedList() {
+        extended.insertOrderedList();
     }
 
-    public void insertparagraph() {
-        // TODO Auto-generated method stub
-
+    public void insertUnorderedList() {
+        extended.insertUnorderedList();
     }
 
-    public void insertunorderedlist() {
-        // TODO Auto-generated method stub
-
+    public boolean isBold() {
+        return basic.isBold();
     }
 
-    public void italic() {
-        // TODO Auto-generated method stub
-
+    public boolean isItalic() {
+        return basic.isItalic();
     }
 
-    public void justifycenter() {
-        // TODO Auto-generated method stub
-
+    public boolean isStrikethrough() {
+        return extended.isStrikethrough();
     }
 
-    public void justifyfull() {
-        // TODO Auto-generated method stub
-
+    public boolean isSubscript() {
+        return basic.isSubscript();
     }
 
-    public void justifyleft() {
-        // TODO Auto-generated method stub
-
+    public boolean isSuperscript() {
+        return basic.isSuperscript();
     }
 
-    public void justifyright() {
-        // TODO Auto-generated method stub
-
+    public boolean isUnderlined() {
+        return basic.isUnderlined();
     }
 
-    public void outdent() {
-        // TODO Auto-generated method stub
+    public void justifyCenter() {
+        basic.setJustification(Justification.CENTER);
+    }
 
+    public void justifyLeft() {
+        basic.setJustification(Justification.LEFT);
+    }
+
+    public void justifyRight() {
+        basic.setJustification(Justification.RIGHT);
+    }
+
+    public void leftIndent() {
+        extended.leftIndent();
     }
 
     public void paste() {
-        extended.undo();
+        extended.paste();
     }
 
     public void redo() {
         extended.redo();
     }
 
-    public void removeformat() {
-        // TODO Auto-generated method stub
+    public void removeFormat() {
+        extended.removeFormat();
     }
 
-    public void selectall() {
-        // TODO Auto-generated method stub
+    public void rightIndent() {
+        extended.rightIndent();
     }
 
     public void selectAll() {
-        // TODO Auto-generated method stub
+        basic.selectAll();
     }
 
     public void setActions(ActionCollection<Object> actions) {
         // TODO Auto-generated method stub
-
     }
 
-    public void strikethrough() {
-        // TODO Auto-generated method stub
-
+    public void setFontName(String name) {
+        basic.setFontName(name);
     }
 
-    public void subscript() {
-        // TODO Auto-generated method stub
-
+    public void setFontSize(int size) {
+        switch (size) {
+        case 1:
+            basic.setFontSize(FontSize.XX_SMALL);
+            break;
+        case 2:
+            basic.setFontSize(FontSize.X_SMALL);
+            break;
+        case 3:
+            basic.setFontSize(FontSize.SMALL);
+            break;
+        case 4:
+            basic.setFontSize(FontSize.MEDIUM);
+            break;
+        case 5:
+            basic.setFontSize(FontSize.LARGE);
+            break;
+        case 6:
+            basic.setFontSize(FontSize.X_LARGE);
+            break;
+        case 7:
+            basic.setFontSize(FontSize.XX_LARGE);
+            break;
+        }
     }
 
-    public void superscript() {
-        // TODO Auto-generated method stub
-
+    public void setForeColor(String color) {
+        basic.setForeColor(color);
     }
 
-    public void underline() {
+    public void toggleBold() {
+        basic.toggleBold();
+    }
+
+    public void toggleItalic() {
+        basic.toggleItalic();
+    }
+
+    public void toggleStrikethrough() {
+        extended.toggleStrikethrough();
+    }
+
+    public void toggleSubscript() {
+        basic.toggleSubscript();
+    }
+
+    public void toggleSuperscript() {
+        basic.toggleSuperscript();
+    }
+
+    public void toggleUnderline() {
         basic.toggleUnderline();
     }
 

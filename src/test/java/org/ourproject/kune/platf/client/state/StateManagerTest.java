@@ -9,7 +9,7 @@ import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
@@ -49,7 +49,7 @@ public class StateManagerTest {
         stateManager.onStateChanged(stateChangeListener);
         stateManager.onGroupChanged(groupChangeListener);
         stateManager.onToolChanged(toolChangeListener);
-        new Site(Mockito.mock(I18nUITranslationService.class), Mockito.mock(SiteProgress.class), null);
+        new Site(Mockito.mock(I18nUITranslationService.class), Mockito.mock(SiteProgress.class), null, null);
     }
 
     @Test

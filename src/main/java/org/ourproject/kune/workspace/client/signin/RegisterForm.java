@@ -19,10 +19,10 @@
  \*/
 package org.ourproject.kune.workspace.client.signin;
 
+import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
 
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
@@ -59,9 +59,9 @@ public class RegisterForm extends DefaultForm {
     private final ComboBox timezoneCombo;
     private final Radio wantPersonalHomePage;
     private final Radio noPersonalHomePage;
-    private final I18nUITranslationService i18n;
+    private final I18nTranslationService i18n;
 
-    public RegisterForm(final I18nUITranslationService i18n, Session session) {
+    public RegisterForm(final I18nTranslationService i18n, Session session) {
         this.i18n = i18n;
         super.addStyleName("kune-Margin-Large-l");
 

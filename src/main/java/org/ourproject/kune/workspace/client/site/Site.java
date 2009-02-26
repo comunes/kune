@@ -20,19 +20,20 @@
 package org.ourproject.kune.workspace.client.site;
 
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
 import org.ourproject.kune.workspace.client.site.msg.SiteToastMessage;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.ioc.Provider;
 
 public class Site {
-    public static final String USERHASH = "userHash";
     public static final String IN_DEVELOPMENT = " (in development)";
     private static I18nTranslationService i18n;
     private static SiteProgress progress;
     private static Provider<SiteToastMessage> siteMessageProvider;
+    private static Provider<WorkspaceSkeleton> ws;
 
     public static void error(final String value) {
         getSiteMessage().showMessage(i18n.t("Error"), value, SiteErrorType.error);
@@ -48,6 +49,10 @@ public class Site {
 
     public static void info(final String value) {
         getSiteMessage().showMessage(i18n.t("Info"), value, SiteErrorType.info);
+    }
+
+    public static void showAlertMessage(String title, String message) {
+        ws.get().showAlertMessage(title, message);
     }
 
     public static void showProgress(final String text) {
@@ -79,10 +84,10 @@ public class Site {
     }
 
     public Site(final I18nUITranslationService i18n, final SiteProgress progress,
-            final Provider<SiteToastMessage> siteMessageProvider) {
+            final Provider<SiteToastMessage> siteMessageProvider, Provider<WorkspaceSkeleton> ws) {
         Site.i18n = i18n;
         Site.progress = progress;
         Site.siteMessageProvider = siteMessageProvider;
+        Site.ws = ws;
     }
-
 }

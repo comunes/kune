@@ -7,9 +7,13 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
 public interface RTEditor {
 
-    void addAction(ActionDescriptor<Object> action);
+    void addBasicAction(ActionDescriptor<Object> action);
 
-    void addActions(ActionCollection<Object> actions);
+    void addBasicActions(ActionCollection<Object> actions);
+
+    void addExtendedAction(ActionDescriptor<Object> action);
+
+    void addExtendedActions(ActionCollection<Object> actions);
 
     void editContent(String content);
 

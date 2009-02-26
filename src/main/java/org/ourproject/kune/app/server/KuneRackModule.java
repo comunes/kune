@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
+import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.manager.file.EntityLogoDownloadManager;
@@ -48,7 +49,6 @@ import org.ourproject.kune.rack.filters.LogFilter;
 import org.ourproject.kune.rack.filters.RedirectFilter;
 import org.ourproject.kune.rack.filters.rest.RESTServicesModule;
 import org.ourproject.kune.wiki.server.WikiServerModule;
-import org.ourproject.kune.workspace.client.site.rpc.UserService;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
