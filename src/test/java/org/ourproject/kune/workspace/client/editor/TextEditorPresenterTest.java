@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;

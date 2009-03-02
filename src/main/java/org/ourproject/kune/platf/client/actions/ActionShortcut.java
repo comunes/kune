@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 
 import com.google.gwt.user.client.ui.KeyboardListener;
 

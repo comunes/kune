@@ -19,6 +19,8 @@
  \*/
 package org.ourproject.kune.workspace.client.skel;
 
+import org.ourproject.kune.platf.client.ui.SimpleToolbar;
+
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;

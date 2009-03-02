@@ -30,7 +30,8 @@ import magick.MagickException;
 
 import org.apache.commons.fileupload.FileItem;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -38,7 +39,6 @@ import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.domain.BasicMimeType;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;
@@ -76,7 +76,7 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
         File tmpDestFile = File.createTempFile("logoDest", "");
 
         boolean result = ImageUtilsDefault.scaleImageToMax(origFile.getAbsolutePath(), tmpDestFile.getAbsolutePath(),
-                EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT);
+                FileConstants.LOGO_ICON_DEFAULT_HEIGHT);
         if (result) {
             group.setLogo(FileUtils.getBytesFromFile(tmpDestFile));
             group.setLogoMime(mimeType);
@@ -126,7 +126,7 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     protected String createXmlResponse(final boolean success, final String message) {
         String error = "";
         if (!success) {
-            error = "<errors><field><id>" + EntityHeaderView.LOGO_FORM_FIELD + "</id><msg><![CDATA[" + message
+            error = "<errors><field><id>" + FileConstants.LOGO_FORM_FIELD + "</id><msg><![CDATA[" + message
                     + "]]></msg></field></errors>";
         }
         return "<response success=\"" + success + "\">" + error + "</response>";

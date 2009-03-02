@@ -9,8 +9,8 @@ import org.mockito.Mockito;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.ui.upload.FileUploaderPresenter;
-import org.ourproject.kune.platf.client.ui.upload.FileUploaderView;
+import org.ourproject.kune.workspace.client.upload.FileUploaderPresenter;
+import org.ourproject.kune.workspace.client.upload.FileUploaderView;
 
 public class FileUploaderPresenterTest {
 

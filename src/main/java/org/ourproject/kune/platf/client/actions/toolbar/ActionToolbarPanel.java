@@ -32,8 +32,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescriptor;
-import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
@@ -57,10 +56,8 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     private final Provider<ActionManager> actionManagerProvider;
     protected final SimpleToolbar topbar;
     protected final SimpleToolbar bottombar;
-    protected final WorkspaceSkeleton ws;
 
-    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider, final WorkspaceSkeleton ws) {
-        this.ws = ws;
+    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider) {
         topbar = new SimpleToolbar();
         bottombar = new SimpleToolbar();
         topbar.setWidth("100%");

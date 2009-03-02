@@ -19,23 +19,20 @@
  \*/
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Listener0;
 
 public class ActionManager {
 
-    private final WorkspaceSkeleton ws;
-
-    public ActionManager(final WorkspaceSkeleton ws) {
-        this.ws = ws;
+    public ActionManager() {
     }
 
     public void doAction(final ActionItem<?> actionItem) {
         final ActionDescriptor<?> action = actionItem.getAction();
         final Object item = actionItem.getItem();
         if (action.isMustBeConfirmed()) {
-            ws.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Listener0() {
+            NotifyUser.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Listener0() {
                 public void onEvent() {
                     fire(action, item);
                 }

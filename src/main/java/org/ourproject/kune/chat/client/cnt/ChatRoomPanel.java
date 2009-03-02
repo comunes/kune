@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.chat.client.cnt;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 

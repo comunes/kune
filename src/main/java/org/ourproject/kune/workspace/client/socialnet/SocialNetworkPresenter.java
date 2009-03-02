@@ -30,19 +30,19 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.CustomMenu;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
@@ -129,7 +129,7 @@ public class SocialNetworkPresenter {
     protected String createTooltipWithLogo(String shortName, StateToken token, boolean hasLogo, boolean isPersonal) {
         return "<table><tr><td>"
                 + (hasLogo ? downloadProvider.get().getLogoAvatarHtml(token, hasLogo, isPersonal,
-                        EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT, 3) : "") + "</td><td>"
+                        FileConstants.LOGO_ICON_DEFAULT_HEIGHT, 3) : "") + "</td><td>"
                 + i18n.t(isPersonal ? "Nickname: [%s]" : "Group short name: [%s]", shortName) + "</td></tr></table>";
     }
 

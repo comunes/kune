@@ -19,8 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.editor.insert;
 
-import org.ourproject.kune.platf.client.app.TextEditorInsertElementGroup;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.options.AbstractOptionsPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;

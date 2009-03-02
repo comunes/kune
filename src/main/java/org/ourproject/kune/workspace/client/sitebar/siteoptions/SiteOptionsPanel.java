@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.siteoptions;
 
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 

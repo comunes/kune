@@ -16,21 +16,29 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- \*/
-package org.ourproject.kune.platf.client.ui.upload;
+ */
+package org.ourproject.kune.platf.client.i18n;
 
-import org.ourproject.kune.platf.client.ui.download.FileParams;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-import com.gwtext.client.core.UrlParam;
+/**
+ * A helper class for implementers of the SourcesI18nChangeEvents interface.
+ * This subclass of {@link ArrayList} assumes that all objects added to it will
+ * be of type {@link org.ourproject.kune.platf.client.i18n.I18nChangeListener}.
+ */
+public class I18nChangeListenerCollection extends ArrayList<I18nChangeListener> {
 
-public class AbstractUploader {
+    private static final long serialVersionUID = 1L;
 
-    public UrlParam[] genUploadParams(final String userhash, final String currentStateToken, final String typeId) {
-        // Warning take into account param[size]
-        final UrlParam param[] = new UrlParam[3];
-        param[0] = new UrlParam(FileParams.HASH, userhash);
-        param[1] = new UrlParam(FileParams.TOKEN, currentStateToken);
-        param[2] = new UrlParam(FileParams.TYPE_ID, typeId);
-        return param;
+    /**
+     * Fires a locale change event to all listeners.
+     * 
+     */
+    public void fireI18nLanguageChange() {
+        for (Iterator<I18nChangeListener> it = iterator(); it.hasNext();) {
+            I18nChangeListener listener = it.next();
+            listener.onI18nLanguageChange();
+        }
     }
 }

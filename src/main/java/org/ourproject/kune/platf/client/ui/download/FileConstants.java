@@ -19,11 +19,16 @@
  \*/
 package org.ourproject.kune.platf.client.ui.download;
 
-public interface FileParams {
+public interface FileConstants {
     String HASH = "hash";
     String TOKEN = "token";
     String DOWNLOAD = "download";
     String IMGSIZE = "imgsize";
     String FILENAME = "filename";
     String TYPE_ID = "typeid";
+    String LOGO_FORM_FIELD = "k-elogov-ff";
+    int LOGO_ICON_DEFAULT_HEIGHT = 60;
+    int LOGO_ICON_DEFAULT_WIDTH = 468;
+    int LOGO_ICON_MIN_HEIGHT = 28;
+    int LOGO_ICON_MIN_WIDTH = 468;
 }

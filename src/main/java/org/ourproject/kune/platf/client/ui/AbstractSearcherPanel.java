@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.UrlParam;

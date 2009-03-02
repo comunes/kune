@@ -26,6 +26,8 @@ import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperDefault;
 import org.ourproject.kune.platf.client.app.ToolGroup;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.I18nService;

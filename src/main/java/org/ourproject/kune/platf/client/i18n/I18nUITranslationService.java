@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.services;
+package org.ourproject.kune.platf.client.i18n;
 
 import java.util.Date;
 import java.util.HashMap;

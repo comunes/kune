@@ -21,9 +21,9 @@ package org.ourproject.kune.workspace.client.sitebar.siteusermenu;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
-import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
+import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.ClickListener;

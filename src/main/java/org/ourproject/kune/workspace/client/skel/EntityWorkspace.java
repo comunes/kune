@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.skel;
 
 import org.ourproject.kune.platf.client.ui.RoundedPanel;
+import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.google.gwt.user.client.ui.Widget;

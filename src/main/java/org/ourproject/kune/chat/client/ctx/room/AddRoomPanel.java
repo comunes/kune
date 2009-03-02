@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.chat.client.ctx.room;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 
 import com.calclab.emiteuimodule.client.dialog.BasicDialogExtended;

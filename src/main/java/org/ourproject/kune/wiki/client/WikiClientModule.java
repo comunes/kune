@@ -23,16 +23,15 @@ import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.ToolGroup;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContent;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContentPanel;
@@ -52,6 +51,7 @@ import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLi
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
+import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;

@@ -1,6 +1,7 @@
 package org.ourproject.kune.workspace.client.site;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.noti.ConfirmationAsk;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.site.msg.SiteToastMessage;
@@ -50,6 +51,11 @@ public class WorkspaceNotifyUser {
         notifyUser.addAlerter(new Listener2<String, String>() {
             public void onEvent(String title, String msg) {
                 ws.get().showAlertMessage(title, msg);
+            }
+        });
+        notifyUser.addConfirmationAsker(new Listener<ConfirmationAsk>() {
+            public void onEvent(ConfirmationAsk ask) {
+                ws.get().askConfirmation(ask.getTitle(), ask.getMessage(), ask.getOnConfirmed(), ask.getOnCancel());
             }
         });
     }

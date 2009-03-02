@@ -21,12 +21,12 @@ package org.ourproject.kune.workspace.client.signin;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
@@ -83,7 +83,7 @@ public abstract class SignInAbstractPanel extends BasicDialogExtended {
         GWT.log("Received hash: " + userHash, null);
     }
 
-    public void setErrorMessage(final String message, final SiteErrorType type) {
-        messageErrorBar.setErrorMessage(message, type);
+    public void setErrorMessage(final String message, final Level level) {
+        messageErrorBar.setErrorMessage(message, level);
     }
 }

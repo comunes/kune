@@ -38,7 +38,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.ui.download.FileParams;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 
 import com.google.inject.Inject;
@@ -98,13 +98,13 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
                     final String name = item.getFieldName();
                     final String value = item.getString();
                     log.info("name: " + name + " value: " + value);
-                    if (name.equals(FileParams.HASH)) {
+                    if (name.equals(FileConstants.HASH)) {
                         userHash = value;
                     }
-                    if (name.equals(FileParams.TOKEN)) {
+                    if (name.equals(FileConstants.TOKEN)) {
                         stateToken = new StateToken(value);
                     }
-                    if (name.equals(FileParams.TYPE_ID)) {
+                    if (name.equals(FileConstants.TYPE_ID)) {
                         typeId = value;
                     }
                 } else {

@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
@@ -72,11 +73,12 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
         final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
         Image logo;
         if (clipped) {
-            logo = new Image(imageUrl, 0, 0, LOGO_ICON_DEFAULT_WIDTH, LOGO_ICON_DEFAULT_HEIGHT);
+            logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_ICON_DEFAULT_WIDTH,
+                    FileConstants.LOGO_ICON_DEFAULT_HEIGHT);
         } else {
             logo = new Image(imageUrl);
-            logo.setWidth("" + LOGO_ICON_DEFAULT_WIDTH);
-            logo.setHeight("" + LOGO_ICON_DEFAULT_HEIGHT);
+            logo.setWidth("" + FileConstants.LOGO_ICON_DEFAULT_WIDTH);
+            logo.setHeight("" + FileConstants.LOGO_ICON_DEFAULT_HEIGHT);
         }
         add(logo);
     }

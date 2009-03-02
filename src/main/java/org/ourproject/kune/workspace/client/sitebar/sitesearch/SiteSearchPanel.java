@@ -20,8 +20,8 @@
 package org.ourproject.kune.workspace.client.sitebar.sitesearch;
 
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.ClickListener;

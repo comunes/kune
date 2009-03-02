@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.editor;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;

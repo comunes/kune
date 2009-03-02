@@ -26,14 +26,6 @@ import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 public interface EntityHeaderView {
 
-    int LOGO_ICON_DEFAULT_HEIGHT = 60;
-    int LOGO_ICON_DEFAULT_WIDTH = 468;
-
-    int LOGO_ICON_MIN_HEIGHT = 28;
-    int LOGO_ICON_MIN_WIDTH = 468;
-
-    String LOGO_FORM_FIELD = "k-elogov-ff";
-
     void addWidget(View view);
 
     void reloadImage(GroupDTO group);

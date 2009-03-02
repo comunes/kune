@@ -24,12 +24,12 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.UserAuthException;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -96,10 +96,9 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
                     try {
                         throw caught;
                     } catch (final UserAuthException e) {
-                        view.setErrorMessage(i18n.t(PlatfMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD),
-                                SiteErrorType.error);
+                        view.setErrorMessage(i18n.t(PlatfMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD), Level.error);
                     } catch (final Throwable e) {
-                        view.setErrorMessage("Error in login", SiteErrorType.error);
+                        view.setErrorMessage("Error in login", Level.error);
                         Log.error("Other kind of exception in SignInPresenter/doLogin");
                     }
                 }

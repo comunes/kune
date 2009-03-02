@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.licensewizard;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.WizardListener;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;

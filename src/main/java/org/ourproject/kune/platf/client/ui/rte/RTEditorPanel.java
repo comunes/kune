@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.ui.rte;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.actions.ActionCollection;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.BasicFormatter;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.ExtendedFormatter;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;

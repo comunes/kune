@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbarPresenter;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionCntCtxToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbarPresenter;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionContextToolbar;
@@ -41,9 +40,10 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
-import org.ourproject.kune.platf.client.app.TextEditorInsertElementGroup;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.registry.RenamableRegistry;
@@ -55,8 +55,6 @@ import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
@@ -65,9 +63,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
-import org.ourproject.kune.platf.client.ui.upload.FileUploader;
-import org.ourproject.kune.platf.client.ui.upload.FileUploaderDialog;
-import org.ourproject.kune.platf.client.ui.upload.FileUploaderPresenter;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
@@ -80,6 +75,7 @@ import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
 import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
+import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementGroup;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementPanel;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementPresenter;
 import org.ourproject.kune.workspace.client.editor.insert.linkemail.TextEditorInsertLinkEmail;
@@ -194,6 +190,7 @@ import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPres
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenu;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPresenter;
+import org.ourproject.kune.workspace.client.skel.ActionCntCtxToolbarPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.socialnet.BuddiesSummary;
 import org.ourproject.kune.workspace.client.socialnet.BuddiesSummaryPanel;
@@ -223,6 +220,9 @@ import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenter;
+import org.ourproject.kune.workspace.client.upload.FileUploader;
+import org.ourproject.kune.workspace.client.upload.FileUploaderDialog;
+import org.ourproject.kune.workspace.client.upload.FileUploaderPresenter;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
@@ -235,6 +235,8 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 public class KuneWorkspaceModule extends AbstractModule {
     @Override
     protected void onInstall() {
+
+        registerDecorator(TextEditorInsertElementGroup.class, new TextEditorInsertElementGroup(container));
 
         register(Singleton.class, new Factory<SocialNetworkServiceAsync>(SocialNetworkServiceAsync.class) {
             @Override
@@ -471,23 +473,21 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ActionManager>(ActionManager.class) {
             @Override
             public ActionManager create() {
-                return new ActionManager($(WorkspaceSkeleton.class));
+                return new ActionManager();
             }
         });
 
         register(Singleton.class, new Factory<ActionGroupSummaryToolbar>(ActionGroupSummaryToolbar.class) {
             @Override
             public ActionGroupSummaryToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
-                        $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>($$(ActionManager.class));
                 final ActionGroupSummaryToolbarPresenter toolbar = new ActionGroupSummaryToolbarPresenter(panel);
                 return toolbar;
             }
         }, new Factory<ActionParticipationToolbar>(ActionParticipationToolbar.class) {
             @Override
             public ActionParticipationToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
-                        $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>($$(ActionManager.class));
                 final ActionParticipationSummaryToolbarPresenter toolbar = new ActionParticipationSummaryToolbarPresenter(
                         panel);
                 return toolbar;
@@ -496,7 +496,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public ActionBuddiesSummaryToolbar create() {
                 final ActionToolbarPanel<UserSimpleDTO> panel = new ActionToolbarPanel<UserSimpleDTO>(
-                        $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                        $$(ActionManager.class));
                 final ActionBuddiesSummaryToolbarPresenter toolbar = new ActionBuddiesSummaryToolbarPresenter(panel);
                 return toolbar;
             }
@@ -964,5 +964,6 @@ public class KuneWorkspaceModule extends AbstractModule {
                 return presenter;
             }
         });
+
     }
 }

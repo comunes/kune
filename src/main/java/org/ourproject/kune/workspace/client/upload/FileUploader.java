@@ -16,12 +16,25 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.services;
+ \*/
+package org.ourproject.kune.workspace.client.upload;
 
-import com.google.gwt.user.client.EventListener;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface I18nChangeListener extends EventListener {
+import com.calclab.suco.client.events.Listener;
 
-    void onI18nLanguageChange();
+public interface FileUploader {
+
+    void addOnUploadCompleteListener(Listener<StateToken> listener);
+
+    boolean hasUploadingFiles();
+
+    void hide();
+
+    void resetPermittedExtensions();
+
+    void setPermittedExtensions(String extensions);
+
+    void show();
+
 }

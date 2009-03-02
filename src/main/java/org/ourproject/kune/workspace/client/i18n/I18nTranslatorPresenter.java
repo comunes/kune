@@ -21,8 +21,8 @@ package org.ourproject.kune.workspace.client.i18n;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 

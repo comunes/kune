@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.ui.download.FileParams;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
@@ -46,7 +46,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
             IOException {
 
         // final String userHash = req.getParameter(FileParams.HASH);
-        final StateToken stateToken = new StateToken(req.getParameter(FileParams.TOKEN));
+        final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
 
         Group group = Group.NO_GROUP;
         try {

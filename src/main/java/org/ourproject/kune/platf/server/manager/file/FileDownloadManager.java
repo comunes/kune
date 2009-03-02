@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.ui.download.FileParams;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
@@ -71,10 +71,10 @@ public class FileDownloadManager extends HttpServlet {
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
             IOException {
 
-        final String userHash = req.getParameter(FileParams.HASH);
-        final StateToken stateToken = new StateToken(req.getParameter(FileParams.TOKEN));
-        final String downloadS = req.getParameter(FileParams.DOWNLOAD);
-        String imageSizeS = req.getParameter(FileParams.IMGSIZE);
+        final String userHash = req.getParameter(FileConstants.HASH);
+        final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
+        final String downloadS = req.getParameter(FileConstants.DOWNLOAD);
+        String imageSizeS = req.getParameter(FileConstants.IMGSIZE);
 
         try {
             Content cnt = getContentForDownload(userHash, stateToken);

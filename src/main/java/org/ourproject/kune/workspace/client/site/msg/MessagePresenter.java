@@ -19,12 +19,12 @@
  */
 package org.ourproject.kune.workspace.client.site.msg;
 
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 public interface MessagePresenter {
 
     void resetMessage();
 
-    void setMessage(final String message, final SiteErrorType type);
+    void setMessage(final String message, final Level level);
 
 }

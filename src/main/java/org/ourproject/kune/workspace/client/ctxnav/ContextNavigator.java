@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.ctxnav;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.ui.upload.FileUploader;
+import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 public interface ContextNavigator {
 

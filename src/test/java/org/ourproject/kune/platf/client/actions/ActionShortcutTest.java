@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.services.I18nTranslationServiceMocked;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 
 import com.google.gwt.user.client.ui.KeyboardListener;
 

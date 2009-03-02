@@ -23,7 +23,7 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
 import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.AccessLists;

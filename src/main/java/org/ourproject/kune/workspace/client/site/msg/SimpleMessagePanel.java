@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.site.msg;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HTML;
@@ -67,16 +67,16 @@ public class SimpleMessagePanel extends HorizontalPanel {
         this.message.setHTML(text);
     }
 
-    public void setMessage(final String text, final SiteErrorType lastMessageType, final SiteErrorType type) {
+    public void setMessage(final String text, final Level lastMessageType, final Level type) {
         AbstractImagePrototype imagePrototype = null;
         switch (type) {
         case error:
             imagePrototype = images.error();
             break;
-        case veryimp:
+        case veryImportant:
             imagePrototype = images.important();
             break;
-        case imp:
+        case important:
             imagePrototype = images.emblemImportant();
             break;
         case info:

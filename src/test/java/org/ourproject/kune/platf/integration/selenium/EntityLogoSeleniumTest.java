@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Ignore;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
 
@@ -24,8 +24,7 @@ public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
         // PlatfMessages.ENT_OPTIONS_GROUP_TITLE);
         click(EntityOptionsLogoPanel.SET_LOGO_ID);
         File dir = new File(".");
-        type(EntityHeaderView.LOGO_FORM_FIELD, dir.getCanonicalPath() + File.separator + "img" + File.separator
-                + filename);
+        type(FileConstants.LOGO_FORM_FIELD, dir.getCanonicalPath() + File.separator + "img" + File.separator + filename);
         click(EntityOptionsLogoPanel.SET_LOGO_ID);
     }
 }

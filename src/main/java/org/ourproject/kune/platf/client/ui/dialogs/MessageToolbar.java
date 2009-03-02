@@ -20,7 +20,7 @@
 package org.ourproject.kune.platf.client.ui.dialogs;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -57,7 +57,7 @@ public class MessageToolbar {
         toolbar.setVisible(false);
     }
 
-    public void setErrorMessage(final String message, final SiteErrorType type) {
+    public void setErrorMessage(final String message, final Level type) {
         errorLabel.setText(message);
         errorIcon.setVisible(true);
         toolbar.setVisible(true);

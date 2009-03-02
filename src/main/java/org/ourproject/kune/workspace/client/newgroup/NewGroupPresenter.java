@@ -25,12 +25,13 @@ import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
@@ -116,10 +117,10 @@ public class NewGroupPresenter implements NewGroup {
                         throw caught;
                     } catch (final GroupNameInUseException e) {
                         view.unMask();
-                        setMessage(i18n.t(WorkspaceMessages.NAME_IN_ALREADY_IN_USE), SiteErrorType.error);
+                        setMessage(i18n.t(WorkspaceMessages.NAME_IN_ALREADY_IN_USE), Level.error);
                     } catch (final Throwable e) {
                         view.unMask();
-                        setMessage(i18n.t("Error creating group"), SiteErrorType.error);
+                        setMessage(i18n.t("Error creating group"), Level.error);
                         GWT.log("Other kind of exception in group registration", null);
                         throw new RuntimeException();
                     }
@@ -138,8 +139,8 @@ public class NewGroupPresenter implements NewGroup {
         }
     }
 
-    public void setMessage(final String message, final SiteErrorType type) {
-        view.setMessage(message, type);
+    public void setMessage(final String message, final Level level) {
+        view.setMessage(message, level);
     }
 
     private GroupType getTypeOfGroup() {

@@ -20,13 +20,14 @@
 package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 
@@ -175,8 +176,8 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         KuneUiUtils.setQuickTip(licenseImage, license.getLongName());
     }
 
-    public void setMessage(final String message, final SiteErrorType type) {
-        messageErrorBar.setErrorMessage(message, type);
+    public void setMessage(final String message, final Level level) {
+        messageErrorBar.setErrorMessage(message, level);
     }
 
     private FormPanel createNewGroupInitialDataForm(final NewGroupPresenter presenter) {

@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.options;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 public abstract class AbstractOptionsPresenter {
 
@@ -46,8 +46,8 @@ public abstract class AbstractOptionsPresenter {
         this.view = view;
     }
 
-    public void setErrorMessage(String message, SiteErrorType type) {
-        view.setErrorMessage(message, type);
+    public void setErrorMessage(String message, Level level) {
+        view.setErrorMessage(message, level);
     }
 
     public void show() {

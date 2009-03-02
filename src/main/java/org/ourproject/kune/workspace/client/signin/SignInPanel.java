@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;

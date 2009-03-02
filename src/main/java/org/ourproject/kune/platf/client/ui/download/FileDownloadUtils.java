@@ -48,7 +48,7 @@ public class FileDownloadUtils {
     }
 
     public String getImageResizedUrl(final StateToken token, ImageSize imageSize) {
-        return calculateUrl(token, false) + "&" + new UrlParam(FileParams.IMGSIZE, imageSize.toString());
+        return calculateUrl(token, false) + "&" + new UrlParam(FileConstants.IMGSIZE, imageSize.toString());
     }
 
     public String getImageUrl(final StateToken token) {
@@ -67,12 +67,12 @@ public class FileDownloadUtils {
     }
 
     public String getLogoImageUrl(StateToken token) {
-        return new Url(LOGODOWNLOADSERVLET, new UrlParam(FileParams.TOKEN, token.toString())).toString();
+        return new Url(LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString())).toString();
     }
 
     private String calculateUrl(final StateToken token, final boolean download) {
-        return new Url(DOWNLOADSERVLET, new UrlParam(FileParams.TOKEN, token.toString()), new UrlParam(FileParams.HASH,
-                session.getUserHash()), new UrlParam(FileParams.DOWNLOAD, download)).toString();
+        return new Url(DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString()), new UrlParam(FileConstants.HASH,
+                session.getUserHash()), new UrlParam(FileConstants.DOWNLOAD, download)).toString();
     }
 
 }

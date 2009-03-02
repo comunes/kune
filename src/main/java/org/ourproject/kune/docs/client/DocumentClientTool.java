@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.docs.client;
 
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;

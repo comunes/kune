@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.platf.client.actions.toolbar;
+package org.ourproject.kune.workspace.client.skel;
 
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -31,13 +31,16 @@ public class ActionCntCtxToolbarPanel<T> extends ActionToolbarPanel<T> {
     }
 
     private final Position position;
+    private final WorkspaceSkeleton ws;
 
     public ActionCntCtxToolbarPanel(final Position position, final Provider<ActionManager> actionManagerProvider,
             final WorkspaceSkeleton ws) {
-        super(actionManagerProvider, ws);
+        super(actionManagerProvider);
         this.position = position;
+        this.ws = ws;
     }
 
+    @Override
     public void attach() {
         if (!topbar.isAttached()) {
             switch (position) {
@@ -55,6 +58,7 @@ public class ActionCntCtxToolbarPanel<T> extends ActionToolbarPanel<T> {
         }
     }
 
+    @Override
     public void detach() {
         if (topbar.isAttached()) {
             switch (position) {

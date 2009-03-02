@@ -24,13 +24,13 @@ import static org.ourproject.kune.platf.server.OutermostCallInterceptor.outermos
 import org.ourproject.kune.app.server.AbstractExtendedModule;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.rpc.ContentService;
 import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.UserService;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.access.AccessRightsServiceDefault;
 import org.ourproject.kune.platf.server.access.AccessService;

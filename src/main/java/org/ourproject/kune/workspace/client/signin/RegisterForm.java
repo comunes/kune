@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.signin;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;

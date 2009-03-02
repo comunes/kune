@@ -17,28 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.services;
+package org.ourproject.kune.platf.client.i18n;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 
-/**
- * A helper class for implementers of the SourcesI18nChangeEvents interface.
- * This subclass of {@link ArrayList} assumes that all objects added to it will
- * be of type {@link org.ourproject.kune.platf.client.services.I18nChangeListener}.
- */
-public class I18nChangeListenerCollection extends ArrayList<I18nChangeListener> {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Fires a locale change event to all listeners.
-     * 
-     */
-    public void fireI18nLanguageChange() {
-        for (Iterator<I18nChangeListener> it = iterator(); it.hasNext();) {
-            I18nChangeListener listener = it.next();
-            listener.onI18nLanguageChange();
-        }
+public class I18nTranslationServiceMocked extends I18nTranslationService {
+    public String t(final String text) {
+        String encodeText = TextUtils.escapeHtmlLight(text);
+        String translation = removeNT(encodeText);
+        return decodeHtml(translation);
     }
 }

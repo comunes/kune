@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.i18n;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;

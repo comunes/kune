@@ -28,12 +28,12 @@ import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
+import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
-import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.suco.client.ioc.Provider;
@@ -97,11 +97,11 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
                     try {
                         throw caught;
                     } catch (final EmailAddressInUseException e) {
-                        view.setErrorMessage(i18n.t(PlatfMessages.EMAIL_IN_USE), SiteErrorType.error);
+                        view.setErrorMessage(i18n.t(PlatfMessages.EMAIL_IN_USE), Level.error);
                     } catch (final GroupNameInUseException e) {
-                        view.setErrorMessage(i18n.t(PlatfMessages.NAME_IN_USE), SiteErrorType.error);
+                        view.setErrorMessage(i18n.t(PlatfMessages.NAME_IN_USE), Level.error);
                     } catch (final Throwable e) {
-                        view.setErrorMessage(i18n.t("Error during registration."), SiteErrorType.error);
+                        view.setErrorMessage(i18n.t("Error during registration."), Level.error);
                         GWT.log("Other kind of exception in user registration" + e.getMessage() + ", "
                                 + e.getLocalizedMessage(), null);
                         e.printStackTrace();

@@ -20,8 +20,8 @@
 package org.ourproject.kune.workspace.client.licensefoot;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.Window;

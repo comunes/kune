@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.platf.client.app;
+package org.ourproject.kune.workspace.client.editor.insert;
 
 import org.ourproject.kune.workspace.client.editor.insert.abstractlink.TextEditorInsertAbstract;
 

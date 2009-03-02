@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
@@ -108,8 +108,8 @@ public abstract class AbstractOptionsPanel {
         return dialog.isVisible();
     }
 
-    public void setErrorMessage(final String message, final SiteErrorType type) {
-        messageErrorBar.setErrorMessage(message, type);
+    public void setErrorMessage(final String message, final Level level) {
+        messageErrorBar.setErrorMessage(message, level);
     }
 
     public void setFirstTabActive() {

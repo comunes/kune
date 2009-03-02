@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.noti;
 
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Event0;
@@ -38,11 +38,18 @@ public class NotifyUser {
 
     private static Event2<String, String> onAlert;
 
+    private static Event<ConfirmationAsk> onConfirmationAsk;
+
     private static Event<String> onProgress;
 
     private static Event0 onHideProgress;
 
     private static I18nTranslationService i18n;
+
+    public static void askConfirmation(String confirmationTitle, String confirmationText, Listener0 onConfirm,
+            Listener0 onCancel) {
+        onConfirmationAsk.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, onCancel));
+    }
 
     public static void error(final String message) {
         onNotify.fire(Level.error, message);
@@ -91,13 +98,18 @@ public class NotifyUser {
     public NotifyUser(I18nTranslationService i18n) {
         NotifyUser.i18n = i18n;
         onNotify = new Event2<Level, String>("onNotify");
-        onAlert = new Event2<String, String>("onNotify");
+        onAlert = new Event2<String, String>("onAlert");
         onProgress = new Event<String>("onProgress");
         onHideProgress = new Event0("onHideProgress");
+        onConfirmationAsk = new Event<ConfirmationAsk>("onConfirmationAsk");
     }
 
     public void addAlerter(final Listener2<String, String> listener) {
         onAlert.add(listener);
+    }
+
+    public void addConfirmationAsker(final Listener<ConfirmationAsk> listener) {
+        onConfirmationAsk.add(listener);
     }
 
     public void addHideProgressNotifier(final Listener0 listener) {
@@ -111,4 +123,5 @@ public class NotifyUser {
     public void addProgressNotifier(final Listener<String> listener) {
         onProgress.add(listener);
     }
+
 }

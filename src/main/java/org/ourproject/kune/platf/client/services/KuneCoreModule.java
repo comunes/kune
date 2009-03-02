@@ -21,7 +21,6 @@ package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
-import org.ourproject.kune.platf.client.app.TextEditorInsertElementGroup;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 
 import com.calclab.suco.client.ioc.module.AbstractModule;
@@ -33,6 +32,5 @@ public class KuneCoreModule extends AbstractModule {
         registerDecorator(ApplicationComponentGroup.class, new ApplicationComponentGroup(container));
         registerDecorator(ToolGroup.class, new ToolGroup(container));
         registerDecorator(EntityOptionsGroup.class, new EntityOptionsGroup(container));
-        registerDecorator(TextEditorInsertElementGroup.class, new TextEditorInsertElementGroup(container));
     }
 }

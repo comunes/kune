@@ -20,11 +20,10 @@
 package org.ourproject.kune.workspace.client.options.logo;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
-import org.ourproject.kune.platf.client.services.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
-import org.ourproject.kune.platf.client.ui.download.FileParams;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -85,17 +84,17 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         });
         dialogInfoLabel = new Label();
         super.add(dialogInfoLabel);
-        file = new TextField("File", EntityHeaderView.LOGO_FORM_FIELD);
+        file = new TextField("File", FileConstants.LOGO_FORM_FIELD);
         EventCallback keyListener = new EventCallback() {
             public void execute(EventObject e) {
                 // setEnableFileField();
             }
         };
         file.addKeyPressListener(keyListener);
-        file.setId(EntityHeaderView.LOGO_FORM_FIELD);
+        file.setId(FileConstants.LOGO_FORM_FIELD);
         file.setInputType("file");
-        userhashField = new Hidden(FileParams.HASH, FileParams.HASH);
-        tokenField = new Hidden(FileParams.TOKEN, FileParams.TOKEN);
+        userhashField = new Hidden(FileConstants.HASH, FileConstants.HASH);
+        tokenField = new Hidden(FileConstants.TOKEN, FileConstants.TOKEN);
         super.add(userhashField);
         super.add(tokenField);
         super.add(file);
@@ -139,7 +138,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
     public void setNormalGroupsLabels() {
         dialogInfoLabel.setHtml(i18n.t("Select an image in your computer as the logo for this group. "
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
-                EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT, EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT)
+                FileConstants.LOGO_ICON_DEFAULT_HEIGHT, FileConstants.LOGO_ICON_DEFAULT_HEIGHT)
                 + DefaultFormUtils.brbr());
         super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
         doLayoutIfNeeded();
@@ -148,7 +147,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
     public void setPersonalGroupsLabels() {
         dialogInfoLabel.setHtml(i18n.t("Select an image in your computer as your avatar. "
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
-                EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT, EntityHeaderView.LOGO_ICON_DEFAULT_HEIGHT)
+                FileConstants.LOGO_ICON_DEFAULT_HEIGHT, FileConstants.LOGO_ICON_DEFAULT_HEIGHT)
                 + "<br/><br/>");
         super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
         doLayoutIfNeeded();

@@ -17,24 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.platf.client.ui.upload;
+package org.ourproject.kune.workspace.client.upload;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.ui.download.FileConstants;
 
-import com.calclab.suco.client.events.Listener;
+import com.gwtext.client.core.UrlParam;
 
-public interface FileUploader {
+public class AbstractUploader {
 
-    void addOnUploadCompleteListener(Listener<StateToken> listener);
-
-    boolean hasUploadingFiles();
-
-    void hide();
-
-    void resetPermittedExtensions();
-
-    void setPermittedExtensions(String extensions);
-
-    void show();
-
+    public UrlParam[] genUploadParams(final String userhash, final String currentStateToken, final String typeId) {
+        // Warning take into account param[size]
+        final UrlParam param[] = new UrlParam[3];
+        param[0] = new UrlParam(FileConstants.HASH, userhash);
+        param[1] = new UrlParam(FileConstants.TOKEN, currentStateToken);
+        param[2] = new UrlParam(FileConstants.TYPE_ID, typeId);
+        return param;
+    }
 }

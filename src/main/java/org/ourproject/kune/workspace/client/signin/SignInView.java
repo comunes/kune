@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.signin;
 
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 public interface SignInView extends SignInAbstractView {
 
@@ -45,7 +45,7 @@ public interface SignInView extends SignInAbstractView {
 
     void setCookie(final String userHash);
 
-    void setErrorMessage(final String message, final SiteErrorType type);
+    void setErrorMessage(final String message, final Level level);
 
     void show();
 
