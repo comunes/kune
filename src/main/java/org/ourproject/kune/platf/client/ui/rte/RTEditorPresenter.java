@@ -13,8 +13,8 @@ import org.ourproject.kune.platf.client.actions.ContentEditorActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
-import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.events.Listener0;
 
@@ -197,7 +197,7 @@ public class RTEditorPresenter implements RTEditor {
         ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
-                        Site.info("In dev");
+                        NotifyUser.info("In dev");
                     }
                 });
         editHtml.setTextDescription(i18n.t("Edit HTML"));

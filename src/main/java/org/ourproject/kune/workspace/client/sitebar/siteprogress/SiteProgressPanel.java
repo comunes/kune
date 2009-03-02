@@ -34,7 +34,7 @@ public class SiteProgressPanel implements SiteProgressView {
 
     private final Widget progressPanel;
     private final Widget progressText;
-    private Timer timeProgressMaxTime;
+    private final Timer timeProgressMaxTime;
 
     private final Provider<SitePublicSpaceLink> publicLinkProvider;
 
@@ -43,6 +43,12 @@ public class SiteProgressPanel implements SiteProgressView {
         this.publicLinkProvider = publicLinkProvider;
         progressPanel = RootPanel.get("kuneprogresspanel");
         progressText = RootPanel.get("kuneprogresstext");
+        timeProgressMaxTime = new Timer() {
+            @Override
+            public void run() {
+                hideProgress();
+            }
+        };
     }
 
     public void hideProgress() {
@@ -56,14 +62,6 @@ public class SiteProgressPanel implements SiteProgressView {
     }
 
     public void showProgress(final String text) {
-        if (timeProgressMaxTime == null) {
-            timeProgressMaxTime = new Timer() {
-                @Override
-                public void run() {
-                    hideProgress();
-                }
-            };
-        }
         timeProgressMaxTime.schedule(MAX_TIME_PROGRESS_BAR);
         publicLinkProvider.get().setVisible(false);
         progressPanel.setVisible(true);

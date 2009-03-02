@@ -32,8 +32,8 @@ import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
-import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.suco.client.ioc.Provider;
@@ -56,10 +56,10 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
     public void doRegister() {
         signInProvider.get().hide();
         if (!session.isLogged()) {
-            Site.showProgressProcessing();
+            NotifyUser.showProgressProcessing();
             view.show();
             view.center();
-            Site.hideProgress();
+            NotifyUser.hideProgress();
         } else {
             stateManager.restorePreviousToken();
         }

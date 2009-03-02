@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui.rate;
+package org.ourproject.kune.workspace.client.rate;
 
 import org.ourproject.kune.platf.client.services.Images;
 

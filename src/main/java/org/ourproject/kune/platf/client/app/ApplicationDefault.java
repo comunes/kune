@@ -23,8 +23,8 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
-import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event0;
@@ -84,7 +84,7 @@ public class ApplicationDefault implements Application {
             public void onFailure(final Throwable error) {
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
                 RootPanel.get("kuneloading").setVisible(false);
-                Site.error("Error fetching initial data");
+                NotifyUser.error("Error fetching initial data");
                 Log.debug(error.getMessage());
             }
 

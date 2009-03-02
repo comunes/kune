@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
@@ -45,12 +45,12 @@ public class LicenseChangeAction {
     }
 
     public void changeLicense(final LicenseDTO license, final Listener0 onSuccess) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         groupService.get().changeDefLicense(session.getUserHash(), session.getCurrentStateToken(), license,
                 new AsyncCallback<Object>() {
                     public void onFailure(Throwable caught) {
-                        Site.hideProgress();
-                        Site.error(i18n.t("Error changing default group license"));
+                        NotifyUser.hideProgress();
+                        NotifyUser.error(i18n.t("Error changing default group license"));
                     }
 
                     public void onSuccess(Object result) {

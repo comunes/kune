@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -76,7 +76,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
         if (beforeSignOutCollection.checkBeforeAction()) {
             userServiceProvider.get().logout(session.getUserHash(), new AsyncCallback<Object>() {
                 public void onFailure(final Throwable caught) {
-                    Site.hideProgress();
+                    NotifyUser.hideProgress();
                     try {
                         throw caught;
                     } catch (final SessionExpiredException e) {
@@ -90,13 +90,13 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
                 }
 
                 public void onSuccess(final Object arg0) {
-                    Site.hideProgress();
+                    NotifyUser.hideProgress();
                     clientUIsignOut();
                 }
 
             });
         } else {
-            Site.hideProgress();
+            NotifyUser.hideProgress();
         }
     }
 

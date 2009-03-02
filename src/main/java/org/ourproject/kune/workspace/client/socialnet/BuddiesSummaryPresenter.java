@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
+import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
 import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
@@ -46,7 +47,7 @@ import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
@@ -151,7 +152,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         ActionToolbarMenuDescriptor<UserSimpleDTO> addNewBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
                     public void onEvent(UserSimpleDTO parameter) {
-                        Site.info("In development");
+                        NotifyUser.info("In development");
                     }
                 });
         addNewBuddiesAction.setTextDescription(i18n.t("Add a new buddy"));
@@ -168,7 +169,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                                 session.getCurrentState().getGroup().getStateToken(), visibility,
                                 new AsyncCallbackSimple<Object>() {
                                     public void onSuccess(Object result) {
-                                        Site.info(i18n.t("Buddies visibility changed"));
+                                        NotifyUser.info(i18n.t("Buddies visibility changed"));
                                     }
                                 });
                     }

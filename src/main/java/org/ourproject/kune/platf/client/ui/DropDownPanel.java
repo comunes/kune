@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.client.ui;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
@@ -142,20 +141,18 @@ public class DropDownPanel extends Composite implements ClickListener {
         outerBorder.setHeight(height);
     }
 
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+    public void setTheme(final String oldTheme, final String newTheme) {
         if (oldTheme != null) {
-            final String oldThemeS = oldTheme.toString();
             // outerBorder.removeStyleDependentName(oldThemeS);
-            vp.removeStyleDependentName(oldThemeS);
-            titleHP.removeStyleDependentName(oldThemeS);
-            contentPanel.removeStyleDependentName(oldThemeS);
+            vp.removeStyleDependentName(oldTheme);
+            titleHP.removeStyleDependentName(oldTheme);
+            contentPanel.removeStyleDependentName(oldTheme);
         }
-        final String newThemeS = newTheme.toString();
-        outerBorder.setCornerStyleName(stylePrimaryName + "-" + newThemeS);
+        outerBorder.setCornerStyleName(stylePrimaryName + "-" + newTheme);
         // outerBorder.addStyleDependentName(newThemeS);
-        vp.addStyleDependentName(newThemeS);
-        titleHP.addStyleDependentName(newThemeS);
-        contentPanel.addStyleDependentName(newThemeS);
+        vp.addStyleDependentName(newTheme);
+        titleHP.addStyleDependentName(newTheme);
+        contentPanel.addStyleDependentName(newTheme);
     }
 
     @Override

@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.site.msg;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 public class SiteToastMessagePresenter implements SiteToastMessage {
 
@@ -37,7 +37,7 @@ public class SiteToastMessagePresenter implements SiteToastMessage {
         this.view = view;
     }
 
-    public void showMessage(String title, final String message, final SiteErrorType type) {
-        view.showMessage(title, message, type);
+    public void showMessage(String title, final String message, final Level level) {
+        view.showMessage(title, message, level);
     }
 }

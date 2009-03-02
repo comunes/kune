@@ -22,6 +22,10 @@ package org.ourproject.kune.platf.client.ui;
 import java.util.ArrayList;
 
 public class TextUtils {
+
+    public static final String IN_DEVELOPMENT_P = " (in development)";
+    public static final String IN_DEVELOPMENT = "In development";
+
     // Original regexp from http://snippets.dzone.com/posts/show/452
     public static final String URL_REGEXP = "((ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?)";
 

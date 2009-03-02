@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.platf.client.tool;
+package org.ourproject.kune.workspace.client.tool;
 
 import java.util.HashMap;
 import java.util.List;

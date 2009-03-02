@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- \*/
-package org.ourproject.kune.platf.client.tool;
+ */
+package org.ourproject.kune.workspace.client.rate;
 
-public interface ToolSelectorItem {
+public interface RateItView {
 
-    String getShortName();
+    void clearRate();
 
-    void setGroupShortName(String groupShortName);
+    void setDesc(String desc);
 
-    void setSelected(boolean selected);
+    void setStars(Double value);
 
     void setVisible(boolean visible);
 

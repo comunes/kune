@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.ui.upload;
 
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.TextUtils;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -59,7 +59,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
     public void destroy() {
         if (hasUploadingFiles()) {
             dialog.stopUpload();
-            Site.important(i18n.t("Upload cancelled after signing out"));
+            NotifyUser.important(i18n.t("Upload cancelled after signing out"));
         }
         if (dialog != null) {
             dialog.destroy();
@@ -138,7 +138,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
             public boolean onBeforeAdd(final UploadDialog source, final String filename) {
                 boolean mustAdd = presenter.checkFolderChange();
                 if (!mustAdd) {
-                    Site.important(i18n.t("Please, wait until current uploads are finished to upload new files into another location"));
+                    NotifyUser.important(i18n.t("Please, wait until current uploads are finished to upload new files into another location"));
                 }
                 return mustAdd;
             }
@@ -151,7 +151,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
             @Override
             public void onUploadComplete(final UploadDialog source) {
                 if (!dialog.isVisible()) {
-                    Site.info(i18n.t("Upload completed"));
+                    NotifyUser.info(i18n.t("Upload completed"));
                     traybarButton.destroy();
                     traybarButton = null;
                 }
@@ -170,7 +170,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
 
             private void showError() {
                 if (!dialog.isVisible()) {
-                    Site.veryImportant(i18n.t("Error uploading"));
+                    NotifyUser.veryImportant(i18n.t("Error uploading"));
                 }
             }
 

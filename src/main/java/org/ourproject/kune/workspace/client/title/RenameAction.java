@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.errors.NameNotPermittedException;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener2;
@@ -58,26 +58,26 @@ public class RenameAction {
 
     public void rename(final StateToken token, final String oldName, final String newName) {
         if (!newName.equals(oldName)) {
-            Site.showProgress(i18n.t("Renaming"));
+            NotifyUser.showProgress(i18n.t("Renaming"));
             final AsyncCallback<StateAbstractDTO> asyncCallback = new AsyncCallback<StateAbstractDTO>() {
                 public void onFailure(final Throwable caught) {
-                    Site.hideProgress();
+                    NotifyUser.hideProgress();
                     try {
                         throw caught;
                     } catch (final NameInUseException e) {
-                        Site.error(i18n.tWithNT("This name already exists",
+                        NotifyUser.error(i18n.tWithNT("This name already exists",
                                 "It is used when a file or a folder with the same name already exists"));
                     } catch (final NameNotPermittedException e) {
-                        Site.error(i18n.tWithNT("This name is not permitted",
+                        NotifyUser.error(i18n.tWithNT("This name is not permitted",
                                 "It is used when a file or a folder does not have a permitted name"));
                     } catch (final Throwable e) {
-                        Site.error(i18n.t("Error renaming"));
+                        NotifyUser.error(i18n.t("Error renaming"));
                     }
                     onFail.fire(token, oldName);
                 }
 
                 public void onSuccess(final StateAbstractDTO state) {
-                    Site.hideProgress();
+                    NotifyUser.hideProgress();
                     session.setCurrentState(state);
                     onSuccess.fire(token, state.getTitle());
                 }

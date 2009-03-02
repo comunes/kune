@@ -27,9 +27,9 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
-import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -59,7 +59,7 @@ public class ChatRoomPresenter extends FoldableContentPresenter implements ChatR
                 view.setInfo(i18n.t("Select a chat room"));
             }
         } else {
-            view.setInfo("History of room conversations..." + Site.IN_DEVELOPMENT);
+            view.setInfo("History of room conversations..." + TextUtils.IN_DEVELOPMENT_P);
         }
         super.setState(state);
     }

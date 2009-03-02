@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
 import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
+import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
@@ -51,6 +52,7 @@ import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.FoldableContent;
@@ -58,9 +60,7 @@ import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
-import org.ourproject.kune.workspace.client.socialnet.RadioMustBeChecked;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -159,7 +159,7 @@ public abstract class AbstractFoldableContentActions {
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
-                        Site.info("Sorry, in development");
+                        NotifyUser.info("Sorry, in development");
                     }
                 });
         delContainer.setParentMenuTitle(parentMenuTitle);
@@ -233,24 +233,24 @@ public abstract class AbstractFoldableContentActions {
                                 contextPropEditorProvider.get().attach();
                                 editor.editContent(session.getContentState().getContent(), new Listener<String>() {
                                     public void onEvent(final String html) {
-                                        Site.showProgressSaving();
+                                        NotifyUser.showProgressSaving();
                                         contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
                                                 new AsyncCallback<Object>() {
                                                     public void onFailure(final Throwable caught) {
-                                                        Site.hideProgress();
+                                                        NotifyUser.hideProgress();
                                                         try {
                                                             throw caught;
                                                         } catch (final SessionExpiredException e) {
                                                             errorHandler.doSessionExpired();
                                                         } catch (final Throwable e) {
-                                                            Site.error(i18n.t("Error saving document. Retrying..."));
+                                                            NotifyUser.error(i18n.t("Error saving document. Retrying..."));
                                                             errorHandler.process(caught);
                                                             editor.onSaveFailed();
                                                         }
                                                     }
 
                                                     public void onSuccess(Object param) {
-                                                        Site.hideProgress();
+                                                        NotifyUser.hideProgress();
                                                         session.getContentState().setContent(html);
                                                         editor.onSavedSuccessful();
                                                     }
@@ -325,7 +325,7 @@ public abstract class AbstractFoldableContentActions {
         addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
                 ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
                                 contentTypeId, new AsyncCallbackSimple<StateContainerDTO>() {
                                     public void onSuccess(final StateContainerDTO state) {
@@ -348,7 +348,7 @@ public abstract class AbstractFoldableContentActions {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().addContent(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), description, typeId,
                                 new AsyncCallbackSimple<StateContentDTO>() {
@@ -424,13 +424,13 @@ public abstract class AbstractFoldableContentActions {
         setAsDefGroupContent = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Administrator,
                 ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
                                 new AsyncCallbackSimple<ContentSimpleDTO>() {
                                     public void onSuccess(final ContentSimpleDTO defContent) {
                                         session.getCurrentState().getGroup().setDefaultContent(defContent);
-                                        Site.hideProgress();
-                                        Site.info(i18n.t("Content selected as the group homepage"));
+                                        NotifyUser.hideProgress();
+                                        NotifyUser.info(i18n.t("Content selected as the group homepage"));
                                     }
                                 });
                     }
@@ -493,7 +493,7 @@ public abstract class AbstractFoldableContentActions {
         ActionToolbarButtonDescriptor<StateToken> translateContent = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
-                        Site.important(i18n.t("Sorry, this functionality is currently in development"));
+                        NotifyUser.important(i18n.t("Sorry, this functionality is currently in development"));
                     }
                 });
         translateContent.setTextDescription(i18n.tWithNT("Translate", "used in button"));
@@ -552,7 +552,7 @@ public abstract class AbstractFoldableContentActions {
                         groupServiceProvider.get().setGroupFullLogo(session.getUserHash(), token,
                                 new AsyncCallbackSimple<GroupDTO>() {
                                     public void onSuccess(GroupDTO newGroup) {
-                                        Site.info("Logo selected");
+                                        NotifyUser.info("Logo selected");
                                         if (session.getCurrentState().getGroup().getShortName().equals(
                                                 newGroup.getShortName())) {
                                             session.getCurrentState().setGroup(newGroup);

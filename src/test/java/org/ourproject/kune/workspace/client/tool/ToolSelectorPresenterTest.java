@@ -1,10 +1,12 @@
-package org.ourproject.kune.platf.client.tool;
+package org.ourproject.kune.workspace.client.tool;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.tool.ToolSelectorItem;
+import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenter;
 
 public class ToolSelectorPresenterTest {
 

@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.sitebar.sitesearch;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -67,7 +67,7 @@ public class SiteSearchPanel implements SiteSearchView {
 
         searchButton.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
-                Site.showProgressProcessing();
+                NotifyUser.showProgressProcessing();
                 presenter.doSearch(searchTextBox.getText());
             }
         });
@@ -82,7 +82,7 @@ public class SiteSearchPanel implements SiteSearchView {
             public void onKeyUp(final Widget widget, final char key, final int mod) {
                 if (key == KEY_ENTER) {
                     if (searchTextBox.getText().length() > 0) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         presenter.doSearch(searchTextBox.getText());
                     }
                 }

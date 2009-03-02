@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener;
@@ -74,12 +74,12 @@ public class WsThemePresenter {
     }
 
     protected void onChangeGroupWsTheme(final WsTheme newTheme) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), session.getCurrentState().getStateToken(),
                 newTheme.getName(), new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
                         setTheme(newTheme);
-                        Site.hideProgress();
+                        NotifyUser.hideProgress();
                     }
                 });
     }

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui.rate;
+package org.ourproject.kune.workspace.client.rate;
 
 import org.ourproject.kune.platf.client.dto.RateResultDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
@@ -93,13 +93,13 @@ public class RateItPresenter implements RateIt {
         isRating = true;
         final Double newValue = starClicked + 1d == currentRate ? currentRate - 0.5d : starClicked + 1d;
         setRatePanel(newValue);
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         final StateAbstractDTO currentState = session.getCurrentState();
         contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getStateToken(), newValue,
                 new AsyncCallbackSimple<RateResultDTO>() {
                     public void onSuccess(final RateResultDTO result) {
-                        Site.hideProgress();
-                        Site.info(i18n.t("Content rated"));
+                        NotifyUser.hideProgress();
+                        NotifyUser.info(i18n.t("Content rated"));
                         if (currentState.getStateToken().equals(session.getCurrentStateToken())) {
                             session.getContentState().setRate(result);
                             setState(true, result.getCurrentUserRate());

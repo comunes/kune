@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
+import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
@@ -50,8 +51,8 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
@@ -118,7 +119,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                                     chatEngineProvider.get().chat(
                                             XmppURI.jid(group.getShortName() + "@" + initData.getChatDomain()));
                                 } else {
-                                    Site.important(i18n.t("To start a chat you need to be 'online'"));
+                                    NotifyUser.important(i18n.t("To start a chat you need to be 'online'"));
                                 }
                             }
                         }), true);
@@ -139,12 +140,12 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     }
 
     public void addCollab(final String groupShortName) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         snServiceProvider.get().addCollabMember(session.getUserHash(), session.getCurrentState().getStateToken(),
                 groupShortName, new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                     public void onSuccess(final SocialNetworkDataDTO result) {
-                        Site.hideProgress();
-                        Site.info(i18n.t("Member added as collaborator"));
+                        NotifyUser.hideProgress();
+                        NotifyUser.info(i18n.t("Member added as collaborator"));
                         stateManager.setSocialNetwork(result);
                     }
 
@@ -191,7 +192,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                                 session.getCurrentState().getGroup().getStateToken(), admissionPolicy,
                                 new AsyncCallbackSimple<Object>() {
                                     public void onSuccess(Object result) {
-                                        Site.info(i18n.t("Members joining policy changed"));
+                                        NotifyUser.info(i18n.t("Members joining policy changed"));
                                     }
                                 });
                     }
@@ -215,7 +216,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                                 session.getCurrentState().getGroup().getStateToken(), visibility,
                                 new AsyncCallbackSimple<Object>() {
                                     public void onSuccess(Object result) {
-                                        Site.info(i18n.t("Members visibility changed"));
+                                        NotifyUser.info(i18n.t("Members visibility changed"));
                                     }
                                 });
                     }

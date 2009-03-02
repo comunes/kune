@@ -28,8 +28,8 @@ import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.newgroup.SiteErrorType;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -52,10 +52,10 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
     public void doSignIn() {
         registerProvider.get().hide();
         if (!session.isLogged()) {
-            Site.showProgressProcessing();
+            NotifyUser.showProgressProcessing();
             view.show();
             view.center();
-            Site.hideProgress();
+            NotifyUser.hideProgress();
             view.focusOnNickname();
         } else {
             stateManager.restorePreviousToken();
@@ -92,7 +92,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
             final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
                 public void onFailure(final Throwable caught) {
                     view.unMask();
-                    Site.hideProgress();
+                    NotifyUser.hideProgress();
                     try {
                         throw caught;
                     } catch (final UserAuthException e) {

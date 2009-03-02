@@ -62,15 +62,9 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.tool.ToolSelector;
-import org.ourproject.kune.platf.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
-import org.ourproject.kune.platf.client.ui.rate.RateIt;
-import org.ourproject.kune.platf.client.ui.rate.RateItPanel;
-import org.ourproject.kune.platf.client.ui.rate.RateItPresenter;
-import org.ourproject.kune.platf.client.ui.rate.RatePanel;
-import org.ourproject.kune.platf.client.ui.rate.RatePresenter;
 import org.ourproject.kune.platf.client.ui.upload.FileUploader;
 import org.ourproject.kune.platf.client.ui.upload.FileUploaderDialog;
 import org.ourproject.kune.platf.client.ui.upload.FileUploaderPresenter;
@@ -144,6 +138,11 @@ import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSp
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConf;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPanel;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPresenter;
+import org.ourproject.kune.workspace.client.rate.RateIt;
+import org.ourproject.kune.workspace.client.rate.RateItPanel;
+import org.ourproject.kune.workspace.client.rate.RateItPresenter;
+import org.ourproject.kune.workspace.client.rate.RatePanel;
+import org.ourproject.kune.workspace.client.rate.RatePresenter;
 import org.ourproject.kune.workspace.client.search.EntityLiveSearcherView;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearchPanel;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
@@ -163,8 +162,8 @@ import org.ourproject.kune.workspace.client.signin.SignIn;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
 import org.ourproject.kune.workspace.client.signin.SignInPresenter;
 import org.ourproject.kune.workspace.client.signin.SignInView;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
+import org.ourproject.kune.workspace.client.site.WorkspaceNotifyUser;
 import org.ourproject.kune.workspace.client.site.msg.SiteToastMessage;
 import org.ourproject.kune.workspace.client.site.msg.SiteToastMessagePanel;
 import org.ourproject.kune.workspace.client.site.msg.SiteToastMessagePresenter;
@@ -210,10 +209,6 @@ import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
 import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddie;
 import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddiePanel;
 import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddiePresenter;
-import org.ourproject.kune.workspace.client.summary.GroupSummary;
-import org.ourproject.kune.workspace.client.summary.GroupSummaryPanel;
-import org.ourproject.kune.workspace.client.summary.GroupSummaryPresenter;
-import org.ourproject.kune.workspace.client.summary.GroupSummaryView;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
@@ -226,6 +221,8 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
 import org.ourproject.kune.workspace.client.title.RenameAction;
+import org.ourproject.kune.workspace.client.tool.ToolSelector;
+import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenter;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
@@ -280,11 +277,11 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<Site>(Site.class) {
+        register(ApplicationComponentGroup.class, new Factory<WorkspaceNotifyUser>(WorkspaceNotifyUser.class) {
             @Override
-            public Site create() {
-                return new Site($(I18nUITranslationService.class), $(SiteProgress.class), $$(SiteToastMessage.class),
-                        $$(WorkspaceSkeleton.class));
+            public WorkspaceNotifyUser create() {
+                return new WorkspaceNotifyUser($(NotifyUser.class), $(I18nUITranslationService.class),
+                        $(SiteProgress.class), $$(SiteToastMessage.class), $$(WorkspaceSkeleton.class));
             }
         });
 
@@ -516,18 +513,6 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $(
                                 ActionGroupSummaryToolbar.class).getView());
-                presenter.init(view);
-                return presenter;
-            }
-        });
-
-        register(ApplicationComponentGroup.class, new Factory<GroupSummary>(GroupSummary.class) {
-            @Override
-            public GroupSummary create() {
-                final GroupSummaryPresenter presenter = new GroupSummaryPresenter($(StateManager.class),
-                        $(WsThemePresenter.class));
-                final GroupSummaryView view = new GroupSummaryPanel($(Images.class), presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
                 presenter.init(view);
                 return presenter;
             }

@@ -16,14 +16,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.ui.rate;
+ \*/
+package org.ourproject.kune.workspace.client.rate;
 
-public interface RateView {
-
-    void setByUsers(Integer byUsers);
-
-    void setRate(Double rate);
+public interface RateIt {
 
     void setVisible(boolean visible);
 

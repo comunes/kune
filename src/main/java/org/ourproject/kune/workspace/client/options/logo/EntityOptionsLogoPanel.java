@@ -23,9 +23,9 @@ import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.download.FileParams;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.gwtext.client.core.Connection;
@@ -102,7 +102,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         FieldListenerAdapter changeListener = new FieldListenerAdapter() {
             @Override
             public void onChange(Field field, Object newVal, Object oldVal) {
-                Site.info("change");
+                NotifyUser.info("change");
                 // setEnableFileField();
             }
         };

@@ -21,10 +21,10 @@ package org.ourproject.kune.chat.client;
 
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
-import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
+import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
 public class ChatClientTool extends FoldableAbstractClientTool {
     public static final String NAME = "chats";

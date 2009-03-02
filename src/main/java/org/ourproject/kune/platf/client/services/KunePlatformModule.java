@@ -40,6 +40,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePresenter;
@@ -211,6 +212,13 @@ public class KunePlatformModule extends AbstractModule {
         });
 
         // ew TestRTEDialog($(RTEditor.class));
+
+        register(ApplicationComponentGroup.class, new Factory<NotifyUser>(NotifyUser.class) {
+            @Override
+            public NotifyUser create() {
+                return new NotifyUser($(I18nTranslationService.class));
+            }
+        });
 
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();

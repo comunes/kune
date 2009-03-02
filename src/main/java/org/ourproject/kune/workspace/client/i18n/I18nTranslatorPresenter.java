@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -52,25 +52,25 @@ public class I18nTranslatorPresenter implements I18nTranslator {
     }
 
     public void doShowTranslator() {
-        Site.showProgressLoading();
+        NotifyUser.showProgressLoading();
         if (session.isLogged()) {
             view.show();
         } else {
-            Site.info(i18n.t("Sign in or register to help with the translation"));
+            NotifyUser.info(i18n.t("Sign in or register to help with the translation"));
         }
-        Site.hideProgress();
+        NotifyUser.hideProgress();
     }
 
     public void doTranslation(final String id, final String trKey, final String translation) {
-        Site.showProgressSaving();
+        NotifyUser.showProgressSaving();
         i18nService.setTranslation(session.getUserHash(), id, translation, new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
-                Site.hideProgress();
-                Site.error(i18n.t("Server error saving the translation"));
+                NotifyUser.hideProgress();
+                NotifyUser.error(i18n.t("Server error saving the translation"));
             }
 
             public void onSuccess(final String result) {
-                Site.hideProgress();
+                NotifyUser.hideProgress();
                 i18n.setTranslationAfterSave(trKey, result);
             }
         });

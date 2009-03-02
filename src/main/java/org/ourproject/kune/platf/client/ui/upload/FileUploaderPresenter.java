@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.ui.upload;
 
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
+import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
 
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;

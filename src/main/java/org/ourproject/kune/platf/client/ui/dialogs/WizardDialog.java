@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.ui.dialogs;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -239,7 +239,7 @@ public class WizardDialog implements WizardDialogView {
             dialog.add(mainPanel);
             doLayoutIfNeeded();
         } else {
-            Site.error("Widget not found in deck of WizardDialog");
+            NotifyUser.error("Widget not found in deck of WizardDialog");
         }
 
     }
@@ -271,7 +271,7 @@ public class WizardDialog implements WizardDialogView {
         } else if (view instanceof DefaultForm) {
             return ((DefaultForm) view).getFormPanel();
         } else {
-            Site.error("Trying to add a unknown element in WizardDialog");
+            NotifyUser.error("Trying to add a unknown element in WizardDialog");
             return null;
         }
     }

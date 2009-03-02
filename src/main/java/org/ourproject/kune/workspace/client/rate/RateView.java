@@ -17,15 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.summary;
+package org.ourproject.kune.workspace.client.rate;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
+public interface RateView {
 
-public interface GroupSummaryView extends View {
+    void setByUsers(Integer byUsers);
 
-    void setComment(String comment);
+    void setRate(Double rate);
 
-    void setTheme(WsTheme oldTheme, WsTheme newTheme);
+    void setVisible(boolean visible);
 
 }

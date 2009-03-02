@@ -16,20 +16,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.tool;
+ \*/
+package org.ourproject.kune.workspace.client.tool;
 
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+public interface ToolSelectorItem {
 
-public abstract class AbstractClientTool implements ClientTool {
+    String getShortName();
 
-    public AbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector,
-            final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws) {
-        final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName, toolSelector,
-                wsThemePresenter);
-        final ToolSelectorItemPanel panel = new ToolSelectorItemPanel(presenter, ws);
-        presenter.init(panel);
-    }
+    void setGroupShortName(String groupShortName);
+
+    void setSelected(boolean selected);
+
+    void setVisible(boolean visible);
 
 }

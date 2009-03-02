@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.sitebar.sitesign;
 
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -42,7 +42,7 @@ public class SiteSignOutLinkPanel implements SiteSignOutLinkView {
         ws.getSiteBar().add(signOutLabel);
         signOutLabel.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
-                Site.showProgressProcessing();
+                NotifyUser.showProgressProcessing();
                 presenter.doSignOut();
             }
         });

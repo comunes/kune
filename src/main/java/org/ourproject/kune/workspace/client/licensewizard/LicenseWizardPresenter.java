@@ -24,11 +24,11 @@ import java.util.List;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFrdFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdFormView;
-import org.ourproject.kune.workspace.client.site.Site;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener;
@@ -119,7 +119,7 @@ public class LicenseWizardPresenter implements LicenseWizard {
             }
         } else if (in(sndForm)) {
             licenseShortName = "by-sa" + ccVers;
-            Site.error("Programatic error in LicenseWizardPresenter");
+            NotifyUser.error("Programatic error in LicenseWizardPresenter");
         } else {
             licenseShortName = frdForm.getSelectedLicense();
         }

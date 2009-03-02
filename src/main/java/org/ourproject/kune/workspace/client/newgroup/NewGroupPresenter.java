@@ -30,8 +30,8 @@ import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import com.calclab.suco.client.events.Listener0;
@@ -66,14 +66,14 @@ public class NewGroupPresenter implements NewGroup {
         session.check(new AsyncCallbackSimple<Object>() {
             public void onSuccess(final Object result) {
                 if (session.isLogged()) {
-                    Site.showProgressProcessing();
+                    NotifyUser.showProgressProcessing();
                     view.show();
                     view.center();
                     view.setLicense(session.getDefLicense());
-                    Site.hideProgress();
+                    NotifyUser.hideProgress();
                 } else {
                     stateManager.restorePreviousToken();
-                    Site.info(i18n.t(WorkspaceMessages.REGISTER_TO_CREATE_A_GROUP));
+                    NotifyUser.info(i18n.t(WorkspaceMessages.REGISTER_TO_CREATE_A_GROUP));
                 }
             }
         });

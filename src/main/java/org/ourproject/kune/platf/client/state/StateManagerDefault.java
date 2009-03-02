@@ -29,7 +29,7 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event;
@@ -190,7 +190,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
     void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
         onStateChanged.fire(newState);
-        Site.hideProgress();
+        NotifyUser.hideProgress();
         checkGroupAndToolChange(newState);
         previousToken = newState.getStateToken();
     }

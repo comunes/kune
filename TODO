@@ -462,6 +462,8 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
    http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
 ** <v> P2P downloads for bigg uploads (the server acts as seeder).
+** TODO <s> Include CC0 license:
+   http://creativecommons.org/license/zero/
 * LONG-TERM
 ** <s> integrate some blog/wiki converter:
    http://code.google.com/p/google-blog-converters-appengine/

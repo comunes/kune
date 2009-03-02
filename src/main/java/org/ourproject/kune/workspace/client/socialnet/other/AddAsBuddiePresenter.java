@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -42,7 +42,7 @@ public class AddAsBuddiePresenter implements AddAsBuddie {
 
     public void onAdd() {
         chatEngine.get().addNewBuddie(session.getCurrentState().getGroup().getShortName());
-        Site.info("Added as buddie. Waiting buddie response");
+        NotifyUser.info("Added as buddie. Waiting buddie response");
         view.setVisible(false);
     }
 

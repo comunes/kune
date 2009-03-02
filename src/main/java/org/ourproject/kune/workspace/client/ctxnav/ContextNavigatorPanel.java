@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -239,7 +239,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
             public boolean doBeforeNodeDrop(final TreePanel treePanel, final TreeNode target, final DragData dragData,
                     final String point, final DragDrop source, final TreeNode dropNode,
                     final DropNodeCallback dropNodeCallback) {
-                Site.info("Drag & drop of contents in development");
+                NotifyUser.info("Drag & drop of contents in development");
                 return false;
             }
 

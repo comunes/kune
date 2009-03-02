@@ -24,7 +24,7 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -43,7 +43,7 @@ public class ContentProviderDefault implements ContentProvider {
     }
 
     public void getContent(final String user, final StateToken newState, final AsyncCallback<StateAbstractDTO> callback) {
-        Site.showProgressLoading();
+        NotifyUser.showProgressLoading();
         final StateAbstractDTO catched = getCached(newState);
         if (catched != null) {
             callback.onSuccess(catched);

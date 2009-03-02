@@ -26,9 +26,9 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
-import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
@@ -80,7 +80,7 @@ public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
     }
 
     public void onSubmitFailed(int httpStatus, String responseText) {
-        Site.error("Error setting the group logo: " + responseText);
+        NotifyUser.error("Error setting the group logo: " + responseText);
     }
 
     private void setState() {

@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -44,14 +44,14 @@ public class AddRoomPresenter implements AddRoom {
     }
 
     public void addRoom(String roomName) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         final String groupShortName = session.getCurrentState().getGroup().getShortName();
         contentServiceProvider.get().addRoom(session.getUserHash(),
                 session.getContainerState().getRootContainer().getStateToken(), groupShortName + "-" + roomName,
                 new AsyncCallbackSimple<StateContainerDTO>() {
                     public void onSuccess(final StateContainerDTO state) {
                         stateManager.setRetrievedState(state);
-                        Site.hideProgress();
+                        NotifyUser.hideProgress();
                     }
                 });
     }

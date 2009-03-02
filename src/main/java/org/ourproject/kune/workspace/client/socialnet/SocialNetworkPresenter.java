@@ -41,8 +41,8 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.CustomMenu;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderView;
-import org.ourproject.kune.workspace.client.site.Site;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
@@ -143,22 +143,22 @@ public class SocialNetworkPresenter {
         participate = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer,
                 ActionToolbarPosition.bottombar, new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         snServiceProvider.get().requestJoinGroup(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), new AsyncCallbackSimple<Object>() {
                                     public void onSuccess(final Object result) {
-                                        Site.hideProgress();
+                                        NotifyUser.hideProgress();
                                         final SocialNetworkRequestResult resultType = (SocialNetworkRequestResult) result;
                                         switch (resultType) {
                                         case accepted:
-                                            Site.info(i18n.t("You are now member of this group"));
+                                            NotifyUser.info(i18n.t("You are now member of this group"));
                                             stateManager.reload();
                                             break;
                                         case denied:
-                                            Site.important(i18n.t("Sorry this is a closed group"));
+                                            NotifyUser.important(i18n.t("Sorry this is a closed group"));
                                             break;
                                         case moderated:
-                                            Site.info(i18n.t("Membership requested. Waiting for admins decision"));
+                                            NotifyUser.info(i18n.t("Membership requested. Waiting for admins decision"));
                                             break;
                                         }
                                     }
@@ -238,13 +238,13 @@ public class SocialNetworkPresenter {
         changeToCollabMenuItem = new MenuItem<GroupDTO>("images/arrow-down-green.gif",
                 i18n.t("Change to collaborator"), new Listener<GroupDTO>() {
                     public void onEvent(final GroupDTO group) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         snServiceProvider.get().setAdminAsCollab(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
                                 new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                                     public void onSuccess(final SocialNetworkDataDTO result) {
-                                        Site.hideProgress();
-                                        Site.info(i18n.t("Member type changed"));
+                                        NotifyUser.hideProgress();
+                                        NotifyUser.info(i18n.t("Member type changed"));
                                         stateManager.setSocialNetwork(result);
                                     }
                                 });
@@ -253,13 +253,13 @@ public class SocialNetworkPresenter {
         removeMemberMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n.t("Remove this member"),
                 new Listener<GroupDTO>() {
                     public void onEvent(final GroupDTO group) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         snServiceProvider.get().deleteMember(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
                                 new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                                     public void onSuccess(final SocialNetworkDataDTO result) {
-                                        Site.hideProgress();
-                                        Site.info(i18n.t("Member removed"));
+                                        NotifyUser.hideProgress();
+                                        NotifyUser.info(i18n.t("Member removed"));
                                         stateManager.reload();
                                         // in the
                                         // future,
@@ -276,13 +276,13 @@ public class SocialNetworkPresenter {
         changeToAdminMenuItem = new MenuItem<GroupDTO>("images/arrow-up-green.gif", i18n.t("Change to admin"),
                 new Listener<GroupDTO>() {
                     public void onEvent(final GroupDTO group) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         snServiceProvider.get().setCollabAsAdmin(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
                                 new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                                     public void onSuccess(final SocialNetworkDataDTO result) {
-                                        Site.hideProgress();
-                                        Site.info(i18n.t("Member type changed"));
+                                        NotifyUser.hideProgress();
+                                        NotifyUser.info(i18n.t("Member type changed"));
                                         stateManager.setSocialNetwork(result);
                                     }
                                 });
@@ -291,13 +291,13 @@ public class SocialNetworkPresenter {
         acceptJoinGroupMenuItem = new MenuItem<GroupDTO>("images/accept.gif", i18n.t("Accept this member"),
                 new Listener<GroupDTO>() {
                     public void onEvent(final GroupDTO group) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         snServiceProvider.get().acceptJoinGroup(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
                                 new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                                     public void onSuccess(final SocialNetworkDataDTO result) {
-                                        Site.hideProgress();
-                                        Site.info(i18n.t("Member accepted"));
+                                        NotifyUser.hideProgress();
+                                        NotifyUser.info(i18n.t("Member accepted"));
                                         stateManager.setSocialNetwork(result);
                                     }
                                 });
@@ -306,13 +306,13 @@ public class SocialNetworkPresenter {
         denyJoinGroupMenuItem = new MenuItem<GroupDTO>("images/cancel.gif", i18n.t("Reject this member"),
                 new Listener<GroupDTO>() {
                     public void onEvent(final GroupDTO group) {
-                        Site.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         snServiceProvider.get().denyJoinGroup(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), group.getShortName(),
                                 new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                                     public void onSuccess(final SocialNetworkDataDTO result) {
-                                        Site.hideProgress();
-                                        Site.info(i18n.t("Member rejected"));
+                                        NotifyUser.hideProgress();
+                                        NotifyUser.info(i18n.t("Member rejected"));
                                         stateManager.setSocialNetwork(result);
                                     }
                                 });
@@ -329,12 +329,12 @@ public class SocialNetworkPresenter {
     }
 
     private void removeMemberAction(final GroupDTO groupDTO) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         snServiceProvider.get().unJoinGroup(session.getUserHash(), new StateToken(groupDTO.getShortName()),
                 new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                     public void onSuccess(final SocialNetworkDataDTO result) {
-                        Site.hideProgress();
-                        Site.info(i18n.t("Removed as member"));
+                        NotifyUser.hideProgress();
+                        NotifyUser.info(i18n.t("Removed as member"));
                         stateManager.reload();
                         // in the future with user
                         // info:

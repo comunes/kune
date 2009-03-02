@@ -33,7 +33,7 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
 
@@ -61,12 +61,12 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void addAuthor(final String authorShortName) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().addAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
                 new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
-                        Site.hideProgress();
+                        NotifyUser.hideProgress();
                         stateManager.reload();
                     }
                 });
@@ -81,12 +81,12 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void delAuthor(final String authorShortName) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().removeAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
                 new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
-                        Site.hideProgress();
+                        NotifyUser.hideProgress();
                         stateManager.reload();
                     }
                 });
@@ -97,12 +97,12 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void doChangeLanguage(final String langCode) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setLanguage(session.getUserHash(), currentState.getStateToken(), langCode,
                 new AsyncCallbackSimple<I18nLanguageDTO>() {
                     public void onSuccess(final I18nLanguageDTO lang) {
-                        Site.hideProgress();
+                        NotifyUser.hideProgress();
                     }
                 });
     }
@@ -112,12 +112,12 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void setPublishedOn(final Date publishedOn) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setPublishedOn(session.getUserHash(), currentState.getStateToken(), publishedOn,
                 new AsyncCallbackSimple<Object>() {
                     public void onSuccess(final Object result) {
-                        Site.hideProgress();
+                        NotifyUser.hideProgress();
                         entitySubTitle.setContentDate(publishedOn);
                     }
                 });
@@ -178,13 +178,13 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void setTags(final String tagsString) {
-        Site.showProgressProcessing();
+        NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setTags(session.getUserHash(), currentState.getStateToken(), tagsString,
                 new AsyncCallbackSimple<TagCloudResultDTO>() {
                     public void onSuccess(final TagCloudResultDTO result) {
                         tagsSummaryProvider.get().setGroupTags(result);
-                        Site.hideProgress();
+                        NotifyUser.hideProgress();
                     }
                 });
     }

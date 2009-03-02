@@ -21,10 +21,10 @@ package org.ourproject.kune.blogs.client;
 
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.services.I18nUITranslationService;
-import org.ourproject.kune.platf.client.tool.FoldableAbstractClientTool;
-import org.ourproject.kune.platf.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
+import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
 public class BlogClientTool extends FoldableAbstractClientTool {
     public static final String NAME = "blogs";

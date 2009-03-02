@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.search.SiteBottomTrayButton;
-import org.ourproject.kune.workspace.client.site.Site;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Frame;
@@ -288,10 +288,10 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
     }
 
     private void setLanguage(final String language) {
-        Site.showProgressLoading();
+        NotifyUser.showProgressLoading();
         query(unTransStore, unTransGrid, language);
         query(transStore, transGrid, language);
-        Site.hideProgress();
+        NotifyUser.hideProgress();
     }
 
     private String[] splitNT(final String textWithNT) {

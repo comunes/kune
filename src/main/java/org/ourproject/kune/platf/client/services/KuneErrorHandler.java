@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event0;
@@ -56,7 +56,7 @@ public class KuneErrorHandler {
 
     public void doSessionExpired() {
         onSessionExpired.fire();
-        Site.info("Your session has expired. Please log in again.");
+        NotifyUser.info("Your session has expired. Please log in again.");
     }
 
     public void onSessionExpired(final Listener0 listener) {
@@ -64,12 +64,12 @@ public class KuneErrorHandler {
     }
 
     public void process(final Throwable caught) {
-        Site.hideProgress();
+        NotifyUser.hideProgress();
         try {
             throw caught;
         } catch (final AccessViolationException e) {
             logException(e);
-            Site.error(i18n.t("You do not have rights to perform that action"));
+            NotifyUser.error(i18n.t("You do not have rights to perform that action"));
         } catch (final SessionExpiredException e) {
             logException(e);
             doSessionExpired();
@@ -78,39 +78,39 @@ public class KuneErrorHandler {
             if (session.isLogged()) {
                 doSessionExpired();
             } else {
-                Site.important(i18n.t("Please sign in or register to collaborate"));
+                NotifyUser.important(i18n.t("Please sign in or register to collaborate"));
             }
         } catch (final GroupNotFoundException e) {
             logException(e);
-            Site.veryImportant(i18n.t("Group not found"));
+            NotifyUser.veryImportant(i18n.t("Group not found"));
             stateManagerProvider.get().gotoToken("");
         } catch (final IncompatibleRemoteServiceException e) {
-            Site.error(i18n.t("Your browser is outdated with the server software. Please reload this page."));
+            NotifyUser.error(i18n.t("Your browser is outdated with the server software. Please reload this page."));
         } catch (final ContentNotFoundException e) {
             logException(e);
-            Site.veryImportant(i18n.t("Content not found"));
+            NotifyUser.veryImportant(i18n.t("Content not found"));
             stateManagerProvider.get().gotoToken("");
         } catch (final ContentNotPermittedException e) {
             logException(e);
-            Site.error(i18n.t("Action not permitted in this location"));
+            NotifyUser.error(i18n.t("Action not permitted in this location"));
             stateManagerProvider.get().gotoToken("");
         } catch (final ContainerNotPermittedException e) {
             logException(e);
-            Site.error(i18n.t("Action not permitted in this location"));
+            NotifyUser.error(i18n.t("Action not permitted in this location"));
             stateManagerProvider.get().gotoToken("");
         } catch (final LastAdminInGroupException e) {
             logException(e);
-            Site.showAlertMessage(i18n.t("Warning"), i18n.t("Sorry, you are the last admin of this group."
+            NotifyUser.showAlertMessage(i18n.t("Warning"), i18n.t("Sorry, you are the last admin of this group."
                     + " Look for someone to substitute you appropriately as admin before leaving this group."));
         } catch (final AlreadyGroupMemberException e) {
             logException(e);
-            Site.error(i18n.t("This group is already a group member"));
+            NotifyUser.error(i18n.t("This group is already a group member"));
         } catch (final AlreadyUserMemberException e) {
             logException(e);
-            Site.error(i18n.t("This user is already a group member"));
+            NotifyUser.error(i18n.t("This user is already a group member"));
         } catch (final Throwable e) {
             logException(e, true);
-            Site.error(i18n.t("Error performing operation"));
+            NotifyUser.error(i18n.t("Error performing operation"));
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
         }
     }

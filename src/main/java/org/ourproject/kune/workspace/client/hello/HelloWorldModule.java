@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.services.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.I18nTranslationServiceMocked;
-import org.ourproject.kune.workspace.client.site.Site;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -78,7 +78,7 @@ public class HelloWorldModule extends AbstractModule {
 
         public void showMessage() {
             /** i18n use with parameters **/
-            Site.info(i18n.t("Hello [%s]!", "world"));
+            NotifyUser.info(i18n.t("Hello [%s]!", "world"));
         }
     }
 
