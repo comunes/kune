@@ -1,84 +1,81 @@
 package org.ourproject.kune.platf.client.ui.rte.img;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.libideas.resources.client.CssResource;
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.libideas.resources.client.ImmutableResourceBundle;
 
 public interface RTEImgResources extends ImmutableResourceBundle {
 
-    public static final RTEImgResources INSTANCE = GWT.create(RTEImgResources.class);
-
     @Resource("alignleft.png")
-    ImageResource alignleft();
+    public ImageResource alignleft();
 
     @Resource("alignright.png")
-    ImageResource alignright();
+    public ImageResource alignright();
 
     @Resource("backcolor.png")
-    ImageResource backcolor();
+    public ImageResource backcolor();
 
     @Resource("bold.png")
-    ImageResource bold();
+    public ImageResource bold();
 
     @Resource("centerpara.png")
-    ImageResource centerpara();
+    public ImageResource centerpara();
 
     @Resource("charfontname.png")
-    ImageResource charfontname();
+    public ImageResource charfontname();
 
     @Resource("rteimg.css")
-    CssResource css();
+    public CssResource css();
 
     @Resource("decrementindent.png")
-    ImageResource decrementindent();
+    public ImageResource decrementindent();
 
     @Resource("defaultbullet.png")
-    ImageResource defaultbullet();
+    public ImageResource defaultbullet();
 
     @Resource("defaultnumbering.png")
-    ImageResource defaultnumbering();
+    public ImageResource defaultnumbering();
 
     @Resource("edithtml.png")
-    ImageResource edithtml();
+    public ImageResource edithtml();
 
     @Resource("fontcolor.png")
-    ImageResource fontcolor();
+    public ImageResource fontcolor();
 
     @Resource("fontheight.png")
-    ImageResource fontheight();
+    public ImageResource fontheight();
 
     @Resource("hfixedline.png")
-    ImageResource hfixedline();
+    public ImageResource hfixedline();
 
     @Resource("images.png")
-    ImageResource images();
+    public ImageResource images();
 
     @Resource("incrementindent.png")
-    ImageResource incrementindent();
+    public ImageResource incrementindent();
 
     @Resource("italic.png")
-    ImageResource italic();
+    public ImageResource italic();
 
     @Resource("link.png")
-    ImageResource link();
+    public ImageResource link();
 
-    @Resource("link_break.png")
-    ImageResource link_break();
+    @Resource("linkbreak.png")
+    public ImageResource linkbreak();
 
     @Resource("removeFormat.png")
-    ImageResource removeFormat();
+    public ImageResource removeFormat();
 
     @Resource("strikeout.png")
-    ImageResource strikeout();
+    public ImageResource strikeout();
 
     @Resource("subscript.png")
-    ImageResource subscript();
+    public ImageResource subscript();
 
     @Resource("superscript.png")
-    ImageResource superscript();
+    public ImageResource superscript();
 
     @Resource("underline.png")
-    ImageResource underline();
+    public ImageResource underline();
 
 }

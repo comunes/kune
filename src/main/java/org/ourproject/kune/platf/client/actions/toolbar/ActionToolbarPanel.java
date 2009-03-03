@@ -41,6 +41,7 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ToolbarButton;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
@@ -75,20 +76,18 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     public void addButtonAction(final ActionItem<T> actionItem, final boolean enable) {
+        final ToolbarButton button = new ToolbarButton();
         final ActionToolbarButtonDescriptor<T> action = (ActionToolbarButtonDescriptor<T>) actionItem.getAction();
         T item = actionItem.getItem();
         final ActionToolbarPosition pos = action.getActionPosition();
-        final ToolbarButton button = new ToolbarButton();
         final String text = action.getText();
-        final String id = action.getId();
         final String iconUrl = action.getIconUrl();
         final String iconCls = action.getIconCls();
         if (text != null) {
             button.setText(text);
         }
-        if (id != null) {
-            button.setId(id);
-        }
+        String id = generateIdIfEmpty(action);
+        button.setId(id);
         if (action instanceof ActionToolbarPushButtonDescriptor) {
             button.setEnableToggle(true);
             ActionPressedCondition<T> mustInitialyPressed = ((ActionToolbarPushButtonDescriptor<T>) action).getMustInitialyPressed();
@@ -119,7 +118,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         if (action.hasRightSeparator()) {
             add(toolbar, action.getRightSeparator());
         }
-        toolbarButtons.put(genButtonKey(pos, text), button);
+        toolbarButtons.put(genButtonKey(pos, id), button);
     }
 
     public void addMenuAction(final ActionItem<T> actionItem, final boolean enable) {
@@ -130,7 +129,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final String itemKey = genMenuKey(pos, menuTitle, menuSubTitle, action.getText());
         Item item = menuItems.get(itemKey);
         if (item == null) {
-            item = createToolbarMenu(pos, menuTitle, menuSubTitle, actionItem, action.getId());
+            item = createToolbarMenu(pos, menuTitle, menuSubTitle, actionItem, generateIdIfEmpty(action));
             menuItems.put(itemKey, item);
         }
         setEnableMenuItem(item, enable);
@@ -169,12 +168,21 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     public void setButtonEnable(final ActionDescriptor<T> action, final boolean enable) {
-        final ActionToolbarPosition pos = ((ActionToolbarDescriptor<T>) action).getActionPosition();
-        final ToolbarButton button = toolbarButtons.get(genButtonKey(pos, action.getText()));
+        final ToolbarButton button = findButton(action);
         if (button != null) {
             setEnableButton(button, enable);
         } else {
             Log.error("Tryng to enable/disable a non existent toolbar button");
+        }
+    }
+
+    public void setPushButtonPressed(final ActionDescriptor<T> action, final boolean pressed) {
+        final ToolbarButton button = findButton(action);
+        if (button != null && button.isEnableToggle()) {
+            // Log.debug("Setting button pressed: " + pressed);
+            button.toggle(pressed);
+        } else {
+            Log.error("Tryng to set pressed a non existent toolbar push button");
         }
     }
 
@@ -272,9 +280,24 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         return menu;
     }
 
-    private String genButtonKey(final ActionToolbarPosition pos, final String actionText) {
-        final String basePart = "km-act-btn-" + pos.toString().substring(0, 2) + "-" + actionText;
+    private ToolbarButton findButton(final ActionDescriptor<T> action) {
+        final ActionToolbarPosition pos = ((ActionToolbarDescriptor<T>) action).getActionPosition();
+        final ToolbarButton button = toolbarButtons.get(genButtonKey(pos, action.getId()));
+        return button;
+    }
+
+    private String genButtonKey(final ActionToolbarPosition pos, final String id) {
+        final String basePart = "km-act-btn-" + pos.toString().substring(0, 2) + "-" + id;
         return basePart;
+    }
+
+    private String generateIdIfEmpty(final ActionDescriptor<T> action) {
+        String id = action.getId();
+        if (id == null) {
+            id = Ext.generateId();
+            action.setId(id);
+        }
+        return id;
     }
 
     private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuSubTitle,

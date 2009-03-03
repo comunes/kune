@@ -9,16 +9,15 @@ import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionShortcut;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.BasicFormatter;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.ExtendedFormatter;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Justification;
-import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.libideas.client.StyleInjector;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -30,14 +29,15 @@ public class RTEditorPanel implements RTEditorView {
     private final ExtendedFormatter extended;
     private final HashMap<ActionShortcut, ActionItem<Object>> shortcuts;
     private final ActionManager actionManager;
+    private final RTEditorPresenter presenter;
 
     public RTEditorPanel(final RTEditorPresenter presenter, I18nUITranslationService i18n, ActionManager actionManager) {
+        this.presenter = presenter;
         this.i18n = i18n;
         this.actionManager = actionManager;
         rta = new RichTextArea();
         basic = rta.getBasicFormatter();
         extended = rta.getExtendedFormatter();
-        StyleInjector.injectStylesheet(RTEImgResources.INSTANCE.css().getText());
         shortcuts = new HashMap<ActionShortcut, ActionItem<Object>>();
         createListeners();
     }
@@ -56,9 +56,12 @@ public class RTEditorPanel implements RTEditorView {
         String time = i18n.formatDateWithLocale(new Date());
         Element span = DOM.createSpan();
         span.setInnerText(i18n.t("type here") + " -" + userName + " " + time);
-        DOM.setElementAttribute((com.google.gwt.user.client.Element) span, "backgroundColor", "rgb(255,255,215");
-        // FIXME: addCustomStyle
+        DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
         insertHtml(span.getString());
+    }
+
+    public boolean canBeBasic() {
+        return basic != null;
     }
 
     public boolean canBeExtended() {
@@ -110,27 +113,28 @@ public class RTEditorPanel implements RTEditorView {
     }
 
     public boolean isBold() {
-        return rta.isAttached() && basic.isBold();
+        Log.debug("Is bold: " + basic.isBold());
+        return basic.isBold();
     }
 
     public boolean isItalic() {
-        return rta.isAttached() && basic.isItalic();
+        return basic.isItalic();
     }
 
     public boolean isStrikethrough() {
-        return rta.isAttached() && extended.isStrikethrough();
+        return extended.isStrikethrough();
     }
 
     public boolean isSubscript() {
-        return rta.isAttached() && basic.isSubscript();
+        return basic.isSubscript();
     }
 
     public boolean isSuperscript() {
-        return rta.isAttached() && basic.isSuperscript();
+        return basic.isSuperscript();
     }
 
     public boolean isUnderlined() {
-        return rta.isAttached() && basic.isUnderlined();
+        return basic.isUnderlined();
     }
 
     public void justifyCenter() {
@@ -236,7 +240,21 @@ public class RTEditorPanel implements RTEditorView {
     }
 
     private void createListeners() {
+        rta.addClickListener(new ClickListener() {
+            public void onClick(Widget sender) {
+                if (sender == rta) {
+                    // We use the RichTextArea's onKeyUp event to update the
+                    // toolbar status.
+                    // This will catch any cases where the user moves the cursur
+                    // using the
+                    // keyboard, or uses one of the browser's built-in keyboard
+                    // shortcuts.
+                    updateStatus();
+                }
+            }
+        });
         rta.addKeyboardListener(new KeyboardListener() {
+
             public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {
             }
 
@@ -251,17 +269,24 @@ public class RTEditorPanel implements RTEditorView {
                     // using the keyboard, or uses one of the browser's built-in
                     // keyboard shortcuts.
 
-                    // updateStatus();
+                    updateStatus();
                     // fireEdit();
                     if (modifiers != 0) {
                         ActionItem<Object> actionItem = shortcuts.get(new ActionShortcut(keyCode, modifiers));
                         if (actionItem != null) {
-                            NotifyUser.info("Shortcut");
+                            Log.debug("RTE shortcut pressed (" + modifiers + ", " + keyCode + ")");
                             actionManager.doAction(actionItem);
                         }
                     }
                 }
             }
         });
+    }
+
+    /**
+     * Updates the status of all the stateful buttons.
+     */
+    private void updateStatus() {
+        presenter.updateStatus();
     }
 }

@@ -39,4 +39,6 @@ public interface ActionToolbarView<T> extends View {
 
     void setButtonEnable(ActionDescriptor<T> action, boolean enable);
 
+    void setPushButtonPressed(ActionDescriptor<T> action, boolean pressed);
+
 }

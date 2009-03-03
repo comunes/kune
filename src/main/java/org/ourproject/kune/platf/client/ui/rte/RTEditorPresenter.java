@@ -6,7 +6,6 @@ import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
-import org.ourproject.kune.platf.client.actions.ActionPressedCondition;
 import org.ourproject.kune.platf.client.actions.ActionShortcut;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
@@ -41,6 +40,10 @@ public class RTEditorPresenter implements RTEditor {
     private final RTEImgResources imgResources;
     private final RTEActionTopToolbar topBar;
     private final RTEActionSndToolbar sndBar;
+    private ActionToolbarPushButtonDescriptor<Object> bold;
+    private ActionToolbarPushButtonDescriptor<Object> italic;
+    private ActionToolbarPushButtonDescriptor<Object> underline;
+    private ActionToolbarPushButtonDescriptor<Object> strikethrough;
 
     public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
             RTEActionSndToolbar sndBar, RTEImgResources imgResources) {
@@ -114,10 +117,12 @@ public class RTEditorPresenter implements RTEditor {
     public void init(RTEditorView view) {
         this.view = view;
         createDefBasicActions();
-        topBar.addActions(basicTopActions);
-        sndBar.addActions(basicSndActions);
-        view.addActions(basicTopActions);
-        view.addActions(basicSndActions);
+        if (view.canBeBasic()) {
+            view.addActions(basicTopActions);
+            view.addActions(basicSndActions);
+            topBar.addActions(basicTopActions);
+            sndBar.addActions(basicSndActions);
+        }
         if (isExtended()) {
             createDefExtendedActions();
             view.addActions(extendedTopActions);
@@ -135,6 +140,17 @@ public class RTEditorPresenter implements RTEditor {
         this.extended = extended;
     }
 
+    public void updateStatus() {
+        if (view.canBeBasic()) {
+            sndBar.setPushButtonPressed(bold, view.isBold());
+            sndBar.setPushButtonPressed(italic, view.isItalic());
+            sndBar.setPushButtonPressed(underline, view.isUnderlined());
+        }
+        if (isExtended()) {
+            sndBar.setPushButtonPressed(strikethrough, view.isStrikethrough());
+        }
+    }
+
     private void createDefBasicActions() {
         ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -146,49 +162,33 @@ public class RTEditorPresenter implements RTEditor {
         selectAll.setTextDescription(i18n.t("Select all"));
         selectAll.setParentMenuTitle(i18n.t(EDIT_MENU));
 
-        ActionToolbarPushButtonDescriptor<Object> bold = new ActionToolbarPushButtonDescriptor<Object>(accessRol,
-                ActionToolbarPosition.topbar, new Listener0() {
-                    public void onEvent() {
-                        view.toggleBold();
-                    }
-                });
-        bold.setIconCls(getCssName(imgResources.bold()));
-        bold.setToolTip(i18n.t("Toggle Bold"));
-        bold.setMustInitialyPressed(new ActionPressedCondition<Object>() {
-            public boolean mustBePressed(Object param) {
-                return view.isBold();
+        bold = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar, new Listener0() {
+            public void onEvent() {
+                view.toggleBold();
             }
         });
+        bold.setIconCls(getCssName(imgResources.bold()));
+        bold.setToolTip(i18n.t("Toggle Bold"));
         bold.setShortcut(new ActionShortcut(true, 'B'));
 
-        ActionToolbarPushButtonDescriptor<Object> italic = new ActionToolbarPushButtonDescriptor<Object>(accessRol,
-                ActionToolbarPosition.topbar, new Listener0() {
+        italic = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
+                new Listener0() {
                     public void onEvent() {
                         view.toggleItalic();
                     }
                 });
         italic.setIconCls(getCssName(imgResources.italic()));
         italic.setToolTip(i18n.t("Toggle Italic"));
-        italic.setMustInitialyPressed(new ActionPressedCondition<Object>() {
-            public boolean mustBePressed(Object param) {
-                return view.isItalic();
-            }
-        });
         italic.setShortcut(new ActionShortcut(true, 'I'));
 
-        ActionToolbarPushButtonDescriptor<Object> underline = new ActionToolbarPushButtonDescriptor<Object>(accessRol,
-                ActionToolbarPosition.topbar, new Listener0() {
+        underline = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
+                new Listener0() {
                     public void onEvent() {
                         view.toggleUnderline();
                     }
                 });
-        underline.setIconCls(imgResources.underline().getName());
+        underline.setIconCls(getCssName(imgResources.underline()));
         underline.setToolTip(i18n.t("Toggle Underline"));
-        underline.setMustInitialyPressed(new ActionPressedCondition<Object>() {
-            public boolean mustBePressed(Object param) {
-                return view.isUnderlined();
-            }
-        });
 
         basicTopActions.add(withNoItem(selectAll));
         basicSndActions.add(withNoItem(bold));
@@ -281,19 +281,14 @@ public class RTEditorPresenter implements RTEditor {
         hr.setTextDescription(i18n.t("Horizontal line"));
         hr.setParentMenuTitle(i18n.t(INSERT_MENU));
 
-        ActionToolbarPushButtonDescriptor<Object> strikethrough = new ActionToolbarPushButtonDescriptor<Object>(
-                accessRol, ActionToolbarPosition.topbar, new Listener0() {
+        strikethrough = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
+                new Listener0() {
                     public void onEvent() {
                         view.toggleStrikethrough();
                     }
                 });
         strikethrough.setIconCls(getCssName(imgResources.strikeout()));
         strikethrough.setToolTip(i18n.t("Toggle Strikethrough"));
-        strikethrough.setMustInitialyPressed(new ActionPressedCondition<Object>() {
-            public boolean mustBePressed(Object param) {
-                return view.isStrikethrough();
-            }
-        });
 
         extendedTopActions.add(withNoItem(undo));
         extendedTopActions.add(withNoItem(redo));
@@ -307,7 +302,7 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     private String getCssName(ImageResource imageResource) {
-        return ".k-rte-" + imageResource.getName();
+        return "k-rte-" + imageResource.getName();
     }
 
     private boolean isExtended() {

@@ -36,6 +36,24 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         this.view = toolbar;
     }
 
+    public void addActions(final ActionItemCollection<T> actions) {
+        for (final ActionItem<T> actionItem : actions) {
+            final ActionDescriptor<T> action = actionItem.getAction();
+            if (actionItem.mustBeAdded()) {
+                if (isToolbarMenu(action)) {
+                    view.addMenuAction(actionItem, actionItem.mustBeEnabled());
+                } else {
+                    if (isToolbarButton(action)) {
+                        view.addButtonAction(actionItem, actionItem.mustBeEnabled());
+                    } else {
+                        Log.error("Code error: Not an ActionMenuDescriptor or ActionButtonDescriptor: "
+                                + action.getText());
+                    }
+                }
+            }
+        }
+    }
+
     public void attach() {
         view.attach();
     }
@@ -56,22 +74,12 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         return view;
     }
 
-    public void addActions(final ActionItemCollection<T> actions) {
-        for (final ActionItem<T> actionItem : actions) {
-            final ActionDescriptor<T> action = actionItem.getAction();
-            if (actionItem.mustBeAdded()) {
-                if (isToolbarMenu(action)) {
-                    view.addMenuAction(actionItem, actionItem.mustBeEnabled());
-                } else {
-                    if (isToolbarButton(action)) {
-                        view.addButtonAction(actionItem, actionItem.mustBeEnabled());
-                    } else {
-                        Log.error("Code error: Not an ActionMenuDescriptor or ActionButtonDescriptor: "
-                                + action.getText());
-                    }
-                }
-            }
-        }
+    public void setButtonEnable(ActionDescriptor<T> action, boolean enable) {
+        view.setButtonEnable(action, enable);
+    }
+
+    public void setPushButtonPressed(ActionDescriptor<T> action, boolean pressed) {
+        view.setPushButtonPressed(action, pressed);
     }
 
     private boolean isToolbarButton(final ActionDescriptor<T> action) {

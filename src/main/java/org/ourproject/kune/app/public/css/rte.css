@@ -2,3 +2,11 @@ body {
   font-family: arial, sans;
   margin: 5px;
 }
+
+.k-rte-comment span {
+  border:1px dashed #C0C0C0;
+  font-size:85%;
+  line-height:1.4;
+  padding:1px;
+  background-color:#D7FFD7;
+}

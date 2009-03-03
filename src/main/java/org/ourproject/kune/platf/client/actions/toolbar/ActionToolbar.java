@@ -19,9 +19,12 @@
  \*/
 package org.ourproject.kune.platf.client.actions.toolbar;
 
+import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 
 public interface ActionToolbar<T> {
+
+    void addActions(ActionItemCollection<T> actionItemCollection);
 
     void attach();
 
@@ -33,6 +36,8 @@ public interface ActionToolbar<T> {
 
     ActionToolbarView<T> getView();
 
-    void addActions(ActionItemCollection<T> actionItemCollection);
+    void setButtonEnable(ActionDescriptor<T> action, boolean enable);
+
+    void setPushButtonPressed(ActionDescriptor<T> action, boolean pressed);
 
 }

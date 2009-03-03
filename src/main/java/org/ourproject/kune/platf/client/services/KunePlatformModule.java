@@ -64,6 +64,7 @@ import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.libideas.client.StyleInjector;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -231,7 +232,7 @@ public class KunePlatformModule extends AbstractModule {
                 RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
                 RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
                 final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
-                        $(Session.class), topBar, sndBar, RTEImgResources.INSTANCE);
+                        $(Session.class), topBar, sndBar, $(RTEImgResources.class));
                 final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
                         $(ActionManager.class));
                 presenter.init(panel);
@@ -252,6 +253,15 @@ public class KunePlatformModule extends AbstractModule {
             }
         });
 
+        register(Singleton.class, new Factory<RTEImgResources>(RTEImgResources.class) {
+            @Override
+            public RTEImgResources create() {
+                RTEImgResources instance = GWT.create(RTEImgResources.class);
+                StyleInjector.injectStylesheet(instance.css().getText());
+                return instance;
+            }
+        });
+
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();
         $(Application.class).start();
@@ -260,6 +270,5 @@ public class KunePlatformModule extends AbstractModule {
         // $(TestRTEDialog.class);
         // $(TestRTEDialog.class);
         // $(TestRTEDialog.class);
-
     }
 }

@@ -1,91 +1,91 @@
-@stripe .k-rte-underline {
+@sprite .x-btn-icon .k-rte-underline {
   gwt-image: 'underline';
 }
 
-@stripe .k-rte-superscript {
+@sprite .x-btn-icon .k-rte-superscript {
   gwt-image: 'superscript';
 }
 
-@stripe .k-rte-subscript {
+@sprite .x-btn-icon .k-rte-subscript {
   gwt-image: 'subscript';
 }
 
-@stripe .k-rte-strikeout {
+@sprite .x-btn-icon .k-rte-strikeout {
   gwt-image: 'strikeout';
 }
 
-@stripe .k-rte-removeFormat {
+@sprite .x-btn-icon .k-rte-removeFormat {
   gwt-image: 'removeFormat';
 }
 
-@stripe .k-rte-link {
+@sprite .x-btn-icon .k-rte-link {
   gwt-image: 'link';
 }
 
-@stripe .k-rte-link_break {
-  gwt-image: 'link_break';
+@sprite .x-btn-icon .k-rte-linkbreak {
+  gwt-image: 'linkbreak';
 }
 
-@stripe .k-rte-italic {
+@sprite .x-btn-icon .k-rte-italic {
   gwt-image: 'italic';
 }
 
-@stripe .k-rte-incrementindent {
+@sprite .x-btn-icon .k-rte-incrementindent {
   gwt-image: 'incrementindent';
 }
 
-@stripe .k-rte-images {
+@sprite .x-btn-icon .k-rte-images {
   gwt-image: 'images';
 }
 
-@stripe .k-rte-hfixedline {
+@sprite .x-btn-icon .k-rte-hfixedline {
   gwt-image: 'hfixedline';
 }
 
-@stripe .k-rte-fontheight {
+@sprite .x-btn-icon .k-rte-fontheight {
   gwt-image: 'fontheight';
 }
 
-@stripe .k-rte-fontcolor {
+@sprite .x-btn-icon .k-rte-fontcolor {
   gwt-image: 'fontcolor';
 }
 
-@stripe .k-rte-edithtml {
+@sprite .x-btn-icon .k-rte-edithtml {
   gwt-image: 'edithtml';
 }
 
-@stripe .k-rte-defaultnumbering {
+@sprite .x-btn-icon .k-rte-defaultnumbering {
   gwt-image: 'defaultnumbering';
 }
 
-@stripe .k-rte-defaultbullet {
+@sprite .x-btn-icon .k-rte-defaultbullet {
   gwt-image: 'defaultbullet';
 }
 
-@stripe .k-rte-decrementindent {
+@sprite .x-btn-icon .k-rte-decrementindent {
   gwt-image: 'decrementindent';
 }
 
-@stripe .k-rte-charfontname {
+@sprite .x-btn-icon .k-rte-charfontname {
   gwt-image: 'charfontname';
 }
 
-@stripe .k-rte-centerpara {
+@sprite .x-btn-icon .k-rte-centerpara {
   gwt-image: 'centerpara';
 }
 
-@stripe .k-rte-bold {
+@sprite .x-btn-icon .k-rte-bold {
   gwt-image: 'bold';
 }
 
-@stripe .k-rte-backcolor {
+@sprite .x-btn-icon .k-rte-backcolor {
   gwt-image: 'backcolor';
 }
 
-@stripe .k-rte-alignright {
+@sprite .x-btn-icon .k-rte-alignright {
   gwt-image: 'alignright';
 }
 
-@stripe .k-rte-alignleft {
+@sprite .x-btn-icon .k-rte-alignleft {
   gwt-image: 'alignleft';
 }
