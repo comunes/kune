@@ -207,19 +207,20 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
         final Item item;
         if (action instanceof ActionToolbarMenuRadioDescriptor) {
-            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcutToS(i18n));
+            CheckItem checkItem = new CheckItem();
             ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
             checkItem.setGroup(radioDescriptor.getGroup());
             checkItem.setChecked(radioDescriptor.mustBeChecked());
             item = checkItem;
         } else if (action instanceof ActionToolbarMenuCheckItemDescriptor) {
-            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcutToS(i18n));
+            CheckItem checkItem = new CheckItem();
             ActionToolbarMenuCheckItemDescriptor<T> checkItemDescriptor = (ActionToolbarMenuCheckItemDescriptor<T>) action;
             checkItem.setChecked(checkItemDescriptor.getMustBeChecked().mustBeChecked());
             item = checkItem;
         } else {
-            item = new Item(action.getText() + action.getShortcutToS(i18n));
+            item = new Item();
         }
+        item.setText(genMenuItemText(action));
         BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override
             public void onClick(BaseItem item, EventObject e) {
@@ -227,11 +228,13 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             }
         };
         item.addListener(clickListener);
-        if (action.getIconCls() != null) {
-            item.setIconCls(action.getIconCls());
+        String iconCls = action.getIconCls();
+        String iconUrl = action.getIconUrl();
+        if (iconCls != null) {
+            item.setIconCls(iconCls);
         }
-        if (action.getIconUrl() != null) {
-            item.setIcon(action.getIconUrl());
+        if (iconUrl != null) {
+            item.setIcon(iconUrl);
         }
         // ToolTip tip = new ToolTip();
         // tip.setHtml(action.getToolTip());
@@ -250,7 +253,8 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
                 subMenu = new Menu();
                 final MenuItem subMenuItem = new MenuItem(menuSubTitle, subMenu);
                 if (menu == null) {
-                    menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), menuTitle, menuKey);
+                    menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), action.getParentMenuIconCls(),
+                            menuTitle, menuKey);
                 }
                 menu.addItem(subMenuItem);
                 toolbarMenus.put(subMenuKey, subMenu);
@@ -260,20 +264,23 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         } else {
             // Menu action without submenu
             if (menu == null) {
-                menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), menuTitle, menuKey);
+                menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), null, menuTitle, menuKey);
             }
             menu.addItem(item);
         }
         return item;
     }
 
-    private Menu createToolbarMenu(final ActionToolbarPosition barPosition, final String iconUrl,
+    private Menu createToolbarMenu(final ActionToolbarPosition barPosition, final String iconUrl, final String iconCls,
             final String menuTitle, final String menuKey) {
         final Menu menu = new Menu();
         final ToolbarButton toolbarMenu = new ToolbarButton(menuTitle);
         toolbarMenu.setMenu(menu);
         if (iconUrl != null) {
             toolbarMenu.setIcon(iconUrl);
+        }
+        if (iconCls != null) {
+            toolbarMenu.setIconCls(iconCls);
         }
         toolbarMenus.put(menuKey, menu);
         add(barPosition, toolbarMenu);
@@ -298,6 +305,16 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             action.setId(id);
         }
         return id;
+    }
+
+    private String genMenuItemText(final ActionToolbarMenuDescriptor<T> action) {
+        // HorizontalPanel hp = new HorizontalPanel();
+        // Label title = new Label(action.getText());
+        // hp.add(title);
+        // hp.setCellWidth(title, "100%");
+        // hp.add(new Label(action.getShortcutToS(i18n)));
+        // return hp.getElement().getInnerHTML();
+        return action.getText() + action.getShortcutToS(i18n);
     }
 
     private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuSubTitle,

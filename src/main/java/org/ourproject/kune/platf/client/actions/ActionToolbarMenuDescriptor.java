@@ -29,6 +29,7 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
     private String parentMenuTitle;
     private String parentMenuIconUrl;
+    private String parentMenuIconCls;
     private String parentSubMenuTitle;
 
     public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
@@ -65,6 +66,10 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
         super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
 
+    public String getParentMenuIconCls() {
+        return parentMenuIconCls;
+    }
+
     public String getParentMenuIconUrl() {
         return parentMenuIconUrl;
     }
@@ -75,6 +80,10 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
     public String getParentSubMenuTitle() {
         return parentSubMenuTitle;
+    }
+
+    public void setParentMenuIconCls(String parentMenuIconCls) {
+        this.parentMenuIconCls = parentMenuIconCls;
     }
 
     public void setParentMenuIconUrl(final String parentMenuIconUrl) {

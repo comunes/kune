@@ -10,30 +10,44 @@ public class ActionShortcut {
         return ((modifiers & modifier) == modifier);
     }
 
-    final boolean alt;
-    final boolean ctrl;
-    final boolean shift;
+    private final boolean alt;
+    private final boolean ctrl;
+    private final boolean shift;
+    private final char key;
+    private final String keyName;
 
-    final char key;
-
-    public ActionShortcut(boolean alt, boolean ctrl, boolean shift, char key) {
+    public ActionShortcut(boolean alt, boolean ctrl, boolean shift, char key, String keyName) {
         this.alt = alt;
         this.ctrl = ctrl;
         this.shift = shift;
         this.key = key;
+        this.keyName = keyName;
     }
 
     public ActionShortcut(boolean ctrl, boolean shift, char key) {
-        this(false, ctrl, shift, key);
+        this(false, ctrl, shift, key, null);
+    }
+
+    public ActionShortcut(boolean ctrl, boolean shift, char key, String keyName) {
+        this(false, ctrl, shift, key, keyName);
     }
 
     public ActionShortcut(boolean ctrl, char key) {
-        this(false, ctrl, false, key);
+        this(false, ctrl, false, key, null);
+    }
+
+    public ActionShortcut(boolean ctrl, char key, String keyName) {
+        this(false, ctrl, false, key, keyName);
     }
 
     public ActionShortcut(char key, int modifiers) {
         this(has(modifiers, KeyboardListener.MODIFIER_ALT), has(modifiers, KeyboardListener.MODIFIER_CTRL), has(
-                modifiers, KeyboardListener.MODIFIER_SHIFT), key);
+                modifiers, KeyboardListener.MODIFIER_SHIFT), key, null);
+    }
+
+    public ActionShortcut(char key, int modifiers, String keyName) {
+        this(has(modifiers, KeyboardListener.MODIFIER_ALT), has(modifiers, KeyboardListener.MODIFIER_CTRL), has(
+                modifiers, KeyboardListener.MODIFIER_SHIFT), key, keyName);
     }
 
     @Override
@@ -89,12 +103,16 @@ public class ActionShortcut {
         s += sKey(alt, "Alt", i18n);
         s += sKey(ctrl, "Ctrl", i18n);
         s += sKey(shift, "Shift", i18n);
-        s += String.valueOf(key).toUpperCase() + ")";
+        s += keyName != null ? translateKey(keyName, i18n) + ")" : String.valueOf(key).toUpperCase() + ")";
         return s;
     }
 
-    private String sKey(boolean key, String keyName, I18nTranslationService i18n) {
-        return key ? i18n.tWithNT(keyName, "The '" + keyName + "' keyboard key") + "+" : "";
+    private String sKey(boolean key, String specialKeyName, I18nTranslationService i18n) {
+        return key ? translateKey(specialKeyName, i18n) + "+" : "";
+    }
+
+    private String translateKey(String keyNameToTranslate, I18nTranslationService i18n) {
+        return i18n.tWithNT(keyNameToTranslate, "The '" + keyNameToTranslate + "' keyboard key");
     }
 
 }

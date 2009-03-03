@@ -53,7 +53,7 @@ public class RTEditorPanel implements RTEditorView {
     }
 
     public void addComment(String userName) {
-        String time = i18n.formatDateWithLocale(new Date());
+        String time = i18n.formatDateWithLocale(new Date(), true);
         Element span = DOM.createSpan();
         span.setInnerText(i18n.t("type here") + " -" + userName + " " + time);
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
@@ -92,10 +92,6 @@ public class RTEditorPanel implements RTEditorView {
         extended.insertHorizontalRule();
     }
 
-    public void insertHR() {
-        extended.insertHorizontalRule();
-    }
-
     public void insertHtml(String html) {
         extended.insertHtml(html);
     }
@@ -112,8 +108,11 @@ public class RTEditorPanel implements RTEditorView {
         extended.insertUnorderedList();
     }
 
+    public boolean isAttached() {
+        return rta.isAttached();
+    }
+
     public boolean isBold() {
-        Log.debug("Is bold: " + basic.isBold());
         return basic.isBold();
     }
 
@@ -239,16 +238,18 @@ public class RTEditorPanel implements RTEditorView {
         extended.removeLink();
     }
 
+    protected void fireEdit() {
+        presenter.fireOnEdit();
+    }
+
     private void createListeners() {
         rta.addClickListener(new ClickListener() {
             public void onClick(Widget sender) {
                 if (sender == rta) {
                     // We use the RichTextArea's onKeyUp event to update the
-                    // toolbar status.
-                    // This will catch any cases where the user moves the cursur
-                    // using the
-                    // keyboard, or uses one of the browser's built-in keyboard
-                    // shortcuts.
+                    // toolbar status. This will catch any cases where the user
+                    // moves the cursor using the keyboard, or uses one of the
+                    // browser's built-in keyboard shortcuts.
                     updateStatus();
                 }
             }
@@ -270,7 +271,7 @@ public class RTEditorPanel implements RTEditorView {
                     // keyboard shortcuts.
 
                     updateStatus();
-                    // fireEdit();
+                    fireEdit();
                     if (modifiers != 0) {
                         ActionItem<Object> actionItem = shortcuts.get(new ActionShortcut(keyCode, modifiers));
                         if (actionItem != null) {

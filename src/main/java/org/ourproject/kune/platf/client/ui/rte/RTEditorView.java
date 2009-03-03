@@ -31,6 +31,8 @@ public interface RTEditorView extends View {
 
     void insertUnorderedList();
 
+    boolean isAttached();
+
     boolean isBold();
 
     boolean isItalic();

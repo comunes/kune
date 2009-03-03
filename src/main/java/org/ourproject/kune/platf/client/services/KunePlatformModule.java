@@ -57,6 +57,7 @@ import org.ourproject.kune.platf.client.ui.rte.RTEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
+import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
@@ -232,7 +233,7 @@ public class KunePlatformModule extends AbstractModule {
                 RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
                 RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
                 final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
-                        $(Session.class), topBar, sndBar, $(RTEImgResources.class));
+                        $(Session.class), topBar, sndBar, $(RTEImgResources.class), $(TextEditorInsertElement.class));
                 final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
                         $(ActionManager.class));
                 presenter.init(panel);

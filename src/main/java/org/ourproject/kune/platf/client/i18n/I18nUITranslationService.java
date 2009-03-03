@@ -62,15 +62,24 @@ public class I18nUITranslationService extends I18nTranslationService {
     }
 
     public String formatDateWithLocale(final Date date) {
-        String dateFormat = currentLang.getDateFormat();
+        return formatDateWithLocale(date, false);
+    }
+
+    public String formatDateWithLocale(final Date date, boolean shortFormat) {
+        String dateFormat = shortFormat ? currentLang.getDateFormatShort() : currentLang.getDateFormat();
+
         final DateTimeFormat fmt;
         if (dateFormat == null) {
-            fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
+            fmt = shortFormat ? DateTimeFormat.getFormat("M/d/yyyy") : DateTimeFormat.getFormat("M/d/yyyy h:mm a");
         } else {
-            String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(date);
-            String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
-            dateFormat = dateFormat.replaceFirst("MMM", "'" + t(monthToTranslate) + "'");
-            fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
+            if (shortFormat) {
+                fmt = DateTimeFormat.getFormat(dateFormat);
+            } else {
+                String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(date);
+                String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
+                dateFormat = dateFormat.replaceFirst("MMM", "'" + t(monthToTranslate) + "'");
+                fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
+            }
         }
         String dateFormated = fmt.format(date);
         return dateFormated;
