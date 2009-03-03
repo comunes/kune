@@ -19,7 +19,8 @@
  \*/
 package org.ourproject.kune.platf.client.services;
 
-import org.ourproject.kune.platf.client.actions.ContentEditorActionRegistry;
+import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
@@ -46,13 +47,19 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePresenter;
+import org.ourproject.kune.platf.client.ui.rte.RTEActionSndToolbar;
+import org.ourproject.kune.platf.client.ui.rte.RTEActionSndToolbarPresenter;
+import org.ourproject.kune.platf.client.ui.rte.RTEActionTopToolbar;
+import org.ourproject.kune.platf.client.ui.rte.RTEActionTopToolbarPresenter;
 import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPresenter;
+import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 
 import com.calclab.suco.client.events.Listener0;
+import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -202,18 +209,41 @@ public class KunePlatformModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<RTEditor>(RTEditor.class) {
+        register(NoDecoration.class, new Factory<RTEActionTopToolbar>(RTEActionTopToolbar.class) {
+            @Override
+            public RTEActionTopToolbar create() {
+                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class), i18n);
+                final RTEActionTopToolbarPresenter toolbar = new RTEActionTopToolbarPresenter(panel);
+                return toolbar;
+            }
+        }, new Factory<RTEActionSndToolbar>(RTEActionSndToolbar.class) {
+            @Override
+            public RTEActionSndToolbar create() {
+                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class), i18n);
+                final RTEActionSndToolbarPresenter toolbar = new RTEActionSndToolbarPresenter(panel);
+                return toolbar;
+            }
+        });
+
+        register(NoDecoration.class, new Factory<RTEditor>(RTEditor.class) {
             @Override
             public RTEditor create() {
-                final RTEditorPresenter presenter = new RTEditorPresenter($(ContentEditorActionRegistry.class),
-                        $(I18nTranslationService.class), $(Session.class), RTEImgResources.INSTANCE);
-                final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class));
+                RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
+                RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
+                final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
+                        $(Session.class), topBar, sndBar, RTEImgResources.INSTANCE);
+                final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
+                        $(ActionManager.class));
                 presenter.init(panel);
                 return presenter;
             }
         });
-
-        // ew TestRTEDialog($(RTEditor.class));
+        register(NoDecoration.class, new Factory<TestRTEDialog>(TestRTEDialog.class) {
+            @Override
+            public TestRTEDialog create() {
+                return new TestRTEDialog($(RTEditor.class));
+            }
+        });
 
         register(ApplicationComponentGroup.class, new Factory<NotifyUser>(NotifyUser.class) {
             @Override
@@ -226,6 +256,10 @@ public class KunePlatformModule extends AbstractModule {
         $(ToolGroup.class).createAll();
         $(Application.class).start();
         // $(HelloWorld.class);
+
+        // $(TestRTEDialog.class);
+        // $(TestRTEDialog.class);
+        // $(TestRTEDialog.class);
 
     }
 }

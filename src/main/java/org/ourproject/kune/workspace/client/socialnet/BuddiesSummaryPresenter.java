@@ -28,10 +28,7 @@ import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
-import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
-import org.ourproject.kune.platf.client.actions.UserActionRegistry;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
@@ -48,6 +45,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbar;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
@@ -135,7 +133,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                     }
                 }
                 toolbar.disableMenusAndClearButtons();
-                toolbar.setActions(actionRegistry.getCurrentActions(session.getCurrentUser(), session.isLogged(),
+                toolbar.addActions(actionRegistry.getCurrentActions(session.getCurrentUser(), session.isLogged(),
                         state.getGroupRights(), true));
                 toolbar.attach();
                 view.show();

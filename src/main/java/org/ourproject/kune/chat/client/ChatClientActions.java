@@ -27,14 +27,14 @@ import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
-import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
-import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.wiki.client.WikiClientTool;
+import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
+import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;

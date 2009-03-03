@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.registry;
 
-import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
+import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 
 public class ContentCapabilitiesRegistry {
 

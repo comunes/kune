@@ -17,10 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.actions.toolbar;
+package org.ourproject.kune.workspace.client.cxt;
 
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface ActionParticipationToolbar extends ActionToolbar<StateToken> {
+public interface ActionContextToolbar extends ActionToolbar<StateToken> {
 
 }

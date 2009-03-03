@@ -20,13 +20,13 @@
 package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
+import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
 import com.calclab.suco.client.ioc.Provider;

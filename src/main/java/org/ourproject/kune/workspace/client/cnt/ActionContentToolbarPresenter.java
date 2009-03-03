@@ -16,13 +16,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- \*/
-package org.ourproject.kune.platf.client.actions;
+ */
+package org.ourproject.kune.workspace.client.cnt;
 
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-/**
- * The Class GroupActionRegistry stores actions over groups (mainly used in SN)
- */
-public class GroupActionRegistry extends ActionRegistry<StateToken> {
+public class ActionContentToolbarPresenter extends ActionToolbarPresenter<StateToken> implements ActionContentToolbar {
+
+    public ActionContentToolbarPresenter(ActionToolbarView<StateToken> toolbar) {
+        super(toolbar);
+    }
+
 }

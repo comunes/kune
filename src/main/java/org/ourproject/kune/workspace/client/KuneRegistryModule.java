@@ -19,12 +19,6 @@
  */
 package org.ourproject.kune.workspace.client;
 
-import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
-import org.ourproject.kune.platf.client.actions.ContentEditorActionRegistry;
-import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
-import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
-import org.ourproject.kune.platf.client.actions.UserActionRegistry;
 import org.ourproject.kune.platf.client.registry.AclEditableRegistry;
 import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
 import org.ourproject.kune.platf.client.registry.CanBeHomepageRegistry;
@@ -42,6 +36,11 @@ import org.ourproject.kune.platf.client.registry.TranslatableRegistry;
 import org.ourproject.kune.platf.client.registry.VersionableRegistry;
 import org.ourproject.kune.platf.client.registry.XmppComentableRegistry;
 import org.ourproject.kune.platf.client.registry.XmppNotifyCapableRegistry;
+import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
+import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
+import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
+import org.ourproject.kune.workspace.client.socialnet.GroupActionRegistry;
+import org.ourproject.kune.workspace.client.socialnet.UserActionRegistry;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
@@ -186,13 +185,6 @@ public class KuneRegistryModule extends AbstractModule {
             @Override
             public ContextActionRegistry create() {
                 return new ContextActionRegistry();
-            }
-        });
-
-        register(Singleton.class, new Factory<ContentEditorActionRegistry>(ContentEditorActionRegistry.class) {
-            @Override
-            public ContentEditorActionRegistry create() {
-                return new ContentEditorActionRegistry();
             }
         });
 

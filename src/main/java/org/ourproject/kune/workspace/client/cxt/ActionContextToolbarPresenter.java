@@ -17,22 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui;
+package org.ourproject.kune.workspace.client.cxt;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-import com.google.gwt.user.client.ui.Label;
+public class ActionContextToolbarPresenter extends ActionToolbarPresenter<StateToken> implements ActionContextToolbar {
 
-public class UnknowComponent extends Label implements View {
-
-    public static final UnknowComponent instance = new UnknowComponent();
-
-    public UnknowComponent() {
-        super("programming error: unknown component!! please contact kune-devel@lists-ourproject.org");
-    }
-
-    public View getView() {
-        return this;
+    public ActionContextToolbarPresenter(ActionToolbarView<StateToken> toolbar) {
+        super(toolbar);
     }
 
 }

@@ -17,10 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.actions.toolbar;
+package org.ourproject.kune.workspace.client.socialnet.toolbar;
 
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface ActionContentToolbar extends ActionToolbar<StateToken> {
+public class ActionParticipationSummaryToolbarPresenter extends ActionToolbarPresenter<StateToken> implements
+        ActionParticipationToolbar {
+
+    public ActionParticipationSummaryToolbarPresenter(ActionToolbarView<StateToken> toolbar) {
+        super(toolbar);
+    }
 
 }

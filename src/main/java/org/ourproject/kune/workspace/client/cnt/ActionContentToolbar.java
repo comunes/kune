@@ -17,11 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui;
+package org.ourproject.kune.workspace.client.cnt;
 
-public interface UIConstants {
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
-    String ICON_HORIZ_ALIGN_RIGHT = "right";
-    String ICON_HORIZ_ALIGN_LEFT = "left";
+public interface ActionContentToolbar extends ActionToolbar<StateToken> {
 
 }

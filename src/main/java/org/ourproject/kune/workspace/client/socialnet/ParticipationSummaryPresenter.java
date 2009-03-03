@@ -21,8 +21,6 @@ package org.ourproject.kune.workspace.client.socialnet;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
@@ -34,6 +32,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 

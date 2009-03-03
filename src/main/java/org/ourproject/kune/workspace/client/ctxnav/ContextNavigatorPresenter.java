@@ -25,7 +25,6 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
@@ -45,6 +44,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
+import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
@@ -140,7 +140,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     public void selectItem(final StateToken stateToken) {
         view.selectItem(genId(stateToken));
         toolbar.disableMenusAndClearButtons();
-        toolbar.setActions(actionsByItem.get(stateToken));
+        toolbar.addActions(actionsByItem.get(stateToken));
     }
 
     public void setEditOnNextStateChange(final boolean edit) {

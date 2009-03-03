@@ -4,12 +4,14 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
+import org.ourproject.kune.platf.client.actions.ActionItem;
+import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionPressedCondition;
 import org.ourproject.kune.platf.client.actions.ActionShortcut;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ContentEditorActionRegistry;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
@@ -17,8 +19,13 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 
 import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.libideas.resources.client.ImageResource;
 
 public class RTEditorPresenter implements RTEditor {
+
+    public enum ActionPosition {
+        top, snd
+    };
 
     private static final String EDIT_MENU = "Edit";
     private static final String INSERT_MENU = "Insert";
@@ -27,39 +34,77 @@ public class RTEditorPresenter implements RTEditor {
     private AccessRolDTO accessRol;
     private final I18nTranslationService i18n;
     private final Session session;
-    private final ActionCollection<Object> extendedActions;
-    private final ActionCollection<Object> basicActions;
+    private final ActionItemCollection<Object> basicTopActions;
+    private final ActionItemCollection<Object> basicSndActions;
+    private final ActionItemCollection<Object> extendedTopActions;
+    private final ActionItemCollection<Object> extendedSndActions;
     private final RTEImgResources imgResources;
+    private final RTEActionTopToolbar topBar;
+    private final RTEActionSndToolbar sndBar;
 
-    public RTEditorPresenter(ContentEditorActionRegistry contentEditorActionRegistry, I18nTranslationService i18n,
-            Session session, RTEImgResources imgResources) {
+    public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
+            RTEActionSndToolbar sndBar, RTEImgResources imgResources) {
         this.i18n = i18n;
         this.session = session;
+        this.topBar = topBar;
+        this.sndBar = sndBar;
+        sndBar.attach();
         this.imgResources = imgResources;
         extended = true;
         accessRol = AccessRolDTO.Editor;
-        extendedActions = createDefExtendedActions();
-        basicActions = createDefBasicActions();
+        basicTopActions = new ActionItemCollection<Object>();
+        basicSndActions = new ActionItemCollection<Object>();
+        extendedTopActions = new ActionItemCollection<Object>();
+        extendedSndActions = new ActionItemCollection<Object>();
     }
 
-    public void addBasicAction(ActionDescriptor<Object> action) {
-        basicActions.add(action);
+    public void addAction(ActionDescriptor<Object> action, boolean basic, ActionPosition position) {
+        switch (position) {
+        case top:
+            if (basic) {
+                basicTopActions.add(withNoItem(action));
+            } else {
+                extendedTopActions.add(withNoItem(action));
+            }
+            break;
+        case snd:
+            if (basic) {
+                basicSndActions.add(withNoItem(action));
+            } else {
+                extendedSndActions.add(withNoItem(action));
+            }
+            break;
+        }
     }
 
-    public void addBasicActions(ActionCollection<Object> actions) {
-        basicActions.addAll(actions);
-    }
-
-    public void addExtendedAction(ActionDescriptor<Object> action) {
-        extendedActions.add(action);
-    }
-
-    public void addExtendedActions(ActionCollection<Object> actions) {
-        extendedActions.addAll(actions);
+    public void addActions(ActionCollection<Object> actions, boolean basic, ActionPosition position) {
+        switch (position) {
+        case top:
+            if (basic) {
+                basicTopActions.addAll(withNoItem(actions));
+            } else {
+                extendedTopActions.addAll(withNoItem(actions));
+            }
+            break;
+        case snd:
+            if (basic) {
+                basicSndActions.addAll(withNoItem(actions));
+            } else {
+                extendedSndActions.addAll(withNoItem(actions));
+            }
+            break;
+        }
     }
 
     public void editContent(String content) {
-        view.setActions(extendedActions);
+    }
+
+    public ActionToolbar<Object> getSndBar() {
+        return sndBar;
+    }
+
+    public ActionToolbar<Object> getTopBar() {
+        return topBar;
     }
 
     public View getView() {
@@ -68,6 +113,18 @@ public class RTEditorPresenter implements RTEditor {
 
     public void init(RTEditorView view) {
         this.view = view;
+        createDefBasicActions();
+        topBar.addActions(basicTopActions);
+        sndBar.addActions(basicSndActions);
+        view.addActions(basicTopActions);
+        view.addActions(basicSndActions);
+        if (isExtended()) {
+            createDefExtendedActions();
+            view.addActions(extendedTopActions);
+            view.addActions(extendedSndActions);
+            topBar.addActions(extendedTopActions);
+            sndBar.addActions(extendedSndActions);
+        }
     }
 
     public void setAccessRol(AccessRolDTO accessRol) {
@@ -78,9 +135,7 @@ public class RTEditorPresenter implements RTEditor {
         this.extended = extended;
     }
 
-    private ActionCollection<Object> createDefBasicActions() {
-        ActionCollection<Object> actions = new ActionCollection<Object>();
-
+    private void createDefBasicActions() {
         ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
@@ -97,13 +152,14 @@ public class RTEditorPresenter implements RTEditor {
                         view.toggleBold();
                     }
                 });
-        bold.setIconCls(imgResources.bold().getName());
+        bold.setIconCls(getCssName(imgResources.bold()));
         bold.setToolTip(i18n.t("Toggle Bold"));
         bold.setMustInitialyPressed(new ActionPressedCondition<Object>() {
             public boolean mustBePressed(Object param) {
                 return view.isBold();
             }
         });
+        bold.setShortcut(new ActionShortcut(true, 'B'));
 
         ActionToolbarPushButtonDescriptor<Object> italic = new ActionToolbarPushButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -111,13 +167,14 @@ public class RTEditorPresenter implements RTEditor {
                         view.toggleItalic();
                     }
                 });
-        italic.setIconCls(imgResources.italic().getName());
+        italic.setIconCls(getCssName(imgResources.italic()));
         italic.setToolTip(i18n.t("Toggle Italic"));
         italic.setMustInitialyPressed(new ActionPressedCondition<Object>() {
             public boolean mustBePressed(Object param) {
                 return view.isItalic();
             }
         });
+        italic.setShortcut(new ActionShortcut(true, 'I'));
 
         ActionToolbarPushButtonDescriptor<Object> underline = new ActionToolbarPushButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -133,17 +190,13 @@ public class RTEditorPresenter implements RTEditor {
             }
         });
 
-        actions.add(bold);
-        actions.add(italic);
-        actions.add(underline);
-        actions.add(selectAll);
-
-        return actions;
+        basicTopActions.add(withNoItem(selectAll));
+        basicSndActions.add(withNoItem(bold));
+        basicSndActions.add(withNoItem(italic));
+        basicSndActions.add(withNoItem(underline));
     }
 
-    private ActionCollection<Object> createDefExtendedActions() {
-        ActionCollection<Object> actions = new ActionCollection<Object>();
-
+    private void createDefExtendedActions() {
         ActionToolbarMenuDescriptor<Object> undo = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
@@ -209,6 +262,11 @@ public class RTEditorPresenter implements RTEditor {
                         view.addComment(session.getCurrentUser().getShortName());
                     }
                 });
+        comment.setEnableCondition(new ActionEnableCondition<Object>() {
+            public boolean mustBeEnabled(Object param) {
+                return session.isLogged();
+            }
+        });
         comment.setShortcut(new ActionShortcut(true, 'M'));
         comment.setTextDescription(i18n.t("Comment..."));
         comment.setParentMenuTitle(i18n.t(INSERT_MENU));
@@ -220,10 +278,8 @@ public class RTEditorPresenter implements RTEditor {
                         view.insertHorizontalRule();
                     }
                 });
-        hr.setShortcut(new ActionShortcut(true, 'M'));
         hr.setTextDescription(i18n.t("Horizontal line"));
         hr.setParentMenuTitle(i18n.t(INSERT_MENU));
-        hr.setEnableCondition(isExtended());
 
         ActionToolbarPushButtonDescriptor<Object> strikethrough = new ActionToolbarPushButtonDescriptor<Object>(
                 accessRol, ActionToolbarPosition.topbar, new Listener0() {
@@ -231,7 +287,7 @@ public class RTEditorPresenter implements RTEditor {
                         view.toggleStrikethrough();
                     }
                 });
-        strikethrough.setIconCls(imgResources.strikeout().getName());
+        strikethrough.setIconCls(getCssName(imgResources.strikeout()));
         strikethrough.setToolTip(i18n.t("Toggle Strikethrough"));
         strikethrough.setMustInitialyPressed(new ActionPressedCondition<Object>() {
             public boolean mustBePressed(Object param) {
@@ -239,25 +295,23 @@ public class RTEditorPresenter implements RTEditor {
             }
         });
 
-        actions.add(undo);
-        actions.add(redo);
-        actions.add(copy);
-        actions.add(cut);
-        actions.add(paste);
-        actions.add(editHtml);
-        actions.add(comment);
-        actions.add(hr);
-        actions.add(strikethrough);
-
-        return actions;
+        extendedTopActions.add(withNoItem(undo));
+        extendedTopActions.add(withNoItem(redo));
+        extendedTopActions.add(withNoItem(copy));
+        extendedTopActions.add(withNoItem(cut));
+        extendedTopActions.add(withNoItem(paste));
+        extendedTopActions.add(withNoItem(editHtml));
+        extendedTopActions.add(withNoItem(hr));
+        extendedTopActions.add(withNoItem(comment));
+        extendedSndActions.add(withNoItem(strikethrough));
     }
 
-    private ActionEnableCondition<Object> isExtended() {
-        return new ActionEnableCondition<Object>() {
-            public boolean mustBeEnabled(Object param) {
-                return extended && view.canBeExtended();
-            }
-        };
+    private String getCssName(ImageResource imageResource) {
+        return ".k-rte-" + imageResource.getName();
+    }
+
+    private boolean isExtended() {
+        return extended && view.canBeExtended();
     }
 
     private ActionEnableCondition<Object> isInsertHtmlSupported() {
@@ -266,5 +320,18 @@ public class RTEditorPresenter implements RTEditor {
                 return true;
             }
         };
+    }
+
+    private ActionItemCollection<Object> withNoItem(ActionCollection<Object> actions) {
+        ActionItemCollection<Object> collection = new ActionItemCollection<Object>();
+        for (ActionDescriptor<Object> action : actions) {
+            // this action don't have a associated item
+            collection.add(withNoItem(action));
+        }
+        return collection;
+    }
+
+    private ActionItem<Object> withNoItem(ActionDescriptor<Object> action) {
+        return new ActionItem<Object>(action, null);
     }
 }

@@ -21,6 +21,7 @@ package org.ourproject.kune.workspace.client.skel;
 
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -34,8 +35,8 @@ public class ActionCntCtxToolbarPanel<T> extends ActionToolbarPanel<T> {
     private final WorkspaceSkeleton ws;
 
     public ActionCntCtxToolbarPanel(final Position position, final Provider<ActionManager> actionManagerProvider,
-            final WorkspaceSkeleton ws) {
-        super(actionManagerProvider);
+            final WorkspaceSkeleton ws, I18nTranslationService i18n) {
+        super(actionManagerProvider, i18n);
         this.position = position;
         this.ws = ws;
     }

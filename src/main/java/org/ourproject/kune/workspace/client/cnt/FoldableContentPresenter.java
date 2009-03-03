@@ -21,7 +21,6 @@ package org.ourproject.kune.workspace.client.cnt;
 
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
@@ -139,7 +138,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
 
     private void setToolbar(ActionItemCollection<StateToken> collection) {
         toolbar.disableMenusAndClearButtons();
-        toolbar.setActions(collection);
+        toolbar.addActions(collection);
         toolbar.attach();
     }
 

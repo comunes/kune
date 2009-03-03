@@ -17,8 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.workspace.client.cxt;
 
+import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 public class ContextActionRegistry extends ActionRegistry<StateToken> {

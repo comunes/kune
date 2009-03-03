@@ -25,9 +25,7 @@ import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
-import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
@@ -53,6 +51,7 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbar;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
@@ -97,7 +96,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             public void onEvent(StateAbstractDTO state) {
                 setState(state);
                 toolbar.disableMenusAndClearButtons();
-                toolbar.setActions(groupActionRegistry.getCurrentActions(state.getGroup().getStateToken(),
+                toolbar.addActions(groupActionRegistry.getCurrentActions(state.getGroup().getStateToken(),
                         session.isLogged(), state.getGroupRights(), true));
                 toolbar.attach();
             }

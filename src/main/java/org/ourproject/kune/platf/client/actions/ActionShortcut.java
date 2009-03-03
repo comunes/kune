@@ -6,9 +6,14 @@ import com.google.gwt.user.client.ui.KeyboardListener;
 
 public class ActionShortcut {
 
+    private static boolean has(int modifiers, int modifier) {
+        return ((modifiers & modifier) == modifier);
+    }
+
     final boolean alt;
     final boolean ctrl;
     final boolean shift;
+
     final char key;
 
     public ActionShortcut(boolean alt, boolean ctrl, boolean shift, char key) {
@@ -26,6 +31,49 @@ public class ActionShortcut {
         this(false, ctrl, false, key);
     }
 
+    public ActionShortcut(char key, int modifiers) {
+        this(has(modifiers, KeyboardListener.MODIFIER_ALT), has(modifiers, KeyboardListener.MODIFIER_CTRL), has(
+                modifiers, KeyboardListener.MODIFIER_SHIFT), key);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ActionShortcut other = (ActionShortcut) obj;
+        if (alt != other.alt) {
+            return false;
+        }
+        if (ctrl != other.ctrl) {
+            return false;
+        }
+        if (key != other.key) {
+            return false;
+        }
+        if (shift != other.shift) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (alt ? 1231 : 1237);
+        result = prime * result + (ctrl ? 1231 : 1237);
+        result = prime * result + key;
+        result = prime * result + (shift ? 1231 : 1237);
+        return result;
+    }
+
     public boolean is(char keyCode, int modifiers) {
         return (keyCode == keyCode && same(modifiers, KeyboardListener.MODIFIER_ALT, alt)
                 && same(modifiers, KeyboardListener.MODIFIER_CTRL, ctrl) && same(modifiers,
@@ -33,7 +81,7 @@ public class ActionShortcut {
     }
 
     public boolean same(int modifiers, int modifier, boolean keyValue) {
-        return (((modifiers & modifier) == modifier) == keyValue);
+        return (has(modifiers, modifier) == keyValue);
     }
 
     public String toString(I18nTranslationService i18n) {

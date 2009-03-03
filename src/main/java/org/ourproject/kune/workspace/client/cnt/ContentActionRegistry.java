@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.actions.toolbar;
+ \*/
+package org.ourproject.kune.workspace.client.cnt;
 
+import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public interface ActionContextToolbar extends ActionToolbar<StateToken> {
-
+public class ContentActionRegistry extends ActionRegistry<StateToken> {
 }

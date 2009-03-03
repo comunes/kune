@@ -16,15 +16,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
+ \*/
+package org.ourproject.kune.workspace.client.socialnet;
+
+import org.ourproject.kune.platf.client.actions.ActionRegistry;
+import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+
+/**
+ * The Class UserActionRegistry.
+ * 
+ * List of actions over a user (initially used for buddies actions)
+ * 
  */
-package org.ourproject.kune.platf.client.actions.toolbar;
-
-import org.ourproject.kune.platf.client.dto.StateToken;
-
-public class ActionContextToolbarPresenter extends ActionToolbarPresenter<StateToken> implements ActionContextToolbar {
-
-    public ActionContextToolbarPresenter(ActionToolbarView<StateToken> toolbar) {
-        super(toolbar);
-    }
-
+public class UserActionRegistry extends ActionRegistry<UserSimpleDTO> {
 }

@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.actions;
 
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 
 import com.calclab.suco.client.events.Listener;
@@ -222,8 +223,8 @@ public abstract class ActionDescriptor<T> {
         return shortcut;
     }
 
-    public String getShortcutToS() {
-        return shortcut == null ? "" : shortcut.toString();
+    public String getShortcutToS(I18nTranslationService i18n) {
+        return shortcut == null ? "" : shortcut.toString(i18n);
     }
 
     /**
@@ -242,6 +243,10 @@ public abstract class ActionDescriptor<T> {
      */
     public String getToolTip() {
         return toolTip;
+    }
+
+    public boolean hasShortcut() {
+        return shortcut != null;
     }
 
     /**

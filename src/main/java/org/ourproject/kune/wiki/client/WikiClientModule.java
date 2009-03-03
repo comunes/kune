@@ -19,9 +19,6 @@
  \*/
 package org.ourproject.kune.wiki.client;
 
-import org.ourproject.kune.platf.client.actions.ContentActionRegistry;
-import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
@@ -43,7 +40,10 @@ import org.ourproject.kune.wiki.client.cnt.WikiViewerPresenter;
 import org.ourproject.kune.wiki.client.cnt.WikiViewerView;
 import org.ourproject.kune.wiki.client.ctx.WikiContext;
 import org.ourproject.kune.wiki.client.ctx.WikiContextPresenter;
+import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
+import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.TextEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;

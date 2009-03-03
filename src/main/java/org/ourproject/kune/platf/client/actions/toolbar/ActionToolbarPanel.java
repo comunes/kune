@@ -24,6 +24,8 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.actions.ActionPressedCondition;
+import org.ourproject.kune.platf.client.actions.ActionShortcut;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
@@ -32,6 +34,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescriptor;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -56,8 +59,10 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     private final Provider<ActionManager> actionManagerProvider;
     protected final SimpleToolbar topbar;
     protected final SimpleToolbar bottombar;
+    private final I18nTranslationService i18n;
 
-    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider) {
+    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider, I18nTranslationService i18n) {
+        this.i18n = i18n;
         topbar = new SimpleToolbar();
         bottombar = new SimpleToolbar();
         topbar.setWidth("100%");
@@ -86,8 +91,8 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         }
         if (action instanceof ActionToolbarPushButtonDescriptor) {
             button.setEnableToggle(true);
-            button.setPressed(((ActionToolbarPushButtonDescriptor<T>) action).getMustInitialyPressed().mustBePressed(
-                    item));
+            ActionPressedCondition<T> mustInitialyPressed = ((ActionToolbarPushButtonDescriptor<T>) action).getMustInitialyPressed();
+            button.setPressed(mustInitialyPressed != null && mustInitialyPressed.mustBePressed(item));
         }
         button.addListener(new ButtonListenerAdapter() {
             @Override
@@ -101,7 +106,9 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         if (iconCls != null) {
             button.setIconCls(iconCls);
         }
-        button.setTooltip(action.getToolTip());
+        String toolTip = action.getToolTip();
+        ActionShortcut shortcut = action.getShortcut();
+        button.setTooltip((toolTip == null ? "" : toolTip) + (shortcut != null ? shortcut.toString(i18n) : ""));
 
         setEnableButton(button, enable);
         final SimpleToolbar toolbar = getToolbar(pos);
@@ -192,18 +199,18 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
         final Item item;
         if (action instanceof ActionToolbarMenuRadioDescriptor) {
-            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcutToS());
+            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcutToS(i18n));
             ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
             checkItem.setGroup(radioDescriptor.getGroup());
             checkItem.setChecked(radioDescriptor.mustBeChecked());
             item = checkItem;
         } else if (action instanceof ActionToolbarMenuCheckItemDescriptor) {
-            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcutToS());
+            CheckItem checkItem = new CheckItem(action.getText() + action.getShortcutToS(i18n));
             ActionToolbarMenuCheckItemDescriptor<T> checkItemDescriptor = (ActionToolbarMenuCheckItemDescriptor<T>) action;
             checkItem.setChecked(checkItemDescriptor.getMustBeChecked().mustBeChecked());
             item = checkItem;
         } else {
-            item = new Item(action.getText() + action.getShortcutToS());
+            item = new Item(action.getText() + action.getShortcutToS(i18n));
         }
         BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override

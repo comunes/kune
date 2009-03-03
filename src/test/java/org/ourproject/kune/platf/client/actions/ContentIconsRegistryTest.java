@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
+import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 
 public class ContentIconsRegistryTest {
 

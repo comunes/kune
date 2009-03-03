@@ -200,7 +200,7 @@ public class TextEditorPresenter implements TextEditor {
         final ActionItemCollection<StateToken> collection = new ActionItemCollection<StateToken>();
         collection.add(new ActionItem<StateToken>(save, null));
         collection.add(new ActionItem<StateToken>(close, null));
-        toolbar.setActions(collection);
+        toolbar.addActions(collection);
     }
 
     private void reset() {

@@ -1,9 +1,11 @@
 package org.ourproject.kune.platf.client.ui.rte;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionCollection;
+import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 
 public interface RTEditorView extends View {
+
+    void addActions(ActionItemCollection<Object> extendedTopActions);
 
     void addComment(String userName);
 
@@ -56,8 +58,6 @@ public interface RTEditorView extends View {
     void rightIndent();
 
     void selectAll();
-
-    void setActions(ActionCollection<Object> actions);
 
     void setFontName(String name);
 

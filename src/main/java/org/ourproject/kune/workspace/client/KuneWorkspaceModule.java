@@ -21,20 +21,6 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.ContentIconsRegistry;
-import org.ourproject.kune.platf.client.actions.ContextActionRegistry;
-import org.ourproject.kune.platf.client.actions.GroupActionRegistry;
-import org.ourproject.kune.platf.client.actions.UserActionRegistry;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbar;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionBuddiesSummaryToolbarPresenter;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbar;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionContentToolbarPresenter;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionContextToolbar;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionContextToolbarPresenter;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbar;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionGroupSummaryToolbarPresenter;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationSummaryToolbarPresenter;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
@@ -64,9 +50,15 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
+import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
+import org.ourproject.kune.workspace.client.cnt.ActionContentToolbarPresenter;
+import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
+import org.ourproject.kune.workspace.client.cxt.ActionContextToolbar;
+import org.ourproject.kune.workspace.client.cxt.ActionContextToolbarPresenter;
+import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPanel;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPresenter;
@@ -195,6 +187,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.socialnet.BuddiesSummary;
 import org.ourproject.kune.workspace.client.socialnet.BuddiesSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.BuddiesSummaryPresenter;
+import org.ourproject.kune.workspace.client.socialnet.GroupActionRegistry;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenter;
@@ -203,9 +196,16 @@ import org.ourproject.kune.workspace.client.socialnet.ParticipationSummary;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
+import org.ourproject.kune.workspace.client.socialnet.UserActionRegistry;
 import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddie;
 import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddiePanel;
 import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddiePresenter;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbar;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbarPresenter;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbar;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbarPresenter;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipationSummaryToolbarPresenter;
+import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
@@ -480,14 +480,16 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ActionGroupSummaryToolbar>(ActionGroupSummaryToolbar.class) {
             @Override
             public ActionGroupSummaryToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>($$(ActionManager.class));
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
+                        $$(ActionManager.class), $(I18nTranslationService.class));
                 final ActionGroupSummaryToolbarPresenter toolbar = new ActionGroupSummaryToolbarPresenter(panel);
                 return toolbar;
             }
         }, new Factory<ActionParticipationToolbar>(ActionParticipationToolbar.class) {
             @Override
             public ActionParticipationToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>($$(ActionManager.class));
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
+                        $$(ActionManager.class), $(I18nTranslationService.class));
                 final ActionParticipationSummaryToolbarPresenter toolbar = new ActionParticipationSummaryToolbarPresenter(
                         panel);
                 return toolbar;
@@ -496,7 +498,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public ActionBuddiesSummaryToolbar create() {
                 final ActionToolbarPanel<UserSimpleDTO> panel = new ActionToolbarPanel<UserSimpleDTO>(
-                        $$(ActionManager.class));
+                        $$(ActionManager.class), $(I18nTranslationService.class));
                 final ActionBuddiesSummaryToolbarPresenter toolbar = new ActionBuddiesSummaryToolbarPresenter(panel);
                 return toolbar;
             }
@@ -867,7 +869,8 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public TextEditor create() {
                 final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
-                        ActionCntCtxToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                        ActionCntCtxToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
                 final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
                         contentNavigatorToolbar);
 
@@ -921,7 +924,8 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public ActionContentToolbar create() {
                 final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
-                        ActionCntCtxToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                        ActionCntCtxToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
                 final ActionContentToolbar toolbar = new ActionContentToolbarPresenter(contentNavigatorToolbar);
                 return toolbar;
             }
@@ -931,7 +935,8 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public ActionContextToolbar create() {
                 final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
-                        ActionCntCtxToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class));
+                        ActionCntCtxToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class));
                 final ActionContextToolbar toolbar = new ActionContextToolbarPresenter(contentNavigatorToolbar);
                 return toolbar;
             }

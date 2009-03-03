@@ -33,6 +33,6 @@ public interface ActionToolbar<T> {
 
     ActionToolbarView<T> getView();
 
-    void setActions(ActionItemCollection<T> actionItemCollection);
+    void addActions(ActionItemCollection<T> actionItemCollection);
 
 }
