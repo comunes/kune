@@ -10,11 +10,13 @@ import com.calclab.suco.client.events.Listener0;
 
 public interface RTEditor {
 
-    void addAction(ActionDescriptor<Object> action, boolean basic, ActionPosition position);
+    void addAction(ActionDescriptor<Object> action, ActionPosition position);
 
-    void addActions(ActionCollection<Object> actions, boolean basic, ActionPosition position);
+    void addActions(ActionCollection<Object> actions, ActionPosition position);
 
     void addOnEditListener(Listener0 listener);
+
+    void attach();
 
     void editContent(String content);
 

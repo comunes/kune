@@ -40,12 +40,14 @@ public class RTEditorPanel implements RTEditorView {
         extended = rta.getExtendedFormatter();
         shortcuts = new HashMap<ActionShortcut, ActionItem<Object>>();
         createListeners();
+        rta.setWidth("96%");
+        rta.setHeight("100%");
     }
 
     public void addActions(ActionItemCollection<Object> actionItems) {
         for (ActionItem<Object> actionItem : actionItems) {
             ActionDescriptor<Object> action = actionItem.getAction();
-            if (action.hasShortcut()) {
+            if (action.hasShortcut() && action.mustBeAdded(null)) {
                 ActionShortcut shortcut = action.getShortcut();
                 shortcuts.put(shortcut, actionItem);
             }
@@ -58,6 +60,10 @@ public class RTEditorPanel implements RTEditorView {
         span.setInnerText(i18n.t("type here") + " -" + userName + " " + time);
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
         insertHtml(span.getString());
+    }
+
+    public void adjustSize(int height) {
+        rta.setHeight("" + height);
     }
 
     public boolean canBeBasic() {

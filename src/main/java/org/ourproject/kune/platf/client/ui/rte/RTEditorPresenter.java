@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.ui.rte;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
@@ -41,10 +42,8 @@ public class RTEditorPresenter implements RTEditor {
     private final AccessRolDTO accessRol;
     private final I18nTranslationService i18n;
     private final Session session;
-    private final ActionItemCollection<Object> basicTopActions;
-    private final ActionItemCollection<Object> basicSndActions;
-    private final ActionItemCollection<Object> extendedTopActions;
-    private final ActionItemCollection<Object> extendedSndActions;
+    private final ActionItemCollection<Object> topActions;
+    private final ActionItemCollection<Object> sndActions;
     private final RTEImgResources imgResources;
     private final RTEActionTopToolbar topBar;
     private final RTEActionSndToolbar sndBar;
@@ -70,53 +69,48 @@ public class RTEditorPresenter implements RTEditor {
         this.imgResources = imgResources;
         extended = true;
         accessRol = AccessRolDTO.Editor;
-        basicTopActions = new ActionItemCollection<Object>();
-        basicSndActions = new ActionItemCollection<Object>();
-        extendedTopActions = new ActionItemCollection<Object>();
-        extendedSndActions = new ActionItemCollection<Object>();
+        topActions = new ActionItemCollection<Object>();
+        sndActions = new ActionItemCollection<Object>();
         this.onEdit = new Event0("onRTEEdit");
     }
 
-    public void addAction(ActionDescriptor<Object> action, boolean basic, ActionPosition position) {
+    public void addAction(ActionDescriptor<Object> action, ActionPosition position) {
         switch (position) {
         case top:
-            if (basic) {
-                basicTopActions.add(withNoItem(action));
-            } else {
-                extendedTopActions.add(withNoItem(action));
-            }
+            topActions.add(withNoItem(action));
             break;
         case snd:
-            if (basic) {
-                basicSndActions.add(withNoItem(action));
-            } else {
-                extendedSndActions.add(withNoItem(action));
-            }
+            sndActions.add(withNoItem(action));
             break;
         }
     }
 
-    public void addActions(ActionCollection<Object> actions, boolean basic, ActionPosition position) {
+    public void addActions(ActionCollection<Object> actions, ActionPosition position) {
         switch (position) {
         case top:
-            if (basic) {
-                basicTopActions.addAll(withNoItem(actions));
-            } else {
-                extendedTopActions.addAll(withNoItem(actions));
-            }
+            topActions.addAll(withNoItem(actions));
             break;
         case snd:
-            if (basic) {
-                basicSndActions.addAll(withNoItem(actions));
-            } else {
-                extendedSndActions.addAll(withNoItem(actions));
-            }
+            sndActions.addAll(withNoItem(actions));
             break;
         }
     }
 
     public void addOnEditListener(final Listener0 listener) {
         onEdit.add(listener);
+    }
+
+    public void adjustSize(final int height) {
+        view.adjustSize(height);
+    }
+
+    public void attach() {
+        topBar.clear();
+        sndBar.clear();
+        view.addActions(topActions);
+        view.addActions(sndActions);
+        topBar.addActions(topActions);
+        sndBar.addActions(sndActions);
     }
 
     public void editContent(String content) {
@@ -141,18 +135,6 @@ public class RTEditorPresenter implements RTEditor {
     public void init(RTEditorView view) {
         this.view = view;
         createBasicActions();
-        if (view.canBeBasic()) {
-            view.addActions(basicTopActions);
-            view.addActions(basicSndActions);
-            topBar.addActions(basicTopActions);
-            sndBar.addActions(basicSndActions);
-        }
-        if (isExtended()) {
-            view.addActions(extendedTopActions);
-            view.addActions(extendedSndActions);
-            topBar.addActions(extendedTopActions);
-            sndBar.addActions(extendedSndActions);
-        }
     }
 
     public void setExtended(boolean extended) {
@@ -173,6 +155,17 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     private void createBasicActions() {
+        ActionAddCondition<Object> canBeBasic = new ActionAddCondition<Object>() {
+            public boolean mustBeAdded(Object param) {
+                return view.canBeBasic();
+            }
+        };
+        ActionAddCondition<Object> canBeExtended = new ActionAddCondition<Object>() {
+            public boolean mustBeAdded(Object param) {
+                return isExtended();
+            }
+        };
+
         ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
@@ -182,6 +175,7 @@ public class RTEditorPresenter implements RTEditor {
         selectAll.setShortcut(new ActionShortcut(true, 'A'));
         selectAll.setTextDescription(i18n.t("Select all"));
         selectAll.setParentMenuTitle(i18n.t(EDIT_MENU));
+        selectAll.setAddCondition(canBeBasic);
 
         bold = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar, new Listener0() {
             public void onEvent() {
@@ -191,6 +185,7 @@ public class RTEditorPresenter implements RTEditor {
         bold.setIconCls(getCssName(imgResources.bold()));
         bold.setToolTip(i18n.t("Toggle Bold"));
         bold.setShortcut(new ActionShortcut(true, 'B'));
+        bold.setAddCondition(canBeBasic);
 
         italic = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
                 new Listener0() {
@@ -201,6 +196,8 @@ public class RTEditorPresenter implements RTEditor {
         italic.setIconCls(getCssName(imgResources.italic()));
         italic.setToolTip(i18n.t("Toggle Italic"));
         italic.setShortcut(new ActionShortcut(true, 'I'));
+        italic.setAddCondition(canBeBasic);
+        italic.setAddCondition(canBeBasic);
 
         underline = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
                 new Listener0() {
@@ -211,6 +208,7 @@ public class RTEditorPresenter implements RTEditor {
         underline.setIconCls(getCssName(imgResources.underline()));
         underline.setToolTip(i18n.t("Toggle Underline"));
         underline.setShortcut(new ActionShortcut(true, 'U'));
+        underline.setAddCondition(canBeBasic);
 
         subscript = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
                 new Listener0() {
@@ -221,6 +219,7 @@ public class RTEditorPresenter implements RTEditor {
         subscript.setIconCls(getCssName(imgResources.superscript()));
         subscript.setToolTip(i18n.t("Toggle Subscript"));
         subscript.setShortcut(new ActionShortcut(true, ','));
+        subscript.setAddCondition(canBeBasic);
 
         superscript = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
                 new Listener0() {
@@ -232,6 +231,7 @@ public class RTEditorPresenter implements RTEditor {
         superscript.setToolTip(i18n.t("Toggle Superscript"));
         superscript.setRightSeparator(ActionToolbarButtonSeparator.spacer);
         superscript.setShortcut(new ActionShortcut(true, '.'));
+        superscript.setAddCondition(canBeBasic);
 
         ActionToolbarButtonDescriptor<Object> justifyLeft = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -242,6 +242,7 @@ public class RTEditorPresenter implements RTEditor {
         justifyLeft.setIconCls(getCssName(imgResources.alignleft()));
         justifyLeft.setToolTip(i18n.t("Left Justify"));
         justifyLeft.setShortcut(new ActionShortcut(true, 'L'));
+        justifyLeft.setAddCondition(canBeBasic);
 
         ActionToolbarButtonDescriptor<Object> justifyCentre = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -252,6 +253,7 @@ public class RTEditorPresenter implements RTEditor {
         justifyCentre.setIconCls(getCssName(imgResources.centerpara()));
         justifyCentre.setToolTip(i18n.t("Centre Justify"));
         justifyCentre.setShortcut(new ActionShortcut(true, 'E'));
+        justifyCentre.setAddCondition(canBeBasic);
 
         ActionToolbarButtonDescriptor<Object> justifyRight = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -263,6 +265,7 @@ public class RTEditorPresenter implements RTEditor {
         justifyRight.setToolTip(i18n.t("Right Justify"));
         justifyRight.setShortcut(new ActionShortcut(true, 'R'));
         justifyRight.setRightSeparator(ActionToolbarButtonSeparator.spacer);
+        justifyRight.setAddCondition(canBeBasic);
 
         ActionToolbarMenuDescriptor<Object> undo = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -273,6 +276,7 @@ public class RTEditorPresenter implements RTEditor {
         undo.setShortcut(new ActionShortcut(true, 'Z'));
         undo.setTextDescription(i18n.t("Undo"));
         undo.setParentMenuTitle(i18n.t(EDIT_MENU));
+        undo.setAddCondition(canBeExtended);
 
         ActionToolbarMenuDescriptor<Object> redo = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -283,6 +287,7 @@ public class RTEditorPresenter implements RTEditor {
         redo.setShortcut(new ActionShortcut(true, 'Y'));
         redo.setTextDescription(i18n.t("Redo"));
         redo.setParentMenuTitle(i18n.t(EDIT_MENU));
+        redo.setAddCondition(canBeExtended);
 
         ActionToolbarMenuDescriptor<Object> copy = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -293,6 +298,7 @@ public class RTEditorPresenter implements RTEditor {
         copy.setShortcut(new ActionShortcut(true, 'C'));
         copy.setTextDescription(i18n.t("Copy"));
         copy.setParentMenuTitle(i18n.t(EDIT_MENU));
+        copy.setAddCondition(canBeExtended);
 
         ActionToolbarMenuDescriptor<Object> cut = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -303,6 +309,7 @@ public class RTEditorPresenter implements RTEditor {
         cut.setShortcut(new ActionShortcut(true, 'X'));
         cut.setTextDescription(i18n.t("Cut"));
         cut.setParentMenuTitle(i18n.t(EDIT_MENU));
+        cut.setAddCondition(canBeExtended);
 
         ActionToolbarMenuDescriptor<Object> paste = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -313,6 +320,7 @@ public class RTEditorPresenter implements RTEditor {
         paste.setShortcut(new ActionShortcut(true, 'V'));
         paste.setTextDescription(i18n.t("Paste"));
         paste.setParentMenuTitle(i18n.t(EDIT_MENU));
+        paste.setAddCondition(canBeExtended);
 
         ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -322,6 +330,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         editHtml.setTextDescription(i18n.t("Edit HTML"));
         editHtml.setParentMenuTitle(i18n.t(EDIT_MENU));
+        editHtml.setAddCondition(canBeExtended);
 
         ActionToolbarMenuDescriptor<Object> comment = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -338,6 +347,7 @@ public class RTEditorPresenter implements RTEditor {
         comment.setTextDescription(i18n.t("Comment..."));
         comment.setParentMenuTitle(i18n.t(INSERT_MENU));
         comment.setEnableCondition(isInsertHtmlSupported());
+        comment.setAddCondition(canBeExtended);
 
         ActionToolbarMenuDescriptor<Object> hr = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -348,6 +358,7 @@ public class RTEditorPresenter implements RTEditor {
         hr.setTextDescription(i18n.t("Horizontal line"));
         hr.setIconCls(getCssName(imgResources.hfixedline()));
         hr.setParentMenuTitle(i18n.t(INSERT_MENU));
+        hr.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> hrButton = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -358,6 +369,7 @@ public class RTEditorPresenter implements RTEditor {
         hrButton.setIconCls(getCssName(imgResources.hfixedline()));
         hrButton.setToolTip(i18n.t("Horizontal line"));
         hrButton.setShortcut(new ActionShortcut(true, true, ' ', "Space"));
+        hrButton.setAddCondition(canBeExtended);
 
         strikethrough = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
                 new Listener0() {
@@ -367,7 +379,8 @@ public class RTEditorPresenter implements RTEditor {
                 });
         strikethrough.setIconCls(getCssName(imgResources.strikeout()));
         strikethrough.setToolTip(i18n.t("Toggle Strikethrough"));
-        strikethrough.setRightSeparator(ActionToolbarButtonSeparator.spacer);
+        strikethrough.setRightSeparator(ActionToolbarButtonSeparator.separator);
+        strikethrough.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> decreaseIndent = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -377,6 +390,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         decreaseIndent.setIconCls(getCssName(imgResources.decrementindent()));
         decreaseIndent.setToolTip(i18n.t("Decrease Indent"));
+        decreaseIndent.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> increaseIndent = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -387,6 +401,7 @@ public class RTEditorPresenter implements RTEditor {
         increaseIndent.setIconCls(getCssName(imgResources.incrementindent()));
         increaseIndent.setToolTip(i18n.t("Increase Indent"));
         increaseIndent.setRightSeparator(ActionToolbarButtonSeparator.spacer);
+        increaseIndent.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> ol = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -397,6 +412,7 @@ public class RTEditorPresenter implements RTEditor {
         ol.setIconCls(getCssName(imgResources.defaultnumbering()));
         ol.setToolTip(i18n.t("Numbered List"));
         ol.setShortcut(new ActionShortcut(true, '7'));
+        ol.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> ul = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -408,6 +424,7 @@ public class RTEditorPresenter implements RTEditor {
         ul.setToolTip(i18n.t("Bullet List"));
         ul.setShortcut(new ActionShortcut(true, '8'));
         ul.setRightSeparator(ActionToolbarButtonSeparator.spacer);
+        ul.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> img = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -417,6 +434,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         img.setIconCls(getCssName(imgResources.images()));
         img.setToolTip(i18n.t("Insert Image"));
+        img.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> createLink = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -427,6 +445,7 @@ public class RTEditorPresenter implements RTEditor {
         createLink.setIconCls(getCssName(imgResources.link()));
         createLink.setToolTip(i18n.t("Create Link"));
         createLink.setShortcut(new ActionShortcut(true, 'K'));
+        createLink.setAddCondition(canBeExtended);
         insertElement.addOnCreateLink(new Listener2<String, String>() {
             public void onEvent(String name, String url) {
                 view.createLink(url);
@@ -442,6 +461,7 @@ public class RTEditorPresenter implements RTEditor {
         removeLink.setIconCls(getCssName(imgResources.linkbreak()));
         removeLink.setToolTip(i18n.t("Remove Link"));
         removeLink.setShortcut(new ActionShortcut(true, true, 'K'));
+        removeLink.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> removeFormat = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -452,35 +472,36 @@ public class RTEditorPresenter implements RTEditor {
         removeFormat.setIconCls(getCssName(imgResources.removeFormat()));
         removeFormat.setToolTip(i18n.t("Clear Formatting"));
         removeFormat.setShortcut(new ActionShortcut(true, ' ', "Space"));
+        removeFormat.setAddCondition(canBeExtended);
 
-        basicTopActions.add(withNoItem(selectAll));
-        basicSndActions.add(withNoItem(bold));
-        basicSndActions.add(withNoItem(italic));
-        basicSndActions.add(withNoItem(underline));
-        extendedSndActions.add(withNoItem(strikethrough));
-        basicSndActions.add(withNoItem(subscript));
-        basicSndActions.add(withNoItem(superscript));
-        basicSndActions.add(withNoItem(justifyLeft));
-        basicSndActions.add(withNoItem(justifyCentre));
-        basicSndActions.add(withNoItem(justifyRight));
+        topActions.add(withNoItem(selectAll));
+        sndActions.add(withNoItem(bold));
+        sndActions.add(withNoItem(italic));
+        sndActions.add(withNoItem(underline));
+        sndActions.add(withNoItem(strikethrough));
+        sndActions.add(withNoItem(subscript));
+        sndActions.add(withNoItem(superscript));
+        sndActions.add(withNoItem(justifyLeft));
+        sndActions.add(withNoItem(justifyCentre));
+        sndActions.add(withNoItem(justifyRight));
 
-        extendedTopActions.add(withNoItem(undo));
-        extendedTopActions.add(withNoItem(redo));
-        extendedTopActions.add(withNoItem(copy));
-        extendedTopActions.add(withNoItem(cut));
-        extendedTopActions.add(withNoItem(paste));
-        extendedTopActions.add(withNoItem(editHtml));
-        extendedTopActions.add(withNoItem(hr));
-        extendedSndActions.add(withNoItem(hrButton));
-        extendedSndActions.add(withNoItem(decreaseIndent));
-        extendedSndActions.add(withNoItem(increaseIndent));
-        extendedSndActions.add(withNoItem(ol));
-        extendedSndActions.add(withNoItem(ul));
-        extendedSndActions.add(withNoItem(img));
-        extendedSndActions.add(withNoItem(createLink));
-        extendedSndActions.add(withNoItem(removeLink));
-        extendedSndActions.add(withNoItem(removeFormat));
-        extendedTopActions.add(withNoItem(comment));
+        topActions.add(withNoItem(undo));
+        topActions.add(withNoItem(redo));
+        topActions.add(withNoItem(copy));
+        topActions.add(withNoItem(cut));
+        topActions.add(withNoItem(paste));
+        topActions.add(withNoItem(editHtml));
+        topActions.add(withNoItem(hr));
+        sndActions.add(withNoItem(hrButton));
+        sndActions.add(withNoItem(decreaseIndent));
+        sndActions.add(withNoItem(increaseIndent));
+        sndActions.add(withNoItem(ol));
+        sndActions.add(withNoItem(ul));
+        sndActions.add(withNoItem(img));
+        sndActions.add(withNoItem(createLink));
+        sndActions.add(withNoItem(removeLink));
+        sndActions.add(withNoItem(removeFormat));
+        topActions.add(withNoItem(comment));
     }
 
     private String getCssName(ImageResource imageResource) {

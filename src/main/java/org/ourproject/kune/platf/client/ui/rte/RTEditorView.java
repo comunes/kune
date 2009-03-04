@@ -9,6 +9,8 @@ public interface RTEditorView extends View {
 
     void addComment(String userName);
 
+    void adjustSize(int height);
+
     boolean canBeBasic();
 
     boolean canBeExtended();

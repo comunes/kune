@@ -70,10 +70,10 @@ public class I18nUITranslationService extends I18nTranslationService {
 
         final DateTimeFormat fmt;
         if (dateFormat == null) {
-            fmt = shortFormat ? DateTimeFormat.getFormat("M/d/yyyy") : DateTimeFormat.getFormat("M/d/yyyy h:mm a");
+            fmt = DateTimeFormat.getFormat("M/d/yyyy h:mm a");
         } else {
             if (shortFormat) {
-                fmt = DateTimeFormat.getFormat(dateFormat);
+                fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
             } else {
                 String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(date);
                 String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
