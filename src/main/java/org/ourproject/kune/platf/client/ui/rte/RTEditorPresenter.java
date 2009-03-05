@@ -37,6 +37,7 @@ public class RTEditorPresenter implements RTEditor {
 
     private static final String EDIT_MENU = "Edit";
     private static final String INSERT_MENU = "Insert";
+    private static final String FORMAT_MENU = "Format";
     private RTEditorView view;
     private boolean extended;
     private final AccessRolDTO accessRol;
@@ -52,8 +53,6 @@ public class RTEditorPresenter implements RTEditor {
     private ActionToolbarPushButtonDescriptor<Object> underline;
     private ActionToolbarPushButtonDescriptor<Object> strikethrough;
     private final Event0 onEdit;
-    private ActionToolbarPushButtonDescriptor<Object> subscript;
-    private ActionToolbarPushButtonDescriptor<Object> superscript;
     private final TextEditorInsertElement insertElement;
 
     public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
@@ -146,8 +145,6 @@ public class RTEditorPresenter implements RTEditor {
             sndBar.setPushButtonPressed(bold, view.isBold());
             sndBar.setPushButtonPressed(italic, view.isItalic());
             sndBar.setPushButtonPressed(underline, view.isUnderlined());
-            sndBar.setPushButtonPressed(subscript, view.isSubscript());
-            sndBar.setPushButtonPressed(superscript, view.isSuperscript());
         }
         if (isExtended()) {
             sndBar.setPushButtonPressed(strikethrough, view.isStrikethrough());
@@ -183,7 +180,7 @@ public class RTEditorPresenter implements RTEditor {
             }
         });
         bold.setIconCls(getCssName(imgResources.bold()));
-        bold.setToolTip(i18n.t("Toggle Bold"));
+        bold.setToolTip(i18n.t("Bold"));
         bold.setShortcut(new ActionShortcut(true, 'B'));
         bold.setAddCondition(canBeBasic);
 
@@ -194,7 +191,7 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         italic.setIconCls(getCssName(imgResources.italic()));
-        italic.setToolTip(i18n.t("Toggle Italic"));
+        italic.setToolTip(i18n.t("Italic"));
         italic.setShortcut(new ActionShortcut(true, 'I'));
         italic.setAddCondition(canBeBasic);
         italic.setAddCondition(canBeBasic);
@@ -206,30 +203,31 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         underline.setIconCls(getCssName(imgResources.underline()));
-        underline.setToolTip(i18n.t("Toggle Underline"));
+        underline.setToolTip(i18n.t("Underline"));
         underline.setShortcut(new ActionShortcut(true, 'U'));
         underline.setAddCondition(canBeBasic);
 
-        subscript = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
-                new Listener0() {
+        ActionToolbarMenuDescriptor<Object> subscript = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
                         view.toggleSubscript();
                     }
                 });
-        subscript.setIconCls(getCssName(imgResources.superscript()));
-        subscript.setToolTip(i18n.t("Toggle Subscript"));
+        subscript.setParentMenuTitle(i18n.t(FORMAT_MENU));
+        subscript.setTextDescription(i18n.t("Subscript"));
+        subscript.setIconCls(getCssName(imgResources.subscript()));
         subscript.setShortcut(new ActionShortcut(true, ','));
         subscript.setAddCondition(canBeBasic);
 
-        superscript = new ActionToolbarPushButtonDescriptor<Object>(accessRol, ActionToolbarPosition.topbar,
-                new Listener0() {
+        ActionToolbarMenuDescriptor<Object> superscript = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
                     public void onEvent() {
                         view.toggleSuperscript();
                     }
                 });
+        superscript.setParentMenuTitle(i18n.t(FORMAT_MENU));
+        superscript.setTextDescription(i18n.t("Superscript"));
         superscript.setIconCls(getCssName(imgResources.superscript()));
-        superscript.setToolTip(i18n.t("Toggle Superscript"));
-        superscript.setRightSeparator(ActionToolbarButtonSeparator.spacer);
         superscript.setShortcut(new ActionShortcut(true, '.'));
         superscript.setAddCondition(canBeBasic);
 
@@ -378,7 +376,7 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         strikethrough.setIconCls(getCssName(imgResources.strikeout()));
-        strikethrough.setToolTip(i18n.t("Toggle Strikethrough"));
+        strikethrough.setToolTip(i18n.t("Strikethrough"));
         strikethrough.setRightSeparator(ActionToolbarButtonSeparator.separator);
         strikethrough.setAddCondition(canBeExtended);
 
@@ -479,8 +477,6 @@ public class RTEditorPresenter implements RTEditor {
         sndActions.add(withNoItem(italic));
         sndActions.add(withNoItem(underline));
         sndActions.add(withNoItem(strikethrough));
-        sndActions.add(withNoItem(subscript));
-        sndActions.add(withNoItem(superscript));
         sndActions.add(withNoItem(justifyLeft));
         sndActions.add(withNoItem(justifyCentre));
         sndActions.add(withNoItem(justifyRight));
@@ -492,6 +488,8 @@ public class RTEditorPresenter implements RTEditor {
         topActions.add(withNoItem(paste));
         topActions.add(withNoItem(editHtml));
         topActions.add(withNoItem(hr));
+        topActions.add(withNoItem(subscript));
+        topActions.add(withNoItem(superscript));
         sndActions.add(withNoItem(hrButton));
         sndActions.add(withNoItem(decreaseIndent));
         sndActions.add(withNoItem(increaseIndent));

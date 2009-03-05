@@ -49,6 +49,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
+import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbarPresenter;
@@ -359,7 +360,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             public SiteOptions create() {
                 final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
                 final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nUITranslationService.class), $$(I18nTranslator.class));
+                        $(I18nUITranslationService.class), $$(I18nTranslator.class), $$(TestRTEDialog.class));
                 presenter.init(panel);
                 return presenter;
             }

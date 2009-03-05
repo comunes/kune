@@ -1,91 +1,91 @@
-@sprite .x-btn-icon .k-rte-underline {
+@sprite div .k-rte-underline {
   gwt-image: 'underline';
 }
 
-@sprite .x-btn-icon .k-rte-superscript {
+@sprite div .k-rte-superscript {
   gwt-image: 'superscript';
 }
 
-@sprite .x-btn-icon .k-rte-subscript {
+@sprite div .k-rte-subscript {
   gwt-image: 'subscript';
 }
 
-@sprite .x-btn-icon .k-rte-strikeout {
+@sprite div .k-rte-strikeout {
   gwt-image: 'strikeout';
 }
 
-@sprite .x-btn-icon .k-rte-removeFormat {
+@sprite div .k-rte-removeFormat {
   gwt-image: 'removeFormat';
 }
 
-@sprite .x-btn-icon .k-rte-link {
+@sprite div .k-rte-link {
   gwt-image: 'link';
 }
 
-@sprite .x-btn-icon .k-rte-linkbreak {
+@sprite div .k-rte-linkbreak {
   gwt-image: 'linkbreak';
 }
 
-@sprite .x-btn-icon .k-rte-italic {
+@sprite div .k-rte-italic {
   gwt-image: 'italic';
 }
 
-@sprite .x-btn-icon .k-rte-incrementindent {
+@sprite div .k-rte-incrementindent {
   gwt-image: 'incrementindent';
 }
 
-@sprite .x-btn-icon .k-rte-images {
+@sprite div .k-rte-images {
   gwt-image: 'images';
 }
 
-@sprite .x-btn-icon .k-rte-hfixedline {
+@sprite div .k-rte-hfixedline {
   gwt-image: 'hfixedline';
 }
 
-@sprite .x-btn-icon .k-rte-fontheight {
+@sprite div .k-rte-fontheight {
   gwt-image: 'fontheight';
 }
 
-@sprite .x-btn-icon .k-rte-fontcolor {
+@sprite div .k-rte-fontcolor {
   gwt-image: 'fontcolor';
 }
 
-@sprite .x-btn-icon .k-rte-edithtml {
+@sprite div .k-rte-edithtml {
   gwt-image: 'edithtml';
 }
 
-@sprite .x-btn-icon .k-rte-defaultnumbering {
+@sprite div .k-rte-defaultnumbering {
   gwt-image: 'defaultnumbering';
 }
 
-@sprite .x-btn-icon .k-rte-defaultbullet {
+@sprite div .k-rte-defaultbullet {
   gwt-image: 'defaultbullet';
 }
 
-@sprite .x-btn-icon .k-rte-decrementindent {
+@sprite div .k-rte-decrementindent {
   gwt-image: 'decrementindent';
 }
 
-@sprite .x-btn-icon .k-rte-charfontname {
+@sprite div .k-rte-charfontname {
   gwt-image: 'charfontname';
 }
 
-@sprite .x-btn-icon .k-rte-centerpara {
+@sprite div .k-rte-centerpara {
   gwt-image: 'centerpara';
 }
 
-@sprite .x-btn-icon .k-rte-bold {
+@sprite div .k-rte-bold {
   gwt-image: 'bold';
 }
 
-@sprite .x-btn-icon .k-rte-backcolor {
+@sprite div .k-rte-backcolor {
   gwt-image: 'backcolor';
 }
 
-@sprite .x-btn-icon .k-rte-alignright {
+@sprite div .k-rte-alignright {
   gwt-image: 'alignright';
 }
 
-@sprite .x-btn-icon .k-rte-alignleft {
+@sprite div .k-rte-alignleft {
   gwt-image: 'alignleft';
 }

@@ -267,9 +267,5 @@ public class KunePlatformModule extends AbstractModule {
         $(ToolGroup.class).createAll();
         $(Application.class).start();
         // $(HelloWorld.class);
-
-        // $(TestRTEDialog.class);
-        // $(TestRTEDialog.class);
-        // $(TestRTEDialog.class);
     }
 }

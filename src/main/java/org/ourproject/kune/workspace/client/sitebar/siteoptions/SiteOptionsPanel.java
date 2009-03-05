@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.sitebar.siteoptions;
 
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -37,7 +38,8 @@ import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 public class SiteOptionsPanel implements SiteOptionsView {
 
     public SiteOptionsPanel(final SiteOptionsPresenter presenter, final WorkspaceSkeleton ws,
-            final I18nUITranslationService i18n, final Provider<I18nTranslator> translatorProvider) {
+            final I18nUITranslationService i18n, final Provider<I18nTranslator> translatorProvider,
+            final Provider<TestRTEDialog> editor) {
         final PushButton optionsButton = new PushButton("");
         // optionsButton.setText(i18n.t("Options"));
         optionsButton.setHTML(i18n.t("Options")
@@ -53,6 +55,22 @@ public class SiteOptionsPanel implements SiteOptionsView {
                 optionsMenu.showAt(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 10);
             }
         });
+
+        final Item testRTE = new Item(i18n.t("Test new RTE"), new BaseItemListenerAdapter() {
+            @Override
+            public void onClick(BaseItem item, EventObject e) {
+                editor.get().show();
+            }
+        }, "");
+
+        final Item testRTEbasic = new Item(i18n.t("Test new RTE (basic mode)"), new BaseItemListenerAdapter() {
+            @Override
+            public void onClick(BaseItem item, EventObject e) {
+                editor.get().setExtended(false);
+                editor.get().show();
+            }
+        }, "");
+
         final Item linkHelpInTrans = new Item(i18n.t("Help with the translation"), new BaseItemListenerAdapter() {
             @Override
             public void onClick(BaseItem item, EventObject e) {
@@ -68,8 +86,9 @@ public class SiteOptionsPanel implements SiteOptionsView {
                 Window.open("http://ourproject.org/tracker/?group_id=407", "_blank", null);
             }
         }, "images/kuneicon16.gif");
+        optionsMenu.addItem(testRTE);
+        optionsMenu.addItem(testRTEbasic);
         optionsMenu.addItem(linkHelpInTrans);
         optionsMenu.addItem(linkKuneBugs);
-
     }
 }

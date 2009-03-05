@@ -10,8 +10,12 @@ import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public class TestRTEDialog {
 
+    private final RTEditor editor;
+    private final BasicDialog dialog;
+
     public TestRTEDialog(RTEditor editor) {
-        BasicDialog dialog = new BasicDialog("Testing RTE", false, false, 400, 200);
+        this.editor = editor;
+        dialog = new BasicDialog("Testing RTE", false, false, 400, 200);
         final VerticalPanel vp = new VerticalPanel();
 
         vp.add(((ActionToolbarPanel<Object>) editor.getTopBar().getView()).getToolbar(ActionToolbarPosition.topbar));
@@ -19,7 +23,6 @@ public class TestRTEDialog {
         final RTEditorPanel editorPanel = (RTEditorPanel) editor.getEditorArea();
         vp.add(editorPanel.getRTE());
         editor.setExtended(true);
-        editor.attach();
         vp.setWidth("100%");
         dialog.add(vp);
         dialog.addListener(new WindowListenerAdapter() {
@@ -30,6 +33,14 @@ public class TestRTEDialog {
                 vp.setCellHeight(editorPanel.getRTE(), "" + newHeight);
             }
         });
+    }
+
+    public void setExtended(boolean extended) {
+        editor.setExtended(extended);
+    }
+
+    public void show() {
+        editor.attach();
         dialog.show();
     }
 }
