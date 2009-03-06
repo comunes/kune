@@ -52,6 +52,7 @@ public class ColorWebSafePalettePanel implements ColorWebSafePaletteView {
             createPalette();
         }
         popupPalette = new PopupPanel(true, true);
+        popupPalette.addStyleName("kune-WebSafePalette-popup");
         popupPalette.setVisible(false);
         popupPalette.show();
         popupPalette.setPopupPosition(left, top);
@@ -68,12 +69,12 @@ public class ColorWebSafePalettePanel implements ColorWebSafePaletteView {
         int row;
         int col;
         int n = 0;
-        for (int a = 0; a < COLORS.length; a++) {
-            for (int b = 0; b < COLORS.length; b++) {
-                for (int c = 0; c < COLORS.length; c++) {
+        for (String element : COLORS) {
+            for (String element2 : COLORS) {
+                for (String element3 : COLORS) {
                     row = n / COLS;
                     col = n % COLS;
-                    final String currentColor = "#" + COLORS[c] + COLORS[a] + COLORS[b];
+                    final String currentColor = "#" + element3 + element + element2;
                     paletteGrid.setText(row, col, " ");
                     DOM.setStyleAttribute(paletteGrid.getCellFormatter().getElement(row, col), "backgroundColor",
                             currentColor);

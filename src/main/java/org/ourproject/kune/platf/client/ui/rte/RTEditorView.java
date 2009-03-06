@@ -24,6 +24,8 @@ public interface RTEditorView extends View {
 
     void delete();
 
+    void focus();
+
     void insertHorizontalRule();
 
     void insertHtml(String html);
@@ -65,6 +67,8 @@ public interface RTEditorView extends View {
     void rightIndent();
 
     void selectAll();
+
+    void setBackColor(String color);
 
     void setFontName(String name);
 

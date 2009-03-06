@@ -15,7 +15,7 @@ public class TestRTEDialog {
 
     public TestRTEDialog(RTEditor editor) {
         this.editor = editor;
-        dialog = new BasicDialog("Testing RTE", false, false, 400, 200);
+        dialog = new BasicDialog("Testing RTE", false, false, 650, 200);
         final VerticalPanel vp = new VerticalPanel();
 
         vp.add(((ActionToolbarPanel<Object>) editor.getTopBar().getView()).getToolbar(ActionToolbarPosition.topbar));

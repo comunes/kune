@@ -233,7 +233,8 @@ public class KunePlatformModule extends AbstractModule {
                 RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
                 RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
                 final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
-                        $(Session.class), topBar, sndBar, $(RTEImgResources.class), $(TextEditorInsertElement.class));
+                        $(Session.class), topBar, sndBar, $(RTEImgResources.class), $(TextEditorInsertElement.class),
+                        $(ColorWebSafePalette.class), $(DeferredCommandWrapper.class));
                 final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
                         $(ActionManager.class));
                 presenter.init(panel);

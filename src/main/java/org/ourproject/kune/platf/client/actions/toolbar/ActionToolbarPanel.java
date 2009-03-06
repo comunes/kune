@@ -114,7 +114,12 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         if (action.hasLeftSeparator()) {
             add(toolbar, action.getLeftSeparator());
         }
-        toolbar.add(button);
+        int position = action.getPosition();
+        if (position != ActionToolbarDescriptor.NO_POSITION) {
+            toolbar.insert(button, position);
+        } else {
+            toolbar.add(button);
+        }
         if (action.hasRightSeparator()) {
             add(toolbar, action.getRightSeparator());
         }
@@ -158,6 +163,14 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         }
     }
 
+    public int getLeftPosition(ActionDescriptor<T> action) {
+        final ToolbarButton button = findButton(action);
+        if (button != null) {
+            return button.getAbsoluteLeft();
+        }
+        return 0;
+    }
+
     public SimpleToolbar getToolbar(final ActionToolbarPosition pos) {
         switch (pos) {
         case bottombar:
@@ -166,6 +179,14 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         default:
             return topbar;
         }
+    }
+
+    public int getTopPosition(ActionDescriptor<T> action) {
+        final ToolbarButton button = findButton(action);
+        if (button != null) {
+            return button.getAbsoluteTop();
+        }
+        return 0;
     }
 
     public void hideAllMenus() {
@@ -217,6 +238,12 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         case spacer:
         default:
             return toolbar.addSpacer();
+        }
+    }
+
+    private void addSeparator(Menu menu, boolean separator) {
+        if (separator) {
+            menu.addSeparator();
         }
     }
 
@@ -277,15 +304,18 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
                 menu.addItem(subMenuItem);
                 toolbarMenus.put(subMenuKey, subMenu);
             }
+            addSeparator(subMenu, action.hasTopSeparator());
             subMenu.addItem(item);
-
+            addSeparator(subMenu, action.hasBottomSeparator());
         } else {
             // Menu action without submenu
             if (menu == null) {
                 menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), action.getParentMenuIconCls(),
                         menuTitle, menuKey, action.getParentMenuTooltip());
             }
+            addSeparator(menu, action.hasTopSeparator());
             menu.addItem(item);
+            addSeparator(menu, action.hasBottomSeparator());
         }
         return item;
     }

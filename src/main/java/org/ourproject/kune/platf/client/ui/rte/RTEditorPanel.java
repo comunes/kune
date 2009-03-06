@@ -60,7 +60,7 @@ public class RTEditorPanel implements RTEditorView {
         Element span = DOM.createSpan();
         span.setInnerHTML("<em>" + i18n.t("type here") + "</em> -" + userName + " " + time);
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
-        insertHtml(span.getString() + " ");
+        insertHtml("&nbsp;" + span.getString() + "&nbsp;");
     }
 
     public void adjustSize(int height) {
@@ -89,6 +89,10 @@ public class RTEditorPanel implements RTEditorView {
 
     public void delete() {
         extended.delete();
+    }
+
+    public void focus() {
+        rta.setFocus(true);
     }
 
     public Widget getRTE() {
@@ -177,6 +181,10 @@ public class RTEditorPanel implements RTEditorView {
 
     public void selectAll() {
         basic.selectAll();
+    }
+
+    public void setBackColor(String color) {
+        basic.setBackColor(color);
     }
 
     public void setFontName(String name) {
@@ -270,8 +278,9 @@ public class RTEditorPanel implements RTEditorView {
                         ActionItem<Object> actionItem = shortcuts.get(new ActionShortcut(keyCode, modifiers));
                         if (actionItem != null) {
                             actionManager.doAction(actionItem);
+                            updateStatus();
                         } else {
-                            Log.debug("...but not mapped to any command");
+                            Log.debug("...but not mapped to any action");
                         }
                     }
                 }
@@ -285,4 +294,5 @@ public class RTEditorPanel implements RTEditorView {
     private void updateStatus() {
         presenter.updateStatus();
     }
+
 }

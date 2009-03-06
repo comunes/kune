@@ -49,6 +49,11 @@ public class SimpleToolbar extends Composite {
         childPanel.setCellVerticalAlignment(widget, valign);
     }
 
+    public void add(final Widget widget, VerticalAlignmentConstant valign, int position) {
+        childPanel.insert(widget, position);
+        childPanel.setCellVerticalAlignment(widget, valign);
+    }
+
     public Widget addFill() {
         final Label emptyLabel = new Label("");
         this.add(emptyLabel);
@@ -69,6 +74,11 @@ public class SimpleToolbar extends Composite {
         emptyLabel.setStyleName("ytb-spacer");
         this.add(emptyLabel);
         return emptyLabel;
+    }
+
+    public void insert(final Widget widget, int position) {
+        childPanel.insert(widget, position);
+        childPanel.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void remove(final Widget widget) {

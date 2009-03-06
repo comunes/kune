@@ -38,6 +38,10 @@ public interface ActionToolbarView<T> extends View {
 
     void disableAllMenuItems();
 
+    int getLeftPosition(ActionDescriptor<T> action);
+
+    int getTopPosition(ActionDescriptor<T> action);
+
     void hideAllMenus();
 
     void setButtonEnable(ActionDescriptor<T> action, boolean enable);

@@ -70,6 +70,14 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         view.clear();
     }
 
+    public int getLeftPosition(ActionDescriptor<T> action) {
+        return view.getLeftPosition(action);
+    }
+
+    public int getTopPosition(ActionDescriptor<T> action) {
+        return view.getTopPosition(action);
+    }
+
     public ActionToolbarView<T> getView() {
         return view;
     }

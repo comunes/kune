@@ -131,5 +131,4 @@ public class KuneUiUtils {
     public static void setQuickTip(final Widget widget, final String tip, final String tipTitle) {
         setQuickTip(widget.getElement(), tip, tipTitle);
     }
-
 }

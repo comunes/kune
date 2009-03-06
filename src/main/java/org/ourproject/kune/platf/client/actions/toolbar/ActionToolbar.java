@@ -35,6 +35,10 @@ public interface ActionToolbar<T> {
 
     void disableMenusAndClearButtons();
 
+    int getLeftPosition(ActionDescriptor<T> action);
+
+    int getTopPosition(ActionDescriptor<T> action);
+
     ActionToolbarView<T> getView();
 
     void hideAllMenus();

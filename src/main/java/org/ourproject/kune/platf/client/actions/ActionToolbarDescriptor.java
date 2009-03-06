@@ -26,7 +26,10 @@ import com.calclab.suco.client.events.Listener0;
 
 public abstract class ActionToolbarDescriptor<T> extends ActionDescriptor<T> {
 
+    public static final int NO_POSITION = -1;
     private ActionToolbarPosition actionToolbarPosition;
+
+    private int position = NO_POSITION;
 
     public ActionToolbarDescriptor(final AccessRolDTO accessRolDTO, final ActionToolbarPosition actionToolbarPosition,
             final Listener<T> onPerformCall) {
@@ -68,8 +71,26 @@ public abstract class ActionToolbarDescriptor<T> extends ActionDescriptor<T> {
         return actionToolbarPosition;
     }
 
+    /**
+     * Get the index position where this action will be inserted
+     * 
+     * @param position
+     */
+    public int getPosition() {
+        return position;
+    }
+
     public void setActionPosition(final ActionToolbarPosition actionToolbarPosition) {
         this.actionToolbarPosition = actionToolbarPosition;
+    }
+
+    /**
+     * Index position where this action will be inserted
+     * 
+     * @param position
+     */
+    public void setPosition(int position) {
+        this.position = position;
     }
 
 }

@@ -141,6 +141,10 @@
   margin: 1px;
 }
 
+.kune-WebSafePalette-popup {
+      z-index: 9999 !important;
+}
+
 .kune-WebSafePalette td {
   width: 12px;
   height: 10px;
