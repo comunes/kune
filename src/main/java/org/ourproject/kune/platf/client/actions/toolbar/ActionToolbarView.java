@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.client.actions.toolbar;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 
 public interface ActionToolbarView<T> extends View {
 
@@ -37,7 +38,11 @@ public interface ActionToolbarView<T> extends View {
 
     void disableAllMenuItems();
 
+    void hideAllMenus();
+
     void setButtonEnable(ActionDescriptor<T> action, boolean enable);
+
+    void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip, String newTitle);
 
     void setPushButtonPressed(ActionDescriptor<T> action, boolean pressed);
 

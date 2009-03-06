@@ -35,6 +35,14 @@ public class RTEditorPresenter implements RTEditor {
         top, snd
     };
 
+    private final String fontNames[] = { "Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet", "Verdana" };
+    private final String fontSizes[] = { "Extra small", "Very small", "Small", "Medium", "Large", "Very large",
+            "Extra large" };
+    private static final RichTextArea.FontSize[] fontSizesConstants = new RichTextArea.FontSize[] {
+            RichTextArea.FontSize.XX_SMALL, RichTextArea.FontSize.X_SMALL, RichTextArea.FontSize.SMALL,
+            RichTextArea.FontSize.MEDIUM, RichTextArea.FontSize.LARGE, RichTextArea.FontSize.X_LARGE,
+            RichTextArea.FontSize.XX_LARGE };
+
     private static final String EDIT_MENU = "Edit";
     private static final String INSERT_MENU = "Insert";
     private static final String FORMAT_MENU = "Format";
@@ -136,6 +144,11 @@ public class RTEditorPresenter implements RTEditor {
         createBasicActions();
     }
 
+    public void onEditorFocus() {
+        topBar.hideAllMenus();
+        sndBar.hideAllMenus();
+    }
+
     public void setExtended(boolean extended) {
         this.extended = extended;
     }
@@ -169,6 +182,7 @@ public class RTEditorPresenter implements RTEditor {
                         view.selectAll();
                     }
                 });
+        selectAll.setIconCls(getCssName(imgResources.selectall()));
         selectAll.setShortcut(new ActionShortcut(true, 'A'));
         selectAll.setTextDescription(i18n.t("Select all"));
         selectAll.setParentMenuTitle(i18n.t(EDIT_MENU));
@@ -275,6 +289,7 @@ public class RTEditorPresenter implements RTEditor {
         undo.setTextDescription(i18n.t("Undo"));
         undo.setParentMenuTitle(i18n.t(EDIT_MENU));
         undo.setAddCondition(canBeExtended);
+        undo.setIconCls(getCssName(imgResources.undo()));
 
         ActionToolbarMenuDescriptor<Object> redo = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -286,6 +301,28 @@ public class RTEditorPresenter implements RTEditor {
         redo.setTextDescription(i18n.t("Redo"));
         redo.setParentMenuTitle(i18n.t(EDIT_MENU));
         redo.setAddCondition(canBeExtended);
+        redo.setIconCls(getCssName(imgResources.redo()));
+
+        ActionToolbarButtonDescriptor<Object> undoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.undo();
+                    }
+                });
+        undoBtn.setToolTip(i18n.t("Undo"));
+        undoBtn.setAddCondition(canBeExtended);
+        undoBtn.setIconCls(getCssName(imgResources.undo()));
+
+        ActionToolbarButtonDescriptor<Object> redoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.redo();
+                    }
+                });
+        redoBtn.setToolTip(i18n.t("Redo"));
+        redoBtn.setAddCondition(canBeExtended);
+        redoBtn.setIconCls(getCssName(imgResources.redo()));
+        redoBtn.setRightSeparator(ActionToolbarButtonSeparator.separator);
 
         ActionToolbarMenuDescriptor<Object> copy = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -297,6 +334,7 @@ public class RTEditorPresenter implements RTEditor {
         copy.setTextDescription(i18n.t("Copy"));
         copy.setParentMenuTitle(i18n.t(EDIT_MENU));
         copy.setAddCondition(canBeExtended);
+        copy.setIconCls(getCssName(imgResources.copy()));
 
         ActionToolbarMenuDescriptor<Object> cut = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -308,6 +346,7 @@ public class RTEditorPresenter implements RTEditor {
         cut.setTextDescription(i18n.t("Cut"));
         cut.setParentMenuTitle(i18n.t(EDIT_MENU));
         cut.setAddCondition(canBeExtended);
+        cut.setIconCls(getCssName(imgResources.cut()));
 
         ActionToolbarMenuDescriptor<Object> paste = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -319,6 +358,7 @@ public class RTEditorPresenter implements RTEditor {
         paste.setTextDescription(i18n.t("Paste"));
         paste.setParentMenuTitle(i18n.t(EDIT_MENU));
         paste.setAddCondition(canBeExtended);
+        paste.setIconCls(getCssName(imgResources.paste()));
 
         ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 ActionToolbarPosition.topbar, new Listener0() {
@@ -326,6 +366,7 @@ public class RTEditorPresenter implements RTEditor {
                         NotifyUser.info("In dev");
                     }
                 });
+        editHtml.setIconCls(getCssName(imgResources.edithtml()));
         editHtml.setTextDescription(i18n.t("Edit HTML"));
         editHtml.setParentMenuTitle(i18n.t(EDIT_MENU));
         editHtml.setAddCondition(canBeExtended);
@@ -471,12 +512,40 @@ public class RTEditorPresenter implements RTEditor {
         removeFormat.setToolTip(i18n.t("Clear Formatting"));
         removeFormat.setShortcut(new ActionShortcut(true, ' ', "Space"));
         removeFormat.setAddCondition(canBeExtended);
+        removeFormat.setRightSeparator(ActionToolbarButtonSeparator.separator);
+
+        ActionToolbarButtonDescriptor<Object> insertTable = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.insertHtml("<table id=\"iorh\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">\n"
+                                + "<tbody>\n"
+                                + "<tr>\n"
+                                + "<td width=\"50%\"><br>\n"
+                                + "</td>\n"
+                                + "<td width=\"50%\"><br>\n"
+                                + "</td>\n"
+                                + "</tr>\n"
+                                + "<tr>\n"
+                                + "<td width=\"50%\"><br>\n"
+                                + "</td>\n"
+                                + "<td width=\"50%\"><br>\n"
+                                + "</td>\n"
+                                + "</tr>\n</tbody>\n</table>");
+                    }
+                });
+        insertTable.setIconCls(getCssName(imgResources.inserttable()));
+        insertTable.setToolTip(i18n.t("Insert Table ..."));
+        insertTable.setAddCondition(canBeExtended);
+        insertTable.setRightSeparator(ActionToolbarButtonSeparator.separator);
 
         topActions.add(withNoItem(selectAll));
+        sndActions.add(withNoItem(undoBtn));
+        sndActions.add(withNoItem(redoBtn));
         sndActions.add(withNoItem(bold));
         sndActions.add(withNoItem(italic));
         sndActions.add(withNoItem(underline));
         sndActions.add(withNoItem(strikethrough));
+
         sndActions.add(withNoItem(justifyLeft));
         sndActions.add(withNoItem(justifyCentre));
         sndActions.add(withNoItem(justifyRight));
@@ -494,12 +563,55 @@ public class RTEditorPresenter implements RTEditor {
         sndActions.add(withNoItem(increaseIndent));
         sndActions.add(withNoItem(ol));
         sndActions.add(withNoItem(ul));
+        sndActions.add(withNoItem(removeFormat));
         sndActions.add(withNoItem(hrButton));
         sndActions.add(withNoItem(img));
         sndActions.add(withNoItem(createLink));
         sndActions.add(withNoItem(removeLink));
-        sndActions.add(withNoItem(removeFormat));
+        sndActions.add(withNoItem(insertTable));
         topActions.add(withNoItem(comment));
+
+        for (String fontName : this.fontNames) {
+            ActionToolbarMenuDescriptor<Object> fontNameAction = createFontNameAction(canBeBasic, fontName);
+            sndActions.add(withNoItem(fontNameAction));
+        }
+        for (int fontSize = 0; fontSize < fontSizes.length; fontSize++) {
+            ActionToolbarMenuDescriptor<Object> fontSizeAction = createFontSizeAction(canBeBasic, fontSize, fontSizes[fontSize]);
+            sndActions.add(withNoItem(fontSizeAction));
+        }
+
+    }
+
+    private ActionToolbarMenuDescriptor<Object> createFontNameAction(ActionAddCondition<Object> canBeBasic,
+            final String fontName) {
+        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.setFontName(fontName);
+                        fireOnEdit();
+                    }
+                });
+        font.setTextDescription("<span style=\"font-family: " + fontName + "\">" + fontName + "</span>");
+        font.setParentMenuTooltip(i18n.t("Font"));
+        font.setParentMenuIconCls(getCssName(imgResources.charfontname()));
+        font.setAddCondition(canBeBasic);
+        return font;
+    }
+
+    private ActionToolbarMenuDescriptor<Object> createFontSizeAction(ActionAddCondition<Object> canBeBasic,
+            final int fontSize, String fontSizeName) {
+        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                ActionToolbarPosition.topbar, new Listener0() {
+                    public void onEvent() {
+                        view.setFontSize(fontSizesConstants[fontSize]);
+                        fireOnEdit();
+                    }
+                });
+        font.setTextDescription("<font size=\"" + (fontSize + 1) + "\">" + i18n.t(fontSizeName) + "</font>");
+        font.setParentMenuTooltip(i18n.t("Font size"));
+        font.setParentMenuIconCls(getCssName(imgResources.fontheight()));
+        font.setAddCondition(canBeBasic);
+        return font;
     }
 
     private String getCssName(ImageResource imageResource) {

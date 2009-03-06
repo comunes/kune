@@ -24,8 +24,14 @@ public interface RTEImgResources extends ImmutableResourceBundle {
     @Resource("charfontname.png")
     public ImageResource charfontname();
 
+    @Resource("copy.png")
+    public ImageResource copy();
+
     @Resource("rteimg.css")
     public CssResource css();
+
+    @Resource("cut.png")
+    public ImageResource cut();
 
     @Resource("decrementindent.png")
     public ImageResource decrementindent();
@@ -54,6 +60,15 @@ public interface RTEImgResources extends ImmutableResourceBundle {
     @Resource("incrementindent.png")
     public ImageResource incrementindent();
 
+    @Resource("insertspreadsheet.png")
+    public ImageResource insertspreadsheet();
+
+    @Resource("insertsymbol.png")
+    public ImageResource insertsymbol();
+
+    @Resource("inserttable.png")
+    public ImageResource inserttable();
+
     @Resource("italic.png")
     public ImageResource italic();
 
@@ -63,8 +78,23 @@ public interface RTEImgResources extends ImmutableResourceBundle {
     @Resource("linkbreak.png")
     public ImageResource linkbreak();
 
+    @Resource("paste.png")
+    public ImageResource paste();
+
+    @Resource("redo.png")
+    public ImageResource redo();
+
     @Resource("removeFormat.png")
     public ImageResource removeFormat();
+
+    @Resource("save.png")
+    public ImageResource save();
+
+    @Resource("selectall.png")
+    public ImageResource selectall();
+
+    @Resource("specialchars.png")
+    public ImageResource specialchars();
 
     @Resource("strikeout.png")
     public ImageResource strikeout();
@@ -77,5 +107,8 @@ public interface RTEImgResources extends ImmutableResourceBundle {
 
     @Resource("underline.png")
     public ImageResource underline();
+
+    @Resource("undo.png")
+    public ImageResource undo();
 
 }

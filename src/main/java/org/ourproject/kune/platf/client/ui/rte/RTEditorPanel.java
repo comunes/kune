@@ -18,6 +18,7 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -182,30 +183,8 @@ public class RTEditorPanel implements RTEditorView {
         basic.setFontName(name);
     }
 
-    public void setFontSize(int size) {
-        switch (size) {
-        case 1:
-            basic.setFontSize(FontSize.XX_SMALL);
-            break;
-        case 2:
-            basic.setFontSize(FontSize.X_SMALL);
-            break;
-        case 3:
-            basic.setFontSize(FontSize.SMALL);
-            break;
-        case 4:
-            basic.setFontSize(FontSize.MEDIUM);
-            break;
-        case 5:
-            basic.setFontSize(FontSize.LARGE);
-            break;
-        case 6:
-            basic.setFontSize(FontSize.X_LARGE);
-            break;
-        case 7:
-            basic.setFontSize(FontSize.XX_LARGE);
-            break;
-        }
+    public void setFontSize(FontSize size) {
+        basic.setFontSize(size);
     }
 
     public void setForeColor(String color) {
@@ -249,6 +228,14 @@ public class RTEditorPanel implements RTEditorView {
     }
 
     private void createListeners() {
+        rta.addFocusListener(new FocusListener() {
+            public void onFocus(Widget sender) {
+                presenter.onEditorFocus();
+            }
+
+            public void onLostFocus(Widget sender) {
+            }
+        });
         rta.addClickListener(new ClickListener() {
             public void onClick(Widget sender) {
                 if (sender == rta) {

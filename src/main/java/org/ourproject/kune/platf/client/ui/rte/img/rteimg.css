@@ -89,3 +89,47 @@
 @sprite div .k-rte-alignleft {
   gwt-image: 'alignleft';
 }
+
+@sprite div .k-rte-specialchars {
+  gwt-image: 'specialchars';
+}
+
+@sprite div .k-rte-copy {
+  gwt-image: 'copy';
+}
+
+@sprite div .k-rte-cut {
+  gwt-image: 'cut';
+}
+
+@sprite div .k-rte-insertspreadsheet {
+  gwt-image: 'insertspreadsheet';
+}
+
+@sprite div .k-rte-insertsymbol {
+  gwt-image: 'insertsymbol';
+}
+
+@sprite div .k-rte-inserttable {
+  gwt-image: 'inserttable';
+}
+
+@sprite div .k-rte-paste {
+  gwt-image: 'paste';
+}
+
+@sprite div .k-rte-redo {
+  gwt-image: 'redo';
+}
+
+@sprite div .k-rte-save {
+  gwt-image: 'save';
+}
+
+@sprite div .k-rte-selectall {
+  gwt-image: 'selectall';
+}
+
+@sprite div .k-rte-undo {
+  gwt-image: 'undo';
+}

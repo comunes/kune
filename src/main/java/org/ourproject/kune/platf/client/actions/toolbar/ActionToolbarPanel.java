@@ -125,11 +125,12 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
         final String menuTitle = action.getParentMenuTitle();
         final String menuSubTitle = action.getParentSubMenuTitle();
+        final String menuTooltip = action.getParentMenuTooltip();
         final ActionToolbarPosition pos = action.getActionPosition();
-        final String itemKey = genMenuKey(pos, menuTitle, menuSubTitle, action.getText());
+        final String itemKey = genMenuKey(pos, menuTitle, action.getParentMenuTooltip(), menuSubTitle, action.getText());
         Item item = menuItems.get(itemKey);
         if (item == null) {
-            item = createToolbarMenu(pos, menuTitle, menuSubTitle, actionItem, generateIdIfEmpty(action));
+            item = createToolbarMenu(pos, menuTitle, menuTooltip, menuSubTitle, actionItem, generateIdIfEmpty(action));
             menuItems.put(itemKey, item);
         }
         setEnableMenuItem(item, enable);
@@ -167,12 +168,29 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         }
     }
 
+    public void hideAllMenus() {
+        for (Menu menu : toolbarMenus.values()) {
+            menu.hide(true);
+        }
+    }
+
     public void setButtonEnable(final ActionDescriptor<T> action, final boolean enable) {
         final ToolbarButton button = findButton(action);
         if (button != null) {
             setEnableButton(button, enable);
         } else {
             Log.error("Tryng to enable/disable a non existent toolbar button");
+        }
+    }
+
+    public void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip,
+            String newTitle) {
+        final String menuKey = genMenuKey(action.getActionPosition(), origTitle, origTooltip, null, null);
+        Menu menu = toolbarMenus.get(menuKey);
+        if (menu != null) {
+            menu.setTitle(newTitle);
+        } else {
+            Log.error("Tryng to rename a non existent menu");
         }
     }
 
@@ -203,7 +221,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     private Item createToolbarMenu(final ActionToolbarPosition toolBarPos, final String menuTitle,
-            final String menuSubTitle, final ActionItem<T> actionItem, String id) {
+            final String menuTooltip, final String menuSubTitle, final ActionItem<T> actionItem, String id) {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
         final Item item;
         if (action instanceof ActionToolbarMenuRadioDescriptor) {
@@ -244,8 +262,8 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             item.setId(id);
         }
 
-        final String menuKey = genMenuKey(toolBarPos, menuTitle, null, null);
-        final String subMenuKey = genMenuKey(toolBarPos, menuTitle, menuSubTitle, null);
+        final String menuKey = genMenuKey(toolBarPos, menuTitle, menuTooltip, null, null);
+        final String subMenuKey = genMenuKey(toolBarPos, menuTitle, menuTooltip, menuSubTitle, null);
         Menu menu = toolbarMenus.get(menuKey);
         Menu subMenu = toolbarMenus.get(subMenuKey);
         if (menuSubTitle != null) {
@@ -254,7 +272,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
                 final MenuItem subMenuItem = new MenuItem(menuSubTitle, subMenu);
                 if (menu == null) {
                     menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), action.getParentMenuIconCls(),
-                            menuTitle, menuKey);
+                            menuTitle, menuKey, "");
                 }
                 menu.addItem(subMenuItem);
                 toolbarMenus.put(subMenuKey, subMenu);
@@ -264,7 +282,8 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         } else {
             // Menu action without submenu
             if (menu == null) {
-                menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), null, menuTitle, menuKey);
+                menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), action.getParentMenuIconCls(),
+                        menuTitle, menuKey, action.getParentMenuTooltip());
             }
             menu.addItem(item);
         }
@@ -272,8 +291,9 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     private Menu createToolbarMenu(final ActionToolbarPosition barPosition, final String iconUrl, final String iconCls,
-            final String menuTitle, final String menuKey) {
+            final String menuTitle, final String menuKey, final String menuTooltip) {
         final Menu menu = new Menu();
+        menu.setShadow(true);
         final ToolbarButton toolbarMenu = new ToolbarButton(menuTitle);
         toolbarMenu.setMenu(menu);
         if (iconUrl != null) {
@@ -281,6 +301,9 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         }
         if (iconCls != null) {
             toolbarMenu.setIconCls(iconCls);
+        }
+        if (menuTooltip != null) {
+            toolbarMenu.setTooltip(menuTooltip);
         }
         toolbarMenus.put(menuKey, menu);
         add(barPosition, toolbarMenu);
@@ -317,10 +340,10 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         return action.getText() + action.getShortcutToS(i18n);
     }
 
-    private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuSubTitle,
-            final String actionText) {
+    private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuTooltip,
+            final String menuSubTitle, final String actionText) {
 
-        final String basePart = "km-atp-menu-" + pos.toString().substring(0, 2) + "-" + menuTitle;
+        final String basePart = "km-atp-menu-" + pos.toString().substring(0, 2) + "-" + menuTitle + "-" + menuTooltip;
         final String subMenuPart = menuSubTitle != null ? "-subm-" + menuSubTitle : "";
         final String itemPart = actionText != null ? "-item-" + actionText : "";
         return basePart + subMenuPart + itemPart;

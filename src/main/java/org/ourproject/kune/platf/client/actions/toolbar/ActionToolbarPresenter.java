@@ -74,8 +74,17 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         return view;
     }
 
+    public void hideAllMenus() {
+        view.hideAllMenus();
+    }
+
     public void setButtonEnable(ActionDescriptor<T> action, boolean enable) {
         view.setButtonEnable(action, enable);
+    }
+
+    public void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip,
+            String newTitle) {
+        view.setParentMenuTitle(action, origTitle, origTooltip, newTitle);
     }
 
     public void setPushButtonPressed(ActionDescriptor<T> action, boolean pressed) {

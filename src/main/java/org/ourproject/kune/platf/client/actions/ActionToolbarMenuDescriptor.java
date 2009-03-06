@@ -31,6 +31,7 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
     private String parentMenuIconUrl;
     private String parentMenuIconCls;
     private String parentSubMenuTitle;
+    private String parentMenuTooltip;
 
     public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
             final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall) {
@@ -78,6 +79,10 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
         return parentMenuTitle;
     }
 
+    public String getParentMenuTooltip() {
+        return parentMenuTooltip;
+    }
+
     public String getParentSubMenuTitle() {
         return parentSubMenuTitle;
     }
@@ -92,6 +97,10 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
     public void setParentMenuTitle(final String parentMenuTitle) {
         this.parentMenuTitle = parentMenuTitle;
+    }
+
+    public void setParentMenuTooltip(String parentMenuTooltip) {
+        this.parentMenuTooltip = parentMenuTooltip;
     }
 
     public void setParentSubMenuTitle(final String parentSubMenuTitle) {

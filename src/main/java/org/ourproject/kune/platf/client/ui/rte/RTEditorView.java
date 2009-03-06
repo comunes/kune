@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.ui.rte;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 
 public interface RTEditorView extends View {
 
@@ -67,7 +68,7 @@ public interface RTEditorView extends View {
 
     void setFontName(String name);
 
-    void setFontSize(int size);
+    void setFontSize(FontSize fontSize);
 
     void setForeColor(String color);
 
