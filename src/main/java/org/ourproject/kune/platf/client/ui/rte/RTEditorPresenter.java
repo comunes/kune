@@ -216,7 +216,7 @@ public class RTEditorPresenter implements RTEditor {
         subscript.setParentMenuTitle(i18n.t(FORMAT_MENU));
         subscript.setTextDescription(i18n.t("Subscript"));
         subscript.setIconCls(getCssName(imgResources.subscript()));
-        subscript.setShortcut(new ActionShortcut(true, ','));
+        subscript.setShortcut(new ActionShortcut(true, '0'));
         subscript.setAddCondition(canBeBasic);
 
         ActionToolbarMenuDescriptor<Object> superscript = new ActionToolbarMenuDescriptor<Object>(accessRol,
@@ -228,7 +228,7 @@ public class RTEditorPresenter implements RTEditor {
         superscript.setParentMenuTitle(i18n.t(FORMAT_MENU));
         superscript.setTextDescription(i18n.t("Superscript"));
         superscript.setIconCls(getCssName(imgResources.superscript()));
-        superscript.setShortcut(new ActionShortcut(true, '.'));
+        superscript.setShortcut(new ActionShortcut(true, '9'));
         superscript.setAddCondition(canBeBasic);
 
         ActionToolbarButtonDescriptor<Object> justifyLeft = new ActionToolbarButtonDescriptor<Object>(accessRol,
@@ -421,7 +421,7 @@ public class RTEditorPresenter implements RTEditor {
         ul.setIconCls(getCssName(imgResources.defaultbullet()));
         ul.setToolTip(i18n.t("Bullet List"));
         ul.setShortcut(new ActionShortcut(true, '8'));
-        ul.setRightSeparator(ActionToolbarButtonSeparator.spacer);
+        ul.setRightSeparator(ActionToolbarButtonSeparator.separator);
         ul.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> img = new ActionToolbarButtonDescriptor<Object>(accessRol,
@@ -490,11 +490,11 @@ public class RTEditorPresenter implements RTEditor {
         topActions.add(withNoItem(hr));
         topActions.add(withNoItem(subscript));
         topActions.add(withNoItem(superscript));
-        sndActions.add(withNoItem(hrButton));
         sndActions.add(withNoItem(decreaseIndent));
         sndActions.add(withNoItem(increaseIndent));
         sndActions.add(withNoItem(ol));
         sndActions.add(withNoItem(ul));
+        sndActions.add(withNoItem(hrButton));
         sndActions.add(withNoItem(img));
         sndActions.add(withNoItem(createLink));
         sndActions.add(withNoItem(removeLink));

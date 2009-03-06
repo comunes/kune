@@ -57,9 +57,9 @@ public class RTEditorPanel implements RTEditorView {
     public void addComment(String userName) {
         String time = i18n.formatDateWithLocale(new Date(), true);
         Element span = DOM.createSpan();
-        span.setInnerText(i18n.t("type here") + " -" + userName + " " + time);
+        span.setInnerHTML("<em>" + i18n.t("type here") + "</em> -" + userName + " " + time);
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
-        insertHtml(span.getString());
+        insertHtml(span.getString() + " ");
     }
 
     public void adjustSize(int height) {
@@ -279,10 +279,12 @@ public class RTEditorPanel implements RTEditorView {
                     updateStatus();
                     fireEdit();
                     if (modifiers != 0) {
+                        Log.debug("RTE shortcut pressed (" + modifiers + ", " + keyCode + ")");
                         ActionItem<Object> actionItem = shortcuts.get(new ActionShortcut(keyCode, modifiers));
                         if (actionItem != null) {
-                            Log.debug("RTE shortcut pressed (" + modifiers + ", " + keyCode + ")");
                             actionManager.doAction(actionItem);
+                        } else {
+                            Log.debug("...but not mapped to any command");
                         }
                     }
                 }

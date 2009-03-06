@@ -3,10 +3,9 @@ body {
   margin: 5px;
 }
 
-.k-rte-comment span {
+.k-rte-comment {
   border:1px dashed #C0C0C0;
-  font-size:85%;
   line-height:1.4;
-  padding:1px;
+  padding:3px;
   background-color:#D7FFD7;
 }

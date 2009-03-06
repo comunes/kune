@@ -28,6 +28,15 @@ public class ActionShortcutTest {
     }
 
     @Test
+    public void ctrl_coma() {
+        ActionShortcut shortcut = new ActionShortcut(true, ',');
+        assertEquals(" (Ctrl+,)", shortcut.toString(i18n));
+        assertTrue(shortcut.is(',', KeyboardListener.MODIFIER_CTRL));
+        assertTrue(!shortcut.is(',', KeyboardListener.MODIFIER_ALT));
+        assertTrue(!shortcut.is(',', KeyboardListener.MODIFIER_SHIFT));
+    }
+
+    @Test
     public void ctrl_s() {
         ActionShortcut shortcut = new ActionShortcut(true, 's');
         assertEquals(" (Ctrl+S)", shortcut.toString(i18n));

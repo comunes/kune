@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2006 Robert Hanson <iamroberthanson AT gmail.com>
  *
@@ -30,22 +29,52 @@ public class Location {
     private String queryString;
     private HashMap<String, String> paramMap;
 
+    /**
+     * sample: #site.docs.3.1
+     **/
     public String getHash() {
         return hash;
     }
 
+    /**
+     * sample: locahost:8080
+     * 
+     * @return
+     */
     public String getHost() {
         return host;
     }
 
+    /**
+     * sample: locahost
+     * 
+     * @return
+     */
     public String getHostName() {
         return hostName;
     }
 
+    /**
+     * sample:
+     * http://localhost:8080/kune/#site.docs.3.1?locale=en&log_level=INFO
+     **/
     public String getHref() {
         return href;
     }
 
+    public String getParameter(final String name) {
+        return paramMap.get(name);
+    }
+
+    public Map<String, String> getParameterMap() {
+        return paramMap;
+    }
+
+    /**
+     * sample: /kune/
+     * 
+     * @return
+     */
     public String getPath() {
         return path;
     }
@@ -58,6 +87,11 @@ public class Location {
         return protocol;
     }
 
+    /**
+     * sample: ?locale=en&log_level=INFO
+     * 
+     * @return
+     */
     public String getQueryString() {
         return queryString;
     }
@@ -97,8 +131,8 @@ public class Location {
         if (queryString != null && queryString.length() > 1) {
             String qs = queryString.substring(1);
             String[] kvPairs = qs.split("&");
-            for (int i = 0; i < kvPairs.length; i++) {
-                String[] kv = kvPairs[i].split("=");
+            for (String kvPair : kvPairs) {
+                String[] kv = kvPair.split("=");
                 if (kv.length > 1) {
                     paramMap.put(kv[0], unescape(kv[1]));
                 } else {
@@ -109,15 +143,7 @@ public class Location {
     }
 
     private native String unescape(String val) /*-{
-                                   return unescape(val);
-                               }-*/;
-
-    public String getParameter(final String name) {
-        return paramMap.get(name);
-    }
-
-    public Map<String, String> getParameterMap() {
-        return paramMap;
-    }
+                                               return unescape(val);
+                                           }-*/;
 
 }
