@@ -94,8 +94,7 @@ public class SimpleToolbar extends Composite {
     }
 
     public void setCleanStyle() {
-        setStyleName("x-toolbar");
-        addStyleName("x-panel");
+        setBasicStyle();
         addStyleName("k-blank-toolbar");
     }
 
@@ -103,5 +102,15 @@ public class SimpleToolbar extends Composite {
     public void setHeight(String height) {
         mainPanel.setHeight(height);
         mainPanel.setCellHeight(childPanel, height);
+    }
+
+    public void setNormalStyle() {
+        setBasicStyle();
+        addStyleName("k-toolbar-bottom-line");
+    }
+
+    private void setBasicStyle() {
+        setStyleName("x-toolbar");
+        addStyleName("x-panel");
     }
 }

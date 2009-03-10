@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.client.actions;
 
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 
 import com.calclab.suco.client.events.Listener;
@@ -30,6 +29,8 @@ import com.calclab.suco.client.events.Listener0;
  * The Class ActionDescriptor.
  */
 public abstract class ActionDescriptor<T> {
+
+    public static final int NO_POSITION = -1;
 
     /** The icon url. */
     private String iconUrl;
@@ -77,6 +78,8 @@ public abstract class ActionDescriptor<T> {
     private String id;
 
     private ActionShortcut shortcut;
+
+    private int position = NO_POSITION;
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall) {
         this.accessRol = accessRolDTO;
@@ -219,12 +222,21 @@ public abstract class ActionDescriptor<T> {
         return id;
     }
 
+    /**
+     * Get the index position where this action will be inserted
+     * 
+     * @param position
+     */
+    public int getPosition() {
+        return position;
+    }
+
     public ActionShortcut getShortcut() {
         return shortcut;
     }
 
-    public String getShortcutToS(I18nTranslationService i18n) {
-        return shortcut == null ? "" : shortcut.toString(i18n);
+    public String getShortcutToS() {
+        return shortcut == null ? "" : shortcut.toString();
     }
 
     /**
@@ -377,6 +389,15 @@ public abstract class ActionDescriptor<T> {
      */
     public void setMustBeConfirmed(final boolean mustBeConfirmed) {
         this.mustBeConfirmed = mustBeConfirmed;
+    }
+
+    /**
+     * Index position where this action will be inserted
+     * 
+     * @param position
+     */
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public void setShortcut(ActionShortcut shortcut) {

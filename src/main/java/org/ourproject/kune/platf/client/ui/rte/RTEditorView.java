@@ -6,7 +6,7 @@ import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 
 public interface RTEditorView extends View {
 
-    void addActions(ActionItemCollection<Object> extendedTopActions);
+    void addActions(ActionItemCollection<Object> actions);
 
     void addComment(String userName);
 
@@ -25,6 +25,10 @@ public interface RTEditorView extends View {
     void delete();
 
     void focus();
+
+    String getHtml();
+
+    String getText();
 
     void insertHorizontalRule();
 
@@ -75,6 +79,10 @@ public interface RTEditorView extends View {
     void setFontSize(FontSize fontSize);
 
     void setForeColor(String color);
+
+    void setHtml(String html);
+
+    void setText(String text);
 
     void toggleBold();
 

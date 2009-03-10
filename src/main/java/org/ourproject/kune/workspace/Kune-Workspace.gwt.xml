@@ -2,47 +2,5 @@
 <module>
     <inherits name='org.ourproject.kune.platf.Kune-Platform' />
     <inherits name="com.google.gwt.core.Core" />
-    <inherits name="com.google.gwt.user.UserAgent" />
-    <!-- RTE css inject -->
-    <!-- See gwt-user: com/google/gwt/user/RichText.gwt.xml -->
-
-    <!-- IE-specific implementation -->
-    <replace-with
-        class="org.ourproject.kune.workspace.client.editor.WrappedRichTextAreaImplIE6">
-        <when-type-is
-            class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl" />
-        <when-property-is name="user.agent" value="ie6" />
-    </replace-with>
-
-    <!-- Mozilla-specific implementation -->
-    <replace-with
-        class="org.ourproject.kune.workspace.client.editor.WrappedRichTextAreaImplMozilla">
-        <when-type-is
-            class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl" />
-        <any>
-            <when-property-is name="user.agent" value="gecko1_8" />
-            <when-property-is name="user.agent" value="gecko" />
-        </any>
-    </replace-with>
-
-    <!-- Safari-specific implementation -->
-    <replace-with
-        class="org.ourproject.kune.workspace.client.editor.WrappedRichTextAreaImplSafari">
-        <when-type-is
-            class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl" />
-        <any>
-            <when-property-is name="user.agent" value="safari" />
-        </any>
-    </replace-with>
-
-    <!-- Opera-specific implementation -->
-    <replace-with
-        class="org.ourproject.kune.workspace.client.editor.WrappedRichTextAreaImplOpera">
-        <when-type-is
-            class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl" />
-        <any>
-            <when-property-is name="user.agent" value="opera" />
-        </any>
-    </replace-with>
 
 </module>

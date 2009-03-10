@@ -124,7 +124,7 @@ public class KuneErrorHandler {
         if (showException) {
             Log.debug("Exception in KuneErrorHandler", e);
         } else {
-            Log.debug(e.getMessage());
+            Log.debug("Exception in KuneErrorHandler: " + e.getMessage());
         }
     }
 

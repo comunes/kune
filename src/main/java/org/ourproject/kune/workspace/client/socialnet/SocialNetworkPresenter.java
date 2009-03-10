@@ -48,6 +48,9 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class SocialNetworkPresenter {
 
+    protected final ActionToolbarPosition membersBottom = new ActionToolbarPosition("sn-bottomtoolbar");
+    protected final ActionToolbarPosition buddiesBottom = new ActionToolbarPosition("sn-bottomtoolbar");
+
     protected MenuItem<GroupDTO> changeToCollabMenuItem;
     protected MenuItem<GroupDTO> removeMemberMenuItem;
     protected MenuItem<GroupDTO> changeToAdminMenuItem;
@@ -139,8 +142,8 @@ public class SocialNetworkPresenter {
     }
 
     private void createButtons() {
-        participate = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer,
-                ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+        participate = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, membersBottom,
+                new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         NotifyUser.showProgressProcessing();
                         snServiceProvider.get().requestJoinGroup(session.getUserHash(),
@@ -174,7 +177,7 @@ public class SocialNetworkPresenter {
             }
         });
 
-        unJoin = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Editor, ActionToolbarPosition.bottombar,
+        unJoin = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Editor, membersBottom,
                 new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         removeMemberAction();

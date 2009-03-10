@@ -20,58 +20,44 @@
 package org.ourproject.kune.workspace.client.skel;
 
 import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 
 import com.calclab.suco.client.ioc.Provider;
 
 public class ActionCntCtxToolbarPanel<T> extends ActionToolbarPanel<T> {
 
-    public enum Position {
-        content, context
-    }
+    Toolbar wsToolbar;
 
-    private final Position position;
-    private final WorkspaceSkeleton ws;
+    public ActionCntCtxToolbarPanel(ActionToolbarPosition position,
+            final Provider<ActionManager> actionManagerProvider, final WorkspaceSkeleton ws) {
+        super(actionManagerProvider);
+        EntityWorkspace entityWorkspace = ws.getEntityWorkspace();
+        if (position.equals(AbstractFoldableContentActions.CONTENT_TOPBAR)) {
+            wsToolbar = entityWorkspace.getContentTopBar();
+        } else if (position.equals(AbstractFoldableContentActions.CONTENT_BOTTOMBAR)) {
+            wsToolbar = entityWorkspace.getContentBottomBar();
+        } else if (position.equals(AbstractFoldableContentActions.CONTEXT_TOPBAR)) {
+            wsToolbar = entityWorkspace.getContextTopBar();
+        } else if (position.equals(AbstractFoldableContentActions.CONTEXT_BOTTOMBAR)) {
+            wsToolbar = entityWorkspace.getContextBottomBar();
+        }
 
-    public ActionCntCtxToolbarPanel(final Position position, final Provider<ActionManager> actionManagerProvider,
-            final WorkspaceSkeleton ws, I18nTranslationService i18n) {
-        super(actionManagerProvider, i18n);
-        this.position = position;
-        this.ws = ws;
     }
 
     @Override
     public void attach() {
-        if (!topbar.isAttached()) {
-            switch (position) {
-            case content:
-                ws.getEntityWorkspace().getContentTopBar().removeAll();
-                ws.getEntityWorkspace().getContentTopBar().add(topbar);
-                ws.getEntityWorkspace().getContentBottomBar().add(bottombar);
-                break;
-            case context:
-            default:
-                ws.getEntityWorkspace().getContextTopBar().removeAll();
-                ws.getEntityWorkspace().getContextTopBar().add(topbar);
-                ws.getEntityWorkspace().getContextBottomBar().add(bottombar);
-            }
+        if (!toolbar.isAttached()) {
+            wsToolbar.removeAll();
+            wsToolbar.add(toolbar);
         }
     }
 
     @Override
     public void detach() {
-        if (topbar.isAttached()) {
-            switch (position) {
-            case content:
-                ws.getEntityWorkspace().getContentTopBar().remove(topbar);
-                ws.getEntityWorkspace().getContentBottomBar().remove(bottombar);
-                break;
-            case context:
-            default:
-                ws.getEntityWorkspace().getContextTopBar().remove(topbar);
-                ws.getEntityWorkspace().getContextBottomBar().remove(bottombar);
-            }
+        if (toolbar.isAttached()) {
+            wsToolbar.remove(toolbar);
         }
     }
 }

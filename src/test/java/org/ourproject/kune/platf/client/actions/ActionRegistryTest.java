@@ -15,6 +15,7 @@ import com.calclab.suco.client.events.Listener;
 public class ActionRegistryTest {
 
     private static final String DEF_CONTENT_TYPE_ID = "test";
+    private static final ActionToolbarPosition SOME_ID = new ActionToolbarPosition("some-id");
     private ActionRegistry<StateToken> registry;
     private ActionToolbarMenuAndItemDescriptor<StateToken> adminAction;
     private ActionToolbarMenuAndItemDescriptor<StateToken> editorAction;
@@ -36,13 +37,13 @@ public class ActionRegistryTest {
     public void before() {
         session = Mockito.mock(Session.class);
         registry = new ActionRegistry<StateToken>();
-        adminAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Administrator,
-                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+        adminAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Administrator, SOME_ID,
+                new Listener<StateToken>() {
                     public void onEvent(final StateToken parameter) {
                     }
                 });
-        editorAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
-                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+        editorAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor, SOME_ID,
+                new Listener<StateToken>() {
                     public void onEvent(final StateToken parameter) {
                     }
                 });

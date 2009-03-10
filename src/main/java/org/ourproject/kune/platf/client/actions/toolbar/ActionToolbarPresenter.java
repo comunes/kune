@@ -24,8 +24,11 @@ import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuAndItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescriptor;
 
 import com.allen_sauer.gwt.log.client.Log;
 
@@ -36,15 +39,24 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         this.view = toolbar;
     }
 
-    public void addActions(final ActionItemCollection<T> actions) {
+    public void addActions(final ActionItemCollection<T> actions, ActionToolbarPosition position) {
         for (final ActionItem<T> actionItem : actions) {
             final ActionDescriptor<T> action = actionItem.getAction();
             if (actionItem.mustBeAdded()) {
                 if (isToolbarMenu(action)) {
-                    view.addMenuAction(actionItem, actionItem.mustBeEnabled());
+                    if (addInPosition(action, position)) {
+                        view.addMenuAction(actionItem, actionItem.mustBeEnabled());
+                    }
                 } else {
-                    if (isToolbarButton(action)) {
-                        view.addButtonAction(actionItem, actionItem.mustBeEnabled());
+                    if (isToolbarPushButton(action)) {
+                        if (addInPosition(action, position)) {
+                            view.addButtonAction(actionItem, actionItem.mustBeEnabled(), true,
+                                    actionItem.mustBePressed());
+                        }
+                    } else if (isToolbarButton(action)) {
+                        if (addInPosition(action, position)) {
+                            view.addButtonAction(actionItem, actionItem.mustBeEnabled(), false, false);
+                        }
                     } else {
                         Log.error("Code error: Not an ActionMenuDescriptor or ActionButtonDescriptor: "
                                 + action.getText());
@@ -90,6 +102,14 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         view.setButtonEnable(action, enable);
     }
 
+    public void setCleanStyle() {
+        view.setCleanStyle();
+    }
+
+    public void setNormalStyle() {
+        view.setNormalStyle();
+    }
+
     public void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip,
             String newTitle) {
         view.setParentMenuTitle(action, origTitle, origTooltip, newTitle);
@@ -99,6 +119,13 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         view.setPushButtonPressed(action, pressed);
     }
 
+    private boolean addInPosition(ActionDescriptor<T> action, ActionToolbarPosition position) {
+        if (position.equals(IN_ANY) || ((ActionToolbarDescriptor<T>) action).getActionPosition().equals(position)) {
+            return true;
+        }
+        return false;
+    }
+
     private boolean isToolbarButton(final ActionDescriptor<T> action) {
         return action instanceof ActionToolbarButtonDescriptor
                 || action instanceof ActionToolbarButtonAndItemDescriptor;
@@ -106,5 +133,9 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
 
     private boolean isToolbarMenu(final ActionDescriptor<T> action) {
         return action instanceof ActionToolbarMenuDescriptor || action instanceof ActionToolbarMenuAndItemDescriptor;
+    }
+
+    private boolean isToolbarPushButton(ActionDescriptor<T> action) {
+        return action instanceof ActionToolbarPushButtonDescriptor;
     }
 }

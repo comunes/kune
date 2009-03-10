@@ -24,27 +24,21 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.ActionPressedCondition;
-import org.ourproject.kune.platf.client.actions.ActionShortcut;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
-import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
-import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescriptor;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
-import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ToolbarButton;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.CheckItem;
 import com.gwtext.client.widgets.menu.Item;
@@ -54,76 +48,41 @@ import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
 public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 
-    private final HashMap<String, Menu> toolbarMenus;
-    private final HashMap<String, ToolbarButton> toolbarButtons;
+    private final HashMap<String, Menu> menus;
     private final HashMap<String, Item> menuItems;
+    private final HashMap<String, ToolbarButton> buttons;
     private final Provider<ActionManager> actionManagerProvider;
-    protected final SimpleToolbar topbar;
-    protected final SimpleToolbar bottombar;
-    private final I18nTranslationService i18n;
+    protected final SimpleToolbar toolbar;
 
-    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider, I18nTranslationService i18n) {
-        this.i18n = i18n;
-        topbar = new SimpleToolbar();
-        bottombar = new SimpleToolbar();
-        topbar.setWidth("100%");
-        bottombar.setWidth("100%");
+    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider) {
+        toolbar = new SimpleToolbar();
+        toolbar.setWidth("100%");
         this.actionManagerProvider = actionManagerProvider;
 
-        toolbarMenus = new HashMap<String, Menu>();
-        toolbarButtons = new HashMap<String, ToolbarButton>();
+        menus = new HashMap<String, Menu>();
         menuItems = new HashMap<String, Item>();
+        buttons = new HashMap<String, ToolbarButton>();
     }
 
-    public void addButtonAction(final ActionItem<T> actionItem, final boolean enable) {
-        final ToolbarButton button = new ToolbarButton();
+    public ActionToolbarButton<T> addButtonAction(final ActionItem<T> actionItem, final boolean enable,
+            final boolean isPushButton, final boolean pressed) {
         final ActionToolbarButtonDescriptor<T> action = (ActionToolbarButtonDescriptor<T>) actionItem.getAction();
-        T item = actionItem.getItem();
-        final ActionToolbarPosition pos = action.getActionPosition();
-        final String text = action.getText();
-        final String iconUrl = action.getIconUrl();
-        final String iconCls = action.getIconCls();
-        if (text != null) {
-            button.setText(text);
-        }
-        String id = generateIdIfEmpty(action);
-        button.setId(id);
-        if (action instanceof ActionToolbarPushButtonDescriptor) {
-            button.setEnableToggle(true);
-            ActionPressedCondition<T> mustInitialyPressed = ((ActionToolbarPushButtonDescriptor<T>) action).getMustInitialyPressed();
-            button.setPressed(mustInitialyPressed != null && mustInitialyPressed.mustBePressed(item));
-        }
-        button.addListener(new ButtonListenerAdapter() {
-            @Override
-            public void onClick(final Button button, final EventObject e) {
-                actionManagerProvider.get().doAction(actionItem);
-            }
-        });
-        if (iconUrl != null) {
-            button.setIcon(iconUrl);
-        }
-        if (iconCls != null) {
-            button.setIconCls(iconCls);
-        }
-        String toolTip = action.getToolTip();
-        ActionShortcut shortcut = action.getShortcut();
-        button.setTooltip((toolTip == null ? "" : toolTip) + (shortcut != null ? shortcut.toString(i18n) : ""));
-
-        setEnableButton(button, enable);
-        final SimpleToolbar toolbar = getToolbar(pos);
+        String id = generateId(action);
+        ActionToolbarButton<T> button = new ActionToolbarButton<T>(action, id, enable, isPushButton, pressed,
+                new Listener0() {
+                    public void onEvent() {
+                        actionManagerProvider.get().doAction(actionItem);
+                    }
+                });
         if (action.hasLeftSeparator()) {
             add(toolbar, action.getLeftSeparator());
         }
-        int position = action.getPosition();
-        if (position != ActionToolbarDescriptor.NO_POSITION) {
-            toolbar.insert(button, position);
-        } else {
-            toolbar.add(button);
-        }
+        toolbar.add(button);
         if (action.hasRightSeparator()) {
             add(toolbar, action.getRightSeparator());
         }
-        toolbarButtons.put(genButtonKey(pos, id), button);
+        buttons.put(genButtonKey(id), button);
+        return button;
     }
 
     public void addMenuAction(final ActionItem<T> actionItem, final boolean enable) {
@@ -135,7 +94,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         final String itemKey = genMenuKey(pos, menuTitle, action.getParentMenuTooltip(), menuSubTitle, action.getText());
         Item item = menuItems.get(itemKey);
         if (item == null) {
-            item = createToolbarMenu(pos, menuTitle, menuTooltip, menuSubTitle, actionItem, generateIdIfEmpty(action));
+            item = createToolbarMenu(pos, menuTitle, menuTooltip, menuSubTitle, actionItem, generateId(action));
             menuItems.put(itemKey, item);
         }
         setEnableMenuItem(item, enable);
@@ -145,22 +104,13 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     public void clear() {
-        toolbarMenus.clear();
+        menus.clear();
         menuItems.clear();
-        toolbarButtons.clear();
-        topbar.removeAll();
-        bottombar.removeAll();
-        getToolbar(ActionToolbarPosition.topbar).removeAll();
-        getToolbar(ActionToolbarPosition.bottombar).removeAll();
+        buttons.clear();
+        toolbar.removeAll();
     }
 
     public void detach() {
-    }
-
-    public void disableAllMenuItems() {
-        for (final Item item : menuItems.values()) {
-            item.disable();
-        }
     }
 
     public int getLeftPosition(ActionDescriptor<T> action) {
@@ -171,14 +121,8 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         return 0;
     }
 
-    public SimpleToolbar getToolbar(final ActionToolbarPosition pos) {
-        switch (pos) {
-        case bottombar:
-            return bottombar;
-        case topbar:
-        default:
-            return topbar;
-        }
+    public SimpleToolbar getToolbar() {
+        return toolbar;
     }
 
     public int getTopPosition(ActionDescriptor<T> action) {
@@ -190,7 +134,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     public void hideAllMenus() {
-        for (Menu menu : toolbarMenus.values()) {
+        for (Menu menu : menus.values()) {
             menu.hide(true);
         }
     }
@@ -204,10 +148,18 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         }
     }
 
+    public void setCleanStyle() {
+        toolbar.setCleanStyle();
+    }
+
+    public void setNormalStyle() {
+        toolbar.setNormalStyle();
+    }
+
     public void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip,
             String newTitle) {
         final String menuKey = genMenuKey(action.getActionPosition(), origTitle, origTooltip, null, null);
-        Menu menu = toolbarMenus.get(menuKey);
+        Menu menu = menus.get(menuKey);
         if (menu != null) {
             menu.setTitle(newTitle);
         } else {
@@ -217,16 +169,16 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 
     public void setPushButtonPressed(final ActionDescriptor<T> action, final boolean pressed) {
         final ToolbarButton button = findButton(action);
-        if (button != null && button.isEnableToggle()) {
-            // Log.debug("Setting button pressed: " + pressed);
-            button.toggle(pressed);
+        if (button != null) {
+            if (button.isEnableToggle()) {
+                // Log.debug("Setting button pressed: " + pressed);
+                button.toggle(pressed);
+            } else {
+                Log.error("Tryng to set pressed a toolbar button not of type push button");
+            }
         } else {
             Log.error("Tryng to set pressed a non existent toolbar push button");
         }
-    }
-
-    private void add(final ActionToolbarPosition toolbar, final Widget widget) {
-        getToolbar(toolbar).add(widget);
     }
 
     private Widget add(final SimpleToolbar toolbar, final ActionToolbarButtonSeparator separator) {
@@ -239,6 +191,10 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         default:
             return toolbar.addSpacer();
         }
+    }
+
+    private void add(final Widget widget) {
+        toolbar.add(widget);
     }
 
     private void addSeparator(Menu menu, boolean separator) {
@@ -291,18 +247,18 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 
         final String menuKey = genMenuKey(toolBarPos, menuTitle, menuTooltip, null, null);
         final String subMenuKey = genMenuKey(toolBarPos, menuTitle, menuTooltip, menuSubTitle, null);
-        Menu menu = toolbarMenus.get(menuKey);
-        Menu subMenu = toolbarMenus.get(subMenuKey);
+        Menu menu = menus.get(menuKey);
+        Menu subMenu = menus.get(subMenuKey);
         if (menuSubTitle != null) {
             if (subMenu == null) {
                 subMenu = new Menu();
                 final MenuItem subMenuItem = new MenuItem(menuSubTitle, subMenu);
                 if (menu == null) {
                     menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), action.getParentMenuIconCls(),
-                            menuTitle, menuKey, "");
+                            menuTitle, menuKey, "", action.getPosition());
                 }
                 menu.addItem(subMenuItem);
-                toolbarMenus.put(subMenuKey, subMenu);
+                menus.put(subMenuKey, subMenu);
             }
             addSeparator(subMenu, action.hasTopSeparator());
             subMenu.addItem(item);
@@ -311,7 +267,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             // Menu action without submenu
             if (menu == null) {
                 menu = createToolbarMenu(toolBarPos, action.getParentMenuIconUrl(), action.getParentMenuIconCls(),
-                        menuTitle, menuKey, action.getParentMenuTooltip());
+                        menuTitle, menuKey, action.getParentMenuTooltip(), action.getPosition());
             }
             addSeparator(menu, action.hasTopSeparator());
             menu.addItem(item);
@@ -321,7 +277,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     private Menu createToolbarMenu(final ActionToolbarPosition barPosition, final String iconUrl, final String iconCls,
-            final String menuTitle, final String menuKey, final String menuTooltip) {
+            final String menuTitle, final String menuKey, final String menuTooltip, int position) {
         final Menu menu = new Menu();
         menu.setShadow(true);
         final ToolbarButton toolbarMenu = new ToolbarButton(menuTitle);
@@ -335,28 +291,24 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         if (menuTooltip != null) {
             toolbarMenu.setTooltip(menuTooltip);
         }
-        toolbarMenus.put(menuKey, menu);
-        add(barPosition, toolbarMenu);
+        menus.put(menuKey, menu);
+        add(toolbarMenu);
         return menu;
     }
 
     private ToolbarButton findButton(final ActionDescriptor<T> action) {
-        final ActionToolbarPosition pos = ((ActionToolbarDescriptor<T>) action).getActionPosition();
-        final ToolbarButton button = toolbarButtons.get(genButtonKey(pos, action.getId()));
+        final ToolbarButton button = buttons.get(genButtonKey(action.getId()));
         return button;
     }
 
-    private String genButtonKey(final ActionToolbarPosition pos, final String id) {
-        final String basePart = "km-act-btn-" + pos.toString().substring(0, 2) + "-" + id;
+    private String genButtonKey(final String id) {
+        final String basePart = "km-act-btn-" + id;
         return basePart;
     }
 
-    private String generateIdIfEmpty(final ActionDescriptor<T> action) {
-        String id = action.getId();
-        if (id == null) {
-            id = Ext.generateId();
-            action.setId(id);
-        }
+    private String generateId(final ActionDescriptor<T> action) {
+        String id = Ext.generateId();
+        action.setId(id);
         return id;
     }
 
@@ -365,9 +317,9 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         // Label title = new Label(action.getText());
         // hp.add(title);
         // hp.setCellWidth(title, "100%");
-        // hp.add(new Label(action.getShortcutToS(i18n)));
+        // hp.add(new Label(action.getShortcutToS(i 18n)));
         // return hp.getElement().getInnerHTML();
-        return action.getText() + action.getShortcutToS(i18n);
+        return action.getText() + action.getShortcutToS();
     }
 
     private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuTooltip,

@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.Resources;
 
 import com.google.gwt.user.client.ui.KeyboardListener;
 
@@ -98,21 +98,22 @@ public class ActionShortcut {
         return (has(modifiers, modifier) == keyValue);
     }
 
-    public String toString(I18nTranslationService i18n) {
+    @Override
+    public String toString() {
         String s = " (";
-        s += sKey(alt, "Alt", i18n);
-        s += sKey(ctrl, "Ctrl", i18n);
-        s += sKey(shift, "Shift", i18n);
-        s += keyName != null ? translateKey(keyName, i18n) + ")" : String.valueOf(key).toUpperCase() + ")";
+        s += sKey(alt, "Alt");
+        s += sKey(ctrl, "Ctrl");
+        s += sKey(shift, "Shift");
+        s += keyName != null ? translateKey(keyName) + ")" : String.valueOf(key).toUpperCase() + ")";
         return s;
     }
 
-    private String sKey(boolean key, String specialKeyName, I18nTranslationService i18n) {
-        return key ? translateKey(specialKeyName, i18n) + "+" : "";
+    private String sKey(boolean key, String specialKeyName) {
+        return key ? translateKey(specialKeyName) + "+" : "";
     }
 
-    private String translateKey(String keyNameToTranslate, I18nTranslationService i18n) {
-        return i18n.tWithNT(keyNameToTranslate, "The '" + keyNameToTranslate + "' keyboard key");
+    private String translateKey(String keyNameToTranslate) {
+        return Resources.i18n.tWithNT(keyNameToTranslate, "The '" + keyNameToTranslate + "' keyboard key");
     }
 
 }

@@ -157,6 +157,14 @@ public class EntityWorkspace {
         cntCtxBorderLayout.addListener(containerListenerAdapter);
     }
 
+    public void clearContent() {
+        content.clear();
+    }
+
+    public void clearContext() {
+        content.clear();
+    }
+
     public SimpleToolbar getBottomTitle() {
         return bottom;
     }

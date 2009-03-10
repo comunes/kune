@@ -26,7 +26,8 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 
 public interface ActionToolbarView<T> extends View {
 
-    void addButtonAction(ActionItem<T> actionItem, boolean enable);
+    ActionToolbarButton<T> addButtonAction(ActionItem<T> actionItem, boolean enabled, boolean isPushButton,
+            boolean pressed);
 
     void addMenuAction(ActionItem<T> actionItem, boolean enable);
 
@@ -36,8 +37,6 @@ public interface ActionToolbarView<T> extends View {
 
     void detach();
 
-    void disableAllMenuItems();
-
     int getLeftPosition(ActionDescriptor<T> action);
 
     int getTopPosition(ActionDescriptor<T> action);
@@ -45,6 +44,10 @@ public interface ActionToolbarView<T> extends View {
     void hideAllMenus();
 
     void setButtonEnable(ActionDescriptor<T> action, boolean enable);
+
+    void setCleanStyle();
+
+    void setNormalStyle();
 
     void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip, String newTitle);
 

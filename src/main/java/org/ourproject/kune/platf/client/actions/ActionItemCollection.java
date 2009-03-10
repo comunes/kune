@@ -20,9 +20,37 @@
 package org.ourproject.kune.platf.client.actions;
 
 import java.util.ArrayList;
+import java.util.Collection;
+
+import com.allen_sauer.gwt.log.client.Log;
 
 public class ActionItemCollection<T> extends ArrayList<ActionItem<T>> {
 
     private static final long serialVersionUID = 1L;
 
+    @Override
+    public boolean add(ActionItem<T> actionItem) {
+        ActionDescriptor<T> action = actionItem.getAction();
+        int position = action.getPosition();
+        if (position == ActionDescriptor.NO_POSITION) {
+            super.add(actionItem);
+        } else {
+            try {
+                super.add(position, actionItem);
+                return true;
+            } catch (IndexOutOfBoundsException e) {
+                Log.error("Trying to add an action in a position out of bounds");
+                super.add(actionItem);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends ActionItem<T>> actionItems) {
+        for (ActionItem<T> actionItem : actionItems) {
+            add(actionItem);
+        }
+        return true;
+    }
 }

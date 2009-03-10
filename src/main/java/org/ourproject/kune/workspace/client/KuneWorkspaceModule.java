@@ -21,9 +21,7 @@ package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -48,8 +46,9 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
+import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
+import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbarPresenter;
@@ -57,16 +56,14 @@ import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
-import org.ourproject.kune.workspace.client.cxt.ActionContextToolbar;
-import org.ourproject.kune.workspace.client.cxt.ActionContextToolbarPresenter;
+import org.ourproject.kune.workspace.client.cxt.ActionContextBottomToolbar;
+import org.ourproject.kune.workspace.client.cxt.ActionContextTopToolBar;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPanel;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPresenter;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorView;
-import org.ourproject.kune.workspace.client.editor.TextEditor;
-import org.ourproject.kune.workspace.client.editor.TextEditorPanel;
-import org.ourproject.kune.workspace.client.editor.TextEditorPresenter;
+import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementGroup;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementPanel;
@@ -481,16 +478,14 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ActionGroupSummaryToolbar>(ActionGroupSummaryToolbar.class) {
             @Override
             public ActionGroupSummaryToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
-                        $$(ActionManager.class), $(I18nTranslationService.class));
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>($$(ActionManager.class));
                 final ActionGroupSummaryToolbarPresenter toolbar = new ActionGroupSummaryToolbarPresenter(panel);
                 return toolbar;
             }
         }, new Factory<ActionParticipationToolbar>(ActionParticipationToolbar.class) {
             @Override
             public ActionParticipationToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(
-                        $$(ActionManager.class), $(I18nTranslationService.class));
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>($$(ActionManager.class));
                 final ActionParticipationSummaryToolbarPresenter toolbar = new ActionParticipationSummaryToolbarPresenter(
                         panel);
                 return toolbar;
@@ -499,7 +494,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public ActionBuddiesSummaryToolbar create() {
                 final ActionToolbarPanel<UserSimpleDTO> panel = new ActionToolbarPanel<UserSimpleDTO>(
-                        $$(ActionManager.class), $(I18nTranslationService.class));
+                        $$(ActionManager.class));
                 final ActionBuddiesSummaryToolbarPresenter toolbar = new ActionBuddiesSummaryToolbarPresenter(panel);
                 return toolbar;
             }
@@ -866,26 +861,6 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<TextEditor>(TextEditor.class) {
-            @Override
-            public TextEditor create() {
-                final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
-                        ActionCntCtxToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
-                final ActionToolbar<StateToken> toolbar = new ActionToolbarPresenter<StateToken>(
-                        contentNavigatorToolbar);
-
-                final TextEditorPresenter presenter = new TextEditorPresenter(true, toolbar,
-                        $(I18nUITranslationService.class), $(StateManager.class), $(SiteSignOutLink.class),
-                        $(DeferredCommandWrapper.class));
-                final TextEditorPanel panel = new TextEditorPanel(presenter, $(I18nTranslationService.class),
-                        $(WorkspaceSkeleton.class), $(ColorWebSafePalette.class), $(TextEditorInsertElement.class),
-                        false);
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
         register(Singleton.class, new Factory<LanguageSelector>(LanguageSelector.class) {
             @Override
             public LanguageSelector create() {
@@ -924,21 +899,40 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(NoDecoration.class, new Factory<ActionContentToolbar>(ActionContentToolbar.class) {
             @Override
             public ActionContentToolbar create() {
-                final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
-                        ActionCntCtxToolbarPanel.Position.content, $$(ActionManager.class), $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
-                final ActionContentToolbar toolbar = new ActionContentToolbarPresenter(contentNavigatorToolbar);
+                final ActionCntCtxToolbarPanel<StateToken> tbar = new ActionCntCtxToolbarPanel<StateToken>(
+                        AbstractFoldableContentActions.CONTENT_TOPBAR, $$(ActionManager.class),
+                        $(WorkspaceSkeleton.class));
+                final ActionContentToolbar toolbar = new ActionContentToolbarPresenter(tbar);
                 return toolbar;
             }
         });
 
-        register(NoDecoration.class, new Factory<ActionContextToolbar>(ActionContextToolbar.class) {
+        register(Singleton.class, new Factory<ContentEditor>(ContentEditor.class) {
             @Override
-            public ActionContextToolbar create() {
-                final ActionCntCtxToolbarPanel<StateToken> contentNavigatorToolbar = new ActionCntCtxToolbarPanel<StateToken>(
-                        ActionCntCtxToolbarPanel.Position.context, $$(ActionManager.class), $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
-                final ActionContextToolbar toolbar = new ActionContextToolbarPresenter(contentNavigatorToolbar);
+            public ContentEditor create() {
+                return new ContentEditor($(RTEditor.class), true, $(I18nTranslationService.class),
+                        $(StateManager.class), $(SiteSignOutLink.class), $(DeferredCommandWrapper.class),
+                        $(RTEImgResources.class), $(WorkspaceSkeleton.class));
+            }
+        });
+        register(NoDecoration.class, new Factory<ActionContextTopToolBar>(ActionContextTopToolBar.class) {
+            @Override
+            public ActionContextTopToolBar create() {
+                final ActionCntCtxToolbarPanel<StateToken> panel = new ActionCntCtxToolbarPanel<StateToken>(
+                        AbstractFoldableContentActions.CONTEXT_TOPBAR, $$(ActionManager.class),
+                        $(WorkspaceSkeleton.class));
+                final ActionContextTopToolBar toolbar = new ActionContextTopToolBar(panel);
+                return toolbar;
+            }
+        });
+
+        register(NoDecoration.class, new Factory<ActionContextBottomToolbar>(ActionContextBottomToolbar.class) {
+            @Override
+            public ActionContextBottomToolbar create() {
+                final ActionCntCtxToolbarPanel<StateToken> panel = new ActionCntCtxToolbarPanel<StateToken>(
+                        AbstractFoldableContentActions.CONTEXT_BOTTOMBAR, $$(ActionManager.class),
+                        $(WorkspaceSkeleton.class));
+                final ActionContextBottomToolbar toolbar = new ActionContextBottomToolbar(panel);
                 return toolbar;
             }
         });
@@ -948,8 +942,9 @@ public class KuneWorkspaceModule extends AbstractModule {
             public ContextNavigator create() {
                 final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
                         $(Session.class), $(I18nTranslationService.class), $(ContentIconsRegistry.class),
-                        $(ContentCapabilitiesRegistry.class), $(ActionContextToolbar.class),
-                        $(ContextActionRegistry.class), $$(FileDownloadUtils.class), true, $(RenameAction.class));
+                        $(ContentCapabilitiesRegistry.class), $(ActionContextTopToolBar.class),
+                        $(ActionContextBottomToolbar.class), $(ContextActionRegistry.class),
+                        $$(FileDownloadUtils.class), true, $(RenameAction.class));
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter,
                         $(I18nTranslationService.class), $(WorkspaceSkeleton.class), $(ActionManager.class));
                 presenter.init(panel);

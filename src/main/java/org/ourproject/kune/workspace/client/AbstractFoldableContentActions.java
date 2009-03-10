@@ -57,7 +57,7 @@ import org.ourproject.kune.workspace.client.cnt.FoldableContent;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
-import org.ourproject.kune.workspace.client.editor.TextEditor;
+import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
@@ -75,6 +75,11 @@ public abstract class AbstractFoldableContentActions {
 
     private static final String PUBLICATION_MENU = "Publication";
 
+    public static final ActionToolbarPosition CONTENT_TOPBAR = new ActionToolbarPosition("afca-ctn-top");
+    public static final ActionToolbarPosition CONTENT_BOTTOMBAR = new ActionToolbarPosition("afca-ctn-bottom");
+    public static final ActionToolbarPosition CONTEXT_TOPBAR = new ActionToolbarPosition("afca-ctx-top");
+    public static final ActionToolbarPosition CONTEXT_BOTTOMBAR = new ActionToolbarPosition("afca-ctx-bottom");
+
     protected final Session session;
     protected final StateManager stateManager;
     protected final I18nUITranslationService i18n;
@@ -86,7 +91,7 @@ public abstract class AbstractFoldableContentActions {
     protected final ContentActionRegistry contentActionRegistry;
     protected final ContextActionRegistry contextActionRegistry;
     protected final Provider<FileDownloadUtils> fileDownloadProvider;
-    protected final Provider<TextEditor> textEditorProvider;
+    protected final Provider<ContentEditor> textEditorProvider;
     protected final Provider<ContextPropEditor> contextPropEditorProvider;
     protected final FoldableContent foldableContent;
     protected final DeferredCommandWrapper deferredCommandWrapper;
@@ -98,7 +103,7 @@ public abstract class AbstractFoldableContentActions {
             Provider<GroupServiceAsync> groupServiceProvider, Provider<ContentServiceAsync> contentServiceProvider,
             Provider<FileUploader> fileUploaderProvider, ContextNavigator contextNavigator,
             ContentActionRegistry contentActionRegistry, ContextActionRegistry contextActionRegistry,
-            Provider<FileDownloadUtils> fileDownloadProvider, Provider<TextEditor> textEditorProvider,
+            Provider<FileDownloadUtils> fileDownloadProvider, Provider<ContentEditor> textEditorProvider,
             Provider<ContextPropEditor> contextPropEditorProvider, FoldableContent foldableContent,
             EntityHeader entityLogo, SitePublicSpaceLink publicLink) {
         this.session = session;
@@ -144,7 +149,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected void createContentRenameAction(String parentMenuTitle, String textDescription, String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtn = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         contextNavigator.editItem(stateToken);
                     }
@@ -157,7 +162,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected void createDelContainerAction(String text, String parentMenuTitle, String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         NotifyUser.info("Sorry, in development");
                     }
@@ -172,7 +177,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected void createDelContentAction(String parentMenuTitle, String textDescription, String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         contentServiceProvider.get().delContent(session.getUserHash(), token,
                                 new AsyncCallbackSimple<StateContentDTO>() {
@@ -197,7 +202,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected void createDownloadActions(String typeUploadedfile) {
         ActionToolbarButtonDescriptor<StateToken> download = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Viewer, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         downloadContent(token);
                     }
@@ -223,15 +228,16 @@ public abstract class AbstractFoldableContentActions {
 
     protected ActionToolbarButtonDescriptor<StateToken> createEditAction(String... registerInTypes) {
         ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
+                        NotifyUser.showProgressProcessing();
                         session.check(new AsyncCallbackSimple<Object>() {
                             public void onSuccess(final Object result) {
-                                final TextEditor editor = textEditorProvider.get();
+                                final ContentEditor editor = textEditorProvider.get();
                                 foldableContent.detach();
                                 contextNavigator.detach();
                                 contextPropEditorProvider.get().attach();
-                                editor.editContent(session.getContentState().getContent(), new Listener<String>() {
+                                editor.edit(session.getContentState().getContent(), new Listener<String>() {
                                     public void onEvent(final String html) {
                                         NotifyUser.showProgressSaving();
                                         contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
@@ -272,6 +278,7 @@ public abstract class AbstractFoldableContentActions {
                                         });
                                     }
                                 });
+                                NotifyUser.hideProgress();
                             }
                         });
                     }
@@ -300,7 +307,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected ActionToolbarButtonDescriptor<StateToken> createGoHomeAction(String... registerInTypes) {
         ActionToolbarButtonDescriptor<StateToken> goGroupHome = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Viewer, CONTEXT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         stateManager.gotoToken(token.getGroup());
                     }
@@ -322,8 +329,8 @@ public abstract class AbstractFoldableContentActions {
             final String textDescription, final String parentMenuTitle, final String parentMenuSubtitle,
             final String defaultName, Position position, String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder;
-        addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
-                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+        addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor, CONTENT_TOPBAR,
+                new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
@@ -346,7 +353,7 @@ public abstract class AbstractFoldableContentActions {
             String iconUrl, final String description, final String parentMenuTitle, Position position,
             String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener0() {
+                AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener0() {
                     public void onEvent() {
                         NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().addContent(session.getUserHash(),
@@ -373,7 +380,7 @@ public abstract class AbstractFoldableContentActions {
     protected ActionToolbarMenuDescriptor<StateToken> createRefreshCntAction(String parentMenuTitle,
             String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> refreshCnt = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Viewer, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         stateManager.reload();
                         contextNavigator.selectItem(stateToken);
@@ -390,7 +397,7 @@ public abstract class AbstractFoldableContentActions {
     protected ActionToolbarMenuDescriptor<StateToken> createRefreshCxtAction(String parentMenuTitleCtx,
             String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> refreshCtx = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Viewer, CONTEXT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         stateManager.reload();
                         contextNavigator.selectItem(stateToken);
@@ -407,7 +414,7 @@ public abstract class AbstractFoldableContentActions {
     protected ActionToolbarMenuAndItemDescriptor<StateToken> createRenameContentInCtxAction(String parentMenuTitleCtx,
             String textDescription, String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtx = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         contextNavigator.editItem(stateToken);
                     }
@@ -421,8 +428,8 @@ public abstract class AbstractFoldableContentActions {
     protected ActionToolbarMenuDescriptor<StateToken> createSetAsDefContent(String parentMenuTitle,
             String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupContent;
-        setAsDefGroupContent = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Administrator,
-                ActionToolbarPosition.topbar, new Listener<StateToken>() {
+        setAsDefGroupContent = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Administrator, CONTENT_TOPBAR,
+                new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
@@ -446,7 +453,7 @@ public abstract class AbstractFoldableContentActions {
     protected void createSetStatusAction(final AccessRolDTO rol, final String textDescription,
             final ContentStatusDTO status, String[] contentsModerated) {
         final ActionToolbarMenuRadioDescriptor<StateToken> action = new ActionToolbarMenuRadioDescriptor<StateToken>(
-                rol, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                rol, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         setContentStatus(status, stateToken);
                     }
@@ -467,7 +474,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected void createShowDeletedItems(String parentMenuTitle, String... registerInTypes) {
         ActionToolbarMenuCheckItemDescriptor<StateToken> showDeletedItems = new ActionToolbarMenuCheckItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener0() {
+                AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener0() {
                     public void onEvent() {
                         boolean mustShow = !session.getCurrentUserInfo().getShowDeletedContent();
                         session.getCurrentUserInfo().setShowDeletedContent(mustShow);
@@ -491,7 +498,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected ActionToolbarButtonDescriptor<StateToken> createTranslateAction(String... registerInTypes) {
         ActionToolbarButtonDescriptor<StateToken> translateContent = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Editor, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.important(i18n.t("Sorry, this functionality is currently in development"));
                     }
@@ -508,8 +515,8 @@ public abstract class AbstractFoldableContentActions {
     protected ActionToolbarButtonAndItemDescriptor<StateToken> createUploadAction(final String textDescription,
             final String iconUrl, final String toolTip, final String permitedExtensions, String... registerInTypes) {
         final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile;
-        uploadFile = new ActionToolbarButtonAndItemDescriptor<StateToken>(AccessRolDTO.Editor,
-                ActionToolbarPosition.bottombar, new Listener0() {
+        uploadFile = new ActionToolbarButtonAndItemDescriptor<StateToken>(AccessRolDTO.Editor, CONTEXT_BOTTOMBAR,
+                new Listener0() {
                     public void onEvent() {
                         if (permitedExtensions != null) {
                             // FIXME: can't be reset ...
@@ -547,7 +554,7 @@ public abstract class AbstractFoldableContentActions {
     @SuppressWarnings("unused")
     private ActionToolbarMenuAndItemDescriptor<StateToken> createSetGroupLogoAction(String parentMenuTitle) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> setGroupLogo = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         groupServiceProvider.get().setGroupFullLogo(session.getUserHash(), token,
                                 new AsyncCallbackSimple<GroupDTO>() {

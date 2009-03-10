@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
+import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
@@ -138,7 +139,8 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
 
     private void setToolbar(ActionItemCollection<StateToken> collection) {
         toolbar.disableMenusAndClearButtons();
-        toolbar.addActions(collection);
+        toolbar.addActions(collection, AbstractFoldableContentActions.CONTENT_TOPBAR);
+        ;
         toolbar.attach();
     }
 

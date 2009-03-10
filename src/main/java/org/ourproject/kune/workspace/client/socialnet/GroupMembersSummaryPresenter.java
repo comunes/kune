@@ -24,8 +24,8 @@ import java.util.List;
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessListsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
@@ -97,7 +97,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                 setState(state);
                 toolbar.disableMenusAndClearButtons();
                 toolbar.addActions(groupActionRegistry.getCurrentActions(state.getGroup().getStateToken(),
-                        session.isLogged(), state.getGroupRights(), true));
+                        session.isLogged(), state.getGroupRights(), true), ActionToolbar.IN_ANY);
                 toolbar.attach();
             }
         };
@@ -157,7 +157,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
     private void createActions() {
         ActionToolbarMenuDescriptor<StateToken> addMember = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
                             public void onEvent(final LinkDTO link) {
@@ -185,7 +185,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
     private void createNewMembersPolicyAction(String textDescription, final AdmissionTypeDTO admissionPolicy) {
         ActionToolbarMenuRadioDescriptor<StateToken> newMembersPolicy = new ActionToolbarMenuRadioDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         groupServiceProvider.get().setGroupNewMembersJoiningPolicy(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), admissionPolicy,
@@ -209,7 +209,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
     private void createSetMembersVisibilityAction(String textDescription, final SocialNetworkVisibilityDTO visibility) {
         ActionToolbarMenuRadioDescriptor<StateToken> showMembers = new ActionToolbarMenuRadioDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<StateToken>() {
+                AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
                     public void onEvent(StateToken parameter) {
                         groupServiceProvider.get().setSocialNetworkVisibility(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), visibility,

@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
@@ -54,7 +53,7 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
         // gridMenuPanel.onClick(go);
         gridMenuPanel.onDoubleClick(go);
         super.add(gridMenuPanel);
-        toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar(ActionToolbarPosition.bottombar);
+        toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar();
         toolbar.setCleanStyle();
         super.add(toolbar);
         addInSummary();

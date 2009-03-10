@@ -19,6 +19,8 @@
  \*/
 package org.ourproject.kune.platf.client.actions;
 
+import com.allen_sauer.gwt.log.client.Log;
+
 /**
  * And action description and a item (for instance a StateToken, a XmmpURI) over
  * the action takes place
@@ -49,5 +51,15 @@ public class ActionItem<T> {
 
     public boolean mustBeEnabled() {
         return action.mustBeEnabled(getItem());
+    }
+
+    public boolean mustBePressed() {
+        if (!(action instanceof ActionToolbarPushButtonDescriptor)) {
+            Log.error("This action is not a push button");
+            return false;
+        } else {
+            ActionPressedCondition<T> mustInitialyPressed = ((ActionToolbarPushButtonDescriptor<T>) action).getMustInitialyPressed();
+            return mustInitialyPressed != null ? mustInitialyPressed.mustBePressed(getItem()) : false;
+        }
     }
 }

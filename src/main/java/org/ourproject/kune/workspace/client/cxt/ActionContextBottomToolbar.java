@@ -19,14 +19,14 @@
  */
 package org.ourproject.kune.workspace.client.cxt;
 
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public class ActionContextToolbarPresenter extends ActionToolbarPresenter<StateToken> implements ActionContextToolbar {
+public class ActionContextBottomToolbar extends ActionToolbarPresenter<StateToken> implements ActionToolbar<StateToken> {
 
-    public ActionContextToolbarPresenter(ActionToolbarView<StateToken> toolbar) {
+    public ActionContextBottomToolbar(ActionToolbarView<StateToken> toolbar) {
         super(toolbar);
     }
-
 }

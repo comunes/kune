@@ -6,6 +6,8 @@ import com.google.gwt.libideas.resources.client.ImmutableResourceBundle;
 
 public interface RTEImgResources extends ImmutableResourceBundle {
 
+    String SUFFIX = "k-rte-";
+
     @Resource("alignleft.png")
     public ImageResource alignleft();
 

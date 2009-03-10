@@ -23,7 +23,6 @@ import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
@@ -48,7 +47,7 @@ public class TextEditorPresenter implements TextEditor {
     private boolean saveAndCloseConfirmed;
     private Listener<String> onSave;
     private Listener0 onEditCancelled;
-    private final ActionToolbar<StateToken> toolbar;
+    private final ActionToolbar<StateToken> topToolbar;
     private ActionToolbarMenuDescriptor<StateToken> save;
     private ActionToolbarButtonDescriptor<StateToken> close;
     private final I18nUITranslationService i18n;
@@ -57,10 +56,10 @@ public class TextEditorPresenter implements TextEditor {
     private final SiteSignOutLink siteSignOutLink;
     private final DeferredCommandWrapper deferredCommandWrapper;
 
-    public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> toolbar,
+    public TextEditorPresenter(final boolean isAutoSave, final ActionToolbar<StateToken> topToolbar,
             final I18nUITranslationService i18n, StateManager stateManager, SiteSignOutLink siteSignOutLink,
             DeferredCommandWrapper deferredCommandWrapper) {
-        this.toolbar = toolbar;
+        this.topToolbar = topToolbar;
         this.autoSave = isAutoSave;
         this.i18n = i18n;
         this.stateManager = stateManager;
@@ -81,7 +80,7 @@ public class TextEditorPresenter implements TextEditor {
     public void editContent(final String content, final Listener<String> onSave, final Listener0 onEditCancelled) {
         this.onSave = onSave;
         this.onEditCancelled = onEditCancelled;
-        toolbar.attach();
+        topToolbar.attach();
         view.attach();
         setContent(content);
         stateManager.addBeforeStateChangeListener(beforeStateChangeListener);
@@ -137,7 +136,7 @@ public class TextEditorPresenter implements TextEditor {
         stateManager.resumeTokenChange();
         reset();
         view.detach();
-        toolbar.detach();
+        topToolbar.detach();
         onEditCancelled.onEvent();
     }
 
@@ -176,23 +175,21 @@ public class TextEditorPresenter implements TextEditor {
     }
 
     private void createActions() {
-        save = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
-                new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        onSave();
-                    }
-                });
+        save = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Viewer, null, new Listener<StateToken>() {
+            public void onEvent(final StateToken token) {
+                onSave();
+            }
+        });
         save.setTextDescription(i18n.tWithNT("Save", "used in button"));
         save.setParentMenuTitle(i18n.t("File"));
         save.setId(SAVE_ID);
         // save.setIconUrl("images/");
 
-        close = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, ActionToolbarPosition.topbar,
-                new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        onCancel();
-                    }
-                });
+        close = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, null, new Listener<StateToken>() {
+            public void onEvent(final StateToken token) {
+                onCancel();
+            }
+        });
         close.setTextDescription(i18n.tWithNT("Close", "used in button"));
         close.setId(CLOSE_ID);
         // close.setIconUrl("images/");
@@ -200,7 +197,7 @@ public class TextEditorPresenter implements TextEditor {
         final ActionItemCollection<StateToken> collection = new ActionItemCollection<StateToken>();
         collection.add(new ActionItem<StateToken>(save, null));
         collection.add(new ActionItem<StateToken>(close, null));
-        toolbar.addActions(collection);
+        topToolbar.addActions(collection, null);
     }
 
     private void reset() {

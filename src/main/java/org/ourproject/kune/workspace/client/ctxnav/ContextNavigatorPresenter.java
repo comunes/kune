@@ -44,7 +44,9 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
+import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
+import org.ourproject.kune.workspace.client.cxt.ActionContextBottomToolbar;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
@@ -63,24 +65,26 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     private boolean editOnNextStateChange;
     private final ContentIconsRegistry contentIconsRegistry;
     private final ActionRegistry<StateToken> actionRegistry;
-    private final ActionToolbar<StateToken> toolbar;
+    private final ActionToolbar<StateToken> topToolbar;
     private final Provider<FileDownloadUtils> downloadUtilsProvider;
     private final boolean useGenericImageIcon;
     private final ContentCapabilitiesRegistry capabilitiesRegistry;
     private final RenameAction renameAction;
+    private final ActionContextBottomToolbar bottomToolbar;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
             final I18nTranslationService i18n, final ContentIconsRegistry contentIconsRegistry,
             ContentCapabilitiesRegistry capabilitiesRegistry, final ActionToolbar<StateToken> toolbar,
-            final ActionRegistry<StateToken> actionRegistry, Provider<FileDownloadUtils> downloadUtilsProvider,
-            boolean useGenericImageIcon, RenameAction renameAction) {
+            ActionContextBottomToolbar bottomToolbar, final ActionRegistry<StateToken> actionRegistry,
+            Provider<FileDownloadUtils> downloadUtilsProvider, boolean useGenericImageIcon, RenameAction renameAction) {
         this.stateManager = stateManager;
         this.session = session;
         this.i18n = i18n;
         this.contentIconsRegistry = contentIconsRegistry;
         this.capabilitiesRegistry = capabilitiesRegistry;
+        this.topToolbar = toolbar;
+        this.bottomToolbar = bottomToolbar;
         this.actionRegistry = actionRegistry;
-        this.toolbar = toolbar;
         this.downloadUtilsProvider = downloadUtilsProvider;
         this.useGenericImageIcon = useGenericImageIcon;
         this.renameAction = renameAction;
@@ -103,18 +107,21 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         // FIXME At the moment detach (removeFromParent) destroy the gwt-ext
         // TreePanel and the widget must be recreated (cannot be attached again
         // like in gwt)
-        toolbar.attach();
+        topToolbar.attach();
+        bottomToolbar.attach();
     }
 
     public void clear() {
-        toolbar.clear();
+        topToolbar.clear();
+        bottomToolbar.clear();
         view.clear();
         actionsByItem.clear();
     }
 
     public void detach() {
         view.detach();
-        toolbar.detach();
+        topToolbar.detach();
+        bottomToolbar.detach();
     }
 
     public void editItem(final StateToken stateToken) {
@@ -139,8 +146,11 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public void selectItem(final StateToken stateToken) {
         view.selectItem(genId(stateToken));
-        toolbar.disableMenusAndClearButtons();
-        toolbar.addActions(actionsByItem.get(stateToken));
+        topToolbar.disableMenusAndClearButtons();
+        bottomToolbar.disableMenusAndClearButtons();
+        ActionItemCollection<StateToken> itemCollection = actionsByItem.get(stateToken);
+        topToolbar.addActions(itemCollection, AbstractFoldableContentActions.CONTEXT_TOPBAR);
+        bottomToolbar.addActions(itemCollection, AbstractFoldableContentActions.CONTEXT_BOTTOMBAR);
     }
 
     public void setEditOnNextStateChange(final boolean edit) {
@@ -324,7 +334,8 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
         selectOrEditNode(select, stateToken);
 
-        toolbar.attach();
+        topToolbar.attach();
+        bottomToolbar.attach();
     }
 
     private void showRootFolder(final StateContainerDTO state, final AccessRightsDTO containerRights) {

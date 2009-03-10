@@ -17,6 +17,7 @@ import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Justification;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.KeyboardListener;
@@ -24,6 +25,59 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class RTEditorPanel implements RTEditorView {
 
+    private class EventListener implements ClickListener, ChangeListener, KeyboardListener, FocusListener {
+
+        public void onChange(Widget sender) {
+            presenter.fireOnEdit();
+        }
+
+        public void onClick(Widget sender) {
+            if (sender == rta) {
+                // We use the RichTextArea's onKeyUp event to update the
+                // toolbar status. This will catch any cases where the user
+                // moves the cursor using the keyboard, or uses one of the
+                // browser's built-in keyboard shortcuts.
+                updateStatus();
+            }
+        }
+
+        public void onFocus(Widget sender) {
+            presenter.onEditorFocus();
+        }
+
+        public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {
+        }
+
+        public void onKeyPress(final Widget sender, final char keyCode, final int modifiers) {
+        }
+
+        public void onKeyUp(final Widget sender, final char keyCode, final int modifiers) {
+            if (sender == rta) {
+                // We use the RichTextArea's onKeyUp event to update the
+                // toolbar status.
+                // This will catch any cases where the user moves the cursor
+                // using the keyboard, or uses one of the browser's built-in
+                // keyboard shortcuts.
+
+                updateStatus();
+                fireEdit();
+                if (modifiers != 0) {
+                    Log.debug("RTE shortcut pressed (" + modifiers + ", " + keyCode + ")");
+                    ActionItem<Object> actionItem = shortcuts.get(new ActionShortcut(keyCode, modifiers));
+                    if (actionItem != null) {
+                        actionManager.doAction(actionItem);
+                        updateStatus();
+                    } else {
+                        Log.debug("...but not mapped to any action");
+                    }
+                }
+            }
+        }
+
+        public void onLostFocus(Widget sender) {
+
+        }
+    }
     private final I18nUITranslationService i18n;
     private final RichTextArea rta;
     private final BasicFormatter basic;
@@ -40,7 +94,10 @@ public class RTEditorPanel implements RTEditorView {
         basic = rta.getBasicFormatter();
         extended = rta.getExtendedFormatter();
         shortcuts = new HashMap<ActionShortcut, ActionItem<Object>>();
-        createListeners();
+        EventListener listener = new EventListener();
+        rta.addClickListener(listener);
+        rta.addKeyboardListener(listener);
+        rta.addFocusListener(listener);
         rta.setWidth("96%");
         rta.setHeight("100%");
     }
@@ -58,7 +115,7 @@ public class RTEditorPanel implements RTEditorView {
     public void addComment(String userName) {
         String time = i18n.formatDateWithLocale(new Date(), true);
         Element span = DOM.createSpan();
-        span.setInnerHTML("<em>" + i18n.t("type here") + "</em> -" + userName + " " + time);
+        span.setInnerHTML("<em>" + i18n.t("type your commment here") + "</em> -" + userName + " " + time);
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
         insertHtml("&nbsp;" + span.getString() + "&nbsp;");
     }
@@ -95,8 +152,16 @@ public class RTEditorPanel implements RTEditorView {
         rta.setFocus(true);
     }
 
+    public String getHtml() {
+        return rta.getHTML();
+    }
+
     public Widget getRTE() {
         return rta;
+    }
+
+    public String getText() {
+        return rta.getText();
     }
 
     public void insertHorizontalRule() {
@@ -199,6 +264,14 @@ public class RTEditorPanel implements RTEditorView {
         basic.setForeColor(color);
     }
 
+    public void setHtml(String html) {
+        rta.setHTML(html);
+    }
+
+    public void setText(String text) {
+        rta.setText(text);
+    }
+
     public void toggleBold() {
         basic.toggleBold();
     }
@@ -233,59 +306,6 @@ public class RTEditorPanel implements RTEditorView {
 
     protected void fireEdit() {
         presenter.fireOnEdit();
-    }
-
-    private void createListeners() {
-        rta.addFocusListener(new FocusListener() {
-            public void onFocus(Widget sender) {
-                presenter.onEditorFocus();
-            }
-
-            public void onLostFocus(Widget sender) {
-            }
-        });
-        rta.addClickListener(new ClickListener() {
-            public void onClick(Widget sender) {
-                if (sender == rta) {
-                    // We use the RichTextArea's onKeyUp event to update the
-                    // toolbar status. This will catch any cases where the user
-                    // moves the cursor using the keyboard, or uses one of the
-                    // browser's built-in keyboard shortcuts.
-                    updateStatus();
-                }
-            }
-        });
-        rta.addKeyboardListener(new KeyboardListener() {
-
-            public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {
-            }
-
-            public void onKeyPress(final Widget sender, final char keyCode, final int modifiers) {
-            }
-
-            public void onKeyUp(final Widget sender, final char keyCode, final int modifiers) {
-                if (sender == rta) {
-                    // We use the RichTextArea's onKeyUp event to update the
-                    // toolbar status.
-                    // This will catch any cases where the user moves the cursor
-                    // using the keyboard, or uses one of the browser's built-in
-                    // keyboard shortcuts.
-
-                    updateStatus();
-                    fireEdit();
-                    if (modifiers != 0) {
-                        Log.debug("RTE shortcut pressed (" + modifiers + ", " + keyCode + ")");
-                        ActionItem<Object> actionItem = shortcuts.get(new ActionShortcut(keyCode, modifiers));
-                        if (actionItem != null) {
-                            actionManager.doAction(actionItem);
-                            updateStatus();
-                        } else {
-                            Log.debug("...but not mapped to any action");
-                        }
-                    }
-                }
-            }
-        });
     }
 
     /**

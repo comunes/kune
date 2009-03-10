@@ -1,6 +1,5 @@
 package org.ourproject.kune.platf.client.ui.rte;
 
-import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 
@@ -10,19 +9,20 @@ import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public class TestRTEDialog {
 
-    private final RTEditor editor;
+    private final RTESavingEditor editor;
     private final BasicDialog dialog;
 
-    public TestRTEDialog(RTEditor editor) {
+    public TestRTEDialog(RTESavingEditor editor) {
         this.editor = editor;
         dialog = new BasicDialog("Testing RTE", false, false, 650, 200);
         final VerticalPanel vp = new VerticalPanel();
 
-        vp.add(((ActionToolbarPanel<Object>) editor.getTopBar().getView()).getToolbar(ActionToolbarPosition.topbar));
-        vp.add(((ActionToolbarPanel<Object>) editor.getSndBar().getView()).getToolbar(ActionToolbarPosition.topbar));
-        final RTEditorPanel editorPanel = (RTEditorPanel) editor.getEditorArea();
+        RTEditor basicEditor = editor.getBasicEditor();
+        vp.add(((ActionToolbarPanel<Object>) basicEditor.getTopBar().getView()).getToolbar());
+        vp.add(((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
+        final RTEditorPanel editorPanel = (RTEditorPanel) basicEditor.getEditorArea();
         vp.add(editorPanel.getRTE());
-        editor.setExtended(true);
+        basicEditor.setExtended(true);
         vp.setWidth("100%");
         dialog.add(vp);
         dialog.addListener(new WindowListenerAdapter() {
@@ -36,11 +36,11 @@ public class TestRTEDialog {
     }
 
     public void setExtended(boolean extended) {
-        editor.setExtended(extended);
+        editor.getBasicEditor().setExtended(extended);
     }
 
     public void show() {
-        editor.attach();
+        editor.getBasicEditor().attach();
         dialog.show();
     }
 }

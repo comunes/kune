@@ -1,31 +1,46 @@
 package org.ourproject.kune.platf.client.ui.rte;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionCollection;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.ui.rte.RTEditorPresenter.ActionPosition;
 
 import com.calclab.suco.client.events.Listener0;
 
 public interface RTEditor {
 
-    void addAction(ActionDescriptor<Object> action, ActionPosition position);
+    public final ActionToolbarPosition topbar = new ActionToolbarPosition("rte-topbar");
+    public final ActionToolbarPosition sndbar = new ActionToolbarPosition("rte-sndbar");;
 
-    void addActions(ActionCollection<Object> actions, ActionPosition position);
+    void addAction(ActionDescriptor<Object> action);
+
+    void addActions(ActionCollection<Object> actions);
 
     void addOnEditListener(Listener0 listener);
 
     void attach();
 
-    void editContent(String content);
+    ActionAddCondition<Object> canBeBasic();
+
+    ActionAddCondition<Object> canBeExtended();
 
     View getEditorArea();
 
+    String getHtml();
+
     ActionToolbar<Object> getSndBar();
+
+    String getText();
 
     ActionToolbar<Object> getTopBar();
 
+    void reset();
+
     void setExtended(boolean extended);
 
+    void setHtml(String html);
+
+    void setText(String text);
 }

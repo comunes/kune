@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.app.HistoryWrapperDefault;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.I18nService;
@@ -51,6 +52,8 @@ import org.ourproject.kune.platf.client.ui.rte.RTEActionSndToolbar;
 import org.ourproject.kune.platf.client.ui.rte.RTEActionSndToolbarPresenter;
 import org.ourproject.kune.platf.client.ui.rte.RTEActionTopToolbar;
 import org.ourproject.kune.platf.client.ui.rte.RTEActionTopToolbarPresenter;
+import org.ourproject.kune.platf.client.ui.rte.RTESavingEditor;
+import org.ourproject.kune.platf.client.ui.rte.RTESavingEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPresenter;
@@ -58,6 +61,7 @@ import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
+import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
@@ -155,6 +159,15 @@ public class KunePlatformModule extends AbstractModule {
             container.removeProvider(I18nTranslationService.class);
         }
 
+        register(Singleton.class, new Factory<Resources>(Resources.class) {
+            @Override
+            public Resources create() {
+                return new Resources(i18n);
+            }
+        });
+
+        $(Resources.class);
+
         register(Singleton.class, new Factory<I18nTranslationService>(I18nTranslationService.class) {
             @Override
             public I18nTranslationService create() {
@@ -214,14 +227,14 @@ public class KunePlatformModule extends AbstractModule {
         register(NoDecoration.class, new Factory<RTEActionTopToolbar>(RTEActionTopToolbar.class) {
             @Override
             public RTEActionTopToolbar create() {
-                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class), i18n);
+                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class));
                 final RTEActionTopToolbarPresenter toolbar = new RTEActionTopToolbarPresenter(panel);
                 return toolbar;
             }
         }, new Factory<RTEActionSndToolbar>(RTEActionSndToolbar.class) {
             @Override
             public RTEActionSndToolbar create() {
-                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class), i18n);
+                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class));
                 final RTEActionSndToolbarPresenter toolbar = new RTEActionSndToolbarPresenter(panel);
                 return toolbar;
             }
@@ -240,11 +253,19 @@ public class KunePlatformModule extends AbstractModule {
                 presenter.init(panel);
                 return presenter;
             }
+        }, new Factory<RTESavingEditor>(RTESavingEditor.class) {
+            @Override
+            public RTESavingEditor create() {
+                return new RTESavingEditorPresenter($(RTEditor.class), true, $(I18nTranslationService.class),
+                        $(StateManager.class), $(SiteSignOutLink.class), $(DeferredCommandWrapper.class),
+                        $(RTEImgResources.class));
+            }
         });
+
         register(NoDecoration.class, new Factory<TestRTEDialog>(TestRTEDialog.class) {
             @Override
             public TestRTEDialog create() {
-                return new TestRTEDialog($(RTEditor.class));
+                return new TestRTEDialog($(RTESavingEditor.class));
             }
         });
 

@@ -23,7 +23,6 @@ import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
@@ -64,7 +63,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         otherBuddiesLabel.addStyleName("kune-Margin-Small-trbl");
         vp.add(flowPanel);
         vp.add(otherBuddiesLabel);
-        toolbar = ((ActionToolbarPanel<UserSimpleDTO>) actionToolbarView).getToolbar(ActionToolbarPosition.bottombar);
+        toolbar = ((ActionToolbarPanel<UserSimpleDTO>) actionToolbarView).getToolbar();
         toolbar.setCleanStyle();
         vp.add(toolbar);
         super.add(vp);

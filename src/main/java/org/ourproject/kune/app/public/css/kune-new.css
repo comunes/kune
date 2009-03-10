@@ -872,3 +872,11 @@
 .k-eil-edit {
     border: thin solid black;
 }
+
+/* duplicated in rte.css */
+.k-rte-comment {
+  border:1px dashed #C0C0C0;
+  line-height:1.4;
+  padding:3px;
+  background-color:#D7FFD7;
+}

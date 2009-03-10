@@ -22,10 +22,13 @@ package org.ourproject.kune.platf.client.actions.toolbar;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 
 public interface ActionToolbar<T> {
 
-    void addActions(ActionItemCollection<T> actionItemCollection);
+    ActionToolbarPosition IN_ANY = new ActionToolbarPosition("in-all");
+
+    void addActions(ActionItemCollection<T> actionItemCollection, ActionToolbarPosition actionToolbarPosition);
 
     void attach();
 
@@ -44,6 +47,10 @@ public interface ActionToolbar<T> {
     void hideAllMenus();
 
     void setButtonEnable(ActionDescriptor<T> action, boolean enable);
+
+    void setCleanStyle();
+
+    void setNormalStyle();
 
     void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip, String newTitle);
 

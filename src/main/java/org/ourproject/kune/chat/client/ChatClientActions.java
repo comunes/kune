@@ -26,13 +26,13 @@ import org.ourproject.kune.gallery.client.GalleryClientTool;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
-import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.wiki.client.WikiClientTool;
+import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 
@@ -62,7 +62,7 @@ public class ChatClientActions {
 
     private void createActions() {
         final ActionToolbarButtonDescriptor<StateToken> chatAbout = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         chatEngineProvider.get().joinRoom(token.toString().replaceAll("\\.", "-"),
                                 session.getCurrentUserInfo().getShortName());
@@ -76,7 +76,7 @@ public class ChatClientActions {
         chatAbout.setEnableCondition(notDeleted());
 
         ActionToolbarButtonDescriptor<StateToken> joinRoom = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Viewer, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(StateToken token) {
                         ChatEngine chatEngine = chatEngineProvider.get();
                         chatEngine.joinRoom(session.getContainerState().getContainer().getName(),
@@ -89,7 +89,7 @@ public class ChatClientActions {
         joinRoom.setMustBeAuthenticated(true);
 
         ActionToolbarButtonDescriptor<StateToken> addRoom = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.topbar, new Listener<StateToken>() {
+                AccessRolDTO.Administrator, AbstractFoldableContentActions.CONTEXT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(StateToken token) {
                         addRoomProvider.get().show();
                     }

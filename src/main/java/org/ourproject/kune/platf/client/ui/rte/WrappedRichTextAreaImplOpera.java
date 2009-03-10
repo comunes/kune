@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.workspace.client.editor;
+package org.ourproject.kune.platf.client.ui.rte;
 
 import org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplOpera;
 

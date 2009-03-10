@@ -27,8 +27,8 @@ import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
+import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
@@ -134,7 +134,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                 }
                 toolbar.disableMenusAndClearButtons();
                 toolbar.addActions(actionRegistry.getCurrentActions(session.getCurrentUser(), session.isLogged(),
-                        state.getGroupRights(), true));
+                        state.getGroupRights(), true), ActionToolbar.IN_ANY);
                 toolbar.attach();
                 view.show();
             } else {
@@ -148,7 +148,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
 
     private void createAddNewBuddiesAction() {
         ActionToolbarMenuDescriptor<UserSimpleDTO> addNewBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
+                AccessRolDTO.Administrator, buddiesBottom, new Listener<UserSimpleDTO>() {
                     public void onEvent(UserSimpleDTO parameter) {
                         NotifyUser.info("In development");
                     }
@@ -161,7 +161,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
 
     private void createSetBuddiesVisibilityAction(String textDescription, final UserBuddiesVisibilityDTO visibility) {
         ActionToolbarMenuRadioDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuRadioDescriptor<UserSimpleDTO>(
-                AccessRolDTO.Administrator, ActionToolbarPosition.bottombar, new Listener<UserSimpleDTO>() {
+                AccessRolDTO.Administrator, buddiesBottom, new Listener<UserSimpleDTO>() {
                     public void onEvent(UserSimpleDTO parameter) {
                         userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), visibility,

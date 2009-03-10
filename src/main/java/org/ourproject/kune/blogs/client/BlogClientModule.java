@@ -45,7 +45,7 @@ import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
-import org.ourproject.kune.workspace.client.editor.TextEditor;
+import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -78,7 +78,7 @@ public class BlogClientModule extends AbstractModule {
                         $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
                         $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(TextEditor.class), $(KuneErrorHandler.class), $(BlogViewer.class),
+                        $(EntityHeader.class), $$(ContentEditor.class), $(KuneErrorHandler.class), $(BlogViewer.class),
                         $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
             }
         });
