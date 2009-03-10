@@ -5,10 +5,12 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.rte.RTESavingEditorPresenter;
+import org.ourproject.kune.platf.client.ui.rte.RTESavingEditorView;
 import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
+import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -30,8 +32,9 @@ public class ContentEditor extends RTESavingEditorPresenter {
 
     public ContentEditor(RTEditor editor, boolean autoSave, I18nTranslationService i18n, StateManager stateManager,
             SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
-            RTEImgResources imgResources, WorkspaceSkeleton ws) {
-        super(editor, autoSave, i18n, stateManager, siteSignOutLink, deferredCommandWrapper, imgResources);
+            RTEImgResources imgResources, WorkspaceSkeleton ws, TimerWrapper timer, RTESavingEditorView view) {
+        super(editor, autoSave, i18n, stateManager, siteSignOutLink, deferredCommandWrapper, imgResources, timer);
+        super.init(view);
         this.ws = ws;
 
         vp = new VerticalPanel();

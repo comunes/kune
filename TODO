@@ -78,55 +78,16 @@ TODO-list for kune -*- mode: org; -*-
    http://en.wikipedia.org/wiki/Fragment_identifier
    http://www.w3.org/DesignIssues/Fragment.html
 ** vjrj <v> better RTE
-*** Functionality
-    + We can have several RTE in use 
-      - with different menus (File/Blog ...)
-      - with different save/close actions
-      - with different capabilities depending on:
-        - the browser
-        - the functionality
-    + bidi support
-    + shortcuts (for insert comments, italic, bold, and soon).
-    + Add new capabilities (based on InsertHTML):
-      - Insert tables
-      - Insert special chars (for table or from unicode).
-      - youtube videos
-    + Edit HTML
-    + Easy extensible for new actions
-    + Try (yes, only try) to be a reusable module (like emite)
-    + autosave on/off
-*** Charactericts 
-    + Builded over gwt RTE (or any similar RTE) and based in gwt mouse/keyboard events
-*** Menus
-**** File
-     + Save (Ctrl+S) [Always active?]
-     + Save as new copy ...
-     + Rename... (F2)
-     + Delete...
-**** Edit
-     + Undo (Ctrl+Z)
-     + Redo (Ctrl+Y)
-     ---------------
-     + Copy
-     + Cut
-     + Paste
-     ---------------
-     + Select all (Ctrl+A)
-     + Edit HTML
-**** Insert
-     + Picture...
-     + Link... (Ctrl+K)
-     + Table...
-     ----------------
-     + Comment...(Ctrl+M)
-     + Special char
-     + Horizontal line
-     + Page break (for printing)
-*** Buttons
-*** Elements
-    + A register of actions (menus/buttons)
-    + Every RTE instance selects the actions to use
-    + Two topbars, one for menus, other for buttons, font/color selections      
+*** Pending
+**** with different menus (File/Blog ...)
+**** bidi support
+**** Insert special chars (for table or from unicode).
+**** images (local/remote) with preview
+**** youtube videos/podcasts
+**** Edit HTML
+**** File > Rename (F2)
+**** Insert > Special char
+**** Insert > Page break (for printing)
 *** Links
    http://www.ongwt.com/post/2009/01/08/XWiki-:-Wysiwyg-editor-based-on-GWT
    http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/samples/internet/ie55/EditRegions/default.asp

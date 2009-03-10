@@ -83,6 +83,7 @@ public class WikiClientActions extends AbstractFoldableContentActions {
 
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
         createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
+        createEditAction(TYPE_WIKIPAGE);
 
         // final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupCxt =
         // createSetAsDefContent(parentMenuTitleCtx);
@@ -100,8 +101,6 @@ public class WikiClientActions extends AbstractFoldableContentActions {
         createGoAction(all);
 
         createGoHomeAction(containers);
-
-        createEditAction(TYPE_WIKIPAGE);
 
         createTranslateAction(TYPE_FOLDER, TYPE_WIKIPAGE);
 

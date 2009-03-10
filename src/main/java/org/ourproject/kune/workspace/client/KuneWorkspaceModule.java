@@ -46,10 +46,12 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.rte.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
+import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbarPresenter;
 import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
@@ -912,7 +914,8 @@ public class KuneWorkspaceModule extends AbstractModule {
             public ContentEditor create() {
                 return new ContentEditor($(RTEditor.class), true, $(I18nTranslationService.class),
                         $(StateManager.class), $(SiteSignOutLink.class), $(DeferredCommandWrapper.class),
-                        $(RTEImgResources.class), $(WorkspaceSkeleton.class));
+                        $(RTEImgResources.class), $(WorkspaceSkeleton.class), $(TimerWrapper.class),
+                        new RTESavingEditorPanel());
             }
         });
         register(NoDecoration.class, new Factory<ActionContextTopToolbar>(ActionContextTopToolbar.class) {

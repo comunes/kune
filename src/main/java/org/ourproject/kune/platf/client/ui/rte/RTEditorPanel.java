@@ -115,7 +115,7 @@ public class RTEditorPanel implements RTEditorView {
     public void addComment(String userName) {
         String time = i18n.formatDateWithLocale(new Date(), true);
         Element span = DOM.createSpan();
-        span.setInnerHTML("<em>" + i18n.t("type your commment here") + "</em> -" + userName + " " + time);
+        span.setInnerHTML("<em>" + i18n.t("type your comment here") + "</em> -" + userName + " " + time);
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
         insertHtml("&nbsp;" + span.getString() + "&nbsp;");
     }

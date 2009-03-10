@@ -53,6 +53,7 @@ import org.ourproject.kune.platf.client.ui.rte.RTEActionSndToolbarPresenter;
 import org.ourproject.kune.platf.client.ui.rte.RTEActionTopToolbar;
 import org.ourproject.kune.platf.client.ui.rte.RTEActionTopToolbarPresenter;
 import org.ourproject.kune.platf.client.ui.rte.RTESavingEditor;
+import org.ourproject.kune.platf.client.ui.rte.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.RTESavingEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPanel;
@@ -60,6 +61,7 @@ import org.ourproject.kune.platf.client.ui.rte.RTEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
+import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
@@ -240,6 +242,13 @@ public class KunePlatformModule extends AbstractModule {
             }
         });
 
+        register(Singleton.class, new Factory<TimerWrapper>(TimerWrapper.class) {
+            @Override
+            public TimerWrapper create() {
+                return new TimerWrapper();
+            }
+        });
+
         register(NoDecoration.class, new Factory<RTEditor>(RTEditor.class) {
             @Override
             public RTEditor create() {
@@ -256,9 +265,12 @@ public class KunePlatformModule extends AbstractModule {
         }, new Factory<RTESavingEditor>(RTESavingEditor.class) {
             @Override
             public RTESavingEditor create() {
-                return new RTESavingEditorPresenter($(RTEditor.class), true, $(I18nTranslationService.class),
-                        $(StateManager.class), $(SiteSignOutLink.class), $(DeferredCommandWrapper.class),
-                        $(RTEImgResources.class));
+                RTESavingEditorPresenter presenter = new RTESavingEditorPresenter($(RTEditor.class), true,
+                        $(I18nTranslationService.class), $(StateManager.class), $(SiteSignOutLink.class),
+                        $(DeferredCommandWrapper.class), $(RTEImgResources.class), $(TimerWrapper.class));
+                RTESavingEditorPanel panel = new RTESavingEditorPanel();
+                presenter.init(panel);
+                return presenter;
             }
         });
 

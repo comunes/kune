@@ -297,7 +297,6 @@ public class RTEditorPresenter implements RTEditor {
         justifyRight.setIconCls(getCssName(imgResources.alignright()));
         justifyRight.setToolTip(i18n.t("Right Justify"));
         justifyRight.setShortcut(new ActionShortcut(true, 'R'));
-        // justifyRight.setRightSeparator(ActionToolbarButtonSeparator.spacer);
         justifyRight.setAddCondition(canBeBasic);
 
         ActionToolbarMenuDescriptor<Object> undo = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
@@ -327,7 +326,7 @@ public class RTEditorPresenter implements RTEditor {
         redo.setBottomSeparator(true);
         redo.setIconCls(getCssName(imgResources.redo()));
 
-        ActionToolbarButtonDescriptor<Object> undoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, topbar,
+        ActionToolbarButtonDescriptor<Object> undoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
                 new Listener0() {
                     public void onEvent() {
                         view.undo();
@@ -337,8 +336,9 @@ public class RTEditorPresenter implements RTEditor {
         undoBtn.setToolTip(i18n.t("Undo"));
         undoBtn.setAddCondition(canBeExtended);
         undoBtn.setIconCls(getCssName(imgResources.undo()));
+        undoBtn.setPosition(0);
 
-        ActionToolbarButtonDescriptor<Object> redoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, topbar,
+        ActionToolbarButtonDescriptor<Object> redoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
                 new Listener0() {
                     public void onEvent() {
                         view.redo();
@@ -348,6 +348,7 @@ public class RTEditorPresenter implements RTEditor {
         redoBtn.setToolTip(i18n.t("Redo"));
         redoBtn.setAddCondition(canBeExtended);
         redoBtn.setIconCls(getCssName(imgResources.redo()));
+        redoBtn.setPosition(1);
         redoBtn.setRightSeparator(ActionToolbarButtonSeparator.separator);
 
         ActionToolbarMenuDescriptor<Object> copy = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
@@ -454,7 +455,7 @@ public class RTEditorPresenter implements RTEditor {
         });
         strikethrough.setIconCls(getCssName(imgResources.strikeout()));
         strikethrough.setToolTip(i18n.t("Strikethrough"));
-        // strikethrough.setRightSeparator(ActionToolbarButtonSeparator.separator);
+        strikethrough.setRightSeparator(ActionToolbarButtonSeparator.separator);
         strikethrough.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> decreaseIndent = new ActionToolbarButtonDescriptor<Object>(accessRol,
@@ -477,7 +478,6 @@ public class RTEditorPresenter implements RTEditor {
                 });
         increaseIndent.setIconCls(getCssName(imgResources.incrementindent()));
         increaseIndent.setToolTip(i18n.t("Increase Indent"));
-        // increaseIndent.setRightSeparator(ActionToolbarButtonSeparator.spacer);
         increaseIndent.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> ol = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
@@ -502,7 +502,7 @@ public class RTEditorPresenter implements RTEditor {
         ul.setIconCls(getCssName(imgResources.defaultbullet()));
         ul.setToolTip(i18n.t("Bullet List"));
         ul.setShortcut(new ActionShortcut(true, '8'));
-        // ul.setRightSeparator(ActionToolbarButtonSeparator.separator);
+        ul.setRightSeparator(ActionToolbarButtonSeparator.separator);
         ul.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> img = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
@@ -559,23 +559,29 @@ public class RTEditorPresenter implements RTEditor {
         removeFormat.setToolTip(i18n.t("Clear Formatting"));
         removeFormat.setShortcut(new ActionShortcut(true, ' ', "Space"));
         removeFormat.setAddCondition(canBeExtended);
-        // removeFormat.setRightSeparator(ActionToolbarButtonSeparator.separator);
+        removeFormat.setRightSeparator(ActionToolbarButtonSeparator.separator);
 
         final ActionToolbarMenuDescriptor<Object> insertTable = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 topbar, new Listener0() {
                     public void onEvent() {
-                        view.insertHtml("<table border=\"0\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">\n"
-                                + "<tbody>\n" + "<tr>\n" + "<td width=\"50%\"><br>\n" + "</td>\n"
-                                + "<td width=\"50%\"><br>\n" + "</td>\n" + "</tr>\n" + "<tr>\n"
-                                + "<td width=\"50%\"><br>\n" + "</td>\n" + "<td width=\"50%\"><br>\n" + "</td>\n"
-                                + "</tr>\n</tbody>\n</table>");
-                        fireOnEdit();
+                        insertSimpleTable();
                     }
                 });
         insertTable.setIconCls(getCssName(imgResources.inserttable()));
         insertTable.setTextDescription(i18n.t("Insert Table ..."));
         insertTable.setAddCondition(canBeExtended);
         insertTable.setParentMenuTitle(i18n.t(INSERT_MENU));
+
+        final ActionToolbarButtonDescriptor<Object> insertTableBtn = new ActionToolbarButtonDescriptor<Object>(
+                accessRol, sndbar, new Listener0() {
+                    public void onEvent() {
+                        insertSimpleTable();
+                    }
+                });
+        insertTableBtn.setIconCls(getCssName(imgResources.inserttable()));
+        insertTableBtn.setToolTip(i18n.t("Insert Table"));
+        insertTableBtn.setAddCondition(canBeExtended);
+        insertTableBtn.setRightSeparator(ActionToolbarButtonSeparator.separator);
 
         final ActionToolbarButtonDescriptor<Object> fontColor = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 sndbar, new Listener0() {
@@ -639,6 +645,7 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(img));
         actions.add(withNoItem(createLink));
         actions.add(withNoItem(removeLink));
+        actions.add(withNoItem(insertTableBtn));
         actions.add(withNoItem(insertTable));
         actions.add(withNoItem(comment));
         actions.add(withNoItem(undoBtn));
@@ -699,6 +706,14 @@ public class RTEditorPresenter implements RTEditor {
 
     private String getCssName(ImageResource imageResource) {
         return RTEImgResources.SUFFIX + imageResource.getName();
+    }
+
+    private void insertSimpleTable() {
+        view.insertHtml("<table border=\"0\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">\n" + "<tbody>\n"
+                + "<tr>\n" + "<td width=\"50%\"><br>\n" + "</td>\n" + "<td width=\"50%\"><br>\n" + "</td>\n"
+                + "</tr>\n" + "<tr>\n" + "<td width=\"50%\"><br>\n" + "</td>\n" + "<td width=\"50%\"><br>\n"
+                + "</td>\n" + "</tr>\n</tbody>\n</table>");
+        fireOnEdit();
     }
 
     private boolean isExtended() {

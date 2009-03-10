@@ -4,19 +4,22 @@ import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.Timer;
 
 public class TimerWrapper {
-    private final Timer timer;
+    private Timer timer;
 
-    public TimerWrapper(final Listener0 onTime) {
+    public TimerWrapper() {
+    }
+
+    public void cancel() {
+        timer.cancel();
+    }
+
+    public void configure(final Listener0 onTime) {
         timer = new Timer() {
             @Override
             public void run() {
                 onTime.onEvent();
             }
         };
-    }
-
-    public void cancel() {
-        timer.cancel();
     }
 
     public void run() {

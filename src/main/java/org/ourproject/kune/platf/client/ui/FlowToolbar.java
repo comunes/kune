@@ -48,6 +48,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
 
     public Widget addFill() {
         final Label emptyLabel = new Label("");
+        emptyLabel.addStyleName("kune-floatleft");
         this.add(emptyLabel);
         return emptyLabel;
     }
@@ -56,6 +57,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
         final Label emptyLabel = new Label("");
         emptyLabel.setStyleName("ytb-sep");
         emptyLabel.addStyleName("k-toolbar-sep");
+        emptyLabel.addStyleName("kune-floatleft");
         this.add(emptyLabel);
         return emptyLabel;
     }
@@ -63,6 +65,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
     public Widget addSpacer() {
         final Label emptyLabel = new Label("");
         emptyLabel.setStyleName("ytb-spacer");
+        emptyLabel.addStyleName("kune-floatleft");
         this.add(emptyLabel);
         return emptyLabel;
     }

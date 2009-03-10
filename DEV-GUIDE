@@ -18,6 +18,14 @@ Only project developers can access the SVN tree via this method. SSH must be ins
 
  svn checkout svn+ssh://colaborator@scm.ourproject.org/svnroot/kune/trunk
 
+== Mailing lists==
+
+We use mainly two lists:
+* [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-devel kune-devel] for all development related topics
+* [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-commits kune-commits] where the svn sends the commit logs and summaries
+
+It's recommended to be subscribed to both if you want to participate in the development.
+
 ==Some relevant docs for kune development==
 
 See this files in trunk directory:

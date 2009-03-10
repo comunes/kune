@@ -80,6 +80,7 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
                 Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+        createEditAction(TYPE_DOCUMENT);
         createContentModeratedActions(parentMenuTitle, contentsModerated);
         createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
 
@@ -99,8 +100,6 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         createGoAction(all);
 
         createGoHomeAction(containers);
-
-        createEditAction(TYPE_DOCUMENT);
 
         createTranslateAction(TYPE_DOCUMENT, TYPE_FOLDER);
 

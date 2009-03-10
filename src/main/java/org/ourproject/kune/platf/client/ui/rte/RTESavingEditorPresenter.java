@@ -8,7 +8,6 @@ import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
@@ -38,11 +37,12 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     private final BeforeActionListener beforeStateChangeListener;
     @Deprecated
     private final SiteSignOutLink siteSignOutLink;
-    private ActionToolbarButtonDescriptor<Object> saveBtn;
+    ActionToolbarButtonDescriptor<Object> saveBtn;
+    private RTESavingEditorView view;
 
     public RTESavingEditorPresenter(RTEditor editor, final boolean autoSave, final I18nTranslationService i18n,
             StateManager stateManager, SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
-            RTEImgResources imgResources) {
+            RTEImgResources imgResources, TimerWrapper timer) {
         this.editor = editor;
         this.autoSave = autoSave;
         this.i18n = i18n;
@@ -53,7 +53,9 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         this.savePending = false;
         this.saveAndCloseConfirmed = false;
         createActions();
-        this.timer = new TimerWrapper(new Listener0() {
+        this.timer =  timer;
+        timer.configure(new Listener0() {;
+
             public void onEvent() {
                 onAutoSave();
             }
@@ -82,6 +84,10 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
 
     public RTEditor getBasicEditor() {
         return editor;
+    }
+
+    public void init(RTESavingEditorView view) {
+        this.view = view;
     }
 
     public void onDoSaveAndClose() {
@@ -121,7 +127,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
                     onCancelConfirmed();
                 }
             };
-            NotifyUser.askConfirmation(i18n.t("Save confirmation"),
+            view.askConfirmation(i18n.t("Save confirmation"),
                     i18n.t("Do you want to save before closing the editor?"), onYes, onCancel);
         } else {
             onCancelConfirmed();
@@ -155,23 +161,34 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         }
     }
 
+    void onEdit() {
+        if (!savePending) {
+            savePending = true;
+            if (autoSave) {
+                timer.schedule(AUTOSAVE_IN_MILLISECONDS);
+            }
+            enableSaveBtn(true);
+        }
+    }
+
     private void createActions() {
         Listener0 onPerformSaveCall = new Listener0() {
             public void onEvent() {
                 onDoSave();
             }
         };
-        saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.topbar, onPerformSaveCall);
+        saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.sndbar, onPerformSaveCall);
         saveBtn.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         saveBtn.setToolTip(i18n.t("Save"));
         saveBtn.setShortcut(new ActionShortcut(true, 'S'));
-        saveBtn.setPosition(20);
+        saveBtn.setPosition(0);
 
         ActionToolbarMenuDescriptor<Object> save = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
                 RTEditor.topbar, onPerformSaveCall);
         save.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         save.setParentMenuTitle(i18n.t(FILE_MENU_OPTION));
         save.setTextDescription(i18n.t("Save"));
+        save.setShortcut(new ActionShortcut(true, 'S'));
         save.setPosition(0);
 
         ActionToolbarMenuDescriptor<Object> close = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
@@ -185,7 +202,12 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
 
         Listener0 onPerformSaveAndCloseCall = new Listener0() {
             public void onEvent() {
-                onDoSaveAndClose();
+                if (savePending) {
+                    timer.cancel();
+                    onDoSaveAndClose();
+                } else {
+                    onCancelConfirmed();
+                }
             }
         };
         ActionToolbarMenuDescriptor<Object> saveclose = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
@@ -208,21 +230,11 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     private void enableSaveBtn(boolean enable) {
-        editor.getTopBar().setButtonEnable(saveBtn, enable);
+        editor.getSndBar().setButtonEnable(saveBtn, enable);
     }
 
     private void onDoEditCancelled() {
         onEditCancelled.onEvent();
-    }
-
-    private void onEdit() {
-        if (!savePending) {
-            savePending = true;
-            if (autoSave) {
-                timer.schedule(AUTOSAVE_IN_MILLISECONDS);
-            }
-            enableSaveBtn(true);
-        }
     }
 
     private void reset() {

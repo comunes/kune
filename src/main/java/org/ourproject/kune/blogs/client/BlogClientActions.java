@@ -79,6 +79,7 @@ public class BlogClientActions extends AbstractFoldableContentActions {
                 Position.ctx, TYPE_BLOG);
 
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
+        createEditAction(TYPE_POST);
         createContentModeratedActions(parentMenuTitle, contentsModerated);
         createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
 
@@ -95,7 +96,6 @@ public class BlogClientActions extends AbstractFoldableContentActions {
 
         createGoAction(all);
         createGoHomeAction(containers);
-        createEditAction(TYPE_POST);
 
         // ContentRPC Authorized must permit folders
         // contentActionRegistry.addAction(setAsDefGroupCxt, TYPE_BLOG);
