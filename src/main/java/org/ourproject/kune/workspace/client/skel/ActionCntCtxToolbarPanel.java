@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.user.client.ui.Widget;
 
 public class ActionCntCtxToolbarPanel<T> extends ActionToolbarPanel<T> {
 
@@ -50,14 +51,14 @@ public class ActionCntCtxToolbarPanel<T> extends ActionToolbarPanel<T> {
     public void attach() {
         if (!toolbar.isAttached()) {
             wsToolbar.removeAll();
-            wsToolbar.add(toolbar);
+            wsToolbar.add((Widget) toolbar);
         }
     }
 
     @Override
     public void detach() {
         if (toolbar.isAttached()) {
-            wsToolbar.remove(toolbar);
+            wsToolbar.remove((Widget) toolbar);
         }
     }
 }

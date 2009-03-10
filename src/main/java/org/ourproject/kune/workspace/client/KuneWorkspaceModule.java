@@ -57,7 +57,7 @@ import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
 import org.ourproject.kune.workspace.client.cxt.ActionContextBottomToolbar;
-import org.ourproject.kune.workspace.client.cxt.ActionContextTopToolBar;
+import org.ourproject.kune.workspace.client.cxt.ActionContextTopToolbar;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPanel;
@@ -915,13 +915,13 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $(RTEImgResources.class), $(WorkspaceSkeleton.class));
             }
         });
-        register(NoDecoration.class, new Factory<ActionContextTopToolBar>(ActionContextTopToolBar.class) {
+        register(NoDecoration.class, new Factory<ActionContextTopToolbar>(ActionContextTopToolbar.class) {
             @Override
-            public ActionContextTopToolBar create() {
+            public ActionContextTopToolbar create() {
                 final ActionCntCtxToolbarPanel<StateToken> panel = new ActionCntCtxToolbarPanel<StateToken>(
                         AbstractFoldableContentActions.CONTEXT_TOPBAR, $$(ActionManager.class),
                         $(WorkspaceSkeleton.class));
-                final ActionContextTopToolBar toolbar = new ActionContextTopToolBar(panel);
+                final ActionContextTopToolbar toolbar = new ActionContextTopToolbar(panel);
                 return toolbar;
             }
         });
@@ -942,7 +942,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             public ContextNavigator create() {
                 final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
                         $(Session.class), $(I18nTranslationService.class), $(ContentIconsRegistry.class),
-                        $(ContentCapabilitiesRegistry.class), $(ActionContextTopToolBar.class),
+                        $(ContentCapabilitiesRegistry.class), $(ActionContextTopToolbar.class),
                         $(ActionContextBottomToolbar.class), $(ContextActionRegistry.class),
                         $$(FileDownloadUtils.class), true, $(RenameAction.class));
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter,

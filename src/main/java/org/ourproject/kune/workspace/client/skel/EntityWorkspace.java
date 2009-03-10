@@ -19,6 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.skel;
 
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.RoundedPanel;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
@@ -165,7 +166,7 @@ public class EntityWorkspace {
         content.clear();
     }
 
-    public SimpleToolbar getBottomTitle() {
+    public AbstractToolbar getBottomTitle() {
         return bottom;
     }
 
@@ -197,11 +198,11 @@ public class EntityWorkspace {
         return mainFitPanel;
     }
 
-    public SimpleToolbar getSubTitle() {
+    public AbstractToolbar getSubTitle() {
         return subTitle;
     }
 
-    public SimpleToolbar getTitleComponent() {
+    public AbstractToolbar getTitleComponent() {
         return title;
     }
 

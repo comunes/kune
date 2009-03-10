@@ -20,39 +20,35 @@
 package org.ourproject.kune.platf.client.ui;
 
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 
-public class SimpleToolbar extends Composite implements AbstractToolbar {
+public class FlowToolbar extends Composite implements AbstractToolbar {
 
-    private final HorizontalPanel childPanel;
     private final HorizontalPanel mainPanel;
+    private final FlowPanel childPanel;
 
-    public SimpleToolbar() {
+    public FlowToolbar() {
         mainPanel = new HorizontalPanel();
-        childPanel = new HorizontalPanel();
+        childPanel = new FlowPanel();
         mainPanel.add(childPanel);
         initWidget(mainPanel);
-        mainPanel.setWidth("100%");
     }
 
     public void add(final Widget widget) {
         childPanel.add(widget);
-        childPanel.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void add(final Widget widget, VerticalAlignmentConstant valign) {
         childPanel.add(widget);
-        childPanel.setCellVerticalAlignment(widget, valign);
     }
 
     public Widget addFill() {
         final Label emptyLabel = new Label("");
         this.add(emptyLabel);
-        childPanel.setCellWidth(emptyLabel, "100%");
         return emptyLabel;
     }
 
@@ -73,7 +69,6 @@ public class SimpleToolbar extends Composite implements AbstractToolbar {
 
     public void insert(final Widget widget, int position) {
         childPanel.insert(widget, position);
-        childPanel.setCellVerticalAlignment(widget, VerticalPanel.ALIGN_MIDDLE);
     }
 
     public void remove(final Widget widget) {
@@ -92,7 +87,7 @@ public class SimpleToolbar extends Composite implements AbstractToolbar {
     @Override
     public void setHeight(String height) {
         mainPanel.setHeight(height);
-        mainPanel.setCellHeight(childPanel, height);
+        childPanel.setHeight(height);
     }
 
     public void setNormalStyle() {

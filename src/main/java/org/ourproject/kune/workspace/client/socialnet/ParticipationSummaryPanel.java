@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
@@ -32,13 +32,14 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.suco.client.events.Listener;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
 public class ParticipationSummaryPanel extends SummaryPanel implements ParticipationSummaryView {
 
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
-    private final SimpleToolbar toolbar;
+    private final AbstractToolbar toolbar;
 
     public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
             final WorkspaceSkeleton ws, ActionToolbarView<StateToken> actionToolbarView) {
@@ -55,7 +56,7 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
         super.add(gridMenuPanel);
         toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar();
         toolbar.setCleanStyle();
-        super.add(toolbar);
+        super.add((Widget) toolbar);
         addInSummary();
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {
             @Override

@@ -22,8 +22,8 @@ package org.ourproject.kune.workspace.client.sitebar.siteusermenu;
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.ClickListener;
@@ -52,7 +52,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
         loggedUserMenu = new PushButton("");
         loggedUserMenu.ensureDebugId(LOGGED_USER_MENU);
         loggedUserMenu.setStyleName("k-sitebar-labellink");
-        SimpleToolbar siteBar = ws.getSiteBar();
+        AbstractToolbar siteBar = ws.getSiteBar();
         siteBar.add(loggedUserMenu);
         separator = siteBar.addSeparator();
         userMenu = new Menu();

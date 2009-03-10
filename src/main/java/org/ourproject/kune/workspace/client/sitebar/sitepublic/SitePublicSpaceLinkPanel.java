@@ -21,8 +21,8 @@ package org.ourproject.kune.workspace.client.sitebar.sitepublic;
 
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.IconLabel;
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.Window;
@@ -49,7 +49,7 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
         contentNoPublic.ensureDebugId(SITE_CONTENT_NO_PUBLIC);
         publicHP.add(gotoPublic);
         publicHP.add(contentNoPublic);
-        final SimpleToolbar siteBar = ws.getSiteBar();
+        final AbstractToolbar siteBar = ws.getSiteBar();
         siteBar.add(publicHP);
         siteBar.addFill();
 

@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridDragConfiguration;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
@@ -38,6 +38,7 @@ import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
@@ -47,7 +48,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
     private final I18nUITranslationService i18n;
     private final GroupMembersSummaryPresenter presenter;
-    private final SimpleToolbar toolbar;
+    private final AbstractToolbar toolbar;
     private final Label noMembersPublic;
 
     public GroupMembersSummaryPanel(final GroupMembersSummaryPresenter presenter, final I18nUITranslationService i18n,
@@ -79,7 +80,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
 
         toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar();
         toolbar.setCleanStyle();
-        super.add(toolbar);
+        super.add((Widget) toolbar);
         super.addInSummary();
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {
             @Override

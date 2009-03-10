@@ -28,8 +28,8 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.BasicThumb;
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -48,7 +48,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
     private final Label otherBuddiesLabel;
     private final I18nTranslationService i18n;
     private final ActionManager actionManager;
-    private final SimpleToolbar toolbar;
+    private final AbstractToolbar toolbar;
     private final Label noBuddiesPublic;
 
     public BuddiesSummaryPanel(final BuddiesSummaryPresenter presenter, final WorkspaceSkeleton ws,
@@ -65,7 +65,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         vp.add(otherBuddiesLabel);
         toolbar = ((ActionToolbarPanel<UserSimpleDTO>) actionToolbarView).getToolbar();
         toolbar.setCleanStyle();
-        vp.add(toolbar);
+        vp.add((Widget) toolbar);
         super.add(vp);
         addInSummary();
         noBuddiesPublic = new Label(i18n.t(PlatfMessages.BUDDIES_NOT_PUBLIC));

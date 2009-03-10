@@ -3,7 +3,7 @@ package org.ourproject.kune.workspace.client.editor;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.rte.RTESavingEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPanel;
@@ -16,6 +16,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
@@ -25,7 +26,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
     private final VerticalPanel vp;
     private final RTEditor basicEditor;
     private final RTEditorPanel editorPanel;
-    private final SimpleToolbar topbar;
+    private final AbstractToolbar topbar;
 
     public ContentEditor(RTEditor editor, boolean autoSave, I18nTranslationService i18n, StateManager stateManager,
             SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
@@ -35,12 +36,11 @@ public class ContentEditor extends RTESavingEditorPresenter {
 
         vp = new VerticalPanel();
         basicEditor = super.getBasicEditor();
-        vp.add(((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
+        vp.add((Widget) ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
         editorPanel = (RTEditorPanel) basicEditor.getEditorArea();
         vp.add(editorPanel.getRTE());
         basicEditor.setExtended(true);
         vp.setWidth("100%");
-        adjHeight(ws.getEntityWorkspace().getContentHeight());
         ws.getEntityWorkspace().addContentListener(new ContainerListenerAdapter() {
             @Override
             public void onResize(final BoxComponent component, final int adjWidth, final int adjHeight,
@@ -55,9 +55,10 @@ public class ContentEditor extends RTESavingEditorPresenter {
     public void edit(String html, Listener<String> onSave, Listener0 onEditCancelled) {
         Toolbar contentTopBar = ws.getEntityWorkspace().getContentTopBar();
         contentTopBar.removeAll();
-        contentTopBar.add(topbar);
+        contentTopBar.add((Widget) topbar);
         ws.getEntityWorkspace().setContent(vp);
         super.edit(html, onSave, onEditCancelled);
+        adjHeight(ws.getEntityWorkspace().getContentHeight());
     }
 
     @Override
@@ -67,7 +68,11 @@ public class ContentEditor extends RTESavingEditorPresenter {
     }
 
     private void adjHeight(final int height) {
-        int newHeight = height - WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 27;
+        AbstractToolbar sndbar = ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar();
+        int barHeight = sndbar.getOffsetHeight();
+        int newHeight = height - 20 - barHeight;
+        // Log.debug("Sndbar height: " + barHeight + " new height: " +
+        // newHeight);
         editorPanel.adjustSize(newHeight);
         vp.setCellHeight(editorPanel.getRTE(), "" + newHeight);
     }

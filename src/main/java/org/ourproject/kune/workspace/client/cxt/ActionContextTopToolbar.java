@@ -24,9 +24,9 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
-public class ActionContextTopToolBar extends ActionToolbarPresenter<StateToken> implements ActionToolbar<StateToken> {
+public class ActionContextTopToolbar extends ActionToolbarPresenter<StateToken> implements ActionToolbar<StateToken> {
 
-    public ActionContextTopToolBar(ActionToolbarView<StateToken> toolbar) {
+    public ActionContextTopToolbar(ActionToolbarView<StateToken> toolbar) {
         super(toolbar);
     }
 

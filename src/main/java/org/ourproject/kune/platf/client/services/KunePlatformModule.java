@@ -234,7 +234,7 @@ public class KunePlatformModule extends AbstractModule {
         }, new Factory<RTEActionSndToolbar>(RTEActionSndToolbar.class) {
             @Override
             public RTEActionSndToolbar create() {
-                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class));
+                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class), true);
                 final RTEActionSndToolbarPresenter toolbar = new RTEActionSndToolbarPresenter(panel);
                 return toolbar;
             }

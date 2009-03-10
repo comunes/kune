@@ -30,6 +30,8 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuCheckItemDescri
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
+import org.ourproject.kune.platf.client.ui.FlowToolbar;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -52,11 +54,19 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     private final HashMap<String, Item> menuItems;
     private final HashMap<String, ToolbarButton> buttons;
     private final Provider<ActionManager> actionManagerProvider;
-    protected final SimpleToolbar toolbar;
+    protected final AbstractToolbar toolbar;
 
     public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider) {
-        toolbar = new SimpleToolbar();
-        toolbar.setWidth("100%");
+        this(actionManagerProvider, false);
+    }
+
+    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider, boolean flow) {
+        if (flow) {
+            toolbar = new FlowToolbar();
+        } else {
+            toolbar = new SimpleToolbar();
+        }
+        // toolbar.setWidth("100%");
         this.actionManagerProvider = actionManagerProvider;
 
         menus = new HashMap<String, Menu>();
@@ -77,6 +87,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         if (action.hasLeftSeparator()) {
             add(toolbar, action.getLeftSeparator());
         }
+        addFloatStyle(button);
         toolbar.add(button);
         if (action.hasRightSeparator()) {
             add(toolbar, action.getRightSeparator());
@@ -121,7 +132,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         return 0;
     }
 
-    public SimpleToolbar getToolbar() {
+    public AbstractToolbar getToolbar() {
         return toolbar;
     }
 
@@ -181,7 +192,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         }
     }
 
-    private Widget add(final SimpleToolbar toolbar, final ActionToolbarButtonSeparator separator) {
+    private Widget add(final AbstractToolbar toolbar, final ActionToolbarButtonSeparator separator) {
         switch (separator) {
         case fill:
             return toolbar.addFill();
@@ -194,7 +205,14 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     private void add(final Widget widget) {
+        addFloatStyle(widget);
         toolbar.add(widget);
+    }
+
+    private void addFloatStyle(Widget widget) {
+        if (toolbar instanceof FlowToolbar) {
+            widget.addStyleName("kune-floatleft");
+        }
     }
 
     private void addSeparator(Menu menu, boolean separator) {

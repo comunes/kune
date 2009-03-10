@@ -19,6 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.skel;
 
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
@@ -106,7 +107,7 @@ public class WorkspaceSkeleton {
         return entity.getEntityWorkspace();
     }
 
-    public SimpleToolbar getSiteBar() {
+    public AbstractToolbar getSiteBar() {
         return sitebar;
     }
 

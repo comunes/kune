@@ -4,6 +4,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
@@ -18,8 +19,8 @@ public class TestRTEDialog {
         final VerticalPanel vp = new VerticalPanel();
 
         RTEditor basicEditor = editor.getBasicEditor();
-        vp.add(((ActionToolbarPanel<Object>) basicEditor.getTopBar().getView()).getToolbar());
-        vp.add(((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
+        vp.add((Widget) ((ActionToolbarPanel<Object>) basicEditor.getTopBar().getView()).getToolbar());
+        vp.add((Widget) ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
         final RTEditorPanel editorPanel = (RTEditorPanel) basicEditor.getEditorArea();
         vp.add(editorPanel.getRTE());
         basicEditor.setExtended(true);

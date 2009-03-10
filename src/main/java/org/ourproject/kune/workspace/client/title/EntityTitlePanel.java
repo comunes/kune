@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.title;
 
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.IconLabelEditable;
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener2;
@@ -40,7 +40,7 @@ public class EntityTitlePanel implements EntityTitleView {
             }
         });
 
-        final SimpleToolbar wsTitle = ws.getEntityWorkspace().getTitleComponent();
+        final AbstractToolbar wsTitle = ws.getEntityWorkspace().getTitleComponent();
         wsTitle.add(icon);
         wsTitle.add(titleLabel);
         wsTitle.addFill();

@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.title;
 
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.ui.Label;
@@ -32,7 +32,7 @@ public class EntitySubTitlePanel implements EntitySubTitleView {
         subTitleLeftLabel = new Label();
         subTitleRightLabel = new Label();
 
-        final SimpleToolbar wsSubTitle = ws.getEntityWorkspace().getSubTitle();
+        final AbstractToolbar wsSubTitle = ws.getEntityWorkspace().getSubTitle();
         wsSubTitle.add(subTitleLeftLabel);
         wsSubTitle.addFill();
         wsSubTitle.add(subTitleRightLabel);

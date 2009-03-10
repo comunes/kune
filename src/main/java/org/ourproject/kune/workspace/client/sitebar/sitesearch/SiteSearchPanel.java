@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.sitebar.sitesearch;
 
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
+import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -40,7 +40,7 @@ public class SiteSearchPanel implements SiteSearchView {
 
     private final PushButton searchButton;
     private final TextBox searchTextBox;
-    private final SimpleToolbar siteBar;
+    private final AbstractToolbar siteBar;
 
     public SiteSearchPanel(final SiteSearchPresenter presenter, final WorkspaceSkeleton ws, Images img) {
         siteBar = ws.getSiteBar();
