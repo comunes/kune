@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.site.msg;
 
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 import com.google.gwt.user.client.ui.HTML;
@@ -33,22 +34,9 @@ public class SiteToastMessagePanel implements SiteToastMessageView {
         HTML html = new HTML(message);
         html.addStyleName("kune-Margin-Medium-trbl");
         ToastWindow toastWindow = new ToastWindow(title, html.toString());
-        String iconCls = "";
-        switch (level) {
-        case info:
-            iconCls = "k-stm-info-icon";
-            break;
-        case important:
-            iconCls = "k-stm-imp-icon";
-            break;
-        case veryImportant:
-            iconCls = "k-stm-verimp-icon";
-            break;
-        case error:
-            iconCls = "k-stm-error-icon";
-            break;
-        }
+        String iconCls = NotifyUser.getCls(level);
         toastWindow.setIconCls(iconCls);
         toastWindow.show();
     }
+
 }

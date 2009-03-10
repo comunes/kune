@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.options;
 
+import java.util.ArrayList;
+
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
@@ -28,6 +30,7 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
+import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
@@ -48,6 +51,7 @@ public abstract class AbstractOptionsPanel {
     private final String errorLabelId;
     private String iconCls;
     private Listener0 onHideListener;
+    private final ArrayList<Button> buttons;
 
     public AbstractOptionsPanel(String dialogId, String title, int width, int height, int minWidth, int minHeight,
             boolean modal, Images images, String errorLabelId) {
@@ -60,6 +64,16 @@ public abstract class AbstractOptionsPanel {
         this.modal = modal;
         this.images = images;
         this.errorLabelId = errorLabelId;
+        buttons = new ArrayList<Button>();
+    }
+
+    /**
+     * User before show/render
+     * 
+     * @param button
+     */
+    public void addButton(Button button) {
+        buttons.add(button);
     }
 
     public void addHideListener(final Listener0 onHideListener) {
@@ -167,6 +181,9 @@ public abstract class AbstractOptionsPanel {
         }
         if (onHideListener != null) {
             addHideListener();
+        }
+        for (Button button : buttons) {
+            dialog.addButton(button);
         }
     }
 

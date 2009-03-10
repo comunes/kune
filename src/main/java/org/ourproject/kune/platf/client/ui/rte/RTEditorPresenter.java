@@ -19,6 +19,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtml;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
@@ -27,6 +28,7 @@ import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
+import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.libideas.resources.client.ImageResource;
 
 public class RTEditorPresenter implements RTEditor {
@@ -61,16 +63,18 @@ public class RTEditorPresenter implements RTEditor {
     private final DeferredCommandWrapper deferred;
     private final ActionAddCondition<Object> canBeBasic;
     private final ActionAddCondition<Object> canBeExtended;
+    private final Provider<EditHtml> editHtmlDialog;
 
     public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
             RTEActionSndToolbar sndBar, RTEImgResources imgResources, TextEditorInsertElement textEditorInsertElement,
-            ColorWebSafePalette palette, DeferredCommandWrapper deferred) {
+            ColorWebSafePalette palette, Provider<EditHtml> editHtmlDialog, DeferredCommandWrapper deferred) {
         this.i18n = i18n;
         this.session = session;
         this.topBar = topBar;
         this.sndBar = sndBar;
         this.insertElement = textEditorInsertElement;
         this.palette = palette;
+        this.editHtmlDialog = editHtmlDialog;
         this.deferred = deferred;
         styleToolbar(sndBar);
         sndBar.attach();
@@ -392,7 +396,14 @@ public class RTEditorPresenter implements RTEditor {
         ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
                 new Listener0() {
                     public void onEvent() {
-                        NotifyUser.info("In dev");
+                        EditHtml dialog = editHtmlDialog.get();
+                        dialog.setUpdateListener(new Listener<String>() {
+                            public void onEvent(String html) {
+                                view.setHtml(html);
+                            }
+                        });
+                        dialog.show();
+                        dialog.setHtml(view.getHtml());
                     }
                 });
         editHtml.setIconCls(getCssName(imgResources.edithtml()));

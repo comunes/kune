@@ -60,6 +60,8 @@ public class MessageToolbar {
     public void setErrorMessage(final String message, final Level type) {
         errorLabel.setText(message);
         errorIcon.setVisible(true);
+        // FIXME
+        // String iconCls = NotifyUser.getCls(level);
         toolbar.setVisible(true);
     }
 }

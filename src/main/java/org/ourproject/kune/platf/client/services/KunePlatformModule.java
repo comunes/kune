@@ -59,6 +59,16 @@ import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.RTEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtml;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlGroup;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlPanel;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlPresenter;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.editor.EditHtmlEditor;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.editor.EditHtmlEditorPanel;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.editor.EditHtmlEditorPresenter;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.preview.EditHtmlPreview;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.preview.EditHtmlPreviewPanel;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.preview.EditHtmlPreviewPresenter;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
@@ -256,7 +266,7 @@ public class KunePlatformModule extends AbstractModule {
                 RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
                 final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
                         $(Session.class), topBar, sndBar, $(RTEImgResources.class), $(TextEditorInsertElement.class),
-                        $(ColorWebSafePalette.class), $(DeferredCommandWrapper.class));
+                        $(ColorWebSafePalette.class), $$(EditHtml.class), $(DeferredCommandWrapper.class));
                 final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
                         $(ActionManager.class));
                 presenter.init(panel);
@@ -294,6 +304,37 @@ public class KunePlatformModule extends AbstractModule {
                 RTEImgResources instance = GWT.create(RTEImgResources.class);
                 StyleInjector.injectStylesheet(instance.css().getText());
                 return instance;
+            }
+        });
+
+        registerDecorator(EditHtmlGroup.class, new EditHtmlGroup(container));
+
+        register(EditHtmlGroup.class, new Factory<EditHtml>(EditHtml.class) {
+            @Override
+            public EditHtml create() {
+                final EditHtmlPresenter presenter = new EditHtmlPresenter();
+                final EditHtmlPanel panel = new EditHtmlPanel(presenter, $(I18nTranslationService.class),
+                        $(RTEImgResources.class), $(Images.class), $(EditHtmlGroup.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(EditHtmlGroup.class, new Factory<EditHtmlEditor>(EditHtmlEditor.class) {
+            @Override
+            public EditHtmlEditor create() {
+                final EditHtmlEditorPresenter presenter = new EditHtmlEditorPresenter($(EditHtml.class));
+                final EditHtmlEditorPanel panel = new EditHtmlEditorPanel(i18n, presenter);
+                presenter.init(panel);
+                return presenter;
+            }
+        }, new Factory<EditHtmlPreview>(EditHtmlPreview.class) {
+            @Override
+            public EditHtmlPreview create() {
+                final EditHtmlPreviewPresenter presenter = new EditHtmlPreviewPresenter($(EditHtml.class));
+                final EditHtmlPreviewPanel panel = new EditHtmlPreviewPanel(i18n, presenter);
+                presenter.init(panel);
+                return presenter;
             }
         });
 

@@ -55,6 +55,25 @@ public class NotifyUser {
         onNotify.fire(Level.error, message);
     }
 
+    public static String getCls(Level level) {
+        String iconCls = "";
+        switch (level) {
+        case info:
+            iconCls = "k-stm-info-icon";
+            break;
+        case important:
+            iconCls = "k-stm-imp-icon";
+            break;
+        case veryImportant:
+            iconCls = "k-stm-verimp-icon";
+            break;
+        case error:
+            iconCls = "k-stm-error-icon";
+            break;
+        }
+        return iconCls;
+    }
+
     public static void hideProgress() {
         onHideProgress.fire();
     }
