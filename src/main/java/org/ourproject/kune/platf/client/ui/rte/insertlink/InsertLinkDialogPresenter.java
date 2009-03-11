@@ -19,12 +19,12 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
-import org.ourproject.kune.workspace.client.options.AbstractOptionsPresenter;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 
 import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener2;
 
-public class InsertLinkDialogPresenter extends AbstractOptionsPresenter implements InsertLinkDialog {
+public class InsertLinkDialogPresenter extends AbstractTabbedDialogPresenter implements InsertLinkDialog {
 
     private final Event2<String, String> onCreateLink;
 

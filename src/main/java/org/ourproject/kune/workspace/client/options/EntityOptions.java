@@ -20,9 +20,10 @@
 package org.ourproject.kune.workspace.client.options;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
-public interface EntityOptions extends AbstractOptions {
+public interface EntityOptions extends AbstractTabbedDialog {
 
     public void addOptionTab(View tab);
 

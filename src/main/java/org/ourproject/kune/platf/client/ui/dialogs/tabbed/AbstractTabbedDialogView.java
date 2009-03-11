@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.options;
+package org.ourproject.kune.platf.client.ui.dialogs.tabbed;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
-public interface AbstractOptionsView extends View {
+public interface AbstractTabbedDialogView extends View {
 
     void addOptionTab(View tab);
 

@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.ui.rte.insertimg;
 
-import org.ourproject.kune.workspace.client.options.AbstractOptions;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
 
-public interface InsertImageDialog extends AbstractOptions {
+public interface InsertImageDialog extends AbstractTabbedDialog {
 
 }

@@ -20,8 +20,9 @@
 package org.ourproject.kune.workspace.client.options;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogView;
 
-public interface EntityOptionsView extends View, AbstractOptionsView {
+public interface EntityOptionsView extends View, AbstractTabbedDialogView {
 
     int HEIGHT = 270;
 

@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.options;
+package org.ourproject.kune.platf.client.ui.dialogs.tabbed;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
-public abstract class AbstractOptionsPresenter {
+public abstract class AbstractTabbedDialogPresenter {
 
-    private AbstractOptionsView view;
+    private AbstractTabbedDialogView view;
 
     public void addOptionTab(View tab) {
         view.addOptionTab(tab);
@@ -42,7 +42,7 @@ public abstract class AbstractOptionsPresenter {
         view.hideMessages();
     }
 
-    public void init(AbstractOptionsView view) {
+    public void init(AbstractTabbedDialogView view) {
         this.view = view;
     }
 

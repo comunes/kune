@@ -21,10 +21,11 @@ package org.ourproject.kune.workspace.client.options;
 
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 
 import com.calclab.suco.client.events.Listener;
 
-public class EntityOptionsPresenter extends AbstractOptionsPresenter implements EntityOptions {
+public class EntityOptionsPresenter extends AbstractTabbedDialogPresenter implements EntityOptions {
 
     EntityOptionsView view;
 

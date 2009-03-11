@@ -21,11 +21,11 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.options.AbstractOptionsPanel;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 
 import com.calclab.suco.client.events.Listener0;
 
-public class InsertLinkDialogPanel extends AbstractOptionsPanel implements InsertLinkDialogView {
+public class InsertLinkDialogPanel extends AbstractTabbedDialogPanel implements InsertLinkDialogView {
     public static final String TEXT_EDT_INSERT_DIALOG = "k-ted-iep-dialog";
     public static final String TEXT_EDT_INSERT_DIALOG_ERROR_ID = "k-ted-iep-dialog-err";
     private final InsertLinkGroup textEditorInsertElementGroup;

@@ -2,9 +2,9 @@ package org.ourproject.kune.platf.client.ui.rte.insertimg;
 
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.options.AbstractOptionsPanel;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 
-public class InsertImageDialogPanel extends AbstractOptionsPanel implements InsertImageDialogView {
+public class InsertImageDialogPanel extends AbstractTabbedDialogPanel implements InsertImageDialogView {
 
     private static final String INSERT_IMG_DIALOG = "iip-dial";
     private static final String INSERT_IMG_DIALOG_ERROR_ID = "iip-err";

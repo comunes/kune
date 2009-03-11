@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.options;
+package org.ourproject.kune.platf.client.ui.dialogs.tabbed;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
-public abstract class AbstractOptionsPanel {
+public abstract class AbstractTabbedDialogPanel {
     private BasicDialog dialog;
     private final String dialogId;
     private TabPanel tabPanel;
@@ -53,7 +53,7 @@ public abstract class AbstractOptionsPanel {
     private Listener0 onHideListener;
     private final ArrayList<Button> buttons;
 
-    public AbstractOptionsPanel(String dialogId, String title, int width, int height, int minWidth, int minHeight,
+    public AbstractTabbedDialogPanel(String dialogId, String title, int width, int height, int minWidth, int minHeight,
             boolean modal, Images images, String errorLabelId) {
         this.dialogId = dialogId;
         this.title = title;

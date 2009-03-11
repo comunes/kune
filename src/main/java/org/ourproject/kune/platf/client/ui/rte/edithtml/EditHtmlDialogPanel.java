@@ -2,16 +2,16 @@ package org.ourproject.kune.platf.client.ui.rte.edithtml;
 
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
-import org.ourproject.kune.workspace.client.options.AbstractOptionsPanel;
 
 import com.google.gwt.user.client.Window;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-public class EditHtmlDialogPanel extends AbstractOptionsPanel implements EditHtmlDialogView {
+public class EditHtmlDialogPanel extends AbstractTabbedDialogPanel implements EditHtmlDialogView {
 
     public static final String EDIT_HTML_DIALOG = "ehtml-dialog";
     public static final String EDIG_HTML_DIALOG_ERROR_ID = "ehtml-dialgo-error";
