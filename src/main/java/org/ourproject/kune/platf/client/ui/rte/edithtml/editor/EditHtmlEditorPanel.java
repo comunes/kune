@@ -15,7 +15,7 @@ public class EditHtmlEditorPanel extends DefaultForm implements EditHtmlEditorVi
         super("HTML");
         super.setAutoWidth(true);
         super.setHideLabels(true);
-        super.setHeight(EditHtmlView.HEIGHT - 35);
+        super.setHeight(EditHtmlView.HEIGHT - 20);
         editorField = new TextArea();
         editorField.setHeight(EditHtmlView.HEIGHT - 70);
         editorField.setWidth("98%");

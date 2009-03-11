@@ -20,8 +20,10 @@
 package org.ourproject.kune.platf.client.ui.dialogs;
 
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.gwtext.client.widgets.Toolbar;
@@ -57,11 +59,11 @@ public class MessageToolbar {
         toolbar.setVisible(false);
     }
 
-    public void setErrorMessage(final String message, final Level type) {
+    public void setErrorMessage(final String message, final Level level) {
         errorLabel.setText(message);
+        AbstractImagePrototype icon = NotifyUser.getImage(level);
+        icon.applyTo(errorIcon);
         errorIcon.setVisible(true);
-        // FIXME
-        // String iconCls = NotifyUser.getCls(level);
         toolbar.setVisible(true);
     }
 }

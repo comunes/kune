@@ -19,10 +19,9 @@
  */
 package org.ourproject.kune.workspace.client.site.msg;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
-public interface SiteToastMessageView extends View {
+public interface ToastMessage {
 
     void showMessage(String title, String message, Level level);
 

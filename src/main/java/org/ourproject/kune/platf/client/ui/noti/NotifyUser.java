@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.ui.noti;
 
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.services.Images;
 
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Event0;
@@ -27,6 +28,7 @@ import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class NotifyUser {
 
@@ -46,6 +48,8 @@ public class NotifyUser {
 
     private static I18nTranslationService i18n;
 
+    private static Images images;
+
     public static void askConfirmation(String confirmationTitle, String confirmationText, Listener0 onConfirm,
             Listener0 onCancel) {
         onConfirmationAsk.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, onCancel));
@@ -56,22 +60,31 @@ public class NotifyUser {
     }
 
     public static String getCls(Level level) {
-        String iconCls = "";
         switch (level) {
         case info:
-            iconCls = "k-stm-info-icon";
-            break;
+            return "k-stm-info-icon";
         case important:
-            iconCls = "k-stm-imp-icon";
-            break;
+            return "k-stm-imp-icon";
         case veryImportant:
-            iconCls = "k-stm-verimp-icon";
-            break;
+            return "k-stm-verimp-icon";
         case error:
-            iconCls = "k-stm-error-icon";
-            break;
+        default:
+            return "k-stm-error-icon";
         }
-        return iconCls;
+    }
+
+    public static AbstractImagePrototype getImage(Level level) {
+        switch (level) {
+        case info:
+            return images.info();
+        case important:
+            return images.important();
+        case veryImportant:
+            return images.alert();
+        case error:
+        default:
+            return images.error();
+        }
     }
 
     public static void hideProgress() {
@@ -114,8 +127,9 @@ public class NotifyUser {
         onNotify.fire(Level.veryImportant, message);
     }
 
-    public NotifyUser(I18nTranslationService i18n) {
+    public NotifyUser(I18nTranslationService i18n, Images images) {
         NotifyUser.i18n = i18n;
+        NotifyUser.images = images;
         onNotify = new Event2<Level, String>("onNotify");
         onAlert = new Event2<String, String>("onAlert");
         onProgress = new Event<String>("onProgress");

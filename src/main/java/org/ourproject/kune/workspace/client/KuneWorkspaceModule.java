@@ -152,9 +152,9 @@ import org.ourproject.kune.workspace.client.signin.SignInPresenter;
 import org.ourproject.kune.workspace.client.signin.SignInView;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.site.WorkspaceNotifyUser;
-import org.ourproject.kune.workspace.client.site.msg.SiteToastMessage;
-import org.ourproject.kune.workspace.client.site.msg.SiteToastMessagePanel;
-import org.ourproject.kune.workspace.client.site.msg.SiteToastMessagePresenter;
+import org.ourproject.kune.workspace.client.site.msg.ToastMessage;
+import org.ourproject.kune.workspace.client.site.msg.ToastMessagePanel;
+import org.ourproject.kune.workspace.client.site.msg.ToastMessagePresenter;
 import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogo;
 import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogoPanel;
 import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogoPresenter;
@@ -283,7 +283,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public WorkspaceNotifyUser create() {
                 return new WorkspaceNotifyUser($(NotifyUser.class), $(I18nUITranslationService.class),
-                        $(SiteProgress.class), $$(SiteToastMessage.class), $$(WorkspaceSkeleton.class));
+                        $(SiteProgress.class), $$(ToastMessage.class), $$(WorkspaceSkeleton.class));
             }
         });
 
@@ -298,11 +298,11 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(NoDecoration.class, new Factory<SiteToastMessage>(SiteToastMessage.class) {
+        register(NoDecoration.class, new Factory<ToastMessage>(ToastMessage.class) {
             @Override
-            public SiteToastMessage create() {
-                final SiteToastMessagePresenter presenter = new SiteToastMessagePresenter();
-                final SiteToastMessagePanel panel = new SiteToastMessagePanel();
+            public ToastMessage create() {
+                final ToastMessagePresenter presenter = new ToastMessagePresenter();
+                final ToastMessagePanel panel = new ToastMessagePanel();
                 presenter.init(panel);
                 return presenter;
             }

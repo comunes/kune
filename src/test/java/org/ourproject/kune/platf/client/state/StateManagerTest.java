@@ -47,7 +47,7 @@ public class StateManagerTest {
         stateManager.onStateChanged(stateChangeListener);
         stateManager.onGroupChanged(groupChangeListener);
         stateManager.onToolChanged(toolChangeListener);
-        new NotifyUser(null);
+        new NotifyUser(null, null);
     }
 
     @Test

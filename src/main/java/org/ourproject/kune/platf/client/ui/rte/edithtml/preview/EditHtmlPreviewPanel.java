@@ -11,14 +11,16 @@ public class EditHtmlPreviewPanel extends Panel implements EditHtmlPreviewView {
 
     public EditHtmlPreviewPanel(I18nTranslationService i18n, final EditHtmlPreviewPresenter presenter) {
         setTitle(i18n.t("Preview"));
-        super.setCls("kune-Content-Main");
-        setHeight(EditHtmlView.HEIGHT - 40);
+        setCls("kune-Content-Main");
+        setHeight(EditHtmlView.HEIGHT - 45);
+        setPaddings(5);
         setAutoScroll(true);
         setAutoWidth(true);
-        super.addListener(new PanelListenerAdapter() {
+        addListener(new PanelListenerAdapter() {
             @Override
             public void onActivate(Panel panel) {
                 clear();
+                setHeight(EditHtmlView.HEIGHT - 45);
                 add(new HTML(presenter.getHtml()));
                 if (isRendered()) {
                     doLayout();

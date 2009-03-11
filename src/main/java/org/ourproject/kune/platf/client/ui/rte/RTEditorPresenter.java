@@ -400,6 +400,7 @@ public class RTEditorPresenter implements RTEditor {
                         dialog.setUpdateListener(new Listener<String>() {
                             public void onEvent(String html) {
                                 view.setHtml(html);
+                                fireOnEdit();
                             }
                         });
                         dialog.show();

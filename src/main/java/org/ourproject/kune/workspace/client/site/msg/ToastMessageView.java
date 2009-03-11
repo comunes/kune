@@ -22,22 +22,8 @@ package org.ourproject.kune.workspace.client.site.msg;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
-public class SiteToastMessagePresenter implements SiteToastMessage {
+public interface ToastMessageView extends View {
 
-    private SiteToastMessageView view;
+    void showMessage(String title, String message, Level level);
 
-    public SiteToastMessagePresenter() {
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void init(SiteToastMessageView view) {
-        this.view = view;
-    }
-
-    public void showMessage(String title, final String message, final Level level) {
-        view.showMessage(title, message, level);
-    }
 }

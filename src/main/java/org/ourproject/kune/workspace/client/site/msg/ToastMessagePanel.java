@@ -19,10 +19,24 @@
  */
 package org.ourproject.kune.workspace.client.site.msg;
 
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
-public interface SiteToastMessage {
+import com.google.gwt.user.client.ui.HTML;
+import com.gwtextux.client.widgets.window.ToastWindow;
 
-    void showMessage(String title, String message, Level level);
+public class ToastMessagePanel implements ToastMessageView {
+
+    public ToastMessagePanel() {
+    }
+
+    public void showMessage(String title, String message, Level level) {
+        HTML html = new HTML(message);
+        html.addStyleName("kune-Margin-Medium-trbl");
+        ToastWindow toastWindow = new ToastWindow(title, html.toString());
+        String iconCls = NotifyUser.getCls(level);
+        toastWindow.setIconCls(iconCls);
+        toastWindow.show();
+    }
 
 }

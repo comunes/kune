@@ -294,7 +294,7 @@ public class KunePlatformModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<NotifyUser>(NotifyUser.class) {
             @Override
             public NotifyUser create() {
-                return new NotifyUser($(I18nTranslationService.class));
+                return new NotifyUser($(I18nTranslationService.class), $(Images.class));
             }
         });
 
