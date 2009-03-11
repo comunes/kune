@@ -24,11 +24,11 @@ import org.ourproject.kune.workspace.client.options.AbstractOptionsPresenter;
 import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener2;
 
-public class TextEditorInsertElementPresenter extends AbstractOptionsPresenter implements TextEditorInsertElement {
+public class InsertLinkDialogPresenter extends AbstractOptionsPresenter implements InsertLinkDialog {
 
     private final Event2<String, String> onCreateLink;
 
-    public TextEditorInsertElementPresenter() {
+    public InsertLinkDialogPresenter() {
         this.onCreateLink = new Event2<String, String>("onCreateLink");
     }
 

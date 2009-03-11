@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 
 import com.calclab.suco.client.ioc.module.AbstractModule;
 
@@ -35,6 +35,6 @@ public class KuneCoreModule extends AbstractModule {
         registerDecorator(ToolGroup.class, new ToolGroup(container));
         registerDecorator(EntityOptionsGroup.class, new EntityOptionsGroup(container));
         registerDecorator(InsertImageGroup.class, new InsertImageGroup(container));
-        registerDecorator(TextEditorInsertElementGroup.class, new TextEditorInsertElementGroup(container));
+        registerDecorator(InsertLinkGroup.class, new InsertLinkGroup(container));
     }
 }

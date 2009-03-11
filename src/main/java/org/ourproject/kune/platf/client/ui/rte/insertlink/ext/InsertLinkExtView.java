@@ -17,10 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.editor.insertlocallink;
+package org.ourproject.kune.platf.client.ui.rte.insertlink.ext;
 
-import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.TextEditorInsertAbstract;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractView;
 
-public interface TextEditorInsertLinkLocal extends TextEditorInsertAbstract {
+public interface InsertLinkExtView extends InsertLinkAbstractView {
 
+    public String getUrl();
+
+    public boolean isValid();
+
+    public void setPreviewUrl(String url);
+
+    public void setUrl(String url);
 }

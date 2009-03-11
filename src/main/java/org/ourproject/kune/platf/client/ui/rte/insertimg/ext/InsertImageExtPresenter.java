@@ -1,12 +1,12 @@
 package org.ourproject.kune.platf.client.ui.rte.insertimg.ext;
 
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImage;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 
 public class InsertImageExtPresenter implements InsertImageExt {
 
-    private final InsertImage insertImageDialog;
+    private final InsertImageDialog insertImageDialog;
 
-    public InsertImageExtPresenter(InsertImage insertImageDialog) {
+    public InsertImageExtPresenter(InsertImageDialog insertImageDialog) {
         this.insertImageDialog = insertImageDialog;
     }
 

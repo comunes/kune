@@ -16,12 +16,31 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
+ \*/
 package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.options.AbstractOptionsView;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstract;
 
-public interface TextEditorInsertElementView extends AbstractOptionsView, View {
-    int HEIGHT = 225;
+import com.calclab.suco.client.ioc.Container;
+import com.calclab.suco.client.ioc.Provider;
+import com.calclab.suco.client.ioc.decorator.ProviderCollection;
+import com.calclab.suco.client.ioc.decorator.Singleton;
+
+public class InsertLinkGroup extends ProviderCollection {
+
+    public InsertLinkGroup(final Container container) {
+        super(container, Singleton.instance);
+    }
+
+    public void createAll() {
+        for (final Provider<?> p : getProviders()) {
+            p.get();
+        }
+    }
+
+    public void resetAll() {
+        for (final Provider<?> p : getProviders()) {
+            ((InsertLinkAbstract) p.get()).reset();
+        }
+    }
 }

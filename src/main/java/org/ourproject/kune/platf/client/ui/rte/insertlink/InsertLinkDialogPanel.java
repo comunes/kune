@@ -25,13 +25,13 @@ import org.ourproject.kune.workspace.client.options.AbstractOptionsPanel;
 
 import com.calclab.suco.client.events.Listener0;
 
-public class TextEditorInsertElementPanel extends AbstractOptionsPanel implements TextEditorInsertElementView {
+public class InsertLinkDialogPanel extends AbstractOptionsPanel implements InsertLinkDialogView {
     public static final String TEXT_EDT_INSERT_DIALOG = "k-ted-iep-dialog";
     public static final String TEXT_EDT_INSERT_DIALOG_ERROR_ID = "k-ted-iep-dialog-err";
-    private final TextEditorInsertElementGroup textEditorInsertElementGroup;
+    private final InsertLinkGroup textEditorInsertElementGroup;
 
-    public TextEditorInsertElementPanel(final TextEditorInsertElementPresenter presenter, Images images,
-            I18nTranslationService i18n, final TextEditorInsertElementGroup textEditorInsertElementGroup) {
+    public InsertLinkDialogPanel(final InsertLinkDialogPresenter presenter, Images images,
+            I18nTranslationService i18n, final InsertLinkGroup textEditorInsertElementGroup) {
         super(TEXT_EDT_INSERT_DIALOG, i18n.tWithNT("Insert a link",
                 "Option in a text editor to insert links and other elements"), 380, HEIGHT + 90, 380, HEIGHT + 90,
                 true, images, TEXT_EDT_INSERT_DIALOG_ERROR_ID);

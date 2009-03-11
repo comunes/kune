@@ -49,10 +49,10 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImage;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElement;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
@@ -73,9 +73,9 @@ import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocal;
 import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocalPresenter;
-import org.ourproject.kune.workspace.client.editor.insertlocallink.TextEditorInsertLinkLocal;
-import org.ourproject.kune.workspace.client.editor.insertlocallink.TextEditorInsertLinkLocalPanel;
-import org.ourproject.kune.workspace.client.editor.insertlocallink.TextEditorInsertLinkLocalPresenter;
+import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocal;
+import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocalPanel;
+import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocalPresenter;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
@@ -806,13 +806,13 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(TextEditorInsertElementGroup.class, new Factory<TextEditorInsertLinkLocal>(
-                TextEditorInsertLinkLocal.class) {
+        register(InsertLinkGroup.class, new Factory<InsertLinkLocal>(
+                InsertLinkLocal.class) {
             @Override
-            public TextEditorInsertLinkLocal create() {
-                final TextEditorInsertLinkLocalPresenter presenter = new TextEditorInsertLinkLocalPresenter(
-                        $(TextEditorInsertElement.class));
-                final TextEditorInsertLinkLocalPanel panel = new TextEditorInsertLinkLocalPanel(presenter,
+            public InsertLinkLocal create() {
+                final InsertLinkLocalPresenter presenter = new InsertLinkLocalPresenter(
+                        $(InsertLinkDialog.class));
+                final InsertLinkLocalPanel panel = new InsertLinkLocalPanel(presenter,
                         $(WorkspaceSkeleton.class), $(I18nTranslationService.class), $(FileDownloadUtils.class));
                 presenter.init(panel);
                 return presenter;
@@ -928,7 +928,7 @@ public class KuneWorkspaceModule extends AbstractModule {
         register(InsertImageGroup.class, new Factory<InsertImageLocal>(InsertImageLocal.class) {
             @Override
             public InsertImageLocal create() {
-                final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImage.class));
+                final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImageDialog.class));
                 final InsertImageLocalPanel panel = new InsertImageLocalPanel(presenter,
                         $(I18nTranslationService.class));
                 presenter.init(panel);

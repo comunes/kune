@@ -17,17 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui.rte.insertlink.ext;
+package org.ourproject.kune.platf.client.ui.rte.insertlink.email;
 
-import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.TextEditorInsertAbstractView;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPresenter;
 
-public interface TextEditorInsertLinkExtView extends TextEditorInsertAbstractView {
+public class InsertLinkEmailPresenter extends InsertLinkAbstractPresenter implements
+        InsertLinkEmail {
 
-    public String getUrl();
+    public InsertLinkEmailPresenter(InsertLinkDialog editorInsertElement) {
+        super(editorInsertElement);
+    }
 
-    public boolean isValid();
-
-    public void setPreviewUrl(String url);
-
-    public void setUrl(String url);
 }

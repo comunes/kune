@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.ui.rte.edithtml.editor;
+package org.ourproject.kune.platf.client.ui.rte.edithtml;
 
 public interface EditHtmlAgent {
 

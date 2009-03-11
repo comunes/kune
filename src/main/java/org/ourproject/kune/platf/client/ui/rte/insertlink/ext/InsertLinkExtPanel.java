@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink.ext;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementView;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialogView;
 
 import com.google.gwt.user.client.ui.Frame;
 import com.gwtext.client.core.EventObject;
@@ -33,17 +33,17 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.FitLayout;
 
-public class TextEditorInsertLinkExtPanel extends DefaultForm implements TextEditorInsertLinkExtView {
+public class InsertLinkExtPanel extends DefaultForm implements InsertLinkExtView {
 
     public static final String LINK_FIELD = "k-teilep-link-f";
     final TextField linkField;
     final Panel previewPanel;
 
-    public TextEditorInsertLinkExtPanel(final TextEditorInsertLinkExtPresenter presenter,
+    public InsertLinkExtPanel(final InsertLinkExtPresenter presenter,
             final I18nTranslationService i18n) {
         super(i18n.t("External link"));
         super.setAutoWidth(true);
-        super.setHeight(TextEditorInsertElementView.HEIGHT);
+        super.setHeight(InsertLinkDialogView.HEIGHT);
         linkField = new TextField();
         linkField.setTabIndex(1);
         linkField.setFieldLabel(i18n.t("External link (URL)"));

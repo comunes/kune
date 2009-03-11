@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink;
+package org.ourproject.kune.platf.client.ui.rte.insertlink.ext;
 
-public interface TextEditorInsertAbstract {
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstract;
 
-    void reset();
+public interface InsertLinkExt extends InsertLinkAbstract {
 
 }

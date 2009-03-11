@@ -20,23 +20,23 @@
 package org.ourproject.kune.platf.client.ui.rte.insertlink.ext;
 
 import org.ourproject.kune.platf.client.ui.TextUtils;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElement;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.TextEditorInsertAbstractPresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPresenter;
 
-public class TextEditorInsertLinkExtPresenter extends TextEditorInsertAbstractPresenter implements
-        TextEditorInsertLinkExt {
+public class InsertLinkExtPresenter extends InsertLinkAbstractPresenter implements
+        InsertLinkExt {
 
     interface Action {
         void onValid(String url);
     }
 
-    private TextEditorInsertLinkExtView view;
+    private InsertLinkExtView view;
 
-    public TextEditorInsertLinkExtPresenter(TextEditorInsertElement editorInsertElement) {
+    public InsertLinkExtPresenter(InsertLinkDialog editorInsertElement) {
         super(editorInsertElement);
     }
 
-    public void init(TextEditorInsertLinkExtView view) {
+    public void init(InsertLinkExtView view) {
         super.init(view);
         this.view = view;
     }

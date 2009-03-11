@@ -24,17 +24,17 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementView;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialogView;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener;
 
-public class TextEditorInsertLinkLocalPanel extends AbstractLiveSearcherPanel implements TextEditorInsertLinkLocalView {
+public class InsertLinkLocalPanel extends AbstractLiveSearcherPanel implements InsertLinkLocalView {
 
     private static final String DATA_PROXY_URL = "/kune/json/ContentJSONService/search";
 
-    public TextEditorInsertLinkLocalPanel(final TextEditorInsertLinkLocalPresenter presenter,
+    public InsertLinkLocalPanel(final InsertLinkLocalPresenter presenter,
             final WorkspaceSkeleton ws, I18nTranslationService i18n, FileDownloadUtils downloadUtils) {
         super(i18n, TEMPLATE_TEXT_PREFIX + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
                 + TEMPLATE_TEXT_SUFFIX, DATA_PROXY_URL, new Listener<LinkDTO>() {
@@ -45,7 +45,7 @@ public class TextEditorInsertLinkLocalPanel extends AbstractLiveSearcherPanel im
         });
         super.setTitle(i18n.t("Local link"));
         super.setFrame(true);
-        super.setHeight(TextEditorInsertElementView.HEIGHT);
+        super.setHeight(InsertLinkDialogView.HEIGHT);
         super.setPaddings(20);
     }
 }

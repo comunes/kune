@@ -50,16 +50,14 @@ import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePresenter;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionSndToolbar;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionSndToolbarPresenter;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionTopToolbar;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionTopToolbarPresenter;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenter;
-import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtml;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlGroup;
-import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlPanel;
-import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlPresenter;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogPanel;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogPresenter;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.editor.EditHtmlEditor;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.editor.EditHtmlEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.editor.EditHtmlEditorPresenter;
@@ -67,24 +65,24 @@ import org.ourproject.kune.platf.client.ui.rte.edithtml.preview.EditHtmlPreview;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.preview.EditHtmlPreviewPanel;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.preview.EditHtmlPreviewPresenter;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImage;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImagePanel;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImagePresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogPresenter;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ext.InsertImageExt;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ext.InsertImageExtPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ext.InsertImageExtPresenter;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElement;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementGroup;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementPanel;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementPresenter;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.email.TextEditorInsertLinkEmail;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.email.TextEditorInsertLinkEmailPanel;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.email.TextEditorInsertLinkEmailPresenter;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.TextEditorInsertLinkExt;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.TextEditorInsertLinkExtPanel;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.TextEditorInsertLinkExtPresenter;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.TextEditorInsertLinkExtView;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialogPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialogPresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.email.InsertLinkEmail;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.email.InsertLinkEmailPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.email.InsertLinkEmailPresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.InsertLinkExt;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.InsertLinkExtPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.InsertLinkExtPresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.InsertLinkExtView;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditor;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
@@ -256,14 +254,14 @@ public class KunePlatformModule extends AbstractModule {
             @Override
             public RTEActionTopToolbar create() {
                 final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class));
-                final RTEActionTopToolbarPresenter toolbar = new RTEActionTopToolbarPresenter(panel);
+                final RTEActionTopToolbar toolbar = new RTEActionTopToolbar(panel);
                 return toolbar;
             }
         }, new Factory<RTEActionSndToolbar>(RTEActionSndToolbar.class) {
             @Override
             public RTEActionSndToolbar create() {
                 final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class), true);
-                final RTEActionSndToolbarPresenter toolbar = new RTEActionSndToolbarPresenter(panel);
+                final RTEActionSndToolbar toolbar = new RTEActionSndToolbar(panel);
                 return toolbar;
             }
         });
@@ -281,8 +279,8 @@ public class KunePlatformModule extends AbstractModule {
                 RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
                 RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
                 final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
-                        $(Session.class), topBar, sndBar, $(RTEImgResources.class), $(TextEditorInsertElement.class),
-                        $(ColorWebSafePalette.class), $$(EditHtml.class), $$(InsertImage.class),
+                        $(Session.class), topBar, sndBar, $(RTEImgResources.class), $(InsertLinkDialog.class),
+                        $(ColorWebSafePalette.class), $$(EditHtmlDialog.class), $$(InsertImageDialog.class),
                         $(DeferredCommandWrapper.class));
                 final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
                         $(ActionManager.class));
@@ -326,11 +324,11 @@ public class KunePlatformModule extends AbstractModule {
 
         registerDecorator(EditHtmlGroup.class, new EditHtmlGroup(container));
 
-        register(Singleton.class, new Factory<EditHtml>(EditHtml.class) {
+        register(Singleton.class, new Factory<EditHtmlDialog>(EditHtmlDialog.class) {
             @Override
-            public EditHtml create() {
-                final EditHtmlPresenter presenter = new EditHtmlPresenter();
-                final EditHtmlPanel panel = new EditHtmlPanel(presenter, $(I18nTranslationService.class),
+            public EditHtmlDialog create() {
+                final EditHtmlDialogPresenter presenter = new EditHtmlDialogPresenter();
+                final EditHtmlDialogPanel panel = new EditHtmlDialogPanel(presenter, $(I18nTranslationService.class),
                         $(RTEImgResources.class), $(Images.class), $(EditHtmlGroup.class));
                 presenter.init(panel);
                 return presenter;
@@ -340,7 +338,7 @@ public class KunePlatformModule extends AbstractModule {
         register(EditHtmlGroup.class, new Factory<EditHtmlEditor>(EditHtmlEditor.class) {
             @Override
             public EditHtmlEditor create() {
-                final EditHtmlEditorPresenter presenter = new EditHtmlEditorPresenter($(EditHtml.class));
+                final EditHtmlEditorPresenter presenter = new EditHtmlEditorPresenter($(EditHtmlDialog.class));
                 final EditHtmlEditorPanel panel = new EditHtmlEditorPanel(i18n, presenter);
                 presenter.init(panel);
                 return presenter;
@@ -348,18 +346,18 @@ public class KunePlatformModule extends AbstractModule {
         }, new Factory<EditHtmlPreview>(EditHtmlPreview.class) {
             @Override
             public EditHtmlPreview create() {
-                final EditHtmlPreviewPresenter presenter = new EditHtmlPreviewPresenter($(EditHtml.class));
+                final EditHtmlPreviewPresenter presenter = new EditHtmlPreviewPresenter($(EditHtmlDialog.class));
                 final EditHtmlPreviewPanel panel = new EditHtmlPreviewPanel(i18n, presenter);
                 presenter.init(panel);
                 return presenter;
             }
         });
 
-        register(Singleton.class, new Factory<InsertImage>(InsertImage.class) {
+        register(Singleton.class, new Factory<InsertImageDialog>(InsertImageDialog.class) {
             @Override
-            public InsertImage create() {
-                final InsertImagePresenter presenter = new InsertImagePresenter();
-                final InsertImagePanel panel = new InsertImagePanel(presenter, $(I18nTranslationService.class),
+            public InsertImageDialog create() {
+                final InsertImageDialogPresenter presenter = new InsertImageDialogPresenter();
+                final InsertImageDialogPanel panel = new InsertImageDialogPanel(presenter, $(I18nTranslationService.class),
                         $(Images.class), $(InsertImageGroup.class));
                 presenter.init(panel);
                 return presenter;
@@ -369,44 +367,44 @@ public class KunePlatformModule extends AbstractModule {
         register(InsertImageGroup.class, new Factory<InsertImageExt>(InsertImageExt.class) {
             @Override
             public InsertImageExt create() {
-                final InsertImageExtPresenter presenter = new InsertImageExtPresenter($(InsertImage.class));
+                final InsertImageExtPresenter presenter = new InsertImageExtPresenter($(InsertImageDialog.class));
                 final InsertImageExtPanel panel = new InsertImageExtPanel(presenter, i18n);
                 presenter.init(panel);
                 return presenter;
             }
         });
 
-        register(Singleton.class, new Factory<TextEditorInsertElement>(TextEditorInsertElement.class) {
+        register(Singleton.class, new Factory<InsertLinkDialog>(InsertLinkDialog.class) {
             @Override
-            public TextEditorInsertElement create() {
-                final TextEditorInsertElementPresenter presenter = new TextEditorInsertElementPresenter();
-                final TextEditorInsertElementPanel panel = new TextEditorInsertElementPanel(presenter, $(Images.class),
-                        $(I18nTranslationService.class), $(TextEditorInsertElementGroup.class));
+            public InsertLinkDialog create() {
+                final InsertLinkDialogPresenter presenter = new InsertLinkDialogPresenter();
+                final InsertLinkDialogPanel panel = new InsertLinkDialogPanel(presenter, $(Images.class),
+                        $(I18nTranslationService.class), $(InsertLinkGroup.class));
                 presenter.init(panel);
                 return presenter;
             }
         });
 
-        register(TextEditorInsertElementGroup.class,
-                new Factory<TextEditorInsertLinkExt>(TextEditorInsertLinkExt.class) {
+        register(InsertLinkGroup.class,
+                new Factory<InsertLinkExt>(InsertLinkExt.class) {
                     @Override
-                    public TextEditorInsertLinkExt create() {
-                        final TextEditorInsertLinkExtPresenter presenter = new TextEditorInsertLinkExtPresenter(
-                                $(TextEditorInsertElement.class));
-                        final TextEditorInsertLinkExtView panel = new TextEditorInsertLinkExtPanel(presenter,
+                    public InsertLinkExt create() {
+                        final InsertLinkExtPresenter presenter = new InsertLinkExtPresenter(
+                                $(InsertLinkDialog.class));
+                        final InsertLinkExtView panel = new InsertLinkExtPanel(presenter,
                                 $(I18nTranslationService.class));
                         presenter.init(panel);
                         return presenter;
                     }
                 });
 
-        register(TextEditorInsertElementGroup.class, new Factory<TextEditorInsertLinkEmail>(
-                TextEditorInsertLinkEmail.class) {
+        register(InsertLinkGroup.class, new Factory<InsertLinkEmail>(
+                InsertLinkEmail.class) {
             @Override
-            public TextEditorInsertLinkEmail create() {
-                final TextEditorInsertLinkEmailPresenter presenter = new TextEditorInsertLinkEmailPresenter(
-                        $(TextEditorInsertElement.class));
-                final TextEditorInsertLinkEmailPanel panel = new TextEditorInsertLinkEmailPanel(presenter,
+            public InsertLinkEmail create() {
+                final InsertLinkEmailPresenter presenter = new InsertLinkEmailPresenter(
+                        $(InsertLinkDialog.class));
+                final InsertLinkEmailPanel panel = new InsertLinkEmailPanel(presenter,
                         $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;

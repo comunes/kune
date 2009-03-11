@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink.email;
 
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementView;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialogView;
 
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -29,16 +29,16 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.VType;
 
-public class TextEditorInsertLinkEmailPanel extends DefaultForm implements TextEditorInsertLinkEmailView {
+public class InsertLinkEmailPanel extends DefaultForm implements InsertLinkEmailView {
 
     public static final String EMAIL_FIELD = "k-teilep-email-field";
     private final TextField emailField;
 
-    public TextEditorInsertLinkEmailPanel(final TextEditorInsertLinkEmailPresenter presenter,
+    public InsertLinkEmailPanel(final InsertLinkEmailPresenter presenter,
             I18nTranslationService i18n) {
         super(i18n.t("Email link"));
         super.setAutoWidth(true);
-        super.setHeight(TextEditorInsertElementView.HEIGHT);
+        super.setHeight(InsertLinkDialogView.HEIGHT);
         emailField = new TextField();
         emailField.setTabIndex(4);
         emailField.setFieldLabel(i18n.t("Email"));

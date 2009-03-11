@@ -11,16 +11,16 @@ import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-public class EditHtmlPanel extends AbstractOptionsPanel implements EditHtmlView {
+public class EditHtmlDialogPanel extends AbstractOptionsPanel implements EditHtmlDialogView {
 
     public static final String EDIT_HTML_DIALOG = "ehtml-dialog";
     public static final String EDIG_HTML_DIALOG_ERROR_ID = "ehtml-dialgo-error";
     private final EditHtmlGroup editHtmlGroup;
     private final I18nTranslationService i18n;
     private Button cancel;
-    private final EditHtmlPresenter presenter;
+    private final EditHtmlDialogPresenter presenter;
 
-    public EditHtmlPanel(final EditHtmlPresenter presenter, I18nTranslationService i18n, RTEImgResources resources,
+    public EditHtmlDialogPanel(final EditHtmlDialogPresenter presenter, I18nTranslationService i18n, RTEImgResources resources,
             Images images, EditHtmlGroup editHtmlGroup) {
         super(EDIT_HTML_DIALOG, i18n.tWithNT("Edit the HTML",
                 "Option in a content editor to edit the html internal code (for advance users)"),

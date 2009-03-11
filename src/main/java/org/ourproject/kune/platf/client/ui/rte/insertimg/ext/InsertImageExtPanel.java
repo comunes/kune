@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertimg.ext;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageView;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogView;
 
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -22,7 +22,7 @@ public class InsertImageExtPanel extends DefaultForm implements InsertImageExtVi
     public InsertImageExtPanel(final InsertImageExtPresenter presenter, I18nTranslationService i18n) {
         super(i18n.t("External image"));
         super.setAutoWidth(true);
-        super.setHeight(InsertImageView.HEIGHT);
+        super.setHeight(InsertImageDialogView.HEIGHT);
         linkField = new TextField();
         linkField.setTabIndex(1);
         linkField.setFieldLabel(i18n.t("External image link (URL)"));

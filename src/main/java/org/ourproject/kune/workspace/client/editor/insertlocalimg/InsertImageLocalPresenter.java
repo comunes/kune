@@ -1,12 +1,12 @@
 package org.ourproject.kune.workspace.client.editor.insertlocalimg;
 
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImage;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 
 public class InsertImageLocalPresenter implements InsertImageLocal {
 
-    private final InsertImage insertImageDialog;
+    private final InsertImageDialog insertImageDialog;
 
-    public InsertImageLocalPresenter(InsertImage insertImageDialog) {
+    public InsertImageLocalPresenter(InsertImageDialog insertImageDialog) {
         this.insertImageDialog = insertImageDialog;
     }
 

@@ -1,18 +1,17 @@
 package org.ourproject.kune.platf.client.ui.rte.edithtml;
 
-import org.ourproject.kune.platf.client.ui.rte.edithtml.editor.EditHtmlAgent;
 import org.ourproject.kune.workspace.client.options.AbstractOptionsPresenter;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
-public class EditHtmlPresenter extends AbstractOptionsPresenter implements EditHtml {
+public class EditHtmlDialogPresenter extends AbstractOptionsPresenter implements EditHtmlDialog {
 
     private Listener<String> updateListener;
     private Listener0 cancelListener;
     private EditHtmlAgent agent;
 
-    public EditHtmlPresenter() {
+    public EditHtmlDialogPresenter() {
     }
 
     public String getHtml() {

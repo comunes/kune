@@ -17,10 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui.rte.insertlink.email;
+package org.ourproject.kune.workspace.client.editor.insertlocallink;
 
-import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.TextEditorInsertAbstract;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPresenter;
 
-public interface TextEditorInsertLinkEmail extends TextEditorInsertAbstract {
+public class InsertLinkLocalPresenter extends InsertLinkAbstractPresenter implements
+        InsertLinkLocal {
+
+    public InsertLinkLocalPresenter(InsertLinkDialog editorInsertElement) {
+        super(editorInsertElement);
+    }
 
 }

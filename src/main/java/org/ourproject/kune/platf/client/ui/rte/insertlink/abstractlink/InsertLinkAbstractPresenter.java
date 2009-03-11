@@ -20,9 +20,32 @@
 package org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 
-public interface TextEditorInsertAbstractView extends View {
+public class InsertLinkAbstractPresenter implements InsertLinkAbstract {
 
-    void reset();
+    private InsertLinkAbstractView view;
+    private final InsertLinkDialog editorInsertElement;
 
+    public InsertLinkAbstractPresenter(InsertLinkDialog editorInsertElement) {
+        this.editorInsertElement = editorInsertElement;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void init(InsertLinkAbstractView view) {
+        this.view = view;
+        editorInsertElement.addOptionTab(view);
+    }
+
+    public void onInsert(String name, String link) {
+        editorInsertElement.fireOnCreateLink(name, link);
+        reset();
+    }
+
+    public void reset() {
+        view.reset();
+    }
 }

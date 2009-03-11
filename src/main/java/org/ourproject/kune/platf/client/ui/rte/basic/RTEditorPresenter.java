@@ -18,10 +18,10 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
-import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtml;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImage;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElement;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 
 import com.calclab.suco.client.events.Event0;
@@ -58,17 +58,17 @@ public class RTEditorPresenter implements RTEditor {
     private ActionToolbarPushButtonDescriptor<Object> underline;
     private ActionToolbarPushButtonDescriptor<Object> strikethrough;
     private final Event0 onEdit;
-    private final TextEditorInsertElement insertElement;
+    private final InsertLinkDialog insertElement;
     private final ColorWebSafePalette palette;
     private final DeferredCommandWrapper deferred;
     private final ActionAddCondition<Object> canBeBasic;
     private final ActionAddCondition<Object> canBeExtended;
-    private final Provider<EditHtml> editHtmlDialog;
-    private final Provider<InsertImage> insertImageDialog;
+    private final Provider<EditHtmlDialog> editHtmlDialog;
+    private final Provider<InsertImageDialog> insertImageDialog;
 
     public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
-            RTEActionSndToolbar sndBar, RTEImgResources imgResources, TextEditorInsertElement textEditorInsertElement,
-            ColorWebSafePalette palette, Provider<EditHtml> editHtmlDialog, Provider<InsertImage> insertImageDialog,
+            RTEActionSndToolbar sndBar, RTEImgResources imgResources, InsertLinkDialog textEditorInsertElement,
+            ColorWebSafePalette palette, Provider<EditHtmlDialog> editHtmlDialog, Provider<InsertImageDialog> insertImageDialog,
             DeferredCommandWrapper deferred) {
         this.i18n = i18n;
         this.session = session;
@@ -399,7 +399,7 @@ public class RTEditorPresenter implements RTEditor {
         ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
                 new Listener0() {
                     public void onEvent() {
-                        EditHtml dialog = editHtmlDialog.get();
+                        EditHtmlDialog dialog = editHtmlDialog.get();
                         dialog.setUpdateListener(new Listener<String>() {
                             public void onEvent(String html) {
                                 view.setHtml(html);

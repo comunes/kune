@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.ui.rte.edithtml.editor;
 
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlView;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogView;
 
 import com.gwtext.client.widgets.form.TextArea;
 
@@ -15,9 +15,9 @@ public class EditHtmlEditorPanel extends DefaultForm implements EditHtmlEditorVi
         super("HTML");
         super.setAutoWidth(true);
         super.setHideLabels(true);
-        super.setHeight(EditHtmlView.HEIGHT - 20);
+        super.setHeight(EditHtmlDialogView.HEIGHT - 20);
         editorField = new TextArea();
-        editorField.setHeight(EditHtmlView.HEIGHT - 70);
+        editorField.setHeight(EditHtmlDialogView.HEIGHT - 70);
         editorField.setWidth("98%");
         editorField.setTabIndex(4);
         editorField.setName(HTML_FIELD);
