@@ -2,6 +2,9 @@ package org.ourproject.kune.platf.client.ui.rte;
 
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
+import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditor;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
