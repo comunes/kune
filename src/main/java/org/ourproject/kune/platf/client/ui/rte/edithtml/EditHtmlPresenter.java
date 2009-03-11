@@ -1,6 +1,5 @@
 package org.ourproject.kune.platf.client.ui.rte.edithtml;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.editor.EditHtmlAgent;
 import org.ourproject.kune.workspace.client.options.AbstractOptionsPresenter;
 
@@ -9,7 +8,6 @@ import com.calclab.suco.client.events.Listener0;
 
 public class EditHtmlPresenter extends AbstractOptionsPresenter implements EditHtml {
 
-    private EditHtmlView view;
     private Listener<String> updateListener;
     private Listener0 cancelListener;
     private EditHtmlAgent agent;
@@ -21,21 +19,11 @@ public class EditHtmlPresenter extends AbstractOptionsPresenter implements EditH
         return agent.getHtml();
     }
 
-    @Override
-    public View getView() {
-        return view;
-    }
-
-    public void init(EditHtmlView view) {
-        super.init(view);
-        this.view = view;
-    }
-
     public void onCancel() {
         if (cancelListener != null) {
             cancelListener.onEvent();
         }
-        view.hide();
+        hide();
     }
 
     public void onUpdate() {
@@ -43,7 +31,7 @@ public class EditHtmlPresenter extends AbstractOptionsPresenter implements EditH
             // FIXME
             updateListener.onEvent(agent.getHtml());
         }
-        view.hide();
+        hide();
     }
 
     public void setAgent(EditHtmlAgent agent) {

@@ -17,15 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
-public interface BeforeActionListener {
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.workspace.client.options.AbstractOptionsView;
 
-    /**
-     * Return false to cancel the action
-     * 
-     * @return
-     */
-    boolean beforeAction();
-
+public interface TextEditorInsertElementView extends AbstractOptionsView, View {
+    int HEIGHT = 225;
 }

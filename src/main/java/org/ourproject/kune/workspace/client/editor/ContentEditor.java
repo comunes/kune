@@ -29,11 +29,13 @@ public class ContentEditor extends RTESavingEditorPresenter {
     private final RTEditor basicEditor;
     private final RTEditorPanel editorPanel;
     private final AbstractToolbar topbar;
+    private final SiteSignOutLink siteSignOutLink;
 
     public ContentEditor(RTEditor editor, boolean autoSave, I18nTranslationService i18n, StateManager stateManager,
             SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
             RTEImgResources imgResources, WorkspaceSkeleton ws, TimerWrapper timer, RTESavingEditorView view) {
-        super(editor, autoSave, i18n, stateManager, siteSignOutLink, deferredCommandWrapper, imgResources, timer);
+        super(editor, autoSave, i18n, stateManager, deferredCommandWrapper, imgResources, timer);
+        this.siteSignOutLink = siteSignOutLink;
         super.init(view);
         this.ws = ws;
 
@@ -62,12 +64,14 @@ public class ContentEditor extends RTESavingEditorPresenter {
         ws.getEntityWorkspace().setContent(vp);
         super.edit(html, onSave, onEditCancelled);
         adjHeight(ws.getEntityWorkspace().getContentHeight());
+        siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
     }
 
     @Override
     protected void onCancelConfirmed() {
         ws.getEntityWorkspace().clearContent();
         super.onCancelConfirmed();
+        siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
     }
 
     private void adjHeight(final int height) {

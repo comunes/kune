@@ -17,15 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink;
 
-public interface BeforeActionListener {
+public interface TextEditorInsertAbstract {
 
-    /**
-     * Return false to cancel the action
-     * 
-     * @return
-     */
-    boolean beforeAction();
+    void reset();
 
 }

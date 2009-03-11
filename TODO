@@ -88,6 +88,14 @@ TODO-list for kune -*- mode: org; -*-
 **** File > Rename (F2)
 **** Insert > Special char
 **** Insert > Page break (for printing)
+**** Shortcut to fonts (Ctrl + numbers)
+**** W3C Range support in RTE (selection)
+     As an intro:
+     http://www.quirksmode.org/dom/range_intro.html
+     http://maven.xwiki.org/site/xwiki-web/xwiki-web-wysiwyg/apidocs/com/xpn/xwiki/wysiwyg/client/dom/internal/AbstractRange.html
+     other links:
+     http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
+     http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
 *** Links
    http://www.ongwt.com/post/2009/01/08/XWiki-:-Wysiwyg-editor-based-on-GWT
    http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/samples/internet/ie55/EditRegions/default.asp
@@ -415,16 +423,11 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
 ** FIXED <v> browser font size (different from default) issues (scroll in dialogs, buttons background, etc)
    CLOSED: [2009-01-03 sáb 01:37]
 
-** W3C Range support in RTE (selection)
-   As an intro:
-   http://www.quirksmode.org/dom/range_intro.html
-   http://maven.xwiki.org/site/xwiki-web/xwiki-web-wysiwyg/apidocs/com/xpn/xwiki/wysiwyg/client/dom/internal/AbstractRange.html
-   other links:
-   http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
-   http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
 ** <v> P2P downloads for bigg uploads (the server acts as seeder).
 ** TODO <s> Include CC0 license:
    http://creativecommons.org/license/zero/
+** TODO <v> Revise use the HP and VP in gwt code
+   http://groups.google.com/group/Google-Web-Toolkit/browse_frm/thread/5d01cd806d93b94e/2909d30d1b2ddfb7?lnk=gst&q=GWT+%2B+FlowPanel+%2B+CSS+#2909d30d1b2ddfb7
 * LONG-TERM
 ** <s> integrate some blog/wiki converter:
    http://code.google.com/p/google-blog-converters-appengine/

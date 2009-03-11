@@ -11,7 +11,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -35,19 +34,16 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     private final I18nTranslationService i18n;
     private final StateManager stateManager;
     private final BeforeActionListener beforeStateChangeListener;
-    @Deprecated
-    private final SiteSignOutLink siteSignOutLink;
     ActionToolbarButtonDescriptor<Object> saveBtn;
     private RTESavingEditorView view;
 
     public RTESavingEditorPresenter(RTEditor editor, final boolean autoSave, final I18nTranslationService i18n,
-            StateManager stateManager, SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
+            StateManager stateManager, DeferredCommandWrapper deferredCommandWrapper,
             RTEImgResources imgResources, TimerWrapper timer) {
         this.editor = editor;
         this.autoSave = autoSave;
         this.i18n = i18n;
         this.stateManager = stateManager;
-        this.siteSignOutLink = siteSignOutLink;
         this.deferredCommandWrapper = deferredCommandWrapper;
         this.imgResources = imgResources;
         this.savePending = false;
@@ -78,12 +74,15 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         editor.setHtml(html);
         editor.attach();
         stateManager.addBeforeStateChangeListener(beforeStateChangeListener);
-        siteSignOutLink.addBeforeSignOut(beforeStateChangeListener);
         enableSaveBtn(false);
     }
 
     public RTEditor getBasicEditor() {
         return editor;
+    }
+
+    public BeforeActionListener getBeforeSavingListener() {
+        return beforeStateChangeListener;
     }
 
     public void init(RTESavingEditorView view) {
@@ -136,7 +135,6 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
 
     protected void onCancelConfirmed() {
         stateManager.removeBeforeStateChangeListener(beforeStateChangeListener);
-        siteSignOutLink.removeBeforeSignOut(beforeStateChangeListener);
         stateManager.resumeTokenChange();
         reset();
         editor.reset();

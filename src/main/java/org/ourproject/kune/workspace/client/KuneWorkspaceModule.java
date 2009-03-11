@@ -50,6 +50,10 @@ import org.ourproject.kune.platf.client.ui.rte.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImage;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElement;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.TextEditorInsertElementGroup;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
@@ -66,20 +70,12 @@ import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPanel;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPresenter;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorView;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
-import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElement;
-import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementGroup;
-import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementPanel;
-import org.ourproject.kune.workspace.client.editor.insert.TextEditorInsertElementPresenter;
-import org.ourproject.kune.workspace.client.editor.insert.linkemail.TextEditorInsertLinkEmail;
-import org.ourproject.kune.workspace.client.editor.insert.linkemail.TextEditorInsertLinkEmailPanel;
-import org.ourproject.kune.workspace.client.editor.insert.linkemail.TextEditorInsertLinkEmailPresenter;
-import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInsertLinkExt;
-import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInsertLinkExtPanel;
-import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInsertLinkExtPresenter;
-import org.ourproject.kune.workspace.client.editor.insert.linkext.TextEditorInsertLinkExtView;
-import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocal;
-import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocalPanel;
-import org.ourproject.kune.workspace.client.editor.insert.linklocal.TextEditorInsertLinkLocalPresenter;
+import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocal;
+import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocalPanel;
+import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocalPresenter;
+import org.ourproject.kune.workspace.client.editor.insertlocallink.TextEditorInsertLinkLocal;
+import org.ourproject.kune.workspace.client.editor.insertlocallink.TextEditorInsertLinkLocalPanel;
+import org.ourproject.kune.workspace.client.editor.insertlocallink.TextEditorInsertLinkLocalPresenter;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
@@ -235,8 +231,6 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 public class KuneWorkspaceModule extends AbstractModule {
     @Override
     protected void onInstall() {
-
-        registerDecorator(TextEditorInsertElementGroup.class, new TextEditorInsertElementGroup(container));
 
         register(Singleton.class, new Factory<SocialNetworkServiceAsync>(SocialNetworkServiceAsync.class) {
             @Override
@@ -812,18 +806,6 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<TextEditorInsertElement>(TextEditorInsertElement.class) {
-            @Override
-            public TextEditorInsertElement create() {
-                final TextEditorInsertElementPresenter presenter = new TextEditorInsertElementPresenter();
-                final TextEditorInsertElementPanel panel = new TextEditorInsertElementPanel(presenter,
-                        $(WorkspaceSkeleton.class), $(Images.class), $(I18nTranslationService.class),
-                        $(TextEditorInsertElementGroup.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
         register(TextEditorInsertElementGroup.class, new Factory<TextEditorInsertLinkLocal>(
                 TextEditorInsertLinkLocal.class) {
             @Override
@@ -832,32 +814,6 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $(TextEditorInsertElement.class));
                 final TextEditorInsertLinkLocalPanel panel = new TextEditorInsertLinkLocalPanel(presenter,
                         $(WorkspaceSkeleton.class), $(I18nTranslationService.class), $(FileDownloadUtils.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
-        register(TextEditorInsertElementGroup.class,
-                new Factory<TextEditorInsertLinkExt>(TextEditorInsertLinkExt.class) {
-                    @Override
-                    public TextEditorInsertLinkExt create() {
-                        final TextEditorInsertLinkExtPresenter presenter = new TextEditorInsertLinkExtPresenter(
-                                $(TextEditorInsertElement.class));
-                        final TextEditorInsertLinkExtView panel = new TextEditorInsertLinkExtPanel(presenter,
-                                $(I18nTranslationService.class));
-                        presenter.init(panel);
-                        return presenter;
-                    }
-                });
-
-        register(TextEditorInsertElementGroup.class, new Factory<TextEditorInsertLinkEmail>(
-                TextEditorInsertLinkEmail.class) {
-            @Override
-            public TextEditorInsertLinkEmail create() {
-                final TextEditorInsertLinkEmailPresenter presenter = new TextEditorInsertLinkEmailPresenter(
-                        $(TextEditorInsertElement.class));
-                final TextEditorInsertLinkEmailPanel panel = new TextEditorInsertLinkEmailPanel(presenter,
-                        $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -965,6 +921,17 @@ public class KuneWorkspaceModule extends AbstractModule {
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class),
                         $(Images.class));
                 presenter.init(view);
+                return presenter;
+            }
+        });
+
+        register(InsertImageGroup.class, new Factory<InsertImageLocal>(InsertImageLocal.class) {
+            @Override
+            public InsertImageLocal create() {
+                final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImage.class));
+                final InsertImageLocalPanel panel = new InsertImageLocalPanel(presenter,
+                        $(I18nTranslationService.class));
+                presenter.init(panel);
                 return presenter;
             }
         });

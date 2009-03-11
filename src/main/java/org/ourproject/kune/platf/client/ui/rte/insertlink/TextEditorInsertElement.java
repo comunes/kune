@@ -17,15 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
-public interface BeforeActionListener {
+import org.ourproject.kune.workspace.client.options.AbstractOptions;
 
-    /**
-     * Return false to cancel the action
-     * 
-     * @return
-     */
-    boolean beforeAction();
+import com.calclab.suco.client.events.Listener2;
+
+public interface TextEditorInsertElement extends AbstractOptions {
+
+    @Deprecated
+    void addOnCreateLink(Listener2<String, String> slot);
+
+    @Deprecated
+    void fireOnCreateLink(String name, String link);
 
 }

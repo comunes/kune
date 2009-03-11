@@ -65,11 +65,9 @@ EOF
 cat <<EOF > $DIR/${NAME}Panel.java
 package $PACKAGE;
 
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-
 public class ${NAME}Panel implements ${NAME}View {
 
-public ${NAME}Panel(final ${NAME}Presenter presenter, final WorkspaceSkeleton ws) {
+public ${NAME}Panel(final ${NAME}Presenter presenter) {
 }
 }
 EOF
@@ -86,7 +84,7 @@ import $PACKAGE.${NAME};
 register(Singleton.class, new Factory<${NAME}>(${NAME}.class) {
     public ${NAME} create() {
 	final ${NAME}Presenter presenter = new ${NAME}Presenter();
-	final ${NAME}Panel panel = new ${NAME}Panel(presenter, \$(WorkspaceSkeleton.class));
+	final ${NAME}Panel panel = new ${NAME}Panel(presenter));
 	presenter.init(panel);
 	return presenter;
     }

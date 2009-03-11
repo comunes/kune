@@ -13,7 +13,6 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.testing.events.MockedListener;
@@ -26,7 +25,6 @@ public class RTESavingEditorPresenterTest {
     private MockedListener<String> saveListener;
     private MockedListener0 cancelListener;
     private StateManager stateManager;
-    private SiteSignOutLink signOutLink;
     private DeferredCommandWrapper deferredCommandWrapper;
     private RTEditor rteEditor;
     private TimerWrapper timer;
@@ -39,7 +37,6 @@ public class RTESavingEditorPresenterTest {
     public void createObjects() {
         I18nUITranslationService i18n = Mockito.mock(I18nUITranslationService.class);
         stateManager = Mockito.mock(StateManager.class);
-        signOutLink = Mockito.mock(SiteSignOutLink.class);
         deferredCommandWrapper = Mockito.mock(DeferredCommandWrapper.class);
         rteEditor = Mockito.mock(RTEditor.class);
         RTEImgResources imgResources = Mockito.mock(RTEImgResources.class);
@@ -50,8 +47,8 @@ public class RTESavingEditorPresenterTest {
         Mockito.when(rteEditor.getSndBar()).thenReturn(sndbar);
         timer = Mockito.mock(TimerWrapper.class);
         view = Mockito.mock(RTESavingEditorView.class);
-        presenter = new RTESavingEditorPresenter(rteEditor, true, i18n, stateManager, signOutLink,
-                deferredCommandWrapper, imgResources, timer);
+        presenter = new RTESavingEditorPresenter(rteEditor, true, i18n, stateManager, deferredCommandWrapper,
+                imgResources, timer);
         presenter.init(view);
         saveListener = new MockedListener<String>();
         cancelListener = new MockedListener0();

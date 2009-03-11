@@ -17,15 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.platf.client.ui.rte.insertlink.email;
 
-public interface BeforeActionListener {
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.TextEditorInsertAbstractView;
 
-    /**
-     * Return false to cancel the action
-     * 
-     * @return
-     */
-    boolean beforeAction();
-
+public interface TextEditorInsertLinkEmailView extends TextEditorInsertAbstractView {
 }
