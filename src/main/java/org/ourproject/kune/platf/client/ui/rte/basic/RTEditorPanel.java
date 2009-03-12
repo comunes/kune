@@ -17,12 +17,14 @@ import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Justification;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Widget;
+import com.xpn.xwiki.wysiwyg.client.dom.Document;
 
 public class RTEditorPanel implements RTEditorView {
 
@@ -151,6 +153,28 @@ public class RTEditorPanel implements RTEditorView {
 
     public void focus() {
         rta.setFocus(true);
+    }
+
+    /**
+     * NOTE: If the current browser doesn't support rich text editing this
+     * method returns <code>null</code>. You should test the returned value and
+     * fail save to an appropriate behavior!<br/>
+     * The appropriate test would be: <code><pre>
+     * if (rta.isAttached() && rta.getDocument() == null) {
+     *   // The current browser doesn't support rich text editing.
+     * }
+     * </pre></code>
+     * 
+     * @return The DOM document being edited with this rich text area.
+     * 
+     *         copied from xwiki
+     */
+    public Document getDocument() {
+        if (rta.getElement().getTagName().equalsIgnoreCase("iframe")) {
+            return IFrameElement.as(rta.getElement()).getContentDocument().cast();
+        } else {
+            return null;
+        }
     }
 
     public String getHtml() {

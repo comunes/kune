@@ -81,13 +81,13 @@ and others icons from openoffice.org-style-human debian package
 others
 --------------------------------------------------------------------------------
 suco
-	 http://suco.googlecode.com
-	 Copyright: under GNU Lesser General Public License
+     http://suco.googlecode.com
+     Copyright: under GNU Lesser General Public License
    http://www.gnu.org/licenses/lgpl.html
 
 emite
-	 http://emite.googlecode.com
-	 Copyright: under GNU Lesser General Public License
+     http://emite.googlecode.com
+     Copyright: under GNU Lesser General Public License
    http://www.gnu.org/licenses/lgpl.html
 
 fonts-min.css and reset.css
@@ -106,6 +106,12 @@ extjs
 
 ext-gwt library:
    http://code.google.com/p/gwt-ext/
+   Copyright: under GNU Lesser General Public License
+   http://www.gnu.org/licenses/lgpl.html
+
+dom region and diff libraries:
+   XWiki Platform
+   http://www.xwiki.org/
    Copyright: under GNU Lesser General Public License
    http://www.gnu.org/licenses/lgpl.html
 

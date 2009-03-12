@@ -4,6 +4,8 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 
+import com.xpn.xwiki.wysiwyg.client.dom.Document;
+
 public interface RTEditorView extends View {
 
     void addActions(ActionItemCollection<Object> actions);
@@ -25,6 +27,8 @@ public interface RTEditorView extends View {
     void delete();
 
     void focus();
+
+    Document getDocument();
 
     String getHtml();
 

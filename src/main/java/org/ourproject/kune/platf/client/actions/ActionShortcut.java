@@ -6,6 +6,8 @@ import com.google.gwt.user.client.ui.KeyboardListener;
 
 public class ActionShortcut {
 
+    private static final String NO_KEYNAME = "nokeyname";
+
     private static boolean has(int modifiers, int modifier) {
         return ((modifiers & modifier) == modifier);
     }
@@ -16,6 +18,10 @@ public class ActionShortcut {
     private final char key;
     private final String keyName;
 
+    public ActionShortcut(boolean alt, boolean ctrl, boolean shift, char key) {
+        this(alt, ctrl, shift, key, NO_KEYNAME);
+    }
+
     public ActionShortcut(boolean alt, boolean ctrl, boolean shift, char key, String keyName) {
         this.alt = alt;
         this.ctrl = ctrl;
@@ -25,7 +31,7 @@ public class ActionShortcut {
     }
 
     public ActionShortcut(boolean ctrl, boolean shift, char key) {
-        this(false, ctrl, shift, key, null);
+        this(false, ctrl, shift, key, NO_KEYNAME);
     }
 
     public ActionShortcut(boolean ctrl, boolean shift, char key, String keyName) {
@@ -33,7 +39,7 @@ public class ActionShortcut {
     }
 
     public ActionShortcut(boolean ctrl, char key) {
-        this(false, ctrl, false, key, null);
+        this(false, ctrl, false, key, NO_KEYNAME);
     }
 
     public ActionShortcut(boolean ctrl, char key, String keyName) {
@@ -42,7 +48,7 @@ public class ActionShortcut {
 
     public ActionShortcut(char key, int modifiers) {
         this(has(modifiers, KeyboardListener.MODIFIER_ALT), has(modifiers, KeyboardListener.MODIFIER_CTRL), has(
-                modifiers, KeyboardListener.MODIFIER_SHIFT), key, null);
+                modifiers, KeyboardListener.MODIFIER_SHIFT), key, NO_KEYNAME);
     }
 
     public ActionShortcut(char key, int modifiers, String keyName) {
@@ -104,7 +110,7 @@ public class ActionShortcut {
         s += sKey(alt, "Alt");
         s += sKey(ctrl, "Ctrl");
         s += sKey(shift, "Shift");
-        s += keyName != null ? translateKey(keyName) + ")" : String.valueOf(key).toUpperCase() + ")";
+        s += keyName != NO_KEYNAME ? translateKey(keyName) + ")" : String.valueOf(key).toUpperCase() + ")";
         return s;
     }
 

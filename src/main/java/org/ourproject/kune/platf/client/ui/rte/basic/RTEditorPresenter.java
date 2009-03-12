@@ -16,6 +16,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
@@ -30,6 +31,7 @@ import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.libideas.resources.client.ImageResource;
+import com.xpn.xwiki.wysiwyg.client.dom.Selection;
 
 public class RTEditorPresenter implements RTEditor {
 
@@ -632,6 +634,21 @@ public class RTEditorPresenter implements RTEditor {
         backgroundColor.setToolTip(i18n.t("Text Background Colour"));
         backgroundColor.setAddCondition(canBeBasic);
 
+        final ActionToolbarMenuDescriptor<Object> devInfo = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
+                new Listener0() {
+                    public void onEvent() {
+                        Selection selection = view.getDocument().getSelection();
+                        String info = "range count: " + selection.getRangeCount() + "<br/>focus offset: "
+                                + selection.getFocusOffset() + "<br/>anchor offset:" + selection.getAnchorOffset()
+                                + "<br/>range 0 as html: " + selection.getRangeAt(0).toHTML();
+                        NotifyUser.info(info);
+                    }
+                });
+        devInfo.setTextDescription(i18n.t("Developers info"));
+        devInfo.setAddCondition(canBeExtended);
+        devInfo.setParentMenuTitle(i18n.t(FORMAT_MENU));
+        devInfo.setShortcut(new ActionShortcut(true, false, false, 'I'));
+
         actions.add(withNoItem(bold));
         actions.add(withNoItem(italic));
         actions.add(withNoItem(underline));
@@ -665,6 +682,7 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(comment));
         actions.add(withNoItem(undoBtn));
         actions.add(withNoItem(redoBtn));
+        actions.add(withNoItem(devInfo));
 
         for (String fontName : this.fontNames) {
             ActionToolbarMenuDescriptor<Object> fontNameAction = createFontNameAction(canBeBasic, fontName);
