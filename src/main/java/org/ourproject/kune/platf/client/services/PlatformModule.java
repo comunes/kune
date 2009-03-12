@@ -100,7 +100,7 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public class KunePlatformModule extends AbstractModule {
+public class PlatformModule extends AbstractModule {
 
     @Override
     protected void onInstall() {
@@ -201,10 +201,10 @@ public class KunePlatformModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<KuneErrorHandler>(KuneErrorHandler.class) {
+        register(Singleton.class, new Factory<ErrorHandler>(ErrorHandler.class) {
             @Override
-            public KuneErrorHandler create() {
-                return new KuneErrorHandler($(Session.class), i18n, $$(StateManager.class));
+            public ErrorHandler create() {
+                return new ErrorHandler($(Session.class), i18n, $$(StateManager.class));
             }
         });
 
@@ -220,7 +220,7 @@ public class KunePlatformModule extends AbstractModule {
             }
         });
 
-        AsyncCallbackSimple.init($(KuneErrorHandler.class));
+        AsyncCallbackSimple.init($(ErrorHandler.class));
 
         register(Singleton.class, new Factory<Application>(Application.class) {
             @Override

@@ -46,7 +46,7 @@ import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
-public class KuneRegistryModule extends AbstractModule {
+public class RegistryModule extends AbstractModule {
 
     @Override
     protected void onInstall() {

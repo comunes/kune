@@ -25,10 +25,8 @@ import com.calclab.suco.client.events.Listener2;
 
 public interface InsertLinkDialog extends AbstractTabbedDialog {
 
-    @Deprecated
-    void addOnCreateLink(Listener2<String, String> slot);
-
-    @Deprecated
     void fireOnCreateLink(String name, String link);
+
+    void setOnCreateLink(Listener2<String, String> listener);
 
 }

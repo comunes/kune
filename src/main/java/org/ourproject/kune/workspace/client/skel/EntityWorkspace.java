@@ -55,6 +55,7 @@ public class EntityWorkspace {
     private final Panel cntCtxBorderLayout;
     private final Panel mainFitPanel;
     private final Panel bottomPanel;
+    private final Panel contextWrap;
 
     public EntityWorkspace() {
         mainFitPanel = new Panel();
@@ -97,7 +98,7 @@ public class EntityWorkspace {
         bottomPanel.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
 
         final Panel contentWrap = new Panel();
-        final Panel contextWrap = new Panel();
+        contextWrap = new Panel();
         contentWrap.setLayout(new BorderLayout());
         contextWrap.setLayout(new BorderLayout());
         contentWrap.setBorder(true);
@@ -218,6 +219,14 @@ public class EntityWorkspace {
 
     public void setContext(final Widget widget) {
         setPanel(context, widget);
+    }
+
+    public void setMaximized(boolean maximized) {
+        if (maximized) {
+            contextWrap.collapse();
+        } else {
+            contextWrap.expand();
+        }
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {

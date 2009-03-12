@@ -24,6 +24,11 @@ import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.ioc.decorator.ProviderCollection;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 
+/**
+ * Use this decorator with parts of kune that are needed at start time (like
+ * main widgets in workspace). Them are created automatically when starting.
+ * 
+ */
 public class ApplicationComponentGroup extends ProviderCollection {
 
     public ApplicationComponentGroup(final Container container) {

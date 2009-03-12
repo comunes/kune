@@ -60,8 +60,14 @@ public interface Images extends ImageBundle {
     @Resource("org/ourproject/kune/platf/public/images/arrow-down-white.gif")
     AbstractImagePrototype arrowDownWhite();
 
+    @Resource("org/ourproject/kune/platf/public/images/arrow_in.png")
+    AbstractImagePrototype arrowIn();
+
     @Resource("org/ourproject/kune/platf/public/images/arrow-left-green.png")
     AbstractImagePrototype arrowLeftGreen();
+
+    @Resource("org/ourproject/kune/platf/public/images/arrow_out.png")
+    AbstractImagePrototype arrowOut();
 
     @Resource("org/ourproject/kune/platf/public/images/arrow-right-black.gif")
     AbstractImagePrototype arrowRightBlack();

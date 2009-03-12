@@ -21,32 +21,27 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 
-import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener2;
 
 public class InsertLinkDialogPresenter extends AbstractTabbedDialogPresenter implements InsertLinkDialog {
 
-    private final Event2<String, String> onCreateLink;
+    private Listener2<String, String> onCreateListener;
 
     public InsertLinkDialogPresenter() {
-        this.onCreateLink = new Event2<String, String>("onCreateLink");
     }
 
-    @Deprecated
-    public void addOnCreateLink(final Listener2<String, String> slot) {
-        onCreateLink.add(slot);
-    }
-
-    @Deprecated
     public void fireOnCreateLink(String name, String link) {
-        onCreateLink.fire(name, link);
+        onCreateListener.onEvent(name, link);
         super.hide();
     }
 
-    @Deprecated
     public void fireOnInsertHtml(String name, String link) {
-        onCreateLink.fire(name, link);
+        onCreateListener.onEvent(name, link);
         super.hide();
+    }
+
+    public void setOnCreateLink(final Listener2<String, String> listener) {
+        this.onCreateListener = listener;
     }
 
 }

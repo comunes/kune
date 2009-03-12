@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
+import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
@@ -47,7 +47,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
     private final BeforeActionCollection beforeSignOutCollection;
 
     public SiteSignOutLinkPresenter(final Session session, final Provider<UserServiceAsync> userServiceProvider,
-            final Provider<KuneErrorHandler> kuneErrorHandlerProvider) {
+            final Provider<ErrorHandler> kuneErrorHandlerProvider) {
         this.session = session;
         this.userServiceProvider = userServiceProvider;
         session.onUserSignIn(new Listener<UserInfoDTO>() {

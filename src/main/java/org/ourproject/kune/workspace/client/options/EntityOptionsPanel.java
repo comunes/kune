@@ -82,9 +82,6 @@ public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements Ent
             }
         });
         optionsButton.ensureDebugId(GROUP_OPTIONS_ICON);
-        optionsButton.addStyleName("kune-Margin-Medium-t");
-        optionsButton.addStyleName("kune-pointer");
-
         entityHeader.addWidget(optionsButton);
     }
 }

@@ -46,7 +46,7 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
+import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -86,7 +86,7 @@ public abstract class AbstractFoldableContentActions {
     protected final Provider<ContentServiceAsync> contentServiceProvider;
     protected final Provider<FileUploader> fileUploaderProvider;
     protected final ContextNavigator contextNavigator;
-    protected final KuneErrorHandler errorHandler;
+    protected final ErrorHandler errorHandler;
     protected final Provider<GroupServiceAsync> groupServiceProvider;
     protected final ContentActionRegistry contentActionRegistry;
     protected final ContextActionRegistry contextActionRegistry;
@@ -99,7 +99,7 @@ public abstract class AbstractFoldableContentActions {
     private final SitePublicSpaceLink publicLink;
 
     public AbstractFoldableContentActions(Session session, StateManager stateManager, I18nUITranslationService i18n,
-            KuneErrorHandler errorHandler, DeferredCommandWrapper deferredCommandWrapper,
+            ErrorHandler errorHandler, DeferredCommandWrapper deferredCommandWrapper,
             Provider<GroupServiceAsync> groupServiceProvider, Provider<ContentServiceAsync> contentServiceProvider,
             Provider<FileUploader> fileUploaderProvider, ContextNavigator contextNavigator,
             ContentActionRegistry contentActionRegistry, ContextActionRegistry contextActionRegistry,

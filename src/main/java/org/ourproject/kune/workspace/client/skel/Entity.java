@@ -111,6 +111,11 @@ public class Entity {
         entitySummary.doLayoutIfNeeded();
     }
 
+    public void setMaximized(boolean maximized) {
+        entityWorkspace.setMaximized(maximized);
+        entitySummary.setMaximized(maximized);
+    }
+
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
         if (oldTheme != null) {
             entityFitPanel.removeClass("k-entity-" + oldTheme);

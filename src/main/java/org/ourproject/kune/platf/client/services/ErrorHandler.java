@@ -41,13 +41,13 @@ import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 
-public class KuneErrorHandler {
+public class ErrorHandler {
     private final Session session;
     private final I18nTranslationService i18n;
     private final Event0 onSessionExpired;
     private final Provider<StateManager> stateManagerProvider;
 
-    public KuneErrorHandler(final Session session, final I18nTranslationService i18n,
+    public ErrorHandler(final Session session, final I18nTranslationService i18n,
             final Provider<StateManager> stateManagerProvider) {
         this.session = session;
         this.i18n = i18n;

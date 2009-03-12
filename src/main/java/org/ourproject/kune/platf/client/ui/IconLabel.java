@@ -55,7 +55,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     private HorizontalAlignmentConstant horzAlign;
     private MouseListenerCollection mouseListeners;
     private MouseWheelListenerCollection mouseWheelListeners;
-    private final Element icon;
+    private Element icon;
     private final Element textLabel;
 
     /**
@@ -123,7 +123,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     private IconLabel(final AbstractImagePrototype image, final boolean leftIcon) {
         setElement(DOM.createDiv());
         sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
-        icon = image.createImage().getElement();
+        setIcon(image);
         textLabel = DOM.createSpan();
         if (leftIcon) {
             setStyleName("kune-IconLabel-l");
@@ -162,10 +162,6 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
             mouseWheelListeners = new MouseWheelListenerCollection();
         }
         mouseWheelListeners.add(listener);
-    }
-
-    public void setStyleNameToText(final String styleName) {
-        DOM.setElementProperty(textLabel.<com.google.gwt.user.client.Element> cast(), "className", styleName);
     }
 
     public HorizontalAlignmentConstant getHorizontalAlignment() {
@@ -244,6 +240,14 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         DOM.setStyleAttribute(textLabel, "textAlign", align.getTextAlignString());
     }
 
+    public void setIcon(AbstractImagePrototype image) {
+        icon = getImageElement(image);
+    }
+
+    public void setStyleNameToText(final String styleName) {
+        DOM.setElementProperty(textLabel.<com.google.gwt.user.client.Element> cast(), "className", styleName);
+    }
+
     public void setText(final String text) {
         DOM.setInnerText(textLabel, text);
     }
@@ -256,6 +260,10 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
 
     public void setWordWrap(final boolean wrap) {
         DOM.setStyleAttribute(textLabel, "whiteSpace", wrap ? "normal" : "nowrap");
+    }
+
+    private Element getImageElement(final AbstractImagePrototype image) {
+        return image.createImage().getElement();
     }
 
 }

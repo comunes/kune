@@ -39,9 +39,9 @@ import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
+import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -79,6 +79,9 @@ import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLoc
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
+import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspace;
+import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspacePanel;
+import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspacePresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
@@ -228,7 +231,7 @@ import com.calclab.suco.client.ioc.module.Factory;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public class KuneWorkspaceModule extends AbstractModule {
+public class WorkspaceModule extends AbstractModule {
     @Override
     protected void onInstall() {
 
@@ -329,7 +332,7 @@ public class KuneWorkspaceModule extends AbstractModule {
             @Override
             public SiteSignOutLink create() {
                 final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter($(Session.class),
-                        $$(UserServiceAsync.class), $$(KuneErrorHandler.class));
+                        $$(UserServiceAsync.class), $$(ErrorHandler.class));
                 final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter,
                         $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
                 presenter.init(panel);
@@ -806,14 +809,12 @@ public class KuneWorkspaceModule extends AbstractModule {
             }
         });
 
-        register(InsertLinkGroup.class, new Factory<InsertLinkLocal>(
-                InsertLinkLocal.class) {
+        register(InsertLinkGroup.class, new Factory<InsertLinkLocal>(InsertLinkLocal.class) {
             @Override
             public InsertLinkLocal create() {
-                final InsertLinkLocalPresenter presenter = new InsertLinkLocalPresenter(
-                        $(InsertLinkDialog.class));
-                final InsertLinkLocalPanel panel = new InsertLinkLocalPanel(presenter,
-                        $(WorkspaceSkeleton.class), $(I18nTranslationService.class), $(FileDownloadUtils.class));
+                final InsertLinkLocalPresenter presenter = new InsertLinkLocalPresenter($(InsertLinkDialog.class));
+                final InsertLinkLocalPanel panel = new InsertLinkLocalPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -931,6 +932,17 @@ public class KuneWorkspaceModule extends AbstractModule {
                 final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImageDialog.class));
                 final InsertImageLocalPanel panel = new InsertImageLocalPanel(presenter,
                         $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(ApplicationComponentGroup.class, new Factory<MaxMinWorkspace>(MaxMinWorkspace.class) {
+            @Override
+            public MaxMinWorkspace create() {
+                final MaxMinWorkspacePresenter presenter = new MaxMinWorkspacePresenter();
+                final MaxMinWorkspacePanel panel = new MaxMinWorkspacePanel(presenter, $(WorkspaceSkeleton.class),
+                        $(Images.class), $(EntityHeader.class), $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }

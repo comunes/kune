@@ -136,6 +136,10 @@ public class WorkspaceSkeleton {
         entity.refreshSummary();
     }
 
+    public void setMaximized(boolean maximized) {
+        entity.setMaximized(maximized);
+    }
+
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
         entity.setTheme(oldTheme, newTheme);
     }

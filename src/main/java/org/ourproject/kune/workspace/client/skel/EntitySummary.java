@@ -156,4 +156,13 @@ public class EntitySummary {
         return trayBar;
     }
 
+    public void setMaximized(boolean maximized) {
+        entitySummary.setVisible(!maximized);
+        if (maximized) {
+            mainFitPanel.collapse();
+        } else {
+            mainFitPanel.expand();
+        }
+    }
+
 }

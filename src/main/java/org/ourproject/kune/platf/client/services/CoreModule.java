@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 
 import com.calclab.suco.client.ioc.module.AbstractModule;
 
-public class KuneCoreModule extends AbstractModule {
+public class CoreModule extends AbstractModule {
 
     @Override
     public void onInstall() {

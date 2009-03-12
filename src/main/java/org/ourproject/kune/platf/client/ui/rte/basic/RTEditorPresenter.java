@@ -68,8 +68,8 @@ public class RTEditorPresenter implements RTEditor {
 
     public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
             RTEActionSndToolbar sndBar, RTEImgResources imgResources, InsertLinkDialog textEditorInsertElement,
-            ColorWebSafePalette palette, Provider<EditHtmlDialog> editHtmlDialog, Provider<InsertImageDialog> insertImageDialog,
-            DeferredCommandWrapper deferred) {
+            ColorWebSafePalette palette, Provider<EditHtmlDialog> editHtmlDialog,
+            Provider<InsertImageDialog> insertImageDialog, DeferredCommandWrapper deferred) {
         this.i18n = i18n;
         this.session = session;
         this.topBar = topBar;
@@ -535,6 +535,12 @@ public class RTEditorPresenter implements RTEditor {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
+                                insertElement.setOnCreateLink(new Listener2<String, String>() {
+                                    public void onEvent(String name, String url) {
+                                        view.createLink(url);
+                                        fireOnEdit();
+                                    }
+                                });
                                 insertElement.show();
                             }
                         });
@@ -544,12 +550,6 @@ public class RTEditorPresenter implements RTEditor {
         createLink.setToolTip(i18n.t("Create Link"));
         createLink.setShortcut(new ActionShortcut(true, 'K'));
         createLink.setAddCondition(canBeExtended);
-        insertElement.addOnCreateLink(new Listener2<String, String>() {
-            public void onEvent(String name, String url) {
-                view.createLink(url);
-                fireOnEdit();
-            }
-        });
 
         ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
                 new Listener0() {

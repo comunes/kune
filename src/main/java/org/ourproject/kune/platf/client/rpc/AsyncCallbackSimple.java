@@ -19,15 +19,15 @@
  */
 package org.ourproject.kune.platf.client.rpc;
 
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
+import org.ourproject.kune.platf.client.services.ErrorHandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
 
-    private static KuneErrorHandler errorHandler;
+    private static ErrorHandler errorHandler;
 
-    public static void init(KuneErrorHandler kuneErrorHandler) {
+    public static void init(ErrorHandler kuneErrorHandler) {
         errorHandler = kuneErrorHandler;
     }
 

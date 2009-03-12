@@ -35,7 +35,7 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
+import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -78,7 +78,7 @@ public class DocumentClientModule extends AbstractModule {
                         $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
                         $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(ContentEditor.class), $(KuneErrorHandler.class),
+                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class),
                         $(DocumentViewer.class), $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
             }
         });

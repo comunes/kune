@@ -27,7 +27,7 @@ import org.ourproject.kune.gallery.client.cnt.GalleryViewer;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.services.KuneErrorHandler;
+import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -52,7 +52,7 @@ public class GalleryClientActions extends AbstractFoldableContentActions {
             final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
-            final Provider<ContentEditor> textEditorProvider, final KuneErrorHandler errorHandler,
+            final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
             final GalleryViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
             final SitePublicSpaceLink publicLink) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
