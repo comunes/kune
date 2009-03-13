@@ -10,8 +10,6 @@ public interface RTEditorView extends View {
 
     void addActions(ActionItemCollection<Object> actions);
 
-    void addComment(String userName);
-
     void adjustSize(int height);
 
     boolean canBeBasic();
@@ -34,6 +32,12 @@ public interface RTEditorView extends View {
 
     String getText();
 
+    void insertComment(String author);
+
+    void insertCommentNotUsingSelection(String author);
+
+    void insertCommentUsingSelection(String author);
+
     void insertHorizontalRule();
 
     void insertHtml(String html);
@@ -43,6 +47,8 @@ public interface RTEditorView extends View {
     void insertOrderedList();
 
     void insertUnorderedList();
+
+    boolean isAnythingSelected();
 
     boolean isAttached();
 

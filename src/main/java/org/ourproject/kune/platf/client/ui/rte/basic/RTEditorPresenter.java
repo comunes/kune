@@ -420,11 +420,33 @@ public class RTEditorPresenter implements RTEditor {
         ActionToolbarMenuDescriptor<Object> comment = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
                 new Listener0() {
                     public void onEvent() {
-                        view.focus();
-                        String author = session.isLogged() ? session.getCurrentUser().getShortName()
-                                : i18n.t("anonymous user");
-                        view.addComment(author);
-                        fireOnEdit();
+                        deferred.addCommand(new Listener0() {
+                            public void onEvent() {
+                                view.focus();
+                                final String author = session.isLogged() ? session.getCurrentUser().getShortName()
+                                        : i18n.t("anonymous user");
+                                if (view.isAnythingSelected()) {
+                                    NotifyUser.askConfirmation(i18n.t("Insert a comment"),
+                                            i18n.t("Include the selected text in the comment?"), new Listener0() {
+                                                public void onEvent() {
+                                                    // include selection in
+                                                    // comment
+                                                    view.insertCommentUsingSelection(author);
+                                                }
+                                            }, new Listener0() {
+                                                public void onEvent() {
+                                                    // not include selection in
+                                                    // comment;
+                                                    view.insertCommentNotUsingSelection(author);
+                                                }
+                                            });
+                                } else {
+                                    // Nothing selected > create comment in
+                                    // insertion point
+                                    view.insertComment(author);
+                                }
+                            }
+                        });
                     }
                 });
         comment.setEnableCondition(new ActionEnableCondition<Object>() {
@@ -637,11 +659,16 @@ public class RTEditorPresenter implements RTEditor {
         final ActionToolbarMenuDescriptor<Object> devInfo = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
                 new Listener0() {
                     public void onEvent() {
-                        Selection selection = view.getDocument().getSelection();
-                        String info = "range count: " + selection.getRangeCount() + "<br/>focus offset: "
-                                + selection.getFocusOffset() + "<br/>anchor offset:" + selection.getAnchorOffset()
-                                + "<br/>range 0 as html: " + selection.getRangeAt(0).toHTML();
-                        NotifyUser.info(info);
+                        deferred.addCommand(new Listener0() {
+                            public void onEvent() {
+                                Selection selection = view.getDocument().getSelection();
+                                String info = "range count: " + selection.getRangeCount() + "<br/>focus offset: "
+                                        + selection.getFocusOffset() + "<br/>anchor offset:"
+                                        + selection.getAnchorOffset() + "<br/>range 0 as html: "
+                                        + selection.getRangeAt(0).toHTML();
+                                NotifyUser.info(info);
+                            }
+                        });
                     }
                 });
         devInfo.setTextDescription(i18n.t("Developers info"));
@@ -682,7 +709,7 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(comment));
         actions.add(withNoItem(undoBtn));
         actions.add(withNoItem(redoBtn));
-        actions.add(withNoItem(devInfo));
+        // actions.add(withNoItem(devInfo));
 
         for (String fontName : this.fontNames) {
             ActionToolbarMenuDescriptor<Object> fontNameAction = createFontNameAction(canBeBasic, fontName);

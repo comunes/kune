@@ -25,6 +25,9 @@ import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Widget;
 import com.xpn.xwiki.wysiwyg.client.dom.Document;
+import com.xpn.xwiki.wysiwyg.client.dom.DocumentFragment;
+import com.xpn.xwiki.wysiwyg.client.dom.Range;
+import com.xpn.xwiki.wysiwyg.client.dom.Selection;
 
 public class RTEditorPanel implements RTEditorView {
 
@@ -115,14 +118,6 @@ public class RTEditorPanel implements RTEditorView {
         }
     }
 
-    public void addComment(String userName) {
-        String time = i18n.formatDateWithLocale(new Date(), true);
-        Element span = DOM.createSpan();
-        span.setInnerHTML("<em>" + i18n.t("type your comment here") + "</em> -" + userName + " " + time);
-        DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
-        insertHtml("&nbsp;" + span.getString() + "&nbsp;");
-    }
-
     public void adjustSize(int height) {
         rta.setHeight("" + height);
     }
@@ -189,6 +184,25 @@ public class RTEditorPanel implements RTEditorView {
         return rta.getText();
     }
 
+    public void insertComment(String author) {
+        String comment = null;
+        createCommentAndSelectIt(author, comment);
+    }
+
+    public void insertCommentNotUsingSelection(String author) {
+        getFstRange().collapse(false);
+        createCommentAndSelectIt(author, null);
+        focus();
+    }
+
+    public void insertCommentUsingSelection(String author) {
+        DocumentFragment extracted = getFstRange().cloneContents();
+        extended.delete();
+        String comment = extracted.getInnerText();
+        createCommentAndSelectIt(author, comment);
+        focus();
+    }
+
     public void insertHorizontalRule() {
         extended.insertHorizontalRule();
     }
@@ -207,6 +221,10 @@ public class RTEditorPanel implements RTEditorView {
 
     public void insertUnorderedList() {
         extended.insertUnorderedList();
+    }
+
+    public boolean isAnythingSelected() {
+        return !getDocument().getSelection().isCollapsed();
     }
 
     public boolean isAttached() {
@@ -331,6 +349,34 @@ public class RTEditorPanel implements RTEditorView {
 
     protected void fireEdit() {
         presenter.fireOnEdit();
+    }
+
+    private void createCommentAndSelectIt(String author, String comment) {
+        Element commentEl = createCommentElement(author, comment);
+        Range innerCommentRange = getDocument().createRange();
+        getFstRange().insertNode(commentEl);
+        innerCommentRange.selectNodeContents(commentEl.getFirstChild());
+        getSelection().addRange(innerCommentRange);
+        fireEdit();
+    }
+
+    private Element createCommentElement(String userName, String insertComment) {
+        String time = i18n.formatDateWithLocale(new Date(), true);
+        Element span = getDocument().createSpanElement();
+        String comment = insertComment != null ? insertComment : i18n.t("type your comment here");
+        span.setInnerHTML("<em>" + comment + "</em> -" + userName + " " + time);
+        DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
+        // insertHtml("&nbsp;" + span.getString() + "&nbsp;");
+        return span;
+    }
+
+    private Range getFstRange() {
+        return getSelection().getRangeAt(0);
+    }
+
+    private Selection getSelection() {
+        Selection selection = getDocument().getSelection();
+        return selection;
     }
 
     /**
