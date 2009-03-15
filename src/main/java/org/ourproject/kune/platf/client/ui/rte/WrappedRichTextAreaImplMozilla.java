@@ -35,42 +35,42 @@ public class WrappedRichTextAreaImplMozilla extends RichTextAreaImplMozilla {
 
     @Override
     public native void initElement() /*-{
-           // Mozilla doesn't allow designMode to be set reliably until the iframe is
-           // fully loaded.
-           var _this = this;
-           var iframe = _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-           _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::initializing = true;
+              // Mozilla doesn't allow designMode to be set reliably until the iframe is
+              // fully loaded.
+              var _this = this;
+              var iframe = _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+              _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::initializing = true;
 
-           iframe.onload = function() {
-             // Some Mozillae have the nasty habit of calling onload again when you set
-             // designMode, so let's avoid doing it more than once.
-             iframe.onload = null;
+              iframe.onload = function() {
+                // Some Mozillae have the nasty habit of calling onload again when you set
+                // designMode, so let's avoid doing it more than once.
+                iframe.onload = null;
 
-             // patch ccs inject:
+                // patch ccs inject:
 
-             var doc = _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document;
-             head=doc.getElementsByTagName('head')[0];
-             link=document.createElement('link');
-             link.setAttribute('rel',"stylesheet");
-             link.setAttribute('type',"text/css");
-             link.setAttribute('href',$wnd.location.protocol + $wnd.location.host + $wnd.location.pathname + "css/richtext.css" );
-             head.appendChild(link);
+                var doc = _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document;
+                head=doc.getElementsByTagName('head')[0];
+                link=document.createElement('link');
+                link.setAttribute('rel',"stylesheet");
+                link.setAttribute('type',"text/css");
+                link.setAttribute('href',$wnd.location.protocol + "//" + $wnd.location.host + $wnd.location.pathname + "css/richtext.css" );
+                head.appendChild(link);
 
-              // -- patch
+                 // -- patch
 
-              // Send notification that the iframe has finished loading.
-              _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitialized()();
+                 // Send notification that the iframe has finished loading.
+                 _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitialized()();
 
-              // Don't set designMode until the RTA actually gets focused. This is
-              // necessary because editing won't work on Mozilla if the iframe is
-              // *hidden, but attached*. Waiting for focus gets around this issue.
-              //
-              // Note: This onfocus will not conflict with the addEventListener('focus',
-              // ...) // in RichTextAreaImplStandard.
-              iframe.contentWindow.onfocus = function() {
-                iframe.contentWindow.onfocus = null;
-                iframe.contentWindow.document.designMode = 'On';
-              };
-            };
-           }-*/;
+                 // Don't set designMode until the RTA actually gets focused. This is
+                 // necessary because editing won't work on Mozilla if the iframe is
+                 // *hidden, but attached*. Waiting for focus gets around this issue.
+                 //
+                 // Note: This onfocus will not conflict with the addEventListener('focus',
+                 // ...) // in RichTextAreaImplStandard.
+                 iframe.contentWindow.onfocus = function() {
+                   iframe.contentWindow.onfocus = null;
+                   iframe.contentWindow.document.designMode = 'On';
+                 };
+               };
+              }-*/;
 }
