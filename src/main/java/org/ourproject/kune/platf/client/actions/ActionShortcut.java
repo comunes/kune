@@ -18,11 +18,11 @@ public class ActionShortcut {
     private final char key;
     private final String keyName;
 
-    public ActionShortcut(boolean alt, boolean ctrl, boolean shift, char key) {
-        this(alt, ctrl, shift, key, NO_KEYNAME);
+    public ActionShortcut(boolean ctrl, boolean alt, boolean shift, char key) {
+        this(ctrl, alt, shift, key, NO_KEYNAME);
     }
 
-    public ActionShortcut(boolean alt, boolean ctrl, boolean shift, char key, String keyName) {
+    public ActionShortcut(boolean ctrl, boolean alt, boolean shift, char key, String keyName) {
         this.alt = alt;
         this.ctrl = ctrl;
         this.shift = shift;
@@ -31,28 +31,28 @@ public class ActionShortcut {
     }
 
     public ActionShortcut(boolean ctrl, boolean shift, char key) {
-        this(false, ctrl, shift, key, NO_KEYNAME);
+        this(ctrl, false, shift, key, NO_KEYNAME);
     }
 
     public ActionShortcut(boolean ctrl, boolean shift, char key, String keyName) {
-        this(false, ctrl, shift, key, keyName);
+        this(ctrl, false, shift, key, keyName);
     }
 
     public ActionShortcut(boolean ctrl, char key) {
-        this(false, ctrl, false, key, NO_KEYNAME);
+        this(ctrl, false, false, key, NO_KEYNAME);
     }
 
     public ActionShortcut(boolean ctrl, char key, String keyName) {
-        this(false, ctrl, false, key, keyName);
+        this(ctrl, false, false, key, keyName);
     }
 
     public ActionShortcut(char key, int modifiers) {
-        this(has(modifiers, KeyboardListener.MODIFIER_ALT), has(modifiers, KeyboardListener.MODIFIER_CTRL), has(
+        this(has(modifiers, KeyboardListener.MODIFIER_CTRL), has(modifiers, KeyboardListener.MODIFIER_ALT), has(
                 modifiers, KeyboardListener.MODIFIER_SHIFT), key, NO_KEYNAME);
     }
 
     public ActionShortcut(char key, int modifiers, String keyName) {
-        this(has(modifiers, KeyboardListener.MODIFIER_ALT), has(modifiers, KeyboardListener.MODIFIER_CTRL), has(
+        this(has(modifiers, KeyboardListener.MODIFIER_CTRL), has(modifiers, KeyboardListener.MODIFIER_ALT), has(
                 modifiers, KeyboardListener.MODIFIER_SHIFT), key, keyName);
     }
 

@@ -28,7 +28,7 @@ import com.calclab.suco.client.events.Listener0;
 /**
  * The Class ActionDescriptor.
  */
-public abstract class ActionDescriptor<T> {
+public class ActionDescriptor<T> {
 
     public static final int NO_POSITION = -1;
 

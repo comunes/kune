@@ -26,6 +26,8 @@ public interface RTEditor {
 
     ActionAddCondition<Object> canBeExtended();
 
+    void detach();
+
     View getEditorArea();
 
     String getHtml();
@@ -35,8 +37,6 @@ public interface RTEditor {
     String getText();
 
     ActionToolbar<Object> getTopBar();
-
-    void reset();
 
     void setExtended(boolean extended);
 

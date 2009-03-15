@@ -1,111 +1,68 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_DOWN;
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_END;
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_ESCAPE;
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_HOME;
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_LEFT;
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_PAGEDOWN;
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_PAGEUP;
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_RIGHT;
+import static com.google.gwt.user.client.ui.KeyboardListener.KEY_UP;
+
 import java.util.Date;
-import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionShortcut;
+import org.ourproject.kune.platf.client.actions.ActionShortcutRegister;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
-import org.ourproject.kune.platf.client.ui.rte.RichTextArea.BasicFormatter;
-import org.ourproject.kune.platf.client.ui.rte.RichTextArea.ExtendedFormatter;
-import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
-import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Justification;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.FocusListener;
-import com.google.gwt.user.client.ui.KeyboardListener;
 import com.google.gwt.user.client.ui.Widget;
 import com.xpn.xwiki.wysiwyg.client.dom.Document;
 import com.xpn.xwiki.wysiwyg.client.dom.DocumentFragment;
 import com.xpn.xwiki.wysiwyg.client.dom.Range;
 import com.xpn.xwiki.wysiwyg.client.dom.Selection;
 
-public class RTEditorPanel implements RTEditorView {
+public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
-    private class EventListener implements ClickListener, ChangeListener, KeyboardListener, FocusListener {
-
-        public void onChange(Widget sender) {
-            presenter.fireOnEdit();
-        }
-
-        public void onClick(Widget sender) {
-            if (sender == rta) {
-                // We use the RichTextArea's onKeyUp event to update the
-                // toolbar status. This will catch any cases where the user
-                // moves the cursor using the keyboard, or uses one of the
-                // browser's built-in keyboard shortcuts.
-                updateStatus();
-            }
-        }
+    private class EventListener implements FocusListener {
 
         public void onFocus(Widget sender) {
             presenter.onEditorFocus();
         }
 
-        public void onKeyDown(final Widget sender, final char keyCode, final int modifiers) {
-        }
-
-        public void onKeyPress(final Widget sender, final char keyCode, final int modifiers) {
-        }
-
-        public void onKeyUp(final Widget sender, final char keyCode, final int modifiers) {
-            if (sender == rta) {
-                // We use the RichTextArea's onKeyUp event to update the
-                // toolbar status.
-                // This will catch any cases where the user moves the cursor
-                // using the keyboard, or uses one of the browser's built-in
-                // keyboard shortcuts.
-
-                updateStatus();
-                fireEdit();
-                if (modifiers != 0) {
-                    Log.debug("RTE shortcut pressed (" + modifiers + ", " + keyCode + ")");
-                    ActionItem<Object> actionItem = shortcuts.get(new ActionShortcut(keyCode, modifiers));
-                    if (actionItem != null) {
-                        actionManager.doAction(actionItem);
-                        updateStatus();
-                    } else {
-                        Log.debug("...but not mapped to any action");
-                    }
-                }
-            }
-        }
-
         public void onLostFocus(Widget sender) {
-
         }
     }
     private final I18nUITranslationService i18n;
-    private final RichTextArea rta;
     private final BasicFormatter basic;
     private final ExtendedFormatter extended;
-    private final HashMap<ActionShortcut, ActionItem<Object>> shortcuts;
-    private final ActionManager actionManager;
     private final RTEditorPresenter presenter;
+    private final ActionManager actionManager;
+    private final ActionShortcutRegister shortcutRegister;
 
-    public RTEditorPanel(final RTEditorPresenter presenter, I18nUITranslationService i18n, ActionManager actionManager) {
+    public RTEditorPanel(final RTEditorPresenter presenter, I18nUITranslationService i18n,
+            final ActionManager actionManager) {
         this.presenter = presenter;
         this.i18n = i18n;
         this.actionManager = actionManager;
-        rta = new RichTextArea();
-        basic = rta.getBasicFormatter();
-        extended = rta.getExtendedFormatter();
-        shortcuts = new HashMap<ActionShortcut, ActionItem<Object>>();
+        basic = getBasicFormatter();
+        extended = getExtendedFormatter();
+        shortcutRegister = new ActionShortcutRegister();
         EventListener listener = new EventListener();
-        rta.addClickListener(listener);
-        rta.addKeyboardListener(listener);
-        rta.addFocusListener(listener);
-        rta.setWidth("96%");
-        rta.setHeight("100%");
+        addFocusListener(listener);
+        setWidth("97%");
+        setHeight("100%");
+
     }
 
     public void addActions(ActionItemCollection<Object> actionItems) {
@@ -113,13 +70,13 @@ public class RTEditorPanel implements RTEditorView {
             ActionDescriptor<Object> action = actionItem.getAction();
             if (action.hasShortcut() && action.mustBeAdded(null)) {
                 ActionShortcut shortcut = action.getShortcut();
-                shortcuts.put(shortcut, actionItem);
+                shortcutRegister.put(shortcut, actionItem);
             }
         }
     }
 
     public void adjustSize(int height) {
-        rta.setHeight("" + height);
+        setHeight("" + height);
     }
 
     public boolean canBeBasic() {
@@ -147,7 +104,7 @@ public class RTEditorPanel implements RTEditorView {
     }
 
     public void focus() {
-        rta.setFocus(true);
+        setFocus(true);
     }
 
     /**
@@ -165,23 +122,11 @@ public class RTEditorPanel implements RTEditorView {
      *         copied from xwiki
      */
     public Document getDocument() {
-        if (rta.getElement().getTagName().equalsIgnoreCase("iframe")) {
-            return IFrameElement.as(rta.getElement()).getContentDocument().cast();
+        if (getElement().getTagName().equalsIgnoreCase("iframe")) {
+            return IFrameElement.as(getElement()).getContentDocument().cast();
         } else {
             return null;
         }
-    }
-
-    public String getHtml() {
-        return rta.getHTML();
-    }
-
-    public Widget getRTE() {
-        return rta;
-    }
-
-    public String getText() {
-        return rta.getText();
     }
 
     public void insertComment(String author) {
@@ -227,10 +172,6 @@ public class RTEditorPanel implements RTEditorView {
         return !getDocument().getSelection().isCollapsed();
     }
 
-    public boolean isAttached() {
-        return rta.isAttached();
-    }
-
     public boolean isBold() {
         return basic.isBold();
     }
@@ -271,6 +212,38 @@ public class RTEditorPanel implements RTEditorView {
         extended.leftIndent();
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public void onBrowserEvent(Event event) {
+        switch (DOM.eventGetType(event)) {
+        case Event.ONCLICK:
+            updateStatus();
+            super.onBrowserEvent(event);
+            break;
+        case Event.ONKEYDOWN:
+            ActionItem actionItem = shortcutRegister.get(event);
+            if (actionItem != null) {
+                updateStatus();
+                fireEdit();
+                event.cancelBubble(true);
+                event.preventDefault();
+                actionManager.doAction(actionItem);
+                updateStatus();
+            } else {
+                super.onBrowserEvent(event);
+                updateStatus();
+                if (isAnEditionKey(event.getKeyCode())) {
+                    fireEdit();
+                }
+            }
+            break;
+        default:
+            // Rest of events
+            super.onBrowserEvent(event);
+            updateStatus();
+        }
+    }
+
     public void paste() {
         extended.paste();
     }
@@ -305,14 +278,6 @@ public class RTEditorPanel implements RTEditorView {
 
     public void setForeColor(String color) {
         basic.setForeColor(color);
-    }
-
-    public void setHtml(String html) {
-        rta.setHTML(html);
-    }
-
-    public void setText(String text) {
-        rta.setText(text);
     }
 
     public void toggleBold() {
@@ -375,8 +340,17 @@ public class RTEditorPanel implements RTEditorView {
     }
 
     private Selection getSelection() {
-        Selection selection = getDocument().getSelection();
-        return selection;
+        return getDocument().getSelection();
+    }
+
+    private boolean isAnEditionKey(int keyCode) {
+        if (keyCode != KEY_HOME && keyCode != KEY_END && keyCode != KEY_UP && keyCode != KEY_DOWN
+                && keyCode != KEY_LEFT && keyCode != KEY_RIGHT && keyCode != KEY_PAGEDOWN && keyCode != KEY_PAGEUP
+                && keyCode != KEY_ESCAPE) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

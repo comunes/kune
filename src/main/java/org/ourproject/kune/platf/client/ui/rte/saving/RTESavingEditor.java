@@ -30,6 +30,8 @@ public interface RTESavingEditor {
      */
     BeforeActionListener getBeforeSavingListener();
 
+    boolean isSavePending();
+
     /**
      * Call this when your save action is successful
      */

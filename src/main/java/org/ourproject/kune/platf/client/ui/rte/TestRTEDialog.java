@@ -25,7 +25,7 @@ public class TestRTEDialog {
         vp.add((Widget) ((ActionToolbarPanel<Object>) basicEditor.getTopBar().getView()).getToolbar());
         vp.add((Widget) ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
         final RTEditorPanel editorPanel = (RTEditorPanel) basicEditor.getEditorArea();
-        vp.add(editorPanel.getRTE());
+        vp.add(editorPanel);
         basicEditor.setExtended(true);
         vp.setWidth("100%");
         dialog.add(vp);
@@ -34,7 +34,7 @@ public class TestRTEDialog {
             public void onResize(Window source, int width, int height) {
                 int newHeight = height - 26 * 2 - 40;
                 editorPanel.adjustSize(newHeight);
-                vp.setCellHeight(editorPanel.getRTE(), "" + newHeight);
+                vp.setCellHeight(editorPanel, "" + newHeight);
             }
         });
     }

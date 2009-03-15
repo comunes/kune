@@ -88,7 +88,17 @@ TODO-list for kune -*- mode: org; -*-
      other links:
      http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
      http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
-**** Quite urgent: Shortcuts propagation in Firefox
+**** Insert/Edit link
+***** use cases
+     ^<a href="http://example.com">sample</a>^   --- Parse and edit
+     <a href="http://example.com">s^ample</a>    --- Parse and edit
+     <a href="http://example.com">s^amp^le</a>   --- Parse and edit
+     ^some text <a href="http://example.com">samp^le</a>   --- new link with get inner content?
+**** Quite urgent: Shortcuts propagation to browser
+     http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/user/client/Event.html#preventDefault
+     http://openkm.cvs.sourceforge.net/viewvc/openkm/openkm/src/es/git/openkm/frontend/client/panel/ExtendedDockPanel.java?revision=1.20&view=markup
+     http://openkm.cvs.sourceforge.net/viewvc/openkm/openkm/src/es/git/openkm/frontend/client/util/Keyboard.java?revision=1.20&view=markup
+     http://whatwouldnickdo.com/wordpress/370/gwt-right-click-context-menu/
 **** with different menus (File/Blog ...)
 **** bidi support
 **** Insert special chars (for table or from unicode).

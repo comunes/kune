@@ -12,7 +12,7 @@ public class ActionShortcutTest {
 
     @Test
     public void altS() {
-        ActionShortcut shortcut = new ActionShortcut(true, false, false, 'S', null);
+        ActionShortcut shortcut = new ActionShortcut(false, true, false, 'S', null);
         assertEquals(" (Alt+S)", shortcut.toString());
         assertTrue(shortcut.is('S', KeyboardListener.MODIFIER_ALT));
         assertTrue(!shortcut.is('S', KeyboardListener.MODIFIER_CTRL));
@@ -52,7 +52,7 @@ public class ActionShortcutTest {
 
     @Test
     public void ctrlShiftS() {
-        ActionShortcut shortcut = new ActionShortcut(false, true, true, 'S', null);
+        ActionShortcut shortcut = new ActionShortcut(true, false, true, 'S', null);
         assertEquals(" (Ctrl+Shift+S)", shortcut.toString());
         assertTrue(!shortcut.is('S', KeyboardListener.MODIFIER_ALT));
         assertTrue(shortcut.is('S', KeyboardListener.MODIFIER_SHIFT | KeyboardListener.MODIFIER_CTRL));

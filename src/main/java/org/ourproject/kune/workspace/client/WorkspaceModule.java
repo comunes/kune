@@ -82,6 +82,7 @@ import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
 import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspace;
 import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspacePanel;
 import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspacePresenter;
+import org.ourproject.kune.workspace.client.events.GlobalShortcutRegister;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
@@ -948,5 +949,13 @@ public class WorkspaceModule extends AbstractModule {
             }
         });
 
+        register(ApplicationComponentGroup.class, new Factory<GlobalShortcutRegister>(GlobalShortcutRegister.class) {
+            @Override
+            public GlobalShortcutRegister create() {
+                return new GlobalShortcutRegister($(ActionManager.class));
+            }
+        });
+
+        $(GlobalShortcutRegister.class).enable();
     }
 }

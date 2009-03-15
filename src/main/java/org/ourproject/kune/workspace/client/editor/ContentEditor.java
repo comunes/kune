@@ -17,6 +17,8 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.WindowCloseListener;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.BoxComponent;
@@ -31,19 +33,31 @@ public class ContentEditor extends RTESavingEditorPresenter {
     private final AbstractToolbar topbar;
     private final SiteSignOutLink siteSignOutLink;
 
-    public ContentEditor(RTEditor editor, boolean autoSave, I18nTranslationService i18n, StateManager stateManager,
-            SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
+    public ContentEditor(RTEditor editor, boolean autoSave, final I18nTranslationService i18n,
+            StateManager stateManager, SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
             RTEImgResources imgResources, WorkspaceSkeleton ws, TimerWrapper timer, RTESavingEditorView view) {
         super(editor, autoSave, i18n, stateManager, deferredCommandWrapper, imgResources, timer);
         this.siteSignOutLink = siteSignOutLink;
         super.init(view);
         this.ws = ws;
+        Window.addWindowCloseListener(new WindowCloseListener() {
+            public void onWindowClosed() {
+            }
 
+            public String onWindowClosing() {
+                if (isSavePending()) {
+                    return i18n.t("You have changes without save. Are you sure?");
+                }
+                // onDoSaveAndClose();
+                return null;
+            }
+
+        });
         vp = new VerticalPanel();
         basicEditor = super.getBasicEditor();
         vp.add((Widget) ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
         editorPanel = (RTEditorPanel) basicEditor.getEditorArea();
-        vp.add(editorPanel.getRTE());
+        vp.add(editorPanel);
         basicEditor.setExtended(true);
         vp.setWidth("100%");
         ws.getEntityWorkspace().addContentListener(new ContainerListenerAdapter() {
@@ -81,6 +95,6 @@ public class ContentEditor extends RTESavingEditorPresenter {
         // Log.debug("Sndbar height: " + barHeight + " new height: " +
         // newHeight);
         editorPanel.adjustSize(newHeight);
-        vp.setCellHeight(editorPanel.getRTE(), "" + newHeight);
+        vp.setCellHeight(editorPanel, "" + newHeight);
     }
 }

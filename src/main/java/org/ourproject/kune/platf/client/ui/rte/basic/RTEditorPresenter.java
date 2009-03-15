@@ -31,7 +31,6 @@ import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.libideas.resources.client.ImageResource;
-import com.xpn.xwiki.wysiwyg.client.dom.Selection;
 
 public class RTEditorPresenter implements RTEditor {
 
@@ -132,6 +131,11 @@ public class RTEditorPresenter implements RTEditor {
         return canBeExtended();
     }
 
+    public void detach() {
+        topBar.clear();
+        sndBar.clear();
+    }
+
     public void fireOnEdit() {
         onEdit.fire();
     }
@@ -141,7 +145,7 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     public String getHtml() {
-        return view.getHtml();
+        return view.getHTML();
     }
 
     public ActionToolbar<Object> getSndBar() {
@@ -167,17 +171,12 @@ public class RTEditorPresenter implements RTEditor {
         palette.hide();
     }
 
-    public void reset() {
-        topBar.clear();
-        sndBar.clear();
-    }
-
     public void setExtended(boolean extended) {
         this.extended = extended;
     }
 
     public void setHtml(String html) {
-        view.setHtml(html);
+        view.setHTML(html);
         view.focus();
     }
 
@@ -404,12 +403,12 @@ public class RTEditorPresenter implements RTEditor {
                         EditHtmlDialog dialog = editHtmlDialog.get();
                         dialog.setUpdateListener(new Listener<String>() {
                             public void onEvent(String html) {
-                                view.setHtml(html);
+                                view.setHTML(html);
                                 fireOnEdit();
                             }
                         });
                         dialog.show();
-                        dialog.setHtml(view.getHtml());
+                        dialog.setHtml(view.getHTML());
                     }
                 });
         editHtml.setIconCls(getCssName(imgResources.edithtml()));
@@ -661,12 +660,17 @@ public class RTEditorPresenter implements RTEditor {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
-                                Selection selection = view.getDocument().getSelection();
-                                String info = "range count: " + selection.getRangeCount() + "<br/>focus offset: "
-                                        + selection.getFocusOffset() + "<br/>anchor offset:"
-                                        + selection.getAnchorOffset() + "<br/>range 0 as html: "
-                                        + selection.getRangeAt(0).toHTML();
-                                NotifyUser.info(info);
+                                // Selection selection =
+                                // view.getDocument().getSelection();
+                                // String info = "range count: " +
+                                // selection.getRangeCount() +
+                                // "<br/>focus offset: "
+                                // + selection.getFocusOffset() +
+                                // "<br/>anchor offset:"
+                                // + selection.getAnchorOffset() +
+                                // "<br/>range 0 as html: "
+                                // + selection.getRangeAt(0).toHTML();
+                                // NotifyUser.info(info);
                             }
                         });
                     }
@@ -674,7 +678,7 @@ public class RTEditorPresenter implements RTEditor {
         devInfo.setTextDescription(i18n.t("Developers info"));
         devInfo.setAddCondition(canBeExtended);
         devInfo.setParentMenuTitle(i18n.t(FORMAT_MENU));
-        devInfo.setShortcut(new ActionShortcut(true, false, false, 'I'));
+        devInfo.setShortcut(new ActionShortcut(false, true, false, 'I'));
 
         actions.add(withNoItem(bold));
         actions.add(withNoItem(italic));

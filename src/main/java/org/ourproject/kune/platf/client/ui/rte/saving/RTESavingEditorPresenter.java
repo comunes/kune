@@ -90,6 +90,10 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         this.view = view;
     }
 
+    public boolean isSavePending() {
+        return savePending;
+    }
+
     public void onDoSaveAndClose() {
         saveAndCloseConfirmed = true;
         onDoSave();
@@ -138,7 +142,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         stateManager.removeBeforeStateChangeListener(beforeStateChangeListener);
         stateManager.resumeTokenChange();
         reset();
-        editor.reset();
+        editor.detach();
         onDoEditCancelled();
     }
 

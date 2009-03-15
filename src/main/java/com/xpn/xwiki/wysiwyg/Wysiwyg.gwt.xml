@@ -4,7 +4,9 @@
   <inherits name="com.google.gwt.http.HTTP"/>
   <inherits name="com.google.gwt.junit.JUnit"/>
 
+<!--
   <stylesheet src="Wysiwyg.css"/>
+ -->
 
   <define-property name="old.user.agent" values="yes,no"/>
 
