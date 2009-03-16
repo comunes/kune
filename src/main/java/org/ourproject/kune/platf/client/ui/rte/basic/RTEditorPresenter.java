@@ -7,7 +7,6 @@ import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
-import org.ourproject.kune.platf.client.actions.ActionShortcut;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
@@ -15,7 +14,9 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescripto
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
@@ -23,6 +24,7 @@ import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 
 import com.calclab.suco.client.events.Event0;
@@ -66,11 +68,17 @@ public class RTEditorPresenter implements RTEditor {
     private final ActionAddCondition<Object> canBeExtended;
     private final Provider<EditHtmlDialog> editHtmlDialog;
     private final Provider<InsertImageDialog> insertImageDialog;
+    private final Provider<InsertTableDialog> insertTableDialog;
+    private Listener<String> insertTableListener;
+    private Listener2<String, String> insertLinkListener;
+    private Listener<String> updateHtmlListener;
+    private ActionToolbarButtonDescriptor<Object> insertTableBtn;
 
     public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
             RTEActionSndToolbar sndBar, RTEImgResources imgResources, InsertLinkDialog textEditorInsertElement,
             ColorWebSafePalette palette, Provider<EditHtmlDialog> editHtmlDialog,
-            Provider<InsertImageDialog> insertImageDialog, DeferredCommandWrapper deferred) {
+            Provider<InsertImageDialog> insertImageDialog, Provider<InsertTableDialog> insertTableDialog,
+            DeferredCommandWrapper deferred) {
         this.i18n = i18n;
         this.session = session;
         this.topBar = topBar;
@@ -79,6 +87,7 @@ public class RTEditorPresenter implements RTEditor {
         this.palette = palette;
         this.editHtmlDialog = editHtmlDialog;
         this.insertImageDialog = insertImageDialog;
+        this.insertTableDialog = insertTableDialog;
         this.deferred = deferred;
         styleToolbar(sndBar);
         sndBar.attach();
@@ -399,14 +408,18 @@ public class RTEditorPresenter implements RTEditor {
 
         ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
                 new Listener0() {
+
                     public void onEvent() {
+                        if (updateHtmlListener == null) {
+                            updateHtmlListener = new Listener<String>() {
+                                public void onEvent(String html) {
+                                    view.setHTML(html);
+                                    fireOnEdit();
+                                }
+                            };
+                        }
                         EditHtmlDialog dialog = editHtmlDialog.get();
-                        dialog.setUpdateListener(new Listener<String>() {
-                            public void onEvent(String html) {
-                                view.setHTML(html);
-                                fireOnEdit();
-                            }
-                        });
+                        dialog.setUpdateListener(updateHtmlListener);
                         dialog.show();
                         dialog.setHtml(view.getHTML());
                     }
@@ -558,12 +571,15 @@ public class RTEditorPresenter implements RTEditor {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
-                                insertElement.setOnCreateLink(new Listener2<String, String>() {
-                                    public void onEvent(String name, String url) {
-                                        view.createLink(url);
-                                        fireOnEdit();
-                                    }
-                                });
+                                if (insertLinkListener == null) {
+                                    insertLinkListener = new Listener2<String, String>() {
+                                        public void onEvent(String name, String url) {
+                                            view.createLink(url);
+                                            fireOnEdit();
+                                        }
+                                    };
+                                }
+                                insertElement.setOnCreateLink(insertLinkListener);
                                 insertElement.show();
                             }
                         });
@@ -599,10 +615,21 @@ public class RTEditorPresenter implements RTEditor {
         removeFormat.setAddCondition(canBeExtended);
         removeFormat.setRightSeparator(ActionToolbarButtonSeparator.separator);
 
+        final ActionToolbarMenuDescriptor<Object> insertMedia = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbar, new Listener0() {
+                    public void onEvent() {
+                        NotifyUser.info(TextUtils.IN_DEVELOPMENT);
+                    }
+                });
+        insertMedia.setIconCls(getCssName(imgResources.film()));
+        insertMedia.setTextDescription(i18n.t("Insert Media ..."));
+        insertMedia.setAddCondition(canBeExtended);
+        insertMedia.setParentMenuTitle(i18n.t(INSERT_MENU));
+
         final ActionToolbarMenuDescriptor<Object> insertTable = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 topbar, new Listener0() {
                     public void onEvent() {
-                        insertSimpleTable();
+                        onInsertTablePressed();
                     }
                 });
         insertTable.setIconCls(getCssName(imgResources.inserttable()));
@@ -610,12 +637,11 @@ public class RTEditorPresenter implements RTEditor {
         insertTable.setAddCondition(canBeExtended);
         insertTable.setParentMenuTitle(i18n.t(INSERT_MENU));
 
-        final ActionToolbarButtonDescriptor<Object> insertTableBtn = new ActionToolbarButtonDescriptor<Object>(
-                accessRol, sndbar, new Listener0() {
-                    public void onEvent() {
-                        insertSimpleTable();
-                    }
-                });
+        insertTableBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar, new Listener0() {
+            public void onEvent() {
+                onInsertTablePressed();
+            }
+        });
         insertTableBtn.setIconCls(getCssName(imgResources.inserttable()));
         insertTableBtn.setToolTip(i18n.t("Insert Table"));
         insertTableBtn.setAddCondition(canBeExtended);
@@ -624,7 +650,7 @@ public class RTEditorPresenter implements RTEditor {
         final ActionToolbarButtonDescriptor<Object> fontColor = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 sndbar, new Listener0() {
                     public void onEvent() {
-                        palette.show(getActionLeftPosition(sndBar, removeFormat), getActionTopPosition(sndBar,
+                        palette.show(getActionLeftPosition(sndBar, insertTableBtn), getActionTopPosition(sndBar,
                                 removeFormat), new Listener<String>() {
                             public void onEvent(String color) {
                                 palette.hide();
@@ -710,6 +736,7 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(removeLink));
         actions.add(withNoItem(insertTableBtn));
         actions.add(withNoItem(insertTable));
+        actions.add(withNoItem(insertMedia));
         actions.add(withNoItem(comment));
         actions.add(withNoItem(undoBtn));
         actions.add(withNoItem(redoBtn));
@@ -772,14 +799,6 @@ public class RTEditorPresenter implements RTEditor {
         return RTEImgResources.SUFFIX + imageResource.getName();
     }
 
-    private void insertSimpleTable() {
-        view.insertHtml("<table border=\"0\" cellpadding=\"3\" cellspacing=\"0\" width=\"100%\">\n" + "<tbody>\n"
-                + "<tr>\n" + "<td width=\"50%\"><br>\n" + "</td>\n" + "<td width=\"50%\"><br>\n" + "</td>\n"
-                + "</tr>\n" + "<tr>\n" + "<td width=\"50%\"><br>\n" + "</td>\n" + "<td width=\"50%\"><br>\n"
-                + "</td>\n" + "</tr>\n</tbody>\n</table>");
-        fireOnEdit();
-    }
-
     private boolean isExtended() {
         return extended && view.canBeExtended();
     }
@@ -790,6 +809,23 @@ public class RTEditorPresenter implements RTEditor {
                 return true;
             }
         };
+    }
+
+    private void onInsertTablePressed() {
+        if (insertTableListener == null) {
+            insertTableListener = new Listener<String>() {
+                public void onEvent(String table) {
+                    if (view.isAnythingSelected()) {
+                        // FIXME
+                        // move to end of selection?
+                    }
+                    view.insertHtml(table);
+                    fireOnEdit();
+                }
+            };
+        }
+        insertTableDialog.get().setOnInsertTable(insertTableListener);
+        insertTableDialog.get().show();
     }
 
     private void styleToolbar(ActionToolbar<Object> bar) {

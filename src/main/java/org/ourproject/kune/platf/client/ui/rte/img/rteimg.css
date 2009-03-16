@@ -10,6 +10,10 @@
   gwt-image: 'subscript';
 }
 
+@sprite div .k-rte-film {
+  gwt-image: 'film';
+}
+
 @sprite div .k-rte-strikeout {
   gwt-image: 'strikeout';
 }

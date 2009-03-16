@@ -29,10 +29,11 @@ import com.gwtext.client.widgets.form.Label;
 
 public class DefaultForm {
 
-    protected static final int DEF_FIELD_WIDTH = 200;
-    protected static final int DEF_SMALL_FIELD_WIDTH = 100;
-    protected static final int DEF_MEDIUM_FIELD_WIDTH = 150;
-    protected static final int DEF_FIELD_LABEL_WITH = 75;
+    public static final int DEF_FIELD_WIDTH = 200;
+    public static final int DEF_SMALL_FIELD_WIDTH = 100;
+    public static final int DEF_XSMALL_FIELD_WIDTH = 50;
+    public static final int DEF_MEDIUM_FIELD_WIDTH = 150;
+    public static final int DEF_FIELD_LABEL_WITH = 75;
 
     private final FormPanel form;
 

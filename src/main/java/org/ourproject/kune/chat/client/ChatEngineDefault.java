@@ -27,6 +27,8 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
+import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -59,15 +61,24 @@ class ChatEngineDefault implements ChatEngine {
     private final Provider<FileDownloadUtils> downloadUtils;
     private Collection<RosterItem> roster;
     private final Event0 onRosterChanged;
+    private final ActionShortcut shortcut;
 
     public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws, Application application,
             Session session, final Provider<EmiteUIDialog> emiteUIProvider,
-            final Provider<FileDownloadUtils> downloadUtils) {
+            final Provider<FileDownloadUtils> downloadUtils, GlobalShortcutRegister globalShortcutRegister) {
         this.i18n = i18n;
         this.ws = ws;
         this.emiteUIProvider = emiteUIProvider;
         this.downloadUtils = downloadUtils;
         this.onRosterChanged = new Event0("onRosterChanged");
+        shortcut = new ActionShortcut(false, true, false, 'C');
+        globalShortcutRegister.put(shortcut, new Listener0() {
+            public void onEvent() {
+                if (isDialogStarted()) {
+                    toggleShow();
+                }
+            }
+        });
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO initData) {
                 checkChatDomain(initData.getChatDomain());
@@ -132,6 +143,10 @@ class ChatEngineDefault implements ChatEngine {
         return false;
     }
 
+    public boolean isDialogStarted() {
+        return !emiteUIProvider.get().isDialogNotStarted();
+    }
+
     public boolean isLoggedIn() {
         return emiteUIProvider.get().isLoggedIn();
     }
@@ -177,16 +192,12 @@ class ChatEngineDefault implements ChatEngine {
         emiteUIProvider.get().show(OwnStatus.online);
         if (traybarButton == null) {
             traybarButton = new ToolbarButton();
-            traybarButton.setTooltip(i18n.t("Show/hide the chat window"));
+            traybarButton.setTooltip(i18n.t("Show/hide the chat window" + shortcut.toString()));
             traybarButton.setIcon("images/e-icon.gif");
             traybarButton.addListener(new ButtonListenerAdapter() {
                 @Override
                 public void onClick(final Button button, final EventObject e) {
-                    if (emiteUIProvider.get().isVisible()) {
-                        emiteUIProvider.get().hide();
-                    } else {
-                        emiteUIProvider.get().show();
-                    }
+                    toggleShow();
                 }
             });
             ws.getSiteTraybar().addButton(traybarButton);
@@ -237,6 +248,14 @@ class ChatEngineDefault implements ChatEngine {
         }
         if (emiteUIProvider.get().getSession().isLoggedIn()) {
             emiteUIProvider.get().getSession().logout();
+        }
+    }
+
+    public void toggleShow() {
+        if (emiteUIProvider.get().isVisible()) {
+            emiteUIProvider.get().hide();
+        } else {
+            emiteUIProvider.get().show();
         }
     }
 

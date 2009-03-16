@@ -21,7 +21,6 @@ package org.ourproject.kune.platf.client.ui.palette;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SourcesTableEvents;
 import com.google.gwt.user.client.ui.TableListener;
 
@@ -31,37 +30,17 @@ import com.google.gwt.user.client.ui.TableListener;
  * http://en.wikipedia.org/wiki/Web_colors#Web-safe_colors
  * 
  */
-public class ColorWebSafePalettePanel implements ColorWebSafePaletteView {
+public class ColorWebSafePalettePanel extends AbstractPalettePanel implements ColorWebSafePaletteView {
 
-    Grid paletteGrid;
     private final ColorWebSafePalettePresenter presenter;
-    private PopupPanel popupPalette;
 
     public ColorWebSafePalettePanel(final ColorWebSafePalettePresenter initPresenter) {
         this.presenter = initPresenter;
     }
 
-    public void hide() {
-        if (popupPalette != null) {
-            popupPalette.hide();
-        }
-    }
-
-    public void show(final int left, final int top) {
-        if (paletteGrid == null) {
-            createPalette();
-        }
-        popupPalette = new PopupPanel(true, true);
-        popupPalette.addStyleName("kune-WebSafePalette-popup");
-        popupPalette.setVisible(false);
-        popupPalette.show();
-        popupPalette.setPopupPosition(left, top);
-        popupPalette.setWidget(paletteGrid);
-        popupPalette.setVisible(true);
-    }
-
-    private void createPalette() {
-        paletteGrid = new Grid(ROWS, COLS);
+    @Override
+    protected void createPalette() {
+        Grid paletteGrid = new Grid(ROWS, COLS);
 
         paletteGrid.setCellSpacing(1);
         // Put color values in the grid cells
@@ -88,5 +67,6 @@ public class ColorWebSafePalettePanel implements ColorWebSafePaletteView {
                 presenter.onColorSelected(row, col);
             }
         });
+        widget = paletteGrid;
     }
 }

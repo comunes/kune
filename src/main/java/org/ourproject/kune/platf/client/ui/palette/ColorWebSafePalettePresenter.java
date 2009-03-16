@@ -19,32 +19,11 @@
  */
 package org.ourproject.kune.platf.client.ui.palette;
 
-import com.calclab.suco.client.events.Listener;
-
-public class ColorWebSafePalettePresenter implements ColorWebSafePalette {
-
-    private Listener<String> onColorSelected;
-    private ColorWebSafePaletteView view;
-
-    public ColorWebSafePalettePresenter() {
-    }
-
-    public void hide() {
-        this.view.hide();
-    }
-
-    public void init(final ColorWebSafePaletteView view) {
-        this.view = view;
-    }
-
-    public void show(final int left, final int top, final Listener<String> onColorSelected) {
-        view.show(left, top);
-        this.onColorSelected = onColorSelected;
-    }
+public class ColorWebSafePalettePresenter extends AbstractPalettePresenter implements ColorWebSafePalette {
 
     protected void onColorSelected(final int row, final int col) {
         final String color = getColor(row, col);
-        onColorSelected.onEvent(color);
+        onColorSelected(color);
     }
 
     private String getColor(final int row, final int col) {

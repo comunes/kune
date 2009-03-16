@@ -1,8 +1,7 @@
-package org.ourproject.kune.workspace.client.events;
+package org.ourproject.kune.platf.client.shortcuts;
 
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.ActionShortcutRegister;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;

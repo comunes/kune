@@ -34,6 +34,8 @@ public class TextUtils {
 
     public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
 
+    public static final String NUM_REGEXP = "^[0-9]+$";
+
     /*
      * This method escape only some dangerous html chars
      */

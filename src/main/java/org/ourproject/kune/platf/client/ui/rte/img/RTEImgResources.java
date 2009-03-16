@@ -47,6 +47,9 @@ public interface RTEImgResources extends ImmutableResourceBundle {
     @Resource("edithtml.png")
     public ImageResource edithtml();
 
+    @Resource("film.png")
+    public ImageResource film();
+
     @Resource("fontcolor.png")
     public ImageResource fontcolor();
 

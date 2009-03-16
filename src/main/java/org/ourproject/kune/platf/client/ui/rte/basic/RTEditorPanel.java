@@ -16,18 +16,17 @@ import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.ActionShortcut;
-import org.ourproject.kune.platf.client.actions.ActionShortcutRegister;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
+import org.ourproject.kune.platf.client.shortcuts.ActionShortcutRegister;
+import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.Widget;
-import com.xpn.xwiki.wysiwyg.client.dom.Document;
 import com.xpn.xwiki.wysiwyg.client.dom.DocumentFragment;
 import com.xpn.xwiki.wysiwyg.client.dom.Range;
 import com.xpn.xwiki.wysiwyg.client.dom.Selection;
@@ -49,18 +48,20 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     private final RTEditorPresenter presenter;
     private final ActionManager actionManager;
     private final ActionShortcutRegister shortcutRegister;
+    private final GlobalShortcutRegister globalShortcutReg;
 
     public RTEditorPanel(final RTEditorPresenter presenter, I18nUITranslationService i18n,
-            final ActionManager actionManager) {
+            final ActionManager actionManager, GlobalShortcutRegister globalShortcutReg) {
         this.presenter = presenter;
         this.i18n = i18n;
         this.actionManager = actionManager;
+        this.globalShortcutReg = globalShortcutReg;
         basic = getBasicFormatter();
         extended = getExtendedFormatter();
         shortcutRegister = new ActionShortcutRegister();
         EventListener listener = new EventListener();
         addFocusListener(listener);
-        setWidth("97%");
+        setWidth("96%");
         setHeight("100%");
 
     }
@@ -105,28 +106,6 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
     public void focus() {
         setFocus(true);
-    }
-
-    /**
-     * NOTE: If the current browser doesn't support rich text editing this
-     * method returns <code>null</code>. You should test the returned value and
-     * fail save to an appropriate behavior!<br/>
-     * The appropriate test would be: <code><pre>
-     * if (rta.isAttached() && rta.getDocument() == null) {
-     *   // The current browser doesn't support rich text editing.
-     * }
-     * </pre></code>
-     * 
-     * @return The DOM document being edited with this rich text area.
-     * 
-     *         copied from xwiki
-     */
-    public Document getDocument() {
-        if (getElement().getTagName().equalsIgnoreCase("iframe")) {
-            return IFrameElement.as(getElement()).getContentDocument().cast();
-        } else {
-            return null;
-        }
     }
 
     public void insertComment(String author) {
@@ -221,7 +200,8 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
             super.onBrowserEvent(event);
             break;
         case Event.ONKEYDOWN:
-            ActionItem actionItem = shortcutRegister.get(event);
+            ActionItem rtaActionItem = shortcutRegister.get(event);
+            ActionItem actionItem = rtaActionItem != null ? rtaActionItem : globalShortcutReg.get(event);
             if (actionItem != null) {
                 updateStatus();
                 fireEdit();

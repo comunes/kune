@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
-import org.ourproject.kune.platf.client.actions.ActionShortcut;
 import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
+import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
 
 import com.calclab.suco.client.events.Listener0;
 import com.gwtext.client.core.EventObject;

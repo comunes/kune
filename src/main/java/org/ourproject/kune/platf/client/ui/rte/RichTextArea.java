@@ -18,6 +18,7 @@ package org.ourproject.kune.platf.client.ui.rte;
 import org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.IFrameElement;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.FocusWidget;
@@ -25,6 +26,7 @@ import com.google.gwt.user.client.ui.HasHTML;
 import com.google.gwt.user.client.ui.MouseListener;
 import com.google.gwt.user.client.ui.MouseListenerCollection;
 import com.google.gwt.user.client.ui.SourcesMouseEvents;
+import com.xpn.xwiki.wysiwyg.client.dom.Document;
 
 /**
  * A rich text editor that allows complex styling and formatting.
@@ -388,6 +390,28 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
             return (BasicFormatter) impl;
         }
         return null;
+    }
+
+    /**
+     * NOTE: If the current browser doesn't support rich text editing this
+     * method returns <code>null</code>. You should test the returned value and
+     * fail save to an appropriate behavior!<br/>
+     * The appropriate test would be: <code><pre>
+     * if (rta.isAttached() && rta.getDocument() == null) {
+     *   // The current browser doesn't support rich text editing.
+     * }
+     * </pre></code>
+     * 
+     * @return The DOM document being edited with this rich text area.
+     * 
+     *         copied from xwiki
+     */
+    public Document getDocument() {
+        if (getElement().getTagName().equalsIgnoreCase("iframe")) {
+            return IFrameElement.as(getElement()).getContentDocument().cast();
+        } else {
+            return null;
+        }
     }
 
     /**

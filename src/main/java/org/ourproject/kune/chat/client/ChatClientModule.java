@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -83,8 +84,10 @@ public class ChatClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<ChatEngine>(ChatEngine.class) {
             @Override
             public ChatEngine create() {
-                return new ChatEngineDefault($(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
-                        $(Application.class), $(Session.class), $$(EmiteUIDialog.class), $$(FileDownloadUtils.class));
+                final ChatEngineDefault chatEngineDefault = new ChatEngineDefault($(I18nUITranslationService.class),
+                        $(WorkspaceSkeleton.class), $(Application.class), $(Session.class), $$(EmiteUIDialog.class),
+                        $$(FileDownloadUtils.class), $(GlobalShortcutRegister.class));
+                return chatEngineDefault;
             }
         });
 

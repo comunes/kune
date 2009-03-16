@@ -468,7 +468,7 @@ public abstract class AbstractFoldableContentActions {
                 });
         action.setTextDescription(textDescription);
         action.setParentMenuTitle(PUBLICATION_MENU);
-        // action.setParentSubMenuTitle(i18n.t("Change the status"));
+        action.setParentMenuIconUrl("images/anybody.png");
         contentActionRegistry.addAction(action, contentsModerated);
     }
 

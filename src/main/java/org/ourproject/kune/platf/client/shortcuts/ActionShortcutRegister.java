@@ -1,7 +1,9 @@
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.platf.client.shortcuts;
 
 import java.util.HashMap;
 
+import org.ourproject.kune.platf.client.actions.ActionDescriptor;
+import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
 import com.allen_sauer.gwt.log.client.Log;

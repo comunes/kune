@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.actions;
+package org.ourproject.kune.platf.client.shortcuts;
 
 import org.ourproject.kune.platf.client.i18n.Resources;
 

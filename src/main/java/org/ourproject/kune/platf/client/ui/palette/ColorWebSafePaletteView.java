@@ -19,16 +19,12 @@
  */
 package org.ourproject.kune.platf.client.ui.palette;
 
-public interface ColorWebSafePaletteView {
+public interface ColorWebSafePaletteView extends AbstractPaletteView {
 
     int ROWS = 18;
 
     int COLS = 12;
 
     String COLORS[] = { "0", "3", "6", "9", "C", "F" };
-
-    void hide();
-
-    void show(int left, int top);
 
 }

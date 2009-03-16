@@ -10,6 +10,45 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** vjrj use xwiki maven repo
+   http://maven.xwiki.org/releases/com/xpn/xwiki/platform/xwiki-web-wysiwyg/1.8-rc-2/
+** vjrj <v> better RTE
+*** Pending
+**** W3C Range/Selection support in RTE
+     https://developer.mozilla.org/en/DOM/selection
+     http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html
+     As an intro:
+     http://www.quirksmode.org/dom/range_intro.html
+     http://maven.xwiki.org/site/xwiki-web/xwiki-web-wysiwyg/apidocs/com/xpn/xwiki/wysiwyg/client/dom/internal/AbstractRange.html
+     other links:
+     http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
+     http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
+**** Insert/Edit link
+***** use cases
+     ^<a href="http://example.com">sample</a>^   --- Parse and edit
+     <a href="http://example.com">s^ample</a>    --- Parse and edit
+     <a href="http://example.com">s^amp^le</a>   --- Parse and edit
+     ^some text <a href="http://example.com">samp^le</a>   --- new link with get inner content?
+**** Quite urgent: Shortcuts propagation to browser
+     http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/user/client/Event.html#preventDefault
+     http://openkm.cvs.sourceforge.net/viewvc/openkm/openkm/src/es/git/openkm/frontend/client/panel/ExtendedDockPanel.java?revision=1.20&view=markup
+     http://openkm.cvs.sourceforge.net/viewvc/openkm/openkm/src/es/git/openkm/frontend/client/util/Keyboard.java?revision=1.20&view=markup
+     http://whatwouldnickdo.com/wordpress/370/gwt-right-click-context-menu/
+**** with different menus (File/Blog ...)
+**** bidi support
+**** Insert special chars (for table or from unicode).
+**** images (local/remote) with preview
+**** youtube videos/podcasts
+**** Edit HTML
+**** File > Rename (F2)
+**** Insert > Special char
+**** Insert > Page break (for printing)
+**** Shortcut to fonts (Ctrl + numbers)
+*** Links
+   http://www.ongwt.com/post/2009/01/08/XWiki-:-Wysiwyg-editor-based-on-GWT
+   http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/samples/internet/ie55/EditRegions/default.asp
+   http://www.mozilla.org/editor/midas-spec.html
+   http://mozilla.org/editor/midasdemo/
 ** vjrj <v> GWT 1.6
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/3e7e6cc3b35ad98a
    http://code.google.com/p/google-web-toolkit/wiki/WAR_Design_1_6
@@ -77,43 +116,6 @@ TODO-list for kune -*- mode: org; -*-
    http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
    http://en.wikipedia.org/wiki/Fragment_identifier
    http://www.w3.org/DesignIssues/Fragment.html
-** vjrj <v> better RTE
-*** Pending
-**** W3C Range/Selection support in RTE
-     https://developer.mozilla.org/en/DOM/selection
-     http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html
-     As an intro:
-     http://www.quirksmode.org/dom/range_intro.html
-     http://maven.xwiki.org/site/xwiki-web/xwiki-web-wysiwyg/apidocs/com/xpn/xwiki/wysiwyg/client/dom/internal/AbstractRange.html
-     other links:
-     http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
-     http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
-**** Insert/Edit link
-***** use cases
-     ^<a href="http://example.com">sample</a>^   --- Parse and edit
-     <a href="http://example.com">s^ample</a>    --- Parse and edit
-     <a href="http://example.com">s^amp^le</a>   --- Parse and edit
-     ^some text <a href="http://example.com">samp^le</a>   --- new link with get inner content?
-**** Quite urgent: Shortcuts propagation to browser
-     http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/user/client/Event.html#preventDefault
-     http://openkm.cvs.sourceforge.net/viewvc/openkm/openkm/src/es/git/openkm/frontend/client/panel/ExtendedDockPanel.java?revision=1.20&view=markup
-     http://openkm.cvs.sourceforge.net/viewvc/openkm/openkm/src/es/git/openkm/frontend/client/util/Keyboard.java?revision=1.20&view=markup
-     http://whatwouldnickdo.com/wordpress/370/gwt-right-click-context-menu/
-**** with different menus (File/Blog ...)
-**** bidi support
-**** Insert special chars (for table or from unicode).
-**** images (local/remote) with preview
-**** youtube videos/podcasts
-**** Edit HTML
-**** File > Rename (F2)
-**** Insert > Special char
-**** Insert > Page break (for printing)
-**** Shortcut to fonts (Ctrl + numbers)
-*** Links
-   http://www.ongwt.com/post/2009/01/08/XWiki-:-Wysiwyg-editor-based-on-GWT
-   http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/samples/internet/ie55/EditRegions/default.asp
-   http://www.mozilla.org/editor/midas-spec.html
-   http://mozilla.org/editor/midasdemo/
 ** vjrj <v> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
    http://agilewebdevelopment.com/plugins/request_routing
    http://wiki.rubyonrails.org/rails/pages/Request+Routing
