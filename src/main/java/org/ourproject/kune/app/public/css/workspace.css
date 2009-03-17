@@ -761,6 +761,10 @@
 
 .kune-Content-Main textarea {width: 12.25em;*width: 11.9em;}
 
+.kune-Content-Main blockquote {
+  border: 1px dashed #DDDDDD;
+  padding: 10px;
+}
 .search-icon {
   background-image: url(img/search.gif) !important;
 }

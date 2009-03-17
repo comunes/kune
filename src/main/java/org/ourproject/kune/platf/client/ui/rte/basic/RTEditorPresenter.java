@@ -490,6 +490,18 @@ public class RTEditorPresenter implements RTEditor {
         hr.setParentMenuTitle(i18n.t(INSERT_MENU));
         hr.setAddCondition(canBeExtended);
 
+        ActionToolbarMenuDescriptor<Object> blockquote = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
+                new Listener0() {
+                    public void onEvent() {
+                        view.focus();
+                        view.insertBlockquote();
+                        fireOnEdit();
+                    }
+                });
+        blockquote.setTextDescription(i18n.t("Block Quotation"));
+        blockquote.setParentMenuTitle(i18n.t(FORMAT_MENU));
+        blockquote.setAddCondition(canBeExtended);
+
         ActionToolbarButtonDescriptor<Object> hrButton = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
                 new Listener0() {
                     public void onEvent() {
@@ -606,22 +618,37 @@ public class RTEditorPresenter implements RTEditor {
         removeLink.setShortcut(new ActionShortcut(true, true, 'K'));
         removeLink.setAddCondition(canBeExtended);
 
-        final ActionToolbarButtonDescriptor<Object> removeFormat = new ActionToolbarButtonDescriptor<Object>(accessRol,
-                sndbar, new Listener0() {
+        final ActionToolbarMenuDescriptor<Object> removeFormat = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbar, new Listener0() {
                     public void onEvent() {
                         view.removeFormat();
                         fireOnEdit();
                     }
                 });
         removeFormat.setIconCls(getCssName(imgResources.removeFormat()));
-        removeFormat.setToolTip(i18n.t("Clear Formatting"));
-        removeFormat.setShortcut(new ActionShortcut(true, ' ', "Space"));
+        ActionShortcut ctrl_space = new ActionShortcut(true, ' ', "Space");
+        removeFormat.setTextDescription(i18n.t("Clear Formatting") + (ctrl_space.toString()));
         removeFormat.setAddCondition(canBeExtended);
-        removeFormat.setRightSeparator(ActionToolbarButtonSeparator.separator);
+        removeFormat.setParentMenuTitle(i18n.t(FORMAT_MENU));
+        removeFormat.setBottomSeparator(true);
+
+        final ActionToolbarButtonDescriptor<Object> removeFormatBtn = new ActionToolbarButtonDescriptor<Object>(
+                accessRol, sndbar, new Listener0() {
+                    public void onEvent() {
+                        view.removeFormat();
+                        fireOnEdit();
+                    }
+                });
+        removeFormatBtn.setIconCls(getCssName(imgResources.removeFormat()));
+        removeFormatBtn.setToolTip(i18n.t("Clear Formatting"));
+        removeFormatBtn.setShortcut(ctrl_space);
+        removeFormatBtn.setAddCondition(canBeExtended);
+        removeFormatBtn.setRightSeparator(ActionToolbarButtonSeparator.separator);
 
         final ActionToolbarMenuDescriptor<Object> insertSpecialChar = new ActionToolbarMenuDescriptor<Object>(
                 accessRol, topbar, new Listener0() {
                     public void onEvent() {
+                        NotifyUser.showProgressLoading();
                         if (insertSpecialCharListener == null) {
                             insertSpecialCharListener = new Listener<String>() {
                                 public void onEvent(String character) {
@@ -631,6 +658,7 @@ public class RTEditorPresenter implements RTEditor {
                         }
                         insertSpecialCharDialog.get().setOnInsertSpecialChar(insertSpecialCharListener);
                         insertSpecialCharDialog.get().show();
+                        NotifyUser.hideProgress();
                     }
                 });
         insertSpecialChar.setIconCls(getCssName(imgResources.specialchars()));
@@ -675,7 +703,7 @@ public class RTEditorPresenter implements RTEditor {
                 sndbar, new Listener0() {
                     public void onEvent() {
                         palette.show(getActionLeftPosition(sndBar, insertTableBtn), getActionTopPosition(sndBar,
-                                removeFormat), new Listener<String>() {
+                                removeFormatBtn), new Listener<String>() {
                             public void onEvent(String color) {
                                 palette.hide();
                                 view.setForeColor(color);
@@ -746,13 +774,15 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(paste));
         actions.add(withNoItem(selectAll));
         actions.add(withNoItem(editHtml));
+        actions.add(withNoItem(removeFormat));
         actions.add(withNoItem(subscript));
         actions.add(withNoItem(superscript));
+        actions.add(withNoItem(blockquote));
         actions.add(withNoItem(decreaseIndent));
         actions.add(withNoItem(increaseIndent));
         actions.add(withNoItem(ol));
         actions.add(withNoItem(ul));
-        actions.add(withNoItem(removeFormat));
+        actions.add(withNoItem(removeFormatBtn));
         actions.add(withNoItem(hrButton));
         actions.add(withNoItem(img));
         actions.add(withNoItem(createLink));

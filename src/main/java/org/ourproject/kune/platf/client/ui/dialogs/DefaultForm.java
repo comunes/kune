@@ -38,18 +38,26 @@ public class DefaultForm {
     private final FormPanel form;
 
     public DefaultForm() {
+        this(Position.RIGHT);
+    }
+
+    public DefaultForm(Position buttonAlign) {
         form = new FormPanel();
         form.setFrame(true);
         form.setPaddings(10);
         form.setBorder(false);
         form.setLabelWidth(DEF_FIELD_LABEL_WITH);
         form.setLabelAlign(Position.RIGHT);
-        form.setButtonAlign(Position.RIGHT);
+        form.setButtonAlign(buttonAlign);
         form.setHeader(false);
     }
 
     public DefaultForm(String title) {
-        this();
+        this(title, Position.RIGHT);
+    }
+
+    public DefaultForm(String title, Position buttonAlign) {
+        this(buttonAlign);
         form.setTitle(title);
     }
 

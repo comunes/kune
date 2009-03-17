@@ -183,15 +183,15 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.sndbar, onPerformSaveCall);
         saveBtn.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         saveBtn.setToolTip(i18n.t("Save"));
-        saveBtn.setShortcut(new ActionShortcut(true, 'S'));
+        ActionShortcut ctrl_S = new ActionShortcut(true, 'S');
+        saveBtn.setShortcut(ctrl_S);
         saveBtn.setPosition(0);
 
         ActionToolbarMenuDescriptor<Object> save = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
                 RTEditor.topbar, onPerformSaveCall);
         save.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         save.setParentMenuTitle(i18n.t(FILE_MENU_OPTION));
-        save.setTextDescription(i18n.t("Save"));
-        save.setShortcut(new ActionShortcut(true, 'S'));
+        save.setTextDescription(i18n.t("Save") + (ctrl_S.toString()));
         save.setPosition(0);
 
         ActionToolbarMenuDescriptor<Object> close = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,

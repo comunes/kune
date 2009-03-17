@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.palette.SimplePalette;
+import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;
@@ -33,8 +34,10 @@ public class InsertTableDialogPanel extends BasicDialog implements InsertTableDi
     private final TextField borderColorField;
 
     public InsertTableDialogPanel(final InsertTableDialogPresenter presenter, I18nTranslationService i18n,
-            final Provider<SimplePalette> simplePalette) {
+            final Provider<SimplePalette> simplePalette, RTEImgResources imgResources) {
         super(INSERT_LINK_ID, i18n.t("Insert Table"), true, false, 320, 260);
+        // super.setIconCls(RTEImgResources.SUFFIX +
+        // imgResources.insertspreadsheet().getName());
         this.i18n = i18n;
         form = new DefaultForm();
         form.setAutoWidth(true);

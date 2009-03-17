@@ -108,6 +108,13 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         setFocus(true);
     }
 
+    public void insertBlockquote() {
+        DocumentFragment extracted = getFstRange().cloneContents();
+        delete();
+        insertHtml("<blockquote>" + extracted.getInnerHTML() + "</blockquote>");
+        focus();
+    }
+
     public void insertComment(String author) {
         String comment = null;
         createCommentAndSelectIt(author, comment);

@@ -97,6 +97,7 @@ import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.asian.InsertSpe
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental.InsertSpecialOccChar;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental.InsertSpecialOccCharPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental.InsertSpecialOccCharPresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.utf8.InsertSpecialUTF8CharPanel;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialogPresenter;
@@ -437,7 +438,7 @@ public class PlatformModule extends AbstractModule {
             public InsertTableDialog create() {
                 final InsertTableDialogPresenter presenter = new InsertTableDialogPresenter();
                 final InsertTableDialogPanel panel = new InsertTableDialogPanel(presenter, i18n,
-                        $$(SimplePalette.class));
+                        $$(SimplePalette.class), $(RTEImgResources.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -448,7 +449,7 @@ public class PlatformModule extends AbstractModule {
             public InsertSpecialCharDialog create() {
                 final InsertSpecialCharDialogPresenter presenter = new InsertSpecialCharDialogPresenter();
                 final InsertSpecialCharDialogPanel panel = new InsertSpecialCharDialogPanel(presenter, $(Images.class),
-                        $(I18nTranslationService.class), $(InsertSpecialCharGroup.class));
+                        $(I18nTranslationService.class), $(InsertSpecialCharGroup.class), $(RTEImgResources.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -469,6 +470,11 @@ public class PlatformModule extends AbstractModule {
                         $(InsertSpecialCharDialog.class), i18n);
                 presenter.init(panel);
                 return presenter;
+            }
+        }, new Factory<InsertSpecialUTF8CharPanel>(InsertSpecialUTF8CharPanel.class) {
+            @Override
+            public InsertSpecialUTF8CharPanel create() {
+                return new InsertSpecialUTF8CharPanel(i18n, $(InsertSpecialCharDialog.class));
             }
         });
 

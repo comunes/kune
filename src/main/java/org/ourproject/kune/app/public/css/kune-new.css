@@ -854,7 +854,6 @@
 }
 
 .x-toolbar-body table { /* width: 100%; */
-
 }
 
 .k-preview-msg {
@@ -905,6 +904,22 @@
 }
 
 .k-specialchar-pb-up {
+}
+
+.k-specialchar-big {
+  padding: 3px;
+  line-height: 22px;
+  font-size: 153.9% !important;
+}
+
+.k-specialchar-adv-label {
+  margin-left: -10px;
+}
+
+.k-specialchar-popup {
+  border: 1px solid #C0C0C0;
+  z-index: 9999 !important;
+  background-color: #FFF;
 }
 
 .k-specialchar-pb-down {

@@ -3,8 +3,11 @@ package org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialogView;
 
+import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.SourcesTableEvents;
 import com.google.gwt.user.client.ui.TableListener;
@@ -12,6 +15,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
 
 public class AbstractInsertCharPanel extends Panel {
+
+    private FocusListener focusListener;
 
     public AbstractInsertCharPanel(final InsertSpecialCharDialog insertSpecialCharDialog, String title,
             String initialLabel, final char[] specialChars, int rows, final int cols) {
@@ -45,10 +50,27 @@ public class AbstractInsertCharPanel extends Panel {
         add(grid);
     }
 
-    private Widget createButton(char c) {
+    private Widget createButton(final char c) {
         PushButton button = new PushButton();
         button.setText("" + c);
         button.setStyleName("k-specialchar-pb");
+        if (focusListener == null) {
+            focusListener = new FocusListener() {
+                public void onFocus(Widget sender) {
+                    PopupPanel popup = new PopupPanel(true);
+                    popup.setStyleName("k-specialchar-popup");
+                    Label characterLabel = new Label(sender.getElement().getInnerText());
+                    characterLabel.setStyleName("k-specialchar-big");
+                    popup.add(characterLabel);
+                    popup.show();
+                    Log.info("Focus!!!!!");
+                }
+
+                public void onLostFocus(Widget sender) {
+                }
+            };
+        }
+        // button.addFocusListener(focusListener);
         return button;
     }
 

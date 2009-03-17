@@ -28,6 +28,8 @@ public interface RTEditorView extends View {
 
     String getText();
 
+    void insertBlockquote();
+
     void insertComment(String author);
 
     void insertCommentNotUsingSelection(String author);
