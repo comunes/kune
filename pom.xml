@@ -94,6 +94,13 @@
       <artifactId>jmagick</artifactId>
       <version>6.2.6-0</version>
     </dependency>
+    <!--
+    <dependency>
+      <groupId>com.xpn.xwiki.platform</groupId>
+      <artifactId>xwiki-web-gwt</artifactId>
+      <version>1.9-SNAPSHOT</version>
+    </dependency>
+		-->
 
     <!-- xmpp -->
     <dependency>
@@ -244,19 +251,19 @@
     <!-- jetty dependencies -->
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
-       <artifactId>jetty-util</artifactId>
-        <version>6.1.5</version>
-        <!-- <version>7.0.0.pre5</version> -->
-        <scope>provided</scope>
+      <artifactId>jetty-util</artifactId>
+      <version>6.1.5</version>
+      <!-- <version>7.0.0.pre5</version> -->
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
       <artifactId>maven-jetty-plugin</artifactId>
       <version>6.1.5</version>
       <!--
-      <artifactId>jetty-maven-plugin</artifactId>
-      <version>7.0.0.pre5</version>
-       -->
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>7.0.0.pre5</version>
+      -->
       <scope>provided</scope>
     </dependency>
 
@@ -383,25 +390,38 @@
         <enabled>false</enabled>
       </releases>
     </repository>
+    <repository>
+      <id>xwiki</id>
+      <name>XWiki Repository</name>
+      <url>http://maven.xwiki.org/snapshots</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+    </repository>
   </repositories>
   <issueManagement>
     <system>kune issues list at ourproject.org</system>
     <url>http://ourproject.org/tracker/?group_id=407</url>
   </issueManagement>
   <developers>
-  	<developer>
-  		<id>dani</id>
-  		<name>Daniel Gómez Blasco</name>
-  		<email>danigb@gmail.com</email>
-  	</developer>
-  	<developer>
-  		<name>Samer Hassan</name>
-  		<email>samer2004@gmail.com</email>
-  	</developer>
-  	<developer>
-  		<name>Vicente J. Ruiz Jurado</name>
-  		<email>vjrj@ourproject.org</email>
-  	</developer>
+    <developer>
+      <id>dani</id>
+      <name>Daniel Gómez Blasco</name>
+      <email>danigb@gmail.com</email>
+    </developer>
+    <developer>
+      <name>Samer Hassan</name>
+      <email>samer2004@gmail.com</email>
+    </developer>
+    <developer>
+      <name>Vicente J. Ruiz Jurado</name>
+      <email>vjrj@ourproject.org</email>
+    </developer>
   </developers>
   <scm>
     <url>svn://scm.ourproject.org/svnroot/kune/trunk</url>
@@ -422,11 +442,11 @@
         <configuration>
           <source>1.5</source>
           <target>1.5</target>
-                    <!-- Uncomment and run mvn with -X -e if we have same compile problems
-          <compilerArgument>-verbose</compilerArgument>
-          <fork>true</fork>
-                    <verbose>true</verbose>
-                    -->
+          <!--
+            Uncomment and run mvn with -X -e if we have same compile
+            problems <compilerArgument>-verbose</compilerArgument>
+            <fork>true</fork> <verbose>true</verbose>
+          -->
         </configuration>
       </plugin>
       <plugin>
@@ -489,8 +509,8 @@
         <artifactId>maven-jetty-plugin</artifactId>
         <version>6.1.5</version>
         <!--
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>7.0.0.pre5</version>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>7.0.0.pre5</version>
         -->
         <configuration>
           <contextPath>/</contextPath>
@@ -498,26 +518,17 @@
           <scanIntervalSeconds>0</scanIntervalSeconds>
         </configuration>
       </plugin>
-     <!--
-     <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+      <!--
+        <plugin> <groupId>org.codehaus.mojo</groupId>
         <artifactId>deb-maven-plugin</artifactId>
-	<version>1.0-SNAPSHOT</version>
-        <configuration>
-          <description>kune free/open/libre collaboration platform</description>
-              <maintainer>Kune Development Team &lt;kune-devel@lists.ourproject.org&gt;</maintainer>
-              <section>web</section>
-              <priority>optional</priority>     
-              <architecture>all</architecture>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>deb</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+        <version>1.0-SNAPSHOT</version> <configuration>
+        <description>kune free/open/libre collaboration
+        platform</description> <maintainer>Kune Development Team
+        &lt;kune-devel@lists.ourproject.org&gt;</maintainer>
+        <section>web</section> <priority>optional</priority>
+        <architecture>all</architecture> </configuration> <executions>
+        <execution> <goals> <goal>deb</goal> </goals> </execution>
+        </executions> </plugin>
       -->
       <plugin>
         <groupId>org.liquibase</groupId>
@@ -538,8 +549,8 @@
             </configuration>
             <!--
               <configuration> <verbose>true</verbose> <propertiesFile>
-              src/main/resources/db/liquibase.properties </propertiesFile>
-              </configuration>
+              src/main/resources/db/liquibase.properties
+              </propertiesFile> </configuration>
             -->
             <goals>
               <goal>update</goal>
@@ -632,8 +643,8 @@
         <configuration>
           <forkMode>pertest</forkMode>
           <!--
-            Skip the normal tests, we'll run them in the integration-test
-            phase
+            Skip the normal tests, we'll run them in the
+            integration-test phase
           -->
           <skip>true</skip>
         </configuration>

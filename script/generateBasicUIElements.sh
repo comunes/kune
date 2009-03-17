@@ -14,7 +14,7 @@ DIR=$1
   fi
 
 # DO
-PACKAGE=`echo $DIR | cut -d "/" -f 4- | sed 's/\//\./g' | sed 's/.$//g'`
+PACKAGE=`echo $DIR | cut -d "/" -f 4- | sed 's/\//\./g' | sed 's/\.$//g'
 
 if [[ ! -d $DIR ]]
 then

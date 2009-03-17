@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 
@@ -73,12 +74,14 @@ public class RTEditorPresenter implements RTEditor {
     private Listener2<String, String> insertLinkListener;
     private Listener<String> updateHtmlListener;
     private ActionToolbarButtonDescriptor<Object> insertTableBtn;
+    private final Provider<InsertSpecialCharDialog> insertSpecialCharDialog;
+    protected Listener<String> insertSpecialCharListener;
 
     public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
             RTEActionSndToolbar sndBar, RTEImgResources imgResources, InsertLinkDialog textEditorInsertElement,
             ColorWebSafePalette palette, Provider<EditHtmlDialog> editHtmlDialog,
             Provider<InsertImageDialog> insertImageDialog, Provider<InsertTableDialog> insertTableDialog,
-            DeferredCommandWrapper deferred) {
+            Provider<InsertSpecialCharDialog> insertSpecialCharDialog, DeferredCommandWrapper deferred) {
         this.i18n = i18n;
         this.session = session;
         this.topBar = topBar;
@@ -88,6 +91,7 @@ public class RTEditorPresenter implements RTEditor {
         this.editHtmlDialog = editHtmlDialog;
         this.insertImageDialog = insertImageDialog;
         this.insertTableDialog = insertTableDialog;
+        this.insertSpecialCharDialog = insertSpecialCharDialog;
         this.deferred = deferred;
         styleToolbar(sndBar);
         sndBar.attach();
@@ -467,7 +471,7 @@ public class RTEditorPresenter implements RTEditor {
             }
         });
         comment.setShortcut(new ActionShortcut(true, 'M'));
-        comment.setTextDescription(i18n.t("Comment..."));
+        comment.setTextDescription(i18n.t("Comment"));
         comment.setParentMenuTitle(i18n.t(INSERT_MENU));
         comment.setEnableCondition(isInsertHtmlSupported());
         comment.setAddCondition(canBeExtended);
@@ -615,6 +619,26 @@ public class RTEditorPresenter implements RTEditor {
         removeFormat.setAddCondition(canBeExtended);
         removeFormat.setRightSeparator(ActionToolbarButtonSeparator.separator);
 
+        final ActionToolbarMenuDescriptor<Object> insertSpecialChar = new ActionToolbarMenuDescriptor<Object>(
+                accessRol, topbar, new Listener0() {
+                    public void onEvent() {
+                        if (insertSpecialCharListener == null) {
+                            insertSpecialCharListener = new Listener<String>() {
+                                public void onEvent(String character) {
+                                    view.insertHtml(character);
+                                }
+                            };
+                        }
+                        insertSpecialCharDialog.get().setOnInsertSpecialChar(insertSpecialCharListener);
+                        insertSpecialCharDialog.get().show();
+                    }
+                });
+        insertSpecialChar.setIconCls(getCssName(imgResources.specialchars()));
+        insertSpecialChar.setTextDescription(i18n.t("Special characters..."));
+        insertSpecialChar.setAddCondition(canBeExtended);
+        insertSpecialChar.setParentMenuTitle(i18n.t(INSERT_MENU));
+        insertSpecialChar.setTopSeparator(true);
+
         final ActionToolbarMenuDescriptor<Object> insertMedia = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 topbar, new Listener0() {
                     public void onEvent() {
@@ -622,7 +646,7 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         insertMedia.setIconCls(getCssName(imgResources.film()));
-        insertMedia.setTextDescription(i18n.t("Insert Media ..."));
+        insertMedia.setTextDescription(i18n.t("Media..."));
         insertMedia.setAddCondition(canBeExtended);
         insertMedia.setParentMenuTitle(i18n.t(INSERT_MENU));
 
@@ -633,7 +657,7 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         insertTable.setIconCls(getCssName(imgResources.inserttable()));
-        insertTable.setTextDescription(i18n.t("Insert Table ..."));
+        insertTable.setTextDescription(i18n.t("Table ..."));
         insertTable.setAddCondition(canBeExtended);
         insertTable.setParentMenuTitle(i18n.t(INSERT_MENU));
 
@@ -722,7 +746,6 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(paste));
         actions.add(withNoItem(selectAll));
         actions.add(withNoItem(editHtml));
-        actions.add(withNoItem(hr));
         actions.add(withNoItem(subscript));
         actions.add(withNoItem(superscript));
         actions.add(withNoItem(decreaseIndent));
@@ -730,14 +753,16 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(ol));
         actions.add(withNoItem(ul));
         actions.add(withNoItem(removeFormat));
-        // topActions.add(withNoItem(hrButton));
+        actions.add(withNoItem(hrButton));
         actions.add(withNoItem(img));
         actions.add(withNoItem(createLink));
         actions.add(withNoItem(removeLink));
         actions.add(withNoItem(insertTableBtn));
         actions.add(withNoItem(insertTable));
         actions.add(withNoItem(insertMedia));
+        actions.add(withNoItem(insertSpecialChar));
         actions.add(withNoItem(comment));
+        actions.add(withNoItem(hr));
         actions.add(withNoItem(undoBtn));
         actions.add(withNoItem(redoBtn));
         // actions.add(withNoItem(devInfo));

@@ -87,6 +87,16 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.InsertLinkExt;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.InsertLinkExtPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.InsertLinkExtPresenter;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.ext.InsertLinkExtView;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialogPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialogPresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.asian.InsertSpecialAsianChar;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.asian.InsertSpecialAsianCharPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.asian.InsertSpecialAsianCharPresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental.InsertSpecialOccChar;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental.InsertSpecialOccCharPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental.InsertSpecialOccCharPresenter;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialogPresenter;
@@ -298,7 +308,7 @@ public class PlatformModule extends AbstractModule {
                 final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
                         $(Session.class), topBar, sndBar, $(RTEImgResources.class), $(InsertLinkDialog.class),
                         $(ColorWebSafePalette.class), $$(EditHtmlDialog.class), $$(InsertImageDialog.class),
-                        $$(InsertTableDialog.class), $(DeferredCommandWrapper.class));
+                        $$(InsertTableDialog.class), $$(InsertSpecialCharDialog.class), $(DeferredCommandWrapper.class));
                 final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
                         $(ActionManager.class), $(GlobalShortcutRegister.class));
                 presenter.init(panel);
@@ -428,6 +438,35 @@ public class PlatformModule extends AbstractModule {
                 final InsertTableDialogPresenter presenter = new InsertTableDialogPresenter();
                 final InsertTableDialogPanel panel = new InsertTableDialogPanel(presenter, i18n,
                         $$(SimplePalette.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(InsertSpecialCharGroup.class, new Factory<InsertSpecialCharDialog>(InsertSpecialCharDialog.class) {
+            @Override
+            public InsertSpecialCharDialog create() {
+                final InsertSpecialCharDialogPresenter presenter = new InsertSpecialCharDialogPresenter();
+                final InsertSpecialCharDialogPanel panel = new InsertSpecialCharDialogPanel(presenter, $(Images.class),
+                        $(I18nTranslationService.class), $(InsertSpecialCharGroup.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        }, new Factory<InsertSpecialOccChar>(InsertSpecialOccChar.class) {
+            @Override
+            public InsertSpecialOccChar create() {
+                final InsertSpecialOccCharPresenter presenter = new InsertSpecialOccCharPresenter();
+                final InsertSpecialOccCharPanel panel = new InsertSpecialOccCharPanel($(InsertSpecialCharDialog.class),
+                        i18n);
+                presenter.init(panel);
+                return presenter;
+            }
+        }, new Factory<InsertSpecialAsianChar>(InsertSpecialAsianChar.class) {
+            @Override
+            public InsertSpecialAsianChar create() {
+                final InsertSpecialAsianCharPresenter presenter = new InsertSpecialAsianCharPresenter();
+                final InsertSpecialAsianCharPanel panel = new InsertSpecialAsianCharPanel(
+                        $(InsertSpecialCharDialog.class), i18n);
                 presenter.init(panel);
                 return presenter;
             }

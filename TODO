@@ -28,6 +28,7 @@ TODO-list for kune -*- mode: org; -*-
      ^<a href="http://example.com">sample</a>^   --- Parse and edit
      <a href="http://example.com">s^ample</a>    --- Parse and edit
      <a href="http://example.com">s^amp^le</a>   --- Parse and edit
+     <a href="http://example.com">s^a<em>kk</em>mp^le</a>   --- Parse, get contains and edit
      ^some text <a href="http://example.com">samp^le</a>   --- new link with get inner content?
 **** Quite urgent: Shortcuts propagation to browser
      http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/user/client/Event.html#preventDefault
