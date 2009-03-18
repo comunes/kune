@@ -4,7 +4,7 @@ import org.ourproject.kune.platf.client.i18n.Resources;
 
 import com.google.gwt.user.client.ui.KeyboardListener;
 
-public class ActionShortcut {
+public class ShortcutDescriptor {
 
     private static final String NO_KEYNAME = "nokeyname";
 
@@ -15,45 +15,45 @@ public class ActionShortcut {
     private final boolean alt;
     private final boolean ctrl;
     private final boolean shift;
-    private final char key;
+    private final int keycode;
     private final String keyName;
 
-    public ActionShortcut(boolean ctrl, boolean alt, boolean shift, char key) {
+    public ShortcutDescriptor(boolean ctrl, boolean alt, boolean shift, int key) {
         this(ctrl, alt, shift, key, NO_KEYNAME);
     }
 
-    public ActionShortcut(boolean ctrl, boolean alt, boolean shift, char key, String keyName) {
+    public ShortcutDescriptor(boolean ctrl, boolean alt, boolean shift, int key, String keyName) {
         this.alt = alt;
         this.ctrl = ctrl;
         this.shift = shift;
-        this.key = key;
+        this.keycode = key;
         this.keyName = keyName;
     }
 
-    public ActionShortcut(boolean ctrl, boolean shift, char key) {
+    public ShortcutDescriptor(boolean ctrl, boolean shift, int key) {
         this(ctrl, false, shift, key, NO_KEYNAME);
     }
 
-    public ActionShortcut(boolean ctrl, boolean shift, char key, String keyName) {
+    public ShortcutDescriptor(boolean ctrl, boolean shift, int key, String keyName) {
         this(ctrl, false, shift, key, keyName);
     }
 
-    public ActionShortcut(boolean ctrl, char key) {
+    public ShortcutDescriptor(boolean ctrl, int key) {
         this(ctrl, false, false, key, NO_KEYNAME);
     }
 
-    public ActionShortcut(boolean ctrl, char key, String keyName) {
-        this(ctrl, false, false, key, keyName);
+    public ShortcutDescriptor(boolean ctrl, int keycode, String keyName) {
+        this(ctrl, false, false, keycode, keyName);
     }
 
-    public ActionShortcut(char key, int modifiers) {
+    public ShortcutDescriptor(int keycode, int modifiers) {
         this(has(modifiers, KeyboardListener.MODIFIER_CTRL), has(modifiers, KeyboardListener.MODIFIER_ALT), has(
-                modifiers, KeyboardListener.MODIFIER_SHIFT), key, NO_KEYNAME);
+                modifiers, KeyboardListener.MODIFIER_SHIFT), keycode, NO_KEYNAME);
     }
 
-    public ActionShortcut(char key, int modifiers, String keyName) {
+    public ShortcutDescriptor(int keycode, int modifiers, String keyName) {
         this(has(modifiers, KeyboardListener.MODIFIER_CTRL), has(modifiers, KeyboardListener.MODIFIER_ALT), has(
-                modifiers, KeyboardListener.MODIFIER_SHIFT), key, keyName);
+                modifiers, KeyboardListener.MODIFIER_SHIFT), keycode, keyName);
     }
 
     @Override
@@ -67,14 +67,14 @@ public class ActionShortcut {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ActionShortcut other = (ActionShortcut) obj;
+        ShortcutDescriptor other = (ShortcutDescriptor) obj;
         if (alt != other.alt) {
             return false;
         }
         if (ctrl != other.ctrl) {
             return false;
         }
-        if (key != other.key) {
+        if (keycode != other.keycode) {
             return false;
         }
         if (shift != other.shift) {
@@ -89,7 +89,7 @@ public class ActionShortcut {
         int result = 1;
         result = prime * result + (alt ? 1231 : 1237);
         result = prime * result + (ctrl ? 1231 : 1237);
-        result = prime * result + key;
+        result = prime * result + keycode;
         result = prime * result + (shift ? 1231 : 1237);
         return result;
     }
@@ -110,7 +110,7 @@ public class ActionShortcut {
         s += sKey(alt, "Alt");
         s += sKey(ctrl, "Ctrl");
         s += sKey(shift, "Shift");
-        s += keyName != NO_KEYNAME ? translateKey(keyName) + ")" : String.valueOf(key).toUpperCase() + ")";
+        s += keyName != NO_KEYNAME ? translateKey(keyName) + ")" : ("" + (char) keycode).toUpperCase() + ")";
         return s;
     }
 

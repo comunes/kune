@@ -44,8 +44,8 @@ public class RenameAction {
         this.i18n = i18n;
         this.session = session;
         this.contentService = contentService;
-        this.onSuccess = new Event2<StateToken, String>("onSuccess");
-        this.onFail = new Event2<StateToken, String>("onFail");
+        this.onSuccess = new Event2<StateToken, String>("onRenameSuccess");
+        this.onFail = new Event2<StateToken, String>("onRenamaFail");
     }
 
     public void onFail(final Listener2<StateToken, String> slot) {

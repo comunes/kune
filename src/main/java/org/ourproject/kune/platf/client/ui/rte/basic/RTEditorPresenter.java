@@ -14,7 +14,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescripto
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
@@ -188,6 +188,10 @@ public class RTEditorPresenter implements RTEditor {
         this.extended = extended;
     }
 
+    public void setFocus(boolean focus) {
+        view.setFocus(focus);
+    }
+
     public void setHtml(String html) {
         view.setHTML(html);
         view.focus();
@@ -217,7 +221,7 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         selectAll.setIconCls(getCssName(imgResources.selectall()));
-        selectAll.setShortcut(new ActionShortcut(true, 'A'));
+        selectAll.setShortcut(new ShortcutDescriptor(true, 'A'));
         selectAll.setTextDescription(i18n.t("Select all"));
         selectAll.setParentMenuTitle(i18n.t(EDIT_MENU));
         selectAll.setAddCondition(canBeBasic);
@@ -232,7 +236,7 @@ public class RTEditorPresenter implements RTEditor {
         });
         bold.setIconCls(getCssName(imgResources.bold()));
         bold.setToolTip(i18n.t("Bold"));
-        bold.setShortcut(new ActionShortcut(true, 'B'));
+        bold.setShortcut(new ShortcutDescriptor(true, 'B'));
         bold.setAddCondition(canBeBasic);
 
         italic = new ActionToolbarPushButtonDescriptor<Object>(accessRol, sndbar, new Listener0() {
@@ -243,7 +247,7 @@ public class RTEditorPresenter implements RTEditor {
         });
         italic.setIconCls(getCssName(imgResources.italic()));
         italic.setToolTip(i18n.t("Italic"));
-        italic.setShortcut(new ActionShortcut(true, 'I'));
+        italic.setShortcut(new ShortcutDescriptor(true, 'I'));
         italic.setAddCondition(canBeBasic);
         italic.setAddCondition(canBeBasic);
 
@@ -255,7 +259,7 @@ public class RTEditorPresenter implements RTEditor {
         });
         underline.setIconCls(getCssName(imgResources.underline()));
         underline.setToolTip(i18n.t("Underline"));
-        underline.setShortcut(new ActionShortcut(true, 'U'));
+        underline.setShortcut(new ShortcutDescriptor(true, 'U'));
         underline.setAddCondition(canBeBasic);
 
         ActionToolbarMenuDescriptor<Object> subscript = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
@@ -268,7 +272,7 @@ public class RTEditorPresenter implements RTEditor {
         subscript.setParentMenuTitle(i18n.t(FORMAT_MENU));
         subscript.setTextDescription(i18n.t("Subscript"));
         subscript.setIconCls(getCssName(imgResources.subscript()));
-        subscript.setShortcut(new ActionShortcut(true, '0'));
+        subscript.setShortcut(new ShortcutDescriptor(true, 188, ","));
         subscript.setAddCondition(canBeBasic);
 
         ActionToolbarMenuDescriptor<Object> superscript = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
@@ -281,7 +285,7 @@ public class RTEditorPresenter implements RTEditor {
         superscript.setParentMenuTitle(i18n.t(FORMAT_MENU));
         superscript.setTextDescription(i18n.t("Superscript"));
         superscript.setIconCls(getCssName(imgResources.superscript()));
-        superscript.setShortcut(new ActionShortcut(true, '9'));
+        superscript.setShortcut(new ShortcutDescriptor(true, 190, "."));
         superscript.setAddCondition(canBeBasic);
 
         ActionToolbarButtonDescriptor<Object> justifyLeft = new ActionToolbarButtonDescriptor<Object>(accessRol,
@@ -293,7 +297,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         justifyLeft.setIconCls(getCssName(imgResources.alignleft()));
         justifyLeft.setToolTip(i18n.t("Left Justify"));
-        justifyLeft.setShortcut(new ActionShortcut(true, 'L'));
+        justifyLeft.setShortcut(new ShortcutDescriptor(true, 'L'));
         justifyLeft.setAddCondition(canBeBasic);
 
         ActionToolbarButtonDescriptor<Object> justifyCentre = new ActionToolbarButtonDescriptor<Object>(accessRol,
@@ -305,7 +309,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         justifyCentre.setIconCls(getCssName(imgResources.centerpara()));
         justifyCentre.setToolTip(i18n.t("Centre Justify"));
-        justifyCentre.setShortcut(new ActionShortcut(true, 'E'));
+        justifyCentre.setShortcut(new ShortcutDescriptor(true, 'E'));
         justifyCentre.setAddCondition(canBeBasic);
 
         ActionToolbarButtonDescriptor<Object> justifyRight = new ActionToolbarButtonDescriptor<Object>(accessRol,
@@ -317,7 +321,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         justifyRight.setIconCls(getCssName(imgResources.alignright()));
         justifyRight.setToolTip(i18n.t("Right Justify"));
-        justifyRight.setShortcut(new ActionShortcut(true, 'R'));
+        justifyRight.setShortcut(new ShortcutDescriptor(true, 'R'));
         justifyRight.setAddCondition(canBeBasic);
 
         ActionToolbarMenuDescriptor<Object> undo = new ActionToolbarMenuDescriptor<Object>(accessRol, topbar,
@@ -327,7 +331,7 @@ public class RTEditorPresenter implements RTEditor {
                         fireOnEdit();
                     }
                 });
-        undo.setShortcut(new ActionShortcut(true, 'Z'));
+        undo.setShortcut(new ShortcutDescriptor(true, 'Z'));
         undo.setTextDescription(i18n.t("Undo"));
         undo.setParentMenuTitle(i18n.t(EDIT_MENU));
         undo.setAddCondition(canBeExtended);
@@ -340,7 +344,7 @@ public class RTEditorPresenter implements RTEditor {
                         fireOnEdit();
                     }
                 });
-        redo.setShortcut(new ActionShortcut(true, 'Y'));
+        redo.setShortcut(new ShortcutDescriptor(true, 'Y'));
         redo.setTextDescription(i18n.t("Redo"));
         redo.setParentMenuTitle(i18n.t(EDIT_MENU));
         redo.setAddCondition(canBeExtended);
@@ -378,7 +382,7 @@ public class RTEditorPresenter implements RTEditor {
                         view.copy();
                     }
                 });
-        copy.setShortcut(new ActionShortcut(true, 'C'));
+        copy.setShortcut(new ShortcutDescriptor(true, 'C'));
         copy.setTextDescription(i18n.t("Copy"));
         copy.setParentMenuTitle(i18n.t(EDIT_MENU));
         copy.setAddCondition(canBeExtended);
@@ -391,7 +395,7 @@ public class RTEditorPresenter implements RTEditor {
                         fireOnEdit();
                     }
                 });
-        cut.setShortcut(new ActionShortcut(true, 'X'));
+        cut.setShortcut(new ShortcutDescriptor(true, 'X'));
         cut.setTextDescription(i18n.t("Cut"));
         cut.setParentMenuTitle(i18n.t(EDIT_MENU));
         cut.setAddCondition(canBeExtended);
@@ -404,7 +408,7 @@ public class RTEditorPresenter implements RTEditor {
                         fireOnEdit();
                     }
                 });
-        paste.setShortcut(new ActionShortcut(true, 'V'));
+        paste.setShortcut(new ShortcutDescriptor(true, 'V'));
         paste.setTextDescription(i18n.t("Paste"));
         paste.setParentMenuTitle(i18n.t(EDIT_MENU));
         paste.setAddCondition(canBeExtended);
@@ -470,7 +474,7 @@ public class RTEditorPresenter implements RTEditor {
                 return session.isLogged();
             }
         });
-        comment.setShortcut(new ActionShortcut(true, 'M'));
+        comment.setShortcut(new ShortcutDescriptor(true, 'M'));
         comment.setTextDescription(i18n.t("Comment"));
         comment.setParentMenuTitle(i18n.t(INSERT_MENU));
         comment.setEnableCondition(isInsertHtmlSupported());
@@ -485,7 +489,7 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         hr.setTextDescription(i18n.t("Horizontal line"));
-        hr.setShortcut(new ActionShortcut(true, true, ' ', "Space"));
+        hr.setShortcut(new ShortcutDescriptor(true, true, ' ', "Space"));
         hr.setIconCls(getCssName(imgResources.hfixedline()));
         hr.setParentMenuTitle(i18n.t(INSERT_MENU));
         hr.setAddCondition(canBeExtended);
@@ -556,7 +560,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         ol.setIconCls(getCssName(imgResources.defaultnumbering()));
         ol.setToolTip(i18n.t("Numbered List"));
-        ol.setShortcut(new ActionShortcut(true, '7'));
+        ol.setShortcut(new ShortcutDescriptor(true, '7'));
         ol.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> ul = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
@@ -568,7 +572,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         ul.setIconCls(getCssName(imgResources.defaultbullet()));
         ul.setToolTip(i18n.t("Bullet List"));
-        ul.setShortcut(new ActionShortcut(true, '8'));
+        ul.setShortcut(new ShortcutDescriptor(true, '8'));
         ul.setRightSeparator(ActionToolbarButtonSeparator.separator);
         ul.setAddCondition(canBeExtended);
 
@@ -603,7 +607,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         createLink.setIconCls(getCssName(imgResources.link()));
         createLink.setToolTip(i18n.t("Create Link"));
-        createLink.setShortcut(new ActionShortcut(true, 'K'));
+        createLink.setShortcut(new ShortcutDescriptor(true, 'K'));
         createLink.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
@@ -615,7 +619,7 @@ public class RTEditorPresenter implements RTEditor {
                 });
         removeLink.setIconCls(getCssName(imgResources.linkbreak()));
         removeLink.setToolTip(i18n.t("Remove Link"));
-        removeLink.setShortcut(new ActionShortcut(true, true, 'K'));
+        removeLink.setShortcut(new ShortcutDescriptor(true, true, 'K'));
         removeLink.setAddCondition(canBeExtended);
 
         final ActionToolbarMenuDescriptor<Object> removeFormat = new ActionToolbarMenuDescriptor<Object>(accessRol,
@@ -626,7 +630,7 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         removeFormat.setIconCls(getCssName(imgResources.removeFormat()));
-        ActionShortcut ctrl_space = new ActionShortcut(true, ' ', "Space");
+        ShortcutDescriptor ctrl_space = new ShortcutDescriptor(true, ' ', "Space");
         removeFormat.setTextDescription(i18n.t("Clear Formatting") + (ctrl_space.toString()));
         removeFormat.setAddCondition(canBeExtended);
         removeFormat.setParentMenuTitle(i18n.t(FORMAT_MENU));
@@ -756,7 +760,7 @@ public class RTEditorPresenter implements RTEditor {
         devInfo.setTextDescription(i18n.t("Developers info"));
         devInfo.setAddCondition(canBeExtended);
         devInfo.setParentMenuTitle(i18n.t(FORMAT_MENU));
-        devInfo.setShortcut(new ActionShortcut(false, true, false, 'I'));
+        devInfo.setShortcut(new ShortcutDescriptor(false, true, false, 'I'));
 
         actions.add(withNoItem(bold));
         actions.add(withNoItem(italic));
@@ -839,6 +843,7 @@ public class RTEditorPresenter implements RTEditor {
         font.setParentMenuTooltip(i18n.t("Font size"));
         font.setParentMenuIconCls(getCssName(imgResources.fontheight()));
         font.setAddCondition(canBeBasic);
+        font.setShortcut(new ShortcutDescriptor(true, 48 + fontSize));
         return font;
     }
 

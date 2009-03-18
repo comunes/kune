@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
-import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
@@ -208,7 +208,7 @@ public class HelloWorldModule extends AbstractModule {
         /**
          * Global shortcut sample definition
          */
-        $(GlobalShortcutRegister.class).put(new ActionShortcut(false, true, false, 'S'), new Listener0() {
+        $(GlobalShortcutRegister.class).put(new ShortcutDescriptor(false, true, false, 'S'), new Listener0() {
             public void onEvent() {
                 NotifyUser.info("Global Ctrl+S pressed");
             }

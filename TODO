@@ -1,4 +1,5 @@
 TODO-list for kune -*- mode: org; -*-
+#+ARCHIVE: %s_done::
 
 #+SEQ_TODO: TODO danigb samer vjrj FEEDBACK VERIFY | FIXED CANCELED WONTFIX
 
@@ -14,15 +15,6 @@ TODO-list for kune -*- mode: org; -*-
    http://maven.xwiki.org/releases/com/xpn/xwiki/platform/xwiki-web-wysiwyg/1.8-rc-2/
 ** vjrj <v> better RTE
 *** Pending
-**** W3C Range/Selection support in RTE
-     https://developer.mozilla.org/en/DOM/selection
-     http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html
-     As an intro:
-     http://www.quirksmode.org/dom/range_intro.html
-     http://maven.xwiki.org/site/xwiki-web/xwiki-web-wysiwyg/apidocs/com/xpn/xwiki/wysiwyg/client/dom/internal/AbstractRange.html
-     other links:
-     http://groups.google.com/group/rocket-gwt/browse_frm/thread/e56540d4168479c0/d25dca75958ba923?hl=en-GB&lnk=gst&q=Range#d25dca75958ba923
-     http://code.google.com/p/gwt-html-editor/source/browse/branches/gwt1.4/src/com/gc/gwt/wysiwyg/public/fckeditor/editor/_source/classes/fckdomrange_ie.js?r=81
 **** Insert/Edit link
 ***** use cases
      ^<a href="http://example.com">sample</a>^   --- Parse and edit
@@ -30,19 +22,11 @@ TODO-list for kune -*- mode: org; -*-
      <a href="http://example.com">s^amp^le</a>   --- Parse and edit
      <a href="http://example.com">s^a<em>kk</em>mp^le</a>   --- Parse, get contains and edit
      ^some text <a href="http://example.com">samp^le</a>   --- new link with get inner content?
-**** Quite urgent: Shortcuts propagation to browser
-     http://google-web-toolkit.googlecode.com/svn/javadoc/1.5/com/google/gwt/user/client/Event.html#preventDefault
-     http://openkm.cvs.sourceforge.net/viewvc/openkm/openkm/src/es/git/openkm/frontend/client/panel/ExtendedDockPanel.java?revision=1.20&view=markup
-     http://openkm.cvs.sourceforge.net/viewvc/openkm/openkm/src/es/git/openkm/frontend/client/util/Keyboard.java?revision=1.20&view=markup
-     http://whatwouldnickdo.com/wordpress/370/gwt-right-click-context-menu/
 **** with different menus (File/Blog ...)
 **** bidi support
-**** Insert special chars (for table or from unicode).
 **** images (local/remote) with preview
 **** youtube videos/podcasts
-**** Edit HTML
 **** File > Rename (F2)
-**** Insert > Special char
 **** Insert > Page break (for printing)
 **** Shortcut to fonts (Ctrl + numbers)
 *** Links
@@ -167,10 +151,6 @@ I am talking about, but I'm sure there is something to do.
    - for ogg :: http://www.flumotion.net/cortado/
    - for mp3+ogg :: flowplayer
 ** TODO <d> Inform to translators when original content changes
-** TODO <v> extjs i18n
-   http://extjs.com/deploy/ext/examples/locale/dutch-form.js
-   http://groups.google.com/group/gwt-ext/browse_thread/thread/ebec316effea2b80/bfbdadc7239b4e5d?lnk=gst&q=i18n#bfbdadc7239b4e5d
-   http://extjs.com/forum/showthread.php?t=20160&highlight=localization
 ** TODO <v> Restarting server don't affect client session
    Now there are problems if client was started before server, when server restart (session persist)
 ** TODO <v> Interceptors also useful for translation of db fields

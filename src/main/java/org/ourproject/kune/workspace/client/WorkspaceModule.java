@@ -873,7 +873,7 @@ public class WorkspaceModule extends AbstractModule {
                 return new ContentEditor($(RTEditor.class), true, $(I18nTranslationService.class),
                         $(StateManager.class), $(SiteSignOutLink.class), $(DeferredCommandWrapper.class),
                         $(RTEImgResources.class), $(WorkspaceSkeleton.class), $(TimerWrapper.class),
-                        new RTESavingEditorPanel());
+                        new RTESavingEditorPanel(), $(EntityTitle.class));
             }
         });
         register(NoDecoration.class, new Factory<ActionContextTopToolbar>(ActionContextTopToolbar.class) {

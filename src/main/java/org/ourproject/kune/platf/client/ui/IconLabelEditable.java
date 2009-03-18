@@ -72,6 +72,11 @@ public class IconLabelEditable extends Composite {
         init(text, useDoubleClick);
     }
 
+    public void edit() {
+        showEditor();
+        editor.setFocus(true);
+    }
+
     public String getText() {
         return label.getText();
     }
@@ -123,7 +128,7 @@ public class IconLabelEditable extends Composite {
     }
 
     private void init(final String text, final boolean useDoubleClick) {
-        this.onEdit = new Event2<String, String>("onEdit");
+        this.onEdit = new Event2<String, String>("onLabelEdit");
         doubleClickToRenameLabel = "Double click to rename";
         clickToRenameLabel = "Click to rename";
         hp = new HorizontalPanel();

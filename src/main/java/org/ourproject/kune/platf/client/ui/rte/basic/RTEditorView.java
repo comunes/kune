@@ -82,6 +82,8 @@ public interface RTEditorView extends View {
 
     void setBackColor(String color);
 
+    void setFocus(boolean focus);
+
     void setFontName(String name);
 
     void setFontSize(FontSize fontSize);
@@ -107,4 +109,5 @@ public interface RTEditorView extends View {
     void undo();
 
     void unlink();
+
 }

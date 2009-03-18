@@ -157,6 +157,8 @@ public abstract class AbstractFoldableContentActions {
         renameCtn.setTextDescription(textDescription);
         renameCtn.setParentMenuTitle(parentMenuTitle);
         renameCtn.setEnableCondition(notDeleted());
+        // renameCtn.setShortcut(new ShortcutDescriptor(false, Keyboard.KEY_F2,
+        // i18n.tWithNT("F2", "The F2 Function key")));
         contentActionRegistry.addAction(renameCtn, registerInTypes);
     }
 

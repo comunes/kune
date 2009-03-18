@@ -19,8 +19,9 @@
  \*/
 package org.ourproject.kune.workspace.client.title;
 
-
 public interface EntityTitle {
+
+    void edit();
 
     void setContentTitle(String title);
 

@@ -6,7 +6,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
@@ -19,7 +19,7 @@ import com.calclab.suco.client.events.Listener0;
 public class RTESavingEditorPresenter implements RTESavingEditor {
 
     @Deprecated
-    private static final String FILE_MENU_OPTION = "File";
+    public static final String FILE_MENU_OPTION = "File";
     public static final int AUTOSAVE_AFTER_FAILS_IN_MILLISECONS = 20000;
     public static final int AUTOSAVE_IN_MILLISECONDS = 10000;
 
@@ -183,7 +183,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.sndbar, onPerformSaveCall);
         saveBtn.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         saveBtn.setToolTip(i18n.t("Save"));
-        ActionShortcut ctrl_S = new ActionShortcut(true, 'S');
+        ShortcutDescriptor ctrl_S = new ShortcutDescriptor(true, 'S');
         saveBtn.setShortcut(ctrl_S);
         saveBtn.setPosition(0);
 

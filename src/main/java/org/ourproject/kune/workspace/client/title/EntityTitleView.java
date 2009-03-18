@@ -23,6 +23,8 @@ import org.ourproject.kune.platf.client.View;
 
 public interface EntityTitleView extends View {
 
+    void edit();
+
     void setContentIcon(String iconUrl);
 
     void setContentIconVisible(boolean visible);

@@ -17,9 +17,9 @@ import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
-import org.ourproject.kune.platf.client.shortcuts.ActionShortcutRegister;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutRegister;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 
 import com.google.gwt.dom.client.Element;
@@ -47,7 +47,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     private final ExtendedFormatter extended;
     private final RTEditorPresenter presenter;
     private final ActionManager actionManager;
-    private final ActionShortcutRegister shortcutRegister;
+    private final ShortcutRegister shortcutRegister;
     private final GlobalShortcutRegister globalShortcutReg;
 
     public RTEditorPanel(final RTEditorPresenter presenter, I18nUITranslationService i18n,
@@ -58,7 +58,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         this.globalShortcutReg = globalShortcutReg;
         basic = getBasicFormatter();
         extended = getExtendedFormatter();
-        shortcutRegister = new ActionShortcutRegister();
+        shortcutRegister = new ShortcutRegister();
         EventListener listener = new EventListener();
         addFocusListener(listener);
         setWidth("96%");
@@ -70,7 +70,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         for (ActionItem<Object> actionItem : actionItems) {
             ActionDescriptor<Object> action = actionItem.getAction();
             if (action.hasShortcut() && action.mustBeAdded(null)) {
-                ActionShortcut shortcut = action.getShortcut();
+                ShortcutDescriptor shortcut = action.getShortcut();
                 shortcutRegister.put(shortcut, actionItem);
             }
         }

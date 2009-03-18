@@ -11,37 +11,40 @@ import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.KeyboardListenerCollection;
 
-public class ActionShortcutRegister {
+public class ShortcutRegister {
 
     @SuppressWarnings("unchecked")
-    private final HashMap<ActionShortcut, ActionItem> shortcuts;
+    private final HashMap<ShortcutDescriptor, ActionItem> shortcuts;
 
     @SuppressWarnings("unchecked")
-    public ActionShortcutRegister() {
-        shortcuts = new HashMap<ActionShortcut, ActionItem>();
-    }
-
-    @SuppressWarnings("unchecked")
-    public ActionItem get(ActionShortcut shortcut) {
-        return shortcuts.get(shortcut);
+    public ShortcutRegister() {
+        shortcuts = new HashMap<ShortcutDescriptor, ActionItem>();
     }
 
     @SuppressWarnings("unchecked")
     public ActionItem get(Event event) {
-        int modifiers = KeyboardListenerCollection.getKeyboardModifiers(event);
-        if (event.getTypeInt() == Event.ONKEYDOWN && modifiers != 0) {
-            ActionShortcut shortcut = new ActionShortcut((char) event.getKeyCode(), modifiers);
-            Log.debug("Shortcut pressed" + shortcut.toString());
-            return shortcuts.get(shortcut);
+        if (event.getTypeInt() == Event.ONKEYDOWN) {
+            int modifiers = KeyboardListenerCollection.getKeyboardModifiers(event);
+            boolean fnKey = (event.getKeyCode() >= Keyboard.KEY_F2 && event.getKeyCode() <= Keyboard.KEY_F12);
+            if (modifiers != 0 || fnKey) {
+                ShortcutDescriptor shortcut = new ShortcutDescriptor(event.getKeyCode(), modifiers);
+                return get(shortcut);
+            }
         }
-        // if (modifiers != 0) {
-        // Log.debug("Not action associated with this shortcut");
-        // }
         return null;
     }
 
     @SuppressWarnings("unchecked")
-    public void put(ActionShortcut shortcut, ActionItem actionItem) {
+    public ActionItem get(ShortcutDescriptor shortcut) {
+        ActionItem actionItem = shortcuts.get(shortcut);
+        if (actionItem != null) {
+            Log.debug("Shortcut pressed" + actionItem.getAction().getShortcut());
+        }
+        return actionItem;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void put(ShortcutDescriptor shortcut, ActionItem actionItem) {
         if (shortcuts.get(shortcut) != null) {
             Log.warn("Shortcut" + shortcut + " already registered");
         }
@@ -49,7 +52,7 @@ public class ActionShortcutRegister {
     }
 
     @SuppressWarnings("unchecked")
-    public void put(ActionShortcut shortcut, final Listener0 listener) {
+    public void put(ShortcutDescriptor shortcut, final Listener0 listener) {
         ActionDescriptor descriptor = new ActionDescriptor(AccessRolDTO.Viewer, new Listener0() {
             public void onEvent() {
                 listener.onEvent();

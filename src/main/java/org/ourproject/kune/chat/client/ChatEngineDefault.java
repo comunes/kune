@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
@@ -61,7 +61,7 @@ class ChatEngineDefault implements ChatEngine {
     private final Provider<FileDownloadUtils> downloadUtils;
     private Collection<RosterItem> roster;
     private final Event0 onRosterChanged;
-    private final ActionShortcut shortcut;
+    private final ShortcutDescriptor shortcut;
 
     public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws, Application application,
             Session session, final Provider<EmiteUIDialog> emiteUIProvider,
@@ -71,7 +71,7 @@ class ChatEngineDefault implements ChatEngine {
         this.emiteUIProvider = emiteUIProvider;
         this.downloadUtils = downloadUtils;
         this.onRosterChanged = new Event0("onRosterChanged");
-        shortcut = new ActionShortcut(false, true, false, 'C');
+        shortcut = new ShortcutDescriptor(false, true, false, 'C');
         globalShortcutRegister.put(shortcut, new Listener0() {
             public void onEvent() {
                 if (isDialogStarted()) {

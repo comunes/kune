@@ -62,6 +62,10 @@ public class EntityTitlePresenter implements EntityTitle {
         addRenameListeners();
     }
 
+    public void edit() {
+        view.edit();
+    }
+
     public View getView() {
         return view;
     }

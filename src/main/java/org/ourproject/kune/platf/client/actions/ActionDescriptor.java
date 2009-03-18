@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.actions;
 
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
-import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -78,7 +78,7 @@ public class ActionDescriptor<T> {
     /** The id. */
     private String id;
 
-    private ActionShortcut shortcut;
+    private ShortcutDescriptor shortcut;
 
     private int position = NO_POSITION;
 
@@ -232,7 +232,7 @@ public class ActionDescriptor<T> {
         return position;
     }
 
-    public ActionShortcut getShortcut() {
+    public ShortcutDescriptor getShortcut() {
         return shortcut;
     }
 
@@ -401,7 +401,7 @@ public class ActionDescriptor<T> {
         this.position = position;
     }
 
-    public void setShortcut(ActionShortcut shortcut) {
+    public void setShortcut(ShortcutDescriptor shortcut) {
         this.shortcut = shortcut;
     }
 

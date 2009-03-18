@@ -1,7 +1,11 @@
 package org.ourproject.kune.workspace.client.editor;
 
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
+import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.shortcuts.Keyboard;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
@@ -14,6 +18,7 @@ import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -32,12 +37,17 @@ public class ContentEditor extends RTESavingEditorPresenter {
     private final RTEditorPanel editorPanel;
     private final AbstractToolbar topbar;
     private final SiteSignOutLink siteSignOutLink;
+    private final I18nTranslationService i18n;
+    private final EntityTitle entityTitle;
 
     public ContentEditor(RTEditor editor, boolean autoSave, final I18nTranslationService i18n,
             StateManager stateManager, SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
-            RTEImgResources imgResources, WorkspaceSkeleton ws, TimerWrapper timer, RTESavingEditorView view) {
+            RTEImgResources imgResources, WorkspaceSkeleton ws, TimerWrapper timer, RTESavingEditorView view,
+            EntityTitle entityTitle) {
         super(editor, autoSave, i18n, stateManager, deferredCommandWrapper, imgResources, timer);
+        this.i18n = i18n;
         this.siteSignOutLink = siteSignOutLink;
+        this.entityTitle = entityTitle;
         super.init(view);
         this.ws = ws;
         Window.addWindowCloseListener(new WindowCloseListener() {
@@ -55,6 +65,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
         });
         vp = new VerticalPanel();
         basicEditor = super.getBasicEditor();
+        addContentActions();
         vp.add((Widget) ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
         editorPanel = (RTEditorPanel) basicEditor.getEditorArea();
         vp.add(editorPanel);
@@ -86,6 +97,20 @@ public class ContentEditor extends RTESavingEditorPresenter {
         ws.getEntityWorkspace().clearContent();
         super.onCancelConfirmed();
         siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
+    }
+
+    private void addContentActions() {
+        ActionToolbarMenuDescriptor<Object> rename = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
+                RTEditor.topbar, new Listener0() {
+                    public void onEvent() {
+                        entityTitle.edit();
+                        // basicEditor.setFocus(false);
+                    }
+                });
+        rename.setParentMenuTitle(i18n.t(RTESavingEditorPresenter.FILE_MENU_OPTION));
+        rename.setShortcut(new ShortcutDescriptor(false, Keyboard.KEY_F2, i18n.tWithNT("F2", "The F2 Function key")));
+        rename.setTextDescription(i18n.t("Rename"));
+        basicEditor.addAction(rename);
     }
 
     private void adjHeight(final int height) {

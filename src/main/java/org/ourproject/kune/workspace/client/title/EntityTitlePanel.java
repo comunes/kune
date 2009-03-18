@@ -52,6 +52,10 @@ public class EntityTitlePanel implements EntityTitleView {
         icon.setVisible(false);
     }
 
+    public void edit() {
+        titleLabel.edit();
+    }
+
     public void setContentIcon(final String iconUrl) {
         icon.setUrl(iconUrl);
     }

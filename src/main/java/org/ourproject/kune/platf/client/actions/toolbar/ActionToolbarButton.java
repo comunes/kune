@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.actions.toolbar;
 
 import org.ourproject.kune.platf.client.actions.ActionToolbarDescriptor;
-import org.ourproject.kune.platf.client.shortcuts.ActionShortcut;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 
 import com.calclab.suco.client.events.Listener0;
 import com.gwtext.client.core.EventObject;
@@ -37,7 +37,7 @@ public class ActionToolbarButton<T> extends ToolbarButton {
             super.setIconCls(iconCls);
         }
         String toolTip = action.getToolTip();
-        ActionShortcut shortcut = action.getShortcut();
+        ShortcutDescriptor shortcut = action.getShortcut();
         super.setTooltip((toolTip == null ? "" : toolTip) + (shortcut != null ? shortcut.toString() : ""));
         setEnableButton(enabled);
         // Waring: If you put set Id above click listener fires twice

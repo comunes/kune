@@ -40,6 +40,8 @@ public interface RTEditor {
 
     void setExtended(boolean extended);
 
+    void setFocus(boolean focus);
+
     void setHtml(String html);
 
     void setText(String text);

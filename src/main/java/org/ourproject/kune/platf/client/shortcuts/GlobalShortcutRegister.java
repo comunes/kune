@@ -7,7 +7,7 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.EventPreview;
 
-public class GlobalShortcutRegister extends ActionShortcutRegister {
+public class GlobalShortcutRegister extends ShortcutRegister {
 
     private final EventPreview eventPreview;
 
