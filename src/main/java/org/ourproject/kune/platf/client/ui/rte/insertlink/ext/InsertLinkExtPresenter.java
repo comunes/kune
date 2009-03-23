@@ -34,7 +34,6 @@ public class InsertLinkExtPresenter extends InsertLinkAbstractPresenter implemen
     public void init(InsertLinkExtView view) {
         super.init(view);
         this.view = view;
-        // editorInsertDialog.insertTab(0, view);
     }
 
     @Override

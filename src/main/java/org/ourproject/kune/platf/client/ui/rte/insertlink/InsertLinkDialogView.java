@@ -24,6 +24,6 @@ import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogVi
 
 public interface InsertLinkDialogView extends AbstractTabbedDialogView, View {
 
-    int HEIGHT = 320;
+    int HEIGHT = 350;
 
 }

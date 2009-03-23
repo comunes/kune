@@ -34,8 +34,6 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emiteuimodule.client.EmiteUIModule;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 
@@ -46,12 +44,6 @@ public class KuneEntryPoint implements EntryPoint {
 
     public void onModuleLoad() {
         Log.setUncaughtExceptionHandler();
-        GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-            public void onUncaughtException(Throwable e) {
-                String message = e.getMessage();
-                Log.error("Caught: " + e.toString() + " " + (message != null ? message : ""), e);
-            }
-        });
 
         // At the moment, in runtime:
         Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);

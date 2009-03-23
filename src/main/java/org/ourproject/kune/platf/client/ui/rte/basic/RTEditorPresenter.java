@@ -587,8 +587,8 @@ public class RTEditorPresenter implements RTEditor {
         img.setToolTip(i18n.t("Insert Image"));
         img.setAddCondition(canBeExtended);
 
-        ActionToolbarButtonDescriptor<Object> createLink = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
-                new Listener0() {
+        ActionToolbarButtonDescriptor<Object> createOrEditLink = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                sndbar, new Listener0() {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
@@ -610,10 +610,10 @@ public class RTEditorPresenter implements RTEditor {
                         });
                     }
                 });
-        createLink.setIconCls(getCssName(imgResources.link()));
-        createLink.setToolTip(i18n.t("Create Link"));
-        createLink.setShortcut(new ShortcutDescriptor(true, 'K'));
-        createLink.setAddCondition(canBeExtended);
+        createOrEditLink.setIconCls(getCssName(imgResources.link()));
+        createOrEditLink.setToolTip(i18n.t("Create or Edit Link"));
+        createOrEditLink.setShortcut(new ShortcutDescriptor(true, 'K'));
+        createOrEditLink.setAddCondition(canBeExtended);
 
         ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbar,
                 new Listener0() {
@@ -784,7 +784,7 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(removeFormatBtn));
         actions.add(withNoItem(hrButton));
         actions.add(withNoItem(img));
-        actions.add(withNoItem(createLink));
+        actions.add(withNoItem(createOrEditLink));
         actions.add(withNoItem(removeLink));
         actions.add(withNoItem(insertTableBtn));
         actions.add(withNoItem(insertTable));
@@ -794,7 +794,7 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(hr));
         actions.add(withNoItem(undoBtn));
         actions.add(withNoItem(redoBtn));
-        actions.add(withNoItem(devInfo));
+        // actions.add(withNoItem(devInfo));
 
         for (String fontName : this.fontNames) {
             ActionToolbarMenuDescriptor<Object> fontNameAction = createFontNameAction(canBeBasic, fontName);

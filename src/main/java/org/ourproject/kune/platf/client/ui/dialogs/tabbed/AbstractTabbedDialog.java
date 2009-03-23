@@ -30,8 +30,6 @@ public interface AbstractTabbedDialog {
 
     void addTab(View view);
 
-    void insertTab(int index, View view);
-
     void show();
 
 }

@@ -12,6 +12,7 @@ import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.Checkbox;
+import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.event.FormPanelListenerAdapter;
 
@@ -83,10 +84,16 @@ public class InsertLinkAbstractPanel extends DefaultForm {
             }
         });
 
+        FieldSet advanced = new FieldSet(Resources.i18n.t("More options"));
+        advanced.setCollapsible(true);
+        advanced.setCollapsed(true);
+        advanced.setAutoHeight(true);
+
+        advanced.add(onOverField);
+        advanced.add(sameWindow);
         add(hrefField);
         add(textField);
-        add(onOverField);
-        add(sameWindow);
+        add(advanced);
     }
 
     public String getHref() {
