@@ -88,7 +88,11 @@ public class InsertLinkExtPanel extends InsertLinkAbstractPanel implements Inser
         if (href != null && !href.equals("")) {
             String hrefValue = hrefField.getRawValue();
             if (hrefValue != null && hrefValue.length() == 0) {
-                hrefField.setValue(href);
+                if (href.startsWith("mailto")) {
+                    hrefField.reset();
+                } else {
+                    hrefField.setValue(href);
+                }
             }
         }
     }

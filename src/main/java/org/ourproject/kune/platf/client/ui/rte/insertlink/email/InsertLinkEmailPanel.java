@@ -43,8 +43,11 @@ public class InsertLinkEmailPanel extends InsertLinkAbstractPanel implements Ins
     @Override
     protected void updateValues(LinkInfo linkInfo) {
         super.updateValues(linkInfo);
-        if (!linkInfo.getHref().startsWith("mailto")) {
+        String href = linkInfo.getHref();
+        if (!href.startsWith("mailto")) {
             hrefField.reset();
+        } else {
+            hrefField.setValue(href.replaceFirst("mailto:\\/\\/", ""));
         }
     }
 }

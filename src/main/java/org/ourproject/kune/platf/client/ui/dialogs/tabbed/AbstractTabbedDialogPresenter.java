@@ -22,9 +22,13 @@ package org.ourproject.kune.platf.client.ui.dialogs.tabbed;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
-public abstract class AbstractTabbedDialogPresenter {
+public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDialog {
 
     private AbstractTabbedDialogView view;
+
+    public void activateTab(int index) {
+        view.activateTab(index);
+    }
 
     public void addTab(View tab) {
         view.addTab(tab);

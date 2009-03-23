@@ -36,7 +36,7 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
-public abstract class AbstractTabbedDialogPanel {
+public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogView {
     private BasicDialog dialog;
     private final String dialogId;
     private TabPanel tabPanel;
@@ -65,6 +65,11 @@ public abstract class AbstractTabbedDialogPanel {
         this.images = images;
         this.errorLabelId = errorLabelId;
         buttons = new ArrayList<Button>();
+    }
+
+    public void activateTab(int index) {
+        createDialogIfNecessary();
+        tabPanel.activate(index);
     }
 
     /**

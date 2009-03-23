@@ -28,6 +28,8 @@ public interface AbstractTabbedDialog {
 
     public void setErrorMessage(String message, Level level);
 
+    void activateTab(int index);
+
     void addTab(View view);
 
     void show();

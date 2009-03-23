@@ -603,9 +603,18 @@ public class RTEditorPresenter implements RTEditor {
                                         }
                                     };
                                 }
-                                insertElement.setLinkInfo(view.getLinkInfoIfHref());
+                                LinkInfo linkInfo = view.getLinkInfoIfHref();
+                                insertElement.setLinkInfo(linkInfo);
                                 insertElement.setOnCreateLink(insertLinkListener);
                                 insertElement.show();
+                                String href = linkInfo.getHref();
+                                if (href.length() > 0) {
+                                    if (href.startsWith("mailto")) {
+                                        insertElement.activateTab(2);
+                                    } else {
+                                        insertElement.activateTab(1);
+                                    }
+                                }
                             }
                         });
                     }

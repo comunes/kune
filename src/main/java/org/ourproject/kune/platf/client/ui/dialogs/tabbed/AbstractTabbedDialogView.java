@@ -24,6 +24,8 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 public interface AbstractTabbedDialogView extends View {
 
+    void activateTab(int index);
+
     void addTab(View tab);
 
     void createAndShow();
