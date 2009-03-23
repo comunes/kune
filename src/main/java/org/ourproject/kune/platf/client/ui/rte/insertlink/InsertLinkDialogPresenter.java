@@ -21,27 +21,53 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 
-import com.calclab.suco.client.events.Listener2;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public class InsertLinkDialogPresenter extends AbstractTabbedDialogPresenter implements InsertLinkDialog {
 
-    private Listener2<String, String> onCreateListener;
+    private Listener<LinkInfo> onCreateListener;
+    private LinkInfo linkInfo;
+    private Listener0 onInsertLinkPressed;
 
     public InsertLinkDialogPresenter() {
     }
 
-    public void fireOnCreateLink(String name, String link) {
-        onCreateListener.onEvent(name, link);
+    public void fireOnInsertLink(LinkInfo linkInfo) {
+        onCreateListener.onEvent(linkInfo);
         super.hide();
     }
 
-    public void fireOnInsertHtml(String name, String link) {
-        onCreateListener.onEvent(name, link);
+    public LinkInfo getLinkInfo() {
+        return linkInfo;
+    }
+
+    public void onCancel() {
         super.hide();
     }
 
-    public void setOnCreateLink(final Listener2<String, String> listener) {
+    public void setLinkInfo(LinkInfo linkInfo) {
+        this.linkInfo = linkInfo;
+    }
+
+    public void setLinkText(String text) {
+        linkInfo.setText(text);
+    }
+
+    public void setLinkTitle(String title) {
+        linkInfo.setTitle(title);
+    }
+
+    public void setOnCreateLink(final Listener<LinkInfo> listener) {
         this.onCreateListener = listener;
+    }
+
+    public void setOnInsertLinkPressed(Listener0 onInsertLinkPressed) {
+        this.onInsertLinkPressed = onInsertLinkPressed;
+    }
+
+    protected void onInsert() {
+        onInsertLinkPressed.onEvent();
     }
 
 }

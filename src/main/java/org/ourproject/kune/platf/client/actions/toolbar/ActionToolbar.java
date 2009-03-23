@@ -21,7 +21,6 @@ package org.ourproject.kune.platf.client.actions.toolbar;
 
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 
 public interface ActionToolbar<T> {
@@ -52,7 +51,7 @@ public interface ActionToolbar<T> {
 
     void setNormalStyle();
 
-    void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip, String newTitle);
+    void setParentMenuTitle(ActionToolbarPosition position, String origTitle, String origTooltip, String newTitle);
 
     void setPushButtonPressed(ActionDescriptor<T> action, boolean pressed);
 

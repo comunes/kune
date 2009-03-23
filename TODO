@@ -22,7 +22,6 @@ TODO-list for kune -*- mode: org; -*-
      <a href="http://example.com">s^amp^le</a>   --- Parse and edit
      <a href="http://example.com">s^a<em>kk</em>mp^le</a>   --- Parse, get contains and edit
      ^some text <a href="http://example.com">samp^le</a>   --- new link with get inner content?
-**** with different menus (File/Blog ...)
 **** bidi support
 **** images (local/remote) with preview
 **** youtube videos/podcasts
@@ -113,6 +112,12 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** vjrj <v> shortcuts enhacement
+*** Clarify the keycodes vs utf8 chars Shortcut definition (Function keys and so on...)
+*** shortcuts in tool actions no registered in GlobalShorcuts
+*** Links:
+    http://www.quirksmode.org/js/keys.html
+    http://www.cambiaresearch.com/c4/702b8cd1-e5b0-42e6-83ac-25f0306e3e25/Javascript-Char-Codes-Key-Codes.aspx
 ** TODO <s> tag UI refactorization
    Think about wikipedia suggestions:
    http://www.mediawiki.org/wiki/API
@@ -424,6 +429,8 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    http://creativecommons.org/license/zero/
 ** TODO <v> Revise use the HP and VP in gwt code
    http://groups.google.com/group/Google-Web-Toolkit/browse_frm/thread/5d01cd806d93b94e/2909d30d1b2ddfb7?lnk=gst&q=GWT+%2B+FlowPanel+%2B+CSS+#2909d30d1b2ddfb7
+** TODO <v> captcha in anonymous comments/edits 
+   http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/99c259aad06406c6?pli=1
 * LONG-TERM
 ** <s> integrate some blog/wiki converter:
    http://code.google.com/p/google-blog-converters-appengine/

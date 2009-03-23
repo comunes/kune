@@ -8,7 +8,7 @@
   <inherits name="com.google.gwt.libideas.ImmutableResources" />
   <inherits name="com.google.gwt.libideas.StyleInjector" />
 
-  <inherits name="com.xpn.xwiki.wysiwyg.Wysiwyg" />
+  <inherits name="org.xwiki.gwt.dom.DOM" />
 
   <public path="public" />
 

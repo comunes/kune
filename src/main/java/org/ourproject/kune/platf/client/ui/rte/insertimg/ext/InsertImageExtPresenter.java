@@ -11,7 +11,7 @@ public class InsertImageExtPresenter implements InsertImageExt {
     }
 
     public void init(InsertImageExtView view) {
-        insertImageDialog.addOptionTab(view);
+        insertImageDialog.addTab(view);
     }
 
     public void onInsert() {

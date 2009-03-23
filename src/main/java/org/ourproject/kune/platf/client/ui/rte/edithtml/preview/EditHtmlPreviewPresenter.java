@@ -22,6 +22,6 @@ public class EditHtmlPreviewPresenter implements EditHtmlPreview {
 
     public void init(EditHtmlPreviewView view) {
         this.view = view;
-        editHtml.addOptionTab(view);
+        editHtml.addTab(view);
     }
 }

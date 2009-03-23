@@ -22,5 +22,4 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink;
 public interface InsertLinkAbstract {
 
     void reset();
-
 }

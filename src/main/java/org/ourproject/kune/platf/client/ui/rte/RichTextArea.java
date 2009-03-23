@@ -16,6 +16,7 @@
 package org.ourproject.kune.platf.client.ui.rte;
 
 import org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl;
+import org.xwiki.gwt.dom.client.Document;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.IFrameElement;
@@ -26,7 +27,6 @@ import com.google.gwt.user.client.ui.HasHTML;
 import com.google.gwt.user.client.ui.MouseListener;
 import com.google.gwt.user.client.ui.MouseListenerCollection;
 import com.google.gwt.user.client.ui.SourcesMouseEvents;
-import com.xpn.xwiki.wysiwyg.client.dom.Document;
 
 /**
  * A rich text editor that allows complex styling and formatting.

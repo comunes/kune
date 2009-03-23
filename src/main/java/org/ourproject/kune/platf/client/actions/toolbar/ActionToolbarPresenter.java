@@ -110,9 +110,8 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         view.setNormalStyle();
     }
 
-    public void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip,
-            String newTitle) {
-        view.setParentMenuTitle(action, origTitle, origTooltip, newTitle);
+    public void setParentMenuTitle(ActionToolbarPosition position, String origTitle, String origTooltip, String newTitle) {
+        view.setParentMenuTitle(position, origTitle, origTooltip, newTitle);
     }
 
     public void setPushButtonPressed(ActionDescriptor<T> action, boolean pressed) {

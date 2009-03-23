@@ -1,9 +1,9 @@
 package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.DOM;
 
 public class LinkInfo {
-
     private static final String HREF = "href";
     // private static final String TITLE = "title";
     private static final String TARGET = "target";
@@ -15,17 +15,55 @@ public class LinkInfo {
                 && target.equals(_BLANK));
     }
 
+    public static LinkInfo parse(org.xwiki.gwt.dom.client.Element element) {
+        String target = element.getAttribute(TARGET);
+        return new LinkInfo(element.getInnerText(), element.getTitle(), element.getAttribute(HREF), target != null
+                && target.equals(_BLANK));
+    }
+
     private String text;
     private String title;
-    private String url;
+    private String href;
+    private String target;
 
-    private boolean inNewWindow;
+    public LinkInfo(String text) {
+        this(text, null, "", false);
+    }
 
-    public LinkInfo(String text, String title, String url, boolean inNewWindow) {
+    public LinkInfo(String text, String href) {
         this.text = text;
+        this.href = href;
+    }
+
+    public LinkInfo(String text, String title, String href, boolean inNewWindow) {
+        this.text = text;
+        this.href = href;
         this.title = title;
-        this.url = url;
-        this.inNewWindow = inNewWindow;
+        if (inNewWindow) {
+            this.setTarget(_BLANK);
+        }
+    }
+
+    public Element getElement() {
+        Element anchor = DOM.createAnchor();
+        com.google.gwt.user.client.Element element = (com.google.gwt.user.client.Element) anchor;
+        DOM.setElementProperty(element, "href", href);
+        if (getTarget() != null) {
+            DOM.setElementProperty(element, TARGET, getTarget());
+        }
+        if (title != null) {
+            DOM.setElementAttribute(element, "title", title);
+        }
+        DOM.setInnerText(element, text);
+        return anchor;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public String getTarget() {
+        return target;
     }
 
     public String getText() {
@@ -36,16 +74,20 @@ public class LinkInfo {
         return title;
     }
 
-    public String getUrl() {
-        return url;
+    public boolean inSameWindow() {
+        if (target != null) {
+            return target.equals(_BLANK);
+        } else {
+            return false;
+        }
     }
 
-    public boolean isInNewWindow() {
-        return inNewWindow;
+    public void setHref(String href) {
+        this.href = href;
     }
 
-    public void setInNewWindow(boolean inNewWindow) {
-        this.inNewWindow = inNewWindow;
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     public void setText(String text) {
@@ -56,8 +98,10 @@ public class LinkInfo {
         this.title = title;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    @Override
+    public String toString() {
+        Element anchor = getElement();
+        return anchor.getString();
     }
 
 }

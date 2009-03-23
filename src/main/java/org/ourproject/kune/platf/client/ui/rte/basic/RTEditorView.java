@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.ui.rte.basic;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 
 public interface RTEditorView extends View {
 
@@ -25,6 +26,12 @@ public interface RTEditorView extends View {
     void focus();
 
     String getHTML();
+
+    LinkInfo getLinkInfoIfHref();
+
+    void getRangeInfo();
+
+    String getSelectionText();
 
     String getText();
 

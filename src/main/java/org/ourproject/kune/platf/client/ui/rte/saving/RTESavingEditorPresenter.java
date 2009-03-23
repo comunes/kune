@@ -18,8 +18,7 @@ import com.calclab.suco.client.events.Listener0;
 
 public class RTESavingEditorPresenter implements RTESavingEditor {
 
-    @Deprecated
-    public static final String FILE_MENU_OPTION = "File";
+    public static final String FILE_DEF_MENU_OPTION = "File";
     public static final int AUTOSAVE_AFTER_FAILS_IN_MILLISECONS = 20000;
     public static final int AUTOSAVE_IN_MILLISECONDS = 10000;
 
@@ -190,7 +189,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         ActionToolbarMenuDescriptor<Object> save = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
                 RTEditor.topbar, onPerformSaveCall);
         save.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
-        save.setParentMenuTitle(i18n.t(FILE_MENU_OPTION));
+        save.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
         save.setTextDescription(i18n.t("Save") + (ctrl_S.toString()));
         save.setPosition(0);
 
@@ -200,7 +199,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
                         onCancel();
                     }
                 });
-        close.setParentMenuTitle(i18n.t(FILE_MENU_OPTION));
+        close.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
         close.setTextDescription(i18n.t("Close"));
 
         Listener0 onPerformSaveAndCloseCall = new Listener0() {
@@ -215,7 +214,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         };
         ActionToolbarMenuDescriptor<Object> saveclose = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
                 RTEditor.topbar, onPerformSaveAndCloseCall);
-        saveclose.setParentMenuTitle(i18n.t(FILE_MENU_OPTION));
+        saveclose.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
         saveclose.setTextDescription(i18n.t("Save & Close"));
 
         ActionToolbarButtonDescriptor<Object> saveCloseBtn = new ActionToolbarButtonDescriptor<Object>(

@@ -23,12 +23,7 @@ import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPresenter;
 
-public class InsertLinkExtPresenter extends InsertLinkAbstractPresenter implements
-        InsertLinkExt {
-
-    interface Action {
-        void onValid(String url);
-    }
+public class InsertLinkExtPresenter extends InsertLinkAbstractPresenter implements InsertLinkExt {
 
     private InsertLinkExtView view;
 
@@ -39,41 +34,33 @@ public class InsertLinkExtPresenter extends InsertLinkAbstractPresenter implemen
     public void init(InsertLinkExtView view) {
         super.init(view);
         this.view = view;
+        // editorInsertDialog.insertTab(0, view);
     }
 
-    public void onInsert() {
-        doActionIfValid(new Action() {
-            public void onValid(String url) {
-                onInsert("", url);
-            }
-        });
-    }
-
-    public void onPreview() {
-        doActionIfValid(new Action() {
-            public void onValid(String url) {
-                view.setPreviewUrl(url);
-            }
-        });
-    }
-
-    private void doActionIfValid(Action action) {
+    @Override
+    public boolean isValid() {
         String url = view.getUrl();
         if (url.matches(TextUtils.URL_REGEXP)) {
-            action.onValid(url);
+            return true;
         } else {
             if (!url.startsWith("http://")) {
                 url = "http://" + url;
                 if (url.matches(TextUtils.URL_REGEXP)) {
                     view.setUrl(url);
-                    action.onValid(url);
+                    return true;
                 } else {
-                    view.isValid();
+                    return view.isValid();
                 }
             } else {
                 // Seems is not valid
-                view.isValid();
+                return view.isValid();
             }
+        }
+    }
+
+    public void onPreview() {
+        if (isValid()) {
+            view.setPreviewUrl(view.getUrl());
         }
     }
 }

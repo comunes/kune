@@ -21,11 +21,13 @@ package org.ourproject.kune.platf.client.ui.dialogs;
 
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.PaddedPanel;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Label;
+import com.gwtext.client.widgets.form.event.FormPanelListener;
 
 public class DefaultForm {
 
@@ -81,6 +83,10 @@ public class DefaultForm {
         form.addButton(button);
     }
 
+    public void addListener(FormPanelListener listener) {
+        form.addListener(listener);
+    }
+
     public void addStyleName(final String cls) {
         form.addStyleName(cls);
     }
@@ -91,6 +97,10 @@ public class DefaultForm {
 
     public FormPanel getFormPanel() {
         return form;
+    }
+
+    public void insert(int index, Component component) {
+        form.insert(index, component);
     }
 
     public boolean isValid() {

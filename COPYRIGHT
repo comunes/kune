@@ -109,7 +109,7 @@ ext-gwt library:
    Copyright: under GNU Lesser General Public License
    http://www.gnu.org/licenses/lgpl.html
 
-dom region and diff libraries:
+dom region library:
    XWiki Platform
    http://www.xwiki.org/
    Copyright: under GNU Lesser General Public License

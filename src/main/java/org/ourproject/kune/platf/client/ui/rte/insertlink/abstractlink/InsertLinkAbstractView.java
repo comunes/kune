@@ -23,6 +23,15 @@ import org.ourproject.kune.platf.client.View;
 
 public interface InsertLinkAbstractView extends View {
 
-    void reset();
+    String getHref();
 
+    String getText();
+
+    String getTitle();
+
+    boolean inSameWindow();
+
+    boolean isValid();
+
+    void reset();
 }

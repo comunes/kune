@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 public interface EntityOptions extends AbstractTabbedDialog {
 
-    public void addOptionTab(View tab);
+    public void addTab(View tab);
 
     public View getView();
 

@@ -17,6 +17,6 @@ public class InsertSpecialAsianCharPanel extends AbstractInsertCharPanel impleme
     public InsertSpecialAsianCharPanel(InsertSpecialCharDialog insertSpecialCharDialog, I18nTranslationService i18n) {
         super(insertSpecialCharDialog, i18n.t("Asian characters"), i18n.t(InsertSpecialCharDialog.DEF_LABEL),
                 SPECIAL_CHARS, 7, 20);
-        insertSpecialCharDialog.addOptionTab(this);
+        insertSpecialCharDialog.addTab(this);
     }
 }

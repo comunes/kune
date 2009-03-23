@@ -24,14 +24,15 @@ import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
-import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.libideas.resources.client.ImageResource;
 
@@ -71,7 +72,7 @@ public class RTEditorPresenter implements RTEditor {
     private final Provider<InsertImageDialog> insertImageDialog;
     private final Provider<InsertTableDialog> insertTableDialog;
     private Listener<String> insertTableListener;
-    private Listener2<String, String> insertLinkListener;
+    private Listener<LinkInfo> insertLinkListener;
     private Listener<String> updateHtmlListener;
     private ActionToolbarButtonDescriptor<Object> insertTableBtn;
     private final Provider<InsertSpecialCharDialog> insertSpecialCharDialog;
@@ -592,13 +593,17 @@ public class RTEditorPresenter implements RTEditor {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
                                 if (insertLinkListener == null) {
-                                    insertLinkListener = new Listener2<String, String>() {
-                                        public void onEvent(String name, String url) {
-                                            view.createLink(url);
+                                    insertLinkListener = new Listener<LinkInfo>() {
+                                        public void onEvent(LinkInfo linkInfo) {
+                                            String link = linkInfo.toString();
+                                            Log.debug("Link: " + link);
+                                            view.focus();
+                                            view.insertHtml(link);
                                             fireOnEdit();
                                         }
                                     };
                                 }
+                                insertElement.setLinkInfo(view.getLinkInfoIfHref());
                                 insertElement.setOnCreateLink(insertLinkListener);
                                 insertElement.show();
                             }
@@ -742,17 +747,7 @@ public class RTEditorPresenter implements RTEditor {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
-                                // Selection selection =
-                                // view.getDocument().getSelection();
-                                // String info = "range count: " +
-                                // selection.getRangeCount() +
-                                // "<br/>focus offset: "
-                                // + selection.getFocusOffset() +
-                                // "<br/>anchor offset:"
-                                // + selection.getAnchorOffset() +
-                                // "<br/>range 0 as html: "
-                                // + selection.getRangeAt(0).toHTML();
-                                // NotifyUser.info(info);
+                                view.getRangeInfo();
                             }
                         });
                     }
@@ -799,7 +794,7 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(hr));
         actions.add(withNoItem(undoBtn));
         actions.add(withNoItem(redoBtn));
-        // actions.add(withNoItem(devInfo));
+        actions.add(withNoItem(devInfo));
 
         for (String fontName : this.fontNames) {
             ActionToolbarMenuDescriptor<Object> fontNameAction = createFontNameAction(canBeBasic, fontName);

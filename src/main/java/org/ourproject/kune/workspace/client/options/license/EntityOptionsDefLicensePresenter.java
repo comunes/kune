@@ -59,7 +59,7 @@ public class EntityOptionsDefLicensePresenter implements EntityOptionsDefLicense
 
     public void init(EntityOptionsDefLicenseView view) {
         this.view = view;
-        entityOptions.addOptionTab(view);
+        entityOptions.addTab(view);
         setState();
     }
 

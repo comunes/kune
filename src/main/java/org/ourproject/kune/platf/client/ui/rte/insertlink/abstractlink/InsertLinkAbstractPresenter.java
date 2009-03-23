@@ -21,14 +21,33 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
+
+import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.events.Listener0;
 
 public class InsertLinkAbstractPresenter implements InsertLinkAbstract {
 
-    private InsertLinkAbstractView view;
-    private final InsertLinkDialog editorInsertElement;
+    protected InsertLinkAbstractView view;
+    protected final InsertLinkDialog editorInsertDialog;
+    private final Listener0 onInsertLinkPressed;
 
-    public InsertLinkAbstractPresenter(InsertLinkDialog editorInsertElement) {
-        this.editorInsertElement = editorInsertElement;
+    public InsertLinkAbstractPresenter(final InsertLinkDialog editorInsertDialog) {
+        this.editorInsertDialog = editorInsertDialog;
+        onInsertLinkPressed = new Listener0() {
+            public void onEvent() {
+                if (isValid()) {
+                    LinkInfo linkInfo = updateLinkInfo();
+                    editorInsertDialog.fireOnInsertLink(linkInfo);
+                } else {
+                    Log.debug("Form in InsertLink not valid");
+                }
+            }
+        };
+    }
+
+    public LinkInfo getLinkInfo() {
+        return editorInsertDialog.getLinkInfo();
     }
 
     public View getView() {
@@ -37,15 +56,35 @@ public class InsertLinkAbstractPresenter implements InsertLinkAbstract {
 
     public void init(InsertLinkAbstractView view) {
         this.view = view;
-        editorInsertElement.addOptionTab(view);
+        editorInsertDialog.addTab(view);
     }
 
-    public void onInsert(String name, String link) {
-        editorInsertElement.fireOnCreateLink(name, link);
+    public boolean isValid() {
+        return view.isValid();
+    }
+
+    public void onActivate() {
+        editorInsertDialog.setOnInsertLinkPressed(onInsertLinkPressed);
+    }
+
+    public void onInsert(LinkInfo linkInfo) {
+        editorInsertDialog.fireOnInsertLink(linkInfo);
         reset();
+    }
+
+    public void onOverFieldChanged(String title) {
+        editorInsertDialog.setLinkTitle(title);
+    }
+
+    public void onTextFieldChanged(String text) {
+        editorInsertDialog.setLinkText(text);
     }
 
     public void reset() {
         view.reset();
+    }
+
+    protected LinkInfo updateLinkInfo() {
+        return new LinkInfo(view.getText(), view.getTitle(), view.getHref(), view.inSameWindow());
     }
 }

@@ -228,7 +228,8 @@ public abstract class AbstractFoldableContentActions {
         contextActionRegistry.addAction(downloadCtx, typeUploadedfile);
     }
 
-    protected ActionToolbarButtonDescriptor<StateToken> createEditAction(String... registerInTypes) {
+    protected ActionToolbarButtonDescriptor<StateToken> createEditAction(final String fileMenuTitle,
+            String... registerInTypes) {
         ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
@@ -280,6 +281,7 @@ public abstract class AbstractFoldableContentActions {
                                         });
                                     }
                                 });
+                                editor.setFileMenuTitle(fileMenuTitle);
                                 NotifyUser.hideProgress();
                             }
                         });

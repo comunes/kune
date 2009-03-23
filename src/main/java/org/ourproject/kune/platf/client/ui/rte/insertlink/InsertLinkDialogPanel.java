@@ -24,16 +24,19 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 
 import com.calclab.suco.client.events.Listener0;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 public class InsertLinkDialogPanel extends AbstractTabbedDialogPanel implements InsertLinkDialogView {
     public static final String TEXT_EDT_INSERT_DIALOG = "k-ted-iep-dialog";
     public static final String TEXT_EDT_INSERT_DIALOG_ERROR_ID = "k-ted-iep-dialog-err";
     private final InsertLinkGroup textEditorInsertElementGroup;
 
-    public InsertLinkDialogPanel(final InsertLinkDialogPresenter presenter, Images images,
-            I18nTranslationService i18n, final InsertLinkGroup textEditorInsertElementGroup) {
+    public InsertLinkDialogPanel(final InsertLinkDialogPresenter presenter, Images images, I18nTranslationService i18n,
+            final InsertLinkGroup textEditorInsertElementGroup) {
         super(TEXT_EDT_INSERT_DIALOG, i18n.tWithNT("Insert a link",
-                "Option in a text editor to insert links and other elements"), 380, HEIGHT + 90, 380, HEIGHT + 90,
+                "Option in a text editor to insert links and other elements"), 380, HEIGHT + 100, 380, HEIGHT + 100,
                 true, images, TEXT_EDT_INSERT_DIALOG_ERROR_ID);
         super.setIconCls("k-link-icon");
         this.textEditorInsertElementGroup = textEditorInsertElementGroup;
@@ -42,6 +45,25 @@ public class InsertLinkDialogPanel extends AbstractTabbedDialogPanel implements 
                 textEditorInsertElementGroup.resetAll();
             }
         });
+
+        Button insert = new Button(i18n.t("Insert"));
+        insert.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
+                presenter.onInsert();
+            }
+        });
+
+        Button cancel = new Button(i18n.t("Cancel"));
+        cancel.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
+                presenter.onCancel();
+            }
+        });
+        addButton(insert);
+        addButton(cancel);
+
     }
 
     @Override

@@ -20,6 +20,6 @@ public class InsertSpecialOccCharPanel extends AbstractInsertCharPanel implement
     public InsertSpecialOccCharPanel(InsertSpecialCharDialog insertSpecialCharDialog, I18nTranslationService i18n) {
         super(insertSpecialCharDialog, i18n.t("Special characters"), i18n.t(InsertSpecialCharDialog.DEF_LABEL),
                 SPECIAL_CHARS, 11, 20);
-        insertSpecialCharDialog.addOptionTab(this);
+        insertSpecialCharDialog.addTab(this);
     }
 }

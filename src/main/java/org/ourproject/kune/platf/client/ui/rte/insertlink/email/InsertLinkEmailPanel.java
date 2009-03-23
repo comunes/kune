@@ -20,48 +20,31 @@
 package org.ourproject.kune.platf.client.ui.rte.insertlink.email;
 
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialogView;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPanel;
 
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
-import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.VType;
 
-public class InsertLinkEmailPanel extends DefaultForm implements InsertLinkEmailView {
+public class InsertLinkEmailPanel extends InsertLinkAbstractPanel implements InsertLinkEmailView {
 
-    public static final String EMAIL_FIELD = "k-teilep-email-field";
-    private final TextField emailField;
+    public InsertLinkEmailPanel(final InsertLinkEmailPresenter presenter, I18nTranslationService i18n) {
+        super(i18n.t("Email link"), presenter);
 
-    public InsertLinkEmailPanel(final InsertLinkEmailPresenter presenter,
-            I18nTranslationService i18n) {
-        super(i18n.t("Email link"));
-        super.setAutoWidth(true);
-        super.setHeight(InsertLinkDialogView.HEIGHT);
-        emailField = new TextField();
-        emailField.setTabIndex(4);
-        emailField.setFieldLabel(i18n.t("Email"));
-        emailField.setName(EMAIL_FIELD);
-        emailField.setVtype(VType.EMAIL);
-        emailField.setWidth(DEF_MEDIUM_FIELD_WIDTH);
-        emailField.setAllowBlank(false);
-        emailField.setValidationEvent(false);
-        emailField.setId(EMAIL_FIELD);
-        add(emailField);
-        Button insert = new Button(i18n.t("Insert"));
-        insert.addListener(new ButtonListenerAdapter() {
-            @Override
-            public void onClick(Button button, EventObject e) {
-                if (getFormPanel().getForm().isValid()) {
-                    presenter.onInsert("", "mailto://" + emailField.getRawValue());
-                }
-            }
-        });
-        addButton(insert);
+        hrefField.setFieldLabel(i18n.t("Email"));
+        hrefField.setVtype(VType.EMAIL);
+
+        sameWindow.setVisible(false);
     }
 
     public void clear() {
         super.reset();
+    }
+
+    @Override
+    protected void updateValues(LinkInfo linkInfo) {
+        super.updateValues(linkInfo);
+        if (!linkInfo.getHref().startsWith("mailto")) {
+            hrefField.reset();
+        }
     }
 }

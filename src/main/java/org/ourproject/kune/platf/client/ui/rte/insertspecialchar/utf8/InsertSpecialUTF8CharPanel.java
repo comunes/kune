@@ -79,7 +79,7 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
         form.addButton(insert);
 
         super.add(form.getFormPanel());
-        charDialog.addOptionTab(this);
+        charDialog.addTab(this);
     }
 
     private char getCharEntered() {

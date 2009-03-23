@@ -26,8 +26,8 @@ public abstract class AbstractTabbedDialogPresenter {
 
     private AbstractTabbedDialogView view;
 
-    public void addOptionTab(View tab) {
-        view.addOptionTab(tab);
+    public void addTab(View tab) {
+        view.addTab(tab);
     }
 
     public View getView() {
@@ -44,6 +44,10 @@ public abstract class AbstractTabbedDialogPresenter {
 
     public void init(AbstractTabbedDialogView view) {
         this.view = view;
+    }
+
+    public void insertTab(int index, View tab) {
+        view.insertTab(index, tab);
     }
 
     public void setErrorMessage(String message, Level level) {

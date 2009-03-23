@@ -301,6 +301,27 @@ public class PlatformModule extends AbstractModule {
             }
         });
 
+        register(InsertLinkGroup.class, new Factory<InsertLinkExt>(InsertLinkExt.class) {
+            @Override
+            public InsertLinkExt create() {
+                final InsertLinkExtPresenter presenter = new InsertLinkExtPresenter($(InsertLinkDialog.class));
+                final InsertLinkExtView panel = new InsertLinkExtPanel(presenter, $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(InsertLinkGroup.class, new Factory<InsertLinkEmail>(InsertLinkEmail.class) {;
+
+            @Override
+            public InsertLinkEmail create() {
+                final InsertLinkEmailPresenter presenter = new InsertLinkEmailPresenter($(InsertLinkDialog.class));
+                final InsertLinkEmailPanel panel = new InsertLinkEmailPanel(presenter, $(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
         register(NoDecoration.class, new Factory<RTEditor>(RTEditor.class) {
             @Override
             public RTEditor create() {
@@ -408,26 +429,6 @@ public class PlatformModule extends AbstractModule {
                 final InsertLinkDialogPresenter presenter = new InsertLinkDialogPresenter();
                 final InsertLinkDialogPanel panel = new InsertLinkDialogPanel(presenter, $(Images.class),
                         $(I18nTranslationService.class), $(InsertLinkGroup.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
-        register(InsertLinkGroup.class, new Factory<InsertLinkExt>(InsertLinkExt.class) {
-            @Override
-            public InsertLinkExt create() {
-                final InsertLinkExtPresenter presenter = new InsertLinkExtPresenter($(InsertLinkDialog.class));
-                final InsertLinkExtView panel = new InsertLinkExtPanel(presenter, $(I18nTranslationService.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
-        register(InsertLinkGroup.class, new Factory<InsertLinkEmail>(InsertLinkEmail.class) {
-            @Override
-            public InsertLinkEmail create() {
-                final InsertLinkEmailPresenter presenter = new InsertLinkEmailPresenter($(InsertLinkDialog.class));
-                final InsertLinkEmailPanel panel = new InsertLinkEmailPanel(presenter, $(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }

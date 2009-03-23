@@ -66,7 +66,7 @@ public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
     public void init(EntityOptionsToolsConfView view) {
         this.view = view;
         setState();
-        entityOptions.addOptionTab(view);
+        entityOptions.addTab(view);
     }
 
     public void onCheck(ToolSimpleDTO tool, boolean checked) {

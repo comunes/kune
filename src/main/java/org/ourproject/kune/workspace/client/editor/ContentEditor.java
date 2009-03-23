@@ -39,6 +39,8 @@ public class ContentEditor extends RTESavingEditorPresenter {
     private final SiteSignOutLink siteSignOutLink;
     private final I18nTranslationService i18n;
     private final EntityTitle entityTitle;
+    private final String fileMenuTitle;
+    private final AbstractToolbar sndbar;
 
     public ContentEditor(RTEditor editor, boolean autoSave, final I18nTranslationService i18n,
             StateManager stateManager, SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
@@ -50,6 +52,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
         this.entityTitle = entityTitle;
         super.init(view);
         this.ws = ws;
+        fileMenuTitle = i18n.t(RTESavingEditorPresenter.FILE_DEF_MENU_OPTION);
         Window.addWindowCloseListener(new WindowCloseListener() {
             public void onWindowClosed() {
             }
@@ -79,6 +82,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
             }
         });
         topbar = ((ActionToolbarPanel<Object>) basicEditor.getTopBar().getView()).getToolbar();
+        sndbar = ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar();
     }
 
     @Override
@@ -90,6 +94,10 @@ public class ContentEditor extends RTESavingEditorPresenter {
         super.edit(html, onSave, onEditCancelled);
         adjHeight(ws.getEntityWorkspace().getContentHeight());
         siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
+    }
+
+    public void setFileMenuTitle(String fileMenuTitleNew) {
+        basicEditor.getTopBar().setParentMenuTitle(RTEditor.topbar, fileMenuTitle, null, fileMenuTitleNew);
     }
 
     @Override
@@ -107,14 +115,13 @@ public class ContentEditor extends RTESavingEditorPresenter {
                         // basicEditor.setFocus(false);
                     }
                 });
-        rename.setParentMenuTitle(i18n.t(RTESavingEditorPresenter.FILE_MENU_OPTION));
+        rename.setParentMenuTitle(fileMenuTitle);
         rename.setShortcut(new ShortcutDescriptor(false, Keyboard.KEY_F2, i18n.tWithNT("F2", "The F2 Function key")));
         rename.setTextDescription(i18n.t("Rename"));
         basicEditor.addAction(rename);
     }
 
     private void adjHeight(final int height) {
-        AbstractToolbar sndbar = ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar();
         int barHeight = sndbar.getOffsetHeight();
         int newHeight = height - 20 - barHeight;
         // Log.debug("Sndbar height: " + barHeight + " new height: " +

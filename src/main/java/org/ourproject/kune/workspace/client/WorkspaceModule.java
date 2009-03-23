@@ -810,17 +810,6 @@ public class WorkspaceModule extends AbstractModule {
             }
         });
 
-        register(InsertLinkGroup.class, new Factory<InsertLinkLocal>(InsertLinkLocal.class) {
-            @Override
-            public InsertLinkLocal create() {
-                final InsertLinkLocalPresenter presenter = new InsertLinkLocalPresenter($(InsertLinkDialog.class));
-                final InsertLinkLocalPanel panel = new InsertLinkLocalPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
         register(Singleton.class, new Factory<LanguageSelector>(LanguageSelector.class) {
             @Override
             public LanguageSelector create() {
@@ -953,6 +942,17 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public GlobalShortcutRegister create() {
                 return new GlobalShortcutRegister($(ActionManager.class));
+            }
+        });
+
+        register(InsertLinkGroup.class, new Factory<InsertLinkLocal>(InsertLinkLocal.class) {
+            @Override
+            public InsertLinkLocal create() {
+                final InsertLinkLocalPresenter presenter = new InsertLinkLocalPresenter($(InsertLinkDialog.class));
+                final InsertLinkLocalPanel panel = new InsertLinkLocalPanel(presenter, $(WorkspaceSkeleton.class),
+                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
+                presenter.init(panel);
+                return presenter;
             }
         });
 

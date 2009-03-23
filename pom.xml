@@ -94,13 +94,11 @@
       <artifactId>jmagick</artifactId>
       <version>6.2.6-0</version>
     </dependency>
-    <!--
     <dependency>
-      <groupId>com.xpn.xwiki.platform</groupId>
-      <artifactId>xwiki-web-gwt</artifactId>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-web-gwt-dom</artifactId>
       <version>1.9-SNAPSHOT</version>
     </dependency>
-		-->
 
     <!-- xmpp -->
     <dependency>

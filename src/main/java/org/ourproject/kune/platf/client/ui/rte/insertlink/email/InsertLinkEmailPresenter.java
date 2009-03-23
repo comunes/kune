@@ -20,13 +20,24 @@
 package org.ourproject.kune.platf.client.ui.rte.insertlink.email;
 
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPresenter;
 
-public class InsertLinkEmailPresenter extends InsertLinkAbstractPresenter implements
-        InsertLinkEmail {
+public class InsertLinkEmailPresenter extends InsertLinkAbstractPresenter implements InsertLinkEmail {
+
+    private InsertLinkEmailView view;
 
     public InsertLinkEmailPresenter(InsertLinkDialog editorInsertElement) {
         super(editorInsertElement);
     }
 
+    public void init(InsertLinkEmailView view) {
+        super.init(view);
+        this.view = view;
+    }
+
+    @Override
+    protected LinkInfo updateLinkInfo() {
+        return new LinkInfo(view.getText(), view.getTitle(), "mailto://" + view.getHref(), false);
+    }
 }

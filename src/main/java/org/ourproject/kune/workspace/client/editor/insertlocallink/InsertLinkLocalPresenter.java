@@ -22,8 +22,7 @@ package org.ourproject.kune.workspace.client.editor.insertlocallink;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPresenter;
 
-public class InsertLinkLocalPresenter extends InsertLinkAbstractPresenter implements
-        InsertLinkLocal {
+public class InsertLinkLocalPresenter extends InsertLinkAbstractPresenter implements InsertLinkLocal {
 
     public InsertLinkLocalPresenter(InsertLinkDialog editorInsertElement) {
         super(editorInsertElement);

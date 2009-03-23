@@ -48,7 +48,8 @@ public class KuneEntryPoint implements EntryPoint {
         Log.setUncaughtExceptionHandler();
         GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
             public void onUncaughtException(Throwable e) {
-                Log.error(e.toString());
+                String message = e.getMessage();
+                Log.error("Caught: " + e.toString() + " " + (message != null ? message : ""), e);
             }
         });
 

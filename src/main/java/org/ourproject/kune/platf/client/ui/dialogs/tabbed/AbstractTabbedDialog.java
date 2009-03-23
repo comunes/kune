@@ -28,7 +28,9 @@ public interface AbstractTabbedDialog {
 
     public void setErrorMessage(String message, Level level);
 
-    void addOptionTab(View view);
+    void addTab(View view);
+
+    void insertTab(int index, View view);
 
     void show();
 

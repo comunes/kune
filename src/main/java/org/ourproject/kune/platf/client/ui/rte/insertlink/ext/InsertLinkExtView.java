@@ -30,4 +30,6 @@ public interface InsertLinkExtView extends InsertLinkAbstractView {
     public void setPreviewUrl(String url);
 
     public void setUrl(String url);
+
+    boolean inSameWindow();
 }

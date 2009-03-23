@@ -37,6 +37,6 @@ public class EntityOptionsPublicSpaceConfPresenter implements EntityOptionsPubli
 
     public void init(EntityOptionsPublicSpaceConfView view) {
         this.view = view;
-        entityOptions.addOptionTab(view);
+        entityOptions.addTab(view);
     }
 }

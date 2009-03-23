@@ -62,7 +62,7 @@ public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
 
     public void init(EntityOptionsLogoView view) {
         this.view = view;
-        entityOptions.addOptionTab(view);
+        entityOptions.addTab(view);
         setState();
     }
 

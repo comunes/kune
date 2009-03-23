@@ -83,14 +83,8 @@ public abstract class AbstractTabbedDialogPanel {
         }
     }
 
-    public void addOptionTab(View view) {
-        if (view instanceof Panel) {
-            addTab((Panel) view);
-        } else if (view instanceof DefaultForm) {
-            addTab(((DefaultForm) view).getFormPanel());
-        } else {
-            Log.error("Programatic error: Unexpected element added to GroupOptions");
-        }
+    public void addTab(View view) {
+        addTabPanel(castPanel(view));
         doLayoutIfNeeded();
     }
 
@@ -115,6 +109,11 @@ public abstract class AbstractTabbedDialogPanel {
         if (dialog != null) {
             messageErrorBar.hideErrorMessage();
         }
+    }
+
+    public void insertTab(int index, View view) {
+        insertTabPanel(index, castPanel(view));
+        doLayoutIfNeeded();
     }
 
     public boolean isVisible() {
@@ -163,9 +162,22 @@ public abstract class AbstractTabbedDialogPanel {
         });
     }
 
-    private void addTab(Panel newTab) {
+    private void addTabPanel(Panel newTab) {
         createDialogIfNecessary();
         tabPanel.add(newTab);
+    }
+
+    private Panel castPanel(View view) {
+        Panel panel;
+        if (view instanceof Panel) {
+            panel = (Panel) view;
+        } else if (view instanceof DefaultForm) {
+            panel = ((DefaultForm) view).getFormPanel();
+        } else {
+            panel = null;
+            Log.error("Programatic error: Unexpected element added to GroupOptions");
+        }
+        return panel;
     }
 
     private void createDialog() {
@@ -191,5 +203,10 @@ public abstract class AbstractTabbedDialogPanel {
         if (dialog == null) {
             createDialog();
         }
+    }
+
+    private void insertTabPanel(int index, Panel newTab) {
+        createDialogIfNecessary();
+        tabPanel.insert(index, newTab);
     }
 }

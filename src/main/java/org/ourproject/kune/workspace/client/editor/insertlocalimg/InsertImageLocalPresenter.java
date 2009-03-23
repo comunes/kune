@@ -11,6 +11,6 @@ public class InsertImageLocalPresenter implements InsertImageLocal {
     }
 
     public void init(InsertImageLocalView view) {
-        insertImageDialog.addOptionTab(view);
+        insertImageDialog.addTab(view);
     }
 }

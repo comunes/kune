@@ -24,7 +24,7 @@ public class EditHtmlEditorPresenter implements EditHtmlEditor, EditHtmlAgent {
 
     public void init(EditHtmlEditorView view) {
         this.view = view;
-        editHtml.addOptionTab(view);
+        editHtml.addTab(view);
     }
 
     public void setHtml(String html) {

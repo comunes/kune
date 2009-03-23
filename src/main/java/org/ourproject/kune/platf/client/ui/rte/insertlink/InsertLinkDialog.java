@@ -21,12 +21,23 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
 
-import com.calclab.suco.client.events.Listener2;
+import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 
 public interface InsertLinkDialog extends AbstractTabbedDialog {
 
-    void fireOnCreateLink(String name, String link);
+    void fireOnInsertLink(LinkInfo linkInfo);
 
-    void setOnCreateLink(Listener2<String, String> listener);
+    LinkInfo getLinkInfo();
+
+    void setLinkInfo(LinkInfo linkInfo);
+
+    void setLinkText(String text);
+
+    void setLinkTitle(String title);
+
+    void setOnCreateLink(Listener<LinkInfo> listener);
+
+    void setOnInsertLinkPressed(Listener0 onInsertLinkPressed);
 
 }

@@ -20,16 +20,19 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutRegister;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkExecutableUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
+import org.xwiki.gwt.dom.client.DocumentFragment;
+import org.xwiki.gwt.dom.client.Range;
+import org.xwiki.gwt.dom.client.Selection;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.Widget;
-import com.xpn.xwiki.wysiwyg.client.dom.DocumentFragment;
-import com.xpn.xwiki.wysiwyg.client.dom.Range;
-import com.xpn.xwiki.wysiwyg.client.dom.Selection;
 
 public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
@@ -108,9 +111,39 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         setFocus(true);
     }
 
+    public LinkInfo getLinkInfoIfHref() {
+        LinkInfo linkinfo = null;
+        org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(this);
+        if (selectedAnchor != null) {
+            Range range = getDocument().createRange();
+            range.selectNode(selectedAnchor);
+            getSelection().addRange(range);
+            linkinfo = LinkInfo.parse(selectedAnchor);
+        } else {
+            linkinfo = new LinkInfo(getSelectionText());
+        }
+        return linkinfo;
+    }
+
+    public void getRangeInfo() {
+        // Selection selection = getSelection();
+        // String info = "range count: " + selection.getRangeCount() +
+        // "<br/>focus offset: " + selection.getFocusOffset()
+        // + "<br/>anchor offset:" + selection.getAnchorOffset() +
+        // "<br/>range 0 as html: "
+        // + selection.getRangeAt(0).toHTML();
+        // NotifyUser.info(info);
+        String info = "range count: " + getFstRange().getCommonAncestorContainer().getFirstChild().getNodeName();
+        NotifyUser.info(info);
+    }
+
+    public String getSelectionText() {
+        return getFstRange().cloneContents().getInnerText();
+    }
+
     public void insertBlockquote() {
         DocumentFragment extracted = getFstRange().cloneContents();
-        delete();
+        // delete();
         insertHtml("<blockquote>" + extracted.getInnerHTML() + "</blockquote>");
         focus();
     }
@@ -160,6 +193,10 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
     public boolean isBold() {
         return basic.isBold();
+    }
+
+    public boolean isCollapsed() {
+        return getFstRange().isCollapsed();
     }
 
     public boolean isItalic() {
@@ -346,5 +383,4 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     private void updateStatus() {
         presenter.updateStatus();
     }
-
 }

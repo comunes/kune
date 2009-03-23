@@ -22,4 +22,5 @@ package org.ourproject.kune.platf.client.ui.rte.insertlink.email;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractView;
 
 public interface InsertLinkEmailView extends InsertLinkAbstractView {
+
 }

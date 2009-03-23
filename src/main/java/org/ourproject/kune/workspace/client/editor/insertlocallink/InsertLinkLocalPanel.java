@@ -22,30 +22,43 @@ package org.ourproject.kune.workspace.client.editor.insertlocallink;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialogView;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPanel;
+import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherField;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener;
 
-public class InsertLinkLocalPanel extends AbstractLiveSearcherPanel implements InsertLinkLocalView {
+public class InsertLinkLocalPanel extends InsertLinkAbstractPanel implements InsertLinkLocalView {
 
     private static final String DATA_PROXY_URL = "/kune/json/ContentJSONService/search";
 
-    public InsertLinkLocalPanel(final InsertLinkLocalPresenter presenter,
-            final WorkspaceSkeleton ws, I18nTranslationService i18n, FileDownloadUtils downloadUtils) {
-        super(i18n, TEMPLATE_TEXT_PREFIX + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
-                + TEMPLATE_TEXT_SUFFIX, DATA_PROXY_URL, new Listener<LinkDTO>() {
-            public void onEvent(LinkDTO link) {
-                // FIXME
-                presenter.onInsert("", WindowUtils.getLocation().getHref() + link.getLink());
-            }
-        });
-        super.setTitle(i18n.t("Local link"));
-        super.setFrame(true);
-        super.setHeight(InsertLinkDialogView.HEIGHT);
-        super.setPaddings(20);
+    private String href;
+
+    public InsertLinkLocalPanel(final InsertLinkLocalPresenter presenter, final WorkspaceSkeleton ws,
+            I18nTranslationService i18n, FileDownloadUtils downloadUtils) {
+        super(i18n.t("Local link"), presenter);
+
+        AbstractLiveSearcherField cb = new AbstractLiveSearcherField(i18n,
+                AbstractLiveSearcherPanel.TEMPLATE_TEXT_PREFIX
+                        + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
+                        + AbstractLiveSearcherPanel.TEMPLATE_TEXT_SUFFIX, DATA_PROXY_URL, new Listener<LinkDTO>() {
+                    public void onEvent(LinkDTO link) {
+                        href = (new StateToken(link.getLink())).getPublicUrl();
+                    }
+                });
+        cb.setLabel(i18n.t("Local content"));
+        cb.setHideLabel(false);
+        cb.setAllowBlank(false);
+        cb.setWidth(220);
+        hrefField.setVisible(false);
+        hrefField.disable();
+        super.insert(0, cb);
+    }
+
+    @Override
+    public String getHref() {
+        return href;
     }
 }

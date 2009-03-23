@@ -167,12 +167,11 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         toolbar.setNormalStyle();
     }
 
-    public void setParentMenuTitle(ActionToolbarMenuDescriptor<T> action, String origTitle, String origTooltip,
-            String newTitle) {
-        final String menuKey = genMenuKey(action.getActionPosition(), origTitle, origTooltip, null, null);
-        Menu menu = menus.get(menuKey);
-        if (menu != null) {
-            menu.setTitle(newTitle);
+    public void setParentMenuTitle(ActionToolbarPosition position, String origTitle, String origTooltip, String newTitle) {
+        final String menuKey = genMenuKey(position, origTitle, origTooltip, null, null);
+        ToolbarButton button = buttons.get(menuKey);
+        if (button != null) {
+            button.setText(newTitle);
         } else {
             Log.error("Tryng to rename a non existent menu");
         }
@@ -310,6 +309,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
             toolbarMenu.setTooltip(menuTooltip);
         }
         menus.put(menuKey, menu);
+        buttons.put(menuKey, toolbarMenu);
         add(toolbarMenu);
         return menu;
     }
@@ -343,7 +343,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuTooltip,
             final String menuSubTitle, final String actionText) {
 
-        final String basePart = "km-atp-menu-" + pos.toString().substring(0, 2) + "-" + menuTitle + "-" + menuTooltip;
+        final String basePart = "km-atp-menu-" + pos + "-" + menuTitle + "-" + menuTooltip;
         final String subMenuPart = menuSubTitle != null ? "-subm-" + menuSubTitle : "";
         final String itemPart = actionText != null ? "-item-" + actionText : "";
         return basePart + subMenuPart + itemPart;
