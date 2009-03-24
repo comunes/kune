@@ -97,7 +97,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
     }
 
     public void setFileMenuTitle(String fileMenuTitleNew) {
-        basicEditor.getTopBar().setParentMenuTitle(RTEditor.topbar, fileMenuTitle, null, fileMenuTitleNew);
+        basicEditor.getTopBar().setParentMenuTitle(RTEditor.topbarPosition, fileMenuTitle, null, fileMenuTitleNew);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
 
     private void addContentActions() {
         ActionToolbarMenuDescriptor<Object> rename = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.topbar, new Listener0() {
+                RTEditor.topbarPosition, new Listener0() {
                     public void onEvent() {
                         entityTitle.edit();
                         // basicEditor.setFocus(false);

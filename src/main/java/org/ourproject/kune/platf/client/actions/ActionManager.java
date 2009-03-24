@@ -31,7 +31,7 @@ public class ActionManager {
     public void doAction(final ActionItem<?> actionItem) {
         final ActionDescriptor<?> action = actionItem.getAction();
         final Object item = actionItem.getItem();
-        if (action.isMustBeConfirmed()) {
+        if (action.mustBeConfirmed()) {
             NotifyUser.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Listener0() {
                 public void onEvent() {
                     fire(action, item);

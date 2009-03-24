@@ -30,9 +30,6 @@ public class InsertLinkDialogPresenter extends AbstractTabbedDialogPresenter imp
     private LinkInfo linkInfo;
     private Listener0 onInsertLinkPressed;
 
-    public InsertLinkDialogPresenter() {
-    }
-
     public void fireOnInsertLink(LinkInfo linkInfo) {
         onCreateListener.onEvent(linkInfo);
         super.hide();

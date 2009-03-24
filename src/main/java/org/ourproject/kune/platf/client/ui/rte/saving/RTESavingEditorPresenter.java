@@ -179,7 +179,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
                 onDoSave();
             }
         };
-        saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.sndbar, onPerformSaveCall);
+        saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.sndbarPosition, onPerformSaveCall);
         saveBtn.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         saveBtn.setToolTip(i18n.t("Save"));
         ShortcutDescriptor ctrl_S = new ShortcutDescriptor(true, 'S');
@@ -187,14 +187,14 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         saveBtn.setPosition(0);
 
         ActionToolbarMenuDescriptor<Object> save = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.topbar, onPerformSaveCall);
+                RTEditor.topbarPosition, onPerformSaveCall);
         save.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         save.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
         save.setTextDescription(i18n.t("Save") + (ctrl_S.toString()));
         save.setPosition(0);
 
         ActionToolbarMenuDescriptor<Object> close = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.topbar, new Listener<Object>() {
+                RTEditor.topbarPosition, new Listener<Object>() {
                     public void onEvent(Object parameter) {
                         onCancel();
                     }
@@ -213,12 +213,12 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
             }
         };
         ActionToolbarMenuDescriptor<Object> saveclose = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.topbar, onPerformSaveAndCloseCall);
+                RTEditor.topbarPosition, onPerformSaveAndCloseCall);
         saveclose.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
         saveclose.setTextDescription(i18n.t("Save & Close"));
 
         ActionToolbarButtonDescriptor<Object> saveCloseBtn = new ActionToolbarButtonDescriptor<Object>(
-                AccessRolDTO.Editor, RTEditor.topbar, onPerformSaveAndCloseCall);
+                AccessRolDTO.Editor, RTEditor.topbarPosition, onPerformSaveAndCloseCall);
         // saveCloseBtn.setIconCls(RTEImgResources.SUFFIX +
         // imgResources.save().getName());
         saveCloseBtn.setTextDescription(i18n.t("Save & Close"));

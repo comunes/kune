@@ -61,7 +61,7 @@ public class ActionDescriptor<T> {
     private final Listener<T> onPerformCall;
 
     /** The on not confirmed. */
-    private final Listener<T> onNotConfirmed;
+    private Listener<T> onNotConfirmed;
 
     /** The must be authenticated. */
     private boolean mustBeAuthenticated;
@@ -139,6 +139,24 @@ public class ActionDescriptor<T> {
             final ActionEnableCondition<T> enableCondition) {
         this(accessRolDTO, onPerformCall);
         this.enableCondition = enableCondition;
+    }
+
+    public ActionDescriptor(ActionDescriptor<T> copy) {
+        this(copy.getAccessRol(), copy.getOnPerformCall());
+        setAddCondition(copy.getAddCondition());
+        setConfirmationText(copy.getConfirmationText());
+        setConfirmationTitle(copy.getConfirmationTitle());
+        setEnableCondition(copy.getEnableCondition());
+        setIconCls(copy.getIconCls());
+        setIconDescriptor(copy.getIconDescriptor());
+        setIconUrl(copy.getIconUrl());
+        setMustBeAuthenticated(copy.mustBeAuthenticated());
+        setMustBeConfirmed(copy.mustBeConfirmed());
+        setOnNotConfirmed(copy.getOnNotConfirmed());
+        setPosition(copy.getPosition());
+        setShortcut(copy.getShortcut());
+        setTextDescription(copy.getTextDescription());
+        setToolTip(copy.getToolTip());
     }
 
     /**
@@ -262,15 +280,6 @@ public class ActionDescriptor<T> {
         return shortcut != null;
     }
 
-    /**
-     * Checks if is must be confirmed.
-     * 
-     * @return true, if is must be confirmed
-     */
-    public boolean isMustBeConfirmed() {
-        return mustBeConfirmed;
-    }
-
     public boolean mustBeAdded(T item) {
         return addCondition != null ? addCondition.mustBeAdded(item) : true;
     }
@@ -282,6 +291,15 @@ public class ActionDescriptor<T> {
      */
     public boolean mustBeAuthenticated() {
         return mustBeAuthenticated;
+    }
+
+    /**
+     * Checks if is must be confirmed.
+     * 
+     * @return true, if is must be confirmed
+     */
+    public boolean mustBeConfirmed() {
+        return mustBeConfirmed;
     }
 
     public boolean mustBeEnabled(T item) {
@@ -424,4 +442,29 @@ public class ActionDescriptor<T> {
     public void setToolTip(final String toolTip) {
         this.toolTip = toolTip;
     }
+
+    private ActionAddCondition<T> getAddCondition() {
+        return addCondition;
+    }
+
+    private ActionEnableCondition<T> getEnableCondition() {
+        return enableCondition;
+    }
+
+    private Listener<T> getOnNotConfirmed() {
+        return onNotConfirmed;
+    }
+
+    private Listener<T> getOnPerformCall() {
+        return onPerformCall;
+    }
+
+    private String getTextDescription() {
+        return textDescription;
+    }
+
+    private void setOnNotConfirmed(Listener<T> onNotConfirmed) {
+        this.onNotConfirmed = onNotConfirmed;
+    }
+
 }

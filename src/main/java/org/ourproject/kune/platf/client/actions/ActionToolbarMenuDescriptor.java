@@ -69,6 +69,10 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
         super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
 
+    public ActionToolbarMenuDescriptor(ActionDescriptor<T> copy) {
+        super(copy);
+    }
+
     public String getParentMenuIconCls() {
         return parentMenuIconCls;
     }

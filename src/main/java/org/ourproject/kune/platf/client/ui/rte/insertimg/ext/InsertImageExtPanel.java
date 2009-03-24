@@ -2,8 +2,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertimg.ext;
 
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.TextUtils;
-import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogView;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertImageAbstractPanel;
 
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -13,16 +12,15 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.FitLayout;
 
-public class InsertImageExtPanel extends DefaultForm implements InsertImageExtView {
+public class InsertImageExtPanel extends InsertImageAbstractPanel implements InsertImageExtView {
 
     private static final String LINK_FIELD = "iiep-img-field";
     private final TextField linkField;
     private final Panel previewPanel;
 
     public InsertImageExtPanel(final InsertImageExtPresenter presenter, I18nTranslationService i18n) {
-        super(i18n.t("External image"));
-        super.setAutoWidth(true);
-        super.setHeight(InsertImageDialogView.HEIGHT);
+        super(i18n.t("External image"), presenter);
+
         linkField = new TextField();
         linkField.setTabIndex(1);
         linkField.setFieldLabel(i18n.t("External image link (URL)"));
@@ -44,18 +42,10 @@ public class InsertImageExtPanel extends DefaultForm implements InsertImageExtVi
         preview.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(Button button, EventObject e) {
-                presenter.onPreview();
+                // presenter.onPreview();
             }
         });
         addButton(preview);
 
-        Button insert = new Button(i18n.t("Insert"));
-        insert.addListener(new ButtonListenerAdapter() {
-            @Override
-            public void onClick(Button button, EventObject e) {
-                presenter.onInsert();
-            }
-        });
-        addButton(insert);
     }
 }

@@ -4,18 +4,47 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 
+import com.calclab.suco.client.events.Listener0;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+
 public class InsertImageDialogPanel extends AbstractTabbedDialogPanel implements InsertImageDialogView {
 
-    private static final String INSERT_IMG_DIALOG = "iip-dial";
-    private static final String INSERT_IMG_DIALOG_ERROR_ID = "iip-err";
+    private static final String INSERT_IMG_DIALOG = "k-iip-dial";
+    private static final String INSERT_IMG_DIALOG_ERROR_ID = "k-iip-err";
     private final InsertImageGroup insertImageGroup;
 
-    public InsertImageDialogPanel(final InsertImageDialogPresenter presenter, I18nTranslationService i18n, Images images,
-            InsertImageGroup insertImageGroup) {
-        super(INSERT_IMG_DIALOG, i18n.t("Insert an image"), 380, HEIGHT + 90, 380, HEIGHT + 90, true, images,
+    public InsertImageDialogPanel(final InsertImageDialogPresenter presenter, I18nTranslationService i18n,
+            Images images, final InsertImageGroup insertImageGroup) {
+        super(INSERT_IMG_DIALOG, i18n.t("Insert Image"), 380, HEIGHT + 100, 380, HEIGHT + 100, true, images,
                 INSERT_IMG_DIALOG_ERROR_ID);
         super.setIconCls("k-picture-icon");
         this.insertImageGroup = insertImageGroup;
+
+        super.addHideListener(new Listener0() {
+            public void onEvent() {
+                insertImageGroup.resetAll();
+            }
+        });
+
+        Button insert = new Button(i18n.t("Insert"));
+        insert.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
+                presenter.onInsert();
+            }
+        });
+
+        Button cancel = new Button(i18n.t("Cancel"));
+        cancel.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(Button button, EventObject e) {
+                presenter.onCancel();
+            }
+        });
+        addButton(insert);
+        addButton(cancel);
     }
 
     @Override

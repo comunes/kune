@@ -1,5 +1,7 @@
 package org.ourproject.kune.workspace.client.editor.insertlocalimg;
 
-public interface InsertImageLocal {
+import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertImageAbstract;
+
+public interface InsertImageLocal extends InsertImageAbstract {
 
 }

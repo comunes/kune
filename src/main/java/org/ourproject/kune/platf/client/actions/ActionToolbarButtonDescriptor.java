@@ -63,6 +63,10 @@ public class ActionToolbarButtonDescriptor<T> extends ActionToolbarDescriptor<T>
         super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
 
+    public ActionToolbarButtonDescriptor(ActionDescriptor<T> copy) {
+        super(copy);
+    }
+
     public ActionToolbarButtonSeparator getLeftSeparator() {
         return leftSeparator;
     }
@@ -86,4 +90,5 @@ public class ActionToolbarButtonDescriptor<T> extends ActionToolbarDescriptor<T>
     public void setRightSeparator(final ActionToolbarButtonSeparator rightSeparator) {
         this.rightSeparator = rightSeparator;
     }
+
 }
