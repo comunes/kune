@@ -328,8 +328,8 @@ public class PlatformModule extends AbstractModule {
                 RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
                 RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
                 final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
-                        $(Session.class), topBar, sndBar, $(RTEImgResources.class), $(InsertLinkDialog.class),
-                        $(ColorWebSafePalette.class), $$(EditHtmlDialog.class), $$(InsertImageDialog.class),
+                        $(Session.class), topBar, sndBar, $(RTEImgResources.class), $$(InsertLinkDialog.class),
+                        $$(ColorWebSafePalette.class), $$(EditHtmlDialog.class), $$(InsertImageDialog.class),
                         $$(InsertTableDialog.class), $$(InsertSpecialCharDialog.class), $(DeferredCommandWrapper.class));
                 final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
                         $(ActionManager.class), $(GlobalShortcutRegister.class));

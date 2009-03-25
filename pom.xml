@@ -53,6 +53,11 @@
       </dependency>
     -->
     <dependency>
+      <groupId>org.cobogw</groupId>
+      <artifactId>gwt</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <dependency>
       <groupId>com.gwtext</groupId>
       <artifactId>gwtext</artifactId>
       <version>2.0.5</version>

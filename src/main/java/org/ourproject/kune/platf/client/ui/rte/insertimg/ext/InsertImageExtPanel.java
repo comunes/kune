@@ -15,25 +15,25 @@ import com.gwtext.client.widgets.layout.FitLayout;
 public class InsertImageExtPanel extends InsertImageAbstractPanel implements InsertImageExtView {
 
     private static final String LINK_FIELD = "iiep-img-field";
-    private final TextField linkField;
+    private final TextField srcField;
     private final Panel previewPanel;
 
     public InsertImageExtPanel(final InsertImageExtPresenter presenter, I18nTranslationService i18n) {
         super(i18n.t("External image"), presenter);
 
-        linkField = new TextField();
-        linkField.setTabIndex(1);
-        linkField.setFieldLabel(i18n.t("External image link (URL)"));
-        linkField.setRegex(TextUtils.URL_REGEXP);
-        linkField.setRegexText(i18n.t("The link should be a URL in the format 'http://www.domain.com'"));
-        linkField.setName(LINK_FIELD);
-        linkField.setWidth(DEF_FIELD_WIDTH);
-        linkField.setAllowBlank(false);
-        linkField.setMinLength(3);
-        linkField.setMaxLength(250);
-        linkField.setValidationEvent(false);
-        linkField.setId(LINK_FIELD);
-        add(linkField);
+        srcField = new TextField();
+        srcField.setTabIndex(1);
+        srcField.setFieldLabel(i18n.t("External image link (URL)"));
+        srcField.setRegex(TextUtils.URL_REGEXP);
+        srcField.setRegexText(i18n.t("The link should be a URL in the format 'http://www.domain.com'"));
+        srcField.setName(LINK_FIELD);
+        srcField.setWidth(DEF_FIELD_WIDTH);
+        srcField.setAllowBlank(false);
+        srcField.setMinLength(3);
+        srcField.setMaxLength(250);
+        srcField.setValidationEvent(false);
+        srcField.setId(LINK_FIELD);
+        insert(0, srcField);
         previewPanel = new Panel();
         previewPanel.setLayout(new FitLayout());
         previewPanel.setHeight(125);
@@ -46,6 +46,10 @@ public class InsertImageExtPanel extends InsertImageAbstractPanel implements Ins
             }
         });
         addButton(preview);
+    }
 
+    @Override
+    public String getSrc() {
+        return srcField.getValueAsString();
     }
 }

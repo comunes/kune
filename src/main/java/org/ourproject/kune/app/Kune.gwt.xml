@@ -18,6 +18,8 @@
     <inherits name='org.ourproject.kune.chat.Kune-Chat' />
     <inherits name='org.ourproject.kune.gallery.Kune-Gallery' />
 
+    <inherits name='org.cobogw.gwt.user.User' />
+
     <!-- gwt-ext -->
     <inherits name='com.gwtext.GwtExt' />
     <script src="js/ext/adapter/ext/ext-base.js" />

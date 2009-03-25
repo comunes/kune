@@ -66,7 +66,7 @@ public class InsertImageAbstractPresenter implements InsertImageAbstract {
     }
 
     protected ImageInfo updateImageInfo() {
-        return new ImageInfo(view.getHref(), view.wrapText(), view.getPosition(), view.getSize());
+        return new ImageInfo(view.getSrc(), view.wrapText(), view.getPosition(), view.getSize());
     }
 
 }

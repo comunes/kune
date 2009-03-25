@@ -384,7 +384,7 @@ public abstract class AbstractFoldableContentActions {
     protected ActionToolbarMenuDescriptor<StateToken> createRefreshCntAction(String parentMenuTitle,
             String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> refreshCnt = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Viewer, CONTENT_TOPBAR, new Listener<StateToken>() {
+                AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         stateManager.reload();
                         contextNavigator.selectItem(stateToken);
@@ -401,7 +401,7 @@ public abstract class AbstractFoldableContentActions {
     protected ActionToolbarMenuDescriptor<StateToken> createRefreshCxtAction(String parentMenuTitleCtx,
             String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> refreshCtx = new ActionToolbarMenuDescriptor<StateToken>(
-                AccessRolDTO.Viewer, CONTEXT_TOPBAR, new Listener<StateToken>() {
+                AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         stateManager.reload();
                         contextNavigator.selectItem(stateToken);

@@ -22,6 +22,7 @@ import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.ImageInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
@@ -63,31 +64,33 @@ public class RTEditorPresenter implements RTEditor {
     private ActionToolbarPushButtonDescriptor<Object> underline;
     private ActionToolbarPushButtonDescriptor<Object> strikethrough;
     private final Event0 onEdit;
-    private final InsertLinkDialog insertElement;
-    private final ColorWebSafePalette palette;
     private final DeferredCommandWrapper deferred;
     private final ActionAddCondition<Object> canBeBasic;
     private final ActionAddCondition<Object> canBeExtended;
+    private final Provider<ColorWebSafePalette> palette;
+    private final Provider<InsertLinkDialog> insertLinkDialog;
     private final Provider<EditHtmlDialog> editHtmlDialog;
     private final Provider<InsertImageDialog> insertImageDialog;
     private final Provider<InsertTableDialog> insertTableDialog;
     private Listener<String> insertTableListener;
     private Listener<LinkInfo> insertLinkListener;
+    private Listener<ImageInfo> insertImageListener;
     private Listener<String> updateHtmlListener;
     private ActionToolbarButtonDescriptor<Object> insertTableBtn;
     private final Provider<InsertSpecialCharDialog> insertSpecialCharDialog;
     protected Listener<String> insertSpecialCharListener;
 
     public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
-            RTEActionSndToolbar sndBar, RTEImgResources imgResources, InsertLinkDialog textEditorInsertElement,
-            ColorWebSafePalette palette, Provider<EditHtmlDialog> editHtmlDialog,
-            Provider<InsertImageDialog> insertImageDialog, Provider<InsertTableDialog> insertTableDialog,
-            Provider<InsertSpecialCharDialog> insertSpecialCharDialog, DeferredCommandWrapper deferred) {
+            RTEActionSndToolbar sndBar, RTEImgResources imgResources,
+            Provider<InsertLinkDialog> textEditorInsertElement, Provider<ColorWebSafePalette> palette,
+            Provider<EditHtmlDialog> editHtmlDialog, Provider<InsertImageDialog> insertImageDialog,
+            Provider<InsertTableDialog> insertTableDialog, Provider<InsertSpecialCharDialog> insertSpecialCharDialog,
+            DeferredCommandWrapper deferred) {
         this.i18n = i18n;
         this.session = session;
         this.topBar = topBar;
         this.sndBar = sndBar;
-        this.insertElement = textEditorInsertElement;
+        this.insertLinkDialog = textEditorInsertElement;
         this.palette = palette;
         this.editHtmlDialog = editHtmlDialog;
         this.insertImageDialog = insertImageDialog;
@@ -182,7 +185,7 @@ public class RTEditorPresenter implements RTEditor {
     public void onEditorFocus() {
         topBar.hideAllMenus();
         sndBar.hideAllMenus();
-        palette.hide();
+        palette.get().hide();
     }
 
     public void setExtended(boolean extended) {
@@ -215,8 +218,8 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     private void createBasicActions() {
-        ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol, topbarPosition,
-                new Listener0() {
+        ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbarPosition, new Listener0() {
                     public void onEvent() {
                         view.selectAll();
                     }
@@ -263,8 +266,8 @@ public class RTEditorPresenter implements RTEditor {
         underline.setShortcut(new ShortcutDescriptor(true, 'U'));
         underline.setAddCondition(canBeBasic);
 
-        ActionToolbarMenuDescriptor<Object> subscript = new ActionToolbarMenuDescriptor<Object>(accessRol, topbarPosition,
-                new Listener0() {
+        ActionToolbarMenuDescriptor<Object> subscript = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbarPosition, new Listener0() {
                     public void onEvent() {
                         view.toggleSubscript();
                         fireOnEdit();
@@ -276,8 +279,8 @@ public class RTEditorPresenter implements RTEditor {
         subscript.setShortcut(new ShortcutDescriptor(true, 188, ","));
         subscript.setAddCondition(canBeBasic);
 
-        ActionToolbarMenuDescriptor<Object> superscript = new ActionToolbarMenuDescriptor<Object>(accessRol, topbarPosition,
-                new Listener0() {
+        ActionToolbarMenuDescriptor<Object> superscript = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbarPosition, new Listener0() {
                     public void onEvent() {
                         view.toggleSuperscript();
                         fireOnEdit();
@@ -352,8 +355,8 @@ public class RTEditorPresenter implements RTEditor {
         redo.setBottomSeparator(true);
         redo.setIconCls(getCssName(imgResources.redo()));
 
-        ActionToolbarButtonDescriptor<Object> undoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbarPosition,
-                new Listener0() {
+        ActionToolbarButtonDescriptor<Object> undoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                sndbarPosition, new Listener0() {
                     public void onEvent() {
                         view.undo();
                         fireOnEdit();
@@ -364,8 +367,8 @@ public class RTEditorPresenter implements RTEditor {
         undoBtn.setIconCls(getCssName(imgResources.undo()));
         undoBtn.setPosition(0);
 
-        ActionToolbarButtonDescriptor<Object> redoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbarPosition,
-                new Listener0() {
+        ActionToolbarButtonDescriptor<Object> redoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                sndbarPosition, new Listener0() {
                     public void onEvent() {
                         view.redo();
                         fireOnEdit();
@@ -415,8 +418,8 @@ public class RTEditorPresenter implements RTEditor {
         paste.setAddCondition(canBeExtended);
         paste.setIconCls(getCssName(imgResources.paste()));
 
-        ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol, topbarPosition,
-                new Listener0() {
+        ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbarPosition, new Listener0() {
 
                     public void onEvent() {
                         if (updateHtmlListener == null) {
@@ -438,8 +441,8 @@ public class RTEditorPresenter implements RTEditor {
         editHtml.setParentMenuTitle(i18n.t(EDIT_MENU));
         editHtml.setAddCondition(canBeExtended);
 
-        ActionToolbarMenuDescriptor<Object> comment = new ActionToolbarMenuDescriptor<Object>(accessRol, topbarPosition,
-                new Listener0() {
+        ActionToolbarMenuDescriptor<Object> comment = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbarPosition, new Listener0() {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
@@ -495,8 +498,8 @@ public class RTEditorPresenter implements RTEditor {
         hr.setParentMenuTitle(i18n.t(INSERT_MENU));
         hr.setAddCondition(canBeExtended);
 
-        ActionToolbarMenuDescriptor<Object> blockquote = new ActionToolbarMenuDescriptor<Object>(accessRol, topbarPosition,
-                new Listener0() {
+        ActionToolbarMenuDescriptor<Object> blockquote = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbarPosition, new Listener0() {
                     public void onEvent() {
                         view.focus();
                         view.insertBlockquote();
@@ -507,8 +510,8 @@ public class RTEditorPresenter implements RTEditor {
         blockquote.setParentMenuTitle(i18n.t(FORMAT_MENU));
         blockquote.setAddCondition(canBeExtended);
 
-        ActionToolbarButtonDescriptor<Object> hrButton = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbarPosition,
-                new Listener0() {
+        ActionToolbarButtonDescriptor<Object> hrButton = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                sndbarPosition, new Listener0() {
                     public void onEvent() {
                         view.focus();
                         view.insertHorizontalRule();
@@ -577,10 +580,29 @@ public class RTEditorPresenter implements RTEditor {
         ul.setRightSeparator(ActionToolbarButtonSeparator.separator);
         ul.setAddCondition(canBeExtended);
 
-        ActionToolbarButtonDescriptor<Object> imgBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbarPosition,
-                new Listener0() {
+        ActionToolbarButtonDescriptor<Object> imgBtn = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                sndbarPosition, new Listener0() {
                     public void onEvent() {
-                        insertImageDialog.get().show();
+                        deferred.addCommand(new Listener0() {
+                            public void onEvent() {
+                                if (insertImageListener == null) {
+                                    insertImageListener = new Listener<ImageInfo>() {
+                                        public void onEvent(ImageInfo imageInfo) {
+                                            String img = imageInfo.toString();
+                                            Log.debug("Image: " + imageInfo);
+                                            view.focus();
+                                            view.insertHtml(img);
+                                            fireOnEdit();
+                                        }
+                                    };
+                                }
+                                InsertImageDialog dialog = insertImageDialog.get();
+                                dialog.setImageInfo(new ImageInfo("", true, ImageInfo.POSITION_LEFT,
+                                        ImageInfo.SIZE_ORIGINAL));
+                                dialog.setOnCreateImage(insertImageListener);
+                                dialog.show();
+                            }
+                        });
                     }
                 });
         imgBtn.setIconCls(getCssName(imgResources.images()));
@@ -596,33 +618,31 @@ public class RTEditorPresenter implements RTEditor {
         ActionToolbarButtonDescriptor<Object> createOrEditLinkBtn = new ActionToolbarButtonDescriptor<Object>(
                 accessRol, sndbarPosition, new Listener0() {
                     public void onEvent() {
-                        deferred.addCommand(new Listener0() {
-                            public void onEvent() {
-                                if (insertLinkListener == null) {
-                                    insertLinkListener = new Listener<LinkInfo>() {
-                                        public void onEvent(LinkInfo linkInfo) {
-                                            String link = linkInfo.toString();
-                                            Log.debug("Link: " + link);
-                                            view.focus();
-                                            view.insertHtml(link);
-                                            fireOnEdit();
-                                        }
-                                    };
+                        if (insertLinkListener == null) {
+                            insertLinkListener = new Listener<LinkInfo>() {
+                                public void onEvent(LinkInfo linkInfo) {
+                                    String link = linkInfo.toString();
+                                    Log.debug("Link: " + link);
+                                    view.focus();
+                                    view.insertHtml(link);
+                                    fireOnEdit();
                                 }
-                                LinkInfo linkInfo = view.getLinkInfoIfHref();
-                                insertElement.setLinkInfo(linkInfo);
-                                insertElement.setOnCreateLink(insertLinkListener);
-                                insertElement.show();
-                                String href = linkInfo.getHref();
-                                if (href.length() > 0) {
-                                    if (href.startsWith("mailto")) {
-                                        insertElement.activateTab(2);
-                                    } else {
-                                        insertElement.activateTab(1);
-                                    }
-                                }
+                            };
+                        }
+                        LinkInfo linkInfo = view.getLinkInfoIfHref();
+                        InsertLinkDialog dialog = insertLinkDialog.get();
+                        dialog.setLinkInfo(linkInfo);
+                        dialog.setOnCreateLink(insertLinkListener);
+                        dialog.show();
+                        String href = linkInfo.getHref();
+                        if (href.length() > 0) {
+                            if (href.startsWith("mailto")) {
+                                dialog.activateTab(2);
+                            } else {
+                                dialog.activateTab(1);
                             }
-                        });
+                        }
+
                     }
                 });
         createOrEditLinkBtn.setIconCls(getCssName(imgResources.link()));
@@ -638,8 +658,8 @@ public class RTEditorPresenter implements RTEditor {
         createOrEditLink.setActionPosition(topbarPosition);
         createOrEditLink.setParentMenuTitle(i18n.t(INSERT_MENU));
 
-        ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol, sndbarPosition,
-                new Listener0() {
+        ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol,
+                sndbarPosition, new Listener0() {
                     public void onEvent() {
                         view.unlink();
                         fireOnEdit();
@@ -734,14 +754,14 @@ public class RTEditorPresenter implements RTEditor {
         final ActionToolbarButtonDescriptor<Object> fontColor = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 sndbarPosition, new Listener0() {
                     public void onEvent() {
-                        palette.show(getActionLeftPosition(sndBar, insertTableBtn), getActionTopPosition(sndBar,
-                                removeFormatBtn), new Listener<String>() {
-                            public void onEvent(String color) {
-                                palette.hide();
-                                view.setForeColor(color);
-                                fireOnEdit();
-                            }
-                        });
+                        palette.get().show(getActionLeftPosition(sndBar, insertTableBtn),
+                                getActionTopPosition(sndBar, removeFormatBtn), new Listener<String>() {
+                                    public void onEvent(String color) {
+                                        palette.get().hide();
+                                        view.setForeColor(color);
+                                        fireOnEdit();
+                                    }
+                                });
                     }
                 });
         fontColor.setIconCls(getCssName(imgResources.fontcolor()));
@@ -751,10 +771,10 @@ public class RTEditorPresenter implements RTEditor {
         ActionToolbarButtonDescriptor<Object> backgroundColor = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 sndbarPosition, new Listener0() {
                     public void onEvent() {
-                        palette.show(getActionLeftPosition(sndBar, fontColor), getActionTopPosition(sndBar, fontColor),
-                                new Listener<String>() {
+                        palette.get().show(getActionLeftPosition(sndBar, fontColor),
+                                getActionTopPosition(sndBar, fontColor), new Listener<String>() {
                                     public void onEvent(String color) {
-                                        palette.hide();
+                                        palette.get().hide();
                                         view.setBackColor(color);
                                         fireOnEdit();
                                     }
@@ -765,8 +785,8 @@ public class RTEditorPresenter implements RTEditor {
         backgroundColor.setToolTip(i18n.t("Text Background Colour"));
         backgroundColor.setAddCondition(canBeBasic);
 
-        final ActionToolbarMenuDescriptor<Object> devInfo = new ActionToolbarMenuDescriptor<Object>(accessRol, topbarPosition,
-                new Listener0() {
+        final ActionToolbarMenuDescriptor<Object> devInfo = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbarPosition, new Listener0() {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
@@ -836,8 +856,8 @@ public class RTEditorPresenter implements RTEditor {
 
     private ActionToolbarMenuDescriptor<Object> createFontNameAction(ActionAddCondition<Object> canBeBasic,
             final String fontName) {
-        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol, sndbarPosition,
-                new Listener0() {
+        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                sndbarPosition, new Listener0() {
                     public void onEvent() {
                         view.setFontName(fontName);
                         fireOnEdit();
@@ -852,8 +872,8 @@ public class RTEditorPresenter implements RTEditor {
 
     private ActionToolbarMenuDescriptor<Object> createFontSizeAction(ActionAddCondition<Object> canBeBasic,
             final int fontSize, String fontSizeName) {
-        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol, sndbarPosition,
-                new Listener0() {
+        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                sndbarPosition, new Listener0() {
                     public void onEvent() {
                         view.setFontSize(fontSizesConstants[fontSize]);
                         fireOnEdit();

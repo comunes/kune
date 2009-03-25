@@ -4,11 +4,11 @@ import org.ourproject.kune.platf.client.View;
 
 public interface InsertImageAbstractView extends View {
 
-    String getHref();
-
     String getPosition();
 
     String getSize();
+
+    String getSrc();
 
     boolean isValid();
 

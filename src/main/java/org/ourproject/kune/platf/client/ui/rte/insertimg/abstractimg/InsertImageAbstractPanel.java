@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ImageInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogView;
 
+import com.gwtext.client.data.Record;
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.Component;
@@ -12,6 +13,7 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.Checkbox;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.FieldSet;
+import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.form.event.FormPanelListenerAdapter;
 
 public class InsertImageAbstractPanel extends DefaultForm implements InsertImageAbstractView {
@@ -36,8 +38,16 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         sizeCombo = createCombo(storeSizes, Resources.i18n.t("Size"));
         positionCombo = createCombo(storePositions, Resources.i18n.t("Position"));
 
-        wrapText = new Checkbox(Resources.i18n.t("Open link in new window"));
+        wrapText = new Checkbox(Resources.i18n.t("Wrap text around image"));
         wrapText.setChecked(false);
+
+        positionCombo.addListener(new ComboBoxListenerAdapter() {
+            @Override
+            public void onSelect(ComboBox comboBox, Record record, int index) {
+                String pos = record.getAsString("abbr");
+                setWrapVisible(pos);
+            }
+        });
 
         super.addListener(new FormPanelListenerAdapter() {
             @Override
@@ -59,16 +69,16 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         add(advanced);
     }
 
-    public String getHref() {
-        return null;
-    }
-
     public String getPosition() {
-        return positionCombo.getValue();
+        return positionCombo.getValueAsString();
     }
 
     public String getSize() {
-        return sizeCombo.getValue();
+        return sizeCombo.getValueAsString();
+    }
+
+    public String getSrc() {
+        return null;
     }
 
     @Override
@@ -82,14 +92,15 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
 
     protected void updateValues(ImageInfo imageInfo) {
         sizeCombo.setValue(imageInfo.getSize());
-        positionCombo.setValue(imageInfo.getPosition());
-        if (wrapText.isVisible()) {
-            wrapText.setChecked(imageInfo.isWraptext());
-        }
+        String position = imageInfo.getPosition();
+        positionCombo.setValue(position);
+        wrapText.setChecked(imageInfo.isWraptext());
+        setWrapVisible(position);
     }
 
     private ComboBox createCombo(final Store storeSizes, String title) {
         ComboBox cb = new ComboBox();
+        cb.setEditable(false);
         cb.setForceSelection(true);
         cb.setMinChars(1);
         cb.setFieldLabel(title);
@@ -97,14 +108,14 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         cb.setDisplayField("trans");
         cb.setMode(ComboBox.LOCAL);
         cb.setTriggerAction(ComboBox.ALL);
-        // cb.setEmptyText("Enter state");
-        // cb.setLoadingText("Searching...");
         cb.setTypeAhead(true);
         cb.setSelectOnFocus(true);
         cb.setWidth(DEF_FIELD_WIDTH);
         cb.setHideTrigger(false);
         cb.setAllowBlank(false);
         cb.setValidationEvent(false);
+        cb.setListWidth(DEF_FIELD_WIDTH + 30);
+        cb.setResizable(true);
         return cb;
     }
 
@@ -132,6 +143,14 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
             }
         }
         return sizesObjs;
+    }
+
+    private void setWrapVisible(String position) {
+        if (position.equals(ImageInfo.POSITION_CENTER)) {
+            wrapText.setVisible(false);
+        } else {
+            wrapText.setVisible(true);
+        }
     }
 
 }
