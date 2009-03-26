@@ -4,10 +4,10 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
 
 public class LinkInfo {
-    private static final String HREF = "href";
-    // private static final String TITLE = "title";
-    private static final String TARGET = "target";
-    private static final String _BLANK = "_blank";
+    public static final String HREF = "href";
+    public static final String TITLE = "title";
+    public static final String TARGET = "target";
+    public static final String _BLANK = "_blank";
 
     public static LinkInfo parse(Element element) {
         String target = element.getAttribute(TARGET);
@@ -47,12 +47,12 @@ public class LinkInfo {
     public Element getElement() {
         Element anchor = DOM.createAnchor();
         com.google.gwt.user.client.Element element = (com.google.gwt.user.client.Element) anchor;
-        DOM.setElementProperty(element, "href", href);
+        DOM.setElementProperty(element, HREF, href);
         if (getTarget() != null) {
             DOM.setElementProperty(element, TARGET, getTarget());
         }
         if (title != null) {
-            DOM.setElementAttribute(element, "title", title);
+            DOM.setElementAttribute(element, TITLE, title);
         }
         DOM.setInnerText(element, text);
         return anchor;

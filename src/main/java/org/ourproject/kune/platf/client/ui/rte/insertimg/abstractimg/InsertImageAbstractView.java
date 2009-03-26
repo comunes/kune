@@ -4,6 +4,8 @@ import org.ourproject.kune.platf.client.View;
 
 public interface InsertImageAbstractView extends View {
 
+    boolean getClickOriginal();
+
     String getPosition();
 
     String getSize();
@@ -14,5 +16,5 @@ public interface InsertImageAbstractView extends View {
 
     void reset();
 
-    boolean wrapText();
+    boolean getWrapText();
 }

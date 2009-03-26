@@ -1,7 +1,9 @@
 package org.ourproject.kune.platf.client.ui.rte.saving;
 
+import org.ourproject.kune.platf.client.actions.ActionCheckedCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
+import org.ourproject.kune.platf.client.actions.ActionToolbarMenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
@@ -23,7 +25,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     public static final int AUTOSAVE_IN_MILLISECONDS = 10000;
 
     private final RTEditor editor;
-    private final boolean autoSave;
+    private boolean autoSave;
     private boolean savePending;
     private boolean saveAndCloseConfirmed;
     private Listener<String> onSave;
@@ -193,6 +195,23 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         save.setTextDescription(i18n.t("Save") + (ctrl_S.toString()));
         save.setPosition(0);
 
+        ActionToolbarMenuCheckItemDescriptor<Object> autoSaveMenuItem = new ActionToolbarMenuCheckItemDescriptor<Object>(AccessRolDTO.Editor,
+                RTEditor.topbarPosition, new Listener0() {
+                    public void onEvent() {
+                        autoSave = !autoSave;
+                        if (autoSave) {
+                            timer.schedule(AUTOSAVE_IN_MILLISECONDS);
+                        } else {
+                            timer.cancel();
+                        }
+                    }}
+                , new ActionCheckedCondition() {
+                    public boolean mustBeChecked() {
+                        return autoSave;
+                    }});
+        autoSaveMenuItem.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
+        autoSaveMenuItem.setTextDescription(i18n.t("Autosave"));
+
         ActionToolbarMenuDescriptor<Object> close = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
                 RTEditor.topbarPosition, new Listener<Object>() {
                     public void onEvent(Object parameter) {
@@ -225,8 +244,10 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         saveCloseBtn.setLeftSeparator(ActionToolbarButtonSeparator.fill);
 
         editor.addAction(save);
+        editor.addAction(autoSaveMenuItem);
         editor.addAction(saveclose);
         editor.addAction(close);
+
         editor.addAction(saveBtn);
         editor.addAction(saveCloseBtn);
     }

@@ -23,6 +23,7 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
     private final ComboBox sizeCombo;
     private final ComboBox positionCombo;
     protected final Checkbox wrapText;
+    protected final Checkbox clickOriginal;
 
     public InsertImageAbstractPanel(String title, final InsertImageAbstractPresenter presenter) {
         super(title);
@@ -39,7 +40,11 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         positionCombo = createCombo(storePositions, Resources.i18n.t("Position"));
 
         wrapText = new Checkbox(Resources.i18n.t("Wrap text around image"));
-        wrapText.setChecked(false);
+        wrapText.setChecked(ImageInfo.DEF_WRAP_VALUE);
+
+        clickOriginal = new Checkbox(Resources.i18n.t("Clicking this image links to the original image file"));
+        clickOriginal.setChecked(ImageInfo.DEF_CLICK_ORIGINAL_VALUE);
+        clickOriginal.setWidth(DEF_FIELD_WIDTH);
 
         positionCombo.addListener(new ComboBoxListenerAdapter() {
             @Override
@@ -62,11 +67,18 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         advanced.setCollapsible(true);
         advanced.setCollapsed(true);
         advanced.setAutoHeight(true);
+        advanced.setAutoWidth(true);
+        advanced.setAutoScroll(false);
 
         advanced.add(sizeCombo);
         advanced.add(positionCombo);
         advanced.add(wrapText);
+        advanced.add(clickOriginal);
         add(advanced);
+    }
+
+    public boolean getClickOriginal() {
+        return clickOriginal.getValue();
     }
 
     public String getPosition() {
@@ -81,13 +93,13 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         return null;
     }
 
+    public boolean getWrapText() {
+        return wrapText.getValue();
+    }
+
     @Override
     public void insert(int index, Component component) {
         super.insert(index, component);
-    }
-
-    public boolean wrapText() {
-        return wrapText.getValue();
     }
 
     protected void updateValues(ImageInfo imageInfo) {
@@ -95,6 +107,7 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         String position = imageInfo.getPosition();
         positionCombo.setValue(position);
         wrapText.setChecked(imageInfo.isWraptext());
+        clickOriginal.setChecked(imageInfo.getClickOriginal());
         setWrapVisible(position);
     }
 

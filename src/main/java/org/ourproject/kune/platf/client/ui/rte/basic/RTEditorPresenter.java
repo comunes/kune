@@ -597,7 +597,8 @@ public class RTEditorPresenter implements RTEditor {
                                     };
                                 }
                                 InsertImageDialog dialog = insertImageDialog.get();
-                                dialog.setImageInfo(new ImageInfo("", true, ImageInfo.POSITION_LEFT,
+                                dialog.setImageInfo(new ImageInfo("", ImageInfo.DEF_WRAP_VALUE,
+                                        ImageInfo.DEF_CLICK_ORIGINAL_VALUE, ImageInfo.POSITION_LEFT,
                                         ImageInfo.SIZE_ORIGINAL));
                                 dialog.setOnCreateImage(insertImageListener);
                                 dialog.show();

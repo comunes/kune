@@ -1,11 +1,15 @@
 package org.ourproject.kune.platf.client.ui.rte.insertimg;
 
 import org.cobogw.gwt.user.client.CSS;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
 
 public class ImageInfo {
+
+    public static final boolean DEF_WRAP_VALUE = true;
+    public static final boolean DEF_CLICK_ORIGINAL_VALUE = false;
 
     public static final String SIZE_ORIGINAL = "original";
     public static final String SIZE_FIT = "fit";
@@ -31,28 +35,32 @@ public class ImageInfo {
 
     private String src;
     private boolean wraptext;
+    private boolean clickOriginal;
     private String position;
     private String size;
 
-    public ImageInfo(String src, boolean wraptext, String position, String size) {
+    public ImageInfo(String src, boolean wraptext, boolean clickOriginal, String position, String size) {
         this.src = src;
         this.wraptext = wraptext;
+        this.clickOriginal = clickOriginal;
         this.setPosition(position);
         this.setSize(size);
     }
 
+    public boolean getClickOriginal() {
+        return clickOriginal;
+    }
+
     public Element getElement() {
-        com.google.gwt.user.client.Element img = DOM.createImg();
-        DOM.setElementProperty(img, "src", src);
-        CSS.setProperty(img, CSS.A.WIDTH, getStyleSize());
-        if (!wraptext || position.equals(POSITION_CENTER)) {
-            com.google.gwt.user.client.Element divEl = DOM.createDiv();
-            CSS.setProperty(divEl, CSS.A.TEXT_ALIGN, position);
-            divEl.setInnerHTML(img.getString());
-            return divEl;
+        Element imgElement = getImageElement();
+        if (clickOriginal) {
+            com.google.gwt.user.client.Element anchor = DOM.createAnchor();
+            DOM.setElementProperty(anchor, LinkInfo.HREF, src);
+            DOM.setElementProperty(anchor, LinkInfo.TARGET, LinkInfo._BLANK);
+            anchor.setInnerHTML(imgElement.getString());
+            return anchor;
         } else {
-            CSS.setProperty(img, CSS.A.FLOAT, position);
-            return img;
+            return imgElement;
         }
     }
 
@@ -70,6 +78,10 @@ public class ImageInfo {
 
     public boolean isWraptext() {
         return wraptext;
+    }
+
+    public void setClickOriginal(boolean clickOriginal) {
+        this.clickOriginal = clickOriginal;
     }
 
     public void setPosition(String position) {
@@ -92,6 +104,21 @@ public class ImageInfo {
     public String toString() {
         Element element = getElement();
         return element.getString();
+    }
+
+    private Element getImageElement() {
+        com.google.gwt.user.client.Element img = DOM.createImg();
+        DOM.setElementProperty(img, "src", src);
+        CSS.setProperty(img, CSS.A.WIDTH, getStyleSize());
+        if (!wraptext || position.equals(POSITION_CENTER)) {
+            com.google.gwt.user.client.Element divEl = DOM.createDiv();
+            CSS.setProperty(divEl, CSS.A.TEXT_ALIGN, position);
+            divEl.setInnerHTML(img.getString());
+            return divEl;
+        } else {
+            CSS.setProperty(img, CSS.A.FLOAT, position);
+            return img;
+        }
     }
 
     private String getStyleSize() {
