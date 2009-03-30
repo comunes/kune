@@ -14,6 +14,7 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.Checkbox;
 import com.gwtext.client.widgets.form.FieldSet;
 import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.form.event.CheckboxListenerAdapter;
 import com.gwtext.client.widgets.form.event.FormPanelListenerAdapter;
 
 public class InsertLinkAbstractPanel extends DefaultForm {
@@ -23,7 +24,7 @@ public class InsertLinkAbstractPanel extends DefaultForm {
     protected TextField onOverField;
     protected final Checkbox sameWindow;
 
-    public InsertLinkAbstractPanel(String title, final InsertLinkAbstractPresenter presenter) {
+    public InsertLinkAbstractPanel(final String title, final InsertLinkAbstractPresenter presenter) {
         super(title);
         super.setAutoWidth(true);
         super.setHeight(InsertLinkDialogView.HEIGHT);
@@ -56,7 +57,7 @@ public class InsertLinkAbstractPanel extends DefaultForm {
         sameWindow.setChecked(false);
 
         textField.addKeyPressListener(new EventCallback() {
-            public void execute(EventObject e) {
+            public void execute(final EventObject e) {
                 DeferredCommand.addCommand(new Command() {
                     public void execute() {
                         presenter.onTextFieldChanged(textField.getRawValue());
@@ -66,7 +67,7 @@ public class InsertLinkAbstractPanel extends DefaultForm {
         });
 
         onOverField.addKeyPressListener(new EventCallback() {
-            public void execute(EventObject e) {
+            public void execute(final EventObject e) {
                 DeferredCommand.addCommand(new Command() {
                     public void execute() {
                         presenter.onOverFieldChanged(onOverField.getRawValue());
@@ -75,9 +76,16 @@ public class InsertLinkAbstractPanel extends DefaultForm {
             }
         });
 
+        sameWindow.addListener(new CheckboxListenerAdapter() {
+            @Override
+            public void onCheck(final Checkbox field, final boolean checked) {
+                presenter.onSameWindowCheck(checked);
+            }
+        });
+
         super.addListener(new FormPanelListenerAdapter() {
             @Override
-            public void onActivate(Panel panel) {
+            public void onActivate(final Panel panel) {
                 LinkInfo linkInfo = presenter.getLinkInfo();
                 updateValues(linkInfo);
                 presenter.onActivate();
@@ -113,11 +121,11 @@ public class InsertLinkAbstractPanel extends DefaultForm {
     }
 
     @Override
-    public void insert(int index, Component component) {
+    public void insert(final int index, final Component component) {
         super.insert(index, component);
     }
 
-    protected void updateValues(LinkInfo linkInfo) {
+    protected void updateValues(final LinkInfo linkInfo) {
         textField.setValue(linkInfo.getText());
         onOverField.setValue(linkInfo.getTitle());
         if (sameWindow.isVisible()) {

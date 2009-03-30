@@ -26,11 +26,11 @@ public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDia
 
     private AbstractTabbedDialogView view;
 
-    public void activateTab(int index) {
+    public void activateTab(final int index) {
         view.activateTab(index);
     }
 
-    public void addTab(View tab) {
+    public void addTab(final View tab) {
         view.addTab(tab);
     }
 
@@ -46,19 +46,20 @@ public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDia
         view.hideMessages();
     }
 
-    public void init(AbstractTabbedDialogView view) {
+    public void init(final AbstractTabbedDialogView view) {
         this.view = view;
     }
 
-    public void insertTab(int index, View tab) {
+    public void insertTab(final int index, final View tab) {
         view.insertTab(index, tab);
     }
 
-    public void setErrorMessage(String message, Level level) {
+    public void setErrorMessage(final String message, final Level level) {
         view.setErrorMessage(message, level);
     }
 
     public void show() {
+        hideMessages();
         view.createAndShow();
     }
 

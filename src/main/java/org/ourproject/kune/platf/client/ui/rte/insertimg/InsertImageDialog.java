@@ -11,11 +11,7 @@ public interface InsertImageDialog extends AbstractTabbedDialog {
 
     ImageInfo getImageInfo();
 
-    void setImageInfo(ImageInfo imageInfo);
-
-    void setImagePosition(String position);
-
-    void setImageSize(String size);
+    void reset();
 
     void setOnCreateImage(Listener<ImageInfo> listener);
 

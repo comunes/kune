@@ -79,6 +79,7 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         createNewContentAction(TYPE_DOCUMENT, "images/nav/page_add.png", i18n.t("New document"), parentMenuTitleCtx,
                 Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
+        createTranslateAction(parentMenuTitle, TYPE_DOCUMENT, TYPE_FOLDER);
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
         createEditAction(parentMenuTitle, TYPE_DOCUMENT);
         createContentModeratedActions(parentMenuTitle, contentsModerated);
@@ -100,8 +101,6 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         createGoAction(all);
 
         createGoHomeAction(containers);
-
-        createTranslateAction(TYPE_DOCUMENT, TYPE_FOLDER);
 
         createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
         createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);

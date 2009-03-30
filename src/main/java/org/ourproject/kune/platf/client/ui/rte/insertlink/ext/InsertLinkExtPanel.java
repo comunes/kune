@@ -47,6 +47,7 @@ public class InsertLinkExtPanel extends InsertLinkAbstractPanel implements Inser
         previewPanel = new Panel();
         previewPanel.setLayout(new FitLayout());
         previewPanel.setHeight(125);
+        previewPanel.setCls("k-preview-panel");
 
         add(new PaddedPanel(previewPanel, 0));
 

@@ -16,7 +16,6 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
@@ -26,6 +25,7 @@ import org.ourproject.kune.platf.client.ui.rte.insertimg.ImageInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
@@ -75,17 +75,19 @@ public class RTEditorPresenter implements RTEditor {
     private Listener<String> insertTableListener;
     private Listener<LinkInfo> insertLinkListener;
     private Listener<ImageInfo> insertImageListener;
+    private Listener<String> insertMediaListener;
     private Listener<String> updateHtmlListener;
     private ActionToolbarButtonDescriptor<Object> insertTableBtn;
     private final Provider<InsertSpecialCharDialog> insertSpecialCharDialog;
     protected Listener<String> insertSpecialCharListener;
+    private final Provider<InsertMediaDialog> insertMediaDialog;
 
-    public RTEditorPresenter(I18nTranslationService i18n, Session session, RTEActionTopToolbar topBar,
-            RTEActionSndToolbar sndBar, RTEImgResources imgResources,
-            Provider<InsertLinkDialog> textEditorInsertElement, Provider<ColorWebSafePalette> palette,
-            Provider<EditHtmlDialog> editHtmlDialog, Provider<InsertImageDialog> insertImageDialog,
-            Provider<InsertTableDialog> insertTableDialog, Provider<InsertSpecialCharDialog> insertSpecialCharDialog,
-            DeferredCommandWrapper deferred) {
+    public RTEditorPresenter(final I18nTranslationService i18n, final Session session,
+            final RTEActionTopToolbar topBar, final RTEActionSndToolbar sndBar, final RTEImgResources imgResources,
+            final Provider<InsertLinkDialog> textEditorInsertElement, final Provider<ColorWebSafePalette> palette,
+            final Provider<EditHtmlDialog> editHtmlDialog, final Provider<InsertImageDialog> insertImageDialog,
+            final Provider<InsertMediaDialog> insertMediaDialog, final Provider<InsertTableDialog> insertTableDialog,
+            final Provider<InsertSpecialCharDialog> insertSpecialCharDialog, final DeferredCommandWrapper deferred) {
         this.i18n = i18n;
         this.session = session;
         this.topBar = topBar;
@@ -94,6 +96,7 @@ public class RTEditorPresenter implements RTEditor {
         this.palette = palette;
         this.editHtmlDialog = editHtmlDialog;
         this.insertImageDialog = insertImageDialog;
+        this.insertMediaDialog = insertMediaDialog;
         this.insertTableDialog = insertTableDialog;
         this.insertSpecialCharDialog = insertSpecialCharDialog;
         this.deferred = deferred;
@@ -105,22 +108,22 @@ public class RTEditorPresenter implements RTEditor {
         actions = new ActionItemCollection<Object>();
         this.onEdit = new Event0("onRTEEdit");
         canBeBasic = new ActionAddCondition<Object>() {
-            public boolean mustBeAdded(Object param) {
+            public boolean mustBeAdded(final Object param) {
                 return view.canBeBasic();
             }
         };
         canBeExtended = new ActionAddCondition<Object>() {
-            public boolean mustBeAdded(Object param) {
+            public boolean mustBeAdded(final Object param) {
                 return isExtended();
             }
         };
     }
 
-    public void addAction(ActionDescriptor<Object> action) {
+    public void addAction(final ActionDescriptor<Object> action) {
         actions.add(withNoItem(action));
     }
 
-    public void addActions(ActionCollection<Object> actioncollection) {
+    public void addActions(final ActionCollection<Object> actioncollection) {
         actions.addAll(withNoItem(actioncollection));
     }
 
@@ -177,7 +180,7 @@ public class RTEditorPresenter implements RTEditor {
         return topBar;
     }
 
-    public void init(RTEditorView view) {
+    public void init(final RTEditorView view) {
         this.view = view;
         createBasicActions();
     }
@@ -188,22 +191,30 @@ public class RTEditorPresenter implements RTEditor {
         palette.get().hide();
     }
 
-    public void setExtended(boolean extended) {
+    public void setExtended(final boolean extended) {
         this.extended = extended;
     }
 
-    public void setFocus(boolean focus) {
+    public void setFocus(final boolean focus) {
         view.setFocus(focus);
     }
 
-    public void setHtml(String html) {
+    public void setHtml(final String html) {
         view.setHTML(html);
         view.focus();
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         view.setText(text);
         view.focus();
+    }
+
+    public void updateLinkInfo() {
+        if (isExtended() && view.isLink()) {
+            view.showLinkCtxMenu();
+        } else {
+            view.hideLinkCtxMenu();
+        }
     }
 
     public void updateStatus() {
@@ -424,7 +435,7 @@ public class RTEditorPresenter implements RTEditor {
                     public void onEvent() {
                         if (updateHtmlListener == null) {
                             updateHtmlListener = new Listener<String>() {
-                                public void onEvent(String html) {
+                                public void onEvent(final String html) {
                                     view.setHTML(html);
                                     fireOnEdit();
                                 }
@@ -474,7 +485,7 @@ public class RTEditorPresenter implements RTEditor {
                     }
                 });
         comment.setEnableCondition(new ActionEnableCondition<Object>() {
-            public boolean mustBeEnabled(Object param) {
+            public boolean mustBeEnabled(final Object param) {
                 return session.isLogged();
             }
         });
@@ -587,7 +598,7 @@ public class RTEditorPresenter implements RTEditor {
                             public void onEvent() {
                                 if (insertImageListener == null) {
                                     insertImageListener = new Listener<ImageInfo>() {
-                                        public void onEvent(ImageInfo imageInfo) {
+                                        public void onEvent(final ImageInfo imageInfo) {
                                             String img = imageInfo.toString();
                                             Log.debug("Image: " + imageInfo);
                                             view.focus();
@@ -597,9 +608,7 @@ public class RTEditorPresenter implements RTEditor {
                                     };
                                 }
                                 InsertImageDialog dialog = insertImageDialog.get();
-                                dialog.setImageInfo(new ImageInfo("", ImageInfo.DEF_WRAP_VALUE,
-                                        ImageInfo.DEF_CLICK_ORIGINAL_VALUE, ImageInfo.POSITION_LEFT,
-                                        ImageInfo.SIZE_ORIGINAL));
+                                dialog.reset();
                                 dialog.setOnCreateImage(insertImageListener);
                                 dialog.show();
                             }
@@ -616,34 +625,64 @@ public class RTEditorPresenter implements RTEditor {
         imgMenu.setParentMenuTitle(i18n.t(INSERT_MENU));
         imgMenu.setActionPosition(topbarPosition);
 
+        final ActionToolbarMenuDescriptor<Object> insertMedia = new ActionToolbarMenuDescriptor<Object>(accessRol,
+                topbarPosition, new Listener0() {
+                    public void onEvent() {
+                        deferred.addCommand(new Listener0() {
+                            public void onEvent() {
+                                if (insertMediaListener == null) {
+                                    insertMediaListener = new Listener<String>() {
+                                        public void onEvent(final String html) {
+                                            Log.debug("Media: " + html);
+                                            view.focus();
+                                            view.insertHtml(html);
+                                            fireOnEdit();
+                                        }
+                                    };
+                                }
+                                InsertMediaDialog dialog = insertMediaDialog.get();
+                                dialog.setOnCreate(insertMediaListener);
+                                dialog.show();
+                            }
+                        });
+                    }
+                });
+        insertMedia.setIconCls(getCssName(imgResources.film()));
+        insertMedia.setTextDescription(i18n.t("Audio/Video..."));
+        insertMedia.setAddCondition(canBeExtended);
+        insertMedia.setParentMenuTitle(i18n.t(INSERT_MENU));
+
         ActionToolbarButtonDescriptor<Object> createOrEditLinkBtn = new ActionToolbarButtonDescriptor<Object>(
                 accessRol, sndbarPosition, new Listener0() {
                     public void onEvent() {
-                        if (insertLinkListener == null) {
-                            insertLinkListener = new Listener<LinkInfo>() {
-                                public void onEvent(LinkInfo linkInfo) {
-                                    String link = linkInfo.toString();
-                                    Log.debug("Link: " + link);
-                                    view.focus();
-                                    view.insertHtml(link);
-                                    fireOnEdit();
+                        deferred.addCommand(new Listener0() {
+                            public void onEvent() {
+                                if (insertLinkListener == null) {
+                                    insertLinkListener = new Listener<LinkInfo>() {
+                                        public void onEvent(final LinkInfo linkInfo) {
+                                            String link = linkInfo.toString();
+                                            Log.debug("Link: " + link);
+                                            view.focus();
+                                            view.insertHtml(link);
+                                            fireOnEdit();
+                                        }
+                                    };
                                 }
-                            };
-                        }
-                        LinkInfo linkInfo = view.getLinkInfoIfHref();
-                        InsertLinkDialog dialog = insertLinkDialog.get();
-                        dialog.setLinkInfo(linkInfo);
-                        dialog.setOnCreateLink(insertLinkListener);
-                        dialog.show();
-                        String href = linkInfo.getHref();
-                        if (href.length() > 0) {
-                            if (href.startsWith("mailto")) {
-                                dialog.activateTab(2);
-                            } else {
-                                dialog.activateTab(1);
+                                LinkInfo linkInfo = view.getLinkInfoIfHref();
+                                InsertLinkDialog dialog = insertLinkDialog.get();
+                                dialog.setLinkInfo(linkInfo);
+                                dialog.setOnCreateLink(insertLinkListener);
+                                dialog.show();
+                                String href = linkInfo.getHref();
+                                if (href.length() > 0) {
+                                    if (href.startsWith("mailto")) {
+                                        dialog.activateTab(2);
+                                    } else {
+                                        dialog.activateTab(1);
+                                    }
+                                }
                             }
-                        }
-
+                        });
                     }
                 });
         createOrEditLinkBtn.setIconCls(getCssName(imgResources.link()));
@@ -659,6 +698,13 @@ public class RTEditorPresenter implements RTEditor {
         createOrEditLink.setActionPosition(topbarPosition);
         createOrEditLink.setParentMenuTitle(i18n.t(INSERT_MENU));
 
+        ActionToolbarMenuDescriptor<Object> editLinkCtx = new ActionToolbarMenuDescriptor<Object>(createOrEditLink);
+        editLinkCtx.setTextDescription(i18n.t("Change"));
+        editLinkCtx.setToolTip(null);
+        editLinkCtx.setShortcut(null);
+        editLinkCtx.setActionPosition(linkCtxPosition);
+        editLinkCtx.setParentMenuTitle(i18n.t(INSERT_MENU));
+
         ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 sndbarPosition, new Listener0() {
                     public void onEvent() {
@@ -670,6 +716,13 @@ public class RTEditorPresenter implements RTEditor {
         removeLink.setToolTip(i18n.t("Remove Link"));
         removeLink.setShortcut(new ShortcutDescriptor(true, true, 'K'));
         removeLink.setAddCondition(canBeExtended);
+
+        ActionToolbarMenuDescriptor<Object> removeLinkCtx = new ActionToolbarMenuDescriptor<Object>(removeLink);
+        removeLinkCtx.setTextDescription(i18n.t("Remove"));
+        removeLinkCtx.setToolTip(null);
+        removeLinkCtx.setShortcut(null);
+        removeLinkCtx.setActionPosition(linkCtxPosition);
+        removeLinkCtx.setParentMenuTitle(i18n.t(INSERT_MENU));
 
         final ActionToolbarMenuDescriptor<Object> removeFormat = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 topbarPosition, new Listener0() {
@@ -704,7 +757,7 @@ public class RTEditorPresenter implements RTEditor {
                         NotifyUser.showProgressLoading();
                         if (insertSpecialCharListener == null) {
                             insertSpecialCharListener = new Listener<String>() {
-                                public void onEvent(String character) {
+                                public void onEvent(final String character) {
                                     view.insertHtml(character);
                                 }
                             };
@@ -719,17 +772,6 @@ public class RTEditorPresenter implements RTEditor {
         insertSpecialChar.setAddCondition(canBeExtended);
         insertSpecialChar.setParentMenuTitle(i18n.t(INSERT_MENU));
         insertSpecialChar.setTopSeparator(true);
-
-        final ActionToolbarMenuDescriptor<Object> insertMedia = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                topbarPosition, new Listener0() {
-                    public void onEvent() {
-                        NotifyUser.info(TextUtils.IN_DEVELOPMENT);
-                    }
-                });
-        insertMedia.setIconCls(getCssName(imgResources.film()));
-        insertMedia.setTextDescription(i18n.t("Media..."));
-        insertMedia.setAddCondition(canBeExtended);
-        insertMedia.setParentMenuTitle(i18n.t(INSERT_MENU));
 
         final ActionToolbarMenuDescriptor<Object> insertTable = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 topbarPosition, new Listener0() {
@@ -757,7 +799,7 @@ public class RTEditorPresenter implements RTEditor {
                     public void onEvent() {
                         palette.get().show(getActionLeftPosition(sndBar, insertTableBtn),
                                 getActionTopPosition(sndBar, removeFormatBtn), new Listener<String>() {
-                                    public void onEvent(String color) {
+                                    public void onEvent(final String color) {
                                         palette.get().hide();
                                         view.setForeColor(color);
                                         fireOnEdit();
@@ -774,7 +816,7 @@ public class RTEditorPresenter implements RTEditor {
                     public void onEvent() {
                         palette.get().show(getActionLeftPosition(sndBar, fontColor),
                                 getActionTopPosition(sndBar, fontColor), new Listener<String>() {
-                                    public void onEvent(String color) {
+                                    public void onEvent(final String color) {
                                         palette.get().hide();
                                         view.setBackColor(color);
                                         fireOnEdit();
@@ -853,9 +895,12 @@ public class RTEditorPresenter implements RTEditor {
         }
         actions.add(withNoItem(fontColor));
         actions.add(withNoItem(backgroundColor));
+
+        view.addCtxAction(withNoItem(editLinkCtx));
+        view.addCtxAction(withNoItem(removeLinkCtx));
     }
 
-    private ActionToolbarMenuDescriptor<Object> createFontNameAction(ActionAddCondition<Object> canBeBasic,
+    private ActionToolbarMenuDescriptor<Object> createFontNameAction(final ActionAddCondition<Object> canBeBasic,
             final String fontName) {
         final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 sndbarPosition, new Listener0() {
@@ -871,8 +916,8 @@ public class RTEditorPresenter implements RTEditor {
         return font;
     }
 
-    private ActionToolbarMenuDescriptor<Object> createFontSizeAction(ActionAddCondition<Object> canBeBasic,
-            final int fontSize, String fontSizeName) {
+    private ActionToolbarMenuDescriptor<Object> createFontSizeAction(final ActionAddCondition<Object> canBeBasic,
+            final int fontSize, final String fontSizeName) {
         final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 sndbarPosition, new Listener0() {
                     public void onEvent() {
@@ -888,15 +933,16 @@ public class RTEditorPresenter implements RTEditor {
         return font;
     }
 
-    private int getActionLeftPosition(ActionToolbar<Object> bar, ActionToolbarButtonDescriptor<Object> action) {
+    private int getActionLeftPosition(final ActionToolbar<Object> bar,
+            final ActionToolbarButtonDescriptor<Object> action) {
         return bar.getLeftPosition(action);
     }
 
-    private int getActionTopPosition(ActionToolbar<Object> bar, ActionToolbarButtonDescriptor<Object> action) {
+    private int getActionTopPosition(final ActionToolbar<Object> bar, final ActionToolbarButtonDescriptor<Object> action) {
         return bar.getTopPosition(action);
     }
 
-    private String getCssName(ImageResource imageResource) {
+    private String getCssName(final ImageResource imageResource) {
         return RTEImgResources.SUFFIX + imageResource.getName();
     }
 
@@ -906,7 +952,7 @@ public class RTEditorPresenter implements RTEditor {
 
     private ActionEnableCondition<Object> isInsertHtmlSupported() {
         return new ActionEnableCondition<Object>() {
-            public boolean mustBeEnabled(Object param) {
+            public boolean mustBeEnabled(final Object param) {
                 return true;
             }
         };
@@ -915,9 +961,8 @@ public class RTEditorPresenter implements RTEditor {
     private void onInsertTablePressed() {
         if (insertTableListener == null) {
             insertTableListener = new Listener<String>() {
-                public void onEvent(String table) {
+                public void onEvent(final String table) {
                     if (view.isAnythingSelected()) {
-                        // FIXME
                         // move to end of selection?
                     }
                     view.insertHtml(table);
@@ -929,11 +974,11 @@ public class RTEditorPresenter implements RTEditor {
         insertTableDialog.get().show();
     }
 
-    private void styleToolbar(ActionToolbar<Object> bar) {
+    private void styleToolbar(final ActionToolbar<Object> bar) {
         bar.setNormalStyle();
     }
 
-    private ActionItemCollection<Object> withNoItem(ActionCollection<Object> actions) {
+    private ActionItemCollection<Object> withNoItem(final ActionCollection<Object> actions) {
         ActionItemCollection<Object> collection = new ActionItemCollection<Object>();
         for (ActionDescriptor<Object> action : actions) {
             // this action don't have a associated item
@@ -942,7 +987,7 @@ public class RTEditorPresenter implements RTEditor {
         return collection;
     }
 
-    private ActionItem<Object> withNoItem(ActionDescriptor<Object> action) {
+    private ActionItem<Object> withNoItem(final ActionDescriptor<Object> action) {
         return new ActionItem<Object>(action, null);
     }
 }

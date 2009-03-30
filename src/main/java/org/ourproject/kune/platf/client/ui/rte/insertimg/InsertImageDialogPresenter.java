@@ -11,7 +11,11 @@ public class InsertImageDialogPresenter extends AbstractTabbedDialogPresenter im
     private ImageInfo imageInfo;
     private Listener0 onInsertPressed;
 
-    public void fireOnInsertImage(ImageInfo imageInfo) {
+    public InsertImageDialogPresenter() {
+        initImageInfo();
+    }
+
+    public void fireOnInsertImage(final ImageInfo imageInfo) {
         onCreateListener.onEvent(imageInfo);
         super.hide();
     }
@@ -20,23 +24,15 @@ public class InsertImageDialogPresenter extends AbstractTabbedDialogPresenter im
         return imageInfo;
     }
 
-    public void setImageInfo(ImageInfo imageInfo) {
-        this.imageInfo = imageInfo;
+    public void reset() {
+        initImageInfo();
     }
 
-    public void setImagePosition(String position) {
-        imageInfo.setPosition(position);
-    }
-
-    public void setImageSize(String size) {
-        imageInfo.setSize(size);
-    }
-
-    public void setOnCreateImage(Listener<ImageInfo> listener) {
+    public void setOnCreateImage(final Listener<ImageInfo> listener) {
         onCreateListener = listener;
     }
 
-    public void setOnInsertImagePressed(Listener0 onInsertPressed) {
+    public void setOnInsertImagePressed(final Listener0 onInsertPressed) {
         this.onInsertPressed = onInsertPressed;
     }
 
@@ -46,5 +42,10 @@ public class InsertImageDialogPresenter extends AbstractTabbedDialogPresenter im
 
     protected void onInsert() {
         onInsertPressed.onEvent();
+    }
+
+    private void initImageInfo() {
+        imageInfo = new ImageInfo("", ImageInfo.DEF_WRAP_VALUE, ImageInfo.DEF_CLICK_ORIGINAL_VALUE,
+                ImageInfo.POSITION_LEFT, ImageInfo.SIZE_ORIGINAL);
     }
 }

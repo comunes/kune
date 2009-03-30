@@ -26,9 +26,7 @@ import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.FlowToolbar;
@@ -38,15 +36,11 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.ToolbarButton;
-import com.gwtext.client.widgets.menu.BaseItem;
-import com.gwtext.client.widgets.menu.CheckItem;
 import com.gwtext.client.widgets.menu.Item;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.menu.MenuItem;
-import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
 public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
 
@@ -60,7 +54,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         this(actionManagerProvider, false);
     }
 
-    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider, boolean flow) {
+    public ActionToolbarPanel(final Provider<ActionManager> actionManagerProvider, final boolean flow) {
         if (flow) {
             toolbar = new FlowToolbar();
         } else {
@@ -124,7 +118,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     public void detach() {
     }
 
-    public int getLeftPosition(ActionDescriptor<T> action) {
+    public int getLeftPosition(final ActionDescriptor<T> action) {
         final ToolbarButton button = findButton(action);
         if (button != null) {
             return button.getAbsoluteLeft();
@@ -136,7 +130,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         return toolbar;
     }
 
-    public int getTopPosition(ActionDescriptor<T> action) {
+    public int getTopPosition(final ActionDescriptor<T> action) {
         final ToolbarButton button = findButton(action);
         if (button != null) {
             return button.getAbsoluteTop();
@@ -167,7 +161,8 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         toolbar.setNormalStyle();
     }
 
-    public void setParentMenuTitle(ActionToolbarPosition position, String origTitle, String origTooltip, String newTitle) {
+    public void setParentMenuTitle(final ActionToolbarPosition position, final String origTitle,
+            final String origTooltip, final String newTitle) {
         final String menuKey = genMenuKey(position, origTitle, origTooltip, null, null);
         ToolbarButton button = buttons.get(menuKey);
         if (button != null) {
@@ -208,59 +203,27 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         toolbar.add(widget);
     }
 
-    private void addFloatStyle(Widget widget) {
+    private void addFloatStyle(final Widget widget) {
         if (toolbar instanceof FlowToolbar) {
             widget.addStyleName("kune-floatleft");
         }
     }
 
-    private void addSeparator(Menu menu, boolean separator) {
+    private void addSeparator(final Menu menu, final boolean separator) {
         if (separator) {
             menu.addSeparator();
         }
     }
 
     private Item createToolbarMenu(final ActionToolbarPosition toolBarPos, final String menuTitle,
-            final String menuTooltip, final String menuSubTitle, final ActionItem<T> actionItem, String id) {
+            final String menuTooltip, final String menuSubTitle, final ActionItem<T> actionItem, final String id) {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
-        final Item item;
-        if (action instanceof ActionToolbarMenuRadioDescriptor) {
-            CheckItem checkItem = new CheckItem();
-            ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
-            checkItem.setGroup(radioDescriptor.getGroup());
-            checkItem.setChecked(radioDescriptor.mustBeChecked());
-            item = checkItem;
-        } else if (action instanceof ActionToolbarMenuCheckItemDescriptor) {
-            CheckItem checkItem = new CheckItem();
-            ActionToolbarMenuCheckItemDescriptor<T> checkItemDescriptor = (ActionToolbarMenuCheckItemDescriptor<T>) action;
-            checkItem.setChecked(checkItemDescriptor.getMustBeChecked().mustBeChecked());
-            item = checkItem;
-        } else {
-            item = new Item();
-        }
-        item.setText(genMenuItemText(action));
-        BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
-            @Override
-            public void onClick(BaseItem item, EventObject e) {
+
+        Item item = (new ActionMenuItem<T>(actionItem, id, new Listener0() {
+            public void onEvent() {
                 actionManagerProvider.get().doAction(actionItem);
             }
-        };
-        item.addListener(clickListener);
-        String iconCls = action.getIconCls();
-        String iconUrl = action.getIconUrl();
-        if (iconCls != null) {
-            item.setIconCls(iconCls);
-        }
-        if (iconUrl != null) {
-            item.setIcon(iconUrl);
-        }
-        // ToolTip tip = new ToolTip();
-        // tip.setHtml(action.getToolTip());
-        // tip.setShowDelay(5000);
-        item.setTitle(action.getToolTip());
-        if (id != null) {
-            item.setId(id);
-        }
+        })).getItem();
 
         final String menuKey = genMenuKey(toolBarPos, menuTitle, menuTooltip, null, null);
         final String subMenuKey = genMenuKey(toolBarPos, menuTitle, menuTooltip, menuSubTitle, null);
@@ -294,7 +257,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     private Menu createToolbarMenu(final ActionToolbarPosition barPosition, final String iconUrl, final String iconCls,
-            final String menuTitle, final String menuKey, final String menuTooltip, int position) {
+            final String menuTitle, final String menuKey, final String menuTooltip, final int position) {
         final Menu menu = new Menu();
         menu.setShadow(true);
         final ToolbarButton toolbarMenu = new ToolbarButton(menuTitle);
@@ -328,16 +291,6 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
         String id = Ext.generateId();
         action.setId(id);
         return id;
-    }
-
-    private String genMenuItemText(final ActionToolbarMenuDescriptor<T> action) {
-        // HorizontalPanel hp = new HorizontalPanel();
-        // Label title = new Label(action.getText());
-        // hp.add(title);
-        // hp.setCellWidth(title, "100%");
-        // hp.add(new Label(action.getShortcutToS(i 18n)));
-        // return hp.getElement().getInnerHTML();
-        return action.getText() + action.getShortcutToS();
     }
 
     private String genMenuKey(final ActionToolbarPosition pos, final String menuTitle, final String menuTooltip,

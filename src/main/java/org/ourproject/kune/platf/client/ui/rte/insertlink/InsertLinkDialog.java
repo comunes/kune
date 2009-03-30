@@ -32,10 +32,6 @@ public interface InsertLinkDialog extends AbstractTabbedDialog {
 
     void setLinkInfo(LinkInfo linkInfo);
 
-    void setLinkText(String text);
-
-    void setLinkTitle(String title);
-
     void setOnCreateLink(Listener<LinkInfo> listener);
 
     void setOnInsertLinkPressed(Listener0 onInsertLinkPressed);

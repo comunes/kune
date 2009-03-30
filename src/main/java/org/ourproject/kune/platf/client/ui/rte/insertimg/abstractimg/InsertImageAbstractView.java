@@ -12,9 +12,10 @@ public interface InsertImageAbstractView extends View {
 
     String getSrc();
 
+    boolean getWrapText();
+
     boolean isValid();
 
     void reset();
 
-    boolean getWrapText();
 }

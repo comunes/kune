@@ -841,6 +841,14 @@
   background-image: url(img/picture.png) !important;
 }
 
+.k-film-icon {
+  background-image: url(img/film.png) !important;
+}
+
+.k-specialchars-icon {
+  background-image: url(img/specialchars.png) !important;
+}
+
 .k-info-icon {
   background-image: url(img/info.gif) !important;
 }
@@ -854,6 +862,7 @@
 }
 
 .x-toolbar-body table { /* width: 100%; */
+
 }
 
 .k-preview-msg {
@@ -904,6 +913,7 @@
 }
 
 .k-specialchar-pb-up {
+
 }
 
 .k-specialchar-big {
@@ -916,7 +926,7 @@
   margin-left: -10px;
 }
 
-.k-specialchar-popup {
+.k-specialchar-popup, {
   border: 1px solid #C0C0C0;
   z-index: 9999 !important;
   background-color: #FFF;
@@ -932,4 +942,22 @@
 
 .k-specialchar-pb-down-hovering {
   color: #161616;
+}
+
+.k-preview-panel {
+  border: dashed 1px gray;
+}
+
+.k-rte-changelink {
+  white-space: nowrap;
+  color: navy;
+  cursor: pointer;
+  text-decoration: underline;
+  margin: 5px;
+}
+
+.k-rte-changelink-popup {
+  border: 1px solid #C0C0C0;
+  z-index: 9999 !important;
+  background-color: #ECECEC;
 }

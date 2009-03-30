@@ -39,7 +39,8 @@ public class ImageInfo {
     private String position;
     private String size;
 
-    public ImageInfo(String src, boolean wraptext, boolean clickOriginal, String position, String size) {
+    public ImageInfo(final String src, final boolean wraptext, final boolean clickOriginal, final String position,
+            final String size) {
         this.src = src;
         this.wraptext = wraptext;
         this.clickOriginal = clickOriginal;
@@ -80,23 +81,23 @@ public class ImageInfo {
         return wraptext;
     }
 
-    public void setClickOriginal(boolean clickOriginal) {
+    public void setClickOriginal(final boolean clickOriginal) {
         this.clickOriginal = clickOriginal;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(final String position) {
         this.position = position;
     }
 
-    public void setSize(String size) {
+    public void setSize(final String size) {
         this.size = size;
     }
 
-    public void setSrc(String src) {
+    public void setSrc(final String src) {
         this.src = src;
     }
 
-    public void setWraptext(boolean wraptext) {
+    public void setWraptext(final boolean wraptext) {
         this.wraptext = wraptext;
     }
 
@@ -123,7 +124,7 @@ public class ImageInfo {
 
     private String getStyleSize() {
         for (String[] current : sizes) {
-            if (current[1].equals(size)) {
+            if (current[0].equals(size)) {
                 return current[2];
             }
         }

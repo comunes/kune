@@ -86,14 +86,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.72123458"
-     inkscape:cx="372.04724"
-     inkscape:cy="526.18109"
+     inkscape:zoom="1"
+     inkscape:cx="342.68538"
+     inkscape:cy="391.54295"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="1379"
-     inkscape:window-height="936"
-     inkscape:window-x="61"
+     inkscape:window-width="1280"
+     inkscape:window-height="1001"
+     inkscape:window-x="1280"
      inkscape:window-y="0"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -747,5 +747,81 @@
          d="M 372.87905,411.27704 L 437.81346,411.27704"
          style="color:#000000;fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947906;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
     </g>
+    <g
+       id="g2737">
+      <path
+         inkscape:export-ydpi="399.59854"
+         inkscape:export-xdpi="399.59854"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-logo-1200.png"
+         id="path2689"
+         d="M 298.07933,890.09763 C 297.3363,890.09763 296.6221,890.10025 295.90542,890.14704 C 295.83851,890.16067 295.77509,890.18388 295.70779,890.19644 C 295.04064,890.32105 294.38243,890.42731 293.6821,890.44348 C 293.58509,890.45708 293.48215,890.42895 293.38566,890.44348 C 287.66961,891.30403 282.84012,893.78596 278.95878,897.90395 C 274.42607,902.69101 272.14061,908.42577 272.1406,915.09763 C 272.1406,921.84435 274.42608,927.61807 278.95878,932.39012 C 283.86545,937.53616 290.24058,940.09761 298.07933,940.09763 C 302.23802,940.09761 306.23614,939.06435 310.03585,936.98498 C 313.8355,934.96547 317.1393,932.10715 319.96668,928.48696 L 311.41925,923.74388 C 307.7392,928.65056 303.21767,931.10554 297.8323,931.10554 C 294.09242,931.10554 290.7392,929.89235 287.85206,927.49882 C 284.91999,925.10531 283.45479,922.18991 283.45483,918.70435 L 322.53585,918.70435 L 322.53585,916.72806 C 322.53581,908.27602 319.67294,901.50799 313.98842,896.42174 C 309.20137,892.18827 303.89852,890.09769 298.07933,890.09763 z M 116.35996,890.44348 L 116.35996,909.3664 L 109.73941,909.3664 L 109.73941,919.0502 L 116.35996,919.0502 L 116.35996,938.81305 L 126.43901,938.81305 L 126.43901,919.0502 L 132.51609,919.0502 L 144.91728,938.81305 L 156.8738,938.81305 L 140.2236,913.71423 L 156.13269,891.38221 L 143.92913,891.38221 L 131.62676,909.3664 L 126.43901,909.3664 L 126.43901,890.44348 L 116.35996,890.44348 z M 240.02597,890.44348 C 238.29094,890.75314 236.67426,891.25714 235.18407,892.02451 C 232.67087,893.37089 230.68678,895.14652 229.20581,897.36048 L 229.20581,891.38221 L 219.07735,891.38221 L 219.07735,938.81305 L 229.20581,938.81305 L 229.20581,912.23202 C 229.2058,908.43237 230.27805,905.51695 232.41728,903.43755 C 234.57141,901.35823 237.30235,900.32493 240.66826,900.3249 C 244.22858,900.32493 247.00891,901.28027 248.96866,903.23992 C 250.9283,905.19964 251.88362,908.27094 251.88368,912.42965 L 251.88368,938.81305 L 262.01214,938.81305 L 262.01214,910.20633 C 262.01209,904.38713 260.23647,899.57918 256.67617,895.77945 C 254.00588,892.92972 250.91617,891.15594 247.38763,890.44348 L 240.02597,890.44348 z M 163.24732,891.38221 L 163.24732,918.85257 C 163.2473,925.28514 165.41585,930.48601 169.76905,934.46522 C 173.80809,938.20508 178.81094,940.09761 184.69,940.09763 C 190.62886,940.09761 195.60633,938.20508 199.66036,934.46522 C 204.01351,930.48601 206.18205,925.28514 206.1821,918.85257 L 206.1821,891.38221 L 196.05364,891.38221 L 196.05364,917.96324 C 196.05359,921.46376 194.98134,924.31165 192.84218,926.51067 C 190.62814,928.78452 187.93618,929.91976 184.69,929.91976 C 181.56346,929.91978 178.85062,928.76957 176.63664,926.51067 C 174.43759,924.23686 173.37574,921.40394 173.37577,917.96324 L 173.37577,891.38221 L 163.24732,891.38221 z M 296.79475,899.18854 C 300.10075,899.18859 302.9876,900.11537 305.44099,901.95534 C 307.8195,903.84025 309.57113,906.58618 310.67815,910.20633 L 283.45483,910.20633 C 284.24766,906.72081 285.89275,904.01387 288.34613,902.05415 C 290.72466,900.15434 293.53358,899.18859 296.79475,899.18854 z"
+         style="font-size:58.13353348px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#a56941;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem" />
+      <g
+         inkscape:export-ydpi="399.59854"
+         inkscape:export-xdpi="399.59854"
+         inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/kune-logo-1200.png"
+         transform="matrix(0.347343,0,0,0.346901,34.203754,588.03773)"
+         id="g2691">
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path2693"
+           d="M 60.321717,411.99998 L 437.33633,411.99998"
+           style="fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23953247;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path2695"
+           d="M 252.61203,788.60332 L 252.61203,411.59154"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffdb6b;stroke-width:109.23950958;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path2697"
+           d="M 252.86937,597.15755 L 629.88177,597.15755"
+           style="fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#69312f;stroke-width:109.23951721;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path2699"
+           d="M 437.45588,596.97447 L 437.45588,219.95956"
+           style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#cc6633;stroke-width:109.23950195;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+        <path
+           transform="matrix(0.240856,0.12287,-0.12287,0.240856,101.5762,778.871)"
+           id="path2701"
+           d="M 372.87905,411.27704 L 437.81346,411.27704"
+           style="fill:#69312f;fill-opacity:1;fill-rule:nonzero;stroke:#dd8a3d;stroke-width:109.23947906;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block" />
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:18.13397598px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#dd8a3d;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem;-inkscape-font-specification:Emblem"
+       x="954.11047"
+       y="752.78009"
+       id="text2703"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         x="954.11047"
+         y="752.78009"
+         id="tspan2709">a web infrastructure to encourage collaboration,</tspan><tspan
+         sodipodi:role="line"
+         x="954.11047"
+         y="770.91406"
+         id="tspan2727">content sharing &amp; free culture</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.27686882px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:100%;writing-mode:lr-tb;text-anchor:end;fill:#dd8a3d;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem;-inkscape-font-specification:Emblem"
+       x="620.35358"
+       y="901.5686"
+       id="text2729"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         x="625.28021"
+         y="901.5686"
+         id="tspan2731">a web infrastructure </tspan><tspan
+         sodipodi:role="line"
+         x="620.35358"
+         y="918.84546"
+         id="tspan2735">to encourage collaboration,</tspan><tspan
+         sodipodi:role="line"
+         x="620.35358"
+         y="936.12231"
+         id="tspan2733">content sharing &amp; free culture</tspan></text>
   </g>
 </svg>

@@ -5,8 +5,21 @@ import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertImage
 
 public class InsertImageExtPresenter extends InsertImageAbstractPresenter implements InsertImageExt {
 
+    private InsertImageExtView view;
+
     public InsertImageExtPresenter(InsertImageDialog insertImageDialog) {
         super(insertImageDialog);
+    }
+
+    public void init(InsertImageExtView view) {
+        super.init(view);
+        this.view = view;
+    }
+
+    public void onPreview() {
+        if (isValid()) {
+            view.setPreviewUrl(view.getSrc());
+        }
     }
 
 }

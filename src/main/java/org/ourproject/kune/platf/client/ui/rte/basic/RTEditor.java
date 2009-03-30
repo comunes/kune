@@ -13,6 +13,7 @@ public interface RTEditor {
 
     public final ActionToolbarPosition topbarPosition = new ActionToolbarPosition("rte-topbar");
     public final ActionToolbarPosition sndbarPosition = new ActionToolbarPosition("rte-sndbar");;
+    public final ActionToolbarPosition linkCtxPosition = new ActionToolbarPosition("rte-linkctx");;
 
     void addAction(ActionDescriptor<Object> action);
 

@@ -54,7 +54,7 @@ public class InsertLinkAbstractPresenter implements InsertLinkAbstract {
         return view;
     }
 
-    public void init(InsertLinkAbstractView view) {
+    public void init(final InsertLinkAbstractView view) {
         this.view = view;
         editorInsertDialog.addTab(view);
     }
@@ -67,17 +67,21 @@ public class InsertLinkAbstractPresenter implements InsertLinkAbstract {
         editorInsertDialog.setOnInsertLinkPressed(onInsertLinkPressed);
     }
 
-    public void onInsert(LinkInfo linkInfo) {
+    public void onInsert(final LinkInfo linkInfo) {
         editorInsertDialog.fireOnInsertLink(linkInfo);
         reset();
     }
 
-    public void onOverFieldChanged(String title) {
-        editorInsertDialog.setLinkTitle(title);
+    public void onOverFieldChanged(final String title) {
+        editorInsertDialog.getLinkInfo().setTitle(title);
     }
 
-    public void onTextFieldChanged(String text) {
-        editorInsertDialog.setLinkText(text);
+    public void onSameWindowCheck(final boolean checked) {
+        editorInsertDialog.getLinkInfo().setInNewWindow(checked);
+    }
+
+    public void onTextFieldChanged(final String text) {
+        editorInsertDialog.getLinkInfo().setText(text);
     }
 
     public void reset() {

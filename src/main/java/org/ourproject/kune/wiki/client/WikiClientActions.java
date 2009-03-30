@@ -80,7 +80,7 @@ public class WikiClientActions extends AbstractFoldableContentActions {
                 parentMenuTitleCtx, Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
         // createContentModeratedActions(parentMenuTitle, contentsModerated);
-
+        createTranslateAction(parentMenuTitle, TYPE_FOLDER, TYPE_WIKIPAGE);
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);
         createRenameContentInCtxAction(parentMenuTitleCtx, i18n.t("Rename"), containersNoRoot);
         createEditAction(parentMenuTitle, TYPE_WIKIPAGE);
@@ -101,8 +101,6 @@ public class WikiClientActions extends AbstractFoldableContentActions {
         createGoAction(all);
 
         createGoHomeAction(containers);
-
-        createTranslateAction(TYPE_FOLDER, TYPE_WIKIPAGE);
 
         createDelContainerAction("Delete folder", parentMenuTitleCtx, containersNoRoot);
         createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);

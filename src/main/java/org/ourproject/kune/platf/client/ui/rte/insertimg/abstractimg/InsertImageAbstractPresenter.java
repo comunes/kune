@@ -12,6 +12,7 @@ public class InsertImageAbstractPresenter implements InsertImageAbstract {
     protected InsertImageAbstractView view;
     protected final InsertImageDialog insertImageDialog;
     private final Listener0 onInsertImagePressed;
+    protected ImageInfo imageInfo;
 
     public InsertImageAbstractPresenter(final InsertImageDialog insertImageDialog) {
         this.insertImageDialog = insertImageDialog;
@@ -35,7 +36,7 @@ public class InsertImageAbstractPresenter implements InsertImageAbstract {
         return view;
     }
 
-    public void init(InsertImageAbstractView view) {
+    public void init(final InsertImageAbstractView view) {
         this.view = view;
         insertImageDialog.addTab(view);
     }
@@ -48,21 +49,37 @@ public class InsertImageAbstractPresenter implements InsertImageAbstract {
         insertImageDialog.setOnInsertImagePressed(onInsertImagePressed);
     }
 
-    public void onInsert(ImageInfo linkInfo) {
+    public void onClickOriginalChecked(final boolean checked) {
+        insertImageDialog.getImageInfo().setClickOriginal(checked);
+    }
+
+    public void onInsert(final ImageInfo linkInfo) {
         insertImageDialog.fireOnInsertImage(linkInfo);
         reset();
     }
 
-    public void onPositionFieldChanged(String position) {
-        insertImageDialog.setImagePosition(position);
+    public void onPositionFieldChanged(final String position) {
+        insertImageDialog.getImageInfo().setPosition(position);
     }
 
-    public void onSizeFieldChanged(String size) {
-        insertImageDialog.setImageSize(size);
+    public void onSizeFieldChanged(final String size) {
+        insertImageDialog.getImageInfo().setSize(size);
+    }
+
+    public void onWrapTextChecked(final boolean checked) {
+        insertImageDialog.getImageInfo().setWraptext(checked);
     }
 
     public void reset() {
         view.reset();
+    }
+
+    public void setPosition(final String position) {
+        insertImageDialog.getImageInfo().setPosition(position);
+    }
+
+    public void setSize(final String size) {
+        insertImageDialog.getImageInfo().setSize(size);
     }
 
     protected ImageInfo updateImageInfo() {

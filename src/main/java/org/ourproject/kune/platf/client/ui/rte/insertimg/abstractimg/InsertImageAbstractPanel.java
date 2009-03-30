@@ -13,6 +13,8 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.Checkbox;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.FieldSet;
+import com.gwtext.client.widgets.form.Label;
+import com.gwtext.client.widgets.form.event.CheckboxListenerAdapter;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.form.event.FormPanelListenerAdapter;
 
@@ -24,11 +26,15 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
     private final ComboBox positionCombo;
     protected final Checkbox wrapText;
     protected final Checkbox clickOriginal;
+    private final Label intro;
 
-    public InsertImageAbstractPanel(String title, final InsertImageAbstractPresenter presenter) {
+    public InsertImageAbstractPanel(final String title, final InsertImageAbstractPresenter presenter) {
         super(title);
         super.setAutoWidth(true);
         super.setHeight(InsertImageDialogView.HEIGHT);
+        super.getFormPanel().setLabelWidth(DEF_FIELD_LABEL_WITH + 20);
+
+        intro = new Label();
 
         final Store storeSizes = new SimpleStore(new String[] { "abbr", "trans", "size" }, getSizes());
         storeSizes.load();
@@ -46,20 +52,43 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         clickOriginal.setChecked(ImageInfo.DEF_CLICK_ORIGINAL_VALUE);
         clickOriginal.setWidth(DEF_FIELD_WIDTH);
 
+        sizeCombo.addListener(new ComboBoxListenerAdapter() {
+            @Override
+            public void onSelect(final ComboBox comboBox, final Record record, final int index) {
+                String size = record.getAsString("abbr");
+                presenter.setSize(size);
+            }
+        });
+
         positionCombo.addListener(new ComboBoxListenerAdapter() {
             @Override
-            public void onSelect(ComboBox comboBox, Record record, int index) {
+            public void onSelect(final ComboBox comboBox, final Record record, final int index) {
                 String pos = record.getAsString("abbr");
+                presenter.setPosition(pos);
                 setWrapVisible(pos);
             }
         });
 
         super.addListener(new FormPanelListenerAdapter() {
             @Override
-            public void onActivate(Panel panel) {
+            public void onActivate(final Panel panel) {
                 ImageInfo linkImage = presenter.getImageInfo();
                 updateValues(linkImage);
                 presenter.onActivate();
+            }
+        });
+
+        clickOriginal.addListener(new CheckboxListenerAdapter() {
+            @Override
+            public void onCheck(final Checkbox field, final boolean checked) {
+                presenter.onClickOriginalChecked(checked);
+            }
+        });
+
+        wrapText.addListener(new CheckboxListenerAdapter() {
+            @Override
+            public void onCheck(final Checkbox field, final boolean checked) {
+                presenter.onWrapTextChecked(checked);
             }
         });
 
@@ -69,11 +98,14 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         advanced.setAutoHeight(true);
         advanced.setAutoWidth(true);
         advanced.setAutoScroll(false);
+        advanced.addClass("kune-Margin-Large-t");
+        // advanced.setPaddings(10, 0, 0, 0);
 
         advanced.add(sizeCombo);
         advanced.add(positionCombo);
         advanced.add(wrapText);
         advanced.add(clickOriginal);
+        add(intro);
         add(advanced);
     }
 
@@ -98,11 +130,15 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
     }
 
     @Override
-    public void insert(int index, Component component) {
+    public void insert(final int index, final Component component) {
         super.insert(index, component);
     }
 
-    protected void updateValues(ImageInfo imageInfo) {
+    public void setIntro(final String text) {
+        intro.setHtml(text);
+    }
+
+    protected void updateValues(final ImageInfo imageInfo) {
         sizeCombo.setValue(imageInfo.getSize());
         String position = imageInfo.getPosition();
         positionCombo.setValue(position);
@@ -111,7 +147,7 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         setWrapVisible(position);
     }
 
-    private ComboBox createCombo(final Store storeSizes, String title) {
+    private ComboBox createCombo(final Store storeSizes, final String title) {
         ComboBox cb = new ComboBox();
         cb.setEditable(false);
         cb.setForceSelection(true);
@@ -119,6 +155,7 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         cb.setFieldLabel(title);
         cb.setStore(storeSizes);
         cb.setDisplayField("trans");
+        cb.setValueField("abbr");
         cb.setMode(ComboBox.LOCAL);
         cb.setTriggerAction(ComboBox.ALL);
         cb.setTypeAhead(true);
@@ -158,7 +195,7 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         return sizesObjs;
     }
 
-    private void setWrapVisible(String position) {
+    private void setWrapVisible(final String position) {
         if (position.equals(ImageInfo.POSITION_CENTER)) {
             wrapText.setVisible(false);
         } else {

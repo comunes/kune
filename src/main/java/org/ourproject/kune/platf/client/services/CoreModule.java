@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharGroup;
 
@@ -36,6 +37,7 @@ public class CoreModule extends AbstractModule {
         registerDecorator(ToolGroup.class, new ToolGroup(container));
         registerDecorator(EntityOptionsGroup.class, new EntityOptionsGroup(container));
         registerDecorator(InsertImageGroup.class, new InsertImageGroup(container));
+        registerDecorator(InsertMediaGroup.class, new InsertMediaGroup(container));
         registerDecorator(InsertLinkGroup.class, new InsertLinkGroup(container));
         registerDecorator(InsertSpecialCharGroup.class, new InsertSpecialCharGroup(container));
     }

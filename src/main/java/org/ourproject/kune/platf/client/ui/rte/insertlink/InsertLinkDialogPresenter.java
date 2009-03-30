@@ -30,7 +30,11 @@ public class InsertLinkDialogPresenter extends AbstractTabbedDialogPresenter imp
     private LinkInfo linkInfo;
     private Listener0 onInsertLinkPressed;
 
-    public void fireOnInsertLink(LinkInfo linkInfo) {
+    public InsertLinkDialogPresenter() {
+        linkInfo = new LinkInfo("");
+    }
+
+    public void fireOnInsertLink(final LinkInfo linkInfo) {
         onCreateListener.onEvent(linkInfo);
         super.hide();
     }
@@ -43,23 +47,15 @@ public class InsertLinkDialogPresenter extends AbstractTabbedDialogPresenter imp
         super.hide();
     }
 
-    public void setLinkInfo(LinkInfo linkInfo) {
+    public void setLinkInfo(final LinkInfo linkInfo) {
         this.linkInfo = linkInfo;
-    }
-
-    public void setLinkText(String text) {
-        linkInfo.setText(text);
-    }
-
-    public void setLinkTitle(String title) {
-        linkInfo.setTitle(title);
     }
 
     public void setOnCreateLink(final Listener<LinkInfo> listener) {
         this.onCreateListener = listener;
     }
 
-    public void setOnInsertLinkPressed(Listener0 onInsertLinkPressed) {
+    public void setOnInsertLinkPressed(final Listener0 onInsertLinkPressed) {
         this.onInsertLinkPressed = onInsertLinkPressed;
     }
 

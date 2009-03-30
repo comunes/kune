@@ -8,9 +8,10 @@ import com.gwtext.client.widgets.form.Label;
 
 public class InsertImageLocalPanel extends InsertImageAbstractPanel implements InsertImageLocalView {
 
-    public InsertImageLocalPanel(final InsertImageLocalPresenter presenter, I18nTranslationService i18n) {
-        super(i18n.t("Local image"), presenter);
-        insert(0, new Label(TextUtils.IN_DEVELOPMENT));
+    public InsertImageLocalPanel(final InsertImageLocalPresenter presenter, final I18nTranslationService i18n) {
+        super(i18n.t("Local"), presenter);
+        Label label = new Label();
+        label.setHtml(TextUtils.IN_DEVELOPMENT + "<br/><br/>");
+        insert(0, label);
     }
-
 }

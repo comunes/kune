@@ -15,17 +15,17 @@ public class InsertSpecialCharDialogPanel extends AbstractTabbedDialogPanel impl
     private static final String INSERT_SPECIAL_CHAR_DIALOG_ERROR_ID = "iscdp-err";
     private final InsertSpecialCharGroup insertSpecialCharGroup;
 
-    public InsertSpecialCharDialogPanel(final InsertSpecialCharDialogPresenter presenter, Images images,
-            I18nTranslationService i18n, InsertSpecialCharGroup insertSpecialCharGroup, RTEImgResources imgResources) {
+    public InsertSpecialCharDialogPanel(final InsertSpecialCharDialogPresenter presenter, final Images images,
+            final I18nTranslationService i18n, final InsertSpecialCharGroup insertSpecialCharGroup,
+            final RTEImgResources imgResources) {
         super(INSERT_SPECIAL_CHAR_DIALOG, i18n.t("Insert Special Character"), 495, HEIGHT + 90, 495, HEIGHT + 90, true,
                 images, INSERT_SPECIAL_CHAR_DIALOG_ERROR_ID);
-        // super.setIconCls(RTEImgResources.SUFFIX +
-        // imgResources.insertspreadsheet().getName());
+        super.setIconCls("k-specialchars-icon");
         this.insertSpecialCharGroup = insertSpecialCharGroup;
         Button close = new Button(i18n.t("Close"));
         close.addListener(new ButtonListenerAdapter() {
             @Override
-            public void onClick(Button button, EventObject e) {
+            public void onClick(final Button button, final EventObject e) {
                 hide();
             }
         });

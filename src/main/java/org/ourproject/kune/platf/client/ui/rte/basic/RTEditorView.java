@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
@@ -8,6 +9,8 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 public interface RTEditorView extends View {
 
     void addActions(ActionItemCollection<Object> actions);
+
+    void addCtxAction(ActionItem<Object> actionItem);
 
     void adjustSize(int height);
 
@@ -35,6 +38,8 @@ public interface RTEditorView extends View {
 
     String getText();
 
+    void hideLinkCtxMenu();
+
     void insertBlockquote();
 
     void insertComment(String author);
@@ -60,6 +65,8 @@ public interface RTEditorView extends View {
     boolean isBold();
 
     boolean isItalic();
+
+    boolean isLink();
 
     boolean isStrikethrough();
 
@@ -100,6 +107,8 @@ public interface RTEditorView extends View {
     void setHTML(String html);
 
     void setText(String text);
+
+    void showLinkCtxMenu();
 
     void toggleBold();
 
