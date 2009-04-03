@@ -109,7 +109,7 @@
     <dependency>
       <groupId>com.calclab.emite</groupId>
       <artifactId>emite</artifactId>
-      <version>0.4.5</version>
+      <version>0.4.6.2</version>
     </dependency>
     <dependency>
       <groupId>org.jivesoftware.smack</groupId>
@@ -575,12 +575,13 @@
             <configuration>
               <classifier>core</classifier>
               <includes>
-                <include>
-                  **/Kune-Platform.gwt.xml**
-                </include>
-                <include>
-                  **/I18nTranslationService**
-                </include>
+                <include>**/KunePlatform.gwt.xml**</include>
+                <include>**/i18n/I18nTranslationService.**</include>
+                <include>**/i18n/I18nTranslationServiceMocked.**</include>
+                <include>**/TextUtils.**</include>
+                <include>**/IconLabelEditable.**</include>
+                <include>**/QuickTipsHelper.**</include>
+                <include>**/RichText.gwt.xml**</include>
                 <include>**/BasicDialog.**</include>
                 <include>**/HorizontalLine.**</include>
                 <include>**/AbstractLabel.**</include>
@@ -607,13 +608,13 @@
             </configuration>
           </execution>
           <execution>
-            <id>helloworldplugin</id>
+            <id>helloworldmodule</id>
             <phase>package</phase>
             <goals>
               <goal>jar</goal>
             </goals>
             <configuration>
-              <classifier>helloworldplugin</classifier>
+              <classifier>helloworldmodule</classifier>
               <includes>
                 <include>**/HelloWorld*</include>
               </includes>

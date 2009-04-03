@@ -27,8 +27,8 @@ import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -37,15 +37,20 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.roster.RosterItem;
+import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.emiteuimodule.client.UserChatOptions;
+import com.calclab.emiteuimodule.client.chat.ChatUI;
 import com.calclab.emiteuimodule.client.params.AvatarProvider;
+import com.calclab.emiteuimodule.client.room.RoomUI;
 import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
 import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Window;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
@@ -63,9 +68,9 @@ class ChatEngineDefault implements ChatEngine {
     private final Event0 onRosterChanged;
     private final ShortcutDescriptor shortcut;
 
-    public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws, Application application,
-            Session session, final Provider<EmiteUIDialog> emiteUIProvider,
-            final Provider<FileDownloadUtils> downloadUtils, GlobalShortcutRegister globalShortcutRegister) {
+    public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
+            final Application application, final Session session, final Provider<EmiteUIDialog> emiteUIProvider,
+            final Provider<FileDownloadUtils> downloadUtils, final GlobalShortcutRegister globalShortcutRegister) {
         this.i18n = i18n;
         this.ws = ws;
         this.emiteUIProvider = emiteUIProvider;
@@ -112,7 +117,7 @@ class ChatEngineDefault implements ChatEngine {
         });
     }
 
-    public void addNewBuddie(String shortName) {
+    public void addNewBuddie(final String shortName) {
         emiteUIProvider.get().addBuddie(getLocalUserJid(shortName), shortName, "");
     }
 
@@ -120,7 +125,7 @@ class ChatEngineDefault implements ChatEngine {
         onRosterChanged.add(slot);
     }
 
-    public void chat(XmppURI jid) {
+    public void chat(final XmppURI jid) {
         emiteUIProvider.get().chat(jid);
     }
 
@@ -128,11 +133,11 @@ class ChatEngineDefault implements ChatEngine {
         return chatOptions;
     }
 
-    public boolean isBuddie(String shortName) {
+    public boolean isBuddie(final String shortName) {
         return isBuddie(getLocalUserJid(shortName));
     }
 
-    public boolean isBuddie(XmppURI jid) {
+    public boolean isBuddie(final XmppURI jid) {
         if (roster != null) {
             for (RosterItem item : roster) {
                 if (item.getJID().equalsNoResource(jid)) {
@@ -152,10 +157,24 @@ class ChatEngineDefault implements ChatEngine {
     }
 
     public void joinRoom(final String roomName, final String userAlias) {
+        joinRoom(roomName, null, userAlias);
+    }
+
+    public void joinRoom(final String roomName, final String subject, final String userAlias) {
         if (emiteUIProvider.get().isLoggedIn()) {
             final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
                     + chatOptions.userOptions.getUserJid().getNode());
-            emiteUIProvider.get().joinRoom(roomURI);
+            final Room room = (Room) emiteUIProvider.get().joinRoom(roomURI);
+            if (subject != null) {
+                DeferredCommand.addCommand(new Command() {
+                    public void execute() {
+                        RoomUI roomUI = (RoomUI) room.getData(ChatUI.class);
+                        if (roomUI != null) {
+                            roomUI.setSubject(subject);
+                        }
+                    }
+                });
+            }
         } else {
             ws.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"));
         }
@@ -165,7 +184,7 @@ class ChatEngineDefault implements ChatEngine {
         final UserChatOptions userChatOptions = getUserChatOptions(jid, passwd);
         // FIXME: Avatar provider
         final AvatarProvider avatarProvider = new AvatarProvider() {
-            public String getAvatarURL(XmppURI userURI) {
+            public String getAvatarURL(final XmppURI userURI) {
                 if (userURI.getHost().equals(chatOptions.domain)) {
                     return downloadUtils.get().getLogoImageUrl(new StateToken(userURI.getNode()));
                 } else {
@@ -178,7 +197,7 @@ class ChatEngineDefault implements ChatEngine {
         chatOptions.userOptions = userChatOptions;
         if (emiteUIProvider.get().isDialogNotStarted()) {
             emiteUIProvider.get().onRosterChanged(new Listener<Collection<RosterItem>>() {
-                public void onEvent(Collection<RosterItem> rosterChanged) {
+                public void onEvent(final Collection<RosterItem> rosterChanged) {
                     roster = rosterChanged;
                     onRosterChanged.fire();
                 }
@@ -234,7 +253,7 @@ class ChatEngineDefault implements ChatEngine {
         }
     }
 
-    public void setAvatar(String photoBinary) {
+    public void setAvatar(final String photoBinary) {
         emiteUIProvider.get().setOwnVCardAvatar(photoBinary);
     }
 
@@ -259,7 +278,7 @@ class ChatEngineDefault implements ChatEngine {
         }
     }
 
-    private XmppURI getLocalUserJid(String shortName) {
+    private XmppURI getLocalUserJid(final String shortName) {
         return XmppURI.jid(shortName + "@" + chatOptions.domain);
     }
 

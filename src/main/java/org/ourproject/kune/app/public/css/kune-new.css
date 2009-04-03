@@ -926,12 +926,38 @@
   margin-left: -10px;
 }
 
-.k-specialchar-popup, {
-  border: 1px solid #C0C0C0;
-  z-index: 9999 !important;
-  background-color: #FFF;
-}
+.k-specialchar-popup
+,
+{
+border
+:
 
+1
+px
+
+solid
+
+#C0C0C0
+;
+
+
+z-index
+:
+
+9999
+!
+important
+;
+
+
+background-color
+:
+
+#FFF
+;
+
+
+}
 .k-specialchar-pb-down {
   color: #161616;
 }
@@ -960,4 +986,15 @@
   border: 1px solid #C0C0C0;
   z-index: 9999 !important;
   background-color: #ECECEC;
+}
+
+.e-ui-room {
+  height: 27px;
+  line-height: 22px;
+}
+
+.e-ui-room input {
+  font-size: 100%;
+  margin-left: 0px;
+  margin-top: 0px;
 }

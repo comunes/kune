@@ -11,13 +11,16 @@
 
     <inherits name="com.calclab.suco.Suco" />
 
-    <inherits name='org.ourproject.kune.platf.Kune-Platform' />
-    <inherits name='org.ourproject.kune.docs.Kune-Docs' />
-    <inherits name='org.ourproject.kune.blogs.Kune-Blogs' />
-    <inherits name='org.ourproject.kune.wiki.Kune-Wiki' />
-    <inherits name='org.ourproject.kune.chat.Kune-Chat' />
-    <inherits name='org.ourproject.kune.gallery.Kune-Gallery' />
+    <inherits name='org.ourproject.kune.platf.KunePlatform' />
+    <inherits name='org.ourproject.kune.docs.KuneDocs' />
+    <inherits name='org.ourproject.kune.blogs.KuneBlogs' />
+    <inherits name='org.ourproject.kune.wiki.KuneWiki' />
+    <inherits name='org.ourproject.kune.chat.KuneChat' />
+    <inherits name='org.ourproject.kune.gallery.KuneGallery' />
 
+    <inherits name="com.google.gwt.libideas.ImmutableResources" />
+    <inherits name="com.google.gwt.libideas.StyleInjector" />
+    <inherits name="org.xwiki.gwt.dom.DOM" />
     <inherits name='org.cobogw.gwt.user.User' />
 
     <!-- gwt-ext -->

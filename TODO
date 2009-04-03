@@ -409,6 +409,11 @@ Caused by: java.lang.RuntimeException: Please apply com.google.inject.servlet.Gu
 ** TODO <v> think about more secure login, SRP protocol thread, and:
 http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/97623347b448e16e
 http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56dd4e5ad1
+*** oauth
+    http://code.google.com/p/gwt-examples/wiki/oAuth
+*** other links
+    http://code.google.com/p/gwt-examples/wiki/project_LoginManager
+    http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
 ** TODO <v> Build better our maven repo
   http://maven.apache.org/guides/mini/guide-central-repository-upload.html
 ** TODO <v> for dev, study jetty hot deploy (manual mode in >=7.0.0).
@@ -418,6 +423,9 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/b4a27c80f50581cc
 ** TODO <v> See css utilities in http://code.google.com/p/cobogw/
 ** TODO <v> kune & accessibility
+   ARIA specification
+   http://code.google.com/docreader/#p=google-web-toolkit-doc-1-5&s=google-web-toolkit-doc-1-5&t=DevGuideAccessibility
+   http://code.google.com/docreader/#p=google-web-toolkit-doc-1-5&s=google-web-toolkit-doc-1-5&t=DevGuideAccessibilityHOWTO
    http://googlewebtoolkit.blogspot.com/2008/09/built-in-accessibility-in-gwt-15.html
    http://extjs.com/forum/showthread.php?t=12999
 ** FIXED <s,v> Add in license choose a free/non-free indicator [3]

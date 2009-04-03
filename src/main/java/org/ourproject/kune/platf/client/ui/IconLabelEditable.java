@@ -174,21 +174,21 @@ public class IconLabelEditable extends Composite {
             editor.setStyleName("k-eil-edit");
             hp.add(editor);
             editor.addFocusListener(new FocusListener() {
-                public void onFocus(Widget sender) {
+                public void onFocus(final Widget sender) {
                 }
 
-                public void onLostFocus(Widget sender) {
+                public void onLostFocus(final Widget sender) {
                     afterEdit();
                 }
             });
             editor.addChangeListener(new ChangeListener() {
-                public void onChange(Widget sender) {
+                public void onChange(final Widget sender) {
                     editor.setFocus(false);
                 }
             });
         }
         editor.setReadOnly(false);
-        editor.setPixelSize(hpWidth < 100 ? 100 : hpWidth, 21);
+        editor.setPixelSize(hpWidth < 100 ? 100 : hpWidth - 3, 21);
         editor.setText(currentText);
         editor.setVisible(true);
         editor.setFocus(true);

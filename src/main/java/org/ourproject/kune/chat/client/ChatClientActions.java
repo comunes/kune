@@ -31,12 +31,14 @@ import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 
 import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 
 public class ChatClientActions {
@@ -47,16 +49,19 @@ public class ChatClientActions {
     private final I18nUITranslationService i18n;
     private final ContextActionRegistry contextActionRegistry;
     private final Provider<AddRoom> addRoomProvider;
+    private final Provider<DeferredCommandWrapper> deferredWrapper;
 
     public ChatClientActions(final I18nUITranslationService i18n, final Session session,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
-            final Provider<ChatEngine> chatEngine, Provider<AddRoom> addRoomProvider) {
+            final Provider<ChatEngine> chatEngine, final Provider<AddRoom> addRoomProvider,
+            final Provider<DeferredCommandWrapper> deferredWrapper) {
         this.i18n = i18n;
         this.session = session;
         this.contentActionRegistry = contentActionRegistry;
         this.contextActionRegistry = contextActionRegistry;
         this.chatEngineProvider = chatEngine;
         this.addRoomProvider = addRoomProvider;
+        this.deferredWrapper = deferredWrapper;
         createActions();
     }
 
@@ -64,9 +69,14 @@ public class ChatClientActions {
         final ActionToolbarButtonDescriptor<StateToken> chatAbout = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
-                        chatEngineProvider.get().joinRoom(token.toString().replaceAll("\\.", "-"),
-                                session.getCurrentUserInfo().getShortName());
-                        chatEngineProvider.get().show();
+                        deferredWrapper.get().addCommand(new Listener0() {
+                            public void onEvent() {
+                                String subject = i18n.t("Chat about: [%s]", session.getContentState().getTitle());
+                                chatEngineProvider.get().joinRoom(token.toString().replaceAll("\\.", "-"), subject,
+                                        session.getCurrentUserInfo().getShortName());
+                                chatEngineProvider.get().show();
+                            }
+                        });
                     }
                 });
         // chatAbout.setTextDescription(i18n.t("Chat about"));
@@ -77,7 +87,7 @@ public class ChatClientActions {
 
         ActionToolbarButtonDescriptor<StateToken> joinRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
-                    public void onEvent(StateToken token) {
+                    public void onEvent(final StateToken token) {
                         ChatEngine chatEngine = chatEngineProvider.get();
                         chatEngine.joinRoom(session.getContainerState().getContainer().getName(),
                                 session.getCurrentUserInfo().getShortName());
@@ -90,7 +100,7 @@ public class ChatClientActions {
 
         ActionToolbarButtonDescriptor<StateToken> addRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Administrator, AbstractFoldableContentActions.CONTEXT_TOPBAR, new Listener<StateToken>() {
-                    public void onEvent(StateToken token) {
+                    public void onEvent(final StateToken token) {
                         addRoomProvider.get().show();
                     }
                 });
@@ -112,7 +122,7 @@ public class ChatClientActions {
 
     private ActionEnableCondition<StateToken> notDeleted() {
         return new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(StateToken token) {
+            public boolean mustBeEnabled(final StateToken token) {
                 final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
                         ContentStatusDTO.inTheDustbin));
                 return isNotDeleted;

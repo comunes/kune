@@ -37,6 +37,7 @@ import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
@@ -60,7 +61,7 @@ public class ChatClientModule extends AbstractModule {
             public ChatClientActions create() {
                 return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatEngine.class),
-                        $$(AddRoom.class));
+                        $$(AddRoom.class), $$(DeferredCommandWrapper.class));
             }
         });
 

@@ -123,24 +123,24 @@ Example of .m2/settings.xml:
 
 <pre>
 <?xml version="1.0" encoding="UTF-8"?>
- <settings>
+<settings>
    <profiles>
      <profile>
        <id>gwt-1.4.61</id>
        <properties>
          <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.4.61</google.webtoolkit.home>
-         <!-- <google.webtoolkit.devjar>gwt-dev-linux</google.webtoolkit.devjar> -->
-         <!-- you only need this is you are on a mac -->
-        <google.webtoolkit.extrajvmargs>-Xmx256M</google.webtoolkit.extrajvmargs>
+         <google.webtoolkit.extrajvmargs>-Xmx512M</google.webtoolkit.extrajvmargs>
+         <!-- XstartOnFirstThread needed only on the mac -->  
+         <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->  
       </properties>
      </profile>
      <profile>
        <id>gwt-1.5.3</id>
        <properties>
          <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.5.3</google.webtoolkit.home>
-         <!-- <google.webtoolkit.devjar>gwt-dev-linux</google.webtoolkit.devjar> -->
-         <!-- you only need this is you are on a mac -->
-        <google.webtoolkit.extrajvmargs>-Xmx256M</google.webtoolkit.extrajvmargs>
+         <google.webtoolkit.extrajvmargs>-Xmx512M</google.webtoolkit.extrajvmargs>
+         <!-- XstartOnFirstThread needed only on the mac -->  
+         <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->  
       </properties>
      </profile>
    </profiles>

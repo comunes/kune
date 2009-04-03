@@ -17,7 +17,7 @@
    inkscape:version="0.46"
    version="1.0"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual"
-   sodipodi:docname="kune-initial-diagram.svg"
+   sodipodi:docname="kune-initial-diagram-es.svg"
    inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/documentos/fsm-virtual/kune-fsm-virtual-0.3.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
@@ -119,9 +119,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="344.8926"
-     inkscape:cy="1195.9505"
+     inkscape:zoom="1"
+     inkscape:cx="437.5873"
+     inkscape:cy="1235.6384"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      width="2104.7244px"
@@ -155,10 +155,6 @@
        orientation="horizontal"
        position="700"
        id="guide2423" />
-    <sodipodi:guide
-       orientation="horizontal"
-       position="1025"
-       id="guide2425" />
     <sodipodi:guide
        orientation="vertical"
        position="375"
@@ -274,11 +270,11 @@
          sodipodi:role="line"
          id="tspan2224"
          x="135.88113"
-         y="77.053635">libre/free projects</tspan><tspan
+         y="77.053635">plataforma colaborativa</tspan><tspan
          id="tspan7145"
          sodipodi:role="line"
          x="135.88113"
-         y="98.258211">collaborative platform</tspan></text>
+         y="119.46278">para proyectos libres</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#e57601;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Emblem"
@@ -289,7 +285,7 @@
          id="tspan3426"
          sodipodi:role="line"
          x="443.77328"
-         y="70.117912">descriptive diagrams</tspan></text>
+         y="70.117912">diagramas descriptivos</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text7201"
@@ -393,7 +389,7 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="1840.093"
        y="27.303005"
        id="text17386"
@@ -401,7 +397,7 @@
          id="tspan17390"
          sodipodi:role="line"
          x="1840.093"
-         y="27.303005">about this doc:</tspan></text>
+         y="27.303005">Sobre este doc:</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text21552"
@@ -441,7 +437,7 @@
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="117.87036"
        y="565.97632"
        id="text16311"
@@ -452,7 +448,7 @@
          id="tspan16313"
          sodipodi:role="line"
          x="117.87036"
-         y="565.97632">project/group A users</tspan></text>
+         y="565.97632">usuarios/as del grupo/proyecto A</tspan></text>
     <rect
        rx="5.0739045"
        style="color:black;fill:#f4e3d7;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017997;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -469,7 +465,7 @@
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="117.37036"
        y="678.97632"
        id="text16317"
@@ -480,7 +476,7 @@
          id="tspan16319"
          sodipodi:role="line"
          x="117.37036"
-         y="678.97632">project/group B users</tspan></text>
+         y="678.97632">usuarios/as del grupo/proyecto B</tspan></text>
     <rect
        rx="5.0739045"
        ry="5.0739045"
@@ -498,7 +494,7 @@
        id="text16323"
        y="720.97632"
        x="117.37036"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
@@ -508,7 +504,7 @@
          y="720.97632"
          x="117.37036"
          sodipodi:role="line"
-         id="tspan16325">project/group N users</tspan></text>
+         id="tspan16325">usuarios/as del grupo/proyecto N</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text16327"
@@ -540,27 +536,27 @@
          sodipodi:role="line"
          x="397.57626"
          y="698.08447"
-         id="tspan18436">an user creates project &gt;&gt;&gt; he/she is the coordinator</tspan><tspan
+         id="tspan18436">una usuaria crea un proyecto &gt;&gt;&gt; ella es la admin</tspan><tspan
          sodipodi:role="line"
          x="397.57626"
          y="712.08447"
-         id="tspan18438">coordinator &gt;&gt;&gt;  invites other users to collab/subsc.</tspan><tspan
+         id="tspan18438">administradora &gt;&gt;&gt;  invita a otros/a para colaborar</tspan><tspan
          sodipodi:role="line"
          x="397.57626"
          y="726.08447"
-         id="tspan18430">coordinator &gt;&gt;&gt; chooses other coordinators</tspan><tspan
+         id="tspan18432">ella también &gt;&gt;&gt; elije otros/as administradores/as</tspan><tspan
          sodipodi:role="line"
          x="397.57626"
          y="740.08447"
-         id="tspan18432">user &gt;&gt;&gt; subs1cribe to blogs/calendar/etc</tspan><tspan
+         id="tspan3842">los usuarios &gt;&gt;&gt; se subscriben a blogs/foros/etc</tspan><tspan
          sodipodi:role="line"
          x="397.57626"
          y="754.08447"
-         id="tspan5985">or</tspan><tspan
+         id="tspan5985">o</tspan><tspan
          sodipodi:role="line"
          x="397.57626"
          y="768.08447"
-         id="tspan18434">user &gt;&gt;&gt; request to collaborate</tspan></text>
+         id="tspan18434">usuario/a &gt;&gt;&gt; solicita colaborar</tspan></text>
     <rect
        rx="5.0739088"
        style="color:black;fill:#f4e3d7;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16018057;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -585,40 +581,33 @@
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-    <g
-       id="g18410"
-       transform="translate(517.62,308.855)"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <rect
-         ry="5.073904"
-         rx="5.0739079"
-         y="306.05661"
-         x="-380.58337"
-         height="23.233286"
-         width="80.210175"
-         id="rect17488"
-         style="opacity:0.66000001;color:black;fill:#c8b7b7;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:2.07187319;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:2.0718732, 4.14374641;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
-      <text
-         inkscape:transform-center-x="-380.01193"
-         inkscape:transform-center-y="-905.97048"
-         xml:space="preserve"
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-         x="-373.09253"
-         y="322.27383"
-         id="text17482"
-         sodipodi:linespacing="100%"><tspan
-           id="tspan17484"
-           sodipodi:role="line"
-           x="-373.09253"
-           y="322.27383">coordinators</tspan></text>
-    </g>
+    <rect
+       style="opacity:0.66000001;fill:#c8b7b7;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:2.1727376;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:2.17273759, 4.34547518;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       id="rect17488"
+       width="88.594589"
+       height="23.132421"
+       x="137.08705"
+       y="614.96204"
+       rx="5.6042867"
+       ry="5.0518765" />
+    <text
+       sodipodi:linespacing="100%"
+       id="text17482"
+       y="631.12885"
+       x="144.52747"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       xml:space="preserve"
+       inkscape:transform-center-y="-905.97048"
+       inkscape:transform-center-x="-380.01193"><tspan
+         y="631.12885"
+         x="144.52747"
+         sodipodi:role="line"
+         id="tspan17484">coordinadores</tspan></text>
     <text
        inkscape:transform-center-x="-380.01193"
        inkscape:transform-center-y="-905.97048"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="144.5271"
        y="605.12878"
        id="text17494"
@@ -629,12 +618,12 @@
          id="tspan17496"
          sodipodi:role="line"
          x="144.5271"
-         y="605.12878">collaborators</tspan></text>
+         y="605.12878">collaboradores/as</tspan></text>
     <text
        inkscape:transform-center-x="-380.01193"
        inkscape:transform-center-y="-905.97048"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="144.5271"
        y="584.57562"
        id="text17499"
@@ -645,13 +634,13 @@
          id="tspan17501"
          sodipodi:role="line"
          x="144.5271"
-         y="584.57562">subscribers</tspan></text>
+         y="584.57562">subscriptores/as</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text17513"
        y="527.323"
        x="113.63623"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="-905.97048"
        inkscape:transform-center-x="-380.01193"
@@ -661,16 +650,16 @@
          y="527.323"
          x="113.63623"
          sodipodi:role="line"
-         id="tspan17515">site admin users</tspan></text>
+         id="tspan17515">administradores del sitio kune</tspan></text>
     <rect
-       style="color:black;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:maroon;stroke-width:2.07187462;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:2.07187465, 4.14374932;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#800000;stroke-width:2.69427085;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:2.69427084, 5.3885417;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect17517"
-       width="96.184792"
-       height="18.25466"
-       x="107.16443"
-       y="513.59503"
-       rx="5.0739136"
-       ry="5.0739021"
+       width="168.39439"
+       height="17.632263"
+       x="107.47562"
+       y="513.90625"
+       rx="8.8830948"
+       ry="4.9009066"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -679,7 +668,7 @@
        id="text16373"
        y="616.86957"
        x="397.95224"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
@@ -689,23 +678,23 @@
          id="tspan16580"
          y="616.86957"
          x="397.95224"
-         sodipodi:role="line">every project/group/user selects </tspan><tspan
+         sodipodi:role="line">cada proyecto/grupo/usuario selecciona</tspan><tspan
          y="630.86957"
          x="397.95224"
          sodipodi:role="line"
-         id="tspan5989">   the tools that want's to use;</tspan><tspan
+         id="tspan5989">   las herramientas que quiere usar;</tspan><tspan
          id="tspan16588"
          y="644.86957"
          x="397.95224"
-         sodipodi:role="line">you can see and interact with content </tspan><tspan
+         sodipodi:role="line">   tu puedes interactuar con los contenidos </tspan><tspan
          y="658.86957"
          x="397.95224"
          sodipodi:role="line"
-         id="tspan5542">   depending on your role (anonymous users have </tspan><tspan
+         id="tspan3828">   dependiendo de tu rol (los usuarios anónimos </tspan><tspan
          id="tspan16586"
-         y="672.86957"
+         y="686.86957"
          x="397.95224"
-         sodipodi:role="line">   less tools and functionality)</tspan></text>
+         sodipodi:role="line">   tienen menos herramientas y funcionalidad)</tspan></text>
     <rect
        style="color:black;fill:#ffba7f;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.99999976;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect2567"
@@ -723,7 +712,7 @@
        id="text3473"
        y="215.51828"
        x="116.4381"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
        inkscape:export-xdpi="90"
@@ -731,7 +720,7 @@
          y="215.51828"
          x="116.4381"
          id="tspan3475"
-         sodipodi:role="line">public space</tspan></text>
+         sodipodi:role="line">espacio público</tspan></text>
     <rect
        style="color:black;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.7925415;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect3513"
@@ -761,7 +750,7 @@
        id="text3515"
        y="339.55713"
        x="116.4381"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
        inkscape:export-xdpi="90"
@@ -769,17 +758,17 @@
          y="339.55713"
          x="116.4381"
          sodipodi:role="line"
-         id="tspan3519">group/projects</tspan><tspan
+         id="tspan3781">espacio de grupos</tspan><tspan
          y="357.55713"
          x="116.4381"
          sodipodi:role="line"
-         id="tspan10318">&amp; users space</tspan></text>
+         id="tspan10318">y usuarios</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text3613"
        y="163.92476"
        x="90.94828"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:green;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
        inkscape:export-xdpi="90"
@@ -787,7 +776,7 @@
          y="163.92476"
          x="90.94828"
          sodipodi:role="line"
-         id="tspan3615">kune site spaces</tspan></text>
+         id="tspan3615">espacios en un sitio kune</tspan></text>
     <path
        style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:black;stroke-width:1.03333509;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.03333518, 3.10000554;stroke-dashoffset:0;stroke-opacity:1"
        d="M 295.26709,395.24634 C 465.3661,575.9561 464.51022,576.8562 464.51022,576.8562"
@@ -801,7 +790,7 @@
        id="text10297"
        y="391.59406"
        x="118.33145"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
        inkscape:export-xdpi="90"
@@ -809,7 +798,7 @@
          y="391.59406"
          x="118.33145"
          sodipodi:role="line"
-         id="tspan10299">private space</tspan></text>
+         id="tspan10299">espacio privado</tspan></text>
     <rect
        style="color:black;fill:url(#linearGradient2761);fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.99999988;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect3617"
@@ -835,7 +824,15 @@
          y="310.45432"
          x="280.22314"
          id="tspan3621"
-         sodipodi:role="line">tools</tspan></text>
+         sodipodi:role="line">herra</tspan><tspan
+         y="328.45432"
+         x="280.22314"
+         sodipodi:role="line"
+         id="tspan3789">mien</tspan><tspan
+         y="346.45432"
+         x="280.22314"
+         sodipodi:role="line"
+         id="tspan3791">tas</tspan></text>
     <g
        id="g11896"
        transform="matrix(0.573628,0,0,0.573628,160.845,252.6829)"
@@ -966,14 +963,14 @@
            inkscape:export-ydpi="71.000000">
           <tspan
              sodipodi:role="line"
-             id="tspan14874"
              x="905.56927"
-             y="219.00177">Todo lists+</tspan>
+             y="219.00177"
+             id="tspan3801">Calendario+</tspan>
           <tspan
              sodipodi:role="line"
              x="905.56927"
-             y="234.00177"
-             id="tspan14876">Calendar</tspan>
+             y="249.00177"
+             id="tspan14876">Lista de tareas</tspan>
         </text>
         <g
            style="display:inline"
@@ -1088,7 +1085,7 @@
              sodipodi:role="line"
              id="tspan14880"
              x="908.02405"
-             y="284.07925">Media Gallery</tspan>
+             y="284.07925">Gallería</tspan>
         </text>
         <g
            transform="matrix(7.525926e-2,0,0,7.525926e-2,846.7084,272.6336)"
@@ -1153,7 +1150,7 @@
              sodipodi:role="line"
              id="tspan14884"
              x="908.02405"
-             y="345.01498">Contact us</tspan>
+             y="345.01498">Contáctanos</tspan>
         </text>
         <g
            style="display:inline"
@@ -1218,7 +1215,7 @@
            id="text14860"
            x="908.02405"
            y="159.5063"
-           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:#6a3230;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:Bitstream Vera Sans"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#6a3230;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:Bitstream Vera Sans"
            sodipodi:linespacing="125%"
            inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
            inkscape:export-xdpi="71.000000"
@@ -1227,12 +1224,12 @@
              sodipodi:role="line"
              id="tspan14862"
              x="908.02405"
-             y="159.5063">Wiki</tspan>
+             y="159.5063">Páginas</tspan>
           <tspan
              sodipodi:role="line"
              x="908.02405"
-             y="174.5063"
-             id="tspan14864">documents</tspan>
+             y="189.5063"
+             id="tspan14864">Wiki</tspan>
         </text>
         <g
            style="display:inline"
@@ -1302,21 +1299,16 @@
            id="text14886"
            font-size="12"
            x="906.69946"
-           y="473.64789"
+           y="481.64789"
            sodipodi:linespacing="125%"
            inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/desarrollo/redefinicion2005/sandbox/newUIdraftwithoutcomments-0.1.png"
            inkscape:export-xdpi="71.000000"
            inkscape:export-ydpi="71.000000">
           <tspan
              sodipodi:role="line"
-             id="tspan14888"
              x="906.69946"
-             y="473.64789">user/project</tspan>
-          <tspan
-             sodipodi:role="line"
-             x="906.69946"
-             y="488.64789"
-             id="tspan14890">preferences</tspan>
+             y="481.64789"
+             id="tspan14890">preferencias</tspan>
         </text>
         <g
            style="display:inline"
@@ -1375,22 +1367,22 @@
              id="tspan16934"
              sodipodi:role="line"
              x="908.55518"
-             y="406.08157">other <tspan
+             y="406.08157">otros <tspan
    id="tspan18624"
-   style="font-size:8px">(faqs, recipes,</tspan>
+   style="font-size:8px">(faqs, recetas,</tspan>
 </tspan>
           <tspan
              style="font-size:8px"
              id="tspan16938"
              sodipodi:role="line"
              x="908.55518"
-             y="417.09458">p2p file sharing, RSS,</tspan>
+             y="417.09457">compartición p2p, RSS,</tspan>
           <tspan
              style="font-size:8px"
              sodipodi:role="line"
              x="908.55518"
-             y="427.09458"
-             id="tspan2406">donnations)</tspan>
+             y="427.09457"
+             id="tspan3817">donaciones)</tspan>
         </text>
         <rect
            style="fill:#dd8a3d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:12.63039398pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1417,14 +1409,9 @@
            inkscape:export-ydpi="71.000000">
           <tspan
              sodipodi:role="line"
-             id="tspan14868"
              x="907.7702"
-             y="28.552214">Message</tspan>
-          <tspan
-             sodipodi:role="line"
-             x="907.7702"
-             y="43.552214"
-             id="tspan14870">boards</tspan>
+             y="28.552214"
+             id="tspan14870">Salas de charla</tspan>
         </text>
         <g
            style="display:inline"
@@ -1516,14 +1503,14 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <rect
-       rx="1.6797104"
-       style="color:black;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:0.95113766;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+       rx="1.7494446"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:0.9704141;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect10957"
-       width="237.98792"
-       height="35.133797"
-       x="740.71301"
-       y="541.66791"
-       ry="1.6797104"
+       width="247.86813"
+       height="35.114521"
+       x="740.72266"
+       y="541.67755"
+       ry="1.6787888"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part2-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -1950,7 +1937,7 @@
        id="text10945"
        y="732.14978"
        x="747.68213"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part2-0.1.png"
        inkscape:export-xdpi="90"
@@ -1958,13 +1945,13 @@
          y="732.14978"
          x="747.68213"
          sodipodi:role="line"
-         id="tspan10949">and others</tspan></text>
+         id="tspan10949">y otras</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text10953"
        y="555.14978"
        x="880.56927"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
@@ -1974,11 +1961,11 @@
          y="555.14978"
          x="880.56927"
          sodipodi:role="line"
-         id="tspan10955">recomended</tspan><tspan
-         y="569.14978"
+         id="tspan10959">recomendadas para</tspan><tspan
+         y="555.14978"
          x="880.56927"
          sodipodi:role="line"
-         id="tspan10959">for practical works</tspan></text>
+         id="tspan3846">trabajos prácticos</tspan></text>
     <rect
        style="color:black;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.99999976;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect13576"
@@ -2056,7 +2043,7 @@
        id="text14523"
        y="541.16681"
        x="1117.6343"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part2-0.1.png"
        inkscape:export-xdpi="90"
@@ -2064,7 +2051,7 @@
          y="541.16681"
          x="1117.6343"
          sodipodi:role="line"
-         id="tspan14525">local search</tspan></text>
+         id="tspan14525">búsqueda local</tspan></text>
     <rect
        style="color:black;fill:#f4e3d7;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:2.07187343;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:2.07187325, 4.14374652;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect14557"
@@ -2118,7 +2105,7 @@
        id="text14559"
        y="645.79883"
        x="1137.2522"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part2-0.1.png"
        inkscape:export-xdpi="90"
@@ -2126,11 +2113,15 @@
          y="645.79883"
          x="1137.2522"
          sodipodi:role="line"
-         id="tspan14561">global search in </tspan><tspan
+         id="tspan14561">búsqueda global en </tspan><tspan
          y="663.79883"
          x="1137.2522"
          sodipodi:role="line"
-         id="tspan14567">other similar sites</tspan></text>
+         id="tspan3864">iniciativas similares</tspan><tspan
+         y="699.79883"
+         x="1137.2522"
+         sodipodi:role="line"
+         id="tspan14567">asociadas</tspan></text>
     <rect
        rx="8"
        style="color:black;fill:#ffba7f;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.99999976;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -2143,22 +2134,6 @@
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part3-0.1.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-    <text
-       inkscape:transform-center-x="31"
-       inkscape:transform-center-y="58"
-       xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
-       x="1383.7319"
-       y="446.56119"
-       id="text18529"
-       sodipodi:linespacing="100%"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part3-0.1.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
-         sodipodi:role="line"
-         x="1383.7319"
-         y="446.56119"
-         id="tspan18531">every content in system can be tagged</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot18561"
@@ -2174,24 +2149,40 @@
            y="1545.189" /></flowRegion><flowPara
          id="flowPara18567"><flowSpan
    style="font-size:24px"
-   id="flowSpan18591">activism</flowSpan> child_health <flowSpan
+   id="flowSpan18591">activismo</flowSpan> salud_infantil <flowSpan
    style="font-size:18px"
-   id="flowSpan18571">ecology</flowSpan> education ethnicity <flowSpan
+   id="flowSpan18571">ecología</flowSpan> educación <flowSpan
    style="font-size:10px"
-   id="flowSpan18595">folklore</flowSpan> internet <flowSpan
+   id="flowSpan18595">folclore</flowSpan> Internet <flowSpan
    style="font-size:16px"
    id="flowSpan18587">lgbt</flowSpan><flowSpan
    style="font-size:14px"
    id="flowSpan18597"> media</flowSpan><flowSpan
    style="font-size:18px"
-   id="flowSpan18589"> medicine nonviolence</flowSpan><flowSpan
+   id="flowSpan18589"> medicina no violencia</flowSpan><flowSpan
    style="font-size:14px"
-   id="flowSpan18593"> nutrition</flowSpan><flowSpan
+   id="flowSpan18593"> nutrición</flowSpan><flowSpan
    style="font-size:24px"
-   id="flowSpan18577"> pacifism</flowSpan> regional <flowSpan
+   id="flowSpan18577"> pacifismo</flowSpan> regional <flowSpan
    style="font-size:24px"
    id="flowSpan18579">social</flowSpan></flowPara><flowPara
-         id="flowPara18569" /></flowRoot>    <rect
+         id="flowPara18569" /></flowRoot>    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="1383.7319"
+       y="446.56119"
+       id="text18529"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part3-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="1383.7319"
+         y="446.56119"
+         id="tspan18531">cualquier contenido puede ser puntuado</tspan></text>
+    <rect
        rx="8"
        style="color:black;fill:#ffba7f;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.99999976;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect11905"
@@ -2219,7 +2210,7 @@
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="764.96442"
        y="208.47394"
        id="text11909"
@@ -2230,7 +2221,7 @@
          id="tspan11913"
          sodipodi:role="line"
          x="764.96442"
-         y="208.47394">project/group A</tspan></text>
+         y="208.47394">proyecto/grupo A</tspan></text>
     <rect
        rx="5.0739045"
        style="color:black;fill:#f4e3d7;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017997;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -2247,7 +2238,7 @@
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="764.46442"
        y="231.47394"
        id="text11927"
@@ -2258,7 +2249,7 @@
          id="tspan11929"
          sodipodi:role="line"
          x="764.46442"
-         y="231.47394">project/group B</tspan></text>
+         y="231.47394">proyecto/grupo B</tspan></text>
     <rect
        rx="5.0739045"
        ry="5.0739045"
@@ -2276,7 +2267,7 @@
        id="text11933"
        y="273.474"
        x="764.46442"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
@@ -2286,7 +2277,7 @@
          y="273.474"
          x="764.46442"
          sodipodi:role="line"
-         id="tspan11935">project/group N</tspan></text>
+         id="tspan11935">proyecto/grupo N</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text11937"
@@ -2320,7 +2311,7 @@
        inkscape:transform-center-x="-297.58728"
        inkscape:transform-center-y="-205.54626"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="-392.07507"
        y="889.39441"
        id="text11951"
@@ -2332,7 +2323,7 @@
          id="tspan11953"
          sodipodi:role="line"
          x="-392.07507"
-         y="889.39441">user A</tspan></text>
+         y="889.39441">usuario/a A</tspan></text>
     <rect
        rx="5.0739045"
        style="opacity:0.66000001;color:black;fill:#f4e3d7;fill-opacity:1;fill-rule:nonzero;stroke:#e57601;stroke-width:1.16017997;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -2350,7 +2341,7 @@
        inkscape:transform-center-x="-297.58728"
        inkscape:transform-center-y="-205.54626"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="-392.57507"
        y="912.39441"
        id="text11957"
@@ -2362,7 +2353,7 @@
          id="tspan11959"
          sodipodi:role="line"
          x="-392.57507"
-         y="912.39441">user B</tspan></text>
+         y="912.39441">usuario/a B</tspan></text>
     <rect
        rx="5.0739045"
        ry="5.0739045"
@@ -2381,7 +2372,7 @@
        id="text11963"
        y="954.39441"
        x="-392.57507"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="-205.54626"
        inkscape:transform-center-x="-297.58728"
@@ -2392,7 +2383,7 @@
          y="954.39441"
          x="-392.57507"
          sodipodi:role="line"
-         id="tspan11965">user N</tspan></text>
+         id="tspan11965">usuario/a N</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text11967"
@@ -2427,7 +2418,7 @@
        inkscape:transform-center-x="-31.703564"
        inkscape:transform-center-y="-324.54137"
        xml:space="preserve"
-       style="font-size:14.00036716px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14.00036716px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="277.0766"
        y="821.07513"
        id="text11975"
@@ -2439,12 +2430,12 @@
          id="tspan11977"
          sodipodi:role="line"
          x="277.0766"
-         y="821.07513">kune site oficial content</tspan></text>
+         y="821.07513">contenido oficial del sitio kune</tspan></text>
     <text
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="732.96442"
        y="444.474"
        id="text11983"
@@ -2455,7 +2446,11 @@
          sodipodi:role="line"
          x="732.96442"
          y="444.474"
-         id="tspan11995">users make publication proposals in projects/groups</tspan></text>
+         id="tspan11995">los usuarios hacen propuestas de publicación</tspan><tspan
+         sodipodi:role="line"
+         x="732.96442"
+         y="458.474"
+         id="tspan3848">o publican (según su rol) en proyectos/grupos</tspan></text>
     <rect
        rx="8"
        style="color:black;fill:#ffba7f;fill-opacity:1;fill-rule:nonzero;stroke:#dc5f01;stroke-width:1.99999976;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -2487,7 +2482,7 @@
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="1058.2578"
        y="444.19019"
        id="text13557"
@@ -2498,7 +2493,11 @@
          sodipodi:role="line"
          x="1058.2578"
          y="444.19019"
-         id="tspan13565">users decide the relevancy of contents</tspan></text>
+         id="tspan13565">todos los usuarios/as deciden la relevancia de los</tspan><tspan
+         sodipodi:role="line"
+         x="1058.2578"
+         y="458.19019"
+         id="tspan3850">contenidos que visitan</tspan></text>
     <path
        style="color:black;fill:#a02c2c;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.35315001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:block"
        d="M 1109.2398,324.36452 L 1146.0437,369.57316 L 1182.8336,324.36452 L 1166.6809,324.36452 L 1166.6809,284.98562 L 1182.8336,284.98562 L 1146.0437,239.76072 L 1109.2398,284.98562 L 1125.5331,284.98562 L 1125.5331,324.36452 L 1109.2398,324.36452 z "
@@ -2511,7 +2510,7 @@
        id="text21514"
        y="769.62695"
        x="1380.5332"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:transform-center-y="58"
        inkscape:transform-center-x="31"
@@ -2521,7 +2520,11 @@
          y="769.62695"
          x="1380.5332"
          sodipodi:role="line"
-         id="tspan21520">kune site minimal top toolbar by default</tspan></text>
+         id="tspan21520">la presencia de la iniciativa kune es mínima, frente</tspan><tspan
+         y="783.62695"
+         x="1380.5332"
+         sodipodi:role="line"
+         id="tspan3878">a la presencia y visibilidad del proyecto/grupo</tspan></text>
     <rect
        style="color:black;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:#1a1a1a;stroke-width:2.07187414;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect18846"
@@ -2580,7 +2583,7 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <text
-       style="font-size:3.8314054px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:black;fill:black;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:Bitstream Vera Sans"
+       style="font-size:3.8314054px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:Bitstream Vera Sans"
        id="text5198"
        font-size="11"
        x="1557.88"
@@ -2595,7 +2598,7 @@
          id="tspan7495"
          x="1557.88"
          y="559.79926"
-         style="font-size:8px">Search</tspan>
+         style="font-size:8px">Busca</tspan>
     </text>
     <rect
        style="color:black;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:#ccc;stroke-width:2.07187462;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -2660,7 +2663,15 @@
          y="599.44934"
          x="1598.48"
          id="tspan21344"
-         sodipodi:role="line">tools</tspan></text>
+         sodipodi:role="line">herra</tspan><tspan
+         y="617.44934"
+         x="1598.48"
+         sodipodi:role="line"
+         id="tspan3870">mien</tspan><tspan
+         y="635.44934"
+         x="1598.48"
+         sodipodi:role="line"
+         id="tspan3872">tas</tspan></text>
     <rect
        style="color:black;fill:#afc7e1;fill-opacity:1;fill-rule:nonzero;stroke:#3c985b;stroke-width:1.96949732;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        id="rect21355"
@@ -2686,11 +2697,11 @@
          y="595.80176"
          x="1409.9233"
          id="tspan21359"
-         sodipodi:role="line">project/group</tspan><tspan
-         y="613.80176"
+         sodipodi:role="line">contenidos del</tspan><tspan
+         y="631.80176"
          x="1409.9233"
          sodipodi:role="line"
-         id="tspan21361">contents</tspan></text>
+         id="tspan21361">proyecto/grupo</tspan></text>
     <g
        id="g21459"
        transform="translate(1678.332,-156.5426)"
@@ -2750,17 +2761,17 @@
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/Desktop/sandbox/edit.png"
-         x="-219.00302"
+         x="-199.20886"
          y="705.70544"
-         style="font-size:8.59295464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:black;fill:#803300;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:Bitstream Vera Sans"
+         style="font-size:8.59295464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;fill:#803300;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:Bitstream Vera Sans"
          id="text21421"
          xml:space="preserve"
          sodipodi:linespacing="125%"><tspan
            style="fill:#803300"
            y="705.70544"
-           x="-219.00302"
+           x="-199.20886"
            id="tspan21423"
-           sodipodi:role="line">Login to collaborate</tspan></text>
+           sodipodi:role="line">Entra</tspan></text>
       <text
          transform="scale(1.010399,0.989708)"
          inkscape:export-ydpi="90"
@@ -2771,12 +2782,12 @@
          x="-287.43378"
          font-size="11"
          id="text21425"
-         style="font-size:8.59295464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:black;fill:#803300;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:Bitstream Vera Sans">
+         style="font-size:8.59295464px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;fill:#803300;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:Bitstream Vera Sans">
         <tspan
            y="705.70544"
            x="-287.43378"
            id="tspan21427"
-           sodipodi:role="line">New project</tspan>
+           sodipodi:role="line">Nuevo proyecto</tspan>
       </text>
     </g>
     <g
@@ -2896,7 +2907,7 @@
          id="tspan2933">- kune means «together, joinly» in Esperanto</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:green;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed;text-indent:0;text-decoration:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;opacity:1;color:black;fill-rule:nonzero;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;visibility:visible;display:inline;overflow:visible"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        x="416.94827"
        y="163.92476"
        id="text3057"
@@ -2907,7 +2918,7 @@
          id="tspan3059"
          sodipodi:role="line"
          x="416.94827"
-         y="163.92476">kune tools</tspan></text>
+         y="163.92476">herramientas de kune</tspan></text>
     <path
        style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:black;stroke-width:1.03333509;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.0333351, 3.10000527;stroke-dashoffset:0;stroke-opacity:1"
        d="M 305.28312,285.28343 C 460.20337,187.77971 459.42388,187.2941 459.42388,187.2941"
@@ -2921,7 +2932,7 @@
        id="text3081"
        y="487.92474"
        x="94.948242"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
        inkscape:export-xdpi="90"
@@ -2929,10 +2940,10 @@
          y="487.92474"
          x="94.948242"
          sodipodi:role="line"
-         id="tspan3083">kune user roles</tspan></text>
+         id="tspan3083">roles de usuario en kune</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        x="744.94818"
        y="487.92474"
        id="text3085"
@@ -2943,13 +2954,13 @@
          id="tspan3087"
          sodipodi:role="line"
          x="744.94818"
-         y="487.92474">kune site content licenses</tspan></text>
+         y="487.92474">licencias de un sitio kune</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text3089"
        y="487.92474"
        x="1072.9482"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part2-0.1.png"
        inkscape:export-xdpi="90"
@@ -2957,10 +2968,10 @@
          y="487.92474"
          x="1072.9482"
          sodipodi:role="line"
-         id="tspan3091">kune site search system</tspan></text>
+         id="tspan3091">sistema de búsquedas en kune</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        x="1398.9482"
        y="163.92476"
        id="text3226"
@@ -2971,7 +2982,9 @@
          id="tspan3228"
          sodipodi:role="line"
          x="1398.9482"
-         y="163.92476">tags / keywords system</tspan></text>
+         y="163.92476">sistema de <tspan
+   style="font-style:italic;-inkscape-font-specification:HoratioDMed Italic"
+   id="tspan3852">tags</tspan> / etiquetas</tspan></text>
     <g
        id="g5912"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part1-0.1.png"
@@ -3199,7 +3212,7 @@
        id="text6093"
        y="162.92474"
        x="744.94818"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part2-0.1.png"
        inkscape:export-xdpi="90"
@@ -3207,10 +3220,10 @@
          y="162.92474"
          x="744.94818"
          sodipodi:role="line"
-         id="tspan6095">kune site content</tspan></text>
+         id="tspan6095">contenidos en kune</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        x="1072.9482"
        y="162.92474"
        id="text6097"
@@ -3221,13 +3234,13 @@
          id="tspan6099"
          sodipodi:role="line"
          x="1072.9482"
-         y="162.92474">kune site content relevancy</tspan></text>
+         y="162.92474">relavancia de contenidos en kune</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text6101"
        y="488.92474"
        x="1396.9482"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part3-0.1.png"
        inkscape:export-xdpi="90"
@@ -3235,7 +3248,7 @@
          y="488.92474"
          x="1396.9482"
          sodipodi:role="line"
-         id="tspan6103">per project style/image</tspan></text>
+         id="tspan6103">estilo e imagen por proyecto/grupo</tspan></text>
     <g
        transform="translate(654.0608,-1)"
        id="g6105"
@@ -3390,7 +3403,7 @@
        inkscape:export-ydpi="90" />
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        x="1722.9482"
        y="163.92474"
        id="text6269"
@@ -3401,7 +3414,7 @@
          id="tspan6271"
          sodipodi:role="line"
          x="1722.9482"
-         y="163.92474">kune social network</tspan></text>
+         y="163.92474">la red social en kune</tspan></text>
     <g
        id="g6273"
        transform="translate(1630.061,0)"
@@ -4001,7 +4014,7 @@
        id="text6624"
        y="489.92474"
        x="1722.9482"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;color:black;fill:green;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;font-family:HoratioDMed"
        xml:space="preserve"
        inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part3-0.1.png"
        inkscape:export-xdpi="90"
@@ -4009,7 +4022,7 @@
          y="489.92474"
          x="1722.9482"
          sodipodi:role="line"
-         id="tspan6626">vertical vs. almost horizontal hierarchy</tspan></text>
+         id="tspan6626">jerarquía vertical contra quasi horizontal </tspan></text>
     <g
        transform="translate(1630.061,326)"
        id="g6628"
@@ -4072,7 +4085,7 @@
        inkscape:transform-center-x="31"
        inkscape:transform-center-y="58"
        xml:space="preserve"
-       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="1706.5332"
        y="769.62695"
        id="text6646"
@@ -4083,11 +4096,11 @@
          id="tspan6648"
          sodipodi:role="line"
          x="1706.5332"
-         y="769.62695">every project/group have one or more coordinators</tspan><tspan
+         y="769.62695">cada proyecto/grupo tiene uno o más administradores</tspan><tspan
          sodipodi:role="line"
          x="1706.5332"
-         y="783.62695"
-         id="tspan6682">(who starts a projects coordinate the project)</tspan></text>
+         y="797.62695"
+         id="tspan6682">(quien comienza el proyecto lo coordina)</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text6654"
@@ -4101,18 +4114,18 @@
          y="610.85645"
          x="1840.2695"
          id="tspan6656"
-         sodipodi:role="line">traditional</tspan><tspan
+         sodipodi:role="line">jerarquía</tspan><tspan
          y="628.85645"
          x="1840.2695"
          sodipodi:role="line"
-         id="tspan6660">vertical</tspan><tspan
-         y="646.85645"
+         id="tspan3880">tradicional</tspan><tspan
+         y="664.85645"
          x="1840.2695"
          sodipodi:role="line"
-         id="tspan6658">hierarchy</tspan></text>
+         id="tspan6658">vertical</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#a40;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;writing-mode:lr-tb;text-anchor:middle;fill:#aa4400;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        x="1839.8257"
        y="708.85645"
        id="text6666"
@@ -4123,7 +4136,7 @@
          id="tspan6672"
          sodipodi:role="line"
          x="1839.8257"
-         y="708.85645">projects/groups organization</tspan></text>
+         y="708.85645">organización de proyectos y grupos</tspan></text>
     <text
        sodipodi:linespacing="100%"
        id="text6678"
@@ -4172,12 +4185,32 @@
        id="text7260"
        y="45.303005"
        x="1840.093"
-       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#520;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
        xml:space="preserve"><tspan
          y="45.303005"
          x="1840.093"
          sodipodi:role="line"
          id="tspan7262"
-         dy="0 -0.96370161 -6.0086506e-07">© kune initiative</tspan></text>
+         dy="0 -0.96370161 0 0 0 0 0 0 0 0 0 0 0 -6.0086506e-07">© iniciativa kune</tspan></text>
+    <text
+       inkscape:transform-center-x="31"
+       inkscape:transform-center-y="58"
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#552200;fill-opacity:1;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:HoratioDMed"
+       x="1710.6294"
+       y="446.75223"
+       id="text3854"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/img/kune-diagram-part3-0.1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="1710.6294"
+         y="446.75223"
+         id="tspan3858">se forja a través de las relaciones entre usuarios/as</tspan><tspan
+         sodipodi:role="line"
+         x="1710.6294"
+         y="460.75223"
+         id="tspan3862">y a través de la participación en diferentes proyectos</tspan></text>
   </g>
 </svg>

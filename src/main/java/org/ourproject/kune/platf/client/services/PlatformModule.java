@@ -192,12 +192,14 @@ public class PlatformModule extends AbstractModule {
             }
         });
 
-        register(Singleton.class, new Factory<QuickTipsHelper>(QuickTipsHelper.class) {
-            @Override
-            public QuickTipsHelper create() {
-                return new QuickTipsHelper();
-            }
-        });
+        if (!container.hasProvider(QuickTipsHelper.class)) {
+            register(Singleton.class, new Factory<QuickTipsHelper>(QuickTipsHelper.class) {
+                @Override
+                public QuickTipsHelper create() {
+                    return new QuickTipsHelper();
+                }
+            });
+        }
 
         $(I18nUITranslationService.class);
         $(QuickTipsHelper.class);

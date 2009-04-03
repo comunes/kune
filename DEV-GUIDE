@@ -172,6 +172,9 @@ generates .project and download necessary code jars. Then you can import the pro
 
 Also you have to set the variable M2_REPO (Eclipse Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/ouruser/.m2/repository).
 
+Useful info about gwt and Eclipse:
+http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
+
 ===GWT's Hosted Mode===
 
 For start the hosted mode, you can both execute from command line:

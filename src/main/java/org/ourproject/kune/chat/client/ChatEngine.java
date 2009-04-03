@@ -40,6 +40,8 @@ public interface ChatEngine {
 
     void joinRoom(String roomName, String userAlias);
 
+    void joinRoom(String roomName, String subject, String userAlias);
+
     void login(String jid, String passwd);
 
     void logout();

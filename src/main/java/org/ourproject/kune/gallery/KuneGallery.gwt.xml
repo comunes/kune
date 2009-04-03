@@ -1,0 +1,5 @@
+<!DOCTYPE document SYSTEM "src/main/java/gwt-module.dtd">
+<module>
+        <inherits name='org.ourproject.kune.platf.KunePlatform' />
+        <inherits name='org.ourproject.kune.workspace.KuneWorkspace' />
+</module>
