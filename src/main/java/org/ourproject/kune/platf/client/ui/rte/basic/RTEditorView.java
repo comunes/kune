@@ -64,6 +64,8 @@ public interface RTEditorView extends View {
 
     boolean isBold();
 
+    boolean isCtxMenuVisible();
+
     boolean isItalic();
 
     boolean isLink();

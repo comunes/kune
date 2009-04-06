@@ -36,6 +36,14 @@ public class RTELinkPopup {
         }
     }
 
+    public boolean isVisible() {
+        if (popupPalette != null && popupPalette.isVisible()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void show(final int left, final int top) {
         popupPalette = new PopupPanel(false, false);
         popupPalette.addStyleName("k-rte-changelink-popup");

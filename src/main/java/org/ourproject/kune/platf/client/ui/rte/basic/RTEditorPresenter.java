@@ -191,6 +191,10 @@ public class RTEditorPresenter implements RTEditor {
         palette.get().hide();
     }
 
+    public void onLostFocus() {
+        hideLinkCtxMenu();
+    }
+
     public void setExtended(final boolean extended) {
         this.extended = extended;
     }
@@ -210,11 +214,15 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     public void updateLinkInfo() {
-        if (isExtended() && view.isLink()) {
-            view.showLinkCtxMenu();
-        } else {
-            view.hideLinkCtxMenu();
-        }
+        deferred.addCommand(new Listener0() {
+            public void onEvent() {
+                if (isExtended() && view.isLink()) {
+                    view.showLinkCtxMenu();
+                } else {
+                    hideLinkCtxMenu();
+                }
+            }
+        });
     }
 
     public void updateStatus() {
@@ -944,6 +952,12 @@ public class RTEditorPresenter implements RTEditor {
 
     private String getCssName(final ImageResource imageResource) {
         return RTEImgResources.SUFFIX + imageResource.getName();
+    }
+
+    private void hideLinkCtxMenu() {
+        if (view.isCtxMenuVisible()) {
+            view.hideLinkCtxMenu();
+        }
     }
 
     private boolean isExtended() {

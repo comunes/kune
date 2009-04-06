@@ -46,6 +46,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         }
 
         public void onLostFocus(final Widget sender) {
+            presenter.onLostFocus();
         }
     }
     private final I18nUITranslationService i18n;
@@ -155,6 +156,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
     public void hideLinkCtxMenu() {
         linkCtxMenu.hide();
+
     }
 
     public void insertBlockquote() {
@@ -215,12 +217,16 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         return getFstRange().isCollapsed();
     }
 
+    public boolean isCtxMenuVisible() {
+        return linkCtxMenu.isVisible();
+    }
+
     public boolean isItalic() {
         return basic.isItalic();
     }
 
     public boolean isLink() {
-        if (LinkExecutableUtils.getSelectedAnchor(this) != null) {
+        if (isAttached() && LinkExecutableUtils.getSelectedAnchor(this) != null) {
             return true;
         } else {
             return false;
@@ -265,6 +271,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         switch (DOM.eventGetType(event)) {
         case Event.ONCLICK:
             updateStatus();
+            updateLinkInfo();
             super.onBrowserEvent(event);
             break;
         case Event.ONKEYDOWN:
@@ -333,8 +340,10 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         DeferredCommand.addCommand(new Command() {
             public void execute() {
                 org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(RTEditorPanel.this);
-                linkCtxMenu.show(RTEditorPanel.this.getAbsoluteLeft() + selectedAnchor.getAbsoluteLeft(),
-                        RTEditorPanel.this.getAbsoluteTop() + selectedAnchor.getAbsoluteTop() + 20);
+                if (selectedAnchor != null) {
+                    linkCtxMenu.show(RTEditorPanel.this.getAbsoluteLeft() + selectedAnchor.getAbsoluteLeft(),
+                            RTEditorPanel.this.getAbsoluteTop() + selectedAnchor.getAbsoluteTop() + 20);
+                }
             }
         });
 
