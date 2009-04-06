@@ -23,6 +23,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.queryParser.MultiFieldQueryParser;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
@@ -88,6 +92,39 @@ public abstract class DefaultManager<T, K> {
             emQuery.setMaxResults(maxResults);
         }
         return new SearchResult<T>(new Long(emQuery.getResultSize()), emQuery.getResultList());
+    }
+
+    public SearchResult<T> search(final String query, final String[] fields, final BooleanClause.Occur[] flags,
+            final Integer firstResult, final Integer maxResults) {
+        Query queryQ;
+        try {
+            queryQ = MultiFieldQueryParser.parse(query, fields, flags, new StandardAnalyzer());
+        } catch (final ParseException e) {
+            throw new RuntimeException("Error parsing search");
+        }
+        return search(queryQ, firstResult, maxResults);
+    }
+
+    public SearchResult<T> search(final String[] queries, final String[] fields, final BooleanClause.Occur[] flags,
+            final Integer firstResult, final Integer maxResults) {
+        Query query;
+        try {
+            query = MultiFieldQueryParser.parse(queries, fields, flags, new StandardAnalyzer());
+        } catch (final ParseException e) {
+            throw new RuntimeException("Error parsing search");
+        }
+        return search(query, firstResult, maxResults);
+    }
+
+    public SearchResult<T> search(final String[] queries, final String[] fields, final Integer firstResult,
+            final Integer maxResults) {
+        Query query;
+        try {
+            query = MultiFieldQueryParser.parse(queries, fields, new StandardAnalyzer());
+        } catch (final ParseException e) {
+            throw new RuntimeException("Error parsing search");
+        }
+        return search(query, firstResult, maxResults);
     }
 
     /**

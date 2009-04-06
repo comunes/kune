@@ -21,10 +21,16 @@ package org.ourproject.kune.platf.server.domain;
 
 import javax.persistence.Embeddable;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
+
 @Embeddable
 public class BasicMimeType {
 
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     private String mimetype;
+    @Field(index = Index.TOKENIZED, store = Store.NO)
     private String mimesubtype;
 
     public BasicMimeType() {

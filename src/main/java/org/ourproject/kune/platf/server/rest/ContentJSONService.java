@@ -55,7 +55,17 @@ public class ContentJSONService {
         SearchResult<Container> resultsContainer = containerManager.search(search, firstResult, maxResults);
         results.setSize(results.getSize() + resultsContainer.getSize());
         results.getList().addAll(results.getList());
-        return mapper.mapSearchResult(results, LinkDTO.class);
+        return map(results);
     }
 
+    @REST(params = { "query", "start", "limit", "mimetype" })
+    public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
+            final String mimetype) {
+        SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, mimetype);
+        return map(results);
+    }
+
+    private SearchResultDTO<LinkDTO> map(final SearchResult<Content> results) {
+        return mapper.mapSearchResult(results, LinkDTO.class);
+    }
 }

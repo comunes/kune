@@ -61,8 +61,6 @@ public interface GroupManager extends Manager<Group, Long> {
 
     Group getSiteDefaultGroup();
 
-    void reIndex();
-
     SearchResult<Group> search(String search);
 
     SearchResult<Group> search(String search, Integer firstResult, Integer maxResults);

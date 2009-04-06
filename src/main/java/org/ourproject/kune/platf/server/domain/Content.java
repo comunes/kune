@@ -118,6 +118,7 @@ public class Content implements HasStateToken {
     @Column(nullable = false)
     private ContentStatus status;
 
+    @IndexedEmbedded
     @Embedded
     private BasicMimeType mimeType;
 
@@ -159,7 +160,7 @@ public class Content implements HasStateToken {
     }
 
     @Finder(query = "select count(*) from Container ctx, Content ctn where ctn.container.id = ctx.id and ctx = :container and ctn.lastRevision.title LIKE :title")
-    public Long findIfExistsTitle(@Named("container") Container container, @Named("title") String title) {
+    public Long findIfExistsTitle(@Named("container") final Container container, @Named("title") final String title) {
         return null;
     }
 

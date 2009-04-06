@@ -33,6 +33,21 @@ import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 public interface ContentManager extends Manager<Content, Long> {
 
+    String[] DEF_GLOBAL_SEARCH_FIELDS = new String[] { "authors.name", "authors.shortName", "container.name",
+            "language.code", "language.englishName", "language.nativeName", "lastRevision.body", "lastRevision.title" };
+
+    String[] DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME = new String[] { "authors.name", "authors.shortName", "container.name",
+            "language.code", "language.englishName", "language.nativeName", "lastRevision.body", "lastRevision.title",
+            "mimeType.mimetype" };
+
+    String[] DEF_GROUP_SEARCH_FIELDS = new String[] { "container.owner.shortName", "authors.name", "authors.shortName",
+            "container.name", "language.code", "language.englishName", "language.nativeName", "lastRevision.body",
+            "lastRevision.title" };
+
+    String[] DEF_GROUP_SEARCH_FIELDS_WITH_MIME = new String[] { "authors.name", "authors.shortName", "container.name",
+            "language.code", "language.englishName", "language.nativeName", "lastRevision.body", "lastRevision.title",
+            "mimeType.mimetype" };
+
     void addAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
     Content createContent(String title, String body, User author, Container container, String typeId);
@@ -56,6 +71,8 @@ public interface ContentManager extends Manager<Content, Long> {
     SearchResult<Content> search(String search);
 
     SearchResult<Content> search(String search, Integer firstResult, Integer maxResults);
+
+    SearchResult<Content> searchMime(String search, Integer firstResult, Integer maxResults, String mimetype);
 
     I18nLanguage setLanguage(User user, Long contentId, String languageCode) throws DefaultException;
 

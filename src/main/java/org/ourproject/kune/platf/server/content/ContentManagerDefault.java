@@ -27,6 +27,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.BooleanClause.Occur;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.client.errors.NameInUseException;
@@ -83,7 +84,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public Content createContent(final String title, final String body, final User author, final Container container,
-            String typeId) {
+            final String typeId) {
         FilenameUtils.checkBasicFilename(title);
         String newtitle = findInexistentTitle(container, title);
         final Content newContent = new Content();
@@ -99,7 +100,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return persist(newContent);
     }
 
-    public boolean findIfExistsTitle(Container container, String title) {
+    public boolean findIfExistsTitle(final Container container, final String title) {
         return (contentFinder.findIfExistsTitle(container, title) > 0)
                 || (containerFinder.findIfExistsTitle(container, title) > 0);
     }
@@ -171,9 +172,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public SearchResult<Content> search(final String search, final Integer firstResult, final Integer maxResults) {
-        final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "authors.name",
-                "authors.shortName", "container.name", "language.code", "language.englishName", "language.nativeName",
-                "lastRevision.body", "lastRevision.title", "tags.name" }, new StandardAnalyzer());
+        final MultiFieldQueryParser parser = createParser();
         Query query;
         try {
             query = parser.parse(search);
@@ -181,6 +180,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             throw new RuntimeException("Error parsing search");
         }
         return super.search(query, firstResult, maxResults);
+    }
+
+    public SearchResult<Content> searchMime(final String search, final Integer firstResult, final Integer maxResults,
+            final String mimetype) {
+        return search(getSearchQueries(search, mimetype), DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME, getConditions(), firstResult,
+                maxResults);
     }
 
     public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
@@ -222,11 +227,34 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         tagManager.setTags(user, content, tags);
     }
 
-    private String findInexistentTitle(Container container, String title) {
+    private MultiFieldQueryParser createParser() {
+        final MultiFieldQueryParser parser = new MultiFieldQueryParser(DEF_GLOBAL_SEARCH_FIELDS, new StandardAnalyzer());
+        return parser;
+    }
+
+    private String findInexistentTitle(final Container container, final String title) {
         String initialTitle = new String(title);
         while (findIfExistsTitle(container, initialTitle)) {
             initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
         }
         return initialTitle;
+    }
+
+    private Occur[] getConditions() {
+        Occur[] conditions = new Occur[ContentManager.DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME.length];
+        for (int i = 0; i < conditions.length; i++) {
+            conditions[i] = Occur.SHOULD;
+        }
+        conditions[conditions.length - 1] = Occur.MUST;
+        return conditions;
+    }
+
+    private String[] getSearchQueries(final String search, final String mimetype) {
+        String[] query = new String[ContentManager.DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME.length];
+        for (int i = 0; i < query.length; i++) {
+            query[i] = search;
+        }
+        query[query.length - 1] = mimetype;
+        return query;
     }
 }

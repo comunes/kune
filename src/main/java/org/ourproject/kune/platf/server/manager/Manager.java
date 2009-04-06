@@ -19,6 +19,9 @@
  */
 package org.ourproject.kune.platf.server.manager;
 
+import org.apache.lucene.search.BooleanClause;
+import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
 public interface Manager<T, X> {
 
     T find(X id);
@@ -26,5 +29,16 @@ public interface Manager<T, X> {
     T merge(T entity);
 
     T persist(T entity);
+
+    void reIndex();
+
+    SearchResult<T> search(final String query, final String[] fields, final BooleanClause.Occur[] flags,
+            final Integer firstResult, final Integer maxResults);
+
+    SearchResult<T> search(final String[] queries, final String[] fields, final BooleanClause.Occur[] flags,
+            final Integer firstResult, final Integer maxResults);
+
+    SearchResult<T> search(final String[] queries, final String[] fields, final Integer firstResult,
+            final Integer maxResults);
 
 }
