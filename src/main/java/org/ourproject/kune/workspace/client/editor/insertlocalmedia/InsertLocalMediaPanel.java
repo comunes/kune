@@ -35,7 +35,7 @@ public class InsertLocalMediaPanel extends InsertMediaAbstractPanel implements I
         cb.setAllowBlank(false);
         cb.setWidth(220);
         cb.setStoreBaseParams(new UrlParam[] { new UrlParam(SearcherContants.MIMETYPE_PARAM, BasicMimeTypeDTO.AUDIO),
-                new UrlParam(SearcherContants.MIMETYPE_PARAM, BasicMimeTypeDTO.VIDEO) });
+                new UrlParam(SearcherContants.MIMETYPE2_PARAM, BasicMimeTypeDTO.VIDEO) });
 
         hrefField.setVisible(false);
         hrefField.disable();

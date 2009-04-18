@@ -6,7 +6,7 @@ public interface SearcherContants {
     String LIMIT_PARAM = "limit";
     String QUERY_PARAM = "query";
     String MIMETYPE_PARAM = "mimetype";
-    String MIMETYPE_PARAM2 = "mimetype2";
+    String MIMETYPE2_PARAM = "mimetype2";
 
     String CONTENT_DATA_PROXY_URL = "/kune/json/ContentJSONService/search";
     String CONTENT_TEMPLATE_TEXT_PREFIX = "<div class=\"search-item\"><span class=\"kune-IconHyperlink\"><img src=\"";

@@ -68,7 +68,7 @@ public class ContentJSONService {
     }
 
     @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM,
-            SearcherContants.MIMETYPE_PARAM, SearcherContants.MIMETYPE_PARAM2 })
+            SearcherContants.MIMETYPE_PARAM, SearcherContants.MIMETYPE2_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
             final String mimetype, final String mimetype2) {
         SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, mimetype, mimetype2);
