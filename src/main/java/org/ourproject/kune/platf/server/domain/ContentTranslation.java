@@ -29,6 +29,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "content_translations")
 public class ContentTranslation implements HasId {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -38,24 +39,24 @@ public class ContentTranslation implements HasId {
 
     private Long contentId;
 
+    public Long getContentId() {
+        return contentId;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public Long getContentId() {
-        return contentId;
+    public I18nLanguage getLanguage() {
+        return language;
     }
 
     public void setContentId(final Long contentId) {
         this.contentId = contentId;
     }
 
-    public I18nLanguage getLanguage() {
-        return language;
+    public void setId(final Long id) {
+        this.id = id;
     }
 
     public void setLanguage(final I18nLanguage language) {

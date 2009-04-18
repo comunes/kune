@@ -38,6 +38,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.IndexedEmbedded;
@@ -49,6 +50,7 @@ public class Comment {
 
     @Id
     @GeneratedValue
+    @DocumentId
     private Long id;
 
     @ManyToOne

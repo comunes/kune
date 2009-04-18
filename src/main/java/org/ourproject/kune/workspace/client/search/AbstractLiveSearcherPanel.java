@@ -27,11 +27,8 @@ import com.gwtext.client.widgets.form.FormPanel;
 
 public class AbstractLiveSearcherPanel extends FormPanel {
 
-    public static final String TEMPLATE_TEXT_PREFIX = "<div class=\"search-item\"><span class=\"kune-IconHyperlink\"><img src=\"";
-    public static final String TEMPLATE_TEXT_SUFFIX = "\" style=\"height: 16px; width: 16px;\" />{shortName}:&nbsp;{longName}</span></div>";
-
-    public AbstractLiveSearcherPanel(I18nTranslationService i18n, String templateText, String dataProxyUrl,
-            final Listener<LinkDTO> listener) {
+    public AbstractLiveSearcherPanel(final I18nTranslationService i18n, final String templateText,
+            final String dataProxyUrl, final Listener<LinkDTO> listener) {
         super.setBorder(false);
         super.setWidth(275);
         super.setHideLabels(true);

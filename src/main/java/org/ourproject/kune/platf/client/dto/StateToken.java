@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.platf.client.dto;
 
-import org.ourproject.kune.platf.client.ui.WindowUtils;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
@@ -55,9 +53,11 @@ public class StateToken implements IsSerializable {
         }
         return encoded;
     }
+
     private String group;
     private String tool;
     private String folder;
+
     private String document;
 
     private String encoded;
@@ -140,31 +140,6 @@ public class StateToken implements IsSerializable {
         return group;
     }
 
-    public String getPublicUrl() {
-        String publicUrl = "http://";
-
-        String separator = ".";
-
-        // FIXME: Maybe get from InitData the site.domain
-        String port = WindowUtils.getLocation().getPort();
-        publicUrl += WindowUtils.getLocation().getHostName() + (port == null ? "" : ":" + port) + "/public";
-
-        if (group != null) {
-            publicUrl += "/" + group;
-        }
-        if (tool != null) {
-            publicUrl += separator + tool;
-        }
-        if (folder != null) {
-            publicUrl += separator + folder;
-        }
-        if (document != null) {
-            publicUrl += separator + document;
-        }
-
-        return publicUrl;
-    }
-
     public String getTool() {
         return tool;
     }
@@ -194,7 +169,7 @@ public class StateToken implements IsSerializable {
         return getGroup() == null && getTool() == null && getFolder() == null && getDocument() == null;
     }
 
-    public boolean hasSameContainer(StateToken currentStateToken) {
+    public boolean hasSameContainer(final StateToken currentStateToken) {
         if (copy().clearDocument().getEncoded().equals(currentStateToken.copy().clearDocument().getEncoded())) {
             return true;
         }

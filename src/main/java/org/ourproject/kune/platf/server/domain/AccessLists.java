@@ -26,6 +26,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.DocumentId;
 import org.ourproject.kune.platf.server.access.AccessRol;
 
 @Entity
@@ -43,6 +44,7 @@ public class AccessLists {
 
     @Id
     @GeneratedValue
+    @DocumentId
     private Long id;
 
     public AccessLists() {

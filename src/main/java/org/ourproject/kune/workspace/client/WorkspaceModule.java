@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.StateTokenUtils;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
@@ -293,11 +294,19 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<SitePublicSpaceLink>(SitePublicSpaceLink.class) {
             @Override
             public SitePublicSpaceLink create() {
-                final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter($(StateManager.class));
+                final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter($(StateManager.class),
+                        $(StateTokenUtils.class));
                 final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter,
                         $(WorkspaceSkeleton.class), $(I18nUITranslationService.class), $(Images.class));
                 presenter.init(panel);
                 return presenter;
+            }
+        });
+
+        register(Singleton.class, new Factory<StateTokenUtils>(StateTokenUtils.class) {
+            @Override
+            public StateTokenUtils create() {
+                return new StateTokenUtils();
             }
         });
 
@@ -720,7 +729,7 @@ public class WorkspaceModule extends AbstractModule {
             }
 
             @Override
-            public void onAfterCreated(FileUploader uploader) {
+            public void onAfterCreated(final FileUploader uploader) {
                 $(ContextNavigator.class).addFileUploaderListener(uploader);
             }
         });
@@ -926,7 +935,7 @@ public class WorkspaceModule extends AbstractModule {
             public InsertImageLocal create() {
                 final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImageDialog.class));
                 final InsertImageLocalPanel panel = new InsertImageLocalPanel(presenter,
-                        $(I18nTranslationService.class));
+                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -955,7 +964,7 @@ public class WorkspaceModule extends AbstractModule {
             public InsertLinkLocal create() {
                 final InsertLinkLocalPresenter presenter = new InsertLinkLocalPresenter($(InsertLinkDialog.class));
                 final InsertLinkLocalPanel panel = new InsertLinkLocalPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
+                        $(I18nTranslationService.class), $(FileDownloadUtils.class), $(StateTokenUtils.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -966,7 +975,7 @@ public class WorkspaceModule extends AbstractModule {
             public InsertLocalMedia create() {
                 final InsertLocalMediaPresenter presenter = new InsertLocalMediaPresenter($(InsertMediaDialog.class));
                 final InsertLocalMediaPanel panel = new InsertLocalMediaPanel(presenter,
-                        $(I18nTranslationService.class));
+                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
                 presenter.init(panel);
                 return presenter;
             }

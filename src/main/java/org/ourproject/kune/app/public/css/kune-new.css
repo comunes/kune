@@ -815,14 +815,15 @@
 }
 
 .k-tsp-tag {
-  float: right;
-  margin-right: 5px;
+  float: left;
+  padding: 3px;
   cursor: pointer;
   color: #0000FF;
 }
 
 .k-tsp-cloud {
-  vertical-align: bottom;
+  line-height: 1.5em;
+  text-align : center;
 }
 
 .k-link-icon {

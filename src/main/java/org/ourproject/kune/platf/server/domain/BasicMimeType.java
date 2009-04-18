@@ -28,9 +28,9 @@ import org.hibernate.search.annotations.Store;
 @Embeddable
 public class BasicMimeType {
 
-    @Field(index = Index.TOKENIZED, store = Store.NO)
+    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
     private String mimetype;
-    @Field(index = Index.TOKENIZED, store = Store.NO)
+    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
     private String mimesubtype;
 
     public BasicMimeType() {

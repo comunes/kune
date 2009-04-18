@@ -38,7 +38,8 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
     private final FileDownloadUtils downloadUtils;
 
     public EntityLiveSearcherPanel(final EntityLiveSearcherPresenter presenter,
-            final EntityLiveSearcherType searchType, final I18nTranslationService i18n, FileDownloadUtils downloadUtils) {
+            final EntityLiveSearcherType searchType, final I18nTranslationService i18n,
+            final FileDownloadUtils downloadUtils) {
         this.presenter = presenter;
         this.searchType = searchType;
         this.i18n = i18n;
@@ -85,12 +86,12 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
             break;
         }
 
-        String templateText = AbstractLiveSearcherPanel.TEMPLATE_TEXT_PREFIX
+        String templateText = SearcherContants.CONTENT_TEMPLATE_TEXT_PREFIX
                 + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
-                + AbstractLiveSearcherPanel.TEMPLATE_TEXT_SUFFIX;
+                + SearcherContants.CONTENT_TEMPLATE_TEXT_SUFFIX;
 
         liveSearcher = new AbstractLiveSearcherPanel(i18n, templateText, dataProxyUrl, new Listener<LinkDTO>() {
-            public void onEvent(LinkDTO link) {
+            public void onEvent(final LinkDTO link) {
                 presenter.onSelection(link);
             }
         });

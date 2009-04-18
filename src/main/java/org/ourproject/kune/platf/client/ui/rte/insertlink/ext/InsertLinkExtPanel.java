@@ -54,7 +54,7 @@ public class InsertLinkExtPanel extends InsertLinkAbstractPanel implements Inser
         Button preview = new Button(i18n.t("Preview"));
         preview.addListener(new ButtonListenerAdapter() {
             @Override
-            public void onClick(Button button, EventObject e) {
+            public void onClick(final Button button, final EventObject e) {
                 presenter.onPreview();
             }
         });
@@ -71,19 +71,19 @@ public class InsertLinkExtPanel extends InsertLinkAbstractPanel implements Inser
         previewPanel.clear();
     }
 
-    public void setPreviewUrl(String url) {
+    public void setPreviewUrl(final String url) {
         Frame previewFrame = new Frame(url);
         previewPanel.clear();
         previewPanel.add(previewFrame);
         previewPanel.doLayout();
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         hrefField.setValue(url);
     }
 
     @Override
-    protected void updateValues(LinkInfo linkInfo) {
+    protected void updateValues(final LinkInfo linkInfo) {
         super.updateValues(linkInfo);
         String href = linkInfo.getHref();
         if (href != null && !href.equals("")) {

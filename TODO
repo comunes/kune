@@ -34,8 +34,10 @@ TODO-list for kune -*- mode: org; -*-
    http://www.mozilla.org/editor/midas-spec.html
    http://mozilla.org/editor/midasdemo/
 ** vjrj <v> GWT 1.6
+   http://code.google.com/intl/es/webtoolkit/doc/1.6/ReleaseNotes_1_6.html#Upgrading
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/3e7e6cc3b35ad98a
    http://code.google.com/p/google-web-toolkit/wiki/WAR_Design_1_6
+   http://www.gwt-ext.com/forum/viewtopic.php?f=5&p=12038
 ** TODO <v> User preferences storing
    (See also variables in 'Styling braimstorming')
    We need a way to store (in db) User preferences (like emite chat configurations) in a extensible way.
@@ -112,6 +114,7 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** <v> trash icon area d&d
 ** vjrj <v> shortcuts enhacement
 *** Clarify the keycodes vs utf8 chars Shortcut definition (Function keys and so on...)
 *** shortcuts in tool actions no registered in GlobalShorcuts

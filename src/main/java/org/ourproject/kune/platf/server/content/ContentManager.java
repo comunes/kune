@@ -40,6 +40,10 @@ public interface ContentManager extends Manager<Content, Long> {
             "language.code", "language.englishName", "language.nativeName", "lastRevision.body", "lastRevision.title",
             "mimeType.mimetype" };
 
+    String[] DEF_GLOBAL_SEARCH_FIELDS_WITH_2MIME = new String[] { "authors.name", "authors.shortName",
+            "container.name", "language.code", "language.englishName", "language.nativeName", "lastRevision.body",
+            "lastRevision.title", "mimeType.mimetype", "mimeType.mimetype" };
+
     String[] DEF_GROUP_SEARCH_FIELDS = new String[] { "container.owner.shortName", "authors.name", "authors.shortName",
             "container.name", "language.code", "language.englishName", "language.nativeName", "lastRevision.body",
             "lastRevision.title" };
@@ -73,6 +77,9 @@ public interface ContentManager extends Manager<Content, Long> {
     SearchResult<Content> search(String search, Integer firstResult, Integer maxResults);
 
     SearchResult<Content> searchMime(String search, Integer firstResult, Integer maxResults, String mimetype);
+
+    SearchResult<Content> searchMime(String search, Integer firstResult, Integer maxResults, String mimetype,
+            String mimetype2);
 
     I18nLanguage setLanguage(User user, Long contentId, String languageCode) throws DefaultException;
 

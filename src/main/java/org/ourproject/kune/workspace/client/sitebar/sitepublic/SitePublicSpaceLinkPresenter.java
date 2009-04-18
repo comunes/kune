@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateContainerDTO;
 import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.client.dto.StateTokenUtils;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.events.Listener;
@@ -33,8 +34,10 @@ import com.calclab.suco.client.events.Listener;
 public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
 
     private SitePublicSpaceLinkView view;
+    private final StateTokenUtils stateTokenUtils;
 
-    public SitePublicSpaceLinkPresenter(final StateManager stateManager) {
+    public SitePublicSpaceLinkPresenter(final StateManager stateManager, final StateTokenUtils stateTokenUtils) {
+        this.stateTokenUtils = stateTokenUtils;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
@@ -54,7 +57,7 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
         if (state instanceof StateContainerDTO) {
             final StateToken token = state.getStateToken();
             if (((StateContainerDTO) state).getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
-                final String publicUrl = token.getPublicUrl();
+                final String publicUrl = stateTokenUtils.getPublicUrl(token);
                 view.setContentGotoPublicUrl(publicUrl);
                 if (state instanceof StateContentDTO) {
                     StateContentDTO content = (StateContentDTO) state;

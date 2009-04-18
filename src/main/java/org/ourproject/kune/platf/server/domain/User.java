@@ -82,7 +82,7 @@ public class User implements HasId {
     @Length(min = 3, max = 50)
     private String name;
 
-    @Field(index = Index.TOKENIZED, store = Store.NO)
+    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
     @Column(unique = true)
     // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
     @Length(min = 3, max = 15)
@@ -204,7 +204,7 @@ public class User implements HasId {
         return getUserGroup().hasLogo();
     }
 
-    public void setBuddiesVisibility(UserBuddiesVisibility buddiesVisibility) {
+    public void setBuddiesVisibility(final UserBuddiesVisibility buddiesVisibility) {
         this.buddiesVisibility = buddiesVisibility;
     }
 

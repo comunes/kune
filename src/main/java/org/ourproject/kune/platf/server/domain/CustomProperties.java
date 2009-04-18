@@ -27,16 +27,11 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import org.hibernate.search.annotations.DocumentId;
-import org.hibernate.search.annotations.Indexed;
-
 @Entity
-@Indexed
 @Table(name = "customproperties")
 public class CustomProperties implements HasId {
 
     @Id
-    @DocumentId
     @GeneratedValue
     private Long id;
 

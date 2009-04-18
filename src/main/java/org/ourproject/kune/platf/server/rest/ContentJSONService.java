@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.rack.filters.rest.REST;
+import org.ourproject.kune.workspace.client.search.SearcherContants;
 
 import com.google.inject.Inject;
 
@@ -44,12 +45,12 @@ public class ContentJSONService {
         this.mapper = mapper;
     }
 
-    @REST(params = { "query" })
+    @REST(params = { SearcherContants.QUERY_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search) {
         return search(search, null, null);
     }
 
-    @REST(params = { "query", "start", "limit" })
+    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults) {
         SearchResult<Content> results = contentManager.search(search, firstResult, maxResults);
         SearchResult<Container> resultsContainer = containerManager.search(search, firstResult, maxResults);
@@ -58,10 +59,19 @@ public class ContentJSONService {
         return map(results);
     }
 
-    @REST(params = { "query", "start", "limit", "mimetype" })
+    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM,
+            SearcherContants.MIMETYPE_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
             final String mimetype) {
         SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, mimetype);
+        return map(results);
+    }
+
+    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM,
+            SearcherContants.MIMETYPE_PARAM, SearcherContants.MIMETYPE_PARAM2 })
+    public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
+            final String mimetype, final String mimetype2) {
+        SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, mimetype, mimetype2);
         return map(results);
     }
 

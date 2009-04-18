@@ -26,9 +26,10 @@ public class AbstractLiveSearcherField extends ComboBox {
     private static final String ICON_URL_FIELD = "iconUrl";
     private static final String LINK_FIELD = "link";
     public static final int PAGINATION_SIZE = 10;
+    private final Store store;
 
-    public AbstractLiveSearcherField(I18nTranslationService i18n, String templateText, String dataProxyUrl,
-            final Listener<LinkDTO> listener) {
+    public AbstractLiveSearcherField(final I18nTranslationService i18n, final String templateText,
+            final String dataProxyUrl, final Listener<LinkDTO> listener) {
         DataProxy dataProxy = new HttpProxy(dataProxyUrl, Connection.POST);
 
         final JsonReader reader = new JsonReader(new RecordDef(
@@ -38,7 +39,7 @@ public class AbstractLiveSearcherField extends ComboBox {
         reader.setTotalProperty("size");
         reader.setId(SHORT_NAME_FIELD);
 
-        final Store store = new Store(dataProxy, reader);
+        store = new Store(dataProxy, reader);
 
         store.load(new UrlParam[] { new UrlParam("query", "."), new UrlParam("first", 1),
                 new UrlParam("max", PAGINATION_SIZE) });
@@ -74,5 +75,9 @@ public class AbstractLiveSearcherField extends ComboBox {
             }
         });
 
+    }
+
+    public void setStoreBaseParams(final UrlParam[] baseParams) {
+        store.setBaseParams(baseParams);
     }
 }

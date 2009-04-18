@@ -60,6 +60,11 @@ public class Group implements HasId {
     // Never expect or return null
     public static Group NO_GROUP = null;
 
+    @Id
+    @DocumentId
+    @GeneratedValue
+    private Long id;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     AdmissionType admissionType;
@@ -68,12 +73,7 @@ public class Group implements HasId {
     @Column(nullable = false)
     GroupType groupType;
 
-    @Id
-    @DocumentId
-    @GeneratedValue
-    private Long id;
-
-    @Field(index = Index.TOKENIZED, store = Store.NO)
+    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
     @Column(unique = true)
     @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
     @Pattern(regex = "^[a-z0-9_\\-]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
@@ -299,11 +299,11 @@ public class Group implements HasId {
         this.id = id;
     }
 
-    public void setLogo(byte[] logo) {
+    public void setLogo(final byte[] logo) {
         this.logo = logo;
     }
 
-    public void setLogoMime(BasicMimeType logoMime) {
+    public void setLogoMime(final BasicMimeType logoMime) {
         this.logoMime = logoMime;
     }
 

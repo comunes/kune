@@ -23,6 +23,10 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class BasicMimeTypeDTO implements IsSerializable {
 
+    public static final String IMAGE = "image";
+    public static final String VIDEO = "video";
+    public static final String AUDIO = "audio";
+
     private String type;
     private String subtype;
 
@@ -59,7 +63,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
      * @return
      */
     public boolean isImage() {
-        return type != null && type.equals("image");
+        return type != null && type.equals(IMAGE);
     }
 
     /**
