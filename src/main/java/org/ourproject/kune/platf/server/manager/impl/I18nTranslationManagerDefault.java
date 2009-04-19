@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.server.manager.impl;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -72,7 +71,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         final I18nLanguage language = languageManager.findByCode(languageCode);
         final List<I18nTranslation> list = finder.getTranslatedLexicon(language, firstResult, maxResults);
         final Long count = finder.getTranslatedLexiconCount(language);
-        return new SearchResult<I18nTranslation>(count, list);
+        return new SearchResult<I18nTranslation>(count.intValue(), list);
     }
 
     public String getTranslation(final String language, final String text) {
@@ -117,7 +116,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         final I18nLanguage language = initUnstranlated(languageCode);
         final Long count = finder.getUnstranslatedLexiconCount(language);
         final List<I18nTranslation> list = finder.getUnstranslatedLexicon(language, firstResult, maxResults);
-        return new SearchResult<I18nTranslation>(count, list);
+        return new SearchResult<I18nTranslation>(count.intValue(), list);
     }
 
     public String setTranslation(final String id, final String translation) throws DefaultException {
@@ -150,8 +149,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         if (!language.equals(I18nTranslation.DEFAULT_LANG)) {
             map = (HashMap<String, String>) getLexicon(I18nTranslation.DEFAULT_LANG).clone();
         }
-        for (final Iterator<I18nTranslation> iterator = set.iterator(); iterator.hasNext();) {
-            final I18nTranslation trans = iterator.next();
+        for (I18nTranslation trans : set) {
             map.put(trans.getTrKey(), trans.getText());
         }
         langCache.put(language, map);
@@ -166,8 +164,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         } else {
             language = languageManager.findByCode(languageCode);
             final List<I18nTranslation> list = finder.getNonExistentFromDefault(defLanguage, language);
-            for (final Iterator<I18nTranslation> iterator = list.iterator(); iterator.hasNext();) {
-                final I18nTranslation defTrans = iterator.next();
+            for (I18nTranslation defTrans : list) {
                 final I18nTranslation newTrans = defTrans.cloneForNewLanguage();
                 newTrans.setLanguage(language);
                 persist(newTrans);

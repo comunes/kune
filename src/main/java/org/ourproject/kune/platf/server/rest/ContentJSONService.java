@@ -54,9 +54,11 @@ public class ContentJSONService {
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults) {
         SearchResult<Content> results = contentManager.search(search, firstResult, maxResults);
         SearchResult<Container> resultsContainer = containerManager.search(search, firstResult, maxResults);
-        results.setSize(results.getSize() + resultsContainer.getSize());
-        results.getList().addAll(results.getList());
-        return map(results);
+        SearchResultDTO<LinkDTO> resultMapped = map(results);
+        SearchResultDTO<LinkDTO> containersMapped = map(resultsContainer);
+        resultMapped.getList().addAll(containersMapped.getList());
+        resultMapped.setSize(resultMapped.getSize() + containersMapped.getSize());
+        return resultMapped;
     }
 
     @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM,
@@ -71,11 +73,13 @@ public class ContentJSONService {
             SearcherContants.MIMETYPE_PARAM, SearcherContants.MIMETYPE2_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
             final String mimetype, final String mimetype2) {
-        SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, mimetype, mimetype2);
-        return map(results);
+        SearchResult<Content> results1st = contentManager.searchMime(search, firstResult, maxResults, mimetype);
+        SearchResult<Content> results2nd = contentManager.searchMime(search, firstResult, maxResults, mimetype2);
+        results1st.getList().addAll(results2nd.getList());
+        return map(results1st);
     }
 
-    private SearchResultDTO<LinkDTO> map(final SearchResult<Content> results) {
+    private SearchResultDTO<LinkDTO> map(final SearchResult<?> results) {
         return mapper.mapSearchResult(results, LinkDTO.class);
     }
 }

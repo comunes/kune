@@ -135,7 +135,7 @@ public class Container implements HasId, HasStateToken {
     }
 
     @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.parent = :container AND c.name LIKE :title")
-    public Long findIfExistsTitle(@Named("container") Container container, @Named("title") String title) {
+    public Long findIfExistsTitle(@Named("container") final Container container, @Named("title") final String title) {
         return null;
     }
 
@@ -233,7 +233,7 @@ public class Container implements HasId, HasStateToken {
         this.absolutePath = absolutePath;
     }
 
-    public void setAccessLists(AccessLists accessLists) {
+    public void setAccessLists(final AccessLists accessLists) {
         this.accessLists = accessLists;
     }
 
@@ -253,11 +253,11 @@ public class Container implements HasId, HasStateToken {
         this.contents = contents;
     }
 
-    public void setCreatedOn(Long createdOn) {
+    public void setCreatedOn(final Long createdOn) {
         this.createdOn = createdOn;
     }
 
-    public void setDeletedOn(Date deletedOn) {
+    public void setDeletedOn(final Date deletedOn) {
         this.deletedOn = deletedOn;
     }
 
@@ -287,5 +287,10 @@ public class Container implements HasId, HasStateToken {
 
     public void setTypeId(final String typeId) {
         this.typeId = typeId;
+    }
+
+    @Override
+    public String toString() {
+        return "Container[(" + getStateTokenEncoded() + "): " + getName() + "]";
     }
 }

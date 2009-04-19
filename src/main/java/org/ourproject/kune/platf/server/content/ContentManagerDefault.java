@@ -188,12 +188,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
                 firstResult, maxResults);
     }
 
-    public SearchResult<Content> searchMime(final String search, final Integer firstResult, final Integer maxResults,
-            final String mimetype, final String mimetype2) {
-        return search(getSearchQueries(search, mimetype, mimetype2), DEF_GLOBAL_SEARCH_FIELDS_WITH_2MIME,
-                getConditions2Mimes(), firstResult, maxResults);
-    }
-
     public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
             throws DefaultException {
         final Content content = finder.getContent(contentId);
@@ -233,25 +227,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         tagManager.setTags(user, content, tags);
     }
 
-    private Occur[] createConditions(final String[] fields) {
-        Occur[] conditions = new Occur[fields.length];
-        for (int i = 0; i < conditions.length; i++) {
-            conditions[i] = Occur.SHOULD;
-        }
-        return conditions;
-    }
-
     private MultiFieldQueryParser createParser() {
         final MultiFieldQueryParser parser = new MultiFieldQueryParser(DEF_GLOBAL_SEARCH_FIELDS, new StandardAnalyzer());
         return parser;
-    }
-
-    private String[] createSearchQuery(final String search, final String[] fields) {
-        String[] query = new String[fields.length];
-        for (int i = 0; i < query.length; i++) {
-            query[i] = search;
-        }
-        return query;
     }
 
     private String findInexistentTitle(final Container container, final String title) {
@@ -264,31 +242,21 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
     private Occur[] getConditions() {
         String[] fields = ContentManager.DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME;
-        Occur[] conditions = createConditions(fields);
+        Occur[] conditions = new Occur[fields.length];
+        for (int i = 0; i < conditions.length; i++) {
+            conditions[i] = Occur.SHOULD;
+        }
         conditions[conditions.length - 1] = Occur.MUST;
-        return conditions;
-    }
-
-    private Occur[] getConditions2Mimes() {
-        String[] fields = ContentManager.DEF_GLOBAL_SEARCH_FIELDS_WITH_2MIME;
-        Occur[] conditions = createConditions(fields);
-        conditions[conditions.length - 2] = Occur.SHOULD;
-        conditions[conditions.length - 1] = Occur.SHOULD;
         return conditions;
     }
 
     private String[] getSearchQueries(final String search, final String mimetype) {
         String[] fields = ContentManager.DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME;
-        String[] query = createSearchQuery(search, fields);
+        String[] query = new String[fields.length];
+        for (int i = 0; i < query.length; i++) {
+            query[i] = search;
+        }
         query[query.length - 1] = mimetype;
-        return query;
-    }
-
-    private String[] getSearchQueries(final String search, final String mimetype, final String mimetype2) {
-        String[] fields = ContentManager.DEF_GLOBAL_SEARCH_FIELDS_WITH_2MIME;
-        String[] query = createSearchQuery(search, fields);
-        query[query.length - 2] = mimetype;
-        query[query.length - 1] = mimetype2;
         return query;
     }
 

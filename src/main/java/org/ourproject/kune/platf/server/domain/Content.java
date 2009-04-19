@@ -328,4 +328,9 @@ public class Content implements HasStateToken {
         this.version = version;
     }
 
+    @Override
+    public String toString() {
+        return "Content[(" + getStateTokenEncoded() + "): " + getTitle() + "]";
+    }
+
 }

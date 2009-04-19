@@ -23,13 +23,13 @@ import java.util.List;
 
 public class SearchResult<T> {
     List<T> list;
-    Long size;
+    int size;
 
     public SearchResult() {
-        this(null, null);
+        this(0, null);
     }
 
-    public SearchResult(final Long count, final List<T> list) {
+    public SearchResult(final int count, final List<T> list) {
         this.list = list;
         this.size = count;
     }
@@ -38,16 +38,25 @@ public class SearchResult<T> {
         return list;
     }
 
+    /**
+     * Gets the size of total results (may differ from list size).
+     * 
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
     public void setList(final List<T> list) {
         this.list = list;
     }
 
-    public Long getSize() {
-        return size;
-    }
-
-    public void setSize(final Long size) {
+    public void setSize(final int size) {
         this.size = size;
     }
 
+    @Override
+    public String toString() {
+        return "SearchResult[(" + getSize() + "): " + list + "]";
+    }
 }

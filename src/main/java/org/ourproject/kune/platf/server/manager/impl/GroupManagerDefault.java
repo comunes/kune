@@ -72,7 +72,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder, final User userFinder,
             final KuneProperties kuneProperties, final DatabaseProperties properties,
             final ServerToolRegistry registry, final LicenseManager licenseManager, final License licenseFinder,
-            ServerToolRegistry serverToolRegistry) {
+            final ServerToolRegistry serverToolRegistry) {
         super(provider, Group.class);
         this.finder = finder;
         this.userFinder = userFinder;
@@ -84,7 +84,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         this.serverToolRegistry = serverToolRegistry;
     }
 
-    public void changeDefLicense(User user, Group group, String licName) {
+    public void changeDefLicense(final User user, final Group group, final String licName) {
         final License license = licenseFinder.findByShortName(licName);
         if (license == null) {
             throw new RuntimeException("Unknown license");
@@ -126,7 +126,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         return createUserGroup(user, true);
     }
 
-    public Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupNameInUseException,
+    public Group createUserGroup(final User user, final boolean wantPersonalHomepage) throws GroupNameInUseException,
             EmailAddressInUseException {
         final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
         final License licenseDef = licenseManager.getDefLicense();
@@ -167,7 +167,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         return finder.findCollabInGroups(groupId);
     }
 
-    public List<String> findEnabledTools(Long id) {
+    public List<String> findEnabledTools(final Long id) {
         return finder.findEnabledTools(id);
     }
 
@@ -209,7 +209,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         }
     }
 
-    public void setToolEnabled(User userLogged, String groupShortName, String tool, boolean enabled) {
+    public void setToolEnabled(final User userLogged, final String groupShortName, final String tool,
+            final boolean enabled) {
         final Group group = findByShortName(groupShortName);
         ToolConfiguration toolConfiguration = group.getToolConfiguration(tool);
         if (toolConfiguration == null) {
@@ -218,7 +219,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         toolConfiguration.setEnabled(enabled);
     }
 
-    private void initGroup(final User user, final Group group, Collection<String> toolsToEnable)
+    private void initGroup(final User user, final Group group, final Collection<String> toolsToEnable)
             throws GroupNameInUseException {
         try {
             persist(group);

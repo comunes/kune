@@ -338,7 +338,7 @@ public abstract class AbstractFoldableContentActions {
             final String textDescription, final String parentMenuTitle, final String parentMenuSubtitle,
             final String defaultName, final Position position, final String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder;
-        addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor, CONTENT_TOPBAR,
+        addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor, CONTEXT_TOPBAR,
                 new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.showProgressProcessing();

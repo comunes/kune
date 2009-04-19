@@ -23,13 +23,13 @@ import java.util.List;
 
 public class SearchResultDTO<T> {
     List<T> list;
-    Long size;
+    int size;
 
     public SearchResultDTO() {
-        this(null, null);
+        this(0, null);
     }
 
-    public SearchResultDTO(final Long size, final List<T> list) {
+    public SearchResultDTO(final int size, final List<T> list) {
         this.list = list;
         this.size = size;
     }
@@ -38,16 +38,21 @@ public class SearchResultDTO<T> {
         return list;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public void setList(final List<T> list) {
         this.list = list;
     }
 
-    public Long getSize() {
-        return size;
+    public void setSize(final int size) {
+        this.size = size;
     }
 
-    public void setSize(final Long size) {
-        this.size = size;
+    @Override
+    public String toString() {
+        return "SearchResultDTO[(" + size + "): " + list + "]";
     }
 
 }

@@ -90,4 +90,8 @@ public class LinkDTO implements IsSerializable {
         this.tags = tags;
     }
 
+    @Override
+    public String toString() {
+        return "LinkDTO[(" + getLink() + "): " + getShortName() + "]";
+    }
 }

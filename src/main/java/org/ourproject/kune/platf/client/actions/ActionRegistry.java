@@ -38,7 +38,7 @@ public class ActionRegistry<T> {
         addAction(action, GENERIC);
     }
 
-    public void addAction(final ActionDescriptor<T> action, String... typeIds) {
+    public void addAction(final ActionDescriptor<T> action, final String... typeIds) {
         assert (action != null);
         for (final String typeId : typeIds) {
             String text = action.getText();

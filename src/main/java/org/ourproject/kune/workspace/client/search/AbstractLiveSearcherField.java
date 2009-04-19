@@ -41,25 +41,27 @@ public class AbstractLiveSearcherField extends ComboBox {
 
         store = new Store(dataProxy, reader);
 
-        store.load(new UrlParam[] { new UrlParam("query", "."), new UrlParam("first", 1),
-                new UrlParam("max", PAGINATION_SIZE) });
+        store.load(new UrlParam[] { new UrlParam(SearcherContants.QUERY_PARAM, "."),
+                new UrlParam(SearcherContants.START_PARAM, 0),
+                new UrlParam(SearcherContants.LIMIT_PARAM, PAGINATION_SIZE) });
 
         final Template resultTpl = new Template(templateText);
         super.setStore(store);
         super.setEmptyText(i18n.t("Write here to search"));
         super.setDisplayField(LONG_NAME_FIELD);
-        super.setTypeAhead(true);
+        super.setTypeAhead(false);
         super.setLoadingText(i18n.t("Searching..."));
-        super.setWidth(268);
+        super.setWidth(260);
         super.setPageSize(PAGINATION_SIZE);
         super.setTpl(resultTpl);
         super.setMode(ComboBox.REMOTE);
         super.setMinChars(2);
+        super.setResizable(true);
         super.setSelectOnFocus(false);
         super.setHideTrigger(true);
         super.setHideLabel(true);
-        // setTitle(i18n.t("User or group"));
         super.setItemSelector("div.search-item");
+        super.setValidationEvent(false);
 
         super.addListener(new ComboBoxListenerAdapter() {
             @Override

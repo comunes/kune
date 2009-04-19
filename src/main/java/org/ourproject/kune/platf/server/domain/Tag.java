@@ -86,4 +86,9 @@ public class Tag implements HasId {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Tag[" + getName() + "]";
+    }
+
 }

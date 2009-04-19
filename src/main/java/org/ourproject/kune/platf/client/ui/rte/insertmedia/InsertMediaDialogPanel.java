@@ -18,7 +18,7 @@ public class InsertMediaDialogPanel extends AbstractTabbedDialogPanel implements
 
     public InsertMediaDialogPanel(final InsertMediaDialogPresenter presenter, final I18nTranslationService i18n,
             final Images images, final InsertMediaGroup insertMediaGroup) {
-        super(INSERT_MEDIA_DIALOG, i18n.t("Insert Media (audio/video)"), 380, HEIGHT + 100, 380, HEIGHT + 100, true,
+        super(INSERT_MEDIA_DIALOG, i18n.t("Insert Media (audio/video)"), 390, HEIGHT + 100, 390, HEIGHT + 100, true,
                 images, INSERT_MEDIA_DIALOG_ERROR_ID);
         super.setIconCls("k-film-icon");
         this.insertMediaGroup = insertMediaGroup;

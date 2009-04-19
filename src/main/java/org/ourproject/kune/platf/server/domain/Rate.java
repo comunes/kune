@@ -113,4 +113,8 @@ public class Rate {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "Rate[" + getRater() + " to " + content.getStateTokenEncoded() + "rated: " + getValue() + "]";
+    }
 }

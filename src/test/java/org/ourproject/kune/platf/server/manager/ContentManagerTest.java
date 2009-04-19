@@ -20,7 +20,7 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
         createContent();
         SearchResult<Content> search = contentManager.search(BODY);
         contentManager.reIndex();
-        assertEquals(new Long(1), search.getSize());
+        assertEquals(1, search.getSize());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
         contentManager.reIndex();
         SearchResult<Content> search = contentManager.search(new String[] { MIMETYPE },
                 new String[] { "mimeType.mimetype" }, 0, 10);
-        assertEquals(new Long(1), search.getSize());
+        assertEquals(1, search.getSize());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
         SearchResult<Content> search = contentManager.search(new String[] { BODY },
                 new String[] { "lastRevision.body" }, 0, 10);
         contentManager.reIndex();
-        assertEquals(new Long(1), search.getSize());
+        assertEquals(1, search.getSize());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
         createContent();
         SearchResult<Content> search = contentManager.search(TITLE);
         contentManager.reIndex();
-        assertEquals(new Long(1), search.getSize());
+        assertEquals(1, search.getSize());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
         createContentWithMimeAndCheck(MIMETYPE + "/png");
         contentManager.reIndex();
         SearchResult<Content> search = contentManager.searchMime(BODY, 0, 10, MIMETYPE);
-        assertEquals(new Long(1), search.getSize());
+        assertEquals(1, search.getSize());
     }
 
     /**

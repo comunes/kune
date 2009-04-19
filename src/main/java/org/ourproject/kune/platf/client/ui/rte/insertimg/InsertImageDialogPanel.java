@@ -15,9 +15,9 @@ public class InsertImageDialogPanel extends AbstractTabbedDialogPanel implements
     private static final String INSERT_IMG_DIALOG_ERROR_ID = "k-iip-err";
     private final InsertImageGroup insertImageGroup;
 
-    public InsertImageDialogPanel(final InsertImageDialogPresenter presenter, I18nTranslationService i18n,
-            Images images, final InsertImageGroup insertImageGroup) {
-        super(INSERT_IMG_DIALOG, i18n.t("Insert Image"), 380, HEIGHT + 100, 380, HEIGHT + 100, true, images,
+    public InsertImageDialogPanel(final InsertImageDialogPresenter presenter, final I18nTranslationService i18n,
+            final Images images, final InsertImageGroup insertImageGroup) {
+        super(INSERT_IMG_DIALOG, i18n.t("Insert Image"), 390, HEIGHT + 100, 390, HEIGHT + 100, true, images,
                 INSERT_IMG_DIALOG_ERROR_ID);
         super.setIconCls("k-picture-icon");
         this.insertImageGroup = insertImageGroup;
@@ -31,7 +31,7 @@ public class InsertImageDialogPanel extends AbstractTabbedDialogPanel implements
         Button insert = new Button(i18n.t("Insert"));
         insert.addListener(new ButtonListenerAdapter() {
             @Override
-            public void onClick(Button button, EventObject e) {
+            public void onClick(final Button button, final EventObject e) {
                 presenter.onInsert();
             }
         });
@@ -39,7 +39,7 @@ public class InsertImageDialogPanel extends AbstractTabbedDialogPanel implements
         Button cancel = new Button(i18n.t("Cancel"));
         cancel.addListener(new ButtonListenerAdapter() {
             @Override
-            public void onClick(Button button, EventObject e) {
+            public void onClick(final Button button, final EventObject e) {
                 presenter.onCancel();
             }
         });

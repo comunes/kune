@@ -91,7 +91,7 @@ public abstract class DefaultManager<T, K> {
             emQuery.setFirstResult(firstResult);
             emQuery.setMaxResults(maxResults);
         }
-        return new SearchResult<T>(new Long(emQuery.getResultSize()), emQuery.getResultList());
+        return new SearchResult<T>(emQuery.getResultSize(), emQuery.getResultList());
     }
 
     public SearchResult<T> search(final String query, final String[] fields, final BooleanClause.Occur[] flags,
