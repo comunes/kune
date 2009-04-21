@@ -40,12 +40,7 @@ public interface ContentManager extends Manager<Content, Long> {
             "language.code", "language.englishName", "language.nativeName", "lastRevision.body", "lastRevision.title",
             "mimeType.mimetype" };
 
-    String[] DEF_GROUP_SEARCH_FIELDS = new String[] { "container.owner.shortName", "authors.name", "authors.shortName",
-            "container.name", "language.code", "language.englishName", "language.nativeName", "lastRevision.body",
-            "lastRevision.title" };
-
-    String[] DEF_GROUP_SEARCH_FIELDS_WITH_MIME = new String[] { "authors.name", "authors.shortName", "container.name",
-            "language.code", "language.englishName", "language.nativeName", "lastRevision.body", "lastRevision.title",
+    String[] DEF_GROUP_SEARCH_FIELDS_WITH_MIME = new String[] { "lastRevision.title", "container.owner_shortName",
             "mimeType.mimetype" };
 
     void addAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
@@ -72,7 +67,11 @@ public interface ContentManager extends Manager<Content, Long> {
 
     SearchResult<Content> search(String search, Integer firstResult, Integer maxResults);
 
-    SearchResult<Content> searchMime(String search, Integer firstResult, Integer maxResults, String mimetype);
+    SearchResult<Content> searchMime(String search, Integer firstResult, Integer maxResults, String group,
+            String mimetype);
+
+    SearchResult<?> searchMime(String search, Integer firstResult, Integer maxResults, String group, String mimetype,
+            String mimetype2);
 
     I18nLanguage setLanguage(User user, Long contentId, String languageCode) throws DefaultException;
 

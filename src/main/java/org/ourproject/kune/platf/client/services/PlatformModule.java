@@ -73,7 +73,6 @@ import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogPresenter;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ext.InsertImageExt;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ext.InsertImageExtPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ext.InsertImageExtPresenter;
@@ -92,9 +91,10 @@ import org.ourproject.kune.platf.client.ui.rte.insertmedia.ExternalMediaRegistry
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialogPresenter;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertExtMedia;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertExtMediaPanel;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertExtMediaPresenter;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertMediaExt;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertMediaExtPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertMediaExtPresenter;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialogPresenter;
@@ -489,11 +489,11 @@ public class PlatformModule extends AbstractModule {
             }
         });
 
-        register(InsertMediaGroup.class, new Factory<InsertExtMedia>(InsertExtMedia.class) {
+        register(InsertMediaGroup.class, new Factory<InsertMediaExt>(InsertMediaExt.class) {
             @Override
-            public InsertExtMedia create() {
-                final InsertExtMediaPresenter presenter = new InsertExtMediaPresenter($(InsertMediaDialog.class), $(ExternalMediaRegistry.class));
-                final InsertExtMediaPanel panel = new InsertExtMediaPanel(presenter, i18n, $(ExternalMediaRegistry.class));
+            public InsertMediaExt create() {
+                final InsertMediaExtPresenter presenter = new InsertMediaExtPresenter($(InsertMediaDialog.class), $(ExternalMediaRegistry.class));
+                final InsertMediaExtPanel panel = new InsertMediaExtPanel(presenter, i18n, $(ExternalMediaRegistry.class));
                 presenter.init(panel);
                 return presenter;
             }

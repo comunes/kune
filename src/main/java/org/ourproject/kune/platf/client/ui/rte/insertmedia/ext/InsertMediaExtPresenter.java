@@ -6,13 +6,13 @@ import org.ourproject.kune.platf.client.ui.rte.insertmedia.ExternalMediaRegistry
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstractPresenter;
 
-public class InsertExtMediaPresenter extends InsertMediaAbstractPresenter implements InsertExtMedia {
+public class InsertMediaExtPresenter extends InsertMediaAbstractPresenter implements InsertMediaExt {
 
-    private InsertExtMediaView view;
+    private InsertMediaExtView view;
     private final ExternalMediaRegistry externalMediaRegistry;
     private ExternalMediaDescriptor mediaDescriptor;
 
-    public InsertExtMediaPresenter(final InsertMediaDialog insertMediaDialog,
+    public InsertMediaExtPresenter(final InsertMediaDialog insertMediaDialog,
             final ExternalMediaRegistry externalMediaRegistry) {
         super(insertMediaDialog);
         this.externalMediaRegistry = externalMediaRegistry;
@@ -21,7 +21,7 @@ public class InsertExtMediaPresenter extends InsertMediaAbstractPresenter implem
                 "http://[a-z]*.youtube.com/watch?v=.*", "FIXME", "<embed [%d]>"));
     }
 
-    public void init(final InsertExtMediaView view) {
+    public void init(final InsertMediaExtView view) {
         super.init(view);
         this.view = view;
     }

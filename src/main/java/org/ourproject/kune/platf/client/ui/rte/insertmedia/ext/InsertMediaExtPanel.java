@@ -4,9 +4,9 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.ExternalMediaRegistry;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstractPanel;
 
-public class InsertExtMediaPanel extends InsertMediaAbstractPanel implements InsertExtMediaView {
+public class InsertMediaExtPanel extends InsertMediaAbstractPanel implements InsertMediaExtView {
 
-    public InsertExtMediaPanel(final InsertExtMediaPresenter presenter, final I18nTranslationService i18n,
+    public InsertMediaExtPanel(final InsertMediaExtPresenter presenter, final I18nTranslationService i18n,
             final ExternalMediaRegistry externalMediaRegistry) {
         super(i18n.t("External"), presenter);
         String supportedVideos = externalMediaRegistry.getNames();

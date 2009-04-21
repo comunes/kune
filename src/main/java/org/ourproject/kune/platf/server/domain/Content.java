@@ -55,6 +55,8 @@ import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;
+import com.wideplay.warp.persist.dao.FirstResult;
+import com.wideplay.warp.persist.dao.MaxResults;
 
 @Entity
 @Table(name = "contents")
@@ -159,9 +161,34 @@ public class Content implements HasStateToken {
         }
     }
 
+    @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND status != 'inTheDustbin' ORDER BY lastRevision.title ASC")
+    public List<Content> find2Mime(@Named("group") final String groupShortName, @Named("title") final String title,
+            @Named("mimetype") final String mimetype, @Named("mimetype2") final String mimetype2,
+            @FirstResult final int offset, @MaxResults final int limit) {
+        return null;
+    }
+
+    @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND status != 'inTheDustbin'")
+    public int find2MimeCount(@Named("group") final String groupShortName, @Named("title") final String title,
+            @Named("mimetype") final String mimetype, @Named("mimetype2") final String mimetype2) {
+        return 0;
+    }
+
     @Finder(query = "select count(*) from Container ctx, Content ctn where ctn.container.id = ctx.id and ctx = :container and ctn.lastRevision.title LIKE :title")
     public Long findIfExistsTitle(@Named("container") final Container container, @Named("title") final String title) {
         return null;
+    }
+
+    @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND status != 'inTheDustbin' ORDER BY lastRevision.title ASC")
+    public List<Content> findMime(@Named("group") final String groupShortName, @Named("title") final String title,
+            @Named("mimetype") final String mimetype, @FirstResult final int offset, @MaxResults final int limit) {
+        return null;
+    }
+
+    @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND status != 'inTheDustbin'")
+    public int findMimeCount(@Named("group") final String groupShortName, @Named("title") final String title,
+            @Named("mimetype") final String mimetype) {
+        return 0;
     }
 
     @Transient

@@ -61,12 +61,12 @@ public class RegisterForm extends DefaultForm {
     private final Radio noPersonalHomePage;
     private final I18nTranslationService i18n;
 
-    public RegisterForm(final I18nTranslationService i18n, Session session) {
+    public RegisterForm(final I18nTranslationService i18n, final Session session) {
         this.i18n = i18n;
         super.addStyleName("kune-Margin-Large-l");
 
         shortNameRegField = new TextField();
-        shortNameRegField.setTabIndex(0);
+        shortNameRegField.setTabIndex(1);
         shortNameRegField.setFieldLabel(i18n.t("Nickname"));
         shortNameRegField.setName(NICK_FIELD);
         shortNameRegField.setWidth(DEF_SMALL_FIELD_WIDTH);
@@ -81,7 +81,7 @@ public class RegisterForm extends DefaultForm {
         add(shortNameRegField);
 
         longNameRegField = new TextField();
-        longNameRegField.setTabIndex(1);
+        longNameRegField.setTabIndex(2);
         longNameRegField.setFieldLabel(i18n.t("Full Name"));
         longNameRegField.setName(LONGNAME_FIELD);
         longNameRegField.setWidth(DEF_FIELD_WIDTH);
@@ -93,7 +93,7 @@ public class RegisterForm extends DefaultForm {
         add(longNameRegField);
 
         passwdRegField = new TextField();
-        passwdRegField.setTabIndex(2);
+        passwdRegField.setTabIndex(3);
         passwdRegField.setFieldLabel(i18n.t("Password"));
         passwdRegField.setName(PASSWORD_FIELD);
         passwdRegField.setPassword(true);
@@ -105,7 +105,7 @@ public class RegisterForm extends DefaultForm {
         add(passwdRegField);
 
         passwdRegFieldDup = new TextField();
-        passwdRegFieldDup.setTabIndex(3);
+        passwdRegFieldDup.setTabIndex(4);
         passwdRegFieldDup.setFieldLabel(i18n.t("Retype password"));
         passwdRegFieldDup.setName(PASSWORD_FIELD_DUP);
         passwdRegFieldDup.setPassword(true);
@@ -124,7 +124,7 @@ public class RegisterForm extends DefaultForm {
         add(passwdRegFieldDup);
 
         emailRegField = new TextField();
-        emailRegField.setTabIndex(4);
+        emailRegField.setTabIndex(5);
         emailRegField.setFieldLabel(i18n.t("Email"));
         emailRegField.setName(EMAIL_FIELD);
         emailRegField.setVtype(VType.EMAIL);
@@ -138,7 +138,7 @@ public class RegisterForm extends DefaultForm {
         langStore.load();
 
         languageCombo = new ComboBox();
-        languageCombo.setTabIndex(5);
+        languageCombo.setTabIndex(6);
         languageCombo.setLazyRender(true);
         languageCombo.setName(LANG_FIELD);
         languageCombo.setMinChars(1);

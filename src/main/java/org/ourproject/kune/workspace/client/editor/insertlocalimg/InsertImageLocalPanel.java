@@ -12,6 +12,8 @@ import org.ourproject.kune.workspace.client.search.SearcherContants;
 
 import com.calclab.suco.client.events.Listener;
 import com.gwtext.client.core.UrlParam;
+import com.gwtext.client.widgets.form.Field;
+import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 
 public class InsertImageLocalPanel extends InsertImageAbstractPanel implements InsertImageLocalView {
 
@@ -21,7 +23,7 @@ public class InsertImageLocalPanel extends InsertImageAbstractPanel implements I
             final FileDownloadUtils downloadUtils) {
         super(i18n.t("Local"), presenter);
 
-        AbstractLiveSearcherField cb = new AbstractLiveSearcherField(i18n,
+        final AbstractLiveSearcherField cb = new AbstractLiveSearcherField(i18n,
                 SearcherContants.CONTENT_TEMPLATE_TEXT_PREFIX
                         + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
                         + SearcherContants.CONTENT_TEMPLATE_TEXT_SUFFIX, SearcherContants.CONTENT_DATA_PROXY_URL,
@@ -34,7 +36,14 @@ public class InsertImageLocalPanel extends InsertImageAbstractPanel implements I
         cb.setHideLabel(false);
         cb.setAllowBlank(false);
         cb.setWidth(220);
-        cb.setStoreBaseParams(new UrlParam[] { new UrlParam(SearcherContants.MIMETYPE_PARAM, BasicMimeTypeDTO.IMAGE) });
+        cb.addListener(new FieldListenerAdapter() {
+            @Override
+            public void onFocus(final Field field) {
+                cb.setStoreBaseParams(new UrlParam[] {
+                        new UrlParam(SearcherContants.GROUP_PARAM, presenter.getCurrentGroupName()),
+                        new UrlParam(SearcherContants.MIMETYPE_PARAM, BasicMimeTypeDTO.IMAGE) });
+            }
+        });
 
         super.insert(0, cb);
     }

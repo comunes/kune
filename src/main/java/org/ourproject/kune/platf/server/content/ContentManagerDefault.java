@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.server.content;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -27,7 +28,6 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.search.BooleanClause.Occur;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.client.errors.NameInUseException;
@@ -172,7 +172,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public SearchResult<Content> search(final String search, final Integer firstResult, final Integer maxResults) {
-        final MultiFieldQueryParser parser = createParser();
+        final MultiFieldQueryParser parser = createMultiFieldParser();
         Query query;
         try {
             query = parser.parse(search);
@@ -183,9 +183,19 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     public SearchResult<Content> searchMime(final String search, final Integer firstResult, final Integer maxResults,
-            final String mimetype) {
-        return search(getSearchQueries(search, mimetype), DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME, getConditions(),
+            final String groupShortName, final String mimetype) {
+        List<Content> list = contentFinder.findMime(groupShortName, "%" + search + "%", mimetype, firstResult,
+                maxResults);
+        int count = contentFinder.findMimeCount(groupShortName, "%" + search + "%", mimetype);
+        return new SearchResult<Content>(count, list);
+    }
+
+    public SearchResult<?> searchMime(final String search, final Integer firstResult, final Integer maxResults,
+            final String groupShortName, final String mimetype, final String mimetype2) {
+        List<Content> list = contentFinder.find2Mime(groupShortName, "%" + search + "%", mimetype, mimetype2,
                 firstResult, maxResults);
+        int count = contentFinder.find2MimeCount(groupShortName, "%" + search + "%", mimetype, mimetype2);
+        return new SearchResult<Content>(count, list);
     }
 
     public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
@@ -227,7 +237,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         tagManager.setTags(user, content, tags);
     }
 
-    private MultiFieldQueryParser createParser() {
+    private MultiFieldQueryParser createMultiFieldParser() {
         final MultiFieldQueryParser parser = new MultiFieldQueryParser(DEF_GLOBAL_SEARCH_FIELDS, new StandardAnalyzer());
         return parser;
     }
@@ -239,25 +249,4 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         }
         return initialTitle;
     }
-
-    private Occur[] getConditions() {
-        String[] fields = ContentManager.DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME;
-        Occur[] conditions = new Occur[fields.length];
-        for (int i = 0; i < conditions.length; i++) {
-            conditions[i] = Occur.SHOULD;
-        }
-        conditions[conditions.length - 1] = Occur.MUST;
-        return conditions;
-    }
-
-    private String[] getSearchQueries(final String search, final String mimetype) {
-        String[] fields = ContentManager.DEF_GLOBAL_SEARCH_FIELDS_WITH_MIME;
-        String[] query = new String[fields.length];
-        for (int i = 0; i < query.length; i++) {
-            query[i] = search;
-        }
-        query[query.length - 1] = mimetype;
-        return query;
-    }
-
 }

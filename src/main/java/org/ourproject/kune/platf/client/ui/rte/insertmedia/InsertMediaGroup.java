@@ -1,4 +1,4 @@
-package org.ourproject.kune.platf.client.ui.rte.insertimg;
+package org.ourproject.kune.platf.client.ui.rte.insertmedia;
 
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstract;
 

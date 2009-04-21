@@ -53,10 +53,10 @@ import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
@@ -80,9 +80,9 @@ import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLoc
 import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocal;
 import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocalPresenter;
-import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertLocalMedia;
-import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertLocalMediaPanel;
-import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertLocalMediaPresenter;
+import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocalPanel;
+import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocalPresenter;
+import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocal;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
@@ -933,7 +933,8 @@ public class WorkspaceModule extends AbstractModule {
         register(InsertImageGroup.class, new Factory<InsertImageLocal>(InsertImageLocal.class) {
             @Override
             public InsertImageLocal create() {
-                final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImageDialog.class));
+                final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImageDialog.class),
+                        $(Session.class));
                 final InsertImageLocalPanel panel = new InsertImageLocalPanel(presenter,
                         $(I18nTranslationService.class), $(FileDownloadUtils.class));
                 presenter.init(panel);
@@ -970,11 +971,12 @@ public class WorkspaceModule extends AbstractModule {
             }
         });
 
-        register(InsertMediaGroup.class, new Factory<InsertLocalMedia>(InsertLocalMedia.class) {
+        register(InsertMediaGroup.class, new Factory<InsertMediaLocal>(InsertMediaLocal.class) {
             @Override
-            public InsertLocalMedia create() {
-                final InsertLocalMediaPresenter presenter = new InsertLocalMediaPresenter($(InsertMediaDialog.class));
-                final InsertLocalMediaPanel panel = new InsertLocalMediaPanel(presenter,
+            public InsertMediaLocal create() {
+                final InsertMediaLocalPresenter presenter = new InsertMediaLocalPresenter($(InsertMediaDialog.class),
+                        $(Session.class));
+                final InsertMediaLocalPanel panel = new InsertMediaLocalPanel(presenter,
                         $(I18nTranslationService.class), $(FileDownloadUtils.class));
                 presenter.init(panel);
                 return presenter;

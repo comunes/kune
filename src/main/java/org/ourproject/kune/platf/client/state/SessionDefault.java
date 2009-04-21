@@ -95,6 +95,10 @@ public class SessionDefault implements Session {
         return initData.getCurrentCCversion();
     }
 
+    public String getCurrentGroupShortName() {
+        return currentState == null ? null : currentState.getStateToken().getGroup();
+    }
+
     public I18nLanguageDTO getCurrentLanguage() {
         return currentLanguage;
     }
@@ -177,7 +181,7 @@ public class SessionDefault implements Session {
         return initData.getUserTools();
     }
 
-    public boolean inSameToken(StateToken token) {
+    public boolean inSameToken(final StateToken token) {
         return getCurrentStateToken().equals(token);
     }
 

@@ -23,8 +23,8 @@ import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharGroup;
 
 import com.calclab.suco.client.ioc.module.AbstractModule;

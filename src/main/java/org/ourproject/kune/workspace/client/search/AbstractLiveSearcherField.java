@@ -37,7 +37,7 @@ public class AbstractLiveSearcherField extends ComboBox {
                         new StringFieldDef(LINK_FIELD), new StringFieldDef(ICON_URL_FIELD) }));
         reader.setRoot("list");
         reader.setTotalProperty("size");
-        reader.setId(SHORT_NAME_FIELD);
+        reader.setId(LINK_FIELD);
 
         store = new Store(dataProxy, reader);
 

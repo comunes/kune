@@ -62,21 +62,19 @@ public class ContentJSONService {
     }
 
     @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM,
-            SearcherContants.MIMETYPE_PARAM })
+            SearcherContants.GROUP_PARAM, SearcherContants.MIMETYPE_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
-            final String mimetype) {
-        SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, mimetype);
+            final String group, final String mimetype) {
+        SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, group, mimetype);
         return map(results);
     }
 
     @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM,
-            SearcherContants.MIMETYPE_PARAM, SearcherContants.MIMETYPE2_PARAM })
+            SearcherContants.GROUP_PARAM, SearcherContants.MIMETYPE_PARAM, SearcherContants.MIMETYPE2_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
-            final String mimetype, final String mimetype2) {
-        SearchResult<Content> results1st = contentManager.searchMime(search, firstResult, maxResults, mimetype);
-        SearchResult<Content> results2nd = contentManager.searchMime(search, firstResult, maxResults, mimetype2);
-        results1st.getList().addAll(results2nd.getList());
-        return map(results1st);
+            final String group, final String mimetype, final String mimetype2) {
+        return map(contentManager.searchMime(search, firstResult, maxResults, group, mimetype, mimetype2));
+
     }
 
     private SearchResultDTO<LinkDTO> map(final SearchResult<?> results) {

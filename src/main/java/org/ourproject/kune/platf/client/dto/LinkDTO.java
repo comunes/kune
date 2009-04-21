@@ -92,6 +92,6 @@ public class LinkDTO implements IsSerializable {
 
     @Override
     public String toString() {
-        return "LinkDTO[(" + getLink() + "): " + getShortName() + "]";
+        return "LinkDTO[" + getLink() + ": " + getLongName() + "]";
     }
 }

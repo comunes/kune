@@ -62,10 +62,10 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
     }
 
     @Test
-    public void testMimeSearch() {
+    public void testtMimeSearch() {
         createContentWithMimeAndCheck(MIMETYPE + "/png");
         contentManager.reIndex();
-        SearchResult<Content> search = contentManager.searchMime(BODY, 0, 10, MIMETYPE);
+        SearchResult<Content> search = contentManager.searchMime(BODY, 0, 10, "asb", MIMETYPE);
         assertEquals(1, search.getSize());
     }
 

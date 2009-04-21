@@ -79,6 +79,8 @@ public interface Session {
 
     String getCurrentCCversion();
 
+    String getCurrentGroupShortName();
+
     I18nLanguageDTO getCurrentLanguage();
 
     StateAbstractDTO getCurrentState();

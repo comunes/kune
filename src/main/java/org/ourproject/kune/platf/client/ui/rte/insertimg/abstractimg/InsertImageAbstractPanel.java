@@ -27,9 +27,11 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
     protected final Checkbox wrapText;
     protected final Checkbox clickOriginal;
     private final Label intro;
+    private final InsertImageAbstractPresenter presenter;
 
     public InsertImageAbstractPanel(final String title, final InsertImageAbstractPresenter presenter) {
         super(title);
+        this.presenter = presenter;
         super.setAutoWidth(true);
         super.setHeight(InsertImageDialogView.HEIGHT);
         super.getFormPanel().setLabelWidth(DEF_FIELD_LABEL_WITH + 20);
@@ -132,6 +134,13 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
     @Override
     public void insert(final int index, final Component component) {
         super.insert(index, component);
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        ImageInfo linkImage = presenter.getImageInfo();
+        updateValues(linkImage);
     }
 
     public void setIntro(final String text) {

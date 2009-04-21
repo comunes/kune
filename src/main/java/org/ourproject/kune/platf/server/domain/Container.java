@@ -73,7 +73,7 @@ public class Container implements HasId, HasStateToken {
     @ManyToOne
     private I18nLanguage language;
 
-    @IndexedEmbedded
+    @IndexedEmbedded(depth = 1, prefix = "owner_")
     @OneToOne
     private Group owner;
 
