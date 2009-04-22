@@ -1,8 +1,14 @@
 package org.ourproject.kune.platf.client.dto;
 
-import org.ourproject.kune.platf.client.ui.WindowUtils;
+import org.ourproject.kune.platf.client.state.Session;
 
 public class StateTokenUtils {
+
+    private final Session session;
+
+    public StateTokenUtils(final Session session) {
+        this.session = session;
+    }
 
     public String getPublicUrl(final StateToken token) {
         String publicUrl = "";
@@ -13,7 +19,7 @@ public class StateTokenUtils {
         String folder = token.getFolder();
         String document = token.getDocument();
 
-        publicUrl += WindowUtils.getPublicHost() + "/public";
+        publicUrl += session.getSiteUrl() + "/public";
 
         if (group != null) {
             publicUrl += "/" + group;

@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
@@ -41,10 +42,12 @@ public class GalleryFolderContentPresenter extends FoldableContentPresenter impl
     private final I18nTranslationService i18n;
     private final Provider<FileDownloadUtils> downloadUtils;
 
-    public GalleryFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
-            final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n,
-            Provider<FileDownloadUtils> downloadUtils, Provider<FileDownloadUtils> downloadProvider) {
-        super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
+    public GalleryFolderContentPresenter(final StateManager stateManager, final Session session,
+            final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
+            final I18nTranslationService i18n, final Provider<FileDownloadUtils> downloadUtils,
+            final Provider<FileDownloadUtils> downloadProvider, final Provider<MediaUtils> mediaUtils) {
+        super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n,
+                mediaUtils);
         this.i18n = i18n;
         this.downloadUtils = downloadUtils;
     }
@@ -55,7 +58,7 @@ public class GalleryFolderContentPresenter extends FoldableContentPresenter impl
     }
 
     @Override
-    protected void setState(StateContainerDTO state) {
+    protected void setState(final StateContainerDTO state) {
         if (state.getTypeId().equals(GalleryClientTool.TYPE_ROOT)) {
             ContainerDTO rootContainer = state.getRootContainer();
             if (rootContainer.getChilds().size() == 0 && rootContainer.getContents().size() == 0) {

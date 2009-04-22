@@ -92,6 +92,7 @@ import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialogPresenter;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertMediaExt;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertMediaExtPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.ext.InsertMediaExtPresenter;
@@ -488,6 +489,13 @@ public class PlatformModule extends AbstractModule {
                 return new InsertSpecialUTF8CharPanel(i18n, $(InsertSpecialCharDialog.class));
             }
         });
+
+
+        register(MediaUtils.class, new Factory<MediaUtils>(MediaUtils.class) {
+            @Override
+            public MediaUtils create() {
+                return new MediaUtils($(Session.class), $(FileDownloadUtils.class));
+            }});
 
         register(InsertMediaGroup.class, new Factory<InsertMediaExt>(InsertMediaExt.class) {
             @Override

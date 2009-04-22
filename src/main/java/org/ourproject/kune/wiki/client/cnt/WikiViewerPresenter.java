@@ -24,6 +24,7 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
@@ -33,18 +34,19 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class WikiViewerPresenter extends FoldableContentPresenter implements WikiViewer {
 
-    public WikiViewerPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
-            ActionContentToolbar toolbar, ContentActionRegistry actionRegistry,
-            Provider<FileDownloadUtils> downloadProvider) {
-        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
+    public WikiViewerPresenter(final StateManager stateManager, final Session session,
+            final I18nUITranslationService i18n, final ActionContentToolbar toolbar,
+            final ContentActionRegistry actionRegistry, final Provider<FileDownloadUtils> downloadProvider,
+            final Provider<MediaUtils> mediaUtils) {
+        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
     }
 
-    public void init(WikiViewerView view) {
+    public void init(final WikiViewerView view) {
         super.init(view);
     }
 
     @Override
-    protected void setState(StateContentDTO state) {
+    protected void setState(final StateContentDTO state) {
         super.setState(state);
         setContent(state, WikiClientTool.TYPE_UPLOADEDFILE);
     }

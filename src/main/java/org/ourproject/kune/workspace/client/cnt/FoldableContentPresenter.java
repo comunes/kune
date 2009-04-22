@@ -32,6 +32,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 
 import com.calclab.suco.client.events.Listener;
@@ -45,16 +46,19 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     private final ActionContentToolbar toolbar;
     private final Provider<FileDownloadUtils> downloadProvider;
     private final I18nTranslationService i18n;
+    private final Provider<MediaUtils> mediaUtils;
 
-    public FoldableContentPresenter(final String toolName, StateManager stateManager, Session session,
-            final ActionContentToolbar toolbar, ActionRegistry<StateToken> actionRegistry,
-            Provider<FileDownloadUtils> downloadProvider, I18nTranslationService i18n) {
+    public FoldableContentPresenter(final String toolName, final StateManager stateManager, final Session session,
+            final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
+            final Provider<FileDownloadUtils> downloadProvider, final I18nTranslationService i18n,
+            final Provider<MediaUtils> mediaUtils) {
         this.toolName = toolName;
         this.session = session;
         this.toolbar = toolbar;
         this.actionRegistry = actionRegistry;
         this.downloadProvider = downloadProvider;
         this.i18n = i18n;
+        this.mediaUtils = mediaUtils;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
@@ -70,7 +74,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
         setState(session.getContentState());
     }
 
-    protected void setContent(StateContentDTO state, String uploadedfileType) {
+    protected void setContent(final StateContentDTO state, final String uploadedfileType) {
         String typeId = state.getTypeId();
         String contentBody = state.getContent();
         StateToken token = state.getStateToken();
@@ -84,6 +88,8 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
                 } else if (mimeType.isPdf()) {
                     view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
                             ImageSize.sized), true);
+                } else if (mimeType.isMp3() || mimeType.isFlv()) {
+                    view.setContent(mediaUtils.get().getEmbed(token), false);
                 } else if (mimeType.isText()) {
                     view.setContent(contentBody, true);
                 } else {
@@ -106,7 +112,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
         view.attach();
     }
 
-    protected void setState(StateAbstractDTO state) {
+    protected void setState(final StateAbstractDTO state) {
         toolbar.detach();
         if (state instanceof StateContainerDTO) {
             StateContainerDTO stateCntCtx = (StateContainerDTO) state;
@@ -121,23 +127,24 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
         }
     }
 
-    protected void setState(StateContainerDTO state) {
+    protected void setState(final StateContainerDTO state) {
         ActionItemCollection<StateToken> collection = getActionCollection(state, state.getContainerRights());
         setToolbar(collection);
         attach();
     }
 
-    protected void setState(StateContentDTO state) {
+    protected void setState(final StateContentDTO state) {
         ActionItemCollection<StateToken> collection = getActionCollection(state, state.getContentRights());
         setToolbar(collection);
     }
 
-    private ActionItemCollection<StateToken> getActionCollection(StateContainerDTO state, AccessRightsDTO rights) {
+    private ActionItemCollection<StateToken> getActionCollection(final StateContainerDTO state,
+            final AccessRightsDTO rights) {
         return actionRegistry.getCurrentActions(state.getStateToken(), state.getTypeId(), session.isLogged(), rights,
                 true);
     }
 
-    private void setToolbar(ActionItemCollection<StateToken> collection) {
+    private void setToolbar(final ActionItemCollection<StateToken> collection) {
         toolbar.disableMenusAndClearButtons();
         toolbar.addActions(collection, AbstractFoldableContentActions.CONTENT_TOPBAR);
         ;

@@ -43,11 +43,6 @@ public class InsertMediaAbstractPresenter implements InsertMediaAbstract {
         insertMediaDialog.setOnInsertPressed(onInsertMediaPressed);
     }
 
-    public void onInsert(final String linkInfo) {
-        insertMediaDialog.fireOnInsertMedia(linkInfo);
-        reset();
-    }
-
     public void reset() {
         view.reset();
     }

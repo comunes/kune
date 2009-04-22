@@ -105,6 +105,8 @@ public interface Session {
 
     int getImgThumbsize();
 
+    InitDataDTO getInitData();
+
     List<I18nLanguageSimpleDTO> getLanguages();
 
     Object[][] getLanguagesArray();
@@ -112,6 +114,8 @@ public interface Session {
     List<LicenseDTO> getLicenses();
 
     boolean getShowDeletedContent();
+
+    String getSiteUrl();
 
     Object[][] getTimezones();
 

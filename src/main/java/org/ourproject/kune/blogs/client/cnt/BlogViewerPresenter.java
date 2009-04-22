@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
@@ -33,18 +34,19 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class BlogViewerPresenter extends FoldableContentPresenter implements BlogViewer {
 
-    public BlogViewerPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
-            ActionContentToolbar toolbar, ContentActionRegistry actionRegistry,
-            Provider<FileDownloadUtils> downloadProvider) {
-        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
+    public BlogViewerPresenter(final StateManager stateManager, final Session session,
+            final I18nUITranslationService i18n, final ActionContentToolbar toolbar,
+            final ContentActionRegistry actionRegistry, final Provider<FileDownloadUtils> downloadProvider,
+            final Provider<MediaUtils> mediaUtils) {
+        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
     }
 
-    public void init(BlogViewerView view) {
+    public void init(final BlogViewerView view) {
         super.init(view);
     }
 
     @Override
-    protected void setState(StateContentDTO state) {
+    protected void setState(final StateContentDTO state) {
         super.setState(state);
         super.setContent(state, BlogClientTool.TYPE_UPLOADEDFILE);
     }

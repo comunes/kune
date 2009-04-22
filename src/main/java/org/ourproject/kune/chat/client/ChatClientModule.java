@@ -37,6 +37,7 @@ import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
@@ -97,7 +98,7 @@ public class ChatClientModule extends AbstractModule {
             public ChatRoom create() {
                 final ChatRoomPresenter presenter = new ChatRoomPresenter($(StateManager.class), $(Session.class),
                         $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class));
+                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
                 final ChatRoomPanel panel = new ChatRoomPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(panel);

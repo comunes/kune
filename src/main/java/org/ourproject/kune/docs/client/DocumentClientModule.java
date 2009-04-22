@@ -39,6 +39,7 @@ import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
@@ -78,8 +79,8 @@ public class DocumentClientModule extends AbstractModule {
                         $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
                         $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class),
-                        $(DocumentViewer.class), $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
+                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class), $(DocumentViewer.class),
+                        $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
             }
         });
 
@@ -97,7 +98,7 @@ public class DocumentClientModule extends AbstractModule {
             public DocumentViewer create() {
                 final DocumentViewerPresenter presenter = new DocumentViewerPresenter($(StateManager.class),
                         $(Session.class), $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class));
+                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
                 final DocumentViewerView view = new DocumentViewerPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);
@@ -110,7 +111,7 @@ public class DocumentClientModule extends AbstractModule {
             public DocFolderContent create() {
                 final DocFolderContentPresenter presenter = new DocFolderContentPresenter($(StateManager.class),
                         $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $$(FileDownloadUtils.class), $(I18nTranslationService.class));
+                        $$(FileDownloadUtils.class), $(I18nTranslationService.class), $$(MediaUtils.class));
                 final DocFolderContentView view = new DocFolderContentPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);

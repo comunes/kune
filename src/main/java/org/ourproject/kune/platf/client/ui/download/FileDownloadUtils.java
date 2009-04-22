@@ -43,20 +43,20 @@ public class FileDownloadUtils {
     }
 
     public void downloadFile(final StateToken token) {
-        final String url = calculateUrl(token, true);
+        final String url = calculateUrl(token, true, true);
         DOM.setElementAttribute(RootPanel.get("__download").getElement(), "src", url);
     }
 
-    public String getImageResizedUrl(final StateToken token, ImageSize imageSize) {
-        return calculateUrl(token, false) + "&" + new UrlParam(FileConstants.IMGSIZE, imageSize.toString());
+    public String getImageResizedUrl(final StateToken token, final ImageSize imageSize) {
+        return calculateUrl(token, false, true) + "&" + new UrlParam(FileConstants.IMGSIZE, imageSize.toString());
     }
 
     public String getImageUrl(final StateToken token) {
-        return calculateUrl(token, false);
+        return calculateUrl(token, false, true);
     }
 
-    public String getLogoAvatarHtml(StateToken groupToken, boolean groupHasLogo, boolean isPersonal, int size,
-            int hvspace) {
+    public String getLogoAvatarHtml(final StateToken groupToken, final boolean groupHasLogo, final boolean isPersonal,
+            final int size, final int hvspace) {
         if (groupHasLogo) {
             return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
                     + "px; height: " + size + "px;' src='" + getLogoImageUrl(groupToken) + "'>";
@@ -66,13 +66,20 @@ public class FileDownloadUtils {
         }
     }
 
-    public String getLogoImageUrl(StateToken token) {
+    public String getLogoImageUrl(final StateToken token) {
         return new Url(LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString())).toString();
     }
 
-    private String calculateUrl(final StateToken token, final boolean download) {
-        return new Url(DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString()), new UrlParam(FileConstants.HASH,
-                session.getUserHash()), new UrlParam(FileConstants.DOWNLOAD, download)).toString();
+    public String getUrl(final StateToken token) {
+        return calculateUrl(token, false, false);
     }
 
+    private String calculateUrl(final StateToken token, final boolean download, final boolean useHash) {
+        Url url = new Url(DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString()), new UrlParam(
+                FileConstants.DOWNLOAD, download));
+        if (useHash) {
+            url.add(new UrlParam(FileConstants.HASH, session.getUserHash()));
+        }
+        return url.toString();
+    }
 }

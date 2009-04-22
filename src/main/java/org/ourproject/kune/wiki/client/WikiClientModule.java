@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContent;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContentPanel;
@@ -97,7 +98,7 @@ public class WikiClientModule extends AbstractModule {
             public WikiViewer create() {
                 final WikiViewerPresenter presenter = new WikiViewerPresenter($(StateManager.class), $(Session.class),
                         $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class));
+                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
                 final WikiViewerView view = new WikiViewerPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);
@@ -110,7 +111,7 @@ public class WikiClientModule extends AbstractModule {
             public WikiFolderContent create() {
                 final WikiFolderContentPresenter presenter = new WikiFolderContentPresenter($(StateManager.class),
                         $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $(I18nTranslationService.class), $$(FileDownloadUtils.class));
+                        $(I18nTranslationService.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
                 final WikiFolderContentView view = new WikiFolderContentPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);

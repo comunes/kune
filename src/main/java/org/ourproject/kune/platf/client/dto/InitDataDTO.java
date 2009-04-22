@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class InitDataDTO implements IsSerializable {
+
+    private String siteUrl;
     private UserInfoDTO userInfo;
     private ArrayList<LicenseDTO> licenses;
     private ArrayList<I18nLanguageSimpleDTO> languages;
@@ -46,6 +48,7 @@ public class InitDataDTO implements IsSerializable {
     private int imgIconsize;
     private ArrayList<ToolSimpleDTO> userTools;
     private ArrayList<ToolSimpleDTO> groupTools;
+    private String mediaEmbedObject;
 
     public String getChatDomain() {
         return chatDomain;
@@ -111,12 +114,20 @@ public class InitDataDTO implements IsSerializable {
         return maxFileSizeInMb;
     }
 
+    public String getMediaEmbedObject() {
+        return mediaEmbedObject;
+    }
+
     public String getSiteDomain() {
         return siteDomain;
     }
 
     public String getSiteLogoUrl() {
         return siteLogoUrl;
+    }
+
+    public String getSiteUrl() {
+        return siteUrl;
     }
 
     public String[] getTimezones() {
@@ -155,11 +166,11 @@ public class InitDataDTO implements IsSerializable {
         this.countries = countries;
     }
 
-    public void setCurrentCCversion(String currentCCversion) {
+    public void setCurrentCCversion(final String currentCCversion) {
         this.currentCCversion = currentCCversion;
     }
 
-    public void setDefaultLicense(LicenseDTO defaultLicense) {
+    public void setDefaultLicense(final LicenseDTO defaultLicense) {
         this.defaultLicense = defaultLicense;
     }
 
@@ -171,23 +182,23 @@ public class InitDataDTO implements IsSerializable {
         this.galleryPermittedExtensions = galleryPermittedExtensions;
     }
 
-    public void setGroupTools(ArrayList<ToolSimpleDTO> groupTools) {
+    public void setGroupTools(final ArrayList<ToolSimpleDTO> groupTools) {
         this.groupTools = groupTools;
     }
 
-    public void setImgCropsize(int imgCropsize) {
+    public void setImgCropsize(final int imgCropsize) {
         this.imgCropsize = imgCropsize;
     }
 
-    public void setImgIconsize(int imgIconsize) {
+    public void setImgIconsize(final int imgIconsize) {
         this.imgIconsize = imgIconsize;
     }
 
-    public void setImgResizewidth(int imgResizewidth) {
+    public void setImgResizewidth(final int imgResizewidth) {
         this.imgResizewidth = imgResizewidth;
     }
 
-    public void setImgThumbsize(int imgThumbsize) {
+    public void setImgThumbsize(final int imgThumbsize) {
         this.imgThumbsize = imgThumbsize;
     }
 
@@ -203,12 +214,20 @@ public class InitDataDTO implements IsSerializable {
         this.maxFileSizeInMb = maxFileSizeInMb;
     }
 
+    public void setMediaEmbedObject(final String mediaEmbedObject) {
+        this.mediaEmbedObject = mediaEmbedObject;
+    }
+
     public void setSiteDomain(final String siteDomain) {
         this.siteDomain = siteDomain;
     }
 
     public void setSiteLogoUrl(final String siteLogoUrl) {
         this.siteLogoUrl = siteLogoUrl;
+    }
+
+    public void setSiteUrl(final String siteUrl) {
+        this.siteUrl = siteUrl;
     }
 
     public void setTimezones(final String[] timezones) {
@@ -219,7 +238,7 @@ public class InitDataDTO implements IsSerializable {
         this.userInfo = currentUser;
     }
 
-    public void setUserTools(ArrayList<ToolSimpleDTO> userTools) {
+    public void setUserTools(final ArrayList<ToolSimpleDTO> userTools) {
         this.userTools = userTools;
     }
 

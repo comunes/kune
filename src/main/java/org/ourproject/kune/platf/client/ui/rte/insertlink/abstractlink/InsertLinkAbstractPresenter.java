@@ -67,11 +67,6 @@ public class InsertLinkAbstractPresenter implements InsertLinkAbstract {
         editorInsertDialog.setOnInsertLinkPressed(onInsertLinkPressed);
     }
 
-    public void onInsert(final LinkInfo linkInfo) {
-        editorInsertDialog.fireOnInsertLink(linkInfo);
-        reset();
-    }
-
     public void onOverFieldChanged(final String title) {
         editorInsertDialog.getLinkInfo().setTitle(title);
     }

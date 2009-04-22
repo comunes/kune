@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
@@ -38,10 +39,11 @@ public class ChatRoomPresenter extends FoldableContentPresenter implements ChatR
     private ChatRoomView view;
     private final I18nUITranslationService i18n;
 
-    public ChatRoomPresenter(StateManager stateManager, Session session, I18nUITranslationService i18n,
-            ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
-            Provider<FileDownloadUtils> downloadProvider) {
-        super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
+    public ChatRoomPresenter(final StateManager stateManager, final Session session,
+            final I18nUITranslationService i18n, final ActionContentToolbar toolbar,
+            final ActionRegistry<StateToken> actionRegistry, final Provider<FileDownloadUtils> downloadProvider,
+            final Provider<MediaUtils> mediaUtils) {
+        super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
         this.i18n = i18n;
     }
 
@@ -51,7 +53,7 @@ public class ChatRoomPresenter extends FoldableContentPresenter implements ChatR
     }
 
     @Override
-    protected void setState(StateContainerDTO state) {
+    protected void setState(final StateContainerDTO state) {
         if (state.getTypeId().equals(ChatClientTool.TYPE_ROOT)) {
             if (state.getRootContainer().getChilds().size() == 0) {
                 view.setInfo(i18n.t("This group has no chat rooms."));

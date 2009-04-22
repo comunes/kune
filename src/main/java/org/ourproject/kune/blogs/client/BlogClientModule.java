@@ -39,6 +39,7 @@ import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
@@ -97,7 +98,7 @@ public class BlogClientModule extends AbstractModule {
             public BlogViewer create() {
                 final BlogViewerPresenter presenter = new BlogViewerPresenter($(StateManager.class), $(Session.class),
                         $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class));
+                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
                 final BlogViewerView view = new BlogViewerPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);
@@ -110,7 +111,7 @@ public class BlogClientModule extends AbstractModule {
             public BlogFolderContent create() {
                 final BlogFolderContentPresenter presenter = new BlogFolderContentPresenter($(StateManager.class),
                         $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $(I18nTranslationService.class), $$(FileDownloadUtils.class));
+                        $(I18nTranslationService.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
                 final BlogFolderContentView view = new BlogFolderContentPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);

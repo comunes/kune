@@ -147,6 +147,10 @@ public class SessionDefault implements Session {
         return initData.getImgThumbsize();
     }
 
+    public InitDataDTO getInitData() {
+        return initData;
+    }
+
     public List<I18nLanguageSimpleDTO> getLanguages() {
         return initData.getLanguages();
     }
@@ -164,6 +168,10 @@ public class SessionDefault implements Session {
 
     public boolean getShowDeletedContent() {
         return currentUserInfo == null ? false : currentUserInfo.getShowDeletedContent();
+    }
+
+    public String getSiteUrl() {
+        return initData.getSiteUrl();
     }
 
     public Object[][] getTimezones() {

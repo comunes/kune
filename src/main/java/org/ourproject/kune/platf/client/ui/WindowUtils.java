@@ -30,42 +30,36 @@ public class WindowUtils {
         return result;
     }
 
-    public static String getPublicHost() {
-        // FIXME: Maybe get from InitData the site.domain
-        String port = WindowUtils.getLocation().getPort();
-        return "http://" + WindowUtils.getLocation().getHostName() + (port == null ? "" : ":" + port);
-    }
-
     private static native String getHash() /*-{
-        return $wnd.location.hash;
-    }-*/;
+           return $wnd.location.hash;
+       }-*/;
 
     private static native String getHost() /*-{
-        return $wnd.location.host;
-    }-*/;
+           return $wnd.location.host;
+       }-*/;
 
     private static native String getHostName() /*-{
-        return $wnd.location.hostname;
-    }-*/;
+           return $wnd.location.hostname;
+       }-*/;
 
     private static native String getHref() /*-{
-        return $wnd.location.href;
-    }-*/;
+           return $wnd.location.href;
+       }-*/;
 
     private static native String getPath() /*-{
-        return $wnd.location.pathname;
-    }-*/;
+           return $wnd.location.pathname;
+       }-*/;
 
     private static native String getPort() /*-{
-        return $wnd.location.port;
-    }-*/;
+           return $wnd.location.port;
+       }-*/;
 
     private static native String getProtocol() /*-{
-        return $wnd.location.protocol;
-    }-*/;
+           return $wnd.location.protocol;
+       }-*/;
 
     private static native String getQueryString() /*-{
-        return $wnd.location.search;
-    }-*/;
+           return $wnd.location.search;
+       }-*/;
 
 }

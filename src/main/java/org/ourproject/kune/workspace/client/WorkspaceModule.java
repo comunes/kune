@@ -57,6 +57,7 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
@@ -80,9 +81,9 @@ import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLoc
 import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocal;
 import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLocalPresenter;
+import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocal;
 import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocalPresenter;
-import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocal;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
@@ -306,7 +307,7 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<StateTokenUtils>(StateTokenUtils.class) {
             @Override
             public StateTokenUtils create() {
-                return new StateTokenUtils();
+                return new StateTokenUtils($(Session.class));
             }
         });
 
@@ -936,7 +937,7 @@ public class WorkspaceModule extends AbstractModule {
                 final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImageDialog.class),
                         $(Session.class));
                 final InsertImageLocalPanel panel = new InsertImageLocalPanel(presenter,
-                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
+                        $(I18nTranslationService.class), $(FileDownloadUtils.class), $(Session.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -975,7 +976,7 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public InsertMediaLocal create() {
                 final InsertMediaLocalPresenter presenter = new InsertMediaLocalPresenter($(InsertMediaDialog.class),
-                        $(Session.class));
+                        $(Session.class), $$(MediaUtils.class));
                 final InsertMediaLocalPanel panel = new InsertMediaLocalPanel(presenter,
                         $(I18nTranslationService.class), $(FileDownloadUtils.class));
                 presenter.init(panel);

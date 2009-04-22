@@ -20,8 +20,9 @@
 package org.ourproject.kune.platf.server.properties;
 
 public interface KuneProperties {
-    String DEFAULT_SITE_SHORT_NAME = "kune.default.site.shortName";
+    String SITE_URL = "kune.siteurl";
     String SITE_DOMAIN = "kune.site.domain";
+    String DEFAULT_SITE_SHORT_NAME = "kune.default.site.shortName";
     String CURRENT_CC_VERSION = "kune.currentccversion";
     String CHAT_HTTP_BASE = "kune.chat.httpbase";
     String CHAT_DOMAIN = "kune.chat.domain";
@@ -36,6 +37,7 @@ public interface KuneProperties {
     String IMAGES_THUMBSIZE = "kune.images.thumbsize";
     String IMAGES_CROPSIZE = "kune.images.cropsize";
     String IMAGES_ICONSIZE = "kune.images.iconsize";
+    String MEDIA_EMBEDED_OBJECT = "kune.media.embededobject";
 
     String get(String key);
 

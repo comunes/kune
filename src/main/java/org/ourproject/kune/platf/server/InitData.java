@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.server.tool.ToolSimple;
 import org.ourproject.kune.platf.server.users.UserInfo;
 
 public class InitData {
+    private String siteUrl;
     private List<License> licenses;
     private List<I18nLanguage> languages;
     private List<I18nCountry> countries;
@@ -51,6 +52,7 @@ public class InitData {
     private int imgIconsize;
     private ArrayList<ToolSimple> userTools;
     private ArrayList<ToolSimple> groupTools;
+    private String mediaEmbedObject;
 
     public String getChatDomain() {
         return chatDomain;
@@ -116,12 +118,20 @@ public class InitData {
         return maxFileSizeInMb;
     }
 
+    public String getMediaEmbedObject() {
+        return mediaEmbedObject;
+    }
+
     public String getSiteDomain() {
         return siteDomain;
     }
 
     public String getSiteLogoUrl() {
         return siteLogoUrl;
+    }
+
+    public String getSiteUrl() {
+        return siteUrl;
     }
 
     public String[] getTimezones() {
@@ -156,11 +166,11 @@ public class InitData {
         this.countries = countries;
     }
 
-    public void setCurrentCCversion(String currentCCversion) {
+    public void setCurrentCCversion(final String currentCCversion) {
         this.currentCCversion = currentCCversion;
     }
 
-    public void setDefaultLicense(License defaultLicense) {
+    public void setDefaultLicense(final License defaultLicense) {
         this.defaultLicense = defaultLicense;
     }
 
@@ -172,23 +182,23 @@ public class InitData {
         this.galleryPermittedExtensions = galleryPermittedExtensions;
     }
 
-    public void setGroupTools(ArrayList<ToolSimple> groupTools) {
+    public void setGroupTools(final ArrayList<ToolSimple> groupTools) {
         this.groupTools = groupTools;
     }
 
-    public void setImgCropsize(int imgCropsize) {
+    public void setImgCropsize(final int imgCropsize) {
         this.imgCropsize = imgCropsize;
     }
 
-    public void setImgIconsize(int imgIconsize) {
+    public void setImgIconsize(final int imgIconsize) {
         this.imgIconsize = imgIconsize;
     }
 
-    public void setImgResizewidth(int imgResizewidth) {
+    public void setImgResizewidth(final int imgResizewidth) {
         this.imgResizewidth = imgResizewidth;
     }
 
-    public void setImgThumbsize(int imgThumbsize) {
+    public void setImgThumbsize(final int imgThumbsize) {
         this.imgThumbsize = imgThumbsize;
     }
 
@@ -204,12 +214,20 @@ public class InitData {
         this.maxFileSizeInMb = maxFileSizeInMb;
     }
 
+    public void setMediaEmbedObject(final String mediaEmbedObject) {
+        this.mediaEmbedObject = mediaEmbedObject;
+    }
+
     public void setSiteDomain(final String siteDomain) {
         this.siteDomain = siteDomain;
     }
 
     public void setSiteLogoUrl(final String siteLogoUrl) {
         this.siteLogoUrl = siteLogoUrl;
+    }
+
+    public void setSiteUrl(final String siteUrl) {
+        this.siteUrl = siteUrl;
     }
 
     public void setTimezones(final String[] timezones) {
@@ -220,7 +238,7 @@ public class InitData {
         this.userInfo = currentUserInfo;
     }
 
-    public void setUserTools(ArrayList<ToolSimple> userTools) {
+    public void setUserTools(final ArrayList<ToolSimple> userTools) {
         this.userTools = userTools;
     }
 

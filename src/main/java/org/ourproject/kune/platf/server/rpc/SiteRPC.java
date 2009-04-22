@@ -79,6 +79,7 @@ public class SiteRPC implements RPC, SiteService {
         final InitData data = new InitData();
         final UserSession userSession = getUserSession();
 
+        data.setSiteUrl(kuneProperties.get(KuneProperties.SITE_URL));
         data.setLicenses(licenseManager.getAll());
         data.setLanguages(languageManager.getAll());
         data.setCountries(countryManager.getAll());
@@ -102,6 +103,7 @@ public class SiteRPC implements RPC, SiteService {
         data.setImgThumbsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE)));
         data.setImgCropsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE)));
         data.setImgIconsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE)));
+        data.setMediaEmbedObject(kuneProperties.get(KuneProperties.MEDIA_EMBEDED_OBJECT));
         return mapper.map(data, InitDataDTO.class);
     }
 

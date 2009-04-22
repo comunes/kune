@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
@@ -37,10 +38,11 @@ public class BlogFolderContentPresenter extends FoldableContentPresenter impleme
     private BlogFolderContentView view;
     private final I18nTranslationService i18n;
 
-    public BlogFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
-            final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n,
-            Provider<FileDownloadUtils> downloadProvider) {
-        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
+    public BlogFolderContentPresenter(final StateManager stateManager, final Session session,
+            final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
+            final I18nTranslationService i18n, final Provider<FileDownloadUtils> downloadProvider,
+            final Provider<MediaUtils> mediaUtils) {
+        super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
         this.i18n = i18n;
     }
 
@@ -50,7 +52,7 @@ public class BlogFolderContentPresenter extends FoldableContentPresenter impleme
     }
 
     @Override
-    protected void setState(StateContainerDTO state) {
+    protected void setState(final StateContainerDTO state) {
         if (state.getTypeId().equals(BlogClientTool.TYPE_ROOT)) {
             if (state.getRootContainer().getChilds().size() == 0) {
                 view.setInfo(i18n.t("This group has no blogs"));

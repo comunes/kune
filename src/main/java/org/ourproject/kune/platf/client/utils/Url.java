@@ -25,16 +25,20 @@ public class Url {
     private final String base;
     private final ArrayList<UrlParam> params;
 
-    public Url(String base) {
+    public Url(final String base) {
         this.base = base;
         params = new ArrayList<UrlParam>();
     }
 
-    public Url(String base, UrlParam... iniParams) {
+    public Url(final String base, final UrlParam... iniParams) {
         this(base);
         for (UrlParam param : iniParams) {
-            params.add(param);
+            add(param);
         }
+    }
+
+    public void add(final UrlParam param) {
+        params.add(param);
     }
 
     @Override

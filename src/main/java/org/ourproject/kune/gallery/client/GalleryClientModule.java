@@ -39,6 +39,7 @@ import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
@@ -78,8 +79,8 @@ public class GalleryClientModule extends AbstractModule {
                         $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
                         $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
                         $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class),
-                        $(GalleryViewer.class), $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
+                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class), $(GalleryViewer.class),
+                        $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
             }
         });
 
@@ -97,7 +98,7 @@ public class GalleryClientModule extends AbstractModule {
             public GalleryViewer create() {
                 final GalleryViewerPresenter presenter = new GalleryViewerPresenter($(StateManager.class),
                         $(Session.class), $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class));
+                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
                 final GalleryViewerView view = new GalleryViewerPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class));
                 presenter.init(view);
@@ -111,7 +112,7 @@ public class GalleryClientModule extends AbstractModule {
                 final GalleryFolderContentPresenter presenter = new GalleryFolderContentPresenter(
                         $(StateManager.class), $(Session.class), $(ActionContentToolbar.class),
                         $(ContentActionRegistry.class), $(I18nTranslationService.class), $$(FileDownloadUtils.class),
-                        $$(FileDownloadUtils.class));
+                        $$(FileDownloadUtils.class), $$(MediaUtils.class));
                 final GalleryFolderContentView view = new GalleryFolderContentPanel($(WorkspaceSkeleton.class),
                         $(I18nTranslationService.class), $(StateManager.class), $(Session.class));
                 presenter.init(view);

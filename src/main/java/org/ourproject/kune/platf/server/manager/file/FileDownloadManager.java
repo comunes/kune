@@ -87,8 +87,9 @@ public class FileDownloadManager extends HttpServlet {
         }
     }
 
-    String buildResponse(final Content cnt, final StateToken stateToken, final String downloadS, String imageSizeS,
-            final HttpServletResponse resp, FileUtils fileUtils) throws FileNotFoundException, IOException {
+    String buildResponse(final Content cnt, final StateToken stateToken, final String downloadS,
+            final String imageSizeS, final HttpServletResponse resp, final FileUtils fileUtils)
+            throws FileNotFoundException, IOException {
         final ImageSize imgsize = imageSizeS == null ? null : ImageSize.valueOf(imageSizeS);
         final boolean download = downloadS != null && downloadS.equals("true") ? true : false;
         final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + FileUtils.toDir(stateToken);
@@ -121,10 +122,8 @@ public class FileDownloadManager extends HttpServlet {
         resp.setContentLength((int) file.length());
         if (mimeType == null || download) {
             resp.setContentType(APPLICATION_X_DOWNLOAD);
-        } else if (mimeType.isImage()) {
-            resp.setContentType(mimeType.toString());
         } else {
-            resp.setContentType(APPLICATION_X_DOWNLOAD);
+            resp.setContentType(mimeType.toString());
         }
         resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + title + extension + RESP_HEADER_END);
         return absFilename;

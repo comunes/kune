@@ -161,14 +161,14 @@ public class Content implements HasStateToken {
         }
     }
 
-    @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND status != 'inTheDustbin' ORDER BY lastRevision.title ASC")
+    @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND deletedOn=null ORDER BY lastRevision.title ASC")
     public List<Content> find2Mime(@Named("group") final String groupShortName, @Named("title") final String title,
             @Named("mimetype") final String mimetype, @Named("mimetype2") final String mimetype2,
             @FirstResult final int offset, @MaxResults final int limit) {
         return null;
     }
 
-    @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND status != 'inTheDustbin'")
+    @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND deletedOn=null")
     public int find2MimeCount(@Named("group") final String groupShortName, @Named("title") final String title,
             @Named("mimetype") final String mimetype, @Named("mimetype2") final String mimetype2) {
         return 0;
@@ -179,13 +179,13 @@ public class Content implements HasStateToken {
         return null;
     }
 
-    @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND status != 'inTheDustbin' ORDER BY lastRevision.title ASC")
+    @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND deletedOn=null ORDER BY lastRevision.title ASC")
     public List<Content> findMime(@Named("group") final String groupShortName, @Named("title") final String title,
             @Named("mimetype") final String mimetype, @FirstResult final int offset, @MaxResults final int limit) {
         return null;
     }
 
-    @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND status != 'inTheDustbin'")
+    @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND deletedOn=null")
     public int findMimeCount(@Named("group") final String groupShortName, @Named("title") final String title,
             @Named("mimetype") final String mimetype) {
         return 0;

@@ -4,7 +4,6 @@ import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstractPanel;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherField;
@@ -29,7 +28,7 @@ public class InsertMediaLocalPanel extends InsertMediaAbstractPanel implements I
                         + SearcherContants.CONTENT_TEMPLATE_TEXT_SUFFIX, SearcherContants.CONTENT_DATA_PROXY_URL,
                 new Listener<LinkDTO>() {
                     public void onEvent(final LinkDTO link) {
-                        src = WindowUtils.getPublicHost() + downloadUtils.getImageUrl(new StateToken(link.getLink()));
+                        src = link.getLink();
                     }
                 });
         cb.setLabel(i18n.t("Local media"));

@@ -53,11 +53,6 @@ public class InsertImageAbstractPresenter implements InsertImageAbstract {
         insertImageDialog.getImageInfo().setClickOriginal(checked);
     }
 
-    public void onInsert(final ImageInfo linkInfo) {
-        insertImageDialog.fireOnInsertImage(linkInfo);
-        reset();
-    }
-
     public void onPositionFieldChanged(final String position) {
         insertImageDialog.getImageInfo().setPosition(position);
     }

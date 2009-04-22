@@ -57,6 +57,10 @@ public class BasicMimeTypeDTO implements IsSerializable {
         return type;
     }
 
+    public boolean isFlv() {
+        return type != null && subtype != null && type.equals("video") && subtype.equals("flv");
+    }
+
     /**
      * Duplicate code in BMT
      * 
@@ -64,6 +68,11 @@ public class BasicMimeTypeDTO implements IsSerializable {
      */
     public boolean isImage() {
         return type != null && type.equals(IMAGE);
+    }
+
+    public boolean isMp3() {
+        return type != null && subtype != null && type.equals("audio")
+                && (subtype.equals("mp3") || subtype.equals("x-mp3") || (subtype.equals("mpeg")));
     }
 
     /**

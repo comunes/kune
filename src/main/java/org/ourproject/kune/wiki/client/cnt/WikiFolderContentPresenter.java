@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
@@ -38,10 +39,11 @@ public class WikiFolderContentPresenter extends FoldableContentPresenter impleme
     private WikiFolderContentView view;
     private final I18nTranslationService i18n;
 
-    public WikiFolderContentPresenter(StateManager stateManager, Session session, ActionContentToolbar toolbar,
-            final ActionRegistry<StateToken> actionRegistry, I18nTranslationService i18n,
-            Provider<FileDownloadUtils> downloadProvider) {
-        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n);
+    public WikiFolderContentPresenter(final StateManager stateManager, final Session session,
+            final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
+            final I18nTranslationService i18n, final Provider<FileDownloadUtils> downloadProvider,
+            final Provider<MediaUtils> mediaUtils) {
+        super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
         this.i18n = i18n;
     }
 
@@ -51,7 +53,7 @@ public class WikiFolderContentPresenter extends FoldableContentPresenter impleme
     }
 
     @Override
-    protected void setState(StateContainerDTO state) {
+    protected void setState(final StateContainerDTO state) {
         if (state.getTypeId().equals(WikiClientTool.TYPE_ROOT)) {
             ContainerDTO rootContainer = state.getRootContainer();
             if (rootContainer.getChilds().size() == 0 && rootContainer.getContents().size() == 0) {

@@ -29,9 +29,9 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
 
     protected final ContentCapabilitiesRegistry contentCapabilitiesRegistry;
 
-    public FoldableAbstractClientTool(String shortName, String longName, ToolSelector toolSelector,
-            WsThemePresenter wsThemePresenter, WorkspaceSkeleton ws,
-            ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
+    public FoldableAbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector,
+            final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
+            final ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
         super(shortName, longName, toolSelector, wsThemePresenter, ws);
         this.contentCapabilitiesRegistry = contentCapabilitiesRegistry;
     }
@@ -44,57 +44,58 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
         contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(contentTypeId, iconUrl);
     }
 
-    protected void registerAclEditableTypes(String... typeIds) {
+    protected void registerAclEditableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getAclEditable().register(typeIds);
     }
 
-    protected void registerAuthorableTypes(String... typeIds) {
+    protected void registerAuthorableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getAuthorable().register(typeIds);
     }
 
-    protected void registerComentableTypes(String... typeIds) {
+    protected void registerComentableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getComentable().register(typeIds);
     }
 
-    protected void registerDragableTypes(String... typeIds) {
+    protected void registerDragableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getDragable().register(typeIds);
     }
 
-    protected void registerDropableTypes(String... typeIds) {
+    protected void registerDropableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getDropable().register(typeIds);
     }
 
-    protected void registerEmailSubscribeAbleTypes(String... typeIds) {
+    protected void registerEmailSubscribeAbleTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getEmailSubscribeAble().register(typeIds);
     }
 
-    protected void registerLicensableTypes(String... typeIds) {
+    protected void registerLicensableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getLicensable().register(typeIds);
     }
 
-    protected void registerPublishModerableTypes(String... typeIds) {
+    protected void registerPublishModerableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getPublishModerable().register(typeIds);
     }
 
-    protected void registerRateableTypes(String... typeIds) {
+    protected void registerRateableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getRateable().register(typeIds);
     }
 
-    protected void registerRenamableTypes(String... typeIds) {
+    protected void registerRenamableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getRenamable().register(typeIds);
     }
 
-    protected void registerTageableTypes(String... typeIds) {
+    protected void registerTageableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getTageable().register(typeIds);
     }
 
-    protected void registerTranslatableTypes(String... typeIds) {
+    protected void registerTranslatableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getTranslatable().register(typeIds);
     }
 
-    protected void registerUploadTypesAndMimes(String typeUploadedfile) {
+    protected void registerUploadTypesAndMimes(final String typeUploadedfile) {
         registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("image"), "images/nav/picture.png");
         registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("video"), "images/nav/film.png");
+        registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("audio"), "images/nav/music.png");
         registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "pdf"), "images/nav/page_pdf.png");
         registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "zip"), "images/nav/page_zip.png");
         registerContentTypeIcon(typeUploadedfile, new BasicMimeTypeDTO("application", "zip"), "images/nav/page_zip.png");
@@ -108,15 +109,15 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
         registerContentTypeIcon(typeUploadedfile, "images/nav/page.png");
     }
 
-    protected void registerVersionableTypes(String... typeIds) {
+    protected void registerVersionableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getVersionable().register(typeIds);
     }
 
-    protected void registerXmppComentableTypes(String... typeIds) {
+    protected void registerXmppComentableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getXmppComentable().register(typeIds);
     }
 
-    protected void registerXmppNotifyCapableTypes(String... typeIds) {
+    protected void registerXmppNotifyCapableTypes(final String... typeIds) {
         contentCapabilitiesRegistry.getXmppNotificyCapable().register(typeIds);
     }
 }
