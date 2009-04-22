@@ -75,8 +75,10 @@ public class FileDownloadUtils {
     }
 
     private String calculateUrl(final StateToken token, final boolean download, final boolean useHash) {
-        Url url = new Url(DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString()), new UrlParam(
-                FileConstants.DOWNLOAD, download));
+        Url url = new Url(DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString()));
+        if (download) {
+            url.add(new UrlParam(FileConstants.DOWNLOAD, download));
+        }
         if (useHash) {
             url.add(new UrlParam(FileConstants.HASH, session.getUserHash()));
         }
