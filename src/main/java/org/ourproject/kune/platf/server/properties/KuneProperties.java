@@ -37,7 +37,10 @@ public interface KuneProperties {
     String IMAGES_THUMBSIZE = "kune.images.thumbsize";
     String IMAGES_CROPSIZE = "kune.images.cropsize";
     String IMAGES_ICONSIZE = "kune.images.iconsize";
-    String MEDIA_EMBEDED_OBJECT = "kune.media.embededobject";
+    String FLV_EMBEDED_OBJECT = "kune.media.flvembededobject";
+    String OGG_EMBEDED_OBJECT = "kune.media.oggembededobject";
+    String MP3_EMBEDED_OBJECT = "kune.media.mp3embededobject";
+    String AVI_EMBEDED_OBJECT = "kune.media.aviembededobject";
 
     String get(String key);
 

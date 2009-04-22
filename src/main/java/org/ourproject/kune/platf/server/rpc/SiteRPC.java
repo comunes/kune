@@ -103,7 +103,10 @@ public class SiteRPC implements RPC, SiteService {
         data.setImgThumbsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE)));
         data.setImgCropsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE)));
         data.setImgIconsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE)));
-        data.setMediaEmbedObject(kuneProperties.get(KuneProperties.MEDIA_EMBEDED_OBJECT));
+        data.setFlvEmbedObject(kuneProperties.get(KuneProperties.FLV_EMBEDED_OBJECT));
+        data.setMp3EmbedObject(kuneProperties.get(KuneProperties.MP3_EMBEDED_OBJECT));
+        data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));
+        data.setAviEmbedObject(kuneProperties.get(KuneProperties.AVI_EMBEDED_OBJECT));
         return mapper.map(data, InitDataDTO.class);
     }
 

@@ -29,6 +29,7 @@ import org.ourproject.kune.platf.server.tool.ToolSimple;
 import org.ourproject.kune.platf.server.users.UserInfo;
 
 public class InitData {
+
     private String siteUrl;
     private List<License> licenses;
     private List<I18nLanguage> languages;
@@ -52,7 +53,18 @@ public class InitData {
     private int imgIconsize;
     private ArrayList<ToolSimple> userTools;
     private ArrayList<ToolSimple> groupTools;
-    private String mediaEmbedObject;
+
+    private String flvEmbedObject;
+
+    private String oggEmbedObject;
+
+    private String mp3EmbedObject;
+
+    private String aviEmbedObject;
+
+    public String getAviEmbedObject() {
+        return aviEmbedObject;
+    }
 
     public String getChatDomain() {
         return chatDomain;
@@ -80,6 +92,10 @@ public class InitData {
 
     public String getDefaultWsTheme() {
         return defaultWsTheme;
+    }
+
+    public String getFlvEmbedObject() {
+        return flvEmbedObject;
     }
 
     public String getGalleryPermittedExtensions() {
@@ -118,8 +134,12 @@ public class InitData {
         return maxFileSizeInMb;
     }
 
-    public String getMediaEmbedObject() {
-        return mediaEmbedObject;
+    public String getMp3EmbedObject() {
+        return mp3EmbedObject;
+    }
+
+    public String getOggEmbedObject() {
+        return oggEmbedObject;
     }
 
     public String getSiteDomain() {
@@ -150,6 +170,10 @@ public class InitData {
         return wsThemes;
     }
 
+    public void setAviEmbedObject(final String aviEmbedObject) {
+        this.aviEmbedObject = aviEmbedObject;
+    }
+
     public void setChatDomain(final String chatDomain) {
         this.chatDomain = chatDomain;
     }
@@ -176,6 +200,10 @@ public class InitData {
 
     public void setDefaultWsTheme(final String defaultWsTheme) {
         this.defaultWsTheme = defaultWsTheme;
+    }
+
+    public void setFlvEmbedObject(final String flvEmbedObject) {
+        this.flvEmbedObject = flvEmbedObject;
     }
 
     public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
@@ -214,8 +242,12 @@ public class InitData {
         this.maxFileSizeInMb = maxFileSizeInMb;
     }
 
-    public void setMediaEmbedObject(final String mediaEmbedObject) {
-        this.mediaEmbedObject = mediaEmbedObject;
+    public void setMp3EmbedObject(final String mp3EmbedObject) {
+        this.mp3EmbedObject = mp3EmbedObject;
+    }
+
+    public void setOggEmbedObject(final String oggEmbedObject) {
+        this.oggEmbedObject = oggEmbedObject;
     }
 
     public void setSiteDomain(final String siteDomain) {

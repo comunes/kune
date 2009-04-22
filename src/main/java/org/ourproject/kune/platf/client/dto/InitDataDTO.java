@@ -48,7 +48,18 @@ public class InitDataDTO implements IsSerializable {
     private int imgIconsize;
     private ArrayList<ToolSimpleDTO> userTools;
     private ArrayList<ToolSimpleDTO> groupTools;
-    private String mediaEmbedObject;
+
+    private String flvEmbedObject;
+
+    private String oggEmbedObject;
+
+    private String mp3EmbedObject;
+
+    private String aviEmbedObject;
+
+    public String getAviEmbedObject() {
+        return aviEmbedObject;
+    }
 
     public String getChatDomain() {
         return chatDomain;
@@ -76,6 +87,10 @@ public class InitDataDTO implements IsSerializable {
 
     public String getDefaultWsTheme() {
         return defaultWsTheme;
+    }
+
+    public String getFlvEmbedObject() {
+        return flvEmbedObject;
     }
 
     public String getGalleryPermittedExtensions() {
@@ -114,8 +129,12 @@ public class InitDataDTO implements IsSerializable {
         return maxFileSizeInMb;
     }
 
-    public String getMediaEmbedObject() {
-        return mediaEmbedObject;
+    public String getMp3EmbedObject() {
+        return mp3EmbedObject;
+    }
+
+    public String getOggEmbedObject() {
+        return oggEmbedObject;
     }
 
     public String getSiteDomain() {
@@ -150,6 +169,10 @@ public class InitDataDTO implements IsSerializable {
         return getUserInfo() != null;
     }
 
+    public void setAviEmbedObject(final String aviEmbedObject) {
+        this.aviEmbedObject = aviEmbedObject;
+    }
+
     public void setChatDomain(final String chatDomain) {
         this.chatDomain = chatDomain;
     }
@@ -176,6 +199,10 @@ public class InitDataDTO implements IsSerializable {
 
     public void setDefaultWsTheme(final String defaultWsTheme) {
         this.defaultWsTheme = defaultWsTheme;
+    }
+
+    public void setFlvEmbedObject(final String flvEmbedObject) {
+        this.flvEmbedObject = flvEmbedObject;
     }
 
     public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
@@ -214,8 +241,12 @@ public class InitDataDTO implements IsSerializable {
         this.maxFileSizeInMb = maxFileSizeInMb;
     }
 
-    public void setMediaEmbedObject(final String mediaEmbedObject) {
-        this.mediaEmbedObject = mediaEmbedObject;
+    public void setMp3EmbedObject(final String mp3EmbedObject) {
+        this.mp3EmbedObject = mp3EmbedObject;
+    }
+
+    public void setOggEmbedObject(final String oggEmbedObject) {
+        this.oggEmbedObject = oggEmbedObject;
     }
 
     public void setSiteDomain(final String siteDomain) {

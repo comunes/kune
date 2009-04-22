@@ -157,7 +157,8 @@ I am talking about, but I'm sure there is something to do.
    see:  svn checkout svn://anonsvn.it.su.se/su-smack su-smack
 ** TODO <v> study different embeded video solutions
    - for ogg :: http://www.flumotion.net/cortado/
-   - for mp3+ogg :: flowplayer
+   - for mp3+flv :: flowplayer
+   - for avi :: ??
 ** TODO <d> Inform to translators when original content changes
 ** TODO <v> Restarting server don't affect client session
    Now there are problems if client was started before server, when server restart (session persist)

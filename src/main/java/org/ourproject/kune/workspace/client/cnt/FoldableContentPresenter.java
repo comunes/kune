@@ -88,8 +88,12 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
                 } else if (mimeType.isPdf()) {
                     view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
                             ImageSize.sized), true);
-                } else if (mimeType.isMp3() || mimeType.isFlv()) {
-                    view.setContent(mediaUtils.get().getEmbed(token), false);
+                } else if (mimeType.isMp3()) {
+                    view.setContent(mediaUtils.get().getMp3Embed(token), false);
+                } else if (mimeType.isOgg()) {
+                    view.setContent(mediaUtils.get().getOggEmbed(token), false);
+                } else if (mimeType.isFlv()) {
+                    view.setContent(mediaUtils.get().getFlvEmbed(token), false);
                 } else if (mimeType.isText()) {
                     view.setContent(contentBody, true);
                 } else {

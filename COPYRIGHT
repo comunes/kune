@@ -115,6 +115,11 @@ dom region library:
    Copyright: under GNU Lesser General Public License
    http://www.gnu.org/licenses/lgpl.html
 
+cortado:
+   A video player java applet (Ogg Theora, Ogg Vorbis)
+   http://www.flumotion.net/cortado/
+   Copyright: (C) 2004 Fluendo S.L under GNU General Public License
+
 some license description:
     from Wikipedia
     Copyright: under GFDL http://www.gnu.org/copyleft/fdl.html

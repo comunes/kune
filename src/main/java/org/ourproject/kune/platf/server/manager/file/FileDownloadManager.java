@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
@@ -59,6 +61,7 @@ public class FileDownloadManager extends HttpServlet {
     static final String APPLICATION_X_DOWNLOAD = "application/x-download";
 
     private static final long serialVersionUID = 1L;
+    public static final Log log = LogFactory.getLog(FileDownloadManager.class);
 
     @Inject
     ContentManager contentManager;
@@ -120,11 +123,16 @@ public class FileDownloadManager extends HttpServlet {
         final File file = new File(absFilename);
 
         resp.setContentLength((int) file.length());
+
+        String contentType;
         if (mimeType == null || download) {
-            resp.setContentType(APPLICATION_X_DOWNLOAD);
+            contentType = APPLICATION_X_DOWNLOAD;
         } else {
-            resp.setContentType(mimeType.toString());
+            contentType = mimeType.toString();
         }
+        resp.setContentType(contentType);
+        log.info("Content type returned: " + contentType);
+
         resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + title + extension + RESP_HEADER_END);
         return absFilename;
     }

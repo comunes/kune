@@ -76,6 +76,11 @@ public class BasicMimeTypeDTO implements IsSerializable {
                 && (subtype.equals("mp3") || subtype.equals("x-mp3") || (subtype.equals("mpeg")));
     }
 
+    public boolean isOgg() {
+        // http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
+        return type != null && subtype != null && subtype.equals("ogg");
+    }
+
     /**
      * Duplicate code in BMT
      * 
