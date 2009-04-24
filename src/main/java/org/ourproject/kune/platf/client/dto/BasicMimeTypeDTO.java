@@ -57,6 +57,11 @@ public class BasicMimeTypeDTO implements IsSerializable {
         return type;
     }
 
+    public boolean isAvi() {
+        return type != null && subtype != null && type.equals("video")
+                && (subtype.equals("x-msvideo") || subtype.equals("msvideo"));
+    }
+
     public boolean isFlv() {
         return type != null && subtype != null && type.equals("video")
                 && (subtype.equals("flv") || subtype.equals("x-flv"));

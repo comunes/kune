@@ -17,6 +17,11 @@ public class MediaUtils {
         this.downloadUtils = downloadUtils;
     }
 
+    public String getAviEmbed(final StateToken token) {
+        return session.getInitData().getAviEmbedObject().replace(DOC_URL_TAG,
+                session.getSiteUrl() + downloadUtils.getUrl(token));
+    }
+
     public String getFlvEmbed(final StateToken token) {
         return session.getInitData().getFlvEmbedObject().replace(DOC_URL_TAG,
                 session.getSiteUrl() + downloadUtils.getUrl(token));

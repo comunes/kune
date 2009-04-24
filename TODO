@@ -11,6 +11,11 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** maven-gwt problem (using another plugin from codehaus)
+   mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:compile
+   and so on.
+   More info:
+   http://code.google.com/p/gwt-maven/wiki/M2FAQ
 ** vjrj use xwiki maven repo
    http://maven.xwiki.org/releases/com/xpn/xwiki/platform/xwiki-web-wysiwyg/1.8-rc-2/
 ** vjrj <v> better RTE
@@ -157,8 +162,14 @@ I am talking about, but I'm sure there is something to do.
    see:  svn checkout svn://anonsvn.it.su.se/su-smack su-smack
 ** TODO <v> study different embeded video solutions
    - for ogg :: http://www.flumotion.net/cortado/
-   - for mp3+flv :: flowplayer
-   - for avi :: ??
+   http://www.flumotion.net/cortado/
+   https://code.fluendo.com/flumotion/trac/browser/cortado/trunk/README
+   http://en.flossmanuals.net/TheoraCookbook/Cortado		
+   - for mp3+flv :: flowplayer		    
+   - for avi :: some links:
+   http://www.w3schools.com/media/media_browservideos.asp
+   http://www.solitude.dk/archives/embedquicktime/
+   http://www.solitude.dk/archives/embedquicktime/jquery.embedquicktime-source.js
 ** TODO <d> Inform to translators when original content changes
 ** TODO <v> Restarting server don't affect client session
    Now there are problems if client was started before server, when server restart (session persist)

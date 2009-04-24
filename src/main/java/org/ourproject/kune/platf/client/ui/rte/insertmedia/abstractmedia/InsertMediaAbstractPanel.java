@@ -52,6 +52,6 @@ public class InsertMediaAbstractPanel extends DefaultForm implements InsertMedia
     }
 
     public void setIntro(final String text) {
-        intro.setHtml(text);
+        intro.setHtml(text + "<br/>");
     }
 }

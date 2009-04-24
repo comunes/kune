@@ -80,7 +80,10 @@ public class FileDownloadUtils {
             url.add(new UrlParam(FileConstants.DOWNLOAD, download));
         }
         if (useHash) {
-            url.add(new UrlParam(FileConstants.HASH, session.getUserHash()));
+            String hash = session.getUserHash();
+            if (hash != null) {
+                url.add(new UrlParam(FileConstants.HASH, hash));
+            }
         }
         return url.toString();
     }

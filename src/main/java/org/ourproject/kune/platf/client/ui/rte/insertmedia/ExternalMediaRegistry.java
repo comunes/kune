@@ -7,7 +7,8 @@ public class ExternalMediaRegistry extends ArrayList<ExternalMediaDescriptor> {
 
     private static final long serialVersionUID = 1L;
 
-    public static final ExternalMediaDescriptor NO_MEDIA = new ExternalMediaDescriptor(null, null, null, null, null);
+    public static final ExternalMediaDescriptor NO_MEDIA = new ExternalMediaDescriptor(null, null, null, null, null, 0,
+            0);
 
     public ExternalMediaDescriptor get(final String url) {
         for (ExternalMediaDescriptor media : this) {
