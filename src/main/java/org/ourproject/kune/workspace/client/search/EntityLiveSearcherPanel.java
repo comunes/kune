@@ -86,9 +86,9 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
             break;
         }
 
-        String templateText = SearcherContants.CONTENT_TEMPLATE_TEXT_PREFIX
+        String templateText = SearcherConstants.CONTENT_TEMPLATE_TEXT_PREFIX
                 + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
-                + SearcherContants.CONTENT_TEMPLATE_TEXT_SUFFIX;
+                + SearcherConstants.CONTENT_TEMPLATE_TEXT_SUFFIX;
 
         liveSearcher = new AbstractLiveSearcherPanel(i18n, templateText, dataProxyUrl, new Listener<LinkDTO>() {
             public void onEvent(final LinkDTO link) {

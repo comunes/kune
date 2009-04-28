@@ -41,9 +41,9 @@ public class AbstractLiveSearcherField extends ComboBox {
 
         store = new Store(dataProxy, reader);
 
-        store.load(new UrlParam[] { new UrlParam(SearcherContants.QUERY_PARAM, "."),
-                new UrlParam(SearcherContants.START_PARAM, 0),
-                new UrlParam(SearcherContants.LIMIT_PARAM, PAGINATION_SIZE) });
+        store.load(new UrlParam[] { new UrlParam(SearcherConstants.QUERY_PARAM, "."),
+                new UrlParam(SearcherConstants.START_PARAM, 0),
+                new UrlParam(SearcherConstants.LIMIT_PARAM, PAGINATION_SIZE) });
 
         final Template resultTpl = new Template(templateText);
         super.setStore(store);

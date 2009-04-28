@@ -119,4 +119,11 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+  <changeSet id="18" author="vjrj">
+    <comment>Initial External Media Descriptors</comment>
+    <sqlFile path="src/main/resources/db/update-0014-extmedia.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>DELETE FROM `ext_media_descriptors` WHERE id BETWEEN 1 AND 6;</rollback>
+  </changeSet>
+
 </databaseChangeLog>

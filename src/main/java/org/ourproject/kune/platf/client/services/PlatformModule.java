@@ -520,7 +520,7 @@ public class PlatformModule extends AbstractModule {
         register(Singleton.class, new Factory<ExternalMediaRegistry>(ExternalMediaRegistry.class) {
             @Override
             public ExternalMediaRegistry create() {
-                return new ExternalMediaRegistry();
+                return new ExternalMediaRegistry($(Session.class).getInitData().getExtMediaDescrips());
             }});
 
         $(ApplicationComponentGroup.class).createAll();

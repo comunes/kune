@@ -4,6 +4,6 @@ import org.ourproject.kune.platf.client.View;
 
 public interface InsertMediaDialogView extends View {
 
-    int HEIGHT = 150;
+    int HEIGHT = 250;
 
 }

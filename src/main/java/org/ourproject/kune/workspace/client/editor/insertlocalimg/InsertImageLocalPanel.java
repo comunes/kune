@@ -8,7 +8,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertImageAbstractPanel;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherField;
-import org.ourproject.kune.workspace.client.search.SearcherContants;
+import org.ourproject.kune.workspace.client.search.SearcherConstants;
 
 import com.calclab.suco.client.events.Listener;
 import com.gwtext.client.core.UrlParam;
@@ -24,9 +24,9 @@ public class InsertImageLocalPanel extends InsertImageAbstractPanel implements I
         super(i18n.t("Local"), presenter);
 
         final AbstractLiveSearcherField cb = new AbstractLiveSearcherField(i18n,
-                SearcherContants.CONTENT_TEMPLATE_TEXT_PREFIX
+                SearcherConstants.CONTENT_TEMPLATE_TEXT_PREFIX
                         + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
-                        + SearcherContants.CONTENT_TEMPLATE_TEXT_SUFFIX, SearcherContants.CONTENT_DATA_PROXY_URL,
+                        + SearcherConstants.CONTENT_TEMPLATE_TEXT_SUFFIX, SearcherConstants.CONTENT_DATA_PROXY_URL,
                 new Listener<LinkDTO>() {
                     public void onEvent(final LinkDTO link) {
                         src = session.getSiteUrl() + downloadUtils.getImageUrl(new StateToken(link.getLink()));
@@ -40,8 +40,8 @@ public class InsertImageLocalPanel extends InsertImageAbstractPanel implements I
             @Override
             public void onFocus(final Field field) {
                 cb.setStoreBaseParams(new UrlParam[] {
-                        new UrlParam(SearcherContants.GROUP_PARAM, presenter.getCurrentGroupName()),
-                        new UrlParam(SearcherContants.MIMETYPE_PARAM, BasicMimeTypeDTO.IMAGE) });
+                        new UrlParam(SearcherConstants.GROUP_PARAM, presenter.getCurrentGroupName()),
+                        new UrlParam(SearcherConstants.MIMETYPE_PARAM, BasicMimeTypeDTO.IMAGE) });
             }
         });
 

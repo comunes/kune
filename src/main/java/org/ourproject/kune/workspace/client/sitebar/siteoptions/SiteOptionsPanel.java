@@ -20,12 +20,12 @@
 package org.ourproject.kune.workspace.client.sitebar.siteoptions;
 
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
@@ -58,14 +58,14 @@ public class SiteOptionsPanel implements SiteOptionsView {
 
         final Item testRTE = new Item(i18n.t("Test new RTE"), new BaseItemListenerAdapter() {
             @Override
-            public void onClick(BaseItem item, EventObject e) {
+            public void onClick(final BaseItem item, final EventObject e) {
                 editor.get().show();
             }
         }, "");
 
         final Item testRTEbasic = new Item(i18n.t("Test new RTE (basic mode)"), new BaseItemListenerAdapter() {
             @Override
-            public void onClick(BaseItem item, EventObject e) {
+            public void onClick(final BaseItem item, final EventObject e) {
                 editor.get().setExtended(false);
                 editor.get().show();
             }
@@ -73,7 +73,7 @@ public class SiteOptionsPanel implements SiteOptionsView {
 
         final Item linkHelpInTrans = new Item(i18n.t("Help with the translation"), new BaseItemListenerAdapter() {
             @Override
-            public void onClick(BaseItem item, EventObject e) {
+            public void onClick(final BaseItem item, final EventObject e) {
                 super.onClick(item, e);
                 translatorProvider.get().doShowTranslator();
             }
@@ -81,9 +81,9 @@ public class SiteOptionsPanel implements SiteOptionsView {
 
         final Item linkKuneBugs = new Item(i18n.t("Report kune bugs"), new BaseItemListenerAdapter() {
             @Override
-            public void onClick(BaseItem item, EventObject e) {
+            public void onClick(final BaseItem item, final EventObject e) {
                 super.onClick(item, e);
-                Window.open("http://ourproject.org/tracker/?group_id=407", "_blank", null);
+                KuneWindowUtils.open("http://ourproject.org/tracker/?group_id=407");
             }
         }, "images/kuneicon16.gif");
         optionsMenu.addItem(testRTE);

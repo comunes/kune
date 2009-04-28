@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ourproject.kune.platf.server.domain.ExtMediaDescrip;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
@@ -53,6 +54,7 @@ public class InitData {
     private int imgIconsize;
     private ArrayList<ToolSimple> userTools;
     private ArrayList<ToolSimple> groupTools;
+    private List<ExtMediaDescrip> extMediaDescrips;
 
     private String flvEmbedObject;
 
@@ -92,6 +94,10 @@ public class InitData {
 
     public String getDefaultWsTheme() {
         return defaultWsTheme;
+    }
+
+    public List<ExtMediaDescrip> getExtMediaDescrips() {
+        return extMediaDescrips;
     }
 
     public String getFlvEmbedObject() {
@@ -200,6 +206,10 @@ public class InitData {
 
     public void setDefaultWsTheme(final String defaultWsTheme) {
         this.defaultWsTheme = defaultWsTheme;
+    }
+
+    public void setExtMediaDescrips(final List<ExtMediaDescrip> extMediaDescrips) {
+        this.extMediaDescrips = extMediaDescrips;
     }
 
     public void setFlvEmbedObject(final String flvEmbedObject) {

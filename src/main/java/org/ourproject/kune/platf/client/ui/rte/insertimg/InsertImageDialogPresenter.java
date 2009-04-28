@@ -46,6 +46,6 @@ public class InsertImageDialogPresenter extends AbstractTabbedDialogPresenter im
 
     private void initImageInfo() {
         imageInfo = new ImageInfo("", ImageInfo.DEF_WRAP_VALUE, ImageInfo.DEF_CLICK_ORIGINAL_VALUE,
-                ImageInfo.POSITION_LEFT, ImageInfo.SIZE_ORIGINAL);
+                ContentPosition.LEFT, ImageInfo.SIZE_ORIGINAL);
     }
 }

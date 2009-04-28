@@ -21,10 +21,10 @@ package org.ourproject.kune.workspace.client.licensefoot;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -56,7 +56,7 @@ public class EntityLicensePanel implements EntityLicenseView {
         licenseBar.add(licenseLabel);
 
         final ClickListener clickListener = new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 presenter.onLicenseClick();
             }
         };
@@ -66,12 +66,12 @@ public class EntityLicensePanel implements EntityLicenseView {
 
         MouseListenerAdapter mouseListenerAdapter = new MouseListenerAdapter() {
             @Override
-            public void onMouseEnter(Widget sender) {
+            public void onMouseEnter(final Widget sender) {
                 fade(true);
             }
 
             @Override
-            public void onMouseLeave(Widget sender) {
+            public void onMouseLeave(final Widget sender) {
                 // fade(false);
             }
         };
@@ -94,7 +94,7 @@ public class EntityLicensePanel implements EntityLicenseView {
     }
 
     public void openWindow(final String url) {
-        Window.open(url, "_blank", "");
+        KuneWindowUtils.open(url);
     }
 
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {

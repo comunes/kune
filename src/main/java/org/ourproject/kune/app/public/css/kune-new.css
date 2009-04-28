@@ -973,6 +973,7 @@ background-color
 
 .k-preview-panel {
   border: dashed 1px gray;
+  padding: 5px;
 }
 
 .k-rte-changelink {

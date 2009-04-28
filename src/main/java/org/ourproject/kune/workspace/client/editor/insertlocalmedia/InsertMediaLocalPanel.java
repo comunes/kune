@@ -7,7 +7,7 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstractPanel;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherField;
-import org.ourproject.kune.workspace.client.search.SearcherContants;
+import org.ourproject.kune.workspace.client.search.SearcherConstants;
 
 import com.calclab.suco.client.events.Listener;
 import com.gwtext.client.core.UrlParam;
@@ -23,9 +23,9 @@ public class InsertMediaLocalPanel extends InsertMediaAbstractPanel implements I
         super(i18n.t("Local"), presenter);
 
         final AbstractLiveSearcherField cb = new AbstractLiveSearcherField(i18n,
-                SearcherContants.CONTENT_TEMPLATE_TEXT_PREFIX
+                SearcherConstants.CONTENT_TEMPLATE_TEXT_PREFIX
                         + downloadUtils.getLogoImageUrl(new StateToken("{shortName}"))
-                        + SearcherContants.CONTENT_TEMPLATE_TEXT_SUFFIX, SearcherContants.CONTENT_DATA_PROXY_URL,
+                        + SearcherConstants.CONTENT_TEMPLATE_TEXT_SUFFIX, SearcherConstants.CONTENT_DATA_PROXY_URL,
                 new Listener<LinkDTO>() {
                     public void onEvent(final LinkDTO link) {
                         src = link.getLink();
@@ -39,9 +39,9 @@ public class InsertMediaLocalPanel extends InsertMediaAbstractPanel implements I
             @Override
             public void onFocus(final Field field) {
                 cb.setStoreBaseParams(new UrlParam[] {
-                        new UrlParam(SearcherContants.GROUP_PARAM, presenter.getCurrentGroupName()),
-                        new UrlParam(SearcherContants.MIMETYPE_PARAM, BasicMimeTypeDTO.AUDIO),
-                        new UrlParam(SearcherContants.MIMETYPE2_PARAM, BasicMimeTypeDTO.VIDEO) });
+                        new UrlParam(SearcherConstants.GROUP_PARAM, presenter.getCurrentGroupName()),
+                        new UrlParam(SearcherConstants.MIMETYPE_PARAM, BasicMimeTypeDTO.AUDIO),
+                        new UrlParam(SearcherConstants.MIMETYPE2_PARAM, BasicMimeTypeDTO.VIDEO) });
             }
         });
 

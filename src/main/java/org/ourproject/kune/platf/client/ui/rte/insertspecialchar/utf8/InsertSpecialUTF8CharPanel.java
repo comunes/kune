@@ -24,7 +24,7 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
     private final TextField inputUnicodeField;
     private final TextField previewField;
 
-    public InsertSpecialUTF8CharPanel(I18nTranslationService i18n, final InsertSpecialCharDialog charDialog) {
+    public InsertSpecialUTF8CharPanel(final I18nTranslationService i18n, final InsertSpecialCharDialog charDialog) {
         super(i18n.t("Advanced"));
         setAutoWidth(true);
         setHeight(InsertSpecialCharDialogView.HEIGHT - 10);
@@ -34,9 +34,8 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
 
         Label label = new Label();
         label.setHtml(i18n.t("If you know a special character's [%s] value, enter it below.",
-                "<a href=\"http://unicode.org/charts/\" target=\"_blank\">Unicode</a>")
+                TextUtils.generateHtmlLink("http://unicode.org/charts/", "Unicode"))
                 + "<br/><br/>");
-        // label.setCls("k-specialchar-adv-label");
 
         inputUnicodeField = new TextField();
         inputUnicodeField.setTabIndex(4);
@@ -57,7 +56,7 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
         previewField.setStyle("background-color:#FFF;background-image:none;color:#000;");
 
         inputUnicodeField.addKeyPressListener(new EventCallback() {
-            public void execute(EventObject e) {
+            public void execute(final EventObject e) {
                 refreshPreview();
             }
         });
@@ -70,7 +69,7 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
 
         insert.addListener(new ButtonListenerAdapter() {
             @Override
-            public void onClick(Button button, EventObject e) {
+            public void onClick(final Button button, final EventObject e) {
                 if (form.getFormPanel().getForm().isValid()) {
                     charDialog.onInsert(getCharEntered());
                 }

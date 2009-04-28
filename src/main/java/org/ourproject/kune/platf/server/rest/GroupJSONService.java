@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.rack.filters.rest.REST;
-import org.ourproject.kune.workspace.client.search.SearcherContants;
+import org.ourproject.kune.workspace.client.search.SearcherConstants;
 
 import com.google.inject.Inject;
 
@@ -40,12 +40,12 @@ public class GroupJSONService {
         this.mapper = mapper;
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search) {
         return search(search, null, null);
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults) {
         SearchResult<Group> results = manager.search(search, firstResult, maxResults);
         return mapper.mapSearchResult(results, LinkDTO.class);

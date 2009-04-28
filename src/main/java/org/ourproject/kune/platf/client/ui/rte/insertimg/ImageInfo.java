@@ -18,12 +18,6 @@ public class ImageInfo {
     public static final String SIZE_M = "m";
     public static final String SIZE_L = "l";
     public static final String SIZE_XL = "xl";
-    public static final String POSITION_LEFT = "left";
-    public static final String POSITION_CENTER = "center";
-    public static final String POSITION_RIGHT = "right";
-
-    public static String[][] positions = { new String[] { POSITION_LEFT }, new String[] { POSITION_CENTER },
-            new String[] { POSITION_RIGHT } };
 
     public static String[][] sizes = { new String[] { SIZE_ORIGINAL, "Original image size", "" },
             new String[] { SIZE_FIT, "Fit page width", "100%" },
@@ -111,15 +105,7 @@ public class ImageInfo {
         com.google.gwt.user.client.Element img = DOM.createImg();
         DOM.setElementProperty(img, "src", src);
         CSS.setProperty(img, CSS.A.WIDTH, getStyleSize());
-        if (!wraptext || position.equals(POSITION_CENTER)) {
-            com.google.gwt.user.client.Element divEl = DOM.createDiv();
-            CSS.setProperty(divEl, CSS.A.TEXT_ALIGN, position);
-            divEl.setInnerHTML(img.getString());
-            return divEl;
-        } else {
-            CSS.setProperty(img, CSS.A.FLOAT, position);
-            return img;
-        }
+        return ContentPosition.getElementPosition(img, wraptext, position);
     }
 
     private String getStyleSize() {

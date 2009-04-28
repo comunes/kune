@@ -10,4 +10,6 @@ public interface InsertMediaAbstractView extends View {
 
     void reset();
 
+    String setPosition(String embedElement);
+
 }

@@ -10,7 +10,8 @@ public class InsertMediaExtPanel extends InsertMediaAbstractPanel implements Ins
             final ExternalMediaRegistry externalMediaRegistry) {
         super(i18n.t("External"), presenter);
         String supportedVideos = externalMediaRegistry.getNames();
-        setIntro(i18n.t("Provide a link to the external video (supported videos: [%s])", supportedVideos) + "<br/>");
+        setIntro(i18n.t("Provide a link to an external video (supported videos: [%s])", supportedVideos) + "<br/>");
+        hrefField.setTitle(i18n.t("Write something like: http://www.youtube.com/watch?v=PxsGyljd6B0"));
     }
 
 }

@@ -52,6 +52,7 @@ import org.ourproject.kune.platf.server.content.ContentManagerDefault;
 import org.ourproject.kune.platf.server.content.CreationService;
 import org.ourproject.kune.platf.server.content.CreationServiceDefault;
 import org.ourproject.kune.platf.server.i18n.I18nTranslationServiceDefault;
+import org.ourproject.kune.platf.server.manager.ExtMediaDescripManager;
 import org.ourproject.kune.platf.server.manager.FileManager;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
@@ -70,6 +71,7 @@ import org.ourproject.kune.platf.server.manager.file.EntityLogoUploadManager;
 import org.ourproject.kune.platf.server.manager.file.FileDownloadManager;
 import org.ourproject.kune.platf.server.manager.file.FileManagerDefault;
 import org.ourproject.kune.platf.server.manager.file.FileUploadManager;
+import org.ourproject.kune.platf.server.manager.impl.ExtMediaDescripManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.GroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nCountryManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nLanguageManagerDefault;
@@ -140,6 +142,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(TagUserContentManager.class).to(TagUserContentManagerDefault.class);
         bind(CommentManager.class).to(CommentManagerDefault.class);
         bind(FileManager.class).to(FileManagerDefault.class);
+        bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
     }
 
     private void bindRPC() {

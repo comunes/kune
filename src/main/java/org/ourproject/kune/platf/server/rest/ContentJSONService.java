@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.rack.filters.rest.REST;
-import org.ourproject.kune.workspace.client.search.SearcherContants;
+import org.ourproject.kune.workspace.client.search.SearcherConstants;
 
 import com.google.inject.Inject;
 
@@ -45,12 +45,12 @@ public class ContentJSONService {
         this.mapper = mapper;
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search) {
         return search(search, null, null);
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults) {
         SearchResult<Content> results = contentManager.search(search, firstResult, maxResults);
         SearchResult<Container> resultsContainer = containerManager.search(search, firstResult, maxResults);
@@ -61,16 +61,16 @@ public class ContentJSONService {
         return resultMapped;
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM,
-            SearcherContants.GROUP_PARAM, SearcherContants.MIMETYPE_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM,
+            SearcherConstants.GROUP_PARAM, SearcherConstants.MIMETYPE_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
             final String group, final String mimetype) {
         SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, group, mimetype);
         return map(results);
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM,
-            SearcherContants.GROUP_PARAM, SearcherContants.MIMETYPE_PARAM, SearcherContants.MIMETYPE2_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM,
+            SearcherConstants.GROUP_PARAM, SearcherConstants.MIMETYPE_PARAM, SearcherConstants.MIMETYPE2_PARAM })
     public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult, final Integer maxResults,
             final String group, final String mimetype, final String mimetype2) {
         return map(contentManager.searchMime(search, firstResult, maxResults, group, mimetype, mimetype2));

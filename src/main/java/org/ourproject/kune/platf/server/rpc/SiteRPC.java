@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
+import org.ourproject.kune.platf.server.manager.ExtMediaDescripManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
@@ -54,6 +55,7 @@ public class SiteRPC implements RPC, SiteService {
     private final I18nLanguageManager languageManager;
     private final I18nCountryManager countryManager;
     private final ServerToolRegistry serverToolRegistry;
+    private final ExtMediaDescripManager extMediaDescripManager;
 
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
@@ -61,7 +63,7 @@ public class SiteRPC implements RPC, SiteService {
             final UserInfoService userInfoService, final LicenseManager licenseManager, final Mapper mapper,
             final KuneProperties kuneProperties, final ChatProperties chatProperties,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final ServerToolRegistry serverToolRegistry) {
+            final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescripManager) {
         this.userSessionProvider = userSessionProvider;
         this.userManager = userManager;
         this.userInfoService = userInfoService;
@@ -72,6 +74,7 @@ public class SiteRPC implements RPC, SiteService {
         this.languageManager = languageManager;
         this.countryManager = countryManager;
         this.serverToolRegistry = serverToolRegistry;
+        this.extMediaDescripManager = extMediaDescripManager;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
@@ -107,6 +110,7 @@ public class SiteRPC implements RPC, SiteService {
         data.setMp3EmbedObject(kuneProperties.get(KuneProperties.MP3_EMBEDED_OBJECT));
         data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));
         data.setAviEmbedObject(kuneProperties.get(KuneProperties.AVI_EMBEDED_OBJECT));
+        data.setExtMediaDescrips(extMediaDescripManager.getAll());
         return mapper.map(data, InitDataDTO.class);
     }
 

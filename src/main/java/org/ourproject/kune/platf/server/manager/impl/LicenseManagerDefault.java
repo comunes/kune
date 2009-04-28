@@ -37,12 +37,14 @@ public class LicenseManagerDefault extends DefaultManager<License, Long> impleme
     private final DatabaseProperties properties;
 
     @Inject
-    public LicenseManagerDefault(final Provider<EntityManager> provider, DatabaseProperties properties) {
+    public LicenseManagerDefault(final Provider<EntityManager> provider, final DatabaseProperties properties,
+            final License licenseFinder) {
         super(provider, License.class);
         this.properties = properties;
+        this.licenseFinder = licenseFinder;
     }
 
-    public License findByShortName(String shortName) {
+    public License findByShortName(final String shortName) {
         return licenseFinder.findByShortName(shortName);
     }
 

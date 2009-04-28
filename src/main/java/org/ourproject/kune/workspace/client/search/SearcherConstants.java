@@ -1,6 +1,6 @@
 package org.ourproject.kune.workspace.client.search;
 
-public interface SearcherContants {
+public interface SearcherConstants {
 
     String START_PARAM = "start";
     String LIMIT_PARAM = "limit";

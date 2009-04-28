@@ -31,6 +31,6 @@ public class InsertMediaLocalPresenter extends InsertMediaAbstractPresenter impl
     @Override
     protected String updateMediaInfo() {
         // FIXME (avi, mp3, ...)
-        return mediaUtils.get().getFlvEmbed(new StateToken(view.getSrc()));
+        return view.setPosition(mediaUtils.get().getFlvEmbed(new StateToken(view.getSrc())));
     }
 }

@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg;
 
 import org.ourproject.kune.platf.client.i18n.Resources;
-import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.ContentPosition;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ImageInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogView;
 
@@ -12,43 +12,25 @@ import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.Checkbox;
 import com.gwtext.client.widgets.form.ComboBox;
-import com.gwtext.client.widgets.form.FieldSet;
-import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.event.CheckboxListenerAdapter;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.form.event.FormPanelListenerAdapter;
 
-public class InsertImageAbstractPanel extends DefaultForm implements InsertImageAbstractView {
+public class InsertImageAbstractPanel extends InsertElementAbstractPanel implements InsertImageAbstractView {
 
     private Object[][] sizesObjs;
-    private Object[][] positionObjs;
     private final ComboBox sizeCombo;
-    private final ComboBox positionCombo;
-    protected final Checkbox wrapText;
     protected final Checkbox clickOriginal;
-    private final Label intro;
     private final InsertImageAbstractPresenter presenter;
 
     public InsertImageAbstractPanel(final String title, final InsertImageAbstractPresenter presenter) {
-        super(title);
+        super(title, InsertImageDialogView.HEIGHT);
         this.presenter = presenter;
-        super.setAutoWidth(true);
-        super.setHeight(InsertImageDialogView.HEIGHT);
-        super.getFormPanel().setLabelWidth(DEF_FIELD_LABEL_WITH + 20);
-
-        intro = new Label();
 
         final Store storeSizes = new SimpleStore(new String[] { "abbr", "trans", "size" }, getSizes());
         storeSizes.load();
 
-        final Store storePositions = new SimpleStore(new String[] { "abbr", "trans" }, getPositions());
-        storePositions.load();
-
         sizeCombo = createCombo(storeSizes, Resources.i18n.t("Size"));
-        positionCombo = createCombo(storePositions, Resources.i18n.t("Position"));
-
-        wrapText = new Checkbox(Resources.i18n.t("Wrap text around image"));
-        wrapText.setChecked(ImageInfo.DEF_WRAP_VALUE);
 
         clickOriginal = new Checkbox(Resources.i18n.t("Clicking this image links to the original image file"));
         clickOriginal.setChecked(ImageInfo.DEF_CLICK_ORIGINAL_VALUE);
@@ -65,9 +47,9 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         positionCombo.addListener(new ComboBoxListenerAdapter() {
             @Override
             public void onSelect(final ComboBox comboBox, final Record record, final int index) {
+                super.onSelect(comboBox, record, index);
                 String pos = record.getAsString("abbr");
                 presenter.setPosition(pos);
-                setWrapVisible(pos);
             }
         });
 
@@ -94,27 +76,15 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
             }
         });
 
-        FieldSet advanced = new FieldSet(Resources.i18n.t("More options"));
-        advanced.setCollapsible(true);
-        advanced.setCollapsed(true);
-        advanced.setAutoHeight(true);
-        advanced.setAutoWidth(true);
-        advanced.setAutoScroll(false);
-        advanced.addClass("kune-Margin-Large-t");
-        // advanced.setPaddings(10, 0, 0, 0);
-
         advanced.add(sizeCombo);
-        advanced.add(positionCombo);
-        advanced.add(wrapText);
         advanced.add(clickOriginal);
-        add(intro);
-        add(advanced);
     }
 
     public boolean getClickOriginal() {
         return clickOriginal.getValue();
     }
 
+    @Override
     public String getPosition() {
         return positionCombo.getValueAsString();
     }
@@ -123,10 +93,12 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         return sizeCombo.getValueAsString();
     }
 
+    @Override
     public String getSrc() {
         return null;
     }
 
+    @Override
     public boolean getWrapText() {
         return wrapText.getValue();
     }
@@ -143,6 +115,7 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         updateValues(linkImage);
     }
 
+    @Override
     public void setIntro(final String text) {
         intro.setHtml(text);
     }
@@ -178,19 +151,6 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
         return cb;
     }
 
-    private Object[][] getPositions() {
-        if (positionObjs == null) {
-            String[][] values = ImageInfo.positions;
-            positionObjs = new Object[values.length][1];
-            int i = 0;
-            for (String[] position : values) {
-                final Object[] obj = new Object[] { position[0], Resources.i18n.t(position[0]) };
-                positionObjs[i++] = obj;
-            }
-        }
-        return positionObjs;
-    }
-
     private Object[][] getSizes() {
         if (sizesObjs == null) {
             String[][] values = ImageInfo.sizes;
@@ -205,7 +165,7 @@ public class InsertImageAbstractPanel extends DefaultForm implements InsertImage
     }
 
     private void setWrapVisible(final String position) {
-        if (position.equals(ImageInfo.POSITION_CENTER)) {
+        if (position.equals(ContentPosition.CENTER)) {
             wrapText.setVisible(false);
         } else {
             wrapText.setVisible(true);

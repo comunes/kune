@@ -28,7 +28,7 @@ import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.rack.filters.rest.REST;
-import org.ourproject.kune.workspace.client.search.SearcherContants;
+import org.ourproject.kune.workspace.client.search.SearcherConstants;
 
 import com.google.inject.Inject;
 
@@ -42,26 +42,26 @@ public class I18nTranslationJSONService {
         this.mapper = mapper;
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM })
     public List<I18nTranslationDTO> search(final String language) {
         List<I18nTranslation> results = manager.getUntranslatedLexicon(language);
         return mapper.mapList(results, I18nTranslationDTO.class);
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM })
     public SearchResultDTO<I18nTranslationDTO> search(final String language, final Integer firstResult,
             final Integer maxResults) {
         SearchResult<I18nTranslation> results = manager.getUntranslatedLexicon(language, firstResult, maxResults);
         return mapper.mapSearchResult(results, I18nTranslationDTO.class);
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM })
     public List<I18nTranslationDTO> searchtranslated(final String language) {
         List<I18nTranslation> results = manager.getTranslatedLexicon(language);
         return mapper.mapList(results, I18nTranslationDTO.class);
     }
 
-    @REST(params = { SearcherContants.QUERY_PARAM, SearcherContants.START_PARAM, SearcherContants.LIMIT_PARAM })
+    @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM, SearcherConstants.LIMIT_PARAM })
     public SearchResultDTO<I18nTranslationDTO> searchtranslated(final String language, final Integer firstResult,
             final Integer maxResults) {
         SearchResult<I18nTranslation> results = manager.getTranslatedLexicon(language, firstResult, maxResults);

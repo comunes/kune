@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.dto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -48,14 +49,11 @@ public class InitDataDTO implements IsSerializable {
     private int imgIconsize;
     private ArrayList<ToolSimpleDTO> userTools;
     private ArrayList<ToolSimpleDTO> groupTools;
-
     private String flvEmbedObject;
-
     private String oggEmbedObject;
-
     private String mp3EmbedObject;
-
     private String aviEmbedObject;
+    private List<ExtMediaDescripDTO> extMediaDescrips;
 
     public String getAviEmbedObject() {
         return aviEmbedObject;
@@ -87,6 +85,10 @@ public class InitDataDTO implements IsSerializable {
 
     public String getDefaultWsTheme() {
         return defaultWsTheme;
+    }
+
+    public List<ExtMediaDescripDTO> getExtMediaDescrips() {
+        return extMediaDescrips;
     }
 
     public String getFlvEmbedObject() {
@@ -199,6 +201,10 @@ public class InitDataDTO implements IsSerializable {
 
     public void setDefaultWsTheme(final String defaultWsTheme) {
         this.defaultWsTheme = defaultWsTheme;
+    }
+
+    public void setExtMediaDescrips(final List<ExtMediaDescripDTO> extMediaDescrips) {
+        this.extMediaDescrips = extMediaDescrips;
     }
 
     public void setFlvEmbedObject(final String flvEmbedObject) {
