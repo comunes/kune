@@ -40,8 +40,8 @@ import com.google.gwt.libideas.resources.client.ImageResource;
 public class RTEditorPresenter implements RTEditor {
 
     private final String fontNames[] = { "Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet", "Verdana" };
-    private final String fontSizes[] = { "Extra small", "Very small", "Small", "Medium", "Large", "Very large",
-            "Extra large" };
+    private final String fontSizes[] = { "Extra small", "Very small (normal)", "Small", "Medium", "Large",
+            "Very large", "Extra large" };
     private static final RichTextArea.FontSize[] fontSizesConstants = new RichTextArea.FontSize[] {
             RichTextArea.FontSize.XX_SMALL, RichTextArea.FontSize.X_SMALL, RichTextArea.FontSize.SMALL,
             RichTextArea.FontSize.MEDIUM, RichTextArea.FontSize.LARGE, RichTextArea.FontSize.X_LARGE,

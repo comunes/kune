@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.i18n.Resources;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.HTML;
 
 public class ContentPosition {
 
@@ -15,18 +16,6 @@ public class ContentPosition {
     public static String[][] positions = { new String[] { LEFT }, new String[] { CENTER }, new String[] { RIGHT } };
 
     private static Object[][] positionObjs;
-
-    public static Element getElementPosition(final Element element, final boolean wraptext, final String position) {
-        if (!wraptext || position.equals(ContentPosition.CENTER)) {
-            com.google.gwt.user.client.Element divEl = DOM.createDiv();
-            CSS.setProperty(divEl, CSS.A.TEXT_ALIGN, position);
-            divEl.setInnerHTML(element.getString());
-            return divEl;
-        } else {
-            CSS.setProperty(element, CSS.A.FLOAT, position);
-            return element;
-        }
-    }
 
     public static Object[][] getPositions() {
         if (positionObjs == null) {
@@ -39,5 +28,27 @@ public class ContentPosition {
             }
         }
         return positionObjs;
+    }
+
+    public static String setCenterPosition(final String elementCode) {
+        return setPosition(elementCode, false, CENTER);
+    }
+
+    public static Element setPosition(final Element element, final boolean wraptext, final String position) {
+        if (!wraptext || position.equals(ContentPosition.CENTER)) {
+            com.google.gwt.user.client.Element divEl = DOM.createDiv();
+            CSS.setProperty(divEl, CSS.A.TEXT_ALIGN, position);
+            divEl.setInnerHTML(element.getString());
+            return divEl;
+        } else {
+            CSS.setProperty(element, CSS.A.FLOAT, position);
+            return element;
+        }
+    }
+
+    public static String setPosition(final String elementCode, final boolean wraptext, final String position) {
+        HTML html = new HTML(elementCode);
+        html.removeStyleName("gwt-HTML");
+        return setPosition(html.getElement(), wraptext, position).getString();
     }
 }

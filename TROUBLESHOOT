@@ -17,3 +17,12 @@ To increase client logging add ?log_level=DEBUG# to the url and use firebug fire
 
 See:
 http://code.google.com/p/emite/wiki/Troubleshooting
+
+==Liquibase==
+
+=== Checksum errors ===
+
+Migration Failed: Validation Failed:1 change sets failed MD5Sum Check     src/main/resources/db/liquibase_changelog.xml :: 18 :: vjrj :: (MD5Sum: bde0aa519108e1e3d1f29bb2483bc9)
+
+Don't try to update the liquibase changelogs you have already use. Better create new ones to delete, update, and so on. If you are developing and want to clear the checksums, you can use the command "clearCheckSums". See script/liquibase-* and http://www.liquibase.org/manual/command_line
+

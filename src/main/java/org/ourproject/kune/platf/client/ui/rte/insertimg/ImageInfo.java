@@ -105,7 +105,7 @@ public class ImageInfo {
         com.google.gwt.user.client.Element img = DOM.createImg();
         DOM.setElementProperty(img, "src", src);
         CSS.setProperty(img, CSS.A.WIDTH, getStyleSize());
-        return ContentPosition.getElementPosition(img, wraptext, position);
+        return ContentPosition.setPosition(img, wraptext, position);
     }
 
     private String getStyleSize() {

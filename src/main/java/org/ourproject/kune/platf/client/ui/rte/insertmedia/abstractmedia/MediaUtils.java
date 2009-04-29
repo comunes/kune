@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.ContentPosition;
 
 public class MediaUtils {
 
@@ -18,23 +19,27 @@ public class MediaUtils {
     }
 
     public String getAviEmbed(final StateToken token) {
-        return session.getInitData().getAviEmbedObject().replace(DOC_URL_TAG,
-                session.getSiteUrl() + downloadUtils.getUrl(token));
+        return setCenterPosition(session.getInitData().getAviEmbedObject().replace(DOC_URL_TAG,
+                session.getSiteUrl() + downloadUtils.getUrl(token)));
     }
 
     public String getFlvEmbed(final StateToken token) {
-        return session.getInitData().getFlvEmbedObject().replace(DOC_URL_TAG,
-                session.getSiteUrl() + downloadUtils.getUrl(token));
+        return setCenterPosition(session.getInitData().getFlvEmbedObject().replace(DOC_URL_TAG,
+                session.getSiteUrl() + downloadUtils.getUrl(token)));
     }
 
     public String getMp3Embed(final StateToken token) {
-        return session.getInitData().getMp3EmbedObject().replace(DOC_URL_TAG,
-                session.getSiteUrl() + downloadUtils.getUrl(token));
+        return setCenterPosition(session.getInitData().getMp3EmbedObject().replace(DOC_URL_TAG,
+                session.getSiteUrl() + downloadUtils.getUrl(token)));
     }
 
     public String getOggEmbed(final StateToken token) {
-        return session.getInitData().getOggEmbedObject().replace(DOC_URL_TAG,
-                session.getSiteUrl() + downloadUtils.getUrl(token));
+        return setCenterPosition(session.getInitData().getOggEmbedObject().replace(DOC_URL_TAG,
+                session.getSiteUrl() + downloadUtils.getUrl(token)));
+    }
+
+    private String setCenterPosition(final String elementCode) {
+        return ContentPosition.setCenterPosition(elementCode);
     }
 
 }

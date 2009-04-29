@@ -5,7 +5,6 @@ import org.ourproject.kune.platf.client.ui.rte.insertimg.ContentPosition;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertElementAbstractPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialogView;
 
-import com.google.gwt.user.client.ui.HTML;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.TextField;
@@ -60,7 +59,7 @@ public class InsertMediaAbstractPanel extends InsertElementAbstractPanel impleme
     }
 
     public String setPosition(final String embedElement) {
-        return ContentPosition.getElementPosition(new HTML(embedElement).getElement(), getWrapText(), getPosition()).getString();
+        return ContentPosition.setPosition(embedElement, getWrapText(), getPosition());
     }
 
     private void defValues() {
