@@ -120,10 +120,12 @@ TODO-list for kune -*- mode: org; -*-
 
 * MID-TERM
 ** TODO <v,s> harden our privacy policy. Goals:
-   - permit user/projects/contents how much private or public are.
-   - APIs public only to associated sites (in study)
+   - permit user/projects/contents how much private or public are
+   - APIs public only to associated sites (in study) ( http://oauth.net ? )
    - the social net info (xmpp ids) must follow the mobile numbers/email info interchange mode (if I don't have yor email/mobile, I can't contact you)
    - keep always the user informed
+   - consider integration of chryptopgraphy (keyczar.org ? )
+   - encourage the use of nicknames; discourage the use of real names (as in Facebook). If a political group uses real names, an undercover would have too much info
 ** <v> trash icon area d&d
 ** vjrj <v> shortcuts enhacement
 *** Clarify the keycodes vs utf8 chars Shortcut definition (Function keys and so on...)
