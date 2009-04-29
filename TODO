@@ -119,6 +119,11 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO <v,s> harden our privacy policy. Goals:
+   - permit user/projects/contents how much private or public are.
+   - APIs public only to associated sites (in study)
+   - the social net info (xmpp ids) must follow the mobile numbers/email info interchange mode (if I don't have yor email/mobile, I can't contact you)
+   - keep always the user informed
 ** <v> trash icon area d&d
 ** vjrj <v> shortcuts enhacement
 *** Clarify the keycodes vs utf8 chars Shortcut definition (Function keys and so on...)
