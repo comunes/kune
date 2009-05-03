@@ -55,8 +55,7 @@ public class Location {
     }
 
     /**
-     * sample:
-     * http://localhost:8080/kune/#site.docs.3.1?locale=en&log_level=INFO
+     * sample: http://localhost:8080/ws/#site.docs.3.1?locale=en&log_level=INFO
      **/
     public String getHref() {
         return href;
@@ -71,7 +70,7 @@ public class Location {
     }
 
     /**
-     * sample: /kune/
+     * sample: /ws/
      * 
      * @return
      */
@@ -143,7 +142,7 @@ public class Location {
     }
 
     private native String unescape(String val) /*-{
-                                               return unescape(val);
-                                           }-*/;
+                                                  return unescape(val);
+                                              }-*/;
 
 }

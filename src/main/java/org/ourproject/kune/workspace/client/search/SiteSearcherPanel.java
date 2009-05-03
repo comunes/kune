@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.search;
 
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -95,7 +96,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
         }
     }
 
-    public void setTextToSearch(String text) {
+    public void setTextToSearch(final String text) {
         searchField.setValue(text);
     }
 
@@ -222,10 +223,10 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 
         switch (type) {
         case group_user:
-            store = groupStore = createStore(fieldDefs, "/kune/json/GroupJSONService/search", id);
+            store = groupStore = createStore(fieldDefs, SearcherConstants.GROUP_DATA_PROXY_URL, id);
             break;
         case content:
-            store = contentStore = createStore(fieldDefs, "/kune/json/ContentJSONService/search", id);
+            store = contentStore = createStore(fieldDefs, SearcherConstants.CONTENT_DATA_PROXY_URL, id);
             break;
         default:
             throw new RuntimeException("Unknown type of search");

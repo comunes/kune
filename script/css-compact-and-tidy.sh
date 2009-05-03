@@ -37,7 +37,7 @@ done
 }
 
 function tidy {
-ls `which csstidy | cut -d " " -f 1` 2> /dev/null > /dev/null
+which csstidy 2> /dev/null > /dev/null
 if [[ $? -eq 0 ]]
 then
   csstidy $CATTMPFILE \

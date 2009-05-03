@@ -29,9 +29,9 @@ public class EntityOptionsPresenter extends AbstractTabbedDialogPresenter implem
 
     EntityOptionsView view;
 
-    public EntityOptionsPresenter(StateManager stateManager) {
+    public EntityOptionsPresenter(final StateManager stateManager) {
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-            public void onEvent(StateAbstractDTO state) {
+            public void onEvent(final StateAbstractDTO state) {
                 if (state.getGroup().isPersonal()) {
                     view.setPersonalTitle();
                 } else {
@@ -41,13 +41,13 @@ public class EntityOptionsPresenter extends AbstractTabbedDialogPresenter implem
                     view.setButtonVisible(true);
                 } else {
                     view.setButtonVisible(false);
-                    view.hide();
+                    view.destroy();
                 }
             }
         });
     }
 
-    public void init(EntityOptionsView view) {
+    public void init(final EntityOptionsView view) {
         super.init(view);
         this.view = view;
     }

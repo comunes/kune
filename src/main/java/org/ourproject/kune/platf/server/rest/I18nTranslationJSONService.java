@@ -23,12 +23,12 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.I18nTranslationDTO;
 import org.ourproject.kune.platf.client.dto.SearchResultDTO;
+import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.rack.filters.rest.REST;
-import org.ourproject.kune.workspace.client.search.SearcherConstants;
 
 import com.google.inject.Inject;
 

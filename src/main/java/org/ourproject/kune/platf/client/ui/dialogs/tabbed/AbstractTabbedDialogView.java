@@ -30,6 +30,8 @@ public interface AbstractTabbedDialogView extends View {
 
     void createAndShow();
 
+    void destroy();
+
     void hide();
 
     void hideMessages();

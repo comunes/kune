@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.i18n;
 import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
+import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
@@ -74,7 +75,7 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
     private final Images img;
 
     public I18nTranslatorPanel(final I18nTranslatorPresenter initPresenter, final I18nTranslationService i18n,
-            final LanguageSelector languageSelector, final WorkspaceSkeleton ws, Images img) {
+            final LanguageSelector languageSelector, final WorkspaceSkeleton ws, final Images img) {
         super(i18n);
         this.presenter = initPresenter;
         this.languageSelector = languageSelector;
@@ -188,8 +189,8 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
     private GridPanel createGridPanel(final boolean translated) {
 
         final Renderer renderNT = new Renderer() {
-            public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
-                    Store store) {
+            public String render(final Object value, final CellMetadata cellMetadata, final Record record,
+                    final int rowIndex, final int colNum, final Store store) {
                 String renderer;
                 String[] splitted = splitNT((String) value);
                 if (splitted.length > 1) {
@@ -209,11 +210,11 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
                 new StringFieldDef(id) };
 
         if (translated) {
-            final String url = "/kune/json/I18nTranslationJSONService/searchtranslated";
+            final String url = SearcherConstants.I18N_JSON_SERVICE_TRANSLATED;
             transStore = createStore(fieldDefs, url, id);
             store = transStore;
         } else {
-            final String url = "/kune/json/I18nTranslationJSONService/search";
+            final String url = SearcherConstants.I18N_JSON_SERVICE;
             unTransStore = createStore(fieldDefs, url, id);
             store = unTransStore;
         }

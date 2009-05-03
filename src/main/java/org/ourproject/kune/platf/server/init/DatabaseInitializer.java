@@ -106,7 +106,9 @@ public class DatabaseInitializer {
         groupManager.reIndex();
 
         final Content defaultContent = siteGroup.getDefaultContent();
-        contentManager.save(user, defaultContent,
+        contentManager.save(
+                user,
+                defaultContent,
                 "<img src=\"http://kune.ourproject.org/IMG/cache-200x37/siteon0-200x37.png\" "
                         + "align=\"right\">This a initial demo of "
                         + "<a href=\"http://kune.ourproject.org\">kune</a>."
@@ -128,7 +130,7 @@ public class DatabaseInitializer {
                         + "Our main goal is to offer customs and configurable styles "
                         + "for groups/users contents.</li></ul></ul><font size=\"4\"><br>"
                         + "We need your feedback<br><br></font>Please help us to improve this software "
-                        + "reporting <a href=\"http://code.google.com/p/kune/issues\">bugs and/or "
+                        + "reporting <a href=\"http://ourproject.org/tracker/?atid=139&group_id=407&func=browse\">bugs and/or "
                         + "suggestions</a>. Also you <a href=\"#translate\">help us to translate it</a> "
                         + "into other languages.<br><br>Thank you,<br>"
                         + "<br>--<br><span style=\"font-style: italic;\">" + "The kune development team</span><br><br>");

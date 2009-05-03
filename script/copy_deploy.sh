@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#script/css-compact-and-tidy.css
+#script/css-compact-and-tidy.sh
 script/css-update.sh
 
 rm src/main/webapp/gwt/org.ourproject.kune.app.Kune/ -R

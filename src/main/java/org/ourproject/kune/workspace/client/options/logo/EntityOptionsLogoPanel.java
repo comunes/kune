@@ -44,7 +44,7 @@ import com.gwtext.client.widgets.form.event.FormListener;
 
 public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLogoView {
 
-    public static final String ICON_UPLOAD_SERVLET = "/kune/servlets/EntityLogoUploadManager";
+    public static final String ICON_UPLOAD_SERVLET = "/ws/servlets/EntityLogoUploadManager";
     public static final String SET_LOGO_ID = "k-eolp-sendb";
     public static final String PANEL_ID = "k-eolp-pan";
     private final Hidden userhashField;
@@ -54,7 +54,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
     private final I18nTranslationService i18n;
 
     public EntityOptionsLogoPanel(final EntityOptionsLogoPresenter presenter, final WorkspaceSkeleton ws,
-            I18nTranslationService i18n) {
+            final I18nTranslationService i18n) {
         this.i18n = i18n;
         super.setHeight(EntityOptionsView.HEIGHT);
         super.setButtonAlign(Position.LEFT);
@@ -70,15 +70,15 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         super.setHideLabels(true);
         super.setPaddings(10);
         super.addFormListener(new FormListener() {
-            public boolean doBeforeAction(Form form) {
+            public boolean doBeforeAction(final Form form) {
                 return true;
             }
 
-            public void onActionComplete(Form form, int httpStatus, String responseText) {
+            public void onActionComplete(final Form form, final int httpStatus, final String responseText) {
                 presenter.onSubmitComplete(httpStatus, responseText);
             }
 
-            public void onActionFailed(Form form, int httpStatus, String responseText) {
+            public void onActionFailed(final Form form, final int httpStatus, final String responseText) {
                 presenter.onSubmitFailed(httpStatus, responseText);
             }
         });
@@ -86,7 +86,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         super.add(dialogInfoLabel);
         file = new TextField("File", FileConstants.LOGO_FORM_FIELD);
         EventCallback keyListener = new EventCallback() {
-            public void execute(EventObject e) {
+            public void execute(final EventObject e) {
                 // setEnableFileField();
             }
         };
@@ -100,7 +100,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         super.add(file);
         FieldListenerAdapter changeListener = new FieldListenerAdapter() {
             @Override
-            public void onChange(Field field, Object newVal, Object oldVal) {
+            public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 NotifyUser.info("change");
                 // setEnableFileField();
             }
@@ -111,7 +111,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
 
         Button sendButton = new Button(i18n.t("Send"), new ButtonListenerAdapter() {
             @Override
-            public void onClick(Button button, EventObject e) {
+            public void onClick(final Button button, final EventObject e) {
                 String filename = file.getValueAsString();
                 if (filename != null && filename.length() > 0) {
                     getForm().submit();
@@ -153,7 +153,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         doLayoutIfNeeded();
     }
 
-    public void setUploadParams(String userHash, String token) {
+    public void setUploadParams(final String userHash, final String token) {
         userhashField.setValue(userHash);
         tokenField.setValue(token);
     }

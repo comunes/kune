@@ -3,8 +3,8 @@
   xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
   xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
   version="2.4">
-  <display-name>kune</display-name>
-  <description>kune</description>
+  <display-name>ws</display-name>
+  <description>kune workspace</description>
 
   <context-param>
     <param-name>jruby.standalone</param-name>

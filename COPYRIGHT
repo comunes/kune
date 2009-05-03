@@ -120,6 +120,11 @@ cortado:
    http://www.flumotion.net/cortado/
    Copyright: (C) 2004 Fluendo S.L under GNU General Public License
 
+video embed dialog:
+	Some ideas and embeded video code from:
+	http://www.jovelstefan.de/embedded-video/ (GPL)
+  http://www.daburna.de/blog/2006/12/13/wordpress-video-plugin/
+
 some license description:
     from Wikipedia
     Copyright: under GFDL http://www.gnu.org/copyleft/fdl.html

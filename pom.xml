@@ -227,17 +227,6 @@
       <version>1.1.1</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.cafesip.gwtcomp</groupId>
-      <artifactId>gwtcomp</artifactId>
-      <version>0.0.3b</version>
-    </dependency>
-    <dependency>
-      <groupId>org.cafesip.gwtcomp</groupId>
-      <artifactId>gwtcomp-servlet</artifactId>
-      <version>0.0.3b</version>
-    </dependency>
-
     <!-- db upgrades -->
 
     <dependency>

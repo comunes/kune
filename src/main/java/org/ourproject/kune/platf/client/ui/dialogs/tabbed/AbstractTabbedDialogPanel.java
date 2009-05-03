@@ -53,8 +53,8 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     private Listener0 onHideListener;
     private final ArrayList<Button> buttons;
 
-    public AbstractTabbedDialogPanel(String dialogId, String title, int width, int height, int minWidth, int minHeight,
-            boolean modal, Images images, String errorLabelId) {
+    public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width, final int height,
+            final int minWidth, final int minHeight, final boolean modal, final Images images, final String errorLabelId) {
         this.dialogId = dialogId;
         this.title = title;
         this.width = width;
@@ -67,7 +67,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         buttons = new ArrayList<Button>();
     }
 
-    public void activateTab(int index) {
+    public void activateTab(final int index) {
         createDialogIfNecessary();
         tabPanel.activate(index);
     }
@@ -77,7 +77,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
      * 
      * @param button
      */
-    public void addButton(Button button) {
+    public void addButton(final Button button) {
         buttons.add(button);
     }
 
@@ -88,7 +88,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         }
     }
 
-    public void addTab(View view) {
+    public void addTab(final View view) {
         addTabPanel(castPanel(view));
         doLayoutIfNeeded();
     }
@@ -96,6 +96,13 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     public void createAndShow() {
         show();
         setFirstTabActive();
+    }
+
+    public void destroy() {
+        if (dialog != null) {
+            dialog.destroy();
+            dialog = null;
+        }
     }
 
     public void doLayoutIfNeeded() {
@@ -116,7 +123,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         }
     }
 
-    public void insertTab(int index, View view) {
+    public void insertTab(final int index, final View view) {
         insertTabPanel(index, castPanel(view));
         doLayoutIfNeeded();
     }
@@ -134,14 +141,14 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         tabPanel.setActiveTab(0);
     }
 
-    public void setIconCls(String iconCls) {
+    public void setIconCls(final String iconCls) {
         this.iconCls = iconCls;
         if (dialog != null) {
             dialog.setIconCls(iconCls);
         }
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
         if (dialog != null) {
             dialog.setTitle(title);
@@ -156,23 +163,23 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     private void addHideListener() {
         dialog.addListener(new WindowListenerAdapter() {
             @Override
-            public void onClose(Panel panel) {
+            public void onClose(final Panel panel) {
                 onHideListener.onEvent();
             }
 
             @Override
-            public void onHide(Component component) {
+            public void onHide(final Component component) {
                 onHideListener.onEvent();
             }
         });
     }
 
-    private void addTabPanel(Panel newTab) {
+    private void addTabPanel(final Panel newTab) {
         createDialogIfNecessary();
         tabPanel.add(newTab);
     }
 
-    private Panel castPanel(View view) {
+    private Panel castPanel(final View view) {
         Panel panel;
         if (view instanceof Panel) {
             panel = (Panel) view;
@@ -210,7 +217,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         }
     }
 
-    private void insertTabPanel(int index, Panel newTab) {
+    private void insertTabPanel(final int index, final Panel newTab) {
         createDialogIfNecessary();
         tabPanel.insert(index, newTab);
     }

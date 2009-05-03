@@ -40,7 +40,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
 
     protected static final String SITE_FILE_UPLOADER = "k-site-file-uploader";
 
-    private static final String URL = "/kune/servlets/FileUploadManager";
+    private static final String URL = "/ws/servlets/FileUploadManager";
 
     private UploadDialog dialog;
     private ToolbarButton traybarButton;

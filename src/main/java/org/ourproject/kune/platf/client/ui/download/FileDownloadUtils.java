@@ -31,8 +31,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class FileDownloadUtils {
 
-    private static final String DOWNLOADSERVLET = "/kune/servlets/FileDownloadManager";
-    private static final String LOGODOWNLOADSERVLET = "/kune/servlets/EntityLogoDownloadManager";
+    private static final String DOWNLOADSERVLET = "/ws/servlets/FileDownloadManager";
+    private static final String LOGODOWNLOADSERVLET = "/ws/servlets/EntityLogoDownloadManager";
 
     private final Session session;
     private final ImageUtils imageUtils;

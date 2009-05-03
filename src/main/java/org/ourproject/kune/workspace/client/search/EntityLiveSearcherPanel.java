@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.search;
 import org.ourproject.kune.platf.client.dto.LinkDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 
@@ -77,10 +78,10 @@ public class EntityLiveSearcherPanel implements EntityLiveSearcherView {
         String dataProxyUrl = "";
         switch (searchType) {
         case groups:
-            dataProxyUrl = "/kune/json/GroupJSONService/search";
+            dataProxyUrl = SearcherConstants.GROUP_DATA_PROXY_URL;
             break;
         case users:
-            dataProxyUrl = "/kune/json/UserJSONService/search";
+            dataProxyUrl = SearcherConstants.USER_DATA_PROXY_URL;
             break;
         default:
             break;
