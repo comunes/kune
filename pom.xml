@@ -447,7 +447,7 @@
         <version>2.0-beta26</version>
         <configuration>
           <logLevel>INFO</logLevel>
-          <style>OBF</style>
+          <style>PRETTY</style>
           <!-- <style>OBF PRETTY</style> -->
           <runTarget>
             org.ourproject.kune.app.Kune/Kune.html

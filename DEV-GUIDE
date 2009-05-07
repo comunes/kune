@@ -181,7 +181,7 @@ For start the hosted mode, you can both execute from command line:
 
  mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:gwt
 
-Also, you can generate a hosted mode launch configuration in eclipse. We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /kune/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
+Also, you can generate a hosted mode launch configuration in eclipse. We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /ws/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
 * gwt-dev-[linux|mac|windows].jar (Add External Jar and choose it from your gwt installation directory)
 * java - /kune/src/main
 * kune (default classpath)

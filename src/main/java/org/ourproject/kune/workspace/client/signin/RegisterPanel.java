@@ -47,9 +47,9 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     public static final String WELCOME_DIALOG = "k-regp-wdiag";
     public static final String REGISTER_DIALOG = "k-regp-dialog";
 
-    public RegisterPanel(final RegisterPresenter presenter, I18nTranslationService i18n, final WorkspaceSkeleton ws,
-            Session session, Images images) {
-        super(REGISTER_DIALOG, i18n, i18n.t(PlatfMessages.REGISTER_TITLE), true, true, 390, 450, "",
+    public RegisterPanel(final RegisterPresenter presenter, final I18nTranslationService i18n,
+            final WorkspaceSkeleton ws, final Session session, final Images images) {
+        super(REGISTER_DIALOG, i18n, i18n.t(PlatfMessages.REGISTER_TITLE), true, true, 400, 420, "",
                 i18n.t(PlatfMessages.REGISTER_TITLE), REGISTER_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
                 CANCEL_BUTTON_ID, new Listener0() {
                     public void onEvent() {
@@ -65,17 +65,17 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
                 }, images, ERRMSG, 11);
         super.addListener(new WindowListenerAdapter() {
             @Override
-            public void onActivate(Panel panel) {
+            public void onActivate(final Panel panel) {
                 KuneUiUtils.focusOnField(registerForm.getShortNameField());
             }
 
             @Override
-            public void onHide(Component component) {
+            public void onHide(final Component component) {
                 presenter.onClose();
             }
 
             @Override
-            public void onShow(Component component) {
+            public void onShow(final Component component) {
                 KuneUiUtils.focusOnField(registerForm.getShortNameField());
             }
         });
@@ -83,7 +83,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
         Panel panel = new Panel();
         panel.setBorder(false);
         registerForm = new RegisterForm(i18n, session);
-        registerForm.setWidth(360);
+        registerForm.setWidth(370);
         panel.add(registerForm.getFormPanel());
         add(panel);
         panel.setId(REGISTER_FORM);

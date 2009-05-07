@@ -41,7 +41,7 @@ public class EntityOptionsPresenter extends AbstractTabbedDialogPresenter implem
                     view.setButtonVisible(true);
                 } else {
                     view.setButtonVisible(false);
-                    view.destroy();
+                    view.hide();
                 }
             }
         });

@@ -45,15 +45,16 @@ public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
     private final I18nTranslationService i18n;
     private final StateManager stateManager;
 
-    public EntityOptionsToolsConfPresenter(StateManager stateManager, Session session, I18nTranslationService i18n,
-            EntityOptions entityOptions, Provider<GroupServiceAsync> groupServiceProvider) {
+    public EntityOptionsToolsConfPresenter(final StateManager stateManager, final Session session,
+            final I18nTranslationService i18n, final EntityOptions entityOptions,
+            final Provider<GroupServiceAsync> groupServiceProvider) {
         this.stateManager = stateManager;
         this.session = session;
         this.i18n = i18n;
         this.entityOptions = entityOptions;
         this.groupServiceProvider = groupServiceProvider;
         stateManager.onGroupChanged(new Listener2<String, String>() {
-            public void onEvent(String group1, String group2) {
+            public void onEvent(final String group1, final String group2) {
                 setState();
             }
         });
@@ -63,13 +64,13 @@ public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
         return view;
     }
 
-    public void init(EntityOptionsToolsConfView view) {
+    public void init(final EntityOptionsToolsConfView view) {
         this.view = view;
         setState();
         entityOptions.addTab(view);
     }
 
-    public void onCheck(ToolSimpleDTO tool, boolean checked) {
+    public void onCheck(final ToolSimpleDTO tool, final boolean checked) {
         StateAbstractDTO state = session.getCurrentState();
         String toolName = tool.getName();
         if (checked) {
@@ -126,12 +127,12 @@ public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
     private void setToolCheckedInServer(final boolean checked, final String toolName) {
         groupServiceProvider.get().setToolEnabled(session.getUserHash(), session.getCurrentStateToken(), toolName,
                 checked, new AsyncCallback<Object>() {
-                    public void onFailure(Throwable caught) {
+                    public void onFailure(final Throwable caught) {
                         view.setChecked(toolName, !checked);
                         entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), Level.error);
                     }
 
-                    public void onSuccess(Object result) {
+                    public void onSuccess(final Object result) {
                         stateManager.reload();
                     }
                 });

@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements EntityOptionsView {
 
-    public static final String ENTITY_OP_PANEL_ID = "k-eop-diag";
+    public static final String ENTITY_OP_PANEL_ID = "k-eop-diagpan";
     public static final String GROUP_OPTIONS_ERROR_ID = "k-eop-err-mess";
     public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
     private final I18nTranslationService i18n;
@@ -43,7 +43,7 @@ public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements Ent
     private final EntityOptionsGroup entityPreferencesGroup;
 
     public EntityOptionsPanel(final EntityOptions presenter, final EntityHeader entityHeader,
-            I18nTranslationService i18n, Images images, EntityOptionsGroup entityOptionsGroup) {
+            final I18nTranslationService i18n, final Images images, final EntityOptionsGroup entityOptionsGroup) {
         super(ENTITY_OP_PANEL_ID, "", 400, HEIGHT + 80, 400, HEIGHT + 80, false, images, GROUP_OPTIONS_ERROR_ID);
         this.entityHeader = entityHeader;
         this.i18n = i18n;
@@ -60,7 +60,7 @@ public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements Ent
         super.createAndShow();
     }
 
-    public void setButtonVisible(boolean visible) {
+    public void setButtonVisible(final boolean visible) {
         optionsButton.setVisible(visible);
     }
 
@@ -77,7 +77,7 @@ public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements Ent
     private void createOptionsButton() {
         optionsButton = new EntityHeaderButton("", images.emblemSystem());
         optionsButton.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 createAndShow();
             }
         });

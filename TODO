@@ -119,6 +119,7 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO <v> Use of command key ⌘ for Mac shortcuts
 ** TODO <v,s> harden our privacy policy. Goals:
    - permit user/projects/contents how much private or public are
    - APIs public only to associated sites (in study) ( http://oauth.net ? )

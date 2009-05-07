@@ -70,10 +70,4 @@ public class WsThemePanel extends ToolbarButton implements WsThemeView {
             });
         }
     }
-
-    @Override
-    public void setVisible(final boolean visible) {
-        super.setVisible(visible);
-    }
-
 }

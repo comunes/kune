@@ -217,7 +217,7 @@ public class RegisterForm extends DefaultForm {
         add(timezoneCombo);
 
         final FieldSet personalSpaceFieldSet = new FieldSet(i18n.t("Do you want a personal homepage?"));
-        personalSpaceFieldSet.setWidth(DEF_FIELD_WIDTH + DEF_FIELD_LABEL_WITH);
+        personalSpaceFieldSet.setWidth(DEF_FIELD_WIDTH + DEF_FIELD_LABEL_WITH + 65);
         wantPersonalHomePage = new Radio();
         wantPersonalHomePage.setTabIndex(9);
         noPersonalHomePage = new Radio();

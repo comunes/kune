@@ -90,11 +90,6 @@ public class WsThemePresenter {
 
     private void setState(final StateAbstractDTO state) {
         setTheme(new WsTheme(state.getGroup().getWorkspaceTheme()));
-        if (state.getGroupRights().isAdministrable()) {
-            view.setVisible(true);
-        } else {
-            view.setVisible(false);
-        }
     }
 
     private void setTheme(final WsTheme newTheme) {

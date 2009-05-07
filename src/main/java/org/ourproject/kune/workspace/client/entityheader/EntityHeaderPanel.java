@@ -44,12 +44,10 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
     private final VerticalPanel vp;
 
     public EntityHeaderPanel(final WorkspaceSkeleton ws, final Provider<FileDownloadUtils> downloadProvider,
-            Images images) {
+            final Images images) {
         this.downloadProvider = downloadProvider;
         this.images = images;
         vp = new VerticalPanel();
-        vp.setWidth("100%");
-        super.setWidth("100%");
         vp.setHorizontalAlignment(ALIGN_RIGHT);
         entityTextLogo = new EntityTextLogo();
         add(entityTextLogo);
@@ -57,13 +55,12 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
         ws.addToEntityMainHeader(this);
     }
 
-    public void addWidget(View view) {
+    public void addWidget(final View view) {
         Widget widget = (Widget) view;
         vp.add(widget);
-        vp.setCellWidth(widget, "100%");
     }
 
-    public void reloadImage(GroupDTO group) {
+    public void reloadImage(final GroupDTO group) {
         entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "&nocache="
                 + new Date().getTime());
     }
@@ -87,11 +84,11 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
         entityTextLogo.setLargeFont();
     }
 
-    public void setLogoImage(StateToken stateToken) {
+    public void setLogoImage(final StateToken stateToken) {
         entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(stateToken));
     }
 
-    public void setLogoImageVisible(boolean visible) {
+    public void setLogoImageVisible(final boolean visible) {
         entityTextLogo.setLogoVisible(visible);
     }
 
