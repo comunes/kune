@@ -155,7 +155,7 @@ public class EntityWorkspace {
         context.addListener(listener);
     }
 
-    public void addListener(ContainerListenerAdapter containerListenerAdapter) {
+    public void addListener(final ContainerListenerAdapter containerListenerAdapter) {
         cntCtxBorderLayout.addListener(containerListenerAdapter);
     }
 
@@ -221,11 +221,11 @@ public class EntityWorkspace {
         setPanel(context, widget);
     }
 
-    public void setMaximized(boolean maximized) {
+    public void setMaximized(final boolean maximized) {
         if (maximized) {
-            contextWrap.collapse();
+            contextWrap.collapse(true);
         } else {
-            contextWrap.expand();
+            contextWrap.expand(true);
         }
     }
 
@@ -248,7 +248,7 @@ public class EntityWorkspace {
         context.addStyleName("k-entity-context-" + newTheme);
     }
 
-    private void setPanel(Panel panel, Widget widget) {
+    private void setPanel(final Panel panel, final Widget widget) {
         panel.clear();
         panel.add(widget);
         if (panel.isRendered()) {

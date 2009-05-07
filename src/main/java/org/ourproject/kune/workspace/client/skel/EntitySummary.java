@@ -93,12 +93,12 @@ public class EntitySummary {
         // }, "Bla, bla, bla"));
         panel.addListener(new ContainerListenerAdapter() {
             @Override
-            public void onHide(Component component) {
+            public void onHide(final Component component) {
                 openFirstIfActiveNotVisible();
             }
 
             @Override
-            public void onShow(Component component) {
+            public void onShow(final Component component) {
                 openFirstIfActiveNotVisible();
             }
 
@@ -156,12 +156,12 @@ public class EntitySummary {
         return trayBar;
     }
 
-    public void setMaximized(boolean maximized) {
+    public void setMaximized(final boolean maximized) {
         entitySummary.setVisible(!maximized);
         if (maximized) {
-            mainFitPanel.collapse();
+            mainFitPanel.collapse(true);
         } else {
-            mainFitPanel.expand();
+            mainFitPanel.expand(true);
         }
     }
 

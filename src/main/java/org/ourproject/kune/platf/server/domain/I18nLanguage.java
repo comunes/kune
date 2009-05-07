@@ -152,7 +152,7 @@ public class I18nLanguage implements HasId {
         return null;
     }
 
-    @Finder(query = "FROM I18nLanguage")
+    @Finder(query = "FROM I18nLanguage ORDER BY englishName")
     public List<I18nLanguage> getAll() {
         return null;
     }
@@ -234,11 +234,11 @@ public class I18nLanguage implements HasId {
         this.code = code;
     }
 
-    public void setDateFormat(String dateFormat) {
+    public void setDateFormat(final String dateFormat) {
         this.dateFormat = dateFormat;
     }
 
-    public void setDateFormatShort(String dateFormatShort) {
+    public void setDateFormatShort(final String dateFormatShort) {
         this.dateFormatShort = dateFormatShort;
     }
 

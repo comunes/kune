@@ -45,9 +45,11 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
 
     public EntityHeaderPanel(final WorkspaceSkeleton ws, final Provider<FileDownloadUtils> downloadProvider,
             final Images images) {
+        super.setWidth("100%");
         this.downloadProvider = downloadProvider;
         this.images = images;
         vp = new VerticalPanel();
+        vp.setWidth("100%");
         vp.setHorizontalAlignment(ALIGN_RIGHT);
         entityTextLogo = new EntityTextLogo();
         add(entityTextLogo);
