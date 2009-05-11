@@ -34,31 +34,31 @@ public class DatabaseProperties {
         this.properties = properties;
     }
 
-    public String getDefaultSiteShortName() {
-        return properties.get("kune.default.site.shortName");
-    }
-
-    public String getDefaultSiteName() {
-        return properties.get("kune.default.site.name");
-    }
-
-    public String getAdminUserName() {
-        return properties.get("kune.admin.name");
-    }
-
-    public String getAdminShortName() {
-        return properties.get("kune.admin.shortName");
-    }
-
     public String getAdminEmail() {
-        return properties.get("kune.admin.email");
+        return properties.get(KuneProperties.SITE_ADMIN_EMAIL);
     }
 
     public String getAdminPassword() {
-        return properties.get("kune.admin.password");
+        return properties.get(KuneProperties.SITE_ADMIN_PASSWD);
+    }
+
+    public String getAdminShortName() {
+        return properties.get(KuneProperties.SITE_ADMIN_SHORTNAME);
+    }
+
+    public String getAdminUserName() {
+        return properties.get(KuneProperties.SITE_ADMIN_NAME);
     }
 
     public String getDefaultLicense() {
-        return properties.get("kune.default.license");
+        return properties.get(KuneProperties.SITE_DEF_LICENSE);
+    }
+
+    public String getDefaultSiteName() {
+        return properties.get(KuneProperties.SITE_NAME);
+    }
+
+    public String getDefaultSiteShortName() {
+        return properties.get(KuneProperties.SITE_SHORTNAME);
     }
 }

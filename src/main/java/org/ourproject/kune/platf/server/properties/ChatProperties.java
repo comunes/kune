@@ -34,16 +34,23 @@ public class ChatProperties {
         this.properties = properties;
     }
 
-    public String getHttpBase() {
-        return properties.get(KuneProperties.CHAT_HTTP_BASE);
+    public String getAdminJID() {
+        return properties.get(KuneProperties.SITE_ADMIN_SHORTNAME);
+    }
+
+    public String getAdminPasswd() {
+        return properties.get(KuneProperties.SITE_ADMIN_PASSWD);
     }
 
     public String getDomain() {
         return properties.get(KuneProperties.CHAT_DOMAIN);
     }
 
+    public String getHttpBase() {
+        return properties.get(KuneProperties.CHAT_HTTP_BASE);
+    }
+
     public String getRoomHost() {
         return properties.get(KuneProperties.CHAT_ROOM_HOST);
     }
-
 }

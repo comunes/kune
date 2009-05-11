@@ -286,7 +286,7 @@ class ChatEngineDefault implements ChatEngine {
         final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
         // getGwtMetaProperty(GWT_PROPERTY_RELEASE);
         // FIXME, get this from user profile
-        return new UserChatOptions(jid + "@" + chatOptions.domain, passwd, resource, "blue",
-                SubscriptionMode.autoAcceptAll, true);
+        return new UserChatOptions(jid + "@" + chatOptions.domain, passwd, resource, "blue", SubscriptionMode.manual,
+                true);
     }
 }

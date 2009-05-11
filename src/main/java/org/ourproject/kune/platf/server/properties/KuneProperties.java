@@ -22,6 +22,14 @@ package org.ourproject.kune.platf.server.properties;
 public interface KuneProperties {
     String SITE_URL = "kune.siteurl";
     String SITE_DOMAIN = "kune.site.domain";
+    String SITE_NAME = "kune.default.site.name";
+    String SITE_SHORTNAME = "kune.default.site.shortName";
+    String SITE_DEF_LICENSE = "kune.default.license";
+
+    String SITE_ADMIN_NAME = "kune.admin.name";
+    String SITE_ADMIN_SHORTNAME = "kune.admin.shortName";
+    String SITE_ADMIN_EMAIL = "kune.admin.email";
+    String SITE_ADMIN_PASSWD = "kune.admin.password";
     String DEFAULT_SITE_SHORT_NAME = "kune.default.site.shortName";
     String CURRENT_CC_VERSION = "kune.currentccversion";
     String CHAT_HTTP_BASE = "kune.chat.httpbase";

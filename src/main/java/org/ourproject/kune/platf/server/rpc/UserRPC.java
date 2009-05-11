@@ -75,18 +75,18 @@ public class UserRPC implements RPC, UserService {
     }
 
     @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
-    public UserInfoDTO createUser(final UserDTO userDTO, boolean wantPersonalHomepage) throws DefaultException {
+    public UserInfoDTO createUser(final UserDTO userDTO, final boolean wantPersonalHomepage) throws DefaultException {
         final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(),
                 userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
                 userDTO.getTimezone().getId());
         groupManager.createUserGroup(user, wantPersonalHomepage);
-        return loginUser(user);
+        return login(userDTO.getShortName(), userDTO.getPassword());
     }
 
     @Authenticated
     @Transactional(type = TransactionType.READ_ONLY)
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-    public String getUserAvatarBaser64(final String userHash, StateToken userToken) throws DefaultException {
+    public String getUserAvatarBaser64(final String userHash, final StateToken userToken) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         Group userGroup = user.getUserGroup();
@@ -133,7 +133,8 @@ public class UserRPC implements RPC, UserService {
     @Authenticated(mandatory = true)
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
     @Transactional(type = TransactionType.READ_WRITE)
-    public void setBuddiesVisibility(final String userHash, StateToken groupToken, UserBuddiesVisibilityDTO visibility) {
+    public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
+            final UserBuddiesVisibilityDTO visibility) {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         if (groupToken.getGroup() != user.getShortName()) {

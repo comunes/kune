@@ -25,6 +25,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.ToolTip;
 import com.gwtext.client.widgets.form.Field;
 
@@ -55,7 +56,7 @@ public class KuneUiUtils {
     }
 
     public static String genQuickTipLabel(final String labelText, final String tipTitle, final String tipText,
-            final AbstractImagePrototype icon, IconPosition iconPosition) {
+            final AbstractImagePrototype icon, final IconPosition iconPosition) {
         String tipHtml = "<span style=\"vertical-align: middle;\" ext:qtip=\"" + tipText + "\"";
         if (tipTitle != null && tipTitle.length() > 0) {
             tipHtml += " ext:qtitle=\"" + tipTitle + "\"";
@@ -88,7 +89,7 @@ public class KuneUiUtils {
         return tipHtml;
     }
 
-    public static String genQuickTipWithImage(String imageResizedUrl, int size) {
+    public static String genQuickTipWithImage(final String imageResizedUrl, final int size) {
         return new Image(imageResizedUrl).toString();
     }
 
@@ -130,5 +131,14 @@ public class KuneUiUtils {
 
     public static void setQuickTip(final Widget widget, final String tip, final String tipTitle) {
         setQuickTip(widget.getElement(), tip, tipTitle);
+    }
+
+    /**
+     * Disables text selection on element
+     * 
+     * @param element
+     */
+    public static void setUnselectable(final Element element) {
+        Ext.get(element).unselectable();
     }
 }

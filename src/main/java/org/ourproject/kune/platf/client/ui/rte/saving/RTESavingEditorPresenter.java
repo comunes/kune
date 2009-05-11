@@ -39,9 +39,9 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     ActionToolbarButtonDescriptor<Object> saveBtn;
     private RTESavingEditorView view;
 
-    public RTESavingEditorPresenter(RTEditor editor, final boolean autoSave, final I18nTranslationService i18n,
-            StateManager stateManager, DeferredCommandWrapper deferredCommandWrapper,
-            RTEImgResources imgResources, TimerWrapper timer) {
+    public RTESavingEditorPresenter(final RTEditor editor, final boolean autoSave, final I18nTranslationService i18n,
+            final StateManager stateManager, final DeferredCommandWrapper deferredCommandWrapper,
+            final RTEImgResources imgResources, final TimerWrapper timer) {
         this.editor = editor;
         this.autoSave = autoSave;
         this.i18n = i18n;
@@ -70,7 +70,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         };
     }
 
-    public void edit(String html, Listener<String> onSave, Listener0 onEditCancelled) {
+    public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
         this.onSave = onSave;
         this.onEditCancelled = onEditCancelled;
         editor.setHtml(html);
@@ -87,7 +87,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         return beforeStateChangeListener;
     }
 
-    public void init(RTESavingEditorView view) {
+    public void init(final RTESavingEditorView view) {
         this.view = view;
     }
 
@@ -214,7 +214,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
 
         ActionToolbarMenuDescriptor<Object> close = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
                 RTEditor.topbarPosition, new Listener<Object>() {
-                    public void onEvent(Object parameter) {
+                    public void onEvent(final Object parameter) {
                         onCancel();
                     }
                 });
@@ -252,7 +252,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         editor.addAction(saveCloseBtn);
     }
 
-    private void enableSaveBtn(boolean enable) {
+    private void enableSaveBtn(final boolean enable) {
         editor.getSndBar().setButtonEnable(saveBtn, enable);
     }
 
@@ -265,5 +265,6 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         savePending = false;
         saveAndCloseConfirmed = false;
         enableSaveBtn(false);
+        editor.reset();
     }
 }

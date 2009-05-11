@@ -96,6 +96,8 @@ public interface RTEditorView extends View {
 
     void selectAll();
 
+    void selectLink();
+
     void setBackColor(String color);
 
     void setFocus(boolean focus);

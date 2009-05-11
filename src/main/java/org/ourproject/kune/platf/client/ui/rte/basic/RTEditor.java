@@ -39,6 +39,8 @@ public interface RTEditor {
 
     ActionToolbar<Object> getTopBar();
 
+    void reset();
+
     void setExtended(boolean extended);
 
     void setFocus(boolean focus);

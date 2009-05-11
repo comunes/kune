@@ -13,9 +13,7 @@ import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import com.google.inject.Inject;
 
 public class XmppManagerTest {
-
     public static class OutputListener implements RoomListener {
-        Log log = LogFactory.getLog(OutputListener.class);
         private final String name;
         private int hits;
 
@@ -35,6 +33,8 @@ public class XmppManagerTest {
         }
 
     }
+
+    static Log log = LogFactory.getLog(XmppManagerTest.class);
 
     @Inject
     XmppManager manager;
@@ -79,6 +79,11 @@ public class XmppManagerTest {
     public void testGetRoster() {
         ChatConnection handler = manager.login("admin", "easyeasy", "test");
         assertNotNull(manager.getRoster(handler));
+    }
+
+    @Test
+    public void testSendMessage() {
+        manager.sendMessage("admin", "test message");
     }
 
     @Test(expected = ChatException.class)

@@ -27,7 +27,7 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 public class InfoDialog extends BasicDialog {
     public InfoDialog(final String dialogId, final String title, final String header, final String text,
-            final String okButtonText, String okButtonId, final boolean modal, final boolean autoScroll,
+            final String okButtonText, final String okButtonId, final boolean modal, final boolean autoScroll,
             final int width, final int height) {
         super(dialogId, title, modal, autoScroll, width, height);
         final Button okButton = new Button(okButtonText);
@@ -35,7 +35,7 @@ public class InfoDialog extends BasicDialog {
         okButton.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
-                hide();
+                destroy();
             }
         });
         final Panel panel = new Panel();

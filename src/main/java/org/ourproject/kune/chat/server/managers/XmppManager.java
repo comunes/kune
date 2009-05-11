@@ -39,4 +39,6 @@ public interface XmppManager {
 
     void sendMessage(Room room, String message);
 
+    void sendMessage(String userName, String message);
+
 }

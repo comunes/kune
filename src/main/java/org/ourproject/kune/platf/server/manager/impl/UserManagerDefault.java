@@ -34,6 +34,7 @@ import org.jivesoftware.smack.RosterEntry;
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.User;
@@ -54,17 +55,19 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     private final I18nLanguageManager languageManager;
     private final XmppManager xmppManager;
     private final ChatProperties properties;
+    private final I18nTranslationService i18n;
 
     @Inject
     public UserManagerDefault(final Provider<EntityManager> provider, final User finder,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final XmppManager xmppManager, ChatProperties properties) {
+            final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n) {
         super(provider, User.class);
         this.finder = finder;
         this.languageManager = languageManager;
         this.countryManager = countryManager;
         this.xmppManager = xmppManager;
         this.properties = properties;
+        this.i18n = i18n;
     }
 
     public User createUser(final String shortName, final String longName, final String email, final String passwd,
@@ -85,7 +88,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         return userId != null ? super.find(userId) : User.UNKNOWN_USER;
     }
 
-    public User findByShortname(String shortName) {
+    public User findByShortname(final String shortName) {
         return finder.getByShortName(shortName);
     }
 
@@ -143,6 +146,15 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
             }
         }
         if (user.getPassword().equals(passwd)) {
+            if (user.getLastLogin() == null) {
+                xmppManager.sendMessage(
+                        user.getShortName(),
+                        i18n.t("This is the chat window. \n"
+                                + "\n"
+                                + "Here you can communicate with other users of this site but also with other users with compatible accounts (like gmail accounts). \n"
+                                + "\n" + "Just add some buddie and start to chat."));
+            }
+            user.setLastLogin(System.currentTimeMillis());
             return user;
         } else {
             return null;

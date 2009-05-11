@@ -108,6 +108,9 @@ public class User implements HasId {
     @Basic(optional = false)
     private final Long createdOn;
 
+    @Basic
+    private Long lastLogin;
+
     public User() {
         this(null, null, null, null, null, null, null);
     }
@@ -125,6 +128,7 @@ public class User implements HasId {
         customProperties = new CustomProperties();
         buddiesVisibility = UserBuddiesVisibility.anyone;
         this.createdOn = System.currentTimeMillis();
+        this.setLastLogin(null);
     }
 
     @Finder(query = "from User")
@@ -172,6 +176,10 @@ public class User implements HasId {
 
     public I18nLanguage getLanguage() {
         return language;
+    }
+
+    public Long getLastLogin() {
+        return lastLogin;
     }
 
     public String getName() {
@@ -222,6 +230,10 @@ public class User implements HasId {
 
     public void setLanguage(final I18nLanguage language) {
         this.language = language;
+    }
+
+    public void setLastLogin(final Long lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
     public void setName(final String name) {

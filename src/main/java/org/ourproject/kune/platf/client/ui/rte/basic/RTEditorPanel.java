@@ -28,6 +28,7 @@ import org.xwiki.gwt.dom.client.DocumentFragment;
 import org.xwiki.gwt.dom.client.Range;
 import org.xwiki.gwt.dom.client.Selection;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Command;
@@ -87,7 +88,11 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     public void addCtxAction(final ActionItem<Object> actionItem) {
         linkCtxMenu.addAction(actionItem, new Listener0() {
             public void onEvent() {
-                actionManager.doAction(actionItem);
+                DeferredCommand.addCommand(new Command() {
+                    public void execute() {
+                        actionManager.doAction(actionItem);
+                    }
+                });
             }
         });
     }
@@ -126,15 +131,13 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
     public LinkInfo getLinkInfoIfHref() {
         LinkInfo linkinfo = null;
-        org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(this);
+        org.xwiki.gwt.dom.client.Element selectedAnchor = selectAndGetLink();
         if (selectedAnchor != null) {
-            Range range = getDocument().createRange();
-            range.selectNode(selectedAnchor);
-            getSelection().addRange(range);
             linkinfo = LinkInfo.parse(selectedAnchor);
         } else {
             linkinfo = new LinkInfo(getSelectionText());
         }
+        Log.debug("Link info: " + linkinfo);
         return linkinfo;
     }
 
@@ -156,7 +159,6 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
     public void hideLinkCtxMenu() {
         linkCtxMenu.hide();
-
     }
 
     public void insertBlockquote() {
@@ -320,6 +322,10 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         basic.selectAll();
     }
 
+    public void selectLink() {
+        selectAndGetLink();
+    }
+
     public void setBackColor(final String color) {
         basic.setBackColor(color);
     }
@@ -420,6 +426,16 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         } else {
             return false;
         }
+    }
+
+    private org.xwiki.gwt.dom.client.Element selectAndGetLink() {
+        org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(this);
+        if (selectedAnchor != null) {
+            Range range = getDocument().createRange();
+            range.selectNode(selectedAnchor);
+            getSelection().addRange(range);
+        }
+        return selectedAnchor;
     }
 
     private void updateLinkInfo() {

@@ -24,7 +24,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPConnection;
@@ -40,6 +44,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class XmppManagerDefault implements XmppManager {
+    public static final Log log = LogFactory.getLog(XmppManagerDefault.class);
 
     private final ChatProperties chatProperties;
 
@@ -78,7 +83,7 @@ public class XmppManagerDefault implements XmppManager {
 
     }
 
-    public Collection<RosterEntry> getRoster(ChatConnection conn) {
+    public Collection<RosterEntry> getRoster(final ChatConnection conn) {
         XmppConnection xConn = (XmppConnection) conn;
         Roster roster = xConn.getConn().getRoster();
         return roster.getEntries();
@@ -121,6 +126,29 @@ public class XmppManagerDefault implements XmppManager {
         } catch (XMPPException e) {
             throw new ChatException(e);
         }
+    }
+
+    public void sendMessage(final String userName, final String text) {
+        ChatConnection connection = login(chatProperties.getAdminJID(), chatProperties.getAdminPasswd(),
+                "kuneserveradmin" + System.currentTimeMillis());
+        XMPPConnection xmppConn = ((XmppConnection) connection).getConn();
+
+        String userJid = userName + "@" + chatProperties.getDomain();
+        Chat newChat = xmppConn.getChatManager().createChat(userJid, new MessageListener() {
+            public void processMessage(final Chat arg0, final Message arg1) {
+                log.info("Sended message: " + text);
+            }
+        });
+        try {
+            final Message message = new Message();
+            message.setFrom(chatProperties.getDomain());
+            message.setTo(userJid);
+            message.setBody(text);
+            newChat.sendMessage(message);
+        } catch (Exception e) {
+            log.error("Error Delivering xmpp message to " + userName);
+        }
+        xmppConn.disconnect();
     }
 
     private void configure(final MultiUserChat muc) throws XMPPException {

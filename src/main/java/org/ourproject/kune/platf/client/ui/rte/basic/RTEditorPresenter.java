@@ -67,7 +67,7 @@ public class RTEditorPresenter implements RTEditor {
     private final DeferredCommandWrapper deferred;
     private final ActionAddCondition<Object> canBeBasic;
     private final ActionAddCondition<Object> canBeExtended;
-    private final Provider<ColorWebSafePalette> palette;
+    private final Provider<ColorWebSafePalette> paletteProvider;
     private final Provider<InsertLinkDialog> insertLinkDialog;
     private final Provider<EditHtmlDialog> editHtmlDialog;
     private final Provider<InsertImageDialog> insertImageDialog;
@@ -81,6 +81,7 @@ public class RTEditorPresenter implements RTEditor {
     private final Provider<InsertSpecialCharDialog> insertSpecialCharDialog;
     protected Listener<String> insertSpecialCharListener;
     private final Provider<InsertMediaDialog> insertMediaDialog;
+    protected ColorWebSafePalette palette;
 
     public RTEditorPresenter(final I18nTranslationService i18n, final Session session,
             final RTEActionTopToolbar topBar, final RTEActionSndToolbar sndBar, final RTEImgResources imgResources,
@@ -93,7 +94,7 @@ public class RTEditorPresenter implements RTEditor {
         this.topBar = topBar;
         this.sndBar = sndBar;
         this.insertLinkDialog = textEditorInsertElement;
-        this.palette = palette;
+        this.paletteProvider = palette;
         this.editHtmlDialog = editHtmlDialog;
         this.insertImageDialog = insertImageDialog;
         this.insertMediaDialog = insertMediaDialog;
@@ -186,12 +187,14 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     public void onEditorFocus() {
-        topBar.hideAllMenus();
-        sndBar.hideAllMenus();
-        palette.get().hide();
+        hideMenus();
     }
 
     public void onLostFocus() {
+    }
+
+    public void reset() {
+        hideMenus();
         hideLinkCtxMenu();
     }
 
@@ -452,6 +455,7 @@ public class RTEditorPresenter implements RTEditor {
                         EditHtmlDialog dialog = editHtmlDialog.get();
                         dialog.setUpdateListener(updateHtmlListener);
                         dialog.show();
+                        hideLinkCtxMenu();
                         dialog.setHtml(view.getHTML());
                     }
                 });
@@ -619,6 +623,7 @@ public class RTEditorPresenter implements RTEditor {
                                 dialog.reset();
                                 dialog.setOnCreateImage(insertImageListener);
                                 dialog.show();
+                                hideLinkCtxMenu();
                             }
                         });
                     }
@@ -651,6 +656,7 @@ public class RTEditorPresenter implements RTEditor {
                                 InsertMediaDialog dialog = insertMediaDialog.get();
                                 dialog.setOnCreate(insertMediaListener);
                                 dialog.show();
+                                hideLinkCtxMenu();
                             }
                         });
                     }
@@ -659,7 +665,6 @@ public class RTEditorPresenter implements RTEditor {
         insertMedia.setTextDescription(i18n.t("Audio/Video..."));
         insertMedia.setAddCondition(canBeExtended);
         insertMedia.setParentMenuTitle(i18n.t(INSERT_MENU));
-
         ActionToolbarButtonDescriptor<Object> createOrEditLinkBtn = new ActionToolbarButtonDescriptor<Object>(
                 accessRol, sndbarPosition, new Listener0() {
                     public void onEvent() {
@@ -681,6 +686,7 @@ public class RTEditorPresenter implements RTEditor {
                                 dialog.setLinkInfo(linkInfo);
                                 dialog.setOnCreateLink(insertLinkListener);
                                 dialog.show();
+                                hideLinkCtxMenu();
                                 String href = linkInfo.getHref();
                                 if (href.length() > 0) {
                                     if (href.startsWith("mailto")) {
@@ -711,13 +717,23 @@ public class RTEditorPresenter implements RTEditor {
         editLinkCtx.setToolTip(null);
         editLinkCtx.setShortcut(null);
         editLinkCtx.setActionPosition(linkCtxPosition);
-        editLinkCtx.setParentMenuTitle(i18n.t(INSERT_MENU));
 
         ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 sndbarPosition, new Listener0() {
                     public void onEvent() {
-                        view.unlink();
-                        fireOnEdit();
+                        if (view.isAnythingSelected()) {
+                            // we try to unlink the selection
+                        } else {
+                            // we try to select the complete link
+                            view.selectLink();
+                        }
+                        deferred.addCommand(new Listener0() {
+                            public void onEvent() {
+                                view.unlink();
+                                hideLinkCtxMenu();
+                                fireOnEdit();
+                            }
+                        });
                     }
                 });
         removeLink.setIconCls(getCssName(imgResources.linkbreak()));
@@ -730,7 +746,6 @@ public class RTEditorPresenter implements RTEditor {
         removeLinkCtx.setToolTip(null);
         removeLinkCtx.setShortcut(null);
         removeLinkCtx.setActionPosition(linkCtxPosition);
-        removeLinkCtx.setParentMenuTitle(i18n.t(INSERT_MENU));
 
         final ActionToolbarMenuDescriptor<Object> removeFormat = new ActionToolbarMenuDescriptor<Object>(accessRol,
                 topbarPosition, new Listener0() {
@@ -772,6 +787,7 @@ public class RTEditorPresenter implements RTEditor {
                         }
                         insertSpecialCharDialog.get().setOnInsertSpecialChar(insertSpecialCharListener);
                         insertSpecialCharDialog.get().show();
+                        hideLinkCtxMenu();
                         NotifyUser.hideProgress();
                     }
                 });
@@ -805,14 +821,16 @@ public class RTEditorPresenter implements RTEditor {
         final ActionToolbarButtonDescriptor<Object> fontColor = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 sndbarPosition, new Listener0() {
                     public void onEvent() {
-                        palette.get().show(getActionLeftPosition(sndBar, insertTableBtn),
-                                getActionTopPosition(sndBar, removeFormatBtn), new Listener<String>() {
-                                    public void onEvent(final String color) {
-                                        palette.get().hide();
-                                        view.setForeColor(color);
-                                        fireOnEdit();
-                                    }
-                                });
+                        getPalette();
+                        palette.show(getActionLeftPosition(sndBar, insertTableBtn), getActionTopPosition(sndBar,
+                                removeFormatBtn), new Listener<String>() {
+                            public void onEvent(final String color) {
+                                palette.hide();
+                                view.setForeColor(color);
+                                fireOnEdit();
+                            }
+                        });
+                        hideLinkCtxMenu();
                     }
                 });
         fontColor.setIconCls(getCssName(imgResources.fontcolor()));
@@ -822,14 +840,16 @@ public class RTEditorPresenter implements RTEditor {
         ActionToolbarButtonDescriptor<Object> backgroundColor = new ActionToolbarButtonDescriptor<Object>(accessRol,
                 sndbarPosition, new Listener0() {
                     public void onEvent() {
-                        palette.get().show(getActionLeftPosition(sndBar, fontColor),
-                                getActionTopPosition(sndBar, fontColor), new Listener<String>() {
+                        getPalette();
+                        palette.show(getActionLeftPosition(sndBar, fontColor), getActionTopPosition(sndBar, fontColor),
+                                new Listener<String>() {
                                     public void onEvent(final String color) {
-                                        palette.get().hide();
+                                        palette.hide();
                                         view.setBackColor(color);
                                         fireOnEdit();
                                     }
                                 });
+                        hideLinkCtxMenu();
                     }
                 });
         backgroundColor.setIconCls(getCssName(imgResources.backcolor()));
@@ -904,8 +924,8 @@ public class RTEditorPresenter implements RTEditor {
         actions.add(withNoItem(fontColor));
         actions.add(withNoItem(backgroundColor));
 
-        view.addCtxAction(withNoItem(editLinkCtx));
         view.addCtxAction(withNoItem(removeLinkCtx));
+        view.addCtxAction(withNoItem(editLinkCtx));
     }
 
     private ActionToolbarMenuDescriptor<Object> createFontNameAction(final ActionAddCondition<Object> canBeBasic,
@@ -954,9 +974,23 @@ public class RTEditorPresenter implements RTEditor {
         return RTEImgResources.SUFFIX + imageResource.getName();
     }
 
+    private void getPalette() {
+        if (palette == null) {
+            palette = paletteProvider.get();
+        }
+    }
+
     private void hideLinkCtxMenu() {
         if (view.isCtxMenuVisible()) {
             view.hideLinkCtxMenu();
+        }
+    }
+
+    private void hideMenus() {
+        topBar.hideAllMenus();
+        sndBar.hideAllMenus();
+        if (palette != null) {
+            palette.hide();
         }
     }
 
