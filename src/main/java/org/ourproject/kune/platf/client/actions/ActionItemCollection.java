@@ -26,10 +26,10 @@ import com.allen_sauer.gwt.log.client.Log;
 
 public class ActionItemCollection<T> extends ArrayList<ActionItem<T>> {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1127359948648860754L;
 
     @Override
-    public boolean add(ActionItem<T> actionItem) {
+    public boolean add(final ActionItem<T> actionItem) {
         ActionDescriptor<T> action = actionItem.getAction();
         int position = action.getPosition();
         if (position == ActionDescriptor.NO_POSITION) {
@@ -47,7 +47,7 @@ public class ActionItemCollection<T> extends ArrayList<ActionItem<T>> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends ActionItem<T>> actionItems) {
+    public boolean addAll(final Collection<? extends ActionItem<T>> actionItems) {
         for (ActionItem<T> actionItem : actionItems) {
             add(actionItem);
         }

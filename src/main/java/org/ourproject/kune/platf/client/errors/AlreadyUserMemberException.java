@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class AlreadyUserMemberException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -6365615768192330492L;
 }

@@ -25,7 +25,7 @@ import com.calclab.emiteuimodule.client.SubscriptionMode;
 
 public class ChatUserParams implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1343712336914940957L;
 
     private String avatar;
 

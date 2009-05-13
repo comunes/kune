@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class ContainerNotPermittedException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6866318170714609691L;
 }

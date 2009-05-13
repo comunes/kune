@@ -45,7 +45,7 @@ import com.google.inject.Inject;
 
 public abstract class FileUploadManagerAbstract extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4227762495128652369L;
 
     public static final Log log = LogFactory.getLog(FileUploadManager.class);
 
@@ -60,8 +60,8 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     protected void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException {
     }
 
-    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file,
-            String typeId) throws Exception {
+    protected void createUploadedFile(final String userHash, final StateToken stateToken, final String fileName,
+            final FileItem file, final String typeId) throws Exception {
     }
 
     @Override
@@ -123,12 +123,12 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
         }
     }
 
-    protected void doResponse(final HttpServletResponse response, String additionalResponse) throws IOException {
+    protected void doResponse(final HttpServletResponse response, final String additionalResponse) throws IOException {
         doResponse(response, additionalResponse, HttpServletResponse.SC_OK);
     }
 
-    protected void doResponse(final HttpServletResponse response, String additionalResponse, int responseCode)
-            throws IOException {
+    protected void doResponse(final HttpServletResponse response, final String additionalResponse,
+            final int responseCode) throws IOException {
         final Writer w = new OutputStreamWriter(response.getOutputStream());
         if (additionalResponse != null) {
             w.write(additionalResponse);
@@ -141,13 +141,13 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
         doResponse(response, null);
     }
 
-    protected void onOtherException(HttpServletResponse response, final Exception e) throws IOException {
+    protected void onOtherException(final HttpServletResponse response, final Exception e) throws IOException {
         log.info("Exception: " + e.getCause());
         e.printStackTrace();
         doResponse(response, null);
     }
 
-    protected void onSuccess(HttpServletResponse response) throws IOException {
+    protected void onSuccess(final HttpServletResponse response) throws IOException {
         doResponse(response, null);
     }
 

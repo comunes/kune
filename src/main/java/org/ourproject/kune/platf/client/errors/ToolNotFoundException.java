@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class ToolNotFoundException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 472511647264356558L;
 }

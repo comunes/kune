@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class GroupNameInUseException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4746775725822225687L;
 }

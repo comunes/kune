@@ -54,13 +54,14 @@ import com.google.inject.Inject;
  */
 public class FileDownloadManager extends HttpServlet {
 
+    private static final long serialVersionUID = -1160659289588014049L;
+
     static final String RESP_HEADER_ATTACHMENT_FILENAME = "attachment; filename=\"";
     static final String RESP_HEADER_CONTEND_DISP = "Content-Disposition";
     static final String RESP_HEADER_END = "\"";
 
     static final String APPLICATION_X_DOWNLOAD = "application/x-download";
 
-    private static final long serialVersionUID = 1L;
     public static final Log log = LogFactory.getLog(FileDownloadManager.class);
 
     @Inject

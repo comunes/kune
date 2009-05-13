@@ -29,12 +29,13 @@ import com.google.gwt.user.server.rpc.RPCRequest;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class DelegatedRemoteServlet extends RemoteServiceServlet {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -7646054921925214953L;
     private transient RemoteService service;
     private ServletContext servletContext;
 
-    public void setService(final RemoteService service) {
-        this.service = service;
+    @Override
+    public ServletContext getServletContext() {
+        return servletContext;
     }
 
     @Override
@@ -47,17 +48,17 @@ public class DelegatedRemoteServlet extends RemoteServiceServlet {
         }
     }
 
-    @Override
-    protected void doUnexpectedFailure(final Throwable e) {
-        e.printStackTrace();
-        super.doUnexpectedFailure(e);
+    public void setService(final RemoteService service) {
+        this.service = service;
     }
 
     public void setServletContext(final ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 
-    public ServletContext getServletContext() {
-        return servletContext;
+    @Override
+    protected void doUnexpectedFailure(final Throwable e) {
+        e.printStackTrace();
+        super.doUnexpectedFailure(e);
     }
 }

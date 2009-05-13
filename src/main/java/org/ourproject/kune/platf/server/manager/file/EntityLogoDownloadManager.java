@@ -36,8 +36,7 @@ import com.google.inject.Inject;
 
 public class EntityLogoDownloadManager extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = -1958945058088446881L;
     @Inject
     GroupManager groupManager;
 

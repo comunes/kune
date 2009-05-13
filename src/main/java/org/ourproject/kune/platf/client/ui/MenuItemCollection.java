@@ -44,6 +44,6 @@ import java.util.ArrayList;
 
 public class MenuItemCollection<T> extends ArrayList<MenuItem<T>> {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4719030300216601947L;
 
 }

@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class ContentNotPermittedException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4771568826852748873L;
 }

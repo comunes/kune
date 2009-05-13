@@ -30,8 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class FileDownloadManagerUtils {
 
-    private static final long serialVersionUID = 1L;
-
     public static void returnFile(final String filename, final OutputStream out) throws FileNotFoundException,
             IOException {
         InputStream in = null;
@@ -49,7 +47,7 @@ public class FileDownloadManagerUtils {
         }
     }
 
-    public static void returnNotFound(HttpServletResponse resp) throws IOException {
+    public static void returnNotFound(final HttpServletResponse resp) throws IOException {
         resp.getWriter().println("Content not found");
         resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }

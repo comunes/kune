@@ -46,7 +46,7 @@ import com.wideplay.warp.persist.Transactional;
 
 public class EntityLogoUploadManager extends FileUploadManagerAbstract {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4281058427935636238L;
 
     @Inject
     GroupManager groupManager;
@@ -55,14 +55,14 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     I18nTranslationService i18n;
 
     @Override
-    protected void beforeRespond(HttpServletResponse response, Writer w) throws IOException {
+    protected void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException {
         super.beforeRespond(response, w);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/xml");
     }
 
-    protected void createUploadedFile(StateToken stateToken, String mimeTypeS, File origFile) throws Exception,
-            IOException, MagickException, FileNotFoundException {
+    protected void createUploadedFile(final StateToken stateToken, final String mimeTypeS, final File origFile)
+            throws Exception, IOException, MagickException, FileNotFoundException {
         BasicMimeType mimeType = new BasicMimeType(mimeTypeS);
         if (!mimeType.getType().equals("image")) {
             throw new Exception("Trying to set a non image (" + mimeTypeS + ") as group logo");
@@ -91,8 +91,8 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
     @Transactional(type = TransactionType.READ_WRITE)
-    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file,
-            String typeId) throws Exception {
+    protected void createUploadedFile(final String userHash, final StateToken stateToken, final String fileName,
+            final FileItem file, final String typeId) throws Exception {
         String mimeTypeS = file.getContentType();
         File tmpOrigFile = File.createTempFile("logoOrig", "");
         file.write(tmpOrigFile);
@@ -133,13 +133,13 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     }
 
     @Override
-    protected void onFileUploadException(HttpServletResponse response) throws IOException {
+    protected void onFileUploadException(final HttpServletResponse response) throws IOException {
         doResponse(response, createXmlResponse(false, i18n.t("Error: File too large")).toString(),
                 HttpServletResponse.SC_BAD_REQUEST);
     }
 
     @Override
-    protected void onOtherException(HttpServletResponse response, Exception e) throws IOException {
+    protected void onOtherException(final HttpServletResponse response, final Exception e) throws IOException {
         super.onOtherException(response, e);
         log.info("Exception: " + e.getCause());
         // e.printStackTrace();
@@ -148,7 +148,7 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     }
 
     @Override
-    protected void onSuccess(HttpServletResponse response) throws IOException {
+    protected void onSuccess(final HttpServletResponse response) throws IOException {
         doResponse(response, createXmlResponse(true, i18n.t("Success uploading")).toString());
     }
 

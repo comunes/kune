@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class EmailAddressInUseException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3740509040361715407L;
 }

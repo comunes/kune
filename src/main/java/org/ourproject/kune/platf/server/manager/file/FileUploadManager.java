@@ -53,8 +53,7 @@ import com.wideplay.warp.persist.Transactional;
 @RequestScoped
 public class FileUploadManager extends FileJsonUploadManagerAbstract {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = -7209922761735338754L;
     @Inject
     UserSession userSession;
     @Inject
@@ -93,8 +92,8 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
     }
 
     @Override
-    protected void createUploadedFile(String userHash, StateToken stateToken, String fileName, FileItem file,
-            String typeId) throws Exception {
+    protected void createUploadedFile(final String userHash, final StateToken stateToken, final String fileName,
+            final FileItem file, final String typeId) throws Exception {
         createUploadedFileWrapped(userHash, stateToken, fileName, file, typeId);
     }
 
@@ -102,7 +101,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
     @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
     Content createUploadedFileWrapped(final String userHash, final StateToken stateToken, final String fileName,
-            final FileItem fileUploadItem, String typeId) throws Exception {
+            final FileItem fileUploadItem, final String typeId) throws Exception {
         final String relDir = FileUtils.toDir(stateToken);
         final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + relDir;
         fileManager.mkdir(absDir);
@@ -146,7 +145,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
         }
     }
 
-    private void generateThumbs(String absDir, String filename, String extension, boolean isPdf) {
+    private void generateThumbs(final String absDir, final String filename, final String extension, final boolean isPdf) {
         try {
             String fileOrig = absDir + filename;
             String withoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);

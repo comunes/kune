@@ -121,10 +121,15 @@ cortado:
    Copyright: (C) 2004 Fluendo S.L under GNU General Public License
 
 video embed dialog:
-	Some ideas and embeded video code from:
-	http://www.jovelstefan.de/embedded-video/ (GPL)
-  http://www.daburna.de/blog/2006/12/13/wordpress-video-plugin/
+   Some ideas and embeded video code from:
+   http://www.jovelstefan.de/embedded-video/ (GPL)
+   http://www.daburna.de/blog/2006/12/13/wordpress-video-plugin/
 
 some license description:
-    from Wikipedia
-    Copyright: under GFDL http://www.gnu.org/copyleft/fdl.html
+   from Wikipedia
+   Copyright: under GFDL http://www.gnu.org/copyleft/fdl.html
+
+some Action classes:
+   from GNU Classpath
+   Copyright: under GNU General Public License
+   http://www.gnu.org/licenses/gpl.html

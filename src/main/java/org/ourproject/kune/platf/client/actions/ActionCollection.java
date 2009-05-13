@@ -23,6 +23,6 @@ import java.util.ArrayList;
 
 public class ActionCollection<T> extends ArrayList<ActionDescriptor<T>> {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -3308296009308246636L;
 
 }

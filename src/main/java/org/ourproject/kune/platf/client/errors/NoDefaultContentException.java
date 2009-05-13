@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class NoDefaultContentException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7443824340580555859L;
 }

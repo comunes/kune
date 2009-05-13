@@ -32,13 +32,12 @@ import com.google.inject.Inject;
 
 public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbstract {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = 8437422616838698647L;
     @Inject
     I18nTranslationService i18n;
 
     @Override
-    protected void beforeRespond(HttpServletResponse response, Writer w) throws IOException {
+    protected void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException {
         super.beforeRespond(response, w);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
@@ -49,12 +48,12 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
     }
 
     @Override
-    protected void onFileUploadException(HttpServletResponse response) throws IOException {
+    protected void onFileUploadException(final HttpServletResponse response) throws IOException {
         doResponse(response, createJsonResponse(false, i18n.t("Error: File too large")).toString());
     }
 
     @Override
-    protected void onOtherException(HttpServletResponse response, Exception e) throws IOException {
+    protected void onOtherException(final HttpServletResponse response, final Exception e) throws IOException {
         super.onOtherException(response, e);
         log.info("Exception: " + e.getCause());
         // e.printStackTrace();
@@ -62,7 +61,7 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
     }
 
     @Override
-    protected void onSuccess(HttpServletResponse response) throws IOException {
+    protected void onSuccess(final HttpServletResponse response) throws IOException {
         doResponse(response, createJsonResponse(true, i18n.t("Uploading was successful")).toString());
     }
 }

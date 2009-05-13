@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class UserNotFoundException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6207713694613166661L;
 }

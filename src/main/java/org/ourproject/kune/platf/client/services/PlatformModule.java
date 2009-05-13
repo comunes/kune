@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
+import org.ourproject.kune.platf.client.actions.ui.TestButton;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
@@ -115,6 +116,7 @@ import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
+import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
@@ -523,9 +525,18 @@ public class PlatformModule extends AbstractModule {
                 return new ExternalMediaRegistry($(Session.class).getInitData().getExtMediaDescrips());
             }});
 
+        register(Singleton.class, new Factory<TestButton>(TestButton.class) {
+            @Override
+            public TestButton create() {
+                final TestButton btn = new TestButton($(WorkspaceSkeleton.class));
+                return btn;
+            }
+        });
+
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();
         $(Application.class).start();
         // $(HelloWorld.class);
+
     }
 }

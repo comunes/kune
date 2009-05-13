@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class UserAuthException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8383513776573054971L;
 }

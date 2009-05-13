@@ -9,8 +9,7 @@ import org.ourproject.kune.platf.client.ui.TextUtils;
 
 public class ExternalMediaRegistry extends ArrayList<ExtMediaDescripDTO> {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = -9109609520119776917L;
     public static final ExtMediaDescripDTO NO_MEDIA = new ExtMediaDescripDTO(null, null, null, null, null, 0, 0);
 
     public ExternalMediaRegistry(final List<ExtMediaDescripDTO> extMediaDescrips) {

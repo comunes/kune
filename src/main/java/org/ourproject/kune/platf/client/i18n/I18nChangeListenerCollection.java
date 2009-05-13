@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.client.i18n;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A helper class for implementers of the SourcesI18nChangeEvents interface.
@@ -29,15 +28,14 @@ import java.util.Iterator;
  */
 public class I18nChangeListenerCollection extends ArrayList<I18nChangeListener> {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2435290836445582410L;
 
     /**
      * Fires a locale change event to all listeners.
      * 
      */
     public void fireI18nLanguageChange() {
-        for (Iterator<I18nChangeListener> it = iterator(); it.hasNext();) {
-            I18nChangeListener listener = it.next();
+        for (I18nChangeListener listener : this) {
             listener.onI18nLanguageChange();
         }
     }

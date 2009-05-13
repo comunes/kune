@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class SessionExpiredException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1603881986661302041L;
 }

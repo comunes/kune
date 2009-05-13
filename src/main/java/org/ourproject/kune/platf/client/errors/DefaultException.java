@@ -23,7 +23,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.user.client.rpc.StatusCodeException;
 
 public class DefaultException extends StatusCodeException implements IsSerializable {
-    private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = -6111471089427505005L;
 
     public DefaultException() {
         this(0, "");

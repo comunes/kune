@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class NameInUseException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4890594846432830537L;
 }

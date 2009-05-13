@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class GroupNotFoundException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2358855015943550817L;
 }

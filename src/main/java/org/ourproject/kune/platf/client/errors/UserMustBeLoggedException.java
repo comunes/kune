@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class UserMustBeLoggedException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -5091069990899662849L;
 }

@@ -20,5 +20,5 @@
 package org.ourproject.kune.platf.client.errors;
 
 public class AccessViolationException extends DefaultException {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -3786772632052256999L;
 }
