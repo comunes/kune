@@ -37,7 +37,7 @@ exception statement from your version. */
 
 package org.ourproject.kune.platf.client.actions;
 
-import com.google.gwt.user.client.ui.KeyboardListener;
+import com.google.gwt.user.client.Event;
 
 /**
  * This event is generated when an action on a component (such as a button
@@ -51,143 +51,19 @@ import com.google.gwt.user.client.ui.KeyboardListener;
  */
 public class ActionEvent {
 
-    /** Bit mask indicating the shift key was pressed. */
-    public static final int SHIFT_MASK = KeyboardListener.MODIFIER_SHIFT;
+    private final Event event;
+    private final Object source;
 
-    /** Bit mask indicating the control key was pressed. */
-    public static final int CTRL_MASK = KeyboardListener.MODIFIER_CTRL;
-
-    /** Bit mask indicating the that meta key was pressed. */
-    public static final int META_MASK = KeyboardListener.MODIFIER_META;
-
-    /** Bit mask indicating that the alt key was pressed. */
-    public static final int ALT_MASK = KeyboardListener.MODIFIER_ALT;
-
-    /** The first id number in the range of action id's. */
-    public static final int ACTION_FIRST = 1001;
-
-    /** The last id number in the range of action id's. */
-    public static final int ACTION_LAST = 1001;
-
-    /** An event id indicating that an action has occurred. */
-    public static final int ACTION_PERFORMED = 1001;
-
-    /**
-     * A nonlocalized string that gives more specific details of the event
-     * cause.
-     * 
-     * @see #getActionCommand()
-     * @serial the command for this event
-     */
-    private final String actionCommand;
-
-    /**
-     * The bitmask of the modifiers that were pressed during the action.
-     * 
-     * @see #getModifiers()
-     * @serial modifiers for this event
-     */
-    private final int modifiers;
-
-    /**
-     * The timestamp of this event; usually the same as the underlying input
-     * event.
-     * 
-     * @see #getWhen()
-     * @serial the timestamp of the event
-     * @since 1.4
-     */
-    private final long when;
-
-    private final int id;
-
-    /**
-     * Initializes a new instance of <code>ActionEvent</code> with the specified
-     * source, id, command, and modifiers, and timestamp. Note that an invalid
-     * id leads to unspecified results.
-     * 
-     * @param source
-     *            the event source
-     * @param id
-     *            the event id
-     * @param command
-     *            the command string for this action
-     * @param when
-     *            the timestamp of the event
-     * @param modifiers
-     *            the bitwise or of modifier keys down during the action
-     * @throws IllegalArgumentException
-     *             if source is null
-     * @since 1.4
-     */
-    public ActionEvent(final Object source, final int id, final String command, final long when, final int modifiers) {
-        super();
-        this.id = id;
-        actionCommand = command;
-        this.when = when;
-        this.modifiers = modifiers;
+    public ActionEvent(final Object source, final Event event) {
+        this.source = source;
+        this.event = event;
     }
 
-    /**
-     * Returns the command string associated with this action.
-     * 
-     * @return the command string associated with this action
-     */
-    public String getActionCommand() {
-        return actionCommand;
+    public Event getEvent() {
+        return event;
     }
 
-    /**
-     * Returns the keys held down during the action. This value will be a
-     * combination of the bit mask constants defined in this class, or 0 if no
-     * modifiers were pressed.
-     * 
-     * @return the modifier bits
-     */
-    public int getModifiers() {
-        return modifiers;
+    public Object getSource() {
+        return source;
     }
-
-    /**
-     * Gets the timestamp of when this action took place. Usually, this
-     * corresponds to the timestamp of the underlying InputEvent.
-     * 
-     * @return the timestamp of this action
-     * @since 1.4
-     */
-    public long getWhen() {
-        return when;
-    }
-
-    /**
-     * Returns a string that identifies the action event. This is in the format
-     * <code>"ACTION_PERFORMED,cmd=" + getActionCommand() + ",when=" + getWhen()
-     * + ",modifiers=" + &lt;modifier string&gt;</code>, where the modifier
-     * string is in the order "Meta", "Ctrl", "Alt", "Shift", "Alt Graph", and
-     * "Button1", separated by '+', according to the bits set in getModifiers().
-     * 
-     * @return a string identifying the event
-     */
-    public String paramString() {
-        String s = new String(id == ACTION_PERFORMED ? "ACTION_PERFORMED,cmd=" : "unknown type,cmd=");
-        s = s + actionCommand + ",when=" + when + ",modifiers";
-        if ((modifiers & META_MASK) != 0) {
-            s += "+Meta";
-        }
-        if ((modifiers & CTRL_MASK) != 0) {
-            s += "+Ctrl";
-        }
-        if ((modifiers & ALT_MASK) != 0) {
-            s += "+Alt";
-        }
-        if ((modifiers & SHIFT_MASK) != 0) {
-            s += "+Shift";
-        }
-        // if ((modifiers & InputEvent.ALT_GRAPH_MASK) != 0)
-        // s+="+Alt Graph");
-        // if ((modifiers & InputEvent.BUTTON1_MASK) != 0)
-        // s+="+Button1");
-        // s.setCharAt(len, '=');
-        return s;
-    }
-} // class ActionEvent
+}

@@ -1,13 +1,16 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
 import org.ourproject.kune.platf.client.actions.Action;
+import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 public abstract class AbstractButton extends Composite {
 
@@ -22,6 +25,14 @@ public abstract class AbstractButton extends Composite {
     public AbstractButton() {
         button = new Button();
         initWidget(button);
+        button.addListener(new ButtonListenerAdapter() {
+            @Override
+            public void onClick(final Button button, final EventObject e) {
+                if (action != null) {
+                    action.actionPerformed(new ActionEvent(button, e.getBrowserEvent()));
+                }
+            }
+        });
     }
 
     public void setAction(final Action a) {

@@ -15,7 +15,10 @@ public class TestButton extends DefaultButton {
             super.putValue(Action.SHORT_DESCRIPTION, "test button");
         }
 
-        public void actionPerformed(final ActionEvent event) {
+        public void actionPerformed(final ActionEvent actionEvent) {
+            if (actionEvent.getEvent().getCtrlKey()) {
+                NotifyUser.info("Button clicked with ctrl button");
+            }
             NotifyUser.info("Button clicked");
         }
     }
