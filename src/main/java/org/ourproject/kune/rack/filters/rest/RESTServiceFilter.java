@@ -32,12 +32,12 @@ import javax.servlet.ServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.rack.RackHelper;
-import org.ourproject.kune.rack.filters.InjectedFilter;
+import org.ourproject.kune.rack.filters.AbstractInjectedFilter;
 
 import com.google.inject.Inject;
 
-public class RESTServiceFilter extends InjectedFilter {
-    private static final Log log = LogFactory.getLog(RESTServiceFilter.class);
+public class RESTServiceFilter extends AbstractInjectedFilter {
+    private static final Log LOG = LogFactory.getLog(RESTServiceFilter.class);
 
     private final Pattern pattern;
     private final Class<?> serviceClass;
@@ -50,12 +50,16 @@ public class RESTServiceFilter extends InjectedFilter {
         this.pattern = Pattern.compile(pattern);
     }
 
+    @Override
+    public void destroy() {
+    }
+
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
 
         String methodName = getMethodName(request);
         ParametersAdapter parameters = new ParametersAdapter(request);
-        log.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
+        LOG.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
 
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/json");

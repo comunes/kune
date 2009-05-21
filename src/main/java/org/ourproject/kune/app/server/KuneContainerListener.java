@@ -19,7 +19,7 @@
  */
 
 /**
- * 
+ *
  \*/
 package org.ourproject.kune.app.server;
 
@@ -41,11 +41,12 @@ class KuneContainerListener implements ContainerListener {
     KunePersistenceService persistenceService;
     ServerToolRegistry toolRegistry;
     DocumentServerTool documentTool;
+    // @PMD:REVIEWED:LoggerIsNotStaticFinal: by vjrj on 21/05/09 16:55
     Logger logger;
 
     @Inject
-    public KuneContainerListener(KunePersistenceService persistenceService, ServerToolRegistry toolRegistry,
-            DocumentServerTool documentTool, Logger logger) {
+    public KuneContainerListener(final KunePersistenceService persistenceService,
+            final ServerToolRegistry toolRegistry, final DocumentServerTool documentTool, final Logger logger) {
         this.persistenceService = persistenceService;
         this.toolRegistry = toolRegistry;
         this.documentTool = documentTool;
@@ -57,7 +58,12 @@ class KuneContainerListener implements ContainerListener {
         logger.log(Level.INFO, "starting Kune...");
         toolRegistry.register(documentTool);
         persistenceService.start();
-        logger.log(Level.INFO, "started");
+        logger.log(Level.INFO, "Kune server started");
+    }
+
+    public void stop() {
+        logger.log(Level.INFO, "stoping Kune...");
+        logger.log(Level.INFO, "Kune server stoped");
     }
 
     private void configureLog4j() {
@@ -70,10 +76,5 @@ class KuneContainerListener implements ContainerListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void stop() {
-        logger.log(Level.INFO, "stoping Kune...");
-        logger.log(Level.INFO, "stoped");
     }
 }

@@ -56,17 +56,17 @@ public class IconHyperlink extends Widget implements SourcesClickEvents, Abstrac
             final String targetHistoryToken) {
         this(image);
         if (asHTML) {
-            setLabelHTML(text);
+            setLabelHtmlImpl(text);
         } else {
-            setLabelText(text);
+            setLabelTextImpl(text);
         }
-        setTargetHistoryToken(targetHistoryToken);
+        setTargetHistoryTokenImpl(targetHistoryToken);
     }
 
     public IconHyperlink(final AbstractImagePrototype image, final String text, final String targetHistoryToken) {
         this(image);
-        setLabelText(text);
-        setTargetHistoryToken(targetHistoryToken);
+        setLabelTextImpl(text);
+        setTargetHistoryTokenImpl(targetHistoryToken);
     }
 
     public void addClickListener(final ClickListener listener) {
@@ -153,16 +153,15 @@ public class IconHyperlink extends Widget implements SourcesClickEvents, Abstrac
     }
 
     public void setLabelHTML(final String html) {
-        DOM.setInnerHTML(link, html);
+        setLabelHtmlImpl(html);
     }
 
     public void setLabelText(final String text) {
-        DOM.setInnerText(link, text);
+        setLabelTextImpl(text);
     }
 
     public void setTargetHistoryToken(final String targetHistoryToken) {
-        this.targetHistoryToken = targetHistoryToken;
-        DOM.setElementProperty(anchorElem, "href", "#" + targetHistoryToken);
+        setTargetHistoryTokenImpl(targetHistoryToken);
     }
 
     public void setText(final String text) {
@@ -173,5 +172,18 @@ public class IconHyperlink extends Widget implements SourcesClickEvents, Abstrac
     public void setTitle(final String title) {
         KuneUiUtils.setQuickTip(icon, title);
         KuneUiUtils.setQuickTip(anchorElem, title);
+    }
+
+    private void setLabelHtmlImpl(final String html) {
+        DOM.setInnerHTML(link, html);
+    }
+
+    private void setLabelTextImpl(final String text) {
+        DOM.setInnerText(link, text);
+    }
+
+    private void setTargetHistoryTokenImpl(final String targetHistoryToken) {
+        this.targetHistoryToken = targetHistoryToken;
+        DOM.setElementProperty(anchorElem, "href", "#" + targetHistoryToken);
     }
 }

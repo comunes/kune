@@ -282,14 +282,14 @@ public class GridMenuPanel<T> extends Panel {
         }
     }
 
-    private void configureDrag(final GridDragConfiguration gridDragConfiguration) {
+    private void configureDragImpl(final GridDragConfiguration gridDragConfiguration) {
         // TODO: put this in GDConf
         grid.setEnableDragDrop(true);
         grid.setDdGroup(gridDragConfiguration.getDdGroupId());
         grid.setDragDropText(gridDragConfiguration.getDragMessage());
     }
 
-    private void configureDrop(final GridDropConfiguration gridDropConfiguration) {
+    private void configureDropImpl(final GridDropConfiguration gridDropConfiguration) {
         // TODO: put this in GDConf
         grid.setEnableDragDrop(true);
         grid.setDdGroup(gridDropConfiguration.getDdGroupId());
@@ -346,24 +346,24 @@ public class GridMenuPanel<T> extends Panel {
         final String commonTootipHtmlRender = "<span ext:qtitle=\"{1}\" ext:qtip=\"{2}\">{0}</span>";
 
         final Renderer iconHtmlRenderer = new Renderer() {
-            public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
-                    Store store) {
+            public String render(final Object value, final CellMetadata cellMetadata, final Record record,
+                    final int rowIndex, final int colNum, final Store store) {
                 return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(ICON_HTML),
                         record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
             }
         };
 
         final Renderer titleHtmlRenderer = new Renderer() {
-            public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
-                    Store store) {
+            public String render(final Object value, final CellMetadata cellMetadata, final Record record,
+                    final int rowIndex, final int colNum, final Store store) {
                 return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(TITLE_HTML),
                         record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
             }
         };
 
         final Renderer endIconHtmlRenderer = new Renderer() {
-            public String render(Object value, CellMetadata cellMetadata, Record record, int rowIndex, int colNum,
-                    Store store) {
+            public String render(final Object value, final CellMetadata cellMetadata, final Record record,
+                    final int rowIndex, final int colNum, final Store store) {
                 return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(END_ICON_HTML),
                         record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
             }
@@ -398,7 +398,7 @@ public class GridMenuPanel<T> extends Panel {
         grid.addGridRowListener(new GridRowListener() {
             public void onRowClick(final GridPanel grid, final int rowIndex, final EventObject e) {
                 showMenu(rowIndex, e);
-                onClick(rowIndex);
+                onClickImpl(rowIndex);
             }
 
             public void onRowContextMenu(final GridPanel grid, final int rowIndex, final EventObject e) {
@@ -406,7 +406,7 @@ public class GridMenuPanel<T> extends Panel {
             }
 
             public void onRowDblClick(final GridPanel grid, final int rowIndex, final EventObject e) {
-                onDoubleClick(rowIndex);
+                onDoubleClickImpl(rowIndex);
             }
 
             private void showMenu(final int rowIndex, final EventObject e) {
@@ -461,22 +461,22 @@ public class GridMenuPanel<T> extends Panel {
         grid.setAutoHeight(true);
 
         if (gridDropConfiguration != null) {
-            configureDrop(gridDropConfiguration);
+            configureDropImpl(gridDropConfiguration);
         }
         if (gridDragConfiguration != null) {
-            configureDrag(gridDragConfiguration);
+            configureDragImpl(gridDragConfiguration);
         } else {
             grid.setDraggable(false);
         }
         super.add(grid);
     }
 
-    private void onClick(final int rowIndex) {
+    private void onClickImpl(final int rowIndex) {
         final Record record = store.getRecordAt(rowIndex);
         onClick.fire(record.getAsString(ID));
     }
 
-    private void onDoubleClick(final int rowIndex) {
+    private void onDoubleClickImpl(final int rowIndex) {
         final Record record = store.getRecordAt(rowIndex);
         onDoubleClick.fire(record.getAsString(ID));
     }

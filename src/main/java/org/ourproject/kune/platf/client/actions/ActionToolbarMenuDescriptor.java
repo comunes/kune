@@ -42,12 +42,6 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
     public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
             final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
-            final ActionAddCondition<T> addCondition) {
-        super(accessRolDTO, actionToolbarPosition, onPerformCall, addCondition);
-    }
-
-    public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
-            final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
             final ActionEnableCondition<T> enableCondition) {
         super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
@@ -59,17 +53,11 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
 
     public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
             final ActionToolbarPosition actionToolbarPosition, final Listener0 onPerformCall,
-            final ActionAddCondition<T> addCondition) {
-        super(accessRolDTO, actionToolbarPosition, onPerformCall, addCondition);
-    }
-
-    public ActionToolbarMenuDescriptor(final AccessRolDTO accessRolDTO,
-            final ActionToolbarPosition actionToolbarPosition, final Listener0 onPerformCall,
             final ActionEnableCondition<T> enableCondition) {
         super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
 
-    public ActionToolbarMenuDescriptor(ActionDescriptor<T> copy) {
+    public ActionToolbarMenuDescriptor(final ActionDescriptor<T> copy) {
         super(copy);
     }
 
@@ -101,11 +89,11 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
         return topSeparator;
     }
 
-    public void setBottomSeparator(boolean bottomSeparator) {
+    public void setBottomSeparator(final boolean bottomSeparator) {
         this.bottomSeparator = bottomSeparator;
     }
 
-    public void setParentMenuIconCls(String parentMenuIconCls) {
+    public void setParentMenuIconCls(final String parentMenuIconCls) {
         this.parentMenuIconCls = parentMenuIconCls;
     }
 
@@ -117,7 +105,7 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
         this.parentMenuTitle = parentMenuTitle;
     }
 
-    public void setParentMenuTooltip(String parentMenuTooltip) {
+    public void setParentMenuTooltip(final String parentMenuTooltip) {
         this.parentMenuTooltip = parentMenuTooltip;
     }
 
@@ -128,7 +116,7 @@ public class ActionToolbarMenuDescriptor<T> extends ActionToolbarDescriptor<T> {
         this.parentSubMenuTitle = parentSubMenuTitle;
     }
 
-    public void setTopSeparator(boolean topSeparator) {
+    public void setTopSeparator(final boolean topSeparator) {
         this.topSeparator = topSeparator;
     }
 }

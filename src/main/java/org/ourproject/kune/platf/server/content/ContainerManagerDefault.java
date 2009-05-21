@@ -38,6 +38,7 @@ import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.manager.file.FileUtils;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+import org.ourproject.kune.platf.server.manager.impl.ServerManagerException;
 import org.ourproject.kune.platf.server.utils.FilenameUtils;
 
 import com.google.inject.Inject;
@@ -51,7 +52,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     private final Content contentFinder;
 
     @Inject
-    public ContainerManagerDefault(Content contentFinder, Container containerFinder,
+    public ContainerManagerDefault(final Content contentFinder, final Container containerFinder,
             final Provider<EntityManager> provider) {
         super(provider, Container.class);
         this.contentFinder = contentFinder;
@@ -59,7 +60,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     }
 
     public Container createFolder(final Group group, final Container parent, final String name,
-            final I18nLanguage language, String typeId) {
+            final I18nLanguage language, final String typeId) {
         FilenameUtils.checkBasicFilename(name);
         String newtitle = findInexistentName(parent, name);
         final List<Container> parentAbsolutePath = parent.getAbsolutePath();
@@ -90,7 +91,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     }
 
     /** Duplicate code in ContentMD **/
-    public boolean findIfExistsTitle(Container container, String title) {
+    public boolean findIfExistsTitle(final Container container, final String title) {
         return (contentFinder.findIfExistsTitle(container, title) > 0)
                 || (containerFinder.findIfExistsTitle(container, title) > 0);
     }
@@ -100,7 +101,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         FilenameUtils.checkBasicFilename(newName);
         String newNameWithoutNT = FilenameUtils.chomp(newName);
         if (container.isRoot()) {
-            throw new RuntimeException("Root folder cannot be renamed");
+            throw new DefaultException("Root folder cannot be renamed");
         }
         if (findIfExistsTitle(container.getParent(), newNameWithoutNT)) {
             throw new NameInUseException();
@@ -120,19 +121,19 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         try {
             query = parser.parse(search);
         } catch (final ParseException e) {
-            throw new RuntimeException("Error parsing search");
+            throw new ServerManagerException("Error parsing search");
         }
         return super.search(query, firstResult, maxResults);
     }
 
-    public void setAccessList(Container container, AccessLists accessList) {
+    public void setAccessList(final Container container, final AccessLists accessList) {
         container.setAccessLists(accessList);
         persist(container);
     }
 
     /** Duplicate code in ContentMD **/
-    private String findInexistentName(Container container, String title) {
-        String initialTitle = new String(title);
+    private String findInexistentName(final Container container, final String title) {
+        String initialTitle = String.valueOf(title);
         while (findIfExistsTitle(container, initialTitle)) {
             initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
         }

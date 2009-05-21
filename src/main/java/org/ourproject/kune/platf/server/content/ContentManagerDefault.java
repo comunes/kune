@@ -45,6 +45,7 @@ import org.ourproject.kune.platf.server.manager.TagUserContentManager;
 import org.ourproject.kune.platf.server.manager.file.FileUtils;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+import org.ourproject.kune.platf.server.manager.impl.ServerManagerException;
 import org.ourproject.kune.platf.server.utils.FilenameUtils;
 
 import com.google.inject.Inject;
@@ -177,7 +178,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         try {
             query = parser.parse(search);
         } catch (final ParseException e) {
-            throw new RuntimeException("Error parsing search");
+            throw new ServerManagerException("Error parsing search");
         }
         return super.search(query, firstResult, maxResults);
     }
@@ -243,7 +244,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
 
     private String findInexistentTitle(final Container container, final String title) {
-        String initialTitle = new String(title);
+        String initialTitle = String.valueOf(title);
         while (findIfExistsTitle(container, initialTitle)) {
             initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
         }

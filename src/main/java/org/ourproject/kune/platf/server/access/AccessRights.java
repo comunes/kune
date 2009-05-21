@@ -20,45 +20,46 @@
 package org.ourproject.kune.platf.server.access;
 
 public class AccessRights {
-    boolean isAdministrable;
-    boolean isEditable;
-    boolean isVisible;
+    boolean administrable;
+    boolean editable;
+    boolean visible;
 
     public AccessRights() {
         this(false, false, false);
     }
 
-    public AccessRights(final boolean isAdministrable, final boolean isEditable, final boolean isVisible) {
-        this.isAdministrable = isAdministrable;
-        this.isEditable = isEditable;
-        this.isVisible = isVisible;
+    public AccessRights(final boolean administrable, final boolean editable, final boolean visible) {
+        this.administrable = administrable;
+        this.editable = editable;
+        this.visible = visible;
     }
 
     public boolean isAdministrable() {
-        return isAdministrable;
+        return administrable;
     }
 
     public boolean isEditable() {
-        return isEditable;
+        return editable;
     }
 
     public boolean isVisible() {
-        return isVisible;
+        return visible;
     }
 
     public void setAdministrable(final boolean isAdministrable) {
-        this.isAdministrable = isAdministrable;
+        this.administrable = isAdministrable;
     }
 
     public void setEditable(final boolean isEditable) {
-        this.isEditable = isEditable;
+        this.editable = isEditable;
     }
 
     public void setVisible(final boolean isVisible) {
-        this.isVisible = isVisible;
+        this.visible = isVisible;
     }
 
+    @Override
     public String toString() {
-        return "AccessRights[a: " + isAdministrable + ", e: " + isEditable + ", v: " + isVisible + "]";
+        return "AccessRights[a: " + administrable + ", e: " + editable + ", v: " + visible + "]";
     }
 }

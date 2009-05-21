@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.platf.client.i18n;
 
-
 public abstract class I18nTranslationService {
     protected static final String TRANSLATION_NOTE_REGEXP = " (\\[)%NT (.*)(\\])$";
     protected static final String NOTE_FOR_TRANSLATOR_TAG_BEGIN = " [%NT ";
@@ -48,14 +47,14 @@ public abstract class I18nTranslationService {
      * @param text
      * @return text translated in the current language
      */
-    public String t(final String text) {
-        return null;
-    }
+    // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:49
+    public abstract String t(final String text);
 
     /**
      * Use [%d] to reference the Integer parameters
      * 
      */
+    // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
     public String t(final String text, final Integer... args) {
         String translation = t(text);
         for (Integer arg : args) {
@@ -68,6 +67,7 @@ public abstract class I18nTranslationService {
      * Use [%d] to reference the Long parameter
      * 
      */
+    // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
     public String t(final String text, final Long... args) {
         String translation = t(text);
         for (Long arg : args) {
@@ -80,6 +80,7 @@ public abstract class I18nTranslationService {
      * Use [%s] to reference the string parameter
      * 
      */
+    // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
     public String t(final String text, final String... args) {
         String translation = t(text);
         for (String arg : args) {

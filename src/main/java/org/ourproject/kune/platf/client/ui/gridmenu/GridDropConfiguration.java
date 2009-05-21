@@ -51,7 +51,7 @@ public class GridDropConfiguration {
     public GridDropConfiguration(final String ddGroupId, final Listener<String> listener) {
         this.ddGroupId = ddGroupId;
         this.onDrop = new Event<String>("onDrop");
-        this.onDrop(listener);
+        this.onDropImpl(listener);
     }
 
     public void fire(final String id) {
@@ -63,6 +63,10 @@ public class GridDropConfiguration {
     }
 
     public void onDrop(final Listener<String> listener) {
+        onDropImpl(listener);
+    }
+
+    private void onDropImpl(final Listener<String> listener) {
         onDrop.add(listener);
     }
 

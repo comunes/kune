@@ -21,6 +21,11 @@ public class TestButton extends DefaultButton {
             }
             NotifyUser.info("Button clicked");
         }
+
+        @Override
+        public boolean isEnabled() {
+            return super.isEnabled();
+        }
     }
 
     public TestButton(final WorkspaceSkeleton ws) {

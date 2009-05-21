@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.StateToken;
+import org.ourproject.kune.platf.server.ServerException;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
 import org.ourproject.kune.workspace.client.signin.RegisterForm;
@@ -54,16 +55,16 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
             selenium.refresh();
             selenium.windowMaximize();
         } catch (final UnsupportedOperationException e) {
-            System.err.println("Seems that selenium server is not running; run before: 'mvn selenium:start-server' ");
+            new ServerException("Seems that selenium server is not running; run before: 'mvn selenium:start-server' ");
         }
     }
 
-    public void setMustCapture(boolean mustCapture) {
+    public void setMustCapture(final boolean mustCapture) {
         this.mustCapture = mustCapture;
     }
 
-    protected void fillNewGroup1stPage(String shortname, String longName, String description, String tags,
-            GroupType groupType) throws Exception {
+    protected void fillNewGroup1stPage(final String shortname, final String longName, final String description,
+            final String tags, final GroupType groupType) throws Exception {
         type(NewGroupPanel.SHORTNAME_FIELD, shortname);
         type(NewGroupPanel.LONGNAME_FIELD, longName);
         type(NewGroupPanel.PUBLICDESC_FIELD, description);
@@ -95,24 +96,24 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         }
     }
 
-    protected void newGroupRegistrationDefLicense(String shortname, String longName, String description, String tags)
-            throws Exception {
+    protected void newGroupRegistrationDefLicense(final String shortname, final String longName,
+            final String description, final String tags) throws Exception {
         GroupType organization = GroupType.ORGANIZATION;
         signInAndNewGroup();
         fillNewGroup1stPage(shortname, longName, description, tags, organization);
         click(NewGroupPanel.REGISTER_BUTTON);
     }
 
-    protected void open(SiteToken token) {
+    protected void open(final SiteToken token) {
         open(KUNE_BASE_URL + token.toString());
     }
 
-    protected void open(StateToken token) {
+    protected void open(final StateToken token) {
         open(KUNE_BASE_URL + token.toString());
     }
 
     @Override
-    protected void open(String url) {
+    protected void open(final String url) {
         try {
             selenium.setTimeout("0");
             super.open(url);
@@ -127,8 +128,8 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         waitForTextInside(gid(EntityTitlePanel.ENTITY_TITLE_RIGHT_TITLE), "Welcome to kune");
     }
 
-    protected void register(String shortName, String longName, String passwd, String passwdDup, String email,
-            String country, String language, String tz, boolean wantHomepage) {
+    protected void register(final String shortName, final String longName, final String passwd, final String passwdDup,
+            final String email, final String country, final String language, final String tz, final boolean wantHomepage) {
         click(gid(SiteSignInLinkPanel.SITE_SIGN_IN));
         click(gid(SignInPanel.CREATE_ONE));
         type(RegisterForm.NICK_FIELD, shortName);
@@ -159,7 +160,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         click(RegisterPanel.REGISTER_BUTTON_ID);
     }
 
-    protected String registerValidUser(boolean wantHomepage) {
+    protected String registerValidUser(final boolean wantHomepage) {
         String shortName = "u" + genPrefix();
         register(shortName, "some name " + genPrefix(), "somepasswd", "somepasswd", genPrefix() + "@example.com",
                 "Andorra", "English", "MET", wantHomepage);
@@ -170,7 +171,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         signIn("admin", "easyeasy");
     }
 
-    protected void signIn(String nick, String passwd) {
+    protected void signIn(final String nick, final String passwd) {
         click(gid(SiteSignInLinkPanel.SITE_SIGN_IN));
         type(SignInForm.NICKOREMAIL_FIELD, nick);
         type(SignInForm.PASSWORD_FIELD, passwd);
@@ -189,7 +190,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
         click("gwt-debug-k-ssolp-lb");
     }
 
-    protected void verifyLoggedUserShorName(String userShortName) throws Exception {
+    protected void verifyLoggedUserShorName(final String userShortName) throws Exception {
         waitForTextInside(gid(SiteUserMenuPanel.LOGGED_USER_MENU), userShortName);
     }
 }

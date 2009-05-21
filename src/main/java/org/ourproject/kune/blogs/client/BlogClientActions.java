@@ -104,4 +104,8 @@ public class BlogClientActions extends AbstractFoldableContentActions {
         createDelContentAction(parentMenuTitle, i18n.t("Delete"), contents);
         createShowDeletedItems(parentMenuTitleCtx, all);
     }
+
+    @Override
+    protected void createPostSessionInitActions() {
+    }
 }

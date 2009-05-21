@@ -24,51 +24,11 @@ import org.ourproject.kune.platf.client.services.Images;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public class Star {
-    private static final Images img = Images.App.getInstance();
+    private static final Images IMG = Images.App.getInstance();
     public static final int GREY = 0;
     public static final int YELLOW = 1;
 
     public final static Star[] CLEAR = { new Star(), new Star(), new Star(), new Star(), new Star() };
-
-    private AbstractImagePrototype image;
-
-    public Star() {
-        image = img.starGrey();
-    }
-
-    public AbstractImagePrototype getImage() {
-        return image;
-    }
-
-    public Star(final double rateDecimals) {
-        if (rateDecimals == 1) {
-            image = img.starYellow();
-        } else if (rateDecimals == 0) {
-            image = img.starGrey();
-        } else {
-            final int rateTrucated = (int) rateDecimals;
-            final int rateDecimal = (int) ((rateDecimals - rateTrucated) * 10) * 10;
-            if (rateDecimal == 10) {
-                image = img.star10();
-            } else if (rateDecimal == 20) {
-                image = img.star20();
-            } else if (rateDecimal == 30) {
-                image = img.star30();
-            } else if (rateDecimal == 40) {
-                image = img.star40();
-            } else if (rateDecimal == 50) {
-                image = img.star50();
-            } else if (rateDecimal == 60) {
-                image = img.star60();
-            } else if (rateDecimal == 70) {
-                image = img.star70();
-            } else if (rateDecimal == 80) {
-                image = img.star80();
-            } else if (rateDecimal == 90) {
-                image = img.star90();
-            }
-        }
-    }
 
     public static Star[] genStars(final double rate) {
         Star[] stars;
@@ -88,5 +48,45 @@ public class Star {
             }
         }
         return stars;
+    }
+
+    private transient AbstractImagePrototype image;
+
+    public Star() {
+        image = IMG.starGrey();
+    }
+
+    public Star(final double rateDecimals) {
+        if (rateDecimals == 1) {
+            image = IMG.starYellow();
+        } else if (rateDecimals == 0) {
+            image = IMG.starGrey();
+        } else {
+            final int rateTrucated = (int) rateDecimals;
+            final int rateDecimal = (int) ((rateDecimals - rateTrucated) * 10) * 10;
+            if (rateDecimal == 10) {
+                image = IMG.star10();
+            } else if (rateDecimal == 20) {
+                image = IMG.star20();
+            } else if (rateDecimal == 30) {
+                image = IMG.star30();
+            } else if (rateDecimal == 40) {
+                image = IMG.star40();
+            } else if (rateDecimal == 50) {
+                image = IMG.star50();
+            } else if (rateDecimal == 60) {
+                image = IMG.star60();
+            } else if (rateDecimal == 70) {
+                image = IMG.star70();
+            } else if (rateDecimal == 80) {
+                image = IMG.star80();
+            } else if (rateDecimal == 90) {
+                image = IMG.star90();
+            }
+        }
+    }
+
+    public AbstractImagePrototype getImage() {
+        return image;
     }
 }

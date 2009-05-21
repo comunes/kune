@@ -42,8 +42,8 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
     private final Provider<UserServiceAsync> userServiceProvider;
     private final Provider<Register> registerProvider;
 
-    public SignInPresenter(Session session, StateManager stateManager, I18nUITranslationService i18n,
-            Provider<UserServiceAsync> userServiceProvider, Provider<Register> registerProvider) {
+    public SignInPresenter(final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
+            final Provider<UserServiceAsync> userServiceProvider, final Provider<Register> registerProvider) {
         super(session, stateManager, i18n);
         this.userServiceProvider = userServiceProvider;
         this.registerProvider = registerProvider;
@@ -66,7 +66,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
         return view;
     }
 
-    public void init(SignInView view) {
+    public void init(final SignInView view) {
         this.view = view;
         super.view = view;
     }
@@ -93,11 +93,9 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
                 public void onFailure(final Throwable caught) {
                     view.unMask();
                     NotifyUser.hideProgress();
-                    try {
-                        throw caught;
-                    } catch (final UserAuthException e) {
+                    if (caught instanceof UserAuthException) {
                         view.setErrorMessage(i18n.t(PlatfMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD), Level.error);
-                    } catch (final Throwable e) {
+                    } else {
                         view.setErrorMessage("Error in login", Level.error);
                         Log.error("Other kind of exception in SignInPresenter/doLogin");
                     }

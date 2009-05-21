@@ -87,7 +87,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     public void changeDefLicense(final User user, final Group group, final String licName) {
         final License license = licenseFinder.findByShortName(licName);
         if (license == null) {
-            throw new RuntimeException("Unknown license");
+            throw new ServerManagerException("Unknown license");
         }
         group.setDefaultLicense(license);
     }
@@ -191,7 +191,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         try {
             query = parser.parse(search);
         } catch (final ParseException e) {
-            throw new RuntimeException("Error parsing search");
+            throw new ServerManagerException("Error parsing search");
         }
         return super.search(query, firstResult, maxResults);
     }

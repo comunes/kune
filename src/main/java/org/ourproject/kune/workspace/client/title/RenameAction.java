@@ -40,7 +40,8 @@ public class RenameAction {
     private final Event2<StateToken, String> onSuccess;
     private final Event2<StateToken, String> onFail;
 
-    public RenameAction(I18nTranslationService i18n, Session session, Provider<ContentServiceAsync> contentService) {
+    public RenameAction(final I18nTranslationService i18n, final Session session,
+            final Provider<ContentServiceAsync> contentService) {
         this.i18n = i18n;
         this.session = session;
         this.contentService = contentService;
@@ -62,15 +63,13 @@ public class RenameAction {
             final AsyncCallback<StateAbstractDTO> asyncCallback = new AsyncCallback<StateAbstractDTO>() {
                 public void onFailure(final Throwable caught) {
                     NotifyUser.hideProgress();
-                    try {
-                        throw caught;
-                    } catch (final NameInUseException e) {
+                    if (caught instanceof NameInUseException) {
                         NotifyUser.error(i18n.tWithNT("This name already exists",
                                 "It is used when a file or a folder with the same name already exists"));
-                    } catch (final NameNotPermittedException e) {
+                    } else if (caught instanceof NameNotPermittedException) {
                         NotifyUser.error(i18n.tWithNT("This name is not permitted",
                                 "It is used when a file or a folder does not have a permitted name"));
-                    } catch (final Throwable e) {
+                    } else {
                         NotifyUser.error(i18n.t("Error renaming"));
                     }
                     onFail.fire(token, oldName);

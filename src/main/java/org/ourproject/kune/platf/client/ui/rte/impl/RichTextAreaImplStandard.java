@@ -118,6 +118,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }
 
     @Override
+    // @PMD:REVIEWED:EmptyMethodInAbstractClassShouldBeAbstract: by vjrj on 21/05/09 13:58
     public boolean isBasicEditingSupported() {
         return true;
     }
@@ -127,6 +128,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }
 
     @Override
+    // @PMD:REVIEWED:EmptyMethodInAbstractClassShouldBeAbstract: by vjrj on 21/05/09 13:58
     public boolean isExtendedEditingSupported() {
         return true;
     }

@@ -21,21 +21,15 @@ package org.ourproject.kune.platf.client.actions;
 
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
-import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
 public class ActionToolbarMenuCheckItemDescriptor<T> extends ActionToolbarMenuDescriptor<T> {
 
     private final ActionCheckedCondition mustBeChecked;
 
-    public ActionToolbarMenuCheckItemDescriptor(AccessRolDTO accessRol, ActionToolbarPosition toolbarPosition,
-            Listener<T> onPerformCall, ActionCheckedCondition mustBeChecked) {
-        super(accessRol, toolbarPosition, onPerformCall);
-        this.mustBeChecked = mustBeChecked;
-    }
-
-    public ActionToolbarMenuCheckItemDescriptor(AccessRolDTO accessRol, ActionToolbarPosition toolbarPosition,
-            Listener0 onPerformCall, ActionCheckedCondition mustBeChecked) {
+    public ActionToolbarMenuCheckItemDescriptor(final AccessRolDTO accessRol,
+            final ActionToolbarPosition toolbarPosition, final Listener0 onPerformCall,
+            final ActionCheckedCondition mustBeChecked) {
         super(accessRol, toolbarPosition, onPerformCall);
         this.mustBeChecked = mustBeChecked;
     }

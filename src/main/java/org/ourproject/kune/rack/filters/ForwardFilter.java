@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.ourproject.kune.rack.RackHelper;
 
-public class ForwardFilter extends InjectedFilter {
+public class ForwardFilter extends AbstractInjectedFilter {
     // private static final Log log = LogFactory.getLog(ForwardFilter.class);
 
     private final String forward;
@@ -44,6 +44,10 @@ public class ForwardFilter extends InjectedFilter {
     public ForwardFilter(final String pattern, final String forward) {
         this.forward = forward;
         this.pattern = Pattern.compile(pattern);
+    }
+
+    @Override
+    public void destroy() {
     }
 
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)

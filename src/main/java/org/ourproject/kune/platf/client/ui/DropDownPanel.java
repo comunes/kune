@@ -37,55 +37,56 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  */
 public class DropDownPanel extends Composite implements ClickListener {
-    private final VerticalPanel vp;
-    private final HorizontalPanel titleHP;
-    private final Label titleLabel;
-    private final SimplePanel contentPanel;
-    private final Images img;
-    private final Image arrowImage;
-    private final RoundedPanel outerBorder;
-    private String stylePrimaryName;
+    private transient final VerticalPanel vpanel;
+    private transient final HorizontalPanel titleHP;
+    private transient final Label titleLabel;
+    private transient final SimplePanel contentPanel;
+    private transient final Images img;
+    private transient final Image arrowImage;
+    private transient final RoundedPanel outerBorder;
+    private transient String stylePrimaryName;
 
-    public DropDownPanel(Images img) {
+    public DropDownPanel(final Images img) {
+        super();
         this.img = img;
-        vp = new VerticalPanel();
-        outerBorder = new RoundedPanel(vp, RoundedPanel.ALL);
+        vpanel = new VerticalPanel();
+        outerBorder = new RoundedPanel(vpanel, RoundedPanel.ALL);
         titleHP = new HorizontalPanel();
         arrowImage = new Image();
         titleLabel = new Label();
         contentPanel = new SimplePanel();
 
         initWidget(outerBorder);
-        vp.add(titleHP);
-        vp.add(contentPanel);
+        vpanel.add(titleHP);
+        vpanel.add(contentPanel);
         titleHP.add(arrowImage);
         titleHP.add(titleLabel);
 
         this.stylePrimaryName = "k-dropdownouter";
         outerBorder.setCornerStyleName(stylePrimaryName);
-        vp.setStylePrimaryName(stylePrimaryName);
-        vp.setWidth("100%");
-        vp.setCellWidth(contentPanel, "100%");
-        vp.setCellWidth(titleHP, "100%");
+        vpanel.setStylePrimaryName(stylePrimaryName);
+        vpanel.setWidth("100%");
+        vpanel.setCellWidth(contentPanel, "100%");
+        vpanel.setCellWidth(titleHP, "100%");
         titleHP.setStylePrimaryName("k-dropdownlabel");
         img.arrowDownWhite().applyTo(arrowImage);
         titleLabel.setText("");
         contentPanel.setStylePrimaryName("k-dropdowninner");
 
-        setContentVisible(false);
+        setContentVisibleImpl(false);
         arrowImage.addClickListener(this);
         titleLabel.addClickListener(this);
     }
 
-    public DropDownPanel(Images img, final boolean visible) {
+    public DropDownPanel(final Images img, final boolean visible) {
         this(img);
-        setContentVisible(visible);
+        setContentVisibleImpl(visible);
     }
 
-    public DropDownPanel(Images img, final String headerText, final boolean visible) {
+    public DropDownPanel(final Images img, final String headerText, final boolean visible) {
         this(img);
-        setContentVisible(visible);
-        setHeaderText(headerText);
+        setContentVisibleImpl(visible);
+        setHeaderTextImpl(headerText);
     }
 
     public boolean isContentVisible() {
@@ -93,7 +94,7 @@ public class DropDownPanel extends Composite implements ClickListener {
     }
 
     public void onClick(final Widget sender) {
-        if (sender == titleHP | sender == arrowImage | sender == titleLabel) {
+        if (sender.equals(titleHP) | sender.equals(arrowImage) | sender.equals(titleLabel)) {
             setContentVisible(!isContentVisible());
         }
     }
@@ -101,7 +102,7 @@ public class DropDownPanel extends Composite implements ClickListener {
     public void setBorderStylePrimaryName(final String stylePrimaryName) {
         this.stylePrimaryName = stylePrimaryName;
         outerBorder.setCornerStyleName(stylePrimaryName);
-        vp.setStylePrimaryName(stylePrimaryName);
+        vpanel.setStylePrimaryName(stylePrimaryName);
     }
 
     public void setContent(final Widget widget) {
@@ -115,18 +116,11 @@ public class DropDownPanel extends Composite implements ClickListener {
     }
 
     public void setContentVisible(final boolean visible) {
-        if (visible) {
-            img.arrowDownWhite().applyTo(arrowImage);
-            contentPanel.setVisible(true);
-
-        } else {
-            img.arrowRightWhite().applyTo(arrowImage);
-            contentPanel.setVisible(false);
-        }
+        setContentVisibleImpl(visible);
     }
 
     public void setHeaderText(final String text) {
-        titleLabel.setText(text);
+        setHeaderTextImpl(text);
     }
 
     public void setHeaderTitle(final String title) {
@@ -144,13 +138,13 @@ public class DropDownPanel extends Composite implements ClickListener {
     public void setTheme(final String oldTheme, final String newTheme) {
         if (oldTheme != null) {
             // outerBorder.removeStyleDependentName(oldThemeS);
-            vp.removeStyleDependentName(oldTheme);
+            vpanel.removeStyleDependentName(oldTheme);
             titleHP.removeStyleDependentName(oldTheme);
             contentPanel.removeStyleDependentName(oldTheme);
         }
         outerBorder.setCornerStyleName(stylePrimaryName + "-" + newTheme);
         // outerBorder.addStyleDependentName(newThemeS);
-        vp.addStyleDependentName(newTheme);
+        vpanel.addStyleDependentName(newTheme);
         titleHP.addStyleDependentName(newTheme);
         contentPanel.addStyleDependentName(newTheme);
     }
@@ -159,6 +153,21 @@ public class DropDownPanel extends Composite implements ClickListener {
     public void setWidth(final String width) {
         super.setWidth(width);
         outerBorder.setWidth(width);
+    }
+
+    private void setContentVisibleImpl(final boolean visible) {
+        if (visible) {
+            img.arrowDownWhite().applyTo(arrowImage);
+            contentPanel.setVisible(true);
+
+        } else {
+            img.arrowRightWhite().applyTo(arrowImage);
+            contentPanel.setVisible(false);
+        }
+    }
+
+    private void setHeaderTextImpl(final String text) {
+        titleLabel.setText(text);
     }
 
 }

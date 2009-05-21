@@ -41,10 +41,10 @@ public class RatePanel extends Composite implements RateView {
         layout();
         setProperties();
         if (rate != null) {
-            setRate(rate);
+            setRateImpl(rate);
         }
         if (byUsers != null) {
-            setByUsers(byUsers);
+            setByUsersImpl(byUsers);
         }
         final Toolbar bottomBar = ws.getEntityWorkspace().getContentBottomBar();
         bottomBar.addFill();
@@ -52,18 +52,11 @@ public class RatePanel extends Composite implements RateView {
     }
 
     public void setByUsers(final Integer byUsers) {
-        if (byUsers.intValue() == 0) {
-            rateDesc.setText(i18n.t("(Not rated)"));
-        } else if (byUsers.intValue() == 1) {
-            // i18n params pluralization
-            rateDesc.setText(i18n.t("([%d] user)", byUsers));
-        } else {
-            rateDesc.setText(i18n.t("([%d] users)", byUsers));
-        }
+        setByUsersImpl(byUsers);
     }
 
     public void setRate(final Double rate) {
-        setRate(Star.genStars(rate.doubleValue()));
+        setRateImpl(rate);
     }
 
     private void initialize() {
@@ -84,6 +77,17 @@ public class RatePanel extends Composite implements RateView {
         rateGrid.setWidget(0, 5, rateDesc);
     }
 
+    private void setByUsersImpl(final Integer byUsers) {
+        if (byUsers.intValue() == 0) {
+            rateDesc.setText(i18n.t("(Not rated)"));
+        } else if (byUsers.intValue() == 1) {
+            // i18n params pluralization
+            rateDesc.setText(i18n.t("([%d] user)", byUsers));
+        } else {
+            rateDesc.setText(i18n.t("([%d] users)", byUsers));
+        }
+    }
+
     private void setProperties() {
         rateGrid.setCellPadding(0);
         rateGrid.setCellSpacing(0);
@@ -93,7 +97,11 @@ public class RatePanel extends Composite implements RateView {
         rateDesc.addStyleName("kune-Margin-Small-lr");
     }
 
-    private void setRate(final Star stars[]) {
+    private void setRateImpl(final Double rate) {
+        setRateImpl(Star.genStars(rate.doubleValue()));
+    }
+
+    private void setRateImpl(final Star stars[]) {
         for (int i = 0; i < 5; i++) {
             stars[i].getImage().applyTo(starImg[i]);
         }

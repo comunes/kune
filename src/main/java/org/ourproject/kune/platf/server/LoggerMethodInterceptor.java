@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class LoggerMethodInterceptor implements MethodInterceptor {
 
-    private static final Log log = LogFactory.getLog(LoggerMethodInterceptor.class);
+    private static final Log LOG = LogFactory.getLog(LoggerMethodInterceptor.class);
     private final boolean simplifyNames;
 
     public LoggerMethodInterceptor() {
@@ -40,17 +40,17 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     public Object invoke(final MethodInvocation invocation) throws Throwable {
         logInvocation(invocation);
         try {
-            Object result = invocation.proceed();
+            final Object result = invocation.proceed();
             logResult(invocation, result);
             return result;
-        } catch (Throwable e) {
+        } catch (Exception e) {
             logException(invocation, e);
             throw e;
         }
     }
 
     protected void log(final String output) {
-        log.debug(output);
+        LOG.debug(output);
     }
 
     protected void logException(final MethodInvocation invocation, final Throwable e) {

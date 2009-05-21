@@ -26,17 +26,17 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserBuddiesDataDTO implements IsSerializable {
 
-    public static UserBuddiesDataDTO NO_BUDDIES = new UserBuddiesDataDTO();
+    public static final UserBuddiesDataDTO NO_BUDDIES = new UserBuddiesDataDTO();
 
     private List<UserSimpleDTO> buddies;
-    int otherExternalBuddies;
+    private int otherExtBuddies;
 
     public UserBuddiesDataDTO() {
         buddies = new ArrayList<UserSimpleDTO>();
-        otherExternalBuddies = 0;
+        otherExtBuddies = 0;
     }
 
-    public boolean contains(String shortName) {
+    public boolean contains(final String shortName) {
         for (UserSimpleDTO buddie : buddies) {
             if (buddie.getShortName().equals(shortName)) {
                 return true;
@@ -49,20 +49,20 @@ public class UserBuddiesDataDTO implements IsSerializable {
         return buddies;
     }
 
-    public int getOtherExternalBuddies() {
-        return otherExternalBuddies;
+    public int getOtherExtBuddies() {
+        return otherExtBuddies;
     }
 
-    public void setBuddies(List<UserSimpleDTO> buddies) {
+    public void setBuddies(final List<UserSimpleDTO> buddies) {
         this.buddies = buddies;
     }
 
-    public void setOtherExternalBuddies(int otherExternalBuddies) {
-        this.otherExternalBuddies = otherExternalBuddies;
+    public void setOtherExtBuddies(final int otherExternalBuddies) {
+        this.otherExtBuddies = otherExternalBuddies;
     }
 
     @Override
     public String toString() {
-        return "UserBuddiesDataDTO[ext: " + otherExternalBuddies + " / int: " + buddies + "]";
+        return "UserBuddiesDataDTO[ext: " + otherExtBuddies + " / int: " + buddies + "]";
     }
 }

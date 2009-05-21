@@ -21,6 +21,8 @@ package org.ourproject.kune.rack.filters.rest;
 
 import java.lang.reflect.Method;
 
+import org.ourproject.kune.platf.server.ServerException;
+
 public class RESTMethod {
     public static final String FORMAT_JSON = "json";
     public static final String FORMAT_XML = "xml";
@@ -31,20 +33,40 @@ public class RESTMethod {
     private Object response;
     private final String format;
 
-    public RESTMethod(Method method, String[] names, Parameters parameters, String format) {
+    public RESTMethod(final Method method, final String[] names, final Parameters parameters, final String format) {
         this.method = method;
         this.names = names;
         this.parameters = parameters;
         this.format = format;
     }
 
-    public boolean invoke(Object service) {
+    public String getFormat() {
+        return format;
+    }
+
+    public Object getResponse() {
+        return response;
+    }
+
+    public boolean invoke(final Object service) {
         Object[] values = convertParameters();
         try {
             response = method.invoke(service, values);
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    private Object convert(final Class<?> type, final String stringValue) {
+        if (type.equals(String.class)) {
+            return stringValue;
+        } else if (type.equals(Integer.TYPE) || type.equals(Integer.class)) {
+            return Integer.parseInt(stringValue);
+        } else if (type.equals(Long.TYPE) || type.equals(Long.class)) {
+            return Long.parseLong(stringValue);
+        } else {
+            throw new ServerException("unable to convert parameter in JSON method to type: " + type);
         }
     }
 
@@ -58,26 +80,6 @@ public class RESTMethod {
         }
 
         return values;
-    }
-
-    private Object convert(Class<?> type, String stringValue) {
-        if (type.equals(String.class)) {
-            return stringValue;
-        } else if (type.equals(Integer.TYPE) || type.equals(Integer.class)) {
-            return Integer.parseInt(stringValue);
-        } else if (type.equals(Long.TYPE) || type.equals(Long.class)) {
-            return Long.parseLong(stringValue);
-        } else {
-            throw new RuntimeException("unable to convert parameter in JSON method to type: " + type);
-        }
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public Object getResponse() {
-        return response;
     }
 
 }

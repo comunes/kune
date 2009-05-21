@@ -128,7 +128,7 @@ public class User implements HasId {
         customProperties = new CustomProperties();
         buddiesVisibility = UserBuddiesVisibility.anyone;
         this.createdOn = System.currentTimeMillis();
-        this.setLastLogin(null);
+        this.lastLogin = null;
     }
 
     @Finder(query = "from User")

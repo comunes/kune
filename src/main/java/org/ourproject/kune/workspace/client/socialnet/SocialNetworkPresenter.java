@@ -74,7 +74,7 @@ public class SocialNetworkPresenter {
 
     public SocialNetworkPresenter(final I18nTranslationService i18n, final StateManager stateManager,
             final Session session, final Provider<SocialNetworkServiceAsync> snServiceProvider,
-            GroupActionRegistry groupActionRegistry, final Provider<FileDownloadUtils> downloadProvider) {
+            final GroupActionRegistry groupActionRegistry, final Provider<FileDownloadUtils> downloadProvider) {
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.session = session;
@@ -128,23 +128,18 @@ public class SocialNetworkPresenter {
         return gridItem;
     }
 
-    protected String createTooltipWithLogo(String shortName, StateToken token, boolean hasLogo, boolean isPersonal) {
+    protected String createTooltipWithLogo(final String shortName, final StateToken token, final boolean hasLogo,
+            final boolean isPersonal) {
         return "<table><tr><td>"
                 + (hasLogo ? downloadProvider.get().getLogoAvatarHtml(token, hasLogo, isPersonal,
                         FileConstants.LOGO_ICON_DEFAULT_HEIGHT, 3) : "") + "</td><td>"
                 + i18n.t(isPersonal ? "Nickname: [%s]" : "Group short name: [%s]", shortName) + "</td></tr></table>";
     }
 
-    protected boolean isMember(AccessRightsDTO rights) {
-        boolean userIsAdmin = rights.isAdministrable();
-        final boolean userIsCollab = !userIsAdmin && rights.isEditable();
-        return isMember(userIsAdmin, userIsCollab);
-    }
-
     private void createButtons() {
         participate = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, membersBottom,
                 new Listener<StateToken>() {
-                    public void onEvent(StateToken parameter) {
+                    public void onEvent(final StateToken parameter) {
                         NotifyUser.showProgressProcessing();
                         snServiceProvider.get().requestJoinGroup(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), new AsyncCallbackSimple<Object>() {
@@ -172,14 +167,14 @@ public class SocialNetworkPresenter {
         participate.setToolTip(i18n.t("Request to participate in this group"));
         participate.setMustBeAuthenticated(false);
         participate.setAddCondition(new ActionAddCondition<StateToken>() {
-            public boolean mustBeAdded(StateToken token) {
+            public boolean mustBeAdded(final StateToken token) {
                 return !isMember(session.getCurrentState().getGroupRights());
             }
         });
 
         unJoin = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Editor, membersBottom,
                 new Listener<StateToken>() {
-                    public void onEvent(StateToken parameter) {
+                    public void onEvent(final StateToken parameter) {
                         removeMemberAction();
                     }
                 });
@@ -320,6 +315,12 @@ public class SocialNetworkPresenter {
                                 });
                     }
                 });
+    }
+
+    private boolean isMember(final AccessRightsDTO rights) {
+        boolean userIsAdmin = rights.isAdministrable();
+        final boolean userIsCollab = !userIsAdmin && rights.isEditable();
+        return isMember(userIsAdmin, userIsCollab);
     }
 
     private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {

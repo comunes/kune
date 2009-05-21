@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
  */
 public class RichTextAreaImplSafari extends RichTextAreaImplStandard {
 
+    // @PMD:REVIEWED:VariableNamingConventions: by vjrj on 21/05/09 16:12
     private static final String[] sizeNumberCSSValues = new String[] { "medium", "xx-small", "x-small", "small",
             "medium", "large", "x-large", "xx-large" };
 

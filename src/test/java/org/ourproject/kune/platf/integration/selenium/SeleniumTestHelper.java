@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.integration.selenium;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.ourproject.kune.platf.server.ServerException;
 
 import com.google.gwt.user.client.ui.UIObject;
 import com.thoughtworks.selenium.DefaultSelenium;
@@ -12,7 +13,7 @@ public class SeleniumTestHelper {
     private static boolean mustStopFinally = true;
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         if (mustStopFinally) {
             selenium.stop();
         }
@@ -49,22 +50,22 @@ public class SeleniumTestHelper {
         selenium.start();
     }
 
-    public static void setMustStopFinally(boolean mustStopFinally) {
+    public static void setMustStopFinally(final boolean mustStopFinally) {
         SeleniumTestHelper.mustStopFinally = mustStopFinally;
     }
 
-    protected void click(String id) {
+    protected void click(final String id) {
         selenium.click(id);
     }
 
-    protected void clickOnPushButton(String id) {
+    protected void clickOnPushButton(final String id) {
         selenium.mouseOver(id);
         selenium.mouseDown(id);
         selenium.mouseUp(id);
     }
 
-    protected void fail(String message) throws Exception {
-        throw new Exception(message);
+    protected void fail(final String message) throws Exception {
+        throw new ServerException(message);
     }
 
     /**
@@ -73,31 +74,32 @@ public class SeleniumTestHelper {
      * @param id
      * @return
      */
-    protected String gid(String id) {
+    protected String gid(final String id) {
         return UIObject.DEBUG_ID_PREFIX + id;
     }
 
-    protected String linkId(String link) {
+    protected String linkId(final String link) {
         return "link=" + link;
     }
 
-    protected void open(String url) {
+    protected void open(final String url) {
         try {
             selenium.open(url);
         } catch (final UnsupportedOperationException e) {
-            System.err.println("Seems that selenium server is not running; run before: 'mvn selenium:start-server' ");
+            new ServerException("Seems that selenium server is not running; run before: 'mvn selenium:start-server' ",
+                    e);
         }
     }
 
-    protected void setSpeed(int milliseconds) {
+    protected void setSpeed(final int milliseconds) {
         selenium.setSpeed("" + milliseconds);
     }
 
-    protected void type(String id, String text) {
+    protected void type(final String id, final String text) {
         selenium.type(id, text);
     }
 
-    protected void wait(int milliseconds) {
+    protected void wait(final int milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
@@ -106,7 +108,7 @@ public class SeleniumTestHelper {
         }
     }
 
-    protected void waitForTextInside(String id, String text) throws Exception {
+    protected void waitForTextInside(final String id, final String text) throws Exception {
         for (int second = 0;; second++) {
             if (second >= 60) {
                 fail("timeout");
@@ -122,7 +124,7 @@ public class SeleniumTestHelper {
         }
     }
 
-    protected void waitForTextRegExp(String id, String text) throws Exception {
+    protected void waitForTextRegExp(final String id, final String text) throws Exception {
         for (int second = 0;; second++) {
             if (second >= 60) {
                 fail("timeout");

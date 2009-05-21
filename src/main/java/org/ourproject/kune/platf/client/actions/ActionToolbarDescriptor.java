@@ -64,13 +64,13 @@ public abstract class ActionToolbarDescriptor<T> extends ActionDescriptor<T> {
         this.actionToolbarPosition = actionToolbarPosition;
     }
 
-    public ActionToolbarDescriptor(ActionDescriptor<T> copy) {
+    public ActionToolbarDescriptor(final ActionDescriptor<T> copy) {
         super(copy);
     }
 
-    public ActionToolbarDescriptor(ActionToolbarDescriptor<T> copy) {
+    public ActionToolbarDescriptor(final ActionToolbarDescriptor<T> copy) {
         super(copy);
-        setActionPosition(copy.getActionPosition());
+        this.actionToolbarPosition = copy.getActionPosition();
     }
 
     public ActionToolbarPosition getActionPosition() {

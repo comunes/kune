@@ -21,12 +21,16 @@ package org.ourproject.kune.chat.server.managers;
 
 import java.util.Iterator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smackx.Form;
 import org.jivesoftware.smackx.FormField;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
 class RoomConfigurationDumper {
+
+    private static final Log LOG = LogFactory.getLog(RoomConfigurationDumper.class);
 
     public static void showConfiguration(final Form form) {
         for (Iterator<FormField> fields = form.getFields(); fields.hasNext();) {
@@ -50,7 +54,7 @@ class RoomConfigurationDumper {
     }
 
     private static void log(final String string) {
-        System.out.println(string);
+        LOG.debug(string);
     }
 
     void configure2(final MultiUserChat muc) throws XMPPException {

@@ -77,9 +77,9 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
         assertEquals(0, userFinder.getAll().size());
         assertEquals(0, groupFinder.getAll().size());
         assertEquals(0, licenseFinder.getAll().size());
-        english = new I18nLanguage(new Long(1819), "English", "English", "en");
+        english = new I18nLanguage(Long.valueOf(1819), "English", "English", "en");
         languageManager.persist(english);
-        gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western", ",");
+        gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western", ",");
         countryManager.persist(gb);
         user = userManager.createUser(USER_SHORT_NAME, USER_LONG_NAME, USER_EMAIL, USER_PASSWORD, "en", "GB",
                 TimeZone.getDefault().getID());

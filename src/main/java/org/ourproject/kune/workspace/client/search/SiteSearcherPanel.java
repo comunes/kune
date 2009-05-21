@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.search;
 
+import org.ourproject.kune.platf.client.errors.UIException;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
@@ -188,13 +189,11 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
         searchField.addListener(new FieldListenerAdapter() {
 
             @Override
-            public void onSpecialKey(final Field field, final EventObject e) {
-                switch (e.getKey()) {
-                case KeyboardListener.KEY_ENTER:
+            public void onSpecialKey(final Field field, final EventObject event) {
+                if (event.getKey() == KeyboardListener.KEY_ENTER) {
                     presenter.doSearch(field.getValueAsString());
-                    break;
                 }
-                e.stopEvent();
+                event.stopEvent();
             }
 
         });
@@ -204,7 +203,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
         searchBtn.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
-                presenter.doSearch(getTextToSearch());
+                presenter.doSearch(searchField.getValueAsString());
             }
         });
         hp.add(form);
@@ -229,7 +228,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
             store = contentStore = createStore(fieldDefs, SearcherConstants.CONTENT_DATA_PROXY_URL, id);
             break;
         default:
-            throw new RuntimeException("Unknown type of search");
+            throw new UIException("Unknown type of search");
         }
 
         final ColumnModel columnModel = new ColumnModel(new ColumnConfig[] { new ColumnConfig() {

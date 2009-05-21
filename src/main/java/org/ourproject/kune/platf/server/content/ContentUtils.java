@@ -21,13 +21,18 @@ package org.ourproject.kune.platf.server.content;
 
 import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 
-public class ContentUtils {
+public final class ContentUtils {
 
+    // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 14:05
     public static Long parseId(final String id) throws ContentNotFoundException {
         try {
-            return new Long(id);
+            return Long.valueOf(id);
         } catch (final NumberFormatException e) {
+            // @PMD:REVIEWED:PreserveStackTrace: by vjrj on 21/05/09 14:05
             throw new ContentNotFoundException();
         }
+    }
+
+    private ContentUtils() {
     }
 }

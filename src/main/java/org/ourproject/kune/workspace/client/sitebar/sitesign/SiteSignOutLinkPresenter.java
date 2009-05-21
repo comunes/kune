@@ -26,6 +26,7 @@ import org.ourproject.kune.platf.client.actions.BeforeActionCollection;
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.SessionExpiredException;
+import org.ourproject.kune.platf.client.errors.UIException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.services.ErrorHandler;
@@ -35,21 +36,20 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 
-    private SiteSignOutLinkView view;
-    private final Session session;
-    private final Provider<UserServiceAsync> userServiceProvider;
-    private final BeforeActionCollection beforeSignOutCollection;
+    private transient SiteSignOutLinkView view;
+    private transient final Session session;
+    private transient final Provider<UserServiceAsync> userService;
+    private transient final BeforeActionCollection beforeSignOut;
 
-    public SiteSignOutLinkPresenter(final Session session, final Provider<UserServiceAsync> userServiceProvider,
-            final Provider<ErrorHandler> kuneErrorHandlerProvider) {
+    public SiteSignOutLinkPresenter(final Session session, final Provider<UserServiceAsync> userService,
+            final Provider<ErrorHandler> errorHandler) {
         this.session = session;
-        this.userServiceProvider = userServiceProvider;
+        this.userService = userService;
         session.onUserSignIn(new Listener<UserInfoDTO>() {
             public void onEvent(final UserInfoDTO userInfoDTO) {
                 view.setVisible(true);
@@ -60,32 +60,29 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
                 view.setVisible(false);
             }
         });
-        kuneErrorHandlerProvider.get().onSessionExpired(new Listener0() {
+        errorHandler.get().onSessionExpired(new Listener0() {
             public void onEvent() {
                 clientUIsignOut();
             }
         });
-        beforeSignOutCollection = new BeforeActionCollection();
+        beforeSignOut = new BeforeActionCollection();
     }
 
-    public void addBeforeSignOut(BeforeActionListener listener) {
-        beforeSignOutCollection.add(listener);
+    public void addBeforeSignOut(final BeforeActionListener listener) {
+        beforeSignOut.add(listener);
     }
 
     public void doSignOut() {
-        if (beforeSignOutCollection.checkBeforeAction()) {
-            userServiceProvider.get().logout(session.getUserHash(), new AsyncCallback<Object>() {
+        if (beforeSignOut.checkBeforeAction()) {
+            userService.get().logout(session.getUserHash(), new AsyncCallback<Object>() {
                 public void onFailure(final Throwable caught) {
                     NotifyUser.hideProgress();
-                    try {
-                        throw caught;
-                    } catch (final SessionExpiredException e) {
+                    if (caught instanceof SessionExpiredException) {
                         clientUIsignOut();
-                    } catch (final UserMustBeLoggedException e) {
+                    } else if (caught instanceof UserMustBeLoggedException) {
                         clientUIsignOut();
-                    } catch (final Throwable e) {
-                        GWT.log("Other kind of exception in doLogout", null);
-                        throw new RuntimeException();
+                    } else {
+                        throw new UIException("Other kind of exception in doLogout", caught);
                     }
                 }
 
@@ -109,8 +106,8 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
         view.setVisible(false);
     }
 
-    public void removeBeforeSignOut(BeforeActionListener listener) {
-        beforeSignOutCollection.remove(listener);
+    public void removeBeforeSignOut(final BeforeActionListener listener) {
+        beforeSignOut.remove(listener);
     }
 
     private void clientUIsignOut() {

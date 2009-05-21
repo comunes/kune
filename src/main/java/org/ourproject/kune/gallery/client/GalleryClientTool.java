@@ -34,8 +34,8 @@ public class GalleryClientTool extends FoldableAbstractClientTool {
 
     public GalleryClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-            ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
-        super(NAME, i18n.t("gallery"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
+            final ContentCapabilitiesRegistry cntCapabReg) {
+        super(NAME, i18n.t("gallery"), toolSelector, wsThemePresenter, ws, cntCapabReg);
 
         // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         registerAuthorableTypes(TYPE_UPLOADEDFILE);
@@ -54,7 +54,7 @@ public class GalleryClientTool extends FoldableAbstractClientTool {
         return NAME;
     }
 
-    protected void registerIcons() {
+    private void registerIcons() {
         registerContentTypeIcon(TYPE_ALBUM, "images/nav/gallery.png");
         registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     }

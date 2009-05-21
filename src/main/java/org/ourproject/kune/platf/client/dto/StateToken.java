@@ -35,9 +35,9 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  */
 public class StateToken implements IsSerializable {
     public static final String SEPARATOR = ".";
-    private static final String[] EMPTY = new String[0];
+    private static final String[] EMPTYA = new String[0];
 
-    public static String encode(final String group, final String tool, final String folder, final String document) {
+    private static String encode(final String group, final String tool, final String folder, final String document) {
         String encoded = "";
         if (group != null) {
             encoded += group;
@@ -57,7 +57,6 @@ public class StateToken implements IsSerializable {
     private String group;
     private String tool;
     private String folder;
-
     private String document;
 
     private String encoded;
@@ -70,7 +69,7 @@ public class StateToken implements IsSerializable {
         parse(encoded);
     }
 
-    public StateToken(final String group, final String tool) {
+    public StateToken(final String group, final String tool) { // NO_UCD
         this(group, tool, null, null);
     }
 
@@ -79,22 +78,22 @@ public class StateToken implements IsSerializable {
     }
 
     public StateToken(final String group, final String tool, final String folder, final String document) {
-        this.setGroup(group);
-        this.setTool(tool);
-        this.setFolder(folder);
-        this.setDocument(document);
-        encoded = null;
+        this.group = group;
+        this.tool = tool;
+        this.folder = folder;
+        this.document = document;
+        resetEncoded();
     }
 
     public StateToken clearDocument() {
         this.document = null;
-        encoded = null;
+        resetEncoded();
         return this;
     }
 
-    public StateToken clearFolder() {
+    public StateToken clearFolder() { // NO_UCD
         this.folder = null;
-        encoded = null;
+        resetEncoded();
         return this;
     }
 
@@ -170,10 +169,11 @@ public class StateToken implements IsSerializable {
     }
 
     public boolean hasSameContainer(final StateToken currentStateToken) {
+        boolean same = false;
         if (copy().clearDocument().getEncoded().equals(currentStateToken.copy().clearDocument().getEncoded())) {
-            return true;
+            same = true;
         }
-        return false;
+        return same;
     }
 
     public boolean isComplete() {
@@ -182,13 +182,13 @@ public class StateToken implements IsSerializable {
 
     public StateToken setDocument(final Long document) {
         this.document = document == null ? null : document.toString();
-        encoded = null;
+        resetEncoded();
         return this;
     }
 
     public StateToken setDocument(final String document) {
         this.document = document;
-        encoded = null;
+        resetEncoded();
         return this;
     }
 
@@ -198,25 +198,25 @@ public class StateToken implements IsSerializable {
 
     public StateToken setFolder(final Long folder) {
         this.folder = folder == null ? null : folder.toString();
-        encoded = null;
+        resetEncoded();
         return this;
     }
 
-    public StateToken setFolder(final String folder) {
+    public StateToken setFolder(final String folder) { // NO_UCD
         this.folder = folder;
-        encoded = null;
+        resetEncoded();
         return this;
     }
 
-    public StateToken setGroup(final String group) {
+    public StateToken setGroup(final String group) { // NO_UCD
         this.group = group;
-        encoded = null;
+        resetEncoded();
         return this;
     }
 
-    public StateToken setTool(final String tool) {
+    public StateToken setTool(final String tool) { // NO_UCD
         this.tool = tool;
-        encoded = null;
+        resetEncoded();
         return this;
     }
 
@@ -238,11 +238,16 @@ public class StateToken implements IsSerializable {
         if (encoded != null && encoded.length() > 0) {
             splitted = encoded.split("\\.");
         } else {
-            splitted = EMPTY;
+            splitted = EMPTYA;
         }
-        setGroup(conditionalAssign(0, splitted));
-        setTool(conditionalAssign(1, splitted));
-        setFolder(conditionalAssign(2, splitted));
-        setDocument(conditionalAssign(3, splitted));
+        group = conditionalAssign(0, splitted);
+        tool = conditionalAssign(1, splitted);
+        folder = conditionalAssign(2, splitted);
+        document = conditionalAssign(3, splitted);
+        resetEncoded();
+    }
+
+    private void resetEncoded() {
+        encoded = null;
     }
 }

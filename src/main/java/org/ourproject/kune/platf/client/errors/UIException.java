@@ -17,13 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.utils;
+package org.ourproject.kune.platf.client.errors;
 
-public final class Convert {
-    public static int toInt(final String value) {
-        return Integer.valueOf(value);
+import com.allen_sauer.gwt.log.client.Log;
+
+public class UIException extends RuntimeException {
+
+    private static final long serialVersionUID = -1327164226202923181L;
+
+    public UIException(final String text) {
+        super(text);
+        Log.error(text);
     }
 
-    private Convert() {
-    };
+    public UIException(final String text, final Throwable cause) {
+        super(text, cause);
+        Log.error(text, cause);
+    }
+
+    public UIException(final Throwable cause) {
+        super(cause);
+        Log.error("UIException", cause);
+    }
+
 }

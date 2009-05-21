@@ -30,11 +30,11 @@ import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 import com.calclab.suco.client.events.Listener2;
 
 public class EntityHeaderPresenter implements EntityHeader {
-    int GROUP_MEDIUM_NAME_LIMIT_SIZE = 90;
-    int GROUP_LARGE_NAME_LIMIT_SIZE = 20;
+    private static final int MEDIUM_NAME_LIMIT = 90;
+    private static final int LARGE_NAME_LIMIT = 20;
 
-    private EntityHeaderView view;
-    private final Session session;
+    private transient EntityHeaderView view;
+    private transient final Session session;
 
     public EntityHeaderPresenter(final StateManager stateManager, final WsThemePresenter theme, final Session session) {
         this.session = session;
@@ -51,7 +51,7 @@ public class EntityHeaderPresenter implements EntityHeader {
         });
     }
 
-    public void addWidget(View widget) {
+    public void addWidget(final View widget) {
         view.addWidget(widget);
     }
 
@@ -86,11 +86,11 @@ public class EntityHeaderPresenter implements EntityHeader {
         }
     }
 
-    void setLogoText(String name) {
+    void setLogoText(final String name) {
         int length = name.length();
-        if (length <= GROUP_LARGE_NAME_LIMIT_SIZE) {
+        if (length <= LARGE_NAME_LIMIT) {
             view.setLargeFont();
-        } else if (length <= GROUP_MEDIUM_NAME_LIMIT_SIZE) {
+        } else if (length <= MEDIUM_NAME_LIMIT) {
             view.setMediumFont();
         } else {
             view.setSmallFont();

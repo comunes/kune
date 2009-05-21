@@ -29,7 +29,7 @@ import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.ToolTip;
 import com.gwtext.client.widgets.form.Field;
 
-public class KuneUiUtils {
+public final class KuneUiUtils {
 
     public enum IconPosition {
         left, right
@@ -67,24 +67,20 @@ public class KuneUiUtils {
         iconImg.setStyleName("vamiddle");
         // setQuickTip(iconImg, tipText, tipTitle);
 
-        ToolTip tooltip = new ToolTip();
+        final ToolTip tooltip = new ToolTip();
         tooltip.setHtml(tipText);
         tooltip.setWidth(250);
         tooltip.applyTo(iconImg.getElement());
 
-        switch (iconPosition) {
-        case left:
+        if (iconPosition.equals(IconPosition.left)) {
             tipHtml += iconImg.toString();
             tipHtml += "&nbsp;";
             tipHtml += labelText;
-            break;
-        case right:
+        } else if (iconPosition.equals(IconPosition.right)) {
             tipHtml += labelText;
             tipHtml += "&nbsp;";
             tipHtml += iconImg.toString();
-            break;
         }
-
         tipHtml += "</span>";
         return tipHtml;
     }
@@ -114,7 +110,7 @@ public class KuneUiUtils {
         if (tipText == null || tipText.length() == 0) {
             DOM.removeElementAttribute(element, "ext:qtip");
         } else {
-            ToolTip tip = new ToolTip();
+            final ToolTip tip = new ToolTip();
             tip.setHtml(tipText);
             if (tipTitle != null) {
                 tip.setTitle(tipTitle);
@@ -140,5 +136,8 @@ public class KuneUiUtils {
      */
     public static void setUnselectable(final Element element) {
         Ext.get(element).unselectable();
+    }
+
+    private KuneUiUtils() {
     }
 }

@@ -58,7 +58,7 @@ public class Group implements HasId {
 
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
-    public static Group NO_GROUP = null;
+    public static final Group NO_GROUP = null;
 
     @Id
     @DocumentId

@@ -54,7 +54,7 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
         siteBar.addFill();
 
         gotoPublic.addStyleName("kune-Margin-Medium-r");
-        setContentPublic(true);
+        setContentPublicImpl(true);
         gotoPublic.addClickListener(new ClickListener() {
             public void onClick(final Widget sender) {
                 gotoPublic();
@@ -80,9 +80,8 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
         this.publicUrl = publicUrl;
     }
 
-    public void setContentPublic(boolean visible) {
-        gotoPublic.setVisible(visible);
-        contentNoPublic.setVisible(!visible);
+    public void setContentPublic(final boolean visible) {
+        setContentPublicImpl(visible);
     }
 
     public void setVisible(final boolean visible) {
@@ -92,5 +91,10 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
 
     private void gotoPublic() {
         Window.open(publicUrl, "_kunepublic", "");
+    }
+
+    private void setContentPublicImpl(final boolean visible) {
+        gotoPublic.setVisible(visible);
+        contentNoPublic.setVisible(!visible);
     }
 }

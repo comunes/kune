@@ -115,7 +115,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                             new AccessRightsDTO(true, true, true), false), avatarUrl, user.getName(), tooltip);
                 }
                 boolean hasLocalBuddies = buddies.size() > 0;
-                int numExtBuddies = userBuddies.getOtherExternalBuddies();
+                int numExtBuddies = userBuddies.getOtherExtBuddies();
                 if (numExtBuddies > 0) {
                     if (hasLocalBuddies) {
                         // i18n: plural

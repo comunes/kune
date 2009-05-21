@@ -29,9 +29,4 @@ public class ActionMenuItemDescriptor<T> extends ActionDescriptor<T> {
         super(accessRolDTO, onPerformCall);
     }
 
-    public ActionMenuItemDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall,
-            final ActionEnableCondition<T> enableCondition) {
-        super(accessRolDTO, onPerformCall, enableCondition);
-    }
-
 }

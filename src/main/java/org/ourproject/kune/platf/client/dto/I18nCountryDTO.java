@@ -43,7 +43,7 @@ public class I18nCountryDTO implements IsSerializable {
         this.code = code;
     }
 
-    public void setDateFormat(String dateFormat) {
+    public void setDateFormat(final String dateFormat) {
         this.dateFormat = dateFormat;
     }
 

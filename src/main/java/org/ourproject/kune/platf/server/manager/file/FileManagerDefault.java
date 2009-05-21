@@ -30,10 +30,12 @@ import com.google.inject.Singleton;
 public class FileManagerDefault implements FileManager {
 
     public File createFileWithSequentialName(final String dir, final String fileName) throws IOException {
-        String fileNameProposal = new String(fileName);
+        String fileNameProposal = String.valueOf(fileName);
         File file = new File(dir, fileNameProposal);
         while (file.exists()) {
             fileNameProposal = FileUtils.getNextSequentialFileName(fileNameProposal, true);
+            // @PMD:REVIEWED:AvoidInstantiatingObjectsInLoops: by vjrj on
+            // 21/05/09 13:15
             file = new File(dir, fileNameProposal);
         }
         file.createNewFile();
@@ -41,16 +43,16 @@ public class FileManagerDefault implements FileManager {
     }
 
     public boolean mkdir(final String dir) {
-        return (new File(dir)).mkdirs();
+        return new File(dir).mkdirs();
     }
 
-    public void rmdir(final String dir) {
+    public void rmdir(final String dir) throws IOException {
         final File file = new File(dir);
         if (!file.isDirectory()) {
-            throw new RuntimeException("rmdir: " + dir + ": Not a directory");
+            throw new IOException("rmdir: " + dir + ": Not a directory");
         }
         if (file.listFiles().length != 0) {
-            throw new RuntimeException("rmdir: " + dir + ": Directory not empty");
+            throw new IOException("rmdir: " + dir + ": Directory not empty");
         }
         file.delete();
     }

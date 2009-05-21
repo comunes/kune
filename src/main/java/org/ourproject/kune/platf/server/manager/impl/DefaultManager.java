@@ -23,6 +23,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
@@ -37,10 +39,12 @@ import com.google.inject.Provider;
 public abstract class DefaultManager<T, K> {
     private final Provider<EntityManager> provider;
     private final Class<T> entityClass;
+    protected final Log log;
 
     public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
         this.provider = provider;
         this.entityClass = entityClass;
+        log = LogFactory.getLog(entityClass);
     }
 
     public T find(final Long primaryKey) {
@@ -100,7 +104,7 @@ public abstract class DefaultManager<T, K> {
         try {
             queryQ = MultiFieldQueryParser.parse(query, fields, flags, new StandardAnalyzer());
         } catch (final ParseException e) {
-            throw new RuntimeException("Error parsing search");
+            throw new ServerManagerException("Error parsing search", e);
         }
         return search(queryQ, firstResult, maxResults);
     }
@@ -111,7 +115,7 @@ public abstract class DefaultManager<T, K> {
         try {
             query = MultiFieldQueryParser.parse(queries, fields, flags, new StandardAnalyzer());
         } catch (final ParseException e) {
-            throw new RuntimeException("Error parsing search");
+            throw new ServerManagerException("Error parsing search", e);
         }
         return search(query, firstResult, maxResults);
     }
@@ -122,7 +126,7 @@ public abstract class DefaultManager<T, K> {
         try {
             query = MultiFieldQueryParser.parse(queries, fields, new StandardAnalyzer());
         } catch (final ParseException e) {
-            throw new RuntimeException("Error parsing search");
+            throw new ServerManagerException("Error parsing search", e);
         }
         return search(query, firstResult, maxResults);
     }

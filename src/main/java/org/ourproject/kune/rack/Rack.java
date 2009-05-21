@@ -48,7 +48,7 @@ import org.ourproject.kune.rack.dock.RequestMatcher;
 import com.google.inject.Module;
 
 public class Rack {
-    public static final Log log = LogFactory.getLog(Rack.class);
+    public static final Log LOG = LogFactory.getLog(Rack.class);
     private final ArrayList<Dock> docks;
     private final ArrayList<Module> modules;
     private final ArrayList<RequestMatcher> excludes;
@@ -67,7 +67,7 @@ public class Rack {
     }
 
     public void add(final Dock dock) {
-        log.debug("INSTALLING: " + dock.toString());
+        LOG.debug("INSTALLING: " + dock.toString());
         docks.add(dock);
     }
 

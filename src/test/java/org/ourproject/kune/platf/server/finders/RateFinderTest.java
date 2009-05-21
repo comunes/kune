@@ -74,7 +74,7 @@ public class RateFinderTest extends PersistencePreLoadedDataTest {
         final Long rateByUsers = rateFinder.calculateRateNumberOfUsers(cd);
         final Double average = (1.3 + 4.3) / 2;
         assertEquals(average, rate);
-        assertEquals(new Long(2), rateByUsers);
+        assertEquals(Long.valueOf(2), rateByUsers);
         final Rate newRate1 = rateFinder.find(user1, cd);
         final Rate newRate2 = rateFinder.find(user2, cd);
         assertEquals(new Double(1.3), newRate1.getValue());

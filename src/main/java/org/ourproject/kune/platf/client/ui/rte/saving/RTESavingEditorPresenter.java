@@ -96,8 +96,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     public void onDoSaveAndClose() {
-        saveAndCloseConfirmed = true;
-        onDoSave();
+        onDoSaveAndCloseImpl();
     }
 
     public void onSavedSuccessful() {
@@ -120,40 +119,16 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     protected void onCancel() {
-        if (savePending) {
-            timer.cancel();
-            Listener0 onYes = new Listener0() {
-                public void onEvent() {
-                    onDoSaveAndClose();
-                }
-            };
-            Listener0 onCancel = new Listener0() {
-                public void onEvent() {
-                    onCancelConfirmed();
-                }
-            };
-            view.askConfirmation(i18n.t("Save confirmation"),
-                    i18n.t("Do you want to save before closing the editor?"), onYes, onCancel);
-        } else {
-            onCancelConfirmed();
-        }
+        onCancelImpl();
     }
 
     protected void onCancelConfirmed() {
-        stateManager.removeBeforeStateChangeListener(beforeStateChangeListener);
-        stateManager.resumeTokenChange();
-        reset();
-        editor.detach();
-        onDoEditCancelled();
-    }
-
-    protected void onDoSave() {
-        onSave.onEvent(editor.getHtml());
+        onCancelConfirmedImpl();
     }
 
     boolean beforeTokenChange() {
         if (savePending) {
-            onCancel();
+            onCancelImpl();
             return false;
         } else {
             deferredCommandWrapper.addCommand(new Listener0() {
@@ -163,6 +138,10 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
             });
             return true;
         }
+    }
+
+    void onDoSave() {
+        onDoSaveImpl();
     }
 
     void onEdit() {
@@ -178,10 +157,10 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     private void createActions() {
         Listener0 onPerformSaveCall = new Listener0() {
             public void onEvent() {
-                onDoSave();
+                onDoSaveImpl();
             }
         };
-        saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.sndbarPosition, onPerformSaveCall);
+        saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.SNDBAR, onPerformSaveCall);
         saveBtn.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         saveBtn.setToolTip(i18n.t("Save"));
         ShortcutDescriptor ctrl_S = new ShortcutDescriptor(true, 'S');
@@ -189,14 +168,14 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         saveBtn.setPosition(0);
 
         ActionToolbarMenuDescriptor<Object> save = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.topbarPosition, onPerformSaveCall);
+                RTEditor.TOPBAR, onPerformSaveCall);
         save.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
         save.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
         save.setTextDescription(i18n.t("Save") + (ctrl_S.toString()));
         save.setPosition(0);
 
         ActionToolbarMenuCheckItemDescriptor<Object> autoSaveMenuItem = new ActionToolbarMenuCheckItemDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.topbarPosition, new Listener0() {
+                RTEditor.TOPBAR, new Listener0() {
                     public void onEvent() {
                         autoSave = !autoSave;
                         if (autoSave) {
@@ -213,9 +192,9 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         autoSaveMenuItem.setTextDescription(i18n.t("Autosave"));
 
         ActionToolbarMenuDescriptor<Object> close = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.topbarPosition, new Listener<Object>() {
+                RTEditor.TOPBAR, new Listener<Object>() {
                     public void onEvent(final Object parameter) {
-                        onCancel();
+                        onCancelImpl();
                     }
                 });
         close.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
@@ -225,19 +204,19 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
             public void onEvent() {
                 if (savePending) {
                     timer.cancel();
-                    onDoSaveAndClose();
+                    onDoSaveAndCloseImpl();
                 } else {
-                    onCancelConfirmed();
+                    onCancelConfirmedImpl();
                 }
             }
         };
         ActionToolbarMenuDescriptor<Object> saveclose = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.topbarPosition, onPerformSaveAndCloseCall);
+                RTEditor.TOPBAR, onPerformSaveAndCloseCall);
         saveclose.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
         saveclose.setTextDescription(i18n.t("Save & Close"));
 
         ActionToolbarButtonDescriptor<Object> saveCloseBtn = new ActionToolbarButtonDescriptor<Object>(
-                AccessRolDTO.Editor, RTEditor.topbarPosition, onPerformSaveAndCloseCall);
+                AccessRolDTO.Editor, RTEditor.TOPBAR, onPerformSaveAndCloseCall);
         // saveCloseBtn.setIconCls(RTEImgResources.SUFFIX +
         // imgResources.save().getName());
         saveCloseBtn.setTextDescription(i18n.t("Save & Close"));
@@ -256,8 +235,45 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         editor.getSndBar().setButtonEnable(saveBtn, enable);
     }
 
+    private void onCancelConfirmedImpl() {
+        stateManager.removeBeforeStateChangeListener(beforeStateChangeListener);
+        stateManager.resumeTokenChange();
+        reset();
+        editor.detach();
+        onDoEditCancelled();
+    }
+
+    private void onCancelImpl() {
+        if (savePending) {
+            timer.cancel();
+            Listener0 onYes = new Listener0() {
+                public void onEvent() {
+                    onDoSaveAndCloseImpl();
+                }
+            };
+            Listener0 onCancel = new Listener0() {
+                public void onEvent() {
+                    onCancelConfirmedImpl();
+                }
+            };
+            view.askConfirmation(i18n.t("Save confirmation"),
+                    i18n.t("Do you want to save before closing the editor?"), onYes, onCancel);
+        } else {
+            onCancelConfirmedImpl();
+        }
+    }
+
     private void onDoEditCancelled() {
         onEditCancelled.onEvent();
+    }
+
+    private void onDoSaveAndCloseImpl() {
+        saveAndCloseConfirmed = true;
+        onDoSaveImpl();
+    }
+
+    private void onDoSaveImpl() {
+        onSave.onEvent(editor.getHtml());
     }
 
     private void reset() {

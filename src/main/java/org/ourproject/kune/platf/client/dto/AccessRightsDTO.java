@@ -22,18 +22,19 @@ package org.ourproject.kune.platf.client.dto;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AccessRightsDTO implements IsSerializable {
-    private boolean isAdministrable;
-    private boolean isEditable;
-    private boolean isVisible;
+    private boolean administrable;
+    private boolean editable;
+    private boolean visible;
+    private static final int PRIME = 31;
 
     public AccessRightsDTO() {
         this(false, false, false);
     }
 
     public AccessRightsDTO(final boolean isAdministrable, final boolean isEditable, final boolean isVisible) {
-        this.isAdministrable = isAdministrable;
-        this.isEditable = isEditable;
-        this.isVisible = isVisible;
+        this.administrable = isAdministrable;
+        this.editable = isEditable;
+        this.visible = isVisible;
     }
 
     @Override
@@ -45,13 +46,13 @@ public class AccessRightsDTO implements IsSerializable {
             return false;
         }
         final AccessRightsDTO other = (AccessRightsDTO) obj;
-        if (isAdministrable != other.isAdministrable) {
+        if (administrable != other.administrable) {
             return false;
         }
-        if (isEditable != other.isEditable) {
+        if (editable != other.editable) {
             return false;
         }
-        if (isVisible != other.isVisible) {
+        if (visible != other.visible) {
             return false;
         }
         return true;
@@ -59,40 +60,39 @@ public class AccessRightsDTO implements IsSerializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
         int result = 1;
-        result = prime * result + (isAdministrable ? 1231 : 1237);
-        result = prime * result + (isEditable ? 1231 : 1237);
-        result = prime * result + (isVisible ? 1231 : 1237);
+        result = PRIME * result + (administrable ? 1231 : 1237);
+        result = PRIME * result + (editable ? 1231 : 1237);
+        result = PRIME * result + (visible ? 1231 : 1237);
         return result;
     }
 
     public boolean isAdministrable() {
-        return isAdministrable;
+        return administrable;
     }
 
     public boolean isEditable() {
-        return isEditable;
+        return editable;
     }
 
     public boolean isVisible() {
-        return isVisible;
+        return visible;
     }
 
-    public void setAdministrable(final boolean isAdministrable) {
-        this.isAdministrable = isAdministrable;
+    public void setAdministrable(final boolean administrable) {
+        this.administrable = administrable;
     }
 
-    public void setEditable(final boolean isEditable) {
-        this.isEditable = isEditable;
+    public void setEditable(final boolean editable) {
+        this.editable = editable;
     }
 
-    public void setVisible(final boolean isVisible) {
-        this.isVisible = isVisible;
+    public void setVisible(final boolean visible) {
+        this.visible = visible;
     }
 
     @Override
     public String toString() {
-        return "AccessRightsDTO[a: " + isAdministrable + ", e: " + isEditable + ", v: " + isVisible + "]";
+        return "AccessRightsDTO[a: " + administrable + ", e: " + editable + ", v: " + visible + "]";
     }
 }

@@ -64,11 +64,16 @@ import com.wideplay.warp.persist.dao.MaxResults;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Content implements HasStateToken {
 
-    public static Content NO_CONTENT = new Content();
+    private static final String TITLE = "title";
+    private static final String GROUP = "group";
+    private static final String MIMETYPE = "mimetype";
+
+    public static final Content NO_CONTENT = new Content();
 
     @Id
     @DocumentId
     @GeneratedValue
+    // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
     private Long id;
 
     @Version
@@ -162,32 +167,32 @@ public class Content implements HasStateToken {
     }
 
     @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND deletedOn=null ORDER BY lastRevision.title ASC")
-    public List<Content> find2Mime(@Named("group") final String groupShortName, @Named("title") final String title,
-            @Named("mimetype") final String mimetype, @Named("mimetype2") final String mimetype2,
+    public List<Content> find2Mime(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
+            @Named(MIMETYPE) final String mimetype, @Named("mimetype2") final String mimetype2,
             @FirstResult final int offset, @MaxResults final int limit) {
         return null;
     }
 
     @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND deletedOn=null")
-    public int find2MimeCount(@Named("group") final String groupShortName, @Named("title") final String title,
-            @Named("mimetype") final String mimetype, @Named("mimetype2") final String mimetype2) {
+    public int find2MimeCount(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
+            @Named(MIMETYPE) final String mimetype, @Named("mimetype2") final String mimetype2) {
         return 0;
     }
 
     @Finder(query = "select count(*) from Container ctx, Content ctn where ctn.container.id = ctx.id and ctx = :container and ctn.lastRevision.title LIKE :title")
-    public Long findIfExistsTitle(@Named("container") final Container container, @Named("title") final String title) {
+    public Long findIfExistsTitle(@Named("container") final Container container, @Named(TITLE) final String title) {
         return null;
     }
 
     @Finder(query = "FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND deletedOn=null ORDER BY lastRevision.title ASC")
-    public List<Content> findMime(@Named("group") final String groupShortName, @Named("title") final String title,
-            @Named("mimetype") final String mimetype, @FirstResult final int offset, @MaxResults final int limit) {
+    public List<Content> findMime(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
+            @Named(MIMETYPE) final String mimetype, @FirstResult final int offset, @MaxResults final int limit) {
         return null;
     }
 
     @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND deletedOn=null")
-    public int findMimeCount(@Named("group") final String groupShortName, @Named("title") final String title,
-            @Named("mimetype") final String mimetype) {
+    public int findMimeCount(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
+            @Named(MIMETYPE) final String mimetype) {
         return 0;
     }
 
@@ -315,6 +320,7 @@ public class Content implements HasStateToken {
         this.filename = filename;
     }
 
+    // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
     public void setId(final Long id) {
         this.id = id;
     }

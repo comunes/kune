@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.ui.gridmenu;
 
 public class GridGroup {
 
-    public static GridGroup NoGridGroup = new GridGroup("", "", "", "", false);
+    public static GridGroup noGridGroup = new GridGroup("", "", "", "", false);
 
     private String name;
     private String tooltipTitle;

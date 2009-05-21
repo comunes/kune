@@ -133,8 +133,7 @@ public abstract class AbstractFoldableContentActions {
         });
     }
 
-    protected void createActions() {
-    }
+    protected abstract void createActions();
 
     protected void createContentModeratedActions(final String parentMenuTitle, final String... contentsModerated) {
         createSetStatusAction(AccessRolDTO.Administrator, i18n.t("Published online"), ContentStatusDTO.publishedOnline,
@@ -252,11 +251,9 @@ public abstract class AbstractFoldableContentActions {
                                                 new AsyncCallback<Object>() {
                                                     public void onFailure(final Throwable caught) {
                                                         NotifyUser.hideProgress();
-                                                        try {
-                                                            throw caught;
-                                                        } catch (final SessionExpiredException e) {
+                                                        if (caught instanceof SessionExpiredException) {
                                                             errorHandler.doSessionExpired();
-                                                        } catch (final Throwable e) {
+                                                        } else {
                                                             NotifyUser.error(i18n.t("Error saving document. Retrying..."));
                                                             errorHandler.process(caught);
                                                             editor.onSaveFailed();
@@ -383,8 +380,7 @@ public abstract class AbstractFoldableContentActions {
         return addContent;
     }
 
-    protected void createPostSessionInitActions() {
-    }
+    protected abstract void createPostSessionInitActions();
 
     protected ActionToolbarMenuDescriptor<StateToken> createRefreshCntAction(final String parentMenuTitle,
             final String... registerInTypes) {
@@ -614,13 +610,10 @@ public abstract class AbstractFoldableContentActions {
 
     private void register(final ActionToolbarMenuAndItemDescriptor<StateToken> action, final Position position,
             final String... registerInTypes) {
-        switch (position) {
-        case ctx:
+        if (position.equals(Position.ctx)) {
             contextActionRegistry.addAction(action, registerInTypes);
-            break;
-        case cnt:
+        } else if (position.equals(Position.cnt)) {
             contentActionRegistry.addAction(action, registerInTypes);
-            break;
         }
     }
 

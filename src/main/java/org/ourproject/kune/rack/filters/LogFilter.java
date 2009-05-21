@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.rack.RackHelper;
 
 public class LogFilter implements Filter {
-    public static final Log log = LogFactory.getLog(LogFilter.class);
+    public static final Log LOG = LogFactory.getLog(LogFilter.class);
 
     public void destroy() {
     }
@@ -41,7 +41,7 @@ public class LogFilter implements Filter {
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
         // final long start = System.currentTimeMillis();
-        log.debug("REQUEST: " + RackHelper.getURI(request));
+        LOG.debug("REQUEST: " + RackHelper.getURI(request));
         chain.doFilter(request, response);
         // final long finish = System.currentTimeMillis();
         // log.debug("TOTAL TIME: " + (finish - start) + " miliseconds");

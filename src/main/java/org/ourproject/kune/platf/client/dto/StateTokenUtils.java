@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.state.Session;
 public class StateTokenUtils {
 
     private final Session session;
+    private static final String SEPARATOR = ".";
 
     public StateTokenUtils(final Session session) {
         this.session = session;
@@ -12,12 +13,11 @@ public class StateTokenUtils {
 
     public String getPublicUrl(final StateToken token) {
         String publicUrl = "";
-        String separator = ".";
 
-        String group = token.getGroup();
-        String tool = token.getTool();
-        String folder = token.getFolder();
-        String document = token.getDocument();
+        final String group = token.getGroup();
+        final String tool = token.getTool();
+        final String folder = token.getFolder();
+        final String document = token.getDocument();
 
         publicUrl += session.getSiteUrl() + "/public";
 
@@ -25,13 +25,13 @@ public class StateTokenUtils {
             publicUrl += "/" + group;
         }
         if (tool != null) {
-            publicUrl += separator + tool;
+            publicUrl += SEPARATOR + tool;
         }
         if (folder != null) {
-            publicUrl += separator + folder;
+            publicUrl += SEPARATOR + folder;
         }
         if (document != null) {
-            publicUrl += separator + document;
+            publicUrl += SEPARATOR + document;
         }
 
         return publicUrl;

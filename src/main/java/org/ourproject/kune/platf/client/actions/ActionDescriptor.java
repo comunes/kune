@@ -123,7 +123,7 @@ public class ActionDescriptor<T> {
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener0 onPerformCall) {
         this(accessRolDTO, new Listener<T>() {
-            public void onEvent(T parameter) {
+            public void onEvent(final T parameter) {
                 onPerformCall.onEvent();
             }
         });
@@ -141,21 +141,49 @@ public class ActionDescriptor<T> {
         this.enableCondition = enableCondition;
     }
 
-    public ActionDescriptor(ActionDescriptor<T> copy) {
+    public ActionDescriptor(final ActionDescriptor<T> copy) {
         this(copy.getAccessRol(), copy.getOnPerformCall());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setAddCondition(copy.getAddCondition());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:22
         setConfirmationText(copy.getConfirmationText());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:22
         setConfirmationTitle(copy.getConfirmationTitle());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setEnableCondition(copy.getEnableCondition());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setIconCls(copy.getIconCls());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setIconDescriptor(copy.getIconDescriptor());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setIconUrl(copy.getIconUrl());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setMustBeAuthenticated(copy.mustBeAuthenticated());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setMustBeConfirmed(copy.mustBeConfirmed());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setOnNotConfirmed(copy.getOnNotConfirmed());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setPosition(copy.getPosition());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setShortcut(copy.getShortcut());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setTextDescription(copy.getTextDescription());
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:21
         setToolTip(copy.getToolTip());
     }
 
@@ -280,7 +308,7 @@ public class ActionDescriptor<T> {
         return shortcut != null;
     }
 
-    public boolean mustBeAdded(T item) {
+    public boolean mustBeAdded(final T item) {
         return addCondition != null ? addCondition.mustBeAdded(item) : true;
     }
 
@@ -302,7 +330,7 @@ public class ActionDescriptor<T> {
         return mustBeConfirmed;
     }
 
-    public boolean mustBeEnabled(T item) {
+    public boolean mustBeEnabled(final T item) {
         return enableCondition != null ? enableCondition.mustBeEnabled(item) : true;
     }
 
@@ -356,7 +384,7 @@ public class ActionDescriptor<T> {
         this.enableCondition = enableCondition;
     }
 
-    public void setIconCls(String iconCls) {
+    public void setIconCls(final String iconCls) {
         this.iconCls = iconCls;
     }
 
@@ -386,7 +414,7 @@ public class ActionDescriptor<T> {
      * @param id
      *            the new id
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -415,11 +443,11 @@ public class ActionDescriptor<T> {
      * 
      * @param position
      */
-    public void setPosition(int position) {
+    public void setPosition(final int position) {
         this.position = position;
     }
 
-    public void setShortcut(ShortcutDescriptor shortcut) {
+    public void setShortcut(final ShortcutDescriptor shortcut) {
         this.shortcut = shortcut;
     }
 
@@ -463,7 +491,7 @@ public class ActionDescriptor<T> {
         return textDescription;
     }
 
-    private void setOnNotConfirmed(Listener<T> onNotConfirmed) {
+    private void setOnNotConfirmed(final Listener<T> onNotConfirmed) {
         this.onNotConfirmed = onNotConfirmed;
     }
 

@@ -23,6 +23,8 @@ import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
 
+import org.ourproject.kune.platf.server.ServerException;
+
 public class JSONLibRESTSerializer implements RESTSerializer {
     private final JsonConfig config;
 
@@ -31,11 +33,11 @@ public class JSONLibRESTSerializer implements RESTSerializer {
         config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
     }
 
-    public String serialize(Object target, String format) {
+    public String serialize(final Object target, final String format) {
         if (format.equals(RESTMethod.FORMAT_JSON)) {
             return JSONSerializer.toJSON(target, config).toString();
         } else {
-            throw new RuntimeException("format not implemented!");
+            throw new ServerException("format not implemented!");
         }
     }
 

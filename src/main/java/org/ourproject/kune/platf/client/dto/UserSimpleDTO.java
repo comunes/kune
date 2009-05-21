@@ -119,7 +119,7 @@ public class UserSimpleDTO implements IsSerializable {
         this.country = country;
     }
 
-    public void setHasLogo(boolean hasLogo) {
+    public void setHasLogo(final boolean hasLogo) {
         this.hasLogo = hasLogo;
     }
 
@@ -139,7 +139,7 @@ public class UserSimpleDTO implements IsSerializable {
         this.shortName = shortName;
     }
 
-    public void setStateToken(StateToken stateToken) {
+    public void setStateToken(final StateToken stateToken) {
         this.stateToken = stateToken;
     }
 

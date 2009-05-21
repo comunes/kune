@@ -8,12 +8,12 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.api.VerificationMode;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
+import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
-import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
-import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorView;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
 
@@ -38,7 +38,8 @@ public class RTESavingEditorPresenterTest {
     @SuppressWarnings("unchecked")
     @Before
     public void createObjects() {
-        I18nUITranslationService i18n = Mockito.mock(I18nUITranslationService.class);
+        I18nTranslationService i18n = new I18nTranslationServiceMocked();
+        new Resources(i18n);
         stateManager = Mockito.mock(StateManager.class);
         deferredCommandWrapper = Mockito.mock(DeferredCommandWrapper.class);
         rteEditor = Mockito.mock(RTEditor.class);
@@ -153,7 +154,7 @@ public class RTESavingEditorPresenterTest {
         return newToken;
     }
 
-    private void verifyAskConfirmationCalled(VerificationMode mode) {
+    private void verifyAskConfirmationCalled(final VerificationMode mode) {
         Mockito.verify(view, mode).askConfirmation(Mockito.anyString(), Mockito.anyString(),
                 (Listener0) Mockito.anyObject(), (Listener0) Mockito.anyObject());
     }

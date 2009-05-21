@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
+import org.ourproject.kune.platf.server.ServerException;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
@@ -155,7 +156,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         return sn;
     }
 
-    public SocialNetworkData getSocialNetworkData(User userLogged, Group group) {
+    public SocialNetworkData getSocialNetworkData(final User userLogged, final Group group) {
         SocialNetworkData socialNetData = new SocialNetworkData();
         socialNetData.setGroupMembers(get(userLogged, group));
         AccessRights groupRights = accessRightsService.get(userLogged, group.getAccessLists());
@@ -218,7 +219,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
         final AdmissionType admissionType = inGroup.getAdmissionType();
         if (admissionType == null) {
-            throw new RuntimeException();
+            throw new ServerException("No admissionType");
         }
         final Group userGroup = userLogged.getUserGroup();
         checkGroupIsNotAlreadyAMember(userGroup, sn);

@@ -28,11 +28,11 @@ import org.ourproject.kune.rack.RackServletFilter;
 
 import com.google.inject.Injector;
 
-public abstract class InjectedFilter implements Filter {
+public abstract class AbstractInjectedFilter implements Filter {
+
     protected ServletContext ctx;
 
-    public void destroy() {
-    }
+    public abstract void destroy();
 
     public <T> T getInstance(final Class<T> type) {
         return getInjector().getInstance(type);

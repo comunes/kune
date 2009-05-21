@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.errors.UIException;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
@@ -37,7 +38,7 @@ public class ToolSelectorPresenter implements ToolSelector {
     public ToolSelectorPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
         tools = new HashMap<String, ToolSelectorItem>();
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-            public void onEvent(StateAbstractDTO state) {
+            public void onEvent(final StateAbstractDTO state) {
                 for (String tool : tools.keySet()) {
                     List<String> enabledTools = state.getEnabledTools();
                     if (enabledTools != null && enabledTools.contains(tool)) {
@@ -63,10 +64,10 @@ public class ToolSelectorPresenter implements ToolSelector {
     public void addTool(final ToolSelectorItem item) {
         final String name = item.getShortName();
         if (name == null) {
-            throw new RuntimeException("You cannot add a tool without a name");
+            throw new UIException("You cannot add a tool without a name");
         }
         if (tools.get(name) != null) {
-            throw new RuntimeException("A tool with the same name already added");
+            throw new UIException("A tool with the same name already added");
         }
         tools.put(name, item);
         item.setSelected(false);

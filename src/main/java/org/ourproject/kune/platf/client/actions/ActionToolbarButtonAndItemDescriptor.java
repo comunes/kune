@@ -32,20 +32,8 @@ public class ActionToolbarButtonAndItemDescriptor<T> extends ActionToolbarButton
     }
 
     public ActionToolbarButtonAndItemDescriptor(final AccessRolDTO accessRolDTO,
-            final ActionToolbarPosition actionToolbarPosition, final Listener<T> onPerformCall,
-            final ActionEnableCondition<T> enableCondition) {
-        super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
-    }
-
-    public ActionToolbarButtonAndItemDescriptor(final AccessRolDTO accessRolDTO,
             final ActionToolbarPosition actionToolbarPosition, final Listener0 onPerformCall) {
         super(accessRolDTO, actionToolbarPosition, onPerformCall);
-    }
-
-    public ActionToolbarButtonAndItemDescriptor(final AccessRolDTO accessRolDTO,
-            final ActionToolbarPosition actionToolbarPosition, final Listener0 onPerformCall,
-            final ActionEnableCondition<T> enableCondition) {
-        super(accessRolDTO, actionToolbarPosition, onPerformCall, enableCondition);
     }
 
 }

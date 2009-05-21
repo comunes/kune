@@ -47,22 +47,16 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
     private static final long serialVersionUID = -4227762495128652369L;
 
-    public static final Log log = LogFactory.getLog(FileUploadManager.class);
+    public static final Log LOG = LogFactory.getLog(FileUploadManager.class);
 
     protected static final String UTF8 = "UTF-8";
 
     @Inject
     KuneProperties kuneProperties;
 
-    protected void beforePostStart() {
-    }
+    protected abstract void beforePostStart();
 
-    protected void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException {
-    }
-
-    protected void createUploadedFile(final String userHash, final StateToken stateToken, final String fileName,
-            final FileItem file, final String typeId) throws Exception {
-    }
+    protected abstract void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException;
 
     @Override
     @SuppressWarnings( { "unchecked", "deprecation" })
@@ -78,12 +72,12 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
         factory.setRepository(new File("/tmp"));
 
         if (!ServletFileUpload.isMultipartContent(req)) {
-            log.warn("Not a multipart upload");
+            LOG.warn("Not a multipart upload");
         }
 
         final ServletFileUpload upload = new ServletFileUpload(factory);
         // maximum size before a FileUploadException will be thrown
-        upload.setSizeMax(new Integer(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE)) * 1024 * 1024);
+        upload.setSizeMax(Integer.valueOf(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE)) * 1024 * 1024);
 
         try {
             final List fileItems = upload.parseRequest(req);
@@ -97,7 +91,7 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
                 if (item.isFormField()) {
                     final String name = item.getFieldName();
                     final String value = item.getString();
-                    log.info("name: " + name + " value: " + value);
+                    LOG.info("name: " + name + " value: " + value);
                     if (name.equals(FileConstants.HASH)) {
                         userHash = value;
                     }
@@ -109,7 +103,7 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
                     }
                 } else {
                     fileName = item.getName();
-                    log.info("file: " + fileName + " fieldName: " + item.getFieldName() + " size: " + item.getSize()
+                    LOG.info("file: " + fileName + " fieldName: " + item.getFieldName() + " size: " + item.getSize()
                             + " typeId: " + typeId);
                     file = item;
                 }
@@ -142,7 +136,7 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     }
 
     protected void onOtherException(final HttpServletResponse response, final Exception e) throws IOException {
-        log.info("Exception: " + e.getCause());
+        LOG.info("Exception: " + e.getCause());
         e.printStackTrace();
         doResponse(response, null);
     }
@@ -150,5 +144,8 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     protected void onSuccess(final HttpServletResponse response) throws IOException {
         doResponse(response, null);
     }
+
+    abstract void createUploadedFile(final String userHash, final StateToken stateToken, final String fileName,
+            final FileItem file, final String typeId) throws Exception;
 
 }

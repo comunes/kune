@@ -36,10 +36,10 @@ public class SocialNetworkDataDTO implements IsSerializable {
         this(null, null, null, null, null, null, false, false);
     }
 
-    public SocialNetworkDataDTO(SocialNetworkVisibilityDTO socialNetworkVisibility,
+    public SocialNetworkDataDTO(final SocialNetworkVisibilityDTO socialNetworkVisibility,
             final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation,
-            UserBuddiesVisibilityDTO userBuddiesVisibility, final UserBuddiesDataDTO userBuddies,
-            AccessRightsDTO groupRights, boolean isBuddiesVisible, boolean isMembersVisible) {
+            final UserBuddiesVisibilityDTO userBuddiesVisibility, final UserBuddiesDataDTO userBuddies,
+            final AccessRightsDTO groupRights, final boolean isBuddiesVisible, final boolean isMembersVisible) {
         this.socialNetworkVisibility = socialNetworkVisibility;
         this.groupMembers = groupMembers;
         this.userParticipation = userParticipation;
@@ -90,7 +90,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
         return isMembersVisible;
     }
 
-    public void setBuddiesVisible(boolean isBuddiesVisible) {
+    public void setBuddiesVisible(final boolean isBuddiesVisible) {
         this.isBuddiesVisible = isBuddiesVisible;
     }
 
@@ -98,31 +98,31 @@ public class SocialNetworkDataDTO implements IsSerializable {
         this.groupMembers = groupMembers;
     }
 
-    public void setGroupRights(AccessRightsDTO groupRights) {
+    public void setGroupRights(final AccessRightsDTO groupRights) {
         this.groupRights = groupRights;
     }
 
-    public void setIsBuddiesVisible(boolean isBuddiesVisible) {
+    public void setIsBuddiesVisible(final boolean isBuddiesVisible) {
         setBuddiesVisible(isBuddiesVisible);
     }
 
-    public void setIsMembersVisible(boolean isMembersVisible) {
+    public void setIsMembersVisible(final boolean isMembersVisible) {
         setMembersVisible(isMembersVisible);
     }
 
-    public void setMembersVisible(boolean isMembersVisible) {
+    public void setMembersVisible(final boolean isMembersVisible) {
         this.isMembersVisible = isMembersVisible;
     }
 
-    public void setSocialNetworkVisibility(SocialNetworkVisibilityDTO socialNetworkVisibilityDTO) {
+    public void setSocialNetworkVisibility(final SocialNetworkVisibilityDTO socialNetworkVisibilityDTO) {
         this.socialNetworkVisibility = socialNetworkVisibilityDTO;
     }
 
-    public void setUserBuddies(UserBuddiesDataDTO userBuddies) {
+    public void setUserBuddies(final UserBuddiesDataDTO userBuddies) {
         this.userBuddies = userBuddies;
     }
 
-    public void setUserBuddiesVisibility(UserBuddiesVisibilityDTO userBuddiesVisibilityDTO) {
+    public void setUserBuddiesVisibility(final UserBuddiesVisibilityDTO userBuddiesVisibilityDTO) {
         this.userBuddiesVisibility = userBuddiesVisibilityDTO;
     }
 

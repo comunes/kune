@@ -49,6 +49,6 @@ public interface FileManager {
      * @param dir
      *            the directory (use File.separator for dir delimiters)
      */
-    void rmdir(String dir);
+    void rmdir(String dir) throws IOException;
 
 }

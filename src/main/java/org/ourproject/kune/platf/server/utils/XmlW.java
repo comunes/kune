@@ -29,6 +29,7 @@ import org.apache.commons.lang.StringUtils;
  */
 final public class XmlW {
 
+    // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
     static public String escapeXml(String str) {
         str = StringUtils.replace(str, "&", "&amp;");
         str = StringUtils.replace(str, "<", "&lt;");
@@ -59,6 +60,7 @@ final public class XmlW {
         return unescapeXml(text.substring(attrStartIdx, attrCloseIdx));
     }
 
+    // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
     static public String getContent(String tag, String text) {
         int idx = XmlW.getIndexOpeningTag(tag, text);
         if (idx == -1) {
@@ -135,6 +137,7 @@ final public class XmlW {
         return buffer.toString();
     }
 
+    // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
     static public String unescapeXml(String str) {
         str = StringUtils.replace(str, "&amp;", "&");
         str = StringUtils.replace(str, "&lt;", "<");

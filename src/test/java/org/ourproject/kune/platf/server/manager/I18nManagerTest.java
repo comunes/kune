@@ -27,55 +27,6 @@ public class I18nManagerTest extends PersistenceTest {
     @Inject
     I18nTranslationService translationService;
 
-    @Before
-    public void insertData() {
-        openTransaction();
-        I18nLanguage english = new I18nLanguage(new Long(1819), "English", "English", "en");
-        I18nLanguage spanish = new I18nLanguage(new Long(5889), "Spanish", "Español", "es");
-        I18nLanguage afrikaans = new I18nLanguage(new Long(114), "Afrikaans", "Afrikaans", "af");
-        I18nLanguage greek = new I18nLanguage(new Long(1793), "Greek", "Ελληνικά", "el");
-        languageManager.persist(english);
-        languageManager.persist(spanish);
-        languageManager.persist(afrikaans);
-        languageManager.persist(greek);
-        translationManager.persist(new I18nTranslation("Sunday [weekday]", english, "Sunday"));
-        translationManager.persist(new I18nTranslation("January [month]", english, "January"));
-        translationManager.persist(new I18nTranslation("Sunday [weekday]", afrikaans, "Sondag"));
-        translationManager.persist(new I18nTranslation("January [month]", greek, "Ιανουάριος"));
-        translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%s] users"), english,
-                StringEscapeUtils.escapeHtml("[%s] users")));
-        translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%d] users"), english,
-                StringEscapeUtils.escapeHtml("[%d] users")));
-        I18nCountry gb = new I18nCountry(new Long(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western",
-                ",");
-        countryManager.persist(gb);
-    }
-
-    @Test
-    public void testGetLexicon() {
-        HashMap<String, String> map = translationManager.getLexicon("af");
-        assertTrue(map.size() > 0);
-    }
-
-    @Test
-    public void getTranslation() {
-        String translation = translationManager.getTranslation("af", "Sunday [weekday]");
-        assertEquals("Sondag", translation);
-    }
-
-    @Test
-    public void getTranslationUTF8() {
-        String translation = translationManager.getTranslation("el", "January [month]");
-        assertEquals("Ιανουάριος", translation);
-    }
-
-    @Test
-    public void setTranslation() {
-        translationManager.setTranslation("en", "Foo foo foo", "Foo foo foo translation");
-        String translation = translationManager.getTranslation("en", "Foo foo foo");
-        assertEquals("Foo foo foo translation", translation);
-    }
-
     @Test
     public void byDefaultUseEnglish() {
         HashMap<String, String> map = translationManager.getLexicon("en");
@@ -83,10 +34,11 @@ public class I18nManagerTest extends PersistenceTest {
         assertEquals(map.size(), map2.size());
     }
 
-    @Test
-    public void getNonExistentTranslationReturnsDefaultLanguage() {
-        String translation = translationManager.getTranslation("af", "January [month]");
-        assertEquals("January", translation);
+    @After
+    public void close() {
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
     }
 
     @Test
@@ -112,9 +64,21 @@ public class I18nManagerTest extends PersistenceTest {
     }
 
     @Test
-    public void getTranslationWithStringArg() {
-        String translation = translationManager.getTranslation("en", "[%s] users", "Twenty");
-        assertEquals("Twenty users", translation);
+    public void getNonExistentTranslationReturnsDefaultLanguage() {
+        String translation = translationManager.getTranslation("af", "January [month]");
+        assertEquals("January", translation);
+    }
+
+    @Test
+    public void getTranslation() {
+        String translation = translationManager.getTranslation("af", "Sunday [weekday]");
+        assertEquals("Sondag", translation);
+    }
+
+    @Test
+    public void getTranslationUTF8() {
+        String translation = translationManager.getTranslation("el", "January [month]");
+        assertEquals("Ιανουάριος", translation);
     }
 
     @Test
@@ -130,15 +94,21 @@ public class I18nManagerTest extends PersistenceTest {
     }
 
     @Test
-    public void getTranslationWithStringArgFromService() {
-        String translation = translationService.t("[%s] users", "Twenty");
+    public void getTranslationWithIntArgFromWithNtService() {
+        String translation = translationService.tWithNT("[%d] users", "foo foo", 20);
+        assertEquals("20 users", translation);
+    }
+
+    @Test
+    public void getTranslationWithStringArg() {
+        String translation = translationManager.getTranslation("en", "[%s] users", "Twenty");
         assertEquals("Twenty users", translation);
     }
 
     @Test
-    public void getTranslationWithIntArgFromWithNtService() {
-        String translation = translationService.tWithNT("[%d] users", "foo foo", 20);
-        assertEquals("20 users", translation);
+    public void getTranslationWithStringArgFromService() {
+        String translation = translationService.t("[%s] users", "Twenty");
+        assertEquals("Twenty users", translation);
     }
 
     @Test
@@ -147,10 +117,40 @@ public class I18nManagerTest extends PersistenceTest {
         assertEquals("Twenty users", translation);
     }
 
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
+    @Before
+    public void insertData() {
+        openTransaction();
+        I18nLanguage english = new I18nLanguage(Long.valueOf(1819), "English", "English", "en");
+        I18nLanguage spanish = new I18nLanguage(Long.valueOf(5889), "Spanish", "Español", "es");
+        I18nLanguage afrikaans = new I18nLanguage(Long.valueOf(114), "Afrikaans", "Afrikaans", "af");
+        I18nLanguage greek = new I18nLanguage(Long.valueOf(1793), "Greek", "Ελληνικά", "el");
+        languageManager.persist(english);
+        languageManager.persist(spanish);
+        languageManager.persist(afrikaans);
+        languageManager.persist(greek);
+        translationManager.persist(new I18nTranslation("Sunday [weekday]", english, "Sunday"));
+        translationManager.persist(new I18nTranslation("January [month]", english, "January"));
+        translationManager.persist(new I18nTranslation("Sunday [weekday]", afrikaans, "Sondag"));
+        translationManager.persist(new I18nTranslation("January [month]", greek, "Ιανουάριος"));
+        translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%s] users"), english,
+                StringEscapeUtils.escapeHtml("[%s] users")));
+        translationManager.persist(new I18nTranslation(StringEscapeUtils.escapeHtml("[%d] users"), english,
+                StringEscapeUtils.escapeHtml("[%d] users")));
+        I18nCountry gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
+                "western", ",");
+        countryManager.persist(gb);
+    }
+
+    @Test
+    public void setTranslation() {
+        translationManager.setTranslation("en", "Foo foo foo", "Foo foo foo translation");
+        String translation = translationManager.getTranslation("en", "Foo foo foo");
+        assertEquals("Foo foo foo translation", translation);
+    }
+
+    @Test
+    public void testGetLexicon() {
+        HashMap<String, String> map = translationManager.getLexicon("af");
+        assertTrue(map.size() > 0);
     }
 }

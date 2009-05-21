@@ -35,23 +35,23 @@ public class FileUtils {
      * http://www.java-tips.org/java-se-tips/java.io/reading-a-file
      * -into-a-byte-array.html
      */
-    public static byte[] getBytesFromFile(File file) throws IOException {
-        InputStream is = new FileInputStream(file);
+    public static byte[] getBytesFromFile(final File file) throws IOException {
+        final InputStream iStream = new FileInputStream(file);
 
         // Get the size of the file
-        long length = file.length();
+        final long length = file.length();
 
         if (length > Integer.MAX_VALUE) {
             // File is too large
         }
 
         // Create the byte array to hold the data
-        byte[] bytes = new byte[(int) length];
+        final byte[] bytes = new byte[(int) length];
 
         // Read in the bytes
         int offset = 0;
         int numRead = 0;
-        while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+        while (offset < bytes.length && (numRead = iStream.read(bytes, offset, bytes.length - offset)) >= 0) {
             offset += numRead;
         }
 
@@ -61,7 +61,7 @@ public class FileUtils {
         }
 
         // Close the input stream and return bytes
-        is.close();
+        iStream.close();
         return bytes;
     }
 
@@ -77,7 +77,7 @@ public class FileUtils {
         if (filename == null) {
             return "";
         }
-        final int dotIndex = filename.lastIndexOf(".");
+        final int dotIndex = filename.lastIndexOf('.');
         if (dotIndex == -1 || dotIndex == 0) {
             return "";
         } else {
@@ -93,7 +93,7 @@ public class FileUtils {
     public static String getFileNameWithoutExtension(final String fileName, final String extension) {
         final int extlength = extension.length();
         if (extlength > 0) {
-            boolean withDot = extension.charAt(0) == '.';
+            final boolean withDot = extension.charAt(0) == '.';
             return fileName.substring(0, fileName.length() - extlength - (withDot ? 0 : 1));
         } else {
             return fileName;
@@ -105,7 +105,7 @@ public class FileUtils {
         if (lastSpace != -1) {
             final String suffix = fileName.substring(lastSpace + 1);
             try {
-                final Integer i = new Integer(suffix);
+                final Integer i = Integer.valueOf(suffix);
                 return fileName.substring(0, lastSpace + 1) + (i + 1);
             } catch (final NumberFormatException e) {
             }
@@ -113,7 +113,7 @@ public class FileUtils {
         return fileName + " 1";
     }
 
-    public static String getNextSequentialFileName(final String fileName, boolean preserveExtension) {
+    public static String getNextSequentialFileName(final String fileName, final boolean preserveExtension) {
         if (!preserveExtension) {
             return getNextSequentialFileName(fileName);
         }
@@ -130,7 +130,7 @@ public class FileUtils {
         return SLASH + stateToken.getGroup() + SLASH + stateToken.getTool() + SLASH + stateToken.getFolder() + SLASH;
     }
 
-    public boolean exist(String file) {
+    public boolean exist(final String file) {
         return new File(file).exists();
     }
 }

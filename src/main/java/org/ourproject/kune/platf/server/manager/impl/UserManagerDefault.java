@@ -31,6 +31,7 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.jivesoftware.smack.RosterEntry;
+import org.jivesoftware.smack.packet.RosterPacket.ItemType;
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
@@ -106,15 +107,14 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         // two db at the same time). This compromise solution is server
         // independent.
         // In the future cache this.
-        String domain = "@" + properties.getDomain();
+        final String domain = "@" + properties.getDomain();
         UserBuddiesData buddiesData = new UserBuddiesData();
         User user = finder.getByShortName(shortName);
         ChatConnection connection = xmppManager.login(user.getShortName() + domain, user.getPassword(), "kserver");
         Collection<RosterEntry> roster = xmppManager.getRoster(connection);
         xmppManager.disconnect(connection);
         for (RosterEntry entry : roster) {
-            switch (entry.getType()) {
-            case both:
+            if (entry.getType().equals(ItemType.both)) {
                 // only show buddies with subscription 'both'
                 int index = entry.getUser().indexOf(domain);
                 if (index > 0) {
@@ -127,7 +127,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
                     }
                 } else {
                     // ext user (only count)
-                    buddiesData.setOtherExternalBuddies(buddiesData.getOtherExternalBuddies() + 1);
+                    buddiesData.setOtherExtBuddies(buddiesData.getOtherExtBuddies() + 1);
                 }
             }
         }
@@ -172,7 +172,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         try {
             query = parser.parse(search);
         } catch (ParseException e) {
-            throw new RuntimeException("Error parsing search");
+            throw new ServerManagerException("Error parsing search", e);
         }
         return super.search(query, firstResult, maxResults);
     }

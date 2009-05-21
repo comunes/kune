@@ -31,31 +31,37 @@ import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * @author vjrj
+ * 
+ */
 public class IconLabelEditable extends Composite {
 
-    private boolean useDoubleClick;
-    private ClickListener listener;
-    private String currentText;
-    private MouseListenerAdapter mouseOverListener;
-    private final AbstractLabel label;
-    private String doubleClickToRenameLabel;
-    private String clickToRenameLabel;
-    private Event2<String, String> onEdit;
-    private TextBox editor;
-    private HorizontalPanel hp;
+    private transient boolean useDoubleClick;
+    private transient ClickListener listener;
+    private transient String currentText;
+    private transient MouseListenerAdapter mouseOverListener;
+    private transient final AbstractLabel label;
+    private transient String dblClickLabel;
+    private transient String clickLabel;
+    private transient Event2<String, String> onEditEvent;
+    private transient TextBox editor;
+    private transient HorizontalPanel hpanel;
 
     public IconLabelEditable() {
         this("");
     }
 
-    public IconLabelEditable(final AbstractImagePrototype icon, final String text, final boolean useDoubleClick) {
+    public IconLabelEditable(final AbstractImagePrototype icon, final String text, final boolean useDoubleClick) { // NO_UCD
+        super();
         label = new IconLabel(icon, text);
         init(text, useDoubleClick);
     }
 
-    public IconLabelEditable(final AbstractImagePrototype icon, final String text, final String targetHistoryToken,
+    public IconLabelEditable(final AbstractImagePrototype icon, final String text, final String targetToken, // NO_UCD
             final boolean useDoubleClick) {
-        label = new IconHyperlink(icon, text, targetHistoryToken);
+        super();
+        label = new IconHyperlink(icon, text, targetToken);
         init(text, useDoubleClick);
     }
 
@@ -63,11 +69,12 @@ public class IconLabelEditable extends Composite {
         this(text, false);
     }
 
-    public IconLabelEditable(final String text, final boolean useDoubleClick) {
-        this(text, false, false);
+    public IconLabelEditable(final String text, final boolean useDoubleClick) { // NO_UCD
+        this(text, false, useDoubleClick);
     }
 
-    public IconLabelEditable(final String text, final boolean wordWrap, final boolean useDoubleClick) {
+    public IconLabelEditable(final String text, final boolean wordWrap, final boolean useDoubleClick) { // NO_UCD
+        super();
         label = new LabelWrapper(text, wordWrap);
         init(text, useDoubleClick);
     }
@@ -82,45 +89,41 @@ public class IconLabelEditable extends Composite {
     }
 
     public void onEdit(final Listener2<String, String> slot) {
-        onEdit.add(slot);
+        onEditEvent.add(slot);
     }
 
-    public void setClickToRenameLabel(final String clickToRenameLabel) {
-        this.clickToRenameLabel = clickToRenameLabel;
+    /**
+     * Sets the text tooltip showed to indicate "click to rename".
+     * 
+     * @param text
+     *            the new click to rename label
+     */
+    public void setClickToRenameLabel(final String text) {
+        this.clickLabel = text;
     }
 
-    public void setDoubleClickToRenameLabel(final String doubleClickToRenameLabel) {
-        this.doubleClickToRenameLabel = doubleClickToRenameLabel;
+    /**
+     * Sets the text tooltip showed to indicate "double click to rename".
+     * 
+     * @param text
+     *            the new double click to rename label
+     */
+    public void setDoubleClickToRenameLabel(final String text) {
+        this.dblClickLabel = text;
     }
 
     public void setEditable(final boolean editable) {
-        reset();
-        if (editable) {
-            if (useDoubleClick) {
-                label.setTitle(doubleClickToRenameLabel);
-                label.addDoubleClickListener(listener);
-            } else {
-                label.setTitle(clickToRenameLabel);
-                label.addClickListener(listener);
-            }
-            label.addStyleDependentName("editable");
-            // label.addDoubleClickListener(listener);
-            label.addMouseListener(mouseOverListener);
-        } else {
-            label.setTitle(null);
-            label.addStyleDependentName("noneditable");
-        }
+        setEditableImpl(editable);
     }
 
     public void setText(final String text) {
-        this.currentText = text;
-        label.setText(text);
+        setTextImpl(text);
     }
 
     private void afterEdit() {
-        String text = editor.getText();
-        onEdit.fire(currentText, text);
-        setText(text);
+        final String text = editor.getText();
+        onEditEvent.fire(currentText, text);
+        setTextImpl(text);
         editor.setVisible(false);
         editor.setReadOnly(true);
         label.setVisible(true);
@@ -128,12 +131,12 @@ public class IconLabelEditable extends Composite {
     }
 
     private void init(final String text, final boolean useDoubleClick) {
-        this.onEdit = new Event2<String, String>("onLabelEdit");
-        doubleClickToRenameLabel = "Double click to rename";
-        clickToRenameLabel = "Click to rename";
-        hp = new HorizontalPanel();
-        hp.add((Widget) label);
-        initWidget(hp);
+        this.onEditEvent = new Event2<String, String>("onLabelEdit");
+        dblClickLabel = "Double click to rename";
+        clickLabel = "Click to rename";
+        hpanel = new HorizontalPanel();
+        hpanel.add((Widget) label);
+        initWidget(hpanel);
         this.currentText = text;
         this.useDoubleClick = useDoubleClick;
         this.listener = new ClickListener() {
@@ -155,7 +158,7 @@ public class IconLabelEditable extends Composite {
         };
         label.setStylePrimaryName("kune-EditableLabel");
         label.addMouseListener(mouseOverListener);
-        setEditable(false);
+        setEditableImpl(false);
     }
 
     private void reset() {
@@ -166,15 +169,40 @@ public class IconLabelEditable extends Composite {
         label.removeMouseListener(mouseOverListener);
     }
 
+    private void setEditableImpl(final boolean editable) {
+        reset();
+        if (editable) {
+            if (useDoubleClick) {
+                label.setTitle(dblClickLabel);
+                label.addDoubleClickListener(listener);
+            } else {
+                label.setTitle(clickLabel);
+                label.addClickListener(listener);
+            }
+            label.addStyleDependentName("editable");
+            // label.addDoubleClickListener(listener);
+            label.addMouseListener(mouseOverListener);
+        } else {
+            label.setTitle(null);
+            label.addStyleDependentName("noneditable");
+        }
+    }
+
+    private void setTextImpl(final String text) {
+        this.currentText = text;
+        label.setText(text);
+    }
+
     private void showEditor() {
-        int hpWidth = hp.getParent().getOffsetWidth();
+        final int hpWidth = hpanel.getParent().getOffsetWidth();
         label.setVisible(false);
         if (editor == null) {
             editor = new TextBox();
             editor.setStyleName("k-eil-edit");
-            hp.add(editor);
+            hpanel.add(editor);
             editor.addFocusListener(new FocusListener() {
                 public void onFocus(final Widget sender) {
+                    // doNothing
                 }
 
                 public void onLostFocus(final Widget sender) {

@@ -129,6 +129,8 @@ public interface Session {
 
     boolean isLogged();
 
+    boolean isNotLogged();
+
     void onInitDataReceived(Listener<InitDataDTO> listener);
 
     void onUserSignIn(Listener<UserInfoDTO> listener);

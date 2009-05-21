@@ -59,6 +59,28 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     private final Element textLabel;
 
     /**
+     * Creates an empty label with a icon.
+     * 
+     * @param image
+     *            the icon to add
+     */
+    public IconLabel(final AbstractImagePrototype image, final boolean leftIcon) {
+        setElement(DOM.createDiv());
+        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
+        setIconImpl(image);
+        textLabel = DOM.createSpan();
+        if (leftIcon) {
+            setStyleName("kune-IconLabel-l");
+            DOM.appendChild(getElement(), icon);
+            DOM.appendChild(getElement(), textLabel);
+        } else {
+            setStyleName("kune-IconLabel-r");
+            DOM.appendChild(getElement(), textLabel);
+            DOM.appendChild(getElement(), icon);
+        }
+    }
+
+    /**
      * Creates a label with the specified text and a icon in the left.
      * 
      * @param image
@@ -68,7 +90,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      */
     public IconLabel(final AbstractImagePrototype image, final String text) {
         this(image, true);
-        setText(text);
+        setTextImpl(text);
     }
 
     /**
@@ -83,7 +105,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      */
     public IconLabel(final AbstractImagePrototype image, final String text, final boolean wordWrap) {
         this(image, text);
-        setWordWrap(wordWrap);
+        setWordWrapImpl(wordWrap);
     }
 
     /**
@@ -96,7 +118,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      */
     public IconLabel(final String text, final AbstractImagePrototype image) {
         this(image, false);
-        setText(text);
+        setTextImpl(text);
     }
 
     /**
@@ -111,29 +133,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      */
     public IconLabel(final String text, final AbstractImagePrototype image, final boolean wordWrap) {
         this(text, image);
-        setWordWrap(wordWrap);
-    }
-
-    /**
-     * Creates an empty label with a icon.
-     * 
-     * @param image
-     *            the icon to add
-     */
-    private IconLabel(final AbstractImagePrototype image, final boolean leftIcon) {
-        setElement(DOM.createDiv());
-        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
-        setIcon(image);
-        textLabel = DOM.createSpan();
-        if (leftIcon) {
-            setStyleName("kune-IconLabel-l");
-            DOM.appendChild(getElement(), icon);
-            DOM.appendChild(getElement(), textLabel);
-        } else {
-            setStyleName("kune-IconLabel-r");
-            DOM.appendChild(getElement(), textLabel);
-            DOM.appendChild(getElement(), icon);
-        }
+        setWordWrapImpl(wordWrap);
     }
 
     public void addClickListener(final ClickListener listener) {
@@ -240,8 +240,8 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         DOM.setStyleAttribute(textLabel, "textAlign", align.getTextAlignString());
     }
 
-    public void setIcon(AbstractImagePrototype image) {
-        icon = getImageElement(image);
+    public void setIcon(final AbstractImagePrototype image) {
+        setIconImpl(image);
     }
 
     public void setStyleNameToText(final String styleName) {
@@ -249,7 +249,7 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     }
 
     public void setText(final String text) {
-        DOM.setInnerText(textLabel, text);
+        setTextImpl(text);
     }
 
     @Override
@@ -259,11 +259,23 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
     }
 
     public void setWordWrap(final boolean wrap) {
-        DOM.setStyleAttribute(textLabel, "whiteSpace", wrap ? "normal" : "nowrap");
+        setWordWrapImpl(wrap);
     }
 
     private Element getImageElement(final AbstractImagePrototype image) {
         return image.createImage().getElement();
+    }
+
+    private void setIconImpl(final AbstractImagePrototype image) {
+        icon = getImageElement(image);
+    }
+
+    private void setTextImpl(final String text) {
+        DOM.setInnerText(textLabel, text);
+    }
+
+    private void setWordWrapImpl(final boolean wrap) {
+        DOM.setStyleAttribute(textLabel, "whiteSpace", wrap ? "normal" : "nowrap");
     }
 
 }

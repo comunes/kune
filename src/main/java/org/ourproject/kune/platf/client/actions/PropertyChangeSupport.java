@@ -96,6 +96,7 @@ public class PropertyChangeSupport {
     public PropertyChangeSupport(final Object source) {
         this.source = source;
         if (source == null) {
+            // @PMD:REVIEWED:AvoidThrowingNullPointerException: by vjrj on 21/05/09 14:12
             throw new NullPointerException();
         }
     }
@@ -148,6 +149,7 @@ public class PropertyChangeSupport {
      * @throws NullPointerException
      *             if propertyName is null
      */
+    // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:12
     public void addPropertyChangeListener(final String propertyName, PropertyChangeListener l) {
         if (l == null) {
             return;
@@ -410,6 +412,7 @@ public class PropertyChangeSupport {
      * @throws NullPointerException
      *             if propertyName is null
      */
+    // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:12
     public void removePropertyChangeListener(final String propertyName, PropertyChangeListener l) {
         if (children == null) {
             return;

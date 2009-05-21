@@ -28,15 +28,19 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ListenerFilter extends InjectedFilter {
-    private Class<? extends ApplicationListener> listenerClass;
+public class ListenerFilter extends AbstractInjectedFilter {
+    private final Class<? extends ApplicationListener> listenerClass;
 
-    public ListenerFilter(Class<? extends ApplicationListener> listenerClass) {
+    public ListenerFilter(final Class<? extends ApplicationListener> listenerClass) {
         this.listenerClass = listenerClass;
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-            ServletException {
+    @Override
+    public void destroy() {
+    }
+
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
+            throws IOException, ServletException {
         ApplicationListener listener = super.getInstance(listenerClass);
         listener.doBefore((HttpServletRequest) request, (HttpServletResponse) response);
         chain.doFilter(request, response);

@@ -32,6 +32,7 @@ public class RichTextAreaImpl {
     protected Element elem;
 
     public RichTextAreaImpl() {
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09 14:39
         elem = createElement();
     }
 

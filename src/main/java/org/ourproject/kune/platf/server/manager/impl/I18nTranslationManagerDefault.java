@@ -120,7 +120,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
 
     public String setTranslation(final String id, final String translation) throws DefaultException {
-        final I18nTranslation trans = super.find(new Long(id));
+        final I18nTranslation trans = super.find(Long.valueOf(id));
         if (trans != null) {
             final String escapedTranslation = TextUtils.escapeHtmlLight(translation);
             trans.setText(escapedTranslation);

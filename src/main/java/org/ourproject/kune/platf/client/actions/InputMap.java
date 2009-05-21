@@ -158,6 +158,7 @@ public class InputMap {
      * 
      * @return An array of keys (may be <code>null</code> or have zero length).
      */
+    // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:33
     public KeyStroke[] keys() {
         if (inputMap != null) {
             KeyStroke[] array = new KeyStroke[size()];

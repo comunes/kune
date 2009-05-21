@@ -26,7 +26,8 @@ import com.google.gwt.user.client.ui.ClickListenerCollection;
 import com.google.gwt.user.client.ui.Label;
 
 public class LabelWrapper extends Label implements AbstractLabel {
-    private ClickListenerCollection doubleClickListeners;
+
+    private transient ClickListenerCollection dblClickListeners;
 
     public LabelWrapper() {
         super();
@@ -41,32 +42,29 @@ public class LabelWrapper extends Label implements AbstractLabel {
         super(text, wordWrap);
     }
 
+    public void addDoubleClickListener(final ClickListener listener) {
+        if (dblClickListeners == null) {
+            dblClickListeners = new ClickListenerCollection();
+        }
+        dblClickListeners.add(listener);
+    }
+
+    @Override
+    public void onBrowserEvent(final Event event) {
+        if (DOM.eventGetType(event) == Event.ONDBLCLICK && dblClickListeners != null) {
+            dblClickListeners.fireClick(this);
+        }
+        super.onBrowserEvent(event);
+    }
+
+    public void removeDoubleClickListener(final ClickListener listener) {
+        if (dblClickListeners != null) {
+            dblClickListeners.remove(listener);
+        }
+    }
+
     public void setColor(final String color) {
         DOM.setStyleAttribute(super.getElement(), "color", color);
     }
 
-    public void addDoubleClickListener(final ClickListener listener) {
-        if (doubleClickListeners == null) {
-            doubleClickListeners = new ClickListenerCollection();
-        }
-        doubleClickListeners.add(listener);
-    }
-
-    public void removeDoubleClickListener(final ClickListener listener) {
-        if (doubleClickListeners != null) {
-            doubleClickListeners.remove(listener);
-        }
-    }
-
-    public void onBrowserEvent(final Event event) {
-        switch (DOM.eventGetType(event)) {
-        case Event.ONDBLCLICK:
-
-            if (doubleClickListeners != null) {
-                doubleClickListeners.fireClick(this);
-            }
-            break;
-        }
-        super.onBrowserEvent(event);
-    }
 }

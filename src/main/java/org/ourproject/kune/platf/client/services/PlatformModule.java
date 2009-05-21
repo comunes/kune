@@ -538,7 +538,7 @@ public class PlatformModule extends AbstractModule {
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();
         $(Application.class).start();
-        // $(HelloWorld.class);
+        //$(HelloWorld.class);
 
     }
 }

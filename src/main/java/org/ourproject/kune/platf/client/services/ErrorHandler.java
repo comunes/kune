@@ -66,65 +66,63 @@ public class ErrorHandler {
 
     public void process(final Throwable caught) {
         NotifyUser.hideProgress();
-        try {
-            throw caught;
-        } catch (final AccessViolationException e) {
-            logException(e);
+        if (caught instanceof AccessViolationException) {
+            logException(caught);
             NotifyUser.error(i18n.t("You do not have rights to perform that action"));
-        } catch (final SessionExpiredException e) {
-            logException(e);
+        } else if (caught instanceof SessionExpiredException) {
+            logException(caught);
             doSessionExpired();
-        } catch (final UserMustBeLoggedException e) {
-            logException(e);
+        } else if (caught instanceof UserMustBeLoggedException) {
+            logException(caught);
             if (session.isLogged()) {
                 doSessionExpired();
             } else {
                 NotifyUser.important(i18n.t("Please sign in or register to collaborate"));
             }
-        } catch (final GroupNotFoundException e) {
-            logException(e);
+        } else if (caught instanceof GroupNotFoundException) {
+            logException(caught);
             NotifyUser.veryImportant(i18n.t("Group not found"));
             stateManagerProvider.get().gotoToken("");
-        } catch (final IncompatibleRemoteServiceException e) {
+        } else if (caught instanceof IncompatibleRemoteServiceException) {
             NotifyUser.error(i18n.t("Your browser is outdated with the server software. Please reload this page."));
-        } catch (final ContentNotFoundException e) {
-            logException(e);
+        } else if (caught instanceof ContentNotFoundException) {
+            logException(caught);
             NotifyUser.veryImportant(i18n.t("Content not found"));
             stateManagerProvider.get().gotoToken("");
-        } catch (final ContentNotPermittedException e) {
-            logException(e);
+        } else if (caught instanceof ContentNotPermittedException) {
+            logException(caught);
             NotifyUser.error(i18n.t("Action not permitted in this location"));
             stateManagerProvider.get().gotoToken("");
-        } catch (final ContainerNotPermittedException e) {
-            logException(e);
+        } else if (caught instanceof ContainerNotPermittedException) {
+            logException(caught);
             NotifyUser.error(i18n.t("Action not permitted in this location"));
             stateManagerProvider.get().gotoToken("");
-        } catch (final LastAdminInGroupException e) {
-            logException(e);
+        } else if (caught instanceof LastAdminInGroupException) {
+            logException(caught);
             NotifyUser.showAlertMessage(i18n.t("Warning"), i18n.t("Sorry, you are the last admin of this group."
                     + " Look for someone to substitute you appropriately as admin before leaving this group."));
-        } catch (final AlreadyGroupMemberException e) {
-            logException(e);
+        } else if (caught instanceof AlreadyGroupMemberException) {
+            logException(caught);
             NotifyUser.error(i18n.t("This group is already a group member"));
-        } catch (final AlreadyUserMemberException e) {
-            logException(e);
+        } else if (caught instanceof AlreadyUserMemberException) {
+            logException(caught);
             NotifyUser.error(i18n.t("This user is already a group member"));
-        } catch (final Throwable e) {
-            logException(e, true);
+        } else {
+            logException(caught, true);
             NotifyUser.error(i18n.t("Error performing operation"));
-            GWT.log("Other kind of exception in StateManagerDefault/processErrorException", null);
+            GWT.log("Other kind of exception in StateManagerDefault/processErrorException", caught);
         }
     }
 
-    private void logException(final Throwable e) {
-        logException(e, false);
+    private void logException(final Throwable caught) {
+        logException(caught, false);
     }
 
-    private void logException(final Throwable e, final boolean showException) {
+    private void logException(final Throwable caught, final boolean showException) {
         if (showException) {
-            Log.debug("Exception in KuneErrorHandler", e);
+            Log.debug("Exception in KuneErrorHandler", caught);
         } else {
-            Log.debug("Exception in KuneErrorHandler: " + e.getMessage());
+            Log.debug("Exception in KuneErrorHandler: " + caught.getMessage());
         }
     }
 

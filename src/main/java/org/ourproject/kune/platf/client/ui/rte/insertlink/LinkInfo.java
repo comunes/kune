@@ -11,13 +11,13 @@ public class LinkInfo {
     private static final String NO_TARGET = null;
 
     public static LinkInfo parse(final Element element) {
-        String target = element.getAttribute(TARGET);
+        final String target = element.getAttribute(TARGET);
         return new LinkInfo(element.getInnerText(), element.getTitle(), element.getAttribute(HREF), target != null
                 && target.equals(_BLANK));
     }
 
     public static LinkInfo parse(final org.xwiki.gwt.dom.client.Element element) {
-        String target = element.getAttribute(TARGET);
+        final String target = element.getAttribute(TARGET);
         return new LinkInfo(element.getInnerText(), element.getTitle(), element.getAttribute(HREF), target != null
                 && target.equals(_BLANK));
     }
@@ -40,12 +40,12 @@ public class LinkInfo {
         this.text = text;
         this.href = href;
         this.title = title;
-        setInNewWindow(inNewWindow);
+        setInNewWindowImpl(inNewWindow);
     }
 
     public Element getElement() {
-        Element anchor = DOM.createAnchor();
-        com.google.gwt.user.client.Element element = (com.google.gwt.user.client.Element) anchor;
+        final Element anchor = DOM.createAnchor();
+        final com.google.gwt.user.client.Element element = (com.google.gwt.user.client.Element) anchor;
         DOM.setElementProperty(element, HREF, href);
         if (getTarget() != NO_TARGET) {
             DOM.setElementProperty(element, TARGET, getTarget());
@@ -74,10 +74,10 @@ public class LinkInfo {
     }
 
     public boolean inSameWindow() {
-        if (target != NO_TARGET) {
-            return target.equals(_BLANK);
-        } else {
+        if (target.equals(NO_TARGET)) {
             return false;
+        } else {
+            return target.equals(_BLANK);
         }
     }
 
@@ -86,15 +86,11 @@ public class LinkInfo {
     }
 
     public void setInNewWindow(final boolean inNewWindow) {
-        if (inNewWindow) {
-            this.setTarget(_BLANK);
-        } else {
-            setTarget(NO_TARGET);
-        }
+        setInNewWindowImpl(inNewWindow);
     }
 
     public void setTarget(final String target) {
-        this.target = target;
+        setTargetImpl(target);
     }
 
     public void setText(final String text) {
@@ -107,8 +103,20 @@ public class LinkInfo {
 
     @Override
     public String toString() {
-        Element anchor = getElement();
+        final Element anchor = getElement();
         return anchor.getString();
+    }
+
+    private void setInNewWindowImpl(final boolean inNewWindow) {
+        if (inNewWindow) {
+            setTargetImpl(_BLANK);
+        } else {
+            setTargetImpl(NO_TARGET);
+        }
+    }
+
+    private void setTargetImpl(final String target) {
+        this.target = target;
     }
 
 }

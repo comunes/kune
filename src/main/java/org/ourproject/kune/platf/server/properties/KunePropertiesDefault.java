@@ -24,6 +24,8 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Properties;
 
+import org.ourproject.kune.platf.server.ServerException;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -41,7 +43,7 @@ public class KunePropertiesDefault implements KuneProperties {
             properties.load(input);
         } catch (IOException e) {
             String msg = MessageFormat.format("Couldn't open property file {0}", fileName);
-            throw new RuntimeException(msg, e);
+            throw new ServerException(msg, e);
         }
 
     }
@@ -49,7 +51,7 @@ public class KunePropertiesDefault implements KuneProperties {
     public String get(final String key) {
         String value = properties.getProperty(key);
         if (value == null) {
-            throw new RuntimeException("PROPERTY: " + key + " not defined in " + fileName);
+            throw new ServerException("PROPERTY: " + key + " not defined in " + fileName);
         }
         return value;
     }
@@ -63,7 +65,7 @@ public class KunePropertiesDefault implements KuneProperties {
         InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
         if (input == null) {
             String msg = MessageFormat.format("Properties file: ''{0}'' not found", fileName);
-            throw new RuntimeException(msg);
+            throw new ServerException(msg);
         }
         return input;
     }

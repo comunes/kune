@@ -49,6 +49,24 @@ import com.google.inject.matcher.Matcher;
 public abstract class AbstractExtendedModule extends AbstractModule {
 
     /**
+     * Hack to ensure unique Keys for binding different instances of
+     * ExtendedModule. The prefix is chosen to reduce the chances of a conflict
+     * with some other use of
+     * 
+     * @Named. A better solution would be to invent an Annotation for just this
+     *         purpose.
+     */
+    private static Annotation getUniqueAnnotation() {
+        return named("ExtendedModule-" + COUNT.incrementAndGet());
+    }
+
+    private final Set<Object> toBeInjected = new HashSet<Object>();
+
+    private boolean selfInjected = false;
+
+    private static final AtomicInteger COUNT = new AtomicInteger();
+
+    /**
      * Overridden version of bindInterceptor that, in addition to the standard
      * behavior, arranges for field and method injection of each
      * MethodInterceptor in {@code interceptors}.
@@ -77,6 +95,13 @@ public abstract class AbstractExtendedModule extends AbstractModule {
         }
     }
 
+    private void ensureSelfInjection() {
+        if (!selfInjected) {
+            bind(AbstractExtendedModule.class).annotatedWith(getUniqueAnnotation()).toInstance(this);
+            selfInjected = true;
+        }
+    }
+
     @SuppressWarnings("unused")
     @Inject
     private void injectRegisteredObjects(final Injector injector) {
@@ -84,29 +109,4 @@ public abstract class AbstractExtendedModule extends AbstractModule {
             injector.injectMembers(injectee);
         }
     }
-
-    private void ensureSelfInjection() {
-        if (!selfInjectionInitialized) {
-            bind(AbstractExtendedModule.class).annotatedWith(getUniqueAnnotation()).toInstance(this);
-            selfInjectionInitialized = true;
-        }
-    }
-
-    private final Set<Object> toBeInjected = new HashSet<Object>();
-
-    private boolean selfInjectionInitialized = false;
-
-    /**
-     * Hack to ensure unique Keys for binding different instances of
-     * ExtendedModule. The prefix is chosen to reduce the chances of a conflict
-     * with some other use of
-     * 
-     * @Named. A better solution would be to invent an Annotation for just this
-     *         purpose.
-     */
-    private static Annotation getUniqueAnnotation() {
-        return named("ExtendedModule-" + count.incrementAndGet());
-    }
-
-    private static final AtomicInteger count = new AtomicInteger();
 }

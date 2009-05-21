@@ -55,7 +55,7 @@ public class SiteRPC implements RPC, SiteService {
     private final I18nLanguageManager languageManager;
     private final I18nCountryManager countryManager;
     private final ServerToolRegistry serverToolRegistry;
-    private final ExtMediaDescripManager extMediaDescripManager;
+    private final ExtMediaDescripManager extMediaDescManager;
 
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
@@ -63,7 +63,7 @@ public class SiteRPC implements RPC, SiteService {
             final UserInfoService userInfoService, final LicenseManager licenseManager, final Mapper mapper,
             final KuneProperties kuneProperties, final ChatProperties chatProperties,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescripManager) {
+            final ServerToolRegistry serverToolRegistry, final ExtMediaDescripManager extMediaDescManager) {
         this.userSessionProvider = userSessionProvider;
         this.userManager = userManager;
         this.userInfoService = userInfoService;
@@ -74,7 +74,7 @@ public class SiteRPC implements RPC, SiteService {
         this.languageManager = languageManager;
         this.countryManager = countryManager;
         this.serverToolRegistry = serverToolRegistry;
-        this.extMediaDescripManager = extMediaDescripManager;
+        this.extMediaDescManager = extMediaDescManager;
     }
 
     @Transactional(type = TransactionType.READ_ONLY)
@@ -102,15 +102,15 @@ public class SiteRPC implements RPC, SiteService {
         data.setMaxFileSizeInMb(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE));
         data.setUserTools(serverToolRegistry.getToolsForUsers());
         data.setGroupTools(serverToolRegistry.getToolsForGroups());
-        data.setImgResizewidth(new Integer(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH)));
-        data.setImgThumbsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE)));
-        data.setImgCropsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE)));
-        data.setImgIconsize(new Integer(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE)));
+        data.setImgResizewidth(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH)));
+        data.setImgThumbsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE)));
+        data.setImgCropsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE)));
+        data.setImgIconsize(Integer.valueOf(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE)));
         data.setFlvEmbedObject(kuneProperties.get(KuneProperties.FLV_EMBEDED_OBJECT));
         data.setMp3EmbedObject(kuneProperties.get(KuneProperties.MP3_EMBEDED_OBJECT));
         data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));
         data.setAviEmbedObject(kuneProperties.get(KuneProperties.AVI_EMBEDED_OBJECT));
-        data.setExtMediaDescrips(extMediaDescripManager.getAll());
+        data.setExtMediaDescrips(extMediaDescManager.getAll());
         return mapper.map(data, InitDataDTO.class);
     }
 

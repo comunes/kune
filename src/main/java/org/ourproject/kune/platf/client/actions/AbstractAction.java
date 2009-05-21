@@ -62,13 +62,22 @@ public abstract class AbstractAction implements Action {
     /**
      * store
      */
-    private final HashMap<String, Object> store = new HashMap<String, Object>();
+    private HashMap<String, Object> store = new HashMap<String, Object>();
 
     /**
      * Creates a new action with no properties set.
      */
     public AbstractAction() {
         // Nothing to do.
+    }
+
+    /**
+     * Copy constructor used as a substitute of clone
+     */
+    @SuppressWarnings("unchecked")
+    public AbstractAction(final AbstractAction action) {
+        enabled = action.enabled;
+        store = (HashMap<String, Object>) action.store.clone();
     }
 
     /**
@@ -80,6 +89,7 @@ public abstract class AbstractAction implements Action {
      *            the name (<code>null</code> permitted).
      */
     public AbstractAction(final String name) {
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09 15:19
         putValue(NAME, name);
     }
 
@@ -95,7 +105,9 @@ public abstract class AbstractAction implements Action {
      *            the icon (<code>null</code> permitted).
      */
     public AbstractAction(final String name, final ImageResource icon) {
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09 15:19
         putValue(NAME, name);
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09 15:19
         putValue(SMALL_ICON, icon);
     }
 
@@ -181,7 +193,7 @@ public abstract class AbstractAction implements Action {
      *            the value (<code>null</code> permitted).
      */
     public void putValue(final String key, final Object value) {
-        Object old = getValue(key);
+        final Object old = getValue(key);
         if ((old == null && value != null) || (old != null && !old.equals(value))) {
             store.put(key, value);
             firePropertyChange(key, old, value);

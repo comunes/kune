@@ -11,9 +11,9 @@ import com.calclab.suco.client.events.Listener0;
 
 public interface RTEditor {
 
-    public final ActionToolbarPosition topbarPosition = new ActionToolbarPosition("rte-topbar");
-    public final ActionToolbarPosition sndbarPosition = new ActionToolbarPosition("rte-sndbar");;
-    public final ActionToolbarPosition linkCtxPosition = new ActionToolbarPosition("rte-linkctx");;
+    ActionToolbarPosition TOPBAR = new ActionToolbarPosition("rte-topbar");
+    ActionToolbarPosition SNDBAR = new ActionToolbarPosition("rte-sndbar");;
+    ActionToolbarPosition LINKCTX = new ActionToolbarPosition("rte-linkctx");;
 
     void addAction(ActionDescriptor<Object> action);
 

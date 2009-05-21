@@ -42,7 +42,7 @@ public class SiteSearchPanel implements SiteSearchView {
     private final TextBox searchTextBox;
     private final AbstractToolbar siteBar;
 
-    public SiteSearchPanel(final SiteSearchPresenter presenter, final WorkspaceSkeleton ws, Images img) {
+    public SiteSearchPanel(final SiteSearchPresenter presenter, final WorkspaceSkeleton ws, final Images img) {
         siteBar = ws.getSiteBar();
         siteBar.addSpacer();
         searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
@@ -54,7 +54,7 @@ public class SiteSearchPanel implements SiteSearchView {
         siteBar.addSpacer();
         siteBar.add(searchTextBox);
 
-        setTextSearchSmall();
+        setTextSearchSmallImpl();
         searchTextBox.addFocusListener(new FocusListener() {
             public void onFocus(final Widget arg0) {
                 presenter.onSearchFocus();
@@ -102,7 +102,7 @@ public class SiteSearchPanel implements SiteSearchView {
         searchTextBox.setText(text);
     }
 
-    public void setTextSearch(String text) {
+    public void setTextSearch(final String text) {
         searchTextBox.setText(text);
     }
 
@@ -111,6 +111,10 @@ public class SiteSearchPanel implements SiteSearchView {
     }
 
     public void setTextSearchSmall() {
+        setTextSearchSmallImpl();
+    }
+
+    private void setTextSearchSmallImpl() {
         searchTextBox.setPixelSize(SEARCH_TEXT_WIDTH_SMALL, SEARCH_TEXT_HEIGHT);
     }
 }

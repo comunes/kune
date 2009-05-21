@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
+import org.ourproject.kune.platf.client.errors.UIException;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -37,24 +38,23 @@ import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class NewGroupPresenter implements NewGroup {
 
-    private NewGroupView view;
-    private final I18nTranslationService i18n;
-    private final Session session;
-    private final StateManager stateManager;
-    private final Provider<GroupServiceAsync> groupServiceProvider;
-    private boolean mustGoToPrevious;
+    private transient NewGroupView view;
+    private transient final I18nTranslationService i18n;
+    private transient final Session session;
+    private transient final StateManager stateManager;
+    private transient final Provider<GroupServiceAsync> groupService;
+    private transient boolean mustGoToPrevious;
 
     public NewGroupPresenter(final I18nTranslationService i18n, final Session session, final StateManager stateManager,
-            final Provider<GroupServiceAsync> groupServiceProvider) {
+            final Provider<GroupServiceAsync> groupService) {
         this.i18n = i18n;
         this.session = session;
         this.stateManager = stateManager;
-        this.groupServiceProvider = groupServiceProvider;
+        this.groupService = groupService;
         stateManager.addSiteToken(SiteToken.newgroup.toString(), new Listener0() {
             public void onEvent() {
                 doNewGroup();
@@ -113,16 +113,13 @@ public class NewGroupPresenter implements NewGroup {
 
             final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
                 public void onFailure(final Throwable caught) {
-                    try {
-                        throw caught;
-                    } catch (final GroupNameInUseException e) {
+                    if (caught instanceof GroupNameInUseException) {
                         view.unMask();
                         setMessage(i18n.t(WorkspaceMessages.NAME_IN_ALREADY_IN_USE), Level.error);
-                    } catch (final Throwable e) {
+                    } else {
                         view.unMask();
                         setMessage(i18n.t("Error creating group"), Level.error);
-                        GWT.log("Other kind of exception in group registration", null);
-                        throw new RuntimeException();
+                        throw new UIException("Other kind of exception in group registration", caught);
                     }
                 }
 
@@ -134,8 +131,7 @@ public class NewGroupPresenter implements NewGroup {
                     view.unMask();
                 }
             };
-            groupServiceProvider.get().createNewGroup(session.getUserHash(), group, publicDesc, view.getTags(), null,
-                    callback);
+            groupService.get().createNewGroup(session.getUserHash(), group, publicDesc, view.getTags(), null, callback);
         }
     }
 

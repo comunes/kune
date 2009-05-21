@@ -35,8 +35,8 @@ public class BlogClientTool extends FoldableAbstractClientTool {
 
     public BlogClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-            ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
-        super(NAME, i18n.t("blogs"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
+            final ContentCapabilitiesRegistry cntCapReg) {
+        super(NAME, i18n.t("blogs"), toolSelector, wsThemePresenter, ws, cntCapReg);
 
         // registerAclEditableTypes();
         registerAuthorableTypes(TYPE_POST, TYPE_UPLOADEDFILE);
@@ -55,7 +55,7 @@ public class BlogClientTool extends FoldableAbstractClientTool {
         return NAME;
     }
 
-    protected void registerIcons() {
+    private void registerIcons() {
         registerContentTypeIcon(TYPE_BLOG, "images/nav/blog.png");
         registerContentTypeIcon(TYPE_POST, "images/nav/post.png");
         registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);

@@ -86,6 +86,7 @@ final public class StringW {
      * 
      * @author timster@mac.com
      */
+    // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
     public static String truncateNicely(String str, int lower, int upper, String appendToEnd) {
         // strip markup from the string
         str = XmlW.removeXml(str);
@@ -180,6 +181,7 @@ final public class StringW {
      * 
      * @return String that has been word wrapped
      */
+    // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
     static public String wordWrap(String str, int width, String delim, String split, boolean delimInside) {
         int sz = str.length();
 

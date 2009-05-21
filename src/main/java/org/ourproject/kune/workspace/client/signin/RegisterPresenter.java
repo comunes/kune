@@ -28,6 +28,7 @@ import org.ourproject.kune.platf.client.dto.UserDTO;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
 import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
+import org.ourproject.kune.platf.client.errors.UIException;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
@@ -37,7 +38,6 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
 import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class RegisterPresenter extends SignInAbstractPresenter implements Register {
@@ -46,8 +46,9 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
     private final Provider<UserServiceAsync> userServiceProvider;
     private final Provider<SignIn> signInProvider;
 
-    public RegisterPresenter(Session session, StateManager stateManager, I18nUITranslationService i18n,
-            Provider<UserServiceAsync> userServiceProvider, Provider<SignIn> signInProvider) {
+    public RegisterPresenter(final Session session, final StateManager stateManager,
+            final I18nUITranslationService i18n, final Provider<UserServiceAsync> userServiceProvider,
+            final Provider<SignIn> signInProvider) {
         super(session, stateManager, i18n);
         this.userServiceProvider = userServiceProvider;
         this.signInProvider = signInProvider;
@@ -69,7 +70,7 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
         return view;
     }
 
-    public void init(RegisterView view) {
+    public void init(final RegisterView view) {
         this.view = view;
         super.view = view;
     }
@@ -87,25 +88,21 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
             final TimeZoneDTO timezone = new TimeZoneDTO();
             timezone.setId(view.getTimezone());
 
-            final boolean wantPersonalHomepage = view.wantPersonalHomepage();
+            final boolean wantHomepage = view.wantPersonalHomepage();
 
             final UserDTO user = new UserDTO(view.getLongName(), view.getShortName(), view.getRegisterPassword(),
                     view.getEmail(), language, country, timezone, null, true, SubscriptionMode.manual, "blue");
             final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
                 public void onFailure(final Throwable caught) {
                     view.unMask();
-                    try {
-                        throw caught;
-                    } catch (final EmailAddressInUseException e) {
+                    if (caught instanceof EmailAddressInUseException) {
                         view.setErrorMessage(i18n.t(PlatfMessages.EMAIL_IN_USE), Level.error);
-                    } catch (final GroupNameInUseException e) {
+                    } else if (caught instanceof GroupNameInUseException) {
                         view.setErrorMessage(i18n.t(PlatfMessages.NAME_IN_USE), Level.error);
-                    } catch (final Throwable e) {
+                    } else {
                         view.setErrorMessage(i18n.t("Error during registration."), Level.error);
-                        GWT.log("Other kind of exception in user registration" + e.getMessage() + ", "
-                                + e.getLocalizedMessage(), null);
-                        e.printStackTrace();
-                        throw new RuntimeException();
+                        throw new UIException("Other kind of exception in user registration", caught);
+
                     }
                 }
 
@@ -114,14 +111,14 @@ public class RegisterPresenter extends SignInAbstractPresenter implements Regist
                     stateManager.gotoToken(userInfoDTO.getHomePage());
                     view.hide();
                     view.unMask();
-                    if (wantPersonalHomepage) {
+                    if (wantHomepage) {
                         view.showWelcolmeDialog();
                     } else {
                         view.showWelcolmeDialogNoHomepage();
                     }
                 }
             };
-            userServiceProvider.get().createUser(user, wantPersonalHomepage, callback);
+            userServiceProvider.get().createUser(user, wantHomepage, callback);
         }
     }
 }

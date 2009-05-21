@@ -20,10 +20,11 @@
 package org.ourproject.kune.platf.client.utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Url {
-    private final String base;
-    private final ArrayList<UrlParam> params;
+    private transient final String base;
+    private transient final List<UrlParam> params;
 
     public Url(final String base) {
         this.base = base;
@@ -33,12 +34,12 @@ public class Url {
     public Url(final String base, final UrlParam... iniParams) {
         this(base);
         for (UrlParam param : iniParams) {
-            add(param);
+            addImpl(param);
         }
     }
 
     public void add(final UrlParam param) {
-        params.add(param);
+        addImpl(param);
     }
 
     @Override
@@ -54,5 +55,9 @@ public class Url {
             }
         }
         return base + paramPart;
+    }
+
+    private void addImpl(final UrlParam param) {
+        params.add(param);
     }
 }

@@ -26,17 +26,17 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public class UserBuddiesData {
 
-    public static UserBuddiesData EMPTY = new UserBuddiesData();
+    public static final UserBuddiesData EMPTY = new UserBuddiesData();
 
     private List<User> buddies;
-    int otherExternalBuddies;
+    private int otherExtBuddies;
 
     public UserBuddiesData() {
-        otherExternalBuddies = 0;
+        otherExtBuddies = 0;
         buddies = new ArrayList<User>();
     }
 
-    public boolean contains(String shortName) {
+    public boolean contains(final String shortName) {
         for (User buddie : buddies) {
             if (buddie.getShortName().equals(shortName)) {
                 return true;
@@ -49,20 +49,20 @@ public class UserBuddiesData {
         return buddies;
     }
 
-    public int getOtherExternalBuddies() {
-        return otherExternalBuddies;
+    public int getOtherExtBuddies() {
+        return otherExtBuddies;
     }
 
-    public void setBuddies(List<User> buddies) {
+    public void setBuddies(final List<User> buddies) {
         this.buddies = buddies;
     }
 
-    public void setOtherExternalBuddies(int otherExternalBuddies) {
-        this.otherExternalBuddies = otherExternalBuddies;
+    public void setOtherExtBuddies(final int otherExtBuddies) {
+        this.otherExtBuddies = otherExtBuddies;
     }
 
     @Override
     public String toString() {
-        return "UserBuddiesData[ext: " + otherExternalBuddies + " / int: " + buddies + "]";
+        return "UserBuddiesData[ext: " + otherExtBuddies + " / int: " + buddies + "]";
     }
 }

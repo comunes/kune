@@ -13,57 +13,6 @@ import org.ourproject.kune.platf.server.domain.User;
 
 public abstract class TestDomainHelper {
 
-    public static User createUser(final int number) {
-        String shortName = "shortname" + number;
-        String longName = "name" + number;
-        User user = new User(shortName, longName, "email@domain" + number, "password" + number, null, null,
-                TimeZone.getDefault());
-        Group userGroup = new Group(shortName, longName);
-        userGroup.setAdmissionType(AdmissionType.Closed);
-        userGroup.setSocialNetwork(createSocialNetwork(userGroup, userGroup, userGroup, null));
-        user.setUserGroup(userGroup);
-        return user;
-    }
-
-    public static Container createFolderWithId(final long id) {
-        Container container = new Container();
-        container.setId(id);
-        return container;
-    }
-
-    public static Container createFolderWithIdAndToolName(final int i, final String toolName) {
-        Container container = createFolderWithId(i);
-        container.setToolName(toolName);
-        return container;
-    }
-
-    public static Container createFolderWithIdAndGroupAndTool(final int i, final String groupShortName,
-            final String toolName) {
-        Container container = createFolderWithIdAndToolName(i, toolName);
-        Group owner = new Group();
-        owner.setShortName(groupShortName);
-        container.setOwner(owner);
-        return container;
-
-    }
-
-    public static Group createGroup(final int number) {
-        Group group = new Group("ysei" + number, "Yellow Submarine Environmental Initiative" + number);
-        group.setId(new Long(number));
-        return group;
-    }
-
-    public static SocialNetwork createSocialNetwork(final Group groupInAdmins, final Group groupInCollab,
-            final Group groupInViewer, final Group groupInPendings) {
-
-        SocialNetwork socialNetwork = new SocialNetwork();
-        socialNetwork.addAdmin(groupInAdmins);
-        socialNetwork.addCollaborator(groupInCollab);
-        socialNetwork.addViewer(groupInViewer);
-        socialNetwork.addPendingCollaborator(groupInPendings);
-        return socialNetwork;
-    }
-
     public static AccessLists createAccessLists(final Group groupAdmin, final Group groupEditor, final Group groupViewer) {
 
         AccessLists lists = new AccessLists();
@@ -77,16 +26,6 @@ public abstract class TestDomainHelper {
             lists.addViewer(groupViewer);
         }
         return lists;
-    }
-
-    public static Content createDescriptor(final long id, final String title, final String content) {
-        Content descriptor = new Content();
-        descriptor.setId(id);
-        Revision rev = new Revision(descriptor);
-        descriptor.addRevision(rev);
-        rev.setTitle(title);
-        rev.setBody(content);
-        return descriptor;
     }
 
     public static String createBigText() {
@@ -236,5 +175,66 @@ public abstract class TestDomainHelper {
                 + "\n"
                 + "Cras vulputate. Praesent tempus fringilla diam. Suspendisse at elit. Cras ut nulla eget mi dapibus pretium. Etiam hendrerit tortor sed lectus. Cras mauris. Nam ligula. Mauris semper, arcu ut facilisis molestie, lorem sapien iaculis quam, at dignissim sapien mauris id pede. In metus ante, porttitor id, fringilla a, adipiscing eget, nisi. Ut ornare sapien nec velit. Aenean tortor metus, pellentesque vitae, iaculis eget, imperdiet nec, turpis. Vestibulum sit amet erat ac urna auctor imperdiet. Nulla facilisi. Quisque facilisis pede vel mi consequat dignissim. Vivamus sapien.\n";
         return text;
+    }
+
+    public static Content createDescriptor(final long id, final String title, final String content) {
+        Content descriptor = new Content();
+        descriptor.setId(id);
+        Revision rev = new Revision(descriptor);
+        descriptor.addRevision(rev);
+        rev.setTitle(title);
+        rev.setBody(content);
+        return descriptor;
+    }
+
+    public static Container createFolderWithId(final long id) {
+        Container container = new Container();
+        container.setId(id);
+        return container;
+    }
+
+    public static Container createFolderWithIdAndGroupAndTool(final int i, final String groupShortName,
+            final String toolName) {
+        Container container = createFolderWithIdAndToolName(i, toolName);
+        Group owner = new Group();
+        owner.setShortName(groupShortName);
+        container.setOwner(owner);
+        return container;
+
+    }
+
+    public static Container createFolderWithIdAndToolName(final int i, final String toolName) {
+        Container container = createFolderWithId(i);
+        container.setToolName(toolName);
+        return container;
+    }
+
+    public static Group createGroup(final int number) {
+        Group group = new Group("ysei" + number, "Yellow Submarine Environmental Initiative" + number);
+        group.setId(Long.valueOf(number));
+        return group;
+    }
+
+    public static SocialNetwork createSocialNetwork(final Group groupInAdmins, final Group groupInCollab,
+            final Group groupInViewer, final Group groupInPendings) {
+
+        SocialNetwork socialNetwork = new SocialNetwork();
+        socialNetwork.addAdmin(groupInAdmins);
+        socialNetwork.addCollaborator(groupInCollab);
+        socialNetwork.addViewer(groupInViewer);
+        socialNetwork.addPendingCollaborator(groupInPendings);
+        return socialNetwork;
+    }
+
+    public static User createUser(final int number) {
+        String shortName = "shortname" + number;
+        String longName = "name" + number;
+        User user = new User(shortName, longName, "email@domain" + number, "password" + number, null, null,
+                TimeZone.getDefault());
+        Group userGroup = new Group(shortName, longName);
+        userGroup.setAdmissionType(AdmissionType.Closed);
+        userGroup.setSocialNetwork(createSocialNetwork(userGroup, userGroup, userGroup, null));
+        user.setUserGroup(userGroup);
+        return user;
     }
 }

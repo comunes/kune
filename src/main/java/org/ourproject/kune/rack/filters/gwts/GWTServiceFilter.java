@@ -32,12 +32,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.rack.RackHelper;
-import org.ourproject.kune.rack.filters.InjectedFilter;
+import org.ourproject.kune.rack.filters.AbstractInjectedFilter;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 
-public class GWTServiceFilter extends InjectedFilter {
-    public static final Log log = LogFactory.getLog(GWTServiceFilter.class);
+public class GWTServiceFilter extends AbstractInjectedFilter {
+    public static final Log LOG = LogFactory.getLog(GWTServiceFilter.class);
 
     private final Class<? extends RemoteService> serviceClass;
     private final DelegatedRemoteServlet servlet;
@@ -47,10 +47,14 @@ public class GWTServiceFilter extends InjectedFilter {
         this.servlet = new DelegatedRemoteServlet();
     }
 
+    @Override
+    public void destroy() {
+    }
+
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
-        log.info("--------------------------------------------------------------------------------");
-        log.debug("SERVICE: " + RackHelper.getURI(request) + " - " + serviceClass.getSimpleName());
+        LOG.info("--------------------------------------------------------------------------------");
+        LOG.debug("SERVICE: " + RackHelper.getURI(request) + " - " + serviceClass.getSimpleName());
         final RemoteService service = getInstance(serviceClass);
         servlet.setService(service);
         servlet.doPost((HttpServletRequest) request, (HttpServletResponse) response);

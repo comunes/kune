@@ -26,7 +26,6 @@ public abstract class AbstractPalettePanel {
         popupPalette.setVisible(true);
     }
 
-    protected void createPalette() {
-    }
+    protected abstract void createPalette();
 
 }

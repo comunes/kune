@@ -8,7 +8,7 @@ public class ShortcutDescriptor {
 
     private static final String NO_KEYNAME = "nokeyname";
 
-    private static boolean has(int modifiers, int modifier) {
+    private static boolean has(final int modifiers, final int modifier) {
         return ((modifiers & modifier) == modifier);
     }
 
@@ -18,46 +18,51 @@ public class ShortcutDescriptor {
     private final int keycode;
     private final String keyName;
 
-    public ShortcutDescriptor(boolean ctrl, boolean alt, boolean shift, int key) {
+    public ShortcutDescriptor(final boolean ctrl, final boolean alt, final boolean shift, final int key) {
         this(ctrl, alt, shift, key, NO_KEYNAME);
     }
 
-    public ShortcutDescriptor(boolean ctrl, boolean alt, boolean shift, int key, String keyName) {
+    public ShortcutDescriptor(final boolean ctrl, final boolean alt, final boolean shift, final int key,
+            final String keyName) {
         this.alt = alt;
         this.ctrl = ctrl;
         this.shift = shift;
         this.keycode = key;
-        this.keyName = keyName;
+        if (keyName == null) {
+            this.keyName = NO_KEYNAME;
+        } else {
+            this.keyName = keyName;
+        }
     }
 
-    public ShortcutDescriptor(boolean ctrl, boolean shift, int key) {
+    public ShortcutDescriptor(final boolean ctrl, final boolean shift, final int key) {
         this(ctrl, false, shift, key, NO_KEYNAME);
     }
 
-    public ShortcutDescriptor(boolean ctrl, boolean shift, int key, String keyName) {
+    public ShortcutDescriptor(final boolean ctrl, final boolean shift, final int key, final String keyName) {
         this(ctrl, false, shift, key, keyName);
     }
 
-    public ShortcutDescriptor(boolean ctrl, int key) {
+    public ShortcutDescriptor(final boolean ctrl, final int key) {
         this(ctrl, false, false, key, NO_KEYNAME);
     }
 
-    public ShortcutDescriptor(boolean ctrl, int keycode, String keyName) {
+    public ShortcutDescriptor(final boolean ctrl, final int keycode, final String keyName) {
         this(ctrl, false, false, keycode, keyName);
     }
 
-    public ShortcutDescriptor(int keycode, int modifiers) {
+    public ShortcutDescriptor(final int keycode, final int modifiers) {
         this(has(modifiers, KeyboardListener.MODIFIER_CTRL), has(modifiers, KeyboardListener.MODIFIER_ALT), has(
                 modifiers, KeyboardListener.MODIFIER_SHIFT), keycode, NO_KEYNAME);
     }
 
-    public ShortcutDescriptor(int keycode, int modifiers, String keyName) {
+    public ShortcutDescriptor(final int keycode, final int modifiers, final String keyName) {
         this(has(modifiers, KeyboardListener.MODIFIER_CTRL), has(modifiers, KeyboardListener.MODIFIER_ALT), has(
                 modifiers, KeyboardListener.MODIFIER_SHIFT), keycode, keyName);
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -94,13 +99,13 @@ public class ShortcutDescriptor {
         return result;
     }
 
-    public boolean is(char keyCode, int modifiers) {
+    public boolean is(final char keyCode, final int modifiers) {
         return (keyCode == keyCode && same(modifiers, KeyboardListener.MODIFIER_ALT, alt)
                 && same(modifiers, KeyboardListener.MODIFIER_CTRL, ctrl) && same(modifiers,
                 KeyboardListener.MODIFIER_SHIFT, shift));
     }
 
-    public boolean same(int modifiers, int modifier, boolean keyValue) {
+    public boolean same(final int modifiers, final int modifier, final boolean keyValue) {
         return (has(modifiers, modifier) == keyValue);
     }
 
@@ -114,11 +119,11 @@ public class ShortcutDescriptor {
         return s;
     }
 
-    private String sKey(boolean key, String specialKeyName) {
+    private String sKey(final boolean key, final String specialKeyName) {
         return key ? translateKey(specialKeyName) + "+" : "";
     }
 
-    private String translateKey(String keyNameToTranslate) {
+    private String translateKey(final String keyNameToTranslate) {
         return Resources.i18n.tWithNT(keyNameToTranslate, "The '" + keyNameToTranslate + "' keyboard key");
     }
 

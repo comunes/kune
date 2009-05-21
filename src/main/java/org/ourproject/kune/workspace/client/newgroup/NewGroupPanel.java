@@ -88,7 +88,7 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
     private LicenseDTO license;
 
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nTranslationService i18n,
-            final Provider<LicenseWizard> licenseWizard, Images img) {
+            final Provider<LicenseWizard> licenseWizard, final Images img) {
         super(NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, 450, 430, "k-newgroup-icon",
                 i18n.t("Cancel"), CANCEL_BUTTON, i18n.t("Register"), REGISTER_BUTTON, new Listener0() {
                     public void onEvent() {
@@ -101,12 +101,12 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
                 }, 9);
         super.addListener(new WindowListenerAdapter() {
             @Override
-            public void onHide(Component component) {
+            public void onHide(final Component component) {
                 presenter.onClose();
             }
 
             @Override
-            public void onShow(Component component) {
+            public void onShow(final Component component) {
                 KuneUiUtils.focusOnField(shortNameField);
             }
         });
@@ -170,10 +170,8 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         mask(i18n.t("Processing"));
     }
 
-    public void setLicense(LicenseDTO license) {
-        this.license = license;
-        licenseImage.setUrl(license.getImageUrl());
-        KuneUiUtils.setQuickTip(licenseImage, license.getLongName());
+    public void setLicense(final LicenseDTO license) {
+        setLicenseImpl(license);
     }
 
     public void setMessage(final String message, final Level level) {
@@ -247,7 +245,7 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
 
         licenseImage = new Image("images/lic/bysa80x15.png");
         licenseImage.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+            public void onClick(final Widget arg0) {
                 KuneWindowUtils.open(license.getUrl());
             }
         });
@@ -261,10 +259,10 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         changeLicenseButton.setTabIndex(5);
         changeLicenseButton.addListener(new ButtonListenerAdapter() {
             @Override
-            public void onClick(Button button, EventObject e) {
+            public void onClick(final Button button, final EventObject e) {
                 licenseWizard.get().start(new Listener<LicenseDTO>() {
-                    public void onEvent(LicenseDTO license) {
-                        setLicense(license);
+                    public void onEvent(final LicenseDTO license) {
+                        setLicenseImpl(license);
                     }
                 });
             }
@@ -313,5 +311,11 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         communityRadio.setTabIndex(8);
 
         return form;
+    }
+
+    private void setLicenseImpl(final LicenseDTO license) {
+        this.license = license;
+        licenseImage.setUrl(license.getImageUrl());
+        KuneUiUtils.setQuickTip(licenseImage, license.getLongName());
     }
 }

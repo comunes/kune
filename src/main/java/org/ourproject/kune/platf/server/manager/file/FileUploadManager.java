@@ -66,6 +66,10 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
     I18nTranslationService i18n;
 
     @Override
+    protected void beforePostStart() {
+    }
+
+    @Override
     protected JSONObject createJsonResponse(final boolean success, final String message) {
         /**
          * 
@@ -86,7 +90,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             response.put("error", message);
             response.put("code", "232");
         } catch (final Exception e) {
-            log.error("Error building response");
+            LOG.error("Error building response");
         }
         return response;
     }
@@ -114,7 +118,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
 
             final String mimetype = fileUploadItem.getContentType();
             BasicMimeType basicMimeType = new BasicMimeType(mimetype);
-            log.info("Mimetype: " + basicMimeType);
+            LOG.info("Mimetype: " + basicMimeType);
             final String extension = FileUtils.getFileNameExtension(file.getName(), false);
 
             String preview = "";
@@ -167,12 +171,11 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
                 ImageUtilsDefault.createThumbFromPdf(fileOrig, previewName);
             }
         } catch (NumberFormatException e) {
-            log.error("Image sizes in kune.properties are not integers");
-            e.printStackTrace();
+            LOG.error("Image sizes in kune.properties are not integers", e);
         } catch (MagickException e) {
-            log.info("Problem generating image thumb for " + filename);
+            LOG.info("Problem generating image thumb for " + filename, e);
         } catch (FileNotFoundException e) {
-            log.info("Original image not found generating image thumb for " + filename);
+            LOG.info("Original image not found generating image thumb for " + filename, e);
         }
     }
 }

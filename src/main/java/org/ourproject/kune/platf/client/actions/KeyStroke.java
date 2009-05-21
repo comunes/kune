@@ -73,7 +73,7 @@ public class KeyStroke {
      * under the assumption that garbage collection of a new keystroke is easy
      * when we find the old one that it matches in the cache.
      */
-    private static final HashMap<KeyStroke, KeyStroke> cache = new HashMap<KeyStroke, KeyStroke>();
+    private static final HashMap<KeyStroke, KeyStroke> CACHE = new HashMap<KeyStroke, KeyStroke>();
 
     /** The most recently generated keystroke, or null. */
     private static KeyStroke recent;
@@ -84,7 +84,7 @@ public class KeyStroke {
      * 
      * @see #getKeyStroke(String)
      */
-    static final HashMap<String, Object> vktable = new HashMap<String, Object>();
+    static final HashMap<String, Object> VKTABLE = new HashMap<String, Object>();
 
     private static final int VK_UNDEFINED = 0;
     private static final char CHAR_UNDEFINED = '\uffff';
@@ -207,9 +207,9 @@ public class KeyStroke {
         }
         stroke = new KeyStroke(keyChar, keyCode, modifiers, release);
         // Check level 1 cache.
-        KeyStroke cached = cache.get(stroke);
+        KeyStroke cached = CACHE.get(stroke);
         if (cached == null) {
-            cache.put(stroke, stroke);
+            CACHE.put(stroke, stroke);
         } else {
             stroke = cached;
         }
@@ -503,11 +503,11 @@ public class KeyStroke {
      * @return a cached replacement if something goes wrong
      */
     protected Object readResolve() {
-        KeyStroke s = cache.get(this);
+        KeyStroke s = CACHE.get(this);
         if (s != null) {
             return s;
         }
-        cache.put(this, this);
+        CACHE.put(this, this);
         return this;
     }
 

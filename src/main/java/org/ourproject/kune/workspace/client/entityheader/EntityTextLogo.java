@@ -40,8 +40,8 @@ public class EntityTextLogo extends VerticalPanel {
     public EntityTextLogo() {
         // Initialize
         super();
-        HorizontalPanel generalHP = new HorizontalPanel();
-        VerticalPanel logoTextVP = new VerticalPanel();
+        final HorizontalPanel generalHP = new HorizontalPanel();
+        final VerticalPanel logoTextVP = new VerticalPanel();
         logoImage = new Image();
         logoLabel = new Label();
         final Label expandCell = new Label("");
@@ -70,7 +70,7 @@ public class EntityTextLogo extends VerticalPanel {
         setStylePrimaryName("k-entitytextlogo");
         addStyleName("k-entitytextlogo-no-border");
         logoImage.setVisible(false);
-        setLogoText("");
+        setLogoTextImpl("");
     }
 
     public void setLargeFont() {
@@ -78,7 +78,7 @@ public class EntityTextLogo extends VerticalPanel {
         logoLabel.addStyleName(LOGO_LARGE_FONT_STYLE);
     }
 
-    public void setLogoImage(AbstractImagePrototype imageProto) {
+    public void setLogoImage(final AbstractImagePrototype imageProto) {
         imageProto.applyTo(logoImage);
     }
 
@@ -88,7 +88,7 @@ public class EntityTextLogo extends VerticalPanel {
     }
 
     public void setLogoText(final String text) {
-        logoLabel.setText(text);
+        setLogoTextImpl(text);
     }
 
     public void setLogoVisible(final boolean visible) {
@@ -109,5 +109,9 @@ public class EntityTextLogo extends VerticalPanel {
         logoLabel.removeStyleName(LOGO_LARGE_FONT_STYLE);
         logoLabel.removeStyleName(LOGO_SMALL_FONT_STYLE);
         logoLabel.removeStyleName(LOGO_MEDIUM_FONT_STYLE);
+    }
+
+    private void setLogoTextImpl(final String text) {
+        logoLabel.setText(text);
     }
 }

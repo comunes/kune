@@ -83,7 +83,7 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
 
     private char getCharEntered() {
         try {
-            return (char) (new Integer(inputUnicodeField.getRawValue())).intValue();
+            return (char) Integer.valueOf(inputUnicodeField.getRawValue()).intValue();
         } catch (Exception except) {
             Log.debug("Not possible to cast utf8 int to char");
         }

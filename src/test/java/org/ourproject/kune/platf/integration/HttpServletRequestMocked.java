@@ -45,6 +45,7 @@ public class HttpServletRequestMocked implements HttpServletRequest {
         return null;
     }
 
+    // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:17
     public Cookie[] getCookies() {
         return null;
     }
@@ -114,6 +115,7 @@ public class HttpServletRequestMocked implements HttpServletRequest {
         return null;
     }
 
+    // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:17
     public String[] getParameterValues(final String arg0) {
         return null;
     }

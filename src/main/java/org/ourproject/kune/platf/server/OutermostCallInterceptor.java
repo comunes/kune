@@ -28,10 +28,10 @@ import com.google.inject.Injector;
 /*
  * See:
  * http://tembrel.blogspot.com/2007/09/matcher-and-methodinterceptor-for-dwr.html
- * 
+ *
  */
 
-public class OutermostCallInterceptor implements MethodInterceptor {
+public final class OutermostCallInterceptor implements MethodInterceptor {
     /**
      * Decorates a MethodInterceptor so that only the outermost invocation using
      * that interceptor will be intercepted and nested invocations willbe

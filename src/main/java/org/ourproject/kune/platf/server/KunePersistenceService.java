@@ -37,7 +37,7 @@ public class KunePersistenceService {
             persistenceService.start();
             databaseInitializer.initConditional();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServerException("Error starting persistence service", e);
         }
     }
 

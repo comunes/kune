@@ -12,7 +12,7 @@ import com.gwtext.client.widgets.form.event.FormPanelListenerAdapter;
 
 public class InsertMediaAbstractPanel extends InsertElementAbstractPanel implements InsertMediaAbstractView {
 
-    protected TextField hrefField;
+    protected transient TextField hrefField;
 
     public InsertMediaAbstractPanel(final String title, final InsertMediaAbstractPresenter presenter) {
         super(title, InsertMediaDialogView.HEIGHT);
@@ -33,7 +33,7 @@ public class InsertMediaAbstractPanel extends InsertElementAbstractPanel impleme
             }
         });
 
-        insert(1, hrefField);
+        insertImpl(1, hrefField);
         defValues();
     }
 
@@ -44,7 +44,7 @@ public class InsertMediaAbstractPanel extends InsertElementAbstractPanel impleme
 
     @Override
     public void insert(final int index, final Component component) {
-        super.insert(index, component);
+        insertImpl(index, component);
     }
 
     @Override
@@ -66,5 +66,9 @@ public class InsertMediaAbstractPanel extends InsertElementAbstractPanel impleme
         wrapText.setVisible(true);
         wrapText.setChecked(true);
         positionCombo.setValue(ContentPosition.RIGHT);
+    }
+
+    private void insertImpl(final int index, final Component component) {
+        super.insert(index, component);
     }
 }

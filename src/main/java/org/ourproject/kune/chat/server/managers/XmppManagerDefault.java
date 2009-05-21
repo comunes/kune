@@ -44,7 +44,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class XmppManagerDefault implements XmppManager {
-    public static final Log log = LogFactory.getLog(XmppManagerDefault.class);
+    public static final Log LOG = LogFactory.getLog(XmppManagerDefault.class);
 
     private final ChatProperties chatProperties;
 
@@ -136,7 +136,7 @@ public class XmppManagerDefault implements XmppManager {
         String userJid = userName + "@" + chatProperties.getDomain();
         Chat newChat = xmppConn.getChatManager().createChat(userJid, new MessageListener() {
             public void processMessage(final Chat arg0, final Message arg1) {
-                log.info("Sended message: " + text);
+                LOG.info("Sended message: " + text);
             }
         });
         try {
@@ -146,7 +146,7 @@ public class XmppManagerDefault implements XmppManager {
             message.setBody(text);
             newChat.sendMessage(message);
         } catch (Exception e) {
-            log.error("Error Delivering xmpp message to " + userName);
+            LOG.error("Error Delivering xmpp message to " + userName);
         }
         xmppConn.disconnect();
     }

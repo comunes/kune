@@ -11,6 +11,16 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** New Action class
+*** Things to support
+**** menu and toolbars separators (space, bar, expand)
+**** index position insertion (for buttons added by other plugins)
+**** menu button property change (icon, text). If we select a menu option, maybe this require a change in the menu button.
+**** confirmation of actions yes, no.... (confirmation title, text, and onNotConfirmed)
+**** tongle/push buttons with isPressed (initially and later)...
+**** position id, that is, if we have some toolbars and a list of actions, how to select which action in which toolbar.
+**** radio menu (with group) and check menu item
+
 ** maven-gwt problem (using another plugin from codehaus)
    mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:compile
    and so on.
@@ -119,6 +129,8 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO <v> study opensocial, openstack and related
+   http://developer.yahoo.net/blog/archives/2008/12/the_open_stack.html
 ** TODO <v> Use of command key ⌘ for Mac shortcuts
 ** TODO <v,s> harden our privacy policy. Goals:
    - permit user/projects/contents how much private or public are
@@ -127,6 +139,7 @@ TODO-list for kune -*- mode: org; -*-
    - keep always the user informed
    - consider integration of chryptopgraphy (keyczar.org ? )
    - encourage the use of nicknames; discourage the use of real names (as in Facebook). If a political group uses real names, an undercover would have too much info
+	 - take into account the rms recommendations about privacy...
 ** <v> trash icon area d&d
 ** vjrj <v> shortcuts enhacement
 *** Clarify the keycodes vs utf8 chars Shortcut definition (Function keys and so on...)
@@ -464,6 +477,21 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    http://groups.google.com/group/Google-Web-Toolkit/browse_frm/thread/5d01cd806d93b94e/2909d30d1b2ddfb7?lnk=gst&q=GWT+%2B+FlowPanel+%2B+CSS+#2909d30d1b2ddfb7
 ** TODO <v> captcha in anonymous comments/edits 
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/99c259aad06406c6?pli=1
+** TODO <v> Study P2P integration
+   Study of P2P usage:
+   http://torrentfreak.com/p2p-traffic-still-booming-071128/
+*** torrent
+    http://en.wikipedia.org/wiki/Torrent_tracker
+    BT FAQ:
+    http://www.dessent.net/btfaq/ 
+    mod_bt:
+    http://www.crackerjack.net/mod_bt/mod_bt.html
+    apt-cache show libapache2-mod-bt
+    http://mail.milwaukeelug.org/wws/arc/mlug-list/2007-10/msg00119.html
+
+    http://hightechsorcery.com/2008/02/bittorrent-tracker-debian-and-ubuntu
+    http://erdgeist.org/arts/software/opentracker/
+    http://torrentfreak.com/the-pirate-bay-switches-to-opentracker-071208/
 * LONG-TERM
 ** <s> integrate some blog/wiki converter:
    http://code.google.com/p/google-blog-converters-appengine/

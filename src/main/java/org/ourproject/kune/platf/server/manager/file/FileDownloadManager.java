@@ -62,7 +62,7 @@ public class FileDownloadManager extends HttpServlet {
 
     static final String APPLICATION_X_DOWNLOAD = "application/x-download";
 
-    public static final Log log = LogFactory.getLog(FileDownloadManager.class);
+    public static final Log LOG = LogFactory.getLog(FileDownloadManager.class);
 
     @Inject
     ContentManager contentManager;
@@ -132,7 +132,7 @@ public class FileDownloadManager extends HttpServlet {
             contentType = mimeType.toString();
         }
         resp.setContentType(contentType);
-        log.info("Content type returned: " + contentType);
+        LOG.info("Content type returned: " + contentType);
 
         resp.setHeader(RESP_HEADER_CONTEND_DISP, RESP_HEADER_ATTACHMENT_FILENAME + title + extension + RESP_HEADER_END);
         return absFilename;

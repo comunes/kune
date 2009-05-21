@@ -35,8 +35,8 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
-            ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
-        super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
+            final ContentCapabilitiesRegistry cntCapRegistry) {
+        super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws, cntCapRegistry);
 
         // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -55,7 +55,7 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
         return NAME;
     }
 
-    protected void registerIcons() {
+    private void registerIcons() {
         registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
         registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
         registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);

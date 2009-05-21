@@ -56,8 +56,7 @@ public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements Ent
     @Override
     public void createAndShow() {
         // FIXME: use onAfterCreate in Factory/Module
-        entityPreferencesGroup.createAll();
-        super.createAndShow();
+        createAndShowItImpl();
     }
 
     public void setButtonVisible(final boolean visible) {
@@ -74,11 +73,16 @@ public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements Ent
         optionsButton.setText(i18n.t(PlatfMessages.ENT_OPTIONS_USER_TITLE));
     }
 
+    private void createAndShowItImpl() {
+        entityPreferencesGroup.createAll();
+        super.createAndShow();
+    }
+
     private void createOptionsButton() {
         optionsButton = new EntityHeaderButton("", images.emblemSystem());
         optionsButton.addClickListener(new ClickListener() {
             public void onClick(final Widget arg0) {
-                createAndShow();
+                createAndShowItImpl();
             }
         });
         optionsButton.ensureDebugId(GROUP_OPTIONS_ICON);

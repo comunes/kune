@@ -183,6 +183,13 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class RoundedPanel extends SimplePanel {
 
+    private static final String _1PX = "1px";
+    private static final String _2PX = "2px";
+    private static final String _3PX = "3px";
+    private static final String _4PX = "4px";
+    private static final String _5PX = "5px";
+    private static final String _6PX = "6px";
+
     /**
      * <code>TOPLEFT</code> top left rounded corner
      */
@@ -236,29 +243,26 @@ public class RoundedPanel extends SimplePanel {
     /**
      * Lookup table for corner border width
      */
-    private final static String[][] CORNERBORDER = { { "1px" }, { "1px", "1px" }, { "1px", "1px", "1px" },
-            { "1px", "1px", "1px", "1px" }, { "1px", "1px", "1px", "2px", "1px" },
-            { "1px", "1px", "1px", "1px", "2px", "1px" }, { "1px", "1px", "1px", "1px", "1px", "2px", "1px" },
-            { "1px", "1px", "1px", "1px", "1px", "2px", "2px", "1px" },
-            { "1px", "1px", "1px", "1px", "1px", "1px", "2px", "3px", "1px" } };
+    private final static String[][] CORNERBORDER = { { _1PX }, { _1PX, _1PX }, { _1PX, _1PX, _1PX },
+            { _1PX, _1PX, _1PX, _1PX }, { _1PX, _1PX, _1PX, _2PX, _1PX }, { _1PX, _1PX, _1PX, _1PX, _2PX, _1PX },
+            { _1PX, _1PX, _1PX, _1PX, _1PX, _2PX, _1PX }, { _1PX, _1PX, _1PX, _1PX, _1PX, _2PX, _2PX, _1PX },
+            { _1PX, _1PX, _1PX, _1PX, _1PX, _1PX, _2PX, _3PX, _1PX } };
 
     /**
      * Lookup table for corner height
      */
-    private final static String[][] CORNERHEIGHT = { { "1px" }, { "1px", "1px" }, { "1px", "1px", "1px" },
-            { "1px", "1px", "1px", "1px" }, { "2px", "1px", "1px", "1px", "1px" },
-            { "2px", "1px", "1px", "1px", "1px", "1px" }, { "2px", "1px", "1px", "1px", "1px", "1px", "1px" },
-            { "2px", "1px", "1px", "1px", "1px", "1px", "1px", "1px" },
-            { "3px", "2px", "1px", "1px", "1px", "1px", "1px", "1px", "1px" } };
+    private final static String[][] CORNERHEIGHT = { { _1PX }, { _1PX, _1PX }, { _1PX, _1PX, _1PX },
+            { _1PX, _1PX, _1PX, _1PX }, { _2PX, _1PX, _1PX, _1PX, _1PX }, { _2PX, _1PX, _1PX, _1PX, _1PX, _1PX },
+            { _2PX, _1PX, _1PX, _1PX, _1PX, _1PX, _1PX }, { _2PX, _1PX, _1PX, _1PX, _1PX, _1PX, _1PX, _1PX },
+            { _3PX, _2PX, _1PX, _1PX, _1PX, _1PX, _1PX, _1PX, _1PX } };
 
     /**
      * Lookup table for corner margin
      */
-    private final static String[][] CORNERMARGIN = { { "1px" }, { "1px", "2px" }, { "1px", "2px", "3px" },
-            { "1px", "2px", "3px", "4px" }, { "1px", "2px", "3px", "4px", "6px" },
-            { "1px", "2px", "3px", "4px", "5px", "7px" }, { "1px", "2px", "3px", "4px", "5px", "6px", "8px" },
-            { "1px", "2px", "3px", "4px", "5px", "6px", "8px", "10px" },
-            { "1px", "2px", "3px", "4px", "5px", "6px", "7px", "9px", "12px" }, };
+    private final static String[][] CORNERMARGIN = { { _1PX }, { _1PX, _2PX }, { _1PX, _2PX, _3PX },
+            { _1PX, _2PX, _3PX, _4PX }, { _1PX, _2PX, _3PX, _4PX, _6PX }, { _1PX, _2PX, _3PX, _4PX, _5PX, "7px" },
+            { _1PX, _2PX, _3PX, _4PX, _5PX, _6PX, "8px" }, { _1PX, _2PX, _3PX, _4PX, _5PX, _6PX, "8px", "10px" },
+            { _1PX, _2PX, _3PX, _4PX, _5PX, _6PX, "7px", "9px", "12px" }, };
 
     /**
      * Element array containing all div elements of the top corner div's.
@@ -348,6 +352,8 @@ public class RoundedPanel extends SimplePanel {
                 divb[i] = addLine(cb, cornerHeight - (i + 1));
             }
         }
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 14:17
         setCornerStyleName(RPSTYLE);
     }
 
@@ -450,6 +456,7 @@ public class RoundedPanel extends SimplePanel {
      * @param style
      *            css style name
      */
+    @Override
     public void setStyleName(final String style) {
         DOM.setElementProperty(body, "className", style);
     }
@@ -457,22 +464,9 @@ public class RoundedPanel extends SimplePanel {
     /**
      * Overwrite of parent getContainerElement()
      */
+    @Override
     protected Element getContainerElement() {
         return divElement;
-    }
-
-    /**
-     * Convenience method to check if given <code>input</code> is with the
-     * <code>mask</code>.
-     * 
-     * @param input
-     *            input to check
-     * @param mask
-     *            mask to check against
-     * @return true if input within mask
-     */
-    protected boolean inMask(final int input, final int mask) {
-        return (input & mask) > 0;
     }
 
     /**
@@ -500,5 +494,19 @@ public class RoundedPanel extends SimplePanel {
         DOM.setInnerHTML(div, "&nbsp;");
         DOM.appendChild(body, div);
         return div;
+    }
+
+    /**
+     * Convenience method to check if given <code>input</code> is with the
+     * <code>mask</code>.
+     * 
+     * @param input
+     *            input to check
+     * @param mask
+     *            mask to check against
+     * @return true if input within mask
+     */
+    private boolean inMask(final int input, final int mask) {
+        return (input & mask) > 0;
     }
 }

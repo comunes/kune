@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.integration.content;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -52,7 +53,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
                 defaultContent.getStateToken());
         assertEquals(new Double(4.5), again.getCurrentUserRate());
         assertEquals(new Double(4.5), again.getRate());
-        assertEquals(new Integer(1), again.getRateByUsers());
+        assertEquals(Integer.valueOf(1), again.getRateByUsers());
     }
 
     @Test
@@ -173,7 +174,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(),
                 added.getStateToken());
 
-        assertTrue(!defaultContent.getStateToken().equals(newDefContent.getStateToken()));
+        assertFalse(defaultContent.getStateToken().equals(newDefContent.getStateToken()));
         assertTrue(added.getStateToken().equals(newDefContent.getStateToken()));
     }
 
@@ -204,7 +205,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         assertEquals(newTitle, folderAgain.getContainer().getName());
     }
 
-    private void checkResult(TagCloudResultDTO cloudResultDTO) {
+    private void checkResult(final TagCloudResultDTO cloudResultDTO) {
         assertNotNull(cloudResultDTO.getTagCountList());
         List<TagCountDTO> summaryTags = cloudResultDTO.getTagCountList();
         assertEquals(3, summaryTags.size());

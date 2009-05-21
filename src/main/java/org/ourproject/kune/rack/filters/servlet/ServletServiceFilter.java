@@ -31,14 +31,18 @@ import javax.servlet.http.HttpServlet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.rack.RackHelper;
-import org.ourproject.kune.rack.filters.InjectedFilter;
+import org.ourproject.kune.rack.filters.AbstractInjectedFilter;
 
-public class ServletServiceFilter extends InjectedFilter {
+public class ServletServiceFilter extends AbstractInjectedFilter {
     Log log = LogFactory.getLog(ServletServiceFilter.class);
     private final Class<? extends HttpServlet> servletClass;
 
     public ServletServiceFilter(final Class<? extends HttpServlet> servletClass) {
         this.servletClass = servletClass;
+    }
+
+    @Override
+    public void destroy() {
     }
 
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)

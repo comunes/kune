@@ -32,9 +32,6 @@ public class ContainerSimpleDTO implements IsSerializable {
     private StateToken stateToken;
     private Long parentFolderId;
 
-    public ContainerSimpleDTO() {
-    }
-
     public Long getId() {
         return id;
     }

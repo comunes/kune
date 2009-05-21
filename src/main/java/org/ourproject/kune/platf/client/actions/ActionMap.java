@@ -81,6 +81,7 @@ public class ActionMap {
      * 
      * @return an array of keys
      */
+    // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:03
     public Object[] allKeys() {
         Set<Object> set = new HashSet<Object>();
 
@@ -134,6 +135,7 @@ public class ActionMap {
      * 
      * @return an array of keys
      */
+    // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:03
     public Object[] keys() {
         if (size() != 0) {
             return actionMap.keySet().toArray();

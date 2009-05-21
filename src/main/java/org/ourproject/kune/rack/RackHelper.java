@@ -22,8 +22,10 @@ package org.ourproject.kune.rack;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-public class RackHelper {
-    private RackHelper() {
+public final class RackHelper {
+    public static String buildForwardString(final ServletRequest request, final String forward) {
+        String parameters = RackHelper.extractParameters(request);
+        return new StringBuilder(forward).append(parameters).toString();
     }
 
     public static String extractParameters(final ServletRequest request) {
@@ -49,9 +51,7 @@ public class RackHelper {
         return httpServletRequest.getRequestURI();
     }
 
-    public static String buildForwardString(final ServletRequest request, final String forward) {
-        String parameters = RackHelper.extractParameters(request);
-        return new StringBuilder(forward).append(parameters).toString();
+    private RackHelper() {
     }
 
 }

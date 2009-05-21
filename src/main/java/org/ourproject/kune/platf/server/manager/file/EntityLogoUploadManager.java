@@ -55,8 +55,11 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     I18nTranslationService i18n;
 
     @Override
+    protected void beforePostStart() {
+    }
+
+    @Override
     protected void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException {
-        super.beforeRespond(response, w);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/xml");
     }
@@ -141,7 +144,7 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     @Override
     protected void onOtherException(final HttpServletResponse response, final Exception e) throws IOException {
         super.onOtherException(response, e);
-        log.info("Exception: " + e.getCause());
+        LOG.info("Exception: " + e.getCause());
         // e.printStackTrace();
         doResponse(response, createXmlResponse(false, i18n.t("Error uploading file")).toString(),
                 HttpServletResponse.SC_BAD_REQUEST);

@@ -32,6 +32,7 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.ourproject.kune.platf.server.ServerException;
 import org.ourproject.kune.rack.dock.Dock;
 import org.ourproject.kune.rack.dock.RequestMatcher;
 
@@ -69,7 +70,7 @@ public class RackServletFilter implements Filter {
     }
     public static final String INJECTOR_ATTRIBUTE = Injector.class.getName();
     private static final String MODULE_PARAMETER = RackModule.class.getName();
-    private static final Log log = LogFactory.getLog(RackServletFilter.class);
+    private static final Log LOG = LogFactory.getLog(RackServletFilter.class);
     private List<Dock> docks;
 
     private List<RequestMatcher> excludes;
@@ -98,7 +99,7 @@ public class RackServletFilter implements Filter {
     }
 
     public void init(final FilterConfig filterConfig) throws ServletException {
-        log.debug("INITIALIZING RackServletFilter...");
+        LOG.debug("INITIALIZING RackServletFilter...");
         final RackModule module = getModule(filterConfig);
         final RackBuilder builder = new RackBuilder();
         module.configure(builder);
@@ -110,7 +111,7 @@ public class RackServletFilter implements Filter {
         docks = rack.getDocks();
         excludes = rack.getExcludes();
         initFilters(filterConfig);
-        log.debug("INITIALIZATION DONE!");
+        LOG.debug("INITIALIZATION DONE!");
     }
 
     private RackModule getModule(final FilterConfig filterConfig) {
@@ -120,14 +121,14 @@ public class RackServletFilter implements Filter {
             final RackModule module = (RackModule) clazz.newInstance();
             return module;
         } catch (final Exception e) {
-            throw new RuntimeException("couldn't instantiate the rack module", e);
+            throw new ServerException("couldn't instantiate the rack module", e);
         }
     }
 
     private String getModuleName(final FilterConfig filterConfig) {
         final String moduleName = filterConfig.getInitParameter(MODULE_PARAMETER);
         if (moduleName == null) {
-            throw new RuntimeException("Rack module name can't be null!");
+            throw new ServerException("Rack module name can't be null!");
         }
         return moduleName;
     }
@@ -146,7 +147,7 @@ public class RackServletFilter implements Filter {
 
     private void startContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
             final Injector injector) {
-        log.debug("STARTING CONTAINER LISTENERS...");
+        LOG.debug("STARTING CONTAINER LISTENERS...");
         for (final Class<? extends ContainerListener> listenerClass : listenerClasses) {
             final ContainerListener listener = injector.getInstance(listenerClass);
             listener.start();
@@ -157,7 +158,7 @@ public class RackServletFilter implements Filter {
     @SuppressWarnings("unused")
     private void stopContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
             final Injector injector) {
-        log.debug("STOPING CONTAINER LISTENERS...");
+        LOG.debug("STOPING CONTAINER LISTENERS...");
         for (final Class<? extends ContainerListener> listenerClass : listenerClasses) {
             final ContainerListener listener = injector.getInstance(listenerClass);
             listener.stop();

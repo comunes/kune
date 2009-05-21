@@ -46,7 +46,7 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class SessionDefault implements Session {
     private String userHash;
-    InitDataDTO initData;
+    private InitDataDTO initData;
     private UserInfoDTO currentUserInfo;
     private Object[][] languagesArray;
     private Object[][] countriesArray;
@@ -199,6 +199,10 @@ public class SessionDefault implements Session {
 
     public boolean isLogged() {
         return userHash != null;
+    }
+
+    public boolean isNotLogged() {
+        return !isLogged();
     }
 
     public void onInitDataReceived(final Listener<InitDataDTO> listener) {

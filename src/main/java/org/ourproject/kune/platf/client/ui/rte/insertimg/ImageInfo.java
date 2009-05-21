@@ -38,8 +38,8 @@ public class ImageInfo {
         this.src = src;
         this.wraptext = wraptext;
         this.clickOriginal = clickOriginal;
-        this.setPosition(position);
-        this.setSize(size);
+        setPositionImpl(position);
+        setSizeImpl(size);
     }
 
     public boolean getClickOriginal() {
@@ -80,11 +80,11 @@ public class ImageInfo {
     }
 
     public void setPosition(final String position) {
-        this.position = position;
+        setPositionImpl(position);
     }
 
     public void setSize(final String size) {
-        this.size = size;
+        setSizeImpl(size);
     }
 
     public void setSrc(final String src) {
@@ -115,5 +115,13 @@ public class ImageInfo {
             }
         }
         return "";
+    }
+
+    private void setPositionImpl(final String position) {
+        this.position = position;
+    }
+
+    private void setSizeImpl(final String size) {
+        this.size = size;
     }
 }

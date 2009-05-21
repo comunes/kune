@@ -38,7 +38,6 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
 
     @Override
     protected void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException {
-        super.beforeRespond(response, w);
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html");
     }
@@ -55,7 +54,7 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
     @Override
     protected void onOtherException(final HttpServletResponse response, final Exception e) throws IOException {
         super.onOtherException(response, e);
-        log.info("Exception: " + e.getCause());
+        LOG.info("Exception: " + e.getCause());
         // e.printStackTrace();
         doResponse(response, createJsonResponse(false, i18n.t("Error uploading file")).toString());
     }
