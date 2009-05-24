@@ -8,9 +8,10 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.user.client.Timer;
 
-public class TestButton extends DefaultButton {
+public class TestButton {
     public class NotiAction extends AbstractAction {
         public NotiAction() {
+            super();
             super.putValue(Action.NAME, "test");
             super.putValue(Action.SHORT_DESCRIPTION, "test button");
         }
@@ -21,24 +22,26 @@ public class TestButton extends DefaultButton {
             }
             NotifyUser.info("Button clicked");
         }
-
-        @Override
-        public boolean isEnabled() {
-            return super.isEnabled();
-        }
     }
 
-    public TestButton(final WorkspaceSkeleton ws) {
-        super();
-        ws.getEntityWorkspace().getBottomTitle().add(this);
+    public TestButton(final WorkspaceSkeleton wksp) {
         final NotiAction noti = new NotiAction();
-        super.setAction(noti);
+
+        final PushButtonDescriptor descriptor = new PushButtonDescriptor(noti);
+
+        final DefaultButton btn = new DefaultButton(descriptor);
+
+        wksp.getEntityWorkspace().getBottomTitle().add(btn);
         new Timer() {
             @Override
             public void run() {
                 noti.putValue(Action.NAME, "test2");
                 noti.putValue(Action.SHORT_DESCRIPTION, "test2 button");
+                descriptor.setPushed(false);
             }
-        }.schedule(5000);
+        }.schedule(10000);
+
+        descriptor.setPushed(true);
+
     }
 }

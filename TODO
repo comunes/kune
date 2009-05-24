@@ -13,14 +13,13 @@ TODO-list for kune -*- mode: org; -*-
 * SHORT-TERM (URGENT)
 ** New Action class
 *** Things to support
-**** menu and toolbars separators (space, bar, expand)
-**** index position insertion (for buttons added by other plugins)
-**** menu button property change (icon, text). If we select a menu option, maybe this require a change in the menu button.
-**** confirmation of actions yes, no.... (confirmation title, text, and onNotConfirmed)
-**** tongle/push buttons with isPressed (initially and later)...
-**** position id, that is, if we have some toolbars and a list of actions, how to select which action in which toolbar.
-**** radio menu (with group) and check menu item
-
+**** [X] menu and toolbars separators (space, bar, expand)
+**** [X] index position insertion (for buttons added by other plugins)
+**** [X] menu button property change (icon, text). If we select a menu option, maybe this require a change in the menu button.
+**** [X] confirmation of actions yes, no.... (confirmation title, text, and onNotConfirmed)
+**** [X] tongle/push buttons with isPressed (initially and later)...
+**** [X] position id, that is, if we have some toolbars and a list of actions, how to select which action in which toolbar.
+**** [X] radio menu (with group) and check menu item
 ** maven-gwt problem (using another plugin from codehaus)
    mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:compile
    and so on.
@@ -129,6 +128,7 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO <v> encourage use of free formats
 ** TODO <v> study opensocial, openstack and related
    http://developer.yahoo.net/blog/archives/2008/12/the_open_stack.html
 ** TODO <v> Use of command key ⌘ for Mac shortcuts

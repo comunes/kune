@@ -172,6 +172,10 @@ generates .project and download necessary code jars. Then you can import the pro
 
 Also you have to set the variable M2_REPO (Eclipse Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/ouruser/.m2/repository).
 
+Is recommended that you use the PMD plugin:
+http://pmd.sourceforge.net/
+http://pmd.sourceforge.net/eclipse/
+
 Useful info about gwt and Eclipse:
 http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
 
@@ -213,6 +217,10 @@ http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html
 also we try to be a "Good Java Citizen":
 
 http://docs.codehaus.org/display/PICO/Good+Citizen
+
+Is recommended that you use the PMD plugin in eclipse:
+http://pmd.sourceforge.net/
+http://pmd.sourceforge.net/eclipse/
 
 ==Use of mylyn in eclipse==
 

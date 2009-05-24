@@ -85,10 +85,10 @@ public class InputMap {
      * @return An array of keys (may be <code>null</code> or have zero length).
      */
     public KeyStroke[] allKeys() {
-        Set<KeyStroke> set = new HashSet<KeyStroke>();
+        final Set<KeyStroke> set = new HashSet<KeyStroke>();
 
         if (parent != null) {
-            KeyStroke[] parentKeys = parent.allKeys();
+            final KeyStroke[] parentKeys = parent.allKeys();
             if (parentKeys != null) {
                 set.addAll(Arrays.asList(parentKeys));
             }
@@ -96,10 +96,10 @@ public class InputMap {
         if (inputMap != null) {
             set.addAll(inputMap.keySet());
         }
-        if (set.size() == 0) {
+        if (set.isEmpty()) {
             return null;
         }
-        KeyStroke[] array = new KeyStroke[set.size()];
+        final KeyStroke[] array = new KeyStroke[set.size()];
         return set.toArray(array);
     }
 
@@ -122,8 +122,8 @@ public class InputMap {
      * @return The binding associated with the specified keystroke (or
      *         <code>null</code>).
      */
-    public Object get(final KeyStroke keystroke) {
-        Object result = null;
+    public Action get(final KeyStroke keystroke) {
+        Action result = null;
         if (inputMap != null) {
             result = inputMap.get(keystroke);
         }
@@ -161,7 +161,7 @@ public class InputMap {
     // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:33
     public KeyStroke[] keys() {
         if (inputMap != null) {
-            KeyStroke[] array = new KeyStroke[size()];
+            final KeyStroke[] array = new KeyStroke[size()];
             return inputMap.keySet().toArray(array);
         }
         return null;

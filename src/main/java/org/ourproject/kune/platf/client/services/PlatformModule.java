@@ -258,10 +258,6 @@ public class PlatformModule extends AbstractModule {
             public Application create() {
                 return new ApplicationDefault($(Session.class));
             }
-
-            @Override
-            public void onAfterCreated(final Application instance) {
-            }
         });
 
         register(Singleton.class, new Factory<DeferredCommandWrapper>(DeferredCommandWrapper.class) {
@@ -338,8 +334,8 @@ public class PlatformModule extends AbstractModule {
         register(NoDecoration.class, new Factory<RTEditor>(RTEditor.class) {
             @Override
             public RTEditor create() {
-                RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
-                RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
+                final RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
+                final RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
                 final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
                         $(Session.class), topBar, sndBar, $(RTEImgResources.class), $$(InsertLinkDialog.class),
                         $$(ColorWebSafePalette.class), $$(EditHtmlDialog.class), $$(InsertImageDialog.class),
@@ -352,10 +348,10 @@ public class PlatformModule extends AbstractModule {
         }, new Factory<RTESavingEditor>(RTESavingEditor.class) {
             @Override
             public RTESavingEditor create() {
-                RTESavingEditorPresenter presenter = new RTESavingEditorPresenter($(RTEditor.class), true,
+                final RTESavingEditorPresenter presenter = new RTESavingEditorPresenter($(RTEditor.class), true,
                         $(I18nTranslationService.class), $(StateManager.class), $(DeferredCommandWrapper.class),
                         $(RTEImgResources.class), $(TimerWrapper.class));
-                RTESavingEditorPanel panel = new RTESavingEditorPanel();
+                final RTESavingEditorPanel panel = new RTESavingEditorPanel();
                 presenter.init(panel);
                 return presenter;
             }
@@ -378,7 +374,7 @@ public class PlatformModule extends AbstractModule {
         register(Singleton.class, new Factory<RTEImgResources>(RTEImgResources.class) {
             @Override
             public RTEImgResources create() {
-                RTEImgResources instance = GWT.create(RTEImgResources.class);
+                final RTEImgResources instance = GWT.create(RTEImgResources.class);
                 StyleInjector.injectStylesheet(instance.css().getText());
                 return instance;
             }

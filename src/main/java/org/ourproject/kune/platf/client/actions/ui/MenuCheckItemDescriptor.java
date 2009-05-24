@@ -1,0 +1,25 @@
+package org.ourproject.kune.platf.client.actions.ui;
+
+import org.ourproject.kune.platf.client.actions.AbstractAction;
+
+public class MenuCheckItemDescriptor extends MenuItemDescriptor {
+    private static final String CHECKED = "checked";
+
+    protected transient boolean checked = false;
+
+    public MenuCheckItemDescriptor(final MenuDescriptor parent, final AbstractAction action) {
+        super(parent, action);
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(final boolean checked) {
+        if (checked != this.checked) {
+            this.checked = checked;
+            action.putValue(CHECKED, this.checked);
+        }
+    }
+
+}
