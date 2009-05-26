@@ -128,6 +128,11 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO <v> use guice 2.0
+   http://google-code-updates.blogspot.com/2009/05/guice-deuce.html
+   http://code.google.com/docreader/#p=google-guice&s=google-guice
+   http://groups.google.com/group/warp-core
+   when warp-persist also support it
 ** TODO <v> encourage use of free formats
 ** TODO <v> study opensocial, openstack and related
    http://developer.yahoo.net/blog/archives/2008/12/the_open_stack.html

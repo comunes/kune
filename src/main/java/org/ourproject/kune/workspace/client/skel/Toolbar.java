@@ -27,15 +27,16 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
 
 public class Toolbar {
-    private final Panel container;
-    private final HorizontalPanel childPanel;
+    private static final String _100PC = "100%";
+    private transient final Panel container;
+    private transient final HorizontalPanel childPanel;
 
     public Toolbar() {
         container = new Panel();
         container.setBorder(false);
         container.setBodyBorder(false);
         container.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
-        container.setWidth("100%");
+        container.setWidth(_100PC);
         container.setHeader(false);
         container.setBaseCls("x-toolbar");
         container.addClass("x-panel");
@@ -46,8 +47,8 @@ public class Toolbar {
     public void add(final Widget widget) {
         childPanel.add(widget);
         if (widget instanceof SimpleToolbar) {
-            widget.setWidth("100%");
-            childPanel.setCellWidth(widget, "100%");
+            widget.setWidth(_100PC);
+            childPanel.setCellWidth(widget, _100PC);
         }
         doLayoutIfNeeded();
     }
@@ -55,7 +56,7 @@ public class Toolbar {
     public Widget addFill() {
         final Label emptyLabel = new Label("");
         this.add(emptyLabel);
-        childPanel.setCellWidth(emptyLabel, "100%");
+        childPanel.setCellWidth(emptyLabel, _100PC);
         return emptyLabel;
     }
 

@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
@@ -7,7 +8,7 @@ import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
 
-public abstract class AbstractGuiItem extends Composite {
+public abstract class AbstractGuiItem extends Composite implements View {
 
     protected transient Action action;
 

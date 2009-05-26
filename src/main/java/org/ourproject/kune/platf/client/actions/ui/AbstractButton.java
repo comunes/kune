@@ -13,8 +13,13 @@ public abstract class AbstractButton extends AbstractGuiItem {
     private transient final Button button;
 
     public AbstractButton(final ButtonDescriptor buttonDescriptor) {
+        this(buttonDescriptor, false);
+    }
+
+    public AbstractButton(final ButtonDescriptor buttonDescriptor, final boolean enableTongle) {
         super();
         button = new Button();
+        button.setEnableToggle(enableTongle);
         initWidget(button);
         button.addListener(new ButtonListenerAdapter() {
             @Override
@@ -34,10 +39,6 @@ public abstract class AbstractButton extends AbstractGuiItem {
         } else {
             button.disable();
         }
-    }
-
-    public void setEnableToggle(final boolean enableToggle) {
-        button.setEnableToggle(enableToggle);
     }
 
     @Override

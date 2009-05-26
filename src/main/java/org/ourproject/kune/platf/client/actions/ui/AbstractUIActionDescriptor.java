@@ -1,12 +1,19 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
+import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AbstractUIActionDescriptor.
  */
-public abstract class AbstractUIActionDescriptor {
+public class AbstractUIActionDescriptor {
+
+    protected static final int NO_POSITION = -1;
+    protected static final View NO_VIEW = null;
+    protected static final AbstractUIActionDescriptor NO_PARENT = new AbstractUIActionDescriptor(null);
+
+    protected transient View view;
+    protected AbstractUIActionDescriptor parent;
 
     /** The action. */
     protected transient AbstractAction action;
@@ -35,6 +42,8 @@ public abstract class AbstractUIActionDescriptor {
      */
     public AbstractUIActionDescriptor(final AbstractAction action) {
         this.action = action;
+        position = NO_POSITION;
+        parent = NO_PARENT;
     }
 
     /**
@@ -65,6 +74,10 @@ public abstract class AbstractUIActionDescriptor {
         return location;
     }
 
+    public AbstractUIActionDescriptor getParent() {
+        return parent;
+    }
+
     /**
      * Gets the position.
      * 
@@ -72,6 +85,14 @@ public abstract class AbstractUIActionDescriptor {
      */
     public int getPosition() {
         return position;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public boolean isChild() {
+        return !parent.equals(NO_PARENT);
     }
 
     /**
@@ -123,6 +144,10 @@ public abstract class AbstractUIActionDescriptor {
      */
     public void setLocation(final String location) {
         this.location = location;
+    }
+
+    public void setParent(final AbstractUIActionDescriptor parent) {
+        this.parent = parent;
     }
 
     /**

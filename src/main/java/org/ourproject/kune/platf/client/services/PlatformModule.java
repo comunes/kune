@@ -529,7 +529,7 @@ public class PlatformModule extends AbstractModule {
             }
         });
 
-        //$(TestButton.class);
+        // $(TestButton.class);
 
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();

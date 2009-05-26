@@ -6,8 +6,7 @@ import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
 public class PushButton extends DefaultButton {
 
     public PushButton(final PushButtonDescriptor btn) {
-        super(btn);
-        setEnableToggle(true);
+        super(btn, true);
         setPressed(btn.isPushed());
         action.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(final PropertyChangeEvent event) {
