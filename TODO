@@ -13,13 +13,22 @@ TODO-list for kune -*- mode: org; -*-
 * SHORT-TERM (URGENT)
 ** New Action class
 *** Things to support
-**** [X] menu and toolbars separators (space, bar, expand)
-**** [X] index position insertion (for buttons added by other plugins)
-**** [X] menu button property change (icon, text). If we select a menu option, maybe this require a change in the menu button.
-**** [X] confirmation of actions yes, no.... (confirmation title, text, and onNotConfirmed)
-**** [X] tongle/push buttons with isPressed (initially and later)...
-**** [X] position id, that is, if we have some toolbars and a list of actions, how to select which action in which toolbar.
-**** [X] radio menu (with group) and check menu item
+- [X] menu and toolbars separators (space, bar, expand)
+- [X] index position insertion (for buttons added by other plugins)
+- [X] menu button property change (icon, text). If we select a menu option, maybe this require a change in the menu button.
+- [X] confirmation of actions yes, no.... (confirmation title, text, and onNotConfirmed)
+- [X] tongle/push buttons with isPressed (initially and later)...
+- [X] position id, that is, if we have some toolbars and a list of actions, how to select which action in which toolbar.
+- [X] radio menu (with group) and check menu item
+** <s> Changes in UI
+   - [ ] 2:21 (video) add member dialog with confirmation (other way to do confirmation)
+   - [ ] Leave this group, with green icon
+   - [ ] 2.23 "page 1 de 1"
+   - [ ] "Those who can view..." too long
+   - [ ] cute menus ala  https://addons.mozilla.org/es-ES/firefox/addon/1330
+   - [ ] 2:27 (?) icon ...
+   - [ ] 2:35 "Start a chat with this member"-> chat! and other long items
+   - [ ] 2.41 long submenus...
 ** maven-gwt problem (using another plugin from codehaus)
    mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:compile
    and so on.
@@ -144,7 +153,7 @@ TODO-list for kune -*- mode: org; -*-
    - keep always the user informed
    - consider integration of chryptopgraphy (keyczar.org ? )
    - encourage the use of nicknames; discourage the use of real names (as in Facebook). If a political group uses real names, an undercover would have too much info
-	 - take into account the rms recommendations about privacy...
+     - take into account the rms recommendations about privacy...
 ** <v> trash icon area d&d
 ** vjrj <v> shortcuts enhacement
 *** Clarify the keycodes vs utf8 chars Shortcut definition (Function keys and so on...)
@@ -192,8 +201,8 @@ I am talking about, but I'm sure there is something to do.
    - for ogg :: http://www.flumotion.net/cortado/
    http://www.flumotion.net/cortado/
    https://code.fluendo.com/flumotion/trac/browser/cortado/trunk/README
-   http://en.flossmanuals.net/TheoraCookbook/Cortado		
-   - for mp3+flv :: flowplayer		    
+   http://en.flossmanuals.net/TheoraCookbook/Cortado
+   - for mp3+flv :: flowplayer
    - for avi :: some links:
    http://www.w3schools.com/media/media_browservideos.asp
    http://www.solitude.dk/archives/embedquicktime/
@@ -480,7 +489,7 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
    http://creativecommons.org/license/zero/
 ** TODO <v> Revise use the HP and VP in gwt code
    http://groups.google.com/group/Google-Web-Toolkit/browse_frm/thread/5d01cd806d93b94e/2909d30d1b2ddfb7?lnk=gst&q=GWT+%2B+FlowPanel+%2B+CSS+#2909d30d1b2ddfb7
-** TODO <v> captcha in anonymous comments/edits 
+** TODO <v> captcha in anonymous comments/edits
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/99c259aad06406c6?pli=1
 ** TODO <v> Study P2P integration
    Study of P2P usage:
@@ -488,7 +497,7 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
 *** torrent
     http://en.wikipedia.org/wiki/Torrent_tracker
     BT FAQ:
-    http://www.dessent.net/btfaq/ 
+    http://www.dessent.net/btfaq/
     mod_bt:
     http://www.crackerjack.net/mod_bt/mod_bt.html
     apt-cache show libapache2-mod-bt
