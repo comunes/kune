@@ -78,14 +78,15 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
 
         File tmpDestFile = File.createTempFile("logoDest", "");
 
-        boolean result = ImageUtilsDefault.scaleImageToMax(origFile.getAbsolutePath(), tmpDestFile.getAbsolutePath(),
-                FileConstants.LOGO_ICON_DEFAULT_HEIGHT);
+        final boolean result = ImageUtilsDefault.scaleImageToMax(origFile.getAbsolutePath(),
+                tmpDestFile.getAbsolutePath(), FileConstants.LOGO_DEF_HEIGHT);
+
         if (result) {
             group.setLogo(FileUtils.getBytesFromFile(tmpDestFile));
             group.setLogoMime(mimeType);
-            tmpDestFile.delete();
+            logFileDel(tmpDestFile.delete());
         } else {
-            tmpDestFile.delete();
+            logFileDel(tmpDestFile.delete());
             throw new Exception("Cannot create group logo thumb");
         }
     }
@@ -100,7 +101,7 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
         File tmpOrigFile = File.createTempFile("logoOrig", "");
         file.write(tmpOrigFile);
         createUploadedFile(stateToken, mimeTypeS, tmpOrigFile);
-        tmpOrigFile.delete();
+        logFileDel(tmpOrigFile.delete());
     }
 
     /**

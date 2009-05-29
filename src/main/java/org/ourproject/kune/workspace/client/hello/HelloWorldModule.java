@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
-import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
+import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -69,7 +69,7 @@ public class HelloWorldModule extends AbstractModule {
      * In the Panel classes we do all the UI stuff (with none business logic)
      * 
      */
-    public class HelloWorldPanel implements HelloWorldView {
+    public static class HelloWorldPanel implements HelloWorldView {
         private final I18nTranslationService i18n;
 
         public HelloWorldPanel(final HelloWorldPresenter presenter, final WorkspaceSkeleton ws,
@@ -85,13 +85,13 @@ public class HelloWorldModule extends AbstractModule {
         }
     }
 
-    public class HelloWorldPresenter implements HelloWorld {
+    public static class HelloWorldPresenter implements HelloWorld {
 
         private HelloWorldView view;
         private final Provider<UserActionRegistry> actionRegistry;
         private final I18nTranslationService i18n;
 
-        public HelloWorldPresenter(I18nTranslationService i18n, Provider<UserActionRegistry> actionRegistry) {
+        public HelloWorldPresenter(final I18nTranslationService i18n, final Provider<UserActionRegistry> actionRegistry) {
             this.i18n = i18n;
             this.actionRegistry = actionRegistry;
             createActions();
@@ -101,7 +101,7 @@ public class HelloWorldModule extends AbstractModule {
             return view;
         }
 
-        public void init(HelloWorldView view) {
+        public void init(final HelloWorldView view) {
             this.view = view;
         }
 
@@ -112,7 +112,7 @@ public class HelloWorldModule extends AbstractModule {
         private void createActions() {
             ActionToolbarMenuDescriptor<UserSimpleDTO> helloWorldBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
                     AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<UserSimpleDTO>() {
-                        public void onEvent(UserSimpleDTO parameter) {
+                        public void onEvent(final UserSimpleDTO parameter) {
                             // We clicked:
                             view.showMessage();
                         }
@@ -188,7 +188,7 @@ public class HelloWorldModule extends AbstractModule {
              * Optionally: we can do something after the instance is created
              **/
             @Override
-            public void onAfterCreated(HelloWorld instance) {
+            public void onAfterCreated(final HelloWorld instance) {
                 Log.info("HelloWorld singleton instance created");
             }
         });

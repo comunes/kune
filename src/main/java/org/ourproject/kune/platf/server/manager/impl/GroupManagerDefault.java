@@ -205,7 +205,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         if (content.getMimeType().getType().equals("image")) {
             group.setGroupFullLogo(content);
         } else {
-            new DefaultException("Trying to set not a image as group logo");
+            throw new DefaultException("Trying to set not a image as group logo");
         }
     }
 

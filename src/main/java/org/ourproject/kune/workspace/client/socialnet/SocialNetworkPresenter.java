@@ -132,7 +132,7 @@ public class SocialNetworkPresenter {
             final boolean isPersonal) {
         return "<table><tr><td>"
                 + (hasLogo ? downloadProvider.get().getLogoAvatarHtml(token, hasLogo, isPersonal,
-                        FileConstants.LOGO_ICON_DEFAULT_HEIGHT, 3) : "") + "</td><td>"
+                        FileConstants.LOGO_DEF_HEIGHT, 3) : "") + "</td><td>"
                 + i18n.t(isPersonal ? "Nickname: [%s]" : "Group short name: [%s]", shortName) + "</td></tr></table>";
     }
 

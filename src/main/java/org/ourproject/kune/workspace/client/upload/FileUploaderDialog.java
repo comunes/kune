@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -187,7 +186,6 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
                 if (dialog == null) {
                     createDialog(false);
                 }
-                Log.info("PermittedExtensions: " + extensions.toString() + " length: " + extensions.length);
                 dialog.setPermittedExtensions(extensions);
             }
         });

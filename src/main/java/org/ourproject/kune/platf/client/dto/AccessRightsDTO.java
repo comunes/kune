@@ -45,7 +45,10 @@ public class AccessRightsDTO implements IsSerializable {
         if (obj == null) {
             return false;
         }
-        final AccessRightsDTO other = (AccessRightsDTO) obj;
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        AccessRightsDTO other = (AccessRightsDTO) obj;
         if (administrable != other.administrable) {
             return false;
         }
@@ -60,10 +63,11 @@ public class AccessRightsDTO implements IsSerializable {
 
     @Override
     public int hashCode() {
+        final int prime = 31;
         int result = 1;
-        result = PRIME * result + (administrable ? 1231 : 1237);
-        result = PRIME * result + (editable ? 1231 : 1237);
-        result = PRIME * result + (visible ? 1231 : 1237);
+        result = prime * result + (administrable ? 1231 : 1237);
+        result = prime * result + (editable ? 1231 : 1237);
+        result = prime * result + (visible ? 1231 : 1237);
         return result;
     }
 

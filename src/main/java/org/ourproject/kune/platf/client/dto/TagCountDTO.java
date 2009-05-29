@@ -23,6 +23,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class TagCountDTO implements IsSerializable {
     private String name;
+    // FIXME: try to use Integer
     private Long count;
 
     public TagCountDTO() {

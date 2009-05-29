@@ -77,7 +77,7 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
         final ServletFileUpload upload = new ServletFileUpload(factory);
         // maximum size before a FileUploadException will be thrown
-        upload.setSizeMax(Integer.valueOf(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE)) * 1024 * 1024);
+        upload.setSizeMax(Long.valueOf(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE)) * 1024 * 1024);
 
         try {
             final List fileItems = upload.parseRequest(req);
@@ -129,6 +129,12 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
         }
         w.close();
         response.setStatus(responseCode);
+    }
+
+    protected void logFileDel(final boolean delResult) {
+        if (!delResult) {
+            LOG.error("Cannot delete file");
+        }
     }
 
     protected void onFileUploadException(final HttpServletResponse response) throws IOException {

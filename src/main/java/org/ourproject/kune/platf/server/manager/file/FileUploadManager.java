@@ -143,7 +143,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             return content;
         } catch (final Exception e) {
             if (file != null && file.exists()) {
-                file.delete();
+                logFileDel(file.delete());
             }
             throw e;
         }

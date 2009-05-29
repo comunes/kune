@@ -3,11 +3,11 @@ package org.ourproject.kune.platf.client.actions.ui;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Menu;
 
-public abstract class AbstractMenu extends AbstractGuiItem {
+public abstract class AbstractMenuGui extends AbstractGuiItem {
 
     protected final transient Menu menu;
 
-    public AbstractMenu() {
+    public AbstractMenuGui() {
         super();
         menu = new Menu();
         menu.setShadow(true);

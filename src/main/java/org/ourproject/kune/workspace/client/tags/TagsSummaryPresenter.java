@@ -41,9 +41,9 @@ public class TagsSummaryPresenter implements TagsSummary {
     private static final int MINSIZE = 11;
     private static final int MAXSIZE = 26;
 
-    private TagsSummaryView view;
-    private final Provider<SiteSearcher> searcherProvider;
-    private final Session session;
+    private transient TagsSummaryView view;
+    private transient final Provider<SiteSearcher> searcherProvider;
+    private transient final Session session;
 
     public TagsSummaryPresenter(final Session session, final Provider<SiteSearcher> searcherProvider,
             final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
@@ -84,6 +84,7 @@ public class TagsSummaryPresenter implements TagsSummary {
         view.expand();
     }
 
+    // @PMD:REVIEWED:DefaultPackage: by vjrj on 27/05/09 3:13
     void setState(final StateContainerDTO state) {
         if (state.getTagCloudResult() != null && state.getTagCloudResult().getTagCountList().size() > 0) {
             Log.debug(state.getTagCloudResult().toString());
@@ -93,15 +94,15 @@ public class TagsSummaryPresenter implements TagsSummary {
         }
     }
 
-    private void setCloud(TagCloudResultDTO tagCloudResult) {
+    private void setCloud(final TagCloudResultDTO tagCloudResult) {
         // Inspired in snippet http://www.bytemycode.com/snippets/snippet/415/
         view.clear();
-        int max = tagCloudResult.getMaxValue();
-        int min = tagCloudResult.getMinValue();
-        int diff = max - min;
-        int step = (MAXSIZE - MINSIZE) / (diff == 0 ? 1 : diff);
+        final int max = tagCloudResult.getMaxValue();
+        final int min = tagCloudResult.getMinValue();
+        final int diff = max - min;
+        final int step = (MAXSIZE - MINSIZE) / (diff == 0 ? 1 : diff);
         for (TagCountDTO tagCount : tagCloudResult.getTagCountList()) {
-            int size = Math.round((MINSIZE + (tagCount.getCount() - min) * step));
+            final int size = Math.round((MINSIZE + (tagCount.getCount().floatValue() - min) * step));
             view.addTag(tagCount.getName(), tagCount.getCount(), "kune-ft" + size + "px");
         }
         view.setVisible(true);

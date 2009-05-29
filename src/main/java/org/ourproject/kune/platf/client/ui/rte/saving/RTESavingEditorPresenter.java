@@ -10,6 +10,7 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.StateManager;
+import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
@@ -161,7 +162,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
             }
         };
         saveBtn = new ActionToolbarButtonDescriptor<Object>(AccessRolDTO.Editor, RTEditor.SNDBAR, onPerformSaveCall);
-        saveBtn.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
+        saveBtn.setIconCls(ImgConstants.CSS_SUFFIX + imgResources.save().getName());
         saveBtn.setToolTip(i18n.t("Save"));
         ShortcutDescriptor ctrl_S = new ShortcutDescriptor(true, 'S');
         saveBtn.setShortcut(ctrl_S);
@@ -169,7 +170,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
 
         ActionToolbarMenuDescriptor<Object> save = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
                 RTEditor.TOPBAR, onPerformSaveCall);
-        save.setIconCls(RTEImgResources.SUFFIX + imgResources.save().getName());
+        save.setIconCls(ImgConstants.CSS_SUFFIX + imgResources.save().getName());
         save.setParentMenuTitle(i18n.t(FILE_DEF_MENU_OPTION));
         save.setTextDescription(i18n.t("Save") + (ctrl_S.toString()));
         save.setPosition(0);
@@ -217,7 +218,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
 
         ActionToolbarButtonDescriptor<Object> saveCloseBtn = new ActionToolbarButtonDescriptor<Object>(
                 AccessRolDTO.Editor, RTEditor.TOPBAR, onPerformSaveAndCloseCall);
-        // saveCloseBtn.setIconCls(RTEImgResources.SUFFIX +
+        // saveCloseBtn.setIconCls(ImgConstants.CSS_SUFFIX +
         // imgResources.save().getName());
         saveCloseBtn.setTextDescription(i18n.t("Save & Close"));
         saveCloseBtn.setLeftSeparator(ActionToolbarButtonSeparator.fill);

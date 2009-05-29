@@ -1,19 +1,25 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 
 /**
  * The Class AbstractUIActionDescriptor.
  */
-public class AbstractUIActionDescriptor {
+public abstract class AbstractGuiActionDescrip {
 
     protected static final int NO_POSITION = -1;
     protected static final View NO_VIEW = null;
-    protected static final AbstractUIActionDescriptor NO_PARENT = new AbstractUIActionDescriptor(null);
+    protected static final AbstractGuiActionDescrip NO_PARENT = null;
 
-    protected transient View view;
-    protected AbstractUIActionDescriptor parent;
+    private GuiAddCondition addCondition = new GuiAddConditionAdapter();
+    private GuiVisibleCondition visibleCondition = new GuiVisibleConditionAdapter();
+
+    protected AbstractGuiActionDescrip parent;
+    private transient final Map<String, Object> store;
 
     /** The action. */
     protected transient AbstractAction action;
@@ -40,10 +46,15 @@ public class AbstractUIActionDescriptor {
      * @param action
      *            the action
      */
-    public AbstractUIActionDescriptor(final AbstractAction action) {
+    public AbstractGuiActionDescrip(final AbstractAction action) {
         this.action = action;
         position = NO_POSITION;
         parent = NO_PARENT;
+        store = new HashMap<String, Object>();
+    }
+
+    public GuiAddCondition getAddCondition() {
+        return addCondition;
     }
 
     /**
@@ -74,7 +85,7 @@ public class AbstractUIActionDescriptor {
         return location;
     }
 
-    public AbstractUIActionDescriptor getParent() {
+    public AbstractGuiActionDescrip getParent() {
         return parent;
     }
 
@@ -87,12 +98,30 @@ public class AbstractUIActionDescriptor {
         return position;
     }
 
-    public View getView() {
-        return view;
+    public abstract Class<?> getType();
+
+    /**
+     * Returns the value associated with the specified key.
+     * 
+     * @param key
+     *            the key (not <code>null</code>).
+     * 
+     * @return The value associated with the specified key, or <code>null</code>
+     *         if the key is not found.
+     * 
+     * @see #putValue(String, Object)
+     */
+    public Object getValue(final String key) {
+        return store.get(key);
+    }
+
+    public GuiVisibleCondition getVisibleCondition() {
+        return visibleCondition;
     }
 
     public boolean isChild() {
-        return !parent.equals(NO_PARENT);
+        // @PMD:REVIEWED:CompareObjectsWithEquals: by vjrj on 26/05/09 20:57
+        return parent != NO_PARENT;
     }
 
     /**
@@ -102,6 +131,24 @@ public class AbstractUIActionDescriptor {
      */
     public boolean isConfirmRequired() {
         return confirmRequired;
+    }
+
+    /**
+     * Sets the value associated with the specified key.
+     * 
+     * Any existing value associated with the key will be overwritten.
+     * 
+     * @param key
+     *            the key (not <code>null</code>).
+     * @param value
+     *            the value (<code>null</code> permitted).
+     */
+    public void putValue(final String key, final Object value) {
+        store.put(key, value);
+    }
+
+    public void setAddCondition(final GuiAddCondition addCondition) {
+        this.addCondition = addCondition;
     }
 
     /**
@@ -146,7 +193,7 @@ public class AbstractUIActionDescriptor {
         this.location = location;
     }
 
-    public void setParent(final AbstractUIActionDescriptor parent) {
+    public void setParent(final AbstractGuiActionDescrip parent) {
         this.parent = parent;
     }
 
@@ -160,4 +207,9 @@ public class AbstractUIActionDescriptor {
     public void setPosition(final int position) {
         this.position = position;
     }
+
+    public void setVisibleCondition(final GuiVisibleCondition visibleCondition) {
+        this.visibleCondition = visibleCondition;
+    }
+
 }

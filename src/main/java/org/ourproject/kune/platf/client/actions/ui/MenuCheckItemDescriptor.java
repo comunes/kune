@@ -11,6 +11,11 @@ public class MenuCheckItemDescriptor extends MenuItemDescriptor {
         super(parent, action);
     }
 
+    @Override
+    public Class<?> getType() {
+        return MenuCheckItemDescriptor.class;
+    }
+
     public boolean isChecked() {
         return checked;
     }
@@ -21,5 +26,4 @@ public class MenuCheckItemDescriptor extends MenuItemDescriptor {
             action.putValue(CHECKED, this.checked);
         }
     }
-
 }

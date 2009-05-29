@@ -137,7 +137,7 @@ public class UserRPC implements RPC, UserService {
             final UserBuddiesVisibilityDTO visibility) {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
-        if (groupToken.getGroup() != user.getShortName()) {
+        if (!groupToken.getGroup().equals(user.getShortName())) {
             new AccessViolationException();
         }
         user.setBuddiesVisibility(UserBuddiesVisibility.valueOf(visibility.toString()));

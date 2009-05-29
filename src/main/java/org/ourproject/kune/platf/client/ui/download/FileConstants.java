@@ -19,16 +19,20 @@
  \*/
 package org.ourproject.kune.platf.client.ui.download;
 
-public interface FileConstants {
-    String HASH = "hash";
-    String TOKEN = "token";
-    String DOWNLOAD = "download";
-    String IMGSIZE = "imgsize";
-    String FILENAME = "filename";
-    String TYPE_ID = "typeid";
-    String LOGO_FORM_FIELD = "k-elogov-ff";
-    int LOGO_ICON_DEFAULT_HEIGHT = 60;
-    int LOGO_ICON_DEFAULT_WIDTH = 468;
-    int LOGO_ICON_MIN_HEIGHT = 28;
-    int LOGO_ICON_MIN_WIDTH = 468;
+public final class FileConstants {
+
+    public final static String HASH = "hash";
+    public final static String TOKEN = "token";
+    public final static String DOWNLOAD = "download";
+    public final static String IMGSIZE = "imgsize";
+    public final static String FILENAME = "filename";
+    public final static String TYPE_ID = "typeid";
+    public final static String LOGO_FORM_FIELD = "k-elogov-ff";
+    public final static int LOGO_DEF_HEIGHT = 60;
+    public final static int LOGO_DEF_WIDTH = 468;
+    public final static int LOGO_MIN_HEIGHT = 28;
+    public final static int LOGO_MIN_WIDTH = 468;
+
+    private FileConstants() {
+    }
 }

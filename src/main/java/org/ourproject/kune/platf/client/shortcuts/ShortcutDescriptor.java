@@ -100,7 +100,7 @@ public class ShortcutDescriptor {
     }
 
     public boolean is(final char keyCode, final int modifiers) {
-        return (keyCode == keyCode && same(modifiers, KeyboardListener.MODIFIER_ALT, alt)
+        return (this.keycode == keyCode && same(modifiers, KeyboardListener.MODIFIER_ALT, alt)
                 && same(modifiers, KeyboardListener.MODIFIER_CTRL, ctrl) && same(modifiers,
                 KeyboardListener.MODIFIER_SHIFT, shift));
     }
@@ -115,7 +115,7 @@ public class ShortcutDescriptor {
         s += sKey(alt, "Alt");
         s += sKey(ctrl, "Ctrl");
         s += sKey(shift, "Shift");
-        s += keyName != NO_KEYNAME ? translateKey(keyName) + ")" : ("" + (char) keycode).toUpperCase() + ")";
+        s += !keyName.equals(NO_KEYNAME) ? translateKey(keyName) + ")" : ("" + (char) keycode).toUpperCase() + ")";
         return s;
     }
 

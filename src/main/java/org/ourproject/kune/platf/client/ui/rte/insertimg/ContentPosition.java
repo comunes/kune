@@ -17,7 +17,7 @@ public class ContentPosition {
 
     private static Object[][] positionObjs;
 
-    public static Object[][] getPositions() {
+    public synchronized static Object[][] getPositions() {
         if (positionObjs == null) {
             String[][] values = positions;
             positionObjs = new Object[values.length][1];

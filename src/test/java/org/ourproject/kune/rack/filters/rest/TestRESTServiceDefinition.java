@@ -28,14 +28,10 @@ public class TestRESTServiceDefinition {
 
     public static class SimpleRESTService {
         @REST(params = { "one", "two" })
-        public void two(final String one, final String two) {
-
-        }
+        public void two(final String one, final String two) {}
 
         @REST(params = { "one", "two", "three" })
-        public void three(final String one, final String two, final String three) {
-
-        }
+        public void three(final String one, final String two, final String three) {}
 
         @REST(params = { "one" })
         public void one(final String one) {

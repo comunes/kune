@@ -173,13 +173,15 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
             case anyone:
                 break;
             case onlyyou:
-                if (userLogged == User.UNKNOWN_USER || !userLogged.getUserGroup().equals(group)) {
+                if (userLogged.equals(User.UNKNOWN_USER) || !userLogged.getUserGroup().equals(group)) {
                     socialNetData.setIsBuddiesVisible(false);
                     socialNetData.setUserBuddies(UserBuddiesData.EMPTY);
                 }
                 break;
             case yourbuddies:
-                if (userLogged != userGroup && !userBuddies.contains(userLogged.getShortName())) {
+                boolean notMe = !userLogged.equals(userGroup);
+                boolean notABuddie = !userBuddies.contains(userLogged.getShortName());
+                if (notMe && notABuddie) {
                     socialNetData.setIsBuddiesVisible(false);
                     socialNetData.setUserBuddies(UserBuddiesData.EMPTY);
                 }

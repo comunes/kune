@@ -109,6 +109,9 @@ public class StateToken implements IsSerializable {
         if (obj == null) {
             return false;
         }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final StateToken other = (StateToken) obj;
         if (getEncoded() == null) {
             if (other.getEncoded() != null) {

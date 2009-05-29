@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.server.domain;
 
 public class TagCount {
     private String name;
+    // FIXME: try to use Integer
     private Long count;
 
     public TagCount() {

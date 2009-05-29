@@ -1,22 +1,24 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
+import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
+import org.ourproject.kune.platf.client.actions.KeyStroke;
+import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-public abstract class AbstractButton extends AbstractGuiItem {
+public abstract class AbstractButtonGui extends AbstractGuiItem {
 
     private transient final Button button;
 
-    public AbstractButton(final ButtonDescriptor buttonDescriptor) {
+    public AbstractButtonGui(final ButtonDescriptor buttonDescriptor) {
         this(buttonDescriptor, false);
     }
 
-    public AbstractButton(final ButtonDescriptor buttonDescriptor, final boolean enableTongle) {
+    public AbstractButtonGui(final ButtonDescriptor buttonDescriptor, final boolean enableTongle) {
         super();
         button = new Button();
         button.setEnableToggle(enableTongle);
@@ -44,8 +46,7 @@ public abstract class AbstractButton extends AbstractGuiItem {
     @Override
     public void setIcon(final ImageResource imageResource) {
         if (imageResource != null) {
-            // FIXME
-            button.setIconCls(RTEImgResources.SUFFIX + imageResource.getName());
+            button.setIcon(ImgConstants.PATH_PREFIX + imageResource.getName());
         }
     }
 
@@ -62,7 +63,12 @@ public abstract class AbstractButton extends AbstractGuiItem {
 
     @Override
     public void setToolTipText(final String tooltip) {
-        button.setTooltip(tooltip);
+        final KeyStroke key = (KeyStroke) action.getValue(Action.ACCELERATOR_KEY);
+        if (key == null) {
+            button.setTooltip(tooltip);
+        } else {
+            button.setTooltip(tooltip + key.toString());
+        }
     }
 
 }

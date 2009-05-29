@@ -138,7 +138,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
     public void setNormalGroupsLabels() {
         dialogInfoLabel.setHtml(i18n.t("Select an image in your computer as the logo for this group. "
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
-                FileConstants.LOGO_ICON_DEFAULT_HEIGHT, FileConstants.LOGO_ICON_DEFAULT_HEIGHT)
+                FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT)
                 + DefaultFormUtils.brbr());
         super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
         doLayoutIfNeeded();
@@ -147,7 +147,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
     public void setPersonalGroupsLabels() {
         dialogInfoLabel.setHtml(i18n.t("Select an image in your computer as your avatar. "
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
-                FileConstants.LOGO_ICON_DEFAULT_HEIGHT, FileConstants.LOGO_ICON_DEFAULT_HEIGHT)
+                FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT)
                 + "<br/><br/>");
         super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
         doLayoutIfNeeded();

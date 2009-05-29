@@ -4,116 +4,115 @@ import com.google.gwt.libideas.resources.client.CssResource;
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.libideas.resources.client.ImmutableResourceBundle;
 
+// @PMD:REVIEWED:TooManyMethods: by vjrj on 27/05/09 0:06
 public interface RTEImgResources extends ImmutableResourceBundle {
 
-    String SUFFIX = "k-rte-";
-
     @Resource("alignleft.png")
-    public ImageResource alignleft();
+    ImageResource alignleft();
 
     @Resource("alignright.png")
-    public ImageResource alignright();
+    ImageResource alignright();
 
     @Resource("backcolor.png")
-    public ImageResource backcolor();
+    ImageResource backcolor();
 
     @Resource("bold.png")
-    public ImageResource bold();
+    ImageResource bold();
 
     @Resource("centerpara.png")
-    public ImageResource centerpara();
+    ImageResource centerpara();
 
     @Resource("charfontname.png")
-    public ImageResource charfontname();
+    ImageResource charfontname();
 
     @Resource("copy.png")
-    public ImageResource copy();
+    ImageResource copy();
 
     @Resource("rteimg.css")
-    public CssResource css();
+    CssResource css();
 
     @Resource("cut.png")
-    public ImageResource cut();
+    ImageResource cut();
 
     @Resource("decrementindent.png")
-    public ImageResource decrementindent();
+    ImageResource decrementindent();
 
     @Resource("defaultbullet.png")
-    public ImageResource defaultbullet();
+    ImageResource defaultbullet();
 
     @Resource("defaultnumbering.png")
-    public ImageResource defaultnumbering();
+    ImageResource defaultnumbering();
 
     @Resource("edithtml.png")
-    public ImageResource edithtml();
+    ImageResource edithtml();
 
     @Resource("film.png")
-    public ImageResource film();
+    ImageResource film();
 
     @Resource("fontcolor.png")
-    public ImageResource fontcolor();
+    ImageResource fontcolor();
 
     @Resource("fontheight.png")
-    public ImageResource fontheight();
+    ImageResource fontheight();
 
     @Resource("hfixedline.png")
-    public ImageResource hfixedline();
+    ImageResource hfixedline();
 
     @Resource("images.png")
-    public ImageResource images();
+    ImageResource images();
 
     @Resource("incrementindent.png")
-    public ImageResource incrementindent();
+    ImageResource incrementindent();
 
     @Resource("insertspreadsheet.png")
-    public ImageResource insertspreadsheet();
+    ImageResource insertspreadsheet();
 
     @Resource("insertsymbol.png")
-    public ImageResource insertsymbol();
+    ImageResource insertsymbol();
 
     @Resource("inserttable.png")
-    public ImageResource inserttable();
+    ImageResource inserttable();
 
     @Resource("italic.png")
-    public ImageResource italic();
+    ImageResource italic();
 
     @Resource("link.png")
-    public ImageResource link();
+    ImageResource link();
 
     @Resource("linkbreak.png")
-    public ImageResource linkbreak();
+    ImageResource linkbreak();
 
     @Resource("paste.png")
-    public ImageResource paste();
+    ImageResource paste();
 
     @Resource("redo.png")
-    public ImageResource redo();
+    ImageResource redo();
 
     @Resource("removeFormat.png")
-    public ImageResource removeFormat();
+    ImageResource removeFormat();
 
     @Resource("save.png")
-    public ImageResource save();
+    ImageResource save();
 
     @Resource("selectall.png")
-    public ImageResource selectall();
+    ImageResource selectall();
 
     @Resource("specialchars.png")
-    public ImageResource specialchars();
+    ImageResource specialchars();
 
     @Resource("strikeout.png")
-    public ImageResource strikeout();
+    ImageResource strikeout();
 
     @Resource("subscript.png")
-    public ImageResource subscript();
+    ImageResource subscript();
 
     @Resource("superscript.png")
-    public ImageResource superscript();
+    ImageResource superscript();
 
     @Resource("underline.png")
-    public ImageResource underline();
+    ImageResource underline();
 
     @Resource("undo.png")
-    public ImageResource undo();
+    ImageResource undo();
 
 }

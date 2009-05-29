@@ -126,7 +126,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
                 // This tool
                 if (stateCntCtx instanceof StateContentDTO) {
                     setState((StateContentDTO) stateCntCtx);
-                } else if (stateCntCtx instanceof StateContainerDTO) {
+                } else {
                     setState(stateCntCtx);
                 }
             }

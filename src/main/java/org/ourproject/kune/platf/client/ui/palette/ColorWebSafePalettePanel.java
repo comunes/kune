@@ -32,32 +32,33 @@ import com.google.gwt.user.client.ui.TableListener;
  */
 public class ColorWebSafePalettePanel extends AbstractPalettePanel implements ColorWebSafePaletteView {
 
-    private final ColorWebSafePalettePresenter presenter;
+    private final transient ColorWebSafePalettePresenter presenter;
 
     public ColorWebSafePalettePanel(final ColorWebSafePalettePresenter initPresenter) {
+        super();
         this.presenter = initPresenter;
     }
 
     @Override
-    protected void createPalette() {
-        Grid paletteGrid = new Grid(ROWS, COLS);
+    protected void createWidget() {
+        final Grid paletteGrid = new Grid(ROWS, COLS);
 
         paletteGrid.setCellSpacing(1);
         // Put color values in the grid cells
 
         int row;
         int col;
-        int n = 0;
+        int num = 0;
         for (String element : COLORS) {
             for (String element2 : COLORS) {
                 for (String element3 : COLORS) {
-                    row = n / COLS;
-                    col = n % COLS;
+                    row = num / COLS;
+                    col = num % COLS;
                     final String currentColor = "#" + element3 + element + element2;
                     paletteGrid.setText(row, col, " ");
                     DOM.setStyleAttribute(paletteGrid.getCellFormatter().getElement(row, col), "backgroundColor",
                             currentColor);
-                    n++;
+                    num++;
                 }
             }
         }

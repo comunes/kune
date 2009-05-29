@@ -46,7 +46,7 @@ public class RateItPresenter implements RateIt {
 
     public RateItPresenter(final I18nTranslationService i18n, final Session session,
             final Provider<ContentServiceAsync> contentServiceProvider, final StateManager stateManager,
-            Provider<RatePresenter> ratePresenterProvider, final ContentCapabilitiesRegistry capabilitiesRegistry) {
+            final Provider<RatePresenter> ratePresenterProvider, final ContentCapabilitiesRegistry capabilitiesRegistry) {
         this.i18n = i18n;
         this.session = session;
         this.contentServiceProvider = contentServiceProvider;
@@ -91,7 +91,7 @@ public class RateItPresenter implements RateIt {
 
     protected void starClicked(final int starClicked) {
         isRating = true;
-        final Double newValue = starClicked + 1d == currentRate ? currentRate - 0.5d : starClicked + 1d;
+        final Double newValue = Math.abs(starClicked + 1d - currentRate) < 0.01 ? currentRate - 0.5d : starClicked + 1d;
         setRatePanel(newValue);
         NotifyUser.showProgressProcessing();
         final StateAbstractDTO currentState = session.getCurrentState();
@@ -147,7 +147,7 @@ public class RateItPresenter implements RateIt {
         }
     }
 
-    private void setState(boolean isRateable, Double currentUserRate) {
+    private void setState(final boolean isRateable, final Double currentUserRate) {
         if (isRateable) {
             if (session.isLogged()) {
                 setRate(currentUserRate);

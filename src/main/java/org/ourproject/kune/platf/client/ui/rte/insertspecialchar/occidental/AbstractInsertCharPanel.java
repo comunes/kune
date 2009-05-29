@@ -18,8 +18,8 @@ public class AbstractInsertCharPanel extends Panel {
 
     private FocusListener focusListener;
 
-    public AbstractInsertCharPanel(final InsertSpecialCharDialog insertSpecialCharDialog, String title,
-            String initialLabel, final char[] specialChars, int rows, final int cols) {
+    public AbstractInsertCharPanel(final InsertSpecialCharDialog insertSpecialCharDialog, final String title,
+            final String initialLabel, final char[] specialChars, final int rows, final int cols) {
         super(title);
         setAutoWidth(true);
         setHeight(InsertSpecialCharDialogView.HEIGHT - 10);
@@ -40,8 +40,8 @@ public class AbstractInsertCharPanel extends Panel {
             n++;
         }
         grid.addTableListener(new TableListener() {
-            public void onCellClicked(SourcesTableEvents sender, int row, int cell) {
-                if (sender == grid) {
+            public void onCellClicked(final SourcesTableEvents sender, final int row, final int cell) {
+                if (sender.equals(grid)) {
                     insertSpecialCharDialog.onInsert(specialChars[row * cols + cell]);
                 }
             }
@@ -56,7 +56,7 @@ public class AbstractInsertCharPanel extends Panel {
         button.setStyleName("k-specialchar-pb");
         if (focusListener == null) {
             focusListener = new FocusListener() {
-                public void onFocus(Widget sender) {
+                public void onFocus(final Widget sender) {
                     PopupPanel popup = new PopupPanel(true);
                     popup.setStyleName("k-specialchar-popup");
                     Label characterLabel = new Label(sender.getElement().getInnerText());
@@ -66,7 +66,7 @@ public class AbstractInsertCharPanel extends Panel {
                     Log.info("Focus!!!!!");
                 }
 
-                public void onLostFocus(Widget sender) {
+                public void onLostFocus(final Widget sender) {
                 }
             };
         }

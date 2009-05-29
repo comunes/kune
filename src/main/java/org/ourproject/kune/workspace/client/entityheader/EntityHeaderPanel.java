@@ -72,12 +72,12 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
         final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
         Image logo;
         if (clipped) {
-            logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_ICON_DEFAULT_WIDTH,
-                    FileConstants.LOGO_ICON_DEFAULT_HEIGHT);
+            logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_DEF_WIDTH,
+                    FileConstants.LOGO_DEF_HEIGHT);
         } else {
             logo = new Image(imageUrl);
-            logo.setWidth("" + FileConstants.LOGO_ICON_DEFAULT_WIDTH);
-            logo.setHeight("" + FileConstants.LOGO_ICON_DEFAULT_HEIGHT);
+            logo.setWidth("" + FileConstants.LOGO_DEF_WIDTH);
+            logo.setHeight("" + FileConstants.LOGO_DEF_HEIGHT);
         }
         add(logo);
     }

@@ -1,6 +1,5 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 
 public class PushButtonDescriptor extends ButtonDescriptor {
@@ -19,12 +18,8 @@ public class PushButtonDescriptor extends ButtonDescriptor {
     }
 
     @Override
-    public View getView() {
-        if (view == null) {
-            final PushButton button = new PushButton(this);
-            view = button;
-        }
-        return view;
+    public Class<?> getType() {
+        return PushButtonDescriptor.class;
     }
 
     public boolean isPushed() {

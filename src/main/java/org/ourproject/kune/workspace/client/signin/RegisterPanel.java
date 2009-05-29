@@ -38,7 +38,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
     public static final String ERRMSG = "k-regp-errmsg";
 
-    static RegisterForm registerForm;
+    private static RegisterForm registerForm;
 
     public static final String CANCEL_BUTTON_ID = "k-regp-cb";
     public static final String REGISTER_BUTTON_ID = "k-regp-rb";

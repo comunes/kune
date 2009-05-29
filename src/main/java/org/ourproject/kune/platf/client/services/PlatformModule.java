@@ -21,6 +21,8 @@ package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
+import org.ourproject.kune.platf.client.actions.ui.BasicGuiBinding;
+import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.actions.ui.TestButton;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
@@ -46,6 +48,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
@@ -371,6 +374,15 @@ public class PlatformModule extends AbstractModule {
             }
         });
 
+        register(Singleton.class, new Factory<ImgResources>(ImgResources.class) {
+            @Override
+            public ImgResources create() {
+                final ImgResources instance = GWT.create(ImgResources.class);
+                StyleInjector.injectStylesheet(instance.css().getText());
+                return instance;
+            }
+        });
+
         register(Singleton.class, new Factory<RTEImgResources>(RTEImgResources.class) {
             @Override
             public RTEImgResources create() {
@@ -521,15 +533,34 @@ public class PlatformModule extends AbstractModule {
                 return new ExternalMediaRegistry($(Session.class).getInitData().getExtMediaDescrips());
             }});
 
+        register(Singleton.class, new Factory<BasicGuiBinding>(BasicGuiBinding.class) {
+            @Override
+            public BasicGuiBinding create() {
+                return new BasicGuiBinding($(GuiBindingsRegister.class));
+            }
+        });
+
+        register(Singleton.class, new Factory<GuiBindingsRegister>(GuiBindingsRegister.class) {
+            @Override
+            public GuiBindingsRegister create() {
+                return new GuiBindingsRegister();
+            }
+            @Override
+            public void onAfterCreated(final GuiBindingsRegister instance) {
+                $(BasicGuiBinding.class);
+            }
+        });
+
         register(Singleton.class, new Factory<TestButton>(TestButton.class) {
             @Override
             public TestButton create() {
-                final TestButton btn = new TestButton($(WorkspaceSkeleton.class));
+                final TestButton btn = new TestButton($(WorkspaceSkeleton.class), $(GuiBindingsRegister.class), $(ImgResources.class));
                 return btn;
             }
         });
 
-        // $(TestButton.class);
+
+        $(TestButton.class);
 
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();

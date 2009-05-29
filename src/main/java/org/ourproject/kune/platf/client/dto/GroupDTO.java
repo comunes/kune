@@ -53,6 +53,9 @@ public class GroupDTO implements IsSerializable {
         if (obj == null) {
             return false;
         }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final GroupDTO other = (GroupDTO) obj;
         if (shortName == null) {
             if (other.shortName != null) {
@@ -131,7 +134,7 @@ public class GroupDTO implements IsSerializable {
         return groupType.equals(GroupType.PERSONAL);
     }
 
-    public void setAdmissionType(AdmissionTypeDTO admissionType) {
+    public void setAdmissionType(final AdmissionTypeDTO admissionType) {
         this.admissionType = admissionType;
     }
 
@@ -151,7 +154,7 @@ public class GroupDTO implements IsSerializable {
         this.groupType = groupType;
     }
 
-    public void setHasLogo(boolean hasLogo) {
+    public void setHasLogo(final boolean hasLogo) {
         this.hasLogo = hasLogo;
     }
 

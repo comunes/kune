@@ -14,4 +14,9 @@ public class MenuRadioItemDescriptor extends MenuCheckItemDescriptor {
     public String getGroup() {
         return group;
     }
+
+    @Override
+    public Class<?> getType() {
+        return MenuRadioItemDescriptor.class;
+    }
 }

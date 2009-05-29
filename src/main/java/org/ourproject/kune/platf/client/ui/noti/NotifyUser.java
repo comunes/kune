@@ -36,30 +36,26 @@ public class NotifyUser {
         info, important, veryImportant, error,
     }
 
-    private static Event2<Level, String> onNotify;
-
-    private static Event2<String, String> onAlert;
-
-    private static Event<ConfirmationAsk> onConfirmationAsk;
-
-    private static Event<String> onProgress;
-
-    private static Event0 onHideProgress;
+    private static final Event2<Level, String> ON_NOTIFY = new Event2<Level, String>("onNotify");
+    private static final Event2<String, String> ON_ALERT = new Event2<String, String>("onAlert");
+    private static final Event<ConfirmationAsk> ON_CONFIRMATION_ASK = new Event<ConfirmationAsk>("onConfirmationAsk");
+    private static final Event<String> ON_PROGRESS = new Event<String>("onProgress");
+    private static final Event0 ON_HIDE_PROGRESS = new Event0("onHideProgress");
 
     private static I18nTranslationService i18n;
 
     private static Images images;
 
-    public static void askConfirmation(String confirmationTitle, String confirmationText, Listener0 onConfirm,
-            Listener0 onCancel) {
-        onConfirmationAsk.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, onCancel));
+    public static void askConfirmation(final String confirmationTitle, final String confirmationText,
+            final Listener0 onConfirm, final Listener0 onCancel) {
+        ON_CONFIRMATION_ASK.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, onCancel));
     }
 
     public static void error(final String message) {
-        onNotify.fire(Level.error, message);
+        ON_NOTIFY.fire(Level.error, message);
     }
 
-    public static String getCls(Level level) {
+    public static String getCls(final Level level) {
         switch (level) {
         case info:
             return "k-stm-info-icon";
@@ -73,7 +69,7 @@ public class NotifyUser {
         }
     }
 
-    public static AbstractImagePrototype getImage(Level level) {
+    public static AbstractImagePrototype getImage(final Level level) {
         switch (level) {
         case info:
             return images.info();
@@ -88,73 +84,72 @@ public class NotifyUser {
     }
 
     public static void hideProgress() {
-        onHideProgress.fire();
+        ON_HIDE_PROGRESS.fire();
     }
 
     public static void important(final String message) {
-        onNotify.fire(Level.important, message);
+        ON_NOTIFY.fire(Level.important, message);
     }
 
     public static void info(final String message) {
-        onNotify.fire(Level.info, message);
+        ON_NOTIFY.fire(Level.info, message);
     }
 
-    public static void showAlertMessage(String title, String message) {
-        onAlert.fire(title, message);
+    public static void showAlertMessage(final String title, final String message) {
+        ON_ALERT.fire(title, message);
     }
 
     public static void showProgress(final String text) {
-        onProgress.fire(text);
+        ON_PROGRESS.fire(text);
     }
 
     public static void showProgressLoading() {
-        onProgress.fire(i18n.t("Loading"));
+        ON_PROGRESS.fire(i18n.t("Loading"));
     }
 
     public static void showProgressProcessing() {
-        onProgress.fire(i18n.t("Processing"));
+        ON_PROGRESS.fire(i18n.t("Processing"));
     }
 
     public static void showProgressSaving() {
-        onProgress.fire(i18n.t("Saving"));
+        ON_PROGRESS.fire(i18n.t("Saving"));
     }
 
     public static void showProgressStarting() {
-        onProgress.fire(i18n.t("Starting"));
+        ON_PROGRESS.fire(i18n.t("Starting"));
     }
 
     public static void veryImportant(final String message) {
-        onNotify.fire(Level.veryImportant, message);
+        ON_NOTIFY.fire(Level.veryImportant, message);
     }
 
-    public NotifyUser(I18nTranslationService i18n, Images images) {
+    public NotifyUser(final I18nTranslationService i18n, final Images images) {
+        this();
         NotifyUser.i18n = i18n;
         NotifyUser.images = images;
-        onNotify = new Event2<Level, String>("onNotify");
-        onAlert = new Event2<String, String>("onAlert");
-        onProgress = new Event<String>("onProgress");
-        onHideProgress = new Event0("onHideProgress");
-        onConfirmationAsk = new Event<ConfirmationAsk>("onConfirmationAsk");
+    }
+
+    private NotifyUser() {
     }
 
     public void addAlerter(final Listener2<String, String> listener) {
-        onAlert.add(listener);
+        ON_ALERT.add(listener);
     }
 
     public void addConfirmationAsker(final Listener<ConfirmationAsk> listener) {
-        onConfirmationAsk.add(listener);
+        ON_CONFIRMATION_ASK.add(listener);
     }
 
     public void addHideProgressNotifier(final Listener0 listener) {
-        onHideProgress.add(listener);
+        ON_HIDE_PROGRESS.add(listener);
     }
 
     public void addNotifier(final Listener2<Level, String> listener) {
-        onNotify.add(listener);
+        ON_NOTIFY.add(listener);
     }
 
     public void addProgressNotifier(final Listener<String> listener) {
-        onProgress.add(listener);
+        ON_PROGRESS.add(listener);
     }
 
 }

@@ -135,10 +135,10 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
         final I18nLanguage language = languageManager.findByCode(languageId);
         final I18nTranslation newTranslation = new I18nTranslation(text, language, translation);
         persist(newTranslation);
-        if (languageId != I18nTranslation.DEFAULT_LANG) {
-            langCache.remove(languageId);
-        } else {
+        if (languageId.equals(I18nTranslation.DEFAULT_LANG)) {
             langCache.clear();
+        } else {
+            langCache.remove(languageId);
         }
     }
 

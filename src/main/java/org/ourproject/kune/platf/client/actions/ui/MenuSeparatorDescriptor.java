@@ -1,7 +1,5 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.View;
-
 public class MenuSeparatorDescriptor extends AbstractSeparatorDescriptor {
 
     public MenuSeparatorDescriptor(final MenuDescriptor parent) {
@@ -10,12 +8,7 @@ public class MenuSeparatorDescriptor extends AbstractSeparatorDescriptor {
     }
 
     @Override
-    public View getView() {
-        if (view == NO_VIEW) {
-            final AbstractMenu menu = ((MenuDescriptor) getParent()).getMenu();
-            menu.addSeparator();
-            view = menu;
-        }
-        return view;
+    public Class<?> getType() {
+        return MenuSeparatorDescriptor.class;
     }
 }

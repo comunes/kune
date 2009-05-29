@@ -1,36 +1,27 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
+import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.gwtext.client.widgets.ToolbarButton;
 
-public class DefaultMenu extends AbstractMenu {
+public class MenuGui extends AbstractMenuGui {
 
-    // @PMD:REVIEWED:AtLeastOneConstructor: by vjrj on 26/05/09 15:56
-    public class MenuButton extends ToolbarButton implements View {
-    }
+    private transient final ToolbarButton button;
 
-    private transient final MenuButton button;
-
-    public DefaultMenu(final AbstractUIActionDescriptor descriptor) {
+    public MenuGui(final AbstractGuiActionDescrip descriptor) {
         super();
-        button = new MenuButton();
+        button = new ToolbarButton();
         button.setMenu(menu);
         setAction(descriptor.action);
-        initWidget(menu);
+        initWidget(button);
     }
 
-    public void add(final DefaultSubMenu submenu) {
+    public void add(final SubMenuGui submenu) {
         menu.addItem(submenu.getMenuItem());
     };
 
-    public MenuButton getButton() {
-        return button;
-    }
-
-    public void insert(final int position, final DefaultSubMenu submenu) {
+    public void insert(final int position, final SubMenuGui submenu) {
         menu.insert(position, submenu.getMenuItem());
     }
 
@@ -46,8 +37,7 @@ public class DefaultMenu extends AbstractMenu {
     @Override
     public void setIcon(final ImageResource imageResource) {
         if (imageResource != null) {
-            // FIXME
-            button.setIconCls(RTEImgResources.SUFFIX + imageResource.getName());
+            button.setIcon(ImgConstants.PATH_PREFIX + imageResource.getName());
         }
     }
 

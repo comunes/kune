@@ -19,18 +19,21 @@
  */
 package org.ourproject.kune.platf.client;
 
-public interface PlatfMessages {
-    String BUDDIES_NOT_PUBLIC = "The buddies of this user are not public";
-    String MEMBERS_NOT_PUBLIC = "The members of this group are not public";
-    String REGISTER_TITLE = "Register";
-    String SIGN_IN_TITLE = "Sign in";
-    String EMAIL_IN_USE = "This email address is being used by another user. Please, try with another one";
-    String NAME_IN_USE = "This name in already in use. Please try with a different name";
-    String INCORRECT_NICKNAME_EMAIL_OR_PASSWORD = "The nickname/email/password is incorrect";
-    String YOUR_HOMEPAGE = "Your homepage";
-    String USER_DOESN_T_HAVE_A_HOMEPAGE = "This user does not have a homepage";
-    String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Logo";
-    String ENT_LOGO_SELECTOR_PERSON_TITLE = "Avatar";
-    String ENT_OPTIONS_GROUP_TITLE = "Group options";
-    String ENT_OPTIONS_USER_TITLE = "User options";
+public final class PlatfMessages {
+    public final static String BUDDIES_NOT_PUBLIC = "The buddies of this user are not public";
+    public final static String MEMBERS_NOT_PUBLIC = "The members of this group are not public";
+    public final static String REGISTER_TITLE = "Register";
+    public final static String SIGN_IN_TITLE = "Sign in";
+    public final static String EMAIL_IN_USE = "This email address is being used by another user. Please, try with another one";
+    public final static String NAME_IN_USE = "This name in already in use. Please try with a different name";
+    public final static String INCORRECT_NICKNAME_EMAIL_OR_PASSWORD = "The nickname/email/password is incorrect";
+    public final static String YOUR_HOMEPAGE = "Your homepage";
+    public final static String USER_DOESN_T_HAVE_A_HOMEPAGE = "This user does not have a homepage";
+    public final static String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Logo";
+    public final static String ENT_LOGO_SELECTOR_PERSON_TITLE = "Avatar";
+    public final static String ENT_OPTIONS_GROUP_TITLE = "Group options";
+    public final static String ENT_OPTIONS_USER_TITLE = "User options";
+
+    private PlatfMessages() {
+    }
 }

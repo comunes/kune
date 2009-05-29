@@ -3,9 +3,9 @@ package org.ourproject.kune.platf.client.actions.ui;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
 
-public class PushButton extends DefaultButton {
+public class PushButtonGui extends ButtonGui {
 
-    public PushButton(final PushButtonDescriptor btn) {
+    public PushButtonGui(final PushButtonDescriptor btn) {
         super(btn, true);
         setPressed(btn.isPushed());
         action.addPropertyChangeListener(new PropertyChangeListener() {
@@ -16,5 +16,4 @@ public class PushButton extends DefaultButton {
             }
         });
     }
-
 }

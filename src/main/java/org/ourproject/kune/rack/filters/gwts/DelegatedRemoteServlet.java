@@ -41,7 +41,7 @@ public class DelegatedRemoteServlet extends RemoteServiceServlet {
     @Override
     public String processCall(final String payload) throws SerializationException {
         try {
-            RPCRequest rpcRequest = RPC.decodeRequest(payload, service.getClass());
+            final RPCRequest rpcRequest = RPC.decodeRequest(payload, service.getClass());
             return RPC.invokeAndEncodeResponse(service, rpcRequest.getMethod(), rpcRequest.getParameters());
         } catch (IncompatibleRemoteServiceException ex) {
             return RPC.encodeResponseForFailure(null, ex);
@@ -57,8 +57,8 @@ public class DelegatedRemoteServlet extends RemoteServiceServlet {
     }
 
     @Override
-    protected void doUnexpectedFailure(final Throwable e) {
-        e.printStackTrace();
-        super.doUnexpectedFailure(e);
+    protected void doUnexpectedFailure(final Throwable except) {
+        except.printStackTrace();
+        super.doUnexpectedFailure(except);
     }
 }

@@ -57,7 +57,7 @@ public class User implements HasId {
     public static final User UNKNOWN_USER = new User();
 
     public static boolean isKnownUser(final User user) {
-        return user != UNKNOWN_USER;
+        return !user.equals(UNKNOWN_USER);
     }
 
     @Id

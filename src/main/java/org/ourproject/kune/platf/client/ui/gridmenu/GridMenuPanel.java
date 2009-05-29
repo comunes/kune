@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.client.ui.gridmenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event;
@@ -72,8 +73,8 @@ public class GridMenuPanel<T> extends Panel {
     private static final String END_ICON_HTML = "endIconHtmlField";
     private static final String TOOLTIP = "tooltipField";
     private static final String TOOLTIPTITLE = "tooltipTitleField";
-    private final HashMap<String, CustomMenu<T>> menuMap;
-    private final HashMap<T, Record> recordMap;
+    private final Map<String, CustomMenu<T>> menuMap;
+    private final Map<T, Record> recordMap;
     private RecordDef recordDef;
     private GroupingStore store;
     private GridPanel grid;
@@ -232,13 +233,13 @@ public class GridMenuPanel<T> extends Panel {
 
     public void removeItem(final GridItem<T> gridItem) {
         final Record record = recordMap.get(gridItem.getItem());
-        if (record != null) {
-            menuMap.remove(record);
+        if (record == null) {
+            Log.error("Trying to remove a non existing item: " + gridItem.getId());
+        } else {
+            menuMap.remove(gridItem.getId());
             store.remove(record);
             recordMap.remove(gridItem.getItem());
             doLayoutIfNeeded();
-        } else {
-            Log.error("Trying to remove a non existing item: " + gridItem.getId());
         }
     }
 

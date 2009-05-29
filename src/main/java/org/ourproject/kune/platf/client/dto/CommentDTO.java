@@ -44,6 +44,9 @@ public class CommentDTO implements IsSerializable {
         if (obj == null) {
             return false;
         }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final CommentDTO other = (CommentDTO) obj;
         if (author == null) {
             if (other.author != null) {

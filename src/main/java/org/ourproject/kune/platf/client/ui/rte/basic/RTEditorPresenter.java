@@ -16,6 +16,7 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
@@ -145,11 +146,20 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     public ActionAddCondition<Object> canBeBasic() {
-        return canBeBasic();
+        return new ActionAddCondition<Object>() {
+            public boolean mustBeAdded(final Object param) {
+                return view.canBeBasic();
+            }
+        };
+
     }
 
     public ActionAddCondition<Object> canBeExtended() {
-        return canBeExtended();
+        return new ActionAddCondition<Object>() {
+            public boolean mustBeAdded(final Object param) {
+                return view.canBeExtended();
+            }
+        };
     }
 
     public void detach() {
@@ -240,8 +250,8 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     private void createBasicActions() {
-        ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                TOPBAR, new Listener0() {
+        ActionToolbarMenuDescriptor<Object> selectAll = new ActionToolbarMenuDescriptor<Object>(accessRol, TOPBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.selectAll();
                     }
@@ -288,8 +298,8 @@ public class RTEditorPresenter implements RTEditor {
         underline.setShortcut(new ShortcutDescriptor(true, 'U'));
         underline.setAddCondition(canBeBasic);
 
-        ActionToolbarMenuDescriptor<Object> subscript = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                TOPBAR, new Listener0() {
+        ActionToolbarMenuDescriptor<Object> subscript = new ActionToolbarMenuDescriptor<Object>(accessRol, TOPBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.toggleSubscript();
                         fireOnEdit();
@@ -301,8 +311,8 @@ public class RTEditorPresenter implements RTEditor {
         subscript.setShortcut(new ShortcutDescriptor(true, 188, ","));
         subscript.setAddCondition(canBeBasic);
 
-        ActionToolbarMenuDescriptor<Object> superscript = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                TOPBAR, new Listener0() {
+        ActionToolbarMenuDescriptor<Object> superscript = new ActionToolbarMenuDescriptor<Object>(accessRol, TOPBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.toggleSuperscript();
                         fireOnEdit();
@@ -377,8 +387,8 @@ public class RTEditorPresenter implements RTEditor {
         redo.setBottomSeparator(true);
         redo.setIconCls(getCssName(imgResources.redo()));
 
-        ActionToolbarButtonDescriptor<Object> undoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol,
-                SNDBAR, new Listener0() {
+        ActionToolbarButtonDescriptor<Object> undoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, SNDBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.undo();
                         fireOnEdit();
@@ -389,8 +399,8 @@ public class RTEditorPresenter implements RTEditor {
         undoBtn.setIconCls(getCssName(imgResources.undo()));
         undoBtn.setPosition(0);
 
-        ActionToolbarButtonDescriptor<Object> redoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol,
-                SNDBAR, new Listener0() {
+        ActionToolbarButtonDescriptor<Object> redoBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, SNDBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.redo();
                         fireOnEdit();
@@ -440,8 +450,8 @@ public class RTEditorPresenter implements RTEditor {
         paste.setAddCondition(canBeExtended);
         paste.setIconCls(getCssName(imgResources.paste()));
 
-        ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                TOPBAR, new Listener0() {
+        ActionToolbarMenuDescriptor<Object> editHtml = new ActionToolbarMenuDescriptor<Object>(accessRol, TOPBAR,
+                new Listener0() {
 
                     public void onEvent() {
                         if (updateHtmlListener == null) {
@@ -464,8 +474,8 @@ public class RTEditorPresenter implements RTEditor {
         editHtml.setParentMenuTitle(i18n.t(EDIT_MENU));
         editHtml.setAddCondition(canBeExtended);
 
-        ActionToolbarMenuDescriptor<Object> comment = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                TOPBAR, new Listener0() {
+        ActionToolbarMenuDescriptor<Object> comment = new ActionToolbarMenuDescriptor<Object>(accessRol, TOPBAR,
+                new Listener0() {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
@@ -521,8 +531,8 @@ public class RTEditorPresenter implements RTEditor {
         hr.setParentMenuTitle(i18n.t(INSERT_MENU));
         hr.setAddCondition(canBeExtended);
 
-        ActionToolbarMenuDescriptor<Object> blockquote = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                TOPBAR, new Listener0() {
+        ActionToolbarMenuDescriptor<Object> blockquote = new ActionToolbarMenuDescriptor<Object>(accessRol, TOPBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.focus();
                         view.insertBlockquote();
@@ -533,8 +543,8 @@ public class RTEditorPresenter implements RTEditor {
         blockquote.setParentMenuTitle(i18n.t(FORMAT_MENU));
         blockquote.setAddCondition(canBeExtended);
 
-        ActionToolbarButtonDescriptor<Object> hrButton = new ActionToolbarButtonDescriptor<Object>(accessRol,
-                SNDBAR, new Listener0() {
+        ActionToolbarButtonDescriptor<Object> hrButton = new ActionToolbarButtonDescriptor<Object>(accessRol, SNDBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.focus();
                         view.insertHorizontalRule();
@@ -603,8 +613,8 @@ public class RTEditorPresenter implements RTEditor {
         ul.setRightSeparator(ActionToolbarButtonSeparator.separator);
         ul.setAddCondition(canBeExtended);
 
-        ActionToolbarButtonDescriptor<Object> imgBtn = new ActionToolbarButtonDescriptor<Object>(accessRol,
-                SNDBAR, new Listener0() {
+        ActionToolbarButtonDescriptor<Object> imgBtn = new ActionToolbarButtonDescriptor<Object>(accessRol, SNDBAR,
+                new Listener0() {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
@@ -718,8 +728,8 @@ public class RTEditorPresenter implements RTEditor {
         editLinkCtx.setShortcut(null);
         editLinkCtx.setActionPosition(LINKCTX);
 
-        ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol,
-                SNDBAR, new Listener0() {
+        ActionToolbarButtonDescriptor<Object> removeLink = new ActionToolbarButtonDescriptor<Object>(accessRol, SNDBAR,
+                new Listener0() {
                     public void onEvent() {
                         if (view.isAnythingSelected()) {
                             // we try to unlink the selection
@@ -856,8 +866,8 @@ public class RTEditorPresenter implements RTEditor {
         backgroundColor.setToolTip(i18n.t("Text Background Colour"));
         backgroundColor.setAddCondition(canBeBasic);
 
-        final ActionToolbarMenuDescriptor<Object> devInfo = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                TOPBAR, new Listener0() {
+        final ActionToolbarMenuDescriptor<Object> devInfo = new ActionToolbarMenuDescriptor<Object>(accessRol, TOPBAR,
+                new Listener0() {
                     public void onEvent() {
                         deferred.addCommand(new Listener0() {
                             public void onEvent() {
@@ -930,8 +940,8 @@ public class RTEditorPresenter implements RTEditor {
 
     private ActionToolbarMenuDescriptor<Object> createFontNameAction(final ActionAddCondition<Object> canBeBasic,
             final String fontName) {
-        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                SNDBAR, new Listener0() {
+        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol, SNDBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.setFontName(fontName);
                         fireOnEdit();
@@ -946,8 +956,8 @@ public class RTEditorPresenter implements RTEditor {
 
     private ActionToolbarMenuDescriptor<Object> createFontSizeAction(final ActionAddCondition<Object> canBeBasic,
             final int fontSize, final String fontSizeName) {
-        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol,
-                SNDBAR, new Listener0() {
+        final ActionToolbarMenuDescriptor<Object> font = new ActionToolbarMenuDescriptor<Object>(accessRol, SNDBAR,
+                new Listener0() {
                     public void onEvent() {
                         view.setFontSize(FONT_SIZES[fontSize]);
                         fireOnEdit();
@@ -971,7 +981,7 @@ public class RTEditorPresenter implements RTEditor {
     }
 
     private String getCssName(final ImageResource imageResource) {
-        return RTEImgResources.SUFFIX + imageResource.getName();
+        return ImgConstants.CSS_SUFFIX + imageResource.getName();
     }
 
     private void getPalette() {

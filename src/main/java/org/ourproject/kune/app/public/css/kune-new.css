@@ -1000,3 +1000,9 @@ background-color
   margin-left: 0px;
   margin-top: 0px;
 }
+
+.k-def-popup {
+  z-index: 9999 !important;
+  background-color: #FFF;
+  border: 1px solid gray;
+}

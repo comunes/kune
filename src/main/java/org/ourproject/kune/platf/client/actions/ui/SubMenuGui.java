@@ -1,20 +1,20 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
+import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.gwtext.client.widgets.menu.MenuItem;
 
-public class DefaultSubMenu extends AbstractMenu {
+public class SubMenuGui extends AbstractMenuGui {
 
     private transient final MenuItem item;
 
-    public DefaultSubMenu(final AbstractUIActionDescriptor descriptor) {
+    public SubMenuGui(final AbstractGuiActionDescrip descriptor) {
         super();
         item = new MenuItem();
         item.setMenu(menu);
-        initWidget(menu);
         setAction(descriptor.action);
+        // initWidget(item);
     }
 
     public MenuItem getMenuItem() {
@@ -33,8 +33,7 @@ public class DefaultSubMenu extends AbstractMenu {
     @Override
     public void setIcon(final ImageResource imageResource) {
         if (imageResource != null) {
-            // FIXME
-            item.setIconCls(RTEImgResources.SUFFIX + imageResource.getName());
+            item.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
         }
     }
 

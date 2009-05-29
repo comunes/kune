@@ -38,15 +38,18 @@ public class FileManagerDefault implements FileManager {
             // 21/05/09 13:15
             file = new File(dir, fileNameProposal);
         }
-        file.createNewFile();
-        return file;
+        if (file.createNewFile()) {
+            return file;
+        } else {
+            throw new IOException("Cannot create sequential file name");
+        }
     }
 
     public boolean mkdir(final String dir) {
         return new File(dir).mkdirs();
     }
 
-    public void rmdir(final String dir) throws IOException {
+    public boolean rmdir(final String dir) throws IOException {
         final File file = new File(dir);
         if (!file.isDirectory()) {
             throw new IOException("rmdir: " + dir + ": Not a directory");
@@ -54,6 +57,6 @@ public class FileManagerDefault implements FileManager {
         if (file.listFiles().length != 0) {
             throw new IOException("rmdir: " + dir + ": Directory not empty");
         }
-        file.delete();
+        return file.delete();
     }
 }
