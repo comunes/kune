@@ -189,7 +189,7 @@ http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
 
 For start the hosted mode, you can both execute from command line:
 
- mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:gwt
+ mvn gwt-maven:gwt
 
 Also, you can generate a hosted mode launch configuration in eclipse. We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /ws/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
 * gwt-dev-[linux|mac|windows].jar (Add External Jar and choose it from your gwt installation directory)
@@ -200,7 +200,7 @@ If you have memory problems running the hosted mode, increase it in VM arguments
  -Xmx512M
 
 before run hosted mode compile once with:
- mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:compile
+ mvn gwt-maven:compile
 and deploy with:
  script/deploy_gwt.sh 
 and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT). This is quite useful to put breakpoints in the server code.

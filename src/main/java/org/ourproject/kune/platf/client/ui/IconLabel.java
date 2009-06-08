@@ -144,7 +144,7 @@ public class IconLabel extends Widget implements HasClickHandlers, HasDoubleClic
     }
 
     public HandlerRegistration addClickHandler(final ClickHandler handler) {
-        return addHandler(handler, ClickEvent.getType());
+        return addDomHandler(handler, ClickEvent.getType());
     }
 
     public HandlerRegistration addDoubleClickHandler(final DoubleClickHandler handler) {

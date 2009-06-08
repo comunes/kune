@@ -54,7 +54,7 @@ public class RateItPresenter implements RateIt {
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
                 if (state instanceof StateContentDTO) {
-                    StateContentDTO stateContentDTO = (StateContentDTO) state;
+                    final StateContentDTO stateContentDTO = (StateContentDTO) state;
                     setState(capabilitiesRegistry.isRateable(stateContentDTO.getTypeId()),
                             stateContentDTO.getCurrentUserRate());
                 } else {
@@ -99,7 +99,7 @@ public class RateItPresenter implements RateIt {
                 new AsyncCallbackSimple<RateResultDTO>() {
                     public void onSuccess(final RateResultDTO result) {
                         NotifyUser.hideProgress();
-                        NotifyUser.info(i18n.t("Content rated"));
+                        // NotifyUser.info(i18n.t("Content rated"));
                         if (currentState.getStateToken().equals(session.getCurrentStateToken())) {
                             session.getContentState().setRate(result);
                             setState(true, result.getCurrentUserRate());

@@ -1,7 +1,0 @@
-History.txt
-Manifest.txt
-README.txt
-Rakefile
-bin/sow
-lib/hoe.rb
-test/test_hoe.rb

@@ -20,19 +20,22 @@
     <param-value>/WEB-INF/publicspace/
     </param-value>
   </context-param>
+
+  <context-param>
+    <param-name>files.default</param-name>
+    <param-value>/WEB-INF/publicspace/public
+    </param-value>
+    <description>
+      The files servlet should forward to the rails servlet
+      if no file could be found
+    </description>
+  </context-param>
+
   <context-param>
     <param-name>files.prefix</param-name>
     <param-value>/WEB-INF/publicspace/public
     </param-value>
-  </context-param>
-  <context-param>
-    <param-name>rails.env</param-name>
-    <param-value>production</param-value>
-  </context-param>
-
-  <context-param>
-    <param-name>jruby.max.runtimes</param-name>
-    <param-value>1</param-value>
+    <description>Prefix added to static files</description>
   </context-param>
 
   <context-param>
@@ -40,6 +43,20 @@
     <param-value>/public/</param-value>
   </context-param>
 
+  <context-param>
+    <param-name>rails.env</param-name>
+    <param-value>production</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>jruby.min.runtimes</param-name>
+    <param-value>1</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>jruby.max.runtimes</param-name>
+    <param-value>1</param-value>
+  </context-param>
 
   <filter>
     <filter-name>RackFilter</filter-name>
@@ -48,14 +65,13 @@
   </filter>
   <filter-mapping>
     <filter-name>RackFilter</filter-name>
-    <url-pattern>/public/*</url-pattern>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
 
   <listener>
     <listener-class>org.jruby.rack.rails.RailsServletContextListener
     </listener-class>
   </listener>
-
 
   <filter>
     <filter-name>rack</filter-name>
@@ -110,15 +126,11 @@
     <url-pattern>/ws/gwt-log</url-pattern>
   </servlet-mapping>
 
-<!--
-  <servlet>
-    <servlet-name>jUnitHostImpl</servlet-name>
+  <!--
+    <servlet> <servlet-name>jUnitHostImpl</servlet-name>
     <servlet-class>com.google.gwt.junit.server.JUnitHostImpl
-    </servlet-class>
-  </servlet>
-  <servlet-mapping>
+    </servlet-class> </servlet> <servlet-mapping>
     <servlet-name>jUnitHostImpl</servlet-name>
-    <url-pattern>/ws/junithost</url-pattern>
-  </servlet-mapping>
- -->
+    <url-pattern>/ws/junithost</url-pattern> </servlet-mapping>
+  -->
 </web-app>
