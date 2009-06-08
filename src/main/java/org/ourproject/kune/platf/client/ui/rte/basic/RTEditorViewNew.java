@@ -1,10 +1,13 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionCollection;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 
 public interface RTEditorViewNew extends View {
+
+    void addActions(GuiActionCollection actions);
 
     void adjustSize(int height);
 

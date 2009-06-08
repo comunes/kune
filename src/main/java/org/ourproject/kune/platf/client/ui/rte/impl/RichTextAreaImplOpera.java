@@ -22,8 +22,7 @@ public class RichTextAreaImplOpera extends RichTextAreaImplStandard {
 
     @Override
     public void setBackColor(String color) {
-        // Opera uses 'BackColor' for the *entire area's* background.
-        // 'HiliteColor'
+    // Opera uses 'BackColor' for the *entire area's* background. 'HiliteColor'
         // does what we actually want.
         execCommand("HiliteColor", color);
     }

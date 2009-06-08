@@ -2,8 +2,6 @@ package org.ourproject.kune.platf.client.shortcuts;
 
 import org.ourproject.kune.platf.client.i18n.Resources;
 
-import com.google.gwt.user.client.ui.KeyboardListener;
-
 public class ShortcutDescriptor {
 
     private static final String NO_KEYNAME = "nokeyname";
@@ -52,13 +50,13 @@ public class ShortcutDescriptor {
     }
 
     public ShortcutDescriptor(final int keycode, final int modifiers) {
-        this(has(modifiers, KeyboardListener.MODIFIER_CTRL), has(modifiers, KeyboardListener.MODIFIER_ALT), has(
-                modifiers, KeyboardListener.MODIFIER_SHIFT), keycode, NO_KEYNAME);
+        this(has(modifiers, Keyboard.MODIFIER_CTRL), has(modifiers, Keyboard.MODIFIER_ALT), has(modifiers,
+                Keyboard.MODIFIER_SHIFT), keycode, NO_KEYNAME);
     }
 
     public ShortcutDescriptor(final int keycode, final int modifiers, final String keyName) {
-        this(has(modifiers, KeyboardListener.MODIFIER_CTRL), has(modifiers, KeyboardListener.MODIFIER_ALT), has(
-                modifiers, KeyboardListener.MODIFIER_SHIFT), keycode, keyName);
+        this(has(modifiers, Keyboard.MODIFIER_CTRL), has(modifiers, Keyboard.MODIFIER_ALT), has(modifiers,
+                Keyboard.MODIFIER_SHIFT), keycode, keyName);
     }
 
     @Override
@@ -72,7 +70,7 @@ public class ShortcutDescriptor {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ShortcutDescriptor other = (ShortcutDescriptor) obj;
+        final ShortcutDescriptor other = (ShortcutDescriptor) obj;
         if (alt != other.alt) {
             return false;
         }
@@ -100,9 +98,8 @@ public class ShortcutDescriptor {
     }
 
     public boolean is(final char keyCode, final int modifiers) {
-        return (this.keycode == keyCode && same(modifiers, KeyboardListener.MODIFIER_ALT, alt)
-                && same(modifiers, KeyboardListener.MODIFIER_CTRL, ctrl) && same(modifiers,
-                KeyboardListener.MODIFIER_SHIFT, shift));
+        return (this.keycode == keyCode && same(modifiers, Keyboard.MODIFIER_ALT, alt)
+                && same(modifiers, Keyboard.MODIFIER_CTRL, ctrl) && same(modifiers, Keyboard.MODIFIER_SHIFT, shift));
     }
 
     public boolean same(final int modifiers, final int modifier, final boolean keyValue) {

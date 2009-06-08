@@ -19,10 +19,10 @@ public abstract class AbstractGuiActionDescrip {
     private GuiVisibleCondition visibleCondition = new GuiVisibleConditionAdapter();
 
     protected AbstractGuiActionDescrip parent;
-    private transient final Map<String, Object> store;
+    private final Map<String, Object> store;
 
     /** The action. */
-    protected transient AbstractAction action;
+    protected AbstractAction action;
 
     /** The position where the item will be inserted. */
     private int position;

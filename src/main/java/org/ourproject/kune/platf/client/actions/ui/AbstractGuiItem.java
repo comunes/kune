@@ -10,12 +10,12 @@ import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractGuiItem extends Composite implements View {
 
-    protected transient Action action;
+    protected Action action;
 
     /**
      * Listener the button uses to receive PropertyChangeEvents from its Action.
      */
-    protected transient PropertyChangeListener changeListener;
+    protected PropertyChangeListener changeListener;
 
     public void setAction(final Action newaction) {
         if (action != null) {

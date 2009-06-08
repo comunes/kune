@@ -100,7 +100,7 @@ public class KuneRackModule implements RackModule {
         builder.at("^/ws").install(new RedirectFilter("/ws/"));
 
         builder.at("^/ws/$").install(new ListenerFilter(KuneApplicationListener.class),
-                new ForwardFilter("/gwt/org.ourproject.kune.app.Kune/Kune.html"));
+                new ForwardFilter("/gwt/ws/ws.html"));
 
         builder.installGWTServices("^/ws/", SiteService.class, GroupService.class, ContentService.class,
                 UserService.class, SocialNetworkService.class, I18nService.class);
@@ -109,7 +109,7 @@ public class KuneRackModule implements RackModule {
         builder.installServlet("^/ws/servlets/", FileUploadManager.class, FileDownloadManager.class,
                 EntityLogoUploadManager.class, EntityLogoDownloadManager.class);
 
-        builder.at("^/ws/(.*)$").install(new ForwardFilter("^/ws/(.*)$", "/gwt/org.ourproject.kune.app.Kune/{0}"));
+        builder.at("^/ws/(.*)$").install(new ForwardFilter("^/ws/(.*)$", "/gwt/ws/{0}"));
     }
 
     private void installGuiceModules(final RackBuilder builder) {

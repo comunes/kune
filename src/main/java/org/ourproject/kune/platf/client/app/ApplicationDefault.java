@@ -33,40 +33,37 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowCloseListener;
+import com.google.gwt.user.client.Window.ClosingEvent;
+import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class ApplicationDefault implements Application {
     private final Session session;
-    private final Event0 onApplicationStart;
-    private final Event0 onApplicationStop;
+    private final Event0 onAppStart;
+    private final Event0 onAppStop;
 
     public ApplicationDefault(final Session session) {
         this.session = session;
-        this.onApplicationStart = new Event0("onApplicationStart");
-        this.onApplicationStop = new Event0("onApplicationStop");
-        Window.addWindowCloseListener(new WindowCloseListener() {
-            public void onWindowClosed() {
-            }
-
-            public String onWindowClosing() {
+        this.onAppStart = new Event0("onApplicationStart");
+        this.onAppStop = new Event0("onApplicationStop");
+        Window.addWindowClosingHandler(new ClosingHandler() {
+            public void onWindowClosing(final ClosingEvent event) {
                 stop();
-                return null;
             }
         });
     }
 
     public void onApplicationStart(final Listener0 listener) {
-        onApplicationStart.add(listener);
+        onAppStart.add(listener);
     }
 
     public void onApplicationStop(final Listener0 listener) {
-        onApplicationStop.add(listener);
+        onAppStop.add(listener);
     }
 
     public void start() {
-        onApplicationStart.fire();
+        onAppStart.fire();
         PrefetchUtilities.preFetchImpImages();
         getInitData();
         final Timer prefetchTimer = new Timer() {
@@ -102,6 +99,6 @@ public class ApplicationDefault implements Application {
     }
 
     private void stop() {
-        onApplicationStop.fire();
+        onAppStop.fire();
     }
 }

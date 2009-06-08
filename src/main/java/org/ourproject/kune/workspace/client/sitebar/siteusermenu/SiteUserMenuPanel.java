@@ -26,7 +26,9 @@ import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
@@ -52,12 +54,13 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
         loggedUserMenu = new PushButton("");
         loggedUserMenu.ensureDebugId(LOGGED_USER_MENU);
         loggedUserMenu.setStyleName("k-sitebar-labellink");
-        AbstractToolbar siteBar = ws.getSiteBar();
+        final AbstractToolbar siteBar = ws.getSiteBar();
         siteBar.add(loggedUserMenu);
         separator = siteBar.addSeparator();
         userMenu = new Menu();
-        loggedUserMenu.addClickListener(new ClickListener() {
-            public void onClick(final Widget sender) {
+        loggedUserMenu.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
+                final Element sender = event.getRelativeElement();
                 userMenu.showAt(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 10);
             }
         });
@@ -99,7 +102,7 @@ public class SiteUserMenuPanel implements SiteUserMenuView {
         for (final org.ourproject.kune.platf.client.ui.MenuItem<GroupDTO> groupItem : participateInGroups) {
             final Item item = new Item(groupItem.getTitle(), new BaseItemListenerAdapter() {
                 @Override
-                public void onClick(BaseItem item, EventObject e) {
+                public void onClick(final BaseItem item, final EventObject e) {
                     super.onClick(item, e);
                     groupItem.fire(null);
                 }

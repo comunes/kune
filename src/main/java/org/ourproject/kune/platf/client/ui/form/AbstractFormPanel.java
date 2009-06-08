@@ -19,8 +19,9 @@
  */
 package org.ourproject.kune.platf.client.ui.form;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -36,25 +37,25 @@ public class AbstractFormPanel extends VerticalPanel implements FormView {
         content = new VerticalPanel();
         add(content);
 
-        btnOk = new Button("", new ClickListener() {
-            public void onClick(final Widget sender) {
+        btnOk = new Button("", new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 listener.onAccept();
             }
         });
-        btnCancel = new Button("", new ClickListener() {
-            public void onClick(final Widget sender) {
+        btnCancel = new Button("", new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 listener.onCancel();
             }
         });
 
-        FlowPanel controls = new FlowPanel();
+        final FlowPanel controls = new FlowPanel();
         controls.add(btnOk);
         controls.add(btnCancel);
         add(controls);
     }
 
     public void addRow(final String label, final Widget widget) {
-        HorizontalPanel panel = new HorizontalPanel();
+        final HorizontalPanel panel = new HorizontalPanel();
         panel.add(new Label(label));
         panel.add(widget);
         content.add(panel);

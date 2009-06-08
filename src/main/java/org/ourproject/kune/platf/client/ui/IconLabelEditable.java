@@ -19,15 +19,27 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener2;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -37,16 +49,19 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class IconLabelEditable extends Composite {
 
-    private transient boolean useDoubleClick;
-    private transient ClickListener listener;
-    private transient String currentText;
-    private transient MouseListenerAdapter mouseOverListener;
-    private transient final AbstractLabel label;
-    private transient String dblClickLabel;
-    private transient String clickLabel;
-    private transient Event2<String, String> onEditEvent;
-    private transient TextBox editor;
-    private transient HorizontalPanel hpanel;
+    private boolean useDoubleClick;
+    private String currentText;
+    private final AbstractLabel label;
+    private String dblClickLabel;
+    private String clickLabel;
+    private Event2<String, String> onEditEvent;
+    private TextBox editor;
+    private HorizontalPanel hpanel;
+    private List<HandlerRegistration> registrations;
+    private ClickHandler clickHandler;
+    private DoubleClickHandler doubleClickHandler;
+    private MouseOutHandler mouseOutHandler;
+    private MouseOverHandler mouseOverHandler;
 
     public IconLabelEditable() {
         this("");
@@ -132,6 +147,7 @@ public class IconLabelEditable extends Composite {
 
     private void init(final String text, final boolean useDoubleClick) {
         this.onEditEvent = new Event2<String, String>("onLabelEdit");
+        registrations = new ArrayList<HandlerRegistration>();
         dblClickLabel = "Double click to rename";
         clickLabel = "Click to rename";
         hpanel = new HorizontalPanel();
@@ -139,34 +155,37 @@ public class IconLabelEditable extends Composite {
         initWidget(hpanel);
         this.currentText = text;
         this.useDoubleClick = useDoubleClick;
-        this.listener = new ClickListener() {
-            public void onClick(final Widget sender) {
+        label.setStylePrimaryName("kune-EditableLabel");
+        doubleClickHandler = new DoubleClickHandler() {
+            public void onDoubleClick(final DoubleClickEvent event) {
                 showEditor();
             }
         };
-
-        mouseOverListener = new MouseListenerAdapter() {
-            @Override
-            public void onMouseEnter(final Widget sender) {
+        clickHandler = new ClickHandler() {
+            public void onClick(final ClickEvent event) {
+                showEditor();
+            }
+        };
+        mouseOverHandler = new MouseOverHandler() {
+            public void onMouseOver(final MouseOverEvent event) {
                 label.addStyleDependentName("high");
             }
-
-            @Override
-            public void onMouseLeave(final Widget sender) {
+        };
+        mouseOutHandler = new MouseOutHandler() {
+            public void onMouseOut(final MouseOutEvent event) {
                 label.removeStyleDependentName("high");
             }
         };
-        label.setStylePrimaryName("kune-EditableLabel");
-        label.addMouseListener(mouseOverListener);
         setEditableImpl(false);
     }
 
     private void reset() {
         label.removeStyleDependentName("noneditable");
         label.removeStyleDependentName("editable");
-        label.removeClickListener(listener);
-        label.removeDoubleClickListener(listener);
-        label.removeMouseListener(mouseOverListener);
+        for (final HandlerRegistration reg : registrations) {
+            reg.removeHandler();
+        }
+        registrations.clear();
     }
 
     private void setEditableImpl(final boolean editable) {
@@ -174,14 +193,14 @@ public class IconLabelEditable extends Composite {
         if (editable) {
             if (useDoubleClick) {
                 label.setTitle(dblClickLabel);
-                label.addDoubleClickListener(listener);
+                registrations.add(label.addDoubleClickHandler(doubleClickHandler));
             } else {
                 label.setTitle(clickLabel);
-                label.addClickListener(listener);
+                registrations.add(label.addClickHandler(clickHandler));
             }
+            registrations.add(label.addMouseOverHandler(mouseOverHandler));
+            registrations.add(label.addMouseOutHandler(mouseOutHandler));
             label.addStyleDependentName("editable");
-            // label.addDoubleClickListener(listener);
-            label.addMouseListener(mouseOverListener);
         } else {
             label.setTitle(null);
             label.addStyleDependentName("noneditable");
@@ -200,17 +219,13 @@ public class IconLabelEditable extends Composite {
             editor = new TextBox();
             editor.setStyleName("k-eil-edit");
             hpanel.add(editor);
-            editor.addFocusListener(new FocusListener() {
-                public void onFocus(final Widget sender) {
-                    // doNothing
-                }
-
-                public void onLostFocus(final Widget sender) {
+            editor.addBlurHandler(new BlurHandler() {
+                public void onBlur(final BlurEvent event) {
                     afterEdit();
                 }
             });
-            editor.addChangeListener(new ChangeListener() {
-                public void onChange(final Widget sender) {
+            editor.addChangeHandler(new ChangeHandler() {
+                public void onChange(final ChangeEvent event) {
                     editor.setFocus(false);
                 }
             });

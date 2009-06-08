@@ -25,7 +25,6 @@ public class AccessRightsDTO implements IsSerializable {
     private boolean administrable;
     private boolean editable;
     private boolean visible;
-    private static final int PRIME = 31;
 
     public AccessRightsDTO() {
         this(false, false, false);
@@ -48,7 +47,7 @@ public class AccessRightsDTO implements IsSerializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        AccessRightsDTO other = (AccessRightsDTO) obj;
+        final AccessRightsDTO other = (AccessRightsDTO) obj;
         if (administrable != other.administrable) {
             return false;
         }

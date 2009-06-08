@@ -20,8 +20,8 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 
 /**
- * Base class for RichText platform implementations. The default version simply
- * creates a text area with no rich text support.
+ * Base class for RichText platform implementations. The default version
+ * simply creates a text area with no rich text support.
  * 
  * This is not currently used by any user-agent, but will provide a
  * &lt;textarea&gt; fallback in the event a future browser fails to implement
@@ -84,7 +84,8 @@ public class RichTextAreaImpl {
     }
 
     protected void hookEvents() {
-        DOM.sinkEvents(elem, Event.MOUSEEVENTS | Event.KEYEVENTS | Event.ONCHANGE | Event.ONCLICK | Event.FOCUSEVENTS);
+    DOM.sinkEvents(elem, Event.MOUSEEVENTS | Event.KEYEVENTS | Event.ONCHANGE
+      | Event.ONCLICK | Event.FOCUSEVENTS);
     }
 
     protected void onElementInitialized() {

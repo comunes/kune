@@ -20,13 +20,9 @@ import org.xwiki.gwt.dom.client.Document;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.IFrameElement;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Event;
+import com.google.gwt.event.dom.client.HasAllMouseHandlers;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasHTML;
-import com.google.gwt.user.client.ui.MouseListener;
-import com.google.gwt.user.client.ui.MouseListenerCollection;
-import com.google.gwt.user.client.ui.SourcesMouseEvents;
 
 /**
  * A rich text editor that allows complex styling and formatting.
@@ -45,7 +41,7 @@ import com.google.gwt.user.client.ui.SourcesMouseEvents;
  * <h3>CSS Style Rules</h3> <ul class="css"> <li>.gwt-RichTextArea { }</li>
  * </ul>
  */
-public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEvents {
+public class RichTextArea extends FocusWidget implements HasHTML, HasAllMouseHandlers {
 
     /**
      * This interface is used to access basic formatting options, when
@@ -310,7 +306,7 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
 
         private final int number;
 
-        private FontSize(int number) {
+        private FontSize(final int number) {
             this.number = number;
         }
 
@@ -352,7 +348,7 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
 
         private final String tag;
 
-        private Justification(String tag) {
+        private Justification(final String tag) {
             this.tag = tag;
         }
 
@@ -363,7 +359,6 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
     }
 
     private final RichTextAreaImpl impl = GWT.create(RichTextAreaImpl.class);
-    private MouseListenerCollection mouseListeners;
 
     /**
      * Creates a new, blank {@link RichTextArea} object with no stylesheet.
@@ -371,13 +366,6 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
     public RichTextArea() {
         setElement(impl.getElement());
         setStyleName("gwt-RichTextArea");
-    }
-
-    public void addMouseListener(MouseListener listener) {
-        if (mouseListeners == null) {
-            mouseListeners = new MouseListenerCollection();
-        }
-        mouseListeners.add(listener);
     }
 
     /**
@@ -435,32 +423,7 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
     }
 
     @Override
-    public void onBrowserEvent(Event event) {
-        switch (DOM.eventGetType(event)) {
-        case Event.ONMOUSEDOWN:
-        case Event.ONMOUSEUP:
-        case Event.ONMOUSEMOVE:
-        case Event.ONMOUSEOVER:
-        case Event.ONMOUSEOUT:
-            if (mouseListeners != null) {
-                mouseListeners.fireMouseEvent(this, event);
-            }
-            break;
-
-        default:
-            // ClickEvents, KeyboardEvents, and FocusEvents
-            super.onBrowserEvent(event);
-        }
-    }
-
-    public void removeMouseListener(MouseListener listener) {
-        if (mouseListeners != null) {
-            mouseListeners.remove(listener);
-        }
-    }
-
-    @Override
-    public void setFocus(boolean focused) {
+    public void setFocus(final boolean focused) {
         // There are different problems on each browser when you try to focus an
         // unattached rich text iframe, so just cut it off early.
         if (isAttached()) {
@@ -468,11 +431,11 @@ public class RichTextArea extends FocusWidget implements HasHTML, SourcesMouseEv
         }
     }
 
-    public void setHTML(String html) {
+    public void setHTML(final String html) {
         impl.setHTML(html);
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         impl.setText(text);
     }
 

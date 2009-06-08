@@ -41,10 +41,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 
-    private transient SiteSignOutLinkView view;
-    private transient final Session session;
-    private transient final Provider<UserServiceAsync> userService;
-    private transient final BeforeActionCollection beforeSignOut;
+    private SiteSignOutLinkView view;
+    private final Session session;
+    private final Provider<UserServiceAsync> userService;
+    private final BeforeActionCollection beforeSignOut;
 
     public SiteSignOutLinkPresenter(final Session session, final Provider<UserServiceAsync> userService,
             final Provider<ErrorHandler> errorHandler) {

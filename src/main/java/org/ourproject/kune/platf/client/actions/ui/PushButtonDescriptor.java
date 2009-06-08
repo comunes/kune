@@ -6,7 +6,7 @@ public class PushButtonDescriptor extends ButtonDescriptor {
 
     public static final String PUSHED = "pushed";
 
-    protected transient boolean pushed = false;
+    protected boolean pushed = false;
 
     public PushButtonDescriptor(final AbstractAction action) {
         super(action);

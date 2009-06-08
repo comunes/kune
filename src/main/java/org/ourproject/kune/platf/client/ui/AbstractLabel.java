@@ -19,18 +19,35 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.dom.client.MouseDownHandler;
+import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.dom.client.MouseUpHandler;
+import com.google.gwt.event.dom.client.MouseWheelHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.MouseListener;
 
 public interface AbstractLabel {
 
-    void addClickListener(final ClickListener listener);
+    HandlerRegistration addClickHandler(final ClickHandler handler);
 
-    void addDoubleClickListener(ClickListener listener);
+    HandlerRegistration addDoubleClickHandler(final DoubleClickHandler handler);
 
-    void addMouseListener(final MouseListener listener);
+    HandlerRegistration addMouseDownHandler(final MouseDownHandler handler);
+
+    HandlerRegistration addMouseMoveHandler(final MouseMoveHandler handler);
+
+    HandlerRegistration addMouseOutHandler(final MouseOutHandler handler);
+
+    HandlerRegistration addMouseOverHandler(final MouseOverHandler handler);
+
+    HandlerRegistration addMouseUpHandler(final MouseUpHandler handler);
+
+    HandlerRegistration addMouseWheelHandler(final MouseWheelHandler handler);
 
     void addStyleDependentName(String string);
 
@@ -39,12 +56,6 @@ public interface AbstractLabel {
     String getText();
 
     void onBrowserEvent(final Event event);
-
-    void removeClickListener(final ClickListener listener);
-
-    void removeDoubleClickListener(ClickListener listener);
-
-    void removeMouseListener(final MouseListener listener);
 
     void removeStyleDependentName(String string);
 

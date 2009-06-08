@@ -5,13 +5,15 @@
   <groupId>org.ourproject</groupId>
   <artifactId>kune</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.5</version>
+  <version>0.0.6</version>
   <description>
     kune free/open/libre collaboration platform
   </description>
   <name>kune</name>
   <url>http://kune.ourproject.org</url>
-
+  <properties>
+    <gwtVersion>1.6.4</gwtVersion>
+  </properties>
   <dependencies>
     <!-- guice -->
     <dependency>
@@ -30,23 +32,41 @@
       <version>1.0</version>
     </dependency>
 
-    <!--  gwt -->
+    <!-- G WT deps (from central repo) -->
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+      <version>${gwtVersion}</version>
+      <scope>runtime</scope>
+    </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>1.5.3</version>
+      <version>${gwtVersion}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>${gwtVersion}</version>
+      <classifier>${platform}-libs</classifier>
+      <type>zip</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>${gwtVersion}</version>
+      <classifier>${platform}</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-incubator</artifactId>
-      <version>1.5</version>
+      <version>march-02-2009</version>
+      <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-servlet</artifactId>
-      <version>1.5.3</version>
-    </dependency>
+
     <!--
       <dependency> <groupId>com.extjs</groupId>
       <artifactId>gxt</artifactId> <version>1.0-beta2</version>
@@ -92,7 +112,7 @@
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>suco</artifactId>
-      <version>0.6.0</version>
+      <version>0.6.1</version>
     </dependency>
     <dependency>
       <groupId>jmagick</groupId>
@@ -102,14 +122,14 @@
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-web-gwt-dom</artifactId>
-      <version>1.9-SNAPSHOT</version>
+      <version>2.0-SNAPSHOT-mine</version>
     </dependency>
 
     <!-- xmpp -->
     <dependency>
       <groupId>com.calclab.emite</groupId>
       <artifactId>emite</artifactId>
-      <version>0.4.6.2</version>
+      <version>0.4.7</version>
     </dependency>
     <dependency>
       <groupId>org.jivesoftware.smack</groupId>
@@ -255,6 +275,9 @@
       <!--
         <artifactId>jetty-maven-plugin</artifactId>
         <version>7.0.0.pre5</version>
+       <configuration>
+          <webAppSourceDirectory>war</webAppSourceDirectory>
+       </configuration>
       -->
       <scope>provided</scope>
     </dependency>
@@ -444,18 +467,22 @@
       <plugin>
         <groupId>com.totsp.gwt</groupId>
         <artifactId>maven-googlewebtoolkit2-plugin</artifactId>
-        <version>2.0-beta26</version>
+        <version>2.0-RC1</version>
         <configuration>
           <logLevel>INFO</logLevel>
           <style>OBF</style>
           <!-- <style>OBF PRETTY</style> -->
-          <runTarget>
-            org.ourproject.kune.app.Kune/Kune.html
-          </runTarget>
+          <!--
+            <output>${project.build.directory}/gwt/www</output>
+          -->
+          <logLevel>INFO</logLevel>
+          <noServer>true</noServer>
+          <extraJvmArgs>-Xmx640m</extraJvmArgs>
+          <gwtVersion>${gwtVersion}</gwtVersion>
+          <output>war/</output>
+          <runTarget>ws/Kune.html</runTarget>
           <compileTargets>
-            <compileTarget>
-              org.ourproject.kune.app.Kune
-            </compileTarget>
+            <compileTarget>org.ourproject.kune.app.Kune</compileTarget>
           </compileTargets>
           <generatorRootClasses>
             <value>org.ourproject.kune.MyBean</value>
@@ -484,7 +511,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>2.0</version>
         <configuration>
-          <webXml>target/web.xml</webXml>
+          <webXml>${project.build.directory}/WEB-INF/web.xml</webXml>
         </configuration>
       </plugin>
       <plugin>
@@ -653,7 +680,50 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>src/main/webapp/gwt/</directory>
+              <includes>
+                <include>**/org.ourproject.kune.app.Kune*</include>
+                <followSymlinks>false</followSymlinks>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.google.gwt</groupId>
+                  <artifactId>gwt-dev</artifactId>
+                  <version>${gwtVersion}</version>
+                  <classifier>${platform}-libs</classifier>
+                  <type>zip</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${settings.localRepository}/com/google/gwt/gwt-dev/${gwtVersion}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
+    <outputDirectory>${project.build.directory}/WEB-INF/classes</outputDirectory>
+    <testOutputDirectory>${project.build.directory}/WEB-INF/test-classes</testOutputDirectory>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
@@ -673,7 +743,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>2.2</version>
+        <version>2.4</version>
         <configuration>
           <linkXref>true</linkXref>
           <sourceEncoding>utf-8</sourceEncoding>
@@ -695,7 +765,7 @@
                 net.sourceforge.cobertura.datafile
               </name>
               <value>
-                ${project.build.directory}/cobertura/cobertura.ser
+                ${project.reporting.directory}/cobertura/cobertura.ser
               </value>
             </property>
           </systemProperties>
@@ -712,4 +782,63 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <!--  profiles (with activation per platform) -->
+  <profiles>
+    <profile>
+      <id>gwt-dev-windows</id>
+      <properties>
+        <platform>windows</platform>
+      </properties>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <!-- FIXME: put here a similar temp directory to linux/unix systems -->
+      <build>
+        <directory>target/</directory>
+      </build>
+      <reporting>
+        <outputDirectory>target/</outputDirectory>
+      </reporting>
+    </profile>
+    <profile>
+      <id>gwt-dev-mac</id>
+      <properties>
+        <platform>mac</platform>
+      </properties>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <build>
+        <directory>/var/tmp/kune-target/</directory>
+      </build>
+      <reporting>
+        <outputDirectory>/var/tmp/kune-target/</outputDirectory>
+      </reporting>
+    </profile>
+    <profile>
+      <id>gwt-dev-linux</id>
+      <properties>
+        <platform>linux</platform>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <os>
+          <name>linux</name>
+        </os>
+      </activation>
+      <build>
+        <directory>/var/tmp/kune-target/</directory>
+      </build>
+      <reporting>
+        <outputDirectory>/var/tmp/kune-target/</outputDirectory>
+      </reporting>
+    </profile>
+  </profiles>
 </project>

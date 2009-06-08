@@ -18,7 +18,7 @@ import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
 public abstract class AbstractMenuItemGui extends AbstractGuiItem {
 
-    private transient Item item;
+    private Item item;
 
     public AbstractMenuItemGui(final MenuItemDescriptor descriptor) {
         super();

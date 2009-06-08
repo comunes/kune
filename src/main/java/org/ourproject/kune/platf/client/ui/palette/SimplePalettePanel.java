@@ -7,8 +7,8 @@ import com.gwtext.client.widgets.event.ColorPaletteListenerAdapter;
 
 public class SimplePalettePanel extends AbstractPalettePanel implements SimplePaletteView {
 
-    private transient final SimplePalettePresenter presenter;
-    private transient final I18nTranslationService i18n;
+    private final SimplePalettePresenter presenter;
+    private final I18nTranslationService i18n;
 
     public SimplePalettePanel(final SimplePalettePresenter presenter, final I18nTranslationService i18n) {
         super();

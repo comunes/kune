@@ -25,11 +25,11 @@ import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
 
@@ -54,7 +54,7 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
         addInSummary();
     }
 
-    public void addTag(final String name, Long count, String style) {
+    public void addTag(final String name, final Long count, final String style) {
         final Label label = new Label(name);
         // i18n pluralization
         if (count > 1) {
@@ -62,8 +62,8 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
         } else {
             KuneUiUtils.setQuickTip(label, i18n.t("There are [%d] item with this tag", count));
         }
-        label.addClickListener(new ClickListener() {
-            public void onClick(final Widget sender) {
+        label.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 presenter.doSearchTag(name);
             }
         });
@@ -77,7 +77,7 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
         flowPanel.clear();
     }
 
-    public void setTheme(WsTheme oldTheme, WsTheme newTheme) {
+    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
         // TODO Auto-generated method stub
     }
 }

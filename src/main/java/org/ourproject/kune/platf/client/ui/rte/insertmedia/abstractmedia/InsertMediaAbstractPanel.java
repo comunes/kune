@@ -12,7 +12,7 @@ import com.gwtext.client.widgets.form.event.FormPanelListenerAdapter;
 
 public class InsertMediaAbstractPanel extends InsertElementAbstractPanel implements InsertMediaAbstractView {
 
-    protected transient TextField hrefField;
+    protected TextField hrefField;
 
     public InsertMediaAbstractPanel(final String title, final InsertMediaAbstractPresenter presenter) {
         super(title, InsertMediaDialogView.HEIGHT);

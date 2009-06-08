@@ -42,12 +42,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class NewGroupPresenter implements NewGroup {
 
-    private transient NewGroupView view;
-    private transient final I18nTranslationService i18n;
-    private transient final Session session;
-    private transient final StateManager stateManager;
-    private transient final Provider<GroupServiceAsync> groupService;
-    private transient boolean mustGoToPrevious;
+    private NewGroupView view;
+    private final I18nTranslationService i18n;
+    private final Session session;
+    private final StateManager stateManager;
+    private final Provider<GroupServiceAsync> groupService;
+    private boolean mustGoToPrevious;
 
     public NewGroupPresenter(final I18nTranslationService i18n, final Session session, final StateManager stateManager,
             final Provider<GroupServiceAsync> groupService) {

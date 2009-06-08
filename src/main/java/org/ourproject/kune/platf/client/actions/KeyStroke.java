@@ -42,10 +42,11 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
 
+import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyEvent;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.KeyboardListener;
-import com.google.gwt.user.client.ui.KeyboardListenerCollection;
 
 /**
  * This class mirrors KeyEvents, representing both low-level key presses and key
@@ -88,6 +89,11 @@ public class KeyStroke {
 
     private static final int VK_UNDEFINED = 0;
     private static final char CHAR_UNDEFINED = '\uffff';
+
+    public static int getKeyboardModifiers(final NativeEvent event) {
+        return (event.getShiftKey() ? Keyboard.MODIFIER_SHIFT : 0) | (event.getMetaKey() ? Keyboard.MODIFIER_META : 0)
+                | (event.getCtrlKey() ? Keyboard.MODIFIER_CTRL : 0) | (event.getAltKey() ? Keyboard.MODIFIER_ALT : 0);
+    }
 
     /**
      * Returns a keystroke representing a typed character.
@@ -171,14 +177,11 @@ public class KeyStroke {
     public static KeyStroke getKeyStrokeForEvent(final Event event) {
         switch (DOM.eventGetType(event)) {
         case Event.ONKEYDOWN:
-            return getKeyStroke((char) event.getKeyCode(), VK_UNDEFINED,
-                    KeyboardListenerCollection.getKeyboardModifiers(event), false);
+            return getKeyStroke((char) event.getKeyCode(), VK_UNDEFINED, getKeyboardModifiers(event), false);
         case Event.ONKEYPRESS:
-            return getKeyStroke(CHAR_UNDEFINED, event.getKeyCode(),
-                    KeyboardListenerCollection.getKeyboardModifiers(event), false);
+            return getKeyStroke(CHAR_UNDEFINED, event.getKeyCode(), getKeyboardModifiers(event), false);
         case Event.ONKEYUP:
-            return getKeyStroke(CHAR_UNDEFINED, event.getKeyCode(),
-                    KeyboardListenerCollection.getKeyboardModifiers(event), true);
+            return getKeyStroke(CHAR_UNDEFINED, event.getKeyCode(), getKeyboardModifiers(event), true);
         default:
             return null;
         }
@@ -207,7 +210,7 @@ public class KeyStroke {
         }
         stroke = new KeyStroke(keyChar, keyCode, modifiers, release);
         // Check level 1 cache.
-        KeyStroke cached = CACHE.get(stroke);
+        final KeyStroke cached = CACHE.get(stroke);
         if (cached == null) {
             CACHE.put(stroke, stroke);
         } else {
@@ -304,7 +307,7 @@ public class KeyStroke {
         if (!(o instanceof KeyStroke)) {
             return false;
         }
-        KeyStroke s = (KeyStroke) o;
+        final KeyStroke s = (KeyStroke) o;
         return this == o
                 || (keyChar == s.keyChar && keyCode == s.keyCode && modifiers == s.modifiers && onKeyRelease == s.onKeyRelease);
     }
@@ -344,31 +347,31 @@ public class KeyStroke {
     @SuppressWarnings("deprecation")
     public String getKeyText(final int keyCode) {
         switch (keyCode) {
-        case KeyboardListener.KEY_BACKSPACE:
+        case KeyCodes.KEY_BACKSPACE:
             return translateKey("Backspace");
-            // case KeyboardListener.KEY_DELETE:
+            // case KeyCodes.KEY_DELETE:
             // return translateKey("Delete");
-        case KeyboardListener.KEY_DOWN:
+        case KeyCodes.KEY_DOWN:
             return translateKey("Down");
-        case KeyboardListener.KEY_END:
+        case KeyCodes.KEY_END:
             return translateKey("End");
-        case KeyboardListener.KEY_ENTER:
+        case KeyCodes.KEY_ENTER:
             return translateKey("Enter");
-        case KeyboardListener.KEY_ESCAPE:
+        case KeyCodes.KEY_ESCAPE:
             return translateKey("Escape");
-        case KeyboardListener.KEY_HOME:
+        case KeyCodes.KEY_HOME:
             return translateKey("Home");
-        case KeyboardListener.KEY_LEFT:
+        case KeyCodes.KEY_LEFT:
             return translateKey("Left");
-        case KeyboardListener.KEY_PAGEDOWN:
+        case KeyCodes.KEY_PAGEDOWN:
             return translateKey("Page Down");
-        case KeyboardListener.KEY_PAGEUP:
+        case KeyCodes.KEY_PAGEUP:
             return translateKey("Page Up");
-        case KeyboardListener.KEY_RIGHT:
+        case KeyCodes.KEY_RIGHT:
             return translateKey("Right");
-        case KeyboardListener.KEY_TAB:
+        case KeyCodes.KEY_TAB:
             return translateKey("Tab");
-        case KeyboardListener.KEY_UP:
+        case KeyCodes.KEY_UP:
             return translateKey("Up");
         case Keyboard.KEY_F1:
         case Keyboard.KEY_F2:
@@ -472,16 +475,16 @@ public class KeyStroke {
     @Override
     public String toString() {
         String s = " (";
-        if ((modifiers & KeyboardListener.MODIFIER_META) != 0) {
+        if ((modifiers & Keyboard.MODIFIER_META) != 0) {
             s += translateKey("Meta") + "+";
         }
-        if ((modifiers & KeyboardListener.MODIFIER_CTRL) != 0) {
+        if ((modifiers & Keyboard.MODIFIER_CTRL) != 0) {
             s += translateKey("Ctrl") + "+";
         }
-        if ((modifiers & KeyboardListener.MODIFIER_ALT) != 0) {
+        if ((modifiers & Keyboard.MODIFIER_ALT) != 0) {
             s += translateKey("Alt") + "+";
         }
-        if ((modifiers & KeyboardListener.MODIFIER_SHIFT) != 0) {
+        if ((modifiers & Keyboard.MODIFIER_SHIFT) != 0) {
             s += translateKey("Shift") + "+";
         }
         if ((modifiers & Event.BUTTON_LEFT) != 0) {
@@ -503,7 +506,7 @@ public class KeyStroke {
      * @return a cached replacement if something goes wrong
      */
     protected Object readResolve() {
-        KeyStroke s = CACHE.get(this);
+        final KeyStroke s = CACHE.get(this);
         if (s != null) {
             return s;
         }

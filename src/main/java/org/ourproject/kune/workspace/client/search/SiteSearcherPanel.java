@@ -27,8 +27,8 @@ import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.KeyboardListener;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.data.FieldDef;
@@ -190,7 +190,7 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
 
             @Override
             public void onSpecialKey(final Field field, final EventObject event) {
-                if (event.getKey() == KeyboardListener.KEY_ENTER) {
+                if (event.getKey() == KeyCodes.KEY_ENTER) {
                     presenter.doSearch(field.getValueAsString());
                 }
                 event.stopEvent();

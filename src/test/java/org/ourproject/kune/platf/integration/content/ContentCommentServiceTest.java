@@ -12,7 +12,6 @@ import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 public class ContentCommentServiceTest extends ContentServiceIntegrationTest {
 
-    String groupName;
     private StateContainerDTO defaultContent;
 
     @Test
@@ -36,7 +35,6 @@ public class ContentCommentServiceTest extends ContentServiceIntegrationTest {
     @Before
     public void init() throws Exception {
         new IntegrationTestHelper(this);
-        groupName = getDefSiteGroupName();
         defaultContent = getSiteDefaultContent();
     }
 

@@ -6,14 +6,14 @@ import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.AbstractPopupPanel;
 
 import com.calclab.suco.client.events.Listener0;
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
 
 public class RTELinkPopup extends AbstractPopupPanel {
-    private final transient HorizontalPanel hpanel;
+    private final HorizontalPanel hpanel;
 
     public RTELinkPopup() {
         super(false, false);
@@ -22,8 +22,8 @@ public class RTELinkPopup extends AbstractPopupPanel {
         KuneUiUtils.setUnselectable(hpanel.getElement());
         final Image close = new Image();
         Images.App.getInstance().kuneClose().applyTo(close);
-        close.addClickListener(new ClickListener() {
-            public void onClick(final Widget sender) {
+        close.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 hide();
             }
         });
@@ -35,8 +35,8 @@ public class RTELinkPopup extends AbstractPopupPanel {
         actionLabel.setText(item.getAction().getText());
         actionLabel.addStyleName("k-rte-changelink");
         KuneUiUtils.setUnselectable(actionLabel.getElement());
-        actionLabel.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
+        actionLabel.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 onClick.onEvent();
             }
         });

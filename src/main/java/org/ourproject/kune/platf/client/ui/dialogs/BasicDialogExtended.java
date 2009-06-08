@@ -35,7 +35,7 @@ public class BasicDialogExtended extends BasicDialog {
     public BasicDialogExtended(final String dialogId, final String title, final boolean modal,
             final boolean autoscroll, final int width, final int heigth, final String icon,
             final String firstButtonTitle, final String cancelButtonTitle, final Listener0 onFirstButtonClick,
-            Listener0 onCancelButtonClick, int tabIndexStart) {
+            final Listener0 onCancelButtonClick, final int tabIndexStart) {
         this(dialogId, title, modal, autoscroll, width, heigth, icon, firstButtonTitle, Ext.generateId(),
                 cancelButtonTitle, Ext.generateId(), onFirstButtonClick, onCancelButtonClick, tabIndexStart);
     }
@@ -44,7 +44,7 @@ public class BasicDialogExtended extends BasicDialog {
             final boolean autoscroll, final int width, final int heigth, final String icon,
             final String firstButtonTitle, final String firstButtonId, final String cancelButtonTitle,
             final String cancelButtonId, final Listener0 onFirstButtonClick, final Listener0 onCancelButtonClick,
-            int tabIndexStart) {
+            final int tabIndexStart) {
         super(dialogId, title, modal, autoscroll, width, heigth);
         setLayout(new FitLayout());
         setCollapsible(false);
@@ -55,7 +55,7 @@ public class BasicDialogExtended extends BasicDialog {
         firstButton.setId(firstButtonId);
         firstButton.addListener(new ButtonListenerAdapter() {
             @Override
-            public void onClick(final Button button, final EventObject e) {
+            public void onClick(final Button button, final EventObject event) {
                 onFirstButtonClick.onEvent();
             }
         });
@@ -66,7 +66,7 @@ public class BasicDialogExtended extends BasicDialog {
         cancel.setId(cancelButtonId);
         cancel.addListener(new ButtonListenerAdapter() {
             @Override
-            public void onClick(final Button button, final EventObject e) {
+            public void onClick(final Button button, final EventObject event) {
                 onCancelButtonClick.onEvent();
             }
         });

@@ -41,7 +41,6 @@ import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.KeyboardListener;
 
 public class RTEditorPresenterNew implements RTEditorNew {
 
@@ -74,7 +73,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
 
         public void actionPerformed(final ActionEvent actionEvent) {
-            getPalette();
+            createPalette();
             final Event event = actionEvent.getEvent();
             palette.show(event.getClientX(), event.getClientY(), new Listener<String>() {
                 public void onEvent(final String color) {
@@ -240,7 +239,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public class EditHtmlAction extends AbstractRTEAction {
-        private transient EditHtmlDialog editHtmlDialog;
+        private EditHtmlDialog editHtmlDialog;
 
         public EditHtmlAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
@@ -266,7 +265,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public class FontAction extends AbstractRTEAction {
-        private final transient String fontName;
+        private final String fontName;
 
         public FontAction(final String fontName, final String tooltip, final ImageResource icon) {
             super("<span style=\"font-family: " + fontName + "\">" + fontName + "</span>", tooltip, icon);
@@ -286,7 +285,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
 
         public void actionPerformed(final ActionEvent actionEvent) {
-            getPalette();
+            createPalette();
             final Event event = actionEvent.getEvent();
             palette.show(event.getClientX(), event.getClientY(), new Listener<String>() {
                 public void onEvent(final String color) {
@@ -300,8 +299,8 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public class FontSizeAction extends AbstractRTEAction {
-        private final transient String fontSizeName;
-        private final transient int fontSize;
+        private final String fontSizeName;
+        private final int fontSize;
 
         public FontSizeAction(final String fontSizeName, final int fontSize, final String tooltip,
                 final ImageResource icon) {
@@ -404,7 +403,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public class InsertSpecialCharAction extends AbstractRTEAction {
-        private transient InsertSpecialCharDialog insCharDialog;
+        private InsertSpecialCharDialog insCharDialog;
 
         public InsertSpecialCharAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
@@ -430,7 +429,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public class InsertTableAction extends AbstractRTEAction {
-        private transient InsertTableDialog insTableDialog;
+        private InsertTableDialog insTableDialog;
 
         public InsertTableAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
@@ -645,43 +644,43 @@ public class RTEditorPresenterNew implements RTEditorNew {
     private static final String NONE = null;
     private static final ImageResource NO_ICON = null;
 
-    private transient RTEditorViewNew view;
+    private RTEditorViewNew view;
     private boolean extended;
-    private final transient I18nTranslationService i18n;
-    private final transient Session session;
-    private final transient RTEImgResources imgResources;
-    private final transient RTEActionTopToolbar topBar;
-    private final transient RTEActionSndToolbar sndBar;
-    private final transient Event0 onEdit;
-    private final transient DeferredCommandWrapper deferred;
-    private final transient Provider<ColorWebSafePalette> paletteProvider;
-    private final transient Provider<InsertLinkDialog> insLinkDialogPv;
-    private final transient Provider<EditHtmlDialog> editHtmlDialogPv;
-    private final transient Provider<InsertImageDialog> insImgDialogProv;
-    private final transient Provider<InsertTableDialog> insTableDialogPv;
-    private final transient Provider<InsertSpecialCharDialog> insCharDialogProv;
-    private final transient Provider<InsertMediaDialog> insMediaDialogPv;
-    private transient Listener<String> insTableListener;
-    private transient Listener<LinkInfo> insLinkListener;
-    private transient Listener<ImageInfo> insImgListener;
-    private transient Listener<String> insMediaListener;
-    private transient Listener<String> updHtmlListener;
-    protected transient Listener<String> insCharListener;
-    protected transient ColorWebSafePalette palette;
-    private transient PushButtonDescriptor bold;
-    private transient PushButtonDescriptor italic;
-    private transient PushButtonDescriptor underline;
-    private transient PushButtonDescriptor strikethrough;
-    private transient final GuiAddCondition basicAddCond;
-    private transient final GuiAddCondition extendedAddCond;
-    private transient final InputMap inputMap;
-    private transient MenuDescriptor editMenu;
-    private transient MenuDescriptor insertMenu;
-    private transient MenuDescriptor formatMenu;
-    private transient MenuDescriptor linkCtxMenu;
-    private transient GuiActionCollection actions;
-    private transient MenuDescriptor fontMenu;
-    private transient MenuDescriptor fontSizeMenu;
+    private final I18nTranslationService i18n;
+    private final Session session;
+    private final RTEImgResources imgResources;
+    private final RTEActionTopToolbar topBar;
+    private final RTEActionSndToolbar sndBar;
+    private final Event0 onEdit;
+    private final DeferredCommandWrapper deferred;
+    private final Provider<ColorWebSafePalette> paletteProvider;
+    private final Provider<InsertLinkDialog> insLinkDialogPv;
+    private final Provider<EditHtmlDialog> editHtmlDialogPv;
+    private final Provider<InsertImageDialog> insImgDialogProv;
+    private final Provider<InsertTableDialog> insTableDialogPv;
+    private final Provider<InsertSpecialCharDialog> insCharDialogProv;
+    private final Provider<InsertMediaDialog> insMediaDialogPv;
+    private Listener<String> insTableListener;
+    private Listener<LinkInfo> insLinkListener;
+    private Listener<ImageInfo> insImgListener;
+    private Listener<String> insMediaListener;
+    private Listener<String> updHtmlListener;
+    protected Listener<String> insCharListener;
+    protected ColorWebSafePalette palette;
+    private PushButtonDescriptor bold;
+    private PushButtonDescriptor italic;
+    private PushButtonDescriptor underline;
+    private PushButtonDescriptor strikethrough;
+    private final GuiAddCondition basicAddCond;
+    private final GuiAddCondition extendedAddCond;
+    private final InputMap inputMap;
+    private MenuDescriptor editMenu;
+    private MenuDescriptor insertMenu;
+    private MenuDescriptor formatMenu;
+    private MenuDescriptor linkCtxMenu;
+    private GuiActionCollection actions;
+    private MenuDescriptor fontMenu;
+    private MenuDescriptor fontSizeMenu;
 
     public RTEditorPresenterNew(final I18nTranslationService i18n, final Session session,
             final RTEActionTopToolbar topBar, final RTEActionSndToolbar sndBar, final RTEImgResources imgResources,
@@ -739,6 +738,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
     public void attach() {
         topBar.clear();
         sndBar.clear();
+        view.addActions(actions);
         // FIXME
         // topBar.addActions(actions, TOPBAR);
         // sndBar.addActions(actions, SNDBAR);
@@ -877,70 +877,69 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"), NONE,
                 imgResources.selectall());
         final MenuItemDescriptor select = new MenuItemDescriptor(editMenu, selectAllAction);
-        setActionShortcut(KeyStroke.getKeyStroke('A', KeyboardListener.MODIFIER_CTRL), selectAllAction);
+        setActionShortcut(KeyStroke.getKeyStroke('A', Keyboard.MODIFIER_CTRL), selectAllAction);
 
         final BoldAction boldAction = new BoldAction(NONE, i18n.t("Bold"), imgResources.bold());
         bold = new PushButtonDescriptor(boldAction);
-        setActionShortcut(KeyStroke.getKeyStroke('B', KeyboardListener.MODIFIER_CTRL), boldAction);
+        setActionShortcut(KeyStroke.getKeyStroke('B', Keyboard.MODIFIER_CTRL), boldAction);
 
         final ItalicAction italicAction = new ItalicAction(NONE, i18n.t("Italic"), imgResources.italic());
         italic = new PushButtonDescriptor(italicAction);
-        setActionShortcut(KeyStroke.getKeyStroke('I', KeyboardListener.MODIFIER_CTRL), italicAction);
+        setActionShortcut(KeyStroke.getKeyStroke('I', Keyboard.MODIFIER_CTRL), italicAction);
 
         final UnderlineAction underlineAction = new UnderlineAction(NONE, i18n.t("Underline"), imgResources.underline());
         underline = new PushButtonDescriptor(underlineAction);
-        setActionShortcut(KeyStroke.getKeyStroke('U', KeyboardListener.MODIFIER_CTRL), underlineAction);
+        setActionShortcut(KeyStroke.getKeyStroke('U', Keyboard.MODIFIER_CTRL), underlineAction);
 
         final SubscriptAction subscriptAction = new SubscriptAction(i18n.t("Subscript"), NONE, imgResources.subscript());
         final MenuItemDescriptor subscript = new MenuItemDescriptor(formatMenu, subscriptAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_COMMA, KeyboardListener.MODIFIER_CTRL), subscriptAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_COMMA, Keyboard.MODIFIER_CTRL), subscriptAction);
 
         final SuperscriptAction superscriptAction = new SuperscriptAction(i18n.t("Superscript"), NONE,
                 imgResources.superscript());
         final MenuItemDescriptor superscript = new MenuItemDescriptor(formatMenu, superscriptAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_PERIOD, KeyboardListener.MODIFIER_CTRL),
-                superscriptAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_PERIOD, Keyboard.MODIFIER_CTRL), superscriptAction);
 
         final JustifyLeftAction jfyLeftAction = new JustifyLeftAction(NONE, i18n.t("Left Justify"),
                 imgResources.alignleft());
         final ButtonDescriptor justifyLeft = new ButtonDescriptor(jfyLeftAction);
-        setActionShortcut(KeyStroke.getKeyStroke('L', KeyboardListener.MODIFIER_CTRL), jfyLeftAction);
+        setActionShortcut(KeyStroke.getKeyStroke('L', Keyboard.MODIFIER_CTRL), jfyLeftAction);
 
         final JustifyCentreAction jfyCentreAction = new JustifyCentreAction(NONE, i18n.t("Centre Justify"),
                 imgResources.centerpara());
         final ButtonDescriptor justifyCentre = new ButtonDescriptor(jfyCentreAction);
-        setActionShortcut(KeyStroke.getKeyStroke('E', KeyboardListener.MODIFIER_CTRL), jfyCentreAction);
+        setActionShortcut(KeyStroke.getKeyStroke('E', Keyboard.MODIFIER_CTRL), jfyCentreAction);
 
         final JustifyRightAction jfyRightAction = new JustifyRightAction(NONE, i18n.t("Right Justify"),
                 imgResources.alignright());
         final ButtonDescriptor justifyRight = new ButtonDescriptor(jfyRightAction);
-        setActionShortcut(KeyStroke.getKeyStroke('R', KeyboardListener.MODIFIER_CTRL), jfyRightAction);
+        setActionShortcut(KeyStroke.getKeyStroke('R', Keyboard.MODIFIER_CTRL), jfyRightAction);
 
         final UndoAction undoAction = new UndoAction(i18n.t("Undo"), NONE, imgResources.undo());
         final UndoAction undoActionBtn = new UndoAction(NONE, i18n.t("Undo"), imgResources.undo());
         final MenuItemDescriptor undo = new MenuItemDescriptor(editMenu, undoAction);
         final ButtonDescriptor undoBtn = new ButtonDescriptor(undoActionBtn);
         undoBtn.setPosition(0);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_Z, KeyboardListener.MODIFIER_CTRL), undoAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_Z, Keyboard.MODIFIER_CTRL), undoAction);
 
         final RedoAction redoAction = new RedoAction(i18n.t("Redo"), NONE, imgResources.redo());
         final RedoAction redoActionBtn = new RedoAction(NONE, i18n.t("Redo"), imgResources.redo());
         final MenuItemDescriptor redo = new MenuItemDescriptor(editMenu, redoAction);
         final ButtonDescriptor redoBtn = new ButtonDescriptor(redoActionBtn);
         redoBtn.setPosition(1);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_Y, KeyboardListener.MODIFIER_CTRL), redoAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_Y, Keyboard.MODIFIER_CTRL), redoAction);
 
         final CopyAction copyAction = new CopyAction(i18n.t("Copy"), NONE, imgResources.copy());
         final MenuItemDescriptor copy = new MenuItemDescriptor(editMenu, copyAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_C, KeyboardListener.MODIFIER_CTRL), copyAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_C, Keyboard.MODIFIER_CTRL), copyAction);
 
         final CutAction cutAction = new CutAction(i18n.t("Cut"), NONE, imgResources.cut());
         final MenuItemDescriptor cut = new MenuItemDescriptor(editMenu, cutAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_X, KeyboardListener.MODIFIER_CTRL), cutAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_X, Keyboard.MODIFIER_CTRL), cutAction);
 
         final PasteAction pasteAction = new PasteAction(i18n.t("Paste"), NONE, imgResources.paste());
         final MenuItemDescriptor paste = new MenuItemDescriptor(editMenu, pasteAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_V, KeyboardListener.MODIFIER_CTRL), pasteAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_V, Keyboard.MODIFIER_CTRL), pasteAction);
 
         final EditHtmlAction editHtmlAction = new EditHtmlAction(i18n.t("Edit HTML"), NONE, imgResources.edithtml());
         final MenuItemDescriptor editHtml = new MenuItemDescriptor(editMenu, editHtmlAction);
@@ -949,7 +948,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final CommentAction commentAction = new CommentAction(i18n.t("Comment"), NONE, NO_ICON);
         final MenuItemDescriptor comment = new MenuItemDescriptor(insertMenu, commentAction);
         comment.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_M, KeyboardListener.MODIFIER_CTRL), commentAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_M, Keyboard.MODIFIER_CTRL), commentAction);
 
         final HrAction hlineAction = new HrAction(i18n.t("Horizontal line"), NONE, imgResources.hfixedline());
         final HrAction hlineBtnAction = new HrAction(NONE, i18n.t("Horizontal line"), imgResources.hfixedline());
@@ -957,9 +956,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final ButtonDescriptor hlineBtn = new ButtonDescriptor(hlineBtnAction);
         hline.setAddCondition(extendedAddCond);
         hlineBtn.setAddCondition(extendedAddCond);
-        setActionShortcut(
-                KeyStroke.getKeyStroke(' ', KeyboardListener.MODIFIER_CTRL & KeyboardListener.MODIFIER_SHIFT),
-                hlineAction);
+        setActionShortcut(KeyStroke.getKeyStroke(' ', Keyboard.MODIFIER_CTRL & Keyboard.MODIFIER_SHIFT), hlineAction);
 
         final BlockquoteAction blockquoteAction = new BlockquoteAction(i18n.t("Block Quotation"), NONE,
                 imgResources.hfixedline());
@@ -984,12 +981,12 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final OlAction olistAction = new OlAction(NONE, i18n.t("Numbered List"), imgResources.defaultnumbering());
         final ButtonDescriptor olist = new ButtonDescriptor(olistAction);
         olist.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_7, KeyboardListener.MODIFIER_CTRL), olistAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_7, Keyboard.MODIFIER_CTRL), olistAction);
 
         final UlAction ulistAction = new UlAction(NONE, i18n.t("Bullet List"), imgResources.defaultbullet());
         final ButtonDescriptor ulist = new ButtonDescriptor(ulistAction);
         ulist.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_8, KeyboardListener.MODIFIER_CTRL), ulistAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_8, Keyboard.MODIFIER_CTRL), ulistAction);
 
         final ImgAction imgAction = new ImgAction(i18n.t("Image..."), NONE, imgResources.images());
         final ImgAction imgBtnAction = new ImgAction(NONE, i18n.t("Insert Image"), imgResources.images());
@@ -1015,11 +1012,10 @@ public class RTEditorPresenterNew implements RTEditorNew {
         editLink.setAddCondition(extendedAddCond);
         editLinkBtn.setAddCondition(extendedAddCond);
         editLinkCtx.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_K, KeyboardListener.MODIFIER_CTRL), editLinkAction,
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_K, Keyboard.MODIFIER_CTRL), editLinkAction,
                 editLinkBtnAction);
 
-        final KeyStroke key_K = KeyStroke.getKeyStroke(Keyboard.KEY_K, KeyboardListener.MODIFIER_CTRL
-                & KeyboardListener.MODIFIER_SHIFT);
+        final KeyStroke key_K = KeyStroke.getKeyStroke(Keyboard.KEY_K, Keyboard.MODIFIER_CTRL & Keyboard.MODIFIER_SHIFT);
         final RemoveLinkAction delLinkBtnAction = new RemoveLinkAction(NONE, i18n.t("Remove Link"),
                 imgResources.linkbreak());
         final RemoveLinkAction delLinkCtxAction = new RemoveLinkAction(i18n.t("Remove"), NONE, imgResources.linkbreak());
@@ -1037,7 +1033,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final ButtonDescriptor removeFormatBtn = new ButtonDescriptor(remFormatBtnAc);
         removeFormat.setAddCondition(extendedAddCond);
         removeFormatBtn.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(' ', KeyboardListener.MODIFIER_CTRL), remFormatAction, remFormatBtnAc);
+        setActionShortcut(KeyStroke.getKeyStroke(' ', Keyboard.MODIFIER_CTRL), remFormatAction, remFormatBtnAc);
 
         final InsertSpecialCharAction insCharAction = new InsertSpecialCharAction(i18n.t("Special characters..."),
                 NONE, imgResources.specialchars());
@@ -1067,7 +1063,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
                 imgResources.specialchars());
         final MenuItemDescriptor devInfo = new MenuItemDescriptor(formatMenu, devInfoAction);
         devInfo.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_I, KeyboardListener.MODIFIER_ALT), devInfoAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_I, Keyboard.MODIFIER_ALT), devInfoAction);
 
         fontMenu = new MenuDescriptor(NONE, i18n.t("Font"), imgResources.charfontname());
         fontSizeMenu = new MenuDescriptor(NONE, i18n.t("Font size"), imgResources.fontheight());
@@ -1105,7 +1101,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
                 NO_ICON);
         final MenuItemDescriptor fontSizeItem = new MenuItemDescriptor(fontSizeMenu, fontSizeAction);
         fontSizeItem.setAddCondition(basicAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(48 + fontSize, KeyboardListener.MODIFIER_CTRL), fontSizeAction);
+        setActionShortcut(KeyStroke.getKeyStroke(48 + fontSize, Keyboard.MODIFIER_CTRL), fontSizeAction);
         fontSizeItem.setLocation(SNDBAR);
         actions.add(fontSizeItem);
     }
@@ -1117,7 +1113,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         linkCtxMenu = new MenuDescriptor(i18n.t("Change Link"));
     }
 
-    private void getPalette() {
+    private void createPalette() {
         if (palette == null) {
             palette = paletteProvider.get();
         }

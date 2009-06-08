@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class GuiBindingsRegister {
 
-    private transient final Map<Class<?>, GuiBinding> map;
+    private final Map<Class<?>, GuiBinding> map;
 
     public GuiBindingsRegister() {
         map = new HashMap<Class<?>, GuiBinding>();

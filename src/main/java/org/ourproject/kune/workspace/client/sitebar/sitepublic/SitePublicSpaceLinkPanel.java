@@ -25,10 +25,10 @@ import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
 
@@ -52,11 +52,11 @@ public class SitePublicSpaceLinkPanel implements SitePublicSpaceLinkView {
         final AbstractToolbar siteBar = ws.getSiteBar();
         siteBar.add(publicHP);
         siteBar.addFill();
-
+        publicUrl = "";
         gotoPublic.addStyleName("kune-Margin-Medium-r");
         setContentPublicImpl(true);
-        gotoPublic.addClickListener(new ClickListener() {
-            public void onClick(final Widget sender) {
+        gotoPublic.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 gotoPublic();
             }
         });

@@ -6,14 +6,18 @@ import com.google.gwt.user.client.ui.Widget;
 
 public abstract class AbstractPopupPanel {
 
-    private transient PopupPanel popupPalette;
-    protected transient Widget widget;
+    private PopupPanel popupPalette;
+    protected Widget widget;
 
-    private final transient boolean autoHide;
-    private final transient boolean modal;
+    private final boolean autoHide;
+    private final boolean modal;
 
     public AbstractPopupPanel() {
         this(true, true);
+    }
+
+    public AbstractPopupPanel(final boolean autohide) {
+        this(autohide, false);
     }
 
     public AbstractPopupPanel(final boolean autohide, final boolean modal) {
@@ -35,9 +39,8 @@ public abstract class AbstractPopupPanel {
     public boolean isVisible() {
         if (popupPalette != null && popupPalette.isVisible()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public void show(final int left, final int top) {

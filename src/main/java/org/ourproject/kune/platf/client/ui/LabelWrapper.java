@@ -19,15 +19,13 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.ClickListenerCollection;
 import com.google.gwt.user.client.ui.Label;
 
 public class LabelWrapper extends Label implements AbstractLabel {
-
-    private transient ClickListenerCollection dblClickListeners;
 
     public LabelWrapper() {
         super();
@@ -35,32 +33,14 @@ public class LabelWrapper extends Label implements AbstractLabel {
 
     public LabelWrapper(final String text) {
         super(text);
-        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
     }
 
     public LabelWrapper(final String text, final boolean wordWrap) {
         super(text, wordWrap);
     }
 
-    public void addDoubleClickListener(final ClickListener listener) {
-        if (dblClickListeners == null) {
-            dblClickListeners = new ClickListenerCollection();
-        }
-        dblClickListeners.add(listener);
-    }
-
-    @Override
-    public void onBrowserEvent(final Event event) {
-        if (DOM.eventGetType(event) == Event.ONDBLCLICK && dblClickListeners != null) {
-            dblClickListeners.fireClick(this);
-        }
-        super.onBrowserEvent(event);
-    }
-
-    public void removeDoubleClickListener(final ClickListener listener) {
-        if (dblClickListeners != null) {
-            dblClickListeners.remove(listener);
-        }
+    public HandlerRegistration addDoubleClickHandler(final DoubleClickHandler handler) {
+        return addDomHandler(handler, DoubleClickEvent.getType());
     }
 
     public void setColor(final String color) {

@@ -23,7 +23,8 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowCloseListener;
+import com.google.gwt.user.client.Window.ClosingEvent;
+import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.BoxComponent;
@@ -42,10 +43,11 @@ public class ContentEditor extends RTESavingEditorPresenter {
     private final String fileMenuTitle;
     private final AbstractToolbar sndbar;
 
-    public ContentEditor(RTEditor editor, boolean autoSave, final I18nTranslationService i18n,
-            StateManager stateManager, SiteSignOutLink siteSignOutLink, DeferredCommandWrapper deferredCommandWrapper,
-            RTEImgResources imgResources, WorkspaceSkeleton ws, TimerWrapper timer, RTESavingEditorView view,
-            EntityTitle entityTitle) {
+    public ContentEditor(final RTEditor editor, final boolean autoSave, final I18nTranslationService i18n,
+            final StateManager stateManager, final SiteSignOutLink siteSignOutLink,
+            final DeferredCommandWrapper deferredCommandWrapper, final RTEImgResources imgResources,
+            final WorkspaceSkeleton ws, final TimerWrapper timer, final RTESavingEditorView view,
+            final EntityTitle entityTitle) {
         super(editor, autoSave, i18n, stateManager, deferredCommandWrapper, imgResources, timer);
         this.i18n = i18n;
         this.siteSignOutLink = siteSignOutLink;
@@ -53,18 +55,13 @@ public class ContentEditor extends RTESavingEditorPresenter {
         super.init(view);
         this.ws = ws;
         fileMenuTitle = i18n.t(RTESavingEditorPresenter.FILE_DEF_MENU_OPTION);
-        Window.addWindowCloseListener(new WindowCloseListener() {
-            public void onWindowClosed() {
-            }
-
-            public String onWindowClosing() {
+        Window.addWindowClosingHandler(new ClosingHandler() {
+            public void onWindowClosing(final ClosingEvent event) {
                 if (isSavePending()) {
-                    return i18n.t("You have changes without save. Are you sure?");
+                    event.setMessage(i18n.t("You have changes without save. Are you sure?"));
                 }
                 // onDoSaveAndClose();
-                return null;
             }
-
         });
         vp = new VerticalPanel();
         basicEditor = super.getBasicEditor();
@@ -86,8 +83,8 @@ public class ContentEditor extends RTESavingEditorPresenter {
     }
 
     @Override
-    public void edit(String html, Listener<String> onSave, Listener0 onEditCancelled) {
-        Toolbar contentTopBar = ws.getEntityWorkspace().getContentTopBar();
+    public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
+        final Toolbar contentTopBar = ws.getEntityWorkspace().getContentTopBar();
         contentTopBar.removeAll();
         contentTopBar.add((Widget) topbar);
         ws.getEntityWorkspace().setContent(vp);
@@ -96,7 +93,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
         siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
     }
 
-    public void setFileMenuTitle(String fileMenuTitleNew) {
+    public void setFileMenuTitle(final String fileMenuTitleNew) {
         basicEditor.getTopBar().setParentMenuTitle(RTEditor.TOPBAR, fileMenuTitle, null, fileMenuTitleNew);
     }
 
@@ -108,7 +105,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
     }
 
     private void addContentActions() {
-        ActionToolbarMenuDescriptor<Object> rename = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
+        final ActionToolbarMenuDescriptor<Object> rename = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
                 RTEditor.TOPBAR, new Listener0() {
                     public void onEvent() {
                         entityTitle.edit();
@@ -122,8 +119,8 @@ public class ContentEditor extends RTESavingEditorPresenter {
     }
 
     private void adjHeight(final int height) {
-        int barHeight = sndbar.getOffsetHeight();
-        int newHeight = height - 20 - barHeight;
+        final int barHeight = sndbar.getOffsetHeight();
+        final int newHeight = height - 20 - barHeight;
         // Log.debug("Sndbar height: " + barHeight + " new height: " +
         // newHeight);
         editorPanel.adjustSize(newHeight);

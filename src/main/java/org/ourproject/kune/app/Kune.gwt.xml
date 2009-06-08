@@ -1,5 +1,5 @@
 <!DOCTYPE document SYSTEM "src/main/java/gwt-module.dtd">
-<module>
+<module rename-to='ws'>
     <inherits name='com.google.gwt.i18n.I18N' />
     <inherits name='com.google.gwt.user.User' />
 

@@ -26,10 +26,10 @@ import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener0;
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
@@ -42,19 +42,16 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     public static final String SIGN_IN_BUTTON_ID = "k-signinp-sib";
     public static final String CREATE_ONE = "k-signinp-create";
     public static final String SIGNIN_DIALOG = "k-signinp-dialog";
-    static SignInForm signInForm;
+    private final SignInForm signInForm;
     private final SignInPresenter presenter;
 
-    public SignInPanel(final SignInPresenter presenter, I18nTranslationService i18n, final WorkspaceSkeleton ws,
-            Images images) {
+    public SignInPanel(final SignInPresenter presenter, final I18nTranslationService i18n, final WorkspaceSkeleton ws,
+            final Images images) {
         super(SIGNIN_DIALOG, i18n, i18n.t(PlatfMessages.SIGN_IN_TITLE), true, true, 340, 240, "",
                 i18n.t(PlatfMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
                 CANCEL_BUTTON_ID, new Listener0() {
                     public void onEvent() {
-                        signInForm.validate();
-                        if (signInForm.isValid()) {
-                            presenter.onFormSignIn();
-                        }
+                        presenter.onFormSignIn();
                     }
                 }, new Listener0() {
                     public void onEvent() {
@@ -65,17 +62,17 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
         super.addListener(new WindowListenerAdapter() {
             @Override
-            public void onHide(Component component) {
+            public void onHide(final Component component) {
                 presenter.onClose();
             }
 
             @Override
-            public void onShow(Component component) {
+            public void onShow(final Component component) {
                 KuneUiUtils.focusOnField(getNickname());
             }
         });
 
-        Panel panel = new Panel();
+        final Panel panel = new Panel();
         panel.setBorder(false);
         signInForm = new SignInForm(presenter, i18n);
         signInForm.setWidth(310);
@@ -104,24 +101,28 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
         signInForm.reset();
     }
 
+    public void validate() {
+        signInForm.validate();
+    }
+
     private Panel createNoAccountRegister() {
         final Panel noAccRegisterPanel = new Panel();
         noAccRegisterPanel.setBorder(false);
         noAccRegisterPanel.setMargins(0, 20, 0, 0);
-        HorizontalPanel hp = new HorizontalPanel();
-        final Label dontHaveAccountLabel = new Label(i18n.t("Don't you have an account?"));
+        final HorizontalPanel hpanel = new HorizontalPanel();
+        final Label dontHaveAccount = new Label(i18n.t("Don't you have an account?"));
         final Label registerLabel = new Label(i18n.t("Create one."));
         registerLabel.ensureDebugId(CREATE_ONE);
-        registerLabel.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
+        registerLabel.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 presenter.onAccountRegister();
             }
         });
         registerLabel.addStyleName("kune-Margin-Medium-l");
         registerLabel.addStyleName("kune-link");
-        hp.add(dontHaveAccountLabel);
-        hp.add(registerLabel);
-        noAccRegisterPanel.add(hp);
+        hpanel.add(dontHaveAccount);
+        hpanel.add(registerLabel);
+        noAccRegisterPanel.add(hpanel);
         return noAccRegisterPanel;
     }
 

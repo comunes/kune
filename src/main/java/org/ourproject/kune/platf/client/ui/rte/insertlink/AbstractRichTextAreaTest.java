@@ -24,18 +24,18 @@ import org.xwiki.gwt.dom.client.Element;
 import org.xwiki.gwt.dom.client.Range;
 import org.xwiki.gwt.dom.client.Selection;
 
+import com.google.gwt.event.dom.client.HasLoadHandlers;
+import com.google.gwt.event.dom.client.LoadEvent;
+import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.LoadListener;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SourcesLoadEvents;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Base class for tests running on a rich text area.
  * 
  * @version $Id$
  */
-public class AbstractRichTextAreaTest extends AbstractWysiwygClientTest implements LoadListener {
+public class AbstractRichTextAreaTest extends AbstractWysiwygClientTest implements LoadHandler {
     /**
      * The number of milliseconds we delay the test finish. This delay is needed
      * because in some browsers the rich text area is initialized after a
@@ -56,21 +56,7 @@ public class AbstractRichTextAreaTest extends AbstractWysiwygClientTest implemen
      */
     protected RichTextArea rta;
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @see LoadListener#onError(Widget)
-     */
-    public void onError(Widget sender) {
-        // ignore
-    }
-
-    /**
-     * {@inheritDoc}
-     * 
-     * @see LoadListener#onLoad(Widget)
-     */
-    public void onLoad(Widget sender) {
+    public void onLoad(final LoadEvent event) {
         // http://wiki.codetalks.org/wiki/index.php/Docs/Keyboard_navigable_JS_widgets
         // #Use_setTimeout_with_element.focus.28.29_to_set_focus
         (new Timer() {
@@ -89,7 +75,7 @@ public class AbstractRichTextAreaTest extends AbstractWysiwygClientTest implemen
      *            The HTML fragment to be cleaned.
      * @return The input string in lower case, stripped of new lines.
      */
-    protected String clean(String html) {
+    protected String clean(final String html) {
         return html.replaceAll("\r\n", "").toLowerCase();
     }
 
@@ -114,8 +100,8 @@ public class AbstractRichTextAreaTest extends AbstractWysiwygClientTest implemen
             rta = new RichTextArea();
             // Workaround till GWT provides a way to detect when the rich text
             // area has finished loading.
-            if (rta.getBasicFormatter() != null && rta.getBasicFormatter() instanceof SourcesLoadEvents) {
-                ((SourcesLoadEvents) rta.getBasicFormatter()).addLoadListener(this);
+            if (rta.getBasicFormatter() instanceof HasLoadHandlers) {
+                ((HasLoadHandlers) rta.getBasicFormatter()).addLoadHandler(this);
             }
         }
         RootPanel.get().add(rta);
@@ -143,7 +129,7 @@ public class AbstractRichTextAreaTest extends AbstractWysiwygClientTest implemen
      *            the HTML fragment to be cleaned of non-breaking spaces
      * @return the input HTML fragment without any non-breaking spaces
      */
-    protected String removeNonBreakingSpaces(String html) {
+    protected String removeNonBreakingSpaces(final String html) {
         return html.replace("&nbsp;", "");
     }
 
@@ -153,8 +139,8 @@ public class AbstractRichTextAreaTest extends AbstractWysiwygClientTest implemen
      * @param range
      *            The range to be selected.
      */
-    protected void select(Range range) {
-        Selection selection = rta.getDocument().getSelection();
+    protected void select(final Range range) {
+        final Selection selection = rta.getDocument().getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
     }

@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -33,55 +33,56 @@ public class BasicThumb extends Composite {
     private final Image thumbImg;
     private final Label thumbLabel;
 
-    public BasicThumb(String imageUrl, int imgSize, String text, int textMaxLenght, boolean crop,
-            ClickListener clickListener) {
-        VerticalPanel vp = new VerticalPanel();
-        if (imgSize != NOSIZE) {
+    public BasicThumb(final String imageUrl, final int imgSize, final String text, final int textMaxLenght,
+            final boolean crop, final ClickHandler clickHandler) {
+        super();
+        final VerticalPanel vpanel = new VerticalPanel();
+        if (imgSize == NOSIZE) {
+            thumbImg = new Image(imageUrl);
+        } else {
             if (crop) {
                 thumbImg = new Image(imageUrl, 0, 0, imgSize, imgSize);
             } else {
                 thumbImg = new Image(imageUrl);
                 thumbImg.setPixelSize(imgSize, imgSize);
             }
-        } else {
-            thumbImg = new Image(imageUrl);
         }
-        String title = textMaxLenght == NOSIZE ? text : Format.ellipsis(text, textMaxLenght);
+        final String title = textMaxLenght == NOSIZE ? text : Format.ellipsis(text, textMaxLenght);
         thumbLabel = new Label(title);
-        vp.add(thumbImg);
-        vp.add(thumbLabel);
-        vp.addStyleName("k-basic-thumb");
-        vp.addStyleName("kune-Margin-Small-trbl");
-        vp.addStyleName("kune-pointer");
-        vp.addStyleName("kune-floatleft");
-        thumbLabel.addClickListener(clickListener);
-        vp.setCellHorizontalAlignment(thumbLabel, VerticalPanel.ALIGN_CENTER);
-        thumbImg.addClickListener(clickListener);
-        initWidget(vp);
+        vpanel.add(thumbImg);
+        vpanel.add(thumbLabel);
+        vpanel.addStyleName("k-basic-thumb");
+        vpanel.addStyleName("kune-Margin-Small-trbl");
+        vpanel.addStyleName("kune-pointer");
+        vpanel.addStyleName("kune-floatleft");
+        thumbLabel.addClickHandler(clickHandler);
+        vpanel.setCellHorizontalAlignment(thumbLabel, VerticalPanel.ALIGN_CENTER);
+        thumbImg.addClickHandler(clickHandler);
+        initWidget(vpanel);
     }
 
-    public BasicThumb(String imageUrl, String thumText, ClickListener clickListener) {
-        this(imageUrl, NOSIZE, thumText, NOSIZE, false, clickListener);
+    public BasicThumb(final String imageUrl, final String thumText, final ClickHandler clickHandler) {
+        this(imageUrl, NOSIZE, thumText, NOSIZE, false, clickHandler);
     }
 
-    public BasicThumb(String imageUrl, String text, int textMaxLenght, ClickListener clickListener) {
-        this(imageUrl, NOSIZE, text, textMaxLenght, false, clickListener);
+    public BasicThumb(final String imageUrl, final String text, final int textMaxLenght, final ClickHandler clickHandler) {
+        this(imageUrl, NOSIZE, text, textMaxLenght, false, clickHandler);
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         thumbLabel.setText(text);
     }
 
-    public void setThumbUrl(String url) {
+    public void setThumbUrl(final String url) {
         thumbImg.setUrl(url);
     }
 
-    public void setTooltip(String tip) {
+    public void setTooltip(final String tip) {
         KuneUiUtils.setQuickTip(thumbImg, tip);
         KuneUiUtils.setQuickTip(thumbLabel, tip);
     }
 
-    public void setTooltip(String tipTitle, String tip) {
+    public void setTooltip(final String tipTitle, final String tip) {
         KuneUiUtils.setQuickTip(thumbImg, tip, tipTitle);
         KuneUiUtils.setQuickTip(thumbLabel, tip, tipTitle);
     }

@@ -51,4 +51,6 @@ public interface SignInView extends SignInAbstractView {
 
     void unMask();
 
+    void validate();
+
 }

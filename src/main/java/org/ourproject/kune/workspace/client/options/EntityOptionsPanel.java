@@ -27,8 +27,8 @@ import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPa
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderButton;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 
 public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements EntityOptionsView {
 
@@ -80,8 +80,8 @@ public class EntityOptionsPanel extends AbstractTabbedDialogPanel implements Ent
 
     private void createOptionsButton() {
         optionsButton = new EntityHeaderButton("", images.emblemSystem());
-        optionsButton.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
+        optionsButton.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 createAndShowItImpl();
             }
         });

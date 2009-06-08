@@ -6,7 +6,7 @@ public class MenuBinding extends GuiBindingAdapter {
 
     public static final String UI_MENU = "UI_MENU";
 
-    private transient Boolean isSubmenu;
+    private Boolean isSubmenu;
 
     @Override
     public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {

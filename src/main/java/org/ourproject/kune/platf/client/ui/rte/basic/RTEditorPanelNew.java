@@ -1,27 +1,23 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_DOWN;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_END;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_ESCAPE;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_HOME;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_LEFT;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_PAGEDOWN;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_PAGEUP;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_RIGHT;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_UP;
-
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.actions.ui.AbstractComplexGuiItem;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionCollection;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutRegister;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea.BasicFormatter;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea.ExtendedFormatter;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Justification;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkExecutableUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 import org.xwiki.gwt.dom.client.DocumentFragment;
@@ -31,23 +27,25 @@ import org.xwiki.gwt.dom.client.Selection;
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.FocusListener;
-import com.google.gwt.user.client.ui.Widget;
 
-public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
+public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditorViewNew {
 
-    private class EventListener implements FocusListener {
-
-        public void onFocus(final Widget sender) {
-            presenter.onEditorFocus();
+    private class EventListener implements FocusHandler, BlurHandler {
+        public void onBlur(final BlurEvent event) {
+            presenter.onLostFocus();
         }
 
-        public void onLostFocus(final Widget sender) {
-            presenter.onLostFocus();
+        public void onFocus(final FocusEvent event) {
+            presenter.onEditorFocus();
         }
     }
     private final I18nUITranslationService i18n;
@@ -58,21 +56,26 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
     private final ShortcutRegister shortcutRegister;
     private final GlobalShortcutRegister globalShortcutReg;
     private final RTELinkPopup linkCtxMenu;
+    private final RichTextArea rta;
 
     public RTEditorPanelNew(final RTEditorPresenter presenter, final I18nUITranslationService i18n,
             final ActionManager actionManager, final GlobalShortcutRegister globalShortcutReg) {
+        super();
         this.presenter = presenter;
         this.i18n = i18n;
         this.actionManager = actionManager;
         this.globalShortcutReg = globalShortcutReg;
-        basic = getBasicFormatter();
-        extended = getExtendedFormatter();
+        rta = new RichTextArea();
+        basic = rta.getBasicFormatter();
+        extended = rta.getExtendedFormatter();
         shortcutRegister = new ShortcutRegister();
-        final EventListener listener = new EventListener();
-        addFocusListener(listener);
+        final EventListener handler = new EventListener();
+        rta.addFocusHandler(handler);
+        rta.addBlurHandler(handler);
         setWidth("96%");
         setHeight("100%");
         linkCtxMenu = new RTELinkPopup();
+        initWidget(rta);
     }
 
     public void addActions(final ActionItemCollection<Object> actionItems) {
@@ -83,6 +86,10 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
                 shortcutRegister.put(shortcut, actionItem);
             }
         }
+    }
+
+    public void addActions(final GuiActionCollection actions) {
+        super.addAll(actions);
     }
 
     public void addCtxAction(final ActionItem<Object> actionItem) {
@@ -98,7 +105,7 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
     }
 
     public void adjustSize(final int height) {
-        setHeight("" + height);
+        setHeight(Integer.toString(height));
     }
 
     public boolean canBeBasic() {
@@ -129,13 +136,17 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
         setFocus(true);
     }
 
+    public String getHTML() {
+        return rta.getHTML();
+    }
+
     public LinkInfo getLinkInfoIfHref() {
         LinkInfo linkinfo = null;
         final org.xwiki.gwt.dom.client.Element selectedAnchor = selectAndGetLink();
-        if (selectedAnchor != null) {
-            linkinfo = LinkInfo.parse(selectedAnchor);
-        } else {
+        if (selectedAnchor == null) {
             linkinfo = new LinkInfo(getSelectionText());
+        } else {
+            linkinfo = LinkInfo.parse(selectedAnchor);
         }
         Log.debug("Link info: " + linkinfo);
         return linkinfo;
@@ -157,6 +168,10 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
         return getFstRange().cloneContents().getInnerText();
     }
 
+    public String getText() {
+        return rta.getText();
+    }
+
     public void hideLinkCtxMenu() {
         linkCtxMenu.hide();
     }
@@ -169,8 +184,7 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
     }
 
     public void insertComment(final String author) {
-        final String comment = null;
-        createCommentAndSelectIt(author, comment);
+        createCommentAndSelectIt(author, null);
     }
 
     public void insertCommentNotUsingSelection(final String author) {
@@ -208,7 +222,7 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
     }
 
     public boolean isAnythingSelected() {
-        return !getDocument().getSelection().isCollapsed();
+        return !rta.getDocument().getSelection().isCollapsed();
     }
 
     public boolean isBold() {
@@ -228,11 +242,11 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
     }
 
     public boolean isLink() {
-        if (isAttached() && LinkExecutableUtils.getSelectedAnchor(this) != null) {
-            return true;
-        } else {
-            return false;
+        boolean isLink = false;
+        if (isAttached() && LinkExecutableUtils.getSelectedAnchor(rta) != null) {
+            isLink = true;
         }
+        return isLink;
     }
 
     public boolean isStrikethrough() {
@@ -278,21 +292,21 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
             break;
         case Event.ONKEYDOWN:
             final ActionItem rtaActionItem = shortcutRegister.get(event);
-            final ActionItem actionItem = rtaActionItem != null ? rtaActionItem : globalShortcutReg.get(event);
-            if (actionItem != null) {
-                updateStatus();
-                fireEdit();
-                event.cancelBubble(true);
-                event.preventDefault();
-                actionManager.doAction(actionItem);
-                updateStatus();
-            } else {
+            final ActionItem actionItem = rtaActionItem == null ? globalShortcutReg.get(event) : rtaActionItem;
+            if (actionItem == null) {
                 super.onBrowserEvent(event);
                 updateStatus();
                 updateLinkInfo();
                 if (isAnEditionKey(event.getKeyCode())) {
                     fireEdit();
                 }
+            } else {
+                updateStatus();
+                fireEdit();
+                event.stopPropagation();
+                event.preventDefault();
+                actionManager.doAction(actionItem);
+                updateStatus();
             }
             break;
         default:
@@ -330,6 +344,10 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
         basic.setBackColor(color);
     }
 
+    public void setFocus(final boolean focused) {
+        rta.setFocus(focused);
+    }
+
     public void setFontName(final String name) {
         basic.setFontName(name);
     }
@@ -342,10 +360,18 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
         basic.setForeColor(color);
     }
 
+    public void setHTML(final String html) {
+        rta.setHTML(html);
+    }
+
+    public void setText(final String text) {
+        rta.setText(text);
+    }
+
     public void showLinkCtxMenu() {
         DeferredCommand.addCommand(new Command() {
             public void execute() {
-                final org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(RTEditorPanelNew.this);
+                final org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(rta);
                 if (selectedAnchor != null) {
                     linkCtxMenu.show(RTEditorPanelNew.this.getAbsoluteLeft() + selectedAnchor.getAbsoluteLeft(),
                             RTEditorPanelNew.this.getAbsoluteTop() + selectedAnchor.getAbsoluteTop() + 20);
@@ -393,7 +419,7 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
 
     private void createCommentAndSelectIt(final String author, final String comment) {
         final Element commentEl = createCommentElement(author, comment);
-        final Range innerCommentRange = getDocument().createRange();
+        final Range innerCommentRange = rta.getDocument().createRange();
         getFstRange().insertNode(commentEl);
         innerCommentRange.selectNodeContents(commentEl.getFirstChild());
         getSelection().addRange(innerCommentRange);
@@ -402,8 +428,8 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
 
     private Element createCommentElement(final String userName, final String insertComment) {
         final String time = i18n.formatDateWithLocale(new Date(), true);
-        final Element span = getDocument().createSpanElement();
-        final String comment = insertComment != null ? insertComment : i18n.t("type your comment here");
+        final Element span = rta.getDocument().createSpanElement();
+        final String comment = insertComment == null ? i18n.t("type your comment here") : insertComment;
         span.setInnerHTML("<em>" + comment + "</em> -" + userName + " " + time);
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
         // insertHtml("&nbsp;" + span.getString() + "&nbsp;");
@@ -415,23 +441,30 @@ public class RTEditorPanelNew extends RichTextArea implements RTEditorViewNew {
     }
 
     private Selection getSelection() {
-        return getDocument().getSelection();
+        return rta.getDocument().getSelection();
     }
 
     private boolean isAnEditionKey(final int keyCode) {
-        if (keyCode != KEY_HOME && keyCode != KEY_END && keyCode != KEY_UP && keyCode != KEY_DOWN
-                && keyCode != KEY_LEFT && keyCode != KEY_RIGHT && keyCode != KEY_PAGEDOWN && keyCode != KEY_PAGEUP
-                && keyCode != KEY_ESCAPE) {
-            return true;
-        } else {
+        switch (keyCode) { // NOPMD by vjrj on 5/06/09 19:14
+        case KeyCodes.KEY_HOME:
+        case KeyCodes.KEY_END:
+        case KeyCodes.KEY_UP:
+        case KeyCodes.KEY_DOWN:
+        case KeyCodes.KEY_LEFT:
+        case KeyCodes.KEY_RIGHT:
+        case KeyCodes.KEY_PAGEDOWN:
+        case KeyCodes.KEY_PAGEUP:
+        case KeyCodes.KEY_ESCAPE:
             return false;
+        default:
+            return true;
         }
     }
 
     private org.xwiki.gwt.dom.client.Element selectAndGetLink() {
-        final org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(this);
+        final org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(rta);
         if (selectedAnchor != null) {
-            final Range range = getDocument().createRange();
+            final Range range = rta.getDocument().createRange();
             range.selectNode(selectedAnchor);
             getSelection().addRange(range);
         }

@@ -38,27 +38,27 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
 
-    SignInView view;
-    private final Provider<UserServiceAsync> userServiceProvider;
+    private SignInView view;
+    private final Provider<UserServiceAsync> userService;
     private final Provider<Register> registerProvider;
 
     public SignInPresenter(final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
-            final Provider<UserServiceAsync> userServiceProvider, final Provider<Register> registerProvider) {
+            final Provider<UserServiceAsync> userService, final Provider<Register> registerProvider) {
         super(session, stateManager, i18n);
-        this.userServiceProvider = userServiceProvider;
+        this.userService = userService;
         this.registerProvider = registerProvider;
     }
 
     public void doSignIn() {
         registerProvider.get().hide();
-        if (!session.isLogged()) {
+        if (session.isLogged()) {
+            stateManager.restorePreviousToken();
+        } else {
             NotifyUser.showProgressProcessing();
             view.show();
             view.center();
             NotifyUser.hideProgress();
             view.focusOnNickname();
-        } else {
-            stateManager.restorePreviousToken();
         }
     }
 
@@ -79,6 +79,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
     }
 
     public void onFormSignIn() {
+        view.validate();
         if (view.isSignInFormValid()) {
             view.maskProcessing();
 
@@ -108,7 +109,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
                     view.unMask();
                 }
             };
-            userServiceProvider.get().login(user.getShortName(), user.getPassword(), callback);
+            userService.get().login(user.getShortName(), user.getPassword(), callback);
         }
     }
 }

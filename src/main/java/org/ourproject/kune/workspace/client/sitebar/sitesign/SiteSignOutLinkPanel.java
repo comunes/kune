@@ -23,9 +23,9 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
 
 public class SiteSignOutLinkPanel implements SiteSignOutLinkView {
 
@@ -40,8 +40,8 @@ public class SiteSignOutLinkPanel implements SiteSignOutLinkView {
         signOutLabel.addStyleName("k-sitebar-labellink");
         signOutLabel.ensureDebugId(SITE_SIGN_OUT);
         ws.getSiteBar().add(signOutLabel);
-        signOutLabel.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
+        signOutLabel.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 NotifyUser.showProgressProcessing();
                 presenter.doSignOut();
             }

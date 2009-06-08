@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
+import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.KeyboardListenerCollection;
+import com.google.gwt.dom.client.NativeEvent;
 
 public class ShortcutRegister {
 
@@ -22,21 +22,19 @@ public class ShortcutRegister {
     }
 
     @SuppressWarnings("unchecked")
-    public ActionItem get(Event event) {
-        if (event.getTypeInt() == Event.ONKEYDOWN) {
-            int modifiers = KeyboardListenerCollection.getKeyboardModifiers(event);
-            boolean fnKey = (event.getKeyCode() >= Keyboard.KEY_F2 && event.getKeyCode() <= Keyboard.KEY_F12);
-            if (modifiers != 0 || fnKey) {
-                ShortcutDescriptor shortcut = new ShortcutDescriptor(event.getKeyCode(), modifiers);
-                return get(shortcut);
-            }
+    public ActionItem get(final NativeEvent event) {
+        final int modifiers = KeyStroke.getKeyboardModifiers(event);
+        final boolean fnKey = (event.getKeyCode() >= Keyboard.KEY_F2 && event.getKeyCode() <= Keyboard.KEY_F12);
+        if (modifiers != 0 || fnKey) {
+            final ShortcutDescriptor shortcut = new ShortcutDescriptor(event.getKeyCode(), modifiers);
+            return get(shortcut);
         }
         return null;
     }
 
     @SuppressWarnings("unchecked")
-    public ActionItem get(ShortcutDescriptor shortcut) {
-        ActionItem actionItem = shortcuts.get(shortcut);
+    public ActionItem get(final ShortcutDescriptor shortcut) {
+        final ActionItem actionItem = shortcuts.get(shortcut);
         if (actionItem != null) {
             Log.debug("Shortcut pressed" + actionItem.getAction().getShortcut());
         }
@@ -44,7 +42,7 @@ public class ShortcutRegister {
     }
 
     @SuppressWarnings("unchecked")
-    public void put(ShortcutDescriptor shortcut, ActionItem actionItem) {
+    public void put(final ShortcutDescriptor shortcut, final ActionItem actionItem) {
         if (shortcuts.get(shortcut) != null) {
             Log.warn("Shortcut" + shortcut + " already registered");
         }
@@ -52,13 +50,13 @@ public class ShortcutRegister {
     }
 
     @SuppressWarnings("unchecked")
-    public void put(ShortcutDescriptor shortcut, final Listener0 listener) {
-        ActionDescriptor descriptor = new ActionDescriptor(AccessRolDTO.Viewer, new Listener0() {
+    public void put(final ShortcutDescriptor shortcut, final Listener0 listener) {
+        final ActionDescriptor descriptor = new ActionDescriptor(AccessRolDTO.Viewer, new Listener0() {
             public void onEvent() {
                 listener.onEvent();
             }
         });
-        ActionItem item = new ActionItem(descriptor, null);
+        final ActionItem item = new ActionItem(descriptor, null);
         put(shortcut, item);
     }
 

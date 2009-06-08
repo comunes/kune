@@ -5,7 +5,7 @@ import com.gwtext.client.widgets.menu.Menu;
 
 public abstract class AbstractMenuGui extends AbstractGuiItem {
 
-    protected final transient Menu menu;
+    protected final Menu menu;
 
     public AbstractMenuGui() {
         super();

@@ -34,7 +34,9 @@ import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -52,12 +54,13 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
     private final Label noBuddiesPublic;
 
     public BuddiesSummaryPanel(final BuddiesSummaryPresenter presenter, final WorkspaceSkeleton ws,
-            I18nTranslationService i18n, ActionManager actionManager, ActionToolbarView<UserSimpleDTO> actionToolbarView) {
+            final I18nTranslationService i18n, final ActionManager actionManager,
+            final ActionToolbarView<UserSimpleDTO> actionToolbarView) {
         super(i18n.t("Buddies"), i18n.t("This user buddies"), ws);
         this.actionManager = actionManager;
         menuItemsContainer = new MenuItemsContainer<UserSimpleDTO>();
         this.i18n = i18n;
-        VerticalPanel vp = new VerticalPanel();
+        final VerticalPanel vp = new VerticalPanel();
         flowPanel = new FlowPanel();
         otherBuddiesLabel = new Label();
         otherBuddiesLabel.addStyleName("kune-Margin-Small-trbl");
@@ -73,11 +76,12 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         noBuddiesPublic.addStyleName("k-text-gray");
     }
 
-    public void addBuddie(final UserSimpleDTO user, ActionItemCollection<UserSimpleDTO> actionCollection,
-            String avatarUrl, String tooltipTitle, String tooltip) {
-        ClickListener listener = new ClickListener() {
-            public void onClick(Widget sender) {
-                Menu menu = menuItemsContainer.get(user.getShortName());
+    public void addBuddie(final UserSimpleDTO user, final ActionItemCollection<UserSimpleDTO> actionCollection,
+            final String avatarUrl, final String tooltipTitle, final String tooltip) {
+        final ClickHandler listener = new ClickHandler() {
+            public void onClick(final ClickEvent event) {
+                final Element sender = event.getRelativeElement();
+                final Menu menu = menuItemsContainer.get(user.getShortName());
                 if (menu.getItems().length > 0) {
                     menu.showAt(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 5);
                 }
@@ -85,13 +89,13 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         };
         menuItemsContainer.createItemMenu(user.getShortName(), actionCollection,
                 new Listener<ActionItem<UserSimpleDTO>>() {
-                    public void onEvent(ActionItem<UserSimpleDTO> actionItem) {
+                    public void onEvent(final ActionItem<UserSimpleDTO> actionItem) {
                         doAction(actionItem);
                     }
                 });
 
-        BasicThumb thumb = new BasicThumb(avatarUrl.equals(NOAVATAR) ? "images/persons/person2-32.png" : avatarUrl,
-                AVATARSIZE, user.getShortName(), AVATARLABELMAXSIZE, false, listener);
+        final BasicThumb thumb = new BasicThumb(avatarUrl.equals(NOAVATAR) ? "images/persons/person2-32.png"
+                : avatarUrl, AVATARSIZE, user.getShortName(), AVATARLABELMAXSIZE, false, listener);
         thumb.setTooltip(tooltipTitle, tooltip);
         flowPanel.add(thumb);
     }
@@ -113,7 +117,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         otherBuddiesLabel.setText(i18n.t("This user has no buddies"));
     }
 
-    public void setOtherUsers(String text) {
+    public void setOtherUsers(final String text) {
         otherBuddiesLabel.setText(text);
     }
 

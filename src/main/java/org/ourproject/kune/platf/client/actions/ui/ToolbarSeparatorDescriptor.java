@@ -7,7 +7,7 @@ public class ToolbarSeparatorDescriptor extends AbstractSeparatorDescriptor {
         spacer, separator, fill
     }
 
-    private transient final Type type;
+    private final Type type;
 
     public ToolbarSeparatorDescriptor(final Type type) {
         super();

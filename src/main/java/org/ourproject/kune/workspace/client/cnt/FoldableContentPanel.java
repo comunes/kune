@@ -26,7 +26,8 @@ import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.RoundedPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -40,7 +41,7 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
     private final RoundedPanel messagePanel;
     private final IconLabel messageLabel;
 
-    public FoldableContentPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
+    public FoldableContentPanel(final WorkspaceSkeleton ws, final I18nTranslationService i18n) {
         super(ws);
         this.i18n = i18n;
         messageLabel = new IconLabel(Images.App.getInstance().info(), "");
@@ -50,31 +51,31 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         messagePanel.addStyleName("kune-Margin-7-b");
     }
 
-    public void setContent(String content, boolean showPreviewMsg) {
+    public void setContent(final String content, final boolean showPreviewMsg) {
         final VerticalPanel vp = createMessageVp(showPreviewMsg);
         final HTML html = new HTML(content);
         vp.add(html);
         setWidgetAsContent(vp, true);
     }
 
-    public void setInfo(String info) {
+    public void setInfo(final String info) {
         setLabel(info);
     }
 
-    public void setInfoMessage(String text) {
-        VerticalPanel vp = createMessageVp(true);
+    public void setInfoMessage(final String text) {
+        final VerticalPanel vp = createMessageVp(true);
         messageLabel.setText(text);
         setWidgetAsContent(vp, true);
     }
 
-    public void setLabel(String text) {
-        Label label = new Label(text);
+    public void setLabel(final String text) {
+        final Label label = new Label(text);
         setDefStyle(label);
         setWidget(label);
     }
 
     public void setNoPreview() {
-        VerticalPanel vp = createMessageVp(true);
+        final VerticalPanel vp = createMessageVp(true);
         setNoPreviewLabelMsg();
         setWidgetAsContent(vp, true);
     }
@@ -85,14 +86,14 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         setContent(html);
     }
 
-    public void setWidgetAsContent(final Widget widget, boolean setDefMargins) {
+    public void setWidgetAsContent(final Widget widget, final boolean setDefMargins) {
         if (setDefMargins) {
             widget.addStyleName(DEF_CONTENT_MARGINS_STYLE);
         }
         setContent(widget);
     }
 
-    public void showImage(String imageUrl, String imageResizedUrl, boolean showPreviewMsg) {
+    public void showImage(final String imageUrl, final String imageResizedUrl, final boolean showPreviewMsg) {
         final VerticalPanel vp = createMessageVp(showPreviewMsg);
         final Image imgOrig = new Image(imageUrl);
         final Image imgResized = new Image(imageResizedUrl);
@@ -102,14 +103,14 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         setDefStyle(imgResized);
         imgOrig.addStyleName("kune-pointer");
         imgResized.addStyleName("kune-pointer");
-        imgResized.addClickListener(new ClickListener() {
-            public void onClick(Widget sender) {
+        imgResized.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 imgResized.removeFromParent();
                 vp.add(imgOrig);
             }
         });
-        imgOrig.addClickListener(new ClickListener() {
-            public void onClick(Widget sender) {
+        imgOrig.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 imgOrig.removeFromParent();
                 vp.add(imgResized);
             }
@@ -119,7 +120,7 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         Image.prefetch(imageUrl);
     }
 
-    private VerticalPanel createMessageVp(boolean showMsg) {
+    private VerticalPanel createMessageVp(final boolean showMsg) {
         final VerticalPanel vp = new VerticalPanel();
         if (showMsg) {
             setDefPreviewMsg();

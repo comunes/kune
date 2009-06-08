@@ -20,8 +20,6 @@ import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import com.google.inject.Inject;
 
 public class UserManagerTest extends PersistencePreLoadedDataTest {
-
-    User userFinder;
     @Inject
     Group groupFinder;
 
@@ -87,7 +85,7 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
     public void userSearch() throws Exception, ParseException {
         userManager.reIndex();
         final SearchResult<User> result = userManager.search(USER_SHORT_NAME);
-        assertEquals(1, (long) result.getSize());
+        assertEquals(1, result.getSize());
         assertEquals(USER_SHORT_NAME, result.getList().get(0).getShortName());
         rollbackTransaction();
     }

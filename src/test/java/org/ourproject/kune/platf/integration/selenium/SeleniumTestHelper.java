@@ -86,8 +86,8 @@ public class SeleniumTestHelper {
         try {
             selenium.open(url);
         } catch (final UnsupportedOperationException e) {
-            new ServerException("Seems that selenium server is not running; run before: 'mvn selenium:start-server' ",
-                    e);
+            throw new ServerException(
+                    "Seems that selenium server is not running; run before: 'mvn selenium:start-server' ", e);
         }
     }
 
@@ -102,7 +102,7 @@ public class SeleniumTestHelper {
     protected void wait(final int milliseconds) {
         try {
             Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -114,11 +114,11 @@ public class SeleniumTestHelper {
                 fail("timeout");
             }
             try {
-                String selText = selenium.getText(id);
+                final String selText = selenium.getText(id);
                 if (selText.indexOf(text) >= 0) {
                     break;
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
             }
             Thread.sleep(1000);
         }
@@ -133,7 +133,7 @@ public class SeleniumTestHelper {
                 if (selenium.getText(id).matches(text)) {
                     break;
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
             }
             Thread.sleep(1000);
         }

@@ -19,10 +19,11 @@
  */
 package org.ourproject.kune.platf.client.ui.palette;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.SourcesTableEvents;
-import com.google.gwt.user.client.ui.TableListener;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 
 /**
  * 
@@ -32,7 +33,7 @@ import com.google.gwt.user.client.ui.TableListener;
  */
 public class ColorWebSafePalettePanel extends AbstractPalettePanel implements ColorWebSafePaletteView {
 
-    private final transient ColorWebSafePalettePresenter presenter;
+    private final ColorWebSafePalettePresenter presenter;
 
     public ColorWebSafePalettePanel(final ColorWebSafePalettePresenter initPresenter) {
         super();
@@ -49,9 +50,9 @@ public class ColorWebSafePalettePanel extends AbstractPalettePanel implements Co
         int row;
         int col;
         int num = 0;
-        for (String element : COLORS) {
-            for (String element2 : COLORS) {
-                for (String element3 : COLORS) {
+        for (final String element : COLORS) {
+            for (final String element2 : COLORS) {
+                for (final String element3 : COLORS) {
                     row = num / COLS;
                     col = num % COLS;
                     final String currentColor = "#" + element3 + element + element2;
@@ -63,9 +64,10 @@ public class ColorWebSafePalettePanel extends AbstractPalettePanel implements Co
             }
         }
         paletteGrid.addStyleName("kune-WebSafePalette");
-        paletteGrid.addTableListener(new TableListener() {
-            public void onCellClicked(final SourcesTableEvents sender, final int row, final int col) {
-                presenter.onColorSelected(row, col);
+        paletteGrid.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
+                final Cell cell = paletteGrid.getCellForEvent(event);
+                presenter.onColorSelected(cell.getRowIndex(), cell.getCellIndex());
             }
         });
         widget = paletteGrid;

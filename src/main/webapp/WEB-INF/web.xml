@@ -6,13 +6,19 @@
   <display-name>ws</display-name>
   <description>kune workspace</description>
 
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>ws.html</welcome-file>
+  </welcome-file-list>
+
   <context-param>
     <param-name>jruby.standalone</param-name>
     <param-value>true</param-value>
   </context-param>
   <context-param>
     <param-name>rails.root</param-name>
-    <param-value>/WEB-INF/publicspace/</param-value>
+    <param-value>/WEB-INF/publicspace/
+    </param-value>
   </context-param>
   <context-param>
     <param-name>files.prefix</param-name>
@@ -55,13 +61,13 @@
     <filter-name>rack</filter-name>
     <filter-class>
       org.ourproject.kune.rack.RackServletFilter
-        </filter-class>
+    </filter-class>
     <init-param>
       <param-name>org.ourproject.kune.rack.RackModule
       </param-name>
       <param-value>
         org.ourproject.kune.app.server.KuneRackModule
-            </param-value>
+      </param-value>
     </init-param>
   </filter>
 
@@ -91,4 +97,28 @@
     <servlet-name>Proxy</servlet-name>
     <url-pattern>/http-bind/</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>remoteLoggerServiceImpl
+    </servlet-name>
+    <servlet-class>
+      com.allen_sauer.gwt.log.server.RemoteLoggerServiceImpl
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>remoteLoggerServiceImpl
+    </servlet-name>
+    <url-pattern>/ws/gwt-log</url-pattern>
+  </servlet-mapping>
+
+<!--
+  <servlet>
+    <servlet-name>jUnitHostImpl</servlet-name>
+    <servlet-class>com.google.gwt.junit.server.JUnitHostImpl
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jUnitHostImpl</servlet-name>
+    <url-pattern>/ws/junithost</url-pattern>
+  </servlet-mapping>
+ -->
 </web-app>

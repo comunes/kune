@@ -275,10 +275,8 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
         // Unhook all custom event handlers when the element is detached.
         unhookEvents();
 
-        // Recreate the placeholder element and store the iframe's contents in
-        // it.
-        // This is necessary because some browsers will wipe the iframe's
-        // contents
+    // Recreate the placeholder element and store the iframe's contents in it.
+    // This is necessary because some browsers will wipe the iframe's contents
         // when it is removed from the DOM.
         String html = getHTML();
         beforeInitPlaceholder = DOM.createDiv();
@@ -300,7 +298,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
 
                 elem.__gwt_handler = function(evt) {
                   if (elem.__listener) {
-                    elem.__listener.@org.ourproject.kune.platf.client.ui.rte.RichTextArea::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
+        elem.__listener.@com.google.gwt.user.client.ui.Widget::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
                   }
                 };
 
@@ -338,8 +336,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
 
     @Override
     protected void onElementInitialized() {
-        // Issue 1897: This method is called after a timeout, during which time
-        // the
+    // Issue 1897: This method is called after a timeout, during which time the
         // element might by detached.
         if (!initializing) {
             return;
@@ -387,8 +384,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
 
     void execCommand(String cmd, String param) {
         if (isRichEditingActive(elem)) {
-            // When executing a command, focus the iframe first, since some
-            // commands
+      // When executing a command, focus the iframe first, since some commands
             // don't take properly when it's not focused.
             setFocus(true);
             execCommandAssumingFocus(cmd, param);
@@ -405,8 +401,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
 
     boolean queryCommandState(String cmd) {
         if (isRichEditingActive(elem)) {
-            // When executing a command, focus the iframe first, since some
-            // commands
+      // When executing a command, focus the iframe first, since some commands
             // don't take properly when it's not focused.
             setFocus(true);
             return queryCommandStateAssumingFocus(cmd);

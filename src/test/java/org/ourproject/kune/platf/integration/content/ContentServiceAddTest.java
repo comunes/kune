@@ -23,13 +23,11 @@ import org.ourproject.kune.wiki.server.WikiServerTool;
 
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
-    String groupName;
     private StateContentDTO defaultContent;
 
     @Before
     public void init() throws Exception {
         new IntegrationTestHelper(this);
-        groupName = getDefSiteGroupName();
     }
 
     @Test(expected = UserMustBeLoggedException.class)
@@ -126,14 +124,14 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void testAddWikiContent() throws Exception {
         doLogin();
 
-        StateToken wikiToken = new StateToken(super.getDefSiteGroupName(), WikiServerTool.NAME);
-        StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(session.getHash(), wikiToken);
+        final StateToken wikiToken = new StateToken(super.getDefSiteGroupName(), WikiServerTool.NAME);
+        final StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(session.getHash(), wikiToken);
 
         final String title = "New wikipage";
         final StateContentDTO added = contentService.addContent(session.getHash(), wiki.getStateToken(), title,
                 WikiServerTool.TYPE_WIKIPAGE);
         assertNotNull(added);
-        ContainerDTO wikiContainer = added.getContainer();
+        final ContainerDTO wikiContainer = added.getContainer();
         final List<ContentSimpleDTO> contents = wikiContainer.getContents();
         assertEquals(title, added.getTitle());
         assertEquals(2, contents.size());

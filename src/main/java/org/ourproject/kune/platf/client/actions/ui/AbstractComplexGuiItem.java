@@ -10,17 +10,21 @@ import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractComplexGuiItem extends Composite {
 
-    private transient GuiActionCollection guiItems;
-    private transient InputMap inputMap;
+    private GuiActionCollection guiItems;
+    private InputMap inputMap;
 
     public void add(final AbstractGuiActionDescrip... descriptors) {
-        for (AbstractGuiActionDescrip descriptor : descriptors) {
+        for (final AbstractGuiActionDescrip descriptor : descriptors) {
             getGuiItems().add(descriptor);
         }
     }
 
     public void addAction(final KeyStroke key, final Action action) {
         getInputMap().put(key, action);
+    }
+
+    public void addAll(final GuiActionCollection actions) {
+        getGuiItems().addAll(actions);
     }
 
     public void addAll(final List<AbstractGuiActionDescrip> descriptors) {

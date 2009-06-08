@@ -26,9 +26,10 @@ import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.PushButton;
-import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Item;
@@ -50,8 +51,9 @@ public class SiteOptionsPanel implements SiteOptionsView {
         ws.getSiteBar().addSpacer();
         ws.getSiteBar().addSpacer();
         final Menu optionsMenu = new Menu();
-        optionsButton.addClickListener(new ClickListener() {
-            public void onClick(final Widget sender) {
+        optionsButton.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
+                final Element sender = event.getRelativeElement();
                 optionsMenu.showAt(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 10);
             }
         });

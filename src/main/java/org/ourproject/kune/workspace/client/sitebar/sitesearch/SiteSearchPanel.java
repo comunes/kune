@@ -24,12 +24,17 @@ import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.FocusListener;
-import com.google.gwt.user.client.ui.KeyboardListener;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 
 public class SiteSearchPanel implements SiteSearchView {
     private static final int SEARCH_TEXT_HEIGHT = 15;
@@ -55,32 +60,25 @@ public class SiteSearchPanel implements SiteSearchView {
         siteBar.add(searchTextBox);
 
         setTextSearchSmallImpl();
-        searchTextBox.addFocusListener(new FocusListener() {
-            public void onFocus(final Widget arg0) {
-                presenter.onSearchFocus();
-            }
-
-            public void onLostFocus(final Widget arg0) {
+        searchTextBox.addBlurHandler(new BlurHandler() {
+            public void onBlur(final BlurEvent event) {
                 presenter.onSearchLostFocus(searchTextBox.getText());
             }
         });
-
-        searchButton.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
+        searchTextBox.addFocusHandler(new FocusHandler() {
+            public void onFocus(final FocusEvent event) {
+                presenter.onSearchFocus();
+            }
+        });
+        searchButton.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 NotifyUser.showProgressProcessing();
                 presenter.doSearch(searchTextBox.getText());
             }
         });
-
-        searchTextBox.addKeyboardListener(new KeyboardListener() {
-            public void onKeyDown(final Widget arg0, final char arg1, final int arg2) {
-            }
-
-            public void onKeyPress(final Widget arg0, final char arg1, final int arg2) {
-            }
-
-            public void onKeyUp(final Widget widget, final char key, final int mod) {
-                if (key == KEY_ENTER) {
+        searchTextBox.addKeyUpHandler(new KeyUpHandler() {
+            public void onKeyUp(final KeyUpEvent event) {
+                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
                     if (searchTextBox.getText().length() > 0) {
                         NotifyUser.showProgressProcessing();
                         presenter.doSearch(searchTextBox.getText());

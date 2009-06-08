@@ -11,6 +11,8 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** Use of webdriver instead of plain selenium
+   http://code.google.com/p/webdriver/
 ** New Action class
 *** Things to support
 - [X] menu and toolbars separators (space, bar, expand)
@@ -29,6 +31,7 @@ TODO-list for kune -*- mode: org; -*-
    - [ ] 2:27 (?) icon ...
    - [ ] 2:35 "Start a chat with this member"-> chat! and other long items
    - [ ] 2.41 long submenus...
+   - [ ] scroll of licenses
 ** maven-gwt problem (using another plugin from codehaus)
    mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:compile
    and so on.
@@ -507,6 +510,21 @@ http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/367bdb56d
     http://erdgeist.org/arts/software/opentracker/
     http://torrentfreak.com/the-pirate-bay-switches-to-opentracker-071208/
 * LONG-TERM
+** <s> About mailman usability and integration
+(sorry some comments in Spanish)
+muy poca chicha:
+2007: http://mail.python.org/pipermail/mailman-users/2007-February/055752.html
+solo un mensaje mmmm sin respuesta:
+2009: http://forum.joomla.org/viewtopic.php?f=471&t=400655&start=0
+tampoco me parece muy allá
+2008: http://markmail.org/message/l4pwznsl6aflth2s
+poca cosa:
+2008: http://markmail.org/message/fbp25rl4v2guak7w?q=mailman+%22google+groups%22#query:mailman%20%22google%20groups%22+page:1+mid:atqbl34zebq2d37u+state:results
+http://wiki.list.org/pages/viewpage.action?pageId=4030527
+Más, interesante para nosotros:
+http://groups.google.com/group/google-appengine/browse_thread/thread/a3ccf221c6f99bcf?pli=1
+http://uphpu.org/pipermail/uphpu/2007-August/007858.html
+Tb es un detalle gracioso que al ir a http://en.wikipedia.org/wiki/Electronic_mailing_list se linkan tanto Mailman como MSN/Yahoo/Google Groups, claro... cualquiera puede ir, ver la más cómoda, y usarla :P
 ** <s> integrate some blog/wiki converter:
    http://code.google.com/p/google-blog-converters-appengine/
    http://toolserver.org/~merphant/wiki2html/

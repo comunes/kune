@@ -89,7 +89,7 @@ public class UserRPC implements RPC, UserService {
     public String getUserAvatarBaser64(final String userHash, final StateToken userToken) throws DefaultException {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
-        Group userGroup = user.getUserGroup();
+        final Group userGroup = user.getUserGroup();
         if (!userGroup.getShortName().equals(userToken.getGroup())) {
             throw new AccessViolationException();
         }
@@ -138,7 +138,7 @@ public class UserRPC implements RPC, UserService {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         if (!groupToken.getGroup().equals(user.getShortName())) {
-            new AccessViolationException();
+            throw new AccessViolationException();
         }
         user.setBuddiesVisibility(UserBuddiesVisibility.valueOf(visibility.toString()));
     };
@@ -149,8 +149,7 @@ public class UserRPC implements RPC, UserService {
 
     private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
         final UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
-        final UserInfoDTO map = mapper.map(userInfo, UserInfoDTO.class);
-        return map;
+        return mapper.map(userInfo, UserInfoDTO.class);
     }
 
     private UserInfoDTO loginUser(final User user) throws DefaultException {

@@ -6,8 +6,8 @@ import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 
 public class ComplexToolbar extends AbstractComplexGuiItem {
 
-    private final transient SimpleToolbar toolbar;
-    private final transient GuiBindingsRegister bindings;
+    private final SimpleToolbar toolbar;
+    private final GuiBindingsRegister bindings;
 
     public ComplexToolbar(final GuiBindingsRegister bindings) {
         super();

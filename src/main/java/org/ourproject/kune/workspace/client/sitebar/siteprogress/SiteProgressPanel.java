@@ -41,8 +41,8 @@ public class SiteProgressPanel implements SiteProgressView {
     public SiteProgressPanel(final SiteProgressPresenter presenter,
             final Provider<SitePublicSpaceLink> publicLinkProvider) {
         this.publicLinkProvider = publicLinkProvider;
-        progressPanel = RootPanel.get("kuneprogresspanel");
         progressText = RootPanel.get("kuneprogresstext");
+        progressPanel = RootPanel.get("kuneprogresspanel");
         timeProgressMaxTime = new Timer() {
             @Override
             public void run() {

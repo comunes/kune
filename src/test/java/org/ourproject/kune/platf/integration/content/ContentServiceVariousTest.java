@@ -90,7 +90,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         final StateToken folderToken = new StateToken(groupShortName, defaultContent.getStateToken().getTool(),
                 newFolder.getId().toString(), null);
-        StateAbstractDTO result = contentService.renameContainer(getHash(), folderToken, newTitle);
+        final StateAbstractDTO result = contentService.renameContainer(getHash(), folderToken, newTitle);
 
         assertEquals(newTitle, result.getTitle());
 
@@ -102,7 +102,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
         newTitle = "folder last name";
 
-        result = contentService.renameContainer(getHash(), newFolderToken, newTitle);
+        contentService.renameContainer(getHash(), newFolderToken, newTitle);
 
         folderAgain = (StateContainerDTO) contentService.getContent(getHash(), newFolderToken);
 
@@ -150,7 +150,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void setTagsAndResults() throws Exception {
         contentService.setTags(getHash(), defaultContent.getStateToken(), "bfoo cfoa afoo2");
-        TagCloudResultDTO cloudResultDTO = contentService.getSummaryTags(getHash(), defaultContent.getStateToken());
+        final TagCloudResultDTO cloudResultDTO = contentService.getSummaryTags(getHash(),
+                defaultContent.getStateToken());
         checkResult(cloudResultDTO);
         checkResult(((StateContentDTO) contentService.getContent(getHash(), defaultContent.getStateToken())).getTagCloudResult());
     }
@@ -207,7 +208,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     private void checkResult(final TagCloudResultDTO cloudResultDTO) {
         assertNotNull(cloudResultDTO.getTagCountList());
-        List<TagCountDTO> summaryTags = cloudResultDTO.getTagCountList();
+        final List<TagCountDTO> summaryTags = cloudResultDTO.getTagCountList();
         assertEquals(3, summaryTags.size());
 
         TagCountDTO tagResultDTO = summaryTags.get(0);

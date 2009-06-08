@@ -173,7 +173,7 @@ public class PlatformModule extends AbstractModule {
             public StateManager create() {
                 final StateManagerDefault stateManager = new StateManagerDefault($(ContentProvider.class),
                         $(Session.class), $(HistoryWrapper.class));
-                History.addHistoryListener(stateManager);
+                History.addValueChangeHandler(stateManager);
                 return stateManager;
             }
         });
@@ -560,7 +560,7 @@ public class PlatformModule extends AbstractModule {
         });
 
 
-        $(TestButton.class);
+ //       $(TestButton.class);
 
         $(ApplicationComponentGroup.class).createAll();
         $(ToolGroup.class).createAll();

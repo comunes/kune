@@ -41,9 +41,9 @@ public class TagsSummaryPresenter implements TagsSummary {
     private static final int MINSIZE = 11;
     private static final int MAXSIZE = 26;
 
-    private transient TagsSummaryView view;
-    private transient final Provider<SiteSearcher> searcherProvider;
-    private transient final Session session;
+    private TagsSummaryView view;
+    private final Provider<SiteSearcher> searcherProvider;
+    private final Session session;
 
     public TagsSummaryPresenter(final Session session, final Provider<SiteSearcher> searcherProvider,
             final StateManager stateManager, final WsThemePresenter wsThemePresenter) {

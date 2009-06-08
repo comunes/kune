@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Url {
-    private transient final String base;
-    private transient final List<UrlParam> params;
+    private final String base;
+    private final List<UrlParam> params;
 
     public Url(final String base) {
         this.base = base;

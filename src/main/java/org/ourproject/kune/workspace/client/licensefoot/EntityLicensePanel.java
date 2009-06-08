@@ -25,12 +25,15 @@ import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.ExtElement;
 
@@ -55,28 +58,25 @@ public class EntityLicensePanel implements EntityLicenseView {
         licenseBar.add(licenseImage, VerticalPanel.ALIGN_TOP);
         licenseBar.add(licenseLabel);
 
-        final ClickListener clickListener = new ClickListener() {
-            public void onClick(final Widget arg0) {
+        final ClickHandler clickListener = new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 presenter.onLicenseClick();
             }
         };
 
-        // licenseLabel.addClickListener(clickListener);
-        licenseImage.addClickListener(clickListener);
+        // licenseLabel.addClickHandler(clickListener);
+        licenseImage.addClickHandler(clickListener);
 
-        MouseListenerAdapter mouseListenerAdapter = new MouseListenerAdapter() {
-            @Override
-            public void onMouseEnter(final Widget sender) {
-                fade(true);
-            }
-
-            @Override
-            public void onMouseLeave(final Widget sender) {
+        licenseImage.addMouseOutHandler(new MouseOutHandler() {
+            public void onMouseOut(final MouseOutEvent event) {
                 // fade(false);
             }
-        };
-
-        licenseImage.addMouseListener(mouseListenerAdapter);
+        });
+        licenseImage.addMouseOverHandler(new MouseOverHandler() {
+            public void onMouseOver(final MouseOverEvent event) {
+                fade(true);
+            }
+        });
 
         licenseLabel.addStyleName("kune-Margin-Large-l");
         licenseLabel.setStyleName("k-elp-limg");
@@ -98,7 +98,7 @@ public class EntityLicensePanel implements EntityLicenseView {
     }
 
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
-        String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
+        final String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
         licenseLabel.setText(licenseText);
         // KuneUiUtils.setQuickTip(licenseLabel, licenseText);
         licenseImage.setUrl(licenseDTO.getImageUrl());

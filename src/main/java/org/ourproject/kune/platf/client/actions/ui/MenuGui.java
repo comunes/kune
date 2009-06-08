@@ -7,7 +7,7 @@ import com.gwtext.client.widgets.ToolbarButton;
 
 public class MenuGui extends AbstractMenuGui {
 
-    private transient final ToolbarButton button;
+    private final ToolbarButton button;
 
     public MenuGui(final AbstractGuiActionDescrip descriptor) {
         super();

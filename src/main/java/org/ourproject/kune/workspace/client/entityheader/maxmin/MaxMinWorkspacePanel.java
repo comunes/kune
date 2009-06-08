@@ -6,8 +6,8 @@ import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderButton;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 
 public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
 
@@ -17,20 +17,20 @@ public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
     private final EntityHeaderButton maxBtn;
     private final EntityHeaderButton minBtn;
 
-    public MaxMinWorkspacePanel(final MaxMinWorkspacePresenter presenter, WorkspaceSkeleton ws, Images images,
-            final EntityHeader entityHeader, I18nTranslationService i18n) {
+    public MaxMinWorkspacePanel(final MaxMinWorkspacePresenter presenter, final WorkspaceSkeleton ws,
+            final Images images, final EntityHeader entityHeader, final I18nTranslationService i18n) {
         this.ws = ws;
         maxBtn = new EntityHeaderButton("", images.arrowOut());
         minBtn = new EntityHeaderButton("", images.arrowIn());
         maxBtn.setTitle(i18n.t("Maximize the workspace"));
         minBtn.setTitle(i18n.t("Minimize the workspace"));
-        maxBtn.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+        maxBtn.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 presenter.onMaximize();
             }
         });
-        minBtn.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+        minBtn.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 presenter.onMinimize();
             }
         });
@@ -41,11 +41,11 @@ public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
         entityHeader.addWidget(minBtn);
     }
 
-    public void setMaximized(boolean maximized) {
+    public void setMaximized(final boolean maximized) {
         ws.setMaximized(maximized);
     }
 
-    public void showMaxButton(boolean showMax) {
+    public void showMaxButton(final boolean showMax) {
         maxBtn.setVisible(showMax);
         minBtn.setVisible(!showMax);
     }

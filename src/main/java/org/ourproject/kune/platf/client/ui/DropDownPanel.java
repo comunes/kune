@@ -21,7 +21,8 @@ package org.ourproject.kune.platf.client.ui;
 
 import org.ourproject.kune.platf.client.services.Images;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -36,15 +37,15 @@ import com.google.gwt.user.client.ui.Widget;
  * </p>
  * 
  */
-public class DropDownPanel extends Composite implements ClickListener {
-    private transient final VerticalPanel vpanel;
-    private transient final HorizontalPanel titleHP;
-    private transient final Label titleLabel;
-    private transient final SimplePanel contentPanel;
-    private transient final Images img;
-    private transient final Image arrowImage;
-    private transient final RoundedPanel outerBorder;
-    private transient String stylePrimaryName;
+public class DropDownPanel extends Composite implements ClickHandler {
+    private final VerticalPanel vpanel;
+    private final HorizontalPanel titleHP;
+    private final Label titleLabel;
+    private final SimplePanel contentPanel;
+    private final Images img;
+    private final Image arrowImage;
+    private final RoundedPanel outerBorder;
+    private String stylePrimaryName;
 
     public DropDownPanel(final Images img) {
         super();
@@ -74,8 +75,8 @@ public class DropDownPanel extends Composite implements ClickListener {
         contentPanel.setStylePrimaryName("k-dropdowninner");
 
         setContentVisibleImpl(false);
-        arrowImage.addClickListener(this);
-        titleLabel.addClickListener(this);
+        arrowImage.addClickHandler(this);
+        titleLabel.addClickHandler(this);
     }
 
     public DropDownPanel(final Images img, final boolean visible) {
@@ -93,10 +94,8 @@ public class DropDownPanel extends Composite implements ClickListener {
         return contentPanel.isVisible();
     }
 
-    public void onClick(final Widget sender) {
-        if (sender.equals(titleHP) || sender.equals(arrowImage) || sender.equals(titleLabel)) {
-            setContentVisible(!isContentVisible());
-        }
+    public void onClick(final ClickEvent event) {
+        setContentVisible(!isContentVisible());
     }
 
     public void setBorderStylePrimaryName(final String stylePrimaryName) {

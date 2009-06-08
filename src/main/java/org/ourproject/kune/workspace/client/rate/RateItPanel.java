@@ -23,15 +23,19 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.MouseListenerAdapter;
-import com.google.gwt.user.client.ui.Widget;
 
-public class RateItPanel extends Composite implements ClickListener, RateItView {
+public class RateItPanel extends Composite implements ClickHandler, RateItView {
     private Grid rateGrid;
     private Image[] starImg;
     private Label rateDesc;
@@ -41,7 +45,7 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
     private final I18nTranslationService i18n;
 
     public RateItPanel(final RateItPresenter presenter, final I18nTranslationService i18n, final WorkspaceSkeleton ws,
-            Images img) {
+            final Images img) {
         this.presenter = presenter;
         this.i18n = i18n;
         this.img = img;
@@ -57,9 +61,10 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
         }
     }
 
-    public void onClick(final Widget sender) {
+    public void onClick(final ClickEvent event) {
+        final Element sender = event.getRelativeElement();
         for (int i = 0; i < 5; i++) {
-            if (sender == starImg[i]) {
+            if (sender.equals(starImg[i].getElement())) {
                 presenter.starClicked(i);
             }
         }
@@ -90,21 +95,20 @@ public class RateItPanel extends Composite implements ClickListener, RateItView 
             starImg[i].addStyleName("rateit-star");
             starImg[i].setStyleName("rateit-star");
             starImg[i].setTitle(i18n.t("Click to rate this"));
-            starImg[i].addClickListener(this);
-            starImg[i].addMouseListener(new MouseListenerAdapter() {
-                @Override
-                public void onMouseEnter(final Widget sender) {
+            starImg[i].addClickHandler(this);
+            starImg[i].addMouseOutHandler(new MouseOutHandler() {
+                public void onMouseOut(final MouseOutEvent event) {
+                    presenter.revertCurrentRate();
+                }
+            });
+            starImg[i].addMouseOverHandler(new MouseOverHandler() {
+                public void onMouseOver(final MouseOverEvent event) {
+                    final Element sender = event.getRelativeElement();
                     for (int j = 0; j < 5; j++) {
-                        if (sender == starImg[j]) {
+                        if (sender.equals(starImg[j].getElement())) {
                             presenter.starOver(j);
                         }
                     }
-
-                }
-
-                @Override
-                public void onMouseLeave(final Widget sender) {
-                    presenter.revertCurrentRate();
                 }
             });
         }

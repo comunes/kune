@@ -24,8 +24,9 @@ import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 public class RichTextAreaImplSafari extends RichTextAreaImplStandard {
 
     // @PMD:REVIEWED:VariableNamingConventions: by vjrj on 21/05/09 16:12
-    private static final String[] sizeNumberCSSValues = new String[] { "medium", "xx-small", "x-small", "small",
-            "medium", "large", "x-large", "xx-large" };
+  private static final String[] sizeNumberCSSValues = new String[] {
+      "medium", "xx-small", "x-small", "small", "medium", "large", "x-large",
+            "xx-large"};
 
     private static int webKitVersion = getWebKitVersion();
 
@@ -111,8 +112,7 @@ public class RichTextAreaImplSafari extends RichTextAreaImplStandard {
     @Override
     public void setFontSize(FontSize fontSize) {
         if (oldSchoolSizeValues) {
-            // Safari2 only accepts css-style 'small, medium, large, etc'
-            // values.
+      // Safari2 only accepts css-style 'small, medium, large, etc' values.
             // Setting these doesn't seem to hurt Safari3.
             int number = fontSize.getNumber();
             if ((number >= 0) && (number <= 7)) {
@@ -168,7 +168,7 @@ public class RichTextAreaImplSafari extends RichTextAreaImplStandard {
 
          // Dispatch the event.
          if (elem.__listener) {
-           elem.__listener.@org.ourproject.kune.platf.client.ui.rte.RichTextArea::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
+        elem.__listener.@com.google.gwt.user.client.ui.Widget::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
          }
        };
 
@@ -188,13 +188,13 @@ public class RichTextAreaImplSafari extends RichTextAreaImplStandard {
        // there interferes with focus.
        elem.onfocus = function(evt) {
          if (elem.__listener) {
-           elem.__listener.@org.ourproject.kune.platf.client.ui.rte.RichTextArea::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
+        elem.__listener.@com.google.gwt.user.client.ui.Widget::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
          }
        };
 
        elem.onblur = function(evt) {
          if (elem.__listener) {
-           elem.__listener.@org.ourproject.kune.platf.client.ui.rte.RichTextArea::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
+        elem.__listener.@com.google.gwt.user.client.ui.Widget::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
          }
        };
      }-*/;

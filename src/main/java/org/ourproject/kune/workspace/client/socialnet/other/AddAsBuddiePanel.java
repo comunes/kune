@@ -5,19 +5,19 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderButton;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 
 public class AddAsBuddiePanel implements AddAsBuddieView {
 
     public static final String ADD_BUDDIE_BUTTON = "k-aabp-bt";
     private final EntityHeaderButton button;
 
-    public AddAsBuddiePanel(final AddAsBuddiePresenter presenter, final EntityHeader entityHeader, Images images,
-            I18nTranslationService i18n) {
+    public AddAsBuddiePanel(final AddAsBuddiePresenter presenter, final EntityHeader entityHeader, final Images images,
+            final I18nTranslationService i18n) {
         button = new EntityHeaderButton(images.addGreen(), i18n.t("Add as a buddie"));
-        button.addClickListener(new ClickListener() {
-            public void onClick(Widget arg0) {
+        button.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 presenter.onAdd();
             }
         });
@@ -27,7 +27,7 @@ public class AddAsBuddiePanel implements AddAsBuddieView {
         entityHeader.addWidget(button);
     }
 
-    public void setVisible(boolean visible) {
+    public void setVisible(final boolean visible) {
         button.setVisible(visible);
     }
 }

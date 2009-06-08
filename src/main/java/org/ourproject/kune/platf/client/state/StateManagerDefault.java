@@ -37,9 +37,10 @@ import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
-import com.google.gwt.user.client.HistoryListener;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
-public class StateManagerDefault implements StateManager, HistoryListener {
+public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
     private final ContentProvider contentProvider;
     private StateToken previousToken;
     /**
@@ -86,7 +87,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         beforeStateChangeCollection = new BeforeActionCollection();
     }
 
-    public void addBeforeStateChangeListener(BeforeActionListener listener) {
+    public void addBeforeStateChangeListener(final BeforeActionListener listener) {
         beforeStateChangeCollection.add(listener);
     }
 
@@ -107,28 +108,6 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         onGroupChanged.add(listener);
     }
 
-    public void onHistoryChanged(final String historyToken) {
-        // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
-        if (beforeStateChangeCollection.checkBeforeAction()) {
-            final Listener0 tokenListener = siteTokens.get(historyToken);
-            Log.debug("StateManager: history token changed (" + historyToken + ")");
-            if (tokenListener == null) {
-                // Ok, normal token change
-                onHistoryChanged(new StateToken(historyToken));
-            } else {
-                // token is one of #newgroup #signin #translate ...
-                if (previousToken == null) {
-                    // Starting with some token like "signin": load defContent
-                    // also
-                    onHistoryChanged("");
-                }
-                tokenListener.onEvent();
-            }
-        } else {
-            resumedToken = new StateToken(historyToken);
-        }
-    }
-
     public void onSocialNetworkChanged(final Listener<StateAbstractDTO> listener) {
         onSocialNetworkChanged.add(listener);
     }
@@ -141,6 +120,10 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         onToolChanged.add(listener);
     }
 
+    public void onValueChange(final ValueChangeEvent<String> event) {
+        onHistoryChanged(event.getValue());
+    }
+
     /**
      * <p>
      * Reload current state (using client cache if available)
@@ -150,7 +133,7 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         onHistoryChanged(history.getToken());
     }
 
-    public void removeBeforeStateChangeListener(BeforeActionListener listener) {
+    public void removeBeforeStateChangeListener(final BeforeActionListener listener) {
         beforeStateChangeCollection.remove(listener);
     }
 
@@ -187,6 +170,28 @@ public class StateManagerDefault implements StateManager, HistoryListener {
         }
     }
 
+    void onHistoryChanged(final String historyToken) {
+        // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
+        if (beforeStateChangeCollection.checkBeforeAction()) {
+            final Listener0 tokenListener = siteTokens.get(historyToken);
+            Log.debug("StateManager: history token changed (" + historyToken + ")");
+            if (tokenListener == null) {
+                // Ok, normal token change
+                onHistoryChanged(new StateToken(historyToken));
+            } else {
+                // token is one of #newgroup #signin #translate ...
+                if (previousToken == null) {
+                    // Starting with some token like "signin": load defContent
+                    // also
+                    onHistoryChanged("");
+                }
+                tokenListener.onEvent();
+            }
+        } else {
+            resumedToken = new StateToken(historyToken);
+        }
+    }
+
     void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
         onStateChanged.fire(newState);
@@ -198,10 +203,10 @@ public class StateManagerDefault implements StateManager, HistoryListener {
     private void checkGroupAndToolChange(final StateAbstractDTO newState) {
         final String previousGroup = previousToken == null ? "" : previousToken.getGroup();
         final String newGroup = newState.getStateToken().getGroup();
-        String previousTokenTool = previousToken == null ? "" : previousToken.getTool();
-        String newTokenTool = newState.getStateToken().getTool();
-        String previousToolName = previousTokenTool == null ? "" : previousTokenTool;
-        String newToolName = newTokenTool == null ? "" : newTokenTool;
+        final String previousTokenTool = previousToken == null ? "" : previousToken.getTool();
+        final String newTokenTool = newState.getStateToken().getTool();
+        final String previousToolName = previousTokenTool == null ? "" : previousTokenTool;
+        final String newToolName = newTokenTool == null ? "" : newTokenTool;
 
         if (previousToken == null || previousToolName == null || !previousToolName.equals(newToolName)) {
             onToolChanged.fire(previousToolName, newToolName);

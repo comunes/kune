@@ -51,8 +51,7 @@ public class RichTextAreaImplMozilla extends RichTextAreaImplStandard {
 
     @Override
     public void setBackColor(String color) {
-        // Gecko uses 'BackColor' for the *entire area's* background.
-        // 'HiliteColor'
+    // Gecko uses 'BackColor' for the *entire area's* background. 'HiliteColor'
         // does what we actually want.
         execCommand("HiliteColor", color);
     }

@@ -55,7 +55,8 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
             selenium.refresh();
             selenium.windowMaximize();
         } catch (final UnsupportedOperationException e) {
-            new ServerException("Seems that selenium server is not running; run before: 'mvn selenium:start-server' ");
+            throw new ServerException(
+                    "Seems that selenium server is not running; run before: 'mvn selenium:start-server' ");
         }
     }
 
@@ -86,7 +87,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
     }
 
     protected long genPrefix() {
-        long prefix = new Date().getTime();
+        final long prefix = new Date().getTime();
         return prefix;
     }
 
@@ -98,7 +99,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
 
     protected void newGroupRegistrationDefLicense(final String shortname, final String longName,
             final String description, final String tags) throws Exception {
-        GroupType organization = GroupType.ORGANIZATION;
+        final GroupType organization = GroupType.ORGANIZATION;
         signInAndNewGroup();
         fillNewGroup1stPage(shortname, longName, description, tags, organization);
         click(NewGroupPanel.REGISTER_BUTTON);
@@ -118,7 +119,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
             selenium.setTimeout("0");
             super.open(url);
             selenium.setTimeout("30");
-        } catch (SeleniumException e) {
+        } catch (final SeleniumException e) {
             // TODO Auto-generated method stub
         }
     }
@@ -161,7 +162,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
     }
 
     protected String registerValidUser(final boolean wantHomepage) {
-        String shortName = "u" + genPrefix();
+        final String shortName = "u" + genPrefix();
         register(shortName, "some name " + genPrefix(), "somepasswd", "somepasswd", genPrefix() + "@example.com",
                 "Andorra", "English", "MET", wantHomepage);
         return shortName;

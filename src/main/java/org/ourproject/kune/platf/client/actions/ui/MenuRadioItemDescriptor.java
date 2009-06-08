@@ -4,7 +4,7 @@ import org.ourproject.kune.platf.client.actions.AbstractAction;
 
 public class MenuRadioItemDescriptor extends MenuCheckItemDescriptor {
 
-    private transient final String group;
+    private final String group;
 
     public MenuRadioItemDescriptor(final MenuDescriptor parent, final AbstractAction action, final String group) {
         super(parent, action);

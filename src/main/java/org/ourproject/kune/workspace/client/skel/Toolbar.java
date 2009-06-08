@@ -28,8 +28,8 @@ import com.gwtext.client.widgets.Panel;
 
 public class Toolbar {
     private static final String _100PC = "100%";
-    private transient final Panel container;
-    private transient final HorizontalPanel childPanel;
+    private final Panel container;
+    private final HorizontalPanel childPanel;
 
     public Toolbar() {
         container = new Panel();

@@ -12,7 +12,7 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 public abstract class AbstractButtonGui extends AbstractGuiItem {
 
-    private transient final Button button;
+    private final Button button;
 
     public AbstractButtonGui(final ButtonDescriptor buttonDescriptor) {
         this(buttonDescriptor, false);

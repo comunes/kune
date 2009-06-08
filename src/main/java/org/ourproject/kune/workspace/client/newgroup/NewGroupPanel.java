@@ -34,9 +34,9 @@ import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
@@ -244,18 +244,18 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         form.add(tags);
 
         licenseImage = new Image("images/lic/bysa80x15.png");
-        licenseImage.addClickListener(new ClickListener() {
-            public void onClick(final Widget arg0) {
+        licenseImage.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 KuneWindowUtils.open(license.getUrl());
             }
         });
         licenseImage.addStyleName("kune-pointer");
-        Panel licenseImagePanel = new Panel();
+        final Panel licenseImagePanel = new Panel();
         // licenseImagePanel.setLayout(new FitLayout());
         // licenseImagePanel.setWidth(80);
         licenseImagePanel.add(licenseImage);
 
-        Button changeLicenseButton = new Button(i18n.t("Change"));
+        final Button changeLicenseButton = new Button(i18n.t("Change"));
         changeLicenseButton.setTabIndex(5);
         changeLicenseButton.addListener(new ButtonListenerAdapter() {
             @Override
@@ -269,12 +269,12 @@ public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
         });
         changeLicenseButton.addClass("kune-Margin-Medium-trbl");
 
-        Label licenseLabel = new Label();
+        final Label licenseLabel = new Label();
         licenseLabel.setHtml(i18n.t("Default license for this group:") + DefaultFormUtils.br());
         form.add(licenseLabel);
         licenseLabel.setStyle(MARGIN_LEFT_105PX);
 
-        Panel licPanel = new Panel();
+        final Panel licPanel = new Panel();
         licPanel.setBorder(false);
         licPanel.setLayout(new HorizontalLayout(5));
         licPanel.add(licenseImagePanel);

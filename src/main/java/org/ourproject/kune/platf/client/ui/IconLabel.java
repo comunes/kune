@@ -17,22 +17,32 @@
  \*/
 package org.ourproject.kune.platf.client.ui;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
+import com.google.gwt.event.dom.client.HasAllMouseHandlers;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasDoubleClickHandlers;
+import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.dom.client.MouseDownHandler;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.dom.client.MouseUpEvent;
+import com.google.gwt.event.dom.client.MouseUpHandler;
+import com.google.gwt.event.dom.client.MouseWheelEvent;
+import com.google.gwt.event.dom.client.MouseWheelHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.ClickListenerCollection;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasWordWrap;
-import com.google.gwt.user.client.ui.MouseListener;
-import com.google.gwt.user.client.ui.MouseListenerCollection;
-import com.google.gwt.user.client.ui.MouseWheelListener;
-import com.google.gwt.user.client.ui.MouseWheelListenerCollection;
-import com.google.gwt.user.client.ui.SourcesClickEvents;
-import com.google.gwt.user.client.ui.SourcesMouseEvents;
-import com.google.gwt.user.client.ui.SourcesMouseWheelEvents;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -47,15 +57,13 @@ import com.google.gwt.user.client.ui.Widget;
  * </p>
  */
 
-public class IconLabel extends Widget implements SourcesClickEvents, SourcesMouseEvents, SourcesMouseWheelEvents,
+public class IconLabel extends Widget implements HasClickHandlers, HasDoubleClickHandlers, HasAllMouseHandlers,
         HasHorizontalAlignment, HasText, HasWordWrap, AbstractLabel {
 
-    private ClickListenerCollection clickListeners;
-    private ClickListenerCollection doubleClickListeners;
     private HorizontalAlignmentConstant horzAlign;
-    private MouseListenerCollection mouseListeners;
-    private MouseWheelListenerCollection mouseWheelListeners;
+
     private Element icon;
+
     private final Element textLabel;
 
     /**
@@ -66,7 +74,6 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
      */
     public IconLabel(final AbstractImagePrototype image, final boolean leftIcon) {
         setElement(DOM.createDiv());
-        sinkEvents(Event.ONCLICK | Event.MOUSEEVENTS | Event.ONMOUSEWHEEL | Event.ONDBLCLICK);
         setIconImpl(image);
         textLabel = DOM.createSpan();
         if (leftIcon) {
@@ -136,32 +143,36 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
         setWordWrapImpl(wordWrap);
     }
 
-    public void addClickListener(final ClickListener listener) {
-        if (clickListeners == null) {
-            clickListeners = new ClickListenerCollection();
-        }
-        clickListeners.add(listener);
+    public HandlerRegistration addClickHandler(final ClickHandler handler) {
+        return addHandler(handler, ClickEvent.getType());
     }
 
-    public void addDoubleClickListener(final ClickListener listener) {
-        if (doubleClickListeners == null) {
-            doubleClickListeners = new ClickListenerCollection();
-        }
-        doubleClickListeners.add(listener);
+    public HandlerRegistration addDoubleClickHandler(final DoubleClickHandler handler) {
+        return addDomHandler(handler, DoubleClickEvent.getType());
     }
 
-    public void addMouseListener(final MouseListener listener) {
-        if (mouseListeners == null) {
-            mouseListeners = new MouseListenerCollection();
-        }
-        mouseListeners.add(listener);
+    public HandlerRegistration addMouseDownHandler(final MouseDownHandler handler) {
+        return addDomHandler(handler, MouseDownEvent.getType());
     }
 
-    public void addMouseWheelListener(final MouseWheelListener listener) {
-        if (mouseWheelListeners == null) {
-            mouseWheelListeners = new MouseWheelListenerCollection();
-        }
-        mouseWheelListeners.add(listener);
+    public HandlerRegistration addMouseMoveHandler(final MouseMoveHandler handler) {
+        return addDomHandler(handler, MouseMoveEvent.getType());
+    }
+
+    public HandlerRegistration addMouseOutHandler(final MouseOutHandler handler) {
+        return addDomHandler(handler, MouseOutEvent.getType());
+    }
+
+    public HandlerRegistration addMouseOverHandler(final MouseOverHandler handler) {
+        return addDomHandler(handler, MouseOverEvent.getType());
+    }
+
+    public HandlerRegistration addMouseUpHandler(final MouseUpHandler handler) {
+        return addDomHandler(handler, MouseUpEvent.getType());
+    }
+
+    public HandlerRegistration addMouseWheelHandler(final MouseWheelHandler handler) {
+        return addDomHandler(handler, MouseWheelEvent.getType());
     }
 
     public HorizontalAlignmentConstant getHorizontalAlignment() {
@@ -174,61 +185,6 @@ public class IconLabel extends Widget implements SourcesClickEvents, SourcesMous
 
     public boolean getWordWrap() {
         return !DOM.getStyleAttribute(textLabel, "whiteSpace").equals("nowrap");
-    }
-
-    @Override
-    public void onBrowserEvent(final Event event) {
-        switch (DOM.eventGetType(event)) {
-        case Event.ONCLICK:
-            if (clickListeners != null) {
-                clickListeners.fireClick(this);
-            }
-            break;
-        case Event.ONMOUSEDOWN:
-        case Event.ONMOUSEUP:
-        case Event.ONMOUSEMOVE:
-        case Event.ONMOUSEOVER:
-        case Event.ONMOUSEOUT:
-            if (mouseListeners != null) {
-                mouseListeners.fireMouseEvent(this, event);
-            }
-            break;
-
-        case Event.ONMOUSEWHEEL:
-            if (mouseWheelListeners != null) {
-                mouseWheelListeners.fireMouseWheelEvent(this, event);
-            }
-            break;
-        case Event.ONDBLCLICK:
-            if (doubleClickListeners != null) {
-                doubleClickListeners.fireClick(this);
-            }
-            break;
-        }
-    }
-
-    public void removeClickListener(final ClickListener listener) {
-        if (clickListeners != null) {
-            clickListeners.remove(listener);
-        }
-    }
-
-    public void removeDoubleClickListener(final ClickListener listener) {
-        if (doubleClickListeners != null) {
-            doubleClickListeners.remove(listener);
-        }
-    }
-
-    public void removeMouseListener(final MouseListener listener) {
-        if (mouseListeners != null) {
-            mouseListeners.remove(listener);
-        }
-    }
-
-    public void removeMouseWheelListener(final MouseWheelListener listener) {
-        if (mouseWheelListeners != null) {
-            mouseWheelListeners.remove(listener);
-        }
     }
 
     public void setColor(final String color) {

@@ -33,8 +33,8 @@ public class EntityHeaderPresenter implements EntityHeader {
     private static final int MEDIUM_NAME_LIMIT = 90;
     private static final int LARGE_NAME_LIMIT = 20;
 
-    private transient EntityHeaderView view;
-    private transient final Session session;
+    private EntityHeaderView view;
+    private final Session session;
 
     public EntityHeaderPresenter(final StateManager stateManager, final WsThemePresenter theme, final Session session) {
         this.session = session;

@@ -39,9 +39,6 @@ import com.google.gwt.user.client.DeferredCommand;
 
 public class KuneEntryPoint implements EntryPoint {
 
-    public KuneEntryPoint() {
-    }
-
     public void onModuleLoad() {
         Log.setUncaughtExceptionHandler();
 

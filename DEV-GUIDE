@@ -147,6 +147,12 @@ We try to make Kune very usable. Then please think like a human and use a human 
 
 Your mother/father must understand and be capable of use Kune if they are capable of use yahoo/gmail/hotmail email accounts. It he/she are not capable of use Kune, we are not doing well our work, and we must do more usable our UI.
 
+Some relevant links to solve doubts:
+
+http://library.gnome.org/devel/hig-book/stable/
+http://wiki.openusability.org/guidelines/
+http://developer.apple.com/documentation/UserExperience/Conceptual/AppleHIGuidelines/OSXHIGuidelines.pdf
+
 ===Designs patterns===
 
 * MVC: We use a lot the [http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller MVC pattern] in our GWT code. See our HelloWorldModule class for a simple sample. We used to auto generate some MVC classes with the script script/generateBasicUIElements.sh:

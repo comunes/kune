@@ -1,30 +1,35 @@
 package org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental;
 
+import org.ourproject.kune.platf.client.ui.dialogs.BasicPopupPanel;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialogView;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.user.client.ui.FocusListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.PushButton;
-import com.google.gwt.user.client.ui.SourcesTableEvents;
-import com.google.gwt.user.client.ui.TableListener;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.gwtext.client.widgets.Panel;
 
 public class AbstractInsertCharPanel extends Panel {
 
-    private FocusListener focusListener;
+    private MouseOverHandler mouseOverhandler;
+    protected BasicPopupPanel popup;
+    private MouseOutHandler mouseOutHandler;
 
-    public AbstractInsertCharPanel(final InsertSpecialCharDialog insertSpecialCharDialog, final String title,
-            final String initialLabel, final char[] specialChars, final int rows, final int cols) {
+    public AbstractInsertCharPanel(final InsertSpecialCharDialog dialog, final String title, final String initialLabel,
+            final char[] specialChars, final int rows, final int cols) {
         super(title);
         setAutoWidth(true);
         setHeight(InsertSpecialCharDialogView.HEIGHT - 10);
         setPaddings(20);
-        Label label = new Label(initialLabel);
+        final Label label = new Label(initialLabel);
         label.addStyleName("kune-Margin-Medium-b");
         add(label);
         final Grid grid = new Grid(rows, cols);
@@ -32,17 +37,18 @@ public class AbstractInsertCharPanel extends Panel {
 
         int row;
         int col;
-        int n = 0;
-        for (char c : specialChars) {
-            row = n / cols;
-            col = n % cols;
+        int num = 0;
+        for (final char c : specialChars) {
+            row = num / cols;
+            col = num % cols;
             grid.setWidget(row, col, createButton(c));
-            n++;
+            num++;
         }
-        grid.addTableListener(new TableListener() {
-            public void onCellClicked(final SourcesTableEvents sender, final int row, final int cell) {
-                if (sender.equals(grid)) {
-                    insertSpecialCharDialog.onInsert(specialChars[row * cols + cell]);
+        grid.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
+                final Cell cell = grid.getCellForEvent(event);
+                if (cell != null) {
+                    dialog.onInsert(specialChars[cell.getRowIndex() * cols + cell.getCellIndex()]);
                 }
             }
         });
@@ -50,28 +56,30 @@ public class AbstractInsertCharPanel extends Panel {
         add(grid);
     }
 
-    private Widget createButton(final char c) {
-        PushButton button = new PushButton();
-        button.setText("" + c);
+    private Widget createButton(final char character) {
+        final PushButton button = new PushButton();
+        button.setText(String.valueOf(character));
         button.setStyleName("k-specialchar-pb");
-        if (focusListener == null) {
-            focusListener = new FocusListener() {
-                public void onFocus(final Widget sender) {
-                    PopupPanel popup = new PopupPanel(true);
-                    popup.setStyleName("k-specialchar-popup");
-                    Label characterLabel = new Label(sender.getElement().getInnerText());
-                    characterLabel.setStyleName("k-specialchar-big");
-                    popup.add(characterLabel);
-                    popup.show();
-                    Log.info("Focus!!!!!");
-                }
 
-                public void onLostFocus(final Widget sender) {
+        if (mouseOverhandler == null) {
+            mouseOverhandler = new MouseOverHandler() {
+                public void onMouseOver(final MouseOverEvent event) {
+                    popup = new BasicPopupPanel(true);
+                    final Label characterLabel = new Label(event.getRelativeElement().getInnerText());
+                    characterLabel.setStyleName("k-specialchar-big");
+                    popup.setWidget(characterLabel);
+                    popup.show(event.getClientX() + 10, event.getClientY() + 10);
+                    popup.addStyleName("k-specialchar-popup");
+                }
+            };
+            mouseOutHandler = new MouseOutHandler() {
+                public void onMouseOut(final MouseOutEvent event) {
+                    popup.hide();
                 }
             };
         }
-        // button.addFocusListener(focusListener);
+        button.addMouseOverHandler(mouseOverhandler);
+        button.addMouseOutHandler(mouseOutHandler);
         return button;
     }
-
 }

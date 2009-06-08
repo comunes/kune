@@ -57,7 +57,7 @@ public class MapperTest {
 
     @Test
     public void groupHasLogo() {
-        Group group = new Group("test", "this is a test");
+        final Group group = new Group("test", "this is a test");
         GroupDTO groupDTO = mapper.map(group, GroupDTO.class);
         assertFalse(group.hasLogo());
         assertFalse(groupDTO.hasLogo());
@@ -181,7 +181,7 @@ public class MapperTest {
         assertEquals(expectedToken, dto.getStateToken());
 
         final ContainerDTO dtoChild = mapper.map(containerChild, ContainerDTO.class);
-        assertTrue(dtoChild.getAbsolutePath()[0] instanceof ContainerSimpleDTO);
+        assertNotNull(dtoChild.getAbsolutePath()[0]);
     }
 
     @Test
@@ -240,21 +240,21 @@ public class MapperTest {
 
     @Test
     public void testSnResultMap() {
-        Group group = new Group("test", "this is a test");
-        SocialNetwork sn = new SocialNetwork();
+        final Group group = new Group("test", "this is a test");
+        final SocialNetwork sn = new SocialNetwork();
         sn.addAdmin(group);
-        ParticipationData part = new ParticipationData();
+        final ParticipationData part = new ParticipationData();
         part.setGroupsIsAdmin(sn.getAccessLists().getAdmins().getList());
-        UserBuddiesData budData = new UserBuddiesData();
-        ArrayList<User> buddies = new ArrayList<User>();
+        final UserBuddiesData budData = new UserBuddiesData();
+        final ArrayList<User> buddies = new ArrayList<User>();
         final User user = new User();
         user.setShortName("usertest");
         user.setUserGroup(new Group("test2", "this is test2"));
         buddies.add(user);
         budData.setBuddies(buddies);
-        SocialNetworkData snResult = new SocialNetworkData(SocialNetworkVisibility.onlymembers, sn, part,
+        final SocialNetworkData snResult = new SocialNetworkData(SocialNetworkVisibility.onlymembers, sn, part,
                 UserBuddiesVisibility.onlyyou, budData, new AccessRights(false, false, true), true, true);
-        SocialNetworkDataDTO map = mapper.map(snResult, SocialNetworkDataDTO.class);
+        final SocialNetworkDataDTO map = mapper.map(snResult, SocialNetworkDataDTO.class);
         assertNotNull(map);
         assertEquals(SocialNetworkVisibilityDTO.onlymembers, map.getSocialNetworkVisibility());
         assertEquals(UserBuddiesVisibilityDTO.onlyyou, map.getUserBuddiesVisibility());

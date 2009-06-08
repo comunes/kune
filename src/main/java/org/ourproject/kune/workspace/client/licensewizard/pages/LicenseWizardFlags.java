@@ -24,8 +24,8 @@ import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.gwtext.client.widgets.Panel;
 
 public class LicenseWizardFlags extends Panel {
@@ -35,7 +35,7 @@ public class LicenseWizardFlags extends Panel {
     private final IconLabel nonCulturalWorks;
     private final IconLabel nonCommercialReasons;
 
-    public LicenseWizardFlags(Images images, I18nTranslationService i18n) {
+    public LicenseWizardFlags(final Images images, final I18nTranslationService i18n) {
         copyleft = new IconLabel(images.copyleft(), i18n.t("This is a copyleft license."));
         nonCopyleft = new IconLabel(images.noCopyleft(), i18n.t("This is not a copyleft license."));
         culturalWorks = new IconLabel(images.info(), i18n.t("This is appropriate for free cultural works."));
@@ -53,33 +53,34 @@ public class LicenseWizardFlags extends Panel {
         add(nonCommercialReasons);
     }
 
-    public void setCopyleft(boolean isCopyleft) {
+    public void setCopyleft(final boolean isCopyleft) {
         copyleft.setVisible(isCopyleft);
         nonCopyleft.setVisible(!isCopyleft);
     }
 
-    public void setCulturalWorks(boolean isAppropiateForCulturalWorks) {
+    public void setCulturalWorks(final boolean isAppropiateForCulturalWorks) {
         culturalWorks.setVisible(isAppropiateForCulturalWorks);
         nonCulturalWorks.setVisible(!isAppropiateForCulturalWorks);
     }
 
-    public void setNonComercial(boolean isNonComercial) {
+    public void setNonComercial(final boolean isNonComercial) {
         nonCommercialReasons.setVisible(isNonComercial);
     }
 
-    public void setVisible(boolean isCopyleft, boolean isAppropiateForCulturalWorks, boolean isNonComercial) {
+    public void setVisible(final boolean isCopyleft, final boolean isAppropiateForCulturalWorks,
+            final boolean isNonComercial) {
         setCopyleft(isCopyleft);
         setCulturalWorks(isAppropiateForCulturalWorks);
         setNonComercial(isNonComercial);
     }
 
-    private void addLink(IconLabel label, final String url) {
-        label.addClickListener(new ClickListener() {
-            public void onClick(Widget sender) {
+    private void addLink(final IconLabel label, final String url) {
+        label.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
                 openWindow(url);
             }
 
-            private void openWindow(String url) {
+            private void openWindow(final String url) {
                 KuneWindowUtils.open(url);
             }
         });

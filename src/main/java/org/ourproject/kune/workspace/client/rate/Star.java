@@ -50,7 +50,7 @@ public class Star {
         return stars;
     }
 
-    private transient AbstractImagePrototype image;
+    private AbstractImagePrototype image;
 
     public Star() {
         image = IMG.starGrey();

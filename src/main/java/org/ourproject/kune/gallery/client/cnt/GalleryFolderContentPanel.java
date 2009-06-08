@@ -27,11 +27,11 @@ import org.ourproject.kune.platf.client.ui.BasicThumb;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class GalleryFolderContentPanel extends FoldableContentPanel implements GalleryFolderContentView {
 
@@ -40,8 +40,8 @@ public class GalleryFolderContentPanel extends FoldableContentPanel implements G
     private final StateManager stateManager;
     private final Session session;
 
-    public GalleryFolderContentPanel(WorkspaceSkeleton ws, I18nTranslationService i18n, StateManager stateManager,
-            Session session) {
+    public GalleryFolderContentPanel(final WorkspaceSkeleton ws, final I18nTranslationService i18n,
+            final StateManager stateManager, final Session session) {
         super(ws, i18n);
         this.stateManager = stateManager;
         this.session = session;
@@ -50,9 +50,9 @@ public class GalleryFolderContentPanel extends FoldableContentPanel implements G
     public void addThumb(final StateToken token, final String title, final String imgUrl) {
         DeferredCommand.addCommand(new Command() {
             public void execute() {
-                BasicThumb thumb = new BasicThumb(imgUrl, session.getImgCropsize(), title, TEXT_MAX_LENGHT, true,
-                        new ClickListener() {
-                            public void onClick(Widget sender) {
+                final BasicThumb thumb = new BasicThumb(imgUrl, session.getImgCropsize(), title, TEXT_MAX_LENGHT, true,
+                        new ClickHandler() {
+                            public void onClick(final ClickEvent event) {
                                 stateManager.gotoToken(token);
                             }
                         });

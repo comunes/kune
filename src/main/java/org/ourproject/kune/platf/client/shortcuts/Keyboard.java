@@ -2,6 +2,11 @@ package org.ourproject.kune.platf.client.shortcuts;
 
 public final class Keyboard {
 
+    public final static int MODIFIER_SHIFT = 1;
+    public final static int MODIFIER_CTRL = 2;
+    public final static int MODIFIER_ALT = 4;
+    public final static int MODIFIER_META = 8;
+
     @Deprecated
     public final static int KEY_F1 = 112; /* Browser's help */
     public final static int KEY_F2 = 113;

@@ -1,15 +1,5 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_DOWN;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_END;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_ESCAPE;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_HOME;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_LEFT;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_PAGEDOWN;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_PAGEUP;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_RIGHT;
-import static com.google.gwt.user.client.ui.KeyboardListener.KEY_UP;
-
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
@@ -31,6 +21,7 @@ import org.xwiki.gwt.dom.client.Selection;
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
@@ -38,6 +29,7 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.Widget;
 
+@SuppressWarnings("deprecation")
 public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
     private class EventListener implements FocusListener {
@@ -68,7 +60,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         basic = getBasicFormatter();
         extended = getExtendedFormatter();
         shortcutRegister = new ShortcutRegister();
-        EventListener listener = new EventListener();
+        final EventListener listener = new EventListener();
         addFocusListener(listener);
         setWidth("96%");
         setHeight("100%");
@@ -76,10 +68,10 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     }
 
     public void addActions(final ActionItemCollection<Object> actionItems) {
-        for (ActionItem<Object> actionItem : actionItems) {
-            ActionDescriptor<Object> action = actionItem.getAction();
+        for (final ActionItem<Object> actionItem : actionItems) {
+            final ActionDescriptor<Object> action = actionItem.getAction();
             if (action.hasShortcut() && action.mustBeAdded(null)) {
-                ShortcutDescriptor shortcut = action.getShortcut();
+                final ShortcutDescriptor shortcut = action.getShortcut();
                 shortcutRegister.put(shortcut, actionItem);
             }
         }
@@ -131,7 +123,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
 
     public LinkInfo getLinkInfoIfHref() {
         LinkInfo linkinfo = null;
-        org.xwiki.gwt.dom.client.Element selectedAnchor = selectAndGetLink();
+        final org.xwiki.gwt.dom.client.Element selectedAnchor = selectAndGetLink();
         if (selectedAnchor != null) {
             linkinfo = LinkInfo.parse(selectedAnchor);
         } else {
@@ -149,7 +141,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
         // "<br/>range 0 as html: "
         // + selection.getRangeAt(0).toHTML();
         // NotifyUser.info(info);
-        String info = "range count: " + getFstRange().getCommonAncestorContainer().getFirstChild().getNodeName();
+        final String info = "range count: " + getFstRange().getCommonAncestorContainer().getFirstChild().getNodeName();
         NotifyUser.info(info);
     }
 
@@ -162,14 +154,14 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     }
 
     public void insertBlockquote() {
-        DocumentFragment extracted = getFstRange().cloneContents();
+        final DocumentFragment extracted = getFstRange().cloneContents();
         // delete();
         insertHtml("<blockquote>" + extracted.getInnerHTML() + "</blockquote>");
         focus();
     }
 
     public void insertComment(final String author) {
-        String comment = null;
+        final String comment = null;
         createCommentAndSelectIt(author, comment);
     }
 
@@ -180,9 +172,9 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     }
 
     public void insertCommentUsingSelection(final String author) {
-        DocumentFragment extracted = getFstRange().cloneContents();
+        final DocumentFragment extracted = getFstRange().cloneContents();
         extended.delete();
-        String comment = extracted.getInnerText();
+        final String comment = extracted.getInnerText();
         createCommentAndSelectIt(author, comment);
         focus();
     }
@@ -277,8 +269,8 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
             super.onBrowserEvent(event);
             break;
         case Event.ONKEYDOWN:
-            ActionItem rtaActionItem = shortcutRegister.get(event);
-            ActionItem actionItem = rtaActionItem != null ? rtaActionItem : globalShortcutReg.get(event);
+            final ActionItem rtaActionItem = shortcutRegister.get(event);
+            final ActionItem actionItem = rtaActionItem != null ? rtaActionItem : globalShortcutReg.get(event);
             if (actionItem != null) {
                 updateStatus();
                 fireEdit();
@@ -345,7 +337,7 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     public void showLinkCtxMenu() {
         DeferredCommand.addCommand(new Command() {
             public void execute() {
-                org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(RTEditorPanel.this);
+                final org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(RTEditorPanel.this);
                 if (selectedAnchor != null) {
                     linkCtxMenu.show(RTEditorPanel.this.getAbsoluteLeft() + selectedAnchor.getAbsoluteLeft(),
                             RTEditorPanel.this.getAbsoluteTop() + selectedAnchor.getAbsoluteTop() + 20);
@@ -392,8 +384,8 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     }
 
     private void createCommentAndSelectIt(final String author, final String comment) {
-        Element commentEl = createCommentElement(author, comment);
-        Range innerCommentRange = getDocument().createRange();
+        final Element commentEl = createCommentElement(author, comment);
+        final Range innerCommentRange = getDocument().createRange();
         getFstRange().insertNode(commentEl);
         innerCommentRange.selectNodeContents(commentEl.getFirstChild());
         getSelection().addRange(innerCommentRange);
@@ -401,9 +393,9 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     }
 
     private Element createCommentElement(final String userName, final String insertComment) {
-        String time = i18n.formatDateWithLocale(new Date(), true);
-        Element span = getDocument().createSpanElement();
-        String comment = insertComment != null ? insertComment : i18n.t("type your comment here");
+        final String time = i18n.formatDateWithLocale(new Date(), true);
+        final Element span = getDocument().createSpanElement();
+        final String comment = insertComment != null ? insertComment : i18n.t("type your comment here");
         span.setInnerHTML("<em>" + comment + "</em> -" + userName + " " + time);
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
         // insertHtml("&nbsp;" + span.getString() + "&nbsp;");
@@ -419,9 +411,9 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     }
 
     private boolean isAnEditionKey(final int keyCode) {
-        if (keyCode != KEY_HOME && keyCode != KEY_END && keyCode != KEY_UP && keyCode != KEY_DOWN
-                && keyCode != KEY_LEFT && keyCode != KEY_RIGHT && keyCode != KEY_PAGEDOWN && keyCode != KEY_PAGEUP
-                && keyCode != KEY_ESCAPE) {
+        if (keyCode != KeyCodes.KEY_HOME && keyCode != KeyCodes.KEY_END && keyCode != KeyCodes.KEY_UP
+                && keyCode != KeyCodes.KEY_DOWN && keyCode != KeyCodes.KEY_LEFT && keyCode != KeyCodes.KEY_RIGHT
+                && keyCode != KeyCodes.KEY_PAGEDOWN && keyCode != KeyCodes.KEY_PAGEUP && keyCode != KeyCodes.KEY_ESCAPE) {
             return true;
         } else {
             return false;
@@ -429,9 +421,9 @@ public class RTEditorPanel extends RichTextArea implements RTEditorView {
     }
 
     private org.xwiki.gwt.dom.client.Element selectAndGetLink() {
-        org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(this);
+        final org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(this);
         if (selectedAnchor != null) {
-            Range range = getDocument().createRange();
+            final Range range = getDocument().createRange();
             range.selectNode(selectedAnchor);
             getSelection().addRange(range);
         }
