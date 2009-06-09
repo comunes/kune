@@ -49,7 +49,7 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
@@ -874,7 +874,7 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ContentEditor>(ContentEditor.class) {
             @Override
             public ContentEditor create() {
-                return new ContentEditor($(RTEditor.class), true, $(I18nTranslationService.class),
+                return new ContentEditor($(RTEditorNew.class), true, $(I18nTranslationService.class),
                         $(StateManager.class), $(SiteSignOutLink.class), $(DeferredCommandWrapper.class),
                         $(RTEImgResources.class), $(WorkspaceSkeleton.class), $(TimerWrapper.class),
                         new RTESavingEditorPanel(), $(EntityTitle.class));

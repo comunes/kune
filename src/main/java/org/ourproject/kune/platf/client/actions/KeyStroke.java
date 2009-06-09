@@ -175,13 +175,18 @@ public class KeyStroke {
      *             if event is null
      */
     public static KeyStroke getKeyStrokeForEvent(final Event event) {
+        final int eventModif = getKeyboardModifiers(event);
+        final int eventKeyCode = event.getKeyCode();
+        // Log.info("key: " + eventKeyCode + " modifier: " + eventModif);
         switch (DOM.eventGetType(event)) {
         case Event.ONKEYDOWN:
-            return getKeyStroke((char) event.getKeyCode(), VK_UNDEFINED, getKeyboardModifiers(event), false);
+            return getKeyStroke(CHAR_UNDEFINED, eventKeyCode, eventModif, false);
         case Event.ONKEYPRESS:
-            return getKeyStroke(CHAR_UNDEFINED, event.getKeyCode(), getKeyboardModifiers(event), false);
+            final char charac = (char) eventKeyCode;
+            return getKeyStroke(Character.isLowerCase(charac) ? Character.toUpperCase(charac) : charac, VK_UNDEFINED,
+                    eventModif, false);
         case Event.ONKEYUP:
-            return getKeyStroke(CHAR_UNDEFINED, event.getKeyCode(), getKeyboardModifiers(event), true);
+            return getKeyStroke(CHAR_UNDEFINED, eventKeyCode, eventModif, false);
         default:
             return null;
         }
@@ -345,7 +350,7 @@ public class KeyStroke {
     }
 
     @SuppressWarnings("deprecation")
-    public String getKeyText(final int keyCode) {
+    public String getKeyText() {
         switch (keyCode) {
         case KeyCodes.KEY_BACKSPACE:
             return translateKey("Backspace");
@@ -373,6 +378,8 @@ public class KeyStroke {
             return translateKey("Tab");
         case KeyCodes.KEY_UP:
             return translateKey("Up");
+        case Keyboard.KEY_SPACE:
+            return translateKey("Space");
         case Keyboard.KEY_F1:
         case Keyboard.KEY_F2:
         case Keyboard.KEY_F3:
@@ -431,8 +438,14 @@ public class KeyStroke {
         case Keyboard.KEY_BACK_SLASH:
         case Keyboard.KEY_CLOSE_BRACKET:
             return ("" + (char) keyCode).toUpperCase();
+
         default:
-            return "Unknown keyCode: 0x" + (keyCode < 0 ? "-" : "") + Integer.toHexString(Math.abs(keyCode));
+            final String charS = String.valueOf(keyChar);
+            if (charS == null) {
+                return "Unknown keyCode: 0x" + (keyCode < 0 ? "-" : "") + Integer.toHexString(Math.abs(keyCode));
+            } else {
+                return charS;
+            }
         }
     }
 
@@ -487,16 +500,13 @@ public class KeyStroke {
         if ((modifiers & Keyboard.MODIFIER_SHIFT) != 0) {
             s += translateKey("Shift") + "+";
         }
-        if ((modifiers & Event.BUTTON_LEFT) != 0) {
-            s += translateKey("Button1") + "+";
-        }
-        if ((modifiers & Event.BUTTON_RIGHT) != 0) {
-            s += translateKey("Button2") + "+";
-        }
-        if ((modifiers & Event.BUTTON_MIDDLE) != 0) {
-            s += translateKey("Button3") + "+";
-        }
-        s += getKeyText(keyCode) + ")";
+        /*
+         * if ((modifiers & Event.BUTTON_LEFT) != 0) { s +=
+         * translateKey("Button1") + "+"; } if ((modifiers & Event.BUTTON_RIGHT)
+         * != 0) { s += translateKey("Button2") + "+"; } if ((modifiers &
+         * Event.BUTTON_MIDDLE) != 0) { s += translateKey("Button3") + "+"; }
+         */
+        s += getKeyText() + ")";
         return s;
     }
 

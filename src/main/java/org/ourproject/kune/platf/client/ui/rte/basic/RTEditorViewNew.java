@@ -1,13 +1,14 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionCollection;
+import org.ourproject.kune.platf.client.actions.InputMap;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 
 public interface RTEditorViewNew extends View {
 
-    void addActions(GuiActionCollection actions);
+    void addActions(GuiActionDescCollection actions);
 
     void adjustSize(int height);
 
@@ -33,7 +34,11 @@ public interface RTEditorViewNew extends View {
 
     String getSelectionText();
 
+    View getSndBar();
+
     String getText();
+
+    View getTopBar();
 
     void hideLinkCtxMenu();
 
@@ -106,6 +111,8 @@ public interface RTEditorViewNew extends View {
     void setForeColor(String color);
 
     void setHTML(String html);
+
+    void setInputMap(InputMap inputMap);
 
     void setText(String text);
 

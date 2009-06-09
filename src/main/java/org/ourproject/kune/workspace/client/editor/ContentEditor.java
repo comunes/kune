@@ -1,15 +1,19 @@
 package org.ourproject.kune.workspace.client.editor;
 
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_ICON;
+import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_TEXT;
+
+import org.ourproject.kune.platf.client.actions.Action;
+import org.ourproject.kune.platf.client.actions.ActionEvent;
+import org.ourproject.kune.platf.client.actions.KeyStroke;
+import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
+import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
-import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.AbstractToolbar;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
+import org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanelNew;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorView;
@@ -22,28 +26,37 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.event.ContainerListenerAdapter;
 
 public class ContentEditor extends RTESavingEditorPresenter {
 
+    public class RenameAction extends AbstractRTEAction {
+        public RenameAction(final String text, final String tooltip, final ImageResource icon) {
+            super(text, tooltip, icon);
+        }
+
+        public void actionPerformed(final ActionEvent actionEvent) {
+            entityTitle.edit();
+        }
+    }
+
     private final WorkspaceSkeleton ws;
     private final VerticalPanel vp;
-    private final RTEditor basicEditor;
-    private final RTEditorPanel editorPanel;
-    private final AbstractToolbar topbar;
+    private final RTEditorNew basicEditor;
+    private final RTEditorPanelNew editorPanel;
+    private final ComplexToolbar topbar;
     private final SiteSignOutLink siteSignOutLink;
     private final I18nTranslationService i18n;
     private final EntityTitle entityTitle;
-    private final String fileMenuTitle;
-    private final AbstractToolbar sndbar;
+    private final ComplexToolbar sndbar;
 
-    public ContentEditor(final RTEditor editor, final boolean autoSave, final I18nTranslationService i18n,
+    public ContentEditor(final RTEditorNew editor, final boolean autoSave, final I18nTranslationService i18n,
             final StateManager stateManager, final SiteSignOutLink siteSignOutLink,
             final DeferredCommandWrapper deferredCommandWrapper, final RTEImgResources imgResources,
             final WorkspaceSkeleton ws, final TimerWrapper timer, final RTESavingEditorView view,
@@ -54,7 +67,6 @@ public class ContentEditor extends RTESavingEditorPresenter {
         this.entityTitle = entityTitle;
         super.init(view);
         this.ws = ws;
-        fileMenuTitle = i18n.t(RTESavingEditorPresenter.FILE_DEF_MENU_OPTION);
         Window.addWindowClosingHandler(new ClosingHandler() {
             public void onWindowClosing(final ClosingEvent event) {
                 if (isSavePending()) {
@@ -66,8 +78,10 @@ public class ContentEditor extends RTESavingEditorPresenter {
         vp = new VerticalPanel();
         basicEditor = super.getBasicEditor();
         addContentActions();
-        vp.add((Widget) ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar());
-        editorPanel = (RTEditorPanel) basicEditor.getEditorArea();
+        editorPanel = (RTEditorPanelNew) basicEditor.getEditorArea();
+        topbar = ((ComplexToolbar) basicEditor.getTopBar());
+        sndbar = ((ComplexToolbar) basicEditor.getSndBar());
+        vp.add(sndbar);
         vp.add(editorPanel);
         basicEditor.setExtended(true);
         vp.setWidth("100%");
@@ -78,15 +92,14 @@ public class ContentEditor extends RTESavingEditorPresenter {
                 adjHeight(adjHeight);
             }
         });
-        topbar = ((ActionToolbarPanel<Object>) basicEditor.getTopBar().getView()).getToolbar();
-        sndbar = ((ActionToolbarPanel<Object>) basicEditor.getSndBar().getView()).getToolbar();
+
     }
 
     @Override
     public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
         final Toolbar contentTopBar = ws.getEntityWorkspace().getContentTopBar();
         contentTopBar.removeAll();
-        contentTopBar.add((Widget) topbar);
+        contentTopBar.add(topbar);
         ws.getEntityWorkspace().setContent(vp);
         super.edit(html, onSave, onEditCancelled);
         adjHeight(ws.getEntityWorkspace().getContentHeight());
@@ -94,7 +107,7 @@ public class ContentEditor extends RTESavingEditorPresenter {
     }
 
     public void setFileMenuTitle(final String fileMenuTitleNew) {
-        basicEditor.getTopBar().setParentMenuTitle(RTEditor.TOPBAR, fileMenuTitle, null, fileMenuTitleNew);
+        basicEditor.getFileMenu().setText(fileMenuTitleNew);
     }
 
     @Override
@@ -105,17 +118,13 @@ public class ContentEditor extends RTESavingEditorPresenter {
     }
 
     private void addContentActions() {
-        final ActionToolbarMenuDescriptor<Object> rename = new ActionToolbarMenuDescriptor<Object>(AccessRolDTO.Editor,
-                RTEditor.TOPBAR, new Listener0() {
-                    public void onEvent() {
-                        entityTitle.edit();
-                        // basicEditor.setFocus(false);
-                    }
-                });
-        rename.setParentMenuTitle(fileMenuTitle);
-        rename.setShortcut(new ShortcutDescriptor(false, Keyboard.KEY_F2, i18n.tWithNT("F2", "The F2 Function key")));
-        rename.setTextDescription(i18n.t("Rename"));
-        basicEditor.addAction(rename);
+        final RenameAction renameAction = new RenameAction(i18n.t("Rename"), NO_TEXT, NO_ICON);
+        final MenuItemDescriptor renameItem = new MenuItemDescriptor(basicEditor.getFileMenu(), renameAction);
+        renameItem.setLocation(RTEditorNew.TOPBAR);
+        final KeyStroke key = KeyStroke.getKeyStroke(Keyboard.KEY_F2, 0);
+        renameAction.putValue(Action.ACCELERATOR_KEY, key);
+        basicEditor.setActionShortcut(key, renameAction);
+        basicEditor.addAction(renameItem);
     }
 
     private void adjHeight(final int height) {

@@ -28,6 +28,7 @@ public class ActionManager {
     public ActionManager() {
     }
 
+    @Deprecated
     public void doAction(final ActionItem<?> actionItem) {
         final ActionDescriptor<?> action = actionItem.getAction();
         final Object item = actionItem.getItem();

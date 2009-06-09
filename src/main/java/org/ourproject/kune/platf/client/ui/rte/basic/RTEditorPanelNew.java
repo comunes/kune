@@ -2,16 +2,17 @@ package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.actions.ActionDescriptor;
-import org.ourproject.kune.platf.client.actions.ActionItem;
-import org.ourproject.kune.platf.client.actions.ActionItemCollection;
-import org.ourproject.kune.platf.client.actions.ActionManager;
+import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.AbstractComplexGuiItem;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionCollection;
+import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
+import org.ourproject.kune.platf.client.errors.UIException;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
-import org.ourproject.kune.platf.client.shortcuts.ShortcutRegister;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.BasicFormatter;
@@ -25,7 +26,6 @@ import org.xwiki.gwt.dom.client.Range;
 import org.xwiki.gwt.dom.client.Selection;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -37,71 +37,55 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Event;
 
-public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditorViewNew {
+public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditorViewNew, FocusHandler, BlurHandler {
 
-    private class EventListener implements FocusHandler, BlurHandler {
-        public void onBlur(final BlurEvent event) {
-            presenter.onLostFocus();
-        }
-
-        public void onFocus(final FocusEvent event) {
-            presenter.onEditorFocus();
-        }
-    }
     private final I18nUITranslationService i18n;
     private final BasicFormatter basic;
     private final ExtendedFormatter extended;
-    private final RTEditorPresenter presenter;
-    private final ActionManager actionManager;
-    private final ShortcutRegister shortcutRegister;
+    private final RTEditorPresenterNew presenter;
     private final GlobalShortcutRegister globalShortcutReg;
     private final RTELinkPopup linkCtxMenu;
     private final RichTextArea rta;
+    private final ComplexToolbar topBar;
+    private final ComplexToolbar sndBar;
 
-    public RTEditorPanelNew(final RTEditorPresenter presenter, final I18nUITranslationService i18n,
-            final ActionManager actionManager, final GlobalShortcutRegister globalShortcutReg) {
+    public RTEditorPanelNew(final RTEditorPresenterNew presenter, final I18nUITranslationService i18n,
+            final GlobalShortcutRegister globalShortcutReg, final GuiBindingsRegister bindReg) {
         super();
         this.presenter = presenter;
         this.i18n = i18n;
-        this.actionManager = actionManager;
         this.globalShortcutReg = globalShortcutReg;
         rta = new RichTextArea();
         basic = rta.getBasicFormatter();
         extended = rta.getExtendedFormatter();
-        shortcutRegister = new ShortcutRegister();
-        final EventListener handler = new EventListener();
-        rta.addFocusHandler(handler);
-        rta.addBlurHandler(handler);
-        setWidth("96%");
-        setHeight("100%");
+        topBar = new ComplexToolbar(bindReg);
+        sndBar = new ComplexToolbar(bindReg);
+        sndBar.setNormalStyle();
+        rta.addFocusHandler(this);
+        rta.addBlurHandler(this);
         linkCtxMenu = new RTELinkPopup();
         initWidget(rta);
+        setWidth("96%");
+        setHeight("100%");
     }
 
-    public void addActions(final ActionItemCollection<Object> actionItems) {
-        for (final ActionItem<Object> actionItem : actionItems) {
-            final ActionDescriptor<Object> action = actionItem.getAction();
-            if (action.hasShortcut() && action.mustBeAdded(null)) {
-                final ShortcutDescriptor shortcut = action.getShortcut();
-                shortcutRegister.put(shortcut, actionItem);
+    public void addActions(final GuiActionDescCollection items) {
+        super.addAll(items);
+        for (final GuiActionDescrip item : items) {
+            final String location = item.getLocation();
+            if (location == null) {
+                throw new UIException("Unknown location in action item: " + item);
+            }
+            if (location.equals(RTEditorNew.TOPBAR)) {
+                topBar.add(item);
+            } else if (location.equals(RTEditorNew.SNDBAR)) {
+                sndBar.add(item);
+            } else if (location.equals(RTEditorNew.LINKCTX)) {
+                linkCtxMenu.add(item);
+            } else {
+                throw new UIException("Unknown location in action item: " + item);
             }
         }
-    }
-
-    public void addActions(final GuiActionCollection actions) {
-        super.addAll(actions);
-    }
-
-    public void addCtxAction(final ActionItem<Object> actionItem) {
-        linkCtxMenu.addAction(actionItem, new Listener0() {
-            public void onEvent() {
-                DeferredCommand.addCommand(new Command() {
-                    public void execute() {
-                        actionManager.doAction(actionItem);
-                    }
-                });
-            }
-        });
     }
 
     public void adjustSize(final int height) {
@@ -168,8 +152,16 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
         return getFstRange().cloneContents().getInnerText();
     }
 
+    public View getSndBar() {
+        return sndBar;
+    }
+
     public String getText() {
         return rta.getText();
+    }
+
+    public View getTopBar() {
+        return topBar;
     }
 
     public void hideLinkCtxMenu() {
@@ -281,7 +273,10 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
         extended.leftIndent();
     }
 
-    @SuppressWarnings("unchecked")
+    public void onBlur(final BlurEvent event) {
+        presenter.onLostFocus();
+    }
+
     @Override
     public void onBrowserEvent(final Event event) {
         switch (DOM.eventGetType(event)) {
@@ -290,10 +285,14 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
             updateLinkInfo();
             super.onBrowserEvent(event);
             break;
-        case Event.ONKEYDOWN:
-            final ActionItem rtaActionItem = shortcutRegister.get(event);
-            final ActionItem actionItem = rtaActionItem == null ? globalShortcutReg.get(event) : rtaActionItem;
+        case Event.ONKEYPRESS:
+            final AbstractAction rtaActionItem = super.getAction(event);
+            // FIXME
+            // final Action actionItem = rtaActionItem == null ?
+            // globalShortcutReg.get(event) : rtaActionItem;
+            final AbstractAction actionItem = rtaActionItem == null ? null : rtaActionItem;
             if (actionItem == null) {
+                Log.warn("rte action key null");
                 super.onBrowserEvent(event);
                 updateStatus();
                 updateLinkInfo();
@@ -305,7 +304,7 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
                 fireEdit();
                 event.stopPropagation();
                 event.preventDefault();
-                actionManager.doAction(actionItem);
+                actionItem.actionPerformed(new ActionEvent(this, event));
                 updateStatus();
             }
             break;
@@ -314,6 +313,10 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
             super.onBrowserEvent(event);
             updateStatus();
         }
+    }
+
+    public void onFocus(final FocusEvent event) {
+        presenter.onEditorFocus();
     }
 
     public void paste() {

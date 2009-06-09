@@ -5,20 +5,21 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.Action;
 
 /**
  * The Class AbstractUIActionDescriptor.
  */
-public abstract class AbstractGuiActionDescrip {
+public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
 
     protected static final int NO_POSITION = -1;
     protected static final View NO_VIEW = null;
-    protected static final AbstractGuiActionDescrip NO_PARENT = null;
+    protected static final GuiActionDescrip NO_PARENT = null;
 
     private GuiAddCondition addCondition = new GuiAddConditionAdapter();
     private GuiVisibleCondition visibleCondition = new GuiVisibleConditionAdapter();
 
-    protected AbstractGuiActionDescrip parent;
+    protected GuiActionDescrip parent;
     private final Map<String, Object> store;
 
     /** The action. */
@@ -26,15 +27,6 @@ public abstract class AbstractGuiActionDescrip {
 
     /** The position where the item will be inserted. */
     private int position;
-
-    /** If the action must be confirmed. */
-    private boolean confirmRequired;
-
-    /** The confirmation dialog title. */
-    private String confirmationTitle;
-
-    /** The confirmation dialog text. */
-    private String confirmationText;
 
     /** The item location. */
     private String location;
@@ -46,7 +38,7 @@ public abstract class AbstractGuiActionDescrip {
      * @param action
      *            the action
      */
-    public AbstractGuiActionDescrip(final AbstractAction action) {
+    public GuiActionDescrip(final AbstractAction action) {
         this.action = action;
         position = NO_POSITION;
         parent = NO_PARENT;
@@ -55,24 +47,6 @@ public abstract class AbstractGuiActionDescrip {
 
     public GuiAddCondition getAddCondition() {
         return addCondition;
-    }
-
-    /**
-     * Gets the dialog confirmation text.
-     * 
-     * @return the confirmation text
-     */
-    public String getConfirmationText() {
-        return confirmationText;
-    }
-
-    /**
-     * Gets the dialog confirmation title.
-     * 
-     * @return the confirmation title
-     */
-    public String getConfirmationTitle() {
-        return confirmationTitle;
     }
 
     /**
@@ -85,7 +59,7 @@ public abstract class AbstractGuiActionDescrip {
         return location;
     }
 
-    public AbstractGuiActionDescrip getParent() {
+    public GuiActionDescrip getParent() {
         return parent;
     }
 
@@ -125,15 +99,6 @@ public abstract class AbstractGuiActionDescrip {
     }
 
     /**
-     * Checks if is confirm required previous to do the action.
-     * 
-     * @return true, if is confirm required
-     */
-    public boolean isConfirmRequired() {
-        return confirmRequired;
-    }
-
-    /**
      * Sets the value associated with the specified key.
      * 
      * Any existing value associated with the key will be overwritten.
@@ -152,36 +117,6 @@ public abstract class AbstractGuiActionDescrip {
     }
 
     /**
-     * Sets the confirmation text.
-     * 
-     * @param confirmationText
-     *            the new confirmation text
-     */
-    public void setConfirmationText(final String confirmationText) {
-        this.confirmationText = confirmationText;
-    }
-
-    /**
-     * Sets the confirmation title.
-     * 
-     * @param confirmationTitle
-     *            the new confirmation title
-     */
-    public void setConfirmationTitle(final String confirmationTitle) {
-        this.confirmationTitle = confirmationTitle;
-    }
-
-    /**
-     * Sets the confirm required.
-     * 
-     * @param isConfirmRequired
-     *            the new confirm required
-     */
-    public void setConfirmRequired(final boolean isConfirmRequired) {
-        this.confirmRequired = isConfirmRequired;
-    }
-
-    /**
      * If we have several toolbars, we can group with the "location" string key
      * actions that must be in the same location (ex: top bar, bottom bar, and
      * so on).
@@ -193,7 +128,7 @@ public abstract class AbstractGuiActionDescrip {
         this.location = location;
     }
 
-    public void setParent(final AbstractGuiActionDescrip parent) {
+    public void setParent(final GuiActionDescrip parent) {
         this.parent = parent;
     }
 
@@ -210,6 +145,14 @@ public abstract class AbstractGuiActionDescrip {
 
     public void setVisibleCondition(final GuiVisibleCondition visibleCondition) {
         this.visibleCondition = visibleCondition;
+    }
+
+    @Override
+    public String toString() {
+        final String name = (String) action.getValue(Action.NAME);
+        final String tooltip = (String) action.getValue(Action.SHORT_DESCRIPTION);
+        return "[GuiActionDescrip: " + action.getClass() + (name == null ? "" : " " + name)
+                + (tooltip == null ? "" : " " + tooltip) + "]";
     }
 
 }

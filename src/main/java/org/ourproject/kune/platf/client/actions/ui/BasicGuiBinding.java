@@ -11,5 +11,6 @@ public class BasicGuiBinding {
         bindings.register(MenuSeparatorDescriptor.class, new MenuSeparatorBinding());
         bindings.register(ButtonDescriptor.class, new ButtonBinding());
         bindings.register(PushButtonDescriptor.class, new PushButtonBinding());
+        bindings.register(ToolbarSeparatorDescriptor.class, new ToolbarSeparatorBinding());
     }
 }

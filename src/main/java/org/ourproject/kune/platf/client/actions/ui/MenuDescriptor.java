@@ -5,13 +5,15 @@ import org.ourproject.kune.platf.client.actions.Action;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
 
-public class MenuDescriptor extends AbstractGuiActionDescrip {
+public class MenuDescriptor extends GuiActionDescrip {
+
+    public static final String MENU_HIDE = "hidemenu";
 
     public MenuDescriptor(final AbstractAction action) {
         this(NO_PARENT, action);
     }
 
-    public MenuDescriptor(final AbstractGuiActionDescrip parent, final AbstractAction action) {
+    public MenuDescriptor(final GuiActionDescrip parent, final AbstractAction action) {
         super(action);
         setParent(parent);
     }
@@ -31,6 +33,10 @@ public class MenuDescriptor extends AbstractGuiActionDescrip {
     @Override
     public Class<?> getType() {
         return MenuDescriptor.class;
+    }
+
+    public void hide() {
+        action.putValue(MENU_HIDE, true);
     }
 
     public void setText(final String text) {

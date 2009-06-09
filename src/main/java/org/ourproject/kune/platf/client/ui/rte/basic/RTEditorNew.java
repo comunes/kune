@@ -1,9 +1,10 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.actions.ui.AbstractGuiActionDescrip;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionCollection;
+import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.KeyStroke;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiAddCondition;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 
@@ -15,9 +16,9 @@ public interface RTEditorNew {
     String SNDBAR = "rte-sndbar";
     String LINKCTX = "rte-linkctx";
 
-    void addAction(AbstractGuiActionDescrip action);
+    void addAction(GuiActionDescrip action);
 
-    void addActions(GuiActionCollection actions);
+    void addActions(GuiActionDescCollection actions);
 
     void addOnEditListener(Listener0 listener);
 
@@ -33,6 +34,8 @@ public interface RTEditorNew {
 
     GuiAddCondition getExtendedAddCondition();
 
+    MenuDescriptor getFileMenu();
+
     MenuDescriptor getFormatMenu();
 
     String getHtml();
@@ -41,13 +44,17 @@ public interface RTEditorNew {
 
     MenuDescriptor getLinkCtxMenu();
 
-    ActionToolbar<Object> getSndBar();
+    View getSndBar();
 
     String getText();
 
-    ActionToolbar<Object> getTopBar();
+    View getTopBar();
 
     void reset();
+
+    void setActionShortcut(KeyStroke key, AbstractAction action);
+
+    void setActionShortcut(KeyStroke key, AbstractAction mainAction, AbstractAction... actions);
 
     void setExtended(boolean extended);
 

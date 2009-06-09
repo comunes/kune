@@ -9,7 +9,7 @@ public class SubMenuGui extends AbstractMenuGui {
 
     private final MenuItem item;
 
-    public SubMenuGui(final AbstractGuiActionDescrip descriptor) {
+    public SubMenuGui(final GuiActionDescrip descriptor) {
         super();
         item = new MenuItem();
         item.setMenu(menu);

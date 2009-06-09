@@ -60,8 +60,11 @@ import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionSndToolbar;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionTopToolbar;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanelNew;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenter;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenterNew;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogPresenter;
@@ -348,10 +351,22 @@ public class PlatformModule extends AbstractModule {
                 presenter.init(panel);
                 return presenter;
             }
+        },new Factory<RTEditorNew>(RTEditorNew.class) {
+            @Override
+            public RTEditorNew create() {
+                final RTEditorPresenterNew presenter = new RTEditorPresenterNew($(I18nTranslationService.class),
+                        $(Session.class),  $(RTEImgResources.class), $$(InsertLinkDialog.class),
+                        $$(ColorWebSafePalette.class), $$(EditHtmlDialog.class), $$(InsertImageDialog.class),
+                        $$(InsertMediaDialog.class),   $$(InsertTableDialog.class), $$(InsertSpecialCharDialog.class), $(DeferredCommandWrapper.class));
+                final RTEditorPanelNew panel = new RTEditorPanelNew(presenter, $(I18nUITranslationService.class),
+                         $(GlobalShortcutRegister.class), $(GuiBindingsRegister.class));
+                presenter.init(panel);
+                return presenter;
+            }
         }, new Factory<RTESavingEditor>(RTESavingEditor.class) {
             @Override
             public RTESavingEditor create() {
-                final RTESavingEditorPresenter presenter = new RTESavingEditorPresenter($(RTEditor.class), true,
+                final RTESavingEditorPresenter presenter = new RTESavingEditorPresenter($(RTEditorNew.class), true,
                         $(I18nTranslationService.class), $(StateManager.class), $(DeferredCommandWrapper.class),
                         $(RTEImgResources.class), $(TimerWrapper.class));
                 final RTESavingEditorPanel panel = new RTESavingEditorPanel();

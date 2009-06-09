@@ -1006,3 +1006,17 @@ background-color
   background-color: #FFF;
   border: 1px solid gray;
 }
+
+#k-mshortcut {
+    position: absolute;
+    right: 10px;
+}
+
+#k-mshortcut-hidden {
+  visibility: hidden;
+}
+
+#k-mshortcut a {
+    text-decoration: none;
+    color: black;
+}

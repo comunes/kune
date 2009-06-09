@@ -7,12 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.api.VerificationMode;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
+import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
@@ -29,25 +29,23 @@ public class RTESavingEditorPresenterTest {
     private MockedListener0 cancelListener;
     private StateManager stateManager;
     private DeferredCommandWrapper deferredCommandWrapper;
-    private RTEditor rteEditor;
+    private RTEditorNew rteEditor;
     private TimerWrapper timer;
-    @SuppressWarnings("unchecked")
-    private ActionToolbar sndbar;
+    private ComplexToolbar sndbar;
     private RTESavingEditorView view;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void createObjects() {
-        I18nTranslationService i18n = new I18nTranslationServiceMocked();
+        final I18nTranslationService i18n = new I18nTranslationServiceMocked();
         new Resources(i18n);
         stateManager = Mockito.mock(StateManager.class);
         deferredCommandWrapper = Mockito.mock(DeferredCommandWrapper.class);
-        rteEditor = Mockito.mock(RTEditor.class);
-        RTEImgResources imgResources = Mockito.mock(RTEImgResources.class);
-        ImageResource imageResource = Mockito.mock(ImageResource.class);
+        rteEditor = Mockito.mock(RTEditorNew.class);
+        final RTEImgResources imgResources = Mockito.mock(RTEImgResources.class);
+        final ImageResource imageResource = Mockito.mock(ImageResource.class);
         Mockito.when(imageResource.getName()).thenReturn("save");
         Mockito.when(imgResources.save()).thenReturn(imageResource);
-        sndbar = Mockito.mock(ActionToolbar.class);
+        sndbar = Mockito.mock(ComplexToolbar.class);
         Mockito.when(rteEditor.getSndBar()).thenReturn(sndbar);
         timer = Mockito.mock(TimerWrapper.class);
         view = Mockito.mock(RTESavingEditorView.class);
@@ -61,7 +59,7 @@ public class RTESavingEditorPresenterTest {
     @Test
     public void historyChangeWithoutPendingMustAccept() {
         presenter.edit("Text to edit", saveListener, cancelListener);
-        boolean change = presenter.beforeTokenChange();
+        final boolean change = presenter.beforeTokenChange();
         assertTrue(change);
         verifyAskConfirmationCalled(Mockito.never());
         Mockito.verify(deferredCommandWrapper, Mockito.times(1)).addCommand((Listener0) Mockito.anyObject());
@@ -95,7 +93,7 @@ public class RTESavingEditorPresenterTest {
     @Test
     public void initialEditWithEditionAndSave() {
         presenter.edit("Text to edit", saveListener, cancelListener);
-        String textModified = "Text modified";
+        final String textModified = "Text modified";
         Mockito.when(rteEditor.getHtml()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onDoSave();
@@ -116,7 +114,7 @@ public class RTESavingEditorPresenterTest {
     @Test
     public void testSavePendingAndCancel() {
         presenter.edit("Text to edit", saveListener, cancelListener);
-        String textModified = "Text modified";
+        final String textModified = "Text modified";
         Mockito.when(rteEditor.getHtml()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onCancel();
@@ -128,7 +126,7 @@ public class RTESavingEditorPresenterTest {
     @Test
     public void testSavePendingAndSaveFails() {
         presenter.edit("Text to edit", saveListener, cancelListener);
-        String textModified = "Text modified";
+        final String textModified = "Text modified";
         Mockito.when(rteEditor.getHtml()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onDoSave();
@@ -139,16 +137,15 @@ public class RTESavingEditorPresenterTest {
         assertTrue(saveListener.isCalled(2));
     }
 
-    @SuppressWarnings("unchecked")
     private void checkSaveBtnDisabled() {
-        Mockito.verify(sndbar, Mockito.times(1)).setButtonEnable(presenter.saveBtn, false);
+        Mockito.verify(presenter.saveAction, Mockito.times(1)).setEnabled(false);
     }
 
     private String editAndChangeHistoryToken() {
         presenter.edit("Text to edit", saveListener, cancelListener);
         presenter.onEdit();
-        String newToken = "somegroup";
-        boolean change = presenter.beforeTokenChange();
+        final String newToken = "somegroup";
+        final boolean change = presenter.beforeTokenChange();
         assertFalse(change);
         verifyAskConfirmationCalled(Mockito.times(1));
         return newToken;

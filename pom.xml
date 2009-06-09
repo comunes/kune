@@ -80,7 +80,7 @@
     <dependency>
       <groupId>com.gwtext</groupId>
       <artifactId>gwtext</artifactId>
-      <version>2.0.5</version>
+      <version>2.0.6-r1872</version>
     </dependency>
     <dependency>
       <groupId>com.gwtextux</groupId>

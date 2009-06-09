@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import org.ourproject.kune.platf.client.actions.ActionItem;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.AbstractPopupPanel;
@@ -30,6 +31,11 @@ public class RTELinkPopup extends AbstractPopupPanel {
         hpanel.add(close);
     }
 
+    public void add(final GuiActionDescrip item) {
+        // TODO
+    }
+
+    @Deprecated
     public void addAction(final ActionItem<Object> item, final Listener0 onClick) {
         final Label actionLabel = new Label();
         actionLabel.setText(item.getAction().getText());

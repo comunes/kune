@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.actions.ui;
 
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 
-public class MenuItemDescriptor extends AbstractGuiActionDescrip {
+public class MenuItemDescriptor extends GuiActionDescrip {
 
     public MenuItemDescriptor(final MenuDescriptor parent, final AbstractAction action) {
         super(action);

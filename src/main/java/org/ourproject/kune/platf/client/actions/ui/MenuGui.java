@@ -1,5 +1,7 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
+import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
+import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
 import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
@@ -9,12 +11,20 @@ public class MenuGui extends AbstractMenuGui {
 
     private final ToolbarButton button;
 
-    public MenuGui(final AbstractGuiActionDescrip descriptor) {
+    public MenuGui(final GuiActionDescrip descriptor) {
         super();
         button = new ToolbarButton();
         button.setMenu(menu);
         setAction(descriptor.action);
         initWidget(button);
+        descriptor.action.addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(final PropertyChangeEvent e) {
+                if (e.getPropertyName().equals(MenuDescriptor.MENU_HIDE) && e.getNewValue().equals(true)) {
+                    menu.hide(true);
+                    descriptor.action.putValue(MenuDescriptor.MENU_HIDE, false);
+                }
+            }
+        });
     }
 
     public void add(final SubMenuGui submenu) {
@@ -37,7 +47,7 @@ public class MenuGui extends AbstractMenuGui {
     @Override
     public void setIcon(final ImageResource imageResource) {
         if (imageResource != null) {
-            button.setIcon(ImgConstants.PATH_PREFIX + imageResource.getName());
+            button.setIcon(ImgConstants.PATH_PREFIX + imageResource.getName() + ".png");
         }
     }
 

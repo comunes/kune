@@ -7,8 +7,7 @@ import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.menu.BaseItem;
@@ -79,13 +78,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
             if (key == null) {
                 item.setText(text);
             } else {
-                final FlowPanel fpanel = new FlowPanel();
-                fpanel.setWidth("100%");
-                fpanel.add(new Label(text));
-                final Label keyLabel = new Label(key.toString());
-                keyLabel.addStyleName("kune-floatright");
-                fpanel.add(keyLabel);
-                item.setText(DOM.getInnerHTML(fpanel.getElement()));
+                item.setText(text + createShortCut(key, "k-mshortcut-hidden") + createShortCut(key, "k-mshortcut"));
             }
         }
     }
@@ -101,5 +94,12 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
         final CheckItem checkItem = new CheckItem();
         checkItem.setChecked(((MenuCheckItemDescriptor) descriptor).isChecked());
         return checkItem;
+    }
+
+    private String createShortCut(final KeyStroke key, final String style) {
+        final Element keyLabel = DOM.createSpan();
+        keyLabel.setId(style);
+        keyLabel.setInnerText(key.toString());
+        return keyLabel.getString();
     }
 }

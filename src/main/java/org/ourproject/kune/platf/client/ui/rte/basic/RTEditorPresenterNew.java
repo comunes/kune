@@ -1,15 +1,20 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
+import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_ICON;
+import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_TEXT;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.InputMap;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.actions.ui.AbstractGuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionCollection;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiAddCondition;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
@@ -43,28 +48,6 @@ import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 
 public class RTEditorPresenterNew implements RTEditorNew {
-
-    public abstract class AbstractRTEAction extends AbstractAction {
-
-        public AbstractRTEAction() {
-            super();
-        }
-
-        public AbstractRTEAction(final String text) {
-            this(text, null, null);
-        }
-
-        public AbstractRTEAction(final String text, final ImageResource icon) {
-            this(text, null, icon);
-        }
-
-        public AbstractRTEAction(final String text, final String tooltip, final ImageResource icon) {
-            super();
-            super.putValue(Action.NAME, text);
-            super.putValue(Action.SHORT_DESCRIPTION, tooltip);
-            super.putValue(Action.SMALL_ICON, icon);
-        }
-    }
 
     public class BackgroundColorAction extends AbstractRTEAction {
 
@@ -641,16 +624,11 @@ public class RTEditorPresenterNew implements RTEditorNew {
             RichTextArea.FontSize.MEDIUM, RichTextArea.FontSize.LARGE, RichTextArea.FontSize.X_LARGE,
             RichTextArea.FontSize.XX_LARGE };
 
-    private static final String NONE = null;
-    private static final ImageResource NO_ICON = null;
-
     private RTEditorViewNew view;
     private boolean extended;
     private final I18nTranslationService i18n;
     private final Session session;
     private final RTEImgResources imgResources;
-    private final RTEActionTopToolbar topBar;
-    private final RTEActionSndToolbar sndBar;
     private final Event0 onEdit;
     private final DeferredCommandWrapper deferred;
     private final Provider<ColorWebSafePalette> paletteProvider;
@@ -678,20 +656,21 @@ public class RTEditorPresenterNew implements RTEditorNew {
     private MenuDescriptor insertMenu;
     private MenuDescriptor formatMenu;
     private MenuDescriptor linkCtxMenu;
-    private GuiActionCollection actions;
+    private GuiActionDescCollection actions;
     private MenuDescriptor fontMenu;
     private MenuDescriptor fontSizeMenu;
+    private MenuDescriptor fileMenu;
+    private final List<MenuDescriptor> menus;
+    private boolean attached;
 
     public RTEditorPresenterNew(final I18nTranslationService i18n, final Session session,
-            final RTEActionTopToolbar topBar, final RTEActionSndToolbar sndBar, final RTEImgResources imgResources,
-            final Provider<InsertLinkDialog> insLinkDialog, final Provider<ColorWebSafePalette> palette,
-            final Provider<EditHtmlDialog> editHtmlDialog, final Provider<InsertImageDialog> insertImageDialog,
-            final Provider<InsertMediaDialog> insertMediaDialog, final Provider<InsertTableDialog> insertTableDialog,
-            final Provider<InsertSpecialCharDialog> insCharDialog, final DeferredCommandWrapper deferred) {
+            final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
+            final Provider<ColorWebSafePalette> palette, final Provider<EditHtmlDialog> editHtmlDialog,
+            final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
+            final Provider<InsertTableDialog> insertTableDialog, final Provider<InsertSpecialCharDialog> insCharDialog,
+            final DeferredCommandWrapper deferred) {
         this.i18n = i18n;
         this.session = session;
-        this.topBar = topBar;
-        this.sndBar = sndBar;
         this.insLinkDialogPv = insLinkDialog;
         this.paletteProvider = palette;
         this.editHtmlDialogPv = editHtmlDialog;
@@ -701,9 +680,8 @@ public class RTEditorPresenterNew implements RTEditorNew {
         this.insCharDialogProv = insCharDialog;
         this.deferred = deferred;
         inputMap = new InputMap();
+        menus = new ArrayList<MenuDescriptor>();
 
-        styleToolbar(sndBar);
-        sndBar.attach();
         this.imgResources = imgResources;
         extended = true;
         this.onEdit = new Event0("onRTEEdit");
@@ -717,14 +695,19 @@ public class RTEditorPresenterNew implements RTEditorNew {
                 return view.canBeBasic();
             }
         };
+        attached = false;
     }
 
-    public void addAction(final AbstractGuiActionDescrip descriptor) {
+    public void addAction(final GuiActionDescrip descriptor) {
         actions.add(descriptor);
+        checkForMenus(descriptor);
     }
 
-    public void addActions(final GuiActionCollection actioncollection) {
-        actions.addAll(actioncollection);
+    public void addActions(final GuiActionDescCollection descriptors) {
+        actions.addAll(descriptors);
+        for (final GuiActionDescrip descriptor : descriptors) {
+            checkForMenus(descriptor);
+        }
     }
 
     public void addOnEditListener(final Listener0 listener) {
@@ -736,18 +719,16 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public void attach() {
-        topBar.clear();
-        sndBar.clear();
-        view.addActions(actions);
-        // FIXME
-        // topBar.addActions(actions, TOPBAR);
-        // sndBar.addActions(actions, SNDBAR);
-        // view.addActions(actions);
+        if (!attached) {
+            attached = true;
+            view.addActions(actions);
+            view.setInputMap(inputMap);
+        }
     }
 
     public void detach() {
-        topBar.clear();
-        sndBar.clear();
+        // topBar.clear();
+        // sndBar.clear();
     }
 
     public void fireOnEdit() {
@@ -770,6 +751,10 @@ public class RTEditorPresenterNew implements RTEditorNew {
         return extendedAddCond;
     }
 
+    public MenuDescriptor getFileMenu() {
+        return fileMenu;
+    }
+
     public MenuDescriptor getFormatMenu() {
         return formatMenu;
     }
@@ -786,16 +771,16 @@ public class RTEditorPresenterNew implements RTEditorNew {
         return linkCtxMenu;
     }
 
-    public ActionToolbar<Object> getSndBar() {
-        return sndBar;
+    public View getSndBar() {
+        return view.getSndBar();
     }
 
     public String getText() {
         return view.getText();
     }
 
-    public ActionToolbar<Object> getTopBar() {
-        return topBar;
+    public View getTopBar() {
+        return view.getTopBar();
     }
 
     public void init(final RTEditorViewNew view) {
@@ -815,6 +800,18 @@ public class RTEditorPresenterNew implements RTEditorNew {
     public void reset() {
         hideMenus();
         hideLinkCtxMenu();
+    }
+
+    public void setActionShortcut(final KeyStroke key, final AbstractAction action) {
+        inputMap.put(key, action);
+        action.putValue(Action.ACCELERATOR_KEY, key);
+    }
+
+    public void setActionShortcut(final KeyStroke key, final AbstractAction mainAction, final AbstractAction... actions) {
+        setActionShortcut(key, mainAction);
+        for (final AbstractAction action : actions) {
+            action.putValue(Action.ACCELERATOR_KEY, key);
+        }
     }
 
     public void setExtended(final boolean extended) {
@@ -858,12 +855,10 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    private void crateFontAction(final MenuDescriptor fontMenu, final String fontName) {
-        final FontAction fontAction = new FontAction(fontName, NONE, NO_ICON);
-        final MenuItemDescriptor font = new MenuItemDescriptor(fontMenu, fontAction);
-        font.setAddCondition(basicAddCond);
-        font.setLocation(SNDBAR);
-        actions.add(font);
+    private void checkForMenus(final GuiActionDescrip descriptor) {
+        if (descriptor instanceof MenuDescriptor) {
+            menus.add((MenuDescriptor) descriptor);
+        }
     }
 
     private void createBasicActions() {
@@ -872,139 +867,140 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final MenuSeparatorDescriptor insertMenuSep = new MenuSeparatorDescriptor(insertMenu);
         final MenuSeparatorDescriptor formatMenuSep = new MenuSeparatorDescriptor(formatMenu);
 
-        final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator);
+        final ToolbarSeparatorDescriptor sndbarSep = new ToolbarSeparatorDescriptor(Type.separator, getSndBar());
 
-        final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"), NONE,
+        final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"), AbstractRTEAction.NO_TEXT,
                 imgResources.selectall());
         final MenuItemDescriptor select = new MenuItemDescriptor(editMenu, selectAllAction);
-        setActionShortcut(KeyStroke.getKeyStroke('A', Keyboard.MODIFIER_CTRL), selectAllAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('A'), Keyboard.MODIFIER_CTRL), selectAllAction);
 
-        final BoldAction boldAction = new BoldAction(NONE, i18n.t("Bold"), imgResources.bold());
+        final BoldAction boldAction = new BoldAction(NO_TEXT, i18n.t("Bold"), imgResources.bold());
         bold = new PushButtonDescriptor(boldAction);
-        setActionShortcut(KeyStroke.getKeyStroke('B', Keyboard.MODIFIER_CTRL), boldAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('B'), Keyboard.MODIFIER_CTRL), boldAction);
 
-        final ItalicAction italicAction = new ItalicAction(NONE, i18n.t("Italic"), imgResources.italic());
+        final ItalicAction italicAction = new ItalicAction(NO_TEXT, i18n.t("Italic"), imgResources.italic());
         italic = new PushButtonDescriptor(italicAction);
-        setActionShortcut(KeyStroke.getKeyStroke('I', Keyboard.MODIFIER_CTRL), italicAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('I'), Keyboard.MODIFIER_CTRL), italicAction);
 
-        final UnderlineAction underlineAction = new UnderlineAction(NONE, i18n.t("Underline"), imgResources.underline());
+        final UnderlineAction underlineAction = new UnderlineAction(NO_TEXT, i18n.t("Underline"),
+                imgResources.underline());
         underline = new PushButtonDescriptor(underlineAction);
-        setActionShortcut(KeyStroke.getKeyStroke('U', Keyboard.MODIFIER_CTRL), underlineAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('U'), Keyboard.MODIFIER_CTRL), underlineAction);
 
-        final SubscriptAction subscriptAction = new SubscriptAction(i18n.t("Subscript"), NONE, imgResources.subscript());
+        final SubscriptAction subscriptAction = new SubscriptAction(i18n.t("Subscript"), NO_TEXT,
+                imgResources.subscript());
         final MenuItemDescriptor subscript = new MenuItemDescriptor(formatMenu, subscriptAction);
         setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_COMMA, Keyboard.MODIFIER_CTRL), subscriptAction);
 
-        final SuperscriptAction superscriptAction = new SuperscriptAction(i18n.t("Superscript"), NONE,
+        final SuperscriptAction superscriptAction = new SuperscriptAction(i18n.t("Superscript"), NO_TEXT,
                 imgResources.superscript());
         final MenuItemDescriptor superscript = new MenuItemDescriptor(formatMenu, superscriptAction);
         setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_PERIOD, Keyboard.MODIFIER_CTRL), superscriptAction);
 
-        final JustifyLeftAction jfyLeftAction = new JustifyLeftAction(NONE, i18n.t("Left Justify"),
+        final JustifyLeftAction jfyLeftAction = new JustifyLeftAction(NO_TEXT, i18n.t("Left Justify"),
                 imgResources.alignleft());
         final ButtonDescriptor justifyLeft = new ButtonDescriptor(jfyLeftAction);
-        setActionShortcut(KeyStroke.getKeyStroke('L', Keyboard.MODIFIER_CTRL), jfyLeftAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('L'), Keyboard.MODIFIER_CTRL), jfyLeftAction);
 
-        final JustifyCentreAction jfyCentreAction = new JustifyCentreAction(NONE, i18n.t("Centre Justify"),
+        final JustifyCentreAction jfyCentreAction = new JustifyCentreAction(NO_TEXT, i18n.t("Centre Justify"),
                 imgResources.centerpara());
         final ButtonDescriptor justifyCentre = new ButtonDescriptor(jfyCentreAction);
-        setActionShortcut(KeyStroke.getKeyStroke('E', Keyboard.MODIFIER_CTRL), jfyCentreAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('E'), Keyboard.MODIFIER_CTRL), jfyCentreAction);
 
-        final JustifyRightAction jfyRightAction = new JustifyRightAction(NONE, i18n.t("Right Justify"),
+        final JustifyRightAction jfyRightAction = new JustifyRightAction(NO_TEXT, i18n.t("Right Justify"),
                 imgResources.alignright());
         final ButtonDescriptor justifyRight = new ButtonDescriptor(jfyRightAction);
-        setActionShortcut(KeyStroke.getKeyStroke('R', Keyboard.MODIFIER_CTRL), jfyRightAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('R'), Keyboard.MODIFIER_CTRL), jfyRightAction);
 
-        final UndoAction undoAction = new UndoAction(i18n.t("Undo"), NONE, imgResources.undo());
-        final UndoAction undoActionBtn = new UndoAction(NONE, i18n.t("Undo"), imgResources.undo());
+        final UndoAction undoAction = new UndoAction(i18n.t("Undo"), NO_TEXT, imgResources.undo());
+        final UndoAction undoActionBtn = new UndoAction(NO_TEXT, i18n.t("Undo"), imgResources.undo());
         final MenuItemDescriptor undo = new MenuItemDescriptor(editMenu, undoAction);
         final ButtonDescriptor undoBtn = new ButtonDescriptor(undoActionBtn);
         undoBtn.setPosition(0);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_Z, Keyboard.MODIFIER_CTRL), undoAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('Z'), Keyboard.MODIFIER_CTRL), undoAction);
 
-        final RedoAction redoAction = new RedoAction(i18n.t("Redo"), NONE, imgResources.redo());
-        final RedoAction redoActionBtn = new RedoAction(NONE, i18n.t("Redo"), imgResources.redo());
+        final RedoAction redoAction = new RedoAction(i18n.t("Redo"), NO_TEXT, imgResources.redo());
+        final RedoAction redoActionBtn = new RedoAction(NO_TEXT, i18n.t("Redo"), imgResources.redo());
         final MenuItemDescriptor redo = new MenuItemDescriptor(editMenu, redoAction);
         final ButtonDescriptor redoBtn = new ButtonDescriptor(redoActionBtn);
         redoBtn.setPosition(1);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_Y, Keyboard.MODIFIER_CTRL), redoAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('Y'), Keyboard.MODIFIER_CTRL), redoAction);
 
-        final CopyAction copyAction = new CopyAction(i18n.t("Copy"), NONE, imgResources.copy());
+        final CopyAction copyAction = new CopyAction(i18n.t("Copy"), NO_TEXT, imgResources.copy());
         final MenuItemDescriptor copy = new MenuItemDescriptor(editMenu, copyAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_C, Keyboard.MODIFIER_CTRL), copyAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('C'), Keyboard.MODIFIER_CTRL), copyAction);
 
-        final CutAction cutAction = new CutAction(i18n.t("Cut"), NONE, imgResources.cut());
+        final CutAction cutAction = new CutAction(i18n.t("Cut"), NO_TEXT, imgResources.cut());
         final MenuItemDescriptor cut = new MenuItemDescriptor(editMenu, cutAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_X, Keyboard.MODIFIER_CTRL), cutAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('X'), Keyboard.MODIFIER_CTRL), cutAction);
 
-        final PasteAction pasteAction = new PasteAction(i18n.t("Paste"), NONE, imgResources.paste());
+        final PasteAction pasteAction = new PasteAction(i18n.t("Paste"), NO_TEXT, imgResources.paste());
         final MenuItemDescriptor paste = new MenuItemDescriptor(editMenu, pasteAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_V, Keyboard.MODIFIER_CTRL), pasteAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('V'), Keyboard.MODIFIER_CTRL), pasteAction);
 
-        final EditHtmlAction editHtmlAction = new EditHtmlAction(i18n.t("Edit HTML"), NONE, imgResources.edithtml());
+        final EditHtmlAction editHtmlAction = new EditHtmlAction(i18n.t("Edit HTML"), NO_TEXT, imgResources.edithtml());
         final MenuItemDescriptor editHtml = new MenuItemDescriptor(editMenu, editHtmlAction);
         editHtml.setAddCondition(extendedAddCond);
 
-        final CommentAction commentAction = new CommentAction(i18n.t("Comment"), NONE, NO_ICON);
+        final CommentAction commentAction = new CommentAction(i18n.t("Comment"), NO_TEXT, NO_ICON);
         final MenuItemDescriptor comment = new MenuItemDescriptor(insertMenu, commentAction);
         comment.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_M, Keyboard.MODIFIER_CTRL), commentAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('M'), Keyboard.MODIFIER_CTRL), commentAction);
 
-        final HrAction hlineAction = new HrAction(i18n.t("Horizontal line"), NONE, imgResources.hfixedline());
-        final HrAction hlineBtnAction = new HrAction(NONE, i18n.t("Horizontal line"), imgResources.hfixedline());
+        final HrAction hlineAction = new HrAction(i18n.t("Horizontal line"), NO_TEXT, imgResources.hfixedline());
+        final HrAction hlineBtnAction = new HrAction(NO_TEXT, i18n.t("Horizontal line"), imgResources.hfixedline());
         final MenuItemDescriptor hline = new MenuItemDescriptor(insertMenu, hlineAction);
         final ButtonDescriptor hlineBtn = new ButtonDescriptor(hlineBtnAction);
         hline.setAddCondition(extendedAddCond);
         hlineBtn.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(' ', Keyboard.MODIFIER_CTRL & Keyboard.MODIFIER_SHIFT), hlineAction);
+        setActionShortcut(KeyStroke.getKeyStroke(' ', Keyboard.MODIFIER_CTRL + Keyboard.MODIFIER_SHIFT), hlineAction);
 
-        final BlockquoteAction blockquoteAction = new BlockquoteAction(i18n.t("Block Quotation"), NONE,
-                imgResources.hfixedline());
+        final BlockquoteAction blockquoteAction = new BlockquoteAction(i18n.t("Block Quotation"), NO_TEXT, NO_ICON);
         final MenuItemDescriptor blockquote = new MenuItemDescriptor(formatMenu, blockquoteAction);
         blockquote.setAddCondition(extendedAddCond);
 
-        final StrikethroughAction strikeAction = new StrikethroughAction(NONE, i18n.t("Strikethrough"),
+        final StrikethroughAction strikeAction = new StrikethroughAction(NO_TEXT, i18n.t("Strikethrough"),
                 imgResources.strikeout());
         strikethrough = new PushButtonDescriptor(strikeAction);
         strikethrough.setAddCondition(extendedAddCond);
 
-        final DecreaseIndentAction decreIndentAction = new DecreaseIndentAction(NONE, i18n.t("Decrease Indent"),
+        final DecreaseIndentAction decreIndentAction = new DecreaseIndentAction(NO_TEXT, i18n.t("Decrease Indent"),
                 imgResources.decrementindent());
         final ButtonDescriptor decreaseIndent = new ButtonDescriptor(decreIndentAction);
         decreaseIndent.setAddCondition(extendedAddCond);
 
-        final IncreaseIndentAction increIndentAction = new IncreaseIndentAction(NONE, i18n.t("Increase Indent"),
+        final IncreaseIndentAction increIndentAction = new IncreaseIndentAction(NO_TEXT, i18n.t("Increase Indent"),
                 imgResources.incrementindent());
         final ButtonDescriptor increaseIndent = new ButtonDescriptor(increIndentAction);
         increaseIndent.setAddCondition(extendedAddCond);
 
-        final OlAction olistAction = new OlAction(NONE, i18n.t("Numbered List"), imgResources.defaultnumbering());
+        final OlAction olistAction = new OlAction(NO_TEXT, i18n.t("Numbered List"), imgResources.defaultnumbering());
         final ButtonDescriptor olist = new ButtonDescriptor(olistAction);
         olist.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_7, Keyboard.MODIFIER_CTRL), olistAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('7'), Keyboard.MODIFIER_CTRL), olistAction);
 
-        final UlAction ulistAction = new UlAction(NONE, i18n.t("Bullet List"), imgResources.defaultbullet());
+        final UlAction ulistAction = new UlAction(NO_TEXT, i18n.t("Bullet List"), imgResources.defaultbullet());
         final ButtonDescriptor ulist = new ButtonDescriptor(ulistAction);
         ulist.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_8, Keyboard.MODIFIER_CTRL), ulistAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('8'), Keyboard.MODIFIER_CTRL), ulistAction);
 
-        final ImgAction imgAction = new ImgAction(i18n.t("Image..."), NONE, imgResources.images());
-        final ImgAction imgBtnAction = new ImgAction(NONE, i18n.t("Insert Image"), imgResources.images());
+        final ImgAction imgAction = new ImgAction(i18n.t("Image..."), NO_TEXT, imgResources.images());
+        final ImgAction imgBtnAction = new ImgAction(NO_TEXT, i18n.t("Insert Image"), imgResources.images());
         final MenuItemDescriptor img = new MenuItemDescriptor(insertMenu, imgAction);
         final ButtonDescriptor imgBtn = new ButtonDescriptor(imgBtnAction);
         img.setAddCondition(extendedAddCond);
         imgBtn.setAddCondition(extendedAddCond);
 
-        final InsertMediaAction insertMediaAction = new InsertMediaAction(i18n.t("Audio/Video..."), NONE,
+        final InsertMediaAction insertMediaAction = new InsertMediaAction(i18n.t("Audio/Video..."), NO_TEXT,
                 imgResources.film());
         final MenuItemDescriptor insertMedia = new MenuItemDescriptor(insertMenu, insertMediaAction);
         insertMedia.setAddCondition(extendedAddCond);
 
-        final CreateOrEditLinkAction editLinkAction = new CreateOrEditLinkAction(i18n.t("Link..."), NONE,
+        final CreateOrEditLinkAction editLinkAction = new CreateOrEditLinkAction(i18n.t("Link..."), NO_TEXT,
                 imgResources.link());
-        final CreateOrEditLinkAction editLinkBtnAction = new CreateOrEditLinkAction(NONE,
+        final CreateOrEditLinkAction editLinkBtnAction = new CreateOrEditLinkAction(NO_TEXT,
                 i18n.t("Create or Edit Link"), imgResources.link());
-        final CreateOrEditLinkAction editLinkCtxAction = new CreateOrEditLinkAction(i18n.t("Change"), NONE,
+        final CreateOrEditLinkAction editLinkCtxAction = new CreateOrEditLinkAction(i18n.t("Change"), NO_TEXT,
                 imgResources.link());
         final MenuItemDescriptor editLink = new MenuItemDescriptor(insertMenu, editLinkAction);
         final MenuItemDescriptor editLinkCtx = new MenuItemDescriptor(linkCtxMenu, editLinkCtxAction);
@@ -1012,83 +1008,84 @@ public class RTEditorPresenterNew implements RTEditorNew {
         editLink.setAddCondition(extendedAddCond);
         editLinkBtn.setAddCondition(extendedAddCond);
         editLinkCtx.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_K, Keyboard.MODIFIER_CTRL), editLinkAction,
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('K'), Keyboard.MODIFIER_CTRL), editLinkAction,
                 editLinkBtnAction);
 
-        final KeyStroke key_K = KeyStroke.getKeyStroke(Keyboard.KEY_K, Keyboard.MODIFIER_CTRL & Keyboard.MODIFIER_SHIFT);
-        final RemoveLinkAction delLinkBtnAction = new RemoveLinkAction(NONE, i18n.t("Remove Link"),
+        final KeyStroke key_SK = KeyStroke.getKeyStroke(Character.valueOf('K'), Keyboard.MODIFIER_CTRL
+                + Keyboard.MODIFIER_SHIFT);
+        final RemoveLinkAction delLinkBtnAction = new RemoveLinkAction(NO_TEXT, i18n.t("Remove Link"),
                 imgResources.linkbreak());
-        final RemoveLinkAction delLinkCtxAction = new RemoveLinkAction(i18n.t("Remove"), NONE, imgResources.linkbreak());
+        final RemoveLinkAction delLinkCtxAction = new RemoveLinkAction(i18n.t("Remove"), NO_TEXT,
+                imgResources.linkbreak());
         final MenuItemDescriptor removeLinkCtx = new MenuItemDescriptor(linkCtxMenu, delLinkCtxAction);
         final ButtonDescriptor removeLinkBtn = new ButtonDescriptor(delLinkBtnAction);
         removeLinkBtn.setAddCondition(extendedAddCond);
         removeLinkCtx.setAddCondition(extendedAddCond);
-        setActionShortcut(key_K, delLinkBtnAction);
+        setActionShortcut(key_SK, delLinkBtnAction);
 
-        final RemoveFormatAction remFormatAction = new RemoveFormatAction(i18n.t("Clear Formatting..."), NONE,
+        final RemoveFormatAction remFormatAction = new RemoveFormatAction(i18n.t("Clear Formatting..."), NO_TEXT,
                 imgResources.removeFormat());
-        final RemoveFormatAction remFormatBtnAc = new RemoveFormatAction(NONE, i18n.t("Clear Formatting..."),
+        final RemoveFormatAction remFormatBtnAc = new RemoveFormatAction(NO_TEXT, i18n.t("Clear Formatting..."),
                 imgResources.removeFormat());
         final MenuItemDescriptor removeFormat = new MenuItemDescriptor(formatMenu, remFormatAction);
         final ButtonDescriptor removeFormatBtn = new ButtonDescriptor(remFormatBtnAc);
         removeFormat.setAddCondition(extendedAddCond);
         removeFormatBtn.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(' ', Keyboard.MODIFIER_CTRL), remFormatAction, remFormatBtnAc);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf(' '), Keyboard.MODIFIER_CTRL), remFormatAction,
+                remFormatBtnAc);
 
         final InsertSpecialCharAction insCharAction = new InsertSpecialCharAction(i18n.t("Special characters..."),
-                NONE, imgResources.specialchars());
+                NO_TEXT, imgResources.specialchars());
         final MenuItemDescriptor insertSpecialChar = new MenuItemDescriptor(insertMenu, insCharAction);
         insertSpecialChar.setAddCondition(extendedAddCond);
 
-        final InsertTableAction insTableAction = new InsertTableAction(i18n.t("Table..."), NONE,
+        final InsertTableAction insTableAction = new InsertTableAction(i18n.t("Table..."), NO_TEXT,
                 imgResources.inserttable());
-        final InsertTableAction insTableBtnAction = new InsertTableAction(NONE, i18n.t("Insert Table"),
+        final InsertTableAction insTableBtnAction = new InsertTableAction(NO_TEXT, i18n.t("Insert Table"),
                 imgResources.inserttable());
         final MenuItemDescriptor insertTable = new MenuItemDescriptor(insertMenu, insTableAction);
         final ButtonDescriptor insertTableBtn = new ButtonDescriptor(insTableBtnAction);
         insertTable.setAddCondition(extendedAddCond);
         insertTableBtn.setAddCondition(extendedAddCond);
 
-        final FontColorAction fontColorAction = new FontColorAction(NONE, i18n.t("Text Colour"),
+        final FontColorAction fontColorAction = new FontColorAction(NO_TEXT, i18n.t("Text Colour"),
                 imgResources.fontcolor());
         final ButtonDescriptor fontColor = new ButtonDescriptor(fontColorAction);
         fontColor.setAddCondition(extendedAddCond);
 
-        final BackgroundColorAction backColorAction = new BackgroundColorAction(NONE, i18n.t("Text Background Colour"),
-                imgResources.backcolor());
+        final BackgroundColorAction backColorAction = new BackgroundColorAction(NO_TEXT,
+                i18n.t("Text Background Colour"), imgResources.backcolor());
         final ButtonDescriptor backgroundColor = new ButtonDescriptor(backColorAction);
         backgroundColor.setAddCondition(basicAddCond);
 
-        final DevInfoAction devInfoAction = new DevInfoAction(i18n.t("Developers info"), NONE,
+        final DevInfoAction devInfoAction = new DevInfoAction(i18n.t("Developers info"), NO_TEXT,
                 imgResources.specialchars());
         final MenuItemDescriptor devInfo = new MenuItemDescriptor(formatMenu, devInfoAction);
         devInfo.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_I, Keyboard.MODIFIER_ALT), devInfoAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('I'), Keyboard.MODIFIER_ALT), devInfoAction);
 
-        fontMenu = new MenuDescriptor(NONE, i18n.t("Font"), imgResources.charfontname());
-        fontSizeMenu = new MenuDescriptor(NONE, i18n.t("Font size"), imgResources.fontheight());
+        actions = new GuiActionDescCollection();
+        actions.add(fileMenu, editMenu, formatMenu, insertMenu, undo, redo, editMenuSep, copy, cut, paste, editMenuSep,
+                select, editMenuSep, editHtml, editLink, img, insertTable, insertMedia, insertMenuSep,
+                insertSpecialChar, comment, hline, removeFormat, formatMenuSep, insertMenuSep, undoBtn, redoBtn,
+                sndbarSep, bold, italic, underline, strikethrough, sndbarSep, justifyLeft, justifyCentre, justifyRight,
+                decreaseIndent, increaseIndent, olist, ulist, sndbarSep, removeFormatBtn, sndbarSep, hlineBtn, imgBtn,
+                editLinkBtn, removeLinkBtn, insertTableBtn, sndbarSep, subscript, superscript, blockquote, fontMenu,
+                fontSizeMenu, fontColor, backgroundColor);
+        // actions.add(devInfo);
 
-        actions = new GuiActionCollection();
-        actions.add(editMenuSep, subscript, superscript, undo, redo, editMenuSep, copy, cut, paste, editMenuSep,
-                select, editHtml, comment, hline, blockquote, img, insertTable, insertMedia, editLink, removeFormat,
-                formatMenuSep, insertMenuSep, insertSpecialChar, insertTable, devInfo, undoBtn, redoBtn, separator,
-                bold, italic, underline, strikethrough, justifyLeft, justifyCentre, justifyRight, undoBtn, redoBtn,
-                hlineBtn, separator, decreaseIndent, increaseIndent, olist, ulist, separator, hlineBtn, imgBtn,
-                editLinkBtn, removeLinkBtn, removeFormatBtn, separator, insertTableBtn, separator, fontColor,
-                backgroundColor);
-
-        setLocation(TOPBAR, new AbstractGuiActionDescrip[] { editMenuSep, subscript, superscript, undo, redo,
-                editMenuSep, copy, cut, paste, editMenuSep, select, editHtml, comment, hline, blockquote, img,
-                insertTable, insertMedia, editLink, removeFormat, formatMenuSep, insertMenuSep, insertSpecialChar,
-                insertTable, devInfo });
-        setLocation(SNDBAR, new AbstractGuiActionDescrip[] { undoBtn, redoBtn, separator, bold, italic, underline,
-                strikethrough, justifyLeft, justifyCentre, justifyRight, undoBtn, redoBtn, hlineBtn, separator,
-                decreaseIndent, increaseIndent, olist, ulist, separator, hlineBtn, imgBtn, editLinkBtn, removeLinkBtn,
-                removeFormatBtn, separator, insertTableBtn, separator, fontColor, backgroundColor });
-        setLocation(LINKCTX, new AbstractGuiActionDescrip[] { editLinkCtx, removeLinkCtx });
+        setLocation(TOPBAR, new GuiActionDescrip[] { fileMenu, editMenu, insertMenu, formatMenu, editMenuSep,
+                subscript, superscript, undo, redo, editMenuSep, copy, cut, paste, editMenuSep, select, editMenuSep,
+                editHtml, comment, hline, blockquote, img, insertTable, insertMedia, editLink, removeFormat,
+                formatMenuSep, insertMenuSep, insertSpecialChar, insertTable, devInfo });
+        setLocation(SNDBAR, new GuiActionDescrip[] { undoBtn, redoBtn, sndbarSep, bold, italic, underline,
+                strikethrough, justifyLeft, justifyCentre, justifyRight, undoBtn, redoBtn, hlineBtn, decreaseIndent,
+                increaseIndent, olist, ulist, hlineBtn, imgBtn, editLinkBtn, removeLinkBtn, removeFormatBtn,
+                insertTableBtn, fontColor, backgroundColor, fontMenu, fontSizeMenu });
+        setLocation(LINKCTX, new GuiActionDescrip[] { editLinkCtx, removeLinkCtx });
 
         for (final String fontName : FONT_NAMES) {
-            crateFontAction(fontMenu, fontName);
+            createFontAction(fontMenu, fontName);
         }
 
         for (int fontSize = 0; fontSize < FONT_SIZE_NAMES.length; fontSize++) {
@@ -1096,21 +1093,35 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
+    private void createFontAction(final MenuDescriptor fontMenu, final String fontName) {
+        final FontAction fontAction = new FontAction(fontName, NO_TEXT, NO_ICON);
+        final MenuItemDescriptor font = new MenuItemDescriptor(fontMenu, fontAction);
+        font.setAddCondition(basicAddCond);
+        font.setLocation(SNDBAR);
+        fontMenu.setText(fontName);
+        actions.add(font);
+    }
+
     private void createFontSizeAction(final MenuDescriptor fontSizeMenu, final int fontSize) {
-        final FontSizeAction fontSizeAction = new FontSizeAction(i18n.t(FONT_SIZE_NAMES[fontSize]), fontSize, NONE,
-                NO_ICON);
+        final String fontSizeName = i18n.t(FONT_SIZE_NAMES[fontSize]);
+        final FontSizeAction fontSizeAction = new FontSizeAction(fontSizeName, fontSize, NO_TEXT, NO_ICON);
         final MenuItemDescriptor fontSizeItem = new MenuItemDescriptor(fontSizeMenu, fontSizeAction);
         fontSizeItem.setAddCondition(basicAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(48 + fontSize, Keyboard.MODIFIER_CTRL), fontSizeAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf(((char) (48 + fontSize))), Keyboard.MODIFIER_CTRL),
+                fontSizeAction);
         fontSizeItem.setLocation(SNDBAR);
+        fontSizeMenu.setText(fontSizeName);
         actions.add(fontSizeItem);
     }
 
     private void createMainMenus() {
-        editMenu = new MenuDescriptor(i18n.t("Edit"));
-        insertMenu = new MenuDescriptor(i18n.t("Insert"));
-        formatMenu = new MenuDescriptor(i18n.t("Format"));
-        linkCtxMenu = new MenuDescriptor(i18n.t("Change Link"));
+        menus.add(fileMenu = new MenuDescriptor(i18n.t("File")));
+        menus.add(editMenu = new MenuDescriptor(i18n.t("Edit")));
+        menus.add(insertMenu = new MenuDescriptor(i18n.t("Insert")));
+        menus.add(formatMenu = new MenuDescriptor(i18n.t("Format")));
+        menus.add(linkCtxMenu = new MenuDescriptor(i18n.t("Change Link")));
+        menus.add(fontMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font"), imgResources.charfontname()));
+        menus.add(fontSizeMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font size"), imgResources.fontheight()));
     }
 
     private void createPalette() {
@@ -1126,8 +1137,9 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     private void hideMenus() {
-        topBar.hideAllMenus();
-        sndBar.hideAllMenus();
+        for (final MenuDescriptor menu : menus) {
+            menu.hide();
+        }
         if (palette != null) {
             palette.hide();
         }
@@ -1137,22 +1149,10 @@ public class RTEditorPresenterNew implements RTEditorNew {
         return extended && view.canBeExtended();
     }
 
-    private void setActionShortcut(final KeyStroke key, final AbstractAction mainAction,
-            final AbstractAction... actions) {
-        inputMap.put(key, mainAction);
-        mainAction.putValue(Action.ACCELERATOR_KEY, key);
-        for (final AbstractAction action : actions) {
-            action.putValue(Action.ACCELERATOR_KEY, key);
-        }
-    }
-
-    private void setLocation(final String location, final AbstractGuiActionDescrip[] descripts) {
-        for (final AbstractGuiActionDescrip descript : descripts) {
+    private void setLocation(final String location, final GuiActionDescrip[] descripts) {
+        for (final GuiActionDescrip descript : descripts) {
             descript.setLocation(location);
         }
     }
 
-    private void styleToolbar(final ActionToolbar<Object> bar) {
-        bar.setNormalStyle();
-    }
 }

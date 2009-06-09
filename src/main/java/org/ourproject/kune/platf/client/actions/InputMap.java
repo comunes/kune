@@ -45,7 +45,7 @@ import java.util.Set;
 
 /**
  * Maps {@link KeyStroke}s to arbitrary objects, usually Strings. This is used
- * in combination with {@link ActionMap}s.
+ * in combination with ActionMaps.
  * 
  * If a component receives an input event, this is looked up in the component's
  * <code>InputMap</code>. The result is an object which serves as a key to the
@@ -63,7 +63,7 @@ public class InputMap {
     /**
      * Storage for the KeyStroke --> Object mappings.
      */
-    private Map<KeyStroke, Action> inputMap;
+    private Map<KeyStroke, AbstractAction> inputMap;
 
     /**
      * An optional parent map.
@@ -122,8 +122,8 @@ public class InputMap {
      * @return The binding associated with the specified keystroke (or
      *         <code>null</code>).
      */
-    public Action get(final KeyStroke keystroke) {
-        Action result = null;
+    public AbstractAction get(final KeyStroke keystroke) {
+        AbstractAction result = null;
         if (inputMap != null) {
             result = inputMap.get(keystroke);
         }
@@ -177,12 +177,12 @@ public class InputMap {
      * @param actionMapKey
      *            the action (<code>null</code> permitted).
      */
-    public void put(final KeyStroke keystroke, final Action actionMapKey) {
+    public void put(final KeyStroke keystroke, final AbstractAction actionMapKey) {
         if (keystroke == null) {
             return;
         }
         if (inputMap == null) {
-            inputMap = new HashMap<KeyStroke, Action>();
+            inputMap = new HashMap<KeyStroke, AbstractAction>();
         }
         if (actionMapKey == null) {
             inputMap.remove(keystroke);

@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
+import org.ourproject.kune.platf.client.View;
 
 public class ToolbarSeparatorDescriptor extends AbstractSeparatorDescriptor {
 
@@ -8,15 +9,20 @@ public class ToolbarSeparatorDescriptor extends AbstractSeparatorDescriptor {
     }
 
     private final Type type;
+    private final View toolbar;
 
-    public ToolbarSeparatorDescriptor(final Type type) {
+    public ToolbarSeparatorDescriptor(final Type type, final View toolbar) {
         super();
-        // setParent(parent);
         this.type = type;
+        this.toolbar = toolbar;
     }
 
     public Type getSeparatorType() {
         return type;
+    }
+
+    public View getToolbar() {
+        return toolbar;
     }
 
     @Override

@@ -78,14 +78,14 @@ public class FileDownloadManager extends HttpServlet {
         final String userHash = req.getParameter(FileConstants.HASH);
         final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
         final String downloadS = req.getParameter(FileConstants.DOWNLOAD);
-        String imageSizeS = req.getParameter(FileConstants.IMGSIZE);
+        final String imageSizeS = req.getParameter(FileConstants.IMGSIZE);
 
         try {
-            Content cnt = getContentForDownload(userHash, stateToken);
-            String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
+            final Content cnt = getContentForDownload(userHash, stateToken);
+            final String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
             final OutputStream out = resp.getOutputStream();
             FileDownloadManagerUtils.returnFile(absFilename, out);
-        } catch (ContentNotFoundException e) {
+        } catch (final ContentNotFoundException e) {
             FileDownloadManagerUtils.returnNotFound(resp);
             return;
         }
@@ -98,15 +98,15 @@ public class FileDownloadManager extends HttpServlet {
         final boolean download = downloadS != null && downloadS.equals("true") ? true : false;
         final String absDir = kuneProperties.get(KuneProperties.UPLOAD_LOCATION) + FileUtils.toDir(stateToken);
         String filename = cnt.getFilename();
-        String title = cnt.getTitle();
+        final String title = cnt.getTitle();
         String extension = FileUtils.getFileNameExtension(filename, true);
         BasicMimeType mimeType = cnt.getMimeType();
 
-        boolean isPdfAndNotDownload = mimeType != null && mimeType.isPdf() && !download;
+        final boolean isPdfAndNotDownload = mimeType != null && mimeType.isPdf() && !download;
         if (mimeType != null && (mimeType.isImage() || isPdfAndNotDownload)) {
-            String imgsizePrefix = imgsize == null ? "" : "." + imgsize;
-            String filenameWithoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
-            String filenameResized = filenameWithoutExtension + imgsizePrefix
+            final String imgsizePrefix = imgsize == null ? "" : "." + imgsize;
+            final String filenameWithoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
+            final String filenameResized = filenameWithoutExtension + imgsizePrefix
                     + (isPdfAndNotDownload ? ".png" : extension);
             if (fileUtils.exist(absDir + filenameResized)) {
                 filename = filenameResized;

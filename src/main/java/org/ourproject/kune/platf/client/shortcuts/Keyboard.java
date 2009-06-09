@@ -66,6 +66,7 @@ public final class Keyboard {
     public final static int KEY_X = 'X';
     public final static int KEY_Y = 'Y';
     public final static int KEY_Z = 'Z';
+    public final static int KEY_SPACE = ' ';
     public final static int KEY_OPEN_BRACKET = '[';
     public final static int KEY_BACK_SLASH = '\\';
     public final static int KEY_CLOSE_BRACKET = ']';

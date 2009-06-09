@@ -43,13 +43,6 @@ public abstract class AbstractButtonGui extends AbstractGuiItem {
         }
     }
 
-    @Override
-    public void setIcon(final ImageResource imageResource) {
-        if (imageResource != null) {
-            button.setIcon(ImgConstants.PATH_PREFIX + imageResource.getName());
-        }
-    }
-
     public void setPressed(final boolean pressed) {
         if (button.isPressed() != pressed) {
             button.toggle();
@@ -68,6 +61,13 @@ public abstract class AbstractButtonGui extends AbstractGuiItem {
             button.setTooltip(tooltip);
         } else {
             button.setTooltip(tooltip + key.toString());
+        }
+    }
+
+    @Override
+    protected void setIcon(final ImageResource imageResource) {
+        if (imageResource != null) {
+            button.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
         }
     }
 
