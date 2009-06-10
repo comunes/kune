@@ -58,23 +58,23 @@ public class SiteOptionsPanel implements SiteOptionsView {
             }
         });
 
-        // final Item testRTE = new Item(i18n.t("Test new RTE"), new
-        // BaseItemListenerAdapter() {
-        // @Override
-        // public void onClick(final BaseItem item, final EventObject e) {
-        // editor.get().show();
-        // }
-        // }, "");
-        //
-        // final Item testRTEbasic = new
-        // Item(i18n.t("Test new RTE (basic mode)"), new
-        // BaseItemListenerAdapter() {
-        // @Override
-        // public void onClick(final BaseItem item, final EventObject e) {
-        // editor.get().setExtended(false);
-        // editor.get().show();
-        // }
-        // }, "");
+        final Item testRTE = new Item(i18n.t("Test new RTE"), new BaseItemListenerAdapter() {
+            @Override
+            public void onClick(final BaseItem item, final EventObject e) {
+                final TestRTEDialog testRTEDialog = editor.get();
+                testRTEDialog.setExtended(true);
+                testRTEDialog.show();
+            }
+        }, "");
+
+        final Item testRTEbasic = new Item(i18n.t("Test new RTE (basic mode)"), new BaseItemListenerAdapter() {
+            @Override
+            public void onClick(final BaseItem item, final EventObject e) {
+                final TestRTEDialog testRTEDialog = editor.get();
+                testRTEDialog.setExtended(false);
+                testRTEDialog.show();
+            }
+        }, "");
 
         final Item linkHelpInTrans = new Item(i18n.t("Help with the translation"), new BaseItemListenerAdapter() {
             @Override
@@ -91,6 +91,8 @@ public class SiteOptionsPanel implements SiteOptionsView {
                 KuneWindowUtils.open("http://ourproject.org/tracker/?group_id=407");
             }
         }, "images/kuneicon16.gif");
+        optionsMenu.addItem(testRTEbasic);
+        optionsMenu.addItem(testRTE);
         optionsMenu.addItem(linkHelpInTrans);
         optionsMenu.addItem(linkKuneBugs);
     }

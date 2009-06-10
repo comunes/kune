@@ -89,7 +89,8 @@ public abstract class AbstractAction implements Action {
      *            the name (<code>null</code> permitted).
      */
     public AbstractAction(final String name) {
-        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09 15:19
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:19
         putValue(NAME, name);
     }
 
@@ -105,9 +106,11 @@ public abstract class AbstractAction implements Action {
      *            the icon (<code>null</code> permitted).
      */
     public AbstractAction(final String name, final ImageResource icon) {
-        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09 15:19
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:19
         putValue(NAME, name);
-        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09 15:19
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 15:19
         putValue(SMALL_ICON, icon);
     }
 

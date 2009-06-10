@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.actions.ui;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 
 public class MenuCheckItemDescriptor extends MenuItemDescriptor {
-    private static final String CHECKED = "checked";
+    public static final String CHECKED = "checked";
 
     private boolean checked = false;
 

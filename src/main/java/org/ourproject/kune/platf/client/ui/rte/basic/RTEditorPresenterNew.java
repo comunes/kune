@@ -4,7 +4,9 @@ import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO
 import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_TEXT;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
@@ -16,8 +18,10 @@ import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiAddCondition;
+import org.ourproject.kune.platf.client.actions.ui.MenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.MenuRadioItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.ToolbarSeparatorDescriptor;
@@ -248,17 +252,22 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public class FontAction extends AbstractRTEAction {
-        private final String fontName;
+        public static final String FONT_NAME = "fontname";
 
         public FontAction(final String fontName, final String tooltip, final ImageResource icon) {
             super("<span style=\"font-family: " + fontName + "\">" + fontName + "</span>", tooltip, icon);
-            this.fontName = fontName;
+            super.putValue(FONT_NAME, fontName);
         }
 
         public void actionPerformed(final ActionEvent actionEvent) {
+            final String fontName = getFontName();
             view.setFontName(fontName);
             fontMenu.setText(fontName);
             fireOnEdit();
+        }
+
+        private String getFontName() {
+            return (String) super.getValue(FONT_NAME);
         }
     }
 
@@ -282,20 +291,18 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public class FontSizeAction extends AbstractRTEAction {
-        private final String fontSizeName;
         private final int fontSize;
 
         public FontSizeAction(final String fontSizeName, final int fontSize, final String tooltip,
                 final ImageResource icon) {
             super("<font size=\"" + (fontSize + 1) + "\">" + fontSizeName + "</font>", tooltip, icon);
-            this.fontSizeName = fontSizeName;
             this.fontSize = fontSize;
         }
 
         public void actionPerformed(final ActionEvent actionEvent) {
             view.setFontSize(FONT_SIZES[fontSize]);
             fireOnEdit();
-            fontSizeMenu.setText(fontSizeName);
+            // fontSizeMenu.setText(fontSizeName);
         }
     }
 
@@ -623,6 +630,8 @@ public class RTEditorPresenterNew implements RTEditorNew {
             RichTextArea.FontSize.XX_SMALL, RichTextArea.FontSize.X_SMALL, RichTextArea.FontSize.SMALL,
             RichTextArea.FontSize.MEDIUM, RichTextArea.FontSize.LARGE, RichTextArea.FontSize.X_LARGE,
             RichTextArea.FontSize.XX_LARGE };
+    private static final String FONT_GROUP = "fontgroup";
+    private static final String FONT_SIZEGROUP = "fontsizegroup";
 
     private RTEditorViewNew view;
     private boolean extended;
@@ -662,6 +671,8 @@ public class RTEditorPresenterNew implements RTEditorNew {
     private MenuDescriptor fileMenu;
     private final List<MenuDescriptor> menus;
     private boolean attached;
+    private final Map<String, MenuCheckItemDescriptor> fontActions;
+    private MenuCheckItemDescriptor currentFontItem;
 
     public RTEditorPresenterNew(final I18nTranslationService i18n, final Session session,
             final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
@@ -683,11 +694,10 @@ public class RTEditorPresenterNew implements RTEditorNew {
         menus = new ArrayList<MenuDescriptor>();
 
         this.imgResources = imgResources;
-        extended = true;
         this.onEdit = new Event0("onRTEEdit");
         extendedAddCond = new GuiAddCondition() {
             public boolean mustBeAdded() {
-                return isExtended();
+                return isAndCanBeExtended();
             }
         };
         basicAddCond = new GuiAddCondition() {
@@ -696,6 +706,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
             }
         };
         attached = false;
+        fontActions = new HashMap<String, MenuCheckItemDescriptor>();
     }
 
     public void addAction(final GuiActionDescrip descriptor) {
@@ -814,8 +825,8 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public void setExtended(final boolean extended) {
-        this.extended = extended;
+    public void setExtended(final boolean newValue) {
+        this.extended = newValue;
     }
 
     public void setFocus(final boolean focus) {
@@ -835,7 +846,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
     public void updateLinkInfo() {
         deferred.addCommand(new Listener0() {
             public void onEvent() {
-                if (isExtended() && view.isLink()) {
+                if (isAndCanBeExtended() && view.isLink()) {
                     view.showLinkCtxMenu();
                 } else {
                     hideLinkCtxMenu();
@@ -849,8 +860,14 @@ public class RTEditorPresenterNew implements RTEditorNew {
             bold.setPushed(view.isBold());
             italic.setPushed(view.isItalic());
             underline.setPushed(view.isUnderlined());
+            deferred.addCommand(new Listener0() {
+                public void onEvent() {
+                    updateFont();
+                    // Log.warn(view.getFontSize());
+                }
+            });
         }
-        if (isExtended()) {
+        if (isAndCanBeExtended()) {
             strikethrough.setPushed(view.isStrikethrough());
         }
     }
@@ -866,8 +883,11 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final MenuSeparatorDescriptor editMenuSep = new MenuSeparatorDescriptor(editMenu);
         final MenuSeparatorDescriptor insertMenuSep = new MenuSeparatorDescriptor(insertMenu);
         final MenuSeparatorDescriptor formatMenuSep = new MenuSeparatorDescriptor(formatMenu);
+        insertMenuSep.setAddCondition(extendedAddCond);
 
         final ToolbarSeparatorDescriptor sndbarSep = new ToolbarSeparatorDescriptor(Type.separator, getSndBar());
+        final ToolbarSeparatorDescriptor sndbarSepExt = new ToolbarSeparatorDescriptor(Type.separator, getSndBar());
+        sndbarSepExt.setAddCondition(extendedAddCond);
 
         final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"), AbstractRTEAction.NO_TEXT,
                 imgResources.selectall());
@@ -1051,7 +1071,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final FontColorAction fontColorAction = new FontColorAction(NO_TEXT, i18n.t("Text Colour"),
                 imgResources.fontcolor());
         final ButtonDescriptor fontColor = new ButtonDescriptor(fontColorAction);
-        fontColor.setAddCondition(extendedAddCond);
+        fontColor.setAddCondition(basicAddCond);
 
         final BackgroundColorAction backColorAction = new BackgroundColorAction(NO_TEXT,
                 i18n.t("Text Background Colour"), imgResources.backcolor());
@@ -1069,20 +1089,20 @@ public class RTEditorPresenterNew implements RTEditorNew {
                 select, editMenuSep, editHtml, editLink, img, insertTable, insertMedia, insertMenuSep,
                 insertSpecialChar, comment, hline, removeFormat, formatMenuSep, insertMenuSep, undoBtn, redoBtn,
                 sndbarSep, bold, italic, underline, strikethrough, sndbarSep, justifyLeft, justifyCentre, justifyRight,
-                decreaseIndent, increaseIndent, olist, ulist, sndbarSep, removeFormatBtn, sndbarSep, hlineBtn, imgBtn,
-                editLinkBtn, removeLinkBtn, insertTableBtn, sndbarSep, subscript, superscript, blockquote, fontMenu,
-                fontSizeMenu, fontColor, backgroundColor);
+                decreaseIndent, increaseIndent, olist, ulist, sndbarSep, removeFormatBtn, sndbarSepExt, hlineBtn,
+                imgBtn, editLinkBtn, removeLinkBtn, insertTableBtn, sndbarSepExt, subscript, superscript, blockquote,
+                fontColor, backgroundColor, fontSizeMenu, fontMenu, editLinkCtx, removeLinkCtx);
         // actions.add(devInfo);
 
         setLocation(TOPBAR, new GuiActionDescrip[] { fileMenu, editMenu, insertMenu, formatMenu, editMenuSep,
                 subscript, superscript, undo, redo, editMenuSep, copy, cut, paste, editMenuSep, select, editMenuSep,
                 editHtml, comment, hline, blockquote, img, insertTable, insertMedia, editLink, removeFormat,
                 formatMenuSep, insertMenuSep, insertSpecialChar, insertTable, devInfo });
-        setLocation(SNDBAR, new GuiActionDescrip[] { undoBtn, redoBtn, sndbarSep, bold, italic, underline,
-                strikethrough, justifyLeft, justifyCentre, justifyRight, undoBtn, redoBtn, hlineBtn, decreaseIndent,
-                increaseIndent, olist, ulist, hlineBtn, imgBtn, editLinkBtn, removeLinkBtn, removeFormatBtn,
-                insertTableBtn, fontColor, backgroundColor, fontMenu, fontSizeMenu });
-        setLocation(LINKCTX, new GuiActionDescrip[] { editLinkCtx, removeLinkCtx });
+        setLocation(SNDBAR, new GuiActionDescrip[] { undoBtn, redoBtn, sndbarSep, sndbarSepExt, bold, italic,
+                underline, strikethrough, justifyLeft, justifyCentre, justifyRight, undoBtn, redoBtn, hlineBtn,
+                decreaseIndent, increaseIndent, olist, ulist, hlineBtn, imgBtn, editLinkBtn, removeLinkBtn,
+                removeFormatBtn, insertTableBtn, fontColor, backgroundColor, fontMenu, fontSizeMenu });
+        setLocation(LINKCTX, new GuiActionDescrip[] { removeLinkCtx, editLinkCtx });
 
         for (final String fontName : FONT_NAMES) {
             createFontAction(fontMenu, fontName);
@@ -1095,22 +1115,22 @@ public class RTEditorPresenterNew implements RTEditorNew {
 
     private void createFontAction(final MenuDescriptor fontMenu, final String fontName) {
         final FontAction fontAction = new FontAction(fontName, NO_TEXT, NO_ICON);
-        final MenuItemDescriptor font = new MenuItemDescriptor(fontMenu, fontAction);
+        final MenuRadioItemDescriptor font = new MenuRadioItemDescriptor(fontMenu, fontAction, FONT_GROUP);
         font.setAddCondition(basicAddCond);
         font.setLocation(SNDBAR);
-        fontMenu.setText(fontName);
+        fontActions.put(fontName.toLowerCase(), font);
         actions.add(font);
     }
 
     private void createFontSizeAction(final MenuDescriptor fontSizeMenu, final int fontSize) {
         final String fontSizeName = i18n.t(FONT_SIZE_NAMES[fontSize]);
         final FontSizeAction fontSizeAction = new FontSizeAction(fontSizeName, fontSize, NO_TEXT, NO_ICON);
-        final MenuItemDescriptor fontSizeItem = new MenuItemDescriptor(fontSizeMenu, fontSizeAction);
+        final MenuRadioItemDescriptor fontSizeItem = new MenuRadioItemDescriptor(fontSizeMenu, fontSizeAction,
+                FONT_SIZEGROUP);
         fontSizeItem.setAddCondition(basicAddCond);
         setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf(((char) (48 + fontSize))), Keyboard.MODIFIER_CTRL),
                 fontSizeAction);
         fontSizeItem.setLocation(SNDBAR);
-        fontSizeMenu.setText(fontSizeName);
         actions.add(fontSizeItem);
     }
 
@@ -1122,6 +1142,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         menus.add(linkCtxMenu = new MenuDescriptor(i18n.t("Change Link")));
         menus.add(fontMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font"), imgResources.charfontname()));
         menus.add(fontSizeMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font size"), imgResources.fontheight()));
+        insertMenu.setAddCondition(extendedAddCond);
     }
 
     private void createPalette() {
@@ -1145,7 +1166,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    private boolean isExtended() {
+    private boolean isAndCanBeExtended() {
         return extended && view.canBeExtended();
     }
 
@@ -1155,4 +1176,18 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
+    private void updateFont() {
+        final String currentFont = view.getFont();
+        final MenuCheckItemDescriptor item = fontActions.get(currentFont);
+        if (currentFontItem != null && item != currentFontItem) {
+            currentFontItem.setChecked(false);
+        }
+        if (item != null) {
+            item.setChecked(true);
+            currentFontItem = item;
+            fontMenu.setText((String) item.getValue(FontAction.FONT_NAME));
+        } else {
+            fontMenu.setText("&nbsp;");
+        }
+    }
 }

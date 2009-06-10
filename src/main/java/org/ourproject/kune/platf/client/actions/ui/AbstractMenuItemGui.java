@@ -3,6 +3,8 @@ package org.ourproject.kune.platf.client.actions.ui;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
+import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
+import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
 import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
@@ -24,9 +26,11 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
         if (descriptor instanceof MenuRadioItemDescriptor) {
             final CheckItem checkItem = createCheckItem(descriptor);
             checkItem.setGroup(((MenuRadioItemDescriptor) descriptor).getGroup());
+            confCheckListener(descriptor, checkItem);
             item = checkItem;
         } else if (descriptor instanceof MenuCheckItemDescriptor) {
             final CheckItem checkItem = createCheckItem(descriptor);
+            confCheckListener(descriptor, checkItem);
             item = checkItem;
         } else {
             item = new Item();
@@ -66,7 +70,6 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
     @Override
     protected void setIcon(final ImageResource imageResource) {
         if (imageResource != null) {
-            // FIXME
             item.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
         }
     }
@@ -88,6 +91,16 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
         if (text != null) {
             item.setTitle(text);
         }
+    }
+
+    private void confCheckListener(final MenuItemDescriptor descriptor, final CheckItem checkItem) {
+        descriptor.action.addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(final PropertyChangeEvent event) {
+                if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
+                    checkItem.setChecked((Boolean) event.getNewValue());
+                }
+            }
+        });
     }
 
     private CheckItem createCheckItem(final MenuItemDescriptor descriptor) {

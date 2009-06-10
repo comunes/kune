@@ -96,7 +96,8 @@ public class PropertyChangeSupport {
     public PropertyChangeSupport(final Object source) {
         this.source = source;
         if (source == null) {
-            // @PMD:REVIEWED:AvoidThrowingNullPointerException: by vjrj on 21/05/09 14:12
+            // @PMD:REVIEWED:AvoidThrowingNullPointerException: by vjrj on
+            // 21/05/09 14:12
             throw new NullPointerException();
         }
     }
@@ -119,7 +120,7 @@ public class PropertyChangeSupport {
         }
 
         if (l instanceof PropertyChangeListenerProxy) {
-            PropertyChangeListenerProxy p = (PropertyChangeListenerProxy) l;
+            final PropertyChangeListenerProxy p = (PropertyChangeListenerProxy) l;
             addPropertyChangeListener(p.propertyName, (PropertyChangeListener) p.getListener());
         } else {
             if (listeners == null) {
@@ -156,7 +157,7 @@ public class PropertyChangeSupport {
         }
 
         while (l instanceof PropertyChangeListenerProxy) {
-            PropertyChangeListenerProxy p = (PropertyChangeListenerProxy) l;
+            final PropertyChangeListenerProxy p = (PropertyChangeListenerProxy) l;
             if (propertyName == null ? p.propertyName != null : !propertyName.equals(p.propertyName)) {
                 return;
             }
@@ -238,10 +239,10 @@ public class PropertyChangeSupport {
                 (v.get(i)).propertyChange(event);
             }
         }
-        HashMap<String, PropertyChangeSupport> h = children; // Be
+        final HashMap<String, PropertyChangeSupport> h = children; // Be
         // thread-safe.
         if (h != null && event.propertyName != null) {
-            PropertyChangeSupport s = h.get(event.propertyName);
+            final PropertyChangeSupport s = h.get(event.propertyName);
             if (s != null) {
                 v = s.listeners; // Be thread-safe.
                 int i = v == null ? 0 : v.size();
@@ -320,17 +321,17 @@ public class PropertyChangeSupport {
      * @since 1.4
      */
     public PropertyChangeListener[] getPropertyChangeListeners() {
-        ArrayList<PropertyChangeListener> list = new ArrayList<PropertyChangeListener>();
+        final ArrayList<PropertyChangeListener> list = new ArrayList<PropertyChangeListener>();
         if (listeners != null) {
             list.addAll(listeners);
         }
         if (children != null) {
             int i = children.size();
-            Iterator<Entry<String, PropertyChangeSupport>> iter = children.entrySet().iterator();
+            final Iterator<Entry<String, PropertyChangeSupport>> iter = children.entrySet().iterator();
             while (--i >= 0) {
-                Entry<String, PropertyChangeSupport> e = iter.next();
-                String name = e.getKey();
-                Vector<PropertyChangeListener> v = (e.getValue()).listeners;
+                final Entry<String, PropertyChangeSupport> e = iter.next();
+                final String name = e.getKey();
+                final Vector<PropertyChangeListener> v = (e.getValue()).listeners;
                 int j = v.size();
                 while (--j >= 0) {
                     list.add(new PropertyChangeListenerProxy(name, v.get(j)));
@@ -352,7 +353,7 @@ public class PropertyChangeSupport {
         if (children == null || propertyName == null) {
             return new PropertyChangeListener[0];
         }
-        PropertyChangeSupport s = children.get(propertyName);
+        final PropertyChangeSupport s = children.get(propertyName);
         if (s == null) {
             return new PropertyChangeListener[0];
         }
@@ -387,7 +388,7 @@ public class PropertyChangeSupport {
      */
     public void removePropertyChangeListener(final PropertyChangeListener l) {
         if (l instanceof PropertyChangeListenerProxy) {
-            PropertyChangeListenerProxy p = (PropertyChangeListenerProxy) l;
+            final PropertyChangeListenerProxy p = (PropertyChangeListenerProxy) l;
             removePropertyChangeListener(p.propertyName, (PropertyChangeListener) p.getListener());
         } else if (listeners != null) {
             listeners.remove(l);
@@ -417,12 +418,12 @@ public class PropertyChangeSupport {
         if (children == null) {
             return;
         }
-        PropertyChangeSupport s = children.get(propertyName);
+        final PropertyChangeSupport s = children.get(propertyName);
         if (s == null) {
             return;
         }
         while (l instanceof PropertyChangeListenerProxy) {
-            PropertyChangeListenerProxy p = (PropertyChangeListenerProxy) l;
+            final PropertyChangeListenerProxy p = (PropertyChangeListenerProxy) l;
             if (propertyName == null ? p.propertyName != null : !propertyName.equals(p.propertyName)) {
                 return;
             }

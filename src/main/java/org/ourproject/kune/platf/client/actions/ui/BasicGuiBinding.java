@@ -9,8 +9,8 @@ public class BasicGuiBinding {
         bindings.register(MenuCheckItemDescriptor.class, menuItemBinding);
         bindings.register(MenuItemDescriptor.class, menuItemBinding);
         bindings.register(MenuSeparatorDescriptor.class, new MenuSeparatorBinding());
-        bindings.register(ButtonDescriptor.class, new ButtonBinding());
         bindings.register(PushButtonDescriptor.class, new PushButtonBinding());
+        bindings.register(ButtonDescriptor.class, new ButtonBinding());
         bindings.register(ToolbarSeparatorDescriptor.class, new ToolbarSeparatorBinding());
     }
 }

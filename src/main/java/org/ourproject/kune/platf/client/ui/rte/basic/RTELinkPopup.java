@@ -1,5 +1,7 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
+import org.ourproject.kune.platf.client.actions.Action;
+import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.services.Images;
@@ -9,6 +11,7 @@ import org.ourproject.kune.platf.client.ui.dialogs.AbstractPopupPanel;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -32,7 +35,16 @@ public class RTELinkPopup extends AbstractPopupPanel {
     }
 
     public void add(final GuiActionDescrip item) {
-        // TODO
+        final Label actionLabel = new Label();
+        actionLabel.setText((String) item.getValue(Action.NAME));
+        actionLabel.addStyleName("k-rte-changelink");
+        KuneUiUtils.setUnselectable(actionLabel.getElement());
+        actionLabel.addClickHandler(new ClickHandler() {
+            public void onClick(final ClickEvent event) {
+                item.fire(new ActionEvent(actionLabel, (Event) event.getNativeEvent()));
+            }
+        });
+        hpanel.insert(actionLabel, 0);
     }
 
     @Deprecated

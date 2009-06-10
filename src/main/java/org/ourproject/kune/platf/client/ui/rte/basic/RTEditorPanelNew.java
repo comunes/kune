@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import java.util.Date;
 
+import org.cobogw.gwt.user.client.CSS;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
@@ -27,6 +28,7 @@ import org.xwiki.gwt.dom.client.Selection;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
@@ -39,6 +41,7 @@ import com.google.gwt.user.client.Event;
 
 public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditorViewNew, FocusHandler, BlurHandler {
 
+    private static final Element NO_ELEMENT = null;
     private final I18nUITranslationService i18n;
     private final BasicFormatter basic;
     private final ExtendedFormatter extended;
@@ -118,6 +121,16 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
 
     public void focus() {
         setFocus(true);
+    }
+
+    public String getFont() {
+        final Element currentElement = getCurrentElement();
+        return currentElement == NO_ELEMENT ? "" : currentElement.getStyle().getProperty(CSS.A.FONT_FAMILY);
+    }
+
+    public String getFontSize() {
+        final Element currentElement = getCurrentElement();
+        return currentElement == NO_ELEMENT ? "" : currentElement.getStyle().getProperty("size");
     }
 
     public String getHTML() {
@@ -292,7 +305,6 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
             // globalShortcutReg.get(event) : rtaActionItem;
             final AbstractAction actionItem = rtaActionItem == null ? null : rtaActionItem;
             if (actionItem == null) {
-                Log.warn("rte action key null");
                 super.onBrowserEvent(event);
                 updateStatus();
                 updateLinkInfo();
@@ -420,6 +432,17 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
         presenter.fireOnEdit();
     }
 
+    protected Element getElement(final Node inputNode) {
+        Node node = inputNode;
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            node = node.getParentNode();
+        }
+        if (node == null || node.getNodeType() != Node.ELEMENT_NODE) {
+            return null;
+        }
+        return Element.as(node);
+    }
+
     private void createCommentAndSelectIt(final String author, final String comment) {
         final Element commentEl = createCommentElement(author, comment);
         final Range innerCommentRange = rta.getDocument().createRange();
@@ -437,6 +460,14 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
         DOM.setElementProperty(span.<com.google.gwt.user.client.Element> cast(), "className", "k-rte-comment");
         // insertHtml("&nbsp;" + span.getString() + "&nbsp;");
         return span;
+    }
+
+    private Element getCurrentElement() {
+        if (getSelection().getRangeCount() > 0) {
+            return getElement(getSelection().getRangeAt(0).getStartContainer());
+        } else {
+            return NO_ELEMENT;
+        }
     }
 
     private Range getFstRange() {

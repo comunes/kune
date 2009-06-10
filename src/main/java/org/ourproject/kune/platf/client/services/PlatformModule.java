@@ -59,11 +59,8 @@ import org.ourproject.kune.platf.client.ui.palette.SimplePalettePresenter;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionSndToolbar;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionTopToolbar;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanelNew;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenterNew;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogPanel;
@@ -337,21 +334,7 @@ public class PlatformModule extends AbstractModule {
             }
         });
 
-        register(NoDecoration.class, new Factory<RTEditor>(RTEditor.class) {
-            @Override
-            public RTEditor create() {
-                final RTEActionTopToolbar topBar = $(RTEActionTopToolbar.class);
-                final RTEActionSndToolbar sndBar = $(RTEActionSndToolbar.class);
-                final RTEditorPresenter presenter = new RTEditorPresenter($(I18nTranslationService.class),
-                        $(Session.class), topBar, sndBar, $(RTEImgResources.class), $$(InsertLinkDialog.class),
-                        $$(ColorWebSafePalette.class), $$(EditHtmlDialog.class), $$(InsertImageDialog.class),
-                        $$(InsertMediaDialog.class),   $$(InsertTableDialog.class), $$(InsertSpecialCharDialog.class), $(DeferredCommandWrapper.class));
-                final RTEditorPanel panel = new RTEditorPanel(presenter, $(I18nUITranslationService.class),
-                        $(ActionManager.class), $(GlobalShortcutRegister.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        },new Factory<RTEditorNew>(RTEditorNew.class) {
+        register(NoDecoration.class,new Factory<RTEditorNew>(RTEditorNew.class) {
             @Override
             public RTEditorNew create() {
                 final RTEditorPresenterNew presenter = new RTEditorPresenterNew($(I18nTranslationService.class),

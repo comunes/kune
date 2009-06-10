@@ -4,7 +4,7 @@ public class PushButtonBinding extends GuiBindingAdapter {
 
     @Override
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        return new ButtonGui((ButtonDescriptor) descriptor, true);
+        return new PushButtonGui((PushButtonDescriptor) descriptor);
     }
 
 }

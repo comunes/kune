@@ -26,6 +26,10 @@ public interface RTEditorViewNew extends View {
 
     void focus();
 
+    String getFont();
+
+    String getFontSize();
+
     String getHTML();
 
     LinkInfo getLinkInfoIfHref();
@@ -133,5 +137,4 @@ public interface RTEditorViewNew extends View {
     void undo();
 
     void unlink();
-
 }

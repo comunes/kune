@@ -1,11 +1,9 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
+import org.ourproject.kune.platf.client.actions.ActionEvent;
 
 /**
  * The Class AbstractUIActionDescriptor.
@@ -20,7 +18,6 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
     private GuiVisibleCondition visibleCondition = new GuiVisibleConditionAdapter();
 
     protected GuiActionDescrip parent;
-    private final Map<String, Object> store;
 
     /** The action. */
     protected AbstractAction action;
@@ -42,7 +39,10 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
         this.action = action;
         position = NO_POSITION;
         parent = NO_PARENT;
-        store = new HashMap<String, Object>();
+    }
+
+    public void fire(final ActionEvent event) {
+        action.actionPerformed(event);
     }
 
     public GuiAddCondition getAddCondition() {
@@ -86,7 +86,7 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
      * @see #putValue(String, Object)
      */
     public Object getValue(final String key) {
-        return store.get(key);
+        return action.getValue(key);
     }
 
     public GuiVisibleCondition getVisibleCondition() {
@@ -109,7 +109,7 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
      *            the value (<code>null</code> permitted).
      */
     public void putValue(final String key, final Object value) {
-        store.put(key, value);
+        action.putValue(key, value);
     }
 
     public void setAddCondition(final GuiAddCondition addCondition) {
