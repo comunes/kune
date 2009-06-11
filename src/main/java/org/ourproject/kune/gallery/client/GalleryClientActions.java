@@ -69,8 +69,8 @@ public class GalleryClientActions extends AbstractFoldableContentActions {
         final String[] containersNoRoot = { TYPE_ALBUM };
         final String[] contents = { TYPE_UPLOADEDFILE };
 
-        String parentMenuTitle = i18n.t("File");
-        String parentMenuTitleCtx = i18n.t("Album");
+        final String parentMenuTitle = i18n.t("File");
+        final String parentMenuTitleCtx = i18n.t("Album");
 
         createNewContainerAction(TYPE_ALBUM, "images/nav/gallery_add.png", i18n.t("New sub-album"), parentMenuTitleCtx,
                 i18n.t("New"), i18n.t("New sub-album"), Position.ctx, TYPE_ALBUM);

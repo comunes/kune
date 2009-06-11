@@ -52,6 +52,7 @@ import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.ClosingEvent;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ToolbarButton;
@@ -110,8 +111,8 @@ class ChatEngineDefault implements ChatEngine {
                 login(user.getChatName(), user.getChatPassword());
             }
         });
-        application.onApplicationStop(new Listener0() {
-            public void onEvent() {
+        application.onClosing(new Listener<ClosingEvent>() {
+            public void onEvent(final ClosingEvent event) {
                 stop();
             }
         });
@@ -139,7 +140,7 @@ class ChatEngineDefault implements ChatEngine {
 
     public boolean isBuddie(final XmppURI jid) {
         if (roster != null) {
-            for (RosterItem item : roster) {
+            for (final RosterItem item : roster) {
                 if (item.getJID().equalsNoResource(jid)) {
                     return true;
                 }
@@ -168,7 +169,7 @@ class ChatEngineDefault implements ChatEngine {
             if (subject != null) {
                 DeferredCommand.addCommand(new Command() {
                     public void execute() {
-                        RoomUI roomUI = (RoomUI) room.getData(ChatUI.class);
+                        final RoomUI roomUI = (RoomUI) room.getData(ChatUI.class);
                         if (roomUI != null) {
                             roomUI.setSubject(subject);
                         }

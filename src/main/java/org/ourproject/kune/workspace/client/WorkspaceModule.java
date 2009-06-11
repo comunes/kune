@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client;
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
+import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -49,8 +50,9 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
@@ -59,7 +61,8 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
-import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
+import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
@@ -76,6 +79,8 @@ import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPanel;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorPresenter;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditorView;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
+import org.ourproject.kune.workspace.client.editor.ContentEditorPanel;
+import org.ourproject.kune.workspace.client.editor.ContentEditorPresenter;
 import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocal;
 import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insertlocalimg.InsertImageLocalPresenter;
@@ -873,10 +878,16 @@ public class WorkspaceModule extends AbstractExtendedModule {
         register(Singleton.class, new Factory<ContentEditor>(ContentEditor.class) {
             @Override
             public ContentEditor create() {
-                return new ContentEditor(i(RTEditorNew.class), true, i(I18nTranslationService.class),
-                        i(StateManager.class), i(SiteSignOutLink.class), i(DeferredCommandWrapper.class),
-                        i(RTEImgResources.class), i(WorkspaceSkeleton.class), i(TimerWrapper.class),
-                        new RTESavingEditorPanel(), i(EntityTitle.class));
+                final ContentEditorPresenter presenter = new ContentEditorPresenter(i(I18nTranslationService.class),
+                        i(Session.class), i(RTEImgResources.class), p(InsertLinkDialog.class),
+                        p(ColorWebSafePalette.class), p(EditHtmlDialog.class), p(InsertImageDialog.class),
+                        p(InsertMediaDialog.class), p(InsertTableDialog.class), p(InsertSpecialCharDialog.class),
+                        i(DeferredCommandWrapper.class), true, i(StateManager.class), i(SiteSignOutLink.class),
+                        i(WorkspaceSkeleton.class), i(TimerWrapper.class), i(EntityTitle.class));
+                final ContentEditorPanel panel = new ContentEditorPanel(presenter, i(I18nUITranslationService.class),
+                        i(GlobalShortcutRegister.class), i(GuiBindingsRegister.class));
+                presenter.init(panel);
+                return presenter;
             }
         });
         register(NoDecoration.class, new Factory<ActionContextTopToolbar>(ActionContextTopToolbar.class) {

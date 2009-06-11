@@ -20,25 +20,32 @@
 package org.ourproject.kune.workspace.client.hello;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.Action;
+import org.ourproject.kune.platf.client.actions.ActionEvent;
+import org.ourproject.kune.platf.client.actions.ui.MenuCheckItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.MenuRadioItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
+import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
+import org.ourproject.kune.workspace.client.editor.ContentEditor;
+import org.ourproject.kune.workspace.client.hello.HelloWorldModule.HelloWorldPanel.HelloWorldPresenter;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.socialnet.UserActionRegistry;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Label;
 
 /**
@@ -70,68 +77,120 @@ public class HelloWorldModule extends AbstractExtendedModule {
      * 
      */
     public static class HelloWorldPanel implements HelloWorldView {
+        public static class HelloWorldPresenter implements HelloWorld {
+
+            private HelloWorldView view;
+
+            public HelloWorldPresenter(final I18nTranslationService i18n,
+                    final Provider<ContentEditor> contentEditorProv, final ImgResources img) {
+                // Or add some actions to the general content editor:
+                createActions(contentEditorProv, img, i18n);
+            }
+
+            public View getView() {
+                return view;
+            }
+
+            public void init(final HelloWorldView view) {
+                this.view = view;
+            }
+
+            /**
+             * We can add some gui action items to the content editor
+             * 
+             * Summary)
+             * 
+             * @param i18n
+             **/
+            private void createActions(final Provider<ContentEditor> contentEditorProv, final ImgResources img,
+                    final I18nTranslationService i18n) {
+
+                final HelloWorldAction action = new HelloWorldAction(img);
+
+                // We describe some gui items and all will use the same action:
+
+                final PushButtonDescriptor btn = new PushButtonDescriptor(action);
+
+                // We no use i18n.t() in most of these gui widgets but it's is
+                // recommended the use in real code
+                final MenuDescriptor menu = new MenuDescriptor(i18n.t("File"), "File menu tooltip");
+
+                final MenuItemDescriptor menuitem = new MenuItemDescriptor(menu, action);
+                final MenuItemDescriptor menuitem2 = new MenuItemDescriptor(menu, action);
+
+                // A submenu
+                final MenuDescriptor submenu = new MenuDescriptor("Options", "Submenu tooltip");
+                submenu.setParent(menu);
+
+                // A menu check item
+                final MenuItemDescriptor menuitem3 = new MenuItemDescriptor(submenu, action);
+                final MenuCheckItemDescriptor menuitem4 = new MenuCheckItemDescriptor(submenu, action);
+                menuitem4.setChecked(true);
+
+                // Some menu radio items
+                final String radioGroup = "helloworldradiogroup";
+                final MenuRadioItemDescriptor menuitem5 = new MenuRadioItemDescriptor(submenu, action, radioGroup);
+                final MenuRadioItemDescriptor menuitem6 = new MenuRadioItemDescriptor(submenu, action, radioGroup);
+                menuitem5.setChecked(true);
+
+                // We can define also some menu separators
+                final MenuSeparatorDescriptor menuSeparator = new MenuSeparatorDescriptor(menu);
+                final MenuSeparatorDescriptor otherSeparator = new MenuSeparatorDescriptor(submenu);
+
+                // Lazy creation of objects:
+                //
+                // Using Provider<Class> we do lazy instantiation. When we call
+                // actionRegistry.get() it creates the instance if is not
+                // created
+                // yet.
+                final ContentEditor contentEditor = contentEditorProv.get();
+
+                // We want to add some items to the topbar and other to the
+                // second bar
+                contentEditor.setLocation(ContentEditor.TOPBAR, menu, menuitem, menuSeparator, menuitem2, submenu,
+                        menuitem3, menuitem4, otherSeparator, menuitem5, menuitem6);
+                contentEditor.setLocation(ContentEditor.SNDBAR, btn);
+
+                // And finally we add the action descriptors to the editor:
+                contentEditor.addActions(btn, menu, menuitem);
+
+                // Also individually
+                contentEditor.addAction(menuSeparator);
+
+                // It's important to add the menus before its menu items
+                contentEditor.addActions(menuitem2, submenu, menuitem3, menuitem4, otherSeparator, menuitem5, menuitem6);
+
+                // We can change descriptors properties and are changed in the
+                // UI
+                btn.setPushed(true);
+
+                // After some time we can change the common action or some other
+                // properties
+                new Timer() {
+                    @Override
+                    public void run() {
+                        // The text of the action (in the menu or in the button)
+                        action.putValue(Action.NAME, "hello world new");
+                        // And the tooltip (on over message):
+                        action.putValue(Action.SHORT_DESCRIPTION, "hello world new");
+                        btn.setPushed(false);
+                    }
+                }.schedule(10000);
+            }
+        }
+
         private final I18nTranslationService i18n;
 
-        public HelloWorldPanel(final HelloWorldPresenter presenter, final WorkspaceSkeleton ws,
+        public HelloWorldPanel(final HelloWorldPresenter presenter, final WorkspaceSkeleton wspace,
                 final I18nTranslationService i18n) {
             this.i18n = i18n;
-            /** We can directly insert something in the workspace skeleton **/
-            ws.getEntityWorkspace().getSubTitle().add(new Label(i18n.t("Hello world!")));
+            // We can directly insert something in the workspace skeleton
+            wspace.getEntityWorkspace().getSubTitle().add(new Label(i18n.t("Hello world!")));
         }
 
         public void showMessage() {
             /** i18n use with parameters **/
             NotifyUser.info(i18n.t("Hello [%s]!", "world"));
-        }
-    }
-
-    public static class HelloWorldPresenter implements HelloWorld {
-
-        private HelloWorldView view;
-        private final Provider<UserActionRegistry> actionRegistry;
-        private final I18nTranslationService i18n;
-
-        public HelloWorldPresenter(final I18nTranslationService i18n, final Provider<UserActionRegistry> actionRegistry) {
-            this.i18n = i18n;
-            this.actionRegistry = actionRegistry;
-            createActions();
-        }
-
-        public View getView() {
-            return view;
-        }
-
-        public void init(final HelloWorldView view) {
-            this.view = view;
-        }
-
-        /**
-         * We add an menu action to users menus (like the buddies in Buddies
-         * Summary)
-         **/
-        private void createActions() {
-            final ActionToolbarMenuDescriptor<UserSimpleDTO> helloWorldBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
-                    AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<UserSimpleDTO>() {
-                        public void onEvent(final UserSimpleDTO parameter) {
-                            // We clicked:
-                            view.showMessage();
-                        }
-                    });
-            // AccessRolDTO.Viewer: any user can see this option and without be
-            // authenticated:
-            helloWorldBuddiesAction.setMustBeAuthenticated(false);
-            // We add a submenu in Options menu:
-            helloWorldBuddiesAction.setParentMenuTitle(i18n.t("Options"));
-            helloWorldBuddiesAction.setParentSubMenuTitle(i18n.t("Hello world submenu"));
-            helloWorldBuddiesAction.setTextDescription(i18n.t("Hello world menu item"));
-            helloWorldBuddiesAction.setIconUrl("images/info.gif");
-
-            // Lazy creation of objects:
-            //
-            // Using Provider<Class> we do lazy instantiation. When we call
-            // actionRegistry.get() it creates the instance if is not created
-            // yet.
-            actionRegistry.get().addAction(helloWorldBuddiesAction);
         }
     }
 
@@ -141,6 +200,22 @@ public class HelloWorldModule extends AbstractExtendedModule {
      */
     public interface HelloWorldView extends View {
         void showMessage();
+    }
+
+    static class HelloWorldAction extends AbstractAction {
+        public HelloWorldAction(final ImgResources img) {
+            super();
+            super.putValue(Action.NAME, "helloword");
+            super.putValue(Action.SHORT_DESCRIPTION, "helloworld item");
+            super.putValue(Action.SMALL_ICON, img.info());
+        }
+
+        public void actionPerformed(final ActionEvent actionEvent) {
+            if (actionEvent.getEvent().getCtrlKey()) {
+                NotifyUser.info("Hello world action fired with ctrl key pressed");
+            }
+            NotifyUser.info("Hello world action fired");
+        }
     }
 
     /**
@@ -175,7 +250,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
             @Override
             public HelloWorld create() {
                 final HelloWorldPresenter presenter = new HelloWorldPresenter(i(I18nTranslationServiceMocked.class),
-                        p(UserActionRegistry.class));
+                        p(ContentEditor.class), i(ImgResources.class));
                 final HelloWorldPanel panel = new HelloWorldPanel(presenter, i(WorkspaceSkeleton.class),
                         i(I18nTranslationServiceMocked.class));
                 presenter.init(panel);
@@ -213,10 +288,5 @@ public class HelloWorldModule extends AbstractExtendedModule {
                 NotifyUser.info("Global Ctrl+S pressed");
             }
         });
-
-        // And because nobody use this module, we get the class (to force the
-        // creation of the
-        // Helloworld instance):
-        // i(HelloWorld.class);
     }
 }

@@ -27,7 +27,9 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Event0;
+import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -40,30 +42,30 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class ApplicationDefault implements Application {
     private final Session session;
-    private final Event0 onAppStart;
-    private final Event0 onAppStop;
+    private final Event0 onAppStarting;
+    private final Event<ClosingEvent> onAppClosing;
 
     public ApplicationDefault(final Session session) {
         this.session = session;
-        this.onAppStart = new Event0("onApplicationStart");
-        this.onAppStop = new Event0("onApplicationStop");
+        this.onAppStarting = new Event0("onAppStarting");
+        this.onAppClosing = new Event<ClosingEvent>("onAppClossing");
         Window.addWindowClosingHandler(new ClosingHandler() {
             public void onWindowClosing(final ClosingEvent event) {
-                stop();
+                stop(event);
             }
         });
     }
 
-    public void onApplicationStart(final Listener0 listener) {
-        onAppStart.add(listener);
+    public void onClosing(final Listener<ClosingEvent> listener) {
+        onAppClosing.add(listener);
     }
 
-    public void onApplicationStop(final Listener0 listener) {
-        onAppStop.add(listener);
+    public void onStarting(final Listener0 listener) {
+        onAppStarting.add(listener);
     }
 
     public void start() {
-        onAppStart.fire();
+        onAppStarting.fire();
         PrefetchUtilities.preFetchImpImages();
         getInitData();
         final Timer prefetchTimer = new Timer() {
@@ -98,7 +100,7 @@ public class ApplicationDefault implements Application {
         });
     }
 
-    private void stop() {
-        onAppStop.fire();
+    private void stop(final ClosingEvent event) {
+        onAppClosing.fire(event);
     }
 }

@@ -70,8 +70,8 @@ public class WikiClientActions extends AbstractFoldableContentActions {
         final String[] containersNoRoot = { TYPE_FOLDER };
         final String[] contents = { TYPE_WIKIPAGE, TYPE_UPLOADEDFILE };
 
-        String parentMenuTitle = i18n.t("Wikipage");
-        String parentMenuTitleCtx = i18n.t("Wiki");
+        final String parentMenuTitle = i18n.t("Wikipage");
+        final String parentMenuTitleCtx = i18n.t("Wiki");
 
         createNewContainerAction(TYPE_FOLDER, "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx,
                 i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_ROOT, TYPE_FOLDER);

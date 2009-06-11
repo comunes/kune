@@ -67,7 +67,11 @@ public abstract class AbstractButtonGui extends AbstractGuiItem {
     @Override
     protected void setIcon(final ImageResource imageResource) {
         if (imageResource != null) {
-            button.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
+            if (action.getValue(Action.NAME) == null) {
+                button.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
+            } else {
+                button.setIcon(ImgConstants.PATH_PREFIX + imageResource.getName() + ".png");
+            }
         }
     }
 

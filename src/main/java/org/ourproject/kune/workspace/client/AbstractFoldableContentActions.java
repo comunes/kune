@@ -207,7 +207,7 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected void createDownloadActions(final String typeUploadedfile) {
-        ActionToolbarButtonDescriptor<StateToken> download = new ActionToolbarButtonDescriptor<StateToken>(
+        final ActionToolbarButtonDescriptor<StateToken> download = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         downloadContent(token);
@@ -218,7 +218,7 @@ public abstract class AbstractFoldableContentActions {
         download.setToolTip(i18n.t("Download this file"));
         download.setIconUrl("images/nav/download.png");
 
-        ActionMenuItemDescriptor<StateToken> downloadCtx = new ActionMenuItemDescriptor<StateToken>(
+        final ActionMenuItemDescriptor<StateToken> downloadCtx = new ActionMenuItemDescriptor<StateToken>(
                 AccessRolDTO.Viewer, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         downloadContent(token);
@@ -234,7 +234,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected ActionToolbarButtonDescriptor<StateToken> createEditAction(final String fileMenuTitle,
             final String... registerInTypes) {
-        ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
+        final ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.showProgressProcessing();
@@ -298,7 +298,7 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected ActionMenuItemDescriptor<StateToken> createGoAction(final String... registerInTypes) {
-        ActionMenuItemDescriptor<StateToken> go = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer,
+        final ActionMenuItemDescriptor<StateToken> go = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer,
                 new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         stateManager.gotoToken(token);
@@ -312,7 +312,7 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected ActionToolbarButtonDescriptor<StateToken> createGoHomeAction(final String... registerInTypes) {
-        ActionToolbarButtonDescriptor<StateToken> goGroupHome = new ActionToolbarButtonDescriptor<StateToken>(
+        final ActionToolbarButtonDescriptor<StateToken> goGroupHome = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, CONTEXT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         stateManager.gotoToken(token.getGroup());
@@ -465,7 +465,7 @@ public abstract class AbstractFoldableContentActions {
                 }, "ContentRadioStatus", new RadioMustBeChecked() {
                     public boolean mustBeChecked() {
                         if (session.getContainerState() instanceof StateContentDTO) {
-                            ContentStatusDTO currentStatus = session.getContentState().getStatus();
+                            final ContentStatusDTO currentStatus = session.getContentState().getStatus();
                             return status.equals(currentStatus);
                         }
                         return false;
@@ -478,10 +478,10 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected void createShowDeletedItems(final String parentMenuTitle, final String... registerInTypes) {
-        ActionToolbarMenuCheckItemDescriptor<StateToken> showDeletedItems = new ActionToolbarMenuCheckItemDescriptor<StateToken>(
+        final ActionToolbarMenuCheckItemDescriptor<StateToken> showDeletedItems = new ActionToolbarMenuCheckItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener0() {
                     public void onEvent() {
-                        boolean mustShow = !session.getCurrentUserInfo().getShowDeletedContent();
+                        final boolean mustShow = !session.getCurrentUserInfo().getShowDeletedContent();
                         session.getCurrentUserInfo().setShowDeletedContent(mustShow);
                         if (!mustShow && session.isCurrentStateAContent()
                                 && session.getContentState().getStatus().equals(ContentStatusDTO.inTheDustbin)) {
@@ -503,7 +503,7 @@ public abstract class AbstractFoldableContentActions {
 
     protected ActionToolbarMenuDescriptor<StateToken> createTranslateAction(final String fileMenuTitle,
             final String... registerInTypes) {
-        ActionToolbarMenuDescriptor<StateToken> translateContent = new ActionToolbarMenuDescriptor<StateToken>(
+        final ActionToolbarMenuDescriptor<StateToken> translateContent = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.important(i18n.t("Sorry, this functionality is currently in development"));
@@ -543,7 +543,7 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected ActionToolbarButtonAndItemDescriptor<StateToken> createUploadMediaAction(final String... registerInTypes) {
-        ActionToolbarButtonAndItemDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
+        final ActionToolbarButtonAndItemDescriptor<StateToken> uploadMedia = createUploadAction(i18n.t("Upload media"),
                 "images/nav/upload.png", i18n.t("Upload some media (images, videos...)"),
                 session.getGalleryPermittedExtensions());
         contextActionRegistry.addAction(uploadMedia, registerInTypes);

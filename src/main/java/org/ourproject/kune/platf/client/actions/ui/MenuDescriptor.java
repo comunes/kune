@@ -27,6 +27,10 @@ public class MenuDescriptor extends GuiActionDescrip {
         this(new BaseAction(text, null, icon));
     }
 
+    public MenuDescriptor(final String text, final String tooltip) {
+        this(new BaseAction(text, tooltip, null));
+    }
+
     public MenuDescriptor(final String text, final String tooltip, final ImageResource icon) {
         this(new BaseAction(text, tooltip, icon));
     }

@@ -28,7 +28,6 @@ import org.ourproject.kune.platf.client.services.PlatformModule;
 import org.ourproject.kune.wiki.client.WikiClientModule;
 import org.ourproject.kune.workspace.client.RegistryModule;
 import org.ourproject.kune.workspace.client.WorkspaceModule;
-import org.ourproject.kune.workspace.client.hello.HelloWorldModule;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emiteuimodule.client.EmiteUIModule;
@@ -56,8 +55,5 @@ public class KuneEntryPoint implements EntryPoint {
         Suco.install(new CoreModule(), new RegistryModule(), new PlatformModule(), new EmiteUIModule(),
                 new DocumentClientModule(), new BlogClientModule(), new WikiClientModule(), new GalleryClientModule(),
                 new ChatClientModule(), new WorkspaceModule());
-
-        // We install our HelloWorldModule
-        Suco.install(new HelloWorldModule());
     }
 }

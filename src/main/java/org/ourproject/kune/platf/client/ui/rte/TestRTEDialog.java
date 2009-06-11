@@ -2,8 +2,7 @@ package org.ourproject.kune.platf.client.ui.rte;
 
 import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanelNew;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditor;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -20,10 +19,9 @@ public class TestRTEDialog {
         dialog = new BasicDialog("Testing RTE", false, false, 650, 200);
         final VerticalPanel vp = new VerticalPanel();
 
-        final RTEditorNew basicEditor = editor.getBasicEditor();
-        vp.add((ComplexToolbar) basicEditor.getTopBar());
-        vp.add((ComplexToolbar) basicEditor.getSndBar());
-        final RTEditorPanelNew editorPanel = (RTEditorPanelNew) basicEditor.getEditorArea();
+        vp.add((ComplexToolbar) editor.getTopBar());
+        vp.add((ComplexToolbar) editor.getSndBar());
+        final RTEditorPanel editorPanel = (RTEditorPanel) editor.getEditorArea();
         vp.add(editorPanel);
         vp.setWidth("100%");
         dialog.add(vp);
@@ -38,11 +36,11 @@ public class TestRTEDialog {
     }
 
     public void setExtended(final boolean extended) {
-        editor.getBasicEditor().setExtended(extended);
+        editor.setExtended(extended);
     }
 
     public void show() {
-        editor.getBasicEditor().attach();
+        editor.attach();
         dialog.show();
     }
 }

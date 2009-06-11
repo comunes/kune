@@ -70,8 +70,8 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
         final String[] containersNoRoot = { TYPE_FOLDER };
         final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
 
-        String parentMenuTitle = i18n.t("File");
-        String parentMenuTitleCtx = i18n.t("Folder");
+        final String parentMenuTitle = i18n.t("File");
+        final String parentMenuTitleCtx = i18n.t("Folder");
 
         createNewContainerAction(TYPE_FOLDER, "images/nav/folder_add.png", i18n.t("New folder"), parentMenuTitleCtx,
                 i18n.t("New"), i18n.t("New folder"), Position.ctx, TYPE_ROOT, TYPE_FOLDER);

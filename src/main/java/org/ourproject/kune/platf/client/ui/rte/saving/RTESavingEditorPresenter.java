@@ -12,17 +12,27 @@ import org.ourproject.kune.platf.client.actions.ui.MenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
+import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
+import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenter;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
+import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
+import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
+import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
+import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.libideas.resources.client.ImageResource;
 
-public class RTESavingEditorPresenter implements RTESavingEditor {
+public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESavingEditor {
 
     public class AutoSaveAction extends AbstractExtendedAction {
         public AutoSaveAction(final String text, final String tooltip, final ImageResource icon) {
@@ -76,7 +86,6 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
 
     public static final int AUTOSAVE_AFTER_FAIL_MILLS = 20000;
     public static final int AUTOSAVE_IN_MILLIS = 10000;
-    private final RTEditorNew editor;
     private boolean autoSave;
     private boolean savePending;
     private boolean saveCloseConfirmed;
@@ -93,18 +102,21 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     SaveAction saveAction;
     private SaveAction saveMenuAction;
 
-    public RTESavingEditorPresenter(final RTEditorNew editor, final boolean autoSave, final I18nTranslationService i18n,
-            final StateManager stateManager, final DeferredCommandWrapper deferredCommandWrapper,
-            final RTEImgResources imgResources, final TimerWrapper timer) {
-        this.editor = editor;
+    public RTESavingEditorPresenter(final I18nTranslationService i18n, final Session session,
+            final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
+            final Provider<ColorWebSafePalette> palette, final Provider<EditHtmlDialog> editHtmlDialog,
+            final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
+            final Provider<InsertTableDialog> insertTableDialog, final Provider<InsertSpecialCharDialog> insCharDialog,
+            final DeferredCommandWrapper deferred, final boolean autoSave,
+            final StateManager stateManager,             final TimerWrapper timer) {
+        super(i18n, session, imgResources, insLinkDialog, palette, editHtmlDialog, insertImageDialog, insertMediaDialog, insertTableDialog, insCharDialog, deferred);
         this.autoSave = autoSave;
         this.i18n = i18n;
         this.stateManager = stateManager;
-        this.deferred = deferredCommandWrapper;
+        this.deferred = deferred;
         this.imgResources = imgResources;
         this.savePending = false;
         this.saveCloseConfirmed = false;
-        createActions();
         this.timer =  timer;
         timer.configure(new Listener0() {;
 
@@ -113,7 +125,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         }
         });
 
-        editor.addOnEditListener(new Listener0() {
+        super.addOnEditListener(new Listener0() {
             public void onEvent() {
                 onEdit();
             }
@@ -128,14 +140,10 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
         this.onSave = onSave;
         this.onEditCancelled = onEditCancelled;
-        editor.setHtml(html);
-        editor.attach();
+        super.setHtml(html);
+        super.attach();
         stateManager.addBeforeStateChangeListener(beforeStateChg);
         enableSaveBtn(false);
-    }
-
-    public RTEditorNew getBasicEditor() {
-        return editor;
     }
 
     public BeforeActionListener getBeforeSavingListener() {
@@ -143,7 +151,9 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     public void init(final RTESavingEditorView view) {
+        super.init(view);
         this.view = view;
+        createActions();
     }
 
     public boolean isSavePending() {
@@ -167,6 +177,15 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         if (saveCloseConfirmed) {
             saveCloseConfirmed = false;
         }
+    }
+
+    @Override
+    public void reset() {
+        timer.cancel();
+        savePending = false;
+        saveCloseConfirmed = false;
+        enableSaveBtn(false);
+        super.reset();
     }
 
     protected void onAutoSave() {
@@ -216,39 +235,39 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         final ButtonDescriptor saveBtn = new ButtonDescriptor(saveAction);
         final KeyStroke key_S = KeyStroke.getKeyStroke(Keyboard.KEY_S, Keyboard.MODIFIER_CTRL);
         saveBtn.setPosition(0);
-        saveBtn.setLocation(RTEditorNew.SNDBAR);
+        saveBtn.setLocation(RTEditor.SNDBAR);
 
         saveMenuAction = new SaveAction(i18n.t("Save"),NO_TEXT, imgResources.save());
-        final MenuItemDescriptor saveMenu = new MenuItemDescriptor(editor.getFileMenu(), saveMenuAction);
+        final MenuItemDescriptor saveMenu = new MenuItemDescriptor(super.getFileMenu(), saveMenuAction);
         saveMenu.setPosition(0);
-        saveMenu.setLocation(RTEditorNew.TOPBAR);
+        saveMenu.setLocation(RTEditor.TOPBAR);
 
-        editor.setActionShortcut(key_S, saveAction, saveMenuAction);
+        super.setActionShortcut(key_S, saveAction, saveMenuAction);
 
         final AutoSaveAction autoSaveAction = new AutoSaveAction(i18n.t("Autosave"), NO_TEXT, NO_ICON);
-        final MenuCheckItemDescriptor autoSaveItem = new MenuCheckItemDescriptor(editor.getFileMenu(), autoSaveAction) { @Override
+        final MenuCheckItemDescriptor autoSaveItem = new MenuCheckItemDescriptor(super.getFileMenu(), autoSaveAction) { @Override
             public boolean isChecked() {
             //autoSaveItem.setChecked(autoSave);
             return autoSave;
         }};
-        autoSaveItem.setLocation(RTEditorNew.TOPBAR);
+        autoSaveItem.setLocation(RTEditor.TOPBAR);
 
         final CloseAction closeAction = new CloseAction(i18n.t("Close"), NO_TEXT, NO_ICON);
-        final MenuItemDescriptor closeItem = new MenuItemDescriptor(editor.getFileMenu(), closeAction);
-        closeItem.setLocation(RTEditorNew.TOPBAR);
+        final MenuItemDescriptor closeItem = new MenuItemDescriptor(super.getFileMenu(), closeAction);
+        closeItem.setLocation(RTEditor.TOPBAR);
 
         final SaveCloseAction saveCloseAction = new SaveCloseAction(i18n.t("Save & Close"), NO_TEXT, NO_ICON);
-        final MenuItemDescriptor saveClose = new MenuItemDescriptor(editor.getFileMenu(), saveCloseAction);
+        final MenuItemDescriptor saveClose = new MenuItemDescriptor(super.getFileMenu(), saveCloseAction);
         final ButtonDescriptor saveCloseBtn = new ButtonDescriptor(saveCloseAction);
-        saveClose.setLocation(RTEditorNew.TOPBAR);
-        saveCloseBtn.setLocation(RTEditorNew.TOPBAR);
+        saveClose.setLocation(RTEditor.TOPBAR);
+        saveCloseBtn.setLocation(RTEditor.TOPBAR);
 
-        editor.addAction(saveMenu);
-        editor.addAction(saveBtn);
-        editor.addAction(autoSaveItem);
-        editor.addAction(saveClose);
-        editor.addAction(saveCloseBtn);
-        editor.addAction(closeItem);
+        super.addAction(saveMenu);
+        super.addAction(saveBtn);
+        super.addAction(autoSaveItem);
+        super.addAction(saveClose);
+        super.addAction(saveCloseBtn);
+        super.addAction(closeItem);
     }
 
     private void enableSaveBtn(final boolean enabled) {
@@ -260,7 +279,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         stateManager.removeBeforeStateChangeListener(beforeStateChg);
         stateManager.resumeTokenChange();
         reset();
-        editor.detach();
+        super.detach();
         onDoEditCancelled();
     }
 
@@ -294,15 +313,6 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     private void onDoSaveImpl() {
-        final String html = editor.getHtml();
-        onSave.onEvent(html);
-    }
-
-    private void reset() {
-        timer.cancel();
-        savePending = false;
-        saveCloseConfirmed = false;
-        enableSaveBtn(false);
-        editor.reset();
+        onSave.onEvent(super.getHtml());
     }
 }

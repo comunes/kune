@@ -19,13 +19,15 @@
  */
 package org.ourproject.kune.platf.client.app;
 
+import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.user.client.Window.ClosingEvent;
 
 public interface Application {
 
-    void onApplicationStart(Listener0 listener);
+    void onClosing(Listener<ClosingEvent> listener);
 
-    void onApplicationStop(Listener0 listener);
+    void onStarting(Listener0 listener);
 
     void start();
 

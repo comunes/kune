@@ -19,11 +19,8 @@
  \*/
 package org.ourproject.kune.platf.client.services;
 
-import org.ourproject.kune.platf.client.actions.ActionManager;
-import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.ui.BasicGuiBinding;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
-import org.ourproject.kune.platf.client.actions.ui.TestButton;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
@@ -57,11 +54,9 @@ import org.ourproject.kune.platf.client.ui.palette.SimplePalette;
 import org.ourproject.kune.platf.client.ui.palette.SimplePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.SimplePalettePresenter;
 import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionSndToolbar;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEActionTopToolbar;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanelNew;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenterNew;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenter;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogPresenter;
@@ -119,7 +114,6 @@ import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
@@ -289,22 +283,6 @@ public class PlatformModule extends AbstractExtendedModule {
             }
         });
 
-        register(NoDecoration.class, new Factory<RTEActionTopToolbar>(RTEActionTopToolbar.class) {
-            @Override
-            public RTEActionTopToolbar create() {
-                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>(p(ActionManager.class));
-                final RTEActionTopToolbar toolbar = new RTEActionTopToolbar(panel);
-                return toolbar;
-            }
-        }, new Factory<RTEActionSndToolbar>(RTEActionSndToolbar.class) {
-            @Override
-            public RTEActionSndToolbar create() {
-                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>(p(ActionManager.class), true);
-                final RTEActionSndToolbar toolbar = new RTEActionSndToolbar(panel);
-                return toolbar;
-            }
-        });
-
         register(Singleton.class, new Factory<TimerWrapper>(TimerWrapper.class) {
             @Override
             public TimerWrapper create() {
@@ -333,14 +311,32 @@ public class PlatformModule extends AbstractExtendedModule {
             }
         });
 
-        register(NoDecoration.class,new Factory<RTEditorNew>(RTEditorNew.class) {
+        register(Singleton.class, new Factory<ImgResources>(ImgResources.class) {
             @Override
-            public RTEditorNew create() {
-                final RTEditorPresenterNew presenter = new RTEditorPresenterNew(i(I18nTranslationService.class),
+            public ImgResources create() {
+                final ImgResources instance = GWT.create(ImgResources.class);
+                StyleInjector.injectStylesheet(instance.css().getText());
+                return instance;
+            }
+        });
+
+        register(Singleton.class, new Factory<RTEImgResources>(RTEImgResources.class) {
+            @Override
+            public RTEImgResources create() {
+                final RTEImgResources instance = GWT.create(RTEImgResources.class);
+                StyleInjector.injectStylesheet(instance.css().getText());
+                return instance;
+            }
+        });
+
+        register(NoDecoration.class,new Factory<RTEditor>(RTEditor.class) {
+            @Override
+            public RTEditor create() {
+                final RTEditorPresenter presenter = new RTEditorPresenter(i(I18nTranslationService.class),
                         i(Session.class),  i(RTEImgResources.class), p(InsertLinkDialog.class),
                         p(ColorWebSafePalette.class), p(EditHtmlDialog.class), p(InsertImageDialog.class),
                         p(InsertMediaDialog.class),   p(InsertTableDialog.class), p(InsertSpecialCharDialog.class), i(DeferredCommandWrapper.class));
-                final RTEditorPanelNew panel = new RTEditorPanelNew(presenter, i(I18nUITranslationService.class),
+                final RTEditorPanel panel = new RTEditorPanel(presenter, i(I18nUITranslationService.class),
                          i(GlobalShortcutRegister.class), i(GuiBindingsRegister.class));
                 presenter.init(panel);
                 return presenter;
@@ -348,10 +344,14 @@ public class PlatformModule extends AbstractExtendedModule {
         }, new Factory<RTESavingEditor>(RTESavingEditor.class) {
             @Override
             public RTESavingEditor create() {
-                final RTESavingEditorPresenter presenter = new RTESavingEditorPresenter(i(RTEditorNew.class), true,
-                        i(I18nTranslationService.class), i(StateManager.class), i(DeferredCommandWrapper.class),
-                        i(RTEImgResources.class), i(TimerWrapper.class));
-                final RTESavingEditorPanel panel = new RTESavingEditorPanel();
+                final RTESavingEditorPresenter presenter = new RTESavingEditorPresenter(i(I18nTranslationService.class),
+                        i(Session.class),  i(RTEImgResources.class), p(InsertLinkDialog.class),
+                        p(ColorWebSafePalette.class), p(EditHtmlDialog.class), p(InsertImageDialog.class),
+                        p(InsertMediaDialog.class),   p(InsertTableDialog.class), p(InsertSpecialCharDialog.class), i(DeferredCommandWrapper.class), true,
+                         i(StateManager.class),
+                        i(TimerWrapper.class));
+                final RTESavingEditorPanel panel = new RTESavingEditorPanel(presenter, i(I18nUITranslationService.class),
+                        i(GlobalShortcutRegister.class), i(GuiBindingsRegister.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -368,24 +368,6 @@ public class PlatformModule extends AbstractExtendedModule {
             @Override
             public NotifyUser create() {
                 return new NotifyUser(i(I18nTranslationService.class), i(Images.class));
-            }
-        });
-
-        register(Singleton.class, new Factory<ImgResources>(ImgResources.class) {
-            @Override
-            public ImgResources create() {
-                final ImgResources instance = GWT.create(ImgResources.class);
-                StyleInjector.injectStylesheet(instance.css().getText());
-                return instance;
-            }
-        });
-
-        register(Singleton.class, new Factory<RTEImgResources>(RTEImgResources.class) {
-            @Override
-            public RTEImgResources create() {
-                final RTEImgResources instance = GWT.create(RTEImgResources.class);
-                StyleInjector.injectStylesheet(instance.css().getText());
-                return instance;
             }
         });
 
@@ -548,21 +530,16 @@ public class PlatformModule extends AbstractExtendedModule {
             }
         });
 
-        register(Singleton.class, new Factory<TestButton>(TestButton.class) {
-            @Override
-            public TestButton create() {
-                final TestButton btn = new TestButton(i(WorkspaceSkeleton.class), i(GuiBindingsRegister.class), i(ImgResources.class));
-                return btn;
-            }
-        });
-
-
- //       i(TestButton.class);
-
         i(ApplicationComponentGroup.class).createAll();
         i(ToolGroup.class).createAll();
         i(Application.class).start();
-        //i(HelloWorld.class);
 
+        // We install our HelloWorldModule
+        //Suco.install(new HelloWorldModule());
+
+        // And because nobody use this module, we get the class (to force the
+        // creation of the
+        // Helloworld instance):
+        //i(HelloWorld.class);
     }
 }

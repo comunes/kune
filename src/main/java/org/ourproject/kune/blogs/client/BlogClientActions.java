@@ -70,8 +70,8 @@ public class BlogClientActions extends AbstractFoldableContentActions {
         final String[] containersNoRoot = { TYPE_BLOG };
         final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
 
-        String parentMenuTitle = i18n.t("Post");
-        String parentMenuTitleCtx = i18n.t("Blog");
+        final String parentMenuTitle = i18n.t("Post");
+        final String parentMenuTitleCtx = i18n.t("Blog");
 
         createNewContainerAction(TYPE_BLOG, "images/nav/blog_add.png", i18n.t("New blog"), parentMenuTitleCtx,
                 i18n.t("New"), i18n.t("New blog"), Position.ctx, TYPE_ROOT);

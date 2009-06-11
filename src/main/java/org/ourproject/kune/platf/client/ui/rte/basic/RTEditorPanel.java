@@ -39,20 +39,20 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Event;
 
-public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditorViewNew, FocusHandler, BlurHandler {
+public class RTEditorPanel extends AbstractComplexGuiItem implements RTEditorView, FocusHandler, BlurHandler {
 
     private static final Element NO_ELEMENT = null;
     private final I18nUITranslationService i18n;
     private final BasicFormatter basic;
     private final ExtendedFormatter extended;
-    private final RTEditorPresenterNew presenter;
+    private final RTEditorPresenter presenter;
     private final GlobalShortcutRegister globalShortcutReg;
     private final RTELinkPopup linkCtxMenu;
     private final RichTextArea rta;
     private final ComplexToolbar topBar;
     private final ComplexToolbar sndBar;
 
-    public RTEditorPanelNew(final RTEditorPresenterNew presenter, final I18nUITranslationService i18n,
+    public RTEditorPanel(final RTEditorPresenter presenter, final I18nUITranslationService i18n,
             final GlobalShortcutRegister globalShortcutReg, final GuiBindingsRegister bindReg) {
         super();
         this.presenter = presenter;
@@ -79,11 +79,11 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
             if (location == null) {
                 throw new UIException("Unknown location in action item: " + item);
             }
-            if (location.equals(RTEditorNew.TOPBAR)) {
+            if (location.equals(RTEditor.TOPBAR)) {
                 topBar.add(item);
-            } else if (location.equals(RTEditorNew.SNDBAR)) {
+            } else if (location.equals(RTEditor.SNDBAR)) {
                 sndBar.add(item);
-            } else if (location.equals(RTEditorNew.LINKCTX)) {
+            } else if (location.equals(RTEditor.LINKCTX)) {
                 linkCtxMenu.add(item);
             } else {
                 throw new UIException("Unknown location in action item: " + item);
@@ -388,8 +388,8 @@ public class RTEditorPanelNew extends AbstractComplexGuiItem implements RTEditor
             public void execute() {
                 final org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(rta);
                 if (selectedAnchor != null) {
-                    linkCtxMenu.show(RTEditorPanelNew.this.getAbsoluteLeft() + selectedAnchor.getAbsoluteLeft(),
-                            RTEditorPanelNew.this.getAbsoluteTop() + selectedAnchor.getAbsoluteTop() + 20);
+                    linkCtxMenu.show(RTEditorPanel.this.getAbsoluteLeft() + selectedAnchor.getAbsoluteLeft(),
+                            RTEditorPanel.this.getAbsoluteTop() + selectedAnchor.getAbsoluteTop() + 20);
                 }
             }
         });

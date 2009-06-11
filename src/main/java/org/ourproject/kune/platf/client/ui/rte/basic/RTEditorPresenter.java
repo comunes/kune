@@ -52,7 +52,7 @@ import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 
-public class RTEditorPresenterNew implements RTEditorNew {
+public class RTEditorPresenter implements RTEditor {
 
     public class BackgroundColorAction extends AbstractExtendedAction {
 
@@ -634,7 +634,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
     private static final String FONT_GROUP = "fontgroup";
     private static final String FONT_SIZEGROUP = "fontsizegroup";
 
-    private RTEditorViewNew view;
+    private RTEditorView view;
     private boolean extended;
     private final I18nTranslationService i18n;
     private final Session session;
@@ -671,11 +671,11 @@ public class RTEditorPresenterNew implements RTEditorNew {
     private MenuDescriptor fontSizeMenu;
     private MenuDescriptor fileMenu;
     private final List<MenuDescriptor> menus;
-    private boolean attached;
+    protected boolean attached;
     private final Map<String, MenuCheckItemDescriptor> fontActions;
     private MenuCheckItemDescriptor currentFontItem;
 
-    public RTEditorPresenterNew(final I18nTranslationService i18n, final Session session,
+    public RTEditorPresenter(final I18nTranslationService i18n, final Session session,
             final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
             final Provider<ColorWebSafePalette> palette, final Provider<EditHtmlDialog> editHtmlDialog,
             final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
@@ -715,8 +715,15 @@ public class RTEditorPresenterNew implements RTEditorNew {
         checkForMenus(descriptor);
     }
 
-    public void addActions(final GuiActionDescCollection descriptors) {
+    public void addActionCollection(final GuiActionDescCollection descriptors) {
         actions.addAll(descriptors);
+        for (final GuiActionDescrip descriptor : descriptors) {
+            checkForMenus(descriptor);
+        }
+    }
+
+    public void addActions(final GuiActionDescrip... descriptors) {
+        actions.add(descriptors);
         for (final GuiActionDescrip descriptor : descriptors) {
             checkForMenus(descriptor);
         }
@@ -739,8 +746,6 @@ public class RTEditorPresenterNew implements RTEditorNew {
     }
 
     public void detach() {
-        // topBar.clear();
-        // sndBar.clear();
     }
 
     public void fireOnEdit() {
@@ -795,7 +800,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         return view.getTopBar();
     }
 
-    public void init(final RTEditorViewNew view) {
+    public void init(final RTEditorView view) {
         this.view = view;
         createMainMenus();
         createBasicActions();
@@ -837,6 +842,12 @@ public class RTEditorPresenterNew implements RTEditorNew {
     public void setHtml(final String html) {
         view.setHTML(html);
         view.focus();
+    }
+
+    public void setLocation(final String location, final GuiActionDescrip[] descripts) {
+        for (final GuiActionDescrip descript : descripts) {
+            descript.setLocation(location);
+        }
     }
 
     public void setText(final String text) {
@@ -890,8 +901,8 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final ToolbarSeparatorDescriptor sndbarSepExt = new ToolbarSeparatorDescriptor(Type.separator, getSndBar());
         sndbarSepExt.setAddCondition(extendedAddCond);
 
-        final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"), AbstractExtendedAction.NO_TEXT,
-                imgResources.selectall());
+        final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"),
+                AbstractExtendedAction.NO_TEXT, imgResources.selectall());
         final MenuItemDescriptor select = new MenuItemDescriptor(editMenu, selectAllAction);
         setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('A'), Keyboard.MODIFIER_CTRL), selectAllAction);
 
@@ -1171,12 +1182,6 @@ public class RTEditorPresenterNew implements RTEditorNew {
 
     private boolean isAndCanBeExtended() {
         return extended && view.canBeExtended();
-    }
-
-    private void setLocation(final String location, final GuiActionDescrip[] descripts) {
-        for (final GuiActionDescrip descript : descripts) {
-            descript.setLocation(location);
-        }
     }
 
     private void updateFont() {

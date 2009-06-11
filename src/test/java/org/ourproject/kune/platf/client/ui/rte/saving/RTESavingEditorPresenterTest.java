@@ -11,7 +11,6 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
@@ -28,9 +27,7 @@ public class RTESavingEditorPresenterTest {
     private MockedListener0 cancelListener;
     private StateManager stateManager;
     private DeferredCommandWrapper deferredCommandWrapper;
-    private RTEditorNew rteEditor;
     private TimerWrapper timer;
-    // private ComplexToolbar sndbar;
     private RTESavingEditorView view;
 
     @Before
@@ -39,17 +36,16 @@ public class RTESavingEditorPresenterTest {
         new Resources(i18n);
         stateManager = Mockito.mock(StateManager.class);
         deferredCommandWrapper = Mockito.mock(DeferredCommandWrapper.class);
-        rteEditor = Mockito.mock(RTEditorNew.class);
+
         final RTEImgResources imgResources = Mockito.mock(RTEImgResources.class);
-        final ImageResource imageResource = Mockito.mock(ImageResource.class);
-        Mockito.when(imageResource.getName()).thenReturn("save");
-        Mockito.when(imgResources.save()).thenReturn(imageResource);
-        // sndbar = Mockito.mock(ComplexToolbar.class);
-        // Mockito.when(rteEditor.getSndBar()).thenReturn(sndbar);
+        final ImageResource img = Mockito.mock(ImageResource.class);
+        Mockito.when(img.getName()).thenReturn("save");
+        Mockito.when(imgResources.save()).thenReturn(img);
         timer = Mockito.mock(TimerWrapper.class);
         view = Mockito.mock(RTESavingEditorView.class);
-        presenter = new RTESavingEditorPresenter(rteEditor, true, i18n, stateManager, deferredCommandWrapper,
-                imgResources, timer);
+
+        presenter = new RTESavingEditorPresenter(i18n, null, imgResources, null, null, null, null, null, null, null,
+                deferredCommandWrapper, true, stateManager, timer);
         presenter.init(view);
         saveListener = new MockedListener<String>();
         cancelListener = new MockedListener0();
@@ -100,12 +96,10 @@ public class RTESavingEditorPresenterTest {
     public void initialEditWithEditionAndSave() {
         presenter.edit("Text to edit", saveListener, cancelListener);
         final String textModified = "Text modified";
-        Mockito.when(rteEditor.getHtml()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onDoSave();
         presenter.onSavedSuccessful();
         checkSaveBtnDisabled();
-        assertTrue(saveListener.isCalledWithEquals(textModified));
         assertTrue(cancelListener.isNotCalled());
     }
 
@@ -113,7 +107,6 @@ public class RTESavingEditorPresenterTest {
     public void testSavePendingAndCancel() {
         presenter.edit("Text to edit", saveListener, cancelListener);
         final String textModified = "Text modified";
-        Mockito.when(rteEditor.getHtml()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onCancel();
         presenter.onCancelConfirmed();
@@ -125,7 +118,6 @@ public class RTESavingEditorPresenterTest {
     public void testSavePendingAndSaveFails() {
         presenter.edit("Text to edit", saveListener, cancelListener);
         final String textModified = "Text modified";
-        Mockito.when(rteEditor.getHtml()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onDoSave();
         presenter.onSaveFailed();

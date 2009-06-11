@@ -1,12 +1,12 @@
 package org.ourproject.kune.platf.client.ui.rte.saving;
 
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
-import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
+import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
-public interface RTESavingEditor {
+public interface RTESavingEditor extends RTEditor {
 
     /**
      * Start to edit some html code
@@ -20,8 +20,6 @@ public interface RTESavingEditor {
      */
     void edit(String html, Listener<String> onSave, Listener0 onEditCancelled);
 
-    RTEditorNew getBasicEditor();
-
     /**
      * This is used for listen to changes that affect the edition as url
      * changes, window close, to save/cancel or stop these actions
@@ -30,6 +28,11 @@ public interface RTESavingEditor {
      */
     BeforeActionListener getBeforeSavingListener();
 
+    /**
+     * Checks if is save is pending.
+     * 
+     * @return true, if is save pending
+     */
     boolean isSavePending();
 
     /**
