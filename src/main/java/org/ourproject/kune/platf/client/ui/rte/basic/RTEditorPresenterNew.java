@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
-import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_ICON;
-import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_TEXT;
+import static org.ourproject.kune.platf.client.actions.AbstractExtendedAction.NO_ICON;
+import static org.ourproject.kune.platf.client.actions.AbstractExtendedAction.NO_TEXT;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.InputMap;
@@ -53,7 +54,7 @@ import com.google.gwt.user.client.Event;
 
 public class RTEditorPresenterNew implements RTEditorNew {
 
-    public class BackgroundColorAction extends AbstractRTEAction {
+    public class BackgroundColorAction extends AbstractExtendedAction {
 
         public BackgroundColorAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
@@ -72,7 +73,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class BlockquoteAction extends AbstractRTEAction {
+    public class BlockquoteAction extends AbstractExtendedAction {
         public BlockquoteAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -84,7 +85,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class BoldAction extends AbstractRTEAction {
+    public class BoldAction extends AbstractExtendedAction {
         public BoldAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -95,7 +96,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class CommentAction extends AbstractRTEAction {
+    public class CommentAction extends AbstractExtendedAction {
         public CommentAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -136,7 +137,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class CopyAction extends AbstractRTEAction {
+    public class CopyAction extends AbstractExtendedAction {
         public CopyAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -146,7 +147,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class CreateOrEditLinkAction extends AbstractRTEAction {
+    public class CreateOrEditLinkAction extends AbstractExtendedAction {
         public CreateOrEditLinkAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -189,7 +190,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class CutAction extends AbstractRTEAction {
+    public class CutAction extends AbstractExtendedAction {
         public CutAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -200,7 +201,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class DecreaseIndentAction extends AbstractRTEAction {
+    public class DecreaseIndentAction extends AbstractExtendedAction {
         public DecreaseIndentAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -211,7 +212,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class DevInfoAction extends AbstractRTEAction {
+    public class DevInfoAction extends AbstractExtendedAction {
         public DevInfoAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -225,7 +226,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class EditHtmlAction extends AbstractRTEAction {
+    public class EditHtmlAction extends AbstractExtendedAction {
         private EditHtmlDialog editHtmlDialog;
 
         public EditHtmlAction(final String text, final String tooltip, final ImageResource icon) {
@@ -251,7 +252,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class FontAction extends AbstractRTEAction {
+    public class FontAction extends AbstractExtendedAction {
         public static final String FONT_NAME = "fontname";
 
         public FontAction(final String fontName, final String tooltip, final ImageResource icon) {
@@ -271,7 +272,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class FontColorAction extends AbstractRTEAction {
+    public class FontColorAction extends AbstractExtendedAction {
         public FontColorAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -290,7 +291,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class FontSizeAction extends AbstractRTEAction {
+    public class FontSizeAction extends AbstractExtendedAction {
         private final int fontSize;
 
         public FontSizeAction(final String fontSizeName, final int fontSize, final String tooltip,
@@ -306,7 +307,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class HrAction extends AbstractRTEAction {
+    public class HrAction extends AbstractExtendedAction {
         public HrAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -318,7 +319,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class ImgAction extends AbstractRTEAction {
+    public class ImgAction extends AbstractExtendedAction {
         public ImgAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -350,7 +351,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class IncreaseIndentAction extends AbstractRTEAction {
+    public class IncreaseIndentAction extends AbstractExtendedAction {
         public IncreaseIndentAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -361,7 +362,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class InsertMediaAction extends AbstractRTEAction {
+    public class InsertMediaAction extends AbstractExtendedAction {
         public InsertMediaAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -392,7 +393,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class InsertSpecialCharAction extends AbstractRTEAction {
+    public class InsertSpecialCharAction extends AbstractExtendedAction {
         private InsertSpecialCharDialog insCharDialog;
 
         public InsertSpecialCharAction(final String text, final String tooltip, final ImageResource icon) {
@@ -418,7 +419,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class InsertTableAction extends AbstractRTEAction {
+    public class InsertTableAction extends AbstractExtendedAction {
         private InsertTableDialog insTableDialog;
 
         public InsertTableAction(final String text, final String tooltip, final ImageResource icon) {
@@ -442,7 +443,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class ItalicAction extends AbstractRTEAction {
+    public class ItalicAction extends AbstractExtendedAction {
         public ItalicAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -453,7 +454,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class JustifyCentreAction extends AbstractRTEAction {
+    public class JustifyCentreAction extends AbstractExtendedAction {
         public JustifyCentreAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -464,7 +465,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class JustifyLeftAction extends AbstractRTEAction {
+    public class JustifyLeftAction extends AbstractExtendedAction {
         public JustifyLeftAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -475,7 +476,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class JustifyRightAction extends AbstractRTEAction {
+    public class JustifyRightAction extends AbstractExtendedAction {
         public JustifyRightAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -486,7 +487,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class OlAction extends AbstractRTEAction {
+    public class OlAction extends AbstractExtendedAction {
         public OlAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -497,7 +498,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class PasteAction extends AbstractRTEAction {
+    public class PasteAction extends AbstractExtendedAction {
         public PasteAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -508,7 +509,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class RedoAction extends AbstractRTEAction {
+    public class RedoAction extends AbstractExtendedAction {
         public RedoAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -519,7 +520,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class RemoveFormatAction extends AbstractRTEAction {
+    public class RemoveFormatAction extends AbstractExtendedAction {
         public RemoveFormatAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -530,7 +531,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class RemoveLinkAction extends AbstractRTEAction {
+    public class RemoveLinkAction extends AbstractExtendedAction {
         public RemoveLinkAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -546,7 +547,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class SelectAllAction extends AbstractRTEAction {
+    public class SelectAllAction extends AbstractExtendedAction {
         public SelectAllAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -556,7 +557,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class StrikethroughAction extends AbstractRTEAction {
+    public class StrikethroughAction extends AbstractExtendedAction {
         public StrikethroughAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -567,7 +568,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class SubscriptAction extends AbstractRTEAction {
+    public class SubscriptAction extends AbstractExtendedAction {
         public SubscriptAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -578,7 +579,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class SuperscriptAction extends AbstractRTEAction {
+    public class SuperscriptAction extends AbstractExtendedAction {
         public SuperscriptAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -589,7 +590,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class UlAction extends AbstractRTEAction {
+    public class UlAction extends AbstractExtendedAction {
         public UlAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -600,7 +601,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class UnderlineAction extends AbstractRTEAction {
+    public class UnderlineAction extends AbstractExtendedAction {
         public UnderlineAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -611,7 +612,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         }
     }
 
-    public class UndoAction extends AbstractRTEAction {
+    public class UndoAction extends AbstractExtendedAction {
         public UndoAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -889,7 +890,7 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final ToolbarSeparatorDescriptor sndbarSepExt = new ToolbarSeparatorDescriptor(Type.separator, getSndBar());
         sndbarSepExt.setAddCondition(extendedAddCond);
 
-        final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"), AbstractRTEAction.NO_TEXT,
+        final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"), AbstractExtendedAction.NO_TEXT,
                 imgResources.selectall());
         final MenuItemDescriptor select = new MenuItemDescriptor(editMenu, selectAllAction);
         setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('A'), Keyboard.MODIFIER_CTRL), selectAllAction);
@@ -910,12 +911,12 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final SubscriptAction subscriptAction = new SubscriptAction(i18n.t("Subscript"), NO_TEXT,
                 imgResources.subscript());
         final MenuItemDescriptor subscript = new MenuItemDescriptor(formatMenu, subscriptAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_COMMA, Keyboard.MODIFIER_CTRL), subscriptAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf(','), Keyboard.MODIFIER_CTRL), subscriptAction);
 
         final SuperscriptAction superscriptAction = new SuperscriptAction(i18n.t("Superscript"), NO_TEXT,
                 imgResources.superscript());
         final MenuItemDescriptor superscript = new MenuItemDescriptor(formatMenu, superscriptAction);
-        setActionShortcut(KeyStroke.getKeyStroke(Keyboard.KEY_PERIOD, Keyboard.MODIFIER_CTRL), superscriptAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('.'), Keyboard.MODIFIER_CTRL), superscriptAction);
 
         final JustifyLeftAction jfyLeftAction = new JustifyLeftAction(NO_TEXT, i18n.t("Left Justify"),
                 imgResources.alignleft());
@@ -973,7 +974,8 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final ButtonDescriptor hlineBtn = new ButtonDescriptor(hlineBtnAction);
         hline.setAddCondition(extendedAddCond);
         hlineBtn.setAddCondition(extendedAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(' ', Keyboard.MODIFIER_CTRL + Keyboard.MODIFIER_SHIFT), hlineAction);
+        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf(' '), Keyboard.MODIFIER_CTRL
+                + Keyboard.MODIFIER_SHIFT), hlineAction);
 
         final BlockquoteAction blockquoteAction = new BlockquoteAction(i18n.t("Block Quotation"), NO_TEXT, NO_ICON);
         final MenuItemDescriptor blockquote = new MenuItemDescriptor(formatMenu, blockquoteAction);
@@ -1128,8 +1130,9 @@ public class RTEditorPresenterNew implements RTEditorNew {
         final MenuRadioItemDescriptor fontSizeItem = new MenuRadioItemDescriptor(fontSizeMenu, fontSizeAction,
                 FONT_SIZEGROUP);
         fontSizeItem.setAddCondition(basicAddCond);
-        setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf(((char) (48 + fontSize))), Keyboard.MODIFIER_CTRL),
-                fontSizeAction);
+        // setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf(((char)
+        // (48 + fontSize))), Keyboard.MODIFIER_CTRL),
+        // fontSizeAction);
         fontSizeItem.setLocation(SNDBAR);
         actions.add(fontSizeItem);
     }

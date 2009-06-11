@@ -40,6 +40,7 @@ import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
+import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.services.Images;
@@ -234,12 +235,11 @@ import org.ourproject.kune.workspace.client.upload.FileUploaderPresenter;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public class WorkspaceModule extends AbstractModule {
+public class WorkspaceModule extends AbstractExtendedModule {
     @Override
     protected void onInstall() {
 
@@ -278,7 +278,7 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public SiteProgress create() {
                 final SiteProgressPresenter presenter = new SiteProgressPresenter();
-                final SiteProgressPanel panel = new SiteProgressPanel(presenter, $$(SitePublicSpaceLink.class));
+                final SiteProgressPanel panel = new SiteProgressPanel(presenter, p(SitePublicSpaceLink.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -287,18 +287,18 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<WorkspaceNotifyUser>(WorkspaceNotifyUser.class) {
             @Override
             public WorkspaceNotifyUser create() {
-                return new WorkspaceNotifyUser($(NotifyUser.class), $(I18nUITranslationService.class),
-                        $(SiteProgress.class), $$(ToastMessage.class), $$(WorkspaceSkeleton.class));
+                return new WorkspaceNotifyUser(i(NotifyUser.class), i(I18nUITranslationService.class),
+                        i(SiteProgress.class), p(ToastMessage.class), p(WorkspaceSkeleton.class));
             }
         });
 
         register(ApplicationComponentGroup.class, new Factory<SitePublicSpaceLink>(SitePublicSpaceLink.class) {
             @Override
             public SitePublicSpaceLink create() {
-                final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter($(StateManager.class),
-                        $(StateTokenUtils.class));
+                final SitePublicSpaceLinkPresenter presenter = new SitePublicSpaceLinkPresenter(i(StateManager.class),
+                        i(StateTokenUtils.class));
                 final SitePublicSpaceLinkPanel panel = new SitePublicSpaceLinkPanel(presenter,
-                        $(WorkspaceSkeleton.class), $(I18nUITranslationService.class), $(Images.class));
+                        i(WorkspaceSkeleton.class), i(I18nUITranslationService.class), i(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -307,7 +307,7 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<StateTokenUtils>(StateTokenUtils.class) {
             @Override
             public StateTokenUtils create() {
-                return new StateTokenUtils($(Session.class));
+                return new StateTokenUtils(i(Session.class));
             }
         });
 
@@ -324,10 +324,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<SiteUserMenu>(SiteUserMenu.class) {
             @Override
             public SiteUserMenu create() {
-                final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter($(Session.class),
-                        $(StateManager.class), $$(EntityOptions.class), $$(FileDownloadUtils.class));
-                final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nUITranslationService.class));
+                final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter(i(Session.class),
+                        i(StateManager.class), p(EntityOptions.class), p(FileDownloadUtils.class));
+                final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nUITranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -336,9 +336,9 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<SiteSignInLink>(SiteSignInLink.class) {
             @Override
             public SiteSignInLink create() {
-                final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter($(Session.class));
-                final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                final SiteSignInLinkPresenter presenter = new SiteSignInLinkPresenter(i(Session.class));
+                final SiteSignInLinkPanel panel = new SiteSignInLinkPanel(presenter, i(I18nUITranslationService.class),
+                        i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -347,10 +347,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<SiteSignOutLink>(SiteSignOutLink.class) {
             @Override
             public SiteSignOutLink create() {
-                final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter($(Session.class),
-                        $$(UserServiceAsync.class), $$(ErrorHandler.class));
+                final SiteSignOutLinkPresenter presenter = new SiteSignOutLinkPresenter(i(Session.class),
+                        p(UserServiceAsync.class), p(ErrorHandler.class));
                 final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class));
+                        i(I18nUITranslationService.class), i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -360,8 +360,8 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public SiteNewGroupLink create() {
                 final SiteNewGroupLinkPresenter presenter = new SiteNewGroupLinkPresenter();
-                final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nUITranslationService.class));
+                final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nUITranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -371,8 +371,8 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public SiteOptions create() {
                 final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
-                final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nUITranslationService.class), $$(I18nTranslator.class), $$(TestRTEDialog.class));
+                final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nUITranslationService.class), p(I18nTranslator.class), p(TestRTEDialog.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -381,10 +381,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<SiteSearch>(SiteSearch.class) {
             @Override
             public SiteSearch create() {
-                final SiteSearchPresenter presenter = new SiteSearchPresenter($$(SiteSearcher.class),
-                        $(I18nTranslationService.class));
-                final SiteSearchPanel panel = new SiteSearchPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(Images.class));
+                final SiteSearchPresenter presenter = new SiteSearchPresenter(p(SiteSearcher.class),
+                        i(I18nTranslationService.class));
+                final SiteSearchPanel panel = new SiteSearchPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -393,8 +393,8 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<SiteLogo>(SiteLogo.class) {
             @Override
             public SiteLogo create() {
-                final SiteLogoPresenter presenter = new SiteLogoPresenter($(Session.class));
-                final SiteLogoPanel panel = new SiteLogoPanel(presenter, $(WorkspaceSkeleton.class));
+                final SiteLogoPresenter presenter = new SiteLogoPresenter(i(Session.class));
+                final SiteLogoPanel panel = new SiteLogoPanel(presenter, i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -403,10 +403,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<EntityHeader>(EntityHeader.class) {
             @Override
             public EntityHeader create() {
-                final EntityHeaderPresenter presenter = new EntityHeaderPresenter($(StateManager.class),
-                        $(WsThemePresenter.class), $(Session.class));
-                final EntityHeaderPanel panel = new EntityHeaderPanel($(WorkspaceSkeleton.class),
-                        $$(FileDownloadUtils.class), $(Images.class));
+                final EntityHeaderPresenter presenter = new EntityHeaderPresenter(i(StateManager.class),
+                        i(WsThemePresenter.class), i(Session.class));
+                final EntityHeaderPanel panel = new EntityHeaderPanel(i(WorkspaceSkeleton.class),
+                        p(FileDownloadUtils.class), i(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -415,10 +415,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<WsThemePresenter>(WsThemePresenter.class) {
             @Override
             public WsThemePresenter create() {
-                final WsThemePresenter presenter = new WsThemePresenter($(Session.class), $$(GroupServiceAsync.class),
-                        $(StateManager.class));
-                final WsThemePanel panel = new WsThemePanel($(WorkspaceSkeleton.class), presenter,
-                        $(I18nUITranslationService.class));
+                final WsThemePresenter presenter = new WsThemePresenter(i(Session.class), p(GroupServiceAsync.class),
+                        i(StateManager.class));
+                final WsThemePanel panel = new WsThemePanel(i(WorkspaceSkeleton.class), presenter,
+                        i(I18nUITranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -427,10 +427,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<EntityTitle>(EntityTitle.class) {
             @Override
             public EntityTitle create() {
-                final EntityTitlePresenter presenter = new EntityTitlePresenter($(StateManager.class),
-                        $(Session.class), $(ContentIconsRegistry.class), $(RenamableRegistry.class),
-                        $(RenameAction.class));
-                final EntityTitlePanel panel = new EntityTitlePanel($(WorkspaceSkeleton.class), presenter);
+                final EntityTitlePresenter presenter = new EntityTitlePresenter(i(StateManager.class),
+                        i(Session.class), i(ContentIconsRegistry.class), i(RenamableRegistry.class),
+                        i(RenameAction.class));
+                final EntityTitlePanel panel = new EntityTitlePanel(i(WorkspaceSkeleton.class), presenter);
                 presenter.init(panel);
                 return presenter;
             }
@@ -440,8 +440,8 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public EntitySubTitle create() {
                 final EntitySubTitlePresenter presenter = new EntitySubTitlePresenter(
-                        $(I18nUITranslationService.class), $(StateManager.class), false, $(AuthorableRegistry.class));
-                final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, $(WorkspaceSkeleton.class));
+                        i(I18nUITranslationService.class), i(StateManager.class), false, i(AuthorableRegistry.class));
+                final EntitySubTitlePanel panel = new EntitySubTitlePanel(presenter, i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -450,9 +450,9 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
             @Override
             public EntityLicensePresenter create() {
-                final EntityLicensePresenter presenter = new EntityLicensePresenter($(StateManager.class));
-                final EntityLicensePanel panel = new EntityLicensePanel(presenter, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                final EntityLicensePresenter presenter = new EntityLicensePresenter(i(StateManager.class));
+                final EntityLicensePanel panel = new EntityLicensePanel(presenter, i(I18nUITranslationService.class),
+                        i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -461,11 +461,11 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<RateIt>(RateIt.class) {
             @Override
             public RateIt create() {
-                final RateItPresenter presenter = new RateItPresenter($(I18nUITranslationService.class),
-                        $(Session.class), $$(ContentServiceAsync.class), $(StateManager.class),
-                        $$(RatePresenter.class), $(ContentCapabilitiesRegistry.class));
-                final RateItPanel panel = new RateItPanel(presenter, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class), $(Images.class));
+                final RateItPresenter presenter = new RateItPresenter(i(I18nUITranslationService.class),
+                        i(Session.class), p(ContentServiceAsync.class), i(StateManager.class), p(RatePresenter.class),
+                        i(ContentCapabilitiesRegistry.class));
+                final RateItPanel panel = new RateItPanel(presenter, i(I18nUITranslationService.class),
+                        i(WorkspaceSkeleton.class), i(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -474,10 +474,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<RatePresenter>(RatePresenter.class) {
             @Override
             public RatePresenter create() {
-                final RatePresenter presenter = new RatePresenter($(StateManager.class),
-                        $(ContentCapabilitiesRegistry.class));
-                final RatePanel panel = new RatePanel(null, null, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                final RatePresenter presenter = new RatePresenter(i(StateManager.class),
+                        i(ContentCapabilitiesRegistry.class));
+                final RatePanel panel = new RatePanel(null, null, i(I18nUITranslationService.class),
+                        i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -493,14 +493,14 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ActionGroupSummaryToolbar>(ActionGroupSummaryToolbar.class) {
             @Override
             public ActionGroupSummaryToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>($$(ActionManager.class));
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(p(ActionManager.class));
                 final ActionGroupSummaryToolbarPresenter toolbar = new ActionGroupSummaryToolbarPresenter(panel);
                 return toolbar;
             }
         }, new Factory<ActionParticipationToolbar>(ActionParticipationToolbar.class) {
             @Override
             public ActionParticipationToolbar create() {
-                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>($$(ActionManager.class));
+                final ActionToolbarPanel<StateToken> panel = new ActionToolbarPanel<StateToken>(p(ActionManager.class));
                 final ActionParticipationSummaryToolbarPresenter toolbar = new ActionParticipationSummaryToolbarPresenter(
                         panel);
                 return toolbar;
@@ -509,7 +509,7 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public ActionBuddiesSummaryToolbar create() {
                 final ActionToolbarPanel<UserSimpleDTO> panel = new ActionToolbarPanel<UserSimpleDTO>(
-                        $$(ActionManager.class));
+                        p(ActionManager.class));
                 final ActionBuddiesSummaryToolbarPresenter toolbar = new ActionBuddiesSummaryToolbarPresenter(panel);
                 return toolbar;
             }
@@ -519,12 +519,12 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public GroupMembersSummary create() {
                 final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(
-                        $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
-                        $(Session.class), $$(SocialNetworkServiceAsync.class), $$(GroupServiceAsync.class),
-                        $$(GroupLiveSearcher.class), $(WsThemePresenter.class), $$(ChatEngine.class),
-                        $(GroupActionRegistry.class), $(ActionGroupSummaryToolbar.class), $$(FileDownloadUtils.class));
+                        i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
+                        i(Session.class), p(SocialNetworkServiceAsync.class), p(GroupServiceAsync.class),
+                        p(GroupLiveSearcher.class), i(WsThemePresenter.class), p(ChatEngine.class),
+                        i(GroupActionRegistry.class), i(ActionGroupSummaryToolbar.class), p(FileDownloadUtils.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $(
+                        i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
                                 ActionGroupSummaryToolbar.class).getView());
                 presenter.init(view);
                 return presenter;
@@ -534,10 +534,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<AddAsBuddie>(AddAsBuddie.class) {
             @Override
             public AddAsBuddie create() {
-                final AddAsBuddiePresenter presenter = new AddAsBuddiePresenter($$(ChatEngine.class),
-                        $(StateManager.class), $(Session.class));
-                final AddAsBuddiePanel panel = new AddAsBuddiePanel(presenter, $(EntityHeader.class), $(Images.class),
-                        $(I18nTranslationService.class));
+                final AddAsBuddiePresenter presenter = new AddAsBuddiePresenter(p(ChatEngine.class),
+                        i(StateManager.class), i(Session.class));
+                final AddAsBuddiePanel panel = new AddAsBuddiePanel(presenter, i(EntityHeader.class), i(Images.class),
+                        i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -546,14 +546,14 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<BuddiesSummary>(BuddiesSummary.class) {
             @Override
             public BuddiesSummary create() {
-                final BuddiesSummaryPresenter presenter = new BuddiesSummaryPresenter($(StateManager.class),
-                        $(Session.class), $$(UserServiceAsync.class), $(UserActionRegistry.class),
-                        $(I18nTranslationService.class), $$(ChatEngine.class), $(ActionBuddiesSummaryToolbar.class),
-                        $$(FileDownloadUtils.class), $(ImageUtils.class), $$(SocialNetworkServiceAsync.class),
-                        $(GroupActionRegistry.class));
-                final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class), $(ActionManager.class),
-                        $(ActionBuddiesSummaryToolbar.class).getView());
+                final BuddiesSummaryPresenter presenter = new BuddiesSummaryPresenter(i(StateManager.class),
+                        i(Session.class), p(UserServiceAsync.class), i(UserActionRegistry.class),
+                        i(I18nTranslationService.class), p(ChatEngine.class), i(ActionBuddiesSummaryToolbar.class),
+                        p(FileDownloadUtils.class), i(ImageUtils.class), p(SocialNetworkServiceAsync.class),
+                        i(GroupActionRegistry.class));
+                final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class), i(ActionManager.class),
+                        i(ActionBuddiesSummaryToolbar.class).getView());
                 presenter.init(panel);
                 return presenter;
             }
@@ -563,12 +563,12 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public ParticipationSummary create() {
                 final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(
-                        $(I18nUITranslationService.class), $(StateManager.class), $(ImageUtils.class),
-                        $(Session.class), $$(SocialNetworkServiceAsync.class), $(WsThemePresenter.class),
-                        $(GroupActionRegistry.class), $(ActionParticipationToolbar.class), $$(FileDownloadUtils.class));
+                        i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
+                        i(Session.class), p(SocialNetworkServiceAsync.class), i(WsThemePresenter.class),
+                        i(GroupActionRegistry.class), i(ActionParticipationToolbar.class), p(FileDownloadUtils.class));
                 final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
-                        ($(ActionParticipationToolbar.class).getView()));
+                        i(I18nUITranslationService.class), i(WorkspaceSkeleton.class),
+                        (i(ActionParticipationToolbar.class).getView()));
                 presenter.init(view);
                 return presenter;
             }
@@ -577,10 +577,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<TagsSummary>(TagsSummary.class) {
             @Override
             public TagsSummary create() {
-                final TagsSummaryPresenter presenter = new TagsSummaryPresenter($(Session.class),
-                        $$(SiteSearcher.class), $(StateManager.class), $(WsThemePresenter.class));
-                final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                final TagsSummaryPresenter presenter = new TagsSummaryPresenter(i(Session.class),
+                        p(SiteSearcher.class), i(StateManager.class), i(WsThemePresenter.class));
+                final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i(I18nUITranslationService.class),
+                        i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -589,10 +589,10 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<NoHomePage>(NoHomePage.class) {
             @Override
             public NoHomePage create() {
-                final NoHomePagePresenter presenter = new NoHomePagePresenter($(StateManager.class),
-                        $$(EntityHeader.class));
-                final NoHomePagePanel panel = new NoHomePagePanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final NoHomePagePresenter presenter = new NoHomePagePresenter(i(StateManager.class),
+                        p(EntityHeader.class));
+                final NoHomePagePanel panel = new NoHomePagePanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -601,9 +601,9 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<EntityOptions>(EntityOptions.class) {
             @Override
             public EntityOptions create() {
-                final EntityOptionsPresenter presenter = new EntityOptionsPresenter($(StateManager.class));
-                final EntityOptionsPanel panel = new EntityOptionsPanel(presenter, $(EntityHeader.class),
-                        $(I18nTranslationService.class), $(Images.class), $(EntityOptionsGroup.class));
+                final EntityOptionsPresenter presenter = new EntityOptionsPresenter(i(StateManager.class));
+                final EntityOptionsPanel panel = new EntityOptionsPanel(presenter, i(EntityHeader.class),
+                        i(I18nTranslationService.class), i(Images.class), i(EntityOptionsGroup.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -613,10 +613,10 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public EntityOptionsToolsConf create() {
                 final EntityOptionsToolsConfPresenter presenter = new EntityOptionsToolsConfPresenter(
-                        $(StateManager.class), $(Session.class), $(I18nTranslationService.class),
-                        $(EntityOptions.class), $$(GroupServiceAsync.class));
+                        i(StateManager.class), i(Session.class), i(I18nTranslationService.class),
+                        i(EntityOptions.class), p(GroupServiceAsync.class));
                 final EntityOptionsToolsConfPanel panel = new EntityOptionsToolsConfPanel(presenter,
-                        $(WorkspaceSkeleton.class), $(I18nTranslationService.class));
+                        i(WorkspaceSkeleton.class), i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -625,11 +625,11 @@ public class WorkspaceModule extends AbstractModule {
         register(EntityOptionsGroup.class, new Factory<EntityOptionsLogo>(EntityOptionsLogo.class) {
             @Override
             public EntityOptionsLogo create() {
-                final EntityOptionsLogoPresenter presenter = new EntityOptionsLogoPresenter($(Session.class),
-                        $(EntityHeader.class), $(EntityOptions.class), $(StateManager.class),
-                        $$(UserServiceAsync.class), $$(ChatEngine.class));
-                final EntityOptionsLogoPanel panel = new EntityOptionsLogoPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final EntityOptionsLogoPresenter presenter = new EntityOptionsLogoPresenter(i(Session.class),
+                        i(EntityHeader.class), i(EntityOptions.class), i(StateManager.class),
+                        p(UserServiceAsync.class), p(ChatEngine.class));
+                final EntityOptionsLogoPanel panel = new EntityOptionsLogoPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -639,10 +639,10 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public EntityOptionsDefLicense create() {
                 final EntityOptionsDefLicensePresenter presenter = new EntityOptionsDefLicensePresenter(
-                        $(EntityOptions.class), $(StateManager.class), $(Session.class), $$(LicenseWizard.class),
-                        $$(LicenseChangeAction.class));
+                        i(EntityOptions.class), i(StateManager.class), i(Session.class), p(LicenseWizard.class),
+                        p(LicenseChangeAction.class));
                 final EntityOptionsDefLicensePanel panel = new EntityOptionsDefLicensePanel(presenter,
-                        $(WorkspaceSkeleton.class), $(I18nTranslationService.class));
+                        i(WorkspaceSkeleton.class), i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -653,10 +653,10 @@ public class WorkspaceModule extends AbstractModule {
                     @Override
                     public EntityOptionsPublicSpaceConf create() {
                         final EntityOptionsPublicSpaceConfPresenter presenter = new EntityOptionsPublicSpaceConfPresenter(
-                                $(EntityOptions.class));
+                                i(EntityOptions.class));
                         final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(
-                                presenter, $(WorkspaceSkeleton.class), $(I18nTranslationService.class),
-                                $(WsThemePresenter.class));
+                                presenter, i(WorkspaceSkeleton.class), i(I18nTranslationService.class),
+                                i(WsThemePresenter.class));
                         presenter.init(panel);
                         return presenter;
                     }
@@ -665,16 +665,15 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<LicenseChangeAction>(LicenseChangeAction.class) {
             @Override
             public LicenseChangeAction create() {
-                return new LicenseChangeAction($$(GroupServiceAsync.class), $(Session.class),
-                        $(I18nTranslationService.class), $(StateManager.class));
+                return new LicenseChangeAction(p(GroupServiceAsync.class), i(Session.class),
+                        i(I18nTranslationService.class), i(StateManager.class));
             }
         });
 
         register(Singleton.class, new Factory<RenameAction>(RenameAction.class) {
             @Override
             public RenameAction create() {
-                return new RenameAction($(I18nTranslationService.class), $(Session.class),
-                        $$(ContentServiceAsync.class));
+                return new RenameAction(i(I18nTranslationService.class), i(Session.class), p(ContentServiceAsync.class));
             }
         });
 
@@ -682,10 +681,10 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public LicenseWizard create() {
                 final LicenseWizardPresenter presenter = new LicenseWizardPresenter(
-                        $(LicenseWizardFirstFormView.class), $(LicenseWizardSndFormView.class),
-                        $(LicenseWizardTrdFormView.class), $(LicenseWizardFrdFormView.class), $(Session.class));
-                final LicenseWizardPanel panel = new LicenseWizardPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                        i(LicenseWizardFirstFormView.class), i(LicenseWizardSndFormView.class),
+                        i(LicenseWizardTrdFormView.class), i(LicenseWizardFrdFormView.class), i(Session.class));
+                final LicenseWizardPanel panel = new LicenseWizardPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -694,53 +693,53 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<LicenseWizardFirstFormView>(LicenseWizardFirstFormView.class) {
             @Override
             public LicenseWizardFirstFormView create() {
-                return new LicenseWizardFirstForm($(I18nTranslationService.class));
+                return new LicenseWizardFirstForm(i(I18nTranslationService.class));
             }
         });
 
         register(Singleton.class, new Factory<LicenseWizardSndFormView>(LicenseWizardSndFormView.class) {
             @Override
             public LicenseWizardSndFormView create() {
-                return new LicenseWizardSndForm($(I18nTranslationService.class));
+                return new LicenseWizardSndForm(i(I18nTranslationService.class));
             }
         });
 
         register(Singleton.class, new Factory<LicenseWizardTrdFormView>(LicenseWizardTrdFormView.class) {
             @Override
             public LicenseWizardTrdFormView create() {
-                return new LicenseWizardTrdForm($(Images.class), $(I18nTranslationService.class));
+                return new LicenseWizardTrdForm(i(Images.class), i(I18nTranslationService.class));
             }
         });
 
         register(Singleton.class, new Factory<LicenseWizardFrdFormView>(LicenseWizardFrdFormView.class) {
             @Override
             public LicenseWizardFrdFormView create() {
-                return new LicenseWizardFrdForm($(I18nTranslationService.class), $(Session.class));
+                return new LicenseWizardFrdForm(i(I18nTranslationService.class), i(Session.class));
             }
         });
 
         register(Singleton.class, new Factory<FileUploader>(FileUploader.class) {
             @Override
             public FileUploader create() {
-                final FileUploaderPresenter presenter = new FileUploaderPresenter($(Session.class));
-                final FileUploaderDialog panel = new FileUploaderDialog(presenter, $(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                final FileUploaderPresenter presenter = new FileUploaderPresenter(i(Session.class));
+                final FileUploaderDialog panel = new FileUploaderDialog(presenter, i(I18nUITranslationService.class),
+                        i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
 
             @Override
             public void onAfterCreated(final FileUploader uploader) {
-                $(ContextNavigator.class).addFileUploaderListener(uploader);
+                i(ContextNavigator.class).addFileUploaderListener(uploader);
             }
         });
 
         register(Singleton.class, new Factory<SiteSearcher>(SiteSearcher.class) {
             @Override
             public SiteSearcher create() {
-                final SiteSearcherPresenter presenter = new SiteSearcherPresenter($$(StateManager.class));
-                final SiteSearcherView view = new SiteSearcherPanel(presenter, $(I18nTranslationService.class),
-                        $(WorkspaceSkeleton.class));
+                final SiteSearcherPresenter presenter = new SiteSearcherPresenter(p(StateManager.class));
+                final SiteSearcherView view = new SiteSearcherPanel(presenter, i(I18nTranslationService.class),
+                        i(WorkspaceSkeleton.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -749,10 +748,10 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<I18nTranslator>(I18nTranslator.class) {
             @Override
             public I18nTranslator create() {
-                final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter($(Session.class),
-                        $(I18nServiceAsync.class), $(I18nUITranslationService.class));
-                final I18nTranslatorView view = new I18nTranslatorPanel(presenter, $(I18nTranslationService.class),
-                        $(LanguageSelector.class), $(WorkspaceSkeleton.class), $(Images.class));
+                final I18nTranslatorPresenter presenter = new I18nTranslatorPresenter(i(Session.class),
+                        i(I18nServiceAsync.class), i(I18nUITranslationService.class));
+                final I18nTranslatorView view = new I18nTranslatorPanel(presenter, i(I18nTranslationService.class),
+                        i(LanguageSelector.class), i(WorkspaceSkeleton.class), i(Images.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -761,10 +760,10 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<SignIn>(SignIn.class) {
             @Override
             public SignIn create() {
-                final SignInPresenter presenter = new SignInPresenter($(Session.class), $(StateManager.class),
-                        $(I18nUITranslationService.class), $$(UserServiceAsync.class), $$(Register.class));
-                final SignInView panel = new SignInPanel(presenter, $(I18nTranslationService.class),
-                        $(WorkspaceSkeleton.class), $(Images.class));
+                final SignInPresenter presenter = new SignInPresenter(i(Session.class), i(StateManager.class),
+                        i(I18nUITranslationService.class), p(UserServiceAsync.class), p(Register.class));
+                final SignInView panel = new SignInPanel(presenter, i(I18nTranslationService.class),
+                        i(WorkspaceSkeleton.class), i(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -773,10 +772,10 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<Register>(Register.class) {
             @Override
             public Register create() {
-                final RegisterPresenter presenter = new RegisterPresenter($(Session.class), $(StateManager.class),
-                        $(I18nUITranslationService.class), $$(UserServiceAsync.class), $$(SignIn.class));
-                final RegisterView panel = new RegisterPanel(presenter, $(I18nTranslationService.class),
-                        $(WorkspaceSkeleton.class), $(Session.class), $(Images.class));
+                final RegisterPresenter presenter = new RegisterPresenter(i(Session.class), i(StateManager.class),
+                        i(I18nUITranslationService.class), p(UserServiceAsync.class), p(SignIn.class));
+                final RegisterView panel = new RegisterPanel(presenter, i(I18nTranslationService.class),
+                        i(WorkspaceSkeleton.class), i(Session.class), i(Images.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -785,10 +784,10 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<NewGroup>(NewGroup.class) {
             @Override
             public NewGroup create() {
-                final NewGroupPresenter presenter = new NewGroupPresenter($(I18nTranslationService.class),
-                        $(Session.class), $(StateManager.class), $$(GroupServiceAsync.class));
-                final NewGroupPanel view = new NewGroupPanel(presenter, $(I18nTranslationService.class),
-                        $$(LicenseWizard.class), $(Images.class));
+                final NewGroupPresenter presenter = new NewGroupPresenter(i(I18nTranslationService.class),
+                        i(Session.class), i(StateManager.class), p(GroupServiceAsync.class));
+                final NewGroupPanel view = new NewGroupPanel(presenter, i(I18nTranslationService.class),
+                        p(LicenseWizard.class), i(Images.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -799,7 +798,7 @@ public class WorkspaceModule extends AbstractModule {
             public UserLiveSearcher create() {
                 final UserLiveSearcherPresenter presenter = new UserLiveSearcherPresenter();
                 final EntityLiveSearcherView view = new UserLiveSearcherPanel(presenter,
-                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
+                        i(I18nTranslationService.class), i(FileDownloadUtils.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -810,7 +809,7 @@ public class WorkspaceModule extends AbstractModule {
             public GroupLiveSearcher create() {
                 final GroupLiveSearcherPresenter presenter = new GroupLiveSearcherPresenter();
                 final EntityLiveSearcherView view = new GroupLiveSearchPanel(presenter,
-                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
+                        i(I18nTranslationService.class), i(FileDownloadUtils.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -819,8 +818,8 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ToolSelector>(ToolSelector.class) {
             @Override
             public ToolSelector create() {
-                final ToolSelectorPresenter presenter = new ToolSelectorPresenter($(StateManager.class),
-                        $(WsThemePresenter.class));
+                final ToolSelectorPresenter presenter = new ToolSelectorPresenter(i(StateManager.class),
+                        i(WsThemePresenter.class));
                 return presenter;
             }
         });
@@ -828,35 +827,35 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<LanguageSelector>(LanguageSelector.class) {
             @Override
             public LanguageSelector create() {
-                final LanguageSelectorPresenter presenter = new LanguageSelectorPresenter($(Session.class));
-                final LanguageSelectorView view = new LanguageSelectorPanel(presenter, $(I18nTranslationService.class));
+                final LanguageSelectorPresenter presenter = new LanguageSelectorPresenter(i(Session.class));
+                final LanguageSelectorView view = new LanguageSelectorPanel(presenter, i(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }
         });
 
         // Register of tokens like "signin", "newgroup", "translate" etcetera
-        $(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Listener0() {
+        i(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Listener0() {
             public void onEvent() {
-                $(SignIn.class).doSignIn();
+                i(SignIn.class).doSignIn();
             }
         });
 
-        $(StateManager.class).addSiteToken(SiteToken.register.toString(), new Listener0() {
+        i(StateManager.class).addSiteToken(SiteToken.register.toString(), new Listener0() {
             public void onEvent() {
-                $(Register.class).doRegister();
+                i(Register.class).doRegister();
             }
         });
 
-        $(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Listener0() {
+        i(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Listener0() {
             public void onEvent() {
-                $(NewGroup.class).doNewGroup();
+                i(NewGroup.class).doNewGroup();
             }
         });
 
-        $(StateManager.class).addSiteToken(SiteToken.translate.toString(), new Listener0() {
+        i(StateManager.class).addSiteToken(SiteToken.translate.toString(), new Listener0() {
             public void onEvent() {
-                $(I18nTranslator.class).doShowTranslator();
+                i(I18nTranslator.class).doShowTranslator();
             }
         });
 
@@ -864,8 +863,8 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public ActionContentToolbar create() {
                 final ActionCntCtxToolbarPanel<StateToken> tbar = new ActionCntCtxToolbarPanel<StateToken>(
-                        AbstractFoldableContentActions.CONTENT_TOPBAR, $$(ActionManager.class),
-                        $(WorkspaceSkeleton.class));
+                        AbstractFoldableContentActions.CONTENT_TOPBAR, p(ActionManager.class),
+                        i(WorkspaceSkeleton.class));
                 final ActionContentToolbar toolbar = new ActionContentToolbarPresenter(tbar);
                 return toolbar;
             }
@@ -874,18 +873,18 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ContentEditor>(ContentEditor.class) {
             @Override
             public ContentEditor create() {
-                return new ContentEditor($(RTEditorNew.class), true, $(I18nTranslationService.class),
-                        $(StateManager.class), $(SiteSignOutLink.class), $(DeferredCommandWrapper.class),
-                        $(RTEImgResources.class), $(WorkspaceSkeleton.class), $(TimerWrapper.class),
-                        new RTESavingEditorPanel(), $(EntityTitle.class));
+                return new ContentEditor(i(RTEditorNew.class), true, i(I18nTranslationService.class),
+                        i(StateManager.class), i(SiteSignOutLink.class), i(DeferredCommandWrapper.class),
+                        i(RTEImgResources.class), i(WorkspaceSkeleton.class), i(TimerWrapper.class),
+                        new RTESavingEditorPanel(), i(EntityTitle.class));
             }
         });
         register(NoDecoration.class, new Factory<ActionContextTopToolbar>(ActionContextTopToolbar.class) {
             @Override
             public ActionContextTopToolbar create() {
                 final ActionCntCtxToolbarPanel<StateToken> panel = new ActionCntCtxToolbarPanel<StateToken>(
-                        AbstractFoldableContentActions.CONTEXT_TOPBAR, $$(ActionManager.class),
-                        $(WorkspaceSkeleton.class));
+                        AbstractFoldableContentActions.CONTEXT_TOPBAR, p(ActionManager.class),
+                        i(WorkspaceSkeleton.class));
                 final ActionContextTopToolbar toolbar = new ActionContextTopToolbar(panel);
                 return toolbar;
             }
@@ -895,8 +894,8 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public ActionContextBottomToolbar create() {
                 final ActionCntCtxToolbarPanel<StateToken> panel = new ActionCntCtxToolbarPanel<StateToken>(
-                        AbstractFoldableContentActions.CONTEXT_BOTTOMBAR, $$(ActionManager.class),
-                        $(WorkspaceSkeleton.class));
+                        AbstractFoldableContentActions.CONTEXT_BOTTOMBAR, p(ActionManager.class),
+                        i(WorkspaceSkeleton.class));
                 final ActionContextBottomToolbar toolbar = new ActionContextBottomToolbar(panel);
                 return toolbar;
             }
@@ -905,13 +904,13 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ContextNavigator>(ContextNavigator.class) {
             @Override
             public ContextNavigator create() {
-                final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter($(StateManager.class),
-                        $(Session.class), $(I18nTranslationService.class), $(ContentIconsRegistry.class),
-                        $(ContentCapabilitiesRegistry.class), $(ActionContextTopToolbar.class),
-                        $(ActionContextBottomToolbar.class), $(ContextActionRegistry.class),
-                        $$(FileDownloadUtils.class), true, $(RenameAction.class));
+                final ContextNavigatorPresenter presenter = new ContextNavigatorPresenter(i(StateManager.class),
+                        i(Session.class), i(I18nTranslationService.class), i(ContentIconsRegistry.class),
+                        i(ContentCapabilitiesRegistry.class), i(ActionContextTopToolbar.class),
+                        i(ActionContextBottomToolbar.class), i(ContextActionRegistry.class),
+                        p(FileDownloadUtils.class), true, i(RenameAction.class));
                 final ContextNavigatorPanel panel = new ContextNavigatorPanel(presenter,
-                        $(I18nTranslationService.class), $(WorkspaceSkeleton.class), $(ActionManager.class));
+                        i(I18nTranslationService.class), i(WorkspaceSkeleton.class), i(ActionManager.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -920,12 +919,12 @@ public class WorkspaceModule extends AbstractModule {
         register(Singleton.class, new Factory<ContextPropEditor>(ContextPropEditor.class) {
             @Override
             public ContextPropEditor create() {
-                final ContextPropEditorPresenter presenter = new ContextPropEditorPresenter($(Session.class),
-                        $(StateManager.class), $(ContentCapabilitiesRegistry.class), $$(TagsSummary.class),
-                        $$(ContentServiceAsync.class), $(EntitySubTitle.class));
+                final ContextPropEditorPresenter presenter = new ContextPropEditorPresenter(i(Session.class),
+                        i(StateManager.class), i(ContentCapabilitiesRegistry.class), p(TagsSummary.class),
+                        p(ContentServiceAsync.class), i(EntitySubTitle.class));
                 final ContextPropEditorView view = new ContextPropEditorPanel(presenter,
-                        $(I18nUITranslationService.class), $(WorkspaceSkeleton.class), $$(LanguageSelector.class),
-                        $(Images.class));
+                        i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), p(LanguageSelector.class),
+                        i(Images.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -934,10 +933,10 @@ public class WorkspaceModule extends AbstractModule {
         register(InsertImageGroup.class, new Factory<InsertImageLocal>(InsertImageLocal.class) {
             @Override
             public InsertImageLocal create() {
-                final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter($(InsertImageDialog.class),
-                        $(Session.class));
+                final InsertImageLocalPresenter presenter = new InsertImageLocalPresenter(i(InsertImageDialog.class),
+                        i(Session.class));
                 final InsertImageLocalPanel panel = new InsertImageLocalPanel(presenter,
-                        $(I18nTranslationService.class), $(FileDownloadUtils.class), $(Session.class));
+                        i(I18nTranslationService.class), i(FileDownloadUtils.class), i(Session.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -947,8 +946,8 @@ public class WorkspaceModule extends AbstractModule {
             @Override
             public MaxMinWorkspace create() {
                 final MaxMinWorkspacePresenter presenter = new MaxMinWorkspacePresenter();
-                final MaxMinWorkspacePanel panel = new MaxMinWorkspacePanel(presenter, $(WorkspaceSkeleton.class),
-                        $(Images.class), $(EntityHeader.class), $(I18nTranslationService.class));
+                final MaxMinWorkspacePanel panel = new MaxMinWorkspacePanel(presenter, i(WorkspaceSkeleton.class),
+                        i(Images.class), i(EntityHeader.class), i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -957,16 +956,16 @@ public class WorkspaceModule extends AbstractModule {
         register(ApplicationComponentGroup.class, new Factory<GlobalShortcutRegister>(GlobalShortcutRegister.class) {
             @Override
             public GlobalShortcutRegister create() {
-                return new GlobalShortcutRegister($(ActionManager.class));
+                return new GlobalShortcutRegister(i(ActionManager.class));
             }
         });
 
         register(InsertLinkGroup.class, new Factory<InsertLinkLocal>(InsertLinkLocal.class) {
             @Override
             public InsertLinkLocal create() {
-                final InsertLinkLocalPresenter presenter = new InsertLinkLocalPresenter($(InsertLinkDialog.class));
-                final InsertLinkLocalPanel panel = new InsertLinkLocalPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class), $(FileDownloadUtils.class), $(StateTokenUtils.class));
+                final InsertLinkLocalPresenter presenter = new InsertLinkLocalPresenter(i(InsertLinkDialog.class));
+                final InsertLinkLocalPanel panel = new InsertLinkLocalPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class), i(FileDownloadUtils.class), i(StateTokenUtils.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -975,15 +974,15 @@ public class WorkspaceModule extends AbstractModule {
         register(InsertMediaGroup.class, new Factory<InsertMediaLocal>(InsertMediaLocal.class) {
             @Override
             public InsertMediaLocal create() {
-                final InsertMediaLocalPresenter presenter = new InsertMediaLocalPresenter($(InsertMediaDialog.class),
-                        $(Session.class), $$(MediaUtils.class));
+                final InsertMediaLocalPresenter presenter = new InsertMediaLocalPresenter(i(InsertMediaDialog.class),
+                        i(Session.class), p(MediaUtils.class));
                 final InsertMediaLocalPanel panel = new InsertMediaLocalPanel(presenter,
-                        $(I18nTranslationService.class), $(FileDownloadUtils.class));
+                        i(I18nTranslationService.class), i(FileDownloadUtils.class));
                 presenter.init(panel);
                 return presenter;
             }
         });
 
-        $(GlobalShortcutRegister.class).enable();
+        i(GlobalShortcutRegister.class).enable();
     }
 }

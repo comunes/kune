@@ -1,7 +1,9 @@
 package org.ourproject.kune.platf.client.ui.rte.saving;
-import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_ICON;
-import static org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction.NO_TEXT;
 
+import static org.ourproject.kune.platf.client.actions.AbstractExtendedAction.NO_ICON;
+import static org.ourproject.kune.platf.client.actions.AbstractExtendedAction.NO_TEXT;
+
+import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
@@ -11,7 +13,6 @@ import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.ui.rte.basic.AbstractRTEAction;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorNew;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
@@ -23,31 +24,32 @@ import com.google.gwt.libideas.resources.client.ImageResource;
 
 public class RTESavingEditorPresenter implements RTESavingEditor {
 
-        public class AutoSaveAction extends AbstractRTEAction {
-            public AutoSaveAction(final String text, final String tooltip, final ImageResource icon) {
-                super(text, tooltip, icon);
-            }
+    public class AutoSaveAction extends AbstractExtendedAction {
+        public AutoSaveAction(final String text, final String tooltip, final ImageResource icon) {
+            super(text, tooltip, icon);
+        }
 
-            public void actionPerformed(final ActionEvent actionEvent) {
-                autoSave = !autoSave;
-                if (autoSave) {
-                    timer.schedule(AUTOSAVE_IN_MILLISECONDS);
-                } else {
-                    timer.cancel();
-                }
+        public void actionPerformed(final ActionEvent actionEvent) {
+            // bitwise, similar to: autoSave = !autoSave; but fast
+            autoSave ^= true;
+            if (autoSave) {
+                timer.schedule(AUTOSAVE_IN_MILLIS);
+            } else {
+                timer.cancel();
             }
-              }
-
-    public class CloseAction extends AbstractRTEAction {
-    public CloseAction(final String text, final String tooltip, final ImageResource icon) {
-        super(text, tooltip, icon);
+        }
     }
 
-    public void actionPerformed(final ActionEvent actionEvent) {
-        onCancelImpl();
+    public class CloseAction extends AbstractExtendedAction {
+        public CloseAction(final String text, final String tooltip, final ImageResource icon) {
+            super(text, tooltip, icon);
+        }
+
+        public void actionPerformed(final ActionEvent actionEvent) {
+            onCancelImpl();
+        }
     }
-      }
-        public class SaveAction extends AbstractRTEAction {
+    public class SaveAction extends AbstractExtendedAction {
         public SaveAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
         }
@@ -55,41 +57,37 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         public void actionPerformed(final ActionEvent actionEvent) {
             onDoSaveImpl();
         }
-       }
+    }
 
-
-
-            public class SaveCloseAction extends AbstractRTEAction {
-          public SaveCloseAction(final String text, final String tooltip, final ImageResource icon) {
+    public class SaveCloseAction extends AbstractExtendedAction {
+        public SaveCloseAction(final String text, final String tooltip, final ImageResource icon) {
             super(text, tooltip, icon);
-          }
+        }
 
-          public void actionPerformed(final ActionEvent actionEvent) {
-              if (savePending) {
-                  timer.cancel();
-                  onDoSaveAndCloseImpl();
-              } else {
-                  onCancelConfirmedImpl();
-              }
-          }
-       }
+        public void actionPerformed(final ActionEvent actionEvent) {
+            if (savePending) {
+                timer.cancel();
+                onDoSaveAndCloseImpl();
+            } else {
+                onCancelConfirmedImpl();
+            }
+        }
+    }
 
-        public static final String FILE_DEF_MENU_OPTION = "File";
-
-            public static final int AUTOSAVE_AFTER_FAILS_IN_MILLISECONS = 20000;
-            public static final int AUTOSAVE_IN_MILLISECONDS = 10000;
+    public static final int AUTOSAVE_AFTER_FAIL_MILLS = 20000;
+    public static final int AUTOSAVE_IN_MILLIS = 10000;
     private final RTEditorNew editor;
     private boolean autoSave;
     private boolean savePending;
-    private boolean saveAndCloseConfirmed;
+    private boolean saveCloseConfirmed;
     private Listener<String> onSave;
     private Listener0 onEditCancelled;
     private final RTEImgResources imgResources;
     private final TimerWrapper timer;
-    private final DeferredCommandWrapper deferredCommandWrapper;
+    private final DeferredCommandWrapper deferred;
     private final I18nTranslationService i18n;
     private final StateManager stateManager;
-    private final BeforeActionListener beforeStateChangeListener;
+    private final BeforeActionListener beforeStateChg;
     private RTESavingEditorView view;
 
     SaveAction saveAction;
@@ -102,24 +100,25 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         this.autoSave = autoSave;
         this.i18n = i18n;
         this.stateManager = stateManager;
-        this.deferredCommandWrapper = deferredCommandWrapper;
+        this.deferred = deferredCommandWrapper;
         this.imgResources = imgResources;
         this.savePending = false;
-        this.saveAndCloseConfirmed = false;
+        this.saveCloseConfirmed = false;
         createActions();
         this.timer =  timer;
         timer.configure(new Listener0() {;
 
-            public void onEvent() {
-                onAutoSave();
-            }
+        public void onEvent() {
+            onAutoSave();
+        }
         });
+
         editor.addOnEditListener(new Listener0() {
             public void onEvent() {
                 onEdit();
             }
         });
-        beforeStateChangeListener = new BeforeActionListener() {
+        beforeStateChg = new BeforeActionListener() {
             public boolean beforeAction() {
                 return beforeTokenChange();
             }
@@ -131,7 +130,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         this.onEditCancelled = onEditCancelled;
         editor.setHtml(html);
         editor.attach();
-        stateManager.addBeforeStateChangeListener(beforeStateChangeListener);
+        stateManager.addBeforeStateChangeListener(beforeStateChg);
         enableSaveBtn(false);
     }
 
@@ -140,7 +139,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     public BeforeActionListener getBeforeSavingListener() {
-        return beforeStateChangeListener;
+        return beforeStateChg;
     }
 
     public void init(final RTESavingEditorView view) {
@@ -156,7 +155,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     public void onSavedSuccessful() {
-        if (saveAndCloseConfirmed) {
+        if (saveCloseConfirmed) {
             onCancelConfirmed();
         } else {
             reset();
@@ -164,9 +163,9 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     public void onSaveFailed() {
-        timer.schedule(AUTOSAVE_AFTER_FAILS_IN_MILLISECONS);
-        if (saveAndCloseConfirmed) {
-            saveAndCloseConfirmed = false;
+        timer.schedule(AUTOSAVE_AFTER_FAIL_MILLS);
+        if (saveCloseConfirmed) {
+            saveCloseConfirmed = false;
         }
     }
 
@@ -183,17 +182,18 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     boolean beforeTokenChange() {
+        boolean result = false;
         if (savePending) {
             onCancelImpl();
-            return false;
         } else {
-            deferredCommandWrapper.addCommand(new Listener0() {
+            deferred.addCommand(new Listener0() {
                 public void onEvent() {
                     onCancelConfirmed();
                 }
             });
-            return true;
+            result = true;
         }
+        return result;
     }
 
     void onDoSave() {
@@ -204,14 +204,13 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         if (!savePending) {
             savePending = true;
             if (autoSave) {
-                timer.schedule(AUTOSAVE_IN_MILLISECONDS);
+                timer.schedule(AUTOSAVE_IN_MILLIS);
             }
             enableSaveBtn(true);
         }
     }
 
     private void createActions() {
-
         saveAction = new SaveAction(NO_TEXT, i18n.t("Save"),imgResources.save());
 
         final ButtonDescriptor saveBtn = new ButtonDescriptor(saveAction);
@@ -228,7 +227,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
 
         final AutoSaveAction autoSaveAction = new AutoSaveAction(i18n.t("Autosave"), NO_TEXT, NO_ICON);
         final MenuCheckItemDescriptor autoSaveItem = new MenuCheckItemDescriptor(editor.getFileMenu(), autoSaveAction) { @Override
-        public boolean isChecked() {
+            public boolean isChecked() {
             //autoSaveItem.setChecked(autoSave);
             return autoSave;
         }};
@@ -249,7 +248,6 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
         editor.addAction(autoSaveItem);
         editor.addAction(saveClose);
         editor.addAction(saveCloseBtn);
-       //FIXME editor.addAction(new ToolbarSeparatorDescriptor(Type.fill));
         editor.addAction(closeItem);
     }
 
@@ -259,7 +257,7 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     private void onCancelConfirmedImpl() {
-        stateManager.removeBeforeStateChangeListener(beforeStateChangeListener);
+        stateManager.removeBeforeStateChangeListener(beforeStateChg);
         stateManager.resumeTokenChange();
         reset();
         editor.detach();
@@ -291,18 +289,19 @@ public class RTESavingEditorPresenter implements RTESavingEditor {
     }
 
     private void onDoSaveAndCloseImpl() {
-        saveAndCloseConfirmed = true;
+        saveCloseConfirmed = true;
         onDoSaveImpl();
     }
 
     private void onDoSaveImpl() {
-        onSave.onEvent(editor.getHtml());
+        final String html = editor.getHtml();
+        onSave.onEvent(html);
     }
 
     private void reset() {
         timer.cancel();
         savePending = false;
-        saveAndCloseConfirmed = false;
+        saveCloseConfirmed = false;
         enableSaveBtn(false);
         editor.reset();
     }

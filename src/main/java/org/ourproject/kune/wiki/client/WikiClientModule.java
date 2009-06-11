@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -55,10 +56,9 @@ import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
-public class WikiClientModule extends AbstractModule {
+public class WikiClientModule extends AbstractExtendedModule {
 
     @Override
     public void onInstall() {
@@ -66,29 +66,29 @@ public class WikiClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<WikiClientTool>(WikiClientTool.class) {
             @Override
             public WikiClientTool create() {
-                $(WikiClientActions.class);
-                return new WikiClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
-                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(ContentCapabilitiesRegistry.class));
+                i(WikiClientActions.class);
+                return new WikiClientTool(i(I18nUITranslationService.class), i(ToolSelector.class),
+                        i(WsThemePresenter.class), i(WorkspaceSkeleton.class), i(ContentCapabilitiesRegistry.class));
             }
         });
 
         register(ToolGroup.class, new Factory<WikiClientActions>(WikiClientActions.class) {
             @Override
             public WikiClientActions create() {
-                return new WikiClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
-                        $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
-                        $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
-                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class), $(WikiViewer.class),
-                        $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
+                return new WikiClientActions(i(I18nUITranslationService.class), i(ContextNavigator.class),
+                        i(Session.class), i(StateManager.class), i(DeferredCommandWrapper.class),
+                        p(ContentServiceAsync.class), p(GroupServiceAsync.class), p(FileUploader.class),
+                        i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(FileDownloadUtils.class),
+                        i(EntityHeader.class), p(ContentEditor.class), i(ErrorHandler.class), i(WikiViewer.class),
+                        p(ContextPropEditor.class), i(SitePublicSpaceLink.class));
             }
         });
 
         register(ToolGroup.class, new Factory<WikiContext>(WikiContext.class) {
             @Override
             public WikiContext create() {
-                final WikiContextPresenter presenter = new WikiContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class), $$(ContextPropEditor.class));
+                final WikiContextPresenter presenter = new WikiContextPresenter(i(StateManager.class),
+                        p(ContextNavigator.class), p(ContextPropEditor.class));
                 return presenter;
             }
         });
@@ -96,11 +96,11 @@ public class WikiClientModule extends AbstractModule {
         register(Singleton.class, new Factory<WikiViewer>(WikiViewer.class) {
             @Override
             public WikiViewer create() {
-                final WikiViewerPresenter presenter = new WikiViewerPresenter($(StateManager.class), $(Session.class),
-                        $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
-                final WikiViewerView view = new WikiViewerPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final WikiViewerPresenter presenter = new WikiViewerPresenter(i(StateManager.class), i(Session.class),
+                        i(I18nUITranslationService.class), i(ActionContentToolbar.class),
+                        i(ContentActionRegistry.class), p(FileDownloadUtils.class), p(MediaUtils.class));
+                final WikiViewerView view = new WikiViewerPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -109,11 +109,11 @@ public class WikiClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<WikiFolderContent>(WikiFolderContent.class) {
             @Override
             public WikiFolderContent create() {
-                final WikiFolderContentPresenter presenter = new WikiFolderContentPresenter($(StateManager.class),
-                        $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $(I18nTranslationService.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
-                final WikiFolderContentView view = new WikiFolderContentPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final WikiFolderContentPresenter presenter = new WikiFolderContentPresenter(i(StateManager.class),
+                        i(Session.class), i(ActionContentToolbar.class), i(ContentActionRegistry.class),
+                        i(I18nTranslationService.class), p(FileDownloadUtils.class), p(MediaUtils.class));
+                final WikiFolderContentView view = new WikiFolderContentPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }

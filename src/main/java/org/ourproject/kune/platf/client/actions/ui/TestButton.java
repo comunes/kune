@@ -1,33 +1,21 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
 import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 
 public class TestButton {
-    static class Action extends AbstractAction {
-        public Action(final ImageResource icon) {
-            super();
-            super.putValue(Action.NAME, "FIXME");
-            super.putValue(Action.SHORT_DESCRIPTION, "FIXME");
-            super.putValue(Action.SMALL_ICON, icon);
-        }
 
-        public void actionPerformed(final ActionEvent actionEvent) {
-            // FIXME
-        }
-    }
-
-    static class NotiAction extends AbstractAction {
-        public NotiAction(final ImgResources img) {
+    static class HelloWorldAction extends AbstractAction {
+        public HelloWorldAction(final ImgResources img) {
             super();
-            super.putValue(Action.NAME, "test");
-            super.putValue(Action.SHORT_DESCRIPTION, "test button");
+            super.putValue(Action.NAME, "helloword");
+            super.putValue(Action.SHORT_DESCRIPTION, "helloworld item");
             super.putValue(Action.SMALL_ICON, img.info());
         }
 
@@ -40,7 +28,7 @@ public class TestButton {
     }
 
     public TestButton(final WorkspaceSkeleton wksp, final GuiBindingsRegister bindings, final ImgResources img) {
-        final NotiAction noti = new NotiAction(img);
+        final HelloWorldAction noti = new HelloWorldAction(img);
 
         final PushButtonDescriptor btn = new PushButtonDescriptor(noti);
 

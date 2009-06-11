@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
+import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -49,10 +50,9 @@ import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
-public class ChatClientModule extends AbstractModule {
+public class ChatClientModule extends AbstractExtendedModule {
 
     @Override
     public void onInstall() {
@@ -60,25 +60,25 @@ public class ChatClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<ChatClientActions>(ChatClientActions.class) {
             @Override
             public ChatClientActions create() {
-                return new ChatClientActions($(I18nUITranslationService.class), $(Session.class),
-                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(ChatEngine.class),
-                        $$(AddRoom.class), $$(DeferredCommandWrapper.class));
+                return new ChatClientActions(i(I18nUITranslationService.class), i(Session.class),
+                        i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(ChatEngine.class),
+                        p(AddRoom.class), p(DeferredCommandWrapper.class));
             }
         });
 
         register(ToolGroup.class, new Factory<ChatClientTool>(ChatClientTool.class) {
             @Override
             public ChatClientTool create() {
-                return new ChatClientTool($(I18nUITranslationService.class), $(WorkspaceSkeleton.class),
-                        $(ToolSelector.class), $(WsThemePresenter.class), $(ContentCapabilitiesRegistry.class));
+                return new ChatClientTool(i(I18nUITranslationService.class), i(WorkspaceSkeleton.class),
+                        i(ToolSelector.class), i(WsThemePresenter.class), i(ContentCapabilitiesRegistry.class));
             }
         });
 
         register(ToolGroup.class, new Factory<ChatContext>(ChatContext.class) {
             @Override
             public ChatContext create() {
-                final ChatContextPresenter presenter = new ChatContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class));
+                final ChatContextPresenter presenter = new ChatContextPresenter(i(StateManager.class),
+                        p(ContextNavigator.class));
                 return presenter;
             }
         });
@@ -86,9 +86,9 @@ public class ChatClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<ChatEngine>(ChatEngine.class) {
             @Override
             public ChatEngine create() {
-                final ChatEngineDefault chatEngineDefault = new ChatEngineDefault($(I18nUITranslationService.class),
-                        $(WorkspaceSkeleton.class), $(Application.class), $(Session.class), $$(EmiteUIDialog.class),
-                        $$(FileDownloadUtils.class), $(GlobalShortcutRegister.class));
+                final ChatEngineDefault chatEngineDefault = new ChatEngineDefault(i(I18nUITranslationService.class),
+                        i(WorkspaceSkeleton.class), i(Application.class), i(Session.class), p(EmiteUIDialog.class),
+                        p(FileDownloadUtils.class), i(GlobalShortcutRegister.class));
                 return chatEngineDefault;
             }
         });
@@ -96,11 +96,11 @@ public class ChatClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<ChatRoom>(ChatRoom.class) {
             @Override
             public ChatRoom create() {
-                final ChatRoomPresenter presenter = new ChatRoomPresenter($(StateManager.class), $(Session.class),
-                        $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
-                final ChatRoomPanel panel = new ChatRoomPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final ChatRoomPresenter presenter = new ChatRoomPresenter(i(StateManager.class), i(Session.class),
+                        i(I18nUITranslationService.class), i(ActionContentToolbar.class),
+                        i(ContentActionRegistry.class), p(FileDownloadUtils.class), p(MediaUtils.class));
+                final ChatRoomPanel panel = new ChatRoomPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -109,9 +109,9 @@ public class ChatClientModule extends AbstractModule {
         register(Singleton.class, new Factory<AddRoom>(AddRoom.class) {
             @Override
             public AddRoom create() {
-                final AddRoomPresenter presenter = new AddRoomPresenter($(Session.class),
-                        $$(ContentServiceAsync.class), $(StateManager.class));
-                final AddRoomPanel panel = new AddRoomPanel(presenter, $(I18nTranslationService.class));
+                final AddRoomPresenter presenter = new AddRoomPresenter(i(Session.class), p(ContentServiceAsync.class),
+                        i(StateManager.class));
+                final AddRoomPanel panel = new AddRoomPanel(presenter, i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }

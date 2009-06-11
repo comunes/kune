@@ -36,6 +36,7 @@ import org.ourproject.kune.platf.client.registry.TranslatableRegistry;
 import org.ourproject.kune.platf.client.registry.VersionableRegistry;
 import org.ourproject.kune.platf.client.registry.XmppComentableRegistry;
 import org.ourproject.kune.platf.client.registry.XmppNotifyCapableRegistry;
+import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
@@ -43,10 +44,9 @@ import org.ourproject.kune.workspace.client.socialnet.GroupActionRegistry;
 import org.ourproject.kune.workspace.client.socialnet.UserActionRegistry;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
-public class RegistryModule extends AbstractModule {
+public class RegistryModule extends AbstractExtendedModule {
 
     @Override
     protected void onInstall() {
@@ -171,13 +171,13 @@ public class RegistryModule extends AbstractModule {
         register(Singleton.class, new Factory<ContentCapabilitiesRegistry>(ContentCapabilitiesRegistry.class) {
             @Override
             public ContentCapabilitiesRegistry create() {
-                return new ContentCapabilitiesRegistry($(AuthorableRegistry.class), $(AclEditableRegistry.class),
-                        $(ContentIconsRegistry.class), $(CanBeHomepageRegistry.class), $(ComentableRegistry.class),
-                        $(DragableRegistry.class), $(DropableRegistry.class), $(EmailSubscribeAbleRegistry.class),
-                        $(LicensableRegistry.class), $(PublishModerableRegistry.class), $(RateableRegistry.class),
-                        $(TageableRegistry.class), $(RenamableRegistry.class), $(TranslatableRegistry.class),
-                        $(VersionableRegistry.class), $(XmppComentableRegistry.class),
-                        $(XmppNotifyCapableRegistry.class));
+                return new ContentCapabilitiesRegistry(i(AuthorableRegistry.class), i(AclEditableRegistry.class),
+                        i(ContentIconsRegistry.class), i(CanBeHomepageRegistry.class), i(ComentableRegistry.class),
+                        i(DragableRegistry.class), i(DropableRegistry.class), i(EmailSubscribeAbleRegistry.class),
+                        i(LicensableRegistry.class), i(PublishModerableRegistry.class), i(RateableRegistry.class),
+                        i(TageableRegistry.class), i(RenamableRegistry.class), i(TranslatableRegistry.class),
+                        i(VersionableRegistry.class), i(XmppComentableRegistry.class),
+                        i(XmppNotifyCapableRegistry.class));
             }
         });
 

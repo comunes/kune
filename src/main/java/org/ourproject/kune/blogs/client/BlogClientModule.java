@@ -35,6 +35,7 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -55,10 +56,9 @@ import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
-public class BlogClientModule extends AbstractModule {
+public class BlogClientModule extends AbstractExtendedModule {
 
     @Override
     public void onInstall() {
@@ -66,29 +66,29 @@ public class BlogClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<BlogClientTool>(BlogClientTool.class) {
             @Override
             public BlogClientTool create() {
-                $(BlogClientActions.class);
-                return new BlogClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
-                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(ContentCapabilitiesRegistry.class));
+                i(BlogClientActions.class);
+                return new BlogClientTool(i(I18nUITranslationService.class), i(ToolSelector.class),
+                        i(WsThemePresenter.class), i(WorkspaceSkeleton.class), i(ContentCapabilitiesRegistry.class));
             }
         });
 
         register(ToolGroup.class, new Factory<BlogClientActions>(BlogClientActions.class) {
             @Override
             public BlogClientActions create() {
-                return new BlogClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
-                        $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
-                        $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
-                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class), $(BlogViewer.class),
-                        $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
+                return new BlogClientActions(i(I18nUITranslationService.class), i(ContextNavigator.class),
+                        i(Session.class), i(StateManager.class), i(DeferredCommandWrapper.class),
+                        p(ContentServiceAsync.class), p(GroupServiceAsync.class), p(FileUploader.class),
+                        i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(FileDownloadUtils.class),
+                        i(EntityHeader.class), p(ContentEditor.class), i(ErrorHandler.class), i(BlogViewer.class),
+                        p(ContextPropEditor.class), i(SitePublicSpaceLink.class));
             }
         });
 
         register(ToolGroup.class, new Factory<BlogContext>(BlogContext.class) {
             @Override
             public BlogContext create() {
-                final BlogContextPresenter presenter = new BlogContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class), $$(ContextPropEditor.class));
+                final BlogContextPresenter presenter = new BlogContextPresenter(i(StateManager.class),
+                        p(ContextNavigator.class), p(ContextPropEditor.class));
                 return presenter;
             }
         });
@@ -96,11 +96,11 @@ public class BlogClientModule extends AbstractModule {
         register(Singleton.class, new Factory<BlogViewer>(BlogViewer.class) {
             @Override
             public BlogViewer create() {
-                final BlogViewerPresenter presenter = new BlogViewerPresenter($(StateManager.class), $(Session.class),
-                        $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
-                final BlogViewerView view = new BlogViewerPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final BlogViewerPresenter presenter = new BlogViewerPresenter(i(StateManager.class), i(Session.class),
+                        i(I18nUITranslationService.class), i(ActionContentToolbar.class),
+                        i(ContentActionRegistry.class), p(FileDownloadUtils.class), p(MediaUtils.class));
+                final BlogViewerView view = new BlogViewerPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -109,11 +109,11 @@ public class BlogClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<BlogFolderContent>(BlogFolderContent.class) {
             @Override
             public BlogFolderContent create() {
-                final BlogFolderContentPresenter presenter = new BlogFolderContentPresenter($(StateManager.class),
-                        $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $(I18nTranslationService.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
-                final BlogFolderContentView view = new BlogFolderContentPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final BlogFolderContentPresenter presenter = new BlogFolderContentPresenter(i(StateManager.class),
+                        i(Session.class), i(ActionContentToolbar.class), i(ContentActionRegistry.class),
+                        i(I18nTranslationService.class), p(FileDownloadUtils.class), p(MediaUtils.class));
+                final BlogFolderContentView view = new BlogFolderContentPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }

@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
+import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
@@ -37,7 +38,6 @@ import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 import com.google.gwt.user.client.ui.Label;
 
@@ -45,7 +45,7 @@ import com.google.gwt.user.client.ui.Label;
  * This module is installed via Suco.install(new HelloWorldModule()). In kune we
  * do this normally in KuneEntryPoint.onModuleLoadCont()
  */
-public class HelloWorldModule extends AbstractModule {
+public class HelloWorldModule extends AbstractExtendedModule {
 
     /**
      * 
@@ -110,7 +110,7 @@ public class HelloWorldModule extends AbstractModule {
          * Summary)
          **/
         private void createActions() {
-            ActionToolbarMenuDescriptor<UserSimpleDTO> helloWorldBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
+            final ActionToolbarMenuDescriptor<UserSimpleDTO> helloWorldBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
                     AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<UserSimpleDTO>() {
                         public void onEvent(final UserSimpleDTO parameter) {
                             // We clicked:
@@ -158,8 +158,8 @@ public class HelloWorldModule extends AbstractModule {
          * can use then from other objects.
          * 
          * If we want to use HelloWorld from other modules we can use:
-         * $(HelloWorld.class) to get a instance or $$(HelloWorld.class) to get
-         * a provider of the instance. This is useful when we want to do lazy
+         * i(HelloWorld.class) to get a instance or p(HelloWorld.class) to get a
+         * provider of the instance. This is useful when we want to do lazy
          * creation of objects: http://en.wikipedia.org/wiki/Lazy_initialization
          * 
          **/
@@ -174,14 +174,14 @@ public class HelloWorldModule extends AbstractModule {
              */
             @Override
             public HelloWorld create() {
-                final HelloWorldPresenter presenter = new HelloWorldPresenter($(I18nTranslationServiceMocked.class),
-                        $$(UserActionRegistry.class));
-                final HelloWorldPanel panel = new HelloWorldPanel(presenter, $(WorkspaceSkeleton.class),
-                        $(I18nTranslationServiceMocked.class));
+                final HelloWorldPresenter presenter = new HelloWorldPresenter(i(I18nTranslationServiceMocked.class),
+                        p(UserActionRegistry.class));
+                final HelloWorldPanel panel = new HelloWorldPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nTranslationServiceMocked.class));
                 presenter.init(panel);
                 return presenter;
                 // now Suco knows how to create HelloWorld instance when we use
-                // $(HelloWorld.class) or $$(HelloWorld.class in a module.
+                // i(HelloWorld.class) or p(HelloWorld.class in a module.
             }
 
             /**
@@ -208,7 +208,7 @@ public class HelloWorldModule extends AbstractModule {
         /**
          * Global shortcut sample definition
          */
-        $(GlobalShortcutRegister.class).put(new ShortcutDescriptor(false, true, false, 'S'), new Listener0() {
+        i(GlobalShortcutRegister.class).put(new ShortcutDescriptor(false, true, false, 'S'), new Listener0() {
             public void onEvent() {
                 NotifyUser.info("Global Ctrl+S pressed");
             }
@@ -217,6 +217,6 @@ public class HelloWorldModule extends AbstractModule {
         // And because nobody use this module, we get the class (to force the
         // creation of the
         // Helloworld instance):
-        // $(HelloWorld.class);
+        // i(HelloWorld.class);
     }
 }

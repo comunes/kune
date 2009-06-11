@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.api.VerificationMode;
-import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.i18n.Resources;
@@ -31,7 +30,7 @@ public class RTESavingEditorPresenterTest {
     private DeferredCommandWrapper deferredCommandWrapper;
     private RTEditorNew rteEditor;
     private TimerWrapper timer;
-    private ComplexToolbar sndbar;
+    // private ComplexToolbar sndbar;
     private RTESavingEditorView view;
 
     @Before
@@ -45,8 +44,8 @@ public class RTESavingEditorPresenterTest {
         final ImageResource imageResource = Mockito.mock(ImageResource.class);
         Mockito.when(imageResource.getName()).thenReturn("save");
         Mockito.when(imgResources.save()).thenReturn(imageResource);
-        sndbar = Mockito.mock(ComplexToolbar.class);
-        Mockito.when(rteEditor.getSndBar()).thenReturn(sndbar);
+        // sndbar = Mockito.mock(ComplexToolbar.class);
+        // Mockito.when(rteEditor.getSndBar()).thenReturn(sndbar);
         timer = Mockito.mock(TimerWrapper.class);
         view = Mockito.mock(RTESavingEditorView.class);
         presenter = new RTESavingEditorPresenter(rteEditor, true, i18n, stateManager, deferredCommandWrapper,
@@ -83,6 +82,13 @@ public class RTESavingEditorPresenterTest {
     }
 
     @Test
+    public void initialEdit() {
+        presenter.edit("Text to edit", saveListener, cancelListener);
+        checkSaveBtnDisabled();
+        assertTrue(cancelListener.isNotCalled());
+    }
+
+    @Test
     public void initialEditWithCancel() {
         presenter.edit("Text to edit", saveListener, cancelListener);
         presenter.onCancel();
@@ -97,17 +103,9 @@ public class RTESavingEditorPresenterTest {
         Mockito.when(rteEditor.getHtml()).thenReturn(textModified);
         presenter.onEdit();
         presenter.onDoSave();
+        presenter.onSavedSuccessful();
         checkSaveBtnDisabled();
         assertTrue(saveListener.isCalledWithEquals(textModified));
-        assertTrue(cancelListener.isNotCalled());
-    }
-
-    @Test
-    public void initialEditWithSave() {
-        presenter.edit("Text to edit", saveListener, cancelListener);
-        presenter.onDoSave();
-        checkSaveBtnDisabled();
-        assertTrue(saveListener.isCalledOnce());
         assertTrue(cancelListener.isNotCalled());
     }
 
@@ -132,13 +130,13 @@ public class RTESavingEditorPresenterTest {
         presenter.onDoSave();
         presenter.onSaveFailed();
         presenter.onDoSave();
-        Mockito.verify(timer, Mockito.times(1)).schedule(RTESavingEditorPresenter.AUTOSAVE_IN_MILLISECONDS);
-        Mockito.verify(timer, Mockito.times(1)).schedule(RTESavingEditorPresenter.AUTOSAVE_AFTER_FAILS_IN_MILLISECONS);
+        Mockito.verify(timer, Mockito.times(1)).schedule(RTESavingEditorPresenter.AUTOSAVE_IN_MILLIS);
+        Mockito.verify(timer, Mockito.times(1)).schedule(RTESavingEditorPresenter.AUTOSAVE_AFTER_FAIL_MILLS);
         assertTrue(saveListener.isCalled(2));
     }
 
     private void checkSaveBtnDisabled() {
-        Mockito.verify(presenter.saveAction, Mockito.times(1)).setEnabled(false);
+        assertFalse(presenter.saveAction.isEnabled());
     }
 
     private String editAndChangeHistoryToken() {

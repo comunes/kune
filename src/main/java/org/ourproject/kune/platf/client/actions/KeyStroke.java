@@ -38,6 +38,7 @@ exception statement from your version. */
 package org.ourproject.kune.platf.client.actions;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
@@ -74,7 +75,7 @@ public class KeyStroke {
      * under the assumption that garbage collection of a new keystroke is easy
      * when we find the old one that it matches in the cache.
      */
-    private static final HashMap<KeyStroke, KeyStroke> CACHE = new HashMap<KeyStroke, KeyStroke>();
+    private static final Map<KeyStroke, KeyStroke> CACHE = new HashMap<KeyStroke, KeyStroke>();
 
     /** The most recently generated keystroke, or null. */
     private static KeyStroke recent;
@@ -85,7 +86,7 @@ public class KeyStroke {
      * 
      * @see #getKeyStroke(String)
      */
-    static final HashMap<String, Object> VKTABLE = new HashMap<String, Object>();
+    static final Map<String, Object> VKTABLE = new HashMap<String, Object>();
 
     private static final int VK_UNDEFINED = 0;
     private static final char CHAR_UNDEFINED = '\uffff';
@@ -303,18 +304,18 @@ public class KeyStroke {
     /**
      * Tests two keystrokes for equality.
      * 
-     * @param o
+     * @param obj
      *            the object to test
      * @return true if it is equal
      */
     @Override
-    public final boolean equals(final Object o) {
-        if (!(o instanceof KeyStroke)) {
+    public final boolean equals(final Object obj) {
+        if (!(obj instanceof KeyStroke)) {
             return false;
         }
-        final KeyStroke s = (KeyStroke) o;
-        return this == o
-                || (keyChar == s.keyChar && keyCode == s.keyCode && modifiers == s.modifiers && onKeyRelease == s.onKeyRelease);
+        final KeyStroke stroke = (KeyStroke) obj;
+        return this == obj
+                || (keyChar == stroke.keyChar && keyCode == stroke.keyCode && modifiers == stroke.modifiers && onKeyRelease == stroke.onKeyRelease);
     }
 
     /**
@@ -437,14 +438,17 @@ public class KeyStroke {
         case Keyboard.KEY_OPEN_BRACKET:
         case Keyboard.KEY_BACK_SLASH:
         case Keyboard.KEY_CLOSE_BRACKET:
-            return ("" + (char) keyCode).toUpperCase();
-
+            return String.valueOf(keyCode).toUpperCase();
         default:
             final String charS = String.valueOf(keyChar);
             if (charS == null) {
                 return "Unknown keyCode: 0x" + (keyCode < 0 ? "-" : "") + Integer.toHexString(Math.abs(keyCode));
             } else {
-                return charS;
+                if (" ".equals(charS)) {
+                    return translateKey("Space");
+                } else {
+                    return charS;
+                }
             }
         }
     }

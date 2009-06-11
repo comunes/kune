@@ -60,10 +60,14 @@ public class KeyStrokeTest {
 
     @Test
     public void equalsTest() {
-        final KeyStroke key1 = KeyStroke.getKeyStroke(new Character('B'), Keyboard.MODIFIER_ALT);
-        final KeyStroke key2 = KeyStroke.getKeyStroke(new Character('B'), Keyboard.MODIFIER_ALT);
-        final KeyStroke key3 = KeyStroke.getKeyStroke(new Character('b'), Keyboard.MODIFIER_ALT);
+        final KeyStroke key1 = KeyStroke.getKeyStroke(Character.valueOf('B'), Keyboard.MODIFIER_ALT);
+        final KeyStroke key2 = KeyStroke.getKeyStroke(Character.valueOf('B'), Keyboard.MODIFIER_ALT);
         assertEquals(key1, key2);
-        assertEquals(key1, key3);
+    }
+
+    @Test
+    public void space() {
+        final KeyStroke key = KeyStroke.getKeyStroke(Character.valueOf(' '), Keyboard.MODIFIER_ALT);
+        assertEquals(" (Alt+Space)", key.toString());
     }
 }

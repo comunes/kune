@@ -35,6 +35,7 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -55,10 +56,9 @@ import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
-public class DocumentClientModule extends AbstractModule {
+public class DocumentClientModule extends AbstractExtendedModule {
 
     @Override
     public void onInstall() {
@@ -66,29 +66,29 @@ public class DocumentClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<DocumentClientTool>(DocumentClientTool.class) {
             @Override
             public DocumentClientTool create() {
-                $(DocumentClientActions.class);
-                return new DocumentClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
-                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(ContentCapabilitiesRegistry.class));
+                i(DocumentClientActions.class);
+                return new DocumentClientTool(i(I18nUITranslationService.class), i(ToolSelector.class),
+                        i(WsThemePresenter.class), i(WorkspaceSkeleton.class), i(ContentCapabilitiesRegistry.class));
             }
         });
 
         register(ToolGroup.class, new Factory<DocumentClientActions>(DocumentClientActions.class) {
             @Override
             public DocumentClientActions create() {
-                return new DocumentClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
-                        $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
-                        $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
-                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class), $(DocumentViewer.class),
-                        $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
+                return new DocumentClientActions(i(I18nUITranslationService.class), i(ContextNavigator.class),
+                        i(Session.class), i(StateManager.class), i(DeferredCommandWrapper.class),
+                        p(ContentServiceAsync.class), p(GroupServiceAsync.class), p(FileUploader.class),
+                        i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(FileDownloadUtils.class),
+                        i(EntityHeader.class), p(ContentEditor.class), i(ErrorHandler.class), i(DocumentViewer.class),
+                        p(ContextPropEditor.class), i(SitePublicSpaceLink.class));
             }
         });
 
         register(ToolGroup.class, new Factory<DocumentContext>(DocumentContext.class) {
             @Override
             public DocumentContext create() {
-                final DocumentContextPresenter presenter = new DocumentContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class), $$(ContextPropEditor.class));
+                final DocumentContextPresenter presenter = new DocumentContextPresenter(i(StateManager.class),
+                        p(ContextNavigator.class), p(ContextPropEditor.class));
                 return presenter;
             }
         });
@@ -96,11 +96,11 @@ public class DocumentClientModule extends AbstractModule {
         register(Singleton.class, new Factory<DocumentViewer>(DocumentViewer.class) {
             @Override
             public DocumentViewer create() {
-                final DocumentViewerPresenter presenter = new DocumentViewerPresenter($(StateManager.class),
-                        $(Session.class), $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
-                final DocumentViewerView view = new DocumentViewerPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final DocumentViewerPresenter presenter = new DocumentViewerPresenter(i(StateManager.class),
+                        i(Session.class), i(I18nUITranslationService.class), i(ActionContentToolbar.class),
+                        i(ContentActionRegistry.class), p(FileDownloadUtils.class), p(MediaUtils.class));
+                final DocumentViewerView view = new DocumentViewerPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -109,11 +109,11 @@ public class DocumentClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<DocFolderContent>(DocFolderContent.class) {
             @Override
             public DocFolderContent create() {
-                final DocFolderContentPresenter presenter = new DocFolderContentPresenter($(StateManager.class),
-                        $(Session.class), $(ActionContentToolbar.class), $(ContentActionRegistry.class),
-                        $$(FileDownloadUtils.class), $(I18nTranslationService.class), $$(MediaUtils.class));
-                final DocFolderContentView view = new DocFolderContentPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final DocFolderContentPresenter presenter = new DocFolderContentPresenter(i(StateManager.class),
+                        i(Session.class), i(ActionContentToolbar.class), i(ContentActionRegistry.class),
+                        p(FileDownloadUtils.class), i(I18nTranslationService.class), p(MediaUtils.class));
+                final DocFolderContentView view = new DocFolderContentPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }

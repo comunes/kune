@@ -16,6 +16,7 @@ public class MenuDescriptor extends GuiActionDescrip {
     public MenuDescriptor(final GuiActionDescrip parent, final AbstractAction action) {
         super(action);
         setParent(parent);
+        action.putValue(MENU_HIDE, false);
     }
 
     public MenuDescriptor(final String text) {
@@ -36,7 +37,7 @@ public class MenuDescriptor extends GuiActionDescrip {
     }
 
     public void hide() {
-        action.putValue(MENU_HIDE, true);
+        action.putValue(MENU_HIDE, !((Boolean) action.getValue(MENU_HIDE)));
     }
 
     public void setText(final String text) {

@@ -35,6 +35,7 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
+import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -55,10 +56,9 @@ import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 
-public class GalleryClientModule extends AbstractModule {
+public class GalleryClientModule extends AbstractExtendedModule {
 
     @Override
     public void onInstall() {
@@ -66,29 +66,29 @@ public class GalleryClientModule extends AbstractModule {
         register(ToolGroup.class, new Factory<GalleryClientTool>(GalleryClientTool.class) {
             @Override
             public GalleryClientTool create() {
-                $(GalleryClientActions.class);
-                return new GalleryClientTool($(I18nUITranslationService.class), $(ToolSelector.class),
-                        $(WsThemePresenter.class), $(WorkspaceSkeleton.class), $(ContentCapabilitiesRegistry.class));
+                i(GalleryClientActions.class);
+                return new GalleryClientTool(i(I18nUITranslationService.class), i(ToolSelector.class),
+                        i(WsThemePresenter.class), i(WorkspaceSkeleton.class), i(ContentCapabilitiesRegistry.class));
             }
         });
 
         register(ToolGroup.class, new Factory<GalleryClientActions>(GalleryClientActions.class) {
             @Override
             public GalleryClientActions create() {
-                return new GalleryClientActions($(I18nUITranslationService.class), $(ContextNavigator.class),
-                        $(Session.class), $(StateManager.class), $(DeferredCommandWrapper.class),
-                        $$(ContentServiceAsync.class), $$(GroupServiceAsync.class), $$(FileUploader.class),
-                        $(ContentActionRegistry.class), $(ContextActionRegistry.class), $$(FileDownloadUtils.class),
-                        $(EntityHeader.class), $$(ContentEditor.class), $(ErrorHandler.class), $(GalleryViewer.class),
-                        $$(ContextPropEditor.class), $(SitePublicSpaceLink.class));
+                return new GalleryClientActions(i(I18nUITranslationService.class), i(ContextNavigator.class),
+                        i(Session.class), i(StateManager.class), i(DeferredCommandWrapper.class),
+                        p(ContentServiceAsync.class), p(GroupServiceAsync.class), p(FileUploader.class),
+                        i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(FileDownloadUtils.class),
+                        i(EntityHeader.class), p(ContentEditor.class), i(ErrorHandler.class), i(GalleryViewer.class),
+                        p(ContextPropEditor.class), i(SitePublicSpaceLink.class));
             }
         });
 
         register(ToolGroup.class, new Factory<GalleryContext>(GalleryContext.class) {
             @Override
             public GalleryContext create() {
-                final GalleryContextPresenter presenter = new GalleryContextPresenter($(StateManager.class),
-                        $$(ContextNavigator.class), $$(ContextPropEditor.class));
+                final GalleryContextPresenter presenter = new GalleryContextPresenter(i(StateManager.class),
+                        p(ContextNavigator.class), p(ContextPropEditor.class));
                 return presenter;
             }
         });
@@ -96,11 +96,11 @@ public class GalleryClientModule extends AbstractModule {
         register(Singleton.class, new Factory<GalleryViewer>(GalleryViewer.class) {
             @Override
             public GalleryViewer create() {
-                final GalleryViewerPresenter presenter = new GalleryViewerPresenter($(StateManager.class),
-                        $(Session.class), $(I18nUITranslationService.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $$(FileDownloadUtils.class), $$(MediaUtils.class));
-                final GalleryViewerView view = new GalleryViewerPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class));
+                final GalleryViewerPresenter presenter = new GalleryViewerPresenter(i(StateManager.class),
+                        i(Session.class), i(I18nUITranslationService.class), i(ActionContentToolbar.class),
+                        i(ContentActionRegistry.class), p(FileDownloadUtils.class), p(MediaUtils.class));
+                final GalleryViewerView view = new GalleryViewerPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
                 presenter.init(view);
                 return presenter;
             }
@@ -110,11 +110,11 @@ public class GalleryClientModule extends AbstractModule {
             @Override
             public GalleryFolderContent create() {
                 final GalleryFolderContentPresenter presenter = new GalleryFolderContentPresenter(
-                        $(StateManager.class), $(Session.class), $(ActionContentToolbar.class),
-                        $(ContentActionRegistry.class), $(I18nTranslationService.class), $$(FileDownloadUtils.class),
-                        $$(FileDownloadUtils.class), $$(MediaUtils.class));
-                final GalleryFolderContentView view = new GalleryFolderContentPanel($(WorkspaceSkeleton.class),
-                        $(I18nTranslationService.class), $(StateManager.class), $(Session.class));
+                        i(StateManager.class), i(Session.class), i(ActionContentToolbar.class),
+                        i(ContentActionRegistry.class), i(I18nTranslationService.class), p(FileDownloadUtils.class),
+                        p(FileDownloadUtils.class), p(MediaUtils.class));
+                final GalleryFolderContentView view = new GalleryFolderContentPanel(i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class), i(StateManager.class), i(Session.class));
                 presenter.init(view);
                 return presenter;
             }

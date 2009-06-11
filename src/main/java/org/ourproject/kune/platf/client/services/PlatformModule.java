@@ -124,7 +124,6 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
-import com.calclab.suco.client.ioc.module.AbstractModule;
 import com.calclab.suco.client.ioc.module.Factory;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.libideas.client.StyleInjector;
@@ -132,7 +131,7 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
-public class PlatformModule extends AbstractModule {
+public class PlatformModule extends AbstractExtendedModule {
 
     @Override
     protected void onInstall() {
@@ -140,7 +139,7 @@ public class PlatformModule extends AbstractModule {
         register(Singleton.class, new Factory<Session>(Session.class) {
             @Override
             public Session create() {
-                return new SessionDefault(Cookies.getCookie(Session.USERHASH), $$(UserServiceAsync.class));
+                return new SessionDefault(Cookies.getCookie(Session.USERHASH), p(UserServiceAsync.class));
             }
         }, new Factory<I18nServiceAsync>(I18nServiceAsync.class) {
             @Override
@@ -166,13 +165,13 @@ public class PlatformModule extends AbstractModule {
         }, new Factory<ContentProvider>(ContentProvider.class) {
             @Override
             public ContentProvider create() {
-                return new ContentProviderDefault($(ContentServiceAsync.class));
+                return new ContentProviderDefault(i(ContentServiceAsync.class));
             }
         }, new Factory<StateManager>(StateManager.class) {
             @Override
             public StateManager create() {
-                final StateManagerDefault stateManager = new StateManagerDefault($(ContentProvider.class),
-                        $(Session.class), $(HistoryWrapper.class));
+                final StateManagerDefault stateManager = new StateManagerDefault(i(ContentProvider.class),
+                        i(Session.class), i(HistoryWrapper.class));
                 History.addValueChangeHandler(stateManager);
                 return stateManager;
             }
@@ -182,7 +181,7 @@ public class PlatformModule extends AbstractModule {
             @Override
             public I18nUITranslationService create() {
                 final I18nUITranslationService i18n = new I18nUITranslationService();
-                i18n.init($(I18nServiceAsync.class), $(Session.class), new Listener0() {
+                i18n.init(i(I18nServiceAsync.class), i(Session.class), new Listener0() {
                     public void onEvent() {
                         onI18nReady();
                     }
@@ -194,7 +193,7 @@ public class PlatformModule extends AbstractModule {
         register(Singleton.class, new Factory<FileDownloadUtils>(FileDownloadUtils.class) {
             @Override
             public FileDownloadUtils create() {
-                return new FileDownloadUtils($(Session.class), $(ImageUtils.class));
+                return new FileDownloadUtils(i(Session.class), i(ImageUtils.class));
             }
         });
 
@@ -207,13 +206,13 @@ public class PlatformModule extends AbstractModule {
             });
         }
 
-        $(I18nUITranslationService.class);
-        $(QuickTipsHelper.class);
+        i(I18nUITranslationService.class);
+        i(QuickTipsHelper.class);
 
     }
 
     private void onI18nReady() {
-        final I18nUITranslationService i18n = $(I18nUITranslationService.class);
+        final I18nUITranslationService i18n = i(I18nUITranslationService.class);
 
         if (container.hasProvider(I18nTranslationService.class)) {
             container.removeProvider(I18nTranslationService.class);
@@ -226,7 +225,7 @@ public class PlatformModule extends AbstractModule {
             }
         });
 
-        $(Resources.class);
+        i(Resources.class);
 
         register(Singleton.class, new Factory<I18nTranslationService>(I18nTranslationService.class) {
             @Override
@@ -238,7 +237,7 @@ public class PlatformModule extends AbstractModule {
         register(Singleton.class, new Factory<ErrorHandler>(ErrorHandler.class) {
             @Override
             public ErrorHandler create() {
-                return new ErrorHandler($(Session.class), i18n, $$(StateManager.class));
+                return new ErrorHandler(i(Session.class), i18n, p(StateManager.class));
             }
         });
 
@@ -250,16 +249,16 @@ public class PlatformModule extends AbstractModule {
         }, new Factory<ImageUtils>(ImageUtils.class) {
             @Override
             public ImageUtils create() {
-                return new ImageUtils($(Images.class));
+                return new ImageUtils(i(Images.class));
             }
         });
 
-        AsyncCallbackSimple.init($(ErrorHandler.class));
+        AsyncCallbackSimple.init(i(ErrorHandler.class));
 
         register(Singleton.class, new Factory<Application>(Application.class) {
             @Override
             public Application create() {
-                return new ApplicationDefault($(Session.class));
+                return new ApplicationDefault(i(Session.class));
             }
         });
 
@@ -293,14 +292,14 @@ public class PlatformModule extends AbstractModule {
         register(NoDecoration.class, new Factory<RTEActionTopToolbar>(RTEActionTopToolbar.class) {
             @Override
             public RTEActionTopToolbar create() {
-                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class));
+                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>(p(ActionManager.class));
                 final RTEActionTopToolbar toolbar = new RTEActionTopToolbar(panel);
                 return toolbar;
             }
         }, new Factory<RTEActionSndToolbar>(RTEActionSndToolbar.class) {
             @Override
             public RTEActionSndToolbar create() {
-                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>($$(ActionManager.class), true);
+                final ActionToolbarPanel<Object> panel = new ActionToolbarPanel<Object>(p(ActionManager.class), true);
                 final RTEActionSndToolbar toolbar = new RTEActionSndToolbar(panel);
                 return toolbar;
             }
@@ -316,8 +315,8 @@ public class PlatformModule extends AbstractModule {
         register(InsertLinkGroup.class, new Factory<InsertLinkExt>(InsertLinkExt.class) {
             @Override
             public InsertLinkExt create() {
-                final InsertLinkExtPresenter presenter = new InsertLinkExtPresenter($(InsertLinkDialog.class));
-                final InsertLinkExtView panel = new InsertLinkExtPanel(presenter, $(I18nTranslationService.class));
+                final InsertLinkExtPresenter presenter = new InsertLinkExtPresenter(i(InsertLinkDialog.class));
+                final InsertLinkExtView panel = new InsertLinkExtPanel(presenter, i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -327,8 +326,8 @@ public class PlatformModule extends AbstractModule {
 
             @Override
             public InsertLinkEmail create() {
-                final InsertLinkEmailPresenter presenter = new InsertLinkEmailPresenter($(InsertLinkDialog.class));
-                final InsertLinkEmailPanel panel = new InsertLinkEmailPanel(presenter, $(I18nTranslationService.class));
+                final InsertLinkEmailPresenter presenter = new InsertLinkEmailPresenter(i(InsertLinkDialog.class));
+                final InsertLinkEmailPanel panel = new InsertLinkEmailPanel(presenter, i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -337,21 +336,21 @@ public class PlatformModule extends AbstractModule {
         register(NoDecoration.class,new Factory<RTEditorNew>(RTEditorNew.class) {
             @Override
             public RTEditorNew create() {
-                final RTEditorPresenterNew presenter = new RTEditorPresenterNew($(I18nTranslationService.class),
-                        $(Session.class),  $(RTEImgResources.class), $$(InsertLinkDialog.class),
-                        $$(ColorWebSafePalette.class), $$(EditHtmlDialog.class), $$(InsertImageDialog.class),
-                        $$(InsertMediaDialog.class),   $$(InsertTableDialog.class), $$(InsertSpecialCharDialog.class), $(DeferredCommandWrapper.class));
-                final RTEditorPanelNew panel = new RTEditorPanelNew(presenter, $(I18nUITranslationService.class),
-                         $(GlobalShortcutRegister.class), $(GuiBindingsRegister.class));
+                final RTEditorPresenterNew presenter = new RTEditorPresenterNew(i(I18nTranslationService.class),
+                        i(Session.class),  i(RTEImgResources.class), p(InsertLinkDialog.class),
+                        p(ColorWebSafePalette.class), p(EditHtmlDialog.class), p(InsertImageDialog.class),
+                        p(InsertMediaDialog.class),   p(InsertTableDialog.class), p(InsertSpecialCharDialog.class), i(DeferredCommandWrapper.class));
+                final RTEditorPanelNew panel = new RTEditorPanelNew(presenter, i(I18nUITranslationService.class),
+                         i(GlobalShortcutRegister.class), i(GuiBindingsRegister.class));
                 presenter.init(panel);
                 return presenter;
             }
         }, new Factory<RTESavingEditor>(RTESavingEditor.class) {
             @Override
             public RTESavingEditor create() {
-                final RTESavingEditorPresenter presenter = new RTESavingEditorPresenter($(RTEditorNew.class), true,
-                        $(I18nTranslationService.class), $(StateManager.class), $(DeferredCommandWrapper.class),
-                        $(RTEImgResources.class), $(TimerWrapper.class));
+                final RTESavingEditorPresenter presenter = new RTESavingEditorPresenter(i(RTEditorNew.class), true,
+                        i(I18nTranslationService.class), i(StateManager.class), i(DeferredCommandWrapper.class),
+                        i(RTEImgResources.class), i(TimerWrapper.class));
                 final RTESavingEditorPanel panel = new RTESavingEditorPanel();
                 presenter.init(panel);
                 return presenter;
@@ -361,14 +360,14 @@ public class PlatformModule extends AbstractModule {
         register(NoDecoration.class, new Factory<TestRTEDialog>(TestRTEDialog.class) {
             @Override
             public TestRTEDialog create() {
-                return new TestRTEDialog($(RTESavingEditor.class));
+                return new TestRTEDialog(i(RTESavingEditor.class));
             }
         });
 
         register(ApplicationComponentGroup.class, new Factory<NotifyUser>(NotifyUser.class) {
             @Override
             public NotifyUser create() {
-                return new NotifyUser($(I18nTranslationService.class), $(Images.class));
+                return new NotifyUser(i(I18nTranslationService.class), i(Images.class));
             }
         });
 
@@ -396,8 +395,8 @@ public class PlatformModule extends AbstractModule {
             @Override
             public EditHtmlDialog create() {
                 final EditHtmlDialogPresenter presenter = new EditHtmlDialogPresenter();
-                final EditHtmlDialogPanel panel = new EditHtmlDialogPanel(presenter, $(I18nTranslationService.class),
-                        $(RTEImgResources.class), $(Images.class), $(EditHtmlGroup.class));
+                final EditHtmlDialogPanel panel = new EditHtmlDialogPanel(presenter, i(I18nTranslationService.class),
+                        i(RTEImgResources.class), i(Images.class), i(EditHtmlGroup.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -406,7 +405,7 @@ public class PlatformModule extends AbstractModule {
         register(EditHtmlGroup.class, new Factory<EditHtmlEditor>(EditHtmlEditor.class) {
             @Override
             public EditHtmlEditor create() {
-                final EditHtmlEditorPresenter presenter = new EditHtmlEditorPresenter($(EditHtmlDialog.class));
+                final EditHtmlEditorPresenter presenter = new EditHtmlEditorPresenter(i(EditHtmlDialog.class));
                 final EditHtmlEditorPanel panel = new EditHtmlEditorPanel(i18n, presenter);
                 presenter.init(panel);
                 return presenter;
@@ -414,7 +413,7 @@ public class PlatformModule extends AbstractModule {
         }, new Factory<EditHtmlPreview>(EditHtmlPreview.class) {
             @Override
             public EditHtmlPreview create() {
-                final EditHtmlPreviewPresenter presenter = new EditHtmlPreviewPresenter($(EditHtmlDialog.class));
+                final EditHtmlPreviewPresenter presenter = new EditHtmlPreviewPresenter(i(EditHtmlDialog.class));
                 final EditHtmlPreviewPanel panel = new EditHtmlPreviewPanel(i18n, presenter);
                 presenter.init(panel);
                 return presenter;
@@ -426,7 +425,7 @@ public class PlatformModule extends AbstractModule {
             public InsertImageDialog create() {
                 final InsertImageDialogPresenter presenter = new InsertImageDialogPresenter();
                 final InsertImageDialogPanel panel = new InsertImageDialogPanel(presenter,
-                        $(I18nTranslationService.class), $(Images.class), $(InsertImageGroup.class));
+                        i(I18nTranslationService.class), i(Images.class), i(InsertImageGroup.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -435,7 +434,7 @@ public class PlatformModule extends AbstractModule {
         register(InsertImageGroup.class, new Factory<InsertImageExt>(InsertImageExt.class) {
             @Override
             public InsertImageExt create() {
-                final InsertImageExtPresenter presenter = new InsertImageExtPresenter($(InsertImageDialog.class));
+                final InsertImageExtPresenter presenter = new InsertImageExtPresenter(i(InsertImageDialog.class));
                 final InsertImageExtPanel panel = new InsertImageExtPanel(presenter, i18n);
                 presenter.init(panel);
                 return presenter;
@@ -446,8 +445,8 @@ public class PlatformModule extends AbstractModule {
             @Override
             public InsertLinkDialog create() {
                 final InsertLinkDialogPresenter presenter = new InsertLinkDialogPresenter();
-                final InsertLinkDialogPanel panel = new InsertLinkDialogPanel(presenter, $(Images.class),
-                        $(I18nTranslationService.class), $(InsertLinkGroup.class));
+                final InsertLinkDialogPanel panel = new InsertLinkDialogPanel(presenter, i(Images.class),
+                        i(I18nTranslationService.class), i(InsertLinkGroup.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -458,7 +457,7 @@ public class PlatformModule extends AbstractModule {
             public InsertTableDialog create() {
                 final InsertTableDialogPresenter presenter = new InsertTableDialogPresenter();
                 final InsertTableDialogPanel panel = new InsertTableDialogPanel(presenter, i18n,
-                        $$(SimplePalette.class), $(RTEImgResources.class));
+                        p(SimplePalette.class), i(RTEImgResources.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -468,8 +467,8 @@ public class PlatformModule extends AbstractModule {
             @Override
             public InsertSpecialCharDialog create() {
                 final InsertSpecialCharDialogPresenter presenter = new InsertSpecialCharDialogPresenter();
-                final InsertSpecialCharDialogPanel panel = new InsertSpecialCharDialogPanel(presenter, $(Images.class),
-                        $(I18nTranslationService.class), $(InsertSpecialCharGroup.class), $(RTEImgResources.class));
+                final InsertSpecialCharDialogPanel panel = new InsertSpecialCharDialogPanel(presenter, i(Images.class),
+                        i(I18nTranslationService.class), i(InsertSpecialCharGroup.class), i(RTEImgResources.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -477,7 +476,7 @@ public class PlatformModule extends AbstractModule {
             @Override
             public InsertSpecialOccChar create() {
                 final InsertSpecialOccCharPresenter presenter = new InsertSpecialOccCharPresenter();
-                final InsertSpecialOccCharPanel panel = new InsertSpecialOccCharPanel($(InsertSpecialCharDialog.class),
+                final InsertSpecialOccCharPanel panel = new InsertSpecialOccCharPanel(i(InsertSpecialCharDialog.class),
                         i18n);
                 presenter.init(panel);
                 return presenter;
@@ -487,14 +486,14 @@ public class PlatformModule extends AbstractModule {
             public InsertSpecialAsianChar create() {
                 final InsertSpecialAsianCharPresenter presenter = new InsertSpecialAsianCharPresenter();
                 final InsertSpecialAsianCharPanel panel = new InsertSpecialAsianCharPanel(
-                        $(InsertSpecialCharDialog.class), i18n);
+                        i(InsertSpecialCharDialog.class), i18n);
                 presenter.init(panel);
                 return presenter;
             }
         }, new Factory<InsertSpecialUTF8CharPanel>(InsertSpecialUTF8CharPanel.class) {
             @Override
             public InsertSpecialUTF8CharPanel create() {
-                return new InsertSpecialUTF8CharPanel(i18n, $(InsertSpecialCharDialog.class));
+                return new InsertSpecialUTF8CharPanel(i18n, i(InsertSpecialCharDialog.class));
             }
         });
 
@@ -502,14 +501,14 @@ public class PlatformModule extends AbstractModule {
         register(MediaUtils.class, new Factory<MediaUtils>(MediaUtils.class) {
             @Override
             public MediaUtils create() {
-                return new MediaUtils($(Session.class), $(FileDownloadUtils.class));
+                return new MediaUtils(i(Session.class), i(FileDownloadUtils.class));
             }});
 
         register(InsertMediaGroup.class, new Factory<InsertMediaExt>(InsertMediaExt.class) {
             @Override
             public InsertMediaExt create() {
-                final InsertMediaExtPresenter presenter = new InsertMediaExtPresenter($(InsertMediaDialog.class), $(ExternalMediaRegistry.class));
-                final InsertMediaExtPanel panel = new InsertMediaExtPanel(presenter, i18n, $(ExternalMediaRegistry.class));
+                final InsertMediaExtPresenter presenter = new InsertMediaExtPresenter(i(InsertMediaDialog.class), i(ExternalMediaRegistry.class));
+                final InsertMediaExtPanel panel = new InsertMediaExtPanel(presenter, i18n, i(ExternalMediaRegistry.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -519,7 +518,7 @@ public class PlatformModule extends AbstractModule {
             @Override
             public InsertMediaDialog create() {
                 final InsertMediaDialogPresenter presenter = new InsertMediaDialogPresenter();
-                final InsertMediaDialogPanel panel = new InsertMediaDialogPanel(presenter, i18n, $(Images.class), $(InsertMediaGroup.class));
+                final InsertMediaDialogPanel panel = new InsertMediaDialogPanel(presenter, i18n, i(Images.class), i(InsertMediaGroup.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -528,13 +527,13 @@ public class PlatformModule extends AbstractModule {
         register(Singleton.class, new Factory<ExternalMediaRegistry>(ExternalMediaRegistry.class) {
             @Override
             public ExternalMediaRegistry create() {
-                return new ExternalMediaRegistry($(Session.class).getInitData().getExtMediaDescrips());
+                return new ExternalMediaRegistry(i(Session.class).getInitData().getExtMediaDescrips());
             }});
 
         register(Singleton.class, new Factory<BasicGuiBinding>(BasicGuiBinding.class) {
             @Override
             public BasicGuiBinding create() {
-                return new BasicGuiBinding($(GuiBindingsRegister.class));
+                return new BasicGuiBinding(i(GuiBindingsRegister.class));
             }
         });
 
@@ -545,25 +544,25 @@ public class PlatformModule extends AbstractModule {
             }
             @Override
             public void onAfterCreated(final GuiBindingsRegister instance) {
-                $(BasicGuiBinding.class);
+                i(BasicGuiBinding.class);
             }
         });
 
         register(Singleton.class, new Factory<TestButton>(TestButton.class) {
             @Override
             public TestButton create() {
-                final TestButton btn = new TestButton($(WorkspaceSkeleton.class), $(GuiBindingsRegister.class), $(ImgResources.class));
+                final TestButton btn = new TestButton(i(WorkspaceSkeleton.class), i(GuiBindingsRegister.class), i(ImgResources.class));
                 return btn;
             }
         });
 
 
- //       $(TestButton.class);
+ //       i(TestButton.class);
 
-        $(ApplicationComponentGroup.class).createAll();
-        $(ToolGroup.class).createAll();
-        $(Application.class).start();
-        //$(HelloWorld.class);
+        i(ApplicationComponentGroup.class).createAll();
+        i(ToolGroup.class).createAll();
+        i(Application.class).start();
+        //i(HelloWorld.class);
 
     }
 }

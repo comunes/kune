@@ -75,7 +75,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
     public void addItem(final ContextNavigatorItem item) {
         final String nodeId = item.getId();
-        TreeNode node = treePanel.getNodeById(nodeId);
+        final TreeNode node = treePanel.getNodeById(nodeId);
         if (node == null) {
             // Log.info("Adding tree node " + nodeId);
 
@@ -101,7 +101,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
             }
             menuItemsContainer.createItemMenu(nodeId, item.getActionCollection(),
                     new Listener<ActionItem<StateToken>>() {
-                        public void onEvent(ActionItem<StateToken> actionItem) {
+                        public void onEvent(final ActionItem<StateToken> actionItem) {
                             doAction(actionItem);
                         }
                     });
@@ -115,7 +115,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
                         }
                     }
                 });
-                boolean isContainer = !item.getStateToken().hasAll();
+                final boolean isContainer = !item.getStateToken().hasAll();
                 if (isContainer) {
                     child.setExpandable(true);
                     child.setSingleClickExpand(true);
@@ -134,7 +134,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
                 }
                 child.addListener(new TreeNodeListenerAdapter() {
                     @Override
-                    public void onClick(Node node, EventObject e) {
+                    public void onClick(final Node node, final EventObject e) {
                         presenter.gotoToken(getToken(node));
                     }
                 });
@@ -162,6 +162,10 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
 
     public void editItem(final String id) {
         treeEditor.startEdit(getNode(id));
+    }
+
+    public boolean isAttached() {
+        return treePanel != null;
     }
 
     public boolean isSelected(final String id) {
@@ -195,7 +199,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         this.isEditable = editable;
     }
 
-    public void setItemStatus(final String id, ContentStatusDTO status) {
+    public void setItemStatus(final String id, final ContentStatusDTO status) {
         setNodeStatus(getNode(id), status);
     }
 
@@ -311,7 +315,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         this.mustFireOnTextChange = fireOnTextChange;
     }
 
-    private void setNodeStatus(final TreeNode node, ContentStatusDTO status) {
+    private void setNodeStatus(final TreeNode node, final ContentStatusDTO status) {
         switch (status) {
         case publishedOnline:
             node.setCls("k-ctn-status-normal");

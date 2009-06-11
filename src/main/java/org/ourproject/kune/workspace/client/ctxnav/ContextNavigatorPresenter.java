@@ -74,9 +74,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
             final I18nTranslationService i18n, final ContentIconsRegistry contentIconsRegistry,
-            ContentCapabilitiesRegistry capabilitiesRegistry, final ActionToolbar<StateToken> toolbar,
-            ActionContextBottomToolbar bottomToolbar, final ActionRegistry<StateToken> actionRegistry,
-            Provider<FileDownloadUtils> downloadUtilsProvider, boolean useGenericImageIcon, RenameAction renameAction) {
+            final ContentCapabilitiesRegistry capabilitiesRegistry, final ActionToolbar<StateToken> toolbar,
+            final ActionContextBottomToolbar bottomToolbar, final ActionRegistry<StateToken> actionRegistry,
+            final Provider<FileDownloadUtils> downloadUtilsProvider, final boolean useGenericImageIcon,
+            final RenameAction renameAction) {
         this.stateManager = stateManager;
         this.session = session;
         this.i18n = i18n;
@@ -93,9 +94,9 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         addRenameListener();
     }
 
-    public void addFileUploaderListener(FileUploader uploader) {
+    public void addFileUploaderListener(final FileUploader uploader) {
         uploader.addOnUploadCompleteListener(new Listener<StateToken>() {
-            public void onEvent(StateToken currentUploadStateToken) {
+            public void onEvent(final StateToken currentUploadStateToken) {
                 if (currentUploadStateToken.hasSameContainer(session.getCurrentStateToken())) {
                     stateManager.reload();
                 }
@@ -138,7 +139,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     public void refreshState() {
-        StateAbstractDTO currentState = session.getCurrentState();
+        final StateAbstractDTO currentState = session.getCurrentState();
         if (currentState instanceof StateContainerDTO) {
             setState((StateContainerDTO) currentState, true);
         }
@@ -148,7 +149,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         view.selectItem(genId(stateToken));
         topToolbar.disableMenusAndClearButtons();
         bottomToolbar.disableMenusAndClearButtons();
-        ActionItemCollection<StateToken> itemCollection = actionsByItem.get(stateToken);
+        final ActionItemCollection<StateToken> itemCollection = actionsByItem.get(stateToken);
         topToolbar.addActions(itemCollection, AbstractFoldableContentActions.CONTEXT_TOPBAR);
         bottomToolbar.addActions(itemCollection, AbstractFoldableContentActions.CONTEXT_BOTTOMBAR);
     }
@@ -157,7 +158,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         editOnNextStateChange = edit;
     }
 
-    public void setItemStatus(final StateToken stateToken, ContentStatusDTO status) {
+    public void setItemStatus(final StateToken stateToken, final ContentStatusDTO status) {
         clear();
         refreshState();
     }
@@ -209,13 +210,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     private void addRenameListener() {
-        Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
-            public void onEvent(StateToken token, String newName) {
+        final Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
+            public void onEvent(final StateToken token, final String newName) {
                 setItemText(token, newName);
             }
         };
-        Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
-            public void onEvent(StateToken token, String oldName) {
+        final Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
+            public void onEvent(final StateToken token, final String oldName) {
                 setItemText(token, oldName);
             }
         };
@@ -264,7 +265,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         }
     }
 
-    private String getTooltip(StateToken token, BasicMimeTypeDTO mimeType) {
+    private String getTooltip(final StateToken token, final BasicMimeTypeDTO mimeType) {
         if (mimeType != null && (mimeType.isImage() || mimeType.isPdf())) {
             return KuneUiUtils.genQuickTipWithImage(downloadUtilsProvider.get().getImageResizedUrl(token,
                     ImageSize.thumb), session.getImgCropsize());
@@ -288,12 +289,14 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     private void setItemText(final StateToken stateToken, final String name) {
-        view.setItemText(genId(stateToken), name);
+        if (view.isAttached()) {
+            view.setItemText(genId(stateToken), name);
+        }
     }
 
     private void setStateContainer(final StateContainerDTO state, final boolean select) {
         final StateToken stateToken = state.getStateToken();
-        boolean isContent = (state instanceof StateContentDTO);
+        final boolean isContent = (state instanceof StateContentDTO);
         StateContentDTO stateContent = null;
 
         final ContainerDTO container = state.getContainer();

@@ -6,8 +6,6 @@ import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.gwtext.client.widgets.ToolbarButton;
-import com.gwtext.client.widgets.menu.Menu;
-import com.gwtext.client.widgets.menu.event.MenuListenerAdapter;
 
 public class MenuGui extends AbstractMenuGui {
 
@@ -21,15 +19,9 @@ public class MenuGui extends AbstractMenuGui {
         initWidget(button);
         descriptor.action.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(final PropertyChangeEvent event) {
-                if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE) && event.getNewValue().equals(true)) {
+                if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE)) {
                     menu.hide(true);
                 }
-            }
-        });
-        menu.addListener(new MenuListenerAdapter() {
-            @Override
-            public void onShow(final Menu menu) {
-                descriptor.action.putValue(MenuDescriptor.MENU_HIDE, false);
             }
         });
     }

@@ -33,6 +33,8 @@ public interface ContextNavigatorView extends View {
 
     void editItem(String id);
 
+    boolean isAttached();
+
     boolean isSelected(String id);
 
     void selectItem(String id);
