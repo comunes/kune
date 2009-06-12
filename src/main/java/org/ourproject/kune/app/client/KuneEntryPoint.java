@@ -23,15 +23,15 @@ import org.ourproject.kune.blogs.client.BlogClientModule;
 import org.ourproject.kune.chat.client.ChatClientModule;
 import org.ourproject.kune.docs.client.DocumentClientModule;
 import org.ourproject.kune.gallery.client.GalleryClientModule;
-import org.ourproject.kune.platf.client.services.CoreModule;
+import org.ourproject.kune.platf.client.services.Loader;
 import org.ourproject.kune.platf.client.services.PlatformModule;
 import org.ourproject.kune.wiki.client.WikiClientModule;
 import org.ourproject.kune.workspace.client.RegistryModule;
 import org.ourproject.kune.workspace.client.WorkspaceModule;
+import org.ourproject.kune.workspace.client.hello.HelloWorldModule;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emiteuimodule.client.EmiteUIModule;
-import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DeferredCommand;
@@ -52,8 +52,11 @@ public class KuneEntryPoint implements EntryPoint {
         // At the moment, in runtime:
         Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
 
-        Suco.install(new CoreModule(), new RegistryModule(), new PlatformModule(), new EmiteUIModule(),
-                new DocumentClientModule(), new BlogClientModule(), new WikiClientModule(), new GalleryClientModule(),
-                new ChatClientModule(), new WorkspaceModule());
+        Loader.install(new RegistryModule(), new DocumentClientModule(), new BlogClientModule(),
+                new WikiClientModule(), new GalleryClientModule(), new EmiteUIModule(), new ChatClientModule(),
+                new WorkspaceModule(), new PlatformModule());
+
+        // We install our HelloWorldModule
+        Loader.install(new HelloWorldModule());
     }
 }

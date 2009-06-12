@@ -98,10 +98,15 @@ public class HelloWorldModule extends AbstractExtendedModule {
             /**
              * We can add some gui action items to the content editor
              * 
-             * Summary)
+             * Summary).
              * 
              * @param i18n
-             **/
+             *            the i18n
+             * @param contentEditorProv
+             *            the content editor provider
+             * @param img
+             *            the img
+             */
             private void createActions(final Provider<ContentEditor> contentEditorProv, final ImgResources img,
                     final I18nTranslationService i18n) {
 
@@ -113,7 +118,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
 
                 // We no use i18n.t() in most of these gui widgets but it's is
                 // recommended the use in real code
-                final MenuDescriptor menu = new MenuDescriptor(i18n.t("File"), "File menu tooltip");
+                final MenuDescriptor menu = new MenuDescriptor(i18n.t("HelloWorldMenu"), "File menu tooltip");
 
                 final MenuItemDescriptor menuitem = new MenuItemDescriptor(menu, action);
                 final MenuItemDescriptor menuitem2 = new MenuItemDescriptor(menu, action);
@@ -141,12 +146,11 @@ public class HelloWorldModule extends AbstractExtendedModule {
                 //
                 // Using Provider<Class> we do lazy instantiation. When we call
                 // actionRegistry.get() it creates the instance if is not
-                // created
-                // yet.
+                // created yet.
                 final ContentEditor contentEditor = contentEditorProv.get();
 
                 // We want to add some items to the topbar and other to the
-                // second bar
+                // second bar of the editor
                 contentEditor.setLocation(ContentEditor.TOPBAR, menu, menuitem, menuSeparator, menuitem2, submenu,
                         menuitem3, menuitem4, otherSeparator, menuitem5, menuitem6);
                 contentEditor.setLocation(ContentEditor.SNDBAR, btn);
@@ -160,8 +164,8 @@ public class HelloWorldModule extends AbstractExtendedModule {
                 // It's important to add the menus before its menu items
                 contentEditor.addActions(menuitem2, submenu, menuitem3, menuitem4, otherSeparator, menuitem5, menuitem6);
 
-                // We can change descriptors properties and are changed in the
-                // UI
+                // We can change descriptors properties after render and the UI
+                // is updated automatically
                 btn.setPushed(true);
 
                 // After some time we can change the common action or some other
@@ -170,12 +174,11 @@ public class HelloWorldModule extends AbstractExtendedModule {
                     @Override
                     public void run() {
                         // The text of the action (in the menu or in the button)
-                        action.putValue(Action.NAME, "hello world new");
-                        // And the tooltip (on over message):
-                        action.putValue(Action.SHORT_DESCRIPTION, "hello world new");
+                        action.putValue(Action.NAME, "hello world (updated)");
+                        action.putValue(Action.SHORT_DESCRIPTION, "hello world tooltip (updated)");
                         btn.setPushed(false);
                     }
-                }.schedule(10000);
+                }.schedule(15000);
             }
         }
 
@@ -189,7 +192,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
         }
 
         public void showMessage() {
-            /** i18n use with parameters **/
+            // i18n use with parameters
             NotifyUser.info(i18n.t("Hello [%s]!", "world"));
         }
     }
@@ -205,16 +208,17 @@ public class HelloWorldModule extends AbstractExtendedModule {
     static class HelloWorldAction extends AbstractAction {
         public HelloWorldAction(final ImgResources img) {
             super();
-            super.putValue(Action.NAME, "helloword");
-            super.putValue(Action.SHORT_DESCRIPTION, "helloworld item");
+            super.putValue(Action.NAME, "helloworld");
+            super.putValue(Action.SHORT_DESCRIPTION, "helloworld tooltip");
             super.putValue(Action.SMALL_ICON, img.info());
         }
 
         public void actionPerformed(final ActionEvent actionEvent) {
             if (actionEvent.getEvent().getCtrlKey()) {
                 NotifyUser.info("Hello world action fired with ctrl key pressed");
+            } else {
+                NotifyUser.info("Hello world action fired");
             }
-            NotifyUser.info("Hello world action fired");
         }
     }
 
@@ -241,11 +245,18 @@ public class HelloWorldModule extends AbstractExtendedModule {
         register(Singleton.class, new Factory<HelloWorld>(HelloWorld.class) {
             /**
              * Singleton.class decorator: creates only one instance of
-             * HelloWorld.class and when we use it the provider returns always
+             * HelloWorld.class and when we use it, the provider returns always
              * the same instance.
              * 
              * NoDecorator.class: Use it if we need to create a new instance of
              * HelloWorld.class in every use.
+             * 
+             * Others:
+             * 
+             * ApplicationComponentGroup.class: Use this decorator with parts of
+             * kune that are needed at start time (like main widgets in
+             * workspace). They are created automatically when starting.
+             * 
              */
             @Override
             public HelloWorld create() {
@@ -261,7 +272,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
 
             /**
              * Optionally: we can do something after the instance is created
-             **/
+             */
             @Override
             public void onAfterCreated(final HelloWorld instance) {
                 Log.info("HelloWorld singleton instance created");
@@ -272,7 +283,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
          * we use a mock for i18n in this sample because we don't really want to
          * translate this module messages. Normally we use:
          * I18nTranslationService.class instead of the mock
-         **/
+         */
         register(Singleton.class, new Factory<I18nTranslationServiceMocked>(I18nTranslationServiceMocked.class) {
             @Override
             public I18nTranslationServiceMocked create() {
@@ -288,5 +299,11 @@ public class HelloWorldModule extends AbstractExtendedModule {
                 NotifyUser.info("Global Ctrl+S pressed");
             }
         });
+
+        // And because nobody use this module, we get the class (to force the
+        // creation of the Helloworld instance):
+        // i(HelloWorld.class);
+
+        // See KuneEntryPoint for a sample of modules registration
     }
 }

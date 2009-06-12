@@ -233,7 +233,7 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         saveAction = new SaveAction(NO_TEXT, i18n.t("Save"),imgResources.save());
 
         final ButtonDescriptor saveBtn = new ButtonDescriptor(saveAction);
-        final KeyStroke key_S = KeyStroke.getKeyStroke(Keyboard.KEY_S, Keyboard.MODIFIER_CTRL);
+        final KeyStroke key_S = KeyStroke.getKeyStroke(Character.valueOf('S'), Keyboard.MODIFIER_CTRL);
         saveBtn.setPosition(0);
         saveBtn.setLocation(RTEditor.SNDBAR);
 
