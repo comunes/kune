@@ -25,7 +25,7 @@ public class MenuBinding extends GuiBindingAdapter {
             isSubmenu = true;
         } else {
             // Is main parent menu
-            final MenuGui menu = new MenuGui(descriptor);
+            final MenuGui menu = new MenuGui((MenuDescriptor) descriptor);
             descriptor.putValue(UI_MENU, menu);
             item = menu;
             isSubmenu = false;

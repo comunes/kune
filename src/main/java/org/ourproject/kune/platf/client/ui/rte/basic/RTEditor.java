@@ -3,9 +3,9 @@ package org.ourproject.kune.platf.client.ui.rte.basic;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiAddCondition;
+import org.ourproject.kune.platf.client.actions.ui.IsActionExtensible;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 
 import com.calclab.suco.client.events.Listener0;
@@ -14,7 +14,7 @@ import com.calclab.suco.client.events.Listener0;
 /**
  * The Interface RTEditor.
  */
-public interface RTEditor {
+public interface RTEditor extends IsActionExtensible {
 
     /**
      * The TOPBAR location used in {@link GuiActionDescrip#setLocation(String)}
@@ -33,30 +33,6 @@ public interface RTEditor {
      * for put the actions in the links context menu
      */
     String LINKCTX = "rte-linkctx";
-
-    /**
-     * Adds a action description
-     * 
-     * @param action
-     *            the action
-     */
-    void addAction(GuiActionDescrip action);
-
-    /**
-     * Adds some action descriptions
-     * 
-     * @param actions
-     *            the actions
-     */
-    void addActionCollection(GuiActionDescCollection actions);
-
-    /**
-     * Adds some action descriptions
-     * 
-     * @param action
-     *            the action
-     */
-    void addActions(GuiActionDescrip... actions);
 
     /**
      * Adds the on edit listener (fired when the user do some edit).

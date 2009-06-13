@@ -110,6 +110,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
     }
 
     private String createShortCut(final KeyStroke key, final String style) {
+        // See: https://yui-ext.com/forum/showthread.php?t=5762
         final Element keyLabel = DOM.createSpan();
         keyLabel.setId(style);
         keyLabel.setInnerText(key.toString());

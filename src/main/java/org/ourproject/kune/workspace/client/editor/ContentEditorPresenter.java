@@ -137,7 +137,7 @@ public class ContentEditorPresenter extends RTESavingEditorPresenter implements 
         final KeyStroke key = KeyStroke.getKeyStroke(Keyboard.KEY_F2, 0);
         renameAction.putValue(Action.ACCELERATOR_KEY, key);
         super.setActionShortcut(key, renameAction);
-        super.addAction(renameItem);
+        addAction(renameItem);
     }
 
     private void adjHeight(final int height) {

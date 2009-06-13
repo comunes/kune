@@ -98,6 +98,22 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
         return parent != NO_PARENT;
     }
 
+    public boolean mustBeAdded() {
+        boolean result = false;
+        if (addCondition != null) {
+            result = addCondition.mustBeAdded();
+        }
+        return result;
+    }
+
+    public boolean mustBeVisible() {
+        boolean result = false;
+        if (visibleCondition != null) {
+            result = visibleCondition.mustBeVisible();
+        }
+        return result;
+    }
+
     /**
      * Sets the value associated with the specified key.
      * 

@@ -49,9 +49,9 @@ import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
-import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
@@ -104,6 +104,7 @@ import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
+import org.ourproject.kune.workspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseChangeAction;
@@ -375,9 +376,10 @@ public class WorkspaceModule extends AbstractExtendedModule {
         register(ApplicationComponentGroup.class, new Factory<SiteOptions>(SiteOptions.class) {
             @Override
             public SiteOptions create() {
-                final SiteOptionsPresenter presenter = new SiteOptionsPresenter();
-                final SiteOptionsPanel panel = new SiteOptionsPanel(presenter, i(WorkspaceSkeleton.class),
-                        i(I18nUITranslationService.class), p(I18nTranslator.class), p(TestRTEDialog.class));
+                final SiteOptionsPresenter presenter = new SiteOptionsPresenter(i(I18nUITranslationService.class),
+                        i(ImgResources.class));
+                final SiteOptionsPanel panel = new SiteOptionsPanel(i(WorkspaceSkeleton.class),
+                        i(I18nUITranslationService.class), i(GuiBindingsRegister.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -572,8 +574,8 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(Session.class), p(SocialNetworkServiceAsync.class), i(WsThemePresenter.class),
                         i(GroupActionRegistry.class), i(ActionParticipationToolbar.class), p(FileDownloadUtils.class));
                 final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
-                        i(I18nUITranslationService.class), i(WorkspaceSkeleton.class),
-                        (i(ActionParticipationToolbar.class).getView()));
+                        i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
+                                ActionParticipationToolbar.class).getView());
                 presenter.init(view);
                 return presenter;
             }
@@ -759,6 +761,15 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(LanguageSelector.class), i(WorkspaceSkeleton.class), i(Images.class));
                 presenter.init(view);
                 return presenter;
+            }
+        });
+
+        register(ApplicationComponentGroup.class, new Factory<SiteOptionsI18nTranslatorAction>(
+                SiteOptionsI18nTranslatorAction.class) {
+            @Override
+            public SiteOptionsI18nTranslatorAction create() {
+                return new SiteOptionsI18nTranslatorAction(i(SiteOptions.class), i(I18nTranslationService.class),
+                        i(ImgResources.class), p(I18nTranslator.class));
             }
         });
 

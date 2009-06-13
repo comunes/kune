@@ -9,6 +9,12 @@ public class MenuDescriptor extends GuiActionDescrip {
 
     public static final String MENU_HIDE = "hidemenu";
 
+    private boolean standalone;
+
+    public MenuDescriptor() {
+        this(new BaseAction(null, null, null));
+    }
+
     public MenuDescriptor(final AbstractAction action) {
         this(NO_PARENT, action);
     }
@@ -17,6 +23,7 @@ public class MenuDescriptor extends GuiActionDescrip {
         super(action);
         setParent(parent);
         action.putValue(MENU_HIDE, false);
+        standalone = false;
     }
 
     public MenuDescriptor(final String text) {
@@ -42,6 +49,21 @@ public class MenuDescriptor extends GuiActionDescrip {
 
     public void hide() {
         action.putValue(MENU_HIDE, !((Boolean) action.getValue(MENU_HIDE)));
+    }
+
+    public boolean isStandalone() {
+        return standalone;
+    }
+
+    /**
+     * Sets the standalone property (if the menu should have button (for a
+     * toolbar) or is a menu independent.
+     * 
+     * @param standalone
+     *            the new standalone
+     */
+    public void setStandalone(final boolean standalone) {
+        this.standalone = standalone;
     }
 
     public void setText(final String text) {

@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.platf.client.services;
 
-import org.ourproject.kune.platf.client.actions.ui.BasicGuiBinding;
+import org.ourproject.kune.platf.client.actions.ui.BasicGuiBindings;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
@@ -439,10 +439,10 @@ public class PlatformModule extends AbstractExtendedModule {
                 return new ExternalMediaRegistry(i(Session.class).getInitData().getExtMediaDescrips());
             }});
 
-        register(Singleton.class, new Factory<BasicGuiBinding>(BasicGuiBinding.class) {
+        register(Singleton.class, new Factory<BasicGuiBindings>(BasicGuiBindings.class) {
             @Override
-            public BasicGuiBinding create() {
-                return new BasicGuiBinding(i(GuiBindingsRegister.class));
+            public BasicGuiBindings create() {
+                return new BasicGuiBindings(i(GuiBindingsRegister.class));
             }
         });
 
@@ -453,7 +453,7 @@ public class PlatformModule extends AbstractExtendedModule {
             }
             @Override
             public void onAfterCreated(final GuiBindingsRegister instance) {
-                i(BasicGuiBinding.class);
+                i(BasicGuiBindings.class);
             }
         });
 

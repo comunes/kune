@@ -262,12 +262,12 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         saveClose.setLocation(RTEditor.TOPBAR);
         saveCloseBtn.setLocation(RTEditor.TOPBAR);
 
-        super.addAction(saveMenu);
-        super.addAction(saveBtn);
-        super.addAction(autoSaveItem);
-        super.addAction(saveClose);
-        super.addAction(saveCloseBtn);
-        super.addAction(closeItem);
+        addAction(saveMenu);
+        addAction(saveBtn);
+        addAction(autoSaveItem);
+        addAction(saveClose);
+        addAction(saveCloseBtn);
+        addAction(closeItem);
     }
 
     private void enableSaveBtn(final boolean enabled) {

@@ -12,4 +12,10 @@ public interface ImgResources extends ImmutableResourceBundle {
     @Resource("info.png")
     ImageResource info();
 
+    @Resource("kune-icon16.png")
+    ImageResource kuneIcon16();
+
+    @Resource("language.png")
+    ImageResource language();
+
 }

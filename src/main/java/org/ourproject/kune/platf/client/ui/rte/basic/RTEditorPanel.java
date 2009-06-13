@@ -6,9 +6,9 @@ import org.cobogw.gwt.user.client.CSS;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.actions.ui.AbstractComplexGuiItem;
+import org.ourproject.kune.platf.client.actions.InputMap;
+import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.errors.UIException;
@@ -38,8 +38,9 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.Composite;
 
-public class RTEditorPanel extends AbstractComplexGuiItem implements RTEditorView, FocusHandler, BlurHandler {
+public class RTEditorPanel extends Composite implements RTEditorView, FocusHandler, BlurHandler {
 
     private static final Element NO_ELEMENT = null;
     private final I18nUITranslationService i18n;
@@ -51,18 +52,18 @@ public class RTEditorPanel extends AbstractComplexGuiItem implements RTEditorVie
     private final RichTextArea rta;
     private final ComplexToolbar topBar;
     private final ComplexToolbar sndBar;
+    private InputMap inputMap;
 
     public RTEditorPanel(final RTEditorPresenter presenter, final I18nUITranslationService i18n,
-            final GlobalShortcutRegister globalShortcutReg, final GuiBindingsRegister bindReg) {
-        super();
+            final GlobalShortcutRegister globalShortcutReg, final GuiBindingsRegister bindings) {
         this.presenter = presenter;
         this.i18n = i18n;
         this.globalShortcutReg = globalShortcutReg;
         rta = new RichTextArea();
         basic = rta.getBasicFormatter();
         extended = rta.getExtendedFormatter();
-        topBar = new ComplexToolbar(bindReg);
-        sndBar = new ComplexToolbar(bindReg);
+        topBar = new ComplexToolbar(bindings);
+        sndBar = new ComplexToolbar(bindings);
         sndBar.setNormalStyle();
         rta.addFocusHandler(this);
         rta.addBlurHandler(this);
@@ -72,22 +73,19 @@ public class RTEditorPanel extends AbstractComplexGuiItem implements RTEditorVie
         setHeight("100%");
     }
 
-    public void addActions(final GuiActionDescCollection items) {
-        super.addAll(items);
-        for (final GuiActionDescrip item : items) {
-            final String location = item.getLocation();
-            if (location == null) {
-                throw new UIException("Unknown location in action item: " + item);
-            }
-            if (location.equals(RTEditor.TOPBAR)) {
-                topBar.add(item);
-            } else if (location.equals(RTEditor.SNDBAR)) {
-                sndBar.add(item);
-            } else if (location.equals(RTEditor.LINKCTX)) {
-                linkCtxMenu.add(item);
-            } else {
-                throw new UIException("Unknown location in action item: " + item);
-            }
+    public void addAction(final GuiActionDescrip item) {
+        final String location = item.getLocation();
+        if (location == null) {
+            throw new UIException("Unknown location in action item: " + item);
+        }
+        if (location.equals(RTEditor.TOPBAR)) {
+            topBar.addAction(item);
+        } else if (location.equals(RTEditor.SNDBAR)) {
+            sndBar.addAction(item);
+        } else if (location.equals(RTEditor.LINKCTX)) {
+            linkCtxMenu.add(item);
+        } else {
+            throw new UIException("Unknown location in action item: " + item);
         }
     }
 
@@ -299,7 +297,7 @@ public class RTEditorPanel extends AbstractComplexGuiItem implements RTEditorVie
             super.onBrowserEvent(event);
             break;
         case Event.ONKEYPRESS:
-            final AbstractAction rtaActionItem = super.getAction(event);
+            final AbstractAction rtaActionItem = inputMap.get(KeyStroke.getKeyStrokeForEvent(event));
             // FIXME
             // final Action actionItem = rtaActionItem == null ?
             // globalShortcutReg.get(event) : rtaActionItem;
@@ -377,6 +375,10 @@ public class RTEditorPanel extends AbstractComplexGuiItem implements RTEditorVie
 
     public void setHTML(final String html) {
         rta.setHTML(html);
+    }
+
+    public void setInputMap(final InputMap inputMap) {
+        this.inputMap = inputMap;
     }
 
     public void setText(final String text) {

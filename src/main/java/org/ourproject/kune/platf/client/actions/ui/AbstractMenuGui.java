@@ -25,4 +25,12 @@ public abstract class AbstractMenuGui extends AbstractGuiItem {
         menu.insert(position, item);
     }
 
+    public void show(final int x, final int y) {
+        menu.showAt(x, y);
+    }
+
+    public void show(final String id) {
+        menu.show(id);
+    }
+
 }

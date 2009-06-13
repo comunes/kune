@@ -19,81 +19,52 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.siteoptions;
 
+import org.ourproject.kune.platf.client.actions.ui.AbstractComposedGuiItem;
+import org.ourproject.kune.platf.client.actions.ui.AbstractGuiItem;
+import org.ourproject.kune.platf.client.actions.ui.AbstractMenuGui;
+import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
+import org.ourproject.kune.platf.client.actions.ui.MenuBinding;
+import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
-import org.ourproject.kune.platf.client.ui.rte.TestRTEDialog;
-import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.PushButton;
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.widgets.menu.BaseItem;
-import com.gwtext.client.widgets.menu.Item;
-import com.gwtext.client.widgets.menu.Menu;
-import com.gwtext.client.widgets.menu.event.BaseItemListenerAdapter;
 
-public class SiteOptionsPanel implements SiteOptionsView {
+public class SiteOptionsPanel extends AbstractComposedGuiItem implements SiteOptionsView {
 
-    public SiteOptionsPanel(final SiteOptionsPresenter presenter, final WorkspaceSkeleton ws,
-            final I18nUITranslationService i18n, final Provider<I18nTranslator> translatorProvider,
-            final Provider<TestRTEDialog> editor) {
+    private static final String BTN_ID = "k-sopts-btn-id";
+    private AbstractMenuGui menu;
+
+    public SiteOptionsPanel(final WorkspaceSkeleton wspace, final I18nUITranslationService i18n,
+            final GuiBindingsRegister bindings) {
+        super(bindings);
         final PushButton optionsButton = new PushButton("");
         // optionsButton.setText(i18n.t("Options"));
         optionsButton.setHTML(i18n.t("Options")
                 + "<img style=\"vertical-align: middle;\" src=\"images/arrowdown.png\" />");
         optionsButton.setStyleName("k-sitebar-labellink");
-        ws.getSiteBar().addSeparator();
-        ws.getSiteBar().add(optionsButton);
-        ws.getSiteBar().addSpacer();
-        ws.getSiteBar().addSpacer();
-        final Menu optionsMenu = new Menu();
+        optionsButton.ensureDebugId(BTN_ID);
+        wspace.getSiteBar().addSeparator();
+        wspace.getSiteBar().add(optionsButton);
+        wspace.getSiteBar().addSpacer();
+        wspace.getSiteBar().addSpacer();
+
         optionsButton.addClickHandler(new ClickHandler() {
             public void onClick(final ClickEvent event) {
-                final Element sender = event.getRelativeElement();
-                optionsMenu.showAt(sender.getAbsoluteLeft(), sender.getAbsoluteTop() + 10);
+                menu.show(optionsButton.getElement().getId());
             }
         });
-
-        final Item testRTE = new Item(i18n.t("Test new RTE"), new BaseItemListenerAdapter() {
-            @Override
-            public void onClick(final BaseItem item, final EventObject e) {
-                final TestRTEDialog testRTEDialog = editor.get();
-                testRTEDialog.setExtended(true);
-                testRTEDialog.show();
-            }
-        }, "");
-
-        final Item testRTEbasic = new Item(i18n.t("Test new RTE (basic mode)"), new BaseItemListenerAdapter() {
-            @Override
-            public void onClick(final BaseItem item, final EventObject e) {
-                final TestRTEDialog testRTEDialog = editor.get();
-                testRTEDialog.setExtended(false);
-                testRTEDialog.show();
-            }
-        }, "");
-
-        final Item linkHelpInTrans = new Item(i18n.t("Help with the translation"), new BaseItemListenerAdapter() {
-            @Override
-            public void onClick(final BaseItem item, final EventObject e) {
-                super.onClick(item, e);
-                translatorProvider.get().doShowTranslator();
-            }
-        }, "images/language.gif");
-
-        final Item linkKuneBugs = new Item(i18n.t("Report kune bugs"), new BaseItemListenerAdapter() {
-            @Override
-            public void onClick(final BaseItem item, final EventObject e) {
-                super.onClick(item, e);
-                KuneWindowUtils.open("http://ourproject.org/tracker/?group_id=407");
-            }
-        }, "images/kuneicon16.gif");
-        optionsMenu.addItem(testRTEbasic);
-        optionsMenu.addItem(testRTE);
-        optionsMenu.addItem(linkHelpInTrans);
-        optionsMenu.addItem(linkKuneBugs);
     }
+
+    public void setMenu(final MenuDescriptor menuDescriptor) {
+        menu = (AbstractMenuGui) menuDescriptor.getValue(MenuBinding.UI_MENU);
+    }
+
+    @Override
+    protected void addWidget(final AbstractGuiItem item, final int position, final boolean visible) {
+        // Do nothing (menu items are attached automatically to its menu
+    }
+
 }

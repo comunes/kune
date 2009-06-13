@@ -19,7 +19,11 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.siteoptions;
 
-import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensibleView;
+import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 
-public interface SiteOptionsView extends View {
+public interface SiteOptionsView extends AbstractActionExtensibleView {
+
+    void setMenu(MenuDescriptor menuDescriptor);
+
 }

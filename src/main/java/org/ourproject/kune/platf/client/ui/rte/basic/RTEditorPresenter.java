@@ -15,6 +15,7 @@ import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.InputMap;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
+import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensiblePresenter;
 import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
@@ -52,7 +53,7 @@ import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 
-public class RTEditorPresenter implements RTEditor {
+public class RTEditorPresenter extends AbstractActionExtensiblePresenter implements RTEditor {
 
     public class BackgroundColorAction extends AbstractExtendedAction {
 
@@ -710,23 +711,10 @@ public class RTEditorPresenter implements RTEditor {
         fontActions = new HashMap<String, MenuCheckItemDescriptor>();
     }
 
+    @Override
     public void addAction(final GuiActionDescrip descriptor) {
         actions.add(descriptor);
         checkForMenus(descriptor);
-    }
-
-    public void addActionCollection(final GuiActionDescCollection descriptors) {
-        actions.addAll(descriptors);
-        for (final GuiActionDescrip descriptor : descriptors) {
-            checkForMenus(descriptor);
-        }
-    }
-
-    public void addActions(final GuiActionDescrip... descriptors) {
-        actions.add(descriptors);
-        for (final GuiActionDescrip descriptor : descriptors) {
-            checkForMenus(descriptor);
-        }
     }
 
     public void addOnEditListener(final Listener0 listener) {
@@ -740,7 +728,7 @@ public class RTEditorPresenter implements RTEditor {
     public void attach() {
         if (!attached) {
             attached = true;
-            view.addActions(actions);
+            attachActions();
             view.setInputMap(inputMap);
         }
     }
@@ -881,6 +869,12 @@ public class RTEditorPresenter implements RTEditor {
         }
         if (isAndCanBeExtended()) {
             strikethrough.setPushed(view.isStrikethrough());
+        }
+    }
+
+    private void attachActions() {
+        for (final GuiActionDescrip descriptor : actions) {
+            view.addAction(descriptor);
         }
     }
 
@@ -1098,7 +1092,7 @@ public class RTEditorPresenter implements RTEditor {
         setActionShortcut(KeyStroke.getKeyStroke(Character.valueOf('I'), Keyboard.MODIFIER_ALT), devInfoAction);
 
         actions = new GuiActionDescCollection();
-        actions.add(fileMenu, editMenu, formatMenu, insertMenu, undo, redo, editMenuSep, copy, cut, paste, editMenuSep,
+        addActions(fileMenu, editMenu, formatMenu, insertMenu, undo, redo, editMenuSep, copy, cut, paste, editMenuSep,
                 select, editMenuSep, editHtml, editLink, img, insertTable, insertMedia, insertMenuSep,
                 insertSpecialChar, comment, hline, removeFormat, formatMenuSep, insertMenuSep, undoBtn, redoBtn,
                 sndbarSep, bold, italic, underline, strikethrough, sndbarSep, justifyLeft, justifyCentre, justifyRight,

@@ -1,10 +1,10 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
-public class BasicGuiBinding {
+public class BasicGuiBindings {
 
-    public BasicGuiBinding(final GuiBindingsRegister bindings) {
-        bindings.register(MenuDescriptor.class, new MenuBinding());
+    public BasicGuiBindings(final GuiBindingsRegister bindings) {
         final MenuItemBinding menuItemBinding = new MenuItemBinding();
+        bindings.register(MenuDescriptor.class, new MenuBinding());
         bindings.register(MenuRadioItemDescriptor.class, menuItemBinding);
         bindings.register(MenuCheckItemDescriptor.class, menuItemBinding);
         bindings.register(MenuItemDescriptor.class, menuItemBinding);
