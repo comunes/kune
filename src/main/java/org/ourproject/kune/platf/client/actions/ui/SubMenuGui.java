@@ -14,7 +14,7 @@ public class SubMenuGui extends AbstractMenuGui {
         item = new MenuItem();
         item.setMenu(menu);
         setAction(descriptor.action);
-        initWidget(item);
+        // initWidget(item);
     }
 
     public MenuItem getMenuItem() {
@@ -32,9 +32,12 @@ public class SubMenuGui extends AbstractMenuGui {
 
     @Override
     public void setIcon(final ImageResource imageResource) {
-        if (imageResource != null) {
-            item.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
-        }
+        item.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
+    }
+
+    @Override
+    public void setIconUrl(final String imageUrl) {
+        item.setIcon(imageUrl);
     }
 
     @Override
@@ -45,5 +48,10 @@ public class SubMenuGui extends AbstractMenuGui {
     @Override
     public void setToolTipText(final String tooltip) {
         item.setTitle(tooltip);
+    }
+
+    @Override
+    public void setVisible(final boolean visible) {
+        item.setVisible(visible);
     }
 }

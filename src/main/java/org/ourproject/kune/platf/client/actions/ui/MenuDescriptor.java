@@ -8,11 +8,14 @@ import com.google.gwt.libideas.resources.client.ImageResource;
 public class MenuDescriptor extends GuiActionDescrip {
 
     public static final String MENU_HIDE = "hidemenu";
+    public static final String MENU_SHOW = "showmenu";
+    public static final String MENU_SHOW_ID = "showmenuid";
+    public static final String MENU_CLEAR = "menuclear";
 
     private boolean standalone;
 
     public MenuDescriptor() {
-        this(new BaseAction(null, null, null));
+        this(new BaseAction(null, null));
     }
 
     public MenuDescriptor(final AbstractAction action) {
@@ -23,11 +26,13 @@ public class MenuDescriptor extends GuiActionDescrip {
         super(action);
         setParent(parent);
         action.putValue(MENU_HIDE, false);
+        action.putValue(MENU_SHOW, false);
+        action.putValue(MENU_CLEAR, false);
         standalone = false;
     }
 
     public MenuDescriptor(final String text) {
-        this(new BaseAction(text, null, null));
+        this(new BaseAction(text, null));
     }
 
     public MenuDescriptor(final String text, final ImageResource icon) {
@@ -35,11 +40,21 @@ public class MenuDescriptor extends GuiActionDescrip {
     }
 
     public MenuDescriptor(final String text, final String tooltip) {
-        this(new BaseAction(text, tooltip, null));
+        this(new BaseAction(text, tooltip));
     }
 
     public MenuDescriptor(final String text, final String tooltip, final ImageResource icon) {
         this(new BaseAction(text, tooltip, icon));
+    }
+
+    public MenuDescriptor(final String text, final String tooltip, final String icon) {
+        this(new BaseAction(text, tooltip, icon));
+    }
+
+    public void clear() {
+        // Action detects changes in values, then we fire a change (whatever) to
+        // fire this method in the UI
+        action.putValue(MENU_CLEAR, !((Boolean) action.getValue(MENU_CLEAR)));
     }
 
     @Override
@@ -70,4 +85,14 @@ public class MenuDescriptor extends GuiActionDescrip {
         action.putValue(Action.NAME, text);
     }
 
+    /**
+     * Show the menu near the Element id specified
+     * 
+     * @param id
+     *            the element id to show menu near of it
+     */
+    public void show(final String id) {
+        action.putValue(MENU_SHOW_ID, id);
+        action.putValue(MENU_SHOW, !((Boolean) action.getValue(MENU_SHOW)));
+    }
 }

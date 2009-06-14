@@ -49,6 +49,11 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
     }
 
     @Override
+    public void setIconUrl(final String imageUrl) {
+        item.setIcon(imageUrl);
+    }
+
+    @Override
     public void setVisible(final boolean visible) {
         item.setVisible(visible);
     }
@@ -69,9 +74,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
 
     @Override
     protected void setIcon(final ImageResource imageResource) {
-        if (imageResource != null) {
-            item.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
-        }
+        item.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
     }
 
     @Override

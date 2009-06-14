@@ -17,25 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.workspace.client.sitebar.siteoptions;
+package org.ourproject.kune.workspace.client.sitebar.siteusermenu;
 
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
+import org.ourproject.kune.workspace.client.sitebar.siteoptions.AbstractSiteOptionsPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-public class SiteOptionsPanel extends AbstractSiteOptionsPanel implements SiteOptionsView {
+import com.google.gwt.user.client.ui.Widget;
 
-    public static final String SITE_OPTIONS_MENU = "kune-sop-om";
+public class SiteUserOptionsPanel extends AbstractSiteOptionsPanel implements SiteUserOptionsView {
 
-    public SiteOptionsPanel(final WorkspaceSkeleton wspace, final I18nUITranslationService i18n,
+    public static final String LOGGED_USER_MENU = "kune-sump-lum";
+
+    private final Widget separator;
+
+    public SiteUserOptionsPanel(final SiteUserOptionsPresenter presenter, final WorkspaceSkeleton wspace,
             final GuiBindingsRegister bindings) {
-        super(bindings, SITE_OPTIONS_MENU);
-        setBtnText(i18n.t("Options"));
+        super(bindings, LOGGED_USER_MENU);
         final AbstractToolbar siteBar = wspace.getSiteBar();
-        siteBar.addSeparator();
         siteBar.add(btn);
-        siteBar.addSpacer();
-        siteBar.addSpacer();
+        separator = siteBar.addSeparator();
+    }
+
+    public void setLoggedUserName(final String name) {
+        setBtnText(name);
+    }
+
+    @Override
+    public void setVisible(final boolean visible) {
+        btn.setVisible(visible);
+        separator.setVisible(visible);
     }
 }

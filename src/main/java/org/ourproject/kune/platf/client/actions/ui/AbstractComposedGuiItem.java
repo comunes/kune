@@ -45,7 +45,7 @@ public abstract class AbstractComposedGuiItem extends Composite {
         return guiItems;
     }
 
-    protected abstract void addWidget(AbstractGuiItem item, int position, boolean visible);
+    protected abstract void add(AbstractGuiItem item);
 
     protected void beforeAddWidget(final GuiActionDescrip descrip) {
         if (descrip.mustBeAdded()) {
@@ -55,9 +55,15 @@ public abstract class AbstractComposedGuiItem extends Composite {
             } else {
                 final AbstractGuiItem item = binding.create(descrip);
                 if (binding.isAttachable()) {
-                    addWidget(item, descrip.getPosition(), descrip.mustBeVisible());
+                    if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
+                        add(item);
+                    } else {
+                        insert(item, descrip.getPosition());
+                    }
                 }
             }
         }
     }
+
+    protected abstract void insert(AbstractGuiItem item, int position);
 }

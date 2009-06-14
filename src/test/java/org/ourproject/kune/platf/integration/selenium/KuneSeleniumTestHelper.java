@@ -19,7 +19,7 @@ import org.ourproject.kune.workspace.client.signin.SignInPanel;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPanel;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPanel;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
+import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptionsPanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 
 import com.thoughtworks.selenium.SeleniumException;
@@ -192,6 +192,6 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
     }
 
     protected void verifyLoggedUserShorName(final String userShortName) throws Exception {
-        waitForTextInside(gid(SiteUserMenuPanel.LOGGED_USER_MENU), userShortName);
+        waitForTextInside(gid(SiteUserOptionsPanel.LOGGED_USER_MENU), userShortName);
     }
 }

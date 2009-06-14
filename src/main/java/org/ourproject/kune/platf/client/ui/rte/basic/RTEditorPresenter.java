@@ -31,6 +31,7 @@ import org.ourproject.kune.platf.client.actions.ui.ToolbarSeparatorDescriptor.Ty
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
@@ -682,6 +683,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
             final Provider<InsertTableDialog> insertTableDialog, final Provider<InsertSpecialCharDialog> insCharDialog,
             final DeferredCommandWrapper deferred) {
+        super();
         this.i18n = i18n;
         this.session = session;
         this.insLinkDialogPv = insLinkDialog;
@@ -734,6 +736,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     }
 
     public void detach() {
+        // Nothing at the moment
     }
 
     public void fireOnEdit() {
@@ -1148,8 +1151,10 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         menus.add(insertMenu = new MenuDescriptor(i18n.t("Insert")));
         menus.add(formatMenu = new MenuDescriptor(i18n.t("Format")));
         menus.add(linkCtxMenu = new MenuDescriptor(i18n.t("Change Link")));
-        menus.add(fontMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font"), imgResources.charfontname()));
-        menus.add(fontSizeMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font size"), imgResources.fontheight()));
+        menus.add(fontMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font"),
+                ImgConstants.toPath(imgResources.charfontname())));
+        menus.add(fontSizeMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font size"),
+                ImgConstants.toPath(imgResources.fontheight())));
         insertMenu.setAddCondition(extendedAddCond);
     }
 
@@ -1181,15 +1186,15 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     private void updateFont() {
         final String currentFont = view.getFont();
         final MenuCheckItemDescriptor item = fontActions.get(currentFont);
-        if (currentFontItem != null && item != currentFontItem) {
+        if (currentFontItem != null && !currentFontItem.equals(item)) {
             currentFontItem.setChecked(false);
         }
-        if (item != null) {
+        if (item == null) {
+            fontMenu.setText("&nbsp;");
+        } else {
             item.setChecked(true);
             currentFontItem = item;
             fontMenu.setText((String) item.getValue(FontAction.FONT_NAME));
-        } else {
-            fontMenu.setText("&nbsp;");
         }
     }
 }

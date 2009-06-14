@@ -13,7 +13,7 @@ import org.ourproject.kune.workspace.client.signin.SignInForm;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPanel;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
+import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptionsPanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 
 public class SignInSeleniumTest extends KuneSeleniumTestHelper {
@@ -49,7 +49,7 @@ public class SignInSeleniumTest extends KuneSeleniumTestHelper {
         registerValidUser(false);
         selenium.isTextPresent("Welcome");
         click(RegisterPanel.WELCOME_OK_BUTTON);
-        clickOnPushButton(gid(SiteUserMenuPanel.LOGGED_USER_MENU));
+        clickOnPushButton(gid(SiteUserOptionsPanel.LOGGED_USER_MENU));
         click(linkId(PlatfMessages.YOUR_HOMEPAGE));
         waitForTextInside(gid(NoHomePagePanel.NO_HOME_PAGE_LABEL), PlatfMessages.USER_DOESN_T_HAVE_A_HOMEPAGE);
     }

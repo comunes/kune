@@ -1,6 +1,5 @@
 package org.ourproject.kune.platf.client.actions;
 
-
 import com.google.gwt.libideas.resources.client.ImageResource;
 
 public abstract class AbstractExtendedAction extends AbstractAction {

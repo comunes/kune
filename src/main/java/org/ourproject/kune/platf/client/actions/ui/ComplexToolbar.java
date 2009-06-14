@@ -34,14 +34,15 @@ public class ComplexToolbar extends AbstractComposedGuiItem implements View {
     }
 
     @Override
-    protected void addWidget(final AbstractGuiItem item, final int position, final boolean visible) {
+    protected void add(final AbstractGuiItem item) {
         item.addStyleName("kune-floatleft");
-        if (position == GuiActionDescrip.NO_POSITION) {
-            toolbar.add(item);
-        } else {
-            toolbar.insert(item, position);
-        }
-        item.setVisible(visible);
+        toolbar.add(item);
+    }
+
+    @Override
+    protected void insert(final AbstractGuiItem item, final int position) {
+        item.addStyleName("kune-floatleft");
+        toolbar.insert(item, position);
     }
 
 }

@@ -19,15 +19,14 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.siteusermenu;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.ui.MenuItemCollection;
+import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensibleView;
+import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 
-public interface SiteUserMenuView extends View {
+public interface SiteUserOptionsView extends AbstractActionExtensibleView {
 
     void setLoggedUserName(String name);
 
-    void setParticipation(MenuItemCollection<GroupDTO> participateInGroups);
+    void setMenu(MenuDescriptor menuDescriptor);
 
     void setVisible(boolean visible);
 

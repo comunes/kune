@@ -19,6 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.siteusermenu;
 
-public interface SiteUserMenu {
+import org.ourproject.kune.platf.client.actions.ui.IsActionExtensible;
 
+public interface SiteUserOptions extends IsActionExtensible {
 }

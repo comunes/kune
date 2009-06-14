@@ -25,9 +25,9 @@ import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPr
 
 import com.calclab.suco.client.events.Listener;
 
-public class EntityOptionsPresenter extends AbstractTabbedDialogPresenter implements EntityOptions {
+public class EntityOptionsPresenter extends AbstractTabbedDialogPresenter implements GroupOptions, UserOptions {
 
-    EntityOptionsView view;
+    private EntityOptionsView view;
 
     public EntityOptionsPresenter(final StateManager stateManager) {
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {

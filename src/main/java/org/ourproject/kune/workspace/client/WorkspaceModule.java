@@ -128,6 +128,8 @@ import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
 import org.ourproject.kune.workspace.client.options.EntityOptionsPresenter;
+import org.ourproject.kune.workspace.client.options.GroupOptions;
+import org.ourproject.kune.workspace.client.options.UserOptions;
 import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicense;
 import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicensePanel;
 import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicensePresenter;
@@ -193,9 +195,9 @@ import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPrese
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPanel;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPresenter;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenu;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPanel;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserMenuPresenter;
+import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptions;
+import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptionsPanel;
+import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptionsPresenter;
 import org.ourproject.kune.workspace.client.skel.ActionCntCtxToolbarPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.socialnet.BuddiesSummary;
@@ -327,13 +329,14 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<SiteUserMenu>(SiteUserMenu.class) {
+        register(ApplicationComponentGroup.class, new Factory<SiteUserOptions>(SiteUserOptions.class) {
             @Override
-            public SiteUserMenu create() {
-                final SiteUserMenuPresenter presenter = new SiteUserMenuPresenter(i(Session.class),
-                        i(StateManager.class), p(EntityOptions.class), p(FileDownloadUtils.class));
-                final SiteUserMenuPanel panel = new SiteUserMenuPanel(presenter, i(WorkspaceSkeleton.class),
-                        i(I18nUITranslationService.class));
+            public SiteUserOptions create() {
+                final SiteUserOptionsPresenter presenter = new SiteUserOptionsPresenter(i(Session.class),
+                        i(StateManager.class), p(UserOptions.class), p(FileDownloadUtils.class),
+                        $(I18nTranslationService.class), $(ImgResources.class));
+                final SiteUserOptionsPanel panel = new SiteUserOptionsPanel(presenter, i(WorkspaceSkeleton.class),
+                        $(GuiBindingsRegister.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -613,6 +616,20 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(I18nTranslationService.class), i(Images.class), i(EntityOptionsGroup.class));
                 presenter.init(panel);
                 return presenter;
+            }
+        });
+
+        register(Singleton.class, new Factory<GroupOptions>(GroupOptions.class) {
+            @Override
+            public GroupOptions create() {
+                return (GroupOptions) i(EntityOptions.class);
+            }
+        });
+
+        register(Singleton.class, new Factory<UserOptions>(UserOptions.class) {
+            @Override
+            public UserOptions create() {
+                return (UserOptions) i(EntityOptions.class);
             }
         });
 

@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
@@ -10,14 +11,14 @@ import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractGuiItem extends Composite implements View {
 
-    protected Action action;
+    protected AbstractAction action;
 
     /**
      * Listener the button uses to receive PropertyChangeEvents from its Action.
      */
     protected PropertyChangeListener changeListener;
 
-    public void setAction(final Action newaction) {
+    public void setAction(final AbstractAction newaction) {
         if (action != null) {
             action.removePropertyChangeListener(changeListener);
             // removeActionListener(action);
@@ -50,9 +51,11 @@ public abstract class AbstractGuiItem extends Composite implements View {
                 } else if (event.getPropertyName().equals(Action.NAME)) {
                     setText((String) (act.getValue(Action.NAME)));
                 } else if (event.getPropertyName().equals(Action.SMALL_ICON)) {
-                    setIcon((ImageResource) (act.getValue(Action.SMALL_ICON)));
+                    setIcon(action.getValue(Action.SMALL_ICON));
                 } else if (event.getPropertyName().equals(Action.SHORT_DESCRIPTION)) {
                     setToolTipText((String) (act.getValue(Action.SHORT_DESCRIPTION)));
+                } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
+                    setVisible(act);
                 }
                 // else if (e.getPropertyName().equals(Action.MNEMONIC_KEY)) {
                 // if (act.getValue(Action.MNEMONIC_KEY) != null) {
@@ -72,6 +75,8 @@ public abstract class AbstractGuiItem extends Composite implements View {
 
     protected abstract void setIcon(ImageResource imageResource);
 
+    protected abstract void setIconUrl(String iconUrl);
+
     protected abstract void setText(String text);
 
     protected abstract void setToolTipText(String text);
@@ -84,9 +89,10 @@ public abstract class AbstractGuiItem extends Composite implements View {
             setToolTipText(null);
         } else {
             setText((String) (action.getValue(Action.NAME)));
-            setIcon((ImageResource) (action.getValue(Action.SMALL_ICON)));
+            setIcon(action.getValue(Action.SMALL_ICON));
             setEnabled(action.isEnabled());
             setToolTipText((String) (action.getValue(Action.SHORT_DESCRIPTION)));
+            setVisible(action);
             // if (a.getValue(Action.MNEMONIC_KEY) != null) {
             // setMnemonic(((Integer)
             // (a.getValue(Action.MNEMONIC_KEY))).intValue());
@@ -105,4 +111,16 @@ public abstract class AbstractGuiItem extends Composite implements View {
         }
     }
 
+    private void setIcon(final Object icon) {
+        if (icon instanceof ImageResource) {
+            setIcon((ImageResource) icon);
+        } else if (icon instanceof String) {
+            setIconUrl((String) icon);
+        }
+    }
+
+    private void setVisible(final Action action) {
+        final Boolean visible = (Boolean) action.getValue(GuiActionDescrip.VISIBLE);
+        setVisible(visible == null ? true : visible);
+    }
 }

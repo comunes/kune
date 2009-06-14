@@ -9,13 +9,13 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
  * The Class AbstractUIActionDescriptor.
  */
 public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
+    public static final String VISIBLE = "visibleprop";
 
     protected static final int NO_POSITION = -1;
     protected static final View NO_VIEW = null;
     protected static final GuiActionDescrip NO_PARENT = null;
 
     private GuiAddCondition addCondition = new GuiAddConditionAdapter();
-    private GuiVisibleCondition visibleCondition = new GuiVisibleConditionAdapter();
 
     protected GuiActionDescrip parent;
 
@@ -89,10 +89,6 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
         return action.getValue(key);
     }
 
-    public GuiVisibleCondition getVisibleCondition() {
-        return visibleCondition;
-    }
-
     public boolean isChild() {
         // @PMD:REVIEWED:CompareObjectsWithEquals: by vjrj on 26/05/09 20:57
         return parent != NO_PARENT;
@@ -102,14 +98,6 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
         boolean result = false;
         if (addCondition != null) {
             result = addCondition.mustBeAdded();
-        }
-        return result;
-    }
-
-    public boolean mustBeVisible() {
-        boolean result = false;
-        if (visibleCondition != null) {
-            result = visibleCondition.mustBeVisible();
         }
         return result;
     }
@@ -130,6 +118,10 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
 
     public void setAddCondition(final GuiAddCondition addCondition) {
         this.addCondition = addCondition;
+    }
+
+    public void setEnabled(final boolean enabled) {
+        action.setEnabled(enabled);
     }
 
     /**
@@ -159,8 +151,8 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
         this.position = position;
     }
 
-    public void setVisibleCondition(final GuiVisibleCondition visibleCondition) {
-        this.visibleCondition = visibleCondition;
+    public void setVisible(final boolean visible) {
+        action.putValue(VISIBLE, visible);
     }
 
     @Override
