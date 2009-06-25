@@ -1,4 +1,4 @@
-<!DOCTYPE document SYSTEM "src/main/java/gwt-module.dtd">
+<!DOCTYPE document SYSTEM "http://google-web-toolkit.googlecode.com/svn/tags/1.6.4/distro-source/core/src/gwt-module.dtd">
 <module>
   <inherits name='org.ourproject.kune.platf.KunePlatform' />
   <inherits name='org.ourproject.kune.workspace.KuneWorkspace' />

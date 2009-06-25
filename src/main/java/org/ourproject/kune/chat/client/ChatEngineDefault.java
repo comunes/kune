@@ -22,13 +22,16 @@ package org.ourproject.kune.chat.client;
 import java.util.Collection;
 import java.util.Date;
 
+import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
+import org.ourproject.kune.platf.client.actions.ActionEvent;
+import org.ourproject.kune.platf.client.actions.KeyStroke;
+import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -61,28 +64,29 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 class ChatEngineDefault implements ChatEngine {
     private ChatConnectionOptions chatOptions;
     private final I18nTranslationService i18n;
-    private final WorkspaceSkeleton ws;
+    private final WorkspaceSkeleton wskel;
     private ToolbarButton traybarButton;
     private final Provider<EmiteUIDialog> emiteUIProvider;
     private final Provider<FileDownloadUtils> downloadUtils;
     private Collection<RosterItem> roster;
     private final Event0 onRosterChanged;
-    private final ShortcutDescriptor shortcut;
+    private final KeyStroke shortcut;
 
-    public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
+    public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton wskel,
             final Application application, final Session session, final Provider<EmiteUIDialog> emiteUIProvider,
-            final Provider<FileDownloadUtils> downloadUtils, final GlobalShortcutRegister globalShortcutRegister) {
+            final Provider<FileDownloadUtils> downloadUtils, final GlobalShortcutRegister shortcutRegister) {
         this.i18n = i18n;
-        this.ws = ws;
+        this.wskel = wskel;
         this.emiteUIProvider = emiteUIProvider;
         this.downloadUtils = downloadUtils;
         this.onRosterChanged = new Event0("onRosterChanged");
-        shortcut = new ShortcutDescriptor(false, true, false, 'C');
-        globalShortcutRegister.put(shortcut, new Listener0() {
-            public void onEvent() {
+        shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
+        shortcutRegister.put(shortcut, new AbstractExtendedAction() {
+            public void actionPerformed(final ActionEvent event) {
                 if (isDialogStarted()) {
                     toggleShow();
                 }
+
             }
         });
         session.onInitDataReceived(new Listener<InitDataDTO>() {
@@ -177,7 +181,7 @@ class ChatEngineDefault implements ChatEngine {
                 });
             }
         } else {
-            ws.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"));
+            wskel.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"));
         }
     }
 
@@ -220,7 +224,7 @@ class ChatEngineDefault implements ChatEngine {
                     toggleShow();
                 }
             });
-            ws.getSiteTraybar().addButton(traybarButton);
+            wskel.getSiteTraybar().addButton(traybarButton);
             emiteUIProvider.get().onChatAttended(new Listener<String>() {
                 public void onEvent(final String parameter) {
                     traybarButton.setIcon("images/e-icon.gif");

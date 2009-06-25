@@ -14,15 +14,14 @@ public class ExtMediaDescripDTO implements IsSerializable {
     private String idRegex;
     private String embedTemplate;
     private int width;
-
     private int height;
 
     public ExtMediaDescripDTO() {
         this(null, null, null, null, null, 0, 0);
     }
 
-    public ExtMediaDescripDTO(final String name, final String siteurl, final String detectRegex,
-            final String idRegex, final String embedTemplate, final int defWidth, final int defHeight) {
+    public ExtMediaDescripDTO(final String name, final String siteurl, final String detectRegex, final String idRegex,
+            final String embedTemplate, final int defWidth, final int defHeight) {
         this.name = name;
         this.siteurl = siteurl;
         this.detectRegex = detectRegex;
@@ -37,7 +36,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
     }
 
     public String getEmbed(final String url) {
-        String id = getId(url);
+        final String id = getId(url);
         String result = embedTemplate.replaceAll(URL, id);
         result = result.replaceAll(HEIGHT, "" + height);
         result = result.replaceAll(WIDTH, "" + width);
@@ -53,7 +52,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
     }
 
     public String getId(final String url) {
-        String id = url.replaceFirst(idRegex, "$1");
+        final String id = url.replaceFirst(idRegex, "$1");
         return id;
     }
 

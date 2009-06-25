@@ -995,7 +995,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
         register(ApplicationComponentGroup.class, new Factory<GlobalShortcutRegister>(GlobalShortcutRegister.class) {
             @Override
             public GlobalShortcutRegister create() {
-                return new GlobalShortcutRegister(i(ActionManager.class));
+                return new GlobalShortcutRegister();
             }
         });
 

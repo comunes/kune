@@ -21,8 +21,10 @@ package org.ourproject.kune.workspace.client.hello;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
+import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.actions.ui.MenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
@@ -33,7 +35,6 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
@@ -41,7 +42,6 @@ import org.ourproject.kune.workspace.client.hello.HelloWorldModule.HelloWorldPan
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -294,11 +294,12 @@ public class HelloWorldModule extends AbstractExtendedModule {
         /**
          * Global shortcut sample definition
          */
-        i(GlobalShortcutRegister.class).put(new ShortcutDescriptor(false, true, false, 'S'), new Listener0() {
-            public void onEvent() {
-                NotifyUser.info("Global Ctrl+S pressed");
-            }
-        });
+        i(GlobalShortcutRegister.class).put(Shortcut.getShortcut(true, Character.valueOf('S')),
+                new AbstractExtendedAction() {
+                    public void actionPerformed(final ActionEvent event) {
+                        NotifyUser.info("Global Ctrl+S pressed");
+                    }
+                });
 
         // And because nobody use this module, we get the class (to force the
         // creation of the Helloworld instance):

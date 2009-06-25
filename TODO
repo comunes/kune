@@ -140,6 +140,11 @@ TODO-list for kune -*- mode: org; -*-
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO <v> karma, reputation, trust metrics:
+http://wiki.couchsurfing.com/en/Trust
+http://p2pfoundation.net/Trust_Metrics
+http://en.wikipedia.org/wiki/Trust_metric
+http://www.advogato.org/trust-metric.html
 ** TODO <v> use guice 2.0
    http://google-code-updates.blogspot.com/2009/05/guice-deuce.html
    http://code.google.com/docreader/#p=google-guice&s=google-guice
@@ -152,6 +157,7 @@ TODO-list for kune -*- mode: org; -*-
 ** TODO <v,s> harden our privacy policy. Goals:
    - permit user/projects/contents how much private or public are
    - APIs public only to associated sites (in study) ( http://oauth.net ? )
+http://raibledesigns.com/rd/entry/implementing_oauth_with_gwt
    - the social net info (xmpp ids) must follow the mobile numbers/email info interchange mode (if I don't have yor email/mobile, I can't contact you)
    - keep always the user informed
    - consider integration of chryptopgraphy (keyczar.org ? )

@@ -1,3 +1,19 @@
 @sprite div .k-icon-info {
   gwt-image: 'info';
 }
+
+@sprite div .k-icon-language {
+  gwt-image: 'language';
+}
+
+@sprite div .k-icon-kuneIcon16 {
+  gwt-image: 'kuneIcon16';
+}
+
+@sprite div .k-icon-prefs {
+  gwt-image: 'prefs';
+}
+
+@sprite div .k-icon-groupHome {
+  gwt-image: 'groupHome';
+}

@@ -39,7 +39,7 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         this.view = toolbar;
     }
 
-    public void addActions(final ActionItemCollection<T> actions, ActionToolbarPosition position) {
+    public void addActions(final ActionItemCollection<T> actions, final ActionToolbarPosition position) {
         for (final ActionItem<T> actionItem : actions) {
             final ActionDescriptor<T> action = actionItem.getAction();
             if (actionItem.mustBeAdded()) {
@@ -82,11 +82,11 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         view.clear();
     }
 
-    public int getLeftPosition(ActionDescriptor<T> action) {
+    public int getLeftPosition(final ActionDescriptor<T> action) {
         return view.getLeftPosition(action);
     }
 
-    public int getTopPosition(ActionDescriptor<T> action) {
+    public int getTopPosition(final ActionDescriptor<T> action) {
         return view.getTopPosition(action);
     }
 
@@ -98,7 +98,7 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         view.hideAllMenus();
     }
 
-    public void setButtonEnable(ActionDescriptor<T> action, boolean enable) {
+    public void setButtonEnable(final ActionDescriptor<T> action, final boolean enable) {
         view.setButtonEnable(action, enable);
     }
 
@@ -110,15 +110,16 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
         view.setNormalStyle();
     }
 
-    public void setParentMenuTitle(ActionToolbarPosition position, String origTitle, String origTooltip, String newTitle) {
+    public void setParentMenuTitle(final ActionToolbarPosition position, final String origTitle,
+            final String origTooltip, final String newTitle) {
         view.setParentMenuTitle(position, origTitle, origTooltip, newTitle);
     }
 
-    public void setPushButtonPressed(ActionDescriptor<T> action, boolean pressed) {
+    public void setPushButtonPressed(final ActionDescriptor<T> action, final boolean pressed) {
         view.setPushButtonPressed(action, pressed);
     }
 
-    private boolean addInPosition(ActionDescriptor<T> action, ActionToolbarPosition position) {
+    private boolean addInPosition(final ActionDescriptor<T> action, final ActionToolbarPosition position) {
         if (position.equals(IN_ANY) || ((ActionToolbarDescriptor<T>) action).getActionPosition().equals(position)) {
             return true;
         }
@@ -126,15 +127,15 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
     }
 
     private boolean isToolbarButton(final ActionDescriptor<T> action) {
-        return action instanceof ActionToolbarButtonDescriptor
-                || action instanceof ActionToolbarButtonAndItemDescriptor;
+        return action instanceof ActionToolbarButtonDescriptor<?>
+                || action instanceof ActionToolbarButtonAndItemDescriptor<?>;
     }
 
     private boolean isToolbarMenu(final ActionDescriptor<T> action) {
         return action instanceof ActionToolbarMenuDescriptor || action instanceof ActionToolbarMenuAndItemDescriptor;
     }
 
-    private boolean isToolbarPushButton(ActionDescriptor<T> action) {
+    private boolean isToolbarPushButton(final ActionDescriptor<T> action) {
         return action instanceof ActionToolbarPushButtonDescriptor;
     }
 }

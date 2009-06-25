@@ -41,7 +41,7 @@ public class RTELinkPopup extends AbstractPopupPanel {
         KuneUiUtils.setUnselectable(actionLabel.getElement());
         actionLabel.addClickHandler(new ClickHandler() {
             public void onClick(final ClickEvent event) {
-                item.fire(new ActionEvent(actionLabel, (Event) event.getNativeEvent()));
+                item.fire(new ActionEvent(actionLabel, Event.as(event.getNativeEvent())));
             }
         });
         hpanel.insert(actionLabel, 0);
