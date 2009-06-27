@@ -25,10 +25,16 @@ public class ComplexToolbar extends AbstractComposedGuiItem implements View {
         toolbar.addSpacer();
     }
 
+    /**
+     * Set the blank/clean style
+     */
     public void setCleanStyle() {
         toolbar.setCleanStyle();
     }
 
+    /**
+     * Set the normal grey style
+     */
     public void setNormalStyle() {
         toolbar.setNormalStyle();
     }

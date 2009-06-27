@@ -20,6 +20,7 @@
 package org.ourproject.kune.workspace.client.entityheader;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.state.Session;
@@ -49,6 +50,10 @@ public class EntityHeaderPresenter implements EntityHeader {
                 view.setTheme(oldTheme, newTheme);
             }
         });
+    }
+
+    public void addAction(final GuiActionDescrip descriptor) {
+        view.addAction(descriptor);
     }
 
     public void addWidget(final View widget) {
@@ -87,7 +92,7 @@ public class EntityHeaderPresenter implements EntityHeader {
     }
 
     void setLogoText(final String name) {
-        int length = name.length();
+        final int length = name.length();
         if (length <= LARGE_NAME_LIMIT) {
             view.setLargeFont();
         } else if (length <= MEDIUM_NAME_LIMIT) {

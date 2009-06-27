@@ -297,11 +297,9 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
             super.onBrowserEvent(event);
             break;
         case Event.ONKEYPRESS:
-            final AbstractAction rtaActionItem = inputMap.get(KeyStroke.getKeyStrokeForEvent(event));
-            // FIXME
-            // final Action actionItem = rtaActionItem == null ?
-            // globalShortcutReg.get(event) : rtaActionItem;
-            final AbstractAction actionItem = rtaActionItem == null ? null : rtaActionItem;
+            final KeyStroke keystroke = KeyStroke.getKeyStrokeForEvent(event);
+            final AbstractAction rtaActionItem = inputMap.get(keystroke);
+            final AbstractAction actionItem = rtaActionItem == null ? globalShortcutReg.get(keystroke) : rtaActionItem;
             if (actionItem == null) {
                 super.onBrowserEvent(event);
                 updateStatus();

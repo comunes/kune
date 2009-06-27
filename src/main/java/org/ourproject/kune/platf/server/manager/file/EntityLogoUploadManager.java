@@ -66,17 +66,17 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
 
     protected void createUploadedFile(final StateToken stateToken, final String mimeTypeS, final File origFile)
             throws Exception, IOException, MagickException, FileNotFoundException {
-        BasicMimeType mimeType = new BasicMimeType(mimeTypeS);
+        final BasicMimeType mimeType = new BasicMimeType(mimeTypeS);
         if (!mimeType.getType().equals("image")) {
             throw new Exception("Trying to set a non image (" + mimeTypeS + ") as group logo");
         }
-        Group group = groupManager.findByShortName(stateToken.getGroup());
+        final Group group = groupManager.findByShortName(stateToken.getGroup());
 
         if (group == Group.NO_GROUP) {
             throw new Exception("Group not found trying to set the logo");
         }
 
-        File tmpDestFile = File.createTempFile("logoDest", "");
+        final File tmpDestFile = File.createTempFile("logoDest", "");
 
         final boolean result = ImageUtilsDefault.scaleImageToMax(origFile.getAbsolutePath(),
                 tmpDestFile.getAbsolutePath(), FileConstants.LOGO_DEF_HEIGHT);
@@ -97,8 +97,8 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     @Transactional(type = TransactionType.READ_WRITE)
     protected void createUploadedFile(final String userHash, final StateToken stateToken, final String fileName,
             final FileItem file, final String typeId) throws Exception {
-        String mimeTypeS = file.getContentType();
-        File tmpOrigFile = File.createTempFile("logoOrig", "");
+        final String mimeTypeS = file.getContentType();
+        final File tmpOrigFile = File.createTempFile("logoOrig", "");
         file.write(tmpOrigFile);
         createUploadedFile(stateToken, mimeTypeS, tmpOrigFile);
         logFileDel(tmpOrigFile.delete());
@@ -129,8 +129,9 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
      **/
     protected String createXmlResponse(final boolean success, final String message) {
         String error = "";
+        // FIXME: Use Group/User field when necessary
         if (!success) {
-            error = "<errors><field><id>" + FileConstants.LOGO_FORM_FIELD + "</id><msg><![CDATA[" + message
+            error = "<errors><field><id>" + FileConstants.GROUP_LOGO_FIELD + "</id><msg><![CDATA[" + message
                     + "]]></msg></field></errors>";
         }
         return "<response success=\"" + success + "\">" + error + "</response>";

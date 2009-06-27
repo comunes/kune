@@ -25,9 +25,4 @@ public interface EntityOptionsView extends AbstractTabbedDialogView {
 
     int HEIGHT = 270;
 
-    void setButtonVisible(boolean visible);
-
-    void setGroupTitle();
-
-    void setPersonalTitle();
 }

@@ -28,6 +28,9 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
     /** The item location. */
     private String location;
 
+    /** The item DOM id. */
+    private String id;
+
     /**
      * Instantiates a new abstract ui action descriptor. This is used for
      * describe UI button, menus, menu items and so on
@@ -47,6 +50,10 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
 
     public GuiAddCondition getAddCondition() {
         return addCondition;
+    }
+
+    public String getId() {
+        return id;
     }
 
     /**
@@ -122,6 +129,10 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
 
     public void setEnabled(final boolean enabled) {
         action.setEnabled(enabled);
+    }
+
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**

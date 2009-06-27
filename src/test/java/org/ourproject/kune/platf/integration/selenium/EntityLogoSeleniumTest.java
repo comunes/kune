@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import org.junit.Ignore;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
-import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
-import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
+import org.ourproject.kune.workspace.client.options.GroupOptionsPresenter;
+import org.ourproject.kune.workspace.client.options.logo.GroupOptionsLogoPanel;
 
 public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
 
@@ -18,13 +18,14 @@ public class EntityLogoSeleniumTest extends KuneSeleniumTestHelper {
         setLogo("kune-logo-without-text.png");
     }
 
-    private void setLogo(String filename) throws Exception, IOException {
-        click(gid(EntityOptionsPanel.GROUP_OPTIONS_ICON));
+    private void setLogo(final String filename) throws Exception, IOException {
+        click(gid(GroupOptionsPresenter.GROUP_OPTIONS_ICON));
         // waitForTextInside(EntityOptionsLogoPanel.PANEL_ID,
         // PlatfMessages.ENT_OPTIONS_GROUP_TITLE);
-        click(EntityOptionsLogoPanel.SET_LOGO_ID);
-        File dir = new File(".");
-        type(FileConstants.LOGO_FORM_FIELD, dir.getCanonicalPath() + File.separator + "img" + File.separator + filename);
-        click(EntityOptionsLogoPanel.SET_LOGO_ID);
+        click(GroupOptionsLogoPanel.BUTTON_ID);
+        final File dir = new File(".");
+        type(FileConstants.GROUP_LOGO_FIELD, dir.getCanonicalPath() + File.separator + "img" + File.separator
+                + filename);
+        click(GroupOptionsLogoPanel.BUTTON_ID);
     }
 }

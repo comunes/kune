@@ -197,6 +197,10 @@ public class SessionDefault implements Session {
         return currentState instanceof StateContentDTO;
     }
 
+    public boolean isCurrentStateAGroup() {
+        return currentState == null ? false : !currentState.getGroup().isPersonal();
+    }
+
     public boolean isLogged() {
         return userHash != null;
     }
@@ -247,7 +251,7 @@ public class SessionDefault implements Session {
         assert (initData != null);
         final Object[][] objs = new Object[initData.getCountries().size()][1];
         int i = 0;
-        for (I18nCountryDTO country : initData.getCountries()) {
+        for (final I18nCountryDTO country : initData.getCountries()) {
             final Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
             objs[i++] = obj;
         }
@@ -258,7 +262,7 @@ public class SessionDefault implements Session {
         assert (initData != null);
         final Object[][] objs = new Object[initData.getLanguages().size()][1];
         int i = 0;
-        for (I18nLanguageSimpleDTO language : initData.getLanguages()) {
+        for (final I18nLanguageSimpleDTO language : initData.getLanguages()) {
             final Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
             objs[i++] = obj;
         }
@@ -273,5 +277,4 @@ public class SessionDefault implements Session {
             timezonesArray[i] = obj;
         }
     }
-
 }

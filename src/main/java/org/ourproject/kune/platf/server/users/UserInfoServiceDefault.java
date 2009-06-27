@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
+import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 
@@ -33,10 +34,12 @@ import com.google.inject.Singleton;
 public class UserInfoServiceDefault implements UserInfoService {
 
     private final SocialNetworkManager socialNetworkManager;
+    private final GroupManager groupManager;
 
     @Inject
-    public UserInfoServiceDefault(final SocialNetworkManager socialNetwork) {
+    public UserInfoServiceDefault(final SocialNetworkManager socialNetwork, final GroupManager groupManager) {
         this.socialNetworkManager = socialNetwork;
+        this.groupManager = groupManager;
     }
 
     public UserInfo buildInfo(final User user, final String userHash) throws DefaultException {
@@ -56,7 +59,7 @@ public class UserInfoServiceDefault implements UserInfoService {
             final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
             info.setGroupsIsAdmin(participation.getGroupsIsAdmin());
             info.setGroupsIsCollab(participation.getGroupsIsCollab());
-
+            info.setEnabledTools(groupManager.findEnabledTools(userGroup.getId()));
             final Content defaultContent = userGroup.getDefaultContent();
             if (defaultContent != null) {
                 info.setHomePage(defaultContent.getStateToken().toString());

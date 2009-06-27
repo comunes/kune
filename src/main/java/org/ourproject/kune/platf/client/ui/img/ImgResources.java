@@ -21,6 +21,12 @@ public interface ImgResources extends ImmutableResourceBundle {
     @Resource("language.png")
     ImageResource language();
 
+    @Resource("arrow_out.png")
+    ImageResource maximize();
+
+    @Resource("arrow_in.png")
+    ImageResource minimize();
+
     @Resource("prefs.png")
     ImageResource prefs();
 }

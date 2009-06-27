@@ -80,7 +80,7 @@
     <dependency>
       <groupId>com.gwtext</groupId>
       <artifactId>gwtext</artifactId>
-      <version>2.0.6-r1872</version>
+      <version>2.0.5</version>
     </dependency>
     <dependency>
       <groupId>com.gwtextux</groupId>
@@ -90,7 +90,7 @@
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
       <artifactId>gwt-log</artifactId>
-      <version>2.5.3</version>
+      <version>2.6.0</version>
     </dependency>
     <dependency>
       <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>

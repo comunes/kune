@@ -39,38 +39,36 @@ import com.gwtext.client.widgets.layout.AnchorLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class WorkspaceSkeleton {
-    public static final int DEF_TOOLBAR_HEIGHT = 26;
+    public static final int DEF_BAR_HEIGHT = 26;
     private final Entity entity;
     private final SimpleToolbar sitebar;
-    private final Panel mainPanel;
-    private final Panel container;
     private final ExtElement extRootBody;
 
     public WorkspaceSkeleton() {
         extRootBody = new ExtElement(RootPanel.getBodyElement());
 
-        container = new Panel();
+        final Panel container = new Panel();
         container.setLayout(new FitLayout());
         container.setBorder(false);
         container.setPaddings(5);
 
-        mainPanel = new Panel();
+        final Panel mainPanel = new Panel();
         mainPanel.setLayout(new AnchorLayout());
         mainPanel.setBorder(false);
 
         sitebar = new SimpleToolbar();
         sitebar.setStyleName("k-sitebar");
-        sitebar.setHeight("" + DEF_TOOLBAR_HEIGHT);
+        sitebar.setHeight(String.valueOf(DEF_BAR_HEIGHT));
 
         entity = new Entity();
 
         mainPanel.add(sitebar, new AnchorLayoutData("100%"));
-        mainPanel.add(entity.getPanel(), new AnchorLayoutData("100% -" + DEF_TOOLBAR_HEIGHT));
+        mainPanel.add(entity.getPanel(), new AnchorLayoutData("100% -" + DEF_BAR_HEIGHT));
         container.add(mainPanel);
         new Viewport(container);
     }
 
-    public void addInSummary(Panel panel) {
+    public void addInSummary(final Panel panel) {
         entity.addInSummary(panel);
     }
 
@@ -78,7 +76,7 @@ public class WorkspaceSkeleton {
         entity.addInTools(widget);
     }
 
-    public void addListenerInEntitySummary(ContainerListenerAdapter listener) {
+    public void addListenerInEntitySummary(final ContainerListenerAdapter listener) {
         entity.addListenerInEntitySummary(listener);
     }
 
@@ -90,7 +88,7 @@ public class WorkspaceSkeleton {
             final Listener0 onCancel) {
         MessageBox.confirm(title, message, new MessageBox.ConfirmCallback() {
             public void execute(final String btnID) {
-                if (btnID.equals("yes")) {
+                if ("yes".equals(btnID)) {
                     DeferredCommand.addCommand(new Command() {
                         public void execute() {
                             onConfirmed.onEvent();
@@ -136,7 +134,7 @@ public class WorkspaceSkeleton {
         entity.refreshSummary();
     }
 
-    public void setMaximized(boolean maximized) {
+    public void setMaximized(final boolean maximized) {
         entity.setMaximized(maximized);
     }
 
@@ -147,6 +145,7 @@ public class WorkspaceSkeleton {
     public void showAlertMessage(final String title, final String message) {
         MessageBox.alert(title, message, new MessageBox.AlertCallback() {
             public void execute() {
+                // Do nothing
             }
         });
     }

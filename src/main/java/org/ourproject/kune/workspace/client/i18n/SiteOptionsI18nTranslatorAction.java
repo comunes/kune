@@ -20,7 +20,7 @@ public class SiteOptionsI18nTranslatorAction extends AbstractAction {
         putValue(Action.NAME, i18n.t("Help with the translation"));
         putValue(Action.SMALL_ICON, img.language());
         final MenuItemDescriptor item = new MenuItemDescriptor(this);
-        item.setPosition(0);
+        item.setPosition(1);
         siteOptions.addAction(item);
     }
 

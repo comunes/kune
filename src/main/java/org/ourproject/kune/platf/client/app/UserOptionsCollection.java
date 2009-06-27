@@ -24,9 +24,9 @@ import com.calclab.suco.client.ioc.Provider;
 import com.calclab.suco.client.ioc.decorator.ProviderCollection;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 
-public class EntityOptionsGroup extends ProviderCollection {
+public class UserOptionsCollection extends ProviderCollection {
 
-    public EntityOptionsGroup(final Container container) {
+    public UserOptionsCollection(final Container container) {
         super(container, Singleton.instance);
     }
 

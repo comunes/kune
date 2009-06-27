@@ -27,7 +27,8 @@ public final class FileConstants {
     public final static String IMGSIZE = "imgsize";
     public final static String FILENAME = "filename";
     public final static String TYPE_ID = "typeid";
-    public final static String LOGO_FORM_FIELD = "k-elogov-ff";
+    public final static String USER_LOGO_FIELD = "k-ulogov-ff";
+    public final static String GROUP_LOGO_FIELD = "k-glogov-ff";
     public final static int LOGO_DEF_HEIGHT = 60;
     public final static int LOGO_DEF_WIDTH = 468;
     public final static int LOGO_MIN_HEIGHT = 28;

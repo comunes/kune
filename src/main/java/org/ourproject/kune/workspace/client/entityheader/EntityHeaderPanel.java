@@ -22,6 +22,9 @@ package org.ourproject.kune.workspace.client.entityheader;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.Images;
@@ -41,25 +44,34 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
     private final Provider<FileDownloadUtils> downloadProvider;
     private final EntityTextLogo entityTextLogo;
     private final Images images;
-    private final VerticalPanel vp;
+    private final VerticalPanel vpanel;
+    private final ComplexToolbar toolbar;
 
-    public EntityHeaderPanel(final WorkspaceSkeleton ws, final Provider<FileDownloadUtils> downloadProvider,
-            final Images images) {
+    public EntityHeaderPanel(final WorkspaceSkeleton wskel, final Provider<FileDownloadUtils> downloadProvider,
+            final Images images, final GuiBindingsRegister bindings) {
+        super();
         super.setWidth("100%");
         this.downloadProvider = downloadProvider;
         this.images = images;
-        vp = new VerticalPanel();
-        vp.setWidth("100%");
-        vp.setHorizontalAlignment(ALIGN_RIGHT);
+        vpanel = new VerticalPanel();
+        vpanel.setWidth("100%");
+        vpanel.setHorizontalAlignment(ALIGN_RIGHT);
         entityTextLogo = new EntityTextLogo();
         add(entityTextLogo);
-        add(vp);
-        ws.addToEntityMainHeader(this);
+        toolbar = new ComplexToolbar(bindings);
+        toolbar.setCleanStyle();
+        vpanel.add(toolbar);
+        add(vpanel);
+        wskel.addToEntityMainHeader(this);
+    }
+
+    public void addAction(final GuiActionDescrip descriptor) {
+        toolbar.add(descriptor);
     }
 
     public void addWidget(final View view) {
-        Widget widget = (Widget) view;
-        vp.add(widget);
+        final Widget widget = (Widget) view;
+        vpanel.add(widget);
     }
 
     public void reloadImage(final GroupDTO group) {
@@ -72,12 +84,11 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
         final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
         Image logo;
         if (clipped) {
-            logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_DEF_WIDTH,
-                    FileConstants.LOGO_DEF_HEIGHT);
+            logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_DEF_WIDTH, FileConstants.LOGO_DEF_HEIGHT);
         } else {
             logo = new Image(imageUrl);
-            logo.setWidth("" + FileConstants.LOGO_DEF_WIDTH);
-            logo.setHeight("" + FileConstants.LOGO_DEF_HEIGHT);
+            logo.setWidth(String.valueOf(FileConstants.LOGO_DEF_WIDTH));
+            logo.setHeight(String.valueOf(FileConstants.LOGO_DEF_HEIGHT));
         }
         add(logo);
     }

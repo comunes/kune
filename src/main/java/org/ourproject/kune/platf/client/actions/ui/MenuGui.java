@@ -22,6 +22,10 @@ public class MenuGui extends AbstractMenuGui {
         if (notStandAlone) {
             button = new ToolbarButton();
             button.setMenu(menu);
+            final String id = descriptor.getId();
+            if (id != null) {
+                button.setId(id);
+            }
             initWidget(button);
         } else {
             initWidget(menu);

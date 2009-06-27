@@ -122,18 +122,6 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
         final MenuItemDescriptor item = new MenuItemDescriptor(userHomeAction);
         item.setPosition(0);
         addAction(item);
-
-        final AbstractExtendedAction userPrefsAction = new AbstractExtendedAction() {
-            public void actionPerformed(final ActionEvent event) {
-                goUserHome();
-                userOptions.get().show();
-            }
-        };
-        userPrefsAction.putValue(Action.NAME, i18n.t("Your preferences"));
-        userPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
-        final MenuItemDescriptor prefsItem = new MenuItemDescriptor(userPrefsAction);
-        prefsItem.setPosition(1);
-        addAction(prefsItem);
     }
 
     private void goUserHome() {

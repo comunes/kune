@@ -20,11 +20,14 @@
 package org.ourproject.kune.workspace.client.entityheader;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 public interface EntityHeaderView {
+
+    void addAction(GuiActionDescrip descriptor);
 
     void addWidget(View view);
 

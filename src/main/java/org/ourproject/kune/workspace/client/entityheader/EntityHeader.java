@@ -20,8 +20,11 @@
 package org.ourproject.kune.workspace.client.entityheader;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 
 public interface EntityHeader {
+
+    void addAction(GuiActionDescrip descriptor);
 
     void addWidget(View widget);
 

@@ -21,74 +21,51 @@ package org.ourproject.kune.workspace.client.options.logo;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
-import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 
-public class EntityOptionsLogoPresenter implements EntityOptionsLogo {
+public abstract class EntityOptionsLogoPresenter implements GroupOptionsLogo, UserOptionsLogo {
 
-    private EntityOptionsLogoView view;
-    private final Session session;
+    protected EntityOptionsLogoView view;
+    protected final Session session;
     private final EntityHeader entityLogo;
     private final EntityOptions entityOptions;
-    private final Provider<UserServiceAsync> userService;
-    private final Provider<ChatEngine> chatEngine;
+    protected final Provider<UserServiceAsync> userService;
+    protected final Provider<ChatEngine> chatEngine;
 
-    public EntityOptionsLogoPresenter(Session session, EntityHeader entityLogo, EntityOptions entityOptions,
-            StateManager stateManager, Provider<UserServiceAsync> userService, Provider<ChatEngine> chatEngine) {
+    public EntityOptionsLogoPresenter(final Session session, final EntityHeader entityLogo,
+            final EntityOptions entityOptions, final Provider<UserServiceAsync> userService,
+            final Provider<ChatEngine> chatEngine) {
         this.session = session;
         this.entityLogo = entityLogo;
         this.entityOptions = entityOptions;
         this.userService = userService;
         this.chatEngine = chatEngine;
-        stateManager.onGroupChanged(new Listener2<String, String>() {
-            public void onEvent(String group1, String group2) {
-                setState();
-            }
-        });
     }
 
     public View getView() {
         return view;
     }
 
-    public void init(EntityOptionsLogoView view) {
+    public void init(final EntityOptionsLogoView view) {
         this.view = view;
         entityOptions.addTab(view);
         setState();
     }
 
-    public void onSubmitComplete(int httpStatus, String photoBinary) {
+    public void onSubmitComplete(final int httpStatus, final String photoBinary) {
         entityLogo.reloadGroupLogoImage();
-        GroupDTO group = session.getCurrentState().getGroup();
-        if (session.getCurrentUser().getShortName().equals(group.getShortName())) {
-            userService.get().getUserAvatarBaser64(session.getUserHash(), group.getStateToken(),
-                    new AsyncCallbackSimple<String>() {
-                        public void onSuccess(String photoBinary) {
-                            chatEngine.get().setAvatar(photoBinary);
-                        }
-                    });
-        }
     }
 
-    public void onSubmitFailed(int httpStatus, String responseText) {
-        NotifyUser.error("Error setting the group logo: " + responseText);
+    public void onSubmitFailed(final int httpStatus, final String responseText) {
+        NotifyUser.error("Error setting the logo: " + responseText);
     }
 
-    private void setState() {
-        view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
-        if (session.getCurrentState().getGroup().isPersonal()) {
-            view.setPersonalGroupsLabels();
-        } else {
-            view.setNormalGroupsLabels();
-        }
-    }
+    protected abstract void setState();
+
 }

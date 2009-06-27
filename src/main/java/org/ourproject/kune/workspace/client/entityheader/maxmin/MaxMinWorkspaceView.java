@@ -6,5 +6,4 @@ public interface MaxMinWorkspaceView extends View {
 
     void setMaximized(boolean maximized);
 
-    void showMaxButton(boolean showMax);
 }

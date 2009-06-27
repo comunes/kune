@@ -21,7 +21,10 @@ package org.ourproject.kune.platf.client.ui.dialogs;
 
 import com.gwtext.client.core.Ext;
 import com.gwtext.client.core.Position;
+import com.gwtext.client.widgets.BoxComponent;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public class BasicDialog extends Window {
 
@@ -59,6 +62,23 @@ public class BasicDialog extends Window {
         setResizable(true);
         setCloseAction(Window.HIDE);
         setButtonAlign(Position.RIGHT);
+        addListener(new WindowListenerAdapter() {
+            @Override
+            public void onMove(final BoxComponent component, final int x, final int y) {
+                checkPosition(component, x, y);
+            }
+
+            @Override
+            public void onShow(final Component component) {
+                checkPosition(BasicDialog.this, component.getAbsoluteLeft(), component.getAbsoluteTop());
+            }
+
+            private void checkPosition(final BoxComponent component, final int x, final int y) {
+                if (y < 0) {
+                    component.setPagePosition(x, 0);
+                }
+            }
+        });
     }
 
     public BasicDialog(final String id, final String caption, final boolean modal, final boolean autoScroll,

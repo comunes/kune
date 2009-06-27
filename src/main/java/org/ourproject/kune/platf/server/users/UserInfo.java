@@ -35,6 +35,7 @@ public class UserInfo {
     private List<Group> groupsIsCollab;
     private String userHash;
     private boolean showDeletedContent;
+    private List<String> enabledTools;
 
     public String getChatName() {
         return chatName;
@@ -46,6 +47,10 @@ public class UserInfo {
 
     public I18nCountry getCountry() {
         return user.getCountry();
+    }
+
+    public List<String> getEnabledTools() {
+        return enabledTools;
     }
 
     public List<Group> getGroupsIsAdmin() {
@@ -92,6 +97,10 @@ public class UserInfo {
         this.chatPassword = chatPassword;
     }
 
+    public void setEnabledTools(final List<String> enabledTools) {
+        this.enabledTools = enabledTools;
+    }
+
     public void setGroupsIsAdmin(final List<Group> groupsIsAdmin) {
         this.groupsIsAdmin = groupsIsAdmin;
     }
@@ -104,11 +113,11 @@ public class UserInfo {
         this.homePage = homePage;
     }
 
-    public void setShowDeletedContent(boolean showDeletedContent) {
+    public void setShowDeletedContent(final boolean showDeletedContent) {
         this.showDeletedContent = showDeletedContent;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 

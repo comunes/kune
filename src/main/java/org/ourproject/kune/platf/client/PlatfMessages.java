@@ -31,8 +31,8 @@ public final class PlatfMessages {
     public final static String USER_DOESN_T_HAVE_A_HOMEPAGE = "This user does not have a homepage";
     public final static String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Logo";
     public final static String ENT_LOGO_SELECTOR_PERSON_TITLE = "Avatar";
-    public final static String ENT_OPTIONS_GROUP_TITLE = "Group options";
-    public final static String ENT_OPTIONS_USER_TITLE = "User options";
+    public final static String GROUP_OPTIONS_DIALOG_TITLE = "Group options";
+    public final static String USER_OPTIONS_DIALOG_TITLE = "User options";
 
     private PlatfMessages() {
     }

@@ -32,6 +32,7 @@ public class UserInfoDTO implements IsSerializable {
     private List<GroupDTO> groupsIsAdmin;
     private List<GroupDTO> groupsIsCollab;
     private boolean showDeletedContent;
+    private List<String> enabledTools;
 
     public String getChatName() {
         return chatName;
@@ -43,6 +44,10 @@ public class UserInfoDTO implements IsSerializable {
 
     public I18nCountryDTO getCountry() {
         return user.getCountry();
+    }
+
+    public List<String> getEnabledTools() {
+        return enabledTools;
     }
 
     public List<GroupDTO> getGroupsIsAdmin() {
@@ -90,6 +95,10 @@ public class UserInfoDTO implements IsSerializable {
 
     }
 
+    public void setEnabledTools(final List<String> enabledTools) {
+        this.enabledTools = enabledTools;
+    }
+
     public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {
         this.groupsIsAdmin = groupsIsAdmin;
     }
@@ -102,11 +111,11 @@ public class UserInfoDTO implements IsSerializable {
         this.homePage = homePage;
     }
 
-    public void setShowDeletedContent(boolean showDeletedContent) {
+    public void setShowDeletedContent(final boolean showDeletedContent) {
         this.showDeletedContent = showDeletedContent;
     }
 
-    public void setUser(UserSimpleDTO user) {
+    public void setUser(final UserSimpleDTO user) {
         this.user = user;
     }
 

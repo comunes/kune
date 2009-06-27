@@ -1,29 +1,10 @@
-/*
- *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
- * This file is part of kune.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
 package org.ourproject.kune.workspace.client.options.tools;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
@@ -32,32 +13,26 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
-import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
+public abstract class EntityOptionsToolsConfPresenter {
 
     private EntityOptionsToolsConfView view;
-    private final Session session;
     private final EntityOptions entityOptions;
+    protected final Session session;
     private final Provider<GroupServiceAsync> groupServiceProvider;
-    private final I18nTranslationService i18n;
-    private final StateManager stateManager;
+    protected final I18nTranslationService i18n;
+    protected final StateManager stateManager;
 
-    public EntityOptionsToolsConfPresenter(final StateManager stateManager, final Session session,
+    public EntityOptionsToolsConfPresenter(final Session session, final StateManager stateManager,
             final I18nTranslationService i18n, final EntityOptions entityOptions,
             final Provider<GroupServiceAsync> groupServiceProvider) {
-        this.stateManager = stateManager;
         this.session = session;
+        this.stateManager = stateManager;
         this.i18n = i18n;
         this.entityOptions = entityOptions;
         this.groupServiceProvider = groupServiceProvider;
-        stateManager.onGroupChanged(new Listener2<String, String>() {
-            public void onEvent(final String group1, final String group2) {
-                setState();
-            }
-        });
     }
 
     public View getView() {
@@ -71,62 +46,65 @@ public class EntityOptionsToolsConfPresenter implements EntityOptionsToolsConf {
     }
 
     public void onCheck(final ToolSimpleDTO tool, final boolean checked) {
-        StateAbstractDTO state = session.getCurrentState();
-        String toolName = tool.getName();
+        final List<String> enabledTools = getEnabledTools();
+        final String toolName = tool.getName();
         if (checked) {
-            if (!(state.getEnabledTools().contains(toolName))) {
-                // Log.info("Tool " + tool.getName() + " checked: " + checked +
-                // " enabled tools: "
-                // + state.getEnabledTools().toString());
+            if (!(enabledTools.contains(toolName))) {
                 setToolCheckedInServer(checked, toolName);
             } else {
                 // do nothing
             }
         } else {
-            if (state.getEnabledTools().contains(tool.getName())) {
-                // Log.info("Tool " + tool.getName() + " checked: " + checked);
+            if (enabledTools.contains(toolName)) {
                 setToolCheckedInServer(checked, toolName);
-                if (session.getCurrentStateToken().getTool().equals(toolName)) {
-                    stateManager.gotoToken(session.getCurrentState().getGroup().getDefaultContent().getStateToken());
-                }
+                gotoDifLocationIfNecessary(toolName);
             }
         }
     }
 
-    private void reset() {
+    protected abstract boolean applicable();
+
+    protected abstract Collection<ToolSimpleDTO> getAllTools();
+
+    protected abstract StateToken getDefContentToken();
+
+    protected abstract String getDefContentTooltip();
+
+    protected abstract List<String> getEnabledTools();
+
+    protected abstract StateToken getOperationToken();
+
+    protected abstract void gotoDifLocationIfNecessary(String toolName);
+
+    protected void reset() {
         view.clear();
         entityOptions.hideMessages();
     }
 
-    private void setState() {
-        StateAbstractDTO state = session.getCurrentState();
+    protected void setState() {
         reset();
-        Collection<ToolSimpleDTO> toolCollection;
-        if (state.getGroup().isPersonal()) {
-            toolCollection = session.getUserTools();
-        } else {
-            toolCollection = session.getGroupTools();
-        }
-        for (ToolSimpleDTO tool : toolCollection) {
+        final Collection<ToolSimpleDTO> toolCollection = getAllTools();
+        for (final ToolSimpleDTO tool : toolCollection) {
             view.add(tool);
             view.setEnabled(tool.getName(), true);
         }
-        for (String tool : state.getEnabledTools()) {
+        for (final String tool : getEnabledTools()) {
             view.setChecked(tool, true);
         }
-        ContentSimpleDTO defaultContent = session.getCurrentState().getGroup().getDefaultContent();
-        if (defaultContent != null) {
-            String defContentTool = defaultContent.getStateToken().getTool();
-            view.setEnabled(defContentTool, false);
-            view.setTooltip(
-                    defContentTool,
-                    i18n.t("You cannot disable this tool because it's where the current group home page is located. To do that you have to select other content as the default group home page but in another tool."));
+
+        final StateToken token = getDefContentToken();
+        if (token != null) {
+            final String defContentTool = token.getTool();
+            if (defContentTool != null) {
+                view.setEnabled(defContentTool, false);
+                view.setTooltip(defContentTool, getDefContentTooltip());
+            }
         }
     }
 
-    private void setToolCheckedInServer(final boolean checked, final String toolName) {
-        groupServiceProvider.get().setToolEnabled(session.getUserHash(), session.getCurrentStateToken(), toolName,
-                checked, new AsyncCallback<Object>() {
+    protected void setToolCheckedInServer(final boolean checked, final String toolName) {
+        groupServiceProvider.get().setToolEnabled(session.getUserHash(), getOperationToken(), toolName, checked,
+                new AsyncCallback<Object>() {
                     public void onFailure(final Throwable caught) {
                         view.setChecked(toolName, !checked);
                         entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), Level.error);

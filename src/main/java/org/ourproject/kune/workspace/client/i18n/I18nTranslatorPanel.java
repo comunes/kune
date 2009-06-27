@@ -39,11 +39,14 @@ import com.gwtext.client.data.Record;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StringFieldDef;
 import com.gwtext.client.util.Format;
+import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.event.WindowListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
@@ -182,7 +185,23 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
         dialog.add(center, new BorderLayoutData(RegionPosition.CENTER));
 
         center.setActiveItemID(unTransCenterPanel.getId());
+        dialog.addListener(new WindowListenerAdapter() {
+            @Override
+            public void onMove(final BoxComponent component, final int x, final int y) {
+                checkPosition(component, x, y);
+            }
 
+            @Override
+            public void onShow(final Component component) {
+                checkPosition(dialog, component.getAbsoluteLeft(), component.getAbsoluteTop());
+            }
+
+            private void checkPosition(final BoxComponent component, final int x, final int y) {
+                if (y < 0) {
+                    component.setPagePosition(x, 0);
+                }
+            }
+        });
         return dialog;
     }
 
@@ -192,10 +211,10 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
             public String render(final Object value, final CellMetadata cellMetadata, final Record record,
                     final int rowIndex, final int colNum, final Store store) {
                 String renderer;
-                String[] splitted = splitNT((String) value);
+                final String[] splitted = splitNT((String) value);
                 if (splitted.length > 1) {
                     renderer = "{0} " + img.nt().getHTML();
-                    String tip = "<div style='min-width: 75px'>" + splitted[1] + "</div>";
+                    final String tip = "<div style='min-width: 75px'>" + splitted[1] + "</div>";
                     cellMetadata.setHtmlAttribute("ext:qtip=\"" + tip + "\" ext:qtitle=\"Note for translators\"");
                 } else {
                     renderer = "{0}";

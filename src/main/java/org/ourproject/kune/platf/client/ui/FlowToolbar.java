@@ -32,6 +32,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
     private final FlowPanel childPanel;
 
     public FlowToolbar() {
+        super();
         mainPanel = new HorizontalPanel();
         childPanel = new FlowPanel();
         mainPanel.add(childPanel);
@@ -42,7 +43,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
         childPanel.add(widget);
     }
 
-    public void add(final Widget widget, VerticalAlignmentConstant valign) {
+    public void add(final Widget widget, final VerticalAlignmentConstant valign) {
         childPanel.add(widget);
     }
 
@@ -70,7 +71,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
         return emptyLabel;
     }
 
-    public void insert(final Widget widget, int position) {
+    public void insert(final Widget widget, final int position) {
         childPanel.insert(widget, position);
     }
 
@@ -82,17 +83,23 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
         childPanel.clear();
     }
 
+    /**
+     * Set the blank/clean style
+     */
     public void setCleanStyle() {
         setBasicStyle();
         addStyleName("k-blank-toolbar");
     }
 
     @Override
-    public void setHeight(String height) {
+    public void setHeight(final String height) {
         mainPanel.setHeight(height);
         childPanel.setHeight(height);
     }
 
+    /**
+     * Set the normal grey style
+     */
     public void setNormalStyle() {
         setBasicStyle();
         addStyleName("k-toolbar-bottom-line");

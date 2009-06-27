@@ -42,19 +42,18 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.event.FieldListenerAdapter;
 import com.gwtext.client.widgets.form.event.FormListener;
 
-public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLogoView {
+public abstract class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLogoView {
 
-    public static final String ICON_UPLOAD_SERVLET = "/ws/servlets/EntityLogoUploadManager";
-    public static final String SET_LOGO_ID = "k-eolp-sendb";
-    public static final String PANEL_ID = "k-eolp-pan";
+    public static final String ICON_UPLD_SERVLET = "/ws/servlets/EntityLogoUploadManager";
     private final Hidden userhashField;
     private final Hidden tokenField;
     private final TextField file;
     private final Label dialogInfoLabel;
     private final I18nTranslationService i18n;
 
-    public EntityOptionsLogoPanel(final EntityOptionsLogoPresenter presenter, final WorkspaceSkeleton ws,
-            final I18nTranslationService i18n) {
+    public EntityOptionsLogoPanel(final EntityOptionsLogoPresenter presenter, final WorkspaceSkeleton wskel,
+            final I18nTranslationService i18n, final String panelId, final String buttonId, final String inputId) {
+        super();
         this.i18n = i18n;
         super.setHeight(EntityOptionsView.HEIGHT);
         super.setButtonAlign(Position.LEFT);
@@ -65,7 +64,7 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         super.setWidth(400);
         super.setIconCls("k-picture-icon");
         super.setMethod(Connection.POST);
-        super.setUrl(ICON_UPLOAD_SERVLET);
+        super.setUrl(ICON_UPLD_SERVLET);
         super.setWaitMsgTarget(true);
         super.setHideLabels(true);
         super.setPaddings(10);
@@ -84,21 +83,21 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         });
         dialogInfoLabel = new Label();
         super.add(dialogInfoLabel);
-        file = new TextField("File", FileConstants.LOGO_FORM_FIELD);
-        EventCallback keyListener = new EventCallback() {
+        file = new TextField("File", inputId);
+        final EventCallback keyListener = new EventCallback() {
             public void execute(final EventObject e) {
                 // setEnableFileField();
             }
         };
         file.addKeyPressListener(keyListener);
-        file.setId(FileConstants.LOGO_FORM_FIELD);
+        file.setId(inputId);
         file.setInputType("file");
         userhashField = new Hidden(FileConstants.HASH, FileConstants.HASH);
         tokenField = new Hidden(FileConstants.TOKEN, FileConstants.TOKEN);
         super.add(userhashField);
         super.add(tokenField);
         super.add(file);
-        FieldListenerAdapter changeListener = new FieldListenerAdapter() {
+        final FieldListenerAdapter changeListener = new FieldListenerAdapter() {
             @Override
             public void onChange(final Field field, final Object newVal, final Object oldVal) {
                 NotifyUser.info("change");
@@ -107,18 +106,18 @@ public class EntityOptionsLogoPanel extends FormPanel implements EntityOptionsLo
         };
         // Don't works:
         file.addListener(changeListener);
-        setId(PANEL_ID);
+        setId(panelId);
 
-        Button sendButton = new Button(i18n.t("Send"), new ButtonListenerAdapter() {
+        final Button sendButton = new Button(i18n.t("Send"), new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
-                String filename = file.getValueAsString();
+                final String filename = file.getValueAsString();
                 if (filename != null && filename.length() > 0) {
                     getForm().submit();
                 }
             }
         });
-        sendButton.setId(SET_LOGO_ID);
+        sendButton.setId(buttonId);
         super.addButton(sendButton);
     }
 

@@ -35,6 +35,7 @@ import com.gwtext.client.data.FieldDef;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.data.Store;
 import com.gwtext.client.data.StringFieldDef;
+import com.gwtext.client.widgets.BoxComponent;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
@@ -42,6 +43,7 @@ import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.event.PanelListenerAdapter;
+import com.gwtext.client.widgets.event.WindowListenerAdapter;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
@@ -169,7 +171,23 @@ public class SiteSearcherPanel extends AbstractSearcherPanel implements SiteSear
         centerPanel.setActiveItemID(panelId);
 
         dialog.setCloseAction(Window.HIDE);
+        dialog.addListener(new WindowListenerAdapter() {
+            @Override
+            public void onMove(final BoxComponent component, final int x, final int y) {
+                checkPosition(component, x, y);
+            }
 
+            @Override
+            public void onShow(final Component component) {
+                checkPosition(dialog, component.getAbsoluteLeft(), component.getAbsoluteTop());
+            }
+
+            private void checkPosition(final BoxComponent component, final int x, final int y) {
+                if (y < 0) {
+                    component.setPagePosition(x, 0);
+                }
+            }
+        });
         return dialog;
     }
 

@@ -35,7 +35,7 @@ public class Toolbar {
         container = new Panel();
         container.setBorder(false);
         container.setBodyBorder(false);
-        container.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
+        container.setHeight(WorkspaceSkeleton.DEF_BAR_HEIGHT);
         container.setWidth(_100PC);
         container.setHeader(false);
         container.setBaseCls("x-toolbar");

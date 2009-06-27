@@ -44,13 +44,13 @@ public class Entity {
         entityFitPanel.setLayout(new FitLayout());
         entityFitPanel.setBorder(false);
 
-        Panel entityAnchorLayout = new Panel();
-        entityAnchorLayout.setBorder(false);
-        entityAnchorLayout.setLayout(new AnchorLayout());
+        final Panel entityAnchor = new Panel();
+        entityAnchor.setBorder(false);
+        entityAnchor.setLayout(new AnchorLayout());
 
-        Panel entityBorderLayout = new Panel();
-        entityBorderLayout.setLayout(new BorderLayout());
-        entityBorderLayout.setBorder(false);
+        final Panel entityBorder = new Panel();
+        entityBorder.setLayout(new BorderLayout());
+        entityBorder.setBorder(false);
 
         entityMainHeader = new Panel();
         entityMainHeader.setBorder(false);
@@ -58,22 +58,22 @@ public class Entity {
 
         entityWorkspace = new EntityWorkspace();
 
-        BorderLayoutData eastData = new BorderLayoutData(RegionPosition.EAST);
+        final BorderLayoutData eastData = new BorderLayoutData(RegionPosition.EAST);
         eastData.setMinSize(50);
         eastData.setSplit(true);
         eastData.setCollapseModeMini(true);
         eastData.setUseSplitTips(true);
 
         entitySummary = new EntitySummary();
-        entityBorderLayout.add(entityWorkspace.getPanel(), new BorderLayoutData(RegionPosition.CENTER));
-        entityBorderLayout.add(entitySummary.getPanel(), eastData);
+        entityBorder.add(entityWorkspace.getPanel(), new BorderLayoutData(RegionPosition.CENTER));
+        entityBorder.add(entitySummary.getPanel(), eastData);
 
-        entityAnchorLayout.add(entityMainHeader, new AnchorLayoutData("100%"));
-        entityAnchorLayout.add(entityBorderLayout, new AnchorLayoutData("100% -65"));
-        entityFitPanel.add(entityAnchorLayout);
+        entityAnchor.add(entityMainHeader, new AnchorLayoutData("100%"));
+        entityAnchor.add(entityBorder, new AnchorLayoutData("100% -65"));
+        entityFitPanel.add(entityAnchor);
     }
 
-    public void addInSummary(Panel panel) {
+    public void addInSummary(final Panel panel) {
         entitySummary.addInSummary(panel);
     }
 
@@ -82,7 +82,7 @@ public class Entity {
         doLayoutIfNeeded();
     }
 
-    public void addListenerInEntitySummary(ContainerListenerAdapter listener) {
+    public void addListenerInEntitySummary(final ContainerListenerAdapter listener) {
         entitySummary.addListener(listener);
     }
 
@@ -111,9 +111,9 @@ public class Entity {
         entitySummary.doLayoutIfNeeded();
     }
 
-    public void setMaximized(boolean maximized) {
-        entityWorkspace.setMaximized(maximized);
+    public void setMaximized(final boolean maximized) {
         entitySummary.setMaximized(maximized);
+        entityWorkspace.setMaximized(maximized);
     }
 
     public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {

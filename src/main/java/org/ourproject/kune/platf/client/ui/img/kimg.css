@@ -17,3 +17,11 @@
 @sprite div .k-icon-groupHome {
   gwt-image: 'groupHome';
 }
+
+@sprite div .k-icon-maximize {
+  gwt-image: 'maximize';
+}
+
+@sprite div .k-icon-minimize {
+  gwt-image: 'minimize';
+}

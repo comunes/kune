@@ -41,7 +41,7 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
     private final I18nTranslationService i18n;
 
     public EntityOptionsToolsConfPanel(final EntityOptionsToolsConfPresenter presenter, final WorkspaceSkeleton ws,
-            I18nTranslationService i18n) {
+            final I18nTranslationService i18n) {
         super(i18n.t("Tools"));
         this.i18n = i18n;
         super.setHeight(EntityOptionsView.HEIGHT);
@@ -53,13 +53,14 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
     }
 
     public void add(final ToolSimpleDTO tool) {
-        Checkbox checkbox = new Checkbox(tool.getRootName(), new CheckboxListenerAdapter() {
+        final Checkbox checkbox = new Checkbox(tool.getRootName());
+        checkbox.setChecked(false);
+        checkbox.addListener(new CheckboxListenerAdapter() {
             @Override
-            public void onCheck(Checkbox field, boolean checked) {
+            public void onCheck(final Checkbox field, final boolean checked) {
                 presenter.onCheck(tool, checked);
             }
         });
-        checkbox.setChecked(false);
         super.add(checkbox);
         fields.put(tool.getName(), checkbox);
         doLayoutIfNeeded();
@@ -68,18 +69,18 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
     public void clear() {
         super.getFormPanel().removeAll(true);
         fields.clear();
-        Label label = new Label();
+        final Label label = new Label();
         label.setHtml(i18n.t("Here you can select the tools used:") + "<br/><br/>");
         super.add(label);
     }
 
-    public void setChecked(String tool, boolean checked) {
-        Checkbox field = getTool(tool);
+    public void setChecked(final String tool, final boolean checked) {
+        final Checkbox field = getTool(tool);
         field.setValue(checked);
     }
 
-    public void setEnabled(String tool, boolean enabled) {
-        Checkbox field = getTool(tool);
+    public void setEnabled(final String tool, final boolean enabled) {
+        final Checkbox field = getTool(tool);
         if (enabled) {
             field.enable();
         } else {
@@ -87,9 +88,9 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
         }
     }
 
-    public void setTooltip(String tool, String tip) {
-        Checkbox field = getTool(tool);
-        ToolTip tooltip = new ToolTip();
+    public void setTooltip(final String tool, final String tip) {
+        final Checkbox field = getTool(tool);
+        final ToolTip tooltip = new ToolTip();
         tooltip.setHtml(tip);
         tooltip.setWidth(250);
         tooltip.applyTo(field);
@@ -103,8 +104,8 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
         }
     }
 
-    private Checkbox getTool(String tool) {
-        Checkbox field = fields.get(tool);
+    private Checkbox getTool(final String tool) {
+        final Checkbox field = fields.get(tool);
         if (field == null) {
             Log.error("Field " + tool + " not found in EOTCP");
         }

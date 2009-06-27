@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensiblePrese
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
@@ -64,6 +65,8 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
         menuDescriptor.setStandalone(true);
         view.addAction(menuDescriptor);
         view.setMenu(menuDescriptor);
+        final MenuSeparatorDescriptor sep = new MenuSeparatorDescriptor(menuDescriptor);
+        view.addAction(sep);
 
         final AbstractExtendedAction bugsAction = new AbstractExtendedAction() {
             public void actionPerformed(final ActionEvent event) {

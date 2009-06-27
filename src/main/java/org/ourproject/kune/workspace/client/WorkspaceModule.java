@@ -24,7 +24,8 @@ import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
-import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
+import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
+import org.ourproject.kune.platf.client.app.UserOptionsCollection;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.StateTokenUtils;
 import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
@@ -126,22 +127,33 @@ import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
-import org.ourproject.kune.workspace.client.options.EntityOptionsPanel;
-import org.ourproject.kune.workspace.client.options.EntityOptionsPresenter;
 import org.ourproject.kune.workspace.client.options.GroupOptions;
+import org.ourproject.kune.workspace.client.options.GroupOptionsPanel;
+import org.ourproject.kune.workspace.client.options.GroupOptionsPresenter;
 import org.ourproject.kune.workspace.client.options.UserOptions;
-import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicense;
+import org.ourproject.kune.workspace.client.options.UserOptionsPanel;
+import org.ourproject.kune.workspace.client.options.UserOptionsPresenter;
 import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicensePanel;
-import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicensePresenter;
-import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogo;
-import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPanel;
+import org.ourproject.kune.workspace.client.options.license.GroupOptionsDefLicense;
+import org.ourproject.kune.workspace.client.options.license.GroupOptionsDefLicensePresenter;
+import org.ourproject.kune.workspace.client.options.license.UserOptionsDefLicense;
+import org.ourproject.kune.workspace.client.options.license.UserOptionsDefLicensePresenter;
 import org.ourproject.kune.workspace.client.options.logo.EntityOptionsLogoPresenter;
-import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSpaceConf;
+import org.ourproject.kune.workspace.client.options.logo.GroupOptionsLogo;
+import org.ourproject.kune.workspace.client.options.logo.GroupOptionsLogoPanel;
+import org.ourproject.kune.workspace.client.options.logo.GroupOptionsLogoPresenter;
+import org.ourproject.kune.workspace.client.options.logo.UserOptionsLogo;
+import org.ourproject.kune.workspace.client.options.logo.UserOptionsLogoPanel;
+import org.ourproject.kune.workspace.client.options.logo.UserOptionsLogoPresenter;
 import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSpaceConfPanel;
 import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSpaceConfPresenter;
+import org.ourproject.kune.workspace.client.options.pscape.GroupOptionsPublicSpaceConf;
+import org.ourproject.kune.workspace.client.options.pscape.UserOptionsPublicSpaceConf;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConf;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPanel;
-import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPresenter;
+import org.ourproject.kune.workspace.client.options.tools.GroupOptionsToolsConfPresenter;
+import org.ourproject.kune.workspace.client.options.tools.UserOptionsToolsConf;
+import org.ourproject.kune.workspace.client.options.tools.UserOptionsToolsConfPresenter;
 import org.ourproject.kune.workspace.client.rate.RateIt;
 import org.ourproject.kune.workspace.client.rate.RateItPanel;
 import org.ourproject.kune.workspace.client.rate.RateItPresenter;
@@ -416,7 +428,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 final EntityHeaderPresenter presenter = new EntityHeaderPresenter(i(StateManager.class),
                         i(WsThemePresenter.class), i(Session.class));
                 final EntityHeaderPanel panel = new EntityHeaderPanel(i(WorkspaceSkeleton.class),
-                        p(FileDownloadUtils.class), i(Images.class));
+                        p(FileDownloadUtils.class), i(Images.class), i(GuiBindingsRegister.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -608,37 +620,36 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<EntityOptions>(EntityOptions.class) {
+        register(ApplicationComponentGroup.class, new Factory<GroupOptions>(GroupOptions.class) {
             @Override
-            public EntityOptions create() {
-                final EntityOptionsPresenter presenter = new EntityOptionsPresenter(i(StateManager.class));
-                final EntityOptionsPanel panel = new EntityOptionsPanel(presenter, i(EntityHeader.class),
-                        i(I18nTranslationService.class), i(Images.class), i(EntityOptionsGroup.class));
+            public GroupOptions create() {
+                final GroupOptionsPresenter presenter = new GroupOptionsPresenter(i(StateManager.class),
+                        i(I18nTranslationService.class), i(ImgResources.class));
+                final GroupOptionsPanel panel = new GroupOptionsPanel(presenter, i(EntityHeader.class),
+                        i(I18nTranslationService.class), i(Images.class), i(GroupOptionsCollection.class));
                 presenter.init(panel);
                 return presenter;
             }
         });
 
-        register(Singleton.class, new Factory<GroupOptions>(GroupOptions.class) {
-            @Override
-            public GroupOptions create() {
-                return (GroupOptions) i(EntityOptions.class);
-            }
-        });
-
-        register(Singleton.class, new Factory<UserOptions>(UserOptions.class) {
+        register(ApplicationComponentGroup.class, new Factory<UserOptions>(UserOptions.class) {
             @Override
             public UserOptions create() {
-                return (UserOptions) i(EntityOptions.class);
+                final UserOptionsPresenter presenter = new UserOptionsPresenter(i(Session.class),
+                        i(I18nTranslationService.class), i(ImgResources.class), i(SiteUserOptions.class));
+                final UserOptionsPanel panel = new UserOptionsPanel(presenter, i(EntityHeader.class),
+                        i(I18nTranslationService.class), i(Images.class), i(UserOptionsCollection.class));
+                presenter.init(panel);
+                return presenter;
             }
         });
 
-        register(EntityOptionsGroup.class, new Factory<EntityOptionsToolsConf>(EntityOptionsToolsConf.class) {
+        register(GroupOptionsCollection.class, new Factory<EntityOptionsToolsConf>(EntityOptionsToolsConf.class) {
             @Override
             public EntityOptionsToolsConf create() {
-                final EntityOptionsToolsConfPresenter presenter = new EntityOptionsToolsConfPresenter(
+                final GroupOptionsToolsConfPresenter presenter = new GroupOptionsToolsConfPresenter(
                         i(StateManager.class), i(Session.class), i(I18nTranslationService.class),
-                        i(EntityOptions.class), p(GroupServiceAsync.class));
+                        i(GroupOptions.class), p(GroupServiceAsync.class));
                 final EntityOptionsToolsConfPanel panel = new EntityOptionsToolsConfPanel(presenter,
                         i(WorkspaceSkeleton.class), i(I18nTranslationService.class));
                 presenter.init(panel);
@@ -646,24 +657,50 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(EntityOptionsGroup.class, new Factory<EntityOptionsLogo>(EntityOptionsLogo.class) {
+        register(UserOptionsCollection.class, new Factory<UserOptionsToolsConf>(UserOptionsToolsConf.class) {
             @Override
-            public EntityOptionsLogo create() {
-                final EntityOptionsLogoPresenter presenter = new EntityOptionsLogoPresenter(i(Session.class),
-                        i(EntityHeader.class), i(EntityOptions.class), i(StateManager.class),
-                        p(UserServiceAsync.class), p(ChatEngine.class));
-                final EntityOptionsLogoPanel panel = new EntityOptionsLogoPanel(presenter, i(WorkspaceSkeleton.class),
+            public UserOptionsToolsConf create() {
+                final UserOptionsToolsConfPresenter presenter = new UserOptionsToolsConfPresenter(i(Session.class),
+                        i(StateManager.class), i(I18nTranslationService.class), i(UserOptions.class),
+                        p(GroupServiceAsync.class));
+                final EntityOptionsToolsConfPanel panel = new EntityOptionsToolsConfPanel(presenter,
+                        i(WorkspaceSkeleton.class), i(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(GroupOptionsCollection.class, new Factory<GroupOptionsLogo>(GroupOptionsLogo.class) {
+            @Override
+            public GroupOptionsLogo create() {
+                final EntityOptionsLogoPresenter presenter = new GroupOptionsLogoPresenter(i(Session.class),
+                        i(EntityHeader.class), i(GroupOptions.class), i(StateManager.class), p(UserServiceAsync.class),
+                        p(ChatEngine.class));
+                final GroupOptionsLogoPanel panel = new GroupOptionsLogoPanel(presenter, i(WorkspaceSkeleton.class),
                         i(I18nTranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
         });
 
-        register(EntityOptionsGroup.class, new Factory<EntityOptionsDefLicense>(EntityOptionsDefLicense.class) {
+        register(UserOptionsCollection.class, new Factory<UserOptionsLogo>(UserOptionsLogo.class) {
             @Override
-            public EntityOptionsDefLicense create() {
-                final EntityOptionsDefLicensePresenter presenter = new EntityOptionsDefLicensePresenter(
-                        i(EntityOptions.class), i(StateManager.class), i(Session.class), p(LicenseWizard.class),
+            public UserOptionsLogo create() {
+                final EntityOptionsLogoPresenter presenter = new UserOptionsLogoPresenter(i(Session.class),
+                        i(EntityHeader.class), i(UserOptions.class), i(StateManager.class), p(UserServiceAsync.class),
+                        p(ChatEngine.class));
+                final UserOptionsLogoPanel panel = new UserOptionsLogoPanel(presenter, i(WorkspaceSkeleton.class),
+                        i(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(GroupOptionsCollection.class, new Factory<GroupOptionsDefLicense>(GroupOptionsDefLicense.class) {
+            @Override
+            public GroupOptionsDefLicense create() {
+                final GroupOptionsDefLicensePresenter presenter = new GroupOptionsDefLicensePresenter(
+                        i(GroupOptions.class), i(StateManager.class), i(Session.class), p(LicenseWizard.class),
                         p(LicenseChangeAction.class));
                 final EntityOptionsDefLicensePanel panel = new EntityOptionsDefLicensePanel(presenter,
                         i(WorkspaceSkeleton.class), i(I18nTranslationService.class));
@@ -672,17 +709,31 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(EntityOptionsGroup.class,
-                new Factory<EntityOptionsPublicSpaceConf>(EntityOptionsPublicSpaceConf.class) {
+        register(UserOptionsCollection.class, new Factory<UserOptionsDefLicense>(UserOptionsDefLicense.class) {
+            @Override
+            public UserOptionsDefLicense create() {
+                final UserOptionsDefLicensePresenter presenter = new UserOptionsDefLicensePresenter(
+                        i(UserOptions.class), i(Session.class), p(LicenseWizard.class), p(LicenseChangeAction.class));
+                final EntityOptionsDefLicensePanel panel = new EntityOptionsDefLicensePanel(presenter,
+                        i(WorkspaceSkeleton.class), i(I18nTranslationService.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(GroupOptionsCollection.class, new Factory<GroupOptionsPublicSpaceConf>(
+                GroupOptionsPublicSpaceConf.class) {
+            @Override
+            public GroupOptionsPublicSpaceConf create() {
+                return createEntityOptionsPublicSpace(i(GroupOptions.class));
+            }
+        });
+
+        register(UserOptionsCollection.class,
+                new Factory<UserOptionsPublicSpaceConf>(UserOptionsPublicSpaceConf.class) {
                     @Override
-                    public EntityOptionsPublicSpaceConf create() {
-                        final EntityOptionsPublicSpaceConfPresenter presenter = new EntityOptionsPublicSpaceConfPresenter(
-                                i(EntityOptions.class));
-                        final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(
-                                presenter, i(WorkspaceSkeleton.class), i(I18nTranslationService.class),
-                                i(WsThemePresenter.class));
-                        presenter.init(panel);
-                        return presenter;
+                    public UserOptionsPublicSpaceConf create() {
+                        return createEntityOptionsPublicSpace(i(UserOptions.class));
                     }
                 });
 
@@ -984,9 +1035,10 @@ public class WorkspaceModule extends AbstractExtendedModule {
         register(ApplicationComponentGroup.class, new Factory<MaxMinWorkspace>(MaxMinWorkspace.class) {
             @Override
             public MaxMinWorkspace create() {
-                final MaxMinWorkspacePresenter presenter = new MaxMinWorkspacePresenter();
-                final MaxMinWorkspacePanel panel = new MaxMinWorkspacePanel(presenter, i(WorkspaceSkeleton.class),
-                        i(Images.class), i(EntityHeader.class), i(I18nTranslationService.class));
+                final MaxMinWorkspacePresenter presenter = new MaxMinWorkspacePresenter(
+                        i(GlobalShortcutRegister.class), i(ImgResources.class), i(I18nTranslationService.class),
+                        i(SiteOptions.class));
+                final MaxMinWorkspacePanel panel = new MaxMinWorkspacePanel(i(WorkspaceSkeleton.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -1023,5 +1075,13 @@ public class WorkspaceModule extends AbstractExtendedModule {
         });
 
         i(GlobalShortcutRegister.class).enable();
+    }
+
+    private EntityOptionsPublicSpaceConfPresenter createEntityOptionsPublicSpace(final EntityOptions entityOptions) {
+        final EntityOptionsPublicSpaceConfPresenter presenter = new EntityOptionsPublicSpaceConfPresenter(entityOptions);
+        final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(presenter,
+                i(WorkspaceSkeleton.class), i(I18nTranslationService.class), i(WsThemePresenter.class));
+        presenter.init(panel);
+        return presenter;
     }
 }

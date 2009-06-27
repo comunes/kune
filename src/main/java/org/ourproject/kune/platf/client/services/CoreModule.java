@@ -20,10 +20,11 @@
 package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
-import org.ourproject.kune.platf.client.app.EntityOptionsGroup;
+import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
 import org.ourproject.kune.platf.client.app.HistoryWrapper;
 import org.ourproject.kune.platf.client.app.HistoryWrapperDefault;
 import org.ourproject.kune.platf.client.app.ToolGroup;
+import org.ourproject.kune.platf.client.app.UserOptionsCollection;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.I18nService;
@@ -114,7 +115,8 @@ public class CoreModule extends AbstractExtendedModule {
 
         registerDecorator(ApplicationComponentGroup.class, new ApplicationComponentGroup(container));
         registerDecorator(ToolGroup.class, new ToolGroup(container));
-        registerDecorator(EntityOptionsGroup.class, new EntityOptionsGroup(container));
+        registerDecorator(GroupOptionsCollection.class, new GroupOptionsCollection(container));
+        registerDecorator(UserOptionsCollection.class, new UserOptionsCollection(container));
         registerDecorator(InsertImageGroup.class, new InsertImageGroup(container));
         registerDecorator(InsertMediaGroup.class, new InsertMediaGroup(container));
         registerDecorator(InsertLinkGroup.class, new InsertLinkGroup(container));

@@ -70,23 +70,23 @@ public abstract class StateAbstractDTO implements IsSerializable {
         return socialNetworkData.getUserBuddies();
     }
 
-    public void setEnabledTools(List<String> enabledTools) {
+    public void setEnabledTools(final List<String> enabledTools) {
         this.enabledTools = enabledTools;
     }
 
-    public void setGroup(GroupDTO group) {
+    public void setGroup(final GroupDTO group) {
         this.group = group;
     }
 
-    public void setSocialNetworkData(SocialNetworkDataDTO socialNetworkData) {
+    public void setSocialNetworkData(final SocialNetworkDataDTO socialNetworkData) {
         this.socialNetworkData = socialNetworkData;
     }
 
-    public void setStateToken(StateToken stateToken) {
+    public void setStateToken(final StateToken stateToken) {
         this.stateToken = stateToken;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 

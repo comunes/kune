@@ -77,25 +77,25 @@ public class EntityWorkspace {
         bottomPanel.setLayout(new AnchorLayout());
 
         title = new SimpleToolbar();
-        title.setHeight("" + (WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2));
+        title.setHeight("" + (WorkspaceSkeleton.DEF_BAR_HEIGHT - 2));
         title.setStylePrimaryName(ENTITY_TITLE);
         // title.ensureDebugId(ENTITY_TITLE);
         subTitle = new SimpleToolbar();
         subTitle.setStylePrimaryName(ENTITY_SUBTITLE);
         // subTitle.ensureDebugId(ENTITY_SUBTITLE);
         bottom = new SimpleToolbar();
-        bottom.setHeight("" + (WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT - 2));
+        bottom.setHeight("" + (WorkspaceSkeleton.DEF_BAR_HEIGHT - 2));
         bottom.setStylePrimaryName(ENTITY_BOTTOM);
         // bottom.ensureDebugId(ENTITY_BOTTOM);
 
         roundedTitle = new RoundedPanel(title, RoundedPanel.TOPLEFT, 2);
         roundedBottom = new RoundedPanel(bottom, RoundedPanel.BOTTOMLEFT, 2);
 
-        titles.add(roundedTitle, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
-        titles.add(subTitle, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
-        bottomPanel.add(roundedBottom, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT));
-        titles.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 2);
-        bottomPanel.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
+        titles.add(roundedTitle, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_BAR_HEIGHT));
+        titles.add(subTitle, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_BAR_HEIGHT));
+        bottomPanel.add(roundedBottom, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_BAR_HEIGHT));
+        titles.setHeight(WorkspaceSkeleton.DEF_BAR_HEIGHT * 2);
+        bottomPanel.setHeight(WorkspaceSkeleton.DEF_BAR_HEIGHT);
 
         final Panel contentWrap = new Panel();
         contextWrap = new Panel();
@@ -117,10 +117,10 @@ public class EntityWorkspace {
         contentBottomBar = new Toolbar();
         contextTopBar = new Toolbar();
         contextBottomBar = new Toolbar();
-        contentTopBar.getPanel().setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
-        contextTopBar.getPanel().setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
-        contentBottomBar.getPanel().setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
-        contentBottomBar.getPanel().setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
+        contentTopBar.getPanel().setHeight(WorkspaceSkeleton.DEF_BAR_HEIGHT);
+        contextTopBar.getPanel().setHeight(WorkspaceSkeleton.DEF_BAR_HEIGHT);
+        contentBottomBar.getPanel().setHeight(WorkspaceSkeleton.DEF_BAR_HEIGHT);
+        contentBottomBar.getPanel().setHeight(WorkspaceSkeleton.DEF_BAR_HEIGHT);
         contentTopBar.addStyleName("k-toolbar-bottom-line");
         contentBottomBar.addStyleName("k-toolbar-top-line");
         contextTopBar.addStyleName("k-toolbar-bottom-line");
@@ -142,8 +142,8 @@ public class EntityWorkspace {
 
         mainAnchorLayout.add(titles, new AnchorLayoutData("100%"));
         mainAnchorLayout.add(cntCtxBorderLayout, new AnchorLayoutData("100% -"
-                + ((WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 3))));
-        mainAnchorLayout.add(bottomPanel, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT * 3));
+                + ((WorkspaceSkeleton.DEF_BAR_HEIGHT * 3))));
+        mainAnchorLayout.add(bottomPanel, new AnchorLayoutData("100% -" + WorkspaceSkeleton.DEF_BAR_HEIGHT * 3));
         mainFitPanel.add(mainAnchorLayout);
     }
 

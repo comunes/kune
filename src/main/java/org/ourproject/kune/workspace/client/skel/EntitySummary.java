@@ -72,7 +72,7 @@ public class EntitySummary {
         entitySummary.setId(ENTITY_SUMMARY);
 
         trayBar = new Toolbar();
-        trayBar.setHeight(WorkspaceSkeleton.DEF_TOOLBAR_HEIGHT);
+        trayBar.setHeight(WorkspaceSkeleton.DEF_BAR_HEIGHT);
         trayBar.setId(SITE_TRAYBAR);
         trayBar.setCls(SITE_TRAYBAR);
         trayBar.addFill();

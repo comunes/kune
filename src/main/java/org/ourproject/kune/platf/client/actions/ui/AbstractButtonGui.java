@@ -22,6 +22,10 @@ public abstract class AbstractButtonGui extends AbstractGuiItem {
         super();
         button = new Button();
         button.setEnableToggle(enableTongle);
+        final String id = buttonDescriptor.getId();
+        if (id != null) {
+            button.setId(id);
+        }
         initWidget(button);
         button.addListener(new ButtonListenerAdapter() {
             @Override

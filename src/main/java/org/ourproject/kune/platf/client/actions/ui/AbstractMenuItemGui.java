@@ -35,6 +35,10 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
         } else {
             item = new Item();
         }
+        final String id = descriptor.getId();
+        if (id != null) {
+            item.setId(id);
+        }
         // initWidget(item);
         final BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override

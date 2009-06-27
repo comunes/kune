@@ -127,6 +127,8 @@ public interface Session {
 
     boolean isCurrentStateAContent();
 
+    boolean isCurrentStateAGroup();
+
     boolean isLogged();
 
     boolean isNotLogged();

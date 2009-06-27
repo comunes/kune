@@ -234,6 +234,10 @@ public abstract class AbstractAction implements Action {
         }
     }
 
+    public void setShortcut(final KeyStroke key) {
+        putValue(Action.ACCELERATOR_KEY, key);
+    }
+
     /**
      * Sends a {@link PropertyChangeEvent} for the named property to all
      * registered listeners.

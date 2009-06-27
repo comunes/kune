@@ -11,7 +11,6 @@ import java.util.Map;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
-import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.InputMap;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
@@ -812,13 +811,13 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
     public void setActionShortcut(final KeyStroke key, final AbstractAction action) {
         inputMap.put(key, action);
-        action.putValue(Action.ACCELERATOR_KEY, key);
+        action.setShortcut(key);
     }
 
     public void setActionShortcut(final KeyStroke key, final AbstractAction mainAction, final AbstractAction... actions) {
         setActionShortcut(key, mainAction);
         for (final AbstractAction action : actions) {
-            action.putValue(Action.ACCELERATOR_KEY, key);
+            action.setShortcut(key);
         }
     }
 
@@ -835,7 +834,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         view.focus();
     }
 
-    public void setLocation(final String location, final GuiActionDescrip[] descripts) {
+    public void setLocation(final String location, final GuiActionDescrip... descripts) {
         for (final GuiActionDescrip descript : descripts) {
             descript.setLocation(location);
         }
