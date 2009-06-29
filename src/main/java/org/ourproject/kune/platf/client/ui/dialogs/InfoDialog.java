@@ -19,16 +19,20 @@
  \*/
 package org.ourproject.kune.platf.client.ui.dialogs;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 public class InfoDialog extends BasicDialog {
-    public InfoDialog(final String dialogId, final String title, final String header, final String text,
-            final String okButtonText, final String okButtonId, final boolean modal, final boolean autoScroll,
-            final int width, final int height) {
+
+    private final Panel mainPanel;
+
+    public InfoDialog(final String dialogId, final String title, final String okButtonText, final String okButtonId,
+            final boolean modal, final boolean autoScroll, final int width, final int height) {
         super(dialogId, title, modal, autoScroll, width, height);
         final Button okButton = new Button(okButtonText);
         okButton.setId(okButtonId);
@@ -38,21 +42,44 @@ public class InfoDialog extends BasicDialog {
                 destroy();
             }
         });
-        final Panel panel = new Panel();
-        panel.setBorder(false);
-        panel.setHeader(false);
-        panel.setPaddings(20);
+        mainPanel = new Panel();
+        mainPanel.setBorder(false);
+        mainPanel.setHeader(false);
+        mainPanel.setPaddings(20);
+        super.add(mainPanel);
+        addButton(okButton);
+    }
+
+    public InfoDialog(final String dialogId, final String title, final String header, final String text,
+            final String okButtonText, final String okButtonId, final boolean modal, final boolean autoScroll,
+            final int width, final int height) {
+        this(dialogId, title, header, text, okButtonText, okButtonId, modal, autoScroll, width, height, false);
+    }
+
+    public InfoDialog(final String dialogId, final String title, final String header, final String text,
+            final String okButtonText, final String okButtonId, final boolean modal, final boolean autoScroll,
+            final int width, final int height, final boolean isHtml) {
+        this(dialogId, title, okButtonText, okButtonId, modal, autoScroll, width, height);
 
         final Label headerLabel = new Label(header);
-        final Label textLabel = new Label(text);
+        Widget textLabel;
+        if (isHtml) {
+            textLabel = new HTML(text);
+        } else {
+            textLabel = new Label(text);
+        }
 
-        panel.add(headerLabel);
-        panel.add(textLabel);
-        super.add(panel);
+        mainPanel.add(headerLabel);
+        mainPanel.add(textLabel);
 
         headerLabel.addStyleName("k-infod-head");
+    }
 
-        addButton(okButton);
-        show();
+    public void add(final Panel panel) {
+        mainPanel.add(panel);
+    }
+
+    public void setMainPanelPaddings(final int padding) {
+        mainPanel.setPaddings(padding);
     }
 }

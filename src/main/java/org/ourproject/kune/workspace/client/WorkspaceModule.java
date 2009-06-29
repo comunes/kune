@@ -225,9 +225,7 @@ import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPanel;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
 import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
 import org.ourproject.kune.workspace.client.socialnet.UserActionRegistry;
-import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddie;
-import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddiePanel;
-import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddiePresenter;
+import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddieHeaderButton;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbarPresenter;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbar;
@@ -553,15 +551,11 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<AddAsBuddie>(AddAsBuddie.class) {
+        register(ApplicationComponentGroup.class, new Factory<AddAsBuddieHeaderButton>(AddAsBuddieHeaderButton.class) {
             @Override
-            public AddAsBuddie create() {
-                final AddAsBuddiePresenter presenter = new AddAsBuddiePresenter(p(ChatEngine.class),
-                        i(StateManager.class), i(Session.class));
-                final AddAsBuddiePanel panel = new AddAsBuddiePanel(presenter, i(EntityHeader.class), i(Images.class),
-                        i(I18nTranslationService.class));
-                presenter.init(panel);
-                return presenter;
+            public AddAsBuddieHeaderButton create() {
+                return new AddAsBuddieHeaderButton(p(ChatEngine.class), i(Session.class), i(StateManager.class),
+                        i(I18nTranslationService.class), i(ImgResources.class), i(EntityHeader.class));
             }
         });
 

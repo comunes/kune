@@ -73,10 +73,22 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
                 KuneWindowUtils.open("http://ourproject.org/tracker/?group_id=407");
             }
         };
-        bugsAction.putValue(Action.NAME, i18n.t("Report kune bugs"));
-        bugsAction.putValue(Action.SMALL_ICON, img.kuneIcon16());
+        bugsAction.putValue(Action.NAME, i18n.t("Report Kune issues/problems"));
+        bugsAction.putValue(Action.SMALL_ICON, img.info());
         final MenuItemDescriptor item = new MenuItemDescriptor(bugsAction);
         addAction(item);
-    }
 
+        // final KeyStroke shortcut = Shortcut.getShortcut(true, true, false,
+        // false, Character.valueOf('K'));
+        final AbstractExtendedAction aboutAction = new AbstractExtendedAction() {
+            public void actionPerformed(final ActionEvent event) {
+                view.showAboutDialog();
+            }
+        };
+        aboutAction.putValue(Action.NAME, i18n.t("About kune"));
+        aboutAction.putValue(Action.SMALL_ICON, img.kuneIcon16());
+        // aboutAction.setShortcut(shortcut);
+        // shortcutReg.put(shortcut, aboutAction);
+        addAction(new MenuItemDescriptor(aboutAction));
+    }
 }

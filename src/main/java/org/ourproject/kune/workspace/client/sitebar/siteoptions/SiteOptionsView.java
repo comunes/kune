@@ -26,4 +26,6 @@ public interface SiteOptionsView extends AbstractActionExtensibleView {
 
     void setMenu(MenuDescriptor menuDescriptor);
 
+    void showAboutDialog();
+
 }

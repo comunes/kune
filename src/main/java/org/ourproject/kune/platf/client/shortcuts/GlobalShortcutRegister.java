@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.shortcuts;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.InputMap;
+import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -45,5 +46,14 @@ public class GlobalShortcutRegister extends InputMap {
 
     public void enable() {
         handlerReg = Event.addNativePreviewHandler(eventHandler);
+    }
+
+    @Override
+    public void put(final KeyStroke keystroke, final AbstractAction action) {
+        final AbstractAction previous = super.get(keystroke);
+        if (previous != null) {
+            Log.warn("Shortcut already registed by: " + previous + "(overriding)");
+        }
+        super.put(keystroke, action);
     }
 }

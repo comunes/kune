@@ -6,6 +6,9 @@ import com.google.gwt.libideas.resources.client.ImmutableResourceBundle;
 
 public interface ImgResources extends ImmutableResourceBundle {
 
+    @Resource("add-green.png")
+    ImageResource addGreen();
+
     @Resource("kimg.css")
     CssResource css();
 

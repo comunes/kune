@@ -18,6 +18,10 @@
   gwt-image: 'groupHome';
 }
 
+@sprite div .k-icon-addGreen {
+  gwt-image: 'addGreen';
+}
+
 @sprite div .k-icon-maximize {
   gwt-image: 'maximize';
 }
