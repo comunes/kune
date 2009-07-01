@@ -8,7 +8,7 @@ import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 public class EntityLogoPresenterTest {
 
@@ -21,7 +21,7 @@ public class EntityLogoPresenterTest {
     public void before() {
         stateManager = Mockito.mock(StateManager.class);
         session = Mockito.mock(Session.class);
-        WsThemePresenter theme = Mockito.mock(WsThemePresenter.class);
+        WsThemeManager theme = Mockito.mock(WsThemeManager.class);
         entityLogoPresenter = new EntityHeaderPresenter(stateManager, theme, session);
         view = Mockito.mock(EntityHeaderView.class);
         entityLogoPresenter.init(view);

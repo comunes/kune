@@ -25,7 +25,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.errors.UIException;
 import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener;
@@ -35,7 +35,7 @@ public class ToolSelectorPresenter implements ToolSelector {
 
     private final HashMap<String, ToolSelectorItem> tools;
 
-    public ToolSelectorPresenter(final StateManager stateManager, final WsThemePresenter wsThemePresenter) {
+    public ToolSelectorPresenter(final StateManager stateManager, final WsThemeManager wsThemePresenter) {
         tools = new HashMap<String, ToolSelectorItem>();
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {

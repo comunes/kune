@@ -25,20 +25,20 @@ import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeSelector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.ToolbarButton;
 
 public class EntityOptionsPublicSpaceConfPanel extends Panel implements EntityOptionsPublicSpaceConfView {
 
     public EntityOptionsPublicSpaceConfPanel(final EntityOptionsPublicSpaceConfPresenter presenter,
-            final WorkspaceSkeleton ws, final I18nTranslationService i18n, final WsThemePresenter wsPresenter) {
+            final WorkspaceSkeleton ws, final I18nTranslationService i18n, final WsThemeSelector wsSelector) {
         super.setTitle(i18n.t("Style"));
         super.setIconCls("k-colors-icon");
         super.setAutoScroll(true);
@@ -49,7 +49,7 @@ public class EntityOptionsPublicSpaceConfPanel extends Panel implements EntityOp
 
         final HorizontalPanel wsHP = new HorizontalPanel();
         final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));
-        final ToolbarButton toolbarWsChange = (ToolbarButton) wsPresenter.getView();
+        final Widget toolbarWsChange = (Widget) wsSelector.getView();
         toolbarWsChange.addStyleName("kune-Margin-Medium-l");
         wsHP.add(wsThemeInfo);
         wsHP.add(toolbarWsChange);

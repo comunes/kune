@@ -9,6 +9,9 @@ public interface ImgResources extends ImmutableResourceBundle {
     @Resource("add-green.png")
     ImageResource addGreen();
 
+    @Resource("bug.png")
+    ImageResource bug();
+
     @Resource("kimg.css")
     CssResource css();
 
@@ -32,4 +35,5 @@ public interface ImgResources extends ImmutableResourceBundle {
 
     @Resource("prefs.png")
     ImageResource prefs();
+
 }

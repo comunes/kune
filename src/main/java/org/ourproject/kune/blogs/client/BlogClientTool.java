@@ -22,7 +22,7 @@ package org.ourproject.kune.blogs.client;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
@@ -34,7 +34,7 @@ public class BlogClientTool extends FoldableAbstractClientTool {
     public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
 
     public BlogClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-            final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
+            final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
             final ContentCapabilitiesRegistry cntCapReg) {
         super(NAME, i18n.t("blogs"), toolSelector, wsThemePresenter, ws, cntCapReg);
 

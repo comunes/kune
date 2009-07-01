@@ -33,11 +33,8 @@ import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipationToolbar;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 
 public class ParticipationSummaryPresenter extends SocialNetworkPresenter implements ParticipationSummary {
@@ -49,9 +46,8 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
 
     public ParticipationSummaryPresenter(final I18nUITranslationService i18n, final StateManager stateManager,
             final ImageUtils imageUtils, final Session session,
-            final Provider<SocialNetworkServiceAsync> snServiceProvider, final WsThemePresenter wsThemePresenter,
-            GroupActionRegistry groupActionRegistry, ActionParticipationToolbar actionParticipationToolbar,
-            final Provider<FileDownloadUtils> downloadProvider) {
+            final Provider<SocialNetworkServiceAsync> snServiceProvider, final GroupActionRegistry groupActionRegistry,
+            final ActionParticipationToolbar actionParticipationToolbar, final Provider<FileDownloadUtils> downloadProvider) {
         super(i18n, stateManager, session, snServiceProvider, groupActionRegistry, downloadProvider);
         adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",
                 "talking about a person"), false);
@@ -61,17 +57,12 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
                 false);
         super.addGroupOperation(gotoGroupMenuItem, false);
         final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
-            public void onEvent(StateAbstractDTO state) {
+            public void onEvent(final StateAbstractDTO state) {
                 setState(state);
             }
         };
         stateManager.onStateChanged(setStateListener);
         stateManager.onSocialNetworkChanged(setStateListener);
-        wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
-            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-                view.setTheme(oldTheme, newTheme);
-            }
-        });
     }
 
     public void init(final ParticipationSummaryView view) {

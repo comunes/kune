@@ -3,9 +3,7 @@ package org.ourproject.kune.platf.client.actions.ui;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
-import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.UIObject;
 import com.gwtext.client.widgets.ToolbarButton;
 
@@ -59,9 +57,9 @@ public class MenuGui extends AbstractMenuGui {
     }
 
     @Override
-    public void setIcon(final ImageResource imageResource) {
+    public void setIconStyle(final String style) {
         if (notStandAlone) {
-            button.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
+            button.setIconCls(style);
         }
     }
 

@@ -9,12 +9,13 @@ public class GotoGroupAction extends AbstractExtendedAction {
     private final String name;
     private final StateManager stateManager;
 
-    public GotoGroupAction(final String logoImageUrl, final String name, final StateManager stateManager) {
+    public GotoGroupAction(final String logoImageUrl, final String name, final String longName,
+            final StateManager stateManager) {
         super();
         this.name = name;
         this.stateManager = stateManager;
         putValue(Action.SMALL_ICON, logoImageUrl);
-        putValue(Action.NAME, name);
+        putValue(Action.NAME, longName);
     }
 
     public void actionPerformed(final ActionEvent event) {

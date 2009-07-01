@@ -29,7 +29,6 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.Widget;
@@ -42,11 +41,11 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
     private final AbstractToolbar toolbar;
 
     public ParticipationSummaryPanel(final ParticipationSummaryPresenter presenter, final I18nTranslationService i18n,
-            final WorkspaceSkeleton ws, ActionToolbarView<StateToken> actionToolbarView) {
+            final WorkspaceSkeleton ws, final ActionToolbarView<StateToken> actionToolbarView) {
         super(i18n.t("Participates in"), i18n.t("Groups in which the user participates"), ws);
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This user does not belong to any group"), false, false,
                 false, false, false);
-        Listener<String> go = new Listener<String>() {
+        final Listener<String> go = new Listener<String>() {
             public void onEvent(final String groupShortName) {
                 presenter.onDoubleClick(groupShortName);
             }
@@ -75,10 +74,6 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
     public void clear() {
         gridMenuPanel.removeAll();
         toolbar.removeAll();
-    }
-
-    public void setTheme(WsTheme oldTheme, WsTheme newTheme) {
-        // TODO Auto-generated method stub
     }
 
 }

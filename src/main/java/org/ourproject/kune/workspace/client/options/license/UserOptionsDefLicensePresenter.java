@@ -1,6 +1,7 @@
 package org.ourproject.kune.workspace.client.options.license;
 
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseChangeAction;
@@ -24,11 +25,16 @@ public class UserOptionsDefLicensePresenter extends EntityOptionsDefLicensePrese
 
     @Override
     protected boolean applicable() {
-        return session.isCurrentStateAGroup();
+        return session.isLogged();
     }
 
     @Override
     protected LicenseDTO getCurrentDefLicense() {
         return session.getCurrentState().getGroup().getDefaultLicense();
+    }
+
+    @Override
+    protected StateToken getOperationToken() {
+        return session.getCurrentUser().getStateToken();
     }
 }

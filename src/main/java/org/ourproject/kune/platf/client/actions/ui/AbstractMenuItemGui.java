@@ -5,9 +5,7 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
-import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
@@ -77,8 +75,8 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
     }
 
     @Override
-    protected void setIcon(final ImageResource imageResource) {
-        item.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
+    protected void setIconStyle(final String style) {
+        item.setIconCls(style);
     }
 
     @Override

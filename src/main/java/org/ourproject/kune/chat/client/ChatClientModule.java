@@ -45,7 +45,7 @@ import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
@@ -70,7 +70,7 @@ public class ChatClientModule extends AbstractExtendedModule {
             @Override
             public ChatClientTool create() {
                 return new ChatClientTool(i(I18nUITranslationService.class), i(WorkspaceSkeleton.class),
-                        i(ToolSelector.class), i(WsThemePresenter.class), i(ContentCapabilitiesRegistry.class));
+                        i(ToolSelector.class), i(WsThemeManager.class), i(ContentCapabilitiesRegistry.class));
             }
         });
 

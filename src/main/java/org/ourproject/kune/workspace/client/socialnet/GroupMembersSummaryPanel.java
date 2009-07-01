@@ -31,7 +31,6 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.emiteuimodule.client.users.UserGridPanel;
 import com.calclab.suco.client.events.Listener;
@@ -52,7 +51,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     private final Label noMembersPublic;
 
     public GroupMembersSummaryPanel(final GroupMembersSummaryPresenter presenter, final I18nUITranslationService i18n,
-            final WorkspaceSkeleton ws, ActionToolbarView<StateToken> actionToolbarView) {
+            final WorkspaceSkeleton ws, final ActionToolbarView<StateToken> actionToolbarView) {
         super(i18n.t("Group members"), i18n.t("People and groups collaborating in this group"), ws);
         this.presenter = presenter;
         this.i18n = i18n;
@@ -62,7 +61,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
                         + i18n.t("Drop into a room to invite the user to join the chat room"));
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
                 + "please request to join to work on it"), dragConf, true, true, false, true, false);
-        Listener<String> go = new Listener<String>() {
+        final Listener<String> go = new Listener<String>() {
             public void onEvent(final String groupShortName) {
                 presenter.onDoubleClick(groupShortName);
             }
@@ -124,10 +123,6 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     @Override
     public void setDraggable(final boolean draggable) {
         // gridMenuPanel.setDraggable(draggable);
-    }
-
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-        // super.setTheme(oldTheme, newTheme);
     }
 
     public void showMembersNotVisible() {

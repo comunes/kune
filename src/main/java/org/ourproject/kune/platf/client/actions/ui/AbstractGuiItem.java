@@ -5,6 +5,7 @@ import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
+import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
 import com.google.gwt.libideas.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
@@ -73,7 +74,7 @@ public abstract class AbstractGuiItem extends Composite implements View {
 
     protected abstract void setEnabled(boolean enabled);
 
-    protected abstract void setIcon(ImageResource imageResource);
+    protected abstract void setIconStyle(String style);
 
     protected abstract void setIconUrl(String iconUrl);
 
@@ -112,8 +113,10 @@ public abstract class AbstractGuiItem extends Composite implements View {
     }
 
     private void setIcon(final Object icon) {
-        if (icon instanceof ImageResource) {
-            setIcon((ImageResource) icon);
+        if (icon instanceof CssStyleDescriptor) {
+            setIconStyle(((CssStyleDescriptor) icon).getName());
+        } else if (icon instanceof ImageResource) {
+            setIconStyle((ImgConstants.CSS_SUFFIX + ((ImageResource) icon).getName()));
         } else if (icon instanceof String) {
             setIconUrl((String) icon);
         }

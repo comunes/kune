@@ -19,10 +19,10 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.siteusermenu;
 
-import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensibleView;
+import org.ourproject.kune.platf.client.actions.ui.ActionExtensibleView;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 
-public interface SiteUserOptionsView extends AbstractActionExtensibleView {
+public interface SiteUserOptionsView extends ActionExtensibleView {
 
     void setLoggedUserName(String name);
 

@@ -1,8 +1,5 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.ui.img.ImgConstants;
-
-import com.google.gwt.libideas.resources.client.ImageResource;
 import com.gwtext.client.widgets.menu.MenuItem;
 
 public class SubMenuGui extends AbstractMenuGui {
@@ -31,8 +28,8 @@ public class SubMenuGui extends AbstractMenuGui {
     }
 
     @Override
-    public void setIcon(final ImageResource imageResource) {
-        item.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
+    public void setIconStyle(final String style) {
+        item.setIconCls(style);
     }
 
     @Override

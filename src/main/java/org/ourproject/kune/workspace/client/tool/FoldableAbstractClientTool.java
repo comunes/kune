@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.tool;
 import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     public static final String UPLOADEDFILE_SUFFIX = "uploaded";
@@ -30,7 +30,7 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     protected final ContentCapabilitiesRegistry contentCapabilitiesRegistry;
 
     public FoldableAbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector,
-            final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
+            final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
             final ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
         super(shortName, longName, toolSelector, wsThemePresenter, ws);
         this.contentCapabilitiesRegistry = contentCapabilitiesRegistry;

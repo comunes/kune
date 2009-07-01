@@ -43,28 +43,29 @@ public class UserInfoServiceDefault implements UserInfoService {
     }
 
     public UserInfo buildInfo(final User user, final String userHash) throws DefaultException {
-        UserInfo info = null;
+        UserInfo userInfo = null;
         if (User.isKnownUser(user)) {
-            info = new UserInfo();
+            userInfo = new UserInfo();
 
-            info.setUser(user);
-            info.setChatName(user.getShortName());
-            info.setChatPassword(user.getPassword());
-            info.setUserHash(userHash);
+            userInfo.setUser(user);
+            userInfo.setChatName(user.getShortName());
+            userInfo.setChatPassword(user.getPassword());
+            userInfo.setUserHash(userHash);
             // FIXME: save this in user properties
-            info.setShowDeletedContent(false);
+            userInfo.setShowDeletedContent(false);
 
             final Group userGroup = user.getUserGroup();
 
             final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
-            info.setGroupsIsAdmin(participation.getGroupsIsAdmin());
-            info.setGroupsIsCollab(participation.getGroupsIsCollab());
-            info.setEnabledTools(groupManager.findEnabledTools(userGroup.getId()));
+            userInfo.setGroupsIsAdmin(participation.getGroupsIsAdmin());
+            userInfo.setGroupsIsCollab(participation.getGroupsIsCollab());
+            userInfo.setEnabledTools(groupManager.findEnabledTools(userGroup.getId()));
             final Content defaultContent = userGroup.getDefaultContent();
+            userInfo.setUserGroup(userGroup);
             if (defaultContent != null) {
-                info.setHomePage(defaultContent.getStateToken().toString());
+                userInfo.setHomePage(defaultContent.getStateToken().toString());
             }
         }
-        return info;
+        return userInfo;
     }
 }

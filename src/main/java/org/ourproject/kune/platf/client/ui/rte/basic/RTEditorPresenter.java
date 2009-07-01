@@ -887,7 +887,6 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     }
 
     private void createBasicActions() {
-
         final MenuSeparatorDescriptor editMenuSep = new MenuSeparatorDescriptor(editMenu);
         final MenuSeparatorDescriptor insertMenuSep = new MenuSeparatorDescriptor(insertMenu);
         final MenuSeparatorDescriptor formatMenuSep = new MenuSeparatorDescriptor(formatMenu);
@@ -1147,7 +1146,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         menus.add(insertMenu = new MenuDescriptor(i18n.t("Insert")));
         menus.add(formatMenu = new MenuDescriptor(i18n.t("Format")));
         menus.add(linkCtxMenu = new MenuDescriptor(i18n.t("Change Link")));
-        menus.add(fontMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font"),
+        menus.add(fontMenu = new MenuDescriptor("&nbsp;", i18n.t("Font"),
                 ImgConstants.toPath(imgResources.charfontname())));
         menus.add(fontSizeMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font size"),
                 ImgConstants.toPath(imgResources.fontheight())));

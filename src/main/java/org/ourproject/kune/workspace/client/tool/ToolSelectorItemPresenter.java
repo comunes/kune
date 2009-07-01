@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.tool;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import com.calclab.suco.client.events.Listener2;
 
@@ -30,12 +30,12 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
     private ToolSelectorItemView view;
     private final ToolSelector toolSelector;
-    private final WsThemePresenter wsThemePresenter;
+    private final WsThemeManager wsThemePresenter;
     private final String shortName;
     private final String longName;
 
     public ToolSelectorItemPresenter(final String shortName, final String longName, final ToolSelector toolSelector,
-            final WsThemePresenter wsThemePresenter) {
+            final WsThemeManager wsThemePresenter) {
         this.shortName = shortName;
         this.longName = longName;
         this.toolSelector = toolSelector;
@@ -53,7 +53,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     public void init(final ToolSelectorItemView view) {
         this.view = view;
         toolSelector.addTool(this);
-        wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
+        wsThemePresenter.addOnThemeChanged(new Listener2<WsTheme, WsTheme>() {
             public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
                 setTheme(oldTheme, newTheme);
             }

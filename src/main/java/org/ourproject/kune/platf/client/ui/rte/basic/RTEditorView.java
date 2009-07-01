@@ -2,11 +2,11 @@ package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.InputMap;
-import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensibleView;
+import org.ourproject.kune.platf.client.actions.ui.ActionExtensibleView;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 
-public interface RTEditorView extends AbstractActionExtensibleView {
+public interface RTEditorView extends ActionExtensibleView {
 
     void adjustSize(int height);
 

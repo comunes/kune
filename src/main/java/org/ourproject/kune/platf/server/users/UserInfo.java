@@ -36,6 +36,7 @@ public class UserInfo {
     private String userHash;
     private boolean showDeletedContent;
     private List<String> enabledTools;
+    private Group userGroup;
 
     public String getChatName() {
         return chatName;
@@ -85,6 +86,10 @@ public class UserInfo {
         return user;
     }
 
+    public Group getUserGroup() {
+        return userGroup;
+    }
+
     public String getUserHash() {
         return userHash;
     }
@@ -119,6 +124,10 @@ public class UserInfo {
 
     public void setUser(final User user) {
         this.user = user;
+    }
+
+    public void setUserGroup(final Group userGroup) {
+        this.userGroup = userGroup;
     }
 
     public void setUserHash(final String userHash) {

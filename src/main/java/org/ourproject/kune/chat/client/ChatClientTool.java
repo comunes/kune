@@ -22,7 +22,7 @@ package org.ourproject.kune.chat.client;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
@@ -33,7 +33,7 @@ public class ChatClientTool extends FoldableAbstractClientTool {
     public static final String TYPE_CHAT = "chat.chat";
 
     public ChatClientTool(final I18nTranslationService i18n, final WorkspaceSkeleton ws,
-            final ToolSelector toolSelector, final WsThemePresenter wsThemePresenter,
+            final ToolSelector toolSelector, final WsThemeManager wsThemePresenter,
             ContentCapabilitiesRegistry contentCapabilitiesRegistry) {
         super(NAME, i18n.t("chat rooms"), toolSelector, wsThemePresenter, ws, contentCapabilitiesRegistry);
         registerContentTypeIcon(TYPE_ROOM, "images/emite-room.png");

@@ -23,7 +23,6 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -75,9 +74,5 @@ public class TagsSummaryPanel extends SummaryPanel implements TagsSummaryView {
     @Override
     public void clear() {
         flowPanel.clear();
-    }
-
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-        // TODO Auto-generated method stub
     }
 }

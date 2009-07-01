@@ -33,6 +33,7 @@ public class UserInfoDTO implements IsSerializable {
     private List<GroupDTO> groupsIsCollab;
     private boolean showDeletedContent;
     private List<String> enabledTools;
+    private GroupDTO userGroup;
 
     public String getChatName() {
         return chatName;
@@ -82,6 +83,10 @@ public class UserInfoDTO implements IsSerializable {
         return user;
     }
 
+    public GroupDTO getUserGroup() {
+        return userGroup;
+    }
+
     public String getUserHash() {
         return userHash;
     }
@@ -117,6 +122,10 @@ public class UserInfoDTO implements IsSerializable {
 
     public void setUser(final UserSimpleDTO user) {
         this.user = user;
+    }
+
+    public void setUserGroup(final GroupDTO userGroup) {
+        this.userGroup = userGroup;
     }
 
     public void setUserHash(final String userHash) {

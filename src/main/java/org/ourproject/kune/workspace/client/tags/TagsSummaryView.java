@@ -20,7 +20,6 @@
 package org.ourproject.kune.workspace.client.tags;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 public interface TagsSummaryView extends View {
 
@@ -29,8 +28,6 @@ public interface TagsSummaryView extends View {
     void clear();
 
     void expand();
-
-    void setTheme(WsTheme oldTheme, WsTheme newTheme);
 
     void setVisible(boolean visible);
 

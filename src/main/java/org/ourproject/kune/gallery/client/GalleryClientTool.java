@@ -22,7 +22,7 @@ package org.ourproject.kune.gallery.client;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
@@ -33,7 +33,7 @@ public class GalleryClientTool extends FoldableAbstractClientTool {
     public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
 
     public GalleryClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-            final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws,
+            final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
             final ContentCapabilitiesRegistry cntCapabReg) {
         super(NAME, i18n.t("gallery"), toolSelector, wsThemePresenter, ws, cntCapabReg);
 

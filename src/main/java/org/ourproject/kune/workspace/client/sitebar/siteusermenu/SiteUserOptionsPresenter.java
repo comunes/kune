@@ -38,7 +38,6 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
-import org.ourproject.kune.workspace.client.options.UserOptions;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -49,7 +48,6 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
     private SiteUserOptionsView view;
     private final StateManager stateManager;
     private final Session session;
-    private final Provider<UserOptions> userOptions;
     private final Provider<FileDownloadUtils> downloadProvider;
     private MenuDescriptor menuDescriptor;
     private final I18nTranslationService i18n;
@@ -58,12 +56,11 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
     private MenuDescriptor partiMenu;;
 
     public SiteUserOptionsPresenter(final Session session, final StateManager stateManager,
-            final Provider<UserOptions> userOptions, final Provider<FileDownloadUtils> downloadProvider,
-            final I18nTranslationService i18n, final ImgResources img) {
+            final Provider<FileDownloadUtils> downloadProvider, final I18nTranslationService i18n,
+            final ImgResources img) {
         super();
         this.session = session;
         this.stateManager = stateManager;
-        this.userOptions = userOptions;
         this.downloadProvider = downloadProvider;
         this.i18n = i18n;
         this.img = img;
@@ -99,7 +96,8 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
     private void addPartipation(final GroupDTO group) {
         final String logoImageUrl = group.hasLogo() ? downloadProvider.get().getLogoImageUrl(group.getStateToken())
                 : "images/group-def-icon.gif";
-        final GotoGroupAction gotoGroupAction = new GotoGroupAction(logoImageUrl, group.getLongName(), stateManager);
+        final GotoGroupAction gotoGroupAction = new GotoGroupAction(logoImageUrl, group.getShortName(),
+                group.getLongName(), stateManager);
         view.addAction(new MenuItemDescriptor(partiMenu, gotoGroupAction));
     }
 

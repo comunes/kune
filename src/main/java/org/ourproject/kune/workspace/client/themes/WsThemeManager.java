@@ -19,9 +19,9 @@
  \*/
 package org.ourproject.kune.workspace.client.themes;
 
-import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
@@ -33,23 +33,21 @@ import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 
-public class WsThemePresenter {
+public class WsThemeManager {
 
-    private WsThemeView view;
     private WsTheme previousTheme;
     private final Event2<WsTheme, WsTheme> onThemeChanged;
     private final Provider<GroupServiceAsync> groupServiceProvider;
     private final Session session;
     private WsTheme defTheme;
 
-    public WsThemePresenter(final Session session, final Provider<GroupServiceAsync> groupServiceProvider,
+    public WsThemeManager(final Session session, final Provider<GroupServiceAsync> groupServiceProvider,
             final StateManager stateManager) {
         this.session = session;
         this.groupServiceProvider = groupServiceProvider;
         this.onThemeChanged = new Event2<WsTheme, WsTheme>("onThemeChanged");
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO initData) {
-                view.setThemes(initData.getWsThemes());
                 setDefTheme(initData);
                 setTheme(defTheme);
             }
@@ -61,15 +59,20 @@ public class WsThemePresenter {
         });
     }
 
-    public View getView() {
-        return view;
+    public void changeTheme(final StateToken token, final WsTheme newTheme) {
+        NotifyUser.showProgressProcessing();
+        groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), token, newTheme.getName(),
+                new AsyncCallbackSimple<Object>() {
+                    public void onSuccess(final Object result) {
+                        if (session.getCurrentState().getStateToken().getGroup().equals(token.getGroup())) {
+                            setTheme(newTheme);
+                        }
+                        NotifyUser.hideProgress();
+                    }
+                });
     }
 
-    public void init(final WsThemeView view) {
-        this.view = view;
-    }
-
-    public void onThemeChanged(final Listener2<WsTheme, WsTheme> listener) {
+    public void addOnThemeChanged(final Listener2<WsTheme, WsTheme> listener) {
         onThemeChanged.add(listener);
     }
 

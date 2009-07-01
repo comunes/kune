@@ -21,18 +21,18 @@ public abstract class EntityOptionsToolsConfPresenter {
     private EntityOptionsToolsConfView view;
     private final EntityOptions entityOptions;
     protected final Session session;
-    private final Provider<GroupServiceAsync> groupServiceProvider;
+    private final Provider<GroupServiceAsync> groupService;
     protected final I18nTranslationService i18n;
     protected final StateManager stateManager;
 
     public EntityOptionsToolsConfPresenter(final Session session, final StateManager stateManager,
             final I18nTranslationService i18n, final EntityOptions entityOptions,
-            final Provider<GroupServiceAsync> groupServiceProvider) {
+            final Provider<GroupServiceAsync> groupService) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
         this.entityOptions = entityOptions;
-        this.groupServiceProvider = groupServiceProvider;
+        this.groupService = groupService;
     }
 
     public View getView() {
@@ -51,8 +51,6 @@ public abstract class EntityOptionsToolsConfPresenter {
         if (checked) {
             if (!(enabledTools.contains(toolName))) {
                 setToolCheckedInServer(checked, toolName);
-            } else {
-                // do nothing
             }
         } else {
             if (enabledTools.contains(toolName)) {
@@ -103,7 +101,7 @@ public abstract class EntityOptionsToolsConfPresenter {
     }
 
     protected void setToolCheckedInServer(final boolean checked, final String toolName) {
-        groupServiceProvider.get().setToolEnabled(session.getUserHash(), getOperationToken(), toolName, checked,
+        groupService.get().setToolEnabled(session.getUserHash(), getOperationToken(), toolName, checked,
                 new AsyncCallback<Object>() {
                     public void onFailure(final Throwable caught) {
                         view.setChecked(toolName, !checked);

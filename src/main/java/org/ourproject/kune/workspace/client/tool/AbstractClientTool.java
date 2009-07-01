@@ -20,12 +20,12 @@
 package org.ourproject.kune.workspace.client.tool;
 
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 public abstract class AbstractClientTool implements ClientTool {
 
     public AbstractClientTool(final String shortName, final String longName, final ToolSelector toolSelector,
-            final WsThemePresenter wsThemePresenter, final WorkspaceSkeleton ws) {
+            final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws) {
         final ToolSelectorItemPresenter presenter = new ToolSelectorItemPresenter(shortName, longName, toolSelector,
                 wsThemePresenter);
         final ToolSelectorItemPanel panel = new ToolSelectorItemPanel(presenter, ws);

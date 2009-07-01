@@ -10,6 +10,10 @@
   gwt-image: 'kuneIcon16';
 }
 
+@sprite div .k-icon-bug {
+  gwt-image: 'bug';
+}
+
 @sprite div .k-icon-prefs {
   gwt-image: 'prefs';
 }

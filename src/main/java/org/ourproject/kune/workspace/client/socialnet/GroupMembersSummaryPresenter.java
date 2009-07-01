@@ -52,12 +52,9 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbar;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 
 public class GroupMembersSummaryPresenter extends SocialNetworkPresenter implements GroupMembersSummary {
@@ -81,9 +78,9 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             final ImageUtils imageUtils, final Session session,
             final Provider<SocialNetworkServiceAsync> snServiceProvider,
             final Provider<GroupServiceAsync> groupServiceProvider,
-            final Provider<GroupLiveSearcher> liveSearcherProvider, final WsThemePresenter wsThemePresenter,
-            final Provider<ChatEngine> chatEngineProvider, final GroupActionRegistry groupActionRegistry,
-            final ActionGroupSummaryToolbar toolbar, final Provider<FileDownloadUtils> downloadProvider) {
+            final Provider<GroupLiveSearcher> liveSearcherProvider, final Provider<ChatEngine> chatEngineProvider,
+            final GroupActionRegistry groupActionRegistry, final ActionGroupSummaryToolbar toolbar,
+            final Provider<FileDownloadUtils> downloadProvider) {
         super(i18n, stateManager, session, snServiceProvider, groupActionRegistry, downloadProvider);
         this.i18n = i18n;
         this.stateManager = stateManager;
@@ -93,7 +90,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         this.liveSearcherProvider = liveSearcherProvider;
         this.groupActionRegistry = groupActionRegistry;
         final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
-            public void onEvent(StateAbstractDTO state) {
+            public void onEvent(final StateAbstractDTO state) {
                 setState(state);
                 toolbar.disableMenusAndClearButtons();
                 toolbar.addActions(groupActionRegistry.getCurrentActions(state.getGroup().getStateToken(),
@@ -103,11 +100,6 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         };
         stateManager.onStateChanged(setStateListener);
         stateManager.onSocialNetworkChanged(setStateListener);
-        wsThemePresenter.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
-            public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
-                view.setTheme(oldTheme, newTheme);
-            }
-        });
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO initData) {
                 addUserOperation(new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),
@@ -156,9 +148,9 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     }
 
     private void createActions() {
-        ActionToolbarMenuDescriptor<StateToken> addMember = new ActionToolbarMenuDescriptor<StateToken>(
+        final ActionToolbarMenuDescriptor<StateToken> addMember = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
-                    public void onEvent(StateToken parameter) {
+                    public void onEvent(final StateToken parameter) {
                         liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
                             public void onEvent(final LinkDTO link) {
                                 view.confirmAddCollab(link.getShortName(), link.getLongName());
@@ -183,21 +175,21 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         createNewMembersPolicyAction(i18n.t("auto accept request to join"), AdmissionTypeDTO.Open);
     }
 
-    private void createNewMembersPolicyAction(String textDescription, final AdmissionTypeDTO admissionPolicy) {
-        ActionToolbarMenuRadioDescriptor<StateToken> newMembersPolicy = new ActionToolbarMenuRadioDescriptor<StateToken>(
+    private void createNewMembersPolicyAction(final String textDescription, final AdmissionTypeDTO admissionPolicy) {
+        final ActionToolbarMenuRadioDescriptor<StateToken> newMembersPolicy = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
-                    public void onEvent(StateToken parameter) {
+                    public void onEvent(final StateToken parameter) {
                         groupServiceProvider.get().setGroupNewMembersJoiningPolicy(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), admissionPolicy,
                                 new AsyncCallbackSimple<Object>() {
-                                    public void onSuccess(Object result) {
+                                    public void onSuccess(final Object result) {
                                         NotifyUser.info(i18n.t("Members joining policy changed"));
                                     }
                                 });
                     }
                 }, NEW_MEMBERS_POLICY_GROUP, new RadioMustBeChecked() {
                     public boolean mustBeChecked() {
-                        StateAbstractDTO currentState = session.getCurrentState();
+                        final StateAbstractDTO currentState = session.getCurrentState();
                         return currentState.getGroup().getAdmissionType().equals(admissionPolicy);
                     }
                 });
@@ -207,23 +199,24 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         groupActionRegistry.addAction(newMembersPolicy);
     }
 
-    private void createSetMembersVisibilityAction(String textDescription, final SocialNetworkVisibilityDTO visibility) {
-        ActionToolbarMenuRadioDescriptor<StateToken> showMembers = new ActionToolbarMenuRadioDescriptor<StateToken>(
+    private void createSetMembersVisibilityAction(final String textDescription,
+            final SocialNetworkVisibilityDTO visibility) {
+        final ActionToolbarMenuRadioDescriptor<StateToken> showMembers = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
-                    public void onEvent(StateToken parameter) {
+                    public void onEvent(final StateToken parameter) {
                         groupServiceProvider.get().setSocialNetworkVisibility(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), visibility,
                                 new AsyncCallbackSimple<Object>() {
-                                    public void onSuccess(Object result) {
+                                    public void onSuccess(final Object result) {
                                         NotifyUser.info(i18n.t("Members visibility changed"));
                                     }
                                 });
                     }
                 }, MEMBERS_VISIBILITY_GROUP, new RadioMustBeChecked() {
                     public boolean mustBeChecked() {
-                        StateAbstractDTO currentState = session.getCurrentState();
+                        final StateAbstractDTO currentState = session.getCurrentState();
                         if (!currentState.getGroup().isPersonal()) {
-                            SocialNetworkDataDTO socialNetworkData = currentState.getSocialNetworkData();
+                            final SocialNetworkDataDTO socialNetworkData = currentState.getSocialNetworkData();
                             return socialNetworkData.getSocialNetworkVisibility().equals(visibility);
                         }
                         return false;
@@ -245,7 +238,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
 
         // final int numAdmins = adminsList.size();
 
-        boolean userIsAdmin = rights.isAdministrable();
+        final boolean userIsAdmin = rights.isAdministrable();
         final boolean userCanView = rights.isVisible();
 
         view.clear();

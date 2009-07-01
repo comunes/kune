@@ -74,7 +74,7 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
             }
         };
         bugsAction.putValue(Action.NAME, i18n.t("Report Kune issues/problems"));
-        bugsAction.putValue(Action.SMALL_ICON, img.info());
+        bugsAction.putValue(Action.SMALL_ICON, img.bug());
         final MenuItemDescriptor item = new MenuItemDescriptor(bugsAction);
         addAction(item);
 

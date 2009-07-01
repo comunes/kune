@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import com.calclab.suco.client.events.Listener2;
 
@@ -37,7 +37,7 @@ public class EntityHeaderPresenter implements EntityHeader {
     private EntityHeaderView view;
     private final Session session;
 
-    public EntityHeaderPresenter(final StateManager stateManager, final WsThemePresenter theme, final Session session) {
+    public EntityHeaderPresenter(final StateManager stateManager, final WsThemeManager theme, final Session session) {
         this.session = session;
 
         stateManager.onGroupChanged(new Listener2<String, String>() {
@@ -45,7 +45,7 @@ public class EntityHeaderPresenter implements EntityHeader {
                 setGroupLogo(session.getCurrentState().getGroup());
             }
         });
-        theme.onThemeChanged(new Listener2<WsTheme, WsTheme>() {
+        theme.addOnThemeChanged(new Listener2<WsTheme, WsTheme>() {
             public void onEvent(final WsTheme oldTheme, final WsTheme newTheme) {
                 view.setTheme(oldTheme, newTheme);
             }

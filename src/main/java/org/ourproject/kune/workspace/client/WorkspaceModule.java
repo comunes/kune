@@ -23,6 +23,7 @@ import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
+import org.ourproject.kune.platf.client.actions.ui.SimpleGuiItem;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
 import org.ourproject.kune.platf.client.app.UserOptionsCollection;
@@ -126,7 +127,6 @@ import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
-import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.options.GroupOptions;
 import org.ourproject.kune.workspace.client.options.GroupOptionsPanel;
 import org.ourproject.kune.workspace.client.options.GroupOptionsPresenter;
@@ -146,9 +146,10 @@ import org.ourproject.kune.workspace.client.options.logo.UserOptionsLogo;
 import org.ourproject.kune.workspace.client.options.logo.UserOptionsLogoPanel;
 import org.ourproject.kune.workspace.client.options.logo.UserOptionsLogoPresenter;
 import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSpaceConfPanel;
-import org.ourproject.kune.workspace.client.options.pscape.EntityOptionsPublicSpaceConfPresenter;
 import org.ourproject.kune.workspace.client.options.pscape.GroupOptionsPublicSpaceConf;
+import org.ourproject.kune.workspace.client.options.pscape.GroupOptionsPublicSpaceConfPresenter;
 import org.ourproject.kune.workspace.client.options.pscape.UserOptionsPublicSpaceConf;
+import org.ourproject.kune.workspace.client.options.pscape.UserOptionsPublicSpaceConfPresenter;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConf;
 import org.ourproject.kune.workspace.client.options.tools.EntityOptionsToolsConfPanel;
 import org.ourproject.kune.workspace.client.options.tools.GroupOptionsToolsConfPresenter;
@@ -235,8 +236,10 @@ import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipatio
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
-import org.ourproject.kune.workspace.client.themes.WsThemePanel;
-import org.ourproject.kune.workspace.client.themes.WsThemePresenter;
+import org.ourproject.kune.workspace.client.themes.WsThemeManager;
+import org.ourproject.kune.workspace.client.themes.WsThemeManagerPanel;
+import org.ourproject.kune.workspace.client.themes.WsThemeSelector;
+import org.ourproject.kune.workspace.client.themes.WsThemeSelectorPresenter;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
 import org.ourproject.kune.workspace.client.title.EntitySubTitlePanel;
 import org.ourproject.kune.workspace.client.title.EntitySubTitlePresenter;
@@ -343,8 +346,8 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public SiteUserOptions create() {
                 final SiteUserOptionsPresenter presenter = new SiteUserOptionsPresenter(i(Session.class),
-                        i(StateManager.class), p(UserOptions.class), p(FileDownloadUtils.class),
-                        $(I18nTranslationService.class), $(ImgResources.class));
+                        i(StateManager.class), p(FileDownloadUtils.class), $(I18nTranslationService.class),
+                        $(ImgResources.class));
                 final SiteUserOptionsPanel panel = new SiteUserOptionsPanel(presenter, i(WorkspaceSkeleton.class),
                         $(GuiBindingsRegister.class));
                 presenter.init(panel);
@@ -424,7 +427,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public EntityHeader create() {
                 final EntityHeaderPresenter presenter = new EntityHeaderPresenter(i(StateManager.class),
-                        i(WsThemePresenter.class), i(Session.class));
+                        i(WsThemeManager.class), i(Session.class));
                 final EntityHeaderPanel panel = new EntityHeaderPanel(i(WorkspaceSkeleton.class),
                         p(FileDownloadUtils.class), i(Images.class), i(GuiBindingsRegister.class));
                 presenter.init(panel);
@@ -432,14 +435,22 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<WsThemePresenter>(WsThemePresenter.class) {
+        register(ApplicationComponentGroup.class, new Factory<WsThemeManager>(WsThemeManager.class) {
             @Override
-            public WsThemePresenter create() {
-                final WsThemePresenter presenter = new WsThemePresenter(i(Session.class), p(GroupServiceAsync.class),
+            public WsThemeManager create() {
+                final WsThemeManager presenter = new WsThemeManager(i(Session.class), p(GroupServiceAsync.class),
                         i(StateManager.class));
-                final WsThemePanel panel = new WsThemePanel(i(WorkspaceSkeleton.class), presenter,
-                        i(I18nUITranslationService.class));
-                presenter.init(panel);
+                new WsThemeManagerPanel(presenter, i(WorkspaceSkeleton.class));
+                return presenter;
+            }
+        });
+
+        register(NoDecoration.class, new Factory<WsThemeSelector>(WsThemeSelector.class) {
+            @Override
+            public WsThemeSelector create() {
+                final WsThemeSelectorPresenter presenter = new WsThemeSelectorPresenter(i(Session.class),
+                        i(I18nTranslationService.class));
+                presenter.init(new SimpleGuiItem(i(GuiBindingsRegister.class)));
                 return presenter;
             }
         });
@@ -541,8 +552,8 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(
                         i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
                         i(Session.class), p(SocialNetworkServiceAsync.class), p(GroupServiceAsync.class),
-                        p(GroupLiveSearcher.class), i(WsThemePresenter.class), p(ChatEngine.class),
-                        i(GroupActionRegistry.class), i(ActionGroupSummaryToolbar.class), p(FileDownloadUtils.class));
+                        p(GroupLiveSearcher.class), p(ChatEngine.class), i(GroupActionRegistry.class),
+                        i(ActionGroupSummaryToolbar.class), p(FileDownloadUtils.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
                         i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
                                 ActionGroupSummaryToolbar.class).getView());
@@ -580,8 +591,8 @@ public class WorkspaceModule extends AbstractExtendedModule {
             public ParticipationSummary create() {
                 final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(
                         i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
-                        i(Session.class), p(SocialNetworkServiceAsync.class), i(WsThemePresenter.class),
-                        i(GroupActionRegistry.class), i(ActionParticipationToolbar.class), p(FileDownloadUtils.class));
+                        i(Session.class), p(SocialNetworkServiceAsync.class), i(GroupActionRegistry.class),
+                        i(ActionParticipationToolbar.class), p(FileDownloadUtils.class));
                 final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
                         i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
                                 ActionParticipationToolbar.class).getView());
@@ -594,7 +605,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public TagsSummary create() {
                 final TagsSummaryPresenter presenter = new TagsSummaryPresenter(i(Session.class),
-                        p(SiteSearcher.class), i(StateManager.class), i(WsThemePresenter.class));
+                        p(SiteSearcher.class), i(StateManager.class));
                 final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i(I18nUITranslationService.class),
                         i(WorkspaceSkeleton.class));
                 presenter.init(panel);
@@ -719,7 +730,14 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 GroupOptionsPublicSpaceConf.class) {
             @Override
             public GroupOptionsPublicSpaceConf create() {
-                return createEntityOptionsPublicSpace(i(GroupOptions.class));
+                final WsThemeSelector themeSelector = i(WsThemeSelector.class);
+                final GroupOptionsPublicSpaceConfPresenter presenter = new GroupOptionsPublicSpaceConfPresenter(
+                        i(Session.class), i(StateManager.class), i(GroupOptions.class), i(WsThemeManager.class),
+                        themeSelector);
+                final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(presenter,
+                        i(WorkspaceSkeleton.class), i(I18nTranslationService.class), themeSelector);
+                presenter.init(panel);
+                return presenter;
             }
         });
 
@@ -727,7 +745,13 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 new Factory<UserOptionsPublicSpaceConf>(UserOptionsPublicSpaceConf.class) {
                     @Override
                     public UserOptionsPublicSpaceConf create() {
-                        return createEntityOptionsPublicSpace(i(UserOptions.class));
+                        final WsThemeSelector themeSelector = i(WsThemeSelector.class);
+                        final UserOptionsPublicSpaceConfPresenter presenter = new UserOptionsPublicSpaceConfPresenter(
+                                i(Session.class), i(UserOptions.class), i(WsThemeManager.class), themeSelector);
+                        final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(
+                                presenter, i(WorkspaceSkeleton.class), i(I18nTranslationService.class), themeSelector);
+                        presenter.init(panel);
+                        return presenter;
                     }
                 });
 
@@ -897,7 +921,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public ToolSelector create() {
                 final ToolSelectorPresenter presenter = new ToolSelectorPresenter(i(StateManager.class),
-                        i(WsThemePresenter.class));
+                        i(WsThemeManager.class));
                 return presenter;
             }
         });
@@ -1071,11 +1095,4 @@ public class WorkspaceModule extends AbstractExtendedModule {
         i(GlobalShortcutRegister.class).enable();
     }
 
-    private EntityOptionsPublicSpaceConfPresenter createEntityOptionsPublicSpace(final EntityOptions entityOptions) {
-        final EntityOptionsPublicSpaceConfPresenter presenter = new EntityOptionsPublicSpaceConfPresenter(entityOptions);
-        final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(presenter,
-                i(WorkspaceSkeleton.class), i(I18nTranslationService.class), i(WsThemePresenter.class));
-        presenter.init(panel);
-        return presenter;
-    }
 }

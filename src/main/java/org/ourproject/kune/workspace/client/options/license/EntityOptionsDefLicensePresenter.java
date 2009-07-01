@@ -21,6 +21,7 @@ package org.ourproject.kune.workspace.client.options.license;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.dto.LicenseDTO;
+import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseChangeAction;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
@@ -60,7 +61,7 @@ public abstract class EntityOptionsDefLicensePresenter {
     public void onChange() {
         licenseWizard.get().start(new Listener<LicenseDTO>() {
             public void onEvent(final LicenseDTO license) {
-                licChangeAction.get().changeLicense(license, new Listener0() {
+                licChangeAction.get().changeLicense(getOperationToken(), license, new Listener0() {
                     public void onEvent() {
                         setLicense(license);
                     }
@@ -76,6 +77,8 @@ public abstract class EntityOptionsDefLicensePresenter {
     protected abstract boolean applicable();
 
     protected abstract LicenseDTO getCurrentDefLicense();
+
+    protected abstract StateToken getOperationToken();
 
     protected void setState() {
         if (applicable()) {

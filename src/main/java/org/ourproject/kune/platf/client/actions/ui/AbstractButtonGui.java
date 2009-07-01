@@ -3,9 +3,7 @@ package org.ourproject.kune.platf.client.actions.ui;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
-import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
@@ -69,8 +67,8 @@ public abstract class AbstractButtonGui extends AbstractGuiItem {
     }
 
     @Override
-    protected void setIcon(final ImageResource imageResource) {
-        button.setIconCls(ImgConstants.CSS_SUFFIX + imageResource.getName());
+    protected void setIconStyle(final String style) {
+        button.setIconCls(style);
     }
 
     @Override
