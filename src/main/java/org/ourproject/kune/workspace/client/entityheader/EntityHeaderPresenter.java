@@ -21,7 +21,6 @@ package org.ourproject.kune.workspace.client.entityheader;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
-import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
@@ -73,10 +72,7 @@ public class EntityHeaderPresenter implements EntityHeader {
     }
 
     void setGroupLogo(final GroupDTO group) {
-        final ContentSimpleDTO groupFullLogo = group.getGroupFullLogo();
-        if (groupFullLogo != null) {
-            view.setFullLogo(groupFullLogo.getStateToken(), true);
-        } else if (group.hasLogo()) {
+        if (group.hasLogo()) {
             setLogoText(group.getLongName());
             view.setLogoImage(group.getStateToken());
             view.setLogoImageVisible(true);

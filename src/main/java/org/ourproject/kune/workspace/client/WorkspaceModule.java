@@ -236,6 +236,8 @@ import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipatio
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
+import org.ourproject.kune.workspace.client.themes.WsBackManager;
+import org.ourproject.kune.workspace.client.themes.WsBackManagerImpl;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.themes.WsThemeManagerPanel;
 import org.ourproject.kune.workspace.client.themes.WsThemeSelector;
@@ -435,11 +437,18 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
+        register(Singleton.class, new Factory<WsBackManager>(WsBackManager.class) {
+            @Override
+            public WsBackManager create() {
+                return new WsBackManagerImpl(i(FileDownloadUtils.class));
+            }
+        });
+
         register(ApplicationComponentGroup.class, new Factory<WsThemeManager>(WsThemeManager.class) {
             @Override
             public WsThemeManager create() {
                 final WsThemeManager presenter = new WsThemeManager(i(Session.class), p(GroupServiceAsync.class),
-                        i(StateManager.class));
+                        i(StateManager.class), i(WsBackManager.class));
                 new WsThemeManagerPanel(presenter, i(WorkspaceSkeleton.class));
                 return presenter;
             }
@@ -641,7 +650,8 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public UserOptions create() {
                 final UserOptionsPresenter presenter = new UserOptionsPresenter(i(Session.class),
-                        i(I18nTranslationService.class), i(ImgResources.class), i(SiteUserOptions.class));
+                        i(StateManager.class), i(I18nTranslationService.class), i(ImgResources.class),
+                        i(SiteUserOptions.class));
                 final UserOptionsPanel panel = new UserOptionsPanel(presenter, i(EntityHeader.class),
                         i(I18nTranslationService.class), i(Images.class), i(UserOptionsCollection.class));
                 presenter.init(panel);
@@ -733,9 +743,10 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 final WsThemeSelector themeSelector = i(WsThemeSelector.class);
                 final GroupOptionsPublicSpaceConfPresenter presenter = new GroupOptionsPublicSpaceConfPresenter(
                         i(Session.class), i(StateManager.class), i(GroupOptions.class), i(WsThemeManager.class),
-                        themeSelector);
+                        themeSelector, p(GroupServiceAsync.class), i(WsBackManager.class));
                 final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(presenter,
-                        i(WorkspaceSkeleton.class), i(I18nTranslationService.class), themeSelector);
+                        i(WorkspaceSkeleton.class), i(I18nTranslationService.class), themeSelector,
+                        i(FileDownloadUtils.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -747,9 +758,11 @@ public class WorkspaceModule extends AbstractExtendedModule {
                     public UserOptionsPublicSpaceConf create() {
                         final WsThemeSelector themeSelector = i(WsThemeSelector.class);
                         final UserOptionsPublicSpaceConfPresenter presenter = new UserOptionsPublicSpaceConfPresenter(
-                                i(Session.class), i(UserOptions.class), i(WsThemeManager.class), themeSelector);
+                                i(Session.class), i(StateManager.class), i(UserOptions.class), i(WsThemeManager.class),
+                                themeSelector, p(GroupServiceAsync.class), i(WsBackManager.class));
                         final EntityOptionsPublicSpaceConfPanel panel = new EntityOptionsPublicSpaceConfPanel(
-                                presenter, i(WorkspaceSkeleton.class), i(I18nTranslationService.class), themeSelector);
+                                presenter, i(WorkspaceSkeleton.class), i(I18nTranslationService.class), themeSelector,
+                                i(FileDownloadUtils.class));
                         presenter.init(panel);
                         return presenter;
                     }

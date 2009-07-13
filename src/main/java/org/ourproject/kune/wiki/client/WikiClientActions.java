@@ -41,6 +41,7 @@ import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
+import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -55,11 +56,11 @@ public class WikiClientActions extends AbstractFoldableContentActions {
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
             final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
             final WikiViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-            final SitePublicSpaceLink publicLink) {
+            final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
                 contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
                 contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
-                documentViewer, entityLogo, publicLink);
+                documentViewer, entityLogo, publicLink, wsBackManager);
     }
 
     @Override
@@ -92,6 +93,7 @@ public class WikiClientActions extends AbstractFoldableContentActions {
         createRefreshCxtAction(parentMenuTitleCtx, containers);
 
         createSetAsDefContent(parentMenuTitle, contents);
+        createSetGroupBackImageAction(parentMenuTitle, TYPE_UPLOADEDFILE);
 
         createUploadAction(i18n.t("Upload file"), "images/nav/upload.png",
                 i18n.t("Upload some files (images, PDFs, ...)"), null, containers);

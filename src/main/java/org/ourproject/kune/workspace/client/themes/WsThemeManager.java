@@ -19,6 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.themes;
 
+import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
 import org.ourproject.kune.platf.client.dto.StateToken;
@@ -40,11 +41,13 @@ public class WsThemeManager {
     private final Provider<GroupServiceAsync> groupServiceProvider;
     private final Session session;
     private WsTheme defTheme;
+    private final WsBackManager wsBackManager;
 
     public WsThemeManager(final Session session, final Provider<GroupServiceAsync> groupServiceProvider,
-            final StateManager stateManager) {
+            final StateManager stateManager, final WsBackManager wsBackManager) {
         this.session = session;
         this.groupServiceProvider = groupServiceProvider;
+        this.wsBackManager = wsBackManager;
         this.onThemeChanged = new Event2<WsTheme, WsTheme>("onThemeChanged");
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO initData) {
@@ -59,6 +62,10 @@ public class WsThemeManager {
         });
     }
 
+    public void addOnThemeChanged(final Listener2<WsTheme, WsTheme> listener) {
+        onThemeChanged.add(listener);
+    }
+
     public void changeTheme(final StateToken token, final WsTheme newTheme) {
         NotifyUser.showProgressProcessing();
         groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), token, newTheme.getName(),
@@ -70,10 +77,6 @@ public class WsThemeManager {
                         NotifyUser.hideProgress();
                     }
                 });
-    }
-
-    public void addOnThemeChanged(final Listener2<WsTheme, WsTheme> listener) {
-        onThemeChanged.add(listener);
     }
 
     protected void onChangeGroupWsTheme(final WsTheme newTheme) {
@@ -93,6 +96,12 @@ public class WsThemeManager {
 
     private void setState(final StateAbstractDTO state) {
         setTheme(new WsTheme(state.getGroup().getWorkspaceTheme()));
+        final ContentSimpleDTO groupBackImage = state.getGroup().getGroupBackImage();
+        if (groupBackImage == null) {
+            wsBackManager.clearBackImage();
+        } else {
+            wsBackManager.setBackImage(groupBackImage.getStateToken());
+        }
     }
 
     private void setTheme(final WsTheme newTheme) {

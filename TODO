@@ -11,6 +11,8 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** Do something with jetty/jruby alias issue
+   http://jetty.mortbay.org/jetty5/faq/faq_s_400-Security_t_Aliases.html
 ** Use of webdriver instead of plain selenium
    http://code.google.com/p/webdriver/
 ** New Action class
@@ -103,6 +105,12 @@ TODO-list for kune -*- mode: org; -*-
      - value :: red
 *** logos
 *** caching
+*** backgrounds
+    A big one select from context
+    body {
+    background: #352726 url('http://some.jpg') fixed no-repeat top left;
+    }
+
 ** danigb,vjrj URLs public/workspace braimstorming
    Nowadays:
    - ws: #group.tool.container.content

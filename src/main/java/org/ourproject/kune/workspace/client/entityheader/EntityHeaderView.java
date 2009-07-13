@@ -33,8 +33,6 @@ public interface EntityHeaderView {
 
     void reloadImage(GroupDTO group);
 
-    void setFullLogo(StateToken stateToken, boolean clipped);
-
     void setLargeFont();
 
     void setLogoImage(StateToken stateToken);

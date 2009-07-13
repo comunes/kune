@@ -189,6 +189,16 @@ public class SessionDefault implements Session {
         return initData.getUserTools();
     }
 
+    public boolean isInCurrentUserSpace() {
+        if (!isLogged()) {
+            return false;
+        }
+        if (getCurrentStateToken().getGroup().equals(getCurrentUser().getShortName())) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean inSameToken(final StateToken token) {
         return getCurrentStateToken().equals(token);
     }

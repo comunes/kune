@@ -20,21 +20,25 @@
 package org.ourproject.kune.workspace.client.options.pscape;
 
 import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
+import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.themes.WsThemeSelector;
 
 import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.ioc.Provider;
 
 public class GroupOptionsPublicSpaceConfPresenter extends EntityOptionsPublicSpaceConfPresenter implements
         GroupOptionsPublicSpaceConf {
 
     public GroupOptionsPublicSpaceConfPresenter(final Session session, final StateManager stateManager,
-            final EntityOptions entityOptions, final WsThemeManager themeManager, final WsThemeSelector themeSelector) {
-        super(entityOptions);
+            final EntityOptions entityOptions, final WsThemeManager themeManager, final WsThemeSelector themeSelector,
+            final Provider<GroupServiceAsync> groupService, final WsBackManager backManager) {
+        super(session, stateManager, entityOptions, groupService, backManager);
         themeSelector.addThemeSelected(new Listener<WsTheme>() {
             public void onEvent(final WsTheme theme) {
                 themeManager.changeTheme(session.getCurrentStateToken(), theme);

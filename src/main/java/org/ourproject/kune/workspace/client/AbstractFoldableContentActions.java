@@ -32,7 +32,6 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
 import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
 import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
@@ -60,6 +59,7 @@ import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
+import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import com.calclab.suco.client.events.Listener;
@@ -98,6 +98,8 @@ public abstract class AbstractFoldableContentActions {
     protected final EntityHeader entityLogo;
     private final SitePublicSpaceLink publicLink;
 
+    private final WsBackManager wsBackManager;
+
     public AbstractFoldableContentActions(final Session session, final StateManager stateManager,
             final I18nUITranslationService i18n, final ErrorHandler errorHandler,
             final DeferredCommandWrapper deferredCommandWrapper,
@@ -107,7 +109,7 @@ public abstract class AbstractFoldableContentActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final Provider<ContentEditor> textEditorProvider,
             final Provider<ContextPropEditor> contextPropEditorProvider, final FoldableContent foldableContent,
-            final EntityHeader entityLogo, final SitePublicSpaceLink publicLink) {
+            final EntityHeader entityLogo, final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
@@ -125,6 +127,7 @@ public abstract class AbstractFoldableContentActions {
         this.foldableContent = foldableContent;
         this.entityLogo = entityLogo;
         this.publicLink = publicLink;
+        this.wsBackManager = wsBackManager;
         createActions();
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO parameter) {
@@ -455,6 +458,34 @@ public abstract class AbstractFoldableContentActions {
         return setAsDefGroupContent;
     }
 
+    protected void createSetGroupBackImageAction(final String parentMenuTitle, final String... registerInTypes) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> setGroupBackImage = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+                AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    public void onEvent(final StateToken token) {
+                        groupServiceProvider.get().setGroupBackImage(session.getUserHash(), token,
+                                new AsyncCallbackSimple<GroupDTO>() {
+                                    public void onSuccess(final GroupDTO newGroup) {
+                                        if (session.getCurrentState().getGroup().getShortName().equals(
+                                                newGroup.getShortName())) {
+                                            session.getCurrentState().setGroup(newGroup);
+                                            wsBackManager.clearBackImage();
+                                            wsBackManager.setBackImage(newGroup.getGroupBackImage().getStateToken());
+                                        }
+                                    }
+                                });
+                    }
+                });
+        setGroupBackImage.setParentMenuTitle(parentMenuTitle);
+        setGroupBackImage.setTextDescription(i18n.t("Set this as the group background image"));
+        setGroupBackImage.setIconUrl("images/nav/picture.png");
+        setGroupBackImage.setEnableCondition(new ActionEnableCondition<StateToken>() {
+            public boolean mustBeEnabled(final StateToken token) {
+                return session.getContentState().getMimeType().isImage();
+            }
+        });
+        contentActionRegistry.addAction(setGroupBackImage, registerInTypes);
+    }
+
     protected void createSetStatusAction(final AccessRolDTO rol, final String textDescription,
             final ContentStatusDTO status, final String[] contentsModerated) {
         final ActionToolbarMenuRadioDescriptor<StateToken> action = new ActionToolbarMenuRadioDescriptor<StateToken>(
@@ -552,40 +583,6 @@ public abstract class AbstractFoldableContentActions {
 
     protected void downloadContent(final StateToken token) {
         fileDownloadProvider.get().downloadFile(token);
-    }
-
-    /**
-     * For future use contentActionRegistry.addAction(setGroupLogo,
-     * TYPE_UPLOADEDFILE);
-     */
-    @SuppressWarnings("unused")
-    private ActionToolbarMenuAndItemDescriptor<StateToken> createSetGroupLogoAction(final String parentMenuTitle) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> setGroupLogo = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
-                    public void onEvent(final StateToken token) {
-                        groupServiceProvider.get().setGroupFullLogo(session.getUserHash(), token,
-                                new AsyncCallbackSimple<GroupDTO>() {
-                                    public void onSuccess(final GroupDTO newGroup) {
-                                        NotifyUser.info("Logo selected");
-                                        if (session.getCurrentState().getGroup().getShortName().equals(
-                                                newGroup.getShortName())) {
-                                            session.getCurrentState().setGroup(newGroup);
-                                        }
-                                        entityLogo.refreshGroupLogo();
-                                    }
-                                });
-                    }
-                });
-        setGroupLogo.setParentMenuTitle(parentMenuTitle);
-        setGroupLogo.setTextDescription(i18n.t("Set this as the group logo"));
-        setGroupLogo.setIconUrl("images/nav/picture.png");
-        setGroupLogo.setEnableCondition(new ActionEnableCondition<StateToken>() {
-            public boolean mustBeEnabled(final StateToken token) {
-                final BasicMimeTypeDTO mime = session.getContentState().getMimeType();
-                return mime != null && mime.getType().equals("image");
-            }
-        });
-        return setGroupLogo;
     }
 
     private ActionEnableCondition<StateToken> notDefAndNotDeleted() {

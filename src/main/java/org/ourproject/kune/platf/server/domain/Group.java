@@ -88,7 +88,7 @@ public class Group implements HasId {
     private Content defaultContent;
 
     @OneToOne
-    private Content groupFullLogo;
+    private Content groupBackImage;
 
     @OneToOne(cascade = CascadeType.ALL)
     private SocialNetwork socialNetwork;
@@ -201,8 +201,8 @@ public class Group implements HasId {
         return defaultLicense;
     }
 
-    public Content getGroupFullLogo() {
-        return groupFullLogo;
+    public Content getGroupBackImage() {
+        return groupBackImage;
     }
 
     public GroupType getGroupType() {
@@ -287,8 +287,8 @@ public class Group implements HasId {
         this.defaultLicense = defaultLicense;
     }
 
-    public void setGroupFullLogo(final Content groupFullLogo) {
-        this.groupFullLogo = groupFullLogo;
+    public void setGroupBackImage(final Content groupBackImage) {
+        this.groupBackImage = groupBackImage;
     }
 
     public void setGroupType(final GroupType groupType) {

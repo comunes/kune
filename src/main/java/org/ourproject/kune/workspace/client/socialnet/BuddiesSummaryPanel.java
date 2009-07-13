@@ -67,7 +67,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         vp.add(flowPanel);
         vp.add(otherBuddiesLabel);
         toolbar = ((ActionToolbarPanel<UserSimpleDTO>) actionToolbarView).getToolbar();
-        toolbar.setCleanStyle();
+        toolbar.setBlankStyle();
         vp.add((Widget) toolbar);
         super.add(vp);
         addInSummary();

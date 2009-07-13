@@ -78,7 +78,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         super.add(noMembersPublic);
 
         toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar();
-        toolbar.setCleanStyle();
+        toolbar.setBlankStyle();
         super.add((Widget) toolbar);
         super.addInSummary();
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {

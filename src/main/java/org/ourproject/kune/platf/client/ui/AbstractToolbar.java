@@ -25,7 +25,7 @@ public interface AbstractToolbar {
 
     void removeAll();
 
-    void setCleanStyle();
+    void setBlankStyle();
 
     void setHeight(String height);
 

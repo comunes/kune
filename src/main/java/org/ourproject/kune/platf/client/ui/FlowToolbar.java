@@ -84,9 +84,9 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
     }
 
     /**
-     * Set the blank/clean style
+     * Set the blank style
      */
-    public void setCleanStyle() {
+    public void setBlankStyle() {
         setBasicStyle();
         addStyleName("k-blank-toolbar");
     }
@@ -103,6 +103,14 @@ public class FlowToolbar extends Composite implements AbstractToolbar {
     public void setNormalStyle() {
         setBasicStyle();
         addStyleName("k-toolbar-bottom-line");
+    }
+
+    /**
+     * Set the transparent style
+     */
+    public void setTranspStyle() {
+        setBasicStyle();
+        addStyleName("k-transp");
     }
 
     private void setBasicStyle() {

@@ -1,5 +1,5 @@
 .k-site-traybar {
-  background: #FFF none repeat scroll 0% 50%;
+  background: transparent none repeat scroll 0% 50%;
 }
 
 .k-blank-toolbar {
@@ -34,7 +34,6 @@
 .k-sitebar {
   margin-right: 10px;
   height: 16px;
-  background: #FFF;
 }
 
 .k-sitebar .gwt-TextBox {
@@ -42,6 +41,7 @@
   margin: 0 15px 0 3px;
   padding-left: 1px;
   color: #B3B3B3;
+  background: transparent;
 }
 
 .k-sitebar .gwt-Hyperlink a {
@@ -63,9 +63,9 @@
 }
 
 .k-entity-summary {
-  border-left-color: #FFF;
+  border-left-color: transparent;
   border-left-width: 5px;
-  border-bottom-color: #FFF;
+  border-bottom-color: transparent;
   border-bottom-width: 5px;
 }
 
@@ -205,7 +205,7 @@
 
 .k-entity-title {
   border-left-style: solid;
-  border-left-width: 2px;
+  border-left-width: 5px;
 }
 
 .k-entity-title div {
@@ -409,6 +409,10 @@
 
 .k-entity-context-purple .x-tree .x-panel-body {
   background: #DDAFE9 none repeat scroll 0% 50%;
+}
+
+.k-entity-content {
+  background: #FFF;
 }
 
 .k-entity-bottom div { /* line-height: 24px; */
@@ -933,7 +937,11 @@
 border
 
 
+
+
 :
+
+
 
 
 
@@ -942,18 +950,28 @@ px
 
 
 
+
+
 solid
+
+
 
 
 
 #C0C0C0
 
 
+
+
 ;
 z-index
 
 
+
+
 :
+
+
 
 
 
@@ -962,15 +980,23 @@ z-index
 important
 
 
+
+
 ;
 background-color
+
+
 
 
 :
 
 
 
+
+
 #FFF
+
+
 
 
 ;
@@ -1039,4 +1065,16 @@ background-color
 
 .k-plain-iframe iframe {
   border: 1px solid gray;
+}
+
+.k-transp .x-panel-body {
+  background: transparent;
+}
+
+.k-transp {
+  background: transparent;
+}
+
+.k-blank {
+  background: #FFF;
 }

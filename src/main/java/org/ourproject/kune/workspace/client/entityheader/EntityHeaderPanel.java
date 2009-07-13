@@ -59,7 +59,7 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
         entityTextLogo = new EntityTextLogo();
         add(entityTextLogo);
         toolbar = new ComplexToolbar(bindings);
-        toolbar.setCleanStyle();
+        toolbar.setTranspStyle();
         vpanel.add(toolbar);
         add(vpanel);
         wskel.addToEntityMainHeader(this);
@@ -79,6 +79,7 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
                 + new Date().getTime());
     }
 
+    @Deprecated
     public void setFullLogo(final StateToken stateToken, final boolean clipped) {
         clear();
         final String imageUrl = downloadProvider.get().getImageUrl(stateToken);

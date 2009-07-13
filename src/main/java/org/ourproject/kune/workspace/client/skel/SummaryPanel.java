@@ -32,9 +32,10 @@ public class SummaryPanel extends Panel {
     private final String collapsedTitle;
     private final String expandedTitle;
 
-    public SummaryPanel(final String title, final String titleTooltip, WorkspaceSkeleton ws) {
+    public SummaryPanel(final String title, final String titleTooltip, final WorkspaceSkeleton ws) {
         this.ws = ws;
         super.setBorder(false);
+        super.addStyleName("k-blank");
         super.setAutoScroll(true);
         collapsedTitle = KuneUiUtils.genQuickTipLabel(title, null, titleTooltip,
                 Images.App.getInstance().arrowRightWhite(), IconPosition.left);
@@ -43,12 +44,12 @@ public class SummaryPanel extends Panel {
         setTitle(expandedTitle);
         super.addListener(new PanelListenerAdapter() {
             @Override
-            public void onCollapse(Panel panel) {
+            public void onCollapse(final Panel panel) {
                 setTitle(collapsedTitle);
             }
 
             @Override
-            public void onExpand(Panel panel) {
+            public void onExpand(final Panel panel) {
                 setTitle(expandedTitle);
             }
         });

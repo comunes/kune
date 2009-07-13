@@ -154,7 +154,7 @@ public class ActionToolbarPanel<T> implements ActionToolbarView<T> {
     }
 
     public void setCleanStyle() {
-        toolbar.setCleanStyle();
+        toolbar.setBlankStyle();
     }
 
     public void setNormalStyle() {

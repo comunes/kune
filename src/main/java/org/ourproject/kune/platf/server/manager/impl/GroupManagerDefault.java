@@ -97,6 +97,10 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         group.setWorkspaceTheme(theme);
     }
 
+    public void clearGroupBackImage(final Group group) {
+        group.setGroupBackImage(null);
+    }
+
     public Group createGroup(final Group group, final User user) throws GroupNameInUseException,
             UserMustBeLoggedException {
         final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
@@ -201,9 +205,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         group.setDefaultContent(content);
     }
 
-    public void setGroupLogo(final Group group, final Content content) {
-        if (content.getMimeType().getType().equals("image")) {
-            group.setGroupFullLogo(content);
+    public void setGroupBackImage(final Group group, final Content content) {
+        if (content.getMimeType().isImage()) {
+            group.setGroupBackImage(content);
         } else {
             throw new DefaultException("Trying to set not a image as group logo");
         }

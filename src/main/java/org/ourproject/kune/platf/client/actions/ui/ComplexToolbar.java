@@ -26,10 +26,10 @@ public class ComplexToolbar extends AbstractComposedGuiItem implements View {
     }
 
     /**
-     * Set the blank/clean style
+     * Set the blank style
      */
     public void setCleanStyle() {
-        toolbar.setCleanStyle();
+        toolbar.setBlankStyle();
     }
 
     /**
@@ -37,6 +37,13 @@ public class ComplexToolbar extends AbstractComposedGuiItem implements View {
      */
     public void setNormalStyle() {
         toolbar.setNormalStyle();
+    }
+
+    /**
+     * Set the blank style
+     */
+    public void setTranspStyle() {
+        toolbar.setTranspStyle();
     }
 
     @Override

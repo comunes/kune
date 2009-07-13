@@ -113,7 +113,9 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
 
     public void hide() {
         if (dialog != null) {
-            dialog.hide();
+            if (dialog.isVisible()) {
+                dialog.hide();
+            }
         }
     }
 
@@ -206,7 +208,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         if (onHideListener != null) {
             addHideListener();
         }
-        for (Button button : buttons) {
+        for (final Button button : buttons) {
             dialog.addButton(button);
         }
     }

@@ -20,7 +20,12 @@
 package org.ourproject.kune.workspace.client.options.pscape;
 
 import org.ourproject.kune.platf.client.View;
+import org.ourproject.kune.platf.client.dto.StateToken;
 
 public interface EntityOptionsPublicSpaceConfView extends View {
-}
 
+    public void clearBackImage();
+
+    public void setBackImage(final StateToken token);
+
+}

@@ -19,6 +19,6 @@
  */
 package org.ourproject.kune.workspace.client.options.pscape;
 
-public interface EntityOptionsPublicSpaceConf {
 
+public interface EntityOptionsPublicSpaceConf {
 }

@@ -36,6 +36,8 @@ public interface GroupManager extends Manager<Group, Long> {
 
     void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
 
+    void clearGroupBackImage(Group group);
+
     Group createGroup(Group group, User user) throws GroupNameInUseException, UserMustBeLoggedException;
 
     Group createUserGroup(User user) throws GroupNameInUseException, EmailAddressInUseException;
@@ -67,7 +69,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
     void setDefaultContent(String groupShortName, Content content);
 
-    void setGroupLogo(Group group, Content content);
+    void setGroupBackImage(Group group, Content content);
 
     void setToolEnabled(User userLogged, String groupShortName, String toolName, boolean enabled);
 

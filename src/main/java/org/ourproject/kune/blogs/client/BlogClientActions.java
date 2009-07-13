@@ -41,6 +41,7 @@ import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
+import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -55,11 +56,11 @@ public class BlogClientActions extends AbstractFoldableContentActions {
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
             final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
             final BlogViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-            final SitePublicSpaceLink publicLink) {
+            final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
                 contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
                 contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
-                documentViewer, entityLogo, publicLink);
+                documentViewer, entityLogo, publicLink, wsBackManager);
     }
 
     @Override
@@ -93,6 +94,7 @@ public class BlogClientActions extends AbstractFoldableContentActions {
                 null, containersNoRoot);
 
         createSetAsDefContent(parentMenuTitle, contents);
+        createSetGroupBackImageAction(parentMenuTitle, TYPE_UPLOADEDFILE);
 
         createGoAction(all);
         createGoHomeAction(containers);

@@ -51,6 +51,7 @@ import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
@@ -80,7 +81,7 @@ public class GalleryClientModule extends AbstractExtendedModule {
                         p(ContentServiceAsync.class), p(GroupServiceAsync.class), p(FileUploader.class),
                         i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(FileDownloadUtils.class),
                         i(EntityHeader.class), p(ContentEditor.class), i(ErrorHandler.class), i(GalleryViewer.class),
-                        p(ContextPropEditor.class), i(SitePublicSpaceLink.class));
+                        p(ContextPropEditor.class), i(SitePublicSpaceLink.class), i(WsBackManager.class));
             }
         });
 

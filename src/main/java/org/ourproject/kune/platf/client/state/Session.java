@@ -123,6 +123,8 @@ public interface Session {
 
     Collection<ToolSimpleDTO> getUserTools();
 
+    boolean isInCurrentUserSpace();
+
     boolean inSameToken(StateToken token);
 
     boolean isCurrentStateAContent();

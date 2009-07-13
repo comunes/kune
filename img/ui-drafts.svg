@@ -3,7 +3,7 @@
 <svg
    xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,7 @@
    height="1488.189"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
+   inkscape:version="0.46"
    sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
    sodipodi:docname="ui-drafts.svg"
    version="1.0"
@@ -27,7 +27,7 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.50128043"
      inkscape:cx="1052.3622"
@@ -42,7 +42,6 @@
      inkscape:object-paths="true"
      guidetolerance="3.9"
      showgrid="true"
-     gridempspacing="0"
      inkscape:window-width="1379"
      inkscape:window-height="936"
      inkscape:window-x="61"
@@ -51,9 +50,31 @@
      height="2104.7244px"
      inkscape:grid-bbox="false"
      inkscape:guide-bbox="true"
-     showguides="true" />
+     showguides="true">
+    <inkscape:grid
+       id="GridFromPre046Settings"
+       type="xygrid"
+       originx="0px"
+       originy="0px"
+       spacingx="1px"
+       spacingy="1px"
+       color="#0000ff"
+       empcolor="#0000ff"
+       opacity="0.2"
+       empopacity="0.4"
+       empspacing="0"
+       visible="true"
+       enabled="true" />
+  </sodipodi:namedview>
   <defs
      id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 744.09448 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="2104.7244 : 744.09448 : 1"
+       inkscape:persp3d-origin="1052.3622 : 496.06299 : 1"
+       id="perspective13699" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#RSSg"
@@ -25089,6 +25110,20 @@
          sodipodi:role="line">from: <tspan
    id="tspan29289"
    style="fill:#803300">Luther Blissett</tspan></tspan></text>
+    <use
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/Imágenes/yellow-logo.png"
+       height="1488.189"
+       width="2104.7244"
+       transform="matrix(1.237931,0,0,1.237931,-857.42313,-63.496407)"
+       id="use14410"
+       xlink:href="#g28384"
+       y="0"
+       x="0"
+       inkscape:transform-center-x="-193.13157"
+       inkscape:transform-center-y="51.674258"
+       style="fill:#241c1c" />
   </g>
   <g
      inkscape:label="orange-circles"

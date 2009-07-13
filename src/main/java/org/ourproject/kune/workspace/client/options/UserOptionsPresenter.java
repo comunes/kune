@@ -25,6 +25,7 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.state.Session;
+import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptions;
@@ -37,9 +38,13 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
     private final ImgResources img;
     private final I18nTranslationService i18n;
     private final SiteUserOptions userOptions;
+    private final Session session;
+    private final StateManager stateManager;
 
-    public UserOptionsPresenter(final Session session, final I18nTranslationService i18n, final ImgResources img,
-            final SiteUserOptions userOptions) {
+    public UserOptionsPresenter(final Session session, final StateManager stateManager,
+            final I18nTranslationService i18n, final ImgResources img, final SiteUserOptions userOptions) {
+        this.session = session;
+        this.stateManager = stateManager;
         this.i18n = i18n;
         this.img = img;
         this.userOptions = userOptions;
@@ -59,6 +64,9 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
     private void createActions() {
         final AbstractExtendedAction userPrefsAction = new AbstractExtendedAction() {
             public void actionPerformed(final ActionEvent event) {
+                if (!session.isInCurrentUserSpace()) {
+                    stateManager.gotoToken(session.getCurrentUser().getStateToken());
+                }
                 show();
             }
         };

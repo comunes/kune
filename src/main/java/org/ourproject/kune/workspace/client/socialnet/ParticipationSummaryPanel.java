@@ -54,7 +54,7 @@ public class ParticipationSummaryPanel extends SummaryPanel implements Participa
         gridMenuPanel.onDoubleClick(go);
         super.add(gridMenuPanel);
         toolbar = ((ActionToolbarPanel<StateToken>) actionToolbarView).getToolbar();
-        toolbar.setCleanStyle();
+        toolbar.setBlankStyle();
         super.add((Widget) toolbar);
         addInSummary();
         ws.addListenerInEntitySummary(new ContainerListenerAdapter() {

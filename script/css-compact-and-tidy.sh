@@ -62,3 +62,5 @@ concat $CSS2
 tidy $DEST2
 
 rm $EXTTMPFILE
+rm $CATTMPFILE
+rm $CSSTMPFILE

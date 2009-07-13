@@ -84,7 +84,7 @@ public class SimpleToolbar extends Composite implements AbstractToolbar {
         childPanel.clear();
     }
 
-    public void setCleanStyle() {
+    public void setBlankStyle() {
         setBasicStyle();
         addStyleName("k-blank-toolbar");
     }

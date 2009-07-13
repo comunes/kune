@@ -34,12 +34,14 @@ public interface GroupService extends RemoteService {
 
     void changeGroupWsTheme(String userHash, StateToken groupToken, String theme) throws DefaultException;
 
+    GroupDTO clearGroupBackImage(String userHash, StateToken token);
+
     StateToken createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags, String[] enabledTools)
             throws DefaultException;
 
     GroupDTO getGroup(String userHash, StateToken token);
 
-    GroupDTO setGroupFullLogo(String userHash, StateToken token);
+    GroupDTO setGroupBackImage(String userHash, StateToken token);
 
     void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionTypeDTO admissionPolicy);
 

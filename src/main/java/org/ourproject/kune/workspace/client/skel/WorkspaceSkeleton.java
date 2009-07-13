@@ -51,13 +51,16 @@ public class WorkspaceSkeleton {
         container.setLayout(new FitLayout());
         container.setBorder(false);
         container.setPaddings(5);
+        container.addStyleName("k-transp");
 
         final Panel mainPanel = new Panel();
         mainPanel.setLayout(new AnchorLayout());
         mainPanel.setBorder(false);
+        mainPanel.addStyleName("k-transp");
 
         sitebar = new SimpleToolbar();
         sitebar.setStyleName("k-sitebar");
+        sitebar.addStyleName("k-transp");
         sitebar.setHeight(String.valueOf(DEF_BAR_HEIGHT));
 
         entity = new Entity();
