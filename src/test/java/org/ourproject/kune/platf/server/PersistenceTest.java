@@ -9,6 +9,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.wideplay.warp.persist.PersistenceService;
+import com.wideplay.warp.persist.Transactional;
 
 public abstract class PersistenceTest {
     @Inject
@@ -48,6 +49,7 @@ public abstract class PersistenceTest {
         }
     }
 
+    @Transactional
     @Before
     public void prepare() {
         final Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit, propetiesFileName);

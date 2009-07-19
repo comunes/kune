@@ -11,7 +11,6 @@ import org.ourproject.kune.platf.client.dto.TagCountDTO;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -25,7 +24,6 @@ public class TagsSummaryPresenterTest {
     public void before() {
         final Session session = Mockito.mock(Session.class);
         final StateManager stateManager = Mockito.mock(StateManager.class);
-        final WsThemeManager theme = Mockito.mock(WsThemeManager.class);
         final SiteSearcher searcher = Mockito.mock(SiteSearcher.class);
         final Provider searcherProvider = Mockito.mock(Provider.class);
         Mockito.when(searcherProvider.get()).thenReturn(searcher);
@@ -44,7 +42,7 @@ public class TagsSummaryPresenterTest {
     @Test
     public void withTagsViewFalse() {
         final StateContainerDTO state = new StateContainerDTO();
-        ArrayList<TagCountDTO> list = new ArrayList<TagCountDTO>();
+        final ArrayList<TagCountDTO> list = new ArrayList<TagCountDTO>();
         state.setTagCloudResult(new TagCloudResultDTO(list, 0, 0));
         tagsSummaryPresenter.setState(state);
         Mockito.verify(view).setVisible(false);
@@ -53,7 +51,7 @@ public class TagsSummaryPresenterTest {
     @Test
     public void withTagsViewVisible() {
         final StateContainerDTO state = new StateContainerDTO();
-        ArrayList<TagCountDTO> list = new ArrayList<TagCountDTO>();
+        final ArrayList<TagCountDTO> list = new ArrayList<TagCountDTO>();
         list.add(new TagCountDTO("abc", 1L));
         state.setTagCloudResult(new TagCloudResultDTO(list, 0, 0));
         tagsSummaryPresenter.setState(state);

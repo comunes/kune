@@ -13,12 +13,15 @@ import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.access.AccessRol;
 
+import com.wideplay.warp.persist.Transactional;
+
 public class AuthorizatedMethodInterceptorTest extends IntegrationTest {
 
     private AuthorizatedMethodInterceptor auth;
     private MethodInvocation invocation;
     private Authorizated authAnnotation;
 
+    @Transactional
     @Before
     public void before() {
         auth = new AuthorizatedMethodInterceptor();

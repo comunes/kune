@@ -49,11 +49,11 @@ public class ChatServerTool implements ServerTool {
         this.containerManager = containerManager;
     }
 
-    public void checkTypesBeforeContainerCreation(String parentTypeId, String typeId) {
+    public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
         checkContainerTypeId(parentTypeId, typeId);
     }
 
-    public void checkTypesBeforeContentCreation(String parentTypeId, String typeId) {
+    public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
         if (!parentTypeId.equals(TYPE_ROOM)) {
             throw new ContainerNotPermittedException();
         }
@@ -85,7 +85,6 @@ public class ChatServerTool implements ServerTool {
     }
 
     public void onCreateContent(final Content content, final Container parent) {
-
     }
 
     @Inject

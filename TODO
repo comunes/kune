@@ -74,6 +74,30 @@ TODO-list for kune -*- mode: org; -*-
    "Because the Preferences API is back-end neutral, you need not care whether the data are stored in files, database tables, or a platform-specific storage such as the Windows Registry. In fact, you don't want to care, because the situation may differ across varying platforms, or even across implementations on the same platform."
    More links:
    http://stackoverflow.com/questions/194349/what-is-the-proper-way-to-store-apps-conf-data-in-java
+
+   Property
+      name
+      PropertyGroup pGroup
+      PropertySubgroup sGroup
+
+   PropertyGroup implements HasId
+      String name
+
+   PropertySubGroup implements HasId
+      String name
+
+   PropertySetted extends Property
+      String value
+
+   Properties
+      List<PropertySetted> list
+
+   User
+      Properties
+
+   Group
+      Properties
+ 
 ** vjrj Styling braimstorming
 *** layouts
     - name :: greenforrest

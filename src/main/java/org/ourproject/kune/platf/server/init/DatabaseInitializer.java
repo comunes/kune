@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.server.init;
 
+import java.util.ArrayList;
 import java.util.TimeZone;
 
 import javax.persistence.NoResultException;
@@ -14,15 +15,22 @@ import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.domain.Property;
+import org.ourproject.kune.platf.server.domain.PropertyGroup;
+import org.ourproject.kune.platf.server.domain.PropertySubgroup;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
+import org.ourproject.kune.platf.server.manager.PropertyManager;
+import org.ourproject.kune.platf.server.manager.PropertySubgroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
+import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
@@ -36,12 +44,17 @@ public class DatabaseInitializer {
     private final I18nCountryManager countryManager;
     private final I18nTranslationManager translationManager;
     private final ContentManager contentManager;
+    private final PropertyManager propertyManager;
+    private final PropertyGroupManager propGroupManager;
+    private final PropertySubgroupManager propSubgroupManager;
 
     @Inject
     public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
             final GroupManager groupManager, final LicenseManager licenseManager,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final I18nTranslationManager translationManager, final ContentManager contentManager) {
+            final I18nTranslationManager translationManager, final ContentManager contentManager,
+            final PropertyManager propertyManager, final PropertyGroupManager propGroupManager,
+            final PropertySubgroupManager propSubgroupManager) {
         this.properties = properties;
         this.userManager = userManager;
         this.groupManager = groupManager;
@@ -50,6 +63,9 @@ public class DatabaseInitializer {
         this.countryManager = countryManager;
         this.translationManager = translationManager;
         this.contentManager = contentManager;
+        this.propertyManager = propertyManager;
+        this.propGroupManager = propGroupManager;
+        this.propSubgroupManager = propSubgroupManager;
     }
 
     public void createOthers() {
@@ -78,6 +94,7 @@ public class DatabaseInitializer {
     public void initDatabase() throws Exception {
         createOthers();
         createLicenses();
+        createProperties();
         createDefUsersGroup();
     }
 
@@ -179,5 +196,28 @@ public class DatabaseInitializer {
                 "This license grant the recipients of a computer program the rights of the free software definition and uses copyleft to ensure the freedoms are preserved, even when the work is changed or added to.",
                 "http://www.gnu.org/licenses/gpl.html", false, true, false, "", "images/lic/gnu-gpl.gif");
         licenseManager.persist(license);
+    }
+
+    private void createProperties() {
+        final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
+        final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
+        propGroupManager.persist(userProps);
+        propGroupManager.persist(groupProps);
+        final PropertySubgroup userXmppProps = new PropertySubgroup("user-xmpp");
+        propSubgroupManager.persist(userXmppProps);
+
+        final Property colorProp = new Property("xmpp_color", "Choose your color", Property.Type.STRING, true, "blue",
+                userProps, userXmppProps);
+        final ArrayList<String> subValues = new ArrayList<String>();
+        subValues.add(SubscriptionMode.autoAcceptAll.toString());
+        subValues.add(SubscriptionMode.autoRejectAll.toString());
+        subValues.add(SubscriptionMode.manual.toString());
+        final Property subProp = new Property("xmpp_subcriptionmode", "New buddies options", Property.Type.ENUM, true,
+                SubscriptionMode.manual.toString(), subValues, userProps, userXmppProps);
+        final Property unanavProp = new Property("xmpp_unanavailableitemsvisible", "Show unavailable buddies",
+                Property.Type.BOOL, true, Boolean.toString(true), userProps, userXmppProps);
+        propertyManager.persist(colorProp);
+        propertyManager.persist(subProp);
+        propertyManager.persist(unanavProp);
     }
 }

@@ -23,6 +23,7 @@ import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 
 import com.google.inject.Inject;
+import com.wideplay.warp.persist.Transactional;
 
 public class DatabaseInitializationTest {
     @Inject
@@ -52,12 +53,13 @@ public class DatabaseInitializationTest {
      */
     @Test
     public void caseSensitive() {
-        Content defaultContent = defaultGroup.getDefaultContent();
+        final Content defaultContent = defaultGroup.getDefaultContent();
         assertTrue(contentManager.findIfExistsTitle(defaultContent.getContainer(), "Welcome to kune demo"));
         assertTrue(!contentManager.findIfExistsTitle(defaultContent.getContainer(), "welcome to kune Demo"));
         assertTrue(!contentManager.findIfExistsTitle(defaultContent.getContainer(), "Welcome to kune demo "));
     }
 
+    @Transactional
     @Before
     public void init() {
         new IntegrationTestHelper(this);
@@ -95,7 +97,7 @@ public class DatabaseInitializationTest {
         final ToolConfiguration chatToolConfig = defaultGroup.getToolConfiguration(ChatServerTool.NAME);
         assertNotNull(chatToolConfig);
         assertTrue(chatToolConfig.isEnabled());
-        List<String> enabledTools = groupManager.findEnabledTools(defaultGroup.getId());
+        final List<String> enabledTools = groupManager.findEnabledTools(defaultGroup.getId());
         assertNotNull(enabledTools);
         assertTrue(enabledTools.size() > 0);
     }

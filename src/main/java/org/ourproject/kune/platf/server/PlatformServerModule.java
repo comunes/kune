@@ -59,6 +59,11 @@ import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.PropertiesManager;
+import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
+import org.ourproject.kune.platf.server.manager.PropertyManager;
+import org.ourproject.kune.platf.server.manager.PropertySettedManager;
+import org.ourproject.kune.platf.server.manager.PropertySubgroupManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
@@ -77,6 +82,11 @@ import org.ourproject.kune.platf.server.manager.impl.I18nCountryManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nLanguageManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nTranslationManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.LicenseManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.PropertiesManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.PropertyGroupManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.PropertyManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.PropertySettedManagerDefault;
+import org.ourproject.kune.platf.server.manager.impl.PropertySubgroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.RateManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.TagManagerDefault;
@@ -143,6 +153,11 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(CommentManager.class).to(CommentManagerDefault.class);
         bind(FileManager.class).to(FileManagerDefault.class);
         bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
+        bind(PropertyManager.class).to(PropertyManagerDefault.class);
+        bind(PropertySettedManager.class).to(PropertySettedManagerDefault.class);
+        bind(PropertyGroupManager.class).to(PropertyGroupManagerDefault.class);
+        bind(PropertySubgroupManager.class).to(PropertySubgroupManagerDefault.class);
+        bind(PropertiesManager.class).to(PropertiesManagerDefault.class);
     }
 
     private void bindRPC() {

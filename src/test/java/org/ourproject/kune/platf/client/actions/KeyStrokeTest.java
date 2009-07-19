@@ -14,7 +14,7 @@ public class KeyStrokeTest {
 
     @Test
     public void altS() {
-        final KeyStroke key = KeyStroke.getKeyStroke('S', Keyboard.MODIFIER_ALT);
+        final KeyStroke key = KeyStroke.getKeyStroke(Character.valueOf('S'), Keyboard.MODIFIER_ALT);
         assertEquals(" (Alt+S)", key.toString());
     }
 

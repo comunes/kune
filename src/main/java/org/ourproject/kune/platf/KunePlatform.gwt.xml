@@ -18,6 +18,7 @@
         <when-type-is
             class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl" />
         <when-property-is name="user.agent" value="ie6" />
+        <when-property-is name="user.agent" value="ie8" />
     </replace-with>
 
     <!-- Mozilla-specific implementation -->

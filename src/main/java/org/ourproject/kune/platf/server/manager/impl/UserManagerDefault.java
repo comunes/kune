@@ -38,9 +38,12 @@ import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import org.ourproject.kune.platf.server.domain.Properties;
+import org.ourproject.kune.platf.server.domain.PropertyGroup;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
+import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
 import org.ourproject.kune.platf.server.sn.UserBuddiesData;
@@ -57,11 +60,14 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     private final XmppManager xmppManager;
     private final ChatProperties properties;
     private final I18nTranslationService i18n;
+    private final PropertyGroupManager propGroupManager;
+    private PropertyGroup userPropGroup;
 
     @Inject
     public UserManagerDefault(final Provider<EntityManager> provider, final User finder,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n) {
+            final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n,
+            final PropertyGroupManager propGroupManager) {
         super(provider, User.class);
         this.finder = finder;
         this.languageManager = languageManager;
@@ -69,17 +75,22 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         this.xmppManager = xmppManager;
         this.properties = properties;
         this.i18n = i18n;
+        this.propGroupManager = propGroupManager;
     }
 
     public User createUser(final String shortName, final String longName, final String email, final String passwd,
             final String langCode, final String countryCode, final String timezone) throws I18nNotFoundException {
         try {
-            I18nLanguage language = languageManager.findByCode(langCode);
-            I18nCountry country = countryManager.findByCode(countryCode);
-            TimeZone tz = TimeZone.getTimeZone(timezone);
-            User user = new User(shortName, longName, email, passwd, language, country, tz);
+            final I18nLanguage language = languageManager.findByCode(langCode);
+            final I18nCountry country = countryManager.findByCode(countryCode);
+            final TimeZone tz = TimeZone.getTimeZone(timezone);
+            if (userPropGroup == null) {
+                userPropGroup = propGroupManager.find(User.PROPS_ID);
+            }
+            final User user = new User(shortName, longName, email, passwd, language, country, tz, new Properties(
+                    userPropGroup));
             return user;
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             throw new I18nNotFoundException();
         }
     }
@@ -108,21 +119,21 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         // independent.
         // In the future cache this.
         final String domain = "@" + properties.getDomain();
-        UserBuddiesData buddiesData = new UserBuddiesData();
-        User user = finder.getByShortName(shortName);
-        ChatConnection connection = xmppManager.login(user.getShortName() + domain, user.getPassword(), "kserver");
-        Collection<RosterEntry> roster = xmppManager.getRoster(connection);
+        final UserBuddiesData buddiesData = new UserBuddiesData();
+        final User user = finder.getByShortName(shortName);
+        final ChatConnection connection = xmppManager.login(user.getShortName() + domain, user.getPassword(), "kserver");
+        final Collection<RosterEntry> roster = xmppManager.getRoster(connection);
         xmppManager.disconnect(connection);
-        for (RosterEntry entry : roster) {
+        for (final RosterEntry entry : roster) {
             if (entry.getType().equals(ItemType.both)) {
                 // only show buddies with subscription 'both'
-                int index = entry.getUser().indexOf(domain);
+                final int index = entry.getUser().indexOf(domain);
                 if (index > 0) {
                     // local user
                     try {
-                        User buddie = finder.getByShortName(entry.getUser().substring(0, index));
+                        final User buddie = finder.getByShortName(entry.getUser().substring(0, index));
                         buddiesData.getBuddies().add(buddie);
-                    } catch (NoResultException e) {
+                    } catch (final NoResultException e) {
                         // No existent buddie, skip
                     }
                 } else {
@@ -138,10 +149,10 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         User user;
         try {
             user = finder.getByShortName(nickOrEmail);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             try {
                 user = finder.getByEmail(nickOrEmail);
-            } catch (NoResultException e2) {
+            } catch (final NoResultException e2) {
                 return null;
             }
         }
@@ -166,12 +177,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
 
     public SearchResult<User> search(final String search, final Integer firstResult, final Integer maxResults) {
-        MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name", "shortName" },
+        final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name", "shortName" },
                 new StandardAnalyzer());
         Query query;
         try {
             query = parser.parse(search);
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             throw new ServerManagerException("Error parsing search", e);
         }
         return super.search(query, firstResult, maxResults);

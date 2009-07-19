@@ -41,6 +41,8 @@ public class RTESavingEditorPresenterTest {
         final ImageResource img = Mockito.mock(ImageResource.class);
         Mockito.when(img.getName()).thenReturn("save");
         Mockito.when(imgResources.save()).thenReturn(img);
+        Mockito.when(imgResources.fontheight()).thenReturn(img);
+        Mockito.when(imgResources.charfontname()).thenReturn(img);
         timer = Mockito.mock(TimerWrapper.class);
         view = Mockito.mock(RTESavingEditorView.class);
 
@@ -95,7 +97,6 @@ public class RTESavingEditorPresenterTest {
     @Test
     public void initialEditWithEditionAndSave() {
         presenter.edit("Text to edit", saveListener, cancelListener);
-        final String textModified = "Text modified";
         presenter.onEdit();
         presenter.onDoSave();
         presenter.onSavedSuccessful();
@@ -106,7 +107,6 @@ public class RTESavingEditorPresenterTest {
     @Test
     public void testSavePendingAndCancel() {
         presenter.edit("Text to edit", saveListener, cancelListener);
-        final String textModified = "Text modified";
         presenter.onEdit();
         presenter.onCancel();
         presenter.onCancelConfirmed();
@@ -117,7 +117,6 @@ public class RTESavingEditorPresenterTest {
     @Test
     public void testSavePendingAndSaveFails() {
         presenter.edit("Text to edit", saveListener, cancelListener);
-        final String textModified = "Text modified";
         presenter.onEdit();
         presenter.onDoSave();
         presenter.onSaveFailed();

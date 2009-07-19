@@ -1,24 +1,24 @@
 =TROUBLESHOOTING=
 
-==Server debug==
+== Server debug ==
 
 Server: debug with jetty in eclipse:
 http://docs.codehaus.org/display/JETTY/Debugging+with+the+Maven+Jetty+Plugin+inside+Eclipse
 
-==Client debug==
+== Client debug ==
 
 Client code: you can debug with gwt hosted mode in eclipse (see DEV-GUIDE for hosted mode instructions).
 
-==Firebug and client log levels==
+== Firebug and client log levels ==
 
 To increase client logging add ?log_level=DEBUG# to the url and use firebug firefox extension to see the output.
 
-==Emite troubleshooting==
+== Emite troubleshooting ==
 
 See:
 http://code.google.com/p/emite/wiki/Troubleshooting
 
-==Liquibase==
+== Liquibase ==
 
 === Checksum errors ===
 
@@ -26,3 +26,23 @@ Migration Failed: Validation Failed:1 change sets failed MD5Sum Check     src/ma
 
 Don't try to update the liquibase changelogs you have already use. Better create new ones to delete, update, and so on. If you are developing and want to clear the checksums, you can use the command "clearCheckSums". See script/liquibase-* and http://www.liquibase.org/manual/command_line
 
+== Lucene ==
+
+=== Indexes problems during upgrades ===
+
+If you get errors like:
+
+org.ourproject.kune.platf.server.ServerException: Error starting persistence service
+(...)
+Caused by: org.hibernate.search.SearchException: Unable to open IndexWriter for class org.ourproject.kune.platf.server.domain.User
+(...)
+Caused by: org.apache.lucene.index.CorruptIndexException: Unknown format version: -7
+
+The indexes in /var/lib/kune/lucen/kune*/indexes/ are not compatible. For the moment the only workaround we now it's to delete the indexes.
+
+== JUnit ==
+
+Running all the Kune test from eclipse I get connection pool exceptions like:
+   Connections could not be acquired from the underlying database
+
+We have problems testing all test together from eclipse and using real db (not the h2 memory db)

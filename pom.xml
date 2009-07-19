@@ -12,7 +12,7 @@
   <name>kune</name>
   <url>http://kune.ourproject.org</url>
   <properties>
-    <gwtVersion>1.6.4</gwtVersion>
+    <gwtVersion>1.7.0</gwtVersion>
   </properties>
   <dependencies>
     <!-- guice -->
@@ -66,7 +66,6 @@
       <version>march-02-2009</version>
       <scope>provided</scope>
     </dependency>
-
     <!--
       <dependency> <groupId>com.extjs</groupId>
       <artifactId>gxt</artifactId> <version>1.0-beta2</version>
@@ -90,12 +89,12 @@
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
       <artifactId>gwt-log</artifactId>
-      <version>2.6.0</version>
+      <version>2.6.2</version>
     </dependency>
     <dependency>
       <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
       <artifactId>gwt-voices</artifactId>
-      <version>1.5.5</version>
+      <version>1.6.0</version>
     </dependency>
 
     <!-- utilities -->
@@ -121,9 +120,9 @@
     </dependency>
     <dependency>
       <groupId>org.xwiki.platform</groupId>
-      <!-- https://yui-ext.com/forum/showthread.php?t=5762 -->
       <artifactId>xwiki-web-gwt-dom</artifactId>
-      <version>2.0-SNAPSHOT-g164</version>
+      <version>2.0-SNAPSHOT</version>
+      <!-- <version>2.0-SNAPSHOT-g164</version> -->
     </dependency>
 
     <!-- xmpp -->
@@ -159,27 +158,32 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-search</artifactId>
-      <version>3.0.0.GA</version>
+      <version>3.1.0.GA</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate</artifactId>
-      <version>3.2.5.ga</version>
+      <version>3.2.6.ga</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-annotations</artifactId>
-      <version>3.3.0.ga</version>
+      <version>3.4.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>3.0.0.ga</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>3.3.1.ga</version>
+      <version>3.4.0.GA</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-tools</artifactId>
-      <version>3.2.0.beta9a</version>
+      <version>3.2.3.GA</version>
     </dependency>
     <dependency>
       <groupId>c3p0</groupId>
@@ -195,6 +199,11 @@
       <groupId>com.wideplay</groupId>
       <artifactId>warp-persist</artifactId>
       <version>1.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.5.2</version>
     </dependency>
 
     <!-- REST: xml and json (stax) -->
@@ -219,7 +228,6 @@
       <version>2.1</version>
       <classifier>jdk15</classifier>
     </dependency>
-
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
@@ -249,7 +257,6 @@
     </dependency>
 
     <!-- db upgrades -->
-
     <dependency>
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
@@ -273,7 +280,7 @@
     </dependency>
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
-  <artifactId>maven-jetty-plugin</artifactId>
+      <artifactId>maven-jetty-plugin</artifactId>
       <!--
         <artifactId>jetty-maven-plugin</artifactId>
         <version>7.0.0.1beta0</version>
@@ -281,7 +288,6 @@
       <version>6.1.5</version>
       <scope>provided</scope>
     </dependency>
-
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
@@ -323,7 +329,6 @@
       <version>0.9.4</version>
     </dependency>
   </dependencies>
-
   <!--
     http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html
   -->
@@ -343,7 +348,6 @@
       </releases>
     </pluginRepository>
   </pluginRepositories>
-
   <repositories>
     <repository>
       <id>Codehaus Snapshots</id>
@@ -487,15 +491,9 @@
           <generatorRootClasses>
             <value>org.ourproject.kune.MyBean</value>
           </generatorRootClasses>
-          <generatorDestinationPackage>
-            org.ourproject.kune.app.Kune
-          </generatorDestinationPackage>
-          <generateGettersAndSetters>
-            true
-          </generateGettersAndSetters>
-          <generatePropertyChangeSupport>
-            true
-          </generatePropertyChangeSupport>
+          <generatorDestinationPackage> org.ourproject.kune.app.Kune </generatorDestinationPackage>
+          <generateGettersAndSetters> true </generateGettersAndSetters>
+          <generatePropertyChangeSupport> true </generatePropertyChangeSupport>
         </configuration>
         <executions>
           <execution>
@@ -525,11 +523,11 @@
       </plugin>
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
-          <artifactId>maven-jetty-plugin</artifactId>
-          <version>6.1.5</version>
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>6.1.5</version>
         <!--
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>7.0.0.1beta0</version>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>7.0.0.1beta0</version>
         -->
         <configuration>
           <contextPath>/</contextPath>
@@ -559,8 +557,7 @@
             <phase>process-resources</phase>
             <configuration>
               <changeLogFile>
-                src/main/resources/db/liquibase_changelog.xml
-              </changeLogFile>
+                src/main/resources/db/liquibase_changelog.xml </changeLogFile>
               <driver>com.mysql.jdbc.Driver</driver>
               <url>jdbc:mysql://localhost/kune_dev</url>
               <username>kune</username>
@@ -603,12 +600,8 @@
                 <include>**/HorizontalLine.**</include>
                 <include>**/AbstractLabel.**</include>
                 <include>**/IconLabel.**</include>
-                <include>
-                  **/EditableIconLabel.**
-                </include>
-                <include>
-                  **/EditableClickListener.**
-                </include>
+                <include> **/EditableIconLabel.** </include>
+                <include> **/EditableClickListener.** </include>
                 <include>**/KuneStringUtils.**</include>
                 <include>**/IconHyperlink*.**</include>
                 <include>**/LabelWrapper*.**</include>
@@ -639,7 +632,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>selenium-maven-plugin</artifactId>
@@ -682,21 +674,12 @@
         </executions>
       </plugin>
       <!--
-      <plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>2.2</version>
-        <configuration>
-          <filesets>
-            <fileset>
-              <directory>src/main/webapp/gwt/</directory>
-              <includes>
-                <include>**/org.ourproject.kune.app.Kune*</include>
-                <followSymlinks>false</followSymlinks>
-              </includes>
-            </fileset>
-          </filesets>
-        </configuration>
-      </plugin>
+        <plugin> <artifactId>maven-clean-plugin</artifactId>
+        <version>2.2</version> <configuration> <filesets> <fileset>
+        <directory>src/main/webapp/gwt/</directory> <includes>
+        <include>**/org.ourproject.kune.app.Kune*</include>
+        <followSymlinks>false</followSymlinks> </includes> </fileset>
+        </filesets> </configuration> </plugin>
       -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -736,7 +719,6 @@
       </resource>
     </resources>
   </build>
-
   <reporting>
     <plugins>
       <plugin>
@@ -764,12 +746,9 @@
         <configuration>
           <systemProperties>
             <property>
-              <name>
-                net.sourceforge.cobertura.datafile
-              </name>
+              <name> net.sourceforge.cobertura.datafile </name>
               <value>
-                ${project.reporting.directory}/cobertura/cobertura.ser
-              </value>
+                ${project.reporting.directory}/cobertura/cobertura.ser </value>
             </property>
           </systemProperties>
           <forkMode>pertest</forkMode>

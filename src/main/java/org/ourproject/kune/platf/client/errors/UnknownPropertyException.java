@@ -17,19 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.chat.server;
+package org.ourproject.kune.platf.client.errors;
 
-import com.google.inject.AbstractModule;
+public class UnknownPropertyException extends DefaultException {
+    private static final long serialVersionUID = -5921396887476497824L;
 
-public class ChatServerModule extends AbstractModule {
-
-    @Override
-    public void configure() {
-        // To debug Smack, descomment this
-        // XMPPConnection.DEBUG_ENABLED = true;
-
-        bind(ChatServerTool.class).asEagerSingleton();
-
+    public UnknownPropertyException(final String message) {
+        super(message);
     }
-
 }

@@ -30,50 +30,45 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.log4j.PropertyConfigurator;
-import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.server.KunePersistenceService;
-import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 import org.ourproject.kune.rack.ContainerListener;
 
 import com.google.inject.Inject;
 
-class KuneContainerListener implements ContainerListener {
-    KunePersistenceService persistenceService;
-    ServerToolRegistry toolRegistry;
-    DocumentServerTool documentTool;
-    // @PMD:REVIEWED:LoggerIsNotStaticFinal: by vjrj on 21/05/09 16:55
-    Logger logger;
+public class KuneContainerListener implements ContainerListener {
+    private final KunePersistenceService persistenceService;
+    private final Logger logger; // NOPMD by vjrj on 16/07/09 22:38
 
     @Inject
-    public KuneContainerListener(final KunePersistenceService persistenceService,
-            final ServerToolRegistry toolRegistry, final DocumentServerTool documentTool, final Logger logger) {
+    public KuneContainerListener(final KunePersistenceService persistenceService, final Logger logger) {
         this.persistenceService = persistenceService;
-        this.toolRegistry = toolRegistry;
-        this.documentTool = documentTool;
         this.logger = logger;
+    }
+
+    public Logger getLogger() {
+        return logger;
     }
 
     public void start() {
         configureLog4j();
         logger.log(Level.INFO, "starting Kune...");
-        toolRegistry.register(documentTool);
         persistenceService.start();
         logger.log(Level.INFO, "Kune server started");
     }
 
     public void stop() {
-        logger.log(Level.INFO, "stoping Kune...");
-        logger.log(Level.INFO, "Kune server stoped");
+        logger.log(Level.INFO, "stopping Kune...");
+        logger.log(Level.INFO, "Kune server stopped");
     }
 
     private void configureLog4j() {
         try {
-            Properties properties = new Properties();
-            InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(
+            final Properties properties = new Properties();
+            final InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(
                     "log4j.dev.properties");
             properties.load(input);
             PropertyConfigurator.configure(properties);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }

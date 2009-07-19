@@ -24,6 +24,8 @@ import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 public interface Manager<T, X> {
 
+    void clear();
+
     T find(X id);
 
     T merge(T entity);
@@ -31,6 +33,8 @@ public interface Manager<T, X> {
     T persist(T entity);
 
     void reIndex();
+
+    void remove(T entity);
 
     SearchResult<T> search(final String query, final String[] fields, final BooleanClause.Occur[] flags,
             final Integer firstResult, final Integer maxResults);

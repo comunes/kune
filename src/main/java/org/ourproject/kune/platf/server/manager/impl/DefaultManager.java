@@ -47,6 +47,10 @@ public abstract class DefaultManager<T, K> {
         log = LogFactory.getLog(entityClass);
     }
 
+    public void clear() {
+        getEntityManager().clear();
+    }
+
     public T find(final Long primaryKey) {
         return getEntityManager().find(entityClass, primaryKey);
     }
@@ -81,6 +85,10 @@ public abstract class DefaultManager<T, K> {
             fullTextEm.index(e);
         }
         fullTextEm.getSearchFactory().optimize(entityClass);
+    }
+
+    public void remove(final T entity) {
+        getEntityManager().remove(entity);
     }
 
     public SearchResult<T> search(final Query query) {

@@ -33,6 +33,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -55,6 +57,7 @@ public class User implements HasId {
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
     public static final User UNKNOWN_USER = new User();
+    public static final String PROPS_ID = "userprops";
 
     public static boolean isKnownUser(final User user) {
         return !user.equals(UNKNOWN_USER);
@@ -111,12 +114,21 @@ public class User implements HasId {
     @Basic
     private Long lastLogin;
 
+    @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Properties properties;
+
     public User() {
-        this(null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null);
     }
 
     public User(final String shortName, final String longName, final String email, final String passwd,
             final I18nLanguage language, final I18nCountry country, final TimeZone timezone) {
+        this(shortName, longName, email, passwd, language, country, timezone, null);
+    }
+
+    public User(final String shortName, final String longName, final String email, final String passwd,
+            final I18nLanguage language, final I18nCountry country, final TimeZone timezone, final Properties properties) {
         this.shortName = shortName;
         this.name = longName;
         this.email = email;
@@ -129,6 +141,7 @@ public class User implements HasId {
         buddiesVisibility = UserBuddiesVisibility.anyone;
         this.createdOn = System.currentTimeMillis();
         this.lastLogin = null;
+        this.properties = properties;
     }
 
     @Finder(query = "from User")
@@ -190,6 +203,10 @@ public class User implements HasId {
         return password;
     }
 
+    public Properties getProperties() {
+        return properties;
+    }
+
     public String getShortName() {
         return shortName;
     }
@@ -244,6 +261,10 @@ public class User implements HasId {
         this.password = password;
         // http://www.dynamic.net.au/christos/crypt/
         // Use UnixCrypt (jetty)
+    }
+
+    public void setProperties(final Properties properties) {
+        this.properties = properties;
     }
 
     public void setShortName(final String shortName) {

@@ -35,7 +35,7 @@ import org.ourproject.kune.platf.client.ui.img.ImgResources;
 public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter implements SiteOptions {
 
     private SiteOptionsView view;
-    private MenuDescriptor menuDescriptor;
+    private final MenuDescriptor menuDescriptor;
     private final I18nTranslationService i18n;
     private final ImgResources img;
 
@@ -43,6 +43,8 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
         super();
         this.i18n = i18n;
         this.img = img;
+        menuDescriptor = new MenuDescriptor();
+        menuDescriptor.setStandalone(true);
     }
 
     @Override
@@ -61,8 +63,6 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
     }
 
     private void createActions() {
-        menuDescriptor = new MenuDescriptor();
-        menuDescriptor.setStandalone(true);
         view.addAction(menuDescriptor);
         view.setMenu(menuDescriptor);
         final MenuSeparatorDescriptor sep = new MenuSeparatorDescriptor(menuDescriptor);

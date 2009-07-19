@@ -21,6 +21,7 @@ import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
 
 import com.google.inject.Inject;
+import com.wideplay.warp.persist.Transactional;
 
 public class SocialNetworkManagerTest extends PersistenceTest {
     @Inject
@@ -163,6 +164,7 @@ public class SocialNetworkManagerTest extends PersistenceTest {
         socialNetworkManager.requestToJoin(user, group);
     }
 
+    @Transactional
     @Before
     public void init() {
         openTransaction();

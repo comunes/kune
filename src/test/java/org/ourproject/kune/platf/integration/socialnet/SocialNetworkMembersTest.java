@@ -14,6 +14,7 @@ import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 
 import com.google.inject.Inject;
+import com.wideplay.warp.persist.Transactional;
 
 public class SocialNetworkMembersTest extends IntegrationTest {
     @Inject
@@ -25,6 +26,7 @@ public class SocialNetworkMembersTest extends IntegrationTest {
 
     private Group group;
 
+    @Transactional
     @Before
     public void init() {
         new IntegrationTestHelper(this);

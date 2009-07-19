@@ -14,7 +14,7 @@
       <property name="hibernate.format_sql" value="false" />
       <property name="use_sql_comments" value="true" />
       <property name="hibernate.dialect"
-        value="org.hibernate.dialect.MySQL5Dialect" />
+        value="org.hibernate.dialect.MySQLInnoDBDialect" />
       <property name="hibernate.connection.driver_class"
         value="com.mysql.jdbc.Driver" />
       <property name="hibernate.connection.url"
@@ -22,10 +22,11 @@
       <property name="hibernate.connection.username" value="kune" />
       <property name="hibernate.connection.password" value="db4kune" />
       <property name="hibernate.hbm2ddl.auto" value="update" />
+      <!-- https://www.hibernate.org/214.html -->
       <property name="hibernate.c3p0.min_size" value="5" />
-      <property name="hibernate.c3p0.max_size" value="20" />
-      <property name="hibernate.c3p0.timeout" value="300" />
-      <property name="hibernate.c3p0.max_statements" value="50" />
+      <property name="hibernate.c3p0.max_size" value="50" />
+      <property name="hibernate.c3p0.timeout" value="100" />
+      <property name="hibernate.c3p0.max_statements" value="0" />
       <property name="hibernate.c3p0.idle_test_period" value="3000" />
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider" />
@@ -43,7 +44,7 @@
       <property name="hibernate.format_sql" value="false" />
       <property name="use_sql_comments" value="false" />
       <property name="hibernate.dialect"
-        value="org.hibernate.dialect.MySQL5Dialect" />
+        value="org.hibernate.dialect.MySQLInnoDBDialect" />
       <property name="hibernate.connection.driver_class"
         value="com.mysql.jdbc.Driver" />
       <property name="hibernate.connection.url"
@@ -52,9 +53,9 @@
       <property name="hibernate.connection.password" value="db4kune" />
       <property name="hibernate.hbm2ddl.auto" value="create" />
       <property name="hibernate.c3p0.min_size" value="5" />
-      <property name="hibernate.c3p0.max_size" value="20" />
-      <property name="hibernate.c3p0.timeout" value="300" />
-      <property name="hibernate.c3p0.max_statements" value="50" />
+      <property name="hibernate.c3p0.max_size" value="50" />
+      <property name="hibernate.c3p0.timeout" value="100" />
+      <property name="hibernate.c3p0.max_statements" value="0" />
       <property name="hibernate.c3p0.idle_test_period" value="3000" />
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider" />

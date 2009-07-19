@@ -49,10 +49,10 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     private static final long serialVersionUID = -4281058427935636238L;
 
     @Inject
-    GroupManager groupManager;
+    transient GroupManager groupManager;
 
     @Inject
-    I18nTranslationService i18n;
+    transient I18nTranslationService i18n;
 
     @Override
     protected void beforePostStart() {
