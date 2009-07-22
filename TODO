@@ -11,6 +11,9 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** Use hibernate cache
+   http://ehcache.sourceforge.net/documentation/openjpa_provider.html
+   http://ehcache.sourceforge.net/documentation/hibernate.html
 ** Do something with jetty/jruby alias issue
    http://jetty.mortbay.org/jetty5/faq/faq_s_400-Security_t_Aliases.html
 ** Use of webdriver instead of plain selenium
@@ -170,6 +173,7 @@ TODO-list for kune -*- mode: org; -*-
    2007-12-21 10:35:16,196 [btpool0-5] DEBUG - ContentManagerDefault.persist EXCEPTION => javax.persistence.EntityExistsException: org.hibernate.exception.ConstraintViolationException: could not insert: [org.ourproject.kune.platf.server.domain.Group]
    2007-12-21 10:35:16,197 [btpool0-5] DEBUG - ContentManagerDefault.createContent EXCEPTION => javax.persistence.Entity
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
+
 
 * MID-TERM
 ** TODO <v> karma, reputation, trust metrics:
