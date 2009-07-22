@@ -34,6 +34,7 @@ public interface ServerTool {
 
     /* Same constant in client */
     public static final String UPLOADEDFILE_SUFFIX = "uploaded";
+    public static final String WAVE_SUFFIX = "wave";
 
     void checkTypesBeforeContainerCreation(String parentTypeId, String typeId);
 

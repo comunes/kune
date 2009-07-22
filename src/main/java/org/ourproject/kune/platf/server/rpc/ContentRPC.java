@@ -98,7 +98,7 @@ public class ContentRPC implements ContentService, RPC {
     private final FinderService finderService;
 
     @Inject
-    public ContentRPC(FinderService finderService, final Provider<UserSession> userSessionProvider,
+    public ContentRPC(final FinderService finderService, final Provider<UserSession> userSessionProvider,
             final AccessService accessService, final AccessRightsService rightsService,
             final StateService stateService, final CreationService creationService, final GroupManager groupManager,
             final XmppManager xmppManager, final ContentManager contentManager,
@@ -156,11 +156,8 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public StateContentDTO addContent(final String userHash, final StateToken parentToken, final String title,
             final String typeId) throws DefaultException {
-        final User user = getCurrentUser();
-        final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
-                user, AccessRol.Editor);
-        final Content addedContent = creationService.createContent(title, "", user, container, typeId);
-        return getState(user, addedContent);
+        final String body = "";
+        return createContent(parentToken, title, typeId, body);
     }
 
     @Authenticated
@@ -199,6 +196,14 @@ public class ContentRPC implements ContentService, RPC {
             xmppManager.destroyRoom(connection, roomName);
             throw new GroupNotFoundException();
         }
+    }
+
+    @Authenticated
+    @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
+    @Transactional(type = TransactionType.READ_WRITE)
+    public StateContentDTO addWave(final String userHash, final StateToken parentToken, final String typeId,
+            final String waveId) throws DefaultException {
+        return createContent(parentToken, "Wave embeded test", typeId, waveId);
     }
 
     @Authenticated
@@ -263,7 +268,7 @@ public class ContentRPC implements ContentService, RPC {
         final Long contentId = ContentUtils.parseId(token.getDocument());
 
         if (isUserLoggedIn()) {
-            RateResult result = contentManager.rateContent(rater, contentId, value);
+            final RateResult result = contentManager.rateContent(rater, contentId, value);
             return mapper.map(result, RateResultDTO.class);
         } else {
             throw new AccessViolationException();
@@ -352,7 +357,7 @@ public class ContentRPC implements ContentService, RPC {
                 || status.equals(ContentStatusDTO.inTheDustbin)) {
             throw new AccessViolationException();
         }
-        Content content = contentManager.setStatus(ContentUtils.parseId(token.getDocument()),
+        final Content content = contentManager.setStatus(ContentUtils.parseId(token.getDocument()),
                 ContentStatus.valueOf(status.toString()));
         return getState(getCurrentUser(), content);
     }
@@ -362,7 +367,7 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public StateAbstractDTO setStatusAsAdmin(final String userHash, final StateToken token,
             final ContentStatusDTO status) {
-        Content content = contentManager.setStatus(ContentUtils.parseId(token.getDocument()),
+        final Content content = contentManager.setStatus(ContentUtils.parseId(token.getDocument()),
                 ContentStatus.valueOf(status.toString()));
         return getState(getCurrentUser(), content);
     }
@@ -390,6 +395,15 @@ public class ContentRPC implements ContentService, RPC {
         return mapper.map(comment, CommentDTO.class);
     }
 
+    private StateContentDTO createContent(final StateToken parentToken, final String title, final String typeId,
+            final String body) {
+        final User user = getCurrentUser();
+        final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
+                user, AccessRol.Editor);
+        final Content addedContent = creationService.createContent(title, body, user, container, typeId);
+        return getState(user, addedContent);
+    }
+
     private Container createFolder(final String groupShortName, final Long parentFolderId, final String title,
             final String typeId) throws DefaultException {
         final User user = getCurrentUser();
@@ -401,9 +415,9 @@ public class ContentRPC implements ContentService, RPC {
 
     @Authenticated(mandatory = false)
     @Authorizated(accessRolRequired = AccessRol.Viewer)
-    private StateAbstractDTO getContentOrDefContent(String userHash, StateToken stateToken, final User user,
-            final Content content) {
-        Long id = content.getId();
+    private StateAbstractDTO getContentOrDefContent(final String userHash, final StateToken stateToken,
+            final User user, final Content content) {
+        final Long id = content.getId();
         if (id != null) {
             // Content
             return mapState(stateService.create(user, content), user);
@@ -418,18 +432,18 @@ public class ContentRPC implements ContentService, RPC {
         return getUserSession().getUser();
     }
 
-    private StateContainerDTO getState(User user, Container container) {
-        StateContainer state = stateService.create(user, container);
+    private StateContainerDTO getState(final User user, final Container container) {
+        final StateContainer state = stateService.create(user, container);
         return mapState(state, user);
     }
 
-    private StateContentDTO getState(User user, Content content) {
-        StateContent state = stateService.create(user, content);
+    private StateContentDTO getState(final User user, final Content content) {
+        final StateContent state = stateService.create(user, content);
         return mapState(state, user);
     }
 
     private TagCloudResultDTO getSummaryTags(final Group group) {
-        TagCloudResult result = tagManager.getTagCloudResultByGroup(group);
+        final TagCloudResult result = tagManager.getTagCloudResultByGroup(group);
         return new TagCloudResultDTO(mapper.mapList(result.getTagCountList(), TagCountDTO.class), result.getMaxValue(),
                 result.getMinValue());
     }

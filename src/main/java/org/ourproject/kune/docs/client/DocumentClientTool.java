@@ -32,6 +32,7 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
     public static final String TYPE_FOLDER = NAME + "." + "folder";
     public static final String TYPE_DOCUMENT = NAME + "." + "doc";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
+    public static final String TYPE_WAVE = NAME + "." + FoldableAbstractClientTool.WAVE_SUFFIX;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,

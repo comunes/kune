@@ -26,6 +26,8 @@ import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.RoundedPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.allen_sauer.gwt.log.client.Log;
+import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HTML;
@@ -33,6 +35,9 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.wave.client.WaveWidget;
+import com.google.gwt.wave.client.event.WaveLoadEvent;
+import com.google.gwt.wave.client.event.WaveLoadHandler;
 
 public abstract class FoldableContentPanel extends AbstractContentPanel implements AbstractContentView {
 
@@ -84,6 +89,20 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         final HTML html = new HTML(content);
         setDefStyle(html);
         setContent(html);
+    }
+
+    public void setWave(final String waveId, final Listener0 onLoaded) {
+        final WaveWidget waveWidget = new WaveWidget("http://wave.google.com/a/wavesandbox.com/");
+        waveWidget.setUIConfig("white", "black", "arial, sans", "10pt");
+        waveWidget.setHeight("100%");
+        waveWidget.addWaveLoadHandler(new WaveLoadHandler() {
+            public void onWaveLoad(final WaveLoadEvent event) {
+                Log.info("Wave '" + event.getWaveId() + "' loaded!");
+                onLoaded.onEvent();
+            }
+        });
+        waveWidget.loadWave(waveId);
+        setContent(waveWidget);
     }
 
     public void setWidgetAsContent(final Widget widget, final boolean setDefMargins) {

@@ -23,6 +23,7 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_ROOT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
+import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WAVE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentViewer;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
@@ -79,6 +80,8 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
         createNewContentAction(TYPE_DOCUMENT, "images/nav/page_add.png", i18n.t("New document"), parentMenuTitleCtx,
                 Position.ctx, TYPE_ROOT, TYPE_FOLDER);
+
+        createWaveAction(TYPE_WAVE, parentMenuTitleCtx, Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
         createTranslateAction(parentMenuTitle, TYPE_DOCUMENT, TYPE_FOLDER);
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);

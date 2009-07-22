@@ -581,6 +581,28 @@ public abstract class AbstractFoldableContentActions {
         return uploadMedia;
     }
 
+    protected ActionToolbarMenuAndItemDescriptor<StateToken> createWaveAction(final String waveFileType,
+            final String parentMenuTitle, final Position position, final String... registerInTypes) {
+        final ActionToolbarMenuAndItemDescriptor<StateToken> addWave = new ActionToolbarMenuAndItemDescriptor<StateToken>(
+                AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
+                    public void onEvent(final StateToken parentToken) {
+                        contentServiceProvider.get().addWave(session.getUserHash(), parentToken, waveFileType,
+                                "wavesandbox.com!w+NdlzA9PU%B", new AsyncCallbackSimple<StateContentDTO>() {
+                                    public void onSuccess(final StateContentDTO state) {
+                                        stateManager.setRetrievedState(state);
+                                    }
+                                });
+                    }
+                });
+        addWave.setTextDescription(i18n.t("Add Wave"));
+        addWave.setParentMenuTitle(parentMenuTitle);
+        addWave.setMustBeAuthenticated(true);
+        addWave.setParentSubMenuTitle(i18n.t("New"));
+        // addContent.setIconUrl(iconUrl);
+        register(addWave, position, registerInTypes);
+        return addWave;
+    }
+
     protected void downloadContent(final StateToken token) {
         fileDownloadProvider.get().downloadFile(token);
     }

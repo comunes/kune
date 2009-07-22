@@ -45,6 +45,7 @@ public class DocumentServerTool implements ServerTool {
     public static final String TYPE_FOLDER = NAME + "." + "folder";
     public static final String TYPE_DOCUMENT = NAME + "." + "doc";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
+    public static final String TYPE_WAVE = NAME + "." + ServerTool.WAVE_SUFFIX;
 
     public static final String ROOT_NAME = "documents";
 
@@ -62,11 +63,11 @@ public class DocumentServerTool implements ServerTool {
         this.i18n = translationService;
     }
 
-    public void checkTypesBeforeContainerCreation(String parentTypeId, String typeId) {
+    public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
         checkContainerTypeId(parentTypeId, typeId);
     }
 
-    public void checkTypesBeforeContentCreation(String parentTypeId, String typeId) {
+    public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
         checkContentTypeId(parentTypeId, typeId);
     }
 
@@ -125,9 +126,10 @@ public class DocumentServerTool implements ServerTool {
     }
 
     void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE)) {
+        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE) || typeId.equals(TYPE_WAVE)) {
             // ok valid content
             if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
+                    || (typeId.equals(TYPE_WAVE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
                     || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
                 // ok
             } else {

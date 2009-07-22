@@ -39,6 +39,7 @@ public class WikiViewerPresenter extends FoldableContentPresenter implements Wik
             final ContentActionRegistry actionRegistry, final Provider<FileDownloadUtils> downloadProvider,
             final Provider<MediaUtils> mediaUtils) {
         super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
+        setUploadType(WikiClientTool.UPLOADEDFILE_SUFFIX);
     }
 
     public void init(final WikiViewerView view) {
@@ -48,6 +49,5 @@ public class WikiViewerPresenter extends FoldableContentPresenter implements Wik
     @Override
     protected void setState(final StateContentDTO state) {
         super.setState(state);
-        setContent(state, WikiClientTool.TYPE_UPLOADEDFILE);
     }
 }

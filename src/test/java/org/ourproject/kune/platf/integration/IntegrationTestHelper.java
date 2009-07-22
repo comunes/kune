@@ -28,7 +28,7 @@ public class IntegrationTestHelper {
                         // memory
                         // test_db: use
                         // mysql
-                        bindConstant().annotatedWith(JpaUnit.class).to("test");
+                        bindConstant().annotatedWith(JpaUnit.class).to("test_db");
                         bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
                         bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
                     }

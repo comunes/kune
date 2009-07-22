@@ -32,10 +32,12 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 
 import com.calclab.suco.client.events.Listener;
+import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 
 public abstract class FoldableContentPresenter extends AbstractContentPresenter implements FoldableContent {
@@ -47,6 +49,9 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     private final Provider<FileDownloadUtils> downloadProvider;
     private final I18nTranslationService i18n;
     private final Provider<MediaUtils> mediaUtils;
+    private String uploadType;
+    private String waveType;
+    private final Listener0 onWaveLoaded;
 
     public FoldableContentPresenter(final String toolName, final StateManager stateManager, final Session session,
             final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
@@ -64,56 +69,46 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
                 setState(state);
             }
         });
+        onWaveLoaded = new Listener0() {
+            public void onEvent() {
+                NotifyUser.hideProgress();
+                NotifyUser.info("Wave loaded");
+            }
+        };
     }
 
     public String getToolName() {
         return toolName;
     }
 
+    public String getUploadType() {
+        return uploadType;
+    }
+
+    public String getWaveType() {
+        return waveType;
+    }
+
     public void refreshState() {
         setState(session.getContentState());
     }
 
-    protected void setContent(final StateContentDTO state, final String uploadedfileType) {
-        String typeId = state.getTypeId();
-        String contentBody = state.getContent();
-        StateToken token = state.getStateToken();
-        BasicMimeTypeDTO mimeType = state.getMimeType();
-        if (typeId.equals(uploadedfileType)) {
-            if (mimeType != null) {
-                FileDownloadUtils fileDownloadUtils = downloadProvider.get();
-                if (mimeType.isImage()) {
-                    view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
-                            ImageSize.sized), false);
-                } else if (mimeType.isPdf()) {
-                    view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
-                            ImageSize.sized), true);
-                } else if (mimeType.isMp3()) {
-                    view.setRawContent(mediaUtils.get().getMp3Embed(token));
-                } else if (mimeType.isOgg()) {
-                    view.setRawContent(mediaUtils.get().getOggEmbed(token));
-                } else if (mimeType.isFlv()) {
-                    view.setRawContent(mediaUtils.get().getFlvEmbed(token));
-                } else if (mimeType.isAvi()) {
-                    view.setRawContent(mediaUtils.get().getAviEmbed(token));
-                } else if (mimeType.isText()) {
-                    view.setContent(contentBody, true);
-                } else {
-                    view.setNoPreview();
-                }
-            } else {
-                view.setNoPreview();
-            }
+    public void setUploadType(final String uploadType) {
+        this.uploadType = uploadType;
+    }
+
+    public void setWaveType(final String waveType) {
+        this.waveType = waveType;
+    }
+
+    protected void setContent(final StateContentDTO state) {
+        final String typeId = state.getTypeId();
+        if (typeId.equals(getUploadType())) {
+            setUploadedContent(state);
+        } else if (typeId.equals(getWaveType())) {
+            setWaveContent(state);
         } else {
-            if ((contentBody == null || contentBody.length() == 0)) {
-                if (state.getContentRights().isEditable()) {
-                    view.setInfoMessage(i18n.t("There is no text in this page. Feel free to edit this page"));
-                } else {
-                    view.setInfoMessage(i18n.t("There is no text in this page"));
-                }
-            } else {
-                view.setRawContent(contentBody);
-            }
+            setNormalContent(state);
         }
         view.attach();
     }
@@ -121,7 +116,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     protected void setState(final StateAbstractDTO state) {
         toolbar.detach();
         if (state instanceof StateContainerDTO) {
-            StateContainerDTO stateCntCtx = (StateContainerDTO) state;
+            final StateContainerDTO stateCntCtx = (StateContainerDTO) state;
             if (stateCntCtx.getToolName().equals(toolName)) {
                 // This tool
                 if (stateCntCtx instanceof StateContentDTO) {
@@ -134,13 +129,13 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     }
 
     protected void setState(final StateContainerDTO state) {
-        ActionItemCollection<StateToken> collection = getActionCollection(state, state.getContainerRights());
+        final ActionItemCollection<StateToken> collection = getActionCollection(state, state.getContainerRights());
         setToolbar(collection);
         attach();
     }
 
     protected void setState(final StateContentDTO state) {
-        ActionItemCollection<StateToken> collection = getActionCollection(state, state.getContentRights());
+        final ActionItemCollection<StateToken> collection = getActionCollection(state, state.getContentRights());
         setToolbar(collection);
     }
 
@@ -150,11 +145,63 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
                 true);
     }
 
+    private String getContentBody(final StateContentDTO state) {
+        final String contentBody = state.getContent();
+        return contentBody;
+    }
+
+    private void setNormalContent(final StateContentDTO state) {
+        final String contentBody = getContentBody(state);
+        if ((contentBody == null || contentBody.length() == 0)) {
+            if (state.getContentRights().isEditable()) {
+                view.setInfoMessage(i18n.t("There is no text in this page. Feel free to edit this page"));
+            } else {
+                view.setInfoMessage(i18n.t("There is no text in this page"));
+            }
+        } else {
+            view.setRawContent(contentBody);
+        }
+    }
+
     private void setToolbar(final ActionItemCollection<StateToken> collection) {
         toolbar.disableMenusAndClearButtons();
         toolbar.addActions(collection, AbstractFoldableContentActions.CONTENT_TOPBAR);
-        ;
         toolbar.attach();
     }
 
+    private void setUploadedContent(final StateContentDTO state) {
+        final String contentBody = state.getContent();
+        final StateToken token = state.getStateToken();
+        final BasicMimeTypeDTO mimeType = state.getMimeType();
+        if (mimeType != null) {
+            final FileDownloadUtils fileDownloadUtils = downloadProvider.get();
+            if (mimeType.isImage()) {
+                view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
+                        ImageSize.sized), false);
+            } else if (mimeType.isPdf()) {
+                view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
+                        ImageSize.sized), true);
+            } else if (mimeType.isMp3()) {
+                view.setRawContent(mediaUtils.get().getMp3Embed(token));
+            } else if (mimeType.isOgg()) {
+                view.setRawContent(mediaUtils.get().getOggEmbed(token));
+            } else if (mimeType.isFlv()) {
+                view.setRawContent(mediaUtils.get().getFlvEmbed(token));
+            } else if (mimeType.isAvi()) {
+                view.setRawContent(mediaUtils.get().getAviEmbed(token));
+            } else if (mimeType.isText()) {
+                view.setContent(contentBody, true);
+            } else {
+                view.setNoPreview();
+            }
+        } else {
+            view.setNoPreview();
+        }
+    }
+
+    private void setWaveContent(final StateContentDTO state) {
+        NotifyUser.showProgressLoading();
+        final String waveId = getContentBody(state);
+        view.setWave(waveId, onWaveLoaded);
+    }
 }

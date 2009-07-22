@@ -39,6 +39,7 @@ public class BlogViewerPresenter extends FoldableContentPresenter implements Blo
             final ContentActionRegistry actionRegistry, final Provider<FileDownloadUtils> downloadProvider,
             final Provider<MediaUtils> mediaUtils) {
         super(BlogClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
+        setUploadType(BlogClientTool.TYPE_UPLOADEDFILE);
     }
 
     public void init(final BlogViewerView view) {
@@ -48,7 +49,7 @@ public class BlogViewerPresenter extends FoldableContentPresenter implements Blo
     @Override
     protected void setState(final StateContentDTO state) {
         super.setState(state);
-        super.setContent(state, BlogClientTool.TYPE_UPLOADEDFILE);
+        super.setContent(state);
     }
 
 }

@@ -40,6 +40,8 @@ public class DocumentViewerPresenter extends FoldableContentPresenter implements
             final Provider<MediaUtils> mediaUtils) {
         super(DocumentClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n,
                 mediaUtils);
+        setUploadType(DocumentClientTool.TYPE_UPLOADEDFILE);
+        setWaveType(DocumentClientTool.TYPE_WAVE);
     }
 
     public void init(final DocumentViewerView view) {
@@ -49,6 +51,6 @@ public class DocumentViewerPresenter extends FoldableContentPresenter implements
     @Override
     protected void setState(final StateContentDTO state) {
         super.setState(state);
-        setContent(state, DocumentClientTool.TYPE_UPLOADEDFILE);
+        setContent(state);
     }
 }

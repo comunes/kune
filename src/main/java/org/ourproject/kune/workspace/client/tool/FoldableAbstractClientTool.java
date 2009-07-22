@@ -26,6 +26,7 @@ import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     public static final String UPLOADEDFILE_SUFFIX = "uploaded";
+    public static final String WAVE_SUFFIX = "wave";
 
     protected final ContentCapabilitiesRegistry contentCapabilitiesRegistry;
 

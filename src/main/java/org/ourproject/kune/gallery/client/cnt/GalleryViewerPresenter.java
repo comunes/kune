@@ -40,6 +40,7 @@ public class GalleryViewerPresenter extends FoldableContentPresenter implements 
             final Provider<MediaUtils> mediaUtils) {
         super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n,
                 mediaUtils);
+        setUploadType(GalleryClientTool.TYPE_UPLOADEDFILE);
     }
 
     public void init(final GalleryViewerView view) {
@@ -49,7 +50,7 @@ public class GalleryViewerPresenter extends FoldableContentPresenter implements 
     @Override
     protected void setState(final StateContentDTO state) {
         super.setState(state);
-        setContent(state, GalleryClientTool.TYPE_UPLOADEDFILE);
+        setContent(state);
     }
 
 }

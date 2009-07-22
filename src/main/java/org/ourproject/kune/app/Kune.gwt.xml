@@ -56,4 +56,6 @@
 
     <!-- <set-property name="user.agent" value="gecko" /> -->
 
+    <inherits name='com.google.gwt.wave.Wave' />
+
 </module>

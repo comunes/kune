@@ -51,6 +51,9 @@ public interface ContentServiceAsync {
 
     void addRoom(String user, StateToken parentToken, String name, AsyncCallback<StateContainerDTO> callback);
 
+    void addWave(String userHash, StateToken parentToken, String waveFileType, String waveId,
+            AsyncCallback<StateContentDTO> asyncCallbackSimple);
+
     void delContent(String userHash, StateToken token, AsyncCallback<StateContentDTO> asyncCallback);
 
     void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);

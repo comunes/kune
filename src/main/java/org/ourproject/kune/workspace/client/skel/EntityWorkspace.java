@@ -61,8 +61,9 @@ public class EntityWorkspace {
         mainFitPanel = new Panel();
         mainFitPanel.setLayout(new FitLayout());
         mainFitPanel.setBorder(false);
+        mainFitPanel.setAutoScroll(false);
 
-        Panel mainAnchorLayout = new Panel();
+        final Panel mainAnchorLayout = new Panel();
         mainAnchorLayout.setLayout(new AnchorLayout());
         mainAnchorLayout.setBorder(false);
 
@@ -133,7 +134,7 @@ public class EntityWorkspace {
         contentWrap.add(contentBottomBar.getPanel(), new BorderLayoutData(RegionPosition.SOUTH));
         contextWrap.add(contextBottomBar.getPanel(), new BorderLayoutData(RegionPosition.SOUTH));
 
-        BorderLayoutData eastData = new BorderLayoutData(RegionPosition.EAST);
+        final BorderLayoutData eastData = new BorderLayoutData(RegionPosition.EAST);
         contextWrap.setWidth(175);
         eastData.setUseSplitTips(true);
         eastData.setCollapseModeMini(true);

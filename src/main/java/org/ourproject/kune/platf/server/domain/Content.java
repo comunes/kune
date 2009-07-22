@@ -95,6 +95,7 @@ public class Content implements HasStateToken {
     @Basic(optional = true)
     private Date publishedOn;
 
+    // @NotNull??
     private String typeId;
 
     @OneToMany(cascade = CascadeType.ALL)
