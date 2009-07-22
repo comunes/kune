@@ -15,11 +15,13 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.License;
+import org.ourproject.kune.platf.server.domain.PropertyGroup;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
+import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 
 import com.google.inject.Inject;
@@ -50,6 +52,8 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
     protected I18nLanguageManager languageManager;
     @Inject
     protected I18nCountryManager countryManager;
+    @Inject
+    protected PropertyGroupManager propGroupManager;
 
     protected User user;
     protected License defLicense;
@@ -77,6 +81,10 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
         assertEquals(0, userFinder.getAll().size());
         assertEquals(0, groupFinder.getAll().size());
         assertEquals(0, licenseFinder.getAll().size());
+        final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
+        final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
+        propGroupManager.persist(userProps);
+        propGroupManager.persist(groupProps);
         english = new I18nLanguage(Long.valueOf(1819), "English", "English", "en");
         languageManager.persist(english);
         gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western", ",");

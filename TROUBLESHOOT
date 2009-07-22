@@ -46,3 +46,9 @@ Running all the Kune test from eclipse I get connection pool exceptions like:
    Connections could not be acquired from the underlying database
 
 We have problems testing all test together from eclipse and using real db (not the h2 memory db)
+
+=== Too many files open ===
+
+If running all the Kune test you get errors about "Too many files open" see:
+http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
+about how to fix it in your system.

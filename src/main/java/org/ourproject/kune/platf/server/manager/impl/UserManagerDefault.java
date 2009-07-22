@@ -43,6 +43,7 @@ import org.ourproject.kune.platf.server.domain.PropertyGroup;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
+import org.ourproject.kune.platf.server.manager.PropertiesManager;
 import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
@@ -62,12 +63,13 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     private final I18nTranslationService i18n;
     private final PropertyGroupManager propGroupManager;
     private PropertyGroup userPropGroup;
+    private final PropertiesManager propManager;
 
     @Inject
     public UserManagerDefault(final Provider<EntityManager> provider, final User finder,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
             final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n,
-            final PropertyGroupManager propGroupManager) {
+            final PropertyGroupManager propGroupManager, final PropertiesManager propManager) {
         super(provider, User.class);
         this.finder = finder;
         this.languageManager = languageManager;
@@ -76,23 +78,29 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         this.properties = properties;
         this.i18n = i18n;
         this.propGroupManager = propGroupManager;
+        this.propManager = propManager;
     }
 
     public User createUser(final String shortName, final String longName, final String email, final String passwd,
             final String langCode, final String countryCode, final String timezone) throws I18nNotFoundException {
+        I18nLanguage language;
+        I18nCountry country;
+        TimeZone tz;
         try {
-            final I18nLanguage language = languageManager.findByCode(langCode);
-            final I18nCountry country = countryManager.findByCode(countryCode);
-            final TimeZone tz = TimeZone.getTimeZone(timezone);
-            if (userPropGroup == null) {
-                userPropGroup = propGroupManager.find(User.PROPS_ID);
-            }
-            final User user = new User(shortName, longName, email, passwd, language, country, tz, new Properties(
-                    userPropGroup));
-            return user;
+            language = languageManager.findByCode(langCode);
+            country = countryManager.findByCode(countryCode);
+            tz = TimeZone.getTimeZone(timezone);
         } catch (final NoResultException e) {
             throw new I18nNotFoundException();
         }
+        if (userPropGroup == null) {
+            userPropGroup = propGroupManager.find(User.PROPS_ID);
+        }
+        final Properties userProp = new Properties(userPropGroup);
+        propManager.persist(userProp);
+        final User user = new User(shortName, longName, email, passwd, language, country, tz, userProp);
+        return user;
+
     }
 
     @Override

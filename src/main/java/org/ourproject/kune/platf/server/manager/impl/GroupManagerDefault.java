@@ -30,6 +30,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
+import org.hibernate.exception.ConstraintViolationException;
 import org.ourproject.kune.platf.client.dto.GroupType;
 import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.client.errors.DefaultException;
@@ -153,7 +154,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
             initGroup(user, userGroup, wantPersonalHomepage ? serverToolRegistry.getToolsForUserKeys()
                     : ServerToolRegistry.emptyToolList);
             super.persist(user, User.class);
-        } catch (final EntityExistsException e) {
+        } catch (final ConstraintViolationException e) {
             throw new GroupNameInUseException();
         }
         return userGroup;
