@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
-import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
+import org.ourproject.kune.platf.client.ui.dialogs.ExtendedDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
@@ -55,7 +55,7 @@ import com.gwtext.client.widgets.form.TextArea;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.HorizontalLayout;
 
-public class NewGroupPanel extends BasicDialogExtended implements NewGroupView {
+public class NewGroupPanel extends ExtendedDialog implements NewGroupView {
     private static final String MARGIN_LEFT_105PX = "margin-left: 105px";
     private static final int LABEL_WIDTH = 100;
     public static final String SHORTNAME_FIELD = "k-ngp-short_name";

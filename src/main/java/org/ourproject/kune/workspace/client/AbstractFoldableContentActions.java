@@ -61,6 +61,7 @@ import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
+import org.ourproject.kune.workspace.client.wave.WaveInsert;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -100,6 +101,8 @@ public abstract class AbstractFoldableContentActions {
 
     private final WsBackManager wsBackManager;
 
+    private final Provider<WaveInsert> waveInsert;
+
     public AbstractFoldableContentActions(final Session session, final StateManager stateManager,
             final I18nUITranslationService i18n, final ErrorHandler errorHandler,
             final DeferredCommandWrapper deferredCommandWrapper,
@@ -109,7 +112,8 @@ public abstract class AbstractFoldableContentActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final Provider<ContentEditor> textEditorProvider,
             final Provider<ContextPropEditor> contextPropEditorProvider, final FoldableContent foldableContent,
-            final EntityHeader entityLogo, final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
+            final EntityHeader entityLogo, final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager,
+            final Provider<WaveInsert> waveInsert) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
@@ -128,6 +132,7 @@ public abstract class AbstractFoldableContentActions {
         this.entityLogo = entityLogo;
         this.publicLink = publicLink;
         this.wsBackManager = wsBackManager;
+        this.waveInsert = waveInsert;
         createActions();
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             public void onEvent(final InitDataDTO parameter) {
@@ -241,8 +246,8 @@ public abstract class AbstractFoldableContentActions {
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.showProgressProcessing();
-                        session.check(new AsyncCallbackSimple<Object>() {
-                            public void onSuccess(final Object result) {
+                        session.check(new AsyncCallbackSimple<Void>() {
+                            public void onSuccess(final Void result) {
                                 final ContentEditor editor = textEditorProvider.get();
                                 foldableContent.detach();
                                 contextNavigator.detach();
@@ -251,7 +256,7 @@ public abstract class AbstractFoldableContentActions {
                                     public void onEvent(final String html) {
                                         NotifyUser.showProgressSaving();
                                         contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
-                                                new AsyncCallback<Object>() {
+                                                new AsyncCallback<Void>() {
                                                     public void onFailure(final Throwable caught) {
                                                         NotifyUser.hideProgress();
                                                         if (caught instanceof SessionExpiredException) {
@@ -263,7 +268,7 @@ public abstract class AbstractFoldableContentActions {
                                                         }
                                                     }
 
-                                                    public void onSuccess(final Object param) {
+                                                    public void onSuccess(final Void param) {
                                                         NotifyUser.hideProgress();
                                                         session.getContentState().setContent(html);
                                                         editor.onSavedSuccessful();
@@ -586,12 +591,7 @@ public abstract class AbstractFoldableContentActions {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addWave = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken parentToken) {
-                        contentServiceProvider.get().addWave(session.getUserHash(), parentToken, waveFileType,
-                                "wavesandbox.com!w+NdlzA9PU%B", new AsyncCallbackSimple<StateContentDTO>() {
-                                    public void onSuccess(final StateContentDTO state) {
-                                        stateManager.setRetrievedState(state);
-                                    }
-                                });
+                        waveInsert.get().show(parentToken);
                     }
                 });
         addWave.setTextDescription(i18n.t("Add Wave"));

@@ -12,6 +12,7 @@
   <name>kune</name>
   <url>http://kune.ourproject.org</url>
   <properties>
+    <!-- <gwtVersion>2.0.0-SNAPSHOT</gwtVersion> -->
     <gwtVersion>1.7.0</gwtVersion>
   </properties>
   <dependencies>
@@ -19,12 +20,12 @@
     <dependency>
       <groupId>com.google.code.guice</groupId>
       <artifactId>guice</artifactId>
-      <version>1.0</version>
+      <version>2.0.1</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.guice</groupId>
       <artifactId>guice-servlet</artifactId>
-      <version>1.0</version>
+      <version>2.0.1</version>
     </dependency>
     <dependency>
       <groupId>aopalliance</groupId>
@@ -32,7 +33,7 @@
       <version>1.0</version>
     </dependency>
 
-    <!-- G WT deps (from central repo) -->
+    <!-- GWT deps (from central repo) -->
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
@@ -121,8 +122,9 @@
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-web-gwt-dom</artifactId>
-      <version>2.0-SNAPSHOT</version>
-      <!-- <version>2.0-SNAPSHOT-g164</version> -->
+      <version>2.0-SNAPSHOT-g164</version>
+      <!-- <version>2.0-SNAPSHOT</version>  -->
+      <!-- <version>2.0-SNAPSHOT-g20s</version> -->
     </dependency>
 
     <!-- xmpp -->
@@ -208,7 +210,7 @@
     <dependency>
       <groupId>com.wideplay</groupId>
       <artifactId>warp-persist</artifactId>
-      <version>1.0.1</version>
+      <version>2.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -359,6 +361,11 @@
     </pluginRepository>
   </pluginRepositories>
   <repositories>
+    <repository>
+      <id>guice-maven</id>
+      <name>guice maven</name>
+      <url>http://guice-maven.googlecode.com/svn/trunk</url>
+    </repository>
     <repository>
       <id>Codehaus Snapshots</id>
       <url>http://snapshots.repository.codehaus.org/</url>

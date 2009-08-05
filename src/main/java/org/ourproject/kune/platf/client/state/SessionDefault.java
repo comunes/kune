@@ -67,7 +67,7 @@ public class SessionDefault implements Session {
         this.onUserSignOut = new Event0("onUserSignOut");
     }
 
-    public void check(final AsyncCallbackSimple<?> callback) {
+    public void check(final AsyncCallbackSimple<Void> callback) {
         Log.debug("Checking session (userhash: " + getUserHash() + ")");
         userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
     }
@@ -189,16 +189,6 @@ public class SessionDefault implements Session {
         return initData.getUserTools();
     }
 
-    public boolean isInCurrentUserSpace() {
-        if (!isLogged()) {
-            return false;
-        }
-        if (getCurrentStateToken().getGroup().equals(getCurrentUser().getShortName())) {
-            return true;
-        }
-        return false;
-    }
-
     public boolean inSameToken(final StateToken token) {
         return getCurrentStateToken().equals(token);
     }
@@ -209,6 +199,16 @@ public class SessionDefault implements Session {
 
     public boolean isCurrentStateAGroup() {
         return currentState == null ? false : !currentState.getGroup().isPersonal();
+    }
+
+    public boolean isInCurrentUserSpace() {
+        if (!isLogged()) {
+            return false;
+        }
+        if (getCurrentStateToken().getGroup().equals(getCurrentUser().getShortName())) {
+            return true;
+        }
+        return false;
     }
 
     public boolean isLogged() {

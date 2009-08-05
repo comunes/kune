@@ -30,9 +30,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface GroupServiceAsync {
 
     void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license,
-            AsyncCallback<?> asyncCallback);
+            AsyncCallback<Void> asyncCallback);
 
-    void changeGroupWsTheme(String userHash, StateToken groupToken, String theme, AsyncCallback<?> callback);
+    void changeGroupWsTheme(String userHash, StateToken groupToken, String theme, AsyncCallback<Void> callback);
 
     void clearGroupBackImage(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
@@ -44,12 +44,12 @@ public interface GroupServiceAsync {
     void setGroupBackImage(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
     void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionTypeDTO admissionPolicy,
-            AsyncCallback<?> asyncCallback);
+            AsyncCallback<Void> asyncCallback);
 
     void setSocialNetworkVisibility(String userHash, StateToken token, SocialNetworkVisibilityDTO visibility,
-            AsyncCallback<?> asyncCallback);
+            AsyncCallback<Void> asyncCallback);
 
     void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled,
-            AsyncCallback<?> asyncCallback);
+            AsyncCallback<Void> asyncCallback);
 
 }

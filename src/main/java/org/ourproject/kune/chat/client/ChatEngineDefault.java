@@ -35,6 +35,7 @@ import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -181,7 +182,7 @@ class ChatEngineDefault implements ChatEngine {
                 });
             }
         } else {
-            wskel.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"));
+            NotifyUser.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"));
         }
     }
 

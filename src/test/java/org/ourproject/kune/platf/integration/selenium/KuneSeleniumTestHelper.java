@@ -26,7 +26,7 @@ import com.thoughtworks.selenium.SeleniumException;
 
 public class KuneSeleniumTestHelper extends SeleniumTestHelper {
 
-    protected static final String KUNE_BASE_URL = "/kune/?locale=en#";
+    protected static final String KUNE_BASE_URL = "/ws/?locale=en#";
 
     private static File dirCaptures;
 
@@ -125,7 +125,7 @@ public class KuneSeleniumTestHelper extends SeleniumTestHelper {
     }
 
     protected void openDefPage() throws Exception {
-        open("/kune/?locale=en#site");
+        open(KUNE_BASE_URL + "#site");
         waitForTextInside(gid(EntityTitlePanel.ENTITY_TITLE_RIGHT_TITLE), "Welcome to kune");
     }
 

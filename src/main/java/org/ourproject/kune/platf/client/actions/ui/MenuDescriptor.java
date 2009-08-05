@@ -54,7 +54,7 @@ public class MenuDescriptor extends GuiActionDescrip {
     public void clear() {
         // Action detects changes in values, then we fire a change (whatever) to
         // fire this method in the UI
-        action.putValue(MENU_CLEAR, !((Boolean) action.getValue(MENU_CLEAR)));
+        putValue(MENU_CLEAR, !((Boolean) getValue(MENU_CLEAR)));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MenuDescriptor extends GuiActionDescrip {
     }
 
     public void hide() {
-        action.putValue(MENU_HIDE, !((Boolean) action.getValue(MENU_HIDE)));
+        putValue(MENU_HIDE, !((Boolean) getValue(MENU_HIDE)));
     }
 
     public boolean isStandalone() {
@@ -82,7 +82,7 @@ public class MenuDescriptor extends GuiActionDescrip {
     }
 
     public void setText(final String text) {
-        action.putValue(Action.NAME, text);
+        putValue(Action.NAME, text);
     }
 
     /**
@@ -92,7 +92,7 @@ public class MenuDescriptor extends GuiActionDescrip {
      *            the element id to show menu near of it
      */
     public void show(final String id) {
-        action.putValue(MENU_SHOW_ID, id);
-        action.putValue(MENU_SHOW, !((Boolean) action.getValue(MENU_SHOW)));
+        putValue(MENU_SHOW_ID, id);
+        putValue(MENU_SHOW, !((Boolean) getValue(MENU_SHOW)));
     }
 }

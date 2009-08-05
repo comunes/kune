@@ -67,7 +67,7 @@ public interface Session {
 
     String USERHASH = "userHash";
 
-    void check(AsyncCallbackSimple<?> callback);
+    void check(AsyncCallbackSimple<Void> callback);
 
     StateContainerDTO getContainerState();
 
@@ -123,13 +123,13 @@ public interface Session {
 
     Collection<ToolSimpleDTO> getUserTools();
 
-    boolean isInCurrentUserSpace();
-
     boolean inSameToken(StateToken token);
 
     boolean isCurrentStateAContent();
 
     boolean isCurrentStateAGroup();
+
+    boolean isInCurrentUserSpace();
 
     boolean isLogged();
 

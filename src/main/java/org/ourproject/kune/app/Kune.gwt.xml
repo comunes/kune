@@ -43,6 +43,11 @@
     <set-property name="log_level" value="DEBUG" />
     <set-property name="log_DivLogger" value="DISABLED" />
     <set-property name="log_FirebugLogger" value="ENABLED" />
+    <!--
+    Inspired by Apache log4j PatternLayout:
+    http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+    -->
+    <set-configuration-property name="log_pattern" value="%d [%-5p] %m%n" />
 
     <!--
         <extend-property name="locale" values="es" />

@@ -1,5 +1,6 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
+import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
@@ -20,7 +21,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
     private Item item;
 
     public AbstractMenuItemGui(final MenuItemDescriptor descriptor) {
-        super();
+        super(descriptor);
         if (descriptor instanceof MenuRadioItemDescriptor) {
             final CheckItem checkItem = createCheckItem(descriptor);
             checkItem.setGroup(((MenuRadioItemDescriptor) descriptor).getGroup());
@@ -41,13 +42,14 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
         final BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override
             public void onClick(final BaseItem item, final EventObject event) {
+                final AbstractAction action = getAction();
                 if (action != null) {
                     action.actionPerformed(new ActionEvent(item, event.getBrowserEvent()));
                 }
             }
         };
         item.addListener(clickListener);
-        setAction(descriptor.action);
+        configureItemFromProperties();
     }
 
     @Override
@@ -82,7 +84,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
     @Override
     protected void setText(final String text) {
         if (text != null) {
-            final KeyStroke key = (KeyStroke) action.getValue(Action.ACCELERATOR_KEY);
+            final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
             if (key == null) {
                 item.setText(text);
             } else {
@@ -99,7 +101,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
     }
 
     private void confCheckListener(final MenuItemDescriptor descriptor, final CheckItem checkItem) {
-        descriptor.action.addPropertyChangeListener(new PropertyChangeListener() {
+        descriptor.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
                     checkItem.setChecked((Boolean) event.getNewValue());

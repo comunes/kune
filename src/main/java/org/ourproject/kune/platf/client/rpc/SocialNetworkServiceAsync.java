@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.client.rpc;
 
 import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
+import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -46,7 +47,7 @@ public interface SocialNetworkServiceAsync {
 
     void getSocialNetwork(String hash, StateToken groupToken, AsyncCallback<SocialNetworkDataDTO> callback);
 
-    void requestJoinGroup(String hash, StateToken groupToken, AsyncCallback<?> callback);
+    void requestJoinGroup(String hash, StateToken groupToken, AsyncCallback<SocialNetworkRequestResult> callback);
 
     void setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName,
             AsyncCallback<SocialNetworkDataDTO> callback);

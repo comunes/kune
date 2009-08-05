@@ -19,19 +19,20 @@
  \*/
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.actions.ActionAddCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
+import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
 import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
+import org.ourproject.kune.platf.client.state.AccessRightsClientManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
@@ -41,6 +42,7 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.CustomMenu;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
+import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
 import com.calclab.suco.client.events.Listener;
@@ -48,9 +50,10 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class SocialNetworkPresenter {
 
+    private static final String MEMBERS_BOTTON = "members_bottom";
+
     protected final ActionToolbarPosition membersBottom = new ActionToolbarPosition("sn-bottomtoolbar");
     protected final ActionToolbarPosition buddiesBottom = new ActionToolbarPosition("sn-bottomtoolbar");
-
     protected MenuItem<GroupDTO> changeToCollabMenuItem;
     protected MenuItem<GroupDTO> removeMemberMenuItem;
     protected MenuItem<GroupDTO> changeToAdminMenuItem;
@@ -67,19 +70,25 @@ public class SocialNetworkPresenter {
     private final MenuItemCollection<GroupDTO> otherLoggedOperations;
     private final MenuItemCollection<GroupDTO> otherOperationsUsers;
     private final MenuItemCollection<GroupDTO> otherLoggedOperationsUsers;
-
     protected ActionToolbarMenuDescriptor<StateToken> unJoin;
     protected ActionToolbarButtonDescriptor<StateToken> participate;
     private final Provider<FileDownloadUtils> downloadProvider;
+    private final AccessRightsClientManager rightsManager;
+    private final ImgResources imgResources;
+
+    private MenuDescriptor menuOptions;
 
     public SocialNetworkPresenter(final I18nTranslationService i18n, final StateManager stateManager,
-            final Session session, final Provider<SocialNetworkServiceAsync> snServiceProvider,
-            final GroupActionRegistry groupActionRegistry, final Provider<FileDownloadUtils> downloadProvider) {
+            final AccessRightsClientManager rightsManager, final Session session,
+            final Provider<SocialNetworkServiceAsync> snServiceProvider, final GroupActionRegistry groupActionRegistry,
+            final Provider<FileDownloadUtils> downloadProvider, final ImgResources imgResources) {
         this.i18n = i18n;
         this.stateManager = stateManager;
+        this.rightsManager = rightsManager;
         this.session = session;
         this.snServiceProvider = snServiceProvider;
         this.downloadProvider = downloadProvider;
+        this.imgResources = imgResources;
         createButtons();
         createMenuActions();
         otherOperationsUsers = new MenuItemCollection<GroupDTO>();
@@ -137,60 +146,29 @@ public class SocialNetworkPresenter {
     }
 
     private void createButtons() {
-        participate = new ActionToolbarButtonDescriptor<StateToken>(AccessRolDTO.Viewer, membersBottom,
-                new Listener<StateToken>() {
-                    public void onEvent(final StateToken parameter) {
-                        NotifyUser.showProgressProcessing();
-                        snServiceProvider.get().requestJoinGroup(session.getUserHash(),
-                                session.getCurrentState().getStateToken(), new AsyncCallbackSimple<Object>() {
-                                    public void onSuccess(final Object result) {
-                                        NotifyUser.hideProgress();
-                                        final SocialNetworkRequestResult resultType = (SocialNetworkRequestResult) result;
-                                        switch (resultType) {
-                                        case accepted:
-                                            NotifyUser.info(i18n.t("You are now member of this group"));
-                                            stateManager.reload();
-                                            break;
-                                        case denied:
-                                            NotifyUser.important(i18n.t("Sorry this is a closed group"));
-                                            break;
-                                        case moderated:
-                                            NotifyUser.info(i18n.t("Membership requested. Waiting for admins decision"));
-                                            break;
-                                        }
-                                    }
-                                });
-                    }
-                });
-        participate.setIconUrl("images/add-green.gif");
-        participate.setTextDescription(i18n.t("Participate"));
-        participate.setToolTip(i18n.t("Request to participate in this group"));
-        participate.setMustBeAuthenticated(false);
-        participate.setAddCondition(new ActionAddCondition<StateToken>() {
-            public boolean mustBeAdded(final StateToken token) {
-                return !isMember(session.getCurrentState().getGroupRights());
-            }
-        });
+        final ParticipateAction participateAction = new ParticipateAction(session, snServiceProvider, stateManager,
+                rightsManager, i18n, imgResources);
+        final ButtonDescriptor participateBtn = new ButtonDescriptor(participateAction);
+        participateBtn.setLocation(MEMBERS_BOTTON);
 
-        unJoin = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Editor, membersBottom,
-                new Listener<StateToken>() {
-                    public void onEvent(final StateToken parameter) {
-                        removeMemberAction();
-                    }
-                });
-        unJoin.setIconUrl("images/del.gif");
-        unJoin.setTextDescription(i18n.t("Leave this group"));
-        unJoin.setToolTip(i18n.t("Do not participate anymore in this group"));
-        unJoin.setParentMenuTitle(i18n.t("Options"));
-        unJoin.setMustBeConfirmed(true);
-        unJoin.setConfirmationTitle(i18n.t("Leave this group"));
-        unJoin.setConfirmationText(i18n.t("Are you sure?"));
+        menuOptions = new MenuDescriptor(i18n.t("Options"));
+
+        final UnjoinAction unjoinAction = new UnjoinAction(session, snServiceProvider, stateManager, rightsManager,
+                i18n, imgResources) {
+            @Override
+            public String getGroupName() {
+                return session.getContainerState().getGroup().getShortName();
+            }
+        };
+
+        final MenuItemDescriptor unjoinBtn = new MenuItemDescriptor(menuOptions, unjoinAction);
+        unjoinBtn.setLocation(MEMBERS_BOTTON);
     }
 
     private GridItem<GroupDTO> createDefMemberMenu(final GroupDTO group, final GridGroup gridGroup) {
         final CustomMenu<GroupDTO> menu = new CustomMenu<GroupDTO>(group);
         final String longName = group.getLongName();
-        boolean hasLogo = group.hasLogo();
+        final boolean hasLogo = group.hasLogo();
         final String toolTip = createTooltipWithLogo(group.getShortName(), group.getStateToken(), hasLogo,
                 group.isPersonal());
         final String imageHtml = downloadProvider.get().getLogoAvatarHtml(group.getStateToken(), hasLogo,
@@ -226,6 +204,7 @@ public class SocialNetworkPresenter {
                         stateManager.gotoToken(groupDTO.getShortName());
                     }
                 });
+
         unJoinMenuItem = new MenuItem<GroupDTO>("images/del.gif", i18n.t("Do not participate anymore in this group"),
                 new Listener<GroupDTO>() {
                     public void onEvent(final GroupDTO groupDTO) {
@@ -315,20 +294,6 @@ public class SocialNetworkPresenter {
                                 });
                     }
                 });
-    }
-
-    private boolean isMember(final AccessRightsDTO rights) {
-        boolean userIsAdmin = rights.isAdministrable();
-        final boolean userIsCollab = !userIsAdmin && rights.isEditable();
-        return isMember(userIsAdmin, userIsCollab);
-    }
-
-    private boolean isMember(final boolean userIsAdmin, final boolean userIsCollab) {
-        return userIsAdmin || userIsCollab;
-    }
-
-    private void removeMemberAction() {
-        removeMemberAction(session.getCurrentState().getGroup());
     }
 
     private void removeMemberAction(final GroupDTO groupDTO) {

@@ -4,11 +4,13 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
+import org.ourproject.kune.platf.client.actions.ChangebleObject;
 
 /**
  * The Class AbstractUIActionDescriptor.
  */
-public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
+public abstract class GuiActionDescrip extends ChangebleObject {
+
     public static final String VISIBLE = "visibleprop";
 
     protected static final int NO_POSITION = -1;
@@ -20,7 +22,7 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
     protected GuiActionDescrip parent;
 
     /** The action. */
-    protected AbstractAction action;
+    private final AbstractAction action;
 
     /** The position where the item will be inserted. */
     private int position;
@@ -46,6 +48,10 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
 
     public void fire(final ActionEvent event) {
         action.actionPerformed(event);
+    }
+
+    public AbstractAction getAction() {
+        return action;
     }
 
     public GuiAddCondition getAddCondition() {
@@ -81,19 +87,17 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
 
     public abstract Class<?> getType();
 
+    @Override
     /**
-     * Returns the value associated with the specified key.
-     * 
-     * @param key
-     *            the key (not <code>null</code>).
-     * 
-     * @return The value associated with the specified key, or <code>null</code>
-     *         if the key is not found.
-     * 
-     * @see #putValue(String, Object)
+     * We try to get the gui property (for instance the name) and if it's empty we try to get the same property in actions. This permit to have several gui items with the same action but different gui properties (like text descriptions) if necessary.
      */
     public Object getValue(final String key) {
-        return action.getValue(key);
+        final Object guiValue = super.getValue(key);
+        if (guiValue == null) {
+            return action.getValue(key);
+        } else {
+            return guiValue;
+        }
     }
 
     public boolean isChild() {
@@ -107,20 +111,6 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
             result = addCondition.mustBeAdded();
         }
         return result;
-    }
-
-    /**
-     * Sets the value associated with the specified key.
-     * 
-     * Any existing value associated with the key will be overwritten.
-     * 
-     * @param key
-     *            the key (not <code>null</code>).
-     * @param value
-     *            the value (<code>null</code> permitted).
-     */
-    public void putValue(final String key, final Object value) {
-        action.putValue(key, value);
     }
 
     public void setAddCondition(final GuiAddCondition addCondition) {
@@ -168,8 +158,8 @@ public abstract class GuiActionDescrip { // NOPMD by vjrj on 9/06/09 2:00
 
     @Override
     public String toString() {
-        final String name = (String) action.getValue(Action.NAME);
-        final String tooltip = (String) action.getValue(Action.SHORT_DESCRIPTION);
+        final String name = (String) getValue(Action.NAME);
+        final String tooltip = (String) getValue(Action.SHORT_DESCRIPTION);
         return "[GuiActionDescrip: " + action.getClass() + (name == null ? "" : " " + name)
                 + (tooltip == null ? "" : " " + tooltip) + "]";
     }

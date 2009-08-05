@@ -174,8 +174,10 @@ TODO-list for kune -*- mode: org; -*-
    2007-12-21 10:35:16,197 [btpool0-5] DEBUG - ContentManagerDefault.createContent EXCEPTION => javax.persistence.Entity
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
-
 * MID-TERM
+** TODO <v> Images zoom-in/out with style="cursor: url(somezoomcursor.cur);"
+http://www.w3.org/TR/SVG/interact.html#Cursors
+http://www.w3.org/TR/CSS2/ui.html
 ** TODO <v> karma, reputation, trust metrics:
 http://wiki.couchsurfing.com/en/Trust
 http://p2pfoundation.net/Trust_Metrics

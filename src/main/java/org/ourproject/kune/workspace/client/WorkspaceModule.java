@@ -48,6 +48,7 @@ import org.ourproject.kune.platf.client.services.ErrorHandler;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
+import org.ourproject.kune.platf.client.state.AccessRightsClientManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -254,6 +255,9 @@ import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 import org.ourproject.kune.workspace.client.upload.FileUploaderDialog;
 import org.ourproject.kune.workspace.client.upload.FileUploaderPresenter;
+import org.ourproject.kune.workspace.client.wave.WaveInsert;
+import org.ourproject.kune.workspace.client.wave.WaveInsertPanel;
+import org.ourproject.kune.workspace.client.wave.WaveInsertPresenter;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
@@ -562,7 +566,8 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
                         i(Session.class), p(SocialNetworkServiceAsync.class), p(GroupServiceAsync.class),
                         p(GroupLiveSearcher.class), p(ChatEngine.class), i(GroupActionRegistry.class),
-                        i(ActionGroupSummaryToolbar.class), p(FileDownloadUtils.class));
+                        i(ActionGroupSummaryToolbar.class), p(FileDownloadUtils.class),
+                        i(AccessRightsClientManager.class), i(ImgResources.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
                         i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
                                 ActionGroupSummaryToolbar.class).getView());
@@ -586,7 +591,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(Session.class), p(UserServiceAsync.class), i(UserActionRegistry.class),
                         i(I18nTranslationService.class), p(ChatEngine.class), i(ActionBuddiesSummaryToolbar.class),
                         p(FileDownloadUtils.class), i(ImageUtils.class), p(SocialNetworkServiceAsync.class),
-                        i(GroupActionRegistry.class));
+                        i(GroupActionRegistry.class), i(AccessRightsClientManager.class), i(ImgResources.class));
                 final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, i(WorkspaceSkeleton.class),
                         i(I18nTranslationService.class), i(ActionManager.class),
                         i(ActionBuddiesSummaryToolbar.class).getView());
@@ -601,7 +606,8 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(
                         i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
                         i(Session.class), p(SocialNetworkServiceAsync.class), i(GroupActionRegistry.class),
-                        i(ActionParticipationToolbar.class), p(FileDownloadUtils.class));
+                        i(ActionParticipationToolbar.class), p(FileDownloadUtils.class),
+                        i(AccessRightsClientManager.class), i(ImgResources.class));
                 final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
                         i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
                                 ActionParticipationToolbar.class).getView());
@@ -1100,6 +1106,18 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(Session.class), p(MediaUtils.class));
                 final InsertMediaLocalPanel panel = new InsertMediaLocalPanel(presenter,
                         i(I18nTranslationService.class), i(FileDownloadUtils.class));
+                presenter.init(panel);
+                return presenter;
+            }
+        });
+
+        register(Singleton.class, new Factory<WaveInsert>(WaveInsert.class) {
+            @Override
+            public WaveInsert create() {
+                final WaveInsertPresenter presenter = new WaveInsertPresenter(i(Session.class), i(StateManager.class),
+                        i(I18nTranslationService.class), p(ContentServiceAsync.class));
+                final WaveInsertPanel panel = new WaveInsertPanel(presenter, i(I18nTranslationService.class),
+                        i(ImgResources.class));
                 presenter.init(panel);
                 return presenter;
             }

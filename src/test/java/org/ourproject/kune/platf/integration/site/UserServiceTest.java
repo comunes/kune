@@ -20,7 +20,6 @@ import org.ourproject.kune.platf.client.errors.SessionExpiredException;
 import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -32,8 +31,6 @@ import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.google.inject.Inject;
 
 public class UserServiceTest extends IntegrationTest {
-    @Inject
-    UserSession session;
     @Inject
     DatabaseProperties properties;
     @Inject

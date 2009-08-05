@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.client.app;
 
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
@@ -44,9 +43,11 @@ public class ApplicationDefault implements Application {
     private final Session session;
     private final Event0 onAppStarting;
     private final Event<ClosingEvent> onAppClosing;
+    private final SiteServiceAsync siteService;
 
-    public ApplicationDefault(final Session session) {
+    public ApplicationDefault(final Session session, final SiteServiceAsync siteService) {
         this.session = session;
+        this.siteService = siteService;
         this.onAppStarting = new Event0("onAppStarting");
         this.onAppClosing = new Event<ClosingEvent>("onAppClossing");
         Window.addWindowClosingHandler(new ClosingHandler() {
@@ -78,8 +79,7 @@ public class ApplicationDefault implements Application {
     }
 
     private void getInitData() {
-        final SiteServiceAsync server = SiteService.App.getInstance();
-        server.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
+        siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
             public void onFailure(final Throwable error) {
                 RootPanel.get("kuneinitialcurtain").setVisible(false);
                 RootPanel.get("kuneloading").setVisible(false);

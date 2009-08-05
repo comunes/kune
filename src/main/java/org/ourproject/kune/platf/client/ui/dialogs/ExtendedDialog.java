@@ -27,12 +27,12 @@ import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.layout.FitLayout;
 
-public class BasicDialogExtended extends BasicDialog {
+public class ExtendedDialog extends BasicDialog {
 
     private final Button cancel;
     private final Button firstButton;
 
-    public BasicDialogExtended(final String dialogId, final String title, final boolean modal,
+    public ExtendedDialog(final String dialogId, final String title, final boolean modal,
             final boolean autoscroll, final int width, final int heigth, final String icon,
             final String firstButtonTitle, final String cancelButtonTitle, final Listener0 onFirstButtonClick,
             final Listener0 onCancelButtonClick, final int tabIndexStart) {
@@ -40,7 +40,7 @@ public class BasicDialogExtended extends BasicDialog {
                 cancelButtonTitle, Ext.generateId(), onFirstButtonClick, onCancelButtonClick, tabIndexStart);
     }
 
-    public BasicDialogExtended(final String dialogId, final String title, final boolean modal,
+    public ExtendedDialog(final String dialogId, final String title, final boolean modal,
             final boolean autoscroll, final int width, final int heigth, final String icon,
             final String firstButtonTitle, final String firstButtonId, final String cancelButtonTitle,
             final String cancelButtonId, final Listener0 onFirstButtonClick, final Listener0 onCancelButtonClick,

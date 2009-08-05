@@ -29,6 +29,8 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.rpc.I18nService;
 import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
+import org.ourproject.kune.platf.client.rpc.SiteService;
+import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.state.ContentProvider;
@@ -78,6 +80,13 @@ public class CoreModule extends AbstractExtendedModule {
             public UserServiceAsync create() {
                 final UserServiceAsync service = (UserServiceAsync) GWT.create(UserService.class);
                 ((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "UserService");
+                return service;
+            }
+        }, new Factory<SiteServiceAsync>(SiteServiceAsync.class) {
+            @Override
+            public SiteServiceAsync create() {
+                final SiteServiceAsync service = (SiteServiceAsync) GWT.create(SiteService.class);
+                ((ServiceDefTarget) service).setServiceEntryPoint(GWT.getModuleBaseURL() + "SiteService");
                 return service;
             }
         });

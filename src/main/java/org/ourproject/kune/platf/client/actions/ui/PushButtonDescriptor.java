@@ -13,7 +13,7 @@ public class PushButtonDescriptor extends ButtonDescriptor {
     }
 
     public PushButtonDescriptor(final PushButtonDescriptor button) {
-        super(button.action);
+        super(button.getAction());
         pushed = button.pushed;
     }
 
@@ -29,7 +29,7 @@ public class PushButtonDescriptor extends ButtonDescriptor {
     public void setPushed(final boolean pushed) {
         if (pushed != this.pushed) {
             this.pushed = pushed;
-            action.putValue(PUSHED, this.pushed);
+            putValue(PUSHED, this.pushed);
         }
     }
 }

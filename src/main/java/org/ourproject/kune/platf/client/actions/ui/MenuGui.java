@@ -13,7 +13,7 @@ public class MenuGui extends AbstractMenuGui {
     private ToolbarButton button = null;
 
     public MenuGui(final MenuDescriptor descriptor) {
-        super();
+        super(descriptor);
         // Standalone menus are menus without and associated button in a toolbar
         // (sometimes, a menu showed in a grid, or other special widgets)
         notStandAlone = !descriptor.isStandalone();
@@ -28,15 +28,15 @@ public class MenuGui extends AbstractMenuGui {
         } else {
             initWidget(menu);
         }
-        setAction(descriptor.action);
-        descriptor.action.addPropertyChangeListener(new PropertyChangeListener() {
+        configureItemFromProperties();
+        descriptor.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE)) {
                     menu.hide(true);
                 }
             }
         });
-        descriptor.action.addPropertyChangeListener(new PropertyChangeListener() {
+        descriptor.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
                     menu.show(UIObject.DEBUG_ID_PREFIX + (String) descriptor.getValue(MenuDescriptor.MENU_SHOW_ID));
@@ -67,7 +67,7 @@ public class MenuGui extends AbstractMenuGui {
     public void setIconUrl(final String imageUrl) {
         if (notStandAlone) {
             button.setIcon(imageUrl);
-            if (action.getValue(Action.NAME) != null) {
+            if (descriptor.getValue(Action.NAME) != null) {
                 button.setCls("x-btn-text-icon");
             }
         }

@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNull;
 
 import java.util.TimeZone;
 
-import javax.persistence.PersistenceException;
+import javax.persistence.EntityExistsException;
 
 import org.apache.lucene.queryParser.ParseException;
 import org.hibernate.validator.InvalidStateException;
@@ -65,7 +65,11 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         persist(user);
     }
 
-    @Test(expected = PersistenceException.class)
+    /**
+     * This is not working:
+     * http://opensource.atlassian.com/projects/hibernate/browse/EJB-382
+     */
+    @Test(expected = EntityExistsException.class)
     public void testUserExist() throws I18nNotFoundException {
         final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
                 "GB", "GMT");

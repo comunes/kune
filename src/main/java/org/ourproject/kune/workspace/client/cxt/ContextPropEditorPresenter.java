@@ -50,7 +50,7 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     private final ContentCapabilitiesRegistry capabilitiesRegistry;
 
     public ContextPropEditorPresenter(final Session session, final StateManager stateManager,
-            ContentCapabilitiesRegistry capabilitiesRegistry, final Provider<TagsSummary> tagsSummaryProvider,
+            final ContentCapabilitiesRegistry capabilitiesRegistry, final Provider<TagsSummary> tagsSummaryProvider,
             final Provider<ContentServiceAsync> contentServiceProvider, final EntitySubTitle entitySubTitle) {
         this.session = session;
         this.stateManager = stateManager;
@@ -64,8 +64,8 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
         NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().addAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
-                new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
+                new AsyncCallbackSimple<Void>() {
+                    public void onSuccess(final Void result) {
                         NotifyUser.hideProgress();
                         stateManager.reload();
                     }
@@ -84,8 +84,8 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
         NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().removeAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
-                new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
+                new AsyncCallbackSimple<Void>() {
+                    public void onSuccess(final Void result) {
                         NotifyUser.hideProgress();
                         stateManager.reload();
                     }
@@ -115,8 +115,8 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
         NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setPublishedOn(session.getUserHash(), currentState.getStateToken(), publishedOn,
-                new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
+                new AsyncCallbackSimple<Void>() {
+                    public void onSuccess(final Void result) {
                         NotifyUser.hideProgress();
                         entitySubTitle.setContentDate(publishedOn);
                     }
@@ -131,7 +131,7 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
         final String tags = state.getTags();
         final List<UserSimpleDTO> authors = state.getAuthors();
 
-        String typeId = state.getTypeId();
+        final String typeId = state.getTypeId();
         if (capabilitiesRegistry.isTranslatable(typeId)) {
             assert (language != null);
             view.setLanguage(language);

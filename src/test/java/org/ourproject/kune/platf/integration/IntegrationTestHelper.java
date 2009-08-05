@@ -13,6 +13,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Scopes;
+import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
 import com.wideplay.warp.jpa.JpaUnit;
 
@@ -24,6 +25,7 @@ public class IntegrationTestHelper {
                     @Override
                     protected void configure() {
                         bindScope(SessionScoped.class, Scopes.SINGLETON);
+                        bindScope(RequestScoped.class, Scopes.SINGLETON);
                         // test: use
                         // memory
                         // test_db: use

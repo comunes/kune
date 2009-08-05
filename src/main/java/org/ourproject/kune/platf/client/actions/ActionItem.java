@@ -54,12 +54,12 @@ public class ActionItem<T> {
     }
 
     public boolean mustBePressed() {
-        if (!(action instanceof ActionToolbarPushButtonDescriptor)) {
+        if (action instanceof ActionToolbarPushButtonDescriptor<?>) {
+            final ActionPressedCondition<T> mustIniPressed = ((ActionToolbarPushButtonDescriptor<T>) action).getMustInitialyPressed();
+            return mustIniPressed == null ? false : mustIniPressed.mustBePressed(getItem());
+        } else {
             Log.error("This action is not a push button");
             return false;
-        } else {
-            ActionPressedCondition<T> mustInitialyPressed = ((ActionToolbarPushButtonDescriptor<T>) action).getMustInitialyPressed();
-            return mustInitialyPressed != null ? mustInitialyPressed.mustBePressed(getItem()) : false;
         }
     }
 }

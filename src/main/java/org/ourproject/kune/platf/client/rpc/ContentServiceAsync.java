@@ -36,7 +36,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ContentServiceAsync {
 
-    void addAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<?> asyncCallback);
+    void addAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<Void> asyncCallback);
 
     void addComment(String userHash, StateToken token, Long parentCommentId, String commentText,
             AsyncCallback<CommentDTO> asyncCallback);
@@ -64,21 +64,21 @@ public interface ContentServiceAsync {
 
     void rateContent(String userHash, StateToken token, Double value, AsyncCallback<RateResultDTO> asyncCallback);
 
-    void removeAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<?> asyncCallback);
+    void removeAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<Void> asyncCallback);
 
     void renameContainer(String userHash, StateToken token, String newName,
             AsyncCallback<StateAbstractDTO> asyncCallback);
 
     void renameContent(String userHash, StateToken token, String newName, AsyncCallback<StateAbstractDTO> asyncCallback);
 
-    void save(String user, StateToken token, String content, AsyncCallback<?> asyncCallback);
+    void save(String user, StateToken token, String content, AsyncCallback<Void> asyncCallback);
 
     void setAsDefaultContent(String userHash, StateToken token, AsyncCallback<ContentSimpleDTO> asyncCallback);
 
     void setLanguage(String userHash, StateToken token, String languageCode,
             AsyncCallback<I18nLanguageDTO> asyncCallback);
 
-    void setPublishedOn(String userHash, StateToken token, Date publishedOn, AsyncCallback<?> asyncCallback);
+    void setPublishedOn(String userHash, StateToken token, Date publishedOn, AsyncCallback<Void> asyncCallback);
 
     void setStatus(String userHash, StateToken stateToken, ContentStatusDTO status,
             AsyncCallback<StateAbstractDTO> asyncCallback);

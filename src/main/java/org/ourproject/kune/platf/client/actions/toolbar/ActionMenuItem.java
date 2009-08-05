@@ -18,30 +18,30 @@ public class ActionMenuItem<T> {
 
     public ActionMenuItem(final ActionItem<T> actionItem, final String id, final Listener0 onclick) {
         final ActionToolbarMenuDescriptor<T> action = (ActionToolbarMenuDescriptor<T>) actionItem.getAction();
-        if (action instanceof ActionToolbarMenuRadioDescriptor) {
-            CheckItem checkItem = new CheckItem();
-            ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
+        if (action instanceof ActionToolbarMenuRadioDescriptor<?>) {
+            final CheckItem checkItem = new CheckItem();
+            final ActionToolbarMenuRadioDescriptor<T> radioDescriptor = (ActionToolbarMenuRadioDescriptor<T>) action;
             checkItem.setGroup(radioDescriptor.getGroup());
             checkItem.setChecked(radioDescriptor.mustBeChecked());
             item = checkItem;
-        } else if (action instanceof ActionToolbarMenuCheckItemDescriptor) {
-            CheckItem checkItem = new CheckItem();
-            ActionToolbarMenuCheckItemDescriptor<T> checkItemDescriptor = (ActionToolbarMenuCheckItemDescriptor<T>) action;
+        } else if (action instanceof ActionToolbarMenuCheckItemDescriptor<?>) {
+            final CheckItem checkItem = new CheckItem();
+            final ActionToolbarMenuCheckItemDescriptor<T> checkItemDescriptor = (ActionToolbarMenuCheckItemDescriptor<T>) action;
             checkItem.setChecked(checkItemDescriptor.getMustBeChecked().mustBeChecked());
             item = checkItem;
         } else {
             item = new Item();
         }
         item.setText(genMenuItemText(action));
-        BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
+        final BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override
             public void onClick(final BaseItem item, final EventObject e) {
                 onclick.onEvent();
             }
         };
         item.addListener(clickListener);
-        String iconCls = action.getIconCls();
-        String iconUrl = action.getIconUrl();
+        final String iconCls = action.getIconCls();
+        final String iconUrl = action.getIconUrl();
         if (iconCls != null) {
             item.setIconCls(iconCls);
         }

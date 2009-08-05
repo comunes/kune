@@ -17,7 +17,7 @@ public abstract class AbstractButtonGui extends AbstractGuiItem {
     }
 
     public AbstractButtonGui(final ButtonDescriptor buttonDescriptor, final boolean enableTongle) {
-        super();
+        super(buttonDescriptor);
         button = new Button();
         button.setEnableToggle(enableTongle);
         final String id = buttonDescriptor.getId();
@@ -28,12 +28,12 @@ public abstract class AbstractButtonGui extends AbstractGuiItem {
         button.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject event) {
-                if (action != null) {
-                    action.actionPerformed(new ActionEvent(button, event.getBrowserEvent()));
+                if (getAction() != null) {
+                    getAction().actionPerformed(new ActionEvent(button, event.getBrowserEvent()));
                 }
             }
         });
-        setAction(buttonDescriptor.action);
+        configureItemFromProperties();
     }
 
     @Override
@@ -58,7 +58,7 @@ public abstract class AbstractButtonGui extends AbstractGuiItem {
 
     @Override
     public void setToolTipText(final String tooltip) {
-        final KeyStroke key = (KeyStroke) action.getValue(Action.ACCELERATOR_KEY);
+        final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
         if (key == null) {
             button.setTooltip(tooltip);
         } else {

@@ -24,7 +24,7 @@ import java.util.Date;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.ui.dialogs.BasicDialogExtended;
+import org.ourproject.kune.platf.client.ui.dialogs.ExtendedDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
@@ -33,7 +33,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.gwtext.client.core.Ext;
 
-public abstract class SignInAbstractPanel extends BasicDialogExtended {
+public abstract class SignInAbstractPanel extends ExtendedDialog {
 
     protected final I18nTranslationService i18n;
     private final MessageToolbar messageErrorBar;

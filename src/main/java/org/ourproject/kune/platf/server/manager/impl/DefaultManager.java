@@ -76,7 +76,7 @@ public abstract class DefaultManager<T, K> {
     @SuppressWarnings("unchecked")
     public void reIndex() {
         // Inject this?
-        final FullTextEntityManager fullTextEm = Search.createFullTextEntityManager(getEntityManager());
+        final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
         fullTextEm.purgeAll(entityClass);
         fullTextEm.getTransaction().commit();
         fullTextEm.getTransaction().begin();
@@ -97,7 +97,7 @@ public abstract class DefaultManager<T, K> {
 
     @SuppressWarnings("unchecked")
     public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
-        final FullTextQuery emQuery = Search.createFullTextEntityManager(getEntityManager()).createFullTextQuery(query,
+        final FullTextQuery emQuery = Search.getFullTextEntityManager(getEntityManager()).createFullTextQuery(query,
                 entityClass);
         if (firstResult != null && maxResults != null) {
             emQuery.setFirstResult(firstResult);

@@ -47,6 +47,15 @@ public class NotifyUser {
     private static Images images;
 
     public static void askConfirmation(final String confirmationTitle, final String confirmationText,
+            final Listener0 onConfirm) {
+        ON_CONFIRMATION_ASK.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, new Listener0() {
+            public void onEvent() {
+                // Do nothing
+            }
+        }));
+    }
+
+    public static void askConfirmation(final String confirmationTitle, final String confirmationText,
             final Listener0 onConfirm, final Listener0 onCancel) {
         ON_CONFIRMATION_ASK.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, onCancel));
     }

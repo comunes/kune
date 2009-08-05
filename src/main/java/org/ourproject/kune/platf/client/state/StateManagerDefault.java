@@ -198,6 +198,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         NotifyUser.hideProgress();
         checkGroupAndToolChange(newState);
         previousToken = newState.getStateToken();
+
     }
 
     private void checkGroupAndToolChange(final StateAbstractDTO newState) {

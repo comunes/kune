@@ -69,8 +69,8 @@ public class WsThemeManager {
     public void changeTheme(final StateToken token, final WsTheme newTheme) {
         NotifyUser.showProgressProcessing();
         groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), token, newTheme.getName(),
-                new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
+                new AsyncCallbackSimple<Void>() {
+                    public void onSuccess(final Void result) {
                         if (session.getCurrentState().getStateToken().getGroup().equals(token.getGroup())) {
                             setTheme(newTheme);
                         }
@@ -82,8 +82,8 @@ public class WsThemeManager {
     protected void onChangeGroupWsTheme(final WsTheme newTheme) {
         NotifyUser.showProgressProcessing();
         groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), session.getCurrentState().getStateToken(),
-                newTheme.getName(), new AsyncCallbackSimple<Object>() {
-                    public void onSuccess(final Object result) {
+                newTheme.getName(), new AsyncCallbackSimple<Void>() {
+                    public void onSuccess(final Void result) {
                         setTheme(newTheme);
                         NotifyUser.hideProgress();
                     }

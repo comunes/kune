@@ -117,7 +117,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             fileUploadItem.write(file);
 
             final String mimetype = fileUploadItem.getContentType();
-            BasicMimeType basicMimeType = new BasicMimeType(mimetype);
+            final BasicMimeType basicMimeType = new BasicMimeType(mimetype);
             LOG.info("Mimetype: " + basicMimeType);
             final String extension = FileUtils.getFileNameExtension(file.getName(), false);
 
@@ -128,7 +128,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             } else if (basicMimeType.isPdf()) {
                 generateThumbs(absDir, file.getName(), "png", true);
             } else if (basicMimeType.isText()) {
-                String textPreview = new String(FileUtils.getBytesFromFile(file));
+                final String textPreview = new String(FileUtils.getBytesFromFile(file));
                 preview = "<pre>" + StringW.wordWrap(textPreview) + "</pre>";
             }
 
@@ -151,18 +151,18 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
 
     private void generateThumbs(final String absDir, final String filename, final String extension, final boolean isPdf) {
         try {
-            String fileOrig = absDir + filename;
-            String withoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
+            final String fileOrig = absDir + filename;
+            final String withoutExtension = FileUtils.getFileNameWithoutExtension(filename, extension);
 
-            String resizeName = absDir + withoutExtension + "." + ImageSize.sized + "." + extension;
-            String thumbName = absDir + withoutExtension + "." + ImageSize.thumb + "." + extension;
-            String iconName = absDir + withoutExtension + "." + ImageSize.ico + "." + extension;
-            String previewName = absDir + withoutExtension + "." + extension;
+            final String resizeName = absDir + withoutExtension + "." + ImageSize.sized + "." + extension;
+            final String thumbName = absDir + withoutExtension + "." + ImageSize.thumb + "." + extension;
+            final String iconName = absDir + withoutExtension + "." + ImageSize.ico + "." + extension;
+            final String previewName = absDir + withoutExtension + "." + extension;
 
-            int resizeWidth = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH));
-            int thumbSize = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE));
-            int cropSize = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE));
-            int iconSize = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE));
+            final int resizeWidth = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_RESIZEWIDTH));
+            final int thumbSize = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_THUMBSIZE));
+            final int cropSize = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_CROPSIZE));
+            final int iconSize = Integer.parseInt(kuneProperties.get(KuneProperties.IMAGES_ICONSIZE));
 
             ImageUtilsDefault.scaleImageToMax(fileOrig, resizeName, resizeWidth);
             ImageUtilsDefault.createThumb(fileOrig, thumbName, thumbSize, cropSize);
@@ -170,11 +170,11 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             if (isPdf) {
                 ImageUtilsDefault.createThumbFromPdf(fileOrig, previewName);
             }
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             LOG.error("Image sizes in kune.properties are not integers", e);
-        } catch (MagickException e) {
+        } catch (final MagickException e) {
             LOG.info("Problem generating image thumb for " + filename, e);
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             LOG.info("Original image not found generating image thumb for " + filename, e);
         }
     }

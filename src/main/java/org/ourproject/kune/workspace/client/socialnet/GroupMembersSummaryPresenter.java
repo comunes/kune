@@ -44,11 +44,13 @@ import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
+import org.ourproject.kune.platf.client.state.AccessRightsClientManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
+import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbar;
@@ -80,8 +82,10 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             final Provider<GroupServiceAsync> groupServiceProvider,
             final Provider<GroupLiveSearcher> liveSearcherProvider, final Provider<ChatEngine> chatEngineProvider,
             final GroupActionRegistry groupActionRegistry, final ActionGroupSummaryToolbar toolbar,
-            final Provider<FileDownloadUtils> downloadProvider) {
-        super(i18n, stateManager, session, snServiceProvider, groupActionRegistry, downloadProvider);
+            final Provider<FileDownloadUtils> downloadProvider, final AccessRightsClientManager accessRightsManager,
+            final ImgResources img) {
+        super(i18n, stateManager, accessRightsManager, session, snServiceProvider, groupActionRegistry,
+                downloadProvider, img);
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.session = session;
@@ -165,9 +169,9 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         addMember.setParentMenuTitle(i18n.t("Options"));
 
         groupActionRegistry.addAction(addMember);
-        groupActionRegistry.addAction(unJoin);
+        // groupActionRegistry.addAction(unJoin);
 
-        groupActionRegistry.addAction(participate);
+        // groupActionRegistry.addAction(participate);
         createSetMembersVisibilityAction(i18n.t("anyone"), SocialNetworkVisibilityDTO.anyone);
         createSetMembersVisibilityAction(i18n.t("only members"), SocialNetworkVisibilityDTO.onlymembers);
         createSetMembersVisibilityAction(i18n.t("only admins"), SocialNetworkVisibilityDTO.onlyadmins);
@@ -181,8 +185,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                     public void onEvent(final StateToken parameter) {
                         groupServiceProvider.get().setGroupNewMembersJoiningPolicy(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), admissionPolicy,
-                                new AsyncCallbackSimple<Object>() {
-                                    public void onSuccess(final Object result) {
+                                new AsyncCallbackSimple<Void>() {
+                                    public void onSuccess(final Void result) {
                                         NotifyUser.info(i18n.t("Members joining policy changed"));
                                     }
                                 });
@@ -206,8 +210,8 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
                     public void onEvent(final StateToken parameter) {
                         groupServiceProvider.get().setSocialNetworkVisibility(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), visibility,
-                                new AsyncCallbackSimple<Object>() {
-                                    public void onSuccess(final Object result) {
+                                new AsyncCallbackSimple<Void>() {
+                                    public void onSuccess(final Void result) {
                                         NotifyUser.info(i18n.t("Members visibility changed"));
                                     }
                                 });

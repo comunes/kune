@@ -8,7 +8,7 @@ public class PushButtonGui extends ButtonGui {
     public PushButtonGui(final PushButtonDescriptor btn) {
         super(btn, true);
         setPressed(btn.isPushed());
-        btn.action.addPropertyChangeListener(new PropertyChangeListener() {
+        btn.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(PushButtonDescriptor.PUSHED)) {
                     setPressed(btn.isPushed());

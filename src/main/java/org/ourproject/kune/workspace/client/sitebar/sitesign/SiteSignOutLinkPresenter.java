@@ -74,7 +74,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 
     public void doSignOut() {
         if (beforeSignOut.checkBeforeAction()) {
-            userService.get().logout(session.getUserHash(), new AsyncCallback<Object>() {
+            userService.get().logout(session.getUserHash(), new AsyncCallback<Void>() {
                 public void onFailure(final Throwable caught) {
                     NotifyUser.hideProgress();
                     if (caught instanceof SessionExpiredException) {
@@ -86,7 +86,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
                     }
                 }
 
-                public void onSuccess(final Object arg0) {
+                public void onSuccess(final Void arg0) {
                     NotifyUser.hideProgress();
                     clientUIsignOut();
                 }

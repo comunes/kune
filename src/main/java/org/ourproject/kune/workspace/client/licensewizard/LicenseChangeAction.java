@@ -47,13 +47,13 @@ public class LicenseChangeAction {
 
     public void changeLicense(final StateToken token, final LicenseDTO license, final Listener0 onSuccess) {
         NotifyUser.showProgressProcessing();
-        groupService.get().changeDefLicense(session.getUserHash(), token, license, new AsyncCallback<Object>() {
+        groupService.get().changeDefLicense(session.getUserHash(), token, license, new AsyncCallback<Void>() {
             public void onFailure(final Throwable caught) {
                 NotifyUser.hideProgress();
                 NotifyUser.error(i18n.t("Error changing default group license"));
             }
 
-            public void onSuccess(final Object result) {
+            public void onSuccess(final Void result) {
                 stateManager.reload();
                 onSuccess.onEvent();
             }

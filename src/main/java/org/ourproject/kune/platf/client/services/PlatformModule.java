@@ -29,7 +29,9 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
+import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
+import org.ourproject.kune.platf.client.state.AccessRightsClientManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
@@ -179,7 +181,7 @@ public class PlatformModule extends AbstractExtendedModule {
         register(Singleton.class, new Factory<Application>(Application.class) {
             @Override
             public Application create() {
-                return new ApplicationDefault(i(Session.class));
+                return new ApplicationDefault(i(Session.class), i(SiteServiceAsync.class));
             }
         });
 
@@ -454,6 +456,13 @@ public class PlatformModule extends AbstractExtendedModule {
             @Override
             public void onAfterCreated(final GuiBindingsRegister instance) {
                 i(BasicGuiBindings.class);
+            }
+        });
+
+        register(Singleton.class, new Factory<AccessRightsClientManager>(AccessRightsClientManager.class) {
+            @Override
+            public AccessRightsClientManager create() {
+                return new AccessRightsClientManager(i(StateManager.class));
             }
         });
 

@@ -12,64 +12,22 @@ import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractGuiItem extends Composite implements View {
 
-    protected AbstractAction action;
+    protected final GuiActionDescrip descriptor;
+
+    public AbstractGuiItem(final GuiActionDescrip descriptor) {
+        super();
+        this.descriptor = descriptor;
+    }
 
     /**
-     * Listener the button uses to receive PropertyChangeEvents from its Action.
+     * Sets the item properties from the stored values
      */
-    protected PropertyChangeListener changeListener;
-
-    public void setAction(final AbstractAction newaction) {
-        if (action != null) {
-            action.removePropertyChangeListener(changeListener);
-            // removeActionListener(action);
-            if (changeListener != null) {
-                action.removePropertyChangeListener(changeListener);
-                // @PMD:REVIEWED:NullAssignment: by vjrj on 24/05/09 20:05
-                changeListener = null;
-            }
-        }
-
-        action = newaction;
-        configurePropertiesFromAction(action);
-        if (action != null) {
-            changeListener = createActionPropertyChangeListener(newaction);
-            action.addPropertyChangeListener(changeListener);
-            // addActionListener(action);
-        }
+    public void configureItemFromProperties() {
+        configure();
     }
 
-    protected void configurePropertiesFromAction(final Action action) {
-        configurePropertiesFromActionImpl(action);
-    }
-
-    protected PropertyChangeListener createActionPropertyChangeListener(final Action action) {
-        return new PropertyChangeListener() {
-            public void propertyChange(final PropertyChangeEvent event) {
-                final Action act = (Action) (event.getSource());
-                if (event.getPropertyName().equals(Action.ENABLED)) {
-                    setEnabled(act.isEnabled());
-                } else if (event.getPropertyName().equals(Action.NAME)) {
-                    setText((String) (act.getValue(Action.NAME)));
-                } else if (event.getPropertyName().equals(Action.SMALL_ICON)) {
-                    setIcon(action.getValue(Action.SMALL_ICON));
-                } else if (event.getPropertyName().equals(Action.SHORT_DESCRIPTION)) {
-                    setToolTipText((String) (act.getValue(Action.SHORT_DESCRIPTION)));
-                } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
-                    setVisible(act);
-                }
-                // else if (e.getPropertyName().equals(Action.MNEMONIC_KEY)) {
-                // if (act.getValue(Action.MNEMONIC_KEY) != null) {
-                // setMnemonic(((Integer) (act.getValue(Action.MNEMONIC_KEY)))
-                // .intValue());
-                // } else if
-                // (e.getPropertyName().equals(Action.ACTION_COMMAND_KEY)) {
-                // setActionCommand((String)
-                // (act.getValue(Action.ACTION_COMMAND_KEY)));
-                // }
-                // }
-            }
-        };
+    public AbstractAction getAction() {
+        return descriptor.getAction();
     }
 
     protected abstract void setEnabled(boolean enabled);
@@ -82,34 +40,42 @@ public abstract class AbstractGuiItem extends Composite implements View {
 
     protected abstract void setToolTipText(String text);
 
-    private void configurePropertiesFromActionImpl(final Action action) {
-        if (action == null) {
-            setText(null);
-            setIcon(null);
-            setEnabled(true);
-            setToolTipText(null);
-        } else {
-            setText((String) (action.getValue(Action.NAME)));
-            setIcon(action.getValue(Action.SMALL_ICON));
-            setEnabled(action.isEnabled());
-            setToolTipText((String) (action.getValue(Action.SHORT_DESCRIPTION)));
-            setVisible(action);
-            // if (a.getValue(Action.MNEMONIC_KEY) != null) {
-            // setMnemonic(((Integer)
-            // (a.getValue(Action.MNEMONIC_KEY))).intValue());
-            // }
-            // String actionCommand = (String)
-            // (a.getValue(Action.ACTION_COMMAND_KEY));
-            //
-            // // Set actionCommand to button's text by default if it is not
-            // // specified
-            // if (actionCommand != null) {
-            // setActionCommand((String)
-            // (a.getValue(Action.ACTION_COMMAND_KEY)));
-            // } else {
-            // setActionCommand(getText());
-            // }
-        }
+    private void configure() {
+        configureProperties();
+        final PropertyChangeListener changeListener = createActionPropertyChangeListener();
+        descriptor.getAction().addPropertyChangeListener(changeListener);
+        descriptor.addPropertyChangeListener(changeListener);
+    }
+
+    private void configureProperties() {
+        setText((String) (descriptor.getValue(Action.NAME)));
+        setIcon(descriptor.getValue(Action.SMALL_ICON));
+        setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
+        setToolTipText((String) (descriptor.getValue(Action.SHORT_DESCRIPTION)));
+        setVisible((Boolean) descriptor.getValue(GuiActionDescrip.VISIBLE));
+    }
+
+    private PropertyChangeListener createActionPropertyChangeListener() {
+        return new PropertyChangeListener() {
+            public void propertyChange(final PropertyChangeEvent event) {
+                final Object newValue = event.getNewValue();
+                if (event.getPropertyName().equals(Action.ENABLED)) {
+                    setEnabled((Boolean) newValue);
+                } else if (event.getPropertyName().equals(Action.NAME)) {
+                    setText((String) newValue);
+                } else if (event.getPropertyName().equals(Action.SMALL_ICON)) {
+                    setIcon(newValue);
+                } else if (event.getPropertyName().equals(Action.SHORT_DESCRIPTION)) {
+                    setToolTipText((String) newValue);
+                } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
+                    setVisible((Boolean) newValue);
+                }
+            }
+        };
+    }
+
+    private void setEnabled(final Boolean enabled) {
+        setEnabled(enabled == null ? true : enabled);
     }
 
     private void setIcon(final Object icon) {
@@ -122,8 +88,7 @@ public abstract class AbstractGuiItem extends Composite implements View {
         }
     }
 
-    private void setVisible(final Action action) {
-        final Boolean visible = (Boolean) action.getValue(GuiActionDescrip.VISIBLE);
+    private void setVisible(final Boolean visible) {
         setVisible(visible == null ? true : visible);
     }
 }

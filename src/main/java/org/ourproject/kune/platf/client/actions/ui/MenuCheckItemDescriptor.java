@@ -3,6 +3,7 @@ package org.ourproject.kune.platf.client.actions.ui;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 
 public class MenuCheckItemDescriptor extends MenuItemDescriptor {
+
     public static final String CHECKED = "checked";
 
     private boolean checked = false;
@@ -23,7 +24,7 @@ public class MenuCheckItemDescriptor extends MenuItemDescriptor {
     public void setChecked(final boolean checked) {
         if (checked != this.checked) {
             this.checked = checked;
-            action.putValue(CHECKED, this.checked);
+            putValue(CHECKED, this.checked);
         }
     }
 }

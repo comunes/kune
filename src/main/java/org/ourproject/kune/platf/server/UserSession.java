@@ -36,22 +36,12 @@ public class UserSession {
         this.manager = manager;
     }
 
-    public void login(final User user, final String newUserHash) {
-        setUser(user);
-        setHash(newUserHash);
-    }
-
-    public void logout() {
-        userId = null;
-        userHash = null;
+    public String getHash() {
+        return userHash;
     }
 
     public User getUser() {
         return manager.find(userId);
-    }
-
-    public String getHash() {
-        return userHash;
     }
 
     public boolean isUserLoggedIn() {
@@ -62,12 +52,22 @@ public class UserSession {
         return !isUserLoggedIn();
     }
 
-    private void setUser(final User user) {
-        userId = user.getId();
+    public void login(final User user, final String newUserHash) {
+        setUser(user);
+        setHash(newUserHash);
+    }
+
+    public void logout() {
+        userId = null;
+        userHash = null;
     }
 
     private void setHash(final String hash) {
         this.userHash = hash;
+    }
+
+    private void setUser(final User user) {
+        userId = user.getId();
     }
 
 }

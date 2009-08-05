@@ -9,12 +9,17 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.Scopes;
+import com.google.inject.servlet.RequestScoped;
+import com.google.inject.servlet.SessionScoped;
 import com.wideplay.warp.jpa.JpaUnit;
 
 public abstract class TestHelper {
     public static Injector create(final Module module, final String persistenceUnit, final String propetiesFileName) {
-        Injector injector = Guice.createInjector(module, new Module() {
-            public void configure(Binder binder) {
+        final Injector injector = Guice.createInjector(module, new Module() {
+            public void configure(final Binder binder) {
+                binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
+                binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
                 binder.bindConstant().annotatedWith(JpaUnit.class).to(persistenceUnit);
                 binder.bindConstant().annotatedWith(PropertiesFileName.class).to(propetiesFileName);
                 binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);

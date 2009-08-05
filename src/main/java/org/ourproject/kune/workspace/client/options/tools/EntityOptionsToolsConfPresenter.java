@@ -102,13 +102,13 @@ public abstract class EntityOptionsToolsConfPresenter {
 
     protected void setToolCheckedInServer(final boolean checked, final String toolName) {
         groupService.get().setToolEnabled(session.getUserHash(), getOperationToken(), toolName, checked,
-                new AsyncCallback<Object>() {
+                new AsyncCallback<Void>() {
                     public void onFailure(final Throwable caught) {
                         view.setChecked(toolName, !checked);
                         entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), Level.error);
                     }
 
-                    public void onSuccess(final Object result) {
+                    public void onSuccess(final Void result) {
                         stateManager.reload();
                     }
                 });

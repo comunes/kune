@@ -20,14 +20,11 @@ import com.google.inject.Singleton;
 public class PropertiesManagerDefault extends DefaultManager<Properties, Long> implements PropertiesManager {
 
     private final Property propFinder;
-    private final Properties propsFinder;
 
     @Inject
-    public PropertiesManagerDefault(final Provider<EntityManager> provider, final Property propFinder,
-            final Properties propsFinder) {
+    public PropertiesManagerDefault(final Provider<EntityManager> provider, final Property propFinder) {
         super(provider, Properties.class);
         this.propFinder = propFinder;
-        this.propsFinder = propsFinder;
     }
 
     public HashMap<String, PropertySetted> get(final Properties properties) {

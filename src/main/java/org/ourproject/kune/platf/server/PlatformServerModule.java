@@ -124,6 +124,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(KuneProperties.class).to(KunePropertiesDefault.class);
         bind(Mapper.class).to(DozerMapper.class);
         bind(ServerToolRegistry.class);
+        // bind(FileUploadManager.class).in(ServletScopes.REQUEST);
         bind(FileUploadManager.class);
         bind(FileDownloadManager.class);
         bind(EntityLogoUploadManager.class);

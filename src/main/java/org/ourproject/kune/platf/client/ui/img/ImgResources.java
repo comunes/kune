@@ -15,6 +15,9 @@ public interface ImgResources extends ImmutableResourceBundle {
     @Resource("kimg.css")
     CssResource css();
 
+    @Resource("del-green.png")
+    ImageResource delGreen();
+
     @Resource("group-home.png")
     ImageResource groupHome();
 
@@ -35,5 +38,4 @@ public interface ImgResources extends ImmutableResourceBundle {
 
     @Resource("prefs.png")
     ImageResource prefs();
-
 }

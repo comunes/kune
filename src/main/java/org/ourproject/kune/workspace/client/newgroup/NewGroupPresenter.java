@@ -64,8 +64,8 @@ public class NewGroupPresenter implements NewGroup {
     }
 
     public void doNewGroup() {
-        session.check(new AsyncCallbackSimple<Object>() {
-            public void onSuccess(final Object result) {
+        session.check(new AsyncCallbackSimple<Void>() {
+            public void onSuccess(final Void result) {
                 if (session.isLogged()) {
                     NotifyUser.showProgressProcessing();
                     view.show();

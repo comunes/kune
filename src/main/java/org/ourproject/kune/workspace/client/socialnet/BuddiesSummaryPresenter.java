@@ -41,9 +41,11 @@ import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
 import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageUtils;
+import org.ourproject.kune.platf.client.state.AccessRightsClientManager;
 import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbar;
 
@@ -64,13 +66,15 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
     private final Provider<UserServiceAsync> userServiceAsync;
     private final Provider<FileDownloadUtils> fileDownUtilsProvider;
 
-    public BuddiesSummaryPresenter(StateManager stateManager, final Session session,
-            Provider<UserServiceAsync> userServiceAsync, UserActionRegistry actionRegistry,
-            I18nTranslationService i18n, final Provider<ChatEngine> chatEngineProvider,
-            final ActionBuddiesSummaryToolbar toolbar, Provider<FileDownloadUtils> fileDownUtilsProvider,
-            ImageUtils imageUtils, Provider<SocialNetworkServiceAsync> snServiceAsync,
-            GroupActionRegistry groupActionRegistry) {
-        super(i18n, stateManager, session, snServiceAsync, groupActionRegistry, fileDownUtilsProvider);
+    public BuddiesSummaryPresenter(final StateManager stateManager, final Session session,
+            final Provider<UserServiceAsync> userServiceAsync, final UserActionRegistry actionRegistry,
+            final I18nTranslationService i18n, final Provider<ChatEngine> chatEngineProvider,
+            final ActionBuddiesSummaryToolbar toolbar, final Provider<FileDownloadUtils> fileDownUtilsProvider,
+            final ImageUtils imageUtils, final Provider<SocialNetworkServiceAsync> snServiceAsync,
+            final GroupActionRegistry groupActionRegistry, final AccessRightsClientManager accessRightManager,
+            final ImgResources img) {
+        super(i18n, stateManager, accessRightManager, session, snServiceAsync, groupActionRegistry,
+                fileDownUtilsProvider, img);
         this.stateManager = stateManager;
         this.session = session;
         this.userServiceAsync = userServiceAsync;
@@ -80,12 +84,12 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         this.toolbar = toolbar;
         this.fileDownUtilsProvider = fileDownUtilsProvider;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-            public void onEvent(StateAbstractDTO state) {
+            public void onEvent(final StateAbstractDTO state) {
                 setState(state);
             }
         });
         stateManager.onSocialNetworkChanged(new Listener<StateAbstractDTO>() {
-            public void onEvent(StateAbstractDTO state) {
+            public void onEvent(final StateAbstractDTO state) {
                 setState(state);
             }
         });
@@ -96,26 +100,26 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         return view;
     }
 
-    public void init(BuddiesSummaryView view) {
+    public void init(final BuddiesSummaryView view) {
         this.view = view;
     }
 
-    protected void setState(StateAbstractDTO state) {
+    protected void setState(final StateAbstractDTO state) {
         if (state.getGroup().isPersonal()) {
             view.clear();
-            UserBuddiesDataDTO userBuddies = state.getUserBuddies();
+            final UserBuddiesDataDTO userBuddies = state.getUserBuddies();
             if (state.getSocialNetworkData().isBuddiesVisible()) {
-                List<UserSimpleDTO> buddies = userBuddies.getBuddies();
-                for (UserSimpleDTO user : buddies) {
-                    String avatarUrl = user.hasLogo() ? fileDownUtilsProvider.get().getLogoImageUrl(
+                final List<UserSimpleDTO> buddies = userBuddies.getBuddies();
+                for (final UserSimpleDTO user : buddies) {
+                    final String avatarUrl = user.hasLogo() ? fileDownUtilsProvider.get().getLogoImageUrl(
                             user.getStateToken()) : BuddiesSummaryView.NOAVATAR;
-                    String tooltip = super.createTooltipWithLogo(user.getShortName(), user.getStateToken(),
+                    final String tooltip = super.createTooltipWithLogo(user.getShortName(), user.getStateToken(),
                             user.hasLogo(), true);
                     view.addBuddie(user, actionRegistry.getCurrentActions(user, session.isLogged(),
                             new AccessRightsDTO(true, true, true), false), avatarUrl, user.getName(), tooltip);
                 }
-                boolean hasLocalBuddies = buddies.size() > 0;
-                int numExtBuddies = userBuddies.getOtherExtBuddies();
+                final boolean hasLocalBuddies = buddies.size() > 0;
+                final int numExtBuddies = userBuddies.getOtherExtBuddies();
                 if (numExtBuddies > 0) {
                     if (hasLocalBuddies) {
                         // i18n: plural
@@ -147,9 +151,9 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
     }
 
     private void createAddNewBuddiesAction() {
-        ActionToolbarMenuDescriptor<UserSimpleDTO> addNewBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
+        final ActionToolbarMenuDescriptor<UserSimpleDTO> addNewBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, buddiesBottom, new Listener<UserSimpleDTO>() {
-                    public void onEvent(UserSimpleDTO parameter) {
+                    public void onEvent(final UserSimpleDTO parameter) {
                         NotifyUser.info("In development");
                     }
                 });
@@ -159,23 +163,24 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         actionRegistry.addAction(addNewBuddiesAction);
     }
 
-    private void createSetBuddiesVisibilityAction(String textDescription, final UserBuddiesVisibilityDTO visibility) {
-        ActionToolbarMenuRadioDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuRadioDescriptor<UserSimpleDTO>(
+    private void createSetBuddiesVisibilityAction(final String textDescription,
+            final UserBuddiesVisibilityDTO visibility) {
+        final ActionToolbarMenuRadioDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuRadioDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, buddiesBottom, new Listener<UserSimpleDTO>() {
-                    public void onEvent(UserSimpleDTO parameter) {
+                    public void onEvent(final UserSimpleDTO parameter) {
                         userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), visibility,
-                                new AsyncCallbackSimple<Object>() {
-                                    public void onSuccess(Object result) {
+                                new AsyncCallbackSimple<Void>() {
+                                    public void onSuccess(final Void result) {
                                         NotifyUser.info(i18n.t("Buddies visibility changed"));
                                     }
                                 });
                     }
                 }, BUDDIES_VISIBILITY_GROUP, new RadioMustBeChecked() {
                     public boolean mustBeChecked() {
-                        StateAbstractDTO currentState = session.getCurrentState();
+                        final StateAbstractDTO currentState = session.getCurrentState();
                         if (currentState.getGroup().isPersonal()) {
-                            SocialNetworkDataDTO socialNetworkData = currentState.getSocialNetworkData();
+                            final SocialNetworkDataDTO socialNetworkData = currentState.getSocialNetworkData();
                             return socialNetworkData.getUserBuddiesVisibility().equals(visibility);
                         }
                         return false;
@@ -198,7 +203,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         addAsBuddie.setTextDescription(i18n.t("Add as a buddie"));
         addAsBuddie.setIconUrl("images/add-green.png");
         addAsBuddie.setEnableCondition(new ActionEnableCondition<UserSimpleDTO>() {
-            public boolean mustBeEnabled(UserSimpleDTO user) {
+            public boolean mustBeEnabled(final UserSimpleDTO user) {
                 return !chatEngineProvider.get().isBuddie(user.getShortName());
             }
         });

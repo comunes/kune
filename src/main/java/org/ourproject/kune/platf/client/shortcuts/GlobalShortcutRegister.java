@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.shortcuts;
 
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
+import org.ourproject.kune.platf.client.actions.ChangebleObject;
 import org.ourproject.kune.platf.client.actions.InputMap;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
@@ -50,7 +51,7 @@ public class GlobalShortcutRegister extends InputMap {
 
     @Override
     public void put(final KeyStroke keystroke, final AbstractAction action) {
-        final AbstractAction previous = super.get(keystroke);
+        final ChangebleObject previous = super.get(keystroke);
         if (previous != null) {
             Log.warn("Shortcut already registed by: " + previous + "(overriding)");
         }

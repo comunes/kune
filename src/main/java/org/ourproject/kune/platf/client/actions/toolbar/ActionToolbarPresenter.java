@@ -132,10 +132,11 @@ public class ActionToolbarPresenter<T> implements ActionToolbar<T> {
     }
 
     private boolean isToolbarMenu(final ActionDescriptor<T> action) {
-        return action instanceof ActionToolbarMenuDescriptor || action instanceof ActionToolbarMenuAndItemDescriptor;
+        return action instanceof ActionToolbarMenuDescriptor<?>
+                || action instanceof ActionToolbarMenuAndItemDescriptor<?>;
     }
 
     private boolean isToolbarPushButton(final ActionDescriptor<T> action) {
-        return action instanceof ActionToolbarPushButtonDescriptor;
+        return action instanceof ActionToolbarPushButtonDescriptor<?>;
     }
 }
