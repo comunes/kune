@@ -20,6 +20,7 @@
 package org.ourproject.kune.app.server;
 
 import org.ourproject.kune.app.server.wave.WaveContainerListener;
+import org.ourproject.kune.app.server.wave.WaveInterceptorModule;
 import org.ourproject.kune.app.server.wave.WavePropertiesParser;
 import org.ourproject.kune.blogs.server.BlogServerModule;
 import org.ourproject.kune.chat.server.ChatServerModule;
@@ -128,6 +129,7 @@ public class KuneRackModule implements RackModule {
         builder.use(new RESTServicesModule());
         builder.use(configModule);
         builder.use(WavePropertiesParser.parseFlags(FlagSettings.class));
+        builder.use(new WaveInterceptorModule());
         builder.use(new ServerModule());
     }
 
