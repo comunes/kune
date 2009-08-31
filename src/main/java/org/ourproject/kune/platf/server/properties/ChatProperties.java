@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * sintactic sugar!
+ * Syntactic sugar!
  */
 @Singleton
 public class ChatProperties {

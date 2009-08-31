@@ -180,4 +180,5 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
         bind(SessionService.class).to(SessionServiceDefault.class);
     }
+
 }

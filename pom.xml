@@ -340,7 +340,96 @@
       <artifactId>jruby-rack</artifactId>
       <version>0.9.4</version>
     </dependency>
+
+    <!-- wave -->
+    <dependency>
+        <groupId>org.waveprotocol</groupId>
+        <artifactId>kune-wave-server</artifactId>
+        <version>0.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>1.2</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.3</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.6.1</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.guice</groupId>
+      <artifactId>guice-assistedinject</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jline</groupId>
+      <artifactId>jline</artifactId>
+      <version>0.9.94</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.gnu.inet</groupId>
+      <artifactId>libidn</artifactId>
+      <version>1.15</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>2.1.0</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>xpp3</groupId>
+      <artifactId>xpp3</artifactId>
+      <version>1.1.4c</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>xpp3</groupId>
+      <artifactId>xpp3_xpath</artifactId>
+      <version>1.1.4c</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.wave-protocol</groupId>
+      <artifactId>xmpp</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.wave-protocol</groupId>
+      <artifactId>whack</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.common</groupId>
+      <artifactId>collect</artifactId>
+      <version>1.0-rc2</version>
+    </dependency>
   </dependencies>
+
+  <distributionManagement>
+    <repository>
+      <id>kune.ourproject.org</id>
+      	<url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/</url>
+    </repository>
+  </distributionManagement>
+
   <!--
     http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html
   -->
@@ -540,12 +629,12 @@
       </plugin>
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
-        <artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.5</version>
         <!--
           <artifactId>jetty-maven-plugin</artifactId>
           <version>7.0.0.1beta0</version>
         -->
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>6.1.5</version>
         <configuration>
           <contextPath>/</contextPath>
           <webAppSourceDirectory>war</webAppSourceDirectory>
@@ -735,6 +824,13 @@
         <directory>src/main/java</directory>
       </resource>
     </resources>
+    <extensions>
+    	<extension>
+    		<groupId>org.apache.maven.wagon</groupId>
+    		<artifactId>wagon-ssh-external</artifactId>
+    		<version>1.0-beta-2</version>
+    	</extension>
+    </extensions>
   </build>
   <reporting>
     <plugins>
