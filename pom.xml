@@ -345,7 +345,7 @@
     <dependency>
         <groupId>org.waveprotocol</groupId>
         <artifactId>kune-wave-server</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.2.1</version>
     </dependency>
     <dependency>
       <groupId>commons-cli</groupId>

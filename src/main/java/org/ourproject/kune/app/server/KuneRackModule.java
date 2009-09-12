@@ -82,6 +82,7 @@ public class KuneRackModule implements RackModule {
                 if (sessionScope != null) {
                     bindScope(SessionScoped.class, sessionScope);
                 }
+                bind(WavePropertiesParser.class).asEagerSingleton();
             }
         };
     }
