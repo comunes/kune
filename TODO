@@ -11,6 +11,13 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** tag, resolve last implementation complexity.
+Summary: recover the:
+[Tag]  <-m--m->  [Content]
+and use:
+[Tag]  <-1--m->   [TagUserContent (fecha)]  <-m--1->  [Content]
+[User] <-1-------m--^
+for user bookmarks/favorites/links
 ** Use hibernate cache
    http://ehcache.sourceforge.net/documentation/openjpa_provider.html
    http://ehcache.sourceforge.net/documentation/hibernate.html
@@ -108,7 +115,6 @@ TODO-list for kune -*- mode: org; -*-
     - varsgroupname :: layout.greenforrest
 *** html+css+variables
 **** css:
-
 **** variables
      prefgroups
      - id :: 1
@@ -139,6 +145,7 @@ TODO-list for kune -*- mode: org; -*-
     }
 
 ** danigb,vjrj URLs public/workspace braimstorming
+   Read this ->  http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html
    Nowadays:
    - ws: #group.tool.container.content
    - public (prov): /public/group.tool.container.content.
