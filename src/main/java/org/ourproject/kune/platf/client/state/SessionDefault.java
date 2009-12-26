@@ -43,6 +43,7 @@ import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.core.client.GWT;
 
 public class SessionDefault implements Session {
     private String userHash;
@@ -171,7 +172,8 @@ public class SessionDefault implements Session {
     }
 
     public String getSiteUrl() {
-        return initData.getSiteUrl();
+        final String baseURL = GWT.getModuleBaseURL();
+        return baseURL.substring(0, baseURL.lastIndexOf("/" + GWT.getModuleName()));
     }
 
     public Object[][] getTimezones() {

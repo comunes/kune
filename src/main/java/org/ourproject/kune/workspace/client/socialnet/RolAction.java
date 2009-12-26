@@ -10,7 +10,7 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.state.StateManager;
 
 import com.calclab.suco.client.events.Listener2;
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
 
 public abstract class RolAction extends AbstractExtendedAction {
 

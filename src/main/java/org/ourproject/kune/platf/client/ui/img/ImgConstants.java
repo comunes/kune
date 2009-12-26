@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.ui.img;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
 
 public final class ImgConstants {
 

@@ -1,11 +1,11 @@
 package org.ourproject.kune.workspace.client.site;
 
-import com.google.gwt.libideas.resources.client.CssResource;
-import com.google.gwt.libideas.resources.client.ImmutableResourceBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 
-public interface DefCssResource extends ImmutableResourceBundle {
+public interface DefCssResource extends ClientBundle {
 
-    @Resource("defCssResource.css")
+    @Source("defCssResource.css")
     CssResource css();
 
 }

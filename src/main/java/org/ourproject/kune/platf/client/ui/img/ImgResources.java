@@ -1,41 +1,42 @@
 package org.ourproject.kune.platf.client.ui.img;
 
-import com.google.gwt.libideas.resources.client.CssResource;
-import com.google.gwt.libideas.resources.client.ImageResource;
-import com.google.gwt.libideas.resources.client.ImmutableResourceBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.resources.client.CssResource.Strict;
 
-public interface ImgResources extends ImmutableResourceBundle {
+public interface ImgResources extends ClientBundle {
 
-    @Resource("add-green.png")
+    @Source("add-green.png")
     ImageResource addGreen();
 
-    @Resource("bug.png")
+    @Source("bug.png")
     ImageResource bug();
 
-    @Resource("kimg.css")
-    CssResource css();
+    @Source("kimg.css")
+    @Strict
+    ImgCssResource css();
 
-    @Resource("del-green.png")
+    @Source("del-green.png")
     ImageResource delGreen();
 
-    @Resource("group-home.png")
+    @Source("group-home.png")
     ImageResource groupHome();
 
-    @Resource("info.png")
+    @Source("info.png")
     ImageResource info();
 
-    @Resource("kune-icon16.png")
+    @Source("kune-icon16.png")
     ImageResource kuneIcon16();
 
-    @Resource("language.png")
+    @Source("language.png")
     ImageResource language();
 
-    @Resource("arrow_out.png")
+    @Source("arrow_out.png")
     ImageResource maximize();
 
-    @Resource("arrow_in.png")
+    @Source("arrow_in.png")
     ImageResource minimize();
 
-    @Resource("prefs.png")
+    @Source("prefs.png")
     ImageResource prefs();
 }

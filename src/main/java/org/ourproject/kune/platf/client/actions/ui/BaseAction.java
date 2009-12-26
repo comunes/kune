@@ -4,7 +4,9 @@ import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
+
+import com.google.gwt.resources.client.ImageResource;
 
 public class BaseAction extends AbstractAction {
     public BaseAction(final String text, final String tooltip) {

@@ -148,6 +148,7 @@ public class InitData {
         return oggEmbedObject;
     }
 
+    @Deprecated
     public String getSiteDomain() {
         return siteDomain;
     }
@@ -260,6 +261,7 @@ public class InitData {
         this.oggEmbedObject = oggEmbedObject;
     }
 
+    @Deprecated
     public void setSiteDomain(final String siteDomain) {
         this.siteDomain = siteDomain;
     }

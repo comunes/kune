@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.actions;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
 
 public abstract class AbstractExtendedAction extends AbstractAction {
     public static final String NO_TEXT = null;

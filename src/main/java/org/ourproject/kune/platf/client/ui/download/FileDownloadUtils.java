@@ -26,13 +26,14 @@ import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.utils.Url;
 import org.ourproject.kune.platf.client.utils.UrlParam;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class FileDownloadUtils {
 
-    private static final String DOWNLOADSERVLET = "/ws/servlets/FileDownloadManager";
-    private static final String LOGODOWNLOADSERVLET = "/ws/servlets/EntityLogoDownloadManager";
+    private static final String DOWNLOADSERVLET = "servlets/FileDownloadManager";
+    private static final String LOGODOWNLOADSERVLET = "servlets/EntityLogoDownloadManager";
 
     private final Session session;
     private final ImageUtils imageUtils;
@@ -67,7 +68,8 @@ public class FileDownloadUtils {
     }
 
     public String getLogoImageUrl(final StateToken token) {
-        return new Url(LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString())).toString();
+        return new Url(GWT.getModuleBaseURL() + LOGODOWNLOADSERVLET,
+                new UrlParam(FileConstants.TOKEN, token.toString())).toString();
     }
 
     public String getUrl(final StateToken token) {
@@ -75,12 +77,13 @@ public class FileDownloadUtils {
     }
 
     private String calculateUrl(final StateToken token, final boolean download, final boolean useHash) {
-        Url url = new Url(DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, token.toString()));
+        final Url url = new Url(GWT.getModuleBaseURL() + DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+                token.toString()));
         if (download) {
             url.add(new UrlParam(FileConstants.DOWNLOAD, download));
         }
         if (useHash) {
-            String hash = session.getUserHash();
+            final String hash = session.getUserHash();
             if (hash != null) {
                 url.add(new UrlParam(FileConstants.HASH, hash));
             }

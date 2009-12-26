@@ -3,7 +3,7 @@ package org.ourproject.kune.platf.client.actions.ui;
 import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
 
 public class MenuDescriptor extends GuiActionDescrip {
 

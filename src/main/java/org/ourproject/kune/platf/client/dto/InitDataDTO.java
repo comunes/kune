@@ -139,6 +139,7 @@ public class InitDataDTO implements IsSerializable {
         return oggEmbedObject;
     }
 
+    @Deprecated
     public String getSiteDomain() {
         return siteDomain;
     }
@@ -255,6 +256,7 @@ public class InitDataDTO implements IsSerializable {
         this.oggEmbedObject = oggEmbedObject;
     }
 
+    @Deprecated
     public void setSiteDomain(final String siteDomain) {
         this.siteDomain = siteDomain;
     }

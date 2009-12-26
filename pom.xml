@@ -12,8 +12,11 @@
   <name>kune</name>
   <url>http://kune.ourproject.org</url>
   <properties>
-    <!-- <gwtVersion>2.0.0-SNAPSHOT</gwtVersion> -->
-    <gwtVersion>1.7.0</gwtVersion>
+    <!--
+      Available versions:
+      http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/
+    -->
+    <gwt.version>2.0.0</gwt.version>
   </properties>
   <dependencies>
     <!-- guice -->
@@ -33,40 +36,19 @@
       <version>1.0</version>
     </dependency>
 
-    <!-- GWT deps (from central repo) -->
+    <!-- GWT dependencies (from maven "central" repo) -->
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
-      <version>${gwtVersion}</version>
-      <scope>runtime</scope>
+      <version>${gwt.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>${gwtVersion}</version>
+      <version>${gwt.version}</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-dev</artifactId>
-      <version>${gwtVersion}</version>
-      <classifier>${platform}-libs</classifier>
-      <type>zip</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-dev</artifactId>
-      <version>${gwtVersion}</version>
-      <classifier>${platform}</classifier>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-incubator</artifactId>
-      <version>march-02-2009</version>
-      <scope>provided</scope>
-    </dependency>
+      </dependency>
     <!--
       <dependency> <groupId>com.extjs</groupId>
       <artifactId>gxt</artifactId> <version>1.0-beta2</version>
@@ -119,13 +101,14 @@
       <artifactId>jmagick</artifactId>
       <version>6.2.6-0</version>
     </dependency>
-    <dependency>
-      <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-web-gwt-dom</artifactId>
-      <version>2.0-SNAPSHOT-g164</version>
-      <!-- <version>2.0-SNAPSHOT</version>  -->
-      <!-- <version>2.0-SNAPSHOT-g20s</version> -->
-    </dependency>
+    <!--
+      <dependency> <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-web-gwt-dom</artifactId> <version>2.2</version>
+    -->
+    <!-- <version>2.0-SNAPSHOT-g164</version> -->
+    <!-- <version>2.0-SNAPSHOT</version>  -->
+    <!-- <version>2.0-SNAPSHOT-g20s</version> -->
+    <!--    </dependency> -->
 
     <!-- xmpp -->
     <dependency>
@@ -281,25 +264,23 @@
     </dependency>
 
     <!-- jetty dependencies -->
-    <dependency>
-      <groupId>org.mortbay.jetty</groupId>
-      <artifactId>jetty-util</artifactId>
-      <version>6.1.5</version>
-      <!--
-      <version>7.0.0.pre5</version>
-      -->
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mortbay.jetty</groupId>
-      <artifactId>maven-jetty-plugin</artifactId>
-      <!--
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>7.0.0.1beta0</version>
-      -->
-      <version>6.1.5</version>
-      <scope>provided</scope>
-    </dependency>
+    <!--    <dependency>-->
+    <!--      <groupId>org.mortbay.jetty</groupId>-->
+    <!--      <artifactId>jetty-util</artifactId>-->
+    <!--      <version>6.1.11</version>-->
+    <!--      -->
+    <!--      <version>7.0.0.pre5</version>-->
+    <!--      -->
+    <!--      <scope>provided</scope>-->
+    <!--    </dependency>-->
+        <dependency>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>maven-jetty-plugin</artifactId>
+<!--            <artifactId>jetty-maven-plugin</artifactId>-->
+<!--            <version>7.0.0.1beta0</version>-->
+          <version>6.1.11</version>
+          <scope>runtime</scope>
+        </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
@@ -343,9 +324,9 @@
 
     <!-- wave -->
     <dependency>
-        <groupId>org.waveprotocol</groupId>
-        <artifactId>kune-wave-server</artifactId>
-        <version>0.0.2.1</version>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>kune-wave-server</artifactId>
+      <version>0.0.2.2</version>
     </dependency>
     <dependency>
       <groupId>commons-cli</groupId>
@@ -422,30 +403,29 @@
       <version>1.0-rc2</version>
     </dependency>
   </dependencies>
-
   <distributionManagement>
     <repository>
       <id>kune.ourproject.org</id>
-      	<url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/</url>
+      <url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/</url>
     </repository>
   </distributionManagement>
-
   <!--
     http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html
   -->
   <pluginRepositories>
-    <pluginRepository>
-      <id>gwt-maven</id>
+    <!--
+      <pluginRepository> <id>gwt-maven</id>
       <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
-    </pluginRepository>
+      </pluginRepository>
+    -->
     <pluginRepository>
       <id>Codehaus Snapshots</id>
       <url>http://snapshots.repository.codehaus.org/</url>
       <snapshots>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
       </snapshots>
       <releases>
-        <enabled>false</enabled>  <!-- Workaround for MNG-2974, see note below -->
+        <enabled>true</enabled>  <!-- Workaround for MNG-2974, see note below -->
       </releases>
     </pluginRepository>
   </pluginRepositories>
@@ -565,8 +545,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.6</source>
+          <target>1.6</target>
           <!--
             Uncomment and run mvn with -X -e if we have same compile
             problems <compilerArgument>-verbose</compilerArgument>
@@ -575,47 +555,30 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>com.totsp.gwt</groupId>
-        <artifactId>maven-googlewebtoolkit2-plugin</artifactId>
-        <version>2.0-RC1</version>
-        <configuration>
-          <logLevel>INFO</logLevel>
-          <!-- <style>OBF or PRETTY</style> -->
-          <style>PRETTY</style>
-          <!--
-            <output>${project.build.directory}/gwt/www</output>
-          -->
-          <logLevel>INFO</logLevel>
-          <noServer>true</noServer>
-          <extraJvmArgs>-Xmx640m</extraJvmArgs>
-          <gwtVersion>${gwtVersion}</gwtVersion>
-          <output>war/</output>
-          <runTarget>ws/Kune.html</runTarget>
-          <compileTargets>
-            <compileTarget>org.ourproject.kune.app.Kune</compileTarget>
-          </compileTargets>
-          <generatorRootClasses>
-            <value>org.ourproject.kune.MyBean</value>
-          </generatorRootClasses>
-          <generatorDestinationPackage> org.ourproject.kune.app.Kune </generatorDestinationPackage>
-          <generateGettersAndSetters> true </generateGettersAndSetters>
-          <generatePropertyChangeSupport> true </generatePropertyChangeSupport>
-        </configuration>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <!-- http://mojo.codehaus.org/gwt-maven-plugin/index.html -->
+        <version>1.2-SNAPSHOT</version>
         <executions>
           <execution>
+            <configuration>
+              <!-- <extraJvmArgs>-Xmx512M</extraJvmArgs> -->
+              <soyc>false</soyc>
+              <style>OBF</style>
+            </configuration>
             <goals>
-              <!-- <goal>mergewebxml</goal> -->
-              <!-- <goal>compile</goal> -->
+              <!-- gwt:* goals to be executed during build -->
+              <goal>compile</goal>
+              <!--
+                http://mojo.codehaus.org/gwt-maven-plugin/user-guide/library.html
+              -->
+              <goal>resources</goal>
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.0</version>
         <configuration>
-          <webXml>${project.build.directory}/WEB-INF/web.xml</webXml>
+          <runTarget>org.ourproject.kune.app.Kune/ws.html?log_level=DEBUG</runTarget>
+          <gwt.module>org.ourproject.kune.app.Kune</gwt.module>
         </configuration>
       </plugin>
       <plugin>
@@ -629,19 +592,17 @@
       </plugin>
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
-        <!--
-          <artifactId>jetty-maven-plugin</artifactId>
-          <version>7.0.0.1beta0</version>
-        -->
+      <!--
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>7.0.0.1beta0</version>
+      -->
         <artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.5</version>
-        <configuration>
-          <contextPath>/</contextPath>
-          <webAppSourceDirectory>war</webAppSourceDirectory>
-          <reload>manual</reload>
-          <scanIntervalSeconds>0</scanIntervalSeconds>
-        </configuration>
-      </plugin>
+        <version>6.1.11</version> <configuration>
+        <contextPath>/</contextPath>
+        <webAppSourceDirectory>war</webAppSourceDirectory>
+        <reload>manual</reload>
+        <scanIntervalSeconds>0</scanIntervalSeconds> </configuration>
+        </plugin>
       <!--
         <plugin> <groupId>org.codehaus.mojo</groupId>
         <artifactId>deb-maven-plugin</artifactId>
@@ -787,32 +748,6 @@
         <followSymlinks>false</followSymlinks> </includes> </fileset>
         </filesets> </configuration> </plugin>
       -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>unpack</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>com.google.gwt</groupId>
-                  <artifactId>gwt-dev</artifactId>
-                  <version>${gwtVersion}</version>
-                  <classifier>${platform}-libs</classifier>
-                  <type>zip</type>
-                  <overWrite>false</overWrite>
-                  <outputDirectory>${settings.localRepository}/com/google/gwt/gwt-dev/${gwtVersion}</outputDirectory>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
     <outputDirectory>war/WEB-INF/classes</outputDirectory>
     <testOutputDirectory>war/WEB-INF/test-classes</testOutputDirectory>
@@ -825,11 +760,11 @@
       </resource>
     </resources>
     <extensions>
-    	<extension>
-    		<groupId>org.apache.maven.wagon</groupId>
-    		<artifactId>wagon-ssh-external</artifactId>
-    		<version>1.0-beta-2</version>
-    	</extension>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh-external</artifactId>
+        <version>1.0-beta-2</version>
+      </extension>
     </extensions>
   </build>
   <reporting>
@@ -877,63 +812,4 @@
       </plugin>
     </plugins>
   </reporting>
-
-  <!--  profiles (with activation per platform) -->
-  <profiles>
-    <profile>
-      <id>gwt-dev-windows</id>
-      <properties>
-        <platform>windows</platform>
-      </properties>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <os>
-          <family>windows</family>
-        </os>
-      </activation>
-      <!-- FIXME: put here a similar temp directory to linux/unix systems -->
-      <build>
-        <directory>target/</directory>
-      </build>
-      <reporting>
-        <outputDirectory>target/</outputDirectory>
-      </reporting>
-    </profile>
-    <profile>
-      <id>gwt-dev-mac</id>
-      <properties>
-        <platform>mac</platform>
-      </properties>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <os>
-          <family>mac</family>
-        </os>
-      </activation>
-      <build>
-        <directory>/var/tmp/kune-target/</directory>
-      </build>
-      <reporting>
-        <outputDirectory>/var/tmp/kune-target/</outputDirectory>
-      </reporting>
-    </profile>
-    <profile>
-      <id>gwt-dev-linux</id>
-      <properties>
-        <platform>linux</platform>
-      </properties>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-        <os>
-          <name>linux</name>
-        </os>
-      </activation>
-      <build>
-        <directory>/var/tmp/kune-target/</directory>
-      </build>
-      <reporting>
-        <outputDirectory>/var/tmp/kune-target/</outputDirectory>
-      </reporting>
-    </profile>
-  </profiles>
 </project>

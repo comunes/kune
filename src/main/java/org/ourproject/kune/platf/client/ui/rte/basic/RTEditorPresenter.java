@@ -50,7 +50,7 @@ import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 
 public class RTEditorPresenter extends AbstractActionExtensiblePresenter implements RTEditor {

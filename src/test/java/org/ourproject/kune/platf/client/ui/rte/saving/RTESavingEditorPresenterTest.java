@@ -18,7 +18,7 @@ import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.testing.events.MockedListener;
 import com.calclab.suco.testing.events.MockedListener0;
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
 
 public class RTESavingEditorPresenterTest {
 

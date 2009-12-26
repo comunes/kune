@@ -100,7 +100,7 @@ Not verified: in Windows you need to do something similar (copy the jmagick .dll
 
 Run jetty:
 
- mvn jetty:run -Dliquibase.should.run=false
+ mvn jetty:run -Dliquibase.should.run=false -Dgwt.compiler.skip=true
 
 Once started (and initialized the db), you should stop (Ctrl-C). In the next start the db migrator will run and insert the initial data.
 
@@ -109,7 +109,7 @@ After that, as a norma, you can start the server using the script:
 
 or directly (w$):
 
- mvn jetty:run -Dorg.mortbay.util.FileResource.checkAliases=False
+ mvn jetty:run -Dorg.mortbay.util.FileResource.checkAliases=False -Dgwt.compiler.skip=true
 
 TODO: put the aliases stuff into a jetty config file
 

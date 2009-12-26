@@ -39,7 +39,7 @@ package org.ourproject.kune.platf.client.actions;
 
 import java.util.HashMap;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
 
 /**
  * A base class for implementing the {@link Action} interface.

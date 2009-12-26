@@ -59,13 +59,13 @@ public class LinkExecutableUtils {
      *            the rich text area whose selection to test
      * @return the anchor in which the current selection is found
      */
-    public static Element getSelectedAnchor(RichTextArea rta) {
+    public static Element getSelectedAnchor(final RichTextArea rta) {
         // there is no wrapping anchor if there is no selection
         if (rta.getDocument().getSelection().getRangeCount() == 0) {
             return null;
         }
         // Find the selected anchor by the following algorithm:
-        Range range = rta.getDocument().getSelection().getRangeAt(0);
+        final Range range = rta.getDocument().getSelection().getRangeAt(0);
         // if the selection is collapsed, we have our answer already
         if (range.isCollapsed()) {
             return (Element) DOMUtils.getInstance().getFirstAncestor(range.getStartContainer(), ANCHOR_TAG_NAME);

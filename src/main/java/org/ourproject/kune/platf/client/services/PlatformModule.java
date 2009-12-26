@@ -110,7 +110,7 @@ import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.libideas.client.StyleInjector;
+import com.google.gwt.dom.client.StyleInjector;
 
 public class PlatformModule extends AbstractExtendedModule {
 

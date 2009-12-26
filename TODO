@@ -11,6 +11,7 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** Compilation in target... resolve
 ** tag, resolve last implementation complexity.
 Summary: recover the:
 [Tag]  <-m--m->  [Content]

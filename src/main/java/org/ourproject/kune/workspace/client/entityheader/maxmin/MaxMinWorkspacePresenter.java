@@ -12,7 +12,7 @@ import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
 
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
 
 public class MaxMinWorkspacePresenter implements MaxMinWorkspace {
     public class MaximizeAction extends AbstractExtendedAction {

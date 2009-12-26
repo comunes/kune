@@ -1,118 +1,119 @@
 package org.ourproject.kune.platf.client.ui.rte.img;
 
-import com.google.gwt.libideas.resources.client.CssResource;
-import com.google.gwt.libideas.resources.client.ImageResource;
-import com.google.gwt.libideas.resources.client.ImmutableResourceBundle;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.resources.client.CssResource.Strict;
 
 // @PMD:REVIEWED:TooManyMethods: by vjrj on 27/05/09 0:06
-public interface RTEImgResources extends ImmutableResourceBundle {
+public interface RTEImgResources extends ClientBundle {
 
-    @Resource("alignleft.png")
+    @Source("alignleft.png")
     ImageResource alignleft();
 
-    @Resource("alignright.png")
+    @Source("alignright.png")
     ImageResource alignright();
 
-    @Resource("backcolor.png")
+    @Source("backcolor.png")
     ImageResource backcolor();
 
-    @Resource("bold.png")
+    @Source("bold.png")
     ImageResource bold();
 
-    @Resource("centerpara.png")
+    @Source("centerpara.png")
     ImageResource centerpara();
 
-    @Resource("charfontname.png")
+    @Source("charfontname.png")
     ImageResource charfontname();
 
-    @Resource("copy.png")
+    @Source("copy.png")
     ImageResource copy();
 
-    @Resource("rteimg.css")
-    CssResource css();
+    @Source("rteimg.css")
+    @Strict
+    RTEImgCssResource css();
 
-    @Resource("cut.png")
+    @Source("cut.png")
     ImageResource cut();
 
-    @Resource("decrementindent.png")
+    @Source("decrementindent.png")
     ImageResource decrementindent();
 
-    @Resource("defaultbullet.png")
+    @Source("defaultbullet.png")
     ImageResource defaultbullet();
 
-    @Resource("defaultnumbering.png")
+    @Source("defaultnumbering.png")
     ImageResource defaultnumbering();
 
-    @Resource("edithtml.png")
+    @Source("edithtml.png")
     ImageResource edithtml();
 
-    @Resource("film.png")
+    @Source("film.png")
     ImageResource film();
 
-    @Resource("fontcolor.png")
+    @Source("fontcolor.png")
     ImageResource fontcolor();
 
-    @Resource("fontheight.png")
+    @Source("fontheight.png")
     ImageResource fontheight();
 
-    @Resource("hfixedline.png")
+    @Source("hfixedline.png")
     ImageResource hfixedline();
 
-    @Resource("images.png")
+    @Source("images.png")
     ImageResource images();
 
-    @Resource("incrementindent.png")
+    @Source("incrementindent.png")
     ImageResource incrementindent();
 
-    @Resource("insertspreadsheet.png")
+    @Source("insertspreadsheet.png")
     ImageResource insertspreadsheet();
 
-    @Resource("insertsymbol.png")
+    @Source("insertsymbol.png")
     ImageResource insertsymbol();
 
-    @Resource("inserttable.png")
+    @Source("inserttable.png")
     ImageResource inserttable();
 
-    @Resource("italic.png")
+    @Source("italic.png")
     ImageResource italic();
 
-    @Resource("link.png")
+    @Source("link.png")
     ImageResource link();
 
-    @Resource("linkbreak.png")
+    @Source("linkbreak.png")
     ImageResource linkbreak();
 
-    @Resource("paste.png")
+    @Source("paste.png")
     ImageResource paste();
 
-    @Resource("redo.png")
+    @Source("redo.png")
     ImageResource redo();
 
-    @Resource("removeFormat.png")
+    @Source("removeFormat.png")
     ImageResource removeFormat();
 
-    @Resource("save.png")
+    @Source("save.png")
     ImageResource save();
 
-    @Resource("selectall.png")
+    @Source("selectall.png")
     ImageResource selectall();
 
-    @Resource("specialchars.png")
+    @Source("specialchars.png")
     ImageResource specialchars();
 
-    @Resource("strikeout.png")
+    @Source("strikeout.png")
     ImageResource strikeout();
 
-    @Resource("subscript.png")
+    @Source("subscript.png")
     ImageResource subscript();
 
-    @Resource("superscript.png")
+    @Source("superscript.png")
     ImageResource superscript();
 
-    @Resource("underline.png")
+    @Source("underline.png")
     ImageResource underline();
 
-    @Resource("undo.png")
+    @Source("undo.png")
     ImageResource undo();
 
 }

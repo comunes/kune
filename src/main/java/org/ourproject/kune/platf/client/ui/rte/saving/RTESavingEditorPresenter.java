@@ -30,7 +30,8 @@ import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.libideas.resources.client.ImageResource;
+import com.google.gwt.resources.client.ImageResource;
+
 
 public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESavingEditor {
 
