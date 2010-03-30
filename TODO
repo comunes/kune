@@ -147,6 +147,7 @@ for user bookmarks/favorites/links
 
 ** danigb,vjrj URLs public/workspace braimstorming
    Read this ->  http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html
+http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a-search-engine
    Nowadays:
    - ws: #group.tool.container.content
    - public (prov): /public/group.tool.container.content.

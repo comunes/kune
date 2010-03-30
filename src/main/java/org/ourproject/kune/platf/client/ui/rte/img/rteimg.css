@@ -1,3 +1,4 @@
+@external k-icon-underline,k-icon-superscript,k-icon-subscript,k-icon-film,k-icon-strikeout,k-icon-removeFormat,k-icon-link,k-icon-linkbreak,k-icon-italic,k-icon-incrementindent,k-icon-images,k-icon-hfixedline,k-icon-fontheight,k-icon-fontcolor,k-icon-edithtml,k-icon-defaultnumbering,k-icon-defaultbullet,k-icon-decrementindent,k-icon-charfontname,k-icon-centerpara,k-icon-bold,k-icon-backcolor,k-icon-alignright,k-icon-alignleft,k-icon-specialchars,k-icon-copy,k-icon-cut,k-icon-insertspreadsheet,k-icon-insertsymbol,k-icon-inserttable,k-icon-paste,k-icon-redo,k-icon-save,k-icon-selectall,k-icon-undo;
 @sprite div .k-icon-underline {
   gwt-image: "underline";
 }

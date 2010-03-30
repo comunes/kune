@@ -2,7 +2,6 @@ package org.ourproject.kune.platf.client.ui.rte.img;
 
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.CssResource.Strict;
 
 // @PMD:REVIEWED:TooManyMethods: by vjrj on 27/05/09 0:06
 public interface RTEImgResources extends ClientBundle {
@@ -29,7 +28,6 @@ public interface RTEImgResources extends ClientBundle {
     ImageResource copy();
 
     @Source("rteimg.css")
-    @Strict
     RTEImgCssResource css();
 
     @Source("cut.png")

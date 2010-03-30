@@ -103,6 +103,8 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         });
         waveWidget.loadWave(waveId);
         setWidgetAsContent(waveWidget, false);
+        waveWidget.setToolbarVisible(true);
+        waveWidget.setEditMode(false);
     }
 
     public void setWidgetAsContent(final Widget widget, final boolean setDefMargins) {

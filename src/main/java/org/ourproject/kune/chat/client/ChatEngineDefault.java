@@ -28,7 +28,6 @@ import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.dto.UserInfoDTO;
 import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
@@ -191,12 +190,14 @@ class ChatEngineDefault implements ChatEngine {
         // FIXME: Avatar provider
         final AvatarProvider avatarProvider = new AvatarProvider() {
             public String getAvatarURL(final XmppURI userURI) {
-                if (userURI.getHost().equals(chatOptions.domain)) {
-                    return downloadUtils.get().getLogoImageUrl(new StateToken(userURI.getNode()));
-                } else {
-                    return "";
-                    // return "images/person-def.gif";
-                }
+                // if (userURI.getHost().equals(chatOptions.domain)) {
+                // FIXME
+                // return downloadUtils.get().getLogoImageUrl(new
+                // StateToken(userURI.getNode()));
+                // } else {
+                // return "";
+                // }
+                return "images/person-def.gif";
             }
         };
         final String initialWindowTitle = Window.getTitle();

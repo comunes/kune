@@ -72,7 +72,7 @@
     <dependency>
       <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
       <artifactId>gwt-log</artifactId>
-      <version>2.6.2</version>
+      <version>3.0.1</version>
     </dependency>
     <dependency>
       <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
@@ -94,7 +94,7 @@
     <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>suco</artifactId>
-      <version>0.6.1</version>
+      <version>0.6.5</version>
     </dependency>
     <dependency>
       <groupId>jmagick</groupId>
@@ -263,16 +263,14 @@
       <version>1.7.0.0</version>
     </dependency>
 
-    <!-- jetty dependencies -->
-    <!--    <dependency>-->
-    <!--      <groupId>org.mortbay.jetty</groupId>-->
-    <!--      <artifactId>jetty-util</artifactId>-->
-    <!--      <version>6.1.11</version>-->
-    <!--      -->
-    <!--      <version>7.0.0.pre5</version>-->
-    <!--      -->
-    <!--      <scope>provided</scope>-->
-    <!--    </dependency>-->
+<!--     jetty dependencies -->
+        <dependency>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>jetty-util</artifactId>
+          <version>6.1.11</version>
+<!--          <version>7.0.0.pre5</version>-->
+          <scope>provided</scope>
+        </dependency>
         <dependency>
           <groupId>org.mortbay.jetty</groupId>
           <artifactId>maven-jetty-plugin</artifactId>
@@ -292,6 +290,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
       <version>1.6</version>
     </dependency>
     <dependency>
@@ -308,12 +307,12 @@
         <scope>test</scope>
       -->
     </dependency>
-    <dependency>
-      <groupId>org.openqa.selenium.client-drivers</groupId>
-      <artifactId>selenium-java-client-driver</artifactId>
-      <version>1.0-beta-1</version>
-      <scope>test</scope>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.openqa.selenium.client-drivers</groupId>-->
+<!--      <artifactId>selenium-java-client-driver</artifactId>-->
+<!--      <version>1.0-beta-1</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
 
     <!-- public side -->
     <dependency>
@@ -558,7 +557,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
         <!-- http://mojo.codehaus.org/gwt-maven-plugin/index.html -->
-        <version>1.2-SNAPSHOT</version>
+        <version>1.2</version>
         <executions>
           <execution>
             <configuration>
@@ -592,10 +591,8 @@
       </plugin>
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
-      <!--
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>7.0.0.1beta0</version>
-      -->
+<!--        <artifactId>jetty-maven-plugin</artifactId>-->
+<!--        <version>7.0.0.1beta0</version>-->
         <artifactId>maven-jetty-plugin</artifactId>
         <version>6.1.11</version> <configuration>
         <contextPath>/</contextPath>
@@ -699,24 +696,24 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>selenium-maven-plugin</artifactId>
-        <configuration>
-          <port>4441</port>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>pre-integration-test</phase>
-            <goals>
-              <goal>start-server</goal>
-            </goals>
-            <configuration>
-              <background>true</background>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.codehaus.mojo</groupId>-->
+<!--        <artifactId>selenium-maven-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          <port>4441</port>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <phase>pre-integration-test</phase>-->
+<!--            <goals>-->
+<!--              <goal>start-server</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <background>true</background>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>

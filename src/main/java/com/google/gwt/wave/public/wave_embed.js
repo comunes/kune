@@ -1,23 +1,22 @@
-// embed.js retreived from http://wave-api.appspot.com/public/embed.js on 2009-06-02
 var a, WAVEPANEL_nextId = 0;
-if(typeof gadgets == "undefined" || !gadgets.rpc)document.write('<script src="http://wave.google.com/gadgets/js/core:rpc?debug=1&c=1" type="text/javascript"><\/script>');
+if(typeof gadgets == "undefined" || !gadgets.rpc)document.write('<script src="https://wave.google.com/gadgets/js/core:rpc?debug=1&c=1" type="text/javascript"><\/script>');
 function WavePanel(b) {
   this.id_ = WAVEPANEL_nextId++;
   this.frameId_ = "iframe_panel_" + this.id_;
   this.eventListeners_ = {};
   this.init_ = false;
-  this.waveRootUrl = b || "http://wave-devel.corp.google.com/a/google.com/"
+  this.waveRootUrl = b || "https://wave.google.com/a/wavesandbox.com/"
 }
 WavePanel.prototype.getId = function() {
   return this.id_
 };
 WavePanel.prototype.setContactProvider = function(b) {
-  if(this.init_)throw"Can only set contact provider before calling init";this.contactProvider_ = b
+  if(this.init_)throw"Can only set profile provider before calling init";this.profileProvider_ = b
 };
 WavePanel.prototype.init = function(b, c) {
   this.init_ = true;
   if(this.initWaveId_ && this.initSearch_)throw"Both an initial wave ID and a search were specified";this.setupRpc_(c);
-  this.createFrame_(b, this.contactProvider_, this.initWaveId_, this.initSearch_, this.uiConfig_);
+  this.createFrame_(b);
   gadgets.rpc.setRelayUrl(this.getFrameId(), this.getRelayUrl_(), false);
   delete this.initSearch_;
   delete this.initWaveId_
@@ -53,45 +52,53 @@ a.setupRpc_ = function(b) {
     gadgets.rpc.register("load_wave_done", function() {
       e(this)
     });
-    gadgets.rpc.register("request_contacts", function() {
-      if(!c.contactProvider_)throw"Got a contacts request but no contact provider is set.";c.contactProvider_(this.a[0])
+    gadgets.rpc.register("digest_search_done", function() {
+      e(this)
+    });
+    gadgets.rpc.register("request_profiles", function() {
+      if(!c.profileProvider_)throw"Got a profiles request but no profile provider is set.";c.profileProvider_(this.a[0])
     });
     gadgets.rpc.registerDefault(function() {
-      var d = this.s, f = this.a[0], h = c.eventListeners_[d];
-      if(h)for(var g in h)h[g](f)
+      var d = this.s, f = this.a[0];
+      if(d = c.eventListeners_[d])for(var g in d)d[g](f)
     })
   }
 };
-a.createFrame_ = function(b, c, e, d, f) {
-  var h = document.createElement("div");
-  h.innerHTML = '<iframe name="' + this.frameId_ + '" >';
-  var g = h.firstChild;
-  g.id = this.frameId_;
-  g.width = "100%";
-  g.height = "100%";
-  g.frameBorder = "no";
-  g.scrolling = "no";
-  g.marginHeight = 0;
-  g.marginWidth = 0;
-  g.className = "embed-iframe";
-  g.src = this.iframeUrl_(c, e, d, f);
+a.createFrame_ = function(b) {
+  var c = document.createElement("div");
+  c.innerHTML = '<iframe name="' + this.frameId_ + '" >';
+  c = c.firstChild;
+  c.id = this.frameId_;
+  c.width = "100%";
+  c.height = "100%";
+  c.frameBorder = "no";
+  c.scrolling = "no";
+  c.marginHeight = 0;
+  c.marginWidth = 0;
+  c.className = "embed-iframe";
+  c.src = this.iframeUrl_();
   b = b || document.body;
-  b.appendChild(g);
-  return g
+  b.appendChild(c);
+  return c
 };
-a.iframeUrl_ = function(b, c, e, d) {
-  var f = [];
-  f.push("client.type=embedded");
-  f.push("parent=" + escape("http://" + window.location.host + window.location.pathname));
-  b && f.push("ext_contacts=1");
-  c && f.push("wave_id=" + encodeURIComponent(c));
-  e && f.push("search_query=" + encodeURIComponent(e));
-  if(d) {
-    d.bgcolor && f.push("bgcolor=" + encodeURIComponent(d.bgcolor));
-    d.color && f.push("color=" + encodeURIComponent(d.color));
-    d.font && f.push("font=" + encodeURIComponent(d.font));
-    d.fontsize && f.push("fontsize=" + encodeURIComponent(d.fontsize))
-  }return this.waveRootUrl + "?" + f.join("&")
+a.iframeUrl_ = function() {
+  var b = [];
+  b.push("client.type=embedded");
+  b.push("parent=" + escape(window.location.protocol + "//" + window.location.host + window.location.pathname));
+  this.profileProvider_ && b.push("ext_profiles=1");
+  this.authToken_ && b.push("auth=" + encodeURIComponent(this.authToken_));
+  this.initWaveId_ && b.push("wave_id=" + encodeURIComponent(this.initWaveId_));
+  this.initSearch_ && b.push("search_query=" + encodeURIComponent(this.initSearch_));
+  if(this.uiConfig_) {
+    var c = this.uiConfig_;
+    b.push("bgcolor=" + encodeURIComponent(c.getBgcolor()));
+    b.push("color=" + encodeURIComponent(c.getColor()));
+    b.push("font=" + encodeURIComponent(c.getFont()));
+    b.push("fontsize=" + encodeURIComponent(c.getFontSize()));
+    b.push("embed_header=" + c.getHeaderEnabled());
+    b.push("embed_footer=" + c.getFooterEnabled());
+    b.push("embed_toolbar=" + c.getToolbarEnabled())
+  }return this.waveRootUrl + "?" + b.join("&")
 };
 a.addListener = function(b, c) {
   var e = this.eventListeners_, d = e[b];
@@ -108,35 +115,44 @@ a.getRelayUrl_ = function() {
   if(c && c.length > 0) {
     var e = c[c.length - 1];
     b = c[0] + "://";
-    for(var d = 0;d < e.length;++d) {
-      if(e[d] == "/")break;
-      b += e[d]
+    for(c = 0;c < e.length;++c) {
+      if(e[c] == "/")break;
+      b += e[c]
     }b += "/"
   }return b + "gadgets/files/container/rpc_relay.html"
 };
 a.loadWave = function(b, c) {
   if(this.init_) {
-    var e = WavePanel.pushCallback_(c);
-    gadgets.rpc.call(this.getFrameId(), "load_wave", null, e, b)
+    c = WavePanel.pushCallback_(c);
+    gadgets.rpc.call(this.getFrameId(), "load_wave", null, c, b)
   }else this.initWaveId_ = b
 };
 a.loadSearch = function(b, c) {
   if(this.init_) {
-    var e = WavePanel.pushCallback_(c);
-    gadgets.rpc.call(this.getFrameId(), "digest_search", null, e, b)
+    c = WavePanel.pushCallback_(c);
+    gadgets.rpc.call(this.getFrameId(), "digest_search", null, c, b)
   }else this.initSearch_ = b
 };
 a.setUIConfig = function(b, c, e, d) {
-  if(this.init_)throw"Cannot change the UIConfig after Init has been called.";else this.uiConfig_ = {bgcolor:b, color:c, font:e, fontsize:d}
+  if(this.init_)throw"Cannot change the UIConfig after Init has been called.";else {
+    if(!this.uiConfig_)this.uiConfig_ = new WavePanel.UIConfig;
+    this.uiConfig_.setBgcolor(b);
+    this.uiConfig_.setColor(c);
+    this.uiConfig_.setFont(e);
+    this.uiConfig_.setFontSize(d)
+  }
+};
+a.setUIConfigObject = function(b) {
+  if(this.init_)throw"Cannot change the UIConfig after Init has been called.";else this.uiConfig_ = b
 };
 a.addParticipant = function() {
   if(!this.init_)throw"Init not called.";gadgets.rpc.call(this.getFrameId(), "add_participant", null, "")
 };
 a.addReply = function(b, c) {
-  if(!this.init_)throw"Init not called.";var e = WavePanel.pushCallback_(c);
-  gadgets.rpc.call(this.getFrameId(), "add_reply", null, e, b)
+  if(!this.init_)throw"Init not called.";c = WavePanel.pushCallback_(c);
+  gadgets.rpc.call(this.getFrameId(), "add_reply", null, c, b)
 };
-a.provideContacts = function(b) {
+a.provideProfiles = function(b) {
   if(!this.init_)throw"Init not called.";var c = [];
   for(var e in b) {
     var d = b[e];
@@ -145,5 +161,69 @@ a.provideContacts = function(b) {
     c.push(d.lastName);
     c.push(d.photoUrl)
   }c.unshift(c.length / 4);
-  gadgets.rpc.call(this.getFrameId(), "provide_contacts", null, c)
+  gadgets.rpc.call(this.getFrameId(), "provide_profiles", null, c)
+};
+a.setAuthToken = function(b) {
+  this.authToken_ = b
+};
+a.setContacts = function(b) {
+  if(!this.init_)throw"Init not called.";gadgets.rpc.call(this.getFrameId(), "set_contacts", null, b)
+};
+a.setEditMode = function(b) {
+  if(!this.init_)throw"Init not called.";b = b ? "true" : "false";
+  gadgets.rpc.call(this.getFrameId(), "set_edit_mode", null, b)
+};
+a.setToolbarVisible = function(b) {
+  if(!this.init_)throw"Init not called.";b = b ? "true" : "false";
+  gadgets.rpc.call(this.getFrameId(), "set_toolbar_visible", null, b)
+};
+WavePanel.UIConfig = function() {
+  this.bgcolor_ = "transparent";
+  this.color_ = "black";
+  this.font_ = "Arial";
+  this.fontsize_ = "8pt";
+  this.toolbar_ = this.footer_ = this.header_ = false
+};
+a = WavePanel.UIConfig.prototype;
+a.getBgcolor = function() {
+  return this.bgcolor_
+};
+a.setBgcolor = function(b) {
+  this.bgcolor_ = b
+};
+a.getColor = function() {
+  return this.color_
+};
+a.setColor = function(b) {
+  this.color_ = b
+};
+a.getFont = function() {
+  return this.font_
+};
+a.setFont = function(b) {
+  this.font_ = b
+};
+a.getFontSize = function() {
+  return this.fontsize_
+};
+a.setFontSize = function(b) {
+  this.fontsize_ = b
+};
+a.getHeaderEnabled = function() {
+  return this.header_
+};
+a.setHeaderEnabled = function(b) {
+  this.header_ = b
+};
+a.getFooterEnabled = function() {
+  return this.footer_
+};
+a.setFooterEnabled = function(b) {
+  this.footer_ = b
+};
+a.getToolbarEnabled = function() {
+  return this.toolbar_
+};
+a.setToolbarEnabled = function(b) {
+  this.toolbar_ = b
 };

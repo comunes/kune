@@ -18,6 +18,16 @@ public class WaveWidget extends Widget implements HasWaveLoadHandlers {
         this.waveEmbed = WaveEmbed.newInstance(waveServer);
     }
 
+    // Package protected until this is functional on the developer sandbox
+    public void addParticipant() {
+        waveEmbed.addParticipant();
+    }
+
+    // Package protected until this is functional on the developer sandbox
+    public void addReply() {
+        waveEmbed.addReply();
+    }
+
     public HandlerRegistration addWaveLoadHandler(final WaveLoadHandler handler) {
         return addHandler(handler, WaveLoadEvent.getType());
     }
@@ -33,6 +43,14 @@ public class WaveWidget extends Widget implements HasWaveLoadHandlers {
     @Override
     public void onLoad() {
         waveEmbed.init(getElement());
+    }
+
+    public void setEditMode(final boolean value) {
+        waveEmbed.setEditMode(value);
+    }
+
+    public void setToolbarVisible(final boolean value) {
+        waveEmbed.setToolbarVisible(value);
     }
 
     /**
@@ -53,13 +71,4 @@ public class WaveWidget extends Widget implements HasWaveLoadHandlers {
         waveEmbed.setUIConfig(bgColor, color, font, fontSize);
     }
 
-    // Package protected until this is functional on the developer sandbox
-    void addParticipant() {
-        waveEmbed.addParticipant();
-    }
-
-    // Package protected until this is functional on the developer sandbox
-    void addReply() {
-        waveEmbed.addReply();
-    }
 }
