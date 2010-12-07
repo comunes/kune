@@ -59,7 +59,7 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     protected abstract void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException;
 
     @Override
-    @SuppressWarnings( { "unchecked", "deprecation" })
+    @SuppressWarnings({ "rawtypes", "deprecation" })
     protected void doPost(final HttpServletRequest req, final HttpServletResponse response) throws ServletException,
             IOException {
 

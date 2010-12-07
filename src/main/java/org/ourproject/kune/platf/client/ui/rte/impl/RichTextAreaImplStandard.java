@@ -19,18 +19,27 @@ import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Justification;
 
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 
 /**
  * Basic rich text platform implementation.
  */
+@SuppressWarnings("deprecation")
 public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implements RichTextArea.BasicFormatter,
-        RichTextArea.ExtendedFormatter {
+        RichTextArea.ExtendedFormatter, RichTextArea.Formatter {
+    /**
+     * The message displayed when the formatter is used before the RichTextArea
+     * is initialized.
+     */
+    private static final String INACTIVE_MESSAGE = "RichTextArea formatters "
+            + "cannot be used until the RichTextArea is attached and focused.";
 
     /**
-     * Holds a cached copy of any user setHTML/setText actions until the real
-     * text area is fully initialized. Becomes <code>null</code> after init.
+     * Holds a cached copy of any user setHTML/setText/setEnabled actions until
+     * the real text area is fully initialized. Becomes <code>null</code> after
+     * init.
      */
     private Element beforeInitPlaceholder = DOM.createDiv();
 
@@ -42,16 +51,26 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
      */
     protected boolean initializing;
 
+    /**
+     * Indicates that the text area should be focused as soon as it is loaded.
+     */
+    private boolean isPendingFocus;
+
+    /**
+     * True when the element has been attached.
+     */
+    private boolean isReady;
+
     public void copy() {
         execCommand("Copy", null);
     }
 
     @Override
     public native Element createElement() /*-{
-                return $doc.createElement('iframe');
-              }-*/;
+        return $doc.createElement('iframe');
+    }-*/;
 
-    public void createLink(String url) {
+    public void createLink(final String url) {
         execCommand("CreateLink", url);
     }
 
@@ -83,29 +102,29 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
 
     @Override
     public native void initElement() /*-{
-               // Most browsers don't like setting designMode until slightly _after_
-               // the iframe becomes attached to the DOM. Any non-zero timeout will do
-               // just fine.
-               var _this = this;
-               _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::initializing = true;
-               setTimeout(function() {
-                 // Turn on design mode.
-                 _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.designMode = 'On';
+        // Most browsers don't like setting designMode until slightly _after_
+        // the iframe becomes attached to the DOM. Any non-zero timeout will do
+        // just fine.
+        var _this = this;
+        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitializing()();
+        setTimeout($entry(function() {
+        // Turn on design mode.
+        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.designMode = 'On';
 
-                 // Send notification that the iframe has reached design mode.
-                 _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitialized()();
-               }, 1);
-             }-*/;
+        // Send notification that the iframe has reached design mode.
+        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitialized()();
+        }), 1);
+    }-*/;
 
     public void insertHorizontalRule() {
         execCommand("InsertHorizontalRule", null);
     }
 
-    public void insertHtml(String html) {
-        execCommand("InsertHtml", html);
+    public void insertHTML(final String html) {
+        execCommand("InsertHTML", html);
     }
 
-    public void insertImage(String url) {
+    public void insertImage(final String url) {
         execCommand("InsertImage", url);
     }
 
@@ -117,20 +136,14 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
         execCommand("InsertUnorderedList", null);
     }
 
-    @Override
-    // @PMD:REVIEWED:EmptyMethodInAbstractClassShouldBeAbstract: by vjrj on 21/05/09 13:58
-    public boolean isBasicEditingSupported() {
-        return true;
-    }
-
     public boolean isBold() {
         return queryCommandState("Bold");
     }
 
     @Override
-    // @PMD:REVIEWED:EmptyMethodInAbstractClassShouldBeAbstract: by vjrj on 21/05/09 13:58
-    public boolean isExtendedEditingSupported() {
-        return true;
+    public boolean isEnabled() {
+        return beforeInitPlaceholder == null ? isEnabledImpl() 
+           : !beforeInitPlaceholder.getPropertyBoolean("disabled");
     }
 
     public boolean isItalic() {
@@ -162,7 +175,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }
 
     public void redo() {
-        execCommand("Redo", null);
+        execCommand("Redo", "false");
     }
 
     public void removeFormat() {
@@ -181,33 +194,45 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
         execCommand("SelectAll", null);
     }
 
-    public void setBackColor(String color) {
+    public void setBackColor(final String color) {
         execCommand("BackColor", color);
     }
 
     @Override
-    public native void setFocus(boolean focused) /*-{
-                if (focused) {
-                  this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.focus();
-                } else {
-                  this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.blur();
-                }
-              }-*/;
+    public void setEnabled(final boolean enabled) {
+        if (beforeInitPlaceholder == null) {
+            setEnabledImpl(enabled);
+        } else {
+            beforeInitPlaceholder.setPropertyBoolean("disabled", !enabled);
+        }
+    }
 
-    public void setFontName(String name) {
+    @Override
+    public void setFocus(final boolean focused) {
+        if (initializing) {
+            // Issue 3503: if we focus before the iframe is in design mode, the
+            // text
+            // caret will not appear.
+            isPendingFocus = focused;
+        } else {
+            setFocusImpl(focused);
+        }
+    }
+
+    public void setFontName(final String name) {
         execCommand("FontName", name);
     }
 
-    public void setFontSize(FontSize fontSize) {
+    public void setFontSize(final FontSize fontSize) {
         execCommand("FontSize", Integer.toString(fontSize.getNumber()));
     }
 
-    public void setForeColor(String color) {
+    public void setForeColor(final String color) {
         execCommand("ForeColor", color);
     }
 
     @Override
-    public final void setHTML(String html) {
+    public final void setHTML(final String html) {
         if (beforeInitPlaceholder == null) {
             setHTMLImpl(html);
         } else {
@@ -215,9 +240,11 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
         }
     }
 
-    public void setJustification(Justification justification) {
+    public void setJustification(final Justification justification) {
         if (justification == Justification.CENTER) {
             execCommand("JustifyCenter", null);
+        } else if (justification == Justification.FULL) {
+            execCommand("JustifyFull", null);
         } else if (justification == Justification.LEFT) {
             execCommand("JustifyLeft", null);
         } else if (justification == Justification.RIGHT) {
@@ -226,7 +253,7 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }
 
     @Override
-    public final void setText(String text) {
+    public final void setText(final String text) {
         if (beforeInitPlaceholder == null) {
             setTextImpl(text);
         } else {
@@ -259,11 +286,13 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
     }
 
     public void undo() {
-        execCommand("Undo", null);
+        execCommand("Undo", "false");
     }
 
     @Override
     public void uninitElement() {
+        isReady = false;
+
         // Issue 1897: initElement uses a timeout, so its possible to call this
         // method after calling initElement, but before the event system is in
         // place.
@@ -275,153 +304,206 @@ public abstract class RichTextAreaImplStandard extends RichTextAreaImpl implemen
         // Unhook all custom event handlers when the element is detached.
         unhookEvents();
 
-    // Recreate the placeholder element and store the iframe's contents in it.
-    // This is necessary because some browsers will wipe the iframe's contents
-        // when it is removed from the DOM.
-        String html = getHTML();
+        // Recreate the placeholder element and store the iframe's contents and
+        // the
+        // enabled status in it. This is necessary because some browsers will
+        // wipe
+        // the iframe's contents when it is removed from the DOM.
+        final String html = getHTML();
+        final boolean enabled = isEnabled();
         beforeInitPlaceholder = DOM.createDiv();
         DOM.setInnerHTML(beforeInitPlaceholder, html);
+        setEnabled(enabled);
     }
 
     protected native String getHTMLImpl() /*-{
-                return this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML;
-              }-*/;
+        return this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML;
+    }-*/;
 
     protected native String getTextImpl() /*-{
-                return this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.body.textContent;
-              }-*/;
+        return this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.body.textContent;
+    }-*/;
 
     @Override
     protected native void hookEvents() /*-{
-                var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-                var wnd = elem.contentWindow;
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        var wnd = elem.contentWindow;
 
-                elem.__gwt_handler = function(evt) {
-                  if (elem.__listener) {
-        elem.__listener.@com.google.gwt.user.client.ui.Widget::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
-                  }
-                };
+        elem.__gwt_handler = $entry(function(evt) {
+        if (elem.__listener) {
+        if (@com.google.gwt.user.client.impl.DOMImpl::isMyListener(Ljava/lang/Object;)(elem.__listener)) {
+        @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, elem.__listener);
+        }
+        }
+        });
 
-                elem.__gwt_focusHandler = function(evt) {
-                  if (elem.__gwt_isFocused) {
-                    return;
-                  }
+        elem.__gwt_focusHandler = function(evt) {
+        if (elem.__gwt_isFocused) {
+        return;
+        }
 
-                  elem.__gwt_isFocused = true;
-                  elem.__gwt_handler(evt);
-                };
+        elem.__gwt_isFocused = true;
+        elem.__gwt_handler(evt);
+        };
 
-                elem.__gwt_blurHandler = function(evt) {
-                  if (!elem.__gwt_isFocused) {
-                    return;
-                  }
+        elem.__gwt_blurHandler = function(evt) {
+        if (!elem.__gwt_isFocused) {
+        return;
+        }
 
-                  elem.__gwt_isFocused = false;
-                  elem.__gwt_handler(evt);
-                };
+        elem.__gwt_isFocused = false;
+        elem.__gwt_handler(evt);
+        };
 
-                wnd.addEventListener('keydown', elem.__gwt_handler, true);
-                wnd.addEventListener('keyup', elem.__gwt_handler, true);
-                wnd.addEventListener('keypress', elem.__gwt_handler, true);
-                wnd.addEventListener('mousedown', elem.__gwt_handler, true);
-                wnd.addEventListener('mouseup', elem.__gwt_handler, true);
-                wnd.addEventListener('mousemove', elem.__gwt_handler, true);
-                wnd.addEventListener('mouseover', elem.__gwt_handler, true);
-                wnd.addEventListener('mouseout', elem.__gwt_handler, true);
-                wnd.addEventListener('click', elem.__gwt_handler, true);
+        wnd.addEventListener('keydown', elem.__gwt_handler, true);
+        wnd.addEventListener('keyup', elem.__gwt_handler, true);
+        wnd.addEventListener('keypress', elem.__gwt_handler, true);
+        wnd.addEventListener('mousedown', elem.__gwt_handler, true);
+        wnd.addEventListener('mouseup', elem.__gwt_handler, true);
+        wnd.addEventListener('mousemove', elem.__gwt_handler, true);
+        wnd.addEventListener('mouseover', elem.__gwt_handler, true);
+        wnd.addEventListener('mouseout', elem.__gwt_handler, true);
+        wnd.addEventListener('click', elem.__gwt_handler, true);
 
-                wnd.addEventListener('focus', elem.__gwt_focusHandler, true);
-                wnd.addEventListener('blur', elem.__gwt_blurHandler, true);
-              }-*/;
+        wnd.addEventListener('focus', elem.__gwt_focusHandler, true);
+        wnd.addEventListener('blur', elem.__gwt_blurHandler, true);
+    }-*/;
+
+    protected native boolean isEnabledImpl() /*-{
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        return elem.contentWindow.document.designMode.toUpperCase() == 'ON';
+    }-*/;
 
     @Override
     protected void onElementInitialized() {
-    // Issue 1897: This method is called after a timeout, during which time the
+        // Issue 1897: This method is called after a timeout, during which time
+        // the
         // element might by detached.
         if (!initializing) {
             return;
         }
         initializing = false;
-
-        super.onElementInitialized();
+        isReady = true;
 
         // When the iframe is ready, ensure cached content is set.
         if (beforeInitPlaceholder != null) {
             setHTMLImpl(DOM.getInnerHTML(beforeInitPlaceholder));
+            setEnabledImpl(isEnabled());
             beforeInitPlaceholder = null;
+        }
+
+        super.onElementInitialized();
+
+        // Focus on the element now that it is initialized
+        if (isPendingFocus) {
+            isPendingFocus = false;
+            setFocus(true);
         }
     }
 
+    protected void onElementInitializing() {
+        initializing = true;
+        isPendingFocus = false;
+    }
+
+    protected native void setEnabledImpl(boolean enabled) /*-{
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        elem.contentWindow.document.designMode = enabled ? 'On' : 'Off';
+    }-*/;
+
+    protected native void setFocusImpl(boolean focused) /*-{
+        if (focused) {
+        this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.focus();
+        } else {
+        this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.blur();
+        }
+    }-*/;
+
     protected native void setHTMLImpl(String html) /*-{
-                this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML = html;
-              }-*/;
+        this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.body.innerHTML = html;
+    }-*/;
 
     protected native void setTextImpl(String text) /*-{
-                this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.body.textContent = text;
-              }-*/;
+        this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.body.textContent = text;
+    }-*/;
 
     protected native void unhookEvents() /*-{
-                var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-                var wnd = elem.contentWindow;
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        var wnd = elem.contentWindow;
 
-                wnd.removeEventListener('keydown', elem.__gwt_handler, true);
-                wnd.removeEventListener('keyup', elem.__gwt_handler, true);
-                wnd.removeEventListener('keypress', elem.__gwt_handler, true);
-                wnd.removeEventListener('mousedown', elem.__gwt_handler, true);
-                wnd.removeEventListener('mouseup', elem.__gwt_handler, true);
-                wnd.removeEventListener('mousemove', elem.__gwt_handler, true);
-                wnd.removeEventListener('mouseover', elem.__gwt_handler, true);
-                wnd.removeEventListener('mouseout', elem.__gwt_handler, true);
-                wnd.removeEventListener('click', elem.__gwt_handler, true);
+        wnd.removeEventListener('keydown', elem.__gwt_handler, true);
+        wnd.removeEventListener('keyup', elem.__gwt_handler, true);
+        wnd.removeEventListener('keypress', elem.__gwt_handler, true);
+        wnd.removeEventListener('mousedown', elem.__gwt_handler, true);
+        wnd.removeEventListener('mouseup', elem.__gwt_handler, true);
+        wnd.removeEventListener('mousemove', elem.__gwt_handler, true);
+        wnd.removeEventListener('mouseover', elem.__gwt_handler, true);
+        wnd.removeEventListener('mouseout', elem.__gwt_handler, true);
+        wnd.removeEventListener('click', elem.__gwt_handler, true);
 
-                wnd.removeEventListener('focus', elem.__gwt_focusHandler, true);
-                wnd.removeEventListener('blur', elem.__gwt_blurHandler, true);
+        wnd.removeEventListener('focus', elem.__gwt_focusHandler, true);
+        wnd.removeEventListener('blur', elem.__gwt_blurHandler, true);
 
-                elem.__gwt_handler = null;
-                elem.__gwt_focusHandler = null;
-                elem.__gwt_blurHandler = null;
-              }-*/;
+        elem.__gwt_handler = null;
+        elem.__gwt_focusHandler = null;
+        elem.__gwt_blurHandler = null;
+    }-*/;
 
-    void execCommand(String cmd, String param) {
-        if (isRichEditingActive(elem)) {
-      // When executing a command, focus the iframe first, since some commands
+    void execCommand(final String cmd, final String param) {
+        assert isReady : INACTIVE_MESSAGE;
+        if (isReady) {
+            // When executing a command, focus the iframe first, since some
+            // commands
             // don't take properly when it's not focused.
             setFocus(true);
-            execCommandAssumingFocus(cmd, param);
+            try {
+                execCommandAssumingFocus(cmd, param);
+            } catch (final JavaScriptException e) {
+                // In mozilla, editing throws a JS exception if the iframe is
+                // *hidden, but attached*.
+            }
         }
     }
 
     native void execCommandAssumingFocus(String cmd, String param) /*-{
-                this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.execCommand(cmd, false, param);
-              }-*/;
+        this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.execCommand(cmd, false, param);
+    }-*/;
 
-    native boolean isRichEditingActive(Element e) /*-{
-                return ((e.contentWindow.document.designMode).toUpperCase()) == 'ON';
-              }-*/;
-
-    boolean queryCommandState(String cmd) {
-        if (isRichEditingActive(elem)) {
-      // When executing a command, focus the iframe first, since some commands
+    boolean queryCommandState(final String cmd) {
+        if (isReady) {
+            // When executing a command, focus the iframe first, since some
+            // commands
             // don't take properly when it's not focused.
             setFocus(true);
-            return queryCommandStateAssumingFocus(cmd);
-        } else {
-            return false;
+            try {
+                return queryCommandStateAssumingFocus(cmd);
+            } catch (final JavaScriptException e) {
+                return false;
+            }
         }
+        return false;
     }
 
     native boolean queryCommandStateAssumingFocus(String cmd) /*-{
-                return !!this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.queryCommandState(cmd);
-              }-*/;
+        return !!this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.queryCommandState(cmd);
+    }-*/;
 
-    String queryCommandValue(String cmd) {
-        // When executing a command, focus the iframe first, since some commands
-        // don't take properly when it's not focused.
-        setFocus(true);
-        return queryCommandValueAssumingFocus(cmd);
+    String queryCommandValue(final String cmd) {
+        if (isReady) {
+            // When executing a command, focus the iframe first, since some
+            // commands
+            // don't take properly when it's not focused.
+            setFocus(true);
+            try {
+                return queryCommandValueAssumingFocus(cmd);
+            } catch (final JavaScriptException e) {
+                return "";
+            }
+        }
+        return "";
     }
 
     native String queryCommandValueAssumingFocus(String cmd) /*-{
-                return this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.queryCommandValue(cmd);
-              }-*/;
+        return this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.queryCommandValue(cmd);
+    }-*/;
 }

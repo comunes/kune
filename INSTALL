@@ -11,6 +11,11 @@ FIXME
 - Install java-jdk (>=5), maven2, mysql (> 5.0) and for example eclipse
 - Install gwt 1.5.3 and follow Appendix A for maven+gwt configuration
 
+=== Wave in a Box ===
+
+https://sites.google.com/a/waveprotocol.org/wave-protocol/code/installation
+https://sites.google.com/a/waveprotocol.org/wave-protocol/federation/openfire-installation
+
 ===MYSQL configuration===
 
 ====Before db creation====	
@@ -49,7 +54,7 @@ FLUSH PRIVILEGES;
 - Compile with maven:
  # (in the trunk directory)
  mvn compile -Dliquibase.should.run=false
- mvn gwt-maven:compile
+ mvn gwt:compile
 
 - Copy the target to src directory (only for test):
  ./script/deploy_gwt.sh

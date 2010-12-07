@@ -105,7 +105,7 @@ public class I18nRPC implements RPC, I18nService {
         String translation = null;
         try {
             translation = getTranslationWrapper(language, text);
-        } catch (SessionExpiredException e) {
+        } catch (final SessionExpiredException e) {
         }
         return translation;
     }

@@ -44,9 +44,10 @@ public class EntitySummary {
         mainFitPanel = new Panel();
         mainFitPanel.setLayout(new FitLayout());
         mainFitPanel.setBorder(false);
-        mainFitPanel.setWidth(150);
+        // 150 for small screens
+        mainFitPanel.setWidth(165);
 
-        Panel anchorLayoutPanel = new Panel();
+        final Panel anchorLayoutPanel = new Panel();
         anchorLayoutPanel.setLayout(new AnchorLayout());
         anchorLayoutPanel.setBorder(false);
 
@@ -104,8 +105,8 @@ public class EntitySummary {
 
             private void openFirstIfActiveNotVisible() {
                 if (accordionLayout.getActiveItem() != null && accordionLayout.getActiveItem().isHidden()) {
-                    for (Component compo : entitySummary.getComponents()) {
-                        Panel panel = (Panel) compo;
+                    for (final Component compo : entitySummary.getComponents()) {
+                        final Panel panel = (Panel) compo;
                         if (panel.isVisible()) {
                             // First visible
                             if (panel.isCollapsed()) {

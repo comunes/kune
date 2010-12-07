@@ -1,6 +1,17 @@
-<!DOCTYPE document SYSTEM "http://google-web-toolkit.googlecode.com/svn/tags/1.6.4/distro-source/core/src/gwt-module.dtd">
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.1.0/distro-source/core/src/gwt-module.dtd">
 <module>
-    <inherits name='org.ourproject.kune.platf.KunePlatform' />
-    <inherits name="com.google.gwt.core.Core" />
-
+  <inherits name='org.ourproject.kune.platf.KunePlatform' />
+  <inherits name="org.ourproject.kune.chat.KuneChat" />
+  <inherits name="com.google.gwt.core.Core" />
+  <stylesheet src="js/ext/resources/css/ext-all.css" />
+  <script src="js/ext/adapter/ext/ext-base.js" />
+  <script src="js/ext/ext-all.js" />
+  <inherits name="com.gwtext.GwtExt" />
+  <inherits name="com.calclab.suco.Suco" />
+  <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />
+  <inherits name="com.gwtextux.GwtExtUx" />
+  <inherits name="com.gwtextux.UploadDialog" />
+  <inherits name="com.gwtextux.ToastWindow" />
+  <inherits name="com.google.gwt.wave.Wave" />
+  <source path='client' excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
 </module>

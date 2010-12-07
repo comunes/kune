@@ -28,44 +28,45 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     private final TagUserContent finder;
 
     @Inject
-    public TagUserContentManagerDefault(Provider<EntityManager> provider, TagManager tagManager, TagUserContent finder) {
+    public TagUserContentManagerDefault(final Provider<EntityManager> provider, final TagManager tagManager,
+            final TagUserContent finder) {
         super(provider, TagUserContent.class);
         this.provider = provider;
         this.tagManager = tagManager;
         this.finder = finder;
     }
 
-    public List<Tag> find(User user, Content content) {
+    public List<Tag> find(final User user, final Content content) {
         return finder.findTags(user, content);
     }
 
-    public TagCloudResult getTagCloudResultByGroup(Group group) {
+    public TagCloudResult getTagCloudResultByGroup(final Group group) {
         return new TagCloudResult(getSummaryByGroup(group), getMaxCount(group), getMinCount(group));
     }
 
-    public String getTagsAsString(User user, Content content) {
+    public String getTagsAsString(final User user, final Content content) {
         String tagConcatenated = "";
         if (user.getId() != null) {
             // FIXME: User must be persisted (this fails on tests)
-            List<Tag> tags = find(user, content);
-            for (Tag tag : tags) {
+            final List<Tag> tags = find(user, content);
+            for (final Tag tag : tags) {
                 tagConcatenated += " " + tag.getName();
             }
         }
         return tagConcatenated.replaceFirst(" ", "");
     }
 
-    public void remove(User user, Content content) {
-        for (TagUserContent item : finder.find(user, content)) {
+    public void remove(final User user, final Content content) {
+        for (final TagUserContent item : finder.find(user, content)) {
             provider.get().remove(item);
         }
     }
 
-    public void setTags(User user, Content content, String tags) {
+    public void setTags(final User user, final Content content, final String tags) {
         final ArrayList<String> tagsStripped = TextUtils.splitTags(tags);
         final ArrayList<Tag> tagList = new ArrayList<Tag>();
 
-        for (String tagString : tagsStripped) {
+        for (final String tagString : tagsStripped) {
             Tag tag;
             try {
                 tag = tagManager.findByTagName(tagString);
@@ -78,33 +79,31 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
             }
         }
         remove(user, content);
-        for (Tag tag : tagList) {
-            TagUserContent tagUserContent = new TagUserContent(tag, user, content);
+        for (final Tag tag : tagList) {
+            final TagUserContent tagUserContent = new TagUserContent(tag, user, content);
             persist(tagUserContent);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private int getMaxCount(Group group) {
-        Query q = provider.get().createNamedQuery(TagUserContent.TAGSMAXGROUPED);
+    private int getMaxCount(final Group group) {
+        final Query q = provider.get().createNamedQuery(TagUserContent.TAGSMAXGROUPED);
         q.setParameter("group", group);
-        List resultList = q.getResultList();
+        final List resultList = q.getResultList();
         return (resultList.size() == 0 ? 0 : ((Long) resultList.get(0)).intValue());
     }
 
-    @SuppressWarnings("unchecked")
-    private int getMinCount(Group group) {
-        Query q = provider.get().createNamedQuery(TagUserContent.TAGSMINGROUPED);
+    @SuppressWarnings("rawtypes")
+    private int getMinCount(final Group group) {
+        final Query q = provider.get().createNamedQuery(TagUserContent.TAGSMINGROUPED);
         q.setParameter("group", group);
-        List resultList = q.getResultList();
+        final List resultList = q.getResultList();
         return (resultList.size() == 0 ? 0 : ((Long) resultList.get(0)).intValue());
     }
 
-    @SuppressWarnings("unchecked")
     private List<TagCount> getSummaryByGroup(final Group group) {
-        Query q = provider.get().createNamedQuery(TagUserContent.TAGSGROUPED);
+        final Query q = provider.get().createNamedQuery(TagUserContent.TAGSGROUPED);
         q.setParameter("group", group);
-        List<TagCount> results = q.getResultList();
+        final List<TagCount> results = q.getResultList();
         return results;
     }
 }

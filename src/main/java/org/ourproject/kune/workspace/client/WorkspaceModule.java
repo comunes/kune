@@ -1081,13 +1081,6 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<GlobalShortcutRegister>(GlobalShortcutRegister.class) {
-            @Override
-            public GlobalShortcutRegister create() {
-                return new GlobalShortcutRegister();
-            }
-        });
-
         register(InsertLinkGroup.class, new Factory<InsertLinkLocal>(InsertLinkLocal.class) {
             @Override
             public InsertLinkLocal create() {

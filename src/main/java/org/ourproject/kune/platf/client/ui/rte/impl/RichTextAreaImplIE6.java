@@ -25,106 +25,135 @@ public class RichTextAreaImplIE6 extends RichTextAreaImplStandard {
 
     @Override
     public Element createElement() {
-        Element elem = super.createElement();
+        final Element elem = super.createElement();
         DOM.setElementProperty(elem, "src", "javascript:''");
         return elem;
     }
 
     @Override
     public native void initElement() /*-{
-       var _this = this;
-       _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::initializing = true;
+        var _this = this;
+        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitializing()();
 
-       setTimeout(function() {
-         if (_this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::initializing == false) {
-           return;
-         }
+        setTimeout($entry(function() {
+        if (_this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::initializing == false) {
+        return;
+        }
 
-         // Attempt to set the iframe document's body to 'contentEditable' mode.
-         // There's no way to know when the body will actually be available, so
-         // keep trying every so often until it is.
-         // Note: The body seems to be missing only rarely, so please don't remove
-         // this retry loop just because it's hard to reproduce.
-         var elem = _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-         var doc = elem.contentWindow.document;
-         if (!doc.body) {
-             // Retry in 50 ms. Faster would run the risk of pegging the CPU. Slower
-             // would increase the probability of a user-visible delay.
-           setTimeout(arguments.callee, 50);
-           return;
-         }
-         doc.body.contentEditable = true;
+        // Attempt to set the iframe document's body to 'contentEditable' mode.
+        // There's no way to know when the body will actually be available, so
+        // keep trying every so often until it is.
+        // Note: The body seems to be missing only rarely, so please don't remove
+        // this retry loop just because it's hard to reproduce.
+        var elem = _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        var doc = elem.contentWindow.document;
+        if (!doc.body) {
+        // Retry in 50 ms. Faster would run the risk of pegging the CPU. Slower
+        // would increase the probability of a user-visible delay.
+        setTimeout(arguments.callee, 50);
+        return;
+        }
+        doc.body.contentEditable = true;
 
-         // Send notification that the iframe has reached design mode.
-         _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitialized()();
-       }, 1);
-     }-*/;
+        // Send notification that the iframe has reached design mode.
+        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitialized()();
+        }, 1));
+    }-*/;
+
+    @Override
+    public native void insertHTML(String html) /*-{
+        try {
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        var doc = elem.contentWindow.document;
+        doc.body.focus();
+        var tr = doc.selection.createRange();
+        if (tr == null) {
+        return;
+        }
+        if (!@com.google.gwt.user.client.DOM::isOrHasChild(Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/Element;)(doc.body, tr.parentElement())) {
+        return;
+        }
+        tr.pasteHTML(html);
+        }
+        catch (e) {
+        return;
+        }
+    }-*/;
 
     @Override
     protected native String getTextImpl() /*-{
-       var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-       return elem.contentWindow.document.body.innerText;
-     }-*/;
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        return elem.contentWindow.document.body.innerText;
+    }-*/;
 
     @Override
     protected native void hookEvents() /*-{
-       var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-       var body = elem.contentWindow.document.body;
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        var body = elem.contentWindow.document.body;
 
-       var handler = function() {
-         if (elem.__listener) {
-           // Weird: this code has the context of the script frame, but we need the
-           // event from the edit iframe's window.
-           var evt = elem.contentWindow.event;
-        elem.__listener.@com.google.gwt.user.client.ui.Widget::onBrowserEvent(Lcom/google/gwt/user/client/Event;)(evt);
-         }
-       };
+        var handler = $entry(function() {
+        if (elem.__listener) {
+        if (@com.google.gwt.user.client.impl.DOMImpl::isMyListener(Ljava/lang/Object;)(elem.__listener)) {
+        // Weird: this code has the context of the script frame, but we need the
+        // event from the edit iframe's window.
+        var evt = elem.contentWindow.event;
+        @com.google.gwt.user.client.DOM::dispatchEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/user/client/Element;Lcom/google/gwt/user/client/EventListener;)(evt, elem, elem.__listener);
+        }
+        }
+        });
 
-       body.onkeydown =
-       body.onkeyup =
-       body.onkeypress =
-       body.onmousedown =
-       body.onmouseup =
-       body.onmousemove =
-       body.onmouseover =
-       body.onmouseout =
-       body.onclick = handler;
+        body.onkeydown =
+        body.onkeyup =
+        body.onkeypress =
+        body.onmousedown =
+        body.onmouseup =
+        body.onmousemove =
+        body.onmouseover =
+        body.onmouseout =
+        body.onclick = handler;
 
-       elem.contentWindow.onfocus =
-       elem.contentWindow.onblur = handler;
-     }-*/;
+        elem.contentWindow.onfocus =
+        elem.contentWindow.onblur = handler;
+    }-*/;
+
+    @Override
+    protected native boolean isEnabledImpl() /*-{
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        return elem.contentWindow.document.body.contentEditable.toLowerCase() == 'true';
+    }-*/;
+
+    @Override
+    protected native void setEnabledImpl(boolean enabled) /*-{
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        elem.contentWindow.document.body.contentEditable = enabled;
+    }-*/;
 
     @Override
     protected native void setTextImpl(String text) /*-{
-       var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-       elem.contentWindow.document.body.innerText = text;
-     }-*/;
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        elem.contentWindow.document.body.innerText = text;
+    }-*/;
 
     @Override
     protected native void unhookEvents() /*-{
-       var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-       var body = elem.contentWindow.document.body;
+        var elem = this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        var body = elem.contentWindow.document.body;
 
-       if (body) {
-         // The body can be undefined in the relatively obscure case that the RTA
-         // is attached and detached before it has a chance to finish initializing.
-         body.onkeydown =
-         body.onkeyup =
-         body.onkeypress =
-         body.onmousedown =
-         body.onmouseup =
-         body.onmousemove =
-         body.onmouseover =
-         body.onmouseout =
-         body.onclick = null;
+        if (body) {
+        // The body can be undefined in the relatively obscure case that the RTA
+        // is attached and detached before it has a chance to finish initializing.
+        body.onkeydown =
+        body.onkeyup =
+        body.onkeypress =
+        body.onmousedown =
+        body.onmouseup =
+        body.onmousemove =
+        body.onmouseover =
+        body.onmouseout =
+        body.onclick = null;
 
-         elem.contentWindow.onfocus =
-         elem.contentWindow.onblur = null;
-       }
-     }-*/;
-
-    @Override
-    boolean isRichEditingActive(Element elem) {
-        return true;
-    }
+        elem.contentWindow.onfocus =
+        elem.contentWindow.onblur = null;
+        }
+    }-*/;
 }

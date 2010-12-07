@@ -110,7 +110,6 @@ import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.StyleInjector;
 
 public class PlatformModule extends AbstractExtendedModule {
 
@@ -244,7 +243,7 @@ public class PlatformModule extends AbstractExtendedModule {
             @Override
             public ImgResources create() {
                 final ImgResources instance = GWT.create(ImgResources.class);
-                StyleInjector.injectStylesheet(instance.css().getText());
+                instance.css().ensureInjected();
                 return instance;
             }
         });
@@ -253,7 +252,7 @@ public class PlatformModule extends AbstractExtendedModule {
             @Override
             public RTEImgResources create() {
                 final RTEImgResources instance = GWT.create(RTEImgResources.class);
-                StyleInjector.injectStylesheet(instance.css().getText());
+                instance.css().ensureInjected();
                 return instance;
             }
         });
@@ -466,6 +465,12 @@ public class PlatformModule extends AbstractExtendedModule {
             }
         });
 
+        register(ApplicationComponentGroup.class, new Factory<GlobalShortcutRegister>(GlobalShortcutRegister.class) {
+            @Override
+            public GlobalShortcutRegister create() {
+                return new GlobalShortcutRegister();
+            }
+        });
         i(ApplicationComponentGroup.class).createAll();
         i(ToolGroup.class).createAll();
         i(Application.class).start();

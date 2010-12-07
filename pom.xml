@@ -12,11 +12,11 @@
   <name>kune</name>
   <url>http://kune.ourproject.org</url>
   <properties>
-    <!--
-      Available versions:
-      http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/
-    -->
-    <gwt.version>2.0.0</gwt.version>
+    <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
+    <gwtVersion>2.1.0</gwtVersion>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
     <!-- guice -->
@@ -30,30 +30,21 @@
       <artifactId>guice-servlet</artifactId>
       <version>2.0.1</version>
     </dependency>
-    <dependency>
-      <groupId>aopalliance</groupId>
-      <artifactId>aopalliance</artifactId>
-      <version>1.0</version>
-    </dependency>
-
     <!-- GWT dependencies (from maven "central" repo) -->
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
-      <version>${gwt.version}</version>
-      <scope>compile</scope>
+      <version>${gwtVersion}</version>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>${gwt.version}</version>
+      <version>${gwtVersion}</version>
       <scope>provided</scope>
     </dependency>
-    <!--
-      <dependency> <groupId>com.extjs</groupId>
-      <artifactId>gxt</artifactId> <version>1.0-beta2</version>
-      </dependency>
-    -->
+    <!-- <dependency> <groupId>com.extjs</groupId> <artifactId>gxt</artifactId> 
+      <version>1.0-beta2</version> </dependency> -->
     <dependency>
       <groupId>org.cobogw</groupId>
       <artifactId>gwt</artifactId>
@@ -79,7 +70,6 @@
       <artifactId>gwt-voices</artifactId>
       <version>1.6.0</version>
     </dependency>
-
     <!-- utilities -->
     <dependency>
       <groupId>log4j</groupId>
@@ -106,10 +96,9 @@
       <artifactId>xwiki-web-gwt-dom</artifactId>
       <version>2.3-rc-1</version>
       <!-- <version>2.0-SNAPSHOT-g164</version> -->
-      <!-- <version>2.0-SNAPSHOT</version>  -->
+      <!-- <version>2.0-SNAPSHOT</version> -->
       <!-- <version>2.0-SNAPSHOT-g20s</version> -->
     </dependency>
-
     <!-- xmpp -->
     <dependency>
       <groupId>com.calclab.emite</groupId>
@@ -131,15 +120,13 @@
       <artifactId>smackx-debugger</artifactId>
       <version>3.0.4</version>
     </dependency>
-
-    <!--  mysql -->
+    <!-- mysql -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.0.5</version>
     </dependency>
-
-    <!--  hibernate JPA -->
+    <!-- hibernate JPA -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -160,11 +147,8 @@
       <artifactId>hibernate-commons-annotations</artifactId>
       <version>3.3.0.ga</version>
     </dependency>
-    <!--
-      <dependency> <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-ehcache</artifactId>
-      <version>3.3.1.GA</version> </dependency>
-    -->
+    <!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> 
+      <version>3.3.1.GA</version> </dependency> -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-search</artifactId>
@@ -200,7 +184,6 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.5.2</version>
     </dependency>
-
     <!-- REST: xml and json (stax) -->
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
@@ -228,7 +211,6 @@
       <artifactId>commons-collections</artifactId>
       <version>3.2</version>
     </dependency>
-
     <!-- File upload -->
     <dependency>
       <groupId>commons-beanutils</groupId>
@@ -250,7 +232,6 @@
       <artifactId>commons-fileupload</artifactId>
       <version>1.1.1</version>
     </dependency>
-
     <!-- db upgrades -->
     <dependency>
       <groupId>org.liquibase</groupId>
@@ -262,21 +243,20 @@
       <artifactId>liquibase-plugin</artifactId>
       <version>1.7.0.0</version>
     </dependency>
-
-    <!--     jetty dependencies -->
+    <!-- jetty dependencies -->
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
       <artifactId>jetty-util</artifactId>
-      <version>6.1.11</version>
-      <!--          <version>7.0.0.pre5</version>-->
+      <!-- <version>6.1.11</version> -->
+      <version>7.0.0.pre5</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.mortbay.jetty</groupId>
-      <artifactId>maven-jetty-plugin</artifactId>
-      <!--            <artifactId>jetty-maven-plugin</artifactId>-->
-      <!--            <version>7.0.0.1beta0</version>-->
-      <version>6.1.11</version>
+      <artifactId>jetty-maven-plugin</artifactId>
+      <version>7.2.1.v20101111</version>
+      <!-- <artifactId>maven-jetty-plugin</artifactId>
+      <version>6.1.11</version> -->
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -285,7 +265,6 @@
       <version>2.4</version>
       <scope>provided</scope>
     </dependency>
-
     <!-- testing dependencies -->
     <dependency>
       <groupId>org.mockito</groupId>
@@ -302,25 +281,21 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.4</version>
-      <!--
-        <scope>test</scope>
-      -->
+      <version>4.7</version>
+      <!-- <scope>test</scope> -->
     </dependency>
-    <!--    <dependency>-->
-    <!--      <groupId>org.openqa.selenium.client-drivers</groupId>-->
-    <!--      <artifactId>selenium-java-client-driver</artifactId>-->
-    <!--      <version>1.0-beta-1</version>-->
-    <!--      <scope>test</scope>-->
-    <!--    </dependency>-->
-
+    <!-- <dependency> -->
+    <!-- <groupId>org.openqa.selenium.client-drivers</groupId> -->
+    <!-- <artifactId>selenium-java-client-driver</artifactId> -->
+    <!-- <version>1.0-beta-1</version> -->
+    <!-- <scope>test</scope> -->
+    <!-- </dependency> -->
     <!-- public side -->
     <dependency>
       <groupId>org.jruby.rack</groupId>
       <artifactId>jruby-rack</artifactId>
-      <version>0.9.4</version>
+      <version>1.0.3</version>
     </dependency>
-
     <!-- wave -->
     <dependency>
       <groupId>org.waveprotocol</groupId>
@@ -408,15 +383,10 @@
       <url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/</url>
     </repository>
   </distributionManagement>
-  <!--
-    http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html
-  -->
+  <!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
   <pluginRepositories>
-    <!--
-      <pluginRepository> <id>gwt-maven</id>
-      <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
-      </pluginRepository>
-    -->
+    <!-- <pluginRepository> <id>gwt-maven</id> <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url> 
+      </pluginRepository> -->
     <pluginRepository>
       <id>Codehaus Snapshots</id>
       <url>http://snapshots.repository.codehaus.org/</url>
@@ -426,6 +396,11 @@
       <releases>
         <enabled>true</enabled>  <!-- Workaround for MNG-2974, see note below -->
       </releases>
+    </pluginRepository>
+    <pluginRepository>
+      <id>gwt-plugin-repo</id>
+      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0.M3/gwt/maven</url>
+      <name>Google Web Toolkit Plugin Repository</name>
     </pluginRepository>
   </pluginRepositories>
   <repositories>
@@ -469,6 +444,14 @@
       <url>http://www.gwt-ext.com/maven2/</url>
     </repository>
     <repository>
+      <id>google-maven-snapshot-repository</id>
+      <name>Google Maven Snapshot Repository</name>
+      <url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <id>openqa.org</id>
       <name>Openqa Release Repository</name>
       <url>http://archiva.openqa.org/repository/releases</url>
@@ -481,7 +464,7 @@
       </releases>
     </repository>
     <repository>
-      <id>openqa.org</id>
+      <id>openqa.org snapshots</id>
       <name>Openqa Snapshot Repository</name>
       <url>http://archiva.openqa.org/repository/snapshots</url>
       <layout>default</layout>
@@ -521,7 +504,7 @@
   </repositories>
   <issueManagement>
     <system>kune issues list at ourproject.org</system>
-    <url>http://ourproject.org/tracker/?group_id=407</url>
+    <url>http://kune.ourproject.org/issues/</url>
   </issueManagement>
   <developers>
     <developer>
@@ -557,31 +540,27 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
-          <!--
-            Uncomment and run mvn with -X -e if we have same compile
-            problems <compilerArgument>-verbose</compilerArgument>
-            <fork>true</fork> <verbose>true</verbose>
-          -->
+          <!-- Uncomment and run mvn with -X -e if we have same compile problems 
+            <compilerArgument>-verbose</compilerArgument> <fork>true</fork> <verbose>true</verbose> -->
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
-        <!-- http://mojo.codehaus.org/gwt-maven-plugin/index.html -->
-        <version>1.2</version>
+        <!--<version>1.2</version> -->
+        <version>2.1.0</version>
         <executions>
           <execution>
             <configuration>
               <!-- <extraJvmArgs>-Xmx512M</extraJvmArgs> -->
               <soyc>false</soyc>
               <style>OBF</style>
+              <inline>true</inline>
             </configuration>
             <goals>
               <!-- gwt:* goals to be executed during build -->
               <goal>compile</goal>
-              <!--
-                http://mojo.codehaus.org/gwt-maven-plugin/user-guide/library.html
-              -->
+              <!-- http://mojo.codehaus.org/gwt-maven-plugin/user-guide/library.html -->
               <goal>resources</goal>
             </goals>
           </execution>
@@ -593,38 +572,50 @@
       </plugin>
       <plugin>
         <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.3</version>
+        <version>2.7</version>
         <configuration>
           <downloadSources>true</downloadSources>
-          <downloadJavadocs>true</downloadJavadocs>
-          <wtpversion>1.5</wtpversion>
+          <downloadJavadocs>false</downloadJavadocs>
+          <wtpversion>2.0</wtpversion>
         </configuration>
       </plugin>
+<!--      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>exploded</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <webappDirectory>/war</webappDirectory>
+        </configuration>
+      </plugin> -->
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
-        <!--        <artifactId>jetty-maven-plugin</artifactId>-->
-        <!--        <version>7.0.0.1beta0</version>-->
-        <artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.11</version>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>7.2.1.v20101111</version>
+        <!--<artifactId>maven-jetty-plugin</artifactId>
+        <version>6.1.14</version> -->
         <configuration>
-          <contextPath>/</contextPath>
+          <!-- <contextPath>/</contextPath> -->
+          <!-- <webAppSourceDirectory>${basedir}/target/${project.artifactId}-${version}</webAppSourceDirectory> -->
+          <!-- <webAppSourceDirectory>war</webAppSourceDirectory> -->
           <webAppSourceDirectory>war</webAppSourceDirectory>
           <reload>manual</reload>
           <scanIntervalSeconds>0</scanIntervalSeconds>
         </configuration>
       </plugin>
-      <!--
-        <plugin> <groupId>org.codehaus.mojo</groupId>
-        <artifactId>deb-maven-plugin</artifactId>
-        <version>1.0-SNAPSHOT</version> <configuration>
-        <description>kune free/open/libre collaboration
-        platform</description> <maintainer>Kune Development Team
-        &lt;kune-devel@lists.ourproject.org&gt;</maintainer>
-        <section>web</section> <priority>optional</priority>
-        <architecture>all</architecture> </configuration> <executions>
-        <execution> <goals> <goal>deb</goal> </goals> </execution>
-        </executions> </plugin>
-      -->
+      <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>deb-maven-plugin</artifactId> 
+        <version>1.0-SNAPSHOT</version> <configuration> <description>kune free/open/libre 
+        collaboration platform</description> <maintainer>Kune Development Team &lt;kune-devel@lists.ourproject.org&gt;</maintainer> 
+        <section>web</section> <priority>optional</priority> <architecture>all</architecture> 
+        </configuration> <executions> <execution> <goals> <goal>deb</goal> </goals> 
+        </execution> </executions> </plugin> -->
       <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-plugin</artifactId>
@@ -641,11 +632,8 @@
               <password>db4kune</password>
               <verbose>true</verbose>
             </configuration>
-            <!--
-              <configuration> <verbose>true</verbose> <propertiesFile>
-              src/main/resources/db/liquibase.properties
-              </propertiesFile> </configuration>
-            -->
+            <!-- <configuration> <verbose>true</verbose> <propertiesFile> 
+              src/main/resources/db/liquibase.properties </propertiesFile> </configuration> -->
             <goals>
               <goal>update</goal>
             </goals>
@@ -684,13 +672,9 @@
                 <include>**/LabelWrapper*.**</include>
                 <include>**/KuneUiUtils.**</include>
                 <include>**/View.**</include>
-                <!--
-                  <include>**/platf/**</include>
-                  <include>**/platf/client/extend/**</include>
-                  <include>**/platf/client/*java</include>
-                  <include>**/platf/client/app/**</include>
-                  <include>**/platf/client/dispatch/**</include>
-                -->
+                <!-- <include>**/platf/**</include> <include>**/platf/client/extend/**</include> 
+                  <include>**/platf/client/*java</include> <include>**/platf/client/app/**</include> 
+                  <include>**/platf/client/dispatch/**</include> -->
               </includes>
             </configuration>
           </execution>
@@ -709,33 +693,31 @@
           </execution>
         </executions>
       </plugin>
-      <!--      <plugin>-->
-      <!--        <groupId>org.codehaus.mojo</groupId>-->
-      <!--        <artifactId>selenium-maven-plugin</artifactId>-->
-      <!--        <configuration>-->
-      <!--          <port>4441</port>-->
-      <!--        </configuration>-->
-      <!--        <executions>-->
-      <!--          <execution>-->
-      <!--            <phase>pre-integration-test</phase>-->
-      <!--            <goals>-->
-      <!--              <goal>start-server</goal>-->
-      <!--            </goals>-->
-      <!--            <configuration>-->
-      <!--              <background>true</background>-->
-      <!--            </configuration>-->
-      <!--          </execution>-->
-      <!--        </executions>-->
-      <!--      </plugin>-->
+      <!-- <plugin> -->
+      <!-- <groupId>org.codehaus.mojo</groupId> -->
+      <!-- <artifactId>selenium-maven-plugin</artifactId> -->
+      <!-- <configuration> -->
+      <!-- <port>4441</port> -->
+      <!-- </configuration> -->
+      <!-- <executions> -->
+      <!-- <execution> -->
+      <!-- <phase>pre-integration-test</phase> -->
+      <!-- <goals> -->
+      <!-- <goal>start-server</goal> -->
+      <!-- </goals> -->
+      <!-- <configuration> -->
+      <!-- <background>true</background> -->
+      <!-- </configuration> -->
+      <!-- </execution> -->
+      <!-- </executions> -->
+      <!-- </plugin> -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <forkMode>pertest</forkMode>
-          <!--
-            Skip the normal tests, we'll run them in the
-            integration-test phase
-          -->
+          <!-- Skip the normal tests, we'll run them in the integration-test 
+            phase -->
           <skip>true</skip>
         </configuration>
         <executions>
@@ -750,15 +732,12 @@
           </execution>
         </executions>
       </plugin>
-      <!--
-        <plugin> <artifactId>maven-clean-plugin</artifactId>
-        <version>2.2</version> <configuration> <filesets> <fileset>
-        <directory>src/main/webapp/gwt/</directory> <includes>
-        <include>**/org.ourproject.kune.app.Kune*</include>
-        <followSymlinks>false</followSymlinks> </includes> </fileset>
-        </filesets> </configuration> </plugin>
-      -->
+      <!-- <plugin> <artifactId>maven-clean-plugin</artifactId> <version>2.2</version> 
+        <configuration> <filesets> <fileset> <directory>src/main/webapp/gwt/</directory> 
+        <includes> <include>**/org.ourproject.kune.app.Kune*</include> <followSymlinks>false</followSymlinks> 
+        </includes> </fileset> </filesets> </configuration> </plugin> -->
     </plugins>
+    <!-- <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory> -->
     <outputDirectory>war/WEB-INF/classes</outputDirectory>
     <testOutputDirectory>war/WEB-INF/test-classes</testOutputDirectory>
     <resources>
@@ -799,20 +778,6 @@
         <artifactId>cobertura-maven-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <systemProperties>
-            <property>
-              <name> net.sourceforge.cobertura.datafile </name>
-              <value>
-                ${project.reporting.directory}/cobertura/cobertura.ser </value>
-            </property>
-          </systemProperties>
-          <forkMode>pertest</forkMode>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>jdepend-maven-plugin</artifactId>
       </plugin>
@@ -822,4 +787,30 @@
       </plugin>
     </plugins>
   </reporting>
+  <profiles>
+    <profile>
+      <!-- Activate only when within eclipse -->
+      <id>m2eclipse</id>
+      <activation>
+        <property>
+          <name>!m2e.version</name>
+        </property>
+      </activation>
+      <!-- GWT SDK is provided by GWT SDK Classpath Container -->
+      <dependencies>
+        <dependency>
+          <groupId>com.google.gwt</groupId>
+          <artifactId>gwt-servlet</artifactId>
+          <version>${gwtVersion}</version>
+          <scope>runtime</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.google.gwt</groupId>
+          <artifactId>gwt-user</artifactId>
+          <version>${gwtVersion}</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>

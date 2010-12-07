@@ -22,27 +22,25 @@ package org.ourproject.kune.platf.client.ui.rte;
 import org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplOpera;
 
 public class WrappedRichTextAreaImplOpera extends RichTextAreaImplOpera {
-
-    @Override
     public native void initElement() /*-{
         // Most browsers don't like setting designMode until slightly _after_
         // the iframe becomes attached to the DOM. Any non-zero timeout will do
         // just fine.
         var _this = this;
-        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::initializing = true;
-        setTimeout(function() {
-          // Turn on design mode.
-          _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.designMode = 'On';
-               // patch css inject:
-               var elem = _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
-               var doc = elem.contentWindow.document;
-               var ct = "<html><head><style>@import url('" + $wnd.location.protocol + "//" + $wnd.location.host + $wnd.location.pathname + "css/richtext.css" + "');</style></head><body CONTENTEDITABLE='true'></body></html>" ;
-               doc.write( ct );
-               // -- patch
+        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitializing()();
+        setTimeout($entry(function() {
+        // Turn on design mode.
+        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.contentWindow.document.designMode = 'On';
 
-          // Send notification that the iframe has reached design mode.
-          _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitialized()();
-        }, 1);
+        // patch css inject:
+        var elem = _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem;
+        var doc = elem.contentWindow.document;
+        var ct = "<html><head><style>@import url('" +$wnd.location.protocol+ "//" + $wnd.location.host + $wnd.location.pathname + "css/richtext.css" + "');</style></head><body CONTENTEDITABLE='true'></body></html>" ;
+        doc.write( ct );
+        // -- patch
+
+        // Send notification that the iframe has reached design mode.
+        _this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplStandard::onElementInitialized()();
+        }), 1);
     }-*/;
-
 }

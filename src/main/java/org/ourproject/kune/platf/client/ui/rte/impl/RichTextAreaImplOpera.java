@@ -28,7 +28,7 @@ public class RichTextAreaImplOpera extends RichTextAreaImplStandard {
     }
 
     @Override
-    public native void setFocus(boolean focused) /*-{
+  protected native void setFocusImpl(boolean focused) /*-{
        // Opera needs the *iframe* focused, not its window.
        if (focused) {
          this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.focus();

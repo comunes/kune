@@ -11,6 +11,22 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** new UI library (gwt-ext is dead)
+- mosaic, 
+- gtx
+- smartclient
+- 
+** wave client integration
+*** Documentation
+**** Hosted Mode support for websocket
+***** Test that websocket is supported in your GWT Hosted Mode browser:
+http://www.websockets.org/
+http://jimbergman.net/websocket-web-browser-test/
+***** if not:
+****** Install nighty firefox (for hosted-mode and websocket support)
+add-apt-repository ppa:ubuntu-mozilla-daily/ppa
+apt-get update
+
 ** Compilation in target... resolve
 ** tag, resolve last implementation complexity.
 Summary: recover the:
@@ -19,14 +35,11 @@ and use:
 [Tag]  <-1--m->   [TagUserContent (fecha)]  <-m--1->  [Content]
 [User] <-1-------m--^
 for user bookmarks/favorites/links
-** Use hibernate cache
-   http://ehcache.sourceforge.net/documentation/openjpa_provider.html
-   http://ehcache.sourceforge.net/documentation/hibernate.html
 ** Do something with jetty/jruby alias issue
    http://jetty.mortbay.org/jetty5/faq/faq_s_400-Security_t_Aliases.html
 ** Use of webdriver instead of plain selenium
    http://code.google.com/p/webdriver/
-** New Action class
+** New Action (Command) class
 *** Things to support
 - [X] menu and toolbars separators (space, bar, expand)
 - [X] index position insertion (for buttons added by other plugins)
@@ -35,6 +48,28 @@ for user bookmarks/favorites/links
 - [X] tongle/push buttons with isPressed (initially and later)...
 - [X] position id, that is, if we have some toolbars and a list of actions, how to select which action in which toolbar.
 - [X] radio menu (with group) and check menu item
+- [ ] you can set a property in a action and change it in the gui without change the action
+- [ ] actions/descriptors can be reused
+- [ ] shortcuts
+- [ ] Presenter/View separation
+- [ ] Injection
+- [ ] Many items of some action/description
+- [ ] a better binding 
+https://code.google.com/p/gwt-beans-binding/
+https://code.google.com/p/gwt-beans-binding/wiki/MoreIntroduction
+*** Descripción:
+Tengo una acción que se asocia a una descripción de UI y que esta se puede traducir a un tipo de Wigdet
+
+acción <1---m>descrip<1---m>widgets
+
+avatar (des) ------------> Widget
+  lazy-menu (des) -------> Widget
+    lazy-submenu (des)---> Widget
+      lazy-item (des) ---> Widget
+         action (act)
+
+lista de (des) ---> lista de views
+
 ** <s> Changes in UI
    - [ ] 2:21 (video) add member dialog with confirmation (other way to do confirmation)
    - [ ] Leave this group, with green icon
@@ -45,14 +80,14 @@ for user bookmarks/favorites/links
    - [ ] 2:35 "Start a chat with this member"-> chat! and other long items
    - [ ] 2.41 long submenus...
    - [ ] scroll of licenses
-** maven-gwt problem (using another plugin from codehaus)
+** maven-gwt problem (using another plugin from codehaus)	    :ARCHIVE:
    mvn com.totsp.gwt:maven-googlewebtoolkit2-plugin:compile
    and so on.
    More info:
    http://code.google.com/p/gwt-maven/wiki/M2FAQ
 ** vjrj use xwiki maven repo
    http://maven.xwiki.org/releases/com/xpn/xwiki/platform/xwiki-web-wysiwyg/1.8-rc-2/
-** vjrj <v> better RTE
+** vjrj <v> better RTE						    :ARCHIVE:
 *** Pending
 **** Insert/Edit link
 ***** use cases
@@ -72,7 +107,7 @@ for user bookmarks/favorites/links
    http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/samples/internet/ie55/EditRegions/default.asp
    http://www.mozilla.org/editor/midas-spec.html
    http://mozilla.org/editor/midasdemo/
-** vjrj <v> GWT 1.6
+** vjrj <v> GWT 1.6						    :ARCHIVE:
    http://code.google.com/intl/es/webtoolkit/doc/1.6/ReleaseNotes_1_6.html#Upgrading
    http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/3e7e6cc3b35ad98a
    http://code.google.com/p/google-web-toolkit/wiki/WAR_Design_1_6
@@ -107,8 +142,7 @@ for user bookmarks/favorites/links
       Properties
 
    Group
-      Properties
- 
+      Properties 
 ** vjrj Styling braimstorming
 *** layouts
     - name :: greenforrest
@@ -137,6 +171,9 @@ for user bookmarks/favorites/links
      - name :: usercolor
      - status :: (setted|def) setted
      - value :: red
+**** links
+http://lesscss.org/
+http://xcss.antpaw.org/ https://code.google.com/p/xcssframework/
 *** logos
 *** caching
 *** backgrounds
@@ -172,6 +209,7 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
    http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
    http://en.wikipedia.org/wiki/Fragment_identifier
    http://www.w3.org/DesignIssues/Fragment.html
+   Some related: https://code.google.com/p/restful-gwt/
 ** vjrj <v> rails group-shortname.kune-site-domain/tool-name/folder-id/doc-id routing, maybe use:
    http://agilewebdevelopment.com/plugins/request_routing
    http://wiki.rubyonrails.org/rails/pages/Request+Routing
@@ -184,6 +222,10 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** Use hibernate cache
+   http://ehcache.sourceforge.net/documentation/openjpa_provider.html
+   http://ehcache.sourceforge.net/documentation/hibernate.html
+
 ** TODO <v> Images zoom-in/out with style="cursor: url(somezoomcursor.cur);"
 http://www.w3.org/TR/SVG/interact.html#Cursors
 http://www.w3.org/TR/CSS2/ui.html
@@ -201,6 +243,8 @@ http://www.advogato.org/trust-metric.html
 ** TODO <v> study opensocial, openstack and related
    http://developer.yahoo.net/blog/archives/2008/12/the_open_stack.html
 ** TODO <v> Use of command key ⌘ for Mac shortcuts
+** TODO <s> Find the way to use: "NOYB: Privacy in online social networks"
+   http://www.citeulike.org/user/dartar/article/4252739
 ** TODO <v,s> harden our privacy policy. Goals:
    - permit user/projects/contents how much private or public are
    - APIs public only to associated sites (in study) ( http://oauth.net ? )

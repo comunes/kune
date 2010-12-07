@@ -43,7 +43,7 @@ public final class OutermostCallInterceptor implements MethodInterceptor {
 
     private final MethodInterceptor interceptor;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     private final ThreadLocal count = new ThreadLocal() {
         @Override
         protected Integer initialValue() {

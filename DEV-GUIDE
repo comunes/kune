@@ -164,6 +164,22 @@ this generates four classes GroupOptions (the external interface), GroupOptionsP
 
 ==Development Environment==
 
+===Prerequisite: Install maven===
+
+Install maven2.
+
+From:
+http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN.txt
+
+Eclipse users will need to install the following plugin components:
+- Google Plugin for Eclipse (instructions at http://code.google.com/eclipse/)
+- m2eclipse Core
+- Maven Integration for WTP (in m2eclipse extras)
+  Instructions for installing the maven plugins can be found here:
+  http://m2eclipse.sonatype.org/installing-m2eclipse.html
+
+Ensure Eclipse is configured to use Java 1.6.
+
 ===Prerequisite: Install kune===
 
 Install kune (see trunk/INSTALL file) and run kune for the first time.

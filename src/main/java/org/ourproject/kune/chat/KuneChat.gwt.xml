@@ -1,6 +1,7 @@
-<!DOCTYPE document SYSTEM "http://google-web-toolkit.googlecode.com/svn/tags/1.6.4/distro-source/core/src/gwt-module.dtd">
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.1.0/distro-source/core/src/gwt-module.dtd">
 <module>
   <inherits name='org.ourproject.kune.platf.KunePlatform' />
   <inherits name='org.ourproject.kune.workspace.KuneWorkspace' />
   <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />
+  <source path="client" />
 </module>

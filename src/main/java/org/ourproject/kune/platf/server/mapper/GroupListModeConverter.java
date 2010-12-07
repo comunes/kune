@@ -39,7 +39,7 @@ public class GroupListModeConverter implements CustomConverter {
         add(GroupListMode.NOBODY);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Object convert(final Object destination, final Object source, final Class destinationClass,
             final Class sourceClass) {
         if (source == null) {

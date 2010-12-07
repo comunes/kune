@@ -19,9 +19,6 @@
  */
 package org.ourproject.kune.app.server;
 
-import org.ourproject.kune.app.server.wave.WaveContainerListener;
-import org.ourproject.kune.app.server.wave.WaveInterceptorModule;
-import org.ourproject.kune.app.server.wave.WavePropertiesParser;
 import org.ourproject.kune.blogs.server.BlogServerModule;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
@@ -52,8 +49,6 @@ import org.ourproject.kune.rack.filters.LogFilter;
 import org.ourproject.kune.rack.filters.RedirectFilter;
 import org.ourproject.kune.rack.filters.rest.RESTServicesModule;
 import org.ourproject.kune.wiki.server.WikiServerModule;
-import org.waveprotocol.wave.examples.fedone.FlagSettings;
-import org.waveprotocol.wave.examples.fedone.ServerModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
@@ -82,7 +77,7 @@ public class KuneRackModule implements RackModule {
                 if (sessionScope != null) {
                     bindScope(SessionScoped.class, sessionScope);
                 }
-                bind(WavePropertiesParser.class).asEagerSingleton();
+                // bind(WavePropertiesParser.class).asEagerSingleton();
             }
         };
     }
@@ -92,7 +87,7 @@ public class KuneRackModule implements RackModule {
         installGuiceModules(builder);
 
         builder.add(KuneContainerListener.class);
-        builder.add(WaveContainerListener.class);
+        // builder.add(WaveContainerListener.class);
 
         builder.exclude("/http-bind.*");
         builder.exclude("/public/.*");
@@ -129,9 +124,9 @@ public class KuneRackModule implements RackModule {
         builder.use(new GalleryServerModule());
         builder.use(new RESTServicesModule());
         builder.use(configModule);
-        builder.use(WavePropertiesParser.parseFlags(FlagSettings.class));
-        builder.use(new WaveInterceptorModule());
-        builder.use(new ServerModule());
+        // builder.use(WavePropertiesParser.parseFlags(FlagSettings.class));
+        // builder.use(new WaveInterceptorModule());
+        // builder.use(new ServerModule());
     }
 
 }

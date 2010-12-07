@@ -65,7 +65,7 @@ public class I18nUITranslationService extends I18nTranslationService {
         return formatDateWithLocale(date, false);
     }
 
-    public String formatDateWithLocale(final Date date, boolean shortFormat) {
+    public String formatDateWithLocale(final Date date, final boolean shortFormat) {
         String dateFormat = shortFormat ? currentLang.getDateFormatShort() : currentLang.getDateFormat();
 
         final DateTimeFormat fmt;
@@ -75,13 +75,13 @@ public class I18nUITranslationService extends I18nTranslationService {
             if (shortFormat) {
                 fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
             } else {
-                String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(date);
-                String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
+                final String abrevMonthInEnglish = DateTimeFormat.getFormat("MMM").format(date);
+                final String monthToTranslate = abrevMonthInEnglish + " [%NT abbreviated month]";
                 dateFormat = dateFormat.replaceFirst("MMM", "'" + t(monthToTranslate) + "'");
                 fmt = DateTimeFormat.getFormat(dateFormat + " h:mm a");
             }
         }
-        String dateFormated = fmt.format(date);
+        final String dateFormated = fmt.format(date);
         return dateFormated;
     }
 
@@ -100,7 +100,7 @@ public class I18nUITranslationService extends I18nTranslationService {
         final String locale = loc.getParameter("locale");
         i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
             public void onFailure(final Throwable caught) {
-                Log.error("Workspace adaptation to your language failed");
+                Log.error("Workspace adaptation to your language failed: " + caught.getMessage());
             }
 
             public void onSuccess(final I18nLanguageDTO result) {
@@ -109,7 +109,7 @@ public class I18nUITranslationService extends I18nTranslationService {
                 session.setCurrentLanguage(currentLang);
                 i18nService.getLexicon(currentLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
                     public void onFailure(final Throwable caught) {
-                        Log.error("Workspace adaptation to your language failed");
+                        Log.error("Workspace adaptation to your language failed:" + caught.getMessage());
                     }
 
                     public void onSuccess(final HashMap<String, String> result) {
@@ -198,33 +198,33 @@ public class I18nUITranslationService extends I18nTranslationService {
      */
     private native void changeLocale(String newLocale)
     /*-{
-       // Uncomment the "debugger;" line to see how to set debug statements in JSNI code
-       // When in web mode, if your browser has a JavaScript debugger attached, it will
-       // launch at this point in the code (when the user changes locale through the menu system).
-       // debugger;
+        // Uncomment the "debugger;" line to see how to set debug statements in JSNI code
+        // When in web mode, if your browser has a JavaScript debugger attached, it will
+        // launch at this point in the code (when the user changes locale through the menu system).
+        // debugger;
 
-       // Get the current location
-       var currLocation = $wnd.location.toString();
-       // Get rid of any GWT History tokens that might be present
-       var noHistoryCurrLocArray = currLocation.split("#");
-       var noHistoryCurrLoc = noHistoryCurrLocArray[0];
-       var currHistory = noHistoryCurrLocArray[1];
-       // Get rid of any locale string
-       var locArray = noHistoryCurrLoc.split("?");
-       // Build the new href location and then send the browser there.
-       // $wnd.location.href = locArray[0]+"?locale="+newLocale+"#"+currHistory;
-       $wnd.location.href = locArray[0]+"?locale="+newLocale
+        // Get the current location
+        var currLocation = $wnd.location.toString();
+        // Get rid of any GWT History tokens that might be present
+        var noHistoryCurrLocArray = currLocation.split("#");
+        var noHistoryCurrLoc = noHistoryCurrLocArray[0];
+        var currHistory = noHistoryCurrLocArray[1];
+        // Get rid of any locale string
+        var locArray = noHistoryCurrLoc.split("?");
+        // Build the new href location and then send the browser there.
+        // $wnd.location.href = locArray[0]+"?locale="+newLocale+"#"+currHistory;
+        $wnd.location.href = locArray[0]+"?locale="+newLocale
 
-       // extjs part:
-       // commented because the error: "Ext is not defined"
-       // we have to try other way
-       // var head = document.getElementsByTagName("head")[0];
-       // var script = document.createElement('script');
-       // script.id = 'localScript';
-       // script.type = 'text/javascript';
-       // script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
-       // head.appendChild(script);
-       }-*/;
+        // extjs part:
+        // commented because the error: "Ext is not defined"
+        // we have to try other way
+        // var head = document.getElementsByTagName("head")[0];
+        // var script = document.createElement('script');
+        // script.id = 'localScript';
+        // script.type = 'text/javascript';
+        // script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
+        // head.appendChild(script);
+    }-*/;
 
     private void fireI18nLanguageChange() {
         if (i18nChangeListeners != null) {

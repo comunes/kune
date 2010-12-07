@@ -20,7 +20,7 @@ public class HttpServletRequestMocked implements HttpServletRequest {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Enumeration getAttributeNames() {
         return null;
     }
@@ -58,12 +58,12 @@ public class HttpServletRequestMocked implements HttpServletRequest {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Enumeration getHeaderNames() {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Enumeration getHeaders(final String arg0) {
         return null;
     }
@@ -84,7 +84,7 @@ public class HttpServletRequestMocked implements HttpServletRequest {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Enumeration getLocales() {
         return null;
     }
@@ -105,12 +105,12 @@ public class HttpServletRequestMocked implements HttpServletRequest {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Map getParameterMap() {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Enumeration getParameterNames() {
         return null;
     }

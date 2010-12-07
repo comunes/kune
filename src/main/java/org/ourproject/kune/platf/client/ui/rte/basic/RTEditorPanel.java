@@ -16,9 +16,8 @@ import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
-import org.ourproject.kune.platf.client.ui.rte.RichTextArea.BasicFormatter;
-import org.ourproject.kune.platf.client.ui.rte.RichTextArea.ExtendedFormatter;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Formatter;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Justification;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkExecutableUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
@@ -44,8 +43,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
 
     private static final Element NO_ELEMENT = null;
     private final I18nUITranslationService i18n;
-    private final BasicFormatter basic;
-    private final ExtendedFormatter extended;
+    private final Formatter extended;
     private final RTEditorPresenter presenter;
     private final GlobalShortcutRegister globalShortcutReg;
     private final RTELinkPopup linkCtxMenu;
@@ -60,8 +58,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
         this.i18n = i18n;
         this.globalShortcutReg = globalShortcutReg;
         rta = new RichTextArea();
-        basic = rta.getBasicFormatter();
-        extended = rta.getExtendedFormatter();
+        extended = rta.getFormatter();
         topBar = new ComplexToolbar(bindings);
         sndBar = new ComplexToolbar(bindings);
         sndBar.setNormalStyle();
@@ -94,7 +91,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public boolean canBeBasic() {
-        return basic != null;
+        return extended != null;
     }
 
     public boolean canBeExtended() {
@@ -209,7 +206,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public void insertHtml(final String html) {
-        extended.insertHtml(html);
+        extended.insertHTML(html);
     }
 
     public void insertImage(final String url) {
@@ -229,7 +226,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public boolean isBold() {
-        return basic.isBold();
+        return extended.isBold();
     }
 
     public boolean isCollapsed() {
@@ -241,7 +238,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public boolean isItalic() {
-        return basic.isItalic();
+        return extended.isItalic();
     }
 
     public boolean isLink() {
@@ -257,27 +254,27 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public boolean isSubscript() {
-        return basic.isSubscript();
+        return extended.isSubscript();
     }
 
     public boolean isSuperscript() {
-        return basic.isSuperscript();
+        return extended.isSuperscript();
     }
 
     public boolean isUnderlined() {
-        return basic.isUnderlined();
+        return extended.isUnderlined();
     }
 
     public void justifyCenter() {
-        basic.setJustification(Justification.CENTER);
+        extended.setJustification(Justification.CENTER);
     }
 
     public void justifyLeft() {
-        basic.setJustification(Justification.LEFT);
+        extended.setJustification(Justification.LEFT);
     }
 
     public void justifyRight() {
-        basic.setJustification(Justification.RIGHT);
+        extended.setJustification(Justification.RIGHT);
     }
 
     public void leftIndent() {
@@ -344,7 +341,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public void selectAll() {
-        basic.selectAll();
+        extended.selectAll();
     }
 
     public void selectLink() {
@@ -352,7 +349,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public void setBackColor(final String color) {
-        basic.setBackColor(color);
+        extended.setBackColor(color);
     }
 
     public void setFocus(final boolean focused) {
@@ -360,15 +357,15 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public void setFontName(final String name) {
-        basic.setFontName(name);
+        extended.setFontName(name);
     }
 
     public void setFontSize(final FontSize size) {
-        basic.setFontSize(size);
+        extended.setFontSize(size);
     }
 
     public void setForeColor(final String color) {
-        basic.setForeColor(color);
+        extended.setForeColor(color);
     }
 
     public void setHTML(final String html) {
@@ -397,11 +394,11 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public void toggleBold() {
-        basic.toggleBold();
+        extended.toggleBold();
     }
 
     public void toggleItalic() {
-        basic.toggleItalic();
+        extended.toggleItalic();
     }
 
     public void toggleStrikethrough() {
@@ -409,15 +406,15 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public void toggleSubscript() {
-        basic.toggleSubscript();
+        extended.toggleSubscript();
     }
 
     public void toggleSuperscript() {
-        basic.toggleSuperscript();
+        extended.toggleSuperscript();
     }
 
     public void toggleUnderline() {
-        basic.toggleUnderline();
+        extended.toggleUnderline();
     }
 
     public void undo() {

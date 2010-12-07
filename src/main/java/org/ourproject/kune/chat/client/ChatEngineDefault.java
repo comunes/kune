@@ -67,10 +67,10 @@ class ChatEngineDefault implements ChatEngine {
     private final WorkspaceSkeleton wskel;
     private ToolbarButton traybarButton;
     private final Provider<EmiteUIDialog> emiteUIProvider;
-    private final Provider<FileDownloadUtils> downloadUtils;
     private Collection<RosterItem> roster;
     private final Event0 onRosterChanged;
     private final KeyStroke shortcut;
+    private final Provider<FileDownloadUtils> downloadUtils;
 
     public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton wskel,
             final Application application, final Session session, final Provider<EmiteUIDialog> emiteUIProvider,

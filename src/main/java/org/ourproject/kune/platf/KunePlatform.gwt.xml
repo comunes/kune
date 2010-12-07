@@ -1,37 +1,40 @@
-<!DOCTYPE document SYSTEM "http://google-web-toolkit.googlecode.com/svn/tags/1.6.4/distro-source/core/src/gwt-module.dtd">
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.1.0/distro-source/core/src/gwt-module.dtd">
 <module>
-  <!-- Inherit the core Web Toolkit stuff.                  -->
+  <!-- Inherit the core Web Toolkit stuff. -->
   <inherits name='com.google.gwt.user.User' />
   <inherits name='com.google.gwt.i18n.I18N' />
   <inherits name="com.google.gwt.user.UserAgent" />
   <inherits name="org.ourproject.kune.platf.RichText" />
+  <inherits name="org.ourproject.kune.workspace.KuneWorkspace" />
   <inherits name="com.google.gwt.resources.Resources" />
-
   <public path="public" />
   <inherits name="com.google.gwt.user.UserAgent" />
   <!-- RTE css inject -->
   <!-- See gwt-user: com/google/gwt/user/RichText.gwt.xml -->
-
   <!-- IE-specific implementation -->
   <replace-with
     class="org.ourproject.kune.platf.client.ui.rte.WrappedRichTextAreaImplIE6">
     <when-type-is
       class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl" />
-    <when-property-is name="user.agent" value="ie6" />
-    <when-property-is name="user.agent" value="ie8" />
+    <any>
+      <when-property-is name="user.agent" value="ie6" />
+      <when-property-is name="user.agent" value="ie8" />
+    </any>
   </replace-with>
-
   <!-- Mozilla-specific implementation -->
   <replace-with
     class="org.ourproject.kune.platf.client.ui.rte.WrappedRichTextAreaImplMozilla">
     <when-type-is
       class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl" />
-    <any>
-      <when-property-is name="user.agent" value="gecko1_8" />
-      <when-property-is name="user.agent" value="gecko" />
-    </any>
+    <when-property-is name="user.agent" value="gecko1_8" />
   </replace-with>
-
+  <!-- Old Mozilla-specific implementation -->
+  <replace-with
+    class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImplOldMozilla">
+    <when-type-is
+      class="org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl" />
+    <when-property-is name="user.agent" value="gecko" />
+  </replace-with>
   <!-- Safari-specific implementation -->
   <replace-with
     class="org.ourproject.kune.platf.client.ui.rte.WrappedRichTextAreaImplSafari">
@@ -41,7 +44,6 @@
       <when-property-is name="user.agent" value="safari" />
     </any>
   </replace-with>
-
   <!-- Opera-specific implementation -->
   <replace-with
     class="org.ourproject.kune.platf.client.ui.rte.WrappedRichTextAreaImplOpera">
@@ -51,4 +53,10 @@
       <when-property-is name="user.agent" value="opera" />
     </any>
   </replace-with>
+  <inherits name="com.calclab.suco.Suco" />
+  <inherits name="com.gwtext.GwtExt" />
+  <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />
+  <inherits name="org.xwiki.gwt.dom.DOM" />
+  <inherits name="com.calclab.suco.Suco"/>
+  <source path='client' excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
 </module>

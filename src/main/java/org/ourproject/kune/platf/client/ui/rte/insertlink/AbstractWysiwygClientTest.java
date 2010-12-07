@@ -23,20 +23,19 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
- * Base class for all WYSIWYG client tests. It returns the name of the module in {@link #getModuleName()} so you don't
- * have to do it in each test.
+ * Base class for all WYSIWYG client tests. It returns the name of the module in
+ * {@link #getModuleName()} so you don't have to do it in each test.
  * 
  * @version $Id$
  */
-public abstract class AbstractWysiwygClientTest extends GWTTestCase
-{
+public abstract class AbstractWysiwygClientTest extends GWTTestCase {
     /**
      * {@inheritDoc}
      * 
      * @see GWTTestCase#getModuleName()
      */
-    public String getModuleName()
-    {
+    @Override
+    public String getModuleName() {
         return "com.xpn.xwiki.wysiwyg.Wysiwyg";
     }
 
@@ -45,11 +44,12 @@ public abstract class AbstractWysiwygClientTest extends GWTTestCase
      * 
      * @see GWTTestCase#gwtSetUp()
      */
-    protected void gwtSetUp() throws Exception
-    {
+    @Override
+    protected void gwtSetUp() throws Exception {
         super.gwtSetUp();
 
-        // We have to remove the default body border because it affects the range detection in IE.
+        // We have to remove the default body border because it affects the
+        // range detection in IE.
         Document.get().getBody().getStyle().setProperty("borderStyle", "none");
     }
 }

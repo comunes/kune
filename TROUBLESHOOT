@@ -52,3 +52,13 @@ We have problems testing all test together from eclipse and using real db (not t
 If running all the Kune test you get errors about "Too many files open" see:
 http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
 about how to fix it in your system.
+
+=== Mysql: Caused by: java.sql.SQLException: Access denied for user 'kune'@'localhost' (using password: YES) ===
+
+Check that the password you have use in the database creation it's the same like the src/main/resources/META-INF/persistence.xml. If it's wrong maybe you have to remove the mysql user (DROP USER) and repeat the GRANT senteces of the INSTALL.
+
+If you have this problem with openfire it's not enough to change the password in openfire.xml because probably it's already stored in the ofProperty openfire table and you need to change the password there.
+
+=== Eclipse ===
+
+If you have some tests with error like "can not be found in source packages. Check the inheritance chain from your module; it may not be inheriting a required module or a module may not be adding its source path entries properly" and you have installed GWTDesigner, uncheck "client classpath": http://code.google.com/webtoolkit/tools/gwtdesigner/preferences/gwt/preferences_builder.html

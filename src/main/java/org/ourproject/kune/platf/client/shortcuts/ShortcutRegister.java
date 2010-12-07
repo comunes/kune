@@ -13,15 +13,15 @@ import com.google.gwt.dom.client.NativeEvent;
 
 public class ShortcutRegister {
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     private final HashMap<ShortcutDescriptor, ActionItem> shortcuts;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public ShortcutRegister() {
         shortcuts = new HashMap<ShortcutDescriptor, ActionItem>();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "rawtypes" })
     public ActionItem get(final NativeEvent event) {
         final int modifiers = KeyStroke.getKeyboardModifiers(event);
         final boolean fnKey = (event.getKeyCode() >= Keyboard.KEY_F2 && event.getKeyCode() <= Keyboard.KEY_F12);
@@ -32,7 +32,7 @@ public class ShortcutRegister {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public ActionItem get(final ShortcutDescriptor shortcut) {
         final ActionItem actionItem = shortcuts.get(shortcut);
         if (actionItem != null) {
@@ -41,7 +41,7 @@ public class ShortcutRegister {
         return actionItem;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public void put(final ShortcutDescriptor shortcut, final ActionItem actionItem) {
         if (shortcuts.get(shortcut) != null) {
             Log.warn("Shortcut" + shortcut + " already registered");
@@ -49,7 +49,7 @@ public class ShortcutRegister {
         shortcuts.put(shortcut, actionItem);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public void put(final ShortcutDescriptor shortcut, final Listener0 listener) {
         final ActionDescriptor descriptor = new ActionDescriptor(AccessRolDTO.Viewer, new Listener0() {
             public void onEvent() {

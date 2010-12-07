@@ -52,9 +52,11 @@ public class KuneEntryPoint implements EntryPoint {
         // At the moment, in runtime:
         Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
 
-        Loader.install(new RegistryModule(), new DocumentClientModule(), new BlogClientModule(),
-                new WikiClientModule(), new GalleryClientModule(), new EmiteUIModule(), new ChatClientModule(),
-                new WorkspaceModule(), new PlatformModule());
+//        Loader.install(new RegistryModule(), new DocumentClientModule(), new BlogClientModule(),
+//                new WikiClientModule(), new GalleryClientModule(), new EmiteUIModule(), new ChatClientModule(),
+//                new WorkspaceModule(), new PlatformModule());
+
+        Loader.install(new RegistryModule(), new PlatformModule());
 
         // We install our HelloWorldModule
         Loader.install(new HelloWorldModule());

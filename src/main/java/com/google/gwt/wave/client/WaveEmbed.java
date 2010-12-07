@@ -1,8 +1,8 @@
 package com.google.gwt.wave.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.wave.client.event.HasWaveLoadHandlers;
 import com.google.gwt.wave.client.event.WaveLoadEvent;
@@ -44,7 +44,6 @@ final class WaveEmbed extends JavaScriptObject {
     }-*/;
 
     // Called from JSNI
-    @SuppressWarnings("unused")
     private static void fireWaveLoadEvent(final HasWaveLoadHandlers source, final String waveId) {
         final UncaughtExceptionHandler ueh = GWT.getUncaughtExceptionHandler();
         final WaveLoadEvent event = new WaveLoadEvent(waveId);

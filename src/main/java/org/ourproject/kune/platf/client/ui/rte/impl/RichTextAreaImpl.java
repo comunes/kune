@@ -15,13 +15,17 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.impl;
 
+import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
+
+import com.google.gwt.event.logical.shared.HasInitializeHandlers;
+import com.google.gwt.event.logical.shared.InitializeEvent;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 
 /**
- * Base class for RichText platform implementations. The default version
- * simply creates a text area with no rich text support.
+ * Base class for RichText platform implementations. The default version simply
+ * creates a text area with no rich text support.
  * 
  * This is not currently used by any user-agent, but will provide a
  * &lt;textarea&gt; fallback in the event a future browser fails to implement
@@ -30,9 +34,11 @@ import com.google.gwt.user.client.Event;
 public class RichTextAreaImpl {
 
     protected Element elem;
+    protected HasInitializeHandlers owner;
 
     public RichTextAreaImpl() {
-        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09 14:39
+        // @PMD:REVIEWED:ConstructorCallsOverridableMethod: by vjrj on 21/05/09
+        // 14:39
         elem = createElement();
     }
 
@@ -52,28 +58,41 @@ public class RichTextAreaImpl {
         onElementInitialized();
     }
 
-    public boolean isBasicEditingSupported() {
-        return false;
+    public boolean isEnabled() {
+        return !elem.getPropertyBoolean("disabled");
     }
 
-    public boolean isExtendedEditingSupported() {
-        return false;
+    public void setEnabled(final boolean enabled) {
+        elem.setPropertyBoolean("disabled", !enabled);
     }
 
     public native void setFocus(boolean focused) /*-{
-          if (focused) {
-            this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.focus();
-          } else {
-            this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.blur();
-          }
-        }-*/;
+        if (focused) {
+        this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.focus();
+        } else {
+        this.@org.ourproject.kune.platf.client.ui.rte.impl.RichTextAreaImpl::elem.blur();
+        }
+    }-*/;
 
-    public void setHTML(String html) {
+    public void setHTML(final String html) {
         DOM.setElementProperty(elem, "value", html);
     }
 
-    public void setText(String text) {
+    public void setOwner(final HasInitializeHandlers owner) {
+        this.owner = owner;
+    }
+
+    public void setText(final String text) {
         DOM.setElementProperty(elem, "value", text);
+    }
+
+    /**
+     * @deprecated as of GWT 2.1, use {@link #setOwner(HasInitializeHandlers)}
+     *             instead
+     */
+    @Deprecated
+    public void setWidget(final RichTextArea richTextWidget) {
+        setOwner(richTextWidget);
     }
 
     public void uninitElement() {
@@ -84,11 +103,13 @@ public class RichTextAreaImpl {
     }
 
     protected void hookEvents() {
-    DOM.sinkEvents(elem, Event.MOUSEEVENTS | Event.KEYEVENTS | Event.ONCHANGE
-      | Event.ONCLICK | Event.FOCUSEVENTS);
+        DOM.sinkEvents(elem, Event.MOUSEEVENTS | Event.KEYEVENTS | Event.ONCHANGE | Event.ONCLICK | Event.FOCUSEVENTS);
     }
 
     protected void onElementInitialized() {
         hookEvents();
+        if (owner != null) {
+            InitializeEvent.fire(owner);
+        }
     }
 }

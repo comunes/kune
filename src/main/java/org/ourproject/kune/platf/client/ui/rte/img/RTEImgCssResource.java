@@ -3,7 +3,6 @@ package org.ourproject.kune.platf.client.ui.rte.img;
 import com.google.gwt.resources.client.CssResource;
 
 public interface RTEImgCssResource extends CssResource {
-
     @ClassName("k-icon-alignleft")
     String kIconAlignleft();
 
