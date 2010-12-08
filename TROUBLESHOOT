@@ -59,6 +59,13 @@ Check that the password you have use in the database creation it's the same like
 
 If you have this problem with openfire it's not enough to change the password in openfire.xml because probably it's already stored in the ofProperty openfire table and you need to change the password there.
 
-=== Eclipse ===
+=== Eclipse & GWT ===
 
 If you have some tests with error like "can not be found in source packages. Check the inheritance chain from your module; it may not be inheriting a required module or a module may not be adding its source path entries properly" and you have installed GWTDesigner, uncheck "client classpath": http://code.google.com/webtoolkit/tools/gwtdesigner/preferences/gwt/preferences_builder.html
+
+ Error: Invalid version number "2.0" passed to external.gwtOnLoad(), expected "2.1"; your hosted mode bootstrap file may be out of date; if you are using -noserver try recompiling and redeploying your app
+ Fix: clear your browser cache
+
+ Error: method should override method xxx (or similar)
+ Fix: Project --> Properties --> Java Compiler ---> Unenable project specific settings
+

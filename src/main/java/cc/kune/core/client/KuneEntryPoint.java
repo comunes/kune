@@ -8,6 +8,11 @@ import com.mvp4g.client.Mvp4gModule;
 
 public class KuneEntryPoint implements EntryPoint {
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
     @Override
     public void onModuleLoad() {
         final Mvp4gModule module = (Mvp4gModule) GWT.create(Mvp4gModule.class);
