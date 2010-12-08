@@ -17,6 +17,8 @@
 <link rel="stylesheet" type="text/css" href="css/docs.css">
 -->
 
+<link href="//fonts.googleapis.com/css?family=Droid+Sans:regular,bold"
+	rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="images/favicon.ico" />
 <title>Kune</title>
 <style type="text/css">
@@ -26,59 +28,64 @@
   top: 0px;
   width: 100%;
   height: 100%;
-  background-color: #FFF;
+  background-color: #F2F2F2;
   z-index: 9999;
 }
 
 #kuneprogresspanel {
-    position: absolute;
-    top: 2px;
-    <!-- left: 2px; -->
-    z-index: 9998;
+  position: absolute;
+  top: 2px;
+  z-index: 9998;
 }
 
 .kune-Progress {
-    background: #E5FF80;
-    border: 1px solid #E5FF80;
-    white-space: nowrap;
-    height: 16px;
-    padding: 0 3px;
+  background: #E5FF80;
+  border: 1px solid #E5FF80;
+  white-space: nowrap;
+  height: 16px;
+  padding: 0 3px;
+}
+
+#kuneprogresspanel {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 #kuneprogresstext {
-    font-family: arial, helvetica, clean, sans-serif;
-    font-size-adjust: none;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.22;
+  font-family: 'Droid Sans', arial, helvetica, clean, sans-serif;
+  font-size-adjust: none;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1.22;
 }
 
 #kuneloading {
-    position: absolute;
-    left: 45%;
-    top: 40%;
-    padding: 0px;
-    z-index: 20001;
-    height: auto;
-    border: 1px solid #ccc;
+  position: absolute;
+  left: 45%;
+  top: 40%;
+  padding: 0px;
+  z-index: 20001;
+  height: auto;
+  border: 1px solid #ccc;
 }
 
 #kuneloading a {
-    color: #225588;
+  color: #225588;
 }
 
 #kuneloading .kuneloading-indicator {
-    background: white;
-    color: #444;
-    font: bold 13px tahoma, arial, helvetica;
-    padding: 5px 5px 10px 5px;
-    margin: 0;
-    height: auto;
+  background: white;
+  color: #444;
+  font: bold 13px 'Droid Sans', tahoma, arial, helvetica;
+  padding: 5px 5px 10px 5px;
+  margin: 0;
+  height: auto;
 }
 
 #kuneloading-msg {
-    font: normal 10px arial, tahoma, sans-serif;
+  font: normal 10px 'Droid Sans', arial, tahoma, sans-serif;
 }
 </style>
 <!--[if lt IE 7.]>
@@ -88,58 +95,46 @@
 </head>
 <body>
 <script type="text/javascript" language="javascript"
-    src="/ws/ws.nocache.js"></script>
+	src="/ws/ws.nocache.js"></script>
 
-<!-- Ext localization javascript -->
-<script type="text/javascript" id="extlocale"></script>
-<script type="text/javascript">
-
-    // decode language passed in url
-    var locale = window.location.search
-                 ? Ext.urlDecode(window.location.search.substring(1)).locale
-                 : ''
-    ;
-    // append locale script to the head
-    var head = Ext.fly(document.getElementsByTagName('head')[0]);
-    if(locale) {
-        Ext.fly('extlocale').set({src:'js/ext/source/locale/ext-lang-' + locale + '.js'});
-    }
-</script>
 <iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
 <iframe src="" id="__download" style="width: 0; height: 0; border: 0"></iframe>
 <div id="kuneinitialcurtain"></div>
 <div class="" id="kuneprogresspanel" style="">
 <table cellspacing="0" cellpadding="0" border="0"
-    style="margin-top: 5px; margin-left: 5px;"
-    summary="Starting">
-    <tbody>
-        <tr>
-            <td height="16" align="left" class="kune-Progress"
-                style="vertical-align: top;"><img
-                style="height: 16px; width: 16px;"
-                src="images/spin-kune-thund-green.gif" alt="progress spin" /></td>
-            <td align="left" class="kune-Progress" style="vertical-align: top;">
-            <div id="kuneprogresstext" class="gwt-Label">Loading</div>
-            </td>
-            <td height="16" width="100%" align="left"
-                style="vertical-align: top;" />
-        </tr>
-    </tbody>
+	style="margin-top: 5px; margin-left: 5px;" summary="Starting">
+	<tbody>
+		<tr>
+			<td height="16" align="left" class="kune-Progress"
+				style="vertical-align: top;"><img
+				style="height: 16px; width: 16px;"
+				src="images/spin-kune-thund-green.gif" alt="progress spin" /></td>
+			<td align="left" class="kune-Progress" style="vertical-align: top;">
+			<div id="kuneprogresstext" class="gwt-Label">Loading</div>
+			</td>
+			<td height="16" width="100%" align="left"
+				style="vertical-align: top;" />
+		</tr>
+	</tbody>
 </table>
 </div>
 <div id="kuneloading">
-    <div class="kuneloading-indicator">
-        <img src="images/kune-anim.gif" width="35" height="35" alt="kune-loading"
-             style="margin-right:3px;float:left;vertical-align:top;"/>kune&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-        <span id="kuneloading-msg">Starting...</span></div>
+<div class="kuneloading-indicator"><img src="images/kune-anim.gif"
+	width="35" height="35" alt="kune-loading"
+	style="margin-right: 3px; float: left; vertical-align: top;" />kune&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span id="kuneloading-msg">Starting...</span></div>
 </div>
 
 <!--include the Ext CSS, and use the gray theme-->
 
-<script type="text/javascript">document.getElementById('kuneloading-msg').innerHTML = 'Loading ...';</script>
+<script type="text/javascript">
+	document.getElementById('kuneloading-msg').innerHTML = 'Loading ...';
+</script>
 
 <!--include the application JS-->
-<script type="text/javascript">document.getElementById('kuneloading-msg').innerHTML = 'Starting...';</script>
+<script type="text/javascript">
+	document.getElementById('kuneloading-msg').innerHTML = 'Starting...';
+</script>
 
 <!--hide loading message-->
 <!-- <script type="text/javascript">Ext.get('loading').fadeOut({remove: true, duration:4});</script> -->

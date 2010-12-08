@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ToolbarButton;
@@ -135,7 +135,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
         dialog.addListener(new UploadDialogListenerAdapter() {
             @Override
             public boolean onBeforeAdd(final UploadDialog source, final String filename) {
-                boolean mustAdd = presenter.checkFolderChange();
+                final boolean mustAdd = presenter.checkFolderChange();
                 if (!mustAdd) {
                     NotifyUser.important(i18n.t("Please, wait until current uploads are finished to upload new files into another location"));
                 }
@@ -181,7 +181,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
     }
 
     private void setPermittedExtensions(final String[] extensions) {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 if (dialog == null) {
                     createDialog(false);

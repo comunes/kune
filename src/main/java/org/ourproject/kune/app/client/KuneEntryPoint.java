@@ -19,29 +19,23 @@
  */
 package org.ourproject.kune.app.client;
 
-import org.ourproject.kune.blogs.client.BlogClientModule;
-import org.ourproject.kune.chat.client.ChatClientModule;
-import org.ourproject.kune.docs.client.DocumentClientModule;
-import org.ourproject.kune.gallery.client.GalleryClientModule;
 import org.ourproject.kune.platf.client.services.Loader;
 import org.ourproject.kune.platf.client.services.PlatformModule;
-import org.ourproject.kune.wiki.client.WikiClientModule;
-import org.ourproject.kune.workspace.client.RegistryModule;
-import org.ourproject.kune.workspace.client.WorkspaceModule;
-import org.ourproject.kune.workspace.client.hello.HelloWorldModule;
+import org.ourproject.kune.ws.armor.client.Body;
+import org.ourproject.kune.ws.armor.client.resources.WsArmorResources;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.emiteuimodule.client.EmiteUIModule;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 public class KuneEntryPoint implements EntryPoint {
 
     public void onModuleLoad() {
         Log.setUncaughtExceptionHandler();
 
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 onModuleLoadCont();
             }
@@ -51,14 +45,20 @@ public class KuneEntryPoint implements EntryPoint {
     public void onModuleLoadCont() {
         // At the moment, in runtime:
         Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
+        final WsArmorResources resources = WsArmorResources.INSTANCE;
+        resources.style().ensureInjected();
 
-//        Loader.install(new RegistryModule(), new DocumentClientModule(), new BlogClientModule(),
-//                new WikiClientModule(), new GalleryClientModule(), new EmiteUIModule(), new ChatClientModule(),
-//                new WorkspaceModule(), new PlatformModule());
+        final Body body = new Body();
+        RootLayoutPanel.get().add(body);
+        // Loader.install(new RegistryModule(), new DocumentClientModule(), new
+        // BlogClientModule(),
+        // new WikiClientModule(), new GalleryClientModule(), new
+        // EmiteUIModule(), new ChatClientModule(),
+        // new WorkspaceModule(), new PlatformModule());
 
-        Loader.install(new RegistryModule(), new PlatformModule());
+        Loader.install(new PlatformModule());
 
         // We install our HelloWorldModule
-        Loader.install(new HelloWorldModule());
+        // Loader.install(new HelloWorldModule());
     }
 }

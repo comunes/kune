@@ -6,8 +6,8 @@ import org.ourproject.kune.platf.client.ui.img.ImgResources;
 
 import com.calclab.emiteuimodule.client.dialog.BasicDialogExtended;
 import com.calclab.emiteuimodule.client.dialog.BasicDialogListener;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.form.Field;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -62,7 +62,7 @@ public class WaveInsertPanel implements WaveInsertView {
             createForm();
         }
         dialog.show();
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 waveId.focus();
             }

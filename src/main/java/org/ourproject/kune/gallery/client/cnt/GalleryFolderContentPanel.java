@@ -27,10 +27,10 @@ import org.ourproject.kune.platf.client.ui.BasicThumb;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 public class GalleryFolderContentPanel extends FoldableContentPanel implements GalleryFolderContentView {
@@ -48,7 +48,7 @@ public class GalleryFolderContentPanel extends FoldableContentPanel implements G
     }
 
     public void addThumb(final StateToken token, final String title, final String imgUrl) {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 final BasicThumb thumb = new BasicThumb(imgUrl, session.getImgCropsize(), title, TEXT_MAX_LENGHT, true,
                         new ClickHandler() {

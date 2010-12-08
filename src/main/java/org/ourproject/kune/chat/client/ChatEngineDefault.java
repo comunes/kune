@@ -52,8 +52,8 @@ import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.gwtext.client.core.EventObject;
@@ -171,7 +171,7 @@ class ChatEngineDefault implements ChatEngine {
                     + chatOptions.userOptions.getUserJid().getNode());
             final Room room = (Room) emiteUIProvider.get().joinRoom(roomURI);
             if (subject != null) {
-                DeferredCommand.addCommand(new Command() {
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     public void execute() {
                         final RoomUI roomUI = (RoomUI) room.getData(ChatUI.class);
                         if (roomUI != null) {

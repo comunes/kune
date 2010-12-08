@@ -26,6 +26,8 @@ import org.xwiki.gwt.dom.client.Range;
 import org.xwiki.gwt.dom.client.Selection;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -33,9 +35,7 @@ import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Composite;
 
@@ -381,7 +381,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
     }
 
     public void showLinkCtxMenu() {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 final org.xwiki.gwt.dom.client.Element selectedAnchor = LinkExecutableUtils.getSelectedAnchor(rta);
                 if (selectedAnchor != null) {

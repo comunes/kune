@@ -22,9 +22,9 @@ package org.ourproject.kune.workspace.client.sitebar.siteprogress;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 
 import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.user.client.Command;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -54,7 +54,7 @@ public class SiteProgressPanel implements SiteProgressView {
     public void hideProgress() {
         timeProgressMaxTime.cancel();
         progressPanel.setVisible(false);
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 publicLinkProvider.get().setVisible(true);
             }

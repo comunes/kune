@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.ourproject</groupId>
+  <groupId>cc</groupId>
   <artifactId>kune</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <description>
     kune free/open/libre collaboration platform
   </description>
@@ -26,11 +25,15 @@
       <version>2.0.1</version>
     </dependency>
     <dependency>
+      <groupId>com.googlecode.gwt.inject</groupId>
+      <artifactId>gin</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
       <groupId>com.google.code.guice</groupId>
       <artifactId>guice-servlet</artifactId>
       <version>2.0.1</version>
     </dependency>
-    <!-- GWT dependencies (from maven "central" repo) -->
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
@@ -43,8 +46,17 @@
       <version>${gwtVersion}</version>
       <scope>provided</scope>
     </dependency>
-    <!-- <dependency> <groupId>com.extjs</groupId> <artifactId>gxt</artifactId> 
-      <version>1.0-beta2</version> </dependency> -->
+    <dependency>
+      <groupId>com.googlecode.mvp4g</groupId>
+      <artifactId>mvp4g</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.mvc4g</groupId>
+      <artifactId>mvc4g</artifactId>
+      <version>1.0.0-jboss</version>
+    </dependency>
+    <!-- cc -->
     <dependency>
       <groupId>org.cobogw</groupId>
       <artifactId>gwt</artifactId>
@@ -69,6 +81,11 @@
       <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
       <artifactId>gwt-voices</artifactId>
       <version>1.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ourproject.kune.ws.armor</groupId>
+      <artifactId>ws-armor</artifactId>
+      <version>0.0.3</version>
     </dependency>
     <!-- utilities -->
     <dependency>
@@ -244,21 +261,20 @@
       <version>1.7.0.0</version>
     </dependency>
     <!-- jetty dependencies -->
-    <dependency>
-      <groupId>org.mortbay.jetty</groupId>
-      <artifactId>jetty-util</artifactId>
-      <!-- <version>6.1.11</version> -->
-      <version>7.0.0.pre5</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mortbay.jetty</groupId>
-      <artifactId>jetty-maven-plugin</artifactId>
-      <version>7.2.1.v20101111</version>
-      <!-- <artifactId>maven-jetty-plugin</artifactId>
-      <version>6.1.11</version> -->
-      <scope>runtime</scope>
-    </dependency>
+    <!-- <dependency> -->
+    <!-- <groupId>org.mortbay.jetty</groupId> -->
+    <!-- <artifactId>jetty-util</artifactId> -->
+    <!-- <version>6.1.11</version> -->
+    <!-- <version>7.0.0.pre5</version> -->
+    <!-- <scope>provided</scope> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.mortbay.jetty</groupId> -->
+    <!-- <artifactId>jetty-maven-plugin</artifactId> -->
+    <!-- <version>7.2.1.v20101111</version> -->
+    <!-- <artifactId>maven-jetty-plugin</artifactId> <version>6.1.11</version> -->
+    <!-- <scope>runtime</scope> -->
+    <!-- </dependency> -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
@@ -295,6 +311,7 @@
       <groupId>org.jruby.rack</groupId>
       <artifactId>jruby-rack</artifactId>
       <version>1.0.3</version>
+      <!-- <version>0.9.4</version> -->
     </dependency>
     <!-- wave -->
     <dependency>
@@ -383,8 +400,23 @@
       <url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/</url>
     </repository>
   </distributionManagement>
-  <!-- http://gwt-maven.googlecode.com/svn/docs/maven-googlewebtoolkit2-plugin/index.html -->
   <pluginRepositories>
+    <!-- cc -->
+    <pluginRepository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Maven Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+    <!-- cc -->
     <!-- <pluginRepository> <id>gwt-maven</id> <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url> 
       </pluginRepository> -->
     <pluginRepository>
@@ -420,11 +452,25 @@
       </releases>
     </repository>
     <repository>
-      <id>repository.jboss.org</id>
-      <name>JBoss Maven Repository</name>
-      <url>http://repository.jboss.org/maven2</url>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Maven Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
       <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
     </repository>
+    <repository>
+      <id>mvp4g.googlecode.releases</id>
+      <name>Releases Repository for Mvp4g</name>
+      <url>http://mvp4g.googlecode.com/svn/maven2/releases/</url>
+    </repository>
+    <!-- cc -->
     <repository>
       <id>dyndns-repo</id>
       <url>http://maven.dyndns.org/2</url>
@@ -438,10 +484,6 @@
     <repository>
       <id>kune-maven</id>
       <url>http://kune.ourproject.org/mavenrepo/</url>
-    </repository>
-    <repository>
-      <id>gwtext</id>
-      <url>http://www.gwt-ext.com/maven2/</url>
     </repository>
     <repository>
       <id>google-maven-snapshot-repository</id>
@@ -579,28 +621,15 @@
           <wtpversion>2.0</wtpversion>
         </configuration>
       </plugin>
-<!--      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.1</version>
-        <executions>
-          <execution>
-            <phase>compile</phase>
-            <goals>
-              <goal>exploded</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <webappDirectory>/war</webappDirectory>
-        </configuration>
-      </plugin> -->
+      <!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
+        <version>2.1</version> <executions> <execution> <phase>compile</phase> <goals> 
+        <goal>exploded</goal> </goals> </execution> </executions> <configuration> 
+        <webappDirectory>/war</webappDirectory> </configuration> </plugin> -->
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <version>7.2.1.v20101111</version>
-        <!--<artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.14</version> -->
+        <!--<artifactId>maven-jetty-plugin</artifactId> <version>6.1.14</version> -->
         <configuration>
           <!-- <contextPath>/</contextPath> -->
           <!-- <webAppSourceDirectory>${basedir}/target/${project.artifactId}-${version}</webAppSourceDirectory> -->

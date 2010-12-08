@@ -24,8 +24,8 @@ import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
 import com.calclab.suco.client.events.Listener0;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.ExtElement;
@@ -92,7 +92,7 @@ public class WorkspaceSkeleton {
         MessageBox.confirm(title, message, new MessageBox.ConfirmCallback() {
             public void execute(final String btnID) {
                 if ("yes".equals(btnID)) {
-                    DeferredCommand.addCommand(new Command() {
+                    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                         public void execute() {
                             onConfirmed.onEvent();
                         }

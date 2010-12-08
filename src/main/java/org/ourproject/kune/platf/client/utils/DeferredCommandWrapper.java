@@ -20,8 +20,8 @@
 package org.ourproject.kune.platf.client.utils;
 
 import com.calclab.suco.client.events.Listener0;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 
 /**
  * The Class DeferredCommandWrapper is a wrapper of the GWT DeferredCommand
@@ -36,7 +36,7 @@ public class DeferredCommandWrapper {
      *            the listener
      */
     public void addCommand(final Listener0 command) {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 command.onEvent();
             }

@@ -30,8 +30,8 @@ import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
@@ -90,7 +90,7 @@ public class ApplicationDefault implements Application {
             public void onSuccess(final InitDataDTO initData) {
                 session.setInitData(initData);
                 session.setCurrentUserInfo(initData.getUserInfo());
-                DeferredCommand.addCommand(new Command() {
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     public void execute() {
                         RootPanel.get("kuneinitialcurtain").setVisible(false);
                         RootPanel.get("kuneloading").setVisible(false);

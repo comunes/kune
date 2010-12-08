@@ -7,8 +7,8 @@ import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCh
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialogView;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtext.client.core.EventCallback;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
@@ -32,7 +32,7 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
         form.setAutoWidth(true);
         form.setHeight(InsertSpecialCharDialogView.HEIGHT - 10);
 
-        Label label = new Label();
+        final Label label = new Label();
         label.setHtml(i18n.t("If you know a special character's [%s] value, enter it below.",
                 TextUtils.generateHtmlLink("http://unicode.org/charts/", "Unicode"))
                 + "<br/><br/>");
@@ -65,7 +65,7 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
         form.add(inputUnicodeField);
         form.add(previewField);
 
-        Button insert = new Button(i18n.t("Insert character"));
+        final Button insert = new Button(i18n.t("Insert character"));
 
         insert.addListener(new ButtonListenerAdapter() {
             @Override
@@ -84,14 +84,14 @@ public class InsertSpecialUTF8CharPanel extends Panel implements InsertSpecialUT
     private char getCharEntered() {
         try {
             return (char) Integer.valueOf(inputUnicodeField.getRawValue()).intValue();
-        } catch (Exception except) {
+        } catch (final Exception except) {
             Log.debug("Not possible to cast utf8 int to char");
         }
         return '?';
     }
 
     private void refreshPreview() {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 previewField.setValue("" + getCharEntered());
             }

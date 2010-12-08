@@ -19,15 +19,15 @@
  */
 package org.ourproject.kune.platf.client.utils;
 
-import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.IncrementalCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.ui.Image;
 
 public class PrefetchUtilities {
 
     public static void doTasksDeferred() {
 
-        DeferredCommand.addCommand(new IncrementalCommand() {
+        Scheduler.get().scheduleIncremental(new RepeatingCommand() {
             int i = 0;
             int j = 0;
 
@@ -66,7 +66,7 @@ public class PrefetchUtilities {
                     j++;
                 }
 
-                boolean notFinished = i + j < lic.length + ext.length;
+                final boolean notFinished = i + j < lic.length + ext.length;
 
                 final boolean finished = !notFinished;
 

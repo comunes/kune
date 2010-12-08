@@ -15,36 +15,36 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.impl;
 
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 
 /**
  * Old Mozilla-specific implementation of rich-text editing.
  */
 public class RichTextAreaImplOldMozilla extends RichTextAreaImplMozilla {
-  /**
-   * The content window cannot be focused immediately after the content window
-   * has been loaded, so we need to wait for an additional deferred command.
-   */
-  @Override
-  protected void onElementInitialized() {
-    DeferredCommand.addCommand(new Command() {
-      public void execute() {
-        RichTextAreaImplOldMozilla.super.onElementInitialized();
-      }
-    });
-  }
-
-  @Override
-  protected void setFirstFocusImpl() {
-    setFocusImpl(true);
-  }
-
-  @Override
-  protected void setFocusImpl(boolean focused) {
-    // Old Mozilla does not support blur on the content window of an iframe.
-    if (focused) {
-      super.setFocusImpl(focused);
+    /**
+     * The content window cannot be focused immediately after the content window
+     * has been loaded, so we need to wait for an additional deferred command.
+     */
+    @Override
+    protected void onElementInitialized() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            public void execute() {
+                RichTextAreaImplOldMozilla.super.onElementInitialized();
+            }
+        });
     }
-  }
+
+    @Override
+    protected void setFirstFocusImpl() {
+        setFocusImpl(true);
+    }
+
+    @Override
+    protected void setFocusImpl(final boolean focused) {
+        // Old Mozilla does not support blur on the content window of an iframe.
+        if (focused) {
+            super.setFocusImpl(focused);
+        }
+    }
 }

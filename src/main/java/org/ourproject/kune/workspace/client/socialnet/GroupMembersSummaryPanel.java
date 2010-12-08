@@ -34,8 +34,8 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.emiteuimodule.client.users.UserGridPanel;
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.widgets.BoxComponent;
@@ -110,7 +110,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
                 new MessageBox.ConfirmCallback() {
                     public void execute(final String btnID) {
                         if (btnID.equals("yes")) {
-                            DeferredCommand.addCommand(new Command() {
+                            Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                                 public void execute() {
                                     presenter.addCollab(groupShortName);
                                 }

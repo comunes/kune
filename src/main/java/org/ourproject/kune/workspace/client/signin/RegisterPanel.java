@@ -28,8 +28,8 @@ import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.calclab.suco.client.events.Listener0;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtext.client.widgets.Component;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
@@ -80,7 +80,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
             }
         });
 
-        Panel panel = new Panel();
+        final Panel panel = new Panel();
         panel.setBorder(false);
         registerForm = new RegisterForm(i18n, session);
         registerForm.setWidth(370);
@@ -126,7 +126,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     }
 
     public void reset() {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 registerForm.reset();
             }
@@ -134,7 +134,8 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     }
 
     public void showWelcolmeDialog() {
-        InfoDialog welcomeDialog = new InfoDialog(WELCOME_DIALOG, i18n.t("Welcome"), i18n.t("Thanks for registering"),
+        final InfoDialog welcomeDialog = new InfoDialog(WELCOME_DIALOG, i18n.t("Welcome"),
+                i18n.t("Thanks for registering"),
                 i18n.t("Now you can participate more actively in this site with other people and groups. "
                         + "You can also use your personal space to publish contents. "
                         + "Your email is not verified, please follow the instructions you will receive by email."),
@@ -143,7 +144,8 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     }
 
     public void showWelcolmeDialogNoHomepage() {
-        InfoDialog welcomeDialog = new InfoDialog(WELCOME_DIALOG, i18n.t("Welcome"), i18n.t("Thanks for registering"),
+        final InfoDialog welcomeDialog = new InfoDialog(WELCOME_DIALOG, i18n.t("Welcome"),
+                i18n.t("Thanks for registering"),
                 i18n.t("Now you can participate more actively in this site with other people and groups. "
                         + "Your email is not verified, please follow the instructions you will receive by email."),
                 i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 380, 210);

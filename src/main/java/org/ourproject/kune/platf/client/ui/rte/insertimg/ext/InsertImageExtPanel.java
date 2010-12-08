@@ -4,8 +4,8 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertImageAbstractPanel;
 
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.Label;
 import com.gwtext.client.core.EventCallback;
@@ -71,7 +71,7 @@ public class InsertImageExtPanel extends InsertImageAbstractPanel implements Ins
     }
 
     public void setPreviewUrl(final String url) {
-        Frame previewFrame = new Frame(url);
+        final Frame previewFrame = new Frame(url);
         previewPanel.clear();
         previewPanel.add(previewFrame);
         previewPanel.doLayout();
@@ -83,7 +83,7 @@ public class InsertImageExtPanel extends InsertImageAbstractPanel implements Ins
     }
 
     private void refreshPreview() {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 presenter.onPreview();
             }

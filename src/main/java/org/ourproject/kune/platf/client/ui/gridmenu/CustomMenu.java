@@ -45,8 +45,8 @@ import java.util.Iterator;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.MenuItemCollection;
 
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Item;
@@ -74,8 +74,9 @@ public class CustomMenu<T> {
         item.setIcon(menuItem.getIcon());
         menu.addItem(item);
         item.addListener(new BaseItemListenerAdapter() {
+            @Override
             public void onClick(final BaseItem item, final EventObject e) {
-                DeferredCommand.addCommand(new Command() {
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     public void execute() {
                         menuItem.fire(param);
                     }

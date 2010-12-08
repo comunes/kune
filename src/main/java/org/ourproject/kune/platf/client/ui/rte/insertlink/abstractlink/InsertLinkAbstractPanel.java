@@ -5,8 +5,8 @@ import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialogView;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtext.client.core.EventCallback;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Component;
@@ -58,7 +58,7 @@ public class InsertLinkAbstractPanel extends DefaultForm {
 
         textField.addKeyPressListener(new EventCallback() {
             public void execute(final EventObject e) {
-                DeferredCommand.addCommand(new Command() {
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     public void execute() {
                         presenter.onTextFieldChanged(textField.getRawValue());
                     }
@@ -68,7 +68,7 @@ public class InsertLinkAbstractPanel extends DefaultForm {
 
         onOverField.addKeyPressListener(new EventCallback() {
             public void execute(final EventObject e) {
-                DeferredCommand.addCommand(new Command() {
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     public void execute() {
                         presenter.onOverFieldChanged(onOverField.getRawValue());
                     }
@@ -86,13 +86,13 @@ public class InsertLinkAbstractPanel extends DefaultForm {
         super.addListener(new FormPanelListenerAdapter() {
             @Override
             public void onActivate(final Panel panel) {
-                LinkInfo linkInfo = presenter.getLinkInfo();
+                final LinkInfo linkInfo = presenter.getLinkInfo();
                 updateValues(linkInfo);
                 presenter.onActivate();
             }
         });
 
-        FieldSet advanced = new FieldSet(Resources.i18n.t("More options"));
+        final FieldSet advanced = new FieldSet(Resources.i18n.t("More options"));
         advanced.setCollapsible(true);
         advanced.setCollapsed(true);
         advanced.setAutoHeight(true);

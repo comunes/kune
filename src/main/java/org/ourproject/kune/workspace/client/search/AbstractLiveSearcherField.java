@@ -5,8 +5,8 @@ import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.SearcherConstants;
 
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.Template;
 import com.gwtext.client.core.UrlParam;
@@ -31,7 +31,7 @@ public class AbstractLiveSearcherField extends ComboBox {
 
     public AbstractLiveSearcherField(final I18nTranslationService i18n, final String templateText,
             final String dataProxyUrl, final Listener<LinkDTO> listener) {
-        DataProxy dataProxy = new HttpProxy(dataProxyUrl, Connection.POST);
+        final DataProxy dataProxy = new HttpProxy(dataProxyUrl, Connection.POST);
 
         final JsonReader reader = new JsonReader(new RecordDef(
                 new FieldDef[] { new StringFieldDef(SHORT_NAME_FIELD), new StringFieldDef(LONG_NAME_FIELD),
@@ -67,7 +67,7 @@ public class AbstractLiveSearcherField extends ComboBox {
         super.addListener(new ComboBoxListenerAdapter() {
             @Override
             public void onSelect(final ComboBox comboBox, final Record record, final int index) {
-                DeferredCommand.addCommand(new Command() {
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     public void execute() {
                         final LinkDTO link = new LinkDTO(record.getAsString(SHORT_NAME_FIELD),
                                 record.getAsString(LONG_NAME_FIELD), record.getAsString(ICON_URL_FIELD),

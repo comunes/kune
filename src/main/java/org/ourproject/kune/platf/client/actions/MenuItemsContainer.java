@@ -22,8 +22,8 @@ package org.ourproject.kune.platf.client.actions;
 import java.util.HashMap;
 
 import com.calclab.suco.client.events.Listener;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.menu.BaseItem;
 import com.gwtext.client.widgets.menu.Item;
@@ -43,7 +43,7 @@ public class MenuItemsContainer<T> {
 
     public void createItemMenu(final String id, final ActionItemCollection<T> actionCollection,
             final Listener<ActionItem<T>> listener) {
-        DeferredCommand.addCommand(new Command() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             public void execute() {
                 Menu menu = null;
                 if (actionCollection != null) {
@@ -69,7 +69,7 @@ public class MenuItemsContainer<T> {
         });
     }
 
-    public Menu get(String id) {
+    public Menu get(final String id) {
         return contextMenus.get(id);
     }
 }
