@@ -7,16 +7,17 @@ import java.util.TimeZone;
 
 import org.apache.lucene.queryParser.ParseException;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
-import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
-import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
+import cc.kune.core.client.errors.EmailAddressInUseException;
+import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.I18nNotFoundException;
+import cc.kune.core.shared.dto.GroupType;
 
 public class GroupManagerTest extends PersistencePreLoadedDataTest {
 

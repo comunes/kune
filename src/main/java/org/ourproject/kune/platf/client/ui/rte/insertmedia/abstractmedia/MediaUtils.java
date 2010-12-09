@@ -1,9 +1,10 @@
 package org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ContentPosition;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.StateToken;
 
 public class MediaUtils {
 

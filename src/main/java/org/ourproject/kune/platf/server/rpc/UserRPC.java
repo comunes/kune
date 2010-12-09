@@ -22,14 +22,6 @@ package org.ourproject.kune.platf.server.rpc;
 import java.util.UUID;
 
 import org.jivesoftware.smack.util.Base64;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
-import org.ourproject.kune.platf.client.dto.UserDTO;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.errors.UserAuthException;
-import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
@@ -44,6 +36,15 @@ import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.UserAuthException;
+import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.dto.UserBuddiesVisibilityDTO;
+import cc.kune.core.shared.dto.UserDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

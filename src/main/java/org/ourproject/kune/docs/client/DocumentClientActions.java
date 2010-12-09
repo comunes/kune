@@ -26,12 +26,6 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFI
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WAVE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentViewer;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.services.ErrorHandler;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
@@ -45,6 +39,13 @@ import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLi
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 import org.ourproject.kune.workspace.client.wave.WaveInsert;
+
+import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 
 import com.calclab.suco.client.ioc.Provider;
 

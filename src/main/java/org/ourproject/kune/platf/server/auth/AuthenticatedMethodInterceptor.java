@@ -25,9 +25,10 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ourproject.kune.platf.client.errors.SessionExpiredException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.UserSession;
+
+import cc.kune.core.client.errors.SessionExpiredException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

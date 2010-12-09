@@ -1,8 +1,9 @@
 package org.ourproject.kune.platf.client.ui.rte.edithtml.editor;
 
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogView;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
 
 import com.gwtext.client.widgets.form.TextArea;
 

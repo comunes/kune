@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import cc.kune.core.client.utils.TextUtils;
+
 public class KuneStringUtilsTest {
 
     @Test

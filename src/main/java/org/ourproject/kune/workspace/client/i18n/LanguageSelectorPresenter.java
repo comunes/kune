@@ -20,8 +20,9 @@
 package org.ourproject.kune.workspace.client.i18n;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.state.Session;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.I18nLanguageDTO;
 
 public class LanguageSelectorPresenter implements LanguageSelector {
 

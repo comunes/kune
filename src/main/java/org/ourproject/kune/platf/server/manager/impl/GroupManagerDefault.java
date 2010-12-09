@@ -31,12 +31,6 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.hibernate.exception.ConstraintViolationException;
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
-import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -52,6 +46,13 @@ import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.tool.ServerTool;
 import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.EmailAddressInUseException;
+import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.shared.dto.GroupType;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

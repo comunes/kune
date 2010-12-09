@@ -4,14 +4,15 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
+
+import cc.kune.core.client.errors.AlreadyUserMemberException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.shared.dto.SocialNetworkDataDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 

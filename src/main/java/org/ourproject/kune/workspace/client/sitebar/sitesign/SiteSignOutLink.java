@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.sitesign;
 
-import org.ourproject.kune.platf.client.actions.BeforeActionListener;
+import cc.kune.core.client.actions.BeforeActionListener;
 
 public interface SiteSignOutLink {
 

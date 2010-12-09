@@ -19,8 +19,9 @@
  */
 package org.ourproject.kune.platf.client.ui.noti;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Event0;

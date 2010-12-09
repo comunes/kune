@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.errors.UIException;
+import cc.kune.core.client.errors.UIException;
 
 public class MenuBinding extends GuiBindingAdapter {
 

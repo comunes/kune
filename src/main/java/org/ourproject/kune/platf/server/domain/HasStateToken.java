@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.server.domain;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
+import cc.kune.core.shared.dto.StateToken;
 
 public interface HasStateToken {
 

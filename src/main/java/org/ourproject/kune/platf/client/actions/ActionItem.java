@@ -19,6 +19,7 @@
  \*/
 package org.ourproject.kune.platf.client.actions;
 
+
 import com.allen_sauer.gwt.log.client.Log;
 
 /**

@@ -7,13 +7,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.api.VerificationMode;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.i18n.Resources;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
+
+import cc.kune.core.client.i18n.I18nTranslationServiceMocked;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.testing.events.MockedListener;

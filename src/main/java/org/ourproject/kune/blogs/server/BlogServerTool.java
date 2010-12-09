@@ -19,9 +19,6 @@
  */
 package org.ourproject.kune.blogs.server;
 
-import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
-import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
@@ -35,6 +32,10 @@ import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.tool.ServerTool;
 import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 import org.ourproject.kune.platf.server.tool.ServerToolTarget;
+
+import cc.kune.core.client.errors.ContainerNotPermittedException;
+import cc.kune.core.client.errors.ContentNotPermittedException;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 

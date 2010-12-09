@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.workspace.client.newgroup;
 
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
@@ -30,6 +28,9 @@ import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
+
+import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

@@ -5,10 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.dto.AccessRolDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.events.Listener;
 

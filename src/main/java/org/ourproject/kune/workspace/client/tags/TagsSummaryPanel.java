@@ -19,10 +19,11 @@
  */
 package org.ourproject.kune.workspace.client.tags;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

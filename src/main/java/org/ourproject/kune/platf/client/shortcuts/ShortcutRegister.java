@@ -5,7 +5,8 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.actions.ActionDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+
+import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;

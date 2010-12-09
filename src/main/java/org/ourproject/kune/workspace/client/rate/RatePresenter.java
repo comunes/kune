@@ -19,11 +19,12 @@
  \*/
 package org.ourproject.kune.workspace.client.rate;
 
-import org.ourproject.kune.platf.client.dto.RateResultDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.state.StateManager;
+
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.RateResultDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.calclab.suco.client.events.Listener;
 

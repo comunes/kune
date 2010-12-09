@@ -48,7 +48,8 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
-import org.ourproject.kune.platf.client.dto.StateToken;
+
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;

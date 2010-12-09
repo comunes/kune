@@ -24,7 +24,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
+import cc.kune.core.shared.dto.StateToken;
 
 public class FileUtils {
 

@@ -19,11 +19,12 @@
  */
 package org.ourproject.kune.workspace.client.signin;
 
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 public class SignInAbstractPresenter {
 

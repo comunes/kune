@@ -23,12 +23,13 @@ import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptions;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener0;
 

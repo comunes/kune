@@ -1,11 +1,12 @@
 package org.ourproject.kune.platf.client.ui.rte.saving;
 
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenter;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
 
 import com.calclab.suco.client.events.Listener0;
 

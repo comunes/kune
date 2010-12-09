@@ -20,14 +20,15 @@
 package org.ourproject.kune.workspace.client.tags;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
-import org.ourproject.kune.platf.client.dto.TagCountDTO;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
 import org.ourproject.kune.workspace.client.search.SiteSearcherType;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.TagCloudResultDTO;
+import cc.kune.core.shared.dto.TagCountDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener;

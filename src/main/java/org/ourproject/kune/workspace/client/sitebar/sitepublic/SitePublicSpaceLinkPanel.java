@@ -19,11 +19,12 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.sitepublic;
 
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

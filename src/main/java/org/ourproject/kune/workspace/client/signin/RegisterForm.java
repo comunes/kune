@@ -19,10 +19,11 @@
  \*/
 package org.ourproject.kune.workspace.client.signin;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;

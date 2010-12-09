@@ -20,7 +20,8 @@
 package org.ourproject.kune.workspace.client.i18n;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
+
+import cc.kune.core.shared.dto.I18nLanguageDTO;
 
 public interface LanguageSelector {
 

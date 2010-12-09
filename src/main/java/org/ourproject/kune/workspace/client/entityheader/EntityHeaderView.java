@@ -21,9 +21,10 @@ package org.ourproject.kune.workspace.client.entityheader;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
+
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 public interface EntityHeaderView {
 

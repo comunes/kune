@@ -19,8 +19,9 @@
  */
 package org.ourproject.kune.chat.client.ctx.room;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.TextUtils;
+
+import cc.kune.core.client.utils.TextUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emiteuimodule.client.dialog.BasicDialogExtended;
 import com.calclab.emiteuimodule.client.dialog.BasicDialogListener;

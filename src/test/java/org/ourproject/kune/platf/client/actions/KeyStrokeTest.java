@@ -5,10 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
+
+import cc.kune.core.client.i18n.I18nTranslationServiceMocked;
 
 public class KeyStrokeTest {
 

@@ -21,11 +21,12 @@ package org.ourproject.kune.workspace.client.options.tools;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.dto.ToolSimpleDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.gwtext.client.widgets.ToolTip;

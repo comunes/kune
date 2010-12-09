@@ -20,15 +20,16 @@
 package org.ourproject.kune.blogs.client.cnt;
 
 import org.ourproject.kune.blogs.client.BlogClientTool;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.calclab.suco.client.ioc.Provider;
 

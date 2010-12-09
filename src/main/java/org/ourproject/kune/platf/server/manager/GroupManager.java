@@ -21,14 +21,15 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
-import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.EmailAddressInUseException;
+import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
 
 public interface GroupManager extends Manager<Group, Long> {
 

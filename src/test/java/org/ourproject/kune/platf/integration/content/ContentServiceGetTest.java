@@ -6,13 +6,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.StateNoContentDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
+
+import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateNoContentDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 

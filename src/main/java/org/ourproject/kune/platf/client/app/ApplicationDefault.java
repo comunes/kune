@@ -19,11 +19,12 @@
  */
 package org.ourproject.kune.platf.client.app;
 
-import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
+
+import cc.kune.core.client.rpcservices.SiteServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.InitDataDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event;

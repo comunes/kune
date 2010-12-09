@@ -21,16 +21,17 @@ package org.ourproject.kune.workspace.client.signin;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.UserDTO;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.errors.UserAuthException;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.site.SiteToken;
+
+import cc.kune.core.client.errors.UserAuthException;
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.UserDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;

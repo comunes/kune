@@ -19,14 +19,15 @@
  */
 package org.ourproject.kune.workspace.client.title;
 
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.NameInUseException;
-import org.ourproject.kune.platf.client.errors.NameNotPermittedException;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+
+import cc.kune.core.client.errors.NameInUseException;
+import cc.kune.core.client.errors.NameNotPermittedException;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener2;

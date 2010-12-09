@@ -22,10 +22,11 @@ package org.ourproject.kune.workspace.client.tool;
 import java.util.HashMap;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.errors.UIException;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
+
+import cc.kune.core.client.errors.UIException;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener;

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import cc.kune.core.shared.dto.BasicMimeTypeDTO;
+
 public class BasicMimeTypeDTOTest {
 
     @Test

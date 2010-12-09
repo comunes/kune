@@ -21,7 +21,8 @@ package org.ourproject.kune.workspace.client.socialnet.toolbar;
 
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+
+import cc.kune.core.shared.dto.UserSimpleDTO;
 
 public class ActionBuddiesSummaryToolbarPresenter extends ActionToolbarPresenter<UserSimpleDTO> implements
         ActionBuddiesSummaryToolbar {

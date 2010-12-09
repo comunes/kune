@@ -2,7 +2,8 @@ package org.ourproject.kune.platf.client.actions.ui;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.errors.UIException;
+
+import cc.kune.core.client.errors.UIException;
 
 import com.google.gwt.user.client.ui.Composite;
 

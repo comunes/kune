@@ -20,7 +20,8 @@
 package org.ourproject.kune.workspace.client.cxt;
 
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.dto.StateToken;
+
+import cc.kune.core.shared.dto.StateToken;
 
 public class ContextActionRegistry extends ActionRegistry<StateToken> {
 }

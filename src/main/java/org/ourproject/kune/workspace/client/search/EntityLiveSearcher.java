@@ -19,7 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.search;
 
-import org.ourproject.kune.platf.client.dto.LinkDTO;
+
+import cc.kune.core.shared.dto.LinkDTO;
 
 import com.calclab.suco.client.events.Listener;
 

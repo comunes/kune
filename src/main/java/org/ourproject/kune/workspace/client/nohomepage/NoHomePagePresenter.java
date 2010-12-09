@@ -20,10 +20,11 @@
 package org.ourproject.kune.workspace.client.nohomepage;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateNoContentDTO;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
+
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateNoContentDTO;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;

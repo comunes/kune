@@ -7,8 +7,9 @@ import static org.ourproject.kune.blogs.server.BlogServerTool.TYPE_UPLOADEDFILE;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
-import org.ourproject.kune.platf.client.errors.ContentNotPermittedException;
+
+import cc.kune.core.client.errors.ContainerNotPermittedException;
+import cc.kune.core.client.errors.ContentNotPermittedException;
 
 public class BlogServerToolTest { // extends PersistenceTest {
 

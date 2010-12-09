@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Tag;
@@ -16,6 +15,8 @@ import org.ourproject.kune.platf.server.domain.TagCount;
 import org.ourproject.kune.platf.server.domain.TagUserContent;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
+
+import cc.kune.core.client.utils.TextUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

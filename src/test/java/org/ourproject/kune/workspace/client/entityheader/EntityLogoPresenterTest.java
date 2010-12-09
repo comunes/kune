@@ -3,12 +3,13 @@ package org.ourproject.kune.workspace.client.entityheader;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.GroupType;
+import cc.kune.core.shared.dto.StateToken;
 
 public class EntityLogoPresenterTest {
 

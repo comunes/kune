@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.tags;
 
-import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
+import cc.kune.core.shared.dto.TagCloudResultDTO;
 
 public interface TagsSummary {
 

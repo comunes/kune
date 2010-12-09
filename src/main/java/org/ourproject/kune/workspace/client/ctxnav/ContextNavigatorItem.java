@@ -20,8 +20,9 @@
 package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
-import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
+
+import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 public class ContextNavigatorItem {
     private final String id;

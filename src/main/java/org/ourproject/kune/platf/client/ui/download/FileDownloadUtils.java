@@ -19,12 +19,13 @@
  \*/
 package org.ourproject.kune.platf.client.ui.download;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.utils.Url;
 import org.ourproject.kune.platf.client.utils.UrlParam;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;

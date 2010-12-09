@@ -20,7 +20,8 @@
 package org.ourproject.kune.workspace.client.socialnet;
 
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+
+import cc.kune.core.shared.dto.UserSimpleDTO;
 
 /**
  * The Class UserActionRegistry.

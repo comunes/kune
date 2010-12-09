@@ -9,10 +9,7 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
@@ -30,6 +27,10 @@ import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

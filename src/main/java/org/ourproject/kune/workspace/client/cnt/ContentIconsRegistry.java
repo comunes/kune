@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.cnt;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
+import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 
 public class ContentIconsRegistry {
     private final HashMap<String, String> contentTypesIcons;

@@ -10,19 +10,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.CommentDTO;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
-import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.GroupListDTO;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.LinkDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
@@ -44,6 +31,20 @@ import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 import org.ourproject.kune.platf.server.state.StateContent;
+
+import cc.kune.core.shared.dto.CommentDTO;
+import cc.kune.core.shared.dto.ContainerDTO;
+import cc.kune.core.shared.dto.ContainerSimpleDTO;
+import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.GroupListDTO;
+import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.dto.LinkDTO;
+import cc.kune.core.shared.dto.SocialNetworkDataDTO;
+import cc.kune.core.shared.dto.SocialNetworkVisibilityDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.dto.UserBuddiesVisibilityDTO;
 
 import com.google.inject.Inject;
 

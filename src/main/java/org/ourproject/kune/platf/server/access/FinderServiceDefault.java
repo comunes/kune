@@ -22,12 +22,6 @@ package org.ourproject.kune.platf.server.access;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.errors.GroupNotFoundException;
-import org.ourproject.kune.platf.client.errors.NoDefaultContentException;
-import org.ourproject.kune.platf.client.errors.ToolNotFoundException;
 import org.ourproject.kune.platf.server.content.CommentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
@@ -39,6 +33,13 @@ import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
+
+import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.GroupNotFoundException;
+import cc.kune.core.client.errors.NoDefaultContentException;
+import cc.kune.core.client.errors.ToolNotFoundException;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

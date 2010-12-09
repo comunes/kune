@@ -27,15 +27,16 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.app.Application;
-import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.ui.WindowUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.utils.WindowUtils;
+import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;

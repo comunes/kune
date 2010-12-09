@@ -19,14 +19,15 @@
  */
 package org.ourproject.kune.platf.server.rest;
 
-import org.ourproject.kune.platf.client.dto.LinkDTO;
-import org.ourproject.kune.platf.client.dto.SearchResultDTO;
 import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.rack.filters.rest.REST;
+
+import cc.kune.core.shared.dto.LinkDTO;
+import cc.kune.core.shared.dto.SearchResultDTO;
 
 import com.google.inject.Inject;
 

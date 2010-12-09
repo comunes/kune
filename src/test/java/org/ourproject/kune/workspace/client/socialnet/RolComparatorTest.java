@@ -4,8 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
+
+import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.dto.AccessRolDTO;
 
 public class RolComparatorTest {
 

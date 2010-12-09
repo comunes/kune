@@ -25,8 +25,9 @@ import java.util.List;
 import net.sf.dozer.util.mapping.DozerBeanMapperSingletonWrapper;
 import net.sf.dozer.util.mapping.MapperIF;
 
-import org.ourproject.kune.platf.client.dto.SearchResultDTO;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
+import cc.kune.core.shared.dto.SearchResultDTO;
 
 import com.google.inject.Singleton;
 

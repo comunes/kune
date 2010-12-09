@@ -25,15 +25,8 @@ import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.ToolGroup;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.i18n.Resources;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.state.AccessRightsClientManager;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
@@ -106,6 +99,14 @@ import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
 
+import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.rpcservices.SiteServiceAsync;
+import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -159,7 +160,7 @@ public class PlatformModule extends AbstractExtendedModule {
         register(Singleton.class, new Factory<ErrorHandler>(ErrorHandler.class) {
             @Override
             public ErrorHandler create() {
-                return new ErrorHandler(i(Session.class), i18n, p(StateManager.class));
+                return null; // new ErrorHandler(i(Session.class), i18n, p(StateManager.class));
             }
         });
 
@@ -175,7 +176,7 @@ public class PlatformModule extends AbstractExtendedModule {
             }
         });
 
-        AsyncCallbackSimple.init(i(ErrorHandler.class));
+        //AsyncCallbackSimple.init(i(ErrorHandler.class));
 
         register(Singleton.class, new Factory<Application>(Application.class) {
             @Override

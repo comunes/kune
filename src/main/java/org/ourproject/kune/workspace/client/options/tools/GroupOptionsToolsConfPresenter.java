@@ -22,14 +22,15 @@ package org.ourproject.kune.workspace.client.options.tools;
 import java.util.Collection;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
+
+import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.dto.ToolSimpleDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;

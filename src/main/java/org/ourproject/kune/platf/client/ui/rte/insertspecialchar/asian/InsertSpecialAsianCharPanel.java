@@ -1,8 +1,9 @@
 package org.ourproject.kune.platf.client.ui.rte.insertspecialchar.asian;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental.AbstractInsertCharPanel;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class InsertSpecialAsianCharPanel extends AbstractInsertCharPanel implements InsertSpecialAsianCharView {
 

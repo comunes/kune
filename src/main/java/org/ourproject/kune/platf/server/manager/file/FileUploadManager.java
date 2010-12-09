@@ -26,8 +26,6 @@ import magick.MagickException;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRol;
@@ -44,6 +42,9 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.FileManager;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.utils.StringW;
+
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;

@@ -1,12 +1,13 @@
 package org.ourproject.kune.workspace.client.options.license;
 
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseChangeAction;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;

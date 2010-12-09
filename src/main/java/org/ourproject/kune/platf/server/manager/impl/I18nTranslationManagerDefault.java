@@ -25,12 +25,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.utils.TextUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

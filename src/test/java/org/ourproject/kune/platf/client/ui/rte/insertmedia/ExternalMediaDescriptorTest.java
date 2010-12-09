@@ -6,7 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.ExtMediaDescripDTO;
+
+import cc.kune.core.shared.dto.ExtMediaDescripDTO;
 
 public class ExternalMediaDescriptorTest {
 

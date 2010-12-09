@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.i18n.Resources;
+
+import cc.kune.core.client.i18n.I18nTranslationServiceMocked;
 
 public class ShortcutTest {
     @Test

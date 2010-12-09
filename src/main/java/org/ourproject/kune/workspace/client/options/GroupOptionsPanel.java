@@ -22,10 +22,11 @@ package org.ourproject.kune.workspace.client.options;
 import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements GroupOptionsView {
 

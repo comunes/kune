@@ -28,10 +28,6 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
-import org.ourproject.kune.platf.client.errors.NameInUseException;
-import org.ourproject.kune.platf.client.errors.UserNotFoundException;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
@@ -47,6 +43,11 @@ import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import org.ourproject.kune.platf.server.manager.impl.ServerManagerException;
 import org.ourproject.kune.platf.server.utils.FilenameUtils;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.I18nNotFoundException;
+import cc.kune.core.client.errors.NameInUseException;
+import cc.kune.core.client.errors.UserNotFoundException;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

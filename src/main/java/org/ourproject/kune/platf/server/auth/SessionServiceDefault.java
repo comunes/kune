@@ -22,7 +22,8 @@ package org.ourproject.kune.platf.server.auth;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.ourproject.kune.platf.client.state.Session;
+
+import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

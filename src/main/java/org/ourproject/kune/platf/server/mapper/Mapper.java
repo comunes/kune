@@ -21,8 +21,9 @@ package org.ourproject.kune.platf.server.mapper;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.SearchResultDTO;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
+import cc.kune.core.shared.dto.SearchResultDTO;
 
 public interface Mapper {
 

@@ -21,7 +21,8 @@ package org.ourproject.kune.workspace.client.cnt;
 
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPresenter;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
-import org.ourproject.kune.platf.client.dto.StateToken;
+
+import cc.kune.core.shared.dto.StateToken;
 
 public class ActionContentToolbarPresenter extends ActionToolbarPresenter<StateToken> implements ActionContentToolbar {
 

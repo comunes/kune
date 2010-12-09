@@ -1,8 +1,9 @@
 package org.ourproject.kune.workspace.client.editor.insertlocalimg;
 
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertImageAbstractPresenter;
+
+import cc.kune.core.client.state.Session;
 
 public class InsertImageLocalPresenter extends InsertImageAbstractPresenter implements InsertImageLocal {
 

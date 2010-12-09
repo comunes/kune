@@ -21,18 +21,19 @@ package org.ourproject.kune.gallery.client.cnt;
 
 import org.ourproject.kune.gallery.client.GalleryClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.ContainerDTO;
+import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 

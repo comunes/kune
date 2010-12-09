@@ -19,12 +19,13 @@
  */
 package org.ourproject.kune.workspace.client.cnt;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.RoundedPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;

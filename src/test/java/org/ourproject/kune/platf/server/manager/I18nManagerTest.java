@@ -9,11 +9,12 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.I18nCountry;
 import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 

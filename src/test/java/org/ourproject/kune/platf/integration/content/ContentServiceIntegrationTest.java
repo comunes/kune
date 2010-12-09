@@ -1,10 +1,11 @@
 package org.ourproject.kune.platf.integration.content;
 
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
+
+import cc.kune.core.client.rpcservices.ContentService;
+import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 

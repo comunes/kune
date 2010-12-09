@@ -19,11 +19,12 @@
  */
 package org.ourproject.kune.workspace.client.licensefoot;
 
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.SimpleToolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

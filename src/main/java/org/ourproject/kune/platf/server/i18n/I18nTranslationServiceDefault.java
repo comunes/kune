@@ -19,11 +19,12 @@
  */
 package org.ourproject.kune.platf.server.i18n;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
+
+import cc.kune.core.client.utils.TextUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

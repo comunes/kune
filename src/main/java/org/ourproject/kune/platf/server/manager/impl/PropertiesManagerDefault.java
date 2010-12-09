@@ -6,11 +6,12 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.client.errors.UnknownPropertyException;
 import org.ourproject.kune.platf.server.domain.Properties;
 import org.ourproject.kune.platf.server.domain.Property;
 import org.ourproject.kune.platf.server.domain.PropertySetted;
 import org.ourproject.kune.platf.server.manager.PropertiesManager;
+
+import cc.kune.core.client.errors.UnknownPropertyException;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

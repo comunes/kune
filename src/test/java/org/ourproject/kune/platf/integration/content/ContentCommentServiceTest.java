@@ -4,11 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.CommentDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.shared.dto.CommentDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
 
 public class ContentCommentServiceTest extends ContentServiceIntegrationTest {
 

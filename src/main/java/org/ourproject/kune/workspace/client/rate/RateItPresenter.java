@@ -19,16 +19,17 @@
  */
 package org.ourproject.kune.workspace.client.rate;
 
-import org.ourproject.kune.platf.client.dto.RateResultDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.RateResultDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;

@@ -19,11 +19,6 @@
  */
 package org.ourproject.kune.platf.server.rpc;
 
-import org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
@@ -34,6 +29,12 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.shared.dto.SocialNetworkDataDTO;
+import cc.kune.core.shared.dto.SocialNetworkRequestResult;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -11,8 +11,6 @@ import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
-import org.ourproject.kune.platf.client.errors.UIException;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
@@ -24,6 +22,9 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 import org.xwiki.gwt.dom.client.DocumentFragment;
 import org.xwiki.gwt.dom.client.Range;
 import org.xwiki.gwt.dom.client.Selection;
+
+import cc.kune.core.client.errors.UIException;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.Scheduler;

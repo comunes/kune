@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
-import org.ourproject.kune.platf.client.dto.TagCountDTO;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.TagCloudResultDTO;
+import cc.kune.core.shared.dto.TagCountDTO;
 
 import com.calclab.suco.client.ioc.Provider;
 

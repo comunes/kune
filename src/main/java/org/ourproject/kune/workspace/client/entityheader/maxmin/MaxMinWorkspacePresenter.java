@@ -7,10 +7,11 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.resources.client.ImageResource;
 

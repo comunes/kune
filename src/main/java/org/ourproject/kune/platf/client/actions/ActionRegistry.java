@@ -21,7 +21,8 @@ package org.ourproject.kune.platf.client.actions;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
+
+import cc.kune.core.shared.dto.AccessRightsDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 

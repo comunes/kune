@@ -19,9 +19,10 @@
  \*/
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
+
+import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

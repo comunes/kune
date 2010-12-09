@@ -19,12 +19,13 @@
  */
 package org.ourproject.kune.workspace.client.search;
 
-import org.ourproject.kune.platf.client.errors.UIException;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.client.errors.UIException;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.KeyCodes;

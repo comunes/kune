@@ -1,16 +1,17 @@
 package org.ourproject.kune.workspace.client.socialnet;
 
 import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
-import org.ourproject.kune.platf.client.state.AccessRightsClientManager;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
+import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.AccessRolDTO;
+import cc.kune.core.shared.dto.SocialNetworkRequestResult;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 

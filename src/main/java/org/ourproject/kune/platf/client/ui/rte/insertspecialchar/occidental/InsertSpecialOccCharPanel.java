@@ -1,7 +1,8 @@
 package org.ourproject.kune.platf.client.ui.rte.insertspecialchar.occidental;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class InsertSpecialOccCharPanel extends AbstractInsertCharPanel implements InsertSpecialOccCharView {
 

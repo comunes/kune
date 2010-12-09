@@ -28,8 +28,6 @@ import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.ToolbarSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.ToolbarSeparatorDescriptor.Type;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
@@ -44,6 +42,9 @@ import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event0;

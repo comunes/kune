@@ -20,14 +20,15 @@
 package org.ourproject.kune.workspace.client.sitebar.sitepublic;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
-import org.ourproject.kune.platf.client.dto.GroupListDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.StateTokenUtils;
-import org.ourproject.kune.platf.client.state.StateManager;
+
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.dto.GroupListDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.dto.StateTokenUtils;
 
 import com.calclab.suco.client.events.Listener;
 

@@ -20,12 +20,13 @@
 package org.ourproject.kune.chat.client.ctx.room;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.calclab.suco.client.ioc.Provider;
 

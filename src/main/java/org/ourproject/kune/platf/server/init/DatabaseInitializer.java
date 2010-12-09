@@ -5,8 +5,6 @@ import java.util.TimeZone;
 
 import javax.persistence.NoResultException;
 
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
@@ -29,6 +27,9 @@ import org.ourproject.kune.platf.server.manager.PropertyManager;
 import org.ourproject.kune.platf.server.manager.PropertySubgroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
+
+import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.shared.dto.GroupType;
 
 import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.google.inject.Inject;

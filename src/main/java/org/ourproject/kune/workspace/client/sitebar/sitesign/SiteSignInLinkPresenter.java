@@ -20,8 +20,9 @@
 package org.ourproject.kune.workspace.client.sitebar.sitesign;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.state.Session;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

@@ -19,11 +19,12 @@
  */
 package org.ourproject.kune.workspace.client.cxt;
 
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
+
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;

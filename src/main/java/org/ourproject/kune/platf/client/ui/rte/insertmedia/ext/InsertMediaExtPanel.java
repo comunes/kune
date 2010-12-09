@@ -1,8 +1,9 @@
 package org.ourproject.kune.platf.client.ui.rte.insertmedia.ext;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.ExternalMediaRegistry;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstractPanel;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class InsertMediaExtPanel extends InsertMediaAbstractPanel implements InsertMediaExtView {
 

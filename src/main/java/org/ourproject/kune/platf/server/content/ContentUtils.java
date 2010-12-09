@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.platf.server.content;
 
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
+import cc.kune.core.client.errors.ContentNotFoundException;
 
 public final class ContentUtils {
 

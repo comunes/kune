@@ -29,14 +29,9 @@ import org.ourproject.kune.chat.client.ctx.room.AddRoomPanel;
 import org.ourproject.kune.chat.client.ctx.room.AddRoomPresenter;
 import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ToolGroup;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
@@ -47,6 +42,12 @@ import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emiteuimodule.client.EmiteUIDialog;
 import com.calclab.suco.client.ioc.decorator.Singleton;

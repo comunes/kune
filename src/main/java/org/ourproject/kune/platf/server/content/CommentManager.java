@@ -19,10 +19,11 @@
  \*/
 package org.ourproject.kune.platf.server.content;
 
-import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.Comment;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.Manager;
+
+import cc.kune.core.client.errors.DefaultException;
 
 public interface CommentManager extends Manager<Comment, Long> {
 

@@ -30,6 +30,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPushButtonDescriptor;
 
+
 import com.allen_sauer.gwt.log.client.Log;
 
 public class ActionToolbarPresenter<T> implements ActionToolbar<T> {

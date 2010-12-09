@@ -1,6 +1,7 @@
 package org.ourproject.kune.platf.client.ui.palette;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.gwtext.client.widgets.ColorPalette;
 import com.gwtext.client.widgets.event.ColorPaletteListenerAdapter;

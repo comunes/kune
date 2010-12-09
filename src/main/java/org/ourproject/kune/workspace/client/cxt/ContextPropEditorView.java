@@ -22,9 +22,9 @@ package org.ourproject.kune.workspace.client.cxt;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.AccessListsDTO;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+import cc.kune.core.shared.dto.AccessListsDTO;
+import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.UserSimpleDTO;
 
 public interface ContextPropEditorView {
 

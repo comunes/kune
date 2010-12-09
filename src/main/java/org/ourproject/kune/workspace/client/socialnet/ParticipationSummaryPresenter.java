@@ -21,20 +21,21 @@ package org.ourproject.kune.workspace.client.socialnet;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.ParticipationDataDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkServiceAsync;
 import org.ourproject.kune.platf.client.services.ImageUtils;
-import org.ourproject.kune.platf.client.state.AccessRightsClientManager;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipationToolbar;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
+import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.ParticipationDataDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;

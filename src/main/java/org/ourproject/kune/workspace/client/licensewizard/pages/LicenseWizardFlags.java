@@ -19,10 +19,11 @@
  */
 package org.ourproject.kune.workspace.client.licensewizard.pages;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

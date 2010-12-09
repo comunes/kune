@@ -21,35 +21,30 @@ package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
-import org.ourproject.kune.platf.client.app.HistoryWrapper;
-import org.ourproject.kune.platf.client.app.HistoryWrapperDefault;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.app.UserOptionsCollection;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.rpc.I18nService;
-import org.ourproject.kune.platf.client.rpc.I18nServiceAsync;
-import org.ourproject.kune.platf.client.rpc.SiteService;
-import org.ourproject.kune.platf.client.rpc.SiteServiceAsync;
-import org.ourproject.kune.platf.client.rpc.UserService;
-import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
-import org.ourproject.kune.platf.client.state.ContentProvider;
-import org.ourproject.kune.platf.client.state.ContentProviderDefault;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.SessionDefault;
-import org.ourproject.kune.platf.client.state.StateManager;
-import org.ourproject.kune.platf.client.state.StateManagerDefault;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharGroup;
 
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.rpcservices.I18nService;
+import cc.kune.core.client.rpcservices.I18nServiceAsync;
+import cc.kune.core.client.rpcservices.SiteService;
+import cc.kune.core.client.rpcservices.SiteServiceAsync;
+import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.state.ContentProvider;
+import cc.kune.core.client.state.HistoryWrapper;
+import cc.kune.core.client.state.HistoryWrapperDefault;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 public class CoreModule extends AbstractExtendedModule {
@@ -66,7 +61,10 @@ public class CoreModule extends AbstractExtendedModule {
         register(Singleton.class, new Factory<Session>(Session.class) {
             @Override
             public Session create() {
-                return new SessionDefault(Cookies.getCookie(Session.USERHASH), p(UserServiceAsync.class));
+                return null;
+                // return new
+                // SessionDefault(Cookies.getCookie(Session.USERHASH),
+                // p(UserServiceAsync.class));
             }
         }, new Factory<I18nServiceAsync>(I18nServiceAsync.class) {
             @Override
@@ -94,9 +92,11 @@ public class CoreModule extends AbstractExtendedModule {
         register(Singleton.class, new Factory<I18nUITranslationService>(I18nUITranslationService.class) {
             @Override
             public I18nUITranslationService create() {
-                final I18nUITranslationService i18n = new I18nUITranslationService();
-                i18n.init(i(I18nServiceAsync.class), i(Session.class), onI18nReady);
-                return i18n;
+                // final I18nUITranslationService i18n = new
+                // I18nUITranslationService();
+                // i18n.init(i(I18nServiceAsync.class), i(Session.class),
+                // onI18nReady);
+                return null; // i18n;
             }
         });
 
@@ -110,15 +110,17 @@ public class CoreModule extends AbstractExtendedModule {
         }, new Factory<ContentProvider>(ContentProvider.class) {
             @Override
             public ContentProvider create() {
-                return new ContentProviderDefault(i(ContentServiceAsync.class));
+                return null; // new
+                             // ContentProviderDefault(i(ContentServiceAsync.class));
             }
         }, new Factory<StateManager>(StateManager.class) {
             @Override
             public StateManager create() {
-                final StateManagerDefault stateManager = new StateManagerDefault(i(ContentProvider.class),
-                        i(Session.class), i(HistoryWrapper.class));
-                History.addValueChangeHandler(stateManager);
-                return stateManager;
+                // final StateManagerDefault stateManager = new
+                // StateManagerDefault(i(ContentProvider.class),
+                // i(Session.class), i(HistoryWrapper.class));
+                // History.addValueChangeHandler(stateManager);
+                return null;
             }
         });
 

@@ -8,9 +8,10 @@ import org.ourproject.kune.platf.client.actions.ui.ActionExtensibleView;
 import org.ourproject.kune.platf.client.actions.ui.CssStyleDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
-import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;

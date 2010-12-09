@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.ExtMediaDescripDTO;
-import org.ourproject.kune.platf.client.ui.TextUtils;
+
+import cc.kune.core.client.utils.TextUtils;
+import cc.kune.core.shared.dto.ExtMediaDescripDTO;
 
 public class ExternalMediaRegistry extends ArrayList<ExtMediaDescripDTO> {
 

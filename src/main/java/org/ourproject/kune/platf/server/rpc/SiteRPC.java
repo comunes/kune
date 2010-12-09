@@ -21,9 +21,6 @@ package org.ourproject.kune.platf.server.rpc;
 
 import java.util.TimeZone;
 
-import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.server.InitData;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.manager.ExtMediaDescripManager;
@@ -36,6 +33,10 @@ import org.ourproject.kune.platf.server.properties.ChatProperties;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 import org.ourproject.kune.platf.server.users.UserInfoService;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.rpcservices.SiteService;
+import cc.kune.core.shared.dto.InitDataDTO;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

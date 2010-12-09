@@ -22,16 +22,17 @@ package org.ourproject.kune.workspace.client.sitebar.sitesign;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.BeforeActionCollection;
-import org.ourproject.kune.platf.client.actions.BeforeActionListener;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.errors.SessionExpiredException;
-import org.ourproject.kune.platf.client.errors.UIException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
-import org.ourproject.kune.platf.client.rpc.UserServiceAsync;
-import org.ourproject.kune.platf.client.services.ErrorHandler;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+
+import cc.kune.core.client.actions.BeforeActionCollection;
+import cc.kune.core.client.actions.BeforeActionListener;
+import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.errors.SessionExpiredException;
+import cc.kune.core.client.errors.UIException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

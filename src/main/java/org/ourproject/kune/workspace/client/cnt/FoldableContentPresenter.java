@@ -21,20 +21,21 @@ package org.ourproject.kune.workspace.client.cnt;
 
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.dto.BasicMimeTypeDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

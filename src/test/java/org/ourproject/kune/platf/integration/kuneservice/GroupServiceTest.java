@@ -4,16 +4,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
-import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
+
+import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.client.rpcservices.GroupService;
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.GroupType;
+import cc.kune.core.shared.dto.LicenseDTO;
 
 import com.google.inject.Inject;
 

@@ -19,15 +19,16 @@
  */
 package org.ourproject.kune.workspace.client.editor.insertlocallink;
 
-import org.ourproject.kune.platf.client.dto.LinkDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.StateTokenUtils;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPanel;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherField;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.dto.LinkDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.dto.StateTokenUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 

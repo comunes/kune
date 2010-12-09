@@ -22,15 +22,16 @@ package org.ourproject.kune.workspace.client.cxt;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.AccessListsDTO;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.ContextPropertyPanel;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.dto.AccessListsDTO;
+import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.UserSimpleDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.ScrollPanel;

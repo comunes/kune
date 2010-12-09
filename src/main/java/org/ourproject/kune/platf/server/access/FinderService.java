@@ -19,14 +19,15 @@
  */
 package org.ourproject.kune.platf.server.access;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.Comment;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.Rate;
 import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.shared.dto.StateToken;
 
 public interface FinderService {
 

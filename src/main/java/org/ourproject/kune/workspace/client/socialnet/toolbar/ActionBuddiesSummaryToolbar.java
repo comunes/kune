@@ -20,7 +20,8 @@
 package org.ourproject.kune.workspace.client.socialnet.toolbar;
 
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
+
+import cc.kune.core.shared.dto.UserSimpleDTO;
 
 public interface ActionBuddiesSummaryToolbar extends ActionToolbar<UserSimpleDTO> {
 

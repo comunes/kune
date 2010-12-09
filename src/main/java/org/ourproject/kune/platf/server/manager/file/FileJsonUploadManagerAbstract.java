@@ -26,7 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 

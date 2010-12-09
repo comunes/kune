@@ -19,11 +19,12 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertlink.ext;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.i18n.Resources;
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPanel;
+
+import cc.kune.core.client.utils.TextUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.user.client.ui.Frame;
 import com.gwtext.client.core.EventObject;

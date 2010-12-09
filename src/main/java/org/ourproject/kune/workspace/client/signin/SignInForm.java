@@ -19,8 +19,9 @@
  \*/
 package org.ourproject.kune.workspace.client.signin;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.form.Field;

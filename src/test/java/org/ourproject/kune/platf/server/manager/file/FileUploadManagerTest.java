@@ -2,10 +2,11 @@ package org.ourproject.kune.platf.server.manager.file;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.errors.SessionExpiredException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.integration.content.ContentServiceIntegrationTest;
+
+import cc.kune.core.client.errors.SessionExpiredException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
 
 import com.google.inject.Inject;
 

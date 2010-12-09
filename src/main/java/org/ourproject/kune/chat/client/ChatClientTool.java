@@ -19,12 +19,13 @@
  */
 package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class ChatClientTool extends FoldableAbstractClientTool {
     public static final String NAME = "chats";

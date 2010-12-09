@@ -20,10 +20,11 @@
 package org.ourproject.kune.workspace.client.licensefoot;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.state.StateManager;
+
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.calclab.suco.client.events.Listener;
 

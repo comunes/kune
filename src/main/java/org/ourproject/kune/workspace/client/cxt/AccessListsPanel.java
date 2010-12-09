@@ -22,12 +22,13 @@ package org.ourproject.kune.workspace.client.cxt;
 import java.util.Iterator;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.AccessListsDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.GroupListDTO;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.IconLabel;
+
+import cc.kune.core.shared.dto.AccessListsDTO;
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.GroupListDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;

@@ -4,9 +4,10 @@ import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 

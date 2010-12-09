@@ -6,12 +6,13 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.access.AccessRol;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.wideplay.warp.persist.Transactional;
 

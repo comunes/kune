@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.cxt;
 
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 
 public interface ContextPropEditor {
     void attach();

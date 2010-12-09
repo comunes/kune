@@ -22,8 +22,9 @@ package org.ourproject.kune.workspace.client.search;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+
+import cc.kune.core.client.state.StateManager;
 
 import com.calclab.suco.client.ioc.Provider;
 

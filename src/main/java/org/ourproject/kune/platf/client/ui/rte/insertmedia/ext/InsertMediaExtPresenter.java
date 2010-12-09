@@ -1,10 +1,11 @@
 package org.ourproject.kune.platf.client.ui.rte.insertmedia.ext;
 
-import org.ourproject.kune.platf.client.dto.ExtMediaDescripDTO;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.ExternalMediaRegistry;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstractPresenter;
+
+import cc.kune.core.shared.dto.ExtMediaDescripDTO;
 
 public class InsertMediaExtPresenter extends InsertMediaAbstractPresenter implements InsertMediaExt {
 

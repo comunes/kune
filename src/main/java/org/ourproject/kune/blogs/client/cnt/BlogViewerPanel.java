@@ -19,9 +19,10 @@
  */
 package org.ourproject.kune.blogs.client.cnt;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class BlogViewerPanel extends FoldableContentPanel implements BlogViewerView {
     public BlogViewerPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {

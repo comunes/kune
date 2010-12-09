@@ -8,14 +8,15 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.InitDataDTO;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.rpc.SiteService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
+
+import cc.kune.core.client.rpcservices.SiteService;
+import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.LicenseDTO;
 
 import com.google.inject.Inject;
 

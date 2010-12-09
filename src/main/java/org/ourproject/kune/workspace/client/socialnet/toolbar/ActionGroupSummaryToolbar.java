@@ -20,7 +20,8 @@
 package org.ourproject.kune.workspace.client.socialnet.toolbar;
 
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.dto.StateToken;
+
+import cc.kune.core.shared.dto.StateToken;
 
 public interface ActionGroupSummaryToolbar extends ActionToolbar<StateToken> {
 

@@ -5,15 +5,11 @@ import static org.ourproject.kune.platf.client.actions.AbstractExtendedAction.NO
 
 import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenter;
@@ -26,6 +22,11 @@ import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCh
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
+
+import cc.kune.core.client.actions.BeforeActionListener;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

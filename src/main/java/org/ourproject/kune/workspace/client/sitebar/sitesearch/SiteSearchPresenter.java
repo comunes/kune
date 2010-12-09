@@ -20,8 +20,9 @@
 package org.ourproject.kune.workspace.client.sitebar.sitesearch;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.workspace.client.search.SiteSearcher;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.ioc.Provider;
 

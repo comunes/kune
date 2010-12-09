@@ -6,10 +6,11 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.errors.SessionExpiredException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
+
+import cc.kune.core.client.errors.SessionExpiredException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
 
 public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 

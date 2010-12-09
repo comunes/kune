@@ -19,9 +19,10 @@
  \*/
 package org.ourproject.kune.workspace.client.upload;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;

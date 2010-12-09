@@ -31,8 +31,6 @@ import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuRadioItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationServiceMocked;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
@@ -40,6 +38,9 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.hello.HelloWorldModule.HelloWorldPanel.HelloWorldPresenter;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.client.i18n.I18nTranslationServiceMocked;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.ioc.Provider;

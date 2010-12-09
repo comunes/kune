@@ -23,8 +23,6 @@ import javax.persistence.NoResultException;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
@@ -36,6 +34,9 @@ import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

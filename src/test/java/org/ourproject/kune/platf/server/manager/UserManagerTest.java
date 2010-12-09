@@ -11,11 +11,12 @@ import javax.persistence.EntityExistsException;
 import org.apache.lucene.queryParser.ParseException;
 import org.hibernate.validator.InvalidStateException;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.errors.I18nNotFoundException;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
+import cc.kune.core.client.errors.I18nNotFoundException;
 
 import com.google.inject.Inject;
 

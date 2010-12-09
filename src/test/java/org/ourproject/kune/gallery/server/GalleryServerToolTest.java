@@ -6,7 +6,8 @@ import static org.ourproject.kune.gallery.server.GalleryServerTool.TYPE_UPLOADED
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.errors.ContainerNotPermittedException;
+
+import cc.kune.core.client.errors.ContainerNotPermittedException;
 
 public class GalleryServerToolTest { // extends PersistenceTest {
 

@@ -20,12 +20,13 @@
 package org.ourproject.kune.workspace.client.options.logo;
 
 import org.ourproject.kune.platf.client.PlatfMessages;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.gwtext.client.core.Connection;
 import com.gwtext.client.core.EventCallback;

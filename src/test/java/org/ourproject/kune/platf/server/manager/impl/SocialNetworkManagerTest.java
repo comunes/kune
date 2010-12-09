@@ -7,11 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
-import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.domain.AdmissionType;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -19,6 +14,12 @@ import org.ourproject.kune.platf.server.domain.GroupListMode;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.AlreadyGroupMemberException;
+import cc.kune.core.client.errors.LastAdminInGroupException;
+import cc.kune.core.shared.dto.GroupType;
+import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.Transactional;

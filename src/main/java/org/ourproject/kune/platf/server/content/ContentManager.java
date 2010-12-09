@@ -21,7 +21,6 @@ package org.ourproject.kune.platf.server.content;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.ContentStatus;
@@ -30,6 +29,8 @@ import org.ourproject.kune.platf.server.domain.RateResult;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.Manager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
+import cc.kune.core.client.errors.DefaultException;
 
 public interface ContentManager extends Manager<Content, Long> {
 

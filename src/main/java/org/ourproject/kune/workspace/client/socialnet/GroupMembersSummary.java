@@ -19,8 +19,9 @@
  */
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.dto.GroupDTO;
 import org.ourproject.kune.platf.client.ui.MenuItem;
+
+import cc.kune.core.shared.dto.GroupDTO;
 
 public interface GroupMembersSummary {
 

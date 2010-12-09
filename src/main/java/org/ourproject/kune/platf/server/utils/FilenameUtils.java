@@ -20,7 +20,8 @@
 package org.ourproject.kune.platf.server.utils;
 
 import org.apache.commons.lang.StringUtils;
-import org.ourproject.kune.platf.client.errors.NameNotPermittedException;
+
+import cc.kune.core.client.errors.NameNotPermittedException;
 
 public class FilenameUtils {
 

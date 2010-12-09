@@ -1,7 +1,8 @@
 package org.ourproject.kune.platf.client.ui.rte.edithtml.preview;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialogView;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.gwtext.client.widgets.Panel;

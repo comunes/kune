@@ -7,69 +7,44 @@
     <date-format>dd/mm/yyyy</date-format>
     <wildcard>true</wildcard>
   </configuration>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.InitDataDTO
-    </class-a>
+    <class-a> cc.kune.core.shared.dto.InitDataDTO </class-a>
     <class-b>org.ourproject.kune.platf.server.InitData</class-b>
     <field>
       <a>licenses</a>
       <b>licenses</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.LicenseDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.License
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.LicenseDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.License </b-hint>
     </field>
     <field>
       <a>languages</a>
       <b>languages</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.I18nLanguageSimpleDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.I18nLanguage
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.I18nLanguageSimpleDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.I18nLanguage </b-hint>
     </field>
     <field>
       <a>countries</a>
       <b>countries</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.I18nCountryDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.I18nCountry
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.I18nCountryDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.I18nCountry </b-hint>
     </field>
   </mapping>
-
   <mapping>
     <class-a>org.ourproject.kune.platf.server.domain.Group</class-a>
-    <class-b>org.ourproject.kune.platf.client.dto.GroupDTO</class-b>
+    <class-b>cc.kune.core.shared.dto.GroupDTO</class-b>
     <field type="one-way">
       <a>hasLogo</a>
       <b>hasLogo</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.GroupListDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.GroupList
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.GroupListDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.GroupList </class-b>
     <field>
       <a>list</a>
       <b>list</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.GroupDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.Group
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.GroupDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.Group </b-hint>
     </field>
     <field
       custom-converter="org.ourproject.kune.platf.server.mapper.GroupListModeConverter">
@@ -77,141 +52,83 @@
       <b>mode</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.AccessListsDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.AccessLists
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.AccessListsDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.AccessLists </class-b>
     <field>
       <a>admins</a>
       <b>admins</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.GroupListDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.GroupList
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.GroupListDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.GroupList </b-hint>
     </field>
     <field>
       <a>editors</a>
       <b>editors</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.GroupListDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.GroupList
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.GroupListDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.GroupList </b-hint>
     </field>
     <field>
       <a>viewers</a>
       <b>viewers</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.GroupListDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.GroupList
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.GroupListDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.GroupList </b-hint>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.AccessRightsDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.access.AccessRights
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.AccessRightsDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.access.AccessRights </class-b>
   </mapping>
-
   <mapping>
-    <class-a>org.ourproject.kune.platf.client.dto.StateContentDTO</class-a>
+    <class-a>cc.kune.core.shared.dto.StateContentDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.state.StateContent</class-b>
     <field>
       <a>authors</a>
       <b>authors</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.UserSimpleDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.User
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.UserSimpleDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.User </b-hint>
     </field>
   </mapping>
-
-   <mapping>
-    <class-a>org.ourproject.kune.platf.client.dto.StateContainerDTO</class-a>
+  <mapping>
+    <class-a>cc.kune.core.shared.dto.StateContainerDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.state.StateContainer</class-b>
-     <field>
+    <field>
       <a>tagCloudResult</a>
       <b>tagCloudResult</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.TagCloudResultDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.TagCloudResult
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.TagCloudResultDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.TagCloudResult </b-hint>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>org.ourproject.kune.platf.client.dto.StateAbstractDTO</class-a>
+    <class-a>cc.kune.core.shared.dto.StateAbstractDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.state.StateAbstract</class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.StateToken
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.client.dto.StateToken
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.StateToken </class-a>
+    <class-b> cc.kune.core.shared.dto.StateToken </class-b>
     <field>
       <a>encoded</a>
       <b>encoded</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.BasicMimeType
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.BasicMimeTypeDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.BasicMimeType </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.LicenseDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.License
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.LicenseDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.License </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.ContainerSimpleDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.Container
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.ContainerSimpleDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.Container </class-b>
     <field>
       <a get-method="getStateToken">stateToken</a>
       <b>stateToken</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.ContentSimpleDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.Content
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.ContentSimpleDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.Content </class-b>
     <field>
       <a>title</a>
       <b>lastRevision.title</b>
@@ -221,12 +138,9 @@
       <b>stateToken</b>
     </field>
   </mapping>
-
   <mapping type="one-way">
-    <class-a>
-      org.ourproject.kune.platf.server.domain.Content
-    </class-a>
-    <class-b>org.ourproject.kune.platf.client.dto.LinkDTO</class-b>
+    <class-a> org.ourproject.kune.platf.server.domain.Content </class-a>
+    <class-b>cc.kune.core.shared.dto.LinkDTO</class-b>
     <field>
       <a>lastRevision.title</a>
       <b>longName</b>
@@ -240,102 +154,57 @@
       <b>link</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.ContainerDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.Container
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.ContainerDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.Container </class-b>
     <field>
       <a>contents</a>
       <b>contents</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.ContentSimpleDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.Content
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.ContentSimpleDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.Content </b-hint>
     </field>
-
     <field>
       <a>absolutePath</a>
       <b>absolutePath</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.ContainerSimpleDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.Container
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.ContainerSimpleDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.Container </b-hint>
     </field>
-
     <field>
       <a>childs</a>
       <b>childs</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.ContainerSimpleDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.Container
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.ContainerSimpleDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.Container </b-hint>
     </field>
-
     <field>
       <a get-method="getStateToken">stateToken</a>
       <b>stateToken</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.UserInfoDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.users.UserInfo
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.UserInfoDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.users.UserInfo </class-b>
     <field>
       <a>user</a>
       <b>user</b>
-      <a-hint>
-        org.ourproject.kune.platf.client.dto.UserSimpleDTO
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.server.domain.User
-      </b-hint>
+      <a-hint> cc.kune.core.shared.dto.UserSimpleDTO </a-hint>
+      <b-hint> org.ourproject.kune.platf.server.domain.User </b-hint>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.ParticipationDataDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.sn.ParticipationData
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.ParticipationDataDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.sn.ParticipationData </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.I18nLanguageDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.I18nLanguage
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.I18nLanguageDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.I18nLanguage </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.I18nCountryDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.I18nCountry
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.I18nCountryDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.I18nCountry </class-b>
   </mapping>
-
   <mapping>
     <class-a>org.ourproject.kune.platf.server.domain.User</class-a>
-    <class-b>org.ourproject.kune.platf.client.dto.UserSimpleDTO</class-b>
+    <class-b>cc.kune.core.shared.dto.UserSimpleDTO</class-b>
     <field type="one-way">
       <a>hasLogo</a>
       <b>hasLogo</b>
@@ -345,177 +214,94 @@
       <b>stateToken</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>org.ourproject.kune.platf.client.dto.TagDTO</class-a>
+    <class-a>cc.kune.core.shared.dto.TagDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.domain.Tag</class-b>
   </mapping>
-
-<mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.TagCloudResultDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.TagCloudResult
-    </class-b>
-  </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.TagCountDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.TagCount
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.TagCloudResultDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.TagCloudResult </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.RateResultDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.RateResult
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.TagCountDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.TagCount </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.server.domain.Comment
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.client.dto.CommentDTO
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.RateResultDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.RateResult </class-b>
+  </mapping>
+  <mapping>
+    <class-a> org.ourproject.kune.platf.server.domain.Comment </class-a>
+    <class-b> cc.kune.core.shared.dto.CommentDTO </class-b>
     <field>
       <a>author</a>
       <b>author</b>
-      <a-hint>
-        org.ourproject.kune.platf.server.domain.User
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.client.dto.UserSimpleDTO
-      </b-hint>
+      <a-hint> org.ourproject.kune.platf.server.domain.User </a-hint>
+      <b-hint> cc.kune.core.shared.dto.UserSimpleDTO </b-hint>
     </field>
-
     <field>
       <a>childs</a>
       <b>childs</b>
-      <a-hint>
-        org.ourproject.kune.platf.server.domain.Comment
-      </a-hint>
-      <b-hint>
-        org.ourproject.kune.platf.client.dto.CommentDTO
-      </b-hint>
+      <a-hint> org.ourproject.kune.platf.server.domain.Comment </a-hint>
+      <b-hint> cc.kune.core.shared.dto.CommentDTO </b-hint>
     </field>
-
     <field type="one-way">
-      <a get-method="getPositiveVotersCount">
-        positiveVotersCount
-      </a>
+      <a get-method="getPositiveVotersCount"> positiveVotersCount </a>
       <b>positiveVotersCount</b>
     </field>
-
     <field type="one-way">
-      <a get-method="getNegativeVotersCount">
-        negativeVotersCount
-      </a>
+      <a get-method="getNegativeVotersCount"> negativeVotersCount </a>
       <b>negativeVotersCount</b>
     </field>
-
     <field type="one-way">
-      <a get-method="getAbuseInformersCount">
-        abuseInformersCount
-      </a>
+      <a get-method="getAbuseInformersCount"> abuseInformersCount </a>
       <b>abuseInformersCount</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>org.ourproject.kune.platf.client.dto.LinkDTO</class-a>
+    <class-a>cc.kune.core.shared.dto.LinkDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.domain.User</class-b>
     <field>
       <a>longName</a>
       <b>name</b>
     </field>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.ChatUserParamsDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.ChatUserParams
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.ChatUserParamsDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.ChatUserParams </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO
-    </class-a>
+    <class-a> cc.kune.core.shared.dto.SocialNetworkVisibilityDTO </class-a>
     <class-b>
-      org.ourproject.kune.platf.server.domain.SocialNetworkVisibility
-    </class-b>
+      org.ourproject.kune.platf.server.domain.SocialNetworkVisibility </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.AdmissionTypeDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.AdmissionType
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.AdmissionTypeDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.AdmissionType </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.UserBuddiesVisibilityDTO
-    </class-a>
+    <class-a> cc.kune.core.shared.dto.UserBuddiesVisibilityDTO </class-a>
     <class-b>
-      org.ourproject.kune.platf.server.domain.UserBuddiesVisibility
-    </class-b>
+      org.ourproject.kune.platf.server.domain.UserBuddiesVisibility </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.ContentStatusDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.ContentStatus
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.ContentStatusDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.ContentStatus </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.AccessRolDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.access.AccessRol
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.AccessRolDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.access.AccessRol </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.ToolSimpleDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.tool.ToolSimple
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.ToolSimpleDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.tool.ToolSimple </class-b>
   </mapping>
-
   <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.UserBuddiesDataDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.sn.UserBuddiesData
-    </class-b>
+    <class-a> cc.kune.core.shared.dto.UserBuddiesDataDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.sn.UserBuddiesData </class-b>
   </mapping>
-
-    <mapping>
-    <class-a>
-      org.ourproject.kune.platf.client.dto.SocialNetworkDataDTO
-    </class-a>
-    <class-b>
-      org.ourproject.kune.platf.server.domain.SocialNetworkData
-    </class-b>
+  <mapping>
+    <class-a> cc.kune.core.shared.dto.SocialNetworkDataDTO </class-a>
+    <class-b> org.ourproject.kune.platf.server.domain.SocialNetworkData </class-b>
   </mapping>
 </mappings>

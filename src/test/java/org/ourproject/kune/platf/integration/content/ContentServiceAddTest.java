@@ -9,17 +9,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.server.DocumentServerTool;
-import org.ourproject.kune.platf.client.dto.AccessRightsDTO;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.ContainerSimpleDTO;
-import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.wiki.server.WikiServerTool;
+
+import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.dto.ContainerDTO;
+import cc.kune.core.shared.dto.ContainerSimpleDTO;
+import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 

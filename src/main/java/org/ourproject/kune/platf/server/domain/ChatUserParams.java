@@ -21,8 +21,9 @@ package org.ourproject.kune.platf.server.domain;
 
 import java.io.Serializable;
 
-import com.calclab.emiteuimodule.client.SubscriptionMode;
+import cc.kune.core.shared.dto.SubscriptionMode;
 
+@Deprecated
 public class ChatUserParams implements Serializable {
 
     private static final long serialVersionUID = -1343712336914940957L;
@@ -31,9 +32,9 @@ public class ChatUserParams implements Serializable {
 
     private boolean publishRoster;
 
-    private SubscriptionMode subscriptionMode;
-
     private String chatColor;
+
+    private SubscriptionMode subscriptionMode;
 
     public ChatUserParams() {
         this(null, false, SubscriptionMode.autoAcceptAll, null);

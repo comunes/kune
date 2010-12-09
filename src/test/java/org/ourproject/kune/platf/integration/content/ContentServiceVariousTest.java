@@ -12,17 +12,18 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.server.DocumentServerTool;
-import org.ourproject.kune.platf.client.dto.ContainerDTO;
-import org.ourproject.kune.platf.client.dto.ContentSimpleDTO;
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
-import org.ourproject.kune.platf.client.dto.TagCountDTO;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.shared.dto.ContainerDTO;
+import cc.kune.core.shared.dto.ContentSimpleDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.dto.TagCloudResultDTO;
+import cc.kune.core.shared.dto.TagCountDTO;
+import cc.kune.core.shared.dto.UserSimpleDTO;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 

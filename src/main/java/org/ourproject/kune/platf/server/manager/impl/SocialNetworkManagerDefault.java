@@ -23,14 +23,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.client.dto.GroupType;
-import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.AlreadyGroupMemberException;
-import org.ourproject.kune.platf.client.errors.AlreadyUserMemberException;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.errors.LastAdminInGroupException;
-import org.ourproject.kune.platf.client.errors.UserMustBeLoggedException;
 import org.ourproject.kune.platf.server.ServerException;
 import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
@@ -46,6 +38,15 @@ import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.platf.server.sn.UserBuddiesData;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.AlreadyGroupMemberException;
+import cc.kune.core.client.errors.AlreadyUserMemberException;
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.errors.LastAdminInGroupException;
+import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.shared.dto.GroupType;
+import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -1,23 +1,11 @@
 package org.ourproject.kune.platf.integration.site;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.I18nCountryDTO;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.TimeZoneDTO;
-import org.ourproject.kune.platf.client.dto.UserDTO;
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.errors.EmailAddressInUseException;
-import org.ourproject.kune.platf.client.errors.GroupNameInUseException;
-import org.ourproject.kune.platf.client.errors.SessionExpiredException;
-import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.domain.Group;
@@ -27,7 +15,18 @@ import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 
-import com.calclab.emiteuimodule.client.SubscriptionMode;
+import cc.kune.core.client.errors.EmailAddressInUseException;
+import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.SessionExpiredException;
+import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.I18nCountryDTO;
+import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.SubscriptionMode;
+import cc.kune.core.shared.dto.TimeZoneDTO;
+import cc.kune.core.shared.dto.UserDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
+
 import com.google.inject.Inject;
 
 public class UserServiceTest extends IntegrationTest {

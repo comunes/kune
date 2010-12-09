@@ -1,12 +1,13 @@
 package org.ourproject.kune.workspace.client.site;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.noti.ConfirmationAsk;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessage;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

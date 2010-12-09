@@ -26,16 +26,17 @@ import org.ourproject.kune.gallery.client.GalleryClientTool;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
-import org.ourproject.kune.platf.client.dto.AccessRolDTO;
-import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.AccessRolDTO;
+import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

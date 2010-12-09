@@ -1,10 +1,11 @@
 package org.ourproject.kune.platf.client.ui.rte.insertspecialchar.utf8;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialogView;
+
+import cc.kune.core.client.utils.TextUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.Scheduler;

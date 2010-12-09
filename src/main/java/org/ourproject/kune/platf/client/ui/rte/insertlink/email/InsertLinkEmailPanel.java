@@ -19,9 +19,10 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertlink.email;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPanel;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.gwtext.client.widgets.form.VType;
 

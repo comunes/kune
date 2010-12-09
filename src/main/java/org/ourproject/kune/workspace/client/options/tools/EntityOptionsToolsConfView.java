@@ -20,7 +20,8 @@
 package org.ourproject.kune.workspace.client.options.tools;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.ToolSimpleDTO;
+
+import cc.kune.core.shared.dto.ToolSimpleDTO;
 
 public interface EntityOptionsToolsConfView extends View {
 

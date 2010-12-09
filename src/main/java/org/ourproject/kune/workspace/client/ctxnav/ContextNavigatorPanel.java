@@ -22,11 +22,12 @@ package org.ourproject.kune.workspace.client.ctxnav;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
-import org.ourproject.kune.platf.client.dto.ContentStatusDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener;

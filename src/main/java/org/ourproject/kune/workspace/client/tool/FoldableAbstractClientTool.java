@@ -19,10 +19,11 @@
  */
 package org.ourproject.kune.workspace.client.tool;
 
-import org.ourproject.kune.platf.client.dto.BasicMimeTypeDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
+
+import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 
 public abstract class FoldableAbstractClientTool extends AbstractClientTool {
     public static final String UPLOADEDFILE_SUFFIX = "uploaded";

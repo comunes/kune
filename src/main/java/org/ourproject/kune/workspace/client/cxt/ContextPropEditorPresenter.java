@@ -22,20 +22,21 @@ package org.ourproject.kune.workspace.client.cxt;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.dto.AccessListsDTO;
-import org.ourproject.kune.platf.client.dto.I18nLanguageDTO;
-import org.ourproject.kune.platf.client.dto.StateContainerDTO;
-import org.ourproject.kune.platf.client.dto.StateContentDTO;
-import org.ourproject.kune.platf.client.dto.TagCloudResultDTO;
-import org.ourproject.kune.platf.client.dto.UserSimpleDTO;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.rpc.AsyncCallbackSimple;
-import org.ourproject.kune.platf.client.rpc.ContentServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
+
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.AccessListsDTO;
+import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.TagCloudResultDTO;
+import cc.kune.core.shared.dto.UserSimpleDTO;
 
 import com.calclab.suco.client.ioc.Provider;
 

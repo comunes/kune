@@ -1,9 +1,10 @@
 package org.ourproject.kune.platf.integration;
 
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.rpcservices.UserService;
 
 import com.google.inject.Inject;
 

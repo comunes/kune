@@ -6,8 +6,6 @@ import static org.junit.Assert.assertSame;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.content.CommentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
@@ -18,6 +16,9 @@ import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
+
+import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.shared.dto.StateToken;
 
 public class FinderTest {
 

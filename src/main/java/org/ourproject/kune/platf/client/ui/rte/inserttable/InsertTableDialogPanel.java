@@ -1,11 +1,12 @@
 package org.ourproject.kune.platf.client.ui.rte.inserttable;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.palette.SimplePalette;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
+
+import cc.kune.core.client.utils.TextUtils;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;

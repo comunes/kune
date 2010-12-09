@@ -19,9 +19,10 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener0;
 import com.gwtext.client.core.EventObject;

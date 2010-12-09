@@ -23,12 +23,6 @@ import org.ourproject.kune.blogs.server.BlogServerModule;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.gallery.server.GalleryServerModule;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.GroupService;
-import org.ourproject.kune.platf.client.rpc.I18nService;
-import org.ourproject.kune.platf.client.rpc.SiteService;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
-import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.manager.file.EntityLogoDownloadManager;
@@ -49,6 +43,13 @@ import org.ourproject.kune.rack.filters.LogFilter;
 import org.ourproject.kune.rack.filters.RedirectFilter;
 import org.ourproject.kune.rack.filters.rest.RESTServicesModule;
 import org.ourproject.kune.wiki.server.WikiServerModule;
+
+import cc.kune.core.client.rpcservices.ContentService;
+import cc.kune.core.client.rpcservices.GroupService;
+import cc.kune.core.client.rpcservices.I18nService;
+import cc.kune.core.client.rpcservices.SiteService;
+import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.client.rpcservices.UserService;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;

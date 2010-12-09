@@ -19,14 +19,15 @@
  */
 package org.ourproject.kune.platf.server.manager;
 
-import org.ourproject.kune.platf.client.dto.SocialNetworkRequestResult;
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.platf.server.domain.SocialNetworkData;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 
 public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 

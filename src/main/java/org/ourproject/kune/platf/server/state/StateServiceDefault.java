@@ -19,7 +19,6 @@
  */
 package org.ourproject.kune.platf.server.state;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.domain.Container;
@@ -31,6 +30,8 @@ import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagUserContentManager;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

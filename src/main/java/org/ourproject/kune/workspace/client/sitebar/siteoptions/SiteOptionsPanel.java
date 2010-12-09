@@ -20,10 +20,11 @@
 package org.ourproject.kune.workspace.client.sitebar.siteoptions;
 
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
-import org.ourproject.kune.platf.client.i18n.I18nUITranslationService;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.dialogs.InfoDialog;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.client.i18n.I18nUITranslationService;
 
 import com.google.gwt.user.client.ui.Frame;
 import com.gwtext.client.widgets.Panel;

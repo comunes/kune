@@ -21,14 +21,15 @@ package org.ourproject.kune.workspace.client.socialnet;
 
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridMenuPanel;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.user.client.ui.Widget;

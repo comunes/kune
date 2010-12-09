@@ -19,13 +19,6 @@
  */
 package org.ourproject.kune.platf.server.rpc;
 
-import org.ourproject.kune.platf.client.dto.AdmissionTypeDTO;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.dto.SocialNetworkVisibilityDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.DefaultException;
-import org.ourproject.kune.platf.client.rpc.GroupService;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
@@ -40,6 +33,14 @@ import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
+
+import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.rpcservices.GroupService;
+import cc.kune.core.shared.dto.AdmissionTypeDTO;
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.dto.SocialNetworkVisibilityDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

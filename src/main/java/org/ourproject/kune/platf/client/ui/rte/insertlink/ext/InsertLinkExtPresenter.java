@@ -19,9 +19,10 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertlink.ext;
 
-import org.ourproject.kune.platf.client.ui.TextUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.abstractlink.InsertLinkAbstractPresenter;
+
+import cc.kune.core.client.utils.TextUtils;
 
 public class InsertLinkExtPresenter extends InsertLinkAbstractPresenter implements InsertLinkExt {
 

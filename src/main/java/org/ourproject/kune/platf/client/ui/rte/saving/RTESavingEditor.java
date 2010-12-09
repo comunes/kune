@@ -1,7 +1,8 @@
 package org.ourproject.kune.platf.client.ui.rte.saving;
 
-import org.ourproject.kune.platf.client.actions.BeforeActionListener;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
+
+import cc.kune.core.client.actions.BeforeActionListener;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

@@ -27,10 +27,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
+
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 

@@ -25,13 +25,14 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
-import org.ourproject.kune.platf.client.dto.GroupDTO;
-import org.ourproject.kune.platf.client.dto.StateToken;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
+
+import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.HorizontalPanel;

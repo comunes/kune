@@ -19,12 +19,13 @@
  */
 package org.ourproject.kune.platf.server.access;
 
-import org.ourproject.kune.platf.client.errors.AccessViolationException;
-import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.domain.AccessLists;
 import org.ourproject.kune.platf.server.domain.Container;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.DefaultException;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

@@ -24,13 +24,6 @@ import static org.ourproject.kune.platf.server.OutermostCallInterceptor.outermos
 import org.ourproject.kune.app.server.AbstractExtendedModule;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.chat.server.managers.XmppManagerDefault;
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
-import org.ourproject.kune.platf.client.rpc.ContentService;
-import org.ourproject.kune.platf.client.rpc.GroupService;
-import org.ourproject.kune.platf.client.rpc.I18nService;
-import org.ourproject.kune.platf.client.rpc.SiteService;
-import org.ourproject.kune.platf.client.rpc.SocialNetworkService;
-import org.ourproject.kune.platf.client.rpc.UserService;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.access.AccessRightsServiceDefault;
 import org.ourproject.kune.platf.server.access.AccessService;
@@ -107,6 +100,14 @@ import org.ourproject.kune.platf.server.state.StateServiceDefault;
 import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 import org.ourproject.kune.platf.server.users.UserInfoService;
 import org.ourproject.kune.platf.server.users.UserInfoServiceDefault;
+
+import cc.kune.core.client.rpcservices.ContentService;
+import cc.kune.core.client.rpcservices.GroupService;
+import cc.kune.core.client.rpcservices.I18nService;
+import cc.kune.core.client.rpcservices.SiteService;
+import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;

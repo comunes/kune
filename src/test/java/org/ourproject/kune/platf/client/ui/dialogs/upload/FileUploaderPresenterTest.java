@@ -7,10 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.workspace.client.upload.FileUploaderPresenter;
 import org.ourproject.kune.workspace.client.upload.FileUploaderView;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.StateToken;
 
 public class FileUploaderPresenterTest {
 

@@ -3,7 +3,8 @@ package org.ourproject.kune.platf.client.actions.common;
 import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.state.StateManager;
+
+import cc.kune.core.client.state.StateManager;
 
 public class GotoGroupAction extends AbstractExtendedAction {
     private final String name;

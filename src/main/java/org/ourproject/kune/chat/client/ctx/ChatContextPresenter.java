@@ -20,9 +20,10 @@
 package org.ourproject.kune.chat.client.ctx;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.FoldableContextPresenter;
+
+import cc.kune.core.client.state.StateManager;
 
 import com.calclab.suco.client.ioc.Provider;
 

@@ -22,13 +22,14 @@ package org.ourproject.kune.workspace.client.licensewizard;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.dto.LicenseDTO;
-import org.ourproject.kune.platf.client.state.Session;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFrdFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdFormView;
+
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.LicenseDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener;

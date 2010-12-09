@@ -44,7 +44,8 @@ import org.hibernate.validator.Email;
 import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Pattern;
-import org.ourproject.kune.platf.client.dto.StateToken;
+
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;

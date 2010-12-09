@@ -19,15 +19,16 @@
  */
 package org.ourproject.kune.workspace.client.options.pscape;
 
-import org.ourproject.kune.platf.client.dto.UserInfoDTO;
-import org.ourproject.kune.platf.client.rpc.GroupServiceAsync;
-import org.ourproject.kune.platf.client.state.Session;
-import org.ourproject.kune.platf.client.state.StateManager;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.themes.WsThemeSelector;
+
+import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.ioc.Provider;

@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.sitepublic;
 
-import org.ourproject.kune.platf.client.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 
 public interface SitePublicSpaceLink {
 

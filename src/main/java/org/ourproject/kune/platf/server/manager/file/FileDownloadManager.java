@@ -31,8 +31,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ourproject.kune.platf.client.dto.StateToken;
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.server.access.AccessRol;
@@ -44,6 +42,9 @@ import org.ourproject.kune.platf.server.content.ContentUtils;
 import org.ourproject.kune.platf.server.domain.BasicMimeType;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
+
+import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 

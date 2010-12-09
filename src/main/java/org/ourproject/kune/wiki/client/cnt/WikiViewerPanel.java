@@ -19,9 +19,10 @@
  */
 package org.ourproject.kune.wiki.client.cnt;
 
-import org.ourproject.kune.platf.client.i18n.I18nTranslationService;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class WikiViewerPanel extends FoldableContentPanel implements WikiViewerView {
     public WikiViewerPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {

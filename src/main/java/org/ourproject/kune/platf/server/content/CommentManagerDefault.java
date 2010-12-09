@@ -21,13 +21,14 @@ package org.ourproject.kune.platf.server.content;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.client.errors.ContentNotFoundException;
-import org.ourproject.kune.platf.client.errors.DefaultException;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.domain.Comment;
 import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
+
+import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.client.errors.DefaultException;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
