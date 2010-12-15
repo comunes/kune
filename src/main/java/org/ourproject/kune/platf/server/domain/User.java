@@ -78,7 +78,7 @@ public class User implements HasId {
     @Length(min = 6, max = 40)
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     private Group userGroup;
 
     @Field(index = Index.TOKENIZED, store = Store.NO)
@@ -104,7 +104,7 @@ public class User implements HasId {
     @NotNull
     private TimeZone timezone;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     private final CustomProperties customProperties;
 
     private UserBuddiesVisibility buddiesVisibility;

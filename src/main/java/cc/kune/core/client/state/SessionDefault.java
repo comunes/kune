@@ -22,8 +22,8 @@ package cc.kune.core.client.state;
 import java.util.Collection;
 import java.util.List;
 
-import cc.kune.core.client.CoreEventBus;
 import cc.kune.core.client.cookies.CookiesManager;
+import cc.kune.core.client.i18n.I18nReadyEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.shared.dto.I18nCountryDTO;
@@ -47,9 +47,9 @@ import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.mvp4g.client.event.BaseEventHandler;
+import com.gwtplatform.mvp.client.EventBus;
 
-public class SessionDefault extends BaseEventHandler<CoreEventBus> implements Session {
+public class SessionDefault implements Session {
     private String userHash;
     private InitDataDTO initData;
     private UserInfoDTO currentUserInfo;
@@ -62,6 +62,9 @@ public class SessionDefault extends BaseEventHandler<CoreEventBus> implements Se
     private final Event<UserInfoDTO> onUserSignIn;
     private final Event0 onUserSignOut;
     private final Provider<UserServiceAsync> userServiceProvider;
+
+    @Inject
+    private static EventBus eventBus;
 
     @Inject
     public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider) {
@@ -241,7 +244,7 @@ public class SessionDefault extends BaseEventHandler<CoreEventBus> implements Se
 
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
         this.currentLanguage = currentLanguage;
-        eventBus.i18nReady();
+        eventBus.fireEvent(new I18nReadyEvent());
     }
 
     public void setCurrentState(final StateAbstractDTO currentState) {

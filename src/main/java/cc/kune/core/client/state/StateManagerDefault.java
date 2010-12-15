@@ -21,9 +21,9 @@ package cc.kune.core.client.state;
 
 import java.util.HashMap;
 
-import cc.kune.core.client.CoreEventBus;
 import cc.kune.core.client.actions.BeforeActionCollection;
 import cc.kune.core.client.actions.BeforeActionListener;
+import cc.kune.core.client.notify.SpinerPresenter;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -40,10 +40,8 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.inject.Inject;
-import com.mvp4g.client.event.BaseEventHandler;
 
-public class StateManagerDefault extends BaseEventHandler<CoreEventBus> implements StateManager,
-        ValueChangeHandler<String> {
+public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
     private final ContentProvider contentProvider;
     private StateToken previousToken;
     /**
@@ -59,10 +57,12 @@ public class StateManagerDefault extends BaseEventHandler<CoreEventBus> implemen
     private final Event2<String, String> onToolChanged;
     private final Event2<String, String> onGroupChanged;
     private final BeforeActionCollection beforeStateChangeCollection;
+    private final SpinerPresenter spiner;
 
     @Inject
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
-            final HistoryWrapper history) {
+            final HistoryWrapper history, final SpinerPresenter spinner) {
+        this.spiner = spinner;
         // Put this outside here
         History.addValueChangeHandler(this);
         this.contentProvider = contentProvider;
@@ -201,7 +201,7 @@ public class StateManagerDefault extends BaseEventHandler<CoreEventBus> implemen
     void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
         onStateChanged.fire(newState);
-        eventBus.hideSpin();
+        spiner.fade();
         checkGroupAndToolChange(newState);
         previousToken = newState.getStateToken();
 

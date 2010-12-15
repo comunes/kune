@@ -21,8 +21,9 @@ package org.ourproject.kune.app.client;
 
 import org.ourproject.kune.platf.client.services.Loader;
 import org.ourproject.kune.platf.client.services.PlatformModule;
-import org.ourproject.kune.ws.armor.client.Body;
-import org.ourproject.kune.ws.armor.client.resources.WsArmorResources;
+
+import cc.kune.core.ws.armor.client.Body;
+import cc.kune.core.ws.armor.client.resources.WsArmorResources;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;

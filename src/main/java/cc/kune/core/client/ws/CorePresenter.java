@@ -1,32 +1,37 @@
 package cc.kune.core.client.ws;
 
-import cc.kune.core.client.CoreEventBus;
-import cc.kune.core.client.ws.CorePresenter.ICoreView;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
-import com.mvp4g.client.annotation.Presenter;
-import com.mvp4g.client.presenter.BasePresenter;
+import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 /**
  * The Class CorePresenter.
  */
-@Presenter(view = CoreView.class)
-public class CorePresenter extends BasePresenter<ICoreView, CoreEventBus> {
+public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresenter.CoreProxy> {
+    @ProxyCodeSplit
+    @NameToken("home")
+    public interface CoreProxy extends ProxyPlace<CorePresenter> {
+    }
 
-    /**
-     * The Interface ICoreView.
-     */
-    public interface ICoreView {
+    public interface CoreView extends View {
     }
 
     @Inject
-    public CorePresenter(final I18nTranslationService i18n) {
+    public CorePresenter(final EventBus eventBus, final CoreView view, final CoreProxy proxy,
+            final I18nTranslationService i18n) {
+        super(eventBus, view, proxy);
     }
 
-    /**
-     * On start.
-     */
-    public void onStart() {
+    @Override
+    protected void revealInParent() {
+        RevealRootLayoutContentEvent.fire(eventBus, this);
     }
+
 }

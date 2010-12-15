@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.platf.server.domain;
 
-public enum AdmissionType {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public enum AdmissionType implements IsSerializable {
     Moderated, Open, Closed
 }

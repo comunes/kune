@@ -9,6 +9,7 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import cc.kune.core.client.actions.BeforeActionListener;
+import cc.kune.core.client.notify.SpinerPresenter;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateToken;
 
@@ -36,7 +37,8 @@ public class StateManagerTest {
         contentProvider = Mockito.mock(ContentProvider.class);
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);
-        stateManager = new StateManagerDefault(contentProvider, session, history);
+        final SpinerPresenter spiner = Mockito.mock(SpinerPresenter.class);
+        stateManager = new StateManagerDefault(contentProvider, session, history, spiner);
         Mockito.when(session.getUserHash()).thenReturn(HASH);
         state = Mockito.mock(StateAbstractDTO.class);
         stateChangeListener = new MockedListener<StateAbstractDTO>();

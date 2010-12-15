@@ -8,6 +8,10 @@ body {
     margin: 5px;
 }
 
+* {
+ font-family: 'Droid Sans', Arial;
+}
+
 body.fontface {font: 'Droid Sans', Arial;}
 
 a { 

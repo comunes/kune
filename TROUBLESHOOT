@@ -69,3 +69,5 @@ If you have some tests with error like "can not be found in source packages. Che
  Error: method should override method xxx (or similar)
  Fix: Project --> Properties --> Java Compiler ---> Unenable project specific settings
 
+ Error: Running Web application seems that are running an old GWT code
+ Fix: Open Run > Run configurations and remove a recreate your launch configuration

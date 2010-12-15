@@ -21,7 +21,8 @@ package cc.kune.core.client.errors;
 
 import org.ourproject.common.client.notify.NotifyLevel;
 
-import cc.kune.core.client.CoreEventBus;
+import cc.kune.core.client.notify.SpinerPresenter;
+import cc.kune.core.client.notify.UserNotifierPresenter;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -31,23 +32,30 @@ import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.inject.Inject;
-import com.mvp4g.client.event.BaseEventHandler;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
-public class ErrorHandler extends BaseEventHandler<CoreEventBus> {
+public class ErrorHandler {
     private final Session session;
     private final I18nTranslationService i18n;
     private final Event0 onSessionExpired;
+    private final UserNotifierPresenter notifier;
+    private final SpinerPresenter spiner;
+    private final PlaceManager placeManager;
 
     @Inject
-    public ErrorHandler(final Session session, final I18nTranslationService i18n) {
+    public ErrorHandler(final Session session, final I18nTranslationService i18n, final UserNotifierPresenter notifier,
+            final SpinerPresenter spiner, final PlaceManager placeManager) {
         this.session = session;
         this.i18n = i18n;
+        this.notifier = notifier;
+        this.spiner = spiner;
+        this.placeManager = placeManager;
         this.onSessionExpired = new Event0("onSessionExpired");
     }
 
     public void doSessionExpired() {
         onSessionExpired.fire();
-        eventBus.notify(NotifyLevel.info, "Your session has expired. Please log in again.");
+        notifier.notify(NotifyLevel.info, "Your session has expired. Please log in again.");
     }
 
     public void onSessionExpired(final Listener0 listener) {
@@ -55,10 +63,10 @@ public class ErrorHandler extends BaseEventHandler<CoreEventBus> {
     }
 
     public void process(final Throwable caught) {
-        eventBus.hideSpin();
+        spiner.fade();
         if (caught instanceof AccessViolationException) {
             logException(caught);
-            eventBus.notify(NotifyLevel.error, i18n.t("You do not have rights to perform that action"));
+            notifier.notify(NotifyLevel.error, i18n.t("You do not have rights to perform that action"));
         } else if (caught instanceof SessionExpiredException) {
             logException(caught);
             doSessionExpired();
@@ -67,43 +75,46 @@ public class ErrorHandler extends BaseEventHandler<CoreEventBus> {
             if (session.isLogged()) {
                 doSessionExpired();
             } else {
-                eventBus.notify(NotifyLevel.important, i18n.t("Please sign in or register to collaborate"));
+                notifier.notify(NotifyLevel.important, i18n.t("Please sign in or register to collaborate"));
             }
         } else if (caught instanceof GroupNotFoundException) {
             logException(caught);
-
-            eventBus.notify(NotifyLevel.veryImportant, i18n.t("Group not found"));
-            eventBus.gotoToken("");
+            notifier.notify(NotifyLevel.veryImportant, i18n.t("Group not found"));
+            goHome();
         } else if (caught instanceof IncompatibleRemoteServiceException) {
-            eventBus.notify(NotifyLevel.error,
+            notifier.notify(NotifyLevel.error,
                     i18n.t("Your browser is outdated with the server software. Please reload this page."));
         } else if (caught instanceof ContentNotFoundException) {
             logException(caught);
-            eventBus.notify(NotifyLevel.veryImportant, i18n.t("Content not found"));
-            eventBus.gotoToken("");
+            notifier.notify(NotifyLevel.veryImportant, i18n.t("Content not found"));
+            goHome();
         } else if (caught instanceof ContentNotPermittedException) {
             logException(caught);
-            eventBus.notify(NotifyLevel.error, i18n.t("Action not permitted in this location"));
-            eventBus.gotoToken("");
+            notifier.notify(NotifyLevel.error, i18n.t("Action not permitted in this location"));
+            goHome();
         } else if (caught instanceof ContainerNotPermittedException) {
             logException(caught);
-            eventBus.notify(NotifyLevel.error, i18n.t("Action not permitted in this location"));
-            eventBus.gotoToken("");
+            notifier.notify(NotifyLevel.error, i18n.t("Action not permitted in this location"));
+            goHome();
         } else if (caught instanceof LastAdminInGroupException) {
             logException(caught);
-            eventBus.alert(i18n.t("Warning"), i18n.t("Sorry, you are the last admin of this group."
+            notifier.alert(i18n.t("Warning"), i18n.t("Sorry, you are the last admin of this group."
                     + " Look for someone to substitute you appropriately as admin before leaving this group."));
         } else if (caught instanceof AlreadyGroupMemberException) {
             logException(caught);
-            eventBus.notify(NotifyLevel.error, i18n.t("This group is already a group member"));
+            notifier.notify(NotifyLevel.error, i18n.t("This group is already a group member"));
         } else if (caught instanceof AlreadyUserMemberException) {
             logException(caught);
-            eventBus.notify(NotifyLevel.error, i18n.t("This user is already a group member"));
+            notifier.notify(NotifyLevel.error, i18n.t("This user is already a group member"));
         } else {
             logException(caught, true);
-            eventBus.notify(NotifyLevel.error, i18n.t("Error performing operation"));
+            notifier.notify(NotifyLevel.error, i18n.t("Error performing operation"));
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", caught);
         }
+    }
+
+    private void goHome() {
+        placeManager.revealDefaultPlace();
     }
 
     private void logException(final Throwable caught) {

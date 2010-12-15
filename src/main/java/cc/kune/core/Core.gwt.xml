@@ -10,16 +10,21 @@
   <public path="public" />
   <!-- Dependencies ============================================= -->
   <inherits name="com.google.gwt.user.User" />
-   <inherits name='com.mvp4g.Mvp4gModule' /> 
-  <inherits name="org.ourproject.kune.ws.armor.WsArmor" />
+  <!-- <inherits name='com.mvp4g.Mvp4gModule' /> -->
+  <inherits name="cc.kune.core.ws.armor.WsArmor" />
   <inherits name="org.ourproject.common.Common" />
   <inherits name="com.extjs.gxt.ui.GXT" />
   <inherits name="com.calclab.suco.Suco" />
+  <inherits name='com.gwtplatform.mvp.Mvp' />
+  <define-configuration-property name="gin.ginjector"
+    is-multi-valued="false" />
+  <set-configuration-property name="gin.ginjector"
+    value="cc.kune.core.client.CoreGinjector" />
   <!-- Styles =================================================== -->
   <stylesheet src="ws.css" />
   <stylesheet src="fontface/stylesheet.css" />
   <!-- Entrypoint =============================================== -->
-  <entry-point class="cc.kune.core.client.KuneEntryPoint" />
+  <!-- <entry-point class="cc.kune.core.client.KuneEntryPoint" /> -->
   <!-- NOTE: this only compiles for chromium/safari ============= -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
   <!-- <set-property name="user.agent" value="gecko1_8" /> -->
