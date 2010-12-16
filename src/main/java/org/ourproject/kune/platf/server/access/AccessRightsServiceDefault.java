@@ -22,11 +22,12 @@ package org.ourproject.kune.platf.server.access;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.GroupList;
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
-import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Group;
+import cc.kune.domain.GroupList;
+import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.User;
 
 import com.google.inject.Singleton;
 

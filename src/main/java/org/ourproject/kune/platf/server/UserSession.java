@@ -19,8 +19,9 @@
  */
 package org.ourproject.kune.platf.server;
 
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.UserManager;
+
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.SessionScoped;

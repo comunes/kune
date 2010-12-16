@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.server.users;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.Tag;
+import cc.kune.domain.Tag;
 
 public class Link {
     private String shortName;

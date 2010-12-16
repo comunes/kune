@@ -35,16 +35,16 @@ import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContentUtils;
-import org.ourproject.kune.platf.server.domain.BasicMimeType;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.FileManager;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 import org.ourproject.kune.platf.server.utils.StringW;
 
 import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.domain.BasicMimeType;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;

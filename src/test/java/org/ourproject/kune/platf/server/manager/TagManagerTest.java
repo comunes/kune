@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.content.ContentManager;
-import org.ourproject.kune.platf.server.domain.Tag;
+
+import cc.kune.domain.Tag;
 
 import com.google.inject.Inject;
 

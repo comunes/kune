@@ -2,8 +2,9 @@ package org.ourproject.kune.platf.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.server.domain.PropertySubgroup;
 import org.ourproject.kune.platf.server.manager.PropertySubgroupManager;
+
+import cc.kune.domain.PropertySubgroup;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

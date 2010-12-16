@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.sitebar.sitepublic;
 import org.ourproject.kune.platf.client.View;
 
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.GroupListDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
@@ -61,8 +61,8 @@ public class SitePublicSpaceLinkPresenter implements SitePublicSpaceLink {
                 final String publicUrl = stateTokenUtils.getPublicUrl(token);
                 view.setContentGotoPublicUrl(publicUrl);
                 if (state instanceof StateContentDTO) {
-                    StateContentDTO content = (StateContentDTO) state;
-                    if (content.getStatus().equals(ContentStatusDTO.publishedOnline)) {
+                    final StateContentDTO content = (StateContentDTO) state;
+                    if (content.getStatus().equals(ContentStatus.publishedOnline)) {
                         view.setContentPublic(true);
                     } else {
                         view.setContentPublic(false);

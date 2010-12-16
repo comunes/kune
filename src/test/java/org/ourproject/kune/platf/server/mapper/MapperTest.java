@@ -1,9 +1,6 @@
 package org.ourproject.kune.platf.server.mapper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,25 +10,14 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.domain.BasicMimeType;
-import org.ourproject.kune.platf.server.domain.Comment;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.GroupList;
-import org.ourproject.kune.platf.server.domain.GroupListMode;
-import org.ourproject.kune.platf.server.domain.License;
-import org.ourproject.kune.platf.server.domain.Revision;
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
-import org.ourproject.kune.platf.server.domain.SocialNetworkData;
-import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
-import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.domain.UserBuddiesVisibility;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 import org.ourproject.kune.platf.server.state.StateContent;
 
+import cc.kune.core.shared.domain.GroupListMode;
+import cc.kune.core.shared.domain.SocialNetworkVisibility;
+import cc.kune.core.shared.domain.UserBuddiesVisibility;
 import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
@@ -41,10 +27,19 @@ import cc.kune.core.shared.dto.GroupListDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
-import cc.kune.core.shared.dto.SocialNetworkVisibilityDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateToken;
-import cc.kune.core.shared.dto.UserBuddiesVisibilityDTO;
+import cc.kune.domain.BasicMimeType;
+import cc.kune.domain.Comment;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.GroupList;
+import cc.kune.domain.License;
+import cc.kune.domain.Revision;
+import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.User;
+import cc.kune.domain.utils.SocialNetworkData;
 
 import com.google.inject.Inject;
 
@@ -257,8 +252,8 @@ public class MapperTest {
                 UserBuddiesVisibility.onlyyou, budData, new AccessRights(false, false, true), true, true);
         final SocialNetworkDataDTO map = mapper.map(snResult, SocialNetworkDataDTO.class);
         assertNotNull(map);
-        assertEquals(SocialNetworkVisibilityDTO.onlymembers, map.getSocialNetworkVisibility());
-        assertEquals(UserBuddiesVisibilityDTO.onlyyou, map.getUserBuddiesVisibility());
+        assertEquals(SocialNetworkVisibility.onlymembers, map.getSocialNetworkVisibility());
+        assertEquals(UserBuddiesVisibility.onlyyou, map.getUserBuddiesVisibility());
         assertEquals("test", map.getGroupMembers().getAccessLists().getAdmins().getList().get(0).getShortName());
         assertEquals("test", map.getUserParticipation().getGroupsIsAdmin().get(0).getShortName());
         assertEquals("usertest", map.getUserBuddies().getBuddies().get(0).getShortName());

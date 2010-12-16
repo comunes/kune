@@ -22,13 +22,13 @@ package org.ourproject.kune.platf.server.state;
 import java.util.List;
 
 import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
-import org.ourproject.kune.platf.server.domain.SocialNetworkData;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 import cc.kune.core.shared.dto.StateToken;
+import cc.kune.domain.Group;
+import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.utils.SocialNetworkData;
 
 public abstract class StateAbstract {
 

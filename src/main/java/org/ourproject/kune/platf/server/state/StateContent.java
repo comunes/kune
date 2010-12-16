@@ -23,9 +23,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.domain.BasicMimeType;
-import org.ourproject.kune.platf.server.domain.ContentStatus;
-import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.domain.BasicMimeType;
+import cc.kune.domain.User;
+
 
 public class StateContent extends StateContainer {
 

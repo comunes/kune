@@ -1,14 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>cc</groupId>
+  <groupId>cc.kune</groupId>
   <artifactId>kune</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <version>0.0.7</version>
-  <description>
-    kune free/open/libre collaboration platform
-  </description>
   <name>kune</name>
+  <description> kune free/open/libre collaboration platform </description>
   <url>http://kune.ourproject.org</url>
   <properties>
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
@@ -16,6 +14,8 @@
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <slf4j.version>1.6.1</slf4j.version>
+    <openjpa.version>2.0.1</openjpa.version>
   </properties>
   <dependencies>
     <dependency>
@@ -148,7 +148,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.0.5</version>
+      <version>5.1.13</version>
     </dependency>
     <!-- hibernate JPA -->
     <dependency>
@@ -159,7 +159,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>3.1.0.GA</version>
+      <version>4.0.2.GA</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -204,9 +204,28 @@
       <version>2.0-SNAPSHOT</version>
     </dependency>
     <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.16</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>1.5.2</version>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
     </dependency>
     <!-- REST: xml and json (stax) -->
     <dependency>
@@ -304,8 +323,9 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.7</version>
-      <!-- <scope>test</scope> -->
+      <version>4.8.1</version>
+      <!-- =roo -->
+      <scope>test</scope>
     </dependency>
     <!-- <dependency> -->
     <!-- <groupId>org.openqa.selenium.client-drivers</groupId> -->
@@ -338,12 +358,12 @@
       <version>1.3</version>
       <type>jar</type>
     </dependency>
-    <dependency>
-      <groupId>dom4j</groupId>
-      <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
-      <type>jar</type>
-    </dependency>
+    <!-- <dependency> -->
+    <!-- <groupId>dom4j</groupId> -->
+    <!-- <artifactId>dom4j</artifactId> -->
+    <!-- <version>1.6.1</version> -->
+    <!-- <type>jar</type> -->
+    <!-- </dependency> -->
     <dependency>
       <groupId>com.google.code.guice</groupId>
       <artifactId>guice-assistedinject</artifactId>
@@ -711,7 +731,7 @@
               <includes>
                 <include>**/KunePlatform.gwt.xml**</include>
                 <include>**/i18n/I18nTranslationService.**</include>
-                <include>**/i18n/I18nTranslationServiceMocked.**</include>
+                <include>**/i18n/I18nTranslationServiceMocked.** </include>
                 <include>**/TextUtils.**</include>
                 <include>**/IconLabelEditable.**</include>
                 <include>**/QuickTipsHelper.**</include>
@@ -720,8 +740,8 @@
                 <include>**/HorizontalLine.**</include>
                 <include>**/AbstractLabel.**</include>
                 <include>**/IconLabel.**</include>
-                <include> **/EditableIconLabel.** </include>
-                <include> **/EditableClickListener.** </include>
+                <include> **/EditableIconLabel.**</include>
+                <include> **/EditableClickListener.**</include>
                 <include>**/KuneStringUtils.**</include>
                 <include>**/IconHyperlink*.**</include>
                 <include>**/LabelWrapper*.**</include>

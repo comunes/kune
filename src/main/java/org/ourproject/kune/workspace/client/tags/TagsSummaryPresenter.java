@@ -25,10 +25,10 @@ import org.ourproject.kune.workspace.client.search.SiteSearcherType;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.core.shared.domain.TagCount;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.core.shared.dto.TagCloudResultDTO;
-import cc.kune.core.shared.dto.TagCountDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener;
@@ -72,7 +72,7 @@ public class TagsSummaryPresenter implements TagsSummary {
         this.view = view;
     }
 
-    public void setGroupTags(final TagCloudResultDTO tagCloud) {
+    public void setGroupTags(final TagCloudResult tagCloud) {
         setCloud(tagCloud);
         view.expand();
     }
@@ -87,14 +87,14 @@ public class TagsSummaryPresenter implements TagsSummary {
         }
     }
 
-    private void setCloud(final TagCloudResultDTO tagCloudResult) {
+    private void setCloud(final TagCloudResult tagCloudResult) {
         // Inspired in snippet http://www.bytemycode.com/snippets/snippet/415/
         view.clear();
         final int max = tagCloudResult.getMaxValue();
         final int min = tagCloudResult.getMinValue();
         final int diff = max - min;
         final int step = (MAXSIZE - MINSIZE) / (diff == 0 ? 1 : diff);
-        for (final TagCountDTO tagCount : tagCloudResult.getTagCountList()) {
+        for (final TagCount tagCount : tagCloudResult.getTagCountList()) {
             final int size = Math.round((MINSIZE + (tagCount.getCount().floatValue() - min) * step));
             view.addTag(tagCount.getName(), tagCount.getCount(), "kune-ft" + size + "px");
         }

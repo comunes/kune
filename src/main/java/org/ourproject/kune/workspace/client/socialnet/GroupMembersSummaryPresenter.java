@@ -43,16 +43,16 @@ import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.AdmissionType;
+import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.AccessRightsDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.core.shared.dto.AdmissionTypeDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
-import cc.kune.core.shared.dto.SocialNetworkVisibilityDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateToken;
 
@@ -173,14 +173,14 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         // groupActionRegistry.addAction(unJoin);
 
         // groupActionRegistry.addAction(participate);
-        createSetMembersVisibilityAction(i18n.t("anyone"), SocialNetworkVisibilityDTO.anyone);
-        createSetMembersVisibilityAction(i18n.t("only members"), SocialNetworkVisibilityDTO.onlymembers);
-        createSetMembersVisibilityAction(i18n.t("only admins"), SocialNetworkVisibilityDTO.onlyadmins);
-        createNewMembersPolicyAction(i18n.t("moderate request to join"), AdmissionTypeDTO.Moderated);
-        createNewMembersPolicyAction(i18n.t("auto accept request to join"), AdmissionTypeDTO.Open);
+        createSetMembersVisibilityAction(i18n.t("anyone"), SocialNetworkVisibility.anyone);
+        createSetMembersVisibilityAction(i18n.t("only members"), SocialNetworkVisibility.onlymembers);
+        createSetMembersVisibilityAction(i18n.t("only admins"), SocialNetworkVisibility.onlyadmins);
+        createNewMembersPolicyAction(i18n.t("moderate request to join"), AdmissionType.Moderated);
+        createNewMembersPolicyAction(i18n.t("auto accept request to join"), AdmissionType.Open);
     }
 
-    private void createNewMembersPolicyAction(final String textDescription, final AdmissionTypeDTO admissionPolicy) {
+    private void createNewMembersPolicyAction(final String textDescription, final AdmissionType admissionPolicy) {
         final ActionToolbarMenuRadioDescriptor<StateToken> newMembersPolicy = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
                     public void onEvent(final StateToken parameter) {
@@ -204,8 +204,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         groupActionRegistry.addAction(newMembersPolicy);
     }
 
-    private void createSetMembersVisibilityAction(final String textDescription,
-            final SocialNetworkVisibilityDTO visibility) {
+    private void createSetMembersVisibilityAction(final String textDescription, final SocialNetworkVisibility visibility) {
         final ActionToolbarMenuRadioDescriptor<StateToken> showMembers = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
                     public void onEvent(final StateToken parameter) {

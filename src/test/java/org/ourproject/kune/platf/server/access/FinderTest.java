@@ -10,15 +10,15 @@ import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.content.CommentManager;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.shared.dto.StateToken;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.ToolConfiguration;
 
 public class FinderTest {
 

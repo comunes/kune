@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.License;
+import cc.kune.domain.License;
 
 public interface LicenseManager {
 

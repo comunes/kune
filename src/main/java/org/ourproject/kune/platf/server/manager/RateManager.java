@@ -19,9 +19,10 @@
  */
 package org.ourproject.kune.platf.server.manager;
 
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Rate;
-import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.domain.Content;
+import cc.kune.domain.Rate;
+import cc.kune.domain.User;
 
 public interface RateManager extends Manager<Rate, Long> {
 

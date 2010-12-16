@@ -4,8 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.server.domain.ExtMediaDescrip;
 import org.ourproject.kune.platf.server.manager.ExtMediaDescripManager;
+
+import cc.kune.domain.ExtMediaDescrip;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

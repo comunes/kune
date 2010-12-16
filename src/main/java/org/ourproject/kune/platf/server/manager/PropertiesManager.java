@@ -2,8 +2,8 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.HashMap;
 
-import org.ourproject.kune.platf.server.domain.Properties;
-import org.ourproject.kune.platf.server.domain.PropertySetted;
+import cc.kune.domain.Properties;
+import cc.kune.domain.PropertySetted;
 
 public interface PropertiesManager extends Manager<Properties, Long> {
 

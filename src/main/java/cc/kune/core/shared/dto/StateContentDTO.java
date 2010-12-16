@@ -22,6 +22,9 @@ package cc.kune.core.shared.dto;
 import java.util.Date;
 import java.util.List;
 
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.RateResult;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateContentDTO extends StateContainerDTO implements IsSerializable {
@@ -30,7 +33,7 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
     private int version;
     private String content;
     private AccessRightsDTO contentRights;
-    private ContentStatusDTO status;
+    private ContentStatus status;
     private Double rate;
     private Integer rateByUsers;
     private Double currentUserRate;
@@ -78,7 +81,7 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
         return rateByUsers;
     }
 
-    public ContentStatusDTO getStatus() {
+    public ContentStatus getStatus() {
         return status;
     }
 
@@ -90,57 +93,57 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
         return version;
     }
 
-    public void setAuthors(List<UserSimpleDTO> authors) {
+    public void setAuthors(final List<UserSimpleDTO> authors) {
         this.authors = authors;
     }
 
-    public void setContent(String content) {
+    public void setContent(final String content) {
         this.content = content;
     }
 
-    public void setContentRights(AccessRightsDTO contentRights) {
+    public void setContentRights(final AccessRightsDTO contentRights) {
         this.contentRights = contentRights;
     }
 
-    public void setCurrentUserRate(Double currentUserRate) {
+    public void setCurrentUserRate(final Double currentUserRate) {
         this.currentUserRate = currentUserRate;
     }
 
-    public void setDocumentId(String documentId) {
+    public void setDocumentId(final String documentId) {
         this.documentId = documentId;
     }
 
-    public void setMimeType(BasicMimeTypeDTO mimeType) {
+    public void setMimeType(final BasicMimeTypeDTO mimeType) {
         this.mimeType = mimeType;
     }
 
-    public void setPublishedOn(Date publishedOn) {
+    public void setPublishedOn(final Date publishedOn) {
         this.publishedOn = publishedOn;
     }
 
-    public void setRate(Double rate) {
+    public void setRate(final Double rate) {
         this.rate = rate;
     }
 
-    public void setRate(RateResultDTO result) {
+    public void setRate(final RateResult result) {
         setRate(result.getRate());
         setRateByUsers(result.getRateByUsers());
         setCurrentUserRate(result.getCurrentUserRate());
     }
 
-    public void setRateByUsers(Integer rateByUsers) {
+    public void setRateByUsers(final Integer rateByUsers) {
         this.rateByUsers = rateByUsers;
     }
 
-    public void setStatus(ContentStatusDTO status) {
+    public void setStatus(final ContentStatus status) {
         this.status = status;
     }
 
-    public void setTags(String tags) {
+    public void setTags(final String tags) {
         this.tags = tags;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(final int version) {
         this.version = version;
     }
 

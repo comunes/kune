@@ -29,14 +29,14 @@ import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.content.ContentUtils;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.shared.dto.StateToken;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

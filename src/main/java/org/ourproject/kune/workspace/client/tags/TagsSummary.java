@@ -19,10 +19,10 @@
  */
 package org.ourproject.kune.workspace.client.tags;
 
-import cc.kune.core.shared.dto.TagCloudResultDTO;
+import cc.kune.core.shared.domain.TagCloudResult;
 
 public interface TagsSummary {
 
-    void setGroupTags(TagCloudResultDTO tagCloud);
+    void setGroupTags(TagCloudResult tagCloud);
 
 }

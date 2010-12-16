@@ -25,7 +25,7 @@ import java.util.HashMap;
 import net.sf.dozer.util.mapping.MappingException;
 import net.sf.dozer.util.mapping.converters.CustomConverter;
 
-import org.ourproject.kune.platf.server.domain.GroupListMode;
+import cc.kune.core.shared.domain.GroupListMode;
 
 public class GroupListModeConverter implements CustomConverter {
     private final HashMap<String, GroupListMode> stringToEnum;

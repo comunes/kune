@@ -6,10 +6,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.TestDomainHelper;
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
+
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Group;
+import cc.kune.domain.SocialNetwork;
 
 public class AccessRightsServiceTest {
     private AccessRightsServiceDefault accessRightsManager;

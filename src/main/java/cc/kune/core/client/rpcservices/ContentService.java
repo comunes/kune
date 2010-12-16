@@ -22,16 +22,16 @@ package cc.kune.core.client.rpcservices;
 import java.util.Date;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.RateResult;
+import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
-import cc.kune.core.shared.dto.ContentStatusDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
-import cc.kune.core.shared.dto.RateResultDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateToken;
-import cc.kune.core.shared.dto.TagCloudResultDTO;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -59,11 +59,11 @@ public interface ContentService extends RemoteService {
 
     StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 
-    TagCloudResultDTO getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
+    TagCloudResult getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
 
     CommentDTO markCommentAsAbuse(String userHash, StateToken token, Long commentId) throws DefaultException;
 
-    RateResultDTO rateContent(String userHash, StateToken token, Double value) throws DefaultException;
+    RateResult rateContent(String userHash, StateToken token, Double value) throws DefaultException;
 
     void removeAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
 
@@ -79,11 +79,11 @@ public interface ContentService extends RemoteService {
 
     void setPublishedOn(String userHash, StateToken token, Date date) throws DefaultException;
 
-    StateAbstractDTO setStatus(String userHash, StateToken stateToken, ContentStatusDTO status);
+    StateAbstractDTO setStatus(String userHash, StateToken stateToken, ContentStatus status);
 
-    StateAbstractDTO setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatusDTO status);
+    StateAbstractDTO setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status);
 
-    TagCloudResultDTO setTags(String userHash, StateToken token, String tags) throws DefaultException;
+    TagCloudResult setTags(String userHash, StateToken token, String tags) throws DefaultException;
 
     CommentDTO voteComment(String userHash, StateToken token, Long commentId, boolean votePositive)
             throws DefaultException;

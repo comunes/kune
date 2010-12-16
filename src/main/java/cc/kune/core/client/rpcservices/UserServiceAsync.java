@@ -19,9 +19,8 @@
  */
 package cc.kune.core.client.rpcservices;
 
-
+import cc.kune.core.shared.domain.UserBuddiesVisibility;
 import cc.kune.core.shared.dto.StateToken;
-import cc.kune.core.shared.dto.UserBuddiesVisibilityDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
@@ -41,7 +40,7 @@ public interface UserServiceAsync {
 
     void reloadUserInfo(String userHash, AsyncCallback<UserInfoDTO> asyncCallback);
 
-    void setBuddiesVisibility(String userHash, StateToken groupToken, UserBuddiesVisibilityDTO visibility,
+    void setBuddiesVisibility(String userHash, StateToken groupToken, UserBuddiesVisibility visibility,
             AsyncCallback<Void> asyncCallback);
 
 }

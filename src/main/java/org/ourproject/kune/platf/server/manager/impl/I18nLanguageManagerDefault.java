@@ -23,8 +23,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
+
+import cc.kune.domain.I18nLanguage;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

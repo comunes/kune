@@ -13,11 +13,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.server.domain.BasicMimeType;
-import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 
 import cc.kune.core.shared.dto.StateToken;
+import cc.kune.domain.BasicMimeType;
+import cc.kune.domain.Content;
 
 import com.google.inject.Inject;
 

@@ -22,12 +22,13 @@ package org.ourproject.kune.platf.server;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.ExtMediaDescrip;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.tool.ToolSimple;
 import org.ourproject.kune.platf.server.users.UserInfo;
+
+import cc.kune.domain.ExtMediaDescrip;
+import cc.kune.domain.I18nCountry;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.License;
 
 public class InitData {
 

@@ -7,16 +7,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.Tag;
-import org.ourproject.kune.platf.server.domain.TagCloudResult;
-import org.ourproject.kune.platf.server.domain.TagCount;
-import org.ourproject.kune.platf.server.domain.TagUserContent;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
 import cc.kune.core.client.utils.TextUtils;
+import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.core.shared.domain.TagCount;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.Tag;
+import cc.kune.domain.TagUserContent;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

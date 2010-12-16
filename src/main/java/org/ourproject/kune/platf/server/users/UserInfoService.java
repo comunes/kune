@@ -19,9 +19,9 @@
  */
 package org.ourproject.kune.platf.server.users;
 
-import org.ourproject.kune.platf.server.domain.User;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.domain.User;
 
 public interface UserInfoService {
 

@@ -11,12 +11,12 @@ import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 

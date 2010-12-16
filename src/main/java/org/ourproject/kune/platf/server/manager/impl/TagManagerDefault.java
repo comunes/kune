@@ -21,8 +21,9 @@ package org.ourproject.kune.platf.server.manager.impl;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.server.domain.Tag;
 import org.ourproject.kune.platf.server.manager.TagManager;
+
+import cc.kune.domain.Tag;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -26,21 +26,19 @@ import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContentUtils;
-import org.ourproject.kune.platf.server.domain.AdmissionType;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.SocialNetworkVisibility;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.GroupService;
-import cc.kune.core.shared.dto.AdmissionTypeDTO;
+import cc.kune.core.shared.domain.AdmissionType;
+import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
-import cc.kune.core.shared.dto.SocialNetworkVisibilityDTO;
 import cc.kune.core.shared.dto.StateToken;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -126,7 +124,7 @@ public class GroupRPC implements RPC, GroupService {
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setGroupNewMembersJoiningPolicy(final String userHash, final StateToken token,
-            final AdmissionTypeDTO admissionPolicy) {
+            final AdmissionType admissionPolicy) {
         final Group group = groupManager.findByShortName(token.getGroup());
         group.setAdmissionType(AdmissionType.valueOf(admissionPolicy.toString()));
     }
@@ -135,7 +133,7 @@ public class GroupRPC implements RPC, GroupService {
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setSocialNetworkVisibility(final String userHash, final StateToken token,
-            final SocialNetworkVisibilityDTO visibility) {
+            final SocialNetworkVisibility visibility) {
         final Group group = groupManager.findByShortName(token.getGroup());
         group.getSocialNetwork().setVisibility(SocialNetworkVisibility.valueOf(visibility.toString()));
     }

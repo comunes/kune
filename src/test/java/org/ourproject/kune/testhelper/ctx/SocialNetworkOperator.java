@@ -1,6 +1,6 @@
 package org.ourproject.kune.testhelper.ctx;
 
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
+import cc.kune.domain.SocialNetwork;
 
 public class SocialNetworkOperator {
     private final DomainContext ctx;

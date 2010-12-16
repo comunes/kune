@@ -22,10 +22,11 @@ package org.ourproject.kune.platf.server.manager.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Rate;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.RateManager;
+
+import cc.kune.domain.Content;
+import cc.kune.domain.Rate;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

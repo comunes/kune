@@ -34,11 +34,6 @@ import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.packet.RosterPacket.ItemType;
 import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.Properties;
-import org.ourproject.kune.platf.server.domain.PropertyGroup;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.PropertiesManager;
@@ -49,6 +44,11 @@ import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.domain.I18nCountry;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.Properties;
+import cc.kune.domain.PropertyGroup;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

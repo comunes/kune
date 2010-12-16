@@ -8,8 +8,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
-import org.ourproject.kune.platf.server.domain.Tag;
-import org.ourproject.kune.platf.server.domain.TagUserContent;
+
+import cc.kune.domain.Tag;
+import cc.kune.domain.TagUserContent;
 
 import com.google.inject.Inject;
 

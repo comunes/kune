@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 
-import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.StateToken;
 
 public class ContextNavigatorItem {
@@ -30,21 +30,21 @@ public class ContextNavigatorItem {
     private final String iconUrl;
     private final String text;
     private final String tooltip;
-    private final ContentStatusDTO contentStatusDTO;
+    private final ContentStatus contentStatus;
     private final StateToken token;
     private final ActionItemCollection<StateToken> actionCollection;
     private final boolean allowDrag;
     private final boolean allowDrop;
 
     public ContextNavigatorItem(final String id, final String parentId, final String iconUrl, final String text,
-            final String tooltip, final ContentStatusDTO contentStatusDTO, final StateToken token,
-            final boolean allowDrag, final boolean allowDrop, final ActionItemCollection<StateToken> actionCollection) {
+            final String tooltip, final ContentStatus contentStatus, final StateToken token, final boolean allowDrag,
+            final boolean allowDrop, final ActionItemCollection<StateToken> actionCollection) {
         this.id = id;
         this.parentId = parentId;
         this.iconUrl = iconUrl;
         this.text = text;
         this.tooltip = tooltip;
-        this.contentStatusDTO = contentStatusDTO;
+        this.contentStatus = contentStatus;
         this.token = token;
         this.allowDrag = allowDrag;
         this.allowDrop = allowDrop;
@@ -55,8 +55,8 @@ public class ContextNavigatorItem {
         return actionCollection;
     }
 
-    public ContentStatusDTO getContentStatus() {
-        return contentStatusDTO;
+    public ContentStatus getContentStatus() {
+        return contentStatus;
     }
 
     public String getIconUrl() {

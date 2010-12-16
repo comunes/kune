@@ -1,9 +1,6 @@
 package org.ourproject.kune.platf.integration.content;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -15,14 +12,14 @@ import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.core.shared.domain.TagCount;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateToken;
-import cc.kune.core.shared.dto.TagCloudResultDTO;
-import cc.kune.core.shared.dto.TagCountDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
@@ -151,9 +148,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     @Test
     public void setTagsAndResults() throws Exception {
         contentService.setTags(getHash(), defaultContent.getStateToken(), "bfoo cfoa afoo2");
-        final TagCloudResultDTO cloudResultDTO = contentService.getSummaryTags(getHash(),
-                defaultContent.getStateToken());
-        checkResult(cloudResultDTO);
+        final TagCloudResult cloudResult = contentService.getSummaryTags(getHash(), defaultContent.getStateToken());
+        checkResult(cloudResult);
         checkResult(((StateContentDTO) contentService.getContent(getHash(), defaultContent.getStateToken())).getTagCloudResult());
     }
 
@@ -207,22 +203,22 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         assertEquals(newTitle, folderAgain.getContainer().getName());
     }
 
-    private void checkResult(final TagCloudResultDTO cloudResultDTO) {
-        assertNotNull(cloudResultDTO.getTagCountList());
-        final List<TagCountDTO> summaryTags = cloudResultDTO.getTagCountList();
+    private void checkResult(final TagCloudResult cloudResult) {
+        assertNotNull(cloudResult.getTagCountList());
+        final List<TagCount> summaryTags = cloudResult.getTagCountList();
         assertEquals(3, summaryTags.size());
 
-        TagCountDTO tagResultDTO = summaryTags.get(0);
-        assertEquals("afoo2", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
+        TagCount tagResult = summaryTags.get(0);
+        assertEquals("afoo2", tagResult.getName());
+        assertEquals(1, (long) tagResult.getCount());
 
-        tagResultDTO = summaryTags.get(1);
-        assertEquals("bfoo", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
+        tagResult = summaryTags.get(1);
+        assertEquals("bfoo", tagResult.getName());
+        assertEquals(1, (long) tagResult.getCount());
 
-        tagResultDTO = summaryTags.get(2);
-        assertEquals("cfoa", tagResultDTO.getName());
-        assertEquals(1, (long) tagResultDTO.getCount());
+        tagResult = summaryTags.get(2);
+        assertEquals("cfoa", tagResult.getName());
+        assertEquals(1, (long) tagResult.getCount());
     }
 
 }

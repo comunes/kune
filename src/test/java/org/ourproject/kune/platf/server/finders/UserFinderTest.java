@@ -9,7 +9,8 @@ import java.util.TimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
-import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 

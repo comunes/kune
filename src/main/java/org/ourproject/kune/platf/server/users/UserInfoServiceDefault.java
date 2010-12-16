@@ -19,14 +19,14 @@
  */
 package org.ourproject.kune.platf.server.users;
 
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

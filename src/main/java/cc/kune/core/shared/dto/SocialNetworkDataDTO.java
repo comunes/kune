@@ -19,14 +19,17 @@
  */
 package cc.kune.core.shared.dto;
 
+import cc.kune.core.shared.domain.SocialNetworkVisibility;
+import cc.kune.core.shared.domain.UserBuddiesVisibility;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class SocialNetworkDataDTO implements IsSerializable {
 
-    private SocialNetworkVisibilityDTO socialNetworkVisibility;
+    private SocialNetworkVisibility socialNetworkVisibility;
     private SocialNetworkDTO groupMembers;
     private ParticipationDataDTO userParticipation;
-    private UserBuddiesVisibilityDTO userBuddiesVisibility;
+    private UserBuddiesVisibility userBuddiesVisibility;
     private UserBuddiesDataDTO userBuddies;
     private AccessRightsDTO groupRights;
     private boolean isBuddiesVisible;
@@ -36,9 +39,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
         this(null, null, null, null, null, null, false, false);
     }
 
-    public SocialNetworkDataDTO(final SocialNetworkVisibilityDTO socialNetworkVisibility,
+    public SocialNetworkDataDTO(final SocialNetworkVisibility socialNetworkVisibility,
             final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation,
-            final UserBuddiesVisibilityDTO userBuddiesVisibility, final UserBuddiesDataDTO userBuddies,
+            final UserBuddiesVisibility userBuddiesVisibility, final UserBuddiesDataDTO userBuddies,
             final AccessRightsDTO groupRights, final boolean isBuddiesVisible, final boolean isMembersVisible) {
         this.socialNetworkVisibility = socialNetworkVisibility;
         this.groupMembers = groupMembers;
@@ -66,7 +69,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
         return isMembersVisible;
     }
 
-    public SocialNetworkVisibilityDTO getSocialNetworkVisibility() {
+    public SocialNetworkVisibility getSocialNetworkVisibility() {
         return socialNetworkVisibility;
     }
 
@@ -74,7 +77,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
         return userBuddies;
     }
 
-    public UserBuddiesVisibilityDTO getUserBuddiesVisibility() {
+    public UserBuddiesVisibility getUserBuddiesVisibility() {
         return userBuddiesVisibility;
     }
 
@@ -114,16 +117,16 @@ public class SocialNetworkDataDTO implements IsSerializable {
         this.isMembersVisible = isMembersVisible;
     }
 
-    public void setSocialNetworkVisibility(final SocialNetworkVisibilityDTO socialNetworkVisibilityDTO) {
-        this.socialNetworkVisibility = socialNetworkVisibilityDTO;
+    public void setSocialNetworkVisibility(final SocialNetworkVisibility socialNetworkVisibility) {
+        this.socialNetworkVisibility = socialNetworkVisibility;
     }
 
     public void setUserBuddies(final UserBuddiesDataDTO userBuddies) {
         this.userBuddies = userBuddies;
     }
 
-    public void setUserBuddiesVisibility(final UserBuddiesVisibilityDTO userBuddiesVisibilityDTO) {
-        this.userBuddiesVisibility = userBuddiesVisibilityDTO;
+    public void setUserBuddiesVisibility(final UserBuddiesVisibility userBuddiesVisibility) {
+        this.userBuddiesVisibility = userBuddiesVisibility;
     }
 
     public void setUserParticipation(final ParticipationDataDTO userParticipation) {

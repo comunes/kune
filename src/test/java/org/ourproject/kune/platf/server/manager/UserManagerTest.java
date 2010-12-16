@@ -1,22 +1,20 @@
 package org.ourproject.kune.platf.server.manager;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.util.TimeZone;
 
 import javax.persistence.EntityExistsException;
+import javax.validation.ValidationException;
 
 import org.apache.lucene.queryParser.ParseException;
-import org.hibernate.validator.InvalidStateException;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
+import cc.kune.domain.Group;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
@@ -30,13 +28,13 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         persist(user);
     }
 
-    @Test(expected = InvalidStateException.class)
+    @Test(expected = ValidationException.class)
     public void emailEmpty() {
-        user = new User("test1", "test1 name", "", "some passwd", english, gb, getTimeZone());
+        user = new User("test1", "test1 name", null, "some passwd", english, gb, getTimeZone());
         persist(user);
     }
 
-    @Test(expected = InvalidStateException.class)
+    @Test(expected = ValidationException.class)
     public void emailIncorrect() {
         user = new User("test1", "test1 name", "falseEmail@", "some passwd", english, gb, getTimeZone());
         persist(user);
@@ -60,7 +58,7 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         assertNotNull(result.getId());
     }
 
-    @Test(expected = InvalidStateException.class)
+    @Test(expected = ValidationException.class)
     public void passwdLengthIncorrect() {
         user = new User("test1", "test1 name", "test@example.com", "pass", english, gb, getTimeZone());
         persist(user);
@@ -80,7 +78,7 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         persist(user2);
     }
 
-    @Test(expected = InvalidStateException.class)
+    @Test(expected = ValidationException.class)
     public void userNameLengthIncorrect() {
         user = new User("test1", "te", "test@example.com", "some passwd", english, gb, getTimeZone());
         persist(user);
@@ -95,7 +93,7 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         rollbackTransaction();
     }
 
-    @Test(expected = InvalidStateException.class)
+    @Test(expected = ValidationException.class)
     public void userShortNameIncorrect() {
         user = new User("test1A", "test1 name", "test@example.com", "some passwd", english, gb, getTimeZone());
         persist(user);

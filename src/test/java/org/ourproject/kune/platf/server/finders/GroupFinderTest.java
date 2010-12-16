@@ -6,7 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
-import org.ourproject.kune.platf.server.domain.Group;
+
+import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 

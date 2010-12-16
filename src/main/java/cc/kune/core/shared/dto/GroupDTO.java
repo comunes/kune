@@ -19,6 +19,8 @@
  */
 package cc.kune.core.shared.dto;
 
+import cc.kune.core.shared.domain.AdmissionType;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupDTO implements IsSerializable {
@@ -33,7 +35,7 @@ public class GroupDTO implements IsSerializable {
     private String workspaceTheme;
     private boolean hasLogo;
     private StateToken stateToken;
-    AdmissionTypeDTO admissionType;
+    AdmissionType admissionType;
 
     public GroupDTO() {
         this(null, null, GroupType.ORGANIZATION);
@@ -67,7 +69,7 @@ public class GroupDTO implements IsSerializable {
         return true;
     }
 
-    public AdmissionTypeDTO getAdmissionType() {
+    public AdmissionType getAdmissionType() {
         return admissionType;
     }
 
@@ -134,7 +136,7 @@ public class GroupDTO implements IsSerializable {
         return groupType.equals(GroupType.PERSONAL);
     }
 
-    public void setAdmissionType(final AdmissionTypeDTO admissionType) {
+    public void setAdmissionType(final AdmissionType admissionType) {
         this.admissionType = admissionType;
     }
 

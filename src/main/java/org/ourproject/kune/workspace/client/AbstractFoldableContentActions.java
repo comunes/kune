@@ -54,9 +54,9 @@ import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
-import cc.kune.core.shared.dto.ContentStatusDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -145,15 +145,14 @@ public abstract class AbstractFoldableContentActions {
     protected abstract void createActions();
 
     protected void createContentModeratedActions(final String parentMenuTitle, final String... contentsModerated) {
-        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("Published online"), ContentStatusDTO.publishedOnline,
+        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("Published online"), ContentStatus.publishedOnline,
                 contentsModerated);
-        createSetStatusAction(AccessRolDTO.Editor, i18n.t("Editing in progress"), ContentStatusDTO.editingInProgress,
+        createSetStatusAction(AccessRolDTO.Editor, i18n.t("Editing in progress"), ContentStatus.editingInProgress,
                 contentsModerated);
-        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("Rejected"), ContentStatusDTO.rejected,
-                contentsModerated);
+        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("Rejected"), ContentStatus.rejected, contentsModerated);
         createSetStatusAction(AccessRolDTO.Editor, i18n.t("Submitted for publish"),
-                ContentStatusDTO.submittedForEvaluation, contentsModerated);
-        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), ContentStatusDTO.inTheDustbin,
+                ContentStatus.submittedForEvaluation, contentsModerated);
+        createSetStatusAction(AccessRolDTO.Administrator, i18n.t("In the rubbish bin"), ContentStatus.inTheDustbin,
                 contentsModerated);
     }
 
@@ -493,7 +492,7 @@ public abstract class AbstractFoldableContentActions {
     }
 
     protected void createSetStatusAction(final AccessRolDTO rol, final String textDescription,
-            final ContentStatusDTO status, final String[] contentsModerated) {
+            final ContentStatus status, final String[] contentsModerated) {
         final ActionToolbarMenuRadioDescriptor<StateToken> action = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 rol, CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken stateToken) {
@@ -502,7 +501,7 @@ public abstract class AbstractFoldableContentActions {
                 }, "ContentRadioStatus", new RadioMustBeChecked() {
                     public boolean mustBeChecked() {
                         if (session.getContainerState() instanceof StateContentDTO) {
-                            final ContentStatusDTO currentStatus = session.getContentState().getStatus();
+                            final ContentStatus currentStatus = session.getContentState().getStatus();
                             return status.equals(currentStatus);
                         }
                         return false;
@@ -521,7 +520,7 @@ public abstract class AbstractFoldableContentActions {
                         final boolean mustShow = !session.getCurrentUserInfo().getShowDeletedContent();
                         session.getCurrentUserInfo().setShowDeletedContent(mustShow);
                         if (!mustShow && session.isCurrentStateAContent()
-                                && session.getContentState().getStatus().equals(ContentStatusDTO.inTheDustbin)) {
+                                && session.getContentState().getStatus().equals(ContentStatus.inTheDustbin)) {
                             stateManager.gotoToken(session.getCurrentStateToken().getGroup());
                         }
                         contextNavigator.clear();
@@ -622,7 +621,7 @@ public abstract class AbstractFoldableContentActions {
         return new ActionEnableCondition<StateToken>() {
             public boolean mustBeEnabled(final StateToken token) {
                 final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
-                        ContentStatusDTO.inTheDustbin));
+                        ContentStatus.inTheDustbin));
                 return isNotDeleted;
             }
         };
@@ -637,7 +636,7 @@ public abstract class AbstractFoldableContentActions {
         }
     }
 
-    private void setContentStatus(final ContentStatusDTO status, final StateToken stateToken) {
+    private void setContentStatus(final ContentStatus status, final StateToken stateToken) {
         final AsyncCallbackSimple<StateAbstractDTO> callback = new AsyncCallbackSimple<StateAbstractDTO>() {
             public void onSuccess(final StateAbstractDTO state) {
                 if (session.inSameToken(stateToken)) {
@@ -648,8 +647,8 @@ public abstract class AbstractFoldableContentActions {
                 contextNavigator.setItemStatus(stateToken, status);
             }
         };
-        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)
-                || status.equals(ContentStatusDTO.inTheDustbin)) {
+        if (status.equals(ContentStatus.publishedOnline) || status.equals(ContentStatus.rejected)
+                || status.equals(ContentStatus.inTheDustbin)) {
             contentServiceProvider.get().setStatusAsAdmin(session.getUserHash(), stateToken, status, callback);
         } else {
             contentServiceProvider.get().setStatus(session.getUserHash(), stateToken, status, callback);

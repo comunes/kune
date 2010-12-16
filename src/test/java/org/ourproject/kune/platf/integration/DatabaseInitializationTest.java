@@ -12,15 +12,16 @@ import org.ourproject.kune.chat.server.ChatServerTool;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.ToolConfiguration;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
+
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.ToolConfiguration;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.Transactional;

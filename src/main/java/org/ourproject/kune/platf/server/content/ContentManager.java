@@ -21,16 +21,16 @@ package org.ourproject.kune.platf.server.content;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.ContentStatus;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.RateResult;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.Manager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.RateResult;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.User;
 
 public interface ContentManager extends Manager<Content, Long> {
 

@@ -39,12 +39,12 @@ import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContentUtils;
-import org.ourproject.kune.platf.server.domain.BasicMimeType;
-import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.shared.dto.StateToken;
+import cc.kune.domain.BasicMimeType;
+import cc.kune.domain.Content;
 
 import com.google.inject.Inject;
 

@@ -23,9 +23,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.ourproject.kune.platf.server.domain.License;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
+
+import cc.kune.domain.License;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -28,9 +28,6 @@ import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.auth.SessionService;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.User;
-import org.ourproject.kune.platf.server.domain.UserBuddiesVisibility;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -41,10 +38,12 @@ import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.shared.domain.UserBuddiesVisibility;
 import cc.kune.core.shared.dto.StateToken;
-import cc.kune.core.shared.dto.UserBuddiesVisibilityDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.domain.Group;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -135,7 +134,7 @@ public class UserRPC implements RPC, UserService {
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
     @Transactional(type = TransactionType.READ_WRITE)
     public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
-            final UserBuddiesVisibilityDTO visibility) {
+            final UserBuddiesVisibility visibility) {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         if (!groupToken.getGroup().equals(user.getShortName())) {

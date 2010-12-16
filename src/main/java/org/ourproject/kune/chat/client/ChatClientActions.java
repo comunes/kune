@@ -34,8 +34,8 @@ import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.core.shared.dto.ContentStatusDTO;
 import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.events.Listener;
@@ -72,7 +72,7 @@ public class ChatClientActions {
                     public void onEvent(final StateToken token) {
                         deferredWrapper.get().addCommand(new Listener0() {
                             public void onEvent() {
-                                String subject = i18n.t("Chat about: [%s]", session.getContentState().getTitle());
+                                final String subject = i18n.t("Chat about: [%s]", session.getContentState().getTitle());
                                 chatEngineProvider.get().joinRoom(token.toString().replaceAll("\\.", "-"), subject,
                                         session.getCurrentUserInfo().getShortName());
                                 chatEngineProvider.get().show();
@@ -86,10 +86,10 @@ public class ChatClientActions {
         chatAbout.setLeftSeparator(ActionToolbarButtonSeparator.fill);
         chatAbout.setEnableCondition(notDeleted());
 
-        ActionToolbarButtonDescriptor<StateToken> joinRoom = new ActionToolbarButtonDescriptor<StateToken>(
+        final ActionToolbarButtonDescriptor<StateToken> joinRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
-                        ChatEngine chatEngine = chatEngineProvider.get();
+                        final ChatEngine chatEngine = chatEngineProvider.get();
                         chatEngine.joinRoom(session.getContainerState().getContainer().getName(),
                                 session.getCurrentUserInfo().getShortName());
                         chatEngine.show();
@@ -99,7 +99,7 @@ public class ChatClientActions {
         joinRoom.setToolTip(i18n.t("Enter in this chat room"));
         joinRoom.setMustBeAuthenticated(true);
 
-        ActionToolbarButtonDescriptor<StateToken> addRoom = new ActionToolbarButtonDescriptor<StateToken>(
+        final ActionToolbarButtonDescriptor<StateToken> addRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Administrator, AbstractFoldableContentActions.CONTEXT_TOPBAR, new Listener<StateToken>() {
                     public void onEvent(final StateToken token) {
                         addRoomProvider.get().show();
@@ -125,7 +125,7 @@ public class ChatClientActions {
         return new ActionEnableCondition<StateToken>() {
             public boolean mustBeEnabled(final StateToken token) {
                 final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
-                        ContentStatusDTO.inTheDustbin));
+                        ContentStatus.inTheDustbin));
                 return isNotDeleted;
             }
         };

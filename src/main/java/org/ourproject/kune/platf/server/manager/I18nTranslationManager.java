@@ -22,10 +22,10 @@ package org.ourproject.kune.platf.server.manager;
 import java.util.HashMap;
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.domain.I18nTranslation;
 
 public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 

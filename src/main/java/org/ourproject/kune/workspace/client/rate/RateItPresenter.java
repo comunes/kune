@@ -26,7 +26,7 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.RateResultDTO;
+import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -97,8 +97,8 @@ public class RateItPresenter implements RateIt {
         NotifyUser.showProgressProcessing();
         final StateAbstractDTO currentState = session.getCurrentState();
         contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getStateToken(), newValue,
-                new AsyncCallbackSimple<RateResultDTO>() {
-                    public void onSuccess(final RateResultDTO result) {
+                new AsyncCallbackSimple<RateResult>() {
+                    public void onSuccess(final RateResult result) {
                         NotifyUser.hideProgress();
                         // NotifyUser.info(i18n.t("Content rated"));
                         if (currentState.getStateToken().equals(session.getCurrentStateToken())) {

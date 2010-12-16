@@ -41,12 +41,12 @@ import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.UserBuddiesVisibility;
 import cc.kune.core.shared.dto.AccessRightsDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserBuddiesDataDTO;
-import cc.kune.core.shared.dto.UserBuddiesVisibilityDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -138,8 +138,9 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                     }
                 }
                 toolbar.disableMenusAndClearButtons();
-                toolbar.addActions(actionRegistry.getCurrentActions(session.getCurrentUser(), session.isLogged(),
-                        state.getGroupRights(), true), ActionToolbar.IN_ANY);
+                toolbar.addActions(
+                        actionRegistry.getCurrentActions(session.getCurrentUser(), session.isLogged(),
+                                state.getGroupRights(), true), ActionToolbar.IN_ANY);
                 toolbar.attach();
                 view.show();
             } else {
@@ -164,8 +165,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         actionRegistry.addAction(addNewBuddiesAction);
     }
 
-    private void createSetBuddiesVisibilityAction(final String textDescription,
-            final UserBuddiesVisibilityDTO visibility) {
+    private void createSetBuddiesVisibilityAction(final String textDescription, final UserBuddiesVisibility visibility) {
         final ActionToolbarMenuRadioDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuRadioDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, buddiesBottom, new Listener<UserSimpleDTO>() {
                     public void onEvent(final UserSimpleDTO parameter) {
@@ -222,9 +222,9 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         actionRegistry.addAction(go);
 
         createAddNewBuddiesAction();
-        createSetBuddiesVisibilityAction(i18n.t("anyone"), UserBuddiesVisibilityDTO.anyone);
-        createSetBuddiesVisibilityAction(i18n.t("only your buddies"), UserBuddiesVisibilityDTO.yourbuddies);
-        createSetBuddiesVisibilityAction(i18n.t("only you"), UserBuddiesVisibilityDTO.onlyyou);
+        createSetBuddiesVisibilityAction(i18n.t("anyone"), UserBuddiesVisibility.anyone);
+        createSetBuddiesVisibilityAction(i18n.t("only your buddies"), UserBuddiesVisibility.yourbuddies);
+        createSetBuddiesVisibilityAction(i18n.t("only you"), UserBuddiesVisibility.onlyyou);
     }
 
 }

@@ -10,9 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.TestDomainHelper;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Rate;
-import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.domain.Content;
+import cc.kune.domain.Rate;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 

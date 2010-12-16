@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
-import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateToken;
 
@@ -45,7 +45,7 @@ public interface ContextNavigator {
 
     void setEditOnNextStateChange(boolean edit);
 
-    void setItemStatus(StateToken stateToken, ContentStatusDTO status);
+    void setItemStatus(StateToken stateToken, ContentStatus status);
 
     void setState(StateContainerDTO state, boolean selectItem);
 }

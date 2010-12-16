@@ -6,6 +6,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import cc.kune.core.shared.domain.GroupListMode;
+import cc.kune.domain.Group;
+import cc.kune.domain.GroupList;
+
 public class GroupListTest {
     private GroupList list;
     private Group includedGroup;

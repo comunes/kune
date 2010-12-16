@@ -21,17 +21,16 @@ package cc.kune.core.client.rpcservices;
 
 import java.util.Date;
 
-
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.RateResult;
+import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
-import cc.kune.core.shared.dto.ContentStatusDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
-import cc.kune.core.shared.dto.RateResultDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateToken;
-import cc.kune.core.shared.dto.TagCloudResultDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -59,11 +58,11 @@ public interface ContentServiceAsync {
 
     void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
-    void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<TagCloudResultDTO> asyncCallback);
+    void getSummaryTags(String userHash, StateToken groupToken, AsyncCallback<TagCloudResult> asyncCallback);
 
     void markCommentAsAbuse(String userHash, StateToken token, Long commentId, AsyncCallback<CommentDTO> asyncCallback);
 
-    void rateContent(String userHash, StateToken token, Double value, AsyncCallback<RateResultDTO> asyncCallback);
+    void rateContent(String userHash, StateToken token, Double value, AsyncCallback<RateResult> asyncCallback);
 
     void removeAuthor(String userHash, StateToken token, String authorShortName, AsyncCallback<Void> asyncCallback);
 
@@ -81,13 +80,13 @@ public interface ContentServiceAsync {
 
     void setPublishedOn(String userHash, StateToken token, Date publishedOn, AsyncCallback<Void> asyncCallback);
 
-    void setStatus(String userHash, StateToken stateToken, ContentStatusDTO status,
+    void setStatus(String userHash, StateToken stateToken, ContentStatus status,
             AsyncCallback<StateAbstractDTO> asyncCallback);
 
-    void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatusDTO status,
+    void setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status,
             AsyncCallback<StateAbstractDTO> asyncCallback);
 
-    void setTags(String userHash, StateToken token, String tags, AsyncCallback<TagCloudResultDTO> asyncCallback);
+    void setTags(String userHash, StateToken token, String tags, AsyncCallback<TagCloudResult> asyncCallback);
 
     void voteComment(String userHash, StateToken token, Long commentId, boolean votePositive,
             AsyncCallback<CommentDTO> asyncCallback);

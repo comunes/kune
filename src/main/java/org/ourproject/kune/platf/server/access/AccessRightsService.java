@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.platf.server.access;
 
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.User;
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.User;
 
 public interface AccessRightsService {
 

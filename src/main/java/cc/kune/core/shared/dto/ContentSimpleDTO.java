@@ -19,6 +19,8 @@
  */
 package cc.kune.core.shared.dto;
 
+import cc.kune.core.shared.domain.ContentStatus;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ContentSimpleDTO implements IsSerializable {
@@ -27,7 +29,7 @@ public class ContentSimpleDTO implements IsSerializable {
     private String title;
     private String typeId;
     private StateToken stateToken;
-    private ContentStatusDTO status;
+    private ContentStatus status;
     private AccessRightsDTO rights;
     private BasicMimeTypeDTO mimeType;
 
@@ -47,7 +49,7 @@ public class ContentSimpleDTO implements IsSerializable {
         return stateToken;
     }
 
-    public ContentStatusDTO getStatus() {
+    public ContentStatus getStatus() {
         return status;
     }
 
@@ -75,7 +77,7 @@ public class ContentSimpleDTO implements IsSerializable {
         this.stateToken = stateToken;
     }
 
-    public void setStatus(final ContentStatusDTO status) {
+    public void setStatus(final ContentStatus status) {
         this.status = status;
     }
 

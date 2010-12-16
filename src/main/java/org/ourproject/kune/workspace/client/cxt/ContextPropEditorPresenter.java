@@ -31,11 +31,11 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.TagCloudResultDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
 import com.calclab.suco.client.ioc.Provider;
@@ -182,8 +182,8 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
         NotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setTags(session.getUserHash(), currentState.getStateToken(), tagsString,
-                new AsyncCallbackSimple<TagCloudResultDTO>() {
-                    public void onSuccess(final TagCloudResultDTO result) {
+                new AsyncCallbackSimple<TagCloudResult>() {
+                    public void onSuccess(final TagCloudResult result) {
                         tagsSummaryProvider.get().setGroupTags(result);
                         NotifyUser.hideProgress();
                     }

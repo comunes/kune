@@ -2,12 +2,13 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.Tag;
-import org.ourproject.kune.platf.server.domain.TagCloudResult;
-import org.ourproject.kune.platf.server.domain.TagUserContent;
-import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.Tag;
+import cc.kune.domain.TagUserContent;
+import cc.kune.domain.User;
 
 public interface TagUserContentManager extends Manager<TagUserContent, Long> {
 

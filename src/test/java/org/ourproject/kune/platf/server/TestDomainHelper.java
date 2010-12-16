@@ -2,14 +2,15 @@ package org.ourproject.kune.platf.server;
 
 import java.util.TimeZone;
 
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.AdmissionType;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.Revision;
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
-import org.ourproject.kune.platf.server.domain.User;
+
+import cc.kune.core.shared.domain.AdmissionType;
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.Revision;
+import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.User;
 
 public abstract class TestDomainHelper {
 

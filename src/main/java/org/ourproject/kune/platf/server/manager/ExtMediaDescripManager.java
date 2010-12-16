@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.ExtMediaDescrip;
+import cc.kune.domain.ExtMediaDescrip;
 
 public interface ExtMediaDescripManager extends Manager<ExtMediaDescrip, Long> {
     List<ExtMediaDescrip> getAll();

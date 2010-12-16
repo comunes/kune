@@ -28,11 +28,6 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.manager.file.FileUtils;
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
@@ -41,6 +36,11 @@ import org.ourproject.kune.platf.server.utils.FilenameUtils;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.NameInUseException;
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.I18nLanguage;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

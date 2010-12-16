@@ -7,14 +7,14 @@ import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.domain.AdmissionType;
-import org.ourproject.kune.platf.server.domain.Group;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.GroupService;
+import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 

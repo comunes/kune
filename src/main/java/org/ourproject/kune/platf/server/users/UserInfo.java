@@ -21,10 +21,10 @@ package org.ourproject.kune.platf.server.users;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.User;
+import cc.kune.domain.Group;
+import cc.kune.domain.I18nCountry;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.User;
 
 public class UserInfo {
     private User user;

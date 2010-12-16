@@ -26,8 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.Authenticated;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.I18nTranslation;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -36,6 +34,8 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.I18nService;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

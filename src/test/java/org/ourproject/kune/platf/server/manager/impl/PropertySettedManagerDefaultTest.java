@@ -9,15 +9,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
-import org.ourproject.kune.platf.server.domain.Properties;
-import org.ourproject.kune.platf.server.domain.Property;
-import org.ourproject.kune.platf.server.domain.PropertyGroup;
-import org.ourproject.kune.platf.server.domain.PropertySetted;
-import org.ourproject.kune.platf.server.domain.PropertySubgroup;
 import org.ourproject.kune.platf.server.manager.PropertiesManager;
 import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
 import org.ourproject.kune.platf.server.manager.PropertyManager;
 import org.ourproject.kune.platf.server.manager.PropertySubgroupManager;
+
+import cc.kune.domain.Properties;
+import cc.kune.domain.Property;
+import cc.kune.domain.PropertyGroup;
+import cc.kune.domain.PropertySetted;
+import cc.kune.domain.PropertySubgroup;
 
 import com.google.inject.Inject;
 

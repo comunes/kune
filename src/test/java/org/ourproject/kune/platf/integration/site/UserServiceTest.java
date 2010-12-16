@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
@@ -26,6 +25,7 @@ import cc.kune.core.shared.dto.SubscriptionMode;
 import cc.kune.core.shared.dto.TimeZoneDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 

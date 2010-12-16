@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
+import cc.kune.domain.I18nLanguage;
 
 public interface I18nLanguageManager extends Manager<I18nLanguage, Long> {
 

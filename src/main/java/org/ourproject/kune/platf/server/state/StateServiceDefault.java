@@ -21,17 +21,17 @@ package org.ourproject.kune.platf.server.state;
 
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.content.ContentManager;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.License;
-import org.ourproject.kune.platf.server.domain.Revision;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagUserContentManager;
 
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.License;
+import cc.kune.domain.Revision;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

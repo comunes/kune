@@ -20,11 +20,12 @@
 package org.ourproject.kune.platf.server.state;
 
 import org.ourproject.kune.platf.server.access.AccessRights;
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.License;
-import org.ourproject.kune.platf.server.domain.TagCloudResult;
+
+import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Container;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.License;
 
 public class StateContainer extends StateAbstract {
 

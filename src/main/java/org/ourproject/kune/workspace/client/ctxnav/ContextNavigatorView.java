@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.ctxnav;
 
 import org.ourproject.kune.platf.client.View;
 
-import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.StateToken;
 
 public interface ContextNavigatorView extends View {
@@ -42,7 +42,7 @@ public interface ContextNavigatorView extends View {
 
     void setEditable(boolean editable);
 
-    void setItemStatus(String id, ContentStatusDTO status);
+    void setItemStatus(String id, ContentStatus status);
 
     void setItemText(String id, String text);
 

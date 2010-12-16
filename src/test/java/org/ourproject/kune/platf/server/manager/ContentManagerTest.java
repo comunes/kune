@@ -5,9 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
-import org.ourproject.kune.platf.server.domain.BasicMimeType;
-import org.ourproject.kune.platf.server.domain.Content;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+
+import cc.kune.domain.BasicMimeType;
+import cc.kune.domain.Content;
+
 
 public class ContentManagerTest extends PersistencePreLoadedDataTest {
 

@@ -34,12 +34,12 @@ import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
-import org.ourproject.kune.platf.server.domain.BasicMimeType;
-import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
 import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.domain.BasicMimeType;
+import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;

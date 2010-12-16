@@ -19,11 +19,10 @@
  */
 package cc.kune.core.client.rpcservices;
 
-
-import cc.kune.core.shared.dto.AdmissionTypeDTO;
+import cc.kune.core.shared.domain.AdmissionType;
+import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
-import cc.kune.core.shared.dto.SocialNetworkVisibilityDTO;
 import cc.kune.core.shared.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -44,10 +43,10 @@ public interface GroupServiceAsync {
 
     void setGroupBackImage(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
-    void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionTypeDTO admissionPolicy,
+    void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionType admissionPolicy,
             AsyncCallback<Void> asyncCallback);
 
-    void setSocialNetworkVisibility(String userHash, StateToken token, SocialNetworkVisibilityDTO visibility,
+    void setSocialNetworkVisibility(String userHash, StateToken token, SocialNetworkVisibility visibility,
             AsyncCallback<Void> asyncCallback);
 
     void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled,

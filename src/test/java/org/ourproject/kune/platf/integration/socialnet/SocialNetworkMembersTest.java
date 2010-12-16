@@ -9,9 +9,10 @@ import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.domain.Group;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
+
+import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.Transactional;

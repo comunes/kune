@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import cc.kune.core.shared.dto.ContentStatusDTO;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -200,7 +200,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         this.isEditable = editable;
     }
 
-    public void setItemStatus(final String id, final ContentStatusDTO status) {
+    public void setItemStatus(final String id, final ContentStatus status) {
         setNodeStatus(getNode(id), status);
     }
 
@@ -316,7 +316,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
         this.mustFireOnTextChange = fireOnTextChange;
     }
 
-    private void setNodeStatus(final TreeNode node, final ContentStatusDTO status) {
+    private void setNodeStatus(final TreeNode node, final ContentStatus status) {
         switch (status) {
         case publishedOnline:
             node.setCls("k-ctn-status-normal");

@@ -10,11 +10,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.I18nTranslation;
 
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.domain.I18nCountry;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
 

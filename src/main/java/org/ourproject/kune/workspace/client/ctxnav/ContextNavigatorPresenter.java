@@ -38,12 +38,12 @@ import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.AccessRightsDTO;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
-import cc.kune.core.shared.dto.ContentStatusDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
@@ -159,7 +159,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         editOnNextStateChange = edit;
     }
 
-    public void setItemStatus(final StateToken stateToken, final ContentStatusDTO status) {
+    public void setItemStatus(final StateToken stateToken, final ContentStatus status) {
         clear();
         refreshState();
     }
@@ -177,7 +177,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     private ActionItemCollection<StateToken> addItem(final String title, final String contentTypeId,
-            final BasicMimeTypeDTO mimeType, final ContentStatusDTO status, final StateToken stateToken,
+            final BasicMimeTypeDTO mimeType, final ContentStatus status, final StateToken stateToken,
             final StateToken parentStateToken, final AccessRightsDTO rights, final boolean isNodeSelected) {
         final ActionItemCollection<StateToken> toolbarActions = actionRegistry.getCurrentActions(stateToken,
                 contentTypeId, session.isLogged(), rights, true);
@@ -189,7 +189,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
                         && rights.isAdministrable(), capabilitiesRegistry.isDropable(contentTypeId)
                         && rights.isAdministrable(), actionRegistry.getCurrentActions(stateToken, contentTypeId,
                         session.isLogged(), rights, false));
-        if (status.equals(ContentStatusDTO.inTheDustbin) && !session.getShowDeletedContent()) {
+        if (status.equals(ContentStatus.inTheDustbin) && !session.getShowDeletedContent()) {
             // Don't show
         } else {
             view.addItem(item);
@@ -227,9 +227,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
         for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
-            addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatusDTO.publishedOnline,
-                    siblingFolder.getStateToken(), siblingFolder.getStateToken().copy().setFolder(
-                            siblingFolder.getParentFolderId()), containerRights, false);
+            addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatus.publishedOnline,
+                    siblingFolder.getStateToken(),
+                    siblingFolder.getStateToken().copy().setFolder(siblingFolder.getParentFolderId()), containerRights,
+                    false);
         }
         for (final ContentSimpleDTO content : container.getContents()) {
             addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
@@ -244,7 +245,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
             final StateToken parentStateToken = state.copy().clearDocument().setFolder(folder.getParentFolderId());
 
             if (folder.getParentFolderId() != null) {
-                addItem(folder.getName(), folder.getTypeId(), null, ContentStatusDTO.publishedOnline, folderStateToken,
+                addItem(folder.getName(), folder.getTypeId(), null, ContentStatus.publishedOnline, folderStateToken,
                         parentStateToken, rights, false);
             } else {
                 // Root must be already created
@@ -268,8 +269,8 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     private String getTooltip(final StateToken token, final BasicMimeTypeDTO mimeType) {
         if (mimeType != null && (mimeType.isImage() || mimeType.isPdf())) {
-            return KuneUiUtils.genQuickTipWithImage(downloadUtilsProvider.get().getImageResizedUrl(token,
-                    ImageSize.thumb), session.getImgCropsize());
+            return KuneUiUtils.genQuickTipWithImage(
+                    downloadUtilsProvider.get().getImageResizedUrl(token, ImageSize.thumb), session.getImgCropsize());
         } else {
             return null;
         }
@@ -325,7 +326,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         } else {
             rights = containerRights;
             final ActionItemCollection<StateToken> containerActions = addItem(container.getName(),
-                    container.getTypeId(), null, ContentStatusDTO.publishedOnline, container.getStateToken(),
+                    container.getTypeId(), null, ContentStatus.publishedOnline, container.getStateToken(),
                     container.getStateToken().copy().setFolder(container.getParentFolderId()), containerRights, false);
             actionItems.addAll(containerActions);
         }

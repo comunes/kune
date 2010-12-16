@@ -21,17 +21,17 @@ package org.ourproject.kune.chat.server;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.platf.server.content.ContainerManager;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.ToolConfiguration;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.ToolConfigurationManager;
 import org.ourproject.kune.platf.server.tool.ServerTool;
 import org.ourproject.kune.platf.server.tool.ServerToolRegistry;
 import org.ourproject.kune.platf.server.tool.ServerToolTarget;
 
 import cc.kune.core.client.errors.ContainerNotPermittedException;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.ToolConfiguration;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 

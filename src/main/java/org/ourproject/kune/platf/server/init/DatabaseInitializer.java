@@ -6,17 +6,6 @@ import java.util.TimeZone;
 import javax.persistence.NoResultException;
 
 import org.ourproject.kune.platf.server.content.ContentManager;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.ContentStatus;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.I18nTranslation;
-import org.ourproject.kune.platf.server.domain.License;
-import org.ourproject.kune.platf.server.domain.Property;
-import org.ourproject.kune.platf.server.domain.PropertyGroup;
-import org.ourproject.kune.platf.server.domain.PropertySubgroup;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
@@ -29,7 +18,18 @@ import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.GroupType;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.I18nCountry;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.I18nTranslation;
+import cc.kune.domain.License;
+import cc.kune.domain.Property;
+import cc.kune.domain.PropertyGroup;
+import cc.kune.domain.PropertySubgroup;
+import cc.kune.domain.User;
 
 import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.google.inject.Inject;

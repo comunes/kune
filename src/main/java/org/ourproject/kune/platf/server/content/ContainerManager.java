@@ -19,14 +19,14 @@
  */
 package org.ourproject.kune.platf.server.content;
 
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
 import org.ourproject.kune.platf.server.manager.Manager;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Container;
+import cc.kune.domain.Group;
+import cc.kune.domain.I18nLanguage;
 
 public interface ContainerManager extends Manager<Container, Long> {
 

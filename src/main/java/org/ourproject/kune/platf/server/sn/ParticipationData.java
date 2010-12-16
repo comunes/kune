@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.server.sn;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.Group;
+import cc.kune.domain.Group;
 
 public class ParticipationData {
     private List<Group> groupsIsAdmin;

@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.server.sn;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ourproject.kune.platf.server.domain.User;
+import cc.kune.domain.User;
 
 public class UserBuddiesData {
 

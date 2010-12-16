@@ -1,6 +1,6 @@
 package org.ourproject.kune.platf.server.manager;
 
-import org.ourproject.kune.platf.server.domain.PropertySetted;
+import cc.kune.domain.PropertySetted;
 
 public interface PropertySettedManager extends Manager<PropertySetted, Long> {
 

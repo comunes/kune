@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.rate;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.RateResultDTO;
+import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 
@@ -33,7 +33,7 @@ public class RatePresenter {
     private RateView view;
     private final ContentCapabilitiesRegistry capabilitiesRegistry;
 
-    public RatePresenter(final StateManager stateManager, ContentCapabilitiesRegistry capabilitiesRegistry) {
+    public RatePresenter(final StateManager stateManager, final ContentCapabilitiesRegistry capabilitiesRegistry) {
         this.capabilitiesRegistry = capabilitiesRegistry;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
             public void onEvent(final StateAbstractDTO state) {
@@ -50,7 +50,7 @@ public class RatePresenter {
         this.view = view;
     }
 
-    public void setRate(RateResultDTO result) {
+    public void setRate(final RateResult result) {
         setRate(result.getRateByUsers(), result.getRate());
     }
 
@@ -58,15 +58,15 @@ public class RatePresenter {
         view.setVisible(visible);
     }
 
-    private void setRate(Integer rateByUsers, Double rate) {
+    private void setRate(final Integer rateByUsers, final Double rate) {
         view.setVisible(true);
         view.setRate(rate);
         view.setByUsers(rateByUsers);
     }
 
     private void setState(final StateContentDTO state) {
-        Integer rateByUsers = state.getRateByUsers();
-        Double rate = state.getRate();
+        final Integer rateByUsers = state.getRateByUsers();
+        final Double rate = state.getRate();
         if (capabilitiesRegistry.isRateable(state.getTypeId())) {
             setRate(rateByUsers, rate);
         } else {

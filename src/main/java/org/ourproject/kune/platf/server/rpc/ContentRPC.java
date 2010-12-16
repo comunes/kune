@@ -39,15 +39,6 @@ import org.ourproject.kune.platf.server.content.ContainerManager;
 import org.ourproject.kune.platf.server.content.ContentManager;
 import org.ourproject.kune.platf.server.content.ContentUtils;
 import org.ourproject.kune.platf.server.content.CreationService;
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Comment;
-import org.ourproject.kune.platf.server.domain.Container;
-import org.ourproject.kune.platf.server.domain.Content;
-import org.ourproject.kune.platf.server.domain.ContentStatus;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.RateResult;
-import org.ourproject.kune.platf.server.domain.TagCloudResult;
-import org.ourproject.kune.platf.server.domain.User;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.TagUserContentManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
@@ -62,19 +53,24 @@ import cc.kune.core.client.errors.GroupNotFoundException;
 import cc.kune.core.client.errors.NoDefaultContentException;
 import cc.kune.core.client.errors.ToolNotFoundException;
 import cc.kune.core.client.rpcservices.ContentService;
+import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.RateResult;
+import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.dto.AccessRightsDTO;
 import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
-import cc.kune.core.shared.dto.ContentStatusDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
-import cc.kune.core.shared.dto.RateResultDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateNoContentDTO;
 import cc.kune.core.shared.dto.StateToken;
-import cc.kune.core.shared.dto.TagCloudResultDTO;
-import cc.kune.core.shared.dto.TagCountDTO;
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Comment;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.Group;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -244,7 +240,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated(mandatory = false)
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_ONLY)
-    public TagCloudResultDTO getSummaryTags(final String userHash, final StateToken groupToken) {
+    public TagCloudResult getSummaryTags(final String userHash, final StateToken groupToken) {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         return getSummaryTags(group);
     }
@@ -263,14 +259,13 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
-    public RateResultDTO rateContent(final String userHash, final StateToken token, final Double value)
+    public RateResult rateContent(final String userHash, final StateToken token, final Double value)
             throws DefaultException {
         final User rater = getCurrentUser();
         final Long contentId = ContentUtils.parseId(token.getDocument());
 
         if (isUserLoggedIn()) {
-            final RateResult result = contentManager.rateContent(rater, contentId, value);
-            return mapper.map(result, RateResultDTO.class);
+            return contentManager.rateContent(rater, contentId, value);
         } else {
             throw new AccessViolationException();
         }
@@ -353,9 +348,9 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateAbstractDTO setStatus(final String userHash, final StateToken token, final ContentStatusDTO status) {
-        if (status.equals(ContentStatusDTO.publishedOnline) || status.equals(ContentStatusDTO.rejected)
-                || status.equals(ContentStatusDTO.inTheDustbin)) {
+    public StateAbstractDTO setStatus(final String userHash, final StateToken token, final ContentStatus status) {
+        if (status.equals(ContentStatus.publishedOnline) || status.equals(ContentStatus.rejected)
+                || status.equals(ContentStatus.inTheDustbin)) {
             throw new AccessViolationException();
         }
         final Content content = contentManager.setStatus(ContentUtils.parseId(token.getDocument()),
@@ -366,8 +361,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
-    public StateAbstractDTO setStatusAsAdmin(final String userHash, final StateToken token,
-            final ContentStatusDTO status) {
+    public StateAbstractDTO setStatusAsAdmin(final String userHash, final StateToken token, final ContentStatus status) {
         final Content content = contentManager.setStatus(ContentUtils.parseId(token.getDocument()),
                 ContentStatus.valueOf(status.toString()));
         return getState(getCurrentUser(), content);
@@ -376,7 +370,7 @@ public class ContentRPC implements ContentService, RPC {
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
-    public TagCloudResultDTO setTags(final String userHash, final StateToken token, final String tags)
+    public TagCloudResult setTags(final String userHash, final StateToken token, final String tags)
             throws DefaultException {
         final Long contentId = ContentUtils.parseId(token.getDocument());
         final User user = getCurrentUser();
@@ -443,10 +437,9 @@ public class ContentRPC implements ContentService, RPC {
         return mapState(state, user);
     }
 
-    private TagCloudResultDTO getSummaryTags(final Group group) {
+    private TagCloudResult getSummaryTags(final Group group) {
         final TagCloudResult result = tagManager.getTagCloudResultByGroup(group);
-        return new TagCloudResultDTO(mapper.mapList(result.getTagCountList(), TagCountDTO.class), result.getMaxValue(),
-                result.getMinValue());
+        return result;
     }
 
     private UserSession getUserSession() {

@@ -3,14 +3,14 @@ package org.ourproject.kune.testhelper.ctx;
 import java.util.HashMap;
 import java.util.TimeZone;
 
-import org.ourproject.kune.platf.server.domain.AccessLists;
-import org.ourproject.kune.platf.server.domain.Group;
-import org.ourproject.kune.platf.server.domain.I18nCountry;
-import org.ourproject.kune.platf.server.domain.I18nLanguage;
-import org.ourproject.kune.platf.server.domain.SocialNetwork;
-import org.ourproject.kune.platf.server.domain.User;
 
 import cc.kune.core.shared.dto.GroupType;
+import cc.kune.domain.AccessLists;
+import cc.kune.domain.Group;
+import cc.kune.domain.I18nCountry;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.User;
 
 public class DomainContext {
     private final HashMap<String, User> users;

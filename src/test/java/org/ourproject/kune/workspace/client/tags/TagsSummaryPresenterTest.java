@@ -9,9 +9,9 @@ import org.ourproject.kune.workspace.client.search.SiteSearcher;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.core.shared.domain.TagCount;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.core.shared.dto.TagCloudResultDTO;
-import cc.kune.core.shared.dto.TagCountDTO;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -43,8 +43,8 @@ public class TagsSummaryPresenterTest {
     @Test
     public void withTagsViewFalse() {
         final StateContainerDTO state = new StateContainerDTO();
-        final ArrayList<TagCountDTO> list = new ArrayList<TagCountDTO>();
-        state.setTagCloudResult(new TagCloudResultDTO(list, 0, 0));
+        final ArrayList<TagCount> list = new ArrayList<TagCount>();
+        state.setTagCloudResult(new TagCloudResult(list, 0, 0));
         tagsSummaryPresenter.setState(state);
         Mockito.verify(view).setVisible(false);
     }
@@ -52,9 +52,9 @@ public class TagsSummaryPresenterTest {
     @Test
     public void withTagsViewVisible() {
         final StateContainerDTO state = new StateContainerDTO();
-        final ArrayList<TagCountDTO> list = new ArrayList<TagCountDTO>();
-        list.add(new TagCountDTO("abc", 1L));
-        state.setTagCloudResult(new TagCloudResultDTO(list, 0, 0));
+        final ArrayList<TagCount> list = new ArrayList<TagCount>();
+        list.add(new TagCount("abc", 1L));
+        state.setTagCloudResult(new TagCloudResult(list, 0, 0));
         tagsSummaryPresenter.setState(state);
         Mockito.verify(view).setVisible(true);
     }

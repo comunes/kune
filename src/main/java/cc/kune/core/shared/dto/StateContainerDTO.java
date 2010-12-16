@@ -19,6 +19,8 @@
  */
 package cc.kune.core.shared.dto;
 
+import cc.kune.core.shared.domain.TagCloudResult;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateContainerDTO extends StateAbstractDTO implements IsSerializable {
@@ -30,7 +32,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
     private ContainerDTO rootContainer;
     private AccessRightsDTO containerRights;
     private LicenseDTO license;
-    private TagCloudResultDTO tagCloudResult;
+    private TagCloudResult tagCloudResult;
     private AccessListsDTO accessLists;
 
     public StateContainerDTO() {
@@ -60,7 +62,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         return rootContainer;
     }
 
-    public TagCloudResultDTO getTagCloudResult() {
+    public TagCloudResult getTagCloudResult() {
         return tagCloudResult;
     }
 
@@ -72,43 +74,43 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         return typeId;
     }
 
-    public boolean isType(String type) {
+    public boolean isType(final String type) {
         return getTypeId().equals(type);
     }
 
-    public void setAccessLists(AccessListsDTO accessLists) {
+    public void setAccessLists(final AccessListsDTO accessLists) {
         this.accessLists = accessLists;
     }
 
-    public void setContainer(ContainerDTO container) {
+    public void setContainer(final ContainerDTO container) {
         this.container = container;
     }
 
-    public void setContainerRights(AccessRightsDTO containerRights) {
+    public void setContainerRights(final AccessRightsDTO containerRights) {
         this.containerRights = containerRights;
     }
 
-    public void setLanguage(I18nLanguageDTO language) {
+    public void setLanguage(final I18nLanguageDTO language) {
         this.language = language;
     }
 
-    public void setLicense(LicenseDTO license) {
+    public void setLicense(final LicenseDTO license) {
         this.license = license;
     }
 
-    public void setRootContainer(ContainerDTO rootContainer) {
+    public void setRootContainer(final ContainerDTO rootContainer) {
         this.rootContainer = rootContainer;
     }
 
-    public void setTagCloudResult(TagCloudResultDTO tagCloudResult) {
+    public void setTagCloudResult(final TagCloudResult tagCloudResult) {
         this.tagCloudResult = tagCloudResult;
     }
 
-    public void setToolName(String toolName) {
+    public void setToolName(final String toolName) {
         this.toolName = toolName;
     }
 
-    public void setTypeId(String typeId) {
+    public void setTypeId(final String typeId) {
         this.typeId = typeId;
     }
 

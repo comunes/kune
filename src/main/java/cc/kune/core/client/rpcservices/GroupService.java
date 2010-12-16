@@ -20,10 +20,10 @@
 package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.shared.dto.AdmissionTypeDTO;
+import cc.kune.core.shared.domain.AdmissionType;
+import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
-import cc.kune.core.shared.dto.SocialNetworkVisibilityDTO;
 import cc.kune.core.shared.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -45,9 +45,9 @@ public interface GroupService extends RemoteService {
 
     GroupDTO setGroupBackImage(String userHash, StateToken token);
 
-    void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionTypeDTO admissionPolicy);
+    void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken, AdmissionType admissionPolicy);
 
-    void setSocialNetworkVisibility(String userHash, StateToken groupToken, SocialNetworkVisibilityDTO visibility);
+    void setSocialNetworkVisibility(String userHash, StateToken groupToken, SocialNetworkVisibility visibility);
 
     void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled);
 
