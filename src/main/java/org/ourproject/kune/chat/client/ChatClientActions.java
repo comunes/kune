@@ -35,8 +35,8 @@ import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

@@ -22,7 +22,8 @@ package org.ourproject.kune.platf.server.auth;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import org.ourproject.kune.platf.server.access.AccessRol;
+
+import cc.kune.core.shared.domain.AccessRol;
 
 import com.google.inject.BindingAnnotation;
 

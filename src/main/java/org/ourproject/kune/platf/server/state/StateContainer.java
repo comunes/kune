@@ -19,9 +19,9 @@
  */
 package org.ourproject.kune.platf.server.state;
 
-import org.ourproject.kune.platf.server.access.AccessRights;
 
 import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.I18nLanguage;

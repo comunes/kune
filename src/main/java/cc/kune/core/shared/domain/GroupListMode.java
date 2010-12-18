@@ -19,24 +19,8 @@
  */
 package cc.kune.core.shared.domain;
 
-import java.util.List;
-
-
-import cc.kune.domain.Group;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public enum GroupListMode implements IsSerializable {
     NORMAL, NOBODY, EVERYONE;
-
-    public boolean checkIfIncludes(final Group group, final List<Group> list) {
-        switch (this) {
-        case NOBODY:
-            return false;
-        case EVERYONE:
-            return true;
-        default:
-            return list.contains(group);
-        }
-    }
 }

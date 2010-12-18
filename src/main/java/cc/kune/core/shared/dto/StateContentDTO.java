@@ -24,6 +24,7 @@ import java.util.List;
 
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
+import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -32,7 +33,7 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
     private String documentId;
     private int version;
     private String content;
-    private AccessRightsDTO contentRights;
+    private AccessRights contentRights;
     private ContentStatus status;
     private Double rate;
     private Integer rateByUsers;
@@ -53,7 +54,7 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
         return content;
     }
 
-    public AccessRightsDTO getContentRights() {
+    public AccessRights getContentRights() {
         return contentRights;
     }
 
@@ -101,7 +102,7 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
         this.content = content;
     }
 
-    public void setContentRights(final AccessRightsDTO contentRights) {
+    public void setContentRights(final AccessRights contentRights) {
         this.contentRights = contentRights;
     }
 

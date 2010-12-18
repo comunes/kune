@@ -75,10 +75,6 @@
     </field>
   </mapping>
   <mapping>
-    <class-a> cc.kune.core.shared.dto.AccessRightsDTO </class-a>
-    <class-b> org.ourproject.kune.platf.server.access.AccessRights </class-b>
-  </mapping>
-  <mapping>
     <class-a>cc.kune.core.shared.dto.StateContentDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.state.StateContent</class-b>
     <field>
@@ -96,14 +92,14 @@
     <class-a>cc.kune.core.shared.dto.StateAbstractDTO</class-a>
     <class-b>org.ourproject.kune.platf.server.state.StateAbstract</class-b>
   </mapping>
-  <mapping>
-    <class-a> cc.kune.core.shared.dto.StateToken </class-a>
-    <class-b> cc.kune.core.shared.dto.StateToken </class-b>
-    <field>
-      <a>encoded</a>
-      <b>encoded</b>
-    </field>
-  </mapping>
+<!--  <mapping>-->
+<!--    <class-a> cc.kune.core.shared.dto.StateToken </class-a>-->
+<!--    <class-b> cc.kune.core.shared.dto.StateToken </class-b>-->
+<!--    <field>-->
+<!--      <a>encoded</a>-->
+<!--      <b>encoded</b>-->
+<!--    </field>-->
+<!--  </mapping>-->
   <mapping>
     <class-a> cc.kune.core.shared.dto.BasicMimeTypeDTO </class-a>
     <class-b> cc.kune.domain.BasicMimeType </class-b>
@@ -250,7 +246,7 @@
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.AccessRolDTO </class-a>
-    <class-b> org.ourproject.kune.platf.server.access.AccessRol </class-b>
+    <class-b> cc.kune.core.shared.domain.AccessRol </class-b>
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.ToolSimpleDTO </class-a>

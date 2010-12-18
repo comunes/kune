@@ -39,7 +39,6 @@ public class KuneEntryPoint implements EntryPoint {
      */
     public void onModuleLoadCont() {
         DelayedBindRegistry.bind(ginjector);
-
         ginjector.getPlaceManager().revealCurrentPlace();
     }
 

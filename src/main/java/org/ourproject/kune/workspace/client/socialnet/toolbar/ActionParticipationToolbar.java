@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.socialnet.toolbar;
 
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 public interface ActionParticipationToolbar extends ActionToolbar<StateToken> {
 

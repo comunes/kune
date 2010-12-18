@@ -30,8 +30,8 @@ import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.emiteuimodule.client.users.UserGridPanel;
 import com.calclab.suco.client.events.Listener;

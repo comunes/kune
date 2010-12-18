@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
 
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
 import cc.kune.domain.SocialNetwork;

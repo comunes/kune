@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.upload;
 import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
 
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;

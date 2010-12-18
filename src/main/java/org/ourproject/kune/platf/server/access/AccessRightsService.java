@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.server.access;
 
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.User;
 

@@ -33,7 +33,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
-import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
@@ -42,7 +41,8 @@ import org.ourproject.kune.platf.server.content.ContentUtils;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.AccessRol;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Content;
 

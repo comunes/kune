@@ -31,8 +31,8 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.HorizontalPanel;

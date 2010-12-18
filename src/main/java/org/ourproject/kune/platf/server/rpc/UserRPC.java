@@ -23,7 +23,6 @@ import java.util.UUID;
 
 import org.jivesoftware.smack.util.Base64;
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
@@ -38,8 +37,9 @@ import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.UserBuddiesVisibility;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.domain.Group;

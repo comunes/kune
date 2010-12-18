@@ -24,13 +24,13 @@ import java.util.Date;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.server.access;
+package cc.kune.core.shared.domain;
 
 public enum AccessRol {
     Administrator, Editor, Viewer

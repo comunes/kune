@@ -20,9 +20,9 @@
 package cc.kune.core.client.rpcservices;
 
 
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

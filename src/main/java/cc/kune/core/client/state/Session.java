@@ -43,6 +43,7 @@ import java.util.List;
 
 
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nCountryDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
@@ -51,7 +52,6 @@ import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.dto.ToolSimpleDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;

@@ -14,12 +14,12 @@ import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {

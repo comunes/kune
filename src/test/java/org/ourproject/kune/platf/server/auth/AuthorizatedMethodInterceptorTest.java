@@ -8,11 +8,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.server.access.AccessRol;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.ContentNotFoundException;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.AccessRol;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.wideplay.warp.persist.Transactional;
 

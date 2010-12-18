@@ -30,8 +30,8 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.utils.TextUtils;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.ioc.Provider;
 

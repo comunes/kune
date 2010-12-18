@@ -5,7 +5,7 @@ import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertM
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.calclab.suco.client.ioc.Provider;
 

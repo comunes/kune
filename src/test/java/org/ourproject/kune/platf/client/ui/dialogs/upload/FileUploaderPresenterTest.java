@@ -11,7 +11,7 @@ import org.ourproject.kune.workspace.client.upload.FileUploaderPresenter;
 import org.ourproject.kune.workspace.client.upload.FileUploaderView;
 
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 public class FileUploaderPresenterTest {
 

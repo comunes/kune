@@ -5,8 +5,8 @@ import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LicenseDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.calclab.suco.client.events.Listener;

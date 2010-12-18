@@ -21,6 +21,9 @@ package cc.kune.core.shared.dto;
 
 import java.util.List;
 
+import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.domain.utils.StateToken;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public abstract class StateAbstractDTO implements IsSerializable {
@@ -46,7 +49,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
         return socialNetworkData.getGroupMembers();
     }
 
-    public AccessRightsDTO getGroupRights() {
+    public AccessRights getGroupRights() {
         return socialNetworkData.getGroupRights();
     }
 

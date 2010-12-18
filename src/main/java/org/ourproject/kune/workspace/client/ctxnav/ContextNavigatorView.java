@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.ctxnav;
 import org.ourproject.kune.platf.client.View;
 
 import cc.kune.core.shared.domain.ContentStatus;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 public interface ContextNavigatorView extends View {
 

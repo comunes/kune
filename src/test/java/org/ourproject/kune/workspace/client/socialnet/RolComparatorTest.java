@@ -5,17 +5,17 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
 public class RolComparatorTest {
 
     @Test
     public void testIsEnabled() {
-        final AccessRightsDTO adminRights = new AccessRightsDTO(true, true, true);
-        final AccessRightsDTO editorRights = new AccessRightsDTO(false, true, true);
-        final AccessRightsDTO viewerRights = new AccessRightsDTO(false, false, true);
-        final AccessRightsDTO noPermRights = new AccessRightsDTO(false, false, false);
+        final AccessRights adminRights = new AccessRights(true, true, true);
+        final AccessRights editorRights = new AccessRights(false, true, true);
+        final AccessRights viewerRights = new AccessRights(false, false, true);
+        final AccessRights noPermRights = new AccessRights(false, false, false);
         assertTrue(RolComparator.isEnabled(AccessRolDTO.Administrator, adminRights));
         assertFalse(RolComparator.isEnabled(AccessRolDTO.Administrator, editorRights));
         assertFalse(RolComparator.isEnabled(AccessRolDTO.Administrator, viewerRights));
@@ -32,10 +32,10 @@ public class RolComparatorTest {
 
     @Test
     public void testIsMember() {
-        assertFalse(RolComparator.isMember(new AccessRightsDTO(false, false, false)));
-        assertFalse(RolComparator.isMember(new AccessRightsDTO(false, false, true)));
-        assertTrue(RolComparator.isMember(new AccessRightsDTO(false, true, true)));
-        assertTrue(RolComparator.isMember(new AccessRightsDTO(true, true, true)));
+        assertFalse(RolComparator.isMember(new AccessRights(false, false, false)));
+        assertFalse(RolComparator.isMember(new AccessRights(false, false, true)));
+        assertTrue(RolComparator.isMember(new AccessRights(false, true, true)));
+        assertTrue(RolComparator.isMember(new AccessRights(true, true, true)));
     }
 
 }

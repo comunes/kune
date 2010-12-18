@@ -61,7 +61,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(Session.class).to(SessionDefault.class).in(Singleton.class);
         bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
         bind(ErrorHandler.class).in(Singleton.class);
-        bind(ContentProvider.class).to(ContentProviderDefault.class).in(Singleton.class);
+      //  bind(ContentProvider.class).to(ContentProviderDefault.class).in(Singleton.class);
         bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
         // bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
     }

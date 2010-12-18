@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;

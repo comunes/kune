@@ -26,6 +26,7 @@ import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.i18n.I18nReadyEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nCountryDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
@@ -34,7 +35,6 @@ import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.dto.ToolSimpleDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
@@ -62,12 +62,12 @@ public class SessionDefault implements Session {
     private final Event<UserInfoDTO> onUserSignIn;
     private final Event0 onUserSignOut;
     private final Provider<UserServiceAsync> userServiceProvider;
+    private final EventBus eventBus;
 
     @Inject
-    private static EventBus eventBus;
-
-    @Inject
-    public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider) {
+    public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider,
+            EventBus eventBus) {
+        this.eventBus = eventBus;
         this.userHash = cookieManager.getCurrentCookie();
         this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
         this.userServiceProvider = userServiceProvider;
@@ -77,23 +77,28 @@ public class SessionDefault implements Session {
         this.onUserSignOut = new Event0("onUserSignOut");
     }
 
+    @Override
     public void check(final AsyncCallbackSimple<Void> callback) {
         Log.debug("Checking session (userhash: " + getUserHash() + ")");
         userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
     }
 
+    @Override
     public StateContainerDTO getContainerState() {
         return (StateContainerDTO) currentState;
     }
 
+    @Override
     public StateContentDTO getContentState() {
         return (StateContentDTO) currentState;
     }
 
+    @Override
     public List<I18nCountryDTO> getCountries() {
         return initData.getCountries();
     }
 
+    @Override
     public Object[][] getCountriesArray() {
         if (countriesArray == null) {
             countriesArray = mapCountries();
@@ -101,70 +106,87 @@ public class SessionDefault implements Session {
         return countriesArray;
     }
 
+    @Override
     public String getCurrentCCversion() {
         return initData.getCurrentCCversion();
     }
 
+    @Override
     public String getCurrentGroupShortName() {
         return currentState == null ? null : currentState.getStateToken().getGroup();
     }
 
+    @Override
     public I18nLanguageDTO getCurrentLanguage() {
         return currentLanguage;
     }
 
+    @Override
     public StateAbstractDTO getCurrentState() {
         return currentState;
     }
 
+    @Override
     public StateToken getCurrentStateToken() {
         return currentState == null ? null : currentState.getStateToken();
     }
 
+    @Override
     public UserSimpleDTO getCurrentUser() {
         return currentUserInfo == null ? null : currentUserInfo.getUser();
     }
 
+    @Override
     public UserInfoDTO getCurrentUserInfo() {
         return currentUserInfo;
     }
 
+    @Override
     public LicenseDTO getDefLicense() {
         return initData.getDefaultLicense();
     }
 
+    @Override
     public String getGalleryPermittedExtensions() {
         return initData.getGalleryPermittedExtensions();
     }
 
+    @Override
     public Collection<ToolSimpleDTO> getGroupTools() {
         return initData.getGroupTools();
     }
 
+    @Override
     public int getImgCropsize() {
         return initData.getImgCropsize();
     }
 
+    @Override
     public int getImgIconsize() {
         return initData.getImgIconsize();
     }
 
+    @Override
     public int getImgResizewidth() {
         return initData.getImgResizewidth();
     }
 
+    @Override
     public int getImgThumbsize() {
         return initData.getImgThumbsize();
     }
 
+    @Override
     public InitDataDTO getInitData() {
         return initData;
     }
 
+    @Override
     public List<I18nLanguageSimpleDTO> getLanguages() {
         return initData.getLanguages();
     }
 
+    @Override
     public Object[][] getLanguagesArray() {
         if (languagesArray == null) {
             languagesArray = mapLangs();
@@ -172,19 +194,23 @@ public class SessionDefault implements Session {
         return languagesArray;
     }
 
+    @Override
     public List<LicenseDTO> getLicenses() {
         return initData.getLicenses();
     }
 
+    @Override
     public boolean getShowDeletedContent() {
         return currentUserInfo == null ? false : currentUserInfo.getShowDeletedContent();
     }
 
+    @Override
     public String getSiteUrl() {
         final String baseURL = GWT.getModuleBaseURL();
         return baseURL.substring(0, baseURL.lastIndexOf("/" + GWT.getModuleName()));
     }
 
+    @Override
     public Object[][] getTimezones() {
         if (timezonesArray == null) {
             mapTimezones();
@@ -192,26 +218,32 @@ public class SessionDefault implements Session {
         return timezonesArray;
     }
 
+    @Override
     public String getUserHash() {
         return userHash;
     }
 
+    @Override
     public Collection<ToolSimpleDTO> getUserTools() {
         return initData.getUserTools();
     }
 
+    @Override
     public boolean inSameToken(final StateToken token) {
         return getCurrentStateToken().equals(token);
     }
 
+    @Override
     public boolean isCurrentStateAContent() {
         return currentState instanceof StateContentDTO;
     }
 
+    @Override
     public boolean isCurrentStateAGroup() {
         return currentState == null ? false : !currentState.getGroup().isPersonal();
     }
 
+    @Override
     public boolean isInCurrentUserSpace() {
         if (!isLogged()) {
             return false;
@@ -222,35 +254,43 @@ public class SessionDefault implements Session {
         return false;
     }
 
+    @Override
     public boolean isLogged() {
         return userHash != null;
     }
 
+    @Override
     public boolean isNotLogged() {
         return !isLogged();
     }
 
+    @Override
     public void onInitDataReceived(final Listener<InitDataDTO> listener) {
         onInitDataReceived.add(listener);
     }
 
+    @Override
     public void onUserSignIn(final Listener<UserInfoDTO> listener) {
         onUserSignIn.add(listener);
     }
 
+    @Override
     public void onUserSignOut(final Listener0 listener) {
         onUserSignOut.add(listener);
     }
 
+    @Override
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
         this.currentLanguage = currentLanguage;
         eventBus.fireEvent(new I18nReadyEvent());
     }
 
+    @Override
     public void setCurrentState(final StateAbstractDTO currentState) {
         this.currentState = currentState;
     }
 
+    @Override
     public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
         this.currentUserInfo = currentUserInfo;
         if (currentUserInfo != null) {
@@ -260,17 +300,19 @@ public class SessionDefault implements Session {
         }
     }
 
+    @Override
     public void setInitData(final InitDataDTO initData) {
         this.initData = initData;
         onInitDataReceived.fire(initData);
     }
 
+    @Override
     public void setUserHash(final String userHash) {
         this.userHash = userHash;
     }
 
     private Object[][] mapCountries() {
-        assert (initData != null);
+        assert initData != null;
         final Object[][] objs = new Object[initData.getCountries().size()][1];
         int i = 0;
         for (final I18nCountryDTO country : initData.getCountries()) {
@@ -281,7 +323,7 @@ public class SessionDefault implements Session {
     }
 
     private Object[][] mapLangs() {
-        assert (initData != null);
+        assert initData != null;
         final Object[][] objs = new Object[initData.getLanguages().size()][1];
         int i = 0;
         for (final I18nLanguageSimpleDTO language : initData.getLanguages()) {
@@ -292,7 +334,7 @@ public class SessionDefault implements Session {
     }
 
     private void mapTimezones() {
-        assert (initData != null);
+        assert initData != null;
         timezonesArray = new Object[initData.getTimezones().length][1];
         for (int i = 0; i < getTimezones().length; i++) {
             final Object[] obj = new Object[] { initData.getTimezones()[i] };

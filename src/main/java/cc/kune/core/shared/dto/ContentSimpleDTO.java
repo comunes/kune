@@ -20,6 +20,8 @@
 package cc.kune.core.shared.dto;
 
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -30,7 +32,7 @@ public class ContentSimpleDTO implements IsSerializable {
     private String typeId;
     private StateToken stateToken;
     private ContentStatus status;
-    private AccessRightsDTO rights;
+    private AccessRights rights;
     private BasicMimeTypeDTO mimeType;
 
     public Long getId() {
@@ -41,7 +43,7 @@ public class ContentSimpleDTO implements IsSerializable {
         return mimeType;
     }
 
-    public AccessRightsDTO getRights() {
+    public AccessRights getRights() {
         return rights;
     }
 
@@ -69,7 +71,7 @@ public class ContentSimpleDTO implements IsSerializable {
         this.mimeType = mimeType;
     }
 
-    public void setRights(final AccessRightsDTO rights) {
+    public void setRights(final AccessRights rights) {
         this.rights = rights;
     }
 

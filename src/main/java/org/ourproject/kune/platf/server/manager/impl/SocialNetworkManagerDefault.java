@@ -24,7 +24,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.ourproject.kune.platf.server.ServerException;
-import org.ourproject.kune.platf.server.access.AccessRights;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
@@ -41,6 +40,7 @@ import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import cc.kune.domain.Group;

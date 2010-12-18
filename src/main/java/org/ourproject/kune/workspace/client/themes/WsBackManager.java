@@ -1,7 +1,7 @@
 package org.ourproject.kune.workspace.client.themes;
 
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

@@ -35,6 +35,7 @@ import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.EventBus;
 
 public class I18nUITranslationService extends I18nTranslationService {
     private HashMap<String, String> lexicon;
@@ -44,25 +45,29 @@ public class I18nUITranslationService extends I18nTranslationService {
     private final Session session;
 
     @Inject
-    public I18nUITranslationService(final Session session, final I18nServiceAsync i18nService) {
+    public I18nUITranslationService(final Session session, final I18nServiceAsync i18nService, final EventBus eventBus) {
         this.session = session;
         this.i18nService = i18nService;
         final Location loc = WindowUtils.getLocation();
         final String locale = loc.getParameter("locale");
         i18nService.getInitialLanguage(locale, new AsyncCallback<I18nLanguageDTO>() {
+            @Override
             public void onFailure(final Throwable caught) {
                 Log.error("Workspace adaptation to your language failed: " + caught.getMessage());
             }
 
+            @Override
             public void onSuccess(final I18nLanguageDTO result) {
                 currentLang = result;
                 currentLanguageCode = currentLang.getCode();
                 session.setCurrentLanguage(currentLang);
                 i18nService.getLexicon(currentLang.getCode(), new AsyncCallback<HashMap<String, String>>() {
+                    @Override
                     public void onFailure(final Throwable caught) {
                         Log.error("Workspace adaptation to your language failed:" + caught.getMessage());
                     }
 
+                    @Override
                     public void onSuccess(final HashMap<String, String> result) {
                         lexicon = result;
                         session.setCurrentLanguage(currentLang);
@@ -152,9 +157,11 @@ public class I18nUITranslationService extends I18nTranslationService {
             if (session.isLogged()) {
                 i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text,
                         new AsyncCallback<String>() {
+                            @Override
                             public void onFailure(final Throwable caught) {
                             }
 
+                            @Override
                             public void onSuccess(final String result) {
                             }
                         });

@@ -25,8 +25,8 @@ import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.client.errors.NameNotPermittedException;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Event2;

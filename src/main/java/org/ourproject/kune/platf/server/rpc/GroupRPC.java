@@ -20,7 +20,6 @@
 package org.ourproject.kune.platf.server.rpc;
 
 import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
@@ -31,11 +30,12 @@ import org.ourproject.kune.platf.server.mapper.Mapper;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.GroupService;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;

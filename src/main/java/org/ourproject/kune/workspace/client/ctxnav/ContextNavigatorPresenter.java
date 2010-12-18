@@ -39,7 +39,8 @@ import org.ourproject.kune.workspace.client.upload.FileUploader;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.ContentStatus;
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
@@ -47,7 +48,6 @@ import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -95,8 +95,10 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         addRenameListener();
     }
 
+    @Override
     public void addFileUploaderListener(final FileUploader uploader) {
         uploader.addOnUploadCompleteListener(new Listener<StateToken>() {
+            @Override
             public void onEvent(final StateToken currentUploadStateToken) {
                 if (currentUploadStateToken.hasSameContainer(session.getCurrentStateToken())) {
                     stateManager.reload();
@@ -105,6 +107,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         });
     }
 
+    @Override
     public void attach() {
         // FIXME At the moment detach (removeFromParent) destroy the gwt-ext
         // TreePanel and the widget must be recreated (cannot be attached again
@@ -113,6 +116,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         bottomToolbar.attach();
     }
 
+    @Override
     public void clear() {
         topToolbar.clear();
         bottomToolbar.clear();
@@ -120,12 +124,14 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         actionsByItem.clear();
     }
 
+    @Override
     public void detach() {
         view.detach();
         topToolbar.detach();
         bottomToolbar.detach();
     }
 
+    @Override
     public void editItem(final StateToken stateToken) {
         view.editItem(genId(stateToken));
     }
@@ -135,10 +141,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         addListeners();
     }
 
+    @Override
     public boolean isSelected(final StateToken stateToken) {
         return view.isSelected(genId(stateToken));
     }
 
+    @Override
     public void refreshState() {
         final StateAbstractDTO currentState = session.getCurrentState();
         if (currentState instanceof StateContainerDTO) {
@@ -146,6 +154,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         }
     }
 
+    @Override
     public void selectItem(final StateToken stateToken) {
         view.selectItem(genId(stateToken));
         topToolbar.disableMenusAndClearButtons();
@@ -155,15 +164,18 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         bottomToolbar.addActions(itemCollection, AbstractFoldableContentActions.CONTEXT_BOTTOMBAR);
     }
 
+    @Override
     public void setEditOnNextStateChange(final boolean edit) {
         editOnNextStateChange = edit;
     }
 
+    @Override
     public void setItemStatus(final StateToken stateToken, final ContentStatus status) {
         clear();
         refreshState();
     }
 
+    @Override
     public void setState(final StateContainerDTO state, final boolean select) {
         setStateContainer(state, select);
     }
@@ -178,7 +190,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     private ActionItemCollection<StateToken> addItem(final String title, final String contentTypeId,
             final BasicMimeTypeDTO mimeType, final ContentStatus status, final StateToken stateToken,
-            final StateToken parentStateToken, final AccessRightsDTO rights, final boolean isNodeSelected) {
+            final StateToken parentStateToken, final AccessRights rights, final boolean isNodeSelected) {
         final ActionItemCollection<StateToken> toolbarActions = actionRegistry.getCurrentActions(stateToken,
                 contentTypeId, session.isLogged(), rights, true);
 
@@ -199,11 +211,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     private void addListeners() {
         session.onUserSignIn(new Listener<UserInfoDTO>() {
+            @Override
             public void onEvent(final UserInfoDTO parameter) {
                 clear();
             }
         });
         session.onUserSignOut(new Listener0() {
+            @Override
             public void onEvent() {
                 clear();
             }
@@ -212,11 +226,13 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     private void addRenameListener() {
         final Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
+            @Override
             public void onEvent(final StateToken token, final String newName) {
                 setItemText(token, newName);
             }
         };
         final Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
+            @Override
             public void onEvent(final StateToken token, final String oldName) {
                 setItemText(token, oldName);
             }
@@ -225,7 +241,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         renameAction.onFail(onFail);
     }
 
-    private void createChildItems(final ContainerDTO container, final AccessRightsDTO containerRights) {
+    private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
         for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
             addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatus.publishedOnline,
                     siblingFolder.getStateToken(),
@@ -239,7 +255,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     private void createTreePath(final StateToken state, final ContainerSimpleDTO[] absolutePath,
-            final AccessRightsDTO rights) {
+            final AccessRights rights) {
         for (final ContainerSimpleDTO folder : absolutePath) {
             final StateToken folderStateToken = folder.getStateToken();
             final StateToken parentStateToken = state.copy().clearDocument().setFolder(folder.getParentFolderId());
@@ -298,12 +314,12 @@ public class ContextNavigatorPresenter implements ContextNavigator {
 
     private void setStateContainer(final StateContainerDTO state, final boolean select) {
         final StateToken stateToken = state.getStateToken();
-        final boolean isContent = (state instanceof StateContentDTO);
+        final boolean isContent = state instanceof StateContentDTO;
         StateContentDTO stateContent = null;
 
         final ContainerDTO container = state.getContainer();
-        final AccessRightsDTO containerRights = state.getContainerRights();
-        AccessRightsDTO rights;
+        final AccessRights containerRights = state.getContainerRights();
+        AccessRights rights;
 
         showRootFolder(state, containerRights);
 
@@ -343,7 +359,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         bottomToolbar.attach();
     }
 
-    private void showRootFolder(final StateContainerDTO state, final AccessRightsDTO containerRights) {
+    private void showRootFolder(final StateContainerDTO state, final AccessRights containerRights) {
         // If container is not a root folder process root (add
         // childs to view)
         final ContainerDTO root = state.getRootContainer();

@@ -27,7 +27,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
-import org.ourproject.kune.platf.server.access.AccessRol;
+
+import cc.kune.core.shared.domain.AccessRol;
 
 @Entity
 @Table(name = "access_lists")

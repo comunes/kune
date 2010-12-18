@@ -19,6 +19,8 @@
  */
 package cc.kune.core.shared.dto;
 
+import cc.kune.core.shared.domain.utils.StateToken;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**

@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 
+import cc.kune.core.shared.domain.AccessRol;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
 import cc.kune.domain.GroupList;

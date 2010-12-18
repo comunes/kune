@@ -1,5 +1,7 @@
 package cc.kune.core.client.ws;
 
+import cc.kune.core.client.notify.AlertEvent;
+import cc.kune.core.client.notify.UserNotifierPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -15,7 +17,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
  * The Class CorePresenter.
  */
 public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresenter.CoreProxy> {
-    @ProxyCodeSplit
+	@ProxyCodeSplit
     @NameToken("home")
     public interface CoreProxy extends ProxyPlace<CorePresenter> {
     }
@@ -25,13 +27,13 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
 
     @Inject
     public CorePresenter(final EventBus eventBus, final CoreView view, final CoreProxy proxy,
-            final I18nTranslationService i18n) {
+            final I18nTranslationService i18n, UserNotifierPresenter userNotifier) {
         super(eventBus, view, proxy);
     }
 
     @Override
     protected void revealInParent() {
-        RevealRootLayoutContentEvent.fire(eventBus, this);
+        RevealRootLayoutContentEvent.fire(getEventBus(), this);    
     }
 
 }

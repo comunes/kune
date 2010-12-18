@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.upload;
 
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.calclab.suco.client.events.Listener;
 

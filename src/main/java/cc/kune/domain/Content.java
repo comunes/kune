@@ -53,7 +53,7 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
 import cc.kune.core.shared.domain.ContentStatus;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.utils.HasStateToken;
 
 import com.google.inject.name.Named;

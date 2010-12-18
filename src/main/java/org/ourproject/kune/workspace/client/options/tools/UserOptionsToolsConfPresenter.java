@@ -27,7 +27,7 @@ import org.ourproject.kune.workspace.client.options.EntityOptions;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ToolSimpleDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;

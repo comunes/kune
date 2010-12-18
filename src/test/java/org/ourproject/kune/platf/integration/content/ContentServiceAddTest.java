@@ -14,13 +14,13 @@ import org.ourproject.kune.wiki.server.WikiServerTool;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
@@ -43,9 +43,9 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         doLogin();
         defaultContent = getSiteDefaultContent();
         assertEquals(1, defaultContent.getContainer().getContents().size());
-        final AccessRightsDTO cntRights = defaultContent.getContentRights();
-        final AccessRightsDTO ctxRights = defaultContent.getContainerRights();
-        final AccessRightsDTO groupRights = defaultContent.getGroupRights();
+        final AccessRights cntRights = defaultContent.getContentRights();
+        final AccessRights ctxRights = defaultContent.getContainerRights();
+        final AccessRights groupRights = defaultContent.getGroupRights();
 
         final String title = "New Content Title";
         final StateContentDTO added = contentService.addContent(session.getHash(),

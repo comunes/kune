@@ -23,7 +23,7 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.calclab.suco.client.events.Listener2;
 

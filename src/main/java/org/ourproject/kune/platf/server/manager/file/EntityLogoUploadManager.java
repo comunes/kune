@@ -30,13 +30,13 @@ import magick.MagickException;
 
 import org.apache.commons.fileupload.FileItem;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
-import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.AccessRol;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Group;

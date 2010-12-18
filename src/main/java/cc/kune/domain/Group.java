@@ -47,8 +47,8 @@ import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.constraints.Length;
 
 import cc.kune.core.shared.domain.AdmissionType;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupType;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.domain.utils.HasId;
 
 import com.google.inject.name.Named;

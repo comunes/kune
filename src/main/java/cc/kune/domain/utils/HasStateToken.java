@@ -19,7 +19,7 @@
  */
 package cc.kune.domain.utils;
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 public interface HasStateToken {
 

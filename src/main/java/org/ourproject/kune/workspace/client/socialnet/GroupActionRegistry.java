@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.socialnet;
 
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 /**
  * The Class GroupActionRegistry stores actions over groups (mainly used in SN)

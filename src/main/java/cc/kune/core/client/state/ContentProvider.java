@@ -20,8 +20,8 @@
 package cc.kune.core.client.state;
 
 
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

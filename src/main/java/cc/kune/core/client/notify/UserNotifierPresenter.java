@@ -3,47 +3,67 @@ package cc.kune.core.client.notify;
 import org.ourproject.common.client.notify.ConfirmationAsk;
 import org.ourproject.common.client.notify.NotifyLevel;
 
+import cc.kune.core.client.notify.AlertEvent.AlertHandler;
 import cc.kune.core.client.notify.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.UserNotifierPresenter.UserNotifierView;
+import cc.kune.core.client.notify.UserNotifyEvent.UserNotifyHandler;
 
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.proxy.Proxy;
 
-public class UserNotifierPresenter extends Presenter<UserNotifierView, UserNotifierProxy> {
+public class UserNotifierPresenter extends
+		Presenter<UserNotifierView, UserNotifierProxy> {
+	@ProxyCodeSplit
+	public interface UserNotifierProxy extends
+			Proxy<UserNotifierPresenter> {
+	}
 
-    public interface UserNotifierProxy extends ProxyPlace<UserNotifierPresenter> {
-    }
+	public interface UserNotifierView extends View {
+		public void alert(String title, String message);
 
-    public interface UserNotifierView extends View {
-        public void alert(String title, String message);
+		public void confirmationAsk(ConfirmationAsk<?> ask);
 
-        public void confirmationAsk(ConfirmationAsk<?> ask);
+		public void notify(NotifyLevel level, String message);
+	}
 
-        public void notify(NotifyLevel level, String message);
-    }
+	@Inject
+	public UserNotifierPresenter(final EventBus eventBus,
+			final UserNotifierView view, final UserNotifierProxy proxy) {
+		super(eventBus, view, proxy);
+		addRegisteredHandler(UserNotifyEvent.getType(),
+				new UserNotifyHandler() {
+					@Override
+					public void onUserNotify(UserNotifyEvent event) {
+						view.notify(event.getLevel(), event.getMessage());
+					}
+				});
+		addRegisteredHandler(AlertEvent.getType(), new AlertHandler() {
+			@Override
+			public void onAlert(AlertEvent event) {
+				view.alert(event.getTitle(), event.getMessage());
+			}
+		});
+	}
 
-    @Inject
-    public UserNotifierPresenter(final EventBus eventBus, final UserNotifierView view, final UserNotifierProxy proxy) {
-        super(eventBus, view, proxy);
-    }
+	@ProxyEvent
+	public void onUserNotify(UserNotifyEvent event) {
+		// FIXME test this
+		getView().notify(event.getLevel(), event.getMessage());
+	}
 
-    public void notify(final NotifyLevel level, final String message) {
-        getView().notify(level, message);
-    }
+	@ProxyEvent
+	public void onAlert(AlertEvent event) {
+		getView().alert(event.getTitle(), event.getMessage());
+	};
 
-    public void alert(final String title, final String message) {
-        getView().alert(title, message);
-    };
-
-    public void onConfirmationAsk(final ConfirmationAsk<?> ask) {
-        getView().confirmationAsk(ask);
-    }
-
-    @Override
-    protected void revealInParent() {
-    }
+	@Override
+	protected void revealInParent() {
+	}
 
 }

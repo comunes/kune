@@ -7,9 +7,9 @@ import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
-import cc.kune.core.shared.dto.StateToken;
 
 public class EntityLogoPresenterTest {
 

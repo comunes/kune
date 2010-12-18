@@ -21,7 +21,7 @@ package cc.kune.core.client.rpcservices;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.domain.UserBuddiesVisibility;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 

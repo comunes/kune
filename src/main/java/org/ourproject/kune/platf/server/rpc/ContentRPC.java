@@ -28,7 +28,6 @@ import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
-import org.ourproject.kune.platf.server.access.AccessRol;
 import org.ourproject.kune.platf.server.access.AccessService;
 import org.ourproject.kune.platf.server.access.FinderService;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
@@ -53,10 +52,12 @@ import cc.kune.core.client.errors.GroupNotFoundException;
 import cc.kune.core.client.errors.NoDefaultContentException;
 import cc.kune.core.client.errors.ToolNotFoundException;
 import cc.kune.core.client.rpcservices.ContentService;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.domain.TagCloudResult;
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.CommentDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
@@ -64,7 +65,6 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateNoContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Comment;
 import cc.kune.domain.Container;
@@ -116,6 +116,7 @@ public class ContentRPC implements ContentService, RPC {
         this.mapper = mapper;
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -126,6 +127,7 @@ public class ContentRPC implements ContentService, RPC {
         contentManager.addAuthor(user, contentId, authorShortName);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -137,6 +139,7 @@ public class ContentRPC implements ContentService, RPC {
         return mapper.map(comment, CommentDTO.class);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -148,6 +151,7 @@ public class ContentRPC implements ContentService, RPC {
         return mapper.map(comment, CommentDTO.class);
     }
 
+    @Override
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -157,6 +161,7 @@ public class ContentRPC implements ContentService, RPC {
         return createContent(parentToken, title, typeId, body);
     }
 
+    @Override
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -168,6 +173,7 @@ public class ContentRPC implements ContentService, RPC {
         return getState(user, container);
     }
 
+    @Override
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -195,6 +201,7 @@ public class ContentRPC implements ContentService, RPC {
         }
     }
 
+    @Override
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -203,6 +210,7 @@ public class ContentRPC implements ContentService, RPC {
         return createContent(parentToken, "Wave embeded test", typeId, waveId);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -211,6 +219,7 @@ public class ContentRPC implements ContentService, RPC {
         return getState(getCurrentUser(), contentManager.setStatus(contentId, ContentStatus.inTheDustbin));
     }
 
+    @Override
     @Authenticated(mandatory = false)
     @Transactional(type = TransactionType.READ_ONLY)
     public StateAbstractDTO getContent(final String userHash, final StateToken token) throws DefaultException {
@@ -237,6 +246,7 @@ public class ContentRPC implements ContentService, RPC {
         }
     }
 
+    @Override
     @Authenticated(mandatory = false)
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_ONLY)
@@ -245,6 +255,7 @@ public class ContentRPC implements ContentService, RPC {
         return getSummaryTags(group);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -256,6 +267,7 @@ public class ContentRPC implements ContentService, RPC {
         return mapper.map(comment, CommentDTO.class);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -271,6 +283,7 @@ public class ContentRPC implements ContentService, RPC {
         }
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -281,6 +294,7 @@ public class ContentRPC implements ContentService, RPC {
         contentManager.removeAuthor(user, contentId, authorShortName);
     }
 
+    @Override
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -290,6 +304,7 @@ public class ContentRPC implements ContentService, RPC {
         return getContent(userHash, token);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -305,6 +320,7 @@ public class ContentRPC implements ContentService, RPC {
         return getContent(userHash, token);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -316,6 +332,7 @@ public class ContentRPC implements ContentService, RPC {
         creationService.saveContent(user, content, textContent);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -325,6 +342,7 @@ public class ContentRPC implements ContentService, RPC {
         return mapper.map(content, ContentSimpleDTO.class);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -335,6 +353,7 @@ public class ContentRPC implements ContentService, RPC {
         return mapper.map(contentManager.setLanguage(user, contentId, languageCode), I18nLanguageDTO.class);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -345,6 +364,7 @@ public class ContentRPC implements ContentService, RPC {
         contentManager.setPublishedOn(user, contentId, publishedOn);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -358,6 +378,7 @@ public class ContentRPC implements ContentService, RPC {
         return getState(getCurrentUser(), content);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -367,6 +388,7 @@ public class ContentRPC implements ContentService, RPC {
         return getState(getCurrentUser(), content);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -379,6 +401,7 @@ public class ContentRPC implements ContentService, RPC {
         return getSummaryTags(group);
     }
 
+    @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Viewer)
     @Transactional(type = TransactionType.READ_WRITE)
@@ -454,7 +477,7 @@ public class ContentRPC implements ContentService, RPC {
             final ContentSimpleDTO siblingDTO) {
         final Content sibling = contentManager.find(siblingDTO.getId());
         final AccessLists lists = sibling.hasAccessList() ? sibling.getAccessLists() : groupAccessList;
-        siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRightsDTO.class));
+        siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRights.class));
     }
 
     private StateContainerDTO mapState(final StateContainer state, final User user) {

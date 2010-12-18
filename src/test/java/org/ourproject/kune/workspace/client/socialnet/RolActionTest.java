@@ -5,24 +5,24 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
 public class RolActionTest {
 
-    private AccessRightsDTO adminRights;
-    private AccessRightsDTO editorRights;
-    private AccessRightsDTO viewerRights;
-    private AccessRightsDTO noPermRights;
+    private AccessRights adminRights;
+    private AccessRights editorRights;
+    private AccessRights viewerRights;
+    private AccessRights noPermRights;
     private UIStatus ff;
     private UIStatus tt;
 
     @Before
     public void before() {
-        adminRights = new AccessRightsDTO(true, true, true);
-        editorRights = new AccessRightsDTO(false, true, true);
-        viewerRights = new AccessRightsDTO(false, false, true);
-        noPermRights = new AccessRightsDTO(false, false, false);
+        adminRights = new AccessRights(true, true, true);
+        editorRights = new AccessRights(false, true, true);
+        viewerRights = new AccessRights(false, false, true);
+        noPermRights = new AccessRights(false, false, false);
         ff = new UIStatus(false, false);
         tt = new UIStatus(true, true);
     }

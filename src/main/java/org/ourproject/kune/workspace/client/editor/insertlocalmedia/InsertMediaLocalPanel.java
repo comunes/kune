@@ -5,9 +5,9 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstractPanel;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherField;
 
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.core.shared.dto.LinkDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;

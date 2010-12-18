@@ -7,9 +7,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.events.Listener;
 
@@ -26,12 +26,12 @@ public class ActionRegistryTest {
     @Test
     public void actionsEmptyButNeverNull() {
         Mockito.when(session.isLogged()).thenReturn(true);
-        checkActionLists(0, new AccessRightsDTO(true, true, true), true);
-        checkActionLists(0, new AccessRightsDTO(true, true, true), false);
-        checkActionLists(0, new AccessRightsDTO(false, true, true), true);
-        checkActionLists(0, new AccessRightsDTO(false, true, true), false);
-        checkActionLists(0, new AccessRightsDTO(false, false, true), true);
-        checkActionLists(0, new AccessRightsDTO(false, false, true), false);
+        checkActionLists(0, new AccessRights(true, true, true), true);
+        checkActionLists(0, new AccessRights(true, true, true), false);
+        checkActionLists(0, new AccessRights(false, true, true), true);
+        checkActionLists(0, new AccessRights(false, true, true), false);
+        checkActionLists(0, new AccessRights(false, false, true), true);
+        checkActionLists(0, new AccessRights(false, false, true), false);
     }
 
     @Before
@@ -40,16 +40,19 @@ public class ActionRegistryTest {
         registry = new ActionRegistry<StateToken>();
         adminAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Administrator, SOME_ID,
                 new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken parameter) {
                     }
                 });
         editorAction = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor, SOME_ID,
                 new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken parameter) {
                     }
                 });
 
         viewerAction = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer, new Listener<StateToken>() {
+            @Override
             public void onEvent(final StateToken parameter) {
             }
         });
@@ -60,32 +63,32 @@ public class ActionRegistryTest {
     public void mustBeAuthFalse() {
         Mockito.when(session.isLogged()).thenReturn(false);
         addDefActions();
-        checkActionLists(0, new AccessRightsDTO(false, true, true), true);
-        checkActionLists(1, new AccessRightsDTO(false, true, true), false);
+        checkActionLists(0, new AccessRights(false, true, true), true);
+        checkActionLists(1, new AccessRights(false, true, true), false);
     }
 
     @Test
     public void testAddWhenAdmin() {
         Mockito.when(session.isLogged()).thenReturn(true);
         addDefActions();
-        checkActionLists(2, new AccessRightsDTO(true, true, true), true);
-        checkActionLists(3, new AccessRightsDTO(true, true, true), false);
+        checkActionLists(2, new AccessRights(true, true, true), true);
+        checkActionLists(3, new AccessRights(true, true, true), false);
     }
 
     @Test
     public void testAddWhenEditor() {
         Mockito.when(session.isLogged()).thenReturn(true);
         addDefActions();
-        checkActionLists(1, new AccessRightsDTO(false, true, true), true);
-        checkActionLists(2, new AccessRightsDTO(false, true, true), false);
+        checkActionLists(1, new AccessRights(false, true, true), true);
+        checkActionLists(2, new AccessRights(false, true, true), false);
     }
 
     @Test
     public void testAddWhenViewer() {
         Mockito.when(session.isLogged()).thenReturn(true);
         addDefActions();
-        checkActionLists(0, new AccessRightsDTO(false, false, true), true);
-        checkActionLists(1, new AccessRightsDTO(false, false, true), false);
+        checkActionLists(0, new AccessRights(false, false, true), true);
+        checkActionLists(1, new AccessRights(false, false, true), false);
     }
 
     private void addDefActions() {
@@ -94,9 +97,11 @@ public class ActionRegistryTest {
         registry.addAction(viewerAction, DEF_CONTENT_TYPE_ID);
     }
 
-    private void checkActionLists(final int expectedActions, final AccessRightsDTO accessRightsDTO,
+    private void checkActionLists(final int expectedActions, final AccessRights AccessRights,
             final boolean toolbarActions) {
-        assertEquals(expectedActions, registry.getCurrentActions(new StateToken(), DEF_CONTENT_TYPE_ID,
-                session.isLogged(), accessRightsDTO, toolbarActions).size());
+        assertEquals(
+                expectedActions,
+                registry.getCurrentActions(new StateToken(), DEF_CONTENT_TYPE_ID, session.isLogged(), AccessRights,
+                        toolbarActions).size());
     }
 }

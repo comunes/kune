@@ -33,7 +33,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.GroupNotFoundException;
 import cc.kune.core.client.errors.NoDefaultContentException;
 import cc.kune.core.client.errors.ToolNotFoundException;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Comment;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;

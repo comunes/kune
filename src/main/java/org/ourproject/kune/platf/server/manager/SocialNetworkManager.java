@@ -19,6 +19,7 @@
  */
 package org.ourproject.kune.platf.server.manager;
 
+
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 
 import cc.kune.core.client.errors.AccessViolationException;

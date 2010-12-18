@@ -21,9 +21,9 @@ package cc.kune.core.client.state;
 
 
 import cc.kune.core.client.actions.BeforeActionListener;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;

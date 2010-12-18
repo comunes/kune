@@ -32,7 +32,7 @@ import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.ParticipationDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -63,6 +63,7 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
                 false);
         super.addGroupOperation(gotoGroupMenuItem, false);
         final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
+            @Override
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
             }
@@ -78,7 +79,7 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
     @SuppressWarnings("unchecked")
     private void setState(final StateAbstractDTO state) {
         final ParticipationDataDTO participation = state.getParticipation();
-        final AccessRightsDTO rights = state.getGroupRights();
+        final AccessRights rights = state.getGroupRights();
         view.clear();
         final List<GroupDTO> groupsIsAdmin = participation.getGroupsIsAdmin();
         final List<GroupDTO> groupsIsCollab = participation.getGroupsIsCollab();

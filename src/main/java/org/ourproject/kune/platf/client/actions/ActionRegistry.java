@@ -21,8 +21,7 @@ package org.ourproject.kune.platf.client.actions;
 
 import java.util.HashMap;
 
-
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.allen_sauer.gwt.log.client.Log;
 
@@ -40,7 +39,7 @@ public class ActionRegistry<T> {
     }
 
     public void addAction(final ActionDescriptor<T> action, final String... typeIds) {
-        assert (action != null);
+        assert action != null;
         for (final String typeId : typeIds) {
             String text = action.getText();
             Log.debug("Registering action " + (text == null ? "with icon" : "'" + text + "'") + " for " + typeId);
@@ -49,13 +48,13 @@ public class ActionRegistry<T> {
         }
     }
 
-    public ActionItemCollection<T> getCurrentActions(final T item, final boolean isLogged,
-            final AccessRightsDTO rights, final boolean toolbarItems) {
+    public ActionItemCollection<T> getCurrentActions(final T item, final boolean isLogged, final AccessRights rights,
+            final boolean toolbarItems) {
         return getCurrentActions(item, GENERIC, isLogged, rights, toolbarItems);
     }
 
     public ActionItemCollection<T> getCurrentActions(final T item, final String typeId, final boolean isLogged,
-            final AccessRightsDTO rights, final boolean toolbarItems) {
+            final AccessRights rights, final boolean toolbarItems) {
         final ActionItemCollection<T> collection = new ActionItemCollection<T>();
 
         for (final ActionDescriptor<T> action : getActions(typeId)) {
@@ -98,7 +97,7 @@ public class ActionRegistry<T> {
         return actionColl;
     }
 
-    private boolean mustAdd(final boolean isLogged, final AccessRightsDTO rights, final ActionDescriptor<T> action) {
+    private boolean mustAdd(final boolean isLogged, final AccessRights rights, final ActionDescriptor<T> action) {
         if (action.mustBeAuthenticated()) {
             if (!isLogged) {
                 return false;

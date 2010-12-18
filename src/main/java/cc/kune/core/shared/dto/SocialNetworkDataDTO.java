@@ -21,6 +21,7 @@ package cc.kune.core.shared.dto;
 
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -31,7 +32,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
     private ParticipationDataDTO userParticipation;
     private UserBuddiesVisibility userBuddiesVisibility;
     private UserBuddiesDataDTO userBuddies;
-    private AccessRightsDTO groupRights;
+    private AccessRights groupRights;
     private boolean isBuddiesVisible;
     private boolean isMembersVisible;
 
@@ -42,7 +43,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
     public SocialNetworkDataDTO(final SocialNetworkVisibility socialNetworkVisibility,
             final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation,
             final UserBuddiesVisibility userBuddiesVisibility, final UserBuddiesDataDTO userBuddies,
-            final AccessRightsDTO groupRights, final boolean isBuddiesVisible, final boolean isMembersVisible) {
+            final AccessRights  groupRights, final boolean isBuddiesVisible, final boolean isMembersVisible) {
         this.socialNetworkVisibility = socialNetworkVisibility;
         this.groupMembers = groupMembers;
         this.userParticipation = userParticipation;
@@ -57,7 +58,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
         return groupMembers;
     }
 
-    public AccessRightsDTO getGroupRights() {
+    public AccessRights  getGroupRights() {
         return groupRights;
     }
 
@@ -101,7 +102,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
         this.groupMembers = groupMembers;
     }
 
-    public void setGroupRights(final AccessRightsDTO groupRights) {
+    public void setGroupRights(final AccessRights groupRights) {
         this.groupRights = groupRights;
     }
 

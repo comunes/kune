@@ -9,11 +9,11 @@ import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateNoContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 

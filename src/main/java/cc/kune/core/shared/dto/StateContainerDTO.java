@@ -20,6 +20,7 @@
 package cc.kune.core.shared.dto;
 
 import cc.kune.core.shared.domain.TagCloudResult;
+import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
@@ -30,7 +31,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
     private String toolName;
     private ContainerDTO container;
     private ContainerDTO rootContainer;
-    private AccessRightsDTO containerRights;
+    private AccessRights containerRights;
     private LicenseDTO license;
     private TagCloudResult tagCloudResult;
     private AccessListsDTO accessLists;
@@ -46,7 +47,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         return container;
     }
 
-    public AccessRightsDTO getContainerRights() {
+    public AccessRights getContainerRights() {
         return containerRights;
     }
 
@@ -86,7 +87,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         this.container = container;
     }
 
-    public void setContainerRights(final AccessRightsDTO containerRights) {
+    public void setContainerRights(final AccessRights containerRights) {
         this.containerRights = containerRights;
     }
 

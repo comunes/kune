@@ -6,7 +6,7 @@ import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -17,7 +17,7 @@ public abstract class RolAction extends AbstractExtendedAction {
 
     public static UIStatus refreshStatus(final AccessRolDTO rolRequired, final boolean authNeed,
             final boolean isLogged, final boolean visibleForMembers, final boolean visibleForNonMemb,
-            final AccessRightsDTO newRights) {
+            final AccessRights newRights) {
         boolean newVisibility = false;
         boolean newEnabled = false;
         if (authNeed && !isLogged) {
@@ -27,7 +27,7 @@ public abstract class RolAction extends AbstractExtendedAction {
             newEnabled = RolComparator.isEnabled(rolRequired, newRights);
             if (newEnabled) {
                 final boolean isMember = RolComparator.isMember(newRights);
-                newEnabled = newVisibility = ((isMember && visibleForMembers) || (!isMember && visibleForNonMemb));
+                newEnabled = newVisibility = isMember && visibleForMembers || !isMember && visibleForNonMemb;
             } else {
                 newVisibility = false;
             }
@@ -52,8 +52,8 @@ public abstract class RolAction extends AbstractExtendedAction {
         this.visibleForMembers = true;
         this.visibleForNonMemb = true;
         this.authNeed = false;
-        rightsManager.onRightsChanged(new Listener2<AccessRightsDTO, AccessRightsDTO>() {
-            public void onEvent(final AccessRightsDTO prevRights, final AccessRightsDTO newRights) {
+        rightsManager.onRightsChanged(new Listener2<AccessRights, AccessRights>() {
+            public void onEvent(final AccessRights prevRights, final AccessRights newRights) {
                 setStatus(refreshStatus(rolRequired, authNeed, session.isLogged(), visibleForMembers,
                         visibleForNonMemb, newRights));
             }

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.shared.dto;
+package cc.kune.core.shared.domain.utils;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

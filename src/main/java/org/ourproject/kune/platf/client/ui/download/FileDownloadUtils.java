@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.utils.Url;
 import org.ourproject.kune.platf.client.utils.UrlParam;
 
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;

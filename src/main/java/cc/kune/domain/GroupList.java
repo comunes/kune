@@ -74,6 +74,17 @@ public class GroupList {
         }
     }
 
+    public boolean checkIfIncludes(final Group group, final List<Group> list, final GroupListMode mode) {
+        switch (mode) {
+        case NOBODY:
+            return false;
+        case EVERYONE:
+            return true;
+        default:
+            return list.contains(group);
+        }
+    }
+
     public ArrayList<Group> duplicate() {
         return new ArrayList<Group>(list);
     }
@@ -91,7 +102,7 @@ public class GroupList {
     }
 
     public boolean includes(final Group group) {
-        return mode.checkIfIncludes(group, this.list);
+        return checkIfIncludes(group, this.list, mode);
     }
 
     public boolean isEmpty() {

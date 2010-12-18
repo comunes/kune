@@ -14,16 +14,16 @@ import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 @GinModules({ CoreGinModule.class })
 public interface CoreGinjector extends Ginjector {
 
-    AsyncProvider<CorePresenter> getCorePresenter();
+	AsyncProvider<CorePresenter> getCorePresenter();
 
-    EventBus getEventBus();
+	EventBus getEventBus();
 
-    PlaceManager getPlaceManager();
+	PlaceManager getPlaceManager();
 
-    ProxyFailureHandler getProxyFailureHandler();
+	ProxyFailureHandler getProxyFailureHandler();
 
-    AsyncProvider<SpinerPresenter> getSpinerPresenter();
+	AsyncProvider<SpinerPresenter> getSpinerPresenter();
 
-    AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
+	AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
 
 }

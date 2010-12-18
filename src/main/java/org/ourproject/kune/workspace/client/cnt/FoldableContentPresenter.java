@@ -29,12 +29,12 @@ import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.core.shared.dto.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
@@ -66,11 +66,13 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
         this.i18n = i18n;
         this.mediaUtils = mediaUtils;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            @Override
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
             }
         });
         onWaveLoaded = new Listener0() {
+            @Override
             public void onEvent() {
                 NotifyUser.hideProgress();
                 NotifyUser.info("Wave loaded");
@@ -90,6 +92,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
         return waveType;
     }
 
+    @Override
     public void refreshState() {
         setState(session.getContentState());
     }
@@ -141,7 +144,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     }
 
     private ActionItemCollection<StateToken> getActionCollection(final StateContainerDTO state,
-            final AccessRightsDTO rights) {
+            final AccessRights rights) {
         return actionRegistry.getCurrentActions(state.getStateToken(), state.getTypeId(), session.isLogged(), rights,
                 true);
     }
@@ -153,7 +156,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
 
     private void setNormalContent(final StateContentDTO state) {
         final String contentBody = getContentBody(state);
-        if ((contentBody == null || contentBody.length() == 0)) {
+        if (contentBody == null || contentBody.length() == 0) {
             if (state.getContentRights().isEditable()) {
                 view.setInfoMessage(i18n.t("There is no text in this page. Feel free to edit this page"));
             } else {
@@ -177,11 +180,11 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
         if (mimeType != null) {
             final FileDownloadUtils fileDownloadUtils = downloadProvider.get();
             if (mimeType.isImage()) {
-                view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
-                        ImageSize.sized), false);
+                view.showImage(fileDownloadUtils.getImageUrl(token),
+                        fileDownloadUtils.getImageResizedUrl(token, ImageSize.sized), false);
             } else if (mimeType.isPdf()) {
-                view.showImage(fileDownloadUtils.getImageUrl(token), fileDownloadUtils.getImageResizedUrl(token,
-                        ImageSize.sized), true);
+                view.showImage(fileDownloadUtils.getImageUrl(token),
+                        fileDownloadUtils.getImageResizedUrl(token, ImageSize.sized), true);
             } else if (mimeType.isMp3()) {
                 view.setRawContent(mediaUtils.get().getMp3Embed(token));
             } else if (mimeType.isOgg()) {

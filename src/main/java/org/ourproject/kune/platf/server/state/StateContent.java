@@ -22,9 +22,9 @@ package org.ourproject.kune.platf.server.state;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.platf.server.access.AccessRights;
 
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.User;
 

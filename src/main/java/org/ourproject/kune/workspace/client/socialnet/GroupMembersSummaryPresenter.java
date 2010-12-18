@@ -45,8 +45,9 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
+import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessListsDTO;
-import cc.kune.core.shared.dto.AccessRightsDTO;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -54,7 +55,6 @@ import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.suco.client.events.Listener;
@@ -95,6 +95,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         this.liveSearcherProvider = liveSearcherProvider;
         this.groupActionRegistry = groupActionRegistry;
         final Listener<StateAbstractDTO> setStateListener = new Listener<StateAbstractDTO>() {
+            @Override
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
                 toolbar.disableMenusAndClearButtons();
@@ -106,9 +107,11 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         stateManager.onStateChanged(setStateListener);
         stateManager.onSocialNetworkChanged(setStateListener);
         session.onInitDataReceived(new Listener<InitDataDTO>() {
+            @Override
             public void onEvent(final InitDataDTO initData) {
                 addUserOperation(new MenuItem<GroupDTO>("images/new-chat.gif", i18n.t("Start a chat with this member"),
                         new Listener<GroupDTO>() {
+                            @Override
                             public void onEvent(final GroupDTO group) {
                                 chatEngineProvider.get().show();
                                 if (chatEngineProvider.get().isLoggedIn()) {
@@ -139,6 +142,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
         NotifyUser.showProgressProcessing();
         snServiceProvider.get().addCollabMember(session.getUserHash(), session.getCurrentState().getStateToken(),
                 groupShortName, new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                    @Override
                     public void onSuccess(final SocialNetworkDataDTO result) {
                         NotifyUser.hideProgress();
                         NotifyUser.info(i18n.t("Member added as collaborator"));
@@ -155,8 +159,10 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     private void createActions() {
         final ActionToolbarMenuDescriptor<StateToken> addMember = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken parameter) {
                         liveSearcherProvider.get().onSelection(new Listener<LinkDTO>() {
+                            @Override
                             public void onEvent(final LinkDTO link) {
                                 view.confirmAddCollab(link.getShortName(), link.getLongName());
                             }
@@ -183,16 +189,19 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     private void createNewMembersPolicyAction(final String textDescription, final AdmissionType admissionPolicy) {
         final ActionToolbarMenuRadioDescriptor<StateToken> newMembersPolicy = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken parameter) {
                         groupServiceProvider.get().setGroupNewMembersJoiningPolicy(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), admissionPolicy,
                                 new AsyncCallbackSimple<Void>() {
+                                    @Override
                                     public void onSuccess(final Void result) {
                                         NotifyUser.info(i18n.t("Members joining policy changed"));
                                     }
                                 });
                     }
                 }, NEW_MEMBERS_POLICY_GROUP, new RadioMustBeChecked() {
+                    @Override
                     public boolean mustBeChecked() {
                         final StateAbstractDTO currentState = session.getCurrentState();
                         return currentState.getGroup().getAdmissionType().equals(admissionPolicy);
@@ -207,16 +216,19 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     private void createSetMembersVisibilityAction(final String textDescription, final SocialNetworkVisibility visibility) {
         final ActionToolbarMenuRadioDescriptor<StateToken> showMembers = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 AccessRolDTO.Administrator, membersBottom, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken parameter) {
                         groupServiceProvider.get().setSocialNetworkVisibility(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), visibility,
                                 new AsyncCallbackSimple<Void>() {
+                                    @Override
                                     public void onSuccess(final Void result) {
                                         NotifyUser.info(i18n.t("Members visibility changed"));
                                     }
                                 });
                     }
                 }, MEMBERS_VISIBILITY_GROUP, new RadioMustBeChecked() {
+                    @Override
                     public boolean mustBeChecked() {
                         final StateAbstractDTO currentState = session.getCurrentState();
                         if (!currentState.getGroup().isPersonal()) {
@@ -233,7 +245,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
     }
 
     @SuppressWarnings("unchecked")
-    private void setGroupMembers(final SocialNetworkDTO socialNetwork, final AccessRightsDTO rights) {
+    private void setGroupMembers(final SocialNetworkDTO socialNetwork, final AccessRights rights) {
         final AccessListsDTO accessLists = socialNetwork.getAccessLists();
 
         final List<GroupDTO> adminsList = accessLists.getAdmins().getList();

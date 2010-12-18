@@ -19,12 +19,13 @@
  */
 package cc.kune.domain.utils;
 
-import org.ourproject.kune.platf.server.access.AccessRights;
+
 import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.SocialNetwork;
 
 public class SocialNetworkData {

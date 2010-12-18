@@ -42,7 +42,7 @@ import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.UserBuddiesVisibility;
-import cc.kune.core.shared.dto.AccessRightsDTO;
+import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -85,11 +85,13 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         this.toolbar = toolbar;
         this.fileDownUtilsProvider = fileDownUtilsProvider;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            @Override
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
             }
         });
         stateManager.onSocialNetworkChanged(new Listener<StateAbstractDTO>() {
+            @Override
             public void onEvent(final StateAbstractDTO state) {
                 setState(state);
             }
@@ -116,8 +118,8 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                             user.getStateToken()) : BuddiesSummaryView.NOAVATAR;
                     final String tooltip = super.createTooltipWithLogo(user.getShortName(), user.getStateToken(),
                             user.hasLogo(), true);
-                    view.addBuddie(user, actionRegistry.getCurrentActions(user, session.isLogged(),
-                            new AccessRightsDTO(true, true, true), false), avatarUrl, user.getName(), tooltip);
+                    view.addBuddie(user, actionRegistry.getCurrentActions(user, session.isLogged(), new AccessRights(
+                            true, true, true), false), avatarUrl, user.getName(), tooltip);
                 }
                 final boolean hasLocalBuddies = buddies.size() > 0;
                 final int numExtBuddies = userBuddies.getOtherExtBuddies();
@@ -155,6 +157,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
     private void createAddNewBuddiesAction() {
         final ActionToolbarMenuDescriptor<UserSimpleDTO> addNewBuddiesAction = new ActionToolbarMenuDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, buddiesBottom, new Listener<UserSimpleDTO>() {
+                    @Override
                     public void onEvent(final UserSimpleDTO parameter) {
                         NotifyUser.info("In development");
                     }
@@ -168,16 +171,19 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
     private void createSetBuddiesVisibilityAction(final String textDescription, final UserBuddiesVisibility visibility) {
         final ActionToolbarMenuRadioDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuRadioDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, buddiesBottom, new Listener<UserSimpleDTO>() {
+                    @Override
                     public void onEvent(final UserSimpleDTO parameter) {
                         userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
                                 session.getCurrentState().getGroup().getStateToken(), visibility,
                                 new AsyncCallbackSimple<Void>() {
+                                    @Override
                                     public void onSuccess(final Void result) {
                                         NotifyUser.info(i18n.t("Buddies visibility changed"));
                                     }
                                 });
                     }
                 }, BUDDIES_VISIBILITY_GROUP, new RadioMustBeChecked() {
+                    @Override
                     public boolean mustBeChecked() {
                         final StateAbstractDTO currentState = session.getCurrentState();
                         if (currentState.getGroup().isPersonal()) {
@@ -196,6 +202,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
     private void registerActions() {
         final ActionMenuItemDescriptor<UserSimpleDTO> addAsBuddie = new ActionMenuItemDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Viewer, new Listener<UserSimpleDTO>() {
+                    @Override
                     public void onEvent(final UserSimpleDTO user) {
                         chatEngineProvider.get().addNewBuddie(user.getShortName());
                     }
@@ -204,6 +211,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         addAsBuddie.setTextDescription(i18n.t("Add as a buddie"));
         addAsBuddie.setIconUrl("images/add-green.png");
         addAsBuddie.setEnableCondition(new ActionEnableCondition<UserSimpleDTO>() {
+            @Override
             public boolean mustBeEnabled(final UserSimpleDTO user) {
                 return !chatEngineProvider.get().isBuddie(user.getShortName());
             }
@@ -212,6 +220,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
 
         final ActionMenuItemDescriptor<UserSimpleDTO> go = new ActionMenuItemDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Viewer, new Listener<UserSimpleDTO>() {
+                    @Override
                     public void onEvent(final UserSimpleDTO user) {
                         stateManager.gotoToken(user.getShortName());
                     }

@@ -11,8 +11,8 @@ import org.ourproject.kune.platf.server.UserSession;
 import cc.kune.core.client.errors.AlreadyUserMemberException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.SocialNetworkService;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.google.inject.Inject;
 

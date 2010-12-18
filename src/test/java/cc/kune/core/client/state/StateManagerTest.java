@@ -10,8 +10,8 @@ import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import cc.kune.core.client.actions.BeforeActionListener;
 import cc.kune.core.client.notify.SpinerPresenter;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateToken;
 
 import com.calclab.suco.testing.events.MockedListener;
 import com.calclab.suco.testing.events.MockedListener0;

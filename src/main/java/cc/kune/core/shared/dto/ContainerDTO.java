@@ -21,6 +21,8 @@ package cc.kune.core.shared.dto;
 
 import java.util.List;
 
+import cc.kune.core.shared.domain.utils.StateToken;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class ContainerDTO implements IsSerializable {

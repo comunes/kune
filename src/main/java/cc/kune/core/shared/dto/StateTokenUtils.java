@@ -1,6 +1,7 @@
 package cc.kune.core.shared.dto;
 
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 public class StateTokenUtils {
 

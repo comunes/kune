@@ -40,7 +40,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 
-import cc.kune.core.shared.dto.StateToken;
+import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.inject.Inject;
 
