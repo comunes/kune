@@ -46,6 +46,7 @@ import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.gwtplatform.mvp.client.EventBus;
 
 public class SessionDefault implements Session {
     private String userHash;
@@ -60,9 +61,12 @@ public class SessionDefault implements Session {
     private final Event<UserInfoDTO> onUserSignIn;
     private final Event0 onUserSignOut;
     private final Provider<UserServiceAsync> userServiceProvider;
+    private final EventBus eventBus;
 
     @Inject
-    public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider) {
+    public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider,
+            EventBus eventBus) {
+        this.eventBus = eventBus;
         this.userHash = cookieManager.getCurrentCookie();
         this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
         this.userServiceProvider = userServiceProvider;
@@ -288,8 +292,10 @@ public class SessionDefault implements Session {
     public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
         this.currentUserInfo = currentUserInfo;
         if (currentUserInfo != null) {
+            eventBus.fireEvent(new UserSignInEvent(currentUserInfo));
             onUserSignIn.fire(currentUserInfo);
         } else {
+            eventBus.fireEvent(new UserSignOutEvent());
             onUserSignOut.fire();
         }
     }

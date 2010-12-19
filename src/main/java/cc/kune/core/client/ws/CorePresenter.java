@@ -23,7 +23,7 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
     private final AppStarter appStarter;
 
     @ProxyCodeSplit
-    @NameToken("home")
+    @NameToken("")
     public interface CoreProxy extends ProxyPlace<CorePresenter> {
     }
 
@@ -45,15 +45,7 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
 
     @Override
     protected void revealInParent() {
-        RevealRootLayoutContentEvent.fire(getEventBus(), this);
-        // getEventBus().fireEvent(new ProgressShowEvent("Something"));
-        // Timer timer = new Timer() {
-        // @Override
-        // public void run() {
-        // getEventBus().fireEvent(new ProgressHideEvent());
-        // }
-        // };
-        // // timer.schedule(4);
+        RevealRootLayoutContentEvent.fire(this, this);
     }
 
 }

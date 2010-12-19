@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.platf.server.sn;
+package cc.kune.domain.utils;
 
 import java.util.ArrayList;
 import java.util.List;

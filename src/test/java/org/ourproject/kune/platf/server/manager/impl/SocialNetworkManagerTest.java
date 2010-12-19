@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
-import org.ourproject.kune.platf.server.sn.ParticipationData;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
 
 import cc.kune.core.client.errors.AccessViolationException;
@@ -20,6 +19,7 @@ import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.domain.utils.ParticipationData;
 
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.Transactional;

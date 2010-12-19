@@ -40,7 +40,6 @@ import org.ourproject.kune.platf.server.manager.PropertiesManager;
 import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
-import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -49,6 +48,7 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.Properties;
 import cc.kune.domain.PropertyGroup;
 import cc.kune.domain.User;
+import cc.kune.domain.utils.UserBuddiesData;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client.state;
 
-
 import cc.kune.core.client.actions.BeforeActionListener;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -33,18 +32,23 @@ public interface StateManager {
 
     void addBeforeStateChangeListener(BeforeActionListener listener);
 
+    @Deprecated
     void addSiteToken(String token, Listener0 whenToken);
 
     void gotoToken(StateToken newToken);
 
     void gotoToken(String newToken);
 
+    @Deprecated
     void onGroupChanged(Listener2<String, String> listener);
 
+    @Deprecated
     void onSocialNetworkChanged(Listener<StateAbstractDTO> listener);
 
+    @Deprecated
     void onStateChanged(Listener<StateAbstractDTO> listener);
 
+    @Deprecated
     void onToolChanged(Listener2<String, String> listener);
 
     void reload();

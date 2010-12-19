@@ -20,10 +20,10 @@
 package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
-import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.domain.User;
+import cc.kune.domain.utils.UserBuddiesData;
 
 public interface UserManager {
     /**

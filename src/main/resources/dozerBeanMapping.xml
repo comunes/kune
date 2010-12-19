@@ -182,7 +182,7 @@
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.ParticipationDataDTO </class-a>
-    <class-b> org.ourproject.kune.platf.server.sn.ParticipationData </class-b>
+    <class-b> cc.kune.domain.utils.ParticipationData </class-b>
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.I18nLanguageDTO </class-a>
@@ -254,7 +254,7 @@
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.UserBuddiesDataDTO </class-a>
-    <class-b> org.ourproject.kune.platf.server.sn.UserBuddiesData </class-b>
+    <class-b> cc.kune.domain.utils.UserBuddiesData </class-b>
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.SocialNetworkDataDTO </class-a>

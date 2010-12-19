@@ -38,9 +38,9 @@ import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.History;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
     private final ContentProvider contentProvider;
@@ -64,8 +64,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
             final HistoryWrapper history, final EventBus eventBus) {
         this.eventBus = eventBus;
-        // Put this outside here
-        History.addValueChangeHandler(this);
         this.contentProvider = contentProvider;
         this.session = session;
         this.history = history;
@@ -75,25 +73,23 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.onGroupChanged = new Event2<String, String>("onGroupChanged");
         this.onToolChanged = new Event2<String, String>("onToolChanged");
         this.onSocialNetworkChanged = new Event<StateAbstractDTO>("onSocialNetworkChanged");
-        session.onUserSignIn(new Listener<UserInfoDTO>() {
-            @Override
-            public void onEvent(final UserInfoDTO parameter) {
-                if (previousToken == null) {
-                    // starting up
-                    reload();
-                } else {
-                    // do nothing, SigInPresent calls goto;
-                }
-            }
-        });
-        session.onUserSignOut(new Listener0() {
-            @Override
-            public void onEvent() {
-                reload();
-            }
-        });
         siteTokens = new HashMap<String, Listener0>();
         beforeStateChangeCollection = new BeforeActionCollection();
+    }
+
+    @ProxyEvent
+    public void onUserSignOut() {
+        reload();
+    }
+
+    @ProxyEvent
+    public void onUserSignIn(UserInfoDTO userInfo) {
+        if (previousToken == null) {
+            // starting up
+            reload();
+        } else {
+            // do nothing, SigInPresent calls goto;
+        }
     }
 
     @Override

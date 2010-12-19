@@ -35,6 +35,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.EventBus;
 
@@ -79,6 +80,12 @@ public class AppStarterDefault implements AppStarter {
                 eventBus.fireEvent(new ProgressHideEvent());
                 eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, "Error fetching initial data"));
                 Log.debug(error.getMessage());
+                hideInitialPanels();
+            }
+
+            private void hideInitialPanels() {
+                RootPanel.get("kuneinitialcurtain").setVisible(false);
+                RootPanel.get("kuneloading").setVisible(false);
             }
 
             @Override
@@ -89,6 +96,7 @@ public class AppStarterDefault implements AppStarter {
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     @Override
                     public void execute() {
+                        hideInitialPanels();
                         eventBus.fireEvent(new ProgressHideEvent());
                     }
                 });

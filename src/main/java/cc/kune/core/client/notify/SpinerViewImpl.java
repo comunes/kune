@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.EventBus;
@@ -17,11 +18,17 @@ import com.gwtplatform.mvp.client.UiHandlers;
 
 public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implements SpinerView {
 
+    private final PopupPanel popup;
+
     @Inject
     protected SpinerViewImpl(EventBus eventBus, WsArmor armor) {
         super(eventBus);
         widget = uiBinder.createAndBindUi(this);
-        armor.getSitebar().add(widget);
+        popup = new PopupPanel(false, false);
+        popup.add(widget);
+        popup.setPopupPosition(7, 0);
+        popup.setStyleName("k-spiner-popup");
+        popup.show();
     }
 
     private static SpinerViewImplUiBinder uiBinder = GWT.create(SpinerViewImplUiBinder.class);
@@ -39,12 +46,12 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
 
     @Override
     public Widget asWidget() {
-        return widget;
+        return popup;
     }
 
     @Override
     public void fade() {
-        panel.setVisible(false);
+        popup.hide();
     }
 
     @Override
@@ -54,6 +61,6 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
         } else {
             label.setText(message);
         }
-        panel.setVisible(true);
+        popup.show();
     }
 }

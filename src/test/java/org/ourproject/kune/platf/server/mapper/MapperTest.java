@@ -10,8 +10,6 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.TestDomainHelper;
 import org.ourproject.kune.platf.server.TestHelper;
 import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.sn.ParticipationData;
-import org.ourproject.kune.platf.server.sn.UserBuddiesData;
 import org.ourproject.kune.platf.server.state.StateContent;
 
 import cc.kune.core.shared.domain.GroupListMode;
@@ -39,7 +37,9 @@ import cc.kune.domain.License;
 import cc.kune.domain.Revision;
 import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.User;
+import cc.kune.domain.utils.ParticipationData;
 import cc.kune.domain.utils.SocialNetworkData;
+import cc.kune.domain.utils.UserBuddiesData;
 
 import com.google.inject.Inject;
 
