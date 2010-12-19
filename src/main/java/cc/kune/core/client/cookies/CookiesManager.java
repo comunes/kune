@@ -1,25 +1,33 @@
 package cc.kune.core.client.cookies;
 
-import cc.kune.core.client.state.Session;
-
-import com.google.gwt.user.client.Cookies;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.Proxy;
 
-public class CookiesManager {
-    public interface ICookiesView {
+public class CookiesManager extends Presenter<CookiesManager.CookiesManagerView, CookiesManager.CookiesManagerProxy> {
+
+    @ProxyCodeSplit
+    public interface CookiesManagerProxy extends Proxy<CookiesManager> {
+    }
+
+    public interface CookiesManagerView extends View {
         String getCurrentCookie();
     }
 
     @Inject
-    public CookiesManager() {
+    public CookiesManager(final EventBus eventBus, final CookiesManagerView view, final CookiesManagerProxy proxy) {
+        super(eventBus, view, proxy);
     }
 
     public String getCurrentCookie() {
-        return Cookies.getCookie(Session.USERHASH);
-        // view.getCurrentCookie();
+        return getView().getCurrentCookie();
     }
 
-    public void onDoNothing() {
+    @Override
+    protected void revealInParent() {
     }
 
 }

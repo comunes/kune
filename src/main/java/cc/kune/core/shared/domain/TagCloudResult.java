@@ -28,6 +28,9 @@ public class TagCloudResult implements IsSerializable {
     private int maxValue;
     private int minValue;
 
+    public TagCloudResult() {
+    }
+
     public TagCloudResult(final List<TagCount> tagCountList, final int maxValue, final int minValue) {
         this.tagCountList = tagCountList;
         this.maxValue = maxValue;

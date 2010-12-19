@@ -21,9 +21,7 @@ package org.ourproject.kune.platf.client.services;
 
 import org.ourproject.kune.platf.client.actions.ui.BasicGuiBindings;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
-import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
-import org.ourproject.kune.platf.client.app.ApplicationDefault;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
@@ -101,7 +99,6 @@ import org.ourproject.kune.platf.client.utils.TimerWrapper;
 
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -178,12 +175,12 @@ public class PlatformModule extends AbstractExtendedModule {
 
         //AsyncCallbackSimple.init(i(ErrorHandler.class));
 
-        register(Singleton.class, new Factory<Application>(Application.class) {
-            @Override
-            public Application create() {
-                return new ApplicationDefault(i(Session.class), i(SiteServiceAsync.class));
-            }
-        });
+//        register(Singleton.class, new Factory<AppStarter>(AppStarter.class) {
+//            @Override
+//            public AppStarter create() {
+//                return new AppStarterDefault(i(Session.class), i(SiteServiceAsync.class));
+//            }
+//        });
 
         register(Singleton.class, new Factory<DeferredCommandWrapper>(DeferredCommandWrapper.class) {
             @Override
@@ -474,7 +471,7 @@ public class PlatformModule extends AbstractExtendedModule {
         });
         i(ApplicationComponentGroup.class).createAll();
         i(ToolGroup.class).createAll();
-        i(Application.class).start();
+//        i(AppStarter.class).start();
 
     }
 }

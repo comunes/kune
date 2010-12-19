@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 import cc.kune.core.client.actions.BeforeActionCollection;
 import cc.kune.core.client.actions.BeforeActionListener;
-import cc.kune.core.client.notify.SpinerPresenter;
+import cc.kune.core.client.notify.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -40,6 +40,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.EventBus;
 
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
     private final ContentProvider contentProvider;
@@ -57,12 +58,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private final Event2<String, String> onToolChanged;
     private final Event2<String, String> onGroupChanged;
     private final BeforeActionCollection beforeStateChangeCollection;
-    private final SpinerPresenter spiner;
+    private final EventBus eventBus;
 
     @Inject
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
-            final HistoryWrapper history, final SpinerPresenter spinner) {
-        this.spiner = spinner;
+            final HistoryWrapper history, final EventBus eventBus) {
+        this.eventBus = eventBus;
         // Put this outside here
         History.addValueChangeHandler(this);
         this.contentProvider = contentProvider;
@@ -75,6 +76,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.onToolChanged = new Event2<String, String>("onToolChanged");
         this.onSocialNetworkChanged = new Event<StateAbstractDTO>("onSocialNetworkChanged");
         session.onUserSignIn(new Listener<UserInfoDTO>() {
+            @Override
             public void onEvent(final UserInfoDTO parameter) {
                 if (previousToken == null) {
                     // starting up
@@ -85,6 +87,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             }
         });
         session.onUserSignOut(new Listener0() {
+            @Override
             public void onEvent() {
                 reload();
             }
@@ -93,39 +96,48 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         beforeStateChangeCollection = new BeforeActionCollection();
     }
 
+    @Override
     public void addBeforeStateChangeListener(final BeforeActionListener listener) {
         beforeStateChangeCollection.add(listener);
     }
 
+    @Override
     public void addSiteToken(final String token, final Listener0 listener) {
         siteTokens.put(token, listener);
     }
 
+    @Override
     public void gotoToken(final StateToken newToken) {
         Log.debug("StateManager: history goto-token newItem (" + newToken + ")");
         history.newItem(newToken.getEncoded());
     }
 
+    @Override
     public void gotoToken(final String token) {
         gotoToken(new StateToken(token));
     }
 
+    @Override
     public void onGroupChanged(final Listener2<String, String> listener) {
         onGroupChanged.add(listener);
     }
 
+    @Override
     public void onSocialNetworkChanged(final Listener<StateAbstractDTO> listener) {
         onSocialNetworkChanged.add(listener);
     }
 
+    @Override
     public void onStateChanged(final Listener<StateAbstractDTO> listener) {
         onStateChanged.add(listener);
     }
 
+    @Override
     public void onToolChanged(final Listener2<String, String> listener) {
         onToolChanged.add(listener);
     }
 
+    @Override
     public void onValueChange(final ValueChangeEvent<String> event) {
         onHistoryChanged(event.getValue());
     }
@@ -135,22 +147,27 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
      * Reload current state (using client cache if available)
      * </p>
      */
+    @Override
     public void reload() {
         onHistoryChanged(history.getToken());
     }
 
+    @Override
     public void removeBeforeStateChangeListener(final BeforeActionListener listener) {
         beforeStateChangeCollection.remove(listener);
     }
 
+    @Override
     public void removeSiteToken(final String token) {
         siteTokens.remove(token);
     }
 
+    @Override
     public void restorePreviousToken() {
         gotoToken(previousToken);
     }
 
+    @Override
     public void resumeTokenChange() {
         if (resumedToken != null) {
             reload();
@@ -159,12 +176,14 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         }
     }
 
+    @Override
     public void setRetrievedState(final StateAbstractDTO newState) {
         contentProvider.cache(newState.getStateToken(), newState);
         // setState(newState);
         history.newItem(newState.getStateToken().toString());
     }
 
+    @Override
     public void setSocialNetwork(final SocialNetworkDataDTO socialNet) {
         StateAbstractDTO state;
         if (session != null && (state = session.getCurrentState()) != null) {
@@ -201,7 +220,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
         onStateChanged.fire(newState);
-        spiner.fade();
+        eventBus.fireEvent(new ProgressHideEvent());
         checkGroupAndToolChange(newState);
         previousToken = newState.getStateToken();
 
@@ -229,6 +248,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     private void onHistoryChanged(final StateToken newState) {
         contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateAbstractDTO>() {
+            @Override
             public void onSuccess(final StateAbstractDTO newState) {
                 setState(newState);
             }

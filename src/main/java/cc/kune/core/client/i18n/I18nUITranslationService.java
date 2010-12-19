@@ -71,6 +71,7 @@ public class I18nUITranslationService extends I18nTranslationService {
                     public void onSuccess(final HashMap<String, String> result) {
                         lexicon = result;
                         session.setCurrentLanguage(currentLang);
+                        eventBus.fireEvent(new I18nReadyEvent());
                     }
                 });
             }

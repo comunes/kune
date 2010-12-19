@@ -21,32 +21,35 @@ package cc.kune.core.client.state;
 
 import java.util.HashMap;
 
-import cc.kune.core.client.notify.SpinerPresenter;
+import cc.kune.core.client.notify.ProgressShowEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.EventBus;
 
 public class ContentProviderDefault implements ContentProvider {
     private final ContentServiceAsync server;
     private final HashMap<StateToken, StateAbstractDTO> cache;
-    private final SpinerPresenter spiner;
+    private final EventBus eventBus;
 
     @Inject
-    public ContentProviderDefault(final ContentServiceAsync server, final SpinerPresenter spiner) {
+    public ContentProviderDefault(final ContentServiceAsync server, final EventBus eventBus) {
         this.server = server;
-        this.spiner = spiner;
+        this.eventBus = eventBus;
         this.cache = new HashMap<StateToken, StateAbstractDTO>();
     }
 
+    @Override
     public void cache(final StateToken encodeState, final StateAbstractDTO content) {
         cache.put(encodeState, content);
     }
 
+    @Override
     public void getContent(final String user, final StateToken newState, final AsyncCallback<StateAbstractDTO> callback) {
-        spiner.showLoading();
+        eventBus.fireEvent(new ProgressShowEvent(""));
         final StateAbstractDTO catched = getCached(newState);
         if (catched != null) {
             callback.onSuccess(catched);

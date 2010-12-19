@@ -1,308 +1,367 @@
 @CHARSET "UTF-8";
 
-body { 
-    background-color: white;
-    color: black;
-    font-family: 'Droid Sans', Arial;
-    font-size: small;
-    margin: 5px;
+body {
+	background-color: white;
+	color: black;
+	font-family: 'Inconsolata', Arial;
+	font-size: small;
+	margin: 5px;
 }
 
 * {
- font-family: 'Droid Sans', Arial;
+	font-family: 'Inconsolata', Arial;
 }
 
-body.fontface {font: 'Droid Sans', Arial;}
-
-a { 
-    color: darkblue;
+body.fontface {
+	font: 'Inconsolata', Arial;
 }
 
-a:visited { 
-    color: darkblue; 
+a {
+	color: darkblue;
+}
+
+a:visited {
+	color: darkblue;
 }
 
 .gwt-DialogBox {
-    border: 2px solid #AAAAAA;
-    background-color: white;
+	border: 2px solid #AAAAAA;
+	background-color: white;
 }
 
 .gwt-DialogBox .Caption {
-    background-image: url(gray_gradient.gif);
-    background-repeat: repeat-x;
-    padding: 4px;
-    padding-bottom: 8px;
-    font-weight: bold;
-    cursor: default;
+	background-image: url(gray_gradient.gif);
+	background-repeat: repeat-x;
+	padding: 4px;
+	padding-bottom: 8px;
+	font-weight: bold;
+	cursor: default;
 }
 
 .gwt-MenuBar {
-    background-color: #C3D9FF;
-    cursor: default;
+	background-color: #C3D9FF;
+	cursor: default;
 }
 
 .gwt-MenuItem {
-    font-size: 80%;
-    margin: 1px;
-    cursor: default;
+	font-size: 80%;
+	margin: 1px;
+	cursor: default;
 }
 
 .gwt-MenuItem-selected {
-    background-color: #E8EEF7;
+	background-color: #E8EEF7;
 }
 
 .gwt-Tree {
+	
 }
 
 .gwt-Tree .gwt-TreeItem {
-    font-size: 80%;
-    cursor: default;
+	font-size: 80%;
+	cursor: default;
 }
 
 .gwt-Tree .gwt-TreeItem-selected {
-    background-color: #C3D9FF;
+	background-color: #C3D9FF;
 }
 
 .gwt-StackPanel {
-    background-color: white;
-    border: 1px solid #AAAAAA;
-    width: 15em;
+	background-color: white;
+	border: 1px solid #AAAAAA;
+	width: 15em;
 }
 
 .gwt-StackPanel .gwt-StackPanelItem {
-    background-image: url(blue_gradient.gif);
-    background-repeat: repeat-x;
-    background-color: #EEEEEE;
-    cursor: pointer;
-    cursor: hand;
+	background-image: url(blue_gradient.gif);
+	background-repeat: repeat-x;
+	background-color: #EEEEEE;
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-StackPanel .gwt-StackPanelItem-selected {
+	
 }
 
 .gwt-TabPanel {
-    
+	
 }
 
 .gwt-TabPanelBottom {
-    border-left: 1px solid #87b3ff;
-    border-right: 1px solid #87b3ff;
-    border-bottom: 1px solid #87b3ff;
+	border-left: 1px solid #87b3ff;
+	border-right: 1px solid #87b3ff;
+	border-bottom: 1px solid #87b3ff;
 }
 
 .gwt-TabBar {
-    font-size: smaller;
+	font-size: smaller;
 }
 
 .gwt-TabBar .gwt-TabBarFirst {
-    height: 100%;
-    border-bottom: 1px solid #87b3ff;
-    border-right: 1px solid #87b3ff;
-    padding-left: 3px;
+	height: 100%;
+	border-bottom: 1px solid #87b3ff;
+	border-right: 1px solid #87b3ff;
+	padding-left: 3px;
 }
 
 .gwt-TabBar .gwt-TabBarRest {
-    border-bottom: 1px solid #87b3ff;
-    padding-right: 3px;
+	border-bottom: 1px solid #87b3ff;
+	padding-right: 3px;
 }
 
 .gwt-TabBar .gwt-TabBarItem {
-    border-top: 1px solid #87b3ff;
-    border-bottom: 1px solid #87b3ff;
-    padding: 2px;
-    cursor: hand;
-    white-space: nowrap;
-    border-right: 1px solid #87b3ff;
+	border-top: 1px solid #87b3ff;
+	border-bottom: 1px solid #87b3ff;
+	padding: 2px;
+	cursor: hand;
+	white-space: nowrap;
+	border-right: 1px solid #87b3ff;
 }
 
 .gwt-TabBar .gwt-TabBarItem-selected {
-    font-weight: bold;
-    background-color: #e8eef7;
-    border-top: 1px solid #87b3ff;
-    border-right: 1px solid #87b3ff;
-    border-bottom: 1px solid #e8eef7;
-    padding: 2px;
-    cursor: default;
-    white-space: nowrap;
+	font-weight: bold;
+	background-color: #e8eef7;
+	border-top: 1px solid #87b3ff;
+	border-right: 1px solid #87b3ff;
+	border-bottom: 1px solid #e8eef7;
+	padding: 2px;
+	cursor: default;
+	white-space: nowrap;
 }
 
 .gwt-PushButton-up {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205) rgb(232, 241, 255);
-  cursor: pointer;
-  cursor: hand;
+	background-color: #C3D9FF;
+	padding: 2px;
+	border: 2px solid transparent;
+	border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+		rgb(232, 241, 255);
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-PushButton-up-hovering {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205) rgb(232, 241, 255);
-  cursor: pointer;
-  cursor: hand;
+	background-color: #C3D9FF;
+	padding: 2px;
+	border: 2px solid transparent;
+	border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+		rgb(232, 241, 255);
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-PushButton-down {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
-  cursor: pointer;
-  cursor: hand;
+	background-color: #C3D9FF;
+	padding: 2px;
+	border: 2px solid transparent;
+	border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+		rgb(157, 174, 205);
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-PushButton-down-hovering {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
-  cursor: pointer;
-  cursor: hand;
+	background-color: #C3D9FF;
+	padding: 2px;
+	border: 2px solid transparent;
+	border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+		rgb(157, 174, 205);
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-ToggleButton-up {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205) rgb(232, 241, 255);
-  cursor: pointer;
-  cursor: hand;
+	background-color: #C3D9FF;
+	padding: 2px;
+	border: 2px solid transparent;
+	border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+		rgb(232, 241, 255);
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-ToggleButton-up-hovering {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205) rgb(232, 241, 255);
-  cursor: pointer;
-  cursor: hand;
+	background-color: #C3D9FF;
+	padding: 2px;
+	border: 2px solid transparent;
+	border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+		rgb(232, 241, 255);
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-ToggleButton-down {
-  background-color: #C3D9FF;
-  padding: 2px;
-  background-color: #E8F1FF;
-  border: 2px solid transparent;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
-  cursor: pointer;
-  cursor: hand;
+	background-color: #C3D9FF;
+	padding: 2px;
+	background-color: #E8F1FF;
+	border: 2px solid transparent;
+	border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+		rgb(157, 174, 205);
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-ToggleButton-down-hovering {
-  background-color: #C3D9FF;
-  padding: 2px;
-  background-color: #E8F1FF;
-  border: 2px solid transparent;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
-  cursor: pointer;
-  cursor: hand;
+	background-color: #C3D9FF;
+	padding: 2px;
+	background-color: #E8F1FF;
+	border: 2px solid transparent;
+	border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+		rgb(157, 174, 205);
+	cursor: pointer;
+	cursor: hand;
 }
 
 .gwt-RichTextArea {
-  border: 1px solid black;
-  background-color: white;
+	border: 1px solid black;
+	background-color: white;
 }
 
 .gwt-RichTextToolbar {
-  background-color: #C3D9FF;
-  padding: 2px;
+	background-color: #C3D9FF;
+	padding: 2px;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-up {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
+	margin-right: 2px;
+	border: 1px solid #C3D9FF;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-up-hovering {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205) rgb(232, 241, 255);
+	margin-right: 2px;
+	border: 1px solid #C3D9FF;
+	border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+		rgb(232, 241, 255);
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-down {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
+	margin-right: 2px;
+	border: 1px solid #C3D9FF;
+	border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+		rgb(157, 174, 205);
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-down-hovering {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
+	margin-right: 2px;
+	border: 1px solid #C3D9FF;
+	border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+		rgb(157, 174, 205);
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-up {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
+	margin-right: 2px;
+	border: 1px solid #C3D9FF;
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-up-hovering {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205) rgb(232, 241, 255);
+	margin-right: 2px;
+	border: 1px solid #C3D9FF;
+	border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+		rgb(232, 241, 255);
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-down {
-  margin-right: 2px;
-  background-color: #E8F1FF;
-  border: 1px solid #C3D9FF;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
+	margin-right: 2px;
+	background-color: #E8F1FF;
+	border: 1px solid #C3D9FF;
+	border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+		rgb(157, 174, 205);
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-down-hovering {
-  margin-right: 2px;
-  background-color: #E8F1FF;
-  border: 1px solid #C3D9FF;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255) rgb(157, 174, 205);
+	margin-right: 2px;
+	background-color: #E8F1FF;
+	border: 1px solid #C3D9FF;
+	border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+		rgb(157, 174, 205);
 }
 
 .gwt-HorizontalSplitPanel {
-    border: 8px solid #C3D9FF;
+	border: 8px solid #C3D9FF;
 }
 
 .gwt-HorizontalSplitPanel .splitter {
-    background-color: #C3D9FF;
-    cursor: move;
+	background-color: #C3D9FF;
+	cursor: move;
 }
 
 .gwt-HorizontalSplitPanel .left {
-  background-color: #E8EEF7;
+	background-color: #E8EEF7;
 }
 
 .gwt-VerticalSplitPanel {
-    border: 8px solid #C3D9FF;
+	border: 8px solid #C3D9FF;
 }
 
 .gwt-VerticalSplitPanel .splitter {
-    background-color: #C3D9FF;
-    height: 8px;
-    cursor: move;
+	background-color: #C3D9FF;
+	height: 8px;
+	cursor: move;
 }
 
 .gwt-SuggestBoxPopup {
-    border: 2px solid #C3D9FF;
+	border: 2px solid #C3D9FF;
 }
 
 .gwt-SuggestBoxPopup .item {
-    padding: 2px;
+	padding: 2px;
 }
 
 .gwt-SuggestBoxPopup .item-selected {
-    background-color: #C3D9FF;
-    padding: 2px;
+	background-color: #C3D9FF;
+	padding: 2px;
 }
 
 .gwt-DisclosurePanel {
-    border: 2px solid #C3D9FF;
+	border: 2px solid #C3D9FF;
 }
 
 .gwt-DisclosurePanel .header {
-    background-color: #e8eef7;
-    cursor: hand;
+	background-color: #e8eef7;
+	cursor: hand;
 }
 
-.gwt-SplitLayoutPanel { }
-.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger { background-color: white; background: none; }
-.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-VDragger {  }
+.gwt-SplitLayoutPanel {
+	
+}
+
+.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger {
+	background-color: white;
+	background: none;
+}
+
+.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-VDragger {
+	
+}
+
+.kLoadingPanel {
+	background-color: #feb295;
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-moz-border-bottom-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-top-right-radius: 4px;
+	border-top-right-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-top-left-radius: 4px;
+	border-top-left-radius: 4px;
+	padding: 0 10px 0 7px;
+}
+
+.kLoadingLabel {
+	font-size: 14px;
+	color: white;
+	font-weight: bold;
+	padding: 0 0 0 5px;
+}
+
+.k-floatleft {
+  float: left;
+}
+
+.k-floatright {
+  float: right;
+}

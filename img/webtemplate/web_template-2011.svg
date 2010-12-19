@@ -51,16 +51,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.6953125"
-     inkscape:cx="512"
-     inkscape:cy="729.16854"
+     inkscape:zoom="1"
+     inkscape:cx="174.00056"
+     inkscape:cy="641.30184"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="1280"
-     inkscape:window-height="749"
+     inkscape:window-height="977"
      inkscape:window-x="0"
-     inkscape:window-y="1024"
+     inkscape:window-y="20"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
@@ -94,7 +94,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2208,6 +2208,15 @@
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#feb295;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4635"
+       width="87.859406"
+       height="19.905512"
+       x="130.07086"
+       y="111.27247"
+       rx="4"
+       ry="4" />
     <g
        style="opacity:0.5;display:inline"
        id="g5064"
@@ -2456,7 +2465,7 @@
          id="tspan3098"
          x="91.84803"
          y="201.77293"
-         style="-inkscape-font-specification:Ubuntu Bold;font-family:Ubuntu;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal">Name of the Initiative</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold">Name of the Initiative</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3073-8"
@@ -2580,7 +2589,7 @@
          id="tspan3926"
          sodipodi:role="line"
          x="543.98315"
-         y="708.99359"
+         y="708.89807"
          style="font-size:16px"><tspan
            style="font-size:16px;fill:#784421"
            id="tspan3930">English</tspan><tspan
@@ -2670,7 +2679,7 @@
          sodipodi:role="line"
          id="tspan14835" /><tspan
          style="font-size:16px;fill:#280b0b"
-         y="710.39124"
+         y="710.29572"
          x="377.75659"
          sodipodi:role="line"
          id="tspan14837"><tspan
@@ -3211,14 +3220,14 @@
    id="tspan19968" /></tspan><tspan
          sodipodi:role="line"
          x="833"
-         y="728.54651"
+         y="728.30774"
          style="fill:#000080"
          id="tspan19970"><tspan
            style="font-size:12px;fill:#000080"
            id="tspan19972">resilience         sustainability</tspan></tspan><tspan
          sodipodi:role="line"
          x="833"
-         y="743.69556"
+         y="743.55231"
          style="fill:#000080"
          id="tspan19974">environmentalism</tspan></text>
     <image
@@ -3269,7 +3278,7 @@
          id="tspan22977"
          sodipodi:role="line"
          x="633.75659"
-         y="743.39124"
+         y="743.29572"
          style="font-size:16px"><tspan
            style="font-size:16px;fill:#784421"
            id="tspan22979">License:</tspan></tspan></text>
@@ -3409,7 +3418,7 @@
          sodipodi:linespacing="100%"><tspan
            sodipodi:role="line"
            id="tspan25503"
-           x="798.60547"
+           x="798.04688"
            y="163">See this in the </tspan><tspan
            id="tspan25505"
            sodipodi:role="line"
@@ -3441,7 +3450,7 @@
          sodipodi:role="line"
          id="tspan3672" /><tspan
          style="font-size:16px"
-         y="743.39124"
+         y="743.29572"
          x="25.756592"
          sodipodi:role="line"
          id="tspan3674"><tspan
@@ -3896,7 +3905,7 @@
          id="tspan4990"
          sodipodi:role="line"
          x="29.756592"
-         y="708.39124"
+         y="708.29572"
          style="font-size:16px"><tspan
            style="font-size:16px;fill:#784421"
            id="tspan4992">Tags:</tspan></tspan></text>
@@ -4430,6 +4439,43 @@
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/def-theme-doc-arrow-down.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <image
+       y="112.88816"
+       x="135.45085"
+       id="image4632"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAV5JREFU
+OI2lk01OAkEQhb8axgGG30EiEEiMLoxuvK1X8ABewDsQdy4gBhNiJgg4IuhMl4vWAQSFxFp2+n2v
+XnW1mJsr5R/l/jyQSh3qbai1oVhFb6/3B0jnDDrnUArAcTZvOw4Ysx0grRM4uQTXQx/vkXAAk3CD
+IRkXTeJ1gJQC6FxAxoX+HfS6bB2MMeB5FvI+t00BELQg56PDPtrr/pmZJIaMi2TcJUArddteOPhb
+DKgaEAe83BIgfhmSD5huZt4aAyyE7yEakx7sVQcemGQlwssI1IBf3qkVL2fNkhWARCPbRdDc7Z7N
+W4CaJYDREH0dQ62JNI5/d/fLkC9Z8dczugA6myJPD2jrFI6OES8P09BGAyRXhKwPhbIVLmbpMqWb
+qOEASWI4bKGlGhSq0IgRk9i8SQzzCKIx+halXa39BX0eIvMIKVTtQL2sFc8msHiD2TTdwK0AwNJX
+HHbVJ0YdhWYwKlACAAAAAElFTkSuQmCC
+"
+       height="16"
+       width="16" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       sodipodi:linespacing="125%"
+       id="text4717"
+       y="125.59216"
+       x="153.17085"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       xml:space="preserve"><tspan
+         y="125.59216"
+         x="153.17085"
+         id="tspan4719"
+         sodipodi:role="line"
+         style="font-size:16px;font-weight:bold;-inkscape-font-specification:Ubuntu Bold">Loading</tspan></text>
+    <rect
+       style="color:#000000;fill:#feb295;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4721"
+       width="87.663948"
+       height="3.7137473"
+       x="130.07883"
+       y="111.25339" />
   </g>
   <g
      inkscape:groupmode="layer"

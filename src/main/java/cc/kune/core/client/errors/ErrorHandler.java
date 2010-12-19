@@ -22,7 +22,7 @@ package cc.kune.core.client.errors;
 import org.ourproject.common.client.notify.NotifyLevel;
 
 import cc.kune.core.client.notify.AlertEvent;
-import cc.kune.core.client.notify.SpinerPresenter;
+import cc.kune.core.client.notify.ProgressHideEvent;
 import cc.kune.core.client.notify.UserNotifyEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -40,18 +40,16 @@ public class ErrorHandler {
     private final Session session;
     private final I18nTranslationService i18n;
     private final Event0 onSessionExpired;
-    private final SpinerPresenter spiner;
     private final PlaceManager placeManager;
-	private final EventBus eventBus;
+    private final EventBus eventBus;
 
     @Inject
-    public ErrorHandler(final Session session, final I18nTranslationService i18n,
-            final SpinerPresenter spiner, final PlaceManager placeManager, EventBus eventBus) {
+    public ErrorHandler(final Session session, final I18nTranslationService i18n, final PlaceManager placeManager,
+            EventBus eventBus) {
         this.session = session;
         this.i18n = i18n;
-        this.spiner = spiner;
         this.placeManager = placeManager;
-		this.eventBus = eventBus;
+        this.eventBus = eventBus;
         this.onSessionExpired = new Event0("onSessionExpired");
     }
 
@@ -65,10 +63,11 @@ public class ErrorHandler {
     }
 
     public void process(final Throwable caught) {
-        spiner.fade();
+        eventBus.fireEvent(new ProgressHideEvent());
         if (caught instanceof AccessViolationException) {
             logException(caught);
-            eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("You do not have rights to perform that action")));
+            eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+                    i18n.t("You do not have rights to perform that action")));
         } else if (caught instanceof SessionExpiredException) {
             logException(caught);
             doSessionExpired();
@@ -77,7 +76,8 @@ public class ErrorHandler {
             if (session.isLogged()) {
                 doSessionExpired();
             } else {
-                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.important, i18n.t("Please sign in or register to collaborate")));
+                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.important,
+                        i18n.t("Please sign in or register to collaborate")));
             }
         } else if (caught instanceof GroupNotFoundException) {
             logException(caught);

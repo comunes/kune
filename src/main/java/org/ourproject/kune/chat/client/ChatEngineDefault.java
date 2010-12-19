@@ -26,12 +26,12 @@ import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
-import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.utils.WindowUtils;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -56,7 +56,6 @@ import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.Window.ClosingEvent;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.ToolbarButton;
@@ -74,7 +73,7 @@ class ChatEngineDefault implements ChatEngine {
     private final Provider<FileDownloadUtils> downloadUtils;
 
     public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton wskel,
-            final Application application, final Session session, final Provider<EmiteUIDialog> emiteUIProvider,
+            final AppStarter application, final Session session, final Provider<EmiteUIDialog> emiteUIProvider,
             final Provider<FileDownloadUtils> downloadUtils, final GlobalShortcutRegister shortcutRegister) {
         this.i18n = i18n;
         this.wskel = wskel;
@@ -83,6 +82,7 @@ class ChatEngineDefault implements ChatEngine {
         this.onRosterChanged = new Event0("onRosterChanged");
         shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
         shortcutRegister.put(shortcut, new AbstractExtendedAction() {
+            @Override
             public void actionPerformed(final ActionEvent event) {
                 if (isDialogStarted()) {
                     toggleShow();
@@ -91,6 +91,7 @@ class ChatEngineDefault implements ChatEngine {
             }
         });
         session.onInitDataReceived(new Listener<InitDataDTO>() {
+            @Override
             public void onEvent(final InitDataDTO initData) {
                 checkChatDomain(initData.getChatDomain());
                 chatOptions = new ChatConnectionOptions(initData.getChatHttpBase(), initData.getChatDomain(),
@@ -107,42 +108,50 @@ class ChatEngineDefault implements ChatEngine {
             }
         });
         session.onUserSignOut(new Listener0() {
+            @Override
             public void onEvent() {
                 logout();
             }
         });
         session.onUserSignIn(new Listener<UserInfoDTO>() {
+            @Override
             public void onEvent(final UserInfoDTO user) {
                 login(user.getChatName(), user.getChatPassword());
             }
         });
-        application.onClosing(new Listener<ClosingEvent>() {
-            public void onEvent(final ClosingEvent event) {
-                stop();
-            }
-        });
+        // application.onClosing(new Listener<ClosingEvent>() {
+        // public void onEvent(final ClosingEvent event) {
+        // stop();
+        // }
+        // });
     }
 
+    @Override
     public void addNewBuddie(final String shortName) {
         emiteUIProvider.get().addBuddie(getLocalUserJid(shortName), shortName, "");
     }
 
+    @Override
     public void addOnRosterChanged(final Listener0 slot) {
         onRosterChanged.add(slot);
     }
 
+    @Override
     public void chat(final XmppURI jid) {
         emiteUIProvider.get().chat(jid);
     }
 
+    @Override
     public ChatConnectionOptions getChatOptions() {
         return chatOptions;
     }
 
+    @Override
     public boolean isBuddie(final String shortName) {
         return isBuddie(getLocalUserJid(shortName));
     }
 
+    @Override
     public boolean isBuddie(final XmppURI jid) {
         if (roster != null) {
             for (final RosterItem item : roster) {
@@ -158,14 +167,17 @@ class ChatEngineDefault implements ChatEngine {
         return !emiteUIProvider.get().isDialogNotStarted();
     }
 
+    @Override
     public boolean isLoggedIn() {
         return emiteUIProvider.get().isLoggedIn();
     }
 
+    @Override
     public void joinRoom(final String roomName, final String userAlias) {
         joinRoom(roomName, null, userAlias);
     }
 
+    @Override
     public void joinRoom(final String roomName, final String subject, final String userAlias) {
         if (emiteUIProvider.get().isLoggedIn()) {
             final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
@@ -173,6 +185,7 @@ class ChatEngineDefault implements ChatEngine {
             final Room room = (Room) emiteUIProvider.get().joinRoom(roomURI);
             if (subject != null) {
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                    @Override
                     public void execute() {
                         final RoomUI roomUI = (RoomUI) room.getData(ChatUI.class);
                         if (roomUI != null) {
@@ -186,10 +199,12 @@ class ChatEngineDefault implements ChatEngine {
         }
     }
 
+    @Override
     public void login(final String jid, final String passwd) {
         final UserChatOptions userChatOptions = getUserChatOptions(jid, passwd);
         // FIXME: Avatar provider
         final AvatarProvider avatarProvider = new AvatarProvider() {
+            @Override
             public String getAvatarURL(final XmppURI userURI) {
                 // if (userURI.getHost().equals(chatOptions.domain)) {
                 // FIXME
@@ -205,6 +220,7 @@ class ChatEngineDefault implements ChatEngine {
         chatOptions.userOptions = userChatOptions;
         if (emiteUIProvider.get().isDialogNotStarted()) {
             emiteUIProvider.get().onRosterChanged(new Listener<Collection<RosterItem>>() {
+                @Override
                 public void onEvent(final Collection<RosterItem> rosterChanged) {
                     roster = rosterChanged;
                     onRosterChanged.fire();
@@ -229,11 +245,13 @@ class ChatEngineDefault implements ChatEngine {
             });
             wskel.getSiteTraybar().addButton(traybarButton);
             emiteUIProvider.get().onChatAttended(new Listener<String>() {
+                @Override
                 public void onEvent(final String parameter) {
                     traybarButton.setIcon("images/e-icon.gif");
                 }
             });
             emiteUIProvider.get().onChatUnattendedWithActivity(new Listener<String>() {
+                @Override
                 public void onEvent(final String parameter) {
                     traybarButton.setIcon("images/e-icon-a.gif");
                 }
@@ -241,17 +259,20 @@ class ChatEngineDefault implements ChatEngine {
         }
         emiteUIProvider.get().hide();
         emiteUIProvider.get().onChatAttended(new Listener<String>() {
+            @Override
             public void onEvent(final String parameter) {
                 Window.setTitle(initialWindowTitle);
             }
         });
         emiteUIProvider.get().onChatUnattendedWithActivity(new Listener<String>() {
+            @Override
             public void onEvent(final String chatTitle) {
                 Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
             }
         });
     }
 
+    @Override
     public void logout() {
         if (!emiteUIProvider.get().isDialogNotStarted()) {
             emiteUIProvider.get().setOwnPresence(OwnStatus.offline);
@@ -261,14 +282,17 @@ class ChatEngineDefault implements ChatEngine {
         }
     }
 
+    @Override
     public void setAvatar(final String photoBinary) {
         emiteUIProvider.get().setOwnVCardAvatar(photoBinary);
     }
 
+    @Override
     public void show() {
         emiteUIProvider.get().show();
     }
 
+    @Override
     public void stop() {
         if (!emiteUIProvider.get().isDialogNotStarted()) {
             emiteUIProvider.get().destroy();

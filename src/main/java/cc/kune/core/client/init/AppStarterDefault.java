@@ -17,20 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.app;
+package cc.kune.core.client.init;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.platf.client.utils.PrefetchUtilities;
+import org.ourproject.common.client.notify.NotifyLevel;
 
+import cc.kune.core.client.notify.ProgressHideEvent;
+import cc.kune.core.client.notify.UserNotifyEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Event;
-import com.calclab.suco.client.events.Event0;
-import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.Timer;
@@ -38,42 +35,38 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.EventBus;
 
-public class ApplicationDefault implements Application {
+public class AppStarterDefault implements AppStarter {
     private final Session session;
-    private final Event0 onAppStarting;
-    private final Event<ClosingEvent> onAppClosing;
     private final SiteServiceAsync siteService;
+    private final EventBus eventBus;
+    private final PrefetchUtilities prefetchUtilities;
 
-    public ApplicationDefault(final Session session, final SiteServiceAsync siteService) {
+    @Inject
+    public AppStarterDefault(final Session session, final SiteServiceAsync siteService, final EventBus eventBus,
+            PrefetchUtilities prefetchUtilities) {
         this.session = session;
         this.siteService = siteService;
-        this.onAppStarting = new Event0("onAppStarting");
-        this.onAppClosing = new Event<ClosingEvent>("onAppClossing");
+        this.eventBus = eventBus;
+        this.prefetchUtilities = prefetchUtilities;
         Window.addWindowClosingHandler(new ClosingHandler() {
+            @Override
             public void onWindowClosing(final ClosingEvent event) {
-                stop(event);
+                eventBus.fireEvent(new AppStopEvent());
             }
         });
     }
 
-    public void onClosing(final Listener<ClosingEvent> listener) {
-        onAppClosing.add(listener);
-    }
-
-    public void onStarting(final Listener0 listener) {
-        onAppStarting.add(listener);
-    }
-
+    @Override
     public void start() {
-        onAppStarting.fire();
-        PrefetchUtilities.preFetchImpImages();
+        prefetchUtilities.preFetchImpImages();
         getInitData();
         final Timer prefetchTimer = new Timer() {
             @Override
             public void run() {
-                PrefetchUtilities.doTasksDeferred();
+                prefetchUtilities.doTasksDeferred();
             }
         };
         prefetchTimer.schedule(20000);
@@ -81,27 +74,25 @@ public class ApplicationDefault implements Application {
 
     private void getInitData() {
         siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
+            @Override
             public void onFailure(final Throwable error) {
-                RootPanel.get("kuneinitialcurtain").setVisible(false);
-                RootPanel.get("kuneloading").setVisible(false);
-                NotifyUser.error("Error fetching initial data");
+                eventBus.fireEvent(new ProgressHideEvent());
+                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, "Error fetching initial data"));
                 Log.debug(error.getMessage());
             }
 
+            @Override
             public void onSuccess(final InitDataDTO initData) {
                 session.setInitData(initData);
                 session.setCurrentUserInfo(initData.getUserInfo());
+                eventBus.fireEvent(new AppStartEvent(initData));
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                    @Override
                     public void execute() {
-                        RootPanel.get("kuneinitialcurtain").setVisible(false);
-                        RootPanel.get("kuneloading").setVisible(false);
+                        eventBus.fireEvent(new ProgressHideEvent());
                     }
                 });
             }
         });
-    }
-
-    private void stop(final ClosingEvent event) {
-        onAppClosing.fire(event);
     }
 }

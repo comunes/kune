@@ -1,6 +1,7 @@
 package cc.kune.core.client.ws;
 
-import cc.kune.core.ws.armor.client.Body;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.ws.armor.client.WsArmorImpl;
 import cc.kune.core.ws.armor.client.resources.WsArmorResources;
 
 import com.google.gwt.core.client.GWT;
@@ -14,24 +15,25 @@ import com.gwtplatform.mvp.client.ViewImpl;
  */
 public class CoreViewImpl extends ViewImpl implements CorePresenter.CoreView {
 
-    private final Body body;
+    private final WsArmorImpl armor;
 
     /**
      * Instantiates a new core view.
      * 
-     * @param body
+     * @param armor
      *            the body
      */
     @Inject
-    public CoreViewImpl(final Body body) {
-        this.body = body;
+    public CoreViewImpl(final WsArmorImpl armor) {
+        this.armor = armor;
+        GWT.<CoreResources> create(CoreResources.class).css().ensureInjected();
         GWT.<WsArmorResources> create(WsArmorResources.class).style().ensureInjected();
-        body.getEntityHeader().add(new InlineLabel("Test - a, e, i, o, u"));
-        body.getDocHeader().add(new InlineLabel("doc title"));
+        armor.getEntityHeader().add(new InlineLabel("Test - a, e, i, o, u"));
+        armor.getDocHeader().add(new InlineLabel("doc title"));
     }
 
     @Override
     public Widget asWidget() {
-        return body;
+        return armor;
     }
 }

@@ -1,48 +1,56 @@
 package cc.kune.core.client.notify;
 
+import cc.kune.core.client.i18n.I18nReadyEvent;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.EventBus;
+import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
-import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, SpinerPresenter.SpinerProxy> {
-	
-	@ProxyCodeSplit
+
+    private final I18nTranslationService i18n;
+
+    @ProxyCodeSplit
     public interface SpinerProxy extends Proxy<SpinerPresenter> {
     }
 
-    public interface SpinerView extends View {
-
+    public interface SpinerView extends PopupView {
         void fade();
 
         void show(String message);
-
-        void showLoading();
     }
 
     @Inject
-    public SpinerPresenter(final EventBus eventBus, final SpinerView view, final SpinerProxy proxy) {
+    public SpinerPresenter(final EventBus eventBus, final SpinerView view, final SpinerProxy proxy,
+            I18nTranslationService i18n) {
         super(eventBus, view, proxy);
+        this.i18n = i18n;
     }
 
-    public void fade() {
+    @ProxyEvent
+    public void onProgressShow(ProgressShowEvent event) {
+        getView().show(event.getMessage());
+    }
+
+    @ProxyEvent
+    public void onI18nReady(I18nReadyEvent event) {
+        getView().show(i18n.t("Loading"));
+    }
+
+    @ProxyEvent
+    public void onProgressHide(ProgressHideEvent event) {
         getView().fade();
-    }
-
-    public void show(final String message) {
-        getView().show(message);
-    }
-
-    public void showLoading() {
-        getView().showLoading();
     }
 
     @Override
     protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
+        RevealRootPopupContentEvent.fire(this, this);
+        // RevealRootContentEvent.fire(this, this);
     }
 }

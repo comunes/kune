@@ -16,19 +16,34 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.app;
+ \*/
+package cc.kune.core.client.sitebar.logo;
 
-import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
-import com.google.gwt.user.client.Window.ClosingEvent;
+import cc.kune.core.ws.armor.client.WsArmor;
 
-public interface Application {
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ViewImpl;
 
-    void onClosing(Listener<ClosingEvent> listener);
+public class SiteLogoViewImpl extends ViewImpl implements SiteLogoPresenter.SiteLogoView {
 
-    void onStarting(Listener0 listener);
+    private final Image siteLogoImg;
 
-    void start();
+    @Inject
+    public SiteLogoViewImpl(WsArmor armor) {
+        siteLogoImg = new Image();
+        siteLogoImg.addStyleName("k-floatright");
+        armor.getSitebar().add(siteLogoImg);
+    }
 
+    @Override
+    public void setSiteLogoUrl(final String siteLogoUrl) {
+        siteLogoImg.setUrl(siteLogoUrl);
+    }
+
+    @Override
+    public Widget asWidget() {
+        return siteLogoImg;
+    }
 }

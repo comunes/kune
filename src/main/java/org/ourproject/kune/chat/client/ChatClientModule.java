@@ -27,7 +27,6 @@ import org.ourproject.kune.chat.client.ctx.ChatContextPresenter;
 import org.ourproject.kune.chat.client.ctx.room.AddRoom;
 import org.ourproject.kune.chat.client.ctx.room.AddRoomPanel;
 import org.ourproject.kune.chat.client.ctx.room.AddRoomPresenter;
-import org.ourproject.kune.platf.client.app.Application;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
@@ -44,6 +43,7 @@ import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -88,7 +88,7 @@ public class ChatClientModule extends AbstractExtendedModule {
             @Override
             public ChatEngine create() {
                 final ChatEngineDefault chatEngineDefault = new ChatEngineDefault(i(I18nUITranslationService.class),
-                        i(WorkspaceSkeleton.class), i(Application.class), i(Session.class), p(EmiteUIDialog.class),
+                        i(WorkspaceSkeleton.class), i(AppStarter.class), i(Session.class), p(EmiteUIDialog.class),
                         p(FileDownloadUtils.class), i(GlobalShortcutRegister.class));
                 return chatEngineDefault;
             }

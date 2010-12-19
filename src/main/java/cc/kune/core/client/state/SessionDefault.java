@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.List;
 
 import cc.kune.core.client.cookies.CookiesManager;
-import cc.kune.core.client.i18n.I18nReadyEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -47,7 +46,6 @@ import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.gwtplatform.mvp.client.EventBus;
 
 public class SessionDefault implements Session {
     private String userHash;
@@ -62,12 +60,9 @@ public class SessionDefault implements Session {
     private final Event<UserInfoDTO> onUserSignIn;
     private final Event0 onUserSignOut;
     private final Provider<UserServiceAsync> userServiceProvider;
-    private final EventBus eventBus;
 
     @Inject
-    public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider,
-            EventBus eventBus) {
-        this.eventBus = eventBus;
+    public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider) {
         this.userHash = cookieManager.getCurrentCookie();
         this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
         this.userServiceProvider = userServiceProvider;
@@ -282,7 +277,6 @@ public class SessionDefault implements Session {
     @Override
     public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
         this.currentLanguage = currentLanguage;
-        eventBus.fireEvent(new I18nReadyEvent());
     }
 
     @Override

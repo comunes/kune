@@ -19,10 +19,10 @@
  \*/
 package cc.kune.core.client.errors;
 
+import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import com.google.gwt.user.client.rpc.StatusCodeException;
 
-public class DefaultException extends StatusCodeException implements IsSerializable {
+public class DefaultException extends InvocationException implements IsSerializable {
 
     private static final long serialVersionUID = -6111471089427505005L;
 
@@ -31,7 +31,7 @@ public class DefaultException extends StatusCodeException implements IsSerializa
     }
 
     public DefaultException(final int statusCode, final String message) {
-        super(statusCode, message);
+        super(statusCode + " " + message);
     }
 
     public DefaultException(final String message) {

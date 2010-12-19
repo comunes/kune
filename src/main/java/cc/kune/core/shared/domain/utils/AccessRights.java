@@ -19,83 +19,83 @@
  */
 package cc.kune.core.shared.domain.utils;
 
-public class AccessRights {
-	boolean administrable;
-	boolean editable;
-	boolean visible;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-	public AccessRights() {
-		this(false, false, false);
-	}
+public class AccessRights implements IsSerializable {
+    boolean administrable;
+    boolean editable;
+    boolean visible;
 
-	public AccessRights(final boolean administrable, final boolean editable,
-			final boolean visible) {
-		this.administrable = administrable;
-		this.editable = editable;
-		this.visible = visible;
-	}
+    public AccessRights() {
+        this(false, false, false);
+    }
 
-	public boolean isAdministrable() {
-		return administrable;
-	}
+    public AccessRights(final boolean administrable, final boolean editable, final boolean visible) {
+        this.administrable = administrable;
+        this.editable = editable;
+        this.visible = visible;
+    }
 
-	public boolean isEditable() {
-		return editable;
-	}
+    public boolean isAdministrable() {
+        return administrable;
+    }
 
-	public boolean isVisible() {
-		return visible;
-	}
+    public boolean isEditable() {
+        return editable;
+    }
 
-	public void setAdministrable(final boolean isAdministrable) {
-		this.administrable = isAdministrable;
-	}
+    public boolean isVisible() {
+        return visible;
+    }
 
-	public void setEditable(final boolean isEditable) {
-		this.editable = isEditable;
-	}
+    public void setAdministrable(final boolean isAdministrable) {
+        this.administrable = isAdministrable;
+    }
 
-	public void setVisible(final boolean isVisible) {
-		this.visible = isVisible;
-	}
+    public void setEditable(final boolean isEditable) {
+        this.editable = isEditable;
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final AccessRights other = (AccessRights) obj;
-		if (administrable != other.administrable) {
-			return false;
-		}
-		if (editable != other.editable) {
-			return false;
-		}
-		if (visible != other.visible) {
-			return false;
-		}
-		return true;
-	}
+    public void setVisible(final boolean isVisible) {
+        this.visible = isVisible;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (administrable ? 1231 : 1237);
-		result = prime * result + (editable ? 1231 : 1237);
-		result = prime * result + (visible ? 1231 : 1237);
-		return result;
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AccessRights other = (AccessRights) obj;
+        if (administrable != other.administrable) {
+            return false;
+        }
+        if (editable != other.editable) {
+            return false;
+        }
+        if (visible != other.visible) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		return "AccessRights[a: " + administrable + ", e: " + editable
-				+ ", v: " + visible + "]";
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (administrable ? 1231 : 1237);
+        result = prime * result + (editable ? 1231 : 1237);
+        result = prime * result + (visible ? 1231 : 1237);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "AccessRights[a: " + administrable + ", e: " + editable + ", v: " + visible + "]";
+    }
 }

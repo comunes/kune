@@ -11,6 +11,9 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** Update Dev Guide
+*** Annotations generation http://code.google.com/p/gwt-platform/wiki/BoilerplateGeneration#Eclipse
+*** Add -startupUrl to your GWT Run launch with /ws/?locale=en&log_level=INFO (or similar)
 ** new UI library (gwt-ext is dead)
 - mosaic, 
 - gtx

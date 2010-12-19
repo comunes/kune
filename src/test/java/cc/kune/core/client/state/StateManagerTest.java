@@ -5,11 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import cc.kune.core.client.actions.BeforeActionListener;
-import cc.kune.core.client.notify.SpinerPresenter;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
@@ -17,6 +15,7 @@ import com.calclab.suco.testing.events.MockedListener;
 import com.calclab.suco.testing.events.MockedListener0;
 import com.calclab.suco.testing.events.MockedListener2;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.mvp.client.EventBus;
 
 public class StateManagerTest {
 
@@ -37,8 +36,8 @@ public class StateManagerTest {
         contentProvider = Mockito.mock(ContentProvider.class);
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);
-        final SpinerPresenter spiner = Mockito.mock(SpinerPresenter.class);
-        stateManager = new StateManagerDefault(contentProvider, session, history, spiner);
+        final EventBus eventBus = Mockito.mock(EventBus.class);
+        stateManager = new StateManagerDefault(contentProvider, session, history, eventBus);
         Mockito.when(session.getUserHash()).thenReturn(HASH);
         state = Mockito.mock(StateAbstractDTO.class);
         stateChangeListener = new MockedListener<StateAbstractDTO>();
@@ -49,7 +48,7 @@ public class StateManagerTest {
         stateManager.onStateChanged(stateChangeListener);
         stateManager.onGroupChanged(groupChangeListener);
         stateManager.onToolChanged(toolChangeListener);
-        new NotifyUser(null, null);
+        // new NotifyUser(null, null);
     }
 
     @Test

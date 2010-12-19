@@ -41,7 +41,6 @@ package cc.kune.core.client.state;
 import java.util.Collection;
 import java.util.List;
 
-
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nCountryDTO;
@@ -136,10 +135,13 @@ public interface Session {
 
     boolean isNotLogged();
 
+    @Deprecated
     void onInitDataReceived(Listener<InitDataDTO> listener);
 
+    @Deprecated
     void onUserSignIn(Listener<UserInfoDTO> listener);
 
+    @Deprecated
     void onUserSignOut(Listener0 listener);
 
     void setCurrentLanguage(final I18nLanguageDTO currentLanguage);

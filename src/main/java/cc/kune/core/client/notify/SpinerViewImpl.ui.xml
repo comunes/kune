@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.extjs.gxt.ui.client.widget">
+	<ui:with field='res' type='cc.kune.core.client.resources.CoreResources' />
+	<g:FlowPanel>
+		<g:HorizontalPanel ui:field="panel" styleName="kLoadingPanel" verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_CENTER" borderWidth="0">
+			<g:Image ui:field="img" styleName="{res.css.loadingSpiner}" />
+			<g:InlineLabel ui:field="label" styleName="kLoadingLabel" horizontalAlignment="ALIGN_CENTER" />
+		</g:HorizontalPanel>
+	</g:FlowPanel>
+</ui:UiBinder> 

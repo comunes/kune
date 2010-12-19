@@ -22,21 +22,19 @@ package org.ourproject.kune.app.client;
 import org.ourproject.kune.platf.client.services.Loader;
 import org.ourproject.kune.platf.client.services.PlatformModule;
 
-import cc.kune.core.ws.armor.client.Body;
-import cc.kune.core.ws.armor.client.resources.WsArmorResources;
-
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 public class KuneEntryPoint implements EntryPoint {
 
+    @Override
     public void onModuleLoad() {
         Log.setUncaughtExceptionHandler();
 
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
             public void execute() {
                 onModuleLoadCont();
             }
@@ -46,11 +44,11 @@ public class KuneEntryPoint implements EntryPoint {
     public void onModuleLoadCont() {
         // At the moment, in runtime:
         Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
-        final WsArmorResources resources = WsArmorResources.INSTANCE;
-        resources.style().ensureInjected();
-
-        final Body body = new Body();
-        RootLayoutPanel.get().add(body);
+        // final WsArmorResources resources = WsArmorResources.INSTANCE;
+        // resources.style().ensureInjected();
+        //
+        // final Body body = new Body();
+        // RootLayoutPanel.get().add(body);
         // Loader.install(new RegistryModule(), new DocumentClientModule(), new
         // BlogClientModule(),
         // new WikiClientModule(), new GalleryClientModule(), new

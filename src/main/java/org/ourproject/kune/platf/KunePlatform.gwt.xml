@@ -1,6 +1,7 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.1.0/distro-source/core/src/gwt-module.dtd">
 <module>
   <!-- Inherit the core Web Toolkit stuff. -->
+  <inherits name="cc.kune.core.Core" />
   <inherits name='com.google.gwt.user.User' />
   <inherits name='com.google.gwt.i18n.I18N' />
   <inherits name="com.google.gwt.user.UserAgent" />

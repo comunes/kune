@@ -169,8 +169,6 @@ import org.ourproject.kune.workspace.client.site.msg.ToastMessage;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessagePanel;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessagePresenter;
 import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogo;
-import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogoPanel;
-import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogoPresenter;
 import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLink;
 import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLinkPanel;
 import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLinkPresenter;
@@ -423,10 +421,12 @@ public class WorkspaceModule extends AbstractExtendedModule {
         register(ApplicationComponentGroup.class, new Factory<SiteLogo>(SiteLogo.class) {
             @Override
             public SiteLogo create() {
-                final SiteLogoPresenter presenter = new SiteLogoPresenter(i(Session.class));
-                final SiteLogoPanel panel = new SiteLogoPanel(presenter, i(WorkspaceSkeleton.class));
-                presenter.init(panel);
-                return presenter;
+                // final SiteLogoPresenter presenter = new
+                // SiteLogoPresenter(i(Session.class));
+                // final SiteLogoPanel panel = new SiteLogoPanel(presenter,
+                // i(WorkspaceSkeleton.class));
+                // presenter.init(panel);
+                return null;
             }
         });
 
@@ -958,24 +958,28 @@ public class WorkspaceModule extends AbstractExtendedModule {
 
         // Register of tokens like "signin", "newgroup", "translate" etcetera
         i(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Listener0() {
+            @Override
             public void onEvent() {
                 i(SignIn.class).doSignIn();
             }
         });
 
         i(StateManager.class).addSiteToken(SiteToken.register.toString(), new Listener0() {
+            @Override
             public void onEvent() {
                 i(Register.class).doRegister();
             }
         });
 
         i(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Listener0() {
+            @Override
             public void onEvent() {
                 i(NewGroup.class).doNewGroup();
             }
         });
 
         i(StateManager.class).addSiteToken(SiteToken.translate.toString(), new Listener0() {
+            @Override
             public void onEvent() {
                 i(I18nTranslator.class).doShowTranslator();
             }
