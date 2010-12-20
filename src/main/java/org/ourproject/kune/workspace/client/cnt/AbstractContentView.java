@@ -19,14 +19,11 @@
  */
 package org.ourproject.kune.workspace.client.cnt;
 
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.ui.Widget;
 
 public interface AbstractContentView {
 
     public void setRawContent(final String content);
-
-    public void setWave(String waveId, Listener0 onLoaded);
 
     void attach();
 

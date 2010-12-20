@@ -23,7 +23,6 @@ import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.download.ImageSize;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 
@@ -38,7 +37,6 @@ import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 
 public abstract class FoldableContentPresenter extends AbstractContentPresenter implements FoldableContent {
@@ -52,7 +50,6 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
     private final Provider<MediaUtils> mediaUtils;
     private String uploadType;
     private String waveType;
-    private final Listener0 onWaveLoaded;
 
     public FoldableContentPresenter(final String toolName, final StateManager stateManager, final Session session,
             final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
@@ -71,13 +68,6 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
                 setState(state);
             }
         });
-        onWaveLoaded = new Listener0() {
-            @Override
-            public void onEvent() {
-                NotifyUser.hideProgress();
-                NotifyUser.info("Wave loaded");
-            }
-        };
     }
 
     public String getToolName() {
@@ -110,7 +100,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
         if (typeId.equals(getUploadType())) {
             setUploadedContent(state);
         } else if (typeId.equals(getWaveType())) {
-            setWaveContent(state);
+            // setWaveContent(state);
         } else {
             setNormalContent(state);
         }
@@ -201,11 +191,5 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
         } else {
             view.setNoPreview();
         }
-    }
-
-    private void setWaveContent(final StateContentDTO state) {
-        NotifyUser.showProgressLoading();
-        final String waveId = getContentBody(state);
-        view.setWave(waveId, onWaveLoaded);
     }
 }

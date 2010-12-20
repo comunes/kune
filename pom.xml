@@ -1,910 +1,940 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>cc.kune</groupId>
-	<artifactId>kune</artifactId>
-	<packaging>war</packaging>
-	<version>0.0.7</version>
-	<name>kune</name>
-	<description> kune free/open/libre collaboration platform </description>
-	<url>http://kune.ourproject.org</url>
-	<properties>
-		<!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
-		<gwtVersion>2.1.0</gwtVersion>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<slf4j.version>1.6.1</slf4j.version>
-		<openjpa.version>2.0.1</openjpa.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-servlet</artifactId>
-			<version>${gwtVersion}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>${gwtVersion}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- guice -->
-		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.gwt.inject</groupId>
-			<artifactId>gin</artifactId>
-			<version>r137</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice-servlet</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ourproject.common</groupId>
-			<artifactId>gwt-common</artifactId>
-			<version>0.0.3</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.extjs</groupId>
-			<artifactId>gxt</artifactId>
-			<version>2.2.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.cobogw.gwt</groupId>
-			<artifactId>cobogw</artifactId>
-			<version>1.3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>cc.kune.core.ws.armor</groupId>
-			<artifactId>ws-armor</artifactId>
-			<version>0.0.7</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gwtplatform</groupId>
-			<artifactId>gwtp</artifactId>
-			<version>0.4</version>
-		</dependency>
-		<!-- cc -->
-		<dependency>
-			<groupId>com.gwtext</groupId>
-			<artifactId>gwtext</artifactId>
-			<version>2.0.5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gwtextux</groupId>
-			<artifactId>gwtextux</artifactId>
-			<version>0.4.0.924</version>
-		</dependency>
-		<dependency>
-			<groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
-			<artifactId>gwt-log</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
-			<artifactId>gwt-voices</artifactId>
-			<version>1.6.0</version>
-		</dependency>
-		<!-- utilities -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.dozer</groupId>
-			<artifactId>dozer</artifactId>
-			<version>4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.calclab</groupId>
-			<artifactId>suco</artifactId>
-			<version>0.6.5</version>
-		</dependency>
-		<dependency>
-			<groupId>jmagick</groupId>
-			<artifactId>jmagick</artifactId>
-			<version>6.2.6-0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.xwiki.platform</groupId>
-			<artifactId>xwiki-web-gwt-dom</artifactId>
-			<version>2.3-rc-1</version>
-			<!-- <version>2.0-SNAPSHOT-g164</version> -->
-			<!-- <version>2.0-SNAPSHOT</version> -->
-			<!-- <version>2.0-SNAPSHOT-g20s</version> -->
-		</dependency>
-		<!-- xmpp -->
-		<dependency>
-			<groupId>com.calclab.emite</groupId>
-			<artifactId>emite</artifactId>
-			<version>0.4.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jivesoftware.smack</groupId>
-			<artifactId>smack</artifactId>
-			<version>3.0.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jivesoftware.smackx</groupId>
-			<artifactId>smackx</artifactId>
-			<version>3.0.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jivesoftware.smackx.debugger</groupId>
-			<artifactId>smackx-debugger</artifactId>
-			<version>3.0.4</version>
-		</dependency>
-		<!-- mysql -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.13</version>
-		</dependency>
-		<!-- hibernate JPA -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>3.3.1.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.0.2.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.4.0.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>3.3.0.ga</version>
-		</dependency>
-		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> 
-			<version>3.3.1.GA</version> </dependency> -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-search</artifactId>
-			<version>3.1.0.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.4.0.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-tools</artifactId>
-			<version>3.2.3.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>c3p0</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.wideplay</groupId>
-			<artifactId>warp-persist</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-			<!-- =roo -->
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-			<!-- =roo -->
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-			<!-- =roo -->
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
-			<!-- =roo -->
-		</dependency>
-		<!-- REST: xml and json (stax) -->
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>stax</groupId>
-			<artifactId>stax-api</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jettison</groupId>
-			<artifactId>jettison</artifactId>
-			<version>1.0-RC2</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>2.1</version>
-			<classifier>jdk15</classifier>
-		</dependency>
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>3.2</version>
-		</dependency>
-		<!-- File upload -->
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.7.0</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<!-- db upgrades -->
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-			<version>1.7.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-plugin</artifactId>
-			<version>1.7.0.0</version>
-		</dependency>
-		<!-- jetty dependencies -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.mortbay.jetty</groupId> -->
-		<!-- <artifactId>jetty-util</artifactId> -->
-		<!-- <version>6.1.11</version> -->
-		<!-- <version>7.0.0.pre5</version> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.mortbay.jetty</groupId> -->
-		<!-- <artifactId>jetty-maven-plugin</artifactId> -->
-		<!-- <version>7.2.1.v20101111</version> -->
-		<!-- <artifactId>maven-jetty-plugin</artifactId> <version>6.1.11</version> -->
-		<!-- <scope>runtime</scope> -->
-		<!-- </dependency> -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- testing dependencies -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<scope>test</scope>
-			<version>1.6</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.0.20070617</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
-			<!-- =roo -->
-			<scope>test</scope>
-		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.openqa.selenium.client-drivers</groupId> -->
-		<!-- <artifactId>selenium-java-client-driver</artifactId> -->
-		<!-- <version>1.0-beta-1</version> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
-		<!-- public side -->
-		<dependency>
-			<groupId>org.jruby.rack</groupId>
-			<artifactId>jruby-rack</artifactId>
-			<version>1.0.3</version>
-			<!-- <version>0.9.4</version> -->
-		</dependency>
-		<!-- wave -->
-		<dependency>
-			<groupId>org.waveprotocol</groupId>
-			<artifactId>kune-wave-server</artifactId>
-			<version>0.0.3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-cli</groupId>
-			<artifactId>commons-cli</artifactId>
-			<version>1.2</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.3</version>
-			<type>jar</type>
-		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>dom4j</groupId> -->
-		<!-- <artifactId>dom4j</artifactId> -->
-		<!-- <version>1.6.1</version> -->
-		<!-- <type>jar</type> -->
-		<!-- </dependency> -->
-		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice-assistedinject</artifactId>
-			<version>2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>jline</groupId>
-			<artifactId>jline</artifactId>
-			<version>0.9.94</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.gnu.inet</groupId>
-			<artifactId>libidn</artifactId>
-			<version>1.15</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>com.google.protobuf</groupId>
-			<artifactId>protobuf-java</artifactId>
-			<version>2.1.0</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>xpp3</groupId>
-			<artifactId>xpp3</artifactId>
-			<version>1.1.4c</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>xpp3</groupId>
-			<artifactId>xpp3_xpath</artifactId>
-			<version>1.1.4c</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>aopalliance</groupId>
-			<artifactId>aopalliance</artifactId>
-			<version>1.0</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.wave-protocol</groupId>
-			<artifactId>xmpp</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.wave-protocol</groupId>
-			<artifactId>whack</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.common</groupId>
-			<artifactId>collect</artifactId>
-			<version>1.0-rc2</version>
-		</dependency>
-	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>kune.ourproject.org</id>
-			<url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/</url>
-		</repository>
-	</distributionManagement>
-	<pluginRepositories>
-		<!-- cc -->
-		<pluginRepository>
-			<id>jboss-public-repository-group</id>
-			<name>JBoss Public Maven Repository Group</name>
-			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</pluginRepository>
-		<!-- cc -->
-		<!-- <pluginRepository> <id>gwt-maven</id> <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url> 
-			</pluginRepository> -->
-		<pluginRepository>
-			<id>Codehaus Snapshots</id>
-			<url>http://snapshots.repository.codehaus.org/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>  <!-- Workaround for MNG-2974, see note below -->
-			</releases>
-		</pluginRepository>
-		<pluginRepository>
-			<id>gwt-plugin-repo</id>
-			<url>http://google-web-toolkit.googlecode.com/svn/2.1.0.M3/gwt/maven</url>
-			<name>Google Web Toolkit Plugin Repository</name>
-		</pluginRepository>
-		<pluginRepository>
-			<id>maven2-repository.dev.java.net</id>
-			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
-			<layout>default</layout>
-		</pluginRepository>
-	</pluginRepositories>
-	<repositories>
-		<repository>
-			<id>guice-maven</id>
-			<name>guice maven</name>
-			<url>http://guice-maven.googlecode.com/svn/trunk</url>
-		</repository>
-		<repository>
-			<id>Codehaus Snapshots</id>
-			<url>http://snapshots.repository.codehaus.org/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>jboss-public-repository-group</id>
-			<name>JBoss Public Maven Repository Group</name>
-			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>mvp4g.googlecode.releases</id>
-			<name>Releases Repository for Mvp4g</name>
-			<url>http://mvp4g.googlecode.com/svn/maven2/releases/</url>
-		</repository>
-		<repository>
-			<id>ext-gxt</id>
-			<name>ext-gxt at jahia</name>
-			<url>http://maven.jahia.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>ext-gxt</id>
-			<name>ext-gxt at jahia</name>
-			<url>http://maven.jahia.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>cobogw</id>
-			<name>Cobogw repository at googlecode</name>
-			<url>http://cobogw.googlecode.com/svn/maven2</url>
-		</repository>
-		<repository>
-			<id>gwtp</id>
-			<name>gwtp repo</name>
-			<url>http://maven.gwt-platform.googlecode.com/hg/</url>
-		</repository>
-		<!-- cc -->
-		<repository>
-			<id>dyndns-repo</id>
-			<url>http://maven.dyndns.org/2</url>
-		</repository>
-		<repository>
-			<id>gwt-maven</id>
-			<url>
-        http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cc.kune</groupId>
+  <artifactId>kune</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.7</version>
+  <name>kune</name>
+  <description> kune free/open/libre collaboration platform </description>
+  <url>http://kune.ourproject.org</url>
+  <properties>
+    <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
+    <gwt.version>2.1.0</gwt.version>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <slf4j.version>1.6.1</slf4j.version>
+    <openjpa.version>2.0.1</openjpa.version>
+  </properties>
+  <repositories>
+    <repository>
+      <id>guice-maven</id>
+      <name>guice maven</name>
+      <url>http://guice-maven.googlecode.com/svn/trunk</url>
+    </repository>
+    <repository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Maven Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/
       </url>
-		</repository>
-		<repository>
-			<id>kune-maven</id>
-			<url>http://kune.ourproject.org/mavenrepo/</url>
-		</repository>
-		<repository>
-			<id>google-maven-snapshot-repository</id>
-			<name>Google Maven Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>openqa.org</id>
-			<name>Openqa Release Repository</name>
-			<url>http://archiva.openqa.org/repository/releases</url>
-			<layout>default</layout>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>openqa.org snapshots</id>
-			<name>Openqa Snapshot Repository</name>
-			<url>http://archiva.openqa.org/repository/snapshots</url>
-			<layout>default</layout>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>ignore</checksumPolicy>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>xwiki-releases</id>
-			<name>XWiki Maven2 Remote Repository for Releases</name>
-			<url>http://maven.xwiki.org/releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>xwiki</id>
-			<name>XWiki Repository</name>
-			<url>http://maven.xwiki.org/snapshots</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</snapshots>
-		</repository>
-	</repositories>
-	<issueManagement>
-		<system>kune issues list at ourproject.org</system>
-		<url>http://kune.ourproject.org/issues/</url>
-	</issueManagement>
-	<developers>
-		<developer>
-			<id>dani</id>
-			<name>Daniel Gómez Blasco</name>
-			<email>danigb@gmail.com</email>
-		</developer>
-		<developer>
-			<name>Samer Hassan</name>
-			<email>samer2004@gmail.com</email>
-		</developer>
-		<developer>
-			<name>Vicente J. Ruiz Jurado</name>
-			<email>vjrj@ourproject.org</email>
-		</developer>
-	</developers>
-	<scm>
-		<url>svn://scm.ourproject.org/svnroot/kune/trunk</url>
-	</scm>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.bsc.maven</groupId>
-				<artifactId>maven-processor-plugin</artifactId>
-				<version>1.3.7</version>
-				<executions>
-					<execution>
-						<id>process</id>
-						<goals>
-							<goal>process</goal>
-						</goals>
-						<phase>generate-sources</phase>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<forkMode>pertest</forkMode>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<!-- Uncomment and run mvn with -X -e if we have same compile problems 
-						<compilerArgument>-verbose</compilerArgument> <fork>true</fork> <verbose>true</verbose> -->
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.1.0-1</version>
-				<executions>
-					<execution>
-						<configuration>
-							<!-- <extraJvmArgs>-Xmx512M</extraJvmArgs> -->
-							<soyc>false</soyc>
-							<style>OBF</style>
-							<inline>true</inline>
-						</configuration>
-						<goals>
-							<!-- gwt:* goals to be executed during build -->
-							<goal>compile</goal>
-							<!-- http://mojo.codehaus.org/gwt-maven-plugin/user-guide/library.html -->
-							<goal>resources</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<runTarget>org.ourproject.kune.app.Kune/ws.html?log_level=DEBUG</runTarget>
-					<gwt.module>org.ourproject.kune.app.Kune</gwt.module>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>false</downloadJavadocs>
-					<wtpversion>2.0</wtpversion>
-				</configuration>
-			</plugin>
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> 
-				<version>2.1</version> <executions> <execution> <phase>compile</phase> <goals> 
-				<goal>exploded</goal> </goals> </execution> </executions> <configuration> 
-				<webappDirectory>/war</webappDirectory> </configuration> </plugin> -->
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>7.2.1.v20101111</version>
-				<!--<artifactId>maven-jetty-plugin</artifactId> <version>6.1.14</version> -->
-				<configuration>
-					<!-- <contextPath>/</contextPath> -->
-					<!-- <webAppSourceDirectory>${basedir}/target/${project.artifactId}-${version}</webAppSourceDirectory> -->
-					<!-- <webAppSourceDirectory>war</webAppSourceDirectory> -->
-					<webAppSourceDirectory>war</webAppSourceDirectory>
-					<reload>manual</reload>
-					<scanIntervalSeconds>0</scanIntervalSeconds>
-				</configuration>
-			</plugin>
-			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>deb-maven-plugin</artifactId> 
-				<version>1.0-SNAPSHOT</version> <configuration> <description>kune free/open/libre 
-				collaboration platform</description> <maintainer>Kune Development Team &lt;kune-devel@lists.ourproject.org&gt;</maintainer> 
-				<section>web</section> <priority>optional</priority> <architecture>all</architecture> 
-				</configuration> <executions> <execution> <goals> <goal>deb</goal> </goals> 
-				</execution> </executions> </plugin> -->
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-plugin</artifactId>
-				<version>1.7.0.0</version>
-				<executions>
-					<execution>
-						<phase>process-resources</phase>
-						<configuration>
-							<changeLogFile>
-								src/main/resources/db/liquibase_changelog.xml </changeLogFile>
-							<driver>com.mysql.jdbc.Driver</driver>
-							<url>jdbc:mysql://localhost/kune_dev</url>
-							<username>kune</username>
-							<password>db4kune</password>
-							<verbose>true</verbose>
-						</configuration>
-						<!-- <configuration> <verbose>true</verbose> <propertiesFile> src/main/resources/db/liquibase.properties 
-							</propertiesFile> </configuration> -->
-						<goals>
-							<goal>update</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<id>core</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<classifier>core</classifier>
-							<includes>
-								<include>**/KunePlatform.gwt.xml**</include>
-								<include>**/i18n/I18nTranslationService.**</include>
-								<include>**/i18n/I18nTranslationServiceMocked.** </include>
-								<include>**/TextUtils.**</include>
-								<include>**/IconLabelEditable.**</include>
-								<include>**/QuickTipsHelper.**</include>
-								<include>**/RichText.gwt.xml**</include>
-								<include>**/BasicDialog.**</include>
-								<include>**/HorizontalLine.**</include>
-								<include>**/AbstractLabel.**</include>
-								<include>**/IconLabel.**</include>
-								<include> **/EditableIconLabel.**</include>
-								<include> **/EditableClickListener.**</include>
-								<include>**/KuneStringUtils.**</include>
-								<include>**/IconHyperlink*.**</include>
-								<include>**/LabelWrapper*.**</include>
-								<include>**/KuneUiUtils.**</include>
-								<include>**/View.**</include>
-								<!-- <include>**/platf/**</include> <include>**/platf/client/extend/**</include> 
-									<include>**/platf/client/*java</include> <include>**/platf/client/app/**</include> 
-									<include>**/platf/client/dispatch/**</include> -->
-							</includes>
-						</configuration>
-					</execution>
-					<execution>
-						<id>helloworldmodule</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<classifier>helloworldmodule</classifier>
-							<includes>
-								<include>**/HelloWorld*</include>
-							</includes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>org.codehaus.mojo</groupId> -->
-			<!-- <artifactId>selenium-maven-plugin</artifactId> -->
-			<!-- <configuration> -->
-			<!-- <port>4441</port> -->
-			<!-- </configuration> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <phase>pre-integration-test</phase> -->
-			<!-- <goals> -->
-			<!-- <goal>start-server</goal> -->
-			<!-- </goals> -->
-			<!-- <configuration> -->
-			<!-- <background>true</background> -->
-			<!-- </configuration> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<forkMode>pertest</forkMode>
-					<!-- Skip the normal tests, we'll run them in the integration-test phase -->
-					<skip>true</skip>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<configuration>
-							<skip>false</skip>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- <plugin> <artifactId>maven-clean-plugin</artifactId> <version>2.2</version> 
-				<configuration> <filesets> <fileset> <directory>src/main/webapp/gwt/</directory> 
-				<includes> <include>**/org.ourproject.kune.app.Kune*</include> <followSymlinks>false</followSymlinks> 
-				</includes> </fileset> </filesets> </configuration> </plugin> -->
-		</plugins>
-		<!-- <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory> -->
-		<outputDirectory>war/WEB-INF/classes</outputDirectory>
-		<testOutputDirectory>war/WEB-INF/test-classes</testOutputDirectory>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>src/main/java</directory>
-			</resource>
-		</resources>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh-external</artifactId>
-				<version>1.0-beta-2</version>
-			</extension>
-		</extensions>
-	</build>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<linkXref>true</linkXref>
-					<sourceEncoding>utf-8</sourceEncoding>
-					<minimumTokens>100</minimumTokens>
-					<targetJdk>1.5</targetJdk>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jdepend-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</reporting>
-	<profiles>
-		<profile>
-			<!-- Activate only when within eclipse -->
-			<id>m2eclipse</id>
-			<activation>
-				<property>
-					<name>!m2e.version</name>
-				</property>
-			</activation>
-			<!-- GWT SDK is provided by GWT SDK Classpath Container -->
-			<dependencies>
-				<dependency>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-servlet</artifactId>
-					<version>${gwtVersion}</version>
-					<scope>runtime</scope>
-				</dependency>
-				<dependency>
-					<groupId>com.google.gwt</groupId>
-					<artifactId>gwt-user</artifactId>
-					<version>${gwtVersion}</version>
-					<scope>provided</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>mvp4g.googlecode.releases</id>
+      <name>Releases Repository for Mvp4g</name>
+      <url>http://mvp4g.googlecode.com/svn/maven2/releases/</url>
+    </repository>
+    <repository>
+      <id>ext-gxt</id>
+      <name>ext-gxt at jahia</name>
+      <url>http://maven.jahia.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>ext-gxt</id>
+      <name>ext-gxt at jahia</name>
+      <url>http://maven.jahia.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>cobogw</id>
+      <name>Cobogw repository at googlecode</name>
+      <url>http://cobogw.googlecode.com/svn/maven2</url>
+    </repository>
+    <repository>
+      <id>gwtp</id>
+      <name>gwtp repo</name>
+      <url>http://maven.gwt-platform.googlecode.com/hg/</url>
+    </repository>
+    <repository>
+      <id>gwt-repo</id>
+      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/</url>
+      <name>Google Web Toolkit Repository</name>
+    </repository>
+    <!-- cc -->
+    <repository>
+      <id>dyndns-repo</id>
+      <url>http://maven.dyndns.org/2</url>
+    </repository>
+    <repository>
+      <id>kune-maven</id>
+      <url>http://kune.ourproject.org/mavenrepo/</url>
+    </repository>
+    <repository>
+      <id>google-maven-snapshot-repository</id>
+      <name>Google Maven Snapshot Repository</name>
+      <url>https://oss.sonatype.org/content/repositories/google-snapshots/
+      </url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>openqa.org</id>
+      <name>Openqa Release Repository</name>
+      <url>http://archiva.openqa.org/repository/releases</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>openqa.org snapshots</id>
+      <name>Openqa Snapshot Repository</name>
+      <url>http://archiva.openqa.org/repository/snapshots</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>ignore</checksumPolicy>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>xwiki-releases</id>
+      <name>XWiki Maven2 Remote Repository for Releases</name>
+      <url>http://maven.xwiki.org/releases</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>xwiki</id>
+      <name>XWiki Repository</name>
+      <url>http://maven.xwiki.org/snapshots</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <!-- cc -->
+    <pluginRepository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Maven Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/
+      </url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+    <!-- cc -->
+    <!-- <pluginRepository> <id>gwt-maven</id> <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url> 
+      </pluginRepository> -->
+    <pluginRepository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>  <!-- Workaround for MNG-2974, see note below -->
+      </releases>
+    </pluginRepository>
+    <pluginRepository>
+      <id>maven2-repository.dev.java.net</id>
+      <name>Java.net Repository for Maven</name>
+      <url>http://download.java.net/maven/2/</url>
+      <layout>default</layout>
+    </pluginRepository>
+    <pluginRepository>
+      <id>gwt-plugin-repo</id>
+      <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/</url>
+      <name>Google Web Toolkit Plugin Repository</name>
+    </pluginRepository>
+  </pluginRepositories>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+      <version>${gwt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>${gwt.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- guice -->
+    <dependency>
+      <groupId>com.google.code.guice</groupId>
+      <artifactId>guice</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.gwt.inject</groupId>
+      <artifactId>gin</artifactId>
+      <version>r137</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.guice</groupId>
+      <artifactId>guice-servlet</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ourproject.common</groupId>
+      <artifactId>gwt-common</artifactId>
+      <version>0.0.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.extjs</groupId>
+      <artifactId>gxt</artifactId>
+      <version>2.2.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.cobogw.gwt</groupId>
+      <artifactId>cobogw</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>cc.kune.core.ws.armor</groupId>
+      <artifactId>ws-armor</artifactId>
+      <version>0.0.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gwtplatform</groupId>
+      <artifactId>gwtp</artifactId>
+      <version>0.4</version>
+    </dependency>
+    <!-- cc -->
+    <dependency>
+      <groupId>com.gwtext</groupId>
+      <artifactId>gwtext</artifactId>
+      <version>2.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.gwtextux</groupId>
+      <artifactId>gwtextux</artifactId>
+      <version>0.4.0.924</version>
+    </dependency>
+    <dependency>
+      <groupId>com.allen_sauer.gwt.log.gwt-log</groupId>
+      <artifactId>gwt-log</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
+      <artifactId>gwt-voices</artifactId>
+      <version>1.6.0</version>
+    </dependency>
+    <!-- utilities -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.14</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.dozer</groupId>
+      <artifactId>dozer</artifactId>
+      <version>4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab</groupId>
+      <artifactId>suco</artifactId>
+      <version>0.6.5</version>
+    </dependency>
+    <dependency>
+      <groupId>jmagick</groupId>
+      <artifactId>jmagick</artifactId>
+      <version>6.2.6-0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-web-gwt-dom</artifactId>
+      <version>2.3-rc-1</version>
+      <!-- <version>2.0-SNAPSHOT-g164</version> -->
+      <!-- <version>2.0-SNAPSHOT</version> -->
+      <!-- <version>2.0-SNAPSHOT-g20s</version> -->
+    </dependency>
+    <!-- xmpp -->
+    <dependency>
+      <groupId>com.calclab.emite</groupId>
+      <artifactId>emite</artifactId>
+      <version>0.4.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jivesoftware.smack</groupId>
+      <artifactId>smack</artifactId>
+      <version>3.0.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jivesoftware.smackx</groupId>
+      <artifactId>smackx</artifactId>
+      <version>3.0.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jivesoftware.smackx.debugger</groupId>
+      <artifactId>smackx-debugger</artifactId>
+      <version>3.0.4</version>
+    </dependency>
+    <!-- mysql -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.13</version>
+    </dependency>
+    <!-- hibernate JPA -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>3.3.1.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>4.0.2.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-annotations</artifactId>
+      <version>3.4.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-commons-annotations</artifactId>
+      <version>3.3.0.ga</version>
+    </dependency>
+    <!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> 
+      <version>3.3.1.GA</version> </dependency> -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-search</artifactId>
+      <version>3.1.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>3.4.0.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-tools</artifactId>
+      <version>3.2.3.GA</version>
+    </dependency>
+    <dependency>
+      <groupId>c3p0</groupId>
+      <artifactId>c3p0</artifactId>
+      <version>0.9.1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.wideplay</groupId>
+      <artifactId>warp-persist</artifactId>
+      <version>2.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.16</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
+      <!-- =roo -->
+    </dependency>
+    <!-- REST: xml and json (stax) -->
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>stax</groupId>
+      <artifactId>stax-api</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <version>1.0-RC2</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.1</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2</version>
+    </dependency>
+    <!-- File upload -->
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <!-- db upgrades -->
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>1.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-plugin</artifactId>
+      <version>1.7.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- testing dependencies -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
+      <version>1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.0.20070617</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <!-- =roo -->
+      <scope>test</scope>
+    </dependency>
+    <!-- <dependency> -->
+    <!-- <groupId>org.openqa.selenium.client-drivers</groupId> -->
+    <!-- <artifactId>selenium-java-client-driver</artifactId> -->
+    <!-- <version>1.0-beta-1</version> -->
+    <!-- <scope>test</scope> -->
+    <!-- </dependency> -->
+    <!-- public side -->
+    <dependency>
+      <groupId>org.jruby.rack</groupId>
+      <artifactId>jruby-rack</artifactId>
+      <version>1.0.3</version>
+      <!-- <version>0.9.4</version> -->
+    </dependency>
+    <!-- wave -->
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>kune-wave-server</artifactId>
+      <!-- <version>0.0.3.1</version> -->
+      <version>0.0.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>1.2</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.3</version>
+      <type>jar</type>
+    </dependency>
+    <!-- <dependency> -->
+    <!-- <groupId>dom4j</groupId> -->
+    <!-- <artifactId>dom4j</artifactId> -->
+    <!-- <version>1.6.1</version> -->
+    <!-- <type>jar</type> -->
+    <!-- </dependency> -->
+    <dependency>
+      <groupId>com.google.code.guice</groupId>
+      <artifactId>guice-assistedinject</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jline</groupId>
+      <artifactId>jline</artifactId>
+      <version>0.9.94</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.gnu.inet</groupId>
+      <artifactId>libidn</artifactId>
+      <version>1.15</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>2.1.0</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>xpp3</groupId>
+      <artifactId>xpp3</artifactId>
+      <version>1.1.4c</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>xpp3</groupId>
+      <artifactId>xpp3_xpath</artifactId>
+      <version>1.1.4c</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.wave-protocol</groupId>
+      <artifactId>xmpp</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.wave-protocol</groupId>
+      <artifactId>whack</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.common</groupId>
+      <artifactId>collect</artifactId>
+      <version>1.0-rc2</version>
+    </dependency>
+  </dependencies>
+  <distributionManagement>
+    <repository>
+      <id>kune.ourproject.org</id>
+      <url>scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/
+      </url>
+    </repository>
+  </distributionManagement>
+  <issueManagement>
+    <system>kune issues list at ourproject.org</system>
+    <url>http://kune.ourproject.org/issues/</url>
+  </issueManagement>
+  <developers>
+    <developer>
+      <id>dani</id>
+      <name>Daniel Gómez Blasco</name>
+      <email>danigb@gmail.com</email>
+    </developer>
+    <developer>
+      <name>Samer Hassan</name>
+      <email>samer2004@gmail.com</email>
+    </developer>
+    <developer>
+      <name>Vicente J. Ruiz Jurado</name>
+      <email>vjrj@ourproject.org</email>
+    </developer>
+  </developers>
+  <scm>
+    <url>svn://scm.ourproject.org/svnroot/kune/trunk</url>
+  </scm>
+  <build>
+    <plugins>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1-beta-1</version>
+        <!-- <configuration> <webXml>target/web.xml</webXml> </configuration> -->
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <!-- Uncomment and run mvn with -X -e if we have same compile problems 
+            <compilerArgument>-verbose</compilerArgument> <fork>true</fork> <verbose>true</verbose> -->
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.4.2</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo + custom -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <excludes>
+            <exclude>**/*_Roo_*</exclude>
+          </excludes>
+          <forkMode>pertest</forkMode>
+          <!-- Skip the normal tests, we'll run them in the integration-test 
+            phase -->
+          <skip>true</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2-beta-5</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo sin spring executions -->
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <downloadJavadocs>false</downloadJavadocs>
+          <wtpversion>2.0</wtpversion>
+          <additionalBuildcommands>
+            <buildCommand>
+              <name>com.google.gwt.eclipse.core.gwtProjectValidator </name>
+            </buildCommand>
+          </additionalBuildcommands>
+          <additionalProjectnatures>
+            <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
+            <projectnature>com.google.gwt.eclipse.core.gwtNature </projectnature>
+          </additionalProjectnatures>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.5</version>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-idea-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <dependenciesAsLibraries>true</dependenciesAsLibraries>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>tomcat-maven-plugin</artifactId>
+        <version>1.0</version>
+<configuration>
+                <path>/</path>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>7.1.2.v20100523</version>
+        <!-- <version>7.2.1.v20101111</version> -->
+        <configuration>
+          <webAppConfig>
+            <!-- FIXME: ws? 
+            <contextPath>/${project.name}</contextPath>
+						-->
+            <contextPath>/</contextPath>
+          </webAppConfig>
+          <reload>manual</reload>
+          <scanIntervalSeconds>0</scanIntervalSeconds>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- pensar/probar: openjpa-maven-plugin -->
+        <!-- gwtp & GenEvent need this plugin -->
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
+        <version>1.3.7</version>
+        <executions>
+          <execution>
+            <id>process</id>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>generate-sources</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!-- =roo -->
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>1.3.2.google</version>
+        <configuration>
+          <logLevel>INFO</logLevel>
+          <style>OBF</style>
+          <soyc>false</soyc>
+          <gwtVersion>${gwt.version}</gwtVersion>
+          <runTarget>/ws/ws.html?log_level=DEBUG</runTarget>
+          <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+          <modules>
+            <module>${project.groupId}.Kune</module>
+          </modules>
+          <copyWebapp>true</copyWebapp>
+        </configuration>
+        <executions>
+          <execution>
+            <id>gwtcompile</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>compile</goal>
+              <!-- http://mojo.codehaus.org/gwt-maven-plugin/user-guide/library.html -->
+              <!-- <goal>resources</goal> -->
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>deb-maven-plugin</artifactId> 
+        <version>1.0-SNAPSHOT</version> <configuration> <description>kune free/open/libre 
+        collaboration platform</description> <maintainer>Kune Development Team &lt;kune-devel@lists.ourproject.org&gt;</maintainer> 
+        <section>web</section> <priority>optional</priority> <architecture>all</architecture> 
+        </configuration> <executions> <execution> <goals> <goal>deb</goal> </goals> 
+        </execution> </executions> </plugin> -->
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-plugin</artifactId>
+        <version>1.7.0.0</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <configuration>
+              <changeLogFile>
+                src/main/resources/db/liquibase_changelog.xml </changeLogFile>
+              <driver>com.mysql.jdbc.Driver</driver>
+              <url>jdbc:mysql://localhost/kune_dev</url>
+              <username>kune</username>
+              <password>db4kune</password>
+              <verbose>true</verbose>
+            </configuration>
+            <!-- <configuration> <verbose>true</verbose> <propertiesFile> 
+              src/main/resources/db/liquibase.properties </propertiesFile> </configuration> -->
+            <goals>
+              <goal>update</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+<!--          <execution>-->
+<!--            <id>core</id>-->
+<!--            <phase>package</phase>-->
+<!--            <goals>-->
+<!--              <goal>jar</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <classifier>core</classifier>-->
+<!--              <includes>-->
+<!--                <include>**/KunePlatform.gwt.xml**</include>-->
+<!--                <include>**/i18n/I18nTranslationService.**</include>-->
+<!--                <include>**/i18n/I18nTranslationServiceMocked.** </include>-->
+<!--                <include>**/TextUtils.**</include>-->
+<!--                <include>**/IconLabelEditable.**</include>-->
+<!--                <include>**/QuickTipsHelper.**</include>-->
+<!--                <include>**/RichText.gwt.xml**</include>-->
+<!--                <include>**/BasicDialog.**</include>-->
+<!--                <include>**/HorizontalLine.**</include>-->
+<!--                <include>**/AbstractLabel.**</include>-->
+<!--                <include>**/IconLabel.**</include>-->
+<!--                <include> **/EditableIconLabel.**</include>-->
+<!--                <include> **/EditableClickListener.**</include>-->
+<!--                <include>**/KuneStringUtils.**</include>-->
+<!--                <include>**/IconHyperlink*.**</include>-->
+<!--                <include>**/LabelWrapper*.**</include>-->
+<!--                <include>**/KuneUiUtils.**</include>-->
+<!--                <include>**/View.**</include>-->
+<!--                 <include>**/platf/**</include> <include>**/platf/client/extend/**</include> -->
+<!--                  <include>**/platf/client/*java</include> <include>**/platf/client/app/**</include> -->
+<!--                  <include>**/platf/client/dispatch/**</include> -->
+<!--              </includes>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+          <execution>
+            <id>helloworldmodule</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>helloworldmodule</classifier>
+              <includes>
+                <include>**/HelloWorld*</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- <plugin> -->
+      <!-- <groupId>org.codehaus.mojo</groupId> -->
+      <!-- <artifactId>selenium-maven-plugin</artifactId> -->
+      <!-- <configuration> -->
+      <!-- <port>4441</port> -->
+      <!-- </configuration> -->
+      <!-- <executions> -->
+      <!-- <execution> -->
+      <!-- <phase>pre-integration-test</phase> -->
+      <!-- <goals> -->
+      <!-- <goal>start-server</goal> -->
+      <!-- </goals> -->
+      <!-- <configuration> -->
+      <!-- <background>true</background> -->
+      <!-- </configuration> -->
+      <!-- </execution> -->
+      <!-- </executions> -->
+      <!-- </plugin> -->
+      <!-- <plugin> <artifactId>maven-clean-plugin</artifactId> <version>2.2</version> 
+        <configuration> <filesets> <fileset> <directory>src/main/webapp/gwt/</directory> 
+        <includes> <include>**/org.ourproject.kune.app.Kune*</include> <followSymlinks>false</followSymlinks> 
+        </includes> </fileset> </filesets> </configuration> </plugin> -->
+    </plugins>
+    <!-- <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory> -->
+    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+    <!-- <outputDirectory>war/WEB-INF/classes</outputDirectory> -->
+    <!-- <testOutputDirectory>war/WEB-INF/test-classes</testOutputDirectory> -->
+  <!-- <resources> -->
+  <!-- <resource> -->
+  <!-- <directory>src/main/resources</directory> -->
+  <!-- </resource> -->
+  <!-- <resource> -->
+  <!-- <directory>src/main/java</directory> -->
+  <!-- </resource> -->
+  <!-- </resources> -->
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh-external</artifactId>
+        <version>1.0-beta-2</version>
+      </extension>
+    </extensions>
+  </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <linkXref>true</linkXref>
+          <sourceEncoding>utf-8</sourceEncoding>
+          <minimumTokens>100</minimumTokens>
+          <targetJdk>1.5</targetJdk>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jdepend-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>

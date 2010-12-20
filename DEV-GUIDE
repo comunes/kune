@@ -244,6 +244,11 @@ Is recommended that you use the PMD plugin in eclipse:
 http://pmd.sourceforge.net/
 http://pmd.sourceforge.net/eclipse/
 
+=== Identation ===
+
+More than the eclipse code preferences we try to:
+* Use spaces instead of tabs (for instance in xml, we try to use 2 spaces of identation)
+
 ==Use of mylyn in eclipse==
 
 To use mylyn and to track the kune issues from eclipse, you have to add a "Web Repository" and select "ASM (gforge" with server: http://ourproject.org. 

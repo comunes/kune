@@ -27,8 +27,6 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HTML;
@@ -36,9 +34,6 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.wave.client.WaveWidget;
-import com.google.gwt.wave.client.event.WaveLoadEvent;
-import com.google.gwt.wave.client.event.WaveLoadHandler;
 
 public abstract class FoldableContentPanel extends AbstractContentPanel implements AbstractContentView {
 
@@ -57,6 +52,7 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         messagePanel.addStyleName("kune-Margin-7-b");
     }
 
+    @Override
     public void setContent(final String content, final boolean showPreviewMsg) {
         final VerticalPanel vp = createMessageVp(showPreviewMsg);
         final HTML html = new HTML(content);
@@ -64,10 +60,12 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         setWidgetAsContent(vp, true);
     }
 
+    @Override
     public void setInfo(final String info) {
         setLabel(info);
     }
 
+    @Override
     public void setInfoMessage(final String text) {
         final VerticalPanel vp = createMessageVp(true);
         messageLabel.setText(text);
@@ -80,34 +78,38 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         setWidget(label);
     }
 
+    @Override
     public void setNoPreview() {
         final VerticalPanel vp = createMessageVp(true);
         setNoPreviewLabelMsg();
         setWidgetAsContent(vp, true);
     }
 
+    @Override
     public void setRawContent(final String content) {
         final HTML html = new HTML(content);
         setDefStyle(html);
         setContent(html);
     }
 
-    public void setWave(final String waveId, final Listener0 onLoaded) {
-        final WaveWidget waveWidget = new WaveWidget("http://wave.google.com/a/wavesandbox.com/");
-        waveWidget.setUIConfig("white", "black", "arial, sans", "10pt");
-        waveWidget.setHeight("100%");
-        waveWidget.addWaveLoadHandler(new WaveLoadHandler() {
-            public void onWaveLoad(final WaveLoadEvent event) {
-                Log.info("Wave '" + event.getWaveId() + "' loaded!");
-                onLoaded.onEvent();
-            }
-        });
-        waveWidget.loadWave(waveId);
-        setWidgetAsContent(waveWidget, false);
-        waveWidget.setToolbarVisible(true);
-        waveWidget.setEditMode(false);
-    }
+    // public void setWave(final String waveId, final Listener0 onLoaded) {
+    // final WaveWidget waveWidget = new
+    // WaveWidget("http://wave.google.com/a/wavesandbox.com/");
+    // waveWidget.setUIConfig("white", "black", "arial, sans", "10pt");
+    // waveWidget.setHeight("100%");
+    // waveWidget.addWaveLoadHandler(new WaveLoadHandler() {
+    // public void onWaveLoad(final WaveLoadEvent event) {
+    // Log.info("Wave '" + event.getWaveId() + "' loaded!");
+    // onLoaded.onEvent();
+    // }
+    // });
+    // waveWidget.loadWave(waveId);
+    // setWidgetAsContent(waveWidget, false);
+    // waveWidget.setToolbarVisible(true);
+    // waveWidget.setEditMode(false);
+    // }
 
+    @Override
     public void setWidgetAsContent(final Widget widget, final boolean setDefMargins) {
         if (setDefMargins) {
             widget.addStyleName(DEF_CONTENT_MARGINS_STYLE);
@@ -115,6 +117,7 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         setContent(widget);
     }
 
+    @Override
     public void showImage(final String imageUrl, final String imageResizedUrl, final boolean showPreviewMsg) {
         final VerticalPanel vp = createMessageVp(showPreviewMsg);
         final Image imgOrig = new Image(imageUrl);
@@ -126,12 +129,14 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         imgOrig.addStyleName("kune-pointer");
         imgResized.addStyleName("kune-pointer");
         imgResized.addClickHandler(new ClickHandler() {
+            @Override
             public void onClick(final ClickEvent event) {
                 imgResized.removeFromParent();
                 vp.add(imgOrig);
             }
         });
         imgOrig.addClickHandler(new ClickHandler() {
+            @Override
             public void onClick(final ClickEvent event) {
                 imgOrig.removeFromParent();
                 vp.add(imgResized);
