@@ -37,6 +37,7 @@ import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 public class ErrorHandler {
+
     private final Session session;
     private final I18nTranslationService i18n;
     private final Event0 onSessionExpired;

@@ -205,7 +205,7 @@
     <dependency>
       <groupId>com.google.code.guice</groupId>
       <artifactId>guice</artifactId>
-      <version>2.0.1</version>
+      <version>2.1-SNAPSHOT-r1160</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.gwt.inject</groupId>
@@ -237,7 +237,7 @@
     <dependency>
       <groupId>cc.kune.core.ws.armor</groupId>
       <artifactId>ws-armor</artifactId>
-      <version>0.0.8</version>
+      <version>0.0.9</version>
     </dependency>
     <dependency>
       <groupId>com.gwtplatform</groupId>
@@ -499,9 +499,8 @@
     <!-- wave -->
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>kune-wave-server</artifactId>
-      <!-- <version>0.0.3.1</version> -->
-      <version>0.0.2.2</version>
+      <artifactId>waveinabox-server</artifactId>
+       <version>0.0.3.2</version> 
     </dependency>
     <dependency>
       <groupId>commons-cli</groupId>
@@ -521,61 +520,61 @@
     <!-- <version>1.6.1</version> -->
     <!-- <type>jar</type> -->
     <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>com.google.code.guice</groupId> -->
+    <!--   <artifactId>guice-assistedinject</artifactId> -->
+    <!--   <version>2.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>jline<!/groupId> -->
+    <!--   <artifactId>jline</artifactId> -->
+    <!--   <version>0.9.94</version> -->
+    <!--   <type>jar</type> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>org.gnu.inet</groupId> -->
+    <!--   <artifactId>libidn</artifactId> -->
+    <!--   <version>1.15</version> -->
+    <!--   <type>jar</type> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>com.google.protobuf</groupId> -->
+    <!--   <artifactId>protobuf-java</artifactId> -->
+    <!--   <version>2.3.0</version> -->
+    <!--   <type>jar</type> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>xpp3</groupId> -->
+    <!--   <artifactId>xpp3</artifactId> -->
+    <!--   <version>1.1.4c</version> -->
+    <!--   <type>jar</type> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>xpp3</groupId> -->
+    <!--   <artifactId>xpp3_xpath</artifactId> -->
+    <!--   <version>1.1.4c</version> -->
+    <!--   <type>jar</type> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>aopalliance</groupId> -->
+    <!--   <artifactId>aopalliance</artifactId> -->
+    <!--   <version>1.0</version> -->
+    <!--   <type>jar</type> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>org.wave-protocol</groupId> -->
+    <!--   <artifactId>xmpp</artifactId> -->
+    <!--   <version>1.0.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>org.wave-protocol</groupId> -->
+    <!--   <artifactId>whack</artifactId> -->
+    <!--   <version>1.0.0</version> -->
+    <!-- </dependency> -->
     <dependency>
-      <groupId>com.google.code.guice</groupId>
-      <artifactId>guice-assistedinject</artifactId>
-      <version>2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>jline</groupId>
-      <artifactId>jline</artifactId>
-      <version>0.9.94</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.gnu.inet</groupId>
-      <artifactId>libidn</artifactId>
-      <version>1.15</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>com.google.protobuf</groupId>
-      <artifactId>protobuf-java</artifactId>
-      <version>2.1.0</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>xpp3</groupId>
-      <artifactId>xpp3</artifactId>
-      <version>1.1.4c</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>xpp3</groupId>
-      <artifactId>xpp3_xpath</artifactId>
-      <version>1.1.4c</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>aopalliance</groupId>
-      <artifactId>aopalliance</artifactId>
-      <version>1.0</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.wave-protocol</groupId>
-      <artifactId>xmpp</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.wave-protocol</groupId>
-      <artifactId>whack</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.common</groupId>
-      <artifactId>collect</artifactId>
-      <version>1.0-rc2</version>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>r07</version>
     </dependency>
   </dependencies>
   <distributionManagement>
@@ -714,8 +713,8 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>tomcat-maven-plugin</artifactId>
         <version>1.0</version>
-<configuration>
-                <path>/</path>
+        <configuration>
+          <path>/</path>
         </configuration>
       </plugin>
       <plugin>
@@ -726,9 +725,7 @@
         <!-- <version>7.2.1.v20101111</version> -->
         <configuration>
           <webAppConfig>
-            <!-- FIXME: ws? 
-            <contextPath>/${project.name}</contextPath>
-						-->
+            <!-- FIXME: ws? <contextPath>/${project.name}</contextPath> -->
             <contextPath>/</contextPath>
           </webAppConfig>
           <reload>manual</reload>
@@ -815,39 +812,39 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.2</version>
         <executions>
-<!--          <execution>-->
-<!--            <id>core</id>-->
-<!--            <phase>package</phase>-->
-<!--            <goals>-->
-<!--              <goal>jar</goal>-->
-<!--            </goals>-->
-<!--            <configuration>-->
-<!--              <classifier>core</classifier>-->
-<!--              <includes>-->
-<!--                <include>**/KunePlatform.gwt.xml**</include>-->
-<!--                <include>**/i18n/I18nTranslationService.**</include>-->
-<!--                <include>**/i18n/I18nTranslationServiceMocked.** </include>-->
-<!--                <include>**/TextUtils.**</include>-->
-<!--                <include>**/IconLabelEditable.**</include>-->
-<!--                <include>**/QuickTipsHelper.**</include>-->
-<!--                <include>**/RichText.gwt.xml**</include>-->
-<!--                <include>**/BasicDialog.**</include>-->
-<!--                <include>**/HorizontalLine.**</include>-->
-<!--                <include>**/AbstractLabel.**</include>-->
-<!--                <include>**/IconLabel.**</include>-->
-<!--                <include> **/EditableIconLabel.**</include>-->
-<!--                <include> **/EditableClickListener.**</include>-->
-<!--                <include>**/KuneStringUtils.**</include>-->
-<!--                <include>**/IconHyperlink*.**</include>-->
-<!--                <include>**/LabelWrapper*.**</include>-->
-<!--                <include>**/KuneUiUtils.**</include>-->
-<!--                <include>**/View.**</include>-->
-<!--                 <include>**/platf/**</include> <include>**/platf/client/extend/**</include> -->
-<!--                  <include>**/platf/client/*java</include> <include>**/platf/client/app/**</include> -->
-<!--                  <include>**/platf/client/dispatch/**</include> -->
-<!--              </includes>-->
-<!--            </configuration>-->
-<!--          </execution>-->
+          <!-- <execution> -->
+          <!-- <id>core</id> -->
+          <!-- <phase>package</phase> -->
+          <!-- <goals> -->
+          <!-- <goal>jar</goal> -->
+          <!-- </goals> -->
+          <!-- <configuration> -->
+          <!-- <classifier>core</classifier> -->
+          <!-- <includes> -->
+          <!-- <include>**/KunePlatform.gwt.xml**</include> -->
+          <!-- <include>**/i18n/I18nTranslationService.**</include> -->
+          <!-- <include>**/i18n/I18nTranslationServiceMocked.** </include> -->
+          <!-- <include>**/TextUtils.**</include> -->
+          <!-- <include>**/IconLabelEditable.**</include> -->
+          <!-- <include>**/QuickTipsHelper.**</include> -->
+          <!-- <include>**/RichText.gwt.xml**</include> -->
+          <!-- <include>**/BasicDialog.**</include> -->
+          <!-- <include>**/HorizontalLine.**</include> -->
+          <!-- <include>**/AbstractLabel.**</include> -->
+          <!-- <include>**/IconLabel.**</include> -->
+          <!-- <include> **/EditableIconLabel.**</include> -->
+          <!-- <include> **/EditableClickListener.**</include> -->
+          <!-- <include>**/KuneStringUtils.**</include> -->
+          <!-- <include>**/IconHyperlink*.**</include> -->
+          <!-- <include>**/LabelWrapper*.**</include> -->
+          <!-- <include>**/KuneUiUtils.**</include> -->
+          <!-- <include>**/View.**</include> -->
+          <!-- <include>**/platf/**</include> <include>**/platf/client/extend/**</include> -->
+          <!-- <include>**/platf/client/*java</include> <include>**/platf/client/app/**</include> -->
+          <!-- <include>**/platf/client/dispatch/**</include> -->
+          <!-- </includes> -->
+          <!-- </configuration> -->
+          <!-- </execution> -->
           <execution>
             <id>helloworldmodule</id>
             <phase>package</phase>
@@ -890,14 +887,14 @@
     <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
     <!-- <outputDirectory>war/WEB-INF/classes</outputDirectory> -->
     <!-- <testOutputDirectory>war/WEB-INF/test-classes</testOutputDirectory> -->
-  <!-- <resources> -->
-  <!-- <resource> -->
-  <!-- <directory>src/main/resources</directory> -->
-  <!-- </resource> -->
-  <!-- <resource> -->
-  <!-- <directory>src/main/java</directory> -->
-  <!-- </resource> -->
-  <!-- </resources> -->
+    <!-- <resources> -->
+    <!-- <resource> -->
+    <!-- <directory>src/main/resources</directory> -->
+    <!-- </resource> -->
+    <!-- <resource> -->
+    <!-- <directory>src/main/java</directory> -->
+    <!-- </resource> -->
+    <!-- </resources> -->
     <extensions>
       <extension>
         <groupId>org.apache.maven.wagon</groupId>

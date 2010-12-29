@@ -28,7 +28,6 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event;
@@ -40,7 +39,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.EventBus;
-import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
     private final ContentProvider contentProvider;
@@ -75,21 +73,23 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.onSocialNetworkChanged = new Event<StateAbstractDTO>("onSocialNetworkChanged");
         siteTokens = new HashMap<String, Listener0>();
         beforeStateChangeCollection = new BeforeActionCollection();
-    }
-
-    @ProxyEvent
-    public void onUserSignOut() {
-        reload();
-    }
-
-    @ProxyEvent
-    public void onUserSignIn(UserInfoDTO userInfo) {
-        if (previousToken == null) {
-            // starting up
-            reload();
-        } else {
-            // do nothing, SigInPresent calls goto;
-        }
+        eventBus.addHandler(UserSignInEvent.getType(), new UserSignInEvent.UserSignInHandler() {
+            @Override
+            public void onUserSignIn(UserSignInEvent event) {
+                if (previousToken == null) {
+                    // starting up
+                    reload();
+                } else {
+                    // do nothing, SigInPresent calls goto;
+                }
+            }
+        });
+        eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutEvent.UserSignOutHandler() {
+            @Override
+            public void onUserSignOut(UserSignOutEvent event) {
+                reload();
+            }
+        });
     }
 
     @Override

@@ -15,6 +15,6 @@ public class CorePlaceManager extends PlaceManagerImpl {
 
     @Override
     public void revealDefaultPlace() {
-        revealPlace(new PlaceRequest(""));
+        revealPlace(new PlaceRequest(CorePresenter.HOME_TOKEN));
     }
 }

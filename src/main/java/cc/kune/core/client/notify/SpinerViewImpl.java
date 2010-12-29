@@ -26,7 +26,7 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
         widget = uiBinder.createAndBindUi(this);
         popup = new PopupPanel(false, false);
         popup.add(widget);
-        popup.setPopupPosition(7, 0);
+        popup.setPopupPosition(0, 0);
         popup.setStyleName("k-spiner-popup");
         popup.show();
     }
@@ -57,7 +57,7 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
     @Override
     public void show(String message) {
         if (message == null || message.isEmpty()) {
-            label.setText("Fixme");
+            label.setText("");
         } else {
             label.setText(message);
         }

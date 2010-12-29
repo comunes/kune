@@ -16,24 +16,33 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package cc.kune.core.client.rpcservices;
+ \*/
+package cc.kune.core.client.sitebar.logo;
 
-import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.ws.armor.client.WsArmor;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
-public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
+public class SiteLogoViewImpl2ç {
 
-    private static ErrorHandler errorHandler;
+    private final Image siteLogoImg;
 
-    @Override
-    public void onFailure(final Throwable caught) {
-        errorHandler.process(caught);
+    @Inject
+    public SiteLogoViewImpl2ç(WsArmor armor, PlaceManager placeManager) {
+        siteLogoImg = new Image();
+        siteLogoImg.addStyleName("k-floatright");
+        armor.getSitebar().add(siteLogoImg);
     }
 
-    public static void init(ErrorHandler kuneErrorHandler) {
-        errorHandler = kuneErrorHandler;
+    public void setSiteLogoUrl(final String siteLogoUrl) {
+        siteLogoImg.setUrl(siteLogoUrl);
+    }
+
+    public Widget asWidget() {
+        return siteLogoImg;
     }
 
 }

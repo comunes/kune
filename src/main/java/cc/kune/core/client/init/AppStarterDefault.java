@@ -97,7 +97,6 @@ public class AppStarterDefault implements AppStarter {
                     @Override
                     public void execute() {
                         hideInitialPanels();
-                        eventBus.fireEvent(new ProgressHideEvent());
                     }
                 });
             }

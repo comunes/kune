@@ -1,5 +1,7 @@
 package cc.kune.core.client;
 
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -18,6 +20,7 @@ public class KuneEntryPoint implements EntryPoint {
      * 
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
+    @Override
     public void onModuleLoad() {
         GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
             @Override
@@ -28,6 +31,7 @@ public class KuneEntryPoint implements EntryPoint {
         });
 
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
             public void execute() {
                 onModuleLoadCont();
             }
@@ -39,7 +43,11 @@ public class KuneEntryPoint implements EntryPoint {
      */
     public void onModuleLoadCont() {
         DelayedBindRegistry.bind(ginjector);
+        AsyncCallbackSimple.init(ginjector.getErrorHandler());
         ginjector.getPlaceManager().revealCurrentPlace();
+        ginjector.getI18n();
+        ginjector.getUserNotifierPresenter();
+        ginjector.getSpinerPresenter();
+        ginjector.getStateManager();
     }
-
 }

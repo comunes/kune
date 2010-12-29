@@ -11,9 +11,15 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** Wave integration
+   [ ] org.waveprotocol.box.webclient.WebClientProd
+   [ ] src/org/waveprotocol/box/server/ServerMain.java
+   [ ] pom.xml dep references
 ** Update Dev Guide
 *** Annotations generation http://code.google.com/p/gwt-platform/wiki/BoilerplateGeneration#Eclipse
 *** Add -startupUrl to your GWT Run launch with /ws/?locale=en&log_level=INFO (or similar)
+*** When you compile/run gwt web-app from eclipse, select target/kune-CURRENT-VERSION as War directory selection
+*** src/main/webapp in GWTDesigner???
 ** new UI library (gwt-ext is dead)
 - mosaic, 
 - gtx

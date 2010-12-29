@@ -19,6 +19,8 @@
  */
 package org.ourproject.kune.app.server;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.blogs.server.BlogServerModule;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
@@ -61,7 +63,7 @@ import com.google.inject.servlet.SessionScoped;
 import com.wideplay.warp.jpa.JpaUnit;
 
 public class KuneRackModule implements RackModule {
-
+    public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
     private final Module configModule;
 
     public KuneRackModule() {
@@ -69,6 +71,7 @@ public class KuneRackModule implements RackModule {
     }
 
     public KuneRackModule(final String jpaUnit, final String propertiesFileName, final Scope sessionScope) {
+
         configModule = new AbstractModule() {
             @Override
             public void configure() {
@@ -78,11 +81,11 @@ public class KuneRackModule implements RackModule {
                 if (sessionScope != null) {
                     bindScope(SessionScoped.class, sessionScope);
                 }
-                // bind(WavePropertiesParser.class).asEagerSingleton();
             }
         };
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public void configure(final RackBuilder builder) {
         installGuiceModules(builder);
