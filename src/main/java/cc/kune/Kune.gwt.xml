@@ -5,6 +5,7 @@
   <inherits name='com.google.gwt.logging.Logging' />
   <inherits name="cc.kune.core.Core" />
   <inherits name="com.calclab.suco.Suco" />
+  <inherits name="org.adamtacy.GWTEffects"></inherits> 
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
   <!-- <source path='shared'/> -->

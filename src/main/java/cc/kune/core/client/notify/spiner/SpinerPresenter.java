@@ -1,4 +1,4 @@
-package cc.kune.core.client.notify;
+package cc.kune.core.client.notify.spiner;
 
 import cc.kune.core.client.i18n.I18nReadyEvent;
 import cc.kune.core.shared.i18n.I18nTranslationService;

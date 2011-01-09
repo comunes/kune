@@ -1,0 +1,45 @@
+.k-msg-panel {
+	background-color: #892c00;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-bottom-right-radius: 5px;
+	kfilter: alpha(opacity =         80);
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+	opacity: 0.80;
+}
+
+.k-msg-panel-title {
+	color: #ffe9da;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.k-msg {
+	margin: 0 5px;
+	border: solid 1px #F2F2F2;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	background: #fff0e6;
+	color: #280b0b;
+	filter: alpha(opacity =         80);
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+	opacity: 0.80;
+	font-weight: bold;
+}
+
+.k-msg-close {
+	position: relative;
+	right: -14px;
+	top: 30px;
+}
+
+.k-msg-icon {
+	padding: 10px 10px 5px;
+}
+
+.k-msg-label { 
+	font-size: 17px;
+}

@@ -1,6 +1,6 @@
-package cc.kune.core.client.notify;
+package cc.kune.core.client.notify.spiner;
 
-import cc.kune.core.client.notify.SpinerPresenter.SpinerView;
+import cc.kune.core.client.notify.spiner.SpinerPresenter.SpinerView;
 import cc.kune.core.ws.armor.client.WsArmor;
 
 import com.google.gwt.core.client.GWT;

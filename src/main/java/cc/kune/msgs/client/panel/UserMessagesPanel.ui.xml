@@ -1,0 +1,7 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <g:VerticalPanel verticalAlignment="ALIGN_TOP"
+    ui:field="vp" width="100%" height="" styleName="k-msg-panel" spacing="10">
+  </g:VerticalPanel>
+</ui:UiBinder>

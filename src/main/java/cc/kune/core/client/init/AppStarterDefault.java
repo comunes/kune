@@ -21,8 +21,8 @@ package cc.kune.core.client.init;
 
 import org.ourproject.common.client.notify.NotifyLevel;
 
-import cc.kune.core.client.notify.ProgressHideEvent;
-import cc.kune.core.client.notify.UserNotifyEvent;
+import cc.kune.core.client.notify.msgs.UserNotifyEvent;
+import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -78,7 +78,8 @@ public class AppStarterDefault implements AppStarter {
             @Override
             public void onFailure(final Throwable error) {
                 eventBus.fireEvent(new ProgressHideEvent());
-                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, "Error fetching initial data"));
+                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+                        "Error fetching initial data from Kune server"));
                 Log.debug(error.getMessage());
                 hideInitialPanels();
             }
@@ -97,6 +98,9 @@ public class AppStarterDefault implements AppStarter {
                     @Override
                     public void execute() {
                         hideInitialPanels();
+                        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, "Started"));
+                        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+                                "Started closeable. Started closeable. Started closeable. Started closeable", true));
                     }
                 });
             }

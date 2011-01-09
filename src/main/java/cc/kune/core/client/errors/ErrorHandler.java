@@ -21,9 +21,9 @@ package cc.kune.core.client.errors;
 
 import org.ourproject.common.client.notify.NotifyLevel;
 
-import cc.kune.core.client.notify.AlertEvent;
-import cc.kune.core.client.notify.ProgressHideEvent;
-import cc.kune.core.client.notify.UserNotifyEvent;
+import cc.kune.core.client.notify.alerts.AlertEvent;
+import cc.kune.core.client.notify.msgs.UserNotifyEvent;
+import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 

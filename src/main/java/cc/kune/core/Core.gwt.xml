@@ -12,6 +12,7 @@
 	<inherits name="com.google.gwt.user.User" />
 	<!-- <inherits name='com.mvp4g.Mvp4gModule' /> -->
 	<inherits name="cc.kune.core.ws.armor.WsArmor" />
+    <inherits name="cc.kune.msgs.KuneMsgs" />
 	<inherits name="org.ourproject.common.Common" />
 	<inherits name="com.extjs.gxt.ui.GXT" />
 	<inherits name="com.calclab.suco.Suco" />

@@ -21,7 +21,7 @@ package cc.kune.core.client.state;
 
 import java.util.HashMap;
 
-import cc.kune.core.client.notify.ProgressShowEvent;
+import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;

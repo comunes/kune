@@ -2,8 +2,8 @@ package cc.kune.core.client;
 
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
-import cc.kune.core.client.notify.SpinerPresenter;
-import cc.kune.core.client.notify.UserNotifierPresenter;
+import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
+import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ws.CorePresenter;

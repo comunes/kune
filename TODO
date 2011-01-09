@@ -231,6 +231,11 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO junit + guice utils:
+https://code.google.com/p/guiceberry/
+https://code.google.com/p/atunit/
+** TODO Study OSGI + guice:
+https://code.google.com/p/peaberry/
 ** Use hibernate cache
    http://ehcache.sourceforge.net/documentation/openjpa_provider.html
    http://ehcache.sourceforge.net/documentation/hibernate.html

@@ -85,4 +85,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <servlet-name>Proxy</servlet-name>
     <url-pattern>/http-bind/</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>remoteLoggerServiceImpl</servlet-name>
+    <servlet-class>com.allen_sauer.gwt.log.server.RemoteLoggerServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>remoteLoggerServiceImpl</servlet-name>
+    <url-pattern>/ws/gwt-log</url-pattern>
+  </servlet-mapping>
 </web-app>

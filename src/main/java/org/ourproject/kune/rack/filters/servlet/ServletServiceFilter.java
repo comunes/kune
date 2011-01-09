@@ -45,6 +45,7 @@ public class ServletServiceFilter extends AbstractInjectedFilter {
     public void destroy() {
     }
 
+    @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
         log.debug("SERVICE: " + RackHelper.getURI(request) + " - " + servletClass.getSimpleName());

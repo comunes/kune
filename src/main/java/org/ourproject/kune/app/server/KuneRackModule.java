@@ -99,6 +99,20 @@ public class KuneRackModule implements RackModule {
         builder.exclude("/stylesheets/.*");
         builder.exclude("/javascripts/.*");
         builder.exclude("/templates/.*");
+        // wave servlets (see RackServletFilter)
+        // builder.exclude("/gadget.*");
+        // builder.exclude("/attachment/*");
+        // builder.exclude("/auth/signin");
+        // builder.exclude("/auth/signout");
+        // builder.exclude("/auth/register");
+        // builder.exclude("/fetch/*");
+        // builder.exclude("/gadgets.*");
+        // // wave (from ServerRprcProvider)
+        // builder.exclude("/socket");
+        // builder.exclude("/socket.io/*");
+        // builder.exclude("/static/*");
+        // FIXME (add robots and / WaveClientServlet)
+
         builder.at(".*").install(new LogFilter());
         builder.at(".*").install(new GuiceFilter());
 
@@ -119,6 +133,7 @@ public class KuneRackModule implements RackModule {
     }
 
     private void installGuiceModules(final RackBuilder builder) {
+        // https://code.google.com/p/google-guice/wiki/ServletModule
         builder.use(new ServletModule());
         builder.use(new PlatformServerModule());
         builder.use(new DocumentServerModule());

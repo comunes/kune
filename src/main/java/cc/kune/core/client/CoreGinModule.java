@@ -7,11 +7,11 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.init.AppStarterDefault;
 import cc.kune.core.client.init.PrefetchUtilities;
-import cc.kune.core.client.notify.SpinerPresenter;
-import cc.kune.core.client.notify.SpinerViewImpl;
-import cc.kune.core.client.notify.UserNotifierPresenter;
-import cc.kune.core.client.notify.UserNotifierPresenter.UserNotifierProxy;
-import cc.kune.core.client.notify.UserNotifierViewImpl;
+import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
+import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
+import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
+import cc.kune.core.client.notify.spiner.SpinerPresenter;
+import cc.kune.core.client.notify.spiner.SpinerViewImpl;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
 import cc.kune.core.client.state.ContentProvider;
@@ -28,6 +28,8 @@ import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.core.ws.armor.client.WsArmor;
 import cc.kune.core.ws.armor.client.WsArmorImpl;
+import cc.kune.msgs.client.panel.UserMessagesPanel;
+import cc.kune.msgs.client.panel.UserMessagesPresenter;
 
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.DefaultEventBus;
@@ -66,6 +68,9 @@ public class CoreGinModule extends AbstractPresenterModule {
                 CookiesManager.CookiesManagerProxy.class);
         bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
                 SiteLogoPresenter.SiteLogoProxy.class);
+
+        bind(UserMessagesPresenter.class).in(Singleton.class);
+        bind(UserMessagesPanel.class).in(Singleton.class);
 
         bind(WsArmorImpl.class).in(Singleton.class);
         bind(WsArmor.class).to(WsArmorImpl.class);

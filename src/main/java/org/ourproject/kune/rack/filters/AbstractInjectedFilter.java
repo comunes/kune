@@ -32,12 +32,14 @@ public abstract class AbstractInjectedFilter implements Filter {
 
     protected ServletContext ctx;
 
+    @Override
     public abstract void destroy();
 
     public <T> T getInstance(final Class<T> type) {
         return getInjector().getInstance(type);
     }
 
+    @Override
     public void init(final FilterConfig filterConfig) throws ServletException {
         this.ctx = filterConfig.getServletContext();
         getInjector().injectMembers(this);
