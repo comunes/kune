@@ -1,7 +1,7 @@
 package cc.kune.core.client.notify.spiner;
 
 import cc.kune.core.client.notify.spiner.SpinerPresenter.SpinerView;
-import cc.kune.core.ws.armor.client.WsArmor;
+import cc.kune.wspace.client.WsArmor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;

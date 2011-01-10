@@ -26,10 +26,10 @@ import cc.kune.core.client.ws.CorePlaceManager;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.core.ws.armor.client.WsArmor;
-import cc.kune.core.ws.armor.client.WsArmorImpl;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
+import cc.kune.wspace.client.WsArmor;
+import cc.kune.wspace.client.WsArmorImpl;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;

@@ -2,8 +2,8 @@ package cc.kune.core.client.ws;
 
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.StateManagerDefault;
-import cc.kune.core.ws.armor.client.WsArmorImpl;
-import cc.kune.core.ws.armor.client.resources.WsArmorResources;
+import cc.kune.wspace.client.WsArmorImpl;
+import cc.kune.wspace.client.resources.WsArmorResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;

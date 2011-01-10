@@ -19,7 +19,7 @@
  \*/
 package cc.kune.core.client.sitebar.logo;
 
-import cc.kune.core.ws.armor.client.WsArmor;
+import cc.kune.wspace.client.WsArmor;
 
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;

@@ -11,7 +11,7 @@
   <!-- Dependencies ============================================= -->
   <inherits name="com.google.gwt.user.User" />
   <!-- <inherits name='com.mvp4g.Mvp4gModule' /> -->
-  <inherits name="cc.kune.core.ws.armor.WsArmor" />
+  <inherits name="cc.kune.wspace.Wspace" />
   <inherits name="cc.kune.msgs.KuneMsgs" />
   <inherits name="cc.kune.common.KuneCommon" />
   <inherits name="org.ourproject.common.Common" />

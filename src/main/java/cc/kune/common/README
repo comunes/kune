@@ -1,0 +1,1 @@
+NOTE: In this package let's put only client-side stuff (UI widgets, utils, css) reusable by other small projects (like wave gadgets, etc). Then we have to maintain few few dependencies to other libs, and no dependencies with the functionality of Kune.
