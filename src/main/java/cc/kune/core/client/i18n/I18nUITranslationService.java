@@ -22,20 +22,20 @@ package cc.kune.core.client.i18n;
 import java.util.Date;
 import java.util.HashMap;
 
+import cc.kune.common.client.utils.Location;
+import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.utils.Location;
-import cc.kune.core.client.utils.TextUtils;
-import cc.kune.core.client.utils.WindowUtils;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.EventBus;
 
 public class I18nUITranslationService extends I18nTranslationService {
     private HashMap<String, String> lexicon;

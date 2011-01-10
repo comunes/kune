@@ -22,8 +22,8 @@ package org.ourproject.kune.workspace.client.upload;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.utils.TextUtils;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;

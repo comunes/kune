@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-import cc.kune.core.client.utils.TextUtils;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.dto.ExtMediaDescripDTO;
 
 public class ExternalMediaRegistry extends ArrayList<ExtMediaDescripDTO> {

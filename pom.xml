@@ -224,7 +224,7 @@
     <dependency>
       <groupId>org.ourproject.common</groupId>
       <artifactId>gwt-common</artifactId>
-      <version>0.0.3</version>
+      <version>0.0.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -246,7 +246,7 @@
     <dependency>
       <groupId>com.gwtplatform</groupId>
       <artifactId>gwtp</artifactId>
-      <version>0.4</version>
+      <version>0.5-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.adamtacy</groupId>
@@ -749,7 +749,8 @@
         <goal>process</goal> </goals> <phase>generate-sources</phase> </execution> 
         </executions> </plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>apt-maven-plugin</artifactId> 
         <version>1.0-alpha-4</version> <executions> <execution> <goals> <goal>process</goal> 
-        <goal>test-process</goal> </goals> </execution> </executions> </plugin> -->
+					<goal>test-process</goal> </goals> </execution> </executions> </plugin> -->
+      <!-- BETTER user: http://code.google.com/p/acris/wiki/AnnotationProcessing -->
       <plugin>
         <!-- =roo -->
         <groupId>org.codehaus.mojo</groupId>

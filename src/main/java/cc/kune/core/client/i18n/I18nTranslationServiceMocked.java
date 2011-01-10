@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.i18n;
 
-import cc.kune.core.client.utils.TextUtils;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class I18nTranslationServiceMocked extends I18nTranslationService {

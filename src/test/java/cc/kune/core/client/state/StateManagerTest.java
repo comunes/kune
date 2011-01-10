@@ -14,8 +14,8 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import com.calclab.suco.testing.events.MockedListener;
 import com.calclab.suco.testing.events.MockedListener0;
 import com.calclab.suco.testing.events.MockedListener2;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.mvp.client.EventBus;
 
 public class StateManagerTest {
 

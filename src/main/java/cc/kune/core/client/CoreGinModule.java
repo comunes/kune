@@ -28,13 +28,13 @@ import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.core.ws.armor.client.WsArmor;
 import cc.kune.core.ws.armor.client.WsArmorImpl;
-import cc.kune.msgs.client.panel.UserMessagesPanel;
-import cc.kune.msgs.client.panel.UserMessagesPresenter;
+import cc.kune.msgs.client.UserMessagesPanel;
+import cc.kune.msgs.client.UserMessagesPresenter;
 
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.DefaultEventBus;
 import com.gwtplatform.mvp.client.DefaultProxyFailureHandler;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
@@ -51,7 +51,7 @@ public class CoreGinModule extends AbstractPresenterModule {
      */
     @Override
     protected void configure() {
-        bind(EventBus.class).to(DefaultEventBus.class).in(Singleton.class);
+        bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
         bind(PlaceManager.class).to(CorePlaceManager.class).in(Singleton.class);
         bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
         bind(RootPresenter.class).asEagerSingleton();

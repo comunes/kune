@@ -26,9 +26,9 @@ import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.EventBus;
 
 public class ContentProviderDefault implements ContentProvider {
     private final ContentServiceAsync server;

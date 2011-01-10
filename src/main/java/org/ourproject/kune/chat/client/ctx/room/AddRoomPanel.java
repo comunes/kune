@@ -20,7 +20,7 @@
 package org.ourproject.kune.chat.client.ctx.room;
 
 
-import cc.kune.core.client.utils.TextUtils;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emiteuimodule.client.dialog.BasicDialogExtended;

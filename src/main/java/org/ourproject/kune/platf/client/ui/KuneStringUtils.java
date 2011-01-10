@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui;
 
-import cc.kune.core.client.utils.TextUtils;
+import cc.kune.common.client.utils.TextUtils;
 
 /**
  * Use TextUtils

@@ -1,10 +1,11 @@
-package cc.kune.msgs.client.msgs;
+package cc.kune.msgs.client;
 
 import org.adamtacy.client.ui.effects.events.EffectCompletedEvent;
 import org.adamtacy.client.ui.effects.events.EffectCompletedHandler;
 import org.adamtacy.client.ui.effects.examples.Fade;
 import org.adamtacy.client.ui.effects.examples.Show;
 
+import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.msgs.client.resources.UserMessageImages;
 
 import com.google.gwt.core.client.GWT;
@@ -32,6 +33,7 @@ public class UserMessage extends Composite implements HasText {
     InlineHTML label;
     @UiField
     PushButton close;
+    private final CloseCallback closeCallback;
 
     interface MessageUiBinder extends UiBinder<Widget, UserMessage> {
     }
@@ -44,10 +46,10 @@ public class UserMessage extends Composite implements HasText {
         fadeMills = mills;
     }
 
-    public UserMessage(UserMessageLevel level, String message, boolean closeable) {
+    public UserMessage(NotifyLevel level, String title, String message, boolean closeable, CloseCallback closeCallback) {
+        this.closeCallback = closeCallback;
         initWidget(uiBinder.createAndBindUi(this));
-        setStyleName("k-msg");
-        label.setHTML(message);
+        label.setHTML((title != null && title.length() > 0 ? "<b>" + title + "</b><br/>" : "") + message);
         close.setVisible(closeable);
         close.setTitle(closeTitle);
         if (!closeable) {
@@ -80,12 +82,16 @@ public class UserMessage extends Composite implements HasText {
         anim.play();
     }
 
-    public UserMessage(String message) {
-        this(message, false);
+    public UserMessage(String message, CloseCallback closeCallback) {
+        this("", message, false, closeCallback);
     }
 
-    public UserMessage(String message, boolean closeable) {
-        this(UserMessageLevel.info, message, closeable);
+    public UserMessage(String title, String message, CloseCallback closeCallback) {
+        this(title, message, false, closeCallback);
+    }
+
+    public UserMessage(String title, String message, boolean closeable, CloseCallback closeCallback) {
+        this(NotifyLevel.info, title, message, closeable, closeCallback);
     }
 
     @Override
@@ -112,6 +118,7 @@ public class UserMessage extends Composite implements HasText {
             @Override
             public void onEffectCompleted(EffectCompletedEvent event) {
                 removeFromParent();
+                closeCallback.onClose();
             }
         });
     }

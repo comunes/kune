@@ -10,3 +10,5 @@ APPPUB=src/main/java/org/ourproject/kune/app/public
 #rsync -aC $APPPUB/images/ $WEBAPP/images
 
 cp src/main/java/cc/kune/msgs/public/kune-message.css target/kune-0.0.7/ws/
+cp src/main/java/cc/kune/common/public/kune-common.css target/kune-0.0.7/ws/
+cp src/main/java/cc/kune/core/public/ws.css target/kune-0.0.7/ws/

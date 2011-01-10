@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import cc.kune.core.client.utils.TextUtils;
+import cc.kune.common.client.utils.TextUtils;
 
 public class TextUtilsTest {
     @Test

@@ -19,8 +19,11 @@
  */
 package cc.kune.core.client.init;
 
-import org.ourproject.common.client.notify.NotifyLevel;
+import org.adamtacy.client.ui.effects.events.EffectCompletedEvent;
+import org.adamtacy.client.ui.effects.events.EffectCompletedHandler;
+import org.adamtacy.client.ui.effects.examples.Fade;
 
+import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
@@ -30,6 +33,7 @@ import cc.kune.core.shared.dto.InitDataDTO;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
@@ -37,7 +41,6 @@ import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.EventBus;
 
 public class AppStarterDefault implements AppStarter {
     private final Session session;
@@ -85,8 +88,18 @@ public class AppStarterDefault implements AppStarter {
             }
 
             private void hideInitialPanels() {
-                RootPanel.get("kuneinitialcurtain").setVisible(false);
-                RootPanel.get("kuneloading").setVisible(false);
+                final RootPanel curtain = RootPanel.get("kuneinitialcurtain");
+                Fade anim = new Fade(curtain.getElement());
+                anim.setDuration(3);
+                anim.addEffectCompletedHandler(new EffectCompletedHandler() {
+                    @Override
+                    public void onEffectCompleted(EffectCompletedEvent event) {
+                        curtain.setVisible(false);
+                        RootPanel.get("kuneloading").setVisible(false);
+                    }
+                });
+                anim.play();
+                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, "Starting"));
             }
 
             @Override
@@ -98,9 +111,7 @@ public class AppStarterDefault implements AppStarter {
                     @Override
                     public void execute() {
                         hideInitialPanels();
-                        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, "Started"));
-                        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-                                "Started closeable. Started closeable. Started closeable. Started closeable", true));
+                        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, "Success", "App Started.", true));
                     }
                 });
             }

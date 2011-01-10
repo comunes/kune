@@ -2,6 +2,7 @@ package org.ourproject.kune.platf.client.ui.noti;
 
 import com.calclab.suco.client.events.Listener0;
 
+@Deprecated
 public class ConfirmationAsk {
 
     private final String title;

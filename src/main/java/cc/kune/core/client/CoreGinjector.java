@@ -9,10 +9,10 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 

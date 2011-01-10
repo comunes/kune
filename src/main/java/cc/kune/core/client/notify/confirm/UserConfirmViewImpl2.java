@@ -1,16 +1,15 @@
 package cc.kune.core.client.notify.confirm;
 
-import org.ourproject.common.client.notify.ConfirmationAsk;
-
+import cc.kune.common.client.noti.ConfirmAskEvent;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmView;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-public class UserConfirmViewImpl extends ViewImpl implements UserConfirmView {
+public class UserConfirmViewImpl2 extends ViewImpl implements UserConfirmView {
     @Inject
-    public UserConfirmViewImpl() {
+    public UserConfirmViewImpl2() {
     }
 
     @Override
@@ -19,7 +18,7 @@ public class UserConfirmViewImpl extends ViewImpl implements UserConfirmView {
     }
 
     @Override
-    public void confirmationAsk(final ConfirmationAsk<?> ask) {
+    public void confirmAsk(final ConfirmAskEvent ask) {
         // TODO Auto-generated method stub
 
     }

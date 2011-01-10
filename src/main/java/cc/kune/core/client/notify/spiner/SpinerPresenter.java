@@ -3,8 +3,8 @@ package cc.kune.core.client.notify.spiner;
 import cc.kune.core.client.i18n.I18nReadyEvent;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;

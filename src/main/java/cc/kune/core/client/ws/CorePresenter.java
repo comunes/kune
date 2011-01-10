@@ -3,8 +3,8 @@ package cc.kune.core.client.ws;
 import cc.kune.core.client.i18n.I18nReadyEvent;
 import cc.kune.core.client.init.AppStarter;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;

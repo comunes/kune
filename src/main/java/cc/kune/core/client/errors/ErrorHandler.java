@@ -19,8 +19,7 @@
  */
 package cc.kune.core.client.errors;
 
-import org.ourproject.common.client.notify.NotifyLevel;
-
+import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.client.notify.alerts.AlertEvent;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
@@ -31,9 +30,9 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 public class ErrorHandler {

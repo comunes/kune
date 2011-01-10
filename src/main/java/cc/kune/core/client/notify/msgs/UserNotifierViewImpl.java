@@ -1,21 +1,19 @@
 package cc.kune.core.client.notify.msgs;
 
-import org.ourproject.common.client.notify.NotifyLevel;
-
+import cc.kune.common.client.ui.PopupPanelBottomCentered;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierView;
-import cc.kune.msgs.client.msgs.UserMessageLevel;
-import cc.kune.msgs.client.panel.UserMessagesPanel;
-import cc.kune.msgs.client.panel.UserMessagesPresenter;
+import cc.kune.msgs.client.CloseCallback;
+import cc.kune.msgs.client.UserMessagesPanel;
+import cc.kune.msgs.client.UserMessagesPresenter;
 
-import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.PopupViewImpl;
 
 public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierView {
     private final UserMessagesPresenter msgs;
-    private final PopupPanel popup;
+    private final PopupPanelBottomCentered popup;
 
     @Inject
     public UserNotifierViewImpl(EventBus eventBus, UserMessagesPresenter msgs, UserMessagesPanel panel) {
@@ -23,10 +21,9 @@ public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierV
         this.msgs = msgs;
         msgs.init(panel);
         panel.setWidth("370px");
-        popup = new PopupPanel(false, false);
+        popup = new PopupPanelBottomCentered(false, false);
+        popup.addStyleName("k-z10000");
         popup.add(panel);
-        popup.setPopupPosition(0, 0);
-        popup.setStyleName("k-user-notif-popup");
         popup.show();
     }
 
@@ -36,23 +33,14 @@ public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierV
     }
 
     @Override
-    public void notify(final NotifyLevel level, final String message, Boolean closeable) {
-        switch (level) {
-        case error:
-            msgs.add(UserMessageLevel.error, message, closeable);
-            break;
-        case important:
-            msgs.add(UserMessageLevel.important, message, closeable);
-            break;
-        case info:
-            msgs.add(UserMessageLevel.info, message, closeable);
-            break;
-        case veryImportant:
-            msgs.add(UserMessageLevel.veryImportant, message, false);
-            break;
-        default:
-            break;
-        }
+    public void notify(UserNotifyEvent event) {
+        msgs.add(event.getLevel(), event.getTitle(), event.getMessage(), event.getCloseable(), new CloseCallback() {
+            @Override
+            public void onClose() {
+                popup.setCenterPosition();
+            }
+        });
+        popup.setCenterPosition();
     }
 
 }

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.utils;
+package cc.kune.common.client.utils;
 
 import java.util.ArrayList;
 

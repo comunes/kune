@@ -2,7 +2,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertimg.ext;
 
 import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertImageAbstractPanel;
 
-import cc.kune.core.client.utils.TextUtils;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.core.client.Scheduler;

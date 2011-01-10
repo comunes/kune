@@ -2,7 +2,8 @@
 <module>
   <!-- Inherit the core Web Toolkit stuff. -->
   <inherits name='com.google.gwt.user.User' />
-  <inherits name="org.adamtacy.GWTEffects"></inherits> 
+  <inherits name="org.adamtacy.GWTEffects"></inherits>
+  <inherits name="cc.kune.common.KuneCommon" />
   <!-- Inherit the default GWT style sheet. You can change -->
   <!-- the theme of your GWT application by uncommenting -->
   <!-- any one of the following lines. -->
@@ -11,7 +12,8 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
   <!-- Other module inherits -->
   <!-- Specify the app entry point class. -->
-<!--  <entry-point class='cc.kune.msgs.client.KuneMessagesSampleEntryPoint' />-->
+  <!-- <entry-point class='cc.kune.msgs.client.KuneMessagesSampleEntryPoint' 
+    /> -->
   <!-- Specify the paths for translatable code -->
   <source path='client' />
   <public path="public" />

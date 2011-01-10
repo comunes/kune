@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 import org.ourproject.kune.platf.server.manager.impl.DefaultManager;
 
-import cc.kune.core.client.utils.TextUtils;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
 import cc.kune.domain.Content;

@@ -3,9 +3,9 @@ package cc.kune.core.client.notify.alerts;
 import cc.kune.core.client.notify.alerts.UserAlerterPresenter.UserAlerterProxy;
 import cc.kune.core.client.notify.alerts.UserAlerterPresenter.UserAlerterView;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;

@@ -31,9 +31,9 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.utils.WindowUtils;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;

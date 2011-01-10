@@ -6,6 +6,7 @@ body {
 	font-family: 'Inconsolata', Arial;
 	font-size: small;
 	margin: 5px;
+	overflow: hidden;
 }
 
 * {
@@ -347,17 +348,4 @@ a:visited {
 	color: white;
 	font-weight: bold;
 	padding: 0 5px 0 5px;
-}
-
-.k-floatleft {
-	float: left;
-}
-
-.k-floatright {
-	float: right;
-}
-
-.k-pointer {
-	cursor: pointer;
-	cursor: hand;
 }

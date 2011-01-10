@@ -28,8 +28,8 @@ import javax.persistence.EntityManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.client.utils.TextUtils;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 

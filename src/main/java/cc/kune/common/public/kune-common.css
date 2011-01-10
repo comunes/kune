@@ -1,0 +1,130 @@
+.k-popup-top-centered {
+	
+}
+
+.k-popup-bottom-centered {
+	
+}
+
+.k-floatleft {
+	float: left;
+}
+
+.k-floatright {
+	float: right;
+}
+
+.k-pointer {
+	cursor: pointer;
+	cursor: hand;
+}
+
+.k-opacity80 {
+	kfilter: alpha(opacity = 80);
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+	opacity: 0.80;
+}
+
+.k-box-5shadow {
+	-webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.k-box-10shadow {
+	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.k-bottom-5corners {
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.k-bottom-10corners {
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.k-top-5corners {
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	border-top-left-radius: 5px;
+}
+
+.k-top-10corners {
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-right-radius: 10px;
+	-webkit-border-top-left-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	border-top-left-radius: 10px;
+}
+
+.k-2corners {
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.k-3corners {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.k-5corners {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.k-10corners {
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.k-dialog-outerp {
+	background-color: #552200;
+}
+
+.k-dialog-title {
+	color: #552200;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.k-dialog-innerp {
+	background-color: #e7caba;
+	border: solid 1px #F2F2F2;
+}
+
+.k-dialog-firstBtn {
+	float: left;
+}
+
+.k-dialog-secondBtn {
+	float: right;
+}
+
+.k-z10000 {
+  z-index: 10000;
+}
+
+.k-z1000 {
+  z-index: 1000;
+}

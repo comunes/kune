@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.server.i18n;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 
-import cc.kune.core.client.utils.TextUtils;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.I18nTranslation;
 

@@ -1,19 +1,21 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
-  <ui:with field='img' type='cc.kune.msgs.client.resources.UserMessageImages' />
+  <ui:with field='img'
+    type='cc.kune.msgs.client.resources.UserMessageImages' />
   <g:HorizontalPanel verticalAlignment="ALIGN_MIDDLE"
-    height="42px">
+    height="42px" addStyleNames="k-msg, k-opacity80, k-3corners">
     <g:SimplePanel addStyleNames="k-msg-icon">
       <g:Image width="100%" ui:field="icon" height="100%" />
     </g:SimplePanel>
     <g:Cell width="100%">
-      <g:InlineHTML ui:field="label" width="100%" styleName="k-msg-label" />
+      <g:InlineHTML ui:field="label" width="100%"
+        styleName="k-msg-label" />
     </g:Cell>
     <g:PushButton ui:field="close" styleName="k-msg-close"
       width="22px">
       <g:upHoveringFace image='{img.removeGrey}' />
-      <g:downFace image='{img.removeOver}'/>
+      <g:downFace image='{img.removeOver}' />
       <g:upFace image='{img.remove}' />
     </g:PushButton>
   </g:HorizontalPanel>

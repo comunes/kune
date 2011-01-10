@@ -2,6 +2,8 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <g:VerticalPanel verticalAlignment="ALIGN_TOP"
-    ui:field="vp" width="100%" height="" styleName="k-msg-panel" spacing="10">
+    ui:field="vp" width="100%" height=""
+    addStyleNames="k-msg-panel, k-opacity80, k-box-10shadow, k-top-10corners"
+    spacing="10">
   </g:VerticalPanel>
 </ui:UiBinder>
