@@ -732,8 +732,8 @@
 	    <contextPath>/</contextPath> 
           </webAppConfig>
 	  <webAppSourceDirectory>${project.build.directory}/${project.build.finalName}</webAppSourceDirectory>
-          <reload>manual</reload>
-          <scanIntervalSeconds>0</scanIntervalSeconds>
+		<!-- <reload>manual</reload> 
+			<scanIntervalSeconds>0</scanIntervalSeconds> -->
         </configuration>
       </plugin>
       <!-- pensar/probar: openjpa-maven-plugin -->

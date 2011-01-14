@@ -5,6 +5,7 @@ import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -19,6 +20,10 @@ import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 @GinModules({ CoreGinModule.class })
 public interface CoreGinjector extends Ginjector {
 
+    /*
+     * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
+     * see the GWTPlatform doc
+     */
     ErrorHandler getErrorHandler();
 
     AsyncProvider<CorePresenter> getCorePresenter();
@@ -34,6 +39,8 @@ public interface CoreGinjector extends Ginjector {
     AsyncProvider<SpinerPresenter> getSpinerPresenter();
 
     AsyncProvider<SiteLogoPresenter> getSiteLogoPresenter();
+
+    AsyncProvider<SpaceSelectorPresenter> getSpacesTabPresenter();
 
     AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
 

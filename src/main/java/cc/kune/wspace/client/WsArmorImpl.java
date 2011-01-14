@@ -6,8 +6,13 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Frame;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
+import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -23,7 +28,7 @@ public class WsArmorImpl extends Composite implements WsArmor {
     @UiField
     FlowPanel sitebar;
     @UiField
-    SplitLayoutPanel split;
+    SplitLayoutPanel groupSpace;
     @UiField
     DockLayoutPanel splitCenter;
     @UiField
@@ -44,55 +49,86 @@ public class WsArmorImpl extends Composite implements WsArmor {
     FlowPanel docSubheader;
     @UiField
     FlowPanel docFooter;
+    @UiField
+    SimplePanel userSpace;
+    @UiField
+    Frame publicSpace;
+    @UiField
+    SimplePanel homeSpace;
+    @UiField
+    TabLayoutPanel tabs;
 
     public WsArmorImpl() {
         initWidget(uiBinder.createAndBindUi(this));
-        split.setWidgetMinSize(splitEast, 150);
-        // split.setWidgetMinSize(splitCenter, 200);
+        groupSpace.setWidgetMinSize(splitEast, 150);
+        tabs.setStyleName("k-spaces");
+        homeSpace.add(RootPanel.get("k-home-ini"));
+        publicSpace.setUrl("http://www.google.com");
+        userSpace.add(new Label("Wave client"));
     }
 
     @Override
-    public HasWidgets getDocFooter() {
+    public ForIsWidget getDocFooter() {
         return docFooter;
     }
 
     @Override
-    public HasWidgets getDocHeader() {
+    public ForIsWidget getDocHeader() {
         return docHeader;
     }
 
     @Override
-    public HasWidgets getDocSubheader() {
+    public ForIsWidget getDocSubheader() {
         return docSubheader;
     }
 
     @Override
-    public HasWidgets getEntityFooter() {
+    public ForIsWidget getEntityFooter() {
         return entityFooter;
     }
 
     @Override
-    public HasWidgets getEntityHeader() {
+    public ForIsWidget getEntityHeader() {
         return entityHeader;
     }
 
     @Override
-    public HasWidgets getEntityToolsCenter() {
+    public ForIsWidget getEntityToolsCenter() {
         return entityToolsCenter;
     }
 
     @Override
-    public HasWidgets getEntityToolsNorth() {
+    public ForIsWidget getEntityToolsNorth() {
         return entityToolsNorth;
     }
 
     @Override
-    public HasWidgets getEntityToolsSouth() {
+    public ForIsWidget getEntityToolsSouth() {
         return entityToolsSouth;
     }
 
     @Override
-    public HasWidgets getSitebar() {
+    public ForIsWidget getSitebar() {
         return sitebar;
+    }
+
+    @Override
+    public void selectHomeSpace() {
+        tabs.selectTab(homeSpace);
+    }
+
+    @Override
+    public void selectUserSpace() {
+        tabs.selectTab(userSpace);
+    }
+
+    @Override
+    public void selectGroupSpace() {
+        tabs.selectTab(groupSpace);
+    }
+
+    @Override
+    public void selectPublicSpace() {
+        tabs.selectTab(publicSpace);
     }
 }

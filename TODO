@@ -11,11 +11,21 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** spaces navigation
+*** index.html via jruby and loads the app in background...
+**** the sitebar (login/logout), the site logo, etc
+**** 
 ** Wave integration
    [ ] org.waveprotocol.box.webclient.WebClientProd
    [ ] src/org/waveprotocol/box/server/ServerMain.java
    [ ] pom.xml dep references
 ** Update Dev Guide
+*** GWT Hosted mode
+**** From eclipse
+***** with: --noserve -port 8080
+***** Hosted mode with server (many memory)
+**** Install GWT extension/plugin http://gwt.google.com/missing-plugin/MissingPlugin.html
+*** Compilation ?
 *** Annotations generation http://code.google.com/p/gwt-platform/wiki/BoilerplateGeneration#Eclipse
 *** Add -startupUrl to your GWT Run launch with /ws/?locale=en&log_level=INFO (or similar)
 *** When you compile/run gwt web-app from eclipse, select target/kune-CURRENT-VERSION as War directory selection
@@ -231,6 +241,9 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO See GWT+RPC with Guice:
+http://stuffthathappens.com/blog/2009/09/14/guice-with-gwt/
+http://pavelgj.blogspot.com/2008/02/gwt-remoteserviceservlet-guice.html
 ** TODO junit + guice utils:
 https://code.google.com/p/guiceberry/
 https://code.google.com/p/atunit/

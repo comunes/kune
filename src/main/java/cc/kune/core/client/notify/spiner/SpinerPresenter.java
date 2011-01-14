@@ -51,6 +51,5 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
     @Override
     protected void revealInParent() {
         RevealRootPopupContentEvent.fire(this, this);
-        // RevealRootContentEvent.fire(this, this);
     }
 }

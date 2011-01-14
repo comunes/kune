@@ -14,9 +14,9 @@
     </g:Cell>
     <g:PushButton ui:field="close" styleName="k-msg-close"
       width="22px">
-      <g:upHoveringFace image='{img.removeGrey}' />
-      <g:downFace image='{img.removeOver}' />
       <g:upFace image='{img.remove}' />
+      <g:downFace image='{img.removeOver}' />
+      <g:upHoveringFace image='{img.removeGrey}' />
     </g:PushButton>
   </g:HorizontalPanel>
 </ui:UiBinder>

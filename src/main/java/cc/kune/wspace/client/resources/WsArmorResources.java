@@ -48,6 +48,22 @@ public interface WsArmorResources extends ClientBundle {
     @Source("def-theme-tools-arrow-left.png")
     ImageResource defThemeToolsArrowLeft();
 
-    @Source("DefaultStyle.css")
+    @Source("wsArmor.css")
     Style style();
+
+    ImageResource publicSpaceEnabled();
+
+    ImageResource publicSpaceDisabled();
+
+    ImageResource userSpaceEnabled();
+
+    ImageResource userSpaceDisabled();
+
+    ImageResource homeSpaceEnabled();
+
+    ImageResource homeSpaceDisabled();
+
+    ImageResource groupSpaceEnabled();
+
+    ImageResource groupSpaceDisabled();
 }

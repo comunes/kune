@@ -14,42 +14,41 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <welcome-file-list>
     <welcome-file>ws.html</welcome-file>
   </welcome-file-list>
-<!-- Jruby rack disabled while developing other parts --> 
-<!--  Note: this gives problems depending on the version of jetty or tomcat --> 
-<!--  <context-param>-->
-<!--    <param-name>jruby.standalone</param-name>-->
-<!--    <param-value>true</param-value>-->
-<!--  </context-param>-->
-<!--  <context-param>-->
-<!--    <param-name>rails.root</param-name>-->
-<!--    <param-value>/WEB-INF/publicspace/-->
-<!--    </param-value>-->
-<!--  </context-param>-->
-<!--  <context-param>-->
-<!--    <param-name>files.prefix</param-name>-->
-<!--    <param-value>/WEB-INF/publicspace/public-->
-<!--    </param-value>-->
-<!--  </context-param>-->
-<!--  <context-param>-->
-<!--    <param-name>rails.env</param-name>-->
-<!--    <param-value>production</param-value>-->
-<!--  </context-param>-->
-<!--  <context-param>-->
-<!--    <param-name>jruby.max.runtimes</param-name>-->
-<!--    <param-value>1</param-value>-->
-<!--  </context-param>-->
-<!--  <context-param>-->
-<!--    <param-name>public.root</param-name>-->
-<!--    <param-value>/public/</param-value>-->
-<!--  </context-param>-->
-<!--  <filter>-->
-<!--    <filter-name>RackFilter</filter-name>-->
-<!--    <filter-class>org.jruby.rack.RackFilter</filter-class>-->
-<!--  </filter>-->
-<!--  <filter-mapping>-->
-<!--    <filter-name>RackFilter</filter-name>-->
-<!--    <url-pattern>/public/*</url-pattern>-->
-<!--  </filter-mapping>-->
+ <!-- Note: this gives problems depending on the version of jetty or tomcat -->
+ <context-param>
+   <param-name>jruby.standalone</param-name>
+   <param-value>true</param-value>
+ </context-param>
+ <context-param>
+   <param-name>rails.root</param-name>
+   <param-value>/WEB-INF/publicspace/
+   </param-value>
+ </context-param>
+ <context-param>
+   <param-name>files.prefix</param-name>
+   <param-value>/WEB-INF/publicspace/public
+   </param-value>
+ </context-param>
+ <context-param>
+   <param-name>rails.env</param-name>
+   <param-value>production</param-value>
+ </context-param>
+ <context-param>
+   <param-name>jruby.max.runtimes</param-name>
+   <param-value>1</param-value>
+ </context-param>
+ <context-param>
+   <param-name>public.root</param-name>
+   <param-value>/public/</param-value>
+ </context-param>
+ <filter>
+   <filter-name>RackFilter</filter-name>
+   <filter-class>org.jruby.rack.RackFilter</filter-class>
+ </filter>
+ <filter-mapping>
+   <filter-name>RackFilter</filter-name>
+   <url-pattern>/public/*</url-pattern>
+ </filter-mapping>
   <listener>
     <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class>
   </listener>

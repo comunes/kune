@@ -1,25 +1,33 @@
 package cc.kune.wspace.client;
 
-import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 
 public interface WsArmor {
 
-    HasWidgets getDocFooter();
+    ForIsWidget getDocFooter();
 
-    HasWidgets getDocHeader();
+    ForIsWidget getDocHeader();
 
-    HasWidgets getDocSubheader();
+    ForIsWidget getDocSubheader();
 
-    HasWidgets getEntityFooter();
+    ForIsWidget getEntityFooter();
 
-    HasWidgets getEntityHeader();
+    ForIsWidget getEntityHeader();
 
-    HasWidgets getEntityToolsCenter();
+    ForIsWidget getEntityToolsCenter();
 
-    HasWidgets getEntityToolsNorth();
+    ForIsWidget getEntityToolsNorth();
 
-    HasWidgets getEntityToolsSouth();
+    ForIsWidget getEntityToolsSouth();
 
-    HasWidgets getSitebar();
+    ForIsWidget getSitebar();
+
+    void selectHomeSpace();
+
+    void selectUserSpace();
+
+    void selectGroupSpace();
+
+    void selectPublicSpace();
 
 }

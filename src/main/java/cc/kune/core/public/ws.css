@@ -336,7 +336,7 @@ a:visited {
 }
 
 .kLoadingPanel {
-	background-color: red; /* #feb295;*/
+	background-color: #FF9999;
 	-webkit-border-bottom-right-radius: 4px;
 	-moz-border-radius-bottomright: 4px;
 	border-bottom-right-radius: 4px;
@@ -348,4 +348,12 @@ a:visited {
 	color: white;
 	font-weight: bold;
 	padding: 0 5px 0 5px;
+}
+
+.k-space-sel {
+	margin-right: 10px;
+	}
+
+.k-space-sel-btn {
+	margin-left: 3px;	
 }

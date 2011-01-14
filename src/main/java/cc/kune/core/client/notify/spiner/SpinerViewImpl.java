@@ -51,7 +51,7 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
 
     @Override
     public void fade() {
-        popup.hide();
+        // popup.hide();
     }
 
     @Override

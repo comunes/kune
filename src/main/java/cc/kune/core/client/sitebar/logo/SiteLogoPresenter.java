@@ -1,6 +1,7 @@
 package cc.kune.core.client.sitebar.logo;
 
 import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.ws.CorePlaceManager;
 
 import com.google.gwt.core.client.Scheduler;
@@ -43,6 +44,7 @@ public class SiteLogoPresenter extends Presenter<SiteLogoPresenter.SiteLogoView,
     @ProxyEvent
     public void onAppStart(AppStartEvent event) {
         getView().setSiteLogoUrl(event.getInitData().getSiteLogoUrl());
+        getEventBus().fireEvent(new ProgressShowEvent("Progress"));
     }
 
     @Override

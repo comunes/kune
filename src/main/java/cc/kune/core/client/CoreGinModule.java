@@ -14,6 +14,8 @@ import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectorViewImpl;
 import cc.kune.core.client.state.ContentProvider;
 import cc.kune.core.client.state.ContentProviderDefault;
 import cc.kune.core.client.state.HistoryWrapper;
@@ -22,6 +24,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SessionDefault;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateManagerDefault;
+import cc.kune.core.client.ui.QTipsHelper;
 import cc.kune.core.client.ws.CorePlaceManager;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
@@ -55,6 +58,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(PlaceManager.class).to(CorePlaceManager.class).in(Singleton.class);
         bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
         bind(RootPresenter.class).asEagerSingleton();
+        bind(QTipsHelper.class).asEagerSingleton();
         bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
 
         // Presenters
@@ -66,6 +70,8 @@ public class CoreGinModule extends AbstractPresenterModule {
                 UserNotifierViewImpl.class, UserNotifierProxy.class);
         bindPresenter(CookiesManager.class, CookiesManager.CookiesManagerView.class, CookiesManagerViewImpl.class,
                 CookiesManager.CookiesManagerProxy.class);
+        bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
+                SpaceSelectorViewImpl.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
         bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
                 SiteLogoPresenter.SiteLogoProxy.class);
 

@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:with field='img'
+    type='cc.kune.wspace.client.resources.WsArmorResources' />
+  <g:HorizontalPanel ui:field="panel" addStyleNames="k-space-sel k-floatright k-pointer" >
+    <g:ToggleButton ui:field="homeButton" styleName="k-space-sel-btn">
+      <g:upFace image='{img.homeSpaceDisabled}' />
+      <g:downFace image='{img.homeSpaceEnabled}' />
+      <g:upHoveringFace image='{img.homeSpaceEnabled}' />
+    </g:ToggleButton>
+    <g:ToggleButton ui:field="userButton" styleName="k-space-sel-btn">
+      <g:upFace image='{img.userSpaceDisabled}' />
+      <g:downFace image='{img.userSpaceEnabled}' />
+      <g:upHoveringFace image='{img.userSpaceEnabled}' />
+    </g:ToggleButton>
+    <g:ToggleButton ui:field="groupButton" styleName="k-space-sel-btn">
+      <g:upFace image='{img.groupSpaceDisabled}' />
+      <g:downFace image='{img.groupSpaceEnabled}' />
+      <g:upHoveringFace image='{img.groupSpaceEnabled}' />
+    </g:ToggleButton>
+    <g:ToggleButton ui:field="publicButton" styleName="k-space-sel-btn">
+      <g:upFace image='{img.publicSpaceDisabled}' />
+      <g:downFace image='{img.publicSpaceEnabled}' />
+      <g:upHoveringFace image='{img.publicSpaceEnabled}' />
+    </g:ToggleButton>
+  </g:HorizontalPanel>
+</ui:UiBinder>

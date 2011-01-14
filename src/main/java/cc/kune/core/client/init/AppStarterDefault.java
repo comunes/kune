@@ -19,10 +19,6 @@
  */
 package cc.kune.core.client.init;
 
-import org.adamtacy.client.ui.effects.events.EffectCompletedEvent;
-import org.adamtacy.client.ui.effects.events.EffectCompletedHandler;
-import org.adamtacy.client.ui.effects.examples.Fade;
-
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
@@ -89,16 +85,16 @@ public class AppStarterDefault implements AppStarter {
 
             private void hideInitialPanels() {
                 final RootPanel curtain = RootPanel.get("kuneinitialcurtain");
-                Fade anim = new Fade(curtain.getElement());
-                anim.setDuration(3);
-                anim.addEffectCompletedHandler(new EffectCompletedHandler() {
-                    @Override
-                    public void onEffectCompleted(EffectCompletedEvent event) {
-                        curtain.setVisible(false);
-                        RootPanel.get("kuneloading").setVisible(false);
-                    }
-                });
-                anim.play();
+                // Fade anim = new Fade(curtain.getElement());
+                // anim.setDuration(3);
+                // anim.addEffectCompletedHandler(new EffectCompletedHandler() {
+                // @Override
+                // public void onEffectCompleted(EffectCompletedEvent event) {
+                // curtain.setVisible(false);
+                // RootPanel.get("kuneloading").setVisible(false);
+                // }
+                // });
+                // anim.play();
                 eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, "Starting"));
             }
 
