@@ -1,9 +1,14 @@
 package cc.kune.core.client;
 
+import org.ourproject.common.client.actions.gxtui.GxtGuiProvider;
+import org.ourproject.common.client.actions.ui.bind.GuiProvider;
+import org.ourproject.common.client.shortcuts.GlobalShortcutRegister;
+
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
+import cc.kune.core.client.sitebar.SiteBarActions;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.state.StateManager;
@@ -24,28 +29,36 @@ public interface CoreGinjector extends Ginjector {
      * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
      * see the GWTPlatform doc
      */
-    ErrorHandler getErrorHandler();
-
-    AsyncProvider<CorePresenter> getCorePresenter();
 
     AsyncProvider<CookiesManager> getCookiesManager();
 
+    AsyncProvider<CorePresenter> getCorePresenter();
+
+    ErrorHandler getErrorHandler();
+
     EventBus getEventBus();
+
+    GlobalShortcutRegister getGlobalShortcutRegister();
+
+    GuiProvider getGuiProvider();
+
+    GxtGuiProvider getGxtGuiProvider();
+
+    I18nTranslationService getI18n();
 
     PlaceManager getPlaceManager();
 
     ProxyFailureHandler getProxyFailureHandler();
 
-    AsyncProvider<SpinerPresenter> getSpinerPresenter();
+    SiteBarActions getSiteBarActions();
 
     AsyncProvider<SiteLogoPresenter> getSiteLogoPresenter();
 
     AsyncProvider<SpaceSelectorPresenter> getSpacesTabPresenter();
 
-    AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
-
-    I18nTranslationService getI18n();
+    AsyncProvider<SpinerPresenter> getSpinerPresenter();
 
     StateManager getStateManager();
 
+    AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
 }

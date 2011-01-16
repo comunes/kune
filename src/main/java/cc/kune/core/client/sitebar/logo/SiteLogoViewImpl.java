@@ -23,7 +23,7 @@ public class SiteLogoViewImpl extends ViewWithUiHandlers<SiteLogoUiHandlers> imp
 
     @Inject
     public SiteLogoViewImpl(WsArmor armor, PlaceManager placeManager) {
-        armor.getSitebar().add(uiBinder.createAndBindUi(this));
+        armor.getSitebar().insert(uiBinder.createAndBindUi(this),0);
     }
 
     @UiField

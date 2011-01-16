@@ -11,6 +11,10 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** src/org/waveprotocol/box/server/gxp/ (pages) >> ./gen/org/waveprotocol/box/server/gxp/WaveClientPage.java
+** Use Emulate Stack Java like src/org/waveprotocol/box/webclient/WebClientDev.gwt.xml
+** roo error
+[FelixDispatchQueue] Expected string-based content in @RooGwtMirroredFrom on cc.kune.client.managed.request.ContainerTranslationProxyObject of class [org.springframework.roo.classpath.details.annotations.ClassAttributeValue] must be an instance of class org.springframework.roo.classpath.details.annotations.StringAttributeValue
 ** spaces navigation
 *** index.html via jruby and loads the app in background...
 **** the sitebar (login/logout), the site logo, etc
@@ -20,12 +24,21 @@ TODO-list for kune -*- mode: org; -*-
    [ ] src/org/waveprotocol/box/server/ServerMain.java
    [ ] pom.xml dep references
 ** Update Dev Guide
+*** Increase open files limit
+/etc/security/limits.conf
+#I adjusted this so kune will work with more java files
+ *       soft    nofile          2048
+ *       hard    nofile          4096
+More info
+http://www.thinkplexx.com/learn/howto/maven2/debug/fixing-too-many-open-files-maven-problem-solution-for-teamcity-hudson-local-and-ssh-shell-environments
 *** GWT Hosted mode
 **** From eclipse
-***** with: --noserve -port 8080
+***** Better without server, with: --noserve -port 8080
 ***** Hosted mode with server (many memory)
 **** Install GWT extension/plugin http://gwt.google.com/missing-plugin/MissingPlugin.html
 *** Compilation ?
+    When compiling from eclipse, select target/kune-VERSION/ as War directory
+*** Run before gwt:compile and mvn package (copy webResources)
 *** Annotations generation http://code.google.com/p/gwt-platform/wiki/BoilerplateGeneration#Eclipse
 *** Add -startupUrl to your GWT Run launch with /ws/?locale=en&log_level=INFO (or similar)
 *** When you compile/run gwt web-app from eclipse, select target/kune-CURRENT-VERSION as War directory selection

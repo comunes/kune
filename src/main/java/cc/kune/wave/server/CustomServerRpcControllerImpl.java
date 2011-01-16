@@ -15,7 +15,7 @@
  *
  */
 
-package org.ourproject.kune.app.server.wave;
+package cc.kune.wave.server;
 
 import org.waveprotocol.box.server.rpc.Rpc;
 import org.waveprotocol.box.server.rpc.ServerRpcController;

@@ -1,5 +1,11 @@
 package cc.kune.core.client;
 
+import org.ourproject.common.client.actions.gxtui.GxtGuiProvider;
+import org.ourproject.common.client.actions.ui.bind.DefaultGuiProvider;
+import org.ourproject.common.client.actions.ui.bind.GuiProvider;
+import org.ourproject.common.client.shortcuts.DefaultGlobalShortcutRegister;
+import org.ourproject.common.client.shortcuts.GlobalShortcutRegister;
+
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerViewImpl;
 import cc.kune.core.client.errors.ErrorHandler;
@@ -12,6 +18,7 @@ import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
+import cc.kune.core.client.sitebar.SiteBarActions;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
@@ -60,6 +67,11 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(RootPresenter.class).asEagerSingleton();
         bind(QTipsHelper.class).asEagerSingleton();
         bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
+
+        bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
+        bind(GxtGuiProvider.class).in(Singleton.class);
+        bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+        bind(SiteBarActions.class).in(Singleton.class);
 
         // Presenters
         bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,

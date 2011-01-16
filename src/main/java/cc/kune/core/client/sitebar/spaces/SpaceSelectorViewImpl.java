@@ -22,7 +22,7 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
     @UiField
     ToggleButton userButton;
     @UiField
-    ToggleButton groupButton;
+    ToggleButton groupButton ;
     @UiField
     ToggleButton publicButton;
     @UiField
@@ -33,7 +33,7 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
 
     @Inject
     public SpaceSelectorViewImpl(WsArmor armor, I18nTranslationService i18n) {
-        armor.getSitebar().insert(uiBinder.createAndBindUi(this), 1);
+        armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
         homeButton.setTitle(i18n.t("Home page of this site"));
         userButton.setTitle(i18n.t("User space: Waves (aka docs) in which you participate"));
         groupButton.setTitle(i18n.t("Group & personal space: Where you can create and publish contents"));

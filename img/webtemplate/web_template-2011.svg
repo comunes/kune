@@ -52,10 +52,10 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5792381"
-     inkscape:cx="122.45896"
-     inkscape:cy="650.75279"
-     inkscape:current-layer="layer1"
+     inkscape:zoom="0.78961905"
+     inkscape:cx="453.50795"
+     inkscape:cy="448.12343"
+     inkscape:current-layer="layer3"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="1280"
@@ -124,7 +124,8 @@
      id="layer1"
      inkscape:label="normal"
      inkscape:groupmode="layer"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect5037"
@@ -2632,8 +2633,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="overlay"
-     sodipodi:insensitive="true"
-     style="display:none">
+     style="display:inline">
     <rect
        style="opacity:0.68399999;color:#000000;fill:#f7ebe3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3865"
@@ -2808,11 +2808,10 @@
        sodipodi:nodetypes="cccc" />
   </g>
   <g
-     style="display:none"
+     style="display:inline"
      inkscape:label="confirmation"
      id="g8450"
-     inkscape:groupmode="layer"
-     sodipodi:insensitive="true">
+     inkscape:groupmode="layer">
     <rect
        ry="10"
        rx="10"
@@ -2821,37 +2820,39 @@
        height="205.09827"
        width="476.85486"
        id="rect8452"
-       style="color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;opacity:0.85" />
     <rect
-       style="color:#000000;fill:#e7caba;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="opacity:0.85;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect8454"
-       width="457.59314"
-       height="116.79102"
-       x="287.29156"
-       y="148" />
+       width="444.9288"
+       height="120.59032"
+       x="293.62372"
+       y="149.06573"
+       rx="3"
+       ry="3" />
     <rect
        y="112.08939"
        x="277.29156"
-       height="19.354607"
+       height="7.9567051"
        width="476.85486"
        id="rect8456"
        style="color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
        xml:space="preserve"
-       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
-       x="434.16895"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#241c1c;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="317.16895"
        y="191.81694"
        id="text8468"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan8470"
-         x="434.16895"
+         x="317.16895"
          y="191.81694">Confirm please</tspan></text>
     <rect
        ry="7"
        rx="6.9999995"
        y="280"
-       x="299"
+       x="509"
        height="26"
        width="103.29102"
        id="rect8472"
@@ -2860,11 +2861,11 @@
        sodipodi:linespacing="125%"
        id="text8474"
        y="298.10547"
-       x="312.03516"
+       x="522.03516"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#666666;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
        xml:space="preserve"><tspan
          y="298.10547"
-         x="312.03516"
+         x="522.03516"
          id="tspan8476"
          sodipodi:role="line">Continuar</tspan></text>
     <rect
@@ -2872,20 +2873,20 @@
        id="rect8488"
        width="103.29102"
        height="26"
-       x="619"
+       x="636"
        y="280"
        rx="6.9999995"
        ry="7" />
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#666666;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
-       x="636.03516"
+       x="653.03516"
        y="298.10547"
        id="text8490"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan8492"
-         x="636.03516"
+         x="653.03516"
          y="298.10547">Cancelar</tspan></text>
     <path
        inkscape:connector-curvature="0"
@@ -2896,12 +2897,12 @@
        sodipodi:linespacing="125%"
        id="text8498"
        y="229.14001"
-       x="434.08438"
+       x="317.08438"
        style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        xml:space="preserve"><tspan
          sodipodi:role="line"
          id="tspan8502"
-         x="434.08438"
+         x="317.08438"
          y="229.14001">Are you sure?</tspan></text>
     <path
        sodipodi:nodetypes="cccc"
@@ -2916,7 +2917,8 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="notify"
-     style="display:none">
+     style="display:none"
+     sodipodi:insensitive="true">
     <g
        style="display:inline"
        id="g8344"
@@ -3014,7 +3016,8 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="browser"
-     sodipodi:insensitive="true">
+     sodipodi:insensitive="true"
+     style="display:inline">
     <g
        id="g5439">
       <path

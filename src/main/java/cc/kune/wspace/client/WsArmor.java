@@ -1,5 +1,7 @@
 package cc.kune.wspace.client;
 
+import org.ourproject.common.client.actions.ui.IsActionExtensible;
+
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 
 public interface WsArmor {
@@ -20,14 +22,16 @@ public interface WsArmor {
 
     ForIsWidget getEntityToolsSouth();
 
+    IsActionExtensible getSiteActionsToolbar();
+
     ForIsWidget getSitebar();
-
-    void selectHomeSpace();
-
-    void selectUserSpace();
 
     void selectGroupSpace();
 
+    void selectHomeSpace();
+
     void selectPublicSpace();
+
+    void selectUserSpace();
 
 }

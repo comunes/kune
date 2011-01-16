@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ourproject.kune.app.server.wave;
+package cc.kune.wave.server;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -25,8 +25,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 import org.waveprotocol.wave.util.settings.Setting;
@@ -109,7 +109,7 @@ public class CustomSettingsBinder {
      */
     public static Module bindSettings(String propertyFile, Class<?>... settingsArg) throws ConfigurationException {
         final CompositeConfiguration config = new CompositeConfiguration();
-        config.addConfiguration(new SystemConfiguration());
+        config.addConfiguration(new SystemConfiguration()); 
         config.addConfiguration(new PropertiesConfiguration(propertyFile));
 
         List<Field> fields = new ArrayList<Field>();

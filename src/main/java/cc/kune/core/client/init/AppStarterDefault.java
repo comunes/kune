@@ -39,10 +39,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 
 public class AppStarterDefault implements AppStarter {
-    private final Session session;
-    private final SiteServiceAsync siteService;
     private final EventBus eventBus;
     private final PrefetchUtilities prefetchUtilities;
+    private final Session session;
+    private final SiteServiceAsync siteService;
 
     @Inject
     public AppStarterDefault(final Session session, final SiteServiceAsync siteService, final EventBus eventBus,
@@ -59,30 +59,8 @@ public class AppStarterDefault implements AppStarter {
         });
     }
 
-    @Override
-    public void start() {
-        prefetchUtilities.preFetchImpImages();
-        getInitData();
-        final Timer prefetchTimer = new Timer() {
-            @Override
-            public void run() {
-                prefetchUtilities.doTasksDeferred();
-            }
-        };
-        prefetchTimer.schedule(20000);
-    }
-
     private void getInitData() {
         siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
-            @Override
-            public void onFailure(final Throwable error) {
-                eventBus.fireEvent(new ProgressHideEvent());
-                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-                        "Error fetching initial data from Kune server"));
-                Log.debug(error.getMessage());
-                hideInitialPanels();
-            }
-
             private void hideInitialPanels() {
                 final RootPanel curtain = RootPanel.get("kuneinitialcurtain");
                 // Fade anim = new Fade(curtain.getElement());
@@ -95,7 +73,17 @@ public class AppStarterDefault implements AppStarter {
                 // }
                 // });
                 // anim.play();
-                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, "Starting"));
+                // eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info,
+                // "Starting"));
+            }
+
+            @Override
+            public void onFailure(final Throwable error) {
+                eventBus.fireEvent(new ProgressHideEvent());
+                eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+                        "Error fetching initial data from Kune server"));
+                Log.debug(error.getMessage());
+                hideInitialPanels();
             }
 
             @Override
@@ -112,5 +100,18 @@ public class AppStarterDefault implements AppStarter {
                 });
             }
         });
+    }
+
+    @Override
+    public void start() {
+        prefetchUtilities.preFetchImpImages();
+        getInitData();
+        final Timer prefetchTimer = new Timer() {
+            @Override
+            public void run() {
+                prefetchUtilities.doTasksDeferred();
+            }
+        };
+        prefetchTimer.schedule(20000);
     }
 }

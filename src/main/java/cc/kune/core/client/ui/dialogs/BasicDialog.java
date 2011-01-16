@@ -8,14 +8,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.HasWidgets.ForIsWidget;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class TwoButtonsDialog extends Composite implements TwoButtonsView {
+public class BasicDialog extends Composite implements BasicDialogView {
 
-    private static TwoButtonsDialogUiBinder uiBinder = GWT.create(TwoButtonsDialogUiBinder.class);
+    private static BasicDialogUiBinder uiBinder = GWT.create(BasicDialogUiBinder.class);
     @UiField
     InlineLabel title;
     @UiField
@@ -25,10 +25,10 @@ public class TwoButtonsDialog extends Composite implements TwoButtonsView {
     @UiField
     VerticalPanel vp;
 
-    interface TwoButtonsDialogUiBinder extends UiBinder<Widget, TwoButtonsDialog> {
+    interface BasicDialogUiBinder extends UiBinder<Widget, BasicDialog> {
     }
 
-    public TwoButtonsDialog() {
+    public BasicDialog() {
         initWidget(uiBinder.createAndBindUi(this));
         title.ensureDebugId("k-ucvi-title");
         firstBtn.ensureDebugId("k-ucvi-accept-btn");

@@ -7,9 +7,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
+@Deprecated
 public class WsArmorEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
@@ -17,7 +15,7 @@ public class WsArmorEntryPoint implements EntryPoint {
         resources.style().ensureInjected();
 
         final RootLayoutPanel rootPanel = RootLayoutPanel.get();
-        final WsArmorImpl armor = new WsArmorImpl();
+        final WsArmorImpl armor = new WsArmorImpl(null);
         final InlineLabel icons = new InlineLabel("Icons");
         final InlineLabel login = new InlineLabel("Login");
         final InlineLabel logo = new InlineLabel("Logo");

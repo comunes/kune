@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:VerticalPanel spacing="12"
+		addStyleNames="k-dialog-outerp, k-bottom-10corners, k-opacity80 ">
+		<g:SimplePanel>
+			<g:VerticalPanel ui:field="vp"
+				addStyleNames="k-dialog-innerp, k-3corners, k-opacity90" spacing="10">
+				<g:InlineLabel ui:field="title" addStyleNames="k-dialog-title" />
+			</g:VerticalPanel>
+		</g:SimplePanel>
+		<g:FlowPanel>
+			<g:Button ui:field="firstBtn"
+				addStyleNames="k-dialog-btn, k-dialog-firstBtn, k-5corners " />
+			<g:Button ui:field="secondBtn"
+				addStyleNames="k-dialog-btn,k-dialog-secondBtn, k-5corners" />
+		</g:FlowPanel>
+	</g:VerticalPanel>
+</ui:UiBinder>

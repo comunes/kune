@@ -46,8 +46,10 @@ public class KuneEntryPoint implements EntryPoint {
         AsyncCallbackSimple.init(ginjector.getErrorHandler());
         ginjector.getPlaceManager().revealCurrentPlace();
         ginjector.getI18n();
+        ginjector.getGxtGuiProvider();
         ginjector.getUserNotifierPresenter();
         ginjector.getSpinerPresenter();
         ginjector.getStateManager();
+        ginjector.getSiteBarActions();
     }
 }

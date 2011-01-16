@@ -22,7 +22,6 @@ public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierV
         msgs.init(panel);
         panel.setWidth("370px");
         popup = new PopupPanelBottomCentered(false, false);
-        popup.addStyleName("k-z10000");
         popup.add(panel);
         popup.show();
     }

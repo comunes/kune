@@ -1,5 +1,8 @@
 package cc.kune.wspace.client;
 
+import org.ourproject.common.client.actions.ui.IsActionExtensible;
+import org.ourproject.common.client.actions.ui.SimpleActionToolbar;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -15,6 +18,8 @@ import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class WsArmorImpl extends Composite implements WsArmor {
 
@@ -24,47 +29,52 @@ public class WsArmorImpl extends Composite implements WsArmor {
     private static WsArmorImplUiBinder uiBinder = GWT.create(WsArmorImplUiBinder.class);
 
     @UiField
-    DockLayoutPanel mainpanel;
-    @UiField
-    FlowPanel sitebar;
-    @UiField
-    SplitLayoutPanel groupSpace;
-    @UiField
-    DockLayoutPanel splitCenter;
-    @UiField
-    DockLayoutPanel splitEast;
-    @UiField
-    VerticalPanel entityToolsSouth;
-    @UiField
-    VerticalPanel entityToolsNorth;
-    @UiField
-    VerticalPanel entityToolsCenter;
-    @UiField
-    FlowPanel entityHeader;
-    @UiField
-    FlowPanel entityFooter;
+    FlowPanel docFooter;
     @UiField
     FlowPanel docHeader;
     @UiField
     FlowPanel docSubheader;
     @UiField
-    FlowPanel docFooter;
+    FlowPanel entityFooter;
     @UiField
-    SimplePanel userSpace;
+    FlowPanel entityHeader;
     @UiField
-    Frame publicSpace;
+    VerticalPanel entityToolsCenter;
+    @UiField
+    VerticalPanel entityToolsNorth;
+    @UiField
+    VerticalPanel entityToolsSouth;
+    @UiField
+    SplitLayoutPanel groupSpace;
     @UiField
     SimplePanel homeSpace;
     @UiField
+    DockLayoutPanel mainpanel;
+    @UiField
+    Frame publicSpace;
+    @UiField
+    FlowPanel sitebar;
+    private final SimpleActionToolbar siteBarToolbar;
+    @UiField
+    DockLayoutPanel splitCenter;
+    @UiField
+    DockLayoutPanel splitEast;
+    @UiField
     TabLayoutPanel tabs;
 
-    public WsArmorImpl() {
+    @UiField
+    SimplePanel userSpace;
+
+    @Inject
+    public WsArmorImpl(Provider<SimpleActionToolbar> toolbarProvider) {
         initWidget(uiBinder.createAndBindUi(this));
         groupSpace.setWidgetMinSize(splitEast, 150);
         tabs.setStyleName("k-spaces");
         homeSpace.add(RootPanel.get("k-home-ini"));
         publicSpace.setUrl("http://www.google.com");
-        userSpace.add(new Label("Wave client"));
+        userSpace.add(new Label("User space"));
+        siteBarToolbar = toolbarProvider.get();
+        sitebar.add(siteBarToolbar);
     }
 
     @Override
@@ -108,18 +118,13 @@ public class WsArmorImpl extends Composite implements WsArmor {
     }
 
     @Override
+    public IsActionExtensible getSiteActionsToolbar() {
+        return siteBarToolbar;
+    }
+
+    @Override
     public ForIsWidget getSitebar() {
         return sitebar;
-    }
-
-    @Override
-    public void selectHomeSpace() {
-        tabs.selectTab(homeSpace);
-    }
-
-    @Override
-    public void selectUserSpace() {
-        tabs.selectTab(userSpace);
     }
 
     @Override
@@ -128,7 +133,17 @@ public class WsArmorImpl extends Composite implements WsArmor {
     }
 
     @Override
+    public void selectHomeSpace() {
+        tabs.selectTab(homeSpace);
+    }
+
+    @Override
     public void selectPublicSpace() {
         tabs.selectTab(publicSpace);
+    }
+
+    @Override
+    public void selectUserSpace() {
+        tabs.selectTab(userSpace);
     }
 }

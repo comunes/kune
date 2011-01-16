@@ -1,6 +1,9 @@
 @CHARSET "UTF-8";
 
-@sprite .loadingSpiner {
+/* @sprite */ 
+.loadingSpiner {
+	/* Unused 
 	gwt-image: 'loadingSpiner';
+	*/
 	margin-top: 2px;
 }

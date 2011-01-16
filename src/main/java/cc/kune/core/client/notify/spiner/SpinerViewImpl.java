@@ -1,7 +1,6 @@
 package cc.kune.core.client.notify.spiner;
 
 import cc.kune.core.client.notify.spiner.SpinerPresenter.SpinerView;
-import cc.kune.wspace.client.WsArmor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
@@ -18,10 +17,24 @@ import com.gwtplatform.mvp.client.UiHandlers;
 
 public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implements SpinerView {
 
+    interface SpinerViewImplUiBinder extends UiBinder<Widget, SpinerViewImpl> {
+    }
+
+    private static SpinerViewImplUiBinder uiBinder = GWT.create(SpinerViewImplUiBinder.class);
+
+    @UiField
+    Image img;
+
+    @UiField
+    InlineLabel label;
+
+    @UiField
+    HorizontalPanel panel;
     private final PopupPanel popup;
+    Widget widget;
 
     @Inject
-    protected SpinerViewImpl(EventBus eventBus, WsArmor armor) {
+    public SpinerViewImpl(EventBus eventBus) {
         super(eventBus);
         widget = uiBinder.createAndBindUi(this);
         popup = new PopupPanel(false, false);
@@ -31,19 +44,6 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
         popup.show();
     }
 
-    private static SpinerViewImplUiBinder uiBinder = GWT.create(SpinerViewImplUiBinder.class);
-
-    interface SpinerViewImplUiBinder extends UiBinder<Widget, SpinerViewImpl> {
-    }
-
-    @UiField
-    HorizontalPanel panel;
-    @UiField
-    InlineLabel label;
-    @UiField
-    Image img;
-    Widget widget;
-
     @Override
     public Widget asWidget() {
         return popup;
@@ -51,7 +51,7 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
 
     @Override
     public void fade() {
-        // popup.hide();
+        popup.hide();
     }
 
     @Override

@@ -224,7 +224,7 @@
     <dependency>
       <groupId>org.ourproject.common</groupId>
       <artifactId>gwt-common</artifactId>
-      <version>0.0.4</version>
+      <version>0.0.6</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -371,7 +371,8 @@
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
-      <version>2.0</version>
+      <!-- wave use 2.5 -->
+      <version>2.5</version>
     </dependency>
     <dependency>
       <groupId>com.wideplay</groupId>
@@ -500,12 +501,17 @@
       <version>1.0.3</version>
       <!-- <version>0.9.4</version> -->
     </dependency>
-    <!-- wave -->
+	<!-- wave -->
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>waveinabox-server</artifactId>
-      <version>0.0.3.2</version>
+      <version>0.3.5</version>
     </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>gwt-util</artifactId>
+      <version>0.3.0</version>
+    </dependency> 
     <dependency>
       <groupId>commons-cli</groupId>
       <artifactId>commons-cli</artifactId>
@@ -578,6 +584,11 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
+      <version>r07</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava-gwt</artifactId>
       <version>r07</version>
     </dependency>
   </dependencies>
@@ -679,7 +690,7 @@
       <plugin>
         <!-- =roo sin spring executions -->
         <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.7</version>
+        <version>2.8</version>
         <configuration>
           <downloadSources>true</downloadSources>
           <downloadJavadocs>false</downloadJavadocs>
@@ -689,8 +700,11 @@
               <name>com.google.gwt.eclipse.core.gwtProjectValidator </name>
             </buildCommand>
           </additionalBuildcommands>
+          <workspaceCodeStylesURL>http://kune.ourproject.org/kune.formatter.eclipse.preferences.xml</workspaceCodeStylesURL>      
           <additionalProjectnatures>
+            <!--   
             <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
+            -->
             <projectnature>com.google.gwt.eclipse.core.gwtNature </projectnature>
           </additionalProjectnatures>
         </configuration>

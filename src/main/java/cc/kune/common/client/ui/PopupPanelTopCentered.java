@@ -24,7 +24,7 @@ public class PopupPanelTopCentered extends PopupPanel {
 
     private void init() {
         setStyleName("k-popup-top-centered");
-        addStyleName("k-opacity80");
+        addStyleName("k-opacity90");
         addStyleName("k-box-10shadow");
         addStyleName("k-bottom-10corners");
         Window.addResizeHandler(new ResizeHandler() {

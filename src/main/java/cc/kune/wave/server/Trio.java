@@ -15,7 +15,7 @@
  *
  */
 
-package org.ourproject.kune.app.server.wave;
+package cc.kune.wave.server;
 
 /**
  * An immutable ordered pair of typed objects.
