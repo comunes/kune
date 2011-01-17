@@ -41,8 +41,8 @@ package org.ourproject.kune.platf.client.actions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Vector;
 import java.util.Map.Entry;
+import java.util.Vector;
 
 /**
  * PropertyChangeSupport makes it easy to fire property change events and handle

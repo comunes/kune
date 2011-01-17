@@ -1,7 +1,7 @@
 package org.ourproject.kune.platf.client.ui;
 
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
+import com.google.gwt.user.client.ui.Widget;
 
 public interface AbstractToolbar {
 

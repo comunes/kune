@@ -24,11 +24,11 @@ import java.util.Date;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
+import cc.kune.common.client.errors.UIException;
 import cc.kune.core.client.actions.BeforeActionCollection;
 import cc.kune.core.client.actions.BeforeActionListener;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.SessionExpiredException;
-import cc.kune.core.client.errors.UIException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;

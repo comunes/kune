@@ -1,11 +1,10 @@
 package cc.kune.core.client;
 
-import org.ourproject.common.client.actions.gxtui.GxtGuiProvider;
-import org.ourproject.common.client.actions.ui.bind.DefaultGuiProvider;
-import org.ourproject.common.client.actions.ui.bind.GuiProvider;
-import org.ourproject.common.client.shortcuts.DefaultGlobalShortcutRegister;
-import org.ourproject.common.client.shortcuts.GlobalShortcutRegister;
-
+import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
+import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;
+import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerViewImpl;
 import cc.kune.core.client.errors.ErrorHandler;
@@ -18,7 +17,8 @@ import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
-import cc.kune.core.client.sitebar.SiteBarActions;
+import cc.kune.core.client.sitebar.SitebarActionsPresenter;
+import cc.kune.core.client.sitebar.SitebarActionsViewImpl;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
@@ -71,7 +71,6 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
         bind(GxtGuiProvider.class).in(Singleton.class);
         bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
-        bind(SiteBarActions.class).in(Singleton.class);
 
         // Presenters
         bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
@@ -86,6 +85,8 @@ public class CoreGinModule extends AbstractPresenterModule {
                 SpaceSelectorViewImpl.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
         bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
                 SiteLogoPresenter.SiteLogoProxy.class);
+        bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,
+                SitebarActionsViewImpl.class, SitebarActionsPresenter.SitebarActionsProxy.class);
 
         bind(UserMessagesPresenter.class).in(Singleton.class);
         bind(UserMessagesPanel.class).in(Singleton.class);

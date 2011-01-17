@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
-import cc.kune.core.client.errors.UIException;
+import cc.kune.common.client.errors.UIException;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
@@ -39,6 +39,7 @@ public class ToolSelectorPresenter implements ToolSelector {
     public ToolSelectorPresenter(final StateManager stateManager, final WsThemeManager wsThemePresenter) {
         tools = new HashMap<String, ToolSelectorItem>();
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            @Override
             public void onEvent(final StateAbstractDTO state) {
                 for (String tool : tools.keySet()) {
                     List<String> enabledTools = state.getEnabledTools();
@@ -51,17 +52,20 @@ public class ToolSelectorPresenter implements ToolSelector {
             }
         });
         stateManager.onGroupChanged(new Listener2<String, String>() {
+            @Override
             public void onEvent(final String oldGroup, final String newGroup) {
                 onGroupChanged(newGroup);
             }
         });
         stateManager.onToolChanged(new Listener2<String, String>() {
+            @Override
             public void onEvent(final String oldTool, final String newTool) {
                 onToolChanged(oldTool, newTool);
             }
         });
     }
 
+    @Override
     public void addTool(final ToolSelectorItem item) {
         final String name = item.getShortName();
         if (name == null) {

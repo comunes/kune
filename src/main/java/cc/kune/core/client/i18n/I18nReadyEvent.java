@@ -3,9 +3,8 @@ package cc.kune.core.client.i18n;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-
-import com.gwtplatform.mvp.client.HasEventBus;
 import com.google.gwt.event.shared.HasHandlers;
+import com.gwtplatform.mvp.client.HasEventBus;
 
 public class I18nReadyEvent extends GwtEvent<I18nReadyEvent.I18nReadyHandler> { 
 

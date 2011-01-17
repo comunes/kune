@@ -1,8 +1,8 @@
 package org.ourproject.kune.platf.client.ui.img;
 
 import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.CssResource.Strict;
+import com.google.gwt.resources.client.ImageResource;
 
 public interface ImgResources extends ClientBundle {
 

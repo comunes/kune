@@ -36,8 +36,6 @@ import org.ourproject.kune.platf.server.ServerException;
 import org.ourproject.kune.rack.dock.Dock;
 import org.ourproject.kune.rack.dock.RequestMatcher;
 
-import cc.kune.wave.server.WaveStarter;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -73,8 +71,8 @@ public class RackServletFilter implements Filter {
     }
 
     public static final String INJECTOR_ATTRIBUTE = Injector.class.getName();
-    private static final String MODULE_PARAMETER = RackModule.class.getName();
     private static final Log LOG = LogFactory.getLog(RackServletFilter.class);
+    private static final String MODULE_PARAMETER = RackModule.class.getName();
     private List<Dock> docks;
 
     private List<RequestMatcher> excludes;
@@ -104,24 +102,6 @@ public class RackServletFilter implements Filter {
         newChain.doFilter(request, response);
     }
 
-    @Override
-    public void init(final FilterConfig filterConfig) throws ServletException {
-        LOG.debug("INITIALIZING RackServletFilter...");
-        final RackModule module = getModule(filterConfig);
-        final RackBuilder builder = new RackBuilder();
-        module.configure(builder);
-
-        final Rack rack = builder.getRack();
-        WaveStarter waveStarter = new WaveStarter();
-        final Injector injector = installInjector(filterConfig, rack);
-        waveStarter.runMain(injector);
-        startContainerListeners(rack.getListeners(), injector);
-        docks = rack.getDocks();
-        excludes = rack.getExcludes();
-        initFilters(filterConfig);
-        LOG.debug("INITIALIZATION DONE!");
-    }
-
     private RackModule getModule(final FilterConfig filterConfig) {
         final String moduleName = getModuleName(filterConfig);
         try {
@@ -139,6 +119,24 @@ public class RackServletFilter implements Filter {
             throw new ServerException("Rack module name can't be null!");
         }
         return moduleName;
+    }
+
+    @Override
+    public void init(final FilterConfig filterConfig) throws ServletException {
+        LOG.debug("INITIALIZING RackServletFilter...");
+        final RackModule module = getModule(filterConfig);
+        final RackBuilder builder = new RackBuilder();
+        module.configure(builder);
+
+        final Rack rack = builder.getRack();
+        // WaveStarter waveStarter = new WaveStarter();
+        final Injector injector = installInjector(filterConfig, rack);
+        // waveStarter.runMain(injector);
+        startContainerListeners(rack.getListeners(), injector);
+        docks = rack.getDocks();
+        excludes = rack.getExcludes();
+        initFilters(filterConfig);
+        LOG.debug("INITIALIZATION DONE!");
     }
 
     private void initFilters(final FilterConfig filterConfig) throws ServletException {

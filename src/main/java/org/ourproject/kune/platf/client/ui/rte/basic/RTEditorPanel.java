@@ -23,7 +23,7 @@ import org.xwiki.gwt.dom.client.DocumentFragment;
 import org.xwiki.gwt.dom.client.Range;
 import org.xwiki.gwt.dom.client.Selection;
 
-import cc.kune.core.client.errors.UIException;
+import cc.kune.common.client.errors.UIException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;

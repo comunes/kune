@@ -5,7 +5,6 @@ import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ContentPosition;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ImageInfo;
 
-
 import com.gwtext.client.data.Record;
 import com.gwtext.client.data.SimpleStore;
 import com.gwtext.client.data.Store;

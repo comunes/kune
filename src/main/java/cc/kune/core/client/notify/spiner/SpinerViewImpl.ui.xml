@@ -5,7 +5,7 @@
 	<g:HorizontalPanel ui:field="panel" styleName="kLoadingPanel"
 		verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_CENTER"
 		borderWidth="0">
-		<g:Image ui:field="img" styleName="{res.css.loadingSpiner}"
+		<g:Image ui:field="img" addStyleNames="{res.css.loadingSpiner}"
 			resource="{res.loadingSpiner}" width="16px" height="16px" />
 		<g:InlineLabel ui:field="label" styleName="kLoadingLabel"
 			horizontalAlignment="ALIGN_CENTER" />

@@ -23,18 +23,23 @@ import java.util.ArrayList;
 
 public class TextUtils {
 
-    public static final String IN_DEVELOPMENT_P = " (in development)";
+    // Original regexp from http://www.regular-expressions.info/email.html
+    public static final String EMAIL_REGEXP = "[-!#$%&\'*+/=?_`{|}~a-z0-9^]+(\\.[-!#$%&\'*+/=?_`{|}~a-z0-9^]+)*@(localhost|([a-z0-9]([-a-z0-9]*[a-z0-9])?\\.)+[a-z0-9]([-a-z0-9]*[a-z0-9]))?";
     public static final String IN_DEVELOPMENT = "In development";
+
+    public static final String IN_DEVELOPMENT_P = " (in development)";
+
+    public static final String NUM_REGEXP = "^[0-9]+$";
+
+    public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
 
     // Original regexp from http://snippets.dzone.com/posts/show/452
     public static final String URL_REGEXP = "((ftp|http|https|mailto):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?)";
 
-    // Original regexp from http://www.regular-expressions.info/email.html
-    public static final String EMAIL_REGEXP = "[-!#$%&\'*+/=?_`{|}~a-z0-9^]+(\\.[-!#$%&\'*+/=?_`{|}~a-z0-9^]+)*@(localhost|([a-z0-9]([-a-z0-9]*[a-z0-9])?\\.)+[a-z0-9]([-a-z0-9]*[a-z0-9]))?";
-
-    public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
-
-    public static final String NUM_REGEXP = "^[0-9]+$";
+    public static String ellipsis(final String text, final int length) {
+        return text == null ? "" : length <= 0 ? text : text.length() > length ? text.substring(0, length - 3) + "..."
+                : text;
+    }
 
     /*
      * This method escape only some dangerous html chars

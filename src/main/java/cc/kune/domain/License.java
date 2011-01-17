@@ -27,7 +27,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 import cc.kune.domain.utils.HasId;
 
 import com.google.inject.name.Named;

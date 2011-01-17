@@ -154,3 +154,231 @@
 .k-z1000 {
 	z-index: 1000;
 }
+
+.oc-user-msg {
+  background-color: #FFCC00;
+  padding: 3px;
+}
+
+.oc-user-msg-popup {
+  padding: 0px;
+  border: 0px;
+}
+
+.oc-floatleft {
+  float: left;
+}
+
+.oc-floatright {
+  float: right;
+}
+
+.x-toolbar {
+	background: none !important;
+	border-color: transparent !important;
+}
+
+.oc-testico {
+  background-image: url(/common/img/ico.png) !important;
+  -moz-background-clip: border;
+  -moz-background-inline-policy: continuous;
+  -moz-background-origin: padding;
+  background-attachment: scroll;
+  background-color: transparent;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  height: 16px;
+  widows: 16px;
+}
+
+.oc-ico-pad {
+  padding-left: 20px;
+  white-space: normal;
+}
+
+.oc-tb-spacer {
+  margin: 2px;
+  width: 2px;
+}
+
+.oc-tb-bottom-line {
+  border-bottom-color: rgb(208, 208, 208);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.oc-blank-toolbar {
+  background: #FFF none repeat scroll 0% 50%;
+}
+
+.oc-tb-sep {
+  padding-top: 4px;
+  padding-left: 5px;
+}
+
+.oc-transp .x-panel-body {
+  background: transparent;
+}
+
+.oc-menu {
+  cursor: default;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border: 1 px solid #BBBBBB;
+}
+
+.oc-menu .gwt-MenuItem {
+  cursor: default;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+.oc-button {
+  padding: 2px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  text-decoration: none;
+  vertical-align: middle;
+   background-color: #F2F2F2;
+}
+
+.oc-button:hover {
+  border: 2px orange solid;
+  background: #f0f0f0;
+  color: #855585;
+}
+
+.oc-button:active {
+  border-top-color: #ffffff;
+  background: #ffffff;
+}
+
+#oc-mshortcut {
+  position: absolute;
+  right: 10px;
+}
+
+#oc-mshortcut-hidden {
+  visibility: hidden;
+}
+
+#oc-mshortcut a {
+  text-decoration: none;
+  color: black;
+}.oc-user-msg {
+  background-color: #FFCC00;
+  padding: 3px;
+}
+
+.oc-user-msg-popup {
+  padding: 0px;
+  border: 0px;
+}
+
+.oc-floatleft {
+  float: left;
+}
+
+.oc-floatright {
+  float: right;
+}
+
+.x-toolbar {
+	background: none !important;
+	border-color: transparent !important;
+}
+
+.oc-testico {
+  background-image: url(/common/img/ico.png) !important;
+  -moz-background-clip: border;
+  -moz-background-inline-policy: continuous;
+  -moz-background-origin: padding;
+  background-attachment: scroll;
+  background-color: transparent;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  height: 16px;
+  widows: 16px;
+}
+
+.oc-ico-pad {
+  padding-left: 20px;
+  white-space: normal;
+}
+
+.oc-tb-spacer {
+  margin: 2px;
+  width: 2px;
+}
+
+.oc-tb-bottom-line {
+  border-bottom-color: rgb(208, 208, 208);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.oc-blank-toolbar {
+  background: #FFF none repeat scroll 0% 50%;
+}
+
+.oc-tb-sep {
+  padding-top: 4px;
+  padding-left: 5px;
+}
+
+.oc-transp .x-panel-body {
+  background: transparent;
+}
+
+.oc-menu {
+  cursor: default;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border: 1 px solid #BBBBBB;
+}
+
+.oc-menu .gwt-MenuItem {
+  cursor: default;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+.oc-button {
+  padding: 2px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  text-decoration: none;
+  vertical-align: middle;
+   background-color: #F2F2F2;
+}
+
+.oc-button:hover {
+  border: 2px orange solid;
+  background: #f0f0f0;
+  color: #855585;
+}
+
+.oc-button:active {
+  border-top-color: #ffffff;
+  background: #ffffff;
+}
+
+#oc-mshortcut {
+  position: absolute;
+  right: 10px;
+}
+
+#oc-mshortcut-hidden {
+  visibility: hidden;
+}
+
+#oc-mshortcut a {
+  text-decoration: none;
+  color: black;
+}

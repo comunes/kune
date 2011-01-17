@@ -1,11 +1,8 @@
 package cc.kune.core.client.sitebar.logo;
 
 import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.ws.CorePlaceManager;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -19,15 +16,15 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 public class SiteLogoPresenter extends Presenter<SiteLogoPresenter.SiteLogoView, SiteLogoPresenter.SiteLogoProxy>
         implements SiteLogoUiHandlers {
 
-    private final CorePlaceManager placeManager;
+    @ProxyCodeSplit
+    public interface SiteLogoProxy extends Proxy<SiteLogoPresenter> {
+    }
 
     public interface SiteLogoView extends View, HasUiHandlers<SiteLogoUiHandlers> {
         void setSiteLogoUrl(String siteLogoUrl);
     }
 
-    @ProxyCodeSplit
-    public interface SiteLogoProxy extends Proxy<SiteLogoPresenter> {
-    }
+    private final CorePlaceManager placeManager;
 
     @Inject
     public SiteLogoPresenter(EventBus eventBus, SiteLogoView view, SiteLogoProxy proxy, CorePlaceManager placeManager) {
@@ -36,24 +33,18 @@ public class SiteLogoPresenter extends Presenter<SiteLogoPresenter.SiteLogoView,
         getView().setUiHandlers(this);
     }
 
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
-
     @ProxyEvent
     public void onAppStart(AppStartEvent event) {
         getView().setSiteLogoUrl(event.getInitData().getSiteLogoUrl());
-        getEventBus().fireEvent(new ProgressShowEvent("Progress"));
     }
 
     @Override
     public void onClick() {
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                // placeManager.revealDefaultPlace();
-            }
-        });
+        // placeManager.revealDefaultPlace();
+    }
+
+    @Override
+    protected void revealInParent() {
+        RevealRootContentEvent.fire(this, this);
     }
 }

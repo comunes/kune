@@ -17,16 +17,16 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
  * The Class CorePresenter.
  */
 public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresenter.CoreProxy> {
-    public static final String HOME_TOKEN = "";
-    private final AppStarter appStarter;
-
     @ProxyCodeSplit
     @NameToken(HOME_TOKEN)
     public interface CoreProxy extends ProxyPlace<CorePresenter> {
     }
-
     public interface CoreView extends View {
     }
+
+    public static final String HOME_TOKEN = "";
+
+    private final AppStarter appStarter;
 
     @Inject
     public CorePresenter(final EventBus eventBus, final CoreView view, final CoreProxy proxy, AppStarter appStarter) {

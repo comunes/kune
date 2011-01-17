@@ -2,7 +2,6 @@ package org.ourproject.kune.platf.server.manager;
 
 import java.util.List;
 
-
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;

@@ -24,7 +24,7 @@ import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
-import cc.kune.core.client.errors.UIException;
+import cc.kune.common.client.errors.UIException;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;

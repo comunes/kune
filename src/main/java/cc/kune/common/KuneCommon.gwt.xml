@@ -14,5 +14,8 @@
   <!-- Specify the paths for translatable code -->
   <source path='client' />
   <public path="public" />
+  <inherits name='org.cobogw.gwt.user.User' />
+  <inherits name='com.google.gwt.inject.Inject' />
+  <inherits name="com.extjs.gxt.ui.GXT" />
   <stylesheet src="kune-common.css" />
 </module>

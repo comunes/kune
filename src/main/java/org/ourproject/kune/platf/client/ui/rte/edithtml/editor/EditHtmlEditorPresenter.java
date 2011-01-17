@@ -1,8 +1,8 @@
 package org.ourproject.kune.platf.client.ui.rte.edithtml.editor;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlAgent;
+import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
 
 public class EditHtmlEditorPresenter implements EditHtmlEditor, EditHtmlAgent {
 

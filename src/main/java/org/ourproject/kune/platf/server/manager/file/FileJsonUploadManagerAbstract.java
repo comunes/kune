@@ -25,8 +25,6 @@ import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
-
-
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;

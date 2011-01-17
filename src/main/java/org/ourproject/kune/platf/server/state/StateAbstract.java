@@ -21,8 +21,6 @@ package org.ourproject.kune.platf.server.state;
 
 import java.util.List;
 
-
-
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;

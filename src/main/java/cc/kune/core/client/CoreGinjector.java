@@ -1,14 +1,13 @@
 package cc.kune.core.client;
 
-import org.ourproject.common.client.actions.gxtui.GxtGuiProvider;
-import org.ourproject.common.client.actions.ui.bind.GuiProvider;
-import org.ourproject.common.client.shortcuts.GlobalShortcutRegister;
-
+import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
+import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
-import cc.kune.core.client.sitebar.SiteBarActions;
+import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.state.StateManager;
@@ -50,7 +49,7 @@ public interface CoreGinjector extends Ginjector {
 
     ProxyFailureHandler getProxyFailureHandler();
 
-    SiteBarActions getSiteBarActions();
+    AsyncProvider<SitebarActionsPresenter> getSitebarActionsPresenter();
 
     AsyncProvider<SiteLogoPresenter> getSiteLogoPresenter();
 

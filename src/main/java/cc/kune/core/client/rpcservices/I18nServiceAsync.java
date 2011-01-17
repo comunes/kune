@@ -21,7 +21,6 @@ package cc.kune.core.client.rpcservices;
 
 import java.util.HashMap;
 
-
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;

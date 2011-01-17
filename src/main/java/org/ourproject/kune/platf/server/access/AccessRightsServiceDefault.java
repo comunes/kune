@@ -22,7 +22,6 @@ package org.ourproject.kune.platf.server.access;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.AccessLists;

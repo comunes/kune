@@ -24,7 +24,6 @@ import java.util.HashMap;
 
 import net.sf.dozer.util.mapping.MappingException;
 import net.sf.dozer.util.mapping.converters.CustomConverter;
-
 import cc.kune.core.shared.domain.GroupListMode;
 
 public class GroupListModeConverter implements CustomConverter {

@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.site.SiteToken;
 
+import cc.kune.common.client.errors.UIException;
 import cc.kune.core.client.errors.GroupNameInUseException;
-import cc.kune.core.client.errors.UIException;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;

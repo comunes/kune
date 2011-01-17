@@ -1,10 +1,10 @@
 package cc.kune.wspace.client;
 
-import org.ourproject.common.client.actions.ui.IsActionExtensible;
-
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 
 public interface WsArmor {
+
+    ForIsWidget getDocContainer();
 
     ForIsWidget getDocFooter();
 
@@ -21,8 +21,6 @@ public interface WsArmor {
     ForIsWidget getEntityToolsNorth();
 
     ForIsWidget getEntityToolsSouth();
-
-    IsActionExtensible getSiteActionsToolbar();
 
     ForIsWidget getSitebar();
 
