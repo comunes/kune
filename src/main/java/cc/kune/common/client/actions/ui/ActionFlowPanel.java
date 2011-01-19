@@ -17,13 +17,13 @@ public class ActionFlowPanel extends AbstractComposedGuiItem implements ActionEx
     }
 
     @Override
-    protected void add(final AbstractGuiItem item) {
+    protected void addWidget(final AbstractGuiItem item) {
         bar.add(item);
     }
 
     @Override
-    protected void insert(final AbstractGuiItem item, final int position) {
-        bar.insert(item, position);
+    protected void insertWidget(final AbstractGuiItem item, final int position) {
+        int count = bar.getWidgetCount();
+        bar.insert(item, count < position ? count : position);
     }
-
 }

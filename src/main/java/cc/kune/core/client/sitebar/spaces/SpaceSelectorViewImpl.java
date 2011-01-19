@@ -16,20 +16,20 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
 public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHandlers> implements SpaceSelectorView {
+    interface SpaceSelectorViewImplUiBinder extends UiBinder<Widget, SpaceSelectorViewImpl> {
+    }
     private static SpaceSelectorViewImplUiBinder uiBinder = GWT.create(SpaceSelectorViewImplUiBinder.class);
+    @UiField
+    ToggleButton groupButton;
     @UiField
     ToggleButton homeButton;
     @UiField
-    ToggleButton userButton;
-    @UiField
-    ToggleButton groupButton ;
+    HorizontalPanel panel;
     @UiField
     ToggleButton publicButton;
-    @UiField
-    HorizontalPanel panel;
 
-    interface SpaceSelectorViewImplUiBinder extends UiBinder<Widget, SpaceSelectorViewImpl> {
-    }
+    @UiField
+    ToggleButton userButton;
 
     @Inject
     public SpaceSelectorViewImpl(WsArmor armor, I18nTranslationService i18n) {
@@ -45,14 +45,24 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
         return panel;
     }
 
-    @Override
-    public void setHomeBtnDown(boolean down) {
-        homeButton.setDown(down);
+    @UiHandler("groupButton")
+    void onGroupSpaceClick(ClickEvent event) {
+        getUiHandlers().onGroupSpaceSelect();
     }
 
-    @Override
-    public void setUserBtnDown(boolean down) {
-        userButton.setDown(down);
+    @UiHandler("homeButton")
+    void onHomeSpaceClick(ClickEvent event) {
+        getUiHandlers().onHomeSpaceSelect();
+    }
+
+    @UiHandler("publicButton")
+    void onPublicSpaceClick(ClickEvent event) {
+        getUiHandlers().onPublicSpaceClick();
+    }
+
+    @UiHandler("userButton")
+    void onUserSpaceClick(ClickEvent event) {
+        getUiHandlers().onUserSpaceSelect();
     }
 
     @Override
@@ -61,28 +71,18 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
     }
 
     @Override
+    public void setHomeBtnDown(boolean down) {
+        homeButton.setDown(down);
+    }
+
+    @Override
     public void setPublicBtnDown(boolean down) {
         publicButton.setDown(down);
     }
 
-    @UiHandler("homeButton")
-    void onHomeSpaceClick(ClickEvent event) {
-        getUiHandlers().onHomeSpaceSelect();
-    }
-
-    @UiHandler("userButton")
-    void onUserSpaceClick(ClickEvent event) {
-        getUiHandlers().onUserSpaceSelect();
-    }
-
-    @UiHandler("groupButton")
-    void onGroupSpaceClick(ClickEvent event) {
-        getUiHandlers().onGroupSpaceSelect();
-    }
-
-    @UiHandler("publicButton")
-    void onPublicSpaceClick(ClickEvent event) {
-        getUiHandlers().onPublicSpaceClick();
+    @Override
+    public void setUserBtnDown(boolean down) {
+        userButton.setDown(down);
     }
 
 }

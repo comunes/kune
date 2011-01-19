@@ -12,6 +12,10 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
 
     protected static final AbstractGuiActionDescrip NO_PARENT = new NoParentGuiActionDescriptor();
     public static final int NO_POSITION = -1;
+    /**
+     * Coma separated, styles of the Gui item
+     */
+    public static final String STYLES = "stylesprop";
     public static final String VISIBLE = "visibleprop";
 
     /** The action. */
@@ -154,6 +158,10 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
      */
     public void setPosition(final int position) {
         this.position = position;
+    }
+
+    public void setStyles(final String styles) {
+        putValue(STYLES, styles);
     }
 
     public void setVisible(final boolean visible) {

@@ -59,7 +59,7 @@ public class CustomSettingsBinder {
         boolean check(Type type);
     }
 
-    private static final Map<Type, SettingTypeValidator> supportedSettingTypes;
+    private static final Map<Type, SettingTypeValidator> supportedSettingTypes; // NOPMD by vjrj on 18/01/11 0:53
 
     /**
      * This default validator just returns true.

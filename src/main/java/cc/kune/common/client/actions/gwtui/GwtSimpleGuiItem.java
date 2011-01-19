@@ -8,22 +8,23 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 
 public class GwtSimpleGuiItem extends AbstractComposedGuiItem {
 
-    private final HorizontalPanel hpanel;
+    private final HorizontalPanel bar;
 
     public GwtSimpleGuiItem(final GuiProvider provider) {
         super(provider);
-        hpanel = new HorizontalPanel();
-        initWidget(hpanel);
+        bar = new HorizontalPanel();
+        initWidget(bar);
     }
 
     @Override
-    protected void add(final AbstractGuiItem item) {
-        hpanel.add(item);
+    protected void addWidget(final AbstractGuiItem item) {
+        bar.add(item);
     }
 
     @Override
-    protected void insert(final AbstractGuiItem item, final int position) {
-        hpanel.insert(item, position);
+    protected void insertWidget(final AbstractGuiItem item, final int position) {
+        int count = bar.getWidgetCount();
+        bar.insert(item, count < position ? count : position);
     }
 
 }

@@ -58,6 +58,12 @@
     <buildCommand>
       <name>org.eclipse.wst.validation.validationbuilder</name>
     </buildCommand>
+    <buildCommand>
+      <name>net.sourceforge.pmd.eclipse.plugin.pmdBuilder</name>
+    </buildCommand>
+    <buildCommand>
+      <name>edu.umd.cs.findbugs.plugin.eclipse.findbugsBuilder</name>
+    </buildCommand>
   </buildSpec>
   <natures>
     <nature>org.eclipse.wst.common.project.facet.core.nature</nature>
@@ -66,5 +72,7 @@
     <nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
     <nature>org.eclipse.ajdt.ui.ajnature</nature>
     <nature>com.google.gwt.eclipse.core.gwtNature</nature>
+    <nature>net.sourceforge.pmd.eclipse.plugin.pmdNature</nature>
+    <nature>edu.umd.cs.findbugs.plugin.eclipse.findbugsNature</nature>
   </natures>
 </projectDescription>

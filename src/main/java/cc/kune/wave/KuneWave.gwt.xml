@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.1.1/distro-source/core/src/gwt-module.dtd">
 <module>
-	<inherits name="com.google.gwt.user.User" />
-	<source path="client"/>
-    <inherits name="org.waveprotocol.box.webclient.WebClientDev" />
+  <inherits name="com.google.gwt.user.User" />
+  <source path="client" />
+  <inherits name="com.google.common.base.Base" />
+  <inherits name='com.google.gwt.user.User' />
+  <inherits name="com.google.gwt.event.EventBase" />
+
+  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome' /> -->
+
+  <inherits name='com.glines.socketio.client.Client' />
+  <inherits name='com.google.gwt.json.JSON' />
+  <inherits name='com.google.gwt.websockets.WebSockets' />
+
+  <inherits name='org.waveprotocol.wave.client.Client' />
+  <inherits name='org.waveprotocol.wave.client.editor.Editor' />
+  <inherits name='org.waveprotocol.wave.client.gadget.Gadget' />
+  <inherits name='org.waveprotocol.wave.client.util.ClientFlags' />
+
+  <inherits name='org.waveprotocol.wave.model.Model' />
+  <inherits name="org.waveprotocol.wave.model.account.Account" />
+  <inherits name='org.waveprotocol.wave.model.conversation.Conversation' />
+
+  <inherits name="org.waveprotocol.box.common.Common" />
+  <inherits name='org.waveprotocol.box.common.comms.WaveClientRpc' />
+  <inherits
+    name='org.waveprotocol.box.webclient.common.communication.Communication' />
+  <inherits name='org.waveprotocol.box.webclient.util.Util' />
+
+  <inherits name='org.waveprotocol.box.webclient.waveclient.common.Common' />
+
+  <inherits name='org.waveprotocol.box.webclient.widget.error.Error' />
+  <inherits name="org.waveprotocol.box.webclient.WebClientDev" />
+
+<!--  Added from errors -->
+  <inherits name='org.waveprotocol.wave.client.common.safehtml.SafeHtml' />
+  <inherits name='org.waveprotocol.wave.client.common.util.Util' />
+  <inherits name='org.waveprotocol.wave.client.debug.logger.Logger' />
+  <inherits name='org.waveprotocol.wave.client.widget.common.Common' />
+  <inherits name='org.waveprotocol.wave.concurrencycontrol.Channel' />
+  <inherits name='org.waveprotocol.wave.concurrencycontrol.Common' />
+  <inherits name='org.waveprotocol.wave.concurrencycontrol.Wave' />
+
 </module>

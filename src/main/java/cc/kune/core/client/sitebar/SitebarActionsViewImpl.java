@@ -17,23 +17,27 @@ public class SitebarActionsViewImpl extends ViewImpl implements SitebarActionsVi
     @Inject
     public SitebarActionsViewImpl(WsArmor armor, ActionFlowPanel panel) {
         this.panel = panel;
+        armor.getSitebar().add(panel);
         // panel.setWidth("100%");
-        armor.getDocContainer().add(panel);
     }
 
     @Override
     public void addAction(AbstractGuiActionDescrip action) {
-        panel.add(action);
+        panel.addAction(action);
     }
 
     @Override
     public void addActions(AbstractGuiActionDescrip... actions) {
-        panel.addActions(actions);
+        for (AbstractGuiActionDescrip action : actions) {
+            this.addAction(action);
+        }
     }
 
     @Override
     public void addActions(GuiActionDescCollection actions) {
-        panel.addActions(actions);
+        for (AbstractGuiActionDescrip action : actions) {
+            this.addAction(action);
+        }
     }
 
     @Override

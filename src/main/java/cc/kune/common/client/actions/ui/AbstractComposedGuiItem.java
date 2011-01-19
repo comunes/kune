@@ -25,8 +25,6 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
         }
     }
 
-    protected abstract void add(AbstractGuiItem item);
-
     @Override
     public void addAction(final AbstractGuiActionDescrip descriptor) {
         getGuiItems().add(descriptor);
@@ -53,6 +51,8 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
         }
     }
 
+    protected abstract void addWidget(AbstractGuiItem item);
+
     protected void beforeAddWidget(final AbstractGuiActionDescrip descrip) {
         if (descrip.mustBeAdded()) {
             final GuiBinding binding = bindings.get(descrip.getType());
@@ -64,9 +64,9 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
                 // Log.debug("Adding: " + descrip);
                 if (binding.shouldBeAdded()) {
                     if (descrip.getPosition() == AbstractGuiActionDescrip.NO_POSITION) {
-                        add(item);
+                        addWidget(item);
                     } else {
-                        insert(item, descrip.getPosition());
+                        insertWidget(item, descrip.getPosition());
                     }
                 }
             }
@@ -80,5 +80,5 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
         return guiItems;
     }
 
-    protected abstract void insert(AbstractGuiItem item, int position);
+    protected abstract void insertWidget(AbstractGuiItem item, int position);
 }

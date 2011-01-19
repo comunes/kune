@@ -34,6 +34,11 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
     }
 
     @Override
+    protected void addStyle(String style) {
+        button.addStyleName(style);
+    }
+
+    @Override
     public void configureItemFromProperties() {
         super.configureItemFromProperties();
         descriptor.addPropertyChangeListener(new PropertyChangeListener() {
@@ -110,7 +115,9 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
     @Override
     public void setToolTipText(final String tooltip) {
         if (button != null) {
-            button.setToolTip(new GxtDefTooltip(tooltip));
+            if (tooltip != null && tooltip.length() > 0) {
+                button.setToolTip(new GxtDefTooltip(tooltip));
+            }
         }
     }
 
@@ -119,6 +126,5 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
         if (button != null) {
             button.setVisible(visible);
         }
-
     }
 }

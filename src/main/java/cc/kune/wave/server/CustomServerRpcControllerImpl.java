@@ -173,7 +173,7 @@ public class CustomServerRpcControllerImpl implements ServerRpcController {
     public void run() {
         RpcCallback<Message> messageCallback = new RpcCallback<Message>() {
             @Override
-            public void run(Message result) {
+            public void run(Message result) { // NOPMD by vjrj on 18/01/11 0:53
                 RpcCallback<Object> runCallback = null;
                 synchronized (statusLock) {
                     if (complete) {

@@ -9,7 +9,7 @@ public class QTipsHelper {
         init();
     }
 
-    void init() {
+    private void init() {
         /*-{
         $wnd.jQuery('div[title]').qtip({
         style: {
@@ -27,7 +27,7 @@ public class QTipsHelper {
         tooltip: 'topLeft'
         } }
         }
-        }-*/
+    }-*/
         ;
     }
 }

@@ -47,7 +47,7 @@ import java.util.HashMap;
  */
 public abstract class AbstractAction extends ChangeableObject implements Action {
 
-    public static AbstractAction NO_ACTION = new NoAction();
+    public final static AbstractAction NO_ACTION = new NoAction();
 
     /**
      * Creates a new action with no properties set.
@@ -105,6 +105,7 @@ public abstract class AbstractAction extends ChangeableObject implements Action 
      * 
      * @see #setEnabled(boolean)
      */
+    @Override
     public boolean isEnabled() {
         return (Boolean) super.getValue(ENABLED);
     }
@@ -145,6 +146,7 @@ public abstract class AbstractAction extends ChangeableObject implements Action 
      * 
      * @see #isEnabled()
      */
+    @Override
     public void setEnabled(final boolean enabled) {
         putValue(ENABLED, enabled);
     }

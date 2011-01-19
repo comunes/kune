@@ -28,6 +28,11 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     }
 
     @Override
+    protected void addStyle(String style) {
+        button.addStyleName(style);
+    }
+
+    @Override
     public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         if (descriptor instanceof PushButtonDescriptor) {

@@ -13,13 +13,13 @@ public class PopupPanelBottomCentered extends PopupPanel {
         init();
     }
 
-    public PopupPanelBottomCentered(boolean autohide, boolean modal) {
-        super(autohide, modal);
+    public PopupPanelBottomCentered(boolean autohide) {
+        super(autohide);
         init();
     }
 
-    public PopupPanelBottomCentered(boolean autohide) {
-        super(autohide);
+    public PopupPanelBottomCentered(boolean autohide, boolean modal) {
+        super(autohide, modal);
         init();
     }
 
@@ -31,12 +31,16 @@ public class PopupPanelBottomCentered extends PopupPanel {
         Window.addResizeHandler(new ResizeHandler() {
             @Override
             public void onResize(ResizeEvent event) {
-                setCenterPosition();
+                setCenterPositionImpl();
             }
         });
     }
 
     public void setCenterPosition() {
+        setCenterPositionImpl();
+    }
+
+    private void setCenterPositionImpl() {
         Widget widget = getWidget();
         int x = (Window.getClientWidth() - (widget != null ? getWidget().getOffsetWidth() : 0)) / 2;
         int y = Window.getClientHeight() - (widget != null ? getWidget().getOffsetHeight() : 0);

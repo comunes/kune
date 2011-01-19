@@ -151,7 +151,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     }
 
     @Override
-    public boolean shouldBeAdded() {
+    public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
         return false;
     }
 }

@@ -6,6 +6,7 @@ import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.bind.GuiBinding;
 import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.utils.TextUtils;
 
 import com.google.gwt.user.client.ui.Composite;
 
@@ -20,6 +21,14 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     public AbstractGuiItem(final AbstractGuiActionDescrip descriptor) {
         super();
         this.descriptor = descriptor;
+    }
+
+    protected void addStyle(String style) {
+        super.addStyleName(style);
+    }
+
+    protected void clearStyles() {
+        super.setStyleName("");
     }
 
     private void configure() {
@@ -38,10 +47,11 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
     private void configureProperties() {
         setText((String) (descriptor.getValue(Action.NAME)));
+        setToolTipText((String) (descriptor.getValue(Action.SHORT_DESCRIPTION)));
         setIcon(descriptor.getValue(Action.SMALL_ICON));
         setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
-        setToolTipText((String) (descriptor.getValue(Action.SHORT_DESCRIPTION)));
         setVisible((Boolean) descriptor.getValue(AbstractGuiActionDescrip.VISIBLE));
+        setStyles((String) descriptor.getValue(AbstractGuiActionDescrip.STYLES));
     }
 
     @Override
@@ -62,6 +72,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
                     setToolTipText((String) newValue);
                 } else if (event.getPropertyName().equals(AbstractGuiActionDescrip.VISIBLE)) {
                     setVisible((Boolean) newValue);
+                } else if (event.getPropertyName().equals(AbstractGuiActionDescrip.STYLES)) {
+                    setStyles((String) newValue);
                 }
             }
         };
@@ -81,6 +93,15 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
     protected abstract void setIconStyle(String style);
 
+    private void setStyles(String styles) {
+        if (styles != null) {
+            clearStyles();
+            for (String style : TextUtils.splitTags(styles)) {
+                addStyle(style);
+            }
+        }
+    }
+
     protected abstract void setText(String text);
 
     protected abstract void setToolTipText(String text);
@@ -90,7 +111,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     }
 
     @Override
-    public boolean shouldBeAdded() {
+    public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
         return true;
     }
 }

@@ -16,29 +16,29 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 public class SiteLogoViewImpl extends ViewWithUiHandlers<SiteLogoUiHandlers> implements SiteLogoView {
 
-    private static SiteLogoViewImplUiBinder uiBinder = GWT.create(SiteLogoViewImplUiBinder.class);
-
     interface SiteLogoViewImplUiBinder extends UiBinder<Widget, SiteLogoViewImpl> {
     }
 
-    @Inject
-    public SiteLogoViewImpl(WsArmor armor, PlaceManager placeManager) {
-        armor.getSitebar().insert(uiBinder.createAndBindUi(this),0);
-    }
+    private static SiteLogoViewImplUiBinder uiBinder = GWT.create(SiteLogoViewImplUiBinder.class);
 
     @UiField
     Image logo;
+
+    @Inject
+    public SiteLogoViewImpl(WsArmor armor, PlaceManager placeManager) {
+        armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
+    }
+
+    @Override
+    public Widget asWidget() {
+        return logo;
+    }
 
     @UiHandler("logo")
     void onLogoClick(ClickEvent event) {
         if (getUiHandlers() != null) {
             getUiHandlers().onClick();
         }
-    }
-
-    @Override
-    public Widget asWidget() {
-        return logo;
     }
 
     @Override

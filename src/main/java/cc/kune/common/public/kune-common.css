@@ -382,3 +382,7 @@
   text-decoration: none;
   color: black;
 }
+
+.k-no-backimage, .k-no-backimage td {
+	background-image: none;
+}

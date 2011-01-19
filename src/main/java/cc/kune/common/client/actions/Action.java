@@ -49,9 +49,24 @@ package cc.kune.common.client.actions;
 public interface Action extends ActionListener {
 
     /**
+     * A key to access the KeyStroke used as the accelerator for the action.
+     */
+    String ACCELERATOR_KEY = "AcceleratorKey";
+
+    /**
+     * A key to access the action command string for the action.
+     */
+    String ACTION_COMMAND_KEY = "ActionCommandKey";
+
+    /**
      * A key to access the default property for the action (this is not used).
      */
     String DEFAULT = "Default";
+
+    /**
+     * A key to access the enabled property for the action.
+     */
+    String ENABLED = "enabled";
 
     /**
      * A key to access the long description for the action.
@@ -59,14 +74,14 @@ public interface Action extends ActionListener {
     String LONG_DESCRIPTION = "LongDescription";
 
     /**
+     * A key to access the mnemonic for the action.
+     */
+    String MNEMONIC_KEY = "MnemonicKey";
+
+    /**
      * A key to access the name for the action.
      */
     String NAME = "Name";
-
-    /**
-     * A key to access the enabled property for the action.
-     */
-    String ENABLED = "enabled";
 
     /**
      * A key to access the short description for the action (the short
@@ -80,19 +95,9 @@ public interface Action extends ActionListener {
     String SMALL_ICON = "SmallIcon";
 
     /**
-     * A key to access the KeyStroke used as the accelerator for the action.
-     */
-    String ACCELERATOR_KEY = "AcceleratorKey";
-
-    /**
-     * A key to access the action command string for the action.
-     */
-    String ACTION_COMMAND_KEY = "ActionCommandKey";
-
-    /**
      * A key to access the mnemonic for the action.
      */
-    String MNEMONIC_KEY = "MnemonicKey";
+    String STYLES = "Styles";
 
     /**
      * Registers a listener to receive notification whenever one of the action's

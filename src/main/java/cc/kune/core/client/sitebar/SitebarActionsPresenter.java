@@ -36,7 +36,8 @@ public class SitebarActionsPresenter extends
     public interface SitebarActionsView extends View, IsActionExtensible {
     }
 
-    public static final ToolbarDescriptor toolbar = new ToolbarDescriptor();
+    public static final ToolbarDescriptor TOOLBAR = new ToolbarDescriptor();
+
     private final I18nTranslationService i18n;
     private MenuDescriptor optionsMenu;
 
@@ -79,14 +80,17 @@ public class SitebarActionsPresenter extends
             }
         };
         MenuItemDescriptor mItem = new MenuItemDescriptor(optionsMenu, action);
+        optionsMenu.setStyles("k-floatright, k-no-backimage");
         action.putValue(Action.NAME, "kk");
         action.putValue(Action.SHORT_DESCRIPTION, "tooltip");
         ButtonDescriptor signIn = new ButtonDescriptor(action);
-        ToolbarSeparatorDescriptor fill = new ToolbarSeparatorDescriptor(Type.fill, toolbar);
-        addAction(toolbar);
+        ToolbarSeparatorDescriptor fill = new ToolbarSeparatorDescriptor(Type.fill, TOOLBAR);
+        addAction(TOOLBAR);
         addAction(fill);
         addAction(icon);
         addAction(signIn);
+        icon.setStyles("k-floatright");
+        signIn.setStyles("k-floatright, k-no-backimage");
         addAction(optionsMenu);
         addAction(mItem);
     }

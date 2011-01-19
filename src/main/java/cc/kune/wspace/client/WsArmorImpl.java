@@ -71,6 +71,7 @@ public class WsArmorImpl extends Composite implements WsArmor {
         homeSpace.add(RootPanel.get("k-home-ini"));
         publicSpace.setUrl("http://www.google.com");
         userSpace.add(new Label("User space"));
+        // userSpace.add(new WebClient());
     }
 
     @Override
