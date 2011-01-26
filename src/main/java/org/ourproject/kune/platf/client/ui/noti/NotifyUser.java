@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.client.ui.noti;
 
 import org.ourproject.kune.platf.client.services.Images;
 
+import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Event;
@@ -29,27 +30,34 @@ import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
+/**
+ * Use {@link EventBus} and {@link UserNotifyEvent} instead
+ * 
+ */
+@Deprecated
 public class NotifyUser {
 
     public enum Level {
-        info, important, veryImportant, error,
+        error, important, info, veryImportant,
     }
 
-    private static final Event2<Level, String> ON_NOTIFY = new Event2<Level, String>("onNotify");
+    private static I18nTranslationService i18n;
+    private static Images images;
     private static final Event2<String, String> ON_ALERT = new Event2<String, String>("onAlert");
     private static final Event<ConfirmationAsk> ON_CONFIRMATION_ASK = new Event<ConfirmationAsk>("onConfirmationAsk");
-    private static final Event<String> ON_PROGRESS = new Event<String>("onProgress");
     private static final Event0 ON_HIDE_PROGRESS = new Event0("onHideProgress");
 
-    private static I18nTranslationService i18n;
+    private static final Event2<Level, String> ON_NOTIFY = new Event2<Level, String>("onNotify");
 
-    private static Images images;
+    private static final Event<String> ON_PROGRESS = new Event<String>("onProgress");
 
     public static void askConfirmation(final String confirmationTitle, final String confirmationText,
             final Listener0 onConfirm) {
         ON_CONFIRMATION_ASK.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, new Listener0() {
+            @Override
             public void onEvent() {
                 // Do nothing
             }
@@ -133,13 +141,13 @@ public class NotifyUser {
         ON_NOTIFY.fire(Level.veryImportant, message);
     }
 
+    private NotifyUser() {
+    }
+
     public NotifyUser(final I18nTranslationService i18n, final Images images) {
         this();
         NotifyUser.i18n = i18n;
         NotifyUser.images = images;
-    }
-
-    private NotifyUser() {
     }
 
     public void addAlerter(final Listener2<String, String> listener) {

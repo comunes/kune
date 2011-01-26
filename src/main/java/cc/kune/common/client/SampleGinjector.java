@@ -8,7 +8,7 @@ import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 
-@GinModules(CommonGinModule.class)
+@GinModules(SampleGinModule.class)
 public interface SampleGinjector extends Ginjector {
     GlobalShortcutRegister getGlobalShortcutRegister();
 

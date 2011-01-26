@@ -1,4 +1,4 @@
-package cc.kune.common.client.noti;
+package cc.kune.common.client.utils;
 
 public interface SimpleCallback {
     /**

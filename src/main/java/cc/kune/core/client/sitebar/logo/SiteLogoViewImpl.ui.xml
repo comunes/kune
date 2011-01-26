@@ -6,5 +6,5 @@
     	font-weight: bold;
     }
   </ui:style>
-    <g:Image ui:field="logo" addStyleNames="k-floatright k-pointer" />
+    <g:Image ui:field="logo" addStyleNames="k-sitebar-logo k-floatright k-pointer" />
 </ui:UiBinder>

@@ -14,44 +14,44 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <welcome-file-list>
     <welcome-file>ws.html</welcome-file>
   </welcome-file-list>
- <!-- Note: this gives problems depending on the version of jetty or tomcat -->
- <context-param>
-   <param-name>jruby.standalone</param-name>
-   <param-value>true</param-value>
- </context-param>
- <context-param>
-   <param-name>rails.root</param-name>
-   <param-value>/WEB-INF/publicspace/
-   </param-value>
- </context-param>
- <context-param>
-   <param-name>files.prefix</param-name>
-   <param-value>/WEB-INF/publicspace/public
-   </param-value>
- </context-param>
- <context-param>
-   <param-name>rails.env</param-name>
-   <param-value>production</param-value>
- </context-param>
- <context-param>
-   <param-name>jruby.max.runtimes</param-name>
-   <param-value>1</param-value>
- </context-param>
- <context-param>
-   <param-name>public.root</param-name>
-   <param-value>/public/</param-value>
- </context-param>
- <filter>
-   <filter-name>RackFilter</filter-name>
-   <filter-class>org.jruby.rack.RackFilter</filter-class>
- </filter>
- <filter-mapping>
-   <filter-name>RackFilter</filter-name>
-   <url-pattern>/public/*</url-pattern>
- </filter-mapping>
-  <listener>
-    <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class>
-  </listener>
+  <!-- Note: this gives problems depending on the version of jetty or tomcat -->
+<!--  <context-param>-->
+<!--    <param-name>jruby.standalone</param-name>-->
+<!--    <param-value>true</param-value>-->
+<!--  </context-param>-->
+<!--  <context-param>-->
+<!--    <param-name>rails.root</param-name>-->
+<!--    <param-value>/WEB-INF/publicspace/-->
+<!--   </param-value>-->
+<!--  </context-param>-->
+<!--  <context-param>-->
+<!--    <param-name>files.prefix</param-name>-->
+<!--    <param-value>/WEB-INF/publicspace/public-->
+<!--   </param-value>-->
+<!--  </context-param>-->
+<!--  <context-param>-->
+<!--    <param-name>rails.env</param-name>-->
+<!--    <param-value>production</param-value>-->
+<!--  </context-param>-->
+<!--  <context-param>-->
+<!--    <param-name>jruby.max.runtimes</param-name>-->
+<!--    <param-value>1</param-value>-->
+<!--  </context-param>-->
+<!--  <context-param>-->
+<!--    <param-name>public.root</param-name>-->
+<!--    <param-value>/public/</param-value>-->
+<!--  </context-param>-->
+<!--  <filter>-->
+<!--    <filter-name>RackFilter</filter-name>-->
+<!--    <filter-class>org.jruby.rack.RackFilter</filter-class>-->
+<!--  </filter>-->
+<!--  <filter-mapping>-->
+<!--    <filter-name>RackFilter</filter-name>-->
+<!--    <url-pattern>/public/*</url-pattern>-->
+<!--  </filter-mapping>-->
+<!--  <listener>-->
+<!--    <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class>-->
+<!--  </listener>-->
   <filter>
     <filter-name>rack</filter-name>
     <filter-class>org.ourproject.kune.rack.RackServletFilter</filter-class>
@@ -86,6 +86,79 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <servlet-name>Proxy</servlet-name>
     <url-pattern>/http-bind/</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>WiabSocketIO</servlet-name>
+    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
+    <init-param>
+      <param-name>ProxyTo</param-name>
+      <param-value>http://127.0.0.1:9898/</param-value>
+    </init-param>
+    <init-param>
+      <param-name>Prefix</param-name>
+      <param-value>/</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WiabSocketIO</servlet-name>
+    <url-pattern>/socket.io/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WiabServlets</servlet-name>
+    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
+    <init-param>
+      <param-name>ProxyTo</param-name>
+      <param-value>http://127.0.0.1:9898/</param-value>
+    </init-param>
+    <init-param>
+      <param-name>Prefix</param-name>
+      <param-value>/</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WiabServlets</servlet-name>
+    <url-pattern>/wiab/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- <servlet> -->
+  <!-- <servlet-name>WIABProxy</servlet-name> -->
+  <!-- <servlet-class>de.spieleck.servlets.ProxyServlet</servlet-class> -->
+  <!-- <init-param> -->
+  <!-- <param-name>remotePath</param-name> -->
+  <!-- <param-value>/wiab/</param-value> -->
+  <!-- </init-param> -->
+  <!-- <init-param> -->
+  <!-- <param-name>remoteServer</param-name> -->
+  <!-- <param-value>localhost</param-value> -->
+  <!-- </init-param> -->
+  <!-- <init-param> -->
+  <!-- <param-name>remotePort</param-name> -->
+  <!-- <param-value>9898</param-value> -->
+  <!-- </init-param> -->
+  <!-- </servlet> -->
+  <!-- <servlet-mapping> -->
+  <!-- <servlet-name>WIABProxy</servlet-name> -->
+  <!-- <url-pattern>/wiab/*</url-pattern> -->
+  <!-- </servlet-mapping> -->
+  <!-- <servlet> -->
+  <!-- <servlet-name>WIABSocket</servlet-name> -->
+  <!-- <servlet-class>de.spieleck.servlets.ProxyServlet</servlet-class> -->
+  <!-- <init-param> -->
+  <!-- <param-name>remotePath</param-name> -->
+  <!-- <param-value>/wiab/socket.io/</param-value> -->
+  <!-- </init-param> -->
+  <!-- <init-param> -->
+  <!-- <param-name>remoteServer</param-name> -->
+  <!-- <param-value>localhost</param-value> -->
+  <!-- </init-param> -->
+  <!-- <init-param> -->
+  <!-- <param-name>remotePort</param-name> -->
+  <!-- <param-value>9898</param-value> -->
+  <!-- </init-param> -->
+  <!-- </servlet> -->
+  <!-- <servlet-mapping> -->
+  <!-- <servlet-name>WIABsocket</servlet-name> -->
+  <!-- <url-pattern>/socket.io/*</url-pattern> -->
+  <!-- </servlet-mapping> -->
   <servlet>
     <servlet-name>remoteLoggerServiceImpl</servlet-name>
     <servlet-class>com.allen_sauer.gwt.log.server.RemoteLoggerServiceImpl</servlet-class>

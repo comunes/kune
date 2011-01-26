@@ -27,8 +27,6 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Event0;
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
@@ -37,29 +35,39 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 public class ErrorHandler {
 
-    private final Session session;
-    private final I18nTranslationService i18n;
-    private final Event0 onSessionExpired;
-    private final PlaceManager placeManager;
     private final EventBus eventBus;
+    private final I18nTranslationService i18n;
+    private final PlaceManager placeManager;
+    private final Session session;
 
     @Inject
     public ErrorHandler(final Session session, final I18nTranslationService i18n, final PlaceManager placeManager,
-            EventBus eventBus) {
+            final EventBus eventBus) {
         this.session = session;
         this.i18n = i18n;
         this.placeManager = placeManager;
         this.eventBus = eventBus;
-        this.onSessionExpired = new Event0("onSessionExpired");
     }
 
     public void doSessionExpired() {
-        onSessionExpired.fire();
+        eventBus.fireEvent(new SessionExpiredEvent());
         eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, "Your session has expired. Please log in again."));
     }
 
-    public void onSessionExpired(final Listener0 listener) {
-        onSessionExpired.add(listener);
+    private void goHome() {
+        placeManager.revealDefaultPlace();
+    }
+
+    private void logException(final Throwable caught) {
+        logException(caught, false);
+    }
+
+    private void logException(final Throwable caught, final boolean showException) {
+        if (showException) {
+            Log.debug("Exception in KuneErrorHandler", caught);
+        } else {
+            Log.debug("Exception in KuneErrorHandler: " + caught.getMessage());
+        }
     }
 
     public void process(final Throwable caught) {
@@ -112,22 +120,6 @@ public class ErrorHandler {
             logException(caught, true);
             eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("Error performing operation")));
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", caught);
-        }
-    }
-
-    private void goHome() {
-        placeManager.revealDefaultPlace();
-    }
-
-    private void logException(final Throwable caught) {
-        logException(caught, false);
-    }
-
-    private void logException(final Throwable caught, final boolean showException) {
-        if (showException) {
-            Log.debug("Exception in KuneErrorHandler", caught);
-        } else {
-            Log.debug("Exception in KuneErrorHandler: " + caught.getMessage());
         }
     }
 

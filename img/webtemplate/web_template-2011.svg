@@ -53,15 +53,15 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.78961905"
-     inkscape:cx="453.50795"
+     inkscape:cx="493.46544"
      inkscape:cy="448.12343"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer7"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="1280"
-     inkscape:window-height="747"
+     inkscape:window-height="974"
      inkscape:window-x="0"
-     inkscape:window-y="1024"
+     inkscape:window-y="21"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="false"
      inkscape:bbox-paths="true"
@@ -124,13 +124,12 @@
      id="layer1"
      inkscape:label="normal"
      inkscape:groupmode="layer"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect5037"
        width="1013"
-       height="26"
+       height="657.95032"
        x="7"
        y="112"
        inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
@@ -2631,9 +2630,13 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="chat" />
+  <g
+     inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="overlay"
-     style="display:inline">
+     style="display:none">
     <rect
        style="opacity:0.68399999;color:#000000;fill:#f7ebe3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3865"
@@ -2808,7 +2811,7 @@
        sodipodi:nodetypes="cccc" />
   </g>
   <g
-     style="display:inline"
+     style="display:none"
      inkscape:label="confirmation"
      id="g8450"
      inkscape:groupmode="layer">
@@ -2820,7 +2823,7 @@
        height="205.09827"
        width="476.85486"
        id="rect8452"
-       style="color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;opacity:0.85" />
+       style="opacity:0.85;color:#000000;fill:#552200;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        style="opacity:0.85;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect8454"

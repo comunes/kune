@@ -17,60 +17,38 @@ public class SpaceSelectorPresenter extends
         Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> implements
         SpaceSelectorUiHandlers {
 
-    private final WsArmor armor;
-
-    public interface SpaceSelectorView extends View, HasUiHandlers<SpaceSelectorUiHandlers> {
-
-        void setHomeBtnDown(boolean down);
-
-        void setUserBtnDown(boolean down);
-
-        void setGroupBtnDown(boolean down);
-
-        void setPublicBtnDown(boolean down);
-    }
-
     @ProxyCodeSplit
     public interface SpaceSelectorProxy extends Proxy<SpaceSelectorPresenter> {
     }
 
+    public interface SpaceSelectorView extends View, HasUiHandlers<SpaceSelectorUiHandlers> {
+
+        void setGroupBtnDown(boolean down);
+
+        void setHomeBtnDown(boolean down);
+
+        void setPublicBtnDown(boolean down);
+
+        void setUserBtnDown(boolean down);
+    }
+
+    private final WsArmor armor;
+
     @Inject
-    public SpaceSelectorPresenter(EventBus eventBus, SpaceSelectorView view, SpaceSelectorProxy proxy, WsArmor armor) {
+    public SpaceSelectorPresenter(final EventBus eventBus, final SpaceSelectorView view,
+            final SpaceSelectorProxy proxy, final WsArmor armor) {
         super(eventBus, view, proxy);
         this.armor = armor;
         getView().setUiHandlers(this);
     }
 
-    @Override
-    protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
-    }
-
     @ProxyEvent
-    public void onAppStart(AppStartEvent event) {
+    public void onAppStart(final AppStartEvent event) {
         getView().setHomeBtnDown(false);
         getView().setUserBtnDown(false);
         getView().setGroupBtnDown(false);
         getView().setPublicBtnDown(false);
-        onHomeSpaceSelect();
-    }
-
-    @Override
-    public void onHomeSpaceSelect() {
-        armor.selectHomeSpace();
-        getView().setHomeBtnDown(true);
-        getView().setUserBtnDown(false);
-        getView().setGroupBtnDown(false);
-        getView().setPublicBtnDown(false);
-    }
-
-    @Override
-    public void onUserSpaceSelect() {
-        armor.selectUserSpace();
-        getView().setHomeBtnDown(false);
-        getView().setUserBtnDown(true);
-        getView().setGroupBtnDown(false);
-        getView().setPublicBtnDown(false);
+        onGroupSpaceSelect();
     }
 
     @Override
@@ -83,11 +61,34 @@ public class SpaceSelectorPresenter extends
     }
 
     @Override
+    public void onHomeSpaceSelect() {
+        armor.selectHomeSpace();
+        getView().setHomeBtnDown(true);
+        getView().setUserBtnDown(false);
+        getView().setGroupBtnDown(false);
+        getView().setPublicBtnDown(false);
+    }
+
+    @Override
     public void onPublicSpaceClick() {
         armor.selectPublicSpace();
         getView().setHomeBtnDown(false);
         getView().setUserBtnDown(false);
         getView().setGroupBtnDown(false);
         getView().setPublicBtnDown(true);
+    }
+
+    @Override
+    public void onUserSpaceSelect() {
+        armor.selectUserSpace();
+        getView().setHomeBtnDown(false);
+        getView().setUserBtnDown(true);
+        getView().setGroupBtnDown(false);
+        getView().setPublicBtnDown(false);
+    }
+
+    @Override
+    protected void revealInParent() {
+        RevealRootContentEvent.fire(this, this);
     }
 }

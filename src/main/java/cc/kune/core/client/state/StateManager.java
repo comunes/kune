@@ -25,15 +25,13 @@ import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
 
 public interface StateManager {
 
     void addBeforeStateChangeListener(BeforeActionListener listener);
 
-    @Deprecated
-    void addSiteToken(String token, Listener0 whenToken);
+    void addSiteToken(String token, HistoryTokenCallback historyTokenCallback);
 
     void gotoToken(StateToken newToken);
 

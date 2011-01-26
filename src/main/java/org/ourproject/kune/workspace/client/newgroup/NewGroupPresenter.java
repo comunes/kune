@@ -23,13 +23,14 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.WorkspaceMessages;
-import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import cc.kune.common.client.errors.UIException;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -37,18 +38,17 @@ import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class NewGroupPresenter implements NewGroup {
 
-    private NewGroupView view;
+    private final Provider<GroupServiceAsync> groupService;
     private final I18nTranslationService i18n;
+    private boolean mustGoToPrevious;
     private final Session session;
     private final StateManager stateManager;
-    private final Provider<GroupServiceAsync> groupService;
-    private boolean mustGoToPrevious;
+    private NewGroupView view;
 
     public NewGroupPresenter(final I18nTranslationService i18n, final Session session, final StateManager stateManager,
             final Provider<GroupServiceAsync> groupService) {
@@ -56,16 +56,20 @@ public class NewGroupPresenter implements NewGroup {
         this.session = session;
         this.stateManager = stateManager;
         this.groupService = groupService;
-        stateManager.addSiteToken(SiteToken.newgroup.toString(), new Listener0() {
-            public void onEvent() {
+        stateManager.addSiteToken(SiteCommonTokens.NEWGROUP, new HistoryTokenCallback() {
+
+            @Override
+            public void onHistoryToken() {
                 doNewGroup();
             }
         });
         mustGoToPrevious = true;
     }
 
+    @Override
     public void doNewGroup() {
         session.check(new AsyncCallbackSimple<Void>() {
+            @Override
             public void onSuccess(final Void result) {
                 if (session.isLogged()) {
                     NotifyUser.showProgressProcessing();
@@ -79,6 +83,16 @@ public class NewGroupPresenter implements NewGroup {
                 }
             }
         });
+    }
+
+    private GroupType getTypeOfGroup() {
+        if (view.isProject()) {
+            return GroupType.PROJECT;
+        } else if (view.isOrganization()) {
+            return GroupType.ORGANIZATION;
+        } else {
+            return GroupType.COMMUNITY;
+        }
     }
 
     public View getView() {
@@ -113,6 +127,7 @@ public class NewGroupPresenter implements NewGroup {
             group.setDefaultLicense(license);
 
             final AsyncCallback<StateToken> callback = new AsyncCallback<StateToken>() {
+                @Override
                 public void onFailure(final Throwable caught) {
                     if (caught instanceof GroupNameInUseException) {
                         view.unMask();
@@ -124,6 +139,7 @@ public class NewGroupPresenter implements NewGroup {
                     }
                 }
 
+                @Override
                 public void onSuccess(final StateToken token) {
                     mustGoToPrevious = false;
                     view.hide();
@@ -136,22 +152,12 @@ public class NewGroupPresenter implements NewGroup {
         }
     }
 
-    public void setMessage(final String message, final Level level) {
-        view.setMessage(message, level);
-    }
-
-    private GroupType getTypeOfGroup() {
-        if (view.isProject()) {
-            return GroupType.PROJECT;
-        } else if (view.isOrganization()) {
-            return GroupType.ORGANIZATION;
-        } else {
-            return GroupType.COMMUNITY;
-        }
-    }
-
     private void reset() {
         view.clearData();
         mustGoToPrevious = true;
+    }
+
+    public void setMessage(final String message, final Level level) {
+        view.setMessage(message, level);
     }
 }

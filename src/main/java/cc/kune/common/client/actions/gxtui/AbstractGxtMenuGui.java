@@ -88,7 +88,7 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
         if (relative instanceof String) {
             menu.show(RootPanel.get((String) relative));
         } else if (relative instanceof UIObject) {
-            menu.show(((UIObject) relative).getElement(), "tl");
+            menu.show(((UIObject) relative).getElement(), "bl");
         } else if (relative instanceof Position) {
             final Position position = (Position) relative;
             menu.showAt(position.getX(), position.getY());

@@ -6,7 +6,7 @@ import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.cookies.CookiesManager;
-import cc.kune.core.client.cookies.CookiesManagerViewImpl;
+import cc.kune.core.client.cookies.CookiesManagerImpl;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
@@ -19,6 +19,10 @@ import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.SitebarActionsViewImpl;
+import cc.kune.core.client.sitebar.SitebarNewGroupLink;
+import cc.kune.core.client.sitebar.SitebarSignInLink;
+import cc.kune.core.client.sitebar.SitebarSignOutLink;
+import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
@@ -79,8 +83,7 @@ public class CoreGinModule extends AbstractPresenterModule {
                 SpinerPresenter.SpinerProxy.class);
         bindPresenter(UserNotifierPresenter.class, UserNotifierPresenter.UserNotifierView.class,
                 UserNotifierViewImpl.class, UserNotifierProxy.class);
-        bindPresenter(CookiesManager.class, CookiesManager.CookiesManagerView.class, CookiesManagerViewImpl.class,
-                CookiesManager.CookiesManagerProxy.class);
+
         bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
                 SpaceSelectorViewImpl.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
         bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
@@ -92,7 +95,8 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(UserMessagesPanel.class).in(Singleton.class);
 
         bind(WsArmorImpl.class).in(Singleton.class);
-        bind(WsArmor.class).to(WsArmorImpl.class);
+        bind(WsArmor.class).to(WsArmorImpl.class).in(Singleton.class);
+        bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
         bind(Session.class).to(SessionDefault.class).in(Singleton.class);
         bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
         bind(ErrorHandler.class).in(Singleton.class);
@@ -102,5 +106,10 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
         bind(PrefetchUtilities.class).in(Singleton.class);
         bind(AppStarter.class).to(AppStarterDefault.class).in(Singleton.class);
+
+        bind(SitebarNewGroupLink.class).in(Singleton.class);
+        bind(SitebarSignInLink.class).in(Singleton.class);
+        bind(SitebarSignOutLink.class).in(Singleton.class);
+        bind(BeforeSignOut.class).in(Singleton.class);
     }
 }

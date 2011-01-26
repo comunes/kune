@@ -6,7 +6,10 @@
 }
 
 .mainPanel {
-	border: 7px solid white;
+	border-top: 2px solid white;
+	border-bottom: 7px solid white;
+	border-right: 7px solid white;
+	border-left: 7px solid white;
 }
 
 .floatRight {

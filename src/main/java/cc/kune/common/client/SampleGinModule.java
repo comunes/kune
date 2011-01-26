@@ -10,7 +10,7 @@ import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 
-public class CommonGinModule extends AbstractGinModule {
+public class SampleGinModule extends AbstractGinModule {
 
     @Override
     protected void configure() {

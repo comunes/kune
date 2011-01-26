@@ -42,40 +42,60 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SiteSignOutLinkPresenter implements SiteSignOutLink {
 
-    private SiteSignOutLinkView view;
+    public class BeforeSignOut extends BeforeActionCollection {
+    }
+    private final BeforeActionCollection beforeSignOut;
     private final Session session;
     private final Provider<UserServiceAsync> userService;
-    private final BeforeActionCollection beforeSignOut;
+
+    private SiteSignOutLinkView view;
 
     public SiteSignOutLinkPresenter(final Session session, final Provider<UserServiceAsync> userService,
             final Provider<ErrorHandler> errorHandler) {
         this.session = session;
         this.userService = userService;
         session.onUserSignIn(new Listener<UserInfoDTO>() {
+            @Override
             public void onEvent(final UserInfoDTO userInfoDTO) {
                 view.setVisible(true);
             }
         });
         session.onUserSignOut(new Listener0() {
+            @Override
             public void onEvent() {
                 view.setVisible(false);
             }
         });
-        errorHandler.get().onSessionExpired(new Listener0() {
-            public void onEvent() {
-                clientUIsignOut();
-            }
-        });
+        // errorHandler.get().onSessionExpired(new Listener0() {
+        // @Override
+        // public void onEvent() {
+        // clientUIsignOut();
+        // }
+        // });
         beforeSignOut = new BeforeActionCollection();
     }
 
+    @Override
     public void addBeforeSignOut(final BeforeActionListener listener) {
         beforeSignOut.add(listener);
+    }
+
+    private void clientUIsignOut() {
+        // FIXME: Remove cookie doesn't works in all browsers, know
+        // issue:
+        // http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/ded86778ee56690/515dc513c7d085eb?lnk=st&q=remove+cookie#515dc513c7d085eb
+        // http://code.google.com/p/google-web-toolkit/issues/detail?id=1735&q=removeCookie
+        Cookies.removeCookie(Session.USERHASH);
+        // Workaround:
+        Cookies.setCookie(Session.USERHASH, null, new Date(0), null, "/", false);
+        session.setUserHash(null);
+        session.setCurrentUserInfo(null);
     }
 
     public void doSignOut() {
         if (beforeSignOut.checkBeforeAction()) {
             userService.get().logout(session.getUserHash(), new AsyncCallback<Void>() {
+                @Override
                 public void onFailure(final Throwable caught) {
                     NotifyUser.hideProgress();
                     if (caught instanceof SessionExpiredException) {
@@ -87,6 +107,7 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
                     }
                 }
 
+                @Override
                 public void onSuccess(final Void arg0) {
                     NotifyUser.hideProgress();
                     clientUIsignOut();
@@ -107,20 +128,9 @@ public class SiteSignOutLinkPresenter implements SiteSignOutLink {
         view.setVisible(false);
     }
 
+    @Override
     public void removeBeforeSignOut(final BeforeActionListener listener) {
         beforeSignOut.remove(listener);
-    }
-
-    private void clientUIsignOut() {
-        // FIXME: Remove cookie doesn't works in all browsers, know
-        // issue:
-        // http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/ded86778ee56690/515dc513c7d085eb?lnk=st&q=remove+cookie#515dc513c7d085eb
-        // http://code.google.com/p/google-web-toolkit/issues/detail?id=1735&q=removeCookie
-        Cookies.removeCookie(Session.USERHASH);
-        // Workaround:
-        Cookies.setCookie(Session.USERHASH, null, new Date(0), null, "/", false);
-        session.setUserHash(null);
-        session.setCurrentUserInfo(null);
     }
 
 }

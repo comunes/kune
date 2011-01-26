@@ -17,7 +17,7 @@ public class AlertEvent extends GwtEvent<AlertEvent.AlertHandler> {
 
   private static final Type<AlertHandler> TYPE = new Type<AlertHandler>();
 
-  public static void fire(HasHandlers source, java.lang.String title, java.lang.String message, cc.kune.common.client.noti.SimpleCallback onOk) {
+  public static void fire(HasHandlers source, java.lang.String title, java.lang.String message, cc.kune.common.client.utils.SimpleCallback onOk) {
     source.fireEvent(new AlertEvent(title, message, onOk));
   }
 
@@ -31,9 +31,9 @@ public class AlertEvent extends GwtEvent<AlertEvent.AlertHandler> {
 
   java.lang.String title;
   java.lang.String message;
-  cc.kune.common.client.noti.SimpleCallback onOk;
+  cc.kune.common.client.utils.SimpleCallback onOk;
 
-  public AlertEvent(java.lang.String title, java.lang.String message, cc.kune.common.client.noti.SimpleCallback onOk) {
+  public AlertEvent(java.lang.String title, java.lang.String message, cc.kune.common.client.utils.SimpleCallback onOk) {
     this.title = title;
     this.message = message;
     this.onOk = onOk;
@@ -60,7 +60,7 @@ public class AlertEvent extends GwtEvent<AlertEvent.AlertHandler> {
     return message;
   }
 
-  public cc.kune.common.client.noti.SimpleCallback getOnOk() {
+  public cc.kune.common.client.utils.SimpleCallback getOnOk() {
     return onOk;
   }
 

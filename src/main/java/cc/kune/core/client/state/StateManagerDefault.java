@@ -33,7 +33,6 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -41,7 +40,14 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
+    private final BeforeActionCollection beforeStateChangeCollection;
     private final ContentProvider contentProvider;
+    private final EventBus eventBus;
+    private final HistoryWrapper history;
+    private final Event2<String, String> onGroupChanged;
+    private final Event<StateAbstractDTO> onSocialNetworkChanged;
+    private final Event<StateAbstractDTO> onStateChanged;
+    private final Event2<String, String> onToolChanged;
     private StateToken previousToken;
     /**
      * When a historyChanged is interrupted (for instance because you are
@@ -49,14 +55,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
      */
     private StateToken resumedToken;
     private final Session session;
-    private final HistoryWrapper history;
-    private final HashMap<String, Listener0> siteTokens;
-    private final Event<StateAbstractDTO> onStateChanged;
-    private final Event<StateAbstractDTO> onSocialNetworkChanged;
-    private final Event2<String, String> onToolChanged;
-    private final Event2<String, String> onGroupChanged;
-    private final BeforeActionCollection beforeStateChangeCollection;
-    private final EventBus eventBus;
+    private final HashMap<String, HistoryTokenCallback> siteTokens;
 
     @Inject
     public StateManagerDefault(final ContentProvider contentProvider, final Session session,
@@ -71,11 +70,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.onGroupChanged = new Event2<String, String>("onGroupChanged");
         this.onToolChanged = new Event2<String, String>("onToolChanged");
         this.onSocialNetworkChanged = new Event<StateAbstractDTO>("onSocialNetworkChanged");
-        siteTokens = new HashMap<String, Listener0>();
+        siteTokens = new HashMap<String, HistoryTokenCallback>();
         beforeStateChangeCollection = new BeforeActionCollection();
         eventBus.addHandler(UserSignInEvent.getType(), new UserSignInEvent.UserSignInHandler() {
             @Override
-            public void onUserSignIn(UserSignInEvent event) {
+            public void onUserSignIn(final UserSignInEvent event) {
                 if (previousToken == null) {
                     // starting up
                     reload();
@@ -86,7 +85,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         });
         eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutEvent.UserSignOutHandler() {
             @Override
-            public void onUserSignOut(UserSignOutEvent event) {
+            public void onUserSignOut(final UserSignOutEvent event) {
                 reload();
             }
         });
@@ -98,8 +97,28 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     @Override
-    public void addSiteToken(final String token, final Listener0 listener) {
-        siteTokens.put(token, listener);
+    public void addSiteToken(final String token, final HistoryTokenCallback callback) {
+        siteTokens.put(token.toLowerCase(), callback);
+    }
+
+    private void checkGroupAndToolChange(final StateAbstractDTO newState) {
+        final String previousGroup = previousToken == null ? "" : previousToken.getGroup();
+        final String newGroup = newState.getStateToken().getGroup();
+        final String previousTokenTool = previousToken == null ? "" : previousToken.getTool();
+        final String newTokenTool = newState.getStateToken().getTool();
+        final String previousToolName = previousTokenTool == null ? "" : previousTokenTool;
+        final String newToolName = newTokenTool == null ? "" : newTokenTool;
+
+        if (previousToken == null || previousToolName == null || !previousToolName.equals(newToolName)) {
+            onToolChanged.fire(previousToolName, newToolName);
+        }
+        if (previousToken == null || !previousGroup.equals(newGroup)) {
+            onGroupChanged.fire(previousGroup, newGroup);
+        }
+    }
+
+    private void clearResumedToken() {
+        resumedToken = null;
     }
 
     @Override
@@ -116,6 +135,38 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     @Override
     public void onGroupChanged(final Listener2<String, String> listener) {
         onGroupChanged.add(listener);
+    }
+
+    private void onHistoryChanged(final StateToken newState) {
+        contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateAbstractDTO>() {
+            @Override
+            public void onSuccess(final StateAbstractDTO newState) {
+                setState(newState);
+            }
+        });
+    }
+
+    void onHistoryChanged(final String historyToken) {
+        // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
+        if (beforeStateChangeCollection.checkBeforeAction()) {
+            final HistoryTokenCallback tokenListener = siteTokens.get(historyToken != null ? historyToken.toLowerCase()
+                    : historyToken);
+            Log.debug("StateManager: history token changed (" + historyToken + ")");
+            if (tokenListener == null) {
+                // Ok, normal token change
+                onHistoryChanged(new StateToken(historyToken));
+            } else {
+                // token is one of #newgroup #signin #translate ...
+                if (previousToken == null) {
+                    // Starting with some token like "signin": load defContent
+                    // also
+                    onHistoryChanged("");
+                }
+                tokenListener.onHistoryToken();
+            }
+        } else {
+            resumedToken = new StateToken(historyToken);
+        }
     }
 
     @Override
@@ -191,28 +242,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         }
     }
 
-    void onHistoryChanged(final String historyToken) {
-        // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
-        if (beforeStateChangeCollection.checkBeforeAction()) {
-            final Listener0 tokenListener = siteTokens.get(historyToken);
-            Log.debug("StateManager: history token changed (" + historyToken + ")");
-            if (tokenListener == null) {
-                // Ok, normal token change
-                onHistoryChanged(new StateToken(historyToken));
-            } else {
-                // token is one of #newgroup #signin #translate ...
-                if (previousToken == null) {
-                    // Starting with some token like "signin": load defContent
-                    // also
-                    onHistoryChanged("");
-                }
-                tokenListener.onEvent();
-            }
-        } else {
-            resumedToken = new StateToken(historyToken);
-        }
-    }
-
     void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
         onStateChanged.fire(newState);
@@ -220,34 +249,5 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         checkGroupAndToolChange(newState);
         previousToken = newState.getStateToken();
 
-    }
-
-    private void checkGroupAndToolChange(final StateAbstractDTO newState) {
-        final String previousGroup = previousToken == null ? "" : previousToken.getGroup();
-        final String newGroup = newState.getStateToken().getGroup();
-        final String previousTokenTool = previousToken == null ? "" : previousToken.getTool();
-        final String newTokenTool = newState.getStateToken().getTool();
-        final String previousToolName = previousTokenTool == null ? "" : previousTokenTool;
-        final String newToolName = newTokenTool == null ? "" : newTokenTool;
-
-        if (previousToken == null || previousToolName == null || !previousToolName.equals(newToolName)) {
-            onToolChanged.fire(previousToolName, newToolName);
-        }
-        if (previousToken == null || !previousGroup.equals(newGroup)) {
-            onGroupChanged.fire(previousGroup, newGroup);
-        }
-    }
-
-    private void clearResumedToken() {
-        resumedToken = null;
-    }
-
-    private void onHistoryChanged(final StateToken newState) {
-        contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateAbstractDTO>() {
-            @Override
-            public void onSuccess(final StateAbstractDTO newState) {
-                setState(newState);
-            }
-        });
     }
 }

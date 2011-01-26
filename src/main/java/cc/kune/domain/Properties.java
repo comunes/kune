@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+
 import cc.kune.domain.utils.HasId;
 
 /**
@@ -27,6 +29,11 @@ public class Properties implements HasId {
     @GeneratedValue
     private Long id;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @MapKey(name = "property")
+    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
+    private Map<Property, PropertySetted> list;
+
     /**
      * Every list of properties are from a unique PropertyGroup (like User
      * properties, or Group properties)
@@ -35,12 +42,6 @@ public class Properties implements HasId {
     @NotNull
     @ManyToOne
     private final PropertyGroup pgroup;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @MapKey(name = "property")
-    // @Cascade( { org.hibernate.annotations.CascadeType.DELETE_ORPHAN })
-    // @OnDelete(action = OnDeleteAction.CASCADE)
-    private Map<Property, PropertySetted> list;
 
     public Properties() {
         this(null);
@@ -57,6 +58,7 @@ public class Properties implements HasId {
     // return null;
     // }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -69,6 +71,7 @@ public class Properties implements HasId {
         return pgroup;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }

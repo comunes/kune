@@ -2,7 +2,8 @@
     xmlns:ui="urn:ui:com.google.gwt.uibinder"
     xmlns:g='urn:import:com.google.gwt.user.client.ui'
     xmlns:s='urn:import:org.waveprotocol.box.webclient.client'
-    xmlns:w='urn:import:org.waveprotocol.wave.client.widget.common' >
+    xmlns:w='urn:import:org.waveprotocol.wave.client.widget.common'
+    xmlns:n='urn:import:org.waveprotocol.box.webclient.client.wavelist'>
   <ui:style type="cc.kune.wave.client.WebClient.Style">
     @def rootBackground #f0f0ff;
     @def gap 5px;
@@ -56,8 +57,8 @@
         <g:south size="200">
           <s:DebugMessagePanel ui:field="logPanel" styleName="{style.subPanel} {style.debugPanel}" />
         </g:south>
-        <g:west size="300">
-          <s:WaveList styleName="{style.subPanel} {style.waveList}" />
+        <g:west size="400">
+          <n:WaveListPanel ui:field="listPanel" styleName="{style.waveList}" />
         </g:west>
         <g:center>
           <w:ImplPanel ui:field="contentPanel"></w:ImplPanel>

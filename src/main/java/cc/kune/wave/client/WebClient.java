@@ -89,11 +89,11 @@ public class WebClient extends Composite {
             GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
         }
 
-        private static String maybe(int value, String otherwise) {
+        private static String maybe(final int value, final String otherwise) {
             return value != -1 ? String.valueOf(value) : otherwise;
         }
 
-        private static String maybe(String value, String otherwise) {
+        private static String maybe(final String value, final String otherwise) {
             return value != null ? value : otherwise;
         }
 
@@ -106,7 +106,7 @@ public class WebClient extends Composite {
         /** Next handler in the handler chain. */
         private final UncaughtExceptionHandler next;
 
-        private ErrorHandler(UncaughtExceptionHandler next) {
+        private ErrorHandler(final UncaughtExceptionHandler next) {
             this.next = next;
         }
 
@@ -124,12 +124,12 @@ public class WebClient extends Composite {
             DeferredCommand.addCommand(new Command() {
                 @Override
                 public void execute() {
-                    SafeHtmlBuilder stack = new SafeHtmlBuilder();
+                    final SafeHtmlBuilder stack = new SafeHtmlBuilder();
 
                     Throwable error = t;
                     while (error != null) {
                         stack.appendEscaped(String.valueOf(error.getMessage())).appendHtmlConstant("<br>");
-                        for (StackTraceElement elt : error.getStackTrace()) {
+                        for (final StackTraceElement elt : error.getStackTrace()) {
                             stack.appendHtmlConstant("  ").appendEscaped(maybe(elt.getClassName(), "??")).appendHtmlConstant(
                                     ".") //
                             .appendEscaped(maybe(elt.getMethodName(), "??")).appendHtmlConstant(" (") //
@@ -149,13 +149,13 @@ public class WebClient extends Composite {
         }
 
         @Override
-        public void onUncaughtException(Throwable e) {
+        public void onUncaughtException(final Throwable e) {
             if (!hasFired) {
                 hasFired = true;
                 final ErrorIndicatorPresenter error = ErrorIndicatorPresenter.create(RootPanel.get("banner"));
                 getStackTraceAsync(e, new Accessor<SafeHtml>() {
                     @Override
-                    public void use(SafeHtml stack) {
+                    public void use(final SafeHtml stack) {
                         error.addDetail(stack, null);
                     }
                 });
@@ -214,7 +214,7 @@ public class WebClient extends Composite {
         ErrorHandler.install();
 
         // Set up UI
-        DockLayoutPanel self = BINDER.createAndBindUi(this);
+        final DockLayoutPanel self = BINDER.createAndBindUi(this);
         initWidget(self);
         // RootPanel.get("app").add(self);
         // DockLayoutPanel forcibly conflicts with sensible layout control, and
@@ -232,7 +232,7 @@ public class WebClient extends Composite {
             // For handling the opening of wave using the new wave panel
             ClientEvents.get().addWaveSelectionEventHandler(new WaveSelectionEventHandler() {
                 @Override
-                public void onSelection(WaveRef waveRef) {
+                public void onSelection(final WaveRef waveRef) {
                     openWave(waveRef, false);
                 }
             });
@@ -249,7 +249,7 @@ public class WebClient extends Composite {
         ClientEvents.get().addWaveCreationEventHandler(new WaveCreationEventHandler() {
 
             @Override
-            public void onCreateRequest(WaveCreationEvent event) {
+            public void onCreateRequest(final WaveCreationEvent event) {
                 LOG.info("WaveCreationEvent received");
                 if (channel == null) {
                     throw new RuntimeException("Spaghetti attack.  Create occured before login"); // NOPMD
@@ -261,13 +261,13 @@ public class WebClient extends Composite {
                 }
 
                 if (ClientFlags.get().enableWavePanelHarness()) {
-                    WaveId newWaveId = idGenerator.newWaveId();
+                    final WaveId newWaveId = idGenerator.newWaveId();
                     openWave(WaveRef.of(newWaveId), true);
                 } else {
-                    WaveId newWaveId = idGenerator.newWaveId();
+                    final WaveId newWaveId = idGenerator.newWaveId();
                     ClientEvents.get().fireEvent(new WaveSelectionEvent(WaveRef.of(newWaveId)));
-                    ObservableConversation convo = waveView.getConversationView().createRoot();
-                    CcBasedWavelet rootWavelet = waveView.getCcStackManager().getView().getRoot();
+                    final ObservableConversation convo = waveView.getConversationView().createRoot();
+                    final CcBasedWavelet rootWavelet = waveView.getCcStackManager().getView().getRoot();
                     rootWavelet.addParticipant(loggedInUser);
                     LOG.info("created conversation: " + convo);
                     convo.getRootThread().appendBlip();
@@ -279,7 +279,7 @@ public class WebClient extends Composite {
 
         HistorySupport.init();
 
-        websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL()));
+        websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL() + "/wiab/"));
         websocket.connect();
 
         if (Session.get().isLoggedIn()) {
@@ -294,8 +294,8 @@ public class WebClient extends Composite {
     private void configureConnectionIndicator() {
         ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
             @Override
-            public void onNetworkStatus(NetworkStatusEvent event) {
-                Element element = Document.get().getElementById("netstatus");
+            public void onNetworkStatus(final NetworkStatusEvent event) {
+                final Element element = Document.get().getElementById("netstatus");
                 if (element != null) {
                     switch (event.getStatus()) {
                     case CONNECTED:
@@ -316,6 +316,10 @@ public class WebClient extends Composite {
             }
         });
     }
+
+    private native String getBaseUrl() /*-{
+        return !!$wnd.__baseUrl
+    }-*/;
 
     /**
      * Returns <code>ws://yourhost[:port]/</code>.
@@ -339,7 +343,7 @@ public class WebClient extends Composite {
 
         ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
             @Override
-            public void onNetworkStatus(NetworkStatusEvent event) {
+            public void onNetworkStatus(final NetworkStatusEvent event) {
                 if (event.getStatus() == ConnectionStatus.CONNECTED) {
                     openIndexWave();
                 }
@@ -348,27 +352,27 @@ public class WebClient extends Composite {
     }
 
     private void openIndexWave() {
-        SimpleCcDocumentFactory docFactory = new SimpleCcDocumentFactory();
+        final SimpleCcDocumentFactory docFactory = new SimpleCcDocumentFactory();
         final WaveViewServiceImpl indexWave = (WaveViewServiceImpl) backend.getIndexWave(docFactory);
         indexWave.viewOpen(IdFilters.ALL_IDS, null, new WaveViewService.OpenCallback() {
 
             @Override
-            public void onException(ChannelException e) {
+            public void onException(final ChannelException e) {
                 LOG.severe("ChannelException opening index wave", e);
             }
 
             @Override
-            public void onFailure(String reason) {
+            public void onFailure(final String reason) {
                 LOG.info("Failure for index wave " + reason);
             }
 
             @Override
-            public void onSuccess(String response) {
+            public void onSuccess(final String response) {
                 LOG.info("Success for index wave subscription");
             }
 
             @Override
-            public void onUpdate(WaveViewService.WaveViewServiceUpdate update) {
+            public void onUpdate(final WaveViewService.WaveViewServiceUpdate update) {
                 LOG.info("IndexWave update received hasDeltas=" + update.hasDeltas() + "  hasWaveletSnapshot="
                         + update.hasWaveletSnapshot());
                 ClientEvents.get().fireEvent(
@@ -386,7 +390,7 @@ public class WebClient extends Composite {
      * @param isNewWave
      *            whether the wave is being created by this client session.
      */
-    private void openWave(WaveRef waveRef, boolean isNewWave) {
+    private void openWave(final WaveRef waveRef, final boolean isNewWave) {
         LOG.info("WebClient.openWave()");
 
         if (wave != null) {
@@ -397,9 +401,9 @@ public class WebClient extends Composite {
         wave = new StagesProvider(contentPanel.getElement().appendChild(Document.get().createDivElement()),
                 contentPanel, waveRef, channel, idGenerator, isNewWave);
         wave.load(null);
-        String encodedToken = History.getToken();
+        final String encodedToken = History.getToken();
         if (encodedToken != null && !encodedToken.isEmpty()) {
-            WaveRef fromWaveRef = HistorySupport.waveRefFromHistoryToken(encodedToken);
+            final WaveRef fromWaveRef = HistorySupport.waveRefFromHistoryToken(encodedToken);
             if (waveRef == null) {
                 LOG.info("History token contains invalid path: " + encodedToken);
                 return;

@@ -36,6 +36,8 @@ import org.ourproject.kune.platf.server.ServerException;
 import org.ourproject.kune.rack.dock.Dock;
 import org.ourproject.kune.rack.dock.RequestMatcher;
 
+import cc.kune.wave.server.WaveStarter;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -129,9 +131,9 @@ public class RackServletFilter implements Filter {
         module.configure(builder);
 
         final Rack rack = builder.getRack();
-        // WaveStarter waveStarter = new WaveStarter();
+        final WaveStarter waveStarter = new WaveStarter();
         final Injector injector = installInjector(filterConfig, rack);
-        // waveStarter.runMain(injector);
+        waveStarter.runMain(injector);
         startContainerListeners(rack.getListeners(), injector);
         docks = rack.getDocks();
         excludes = rack.getExcludes();

@@ -19,10 +19,10 @@
  \*/
 package org.ourproject.kune.workspace.client.sitebar.sitesign;
 
-import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.state.SiteCommonTokens;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
@@ -37,11 +37,12 @@ public class SiteSignInLinkPanel implements SiteSignInLinkView {
         signInHyperlink = new Hyperlink();
         signInHyperlink.ensureDebugId(SITE_SIGN_IN);
         signInHyperlink.setText(i18n.t("Sign in to collaborate"));
-        signInHyperlink.setTargetHistoryToken(SiteToken.signin.toString());
+        signInHyperlink.setTargetHistoryToken(SiteCommonTokens.SIGNIN);
         ws.getSiteBar().add(signInHyperlink);
         ws.getSiteBar().addSpacer();
     }
 
+    @Override
     public void setVisible(final boolean visible) {
         signInHyperlink.setVisible(visible);
     }

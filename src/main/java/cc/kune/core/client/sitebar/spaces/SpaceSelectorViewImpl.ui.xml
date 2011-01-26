@@ -3,7 +3,7 @@
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:with field='img'
     type='cc.kune.wspace.client.resources.WsArmorResources' />
-  <g:HorizontalPanel ui:field="panel" addStyleNames="k-space-sel k-10corners k-floatright k-pointer" >
+  <g:HorizontalPanel ui:field="panel" addStyleNames="k-space-sel k-10corners k-floatleft k-pointer" >
     <g:ToggleButton ui:field="homeButton" styleName="k-space-sel-btn">
       <g:upFace image='{img.homeSpaceDisabled}' />
       <g:downFace image='{img.homeSpaceEnabled}' />

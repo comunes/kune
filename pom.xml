@@ -296,7 +296,7 @@
     <dependency>
       <groupId>com.calclab.emite</groupId>
       <artifactId>emite</artifactId>
-      <version>0.4.7</version>
+      <version>0.6.0-RC1</version>
     </dependency>
     <dependency>
       <groupId>org.jivesoftware.smack</groupId>
@@ -498,8 +498,13 @@
     <!-- wave -->
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>waveinabox-server</artifactId>
-      <version>0.3.5</version>
+      <artifactId>waveinabox-server-custom</artifactId>
+      <version>0.3.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>proto-gwt</artifactId>
+      <version>0.3.1</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
@@ -511,56 +516,53 @@
       <artifactId>guava-gwt</artifactId>
       <version>r07</version>
     </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>proto-gwt</artifactId>
-      <version>0.3.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>box-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>model-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client-common-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>common-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>util-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>concurrencycontrol-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>client-scheduler-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
-      <artifactId>media-src</artifactId>
-      <version>0.3.0</version>
-    </dependency>
+    <!-- From here necessary as .java not included in waveinabox-serve.jar -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>box-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>model-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>client-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>client-common-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>common-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>util-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>concurrencycontrol-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>client-scheduler-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.waveprotocol</groupId> -->
+    <!-- <artifactId>media-src</artifactId> -->
+    <!-- <version>0.3.0</version> -->
+    <!-- </dependency> -->
+    <!-- to here -->
     <dependency>
       <groupId>net.sourceforge.findbugs</groupId>
       <artifactId>jsr-305</artifactId>

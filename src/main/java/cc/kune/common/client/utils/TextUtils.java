@@ -61,6 +61,10 @@ public class TextUtils {
         return "<a href=\"" + href + "\" target=\"_blank\">" + text + "</a>";
     }
 
+    public static String removeLastSlash(final String text) {
+        return text.replaceFirst("/$", "");
+    }
+
     public static ArrayList<String> splitTags(final String tagsString) {
         final ArrayList<String> tagsList = new ArrayList<String>();
         String tagsCopy = tagsString;

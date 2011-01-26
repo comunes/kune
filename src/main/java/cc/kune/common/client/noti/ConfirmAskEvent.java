@@ -17,7 +17,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   private static final Type<ConfirmAskHandler> TYPE = new Type<ConfirmAskHandler>();
 
-  public static void fire(HasHandlers source, java.lang.String title, java.lang.String message, java.lang.String acceptBtnMsg, java.lang.String cancelBtnMsg, java.lang.String acceptBtnTooltip, java.lang.String cancelBtnTooltip, cc.kune.common.client.noti.SimpleCallback onAccept, cc.kune.common.client.noti.SimpleCallback onCancel) {
+  public static void fire(HasHandlers source, java.lang.String title, java.lang.String message, java.lang.String acceptBtnMsg, java.lang.String cancelBtnMsg, java.lang.String acceptBtnTooltip, java.lang.String cancelBtnTooltip, cc.kune.common.client.utils.SimpleCallback onAccept, cc.kune.common.client.utils.SimpleCallback onCancel) {
     source.fireEvent(new ConfirmAskEvent(title, message, acceptBtnMsg, cancelBtnMsg, acceptBtnTooltip, cancelBtnTooltip, onAccept, onCancel));
   }
 
@@ -35,10 +35,10 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
   java.lang.String cancelBtnMsg;
   java.lang.String acceptBtnTooltip;
   java.lang.String cancelBtnTooltip;
-  cc.kune.common.client.noti.SimpleCallback onAccept;
-  cc.kune.common.client.noti.SimpleCallback onCancel;
+  cc.kune.common.client.utils.SimpleCallback onAccept;
+  cc.kune.common.client.utils.SimpleCallback onCancel;
 
-  public ConfirmAskEvent(java.lang.String title, java.lang.String message, java.lang.String acceptBtnMsg, java.lang.String cancelBtnMsg, java.lang.String acceptBtnTooltip, java.lang.String cancelBtnTooltip, cc.kune.common.client.noti.SimpleCallback onAccept, cc.kune.common.client.noti.SimpleCallback onCancel) {
+  public ConfirmAskEvent(java.lang.String title, java.lang.String message, java.lang.String acceptBtnMsg, java.lang.String cancelBtnMsg, java.lang.String acceptBtnTooltip, java.lang.String cancelBtnTooltip, cc.kune.common.client.utils.SimpleCallback onAccept, cc.kune.common.client.utils.SimpleCallback onCancel) {
     this.title = title;
     this.message = message;
     this.acceptBtnMsg = acceptBtnMsg;
@@ -86,11 +86,11 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     return cancelBtnTooltip;
   }
 
-  public cc.kune.common.client.noti.SimpleCallback getOnAccept() {
+  public cc.kune.common.client.utils.SimpleCallback getOnAccept() {
     return onAccept;
   }
 
-  public cc.kune.common.client.noti.SimpleCallback getOnCancel() {
+  public cc.kune.common.client.utils.SimpleCallback getOnCancel() {
     return onCancel;
   }
 

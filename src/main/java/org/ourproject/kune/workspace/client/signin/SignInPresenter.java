@@ -23,12 +23,12 @@ import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
-import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
@@ -39,9 +39,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
 
-    private SignInView view;
-    private final Provider<UserServiceAsync> userService;
     private final Provider<Register> registerProvider;
+    private final Provider<UserServiceAsync> userService;
+    private SignInView view;
 
     public SignInPresenter(final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
             final Provider<UserServiceAsync> userService, final Provider<Register> registerProvider) {
@@ -50,6 +50,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
         this.registerProvider = registerProvider;
     }
 
+    @Override
     public void doSignIn() {
         registerProvider.get().hide();
         if (session.isLogged()) {
@@ -76,7 +77,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
         view.reset();
         view.hideMessages();
         view.hide();
-        stateManager.gotoToken(SiteToken.register.toString());
+        stateManager.gotoToken(SiteCommonTokens.REGISTER);
     }
 
     public void onFormSignIn() {
@@ -92,6 +93,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
             user.setPassword(passwd);
 
             final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+                @Override
                 public void onFailure(final Throwable caught) {
                     view.unMask();
                     NotifyUser.hideProgress();
@@ -103,6 +105,7 @@ public class SignInPresenter extends SignInAbstractPresenter implements SignIn {
                     }
                 }
 
+                @Override
                 public void onSuccess(final UserInfoDTO userInfoDTO) {
                     onSignIn(userInfoDTO);
                     stateManager.restorePreviousToken();

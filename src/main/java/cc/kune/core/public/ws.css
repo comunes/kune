@@ -3,18 +3,18 @@
 body {
 	background-color: white;
 	color: black;
-	font-family: 'Inconsolata', Arial;
+	font-family: 'UbuntuRegular', Arial;
 	font-size: small;
 	margin: 5px;
 	overflow: hidden;
 }
 
 * {
-	font-family: 'Inconsolata', Arial;
+	font-family: 'UbuntuRegular', Arial;
 }
 
 body.fontface {
-	font: 'Inconsolata', Arial;
+	font: 'UbuntuRegular', Arial;
 }
 
 a {
@@ -359,6 +359,28 @@ a:visited {
 }
 
 .k-space-sel-btn {
-	margin-left: 3px;
+	padding: 0 1px 0 1px;
 	margin: 0 0 -2px;
+}
+
+.k-sitebar-logo {
+	margin-top: 2px;
+}
+
+.x-btn button {
+  font: 18px/27px UbuntuRegular, arial;
+}
+
+.k-btn-sitebar button { 
+  font: 13px UbuntuRegular, arial;  
+  color:#B3B3B3;
+  cursor:pointer;
+  text-decoration:underline;
+  white-space:nowrap;
+  margin-top: -5px;
+  border-bottom:1px solid #B3B3B3;
+}
+
+.k-sitebar { 
+  margin-top: -30px;
 }

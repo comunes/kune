@@ -99,19 +99,8 @@ public class KuneRackModule implements RackModule {
         builder.exclude("/stylesheets/.*");
         builder.exclude("/javascripts/.*");
         builder.exclude("/templates/.*");
-        // wave servlets (see RackServletFilter)
-        // builder.exclude("/gadget.*");
-        // builder.exclude("/attachment/*");
-        // builder.exclude("/auth/signin");
-        // builder.exclude("/auth/signout");
-        // builder.exclude("/auth/register");
-        // builder.exclude("/fetch/*");
-        // builder.exclude("/gadgets.*");
-        // // wave (from ServerRprcProvider)
-        // builder.exclude("/socket");
-        // builder.exclude("/socket.io/*");
-        // builder.exclude("/static/*");
-        // FIXME (add robots and / WaveClientServlet)
+        builder.exclude("/wiab.*");
+        builder.exclude("/socket.*");
 
         builder.at(".*").install(new LogFilter());
         builder.at(".*").install(new GuiceFilter());

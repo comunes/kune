@@ -163,15 +163,11 @@ import org.ourproject.kune.workspace.client.signin.SignIn;
 import org.ourproject.kune.workspace.client.signin.SignInPanel;
 import org.ourproject.kune.workspace.client.signin.SignInPresenter;
 import org.ourproject.kune.workspace.client.signin.SignInView;
-import org.ourproject.kune.workspace.client.site.SiteToken;
 import org.ourproject.kune.workspace.client.site.WorkspaceNotifyUser;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessage;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessagePanel;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessagePresenter;
 import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogo;
-import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLink;
-import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLinkPanel;
-import org.ourproject.kune.workspace.client.sitebar.sitenewgroup.SiteNewGroupLinkPresenter;
 import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
 import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptionsPanel;
 import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptionsPresenter;
@@ -251,14 +247,15 @@ import cc.kune.core.client.rpcservices.SocialNetworkService;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateTokenUtils;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;
@@ -378,17 +375,6 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         p(UserServiceAsync.class), p(ErrorHandler.class));
                 final SiteSignOutLinkPanel panel = new SiteSignOutLinkPanel(presenter,
                         i(I18nUITranslationService.class), i(WorkspaceSkeleton.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
-        register(ApplicationComponentGroup.class, new Factory<SiteNewGroupLink>(SiteNewGroupLink.class) {
-            @Override
-            public SiteNewGroupLink create() {
-                final SiteNewGroupLinkPresenter presenter = new SiteNewGroupLinkPresenter();
-                final SiteNewGroupLinkPanel panel = new SiteNewGroupLinkPanel(presenter, i(WorkspaceSkeleton.class),
-                        i(I18nUITranslationService.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -957,30 +943,34 @@ public class WorkspaceModule extends AbstractExtendedModule {
         });
 
         // Register of tokens like "signin", "newgroup", "translate" etcetera
-        i(StateManager.class).addSiteToken(SiteToken.signin.toString(), new Listener0() {
+        i(StateManager.class).addSiteToken(SiteCommonTokens.SIGNIN, new HistoryTokenCallback() {
+
             @Override
-            public void onEvent() {
+            public void onHistoryToken() {
                 i(SignIn.class).doSignIn();
             }
         });
 
-        i(StateManager.class).addSiteToken(SiteToken.register.toString(), new Listener0() {
+        i(StateManager.class).addSiteToken(SiteCommonTokens.REGISTER, new HistoryTokenCallback() {
+
             @Override
-            public void onEvent() {
+            public void onHistoryToken() {
                 i(Register.class).doRegister();
             }
         });
 
-        i(StateManager.class).addSiteToken(SiteToken.newgroup.toString(), new Listener0() {
+        i(StateManager.class).addSiteToken(SiteCommonTokens.NEWGROUP, new HistoryTokenCallback() {
+
             @Override
-            public void onEvent() {
+            public void onHistoryToken() {
                 i(NewGroup.class).doNewGroup();
             }
         });
 
-        i(StateManager.class).addSiteToken(SiteToken.translate.toString(), new Listener0() {
+        i(StateManager.class).addSiteToken(SiteCommonTokens.TRANSLATE, new HistoryTokenCallback() {
+
             @Override
-            public void onEvent() {
+            public void onHistoryToken() {
                 i(I18nTranslator.class).doShowTranslator();
             }
         });

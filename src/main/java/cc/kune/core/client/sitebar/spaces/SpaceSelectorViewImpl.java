@@ -32,11 +32,11 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
     ToggleButton userButton;
 
     @Inject
-    public SpaceSelectorViewImpl(WsArmor armor, I18nTranslationService i18n) {
+    public SpaceSelectorViewImpl(final WsArmor armor, final I18nTranslationService i18n) {
         armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
         homeButton.setTitle(i18n.t("Home page of this site"));
         userButton.setTitle(i18n.t("User space: Waves (aka docs) in which you participate"));
-        groupButton.setTitle(i18n.t("Group & personal space: Where you can create and publish contents"));
+        groupButton.setTitle(i18n.t("Group and personal space: Where you can create and publish contents"));
         publicButton.setTitle(i18n.t("Public space: This is how the rest of public see your published works"));
     }
 
@@ -46,42 +46,42 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
     }
 
     @UiHandler("groupButton")
-    void onGroupSpaceClick(ClickEvent event) {
+    void onGroupSpaceClick(final ClickEvent event) {
         getUiHandlers().onGroupSpaceSelect();
     }
 
     @UiHandler("homeButton")
-    void onHomeSpaceClick(ClickEvent event) {
+    void onHomeSpaceClick(final ClickEvent event) {
         getUiHandlers().onHomeSpaceSelect();
     }
 
     @UiHandler("publicButton")
-    void onPublicSpaceClick(ClickEvent event) {
+    void onPublicSpaceClick(final ClickEvent event) {
         getUiHandlers().onPublicSpaceClick();
     }
 
     @UiHandler("userButton")
-    void onUserSpaceClick(ClickEvent event) {
+    void onUserSpaceClick(final ClickEvent event) {
         getUiHandlers().onUserSpaceSelect();
     }
 
     @Override
-    public void setGroupBtnDown(boolean down) {
+    public void setGroupBtnDown(final boolean down) {
         groupButton.setDown(down);
     }
 
     @Override
-    public void setHomeBtnDown(boolean down) {
+    public void setHomeBtnDown(final boolean down) {
         homeButton.setDown(down);
     }
 
     @Override
-    public void setPublicBtnDown(boolean down) {
+    public void setPublicBtnDown(final boolean down) {
         publicButton.setDown(down);
     }
 
     @Override
-    public void setUserBtnDown(boolean down) {
+    public void setUserBtnDown(final boolean down) {
         userButton.setDown(down);
     }
 

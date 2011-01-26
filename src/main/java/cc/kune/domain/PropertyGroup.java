@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -27,17 +28,19 @@ public class PropertyGroup implements HasId {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "pgroup")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Property> propertyList;
-
-    @OneToMany(mappedBy = "pgroup")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Properties> propertiesList;
-
     @NotNull
     @Column(unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "pgroup")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    private List<Properties> propertiesList;
+
+    @OneToMany(mappedBy = "pgroup")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    private List<Property> propertyList;
 
     public PropertyGroup() {
         this(null);
@@ -59,6 +62,7 @@ public class PropertyGroup implements HasId {
         return null;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -75,6 +79,7 @@ public class PropertyGroup implements HasId {
         return propertyList;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }

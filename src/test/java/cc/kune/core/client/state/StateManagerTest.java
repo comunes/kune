@@ -5,14 +5,12 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.workspace.client.site.SiteToken;
 
 import cc.kune.core.client.actions.BeforeActionListener;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.calclab.suco.testing.events.MockedListener;
-import com.calclab.suco.testing.events.MockedListener0;
 import com.calclab.suco.testing.events.MockedListener2;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -20,16 +18,16 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class StateManagerTest {
 
     private static final String HASH = "someUserHash";
-    private StateManagerDefault stateManager;
-    private HistoryWrapper history;
-    private ContentProvider contentProvider;
-    private Session session;
-    private MockedListener2<String, String> toolChangeListener;
-    private MockedListener2<String, String> groupChangeListener;
-    private MockedListener<StateAbstractDTO> stateChangeListener;
-    private StateAbstractDTO state;
     private BeforeActionListener beforeChangeListener1;
     private BeforeActionListener beforeChangeListener2;
+    private ContentProvider contentProvider;
+    private MockedListener2<String, String> groupChangeListener;
+    private HistoryWrapper history;
+    private Session session;
+    private StateAbstractDTO state;
+    private MockedListener<StateAbstractDTO> stateChangeListener;
+    private StateManagerDefault stateManager;
+    private MockedListener2<String, String> toolChangeListener;
 
     @Before
     public void before() {
@@ -58,6 +56,13 @@ public class StateManagerTest {
         assertTrue(toolChangeListener.isCalledWithEquals("", ""));
         assertTrue(groupChangeListener.isCalled(2));
         assertTrue(stateChangeListener.isCalled(2));
+    }
+
+    private void changeState(final String... tokens) {
+        for (final String token : tokens) {
+            Mockito.when(state.getStateToken()).thenReturn(new StateToken(token));
+            stateManager.setState(state);
+        }
     }
 
     @Test
@@ -100,6 +105,15 @@ public class StateManagerTest {
         assertTrue(toolChangeListener.isCalledWithEquals("", "tool1"));
         assertTrue(groupChangeListener.isCalledOnce());
         assertTrue(stateChangeListener.isCalled(2));
+    }
+
+    private String confBeforeStateChangeListeners(final boolean value, final boolean value2) {
+        stateManager.addBeforeStateChangeListener(beforeChangeListener1);
+        stateManager.addBeforeStateChangeListener(beforeChangeListener2);
+        final String newToken = "something";
+        Mockito.when(beforeChangeListener1.beforeAction()).thenReturn(value);
+        Mockito.when(beforeChangeListener2.beforeAction()).thenReturn(value2);
+        return newToken;
     }
 
     @SuppressWarnings("unchecked")
@@ -166,44 +180,28 @@ public class StateManagerTest {
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
 
+    private void removeBeforeStateChangeListener() {
+        stateManager.removeBeforeStateChangeListener(beforeChangeListener1);
+        stateManager.removeBeforeStateChangeListener(beforeChangeListener2);
+    }
+
     @SuppressWarnings("unchecked")
     @Test
     public void siteTokenFirstLoadDefContentAndFireListener() {
-        final MockedListener0 listener = new MockedListener0();
-        final String token = SiteToken.signin.toString();
+        final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
+        final String token = SiteCommonTokens.SIGNIN;
         stateManager.addSiteToken(token, listener);
         stateManager.onHistoryChanged(token);
-        assertTrue(listener.isCalledOnce());
+        Mockito.verify(listener, Mockito.times(1)).onHistoryToken();
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
 
     @Test
     public void siteTokenTest() {
-        final MockedListener0 siteTokenListener = new MockedListener0();
+        final HistoryTokenCallback siteTokenListener = Mockito.mock(HistoryTokenCallback.class);
         stateManager.addSiteToken("signin", siteTokenListener);
         stateManager.onHistoryChanged("signIn");
-        siteTokenListener.isCalledOnce();
-    }
-
-    private void changeState(final String... tokens) {
-        for (final String token : tokens) {
-            Mockito.when(state.getStateToken()).thenReturn(new StateToken(token));
-            stateManager.setState(state);
-        }
-    }
-
-    private String confBeforeStateChangeListeners(final boolean value, final boolean value2) {
-        stateManager.addBeforeStateChangeListener(beforeChangeListener1);
-        stateManager.addBeforeStateChangeListener(beforeChangeListener2);
-        final String newToken = "something";
-        Mockito.when(beforeChangeListener1.beforeAction()).thenReturn(value);
-        Mockito.when(beforeChangeListener2.beforeAction()).thenReturn(value2);
-        return newToken;
-    }
-
-    private void removeBeforeStateChangeListener() {
-        stateManager.removeBeforeStateChangeListener(beforeChangeListener1);
-        stateManager.removeBeforeStateChangeListener(beforeChangeListener2);
+        Mockito.verify(siteTokenListener, Mockito.times(1)).onHistoryToken();
     }
 }
