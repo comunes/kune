@@ -94,6 +94,38 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
         stateManager.gotoToken(SiteCommonTokens.REGISTER);
     }
 
+    @Override
+    protected void onBind() {
+        super.onBind();
+        getView().getFirstBtn().addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                onFormSignIn();
+            }
+        });
+        getView().getSecondBtn().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(final ClickEvent event) {
+                onCancel();
+            }
+        });
+        getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
+
+            @Override
+            public void onClose(final CloseEvent<PopupPanel> event) {
+                SignInPresenter.this.onClose();
+            }
+        });
+        getView().getAccountRegister().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(final ClickEvent event) {
+                onAccountRegister();
+            }
+        });
+    }
+
     public void onFormSignIn() {
         getView().validate();
         if (getView().isSignInFormValid()) {
@@ -130,38 +162,6 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
             };
             userService.login(user.getShortName(), user.getPassword(), callback);
         }
-    }
-
-    @Override
-    protected void onReveal() {
-        super.onReveal();
-        getView().getFirstBtn().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                onFormSignIn();
-            }
-        });
-        getView().getSecondBtn().addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(final ClickEvent event) {
-                onCancel();
-            }
-        });
-        getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
-
-            @Override
-            public void onClose(final CloseEvent<PopupPanel> event) {
-                SignInPresenter.this.onClose();
-            }
-        });
-        getView().getAccountRegister().addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(final ClickEvent event) {
-                onAccountRegister();
-            }
-        });
     }
 
     @Override

@@ -61,6 +61,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     private void createMessageErrorIfNeeded() {
         if (messageErrorBar == null) {
             messageErrorBar = new MessageToolbar(images, errorLabelId);
+            dialog.getBottomPanel().add(messageErrorBar);
         }
     }
 

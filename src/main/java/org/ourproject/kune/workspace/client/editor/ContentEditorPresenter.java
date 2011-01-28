@@ -21,13 +21,13 @@ import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
-import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
 
+import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -69,7 +69,7 @@ public class ContentEditorPresenter extends RTESavingEditorPresenter implements 
             final Provider<ColorWebSafePalette> palette, final Provider<EditHtmlDialog> editHtmlDialog,
             final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
             final Provider<InsertTableDialog> insertTableDialog, final Provider<InsertSpecialCharDialog> insCharDialog,
-            final DeferredCommandWrapper deferred, final boolean autoSave, final StateManager stateManager,
+            final SchedulerManager deferred, final boolean autoSave, final StateManager stateManager,
             final SiteSignOutLink siteSignOutLink, final WorkspaceSkeleton wspace, final TimerWrapper timer,
             final EntityTitle entityTitle) {
         super(i18n, session, imgResources, insLinkDialog, palette, editHtmlDialog, insertImageDialog,

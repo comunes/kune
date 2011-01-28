@@ -49,8 +49,6 @@ import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
-import org.ourproject.kune.platf.client.utils.TimerWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbarPresenter;
 import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
@@ -229,6 +227,8 @@ import org.ourproject.kune.workspace.client.wave.WaveInsertPanel;
 import org.ourproject.kune.workspace.client.wave.WaveInsertPresenter;
 
 import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.ErrorHandler;
@@ -995,7 +995,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(Session.class), i(RTEImgResources.class), p(InsertLinkDialog.class),
                         p(ColorWebSafePalette.class), p(EditHtmlDialog.class), p(InsertImageDialog.class),
                         p(InsertMediaDialog.class), p(InsertTableDialog.class), p(InsertSpecialCharDialog.class),
-                        i(DeferredCommandWrapper.class), true, i(StateManager.class), i(SiteSignOutLink.class),
+                        i(SchedulerManager.class), true, i(StateManager.class), i(SiteSignOutLink.class),
                         i(WorkspaceSkeleton.class), i(TimerWrapper.class), i(EntityTitle.class));
                 final ContentEditorPanel panel = new ContentEditorPanel(presenter, i(I18nUITranslationService.class),
                         i(GlobalShortcutRegister.class), i(GuiBindingsRegister.class));

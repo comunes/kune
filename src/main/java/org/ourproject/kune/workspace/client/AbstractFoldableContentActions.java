@@ -33,7 +33,6 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cnt.FoldableContent;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
@@ -46,6 +45,7 @@ import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 import org.ourproject.kune.workspace.client.wave.WaveInsert;
 
+import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -67,6 +67,7 @@ import cc.kune.core.shared.dto.StateContentDTO;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public abstract class AbstractFoldableContentActions {
@@ -75,39 +76,38 @@ public abstract class AbstractFoldableContentActions {
         cnt, ctx
     }
 
-    private static final String PUBLICATION_MENU = "Publication";
+    public static final ActionToolbarPosition CONTENT_BOTTOMBAR = new ActionToolbarPosition("afca-ctn-bottom");
 
     public static final ActionToolbarPosition CONTENT_TOPBAR = new ActionToolbarPosition("afca-ctn-top");
-    public static final ActionToolbarPosition CONTENT_BOTTOMBAR = new ActionToolbarPosition("afca-ctn-bottom");
-    public static final ActionToolbarPosition CONTEXT_TOPBAR = new ActionToolbarPosition("afca-ctx-top");
     public static final ActionToolbarPosition CONTEXT_BOTTOMBAR = new ActionToolbarPosition("afca-ctx-bottom");
+    public static final ActionToolbarPosition CONTEXT_TOPBAR = new ActionToolbarPosition("afca-ctx-top");
+    private static final String PUBLICATION_MENU = "Publication";
 
+    protected final ContentActionRegistry contentActionRegistry;
+    protected final Provider<ContentServiceAsync> contentServiceProvider;
+    protected final ContextActionRegistry contextActionRegistry;
+    protected final ContextNavigator contextNavigator;
+    protected final Provider<ContextPropEditor> contextPropEditorProvider;
+    protected final SchedulerManager deferredCommandWrapper;
+    protected final EntityHeader entityLogo;
+    protected final ErrorHandler errorHandler;
+    protected final Provider<FileDownloadUtils> fileDownloadProvider;
+    protected final Provider<FileUploader> fileUploaderProvider;
+    protected final FoldableContent foldableContent;
+    protected final Provider<GroupServiceAsync> groupServiceProvider;
+    protected final I18nUITranslationService i18n;
+    private final SitePublicSpaceLink publicLink;
     protected final Session session;
     protected final StateManager stateManager;
-    protected final I18nUITranslationService i18n;
-    protected final Provider<ContentServiceAsync> contentServiceProvider;
-    protected final Provider<FileUploader> fileUploaderProvider;
-    protected final ContextNavigator contextNavigator;
-    protected final ErrorHandler errorHandler;
-    protected final Provider<GroupServiceAsync> groupServiceProvider;
-    protected final ContentActionRegistry contentActionRegistry;
-    protected final ContextActionRegistry contextActionRegistry;
-    protected final Provider<FileDownloadUtils> fileDownloadProvider;
     protected final Provider<ContentEditor> textEditorProvider;
-    protected final Provider<ContextPropEditor> contextPropEditorProvider;
-    protected final FoldableContent foldableContent;
-    protected final DeferredCommandWrapper deferredCommandWrapper;
-    protected final EntityHeader entityLogo;
-    private final SitePublicSpaceLink publicLink;
-
-    private final WsBackManager wsBackManager;
 
     private final Provider<WaveInsert> waveInsert;
 
+    private final WsBackManager wsBackManager;
+
     public AbstractFoldableContentActions(final Session session, final StateManager stateManager,
             final I18nUITranslationService i18n, final ErrorHandler errorHandler,
-            final DeferredCommandWrapper deferredCommandWrapper,
-            final Provider<GroupServiceAsync> groupServiceProvider,
+            final SchedulerManager deferredCommandWrapper, final Provider<GroupServiceAsync> groupServiceProvider,
             final Provider<ContentServiceAsync> contentServiceProvider,
             final Provider<FileUploader> fileUploaderProvider, final ContextNavigator contextNavigator,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
@@ -136,6 +136,7 @@ public abstract class AbstractFoldableContentActions {
         this.waveInsert = waveInsert;
         createActions();
         session.onInitDataReceived(new Listener<InitDataDTO>() {
+            @Override
             public void onEvent(final InitDataDTO parameter) {
                 createPostSessionInitActions();
             }
@@ -160,6 +161,7 @@ public abstract class AbstractFoldableContentActions {
             final String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtn = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken stateToken) {
                         contextNavigator.editItem(stateToken);
                     }
@@ -176,6 +178,7 @@ public abstract class AbstractFoldableContentActions {
             final String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContainer = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         NotifyUser.info("Sorry, in development");
                     }
@@ -192,9 +195,11 @@ public abstract class AbstractFoldableContentActions {
             final String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> delContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         contentServiceProvider.get().delContent(session.getUserHash(), token,
                                 new AsyncCallbackSimple<StateContentDTO>() {
+                                    @Override
                                     public void onSuccess(final StateContentDTO state) {
                                         session.setCurrentState(state);
                                         final StateToken parent = token.copy().clearDocument();
@@ -217,6 +222,7 @@ public abstract class AbstractFoldableContentActions {
     protected void createDownloadActions(final String typeUploadedfile) {
         final ActionToolbarButtonDescriptor<StateToken> download = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         downloadContent(token);
                     }
@@ -228,6 +234,7 @@ public abstract class AbstractFoldableContentActions {
 
         final ActionMenuItemDescriptor<StateToken> downloadCtx = new ActionMenuItemDescriptor<StateToken>(
                 AccessRolDTO.Viewer, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         downloadContent(token);
                     }
@@ -244,19 +251,23 @@ public abstract class AbstractFoldableContentActions {
             final String... registerInTypes) {
         final ActionToolbarButtonDescriptor<StateToken> editContent = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.showProgressProcessing();
                         session.check(new AsyncCallbackSimple<Void>() {
+                            @Override
                             public void onSuccess(final Void result) {
                                 final ContentEditor editor = textEditorProvider.get();
                                 foldableContent.detach();
                                 contextNavigator.detach();
                                 contextPropEditorProvider.get().attach();
                                 editor.edit(session.getContentState().getContent(), new Listener<String>() {
+                                    @Override
                                     public void onEvent(final String html) {
                                         NotifyUser.showProgressSaving();
                                         contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
                                                 new AsyncCallback<Void>() {
+                                                    @Override
                                                     public void onFailure(final Throwable caught) {
                                                         NotifyUser.hideProgress();
                                                         if (caught instanceof SessionExpiredException) {
@@ -268,6 +279,7 @@ public abstract class AbstractFoldableContentActions {
                                                         }
                                                     }
 
+                                                    @Override
                                                     public void onSuccess(final Void param) {
                                                         NotifyUser.hideProgress();
                                                         session.getContentState().setContent(html);
@@ -276,10 +288,12 @@ public abstract class AbstractFoldableContentActions {
                                                 });
                                     }
                                 }, new Listener0() {
+                                    @Override
                                     public void onEvent() {
                                         // onClose
-                                        deferredCommandWrapper.addCommand(new Listener0() {
-                                            public void onEvent() {
+                                        deferredCommandWrapper.addCommand(new ScheduledCommand() {
+                                            @Override
+                                            public void execute() {
                                                 foldableContent.attach();
                                                 contextPropEditorProvider.get().detach();
                                                 contextNavigator.attach();
@@ -308,6 +322,7 @@ public abstract class AbstractFoldableContentActions {
     protected ActionMenuItemDescriptor<StateToken> createGoAction(final String... registerInTypes) {
         final ActionMenuItemDescriptor<StateToken> go = new ActionMenuItemDescriptor<StateToken>(AccessRolDTO.Viewer,
                 new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         stateManager.gotoToken(token);
                     }
@@ -322,6 +337,7 @@ public abstract class AbstractFoldableContentActions {
     protected ActionToolbarButtonDescriptor<StateToken> createGoHomeAction(final String... registerInTypes) {
         final ActionToolbarButtonDescriptor<StateToken> goGroupHome = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, CONTEXT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         stateManager.gotoToken(token.getGroup());
                     }
@@ -329,6 +345,7 @@ public abstract class AbstractFoldableContentActions {
         goGroupHome.setMustBeAuthenticated(false);
         goGroupHome.setIconUrl("images/group-home.png");
         goGroupHome.setEnableCondition(new ActionEnableCondition<StateToken>() {
+            @Override
             public boolean mustBeEnabled(final StateToken token) {
                 final StateToken defContentToken = session.getCurrentState().getGroup().getDefaultContent().getStateToken();
                 return !session.getCurrentStateToken().equals(defContentToken);
@@ -345,10 +362,12 @@ public abstract class AbstractFoldableContentActions {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addFolder;
         addFolder = new ActionToolbarMenuAndItemDescriptor<StateToken>(AccessRolDTO.Editor, CONTEXT_TOPBAR,
                 new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
                                 contentTypeId, new AsyncCallbackSimple<StateContainerDTO>() {
+                                    @Override
                                     public void onSuccess(final StateContainerDTO state) {
                                         contextNavigator.setEditOnNextStateChange(true);
                                         stateManager.setRetrievedState(state);
@@ -368,11 +387,13 @@ public abstract class AbstractFoldableContentActions {
             final String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addContent = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener0() {
+                    @Override
                     public void onEvent() {
                         NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().addContent(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), description, typeId,
                                 new AsyncCallbackSimple<StateContentDTO>() {
+                                    @Override
                                     public void onSuccess(final StateContentDTO state) {
                                         contextNavigator.setEditOnNextStateChange(true);
                                         stateManager.setRetrievedState(state);
@@ -394,6 +415,7 @@ public abstract class AbstractFoldableContentActions {
             final String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> refreshCnt = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken stateToken) {
                         stateManager.reload();
                         contextNavigator.selectItem(stateToken);
@@ -411,6 +433,7 @@ public abstract class AbstractFoldableContentActions {
             final String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> refreshCtx = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken stateToken) {
                         stateManager.reload();
                         contextNavigator.selectItem(stateToken);
@@ -428,6 +451,7 @@ public abstract class AbstractFoldableContentActions {
             final String parentMenuTitleCtx, final String textDescription, final String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> renameCtx = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken stateToken) {
                         contextNavigator.editItem(stateToken);
                     }
@@ -443,10 +467,12 @@ public abstract class AbstractFoldableContentActions {
         final ActionToolbarMenuDescriptor<StateToken> setAsDefGroupContent;
         setAsDefGroupContent = new ActionToolbarMenuDescriptor<StateToken>(AccessRolDTO.Administrator, CONTENT_TOPBAR,
                 new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         NotifyUser.showProgressProcessing();
                         contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
                                 new AsyncCallbackSimple<ContentSimpleDTO>() {
+                                    @Override
                                     public void onSuccess(final ContentSimpleDTO defContent) {
                                         session.getCurrentState().getGroup().setDefaultContent(defContent);
                                         NotifyUser.hideProgress();
@@ -466,9 +492,11 @@ public abstract class AbstractFoldableContentActions {
     protected void createSetGroupBackImageAction(final String parentMenuTitle, final String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> setGroupBackImage = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         groupServiceProvider.get().setGroupBackImage(session.getUserHash(), token,
                                 new AsyncCallbackSimple<GroupDTO>() {
+                                    @Override
                                     public void onSuccess(final GroupDTO newGroup) {
                                         if (session.getCurrentState().getGroup().getShortName().equals(
                                                 newGroup.getShortName())) {
@@ -484,6 +512,7 @@ public abstract class AbstractFoldableContentActions {
         setGroupBackImage.setTextDescription(i18n.t("Set this as the group background image"));
         setGroupBackImage.setIconUrl("images/nav/picture.png");
         setGroupBackImage.setEnableCondition(new ActionEnableCondition<StateToken>() {
+            @Override
             public boolean mustBeEnabled(final StateToken token) {
                 return session.getContentState().getMimeType().isImage();
             }
@@ -495,10 +524,12 @@ public abstract class AbstractFoldableContentActions {
             final ContentStatus status, final String[] contentsModerated) {
         final ActionToolbarMenuRadioDescriptor<StateToken> action = new ActionToolbarMenuRadioDescriptor<StateToken>(
                 rol, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken stateToken) {
                         setContentStatus(status, stateToken);
                     }
                 }, "ContentRadioStatus", new RadioMustBeChecked() {
+                    @Override
                     public boolean mustBeChecked() {
                         if (session.getContainerState() instanceof StateContentDTO) {
                             final ContentStatus currentStatus = session.getContentState().getStatus();
@@ -516,6 +547,7 @@ public abstract class AbstractFoldableContentActions {
     protected void createShowDeletedItems(final String parentMenuTitle, final String... registerInTypes) {
         final ActionToolbarMenuCheckItemDescriptor<StateToken> showDeletedItems = new ActionToolbarMenuCheckItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener0() {
+                    @Override
                     public void onEvent() {
                         final boolean mustShow = !session.getCurrentUserInfo().getShowDeletedContent();
                         session.getCurrentUserInfo().setShowDeletedContent(mustShow);
@@ -527,6 +559,7 @@ public abstract class AbstractFoldableContentActions {
                         contextNavigator.refreshState();
                     }
                 }, new ActionCheckedCondition() {
+                    @Override
                     public boolean mustBeChecked() {
                         return session.getShowDeletedContent();
                     }
@@ -541,6 +574,7 @@ public abstract class AbstractFoldableContentActions {
             final String... registerInTypes) {
         final ActionToolbarMenuDescriptor<StateToken> translateContent = new ActionToolbarMenuDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken stateToken) {
                         NotifyUser.important(i18n.t("Sorry, this functionality is currently in development"));
                     }
@@ -560,6 +594,7 @@ public abstract class AbstractFoldableContentActions {
         final ActionToolbarButtonAndItemDescriptor<StateToken> uploadFile;
         uploadFile = new ActionToolbarButtonAndItemDescriptor<StateToken>(AccessRolDTO.Editor, CONTEXT_BOTTOMBAR,
                 new Listener0() {
+                    @Override
                     public void onEvent() {
                         if (permitedExtensions != null) {
                             // FIXME: can't be reset ...
@@ -590,6 +625,7 @@ public abstract class AbstractFoldableContentActions {
             final String parentMenuTitle, final Position position, final String... registerInTypes) {
         final ActionToolbarMenuAndItemDescriptor<StateToken> addWave = new ActionToolbarMenuAndItemDescriptor<StateToken>(
                 AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken parentToken) {
                         waveInsert.get().show(parentToken);
                     }
@@ -609,6 +645,7 @@ public abstract class AbstractFoldableContentActions {
 
     private ActionEnableCondition<StateToken> notDefAndNotDeleted() {
         return new ActionEnableCondition<StateToken>() {
+            @Override
             public boolean mustBeEnabled(final StateToken token) {
                 final boolean isNotDefContentToken = !session.getCurrentState().getGroup().getDefaultContent().getStateToken().equals(
                         session.getCurrentStateToken());
@@ -619,6 +656,7 @@ public abstract class AbstractFoldableContentActions {
 
     private ActionEnableCondition<StateToken> notDeleted() {
         return new ActionEnableCondition<StateToken>() {
+            @Override
             public boolean mustBeEnabled(final StateToken token) {
                 final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
                         ContentStatus.inTheDustbin));
@@ -638,6 +676,7 @@ public abstract class AbstractFoldableContentActions {
 
     private void setContentStatus(final ContentStatus status, final StateToken stateToken) {
         final AsyncCallbackSimple<StateAbstractDTO> callback = new AsyncCallbackSimple<StateAbstractDTO>() {
+            @Override
             public void onSuccess(final StateAbstractDTO state) {
                 if (session.inSameToken(stateToken)) {
                     session.setCurrentState(state);

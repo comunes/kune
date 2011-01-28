@@ -88,6 +88,34 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
         return (RegisterView) super.getView();
     }
 
+    @Override
+    protected void onBind() {
+        super.onBind();
+        getView().getFirstBtn().addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                getView().validate();
+                if (getView().isValid()) {
+                    onFormRegister();
+                }
+            }
+        });
+        getView().getSecondBtn().addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(final ClickEvent event) {
+                onCancel();
+            }
+        });
+        getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
+
+            @Override
+            public void onClose(final CloseEvent<PopupPanel> event) {
+                RegisterPresenter.this.onClose();
+            }
+        });
+    }
+
     public void onFormRegister() {
         if (getView().isRegisterFormValid()) {
             getView().maskProcessing();
@@ -117,7 +145,6 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
                     } else {
                         getView().setErrorMessage(i18n.t("Error during registration."), NotifyLevel.error);
                         throw new UIException("Other kind of exception in user registration", caught);
-
                     }
                 }
 
@@ -136,34 +163,6 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
             };
             userServiceProvider.get().createUser(user, wantHomepage, callback);
         }
-    }
-
-    @Override
-    protected void onReveal() {
-        super.onReveal();
-        getView().getFirstBtn().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                getView().validate();
-                if (getView().isValid()) {
-                    onFormRegister();
-                }
-            }
-        });
-        getView().getSecondBtn().addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(final ClickEvent event) {
-                onCancel();
-            }
-        });
-        getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
-
-            @Override
-            public void onClose(final CloseEvent<PopupPanel> event) {
-                RegisterPresenter.this.onClose();
-            }
-        });
     }
 
     @Override

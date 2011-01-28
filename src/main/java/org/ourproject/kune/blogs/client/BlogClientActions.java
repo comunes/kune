@@ -26,7 +26,6 @@ import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_UPLOADEDFILE;
 
 import org.ourproject.kune.blogs.client.cnt.BlogViewer;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
@@ -39,6 +38,7 @@ import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 import org.ourproject.kune.workspace.client.wave.WaveInsert;
 
+import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -51,7 +51,7 @@ import com.calclab.suco.client.ioc.Provider;
 public class BlogClientActions extends AbstractFoldableContentActions {
     public BlogClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager,
-            final DeferredCommandWrapper deferredCommandWrapper,
+            final SchedulerManager deferredCommandWrapper,
             final Provider<ContentServiceAsync> contentServiceProvider,
             final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,

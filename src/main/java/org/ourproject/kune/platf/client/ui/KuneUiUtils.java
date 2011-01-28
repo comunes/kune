@@ -29,6 +29,7 @@ import com.gwtext.client.core.Ext;
 import com.gwtext.client.widgets.ToolTip;
 import com.gwtext.client.widgets.form.Field;
 
+@Deprecated
 public final class KuneUiUtils {
 
     public enum IconPosition {

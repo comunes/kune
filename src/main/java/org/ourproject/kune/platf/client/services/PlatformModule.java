@@ -94,10 +94,10 @@ import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialogPres
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditor;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
-import org.ourproject.kune.platf.client.utils.TimerWrapper;
 
 import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.AccessRightsClientManager;
@@ -183,10 +183,10 @@ public class PlatformModule extends AbstractExtendedModule {
 //            }
 //        });
 
-        register(Singleton.class, new Factory<DeferredCommandWrapper>(DeferredCommandWrapper.class) {
+        register(Singleton.class, new Factory<SchedulerManager>(SchedulerManager.class) {
             @Override
-            public DeferredCommandWrapper create() {
-                return new DeferredCommandWrapper();
+            public SchedulerManager create() {
+                return new SchedulerManager();
             }
         });
 
@@ -262,7 +262,7 @@ public class PlatformModule extends AbstractExtendedModule {
                 final RTEditorPresenter presenter = new RTEditorPresenter(i(I18nTranslationService.class),
                         i(Session.class),  i(RTEImgResources.class), p(InsertLinkDialog.class),
                         p(ColorWebSafePalette.class), p(EditHtmlDialog.class), p(InsertImageDialog.class),
-                        p(InsertMediaDialog.class),   p(InsertTableDialog.class), p(InsertSpecialCharDialog.class), i(DeferredCommandWrapper.class));
+                        p(InsertMediaDialog.class),   p(InsertTableDialog.class), p(InsertSpecialCharDialog.class), i(SchedulerManager.class));
                 final RTEditorPanel panel = new RTEditorPanel(presenter, i(I18nUITranslationService.class),
                          i(GlobalShortcutRegister.class), i(GuiBindingsRegister.class));
                 presenter.init(panel);
@@ -274,7 +274,7 @@ public class PlatformModule extends AbstractExtendedModule {
                 final RTESavingEditorPresenter presenter = new RTESavingEditorPresenter(i(I18nTranslationService.class),
                         i(Session.class),  i(RTEImgResources.class), p(InsertLinkDialog.class),
                         p(ColorWebSafePalette.class), p(EditHtmlDialog.class), p(InsertImageDialog.class),
-                        p(InsertMediaDialog.class),   p(InsertTableDialog.class), p(InsertSpecialCharDialog.class), i(DeferredCommandWrapper.class), true,
+                        p(InsertMediaDialog.class),   p(InsertTableDialog.class), p(InsertSpecialCharDialog.class), i(SchedulerManager.class), true,
                          i(StateManager.class),
                         i(TimerWrapper.class));
                 final RTESavingEditorPanel panel = new RTESavingEditorPanel(presenter, i(I18nUITranslationService.class),

@@ -41,8 +41,8 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.LinkInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 
+import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -51,6 +51,7 @@ import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 
@@ -62,10 +63,12 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             createPalette();
             final Event event = actionEvent.getEvent();
             palette.show(event.getClientX(), event.getClientY(), new Listener<String>() {
+                @Override
                 public void onEvent(final String color) {
                     palette.hide();
                     view.setBackColor(color);
@@ -80,6 +83,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.focus();
             view.insertBlockquote();
@@ -92,6 +96,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.toggleBold();
             fireOnEdit();
@@ -103,21 +108,25 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
-            deferred.addCommand(new Listener0() {
-                public void onEvent() {
+            deferred.addCommand(new ScheduledCommand() {
+                @Override
+                public void execute() {
                     view.focus();
                     final String author = session.isLogged() ? session.getCurrentUser().getShortName()
                             : i18n.t("anonymous user");
                     if (view.isAnythingSelected()) {
                         NotifyUser.askConfirmation(i18n.t("Insert a comment"),
                                 i18n.t("Include the selected text in the comment?"), new Listener0() {
+                                    @Override
                                     public void onEvent() {
                                         // include selection in
                                         // comment
                                         view.insertCommentUsingSelection(author);
                                     }
                                 }, new Listener0() {
+                                    @Override
                                     public void onEvent() {
                                         // not include selection in
                                         // comment;
@@ -144,6 +153,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.copy();
         }
@@ -154,13 +164,16 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
-            deferred.addCommand(new Listener0() {
+            deferred.addCommand(new ScheduledCommand() {
                 private InsertLinkDialog insLinkDialog;
 
-                public void onEvent() {
+                @Override
+                public void execute() {
                     if (insLinkListener == null) {
                         insLinkListener = new Listener<LinkInfo>() {
+                            @Override
                             public void onEvent(final LinkInfo linkInfo) {
                                 final String link = linkInfo.toString();
                                 Log.debug("Link: " + link);
@@ -197,6 +210,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.cut();
             fireOnEdit();
@@ -208,6 +222,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.leftIndent();
             fireOnEdit();
@@ -219,9 +234,11 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
-            deferred.addCommand(new Listener0() {
-                public void onEvent() {
+            deferred.addCommand(new ScheduledCommand() {
+                @Override
+                public void execute() {
                     view.getRangeInfo();
                 }
             });
@@ -235,9 +252,11 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             if (updHtmlListener == null) {
                 updHtmlListener = new Listener<String>() {
+                    @Override
                     public void onEvent(final String html) {
                         view.setHTML(html);
                         fireOnEdit();
@@ -262,6 +281,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super.putValue(FONT_NAME, fontName);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             final String fontName = getFontName();
             view.setFontName(fontName);
@@ -279,10 +299,12 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             createPalette();
             final Event event = actionEvent.getEvent();
             palette.show(event.getClientX(), event.getClientY(), new Listener<String>() {
+                @Override
                 public void onEvent(final String color) {
                     palette.hide();
                     view.setForeColor(color);
@@ -302,6 +324,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             this.fontSize = fontSize;
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.setFontSize(FONT_SIZES[fontSize]);
             fireOnEdit();
@@ -314,6 +337,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.focus();
             view.insertHorizontalRule();
@@ -326,13 +350,16 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
-            deferred.addCommand(new Listener0() {
+            deferred.addCommand(new ScheduledCommand() {
                 private InsertImageDialog insImgDialog;
 
-                public void onEvent() {
+                @Override
+                public void execute() {
                     if (insImgListener == null) {
                         insImgListener = new Listener<ImageInfo>() {
+                            @Override
                             public void onEvent(final ImageInfo imageInfo) {
                                 Log.debug("Image: " + imageInfo);
                                 view.focus();
@@ -358,6 +385,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.rightIndent();
             fireOnEdit();
@@ -369,13 +397,16 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
-            deferred.addCommand(new Listener0() {
+            deferred.addCommand(new ScheduledCommand() {
                 private InsertMediaDialog insMediaDialog;
 
-                public void onEvent() {
+                @Override
+                public void execute() {
                     if (insMediaListener == null) {
                         insMediaListener = new Listener<String>() {
+                            @Override
                             public void onEvent(final String html) {
                                 Log.debug("Media: " + html);
                                 view.focus();
@@ -402,10 +433,12 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             NotifyUser.showProgressLoading();
             if (insCharListener == null) {
                 insCharListener = new Listener<String>() {
+                    @Override
                     public void onEvent(final String character) {
                         view.insertHtml(character);
                     }
@@ -428,9 +461,11 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             if (insTableListener == null) {
                 insTableListener = new Listener<String>() {
+                    @Override
                     public void onEvent(final String table) {
                         view.insertHtml(table);
                         fireOnEdit();
@@ -450,6 +485,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.toggleItalic();
             fireOnEdit();
@@ -461,6 +497,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.justifyCenter();
             fireOnEdit();
@@ -472,6 +509,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.justifyLeft();
             fireOnEdit();
@@ -483,6 +521,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.justifyRight();
             fireOnEdit();
@@ -494,6 +533,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.insertOrderedList();
             fireOnEdit();
@@ -505,6 +545,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.paste();
             fireOnEdit();
@@ -516,6 +557,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.redo();
             fireOnEdit();
@@ -527,6 +569,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.removeFormat();
             fireOnEdit();
@@ -538,9 +581,11 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
-            deferred.addCommand(new Listener0() {
-                public void onEvent() {
+            deferred.addCommand(new ScheduledCommand() {
+                @Override
+                public void execute() {
                     view.unlink();
                     hideLinkCtxMenu();
                     fireOnEdit();
@@ -554,6 +599,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.selectAll();
         }
@@ -564,6 +610,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.toggleStrikethrough();
             fireOnEdit();
@@ -575,6 +622,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.toggleSubscript();
             fireOnEdit();
@@ -586,6 +634,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.toggleSuperscript();
             fireOnEdit();
@@ -597,6 +646,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.insertUnorderedList();
             fireOnEdit();
@@ -608,6 +658,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.toggleUnderline();
             fireOnEdit();
@@ -619,70 +670,71 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             view.undo();
             fireOnEdit();
         }
     }
 
+    private static final String FONT_GROUP = "fontgroup";
     private static final String FONT_NAMES[] = { "Times New Roman", "Arial", "Courier New", "Georgia", "Trebuchet",
             "Verdana" };
     private static final String FONT_SIZE_NAMES[] = { "Extra small", "Very small (normal)", "Small", "Medium", "Large",
             "Very large", "Extra large" };
+    private static final String FONT_SIZEGROUP = "fontsizegroup";
     private static final RichTextArea.FontSize[] FONT_SIZES = new RichTextArea.FontSize[] {
             RichTextArea.FontSize.XX_SMALL, RichTextArea.FontSize.X_SMALL, RichTextArea.FontSize.SMALL,
             RichTextArea.FontSize.MEDIUM, RichTextArea.FontSize.LARGE, RichTextArea.FontSize.X_LARGE,
             RichTextArea.FontSize.XX_LARGE };
-    private static final String FONT_GROUP = "fontgroup";
-    private static final String FONT_SIZEGROUP = "fontsizegroup";
 
-    private RTEditorView view;
-    private boolean extended;
-    private final I18nTranslationService i18n;
-    private final Session session;
-    private final RTEImgResources imgResources;
-    private final Event0 onEdit;
-    private final DeferredCommandWrapper deferred;
-    private final Provider<ColorWebSafePalette> paletteProvider;
-    private final Provider<InsertLinkDialog> insLinkDialogPv;
-    private final Provider<EditHtmlDialog> editHtmlDialogPv;
-    private final Provider<InsertImageDialog> insImgDialogProv;
-    private final Provider<InsertTableDialog> insTableDialogPv;
-    private final Provider<InsertSpecialCharDialog> insCharDialogProv;
-    private final Provider<InsertMediaDialog> insMediaDialogPv;
-    private Listener<String> insTableListener;
-    private Listener<LinkInfo> insLinkListener;
-    private Listener<ImageInfo> insImgListener;
-    private Listener<String> insMediaListener;
-    private Listener<String> updHtmlListener;
-    protected Listener<String> insCharListener;
-    protected ColorWebSafePalette palette;
-    private PushButtonDescriptor bold;
-    private PushButtonDescriptor italic;
-    private PushButtonDescriptor underline;
-    private PushButtonDescriptor strikethrough;
-    private final GuiAddCondition basicAddCond;
-    private final GuiAddCondition extendedAddCond;
-    private final InputMap inputMap;
-    private MenuDescriptor editMenu;
-    private MenuDescriptor insertMenu;
-    private MenuDescriptor formatMenu;
-    private MenuDescriptor linkCtxMenu;
     private GuiActionDescCollection actions;
+    protected boolean attached;
+    private final GuiAddCondition basicAddCond;
+    private PushButtonDescriptor bold;
+    private MenuCheckItemDescriptor currentFontItem;
+    private final SchedulerManager deferred;
+    private final Provider<EditHtmlDialog> editHtmlDialogPv;
+    private MenuDescriptor editMenu;
+    private boolean extended;
+    private final GuiAddCondition extendedAddCond;
+    private MenuDescriptor fileMenu;
+    private final Map<String, MenuCheckItemDescriptor> fontActions;
     private MenuDescriptor fontMenu;
     private MenuDescriptor fontSizeMenu;
-    private MenuDescriptor fileMenu;
+    private MenuDescriptor formatMenu;
+    private final I18nTranslationService i18n;
+    private final RTEImgResources imgResources;
+    private final InputMap inputMap;
+    private final Provider<InsertSpecialCharDialog> insCharDialogProv;
+    protected Listener<String> insCharListener;
+    private MenuDescriptor insertMenu;
+    private final Provider<InsertImageDialog> insImgDialogProv;
+    private Listener<ImageInfo> insImgListener;
+    private final Provider<InsertLinkDialog> insLinkDialogPv;
+    private Listener<LinkInfo> insLinkListener;
+    private final Provider<InsertMediaDialog> insMediaDialogPv;
+    private Listener<String> insMediaListener;
+    private final Provider<InsertTableDialog> insTableDialogPv;
+    private Listener<String> insTableListener;
+    private PushButtonDescriptor italic;
+    private MenuDescriptor linkCtxMenu;
     private final List<MenuDescriptor> menus;
-    protected boolean attached;
-    private final Map<String, MenuCheckItemDescriptor> fontActions;
-    private MenuCheckItemDescriptor currentFontItem;
+    private final Event0 onEdit;
+    protected ColorWebSafePalette palette;
+    private final Provider<ColorWebSafePalette> paletteProvider;
+    private final Session session;
+    private PushButtonDescriptor strikethrough;
+    private PushButtonDescriptor underline;
+    private Listener<String> updHtmlListener;
+    private RTEditorView view;
 
     public RTEditorPresenter(final I18nTranslationService i18n, final Session session,
             final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
             final Provider<ColorWebSafePalette> palette, final Provider<EditHtmlDialog> editHtmlDialog,
             final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
             final Provider<InsertTableDialog> insertTableDialog, final Provider<InsertSpecialCharDialog> insCharDialog,
-            final DeferredCommandWrapper deferred) {
+            final SchedulerManager deferred) {
         super();
         this.i18n = i18n;
         this.session = session;
@@ -700,11 +752,13 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         this.imgResources = imgResources;
         this.onEdit = new Event0("onRTEEdit");
         extendedAddCond = new GuiAddCondition() {
+            @Override
             public boolean mustBeAdded() {
                 return isAndCanBeExtended();
             }
         };
         basicAddCond = new GuiAddCondition() {
+            @Override
             public boolean mustBeAdded() {
                 return view.canBeBasic();
             }
@@ -719,6 +773,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         checkForMenus(descriptor);
     }
 
+    @Override
     public void addOnEditListener(final Listener0 listener) {
         onEdit.add(listener);
     }
@@ -727,151 +782,12 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         view.adjustSize(height);
     }
 
+    @Override
     public void attach() {
         if (!attached) {
             attached = true;
             attachActions();
             view.setInputMap(inputMap);
-        }
-    }
-
-    public void detach() {
-        // Nothing at the moment
-    }
-
-    public void fireOnEdit() {
-        onEdit.fire();
-    }
-
-    public GuiAddCondition getBasicAddCondition() {
-        return basicAddCond;
-    }
-
-    public MenuDescriptor getEditMenu() {
-        return editMenu;
-    }
-
-    public View getEditorArea() {
-        return view;
-    }
-
-    public GuiAddCondition getExtendedAddCondition() {
-        return extendedAddCond;
-    }
-
-    public MenuDescriptor getFileMenu() {
-        return fileMenu;
-    }
-
-    public MenuDescriptor getFormatMenu() {
-        return formatMenu;
-    }
-
-    public String getHtml() {
-        return view.getHTML();
-    }
-
-    public MenuDescriptor getInsertMenu() {
-        return insertMenu;
-    }
-
-    public MenuDescriptor getLinkCtxMenu() {
-        return linkCtxMenu;
-    }
-
-    public View getSndBar() {
-        return view.getSndBar();
-    }
-
-    public String getText() {
-        return view.getText();
-    }
-
-    public View getTopBar() {
-        return view.getTopBar();
-    }
-
-    public void init(final RTEditorView view) {
-        this.view = view;
-        createMainMenus();
-        createBasicActions();
-    }
-
-    public void onEditorFocus() {
-        hideMenus();
-    }
-
-    public void onLostFocus() {
-        // Nothing for the moment
-    }
-
-    public void reset() {
-        hideMenus();
-        hideLinkCtxMenu();
-    }
-
-    public void setActionShortcut(final KeyStroke key, final AbstractAction action) {
-        inputMap.put(key, action);
-        action.setShortcut(key);
-    }
-
-    public void setActionShortcut(final KeyStroke key, final AbstractAction mainAction, final AbstractAction... actions) {
-        setActionShortcut(key, mainAction);
-        for (final AbstractAction action : actions) {
-            action.setShortcut(key);
-        }
-    }
-
-    public void setExtended(final boolean newValue) {
-        this.extended = newValue;
-    }
-
-    public void setFocus(final boolean focus) {
-        view.setFocus(focus);
-    }
-
-    public void setHtml(final String html) {
-        view.setHTML(html);
-        view.focus();
-    }
-
-    public void setLocation(final String location, final GuiActionDescrip... descripts) {
-        for (final GuiActionDescrip descript : descripts) {
-            descript.setLocation(location);
-        }
-    }
-
-    public void setText(final String text) {
-        view.setText(text);
-        view.focus();
-    }
-
-    public void updateLinkInfo() {
-        deferred.addCommand(new Listener0() {
-            public void onEvent() {
-                if (isAndCanBeExtended() && view.isLink()) {
-                    view.showLinkCtxMenu();
-                } else {
-                    hideLinkCtxMenu();
-                }
-            }
-        });
-    }
-
-    public void updateStatus() {
-        if (view.canBeBasic()) {
-            bold.setPushed(view.isBold());
-            italic.setPushed(view.isItalic());
-            underline.setPushed(view.isUnderlined());
-            deferred.addCommand(new Listener0() {
-                public void onEvent() {
-                    updateFont();
-                    // Log.warn(view.getFontSize());
-                }
-            });
-        }
-        if (isAndCanBeExtended()) {
-            strikethrough.setPushed(view.isStrikethrough());
         }
     }
 
@@ -1160,6 +1076,75 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         }
     }
 
+    @Override
+    public void detach() {
+        // Nothing at the moment
+    }
+
+    public void fireOnEdit() {
+        onEdit.fire();
+    }
+
+    @Override
+    public GuiAddCondition getBasicAddCondition() {
+        return basicAddCond;
+    }
+
+    @Override
+    public MenuDescriptor getEditMenu() {
+        return editMenu;
+    }
+
+    @Override
+    public View getEditorArea() {
+        return view;
+    }
+
+    @Override
+    public GuiAddCondition getExtendedAddCondition() {
+        return extendedAddCond;
+    }
+
+    @Override
+    public MenuDescriptor getFileMenu() {
+        return fileMenu;
+    }
+
+    @Override
+    public MenuDescriptor getFormatMenu() {
+        return formatMenu;
+    }
+
+    @Override
+    public String getHtml() {
+        return view.getHTML();
+    }
+
+    @Override
+    public MenuDescriptor getInsertMenu() {
+        return insertMenu;
+    }
+
+    @Override
+    public MenuDescriptor getLinkCtxMenu() {
+        return linkCtxMenu;
+    }
+
+    @Override
+    public View getSndBar() {
+        return view.getSndBar();
+    }
+
+    @Override
+    public String getText() {
+        return view.getText();
+    }
+
+    @Override
+    public View getTopBar() {
+        return view.getTopBar();
+    }
+
     private void hideLinkCtxMenu() {
         if (view.isCtxMenuVisible()) {
             view.hideLinkCtxMenu();
@@ -1175,8 +1160,71 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         }
     }
 
+    public void init(final RTEditorView view) {
+        this.view = view;
+        createMainMenus();
+        createBasicActions();
+    }
+
     private boolean isAndCanBeExtended() {
         return extended && view.canBeExtended();
+    }
+
+    public void onEditorFocus() {
+        hideMenus();
+    }
+
+    public void onLostFocus() {
+        // Nothing for the moment
+    }
+
+    @Override
+    public void reset() {
+        hideMenus();
+        hideLinkCtxMenu();
+    }
+
+    @Override
+    public void setActionShortcut(final KeyStroke key, final AbstractAction action) {
+        inputMap.put(key, action);
+        action.setShortcut(key);
+    }
+
+    @Override
+    public void setActionShortcut(final KeyStroke key, final AbstractAction mainAction, final AbstractAction... actions) {
+        setActionShortcut(key, mainAction);
+        for (final AbstractAction action : actions) {
+            action.setShortcut(key);
+        }
+    }
+
+    @Override
+    public void setExtended(final boolean newValue) {
+        this.extended = newValue;
+    }
+
+    @Override
+    public void setFocus(final boolean focus) {
+        view.setFocus(focus);
+    }
+
+    @Override
+    public void setHtml(final String html) {
+        view.setHTML(html);
+        view.focus();
+    }
+
+    @Override
+    public void setLocation(final String location, final GuiActionDescrip... descripts) {
+        for (final GuiActionDescrip descript : descripts) {
+            descript.setLocation(location);
+        }
+    }
+
+    @Override
+    public void setText(final String text) {
+        view.setText(text);
+        view.focus();
     }
 
     private void updateFont() {
@@ -1191,6 +1239,37 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             item.setChecked(true);
             currentFontItem = item;
             fontMenu.setText((String) item.getValue(FontAction.FONT_NAME));
+        }
+    }
+
+    public void updateLinkInfo() {
+        deferred.addCommand(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                if (isAndCanBeExtended() && view.isLink()) {
+                    view.showLinkCtxMenu();
+                } else {
+                    hideLinkCtxMenu();
+                }
+            }
+        });
+    }
+
+    public void updateStatus() {
+        if (view.canBeBasic()) {
+            bold.setPushed(view.isBold());
+            italic.setPushed(view.isItalic());
+            underline.setPushed(view.isUnderlined());
+            deferred.addCommand(new ScheduledCommand() {
+                @Override
+                public void execute() {
+                    updateFont();
+                    // Log.warn(view.getFontSize());
+                }
+            });
+        }
+        if (isAndCanBeExtended()) {
+            strikethrough.setPushed(view.isStrikethrough());
         }
     }
 }

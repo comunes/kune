@@ -17,29 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.utils;
+package cc.kune.common.client.utils;
 
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 
 /**
- * The Class DeferredCommandWrapper is a wrapper of the GWT DeferredCommand
- * (used for testing classes without GWT dependencies).
+ * The Class {@link #SchedulerManager} is a wrapper of the GWT
+ * {@link #Scheduler} (used for testing classes without GWT dependencies).
  */
-public class DeferredCommandWrapper {
-
+public class SchedulerManager {
     /**
      * Adds the command.
      * 
      * @param command
      *            the listener
      */
-    public void addCommand(final Listener0 command) {
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-            public void execute() {
-                command.onEvent();
-            }
-        });
+    public void addCommand(final ScheduledCommand command) {
+        Scheduler.get().scheduleDeferred(command);
     }
 }

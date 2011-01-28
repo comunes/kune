@@ -2,6 +2,7 @@ package cc.kune.core.client.ui.dialogs;
 
 import cc.kune.common.client.ui.PopupPanelTopCentered;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.user.client.ui.PopupPanel;
 
@@ -19,6 +20,7 @@ public class BasicTopDialog extends BasicDialog {
         super.getTitleText().setText(title);
         // super.setAutoscroll(autoscroll);
         // super.setSize(String.valueOf(width), String.valueOf(height));
+        GWT.log("Not setting size of dialog to: " + String.valueOf(width) + "/" + String.valueOf(height));
         super.setTitleIcon(icon);
         super.getFirstBtnText().setText(firstButtonTitle);
         super.getSecondBtnText().setText(cancelButtonTitle);

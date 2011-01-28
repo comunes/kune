@@ -1,10 +1,15 @@
 package cc.kune.core.client.sitebar.spaces;
 
+import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.wspace.client.WsArmor;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -33,12 +38,19 @@ public class SpaceSelectorPresenter extends
     }
 
     private final WsArmor armor;
+    private final I18nTranslationService i18n;
+    private final Session session;
+    private final Provider<SignIn> signIn;
 
     @Inject
     public SpaceSelectorPresenter(final EventBus eventBus, final SpaceSelectorView view,
-            final SpaceSelectorProxy proxy, final WsArmor armor) {
+            final SpaceSelectorProxy proxy, final WsArmor armor, final Session session, final Provider<SignIn> sigIn,
+            final I18nTranslationService i18n) {
         super(eventBus, view, proxy);
         this.armor = armor;
+        this.session = session;
+        this.signIn = sigIn;
+        this.i18n = i18n;
         getView().setUiHandlers(this);
     }
 
@@ -80,11 +92,17 @@ public class SpaceSelectorPresenter extends
 
     @Override
     public void onUserSpaceSelect() {
-        armor.selectUserSpace();
-        getView().setHomeBtnDown(false);
-        getView().setUserBtnDown(true);
-        getView().setGroupBtnDown(false);
-        getView().setPublicBtnDown(false);
+        if (session.isLogged()) {
+            armor.selectUserSpace();
+            getView().setHomeBtnDown(false);
+            getView().setUserBtnDown(true);
+            getView().setGroupBtnDown(false);
+            getView().setPublicBtnDown(false);
+        } else {
+            signIn.get().doSignIn();
+            getView().setUserBtnDown(false);
+            NotifyUser.info(i18n.t("Sign in to access to your workspace"));
+        }
     }
 
     @Override

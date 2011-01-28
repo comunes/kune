@@ -26,12 +26,12 @@ import org.ourproject.kune.gallery.client.GalleryClientTool;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 
+import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -39,23 +39,23 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 
 public class ChatClientActions {
 
-    private final Session session;
+    private final Provider<AddRoom> addRoomProvider;
     private final Provider<ChatEngine> chatEngineProvider;
     private final ContentActionRegistry contentActionRegistry;
-    private final I18nUITranslationService i18n;
     private final ContextActionRegistry contextActionRegistry;
-    private final Provider<AddRoom> addRoomProvider;
-    private final Provider<DeferredCommandWrapper> deferredWrapper;
+    private final Provider<SchedulerManager> deferredWrapper;
+    private final I18nUITranslationService i18n;
+    private final Session session;
 
     public ChatClientActions(final I18nUITranslationService i18n, final Session session,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<ChatEngine> chatEngine, final Provider<AddRoom> addRoomProvider,
-            final Provider<DeferredCommandWrapper> deferredWrapper) {
+            final Provider<SchedulerManager> deferredWrapper) {
         this.i18n = i18n;
         this.session = session;
         this.contentActionRegistry = contentActionRegistry;
@@ -69,9 +69,11 @@ public class ChatClientActions {
     private void createActions() {
         final ActionToolbarButtonDescriptor<StateToken> chatAbout = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
-                        deferredWrapper.get().addCommand(new Listener0() {
-                            public void onEvent() {
+                        deferredWrapper.get().addCommand(new ScheduledCommand() {
+                            @Override
+                            public void execute() {
                                 final String subject = i18n.t("Chat about: [%s]", session.getContentState().getTitle());
                                 chatEngineProvider.get().joinRoom(token.toString().replaceAll("\\.", "-"), subject,
                                         session.getCurrentUserInfo().getShortName());
@@ -88,6 +90,7 @@ public class ChatClientActions {
 
         final ActionToolbarButtonDescriptor<StateToken> joinRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         final ChatEngine chatEngine = chatEngineProvider.get();
                         chatEngine.joinRoom(session.getContainerState().getContainer().getName(),
@@ -101,6 +104,7 @@ public class ChatClientActions {
 
         final ActionToolbarButtonDescriptor<StateToken> addRoom = new ActionToolbarButtonDescriptor<StateToken>(
                 AccessRolDTO.Administrator, AbstractFoldableContentActions.CONTEXT_TOPBAR, new Listener<StateToken>() {
+                    @Override
                     public void onEvent(final StateToken token) {
                         addRoomProvider.get().show();
                     }
@@ -123,6 +127,7 @@ public class ChatClientActions {
 
     private ActionEnableCondition<StateToken> notDeleted() {
         return new ActionEnableCondition<StateToken>() {
+            @Override
             public boolean mustBeEnabled(final StateToken token) {
                 final boolean isNotDeleted = !(session.isCurrentStateAContent() && session.getContentState().getStatus().equals(
                         ContentStatus.inTheDustbin));

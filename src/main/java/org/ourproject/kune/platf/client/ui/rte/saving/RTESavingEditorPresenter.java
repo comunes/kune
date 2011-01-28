@@ -20,10 +20,11 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
-import org.ourproject.kune.platf.client.utils.TimerWrapper;
 
 import cc.kune.common.client.actions.BeforeActionListener;
+import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.common.client.utils.TimerWrapper;
+import cc.kune.common.client.utils.TimerWrapper.Executer;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -31,6 +32,7 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.resources.client.ImageResource;
 
 
@@ -41,6 +43,7 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             // bitwise, similar to: autoSave = !autoSave; but fast
             autoSave ^= true;
@@ -57,6 +60,7 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             onCancelImpl();
         }
@@ -66,6 +70,7 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             onDoSaveImpl();
         }
@@ -76,6 +81,7 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             if (savePending) {
                 timer.cancel();
@@ -89,27 +95,27 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
     public static final int AUTOSAVE_AFTER_FAIL_MILLS = 20000;
     public static final int AUTOSAVE_IN_MILLIS = 10000;
     private boolean autoSave;
-    private boolean savePending;
-    private boolean saveCloseConfirmed;
-    private Listener<String> onSave;
-    private Listener0 onEditCancelled;
-    private final RTEImgResources imgResources;
-    private final TimerWrapper timer;
-    private final DeferredCommandWrapper deferred;
-    private final I18nTranslationService i18n;
-    private final StateManager stateManager;
     private final BeforeActionListener beforeStateChg;
-    private RTESavingEditorView view;
-
+    private final SchedulerManager deferred;
+    private final I18nTranslationService i18n;
+    private final RTEImgResources imgResources;
+    private Listener0 onEditCancelled;
+    private Listener<String> onSave;
     SaveAction saveAction;
+    private boolean saveCloseConfirmed;
     private SaveAction saveMenuAction;
+    private boolean savePending;
+    private final StateManager stateManager;
+
+    private final TimerWrapper timer;
+    private RTESavingEditorView view;
 
     public RTESavingEditorPresenter(final I18nTranslationService i18n, final Session session,
             final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
             final Provider<ColorWebSafePalette> palette, final Provider<EditHtmlDialog> editHtmlDialog,
             final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
             final Provider<InsertTableDialog> insertTableDialog, final Provider<InsertSpecialCharDialog> insCharDialog,
-            final DeferredCommandWrapper deferred, final boolean autoSave,
+            final SchedulerManager deferred, final boolean autoSave,
             final StateManager stateManager,             final TimerWrapper timer) {
         super(i18n, session, imgResources, insLinkDialog, palette, editHtmlDialog, insertImageDialog, insertMediaDialog, insertTableDialog, insCharDialog, deferred);
         this.autoSave = autoSave;
@@ -120,86 +126,26 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         this.savePending = false;
         this.saveCloseConfirmed = false;
         this.timer =  timer;
-        timer.configure(new Listener0() {;
+        timer.configure(new Executer() {;
 
-        public void onEvent() {
+        @Override
+        public void execute() {
             onAutoSave();
         }
         });
 
         super.addOnEditListener(new Listener0() {
+            @Override
             public void onEvent() {
                 onEdit();
             }
         });
         beforeStateChg = new BeforeActionListener() {
+            @Override
             public boolean beforeAction() {
                 return beforeTokenChange();
             }
         };
-    }
-
-    public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
-        this.onSave = onSave;
-        this.onEditCancelled = onEditCancelled;
-        super.setHtml(html);
-        super.attach();
-        stateManager.addBeforeStateChangeListener(beforeStateChg);
-        enableSaveBtn(false);
-    }
-
-    public BeforeActionListener getBeforeSavingListener() {
-        return beforeStateChg;
-    }
-
-    public void init(final RTESavingEditorView view) {
-        super.init(view);
-        this.view = view;
-        createActions();
-    }
-
-    public boolean isSavePending() {
-        return savePending;
-    }
-
-    public void onDoSaveAndClose() {
-        onDoSaveAndCloseImpl();
-    }
-
-    public void onSavedSuccessful() {
-        if (saveCloseConfirmed) {
-            onCancelConfirmed();
-        } else {
-            reset();
-        }
-    }
-
-    public void onSaveFailed() {
-        timer.schedule(AUTOSAVE_AFTER_FAIL_MILLS);
-        if (saveCloseConfirmed) {
-            saveCloseConfirmed = false;
-        }
-    }
-
-    @Override
-    public void reset() {
-        timer.cancel();
-        savePending = false;
-        saveCloseConfirmed = false;
-        enableSaveBtn(false);
-        super.reset();
-    }
-
-    protected void onAutoSave() {
-        onDoSave();
-    }
-
-    protected void onCancel() {
-        onCancelImpl();
-    }
-
-    protected void onCancelConfirmed() {
-        onCancelConfirmedImpl();
     }
 
     boolean beforeTokenChange() {
@@ -207,28 +153,15 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         if (savePending) {
             onCancelImpl();
         } else {
-            deferred.addCommand(new Listener0() {
-                public void onEvent() {
+            deferred.addCommand(new ScheduledCommand() {
+                @Override
+                public void execute() {
                     onCancelConfirmed();
                 }
             });
             result = true;
         }
         return result;
-    }
-
-    void onDoSave() {
-        onDoSaveImpl();
-    }
-
-    void onEdit() {
-        if (!savePending) {
-            savePending = true;
-            if (autoSave) {
-                timer.schedule(AUTOSAVE_IN_MILLIS);
-            }
-            enableSaveBtn(true);
-        }
     }
 
     private void createActions() {
@@ -272,9 +205,47 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         addAction(closeItem);
     }
 
+    @Override
+    public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
+        this.onSave = onSave;
+        this.onEditCancelled = onEditCancelled;
+        super.setHtml(html);
+        super.attach();
+        stateManager.addBeforeStateChangeListener(beforeStateChg);
+        enableSaveBtn(false);
+    }
+
     private void enableSaveBtn(final boolean enabled) {
         saveAction.setEnabled(enabled);
         saveMenuAction.setEnabled(enabled);
+    }
+
+    @Override
+    public BeforeActionListener getBeforeSavingListener() {
+        return beforeStateChg;
+    }
+
+    public void init(final RTESavingEditorView view) {
+        super.init(view);
+        this.view = view;
+        createActions();
+    }
+
+    @Override
+    public boolean isSavePending() {
+        return savePending;
+    }
+
+    protected void onAutoSave() {
+        onDoSave();
+    }
+
+    protected void onCancel() {
+        onCancelImpl();
+    }
+
+    protected void onCancelConfirmed() {
+        onCancelConfirmedImpl();
     }
 
     private void onCancelConfirmedImpl() {
@@ -289,11 +260,13 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         if (savePending) {
             timer.cancel();
             final Listener0 onYes = new Listener0() {
+                @Override
                 public void onEvent() {
                     onDoSaveAndCloseImpl();
                 }
             };
             final Listener0 onCancel = new Listener0() {
+                @Override
                 public void onEvent() {
                     onCancelConfirmedImpl();
                 }
@@ -309,6 +282,14 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         onEditCancelled.onEvent();
     }
 
+    void onDoSave() {
+        onDoSaveImpl();
+    }
+
+    public void onDoSaveAndClose() {
+        onDoSaveAndCloseImpl();
+    }
+
     private void onDoSaveAndCloseImpl() {
         saveCloseConfirmed = true;
         onDoSaveImpl();
@@ -316,5 +297,41 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
 
     private void onDoSaveImpl() {
         onSave.onEvent(super.getHtml());
+    }
+
+    void onEdit() {
+        if (!savePending) {
+            savePending = true;
+            if (autoSave) {
+                timer.schedule(AUTOSAVE_IN_MILLIS);
+            }
+            enableSaveBtn(true);
+        }
+    }
+
+    @Override
+    public void onSavedSuccessful() {
+        if (saveCloseConfirmed) {
+            onCancelConfirmed();
+        } else {
+            reset();
+        }
+    }
+
+    @Override
+    public void onSaveFailed() {
+        timer.schedule(AUTOSAVE_AFTER_FAIL_MILLS);
+        if (saveCloseConfirmed) {
+            saveCloseConfirmed = false;
+        }
+    }
+
+    @Override
+    public void reset() {
+        timer.cancel();
+        savePending = false;
+        saveCloseConfirmed = false;
+        enableSaveBtn(false);
+        super.reset();
     }
 }

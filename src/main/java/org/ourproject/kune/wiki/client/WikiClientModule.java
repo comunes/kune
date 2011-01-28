@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContent;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContentPanel;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContentPresenter;
@@ -50,6 +49,7 @@ import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 import org.ourproject.kune.workspace.client.wave.WaveInsert;
 
+import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -79,7 +79,7 @@ public class WikiClientModule extends AbstractExtendedModule {
             @Override
             public WikiClientActions create() {
                 return new WikiClientActions(i(I18nUITranslationService.class), i(ContextNavigator.class),
-                        i(Session.class), i(StateManager.class), i(DeferredCommandWrapper.class),
+                        i(Session.class), i(StateManager.class), i(SchedulerManager.class),
                         p(ContentServiceAsync.class), p(GroupServiceAsync.class), p(FileUploader.class),
                         i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(FileDownloadUtils.class),
                         i(EntityHeader.class), p(ContentEditor.class), i(ErrorHandler.class), i(WikiViewer.class),

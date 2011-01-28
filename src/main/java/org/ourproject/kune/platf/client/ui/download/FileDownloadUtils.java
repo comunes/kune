@@ -21,9 +21,9 @@ package org.ourproject.kune.platf.client.ui.download;
 
 import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.services.ImageUtils;
-import org.ourproject.kune.platf.client.utils.Url;
-import org.ourproject.kune.platf.client.utils.UrlParam;
 
+import cc.kune.common.client.utils.Url;
+import cc.kune.common.client.utils.UrlParam;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 

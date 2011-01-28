@@ -9,9 +9,9 @@ import org.mockito.Mockito;
 import org.mockito.internal.verification.api.VerificationMode;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
-import org.ourproject.kune.platf.client.utils.TimerWrapper;
 
+import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.core.client.i18n.I18nTranslationServiceMocked;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -19,24 +19,29 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.testing.events.MockedListener;
 import com.calclab.suco.testing.events.MockedListener0;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.resources.client.ImageResource;
 
 public class RTESavingEditorPresenterTest {
 
+    private MockedListener0 cancelListener;
+    private SchedulerManager deferredCommandWrapper;
     private RTESavingEditorPresenter presenter;
     private MockedListener<String> saveListener;
-    private MockedListener0 cancelListener;
     private StateManager stateManager;
-    private DeferredCommandWrapper deferredCommandWrapper;
     private TimerWrapper timer;
     private RTESavingEditorView view;
+
+    private void checkSaveBtnDisabled() {
+        assertFalse(presenter.saveAction.isEnabled());
+    }
 
     @Before
     public void createObjects() {
         final I18nTranslationService i18n = new I18nTranslationServiceMocked();
         new Resources(i18n);
         stateManager = Mockito.mock(StateManager.class);
-        deferredCommandWrapper = Mockito.mock(DeferredCommandWrapper.class);
+        deferredCommandWrapper = Mockito.mock(SchedulerManager.class);
 
         final RTEImgResources imgResources = Mockito.mock(RTEImgResources.class);
         final ImageResource img = Mockito.mock(ImageResource.class);
@@ -54,13 +59,23 @@ public class RTESavingEditorPresenterTest {
         cancelListener = new MockedListener0();
     }
 
+    private String editAndChangeHistoryToken() {
+        presenter.edit("Text to edit", saveListener, cancelListener);
+        presenter.onEdit();
+        final String newToken = "somegroup";
+        final boolean change = presenter.beforeTokenChange();
+        assertFalse(change);
+        verifyAskConfirmationCalled(Mockito.times(1));
+        return newToken;
+    }
+
     @Test
     public void historyChangeWithoutPendingMustAccept() {
         presenter.edit("Text to edit", saveListener, cancelListener);
         final boolean change = presenter.beforeTokenChange();
         assertTrue(change);
         verifyAskConfirmationCalled(Mockito.never());
-        Mockito.verify(deferredCommandWrapper, Mockito.times(1)).addCommand((Listener0) Mockito.anyObject());
+        Mockito.verify(deferredCommandWrapper, Mockito.times(1)).addCommand((ScheduledCommand) Mockito.anyObject());
     }
 
     @Test
@@ -125,20 +140,6 @@ public class RTESavingEditorPresenterTest {
         Mockito.verify(timer, Mockito.times(1)).schedule(RTESavingEditorPresenter.AUTOSAVE_IN_MILLIS);
         Mockito.verify(timer, Mockito.times(1)).schedule(RTESavingEditorPresenter.AUTOSAVE_AFTER_FAIL_MILLS);
         assertTrue(saveListener.isCalled(2));
-    }
-
-    private void checkSaveBtnDisabled() {
-        assertFalse(presenter.saveAction.isEnabled());
-    }
-
-    private String editAndChangeHistoryToken() {
-        presenter.edit("Text to edit", saveListener, cancelListener);
-        presenter.onEdit();
-        final String newToken = "somegroup";
-        final boolean change = presenter.beforeTokenChange();
-        assertFalse(change);
-        verifyAskConfirmationCalled(Mockito.times(1));
-        return newToken;
     }
 
     private void verifyAskConfirmationCalled(final VerificationMode mode) {

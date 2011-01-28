@@ -33,7 +33,6 @@ import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
-import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
@@ -42,6 +41,7 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 
+import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -63,7 +63,7 @@ public class ChatClientModule extends AbstractExtendedModule {
             public ChatClientActions create() {
                 return new ChatClientActions(i(I18nUITranslationService.class), i(Session.class),
                         i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(ChatEngine.class),
-                        p(AddRoom.class), p(DeferredCommandWrapper.class));
+                        p(AddRoom.class), p(SchedulerManager.class));
             }
         });
 

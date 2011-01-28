@@ -18,6 +18,9 @@ public class PopupPanelTopCentered extends PopupPanel {
 
     public PopupPanelTopCentered(final boolean autohide, final boolean modal) {
         super(autohide, modal);
+        if (modal) {
+            super.setGlassEnabled(true);
+        }
         init();
     }
 

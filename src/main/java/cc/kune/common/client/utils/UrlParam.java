@@ -16,14 +16,33 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.platf.client.utils;
+ \*/
+package cc.kune.common.client.utils;
 
-public final class Convert {
-    public static int toInt(final String value) {
-        return Integer.valueOf(value);
+public class UrlParam {
+    private final String value;
+    private final String name;
+
+    public UrlParam(String name, boolean value) {
+        this.name = name;
+        this.value = value ? "true" : "false";
     }
 
-    private Convert() {
-    };
+    public UrlParam(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return name + "=" + value;
+    }
 }

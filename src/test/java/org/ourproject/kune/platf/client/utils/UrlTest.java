@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import cc.kune.common.client.utils.Url;
+import cc.kune.common.client.utils.UrlParam;
+
 public class UrlTest {
 
     @Test

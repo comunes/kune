@@ -27,9 +27,10 @@ import com.extjs.gxt.ui.client.widget.WidgetComponent;
 import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 
-public class MessageToolbar {
+public class MessageToolbar extends Composite {
     private final Image errorIcon;
     private final Label errorLabel;
     private final NotifyLevelImages images;
@@ -51,6 +52,7 @@ public class MessageToolbar {
         toolbar.add(errorLabel);
         errorIcon.setVisible(false);
         toolbar.setVisible(false);
+        initWidget(toolbar);
     }
 
     public ToolBar getToolbar() {

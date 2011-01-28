@@ -1,9 +1,15 @@
-package org.ourproject.kune.platf.client.utils;
+package cc.kune.common.client.utils;
 
-import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.user.client.Timer;
 
 public class TimerWrapper {
+    public interface Executer {
+        /**
+         * Invokes the execute.
+         */
+        void execute();
+    }
+
     private Timer timer;
 
     public TimerWrapper() {
@@ -13,11 +19,11 @@ public class TimerWrapper {
         timer.cancel();
     }
 
-    public void configure(final Listener0 onTime) {
+    public void configure(final Executer onTime) {
         timer = new Timer() {
             @Override
             public void run() {
-                onTime.onEvent();
+                onTime.execute();
             }
         };
     }

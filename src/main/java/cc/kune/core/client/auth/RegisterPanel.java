@@ -22,6 +22,7 @@ package cc.kune.core.client.auth;
 import cc.kune.common.client.noti.NotifyLevelImages;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.ui.KuneUiUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
@@ -47,18 +48,6 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
         super(REGISTER_DIALOG, i18n, i18n.t(CoreMessages.REGISTER_TITLE), true, true, true, 400, 420, "",
                 i18n.t(CoreMessages.REGISTER_TITLE), REGISTER_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
                 CANCEL_BUTTON_ID, images, ERRMSG, 11);
-        // super.addListener(new WindowListenerAdapter() {
-        // @Override
-        // public void onActivate(final Panel panel) {
-        // KuneUiUtils.focusOnField(registerForm.getShortNameField());
-        // }
-        //
-        // @Override
-        // public void onShow(final Component component) {
-        // KuneUiUtils.focusOnField(registerForm.getShortNameField());
-        // }
-        // });
-
         final VerticalPanel panel = new VerticalPanel();
         // panel.setBorder(false);
         registerForm = new RegisterForm(i18n, session);
@@ -106,6 +95,12 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
                 registerForm.reset();
             }
         });
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        KuneUiUtils.focusOnField(registerForm.getShortNameField());
     }
 
     @Override
