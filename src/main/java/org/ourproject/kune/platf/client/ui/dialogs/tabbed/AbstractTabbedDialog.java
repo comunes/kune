@@ -20,17 +20,18 @@
 package org.ourproject.kune.platf.client.ui.dialogs.tabbed;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
+
+import cc.kune.common.client.noti.NotifyLevel;
 
 public interface AbstractTabbedDialog {
-
-    public void hideMessages();
-
-    public void setErrorMessage(String message, Level level);
 
     void activateTab(int index);
 
     void addTab(View view);
+
+    public void hideMessages();
+
+    public void setErrorMessage(String message, NotifyLevel level);
 
     void show();
 

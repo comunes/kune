@@ -38,10 +38,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
 public class I18nUITranslationService extends I18nTranslationService {
-    private HashMap<String, String> lexicon;
-    private String currentLanguageCode;
     private I18nLanguageDTO currentLang;
+    private String currentLanguageCode;
     private final I18nServiceAsync i18nService;
+    private HashMap<String, String> lexicon;
     private final Session session;
 
     @Inject
@@ -84,6 +84,52 @@ public class I18nUITranslationService extends I18nTranslationService {
             changeLocale(newLanguage);
         }
     }
+
+    /**
+     * 
+     * See in:
+     * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread
+     * /5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
+     * 
+     * JSNI method to change the locale of the application - it effectively
+     * parses the existing URL and creates a new one for the chosen locale.
+     * 
+     * It additionally launches any JavaScript debugger that might be attached
+     * to the system (Windows only). To disable this functionality just remove
+     * the "debugger" line.
+     * 
+     * @param newLocale
+     *            String value of the new locale to go to.
+     */
+    private native void changeLocale(String newLocale)
+    /*-{
+        // Uncomment the "debugger;" line to see how to set debug statements in JSNI code
+        // When in web mode, if your browser has a JavaScript debugger attached, it will
+        // launch at this point in the code (when the user changes locale through the menu system).
+        // debugger;
+
+        // Get the current location
+        var currLocation = $wnd.location.toString();
+        // Get rid of any GWT History tokens that might be present
+        var noHistoryCurrLocArray = currLocation.split("#");
+        var noHistoryCurrLoc = noHistoryCurrLocArray[0];
+        var currHistory = noHistoryCurrLocArray[1];
+        // Get rid of any locale string
+        var locArray = noHistoryCurrLoc.split("?");
+        // Build the new href location and then send the browser there.
+        // $wnd.location.href = locArray[0]+"?locale="+newLocale+"#"+currHistory;
+        $wnd.location.href = locArray[0]+"?locale="+newLocale
+
+        // extjs part:
+        // commented because the error: "Ext is not defined"
+        // we have to try other way
+        // var head = document.getElementsByTagName("head")[0];
+        // var script = document.createElement('script');
+        // script.id = 'localScript';
+        // script.type = 'text/javascript';
+        // script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
+        // head.appendChild(script);
+    }-*/;
 
     public String formatDateWithLocale(final Date date) {
         return formatDateWithLocale(date, false);
@@ -173,51 +219,5 @@ public class I18nUITranslationService extends I18nTranslationService {
         }
         return decodeHtml(translation);
     }
-
-    /**
-     * 
-     * See in:
-     * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread
-     * /5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
-     * 
-     * JSNI method to change the locale of the application - it effectively
-     * parses the existing URL and creates a new one for the chosen locale.
-     * 
-     * It additionally launches any JavaScript debugger that might be attached
-     * to the system (Windows only). To disable this functionality just remove
-     * the "debugger" line.
-     * 
-     * @param newLocale
-     *            String value of the new locale to go to.
-     */
-    private native void changeLocale(String newLocale)
-    /*-{
-        // Uncomment the "debugger;" line to see how to set debug statements in JSNI code
-        // When in web mode, if your browser has a JavaScript debugger attached, it will
-        // launch at this point in the code (when the user changes locale through the menu system).
-        // debugger;
-
-        // Get the current location
-        var currLocation = $wnd.location.toString();
-        // Get rid of any GWT History tokens that might be present
-        var noHistoryCurrLocArray = currLocation.split("#");
-        var noHistoryCurrLoc = noHistoryCurrLocArray[0];
-        var currHistory = noHistoryCurrLocArray[1];
-        // Get rid of any locale string
-        var locArray = noHistoryCurrLoc.split("?");
-        // Build the new href location and then send the browser there.
-        // $wnd.location.href = locArray[0]+"?locale="+newLocale+"#"+currHistory;
-        $wnd.location.href = locArray[0]+"?locale="+newLocale
-
-        // extjs part:
-        // commented because the error: "Ext is not defined"
-        // we have to try other way
-        // var head = document.getElementsByTagName("head")[0];
-        // var script = document.createElement('script');
-        // script.id = 'localScript';
-        // script.type = 'text/javascript';
-        // script.src = "js/ext/locale/ext-lang-"+newLocale+".js";
-        // head.appendChild(script);
-    }-*/;
 
 }

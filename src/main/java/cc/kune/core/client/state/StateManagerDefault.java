@@ -21,8 +21,8 @@ package cc.kune.core.client.state;
 
 import java.util.HashMap;
 
-import cc.kune.core.client.actions.BeforeActionCollection;
-import cc.kune.core.client.actions.BeforeActionListener;
+import cc.kune.common.client.actions.BeforeActionCollection;
+import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.shared.domain.utils.StateToken;

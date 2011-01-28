@@ -20,8 +20,8 @@
 package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 
+import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.shared.dto.LicenseDTO;
 
 public interface NewGroupView extends View {
@@ -56,7 +56,7 @@ public interface NewGroupView extends View {
 
     void setLicense(LicenseDTO license);
 
-    void setMessage(String message, Level level);
+    void setMessage(String message, NotifyLevel level);
 
     void show();
 

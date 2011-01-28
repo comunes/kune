@@ -1,7 +1,9 @@
 package cc.kune.core.client;
 
+import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -29,7 +31,7 @@ public class KuneEntryPoint implements EntryPoint {
                 e.printStackTrace();
             }
         });
-
+        Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {
@@ -44,12 +46,16 @@ public class KuneEntryPoint implements EntryPoint {
     public void onModuleLoadCont() {
         DelayedBindRegistry.bind(ginjector);
         AsyncCallbackSimple.init(ginjector.getErrorHandler());
-        ginjector.getPlaceManager().revealCurrentPlace();
+        NotifyUser.init(ginjector.getEventBus());
+        // ginjector.getPlaceManager().revealCurrentPlace();
+        ginjector.getCorePresenter().get().forceReveal();
+        ginjector.getStateManager();
+        ginjector.getSiteTokenListeners();
+        ginjector.getEventLogger();
         ginjector.getI18n();
         ginjector.getGxtGuiProvider();
         ginjector.getUserNotifierPresenter();
         ginjector.getSpinerPresenter();
-        ginjector.getStateManager();
         ginjector.getSiteLogoPresenter();
         ginjector.getSpacesTabPresenter();
     }

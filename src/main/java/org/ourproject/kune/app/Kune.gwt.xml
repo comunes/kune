@@ -44,7 +44,7 @@
   <inherits name="com.google.gwt.wave.Wave" />
   <inherits name="org.ourproject.kune.ws.armor.WsArmor" />
   <!-- Specify the app entry point class. -->
-  <entry-point class="org.ourproject.kune.app.client.KuneEntryPoint" />
+  <entry-point class="org.ourproject.kune.app.client.OldKuneEntryPoint" />
   <!-- excluding test sources for this module workaround for open issue 4454 
     see http://code.google.com/p/google-web-toolkit/issues/detail?id=4454 -->
   <source path='client' excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>

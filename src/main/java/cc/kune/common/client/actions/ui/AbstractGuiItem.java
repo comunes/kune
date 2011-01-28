@@ -23,7 +23,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
         this.descriptor = descriptor;
     }
 
-    protected void addStyle(String style) {
+    protected void addStyle(final String style) {
         super.addStyleName(style);
     }
 
@@ -93,10 +93,10 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
     protected abstract void setIconStyle(String style);
 
-    private void setStyles(String styles) {
+    private void setStyles(final String styles) {
         if (styles != null) {
             clearStyles();
-            for (String style : TextUtils.splitTags(styles)) {
+            for (final String style : TextUtils.splitTags(styles)) {
                 addStyle(style);
             }
         }

@@ -19,13 +19,13 @@
  */
 package org.ourproject.kune.workspace.client.options;
 
-import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
-import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
+import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements GroupOptionsView {
@@ -37,14 +37,16 @@ public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements Grou
     private final GroupOptionsCollection entityPreferencesGroup;
 
     public GroupOptionsPanel(final EntityOptions presenter, final EntityHeader entityHeader,
-            final I18nTranslationService i18n, final Images images, final GroupOptionsCollection entityOptionsGroup) {
+            final I18nTranslationService i18n, final NotifyLevelImages images,
+            final GroupOptionsCollection entityOptionsGroup) {
         super(GROUP_OP_PANEL_ID, "", 400, HEIGHT + 80, 400, HEIGHT + 80, false, images, GROUP_OPTIONS_ERROR_ID);
         this.entityHeader = entityHeader;
         this.entityPreferencesGroup = entityOptionsGroup;
         super.setIconCls("k-options-icon");
-        super.setTitle(i18n.t(PlatfMessages.GROUP_OPTIONS_DIALOG_TITLE));
+        super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE));
     }
 
+    @Override
     public void addAction(final GuiActionDescrip descriptor) {
         entityHeader.addAction(descriptor);
     }

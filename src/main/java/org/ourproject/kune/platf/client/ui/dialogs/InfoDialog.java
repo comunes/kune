@@ -27,6 +27,7 @@ import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
+@Deprecated
 public class InfoDialog extends BasicDialog {
 
     private final Panel mainPanel;

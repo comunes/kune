@@ -3,18 +3,18 @@
 body {
 	background-color: white;
 	color: black;
-	font-family: 'UbuntuRegular', Arial;
+	font-family: 'Ubuntu', Arial;
 	font-size: small;
 	margin: 5px;
 	overflow: hidden;
 }
 
 * {
-	font-family: 'UbuntuRegular', Arial;
+	font-family: 'Ubuntu', Arial;
 }
 
 body.fontface {
-	font: 'UbuntuRegular', Arial;
+	font: 'Ubuntu', Arial;
 }
 
 a {
@@ -368,17 +368,16 @@ a:visited {
 }
 
 .x-btn button {
-  font: 18px/27px UbuntuRegular, arial;
+  font: 18px/27px 'Ubuntu', arial;
 }
 
 .k-btn-sitebar button { 
-  font: 13px UbuntuRegular, arial;  
+  font: 13px 'Ubuntu', arial;  
   color:#B3B3B3;
   cursor:pointer;
   text-decoration:underline;
   white-space:nowrap;
   margin-top: -5px;
-  border-bottom:1px solid #B3B3B3;
 }
 
 .k-sitebar { 

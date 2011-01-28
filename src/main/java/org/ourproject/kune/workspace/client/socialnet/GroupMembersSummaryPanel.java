@@ -19,7 +19,6 @@
  \*/
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarView;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
@@ -30,6 +29,7 @@ import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -72,7 +72,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         gridMenuPanel.getBottomBar().setCls("k-blank-toolbar");
         super.add(gridMenuPanel);
 
-        noMembersPublic = new Label(i18n.t(PlatfMessages.MEMBERS_NOT_PUBLIC));
+        noMembersPublic = new Label(i18n.t(CoreMessages.MEMBERS_NOT_PUBLIC));
         noMembersPublic.addStyleName("kune-Margin-7-trbl");
         noMembersPublic.addStyleName("k-text-gray");
         noMembersPublic.setVisible(false);

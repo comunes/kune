@@ -21,18 +21,23 @@ package org.ourproject.kune.workspace.client.options;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
+
+import cc.kune.common.client.noti.NotifyLevel;
 
 public interface EntityOptions extends AbstractTabbedDialog {
 
+    @Override
     public void addTab(View tab);
 
     public View getView();
 
+    @Override
     public void hideMessages();
 
-    public void setErrorMessage(String message, Level level);
+    @Override
+    public void setErrorMessage(String message, NotifyLevel level);
 
+    @Override
     public void show();
 
 }

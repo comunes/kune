@@ -4,6 +4,7 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.UserSignInEvent;
@@ -39,11 +40,11 @@ public class SitebarSignInLink extends ButtonDescriptor {
     public static final String SITE_SIGN_IN = "kune-ssilp-hy";
 
     @Inject
-    public SitebarSignInLink(final SitebarSignInAction action, final EventBus eventBus) {
+    public SitebarSignInLink(final SitebarSignInAction action, final EventBus eventBus, final Session session) {
         super(action);
         setStyles("k-floatright, k-no-backimage, k-btn-sitebar");
         setId(SITE_SIGN_IN);
-        setVisible(false);
+        setVisible(!session.isLogged());
         eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
             @Override
             public void onUserSignIn(final UserSignInEvent event) {

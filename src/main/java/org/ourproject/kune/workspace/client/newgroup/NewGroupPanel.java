@@ -19,16 +19,16 @@
  */
 package org.ourproject.kune.workspace.client.newgroup;
 
-import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.ExtendedDialog;
-import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
-import org.ourproject.kune.workspace.client.WorkspaceMessages;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 
+import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.core.client.resources.CoreMessages;
+import cc.kune.core.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -57,45 +57,47 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.HorizontalLayout;
 
 public class NewGroupPanel extends ExtendedDialog implements NewGroupView {
-    private static final String MARGIN_LEFT_105PX = "margin-left: 105px";
-    private static final int LABEL_WIDTH = 100;
-    public static final String SHORTNAME_FIELD = "k-ngp-short_name";
-    public static final String LONGNAME_FIELD = "k-ngp-long_name";
-    public static final String PUBLICDESC_FIELD = "k-ngp-public_desc";
-    public static final String TYPEOFGROUP_FIELD = "k-ngp-type_of_group";
-    public static final String PROJ_GROUP_TYPE_ID = "k-ngp-type_of_group_proj";
-    public static final String ORG_GROUP_TYPE_ID = "k-ngp-type_of_group_org";
-    public static final String COMM_GROUP_TYPE_ID = "k-ngp-type_of_group_comm";
-    public static final String TAGS_FIELD = "k-ngp-tags";
-    public static final String NEWGROUP_WIZARD = "k-ngp-wiz";
-    public static final String REGISTER_BUTTON = "k-ngp-finish-bt";
-    public static final String CANCEL_BUTTON = "k-ngp-cancel-bt";
-    public static final String ERROR_MSG_BAR = "k-ngp-error-mb";
     private static final int BIG_FIELD_WIDTH = 280;
+    public static final String CANCEL_BUTTON = "k-ngp-cancel-bt";
+    public static final String COMM_GROUP_TYPE_ID = "k-ngp-type_of_group_comm";
+    public static final String ERROR_MSG_BAR = "k-ngp-error-mb";
+    private static final int LABEL_WIDTH = 100;
+    public static final String LONGNAME_FIELD = "k-ngp-long_name";
+    private static final String MARGIN_LEFT_105PX = "margin-left: 105px";
+    public static final String NEWGROUP_WIZARD = "k-ngp-wiz";
+    public static final String ORG_GROUP_TYPE_ID = "k-ngp-type_of_group_org";
+    public static final String PROJ_GROUP_TYPE_ID = "k-ngp-type_of_group_proj";
+    public static final String PUBLICDESC_FIELD = "k-ngp-public_desc";
+    public static final String REGISTER_BUTTON = "k-ngp-finish-bt";
+    public static final String SHORTNAME_FIELD = "k-ngp-short_name";
+    public static final String TAGS_FIELD = "k-ngp-tags";
+    public static final String TYPEOFGROUP_FIELD = "k-ngp-type_of_group";
 
-    private final FormPanel form;
-    private Radio projectRadio;
-    private Radio orgRadio;
     private Radio communityRadio;
-
-    private TextField shortNameField;
-    private TextField longNameField;
-    private TextArea publicDescField;
-    private TextField tags;
-    private final MessageToolbar messageErrorBar;
-    private final Provider<LicenseWizard> licenseWizard;
+    private final FormPanel form;
     private final I18nTranslationService i18n;
-    private Image licenseImage;
     private LicenseDTO license;
 
+    private Image licenseImage;
+    private final Provider<LicenseWizard> licenseWizard;
+    private TextField longNameField;
+    private final MessageToolbar messageErrorBar;
+    private Radio orgRadio;
+    private Radio projectRadio;
+    private TextArea publicDescField;
+    private TextField shortNameField;
+    private TextField tags;
+
     public NewGroupPanel(final NewGroupPresenter presenter, final I18nTranslationService i18n,
-            final Provider<LicenseWizard> licenseWizard, final Images img) {
-        super(NEWGROUP_WIZARD, WorkspaceMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, 450, 430, "k-newgroup-icon",
+            final Provider<LicenseWizard> licenseWizard, final NotifyLevelImages img) {
+        super(NEWGROUP_WIZARD, CoreMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, 450, 430, "k-newgroup-icon",
                 i18n.t("Cancel"), CANCEL_BUTTON, i18n.t("Register"), REGISTER_BUTTON, new Listener0() {
+                    @Override
                     public void onEvent() {
                         presenter.onCancel();
                     }
                 }, new Listener0() {
+                    @Override
                     public void onEvent() {
                         presenter.onRegister();
                     }
@@ -117,66 +119,15 @@ public class NewGroupPanel extends ExtendedDialog implements NewGroupView {
         form = createNewGroupInitialDataForm(presenter);
 
         messageErrorBar = new MessageToolbar(img, ERROR_MSG_BAR);
-        super.setBottomToolbar(messageErrorBar.getToolbar());
+        // FIXME in gxt super.setBottomToolbar(messageErrorBar.getToolbar());
 
         super.add(form);
     }
 
+    @Override
     public void clearData() {
         form.getForm().reset();
         shortNameField.focus(false);
-    }
-
-    public LicenseDTO getLicense() {
-        return license;
-    }
-
-    public String getLongName() {
-        return longNameField.getValueAsString();
-    }
-
-    public String getPublicDesc() {
-        return publicDescField.getValueAsString();
-    }
-
-    public String getShortName() {
-        return shortNameField.getValueAsString();
-    }
-
-    public String getTags() {
-        return tags.getRawValue();
-    }
-
-    public void hideMessage() {
-        messageErrorBar.hideErrorMessage();
-    }
-
-    public boolean isCommunity() {
-        return communityRadio.getValue();
-    }
-
-    public boolean isFormValid() {
-        return form.getForm().isValid();
-    }
-
-    public boolean isOrganization() {
-        return orgRadio.getValue();
-    }
-
-    public boolean isProject() {
-        return projectRadio.getValue();
-    }
-
-    public void maskProcessing() {
-        mask(i18n.t("Processing"));
-    }
-
-    public void setLicense(final LicenseDTO license) {
-        setLicenseImpl(license);
-    }
-
-    public void setMessage(final String message, final Level level) {
-        messageErrorBar.setErrorMessage(message, level);
     }
 
     private FormPanel createNewGroupInitialDataForm(final NewGroupPresenter presenter) {
@@ -203,9 +154,9 @@ public class NewGroupPanel extends ExtendedDialog implements NewGroupView {
         shortNameField.setMaxLength(15);
         shortNameField.setAllowBlank(false);
         shortNameField.setRegex("^[a-z0-9_\\-]+$");
-        shortNameField.setMinLengthText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setMaxLengthText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
-        shortNameField.setRegexText(i18n.t(WorkspaceMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setMinLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setMaxLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
+        shortNameField.setRegexText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
         shortNameField.setValidationDelay(1000);
 
         form.add(shortNameField);
@@ -246,6 +197,7 @@ public class NewGroupPanel extends ExtendedDialog implements NewGroupView {
 
         licenseImage = new Image("images/lic/bysa80x15.png");
         licenseImage.addClickHandler(new ClickHandler() {
+            @Override
             public void onClick(final ClickEvent event) {
                 KuneWindowUtils.open(license.getUrl());
             }
@@ -262,6 +214,7 @@ public class NewGroupPanel extends ExtendedDialog implements NewGroupView {
             @Override
             public void onClick(final Button button, final EventObject e) {
                 licenseWizard.get().start(new Listener<LicenseDTO>() {
+                    @Override
                     public void onEvent(final LicenseDTO license) {
                         setLicenseImpl(license);
                     }
@@ -314,9 +267,74 @@ public class NewGroupPanel extends ExtendedDialog implements NewGroupView {
         return form;
     }
 
+    @Override
+    public LicenseDTO getLicense() {
+        return license;
+    }
+
+    @Override
+    public String getLongName() {
+        return longNameField.getValueAsString();
+    }
+
+    @Override
+    public String getPublicDesc() {
+        return publicDescField.getValueAsString();
+    }
+
+    @Override
+    public String getShortName() {
+        return shortNameField.getValueAsString();
+    }
+
+    @Override
+    public String getTags() {
+        return tags.getRawValue();
+    }
+
+    @Override
+    public void hideMessage() {
+        messageErrorBar.hideErrorMessage();
+    }
+
+    @Override
+    public boolean isCommunity() {
+        return communityRadio.getValue();
+    }
+
+    @Override
+    public boolean isFormValid() {
+        return form.getForm().isValid();
+    }
+
+    @Override
+    public boolean isOrganization() {
+        return orgRadio.getValue();
+    }
+
+    @Override
+    public boolean isProject() {
+        return projectRadio.getValue();
+    }
+
+    @Override
+    public void maskProcessing() {
+        mask(i18n.t("Processing"));
+    }
+
+    @Override
+    public void setLicense(final LicenseDTO license) {
+        setLicenseImpl(license);
+    }
+
     private void setLicenseImpl(final LicenseDTO license) {
         this.license = license;
         licenseImage.setUrl(license.getImageUrl());
         KuneUiUtils.setQuickTip(licenseImage, license.getLongName());
+    }
+
+    @Override
+    public void setMessage(final String message, final NotifyLevel level) {
+        messageErrorBar.setErrorMessage(message, level);
     }
 }

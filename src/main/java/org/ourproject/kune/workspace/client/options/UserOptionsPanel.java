@@ -19,12 +19,12 @@
  */
 package org.ourproject.kune.workspace.client.options;
 
-import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.app.UserOptionsCollection;
-import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
+import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserOptionsView {
@@ -35,11 +35,12 @@ public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserO
     private final UserOptionsCollection userPreferencesGroup;
 
     public UserOptionsPanel(final EntityOptions presenter, final EntityHeader entityHeader,
-            final I18nTranslationService i18n, final Images images, final UserOptionsCollection userOptionsGroup) {
+            final I18nTranslationService i18n, final NotifyLevelImages images,
+            final UserOptionsCollection userOptionsGroup) {
         super(USER_OP_PANEL_ID, "", 400, HEIGHT + 80, 400, HEIGHT + 80, false, images, USER_OPTIONS_ERROR_ID);
         this.userPreferencesGroup = userOptionsGroup;
         super.setIconCls("k-options-icon");
-        super.setTitle(i18n.t(PlatfMessages.USER_OPTIONS_DIALOG_TITLE));
+        super.setTitle(i18n.t(CoreMessages.USER_OPTIONS_DIALOG_TITLE));
     }
 
     @Override

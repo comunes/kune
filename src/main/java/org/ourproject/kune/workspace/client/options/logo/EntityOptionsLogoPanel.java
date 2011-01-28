@@ -19,13 +19,13 @@
  \*/
 package org.ourproject.kune.workspace.client.options.logo;
 
-import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.gwtext.client.core.Connection;
@@ -140,7 +140,7 @@ public abstract class EntityOptionsLogoPanel extends FormPanel implements Entity
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
                 FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT)
                 + DefaultFormUtils.brbr());
-        super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
+        super.setTitle(CoreMessages.ENT_LOGO_SELECTOR_NORMAL_TITLE);
         doLayoutIfNeeded();
     }
 
@@ -149,7 +149,7 @@ public abstract class EntityOptionsLogoPanel extends FormPanel implements Entity
                 + "For best results use a [%d]x[%d] pixel image. We will automatically resize bigger images.",
                 FileConstants.LOGO_DEF_HEIGHT, FileConstants.LOGO_DEF_HEIGHT)
                 + "<br/><br/>");
-        super.setTitle(PlatfMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
+        super.setTitle(CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE);
         doLayoutIfNeeded();
     }
 

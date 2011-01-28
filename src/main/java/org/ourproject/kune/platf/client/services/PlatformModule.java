@@ -97,6 +97,7 @@ import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
 import org.ourproject.kune.platf.client.utils.DeferredCommandWrapper;
 import org.ourproject.kune.platf.client.utils.TimerWrapper;
 
+import cc.kune.common.client.noti.NotifyLevelImages;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.AccessRightsClientManager;
@@ -304,7 +305,7 @@ public class PlatformModule extends AbstractExtendedModule {
             public EditHtmlDialog create() {
                 final EditHtmlDialogPresenter presenter = new EditHtmlDialogPresenter();
                 final EditHtmlDialogPanel panel = new EditHtmlDialogPanel(presenter, i(I18nTranslationService.class),
-                        i(RTEImgResources.class), i(Images.class), i(EditHtmlGroup.class));
+                        i(RTEImgResources.class), i(NotifyLevelImages.class), i(EditHtmlGroup.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -333,7 +334,7 @@ public class PlatformModule extends AbstractExtendedModule {
             public InsertImageDialog create() {
                 final InsertImageDialogPresenter presenter = new InsertImageDialogPresenter();
                 final InsertImageDialogPanel panel = new InsertImageDialogPanel(presenter,
-                        i(I18nTranslationService.class), i(Images.class), i(InsertImageGroup.class));
+                        i(I18nTranslationService.class), i(NotifyLevelImages.class), i(InsertImageGroup.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -353,7 +354,7 @@ public class PlatformModule extends AbstractExtendedModule {
             @Override
             public InsertLinkDialog create() {
                 final InsertLinkDialogPresenter presenter = new InsertLinkDialogPresenter();
-                final InsertLinkDialogPanel panel = new InsertLinkDialogPanel(presenter, i(Images.class),
+                final InsertLinkDialogPanel panel = new InsertLinkDialogPanel(presenter, i(NotifyLevelImages.class),
                         i(I18nTranslationService.class), i(InsertLinkGroup.class));
                 presenter.init(panel);
                 return presenter;
@@ -375,7 +376,7 @@ public class PlatformModule extends AbstractExtendedModule {
             @Override
             public InsertSpecialCharDialog create() {
                 final InsertSpecialCharDialogPresenter presenter = new InsertSpecialCharDialogPresenter();
-                final InsertSpecialCharDialogPanel panel = new InsertSpecialCharDialogPanel(presenter, i(Images.class),
+                final InsertSpecialCharDialogPanel panel = new InsertSpecialCharDialogPanel(presenter, i(NotifyLevelImages.class),
                         i(I18nTranslationService.class), i(InsertSpecialCharGroup.class), i(RTEImgResources.class));
                 presenter.init(panel);
                 return presenter;
@@ -426,7 +427,7 @@ public class PlatformModule extends AbstractExtendedModule {
             @Override
             public InsertMediaDialog create() {
                 final InsertMediaDialogPresenter presenter = new InsertMediaDialogPresenter();
-                final InsertMediaDialogPanel panel = new InsertMediaDialogPanel(presenter, i18n, i(Images.class), i(InsertMediaGroup.class));
+                final InsertMediaDialogPanel panel = new InsertMediaDialogPanel(presenter, i18n, i(NotifyLevelImages.class), i(InsertMediaGroup.class));
                 presenter.init(panel);
                 return presenter;
             }

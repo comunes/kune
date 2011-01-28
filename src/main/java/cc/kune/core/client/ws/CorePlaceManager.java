@@ -3,9 +3,9 @@ package cc.kune.core.client.ws;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
+@Deprecated
 public class CorePlaceManager extends PlaceManagerImpl {
 
     @Inject
@@ -15,6 +15,6 @@ public class CorePlaceManager extends PlaceManagerImpl {
 
     @Override
     public void revealDefaultPlace() {
-        revealPlace(new PlaceRequest(CorePresenter.HOME_TOKEN));
+        // revealPlace(new PlaceRequest(CorePresenter.HOME_TOKEN));
     }
 }

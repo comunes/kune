@@ -19,7 +19,6 @@
  \*/
 package org.ourproject.kune.workspace.client.socialnet;
 
-import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionManager;
@@ -31,6 +30,7 @@ import org.ourproject.kune.platf.client.ui.BasicThumb;
 import org.ourproject.kune.workspace.client.skel.SummaryPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -72,7 +72,7 @@ public class BuddiesSummaryPanel extends SummaryPanel implements BuddiesSummaryV
         vp.add((Widget) toolbar);
         super.add(vp);
         addInSummary();
-        noBuddiesPublic = new Label(i18n.t(PlatfMessages.BUDDIES_NOT_PUBLIC));
+        noBuddiesPublic = new Label(i18n.t(CoreMessages.BUDDIES_NOT_PUBLIC));
         noBuddiesPublic.addStyleName("kune-Margin-7-trbl");
         noBuddiesPublic.addStyleName("k-text-gray");
     }

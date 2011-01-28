@@ -23,6 +23,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
+/**
+ * Use {@link #CoreResources} instead
+ **/
+@Deprecated
 public interface Images extends ImageBundle {
 
     public static class App {

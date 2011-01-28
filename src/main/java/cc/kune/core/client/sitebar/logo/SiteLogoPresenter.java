@@ -1,7 +1,8 @@
 package cc.kune.core.client.sitebar.logo;
 
 import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.ws.CorePlaceManager;
+import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.StateManager;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -24,23 +25,24 @@ public class SiteLogoPresenter extends Presenter<SiteLogoPresenter.SiteLogoView,
         void setSiteLogoUrl(String siteLogoUrl);
     }
 
-    private final CorePlaceManager placeManager;
+    private final StateManager stateManager;
 
     @Inject
-    public SiteLogoPresenter(EventBus eventBus, SiteLogoView view, SiteLogoProxy proxy, CorePlaceManager placeManager) {
+    public SiteLogoPresenter(final EventBus eventBus, final SiteLogoView view, final SiteLogoProxy proxy,
+            final StateManager stateManager) {
         super(eventBus, view, proxy);
-        this.placeManager = placeManager;
+        this.stateManager = stateManager;
         getView().setUiHandlers(this);
     }
 
     @ProxyEvent
-    public void onAppStart(AppStartEvent event) {
+    public void onAppStart(final AppStartEvent event) {
         getView().setSiteLogoUrl(event.getInitData().getSiteLogoUrl());
     }
 
     @Override
     public void onClick() {
-        // placeManager.revealDefaultPlace();
+        stateManager.gotoToken(SiteCommonTokens.HOME);
     }
 
     @Override

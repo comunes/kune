@@ -7,16 +7,18 @@ import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 
 public interface BasicDialogView {
 
-    HasText getFirstBtnText();
-
-    HasText getSecondBtnText();
-
-    HasClickHandlers getSecondBtn();
+    ForIsWidget getBottomPanel();
 
     HasClickHandlers getFirstBtn();
 
-    HasDirectionalText getTitleText();
+    HasText getFirstBtnText();
 
     ForIsWidget getInnerPanel();
+
+    HasClickHandlers getSecondBtn();
+
+    HasText getSecondBtnText();
+
+    HasDirectionalText getTitleText();
 
 }

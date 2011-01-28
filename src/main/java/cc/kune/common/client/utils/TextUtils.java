@@ -61,6 +61,10 @@ public class TextUtils {
         return "<a href=\"" + href + "\" target=\"_blank\">" + text + "</a>";
     }
 
+    public static boolean notEmpty(final String string) {
+        return string != null & string.length() > 0;
+    }
+
     public static String removeLastSlash(final String text) {
         return text.replaceFirst("/$", "");
     }

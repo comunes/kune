@@ -21,11 +21,11 @@ package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
-import org.ourproject.kune.workspace.client.WorkspaceMessages;
 
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.HistoryTokenCallback;
@@ -79,7 +79,7 @@ public class NewGroupPresenter implements NewGroup {
                     NotifyUser.hideProgress();
                 } else {
                     stateManager.restorePreviousToken();
-                    NotifyUser.info(i18n.t(WorkspaceMessages.REGISTER_TO_CREATE_A_GROUP));
+                    NotifyUser.info(i18n.t(CoreMessages.REGISTER_TO_CREATE_A_GROUP));
                 }
             }
         });
@@ -131,10 +131,10 @@ public class NewGroupPresenter implements NewGroup {
                 public void onFailure(final Throwable caught) {
                     if (caught instanceof GroupNameInUseException) {
                         view.unMask();
-                        setMessage(i18n.t(WorkspaceMessages.NAME_IN_ALREADY_IN_USE), Level.error);
+                        setMessage(i18n.t(CoreMessages.NAME_IN_ALREADY_IN_USE), NotifyLevel.error);
                     } else {
                         view.unMask();
-                        setMessage(i18n.t("Error creating group"), Level.error);
+                        setMessage(i18n.t("Error creating group"), NotifyLevel.error);
                         throw new UIException("Other kind of exception in group registration", caught);
                     }
                 }
@@ -157,7 +157,7 @@ public class NewGroupPresenter implements NewGroup {
         mustGoToPrevious = true;
     }
 
-    public void setMessage(final String message, final Level level) {
+    public void setMessage(final String message, final NotifyLevel level) {
         view.setMessage(message, level);
     }
 }

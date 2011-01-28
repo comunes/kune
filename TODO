@@ -15,10 +15,8 @@ TODO-list for kune -*- mode: org; -*-
 ** Use Emulate Stack Java like src/org/waveprotocol/box/webclient/WebClientDev.gwt.xml
 ** roo error
 [FelixDispatchQueue] Expected string-based content in @RooGwtMirroredFrom on cc.kune.client.managed.request.ContainerTranslationProxyObject of class [org.springframework.roo.classpath.details.annotations.ClassAttributeValue] must be an instance of class org.springframework.roo.classpath.details.annotations.StringAttributeValue
-** spaces navigation
-*** index.html via jruby and loads the app in background...
-**** the sitebar (login/logout), the site logo, etc
-**** 
+** Gin sharing of instances between injectos
+https://groups.google.com/group/google-gin/browse_thread/thread/203ab1725406bd44/209429fd95366182?lnk=gst&q=multiple+module#209429fd95366182
 ** Wave integration
    [ ] org.waveprotocol.box.webclient.WebClientProd
    [ ] src/org/waveprotocol/box/server/ServerMain.java

@@ -21,7 +21,6 @@ package org.ourproject.kune.workspace.client.sitebar.siteusermenu;
 
 import java.util.List;
 
-import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.Action;
@@ -34,6 +33,7 @@ import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.img.ImgResources;
 
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -116,7 +116,7 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
                 goUserHome();
             }
         };
-        userHomeAction.putValue(Action.NAME, i18n.t(PlatfMessages.YOUR_HOMEPAGE));
+        userHomeAction.putValue(Action.NAME, i18n.t(CoreMessages.YOUR_HOMEPAGE));
         userHomeAction.putValue(Action.SMALL_ICON, img.groupHome());
         final MenuItemDescriptor item = new MenuItemDescriptor(userHomeAction);
         item.setPosition(0);

@@ -4,4 +4,6 @@ public interface CookiesManager {
     String getCurrentCookie();
 
     void removeCookie();
+
+    void setCookie(String userHash);
 }

@@ -28,7 +28,7 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     }
 
     @Override
-    protected void addStyle(String style) {
+    protected void addStyle(final String style) {
         button.addStyleName(style);
     }
 
@@ -101,8 +101,10 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     @Override
     public void setVisible(final boolean visible) {
         if (button.isRendered()) {
-            super.setVisible(visible);
+            // ??
         }
+        button.setVisible(visible);
+
     }
 
     @Override

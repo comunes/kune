@@ -1,8 +1,8 @@
 package org.ourproject.kune.platf.client.ui.rte.insertmedia;
 
-import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 
+import cc.kune.common.client.noti.NotifyLevelImages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener0;
@@ -17,19 +17,20 @@ public class InsertMediaDialogPanel extends AbstractTabbedDialogPanel implements
     private final InsertMediaGroup insertMediaGroup;
 
     public InsertMediaDialogPanel(final InsertMediaDialogPresenter presenter, final I18nTranslationService i18n,
-            final Images images, final InsertMediaGroup insertMediaGroup) {
+            final NotifyLevelImages images, final InsertMediaGroup insertMediaGroup) {
         super(INSERT_MEDIA_DIALOG, i18n.t("Insert Media (audio/video)"), 390, HEIGHT + 100, 390, HEIGHT + 100, true,
                 images, INSERT_MEDIA_DIALOG_ERROR_ID);
         super.setIconCls("k-film-icon");
         this.insertMediaGroup = insertMediaGroup;
 
         super.addHideListener(new Listener0() {
+            @Override
             public void onEvent() {
                 insertMediaGroup.resetAll();
             }
         });
 
-        Button insert = new Button(i18n.t("Insert"));
+        final Button insert = new Button(i18n.t("Insert"));
         insert.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {
@@ -37,7 +38,7 @@ public class InsertMediaDialogPanel extends AbstractTabbedDialogPanel implements
             }
         });
 
-        Button cancel = new Button(i18n.t("Cancel"));
+        final Button cancel = new Button(i18n.t("Cancel"));
         cancel.addListener(new ButtonListenerAdapter() {
             @Override
             public void onClick(final Button button, final EventObject e) {

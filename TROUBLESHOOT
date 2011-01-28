@@ -5,6 +5,8 @@
 Server: debug with jetty in eclipse:
 http://docs.codehaus.org/display/JETTY/Debugging+with+the+Maven+Jetty+Plugin+inside+Eclipse
 
+Also for different logging levels you can play with -Dorg.eclipse.jetty.util.log.DEBUG=true (or similars)
+
 == Client debug ==
 
 Client code: you can debug with gwt hosted mode in eclipse (see DEV-GUIDE for hosted mode instructions).
@@ -75,5 +77,8 @@ If you have some tests with error like "can not be found in source packages. Che
  Error: Problem with Eclipse plugin and UiBinder "Field xxx has no corresponding field in template file yyy.ui.xml"
 https://code.google.com/p/google-web-toolkit/issues/detail?id=4353
 
-== Outbound variable M2_REPO ==
+=== Outbound variable M2_REPO ===
+
 Set M2_REPO to eclipse in Preferences > Java > Build Path > Classpath Variable (normally to /home/youruser/.m2/repository/)
+
+===

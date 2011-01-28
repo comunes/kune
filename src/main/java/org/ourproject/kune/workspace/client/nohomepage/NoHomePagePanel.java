@@ -19,10 +19,10 @@
  \*/
 package org.ourproject.kune.workspace.client.nohomepage;
 
-import org.ourproject.kune.platf.client.PlatfMessages;
 import org.ourproject.kune.workspace.client.skel.EntityWorkspace;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.user.client.ui.Label;
@@ -35,7 +35,7 @@ public class NoHomePagePanel implements NoHomePageView {
 
     public NoHomePagePanel(final NoHomePagePresenter presenter, final WorkspaceSkeleton ws, I18nTranslationService i18n) {
         this.ws = ws;
-        noHomepageCtnLabel = new Label(i18n.t(PlatfMessages.USER_DOESN_T_HAVE_A_HOMEPAGE));
+        noHomepageCtnLabel = new Label(i18n.t(CoreMessages.USER_DOESN_T_HAVE_A_HOMEPAGE));
         noHomepageCtnLabel.ensureDebugId(NO_HOME_PAGE_LABEL);
         noHomepageCtnLabel.setStyleName("kune-Content-Main");
         noHomepageCtnLabel.addStyleName("kune-Margin-7-trbl");

@@ -13,12 +13,12 @@ public class PopupPanelBottomCentered extends PopupPanel {
         init();
     }
 
-    public PopupPanelBottomCentered(boolean autohide) {
+    public PopupPanelBottomCentered(final boolean autohide) {
         super(autohide);
         init();
     }
 
-    public PopupPanelBottomCentered(boolean autohide, boolean modal) {
+    public PopupPanelBottomCentered(final boolean autohide, final boolean modal) {
         super(autohide, modal);
         init();
     }
@@ -30,7 +30,7 @@ public class PopupPanelBottomCentered extends PopupPanel {
         addStyleName("k-top-10corners");
         Window.addResizeHandler(new ResizeHandler() {
             @Override
-            public void onResize(ResizeEvent event) {
+            public void onResize(final ResizeEvent event) {
                 setCenterPositionImpl();
             }
         });
@@ -41,15 +41,19 @@ public class PopupPanelBottomCentered extends PopupPanel {
     }
 
     private void setCenterPositionImpl() {
-        Widget widget = getWidget();
-        int x = (Window.getClientWidth() - (widget != null ? getWidget().getOffsetWidth() : 0)) / 2;
-        int y = Window.getClientHeight() - (widget != null ? getWidget().getOffsetHeight() : 0);
-        setPopupPosition(x, y);
+        setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+            @Override
+            public void setPosition(final int offsetWidth, final int offsetHeight) {
+                final Widget widget = getWidget();
+                final int x = (Window.getClientWidth() - (widget != null ? getWidget().getOffsetWidth() : 0)) / 2;
+                final int y = Window.getClientHeight() - (widget != null ? getWidget().getOffsetHeight() : 0);
+                PopupPanelBottomCentered.this.setPopupPosition(x, y);
+            }
+        });
+
     }
 
-    @Override
-    public void show() {
-        super.show();
-        setCenterPosition();
+    public void showCentered() {
+        setCenterPositionImpl();
     }
 }

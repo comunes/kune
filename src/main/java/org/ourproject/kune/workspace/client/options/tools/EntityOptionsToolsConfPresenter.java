@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
+import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -19,12 +19,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public abstract class EntityOptionsToolsConfPresenter {
 
-    private EntityOptionsToolsConfView view;
     private final EntityOptions entityOptions;
-    protected final Session session;
     private final Provider<GroupServiceAsync> groupService;
     protected final I18nTranslationService i18n;
+    protected final Session session;
     protected final StateManager stateManager;
+    private EntityOptionsToolsConfView view;
 
     public EntityOptionsToolsConfPresenter(final Session session, final StateManager stateManager,
             final I18nTranslationService i18n, final EntityOptions entityOptions,
@@ -36,9 +36,23 @@ public abstract class EntityOptionsToolsConfPresenter {
         this.groupService = groupService;
     }
 
+    protected abstract boolean applicable();
+
+    protected abstract Collection<ToolSimpleDTO> getAllTools();
+
+    protected abstract StateToken getDefContentToken();
+
+    protected abstract String getDefContentTooltip();
+
+    protected abstract List<String> getEnabledTools();
+
+    protected abstract StateToken getOperationToken();
+
     public View getView() {
         return view;
     }
+
+    protected abstract void gotoDifLocationIfNecessary(String toolName);
 
     public void init(final EntityOptionsToolsConfView view) {
         this.view = view;
@@ -60,20 +74,6 @@ public abstract class EntityOptionsToolsConfPresenter {
             }
         }
     }
-
-    protected abstract boolean applicable();
-
-    protected abstract Collection<ToolSimpleDTO> getAllTools();
-
-    protected abstract StateToken getDefContentToken();
-
-    protected abstract String getDefContentTooltip();
-
-    protected abstract List<String> getEnabledTools();
-
-    protected abstract StateToken getOperationToken();
-
-    protected abstract void gotoDifLocationIfNecessary(String toolName);
 
     protected void reset() {
         view.clear();
@@ -104,11 +104,13 @@ public abstract class EntityOptionsToolsConfPresenter {
     protected void setToolCheckedInServer(final boolean checked, final String toolName) {
         groupService.get().setToolEnabled(session.getUserHash(), getOperationToken(), toolName, checked,
                 new AsyncCallback<Void>() {
+                    @Override
                     public void onFailure(final Throwable caught) {
                         view.setChecked(toolName, !checked);
-                        entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), Level.error);
+                        entityOptions.setErrorMessage(i18n.t("Error configuring the tool"), NotifyLevel.error);
                     }
 
+                    @Override
                     public void onSuccess(final Void result) {
                         stateManager.reload();
                     }

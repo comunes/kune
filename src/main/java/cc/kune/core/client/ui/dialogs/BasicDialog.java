@@ -1,5 +1,8 @@
 package cc.kune.core.client.ui.dialogs;
 
+import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.client.utils.TextUtils;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -8,57 +11,54 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class BasicDialog extends Composite implements BasicDialogView {
 
+    interface BasicDialogUiBinder extends UiBinder<Widget, BasicDialog> {
+    }
     private static BasicDialogUiBinder uiBinder = GWT.create(BasicDialogUiBinder.class);
     @UiField
-    InlineLabel title;
+    VerticalPanel bottomPanel;
     @UiField
     Button firstBtn;
     @UiField
     Button secondBtn;
     @UiField
+    IconLabel title;
+    @UiField
     VerticalPanel vp;
-
-    interface BasicDialogUiBinder extends UiBinder<Widget, BasicDialog> {
-    }
 
     public BasicDialog() {
         initWidget(uiBinder.createAndBindUi(this));
-        title.ensureDebugId("k-ucvi-title");
-        firstBtn.ensureDebugId("k-ucvi-accept-btn");
-        secondBtn.ensureDebugId("k-ucvi-cancel-btn");
     }
 
-    public void setTitleId(String id) {
-        title.ensureDebugId(id);
+    public void ensureDebugIdFirstBtn(final String id) {
+        if (id != null && id.length() > 0) {
+            firstBtn.ensureDebugId(id);
+        }
     }
 
-    public void setFirstBtnId(String id) {
-        firstBtn.ensureDebugId(id);
-    }
-
-    public void setSecondBtnId(String id) {
-        secondBtn.ensureDebugId(id);
+    public void ensureDebugIdSecondBtn(final String id) {
+        if (id != null && id.length() > 0) {
+            secondBtn.ensureDebugId(id);
+        }
     }
 
     @Override
-    public HasDirectionalText getTitleText() {
-        return title;
-    }
-
-    @Override
-    public HasClickHandlers getSecondBtn() {
-        return secondBtn;
+    public ForIsWidget getBottomPanel() {
+        return bottomPanel;
     }
 
     @Override
     public HasClickHandlers getFirstBtn() {
+        return firstBtn;
+    }
+
+    @Override
+    public HasText getFirstBtnText() {
         return firstBtn;
     }
 
@@ -68,12 +68,36 @@ public class BasicDialog extends Composite implements BasicDialogView {
     }
 
     @Override
-    public HasText getFirstBtnText() {
-        return firstBtn;
+    public HasClickHandlers getSecondBtn() {
+        return secondBtn;
     }
 
     @Override
     public HasText getSecondBtnText() {
         return secondBtn;
     }
+
+    @Override
+    public HasDirectionalText getTitleText() {
+        return title;
+    }
+
+    public void setFirstBtnId(final String id) {
+        firstBtn.ensureDebugId(id);
+    }
+
+    public void setSecondBtnId(final String id) {
+        secondBtn.ensureDebugId(id);
+    }
+
+    public void setTitleIcon(final String icon) {
+        if (TextUtils.notEmpty(icon)) {
+            title.setIcon(icon);
+        }
+    }
+
+    public void setTitleId(final String id) {
+        title.ensureDebugId(id);
+    }
+
 }

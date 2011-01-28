@@ -20,7 +20,8 @@
 package org.ourproject.kune.platf.client.ui.dialogs.tabbed;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
+
+import cc.kune.common.client.noti.NotifyLevel;
 
 public interface AbstractTabbedDialogView extends View {
 
@@ -38,6 +39,6 @@ public interface AbstractTabbedDialogView extends View {
 
     void insertTab(int index, View tab);
 
-    void setErrorMessage(final String message, final Level level);
+    void setErrorMessage(final String message, final NotifyLevel level);
 
 }

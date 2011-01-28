@@ -155,14 +155,6 @@ import org.ourproject.kune.workspace.client.search.SiteSearcherView;
 import org.ourproject.kune.workspace.client.search.UserLiveSearcher;
 import org.ourproject.kune.workspace.client.search.UserLiveSearcherPanel;
 import org.ourproject.kune.workspace.client.search.UserLiveSearcherPresenter;
-import org.ourproject.kune.workspace.client.signin.Register;
-import org.ourproject.kune.workspace.client.signin.RegisterPanel;
-import org.ourproject.kune.workspace.client.signin.RegisterPresenter;
-import org.ourproject.kune.workspace.client.signin.RegisterView;
-import org.ourproject.kune.workspace.client.signin.SignIn;
-import org.ourproject.kune.workspace.client.signin.SignInPanel;
-import org.ourproject.kune.workspace.client.signin.SignInPresenter;
-import org.ourproject.kune.workspace.client.signin.SignInView;
 import org.ourproject.kune.workspace.client.site.WorkspaceNotifyUser;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessage;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessagePanel;
@@ -236,6 +228,9 @@ import org.ourproject.kune.workspace.client.wave.WaveInsert;
 import org.ourproject.kune.workspace.client.wave.WaveInsertPanel;
 import org.ourproject.kune.workspace.client.wave.WaveInsertPresenter;
 
+import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.core.client.auth.Register;
+import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.ContentService;
@@ -633,7 +628,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 final GroupOptionsPresenter presenter = new GroupOptionsPresenter(i(StateManager.class),
                         i(I18nTranslationService.class), i(ImgResources.class));
                 final GroupOptionsPanel panel = new GroupOptionsPanel(presenter, i(EntityHeader.class),
-                        i(I18nTranslationService.class), i(Images.class), i(GroupOptionsCollection.class));
+                        i(I18nTranslationService.class), i(NotifyLevelImages.class), i(GroupOptionsCollection.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -646,7 +641,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(StateManager.class), i(I18nTranslationService.class), i(ImgResources.class),
                         i(SiteUserOptions.class));
                 final UserOptionsPanel panel = new UserOptionsPanel(presenter, i(EntityHeader.class),
-                        i(I18nTranslationService.class), i(Images.class), i(UserOptionsCollection.class));
+                        i(I18nTranslationService.class), i(NotifyLevelImages.class), i(UserOptionsCollection.class));
                 presenter.init(panel);
                 return presenter;
             }
@@ -865,29 +860,36 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(Singleton.class, new Factory<SignIn>(SignIn.class) {
-            @Override
-            public SignIn create() {
-                final SignInPresenter presenter = new SignInPresenter(i(Session.class), i(StateManager.class),
-                        i(I18nUITranslationService.class), p(UserServiceAsync.class), p(Register.class));
-                final SignInView panel = new SignInPanel(presenter, i(I18nTranslationService.class),
-                        i(WorkspaceSkeleton.class), i(Images.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
-        register(Singleton.class, new Factory<Register>(Register.class) {
-            @Override
-            public Register create() {
-                final RegisterPresenter presenter = new RegisterPresenter(i(Session.class), i(StateManager.class),
-                        i(I18nUITranslationService.class), p(UserServiceAsync.class), p(SignIn.class));
-                final RegisterView panel = new RegisterPanel(presenter, i(I18nTranslationService.class),
-                        i(WorkspaceSkeleton.class), i(Session.class), i(Images.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+        // register(Singleton.class, new Factory<SignIn>(SignIn.class) {
+        // @Override
+        // public SignIn create() {
+        // final SignInPresenter presenter = new
+        // SignInPresenter(i(Session.class), i(StateManager.class),
+        // i(I18nUITranslationService.class), p(UserServiceAsync.class),
+        // p(Register.class));
+        // final SignInView panel = new SignInPanel(presenter,
+        // i(I18nTranslationService.class),
+        // i(WorkspaceSkeleton.class), i(NotifyLevelImages.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
+        //
+        // register(Singleton.class, new Factory<Register>(Register.class) {
+        // @Override
+        // public Register create() {
+        // final RegisterPresenter presenter = new
+        // RegisterPresenter(i(Session.class), i(StateManager.class),
+        // i(I18nUITranslationService.class), p(UserServiceAsync.class),
+        // p(SignIn.class));
+        // final RegisterView panel = new RegisterPanel(presenter,
+        // i(I18nTranslationService.class),
+        // i(WorkspaceSkeleton.class), i(Session.class),
+        // i(NotifyLevelImages.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
         register(Singleton.class, new Factory<NewGroup>(NewGroup.class) {
             @Override
@@ -895,7 +897,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 final NewGroupPresenter presenter = new NewGroupPresenter(i(I18nTranslationService.class),
                         i(Session.class), i(StateManager.class), p(GroupServiceAsync.class));
                 final NewGroupPanel view = new NewGroupPanel(presenter, i(I18nTranslationService.class),
-                        p(LicenseWizard.class), i(Images.class));
+                        p(LicenseWizard.class), i(NotifyLevelImages.class));
                 presenter.init(view);
                 return presenter;
             }

@@ -22,11 +22,12 @@ package org.ourproject.kune.platf.client.ui.dialogs.tabbed;
 import java.util.ArrayList;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
-import org.ourproject.kune.platf.client.ui.dialogs.MessageToolbar;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
+
+import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.core.client.ui.dialogs.MessageToolbar;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
@@ -37,24 +38,25 @@ import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.event.WindowListenerAdapter;
 
 public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogView {
+    private final ArrayList<Button> buttons;
     private BasicDialog dialog;
     private final String dialogId;
-    private TabPanel tabPanel;
+    private final String errorLabelId;
+    private final int height;
+    private String iconCls;
+    private final NotifyLevelImages images;
     private MessageToolbar messageErrorBar;
+    private final int minHeight;
+    private final int minWidth;
+    private final boolean modal;
+    private Listener0 onHideListener;
+    private TabPanel tabPanel;
     private String title;
     private final int width;
-    private final int height;
-    private final int minWidth;
-    private final int minHeight;
-    private final boolean modal;
-    private final Images images;
-    private final String errorLabelId;
-    private String iconCls;
-    private Listener0 onHideListener;
-    private final ArrayList<Button> buttons;
 
     public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width, final int height,
-            final int minWidth, final int minHeight, final boolean modal, final Images images, final String errorLabelId) {
+            final int minWidth, final int minHeight, final boolean modal, final NotifyLevelImages images,
+            final String errorLabelId) {
         this.dialogId = dialogId;
         this.title = title;
         this.width = width;
@@ -67,6 +69,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         buttons = new ArrayList<Button>();
     }
 
+    @Override
     public void activateTab(final int index) {
         createDialogIfNecessary();
         tabPanel.activate(index);
@@ -81,6 +84,20 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         buttons.add(button);
     }
 
+    private void addHideListener() {
+        dialog.addListener(new WindowListenerAdapter() {
+            @Override
+            public void onClose(final Panel panel) {
+                onHideListener.onEvent();
+            }
+
+            @Override
+            public void onHide(final Component component) {
+                onHideListener.onEvent();
+            }
+        });
+    }
+
     public void addHideListener(final Listener0 onHideListener) {
         this.onHideListener = onHideListener;
         if (dialog != null) {
@@ -88,16 +105,62 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         }
     }
 
+    @Override
     public void addTab(final View view) {
         addTabPanel(castPanel(view));
         doLayoutIfNeeded();
     }
 
+    private void addTabPanel(final Panel newTab) {
+        createDialogIfNecessary();
+        tabPanel.add(newTab);
+    }
+
+    private Panel castPanel(final View view) {
+        Panel panel;
+        if (view instanceof Panel) {
+            panel = (Panel) view;
+        } else if (view instanceof DefaultForm) {
+            panel = ((DefaultForm) view).getFormPanel();
+        } else {
+            panel = null;
+            Log.error("Programatic error: Unexpected element added to GroupOptions");
+        }
+        return panel;
+    }
+
+    @Override
     public void createAndShow() {
         show();
         setFirstTabActive();
     }
 
+    private void createDialog() {
+        dialog = new BasicDialog(dialogId, title, modal, true, width, height, minWidth, minHeight);
+        dialog.setCollapsible(false);
+        messageErrorBar = new MessageToolbar(images, errorLabelId);
+        // FIXME in gxt: dialog.setBottomToolbar(messageErrorBar.getToolbar());
+        tabPanel = new TabPanel();
+        tabPanel.setBorder(false);
+        dialog.add(tabPanel);
+        if (iconCls != null) {
+            dialog.setIconCls(iconCls);
+        }
+        if (onHideListener != null) {
+            addHideListener();
+        }
+        for (final Button button : buttons) {
+            dialog.addButton(button);
+        }
+    }
+
+    private void createDialogIfNecessary() {
+        if (dialog == null) {
+            createDialog();
+        }
+    }
+
+    @Override
     public void destroy() {
         if (dialog != null) {
             dialog.destroy();
@@ -111,6 +174,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         }
     }
 
+    @Override
     public void hide() {
         if (dialog != null) {
             if (dialog.isVisible()) {
@@ -119,15 +183,22 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         }
     }
 
+    @Override
     public void hideMessages() {
         if (dialog != null) {
             messageErrorBar.hideErrorMessage();
         }
     }
 
+    @Override
     public void insertTab(final int index, final View view) {
         insertTabPanel(index, castPanel(view));
         doLayoutIfNeeded();
+    }
+
+    private void insertTabPanel(final int index, final Panel newTab) {
+        createDialogIfNecessary();
+        tabPanel.insert(index, newTab);
     }
 
     public boolean isVisible() {
@@ -135,7 +206,8 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         return dialog.isVisible();
     }
 
-    public void setErrorMessage(final String message, final Level level) {
+    @Override
+    public void setErrorMessage(final String message, final NotifyLevel level) {
         messageErrorBar.setErrorMessage(message, level);
     }
 
@@ -160,67 +232,5 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
     public void show() {
         createDialogIfNecessary();
         dialog.show();
-    }
-
-    private void addHideListener() {
-        dialog.addListener(new WindowListenerAdapter() {
-            @Override
-            public void onClose(final Panel panel) {
-                onHideListener.onEvent();
-            }
-
-            @Override
-            public void onHide(final Component component) {
-                onHideListener.onEvent();
-            }
-        });
-    }
-
-    private void addTabPanel(final Panel newTab) {
-        createDialogIfNecessary();
-        tabPanel.add(newTab);
-    }
-
-    private Panel castPanel(final View view) {
-        Panel panel;
-        if (view instanceof Panel) {
-            panel = (Panel) view;
-        } else if (view instanceof DefaultForm) {
-            panel = ((DefaultForm) view).getFormPanel();
-        } else {
-            panel = null;
-            Log.error("Programatic error: Unexpected element added to GroupOptions");
-        }
-        return panel;
-    }
-
-    private void createDialog() {
-        dialog = new BasicDialog(dialogId, title, modal, true, width, height, minWidth, minHeight);
-        dialog.setCollapsible(false);
-        messageErrorBar = new MessageToolbar(images, errorLabelId);
-        dialog.setBottomToolbar(messageErrorBar.getToolbar());
-        tabPanel = new TabPanel();
-        tabPanel.setBorder(false);
-        dialog.add(tabPanel);
-        if (iconCls != null) {
-            dialog.setIconCls(iconCls);
-        }
-        if (onHideListener != null) {
-            addHideListener();
-        }
-        for (final Button button : buttons) {
-            dialog.addButton(button);
-        }
-    }
-
-    private void createDialogIfNecessary() {
-        if (dialog == null) {
-            createDialog();
-        }
-    }
-
-    private void insertTabPanel(final int index, final Panel newTab) {
-        createDialogIfNecessary();
-        tabPanel.insert(index, newTab);
     }
 }

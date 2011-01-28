@@ -1,6 +1,7 @@
 package cc.kune.common.client.actions.gxtui;
 
 import cc.kune.common.client.actions.gwtui.GwtIconLabelGui;
+import cc.kune.common.client.actions.gwtui.GwtToolbarSeparatorGui;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
@@ -24,7 +25,7 @@ public class GxtGuiProvider {
             final Provider<GxtMenuGui> gxtMenuGui, final Provider<GxtMenuItemGui> gxtMenuItemGui,
             final Provider<GxtMenuSeparatorGui> gxtMenuSeparatorGui, final Provider<GxtPushButtonGui> gxtPushButtonGui,
             final Provider<GxtButtonGui> gxtButtonGui, final Provider<GwtIconLabelGui> gwtIconLabelGui,
-            final Provider<GxtToolbarGui> gxtToolbarGui, final Provider<GxtToolbarSeparatorGui> gxtToolbarSeparatorGui) {
+            final Provider<GxtToolbarGui> gxtToolbarGui, final Provider<GwtToolbarSeparatorGui> gxtToolbarSeparatorGui) {
 
         guiProvider.register(SubMenuDescriptor.class, gxtSubMenuGui);
         guiProvider.register(MenuDescriptor.class, gxtMenuGui);

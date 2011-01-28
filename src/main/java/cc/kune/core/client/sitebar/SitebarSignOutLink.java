@@ -3,9 +3,9 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.errors.UIException;
-import cc.kune.core.client.actions.BeforeActionCollection;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.SessionExpiredEvent;
@@ -16,6 +16,8 @@ import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.UserSignInEvent;
+import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -92,14 +94,14 @@ public class SitebarSignOutLink extends ButtonDescriptor {
 
     @Inject
     public SitebarSignOutLink(final SitebarSignOutAction action, final EventBus eventBus,
-            final ErrorHandler errorHandler) {
+            final ErrorHandler errorHandler, final Session session) {
         super(action);
         setStyles("k-floatright, k-no-backimage, k-btn-sitebar");
         setId(SITE_SIGN_OUT);
-        setVisible(false);
-        eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutHandler() {
+        setVisible(session.isLogged());
+        eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
             @Override
-            public void onUserSignOut(final UserSignOutEvent event) {
+            public void onUserSignIn(final UserSignInEvent event) {
                 SitebarSignOutLink.this.setVisible(true);
             }
         });

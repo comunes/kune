@@ -24,6 +24,8 @@ import cc.kune.core.client.notify.alerts.AlertEvent;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -31,21 +33,20 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 public class ErrorHandler {
 
     private final EventBus eventBus;
     private final I18nTranslationService i18n;
-    private final PlaceManager placeManager;
     private final Session session;
+    private final StateManager stateManager;
 
     @Inject
-    public ErrorHandler(final Session session, final I18nTranslationService i18n, final PlaceManager placeManager,
+    public ErrorHandler(final Session session, final I18nTranslationService i18n, final StateManager stateManager,
             final EventBus eventBus) {
         this.session = session;
         this.i18n = i18n;
-        this.placeManager = placeManager;
+        this.stateManager = stateManager;
         this.eventBus = eventBus;
     }
 
@@ -55,7 +56,7 @@ public class ErrorHandler {
     }
 
     private void goHome() {
-        placeManager.revealDefaultPlace();
+        stateManager.gotoToken(SiteCommonTokens.HOME);
     }
 
     private void logException(final Throwable caught) {

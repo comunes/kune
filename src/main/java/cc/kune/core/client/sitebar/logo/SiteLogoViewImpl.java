@@ -12,7 +12,6 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 public class SiteLogoViewImpl extends ViewWithUiHandlers<SiteLogoUiHandlers> implements SiteLogoView {
 
@@ -25,7 +24,7 @@ public class SiteLogoViewImpl extends ViewWithUiHandlers<SiteLogoUiHandlers> imp
     Image logo;
 
     @Inject
-    public SiteLogoViewImpl(WsArmor armor, PlaceManager placeManager) {
+    public SiteLogoViewImpl(final WsArmor armor) {
         armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
     }
 
@@ -35,14 +34,14 @@ public class SiteLogoViewImpl extends ViewWithUiHandlers<SiteLogoUiHandlers> imp
     }
 
     @UiHandler("logo")
-    void onLogoClick(ClickEvent event) {
+    void onLogoClick(final ClickEvent event) {
         if (getUiHandlers() != null) {
             getUiHandlers().onClick();
         }
     }
 
     @Override
-    public void setSiteLogoUrl(String siteLogoUrl) {
+    public void setSiteLogoUrl(final String siteLogoUrl) {
         logo.setUrl(siteLogoUrl);
     }
 }

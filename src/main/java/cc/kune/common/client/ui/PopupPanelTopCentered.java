@@ -4,7 +4,6 @@ import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class PopupPanelTopCentered extends PopupPanel {
     public PopupPanelTopCentered() {
@@ -12,12 +11,12 @@ public class PopupPanelTopCentered extends PopupPanel {
         init();
     }
 
-    public PopupPanelTopCentered(boolean autohide) {
+    public PopupPanelTopCentered(final boolean autohide) {
         super(autohide);
         init();
     }
 
-    public PopupPanelTopCentered(boolean autohide, boolean modal) {
+    public PopupPanelTopCentered(final boolean autohide, final boolean modal) {
         super(autohide, modal);
         init();
     }
@@ -29,7 +28,7 @@ public class PopupPanelTopCentered extends PopupPanel {
         addStyleName("k-bottom-10corners");
         Window.addResizeHandler(new ResizeHandler() {
             @Override
-            public void onResize(ResizeEvent event) {
+            public void onResize(final ResizeEvent event) {
                 setCenterPositionImpl();
             }
         });
@@ -40,15 +39,17 @@ public class PopupPanelTopCentered extends PopupPanel {
     }
 
     private void setCenterPositionImpl() {
-        Widget widget = getWidget();
-        int x = (Window.getClientWidth() - (widget != null ? getWidget().getOffsetWidth() : 0)) / 2;
-        int y = 0;
-        setPopupPosition(x, y);
+        setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+            @Override
+            public void setPosition(final int offsetWidth, final int offsetHeight) {
+                final int x = (Window.getClientWidth() - (getWidget() != null ? getWidget().getOffsetWidth() : 0)) / 2;
+                final int y = 0;
+                PopupPanelTopCentered.this.setPopupPosition(x, y);
+            }
+        });
     }
 
-    @Override
-    public void show() {
-        super.show();
-        setCenterPosition();
+    public void showCentered() {
+        setCenterPositionImpl();
     }
 }

@@ -4,16 +4,18 @@ import java.util.Iterator;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class IconLabel extends Composite implements HasWidgets {
+public class IconLabel extends Composite implements HasWidgets, HasDirectionalText {
 
     interface IconTitleUiBinder extends UiBinder<Widget, IconLabel> {
     }
@@ -21,11 +23,15 @@ public class IconLabel extends Composite implements HasWidgets {
     private static IconTitleUiBinder uiBinder = GWT.create(IconTitleUiBinder.class);
 
     @UiField
-    HTML label;
-    @UiField
     HorizontalPanel hp;
     @UiField
+    HTML label;
+    @UiField
     FocusPanel self;
+
+    public IconLabel() {
+        this("");
+    }
 
     public IconLabel(final String text) {
         initWidget(uiBinder.createAndBindUi(this));
@@ -51,6 +57,16 @@ public class IconLabel extends Composite implements HasWidgets {
     }
 
     @Override
+    public String getText() {
+        return label.getText();
+    }
+
+    @Override
+    public Direction getTextDirection() {
+        return label.getTextDirection();
+    }
+
+    @Override
     public Iterator<Widget> iterator() {
         return hp.iterator();
     }
@@ -69,7 +85,13 @@ public class IconLabel extends Composite implements HasWidgets {
         label.setHTML(html);
     }
 
+    @Override
     public void setText(final String text) {
         label.setText(text);
+    }
+
+    @Override
+    public void setText(final String text, final Direction dir) {
+        label.setText(text, dir);
     }
 }

@@ -20,16 +20,19 @@
 package org.ourproject.kune.platf.client.ui.dialogs.tabbed;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
+
+import cc.kune.common.client.noti.NotifyLevel;
 
 public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDialog {
 
     private AbstractTabbedDialogView view;
 
+    @Override
     public void activateTab(final int index) {
         view.activateTab(index);
     }
 
+    @Override
     public void addTab(final View tab) {
         view.addTab(tab);
     }
@@ -42,6 +45,7 @@ public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDia
         view.hide();
     }
 
+    @Override
     public void hideMessages() {
         view.hideMessages();
     }
@@ -54,10 +58,11 @@ public abstract class AbstractTabbedDialogPresenter implements AbstractTabbedDia
         view.insertTab(index, tab);
     }
 
-    public void setErrorMessage(final String message, final Level level) {
+    public void setErrorMessage(final String message, final NotifyLevel level) {
         view.setErrorMessage(message, level);
     }
 
+    @Override
     public void show() {
         hideMessages();
         view.createAndShow();
