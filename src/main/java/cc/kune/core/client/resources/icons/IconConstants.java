@@ -1,8 +1,8 @@
-package org.ourproject.kune.platf.client.ui.img;
+package cc.kune.core.client.resources.icons;
 
 import com.google.gwt.resources.client.ImageResource;
 
-public final class ImgConstants {
+public final class IconConstants {
 
     public static final String CSS_SUFFIX = "k-icon-";
 
@@ -12,6 +12,6 @@ public final class ImgConstants {
         return PATH_PREFIX + img.getName() + ".png";
     }
 
-    private ImgConstants() {
+    private IconConstants() {
     }
 }

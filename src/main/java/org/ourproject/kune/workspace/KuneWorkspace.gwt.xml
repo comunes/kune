@@ -9,7 +9,7 @@
   <script src="js/ext/ext-all.js" />
   <inherits name="com.gwtext.GwtExt" />
   <inherits name="com.calclab.suco.Suco" />
-  <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />
+<!--  <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />-->
   <inherits name="com.gwtextux.GwtExtUx" />
   <inherits name="com.gwtextux.UploadDialog" />
   <inherits name="com.gwtextux.ToastWindow" />

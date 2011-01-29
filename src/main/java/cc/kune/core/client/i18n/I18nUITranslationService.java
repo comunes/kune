@@ -25,12 +25,12 @@ import java.util.HashMap;
 import cc.kune.common.client.utils.Location;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -192,6 +192,7 @@ public class I18nUITranslationService extends I18nTranslationService {
      */
     @Override
     public String t(final String text) {
+        assert lexicon != null;
         final String encodeText = TextUtils.escapeHtmlLight(text);
         String translation = lexicon.get(encodeText);
         if (lexicon.containsKey(encodeText)) {

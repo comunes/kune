@@ -22,7 +22,6 @@ package org.ourproject.kune.platf.client.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -49,19 +48,19 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class IconLabelEditable extends Composite {
 
-    private boolean useDoubleClick;
-    private String currentText;
-    private final AbstractLabel label;
-    private String dblClickLabel;
+    private ClickHandler clickHandler;
     private String clickLabel;
-    private Event2<String, String> onEditEvent;
+    private String currentText;
+    private String dblClickLabel;
+    private DoubleClickHandler doubleClickHandler;
+    // private Event2<String, String> onEditEvent;
     private TextBox editor;
     private HorizontalPanel hpanel;
-    private List<HandlerRegistration> registrations;
-    private ClickHandler clickHandler;
-    private DoubleClickHandler doubleClickHandler;
+    private final AbstractLabel label;
     private MouseOutHandler mouseOutHandler;
     private MouseOverHandler mouseOverHandler;
+    private List<HandlerRegistration> registrations;
+    private boolean useDoubleClick;
 
     public IconLabelEditable() {
         this("");
@@ -94,6 +93,16 @@ public class IconLabelEditable extends Composite {
         init(text, useDoubleClick);
     }
 
+    private void afterEdit() {
+        final String text = editor.getText();
+        // onEditEvent.fire(currentText, text);
+        setTextImpl(text);
+        editor.setVisible(false);
+        editor.setReadOnly(true);
+        label.setVisible(true);
+        label.removeStyleDependentName("high");
+    }
+
     public void edit() {
         showEditor();
         editor.setFocus(true);
@@ -103,8 +112,55 @@ public class IconLabelEditable extends Composite {
         return label.getText();
     }
 
+    private void init(final String text, final boolean useDoubleClick) {
+        // this.onEditEvent = new Event2<String, String>("onLabelEdit");
+        registrations = new ArrayList<HandlerRegistration>();
+        dblClickLabel = "Double click to rename";
+        clickLabel = "Click to rename";
+        hpanel = new HorizontalPanel();
+        hpanel.add((Widget) label);
+        initWidget(hpanel);
+        this.currentText = text;
+        this.useDoubleClick = useDoubleClick;
+        label.setStylePrimaryName("kune-EditableLabel");
+        doubleClickHandler = new DoubleClickHandler() {
+            @Override
+            public void onDoubleClick(final DoubleClickEvent event) {
+                showEditor();
+            }
+        };
+        clickHandler = new ClickHandler() {
+            @Override
+            public void onClick(final ClickEvent event) {
+                showEditor();
+            }
+        };
+        mouseOverHandler = new MouseOverHandler() {
+            @Override
+            public void onMouseOver(final MouseOverEvent event) {
+                label.addStyleDependentName("high");
+            }
+        };
+        mouseOutHandler = new MouseOutHandler() {
+            @Override
+            public void onMouseOut(final MouseOutEvent event) {
+                label.removeStyleDependentName("high");
+            }
+        };
+        setEditableImpl(false);
+    }
+
     public void onEdit(final Listener2<String, String> slot) {
-        onEditEvent.add(slot);
+        // onEditEvent.add(slot);
+    }
+
+    private void reset() {
+        label.removeStyleDependentName("noneditable");
+        label.removeStyleDependentName("editable");
+        for (final HandlerRegistration reg : registrations) {
+            reg.removeHandler();
+        }
+        registrations.clear();
     }
 
     /**
@@ -131,63 +187,6 @@ public class IconLabelEditable extends Composite {
         setEditableImpl(editable);
     }
 
-    public void setText(final String text) {
-        setTextImpl(text);
-    }
-
-    private void afterEdit() {
-        final String text = editor.getText();
-        onEditEvent.fire(currentText, text);
-        setTextImpl(text);
-        editor.setVisible(false);
-        editor.setReadOnly(true);
-        label.setVisible(true);
-        label.removeStyleDependentName("high");
-    }
-
-    private void init(final String text, final boolean useDoubleClick) {
-        this.onEditEvent = new Event2<String, String>("onLabelEdit");
-        registrations = new ArrayList<HandlerRegistration>();
-        dblClickLabel = "Double click to rename";
-        clickLabel = "Click to rename";
-        hpanel = new HorizontalPanel();
-        hpanel.add((Widget) label);
-        initWidget(hpanel);
-        this.currentText = text;
-        this.useDoubleClick = useDoubleClick;
-        label.setStylePrimaryName("kune-EditableLabel");
-        doubleClickHandler = new DoubleClickHandler() {
-            public void onDoubleClick(final DoubleClickEvent event) {
-                showEditor();
-            }
-        };
-        clickHandler = new ClickHandler() {
-            public void onClick(final ClickEvent event) {
-                showEditor();
-            }
-        };
-        mouseOverHandler = new MouseOverHandler() {
-            public void onMouseOver(final MouseOverEvent event) {
-                label.addStyleDependentName("high");
-            }
-        };
-        mouseOutHandler = new MouseOutHandler() {
-            public void onMouseOut(final MouseOutEvent event) {
-                label.removeStyleDependentName("high");
-            }
-        };
-        setEditableImpl(false);
-    }
-
-    private void reset() {
-        label.removeStyleDependentName("noneditable");
-        label.removeStyleDependentName("editable");
-        for (final HandlerRegistration reg : registrations) {
-            reg.removeHandler();
-        }
-        registrations.clear();
-    }
-
     private void setEditableImpl(final boolean editable) {
         reset();
         if (editable) {
@@ -207,6 +206,10 @@ public class IconLabelEditable extends Composite {
         }
     }
 
+    public void setText(final String text) {
+        setTextImpl(text);
+    }
+
     private void setTextImpl(final String text) {
         this.currentText = text;
         label.setText(text);
@@ -220,11 +223,13 @@ public class IconLabelEditable extends Composite {
             editor.setStyleName("k-eil-edit");
             hpanel.add(editor);
             editor.addBlurHandler(new BlurHandler() {
+                @Override
                 public void onBlur(final BlurEvent event) {
                     afterEdit();
                 }
             });
             editor.addChangeHandler(new ChangeHandler() {
+                @Override
                 public void onChange(final ChangeEvent event) {
                     editor.setFocus(false);
                 }

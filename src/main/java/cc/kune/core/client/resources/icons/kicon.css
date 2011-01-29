@@ -1,4 +1,4 @@
-@external k-icon-info,k-icon-language,k-icon-kuneIcon16,k-icon-bug,k-icon-prefs,k-icon-groupHome,k-icon-addGreen,k-icon-maximize,k-icon-minimize;
+@external k-icon-info,k-icon-language,k-icon-kuneIcon16,k-icon-bug,k-icon-prefs,k-icon-groupHome,k-icon-addGreen,k-icon-maximize,k-icon-minimize,k-*;
 
 @sprite div .k-icon-info {
   gwt-image: "info";
@@ -30,6 +30,10 @@
 
 @sprite div .k-icon-maximize {
   gwt-image: "maximize";
+}
+
+@sprite div .k-icon-chat {
+  gwt-image: "chat";
 }
 
 @sprite div .k-icon-minimize {

@@ -6,11 +6,11 @@
 	
 }
 
-.k-floatleft {
+.k-floatleft, .k-fl {
 	float: left;
 }
 
-.k-floatright {
+.k-floatright, .k-fr {
 	float: right;
 }
 

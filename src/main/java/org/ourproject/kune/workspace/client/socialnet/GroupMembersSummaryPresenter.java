@@ -31,12 +31,12 @@ import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.ui.MenuItem;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbar;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
@@ -84,7 +84,7 @@ public class GroupMembersSummaryPresenter extends SocialNetworkPresenter impleme
             final Provider<GroupLiveSearcher> liveSearcherProvider, final Provider<ChatEngine> chatEngineProvider,
             final GroupActionRegistry groupActionRegistry, final ActionGroupSummaryToolbar toolbar,
             final Provider<FileDownloadUtils> downloadProvider, final AccessRightsClientManager accessRightsManager,
-            final ImgResources img) {
+            final IconResources img) {
         super(i18n, stateManager, accessRightsManager, session, snServiceProvider, groupActionRegistry,
                 downloadProvider, img);
         this.i18n = i18n;

@@ -6,8 +6,11 @@ import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.bind.GuiBinding;
 import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.core.client.resources.icons.IconConstants;
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractGuiItem extends Composite implements GuiBinding {
@@ -86,8 +89,12 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     }
 
     private void setIcon(final Object icon) {
-        if (icon != null) {
+        if (icon instanceof ImageResource) {
+            setIconStyle((IconConstants.CSS_SUFFIX + ((ImageResource) icon).getName()));
+        } else if (icon instanceof String) {
             setIconStyle((String) icon);
+        } else if (icon != null) {
+            throw new NotImplementedException();
         }
     }
 

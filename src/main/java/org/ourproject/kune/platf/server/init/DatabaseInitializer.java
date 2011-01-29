@@ -1,6 +1,5 @@
 package org.ourproject.kune.platf.server.init;
 
-import java.util.ArrayList;
 import java.util.TimeZone;
 
 import javax.persistence.NoResultException;
@@ -26,28 +25,26 @@ import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 import cc.kune.domain.License;
-import cc.kune.domain.Property;
 import cc.kune.domain.PropertyGroup;
 import cc.kune.domain.PropertySubgroup;
 import cc.kune.domain.User;
 
-import com.calclab.emiteuimodule.client.SubscriptionMode;
 import com.google.inject.Inject;
 import com.wideplay.warp.persist.TransactionType;
 import com.wideplay.warp.persist.Transactional;
 
 public class DatabaseInitializer {
+    private final ContentManager contentManager;
+    private final I18nCountryManager countryManager;
+    private final GroupManager groupManager;
+    private final I18nLanguageManager languageManager;
     private final LicenseManager licenseManager;
     private final DatabaseProperties properties;
-    private final GroupManager groupManager;
-    private final UserManager userManager;
-    private final I18nLanguageManager languageManager;
-    private final I18nCountryManager countryManager;
-    private final I18nTranslationManager translationManager;
-    private final ContentManager contentManager;
     private final PropertyManager propertyManager;
     private final PropertyGroupManager propGroupManager;
     private final PropertySubgroupManager propSubgroupManager;
+    private final I18nTranslationManager translationManager;
+    private final UserManager userManager;
 
     @Inject
     public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
@@ -67,36 +64,6 @@ public class DatabaseInitializer {
         this.propertyManager = propertyManager;
         this.propGroupManager = propGroupManager;
         this.propSubgroupManager = propSubgroupManager;
-    }
-
-    public void createOthers() {
-        final I18nLanguage english = new I18nLanguage(Long.valueOf(1819), "en", "ltr", "English", "", "", "en", "eng",
-                "eng", false, "", "", "", "c == 1 ? 1 : 2", null, "L", "MMM d\\, yyyy");
-        final I18nLanguage spanish = new I18nLanguage(Long.valueOf(5889), "es", "ltr", "Spanish", "", "", "es", "spa",
-                "spa", true, "Español", "", "", "c == 1 ? 1 : 2", null, "L", "dd/MM/yyyy");
-        languageManager.persist(english);
-        languageManager.persist(spanish);
-        final I18nCountry gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
-                "western", ",");
-        countryManager.persist(gb);
-        final I18nTranslation test = new I18nTranslation("test", english, "test");
-        translationManager.persist(test);
-    }
-
-    public void initConditional() throws Exception {
-        try {
-            groupManager.getSiteDefaultGroup();
-        } catch (final NoResultException e) {
-            initDatabase();
-        }
-    }
-
-    @Transactional(type = TransactionType.READ_WRITE)
-    public void initDatabase() throws Exception {
-        createOthers();
-        createLicenses();
-        createProperties();
-        createDefUsersGroup();
     }
 
     private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
@@ -199,6 +166,20 @@ public class DatabaseInitializer {
         licenseManager.persist(license);
     }
 
+    public void createOthers() {
+        final I18nLanguage english = new I18nLanguage(Long.valueOf(1819), "en", "ltr", "English", "", "", "en", "eng",
+                "eng", false, "", "", "", "c == 1 ? 1 : 2", null, "L", "MMM d\\, yyyy");
+        final I18nLanguage spanish = new I18nLanguage(Long.valueOf(5889), "es", "ltr", "Spanish", "", "", "es", "spa",
+                "spa", true, "Español", "", "", "c == 1 ? 1 : 2", null, "L", "dd/MM/yyyy");
+        languageManager.persist(english);
+        languageManager.persist(spanish);
+        final I18nCountry gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom",
+                "western", ",");
+        countryManager.persist(gb);
+        final I18nTranslation test = new I18nTranslation("test", english, "test");
+        translationManager.persist(test);
+    }
+
     private void createProperties() {
         final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
         final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
@@ -207,18 +188,40 @@ public class DatabaseInitializer {
         final PropertySubgroup userXmppProps = new PropertySubgroup("user-xmpp");
         propSubgroupManager.persist(userXmppProps);
 
-        final Property colorProp = new Property("xmpp_color", "Choose your color", Property.Type.STRING, true, "blue",
-                userProps, userXmppProps);
-        final ArrayList<String> subValues = new ArrayList<String>();
-        subValues.add(SubscriptionMode.autoAcceptAll.toString());
-        subValues.add(SubscriptionMode.autoRejectAll.toString());
-        subValues.add(SubscriptionMode.manual.toString());
-        final Property subProp = new Property("xmpp_subcriptionmode", "New buddies options", Property.Type.ENUM, true,
-                SubscriptionMode.manual.toString(), subValues, userProps, userXmppProps);
-        final Property unanavProp = new Property("xmpp_unanavailableitemsvisible", "Show unavailable buddies",
-                Property.Type.BOOL, true, Boolean.toString(true), userProps, userXmppProps);
-        propertyManager.persist(colorProp);
-        propertyManager.persist(subProp);
-        propertyManager.persist(unanavProp);
+        // final Property colorProp = new Property("xmpp_color",
+        // "Choose your color", Property.Type.STRING, true, "blue",
+        // userProps, userXmppProps);
+        // final ArrayList<String> subValues = new ArrayList<String>();
+        // subValues.add(SubscriptionMode.autoAcceptAll.toString());
+        // subValues.add(SubscriptionMode.autoRejectAll.toString());
+        // subValues.add(SubscriptionMode.manual.toString());
+        // final Property subProp = new Property("xmpp_subcriptionmode",
+        // "New buddies options", Property.Type.ENUM, true,
+        // SubscriptionMode.manual.toString(), subValues, userProps,
+        // userXmppProps);
+        // final Property unanavProp = new
+        // Property("xmpp_unanavailableitemsvisible",
+        // "Show unavailable buddies",
+        // Property.Type.BOOL, true, Boolean.toString(true), userProps,
+        // userXmppProps);
+        // propertyManager.persist(colorProp);
+        // propertyManager.persist(subProp);
+        // propertyManager.persist(unanavProp);
+    }
+
+    public void initConditional() throws Exception {
+        try {
+            groupManager.getSiteDefaultGroup();
+        } catch (final NoResultException e) {
+            initDatabase();
+        }
+    }
+
+    @Transactional(type = TransactionType.READ_WRITE)
+    public void initDatabase() throws Exception {
+        createOthers();
+        createLicenses();
+        createProperties();
+        createDefUsersGroup();
     }
 }

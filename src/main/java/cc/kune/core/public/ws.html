@@ -5,90 +5,41 @@
 <title>Kune</title>
 <script type="text/javascript" language="javascript"
 	src="/ws/ws.nocache.js"></script>
-</head>
+<meta name="emite.httpBase" content="/http-bind" />
+<meta name="emite.host" content="localhost" />
+<meta name="emite.searchHost" content="search.localhost" />
+<!--  <meta name="emite.session" content="login" /> -->
+<meta name="emite.user" content="admin@localhost" />
+<meta name="emite.password" content="easyeasy" />
+<meta name="hablar.roomService" content="conference.localhost" />
+<meta name="hablar.login" content="false" />
+<meta name="hablar.roster" content="true" />
+<meta name="hablar.dockRoster" content="left" />
+<meta name="hablar.icons" content="alt" />
+<meta name="hablar.layout" content="tabs" />
+<meta name="hablar.inline" content="vertical_dock_div" />
+<meta name="hablar.width" content="100%" />
+<meta name="hablar.height" content="100%" />
 <link rel="shortcut icon" href="favicon.ico" />
 <!-- FIXME: make something local -->
 <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
 <script>
-WebFont.load({
-    google: {
-        families: [ 'Ubuntu' ]
-      }});
+	WebFont.load({
+		google : {
+			families : [ 'Ubuntu' ]
+		}
+	});
 </script>
-<link href='http://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link
+	href='http://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic'
+	rel='stylesheet' type='text/css'>
 <!-- <link href='http://fonts.googleapis.com/css?family=Inconsolata'
 	rel='stylesheet' type='text/css'> -->
 <link type="text/css" rel="stylesheet" href="gxt/css/gxt-all.css">
 <link type="text/css" rel="stylesheet" href="gxt/css/gxt-gray.css">
 <style type="text/css">
-<!--
-#kuneinitialcurtain {--><!--
-	position: absolute; --> <!--
-	left: 0px; --> <!--
-	top: 0px; --> <!--
-	width: 100%; --> <!--
-	height: 100%; --> <!--
-	background-color: #F7EBE3; --> <!--
-	z-index: 9999;
-	-->
-	<!--
-}
-
--->
-<!--
--->
-<!--
-#kuneloading {--><!--
-	position: absolute; --> <!--
-	left: 45%; --> <!--
-	top: 40%; --> <!--
-	z-index: 20001; --> <!--
-	height: auto; --> <!--
-	border: solid 2px #ccc; --> <!--
-	-moz-border-radius: 10px; --> <!--
-	-webkit-border-radius: 10px; --> <!--
-	border-radius: 10px; --> <!--
-	background-color: white;
-	-->
-	<!--
-}
-
--->
-<!--
--->
-<!--
-#kuneloading a {--><!--
-	color: #225588;
-	-->
-	<!--
-}
-
--->
-<!--
--->
-<!--
-#kuneloading .kuneloading-indicator {--><!--
-	color: #444; --> <!--
-	font: bold 13px tahoma, arial, helvetica; --> <!--
-	padding: 5px 5px 10px 5px; --> <!--
-	margin: 0; --> <!--
-	height: auto;
-	-->
-	<!--
-}
-
--->
-<!--
--->
-<!--
-#kuneloading-msg {--><!--
-	font: normal 10px arial, tahoma, sans-serif;
-	-->
-	<!--
-}
--->
 </style>
-
+</head>
 <body>
 <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
 <noscript>
@@ -97,7 +48,6 @@ WebFont.load({
 Your web browser must have JavaScript enabled in order for this
 application to display correctly.</div>
 </noscript>
-
 <iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
 <iframe src="" id="__download" style="width: 0; height: 0; border: 0"></iframe>
 <!--<div id="kuneinitialcurtain"></div>-->

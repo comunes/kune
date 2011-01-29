@@ -20,6 +20,7 @@
 package cc.kune.core.client.errors;
 
 import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.alerts.AlertEvent;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
@@ -28,7 +29,6 @@ import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;

@@ -23,15 +23,14 @@ import java.util.HashMap;
 
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
+import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Event;
-import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -44,10 +43,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private final ContentProvider contentProvider;
     private final EventBus eventBus;
     private final HistoryWrapper history;
-    private final Event2<String, String> onGroupChanged;
-    private final Event<StateAbstractDTO> onSocialNetworkChanged;
-    private final Event<StateAbstractDTO> onStateChanged;
-    private final Event2<String, String> onToolChanged;
     private StateToken previousToken;
     /**
      * When a historyChanged is interrupted (for instance because you are
@@ -66,10 +61,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.history = history;
         this.previousToken = null;
         this.resumedToken = null;
-        this.onStateChanged = new Event<StateAbstractDTO>("onStateChanged");
-        this.onGroupChanged = new Event2<String, String>("onGroupChanged");
-        this.onToolChanged = new Event2<String, String>("onToolChanged");
-        this.onSocialNetworkChanged = new Event<StateAbstractDTO>("onSocialNetworkChanged");
         siteTokens = new HashMap<String, HistoryTokenCallback>();
         beforeStateChangeCollection = new BeforeActionCollection();
         eventBus.addHandler(UserSignInEvent.getType(), new UserSignInEvent.UserSignInHandler() {
@@ -110,10 +101,10 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         final String newToolName = newTokenTool == null ? "" : newTokenTool;
 
         if (previousToken == null || previousToolName == null || !previousToolName.equals(newToolName)) {
-            onToolChanged.fire(previousToolName, newToolName);
+            ToolChangedEvent.fire(eventBus, previousToolName, newToolName);
         }
         if (previousToken == null || !previousGroup.equals(newGroup)) {
-            onGroupChanged.fire(previousGroup, newGroup);
+            GroupChangedEvent.fire(eventBus, previousGroup, newGroup);
         }
     }
 
@@ -134,7 +125,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void onGroupChanged(final Listener2<String, String> listener) {
-        onGroupChanged.add(listener);
+        throw new NotImplementedException();
     }
 
     private void onHistoryChanged(final StateToken newState) {
@@ -171,17 +162,17 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void onSocialNetworkChanged(final Listener<StateAbstractDTO> listener) {
-        onSocialNetworkChanged.add(listener);
+        throw new NotImplementedException();
     }
 
     @Override
     public void onStateChanged(final Listener<StateAbstractDTO> listener) {
-        onStateChanged.add(listener);
+        throw new NotImplementedException();
     }
 
     @Override
     public void onToolChanged(final Listener2<String, String> listener) {
-        onToolChanged.add(listener);
+        throw new NotImplementedException();
     }
 
     @Override
@@ -238,13 +229,13 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             // with new SN data and we refresh the state
             // to avoid to reload() again the state
             state.setSocialNetworkData(socialNet);
-            onSocialNetworkChanged.fire(state);
+            SocialNetworkChangedEvent.fire(eventBus, state);
         }
     }
 
     void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
-        onStateChanged.fire(newState);
+        StateChangedEvent.fire(eventBus, newState);
         eventBus.fireEvent(new ProgressHideEvent());
         checkGroupAndToolChange(newState);
         previousToken = newState.getStateToken();

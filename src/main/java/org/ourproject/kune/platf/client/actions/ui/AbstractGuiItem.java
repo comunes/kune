@@ -5,7 +5,8 @@ import org.ourproject.kune.platf.client.actions.AbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
-import org.ourproject.kune.platf.client.ui.img.ImgConstants;
+
+import cc.kune.core.client.resources.icons.IconConstants;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
@@ -82,7 +83,7 @@ public abstract class AbstractGuiItem extends Composite implements View {
         if (icon instanceof CssStyleDescriptor) {
             setIconStyle(((CssStyleDescriptor) icon).getName());
         } else if (icon instanceof ImageResource) {
-            setIconStyle((ImgConstants.CSS_SUFFIX + ((ImageResource) icon).getName()));
+            setIconStyle((IconConstants.CSS_SUFFIX + ((ImageResource) icon).getName()));
         } else if (icon instanceof String) {
             setIconUrl((String) icon);
         }

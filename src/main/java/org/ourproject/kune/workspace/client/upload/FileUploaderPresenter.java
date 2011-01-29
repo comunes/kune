@@ -24,24 +24,24 @@ import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 
-import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
 public class FileUploaderPresenter implements FileUploader {
 
-    private FileUploaderView view;
-    private final Session session;
     private StateToken currentUploadStateToken;
-    private final Event<StateToken> onUploadComplete;
+    // private final Event<StateToken> onUploadComplete;
+    private final Session session;
+    private FileUploaderView view;
 
     public FileUploaderPresenter(final Session session) {
         this.session = session;
-        this.onUploadComplete = new Event<StateToken>("onUploadComplete");
+        // this.onUploadComplete = new Event<StateToken>("onUploadComplete");
     }
 
+    @Override
     public void addOnUploadCompleteListener(final Listener<StateToken> slot) {
-        onUploadComplete.add(slot);
+        // onUploadComplete.add(slot);
     }
 
     public boolean checkFolderChange() {
@@ -61,10 +61,12 @@ public class FileUploaderPresenter implements FileUploader {
         }
     }
 
+    @Override
     public boolean hasUploadingFiles() {
         return view.hasUploadingFiles();
     }
 
+    @Override
     public void hide() {
         view.hide();
     }
@@ -72,6 +74,7 @@ public class FileUploaderPresenter implements FileUploader {
     public void init(final FileUploaderView view) {
         this.view = view;
         session.onUserSignOut(new Listener0() {
+            @Override
             public void onEvent() {
                 view.destroy();
             }
@@ -79,24 +82,27 @@ public class FileUploaderPresenter implements FileUploader {
     }
 
     public void onUploadComplete() {
-        onUploadComplete.fire(currentUploadStateToken);
+        // onUploadComplete.fire(currentUploadStateToken);
     }
 
+    @Override
     public void resetPermittedExtensions() {
         view.resetPermittedExtensions();
-    }
-
-    public void setPermittedExtensions(final String extensions) {
-        view.setPermittedExtensions(extensions);
-    }
-
-    public void show() {
-        view.show();
     }
 
     private boolean sameContainer() {
         final StateToken currentStateToken = session.getCurrentStateToken();
         currentUploadStateToken = currentUploadStateToken == null ? currentStateToken : currentUploadStateToken;
         return currentUploadStateToken.equals(currentStateToken);
+    }
+
+    @Override
+    public void setPermittedExtensions(final String extensions) {
+        view.setPermittedExtensions(extensions);
+    }
+
+    @Override
+    public void show() {
+        view.show();
     }
 }

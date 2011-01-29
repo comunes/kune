@@ -32,9 +32,9 @@ import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.CustomMenu;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridItem;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
@@ -75,14 +75,14 @@ public class SocialNetworkPresenter {
     protected ActionToolbarButtonDescriptor<StateToken> participate;
     private final Provider<FileDownloadUtils> downloadProvider;
     private final AccessRightsClientManager rightsManager;
-    private final ImgResources imgResources;
+    private final IconResources imgResources;
 
     private MenuDescriptor menuOptions;
 
     public SocialNetworkPresenter(final I18nTranslationService i18n, final StateManager stateManager,
             final AccessRightsClientManager rightsManager, final Session session,
             final Provider<SocialNetworkServiceAsync> snServiceProvider, final GroupActionRegistry groupActionRegistry,
-            final Provider<FileDownloadUtils> downloadProvider, final ImgResources imgResources) {
+            final Provider<FileDownloadUtils> downloadProvider, final IconResources imgResources) {
         this.i18n = i18n;
         this.stateManager = stateManager;
         this.rightsManager = rightsManager;

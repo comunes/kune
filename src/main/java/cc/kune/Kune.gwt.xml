@@ -4,11 +4,12 @@
   <inherits name="com.google.gwt.user.User" />
   <inherits name='com.google.gwt.logging.Logging' />
   <inherits name="cc.kune.core.Core" />
+  <inherits name="cc.kune.chat.Chat" />
   <inherits name="cc.kune.wave.KuneWave" />
   <inherits name="com.calclab.suco.Suco" />
   <inherits name="org.adamtacy.GWTEffects"></inherits>
-	<!-- <source path='client'
-			excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" /> -->
+  <!-- <source path='client' excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" 
+    /> -->
   <!-- <source path='shared'/> -->
   <!-- <public path="public"/> -->
   <!-- Logging Configuration -->
@@ -31,6 +32,10 @@
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
   <!-- <set-property name="user.agent" value="gecko1_8" /> -->
   <set-property name="user.agent" value="safari,gecko1_8" />
+  <!-- Debugging =============================================== -->
+  <!-- for add ensureDebugIds (debugId in UIBinder), remove/comment in production 
+    see UIObject.ensureDebugId()) -->
+  <inherits name="com.google.gwt.user.Debug" />
   <!-- Entrypoint =============================================== -->
   <entry-point class="cc.kune.core.client.KuneEntryPoint" />
 </module>

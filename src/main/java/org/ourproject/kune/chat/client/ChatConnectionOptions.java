@@ -19,18 +19,17 @@
  */
 package org.ourproject.kune.chat.client;
 
-import com.calclab.emiteuimodule.client.UserChatOptions;
 
 public class ChatConnectionOptions {
-    public UserChatOptions userOptions;
-    public final String httpBase;
     public final String domain;
+    // public UserChatOptions userOptions;
+    public final String httpBase;
     public final String roomHost;
 
     public ChatConnectionOptions(final String httpBase, final String domain, final String roomHost) {
         this.httpBase = httpBase;
         this.domain = domain;
         this.roomHost = roomHost;
-        userOptions = null;
+        // userOptions = null;
     }
 }

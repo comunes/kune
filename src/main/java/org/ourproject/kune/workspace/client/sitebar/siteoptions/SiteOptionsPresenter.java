@@ -29,8 +29,8 @@ import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter implements SiteOptions {
@@ -38,9 +38,9 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
     private SiteOptionsView view;
     private final MenuDescriptor menuDescriptor;
     private final I18nTranslationService i18n;
-    private final ImgResources img;
+    private final IconResources img;
 
-    public SiteOptionsPresenter(final I18nTranslationService i18n, final ImgResources img) {
+    public SiteOptionsPresenter(final I18nTranslationService i18n, final IconResources img) {
         super();
         this.i18n = i18n;
         this.img = img;

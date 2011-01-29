@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
@@ -100,6 +99,7 @@ import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -238,10 +238,10 @@ public class PlatformModule extends AbstractExtendedModule {
             }
         });
 
-        register(Singleton.class, new Factory<ImgResources>(ImgResources.class) {
+        register(Singleton.class, new Factory<IconResources>(IconResources.class) {
             @Override
-            public ImgResources create() {
-                final ImgResources instance = GWT.create(ImgResources.class);
+            public IconResources create() {
+                final IconResources instance = GWT.create(IconResources.class);
                 instance.css().ensureInjected();
                 return instance;
             }

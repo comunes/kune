@@ -35,7 +35,6 @@ import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
@@ -222,9 +221,6 @@ import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 import org.ourproject.kune.workspace.client.upload.FileUploaderDialog;
 import org.ourproject.kune.workspace.client.upload.FileUploaderPresenter;
-import org.ourproject.kune.workspace.client.wave.WaveInsert;
-import org.ourproject.kune.workspace.client.wave.WaveInsertPanel;
-import org.ourproject.kune.workspace.client.wave.WaveInsertPresenter;
 
 import cc.kune.common.client.noti.NotifyLevelImages;
 import cc.kune.common.client.utils.SchedulerManager;
@@ -233,6 +229,7 @@ import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.rpcservices.GroupService;
@@ -344,7 +341,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             public SiteUserOptions create() {
                 final SiteUserOptionsPresenter presenter = new SiteUserOptionsPresenter(i(Session.class),
                         i(StateManager.class), p(FileDownloadUtils.class), $(I18nTranslationService.class),
-                        $(ImgResources.class));
+                        $(IconResources.class));
                 final SiteUserOptionsPanel panel = new SiteUserOptionsPanel(presenter, i(WorkspaceSkeleton.class),
                         $(GuiBindingsRegister.class));
                 presenter.init(panel);
@@ -379,7 +376,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public SiteOptions create() {
                 final SiteOptionsPresenter presenter = new SiteOptionsPresenter(i(I18nUITranslationService.class),
-                        i(ImgResources.class));
+                        i(IconResources.class));
                 final SiteOptionsPanel panel = new SiteOptionsPanel(i(WorkspaceSkeleton.class),
                         i(I18nUITranslationService.class), i(GuiBindingsRegister.class));
                 presenter.init(panel);
@@ -549,7 +546,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(Session.class), p(SocialNetworkServiceAsync.class), p(GroupServiceAsync.class),
                         p(GroupLiveSearcher.class), p(ChatEngine.class), i(GroupActionRegistry.class),
                         i(ActionGroupSummaryToolbar.class), p(FileDownloadUtils.class),
-                        i(AccessRightsClientManager.class), i(ImgResources.class));
+                        i(AccessRightsClientManager.class), i(IconResources.class));
                 final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
                         i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
                                 ActionGroupSummaryToolbar.class).getView());
@@ -562,7 +559,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public AddAsBuddieHeaderButton create() {
                 return new AddAsBuddieHeaderButton(p(ChatEngine.class), i(Session.class), i(StateManager.class),
-                        i(I18nTranslationService.class), i(ImgResources.class), i(EntityHeader.class));
+                        i(I18nTranslationService.class), i(IconResources.class), i(EntityHeader.class));
             }
         });
 
@@ -573,7 +570,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(Session.class), p(UserServiceAsync.class), i(UserActionRegistry.class),
                         i(I18nTranslationService.class), p(ChatEngine.class), i(ActionBuddiesSummaryToolbar.class),
                         p(FileDownloadUtils.class), i(ImageUtils.class), p(SocialNetworkServiceAsync.class),
-                        i(GroupActionRegistry.class), i(AccessRightsClientManager.class), i(ImgResources.class));
+                        i(GroupActionRegistry.class), i(AccessRightsClientManager.class), i(IconResources.class));
                 final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, i(WorkspaceSkeleton.class),
                         i(I18nTranslationService.class), i(ActionManager.class),
                         i(ActionBuddiesSummaryToolbar.class).getView());
@@ -589,7 +586,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
                         i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
                         i(Session.class), p(SocialNetworkServiceAsync.class), i(GroupActionRegistry.class),
                         i(ActionParticipationToolbar.class), p(FileDownloadUtils.class),
-                        i(AccessRightsClientManager.class), i(ImgResources.class));
+                        i(AccessRightsClientManager.class), i(IconResources.class));
                 final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
                         i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
                                 ActionParticipationToolbar.class).getView());
@@ -626,7 +623,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public GroupOptions create() {
                 final GroupOptionsPresenter presenter = new GroupOptionsPresenter(i(StateManager.class),
-                        i(I18nTranslationService.class), i(ImgResources.class));
+                        i(I18nTranslationService.class), i(IconResources.class));
                 final GroupOptionsPanel panel = new GroupOptionsPanel(presenter, i(EntityHeader.class),
                         i(I18nTranslationService.class), i(NotifyLevelImages.class), i(GroupOptionsCollection.class));
                 presenter.init(panel);
@@ -638,7 +635,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public UserOptions create() {
                 final UserOptionsPresenter presenter = new UserOptionsPresenter(i(Session.class),
-                        i(StateManager.class), i(I18nTranslationService.class), i(ImgResources.class),
+                        i(StateManager.class), i(I18nTranslationService.class), i(IconResources.class),
                         i(SiteUserOptions.class));
                 final UserOptionsPanel panel = new UserOptionsPanel(presenter, i(EntityHeader.class),
                         i(I18nTranslationService.class), i(NotifyLevelImages.class), i(UserOptionsCollection.class));
@@ -856,7 +853,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public SiteOptionsI18nTranslatorAction create() {
                 return new SiteOptionsI18nTranslatorAction(i(SiteOptions.class), i(I18nTranslationService.class),
-                        i(ImgResources.class), p(I18nTranslator.class));
+                        i(IconResources.class), p(I18nTranslator.class));
             }
         });
 
@@ -1070,7 +1067,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public MaxMinWorkspace create() {
                 final MaxMinWorkspacePresenter presenter = new MaxMinWorkspacePresenter(
-                        i(GlobalShortcutRegister.class), i(ImgResources.class), i(I18nTranslationService.class),
+                        i(GlobalShortcutRegister.class), i(IconResources.class), i(I18nTranslationService.class),
                         i(SiteOptions.class));
                 final MaxMinWorkspacePanel panel = new MaxMinWorkspacePanel(i(WorkspaceSkeleton.class));
                 presenter.init(panel);
@@ -1100,19 +1097,6 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 return presenter;
             }
         });
-
-        register(Singleton.class, new Factory<WaveInsert>(WaveInsert.class) {
-            @Override
-            public WaveInsert create() {
-                final WaveInsertPresenter presenter = new WaveInsertPresenter(i(Session.class), i(StateManager.class),
-                        i(I18nTranslationService.class), p(ContentServiceAsync.class));
-                final WaveInsertPanel panel = new WaveInsertPanel(presenter, i(I18nTranslationService.class),
-                        i(ImgResources.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
-
         i(GlobalShortcutRegister.class).enable();
     }
 

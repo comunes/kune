@@ -1,9 +1,9 @@
 package org.ourproject.kune.workspace.client.socialnet;
 
 import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
@@ -20,7 +20,7 @@ public class ParticipateAction extends RolAction {
 
     public ParticipateAction(final Session session, final Provider<SocialNetworkServiceAsync> snServiceProvider,
             final StateManager stateManager, final AccessRightsClientManager rightsManager,
-            final I18nTranslationService i18n, final ImgResources imgResources) {
+            final I18nTranslationService i18n, final IconResources imgResources) {
         super(session, stateManager, rightsManager, i18n, AccessRolDTO.Viewer, i18n.t("Participate"),
                 i18n.t("Request to participate in this group"), imgResources.addGreen());
         this.snServiceProvider = snServiceProvider;

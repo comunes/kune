@@ -43,7 +43,6 @@ import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
-import org.ourproject.kune.workspace.client.wave.WaveInsert;
 
 import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.errors.ErrorHandler;
@@ -101,8 +100,6 @@ public abstract class AbstractFoldableContentActions {
     protected final StateManager stateManager;
     protected final Provider<ContentEditor> textEditorProvider;
 
-    private final Provider<WaveInsert> waveInsert;
-
     private final WsBackManager wsBackManager;
 
     public AbstractFoldableContentActions(final Session session, final StateManager stateManager,
@@ -113,8 +110,7 @@ public abstract class AbstractFoldableContentActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final Provider<ContentEditor> textEditorProvider,
             final Provider<ContextPropEditor> contextPropEditorProvider, final FoldableContent foldableContent,
-            final EntityHeader entityLogo, final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager,
-            final Provider<WaveInsert> waveInsert) {
+            final EntityHeader entityLogo, final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
@@ -133,7 +129,6 @@ public abstract class AbstractFoldableContentActions {
         this.entityLogo = entityLogo;
         this.publicLink = publicLink;
         this.wsBackManager = wsBackManager;
-        this.waveInsert = waveInsert;
         createActions();
         session.onInitDataReceived(new Listener<InitDataDTO>() {
             @Override
@@ -619,24 +614,6 @@ public abstract class AbstractFoldableContentActions {
                 session.getGalleryPermittedExtensions());
         contextActionRegistry.addAction(uploadMedia, registerInTypes);
         return uploadMedia;
-    }
-
-    protected ActionToolbarMenuAndItemDescriptor<StateToken> createWaveAction(final String waveFileType,
-            final String parentMenuTitle, final Position position, final String... registerInTypes) {
-        final ActionToolbarMenuAndItemDescriptor<StateToken> addWave = new ActionToolbarMenuAndItemDescriptor<StateToken>(
-                AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener<StateToken>() {
-                    @Override
-                    public void onEvent(final StateToken parentToken) {
-                        waveInsert.get().show(parentToken);
-                    }
-                });
-        addWave.setTextDescription(i18n.t("Add Wave"));
-        addWave.setParentMenuTitle(parentMenuTitle);
-        addWave.setMustBeAuthenticated(true);
-        addWave.setParentSubMenuTitle(i18n.t("New"));
-        // addContent.setIconUrl(iconUrl);
-        register(addWave, position, registerInTypes);
-        return addWave;
     }
 
     protected void downloadContent(final StateToken token) {

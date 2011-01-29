@@ -3,7 +3,6 @@ package cc.kune.core.client;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -15,6 +14,7 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  * The Class KuneEntryPoint.
  */
 public class KuneEntryPoint implements EntryPoint {
+
     public final CoreGinjector ginjector = GWT.create(CoreGinjector.class);
 
     /*
@@ -31,7 +31,6 @@ public class KuneEntryPoint implements EntryPoint {
                 e.printStackTrace();
             }
         });
-        Log.setCurrentLogLevel(Log.LOG_LEVEL_DEBUG);
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {
@@ -58,5 +57,6 @@ public class KuneEntryPoint implements EntryPoint {
         ginjector.getSpinerPresenter();
         ginjector.getSiteLogoPresenter();
         ginjector.getSpacesTabPresenter();
+        ginjector.getChatClient();
     }
 }

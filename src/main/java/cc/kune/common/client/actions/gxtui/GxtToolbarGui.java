@@ -28,16 +28,22 @@ public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
         toolbar.add((Component) uiObject);
     }
 
-    public void addFill() {
-        toolbar.add(new FillToolItem());
+    public FillToolItem addFill() {
+        final FillToolItem item = new FillToolItem();
+        toolbar.add(item);
+        return item;
     }
 
-    public void addSeparator() {
-        toolbar.add(new SeparatorToolItem());
+    public SeparatorToolItem addSeparator() {
+        final SeparatorToolItem item = new SeparatorToolItem();
+        toolbar.add(item);
+        return item;
     }
 
-    public void addSpacer() {
-        toolbar.add(new LabelToolItem());
+    public LabelToolItem addSpacer() {
+        final LabelToolItem item = new LabelToolItem();
+        toolbar.add(item);
+        return item;
     }
 
     @Override

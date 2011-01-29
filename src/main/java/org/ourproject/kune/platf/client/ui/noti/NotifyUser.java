@@ -24,9 +24,6 @@ import org.ourproject.kune.platf.client.services.Images;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Event;
-import com.calclab.suco.client.events.Event0;
-import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.events.Listener2;
@@ -46,31 +43,39 @@ public class NotifyUser {
 
     private static I18nTranslationService i18n;
     private static Images images;
-    private static final Event2<String, String> ON_ALERT = new Event2<String, String>("onAlert");
-    private static final Event<ConfirmationAsk> ON_CONFIRMATION_ASK = new Event<ConfirmationAsk>("onConfirmationAsk");
-    private static final Event0 ON_HIDE_PROGRESS = new Event0("onHideProgress");
 
-    private static final Event2<Level, String> ON_NOTIFY = new Event2<Level, String>("onNotify");
+    // private static final Event2<String, String> ON_ALERT = new Event2<String,
+    // String>("onAlert");
+    // private static final Event<ConfirmationAsk> ON_CONFIRMATION_ASK = new
+    // Event<ConfirmationAsk>("onConfirmationAsk");
+    // private static final Event0 ON_HIDE_PROGRESS = new
+    // Event0("onHideProgress");
 
-    private static final Event<String> ON_PROGRESS = new Event<String>("onProgress");
+    // private static final Event2<Level, String> ON_NOTIFY = new Event2<Level,
+    // String>("onNotify");
+
+    // private static final Event<String> ON_PROGRESS = new
+    // Event<String>("onProgress");
 
     public static void askConfirmation(final String confirmationTitle, final String confirmationText,
             final Listener0 onConfirm) {
-        ON_CONFIRMATION_ASK.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, new Listener0() {
-            @Override
-            public void onEvent() {
-                // Do nothing
-            }
-        }));
+        // ON_CONFIRMATION_ASK.fire(new ConfirmationAsk(confirmationTitle,
+        // confirmationText, onConfirm, new Listener0() {
+        // @Override
+        // public void onEvent() {
+        // // Do nothing
+        // }
+        // }));
     }
 
     public static void askConfirmation(final String confirmationTitle, final String confirmationText,
             final Listener0 onConfirm, final Listener0 onCancel) {
-        ON_CONFIRMATION_ASK.fire(new ConfirmationAsk(confirmationTitle, confirmationText, onConfirm, onCancel));
+        // ON_CONFIRMATION_ASK.fire(new ConfirmationAsk(confirmationTitle,
+        // confirmationText, onConfirm, onCancel));
     }
 
     public static void error(final String message) {
-        ON_NOTIFY.fire(Level.error, message);
+        // ON_NOTIFY.fire(Level.error, message);
     }
 
     public static String getCls(final Level level) {
@@ -102,43 +107,43 @@ public class NotifyUser {
     }
 
     public static void hideProgress() {
-        ON_HIDE_PROGRESS.fire();
+        // ON_HIDE_PROGRESS.fire();
     }
 
     public static void important(final String message) {
-        ON_NOTIFY.fire(Level.important, message);
+        // ON_NOTIFY.fire(Level.important, message);
     }
 
     public static void info(final String message) {
-        ON_NOTIFY.fire(Level.info, message);
+        // ON_NOTIFY.fire(Level.info, message);
     }
 
     public static void showAlertMessage(final String title, final String message) {
-        ON_ALERT.fire(title, message);
+        // ON_ALERT.fire(title, message);
     }
 
     public static void showProgress(final String text) {
-        ON_PROGRESS.fire(text);
+        // ON_PROGRESS.fire(text);
     }
 
     public static void showProgressLoading() {
-        ON_PROGRESS.fire(i18n.t("Loading"));
+        // ON_PROGRESS.fire(i18n.t("Loading"));
     }
 
     public static void showProgressProcessing() {
-        ON_PROGRESS.fire(i18n.t("Processing"));
+        // ON_PROGRESS.fire(i18n.t("Processing"));
     }
 
     public static void showProgressSaving() {
-        ON_PROGRESS.fire(i18n.t("Saving"));
+        // ON_PROGRESS.fire(i18n.t("Saving"));
     }
 
     public static void showProgressStarting() {
-        ON_PROGRESS.fire(i18n.t("Starting"));
+        // ON_PROGRESS.fire(i18n.t("Starting"));
     }
 
     public static void veryImportant(final String message) {
-        ON_NOTIFY.fire(Level.veryImportant, message);
+        // ON_NOTIFY.fire(Level.veryImportant, message);
     }
 
     private NotifyUser() {
@@ -151,23 +156,23 @@ public class NotifyUser {
     }
 
     public void addAlerter(final Listener2<String, String> listener) {
-        ON_ALERT.add(listener);
+        // ON_ALERT.add(listener);
     }
 
     public void addConfirmationAsker(final Listener<ConfirmationAsk> listener) {
-        ON_CONFIRMATION_ASK.add(listener);
+        // ON_CONFIRMATION_ASK.add(listener);
     }
 
     public void addHideProgressNotifier(final Listener0 listener) {
-        ON_HIDE_PROGRESS.add(listener);
+        // ON_HIDE_PROGRESS.add(listener);
     }
 
     public void addNotifier(final Listener2<Level, String> listener) {
-        ON_NOTIFY.add(listener);
+        // ON_NOTIFY.add(listener);
     }
 
     public void addProgressNotifier(final Listener<String> listener) {
-        ON_PROGRESS.add(listener);
+        // ON_PROGRESS.add(listener);
     }
 
 }

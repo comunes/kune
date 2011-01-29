@@ -1,9 +1,9 @@
 package org.ourproject.kune.workspace.client.socialnet;
 
 import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
@@ -23,7 +23,7 @@ public class UnjoinAction extends RolAction {
 
     public UnjoinAction(final Session session, final Provider<SocialNetworkServiceAsync> snServiceProvider,
             final StateManager stateManager, final AccessRightsClientManager rightsManager,
-            final I18nTranslationService i18n, final ImgResources imgResources) {
+            final I18nTranslationService i18n, final IconResources imgResources) {
         super(session, stateManager, rightsManager, i18n, AccessRolDTO.Editor, i18n.t("Leave this group"),
                 i18n.t("Do not participate anymore in this group"), imgResources.delGreen());
         this.snServiceProvider = snServiceProvider;

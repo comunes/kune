@@ -19,306 +19,368 @@
  */
 package org.ourproject.kune.chat.client;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
-import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.actions.KeyStroke;
-import org.ourproject.kune.platf.client.actions.Shortcut;
-import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-
-import cc.kune.common.client.utils.WindowUtils;
-import cc.kune.core.client.init.AppStarter;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.InitDataDTO;
-import cc.kune.core.shared.dto.UserInfoDTO;
-import cc.kune.core.shared.i18n.I18nTranslationService;
-
-import com.allen_sauer.gwt.log.client.Log;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.emite.xep.muc.client.Room;
-import com.calclab.emiteuimodule.client.EmiteUIDialog;
-import com.calclab.emiteuimodule.client.SubscriptionMode;
-import com.calclab.emiteuimodule.client.UserChatOptions;
-import com.calclab.emiteuimodule.client.chat.ChatUI;
-import com.calclab.emiteuimodule.client.params.AvatarProvider;
-import com.calclab.emiteuimodule.client.room.RoomUI;
-import com.calclab.emiteuimodule.client.status.OwnPresence.OwnStatus;
-import com.calclab.suco.client.events.Event0;
-import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
-import com.calclab.suco.client.ioc.Provider;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.user.client.Window;
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.ToolbarButton;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 class ChatEngineDefault implements ChatEngine {
-    private ChatConnectionOptions chatOptions;
-    private final I18nTranslationService i18n;
-    private final WorkspaceSkeleton wskel;
-    private ToolbarButton traybarButton;
-    private final Provider<EmiteUIDialog> emiteUIProvider;
-    private Collection<RosterItem> roster;
-    private final Event0 onRosterChanged;
-    private final KeyStroke shortcut;
-    private final Provider<FileDownloadUtils> downloadUtils;
-
-    public ChatEngineDefault(final I18nTranslationService i18n, final WorkspaceSkeleton wskel,
-            final AppStarter application, final Session session, final Provider<EmiteUIDialog> emiteUIProvider,
-            final Provider<FileDownloadUtils> downloadUtils, final GlobalShortcutRegister shortcutRegister) {
-        this.i18n = i18n;
-        this.wskel = wskel;
-        this.emiteUIProvider = emiteUIProvider;
-        this.downloadUtils = downloadUtils;
-        this.onRosterChanged = new Event0("onRosterChanged");
-        shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
-        shortcutRegister.put(shortcut, new AbstractExtendedAction() {
-            @Override
-            public void actionPerformed(final ActionEvent event) {
-                if (isDialogStarted()) {
-                    toggleShow();
-                }
-
-            }
-        });
-        session.onInitDataReceived(new Listener<InitDataDTO>() {
-            @Override
-            public void onEvent(final InitDataDTO initData) {
-                checkChatDomain(initData.getChatDomain());
-                chatOptions = new ChatConnectionOptions(initData.getChatHttpBase(), initData.getChatDomain(),
-                        initData.getChatRoomHost());
-            }
-
-            private void checkChatDomain(final String chatDomain) {
-                final String httpDomain = WindowUtils.getLocation().getHostName();
-                if (!chatDomain.equals(httpDomain)) {
-                    Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
-                            + "). This will cause problems with the chat functionality. "
-                            + "Please check kune.properties on the server.");
-                }
-            }
-        });
-        session.onUserSignOut(new Listener0() {
-            @Override
-            public void onEvent() {
-                logout();
-            }
-        });
-        session.onUserSignIn(new Listener<UserInfoDTO>() {
-            @Override
-            public void onEvent(final UserInfoDTO user) {
-                login(user.getChatName(), user.getChatPassword());
-            }
-        });
-        // application.onClosing(new Listener<ClosingEvent>() {
-        // public void onEvent(final ClosingEvent event) {
-        // stop();
-        // }
-        // });
-    }
 
     @Override
     public void addNewBuddie(final String shortName) {
-        emiteUIProvider.get().addBuddie(getLocalUserJid(shortName), shortName, "");
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void addOnRosterChanged(final Listener0 slot) {
-        onRosterChanged.add(slot);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void chat(final XmppURI jid) {
-        emiteUIProvider.get().chat(jid);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public ChatConnectionOptions getChatOptions() {
-        return chatOptions;
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
-    public boolean isBuddie(final String shortName) {
-        return isBuddie(getLocalUserJid(shortName));
+    public boolean isBuddie(final String localUserName) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public boolean isBuddie(final XmppURI jid) {
-        if (roster != null) {
-            for (final RosterItem item : roster) {
-                if (item.getJID().equalsNoResource(jid)) {
-                    return true;
-                }
-            }
-        }
+        // TODO Auto-generated method stub
         return false;
-    }
-
-    public boolean isDialogStarted() {
-        return !emiteUIProvider.get().isDialogNotStarted();
     }
 
     @Override
     public boolean isLoggedIn() {
-        return emiteUIProvider.get().isLoggedIn();
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public void joinRoom(final String roomName, final String userAlias) {
-        joinRoom(roomName, null, userAlias);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void joinRoom(final String roomName, final String subject, final String userAlias) {
-        if (emiteUIProvider.get().isLoggedIn()) {
-            final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/"
-                    + chatOptions.userOptions.getUserJid().getNode());
-            final Room room = (Room) emiteUIProvider.get().joinRoom(roomURI);
-            if (subject != null) {
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                    @Override
-                    public void execute() {
-                        final RoomUI roomUI = (RoomUI) room.getData(ChatUI.class);
-                        if (roomUI != null) {
-                            roomUI.setSubject(subject);
-                        }
-                    }
-                });
-            }
-        } else {
-            NotifyUser.showAlertMessage(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"));
-        }
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void login(final String jid, final String passwd) {
-        final UserChatOptions userChatOptions = getUserChatOptions(jid, passwd);
-        // FIXME: Avatar provider
-        final AvatarProvider avatarProvider = new AvatarProvider() {
-            @Override
-            public String getAvatarURL(final XmppURI userURI) {
-                // if (userURI.getHost().equals(chatOptions.domain)) {
-                // FIXME
-                // return downloadUtils.get().getLogoImageUrl(new
-                // StateToken(userURI.getNode()));
-                // } else {
-                // return "";
-                // }
-                return "images/person-def.gif";
-            }
-        };
-        final String initialWindowTitle = Window.getTitle();
-        chatOptions.userOptions = userChatOptions;
-        if (emiteUIProvider.get().isDialogNotStarted()) {
-            emiteUIProvider.get().onRosterChanged(new Listener<Collection<RosterItem>>() {
-                @Override
-                public void onEvent(final Collection<RosterItem> rosterChanged) {
-                    roster = rosterChanged;
-                    onRosterChanged.fire();
-                }
-            });
-            emiteUIProvider.get().start(userChatOptions, chatOptions.httpBase, chatOptions.domain,
-                    chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
-        } else {
-            emiteUIProvider.get().setEnableStatusUI(true);
-            emiteUIProvider.get().refreshUserInfo(chatOptions.userOptions);
-        }
-        emiteUIProvider.get().show(OwnStatus.online);
-        if (traybarButton == null) {
-            traybarButton = new ToolbarButton();
-            traybarButton.setTooltip(i18n.t("Show/hide the chat window" + shortcut.toString()));
-            traybarButton.setIcon("images/e-icon.gif");
-            traybarButton.addListener(new ButtonListenerAdapter() {
-                @Override
-                public void onClick(final Button button, final EventObject e) {
-                    toggleShow();
-                }
-            });
-            wskel.getSiteTraybar().addButton(traybarButton);
-            emiteUIProvider.get().onChatAttended(new Listener<String>() {
-                @Override
-                public void onEvent(final String parameter) {
-                    traybarButton.setIcon("images/e-icon.gif");
-                }
-            });
-            emiteUIProvider.get().onChatUnattendedWithActivity(new Listener<String>() {
-                @Override
-                public void onEvent(final String parameter) {
-                    traybarButton.setIcon("images/e-icon-a.gif");
-                }
-            });
-        }
-        emiteUIProvider.get().hide();
-        emiteUIProvider.get().onChatAttended(new Listener<String>() {
-            @Override
-            public void onEvent(final String parameter) {
-                Window.setTitle(initialWindowTitle);
-            }
-        });
-        emiteUIProvider.get().onChatUnattendedWithActivity(new Listener<String>() {
-            @Override
-            public void onEvent(final String chatTitle) {
-                Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
-            }
-        });
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void logout() {
-        if (!emiteUIProvider.get().isDialogNotStarted()) {
-            emiteUIProvider.get().setOwnPresence(OwnStatus.offline);
-            chatOptions.userOptions = getUserChatOptions("reset@example.com", "");
-            emiteUIProvider.get().refreshUserInfo(chatOptions.userOptions);
-            emiteUIProvider.get().setEnableStatusUI(false);
-        }
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void setAvatar(final String photoBinary) {
-        emiteUIProvider.get().setOwnVCardAvatar(photoBinary);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void show() {
-        emiteUIProvider.get().show();
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void stop() {
-        if (!emiteUIProvider.get().isDialogNotStarted()) {
-            emiteUIProvider.get().destroy();
-        }
-        if (emiteUIProvider.get().getSession().isLoggedIn()) {
-            emiteUIProvider.get().getSession().logout();
-        }
-    }
+        // TODO Auto-generated method stub
 
-    public void toggleShow() {
-        if (emiteUIProvider.get().isVisible()) {
-            emiteUIProvider.get().hide();
-        } else {
-            emiteUIProvider.get().show();
-        }
     }
-
-    private XmppURI getLocalUserJid(final String shortName) {
-        return XmppURI.jid(shortName + "@" + chatOptions.domain);
-    }
-
-    private UserChatOptions getUserChatOptions(final String jid, final String passwd) {
-        final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
-        // getGwtMetaProperty(GWT_PROPERTY_RELEASE);
-        // FIXME, get this from user profile
-        return new UserChatOptions(jid + "@" + chatOptions.domain, passwd, resource, "blue", SubscriptionMode.manual,
-                true);
-    }
+    // private ChatConnectionOptions chatOptions;
+    // private final I18nTranslationService i18n;
+    // private final WorkspaceSkeleton wskel;
+    // private ToolbarButton traybarButton;
+    // private final Provider<EmiteUIDialog> emiteUIProvider;
+    // private Collection<RosterItem> roster;
+    // private final Event0 onRosterChanged;
+    // private final KeyStroke shortcut;
+    // private final Provider<FileDownloadUtils> downloadUtils;
+    //
+    // public ChatEngineDefault(final I18nTranslationService i18n, final
+    // WorkspaceSkeleton wskel,
+    // final AppStarter application, final Session session, final
+    // Provider<EmiteUIDialog> emiteUIProvider,
+    // final Provider<FileDownloadUtils> downloadUtils, final
+    // GlobalShortcutRegister shortcutRegister) {
+    // this.i18n = i18n;
+    // this.wskel = wskel;
+    // this.emiteUIProvider = emiteUIProvider;
+    // this.downloadUtils = downloadUtils;
+    // this.onRosterChanged = new Event0("onRosterChanged");
+    // shortcut = Shortcut.getShortcut(false, true, false, false,
+    // Character.valueOf('C'));
+    // shortcutRegister.put(shortcut, new AbstractExtendedAction() {
+    // @Override
+    // public void actionPerformed(final ActionEvent event) {
+    // if (isDialogStarted()) {
+    // toggleShow();
+    // }
+    //
+    // }
+    // });
+    // session.onInitDataReceived(new Listener<InitDataDTO>() {
+    // @Override
+    // public void onEvent(final InitDataDTO initData) {
+    // checkChatDomain(initData.getChatDomain());
+    // chatOptions = new ChatConnectionOptions(initData.getChatHttpBase(),
+    // initData.getChatDomain(),
+    // initData.getChatRoomHost());
+    // }
+    //
+    // private void checkChatDomain(final String chatDomain) {
+    // final String httpDomain = WindowUtils.getLocation().getHostName();
+    // if (!chatDomain.equals(httpDomain)) {
+    // Log.error("Your http domain (" + httpDomain +
+    // ") is different from the chat domain (" + chatDomain
+    // + "). This will cause problems with the chat functionality. "
+    // + "Please check kune.properties on the server.");
+    // }
+    // }
+    // });
+    // session.onUserSignOut(new Listener0() {
+    // @Override
+    // public void onEvent() {
+    // logout();
+    // }
+    // });
+    // session.onUserSignIn(new Listener<UserInfoDTO>() {
+    // @Override
+    // public void onEvent(final UserInfoDTO user) {
+    // login(user.getChatName(), user.getChatPassword());
+    // }
+    // });
+    // // application.onClosing(new Listener<ClosingEvent>() {
+    // // public void onEvent(final ClosingEvent event) {
+    // // stop();
+    // // }
+    // // });
+    // }
+    //
+    // @Override
+    // public void addNewBuddie(final String shortName) {
+    // emiteUIProvider.get().addBuddie(getLocalUserJid(shortName), shortName,
+    // "");
+    // }
+    //
+    // @Override
+    // public void addOnRosterChanged(final Listener0 slot) {
+    // onRosterChanged.add(slot);
+    // }
+    //
+    // @Override
+    // public void chat(final XmppURI jid) {
+    // emiteUIProvider.get().chat(jid);
+    // }
+    //
+    // @Override
+    // public ChatConnectionOptions getChatOptions() {
+    // return chatOptions;
+    // }
+    //
+    // @Override
+    // public boolean isBuddie(final String shortName) {
+    // return isBuddie(getLocalUserJid(shortName));
+    // }
+    //
+    // @Override
+    // public boolean isBuddie(final XmppURI jid) {
+    // if (roster != null) {
+    // for (final RosterItem item : roster) {
+    // if (item.getJID().equalsNoResource(jid)) {
+    // return true;
+    // }
+    // }
+    // }
+    // return false;
+    // }
+    //
+    // public boolean isDialogStarted() {
+    // return !emiteUIProvider.get().isDialogNotStarted();
+    // }
+    //
+    // @Override
+    // public boolean isLoggedIn() {
+    // return emiteUIProvider.get().isLoggedIn();
+    // }
+    //
+    // @Override
+    // public void joinRoom(final String roomName, final String userAlias) {
+    // joinRoom(roomName, null, userAlias);
+    // }
+    //
+    // @Override
+    // public void joinRoom(final String roomName, final String subject, final
+    // String userAlias) {
+    // if (emiteUIProvider.get().isLoggedIn()) {
+    // final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost
+    // + "/"
+    // + chatOptions.userOptions.getUserJid().getNode());
+    // final Room room = (Room) emiteUIProvider.get().joinRoom(roomURI);
+    // if (subject != null) {
+    // Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+    // @Override
+    // public void execute() {
+    // final RoomUI roomUI = (RoomUI) room.getData(ChatUI.class);
+    // if (roomUI != null) {
+    // roomUI.setSubject(subject);
+    // }
+    // }
+    // });
+    // }
+    // } else {
+    // NotifyUser.showAlertMessage(i18n.t("Error"),
+    // i18n.t("To join a chatroom you need to be 'online'"));
+    // }
+    // }
+    //
+    // @Override
+    // public void login(final String jid, final String passwd) {
+    // final UserChatOptions userChatOptions = getUserChatOptions(jid, passwd);
+    // // FIXME: Avatar provider
+    // final AvatarProvider avatarProvider = new AvatarProvider() {
+    // @Override
+    // public String getAvatarURL(final XmppURI userURI) {
+    // // if (userURI.getHost().equals(chatOptions.domain)) {
+    // // FIXME
+    // // return downloadUtils.get().getLogoImageUrl(new
+    // // StateToken(userURI.getNode()));
+    // // } else {
+    // // return "";
+    // // }
+    // return "images/person-def.gif";
+    // }
+    // };
+    // final String initialWindowTitle = Window.getTitle();
+    // chatOptions.userOptions = userChatOptions;
+    // if (emiteUIProvider.get().isDialogNotStarted()) {
+    // emiteUIProvider.get().onRosterChanged(new
+    // Listener<Collection<RosterItem>>() {
+    // @Override
+    // public void onEvent(final Collection<RosterItem> rosterChanged) {
+    // roster = rosterChanged;
+    // onRosterChanged.fire();
+    // }
+    // });
+    // emiteUIProvider.get().start(userChatOptions, chatOptions.httpBase,
+    // chatOptions.domain,
+    // chatOptions.roomHost, avatarProvider, i18n.t("Chat"));
+    // } else {
+    // emiteUIProvider.get().setEnableStatusUI(true);
+    // emiteUIProvider.get().refreshUserInfo(chatOptions.userOptions);
+    // }
+    // emiteUIProvider.get().show(OwnStatus.online);
+    // if (traybarButton == null) {
+    // traybarButton = new ToolbarButton();
+    // traybarButton.setTooltip(i18n.t("Show/hide the chat window" +
+    // shortcut.toString()));
+    // traybarButton.setIcon("images/e-icon.gif");
+    // traybarButton.addListener(new ButtonListenerAdapter() {
+    // @Override
+    // public void onClick(final Button button, final EventObject e) {
+    // toggleShow();
+    // }
+    // });
+    // wskel.getSiteTraybar().addButton(traybarButton);
+    // emiteUIProvider.get().onChatAttended(new Listener<String>() {
+    // @Override
+    // public void onEvent(final String parameter) {
+    // traybarButton.setIcon("images/e-icon.gif");
+    // }
+    // });
+    // emiteUIProvider.get().onChatUnattendedWithActivity(new Listener<String>()
+    // {
+    // @Override
+    // public void onEvent(final String parameter) {
+    // traybarButton.setIcon("images/e-icon-a.gif");
+    // }
+    // });
+    // }
+    // emiteUIProvider.get().hide();
+    // emiteUIProvider.get().onChatAttended(new Listener<String>() {
+    // @Override
+    // public void onEvent(final String parameter) {
+    // Window.setTitle(initialWindowTitle);
+    // }
+    // });
+    // emiteUIProvider.get().onChatUnattendedWithActivity(new Listener<String>()
+    // {
+    // @Override
+    // public void onEvent(final String chatTitle) {
+    // Window.setTitle("(* " + chatTitle + ") " + initialWindowTitle);
+    // }
+    // });
+    // }
+    //
+    // @Override
+    // public void logout() {
+    // if (!emiteUIProvider.get().isDialogNotStarted()) {
+    // emiteUIProvider.get().setOwnPresence(OwnStatus.offline);
+    // chatOptions.userOptions = getUserChatOptions("reset@example.com", "");
+    // emiteUIProvider.get().refreshUserInfo(chatOptions.userOptions);
+    // emiteUIProvider.get().setEnableStatusUI(false);
+    // }
+    // }
+    //
+    // @Override
+    // public void setAvatar(final String photoBinary) {
+    // emiteUIProvider.get().setOwnVCardAvatar(photoBinary);
+    // }
+    //
+    // @Override
+    // public void show() {
+    // emiteUIProvider.get().show();
+    // }
+    //
+    // @Override
+    // public void stop() {
+    // if (!emiteUIProvider.get().isDialogNotStarted()) {
+    // emiteUIProvider.get().destroy();
+    // }
+    // if (emiteUIProvider.get().getSession().isLoggedIn()) {
+    // emiteUIProvider.get().getSession().logout();
+    // }
+    // }
+    //
+    // public void toggleShow() {
+    // if (emiteUIProvider.get().isVisible()) {
+    // emiteUIProvider.get().hide();
+    // } else {
+    // emiteUIProvider.get().show();
+    // }
+    // }
+    //
+    // private XmppURI getLocalUserJid(final String shortName) {
+    // return XmppURI.jid(shortName + "@" + chatOptions.domain);
+    // }
+    //
+    // private UserChatOptions getUserChatOptions(final String jid, final String
+    // passwd) {
+    // final String resource = "emiteui-" + new Date().getTime() + "-kune"; // +
+    // // getGwtMetaProperty(GWT_PROPERTY_RELEASE);
+    // // FIXME, get this from user profile
+    // return new UserChatOptions(jid + "@" + chatOptions.domain, passwd,
+    // resource, "blue", SubscriptionMode.manual,
+    // true);
+    // }
 }

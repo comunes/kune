@@ -30,7 +30,6 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener0;
 import com.gwtext.client.core.Template;
 import com.gwtext.client.data.Record;
@@ -45,17 +44,17 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
     public static final String OTHER_LICENSES_ID = "k-lwsf-other";
     public static final String RADIO_FIELD_NAME = "k-lwsf-radio";
     private final ComboBox cb;
-    private final Event0 onChange;
+    // private final Event0 onChange;
     private final Session session;
 
-    public LicenseWizardFrdForm(I18nTranslationService i18n, Session session) {
+    public LicenseWizardFrdForm(final I18nTranslationService i18n, final Session session) {
         this.session = session;
-        this.onChange = new Event0("onChange");
+        // this.onChange = new Event0("onChange");
         setFrame(true);
         super.setPaddings(10);
         super.setHeight(LicenseWizardView.HEIGHT);
 
-        Label intro = new Label();
+        final Label intro = new Label();
         intro.setHtml(i18n.t("Select other kind of licenses:") + DefaultFormUtils.brbr());
 
         final Store store = new SimpleStore(new String[] { "shortname", "longname", "url" }, getNonCCLicenses());
@@ -85,20 +84,40 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
         cb.setTitle("Licenses");
         cb.addListener(new ComboBoxListenerAdapter() {
             @Override
-            public void onSelect(ComboBox comboBox, Record record, int index) {
-                onChange.fire();
+            public void onSelect(final ComboBox comboBox, final Record record, final int index) {
+                // onChange.fire();
             }
         });
         add(intro);
         add(cb);
     }
 
+    private String[][] getNonCCLicenses() {
+        final ArrayList<LicenseDTO> licensesNonCCList = new ArrayList<LicenseDTO>();
+        final List<LicenseDTO> licenses = session.getLicenses();
+        for (final LicenseDTO license : licenses) {
+            if (!license.isCC()) {
+                licensesNonCCList.add(license);
+            }
+        }
+        final String[][] licensesArray = new String[licensesNonCCList.size()][3];
+        for (int i = 0; i < licensesNonCCList.size(); i++) {
+            final LicenseDTO license = licensesNonCCList.get(i);
+            licensesArray[i][0] = license.getShortName();
+            licensesArray[i][1] = license.getLongName();
+            licensesArray[i][2] = license.getImageUrl();
+        }
+        return licensesArray;
+    }
+
+    @Override
     public String getSelectedLicense() {
         return cb.getValueAsString();
     }
 
+    @Override
     public void onChange(final Listener0 slot) {
-        onChange.add(slot);
+        // onChange.add(slot);
     }
 
     @Override
@@ -106,25 +125,9 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
         super.reset();
     }
 
-    public void setFlags(boolean isCopyleft, boolean isAppropiateForCulturalWorks, boolean isNonComercial) {
+    @Override
+    public void setFlags(final boolean isCopyleft, final boolean isAppropiateForCulturalWorks,
+            final boolean isNonComercial) {
         // TODO Auto-generated method stub
-    }
-
-    private String[][] getNonCCLicenses() {
-        ArrayList<LicenseDTO> licensesNonCCList = new ArrayList<LicenseDTO>();
-        List<LicenseDTO> licenses = session.getLicenses();
-        for (LicenseDTO license : licenses) {
-            if (!license.isCC()) {
-                licensesNonCCList.add(license);
-            }
-        }
-        String[][] licensesArray = new String[licensesNonCCList.size()][3];
-        for (int i = 0; i < licensesNonCCList.size(); i++) {
-            LicenseDTO license = licensesNonCCList.get(i);
-            licensesArray[i][0] = license.getShortName();
-            licensesArray[i][1] = license.getLongName();
-            licensesArray[i][2] = license.getImageUrl();
-        }
-        return licensesArray;
     }
 }

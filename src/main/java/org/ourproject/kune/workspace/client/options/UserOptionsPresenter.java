@@ -24,9 +24,9 @@ import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptions;
 
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -36,14 +36,14 @@ import com.calclab.suco.client.events.Listener0;
 public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implements UserOptions {
 
     private UserOptionsView view;
-    private final ImgResources img;
+    private final IconResources img;
     private final I18nTranslationService i18n;
     private final SiteUserOptions userOptions;
     private final Session session;
     private final StateManager stateManager;
 
     public UserOptionsPresenter(final Session session, final StateManager stateManager,
-            final I18nTranslationService i18n, final ImgResources img, final SiteUserOptions userOptions) {
+            final I18nTranslationService i18n, final IconResources img, final SiteUserOptions userOptions) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;

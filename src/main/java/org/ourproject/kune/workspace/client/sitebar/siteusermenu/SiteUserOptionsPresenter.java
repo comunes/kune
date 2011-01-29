@@ -31,9 +31,9 @@ import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 
 import cc.kune.core.client.resources.CoreMessages;
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -52,13 +52,13 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
     private final Provider<FileDownloadUtils> downloadProvider;
     private MenuDescriptor menuDescriptor;
     private final I18nTranslationService i18n;
-    private final ImgResources img;
+    private final IconResources img;
 
     private MenuDescriptor partiMenu;;
 
     public SiteUserOptionsPresenter(final Session session, final StateManager stateManager,
             final Provider<FileDownloadUtils> downloadProvider, final I18nTranslationService i18n,
-            final ImgResources img) {
+            final IconResources img) {
         super();
         this.session = session;
         this.stateManager = stateManager;

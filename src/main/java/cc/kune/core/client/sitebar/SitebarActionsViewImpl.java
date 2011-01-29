@@ -1,6 +1,6 @@
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ui.ActionFlowPanel;
+import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
@@ -12,14 +12,15 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class SitebarActionsViewImpl extends ViewImpl implements SitebarActionsView {
 
-    private final ActionFlowPanel panel;
+    private final ActionSimplePanel panel;
 
     @Inject
-    public SitebarActionsViewImpl(final WsArmor armor, final ActionFlowPanel panel) {
+    public SitebarActionsViewImpl(final WsArmor armor, final ActionSimplePanel panel) {
         this.panel = panel;
         panel.addStyleName("k-sitebar");
-        // armor.getDocContainer().add(panel);
+        panel.addStyleName("k-floatright");
         armor.getSitebar().add(panel);
+        // armor.getDocContainer().add(panel);
         // panel.setWidth("100%");
     }
 

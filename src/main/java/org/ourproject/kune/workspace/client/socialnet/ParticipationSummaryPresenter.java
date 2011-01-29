@@ -24,10 +24,10 @@ import java.util.List;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipationToolbar;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
@@ -52,7 +52,7 @@ public class ParticipationSummaryPresenter extends SocialNetworkPresenter implem
             final Provider<SocialNetworkServiceAsync> snServiceProvider, final GroupActionRegistry groupActionRegistry,
             final ActionParticipationToolbar actionParticipationToolbar,
             final Provider<FileDownloadUtils> downloadProvider, final AccessRightsClientManager accessRightsManager,
-            final ImgResources img) {
+            final IconResources img) {
         super(i18n, stateManager, accessRightsManager, session, snServiceProvider, groupActionRegistry,
                 downloadProvider, img);
         adminCategory = new GridGroup("admin in:", " ", i18n.tWithNT("Administrate these groups",

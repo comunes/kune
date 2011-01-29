@@ -31,10 +31,10 @@ import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbar;
 
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
@@ -73,7 +73,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
             final ActionBuddiesSummaryToolbar toolbar, final Provider<FileDownloadUtils> fileDownUtilsProvider,
             final ImageUtils imageUtils, final Provider<SocialNetworkServiceAsync> snServiceAsync,
             final GroupActionRegistry groupActionRegistry, final AccessRightsClientManager accessRightManager,
-            final ImgResources img) {
+            final IconResources img) {
         super(i18n, stateManager, accessRightManager, session, snServiceAsync, groupActionRegistry,
                 fileDownUtilsProvider, img);
         this.stateManager = stateManager;

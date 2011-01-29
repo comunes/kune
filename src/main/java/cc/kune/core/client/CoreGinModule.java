@@ -1,5 +1,7 @@
 package cc.kune.core.client;
 
+import cc.kune.chat.client.ChatClient;
+import cc.kune.chat.client.ChatClientDefault;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;
@@ -131,5 +133,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(SitebarSignOutLink.class).in(Singleton.class);
         bind(BeforeSignOut.class).in(Singleton.class);
         bind(SiteTokenListeners.class).asEagerSingleton();
+
+        bind(ChatClient.class).to(ChatClientDefault.class).in(Singleton.class);
     }
 }

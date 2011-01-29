@@ -1,5 +1,6 @@
 package cc.kune.core.client;
 
+import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
@@ -34,6 +35,8 @@ public interface CoreGinjector extends Ginjector {
      * see the GWTPlatform doc
      */
 
+    ChatClient getChatClient();
+
     AsyncProvider<CookiesManager> getCookiesManager();
 
     Provider<CorePresenter> getCorePresenter();
@@ -53,8 +56,6 @@ public interface CoreGinjector extends Ginjector {
     GxtGuiProvider getGxtGuiProvider();
 
     I18nTranslationService getI18n();
-
-    // PlaceManager getPlaceManager();
 
     ProxyFailureHandler getProxyFailureHandler();
 

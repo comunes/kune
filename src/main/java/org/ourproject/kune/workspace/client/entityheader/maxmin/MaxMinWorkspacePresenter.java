@@ -8,9 +8,9 @@ import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
 
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.resources.client.ImageResource;
@@ -45,7 +45,7 @@ public class MaxMinWorkspacePresenter implements MaxMinWorkspace {
 
     private boolean maximized;
 
-    private final ImgResources images;
+    private final IconResources images;
 
     private final I18nTranslationService i18n;
 
@@ -56,7 +56,7 @@ public class MaxMinWorkspacePresenter implements MaxMinWorkspace {
     private MenuItemDescriptor minimizeButton;
     private final SiteOptions siteOptions;
 
-    public MaxMinWorkspacePresenter(final GlobalShortcutRegister shortcutReg, final ImgResources images,
+    public MaxMinWorkspacePresenter(final GlobalShortcutRegister shortcutReg, final IconResources images,
             final I18nTranslationService i18n, final SiteOptions siteOptions) {
         this.shortcutReg = shortcutReg;
         this.images = images;

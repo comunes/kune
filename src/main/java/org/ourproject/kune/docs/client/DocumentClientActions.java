@@ -23,7 +23,6 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_ROOT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_WAVE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentViewer;
 import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
@@ -37,7 +36,6 @@ import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
-import org.ourproject.kune.workspace.client.wave.WaveInsert;
 
 import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.errors.ErrorHandler;
@@ -51,20 +49,18 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class DocumentClientActions extends AbstractFoldableContentActions {
     public DocumentClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
-            final Session session, final StateManager stateManager,
-            final SchedulerManager deferredCommandWrapper,
+            final Session session, final StateManager stateManager, final SchedulerManager deferredCommandWrapper,
             final Provider<ContentServiceAsync> contentServiceProvider,
             final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
             final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
             final DocumentViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-            final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager,
-            final Provider<WaveInsert> waveInsert) {
+            final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
                 contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
                 contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
-                documentViewer, entityLogo, publicLink, wsBackManager, waveInsert);
+                documentViewer, entityLogo, publicLink, wsBackManager);
     }
 
     @Override
@@ -83,8 +79,6 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
 
         createNewContentAction(TYPE_DOCUMENT, "images/nav/page_add.png", i18n.t("New document"), parentMenuTitleCtx,
                 Position.ctx, TYPE_ROOT, TYPE_FOLDER);
-
-        createWaveAction(TYPE_WAVE, parentMenuTitleCtx, Position.ctx, TYPE_ROOT, TYPE_FOLDER);
 
         createTranslateAction(parentMenuTitle, TYPE_DOCUMENT, TYPE_FOLDER);
         createContentRenameAction(parentMenuTitle, i18n.t("Rename"), contents);

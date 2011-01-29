@@ -28,7 +28,6 @@ import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.ToolbarSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.ToolbarSeparatorDescriptor.Type;
-import org.ourproject.kune.platf.client.ui.img.ImgConstants;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
@@ -43,11 +42,11 @@ import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCh
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 
 import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.core.client.resources.icons.IconConstants;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.calclab.suco.client.ioc.Provider;
@@ -720,7 +719,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     private PushButtonDescriptor italic;
     private MenuDescriptor linkCtxMenu;
     private final List<MenuDescriptor> menus;
-    private final Event0 onEdit;
+    // private final Event0 onEdit;
     protected ColorWebSafePalette palette;
     private final Provider<ColorWebSafePalette> paletteProvider;
     private final Session session;
@@ -750,7 +749,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         menus = new ArrayList<MenuDescriptor>();
 
         this.imgResources = imgResources;
-        this.onEdit = new Event0("onRTEEdit");
+        // this.onEdit = new Event0("onRTEEdit");
         extendedAddCond = new GuiAddCondition() {
             @Override
             public boolean mustBeAdded() {
@@ -775,7 +774,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
     @Override
     public void addOnEditListener(final Listener0 listener) {
-        onEdit.add(listener);
+        // onEdit.add(listener);
     }
 
     public void adjustSize(final int height) {
@@ -1064,9 +1063,9 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
         menus.add(formatMenu = new MenuDescriptor(i18n.t("Format")));
         menus.add(linkCtxMenu = new MenuDescriptor(i18n.t("Change Link")));
         menus.add(fontMenu = new MenuDescriptor("&nbsp;", i18n.t("Font"),
-                ImgConstants.toPath(imgResources.charfontname())));
+                IconConstants.toPath(imgResources.charfontname())));
         menus.add(fontSizeMenu = new MenuDescriptor(NO_TEXT, i18n.t("Font size"),
-                ImgConstants.toPath(imgResources.fontheight())));
+                IconConstants.toPath(imgResources.fontheight())));
         insertMenu.setAddCondition(extendedAddCond);
     }
 
@@ -1082,7 +1081,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     }
 
     public void fireOnEdit() {
-        onEdit.fire();
+        // onEdit.fire();
     }
 
     @Override

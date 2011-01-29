@@ -36,7 +36,6 @@ import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
-import org.ourproject.kune.workspace.client.wave.WaveInsert;
 
 import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.errors.ErrorHandler;
@@ -50,20 +49,18 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class WikiClientActions extends AbstractFoldableContentActions {
     public WikiClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
-            final Session session, final StateManager stateManager,
-            final SchedulerManager deferredCommandWrapper,
+            final Session session, final StateManager stateManager, final SchedulerManager deferredCommandWrapper,
             final Provider<ContentServiceAsync> contentServiceProvider,
             final Provider<GroupServiceAsync> groupServiceProvider, final Provider<FileUploader> fileUploaderProvider,
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
             final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
             final WikiViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-            final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager,
-            final Provider<WaveInsert> waveInsert) {
+            final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
                 contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
                 contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
-                documentViewer, entityLogo, publicLink, wsBackManager, waveInsert);
+                documentViewer, entityLogo, publicLink, wsBackManager);
     }
 
     @Override

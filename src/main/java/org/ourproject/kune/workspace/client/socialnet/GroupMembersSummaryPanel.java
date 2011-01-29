@@ -33,7 +33,6 @@ import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 
-import com.calclab.emiteuimodule.client.users.UserGridPanel;
 import com.calclab.suco.client.events.Listener;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -47,9 +46,9 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
     // private static final int MAX_HEIGHT = 110;
     private final GridMenuPanel<GroupDTO> gridMenuPanel;
     private final I18nUITranslationService i18n;
+    private final Label noMembersPublic;
     private final GroupMembersSummaryPresenter presenter;
     private final AbstractToolbar toolbar;
-    private final Label noMembersPublic;
 
     public GroupMembersSummaryPanel(final GroupMembersSummaryPresenter presenter, final I18nUITranslationService i18n,
             final WorkspaceSkeleton ws, final ActionToolbarView<StateToken> actionToolbarView) {
@@ -57,12 +56,13 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         this.presenter = presenter;
         this.i18n = i18n;
 
-        final GridDragConfiguration dragConf = new GridDragConfiguration(UserGridPanel.USER_GROUP_DD,
+        final GridDragConfiguration dragConf = new GridDragConfiguration("kk",
                 i18n.t("Drop into the chat area to start a chat.") + "<br/>"
                         + i18n.t("Drop into a room to invite the user to join the chat room"));
         gridMenuPanel = new GridMenuPanel<GroupDTO>(i18n.t("This is an orphaned project, if you are interested "
                 + "please request to join to work on it"), dragConf, true, true, false, true, false);
         final Listener<String> go = new Listener<String>() {
+            @Override
             public void onEvent(final String groupShortName) {
                 presenter.onDoubleClick(groupShortName);
             }
@@ -91,6 +91,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         });
     }
 
+    @Override
     public void addItem(final GridItem<GroupDTO> gridItem) {
         gridMenuPanel.setVisible(true);
         gridMenuPanel.addItem(gridItem);
@@ -105,13 +106,16 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         doLayoutIfNeeded();
     }
 
+    @Override
     public void confirmAddCollab(final String groupShortName, final String groupLongName) {
         final String groupName = groupLongName + " (" + groupShortName + ")";
         MessageBox.confirm(i18n.t("Confirm member joining"), i18n.t("Add [%s] as a member?", groupName),
                 new MessageBox.ConfirmCallback() {
+                    @Override
                     public void execute(final String btnID) {
                         if (btnID.equals("yes")) {
                             Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                                @Override
                                 public void execute() {
                                     presenter.addCollab(groupShortName);
                                 }
@@ -126,6 +130,7 @@ public class GroupMembersSummaryPanel extends SummaryPanel implements GroupMembe
         // gridMenuPanel.setDraggable(draggable);
     }
 
+    @Override
     public void showMembersNotVisible() {
         noMembersPublic.setVisible(true);
         gridMenuPanel.setVisible(false);

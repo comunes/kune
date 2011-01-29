@@ -1,10 +1,10 @@
 package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.workspace.client.socialnet.ParticipateAction;
 import org.ourproject.kune.workspace.client.socialnet.UnjoinAction;
 
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
@@ -22,7 +22,7 @@ public class ActionsModule extends AbstractExtendedModule {
             public ParticipateAction create() {
                 return new ParticipateAction(i(Session.class), p(SocialNetworkServiceAsync.class),
                         i(StateManager.class), i(AccessRightsClientManager.class), i(I18nTranslationService.class),
-                        i(ImgResources.class));
+                        i(IconResources.class));
             }
         });
 
@@ -30,7 +30,7 @@ public class ActionsModule extends AbstractExtendedModule {
             @Override
             public UnjoinAction create() {
                 return new UnjoinAction(i(Session.class), p(SocialNetworkServiceAsync.class), i(StateManager.class),
-                        i(AccessRightsClientManager.class), i(I18nTranslationService.class), i(ImgResources.class));
+                        i(AccessRightsClientManager.class), i(I18nTranslationService.class), i(IconResources.class));
             }
         });
 

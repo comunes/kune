@@ -1,6 +1,6 @@
 package cc.kune.core.client.ui.dialogs;
 
-import cc.kune.common.client.ui.PopupPanelTopCentered;
+import cc.kune.common.client.ui.PopupTopPanel;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
@@ -8,13 +8,13 @@ import com.google.gwt.user.client.ui.PopupPanel;
 
 public class BasicTopDialog extends BasicDialog {
 
-    private final PopupPanelTopCentered popup;
+    private final PopupTopPanel popup;
 
     public BasicTopDialog(final String dialogId, final String title, final boolean autohide, final boolean modal,
             final boolean autoscroll, final int width, final int height, final String icon,
             final String firstButtonTitle, final String firstButtonId, final String cancelButtonTitle,
             final String cancelButtonId, final int tabIndexStart) {
-        popup = new PopupPanelTopCentered(autohide, modal);
+        popup = new PopupTopPanel(autohide, modal);
         popup.add(this);
         popup.ensureDebugId(dialogId);
         super.getTitleText().setText(title);

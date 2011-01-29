@@ -13,7 +13,6 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 
 public class WsThemeSelectorPresenter implements WsThemeSelector {
@@ -29,41 +28,30 @@ public class WsThemeSelectorPresenter implements WsThemeSelector {
             putValue(SMALL_ICON, CssStyleDescriptor.create("k-wstheme-icon-" + theme));
         }
 
+        @Override
         public void actionPerformed(final ActionEvent event) {
-            themeSelected.fire(new WsTheme(theme));
+            // themeSelected.fire(new WsTheme(theme));
             menu.setText(i18n.t(theme));
         }
     }
 
-    private final Event<WsTheme> themeSelected;
-    private final Event<String> selectItemInUI;
+    // private final Event<WsTheme> themeSelected;
+    // private final Event<String> selectItemInUI;
     private final I18nTranslationService i18n;
     private MenuDescriptor menu;
-    private ActionExtensibleView view;
     private final Session session;
+    private ActionExtensibleView view;
 
     public WsThemeSelectorPresenter(final Session session, final I18nTranslationService i18n) {
         this.session = session;
         this.i18n = i18n;
-        this.themeSelected = new Event<WsTheme>("themeSelected");
-        this.selectItemInUI = new Event<String>("selectItemInUI");
+        // this.themeSelected = new Event<WsTheme>("themeSelected");
+        // this.selectItemInUI = new Event<String>("selectItemInUI");
     }
 
+    @Override
     public void addThemeSelected(final Listener<WsTheme> listener) {
-        themeSelected.add(listener);
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void init(final ActionExtensibleView view) {
-        this.view = view;
-        createActions();
-    }
-
-    public void select(final String theme) {
-        selectItemInUI.fire(theme);
+        // themeSelected.add(listener);
     }
 
     private void createActions() {
@@ -71,6 +59,7 @@ public class WsThemeSelectorPresenter implements WsThemeSelector {
         final InitDataDTO initData = session.getInitData();
         if (initData == null) {
             session.onInitDataReceived(new Listener<InitDataDTO>() {
+                @Override
                 public void onEvent(final InitDataDTO initData) {
                     setThemes(initData);
                 }
@@ -88,15 +77,30 @@ public class WsThemeSelectorPresenter implements WsThemeSelector {
     private void createTheme(final String theme) {
         final ThemeAction action = new ThemeAction(theme);
         final MenuItemDescriptor themeItem = new MenuItemDescriptor(menu, action);
-        selectItemInUI.add(new Listener<String>() {
-            public void onEvent(final String themeToSelect) {
-                if (theme.equals(themeToSelect)) {
-                    menu.setText(i18n.t(theme));
-                    // themeItem.setChecked(true);
-                }
-            }
-        });
+        // selectItemInUI.add(new Listener<String>() {
+        // public void onEvent(final String themeToSelect) {
+        // if (theme.equals(themeToSelect)) {
+        // menu.setText(i18n.t(theme));
+        // // themeItem.setChecked(true);
+        // }
+        // }
+        // });
         view.addAction(themeItem);
+    }
+
+    @Override
+    public View getView() {
+        return view;
+    }
+
+    public void init(final ActionExtensibleView view) {
+        this.view = view;
+        createActions();
+    }
+
+    @Override
+    public void select(final String theme) {
+        // selectItemInUI.fire(theme);
     }
 
     private void setThemes(final InitDataDTO initData) {

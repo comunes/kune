@@ -26,7 +26,6 @@ import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardView;
 
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener0;
 import com.gwtext.client.widgets.PaddedPanel;
 import com.gwtext.client.widgets.form.Checkbox;
@@ -37,35 +36,35 @@ import com.gwtext.client.widgets.form.Radio;
 import com.gwtext.client.widgets.form.event.CheckboxListenerAdapter;
 
 public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTrdFormView {
-    public static final String RADIO_PERMIT_COMMERCIAL_ID = "k-lwtf-perm-comm";
-    public static final String RADIO_NOT_COMM_ID = "k-lwtf-not-perm-comm";
     public static final String RADIO_COMMERCIAL_FIELD_NAME = "k-lwtf-comm-radio";
+    public static final String RADIO_MODIF_FIELD_NAME = "k-lwtf-mod-radio";
+    public static final String RADIO_NOT_COMM_ID = "k-lwtf-not-perm-comm";
+    public static final String RADIO_NOT_PERMIT_MOD_ID = "k-lwtf-not-mod";
+    public static final String RADIO_PERMIT_COMMERCIAL_ID = "k-lwtf-perm-comm";
     public static final String RADIO_PERMIT_MOD_ID = "k-lwtf-mod-perm";
     public static final String RADIO_PERMIT_MOD_SA_ID = "k-lwtf-mod-perm-sa";
-    public static final String RADIO_NOT_PERMIT_MOD_ID = "k-lwtf-not-mod";
-    public static final String RADIO_MODIF_FIELD_NAME = "k-lwtf-mod-radio";
+    private final LicenseWizardFlags info;
+    private Radio notPermitComercialLicenseRadio;
+    // private final Event0 onChange;
+    private Radio notPermitModRadio;
     private Radio permitComercialRadio;
     private Radio permitModRadio;
     private Radio permitModSaRadio;
-    private final LicenseWizardFlags info;
-    private Radio notPermitModRadio;
-    private Radio notPermitComercialLicenseRadio;
-    private final Event0 onChange;
 
-    public LicenseWizardTrdForm(Images images, I18nTranslationService i18n) {
+    public LicenseWizardTrdForm(final Images images, final I18nTranslationService i18n) {
         super.setFrame(true);
         super.setHeight(LicenseWizardView.HEIGHT);
         super.setPaddings(10);
 
-        this.onChange = new Event0("onChange");
+        // this.onChange = new Event0("onChange");
 
-        Label intro = new Label();
+        final Label intro = new Label();
         intro.setHtml(i18n.t("With a Creative Commons license, you keep your copyright but allow people to copy and distribute your work provided they give you credit — and only on the conditions you specify here. What do you want to do?")
                 + DefaultFormUtils.brbr());
 
-        Label commercialQuestion = new Label();
+        final Label commercialQuestion = new Label();
         commercialQuestion.setHtml(i18n.t("Allow any uses of your work, including commercial?") + DefaultFormUtils.br());
-        Label modificationsQuestion = new Label();
+        final Label modificationsQuestion = new Label();
         modificationsQuestion.setHtml(i18n.t("Allow modifications of your work?") + DefaultFormUtils.br());
 
         final FieldSet commercialfieldSet = new FieldSet(i18n.t("Allow any uses of your work, including commercial?"));
@@ -88,52 +87,25 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
         add(new PaddedPanel(info, 0, 0, 0, 0));
     }
 
-    public boolean isAllowComercial() {
-        return permitComercialRadio.getValue();
-    }
-
-    public boolean isAllowModif() {
-        return permitModRadio.getValue();
-    }
-
-    public boolean isAllowModifShareAlike() {
-        return permitModSaRadio.getValue();
-    }
-
-    public void onChange(final Listener0 slot) {
-        onChange.add(slot);
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        permitComercialRadio.setChecked(true);
-        permitModSaRadio.setChecked(true);
-    }
-
-    public void setFlags(boolean isCopyleft, boolean isAppropiateForCulturalWorks, boolean isNonComercial) {
-        info.setVisible(isCopyleft, isAppropiateForCulturalWorks, isNonComercial);
-    }
-
     private void createRadioListeners() {
-        Radio[] radios = { permitModRadio, permitModSaRadio, notPermitModRadio, permitComercialRadio,
+        final Radio[] radios = { permitModRadio, permitModSaRadio, notPermitModRadio, permitComercialRadio,
                 notPermitComercialLicenseRadio };
-        for (Radio radio : radios) {
+        for (final Radio radio : radios) {
             radio.addListener(new CheckboxListenerAdapter() {
                 @Override
-                public void onChange(Field field, Object newVal, Object oldVal) {
-                    onChange.fire();
+                public void onChange(final Field field, final Object newVal, final Object oldVal) {
+                    // onChange.fire();
                 }
 
                 @Override
-                public void onCheck(Checkbox field, boolean checked) {
-                    onChange.fire();
+                public void onCheck(final Checkbox field, final boolean checked) {
+                    // onChange.fire();
                 }
             });
         }
     }
 
-    private void createRadios(I18nTranslationService i18n, final FieldSet commercialfieldSet,
+    private void createRadios(final I18nTranslationService i18n, final FieldSet commercialfieldSet,
             final FieldSet modificationsfieldSet) {
         permitComercialRadio = DefaultFormUtils.createRadio(
                 commercialfieldSet,
@@ -165,5 +137,38 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
                 RADIO_MODIF_FIELD_NAME,
                 i18n.t("The licensor permits others to copy, distribute, display and perform only unaltered copies of the work — not derivative works based on it"),
                 RADIO_NOT_PERMIT_MOD_ID);
+    }
+
+    @Override
+    public boolean isAllowComercial() {
+        return permitComercialRadio.getValue();
+    }
+
+    @Override
+    public boolean isAllowModif() {
+        return permitModRadio.getValue();
+    }
+
+    @Override
+    public boolean isAllowModifShareAlike() {
+        return permitModSaRadio.getValue();
+    }
+
+    @Override
+    public void onChange(final Listener0 slot) {
+        // onChange.add(slot);
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        permitComercialRadio.setChecked(true);
+        permitModSaRadio.setChecked(true);
+    }
+
+    @Override
+    public void setFlags(final boolean isCopyleft, final boolean isAppropiateForCulturalWorks,
+            final boolean isNonComercial) {
+        info.setVisible(isCopyleft, isAppropiateForCulturalWorks, isNonComercial);
     }
 }

@@ -24,9 +24,9 @@ import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
-import org.ourproject.kune.platf.client.ui.img.ImgConstants;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 
+import cc.kune.core.client.resources.icons.IconConstants;
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -37,11 +37,11 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
     public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
     private GroupOptionsView view;
     private final I18nTranslationService i18n;
-    private final ImgResources img;
+    private final IconResources img;
     private ButtonDescriptor prefsItem;
 
     public GroupOptionsPresenter(final StateManager stateManager, final I18nTranslationService i18n,
-            final ImgResources img) {
+            final IconResources img) {
         this.i18n = i18n;
         this.img = img;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
@@ -69,7 +69,7 @@ public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter impleme
             }
         };
         groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
-        groupPrefsAction.putValue(Action.SMALL_ICON, ImgConstants.toPath(img.prefs()));
+        groupPrefsAction.putValue(Action.SMALL_ICON, IconConstants.toPath(img.prefs()));
         prefsItem = new ButtonDescriptor(groupPrefsAction);
         prefsItem.setId(GROUP_OPTIONS_ICON);
         prefsItem.setVisible(false);

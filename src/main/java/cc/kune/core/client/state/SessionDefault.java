@@ -22,7 +22,9 @@ package cc.kune.core.client.state;
 import java.util.Collection;
 import java.util.List;
 
+import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.core.client.cookies.CookiesManager;
+import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -38,9 +40,6 @@ import cc.kune.core.shared.dto.ToolSimpleDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Event;
-import com.calclab.suco.client.events.Event0;
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 import com.google.gwt.core.client.GWT;
@@ -49,31 +48,25 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class SessionDefault implements Session {
-    private String userHash;
-    private InitDataDTO initData;
-    private UserInfoDTO currentUserInfo;
-    private Object[][] languagesArray;
     private Object[][] countriesArray;
-    private Object[][] timezonesArray;
-    private StateAbstractDTO currentState;
     private I18nLanguageDTO currentLanguage;
-    private final Event<InitDataDTO> onInitDataReceived;
-    private final Event<UserInfoDTO> onUserSignIn;
-    private final Event0 onUserSignOut;
-    private final Provider<UserServiceAsync> userServiceProvider;
+    private StateAbstractDTO currentState;
+    private UserInfoDTO currentUserInfo;
     private final EventBus eventBus;
+    private InitDataDTO initData;
+    private Object[][] languagesArray;
+    private Object[][] timezonesArray;
+    private String userHash;
+    private final Provider<UserServiceAsync> userServiceProvider;
 
     @Inject
     public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider,
-            EventBus eventBus) {
+            final EventBus eventBus) {
         this.eventBus = eventBus;
         this.userHash = cookieManager.getCurrentCookie();
         this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
         this.userServiceProvider = userServiceProvider;
         languagesArray = null;
-        this.onInitDataReceived = new Event<InitDataDTO>("initDataReceived");
-        this.onUserSignIn = new Event<UserInfoDTO>("onUserSignIn");
-        this.onUserSignOut = new Event0("onUserSignOut");
     }
 
     @Override
@@ -263,54 +256,6 @@ public class SessionDefault implements Session {
         return !isLogged();
     }
 
-    @Override
-    public void onInitDataReceived(final Listener<InitDataDTO> listener) {
-        onInitDataReceived.add(listener);
-    }
-
-    @Override
-    public void onUserSignIn(final Listener<UserInfoDTO> listener) {
-        onUserSignIn.add(listener);
-    }
-
-    @Override
-    public void onUserSignOut(final Listener0 listener) {
-        onUserSignOut.add(listener);
-    }
-
-    @Override
-    public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
-        this.currentLanguage = currentLanguage;
-    }
-
-    @Override
-    public void setCurrentState(final StateAbstractDTO currentState) {
-        this.currentState = currentState;
-    }
-
-    @Override
-    public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
-        this.currentUserInfo = currentUserInfo;
-        if (currentUserInfo != null) {
-            eventBus.fireEvent(new UserSignInEvent(currentUserInfo));
-            onUserSignIn.fire(currentUserInfo);
-        } else {
-            eventBus.fireEvent(new UserSignOutEvent());
-            onUserSignOut.fire();
-        }
-    }
-
-    @Override
-    public void setInitData(final InitDataDTO initData) {
-        this.initData = initData;
-        onInitDataReceived.fire(initData);
-    }
-
-    @Override
-    public void setUserHash(final String userHash) {
-        this.userHash = userHash;
-    }
-
     private Object[][] mapCountries() {
         assert initData != null;
         final Object[][] objs = new Object[initData.getCountries().size()][1];
@@ -340,5 +285,50 @@ public class SessionDefault implements Session {
             final Object[] obj = new Object[] { initData.getTimezones()[i] };
             timezonesArray[i] = obj;
         }
+    }
+
+    @Override
+    public void onInitDataReceived(final Listener<InitDataDTO> listener) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void onUserSignIn(final Listener<UserInfoDTO> listener) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void onUserSignOut(final Listener0 listener) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
+        this.currentLanguage = currentLanguage;
+    }
+
+    @Override
+    public void setCurrentState(final StateAbstractDTO currentState) {
+        this.currentState = currentState;
+    }
+
+    @Override
+    public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
+        this.currentUserInfo = currentUserInfo;
+        if (currentUserInfo != null) {
+            eventBus.fireEvent(new UserSignInEvent(currentUserInfo));
+        } else {
+            eventBus.fireEvent(new UserSignOutEvent());
+        }
+    }
+
+    @Override
+    public void setInitData(final InitDataDTO initData) {
+        this.initData = initData;
+    }
+
+    @Override
+    public void setUserHash(final String userHash) {
+        this.userHash = userHash;
     }
 }

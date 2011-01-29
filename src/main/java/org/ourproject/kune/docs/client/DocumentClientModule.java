@@ -47,7 +47,6 @@ import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
-import org.ourproject.kune.workspace.client.wave.WaveInsert;
 
 import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.errors.ErrorHandler;
@@ -83,8 +82,7 @@ public class DocumentClientModule extends AbstractExtendedModule {
                         p(ContentServiceAsync.class), p(GroupServiceAsync.class), p(FileUploader.class),
                         i(ContentActionRegistry.class), i(ContextActionRegistry.class), p(FileDownloadUtils.class),
                         i(EntityHeader.class), p(ContentEditor.class), i(ErrorHandler.class), i(DocumentViewer.class),
-                        p(ContextPropEditor.class), i(SitePublicSpaceLink.class), i(WsBackManager.class),
-                        p(WaveInsert.class));
+                        p(ContextPropEditor.class), i(SitePublicSpaceLink.class), i(WsBackManager.class));
             }
         });
 

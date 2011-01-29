@@ -56,7 +56,7 @@
   </replace-with>
   <inherits name="com.calclab.suco.Suco" />
   <inherits name="com.gwtext.GwtExt" />
-  <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />
+<!--  <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />-->
   <inherits name="org.xwiki.gwt.dom.DOM" />
   <inherits name="com.calclab.suco.Suco"/>
   <source path='client' excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>

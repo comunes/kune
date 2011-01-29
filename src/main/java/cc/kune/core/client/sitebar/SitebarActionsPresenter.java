@@ -1,6 +1,7 @@
 package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
@@ -8,12 +9,15 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -34,15 +38,16 @@ public class SitebarActionsPresenter extends
     public static final ToolbarDescriptor TOOLBAR = new ToolbarDescriptor();
 
     private final I18nTranslationService i18n;
-    private final SitebarNewGroupLink newGroupLink;
+    private final Provider<SitebarNewGroupLink> newGroupLink;
     private MenuDescriptor optionsMenu;
-    private final SitebarSignInLink signInLink;
-    private final SitebarSignOutLink signOutLink;
+    private final Provider<SitebarSignInLink> signInLink;
+    private final Provider<SitebarSignOutLink> signOutLink;
 
     @Inject
     public SitebarActionsPresenter(final EventBus eventBus, final SitebarActionsView view,
-            final SitebarActionsProxy proxy, final I18nTranslationService i18n, final SitebarNewGroupLink newGroupLink,
-            final SitebarSignOutLink signOutLink, final SitebarSignInLink signInLink) {
+            final SitebarActionsProxy proxy, final I18nTranslationService i18n,
+            final Provider<SitebarNewGroupLink> newGroupLink, final Provider<SitebarSignOutLink> signOutLink,
+            final Provider<SitebarSignInLink> signInLink) {
         super(eventBus, view, proxy);
         this.i18n = i18n;
         this.newGroupLink = newGroupLink;
@@ -72,39 +77,29 @@ public class SitebarActionsPresenter extends
 
     public void init() {
         optionsMenu = new MenuDescriptor(i18n.t("Options"));
-
-        // final IconLabelDescriptor icon = new IconLabelDescriptor("test");
         final AbstractExtendedAction action = new AbstractExtendedAction() {
-
             @Override
             public void actionPerformed(final ActionEvent event) {
                 getEventBus().fireEvent(new UserNotifyEvent("Testing only"));
             }
         };
+        action.putValue(Action.NAME, "Test");
         final MenuItemDescriptor mItem = new MenuItemDescriptor(optionsMenu, action);
-        optionsMenu.setStyles("k-floatright, k-no-backimage, k-btn-sitebar");
-        // action.putValue(Action.NAME, "kk");
-        // action.putValue(Action.SHORT_DESCRIPTION, "tooltip");
-        // final ButtonDescriptor signIn = new ButtonDescriptor(action);
-        // final ToolbarSeparatorDescriptor fill = new
-        // ToolbarSeparatorDescriptor(Type.fill, TOOLBAR);
+        optionsMenu.setStyles("k-no-backimage, k-btn-sitebar");
+        final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
+                SitebarActionsPresenter.TOOLBAR);
+        final ToolbarSeparatorDescriptor spacer = new ToolbarSeparatorDescriptor(Type.spacer,
+                SitebarActionsPresenter.TOOLBAR);
         addAction(TOOLBAR);
-        // addAction(fill);
-        // addAction(icon);
-        // addAction(signIn);
-        // icon.setStyles("k-floatright");
-        // signIn.setStyles("k-floatright, k-no-backimage");
+        addAction(signInLink.get());
+        addAction(signOutLink.get());
+        addAction(spacer);
+        addAction(separator);
+        addAction(newGroupLink.get());
+        addAction(spacer);
+        addAction(separator);
         addAction(optionsMenu);
         addAction(mItem);
-        // addAction(new ToolbarSeparatorDescriptor(Type.separator,
-        // SitebarActionsPresenter.TOOLBAR));
-        addAction(newGroupLink);
-        addAction(signInLink);
-        addAction(signOutLink);
-        // addAction(new ToolbarSeparatorDescriptor(Type.spacer,
-        // SitebarActionsPresenter.TOOLBAR));
-        // addAction(new ToolbarSeparatorDescriptor(Type.spacer,
-        // SitebarActionsPresenter.TOOLBAR));
     }
 
     @ProxyEvent

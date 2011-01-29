@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Event;
 import com.calclab.suco.client.events.Listener;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Ext;
@@ -60,31 +59,31 @@ import com.gwtext.client.widgets.grid.event.GridRowListener;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class GridMenuPanel<T> extends Panel {
-    public static final String GRID_MENU_PANEL_DD = "gridMenuPanelDD";
     public static final int DEFAULT_INITIAL_WIDTH = 150;
+    private static final String END_ICON_HTML = "endIconHtmlField";
+    public static final String GRID_MENU_PANEL_DD = "gridMenuPanelDD";
     private static final String GROUP = "groupField";
-    private static final String GROUP_TOOLTIP_TITLE = "groupTooltipTitleField";
-    private static final String GROUP_TOOLTIP = "groupTooltipField";
     private static final String GROUP_ENDICON_HTML = "groupEndIconHtmlField";
-    private static final String ID = "idField";
+    private static final String GROUP_TOOLTIP = "groupTooltipField";
+    private static final String GROUP_TOOLTIP_TITLE = "groupTooltipTitleField";
     private static final String ICON_HTML = "iconHtmlField";
+    private static final String ID = "idField";
     private static final String TITLE = "titleField";
     private static final String TITLE_HTML = "titleHtmlField";
-    private static final String END_ICON_HTML = "endIconHtmlField";
     private static final String TOOLTIP = "tooltipField";
     private static final String TOOLTIPTITLE = "tooltipTitleField";
-    private final Map<String, CustomMenu<T>> menuMap;
-    private final Map<T, Record> recordMap;
-    private RecordDef recordDef;
-    private GroupingStore store;
-    private GridPanel grid;
-    private final boolean grouped;
-    private final boolean withCounters;
-    private final Event<String> onClick;
-    private final Event<String> onDoubleClick;
-    private Toolbar topBar;
     private Toolbar bottomBar;
     private ColumnModel columnModel;
+    private GridPanel grid;
+    private final boolean grouped;
+    private final Map<String, CustomMenu<T>> menuMap;
+    private RecordDef recordDef;
+    private final Map<T, Record> recordMap;
+    private GroupingStore store;
+    // private final Event<String> onClick;
+    // private final Event<String> onDoubleClick;
+    private Toolbar topBar;
+    private final boolean withCounters;
     private final boolean withEndIcon;
 
     public GridMenuPanel(final String emptyText) {
@@ -112,8 +111,8 @@ public class GridMenuPanel<T> extends Panel {
     public GridMenuPanel(final String emptyText, final GridDragConfiguration gridDragConfiguration,
             final GridDropConfiguration gridDropConfiguration, final boolean grouped, final boolean withCounters,
             final boolean withTopBar, final boolean withBottomBar, final boolean withEndIcon) {
-        this.onClick = new Event<String>("onClick");
-        this.onDoubleClick = new Event<String>("onDoubleClick");
+        // this.onClick = new Event<String>("onClick");
+        // this.onDoubleClick = new Event<String>("onDoubleClick");
         this.grouped = grouped;
         this.withCounters = withCounters;
         this.withEndIcon = withEndIcon;
@@ -150,10 +149,12 @@ public class GridMenuPanel<T> extends Panel {
 
     public void addItem(final GridItem<T> gridItem) {
         final String id = gridItem.getId();
-        final Record newRecord = recordDef.createRecord(id, new Object[] { gridItem.getGroup().getName(),
-                gridItem.getGroup().getTooltipTitle(), gridItem.getGroup().getTooltip(),
-                gridItem.getGroup().getEndIconHtml(), id, gridItem.getIconHtml(), gridItem.getTitle(),
-                gridItem.getTitleHtml(), gridItem.getEndIconHtml(), gridItem.getTooltipTitle(), gridItem.getTooltip() });
+        final Record newRecord = recordDef.createRecord(
+                id,
+                new Object[] { gridItem.getGroup().getName(), gridItem.getGroup().getTooltipTitle(),
+                        gridItem.getGroup().getTooltip(), gridItem.getGroup().getEndIconHtml(), id,
+                        gridItem.getIconHtml(), gridItem.getTitle(), gridItem.getTitleHtml(),
+                        gridItem.getEndIconHtml(), gridItem.getTooltipTitle(), gridItem.getTooltip() });
         recordMap.put(gridItem.getItem(), newRecord);
         store.addSorted(newRecord);
         menuMap.put(id, gridItem.getMenu());
@@ -173,7 +174,7 @@ public class GridMenuPanel<T> extends Panel {
                 if (dragData instanceof GridDragData) {
                     final GridDragData gridDragData = (GridDragData) dragData;
                     final Record[] records = gridDragData.getSelections();
-                    for (Record record : records) {
+                    for (final Record record : records) {
                         gridDropConfiguration.fire(record.getAsString(ID));
                     }
                 }
@@ -190,97 +191,6 @@ public class GridMenuPanel<T> extends Panel {
                 return "x-tree-drop-ok-append";
             }
         };
-    }
-
-    @Override
-    public void doLayout(final boolean shallow) {
-        // Grid rendered problems with shallow false
-        grid.doLayout(true);
-        super.doLayout(true);
-    }
-
-    public void doLayoutIfNeeded() {
-        if (super.isRendered()) {
-            grid.doLayout(true);
-            super.doLayout(true);
-        }
-    }
-
-    public Toolbar getBottomBar() {
-        assert bottomBar != null;
-        return bottomBar;
-    }
-
-    public Toolbar getTopBar() {
-        assert topBar != null;
-        return topBar;
-    }
-
-    public void onClick(final Listener<String> listener) {
-        onClick.add(listener);
-    }
-
-    public void onDoubleClick(final Listener<String> listener) {
-        onDoubleClick.add(listener);
-    }
-
-    @Override
-    public void removeAll() {
-        store.removeAll();
-        recordMap.clear();
-        menuMap.clear();
-    }
-
-    public void removeItem(final GridItem<T> gridItem) {
-        final Record record = recordMap.get(gridItem.getItem());
-        if (record == null) {
-            Log.error("Trying to remove a non existing item: " + gridItem.getId());
-        } else {
-            menuMap.remove(gridItem.getId());
-            store.remove(record);
-            recordMap.remove(gridItem.getItem());
-            doLayoutIfNeeded();
-        }
-    }
-
-    @Override
-    public void setHeight(final int height) {
-        super.setHeight(height);
-        doLayoutIfNeeded();
-    }
-
-    @Override
-    public void setWidth(final int width) {
-        grid.setWidth(width - 27);
-        // super.setWidth(width);
-        doLayoutIfNeeded();
-    }
-
-    public void sort() {
-        store.sort(GROUP, SortDir.ASC);
-    }
-
-    public void updateItem(final GridItem<T> gridItem) {
-        final String id = gridItem.getId();
-        final Record record = recordMap.get(gridItem.getItem());
-        if (record != null) {
-            record.set(GROUP, gridItem.getGroup().getName());
-            record.set(GROUP_TOOLTIP_TITLE, gridItem.getGroup().getTooltipTitle());
-            record.set(GROUP_TOOLTIP, gridItem.getGroup().getTooltip());
-            record.set(GROUP_ENDICON_HTML, gridItem.getGroup().getEndIconHtml());
-            record.set(ICON_HTML, gridItem.getIconHtml());
-            record.set(TITLE, gridItem.getTitle());
-            record.set(TITLE_HTML, gridItem.getTitleHtml());
-            record.set(END_ICON_HTML, gridItem.getEndIconHtml());
-            record.set(TOOLTIPTITLE, gridItem.getTooltipTitle());
-            record.set(TOOLTIP, gridItem.getTooltip());
-            store.commitChanges();
-            menuMap.put(id, gridItem.getMenu());
-            sort();
-            doLayoutIfNeeded();
-        } else {
-            Log.error("Trying to update a non existing item: " + id);
-        }
     }
 
     private void configureDragImpl(final GridDragConfiguration gridDragConfiguration) {
@@ -303,7 +213,7 @@ public class GridMenuPanel<T> extends Panel {
                 if (dragData instanceof GridDragData) {
                     final GridDragData gridDragData = (GridDragData) dragData;
                     final Record[] records = gridDragData.getSelections();
-                    for (Record record : records) {
+                    for (final Record record : records) {
                         gridDropConfiguration.fire(record.getAsString(ID));
                     }
                 }
@@ -347,26 +257,35 @@ public class GridMenuPanel<T> extends Panel {
         final String commonTootipHtmlRender = "<span ext:qtitle=\"{1}\" ext:qtip=\"{2}\">{0}</span>";
 
         final Renderer iconHtmlRenderer = new Renderer() {
+            @Override
             public String render(final Object value, final CellMetadata cellMetadata, final Record record,
                     final int rowIndex, final int colNum, final Store store) {
-                return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(ICON_HTML),
-                        record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
+                return Format.format(
+                        commonTootipHtmlRender,
+                        new String[] { record.getAsString(ICON_HTML), record.getAsString(TOOLTIPTITLE),
+                                record.getAsString(TOOLTIP) });
             }
         };
 
         final Renderer titleHtmlRenderer = new Renderer() {
+            @Override
             public String render(final Object value, final CellMetadata cellMetadata, final Record record,
                     final int rowIndex, final int colNum, final Store store) {
-                return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(TITLE_HTML),
-                        record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
+                return Format.format(
+                        commonTootipHtmlRender,
+                        new String[] { record.getAsString(TITLE_HTML), record.getAsString(TOOLTIPTITLE),
+                                record.getAsString(TOOLTIP) });
             }
         };
 
         final Renderer endIconHtmlRenderer = new Renderer() {
+            @Override
             public String render(final Object value, final CellMetadata cellMetadata, final Record record,
                     final int rowIndex, final int colNum, final Store store) {
-                return Format.format(commonTootipHtmlRender, new String[] { record.getAsString(END_ICON_HTML),
-                        record.getAsString(TOOLTIPTITLE), record.getAsString(TOOLTIP) });
+                return Format.format(
+                        commonTootipHtmlRender,
+                        new String[] { record.getAsString(END_ICON_HTML), record.getAsString(TOOLTIPTITLE),
+                                record.getAsString(TOOLTIP) });
             }
         };
 
@@ -397,15 +316,18 @@ public class GridMenuPanel<T> extends Panel {
         grid.setSelectionModel(new RowSelectionModel());
 
         grid.addGridRowListener(new GridRowListener() {
+            @Override
             public void onRowClick(final GridPanel grid, final int rowIndex, final EventObject e) {
                 showMenu(rowIndex, e);
                 onClickImpl(rowIndex);
             }
 
+            @Override
             public void onRowContextMenu(final GridPanel grid, final int rowIndex, final EventObject e) {
                 showMenu(rowIndex, e);
             }
 
+            @Override
             public void onRowDblClick(final GridPanel grid, final int rowIndex, final EventObject e) {
                 onDoubleClickImpl(rowIndex);
             }
@@ -472,14 +394,105 @@ public class GridMenuPanel<T> extends Panel {
         super.add(grid);
     }
 
+    @Override
+    public void doLayout(final boolean shallow) {
+        // Grid rendered problems with shallow false
+        grid.doLayout(true);
+        super.doLayout(true);
+    }
+
+    public void doLayoutIfNeeded() {
+        if (super.isRendered()) {
+            grid.doLayout(true);
+            super.doLayout(true);
+        }
+    }
+
+    public Toolbar getBottomBar() {
+        assert bottomBar != null;
+        return bottomBar;
+    }
+
+    public Toolbar getTopBar() {
+        assert topBar != null;
+        return topBar;
+    }
+
+    public void onClick(final Listener<String> listener) {
+        // onClick.add(listener);
+    }
+
     private void onClickImpl(final int rowIndex) {
         final Record record = store.getRecordAt(rowIndex);
-        onClick.fire(record.getAsString(ID));
+        // onClick.fire(record.getAsString(ID));
+    }
+
+    public void onDoubleClick(final Listener<String> listener) {
+        // onDoubleClick.add(listener);
     }
 
     private void onDoubleClickImpl(final int rowIndex) {
         final Record record = store.getRecordAt(rowIndex);
-        onDoubleClick.fire(record.getAsString(ID));
+        // onDoubleClick.fire(record.getAsString(ID));
+    }
+
+    @Override
+    public void removeAll() {
+        store.removeAll();
+        recordMap.clear();
+        menuMap.clear();
+    }
+
+    public void removeItem(final GridItem<T> gridItem) {
+        final Record record = recordMap.get(gridItem.getItem());
+        if (record == null) {
+            Log.error("Trying to remove a non existing item: " + gridItem.getId());
+        } else {
+            menuMap.remove(gridItem.getId());
+            store.remove(record);
+            recordMap.remove(gridItem.getItem());
+            doLayoutIfNeeded();
+        }
+    }
+
+    @Override
+    public void setHeight(final int height) {
+        super.setHeight(height);
+        doLayoutIfNeeded();
+    }
+
+    @Override
+    public void setWidth(final int width) {
+        grid.setWidth(width - 27);
+        // super.setWidth(width);
+        doLayoutIfNeeded();
+    }
+
+    public void sort() {
+        store.sort(GROUP, SortDir.ASC);
+    }
+
+    public void updateItem(final GridItem<T> gridItem) {
+        final String id = gridItem.getId();
+        final Record record = recordMap.get(gridItem.getItem());
+        if (record != null) {
+            record.set(GROUP, gridItem.getGroup().getName());
+            record.set(GROUP_TOOLTIP_TITLE, gridItem.getGroup().getTooltipTitle());
+            record.set(GROUP_TOOLTIP, gridItem.getGroup().getTooltip());
+            record.set(GROUP_ENDICON_HTML, gridItem.getGroup().getEndIconHtml());
+            record.set(ICON_HTML, gridItem.getIconHtml());
+            record.set(TITLE, gridItem.getTitle());
+            record.set(TITLE_HTML, gridItem.getTitleHtml());
+            record.set(END_ICON_HTML, gridItem.getEndIconHtml());
+            record.set(TOOLTIPTITLE, gridItem.getTooltipTitle());
+            record.set(TOOLTIP, gridItem.getTooltip());
+            store.commitChanges();
+            menuMap.put(id, gridItem.getMenu());
+            sort();
+            doLayoutIfNeeded();
+        } else {
+            Log.error("Trying to update a non existing item: " + id);
+        }
     }
 
 }

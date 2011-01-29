@@ -23,6 +23,7 @@ import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.resources.CoreMessages;
@@ -33,7 +34,6 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;

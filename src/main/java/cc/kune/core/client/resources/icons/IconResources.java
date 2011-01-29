@@ -1,10 +1,9 @@
-package org.ourproject.kune.platf.client.ui.img;
+package cc.kune.core.client.resources.icons;
 
 import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.CssResource.Strict;
 import com.google.gwt.resources.client.ImageResource;
 
-public interface ImgResources extends ClientBundle {
+public interface IconResources extends ClientBundle {
 
     @Source("add-green.png")
     ImageResource addGreen();
@@ -12,9 +11,12 @@ public interface ImgResources extends ClientBundle {
     @Source("bug.png")
     ImageResource bug();
 
-    @Source("kimg.css")
-    @Strict
-    ImgCssResource css();
+    @Source("e-icon.gif")
+    ImageResource chat();
+
+    @Source("kicon.css")
+    // @Strict
+    IconBorrarCssResource css();
 
     @Source("del-green.png")
     ImageResource delGreen();

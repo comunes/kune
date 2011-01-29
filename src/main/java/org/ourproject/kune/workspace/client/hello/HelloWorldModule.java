@@ -33,13 +33,13 @@ import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.ui.img.ImgResources;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.hello.HelloWorldModule.HelloWorldPanel.HelloWorldPresenter;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.core.client.i18n.I18nTranslationServiceMocked;
+import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -83,7 +83,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
             private HelloWorldView view;
 
             public HelloWorldPresenter(final I18nTranslationService i18n,
-                    final Provider<ContentEditor> contentEditorProv, final ImgResources img) {
+                    final Provider<ContentEditor> contentEditorProv, final IconResources img) {
                 // Or add some actions to the general content editor:
                 createActions(contentEditorProv, img, i18n);
             }
@@ -108,7 +108,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
              * @param img
              *            the img
              */
-            private void createActions(final Provider<ContentEditor> contentEditorProv, final ImgResources img,
+            private void createActions(final Provider<ContentEditor> contentEditorProv, final IconResources img,
                     final I18nTranslationService i18n) {
 
                 final HelloWorldAction action = new HelloWorldAction(img);
@@ -207,7 +207,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
     }
 
     static class HelloWorldAction extends AbstractAction {
-        public HelloWorldAction(final ImgResources img) {
+        public HelloWorldAction(final IconResources img) {
             super();
             super.putValue(Action.NAME, "helloworld");
             super.putValue(Action.SHORT_DESCRIPTION, "helloworld tooltip");
@@ -262,7 +262,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
             @Override
             public HelloWorld create() {
                 final HelloWorldPresenter presenter = new HelloWorldPresenter(i(I18nTranslationServiceMocked.class),
-                        p(ContentEditor.class), i(ImgResources.class));
+                        p(ContentEditor.class), i(IconResources.class));
                 final HelloWorldPanel panel = new HelloWorldPanel(presenter, i(WorkspaceSkeleton.class),
                         i(I18nTranslationServiceMocked.class));
                 presenter.init(panel);

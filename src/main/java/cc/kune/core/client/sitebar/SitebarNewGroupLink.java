@@ -33,6 +33,6 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
     @Inject
     public SitebarNewGroupLink(final SitebarNewGroupAction action) {
         super(action);
-        setStyles("k-floatright, k-no-backimage, k-btn-sitebar");
+        setStyles("k-no-backimage, k-btn-sitebar");
     }
 }

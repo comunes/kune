@@ -24,6 +24,11 @@ public class GwtIconLabelGui extends AbstractGuiItem {
     }
 
     @Override
+    protected void addStyle(final String style) {
+        iconLabel.addStyleName(style);
+    }
+
+    @Override
     public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         iconLabel = new IconLabel("");

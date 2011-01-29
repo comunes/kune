@@ -29,39 +29,40 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Event2;
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class RenameAction {
-    private final I18nTranslationService i18n;
     private final Provider<ContentServiceAsync> contentService;
+    private final I18nTranslationService i18n;
     private final Session session;
-    private final Event2<StateToken, String> onSuccess;
-    private final Event2<StateToken, String> onFail;
+
+    // private final Event2<StateToken, String> onSuccess;
+    // private final Event2<StateToken, String> onFail;
 
     public RenameAction(final I18nTranslationService i18n, final Session session,
             final Provider<ContentServiceAsync> contentService) {
         this.i18n = i18n;
         this.session = session;
         this.contentService = contentService;
-        this.onSuccess = new Event2<StateToken, String>("onRenameSuccess");
-        this.onFail = new Event2<StateToken, String>("onRenamaFail");
+        // this.onSuccess = new Event2<StateToken, String>("onRenameSuccess");
+        // this.onFail = new Event2<StateToken, String>("onRenamaFail");
     }
 
     public void onFail(final Listener2<StateToken, String> slot) {
-        onFail.add(slot);
+        // onFail.add(slot);
     }
 
     public void onSuccess(final Listener2<StateToken, String> slot) {
-        onSuccess.add(slot);
+        // onSuccess.add(slot);
     }
 
     public void rename(final StateToken token, final String oldName, final String newName) {
         if (!newName.equals(oldName)) {
             NotifyUser.showProgress(i18n.t("Renaming"));
             final AsyncCallback<StateAbstractDTO> asyncCallback = new AsyncCallback<StateAbstractDTO>() {
+                @Override
                 public void onFailure(final Throwable caught) {
                     NotifyUser.hideProgress();
                     if (caught instanceof NameInUseException) {
@@ -73,13 +74,14 @@ public class RenameAction {
                     } else {
                         NotifyUser.error(i18n.t("Error renaming"));
                     }
-                    onFail.fire(token, oldName);
+                    // onFail.fire(token, oldName);
                 }
 
+                @Override
                 public void onSuccess(final StateAbstractDTO state) {
                     NotifyUser.hideProgress();
                     session.setCurrentState(state);
-                    onSuccess.fire(token, state.getTitle());
+                    // onSuccess.fire(token, state.getTitle());
                 }
             };
             if (token.isComplete()) {

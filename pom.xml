@@ -274,11 +274,11 @@
       <artifactId>dozer</artifactId>
       <version>4.0</version>
     </dependency>
-    <dependency>
+		<!--    <dependency>
       <groupId>com.calclab</groupId>
       <artifactId>suco</artifactId>
       <version>0.6.5</version>
-    </dependency>
+			</dependency> -->
     <dependency>
       <groupId>jmagick</groupId>
       <artifactId>jmagick</artifactId>
@@ -296,7 +296,12 @@
     <dependency>
       <groupId>com.calclab.emite</groupId>
       <artifactId>emite</artifactId>
-      <version>0.6.0-RC1</version>
+      <version>r1694</version>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab.emite</groupId>
+      <artifactId>hablar</artifactId>
+      <version>r1694</version>
     </dependency>
     <dependency>
       <groupId>org.jivesoftware.smack</groupId>

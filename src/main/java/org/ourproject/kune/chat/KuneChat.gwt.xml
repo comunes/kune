@@ -3,6 +3,6 @@
   <inherits name="cc.kune.core.Core" />
   <inherits name='org.ourproject.kune.platf.KunePlatform' />
   <inherits name='org.ourproject.kune.workspace.KuneWorkspace' />
-  <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />
+<!--  <inherits name="com.calclab.emiteuimodule.EmiteUIModule" />-->
   <source path="client" />
 </module>
