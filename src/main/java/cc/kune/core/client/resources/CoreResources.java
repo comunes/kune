@@ -54,6 +54,9 @@ public interface CoreResources extends ClientBundle {
     @Source("arrow-up-green.png")
     ImageResource arrowUpGreen();
 
+    @Source("browser-32.png")
+    ImageResource browser32();
+
     @Source("bullet_add.png")
     ImageResource bulletAdd();
 
@@ -234,6 +237,9 @@ public interface CoreResources extends ClientBundle {
     @Source("cancel.png")
     ImageResource cancel();
 
+    @Source("cancel-32.png")
+    ImageResource cancel32();
+
     @Source("clear.png")
     ImageResource clear();
 
@@ -278,6 +284,9 @@ public interface CoreResources extends ClientBundle {
 
     @Source("important.png")
     ImageResource important();
+
+    @Source("important-32.png")
+    ImageResource important32();
 
     @Source("info.png")
     ImageResource info();

@@ -2,7 +2,7 @@ package cc.kune.core.client.sitebar.spaces;
 
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.wspace.client.WsArmor;
+import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.client.ui;
+package cc.kune.common.client.ui;
 
 import com.google.gwt.user.client.Window;
 

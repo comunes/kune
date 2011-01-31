@@ -6,6 +6,7 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
+import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.shortcuts.Keyboard;
 import cc.kune.common.client.ui.PopupTopPanel;
@@ -57,7 +58,11 @@ public class ChatClientDefault implements ChatClient {
 
     }
 
+    protected static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
+
+    protected IconLabelDescriptor chatIcon;
     private PopupTopPanel popup;
+
     private final Session session;
 
     @Inject
@@ -68,14 +73,14 @@ public class ChatClientDefault implements ChatClient {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 res.css().ensureInjected();
-                final IconLabelDescriptor chatIcon = new IconLabelDescriptor(action);
+                chatIcon = new IconLabelDescriptor(action);
                 chatIcon.putValue(Action.SMALL_ICON, res.chat());
-                chatIcon.putValue(Action.NAME, "Chat");
-                chatIcon.setStyles("k-floatright, k-no-backimage, k-btn-sitebar");
+                chatIcon.setId(CHAT_CLIENT_ICON_ID);
+                chatIcon.setStyles("k-floatright, k-no-backimage, k-btn-sitebar, k-chat-icon");
                 action.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
                 action.setShortcut(KeyStroke.getKeyStroke('C', Keyboard.MODIFIER_ALT));
                 chatIcon.setVisible(session.isLogged());
-                siteActions.addAction(chatIcon);
+                siteActions.getLeftToolbar().addAction(chatIcon);
                 eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
                     @Override
                     public void onUserSignIn(final UserSignInEvent event) {
@@ -236,7 +241,7 @@ public class ChatClientDefault implements ChatClient {
         if (session.isLogged()) {
             createDialogIfNeeded();
             if (show) {
-                popup.showCentered();
+                popup.showNear((Widget) chatIcon.getValue(ParentWidget.PARENT_UI));
             } else {
                 popup.hide();
             }

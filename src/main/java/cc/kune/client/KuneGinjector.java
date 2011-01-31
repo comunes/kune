@@ -1,15 +1,17 @@
-package cc.kune.core.client;
+package cc.kune.client;
 
 import cc.kune.chat.client.ChatClient;
+import cc.kune.chat.client.ChatGinModule;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.core.client.CoreGinModule;
 import cc.kune.core.client.auth.RegisterPresenter;
 import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
-import cc.kune.core.client.logs.EventsLogger;
+import cc.kune.core.client.logs.EventBusWithLogging;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
@@ -19,6 +21,8 @@ import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.pspace.client.PSpaceGinModule;
+import cc.kune.pspace.client.PSpacePresenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
@@ -27,8 +31,8 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
-@GinModules({ CoreGinModule.class })
-public interface CoreGinjector extends Ginjector {
+@GinModules({ CoreGinModule.class, ChatGinModule.class, PSpaceGinModule.class })
+public interface KuneGinjector extends Ginjector {
 
     /*
      * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
@@ -45,7 +49,7 @@ public interface CoreGinjector extends Ginjector {
 
     EventBus getEventBus();
 
-    EventsLogger getEventLogger();
+    EventBusWithLogging getEventLogger();
 
     GlobalShortcutRegister getGlobalShortcutRegister();
 
@@ -58,6 +62,8 @@ public interface CoreGinjector extends Ginjector {
     I18nTranslationService getI18n();
 
     ProxyFailureHandler getProxyFailureHandler();
+
+    AsyncProvider<PSpacePresenter> getPSpacePresenter();
 
     AsyncProvider<RegisterPresenter> getRegisterPresenter();
 

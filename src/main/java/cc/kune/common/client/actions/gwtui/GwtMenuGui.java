@@ -98,7 +98,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
         if (notStandAlone) {
             button.setVisible(visible);
         } else {
-            button.setVisible(visible);
+            // button.setVisible(visible);
         }
     }
 

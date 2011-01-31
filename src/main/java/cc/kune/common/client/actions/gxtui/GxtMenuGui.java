@@ -34,7 +34,7 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
     }
 
     @Override
-    protected void addStyle(String style) {
+    protected void addStyle(final String style) {
         button.addStyleName(style);
     }
 
@@ -56,8 +56,8 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
         super.descriptor = descriptor;
         descriptor.putValue(ParentWidget.PARENT_UI, this);
         // Standalone menus are menus without and associated button in a
-        // toolbar
-        // (sometimes, a menu showed in a grid, or other special widgets)
+        // toolbar (sometimes, a menu showed in a grid, or other special
+        // widgets)
         notStandAlone = !((MenuDescriptor) descriptor).isStandalone();
         if (notStandAlone) {
             button = new SplitButton("");
@@ -93,7 +93,6 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
         if (button != null) {
             button.setEnabled(enabled);
         }
-
     }
 
     @Override
@@ -101,7 +100,6 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
         if (button != null) {
             button.setIconStyle(style);
         }
-
     }
 
     @Override
@@ -109,7 +107,6 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
         if (button != null) {
             button.setText(text);
         }
-
     }
 
     @Override

@@ -1,4 +1,4 @@
-package cc.kune.core.client;
+package cc.kune.client;
 
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -15,7 +15,7 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  */
 public class KuneEntryPoint implements EntryPoint {
 
-    public final CoreGinjector ginjector = GWT.create(CoreGinjector.class);
+    public final KuneGinjector ginjector = GWT.create(KuneGinjector.class);
 
     /*
      * (non-Javadoc)

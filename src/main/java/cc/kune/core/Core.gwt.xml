@@ -12,17 +12,12 @@
 	<script src="js/jquery.qtip-1.0.0-rc3.min.js" />
 	<!-- Dependencies ============================================= -->
 	<inherits name="com.google.gwt.user.User" />
-	<inherits name="cc.kune.wspace.Wspace" />
+	<inherits name="cc.kune.gspace.GSpace" />
 	<inherits name="cc.kune.msgs.KuneMsgs" />
 	<inherits name="cc.kune.common.KuneCommon" />
 	<inherits name="com.extjs.gxt.ui.GXT" />
+    <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />
 	<inherits name="com.calclab.suco.Suco" />
-	<!-- gwt-platform ============================================= -->
-	<inherits name='com.gwtplatform.mvp.Mvp' />
-	<define-configuration-property name="gin.ginjector"
-		is-multi-valued="false" />
-	<set-configuration-property name="gin.ginjector"
-		value="cc.kune.core.client.CoreGinjector" />
 	<!-- Styles =================================================== -->
 	<stylesheet src="ws.css" />
 	<stylesheet src="fontface/stylesheet.css" />

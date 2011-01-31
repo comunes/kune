@@ -53,7 +53,6 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
         // }
 
         final VerticalPanel panel = new VerticalPanel();
-        // panel.setBorder(false);
         signInForm = new SignInForm(i18n);
         signInForm.setWidth(370);
         panel.add(signInForm.getFormPanel());
@@ -84,6 +83,11 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     }
 
     @Override
+    public void focusOnPassword() {
+        signInForm.focusOnPassword();
+    }
+
+    @Override
     public HasClickHandlers getAccountRegister() {
         return registerLabel;
     }
@@ -110,6 +114,16 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     @Override
     public void reset() {
         signInForm.reset();
+    }
+
+    @Override
+    public void setLoginPassword(final String password) {
+        signInForm.setLoginPassword(password);
+    }
+
+    @Override
+    public void setNickOrEmail(final String nickOrEmail) {
+        signInForm.setNickOrEmail(nickOrEmail);
     }
 
     @Override

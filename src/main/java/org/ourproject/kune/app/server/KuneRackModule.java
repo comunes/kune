@@ -91,7 +91,6 @@ public class KuneRackModule implements RackModule {
         installGuiceModules(builder);
 
         builder.add(KuneContainerListener.class);
-        // builder.add(WaveContainerListener.class);
 
         builder.exclude("/http-bind.*");
         builder.exclude("/public/.*");
@@ -99,13 +98,35 @@ public class KuneRackModule implements RackModule {
         builder.exclude("/stylesheets/.*");
         builder.exclude("/javascripts/.*");
         builder.exclude("/templates/.*");
-        builder.exclude("/wiab.*");
-        builder.exclude("/socket.*");
+
+        /* Wave with context '/wiab/' */
+        // builder.exclude("/wiab.*");
+        // builder.exclude("/socket.*");
+
+        /* Wave with context '/' */
+        builder.exclude("/");
+        builder.exclude("/attachment/.*");
+        builder.exclude("/auth/signin");
+        builder.exclude("/auth/signout");
+        builder.exclude("/auth/register");
+        builder.exclude("/fetch/.*");
+        builder.exclude("/robot/dataapi");
+        builder.exclude("/robot/dataapi/oauth/.*");
+        builder.exclude("/robot/dataapi/rpc");
+        builder.exclude("/robot/register/.*");
+        builder.exclude("/robot/rpc");
+        builder.exclude("/gadgets");
+        builder.exclude("/gadgets/.*");
+        builder.exclude("/socket.io/*");
+        builder.exclude("/socket");
+        builder.exclude("/static/.*");
+        builder.exclude("/webclient/.*");
 
         builder.at(".*").install(new LogFilter());
         builder.at(".*").install(new GuiceFilter());
 
-        builder.at("^/$").install(new RedirectFilter("/ws/"));
+        // NOTE: Commented this while testing Wave
+        // builder.at("^/$").install(new RedirectFilter("/ws/"));
         builder.at("^/ws").install(new RedirectFilter("/ws/"));
 
         builder.at("^/ws/$").install(new ListenerFilter(KuneApplicationListener.class),
@@ -132,9 +153,6 @@ public class KuneRackModule implements RackModule {
         builder.use(new GalleryServerModule());
         builder.use(new RESTServicesModule());
         builder.use(configModule);
-        // builder.use(WavePropertiesParser.parseFlags(FlagSettings.class));
-        // builder.use(new WaveInterceptorModule());
-        // builder.use(new ServerModule());
     }
 
 }

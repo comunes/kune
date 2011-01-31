@@ -33,6 +33,13 @@
 	opacity: 0.90;
 }
 
+.k-opacity95 {
+	kfilter: alpha(opacity =       95);
+	-moz-opacity: 0.95;
+	-khtml-opacity: 0.95;
+	opacity: 0.95;
+}
+
 .gwt-PopupPanelGlass {
 	background-color: #f7ebe3 !important;
 	kfilter: alpha(opacity =       68) !important;

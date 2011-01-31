@@ -3,11 +3,14 @@ package cc.kune.core.shared.dto;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 
+import com.google.inject.Inject;
+
 public class StateTokenUtils {
 
-    private final Session session;
     private static final String SEPARATOR = ".";
+    private final Session session;
 
+    @Inject
     public StateTokenUtils(final Session session) {
         this.session = session;
     }

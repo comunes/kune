@@ -1,6 +1,6 @@
-package cc.kune.wspace.client;
+package cc.kune.gspace.client;
 
-import cc.kune.wspace.client.resources.WsArmorResources;
+import cc.kune.gspace.client.resources.WsArmorResources;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -15,7 +15,7 @@ public class WsArmorEntryPoint implements EntryPoint {
         resources.style().ensureInjected();
 
         final RootLayoutPanel rootPanel = RootLayoutPanel.get();
-        final WsArmorImpl armor = new WsArmorImpl();
+        final WsArmorImpl armor = new WsArmorImpl(null);
         final InlineLabel icons = new InlineLabel("Icons");
         final InlineLabel login = new InlineLabel("Login");
         final InlineLabel logo = new InlineLabel("Logo");

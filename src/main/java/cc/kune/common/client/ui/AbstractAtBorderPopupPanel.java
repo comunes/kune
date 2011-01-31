@@ -12,17 +12,16 @@ public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
     protected UIObject showNearObject;
 
     public AbstractAtBorderPopupPanel() {
-        super();
-        init();
+        super(false, false);
     }
 
     public AbstractAtBorderPopupPanel(final boolean autohide) {
-        super(autohide);
-        init();
+        this(autohide, false);
     }
 
     public AbstractAtBorderPopupPanel(final boolean autohide, final boolean modal) {
         super(autohide, modal);
+        setGlassEnabled(modal);
         init();
     }
 
@@ -35,10 +34,12 @@ public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
         Window.addResizeHandler(new ResizeHandler() {
             @Override
             public void onResize(final ResizeEvent event) {
-                if (showCentered) {
-                    setCenterPositionImpl();
-                } else {
-                    showRelativeImpl();
+                if (isShowing()) {
+                    if (showCentered) {
+                        setCenterPositionImpl();
+                    } else {
+                        showRelativeImpl();
+                    }
                 }
             }
         });

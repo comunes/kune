@@ -1,10 +1,9 @@
 package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
-import cc.kune.wspace.client.WsArmor;
+import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -12,40 +11,35 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class SitebarActionsViewImpl extends ViewImpl implements SitebarActionsView {
 
-    private final ActionSimplePanel panel;
+    private final ActionSimplePanel toolbarLeft;
+    private final ActionSimplePanel toolbarRight;
 
     @Inject
-    public SitebarActionsViewImpl(final WsArmor armor, final ActionSimplePanel panel) {
-        this.panel = panel;
-        panel.addStyleName("k-sitebar");
-        panel.addStyleName("k-floatright");
-        armor.getSitebar().add(panel);
-        // armor.getDocContainer().add(panel);
-        // panel.setWidth("100%");
-    }
-
-    @Override
-    public void addAction(final AbstractGuiActionDescrip action) {
-        panel.addAction(action);
-    }
-
-    @Override
-    public void addActions(final AbstractGuiActionDescrip... actions) {
-        for (final AbstractGuiActionDescrip action : actions) {
-            this.addAction(action);
-        }
-    }
-
-    @Override
-    public void addActions(final GuiActionDescCollection actions) {
-        for (final AbstractGuiActionDescrip action : actions) {
-            this.addAction(action);
-        }
+    public SitebarActionsViewImpl(final WsArmor armor, final ActionSimplePanel toolbarRight,
+            final ActionSimplePanel toolbarLeft) {
+        this.toolbarRight = toolbarRight;
+        this.toolbarLeft = toolbarLeft;
+        toolbarRight.addStyleName("k-sitebar");
+        toolbarRight.addStyleName("k-floatright");
+        toolbarLeft.addStyleName("k-sitebar");
+        toolbarLeft.addStyleName("k-floatleft");
+        armor.getSitebar().add(toolbarLeft);
+        armor.getSitebar().add(toolbarRight);
     }
 
     @Override
     public Widget asWidget() {
-        return panel;
+        return toolbarRight;
+    }
+
+    @Override
+    public IsActionExtensible getLeftBar() {
+        return toolbarLeft;
+    }
+
+    @Override
+    public IsActionExtensible getRightBar() {
+        return toolbarRight;
     }
 
 }

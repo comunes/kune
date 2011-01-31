@@ -47,7 +47,7 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     public RegisterPanel(final I18nTranslationService i18n, final Session session, final NotifyLevelImages images) {
         super(REGISTER_DIALOG, i18n, i18n.t(CoreMessages.REGISTER_TITLE), true, true, true, 400, 420, "",
                 i18n.t(CoreMessages.REGISTER_TITLE), REGISTER_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
-                CANCEL_BUTTON_ID, images, ERRMSG, 11);
+                CANCEL_BUTTON_ID, images, ERRMSG, 5);
         final VerticalPanel panel = new VerticalPanel();
         // panel.setBorder(false);
         registerForm = new RegisterForm(i18n, session);
@@ -62,10 +62,10 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
         return registerForm.getEmail();
     }
 
-    @Override
-    public String getLongName() {
-        return registerForm.getLongName();
-    }
+    // @Override
+    // public String getLongName() {
+    // return registerForm.getLongName();
+    // }
 
     @Override
     public String getRegisterPassword() {

@@ -1,4 +1,4 @@
-package cc.kune.wspace.client;
+package cc.kune.gspace.client;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 

@@ -1,4 +1,6 @@
-package cc.kune.wspace.client;
+package cc.kune.gspace.client;
+
+import cc.kune.pspace.client.PSpacePresenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -6,7 +8,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -49,7 +50,7 @@ public class WsArmorImpl extends Composite implements WsArmor {
     @UiField
     DockLayoutPanel mainpanel;
     @UiField
-    Frame publicSpace;
+    SimplePanel publicSpace;
     @UiField
     FlowPanel sitebar;
     @UiField
@@ -64,12 +65,12 @@ public class WsArmorImpl extends Composite implements WsArmor {
     SimplePanel userSpace;
 
     @Inject
-    public WsArmorImpl() {
+    public WsArmorImpl(final PSpacePresenter pspace) {
         initWidget(uiBinder.createAndBindUi(this));
         groupSpace.setWidgetMinSize(splitEast, 150);
         tabs.setStyleName("k-spaces");
         homeSpace.add(RootPanel.get("k-home-ini"));
-        publicSpace.setUrl("http://www.google.com");
+        publicSpace.add(pspace.getWidget());
         userSpace.add(new Label("User space"));
         // userSpace.add(new WebClient());
     }

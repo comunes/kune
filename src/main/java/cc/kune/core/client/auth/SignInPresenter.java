@@ -20,6 +20,9 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.client.utils.TimerWrapper;
+import cc.kune.common.client.utils.TimerWrapper.Executer;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -52,20 +55,22 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     @ProxyCodeSplit
     public interface SignInProxy extends Proxy<SignInPresenter> {
     }
-
     private final EventBus eventBus;
     private final Provider<Register> registerProvider;
+    private final TimerWrapper timer;
     private final UserServiceAsync userService;
 
     @Inject
     public SignInPresenter(final EventBus eventBus, final SignInView view, final SignInProxy proxy,
             final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
             final UserServiceAsync userService, final Provider<Register> registerProvider,
-            final CookiesManager cookiesManager) {
-        super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager);
+            final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete,
+            final TimerWrapper timeWrapper) {
+        super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, autocomplete);
         this.eventBus = eventBus;
         this.userService = userService;
         this.registerProvider = registerProvider;
+        this.timer = timeWrapper;
     }
 
     @Override
@@ -79,6 +84,19 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
             // getView().center();
             eventBus.fireEvent(new ProgressHideEvent());
             getView().focusOnNickname();
+            timer.configure(new Executer() {
+                @Override
+                public void execute() {
+                    final String savedLogin = autocomplete.getNickOrEmail();
+                    final String savedPasswd = autocomplete.getPassword();
+                    if (TextUtils.notEmpty(savedLogin)) {
+                        getView().setNickOrEmail(savedLogin);
+                        getView().setLoginPassword(savedPasswd);
+                        getView().focusOnPassword();
+                    }
+                }
+            });
+            timer.schedule(500);
         }
     }
 
@@ -114,6 +132,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
             @Override
             public void onClose(final CloseEvent<PopupPanel> event) {
+                Log.debug("Closing register presenter");
                 SignInPresenter.this.onClose();
             }
         });
@@ -137,7 +156,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
             final UserDTO user = new UserDTO();
             user.setShortName(nickOrEmail);
             user.setPassword(passwd);
-
+            saveAutocompleteLoginData(nickOrEmail, passwd);
             final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
                 @Override
                 public void onFailure(final Throwable caught) {
@@ -168,4 +187,5 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
     }
+
 }

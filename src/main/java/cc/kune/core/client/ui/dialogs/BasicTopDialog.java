@@ -26,6 +26,8 @@ public class BasicTopDialog extends BasicDialog {
         super.getSecondBtnText().setText(cancelButtonTitle);
         super.setFirstBtnId(firstButtonId);
         super.setSecondBtnId(cancelButtonId);
+        super.setFirstBtnTabIndex(tabIndexStart);
+        super.setSecondBtnTabIndex(tabIndexStart + 1);
     }
 
     public HasCloseHandlers<PopupPanel> getClose() {

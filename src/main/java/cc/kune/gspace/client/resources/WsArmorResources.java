@@ -1,4 +1,4 @@
-package cc.kune.wspace.client.resources;
+package cc.kune.gspace.client.resources;
 
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
@@ -48,22 +48,22 @@ public interface WsArmorResources extends ClientBundle {
     @Source("def-theme-tools-arrow-left.png")
     ImageResource defThemeToolsArrowLeft();
 
-    @Source("wsArmor.css")
-    Style style();
-
-    ImageResource publicSpaceEnabled();
-
-    ImageResource publicSpaceDisabled();
-
-    ImageResource userSpaceEnabled();
-
-    ImageResource userSpaceDisabled();
-
-    ImageResource homeSpaceEnabled();
-
-    ImageResource homeSpaceDisabled();
+    ImageResource groupSpaceDisabled();
 
     ImageResource groupSpaceEnabled();
 
-    ImageResource groupSpaceDisabled();
+    ImageResource homeSpaceDisabled();
+
+    ImageResource homeSpaceEnabled();
+
+    ImageResource publicSpaceDisabled();
+
+    ImageResource publicSpaceEnabled();
+
+    @Source("wsArmor.css")
+    Style style();
+
+    ImageResource userSpaceDisabled();
+
+    ImageResource userSpaceEnabled();
 }

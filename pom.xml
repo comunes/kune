@@ -242,6 +242,16 @@
       <artifactId>gwt-fx</artifactId>
       <version>r464</version>
     </dependency>
+    <dependency>
+			<groupId>com.jhickman.web.gwt</groupId>
+      <artifactId>gwt-customuibinder</artifactId>
+      <version>0.1</version>
+    </dependency>
+    <dependency>
+			<groupId>com.jhickman.web.gwt</groupId>
+      <artifactId>gxt-uibinder</artifactId>
+      <version>0.6</version>
+    </dependency>
     <!-- cc -->
     <dependency>
       <groupId>com.gwtext</groupId>
@@ -274,11 +284,8 @@
       <artifactId>dozer</artifactId>
       <version>4.0</version>
     </dependency>
-		<!--    <dependency>
-      <groupId>com.calclab</groupId>
-      <artifactId>suco</artifactId>
-      <version>0.6.5</version>
-			</dependency> -->
+    <!-- <dependency> <groupId>com.calclab</groupId> <artifactId>suco</artifactId> 
+      <version>0.6.5</version> </dependency> -->
     <dependency>
       <groupId>jmagick</groupId>
       <artifactId>jmagick</artifactId>
@@ -468,11 +475,17 @@
       <scope>provided</scope>
     </dependency>
     <!-- testing dependencies -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.mockito</groupId> -->
+    <!-- <artifactId>mockito-all</artifactId> -->
+    <!-- <scope>test</scope> -->
+    <!-- <version>1.6</version> -->
+    <!-- </dependency> -->
     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
+      <groupId>org.jukito</groupId>
+      <artifactId>jukito</artifactId>
+      <version>1.0</version>
       <scope>test</scope>
-      <version>1.6</version>
     </dependency>
     <dependency>
       <groupId>com.h2database</groupId>

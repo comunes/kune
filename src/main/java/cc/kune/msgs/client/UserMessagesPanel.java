@@ -14,22 +14,23 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class UserMessagesPanel extends Composite implements UserMessagesView {
 
-    private static MessagesPanelUiBinder uiBinder = GWT.create(MessagesPanelUiBinder.class);
-    @UiField
-    VerticalPanel vp;
-
     interface MessagesPanelUiBinder extends UiBinder<Widget, UserMessagesPanel> {
     }
+    private static MessagesPanelUiBinder uiBinder = GWT.create(MessagesPanelUiBinder.class);
+
+    @UiField
+    VerticalPanel vp;
 
     public UserMessagesPanel() {
         initWidget(uiBinder.createAndBindUi(this));
     }
 
     @Override
-    public void add(NotifyLevel level, String title, String message, boolean closeable, CloseCallback closeCallback) {
-        UserMessage msg = new UserMessage(level, title, message, closeable, closeCallback);
+    public void add(final NotifyLevel level, final String title, final String message, final boolean closeable,
+            final CloseCallback closeCallback) {
+        final UserMessage msg = new UserMessage(level, title, message, closeable, closeCallback);
         vp.add(msg);
-        SlideUp anim = new SlideUp(msg.getElement());
+        final SlideUp anim = new SlideUp(msg.getElement());
         anim.setDuration(.5);
         anim.play();
     }

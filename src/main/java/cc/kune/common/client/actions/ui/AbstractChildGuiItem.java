@@ -19,6 +19,13 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
     }
 
     @Override
+    protected void addStyle(final String style) {
+        if (child != null) {
+            child.addStyleName(style);
+        }
+    }
+
+    @Override
     public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
         final int position = descriptor.getPosition();
         if (descriptor.isChild()) {

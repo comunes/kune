@@ -25,6 +25,8 @@ public interface SignInView extends SignInAbstractView {
 
     void focusOnNickname();
 
+    void focusOnPassword();
+
     HasClickHandlers getAccountRegister();
 
     String getLoginPassword();
@@ -32,6 +34,10 @@ public interface SignInView extends SignInAbstractView {
     String getNickOrEmail();
 
     boolean isSignInFormValid();
+
+    void setLoginPassword(String password);
+
+    void setNickOrEmail(String nickOrEmail);
 
     void validate();
 

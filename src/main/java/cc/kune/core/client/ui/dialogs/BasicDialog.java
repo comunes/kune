@@ -86,8 +86,16 @@ public class BasicDialog extends Composite implements BasicDialogView {
         firstBtn.ensureDebugId(id);
     }
 
+    public void setFirstBtnTabIndex(final int index) {
+        firstBtn.setTabIndex(index);
+    }
+
     public void setSecondBtnId(final String id) {
         secondBtn.ensureDebugId(id);
+    }
+
+    public void setSecondBtnTabIndex(final int index) {
+        secondBtn.setTabIndex(index);
     }
 
     public void setTitleIcon(final String icon) {

@@ -5,6 +5,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
+import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.ui.IconLabel;
@@ -32,6 +33,7 @@ public class GwtIconLabelGui extends AbstractGuiItem {
     public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         iconLabel = new IconLabel("");
+        descriptor.putValue(ParentWidget.PARENT_UI, this);
         final String id = descriptor.getId();
         if (id != null) {
             iconLabel.ensureDebugId(id);

@@ -58,7 +58,7 @@ public class SignInForm extends DefaultForm {
         loginPassField.setValidationDelay(1000);
         loginPassField.setId(PASSWORD_FIELD);
         loginPassField.setTabIndex(101);
-        loginPassField.addListener(Events.Change, new Listener<FieldEvent>() {
+        loginPassField.addListener(Events.OnKeyPress, new Listener<FieldEvent>() {
             @Override
             public void handleEvent(final FieldEvent fe) {
                 if (fe.getEvent().getKeyCode() == 13) {
@@ -74,6 +74,10 @@ public class SignInForm extends DefaultForm {
         loginNickOrEmailField.focus();
     }
 
+    public void focusOnPassword() {
+        loginPassField.focus();
+    }
+
     public String getLoginPassword() {
         return loginPassField.getValue();
     }
@@ -84,5 +88,13 @@ public class SignInForm extends DefaultForm {
 
     public Field<String> getNickOrEmailField() {
         return loginNickOrEmailField;
+    }
+
+    public void setLoginPassword(final String password) {
+        loginPassField.setValue(password);
+    }
+
+    public void setNickOrEmail(final String nickOrEmail) {
+        loginNickOrEmailField.setValue(nickOrEmail);
     }
 }

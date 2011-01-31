@@ -20,13 +20,13 @@
 package org.ourproject.kune.workspace.client.newgroup;
 
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
-import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
 import org.ourproject.kune.platf.client.ui.dialogs.ExtendedDialog;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.shared.dto.LicenseDTO;

@@ -34,6 +34,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Proxy<?>> extends
         Presenter<View, Proxy<?>> {
 
+    protected final UserPassAutocompleteManager autocomplete;
     protected final CookiesManager cookiesManager;
     protected final I18nUITranslationService i18n;
     protected final Session session;
@@ -41,12 +42,13 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
     public SignInAbstractPresenter(final EventBus eventBus, final View view, final Proxy<?> proxy,
             final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
-            final CookiesManager cookiesManager) {
+            final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete) {
         super(eventBus, view, proxy);
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
         this.cookiesManager = cookiesManager;
+        this.autocomplete = autocomplete;
     }
 
     @Override
@@ -83,6 +85,12 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
         i18n.changeCurrentLanguage(language.getCode());
         session.setCurrentLanguage(language);
         stateManager.restorePreviousToken();
+    }
+
+    protected void saveAutocompleteLoginData(final String nickOrEmail, final String password) {
+        autocomplete.setNickOrEmail(nickOrEmail);
+        autocomplete.setPassword(password);
+        autocomplete.clickFormLogin();
     }
 
 }

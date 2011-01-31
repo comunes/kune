@@ -23,7 +23,8 @@ public interface RegisterView extends SignInAbstractView {
 
     String getEmail();
 
-    String getLongName();
+    //
+    // String getLongName();
 
     String getRegisterPassword();
 

@@ -6,38 +6,30 @@ import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 
-import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
+import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 
 public class GxtToolbarSeparatorGui extends AbstractChildGuiItem {
 
-    Component separator;
-
-    @Override
-    protected void addStyle(final String style) {
-        if (separator != null) {
-            separator.addStyleName(style);
-        }
-    }
-
     @Override
     public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
-        super.create(descriptor);
         final GxtToolbarGui toolbar = (GxtToolbarGui) parent;
-
         final Type type = ((ToolbarSeparatorDescriptor) descriptor).getSeparatorType();
         switch (type) {
         case fill:
-            separator = toolbar.addFill();
+            child = new FillToolItem();
             break;
         case spacer:
-            separator = toolbar.addSpacer();
+            child = new SeparatorToolItem();
             break;
         case separator:
-            separator = toolbar.addSeparator();
+            child = new LabelToolItem();
             break;
         default:
             break;
         }
+        super.create(descriptor);
         return toolbar;
     }
 

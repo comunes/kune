@@ -1,7 +1,5 @@
 package cc.kune.core.client;
 
-import cc.kune.chat.client.ChatClient;
-import cc.kune.chat.client.ChatClientDefault;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;
@@ -16,6 +14,8 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.auth.SignInPanel;
 import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.auth.SignInView;
+import cc.kune.core.client.auth.UserPassAutocompleteManager;
+import cc.kune.core.client.auth.UserPassAutocompleteManagerImpl;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
 import cc.kune.core.client.errors.ErrorHandler;
@@ -23,7 +23,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.init.AppStarterDefault;
 import cc.kune.core.client.init.PrefetchUtilities;
-import cc.kune.core.client.logs.EventsLogger;
+import cc.kune.core.client.logs.EventBusWithLogging;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
@@ -52,13 +52,12 @@ import cc.kune.core.client.ui.QTipsHelper;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.WsArmorImpl;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
-import cc.kune.wspace.client.WsArmor;
-import cc.kune.wspace.client.WsArmorImpl;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.DefaultProxyFailureHandler;
 import com.gwtplatform.mvp.client.RootPresenter;
@@ -76,12 +75,10 @@ public class CoreGinModule extends AbstractPresenterModule {
      */
     @Override
     protected void configure() {
-        bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-        // bind(PlaceManager.class).to(CorePlaceManager.class).in(Singleton.class);
+        bind(EventBus.class).to(EventBusWithLogging.class).in(Singleton.class);
         bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
         bind(RootPresenter.class).asEagerSingleton();
         bind(QTipsHelper.class).asEagerSingleton();
-        bind(EventsLogger.class).asEagerSingleton();
         bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
         bind(I18nUITranslationService.class).in(Singleton.class);
         bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
@@ -106,6 +103,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,
                 SitebarActionsViewImpl.class, SitebarActionsPresenter.SitebarActionsProxy.class);
 
+        bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class, SignInPresenter.SignInProxy.class);
         bindPresenter(RegisterPresenter.class, RegisterView.class, RegisterPanel.class,
                 RegisterPresenter.RegisterProxy.class);
@@ -133,7 +131,5 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(SitebarSignOutLink.class).in(Singleton.class);
         bind(BeforeSignOut.class).in(Singleton.class);
         bind(SiteTokenListeners.class).asEagerSingleton();
-
-        bind(ChatClient.class).to(ChatClientDefault.class).in(Singleton.class);
     }
 }

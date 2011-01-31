@@ -5,7 +5,7 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.wspace.client.WsArmor;
+import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;

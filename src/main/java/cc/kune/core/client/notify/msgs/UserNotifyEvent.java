@@ -6,7 +6,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
-import com.gwtplatform.mvp.client.HasEventBus;
 
 public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler> {
 
@@ -20,20 +19,22 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
 
     private static final Type<UserNotifyHandler> TYPE = new Type<UserNotifyHandler>();
 
-    public static void fire(HasEventBus source, NotifyLevel level, java.lang.String message) {
+    public static void fire(final HasHandlers source, final NotifyLevel level, final java.lang.String message) {
         source.fireEvent(new UserNotifyEvent(level, "", message));
     }
 
-    public static void fire(HasEventBus source, NotifyLevel level, java.lang.String message, Boolean closeable) {
+    public static void fire(final HasHandlers source, final NotifyLevel level, final java.lang.String message,
+            final Boolean closeable) {
         source.fireEvent(new UserNotifyEvent(level, "", message, closeable));
     }
 
-    public static void fire(HasEventBus source, NotifyLevel level, java.lang.String title, java.lang.String message) {
+    public static void fire(final HasHandlers source, final NotifyLevel level, final java.lang.String title,
+            final java.lang.String message) {
         source.fireEvent(new UserNotifyEvent(level, title, message));
     }
 
-    public static void fire(HasEventBus source, NotifyLevel level, java.lang.String title, java.lang.String message,
-            Boolean closeable) {
+    public static void fire(final HasHandlers source, final NotifyLevel level, final java.lang.String title,
+            final java.lang.String message, final Boolean closeable) {
         source.fireEvent(new UserNotifyEvent(level, title, message, closeable));
     }
 
@@ -46,31 +47,32 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
     private final java.lang.String message;
     private final java.lang.String title;
 
-    public UserNotifyEvent(NotifyLevel level, java.lang.String message) {
+    public UserNotifyEvent(final NotifyLevel level, final java.lang.String message) {
         this(level, "", message, false);
     }
 
-    public UserNotifyEvent(NotifyLevel level, java.lang.String message, Boolean closeable) {
+    public UserNotifyEvent(final NotifyLevel level, final java.lang.String message, final Boolean closeable) {
         this(level, "", message, closeable);
     }
 
-    public UserNotifyEvent(NotifyLevel level, java.lang.String title, java.lang.String message) {
+    public UserNotifyEvent(final NotifyLevel level, final java.lang.String title, final java.lang.String message) {
         this(level, title, message, false);
     }
 
-    public UserNotifyEvent(NotifyLevel level, java.lang.String title, java.lang.String message, Boolean closeable) {
+    public UserNotifyEvent(final NotifyLevel level, final java.lang.String title, final java.lang.String message,
+            final Boolean closeable) {
         this.level = level;
         this.title = title;
         this.message = message;
         this.closeable = closeable;
     }
 
-    public UserNotifyEvent(String message) {
+    public UserNotifyEvent(final String message) {
         this(NotifyLevel.info, message);
     }
 
     @Override
-    protected void dispatch(UserNotifyHandler handler) {
+    protected void dispatch(final UserNotifyHandler handler) {
         handler.onUserNotify(this);
     }
 

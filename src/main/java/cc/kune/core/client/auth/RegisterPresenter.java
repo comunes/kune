@@ -26,6 +26,7 @@ import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -64,8 +65,8 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
     public RegisterPresenter(final EventBus eventBus, final RegisterView view, final RegisterProxy proxy,
             final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
             final Provider<UserServiceAsync> userServiceProvider, final Provider<SignIn> signInProvider,
-            final CookiesManager cookiesManager) {
-        super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager);
+            final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete) {
+        super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, autocomplete);
         this.userServiceProvider = userServiceProvider;
         this.signInProvider = signInProvider;
     }
@@ -111,6 +112,7 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
 
             @Override
             public void onClose(final CloseEvent<PopupPanel> event) {
+                Log.debug("Closing register presenter");
                 RegisterPresenter.this.onClose();
             }
         });
@@ -131,9 +133,11 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
 
             final boolean wantHomepage = true;
 
-            final UserDTO user = new UserDTO(getView().getLongName(), getView().getShortName(),
-                    getView().getRegisterPassword(), getView().getEmail(), language, country, timezone, null, true,
-                    SubscriptionMode.manual, "blue");
+            final String shortName = getView().getShortName();
+            final String password = getView().getRegisterPassword();
+            final UserDTO user = new UserDTO("", shortName, password, getView().getEmail(), language, country,
+                    timezone, null, true, SubscriptionMode.manual, "blue");
+            super.saveAutocompleteLoginData(shortName, password);
             final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
                 @Override
                 public void onFailure(final Throwable caught) {

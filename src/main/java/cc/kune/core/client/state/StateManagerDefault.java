@@ -1,5 +1,6 @@
 /*
  *
+
  * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
@@ -120,6 +121,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void gotoToken(final String token) {
+        Log.debug("StateManager: history goto-string-token newItem (" + token + ")");
         gotoToken(new StateToken(token));
     }
 

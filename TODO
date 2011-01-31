@@ -11,11 +11,15 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** TODO StateManager #signin while already signed in NPE
+** TODO Testing Presenters via juckito:
+https://code.google.com/p/gwt-platform/wiki/UnitTesting
+https://code.google.com/p/arcbees-hive/source/browse/test/com/arcbees/hive/client/home/blog/ui/BlogItemWidgetTest.java
 ** src/org/waveprotocol/box/server/gxp/ (pages) >> ./gen/org/waveprotocol/box/server/gxp/WaveClientPage.java
 ** Use Emulate Stack Java like src/org/waveprotocol/box/webclient/WebClientDev.gwt.xml
 ** roo error
 [FelixDispatchQueue] Expected string-based content in @RooGwtMirroredFrom on cc.kune.client.managed.request.ContainerTranslationProxyObject of class [org.springframework.roo.classpath.details.annotations.ClassAttributeValue] must be an instance of class org.springframework.roo.classpath.details.annotations.StringAttributeValue
-** Gin sharing of instances between injectos
+** Gin sharing of instances between injectors
 https://groups.google.com/group/google-gin/browse_thread/thread/203ab1725406bd44/209429fd95366182?lnk=gst&q=multiple+module#209429fd95366182
 ** Wave integration
    [ ] org.waveprotocol.box.webclient.WebClientProd
@@ -57,8 +61,7 @@ http://jimbergman.net/websocket-web-browser-test/
 add-apt-repository ppa:ubuntu-mozilla-daily/ppa
 apt-get update
 
-** Compilation in target... resolve
-** tag, resolve last implementation complexity.
+** tags system, resolve last implementation complexity.
 Summary: recover the:
 [Tag]  <-m--m->  [Content]
 and use:
@@ -256,6 +259,7 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
 http://stuffthathappens.com/blog/2009/09/14/guice-with-gwt/
 http://pavelgj.blogspot.com/2008/02/gwt-remoteserviceservlet-guice.html
 ** TODO junit + guice utils:
+https://code.google.com/p/jukito/
 https://code.google.com/p/guiceberry/
 https://code.google.com/p/atunit/
 ** TODO Study OSGI + guice:

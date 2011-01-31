@@ -43,6 +43,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
         hp.add(w);
     }
 
+    @Override
+    public void addStyleName(final String style) {
+        label.addStyleName(style);
+    }
+
     public void addTextStyleName(final String style) {
         label.addStyleName(style);
     }

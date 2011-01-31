@@ -7,6 +7,7 @@ import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.PopupViewImpl;
@@ -16,7 +17,7 @@ public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierV
     private final PopupBottomPanel popup;
 
     @Inject
-    public UserNotifierViewImpl(EventBus eventBus, UserMessagesPresenter msgs, UserMessagesPanel panel) {
+    public UserNotifierViewImpl(final EventBus eventBus, final UserMessagesPresenter msgs, final UserMessagesPanel panel) {
         super(eventBus);
         this.msgs = msgs;
         msgs.init(panel);
@@ -32,7 +33,7 @@ public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierV
     }
 
     @Override
-    public void notify(UserNotifyEvent event) {
+    public void notify(final UserNotifyEvent event) {
         msgs.add(event.getLevel(), event.getTitle(), event.getMessage(), event.getCloseable(), new CloseCallback() {
             @Override
             public void onClose() {
@@ -40,6 +41,7 @@ public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierV
             }
         });
         popup.setCenterPosition();
+        DOM.setStyleAttribute(popup.getElement(), "zIndex", "100000");
     }
 
 }

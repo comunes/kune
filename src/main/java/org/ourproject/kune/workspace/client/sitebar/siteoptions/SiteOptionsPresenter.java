@@ -28,8 +28,8 @@ import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
-import org.ourproject.kune.platf.client.ui.KuneWindowUtils;
 
+import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
