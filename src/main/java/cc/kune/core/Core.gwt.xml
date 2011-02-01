@@ -19,7 +19,5 @@
     <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />
 	<inherits name="com.calclab.suco.Suco" />
 	<!-- Styles =================================================== -->
-	<stylesheet src="ws.css" />
-	<stylesheet src="fontface/stylesheet.css" />
 	<!-- <inherits name="com.google.gwt.user.theme.standard.Standard" /> -->
 </module>

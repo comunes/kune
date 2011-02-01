@@ -21,10 +21,10 @@ public class GxtToolbarSeparatorGui extends AbstractChildGuiItem {
             child = new FillToolItem();
             break;
         case spacer:
-            child = new SeparatorToolItem();
+            child = new LabelToolItem();
             break;
         case separator:
-            child = new LabelToolItem();
+            child = new SeparatorToolItem();
             break;
         default:
             break;

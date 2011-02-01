@@ -21,4 +21,8 @@ public interface BasicDialogView {
 
     HasDirectionalText getTitleText();
 
+    void setFirstBtnVisible(boolean visible);
+
+    void setSecondBtnVisible(boolean visible);
+
 }

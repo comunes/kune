@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
@@ -22,6 +23,8 @@ public class BasicDialog extends Composite implements BasicDialogView {
     private static BasicDialogUiBinder uiBinder = GWT.create(BasicDialogUiBinder.class);
     @UiField
     VerticalPanel bottomPanel;
+    @UiField
+    FlowPanel btnPanel;
     @UiField
     Button firstBtn;
     @UiField
@@ -90,12 +93,22 @@ public class BasicDialog extends Composite implements BasicDialogView {
         firstBtn.setTabIndex(index);
     }
 
+    @Override
+    public void setFirstBtnVisible(final boolean visible) {
+        firstBtn.setVisible(visible);
+    }
+
     public void setSecondBtnId(final String id) {
         secondBtn.ensureDebugId(id);
     }
 
     public void setSecondBtnTabIndex(final int index) {
         secondBtn.setTabIndex(index);
+    }
+
+    @Override
+    public void setSecondBtnVisible(final boolean visible) {
+        secondBtn.setVisible(visible);
     }
 
     public void setTitleIcon(final String icon) {

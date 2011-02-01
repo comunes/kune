@@ -11,7 +11,7 @@
         <g:VerticalPanel ui:field="bottomPanel"></g:VerticalPanel>
       </g:VerticalPanel>
     </g:SimplePanel>
-    <g:FlowPanel>
+    <g:FlowPanel ui:field="btnPanel" addStyleNames="k-dialog-btn-area">
       <g:Button ui:field="firstBtn"
         addStyleNames="k-dialog-btn, k-dialog-firstBtn, k-5corners " />
       <g:Button ui:field="secondBtn"

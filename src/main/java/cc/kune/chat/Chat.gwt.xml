@@ -10,4 +10,5 @@
   <inherits name='com.calclab.hablar.icons.alt.HablarAltIcons' />
   <source path="client" />
   <set-property name="user.agent" value="safari,gecko1_8" />
+  <public path="public" />
 </module>

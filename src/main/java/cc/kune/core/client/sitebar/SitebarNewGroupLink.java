@@ -34,5 +34,6 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
     public SitebarNewGroupLink(final SitebarNewGroupAction action) {
         super(action);
         setStyles("k-no-backimage, k-btn-sitebar");
+        setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
     }
 }

@@ -31,7 +31,9 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     }
 
     protected void clearStyles() {
-        super.setStyleName("");
+        if (super.isAttached()) {
+            super.setStyleName("");
+        }
     }
 
     private void configure() {

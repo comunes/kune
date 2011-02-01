@@ -21,6 +21,8 @@
 <meta name="hablar.width" content="100%" />
 <meta name="hablar.height" content="100%" />
 <link rel="shortcut icon" href="favicon.ico" />
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css">
 <!-- FIXME: make something local -->
 <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
 <script>
@@ -37,16 +39,29 @@
 	rel='stylesheet' type='text/css'> -->
 <link type="text/css" rel="stylesheet" href="gxt/css/gxt-all.css">
 <link type="text/css" rel="stylesheet" href="gxt/css/gxt-gray.css">
+<link type="text/css" rel="stylesheet" href="kune-chat.css">
+<link type="text/css" rel="stylesheet" href="kune-hablar.css">
+<link type="text/css" rel="stylesheet" href="kune-common.css">
+<link type="text/css" rel="stylesheet" href="fontface/stylesheet.css">
+<link type="text/css" rel="stylesheet" href="kune-message.css">
+<link type="text/css" rel="stylesheet" href="ws.css">
 <style type="text/css">
+body {
+	background-color: white;
+	color: black;
+	font-family: 'Ubuntu', Arial;
+	font-size: small;
+	margin: 5px;
+	overflow: hidden;
+}
 </style>
 </head>
 <body>
 <!-- Autocomplete user/pass -->
 <form method="post" action="javascript:void(0)" style="display: none">
-    <input type="text" id="username" name="username" value=""/>
-    <input type="password" id="password" name="password" value=""/>
-    <input type="submit" value="Login" id="login"/>
-</form>
+<input type="text" id="username" name="username" value="" /> <input
+	type="password" id="password" name="password" value="" /> <input
+	type="submit" value="Login" id="login" /></form>
 <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
 <noscript>
 <div

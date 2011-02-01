@@ -1,5 +1,7 @@
 .k-msg-panel {
 	background-color: #892c00;
+	border-collapse: separate;
+	border-spacing: 15px 8px;
 }
 
 .k-msg-panel-title {
@@ -9,10 +11,11 @@
 }
 
 .k-msg {
-	margin: 0 5px;
 	border: solid 1px #F2F2F2;
 	background: #fff0e6;
-	color: #280b0b
+	color: #280b0b;
+	border-collapse: separate;
+	border-spacing: 0px;
 }
 
 .k-msg-close {

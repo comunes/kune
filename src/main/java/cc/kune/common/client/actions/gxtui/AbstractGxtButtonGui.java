@@ -5,10 +5,12 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
+import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 
+import com.extjs.gxt.ui.client.Style.ButtonScale;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -35,11 +37,15 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     @Override
     public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
         super.descriptor = descriptor;
+        descriptor.putValue(ParentWidget.PARENT_UI, this);
         if (descriptor instanceof PushButtonDescriptor) {
             button = new ToggleButton();
         } else {
             button = new Button();
         }
+        button.setAutoWidth(false);
+        button.setAutoHeight(false);
+        button.setBorders(false);
         final String id = descriptor.getId();
         if (id != null) {
             button.ensureDebugId(id);
@@ -71,6 +77,7 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     @Override
     protected void setIconStyle(final String style) {
         button.setIconStyle(style);
+        button.setScale(ButtonScale.SMALL);
     }
 
     public void setPressed(final boolean pressed) {

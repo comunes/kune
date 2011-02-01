@@ -19,36 +19,15 @@
  \*/
 package cc.kune.common.client.ui;
 
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.IndexedPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidget {
+public abstract class AbstractFlowToolbar extends FlowPanel implements AbstractToolbar, HasWidgets {
 
-    private final FlowPanel childPanel;
-    private final HorizontalPanel mainPanel;
-
-    public FlowToolbar() {
+    public AbstractFlowToolbar() {
         super();
-        mainPanel = new HorizontalPanel();
-        childPanel = new FlowPanel();
-        mainPanel.add(childPanel);
-        initWidget(mainPanel);
-    }
-
-    @Override
-    public void add(final Widget widget) {
-        childPanel.add(widget);
-    }
-
-    @Override
-    public void add(final Widget widget, final VerticalAlignmentConstant valign) {
-        childPanel.add(widget);
     }
 
     @Override
@@ -56,7 +35,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
         final Label emptyLabel = new Label("");
         emptyLabel.addStyleName("oc-floatright");
         // emptyLabel.setWidth("100%");
-        this.add(emptyLabel);
+        add(emptyLabel);
         return emptyLabel;
     }
 
@@ -66,7 +45,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
         emptyLabel.setStyleName("ytb-sep-FIXMEEE");
         emptyLabel.addStyleName("oc-tb-sep");
         emptyLabel.addStyleName("oc-floatleft");
-        this.add(emptyLabel);
+        add(emptyLabel);
         return emptyLabel;
     }
 
@@ -75,52 +54,13 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
         final Label emptyLabel = new Label("");
         emptyLabel.setStyleName("oc-tb-spacer");
         emptyLabel.addStyleName("oc-floatleft");
-        this.add(emptyLabel);
+        add(emptyLabel);
         return emptyLabel;
-    }
-
-    public void clear() {
-        childPanel.clear();
-    }
-
-    @Override
-    public Widget getWidget(final int index) {
-        return childPanel.getWidget(index);
-    }
-
-    @Override
-    public int getWidgetCount() {
-        return childPanel.getWidgetCount();
-    }
-
-    @Override
-    public int getWidgetIndex(final IsWidget child) {
-        return childPanel.getWidgetIndex(child);
-    }
-
-    @Override
-    public int getWidgetIndex(final Widget child) {
-        return childPanel.getWidgetIndex(child);
-    }
-
-    @Override
-    public void insert(final Widget widget, final int position) {
-        childPanel.insert(widget, position);
-    }
-
-    @Override
-    public boolean remove(final int index) {
-        return childPanel.remove(index);
-    }
-
-    @Override
-    public boolean remove(final Widget widget) {
-        return childPanel.remove(widget);
     }
 
     @Override
     public void removeAll() {
-        childPanel.clear();
+        clear();
     }
 
     private void setBasicStyle() {
@@ -135,12 +75,6 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
     public void setBlankStyle() {
         setBasicStyle();
         addStyleName("oc-blank-toolbar");
-    }
-
-    @Override
-    public void setHeight(final String height) {
-        mainPanel.setHeight(height);
-        childPanel.setHeight(height);
     }
 
     /**
@@ -159,4 +93,5 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
         setBasicStyle();
         addStyleName("oc-transp");
     }
+
 }

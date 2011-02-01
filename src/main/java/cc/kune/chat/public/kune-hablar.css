@@ -1,0 +1,602 @@
+/** Colors */
+.hablar-clearBackground {
+	background-color: white;
+}
+
+.hablar-lightBackground {
+	background-color: #e9e9e9;
+}
+
+.hablar-highlightBackground {
+	background-color: highlight;
+}
+
+.hablar-defaultBackground {
+	background-color: #bbbbbb;
+}
+
+.hablar-darkBackground {
+	background-color: #bbbbbb;
+}
+
+.hablar-selectedBackground {
+	background-color: highlight;
+}
+
+.hablar-selectedBackground div.hablar-RosterItemWidget:hover {
+	background-color: transparent;
+}
+
+/** Text colors **/
+.hablar-clearColor {
+	color: black;
+}
+
+.hablar-lightColor {
+	color: #BBBBBB;
+}
+
+.hablar-mediumColor {
+	color: gray;
+}
+
+.hablar-darkColor {
+	color: black;
+}
+
+.hablar-errorColor {
+	color: #c00;
+}
+
+/** Non generalizable styles **/
+div.hablar-ActionWidget:hover {
+	background-color: #BBBBBB;
+}
+
+div.hablar-GroupHeaderWidget:hover {
+	background-color: #BBBBBB;
+	color: black;
+}
+
+div.hablar-RosterItemWidget:hover {
+	background-color: #E9E9E9;
+}
+
+div.hablar-SearchResultItemWidget:hover {
+	background-color: #e9e9e9;
+}
+
+.hablar-ChatWidget .actions div.hablar-OccupantsWidget:hover {
+	background-color: #BBBBBB;
+	color: white;
+}
+
+.hablar-Logger a.gwt-Anchor:hover {
+	color: white;
+	background-color: #BBBBBB;
+}
+
+.hablar-HablarWidget .gwt-TabLayoutPanel .gwt-TabLayoutPanelTab {
+	background-color: #AAAAAA;
+	padding: 0px 1px;
+	margin: 0 0px 0 0;
+	border-left: 1px solid #bbbbbb;
+	border-top: 1px solid #e9e9e9;
+	border-right: 1px solid e9e9e9;
+}
+
+.hablar-HablarWidget .gwt-TabLayoutPanel .gwt-TabLayoutPanelTab-selected
+	{
+	background-color: #e9e9e9;
+	border-left: 1px solid white;
+	border-top: 1px solid white;
+	border-right: 1px solid white;
+}
+/*
+.gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger {
+	background-color: #bbbbbb;
+    border-left: 1px solid gray;
+    border-right: 1px solid #e9e9e9;
+}
+*/
+
+input[disabled] {
+	background-color: #e9e9e9;
+	color: black;
+}
+
+.hablar-Header.unattended {
+	color: #cc0000;
+	font-weight: bold;
+}
+
+.hablar-Header.unattended.blinkOn {
+	color: #000000;
+	background-color: highlight;
+}
+
+/** Classes for borders **/
+.hablar-lightBordered {
+	border: 3px solid #E9E9E9;
+}
+
+.hablar-partialLightBordered {
+	border-top: 1px solid #E9E9E9;
+	border-bottom: 1px solid #E9E9E9;
+}
+
+.hablar-bottomLightBordered {
+	border-bottom: 1px solid #E9E9E9;
+}
+
+.hablar-defaultBordered {
+	border-left: 1px solid #BBBBBB;
+	/* This border affects scroll visibility */
+	border-top: 1px solid #BBBBBB;
+}
+
+.hablar-topDefaultBordered {
+	border-top: 1px solid #BBBBBB;
+}
+
+.hablar-bottomDefaultBordered {
+	border-bottom: 1px solid #BBBBBB;
+}
+
+.hablar-partialDarkBordered {
+	border-left: 1px solid #BBBBBB;
+	border-top: 1px solid #BBBBBB;
+}
+
+.hablar-darkBordered {
+	border: 1px solid #BBBBBB;
+}
+
+.hablar-bottomDarkBordered {
+	border-bottom: 1px solid #BBBBBB;
+}
+
+.hablar-disabledBordered {
+	border-left: 1px solid #8C8C8C;
+	border-top: 1px solid #8C8C8C;
+}
+
+/** Accordion effects **/
+.hablar-AccordionHeaderWidget.notFocused {
+	border-top: 1px solid #E9E9E9;
+	border-bottom: 1px solid #BBB;
+}
+
+.hablar-AccordionHeaderWidget.focused {
+	border-top: 1px solid white;
+	border-bottom: 1px solid #BBB;
+}
+
+/** Chat messages **/
+.chatMessage .body.incoming {
+	
+}
+
+.chatMessage .body.sent {
+	color: #808080;
+}
+
+.chatMessage .body.info {
+	color: #808080;
+	font-style: italic;
+}
+
+.chatMessage .body.alert {
+	color: #c00;
+}
+
+.hablar-ChatWidget .chatMessage {
+	display: block;
+	width: 94%;
+	overflow: hidden;
+	padding: 2px 3% 2px 3%;
+}
+
+.hablar-ChatWidget .chatMessage.odd {
+	background-color: #efefef;
+}
+
+.chatMessage .author {
+	display: inline;
+	font-weight: bold;
+}
+
+.chatMessage .metadata {
+	display: inline;
+	color: #808080;
+	font-size: 90%;
+}
+
+.chatMessage .body {
+	display: inline;
+}
+
+.hablar-EmoticonImage {
+	vertical-align: text-top;
+}
+
+/** MUC room occupants **/
+.gwt-PopupPanel.occupants {
+	border-top: 1px solid #E9E9E9;
+	border-left: 1px solid #BBBBBB;
+	border-right: 1px solid #BBBBBB;
+	border-bottom: 1px solid #BBBBBB;
+	background-color: #e9e9e9;
+	z-index: 10000;
+}
+
+/** IE6 ZINDEX BUG **/
+.hablar-HablarWidget {
+	z-index: 1;
+}
+
+html {
+	font-family: Tahoma, sans-serif;
+	font-size: 80%;
+}
+
+body {
+	height: 90%;
+}
+
+/** HABLAR HEADER **/
+.hablar-Header {
+	width: 100%;
+	overflow: hidden;
+	cursor: pointer;
+	padding: 3px 0;
+}
+
+.hablar-Header .icon {
+	float: left;
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+.hablar-RosterGroupWidget .icon {
+	float: left;
+	margin-right: 3px;
+}
+
+.hablar-Header .title {
+	float: left;
+}
+
+.hablar-AccordionHeaderWidget  .icon {
+	float: left;
+	margin: 0 3px 0 3px;
+}
+
+.hablar-AccordionHeaderWidget  .title {
+	display: block;
+	margin: 0 3px;
+}
+
+.hablar-AccordionHeaderWidget  .close {
+	float: right;
+	margin: 0px 3px 0 0;
+}
+
+.hablar-TabsHeaderWidget {
+	padding: 0;
+	margin: 0;
+	background-color: transparent;
+	border: none;
+}
+
+.hablar-TabsHeaderWidget .close {
+	margin: 2px 3px;
+}
+
+.hablar-AccordionHeader .close {
+	margin: 2px 3px 0 0;
+}
+
+.hablar-AccordionHeader .icon {
+	
+}
+
+.hablar-AccordionHeader .title {
+	display: block;
+}
+
+.hablar-TabsHeaderWidget .title {
+	display: inline;
+	margin-right: 10px;
+}
+
+/** DOCKS **/
+.hablar-DockContainer-top {
+	background-color: transparent;
+	z-index: 4000;
+}
+
+.hablar-Header.DockHeaderWidget-top {
+	background-color: transparent;
+	border: 1px transparent;
+}
+
+.hablar-Header.DockHeaderWidget-left {
+	cursor: default;
+	-moz-user-select: none;
+}
+
+.DockHeaderWidget-left .icon {
+	margin-left: 3px;
+}
+
+/** LIST ITEMS **/
+.hablar-ListItem {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	padding: 5px 0px 0 0px;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+/** USER **/
+.hablar-UserWidget .container {
+	padding: 0px 10px;
+	z-index: 3000;
+}
+
+.hablar-UserWidget h2 {
+	margin: 15px 0 5px 0;
+}
+
+.hablar-UserWidget .actions {
+	padding: 5px 0 0 10px;
+}
+
+/** ROSTER **/
+.hablar-RosterWidget .item {
+	width: 100%;
+	overflow: hidden;
+}
+
+.hablar-RosterWidget .actions {
+	width: 100%;
+	overflow: hidden;
+}
+
+.hablar-RosterWidget .actions .hablar-ActionWidget {
+	float: left;
+	margin-right: 1px;
+}
+
+.hablar-GroupHeaderWidget {
+	overflow: hidden;
+	padding: 3px;
+	cursor: pointer;
+	border-bottom: 1px solid #BBBBBB;
+	border-top: 1px solid white;
+}
+
+.hablar-GroupHeaderWidget .label {
+	display: block;
+	margin: 3px;
+}
+
+.hablar-GroupHeaderWidget .menu {
+	float: right;
+	margin-right: 3px;
+}
+
+.hablar-RosterItemWidget .user {
+	float: left;
+}
+
+.hablar-RosterItemWidget .icon {
+	display: block;
+	float: left;
+	margin: 2px 5px 2px 2px;
+}
+
+.hablar-RosterItemWidget .name {
+	display: block;
+	float: left;
+	margin-right: 5px;
+}
+
+.hablar-RosterItemWidget .menu {
+	float: right;
+}
+
+.hablar-RosterGroupWidget .menu {
+	float: right;
+	cursor: pointer;
+}
+
+/** CHAT PAGE **/
+.hablar-ChatWidget .actions div {
+	float: right;
+}
+
+/** SEARCH PAGE **/
+.hablar-SearchWidget .searchBox {
+	width: 75%;
+	padding: 3px;
+	margin-right: 1%;
+}
+
+.hablar-SearchWidget .gwt-Button {
+	width: 20%;
+}
+
+/** ROOMS **/
+.hablar-ChatWidget .actions .hablar-OccupantsWidget {
+	display: block;
+	float: left;
+	padding: 2px 5px;
+	margin-left: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	cursor: pointer;
+}
+
+.hablar-OccupantWidget {
+	width: 100%;
+	overflow: hidden;
+	margin: 2px 5px;
+	cursor: default;
+}
+
+.hablar-OccupantWidget .icon {
+	display: block;
+	float: left;
+	margin-right: 5px;
+}
+
+.hablar-OccupantWidget .name {
+	display: block;
+	float: left;
+}
+
+/** ROOM INVITATION **/
+.hablar-OpenRoomWidget .list {
+	padding: 5px;
+}
+
+/** LOGGER **/
+.hablar-Logger .gwt-Label {
+	opacity: 0.5;
+}
+
+.hablar-Logger .gwt-Label.ready {
+	opacity: 1;
+}
+
+.hablar-Logger .output {
+	color: blue;
+}
+
+.hablar-Logger .input {
+	color: #0c0;
+}
+
+/** OVERLAY **/
+.hablar-Overlay {
+	z-index: 7000;
+	padding: 20px 10px 10px 10px;
+}
+
+/** FORMS **/
+.form p {
+	width: 100%;
+	overflow: hidden;
+	margin: 3px 0;
+}
+
+.form h2 {
+	font-size: 200%;
+}
+
+.form span.option {
+	display: block;
+	margin: 0 0 15px 30px;
+}
+
+.form p label {
+	display: block;
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-right: 0.5em;
+}
+
+.form p .gwt-Label {
+	font-weight: bold;
+}
+
+.form .actions {
+	padding-left: 5px;
+	margin-top: 15px;
+	padding-top: 5px;
+}
+
+.form .gwt-TextBox,.form .gwt-PasswordTextBox {
+	padding: 2px;
+	width: 98%;
+	border: 0;
+}
+
+.form p .gwt-RadioButton,.form p .gwt-CheckBox {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+}
+
+.form p .gwt-RadioButton input,.form p .gwt-CheckBox input {
+	float: left;
+	margin-right: 5px;
+}
+
+.form p .gwt-RadioButton label,.form p .gwt-CheckBox label {
+	float: left;
+	margin: 0;
+}
+
+.hablar-PopupPanel {
+	z-index: 5000;
+	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hablar-PresenceWidget .controls {
+	width: 100%;
+	overflow: hidden;
+}
+
+.hablar-PresenceWidget .menu,.hablar-PresenceWidget .icon {
+	float: left;
+	margin-top: 4px;
+}
+
+.loading {
+	width: 100%;
+	overflow: hidden;
+}
+
+.loading .icon {
+	display: block;
+	float: left;
+	margin-right: 5px;
+}
+
+/** SEMANTIC CSS PLEASE! **/
+.overflowhidden {
+	overflow: hidden;
+}
+
+/** ADD TO GROUP **/
+.hablar-ManageGroupsWidget .list {
+	padding: 5px;
+}
+
+/** COPY TO CLIPBOARD **/
+.hablar-CopyToClipboardWidget .gwt-TextArea {
+	width: 100%;
+	height: 10em;
+	margin-top: 3px;
+}
+
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	-ms-text-overflow: ellipsis;
+	-moz-binding: url('ellipsis.xml#ellipsis');
+	width: 100%
+}
+
+.gwt-TextArea {
+	border: 1px solid #bbbbbb;
+}

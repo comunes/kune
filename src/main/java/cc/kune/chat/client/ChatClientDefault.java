@@ -6,9 +6,11 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
+import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
-import cc.kune.common.client.shortcuts.Keyboard;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.resources.icons.IconResources;
@@ -52,7 +54,6 @@ public class ChatClientDefault implements ChatClient {
 
         @Override
         public void actionPerformed(final ActionEvent event) {
-            // FIXME
             eventBus.fireEvent(new ToggleShowChatDialogEvent());
         }
 
@@ -60,30 +61,36 @@ public class ChatClientDefault implements ChatClient {
 
     protected static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
 
+    private final ChatClientAction action;
     protected IconLabelDescriptor chatIcon;
+    private final I18nTranslationService i18n;
+
     private PopupTopPanel popup;
 
+    private final IconResources res;
+
     private final Session session;
+
+    private final SitebarActionsPresenter siteActions;
 
     @Inject
     public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n, final ChatClientAction action,
             final SitebarActionsPresenter siteActions, final IconResources res, final Session session) {
+        this.i18n = i18n;
+        this.action = action;
+        this.siteActions = siteActions;
+        this.res = res;
         this.session = session;
         eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
-                res.css().ensureInjected();
-                chatIcon = new IconLabelDescriptor(action);
-                chatIcon.putValue(Action.SMALL_ICON, res.chat());
-                chatIcon.setId(CHAT_CLIENT_ICON_ID);
-                chatIcon.setStyles("k-floatright, k-no-backimage, k-btn-sitebar, k-chat-icon");
-                action.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
-                action.setShortcut(KeyStroke.getKeyStroke('C', Keyboard.MODIFIER_ALT));
-                chatIcon.setVisible(session.isLogged());
-                siteActions.getLeftToolbar().addAction(chatIcon);
+                if (session.isLogged()) {
+                    createActionIfNeeded();
+                }
                 eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
                     @Override
                     public void onUserSignIn(final UserSignInEvent event) {
+                        createActionIfNeeded();
                         createDialogIfNeeded();
                         chatIcon.setVisible(true);
                     }
@@ -91,12 +98,14 @@ public class ChatClientDefault implements ChatClient {
                 eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutHandler() {
                     @Override
                     public void onUserSignOut(final UserSignOutEvent event) {
+                        createActionIfNeeded();
                         chatIcon.setVisible(false);
                     }
                 });
                 eventBus.addHandler(ShowChatDialogEvent.getType(), new ShowChatDialogHandler() {
                     @Override
                     public void onShowChatDialog(final ShowChatDialogEvent event) {
+                        createActionIfNeeded();
                         showDialog(event.show);
                     }
                 });
@@ -119,11 +128,34 @@ public class ChatClientDefault implements ChatClient {
     @Override
     public void chat(final XmppURI jid) {
         // TODO Auto-generated method stub
+    }
 
+    private void createActionIfNeeded() {
+        if (chatIcon == null) {
+            res.css().ensureInjected();
+            chatIcon = new IconLabelDescriptor(action);
+            chatIcon.setParent(SitebarActionsPresenter.LEFT_TOOLBAR);
+            chatIcon.putValue(Action.SMALL_ICON, res.chat());
+            chatIcon.putValue(Action.NAME, i18n.t("Chat ;)"));
+            chatIcon.setId(CHAT_CLIENT_ICON_ID);
+            chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
+            action.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
+            final KeyStroke shortcut = Shortcut.getShortcut(false, true, true, false, Character.valueOf('C'));
+            action.setShortcut(shortcut);
+            chatIcon.setVisible(session.isLogged());
+            siteActions.getLeftToolbar().addAction(
+                    new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
+            siteActions.getLeftToolbar().addAction(
+                    new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
+            siteActions.getLeftToolbar().addAction(
+                    new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
+            siteActions.getLeftToolbar().addAction(chatIcon);
+        }
     }
 
     private void createDialog(final HablarWidget widget, final HtmlConfig htmlConfig) {
         // popup.setSize(htmlConfig.width, htmlConfig.height);
+        widget.addStyleName("k-chat-panel");
         setSize(widget, htmlConfig);
         popup.add(widget);
     }
@@ -227,8 +259,8 @@ public class ChatClientDefault implements ChatClient {
         if (htmlConfig.height != null) {
             widget.setHeight(htmlConfig.height);
         }
-        widget.setWidth("400px");
-        widget.setHeight("400px");
+        widget.setWidth("450px");
+        widget.setHeight("300px");
     }
 
     @Override

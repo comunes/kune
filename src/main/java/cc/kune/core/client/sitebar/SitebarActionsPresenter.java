@@ -40,8 +40,9 @@ public class SitebarActionsPresenter extends
         IsActionExtensible getRightBar();
     }
 
+    public static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
     public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
-    public static final ToolbarDescriptor TOOLBAR = new ToolbarDescriptor();
+    public static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
 
     private final I18nTranslationService i18n;
     private final IconResources icons;
@@ -63,6 +64,7 @@ public class SitebarActionsPresenter extends
         this.signInLink = signInLink;
         this.res = res;
         this.icons = icons;
+        init();
     }
 
     public IsActionExtensible getLeftToolbar() {
@@ -77,8 +79,17 @@ public class SitebarActionsPresenter extends
         return getView().getRightBar();
     }
 
-    public void init() {
+    private void init() {
+        getView().getLeftBar().addAction(LEFT_TOOLBAR);
+        getView().getRightBar().addAction(RIGHT_TOOLBAR);
+        getView().getRightBar().addAction(OPTIONS_MENU);
+    }
+
+    @ProxyEvent
+    public void onAppStart(final AppStartEvent event) {
+        final IsActionExtensible right = getView().getRightBar();
         OPTIONS_MENU.putValue(Action.NAME, i18n.t("Options"));
+        OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
         final AbstractExtendedAction action = new AbstractExtendedAction() {
             @Override
             public void actionPerformed(final ActionEvent event) {
@@ -88,15 +99,10 @@ public class SitebarActionsPresenter extends
         action.putValue(Action.NAME, "Test");
         final MenuItemDescriptor testMenuItem = new MenuItemDescriptor(OPTIONS_MENU, action);
         OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
-        final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
-                SitebarActionsPresenter.TOOLBAR);
-        final ToolbarSeparatorDescriptor separator2 = new ToolbarSeparatorDescriptor(Type.separator,
-                SitebarActionsPresenter.TOOLBAR);
-        final ToolbarSeparatorDescriptor spacer = new ToolbarSeparatorDescriptor(Type.spacer,
-                SitebarActionsPresenter.TOOLBAR);
-        final IsActionExtensible right = getView().getRightBar();
+        final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
+        final ToolbarSeparatorDescriptor separator2 = new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
 
-        final MenuSeparatorDescriptor sep = new MenuSeparatorDescriptor(OPTIONS_MENU);
+        final MenuSeparatorDescriptor menuSeparator = new MenuSeparatorDescriptor(OPTIONS_MENU);
         final AbstractExtendedAction bugsAction = new AbstractExtendedAction() {
             @Override
             public void actionPerformed(final ActionEvent event) {
@@ -120,25 +126,16 @@ public class SitebarActionsPresenter extends
         aboutAction.putValue(Action.SMALL_ICON, res.kuneIcon16());
         // aboutAction.setShortcut(shortcut);
         // shortcutReg.put(shortcut, aboutAction);
-        right.addAction(TOOLBAR);
-        // addAction(separator);
-        right.addAction(OPTIONS_MENU);
+
         right.addAction(signInLink.get());
         right.addAction(signOutLink.get());
-        // addAction(spacer);
-        // addAction(separator2);
+        right.addAction(separator2);
         right.addAction(newGroupLink.get());
-        // addAction(spacer);
+        right.addAction(separator);
         right.addAction(testMenuItem);
-        right.addAction(sep);
+        right.addAction(menuSeparator);
         right.addAction(bugs);
         right.addAction(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
-
-    }
-
-    @ProxyEvent
-    public void onAppStart(final AppStartEvent event) {
-        init();
     }
 
     @Override

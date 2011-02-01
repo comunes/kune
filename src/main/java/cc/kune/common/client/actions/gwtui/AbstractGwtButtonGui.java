@@ -21,6 +21,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     private ButtonBase button;
     private final boolean enableTongle;
     private IconLabel iconLabel;
+    private boolean isChild;
 
     public AbstractGwtButtonGui() {
         this(null, false);
@@ -51,9 +52,14 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
         if (id != null) {
             button.ensureDebugId(id);
         }
-        initWidget(button);
-        if (descriptor.isChild()) {
-            child = button;
+        isChild = descriptor.isChild();
+        if (isChild) {
+            // If button is inside a toolbar don't init...
+            if (descriptor.isChild()) {
+                child = button;
+            }
+        } else {
+            initWidget(button);
         }
         button.addClickHandler(new ClickHandler() {
             @Override
@@ -109,8 +115,10 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
 
     @Override
     public void setVisible(final boolean visible) {
-        if (button.isAttached()) {
-            super.setVisible(visible);
+        if (!isChild) {
+            if (button.isAttached()) {
+                super.setVisible(visible);
+            }
         }
     }
 
