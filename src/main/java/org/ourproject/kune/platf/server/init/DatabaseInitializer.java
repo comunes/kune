@@ -10,9 +10,6 @@ import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
-import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
-import org.ourproject.kune.platf.server.manager.PropertyManager;
-import org.ourproject.kune.platf.server.manager.PropertySubgroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
@@ -25,8 +22,6 @@ import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 import cc.kune.domain.License;
-import cc.kune.domain.PropertyGroup;
-import cc.kune.domain.PropertySubgroup;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
@@ -40,9 +35,6 @@ public class DatabaseInitializer {
     private final I18nLanguageManager languageManager;
     private final LicenseManager licenseManager;
     private final DatabaseProperties properties;
-    private final PropertyManager propertyManager;
-    private final PropertyGroupManager propGroupManager;
-    private final PropertySubgroupManager propSubgroupManager;
     private final I18nTranslationManager translationManager;
     private final UserManager userManager;
 
@@ -50,9 +42,7 @@ public class DatabaseInitializer {
     public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
             final GroupManager groupManager, final LicenseManager licenseManager,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final I18nTranslationManager translationManager, final ContentManager contentManager,
-            final PropertyManager propertyManager, final PropertyGroupManager propGroupManager,
-            final PropertySubgroupManager propSubgroupManager) {
+            final I18nTranslationManager translationManager, final ContentManager contentManager) {
         this.properties = properties;
         this.userManager = userManager;
         this.groupManager = groupManager;
@@ -61,9 +51,6 @@ public class DatabaseInitializer {
         this.countryManager = countryManager;
         this.translationManager = translationManager;
         this.contentManager = contentManager;
-        this.propertyManager = propertyManager;
-        this.propGroupManager = propGroupManager;
-        this.propSubgroupManager = propSubgroupManager;
     }
 
     private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
@@ -181,12 +168,13 @@ public class DatabaseInitializer {
     }
 
     private void createProperties() {
-        final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
-        final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
-        propGroupManager.persist(userProps);
-        propGroupManager.persist(groupProps);
-        final PropertySubgroup userXmppProps = new PropertySubgroup("user-xmpp");
-        propSubgroupManager.persist(userXmppProps);
+        // final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
+        // final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
+        // propGroupManager.persist(userProps);
+        // propGroupManager.persist(groupProps);
+        // final PropertySubgroup userXmppProps = new
+        // PropertySubgroup("user-xmpp");
+        // propSubgroupManager.persist(userXmppProps);
 
         // final Property colorProp = new Property("xmpp_color",
         // "Choose your color", Property.Type.STRING, true, "blue",

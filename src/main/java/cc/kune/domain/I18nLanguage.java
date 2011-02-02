@@ -25,14 +25,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.Length;
+import org.hibernate.validator.Pattern;
 
 import cc.kune.domain.utils.HasId;
 
@@ -50,27 +50,18 @@ import com.wideplay.warp.persist.dao.Finder;
 @Table(name = "globalize_languages")
 public class I18nLanguage implements HasId {
 
-    @Id
-    // Is not GeneratedValue
-    @DocumentId
-    @Column(name = "id", unique = true, nullable = false)
-    private Long id;
-
     @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(name = "code", unique = true)
     private String code;
 
-    @Column(name = "iso_639_1", length = 2)
-    private String iso6391;
+    @Column(name = "date_format")
+    private String dateFormat;
 
-    @Column(name = "iso_639_2", length = 3, unique = true)
-    private String iso6392;
+    @Column(name = "date_format_short")
+    private String dateFormatShort;
 
-    @Column(name = "iso_639_3", length = 3, unique = true)
-    private String iso6393;
-
-    @Column(name = "rfc_3066", unique = true)
-    private String rfc3066;
+    @Column(name = "direction")
+    private String direction;
 
     @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(name = "english_name")
@@ -82,6 +73,24 @@ public class I18nLanguage implements HasId {
     @Column(name = "english_name_modifier")
     private String englishNameModifier;
 
+    @Id
+    // Is not GeneratedValue
+    @DocumentId
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
+
+    @Column(name = "iso_639_1", length = 2)
+    private String iso6391;
+
+    @Column(name = "iso_639_2", length = 3, unique = true)
+    private String iso6392;
+
+    @Column(name = "iso_639_3", length = 3, unique = true)
+    private String iso6393;
+
+    @Column(name = "macro_language")
+    private Boolean macroLanguage;
+
     @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(name = "native_name")
     private String nativeName;
@@ -92,25 +101,16 @@ public class I18nLanguage implements HasId {
     @Column(name = "native_name_modifier")
     private String nativeNameModifier;
 
-    @Column(name = "macro_language")
-    private Boolean macroLanguage;
-
-    @Column(name = "direction")
-    private String direction;
-
-    @Pattern(regexp = "^[c=\\d?:%!<>&|() ]+$")
+    @Pattern(regex = "^[c=\\d?:%!<>&|() ]+$")
     @Column(name = "pluralization")
     @Length(max = 200)
     private String pluralization;
 
+    @Column(name = "rfc_3066", unique = true)
+    private String rfc3066;
+
     @Column(name = "scope", length = 1)
     private String scope;
-
-    @Column(name = "date_format")
-    private String dateFormat;
-
-    @Column(name = "date_format_short")
-    private String dateFormatShort;
 
     public I18nLanguage() {
         this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
@@ -187,6 +187,7 @@ public class I18nLanguage implements HasId {
         return this.englishNameModifier;
     }
 
+    @Override
     public Long getId() {
         return this.id;
     }
@@ -260,6 +261,7 @@ public class I18nLanguage implements HasId {
         this.englishNameModifier = englishNameModifier;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }

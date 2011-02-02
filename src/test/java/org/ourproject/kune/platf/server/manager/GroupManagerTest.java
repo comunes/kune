@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.TimeZone;
 
 import org.apache.lucene.queryParser.ParseException;
+import org.hibernate.validator.InvalidStateException;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
@@ -52,7 +53,7 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
         groupManager.createGroup(group, user);
         groupManager.reIndex();
         final SearchResult<Group> result = groupManager.search("ysei");
-        assertEquals(1, (long) result.getSize());
+        assertEquals(1, result.getSize());
         assertEquals("ysei", result.getList().get(0).getShortName());
         rollbackTransaction();
     }
@@ -82,6 +83,12 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
         groupManager.createGroup(group2, user);
 
         rollbackTransaction();
+    }
+
+    private void createTestGroup(final int number) throws Exception {
+        final Group g = new Group("ysei" + number, "Yellow Submarine Environmental Initiative " + number, defLicense,
+                GroupType.PROJECT);
+        groupManager.createGroup(g, user);
     }
 
     @Test(expected = EmailAddressInUseException.class)
@@ -141,6 +148,22 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
         rollbackTransaction();
     }
 
+    @Test(expected = InvalidStateException.class)
+    public void createUserWithIncorrectShortName() throws Exception {
+        final User user2 = userManager.createUser("u s", "the user name 2", "email2@example.com", "userPassword", "en",
+                "GB", TimeZone.getDefault().getID());
+        groupManager.createUserGroup(user2);
+        rollbackTransaction();
+    }
+
+    @Test(expected = InvalidStateException.class)
+    public void createUserWithVeryShortName() throws Exception {
+        final User user2 = userManager.createUser("us", "the user name 2", "email2@example.com", "userPassword", "en",
+                "GB", TimeZone.getDefault().getID());
+        groupManager.createUserGroup(user2);
+        rollbackTransaction();
+    }
+
     @Test
     public void groupSearchPagination() throws Exception, ParseException {
         for (int i = 1; i < 10; i++) {
@@ -148,17 +171,11 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
         }
         groupManager.reIndex();
         final SearchResult<Group> result = groupManager.search("Yellow", 0, 5);
-        assertEquals(9, (long) result.getSize());
+        assertEquals(9, result.getSize());
         assertEquals(5, result.getList().size());
         final SearchResult<Group> result2 = groupManager.search("Yellow", 5, 5);
-        assertEquals(9, (long) result2.getSize());
+        assertEquals(9, result2.getSize());
         assertEquals(4, result2.getList().size());
         rollbackTransaction();
-    }
-
-    private void createTestGroup(final int number) throws Exception {
-        final Group g = new Group("ysei" + number, "Yellow Submarine Environmental Initiative " + number, defLicense,
-                GroupType.PROJECT);
-        groupManager.createGroup(g, user);
     }
 }

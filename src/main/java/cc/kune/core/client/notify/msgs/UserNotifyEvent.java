@@ -43,6 +43,7 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
     }
 
     private final Boolean closeable;
+    private java.lang.String id;
     private final NotifyLevel level;
     private final java.lang.String message;
     private final java.lang.String title;
@@ -85,6 +86,10 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
         return closeable;
     }
 
+    public java.lang.String getId() {
+        return id;
+    }
+
     public NotifyLevel getLevel() {
         return level;
     }
@@ -95,6 +100,10 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
 
     public java.lang.String getTitle() {
         return title;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
     }
 
 }

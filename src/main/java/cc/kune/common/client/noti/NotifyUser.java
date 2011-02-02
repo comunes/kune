@@ -11,6 +11,18 @@ public class NotifyUser {
     private static EventBus eventBus;
     private static SimpleCallback onOk;
 
+    public static void error(final String message) {
+        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message));
+    }
+
+    public static void error(final String message, final boolean closeable) {
+        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, closeable));
+    }
+
+    public static void error(final String message, final String id, final boolean closeable) {
+        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, id, closeable));
+    }
+
     public static void hideProgress() {
         eventBus.fireEvent(new ProgressHideEvent());
     }
@@ -63,5 +75,4 @@ public class NotifyUser {
     public static void veryImportant(final String message) {
         eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, message));
     }
-
 }

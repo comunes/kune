@@ -52,11 +52,6 @@ import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
-import org.ourproject.kune.platf.server.manager.PropertiesManager;
-import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
-import org.ourproject.kune.platf.server.manager.PropertyManager;
-import org.ourproject.kune.platf.server.manager.PropertySettedManager;
-import org.ourproject.kune.platf.server.manager.PropertySubgroupManager;
 import org.ourproject.kune.platf.server.manager.RateManager;
 import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import org.ourproject.kune.platf.server.manager.TagManager;
@@ -75,11 +70,6 @@ import org.ourproject.kune.platf.server.manager.impl.I18nCountryManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nLanguageManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.I18nTranslationManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.LicenseManagerDefault;
-import org.ourproject.kune.platf.server.manager.impl.PropertiesManagerDefault;
-import org.ourproject.kune.platf.server.manager.impl.PropertyGroupManagerDefault;
-import org.ourproject.kune.platf.server.manager.impl.PropertyManagerDefault;
-import org.ourproject.kune.platf.server.manager.impl.PropertySettedManagerDefault;
-import org.ourproject.kune.platf.server.manager.impl.PropertySubgroupManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.RateManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerDefault;
 import org.ourproject.kune.platf.server.manager.impl.TagManagerDefault;
@@ -114,6 +104,46 @@ import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 
 public class PlatformServerModule extends AbstractExtendedModule {
+    private void bindManagers() {
+        bind(UserManager.class).to(UserManagerDefault.class);
+        bind(GroupManager.class).to(GroupManagerDefault.class);
+        bind(ContentManager.class).to(ContentManagerDefault.class);
+        bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
+        bind(ContainerManager.class).to(ContainerManagerDefault.class);
+        bind(LicenseManager.class).to(LicenseManagerDefault.class);
+        bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
+        bind(XmppManager.class).to(XmppManagerDefault.class);
+        bind(RateManager.class).to(RateManagerDefault.class);
+        bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
+        bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
+        bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
+        bind(TagManager.class).to(TagManagerDefault.class);
+        bind(TagUserContentManager.class).to(TagUserContentManagerDefault.class);
+        bind(CommentManager.class).to(CommentManagerDefault.class);
+        bind(FileManager.class).to(FileManagerDefault.class);
+        bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
+    }
+
+    private void bindRPC() {
+        bind(SiteService.class).to(SiteRPC.class);
+        bind(GroupService.class).to(GroupRPC.class);
+        bind(ContentService.class).to(ContentRPC.class);
+        bind(UserService.class).to(UserRPC.class);
+        bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
+        bind(I18nService.class).to(I18nRPC.class);
+    }
+
+    private void bindServices() {
+        bind(UserInfoService.class).to(UserInfoServiceDefault.class);
+        bind(CreationService.class).to(CreationServiceDefault.class);
+        bind(AccessRightsService.class).to(AccessRightsServiceDefault.class);
+        bind(AccessService.class).to(AccessServiceDefault.class);
+        bind(FinderService.class).to(FinderServiceDefault.class);
+        bind(StateService.class).to(StateServiceDefault.class);
+        bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
+        bind(SessionService.class).to(SessionServiceDefault.class);
+    }
+
     @Override
     protected void configure() {
         install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
@@ -135,51 +165,6 @@ public class PlatformServerModule extends AbstractExtendedModule {
                 outermostCall(new AuthenticatedMethodInterceptor()));
         bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authorizated.class),
                 outermostCall(new AuthorizatedMethodInterceptor()));
-    }
-
-    private void bindManagers() {
-        bind(UserManager.class).to(UserManagerDefault.class);
-        bind(GroupManager.class).to(GroupManagerDefault.class);
-        bind(ContentManager.class).to(ContentManagerDefault.class);
-        bind(ToolConfigurationManager.class).to(ToolConfigurationManagerDefault.class);
-        bind(ContainerManager.class).to(ContainerManagerDefault.class);
-        bind(LicenseManager.class).to(LicenseManagerDefault.class);
-        bind(SocialNetworkManager.class).to(SocialNetworkManagerDefault.class);
-        bind(XmppManager.class).to(XmppManagerDefault.class);
-        bind(RateManager.class).to(RateManagerDefault.class);
-        bind(I18nCountryManager.class).to(I18nCountryManagerDefault.class);
-        bind(I18nLanguageManager.class).to(I18nLanguageManagerDefault.class);
-        bind(I18nTranslationManager.class).to(I18nTranslationManagerDefault.class);
-        bind(TagManager.class).to(TagManagerDefault.class);
-        bind(TagUserContentManager.class).to(TagUserContentManagerDefault.class);
-        bind(CommentManager.class).to(CommentManagerDefault.class);
-        bind(FileManager.class).to(FileManagerDefault.class);
-        bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
-        bind(PropertyManager.class).to(PropertyManagerDefault.class);
-        bind(PropertySettedManager.class).to(PropertySettedManagerDefault.class);
-        bind(PropertyGroupManager.class).to(PropertyGroupManagerDefault.class);
-        bind(PropertySubgroupManager.class).to(PropertySubgroupManagerDefault.class);
-        bind(PropertiesManager.class).to(PropertiesManagerDefault.class);
-    }
-
-    private void bindRPC() {
-        bind(SiteService.class).to(SiteRPC.class);
-        bind(GroupService.class).to(GroupRPC.class);
-        bind(ContentService.class).to(ContentRPC.class);
-        bind(UserService.class).to(UserRPC.class);
-        bind(SocialNetworkService.class).to(SocialNetworkRPC.class);
-        bind(I18nService.class).to(I18nRPC.class);
-    }
-
-    private void bindServices() {
-        bind(UserInfoService.class).to(UserInfoServiceDefault.class);
-        bind(CreationService.class).to(CreationServiceDefault.class);
-        bind(AccessRightsService.class).to(AccessRightsServiceDefault.class);
-        bind(AccessService.class).to(AccessServiceDefault.class);
-        bind(FinderService.class).to(FinderServiceDefault.class);
-        bind(StateService.class).to(StateServiceDefault.class);
-        bind(I18nTranslationService.class).to(I18nTranslationServiceDefault.class);
-        bind(SessionService.class).to(SessionServiceDefault.class);
     }
 
 }

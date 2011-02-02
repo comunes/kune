@@ -37,14 +37,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.Length;
+import org.hibernate.validator.Pattern;
 
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -62,48 +62,32 @@ public class Group implements HasId {
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
     public static final Group NO_GROUP = null;
-    public static final String PROPS_ID = "groupprops";
-
-    @Id
-    @DocumentId
-    @GeneratedValue
-    private Long id;
+    // public static final String PROPS_ID = "groupprops";
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     AdmissionType admissionType;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    GroupType groupType;
-
-    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
-    @Column(unique = true)
-    @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
-    @Pattern(regexp = "^[a-z0-9_\\-]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
-    private String shortName;
-
-    @Field(index = Index.TOKENIZED, store = Store.NO)
-    @Column(unique = true)
-    @Length(min = 3, max = 50, message = "The longName must be between 3 and 50 characters of length")
-    private String longName;
+    @Basic(optional = false)
+    private final Long createdOn;
 
     @OneToOne
     private Content defaultContent;
 
     @OneToOne
-    private Content groupBackImage;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private SocialNetwork socialNetwork;
-
-    @OneToOne
     private License defaultLicense;
 
-    @OneToMany
-    private final Map<String, ToolConfiguration> toolsConfig;
+    @OneToOne
+    private Content groupBackImage;
 
-    private String workspaceTheme;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    GroupType groupType;
+
+    @Id
+    @DocumentId
+    @GeneratedValue
+    private Long id;
 
     @Lob
     private byte[] logo;
@@ -111,8 +95,24 @@ public class Group implements HasId {
     @Embedded
     private BasicMimeType logoMime;
 
-    @Basic(optional = false)
-    private final Long createdOn;
+    @Field(index = Index.TOKENIZED, store = Store.NO)
+    @Column(unique = true)
+    @Length(min = 3, max = 50, message = "The longName must be between 3 and 50 characters of length")
+    private String longName;
+
+    @Field(index = Index.UN_TOKENIZED, store = Store.NO)
+    @Column(unique = true)
+    @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
+    @Pattern(regex = "^[a-z0-9_\\-]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+    private String shortName;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private SocialNetwork socialNetwork;
+
+    @OneToMany
+    private final Map<String, ToolConfiguration> toolsConfig;
+
+    private String workspaceTheme;
 
     public Group() {
         this(null, null, null, null);
@@ -217,6 +217,7 @@ public class Group implements HasId {
         return hasLogo();
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -299,6 +300,7 @@ public class Group implements HasId {
         this.groupType = groupType;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }

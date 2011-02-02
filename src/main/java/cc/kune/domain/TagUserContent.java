@@ -11,11 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.validator.NotNull;
 
 import cc.kune.domain.utils.HasId;
 
@@ -35,8 +35,16 @@ import com.wideplay.warp.persist.dao.Finder;
 @Table(name = "tag_user_content")
 public class TagUserContent implements HasId {
     public static final String TAGSGROUPED = "tagsgrouped";
-    public static final String TAGSMINGROUPED = "tagsmingrouped";
     public static final String TAGSMAXGROUPED = "tagsmaxgrouped";
+    public static final String TAGSMINGROUPED = "tagsmingrouped";
+
+    @IndexedEmbedded
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Content content;
+
+    @Basic(optional = false)
+    private final Long createdOn;
 
     @Id
     @GeneratedValue
@@ -51,15 +59,7 @@ public class TagUserContent implements HasId {
     @IndexedEmbedded
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    private Content content;
-
-    @IndexedEmbedded
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
-    @Basic(optional = false)
-    private final Long createdOn;
 
     public TagUserContent() {
         this(null, null, null);
@@ -90,6 +90,7 @@ public class TagUserContent implements HasId {
         return createdOn;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -106,6 +107,7 @@ public class TagUserContent implements HasId {
         this.content = content;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }

@@ -243,12 +243,12 @@
       <version>r464</version>
     </dependency>
     <dependency>
-			<groupId>com.jhickman.web.gwt</groupId>
+      <groupId>com.jhickman.web.gwt</groupId>
       <artifactId>gwt-customuibinder</artifactId>
       <version>0.1</version>
     </dependency>
     <dependency>
-			<groupId>com.jhickman.web.gwt</groupId>
+      <groupId>com.jhickman.web.gwt</groupId>
       <artifactId>gxt-uibinder</artifactId>
       <version>0.6</version>
     </dependency>
@@ -340,7 +340,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>4.0.2.GA</version>
+      <version>3.1.0.GA</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -351,9 +351,16 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-commons-annotations</artifactId>
       <version>3.3.0.ga</version>
+      <!-- http://stackoverflow.com/questions/882338/hibernate-preinsertevent-getsource-nosuchmethoderror -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
-    <!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> 
-      <version>3.3.1.GA</version> </dependency> -->
+<!--     <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> -->
+<!--      <version>3.3.1.GA</version> </dependency> -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-search</artifactId>

@@ -6,6 +6,7 @@ import org.adamtacy.client.ui.effects.examples.Fade;
 import org.adamtacy.client.ui.effects.examples.Show;
 
 import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.msgs.client.resources.UserMessageImages;
 
 import com.google.gwt.core.client.GWT;
@@ -23,37 +24,43 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class UserMessage extends Composite implements HasText {
 
-    private static int fadeMills = 5000;
-    private static MessageUiBinder uiBinder = GWT.create(MessageUiBinder.class);
-    private static String closeTitle = "Close";
-
-    @UiField
-    Image icon;
-    @UiField
-    InlineHTML label;
-    @UiField
-    PushButton close;
-    private final CloseCallback closeCallback;
-
     interface MessageUiBinder extends UiBinder<Widget, UserMessage> {
     }
+    private static String closeTitle = "Close";
+    private static int fadeMills = 5000;
 
-    public static void setCloseTitle(String title) {
+    private static MessageUiBinder uiBinder = GWT.create(MessageUiBinder.class);
+
+    public static void setCloseTitle(final String title) {
         closeTitle = title;
     }
 
-    public static void setFadeMills(int mills) {
+    public static void setFadeMills(final int mills) {
         fadeMills = mills;
     }
+    @UiField
+    PushButton close;
 
-    public UserMessage(NotifyLevel level, String title, String message, boolean closeable, CloseCallback closeCallback) {
+    private final CloseCallback closeCallback;
+
+    @UiField
+    Image icon;
+
+    @UiField
+    InlineHTML label;
+
+    public UserMessage(final NotifyLevel level, final String title, final String message, final String id,
+            final boolean closeable, final CloseCallback closeCallback) {
         this.closeCallback = closeCallback;
         initWidget(uiBinder.createAndBindUi(this));
+        if (TextUtils.notEmpty(id)) {
+            super.ensureDebugId(id);
+        }
         label.setHTML((title != null && title.length() > 0 ? "<b>" + title + "</b><br/>" : "") + message);
         close.setVisible(closeable);
         close.setTitle(closeTitle);
         if (!closeable) {
-            Timer time = new Timer() {
+            final Timer time = new Timer() {
                 @Override
                 public void run() {
                     close();
@@ -77,26 +84,36 @@ public class UserMessage extends Composite implements HasText {
         default:
             break;
         }
-        Show anim = new Show(this.getElement());
+        final Show anim = new Show(this.getElement());
         anim.setDuration(0.5);
         anim.play();
     }
 
-    public UserMessage(String message, CloseCallback closeCallback) {
+    public UserMessage(final String message, final CloseCallback closeCallback) {
         this("", message, false, closeCallback);
     }
 
-    public UserMessage(String title, String message, CloseCallback closeCallback) {
+    public UserMessage(final String title, final String message, final boolean closeable,
+            final CloseCallback closeCallback) {
+        this(NotifyLevel.info, title, message, "", closeable, closeCallback);
+    }
+
+    public UserMessage(final String title, final String message, final CloseCallback closeCallback) {
         this(title, message, false, closeCallback);
     }
 
-    public UserMessage(String title, String message, boolean closeable, CloseCallback closeCallback) {
-        this(NotifyLevel.info, title, message, closeable, closeCallback);
-    }
+    private void close() {
+        final Fade fade = new Fade(this.getElement());
+        fade.setDuration(0.7);
+        fade.play();
+        fade.addEffectCompletedHandler(new EffectCompletedHandler() {
 
-    @Override
-    public void setText(String text) {
-        label.setText(text);
+            @Override
+            public void onEffectCompleted(final EffectCompletedEvent event) {
+                removeFromParent();
+                closeCallback.onClose();
+            }
+        });
     }
 
     @Override
@@ -105,22 +122,13 @@ public class UserMessage extends Composite implements HasText {
     }
 
     @UiHandler("close")
-    void handleClick(ClickEvent e) {
+    void handleClick(final ClickEvent e) {
         close();
     }
 
-    private void close() {
-        Fade fade = new Fade(this.getElement());
-        fade.setDuration(0.7);
-        fade.play();
-        fade.addEffectCompletedHandler(new EffectCompletedHandler() {
-
-            @Override
-            public void onEffectCompleted(EffectCompletedEvent event) {
-                removeFromParent();
-                closeCallback.onClose();
-            }
-        });
+    @Override
+    public void setText(final String text) {
+        label.setText(text);
     }
 
 }

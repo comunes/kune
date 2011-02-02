@@ -45,15 +45,14 @@ public class TextUtils {
      * This method escape only some dangerous html chars
      */
     public static String escapeHtmlLight(final String source) {
-        if (source == null) {
-            return null;
-        }
         String result = source;
-        result = result.replaceAll("&", "&amp;");
-        result = result.replaceAll("\"", "&quot;");
-        // text = text.replaceAll("\'", "&#039;");
-        result = result.replaceAll("<", "&lt;");
-        result = result.replaceAll(">", "&gt;");
+        if (source != null) {
+            result = result.replaceAll("&", "&amp;");
+            result = result.replaceAll("\"", "&quot;");
+            // text = text.replaceAll("\'", "&#039;");
+            result = result.replaceAll("<", "&lt;");
+            result = result.replaceAll(">", "&gt;");
+        }
         return result;
     }
 
@@ -62,7 +61,7 @@ public class TextUtils {
     }
 
     public static boolean notEmpty(final String string) {
-        return string != null & string.length() > 0;
+        return string != null && string.length() > 0;
     }
 
     public static String removeLastSlash(final String text) {

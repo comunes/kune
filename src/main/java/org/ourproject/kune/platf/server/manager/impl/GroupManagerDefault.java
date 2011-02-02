@@ -22,9 +22,9 @@ package org.ourproject.kune.platf.server.manager.impl;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
@@ -62,13 +62,13 @@ import com.google.inject.Singleton;
 public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager {
 
     private final Group finder;
-    private final ServerToolRegistry registry;
-    private final DatabaseProperties properties;
-    private final License licenseFinder;
     private final KuneProperties kuneProperties;
-    private final User userFinder;
-    private final ServerToolRegistry serverToolRegistry;
+    private final License licenseFinder;
     private final LicenseManager licenseManager;
+    private final DatabaseProperties properties;
+    private final ServerToolRegistry registry;
+    private final ServerToolRegistry serverToolRegistry;
+    private final User userFinder;
 
     @Inject
     public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder, final User userFinder,
@@ -86,6 +86,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         this.serverToolRegistry = serverToolRegistry;
     }
 
+    @Override
     public void changeDefLicense(final User user, final Group group, final String licName) {
         final License license = licenseFinder.findByShortName(licName);
         if (license == null) {
@@ -94,15 +95,18 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         group.setDefaultLicense(license);
     }
 
+    @Override
     public void changeWsTheme(final User user, final Group group, final String theme) throws AccessViolationException {
         // TODO: check theme
         group.setWorkspaceTheme(theme);
     }
 
+    @Override
     public void clearGroupBackImage(final Group group) {
         group.setGroupBackImage(null);
     }
 
+    @Override
     public Group createGroup(final Group group, final User user) throws GroupNameInUseException,
             UserMustBeLoggedException {
         final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
@@ -128,10 +132,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         }
     }
 
+    @Override
     public Group createUserGroup(final User user) throws GroupNameInUseException, EmailAddressInUseException {
         return createUserGroup(user, true);
     }
 
+    @Override
     public Group createUserGroup(final User user, final boolean wantPersonalHomepage) throws GroupNameInUseException,
             EmailAddressInUseException {
         final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
@@ -155,82 +161,55 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
             initGroup(user, userGroup, wantPersonalHomepage ? serverToolRegistry.getToolsForUserKeys()
                     : ServerToolRegistry.emptyToolList);
             super.persist(user, User.class);
-        } catch (final ConstraintViolationException e) {
-            throw new GroupNameInUseException();
+        } catch (final PersistenceException e) {
+            if (e.getCause() instanceof ConstraintViolationException) {
+                throw new GroupNameInUseException();
+            }
+            throw e;
         }
         return userGroup;
     }
 
+    @Override
     public List<Group> findAdminInGroups(final Long groupId) {
         return finder.findAdminInGroups(groupId);
     }
 
+    @Override
     public Group findByShortName(final String shortName) {
         return finder.findByShortName(shortName);
     }
 
+    @Override
     public List<Group> findCollabInGroups(final Long groupId) {
         return finder.findCollabInGroups(groupId);
     }
 
+    @Override
     public List<String> findEnabledTools(final Long id) {
         return finder.findEnabledTools(id);
     }
 
+    @Override
     public Group getGroupOfUserWithId(final Long userId) {
         return userId != null ? find(User.class, userId).getUserGroup() : null;
     }
 
+    @Override
     public Group getSiteDefaultGroup() {
         final String shortName = properties.getDefaultSiteShortName();
         return findByShortName(shortName);
-    }
-
-    public SearchResult<Group> search(final String search) {
-        return this.search(search, null, null);
-    }
-
-    public SearchResult<Group> search(final String search, final Integer firstResult, final Integer maxResults) {
-        final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "longName", "shortName",
-                "publicDesc" }, new StandardAnalyzer());
-        Query query;
-        try {
-            query = parser.parse(search);
-        } catch (final ParseException e) {
-            throw new ServerManagerException("Error parsing search");
-        }
-        return super.search(query, firstResult, maxResults);
-    }
-
-    public void setDefaultContent(final String groupShortName, final Content content) {
-        final Group group = findByShortName(groupShortName);
-        group.setDefaultContent(content);
-    }
-
-    public void setGroupBackImage(final Group group, final Content content) {
-        if (content.getMimeType().isImage()) {
-            group.setGroupBackImage(content);
-        } else {
-            throw new DefaultException("Trying to set not a image as group logo");
-        }
-    }
-
-    public void setToolEnabled(final User userLogged, final String groupShortName, final String tool,
-            final boolean enabled) {
-        final Group group = findByShortName(groupShortName);
-        ToolConfiguration toolConfiguration = group.getToolConfiguration(tool);
-        if (toolConfiguration == null) {
-            toolConfiguration = serverToolRegistry.get(tool).initGroup(userLogged, group).getToolConfiguration(tool);
-        }
-        toolConfiguration.setEnabled(enabled);
     }
 
     private void initGroup(final User user, final Group group, final Collection<String> toolsToEnable)
             throws GroupNameInUseException {
         try {
             persist(group);
-        } catch (final EntityExistsException e) {
-            throw new GroupNameInUseException();
+        } catch (final PersistenceException e) {
+            if (e.getCause() instanceof ConstraintViolationException) {
+                throw new GroupNameInUseException();
+            }
+            throw e;
         }
         for (final ServerTool tool : registry.all()) {
             if (toolsToEnable.contains(tool.getName())) {
@@ -247,6 +226,50 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         if (!group.getGroupType().equals(GroupType.ORPHANED_PROJECT)) {
             network.addAdmin(userGroup);
         }
+    }
+
+    @Override
+    public SearchResult<Group> search(final String search) {
+        return this.search(search, null, null);
+    }
+
+    @Override
+    public SearchResult<Group> search(final String search, final Integer firstResult, final Integer maxResults) {
+        final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "longName", "shortName",
+                "publicDesc" }, new StandardAnalyzer());
+        Query query;
+        try {
+            query = parser.parse(search);
+        } catch (final ParseException e) {
+            throw new ServerManagerException("Error parsing search");
+        }
+        return super.search(query, firstResult, maxResults);
+    }
+
+    @Override
+    public void setDefaultContent(final String groupShortName, final Content content) {
+        final Group group = findByShortName(groupShortName);
+        group.setDefaultContent(content);
+    }
+
+    @Override
+    public void setGroupBackImage(final Group group, final Content content) {
+        if (content.getMimeType().isImage()) {
+            group.setGroupBackImage(content);
+        } else {
+            throw new DefaultException("Trying to set not a image as group logo");
+        }
+    }
+
+    @Override
+    public void setToolEnabled(final User userLogged, final String groupShortName, final String tool,
+            final boolean enabled) {
+        final Group group = findByShortName(groupShortName);
+        ToolConfiguration toolConfiguration = group.getToolConfiguration(tool);
+        if (toolConfiguration == null) {
+            toolConfiguration = serverToolRegistry.get(tool).initGroup(userLogged, group).getToolConfiguration(tool);
+        }
+        toolConfiguration.setEnabled(enabled);
     }
 
 }

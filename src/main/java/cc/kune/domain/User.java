@@ -32,18 +32,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.Email;
+import org.hibernate.validator.Length;
+import org.hibernate.validator.NotNull;
+import org.hibernate.validator.Pattern;
 
 import cc.kune.core.shared.domain.UserBuddiesVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -57,81 +55,85 @@ import com.wideplay.warp.persist.dao.Finder;
 @Table(name = "kusers")
 public class User implements HasId {
 
+    // public static final String PROPS_ID = "userprops";
     // see: http://docs.codehaus.org/display/PICO/Good+Citizen:
     // Never expect or return null
     public static final User UNKNOWN_USER = new User();
-    public static final String PROPS_ID = "userprops";
 
     public static boolean isKnownUser(final User user) {
         return !user.equals(UNKNOWN_USER);
     }
 
-    @Id
-    @DocumentId
-    @GeneratedValue
-    private Long id;
+    private UserBuddiesVisibility buddiesVisibility;
+
+    @ManyToOne
+    @NotNull
+    private I18nCountry country;
+
+    @Basic(optional = false)
+    private final Long createdOn;
+
+    // @OneToOne(cascade = CascadeType.REMOVE)
+    // private final CustomProperties customProperties;
 
     @Column(unique = true, nullable = false)
     @Email
     @Length(min = 1)
     private String email;
 
-    @Column(nullable = false)
-    @Length(min = 6, max = 40)
-    private String password;
+    @Id
+    @DocumentId
+    @GeneratedValue
+    private Long id;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private Group userGroup;
+    @ManyToOne
+    @NotNull
+    private I18nLanguage language;
+
+    @Basic
+    private Long lastLogin;
 
     @Field(index = Index.TOKENIZED, store = Store.NO)
     @Column(nullable = false)
     @Length(min = 3, max = 50)
     private String name;
 
+    @Column(nullable = false)
+    @Length(min = 6, max = 40)
+    private String password;
+
     @Field(index = Index.UN_TOKENIZED, store = Store.NO)
     @Column(unique = true)
     // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
     @Length(min = 3, max = 15)
-    @Pattern(regexp = "^[a-z0-9_\\-]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+    @Pattern(regex = "^[a-z0-9_\\-]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
     private String shortName;
-
-    @ManyToOne
-    @NotNull
-    private I18nLanguage language;
-
-    @ManyToOne
-    @NotNull
-    private I18nCountry country;
 
     @NotNull
     private TimeZone timezone;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    private final CustomProperties customProperties;
+    private Group userGroup;
 
-    private UserBuddiesVisibility buddiesVisibility;
-
-    @Basic(optional = false)
-    private final Long createdOn;
-
-    @Basic
-    private Long lastLogin;
-
-    @OneToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Properties properties;
+    // @OneToOne
+    // @OnDelete(action = OnDeleteAction.CASCADE)
+    // private Properties properties;
 
     public User() {
-        this(null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null);
     }
+
+    //
+    // public User(final String shortName, final String longName, final String
+    // email, final String passwd,
+    // final I18nLanguage language, final I18nCountry country, final TimeZone
+    // timezone) {
+    // this(shortName, longName, email, passwd, language, country, timezone,
+    // null);
+    // }
 
     public User(final String shortName, final String longName, final String email, final String passwd,
             final I18nLanguage language, final I18nCountry country, final TimeZone timezone) {
-        this(shortName, longName, email, passwd, language, country, timezone, null);
-    }
-
-    public User(final String shortName, final String longName, final String email, final String passwd,
-            final I18nLanguage language, final I18nCountry country, final TimeZone timezone, final Properties properties) {
         this.shortName = shortName;
         this.name = longName;
         this.email = email;
@@ -140,11 +142,11 @@ public class User implements HasId {
         this.language = language;
         this.country = country;
         this.timezone = timezone;
-        customProperties = new CustomProperties();
+        // customProperties = new CustomProperties();
         buddiesVisibility = UserBuddiesVisibility.anyone;
         this.createdOn = System.currentTimeMillis();
         this.lastLogin = null;
-        this.properties = properties;
+        // this.properties = properties;
     }
 
     @Finder(query = "from User")
@@ -174,9 +176,9 @@ public class User implements HasId {
         return createdOn;
     }
 
-    public CustomProperties getCustomProperties() {
-        return customProperties;
-    }
+    // public CustomProperties getCustomProperties() {
+    // return customProperties;
+    // }
 
     public String getEmail() {
         return email;
@@ -186,6 +188,7 @@ public class User implements HasId {
         return hasLogo();
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -206,9 +209,9 @@ public class User implements HasId {
         return password;
     }
 
-    public Properties getProperties() {
-        return properties;
-    }
+    // public Properties getProperties() {
+    // return properties;
+    // }
 
     public String getShortName() {
         return shortName;
@@ -244,6 +247,7 @@ public class User implements HasId {
         this.email = email;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }
@@ -266,9 +270,9 @@ public class User implements HasId {
         // Use UnixCrypt (jetty)
     }
 
-    public void setProperties(final Properties properties) {
-        this.properties = properties;
-    }
+    // public void setProperties(final Properties properties) {
+    // this.properties = properties;
+    // }
 
     public void setShortName(final String shortName) {
         this.shortName = shortName;

@@ -45,12 +45,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.validator.NotNull;
 
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -67,52 +67,11 @@ import com.wideplay.warp.persist.dao.MaxResults;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Content implements HasStateToken {
 
-    private static final String TITLE = "title";
     private static final String GROUP = "group";
     private static final String MIMETYPE = "mimetype";
-
     public static final Content NO_CONTENT = new Content();
 
-    @Id
-    @DocumentId
-    @GeneratedValue
-    // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
-    private Long id;
-
-    @Version
-    private int version;
-
-    @OneToOne
-    private License license;
-
-    @IndexedEmbedded
-    @OneToOne(cascade = { CascadeType.ALL })
-    private Revision lastRevision;
-
-    @Basic(optional = false)
-    private Long createdOn;
-
-    @Basic(optional = true)
-    private Date deletedOn;
-
-    @Basic(optional = true)
-    private Date publishedOn;
-
-    // @NotNull??
-    private String typeId;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ContentTranslation> translations;
-
-    @ManyToOne
-    @JoinColumn
-    @IndexedEmbedded
-    private Container container;
-
-    @IndexedEmbedded
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    private I18nLanguage language;
+    private static final String TITLE = "title";
 
     @OneToOne(cascade = CascadeType.ALL)
     private AccessLists accessLists;
@@ -125,18 +84,59 @@ public class Content implements HasStateToken {
     @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Comment> comments;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ContentStatus status;
-
+    @ManyToOne
+    @JoinColumn
     @IndexedEmbedded
-    @Embedded
-    private BasicMimeType mimeType;
+    private Container container;
+
+    @Basic(optional = false)
+    private Long createdOn;
+
+    @Basic(optional = true)
+    private Date deletedOn;
 
     /**
      * filename if is an uploaded content
      */
     private String filename;
+
+    @Id
+    @DocumentId
+    @GeneratedValue
+    // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
+    private Long id;
+
+    @IndexedEmbedded
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    private I18nLanguage language;
+
+    @IndexedEmbedded
+    @OneToOne(cascade = { CascadeType.ALL })
+    private Revision lastRevision;
+
+    @OneToOne
+    private License license;
+
+    @IndexedEmbedded
+    @Embedded
+    private BasicMimeType mimeType;
+
+    @Basic(optional = true)
+    private Date publishedOn;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ContentStatus status;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ContentTranslation> translations;
+
+    // @NotNull??
+    private String typeId;
+
+    @Version
+    private int version;
 
     public Content() {
         translations = new ArrayList<ContentTranslation>();
@@ -257,6 +257,7 @@ public class Content implements HasStateToken {
         return publishedOn;
     }
 
+    @Override
     @Transient
     public StateToken getStateToken() {
         return getContainer().getStateToken().copy().setDocument(getId());

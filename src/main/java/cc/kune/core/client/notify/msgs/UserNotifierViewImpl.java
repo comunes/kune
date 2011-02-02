@@ -34,12 +34,13 @@ public class UserNotifierViewImpl extends PopupViewImpl implements UserNotifierV
 
     @Override
     public void notify(final UserNotifyEvent event) {
-        msgs.add(event.getLevel(), event.getTitle(), event.getMessage(), event.getCloseable(), new CloseCallback() {
-            @Override
-            public void onClose() {
-                popup.setCenterPosition();
-            }
-        });
+        msgs.add(event.getLevel(), event.getTitle(), event.getMessage(), event.getId(), event.getCloseable(),
+                new CloseCallback() {
+                    @Override
+                    public void onClose() {
+                        popup.setCenterPosition();
+                    }
+                });
         popup.setCenterPosition();
         DOM.setStyleAttribute(popup.getElement(), "zIndex", "100000");
     }

@@ -26,9 +26,9 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
     }
 
     @Override
-    public void add(final NotifyLevel level, final String title, final String message, final boolean closeable,
-            final CloseCallback closeCallback) {
-        final UserMessage msg = new UserMessage(level, title, message, closeable, closeCallback);
+    public void add(final NotifyLevel level, final String title, final String message, final String id,
+            final boolean closeable, final CloseCallback closeCallback) {
+        final UserMessage msg = new UserMessage(level, title, message, id, closeable, closeCallback);
         vp.add(msg);
         final SlideUp anim = new SlideUp(msg.getElement());
         anim.setDuration(.5);

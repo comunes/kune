@@ -89,7 +89,7 @@ public class SitebarActionsPresenter extends
     public void onAppStart(final AppStartEvent event) {
         final IsActionExtensible right = getView().getRightBar();
         OPTIONS_MENU.putValue(Action.NAME, i18n.t("Options"));
-        OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
+        // OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
         final AbstractExtendedAction action = new AbstractExtendedAction() {
             @Override
             public void actionPerformed(final ActionEvent event) {
@@ -129,9 +129,9 @@ public class SitebarActionsPresenter extends
 
         right.addAction(signInLink.get());
         right.addAction(signOutLink.get());
-        right.addAction(separator2);
+        // right.addAction(separator2);
         right.addAction(newGroupLink.get());
-        right.addAction(separator);
+        // right.addAction(separator);
         right.addAction(testMenuItem);
         right.addAction(menuSeparator);
         right.addAction(bugs);

@@ -344,6 +344,8 @@ a:visited {
 	-moz-border-radius-bottomright: 4px;
 	border-bottom-right-radius: 4px;
 	padding: 0 1px 0 3px;
+	border-collapse: separate;
+	border-spacing: 2px;
 }
 
 .kLoadingLabel {
@@ -643,7 +645,7 @@ a:visited {
 
 .k-publicspace-icon {
 	margin: 3px 3px 3px 0;
-	float:left;
+	float: left;
 }
 
 .k-publicspace-title {
@@ -661,4 +663,33 @@ a:visited {
 
 .k-publicspace-actions {
 	display: inline;
+}
+
+
+.k-message-panel {
+	margin: 5px;
+	display: table-row;
+}
+
+.k-message-icon {
+	margin: 3px 3px 3px 0;
+	float: left;
+}
+
+.k-message-title {
+	font-weight: bold;
+	display: block;
+	margin-bottom: 5px;
+	font-size: 16px;
+	display: table-caption;
+}
+
+.k-message-description {
+	font-size: 14px;
+	display: table-cell;
+}
+
+.k-error-tb {
+  background: #FFB380 none repeat scroll 0% 50%;
+  color: #250;
 }

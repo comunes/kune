@@ -36,8 +36,6 @@ import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
-import org.ourproject.kune.platf.server.manager.PropertiesManager;
-import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
 
@@ -45,8 +43,6 @@ import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
-import cc.kune.domain.Properties;
-import cc.kune.domain.PropertyGroup;
 import cc.kune.domain.User;
 import cc.kune.domain.utils.UserBuddiesData;
 
@@ -56,21 +52,18 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
-    private final User finder;
     private final I18nCountryManager countryManager;
-    private final I18nLanguageManager languageManager;
-    private final XmppManager xmppManager;
-    private final ChatProperties properties;
+    private final User finder;
     private final I18nTranslationService i18n;
-    private final PropertyGroupManager propGroupManager;
-    private PropertyGroup userPropGroup;
-    private final PropertiesManager propManager;
+    private final I18nLanguageManager languageManager;
+    private final ChatProperties properties;
+    // private final PropertiesManager propManager;
+    private final XmppManager xmppManager;
 
     @Inject
     public UserManagerDefault(final Provider<EntityManager> provider, final User finder,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n,
-            final PropertyGroupManager propGroupManager, final PropertiesManager propManager) {
+            final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n) {
         super(provider, User.class);
         this.finder = finder;
         this.languageManager = languageManager;
@@ -78,10 +71,9 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         this.xmppManager = xmppManager;
         this.properties = properties;
         this.i18n = i18n;
-        this.propGroupManager = propGroupManager;
-        this.propManager = propManager;
     }
 
+    @Override
     public User createUser(final String shortName, final String longName, final String email, final String passwd,
             final String langCode, final String countryCode, final String timezone) throws I18nNotFoundException {
         I18nLanguage language;
@@ -94,12 +86,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         } catch (final NoResultException e) {
             throw new I18nNotFoundException();
         }
-        if (userPropGroup == null) {
-            userPropGroup = propGroupManager.find(User.PROPS_ID);
-        }
-        final Properties userProp = new Properties(userPropGroup);
-        propManager.persist(userProp);
-        final User user = new User(shortName, longName, email, passwd, language, country, tz, userProp);
+        // if (userPropGroup == null) {
+        // userPropGroup = propGroupManager.find(User.PROPS_ID);
+        // }
+        // final Properties userProp = new Properties(userPropGroup);
+        // propManager.persist(userProp);
+        final User user = new User(shortName, longName, email, passwd, language, country, tz);
         return user;
 
     }
@@ -109,6 +101,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         return userId != null ? super.find(userId) : User.UNKNOWN_USER;
     }
 
+    @Override
     public User findByShortname(final String shortName) {
         return finder.getByShortName(shortName);
     }
@@ -121,6 +114,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         return finder.getAll();
     }
 
+    @Override
     public UserBuddiesData getUserBuddies(final String shortName) {
         // XEP-133 get roster by admin part is not implemented in openfire
         // also access to the openfire db is not easy with hibernate (the use of
@@ -154,6 +148,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         return buddiesData;
     }
 
+    @Override
     public User login(final String nickOrEmail, final String passwd) {
         User user;
         try {
@@ -181,10 +176,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         }
     }
 
+    @Override
     public SearchResult<User> search(final String search) {
         return this.search(search, null, null);
     }
 
+    @Override
     public SearchResult<User> search(final String search, final Integer firstResult, final Integer maxResults) {
         final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name", "shortName" },
                 new StandardAnalyzer());

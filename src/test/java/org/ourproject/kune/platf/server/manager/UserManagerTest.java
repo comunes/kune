@@ -1,13 +1,15 @@
 package org.ourproject.kune.platf.server.manager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.TimeZone;
 
-import javax.persistence.EntityExistsException;
-import javax.validation.ValidationException;
+import javax.persistence.PersistenceException;
 
 import org.apache.lucene.queryParser.ParseException;
+import org.hibernate.validator.InvalidStateException;
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
@@ -28,16 +30,20 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         persist(user);
     }
 
-    @Test(expected = ValidationException.class)
+    @Test(expected = PersistenceException.class)
     public void emailEmpty() {
         user = new User("test1", "test1 name", null, "some passwd", english, gb, getTimeZone());
         persist(user);
     }
 
-    @Test(expected = ValidationException.class)
+    @Test(expected = InvalidStateException.class)
     public void emailIncorrect() {
         user = new User("test1", "test1 name", "falseEmail@", "some passwd", english, gb, getTimeZone());
         persist(user);
+    }
+
+    private TimeZone getTimeZone() {
+        return TimeZone.getDefault();
     }
 
     @Test
@@ -58,7 +64,7 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         assertNotNull(result.getId());
     }
 
-    @Test(expected = ValidationException.class)
+    @Test(expected = InvalidStateException.class)
     public void passwdLengthIncorrect() {
         user = new User("test1", "test1 name", "test@example.com", "pass", english, gb, getTimeZone());
         persist(user);
@@ -68,7 +74,7 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
      * This is not working:
      * http://opensource.atlassian.com/projects/hibernate/browse/EJB-382
      */
-    @Test(expected = EntityExistsException.class)
+    @Test(expected = PersistenceException.class)
     public void testUserExist() throws I18nNotFoundException {
         final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
                 "GB", "GMT");
@@ -78,7 +84,7 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         persist(user2);
     }
 
-    @Test(expected = ValidationException.class)
+    @Test(expected = InvalidStateException.class)
     public void userNameLengthIncorrect() {
         user = new User("test1", "te", "test@example.com", "some passwd", english, gb, getTimeZone());
         persist(user);
@@ -93,14 +99,10 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
         rollbackTransaction();
     }
 
-    @Test(expected = ValidationException.class)
+    @Test(expected = InvalidStateException.class)
     public void userShortNameIncorrect() {
         user = new User("test1A", "test1 name", "test@example.com", "some passwd", english, gb, getTimeZone());
         persist(user);
-    }
-
-    private TimeZone getTimeZone() {
-        return TimeZone.getDefault();
     }
 
 }

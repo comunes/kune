@@ -4,20 +4,21 @@ import cc.kune.common.client.noti.NotifyLevel;
 
 public class UserMessagesPresenter {
 
-    private UserMessagesView view;
-
     public interface UserMessagesView {
-        void add(NotifyLevel level, String title, String message, boolean closable, CloseCallback callback);
+        void add(NotifyLevel level, String title, String message, String id, boolean closable, CloseCallback callback);
     }
+
+    private UserMessagesView view;
 
     public UserMessagesPresenter() {
     }
 
-    public void init(UserMessagesView view) {
-        this.view = view;
+    public void add(final NotifyLevel level, final String title, final String message, final String id,
+            final boolean closable, final CloseCallback closeCallback) {
+        view.add(level, title, message, id, closable, closeCallback);
     }
 
-    public void add(NotifyLevel level, String title, String message, boolean closable, CloseCallback closeCallback) {
-        view.add(level, title, message, closable, closeCallback);
+    public void init(final UserMessagesView view) {
+        this.view = view;
     }
 }

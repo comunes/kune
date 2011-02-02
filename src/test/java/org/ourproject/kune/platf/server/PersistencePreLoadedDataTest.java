@@ -13,7 +13,6 @@ import org.ourproject.kune.platf.server.manager.GroupManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
-import org.ourproject.kune.platf.server.manager.PropertyGroupManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 
 import cc.kune.domain.Container;
@@ -22,46 +21,45 @@ import cc.kune.domain.Group;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.License;
-import cc.kune.domain.PropertyGroup;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
 public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
-    protected static final String USER_SHORT_NAME = "user-shortname";
+    protected static final String USER_EMAIL = "useremail@example.com";
     protected static final String USER_LONG_NAME = "the user long name";
     protected static final String USER_PASSWORD = "userPassword";
-    protected static final String USER_EMAIL = "useremail@example.com";
+    protected static final String USER_SHORT_NAME = "user-shortname";
 
+    protected Container container;
     @Inject
-    protected User userFinder;
-    @Inject
-    protected Group groupFinder;
-    @Inject
-    protected License licenseFinder;
+    protected ContainerManager containerManager;
+    protected Content content;
     @Inject
     protected ContentManager contentManager;
     @Inject
-    protected ContainerManager containerManager;
-    @Inject
-    protected GroupManager groupManager;
-    @Inject
-    protected UserManager userManager;
-    @Inject
-    protected LicenseManager licenseManager;
-    @Inject
-    protected I18nLanguageManager languageManager;
-    @Inject
     protected I18nCountryManager countryManager;
-    @Inject
-    protected PropertyGroupManager propGroupManager;
-
-    protected User user;
     protected License defLicense;
     protected I18nLanguage english;
     protected I18nCountry gb;
-    protected Content content;
-    protected Container container;
+    @Inject
+    protected Group groupFinder;
+    @Inject
+    protected GroupManager groupManager;
+    @Inject
+    protected I18nLanguageManager languageManager;
+
+    @Inject
+    protected License licenseFinder;
+    @Inject
+    protected LicenseManager licenseManager;
+    // @Inject
+    // protected PropertyGroupManager propGroupManager;
+    protected User user;
+    @Inject
+    protected User userFinder;
+    @Inject
+    protected UserManager userManager;
 
     public PersistencePreLoadedDataTest() {
         // test: use memory
@@ -82,10 +80,10 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
         assertEquals(0, userFinder.getAll().size());
         assertEquals(0, groupFinder.getAll().size());
         assertEquals(0, licenseFinder.getAll().size());
-        final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
-        final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
-        propGroupManager.persist(userProps);
-        propGroupManager.persist(groupProps);
+        // final PropertyGroup groupProps = new PropertyGroup(Group.PROPS_ID);
+        // final PropertyGroup userProps = new PropertyGroup(User.PROPS_ID);
+        // propGroupManager.persist(userProps);
+        // propGroupManager.persist(groupProps);
         english = new I18nLanguage(Long.valueOf(1819), "English", "English", "en");
         languageManager.persist(english);
         gb = new I18nCountry(Long.valueOf(75), "GB", "GBP", ".", "£%n", "", ".", "United Kingdom", "western", ",");

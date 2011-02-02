@@ -97,7 +97,7 @@ public class SitebarSignOutLink extends ButtonDescriptor {
             final ErrorHandler errorHandler, final Session session) {
         super(action);
         setId(SITE_SIGN_OUT);
-        setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+        // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
         setVisible(session.isLogged());
         setStyles("k-no-backimage, k-btn-sitebar");
         eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {

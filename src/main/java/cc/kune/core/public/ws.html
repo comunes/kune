@@ -32,6 +32,16 @@
 		}
 	});
 </script>
+<!-- Only for wave testing  -->
+<script type="text/javascript" language="javascript">
+	var __session = {
+		"id" : "TK8O7UyqvT",
+		"address" : "vjrj@kune.beta.iepala.es",
+		"domain" : "kune.beta.iepala.es"
+	};
+	var __client_flags = {};
+	var __useSocketIO = true;
+</script>
 <link
 	href='http://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic'
 	rel='stylesheet' type='text/css'>
@@ -42,7 +52,8 @@
 <link type="text/css" rel="stylesheet" href="kune-chat.css">
 <link type="text/css" rel="stylesheet" href="kune-hablar.css">
 <link type="text/css" rel="stylesheet" href="kune-common.css">
-<link type="text/css" rel="stylesheet" href="fontface/stylesheet.css">
+<link type="text/css" rel="stylesheet"
+	href="fontface/ubuntufontface.css">
 <link type="text/css" rel="stylesheet" href="kune-message.css">
 <link type="text/css" rel="stylesheet" href="ws.css">
 <style type="text/css">
@@ -54,9 +65,15 @@ body {
 	margin: 5px;
 	overflow: hidden;
 }
+
+.banner {
+	margin: 30px;
+}
 </style>
 </head>
 <body>
+<!-- Banner for wave errors -->
+<div class="banner" id="banner"></div>
 <!-- Autocomplete user/pass -->
 <form method="post" action="javascript:void(0)" style="display: none">
 <input type="text" id="username" name="username" value="" /> <input

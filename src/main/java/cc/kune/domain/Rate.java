@@ -27,7 +27,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.Range;
 
 import com.google.inject.name.Named;
 import com.wideplay.warp.persist.dao.Finder;

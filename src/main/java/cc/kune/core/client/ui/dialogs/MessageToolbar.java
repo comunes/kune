@@ -22,40 +22,36 @@ package cc.kune.core.client.ui.dialogs;
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.noti.NotifyLevelImages;
 
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.WidgetComponent;
-import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
-import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 
 public class MessageToolbar extends Composite {
     private final Image errorIcon;
     private final Label errorLabel;
     private final NotifyLevelImages images;
-    private final ToolBar toolbar;
+    private final FlowPanel toolbar;
 
     public MessageToolbar(final NotifyLevelImages images, final String errorLabelId) {
         this.images = images;
-        toolbar = new ToolBar();
+        toolbar = new FlowPanel();
         errorLabel = new Label("");
         errorLabel.ensureDebugId(errorLabelId);
         errorIcon = new Image();
         errorIcon.setResource(images.getImage(NotifyLevel.error));
-        toolbar.add(new LabelToolItem());
-        toolbar.add(new LabelToolItem());
-        toolbar.add(new WidgetComponent(errorIcon));
+
+        toolbar.add(errorIcon);
         toolbar.setStyleName("k-error-tb");
-        toolbar.add(new LabelToolItem());
-        toolbar.add(new LabelToolItem());
+
         toolbar.add(errorLabel);
         errorIcon.setVisible(false);
         toolbar.setVisible(false);
         initWidget(toolbar);
     }
 
-    public ToolBar getToolbar() {
+    public FlowPanel getToolbar() {
         return toolbar;
     }
 

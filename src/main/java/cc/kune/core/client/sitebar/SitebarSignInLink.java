@@ -42,7 +42,7 @@ public class SitebarSignInLink extends ButtonDescriptor {
     @Inject
     public SitebarSignInLink(final SitebarSignInAction action, final EventBus eventBus, final Session session) {
         super(action);
-        setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+        // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
         setId(SITE_SIGN_IN);
         setVisible(!session.isLogged());
         setStyles("k-no-backimage, k-btn-sitebar");

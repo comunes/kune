@@ -11,6 +11,7 @@ import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.resources.icons.IconResources;
@@ -71,16 +72,20 @@ public class ChatClientDefault implements ChatClient {
 
     private final Session session;
 
+    private final GlobalShortcutRegister shorcutRegister;
+
     private final SitebarActionsPresenter siteActions;
 
     @Inject
     public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n, final ChatClientAction action,
-            final SitebarActionsPresenter siteActions, final IconResources res, final Session session) {
+            final SitebarActionsPresenter siteActions, final IconResources res, final Session session,
+            final GlobalShortcutRegister shorcutRegister) {
         this.i18n = i18n;
         this.action = action;
         this.siteActions = siteActions;
         this.res = res;
         this.session = session;
+        this.shorcutRegister = shorcutRegister;
         eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
@@ -134,13 +139,14 @@ public class ChatClientDefault implements ChatClient {
         if (chatIcon == null) {
             res.css().ensureInjected();
             chatIcon = new IconLabelDescriptor(action);
-            chatIcon.setParent(SitebarActionsPresenter.LEFT_TOOLBAR);
+            // chatIcon.setParent(SitebarActionsPresenter.LEFT_TOOLBAR);
             chatIcon.putValue(Action.SMALL_ICON, res.chat());
             chatIcon.putValue(Action.NAME, i18n.t("Chat ;)"));
             chatIcon.setId(CHAT_CLIENT_ICON_ID);
             chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
             action.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
             final KeyStroke shortcut = Shortcut.getShortcut(false, true, true, false, Character.valueOf('C'));
+            shorcutRegister.put(shortcut, action);
             action.setShortcut(shortcut);
             chatIcon.setVisible(session.isLogged());
             siteActions.getLeftToolbar().addAction(
