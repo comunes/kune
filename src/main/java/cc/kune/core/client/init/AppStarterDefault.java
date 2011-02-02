@@ -95,7 +95,9 @@ public class AppStarterDefault implements AppStarter {
                     @Override
                     public void execute() {
                         hideInitialPanels();
-                        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, "Success", "App Started.", true));
+                        // eventBus.fireEvent(new
+                        // UserNotifyEvent(NotifyLevel.info, "Success",
+                        // "App Started.", true));
                     }
                 });
             }

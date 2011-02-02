@@ -26,18 +26,19 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.InlineLabel;
 
 public class MessageToolbar extends Composite {
     private final Image errorIcon;
-    private final Label errorLabel;
+    private final InlineLabel errorLabel;
     private final NotifyLevelImages images;
     private final FlowPanel toolbar;
 
     public MessageToolbar(final NotifyLevelImages images, final String errorLabelId) {
         this.images = images;
         toolbar = new FlowPanel();
-        errorLabel = new Label("");
+        errorLabel = new InlineLabel("");
+        errorLabel.setWordWrap(true);
         errorLabel.ensureDebugId(errorLabelId);
         errorIcon = new Image();
         errorIcon.setResource(images.getImage(NotifyLevel.error));

@@ -665,7 +665,6 @@ a:visited {
 	display: inline;
 }
 
-
 .k-message-panel {
 	margin: 5px;
 	display: table-row;
@@ -690,6 +689,17 @@ a:visited {
 }
 
 .k-error-tb {
-  background: #FFB380 none repeat scroll 0% 50%;
-  color: #250;
+	background: #FFB380 none repeat scroll 0% 50%;
+	/* color: #250; */
+	margin: 0 20px 0 10px;
+}
+
+.k-error-tb img {
+	margin: 15px 5px 5px 15px;
+}
+
+.k-error-tb span {
+	position:relative;
+	top: -7px;
+	left: 9px;
 }

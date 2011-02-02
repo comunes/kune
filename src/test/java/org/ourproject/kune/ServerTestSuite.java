@@ -25,8 +25,7 @@ import org.ourproject.kune.platf.server.properties.KunePropertiesTest;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ GroupListTest.class, AccessRightsServiceTest.class, FinderTest.class, KunePropertiesTest.class,
-
-LicenseFinderTest.class, UserFinderTest.class, GroupFinderTest.class, RateFinderTest.class,
+        LicenseFinderTest.class, UserFinderTest.class, GroupFinderTest.class, RateFinderTest.class,
         AuthorizatedMethodInterceptorTest.class, AuthenticatedMethodInterceptorTest.class, MapperTest.class })
 public class ServerTestSuite {
 

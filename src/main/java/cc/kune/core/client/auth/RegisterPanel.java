@@ -62,10 +62,10 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
         return registerForm.getEmail();
     }
 
-    // @Override
-    // public String getLongName() {
-    // return registerForm.getLongName();
-    // }
+    @Override
+    public String getLongName() {
+        return registerForm.getLongName();
+    }
 
     @Override
     public String getRegisterPassword() {
@@ -101,31 +101,6 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     public void show() {
         super.show();
         KuneUiUtils.focusOnField(registerForm.getShortNameField());
-    }
-
-    @Override
-    public void showWelcolmeDialog() {
-        // final InfoDialog welcomeDialog = new InfoDialog(WELCOME_DIALOG,
-        // i18n.t("Welcome"),
-        // i18n.t("Thanks for registering"),
-        // i18n.t("Now you can participate more actively in this site with other people and groups. "
-        // + "You can also use your personal space to publish contents. "
-        // +
-        // "Your email is not verified, please follow the instructions you will receive by email."),
-        // i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 380, 210);
-        // welcomeDialog.show();
-    }
-
-    @Override
-    public void showWelcolmeDialogNoHomepage() {
-        // final InfoDialog welcomeDialog = new InfoDialog(WELCOME_DIALOG,
-        // i18n.t("Welcome"),
-        // i18n.t("Thanks for registering"),
-        // i18n.t("Now you can participate more actively in this site with other people and groups. "
-        // +
-        // "Your email is not verified, please follow the instructions you will receive by email."),
-        // i18n.t("Ok"), WELCOME_OK_BUTTON, true, true, 380, 210);
-        // welcomeDialog.show();
     }
 
     @Override

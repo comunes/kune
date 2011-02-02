@@ -27,6 +27,7 @@ import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.logs.Log;
+import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -133,11 +134,10 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
 
             final boolean wantHomepage = true;
 
-            final String shortName = getView().getShortName();
-            final String password = getView().getRegisterPassword();
-            final UserDTO user = new UserDTO("", shortName, password, getView().getEmail(), language, country,
-                    timezone, null, true, SubscriptionMode.manual, "blue");
-            super.saveAutocompleteLoginData(shortName, password);
+            final UserDTO user = new UserDTO(getView().getLongName(), getView().getShortName(),
+                    getView().getRegisterPassword(), getView().getEmail(), language, country, timezone, null, true,
+                    SubscriptionMode.manual, "blue");
+            super.saveAutocompleteLoginData(getView().getShortName(), getView().getRegisterPassword());
             final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
                 @Override
                 public void onFailure(final Throwable caught) {
@@ -159,10 +159,33 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
                     getView().hide();
                     getView().unMask();
                     if (wantHomepage) {
-                        getView().showWelcolmeDialog();
+                        showWelcolmeDialog();
                     } else {
-                        getView().showWelcolmeDialogNoHomepage();
+                        showWelcolmeDialogNoHomepage();
                     }
+                }
+
+                private void showWelcolmeDialog() {
+                    getEventBus().fireEvent(
+                            new UserNotifyEvent(
+                                    NotifyLevel.info,
+                                    i18n.t("Welcome"),
+                                    i18n.t("Thanks for registering. "
+                                            + "Now you can participate more actively in this site with other people and groups. "
+                                            + "You can also use your personal space to publish contents. "
+                                            + "Your email is not verified, please follow the instructions you will receive by email."),
+                                    true));
+                }
+
+                private void showWelcolmeDialogNoHomepage() {
+                    getEventBus().fireEvent(
+                            new UserNotifyEvent(
+                                    NotifyLevel.info,
+                                    i18n.t("Welcome"),
+                                    i18n.t("Thanks for registering"
+                                            + "Now you can participate more actively in this site with other people and groups. "
+                                            + "Your email is not verified, please follow the instructions you will receive by email."),
+                                    true));
                 }
             };
             userServiceProvider.get().createUser(user, wantHomepage, callback);

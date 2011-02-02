@@ -23,8 +23,7 @@ public interface RegisterView extends SignInAbstractView {
 
     String getEmail();
 
-    //
-    // String getLongName();
+    String getLongName();
 
     String getRegisterPassword();
 
@@ -33,10 +32,6 @@ public interface RegisterView extends SignInAbstractView {
     boolean isRegisterFormValid();
 
     boolean isValid();
-
-    void showWelcolmeDialog();
-
-    void showWelcolmeDialogNoHomepage();
 
     void validate();
 

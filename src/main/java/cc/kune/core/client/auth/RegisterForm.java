@@ -33,7 +33,7 @@ public class RegisterForm extends DefaultForm {
     public static final String COUNTRY_FIELD = "k-urf-country-f";
     public static final String EMAIL_FIELD = "k-urf-email-f";
     public static final String LANG_FIELD = "k-urf-lang-f";
-    // public static final String LONGNAME_FIELD = "k-urf-long_name-f";
+    public static final String LONGNAME_FIELD = "k-urf-long_name-f";
     public static final String NICK_FIELD = "k-urf-nick-f";
     public static final String NOPERSONALHOMEPAGE_ID = "k-urf-nphp-id";
     public static final String PASSWORD_FIELD = "k-urf-password-f";
@@ -43,7 +43,7 @@ public class RegisterForm extends DefaultForm {
     public static final String WANTHOMEPAGE_FIELD = "k-urf-wphp-f";
 
     private final TextField<String> emailRegField;
-    // private final TextField<String> longNameRegField;
+    private final TextField<String> longNameRegField;
     private final TextField<String> passwdRegField;
     private final TextField<String> shortNameRegField;
 
@@ -65,17 +65,17 @@ public class RegisterForm extends DefaultForm {
         shortNameRegField.setValidationDelay(1000);
         add(shortNameRegField);
 
-        // longNameRegField = new TextField<String>();
-        // longNameRegField.setTabIndex(2);
-        // longNameRegField.setFieldLabel(i18n.t("Full Name"));
-        // longNameRegField.setName(LONGNAME_FIELD);
-        // longNameRegField.setWidth(DEF_FIELD_WIDTH);
-        // longNameRegField.setAllowBlank(false);
-        // longNameRegField.setMinLength(3);
-        // longNameRegField.setMaxLength(50);
-        // // longNameRegField.setValidationEvent(false);
-        // longNameRegField.setId(LONGNAME_FIELD);
-        // add(longNameRegField);
+        longNameRegField = new TextField<String>();
+        longNameRegField.setTabIndex(2);
+        longNameRegField.setFieldLabel(i18n.t("Full Name"));
+        longNameRegField.setName(LONGNAME_FIELD);
+        longNameRegField.setWidth(DEF_FIELD_WIDTH);
+        longNameRegField.setAllowBlank(false);
+        longNameRegField.setMinLength(3);
+        longNameRegField.setMaxLength(50);
+        // longNameRegField.setValidationEvent(false);
+        longNameRegField.setId(LONGNAME_FIELD);
+        add(longNameRegField);
 
         passwdRegField = new TextField<String>();
         passwdRegField.setTabIndex(3);
@@ -83,7 +83,10 @@ public class RegisterForm extends DefaultForm {
         passwdRegField.setName(PASSWORD_FIELD);
         passwdRegField.setPassword(true);
         passwdRegField.setAllowBlank(false);
+        passwdRegField.setMinLength(6);
         passwdRegField.setMaxLength(40);
+        passwdRegField.getMessages().setMinLengthText(i18n.t(CoreMessages.PASSWD_MUST_BE_BETWEEN_6_AND_40));
+        passwdRegField.getMessages().setMaxLengthText(i18n.t(CoreMessages.PASSWD_MUST_BE_BETWEEN_6_AND_40));
         passwdRegField.setWidth(DEF_MEDIUM_FIELD_WIDTH);
         passwdRegField.setValidationDelay(1000);
         passwdRegField.setId(PASSWORD_FIELD);
@@ -107,9 +110,9 @@ public class RegisterForm extends DefaultForm {
         return emailRegField.getValue();
     }
 
-    // public String getLongName() {
-    // return longNameRegField.getValue();
-    // }
+    public String getLongName() {
+        return longNameRegField.getValue();
+    }
 
     public String getRegisterPassword() {
         return passwdRegField.getValue();

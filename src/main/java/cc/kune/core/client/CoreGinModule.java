@@ -49,8 +49,6 @@ import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateManagerDefault;
 import cc.kune.core.client.ui.QTipsHelper;
-import cc.kune.core.client.ui.dialogs.MessagePanel;
-import cc.kune.core.client.ui.dialogs.MessagePanelView;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -114,7 +112,7 @@ public class CoreGinModule extends AbstractPresenterModule {
 
         bind(UserMessagesPresenter.class).in(Singleton.class);
         bind(UserMessagesPanel.class).in(Singleton.class);
-        bind(MessagePanelView.class).to(MessagePanel.class);
+        // bind(MessagePanelView.class).to(MessagePanel.class);
 
         bind(WsArmorImpl.class).in(Singleton.class);
         bind(WsArmor.class).to(WsArmorImpl.class).in(Singleton.class);

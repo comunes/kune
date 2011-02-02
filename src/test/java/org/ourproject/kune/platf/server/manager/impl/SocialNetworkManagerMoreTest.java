@@ -74,7 +74,7 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
         final SocialNetworkRequestResult result = socialNetworkManager.requestToJoin(user, group);
         assertEquals(result, SocialNetworkRequestResult.denied);
-        closeTransaction();
+        rollbackTransaction();
     }
 
     @Test
@@ -84,7 +84,7 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
         final SocialNetworkRequestResult result = socialNetworkManager.requestToJoin(user, group);
         assertEquals(result, SocialNetworkRequestResult.moderated);
         assertTrue(group.getSocialNetwork().getPendingCollaborators().getList().contains(userGroup));
-        closeTransaction();
+        rollbackTransaction();
     }
 
     @Test
@@ -95,7 +95,7 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
         assertEquals(result, SocialNetworkRequestResult.accepted);
         assertTrue(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
-        closeTransaction();
+        rollbackTransaction();
     }
 
     @Test
@@ -108,7 +108,7 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
         assertEquals(orphanedGroup.getSocialNetwork().getAccessLists().getAdmins().getMode(), GroupListMode.NORMAL);
 
         // FIXME Check change group type to PROJECT
-        closeTransaction();
+        rollbackTransaction();
     }
 
     @Test(expected = AlreadyGroupMemberException.class)
@@ -127,7 +127,7 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
         socialNetworkManager.requestToJoin(user, group);
         socialNetworkManager.requestToJoin(user, group);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 1);
-        closeTransaction();
+        rollbackTransaction();
     }
 
     @Test(expected = Exception.class)
@@ -153,7 +153,7 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 1);
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
-        closeTransaction();
+        rollbackTransaction();
     }
 
     @Test(expected = AccessViolationException.class)
@@ -186,7 +186,7 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 0);
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NOBODY);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
-        closeTransaction();
+        rollbackTransaction();
     }
 
     @Test(expected = AccessViolationException.class)

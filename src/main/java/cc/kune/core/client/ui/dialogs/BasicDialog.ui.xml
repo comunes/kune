@@ -8,7 +8,7 @@
         spacing="10">
         <k:IconLabel ui:field="title" addStyleNames="k-dialog-title" />
           <g:VerticalPanel ui:field="vp" />
-        <g:VerticalPanel ui:field="bottomPanel"></g:VerticalPanel>
+        <g:VerticalPanel ui:field="bottomPanel" width="100%"></g:VerticalPanel>
       </g:VerticalPanel>
     </g:SimplePanel>
     <g:FlowPanel ui:field="btnPanel" addStyleNames="k-dialog-btn-area">

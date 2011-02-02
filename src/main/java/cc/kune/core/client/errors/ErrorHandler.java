@@ -119,7 +119,8 @@ public class ErrorHandler {
             eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("This user is already a group member")));
         } else {
             logException(caught, true);
-            eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("Error performing operation")));
+            eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
+                    i18n.t("Oops! Something has gone wrong with our servers. Retry later, please.")));
             GWT.log("Other kind of exception in StateManagerDefault/processErrorException", caught);
         }
     }

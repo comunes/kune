@@ -27,7 +27,6 @@ import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.google.gwt.user.client.Window;
 
 public class SignInForm extends DefaultForm {
     public static final String NICKOREMAIL_FIELD = "kune-sif-nkf";
@@ -62,7 +61,7 @@ public class SignInForm extends DefaultForm {
             @Override
             public void handleEvent(final FieldEvent fe) {
                 if (fe.getEvent().getKeyCode() == 13) {
-                    Window.alert("SignInForm");
+                    // Window.alert("SignInForm");
                     // presenter.onFormSignIn();
                 }
             }

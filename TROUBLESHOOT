@@ -40,7 +40,9 @@ Caused by: org.hibernate.search.SearchException: Unable to open IndexWriter for 
 (...)
 Caused by: org.apache.lucene.index.CorruptIndexException: Unknown format version: -7
 
-The indexes in /var/lib/kune/lucen/kune*/indexes/ are not compatible. For the moment the only workaround we now it's to delete the indexes.
+The indexes in /var/lib/kune/lucene/kune*/indexes/ are not compatible. For the moment the only workaround we now it's to delete the indexes.
+
+Sometimes the tests also fails without any error (use the same workaround).
 
 == JUnit ==
 

@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
 
 public class MessagePanel extends Composite implements MessagePanelView {
 
@@ -32,6 +33,7 @@ public class MessagePanel extends Composite implements MessagePanelView {
     @UiField
     Label title;
 
+    @Inject
     public MessagePanel(final NotifyLevelImages images, final String errorLabelId) {
         this.images = images;
         initWidget(uiBinder.createAndBindUi(this));

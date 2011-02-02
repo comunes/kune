@@ -12,10 +12,10 @@ import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.Transactional;
 
 public abstract class PersistenceTest {
-    @Inject
-    Provider<EntityManager> provider;
     private final String persistenceUnit;
     private final String propetiesFileName;
+    @Inject
+    Provider<EntityManager> provider;
 
     public PersistenceTest() {
         // test: use memory
@@ -30,6 +30,10 @@ public abstract class PersistenceTest {
 
     public void closeTransaction() {
         getManager().getTransaction().commit();
+    }
+
+    protected EntityManager getManager() {
+        return provider.get();
     }
 
     public EntityTransaction getTransaction() {
@@ -61,10 +65,6 @@ public abstract class PersistenceTest {
 
     public void rollbackTransaction() {
         getManager().getTransaction().rollback();
-    }
-
-    protected EntityManager getManager() {
-        return provider.get();
     }
 
 }
