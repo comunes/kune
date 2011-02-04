@@ -1,4 +1,4 @@
-package org.ourproject.kune;
+package testsuites;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -27,6 +27,6 @@ import org.ourproject.kune.platf.server.properties.KunePropertiesTest;
 @SuiteClasses({ GroupListTest.class, AccessRightsServiceTest.class, FinderTest.class, KunePropertiesTest.class,
         LicenseFinderTest.class, UserFinderTest.class, GroupFinderTest.class, RateFinderTest.class,
         AuthorizatedMethodInterceptorTest.class, AuthenticatedMethodInterceptorTest.class, MapperTest.class })
-public class ServerTestSuite {
+public class ServerOtherTestSuite {
 
 }

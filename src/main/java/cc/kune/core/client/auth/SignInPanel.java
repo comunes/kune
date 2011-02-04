@@ -20,6 +20,7 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.KuneUiUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -42,8 +43,8 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     private final SignInForm signInForm;
 
     @Inject
-    public SignInPanel(final I18nTranslationService i18n, final NotifyLevelImages images) {
-        super(SIGNIN_DIALOG, i18n, i18n.t(CoreMessages.SIGN_IN_TITLE), true, true, true, 360, 430, "",
+    public SignInPanel(final I18nTranslationService i18n, final MaskWidgetView mask, final NotifyLevelImages images) {
+        super(SIGNIN_DIALOG, mask, i18n, i18n.t(CoreMessages.SIGN_IN_TITLE), true, true, true, 360, 430, "",
                 i18n.t(CoreMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
                 CANCEL_BUTTON_ID, images, ERROR_MSG, 102);
 
@@ -62,10 +63,8 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
     private VerticalPanel createNoAccountRegister() {
         final VerticalPanel noAccRegisterPanel = new VerticalPanel();
-        // noAccRegisterPanel.setBorder(false);
-        // noAccRegisterPanel.setMargins(0, 20, 0, 0);
         final HorizontalPanel hpanel = new HorizontalPanel();
-        final Label dontHaveAccount = new Label(i18n.t("Don't you have an account?"));
+        final Label dontHaveAccount = new Label(i18n.t("Don't have an account?"));
         registerLabel = new Label(i18n.t("Create one."));
         registerLabel.ensureDebugId(CREATE_ONE);
         registerLabel.addStyleName("kune-Margin-Medium-l");

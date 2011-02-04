@@ -20,7 +20,8 @@ public abstract class PersistenceTest {
     public PersistenceTest() {
         // test: use memory
         // test_db: use mysql
-        this("test", "kune.properties");
+        // Also configurable ein TestHelper
+        this("test_db", "kune.properties");
     }
 
     public PersistenceTest(final String persistenceUnit, final String propetiesFileName) {

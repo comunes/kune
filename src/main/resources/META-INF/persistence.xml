@@ -8,26 +8,30 @@
     transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="hibernate.archive.autodetection"
-        value="class, hbm" />
+      <property name="hibernate.archive.autodetection" value="class, hbm" />
       <property name="hibernate.show_sql" value="false" />
       <property name="hibernate.format_sql" value="false" />
       <property name="use_sql_comments" value="true" />
-      <property name="hibernate.dialect"
-        value="org.hibernate.dialect.MySQLInnoDBDialect" />
-      <property name="hibernate.connection.driver_class"
-        value="com.mysql.jdbc.Driver" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
       <property name="hibernate.connection.url"
         value="jdbc:mysql://localhost/kune_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
       <property name="hibernate.connection.username" value="kune" />
       <property name="hibernate.connection.password" value="db4kune" />
+
+      <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production 
+        (NO!, une liquibase, for instance) -->
+      <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
       <property name="hibernate.hbm2ddl.auto" value="update" />
       <!-- https://www.hibernate.org/214.html -->
+      <property name="hibernate.connection.provider_class"
+        value="org.hibernate.connection.C3P0ConnectionProvider" />
       <property name="hibernate.c3p0.min_size" value="5" />
       <property name="hibernate.c3p0.max_size" value="50" />
       <property name="hibernate.c3p0.timeout" value="100" />
       <property name="hibernate.c3p0.max_statements" value="0" />
       <property name="hibernate.c3p0.idle_test_period" value="3000" />
+      <property name="c3p0.preferredTestQuery" value="SELECT 1" />
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider" />
       <property name="hibernate.search.default.indexBase"
@@ -38,25 +42,26 @@
   <persistence-unit name="test_db" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="hibernate.archive.autodetection"
-        value="class, hbm" />
+      <property name="hibernate.archive.autodetection" value="class, hbm" />
       <property name="hibernate.show_sql" value="false" />
       <property name="hibernate.format_sql" value="false" />
       <property name="use_sql_comments" value="false" />
-      <property name="hibernate.dialect"
-        value="org.hibernate.dialect.MySQLInnoDBDialect" />
-      <property name="hibernate.connection.driver_class"
-        value="com.mysql.jdbc.Driver" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
       <property name="hibernate.connection.url"
         value="jdbc:mysql://localhost/kune_test?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
       <property name="hibernate.connection.username" value="kune" />
       <property name="hibernate.connection.password" value="db4kune" />
-      <property name="hibernate.hbm2ddl.auto" value="create" />
+      <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+      <!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+      <property name="hibernate.connection.provider_class"
+        value="org.hibernate.connection.C3P0ConnectionProvider" />
       <property name="hibernate.c3p0.min_size" value="5" />
       <property name="hibernate.c3p0.max_size" value="50" />
       <property name="hibernate.c3p0.timeout" value="100" />
       <property name="hibernate.c3p0.max_statements" value="0" />
       <property name="hibernate.c3p0.idle_test_period" value="3000" />
+      <property name="c3p0.preferredTestQuery" value="SELECT 1" />
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider" />
       <property name="hibernate.search.default.indexBase"
@@ -70,15 +75,12 @@
       <property name="hibernate.show_sql" value="false" />
       <property name="hibernate.format_sql" value="false" />
       <property name="use_sql_comments" value="false" />
-      <property name="hibernate.dialect"
-        value="org.hibernate.dialect.H2Dialect" />
-      <property name="hibernate.hbm2ddl.auto" value="create" />
-      <property name="hibernate.connection.driver_class"
-        value="org.h2.Driver" />
+      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+      <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+      <property name="hibernate.connection.driver_class" value="org.h2.Driver" />
       <property name="hibernate.connection.username" value="sa" />
       <property name="hibernate.connection.password" value="" />
-      <property name="hibernate.connection.url"
-        value="jdbc:h2:mem:testdb" />
+      <property name="hibernate.connection.url" value="jdbc:h2:mem:testdb" />
       <property name="hibernate.search.default.directory_provider"
         value="org.hibernate.search.store.FSDirectoryProvider" />
       <property name="hibernate.search.default.indexBase"

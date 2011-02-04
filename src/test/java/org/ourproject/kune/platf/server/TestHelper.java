@@ -17,6 +17,7 @@ import com.wideplay.warp.jpa.JpaUnit;
 public abstract class TestHelper {
     public static Injector create(final Module module, final String persistenceUnit, final String propetiesFileName) {
         final Injector injector = Guice.createInjector(module, new Module() {
+            @Override
             public void configure(final Binder binder) {
                 binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
                 binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
@@ -31,7 +32,8 @@ public abstract class TestHelper {
     public static void inject(final Object target) {
         // test: use memory
         // test_db: use mysql
-        TestHelper.create(new PlatformServerModule(), "test", "kune.properties").injectMembers(target);
+        // Also configurable ein PersistenceTest
+        TestHelper.create(new PlatformServerModule(), "test_db", "kune.properties").injectMembers(target);
     }
 
 }

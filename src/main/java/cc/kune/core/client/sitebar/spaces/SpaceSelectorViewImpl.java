@@ -35,9 +35,9 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
     public SpaceSelectorViewImpl(final WsArmor armor, final I18nTranslationService i18n) {
         armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
         homeButton.setTitle(i18n.t("Home page of this site"));
-        userButton.setTitle(i18n.t("User space: Waves (aka docs) in which you participate"));
-        groupButton.setTitle(i18n.t("Group and personal space: Where you can create and publish contents"));
-        publicButton.setTitle(i18n.t("Public space: This is how the rest of public see your published works"));
+        userButton.setTitle(i18n.t("User space: Waves (docs) in which you participate"));
+        groupButton.setTitle(i18n.t("Group and personal space: Where you can create and publish contents for your personal or group spaces"));
+        publicButton.setTitle(i18n.t("Public space: This is only a preview of how this page looks like to the general public on the web, outside this site"));
     }
 
     @Override

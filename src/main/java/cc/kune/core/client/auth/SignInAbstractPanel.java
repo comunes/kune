@@ -21,11 +21,11 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.ui.dialogs.BasicTopDialog;
 import cc.kune.core.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
@@ -39,11 +39,12 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     private final String errorLabelId;
     protected final I18nTranslationService i18n;
     private final NotifyLevelImages images;
+    private final MaskWidgetView mask;
     private MessageToolbar messageErrorBar;
 
-    public SignInAbstractPanel(final String dialogId, final I18nTranslationService i18n, final String title,
-            final boolean autohide, final boolean modal, final boolean autoscroll, final int width, final int heigth,
-            final String icon, final String firstButtonTitle, final String firstButtonId,
+    public SignInAbstractPanel(final String dialogId, final MaskWidgetView mask, final I18nTranslationService i18n,
+            final String title, final boolean autohide, final boolean modal, final boolean autoscroll, final int width,
+            final int heigth, final String icon, final String firstButtonTitle, final String firstButtonId,
             final String cancelButtonTitle, final String cancelButtonId, final NotifyLevelImages images,
             final String errorLabelId, final int tabIndexStart) {
         dialog = new BasicTopDialog(dialogId, title, autohide, modal, autoscroll, width, heigth, icon,
@@ -51,6 +52,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
         this.i18n = i18n;
         this.images = images;
         this.errorLabelId = errorLabelId;
+        this.mask = mask;
     }
 
     @Override
@@ -94,13 +96,11 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     }
 
     public void mask(final String message) {
-        GWT.log("Mask not implemented");
-
+        mask.mask(dialog);
     }
 
     public void maskProcessing() {
-        GWT.log("Mask not implemented");
-        // mask(i18n.t("Processing"));
+        mask.mask(dialog, i18n.t("Processing"));
     }
 
     public void setErrorMessage(final String message, final NotifyLevel level) {
@@ -113,6 +113,6 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     }
 
     public void unMask() {
-        GWT.log("Unask not implemented");
+        mask.unMask();
     }
 }

@@ -20,6 +20,7 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.KuneUiUtils;
@@ -44,8 +45,9 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     private final RegisterForm registerForm;
 
     @Inject
-    public RegisterPanel(final I18nTranslationService i18n, final Session session, final NotifyLevelImages images) {
-        super(REGISTER_DIALOG, i18n, i18n.t(CoreMessages.REGISTER_TITLE), true, true, true, 400, 420, "",
+    public RegisterPanel(final I18nTranslationService i18n, final Session session, final MaskWidgetView mask,
+            final NotifyLevelImages images) {
+        super(REGISTER_DIALOG, mask, i18n, i18n.t(CoreMessages.REGISTER_TITLE), true, true, true, 400, 420, "",
                 i18n.t(CoreMessages.REGISTER_TITLE), REGISTER_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
                 CANCEL_BUTTON_ID, images, ERRMSG, 5);
         final VerticalPanel panel = new VerticalPanel();

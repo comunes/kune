@@ -35,7 +35,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 
 public class AppStarterDefault implements AppStarter {
@@ -62,7 +61,8 @@ public class AppStarterDefault implements AppStarter {
     private void getInitData() {
         siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
             private void hideInitialPanels() {
-                final RootPanel curtain = RootPanel.get("kuneinitialcurtain");
+                // final RootPanel curtain =
+                // RootPanel.get("kuneinitialcurtain");
                 // Fade anim = new Fade(curtain.getElement());
                 // anim.setDuration(3);
                 // anim.addEffectCompletedHandler(new EffectCompletedHandler() {

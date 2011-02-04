@@ -9,10 +9,10 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class IconLabel extends Composite implements HasWidgets, HasDirectionalText {
@@ -25,7 +25,9 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     @UiField
     HorizontalPanel hp;
     @UiField
-    HTML label;
+    InlineLabel icon;
+    @UiField
+    InlineLabel label;
     @UiField
     FocusPanel self;
 
@@ -45,7 +47,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
     @Override
     public void addStyleName(final String style) {
-        label.addStyleName(style);
+        hp.addStyleName(style);
     }
 
     public void addTextStyleName(final String style) {
@@ -82,12 +84,12 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     }
 
     public void setIcon(final String imgCss) {
-        label.addStyleName(imgCss);
-        label.addStyleName("oc-ico-pad");
+        icon.setStyleName(imgCss);
+        icon.addStyleName("oc-ico-pad");
     }
 
-    public void setLabelHtml(final String html) {
-        label.setHTML(html);
+    public void setLabelText(final String text) {
+        label.setText(text);
     }
 
     @Override

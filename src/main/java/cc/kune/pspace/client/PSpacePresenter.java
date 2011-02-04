@@ -79,7 +79,7 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
     private void setContentPublic() {
         getView().getTitle().setText(i18n.t("Preview"));
         getView().getDescription().setText(
-                i18n.t("This is only a preview of how this page looks like to the general public."));
+                i18n.t("This is only a preview of how this page looks like to the general public on the web, outside this site."));
     }
 
     public void setState(final StateAbstractDTO state) {

@@ -1,4 +1,4 @@
-package org.ourproject.kune;
+package org;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

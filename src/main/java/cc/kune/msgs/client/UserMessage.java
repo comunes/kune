@@ -11,6 +11,9 @@ import cc.kune.msgs.client.resources.UserMessageImages;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.safehtml.client.SafeHtmlTemplates;
+import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SimpleHtmlSanitizer;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -26,8 +29,20 @@ public class UserMessage extends Composite implements HasText {
 
     interface MessageUiBinder extends UiBinder<Widget, UserMessage> {
     }
+    public interface MsgTemplate extends SafeHtmlTemplates {
+        @Template("<span>{0}</span>")
+        SafeHtml format(SafeHtml message);
+    }
+    public interface MsgWithTitleTemplate extends SafeHtmlTemplates {
+        @Template("<span><b>{0}</b><br/><p>{1}</p></span>")
+        SafeHtml format(SafeHtml title, SafeHtml message);
+    }
     private static String closeTitle = "Close";
+
     private static int fadeMills = 5000;
+
+    private static final MsgTemplate MSG_NO_TITLE = GWT.create(MsgTemplate.class);
+    private static final MsgWithTitleTemplate MSG_WITH_TITLE = GWT.create(MsgWithTitleTemplate.class);
 
     private static MessageUiBinder uiBinder = GWT.create(MessageUiBinder.class);
 
@@ -38,6 +53,7 @@ public class UserMessage extends Composite implements HasText {
     public static void setFadeMills(final int mills) {
         fadeMills = mills;
     }
+
     @UiField
     PushButton close;
 
@@ -56,7 +72,12 @@ public class UserMessage extends Composite implements HasText {
         if (TextUtils.notEmpty(id)) {
             super.ensureDebugId(id);
         }
-        label.setHTML((title != null && title.length() > 0 ? "<b>" + title + "</b><br/>" : "") + message);
+        if (TextUtils.notEmpty(title)) {
+            label.setHTML(MSG_WITH_TITLE.format(SimpleHtmlSanitizer.sanitizeHtml(title),
+                    SimpleHtmlSanitizer.sanitizeHtml(message)));
+        } else {
+            label.setHTML(MSG_NO_TITLE.format(SimpleHtmlSanitizer.sanitizeHtml(message)));
+        }
         close.setVisible(closeable);
         close.setTitle(closeTitle);
         if (!closeable) {

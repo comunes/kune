@@ -8,14 +8,14 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 
-public class UserMessage extends Composite {
+public class SimpleUserMessage extends Composite {
     private static final int SHOWTIME = 3500;
     private final RoundedPanel rp;
     private final Label msg;
     private PopupPanel popupPalette;
     private final Timer timer;
 
-    public UserMessage() {
+    public SimpleUserMessage() {
         msg = new Label();
         msg.addStyleName("oc-user-msg");
         rp = new RoundedPanel(msg, RoundedPanel.ALL, 2);

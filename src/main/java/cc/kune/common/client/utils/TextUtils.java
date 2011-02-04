@@ -21,6 +21,8 @@ package cc.kune.common.client.utils;
 
 import java.util.ArrayList;
 
+import com.google.gwt.safehtml.shared.SimpleHtmlSanitizer;
+
 public class TextUtils {
 
     // Original regexp from http://www.regular-expressions.info/email.html
@@ -41,9 +43,13 @@ public class TextUtils {
                 : text;
     }
 
-    /*
+    /**
      * This method escape only some dangerous html chars
+     * 
+     * Try to use {@link SimpleHtmlSanitizer} better
+     * 
      */
+    @Deprecated
     public static String escapeHtmlLight(final String source) {
         String result = source;
         if (source != null) {
@@ -56,6 +62,12 @@ public class TextUtils {
         return result;
     }
 
+    /**
+     * FIXME: Is this safe? Try to use {@link SimpleHtmlSanitizer} also in the
+     * method
+     * 
+     */
+    @Deprecated
     public static String generateHtmlLink(final String href, final String text) {
         return "<a href=\"" + href + "\" target=\"_blank\">" + text + "</a>";
     }

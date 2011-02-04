@@ -131,7 +131,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
             if (key == null) {
                 iconLabel.setText(text);
             } else {
-                iconLabel.setLabelHtml(text + createShortCut(key, "oc-mshortcut-hidden")
+                iconLabel.setLabelText(text + createShortCut(key, "oc-mshortcut-hidden")
                         + createShortCut(key, "oc-mshortcut"));
             }
         }

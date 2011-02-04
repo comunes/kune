@@ -255,6 +255,9 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO registration/general mask
+** TODO sigin forms to uibinder (intro sing-in) 
+** TODO Use google-guice guicepersist (in 3.0) instead of warp-persist
 ** TODO See GWT+RPC with Guice:
 http://stuffthathappens.com/blog/2009/09/14/guice-with-gwt/
 http://pavelgj.blogspot.com/2008/02/gwt-remoteserviceservlet-guice.html
@@ -267,7 +270,6 @@ https://code.google.com/p/peaberry/
 ** Use hibernate cache
    http://ehcache.sourceforge.net/documentation/openjpa_provider.html
    http://ehcache.sourceforge.net/documentation/hibernate.html
-
 ** TODO <v> Images zoom-in/out with style="cursor: url(somezoomcursor.cur);"
 http://www.w3.org/TR/SVG/interact.html#Cursors
 http://www.w3.org/TR/CSS2/ui.html

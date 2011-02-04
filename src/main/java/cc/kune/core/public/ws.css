@@ -373,12 +373,15 @@ a:visited {
 	font: 18px/27px 'Ubuntu', arial;
 }
 
-.k-btn-sitebar button {
+.k-btn-sitebar, .k-btn-sitebar button {
 	font: 13px 'Ubuntu', arial;
 	color: #B3B3B3;
 	cursor: pointer;
 	text-decoration: underline;
 	white-space: nowrap;
+}
+
+.k-btn-sitebar button {
 	margin-top: -5px;
 }
 
@@ -699,7 +702,15 @@ a:visited {
 }
 
 .k-error-tb span {
-	position:relative;
+	position: relative;
 	top: -7px;
 	left: 9px;
+}
+
+.k-mask {
+	background-color: #F2F2F2 !important;
+	/* kfilter: alpha(opacity = 78) !important; */
+	-moz-opacity: 0.78 !important;
+	-khtml-opacity: 0.78 !important;
+	opacity: 0.78 !important;
 }

@@ -64,7 +64,7 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
     public PersistencePreLoadedDataTest() {
         // test: use memory
         // test_db: use mysql
-        super("test", "kune.properties");
+        // super("test_db", "kune.properties");
     }
 
     @After

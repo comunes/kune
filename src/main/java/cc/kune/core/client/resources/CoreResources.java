@@ -273,6 +273,12 @@ public interface CoreResources extends ClientBundle {
     @Source("fullscreen.png")
     ImageResource fullscreen();
 
+    @Source("loading_gadget.gif")
+    ImageResource gadgetLoading();
+
+    @Source("loading_gadget_small.gif")
+    ImageResource gadgetLoadingSmall();
+
     @Source("gnu-fdl.gif")
     ImageResource gnuFdl();
 
@@ -293,6 +299,9 @@ public interface CoreResources extends ClientBundle {
 
     @Source("info-light.png")
     ImageResource infoLight();
+
+    @Source("kune-anim.gif")
+    ImageResource kuneAnim();
 
     @Source("kune-close.png")
     ImageResource kuneClose();

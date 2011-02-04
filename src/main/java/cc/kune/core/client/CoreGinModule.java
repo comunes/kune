@@ -6,6 +6,8 @@ import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.core.client.auth.RegisterPresenter;
@@ -83,11 +85,6 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(I18nUITranslationService.class).in(Singleton.class);
         bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
 
-        bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
-        bind(GxtGuiProvider.class).in(Singleton.class);
-        bind(GwtGuiProvider.class).in(Singleton.class);
-        bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
-
         // Presenters
         bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
                 CorePresenter.CoreProxy.class);
@@ -114,11 +111,17 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(UserMessagesPanel.class).in(Singleton.class);
         // bind(MessagePanelView.class).to(MessagePanel.class);
 
+        // UI
         bind(WsArmorImpl.class).in(Singleton.class);
         bind(WsArmor.class).to(WsArmorImpl.class).in(Singleton.class);
-        bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
-        bind(Session.class).to(SessionDefault.class).in(Singleton.class);
+        bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
+        bind(GxtGuiProvider.class).in(Singleton.class);
+        bind(GwtGuiProvider.class).in(Singleton.class);
+        bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+        bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
 
+        // Core App
+        bind(Session.class).to(SessionDefault.class).in(Singleton.class);
         bind(ErrorHandler.class).in(Singleton.class);
         bind(StateManagerDefault.class).in(Singleton.class);
         bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
@@ -126,6 +129,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
         bind(PrefetchUtilities.class).in(Singleton.class);
         bind(AppStarter.class).to(AppStarterDefault.class).in(Singleton.class);
+        bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
 
         bind(SitebarNewGroupLink.class).in(Singleton.class);
         bind(SitebarSignInLink.class).in(Singleton.class);

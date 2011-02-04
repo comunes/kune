@@ -170,10 +170,10 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
                             new UserNotifyEvent(
                                     NotifyLevel.info,
                                     i18n.t("Welcome"),
-                                    i18n.t("Thanks for registering. "
-                                            + "Now you can participate more actively in this site with other people and groups. "
+                                    i18n.t("Thanks for joining this site. "
+                                            + "Now you can actively participate in this site. "
                                             + "You can also use your personal space to publish contents. "
-                                            + "Your email is not verified, please follow the instructions you will receive by email."),
+                                            + "Note: your email is not verified, please follow the instructions you will receive by email."),
                                     true));
                 }
 
@@ -182,9 +182,9 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
                             new UserNotifyEvent(
                                     NotifyLevel.info,
                                     i18n.t("Welcome"),
-                                    i18n.t("Thanks for registering"
-                                            + "Now you can participate more actively in this site with other people and groups. "
-                                            + "Your email is not verified, please follow the instructions you will receive by email."),
+                                    i18n.t("Thanks for joining this site"
+                                            + "Now you can actively participate in this site. "
+                                            + "Note: your email is not verified, please follow the instructions you will receive by email."),
                                     true));
                 }
             };

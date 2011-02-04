@@ -17,7 +17,7 @@ import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
-import cc.kune.common.client.notify.UserMessage;
+import cc.kune.common.client.notify.SimpleUserMessage;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.IconLabel;
 
@@ -26,7 +26,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class SampleEntrypoint implements EntryPoint {
+public class SampleEntryPoint implements EntryPoint {
     public interface ISampleView {
         void addAll(GuiActionDescCollection actions);
     }
@@ -47,7 +47,7 @@ public class SampleEntrypoint implements EntryPoint {
             userMsg.show(message);
         }
     }
-    UserMessage userMsg = new UserMessage();
+    SimpleUserMessage userMsg = new SimpleUserMessage();
 
     @Override
     public void onModuleLoad() {

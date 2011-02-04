@@ -18,7 +18,8 @@
   <g:FocusPanel ui:field="self">
     <g:HorizontalPanel styleName="{style.pad}"
       ui:field="hp">
-      <g:HTML ui:field="label" styleName="{style.label}" />
+    	<g:InlineLabel ui:field="icon"/>
+    	<g:InlineLabel ui:field="label" styleName="{style.label}" />
     </g:HorizontalPanel>
   </g:FocusPanel>
 </ui:UiBinder>
