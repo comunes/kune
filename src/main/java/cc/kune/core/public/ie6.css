@@ -1,0 +1,41 @@
+.nogwt-TabLayoutPanelTab .title {
+	float: left;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	width: 75px;
+	height: 1em;
+	margin-right: 5px;
+}
+
+.nogwt-TabLayoutPanelTab {
+	width: 140px;
+}
+
+.hablar-Emoticon {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	padding: 0 !important;
+}
+
+.hablar-Emoticon span {
+	display: none;
+}
+
+.hablar-Header.unattended.blinkOn {
+    background-color: highlight;
+}
+
+.hablar-SelectionList {
+	zoom: 1;
+}
+/*
+.chatMessage .author {
+	margin-right: 0.5em;
+}
+
+.chatMessage .metadata {
+	margin-right: 0.5em;
+}
+*/
