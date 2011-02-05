@@ -307,6 +307,11 @@
     </dependency>
     <dependency>
       <groupId>com.calclab.emite</groupId>
+      <artifactId>emite-proxy</artifactId>
+      <version>0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.calclab.emite</groupId>
       <artifactId>hablar</artifactId>
       <version>r1694</version>
     </dependency>

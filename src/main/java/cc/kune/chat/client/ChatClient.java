@@ -6,13 +6,7 @@ public interface ChatClient {
 
     void addNewBuddie(String shortName);
 
-    //
-    // void addOnRosterChanged(Listener0 slot);
-
     void chat(XmppURI jid);
-
-    //
-    // ChatConnectionOptions getChatOptions();
 
     boolean isBuddie(String localUserName);
 
@@ -24,14 +18,12 @@ public interface ChatClient {
 
     void joinRoom(String roomName, String subject, String userAlias);
 
-    void login(String jid, String passwd);
+    void login(XmppURI uri, String passwd);
 
     void logout();
 
     void setAvatar(String photoBinary);
 
     void show();
-
-    void stop();
 
 }

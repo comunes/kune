@@ -5,21 +5,24 @@
 <title>Kune</title>
 <script type="text/javascript" language="javascript"
 	src="/ws/ws.nocache.js"></script>
-<meta name="emite.httpBase" content="/http-bind" />
+<meta name="emite.httpBase" content="/http-bind/" />
 <meta name="emite.host" content="localhost" />
 <meta name="emite.searchHost" content="search.localhost" />
 <meta name="emite.session" content="login" />
-<meta name="emite.user" content="admin@localhost" />
-<meta name="emite.password" content="easyeasy" />
 <meta name="hablar.roomService" content="rooms.localhost" />
 <meta name="hablar.login" content="false" />
+<meta name="hablar.hasVCard" content="false" />
+<meta name="hablar.search" content="false" />
+<meta name="hablar.hasCopyToClipboard" content="false" />
+<meta name="hablar.hasLogger" content="true" />
+<meta name="hablar.hasSignals" content="false" />
 <meta name="hablar.roster" content="true" />
 <meta name="hablar.dockRoster" content="left" />
 <meta name="hablar.icons" content="alt" />
 <meta name="hablar.layout" content="tabs" />
 <meta name="hablar.inline" content="vertical_dock_div" />
-<meta name="hablar.width" content="100%" />
-<meta name="hablar.height" content="100%" />
+<meta name="hablar.width" content="550px" />
+<meta name="hablar.height" content="300px" />
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="stylesheet" type="text/css"
 	href="http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css">
@@ -49,8 +52,8 @@
 	rel='stylesheet' type='text/css'> -->
 <link type="text/css" rel="stylesheet" href="gxt/css/gxt-all.css">
 <link type="text/css" rel="stylesheet" href="gxt/css/gxt-gray.css">
-<link type="text/css" rel="stylesheet" href="kune-chat.css">
 <link type="text/css" rel="stylesheet" href="kune-hablar.css">
+<link type="text/css" rel="stylesheet" href="kune-chat.css">
 <link type="text/css" rel="stylesheet" href="kune-common.css">
 <link type="text/css" rel="stylesheet"
 	href="fontface/ubuntufontface.css">
@@ -70,6 +73,9 @@ body {
 	margin: 30px;
 }
 </style>
+<!--[if IE 6]>
+    <link type="text/css" rel="stylesheet" href="ie6.css">
+<![endif]-->
 </head>
 <body>
 <!-- Banner for wave errors -->

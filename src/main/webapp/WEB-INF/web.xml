@@ -4,6 +4,10 @@
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   version="2.5">
+
+  <!-- NOTE: if you modify this, cp for rapid testing: cp src/main/webapp/WEB-INF/web.xml 
+    target/kune-PUT_HERE_VERSION/WEB-INF/web.xml -->
+
   <!-- TODO: Add <servlet> tags for each servlet here. -->
   <!-- TODO: Add <servlet-mapping> tags for each <servlet> here. -->
   <!-- TODO: Optionally add a <welcome-file-list> tag to display a welcome 
@@ -16,43 +20,43 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   </welcome-file-list>
   <!-- JRuby servlets ======================================================================================= -->
   <!-- Note: this gives problems depending on the version of jetty or tomcat -->
-  <!-- <context-param> -->
-  <!-- <param-name>jruby.standalone</param-name> -->
-  <!-- <param-value>true</param-value> -->
-  <!-- </context-param> -->
-  <!-- <context-param> -->
-  <!-- <param-name>rails.root</param-name> -->
-  <!-- <param-value>/WEB-INF/publicspace/ -->
-  <!-- </param-value> -->
-  <!-- </context-param> -->
-  <!-- <context-param> -->
-  <!-- <param-name>files.prefix</param-name> -->
-  <!-- <param-value>/WEB-INF/publicspace/public -->
-  <!-- </param-value> -->
-  <!-- </context-param> -->
-  <!-- <context-param> -->
-  <!-- <param-name>rails.env</param-name> -->
-  <!-- <param-value>production</param-value> -->
-  <!-- </context-param> -->
-  <!-- <context-param> -->
-  <!-- <param-name>jruby.max.runtimes</param-name> -->
-  <!-- <param-value>1</param-value> -->
-  <!-- </context-param> -->
-  <!-- <context-param> -->
-  <!-- <param-name>public.root</param-name> -->
-  <!-- <param-value>/public/</param-value> -->
-  <!-- </context-param> -->
-  <!-- <filter> -->
-  <!-- <filter-name>RackFilter</filter-name> -->
-  <!-- <filter-class>org.jruby.rack.RackFilter</filter-class> -->
-  <!-- </filter> -->
-  <!-- <filter-mapping> -->
-  <!-- <filter-name>RackFilter</filter-name> -->
-  <!-- <url-pattern>/public/*</url-pattern> -->
-  <!-- </filter-mapping> -->
-  <!-- <listener> -->
-  <!-- <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class> -->
-  <!-- </listener> -->
+  <context-param>
+    <param-name>jruby.standalone</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>rails.root</param-name>
+    <param-value>/WEB-INF/publicspace/ 
+   </param-value>
+  </context-param>
+  <context-param>
+    <param-name>files.prefix</param-name>
+    <param-value>/WEB-INF/publicspace/public 
+   </param-value>
+  </context-param>
+  <context-param>
+    <param-name>rails.env</param-name>
+    <param-value>production</param-value>
+  </context-param>
+  <context-param>
+    <param-name>jruby.max.runtimes</param-name>
+    <param-value>1</param-value>
+  </context-param>
+  <context-param>
+    <param-name>public.root</param-name>
+    <param-value>/public/</param-value>
+  </context-param>
+  <filter>
+    <filter-name>RackFilter</filter-name>
+    <filter-class>org.jruby.rack.RackFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>RackFilter</filter-name>
+    <url-pattern>/public/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class>
+  </listener>
   <!-- Kune normal guice configuration ======================================================================== -->
   <filter>
     <filter-name>rack</filter-name>
@@ -69,21 +73,42 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <!-- Emite xmpp proxy ======================================================================================= -->
+  <!-- <servlet> -->
+  <!-- <servlet-name>HttpBind</servlet-name> -->
+  <!-- <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class> -->
+  <!-- <init-param> -->
+  <!-- <param-name>ProxyTo</param-name> -->
+  <!-- <param-value>http://localhost:5280/</param-value> -->
+  <!-- </init-param> -->
+  <!-- <init-param> -->
+  <!-- <param-name>Prefix</param-name> -->
+  <!-- <param-value>/</param-value> -->
+  <!-- </init-param> -->
+  <!-- </servlet> -->
+  <!-- <servlet-mapping> -->
+  <!-- <servlet-name>HttpBind</servlet-name> -->
+  <!-- <url-pattern>/http-bind/</url-pattern> -->
+  <!-- </servlet-mapping> -->
   <servlet>
-    <servlet-name>HttpBind</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
+    <servlet-name>Proxy</servlet-name>
+    <servlet-class>de.spieleck.servlets.ProxyServlet</servlet-class>
     <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://localhost:5280/http-bind/</param-value>
+      <param-name>remotePath</param-name>
+      <param-value>/http-bind/</param-value>
     </init-param>
     <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
+      <param-name>remoteServer</param-name>
+      <param-value>localhost</param-value>
+    </init-param>
+    <init-param>
+      <param-name>remotePort</param-name>
+      <param-value>5280</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HttpBind</servlet-name>
-    <url-pattern>/http-bind</url-pattern>
+    <servlet-name>Proxy</servlet-name>
+    <url-pattern>/http-bind/
+    </url-pattern>
   </servlet-mapping>
   <!-- Wave proxies with context / ====================================================================== -->
   <servlet>

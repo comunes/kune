@@ -25,6 +25,7 @@
   <classpathentry kind="var" path="M2_REPO/net/sf/dozer/dozer/4.0/dozer-4.0.jar" sourcepath="M2_REPO/net/sf/dozer/dozer/4.0/dozer-4.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/ejb3-persistence/1.0.2.GA/ejb3-persistence-1.0.2.GA.jar" sourcepath="M2_REPO/org/hibernate/ejb3-persistence/1.0.2.GA/ejb3-persistence-1.0.2.GA-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/calclab/emite/emite/r1694/emite-r1694.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/calclab/emite/emite-proxy/0.1/emite-proxy-0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/ezmorph/ezmorph/1.0.3/ezmorph-1.0.3.jar" sourcepath="M2_REPO/net/sf/ezmorph/ezmorph/1.0.3/ezmorph-1.0.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/freemarker/freemarker/2.3.8/freemarker-2.3.8.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwt/inject/gin/r137/gin-r137.jar"/>

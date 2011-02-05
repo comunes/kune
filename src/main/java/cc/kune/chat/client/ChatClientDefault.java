@@ -1,5 +1,7 @@
 package cc.kune.chat.client;
 
+import java.util.Date;
+
 import cc.kune.chat.client.ShowChatDialogEvent.ShowChatDialogHandler;
 import cc.kune.chat.client.ToggleShowChatDialogEvent.ToggleShowChatDialogHandler;
 import cc.kune.common.client.actions.AbstractExtendedAction;
@@ -11,9 +13,14 @@ import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.PopupTopPanel;
+import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.init.AppStopEvent;
+import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.Session;
@@ -21,10 +28,19 @@ import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
+import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emite.browser.client.PageAssist;
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.im.client.chat.ChatManager;
+import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.reconnect.client.SessionReconnect;
+import com.calclab.emite.xep.avatar.client.AvatarManager;
+import com.calclab.emite.xep.muc.client.Room;
+import com.calclab.emite.xep.muc.client.RoomManager;
+import com.calclab.emite.xep.muc.client.subject.RoomSubject;
 import com.calclab.hablar.HablarComplete;
 import com.calclab.hablar.HablarConfig;
 import com.calclab.hablar.console.client.HablarConsole;
@@ -36,8 +52,8 @@ import com.calclab.hablar.icons.def.client.DefaultIcons;
 import com.calclab.hablar.icons.ie6gif.client.IE6GifIcons;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.login.client.LoginConfig;
+import com.calclab.suco.client.Suco;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
@@ -46,16 +62,25 @@ public class ChatClientDefault implements ChatClient {
     public static class ChatClientAction extends AbstractExtendedAction {
 
         private final EventBus eventBus;
+        private final IconResources res;
 
         @Inject
-        public ChatClientAction(final EventBus eventBus) {
+        public ChatClientAction(final EventBus eventBus, final IconResources res) {
             super();
             this.eventBus = eventBus;
+            this.res = res;
+            res.css().ensureInjected();
+            putValue(Action.SMALL_ICON, res.chatBlink());
+
         }
 
         @Override
         public void actionPerformed(final ActionEvent event) {
             eventBus.fireEvent(new ToggleShowChatDialogEvent());
+        }
+
+        public void setBlink(final boolean blink) {
+            putValue(Action.SMALL_ICON, blink ? res.chatBlink() : res.chat());
         }
 
     }
@@ -64,40 +89,46 @@ public class ChatClientDefault implements ChatClient {
 
     private final ChatClientAction action;
     protected IconLabelDescriptor chatIcon;
+    private final ChatManager chatManager;
+    private final ChatOptions chatOptions;
     private final I18nTranslationService i18n;
-
     private PopupTopPanel popup;
-
-    private final IconResources res;
-
+    private final RoomManager roomManager;
+    private final XmppRoster roster;
     private final Session session;
-
     private final GlobalShortcutRegister shorcutRegister;
-
     private final SitebarActionsPresenter siteActions;
+    private final XmppSession xmppSession;
 
     @Inject
     public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n, final ChatClientAction action,
-            final SitebarActionsPresenter siteActions, final IconResources res, final Session session,
-            final GlobalShortcutRegister shorcutRegister) {
+            final SitebarActionsPresenter siteActions, final Session session,
+            final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions) {
         this.i18n = i18n;
         this.action = action;
         this.siteActions = siteActions;
-        this.res = res;
         this.session = session;
         this.shorcutRegister = shorcutRegister;
+        this.chatOptions = chatOptions;
+        roster = Suco.get(XmppRoster.class);
+        xmppSession = Suco.get(XmppSession.class);
+        chatManager = Suco.get(ChatManager.class);
+        roomManager = Suco.get(RoomManager.class);
+        Suco.get(SessionReconnect.class);
         eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
+                chatOptions.domain = event.getInitData().getChatDomain();
+                chatOptions.httpBase = event.getInitData().getChatHttpBase();
+                chatOptions.roomHost = event.getInitData().getChatRoomHost();
+                checkChatDomain(chatOptions.domain);
                 if (session.isLogged()) {
-                    createActionIfNeeded();
+                    doLogin(session.getCurrentUserInfo());
                 }
                 eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
                     @Override
                     public void onUserSignIn(final UserSignInEvent event) {
-                        createActionIfNeeded();
-                        createDialogIfNeeded();
-                        chatIcon.setVisible(true);
+                        doLogin(event.getUserInfo());
                     }
                 });
                 eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutHandler() {
@@ -105,6 +136,7 @@ public class ChatClientDefault implements ChatClient {
                     public void onUserSignOut(final UserSignOutEvent event) {
                         createActionIfNeeded();
                         chatIcon.setVisible(false);
+                        logout();
                     }
                 });
                 eventBus.addHandler(ShowChatDialogEvent.getType(), new ShowChatDialogHandler() {
@@ -122,29 +154,41 @@ public class ChatClientDefault implements ChatClient {
                 });
             }
         });
+        eventBus.addHandler(AppStopEvent.getType(), new AppStopEvent.AppStopHandler() {
+            @Override
+            public void onAppStop(final AppStopEvent event) {
+                logout();
+            }
+        });
     }
 
     @Override
     public void addNewBuddie(final String shortName) {
-        // TODO Auto-generated method stub
-
+        roster.requestAddItem(XmppURI.jid(shortName + "@" + chatOptions.domain), shortName, "");
     }
 
     @Override
     public void chat(final XmppURI jid) {
-        // TODO Auto-generated method stub
+        chatManager.open(jid);
+    }
+
+    // Put this in Panel object
+    private void checkChatDomain(final String chatDomain) {
+        final String httpDomain = WindowUtils.getLocation().getHostName();
+        if (!chatDomain.equals(httpDomain)) {
+            Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+                    + "). This will cause problems with the chat functionality. "
+                    + "Please check kune.properties on the server.");
+        }
     }
 
     private void createActionIfNeeded() {
         if (chatIcon == null) {
-            res.css().ensureInjected();
             chatIcon = new IconLabelDescriptor(action);
-            // chatIcon.setParent(SitebarActionsPresenter.LEFT_TOOLBAR);
-            chatIcon.putValue(Action.SMALL_ICON, res.chat());
-            chatIcon.putValue(Action.NAME, i18n.t("Chat ;)"));
             chatIcon.setId(CHAT_CLIENT_ICON_ID);
             chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
-            action.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
+            chatIcon.putValue(Action.NAME, i18n.t("Chat ;)"));
+            chatIcon.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
             final KeyStroke shortcut = Shortcut.getShortcut(false, true, true, false, Character.valueOf('C'));
             shorcutRegister.put(shortcut, action);
             action.setShortcut(shortcut);
@@ -160,26 +204,37 @@ public class ChatClientDefault implements ChatClient {
     }
 
     private void createDialog(final HablarWidget widget, final HtmlConfig htmlConfig) {
-        // popup.setSize(htmlConfig.width, htmlConfig.height);
         widget.addStyleName("k-chat-panel");
         setSize(widget, htmlConfig);
         popup.add(widget);
     }
 
-    private DialogBox createDialog2(final HablarWidget widget, final HtmlConfig htmlConfig) {
-        final DialogBox dialog = new DialogBox();
-        dialog.setText("Hablar");
-        setSize(dialog, htmlConfig);
-        dialog.show();
-        dialog.center();
-        return dialog;
-    }
-
     private void createDialogIfNeeded() {
         if (popup == null) {
             popup = new PopupTopPanel();
+            popup.setStyleName("k-popup-top-centered");
+            popup.addStyleName("k-bottom-10corners");
+            popup.addStyleName("k-box-10shadow");
+            popup.addStyleName("k-chat-window");
             initEmite();
         }
+    }
+
+    private boolean dialogVisible() {
+        return popup != null && popup.isShowing();
+    }
+
+    private void doLogin(final UserInfoDTO user) {
+        createActionIfNeeded();
+        createDialogIfNeeded();
+        chatOptions.username = user.getChatName();
+        chatOptions.passwd = user.getChatPassword();
+        chatOptions.resource = "emite-" + new Date().getTime() + "-kune";
+        chatOptions.useruri = XmppURI.uri(chatOptions.username, chatOptions.domain, chatOptions.resource);
+        createActionIfNeeded();
+        createDialogIfNeeded();
+        chatIcon.setVisible(true);
+        login(chatOptions.useruri, chatOptions.passwd);
     }
 
     private void initEmite() {
@@ -194,12 +249,11 @@ public class ChatClientDefault implements ChatClient {
 
         final HablarConfig config = HablarConfig.getFromMeta();
         final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
-        htmlConfig.hasLogger = true;
         final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
         final Hablar hablar = widget.getHablar();
 
         HablarComplete.install(hablar, config);
-
+        new KuneHablarSignals(hablar, action);
         if (htmlConfig.hasLogger) {
             new HablarConsole(hablar);
         }
@@ -212,50 +266,60 @@ public class ChatClientDefault implements ChatClient {
 
     @Override
     public boolean isBuddie(final String localUserName) {
-        // TODO Auto-generated method stub
-        return false;
+        return isBuddie(XmppURI.jid(localUserName + "@" + chatOptions.domain));
     }
 
     @Override
     public boolean isBuddie(final XmppURI jid) {
-        // TODO Auto-generated method stub
+        if (roster.isRosterReady()) {
+            if (roster.getItemByJID(jid) != null) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean isLoggedIn() {
-        // TODO Auto-generated method stub
-        return false;
+        return xmppSession.isReady();
     }
 
     @Override
     public void joinRoom(final String roomName, final String userAlias) {
-        // TODO Auto-generated method stub
-
+        joinRoom(roomName, null, userAlias);
     }
 
     @Override
     public void joinRoom(final String roomName, final String subject, final String userAlias) {
-        // TODO Auto-generated method stub
-
+        if (xmppSession.isReady()) {
+            final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/" + chatOptions.username);
+            final Room room = roomManager.open(roomURI, roomManager.getDefaultHistoryOptions());
+            if (TextUtils.notEmpty(subject)) {
+                RoomSubject.requestSubjectChange(room, subject);
+            }
+        } else {
+            NotifyUser.error(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"), true);
+        }
     }
 
     @Override
-    public void login(final String jid, final String passwd) {
-        // TODO Auto-generated method stub
-
+    public void login(final XmppURI uri, final String passwd) {
+        xmppSession.login(uri, passwd);
     }
 
     @Override
     public void logout() {
-        // TODO Auto-generated method stub
-
+        if (dialogVisible()) {
+            popup.hide();
+        }
+        if (isLoggedIn()) {
+            xmppSession.logout();
+        }
     }
 
     @Override
     public void setAvatar(final String photoBinary) {
-        // TODO Auto-generated method stub
-
+        Suco.get(AvatarManager.class).setVCardAvatar(photoBinary);
     }
 
     private void setSize(final Widget widget, final HtmlConfig htmlConfig) {
@@ -265,14 +329,11 @@ public class ChatClientDefault implements ChatClient {
         if (htmlConfig.height != null) {
             widget.setHeight(htmlConfig.height);
         }
-        widget.setWidth("450px");
-        widget.setHeight("300px");
     }
 
     @Override
     public void show() {
-        // TODO Auto-generated method stub
-
+        showDialog(true);
     }
 
     private void showDialog(final boolean show) {
@@ -286,14 +347,7 @@ public class ChatClientDefault implements ChatClient {
         }
     }
 
-    @Override
-    public void stop() {
-        // TODO Auto-generated method stub
-
-    }
-
     private void toggleShowDialog() {
         showDialog(popup == null ? true : !popup.isShowing());
     }
-
 }

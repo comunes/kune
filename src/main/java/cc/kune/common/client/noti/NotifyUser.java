@@ -19,8 +19,14 @@ public class NotifyUser {
         eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, closeable));
     }
 
-    public static void error(final String message, final String id, final boolean closeable) {
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, id, closeable));
+    public static void error(final String message, final String title, final boolean closeable) {
+        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, title, closeable));
+    }
+
+    public static void error(final String message, final String title, final String id, final boolean closeable) {
+        final UserNotifyEvent event = new UserNotifyEvent(NotifyLevel.error, message, id, closeable);
+        event.setId(id);
+        eventBus.fireEvent(event);
     }
 
     public static void hideProgress() {
