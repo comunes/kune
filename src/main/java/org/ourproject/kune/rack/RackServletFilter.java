@@ -38,7 +38,6 @@ import org.ourproject.kune.rack.dock.RequestMatcher;
 
 import cc.kune.wave.server.WaveStarter;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class RackServletFilter implements Filter {
@@ -130,9 +129,8 @@ public class RackServletFilter implements Filter {
         final RackBuilder builder = new RackBuilder();
         module.configure(builder);
         final Rack rack = builder.getRack();
-        final Injector parentInjector = Guice.createInjector();
         final WaveStarter waveStarter = new WaveStarter();
-        final Injector waveChildInjector = waveStarter.runMain(parentInjector);
+        final Injector waveChildInjector = waveStarter.runMain();
         final Injector kuneChildInjector = installInjector(filterConfig, rack, waveChildInjector);
         startContainerListeners(rack.getListeners(), kuneChildInjector);
         docks = rack.getDocks();

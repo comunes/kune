@@ -45,7 +45,6 @@ import org.waveprotocol.box.server.rpc.AuthenticationServlet;
 import org.waveprotocol.box.server.rpc.FetchServlet;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
-import org.waveprotocol.box.server.rpc.UserRegistrationServlet;
 import org.waveprotocol.box.server.rpc.WaveClientServlet;
 import org.waveprotocol.box.server.waveserver.WaveBus;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
@@ -58,6 +57,7 @@ import org.waveprotocol.wave.federation.xmpp.XmppFederationModule;
 import org.waveprotocol.wave.model.version.HashedVersionFactory;
 import org.waveprotocol.wave.util.settings.SettingsBinder;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Module;
@@ -121,7 +121,7 @@ public class WaveStarter {
 
         server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));
         server.addServlet("/auth/signout", injector.getInstance(SignOutServlet.class));
-        server.addServlet("/auth/register", injector.getInstance(UserRegistrationServlet.class));
+        server.addServlet("/auth/register", injector.getInstance(CustomUserRegistrationServlet.class));
 
         server.addServlet("/fetch/*", injector.getInstance(FetchServlet.class));
 
@@ -146,10 +146,9 @@ public class WaveStarter {
     public WaveStarter() {
     }
 
-    public Injector run(final Module coreSettings, final Injector parentInjector) throws PersistenceException,
-            ConfigurationException, WaveServerException {
-        // Injector settingsInjector = Guice.createInjector(coreSettings);
-        Injector settingsInjector = parentInjector.createChildInjector(coreSettings);
+    public Injector run(final Module coreSettings) throws PersistenceException, ConfigurationException,
+            WaveServerException {
+        Injector settingsInjector = Guice.createInjector(coreSettings);
         final boolean enableFederation = settingsInjector.getInstance(Key.get(Boolean.class,
                 Names.named(CoreSettings.ENABLE_FEDERATION)));
 
@@ -179,10 +178,10 @@ public class WaveStarter {
         return injector;
     }
 
-    public Injector runMain(final Injector settingsInjector) {
+    public Injector runMain() {
         try {
             final Module coreSettings = CustomSettingsBinder.bindSettings(PROPERTIES_FILE_KEY, CoreSettings.class);
-            return run(coreSettings, settingsInjector);
+            return run(coreSettings);
         } catch (final PersistenceException e) {
             LOG.error("PersistenceException when running server:", e);
         } catch (final ConfigurationException e) {
@@ -190,6 +189,6 @@ public class WaveStarter {
         } catch (final WaveServerException e) {
             LOG.error("WaveServerException when running server:", e);
         }
-        return settingsInjector;
+        return null;
     }
 }

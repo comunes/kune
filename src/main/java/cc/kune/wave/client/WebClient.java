@@ -279,7 +279,7 @@ public class WebClient extends Composite {
 
         HistorySupport.init();
 
-        websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL() + "/wiab/"));
+        websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl(GWT.getModuleBaseURL()));
         websocket.connect();
 
         if (Session.get().isLoggedIn()) {

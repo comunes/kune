@@ -18,6 +18,33 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <welcome-file-list>
     <welcome-file>ws.html</welcome-file>
   </welcome-file-list>
+
+  <!-- Wave proxies ========================================================================================= -->
+  <filter>
+    <filter-name>JettyContinuationFilter</filter-name>
+    <filter-class>org.eclipse.jetty.continuation.ContinuationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>JettyContinuationFilter</filter-name>
+    <url-pattern>/attachment/*</url-pattern>
+    <url-pattern>/auth/signin</url-pattern>
+    <url-pattern>/auth/signout</url-pattern>
+    <url-pattern>/auth/register</url-pattern>
+    <url-pattern>/fetch/*</url-pattern>
+    <url-pattern>/robot/dataapi</url-pattern>
+    <url-pattern>/robot/dataapi/oauth/*</url-pattern>
+    <url-pattern>/robot/dataapi/rpc</url-pattern>
+    <url-pattern>/robot/register/*</url-pattern>
+    <url-pattern>/robot/rpc</url-pattern>
+    <url-pattern>/gadgets</url-pattern>
+    <url-pattern>/gadgets/*</url-pattern>
+    <url-pattern>/socket.io/*</url-pattern>
+    <url-pattern>/socket</url-pattern>
+    <url-pattern>/static/*</url-pattern>
+    <url-pattern>/webclient/*</url-pattern>
+    <!-- <url-pattern>/*</url-pattern> -->
+  </filter-mapping>
+
   <!-- JRuby servlets ======================================================================================= -->
   <!-- Note: this gives problems depending on the version of jetty or tomcat -->
   <context-param>
