@@ -28,6 +28,7 @@ import cc.kune.core.client.rpcservices.UserService;
 import com.google.inject.Inject;
 
 public abstract class IntegrationTest {
+
     @Inject
     DatabaseProperties properties;
     @Inject

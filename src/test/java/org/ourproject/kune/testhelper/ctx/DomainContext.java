@@ -22,7 +22,6 @@ package org.ourproject.kune.testhelper.ctx;
 import java.util.HashMap;
 import java.util.TimeZone;
 
-
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
@@ -32,8 +31,8 @@ import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.User;
 
 public class DomainContext {
-    private final HashMap<String, User> users;
     private final HashMap<String, Group> groups;
+    private final HashMap<String, User> users;
 
     public DomainContext() {
         this.users = new HashMap<String, User>();
@@ -42,7 +41,7 @@ public class DomainContext {
 
     public void createGroups(final String... groupNames) {
         Group group;
-        for (String name : groupNames) {
+        for (final String name : groupNames) {
             group = new Group("name", "Some group: " + name);
             groups.put(name, group);
         }
@@ -50,7 +49,7 @@ public class DomainContext {
 
     public void createOrphanGroup(final String... groupNames) {
         Group group;
-        for (String name : groupNames) {
+        for (final String name : groupNames) {
             group = new Group("name", "Some group: " + name);
             group.setGroupType(GroupType.ORPHANED_PROJECT);
             groups.put(name, group);
@@ -59,9 +58,9 @@ public class DomainContext {
 
     public void createUsers(final String... userNames) {
         User user;
-        for (String name : userNames) {
-            user = new User(name, "long" + name, name + "@email.com", "password" + name, new I18nLanguage(),
-                    new I18nCountry(), TimeZone.getDefault());
+        for (final String name : userNames) {
+            user = new User(name, "long" + name, name + "@email.com", ("password" + name), "diggest".getBytes(),
+                    "salt".getBytes(), new I18nLanguage(), new I18nCountry(), TimeZone.getDefault());
             user.setUserGroup(new Group(name, "groupLong" + name));
             users.put(name, user);
         }
@@ -76,9 +75,15 @@ public class DomainContext {
     }
 
     public Group getGroupOf(final String userName) {
-        User user = getUser(userName);
-        Group userGroup = user.getUserGroup();
+        final User user = getUser(userName);
+        final Group userGroup = user.getUserGroup();
         return userGroup;
+    }
+
+    private SocialNetwork getSocialNetworkOf(final String userName) {
+        final Group userGroup = getGroupOf(userName);
+        final SocialNetwork socialNetwork = userGroup.getSocialNetwork();
+        return socialNetwork;
     }
 
     public User getUser(final String userName) {
@@ -87,12 +92,6 @@ public class DomainContext {
 
     public SocialNetworkOperator inSocialNetworkOf(final String userName) {
         return new SocialNetworkOperator(this, getSocialNetworkOf(userName));
-    }
-
-    private SocialNetwork getSocialNetworkOf(final String userName) {
-        Group userGroup = getGroupOf(userName);
-        SocialNetwork socialNetwork = userGroup.getSocialNetwork();
-        return socialNetwork;
     }
 
 }

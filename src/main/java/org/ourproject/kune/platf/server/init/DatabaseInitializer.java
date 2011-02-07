@@ -12,6 +12,7 @@ import org.ourproject.kune.platf.server.manager.I18nTranslationManager;
 import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
+import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -59,11 +60,15 @@ public class DatabaseInitializer {
         final String adminEmail = properties.getAdminEmail();
         final String adminPassword = properties.getAdminPassword();
         // FIXME:
-        final User user = new User(adminShortName, adminName, adminEmail, adminPassword,
-                languageManager.findByCode("en"), countryManager.findByCode("GB"), TimeZone.getDefault());
+
+        final PasswordDigest passwdDigest = new PasswordDigest(adminPassword.toCharArray());
+        final User user = new User(adminShortName, adminName, adminEmail, adminPassword, passwdDigest.getDigest(),
+                passwdDigest.getSalt(), languageManager.findByCode("en"), countryManager.findByCode("GB"),
+                TimeZone.getDefault());
         groupManager.createUserGroup(user, false);
         final User dummyUser = new User("dummy", "dummy user", "example@example.com", adminPassword,
-                languageManager.findByCode("en"), countryManager.findByCode("GB"), TimeZone.getDefault());
+                passwdDigest.getDigest(), passwdDigest.getSalt(), languageManager.findByCode("en"),
+                countryManager.findByCode("GB"), TimeZone.getDefault());
         groupManager.createUserGroup(dummyUser, false);
 
         final String siteName = properties.getDefaultSiteName();

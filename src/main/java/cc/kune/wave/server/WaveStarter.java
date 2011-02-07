@@ -66,7 +66,7 @@ import com.google.inject.name.Names;
 public class WaveStarter {
 
     private static final Log LOG = LogFactory.getLog(WaveStarter.class);
-    private static final String PROPERTIES_FILE_KEY = "wave-server.properties";
+    public static final String PROPERTIES_FILE_KEY = "wave-server.properties";
 
     private static Module buildFederationModule(final Injector settingsInjector, final boolean enableFederation)
             throws ConfigurationException {

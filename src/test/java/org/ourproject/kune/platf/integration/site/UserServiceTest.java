@@ -19,7 +19,9 @@
  */
 package org.ourproject.kune.platf.integration.site;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -49,19 +51,33 @@ import cc.kune.domain.Group;
 import com.google.inject.Inject;
 
 public class UserServiceTest extends IntegrationTest {
-    @Inject
-    DatabaseProperties properties;
-    @Inject
-    UserService userService;
-    @Inject
-    UserInfoService userInfoService;
-    @Inject
-    Mapper mapper;
+    private I18nCountryDTO country;
     @Inject
     I18nLanguageManager i18nLangManager;
     private I18nLanguageDTO lang;
-    private I18nCountryDTO country;
+    @Inject
+    Mapper mapper;
+    @Inject
+    DatabaseProperties properties;
     private TimeZoneDTO timezone;
+    @Inject
+    UserInfoService userInfoService;
+    @Inject
+    UserService userService;
+
+    private void assertEqualGroupLists(final List<GroupDTO> listDTO, final List<Group> list) {
+        assertEquals(listDTO.size(), list.size());
+        for (int i = 0; i < listDTO.size(); i++) {
+            final Object object = listDTO.get(i);
+            assertEquals(GroupDTO.class, object.getClass());
+            final GroupDTO d = (GroupDTO) object;
+            final Group l = list.get(i);
+            assertNotNull(d);
+            assertNotNull(l);
+            final GroupDTO map = mapper.map(l, GroupDTO.class);
+            assertEquals(map.getShortName(), d.getShortName());
+        }
+    }
 
     @Test(expected = EmailAddressInUseException.class)
     public void createUserExistingEmailFails() throws Exception {
@@ -118,24 +134,9 @@ public class UserServiceTest extends IntegrationTest {
         final UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
         assertEquals(userInfo.getName(), userInfoDTO.getName());
         assertEquals(userInfo.getChatName(), userInfoDTO.getChatName());
-        assertEquals(userInfo.getChatPassword(), userInfoDTO.getChatPassword());
         final List<Group> adminsGroup = userInfo.getGroupsIsAdmin();
         final List<GroupDTO> adminsGroupDTO = userInfoDTO.getGroupsIsAdmin();
         assertEqualGroupLists(adminsGroupDTO, adminsGroup);
-    }
-
-    private void assertEqualGroupLists(final List<GroupDTO> listDTO, final List<Group> list) {
-        assertEquals(listDTO.size(), list.size());
-        for (int i = 0; i < listDTO.size(); i++) {
-            final Object object = listDTO.get(i);
-            assertEquals(GroupDTO.class, object.getClass());
-            final GroupDTO d = (GroupDTO) object;
-            final Group l = list.get(i);
-            assertNotNull(d);
-            assertNotNull(l);
-            final GroupDTO map = mapper.map(l, GroupDTO.class);
-            assertEquals(map.getShortName(), d.getShortName());
-        }
     }
 
 }

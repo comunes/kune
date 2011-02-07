@@ -19,7 +19,10 @@
  */
 package org.ourproject.kune.platf.server.mapper;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,12 +66,66 @@ import cc.kune.domain.utils.UserBuddiesData;
 import com.google.inject.Inject;
 
 public class MapperTest {
-    private static final String TESTTOOL = "docs";
     private static final String TESTGROUPSHORTNAME = "grouptest";
-    @Inject
-    Mapper mapper;
+    private static final String TESTTOOL = "docs";
     @Inject
     GroupManager groupManager;
+    @Inject
+    Mapper mapper;
+
+    private void assertMapping(final GroupListMode mode, final String modeName) {
+        final GroupList list = new GroupList();
+        list.setMode(mode);
+        final GroupListDTO dto = mapper.map(list, GroupListDTO.class);
+        assertEquals(modeName, dto.getMode());
+        final GroupList listBack = mapper.map(dto, GroupList.class);
+        assertEquals(mode, listBack.getMode());
+    }
+
+    private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
+        final List<Group> listOrig = groupList.getList();
+        final List<GroupDTO> listDto = groupListDTO.getList();
+        assertEquals(listDto.size(), listOrig.size());
+        for (int i = 0; i < listDto.size(); i++) {
+            final Object object = listDto.get(i);
+            assertEquals(GroupDTO.class, object.getClass());
+            final GroupDTO d = (GroupDTO) object;
+            final Group g = listOrig.get(i);
+            assertNotNull(d);
+            assertNotNull(g);
+            final GroupDTO map = mapper.map(g, GroupDTO.class);
+            assertEquals(map, d);
+        }
+    }
+
+    private Container createDefContainer() {
+        return createDefContainer(createDeGroup());
+    }
+
+    private Container createDefContainer(final Group group) {
+        final Container container = new Container();
+        container.setId(1L);
+        container.setToolName(TESTTOOL);
+        container.setOwner(group);
+        container.setName("folder");
+        return container;
+    }
+
+    private Content createDefContent() {
+        final Container container = createDefContainer(createDeGroup());
+        final Content d = new Content();
+        d.setId(1L);
+        final Revision revision = new Revision(d);
+        revision.setTitle("title");
+        d.addRevision(revision);
+        d.setContainer(container);
+        return d;
+    }
+
+    private Group createDeGroup() {
+        final Group group = new Group(TESTGROUPSHORTNAME, "This is a group Test");
+        return group;
+    }
 
     @Test
     public void groupHasLogo() {
@@ -296,63 +353,9 @@ public class MapperTest {
 
     @Test
     public void testUserToLinkMappping() {
-        final User user = new User("shortName", "longName", "", "", null, null, null);
+        final User user = new User("shortName", "longName", "", "", "".getBytes(), "".getBytes(), null, null, null);
         final LinkDTO dto = mapper.map(user, LinkDTO.class);
         assertEquals("shortName", dto.getShortName());
         assertEquals("longName", dto.getLongName());
-    }
-
-    private void assertMapping(final GroupListMode mode, final String modeName) {
-        final GroupList list = new GroupList();
-        list.setMode(mode);
-        final GroupListDTO dto = mapper.map(list, GroupListDTO.class);
-        assertEquals(modeName, dto.getMode());
-        final GroupList listBack = mapper.map(dto, GroupList.class);
-        assertEquals(mode, listBack.getMode());
-    }
-
-    private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
-        final List<Group> listOrig = groupList.getList();
-        final List<GroupDTO> listDto = groupListDTO.getList();
-        assertEquals(listDto.size(), listOrig.size());
-        for (int i = 0; i < listDto.size(); i++) {
-            final Object object = listDto.get(i);
-            assertEquals(GroupDTO.class, object.getClass());
-            final GroupDTO d = (GroupDTO) object;
-            final Group g = listOrig.get(i);
-            assertNotNull(d);
-            assertNotNull(g);
-            final GroupDTO map = mapper.map(g, GroupDTO.class);
-            assertEquals(map, d);
-        }
-    }
-
-    private Container createDefContainer() {
-        return createDefContainer(createDeGroup());
-    }
-
-    private Container createDefContainer(final Group group) {
-        final Container container = new Container();
-        container.setId(1L);
-        container.setToolName(TESTTOOL);
-        container.setOwner(group);
-        container.setName("folder");
-        return container;
-    }
-
-    private Content createDefContent() {
-        final Container container = createDefContainer(createDeGroup());
-        final Content d = new Content();
-        d.setId(1L);
-        final Revision revision = new Revision(d);
-        revision.setTitle("title");
-        d.addRevision(revision);
-        d.setContainer(container);
-        return d;
-    }
-
-    private Group createDeGroup() {
-        final Group group = new Group(TESTGROUPSHORTNAME, "This is a group Test");
-        return group;
     }
 }

@@ -21,7 +21,6 @@ package org.ourproject.kune.platf.server;
 
 import java.util.TimeZone;
 
-
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
@@ -35,7 +34,7 @@ public abstract class TestDomainHelper {
 
     public static AccessLists createAccessLists(final Group groupAdmin, final Group groupEditor, final Group groupViewer) {
 
-        AccessLists lists = new AccessLists();
+        final AccessLists lists = new AccessLists();
         if (groupAdmin != null) {
             lists.addAdmin(groupAdmin);
         }
@@ -49,7 +48,7 @@ public abstract class TestDomainHelper {
     }
 
     public static String createBigText() {
-        String text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce leo felis, cursus eget, scelerisque adipiscing, fringilla vel, sem. Vestibulum semper tristique sem. Etiam quam neque, consectetuer at, fermentum id, vulputate non, leo. Ut condimentum, mauris et sollicitudin faucibus, lectus arcu facilisis mi, eu pretium arcu tortor quis sem. Pellentesque sit amet nulla ut tellus dapibus blandit. Donec eu dolor vitae mi scelerisque pretium. Donec sit amet nunc ut risus laoreet porta. Integer dictum mi at mauris. Vivamus vulputate, dolor quis pharetra interdum, augue nisi congue eros, a consectetuer libero mi ut quam. Fusce commodo sem blandit massa. Phasellus vehicula varius felis.\n"
+        final String text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce leo felis, cursus eget, scelerisque adipiscing, fringilla vel, sem. Vestibulum semper tristique sem. Etiam quam neque, consectetuer at, fermentum id, vulputate non, leo. Ut condimentum, mauris et sollicitudin faucibus, lectus arcu facilisis mi, eu pretium arcu tortor quis sem. Pellentesque sit amet nulla ut tellus dapibus blandit. Donec eu dolor vitae mi scelerisque pretium. Donec sit amet nunc ut risus laoreet porta. Integer dictum mi at mauris. Vivamus vulputate, dolor quis pharetra interdum, augue nisi congue eros, a consectetuer libero mi ut quam. Fusce commodo sem blandit massa. Phasellus vehicula varius felis.\n"
                 + "\n"
                 + "Aenean tempus. Ut vel elit a nisl adipiscing commodo. Suspendisse nibh. Praesent pellentesque. Curabitur fringilla tempor justo. Suspendisse bibendum faucibus ipsum. Aenean porta elementum pede. Sed vel odio et metus egestas ultrices. Nulla facilisi. Sed blandit fermentum purus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam adipiscing. Suspendisse dapibus, est porta vehicula auctor, diam orci scelerisque risus, eu condimentum enim pede ut turpis. Nullam turpis. Aliquam erat volutpat. Integer vitae magna. Mauris sit amet turpis.\n"
                 + "\n"
@@ -198,9 +197,9 @@ public abstract class TestDomainHelper {
     }
 
     public static Content createDescriptor(final long id, final String title, final String content) {
-        Content descriptor = new Content();
+        final Content descriptor = new Content();
         descriptor.setId(id);
-        Revision rev = new Revision(descriptor);
+        final Revision rev = new Revision(descriptor);
         descriptor.addRevision(rev);
         rev.setTitle(title);
         rev.setBody(content);
@@ -208,15 +207,15 @@ public abstract class TestDomainHelper {
     }
 
     public static Container createFolderWithId(final long id) {
-        Container container = new Container();
+        final Container container = new Container();
         container.setId(id);
         return container;
     }
 
     public static Container createFolderWithIdAndGroupAndTool(final int i, final String groupShortName,
             final String toolName) {
-        Container container = createFolderWithIdAndToolName(i, toolName);
-        Group owner = new Group();
+        final Container container = createFolderWithIdAndToolName(i, toolName);
+        final Group owner = new Group();
         owner.setShortName(groupShortName);
         container.setOwner(owner);
         return container;
@@ -224,13 +223,13 @@ public abstract class TestDomainHelper {
     }
 
     public static Container createFolderWithIdAndToolName(final int i, final String toolName) {
-        Container container = createFolderWithId(i);
+        final Container container = createFolderWithId(i);
         container.setToolName(toolName);
         return container;
     }
 
     public static Group createGroup(final int number) {
-        Group group = new Group("ysei" + number, "Yellow Submarine Environmental Initiative" + number);
+        final Group group = new Group("ysei" + number, "Yellow Submarine Environmental Initiative" + number);
         group.setId(Long.valueOf(number));
         return group;
     }
@@ -238,7 +237,7 @@ public abstract class TestDomainHelper {
     public static SocialNetwork createSocialNetwork(final Group groupInAdmins, final Group groupInCollab,
             final Group groupInViewer, final Group groupInPendings) {
 
-        SocialNetwork socialNetwork = new SocialNetwork();
+        final SocialNetwork socialNetwork = new SocialNetwork();
         socialNetwork.addAdmin(groupInAdmins);
         socialNetwork.addCollaborator(groupInCollab);
         socialNetwork.addViewer(groupInViewer);
@@ -247,11 +246,11 @@ public abstract class TestDomainHelper {
     }
 
     public static User createUser(final int number) {
-        String shortName = "shortname" + number;
-        String longName = "name" + number;
-        User user = new User(shortName, longName, "email@domain" + number, "password" + number, null, null,
-                TimeZone.getDefault());
-        Group userGroup = new Group(shortName, longName);
+        final String shortName = "shortname" + number;
+        final String longName = "name" + number;
+        final User user = new User(shortName, longName, "email@domain" + number, ("password" + number),
+                "diggest".getBytes(), "salt".getBytes(), null, null, TimeZone.getDefault());
+        final Group userGroup = new Group(shortName, longName);
         userGroup.setAdmissionType(AdmissionType.Closed);
         userGroup.setSocialNetwork(createSocialNetwork(userGroup, userGroup, userGroup, null));
         user.setUserGroup(userGroup);

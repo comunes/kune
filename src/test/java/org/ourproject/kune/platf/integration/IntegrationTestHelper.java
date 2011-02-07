@@ -21,12 +21,18 @@ package org.ourproject.kune.platf.integration;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.configuration.ConfigurationException;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.PlatformServerModule;
+import org.ourproject.kune.platf.server.TestConstants;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.wiki.server.WikiServerModule;
+import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.persistence.PersistenceModule;
+
+import cc.kune.wave.server.CustomSettingsBinder;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -39,22 +45,32 @@ import com.wideplay.warp.jpa.JpaUnit;
 public class IntegrationTestHelper {
 
     public static Injector createInjector() {
-        final Injector injector = Guice.createInjector(new PlatformServerModule(), new DocumentServerModule(),
-                new ChatServerModule(), new WikiServerModule(), new AbstractModule() {
-                    @Override
-                    protected void configure() {
-                        bindScope(SessionScoped.class, Scopes.SINGLETON);
-                        bindScope(RequestScoped.class, Scopes.SINGLETON);
-                        // test: use
-                        // memory
-                        // test_db: use
-                        // mysql
-                        bindConstant().annotatedWith(JpaUnit.class).to("test");
-                        bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
-                        bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
-                    }
-                });
-        return injector;
+        Injector injector;
+        try {
+            injector = Guice.createInjector(CustomSettingsBinder.bindSettings(TestConstants.WAVE_TEST_PROPFILE,
+                    CoreSettings.class));
+            final PersistenceModule persistenceModule = injector.getInstance(PersistenceModule.class);
+
+            final Injector childInjector = injector.createChildInjector(persistenceModule, new PlatformServerModule(),
+                    new DocumentServerModule(), new ChatServerModule(), new WikiServerModule(), new AbstractModule() {
+                        @Override
+                        protected void configure() {
+                            bindScope(SessionScoped.class, Scopes.SINGLETON);
+                            bindScope(RequestScoped.class, Scopes.SINGLETON);
+                            // test: use
+                            // memory
+                            // test_db: use
+                            // mysql
+                            bindConstant().annotatedWith(JpaUnit.class).to(TestConstants.PERSISTENCE_UNIT);
+                            bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
+                            bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+                        }
+                    });
+            return childInjector;
+        } catch (final ConfigurationException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public IntegrationTestHelper(final Object... tests) {

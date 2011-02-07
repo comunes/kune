@@ -71,12 +71,7 @@
       <id>cobogw</id>
       <name>Cobogw repository at googlecode</name>
       <url>http://cobogw.googlecode.com/svn/maven2</url>
-    </repository>
-    <repository>
-      <id>gwtp</id>
-      <name>gwtp repo</name>
-      <url>http://maven.gwt-platform.googlecode.com/hg/</url>
-    </repository>
+    </repository>    
     <repository>
       <id>gwt-repo</id>
       <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/</url>
@@ -232,11 +227,29 @@
       <artifactId>cobogw</artifactId>
       <version>1.3.1</version>
     </dependency>
-    <dependency>
-      <groupId>com.gwtplatform</groupId>
-      <artifactId>gwtp</artifactId>
-      <version>0.5-SNAPSHOT</version>
-    </dependency>
+<dependency>
+  <groupId>com.gwtplatform</groupId>
+  <artifactId>gwtp-all</artifactId>
+  <version>0.5</version>
+  <exclusions>
+    <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+    </exclusion>
+    <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </exclusion>
+    <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </exclusion>
+    <exclusion>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+    </exclusion>
+  </exclusions> 
+</dependency>
     <dependency>
       <groupId>org.adamtacy</groupId>
       <artifactId>gwt-fx</artifactId>

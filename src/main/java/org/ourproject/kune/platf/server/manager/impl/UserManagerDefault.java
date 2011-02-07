@@ -38,6 +38,7 @@ import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
+import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -90,13 +91,16 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         } catch (final NoResultException e) {
             throw new I18nNotFoundException();
         }
-        waveUserRegister.tryCreateUser(shortName, passwd);
+        final PasswordDigest passwdDigest = new PasswordDigest(passwd.toCharArray());
+
+        waveUserRegister.tryCreateUser(shortName, passwdDigest);
         // if (userPropGroup == null) {
         // userPropGroup = propGroupManager.find(User.PROPS_ID);
         // }
         // final Properties userProp = new Properties(userPropGroup);
         // propManager.persist(userProp);
-        final User user = new User(shortName, longName, email, passwd, language, country, tz);
+        final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
+                passwdDigest.getSalt(), language, country, tz);
         return user;
 
     }
@@ -120,6 +124,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
 
     @Override
+    @Deprecated
     public UserBuddiesData getUserBuddies(final String shortName) {
         // XEP-133 get roster by admin part is not implemented in openfire
         // also access to the openfire db is not easy with hibernate (the use of
@@ -128,6 +133,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         // In the future cache this.
         final String domain = "@" + properties.getDomain();
         final UserBuddiesData buddiesData = new UserBuddiesData();
+
         final User user = finder.getByShortName(shortName);
         final ChatConnection connection = xmppManager.login(user.getShortName() + domain, user.getPassword(), "kserver");
         final Collection<RosterEntry> roster = xmppManager.getRoster(connection);

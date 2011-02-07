@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,21 +24,22 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserInfoDTO implements IsSerializable {
-    private UserSimpleDTO user;
     private String chatName;
     private String chatPassword;
-    private String homePage;
-    private String userHash;
+    private List<String> enabledTools;
     private List<GroupDTO> groupsIsAdmin;
     private List<GroupDTO> groupsIsCollab;
+    private String homePage;
     private boolean showDeletedContent;
-    private List<String> enabledTools;
+    private UserSimpleDTO user;
     private GroupDTO userGroup;
+    private String userHash;
 
     public String getChatName() {
         return chatName;
     }
 
+    @Deprecated
     public String getChatPassword() {
         return chatPassword;
     }
@@ -95,6 +96,7 @@ public class UserInfoDTO implements IsSerializable {
         this.chatName = chatName;
     }
 
+    @Deprecated
     public void setChatPassword(final String password) {
         this.chatPassword = password;
 

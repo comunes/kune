@@ -34,8 +34,8 @@ import com.google.inject.Singleton;
 @Singleton
 public class UserInfoServiceDefault implements UserInfoService {
 
-    private final SocialNetworkManager socialNetworkManager;
     private final GroupManager groupManager;
+    private final SocialNetworkManager socialNetworkManager;
 
     @Inject
     public UserInfoServiceDefault(final SocialNetworkManager socialNetwork, final GroupManager groupManager) {
@@ -43,6 +43,7 @@ public class UserInfoServiceDefault implements UserInfoService {
         this.groupManager = groupManager;
     }
 
+    @Override
     public UserInfo buildInfo(final User user, final String userHash) throws DefaultException {
         UserInfo userInfo = null;
         if (User.isKnownUser(user)) {

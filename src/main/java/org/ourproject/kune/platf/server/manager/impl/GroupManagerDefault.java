@@ -205,6 +205,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
             throws GroupNameInUseException {
         try {
             persist(group);
+        } catch (final IllegalStateException e) {
+            e.printStackTrace();
         } catch (final PersistenceException e) {
             if (e.getCause() instanceof ConstraintViolationException) {
                 throw new GroupNameInUseException();

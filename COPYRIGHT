@@ -80,13 +80,19 @@ and others icons from openoffice.org-style-human debian package
 
 others
 --------------------------------------------------------------------------------
-suco
-   http://suco.googlecode.com
-   Copyright: under GNU Lesser General Public License
-   http://www.gnu.org/licenses/lgpl.html
+
+wave / wave in a box
+   http://www.waveprotocol.org   
+   http://www.apache.org/licenses/LICENSE-2.0
+   http://www.waveprotocol.org/patent-license
 
 emite
    http://emite.googlecode.com
+   Copyright: under GNU Lesser General Public License
+   http://www.gnu.org/licenses/lgpl.html
+
+suco
+   http://suco.googlecode.com
    Copyright: under GNU Lesser General Public License
    http://www.gnu.org/licenses/lgpl.html
 
@@ -95,19 +101,29 @@ fonts-min.css and reset.css
    Code licensed under the BSD License:
    http://developer.yahoo.net/yui/license.txt
 
-emoticons from Adium and Kopete theme
-   kopete adium theme by robotangel and original "Adiumicons" by Oscar Gruno
-   under GNU GPL license
+ext-gwt gxt library:
+   http://www.sencha.com/products/extgwt/
+   Copyright: under GNU General Public License 
+   http://www.gnu.org/copyleft/gpl.html
 
-extjs
-   http://extjs.com/
-   Copyright: under GNU Lesser General Public License
-   http://www.gnu.org/licenses/lgpl.html
-
-ext-gwt library:
+gwt-ext (deprecated) library:
    http://code.google.com/p/gwt-ext/
    Copyright: under GNU Lesser General Public License
    http://www.gnu.org/licenses/lgpl.html
+
+google-gin library:
+   https://code.google.com/p/google-gin/
+   Copyright: under Apache License 2.0
+   http://www.apache.org/licenses/LICENSE-2.0
+
+gwt-platform library:
+   https://code.google.com/p/gwt-platform/
+   Copyright: under Apache License 2.0
+   http://www.apache.org/licenses/LICENSE-2.0
+
+emoticons from Adium and Kopete theme
+   kopete adium theme by robotangel and original "Adiumicons" by Oscar Gruno
+   under GNU GPL license
 
 dom region library:
    XWiki Platform
@@ -133,8 +149,3 @@ some Action classes:
    from GNU Classpath
    Copyright: under GNU General Public License
    http://www.gnu.org/licenses/gpl.html
-
-qtip:
-   http://craigsworks.com/projects/qtip/docs/support/
-   Under MIT license:
-   http://creativecommons.org/licenses/MIT/ 

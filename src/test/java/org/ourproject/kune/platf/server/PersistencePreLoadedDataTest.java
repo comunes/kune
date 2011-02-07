@@ -48,7 +48,7 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
     protected static final String USER_EMAIL = "useremail@example.com";
     protected static final String USER_LONG_NAME = "the user long name";
     protected static final String USER_PASSWORD = "userPassword";
-    protected static final String USER_SHORT_NAME = "user-shortname";
+    protected static final String USER_SHORT_NAME = "usershortname";
 
     protected Container container;
     @Inject
@@ -81,9 +81,6 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
     protected UserManager userManager;
 
     public PersistencePreLoadedDataTest() {
-        // test: use memory
-        // test_db: use mysql
-        // super("test_db", "kune.properties");
     }
 
     @After

@@ -27,16 +27,16 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
 
 public class UserInfo {
-    private User user;
     private String chatName;
     private String chatPassword;
-    private String homePage;
+    private List<String> enabledTools;
     private List<Group> groupsIsAdmin;
     private List<Group> groupsIsCollab;
-    private String userHash;
+    private String homePage;
     private boolean showDeletedContent;
-    private List<String> enabledTools;
+    private User user;
     private Group userGroup;
+    private String userHash;
 
     public String getChatName() {
         return chatName;
@@ -98,6 +98,7 @@ public class UserInfo {
         this.chatName = chatName;
     }
 
+    @Deprecated
     public void setChatPassword(final String chatPassword) {
         this.chatPassword = chatPassword;
     }

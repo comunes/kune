@@ -28,6 +28,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -76,6 +77,11 @@ public class User implements HasId {
     // @OneToOne(cascade = CascadeType.REMOVE)
     // private final CustomProperties customProperties;
 
+    @Basic
+    @Lob
+    @Column(nullable = false)
+    private byte[] diggest;
+
     @Column(unique = true, nullable = false)
     @Email
     @Length(min = 1)
@@ -102,6 +108,11 @@ public class User implements HasId {
     @Length(min = 6, max = 40)
     private String password;
 
+    @Basic
+    @Lob
+    @Column(nullable = false)
+    private byte[] salt;
+
     @Field(index = Index.UN_TOKENIZED, store = Store.NO)
     @Column(unique = true)
     // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
@@ -120,7 +131,7 @@ public class User implements HasId {
     // private Properties properties;
 
     public User() {
-        this(null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null);
     }
 
     //
@@ -133,11 +144,14 @@ public class User implements HasId {
     // }
 
     public User(final String shortName, final String longName, final String email, final String passwd,
-            final I18nLanguage language, final I18nCountry country, final TimeZone timezone) {
+            final byte[] diggets, final byte[] salt, final I18nLanguage language, final I18nCountry country,
+            final TimeZone timezone) {
         this.shortName = shortName;
         this.name = longName;
         this.email = email;
         this.password = passwd;
+        this.diggest = diggets;
+        this.salt = salt;
         this.userGroup = null;
         this.language = language;
         this.country = country;
@@ -180,6 +194,10 @@ public class User implements HasId {
     // return customProperties;
     // }
 
+    public byte[] getDiggest() {
+        return diggest;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -205,13 +223,17 @@ public class User implements HasId {
         return name;
     }
 
+    // public Properties getProperties() {
+    // return properties;
+    // }
+
     public String getPassword() {
         return password;
     }
 
-    // public Properties getProperties() {
-    // return properties;
-    // }
+    public byte[] getSalt() {
+        return salt;
+    }
 
     public String getShortName() {
         return shortName;
@@ -243,6 +265,10 @@ public class User implements HasId {
         this.country = country;
     }
 
+    public void setDiggest(final byte[] diggest) {
+        this.diggest = diggest;
+    }
+
     public void setEmail(final String email) {
         this.email = email;
     }
@@ -266,13 +292,11 @@ public class User implements HasId {
 
     public void setPassword(final String password) {
         this.password = password;
-        // http://www.dynamic.net.au/christos/crypt/
-        // Use UnixCrypt (jetty)
     }
 
-    // public void setProperties(final Properties properties) {
-    // this.properties = properties;
-    // }
+    public void setSalt(final byte[] salt) {
+        this.salt = salt;
+    }
 
     public void setShortName(final String shortName) {
         this.shortName = shortName;

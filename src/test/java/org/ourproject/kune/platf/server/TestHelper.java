@@ -21,38 +21,64 @@ package org.ourproject.kune.platf.server;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.configuration.ConfigurationException;
 import org.ourproject.kune.platf.integration.HttpServletRequestMocked;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
+import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.authentication.AccountStoreHolder;
+import org.waveprotocol.box.server.persistence.AccountStore;
+import org.waveprotocol.box.server.persistence.PersistenceException;
+import org.waveprotocol.box.server.persistence.PersistenceModule;
+
+import cc.kune.wave.server.CustomSettingsBinder;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.Scopes;
+import com.google.inject.name.Names;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
 import com.wideplay.warp.jpa.JpaUnit;
 
 public abstract class TestHelper {
     public static Injector create(final Module module, final String persistenceUnit, final String propetiesFileName) {
-        final Injector injector = Guice.createInjector(module, new Module() {
-            @Override
-            public void configure(final Binder binder) {
-                binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
-                binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
-                binder.bindConstant().annotatedWith(JpaUnit.class).to(persistenceUnit);
-                binder.bindConstant().annotatedWith(PropertiesFileName.class).to(propetiesFileName);
-                binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
-            }
-        });
-        return injector;
+        try {
+            final Injector injector = Guice.createInjector(CustomSettingsBinder.bindSettings(
+                    TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
+            final PersistenceModule persistenceModule = injector.getInstance(PersistenceModule.class);
+            final Injector childInjector = injector.createChildInjector(persistenceModule, module, new Module() {
+                @Override
+                public void configure(final Binder binder) {
+                    binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
+                    binder.bindScope(RequestScoped.class, Scopes.SINGLETON);
+                    binder.bindConstant().annotatedWith(JpaUnit.class).to(persistenceUnit);
+                    binder.bindConstant().annotatedWith(PropertiesFileName.class).to(propetiesFileName);
+                    binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
+                }
+            });
+            final AccountStore accountStore = childInjector.getInstance(AccountStore.class);
+            accountStore.initializeAccountStore();
+            AccountStoreHolder.resetForTesting();
+            AccountStoreHolder.init(accountStore,
+                    childInjector.getInstance(Key.get(String.class, Names.named(CoreSettings.WAVE_SERVER_DOMAIN))));
+            return childInjector;
+        } catch (final ConfigurationException e) {
+            e.printStackTrace();
+        } catch (final PersistenceException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static void inject(final Object target) {
         // test: use memory
         // test_db: use mysql
         // Also configurable ein PersistenceTest
-        TestHelper.create(new PlatformServerModule(), "test_db", "kune.properties").injectMembers(target);
+        TestHelper.create(new PlatformServerModule(), TestConstants.PERSISTENCE_UNIT, "kune.properties").injectMembers(
+                target);
     }
 
 }

@@ -23,8 +23,6 @@ import java.util.Date;
 
 import javax.persistence.NoResultException;
 
-import org.ourproject.kune.chat.server.ChatServerTool;
-import org.ourproject.kune.chat.server.managers.ChatConnection;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.access.AccessRightsService;
@@ -48,7 +46,6 @@ import org.ourproject.kune.platf.server.state.StateService;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.client.errors.GroupNotFoundException;
 import cc.kune.core.client.errors.NoDefaultContentException;
 import cc.kune.core.client.errors.ToolNotFoundException;
 import cc.kune.core.client.rpcservices.ContentService;
@@ -80,19 +77,19 @@ import com.wideplay.warp.persist.Transactional;
 
 @Singleton
 public class ContentRPC implements ContentService, RPC {
-    private final StateService stateService;
-    private final Provider<UserSession> userSessionProvider;
-    private final Mapper mapper;
-    private final GroupManager groupManager;
     private final AccessService accessService;
-    private final CreationService creationService;
-    private final XmppManager xmppManager;
-    private final ContentManager contentManager;
-    private final ContainerManager containerManager;
-    private final TagUserContentManager tagManager;
     private final CommentManager commentManager;
-    private final AccessRightsService rightsService;
+    private final ContainerManager containerManager;
+    private final ContentManager contentManager;
+    private final CreationService creationService;
     private final FinderService finderService;
+    private final GroupManager groupManager;
+    private final Mapper mapper;
+    private final AccessRightsService rightsService;
+    private final StateService stateService;
+    private final TagUserContentManager tagManager;
+    private final Provider<UserSession> userSessionProvider;
+    private final XmppManager xmppManager;
 
     @Inject
     public ContentRPC(final FinderService finderService, final Provider<UserSession> userSessionProvider,
@@ -179,26 +176,30 @@ public class ContentRPC implements ContentService, RPC {
     @Transactional(type = TransactionType.READ_WRITE)
     public StateContainerDTO addRoom(final String userHash, final StateToken parentToken, final String roomName)
             throws DefaultException {
-        final String groupShortName = parentToken.getGroup();
-        final User user = getCurrentUser();
-        final String userShortName = user.getShortName();
-        final ChatConnection connection = xmppManager.login(userShortName, user.getPassword(), userHash);
-        xmppManager.createRoom(connection, roomName, userShortName + userHash);
-        xmppManager.disconnect(connection);
-        try {
-            final Container container = createFolder(groupShortName, ContentUtils.parseId(parentToken.getFolder()),
-                    roomName, ChatServerTool.TYPE_ROOM);
-            return getState(user, container);
-        } catch (final ContentNotFoundException e) {
-            xmppManager.destroyRoom(connection, roomName);
-            throw new ContentNotFoundException();
-        } catch (final AccessViolationException e) {
-            xmppManager.destroyRoom(connection, roomName);
-            throw new AccessViolationException();
-        } catch (final GroupNotFoundException e) {
-            xmppManager.destroyRoom(connection, roomName);
-            throw new GroupNotFoundException();
-        }
+        // final String groupShortName = parentToken.getGroup();
+        // final User user = getCurrentUser();
+        // final String userShortName = user.getShortName();
+        // final ChatConnection connection = xmppManager.login(userShortName,
+        // user.getPassword(), userHash);
+        // xmppManager.createRoom(connection, roomName, userShortName +
+        // userHash);
+        // xmppManager.disconnect(connection);
+        // try {
+        // final Container container = createFolder(groupShortName,
+        // ContentUtils.parseId(parentToken.getFolder()),
+        // roomName, ChatServerTool.TYPE_ROOM);
+        // return getState(user, container);
+        // } catch (final ContentNotFoundException e) {
+        // xmppManager.destroyRoom(connection, roomName);
+        // throw new ContentNotFoundException();
+        // } catch (final AccessViolationException e) {
+        // xmppManager.destroyRoom(connection, roomName);
+        // throw new AccessViolationException();
+        // } catch (final GroupNotFoundException e) {
+        // xmppManager.destroyRoom(connection, roomName);
+        // throw new GroupNotFoundException();
+        // }
+        return null;
     }
 
     @Override
@@ -208,6 +209,24 @@ public class ContentRPC implements ContentService, RPC {
     public StateContentDTO addWave(final String userHash, final StateToken parentToken, final String typeId,
             final String waveId) throws DefaultException {
         return createContent(parentToken, "Wave embeded test", typeId, waveId);
+    }
+
+    private StateContentDTO createContent(final StateToken parentToken, final String title, final String typeId,
+            final String body) {
+        final User user = getCurrentUser();
+        final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
+                user, AccessRol.Editor);
+        final Content addedContent = creationService.createContent(title, body, user, container, typeId);
+        return getState(user, addedContent);
+    }
+
+    private Container createFolder(final String groupShortName, final Long parentFolderId, final String title,
+            final String typeId) throws DefaultException {
+        final User user = getCurrentUser();
+        final Group group = groupManager.findByShortName(groupShortName);
+        final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage(),
+                typeId);
+        return container;
     }
 
     @Override
@@ -246,6 +265,40 @@ public class ContentRPC implements ContentService, RPC {
         }
     }
 
+    @Authenticated(mandatory = false)
+    @Authorizated(accessRolRequired = AccessRol.Viewer)
+    private StateAbstractDTO getContentOrDefContent(final String userHash, final StateToken stateToken,
+            final User user, final Content content) {
+        final Long id = content.getId();
+        if (id != null) {
+            // Content
+            return mapState(stateService.create(user, content), user);
+        } else {
+            // Container
+            final Container container = content.getContainer();
+            return mapState(stateService.create(user, container), user);
+        }
+    }
+
+    private User getCurrentUser() {
+        return getUserSession().getUser();
+    }
+
+    private StateContainerDTO getState(final User user, final Container container) {
+        final StateContainer state = stateService.create(user, container);
+        return mapState(state, user);
+    }
+
+    private StateContentDTO getState(final User user, final Content content) {
+        final StateContent state = stateService.create(user, content);
+        return mapState(state, user);
+    }
+
+    private TagCloudResult getSummaryTags(final Group group) {
+        final TagCloudResult result = tagManager.getTagCloudResultByGroup(group);
+        return result;
+    }
+
     @Override
     @Authenticated(mandatory = false)
     @Authorizated(accessRolRequired = AccessRol.Viewer)
@@ -253,6 +306,45 @@ public class ContentRPC implements ContentService, RPC {
     public TagCloudResult getSummaryTags(final String userHash, final StateToken groupToken) {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         return getSummaryTags(group);
+    }
+
+    private UserSession getUserSession() {
+        return userSessionProvider.get();
+    }
+
+    private boolean isUserLoggedIn() {
+        return getUserSession().isUserLoggedIn();
+    }
+
+    private void mapContentRightsInstate(final User user, final AccessLists groupAccessList,
+            final ContentSimpleDTO siblingDTO) {
+        final Content sibling = contentManager.find(siblingDTO.getId());
+        final AccessLists lists = sibling.hasAccessList() ? sibling.getAccessLists() : groupAccessList;
+        siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRights.class));
+    }
+
+    private StateContainerDTO mapState(final StateContainer state, final User user) {
+        final StateContainerDTO stateDTO = mapper.map(state, StateContainerDTO.class);
+        final AccessLists groupAccessList = state.getGroup().getSocialNetwork().getAccessLists();
+        for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
+            mapContentRightsInstate(user, groupAccessList, siblingDTO);
+        }
+        for (final ContentSimpleDTO siblingDTO : stateDTO.getContainer().getContents()) {
+            mapContentRightsInstate(user, groupAccessList, siblingDTO);
+        }
+        return stateDTO;
+    }
+
+    private StateContentDTO mapState(final StateContent state, final User user) {
+        final StateContentDTO stateDTO = mapper.map(state, StateContentDTO.class);
+        final AccessLists groupAccessList = state.getGroup().getSocialNetwork().getAccessLists();
+        for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
+            mapContentRightsInstate(user, groupAccessList, siblingDTO);
+        }
+        for (final ContentSimpleDTO siblingDTO : stateDTO.getContainer().getContents()) {
+            mapContentRightsInstate(user, groupAccessList, siblingDTO);
+        }
+        return stateDTO;
     }
 
     @Override
@@ -318,6 +410,21 @@ public class ContentRPC implements ContentService, RPC {
         }
         renameContent(token.getDocument(), newName);
         return getContent(userHash, token);
+    }
+
+    private Content renameContent(final String documentId, final String newName) throws ContentNotFoundException,
+            DefaultException {
+        final Long contentId = ContentUtils.parseId(documentId);
+        final User user = getCurrentUser();
+        return contentManager.renameContent(user, contentId, newName);
+    }
+
+    private Container renameFolder(final String groupShortName, final Long folderId, final String newName)
+            throws DefaultException {
+        final Group group = groupManager.findByShortName(groupShortName);
+        final User user = getCurrentUser();
+        final Container container = accessService.accessToContainer(folderId, user, AccessRol.Editor);
+        return containerManager.renameFolder(group, container, newName);
     }
 
     @Override
@@ -411,112 +518,6 @@ public class ContentRPC implements ContentService, RPC {
         final Long contentId = ContentUtils.parseId(token.getDocument());
         final Comment comment = commentManager.vote(voter, contentId, commentId, votePositive);
         return mapper.map(comment, CommentDTO.class);
-    }
-
-    private StateContentDTO createContent(final StateToken parentToken, final String title, final String typeId,
-            final String body) {
-        final User user = getCurrentUser();
-        final Container container = accessService.accessToContainer(ContentUtils.parseId(parentToken.getFolder()),
-                user, AccessRol.Editor);
-        final Content addedContent = creationService.createContent(title, body, user, container, typeId);
-        return getState(user, addedContent);
-    }
-
-    private Container createFolder(final String groupShortName, final Long parentFolderId, final String title,
-            final String typeId) throws DefaultException {
-        final User user = getCurrentUser();
-        final Group group = groupManager.findByShortName(groupShortName);
-        final Container container = creationService.createFolder(group, parentFolderId, title, user.getLanguage(),
-                typeId);
-        return container;
-    }
-
-    @Authenticated(mandatory = false)
-    @Authorizated(accessRolRequired = AccessRol.Viewer)
-    private StateAbstractDTO getContentOrDefContent(final String userHash, final StateToken stateToken,
-            final User user, final Content content) {
-        final Long id = content.getId();
-        if (id != null) {
-            // Content
-            return mapState(stateService.create(user, content), user);
-        } else {
-            // Container
-            final Container container = content.getContainer();
-            return mapState(stateService.create(user, container), user);
-        }
-    }
-
-    private User getCurrentUser() {
-        return getUserSession().getUser();
-    }
-
-    private StateContainerDTO getState(final User user, final Container container) {
-        final StateContainer state = stateService.create(user, container);
-        return mapState(state, user);
-    }
-
-    private StateContentDTO getState(final User user, final Content content) {
-        final StateContent state = stateService.create(user, content);
-        return mapState(state, user);
-    }
-
-    private TagCloudResult getSummaryTags(final Group group) {
-        final TagCloudResult result = tagManager.getTagCloudResultByGroup(group);
-        return result;
-    }
-
-    private UserSession getUserSession() {
-        return userSessionProvider.get();
-    }
-
-    private boolean isUserLoggedIn() {
-        return getUserSession().isUserLoggedIn();
-    }
-
-    private void mapContentRightsInstate(final User user, final AccessLists groupAccessList,
-            final ContentSimpleDTO siblingDTO) {
-        final Content sibling = contentManager.find(siblingDTO.getId());
-        final AccessLists lists = sibling.hasAccessList() ? sibling.getAccessLists() : groupAccessList;
-        siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRights.class));
-    }
-
-    private StateContainerDTO mapState(final StateContainer state, final User user) {
-        final StateContainerDTO stateDTO = mapper.map(state, StateContainerDTO.class);
-        final AccessLists groupAccessList = state.getGroup().getSocialNetwork().getAccessLists();
-        for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
-            mapContentRightsInstate(user, groupAccessList, siblingDTO);
-        }
-        for (final ContentSimpleDTO siblingDTO : stateDTO.getContainer().getContents()) {
-            mapContentRightsInstate(user, groupAccessList, siblingDTO);
-        }
-        return stateDTO;
-    }
-
-    private StateContentDTO mapState(final StateContent state, final User user) {
-        final StateContentDTO stateDTO = mapper.map(state, StateContentDTO.class);
-        final AccessLists groupAccessList = state.getGroup().getSocialNetwork().getAccessLists();
-        for (final ContentSimpleDTO siblingDTO : stateDTO.getRootContainer().getContents()) {
-            mapContentRightsInstate(user, groupAccessList, siblingDTO);
-        }
-        for (final ContentSimpleDTO siblingDTO : stateDTO.getContainer().getContents()) {
-            mapContentRightsInstate(user, groupAccessList, siblingDTO);
-        }
-        return stateDTO;
-    }
-
-    private Content renameContent(final String documentId, final String newName) throws ContentNotFoundException,
-            DefaultException {
-        final Long contentId = ContentUtils.parseId(documentId);
-        final User user = getCurrentUser();
-        return contentManager.renameContent(user, contentId, newName);
-    }
-
-    private Container renameFolder(final String groupShortName, final Long folderId, final String newName)
-            throws DefaultException {
-        final Group group = groupManager.findByShortName(groupShortName);
-        final User user = getCurrentUser();
-        final Container container = accessService.accessToContainer(folderId, user, AccessRol.Editor);
-        return containerManager.renameFolder(group, container, newName);
     }
 
 }

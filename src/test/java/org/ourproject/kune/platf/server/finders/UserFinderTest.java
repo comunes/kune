@@ -39,20 +39,22 @@ public class UserFinderTest extends PersistencePreLoadedDataTest {
 
     @Test
     public void findAll() {
-        List<User> all = finder.getAll();
+        final List<User> all = finder.getAll();
         assertEquals(3, all.size());
     }
 
     @Test
     public void findByEmail() {
-        User user = finder.getByEmail("one@here.com");
+        final User user = finder.getByEmail("one@here.com");
         assertNotNull(user);
     }
 
     @Before
     public void initData() {
-        persist(new User("shortname1", "the name1", "one@here.com", "password1", english, gb, TimeZone.getDefault()));
-        persist(new User("shortname2", "the name2", "two@here.com", "password1", english, gb, TimeZone.getDefault()));
+        persist(new User("shortname1", "the name1", "one@here.com", "password1", "diggest".getBytes(),
+                "salt".getBytes(), english, gb, TimeZone.getDefault()));
+        persist(new User("shortname2", "the name2", "two@here.com", "password1", "somediggest".getBytes(),
+                "salt".getBytes(), english, gb, TimeZone.getDefault()));
     }
 
 }

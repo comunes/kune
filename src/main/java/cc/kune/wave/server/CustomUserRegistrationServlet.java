@@ -71,8 +71,15 @@ public class CustomUserRegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
-        String message = tryCreateUser(req.getParameter(HttpRequestBasedCallbackHandler.ADDRESS_FIELD),
-                req.getParameter(HttpRequestBasedCallbackHandler.PASSWORD_FIELD));
+
+        final String username = req.getParameter(HttpRequestBasedCallbackHandler.ADDRESS_FIELD);
+        String passwd = req.getParameter(HttpRequestBasedCallbackHandler.PASSWORD_FIELD);
+        if (passwd == null) {
+            // Register the user with an empty password.
+            passwd = "";
+        }
+        final PasswordDigest passwordDigest = new PasswordDigest(passwd.toCharArray());
+        String message = tryCreateUser(username, passwordDigest);
         String responseType = AuthenticationServlet.RESPONSE_STATUS_SUCCESS;
 
         if (message != null) {
@@ -90,10 +97,9 @@ public class CustomUserRegistrationServlet extends HttpServlet {
      * Try to create a user with the provided username and password. On error,
      * returns a string containing an error message. On success, returns null.
      */
-    public String tryCreateUser(final String username, final String password) {
+    public String tryCreateUser(final String username, final PasswordDigest passwordDigest) {
         String lusername = username;
-        String lpassword = password;
-        final String message = null;
+        // final String message = null;
         ParticipantId id = null;
 
         try {
@@ -130,12 +136,7 @@ public class CustomUserRegistrationServlet extends HttpServlet {
             return "An unexpected error occured while trying to retrieve account status";
         }
 
-        if (lpassword == null) {
-            // Register the user with an empty password.
-            lpassword = "";
-        }
-
-        final HumanAccountDataImpl account = new HumanAccountDataImpl(id, new PasswordDigest(lpassword.toCharArray()));
+        final HumanAccountDataImpl account = new HumanAccountDataImpl(id, passwordDigest);
         try {
             accountStore.putAccount(account);
         } catch (final PersistenceException e) {
