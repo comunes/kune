@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,9 +19,13 @@
  */
 package org.ourproject.kune.platf.client;
 
+import com.google.gwt.user.client.ui.IsWidget;
+
 /**
  * For make tests without dependencies to gwt. Use casting to use the widget.
+ * Use #{@link com.gwtplatform.mvp.client.View} 0r #{@link IsWidget}
  */
+@Deprecated
 public interface View {
 
 }

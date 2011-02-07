@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -98,12 +98,48 @@ import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SocialNetworkService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.domain.Comment;
+import cc.kune.domain.Container;
+import cc.kune.domain.Content;
+import cc.kune.domain.ExtMediaDescrip;
+import cc.kune.domain.Group;
+import cc.kune.domain.I18nCountry;
+import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.I18nTranslation;
+import cc.kune.domain.License;
+import cc.kune.domain.Rate;
+import cc.kune.domain.SocialNetwork;
+import cc.kune.domain.Tag;
+import cc.kune.domain.TagUserContent;
+import cc.kune.domain.User;
 
 import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 
 public class PlatformServerModule extends AbstractExtendedModule {
+    private void bindFinders() {
+        // http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html
+        // (...) Just-in-time bindings created for child injectors will be
+        // created in an ancestor injector whenever possible (...)
+        // (This fails with finders, then we make explicit bindings)
+
+        bind(User.class);
+        bind(Group.class);
+        bind(Content.class);
+        bind(Container.class);
+        bind(License.class);
+        bind(SocialNetwork.class);
+        bind(Rate.class);
+        bind(I18nCountry.class);
+        bind(I18nLanguage.class);
+        bind(I18nTranslation.class);
+        bind(Tag.class);
+        bind(TagUserContent.class);
+        bind(Comment.class);
+        bind(ExtMediaDescrip.class);
+    }
+
     private void bindManagers() {
         bind(UserManager.class).to(UserManagerDefault.class);
         bind(GroupManager.class).to(GroupManagerDefault.class);
@@ -149,6 +185,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
         install(PersistenceService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
         bind(KunePersistenceService.class);
 
+        bindFinders();
         bindManagers();
         bindRPC();
         bindServices();

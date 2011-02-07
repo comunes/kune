@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -45,6 +45,7 @@ import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
 import cc.kune.domain.utils.UserBuddiesData;
+import cc.kune.wave.server.CustomUserRegistrationServlet;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -58,12 +59,14 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     private final I18nLanguageManager languageManager;
     private final ChatProperties properties;
     // private final PropertiesManager propManager;
+    private final CustomUserRegistrationServlet waveUserRegister;
     private final XmppManager xmppManager;
 
     @Inject
     public UserManagerDefault(final Provider<EntityManager> provider, final User finder,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n) {
+            final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n,
+            final CustomUserRegistrationServlet waveUserRegister) {
         super(provider, User.class);
         this.finder = finder;
         this.languageManager = languageManager;
@@ -71,6 +74,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         this.xmppManager = xmppManager;
         this.properties = properties;
         this.i18n = i18n;
+        this.waveUserRegister = waveUserRegister;
     }
 
     @Override
@@ -86,6 +90,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         } catch (final NoResultException e) {
             throw new I18nNotFoundException();
         }
+        waveUserRegister.tryCreateUser(shortName, passwd);
         // if (userPropGroup == null) {
         // userPropGroup = propGroupManager.find(User.PROPS_ID);
         // }
