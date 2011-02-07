@@ -40,6 +40,10 @@ import cc.kune.core.client.auth.UserPassAutocompleteManagerImpl;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
 import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.groups.newgroup.NewGroup;
+import cc.kune.core.client.groups.newgroup.NewGroupPanel;
+import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
+import cc.kune.core.client.groups.newgroup.NewGroupView;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.init.AppStarterDefault;
@@ -69,7 +73,6 @@ import cc.kune.core.client.state.SessionDefault;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateManagerDefault;
-import cc.kune.core.client.ui.QTipsHelper;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -99,7 +102,6 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(EventBus.class).to(EventBusWithLogging.class).in(Singleton.class);
         bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
         bind(RootPresenter.class).asEagerSingleton();
-        bind(QTipsHelper.class).asEagerSingleton();
         bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
         bind(I18nUITranslationService.class).in(Singleton.class);
         bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
@@ -118,6 +120,8 @@ public class CoreGinModule extends AbstractPresenterModule {
                 SiteLogoPresenter.SiteLogoProxy.class);
         bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,
                 SitebarActionsViewImpl.class, SitebarActionsPresenter.SitebarActionsProxy.class);
+        bindPresenter(NewGroupPresenter.class, NewGroupView.class, NewGroupPanel.class,
+                NewGroupPresenter.NewGroupProxy.class);
 
         bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class, SignInPresenter.SignInProxy.class);
@@ -125,6 +129,7 @@ public class CoreGinModule extends AbstractPresenterModule {
                 RegisterPresenter.RegisterProxy.class);
         bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
         bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
+        bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
 
         bind(UserMessagesPresenter.class).in(Singleton.class);
         bind(UserMessagesPanel.class).in(Singleton.class);

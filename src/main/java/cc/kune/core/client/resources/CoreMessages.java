@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@ public final class CoreMessages {
     public final static String EMAIL_IN_USE = "This email address is being used by another user. Please, try with another one";
     public final static String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Logo";
     public final static String ENT_LOGO_SELECTOR_PERSON_TITLE = "Avatar";
-    public final static String FIELD_MUST_BE_BETWEEN_3_AND_15 = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes";
+    public final static String FIELD_MUST_BE_BETWEEN_3_AND_15 = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers";
     public final static String GROUP_OPTIONS_DIALOG_TITLE = "Group options";
     public final static String INCORRECT_NICKNAME_EMAIL_OR_PASSWORD = "The nickname/email/password is incorrect";
     public final static String MEMBERS_NOT_PUBLIC = "The members of this group are not public";

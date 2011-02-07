@@ -106,8 +106,8 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
             final StateToken token = state.getStateToken();
             if (((StateContainerDTO) state).getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
                 final String publicUrl = stateTokenUtils.getPublicUrl(token);
-                // getView().setContentGotoPublicUrl(publicUrl);
-                getView().setContentGotoPublicUrl("http://www.google.com");
+                getView().setContentGotoPublicUrl(publicUrl);
+                // getView().setContentGotoPublicUrl("http://www.google.com");
                 if (state instanceof StateContentDTO) {
                     final StateContentDTO content = (StateContentDTO) state;
                     if (content.getStatus().equals(ContentStatus.publishedOnline)) {

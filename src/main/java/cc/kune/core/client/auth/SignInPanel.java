@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -47,11 +47,6 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
         super(SIGNIN_DIALOG, mask, i18n, i18n.t(CoreMessages.SIGN_IN_TITLE), true, true, true, 360, 430, "",
                 i18n.t(CoreMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
                 CANCEL_BUTTON_ID, images, ERROR_MSG, 102);
-
-        // @Override
-        // public void onShow(final Component component) {
-        //
-        // }
 
         final VerticalPanel panel = new VerticalPanel();
         signInForm = new SignInForm(i18n);

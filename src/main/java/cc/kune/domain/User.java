@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -106,7 +106,7 @@ public class User implements HasId {
     @Column(unique = true)
     // http://www.hibernate.org/hib_docs/validator/reference/en/html/validator-defineconstraints.html
     @Length(min = 3, max = 15)
-    @Pattern(regex = "^[a-z0-9_\\-]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+    @Pattern(regex = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
     private String shortName;
 
     @NotNull

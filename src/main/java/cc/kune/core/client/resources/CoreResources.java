@@ -322,6 +322,9 @@ public interface CoreResources extends ClientBundle {
     @Source("kune-anim.gif")
     ImageResource kuneAnim();
 
+    @Source("kune-anim-g.gif")
+    ImageResource kuneAnimGray();
+
     @Source("kune-close.png")
     ImageResource kuneClose();
 

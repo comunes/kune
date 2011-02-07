@@ -146,7 +146,7 @@ public class WaveStarter {
     public WaveStarter() {
     }
 
-    public void run(final Module coreSettings, final Injector parentInjector) throws PersistenceException,
+    public Injector run(final Module coreSettings, final Injector parentInjector) throws PersistenceException,
             ConfigurationException, WaveServerException {
         // Injector settingsInjector = Guice.createInjector(coreSettings);
         Injector settingsInjector = parentInjector.createChildInjector(coreSettings);
@@ -176,13 +176,13 @@ public class WaveStarter {
 
         LOG.info("Starting server");
         server.startWebSocketServer();
+        return injector;
     }
 
-    public void runMain(final Injector settingsInjector) {
+    public Injector runMain(final Injector settingsInjector) {
         try {
             final Module coreSettings = CustomSettingsBinder.bindSettings(PROPERTIES_FILE_KEY, CoreSettings.class);
-            run(coreSettings, settingsInjector);
-            return;
+            return run(coreSettings, settingsInjector);
         } catch (final PersistenceException e) {
             LOG.error("PersistenceException when running server:", e);
         } catch (final ConfigurationException e) {
@@ -190,6 +190,6 @@ public class WaveStarter {
         } catch (final WaveServerException e) {
             LOG.error("WaveServerException when running server:", e);
         }
-
+        return settingsInjector;
     }
 }

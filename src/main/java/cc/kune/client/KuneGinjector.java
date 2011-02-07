@@ -30,6 +30,7 @@ import cc.kune.core.client.auth.RegisterPresenter;
 import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
 import cc.kune.core.client.logs.EventBusWithLogging;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
@@ -79,6 +80,8 @@ public interface KuneGinjector extends Ginjector {
     GxtGuiProvider getGxtGuiProvider();
 
     I18nTranslationService getI18n();
+
+    AsyncProvider<NewGroupPresenter> getNewGroupPresenter();
 
     ProxyFailureHandler getProxyFailureHandler();
 

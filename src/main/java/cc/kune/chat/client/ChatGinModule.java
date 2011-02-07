@@ -31,5 +31,6 @@ public class ChatGinModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
         bind(ChatClient.class).to(ChatClientDefault.class).in(Singleton.class);
+        bind(ChatOptions.class).in(Singleton.class);
     }
 }

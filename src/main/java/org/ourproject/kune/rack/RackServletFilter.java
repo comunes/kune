@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -91,10 +91,10 @@ public class RackServletFilter implements Filter {
             throws IOException, ServletException {
 
         final String relative = RackHelper.getRelativeURL(request);
-        // log.debug("REQUEST: " + relative);
+        LOG.debug("REQUEST: " + relative);
         for (final RequestMatcher matcher : excludes) {
             if (matcher.matches(relative)) {
-                // log.debug("SKIPING!");
+                LOG.info("Excluded (from Guice): " + relative);
                 chain.doFilter(request, response);
                 return;
             }
@@ -129,12 +129,12 @@ public class RackServletFilter implements Filter {
         final RackModule module = getModule(filterConfig);
         final RackBuilder builder = new RackBuilder();
         module.configure(builder);
-
         final Rack rack = builder.getRack();
+        final Injector parentInjector = Guice.createInjector();
         final WaveStarter waveStarter = new WaveStarter();
-        final Injector injector = installInjector(filterConfig, rack);
-        waveStarter.runMain(injector);
-        startContainerListeners(rack.getListeners(), injector);
+        final Injector waveChildInjector = waveStarter.runMain(parentInjector);
+        final Injector kuneChildInjector = installInjector(filterConfig, rack, waveChildInjector);
+        startContainerListeners(rack.getListeners(), kuneChildInjector);
         docks = rack.getDocks();
         excludes = rack.getExcludes();
         initFilters(filterConfig);
@@ -147,10 +147,11 @@ public class RackServletFilter implements Filter {
         }
     }
 
-    private Injector installInjector(final FilterConfig filterConfig, final Rack rack) {
-        final Injector injector = Guice.createInjector(rack.getGuiceModules());
-        filterConfig.getServletContext().setAttribute(INJECTOR_ATTRIBUTE, injector);
-        return injector;
+    private Injector installInjector(final FilterConfig filterConfig, final Rack rack, final Injector waveChildInjector) {
+        // final Injector injector = Guice.createInjector();
+        final Injector childInjector = waveChildInjector.createChildInjector(rack.getGuiceModules());
+        filterConfig.getServletContext().setAttribute(INJECTOR_ATTRIBUTE, childInjector);
+        return childInjector;
     }
 
     private void startContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,

@@ -57,21 +57,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <listener>
     <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class>
   </listener>
-  <!-- Kune normal guice configuration ======================================================================== -->
-  <filter>
-    <filter-name>rack</filter-name>
-    <filter-class>org.ourproject.kune.rack.RackServletFilter</filter-class>
-    <init-param>
-      <param-name>org.ourproject.kune.rack.RackModule</param-name>
-      <param-value>
-        org.ourproject.kune.app.server.KuneRackModule
-      </param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>rack</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+
   <!-- Emite xmpp proxy ======================================================================================= -->
   <!-- <servlet> -->
   <!-- <servlet-name>HttpBind</servlet-name> -->
@@ -382,6 +368,21 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <servlet-name>WiabWebClient</servlet-name>
     <url-pattern>/webclient/*</url-pattern>
   </servlet-mapping>
+  <!-- Kune normal guice configuration ======================================================================== -->
+  <filter>
+    <filter-name>rack</filter-name>
+    <filter-class>org.ourproject.kune.rack.RackServletFilter</filter-class>
+    <init-param>
+      <param-name>org.ourproject.kune.rack.RackModule</param-name>
+      <param-value>
+        org.ourproject.kune.app.server.KuneRackModule
+      </param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>rack</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <!-- Wave proxies with context /wiab/ ====================================================================== -->
   <!-- <servlet> -->
   <!-- <servlet-name>WiabSocketIO</servlet-name> -->

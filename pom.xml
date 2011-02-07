@@ -364,8 +364,8 @@
         </exclusion>
       </exclusions>
     </dependency>
-<!--     <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> -->
-<!--      <version>3.3.1.GA</version> </dependency> -->
+    <!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> -->
+    <!-- <version>3.3.1.GA</version> </dependency> -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-search</artifactId>
@@ -381,11 +381,16 @@
       <artifactId>hibernate-tools</artifactId>
       <version>3.2.3.GA</version>
     </dependency>
-    <dependency>
+		<dependency>
+			    <groupId>org.hibernate</groupId>
+					    <artifactId>hibernate-c3p0</artifactId>
+							    <version>3.3.1.GA</version>
+								</dependency>
+								<!-- <dependency>
       <groupId>c3p0</groupId>
       <artifactId>c3p0</artifactId>
       <version>0.9.1.2</version>
-    </dependency>
+			</dependency> -->
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
@@ -522,8 +527,8 @@
     <dependency>
       <groupId>org.jruby.rack</groupId>
       <artifactId>jruby-rack</artifactId>
-      <version>1.0.3</version>
-      <!-- <version>0.9.4</version> -->
+      <!-- <version>1.0.3</version> -->
+      <version>0.9.4</version>
     </dependency>
     <!-- wave -->
     <dependency>

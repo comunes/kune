@@ -21,6 +21,7 @@ package cc.kune.core.client.state;
 
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.SignIn;
+import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 
@@ -31,16 +32,18 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class SiteTokenListeners {
+    private final Provider<NewGroup> newGroup;
     private final Provider<Register> register;
     private final Provider<SignIn> signIn;
     private final Provider<StateManager> stateManager;
 
     @Inject
     public SiteTokenListeners(final EventBus eventBus, final Provider<StateManager> stateManager,
-            final Provider<SignIn> signIn, final Provider<Register> register) {
+            final Provider<SignIn> signIn, final Provider<Register> register, final Provider<NewGroup> newGroup) {
         this.stateManager = stateManager;
         this.signIn = signIn;
         this.register = register;
+        this.newGroup = newGroup;
         init();
         eventBus.addHandler(AppStartEvent.getType(), new AppStartHandler() {
             @Override
@@ -61,6 +64,12 @@ public class SiteTokenListeners {
             @Override
             public void onHistoryToken() {
                 register.get().doRegister();
+            }
+        });
+        stateManager.get().addSiteToken(SiteCommonTokens.NEWGROUP, new HistoryTokenCallback() {
+            @Override
+            public void onHistoryToken() {
+                newGroup.get().doNewGroup();
             }
         });
     }

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -102,9 +102,6 @@ import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSnd
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdForm;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrdFormView;
-import org.ourproject.kune.workspace.client.newgroup.NewGroup;
-import org.ourproject.kune.workspace.client.newgroup.NewGroupPanel;
-import org.ourproject.kune.workspace.client.newgroup.NewGroupPresenter;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
@@ -228,6 +225,7 @@ import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.ContentService;
@@ -888,17 +886,20 @@ public class WorkspaceModule extends AbstractExtendedModule {
         // }
         // });
 
-        register(Singleton.class, new Factory<NewGroup>(NewGroup.class) {
-            @Override
-            public NewGroup create() {
-                final NewGroupPresenter presenter = new NewGroupPresenter(i(I18nTranslationService.class),
-                        i(Session.class), i(StateManager.class), p(GroupServiceAsync.class));
-                final NewGroupPanel view = new NewGroupPanel(presenter, i(I18nTranslationService.class),
-                        p(LicenseWizard.class), i(NotifyLevelImages.class));
-                presenter.init(view);
-                return presenter;
-            }
-        });
+        // register(Singleton.class, new Factory<NewGroup>(NewGroup.class) {
+        // @Override
+        // public NewGroup create() {
+        // final NewGroupPresenter presenter = new
+        // NewGroupPresenter(i(I18nTranslationService.class),
+        // i(Session.class), i(StateManager.class),
+        // p(GroupServiceAsync.class));
+        // final NewGroupPanel view = new NewGroupPanel(presenter,
+        // i(I18nTranslationService.class),
+        // p(LicenseWizard.class), i(NotifyLevelImages.class));
+        // presenter.init(view);
+        // return presenter;
+        // }
+        // });
 
         register(Singleton.class, new Factory<UserLiveSearcher>(UserLiveSearcher.class) {
             @Override

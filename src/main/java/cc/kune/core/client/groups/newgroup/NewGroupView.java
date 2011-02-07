@@ -17,36 +17,47 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.ui;
+package cc.kune.core.client.groups.newgroup;
 
-/**
- * qtip integration: http://craigsworks.com/projects/qtip/
- * 
- */
-public class QTipsHelper {
-    public QTipsHelper() {
-        init();
-    }
+import cc.kune.common.client.noti.NotifyLevel;
 
-    private void init() {
-        /*-{
-        $wnd.jQuery('div[title]').qtip({
-        style: {
-        name: 'Green', tip: true,
-        border: {
-        width: 2,
-        radius: 4,
-        color: '#CF5C43'
-        },
-        background: '#FFFFBD',
-        textAlign: 'left'
-        },
-        position: { corner: {
-        target: 'bottomRight',
-        tooltip: 'topLeft'
-        } }
-        }
-    }-*/
-        ;
-    }
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.gwtplatform.mvp.client.View;
+
+public interface NewGroupView extends View {
+
+    void clearData();
+
+    HasClickHandlers getFirstBtn();
+
+    String getLongName();
+
+    String getPublicDesc();
+
+    HasClickHandlers getSecondBtn();
+
+    String getShortName();
+
+    String getTags();
+
+    void hide();
+
+    void hideMessage();
+
+    boolean isCommunity();
+
+    boolean isFormValid();
+
+    boolean isOrganization();
+
+    boolean isProject();
+
+    void maskProcessing();
+
+    void setMessage(String message, NotifyLevel level);
+
+    void show();
+
+    void unMask();
+
 }

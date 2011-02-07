@@ -39,7 +39,7 @@
   <g:SimplePanel ui:field="mainPanel" styleName='{style.main}'>
     <g:FlowPanel ui:field="flow" styleName='{style.flow}'>
       <g:Image ui:field="icon" styleName='{style.icon}'
-        resource="{img.kuneAnim}" />
+        resource="{img.kuneAnimGray}" />
       <g:Label ui:field="label" styleName='{style.label}' />
     </g:FlowPanel>
   </g:SimplePanel>

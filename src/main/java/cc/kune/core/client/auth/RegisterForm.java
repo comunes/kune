@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -58,7 +58,7 @@ public class RegisterForm extends DefaultForm {
         shortNameRegField.setAllowBlank(false);
         shortNameRegField.setMinLength(3);
         shortNameRegField.setMaxLength(15);
-        shortNameRegField.setRegex("^[a-z0-9_\\-]+$");
+        shortNameRegField.setRegex("^[a-z0-9]+$");
         shortNameRegField.getMessages().setMinLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
         shortNameRegField.getMessages().setMaxLengthText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));
         shortNameRegField.getMessages().setRegexText(i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_15));

@@ -41,6 +41,7 @@ import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
 import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.resources.icons.IconResources;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
@@ -55,7 +56,6 @@ import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.reconnect.client.SessionReconnect;
 import com.calclab.emite.xep.avatar.client.AvatarManager;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
@@ -133,7 +133,8 @@ public class ChatClientDefault implements ChatClient {
         xmppSession = Suco.get(XmppSession.class);
         chatManager = Suco.get(ChatManager.class);
         roomManager = Suco.get(RoomManager.class);
-        Suco.get(SessionReconnect.class);
+        // Suco.get(SessionReconnect.class);
+
         eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
@@ -142,7 +143,12 @@ public class ChatClientDefault implements ChatClient {
                 chatOptions.roomHost = event.getInitData().getChatRoomHost();
                 checkChatDomain(chatOptions.domain);
                 if (session.isLogged()) {
-                    doLogin(session.getCurrentUserInfo());
+                    session.check(new AsyncCallbackSimple<Void>() {
+                        @Override
+                        public void onSuccess(final Void result) {
+                            doLogin(session.getCurrentUserInfo());
+                        }
+                    });
                 }
                 eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
                     @Override

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -103,7 +103,7 @@ public class Group implements HasId {
     @Field(index = Index.UN_TOKENIZED, store = Store.NO)
     @Column(unique = true)
     @Length(min = 3, max = 15, message = "The shortname must be between 3 and 15 characters of length")
-    @Pattern(regex = "^[a-z0-9_\\-]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
+    @Pattern(regex = "^[a-z0-9]+$", message = "The name must be between 3 and 15 lowercase characters. It can only contain Western characters, numbers, and dashes")
     private String shortName;
 
     @OneToOne(cascade = CascadeType.ALL)

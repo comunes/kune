@@ -28,17 +28,12 @@ import cc.kune.core.client.rpcservices.UserService;
 import com.google.inject.Inject;
 
 public abstract class IntegrationTest {
-
+    @Inject
+    DatabaseProperties properties;
     @Inject
     protected UserSession session;
     @Inject
     UserService userService;
-    @Inject
-    DatabaseProperties properties;
-
-    public String getHash() {
-        return session.getHash();
-    }
 
     protected String doLogin() throws DefaultException {
         return userService.login(getSiteAdminShortName(), properties.getAdminPassword()).getUserHash();
@@ -58,6 +53,10 @@ public abstract class IntegrationTest {
 
     protected String getDefSiteGroupName() {
         return properties.getDefaultSiteShortName();
+    }
+
+    public String getHash() {
+        return session.getHash();
     }
 
     protected String getSiteAdminShortName() {
