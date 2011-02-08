@@ -129,7 +129,7 @@ public class CustomUserRegistrationServlet extends HttpServlet {
 
         try {
             if (accountStore.getAccount(id) != null) {
-                return "Account already exists";
+                return "An account with this name already exists";
             }
         } catch (final PersistenceException e) {
             LOG.severe("Failed to retreive account data for " + id, e);

@@ -25,6 +25,7 @@ import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
@@ -146,6 +147,9 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
                         getView().setErrorMessage(i18n.t(CoreMessages.EMAIL_IN_USE), NotifyLevel.error);
                     } else if (caught instanceof GroupNameInUseException) {
                         getView().setErrorMessage(i18n.t(CoreMessages.NAME_IN_USE), NotifyLevel.error);
+                    } else if (caught instanceof UserRegistrationException) {
+                        getView().setErrorMessage(i18n.t("Error during registration. " + caught.getMessage()),
+                                NotifyLevel.error);
                     } else {
                         getView().setErrorMessage(i18n.t("Error during registration."), NotifyLevel.error);
                         throw new UIException("Other kind of exception in user registration", caught);

@@ -24,6 +24,7 @@ import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.GroupNameInUseException;
+import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
@@ -39,8 +40,11 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
@@ -122,10 +126,17 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
             }
         });
         getView().getSecondBtn().addClickHandler(new ClickHandler() {
-
             @Override
             public void onClick(final ClickEvent event) {
                 onCancel();
+            }
+        });
+        getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
+
+            @Override
+            public void onClose(final CloseEvent<PopupPanel> event) {
+                Log.debug("Closing register presenter");
+                NewGroupPresenter.this.onCancel();
             }
         });
     }

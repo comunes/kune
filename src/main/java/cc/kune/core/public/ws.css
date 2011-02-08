@@ -694,17 +694,17 @@ a:visited {
 .k-error-tb {
   background: #FFB380 none repeat scroll 0% 50%;
   /* color: #250; */
-  margin: 0 20px 0 10px;
+  padding: 10px;
 }
 
 .k-error-tb img {
-  margin: 15px 5px 5px 15px;
+  margin: 0 10px;
+  float: left;
 }
 
-.k-error-tb span {
-  position: relative;
-  top: -7px;
-  left: 9px;
+.k-error-tb div {
+  font-size: 14px;
+  display: table-cell;
 }
 
 .k-mask {

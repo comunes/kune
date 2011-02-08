@@ -23,6 +23,7 @@ import cc.kune.common.client.noti.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.KuneUiUtils;
+import cc.kune.core.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
@@ -48,12 +49,12 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
                 i18n.t(CoreMessages.SIGN_IN_TITLE), SIGN_IN_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
                 CANCEL_BUTTON_ID, images, ERROR_MSG, 102);
 
-        final VerticalPanel panel = new VerticalPanel();
         signInForm = new SignInForm(i18n);
         signInForm.setWidth(370);
-        panel.add(signInForm.getFormPanel());
-        panel.add(createNoAccountRegister());
-        super.getInnerPanel().add(panel);
+        signInForm.add(createNoAccountRegister());
+        messageErrorBar = new MessageToolbar(images, errorLabelId);
+        signInForm.add(messageErrorBar);
+        super.getInnerPanel().add(signInForm.getFormPanel());
     }
 
     private VerticalPanel createNoAccountRegister() {

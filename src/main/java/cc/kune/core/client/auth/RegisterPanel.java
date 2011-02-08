@@ -24,9 +24,9 @@ import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.KuneUiUtils;
+import cc.kune.core.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.inject.Inject;
@@ -50,13 +50,12 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
         super(REGISTER_DIALOG, mask, i18n, i18n.t(CoreMessages.REGISTER_TITLE), true, true, true, 400, 420, "",
                 i18n.t(CoreMessages.REGISTER_TITLE), REGISTER_BUTTON_ID, i18n.tWithNT("Cancel", "used in button"),
                 CANCEL_BUTTON_ID, images, ERRMSG, 5);
-        final VerticalPanel panel = new VerticalPanel();
-        // panel.setBorder(false);
         registerForm = new RegisterForm(i18n, session);
         registerForm.setWidth(370);
-        panel.add(registerForm.getFormPanel());
-        super.getInnerPanel().add(panel);
-        panel.setId(REGISTER_FORM);
+        registerForm.getFormPanel().setId(REGISTER_FORM);
+        messageErrorBar = new MessageToolbar(images, errorLabelId);
+        registerForm.add(messageErrorBar);
+        super.getInnerPanel().add(registerForm.getFormPanel());
     }
 
     @Override

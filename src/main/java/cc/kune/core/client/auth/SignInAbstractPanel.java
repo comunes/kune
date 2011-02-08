@@ -36,11 +36,11 @@ import com.gwtplatform.mvp.client.ViewImpl;
 public abstract class SignInAbstractPanel extends ViewImpl {
 
     private final BasicTopDialog dialog;
-    private final String errorLabelId;
+    protected final String errorLabelId;
     protected final I18nTranslationService i18n;
-    private final NotifyLevelImages images;
+    protected final NotifyLevelImages images;
     private final MaskWidgetView mask;
-    private MessageToolbar messageErrorBar;
+    protected MessageToolbar messageErrorBar;
 
     public SignInAbstractPanel(final String dialogId, final MaskWidgetView mask, final I18nTranslationService i18n,
             final String title, final boolean autohide, final boolean modal, final boolean autoscroll, final int width,
@@ -58,14 +58,6 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     @Override
     public Widget asWidget() {
         return dialog;
-    }
-
-    private void createMessageErrorIfNeeded() {
-        if (messageErrorBar == null) {
-            messageErrorBar = new MessageToolbar(images, errorLabelId);
-            messageErrorBar.setHeight("50px");
-            dialog.getBottomPanel().add(messageErrorBar);
-        }
     }
 
     public HasCloseHandlers<PopupPanel> getClose() {
@@ -91,7 +83,6 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     }
 
     public void hideMessages() {
-        createMessageErrorIfNeeded();
         messageErrorBar.hideErrorMessage();
     }
 
@@ -104,7 +95,6 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     }
 
     public void setErrorMessage(final String message, final NotifyLevel level) {
-        createMessageErrorIfNeeded();
         messageErrorBar.setErrorMessage(message, level);
     }
 

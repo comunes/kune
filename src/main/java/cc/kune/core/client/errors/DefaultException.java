@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -32,9 +32,10 @@ public class DefaultException extends InvocationException implements IsSerializa
 
     public DefaultException(final int statusCode, final String message) {
         super(statusCode + " " + message);
+
     }
 
     public DefaultException(final String message) {
-        this(0, message);
+        super(message);
     }
 }

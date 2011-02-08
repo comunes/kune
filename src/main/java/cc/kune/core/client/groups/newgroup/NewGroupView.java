@@ -22,6 +22,8 @@ package cc.kune.core.client.groups.newgroup;
 import cc.kune.common.client.noti.NotifyLevel;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.HasCloseHandlers;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.gwtplatform.mvp.client.View;
 
 public interface NewGroupView extends View {
@@ -29,6 +31,8 @@ public interface NewGroupView extends View {
     void clearData();
 
     void focusOnShorName();
+
+    HasCloseHandlers<PopupPanel> getClose();
 
     HasClickHandlers getFirstBtn();
 

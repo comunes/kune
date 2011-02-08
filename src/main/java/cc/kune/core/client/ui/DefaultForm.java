@@ -32,6 +32,7 @@ import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
+import com.google.gwt.user.client.ui.Widget;
 
 public class DefaultForm {
 
@@ -77,6 +78,10 @@ public class DefaultForm {
 
     public void add(final Label label) {
         form.add(label);
+    }
+
+    public void add(final Widget widget) {
+        form.add(widget);
     }
 
     public void addButton(final Button button) {

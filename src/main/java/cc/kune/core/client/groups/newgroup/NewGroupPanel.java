@@ -36,7 +36,9 @@ import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -78,14 +80,14 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     @Inject
     public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img, final MaskWidgetView mask) {
         dialog = new BasicTopDialog(NEWGROUP_WIZARD, CoreMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, true, 450,
-                420, "k-newgroup-icon", i18n.t("Register"), REGISTER_BUTTON, i18n.t("Cancel"), CANCEL_BUTTON, 9);
+                360, "k-newgroup-icon", i18n.t("Register"), REGISTER_BUTTON, i18n.t("Cancel"), CANCEL_BUTTON, 9);
         this.i18n = i18n;
         this.mask = mask;
         // Field.setMsgTarget("side");
         form = createNewGroupInitialDataForm();
 
         messageErrorBar = new MessageToolbar(img, ERROR_MSG_BAR);
-        dialog.getBottomPanel().add(messageErrorBar);
+        form.add(messageErrorBar);
         dialog.getInnerPanel().add(form);
     }
 
@@ -98,6 +100,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     public void clearData() {
         form.reset();
         shortNameField.focus();
+        messageErrorBar.hideErrorMessage();
     }
 
     private FormPanel createNewGroupInitialDataForm() {
@@ -202,9 +205,12 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
         shortNameField.focus();
     }
 
+    public HasCloseHandlers<PopupPanel> getClose() {
+        return dialog.getClose();
+    }
+
     @Override
     public HasClickHandlers getFirstBtn() {
-
         return dialog.getFirstBtn();
     }
 
