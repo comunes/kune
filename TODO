@@ -11,6 +11,8 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** TODO WIAB under proxies
+https://groups.google.com/group/wave-protocol/browse_thread/thread/202dee4bfdbdeee6
 ** TODO StateManager #signin while already signed in NPE
 ** TODO Testing Presenters via juckito:
 https://code.google.com/p/gwt-platform/wiki/UnitTesting
@@ -255,6 +257,9 @@ http://stackoverflow.com/questions/2430244/making-gwt-application-crawlable-by-a
 ** vjrj <v> IconHyperlink.java and IconLabel.java to gwt1.5
 
 * MID-TERM
+** TODO start/stop init scripts
+https://groups.google.com/group/wave-protocol/browse_thread/thread/d9cdcea0d5393eda
+./platforms/ubuntu/server-wrapper.sh
 ** TODO registration/general mask
 ** TODO sigin forms to uibinder (intro sing-in) 
 ** TODO Use google-guice guicepersist (in 3.0) instead of warp-persist

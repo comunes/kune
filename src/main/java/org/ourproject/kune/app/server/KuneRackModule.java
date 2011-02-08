@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -99,12 +99,8 @@ public class KuneRackModule implements RackModule {
         builder.exclude("/javascripts/.*");
         builder.exclude("/templates/.*");
 
-        /* Wave with context '/wiab/' */
-        // builder.exclude("/wiab.*");
-        // builder.exclude("/socket.*");
-
         /* Wave with context '/' */
-        builder.exclude("/");
+        // builder.exclude("/*");
         builder.exclude("/attachment/.*");
         builder.exclude("/auth/signin");
         builder.exclude("/auth/signout");

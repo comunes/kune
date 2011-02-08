@@ -41,7 +41,7 @@ public class UserPassAutocompleteManagerImpl implements UserPassAutocompleteMana
 
     @Override
     public String getNickOrEmail() {
-        return getElementValue("username");
+        return getElementValue("address");
     }
 
     @Override
@@ -51,7 +51,7 @@ public class UserPassAutocompleteManagerImpl implements UserPassAutocompleteMana
 
     @Override
     public void setNickOrEmail(final String username) {
-        DOM.getElementById("username").setAttribute(VALUE, username);
+        DOM.getElementById("address").setAttribute(VALUE, username);
     }
 
     @Override

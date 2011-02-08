@@ -90,7 +90,6 @@ public class RackServletFilter implements Filter {
             throws IOException, ServletException {
 
         final String relative = RackHelper.getRelativeURL(request);
-        LOG.debug("REQUEST: " + relative);
         for (final RequestMatcher matcher : excludes) {
             if (matcher.matches(relative)) {
                 LOG.info("Excluded (from Guice): " + relative);
@@ -98,7 +97,7 @@ public class RackServletFilter implements Filter {
                 return;
             }
         }
-
+        LOG.debug("REQUEST: " + relative);
         final FilterChain newChain = new DockChain(docks.iterator());
         newChain.doFilter(request, response);
     }

@@ -77,8 +77,8 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
     @Inject
     public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img, final MaskWidgetView mask) {
-        dialog = new BasicTopDialog(NEWGROUP_WIZARD, CoreMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, false, 450,
-                430, "k-newgroup-icon", i18n.t("Register"), REGISTER_BUTTON, i18n.t("Cancel"), CANCEL_BUTTON, 9);
+        dialog = new BasicTopDialog(NEWGROUP_WIZARD, CoreMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, true, 450,
+                420, "k-newgroup-icon", i18n.t("Register"), REGISTER_BUTTON, i18n.t("Cancel"), CANCEL_BUTTON, 9);
         this.i18n = i18n;
         this.mask = mask;
         // Field.setMsgTarget("side");
@@ -91,7 +91,6 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
     @Override
     public Widget asWidget() {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -106,14 +105,15 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
         form.setFrame(true);
         form.setPadding(10);
         form.setBorders(false);
-        form.setWidth(420);
+        form.setWidth(360);
         form.setLabelWidth(LABEL_WIDTH);
         form.setLabelAlign(LabelAlign.RIGHT);
         form.setButtonAlign(HorizontalAlignment.RIGHT);
+        form.setHeaderVisible(false);
 
         final Label intro = new Label();
-        intro.setText(i18n.t("Please fill this form to register a new group:")); // +
-                                                                                 // DefaultFormUtils.brbr());
+        intro.setText(i18n.t("Please fill this form to register a new group:"));
+        intro.setStyleName("k-form-intro");
         form.add(intro);
 
         shortNameField = new TextField<String>();
@@ -167,11 +167,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
         final FieldSet groupTypeFieldSet = new FieldSet();
         groupTypeFieldSet.setHeading(i18n.t("Group type"));
-        groupTypeFieldSet.setCollapsible(false);
-        groupTypeFieldSet.setStyleName(MARGIN_LEFT_105PX);
-        groupTypeFieldSet.setWidth(BIG_FIELD_WIDTH);
-        // groupTypeFieldSet.setFrame(false);
-        groupTypeFieldSet.setCollapsible(false);
+        groupTypeFieldSet.addStyleName("k-form-fieldset");
+        groupTypeFieldSet.setCollapsible(true);
+        groupTypeFieldSet.setWidth("210px");
         groupTypeFieldSet.setAutoHeight(true);
 
         form.add(groupTypeFieldSet);
@@ -197,6 +195,11 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
         communityRadio.setTabIndex(8);
 
         return form;
+    }
+
+    @Override
+    public void focusOnShorName() {
+        shortNameField.focus();
     }
 
     @Override

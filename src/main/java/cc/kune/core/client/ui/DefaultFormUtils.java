@@ -35,6 +35,7 @@ public class DefaultFormUtils {
 
         if (radioTip != null) {
             radio.setTitle(radioTip);
+            radio.setBoxLabel(radioLabel);
             // radio.setBoxLabel(KuneUiUtils.genQuickTipLabel(radioLabel, null,
             // radioTip));
             // ToolTip tooltip = new ToolTip();

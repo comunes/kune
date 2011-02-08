@@ -36,6 +36,7 @@ import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.wave.client.WaveClientTester;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -59,18 +60,20 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     private final Provider<Register> registerProvider;
     private final TimerWrapper timer;
     private final UserServiceAsync userService;
+    private final WaveClientTester waveClientTester;
 
     @Inject
     public SignInPresenter(final EventBus eventBus, final SignInView view, final SignInProxy proxy,
             final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
             final UserServiceAsync userService, final Provider<Register> registerProvider,
             final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete,
-            final TimerWrapper timeWrapper) {
+            final TimerWrapper timeWrapper, final WaveClientTester waveClientTester) {
         super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, autocomplete);
         this.eventBus = eventBus;
         this.userService = userService;
         this.registerProvider = registerProvider;
         this.timer = timeWrapper;
+        this.waveClientTester = waveClientTester;
     }
 
     @Override
@@ -175,8 +178,10 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
                 public void onSuccess(final UserInfoDTO userInfoDTO) {
                     onSignIn(userInfoDTO);
                     stateManager.restorePreviousToken();
+                    // waveClientTester.doLogin(nickOrEmail, passwd);
                     getView().hide();
                     getView().unMask();
+
                 }
             };
             userService.login(user.getShortName(), user.getPassword(), callback);

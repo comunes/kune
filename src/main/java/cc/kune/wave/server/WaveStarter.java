@@ -45,7 +45,6 @@ import org.waveprotocol.box.server.rpc.AuthenticationServlet;
 import org.waveprotocol.box.server.rpc.FetchServlet;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
-import org.waveprotocol.box.server.rpc.WaveClientServlet;
 import org.waveprotocol.box.server.waveserver.WaveBus;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
@@ -140,7 +139,7 @@ public class WaveStarter {
         final ServletHolder proxyServletHolder = server.addServlet("/gadgets/*", proxyServlet);
         proxyServletHolder.setInitParameter("HostHeader", gadgetServerHostname);
 
-        server.addServlet("/", injector.getInstance(WaveClientServlet.class));
+        server.addServlet("/", injector.getInstance(CustomWaveClientServlet.class));
     }
 
     public WaveStarter() {

@@ -28,6 +28,8 @@ public interface NewGroupView extends View {
 
     void clearData();
 
+    void focusOnShorName();
+
     HasClickHandlers getFirstBtn();
 
     String getLongName();

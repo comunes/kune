@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -44,7 +44,7 @@ public class DefaultForm {
     private final FormPanel form;
 
     public DefaultForm() {
-        this(HorizontalAlignment.RIGHT);
+        this(HorizontalAlignment.LEFT);
     }
 
     public DefaultForm(final HorizontalAlignment buttonAlign) {
@@ -53,13 +53,13 @@ public class DefaultForm {
         form.setPadding(10);
         form.setBorders(false);
         form.setLabelWidth(DEF_FIELD_LABEL_WITH);
-        form.setLabelAlign(LabelAlign.RIGHT);
+        form.setLabelAlign(LabelAlign.LEFT);
         form.setButtonAlign(buttonAlign);
         form.setHeaderVisible(false);
     }
 
     public DefaultForm(final String title) {
-        this(title, HorizontalAlignment.RIGHT);
+        this(title, HorizontalAlignment.LEFT);
     }
 
     public DefaultForm(final String title, final HorizontalAlignment buttonAlign) {

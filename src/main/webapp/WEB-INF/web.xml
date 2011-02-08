@@ -18,7 +18,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <welcome-file-list>
     <welcome-file>ws.html</welcome-file>
   </welcome-file-list>
-
   <!-- Wave proxies ========================================================================================= -->
   <filter>
     <filter-name>JettyContinuationFilter</filter-name>
@@ -26,6 +25,23 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   </filter>
   <filter-mapping>
     <filter-name>JettyContinuationFilter</filter-name>
+    <servlet-name>Wiab</servlet-name>
+    <!-- <url-pattern>/*</url-pattern> -->
+  </filter-mapping>
+  <servlet>
+    <servlet-name>Wiab</servlet-name>
+    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
+    <init-param>
+      <param-name>ProxyTo</param-name>
+      <param-value>http://127.0.0.1:9898/</param-value>
+    </init-param>
+    <init-param>
+      <param-name>Prefix</param-name>
+      <param-value>/</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Wiab</servlet-name>
     <url-pattern>/attachment/*</url-pattern>
     <url-pattern>/auth/signin</url-pattern>
     <url-pattern>/auth/signout</url-pattern>
@@ -43,8 +59,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <url-pattern>/static/*</url-pattern>
     <url-pattern>/webclient/*</url-pattern>
     <!-- <url-pattern>/*</url-pattern> -->
-  </filter-mapping>
-
+    <!-- <load-on-startup>1</load-on-startup> -->
+  </servlet-mapping>
   <!-- JRuby servlets ======================================================================================= -->
   <!-- Note: this gives problems depending on the version of jetty or tomcat -->
   <context-param>
@@ -84,7 +100,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <listener>
     <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class>
   </listener>
-
   <!-- Emite xmpp proxy ======================================================================================= -->
   <!-- <servlet> -->
   <!-- <servlet-name>HttpBind</servlet-name> -->
@@ -122,278 +137,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <servlet-name>Proxy</servlet-name>
     <url-pattern>/http-bind/
     </url-pattern>
-  </servlet-mapping>
-  <!-- Wave proxies with context / ====================================================================== -->
-  <servlet>
-    <servlet-name>WiabAttachs</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabAttachs</servlet-name>
-    <url-pattern>/attachment/*</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabSignIn</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabSignIn</servlet-name>
-    <url-pattern>/auth/signin</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabSignOut</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabSignOut</servlet-name>
-    <url-pattern>/auth/signout</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabRegister</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabRegister</servlet-name>
-    <url-pattern>/auth/register</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabFetch</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabFetch</servlet-name>
-    <url-pattern>/fetch/*</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabRobotDataApi</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabRobotDataApi</servlet-name>
-    <url-pattern>/robot/dataapi</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabRobotDataApiOauth</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabRobotDataApiOauth</servlet-name>
-    <url-pattern>/robot/dataapi/oauth/*</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabRobotDataApiRpc</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabRobotDataApiRpc</servlet-name>
-    <url-pattern>/robot/dataapi/rpc</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabRobotRegister</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabRobotRegister</servlet-name>
-    <url-pattern>/robot/register/*</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabRobotRpc</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabRobotRpc</servlet-name>
-    <url-pattern>/robot/rpc</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabGadgets</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabGadgets</servlet-name>
-    <url-pattern>/gadgets</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabGadgetsAst</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabGadgetsAst</servlet-name>
-    <url-pattern>/gadgets/*</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabSocketIO</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabSocketIO</servlet-name>
-    <url-pattern>/socket.io/*</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabSocket</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabSocket</servlet-name>
-    <url-pattern>/socket</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabStatic</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabStatic</servlet-name>
-    <url-pattern>/static/*</url-pattern>
-  </servlet-mapping>
-  <!-- ==================== -->
-  <servlet>
-    <servlet-name>WiabWebClient</servlet-name>
-    <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class>
-    <init-param>
-      <param-name>ProxyTo</param-name>
-      <param-value>http://127.0.0.1:9898/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>Prefix</param-name>
-      <param-value>/</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WiabWebClient</servlet-name>
-    <url-pattern>/webclient/*</url-pattern>
   </servlet-mapping>
   <!-- Kune normal guice configuration ======================================================================== -->
   <filter>

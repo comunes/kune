@@ -91,6 +91,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
                 if (session.isLogged()) {
                     NotifyUser.showProgressProcessing();
                     getView().show();
+                    getView().focusOnShorName();
                     NotifyUser.hideProgress();
                 } else {
                     // stateManager.restorePreviousToken();
