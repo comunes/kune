@@ -26,11 +26,14 @@ import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 
+import com.extjs.gxt.ui.client.Style.ButtonScale;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.SplitButton;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
@@ -111,6 +114,14 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
     public void setEnabled(final boolean enabled) {
         if (button != null) {
             button.setEnabled(enabled);
+        }
+    }
+
+    @Override
+    public void setIconResource(final ImageResource icon) {
+        if (button != null) {
+            button.setIcon(AbstractImagePrototype.create(icon));
+            button.setScale(ButtonScale.SMALL);
         }
     }
 

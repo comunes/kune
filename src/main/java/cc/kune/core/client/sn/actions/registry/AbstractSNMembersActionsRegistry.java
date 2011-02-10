@@ -6,5 +6,5 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 
 import com.google.inject.Provider;
 
-public abstract class AbstractSocialNetworActionsRegistry extends ArrayList<Provider<MenuItemDescriptor>> { // NOPMD by vjrj on 10/02/11 3:19
+public abstract class AbstractSNMembersActionsRegistry extends ArrayList<Provider<MenuItemDescriptor>> { // NOPMD by vjrj on 10/02/11 3:19
 }

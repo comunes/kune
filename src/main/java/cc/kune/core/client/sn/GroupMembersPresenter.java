@@ -8,7 +8,8 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.services.FileDownloadUtils;
-import cc.kune.core.client.sn.actions.registry.AbstractSocialNetworActionsRegistry;
+import cc.kune.core.client.sn.actions.registry.AbstractSNMembersActionsRegistry;
+import cc.kune.core.client.sn.actions.registry.GroupMembersActionsRegistry;
 import cc.kune.core.client.sn.actions.registry.SNAdminsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.SNCollabsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.SNPendingsMenuItemsRegistry;
@@ -39,8 +40,9 @@ public class GroupMembersPresenter extends
     }
 
     public interface GroupMembersView extends View {
-        int AVATARLABELMAXSIZE = 15;
-        int AVATARSIZE = 32;
+        int AVATARLABELMAXSIZE = 4;
+        // int AVATARSIZE = 32;
+        int AVATARSIZE = 22;
         String NOAVATAR = "";
 
         void addAdmin(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
@@ -56,7 +58,17 @@ public class GroupMembersPresenter extends
 
         IsActionExtensible getBottomToolbar();
 
-        void setVisible(boolean b);
+        void setAdminsCount(int count);
+
+        void setCollabsCount(int count);
+
+        void setCollabsVisible(boolean visible);
+
+        void setPendingsCount(int count);
+
+        void setPendingVisible(boolean visible);
+
+        void setVisible(boolean visible);
 
         void showMemberNotPublic();
 
@@ -65,9 +77,10 @@ public class GroupMembersPresenter extends
         void showOrphan();
     }
 
+    private final GroupMembersActionsRegistry actionsRegistry;
     private final SNAdminsMenuItemsRegistry adminsMenuItemsRegistry;
-    private final SNCollabsMenuItemsRegistry collabsMenuItemsRegistry;
 
+    private final SNCollabsMenuItemsRegistry collabsMenuItemsRegistry;
     private final Provider<FileDownloadUtils> downloadProvider;
     private final SNPendingsMenuItemsRegistry pendingsMenuItemsRegistry;
     private final Session session;
@@ -77,13 +90,15 @@ public class GroupMembersPresenter extends
             final StateManager stateManager, final Session session, final Provider<FileDownloadUtils> downloadProvider,
             final SNAdminsMenuItemsRegistry adminsMenuItemsRegistry,
             final SNCollabsMenuItemsRegistry collabsMenuItemsRegistry,
-            final SNPendingsMenuItemsRegistry pendingsMenuItemsRegistry) {
+            final SNPendingsMenuItemsRegistry pendingsMenuItemsRegistry,
+            final GroupMembersActionsRegistry actionsRegistry) {
         super(eventBus, view, proxy);
         this.session = session;
         this.downloadProvider = downloadProvider;
         this.adminsMenuItemsRegistry = adminsMenuItemsRegistry;
         this.collabsMenuItemsRegistry = collabsMenuItemsRegistry;
         this.pendingsMenuItemsRegistry = pendingsMenuItemsRegistry;
+        this.actionsRegistry = actionsRegistry;
         stateManager.onStateChanged(new StateChangedEvent.StateChangedHandler() {
             @Override
             public void onStateChanged(final StateChangedEvent event) {
@@ -107,11 +122,11 @@ public class GroupMembersPresenter extends
     }
 
     private void createActions() {
-        // TODO
+        getView().getBottomToolbar().addActions(actionsRegistry);
     }
 
     private GuiActionDescCollection createMenuItems(final GroupDTO group,
-            final AbstractSocialNetworActionsRegistry registry) {
+            final AbstractSNMembersActionsRegistry registry) {
         final GuiActionDescCollection items = new GuiActionDescCollection();
         for (final Provider<MenuItemDescriptor> provider : registry) {
             final MenuItemDescriptor menuItem = provider.get();
@@ -130,6 +145,7 @@ public class GroupMembersPresenter extends
             getView().setVisible(false);
         } else {
             if (state.getSocialNetworkData().isMembersVisible()) {
+                getView().clear();
                 setGroupMembers(state.getGroupMembers(), state.getGroupRights());
             } else {
                 getView().clear();
@@ -155,7 +171,11 @@ public class GroupMembersPresenter extends
         final int numCollabs = collabList.size();
         final int numPendings = pendingCollabsList.size();
 
-        if ((numAdmins + numCollabs + numPendings) == 0) {
+        getView().setAdminsCount(numAdmins);
+        getView().setCollabsCount(numCollabs);
+        getView().setPendingsCount(numPendings);
+
+        if ((numAdmins + numCollabs) == 0) {
             getView().showOrphan();
         } else {
             final boolean userIsAdmin = rights.isAdministrable();
@@ -166,19 +186,22 @@ public class GroupMembersPresenter extends
                     final String avatar = getAvatar(admin);
                     getView().addAdmin(admin, avatar, admin.getLongName(), "",
                             createMenuItems(admin, adminsMenuItemsRegistry));
-
                 }
+                getView().setCollabsVisible(numCollabs > 0);
                 for (final GroupDTO collab : collabList) {
                     final String avatar = getAvatar(collab);
                     getView().addCollab(collab, avatar, collab.getLongName(), "",
                             createMenuItems(collab, collabsMenuItemsRegistry));
                 }
                 if (userIsAdmin) {
+                    getView().setPendingVisible(numPendings > 0);
                     for (final GroupDTO pendingCollab : pendingCollabsList) {
                         final String avatar = getAvatar(pendingCollab);
-                        getView().addCollab(pendingCollab, avatar, pendingCollab.getLongName(), "",
+                        getView().addPending(pendingCollab, avatar, pendingCollab.getLongName(), "",
                                 createMenuItems(pendingCollab, pendingsMenuItemsRegistry));
                     }
+                } else {
+                    getView().setPendingVisible(false);
                 }
                 getView().showMembers();
             }

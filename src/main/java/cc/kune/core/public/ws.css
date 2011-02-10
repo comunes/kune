@@ -775,10 +775,54 @@ a:visited {
     color: #FFF;
     text-transform: lowercase;
     padding-left: 10px;
+    float: left;
+}
+
+.k-sn-adminsCountlabel,.k-sn-collabsCountlabel,.k-sn-pendingsCountlabel {
+  float: left;
+  padding-left: 5px;
+  color: #e0e0e0;
 }
 
 .k-sn-adminslabel {
 
+}
+
+.k-sn-mainpanel .k-basic-thumb {
+    float: left;
+}
+
+/*
+.k-sn-mainpanel .x-btn button {
+    text-decoration: underline;
+    white-space: nowrap;
+}
+*/
+.k-sn-mainpanel .x-btn button {
+    cursor: pointer;
+    font: 13px 'Ubuntu', arial;
+    padding: 2px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    text-decoration: none;
+    vertical-align: middle;
+    background-color: #F2F2F2;
+    border: 2px gray solid;
+    height: 26px !important;
+    line-height: 2em !important;
+    padding-left: 25px !important;
+}
+
+.k-sn-mainpanel .x-btn button:hover {
+    border: 2px orange solid;
+    background: #f0f0f0;
+    color: #855585;
+}
+
+.k-sn-mainpanel .x-btn button:active {
+    border-top-color: #ffffff;
+    background: #ffffff;
 }
 
 .k-sn-collabslabel {
@@ -787,6 +831,14 @@ a:visited {
 
 .k-sn-pendingslabel {
 
+}
+
+.k-sn-orphan-label {
+    padding: 10px;
+}
+
+.k-sn-novisible-label {
+    padding: 10px;
 }
 
 .k-sn-adminspanel {
@@ -798,11 +850,15 @@ a:visited {
 }
 
 .k-sn-pendingspanel {
-
+    /* background-color: #a05a2c; */
 }
 
 .k-sn-adminsscroll,.k-sn-collabsscroll,.k-sn-pendingsscroll {
-    padding-left: 10px;
+
+}
+
+.k-sn-adminsflow,.k-sn-collabsflow,.k-sn-pendingsflow {
+    margin-left: 10px;
 }
 
 .k-sn-adminsscroll {
@@ -814,7 +870,7 @@ a:visited {
 }
 
 .k-sn-pendingsscroll {
-    margin: 5px;
+
 }
 
 .k-userconfirm-label {
@@ -823,7 +879,16 @@ a:visited {
 }
 
 .k-sn-deck {
-    padding: 5px;
+
+}
+
+.k-sn-bottomPanel {
+    padding: 0 10px;
+    float: right;
+}
+
+.k-sn-bottomPanel-actions {
+    width: 100%;
 }
 
 .k-sn-novisible-label,.k-sn-orphan-label {

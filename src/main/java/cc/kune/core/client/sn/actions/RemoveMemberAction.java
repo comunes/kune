@@ -3,7 +3,6 @@ package cc.kune.core.client.sn.actions;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -18,12 +17,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class RemoveMemberAction extends AbstractExtendedAction {
-    public class RemoveMemberMenuItem extends MenuItemDescriptor {
-        @Inject
-        public RemoveMemberMenuItem(final RemoveMemberAction action) {
-            super(action);
-        }
-    }
     private final I18nTranslationService i18n;
     private final Session session;
     private final Provider<SocialNetworkServiceAsync> snServiceProvider;

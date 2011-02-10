@@ -36,9 +36,11 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
 
@@ -129,6 +131,11 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
     @Override
     protected void setEnabled(final boolean enabled) {
         item.setVisible(enabled);
+    }
+
+    @Override
+    public void setIconResource(final ImageResource icon) {
+        item.setIcon(AbstractImagePrototype.create(icon));
     }
 
     @Override

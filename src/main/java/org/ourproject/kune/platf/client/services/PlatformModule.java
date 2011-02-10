@@ -461,7 +461,7 @@ public class PlatformModule extends AbstractExtendedModule {
         register(Singleton.class, new Factory<AccessRightsClientManager>(AccessRightsClientManager.class) {
             @Override
             public AccessRightsClientManager create() {
-                return new AccessRightsClientManager(i(StateManager.class));
+                return null; // new AccessRightsClientManager(i(StateManager.class));
             }
         });
 

@@ -3,7 +3,6 @@ package cc.kune.core.client.sn.actions;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -12,12 +11,6 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 
 public class GotoGroupAction extends AbstractExtendedAction {
-    public class GotoGroupMenuItem extends MenuItemDescriptor {
-        @Inject
-        public GotoGroupMenuItem(final GotoGroupAction action) {
-            super(action);
-        }
-    }
 
     private final StateManager stateManager;
 

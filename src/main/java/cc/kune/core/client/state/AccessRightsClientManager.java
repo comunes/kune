@@ -19,31 +19,35 @@
  */
 package cc.kune.core.client.state;
 
+import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.shared.domain.utils.AccessRights;
 
-import com.calclab.suco.client.events.Listener2;
+import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Inject;
 
 public class AccessRightsClientManager {
-    private final AccessRights previousRights;
+    private final EventBus eventBus;
+    private AccessRights previousRights;
 
-    // private final Event2<AccessRights, AccessRights> onRightsChanged;
-
-    public AccessRightsClientManager(final StateManager stateManager) {
+    @Inject
+    public AccessRightsClientManager(final EventBus eventBus, final StateManager stateManager) {
+        this.eventBus = eventBus;
         this.previousRights = null;
-        // this.onRightsChanged = new Event2<AccessRights , AccessRights
-        // >("onRightsChanged");
-        // stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-        // public void onEvent(final StateAbstractDTO newState) {
-        // final AccessRights rights = newState.getGroupRights();
-        // if (!rights.equals(previousRights)) {
-        // onRightsChanged.fire(previousRights, rights);
-        // previousRights = rights;
-        // }
-        // }
-        // });
+        stateManager.onStateChanged(new StateChangedHandler() {
+
+            @Override
+            public void onStateChanged(final StateChangedEvent event) {
+                final AccessRights rights = event.getState().getGroupRights();
+                if (!rights.equals(previousRights)) {
+                    AccessRightsChangedEvent.fire(eventBus, previousRights, rights);
+                    previousRights = rights;
+                }
+
+            }
+        });
     }
 
-    public void onRightsChanged(final Listener2<AccessRights, AccessRights> listener) {
-        // onRightsChanged.add(listener);
+    public void onRightsChanged(final AccessRightsChangedEvent.AccessRightsChangedHandler handler) {
+        eventBus.addHandler(AccessRightsChangedEvent.getType(), handler);
     }
 }

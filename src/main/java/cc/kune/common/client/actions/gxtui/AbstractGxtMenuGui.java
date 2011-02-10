@@ -31,11 +31,25 @@ import cc.kune.common.client.actions.ui.descrip.Position;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.UIObject;
 
 public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements ParentWidget {
 
+    public enum MenuPosition {
+        b, // The top left corner (default)
+        bl, // The center of the top edge
+        br, // The bottom right corner ,// The top right corner
+        c, // The center of the left edge
+        l, // In the center of the element
+        r, // The center of the right edge
+        t, // The bottom left corner
+        tl, // The center of the bottom edge
+        tr
+    }
+    public static final String DEF_MENU_POSITION = "bl";
+    public static final String MENU_POSITION = "menu-position";
     protected Menu menu;
 
     public AbstractGxtMenuGui() {
@@ -52,7 +66,6 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
 
     public void addSeparator() {
         menu.add(new SeparatorMenuItem());
-
     }
 
     @Override
@@ -92,6 +105,12 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
         return this;
     }
 
+    protected String getMenuPosition() {
+        final MenuPosition position = (MenuPosition) descriptor.getValue(MENU_POSITION);
+        GWT.log("menu position" + position == null ? "none" : position.name());
+        return position == null ? DEF_MENU_POSITION : position.name();
+    }
+
     @Override
     public void insert(final int position, final UIObject item) {
         menu.insert((MenuItem) item, position);
@@ -104,9 +123,9 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
 
     public void show(final Object relative) {
         if (relative instanceof String) {
-            menu.show(RootPanel.get((String) relative));
+            menu.show(RootPanel.get((String) relative).getElement(), getMenuPosition());
         } else if (relative instanceof UIObject) {
-            menu.show(((UIObject) relative).getElement(), "bl");
+            menu.show(((UIObject) relative).getElement(), getMenuPosition());
         } else if (relative instanceof Position) {
             final Position position = (Position) relative;
             menu.showAt(position.getX(), position.getY());

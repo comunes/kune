@@ -34,7 +34,9 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
 
@@ -94,6 +96,12 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     }
 
     @Override
+    public void setIconResource(final ImageResource icon) {
+        button.setIcon(AbstractImagePrototype.create(icon));
+        button.setScale(ButtonScale.SMALL);
+    }
+
+    @Override
     protected void setIconStyle(final String style) {
         button.setIconStyle(style);
         button.setScale(ButtonScale.SMALL);
@@ -117,9 +125,12 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
         if (tooltip != null && !tooltip.isEmpty()) {
             final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
             if (key == null) {
-                button.setToolTip(new GxtDefTooltip(tooltip));
+                // button.setToolTip(new GxtDefTooltip(tooltip));
+                button.setTitle(tooltip);
             } else {
-                button.setToolTip(new GxtDefTooltip(tooltip + key.toString()));
+                // button.setToolTip(new GxtDefTooltip(tooltip +
+                // key.toString()));
+                button.setTitle(tooltip + key.toString());
             }
         }
     }

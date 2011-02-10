@@ -1,5 +1,6 @@
 package cc.kune.core.client.sn;
 
+import cc.kune.common.client.actions.gxtui.AbstractGxtMenuGui;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
@@ -19,6 +20,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.DeckPanel;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -34,6 +36,8 @@ public class GroupMembersPanel extends ViewImpl implements GroupMembersView {
     private static GroupMembersPanelUiBinder uiBinder = GWT.create(GroupMembersPanelUiBinder.class);
     private final ActionSimplePanel actions;
     @UiField
+    Label adminsCount;
+    @UiField
     FlowPanel adminsFlow;
     @UiField
     Label adminsLabel;
@@ -41,9 +45,14 @@ public class GroupMembersPanel extends ViewImpl implements GroupMembersView {
     @UiField
     FlowPanel bottomPanel;
     @UiField
+    Label collabsCount;
+    @UiField
     FlowPanel collabsFlow;
     @UiField
     Label collabsLabel;
+    @UiField
+    DockLayoutPanel collabsPanel;
+
     @UiField
     ScrollPanel collabsScroll;
     @UiField
@@ -59,9 +68,13 @@ public class GroupMembersPanel extends ViewImpl implements GroupMembersView {
     @UiField
     Label orphanProject;
     @UiField
+    Label pendingsCount;
+    @UiField
     FlowPanel pendingsFlow;
     @UiField
     Label pendingsLabel;
+    @UiField
+    DockLayoutPanel pendingsPanel;
     @UiField
     ScrollPanel pendingsScroll;
     private final Widget widget;
@@ -82,6 +95,7 @@ public class GroupMembersPanel extends ViewImpl implements GroupMembersView {
         bottomActionsToolbar = new ActionFlowPanel(guiProvider);
         actions = new ActionSimplePanel(guiProvider);
         bottomPanel.add(bottomActionsToolbar);
+        bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
         armor.getEntityToolsNorth().add(widget);
         deck.showWidget(2);
     }
@@ -125,6 +139,7 @@ public class GroupMembersPanel extends ViewImpl implements GroupMembersView {
         final BasicThumb thumb = new BasicThumb(avatarUrl, AVATARSIZE, group.getShortName(), AVATARLABELMAXSIZE, false);
         final MenuDescriptor menu = new MenuDescriptor();
         menu.setStandalone(true);
+        menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
         for (final GuiActionDescrip item : menuitems) {
             item.setParent(menu);
         }
@@ -138,15 +153,39 @@ public class GroupMembersPanel extends ViewImpl implements GroupMembersView {
         thumb.addClickHandler(clickHand);
         actions.add(menu);
         actions.add(menuitems);
-
         thumb.setTooltip(tooltipTitle, tooltip);
-        thumb.setOnOverLabel(true);
+        thumb.setLabelVisible(false);
         return thumb;
     }
 
     @Override
     public IsActionExtensible getBottomToolbar() {
         return bottomActionsToolbar;
+    }
+
+    @Override
+    public void setAdminsCount(final int count) {
+        adminsCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    }
+
+    @Override
+    public void setCollabsCount(final int count) {
+        collabsCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    }
+
+    @Override
+    public void setCollabsVisible(final boolean visible) {
+        collabsPanel.setVisible(visible);
+    }
+
+    @Override
+    public void setPendingsCount(final int count) {
+        pendingsCount.setText(new StringBuffer("(").append(count).append(")").toString());
+    }
+
+    @Override
+    public void setPendingVisible(final boolean visible) {
+        pendingsPanel.setVisible(visible);
     }
 
     @Override

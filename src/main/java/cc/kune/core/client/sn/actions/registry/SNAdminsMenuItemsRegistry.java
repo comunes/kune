@@ -8,7 +8,7 @@ import cc.kune.core.client.sn.actions.DenyJoinGroupAction;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.sn.actions.GotoMemberAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
-import cc.kune.core.client.sn.actions.StartChatWithUserAction;
+import cc.kune.core.client.sn.actions.StartChatWithMemberAction;
 import cc.kune.core.client.sn.actions.conditions.IsAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
@@ -17,14 +17,14 @@ import cc.kune.core.client.state.Session;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class SNAdminsMenuItemsRegistry extends AbstractSocialNetworActionsRegistry {
+public class SNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
     @Inject
     public SNAdminsMenuItemsRegistry(final Session session, final IsAdministrableCondition isAdministrableCondition,
             final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
             final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
             final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
-            final DenyJoinGroupAction denyJoinGroupAction, final StartChatWithUserAction startChatWithUserAction,
+            final DenyJoinGroupAction denyJoinGroupAction, final StartChatWithMemberAction startChatWithUserAction,
             final GotoGroupAction gotoGroupAction, final GotoMemberAction gotoMemberAction) {
         add(new Provider<MenuItemDescriptor>() {
             @Override

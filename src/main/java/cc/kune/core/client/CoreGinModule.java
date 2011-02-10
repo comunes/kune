@@ -68,6 +68,11 @@ import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorViewImpl;
 import cc.kune.core.client.sn.GroupMembersPanel;
 import cc.kune.core.client.sn.GroupMembersPresenter;
+import cc.kune.core.client.sn.actions.registry.GroupMembersActionsRegistry;
+import cc.kune.core.client.sn.actions.registry.SNAdminsMenuItemsRegistry;
+import cc.kune.core.client.sn.actions.registry.SNCollabsMenuItemsRegistry;
+import cc.kune.core.client.sn.actions.registry.SNPendingsMenuItemsRegistry;
+import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.ContentProvider;
 import cc.kune.core.client.state.ContentProviderDefault;
 import cc.kune.core.client.state.HistoryWrapper;
@@ -158,11 +163,18 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(ErrorHandler.class).in(Singleton.class);
         bind(StateManagerDefault.class).in(Singleton.class);
         bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
+        bind(AccessRightsClientManager.class).in(Singleton.class);
         bind(ContentProvider.class).to(ContentProviderDefault.class).in(Singleton.class);
         bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
         bind(PrefetchUtilities.class).in(Singleton.class);
         bind(AppStarter.class).to(AppStarterDefault.class).in(Singleton.class);
         bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
+
+        // SN
+        bind(SNAdminsMenuItemsRegistry.class).in(Singleton.class);
+        bind(SNCollabsMenuItemsRegistry.class).in(Singleton.class);
+        bind(SNPendingsMenuItemsRegistry.class).in(Singleton.class);
+        bind(GroupMembersActionsRegistry.class).in(Singleton.class);
 
         bind(SitebarNewGroupLink.class).in(Singleton.class);
         bind(SitebarSignInLink.class).in(Singleton.class);

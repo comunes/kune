@@ -5,8 +5,8 @@
     type='cc.kune.gspace.client.resources.WsArmorResources' />
   <ui:style>
     .frame {
-    	border: 0px;
-    	margin: 0px;
+      border: 0px;
+      margin: 0px;
     }
   </ui:style>
   <g:DockLayoutPanel ui:field="mainpanel" styleName='{res.style.mainPanel}'
@@ -86,7 +86,7 @@
             <g:east size="200.0">
               <g:DockLayoutPanel unit="PX"
                 styleName="{res.style.entityTools}" ui:field="splitEast">
-                <g:north size="190">
+                <g:north size="305">
                   <g:VerticalPanel width="100%"
                     ui:field="entityToolsNorth" styleName="{res.style.entityToolsNorth}"></g:VerticalPanel>
                 </g:north>

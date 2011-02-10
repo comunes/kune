@@ -65,9 +65,9 @@ public class BasicThumb extends Composite {
         vpanel.add(image);
         vpanel.add(label);
         vpanel.addStyleName("k-basic-thumb");
-        vpanel.addStyleName("kune-Margin-Small-trbl");
-        vpanel.addStyleName("kune-pointer");
-        vpanel.addStyleName("kune-floatleft");
+        vpanel.addStyleName("kune-Margin-Mini-trbl");
+        vpanel.addStyleName("k-pointer");
+        vpanel.addStyleName("k-floatleft");
         vpanel.setCellHorizontalAlignment(label, VerticalPanel.ALIGN_CENTER);
         if (clickHandler instanceof ClickHandler) {
             addClickHandlerImpl(clickHandler);
@@ -110,9 +110,12 @@ public class BasicThumb extends Composite {
         image.addClickHandler(clickHandler);
     }
 
+    public void setLabelVisible(final boolean visible) {
+        label.setVisible(visible);
+    }
+
     public void setOnOverLabel(final boolean onOverLabel) {
         this.onOverLabel = onOverLabel;
-        label.setVisible(!onOverLabel);
     }
 
     public void setText(final String text) {

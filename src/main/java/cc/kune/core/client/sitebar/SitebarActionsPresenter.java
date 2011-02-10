@@ -22,6 +22,7 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.gxtui.AbstractGxtMenuGui;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
@@ -99,7 +100,6 @@ public class SitebarActionsPresenter extends
     private void init() {
         getView().getLeftBar().addAction(LEFT_TOOLBAR);
         getView().getRightBar().addAction(RIGHT_TOOLBAR);
-        getView().getRightBar().addAction(OPTIONS_MENU);
     }
 
     @ProxyEvent
@@ -116,6 +116,7 @@ public class SitebarActionsPresenter extends
         action.putValue(Action.NAME, "Test");
         final MenuItemDescriptor testMenuItem = new MenuItemDescriptor(OPTIONS_MENU, action);
         OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
+        OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
         // final ToolbarSeparatorDescriptor separator = new
         // ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
         // final ToolbarSeparatorDescriptor separator2 = new
@@ -151,10 +152,12 @@ public class SitebarActionsPresenter extends
         // right.addAction(separator2);
         right.addAction(newGroupLink.get());
         // right.addAction(separator);
+        right.addAction(OPTIONS_MENU);
         right.addAction(testMenuItem);
         right.addAction(menuSeparator);
         right.addAction(bugs);
         right.addAction(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
+
     }
 
     @Override

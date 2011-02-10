@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.oldsn;
+package cc.kune.core.client.sn.actions;
 
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;

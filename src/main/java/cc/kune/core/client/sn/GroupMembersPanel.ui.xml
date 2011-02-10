@@ -13,54 +13,65 @@
     <g:DeckPanel ui:field="deck" addStyleNames="k-sn-deck">
       <g:Label ui:field="noMembersVisible" addStyleNames="k-sn-novisible-label" />
       <g:Label ui:field="orphanProject" addStyleNames="k-sn-orphan-label" />
-      <g:FlowPanel width="100%" height="100px" ui:field="membersFlow">
+      <g:FlowPanel width="100%" ui:field="membersFlow">
 
         <g:DockLayoutPanel unit="EM" width="100%"
-          addStyleNames="k-sn-adminspanel" height="100px">
-          <g:north size="2.0">
+          addStyleNames="k-sn-adminspanel" height="80px">
+          <g:north size="1.2">
+            <g:FlowPanel>
             <g:Label text="Admins" ui:field="adminsLabel"
-              addStyleNames="k-sn-adminslabel" />
+              addStyleNames="k-sn-adminslabel" /><g:Label ui:field="adminsCount"
+              addStyleNames="k-sn-adminsCountlabel" />
+          </g:FlowPanel>
           </g:north>
           <g:center>
             <g:ScrollPanel width="100%" addStyleNames="k-sn-adminsscroll">
-              <g:FlowPanel width="100%" height="100%"
+              <g:FlowPanel addStyleNames="k-sn-adminsflow"
                 ui:field="adminsFlow" />
             </g:ScrollPanel>
           </g:center>
         </g:DockLayoutPanel>
 
         <g:DockLayoutPanel unit="EM" width="100%"
-          addStyleNames="k-sn-collabspanel" height="100px">
-          <g:north size="2.0">
+          ui:field="collabsPanel" addStyleNames="k-sn-collabspanel"
+          height="80px">
+          <g:north size="1.2">
+          <g:FlowPanel>
             <g:Label text="Collabs" ui:field="collabsLabel"
-              addStyleNames="k-sn-collabslabel" />
+              addStyleNames="k-sn-collabslabel" /><g:Label ui:field="collabsCount"
+              addStyleNames="k-sn-collabsCountlabel" />
+          </g:FlowPanel>
           </g:north>
           <g:center>
             <g:ScrollPanel ui:field="collabsScroll" width="100%"
               addStyleNames="k-sn-collabsscroll">
-              <g:FlowPanel width="100%" height="100%"
-                ui:field="collabsFlow" />
+              <g:FlowPanel ui:field="collabsFlow"
+                addStyleNames="k-sn-collabsflow" />
             </g:ScrollPanel>
           </g:center>
 
         </g:DockLayoutPanel>
 
         <g:DockLayoutPanel unit="EM" width="100%"
-          addStyleNames="k-sn-pendingspanel" height="100px">
-          <g:north size="2.0">
+          ui:field="pendingsPanel" addStyleNames="k-sn-pendingspanel"
+          height="80px">
+          <g:north size="1.2">
+           <g:FlowPanel>
             <g:Label text="Pendings" ui:field="pendingsLabel"
-              addStyleNames="k-sn-pendingslabel" />
+              addStyleNames="k-sn-pendingslabel" /><g:Label ui:field="pendingsCount"
+              addStyleNames="k-sn-pendingsCountlabel" />
+               </g:FlowPanel>
           </g:north>
           <g:center>
             <g:ScrollPanel ui:field="pendingsScroll"
               addStyleNames="k-sn-pendingsscroll" width="100%">
-              <g:FlowPanel width="100%" height="100%"
+              <g:FlowPanel addStyleNames="k-sn-pendingsflow"
                 ui:field="pendingsFlow" />
             </g:ScrollPanel>
           </g:center>
         </g:DockLayoutPanel>
       </g:FlowPanel>
     </g:DeckPanel>
-    <g:FlowPanel ui:field="bottomPanel" />
+    <g:FlowPanel ui:field="bottomPanel" addStyleNames="k-sn-bottomPanel" />
   </g:FlowPanel>
 </ui:UiBinder>

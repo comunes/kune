@@ -111,12 +111,16 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
     private void setIcon(final Object icon) {
         if (icon instanceof ImageResource) {
-            setIconStyle((IconConstants.CSS_SUFFIX + ((ImageResource) icon).getName()));
+            setIconResource((ImageResource) icon);
         } else if (icon instanceof String) {
             setIconStyle((String) icon);
         } else if (icon != null) {
             throw new NotImplementedException();
         }
+    }
+
+    public void setIconResource(final ImageResource icon) {
+        setIconStyle((IconConstants.CSS_SUFFIX + icon.getName()));
     }
 
     protected abstract void setIconStyle(String style);

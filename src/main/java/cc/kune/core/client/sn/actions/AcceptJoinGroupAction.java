@@ -3,7 +3,6 @@ package cc.kune.core.client.sn.actions;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -18,13 +17,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class AcceptJoinGroupAction extends AbstractExtendedAction {
-    public class AcceptJoinGroupMenuItem extends MenuItemDescriptor {
-
-        @Inject
-        public AcceptJoinGroupMenuItem(final AcceptJoinGroupAction action) {
-            super(action);
-        }
-    }
     private final I18nTranslationService i18n;
     private final Session session;
     private final Provider<SocialNetworkServiceAsync> snServiceProvider;

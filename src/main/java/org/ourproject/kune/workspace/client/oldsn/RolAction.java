@@ -22,6 +22,7 @@ package org.ourproject.kune.workspace.client.oldsn;
 import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 
+import cc.kune.core.client.sn.actions.RolComparator;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -29,7 +30,6 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Listener2;
 import com.google.gwt.resources.client.ImageResource;
 
 public abstract class RolAction extends AbstractExtendedAction {
@@ -54,12 +54,12 @@ public abstract class RolAction extends AbstractExtendedAction {
         return new UIStatus(newVisibility, newEnabled);
     }
 
+    private boolean authNeed;
+    protected final I18nTranslationService i18n;
     protected final Session session;
     protected final StateManager stateManager;
-    protected final I18nTranslationService i18n;
-    private boolean visibleForNonMemb;
     private boolean visibleForMembers;
-    private boolean authNeed;
+    private boolean visibleForNonMemb;
 
     public RolAction(final Session session, final StateManager stateManager,
             final AccessRightsClientManager rightsManager, final I18nTranslationService i18n,
@@ -71,26 +71,29 @@ public abstract class RolAction extends AbstractExtendedAction {
         this.visibleForMembers = true;
         this.visibleForNonMemb = true;
         this.authNeed = false;
-        rightsManager.onRightsChanged(new Listener2<AccessRights, AccessRights>() {
-            public void onEvent(final AccessRights prevRights, final AccessRights newRights) {
-                setStatus(refreshStatus(rolRequired, authNeed, session.isLogged(), visibleForMembers,
-                        visibleForNonMemb, newRights));
-            }
-
-        });
+        // rightsManager.onRightsChanged(new Listener2<AccessRights,
+        // AccessRights>() {
+        // public void onEvent(final AccessRights prevRights, final AccessRights
+        // newRights) {
+        // setStatus(refreshStatus(rolRequired, authNeed, session.isLogged(),
+        // visibleForMembers,
+        // visibleForNonMemb, newRights));
+        // }
+        //
+        // });
     }
 
     public void setMustBeAuthenticated(final boolean authNeed) {
         this.authNeed = authNeed;
     }
 
-    public void setVisible(final boolean forMembers, final boolean forNonMembers) {
-        this.visibleForMembers = forMembers;
-        this.visibleForNonMemb = forNonMembers;
-    }
-
     private void setStatus(final UIStatus refreshStatus) {
         setEnabled(refreshStatus.isEnabled());
         putValue(OldGuiActionDescrip.VISIBLE, refreshStatus.isVisible());
+    }
+
+    public void setVisible(final boolean forMembers, final boolean forNonMembers) {
+        this.visibleForMembers = forMembers;
+        this.visibleForNonMemb = forNonMembers;
     }
 }
