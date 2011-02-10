@@ -27,8 +27,6 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
@@ -118,8 +116,10 @@ public class SitebarActionsPresenter extends
         action.putValue(Action.NAME, "Test");
         final MenuItemDescriptor testMenuItem = new MenuItemDescriptor(OPTIONS_MENU, action);
         OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
-        final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
-        final ToolbarSeparatorDescriptor separator2 = new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
+        // final ToolbarSeparatorDescriptor separator = new
+        // ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
+        // final ToolbarSeparatorDescriptor separator2 = new
+        // ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
 
         final MenuSeparatorDescriptor menuSeparator = new MenuSeparatorDescriptor(OPTIONS_MENU);
         final AbstractExtendedAction bugsAction = new AbstractExtendedAction() {

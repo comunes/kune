@@ -21,7 +21,7 @@ package cc.kune.common.client.actions.gxtui;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 
@@ -33,19 +33,19 @@ public class GxtSubMenuGui extends AbstractGxtMenuGui {
         super();
     }
 
-    public GxtSubMenuGui(final AbstractGuiActionDescrip descriptor) {
+    public GxtSubMenuGui(final GuiActionDescrip descriptor) {
         super(descriptor);
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.create(descriptor);
         item = new MenuItem();
         item.setSubMenu(menu);
         final AbstractGxtMenuGui parentMenu = ((AbstractGxtMenuGui) descriptor.getParent().getValue(
                 ParentWidget.PARENT_UI));
         final int position = descriptor.getPosition();
-        if (position == AbstractGuiActionDescrip.NO_POSITION) {
+        if (position == GuiActionDescrip.NO_POSITION) {
             parentMenu.add(item);
         } else {
             parentMenu.insert(position, item);

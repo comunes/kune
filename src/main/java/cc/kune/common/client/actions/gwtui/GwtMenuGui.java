@@ -21,7 +21,7 @@ package cc.kune.common.client.actions.gwtui;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.IconLabel;
 
@@ -44,7 +44,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         descriptor.putValue(ParentWidget.PARENT_UI, this);
         // Standalone menus are menus without and associated button in a toolbar

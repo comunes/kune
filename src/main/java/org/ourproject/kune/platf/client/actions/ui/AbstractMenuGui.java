@@ -29,7 +29,7 @@ public abstract class AbstractMenuGui extends AbstractGuiItem {
 
     protected final Menu menu;
 
-    public AbstractMenuGui(final GuiActionDescrip descriptor) {
+    public AbstractMenuGui(final OldGuiActionDescrip descriptor) {
         super(descriptor);
         menu = new Menu();
         menu.setShadow(true);

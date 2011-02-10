@@ -20,8 +20,8 @@
 package org.ourproject.kune.workspace.client.themes;
 
 import org.cobogw.gwt.user.client.CSS;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.calclab.suco.client.events.Listener;

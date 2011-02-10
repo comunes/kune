@@ -19,13 +19,13 @@
  */
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 
 public class MenuRadioItemDescriptor extends MenuCheckItemDescriptor {
 
     private final String group;
 
-    public MenuRadioItemDescriptor(final MenuDescriptor parent, final AbstractAction action, final String group) {
+    public MenuRadioItemDescriptor(final MenuDescriptor parent, final OldAbstractAction action, final String group) {
         super(parent, action);
         this.group = group;
     }

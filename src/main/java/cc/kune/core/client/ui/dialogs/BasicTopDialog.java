@@ -24,6 +24,7 @@ import cc.kune.common.client.ui.PopupTopPanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.UIObject;
 
 public class BasicTopDialog extends BasicDialog {
 
@@ -58,7 +59,11 @@ public class BasicTopDialog extends BasicDialog {
 
     }
 
-    public void show() {
+    public void showCentered() {
         popup.showCentered();
+    }
+
+    public void showRelativeTo(final UIObject object) {
+        popup.showRelativeTo(object);
     }
 }

@@ -286,7 +286,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
     @Override
     public void show() {
-        dialog.show();
+        dialog.showCentered();
     }
 
     @Override

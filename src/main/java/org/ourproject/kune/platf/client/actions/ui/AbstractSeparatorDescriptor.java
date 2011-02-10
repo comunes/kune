@@ -19,13 +19,13 @@
  */
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 
-public abstract class AbstractSeparatorDescriptor extends GuiActionDescrip {
+public abstract class AbstractSeparatorDescriptor extends OldGuiActionDescrip {
 
     public AbstractSeparatorDescriptor() {
-        super(new AbstractAction() {
+        super(new OldAbstractAction() {
             public void actionPerformed(final ActionEvent event) {
                 // No action
             }

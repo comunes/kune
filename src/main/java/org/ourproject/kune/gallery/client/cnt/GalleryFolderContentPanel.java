@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,10 +19,10 @@
  */
 package org.ourproject.kune.gallery.client.cnt;
 
-import org.ourproject.kune.platf.client.ui.BasicThumb;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;

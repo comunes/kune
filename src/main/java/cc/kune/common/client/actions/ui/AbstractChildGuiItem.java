@@ -19,7 +19,7 @@
  */
 package cc.kune.common.client.actions.ui;
 
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.UIException;
 
 import com.google.gwt.user.client.ui.UIObject;
@@ -33,7 +33,7 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
         super();
     }
 
-    public AbstractChildGuiItem(final AbstractGuiActionDescrip descriptor) {
+    public AbstractChildGuiItem(final GuiActionDescrip descriptor) {
         super(descriptor);
     }
 
@@ -45,7 +45,7 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         final int position = descriptor.getPosition();
         if (descriptor.isChild()) {
             // A menu item is a child, a toolbar separator, also. A button can
@@ -57,7 +57,7 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
             if (child != null) {
                 // Sometimes (menu/toolbar separators), there is no Widget to
                 // add/insert
-                if (position == AbstractGuiActionDescrip.NO_POSITION) {
+                if (position == GuiActionDescrip.NO_POSITION) {
                     parent.add(child);
                 } else {
                     parent.insert(position, child);

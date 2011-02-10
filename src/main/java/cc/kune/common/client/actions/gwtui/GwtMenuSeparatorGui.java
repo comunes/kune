@@ -21,13 +21,13 @@ package cc.kune.common.client.actions.gwtui;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.UIException;
 
 public class GwtMenuSeparatorGui extends AbstractGuiItem {
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         final AbstractGwtMenuGui menu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
         if (menu == null) {
             throw new UIException("To add a menu separator you need to add the menu before. Item: " + descriptor);

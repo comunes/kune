@@ -20,11 +20,11 @@
 package cc.kune.common.client.actions.ui.bind;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 public interface GuiBinding {
 
-    AbstractGuiItem create(AbstractGuiActionDescrip descriptor);
+    AbstractGuiItem create(GuiActionDescrip descriptor);
 
     boolean shouldBeAdded();
 

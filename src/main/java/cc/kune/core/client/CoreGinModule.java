@@ -49,6 +49,8 @@ import cc.kune.core.client.init.AppStarter;
 import cc.kune.core.client.init.AppStarterDefault;
 import cc.kune.core.client.init.PrefetchUtilities;
 import cc.kune.core.client.logs.EventBusWithLogging;
+import cc.kune.core.client.notify.confirm.UserConfirmPanel;
+import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
@@ -64,6 +66,8 @@ import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorViewImpl;
+import cc.kune.core.client.sn.GroupMembersPanel;
+import cc.kune.core.client.sn.GroupMembersPresenter;
 import cc.kune.core.client.state.ContentProvider;
 import cc.kune.core.client.state.ContentProviderDefault;
 import cc.kune.core.client.state.HistoryWrapper;
@@ -122,6 +126,8 @@ public class CoreGinModule extends AbstractPresenterModule {
                 SitebarActionsViewImpl.class, SitebarActionsPresenter.SitebarActionsProxy.class);
         bindPresenter(NewGroupPresenter.class, NewGroupView.class, NewGroupPanel.class,
                 NewGroupPresenter.NewGroupProxy.class);
+        bindPresenter(GroupMembersPresenter.class, GroupMembersPresenter.GroupMembersView.class,
+                GroupMembersPanel.class, GroupMembersPresenter.GroupMembersProxy.class);
 
         bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class, SignInPresenter.SignInProxy.class);
@@ -133,6 +139,9 @@ public class CoreGinModule extends AbstractPresenterModule {
 
         bind(UserMessagesPresenter.class).in(Singleton.class);
         bind(UserMessagesPanel.class).in(Singleton.class);
+        bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class, UserConfirmPanel.class,
+                UserConfirmPresenter.UserConfirmProxy.class);
+
         // bind(MessagePanelView.class).to(MessagePanel.class);
 
         // UI
@@ -160,5 +169,6 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(SitebarSignOutLink.class).in(Singleton.class);
         bind(BeforeSignOut.class).in(Singleton.class);
         bind(SiteTokenListeners.class).asEagerSingleton();
+        bind(CoreParts.class).asEagerSingleton();
     }
 }

@@ -29,12 +29,12 @@ import javax.servlet.http.HttpServletResponse;
 import magick.MagickException;
 
 import org.apache.commons.fileupload.FileItem;
-import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
 import org.ourproject.kune.platf.server.auth.Authorizated;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
+import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;

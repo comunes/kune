@@ -19,9 +19,9 @@
  \*/
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.services.ImageDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.ShortcutDescriptor;
 
+import cc.kune.core.client.services.ImageDescriptor;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.calclab.suco.client.events.Listener;
@@ -30,12 +30,25 @@ import com.calclab.suco.client.events.Listener0;
 /**
  * The Class ActionDescriptor.
  */
+@Deprecated
 public class ActionDescriptor<T> {
 
     public static final int NO_POSITION = -1;
 
-    /** The icon url. */
-    private String iconUrl;
+    /** The access rol. */
+    private AccessRolDTO accessRol;
+
+    /** The must be added condition. */
+    private ActionAddCondition<T> addCondition;
+
+    /** The confirmation text. */
+    private String confirmationText;
+
+    /** The confirmation title. */
+    private String confirmationTitle;
+
+    /** The enable condition. */
+    private ActionEnableCondition<T> enableCondition;
 
     /** The icon cls. */
     private String iconCls;
@@ -43,45 +56,33 @@ public class ActionDescriptor<T> {
     /** The icon descriptor. */
     private ImageDescriptor iconDescriptor;
 
+    /** The icon url. */
+    private String iconUrl;
+
+    /** The id. */
+    private String id;
+
+    /** The must be authenticated. */
+    private boolean mustBeAuthenticated;
+
+    /** The must be confirmed. */
+    private boolean mustBeConfirmed;
+
+    /** The on not confirmed. */
+    private Listener<T> onNotConfirmed;
+
+    /** The on perform call. */
+    private final Listener<T> onPerformCall;
+
+    private int position = NO_POSITION;
+
+    private ShortcutDescriptor shortcut;
+
     /** The text description. */
     private String textDescription;
 
     /** The tool tip. */
     private String toolTip;
-
-    /** The must be confirmed. */
-    private boolean mustBeConfirmed;
-
-    /** The confirmation title. */
-    private String confirmationTitle;
-
-    /** The confirmation text. */
-    private String confirmationText;
-
-    /** The on perform call. */
-    private final Listener<T> onPerformCall;
-
-    /** The on not confirmed. */
-    private Listener<T> onNotConfirmed;
-
-    /** The must be authenticated. */
-    private boolean mustBeAuthenticated;
-
-    /** The access rol. */
-    private AccessRolDTO accessRol;
-
-    /** The enable condition. */
-    private ActionEnableCondition<T> enableCondition;
-
-    /** The must be added condition. */
-    private ActionAddCondition<T> addCondition;
-
-    /** The id. */
-    private String id;
-
-    private ShortcutDescriptor shortcut;
-
-    private int position = NO_POSITION;
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener<T> onPerformCall) {
         this.accessRol = accessRolDTO;
@@ -124,6 +125,7 @@ public class ActionDescriptor<T> {
 
     public ActionDescriptor(final AccessRolDTO accessRolDTO, final Listener0 onPerformCall) {
         this(accessRolDTO, new Listener<T>() {
+            @Override
             public void onEvent(final T parameter) {
                 onPerformCall.onEvent();
             }
@@ -221,6 +223,10 @@ public class ActionDescriptor<T> {
         return accessRol;
     }
 
+    private ActionAddCondition<T> getAddCondition() {
+        return addCondition;
+    }
+
     /**
      * Gets the confirmation text.
      * 
@@ -237,6 +243,10 @@ public class ActionDescriptor<T> {
      */
     public String getConfirmationTitle() {
         return confirmationTitle;
+    }
+
+    private ActionEnableCondition<T> getEnableCondition() {
+        return enableCondition;
     }
 
     public String getIconCls() {
@@ -270,6 +280,14 @@ public class ActionDescriptor<T> {
         return id;
     }
 
+    private Listener<T> getOnNotConfirmed() {
+        return onNotConfirmed;
+    }
+
+    private Listener<T> getOnPerformCall() {
+        return onPerformCall;
+    }
+
     /**
      * Get the index position where this action will be inserted
      * 
@@ -293,6 +311,10 @@ public class ActionDescriptor<T> {
      * @return the text
      */
     public String getText() {
+        return textDescription;
+    }
+
+    private String getTextDescription() {
         return textDescription;
     }
 
@@ -439,6 +461,10 @@ public class ActionDescriptor<T> {
         this.mustBeConfirmed = mustBeConfirmed;
     }
 
+    private void setOnNotConfirmed(final Listener<T> onNotConfirmed) {
+        this.onNotConfirmed = onNotConfirmed;
+    }
+
     /**
      * Index position where this action will be inserted
      * 
@@ -470,30 +496,6 @@ public class ActionDescriptor<T> {
      */
     public void setToolTip(final String toolTip) {
         this.toolTip = toolTip;
-    }
-
-    private ActionAddCondition<T> getAddCondition() {
-        return addCondition;
-    }
-
-    private ActionEnableCondition<T> getEnableCondition() {
-        return enableCondition;
-    }
-
-    private Listener<T> getOnNotConfirmed() {
-        return onNotConfirmed;
-    }
-
-    private Listener<T> getOnPerformCall() {
-        return onPerformCall;
-    }
-
-    private String getTextDescription() {
-        return textDescription;
-    }
-
-    private void setOnNotConfirmed(final Listener<T> onNotConfirmed) {
-        this.onNotConfirmed = onNotConfirmed;
     }
 
 }

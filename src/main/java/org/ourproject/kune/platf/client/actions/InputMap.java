@@ -63,7 +63,7 @@ public class InputMap {
     /**
      * Storage for the KeyStroke --> Object mappings.
      */
-    private Map<KeyStroke, AbstractAction> inputMap;
+    private Map<KeyStroke, OldAbstractAction> inputMap;
 
     /**
      * An optional parent map.
@@ -122,8 +122,8 @@ public class InputMap {
      * @return The binding associated with the specified keystroke (or
      *         <code>null</code>).
      */
-    public AbstractAction get(final KeyStroke keystroke) {
-        AbstractAction result = null;
+    public OldAbstractAction get(final KeyStroke keystroke) {
+        OldAbstractAction result = null;
         if (inputMap != null) {
             result = inputMap.get(keystroke);
         }
@@ -177,12 +177,12 @@ public class InputMap {
      * @param actionMapKey
      *            the action (<code>null</code> permitted).
      */
-    public void put(final KeyStroke keystroke, final AbstractAction actionMapKey) {
+    public void put(final KeyStroke keystroke, final OldAbstractAction actionMapKey) {
         if (keystroke == null) {
             return;
         }
         if (inputMap == null) {
-            inputMap = new HashMap<KeyStroke, AbstractAction>();
+            inputMap = new HashMap<KeyStroke, OldAbstractAction>();
         }
         if (actionMapKey == null) {
             inputMap.remove(keystroke);

@@ -19,15 +19,15 @@
  */
 package org.ourproject.kune.workspace.client.options.pscape;
 
-import org.ourproject.kune.platf.client.ui.BasicThumb;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
-import org.ourproject.kune.platf.client.ui.download.ImageSize;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeSelector;
 
+import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 

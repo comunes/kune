@@ -27,9 +27,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.manager.GroupManager;
 
+import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
 

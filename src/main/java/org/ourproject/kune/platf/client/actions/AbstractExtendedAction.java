@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.actions;
 
 import com.google.gwt.resources.client.ImageResource;
 
-public abstract class AbstractExtendedAction extends AbstractAction {
+public abstract class AbstractExtendedAction extends OldAbstractAction {
     public static final String NO_TEXT = null;
     public static final ImageResource NO_ICON = null;
 

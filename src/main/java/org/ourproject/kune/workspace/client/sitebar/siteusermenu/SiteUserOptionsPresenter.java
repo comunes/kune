@@ -27,13 +27,13 @@ import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.common.GotoGroupAction;
 import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensiblePresenter;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.icons.IconResources;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -80,7 +80,7 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
     }
 
     @Override
-    public void addAction(final GuiActionDescrip descriptor) {
+    public void addAction(final OldGuiActionDescrip descriptor) {
         descriptor.setParent(menuDescriptor);
         view.addAction(descriptor);
     }
@@ -99,7 +99,7 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
                 : "images/group-def-icon.gif";
         final GotoGroupAction gotoGroupAction = new GotoGroupAction(logoImageUrl, group.getShortName(),
                 group.getLongName(), stateManager);
-        view.addAction(new MenuItemDescriptor(partiMenu, gotoGroupAction));
+        view.addAction(new OldMenuItemDescriptor(partiMenu, gotoGroupAction));
     }
 
     private void createActions() {
@@ -118,7 +118,7 @@ public class SiteUserOptionsPresenter extends AbstractActionExtensiblePresenter 
         };
         userHomeAction.putValue(Action.NAME, i18n.t(CoreMessages.YOUR_HOMEPAGE));
         userHomeAction.putValue(Action.SMALL_ICON, img.groupHome());
-        final MenuItemDescriptor item = new MenuItemDescriptor(userHomeAction);
+        final OldMenuItemDescriptor item = new OldMenuItemDescriptor(userHomeAction);
         item.setPosition(0);
         addAction(item);
     }

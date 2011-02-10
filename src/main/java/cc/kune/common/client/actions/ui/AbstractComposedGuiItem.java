@@ -23,8 +23,8 @@ import java.util.List;
 
 import cc.kune.common.client.actions.ui.bind.GuiBinding;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.UIException;
 
 import com.google.gwt.user.client.ui.Composite;
@@ -38,41 +38,47 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
         this.bindings = bindings;
     }
 
-    public void add(final AbstractGuiActionDescrip... descriptors) {
-        for (final AbstractGuiActionDescrip descriptor : descriptors) {
+    public void add(final GuiActionDescCollection descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
+            addAction(descriptor);
+        }
+    }
+
+    public void add(final GuiActionDescrip... descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
     @Override
-    public void addAction(final AbstractGuiActionDescrip descriptor) {
+    public void addAction(final GuiActionDescrip descriptor) {
         getGuiItems().add(descriptor);
         beforeAddWidget(descriptor);
     }
 
     @Override
-    public void addActions(AbstractGuiActionDescrip... descriptors) {
-        for (final AbstractGuiActionDescrip descriptor : descriptors) {
+    public void addActions(final GuiActionDescCollection descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
     @Override
-    public void addActions(final GuiActionDescCollection descriptors) {
-        for (final AbstractGuiActionDescrip descriptor : descriptors) {
+    public void addActions(final GuiActionDescrip... descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
-    public void addActions(final List<AbstractGuiActionDescrip> descriptors) {
-        for (final AbstractGuiActionDescrip descriptor : descriptors) {
+    public void addActions(final List<GuiActionDescrip> descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
     protected abstract void addWidget(AbstractGuiItem item);
 
-    protected void beforeAddWidget(final AbstractGuiActionDescrip descrip) {
+    protected void beforeAddWidget(final GuiActionDescrip descrip) {
         if (descrip.mustBeAdded()) {
             final GuiBinding binding = bindings.get(descrip.getType());
             if (binding == null) {
@@ -82,7 +88,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
                 final AbstractGuiItem item = binding.create(descrip);
                 // Log.debug("Adding: " + descrip);
                 if (binding.shouldBeAdded()) {
-                    if (descrip.getPosition() == AbstractGuiActionDescrip.NO_POSITION) {
+                    if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
                         addWidget(item);
                     } else {
                         insertWidget(item, descrip.getPosition());

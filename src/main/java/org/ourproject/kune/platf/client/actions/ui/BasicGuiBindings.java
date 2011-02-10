@@ -26,7 +26,7 @@ public class BasicGuiBindings {
         bindings.register(MenuDescriptor.class, new MenuBinding());
         bindings.register(MenuRadioItemDescriptor.class, menuItemBinding);
         bindings.register(MenuCheckItemDescriptor.class, menuItemBinding);
-        bindings.register(MenuItemDescriptor.class, menuItemBinding);
+        bindings.register(OldMenuItemDescriptor.class, menuItemBinding);
         bindings.register(MenuSeparatorDescriptor.class, new MenuSeparatorBinding());
         bindings.register(PushButtonDescriptor.class, new PushButtonBinding());
         bindings.register(ButtonDescriptor.class, new ButtonBinding());

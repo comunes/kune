@@ -31,10 +31,8 @@ import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.registry.RenamableRegistry;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
-import org.ourproject.kune.platf.client.services.ImageUtils;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
@@ -105,6 +103,13 @@ import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrd
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
+import org.ourproject.kune.workspace.client.oldsn.other.AddAsBuddieHeaderButton;
+import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionBuddiesSummaryToolbar;
+import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionBuddiesSummaryToolbarPresenter;
+import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionGroupSummaryToolbar;
+import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionGroupSummaryToolbarPresenter;
+import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionParticipationSummaryToolbarPresenter;
+import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.workspace.client.options.GroupOptions;
 import org.ourproject.kune.workspace.client.options.GroupOptionsPanel;
 import org.ourproject.kune.workspace.client.options.GroupOptionsPresenter;
@@ -177,26 +182,6 @@ import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptions
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptionsPresenter;
 import org.ourproject.kune.workspace.client.skel.ActionCntCtxToolbarPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.socialnet.BuddiesSummary;
-import org.ourproject.kune.workspace.client.socialnet.BuddiesSummaryPanel;
-import org.ourproject.kune.workspace.client.socialnet.BuddiesSummaryPresenter;
-import org.ourproject.kune.workspace.client.socialnet.GroupActionRegistry;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummary;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPanel;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryPresenter;
-import org.ourproject.kune.workspace.client.socialnet.GroupMembersSummaryView;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationSummary;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPanel;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryPresenter;
-import org.ourproject.kune.workspace.client.socialnet.ParticipationSummaryView;
-import org.ourproject.kune.workspace.client.socialnet.UserActionRegistry;
-import org.ourproject.kune.workspace.client.socialnet.other.AddAsBuddieHeaderButton;
-import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbar;
-import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionBuddiesSummaryToolbarPresenter;
-import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbar;
-import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionGroupSummaryToolbarPresenter;
-import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipationSummaryToolbarPresenter;
-import org.ourproject.kune.workspace.client.socialnet.toolbar.ActionParticipationToolbar;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
@@ -236,7 +221,7 @@ import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.rpcservices.SocialNetworkService;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
-import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteCommonTokens;
@@ -536,22 +521,28 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<GroupMembersSummary>(GroupMembersSummary.class) {
-            @Override
-            public GroupMembersSummary create() {
-                final GroupMembersSummaryPresenter presenter = new GroupMembersSummaryPresenter(
-                        i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
-                        i(Session.class), p(SocialNetworkServiceAsync.class), p(GroupServiceAsync.class),
-                        p(GroupLiveSearcher.class), p(ChatEngine.class), i(GroupActionRegistry.class),
-                        i(ActionGroupSummaryToolbar.class), p(FileDownloadUtils.class),
-                        i(AccessRightsClientManager.class), i(IconResources.class));
-                final GroupMembersSummaryView view = new GroupMembersSummaryPanel(presenter,
-                        i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
-                                ActionGroupSummaryToolbar.class).getView());
-                presenter.init(view);
-                return presenter;
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<GroupMembersSummary>(GroupMembersSummary.class) {
+        // @Override
+        // public GroupMembersSummary create() {
+        // final GroupMembersSummaryPresenter presenter = new
+        // GroupMembersSummaryPresenter(
+        // i(I18nUITranslationService.class), i(StateManager.class),
+        // i(ImageUtils.class),
+        // i(Session.class), p(SocialNetworkServiceAsync.class),
+        // p(GroupServiceAsync.class),
+        // p(GroupLiveSearcher.class), p(ChatEngine.class),
+        // i(GroupActionRegistry.class),
+        // i(ActionGroupSummaryToolbar.class), p(FileDownloadUtils.class),
+        // i(AccessRightsClientManager.class), i(IconResources.class));
+        // final GroupMembersSummaryView view = new
+        // GroupMembersSummaryPanel(presenter,
+        // i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
+        // ActionGroupSummaryToolbar.class).getView());
+        // presenter.init(view);
+        // return presenter;
+        // }
+        // });
 
         register(ApplicationComponentGroup.class, new Factory<AddAsBuddieHeaderButton>(AddAsBuddieHeaderButton.class) {
             @Override
@@ -561,37 +552,49 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<BuddiesSummary>(BuddiesSummary.class) {
-            @Override
-            public BuddiesSummary create() {
-                final BuddiesSummaryPresenter presenter = new BuddiesSummaryPresenter(i(StateManager.class),
-                        i(Session.class), p(UserServiceAsync.class), i(UserActionRegistry.class),
-                        i(I18nTranslationService.class), p(ChatEngine.class), i(ActionBuddiesSummaryToolbar.class),
-                        p(FileDownloadUtils.class), i(ImageUtils.class), p(SocialNetworkServiceAsync.class),
-                        i(GroupActionRegistry.class), i(AccessRightsClientManager.class), i(IconResources.class));
-                final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter, i(WorkspaceSkeleton.class),
-                        i(I18nTranslationService.class), i(ActionManager.class),
-                        i(ActionBuddiesSummaryToolbar.class).getView());
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<BuddiesSummary>(BuddiesSummary.class) {
+        // @Override
+        // public BuddiesSummary create() {
+        // final BuddiesSummaryPresenter presenter = new
+        // BuddiesSummaryPresenter(i(StateManager.class),
+        // i(Session.class), p(UserServiceAsync.class),
+        // i(UserActionRegistry.class),
+        // i(I18nTranslationService.class), p(ChatEngine.class),
+        // i(ActionBuddiesSummaryToolbar.class),
+        // p(FileDownloadUtils.class), i(ImageUtils.class),
+        // p(SocialNetworkServiceAsync.class),
+        // i(GroupActionRegistry.class), i(AccessRightsClientManager.class),
+        // i(IconResources.class));
+        // final BuddiesSummaryPanel panel = new BuddiesSummaryPanel(presenter,
+        // i(WorkspaceSkeleton.class),
+        // i(I18nTranslationService.class), i(ActionManager.class),
+        // i(ActionBuddiesSummaryToolbar.class).getView());
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
-        register(ApplicationComponentGroup.class, new Factory<ParticipationSummary>(ParticipationSummary.class) {
-            @Override
-            public ParticipationSummary create() {
-                final ParticipationSummaryPresenter presenter = new ParticipationSummaryPresenter(
-                        i(I18nUITranslationService.class), i(StateManager.class), i(ImageUtils.class),
-                        i(Session.class), p(SocialNetworkServiceAsync.class), i(GroupActionRegistry.class),
-                        i(ActionParticipationToolbar.class), p(FileDownloadUtils.class),
-                        i(AccessRightsClientManager.class), i(IconResources.class));
-                final ParticipationSummaryView view = new ParticipationSummaryPanel(presenter,
-                        i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
-                                ActionParticipationToolbar.class).getView());
-                presenter.init(view);
-                return presenter;
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<ParticipationSummary>(ParticipationSummary.class) {
+        // @Override
+        // public ParticipationSummary create() {
+        // final ParticipationSummaryPresenter presenter = new
+        // ParticipationSummaryPresenter(
+        // i(I18nUITranslationService.class), i(StateManager.class),
+        // i(ImageUtils.class),
+        // i(Session.class), p(SocialNetworkServiceAsync.class),
+        // i(GroupActionRegistry.class),
+        // i(ActionParticipationToolbar.class), p(FileDownloadUtils.class),
+        // i(AccessRightsClientManager.class), i(IconResources.class));
+        // final ParticipationSummaryView view = new
+        // ParticipationSummaryPanel(presenter,
+        // i(I18nUITranslationService.class), i(WorkspaceSkeleton.class), i(
+        // ActionParticipationToolbar.class).getView());
+        // presenter.init(view);
+        // return presenter;
+        // }
+        // });
 
         register(ApplicationComponentGroup.class, new Factory<TagsSummary>(TagsSummary.class) {
             @Override

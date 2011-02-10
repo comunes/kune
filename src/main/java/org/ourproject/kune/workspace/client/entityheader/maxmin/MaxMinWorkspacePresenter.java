@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
 
@@ -70,9 +70,9 @@ public class MaxMinWorkspacePresenter implements MaxMinWorkspace {
 
     private final GlobalShortcutRegister shortcutReg;
 
-    private MenuItemDescriptor maximizeButton;
+    private OldMenuItemDescriptor maximizeButton;
 
-    private MenuItemDescriptor minimizeButton;
+    private OldMenuItemDescriptor minimizeButton;
     private final SiteOptions siteOptions;
 
     public MaxMinWorkspacePresenter(final GlobalShortcutRegister shortcutReg, final IconResources images,
@@ -107,13 +107,13 @@ public class MaxMinWorkspacePresenter implements MaxMinWorkspace {
 
         final MaximizeAction maximizeAction = new MaximizeAction(i18n.t("Maximize the workspace"), images.maximize());
         maximizeAction.setShortcut(shortcut);
-        maximizeButton = new MenuItemDescriptor(maximizeAction);
+        maximizeButton = new OldMenuItemDescriptor(maximizeAction);
         maximizeButton.setPosition(0);
         maximizeButton.setId(MAX_ICON);
 
         final MinimizeAction minimizeAction = new MinimizeAction(i18n.t("Minimize the workspace"), images.minimize());
         minimizeAction.setShortcut(shortcut);
-        minimizeButton = new MenuItemDescriptor(minimizeAction);
+        minimizeButton = new OldMenuItemDescriptor(minimizeAction);
         minimizeButton.setPosition(1);
         minimizeButton.setVisible(false);
         minimizeButton.setId(MIN_ICON);

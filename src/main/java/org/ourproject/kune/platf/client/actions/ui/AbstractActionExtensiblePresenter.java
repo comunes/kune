@@ -21,16 +21,16 @@ package org.ourproject.kune.platf.client.actions.ui;
 
 public abstract class AbstractActionExtensiblePresenter implements IsActionExtensible {
 
-    public abstract void addAction(final GuiActionDescrip descriptor);
+    public abstract void addAction(final OldGuiActionDescrip descriptor);
 
     public void addActionCollection(final GuiActionDescCollection descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
+        for (final OldGuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
-    public void addActions(final GuiActionDescrip... descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
+    public void addActions(final OldGuiActionDescrip... descriptors) {
+        for (final OldGuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }

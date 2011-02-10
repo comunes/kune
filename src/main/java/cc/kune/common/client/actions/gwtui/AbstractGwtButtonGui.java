@@ -24,8 +24,8 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -56,7 +56,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         iconLabel = new IconLabel("");
         if (enableTongle) {

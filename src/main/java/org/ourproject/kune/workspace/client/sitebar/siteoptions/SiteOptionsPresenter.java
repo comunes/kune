@@ -24,9 +24,9 @@ import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensiblePresenter;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 
 import cc.kune.common.client.ui.KuneWindowUtils;
@@ -49,7 +49,7 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
     }
 
     @Override
-    public void addAction(final GuiActionDescrip descriptor) {
+    public void addAction(final OldGuiActionDescrip descriptor) {
         descriptor.setParent(menuDescriptor);
         view.addAction(descriptor);
     }
@@ -76,7 +76,7 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
         };
         bugsAction.putValue(Action.NAME, i18n.t("Report Kune issues/problems"));
         bugsAction.putValue(Action.SMALL_ICON, img.bug());
-        final MenuItemDescriptor item = new MenuItemDescriptor(bugsAction);
+        final OldMenuItemDescriptor item = new OldMenuItemDescriptor(bugsAction);
         addAction(item);
 
         // final KeyStroke shortcut = Shortcut.getShortcut(true, true, false,
@@ -90,6 +90,6 @@ public class SiteOptionsPresenter extends AbstractActionExtensiblePresenter impl
         aboutAction.putValue(Action.SMALL_ICON, img.kuneIcon16());
         // aboutAction.setShortcut(shortcut);
         // shortcutReg.put(shortcut, aboutAction);
-        addAction(new MenuItemDescriptor(aboutAction));
+        addAction(new OldMenuItemDescriptor(aboutAction));
     }
 }

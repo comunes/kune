@@ -22,7 +22,7 @@ package cc.kune.common.client.actions.gxtui;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 
 public class GxtPushButtonGui extends GxtButtonGui {
@@ -32,7 +32,7 @@ public class GxtPushButtonGui extends GxtButtonGui {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         final AbstractGuiItem item = super.create(descriptor);
         final PushButtonDescriptor btn = (PushButtonDescriptor) descriptor;
         setPressed(btn.isPushed());

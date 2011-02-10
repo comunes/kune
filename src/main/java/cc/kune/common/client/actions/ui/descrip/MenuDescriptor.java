@@ -43,7 +43,7 @@ public class MenuDescriptor extends AbstractGuiActionDescrip {
         this(NO_PARENT, action);
     }
 
-    public MenuDescriptor(final AbstractGuiActionDescrip parent, final AbstractAction action) {
+    public MenuDescriptor(final GuiActionDescrip parent, final AbstractAction action) {
         super(action);
         setParent(parent);
         putValue(MENU_HIDE, false);

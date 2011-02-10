@@ -36,30 +36,30 @@ public abstract class AbstractComposedGuiItem extends Composite {
 
     protected abstract void add(AbstractGuiItem item);
 
-    public void add(final GuiActionDescrip... descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
+    public void add(final OldGuiActionDescrip... descriptors) {
+        for (final OldGuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
-    public void addAction(final GuiActionDescrip descriptor) {
+    public void addAction(final OldGuiActionDescrip descriptor) {
         getGuiItems().add(descriptor);
         beforeAddWidget(descriptor);
     }
 
     public void addAll(final GuiActionDescCollection descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
+        for (final OldGuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
-    public void addAll(final List<GuiActionDescrip> descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
+    public void addAll(final List<OldGuiActionDescrip> descriptors) {
+        for (final OldGuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
-    protected void beforeAddWidget(final GuiActionDescrip descrip) {
+    protected void beforeAddWidget(final OldGuiActionDescrip descrip) {
         if (descrip.mustBeAdded()) {
             final GuiBinding binding = bindings.get(descrip.getType());
             if (binding == null) {
@@ -67,7 +67,7 @@ public abstract class AbstractComposedGuiItem extends Composite {
             } else {
                 final AbstractGuiItem item = binding.create(descrip);
                 if (binding.isAttachable()) {
-                    if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
+                    if (descrip.getPosition() == OldGuiActionDescrip.NO_POSITION) {
                         add(item);
                     } else {
                         insert(item, descrip.getPosition());

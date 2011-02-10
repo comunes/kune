@@ -23,6 +23,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.ourproject.kune.workspace.client.oldsn.RolAction;
+import org.ourproject.kune.workspace.client.oldsn.UIStatus;
 
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;

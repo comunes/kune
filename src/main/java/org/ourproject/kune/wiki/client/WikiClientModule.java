@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@ package org.ourproject.kune.wiki.client;
 import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContent;
 import org.ourproject.kune.wiki.client.cnt.WikiFolderContentPanel;
@@ -53,6 +52,7 @@ import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;

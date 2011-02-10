@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.options;
 import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptions;
 
@@ -73,7 +73,7 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
         };
         userPrefsAction.putValue(Action.NAME, i18n.t("Your preferences"));
         userPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
-        final MenuItemDescriptor prefsItem = new MenuItemDescriptor(userPrefsAction);
+        final OldMenuItemDescriptor prefsItem = new OldMenuItemDescriptor(userPrefsAction);
         prefsItem.setPosition(1);
         userOptions.addAction(prefsItem);
     }

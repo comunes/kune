@@ -19,10 +19,10 @@
  */
 package org.ourproject.kune.workspace.client.options;
 
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 
 public interface GroupOptionsView extends EntityOptionsView {
 
-    void addAction(GuiActionDescrip descriptor);
+    void addAction(OldGuiActionDescrip descriptor);
 
 }

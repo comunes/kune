@@ -20,8 +20,8 @@
 package cc.kune.core.client.errors;
 
 import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.logs.Log;
-import cc.kune.core.client.notify.alerts.AlertEvent;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.state.Session;
@@ -109,8 +109,8 @@ public class ErrorHandler {
             goHome();
         } else if (caught instanceof LastAdminInGroupException) {
             logException(caught);
-            eventBus.fireEvent(new AlertEvent(i18n.t("Warning"), i18n.t("Sorry, you are the last admin of this group."
-                    + " Look for someone to substitute you appropriately as admin before leaving this group.")));
+            NotifyUser.showAlertMessage(i18n.t("Warning"), i18n.t("Sorry, you are the last admin of this group."
+                    + " Look for someone to substitute you appropriately as admin before leaving this group."));
         } else if (caught instanceof AlreadyGroupMemberException) {
             logException(caught);
             eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("This group is already a group member")));

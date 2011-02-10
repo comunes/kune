@@ -21,7 +21,7 @@ package cc.kune.common.client.actions.gxtui;
 
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 
@@ -32,7 +32,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 public class GxtToolbarSeparatorGui extends AbstractChildGuiItem {
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         final GxtToolbarGui toolbar = (GxtToolbarGui) parent;
         final Type type = ((ToolbarSeparatorDescriptor) descriptor).getSeparatorType();
         switch (type) {

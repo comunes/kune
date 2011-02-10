@@ -19,11 +19,11 @@
  */
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 
-public class ButtonDescriptor extends GuiActionDescrip {
+public class ButtonDescriptor extends OldGuiActionDescrip {
 
-    public ButtonDescriptor(final AbstractAction action) {
+    public ButtonDescriptor(final OldAbstractAction action) {
         super(action);
     }
 

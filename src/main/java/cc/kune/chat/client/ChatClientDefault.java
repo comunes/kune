@@ -189,7 +189,12 @@ public class ChatClientDefault implements ChatClient {
 
     @Override
     public void addNewBuddie(final String shortName) {
-        roster.requestAddItem(XmppURI.jid(shortName + "@" + chatOptions.domain), shortName, "");
+        roster.requestAddItem(uriFrom(shortName), shortName, "");
+    }
+
+    @Override
+    public void chat(final String shortName) {
+        chat(uriFrom(shortName));
     }
 
     @Override
@@ -290,8 +295,8 @@ public class ChatClientDefault implements ChatClient {
     }
 
     @Override
-    public boolean isBuddie(final String localUserName) {
-        return isBuddie(XmppURI.jid(localUserName + "@" + chatOptions.domain));
+    public boolean isBuddie(final String shortName) {
+        return isBuddie(uriFrom(shortName));
     }
 
     @Override
@@ -374,5 +379,9 @@ public class ChatClientDefault implements ChatClient {
 
     private void toggleShowDialog() {
         showDialog(popup == null ? true : !popup.isShowing());
+    }
+
+    private XmppURI uriFrom(final String shortName) {
+        return XmppURI.jid(shortName + "@" + chatOptions.domain);
     }
 }

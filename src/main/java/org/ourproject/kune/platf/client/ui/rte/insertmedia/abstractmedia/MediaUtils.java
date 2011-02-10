@@ -19,9 +19,9 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia;
 
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ContentPosition;
 
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 

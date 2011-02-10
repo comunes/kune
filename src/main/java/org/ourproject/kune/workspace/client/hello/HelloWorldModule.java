@@ -20,14 +20,14 @@
 package org.ourproject.kune.workspace.client.hello;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.actions.ui.MenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuRadioItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
@@ -121,15 +121,15 @@ public class HelloWorldModule extends AbstractExtendedModule {
                 // recommended the use in real code
                 final MenuDescriptor menu = new MenuDescriptor(i18n.t("HelloWorldMenu"), "File menu tooltip");
 
-                final MenuItemDescriptor menuitem = new MenuItemDescriptor(menu, action);
-                final MenuItemDescriptor menuitem2 = new MenuItemDescriptor(menu, action);
+                final OldMenuItemDescriptor menuitem = new OldMenuItemDescriptor(menu, action);
+                final OldMenuItemDescriptor menuitem2 = new OldMenuItemDescriptor(menu, action);
 
                 // A submenu
                 final MenuDescriptor submenu = new MenuDescriptor("Options", "Submenu tooltip");
                 submenu.setParent(menu);
 
                 // A menu check item
-                final MenuItemDescriptor menuitem3 = new MenuItemDescriptor(submenu, action);
+                final OldMenuItemDescriptor menuitem3 = new OldMenuItemDescriptor(submenu, action);
                 final MenuCheckItemDescriptor menuitem4 = new MenuCheckItemDescriptor(submenu, action);
                 menuitem4.setChecked(true);
 
@@ -206,7 +206,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
         void showMessage();
     }
 
-    static class HelloWorldAction extends AbstractAction {
+    static class HelloWorldAction extends OldAbstractAction {
         public HelloWorldAction(final IconResources img) {
             super();
             super.putValue(Action.NAME, "helloworld");

@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.entityheader;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
@@ -52,7 +52,7 @@ public class EntityHeaderPresenter implements EntityHeader {
         });
     }
 
-    public void addAction(final GuiActionDescrip descriptor) {
+    public void addAction(final OldGuiActionDescrip descriptor) {
         view.addAction(descriptor);
     }
 

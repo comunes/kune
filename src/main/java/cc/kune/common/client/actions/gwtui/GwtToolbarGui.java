@@ -22,6 +22,7 @@ package cc.kune.common.client.actions.gwtui;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -55,7 +56,7 @@ public class GwtToolbarGui extends AbstractGuiItem implements ParentWidget {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         toolbar = new GwtComplexToolbar();
         initWidget(toolbar);

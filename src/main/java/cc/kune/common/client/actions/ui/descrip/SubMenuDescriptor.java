@@ -34,7 +34,7 @@ public class SubMenuDescriptor extends MenuDescriptor {
         this(NO_PARENT, action);
     }
 
-    public SubMenuDescriptor(final AbstractGuiActionDescrip parent, final AbstractAction action) {
+    public SubMenuDescriptor(final GuiActionDescrip parent, final AbstractAction action) {
         super(action);
         setParent(parent);
         putValue(MENU_HIDE, false);

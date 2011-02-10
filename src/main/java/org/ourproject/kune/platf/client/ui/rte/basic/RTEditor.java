@@ -20,9 +20,9 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiAddCondition;
 import org.ourproject.kune.platf.client.actions.ui.IsActionExtensible;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
@@ -36,19 +36,19 @@ import com.calclab.suco.client.events.Listener0;
 public interface RTEditor extends IsActionExtensible {
 
     /**
-     * The TOPBAR location used in {@link GuiActionDescrip#setLocation(String)}
+     * The TOPBAR location used in {@link OldGuiActionDescrip#setLocation(String)}
      * for put the actions in the correct position
      */
     String TOPBAR = "rte-topbar";
 
     /**
-     * The SNDBAR location used in {@link GuiActionDescrip#setLocation(String)}
+     * The SNDBAR location used in {@link OldGuiActionDescrip#setLocation(String)}
      * for put the actions in the correct position
      */
     String SNDBAR = "rte-sndbar";
 
     /**
-     * The LINKCTX location used in {@link GuiActionDescrip#setLocation(String)}
+     * The LINKCTX location used in {@link OldGuiActionDescrip#setLocation(String)}
      * for put the actions in the links context menu
      */
     String LINKCTX = "rte-linkctx";
@@ -168,7 +168,7 @@ public interface RTEditor extends IsActionExtensible {
      * @param action
      *            the action
      */
-    void setActionShortcut(KeyStroke key, AbstractAction action);
+    void setActionShortcut(KeyStroke key, OldAbstractAction action);
 
     /**
      * Sets some action shortcut, some principal, other similar (used when some
@@ -181,7 +181,7 @@ public interface RTEditor extends IsActionExtensible {
      * @param actions
      *            the actions
      */
-    void setActionShortcut(KeyStroke key, AbstractAction mainAction, AbstractAction... actions);
+    void setActionShortcut(KeyStroke key, OldAbstractAction mainAction, OldAbstractAction... actions);
 
     /**
      * Sets that editor must be extended type (if browser permit it).
@@ -216,7 +216,7 @@ public interface RTEditor extends IsActionExtensible {
      * @param descripts
      *            the descripts
      */
-    void setLocation(String location, GuiActionDescrip... descripts);
+    void setLocation(String location, OldGuiActionDescrip... descripts);
 
     /**
      * Sets the text of the editor.

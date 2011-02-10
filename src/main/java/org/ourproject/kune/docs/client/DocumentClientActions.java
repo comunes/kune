@@ -25,7 +25,6 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_ROOT;
 import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
 
 import org.ourproject.kune.docs.client.cnt.DocumentViewer;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
@@ -42,6 +41,7 @@ import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 

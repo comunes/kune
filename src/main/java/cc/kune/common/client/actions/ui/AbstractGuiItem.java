@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.bind.GuiBinding;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.resources.icons.IconConstants;
@@ -34,13 +34,13 @@ import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
-    protected AbstractGuiActionDescrip descriptor;
+    protected GuiActionDescrip descriptor;
 
     public AbstractGuiItem() {
         super();
     }
 
-    public AbstractGuiItem(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem(final GuiActionDescrip descriptor) {
         super();
         this.descriptor = descriptor;
     }
@@ -74,12 +74,12 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
         setToolTipText((String) (descriptor.getValue(Action.SHORT_DESCRIPTION)));
         setIcon(descriptor.getValue(Action.SMALL_ICON));
         setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
-        setVisible((Boolean) descriptor.getValue(AbstractGuiActionDescrip.VISIBLE));
-        setStyles((String) descriptor.getValue(AbstractGuiActionDescrip.STYLES));
+        setVisible((Boolean) descriptor.getValue(GuiActionDescrip.VISIBLE));
+        setStyles((String) descriptor.getValue(GuiActionDescrip.STYLES));
     }
 
     @Override
-    public abstract AbstractGuiItem create(final AbstractGuiActionDescrip descriptor);
+    public abstract AbstractGuiItem create(final GuiActionDescrip descriptor);
 
     private PropertyChangeListener createActionPropertyChangeListener() {
         return new PropertyChangeListener() {
@@ -94,9 +94,9 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
                     setIcon(newValue);
                 } else if (event.getPropertyName().equals(Action.SHORT_DESCRIPTION)) {
                     setToolTipText((String) newValue);
-                } else if (event.getPropertyName().equals(AbstractGuiActionDescrip.VISIBLE)) {
+                } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
                     setVisible((Boolean) newValue);
-                } else if (event.getPropertyName().equals(AbstractGuiActionDescrip.STYLES)) {
+                } else if (event.getPropertyName().equals(GuiActionDescrip.STYLES)) {
                     setStyles((String) newValue);
                 }
             }

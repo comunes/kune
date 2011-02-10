@@ -20,7 +20,7 @@
 package org.ourproject.kune.platf.client.actions.ui;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
@@ -32,9 +32,9 @@ import com.google.gwt.user.client.ui.Composite;
 
 public abstract class AbstractGuiItem extends Composite implements View {
 
-    protected final GuiActionDescrip descriptor;
+    protected final OldGuiActionDescrip descriptor;
 
-    public AbstractGuiItem(final GuiActionDescrip descriptor) {
+    public AbstractGuiItem(final OldGuiActionDescrip descriptor) {
         super();
         this.descriptor = descriptor;
     }
@@ -46,7 +46,7 @@ public abstract class AbstractGuiItem extends Composite implements View {
         configure();
     }
 
-    public AbstractAction getAction() {
+    public OldAbstractAction getAction() {
         return descriptor.getAction();
     }
 
@@ -70,9 +70,9 @@ public abstract class AbstractGuiItem extends Composite implements View {
     private void configureProperties() {
         setText((String) (descriptor.getValue(Action.NAME)));
         setIcon(descriptor.getValue(Action.SMALL_ICON));
-        setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
+        setEnabled((Boolean) descriptor.getValue(OldAbstractAction.ENABLED));
         setToolTipText((String) (descriptor.getValue(Action.SHORT_DESCRIPTION)));
-        setVisible((Boolean) descriptor.getValue(GuiActionDescrip.VISIBLE));
+        setVisible((Boolean) descriptor.getValue(OldGuiActionDescrip.VISIBLE));
     }
 
     private PropertyChangeListener createActionPropertyChangeListener() {
@@ -87,7 +87,7 @@ public abstract class AbstractGuiItem extends Composite implements View {
                     setIcon(newValue);
                 } else if (event.getPropertyName().equals(Action.SHORT_DESCRIPTION)) {
                     setToolTipText((String) newValue);
-                } else if (event.getPropertyName().equals(GuiActionDescrip.VISIBLE)) {
+                } else if (event.getPropertyName().equals(OldGuiActionDescrip.VISIBLE)) {
                     setVisible((Boolean) newValue);
                 }
             }

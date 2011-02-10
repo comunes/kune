@@ -23,12 +23,12 @@ import java.util.Date;
 
 import org.cobogw.gwt.user.client.CSS;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.InputMap;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
@@ -90,7 +90,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
         setHeight("100%");
     }
 
-    public void addAction(final GuiActionDescrip item) {
+    public void addAction(final OldGuiActionDescrip item) {
         final String location = item.getLocation();
         if (location == null) {
             throw new UIException("Unknown location in action item: " + item);
@@ -315,8 +315,8 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
             break;
         case Event.ONKEYPRESS:
             final KeyStroke keystroke = KeyStroke.getKeyStrokeForEvent(event);
-            final AbstractAction rtaActionItem = inputMap.get(keystroke);
-            final AbstractAction actionItem = rtaActionItem == null ? globalShortcutReg.get(keystroke) : rtaActionItem;
+            final OldAbstractAction rtaActionItem = inputMap.get(keystroke);
+            final OldAbstractAction actionItem = rtaActionItem == null ? globalShortcutReg.get(keystroke) : rtaActionItem;
             if (actionItem == null) {
                 super.onBrowserEvent(event);
                 updateStatus();

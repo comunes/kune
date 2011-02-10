@@ -21,7 +21,7 @@ package cc.kune.common.client.actions.gwtui;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.errors.UIException;
@@ -29,7 +29,7 @@ import cc.kune.common.client.errors.UIException;
 public class GwtToolbarSeparatorGui extends AbstractGuiItem {
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         final GwtToolbarGui toolbar = ((GwtToolbarGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
         if (toolbar == null) {
             throw new UIException("To add a toolbar separator you need to add the toolbar before. Item: " + descriptor);

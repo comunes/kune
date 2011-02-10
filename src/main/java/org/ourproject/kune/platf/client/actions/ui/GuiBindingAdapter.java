@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.actions.ui;
 
 public class GuiBindingAdapter implements GuiBinding {
 
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final OldGuiActionDescrip descriptor) {
         return null;
     }
 

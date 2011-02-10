@@ -27,7 +27,7 @@ import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
@@ -64,7 +64,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         iconLabel = new IconLabel("");
         iconLabel.addTextStyleName("oc-ico-pad");
@@ -102,7 +102,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
         if (menu == null) {
             throw new UIException("To add a menu item you need to add the menu before. Item: " + descriptor);
         }
-        if (position == AbstractGuiActionDescrip.NO_POSITION) {
+        if (position == GuiActionDescrip.NO_POSITION) {
             menu.add(item);
         } else {
             menu.insert(position, item);

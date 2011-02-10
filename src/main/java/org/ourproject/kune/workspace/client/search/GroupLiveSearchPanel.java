@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.search;
 
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class GroupLiveSearchPanel extends EntityLiveSearcherPanel {

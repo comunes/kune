@@ -37,9 +37,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.platf.server.properties.KuneProperties;
 
+import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.inject.Inject;

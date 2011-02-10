@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.shortcuts;
 
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ChangebleObject;
 import org.ourproject.kune.platf.client.actions.InputMap;
@@ -45,7 +45,7 @@ public class GlobalShortcutRegister extends InputMap {
                 if (nativeEventPrev.getTypeInt() == Event.ONKEYDOWN) {
                     final NativeEvent nativeEvent = nativeEventPrev.getNativeEvent();
                     final Event event = Event.as(nativeEvent);
-                    final AbstractAction action = get(Shortcut.getShortcut(event.getCtrlKey(), event.getAltKey(),
+                    final OldAbstractAction action = get(Shortcut.getShortcut(event.getCtrlKey(), event.getAltKey(),
                             event.getShiftKey(), event.getShiftKey(), (char) event.getKeyCode()));
                     if (action != null) {
                         Log.debug("Not propagating event");
@@ -69,7 +69,7 @@ public class GlobalShortcutRegister extends InputMap {
     }
 
     @Override
-    public void put(final KeyStroke keystroke, final AbstractAction action) {
+    public void put(final KeyStroke keystroke, final OldAbstractAction action) {
         final ChangebleObject previous = super.get(keystroke);
         if (previous != null) {
             Log.warn("Shortcut already registed by: " + previous + "(overriding)");

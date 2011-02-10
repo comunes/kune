@@ -21,7 +21,7 @@ package cc.kune.common.client.actions.ui.bind;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.UIException;
 
 import com.google.gwt.user.client.ui.UIObject;
@@ -32,7 +32,7 @@ public abstract class GuiChildBinding extends AbstractGuiBinding {
     protected ParentWidget parent;
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         final int position = descriptor.getPosition();
         if (descriptor.isChild()) {
             // A menu item is a child, a toolbar separator, also. A button can
@@ -44,7 +44,7 @@ public abstract class GuiChildBinding extends AbstractGuiBinding {
             if (child != null) {
                 // Sometimes (menu/toolbar separators), there is no Widget to
                 // add/insert
-                if (position == AbstractGuiActionDescrip.NO_POSITION) {
+                if (position == GuiActionDescrip.NO_POSITION) {
                     parent.add(child);
                 } else {
                     parent.insert(position, child);

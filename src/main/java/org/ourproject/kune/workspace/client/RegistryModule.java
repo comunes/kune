@@ -40,8 +40,8 @@ import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
-import org.ourproject.kune.workspace.client.socialnet.GroupActionRegistry;
-import org.ourproject.kune.workspace.client.socialnet.UserActionRegistry;
+import org.ourproject.kune.workspace.client.oldsn.GroupActionRegistry;
+import org.ourproject.kune.workspace.client.oldsn.UserActionRegistry;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;

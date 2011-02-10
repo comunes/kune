@@ -1,7 +1,7 @@
 /*
  *
 
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,6 +28,10 @@ import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
+import cc.kune.core.client.state.SocialNetworkChangedEvent.SocialNetworkChangedHandler;
+import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
+import cc.kune.core.client.state.ToolChangedEvent.ToolChangedHandler;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -126,6 +130,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     @Override
+    public void onGroupChanged(final GroupChangedHandler handler) {
+        eventBus.addHandler(GroupChangedEvent.getType(), handler);
+    }
+
+    @Override
     public void onGroupChanged(final Listener2<String, String> listener) {
         throw new NotImplementedException();
     }
@@ -168,13 +177,28 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     @Override
+    public void onSocialNetworkChanged(final SocialNetworkChangedHandler handler) {
+        eventBus.addHandler(SocialNetworkChangedEvent.getType(), handler);
+    }
+
+    @Override
     public void onStateChanged(final Listener<StateAbstractDTO> listener) {
         throw new NotImplementedException();
     }
 
     @Override
+    public void onStateChanged(final StateChangedHandler handler) {
+        eventBus.addHandler(StateChangedEvent.getType(), handler);
+    }
+
+    @Override
     public void onToolChanged(final Listener2<String, String> listener) {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public void onToolChanged(final ToolChangedHandler handler) {
+        eventBus.addHandler(ToolChangedEvent.getType(), handler);
     }
 
     @Override
@@ -241,6 +265,5 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         eventBus.fireEvent(new ProgressHideEvent());
         checkGroupAndToolChange(newState);
         previousToken = newState.getStateToken();
-
     }
 }

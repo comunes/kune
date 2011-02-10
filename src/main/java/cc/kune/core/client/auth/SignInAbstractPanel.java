@@ -99,7 +99,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     }
 
     public void show() {
-        dialog.show();
+        dialog.showCentered();
     }
 
     public void unMask() {

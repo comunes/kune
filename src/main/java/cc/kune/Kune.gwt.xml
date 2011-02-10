@@ -25,9 +25,9 @@
   <set-property name="gwt.logging.systemHandler" value="ENABLED" />
   <set-property name="gwt.logging.simpleRemoteHandler"
     value="DISABLED" />
-  <!-- Uncomment if you are enabling server side deobfuscation of StackTraces 
-    <set-property name="compiler.emulatedStack" value="true" /> <set-configuration-property 
-    name="compiler.emulatedStack.recordLineNumbers" value="true" /> <set-configuration-property 
+  <!-- Uncomment if you are enabling server side deobfuscation of StackTraces
+    <set-property name="compiler.emulatedStack" value="true" /> <set-configuration-property
+    name="compiler.emulatedStack.recordLineNumbers" value="true" /> <set-configuration-property
     name="compiler.emulatedStack.recordFileNames" value="true" /> -->
   <!-- NOTE: this only compiles for chromium/safari ============= -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
@@ -40,9 +40,10 @@
   <set-configuration-property name="gin.ginjector"
     value="cc.kune.client.KuneGinjector" />
   <!-- Debugging =============================================== -->
-  <!-- for add ensureDebugIds (debugId in UIBinder), remove/comment in production 
+  <!-- for add ensureDebugIds (debugId in UIBinder), remove/comment in production
     see UIObject.ensureDebugId()) -->
   <inherits name="com.google.gwt.user.Debug" />
   <!-- Entrypoint =============================================== -->
   <entry-point class="cc.kune.client.KuneEntryPoint" />
+  <!-- <entry-point class="cc.kune.common.client.SampleEntryPoint" /> -->
 </module>

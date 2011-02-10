@@ -21,7 +21,7 @@ package cc.kune.common.client.actions.gxtui;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
@@ -35,7 +35,7 @@ public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
         super();
     }
 
-    public GxtToolbarGui(final AbstractGuiActionDescrip descriptor) {
+    public GxtToolbarGui(final GuiActionDescrip descriptor) {
         super(descriptor);
     }
 
@@ -63,7 +63,7 @@ public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
     // }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         toolbar = new ToolBar();
         initWidget(toolbar);

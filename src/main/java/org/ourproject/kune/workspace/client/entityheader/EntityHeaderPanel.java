@@ -23,14 +23,14 @@ import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.download.FileConstants;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsTheme;
 
+import cc.kune.core.client.services.FileConstants;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 
@@ -66,7 +66,7 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
         wskel.addToEntityMainHeader(this);
     }
 
-    public void addAction(final GuiActionDescrip descriptor) {
+    public void addAction(final OldGuiActionDescrip descriptor) {
         toolbar.add(descriptor);
     }
 

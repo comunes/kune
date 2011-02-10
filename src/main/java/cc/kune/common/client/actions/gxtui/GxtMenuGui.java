@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -71,7 +71,7 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         descriptor.putValue(ParentWidget.PARENT_UI, this);
         // Standalone menus are menus without and associated button in a
@@ -142,5 +142,10 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
         if (button != null) {
             button.setVisible(visible);
         }
+    }
+
+    @Override
+    public boolean shouldBeAdded() {
+        return notStandAlone;
     }
 }

@@ -25,7 +25,7 @@ public class SubMenuGui extends AbstractMenuGui {
 
     private final MenuItem item;
 
-    public SubMenuGui(final GuiActionDescrip descriptor) {
+    public SubMenuGui(final OldGuiActionDescrip descriptor) {
         super(descriptor);
         item = new MenuItem();
         item.setMenu(menu);

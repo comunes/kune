@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 /*
  *
  * This file is part of kune.
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -41,6 +41,7 @@ package cc.kune.core.client.state;
 import java.util.Collection;
 import java.util.List;
 
+import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nCountryDTO;
@@ -135,14 +136,20 @@ public interface Session {
 
     boolean isNotLogged();
 
+    void onInitDataReceived(AppStartEvent.AppStartHandler handler);
+
     @Deprecated
     void onInitDataReceived(Listener<InitDataDTO> listener);
 
     @Deprecated
     void onUserSignIn(Listener<UserInfoDTO> listener);
 
+    void onUserSignIn(UserSignInEvent.UserSignInHandler handler);
+
     @Deprecated
     void onUserSignOut(Listener0 listener);
+
+    void onUserSignOut(UserSignOutEvent.UserSignOutHandler handler);
 
     void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
 

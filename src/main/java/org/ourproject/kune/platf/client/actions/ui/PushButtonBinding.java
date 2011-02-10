@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.client.actions.ui;
 public class PushButtonBinding extends GuiBindingAdapter {
 
     @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final OldGuiActionDescrip descriptor) {
         return new PushButtonGui((PushButtonDescriptor) descriptor);
     }
 

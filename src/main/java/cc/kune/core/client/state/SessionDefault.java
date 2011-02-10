@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,9 +24,13 @@ import java.util.List;
 
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.core.client.cookies.CookiesManager;
+import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nCountryDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
@@ -288,6 +292,11 @@ public class SessionDefault implements Session {
     }
 
     @Override
+    public void onInitDataReceived(final AppStartHandler handler) {
+        eventBus.addHandler(AppStartEvent.getType(), handler);
+    }
+
+    @Override
     public void onInitDataReceived(final Listener<InitDataDTO> listener) {
         throw new NotImplementedException();
     }
@@ -298,8 +307,18 @@ public class SessionDefault implements Session {
     }
 
     @Override
+    public void onUserSignIn(final UserSignInHandler handler) {
+        eventBus.addHandler(UserSignInEvent.getType(), handler);
+    }
+
+    @Override
     public void onUserSignOut(final Listener0 listener) {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public void onUserSignOut(final UserSignOutHandler handler) {
+        eventBus.addHandler(UserSignOutEvent.getType(), handler);
     }
 
     @Override

@@ -1,7 +1,38 @@
+html {
+    background-color: #DD8A3D;
+}
 
-html {background-color: #DD8A3D;}
+body {
+    color: black;
+    font-family: 'Ubuntu', Arial;
+    font-size: 18px,
+}
 
-.page {width: 60em; height: 30em; margin: 2em auto; padding: 1em; background-color: #fff; overflow: hidden;}
-.page h1 {color: black; letter-spacing:-0.05em; line-height:1em; margin:1em 0 0.5em 4em; }
-.page .menu {float: left; padding: 1em; width: 9em; background-color: #efefef; margin-right: 1em;}
-.page .content {}
+.page {
+    width: 800px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.page h1 {
+    color: black;
+    letter-spacing: -0.05em;
+    line-height: 1em;
+    margin: 1em 0 0.5em 4em;
+    padding: 20px 20px 20px 50px;
+    font-size: 26px;
+}
+
+.page .menu {
+    float: left;
+    padding: 1em;
+    width: 9em;
+    background-color: #efefef;
+    margin-right: 1em;
+}
+
+.page .content {
+    display: table-cell
+}

@@ -20,12 +20,17 @@
 package cc.kune.common.client.actions.ui.bind;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 public abstract class AbstractGuiBinding implements GuiBinding {
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) { // NOPMD by vjrj on 18/01/11 0:47
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) { // NOPMD
+                                                                       // by
+                                                                       // vjrj
+                                                                       // on
+                                                                       // 18/01/11
+                                                                       // 0:47
         return null;
     }
 

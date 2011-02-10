@@ -23,12 +23,18 @@ import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 
 public class NotifyUser {
     private static EventBus eventBus;
+    private static I18nTranslationService i18n;
     private static SimpleCallback onOk;
+
+    public static void askConfirmation(final String tittle, final String message, final SimpleCallback callback) {
+        eventBus.fireEvent(new ConfirmAskEvent(tittle, message, i18n.t("Yes"), i18n.t("No"), callback));
+    }
 
     public static void error(final String message) {
         eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message));
@@ -60,8 +66,9 @@ public class NotifyUser {
         eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message));
     }
 
-    public static void init(final EventBus eventBus) {
+    public static void init(final EventBus eventBus, final I18nTranslationService i18n) {
         NotifyUser.eventBus = eventBus;
+        NotifyUser.i18n = i18n;
         onOk = new SimpleCallback() {
 
             @Override
@@ -78,11 +85,11 @@ public class NotifyUser {
     }
 
     public static void showAlertMessage(final String title, final String message) {
-        eventBus.fireEvent(new AlertEvent(title, message, onOk));
+        showAlertMessage(title, message, onOk);
     }
 
     public static void showAlertMessage(final String title, final String message, final SimpleCallback callback) {
-        eventBus.fireEvent(new AlertEvent(title, message, callback));
+        eventBus.fireEvent(new ConfirmAskEvent(title, message, i18n.t("Ok"), i18n.t("Close"), callback));
     }
 
     public static void showProgress(final String text) {

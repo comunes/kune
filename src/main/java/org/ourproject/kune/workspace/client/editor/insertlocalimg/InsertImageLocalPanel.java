@@ -20,10 +20,10 @@
 package org.ourproject.kune.workspace.client.editor.insertlocalimg;
 
 import org.ourproject.kune.platf.client.services.SearcherConstants;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg.InsertImageAbstractPanel;
 import org.ourproject.kune.workspace.client.search.AbstractLiveSearcherField;
 
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;

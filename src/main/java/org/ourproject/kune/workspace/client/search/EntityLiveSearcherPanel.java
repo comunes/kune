@@ -21,8 +21,8 @@ package org.ourproject.kune.workspace.client.search;
 
 import org.ourproject.kune.platf.client.services.SearcherConstants;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;

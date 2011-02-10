@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.Position;
 
@@ -41,7 +41,7 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
     public AbstractGxtMenuGui() {
     }
 
-    public AbstractGxtMenuGui(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGxtMenuGui(final GuiActionDescrip descriptor) {
         super(descriptor);
     }
 
@@ -69,7 +69,7 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         super.create(descriptor);
         menu = new Menu();
@@ -85,8 +85,7 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
-                    final String id = (String) descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO);
-                    show(id);
+                    show(descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO));
                 }
             }
         });

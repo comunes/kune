@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,13 +21,13 @@ package org.ourproject.kune.chat.client.cnt;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;

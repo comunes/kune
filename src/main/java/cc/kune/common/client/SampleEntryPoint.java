@@ -38,10 +38,14 @@ import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.notify.SimpleUserMessage;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.common.client.ui.IconLabel;
 
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -139,6 +143,21 @@ public class SampleEntryPoint implements EntryPoint {
         panel.add(view);
         panel.add(simpleIconLabel);
 
+        final BasicThumb thumb = new BasicThumb("http://www.truth-out.org/sites/all/themes/truth/images/logo.gif", 60,
+                "fooo", 5, false, new ClickHandler() {
+
+                    @Override
+                    public void onClick(final ClickEvent event) {
+                        userMsg.show("Testing");
+                    }
+                });
+        thumb.setTooltip("kkkkkkK");
+        thumb.setOnOverLabel(true);
+        final LayoutContainer layout = new LayoutContainer();
+        // final QuickTip quickTip = new QuickTip(layout);
+        // quickTip.setInterceptTitles(true);
+        layout.add(thumb);
+        RootPanel.get().add(layout);
         RootPanel.get().add(view);
     }
 }

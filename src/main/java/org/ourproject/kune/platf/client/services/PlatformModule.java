@@ -26,7 +26,6 @@ import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
@@ -100,6 +99,8 @@ import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.icons.IconResources;
+import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.ImageUtils;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -161,18 +162,18 @@ public class PlatformModule extends AbstractExtendedModule {
                 return null; // new ErrorHandler(i(Session.class), i18n, p(StateManager.class));
             }
         });
-
-        register(Singleton.class, new Factory<Images>(Images.class) {
-            @Override
-            public Images create() {
-                return Images.App.getInstance();
-            }
-        }, new Factory<ImageUtils>(ImageUtils.class) {
-            @Override
-            public ImageUtils create() {
-                return new ImageUtils(i(Images.class));
-            }
-        });
+//
+//        register(Singleton.class, new Factory<Images>(Images.class) {
+//            @Override
+//            public Images create() {
+//                return Images.App.getInstance();
+//            }
+//        }, new Factory<ImageUtils>(ImageUtils.class) {
+//            @Override
+//            public ImageUtils create() {
+//                return new ImageUtils(i(Images.class));
+//            }
+//        });
 
         //AsyncCallbackSimple.init(i(ErrorHandler.class));
 

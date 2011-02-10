@@ -47,7 +47,7 @@ public class UserConfirmPresenter extends Presenter<UserConfirmView, UserConfirm
     }
 
     @ProxyEvent
-    public void onConfirmAsk(ConfirmAskEvent event) {
+    public void onConfirmAsk(final ConfirmAskEvent event) {
         getView().confirmAsk(event);
     }
 

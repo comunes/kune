@@ -2,170 +2,170 @@
 
 @external .*;
 .floatLeft {
-	float: left;
+  float: left;
 }
 
 .mainPanel {
-	border-top: 2px solid white;
-	border-bottom: 7px solid white;
-	border-right: 7px solid white;
-	border-left: 7px solid white;
+  border-top: 2px solid white;
+  border-bottom: 7px solid white;
+  border-right: 7px solid white;
+  border-left: 7px solid white;
 }
 
 .floatRight {
-	float: right;
+  float: right;
 }
 
 .siteBar {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .entityHeader {
-	-webkit-border-top-left-radius: 10px;
-	-moz-border-radius-topleft: 10px;
-	border-top-left-radius: 10px;
-	background-color: #f4e3d7;
-	overflow: hidden;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-left-radius: 10px;
+  background-color: #f4e3d7;
+  overflow: hidden;
 }
 
 .entityFooter {
-	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-bottomleft: 10px;
-	border-top-bottom-radius: 10px;
-	background-color: #f7ebe3;
-	padding: 7px 10px 0px 17px;
-	overflow: hidden;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-top-bottom-radius: 10px;
+  background-color: #f7ebe3;
+  padding: 7px 10px 0px 17px;
+  overflow: hidden;
 }
 
 .entityFooter span {
-	color: #784421;
-	font-size: 16px;
-	font-weight: bold;
+  color: #784421;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .entityHeader span {
-	font-size: 56px;
-	margin-left: 15px;
-	color: #550000;
-	font-weight: bold;
-	font: 'UbuntuBold', Arial;
+  font-size: 56px;
+  margin-left: 15px;
+  color: #550000;
+  font-weight: bold;
+  font: 'UbuntuBold', Arial;
 }
 
 .docHeader {
-	background-color: #c87137;
-	overflow: hidden;
+  background-color: #c87137;
+  overflow: hidden;
 }
 
 .docHeaderArrow {
-	position: relative;
-	z-index: 10;
-	top: -25px;
-	left: 10px;
+  position: relative;
+  z-index: 10;
+  top: -25px;
+  left: 10px;
 }
 
 .docHeader span {
-	color: #FFF;
-	font-size: 28px;
-	font-weight: bold;
-	margin-left: 15px;
-	font: 'UbuntuBold', Arial;
+  color: #FFF;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: 15px;
+  font: 'UbuntuBold', Arial;
 }
 
 .docSubheader {
-	background-color: #f7ebe3;
-	padding: 15px 0 0 15px;
-	overflow: hidden;
+  background-color: #f7ebe3;
+  padding: 15px 0 0 15px;
+  overflow: hidden;
 }
 
 .docSubheaderLeft {
-	position: relative;
-	top: 0;
-	left: -30px;
+  position: relative;
+  top: 0;
+  left: -30px;
 }
 
 .docSubheader span {
-	color: #784421;
-	font-size: 20px;
-	font-weight: bold;
+  color: #784421;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .docEditorMargin {
-	background-color: #f7ebe3;
+  background-color: #f7ebe3;
 }
 
 .docEditor {
-	background-color: #FFF;
-	border-left: 1px solid #959595;
-	border-right: 1px solid #959595;
-	border-top: 1px solid #959595;
-	-webkit-border-top-left-radius: 7px;
-	-moz-border-radius-topleft: 7px;
-	border-top-left-radius: 7px;
-	-webkit-border-top-right-radius: 7px;
-	-moz-border-radius-topright: 7px;
-	border-top-right-radius: 7px;
-	padding: 5px;
+  background-color: #FFF;
+  border-left: 1px solid #959595;
+  border-right: 1px solid #959595;
+  border-top: 1px solid #959595;
+  -webkit-border-top-left-radius: 7px;
+  -moz-border-radius-topleft: 7px;
+  border-top-left-radius: 7px;
+  -webkit-border-top-right-radius: 7px;
+  -moz-border-radius-topright: 7px;
+  border-top-right-radius: 7px;
+  padding: 5px;
 }
 
 .docFooter {
-	border-left: 1px solid #959595;
-	border-right: 1px solid #959595;
-	border-bottom: 1px solid #959595;
-	background-color: #e3dbdb;
-	-webkit-border-bottom-left-radius: 7px;
-	-moz-border-radius-bottomleft: 7px;
-	border-bottom-left-radius: 7px;
-	-webkit-border-bottom-right-radius: 7px;
-	-moz-border-radius-bottomright: 7px;
-	border-bottom-right-radius: 7px;
-	padding: 7px 7px 0 7px;
-	overflow: hidden;
+  border-left: 1px solid #959595;
+  border-right: 1px solid #959595;
+  border-bottom: 1px solid #959595;
+  background-color: #e3dbdb;
+  -webkit-border-bottom-left-radius: 7px;
+  -moz-border-radius-bottomleft: 7px;
+  border-bottom-left-radius: 7px;
+  -webkit-border-bottom-right-radius: 7px;
+  -moz-border-radius-bottomright: 7px;
+  border-bottom-right-radius: 7px;
+  padding: 7px 7px 0 7px;
+  overflow: hidden;
 }
 
 .docFooter span {
-	color: #784421;
-	font-size: 16px;
-	font-weight: bold;
+  color: #784421;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .entityTools {
-	-webkit-border-top-right-radius: 10px;
-	-moz-border-radius-topright: 10px;
-	border-top-right-radius: 10px;
-	-webkit-border-bottom-right-radius: 10px;
-	-moz-border-radius-bottomright: 10px;
-	border-bottom-right-radius: 10px;
-	background-color: #DEAA87;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #DEAA87;
 }
 
 .entityToolsNorth {
-	margin: 10px;
+  /* margin: 10px; */
 }
 
 .entityToolsNorth span {
-	color: #a05a2c;
-	font-size: 20px;
-	font-weight: bold;
+  color: #a05a2c;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .entityToolsCenter {
-	margin: 10px;
+  margin: 10px;
 }
 
 .entityToolsCenter span {
-	color: #FFF;
-	font-size: 22px;
-	font-weight: bold;
+  color: #FFF;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .entityToolsSouth {
-	border-top: 2px solid #FFF;
-	padding: 10px;
+  border-top: 2px solid #FFF;
+  padding: 10px;
 }
 
 .entityToolsSouth span {
-	color: #a05a2c;
-	font-size: 20px;
-	font-weight: bold;
+  color: #a05a2c;
+  font-size: 20px;
+  font-weight: bold;
 }
 

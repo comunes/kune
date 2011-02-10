@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.Position;
 
@@ -45,7 +45,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     public AbstractGwtMenuGui() {
     }
 
-    public AbstractGwtMenuGui(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGwtMenuGui(final GuiActionDescrip descriptor) {
         super(descriptor);
     }
 
@@ -72,7 +72,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.create(descriptor);
         menu = new MenuBar(true);
         menu.setAnimationEnabled(true);

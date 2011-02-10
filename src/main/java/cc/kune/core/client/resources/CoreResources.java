@@ -355,6 +355,9 @@ public interface CoreResources extends ClientBundle {
     @Source("loading-spiner.gif")
     ImageResource loadingSpiner();
 
+    @Source("new-chat.gif")
+    ImageResource newChat();
+
     @Source("nobody.png")
     ImageResource nobody();
 

@@ -28,13 +28,13 @@ public class MenuBinding extends GuiBindingAdapter {
     private Boolean isSubmenu;
 
     @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final OldGuiActionDescrip descriptor) {
         AbstractGuiItem item;
         if (descriptor.isChild()) {
             final SubMenuGui submenu = new SubMenuGui(descriptor);
             final AbstractMenuGui parentMenu = ((AbstractMenuGui) descriptor.getParent().getValue(UI_MENU));
             final int position = descriptor.getPosition();
-            if (position == GuiActionDescrip.NO_POSITION) {
+            if (position == OldGuiActionDescrip.NO_POSITION) {
                 parentMenu.add(submenu.getMenuItem());
             } else {
                 parentMenu.insert(position, submenu.getMenuItem());

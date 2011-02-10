@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.options;
 
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
@@ -47,7 +47,7 @@ public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements Grou
     }
 
     @Override
-    public void addAction(final GuiActionDescrip descriptor) {
+    public void addAction(final OldGuiActionDescrip descriptor) {
         entityHeader.addAction(descriptor);
     }
 

@@ -19,23 +19,23 @@
  */
 package cc.kune.common.client.actions.ui;
 
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 public abstract class AbstractActionExtensiblePresenter implements IsActionExtensible {
 
     @Override
-    public abstract void addAction(final AbstractGuiActionDescrip descriptor);
+    public abstract void addAction(final GuiActionDescrip descriptor);
 
     public void addActionCollection(final GuiActionDescCollection descriptors) {
-        for (final AbstractGuiActionDescrip descriptor : descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }
 
     @Override
-    public void addActions(final AbstractGuiActionDescrip... descriptors) {
-        for (final AbstractGuiActionDescrip descriptor : descriptors) {
+    public void addActions(final GuiActionDescrip... descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
             addAction(descriptor);
         }
     }

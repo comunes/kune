@@ -22,6 +22,7 @@ package cc.kune.common.client.actions.gwtui;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.user.client.ui.MenuItem;
@@ -39,7 +40,7 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         item = new MenuItem("", menu);
         iconLabel = new IconLabel("");
@@ -47,7 +48,7 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
         configureItemFromProperties();
         final AbstractGwtMenuGui parentMenu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(PARENT_UI));
         final int position = descriptor.getPosition();
-        if (position == AbstractGuiActionDescrip.NO_POSITION) {
+        if (position == GuiActionDescrip.NO_POSITION) {
             parentMenu.add(item);
         } else {
             parentMenu.insert(position, item);

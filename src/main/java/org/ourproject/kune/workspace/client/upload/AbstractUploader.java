@@ -19,7 +19,8 @@
  \*/
 package org.ourproject.kune.workspace.client.upload;
 
-import org.ourproject.kune.platf.client.ui.download.FileConstants;
+
+import cc.kune.core.client.services.FileConstants;
 
 import com.gwtext.client.core.UrlParam;
 

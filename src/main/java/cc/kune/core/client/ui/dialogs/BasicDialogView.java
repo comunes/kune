@@ -40,7 +40,11 @@ public interface BasicDialogView {
 
     HasDirectionalText getTitleText();
 
+    void setFirstBtnTitle(String title);
+
     void setFirstBtnVisible(boolean visible);
+
+    void setSecondBtnTitle(String title);
 
     void setSecondBtnVisible(boolean visible);
 

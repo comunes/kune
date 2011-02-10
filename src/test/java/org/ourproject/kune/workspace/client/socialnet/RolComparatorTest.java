@@ -23,6 +23,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.ourproject.kune.workspace.client.oldsn.RolComparator;
 
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;

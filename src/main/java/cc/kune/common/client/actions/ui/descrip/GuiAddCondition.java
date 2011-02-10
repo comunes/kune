@@ -19,8 +19,9 @@
  */
 package cc.kune.common.client.actions.ui.descrip;
 
+
 public interface GuiAddCondition {
 
-    boolean mustBeAdded();
+    boolean mustBeAdded(GuiActionDescrip descript);
 
 }

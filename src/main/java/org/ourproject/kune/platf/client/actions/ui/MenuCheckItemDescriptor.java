@@ -19,15 +19,15 @@
  */
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 
-public class MenuCheckItemDescriptor extends MenuItemDescriptor {
+public class MenuCheckItemDescriptor extends OldMenuItemDescriptor {
 
     public static final String CHECKED = "checked";
 
     private boolean checked = false;
 
-    public MenuCheckItemDescriptor(final MenuDescriptor parent, final AbstractAction action) {
+    public MenuCheckItemDescriptor(final MenuDescriptor parent, final OldAbstractAction action) {
         super(parent, action);
     }
 

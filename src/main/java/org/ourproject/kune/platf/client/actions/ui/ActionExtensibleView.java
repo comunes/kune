@@ -23,6 +23,6 @@ import org.ourproject.kune.platf.client.View;
 
 public interface ActionExtensibleView extends View {
 
-    void addAction(GuiActionDescrip descriptor);
+    void addAction(OldGuiActionDescrip descriptor);
 
 }

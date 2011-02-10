@@ -19,12 +19,12 @@
  */
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 
 import com.google.gwt.resources.client.ImageResource;
 
-public class MenuDescriptor extends GuiActionDescrip {
+public class MenuDescriptor extends OldGuiActionDescrip {
 
     public static final String MENU_HIDE = "hidemenu";
     public static final String MENU_SHOW = "showmenu";
@@ -37,11 +37,11 @@ public class MenuDescriptor extends GuiActionDescrip {
         this(new BaseAction(null, null));
     }
 
-    public MenuDescriptor(final AbstractAction action) {
+    public MenuDescriptor(final OldAbstractAction action) {
         this(NO_PARENT, action);
     }
 
-    public MenuDescriptor(final GuiActionDescrip parent, final AbstractAction action) {
+    public MenuDescriptor(final OldGuiActionDescrip parent, final OldAbstractAction action) {
         super(action);
         setParent(parent);
         action.putValue(MENU_HIDE, false);

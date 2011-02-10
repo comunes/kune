@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuCheckItemDescriptor;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
@@ -192,7 +192,7 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         saveBtn.setLocation(RTEditor.SNDBAR);
 
         saveMenuAction = new SaveAction(i18n.t("Save"),NO_TEXT, imgResources.save());
-        final MenuItemDescriptor saveMenu = new MenuItemDescriptor(super.getFileMenu(), saveMenuAction);
+        final OldMenuItemDescriptor saveMenu = new OldMenuItemDescriptor(super.getFileMenu(), saveMenuAction);
         saveMenu.setPosition(0);
         saveMenu.setLocation(RTEditor.TOPBAR);
 
@@ -207,11 +207,11 @@ public class RTESavingEditorPresenter extends RTEditorPresenter implements RTESa
         autoSaveItem.setLocation(RTEditor.TOPBAR);
 
         final CloseAction closeAction = new CloseAction(i18n.t("Close"), NO_TEXT, NO_ICON);
-        final MenuItemDescriptor closeItem = new MenuItemDescriptor(super.getFileMenu(), closeAction);
+        final OldMenuItemDescriptor closeItem = new OldMenuItemDescriptor(super.getFileMenu(), closeAction);
         closeItem.setLocation(RTEditor.TOPBAR);
 
         final SaveCloseAction saveCloseAction = new SaveCloseAction(i18n.t("Save & Close"), NO_TEXT, NO_ICON);
-        final MenuItemDescriptor saveClose = new MenuItemDescriptor(super.getFileMenu(), saveCloseAction);
+        final OldMenuItemDescriptor saveClose = new OldMenuItemDescriptor(super.getFileMenu(), saveCloseAction);
         final ButtonDescriptor saveCloseBtn = new ButtonDescriptor(saveCloseAction);
         saveClose.setLocation(RTEditor.TOPBAR);
         saveCloseBtn.setLocation(RTEditor.TOPBAR);

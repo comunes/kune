@@ -21,11 +21,11 @@ package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;

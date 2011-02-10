@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.ActionExtensibleView;
 import org.ourproject.kune.platf.client.actions.ui.CssStyleDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -95,7 +95,7 @@ public class WsThemeSelectorPresenter implements WsThemeSelector {
 
     private void createTheme(final String theme) {
         final ThemeAction action = new ThemeAction(theme);
-        final MenuItemDescriptor themeItem = new MenuItemDescriptor(menu, action);
+        final OldMenuItemDescriptor themeItem = new OldMenuItemDescriptor(menu, action);
         // selectItemInUI.add(new Listener<String>() {
         // public void onEvent(final String themeToSelect) {
         // if (theme.equals(themeToSelect)) {

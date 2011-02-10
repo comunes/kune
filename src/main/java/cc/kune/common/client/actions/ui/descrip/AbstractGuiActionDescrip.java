@@ -27,15 +27,7 @@ import cc.kune.common.client.actions.ChangeableObject;
 /**
  * The Class AbstractUIActionDescriptor.
  */
-public abstract class AbstractGuiActionDescrip extends ChangeableObject {
-
-    protected static final AbstractGuiActionDescrip NO_PARENT = new NoParentGuiActionDescriptor();
-    public static final int NO_POSITION = -1;
-    /**
-     * Coma separated, styles of the Gui item
-     */
-    public static final String STYLES = "stylesprop";
-    public static final String VISIBLE = "visibleprop";
+public abstract class AbstractGuiActionDescrip extends ChangeableObject implements GuiActionDescrip {
 
     /** The action. */
     private final AbstractAction action;
@@ -48,7 +40,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
     /** The item location. */
     private String location;
 
-    protected AbstractGuiActionDescrip parent = NO_PARENT;
+    protected GuiActionDescrip parent = NO_PARENT;
 
     /** The position where the item will be inserted. */
     private int position;
@@ -66,20 +58,29 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
         parent = NO_PARENT;
     }
 
+    @Override
     public void fire(final ActionEvent event) {
         action.actionPerformed(event);
     }
 
+    @Override
     public AbstractAction getAction() {
         return action;
     }
 
+    @Override
     public GuiAddCondition getAddCondition() {
         return addCondition;
     }
 
+    @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public Object getItem() {
+        return getValue(ITEM);
     }
 
     /**
@@ -88,11 +89,13 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
      * 
      * @return the location
      */
+    @Override
     public String getLocation() {
         return location;
     }
 
-    public AbstractGuiActionDescrip getParent() {
+    @Override
+    public GuiActionDescrip getParent() {
         return parent;
     }
 
@@ -101,10 +104,12 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
      * 
      * @return the position
      */
+    @Override
     public int getPosition() {
         return position;
     }
 
+    @Override
     public abstract Class<?> getType();
 
     @Override
@@ -120,36 +125,53 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
         }
     }
 
+    @Override
+    public boolean hasItem() {
+        return getValue(ITEM) != null;
+    }
+
+    @Override
     public boolean isChild() {
         return !parent.equals(NO_PARENT);
     }
 
+    @Override
     public boolean isEnabled() {
         return (Boolean) getValue(Action.ENABLED);
     }
 
+    @Override
     public boolean isVisible() {
         return (Boolean) getValue(VISIBLE);
     }
 
+    @Override
     public boolean mustBeAdded() {
         boolean result = false;
         if (addCondition != null) {
-            result = addCondition.mustBeAdded();
+            result = addCondition.mustBeAdded(this);
         }
         return result;
     }
 
+    @Override
     public void setAddCondition(final GuiAddCondition addCondition) {
         this.addCondition = addCondition;
     }
 
+    @Override
     public void setEnabled(final boolean enabled) {
         super.putValue(Action.ENABLED, enabled);
     }
 
+    @Override
     public void setId(final String id) {
         this.id = id;
+    }
+
+    @Override
+    public void setItem(final Object object) {
+        putValue(ITEM, object);
     }
 
     /**
@@ -160,11 +182,13 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
      * @param location
      *            the new location
      */
+    @Override
     public void setLocation(final String location) {
         this.location = location;
     }
 
-    public void setParent(final AbstractGuiActionDescrip parent) {
+    @Override
+    public void setParent(final GuiActionDescrip parent) {
         this.parent = parent;
     }
 
@@ -175,14 +199,17 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject {
      * @param position
      *            the new position
      */
+    @Override
     public void setPosition(final int position) {
         this.position = position;
     }
 
+    @Override
     public void setStyles(final String styles) {
         putValue(STYLES, styles);
     }
 
+    @Override
     public void setVisible(final boolean visible) {
         putValue(VISIBLE, visible);
     }

@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
@@ -39,7 +39,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
 
     private Item item;
 
-    public AbstractMenuItemGui(final MenuItemDescriptor descriptor) {
+    public AbstractMenuItemGui(final OldMenuItemDescriptor descriptor) {
         super(descriptor);
         if (descriptor instanceof MenuRadioItemDescriptor) {
             final CheckItem checkItem = createCheckItem(descriptor);
@@ -61,7 +61,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
         final BaseItemListenerAdapter clickListener = new BaseItemListenerAdapter() {
             @Override
             public void onClick(final BaseItem item, final EventObject event) {
-                final AbstractAction action = getAction();
+                final OldAbstractAction action = getAction();
                 if (action != null) {
                     action.actionPerformed(new ActionEvent(item, event.getBrowserEvent()));
                 }
@@ -119,7 +119,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
         }
     }
 
-    private void confCheckListener(final MenuItemDescriptor descriptor, final CheckItem checkItem) {
+    private void confCheckListener(final OldMenuItemDescriptor descriptor, final CheckItem checkItem) {
         descriptor.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
@@ -129,7 +129,7 @@ public abstract class AbstractMenuItemGui extends AbstractGuiItem {
         });
     }
 
-    private CheckItem createCheckItem(final MenuItemDescriptor descriptor) {
+    private CheckItem createCheckItem(final OldMenuItemDescriptor descriptor) {
         final CheckItem checkItem = new CheckItem();
         checkItem.setChecked(((MenuCheckItemDescriptor) descriptor).isChecked());
         return checkItem;

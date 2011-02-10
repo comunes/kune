@@ -26,17 +26,20 @@ import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.CoreGinModule;
+import cc.kune.core.client.CoreParts;
 import cc.kune.core.client.auth.RegisterPresenter;
 import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
 import cc.kune.core.client.logs.EventBusWithLogging;
+import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
+import cc.kune.core.client.sn.GroupMembersPresenter;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ws.CorePresenter;
@@ -63,6 +66,8 @@ public interface KuneGinjector extends Ginjector {
 
     AsyncProvider<CookiesManager> getCookiesManager();
 
+    CoreParts getCoreParts();
+
     Provider<CorePresenter> getCorePresenter();
 
     ErrorHandler getErrorHandler();
@@ -72,6 +77,8 @@ public interface KuneGinjector extends Ginjector {
     EventBusWithLogging getEventLogger();
 
     GlobalShortcutRegister getGlobalShortcutRegister();
+
+    AsyncProvider<GroupMembersPresenter> getGroupMembersPresenter();
 
     GuiProvider getGuiProvider();
 
@@ -102,6 +109,8 @@ public interface KuneGinjector extends Ginjector {
     AsyncProvider<SpinerPresenter> getSpinerPresenter();
 
     StateManager getStateManager();
+
+    AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
 
     AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
 }

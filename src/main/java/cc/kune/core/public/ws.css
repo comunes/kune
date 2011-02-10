@@ -1,57 +1,57 @@
 @CHARSET "UTF-8";
 
 body {
-  background-color: white;
-  color: black;
-  font-family: 'Ubuntu', Arial;
-  font-size: small;
-  margin: 5px;
-  overflow: hidden;
+    background-color: white;
+    color: black;
+    font-family: 'Ubuntu', Arial;
+    font-size: small;
+    margin: 5px;
+    overflow: hidden;
 }
 
 * {
-  font-family: 'Ubuntu', Arial;
+    font-family: 'Ubuntu', Arial;
 }
 
 body.fontface {
-  font: 'Ubuntu', Arial;
+    font: 'Ubuntu', Arial;
 }
 
 a {
-  color: darkblue;
+    color: darkblue;
 }
 
 a:visited {
-  color: darkblue;
+    color: darkblue;
 }
 
 .gwt-DialogBox {
-  border: 2px solid #AAAAAA;
-  background-color: white;
+    border: 2px solid #AAAAAA;
+    background-color: white;
 }
 
 .gwt-DialogBox .Caption {
-  background-image: url(gray_gradient.gif);
-  background-repeat: repeat-x;
-  padding: 4px;
-  padding-bottom: 8px;
-  font-weight: bold;
-  cursor: default;
+    background-image: url(gray_gradient.gif);
+    background-repeat: repeat-x;
+    padding: 4px;
+    padding-bottom: 8px;
+    font-weight: bold;
+    cursor: default;
 }
 
 .gwt-MenuBar {
-  background-color: #C3D9FF;
-  cursor: default;
+    background-color: #C3D9FF;
+    cursor: default;
 }
 
 .gwt-MenuItem {
-  font-size: 80%;
-  margin: 1px;
-  cursor: default;
+    font-size: 80%;
+    margin: 1px;
+    cursor: default;
 }
 
 .gwt-MenuItem-selected {
-  background-color: #E8EEF7;
+    background-color: #E8EEF7;
 }
 
 .gwt-Tree {
@@ -59,26 +59,26 @@ a:visited {
 }
 
 .gwt-Tree .gwt-TreeItem {
-  font-size: 80%;
-  cursor: default;
+    font-size: 80%;
+    cursor: default;
 }
 
 .gwt-Tree .gwt-TreeItem-selected {
-  background-color: #C3D9FF;
+    background-color: #C3D9FF;
 }
 
 .gwt-StackPanel {
-  background-color: white;
-  border: 1px solid #AAAAAA;
-  width: 15em;
+    background-color: white;
+    border: 1px solid #AAAAAA;
+    width: 15em;
 }
 
 .gwt-StackPanel .gwt-StackPanelItem {
-  background-image: url(blue_gradient.gif);
-  background-repeat: repeat-x;
-  background-color: #EEEEEE;
-  cursor: pointer;
-  cursor: hand;
+    background-image: url(blue_gradient.gif);
+    background-repeat: repeat-x;
+    background-color: #EEEEEE;
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-StackPanel .gwt-StackPanelItem-selected {
@@ -90,236 +90,236 @@ a:visited {
 }
 
 .gwt-TabPanelBottom {
-  border-left: 1px solid #87b3ff;
-  border-right: 1px solid #87b3ff;
-  border-bottom: 1px solid #87b3ff;
+    border-left: 1px solid #87b3ff;
+    border-right: 1px solid #87b3ff;
+    border-bottom: 1px solid #87b3ff;
 }
 
 .gwt-TabBar {
-  font-size: smaller;
+    font-size: smaller;
 }
 
 .gwt-TabBar .gwt-TabBarFirst {
-  height: 100%;
-  border-bottom: 1px solid #87b3ff;
-  border-right: 1px solid #87b3ff;
-  padding-left: 3px;
+    height: 100%;
+    border-bottom: 1px solid #87b3ff;
+    border-right: 1px solid #87b3ff;
+    padding-left: 3px;
 }
 
 .gwt-TabBar .gwt-TabBarRest {
-  border-bottom: 1px solid #87b3ff;
-  padding-right: 3px;
+    border-bottom: 1px solid #87b3ff;
+    padding-right: 3px;
 }
 
 .gwt-TabBar .gwt-TabBarItem {
-  border-top: 1px solid #87b3ff;
-  border-bottom: 1px solid #87b3ff;
-  padding: 2px;
-  cursor: hand;
-  white-space: nowrap;
-  border-right: 1px solid #87b3ff;
+    border-top: 1px solid #87b3ff;
+    border-bottom: 1px solid #87b3ff;
+    padding: 2px;
+    cursor: hand;
+    white-space: nowrap;
+    border-right: 1px solid #87b3ff;
 }
 
 .gwt-TabBar .gwt-TabBarItem-selected {
-  font-weight: bold;
-  background-color: #e8eef7;
-  border-top: 1px solid #87b3ff;
-  border-right: 1px solid #87b3ff;
-  border-bottom: 1px solid #e8eef7;
-  padding: 2px;
-  cursor: default;
-  white-space: nowrap;
+    font-weight: bold;
+    background-color: #e8eef7;
+    border-top: 1px solid #87b3ff;
+    border-right: 1px solid #87b3ff;
+    border-bottom: 1px solid #e8eef7;
+    padding: 2px;
+    cursor: default;
+    white-space: nowrap;
 }
 
 .gwt-PushButton-up {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
-    rgb(232, 241, 255);
-  cursor: pointer;
-  cursor: hand;
+    background-color: #C3D9FF;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+        rgb(232, 241, 255);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-PushButton-up-hovering {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
-    rgb(232, 241, 255);
-  cursor: pointer;
-  cursor: hand;
+    background-color: #C3D9FF;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+        rgb(232, 241, 255);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-PushButton-down {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
-    rgb(157, 174, 205);
-  cursor: pointer;
-  cursor: hand;
+    background-color: #C3D9FF;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+        rgb(157, 174, 205);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-PushButton-down-hovering {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
-    rgb(157, 174, 205);
-  cursor: pointer;
-  cursor: hand;
+    background-color: #C3D9FF;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+        rgb(157, 174, 205);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-ToggleButton-up {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
-    rgb(232, 241, 255);
-  cursor: pointer;
-  cursor: hand;
+    background-color: #C3D9FF;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+        rgb(232, 241, 255);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-ToggleButton-up-hovering {
-  background-color: #C3D9FF;
-  padding: 2px;
-  border: 2px solid transparent;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
-    rgb(232, 241, 255);
-  cursor: pointer;
-  cursor: hand;
+    background-color: #C3D9FF;
+    padding: 2px;
+    border: 2px solid transparent;
+    border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+        rgb(232, 241, 255);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-ToggleButton-down {
-  background-color: #C3D9FF;
-  padding: 2px;
-  background-color: #E8F1FF;
-  border: 2px solid transparent;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
-    rgb(157, 174, 205);
-  cursor: pointer;
-  cursor: hand;
+    background-color: #C3D9FF;
+    padding: 2px;
+    background-color: #E8F1FF;
+    border: 2px solid transparent;
+    border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+        rgb(157, 174, 205);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-ToggleButton-down-hovering {
-  background-color: #C3D9FF;
-  padding: 2px;
-  background-color: #E8F1FF;
-  border: 2px solid transparent;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
-    rgb(157, 174, 205);
-  cursor: pointer;
-  cursor: hand;
+    background-color: #C3D9FF;
+    padding: 2px;
+    background-color: #E8F1FF;
+    border: 2px solid transparent;
+    border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+        rgb(157, 174, 205);
+    cursor: pointer;
+    cursor: hand;
 }
 
 .gwt-RichTextArea {
-  border: 1px solid black;
-  background-color: white;
+    border: 1px solid black;
+    background-color: white;
 }
 
 .gwt-RichTextToolbar {
-  background-color: #C3D9FF;
-  padding: 2px;
+    background-color: #C3D9FF;
+    padding: 2px;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-up {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
+    margin-right: 2px;
+    border: 1px solid #C3D9FF;
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-up-hovering {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
-    rgb(232, 241, 255);
+    margin-right: 2px;
+    border: 1px solid #C3D9FF;
+    border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+        rgb(232, 241, 255);
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-down {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
-    rgb(157, 174, 205);
+    margin-right: 2px;
+    border: 1px solid #C3D9FF;
+    border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+        rgb(157, 174, 205);
 }
 
 .gwt-RichTextToolbar .gwt-PushButton-down-hovering {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
-    rgb(157, 174, 205);
+    margin-right: 2px;
+    border: 1px solid #C3D9FF;
+    border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+        rgb(157, 174, 205);
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-up {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
+    margin-right: 2px;
+    border: 1px solid #C3D9FF;
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-up-hovering {
-  margin-right: 2px;
-  border: 1px solid #C3D9FF;
-  border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
-    rgb(232, 241, 255);
+    margin-right: 2px;
+    border: 1px solid #C3D9FF;
+    border-color: #E8F1FF rgb(157, 174, 205) rgb(157, 174, 205)
+        rgb(232, 241, 255);
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-down {
-  margin-right: 2px;
-  background-color: #E8F1FF;
-  border: 1px solid #C3D9FF;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
-    rgb(157, 174, 205);
+    margin-right: 2px;
+    background-color: #E8F1FF;
+    border: 1px solid #C3D9FF;
+    border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+        rgb(157, 174, 205);
 }
 
 .gwt-RichTextToolbar .gwt-ToggleButton-down-hovering {
-  margin-right: 2px;
-  background-color: #E8F1FF;
-  border: 1px solid #C3D9FF;
-  border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
-    rgb(157, 174, 205);
+    margin-right: 2px;
+    background-color: #E8F1FF;
+    border: 1px solid #C3D9FF;
+    border-color: #9DAECD rgb(232, 241, 255) rgb(232, 241, 255)
+        rgb(157, 174, 205);
 }
 
 .gwt-HorizontalSplitPanel {
-  border: 8px solid #C3D9FF;
+    border: 8px solid #C3D9FF;
 }
 
 .gwt-HorizontalSplitPanel .splitter {
-  background-color: #C3D9FF;
-  cursor: move;
+    background-color: #C3D9FF;
+    cursor: move;
 }
 
 .gwt-HorizontalSplitPanel .left {
-  background-color: #E8EEF7;
+    background-color: #E8EEF7;
 }
 
 .gwt-VerticalSplitPanel {
-  border: 8px solid #C3D9FF;
+    border: 8px solid #C3D9FF;
 }
 
 .gwt-VerticalSplitPanel .splitter {
-  background-color: #C3D9FF;
-  height: 8px;
-  cursor: move;
+    background-color: #C3D9FF;
+    height: 8px;
+    cursor: move;
 }
 
 .gwt-SuggestBoxPopup {
-  border: 2px solid #C3D9FF;
+    border: 2px solid #C3D9FF;
 }
 
 .gwt-SuggestBoxPopup .item {
-  padding: 2px;
+    padding: 2px;
 }
 
 .gwt-SuggestBoxPopup .item-selected {
-  background-color: #C3D9FF;
-  padding: 2px;
+    background-color: #C3D9FF;
+    padding: 2px;
 }
 
 .gwt-DisclosurePanel {
-  border: 2px solid #C3D9FF;
+    border: 2px solid #C3D9FF;
 }
 
 .gwt-DisclosurePanel .header {
-  background-color: #e8eef7;
-  cursor: hand;
+    background-color: #e8eef7;
+    cursor: hand;
 }
 
 .gwt-SplitLayoutPanel {
@@ -327,62 +327,62 @@ a:visited {
 }
 
 .gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger {
-  background-color: white;
-  background: none;
-  cursor: col-resize;
+    background-color: white;
+    background: none;
+    cursor: col-resize;
 }
 
 .gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-VDragger {
-  background-color: white;
-  background: none;
-  cursor: row-resize;
+    background-color: white;
+    background: none;
+    cursor: row-resize;
 }
 
 .kLoadingPanel {
-  background-color: #FF9999;
-  -webkit-border-bottom-right-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-  border-bottom-right-radius: 4px;
-  padding: 0 1px 0 3px;
-  border-collapse: separate;
-  border-spacing: 2px;
+    background-color: #FF9999;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 0 1px 0 3px;
+    border-collapse: separate;
+    border-spacing: 2px;
 }
 
 .kLoadingLabel {
-  font-size: 14px;
-  color: white;
-  font-weight: bold;
-  padding: 0 5px 0 5px;
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    padding: 0 5px 0 5px;
 }
 
 .k-space-sel {
-  margin-right: 10px;
-  background-color: #F2F2F2;
+    margin-right: 10px;
+    background-color: #F2F2F2;
 }
 
 .k-space-sel-btn {
-  padding: 0 1px 0 1px;
-  margin: 0 0 -2px;
+    padding: 0 1px 0 1px;
+    margin: 0 0 -2px;
 }
 
 .k-sitebar-logo {
-  margin-top: 2px;
+    margin-top: 2px;
 }
 
 .x-btn button {
-  font: 18px/27px 'Ubuntu', arial;
+    font: 18px/27px 'Ubuntu', arial;
 }
 
 .k-btn-sitebar,.k-btn-sitebar button {
-  font: 13px 'Ubuntu', arial;
-  color: #B3B3B3;
-  cursor: pointer;
-  text-decoration: underline;
-  white-space: nowrap;
+    font: 13px 'Ubuntu', arial;
+    color: #B3B3B3;
+    cursor: pointer;
+    text-decoration: underline;
+    white-space: nowrap;
 }
 
 .k-btn-sitebar button {
-  margin-top: -5px;
+    margin-top: -5px;
 }
 
 .k-sitebar { /* margin-top: -30px; */
@@ -390,247 +390,247 @@ a:visited {
 }
 
 .k-link {
-  text-decoration: underline;
-  color: green;
-  cursor: pointer;
+    text-decoration: underline;
+    color: green;
+    cursor: pointer;
 }
 
 /* Margins */
 .kune-Margin-40-trbl {
-  margin: 40px;
+    margin: 40px;
 }
 
 .kune-Margin-40-lr {
-  margin-left: 40px;
-  margin-right: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .kune-Margin-40-tl {
-  margin-top: 40px;
-  margin-left: 40px;
+    margin-top: 40px;
+    margin-left: 40px;
 }
 
 .kune-Margin-40-tb {
-  margin-top: 40px;
-  margin-bottom: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .kune-Margin-40-t {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 .kune-Margin-40-r {
-  margin-right: 40px;
+    margin-right: 40px;
 }
 
 .kune-Margin-40-l {
-  margin-left: 40px;
+    margin-left: 40px;
 }
 
 .kune-Margin-20-trbl {
-  margin: 20px;
+    margin: 20px;
 }
 
 .kune-Margin-20-lr {
-  margin-left: 20px;
-  margin-right: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .kune-Margin-20-tl {
-  margin-top: 20px;
-  margin-left: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .kune-Margin-20-tb {
-  margin-top: 20px;
-  margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .kune-Margin-20-t {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .kune-Margin-20-r {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .kune-Margin-20-l {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 .kune-Margin-Large-trbl {
-  margin: 10px;
+    margin: 10px;
 }
 
 .kune-Margin-Large-lr {
-  margin-left: 10px;
-  margin-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .kune-Margin-Large-tl {
-  margin-top: 10px;
-  margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .kune-Margin-Large-tb {
-  margin-top: 10px;
-  margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .kune-Margin-Large-t {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .kune-Margin-Large-r {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .kune-Margin-Large-l {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .kune-Margin-7-trbl {
-  margin: 7px;
+    margin: 7px;
 }
 
 .kune-Margin-7-lr {
-  margin-left: 7px;
-  margin-right: 7px;
+    margin-left: 7px;
+    margin-right: 7px;
 }
 
 .kune-Margin-7-tl {
-  margin-top: 7px;
-  margin-left: 7px;
+    margin-top: 7px;
+    margin-left: 7px;
 }
 
 .kune-Margin-7-tb {
-  margin-top: 7px;
-  margin-bottom: 7px;
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
 .kune-Margin-7-t {
-  margin-top: 7px;
+    margin-top: 7px;
 }
 
 .kune-Margin-7-r {
-  margin-right: 7px;
+    margin-right: 7px;
 }
 
 .kune-Margin-7-b {
-  margin-bottom: 7px;
+    margin-bottom: 7px;
 }
 
 .kune-Margin-7-l {
-  margin-left: 7px;
+    margin-left: 7px;
 }
 
 .kune-Margin-Medium-trbl {
-  margin: 5px;
+    margin: 5px;
 }
 
 .kune-Margin-Medium-lr {
-  margin-left: 5px;
-  margin-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .kune-Margin-Medium-tl {
-  margin-top: 5px;
-  margin-left: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
 }
 
 .kune-Margin-Medium-tb {
-  margin-top: 5px;
-  margin-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .kune-Margin-Medium-t {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 .kune-Margin-Medium-r {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
 .kune-Margin-Medium-b {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .kune-Margin-Medium-l {
-  margin-left: 5px;
+    margin-left: 5px;
 }
 
 .kune-Margin-Small-trbl {
-  margin: 3px;
+    margin: 3px;
 }
 
 .kune-Margin-Small-lr {
-  margin-left: 3px;
-  margin-right: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .kune-Margin-Small-tl {
-  margin-top: 3px;
-  margin-left: 3px;
+    margin-top: 3px;
+    margin-left: 3px;
 }
 
 .kune-Margin-Small-tb {
-  margin-top: 3px;
-  margin-bottom: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .kune-Margin-Small-t {
-  margin-top: 3px;
+    margin-top: 3px;
 }
 
 .kune-Margin-Small-l {
-  margin-left: 3px;
+    margin-left: 3px;
 }
 
 .kune-Margin-Small-r {
-  margin-right: 3px;
+    margin-right: 3px;
 }
 
 .kune-Margin-Small-b {
-  margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 
 .kune-Margin-Mini-trbl {
-  margin: 1px;
+    margin: 1px;
 }
 
 .kune-Margin-Mini-lr {
-  margin-left: 1px;
-  margin-right: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
 }
 
 .kune-Margin-Mini-tl {
-  margin-top: 1px;
-  margin-left: 1px;
+    margin-top: 1px;
+    margin-left: 1px;
 }
 
 .kune-Margin-Mini-tb {
-  margin-top: 1px;
-  margin-bottom: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 
 .kune-Margin-Mini-t {
-  margin-top: 1px;
+    margin-top: 1px;
 }
 
 .kune-Margin-Mini-r {
-  margin-right: 1px;
+    margin-right: 1px;
 }
 
 .kune-Margin-Mini-b {
-  margin-bottom: 1px;
+    margin-bottom: 1px;
 }
 
 .kune-Margin-Mini-l {
-  margin-left: 1px;
+    margin-left: 1px;
 }
 
 .k-publicspace-msg {
-  background-color: #E0E0E0;
+    background-color: #E0E0E0;
 }
 
 .k-publicspace-mask { /*	background-color: #fff !important;
@@ -642,100 +642,192 @@ a:visited {
 }
 
 .k-publicspace-panel {
-  margin: 5px;
-  display: table-row;
+    margin: 5px;
+    display: table-row;
 }
 
 .k-publicspace-icon {
-  margin: 3px 3px 3px 0;
-  float: left;
+    margin: 3px 3px 3px 0;
+    float: left;
 }
 
 .k-publicspace-title {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-  font-size: 16px;
-  display: table-caption;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    display: table-caption;
 }
 
 .k-publicspace-description {
-  font-size: 14px;
-  display: table-cell;
+    font-size: 14px;
+    display: table-cell;
 }
 
 .k-publicspace-actions {
-  display: inline;
+    display: inline;
 }
 
 .k-message-panel {
-  margin: 5px;
-  display: table-row;
+    margin: 5px;
+    display: table-row;
 }
 
 .k-message-icon {
-  margin: 3px 3px 3px 0;
-  float: left;
+    margin: 3px 3px 3px 0;
+    float: left;
 }
 
 .k-message-title {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-  font-size: 16px;
-  display: table-caption;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    display: table-caption;
 }
 
 .k-message-description {
-  font-size: 14px;
-  display: table-cell;
+    font-size: 14px;
+    display: table-cell;
 }
 
 .k-error-tb {
-  background: #FFB380 none repeat scroll 0% 50%;
-  /* color: #250; */
-  padding: 10px;
+    background: #FFB380 none repeat scroll 0% 50%;
+    /* color: #250; */
+    padding: 10px;
 }
 
 .k-error-tb img {
-  margin: 0 10px;
-  float: left;
+    margin: 0 10px;
+    float: left;
 }
 
 .k-error-tb div {
-  font-size: 14px;
-  display: table-cell;
+    font-size: 14px;
+    display: table-cell;
 }
 
 .k-mask {
-  background-color: #F2F2F2 !important;
-  /* kfilter: alpha(opacity = 78) !important; */
-  -moz-opacity: 0.78 !important;
-  -khtml-opacity: 0.78 !important;
-  opacity: 0.78 !important;
+    background-color: #F2F2F2 !important;
+    /* kfilter: alpha(opacity = 78) !important; */
+    -moz-opacity: 0.78 !important;
+    -khtml-opacity: 0.78 !important;
+    opacity: 0.78 !important;
 }
 
 .x-form-item-label {
-  font-size: 14px;
-  font-weight: bold;
-  color: brown;
+    font-size: 14px;
+    font-weight: bold;
+    color: brown;
 }
 
 .x-form-text {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .x-fieldset-header-text,.x-form-group-label,.x-form-cb-label {
-  font-size: 14px;
-  font-family: 'Ubuntu', Arial;
+    font-size: 14px;
+    font-family: 'Ubuntu', Arial;
 }
 
 .k-form-intro {
-  font-size: 14px;
-  margin-bottom: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .k-form-fieldset {
-  font-size: 16px;
-  margin-left: 105px;
+    font-size: 16px;
+    margin-left: 105px;
+}
+
+.k-basic-thumb {
+    background-color: #F2F2F2;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.k-basic-thumb img {
+    margin: 2px 2px 0px 2px;
+}
+
+.k-basic-thumb div {
+    margin: -3px 0px 0px 0px;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.k-sn-mainpanel {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.k-sn-maintitle {
+    margin: 5px;
+}
+
+.k-sn-maintitle {
+    color: #a05a2c;
+    font-size: 20px;
+}
+
+.k-sn-adminslabel,.k-sn-collabslabel,.k-sn-pendingslabel {
+    color: #FFF;
+    text-transform: lowercase;
+    padding-left: 10px;
+}
+
+.k-sn-adminslabel {
+
+}
+
+.k-sn-collabslabel {
+
+}
+
+.k-sn-pendingslabel {
+
+}
+
+.k-sn-adminspanel {
+    background-color: #a05a2c;
+}
+
+.k-sn-collabspanel {
+
+}
+
+.k-sn-pendingspanel {
+
+}
+
+.k-sn-adminsscroll,.k-sn-collabsscroll,.k-sn-pendingsscroll {
+    padding-left: 10px;
+}
+
+.k-sn-adminsscroll {
+
+}
+
+.k-sn-collabsscroll {
+
+}
+
+.k-sn-pendingsscroll {
+    margin: 5px;
+}
+
+.k-userconfirm-label {
+    width: 300px;
+    margin: 10px;
+}
+
+.k-sn-deck {
+    padding: 5px;
+}
+
+.k-sn-novisible-label,.k-sn-orphan-label {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
 }

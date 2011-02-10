@@ -27,7 +27,7 @@ import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
@@ -65,7 +65,7 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         if (descriptor instanceof MenuRadioItemDescriptor) {
             final CheckMenuItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
@@ -89,8 +89,17 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
             public void componentSelected(final MenuEvent ce) {
                 final AbstractAction action = descriptor.getAction();
                 if (action != null) {
-                    action.actionPerformed(new ActionEvent(item, Event.getCurrentEvent()));
+
+                    action.actionPerformed(new ActionEvent(getItemObjectOfAction(descriptor), Event.getCurrentEvent()));
                 }
+            }
+
+            private Object getItemObjectOfAction(final GuiActionDescrip descriptor) {
+                // If the action is associated with a item (like a Group, a
+                // group shortname, a username, etc) we pass this item to
+                // the action, if not we only pass the menuitem
+                return descriptor.hasItem() ? descriptor.getItem()
+                        : descriptor.isChild() ? descriptor.getParent().getItem() : item;
             }
         });
         child = item;

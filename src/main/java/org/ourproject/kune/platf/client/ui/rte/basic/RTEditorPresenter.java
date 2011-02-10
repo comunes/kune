@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.InputMap;
@@ -37,11 +37,11 @@ import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.actions.ui.AbstractActionExtensiblePresenter;
 import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.GuiActionDescCollection;
-import org.ourproject.kune.platf.client.actions.ui.GuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.actions.ui.GuiAddCondition;
 import org.ourproject.kune.platf.client.actions.ui.MenuCheckItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuRadioItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.MenuSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
@@ -786,7 +786,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     }
 
     @Override
-    public void addAction(final GuiActionDescrip descriptor) {
+    public void addAction(final OldGuiActionDescrip descriptor) {
         actions.add(descriptor);
         checkForMenus(descriptor);
     }
@@ -810,12 +810,12 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     }
 
     private void attachActions() {
-        for (final GuiActionDescrip descriptor : actions) {
+        for (final OldGuiActionDescrip descriptor : actions) {
             view.addAction(descriptor);
         }
     }
 
-    private void checkForMenus(final GuiActionDescrip descriptor) {
+    private void checkForMenus(final OldGuiActionDescrip descriptor) {
         if (descriptor instanceof MenuDescriptor) {
             menus.add((MenuDescriptor) descriptor);
         }
@@ -833,7 +833,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
         final SelectAllAction selectAllAction = new SelectAllAction(i18n.t("Select all"),
                 AbstractExtendedAction.NO_TEXT, imgResources.selectall());
-        final MenuItemDescriptor select = new MenuItemDescriptor(editMenu, selectAllAction);
+        final OldMenuItemDescriptor select = new OldMenuItemDescriptor(editMenu, selectAllAction);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf('A')), selectAllAction);
 
         final BoldAction boldAction = new BoldAction(NO_TEXT, i18n.t("Bold"), imgResources.bold());
@@ -851,12 +851,12 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
         final SubscriptAction subscriptAction = new SubscriptAction(i18n.t("Subscript"), NO_TEXT,
                 imgResources.subscript());
-        final MenuItemDescriptor subscript = new MenuItemDescriptor(formatMenu, subscriptAction);
+        final OldMenuItemDescriptor subscript = new OldMenuItemDescriptor(formatMenu, subscriptAction);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf(',')), subscriptAction);
 
         final SuperscriptAction superscriptAction = new SuperscriptAction(i18n.t("Superscript"), NO_TEXT,
                 imgResources.superscript());
-        final MenuItemDescriptor superscript = new MenuItemDescriptor(formatMenu, superscriptAction);
+        final OldMenuItemDescriptor superscript = new OldMenuItemDescriptor(formatMenu, superscriptAction);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf('.')), superscriptAction);
 
         final JustifyLeftAction jfyLeftAction = new JustifyLeftAction(NO_TEXT, i18n.t("Left Justify"),
@@ -876,49 +876,49 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
         final UndoAction undoAction = new UndoAction(i18n.t("Undo"), NO_TEXT, imgResources.undo());
         final UndoAction undoActionBtn = new UndoAction(NO_TEXT, i18n.t("Undo"), imgResources.undo());
-        final MenuItemDescriptor undo = new MenuItemDescriptor(editMenu, undoAction);
+        final OldMenuItemDescriptor undo = new OldMenuItemDescriptor(editMenu, undoAction);
         final ButtonDescriptor undoBtn = new ButtonDescriptor(undoActionBtn);
         undoBtn.setPosition(0);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf('Z')), undoAction);
 
         final RedoAction redoAction = new RedoAction(i18n.t("Redo"), NO_TEXT, imgResources.redo());
         final RedoAction redoActionBtn = new RedoAction(NO_TEXT, i18n.t("Redo"), imgResources.redo());
-        final MenuItemDescriptor redo = new MenuItemDescriptor(editMenu, redoAction);
+        final OldMenuItemDescriptor redo = new OldMenuItemDescriptor(editMenu, redoAction);
         final ButtonDescriptor redoBtn = new ButtonDescriptor(redoActionBtn);
         redoBtn.setPosition(1);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf('Y')), redoAction);
 
         final CopyAction copyAction = new CopyAction(i18n.t("Copy"), NO_TEXT, imgResources.copy());
-        final MenuItemDescriptor copy = new MenuItemDescriptor(editMenu, copyAction);
+        final OldMenuItemDescriptor copy = new OldMenuItemDescriptor(editMenu, copyAction);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf('C')), copyAction);
 
         final CutAction cutAction = new CutAction(i18n.t("Cut"), NO_TEXT, imgResources.cut());
-        final MenuItemDescriptor cut = new MenuItemDescriptor(editMenu, cutAction);
+        final OldMenuItemDescriptor cut = new OldMenuItemDescriptor(editMenu, cutAction);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf('X')), cutAction);
 
         final PasteAction pasteAction = new PasteAction(i18n.t("Paste"), NO_TEXT, imgResources.paste());
-        final MenuItemDescriptor paste = new MenuItemDescriptor(editMenu, pasteAction);
+        final OldMenuItemDescriptor paste = new OldMenuItemDescriptor(editMenu, pasteAction);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf('V')), pasteAction);
 
         final EditHtmlAction editHtmlAction = new EditHtmlAction(i18n.t("Edit HTML"), NO_TEXT, imgResources.edithtml());
-        final MenuItemDescriptor editHtml = new MenuItemDescriptor(editMenu, editHtmlAction);
+        final OldMenuItemDescriptor editHtml = new OldMenuItemDescriptor(editMenu, editHtmlAction);
         editHtml.setAddCondition(extendedAddCond);
 
         final CommentAction commentAction = new CommentAction(i18n.t("Comment"), NO_TEXT, NO_ICON);
-        final MenuItemDescriptor comment = new MenuItemDescriptor(insertMenu, commentAction);
+        final OldMenuItemDescriptor comment = new OldMenuItemDescriptor(insertMenu, commentAction);
         comment.setAddCondition(extendedAddCond);
         setActionShortcut(Shortcut.getShortcut(true, Character.valueOf('M')), commentAction);
 
         final HrAction hlineAction = new HrAction(i18n.t("Horizontal line"), NO_TEXT, imgResources.hfixedline());
         final HrAction hlineBtnAction = new HrAction(NO_TEXT, i18n.t("Horizontal line"), imgResources.hfixedline());
-        final MenuItemDescriptor hline = new MenuItemDescriptor(insertMenu, hlineAction);
+        final OldMenuItemDescriptor hline = new OldMenuItemDescriptor(insertMenu, hlineAction);
         final ButtonDescriptor hlineBtn = new ButtonDescriptor(hlineBtnAction);
         hline.setAddCondition(extendedAddCond);
         hlineBtn.setAddCondition(extendedAddCond);
         setActionShortcut(Shortcut.getShortcut(true, true, Character.valueOf(' ')), hlineAction);
 
         final BlockquoteAction blockquoteAction = new BlockquoteAction(i18n.t("Block Quotation"), NO_TEXT, NO_ICON);
-        final MenuItemDescriptor blockquote = new MenuItemDescriptor(formatMenu, blockquoteAction);
+        final OldMenuItemDescriptor blockquote = new OldMenuItemDescriptor(formatMenu, blockquoteAction);
         blockquote.setAddCondition(extendedAddCond);
 
         final StrikethroughAction strikeAction = new StrikethroughAction(NO_TEXT, i18n.t("Strikethrough"),
@@ -948,14 +948,14 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
         final ImgAction imgAction = new ImgAction(i18n.t("Image..."), NO_TEXT, imgResources.images());
         final ImgAction imgBtnAction = new ImgAction(NO_TEXT, i18n.t("Insert Image"), imgResources.images());
-        final MenuItemDescriptor img = new MenuItemDescriptor(insertMenu, imgAction);
+        final OldMenuItemDescriptor img = new OldMenuItemDescriptor(insertMenu, imgAction);
         final ButtonDescriptor imgBtn = new ButtonDescriptor(imgBtnAction);
         img.setAddCondition(extendedAddCond);
         imgBtn.setAddCondition(extendedAddCond);
 
         final InsertMediaAction insertMediaAction = new InsertMediaAction(i18n.t("Audio/Video..."), NO_TEXT,
                 imgResources.film());
-        final MenuItemDescriptor insertMedia = new MenuItemDescriptor(insertMenu, insertMediaAction);
+        final OldMenuItemDescriptor insertMedia = new OldMenuItemDescriptor(insertMenu, insertMediaAction);
         insertMedia.setAddCondition(extendedAddCond);
 
         final CreateOrEditLinkAction editLinkAction = new CreateOrEditLinkAction(i18n.t("Link..."), NO_TEXT,
@@ -964,8 +964,8 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
                 i18n.t("Create or Edit Link"), imgResources.link());
         final CreateOrEditLinkAction editLinkCtxAction = new CreateOrEditLinkAction(i18n.t("Change"), NO_TEXT,
                 imgResources.link());
-        final MenuItemDescriptor editLink = new MenuItemDescriptor(insertMenu, editLinkAction);
-        final MenuItemDescriptor editLinkCtx = new MenuItemDescriptor(linkCtxMenu, editLinkCtxAction);
+        final OldMenuItemDescriptor editLink = new OldMenuItemDescriptor(insertMenu, editLinkAction);
+        final OldMenuItemDescriptor editLinkCtx = new OldMenuItemDescriptor(linkCtxMenu, editLinkCtxAction);
         final ButtonDescriptor editLinkBtn = new ButtonDescriptor(editLinkBtnAction);
         editLink.setAddCondition(extendedAddCond);
         editLinkBtn.setAddCondition(extendedAddCond);
@@ -977,7 +977,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
                 imgResources.linkbreak());
         final RemoveLinkAction delLinkCtxAction = new RemoveLinkAction(i18n.t("Remove"), NO_TEXT,
                 imgResources.linkbreak());
-        final MenuItemDescriptor removeLinkCtx = new MenuItemDescriptor(linkCtxMenu, delLinkCtxAction);
+        final OldMenuItemDescriptor removeLinkCtx = new OldMenuItemDescriptor(linkCtxMenu, delLinkCtxAction);
         final ButtonDescriptor removeLinkBtn = new ButtonDescriptor(delLinkBtnAction);
         removeLinkBtn.setAddCondition(extendedAddCond);
         removeLinkCtx.setAddCondition(extendedAddCond);
@@ -987,7 +987,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
                 imgResources.removeFormat());
         final RemoveFormatAction remFormatBtnAc = new RemoveFormatAction(NO_TEXT, i18n.t("Clear Formatting..."),
                 imgResources.removeFormat());
-        final MenuItemDescriptor removeFormat = new MenuItemDescriptor(formatMenu, remFormatAction);
+        final OldMenuItemDescriptor removeFormat = new OldMenuItemDescriptor(formatMenu, remFormatAction);
         final ButtonDescriptor removeFormatBtn = new ButtonDescriptor(remFormatBtnAc);
         removeFormat.setAddCondition(extendedAddCond);
         removeFormatBtn.setAddCondition(extendedAddCond);
@@ -995,14 +995,14 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
         final InsertSpecialCharAction insCharAction = new InsertSpecialCharAction(i18n.t("Special characters..."),
                 NO_TEXT, imgResources.specialchars());
-        final MenuItemDescriptor insertSpecialChar = new MenuItemDescriptor(insertMenu, insCharAction);
+        final OldMenuItemDescriptor insertSpecialChar = new OldMenuItemDescriptor(insertMenu, insCharAction);
         insertSpecialChar.setAddCondition(extendedAddCond);
 
         final InsertTableAction insTableAction = new InsertTableAction(i18n.t("Table..."), NO_TEXT,
                 imgResources.inserttable());
         final InsertTableAction insTableBtnAction = new InsertTableAction(NO_TEXT, i18n.t("Insert Table"),
                 imgResources.inserttable());
-        final MenuItemDescriptor insertTable = new MenuItemDescriptor(insertMenu, insTableAction);
+        final OldMenuItemDescriptor insertTable = new OldMenuItemDescriptor(insertMenu, insTableAction);
         final ButtonDescriptor insertTableBtn = new ButtonDescriptor(insTableBtnAction);
         insertTable.setAddCondition(extendedAddCond);
         insertTableBtn.setAddCondition(extendedAddCond);
@@ -1019,7 +1019,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
         final DevInfoAction devInfoAction = new DevInfoAction(i18n.t("Developers info"), NO_TEXT,
                 imgResources.specialchars());
-        final MenuItemDescriptor devInfo = new MenuItemDescriptor(formatMenu, devInfoAction);
+        final OldMenuItemDescriptor devInfo = new OldMenuItemDescriptor(formatMenu, devInfoAction);
         devInfo.setAddCondition(extendedAddCond);
         setActionShortcut(Shortcut.getShortcut(false, true, false, false, Character.valueOf('I')), devInfoAction);
 
@@ -1033,15 +1033,15 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
                 fontColor, backgroundColor, fontSizeMenu, fontMenu, editLinkCtx, removeLinkCtx);
         // actions.add(devInfo);
 
-        setLocation(TOPBAR, new GuiActionDescrip[] { fileMenu, editMenu, insertMenu, formatMenu, editMenuSep,
+        setLocation(TOPBAR, new OldGuiActionDescrip[] { fileMenu, editMenu, insertMenu, formatMenu, editMenuSep,
                 subscript, superscript, undo, redo, editMenuSep, copy, cut, paste, editMenuSep, select, editMenuSep,
                 editHtml, comment, hline, blockquote, img, insertTable, insertMedia, editLink, removeFormat,
                 formatMenuSep, insertMenuSep, insertSpecialChar, insertTable, devInfo });
-        setLocation(SNDBAR, new GuiActionDescrip[] { undoBtn, redoBtn, sndbarSep, sndbarSepExt, bold, italic,
+        setLocation(SNDBAR, new OldGuiActionDescrip[] { undoBtn, redoBtn, sndbarSep, sndbarSepExt, bold, italic,
                 underline, strikethrough, justifyLeft, justifyCentre, justifyRight, undoBtn, redoBtn, hlineBtn,
                 decreaseIndent, increaseIndent, olist, ulist, hlineBtn, imgBtn, editLinkBtn, removeLinkBtn,
                 removeFormatBtn, insertTableBtn, fontColor, backgroundColor, fontMenu, fontSizeMenu });
-        setLocation(LINKCTX, new GuiActionDescrip[] { removeLinkCtx, editLinkCtx });
+        setLocation(LINKCTX, new OldGuiActionDescrip[] { removeLinkCtx, editLinkCtx });
 
         for (final String fontName : FONT_NAMES) {
             createFontAction(fontMenu, fontName);
@@ -1203,15 +1203,15 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     }
 
     @Override
-    public void setActionShortcut(final KeyStroke key, final AbstractAction action) {
+    public void setActionShortcut(final KeyStroke key, final OldAbstractAction action) {
         inputMap.put(key, action);
         action.setShortcut(key);
     }
 
     @Override
-    public void setActionShortcut(final KeyStroke key, final AbstractAction mainAction, final AbstractAction... actions) {
+    public void setActionShortcut(final KeyStroke key, final OldAbstractAction mainAction, final OldAbstractAction... actions) {
         setActionShortcut(key, mainAction);
-        for (final AbstractAction action : actions) {
+        for (final OldAbstractAction action : actions) {
             action.setShortcut(key);
         }
     }
@@ -1233,8 +1233,8 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
     }
 
     @Override
-    public void setLocation(final String location, final GuiActionDescrip... descripts) {
-        for (final GuiActionDescrip descript : descripts) {
+    public void setLocation(final String location, final OldGuiActionDescrip... descripts) {
+        for (final OldGuiActionDescrip descript : descripts) {
             descript.setLocation(location);
         }
     }

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,7 +24,6 @@ import static org.ourproject.kune.gallery.client.GalleryClientTool.TYPE_ROOT;
 import static org.ourproject.kune.gallery.client.GalleryClientTool.TYPE_UPLOADEDFILE;
 
 import org.ourproject.kune.gallery.client.cnt.GalleryViewer;
-import org.ourproject.kune.platf.client.ui.download.FileDownloadUtils;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
@@ -41,6 +40,7 @@ import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 

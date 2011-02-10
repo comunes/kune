@@ -24,7 +24,7 @@ import cc.kune.common.client.errors.UIException;
 public class MenuSeparatorBinding extends GuiBindingAdapter {
 
     @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final OldGuiActionDescrip descriptor) {
         final AbstractMenuGui menu = ((AbstractMenuGui) descriptor.getParent().getValue(MenuBinding.UI_MENU));
         if (menu == null) {
             throw new UIException("To add a menu separator you need to add the menu before. Item: " + descriptor);

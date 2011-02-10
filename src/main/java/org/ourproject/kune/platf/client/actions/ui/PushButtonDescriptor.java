@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.actions.AbstractAction;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 
 public class PushButtonDescriptor extends ButtonDescriptor {
 
@@ -27,7 +27,7 @@ public class PushButtonDescriptor extends ButtonDescriptor {
 
     protected boolean pushed = false;
 
-    public PushButtonDescriptor(final AbstractAction action) {
+    public PushButtonDescriptor(final OldAbstractAction action) {
         super(action);
     }
 

@@ -40,6 +40,10 @@ public class ActionSimplePanel extends AbstractComposedGuiItem implements Action
         bar.add(item);
     }
 
+    public void clear() {
+        bar.clear();
+    }
+
     @Override
     protected void insertWidget(final AbstractGuiItem item, final int position) {
         final int count = bar.getWidgetCount();

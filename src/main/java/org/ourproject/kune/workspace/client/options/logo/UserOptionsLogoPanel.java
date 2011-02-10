@@ -19,9 +19,9 @@
  */
 package org.ourproject.kune.workspace.client.options.logo;
 
-import org.ourproject.kune.platf.client.ui.download.FileConstants;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
+import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class UserOptionsLogoPanel extends EntityOptionsLogoPanel {

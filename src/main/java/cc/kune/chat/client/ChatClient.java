@@ -25,9 +25,11 @@ public interface ChatClient {
 
     void addNewBuddie(String shortName);
 
+    void chat(String shortName);
+
     void chat(XmppURI jid);
 
-    boolean isBuddie(String localUserName);
+    boolean isBuddie(String shortName);
 
     boolean isBuddie(XmppURI jid);
 

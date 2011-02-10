@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
-import org.ourproject.kune.platf.client.actions.ui.MenuItemDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.Keyboard;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditor;
@@ -152,7 +152,7 @@ public class ContentEditorPresenter extends RTESavingEditorPresenter implements 
 
     private void addContentActions() {
         final RenameAction renameAction = new RenameAction(i18n.t("Rename"), NO_TEXT, NO_ICON);
-        final MenuItemDescriptor renameItem = new MenuItemDescriptor(super.getFileMenu(), renameAction);
+        final OldMenuItemDescriptor renameItem = new OldMenuItemDescriptor(super.getFileMenu(), renameAction);
         renameItem.setLocation(RTEditor.TOPBAR);
         final KeyStroke key = KeyStroke.getKeyStroke(Keyboard.KEY_F2, 0);
         renameAction.putValue(Action.ACCELERATOR_KEY, key);

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -37,17 +37,25 @@ public interface StateManager {
 
     void gotoToken(String newToken);
 
+    void onGroupChanged(GroupChangedEvent.GroupChangedHandler handler);
+
     @Deprecated
     void onGroupChanged(Listener2<String, String> listener);
 
     @Deprecated
     void onSocialNetworkChanged(Listener<StateAbstractDTO> listener);
 
+    void onSocialNetworkChanged(SocialNetworkChangedEvent.SocialNetworkChangedHandler handler);
+
     @Deprecated
     void onStateChanged(Listener<StateAbstractDTO> listener);
 
+    void onStateChanged(StateChangedEvent.StateChangedHandler handler);
+
     @Deprecated
     void onToolChanged(Listener2<String, String> listener);
+
+    void onToolChanged(ToolChangedEvent.ToolChangedHandler handler);
 
     void reload();
 

@@ -19,8 +19,8 @@
  */
 package cc.kune.common.client.actions.ui;
 
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 public interface IsActionExtensible {
 
@@ -30,15 +30,7 @@ public interface IsActionExtensible {
      * @param action
      *            the action
      */
-    void addAction(AbstractGuiActionDescrip action);
-
-    /**
-     * Adds some action descriptions
-     * 
-     * @param action
-     *            the action
-     */
-    void addActions(AbstractGuiActionDescrip... actions);
+    void addAction(GuiActionDescrip action);
 
     /**
      * Adds some action descriptions
@@ -47,5 +39,13 @@ public interface IsActionExtensible {
      *            the actions
      */
     void addActions(GuiActionDescCollection actions);
+
+    /**
+     * Adds some action descriptions
+     * 
+     * @param action
+     *            the action
+     */
+    void addActions(GuiActionDescrip... actions);
 
 }

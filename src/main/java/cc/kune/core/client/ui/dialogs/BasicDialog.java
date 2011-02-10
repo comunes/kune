@@ -113,6 +113,11 @@ public class BasicDialog extends Composite implements BasicDialogView {
     }
 
     @Override
+    public void setFirstBtnTitle(final String title) {
+        firstBtn.setTitle(title);
+    }
+
+    @Override
     public void setFirstBtnVisible(final boolean visible) {
         firstBtn.setVisible(visible);
     }
@@ -123,6 +128,11 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
     public void setSecondBtnTabIndex(final int index) {
         secondBtn.setTabIndex(index);
+    }
+
+    @Override
+    public void setSecondBtnTitle(final String title) {
+        secondBtn.setTitle(title);
     }
 
     @Override

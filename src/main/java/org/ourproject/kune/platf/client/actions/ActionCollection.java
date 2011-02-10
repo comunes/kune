@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.client.actions;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class ActionCollection<T> extends ArrayList<ActionDescriptor<T>> {
 
     private static final long serialVersionUID = -3308296009308246636L;

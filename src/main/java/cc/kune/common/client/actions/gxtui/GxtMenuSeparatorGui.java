@@ -22,7 +22,7 @@ package cc.kune.common.client.actions.gxtui;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -33,7 +33,7 @@ public class GxtMenuSeparatorGui extends AbstractChildGuiItem implements ParentW
     }
 
     @Override
-    public AbstractGuiItem create(final AbstractGuiActionDescrip descriptor) {
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.create(descriptor);
         final GxtMenuGui menu = (GxtMenuGui) parent;
         menu.addSeparator();
