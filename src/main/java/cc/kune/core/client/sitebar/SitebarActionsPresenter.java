@@ -108,6 +108,7 @@ public class SitebarActionsPresenter extends
     public void onAppStart(final AppStartEvent event) {
         final IsActionExtensible right = getView().getRightBar();
         OPTIONS_MENU.putValue(Action.NAME, i18n.t("Options"));
+        // OPTIONS_MENU.putValue(Action.SMALL_ICON, res.arrowDownBlack());
         // OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
         OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
         OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
@@ -146,7 +147,7 @@ public class SitebarActionsPresenter extends
         gotoKuneDevSite.putValue(Action.SMALL_ICON, icons.kuneIcon16());
 
         aboutAction.putValue(Action.NAME, i18n.t("About kune"));
-        aboutAction.putValue(Action.SMALL_ICON, res.kuneIcon16());
+        aboutAction.putValue(Action.SMALL_ICON, res.info());
         // aboutAction.setShortcut(shortcut);
         // shortcutReg.put(shortcut, aboutAction);
 

@@ -28,7 +28,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
@@ -76,10 +75,8 @@ public class WsArmorImpl extends Composite implements WsArmor {
     DockLayoutPanel splitCenter;
     @UiField
     DockLayoutPanel splitEast;
-
     @UiField
     TabLayoutPanel tabs;
-
     @UiField
     SimplePanel userSpace;
 
@@ -90,8 +87,7 @@ public class WsArmorImpl extends Composite implements WsArmor {
         tabs.setStyleName("k-spaces");
         homeSpace.add(RootPanel.get("k-home-ini"));
         publicSpace.add(pspace.getWidget());
-        userSpace.add(new Label("User space"));
-        // userSpace.add(new WebClient());
+        // userSpace.add(new Label("User space"));
     }
 
     @Override

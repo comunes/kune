@@ -904,3 +904,13 @@ font-size:small;
     font-size: 16px;
     font-weight: bold;
 }
+
+.k-frame-def {
+    margin: 0px;
+    border: 0px;
+}
+
+.k-maxsize {
+    width: 100%;
+    height: 100%;
+}

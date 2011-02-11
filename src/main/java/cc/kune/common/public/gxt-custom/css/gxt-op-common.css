@@ -1380,6 +1380,9 @@ a.x-menu-item {
     background-color: #f09134;
     background-image: none;
     border-color: #b36427;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .x-menu-item-active a.x-menu-item {
