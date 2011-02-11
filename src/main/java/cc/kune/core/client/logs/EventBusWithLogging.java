@@ -25,7 +25,7 @@ import com.google.gwt.event.shared.SimpleEventBus;
 public class EventBusWithLogging extends SimpleEventBus {
     @Override
     public void fireEvent(final GwtEvent<?> event) {
-        Log.debug("Kune " + event.toDebugString());
+        Log.debug("Kune " + event.toDebugString() + " " + event.toString());
         super.fireEvent(event);
     }
 }

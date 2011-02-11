@@ -11,12 +11,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class IsAdministrableCondition implements GuiAddCondition {
+public class IsEditableCondition implements GuiAddCondition {
 
     private final Session session;
 
     @Inject
-    public IsAdministrableCondition(final Session session) {
+    public IsEditableCondition(final Session session) {
         this.session = session;
     }
 
@@ -24,10 +24,10 @@ public class IsAdministrableCondition implements GuiAddCondition {
     public boolean mustBeAdded(final GuiActionDescrip descr) {
         final StateAbstractDTO currentState = session.getCurrentState();
         if (currentState instanceof StateContentDTO) {
-            return ((StateContentDTO) currentState).getGroupRights().isAdministrable();
+            return ((StateContentDTO) currentState).getGroupRights().isEditable();
         } else {
             // session.getContainerState() instanceof StateContentDTO)
-            return ((StateContainerDTO) currentState).getGroupRights().isAdministrable();
+            return ((StateContainerDTO) currentState).getGroupRights().isEditable();
         }
     }
 }

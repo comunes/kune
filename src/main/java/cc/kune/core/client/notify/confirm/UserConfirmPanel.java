@@ -20,6 +20,7 @@
 package cc.kune.core.client.notify.confirm;
 
 import cc.kune.common.client.noti.ConfirmAskEvent;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmView;
 import cc.kune.core.client.ui.dialogs.BasicTopDialog;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -57,9 +58,15 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
     @Override
     public void confirmAsk(final ConfirmAskEvent ask) {
         dialog.getFirstBtnText().setText(ask.getAcceptBtnMsg());
-        dialog.getSecondBtnText().setText(ask.getCancelBtnMsg());
+        final String cancelBtnMsg = ask.getCancelBtnMsg();
         dialog.setFirstBtnTitle(ask.getAcceptBtnTooltip());
-        dialog.setSecondBtnTitle(ask.getCancelBtnTooltip());
+        if (TextUtils.notEmpty(cancelBtnMsg)) {
+            dialog.getSecondBtnText().setText(cancelBtnMsg);
+            dialog.setSecondBtnTitle(ask.getCancelBtnTooltip());
+            dialog.setSecondBtnVisible(true);
+        } else {
+            dialog.setSecondBtnVisible(false);
+        }
         dialog.getTitleText().setText(ask.getTitle());
         askLabel.setText(ask.getMessage());
         dialog.showCentered();

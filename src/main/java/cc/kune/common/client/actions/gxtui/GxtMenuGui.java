@@ -25,6 +25,7 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.Style.ButtonScale;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -142,7 +143,7 @@ public class GxtMenuGui extends AbstractGxtMenuGui implements ParentWidget {
     @Override
     public void setToolTipText(final String tooltip) {
         if (button != null) {
-            if (tooltip != null && tooltip.length() > 0) {
+            if (TextUtils.notEmpty(tooltip)) {
                 button.setToolTip(new GxtDefTooltip(tooltip));
             }
         }

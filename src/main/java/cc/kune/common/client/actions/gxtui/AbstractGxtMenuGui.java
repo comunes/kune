@@ -31,7 +31,6 @@ import cc.kune.common.client.actions.ui.descrip.Position;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -107,7 +106,6 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
 
     protected String getMenuPosition() {
         final MenuPosition position = (MenuPosition) descriptor.getValue(MENU_POSITION);
-        GWT.log("menu position" + position == null ? "none" : position.name());
         return position == null ? DEF_MENU_POSITION : position.name();
     }
 

@@ -24,6 +24,7 @@ package cc.kune.core.client.state;
  * 
  */
 public final class SiteCommonTokens {
+    public static final String ABOUTKUNE = "about";
     public final static String HOME = "";
     public final static String NEWGROUP = "newgroup";
     public final static String REGISTER = "register";

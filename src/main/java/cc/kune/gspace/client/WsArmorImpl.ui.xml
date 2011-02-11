@@ -27,7 +27,8 @@
         <g:tab>
           <g:header size='0' />
           <g:SimplePanel ui:field="userSpace" width="100%"
-            height="100%"></g:SimplePanel>
+            height="100%">
+            </g:SimplePanel>
         </g:tab>
         <g:tab>
           <g:header size='0' />

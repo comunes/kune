@@ -31,6 +31,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
+import cc.kune.common.client.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
@@ -91,7 +92,6 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
             public void componentSelected(final MenuEvent ce) {
                 final AbstractAction action = descriptor.getAction();
                 if (action != null) {
-
                     action.actionPerformed(new ActionEvent(getItemObjectOfAction(descriptor), Event.getCurrentEvent()));
                 }
             }
@@ -157,7 +157,7 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
 
     @Override
     protected void setToolTipText(final String tooltip) {
-        if (tooltip != null) {
+        if (TextUtils.notEmpty(tooltip)) {
             item.setToolTip(new GxtDefTooltip(tooltip));
         }
     }

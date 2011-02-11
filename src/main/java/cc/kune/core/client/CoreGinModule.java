@@ -56,8 +56,10 @@ import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
+import cc.kune.core.client.sitebar.SiteUserOptions;
+import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
+import cc.kune.core.client.sitebar.SitebarActionsPanel;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
-import cc.kune.core.client.sitebar.SitebarActionsViewImpl;
 import cc.kune.core.client.sitebar.SitebarNewGroupLink;
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
@@ -128,7 +130,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
                 SiteLogoPresenter.SiteLogoProxy.class);
         bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,
-                SitebarActionsViewImpl.class, SitebarActionsPresenter.SitebarActionsProxy.class);
+                SitebarActionsPanel.class, SitebarActionsPresenter.SitebarActionsProxy.class);
         bindPresenter(NewGroupPresenter.class, NewGroupView.class, NewGroupPanel.class,
                 NewGroupPresenter.NewGroupProxy.class);
         bindPresenter(GroupMembersPresenter.class, GroupMembersPresenter.GroupMembersView.class,
@@ -169,6 +171,9 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(PrefetchUtilities.class).in(Singleton.class);
         bind(AppStarter.class).to(AppStarterDefault.class).in(Singleton.class);
         bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
+        bind(BeforeSignOut.class).in(Singleton.class);
+        bind(SiteTokenListeners.class).asEagerSingleton();
+        bind(CoreParts.class).asEagerSingleton();
 
         // SN
         bind(SNAdminsMenuItemsRegistry.class).in(Singleton.class);
@@ -176,11 +181,10 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(SNPendingsMenuItemsRegistry.class).in(Singleton.class);
         bind(GroupMembersActionsRegistry.class).in(Singleton.class);
 
+        bind(SiteUserOptions.class).to(SiteUserOptionsPresenter.class).in(Singleton.class);
         bind(SitebarNewGroupLink.class).in(Singleton.class);
         bind(SitebarSignInLink.class).in(Singleton.class);
         bind(SitebarSignOutLink.class).in(Singleton.class);
-        bind(BeforeSignOut.class).in(Singleton.class);
-        bind(SiteTokenListeners.class).asEagerSingleton();
-        bind(CoreParts.class).asEagerSingleton();
+
     }
 }

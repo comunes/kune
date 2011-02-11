@@ -24,6 +24,7 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.sitebar.AboutKuneDialog;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -32,6 +33,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class SiteTokenListeners {
+    private final Provider<AboutKuneDialog> aboutKuneDialog;
     private final Provider<NewGroup> newGroup;
     private final Provider<Register> register;
     private final Provider<SignIn> signIn;
@@ -39,11 +41,13 @@ public class SiteTokenListeners {
 
     @Inject
     public SiteTokenListeners(final EventBus eventBus, final Provider<StateManager> stateManager,
-            final Provider<SignIn> signIn, final Provider<Register> register, final Provider<NewGroup> newGroup) {
+            final Provider<SignIn> signIn, final Provider<Register> register, final Provider<NewGroup> newGroup,
+            final Provider<AboutKuneDialog> aboutKuneDialog) {
         this.stateManager = stateManager;
         this.signIn = signIn;
         this.register = register;
         this.newGroup = newGroup;
+        this.aboutKuneDialog = aboutKuneDialog;
         init();
         eventBus.addHandler(AppStartEvent.getType(), new AppStartHandler() {
             @Override
@@ -70,6 +74,13 @@ public class SiteTokenListeners {
             @Override
             public void onHistoryToken() {
                 newGroup.get().doNewGroup();
+            }
+        });
+        stateManager.get().addSiteToken(SiteCommonTokens.ABOUTKUNE, new HistoryTokenCallback() {
+            @Override
+            public void onHistoryToken() {
+                // FIXME, something to come back
+                aboutKuneDialog.get().showCentered();
             }
         });
     }

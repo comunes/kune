@@ -22,22 +22,27 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-public class SitebarActionsViewImpl extends ViewImpl implements SitebarActionsView {
+public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView {
 
+    private final Provider<AboutKuneDialog> aboutPanel;
     private final ActionSimplePanel toolbarLeft;
     private final ActionSimplePanel toolbarRight;
 
     @Inject
-    public SitebarActionsViewImpl(final WsArmor armor, final ActionSimplePanel toolbarRight,
-            final ActionSimplePanel toolbarLeft) {
+    public SitebarActionsPanel(final WsArmor armor, final ActionSimplePanel toolbarRight,
+            final ActionSimplePanel toolbarLeft, final I18nTranslationService i18n,
+            final Provider<AboutKuneDialog> aboutPanel) {
         this.toolbarRight = toolbarRight;
         this.toolbarLeft = toolbarLeft;
+        this.aboutPanel = aboutPanel;
         toolbarRight.addStyleName("k-sitebar");
         toolbarRight.addStyleName("k-floatright");
         toolbarLeft.addStyleName("k-sitebar");
@@ -59,6 +64,11 @@ public class SitebarActionsViewImpl extends ViewImpl implements SitebarActionsVi
     @Override
     public IsActionExtensible getRightBar() {
         return toolbarRight;
+    }
+
+    @Override
+    public void showAboutDialog() {
+        aboutPanel.get().showCentered();
     }
 
 }

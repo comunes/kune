@@ -19,6 +19,9 @@
  */
 package cc.kune.common.client.actions.ui.descrip;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -32,7 +35,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     /** The action. */
     private final AbstractAction action;
 
-    private GuiAddCondition addCondition = new GuiAddConditionAdapter();
+    private final List<GuiAddCondition> addConditions;
 
     /** The item DOM id. */
     private String id;
@@ -56,6 +59,12 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
         this.action = action;
         position = NO_POSITION;
         parent = NO_PARENT;
+        addConditions = new ArrayList<GuiAddCondition>();
+    }
+
+    @Override
+    public void add(final GuiAddCondition addCondition) {
+        addConditions.add(addCondition);
     }
 
     @Override
@@ -66,11 +75,6 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     @Override
     public AbstractAction getAction() {
         return action;
-    }
-
-    @Override
-    public GuiAddCondition getAddCondition() {
-        return addCondition;
     }
 
     @Override
@@ -147,16 +151,13 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
     @Override
     public boolean mustBeAdded() {
-        boolean result = false;
-        if (addCondition != null) {
-            result = addCondition.mustBeAdded(this);
+        final boolean result = true;
+        for (final GuiAddCondition addCondition : addConditions) {
+            if (!addCondition.mustBeAdded(this)) {
+                return false;
+            }
         }
         return result;
-    }
-
-    @Override
-    public void setAddCondition(final GuiAddCondition addCondition) {
-        this.addCondition = addCondition;
     }
 
     @Override

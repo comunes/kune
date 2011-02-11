@@ -30,7 +30,7 @@ public class SNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistr
             @Override
             public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(acceptJoinGroupAction);
-                item.setAddCondition(isAdministrableCondition);
+                item.add(isAdministrableCondition);
                 return item;
             }
         });
@@ -38,7 +38,7 @@ public class SNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistr
             @Override
             public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(denyJoinGroupAction);
-                item.setAddCondition(isAdministrableCondition);
+                item.add(isAdministrableCondition);
                 return item;
             }
         });
@@ -46,7 +46,7 @@ public class SNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistr
             @Override
             public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(gotoPersonAction);
-                item.setAddCondition(isPersonCondition);
+                item.add(isPersonCondition);
                 return item;
             }
         });
@@ -54,7 +54,7 @@ public class SNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistr
             @Override
             public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(gotoGroupAction);
-                item.setAddCondition(isGroupCondition);
+                item.add(isGroupCondition);
                 return item;
             }
         });
@@ -62,7 +62,7 @@ public class SNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistr
             @Override
             public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithUserAction);
-                item.setAddCondition(isPersonCondition);
+                item.add(isPersonCondition);
                 return item;
             }
         });

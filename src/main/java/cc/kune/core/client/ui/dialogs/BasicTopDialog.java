@@ -20,6 +20,7 @@
 package cc.kune.core.client.ui.dialogs;
 
 import cc.kune.common.client.ui.PopupTopPanel;
+import cc.kune.common.client.utils.TextUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
@@ -29,6 +30,14 @@ import com.google.gwt.user.client.ui.UIObject;
 public class BasicTopDialog extends BasicDialog {
 
     private final PopupTopPanel popup;
+
+    public BasicTopDialog(final String dialogId, final String title, final boolean autohide, final boolean modal,
+            final boolean autoscroll, final int width, final int height, final String icon,
+            final String firstButtonTitle, final String firstButtonId, final int tabIndexStart) {
+        this(dialogId, title, autohide, modal, autoscroll, width, height, icon, firstButtonTitle, firstButtonId, "",
+                "", tabIndexStart);
+        super.setSecondBtnVisible(false);
+    }
 
     public BasicTopDialog(final String dialogId, final String title, final boolean autohide, final boolean modal,
             final boolean autoscroll, final int width, final int height, final String icon,
@@ -43,9 +52,13 @@ public class BasicTopDialog extends BasicDialog {
         GWT.log("Not setting size of dialog to: " + String.valueOf(width) + "/" + String.valueOf(height));
         super.setTitleIcon(icon);
         super.getFirstBtnText().setText(firstButtonTitle);
-        super.getSecondBtnText().setText(cancelButtonTitle);
+        if (TextUtils.notEmpty(cancelButtonTitle)) {
+            super.getSecondBtnText().setText(cancelButtonTitle);
+        }
         super.setFirstBtnId(firstButtonId);
-        super.setSecondBtnId(cancelButtonId);
+        if (TextUtils.notEmpty(cancelButtonId)) {
+            super.setSecondBtnId(cancelButtonId);
+        }
         super.setFirstBtnTabIndex(tabIndexStart);
         super.setSecondBtnTabIndex(tabIndexStart + 1);
     }

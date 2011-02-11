@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.sitebar;
 
+import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -30,7 +31,6 @@ import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -56,6 +56,8 @@ public class SitebarActionsPresenter extends
         IsActionExtensible getLeftBar();
 
         IsActionExtensible getRightBar();
+
+        void showAboutDialog();
     }
 
     public static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
@@ -107,14 +109,6 @@ public class SitebarActionsPresenter extends
         final IsActionExtensible right = getView().getRightBar();
         OPTIONS_MENU.putValue(Action.NAME, i18n.t("Options"));
         // OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
-        final AbstractExtendedAction action = new AbstractExtendedAction() {
-            @Override
-            public void actionPerformed(final ActionEvent event) {
-                getEventBus().fireEvent(new UserNotifyEvent("Testing only"));
-            }
-        };
-        action.putValue(Action.NAME, "Test");
-        final MenuItemDescriptor testMenuItem = new MenuItemDescriptor(OPTIONS_MENU, action);
         OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
         OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
         // final ToolbarSeparatorDescriptor separator = new
@@ -131,31 +125,40 @@ public class SitebarActionsPresenter extends
         };
         bugsAction.putValue(Action.NAME, i18n.t("Report Kune issues/problems"));
         bugsAction.putValue(Action.SMALL_ICON, icons.bug());
-        final MenuItemDescriptor bugs = new MenuItemDescriptor(OPTIONS_MENU, bugsAction);
+        final MenuItemDescriptor reportBugs = new MenuItemDescriptor(OPTIONS_MENU, bugsAction);
 
         // final KeyStroke shortcut = Shortcut.getShortcut(true, true, false,
         // false, Character.valueOf('K'));
         final AbstractExtendedAction aboutAction = new AbstractExtendedAction() {
             @Override
             public void actionPerformed(final ActionEvent event) {
-                // view.showAboutDialog();
+                getView().showAboutDialog();
             }
         };
+
+        final MenuItemDescriptor gotoKuneDevSite = new MenuItemDescriptor(OPTIONS_MENU, new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent event) {
+                KuneWindowUtils.open("http://kune.ourproject.org/");
+            }
+        });
+        gotoKuneDevSite.putValue(Action.NAME, i18n.t("kune development site"));
+        gotoKuneDevSite.putValue(Action.SMALL_ICON, icons.kuneIcon16());
 
         aboutAction.putValue(Action.NAME, i18n.t("About kune"));
         aboutAction.putValue(Action.SMALL_ICON, res.kuneIcon16());
         // aboutAction.setShortcut(shortcut);
         // shortcutReg.put(shortcut, aboutAction);
 
+        right.addAction(OPTIONS_MENU);
         right.addAction(signInLink.get());
         right.addAction(signOutLink.get());
         // right.addAction(separator2);
         right.addAction(newGroupLink.get());
         // right.addAction(separator);
-        right.addAction(OPTIONS_MENU);
-        right.addAction(testMenuItem);
+        right.addAction(reportBugs);
+        right.addAction(gotoKuneDevSite);
         right.addAction(menuSeparator);
-        right.addAction(bugs);
         right.addAction(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
 
     }
@@ -164,4 +167,5 @@ public class SitebarActionsPresenter extends
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
     }
+
 }

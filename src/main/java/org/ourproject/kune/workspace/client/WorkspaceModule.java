@@ -74,9 +74,6 @@ import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaL
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPanel;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
-import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspace;
-import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspacePanel;
-import org.ourproject.kune.workspace.client.entityheader.maxmin.MaxMinWorkspacePresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
@@ -85,7 +82,6 @@ import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
-import org.ourproject.kune.workspace.client.i18n.SiteOptionsI18nTranslatorAction;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
 import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseChangeAction;
@@ -114,8 +110,6 @@ import org.ourproject.kune.workspace.client.options.GroupOptions;
 import org.ourproject.kune.workspace.client.options.GroupOptionsPanel;
 import org.ourproject.kune.workspace.client.options.GroupOptionsPresenter;
 import org.ourproject.kune.workspace.client.options.UserOptions;
-import org.ourproject.kune.workspace.client.options.UserOptionsPanel;
-import org.ourproject.kune.workspace.client.options.UserOptionsPresenter;
 import org.ourproject.kune.workspace.client.options.license.EntityOptionsDefLicensePanel;
 import org.ourproject.kune.workspace.client.options.license.GroupOptionsDefLicense;
 import org.ourproject.kune.workspace.client.options.license.GroupOptionsDefLicensePresenter;
@@ -159,9 +153,6 @@ import org.ourproject.kune.workspace.client.site.msg.ToastMessage;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessagePanel;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessagePresenter;
 import org.ourproject.kune.workspace.client.sitebar.sitelogo.SiteLogo;
-import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
-import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptionsPanel;
-import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptionsPresenter;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgressPanel;
 import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgressPresenter;
@@ -177,9 +168,6 @@ import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignInLinkPrese
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPanel;
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPresenter;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptions;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptionsPanel;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptionsPresenter;
 import org.ourproject.kune.workspace.client.skel.ActionCntCtxToolbarPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.tags.TagsSummary;
@@ -319,18 +307,22 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<SiteUserOptions>(SiteUserOptions.class) {
-            @Override
-            public SiteUserOptions create() {
-                final SiteUserOptionsPresenter presenter = new SiteUserOptionsPresenter(i(Session.class),
-                        i(StateManager.class), p(FileDownloadUtils.class), $(I18nTranslationService.class),
-                        $(IconResources.class));
-                final SiteUserOptionsPanel panel = new SiteUserOptionsPanel(presenter, i(WorkspaceSkeleton.class),
-                        $(GuiBindingsRegister.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<SiteUserOptions>(SiteUserOptions.class) {
+        // @Override
+        // public SiteUserOptions create() {
+        // final SiteUserOptionsPresenter presenter = new
+        // SiteUserOptionsPresenter(i(Session.class),
+        // i(StateManager.class), p(FileDownloadUtils.class),
+        // $(I18nTranslationService.class),
+        // $(IconResources.class));
+        // final SiteUserOptionsPanel panel = new
+        // SiteUserOptionsPanel(presenter, i(WorkspaceSkeleton.class),
+        // $(GuiBindingsRegister.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
         register(ApplicationComponentGroup.class, new Factory<SiteSignInLink>(SiteSignInLink.class) {
             @Override
@@ -354,18 +346,21 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 return presenter;
             }
         });
-
-        register(ApplicationComponentGroup.class, new Factory<SiteOptions>(SiteOptions.class) {
-            @Override
-            public SiteOptions create() {
-                final SiteOptionsPresenter presenter = new SiteOptionsPresenter(i(I18nUITranslationService.class),
-                        i(IconResources.class));
-                final SiteOptionsPanel panel = new SiteOptionsPanel(i(WorkspaceSkeleton.class),
-                        i(I18nUITranslationService.class), i(GuiBindingsRegister.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+        //
+        // register(ApplicationComponentGroup.class, new
+        // Factory<SiteOptions>(SiteOptions.class) {
+        // @Override
+        // public SiteOptions create() {
+        // final SiteOptionsPresenter presenter = new
+        // SiteOptionsPresenter(i(I18nUITranslationService.class),
+        // i(IconResources.class));
+        // final SiteOptionsPanel panel = new
+        // SiteOptionsPanel(i(WorkspaceSkeleton.class),
+        // i(I18nUITranslationService.class), i(GuiBindingsRegister.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
         register(ApplicationComponentGroup.class, new Factory<SiteSearch>(SiteSearch.class) {
             @Override
@@ -631,19 +626,24 @@ public class WorkspaceModule extends AbstractExtendedModule {
                 return presenter;
             }
         });
-
-        register(ApplicationComponentGroup.class, new Factory<UserOptions>(UserOptions.class) {
-            @Override
-            public UserOptions create() {
-                final UserOptionsPresenter presenter = new UserOptionsPresenter(i(Session.class),
-                        i(StateManager.class), i(I18nTranslationService.class), i(IconResources.class),
-                        i(SiteUserOptions.class));
-                final UserOptionsPanel panel = new UserOptionsPanel(presenter, i(EntityHeader.class),
-                        i(I18nTranslationService.class), i(NotifyLevelImages.class), i(UserOptionsCollection.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+        //
+        // register(ApplicationComponentGroup.class, new
+        // Factory<UserOptions>(UserOptions.class) {
+        // @Override
+        // public UserOptions create() {
+        // final UserOptionsPresenter presenter = new
+        // UserOptionsPresenter(i(Session.class),
+        // i(StateManager.class), i(I18nTranslationService.class),
+        // i(IconResources.class),
+        // i(SiteUserOptions.class));
+        // final UserOptionsPanel panel = new UserOptionsPanel(presenter,
+        // i(EntityHeader.class),
+        // i(I18nTranslationService.class), i(NotifyLevelImages.class),
+        // i(UserOptionsCollection.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
         register(GroupOptionsCollection.class, new Factory<EntityOptionsToolsConf>(EntityOptionsToolsConf.class) {
             @Override
@@ -849,14 +849,16 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<SiteOptionsI18nTranslatorAction>(
-                SiteOptionsI18nTranslatorAction.class) {
-            @Override
-            public SiteOptionsI18nTranslatorAction create() {
-                return new SiteOptionsI18nTranslatorAction(i(SiteOptions.class), i(I18nTranslationService.class),
-                        i(IconResources.class), p(I18nTranslator.class));
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<SiteOptionsI18nTranslatorAction>(
+        // SiteOptionsI18nTranslatorAction.class) {
+        // @Override
+        // public SiteOptionsI18nTranslatorAction create() {
+        // return new SiteOptionsI18nTranslatorAction(i(SiteOptions.class),
+        // i(I18nTranslationService.class),
+        // i(IconResources.class), p(I18nTranslator.class));
+        // }
+        // });
 
         // register(Singleton.class, new Factory<SignIn>(SignIn.class) {
         // @Override
@@ -1067,17 +1069,21 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<MaxMinWorkspace>(MaxMinWorkspace.class) {
-            @Override
-            public MaxMinWorkspace create() {
-                final MaxMinWorkspacePresenter presenter = new MaxMinWorkspacePresenter(
-                        i(GlobalShortcutRegister.class), i(IconResources.class), i(I18nTranslationService.class),
-                        i(SiteOptions.class));
-                final MaxMinWorkspacePanel panel = new MaxMinWorkspacePanel(i(WorkspaceSkeleton.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<MaxMinWorkspace>(MaxMinWorkspace.class) {
+        // @Override
+        // public MaxMinWorkspace create() {
+        // final MaxMinWorkspacePresenter presenter = new
+        // MaxMinWorkspacePresenter(
+        // i(GlobalShortcutRegister.class), i(IconResources.class),
+        // i(I18nTranslationService.class),
+        // i(SiteOptions.class));
+        // final MaxMinWorkspacePanel panel = new
+        // MaxMinWorkspacePanel(i(WorkspaceSkeleton.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
         register(InsertLinkGroup.class, new Factory<InsertLinkLocal>(InsertLinkLocal.class) {
             @Override

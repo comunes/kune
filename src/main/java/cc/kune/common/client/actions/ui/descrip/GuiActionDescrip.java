@@ -26,11 +26,11 @@ public interface GuiActionDescrip {
 
     void addPropertyChangeListener(final PropertyChangeListener listener);
 
+    void add(final GuiAddCondition addCondition);
+
     void fire(final ActionEvent event);
 
     AbstractAction getAction();
-
-    GuiAddCondition getAddCondition();
 
     String getId();
 
@@ -63,8 +63,6 @@ public interface GuiActionDescrip {
     public void putValue(final String key, final Object value);
 
     void removePropertyChangeListener(final PropertyChangeListener listener);
-
-    void setAddCondition(final GuiAddCondition addCondition);
 
     void setEnabled(final boolean enabled);
 

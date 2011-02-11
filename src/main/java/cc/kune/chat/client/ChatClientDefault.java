@@ -56,6 +56,7 @@ import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.reconnect.client.SessionReconnect;
 import com.calclab.emite.xep.avatar.client.AvatarManager;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
@@ -133,7 +134,7 @@ public class ChatClientDefault implements ChatClient {
         xmppSession = Suco.get(XmppSession.class);
         chatManager = Suco.get(ChatManager.class);
         roomManager = Suco.get(RoomManager.class);
-        // Suco.get(SessionReconnect.class);
+        Suco.get(SessionReconnect.class);
 
         eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
             @Override

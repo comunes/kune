@@ -11,8 +11,8 @@ public class GroupMembersActionsRegistry extends AbstractSNActionsRegistry {
     public GroupMembersActionsRegistry(final JoinGroupAction joinGroupAction, final UnJoinGroupAction unJoinGroupAction) {
         final ButtonDescriptor join = new ButtonDescriptor(joinGroupAction);
         final ButtonDescriptor unjoin = new ButtonDescriptor(unJoinGroupAction);
-        join.setStyles("k-no-backimage");
-        unjoin.setStyles("k-no-backimage");
+        // join.setStyles("k-no-backimage");
+        // unjoin.setStyles("k-no-backimage");
         add(join);
         add(unjoin);
     }

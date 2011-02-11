@@ -24,7 +24,6 @@ import org.ourproject.kune.platf.client.actions.Action;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
-import org.ourproject.kune.workspace.client.sitebar.siteusermenu.SiteUserOptions;
 
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.state.Session;
@@ -35,35 +34,35 @@ import com.calclab.suco.client.events.Listener0;
 
 public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implements UserOptions {
 
-    private UserOptionsView view;
-    private final IconResources img;
     private final I18nTranslationService i18n;
-    private final SiteUserOptions userOptions;
+    private final IconResources img;
     private final Session session;
     private final StateManager stateManager;
+    // private final SiteUserOptions userOptions;
+    private UserOptionsView view;
 
     public UserOptionsPresenter(final Session session, final StateManager stateManager,
-            final I18nTranslationService i18n, final IconResources img, final SiteUserOptions userOptions) {
+            final I18nTranslationService i18n, final IconResources img) {// ,
+                                                                         // final
+                                                                         // SiteUserOptions
+                                                                         // userOptions)
+                                                                         // {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
         this.img = img;
-        this.userOptions = userOptions;
+        // this.userOptions = userOptions;
         session.onUserSignOut(new Listener0() {
+            @Override
             public void onEvent() {
                 view.hide();
             }
         });
     }
 
-    public void init(final UserOptionsView view) {
-        super.init(view);
-        this.view = view;
-        createActions();
-    }
-
     private void createActions() {
         final AbstractExtendedAction userPrefsAction = new AbstractExtendedAction() {
+            @Override
             public void actionPerformed(final ActionEvent event) {
                 if (!session.isInCurrentUserSpace()) {
                     stateManager.gotoToken(session.getCurrentUser().getStateToken());
@@ -75,6 +74,12 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
         userPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
         final OldMenuItemDescriptor prefsItem = new OldMenuItemDescriptor(userPrefsAction);
         prefsItem.setPosition(1);
-        userOptions.addAction(prefsItem);
+        // userOptions.addAction(prefsItem);
+    }
+
+    public void init(final UserOptionsView view) {
+        super.init(view);
+        this.view = view;
+        createActions();
     }
 }

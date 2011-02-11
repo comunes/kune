@@ -52,16 +52,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.78961905"
-     inkscape:cx="493.46544"
-     inkscape:cy="448.12343"
-     inkscape:current-layer="layer7"
+     inkscape:zoom="2.7077228"
+     inkscape:cx="962.93133"
+     inkscape:cy="392.7939"
+     inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="1280"
-     inkscape:window-height="974"
+     inkscape:window-height="747"
      inkscape:window-x="0"
-     inkscape:window-y="21"
+     inkscape:window-y="1024"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="false"
      inkscape:bbox-paths="true"
@@ -232,7 +232,7 @@
              id="g5365">
             <path
                transform="matrix(0.102065,0,0,0.102065,387.7515,-17.05636)"
-               d="m 277.35793,332.62314 a 26.82268,26.82268 0 1 1 -53.64536,0 26.82268,26.82268 0 1 1 53.64536,0 z"
+               d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
                sodipodi:ry="26.82268"
                sodipodi:rx="26.82268"
                sodipodi:cy="332.62314"
@@ -242,7 +242,7 @@
                sodipodi:type="arc" />
             <path
                transform="matrix(0.05245387,0,0,0.05245387,400.1808,-0.554549)"
-               d="m 277.35793,332.62314 a 26.82268,26.82268 0 1 1 -53.64536,0 26.82268,26.82268 0 1 1 53.64536,0 z"
+               d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
                sodipodi:ry="26.82268"
                sodipodi:rx="26.82268"
                sodipodi:cy="332.62314"
@@ -567,7 +567,7 @@
        transform="translate(-751,-12)">
       <path
          transform="translate(0,-3)"
-         d="m 333,232 a 11,11 0 1 1 -22,0 11,11 0 1 1 22,0 z"
+         d="m 333,232 c 0,6.07513 -4.92487,11 -11,11 -6.07513,0 -11,-4.92487 -11,-11 0,-6.07513 4.92487,-11 11,-11 6.07513,0 11,4.92487 11,11 z"
          sodipodi:ry="11"
          sodipodi:rx="11"
          sodipodi:cy="232"
@@ -2546,7 +2546,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
          transform="matrix(0.475,0,0,0.95,-21.570622,377.21335)"
-         d="m 110,32.362183 a 20,10 0 1 1 -40,0 20,10 0 1 1 40,0 z"
+         d="m 110,32.362183 c 0,5.522847 -8.95431,10 -20,10 -11.045695,0 -20,-4.477153 -20,-10 0,-5.522848 8.954305,-10 20,-10 11.04569,0 20,4.477152 20,10 z"
          sodipodi:ry="10"
          sodipodi:rx="20"
          sodipodi:cy="32.362183"
@@ -2559,7 +2559,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,8.0842525,364.37023)"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          sodipodi:ry="1"
          sodipodi:rx="1"
          sodipodi:cy="16.362183"
@@ -2578,14 +2578,14 @@
          sodipodi:cy="16.362183"
          sodipodi:rx="1"
          sodipodi:ry="1"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,2.7154875,362.20909)" />
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,7.7663825,370.24449)"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          sodipodi:ry="1"
          sodipodi:rx="1"
          sodipodi:cy="16.362183"
@@ -2604,14 +2604,14 @@
          sodipodi:cy="16.362183"
          sodipodi:rx="1"
          sodipodi:ry="1"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,2.2467045,371.75097)" />
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/from-private-to-public.png"
          transform="matrix(1.8840121,0.6711918,-0.6711918,1.8840121,-0.8112855,366.96948)"
-         d="m 16,16.362183 a 1,1 0 1 1 -2,0 1,1 0 1 1 2,0 z"
+         d="m 16,16.362183 c 0,0.552284 -0.447715,1 -1,1 -0.552285,0 -1,-0.447716 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z"
          sodipodi:ry="1"
          sodipodi:rx="1"
          sodipodi:cy="16.362183"
@@ -2627,6 +2627,48 @@
        height="113.28773"
        x="-48.066803"
        y="340.33881" />
+    <rect
+       style="opacity:0.84999999999999998;color:#000000;fill:#280b0b;fill-opacity:1;fill-rule:nonzero;stroke:#552200;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6139"
+       width="167.08397"
+       height="134.83969"
+       x="879.38934"
+       y="307.78625" />
+    <rect
+       style="opacity:0.85;color:#000000;fill:#c87137;fill-opacity:1;fill-rule:nonzero;stroke:#cf5c43;stroke-width:0.1996699;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect6141"
+       width="164.7063"
+       height="32.31588"
+       x="880.42413"
+       y="328.24014" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       x="889.85516"
+       y="349.36758"
+       id="text24744-4"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan24746-6"
+         x="889.85516"
+         y="349.36758">menu item</tspan></text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/webtemplate/web_template-2011.png"
+       sodipodi:linespacing="125%"
+       id="text6164"
+       y="379.36758"
+       x="889.85516"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Bold"
+       xml:space="preserve"><tspan
+         y="379.36758"
+         x="889.85516"
+         id="tspan6166"
+         sodipodi:role="line">menu item</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

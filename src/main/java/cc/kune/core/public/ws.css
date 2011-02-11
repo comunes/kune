@@ -17,6 +17,7 @@ body.fontface {
     font: 'Ubuntu', Arial;
 }
 
+/*
 a {
     color: darkblue;
 }
@@ -24,7 +25,7 @@ a {
 a:visited {
     color: darkblue;
 }
-
+*/
 .gwt-DialogBox {
     border: 2px solid #AAAAAA;
     background-color: white;
@@ -778,10 +779,11 @@ a:visited {
     float: left;
 }
 
-.k-sn-adminsCountlabel,.k-sn-collabsCountlabel,.k-sn-pendingsCountlabel {
-  float: left;
-  padding-left: 5px;
-  color: #e0e0e0;
+.k-sn-adminsCountlabel,.k-sn-collabsCountlabel,.k-sn-pendingsCountlabel
+    {
+    float: left;
+    padding-left: 5px;
+    color: #e0e0e0;
 }
 
 .k-sn-adminslabel {
@@ -799,19 +801,25 @@ a:visited {
 }
 */
 .k-sn-mainpanel .x-btn button {
-    cursor: pointer;
     font: 13px 'Ubuntu', arial;
-    padding: 2px;
+    border: 2px solid #CCCCCC;
+    cursor: pointer;
+    margin: 0;
+    padding: 3px 0;
+    text-decoration: none;
+    background-color: #F2F2F2;
+    color: #855585;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
-    text-decoration: none;
     vertical-align: middle;
-    background-color: #F2F2F2;
-    border: 2px gray solid;
-    height: 26px !important;
     line-height: 2em !important;
-    padding-left: 25px !important;
+    height: 26px !important;
+    /*
+font-size:small;
+    cursor: pointer;
+    border: 2px gray solid;
+    padding-left: 25px !important; */
 }
 
 .k-sn-mainpanel .x-btn button:hover {
@@ -849,8 +857,8 @@ a:visited {
 
 }
 
-.k-sn-pendingspanel {
-    /* background-color: #a05a2c; */
+.k-sn-pendingspanel { /* background-color: #a05a2c; */
+
 }
 
 .k-sn-adminsscroll,.k-sn-collabsscroll,.k-sn-pendingsscroll {

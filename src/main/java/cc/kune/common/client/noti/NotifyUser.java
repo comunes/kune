@@ -89,7 +89,7 @@ public class NotifyUser {
     }
 
     public static void showAlertMessage(final String title, final String message, final SimpleCallback callback) {
-        eventBus.fireEvent(new ConfirmAskEvent(title, message, i18n.t("Ok"), i18n.t("Close"), callback));
+        eventBus.fireEvent(new ConfirmAskEvent(title, message, i18n.t("Ok"), "", callback));
     }
 
     public static void showProgress(final String text) {

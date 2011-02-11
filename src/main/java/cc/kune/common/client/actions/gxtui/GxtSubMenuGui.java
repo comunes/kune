@@ -22,6 +22,7 @@ package cc.kune.common.client.actions.gxtui;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 
@@ -72,7 +73,9 @@ public class GxtSubMenuGui extends AbstractGxtMenuGui {
 
     @Override
     public void setToolTipText(final String tooltip) {
-        item.setToolTip(new GxtDefTooltip(tooltip));
+        if (TextUtils.notEmpty(tooltip)) {
+            item.setToolTip(new GxtDefTooltip(tooltip));
+        }
     }
 
     @Override

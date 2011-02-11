@@ -27,7 +27,6 @@ import org.ourproject.kune.platf.client.actions.KeyStroke;
 import org.ourproject.kune.platf.client.actions.Shortcut;
 import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.workspace.client.sitebar.siteoptions.SiteOptions;
 
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -42,6 +41,7 @@ public class MaxMinWorkspacePresenter implements MaxMinWorkspace {
             putValue(Action.SMALL_ICON, img);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent event) {
             showMaximized(true);
         }
@@ -53,53 +53,37 @@ public class MaxMinWorkspacePresenter implements MaxMinWorkspace {
             putValue(Action.SMALL_ICON, img);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent event) {
             showMaximized(false);
         }
     }
 
-    public static final String MIN_ICON = "mmwp-min_bt";
     public static final String MAX_ICON = "mmwp-max_bt";
-    private MaxMinWorkspaceView view;
-
-    private boolean maximized;
+    public static final String MIN_ICON = "mmwp-min_bt";
+    private final I18nTranslationService i18n;
 
     private final IconResources images;
 
-    private final I18nTranslationService i18n;
+    private OldMenuItemDescriptor maximizeButton;
+
+    private boolean maximized;
+
+    private OldMenuItemDescriptor minimizeButton;
+    // private final SiteOptions siteOptions;
 
     private final GlobalShortcutRegister shortcutReg;
 
-    private OldMenuItemDescriptor maximizeButton;
-
-    private OldMenuItemDescriptor minimizeButton;
-    private final SiteOptions siteOptions;
+    private MaxMinWorkspaceView view;
 
     public MaxMinWorkspacePresenter(final GlobalShortcutRegister shortcutReg, final IconResources images,
-            final I18nTranslationService i18n, final SiteOptions siteOptions) {
+            final I18nTranslationService i18n) {
         this.shortcutReg = shortcutReg;
         this.images = images;
         this.i18n = i18n;
-        this.siteOptions = siteOptions;
+        // this.siteOptions = siteOptions;
         maximized = false;
 
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void init(final MaxMinWorkspaceView view) {
-        this.view = view;
-        createActions();
-    }
-
-    public void maximize() {
-        showMaximized(true);
-    }
-
-    public void minimize() {
-        showMaximized(false);
     }
 
     private void createActions() {
@@ -119,13 +103,33 @@ public class MaxMinWorkspacePresenter implements MaxMinWorkspace {
         minimizeButton.setId(MIN_ICON);
 
         shortcutReg.put(shortcut, new AbstractExtendedAction() {
+            @Override
             public void actionPerformed(final ActionEvent event) {
                 showMaximized(!maximized);
             }
         });
 
-        siteOptions.addAction(maximizeButton);
-        siteOptions.addAction(minimizeButton);
+        // siteOptions.addAction(maximizeButton);
+        // siteOptions.addAction(minimizeButton);
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void init(final MaxMinWorkspaceView view) {
+        this.view = view;
+        createActions();
+    }
+
+    @Override
+    public void maximize() {
+        showMaximized(true);
+    }
+
+    @Override
+    public void minimize() {
+        showMaximized(false);
     }
 
     private void showMaximized(final boolean maximized) {
