@@ -32,5 +32,6 @@ public class ChatGinModule extends AbstractPresenterModule {
     protected void configure() {
         bind(ChatClient.class).to(ChatClientDefault.class).in(Singleton.class);
         bind(ChatOptions.class).in(Singleton.class);
+        bind(AddAsBuddieHeaderButton.class).in(Singleton.class);
     }
 }

@@ -17,48 +17,55 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.oldsn.other;
+package cc.kune.chat.client;
 
-import org.ourproject.kune.chat.client.ChatEngine;
-import org.ourproject.kune.platf.client.actions.OldAbstractAction;
-import org.ourproject.kune.platf.client.actions.AbstractExtendedAction;
-import org.ourproject.kune.platf.client.actions.Action;
-import org.ourproject.kune.platf.client.actions.ActionEvent;
-import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
-import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
-import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
-
+import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.AbstractExtendedAction;
+import cc.kune.common.client.actions.Action;
+import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.PropertyChangeEvent;
+import cc.kune.common.client.actions.PropertyChangeListener;
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.resources.icons.IconConstants;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateChangedEvent;
+import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.events.Listener0;
-import com.calclab.suco.client.ioc.Provider;
+import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.im.client.roster.events.RosterGroupChangedEvent;
+import com.calclab.emite.im.client.roster.events.RosterGroupChangedHandler;
+import com.calclab.suco.client.Suco;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class AddAsBuddieHeaderButton {
 
     public static class AddAsBuddieAction extends AbstractExtendedAction {
-        private final Provider<ChatEngine> chatEngine;
+        private final Provider<ChatClientDefault> chatEngine;
         private final Session session;
 
-        public AddAsBuddieAction(final Provider<ChatEngine> chatEngine, final Session session,
+        @Inject
+        public AddAsBuddieAction(final Provider<ChatClientDefault> chatEngine, final Session session,
                 final StateManager stateManager, final I18nTranslationService i18n, final IconResources img) {
             super();
             this.chatEngine = chatEngine;
             this.session = session;
-            stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-                public void onEvent(final StateAbstractDTO state) {
-                    setState(state);
+            stateManager.onStateChanged(new StateChangedHandler() {
+                @Override
+                public void onStateChanged(final StateChangedEvent event) {
+                    setState(event.getState());
                 }
             });
-            chatEngine.get().addOnRosterChanged(new Listener0() {
-                public void onEvent() {
+            Suco.get(XmppRoster.class).addRosterGroupChangedHandler(new RosterGroupChangedHandler() {
+
+                @Override
+                public void onGroupChanged(final RosterGroupChangedEvent event) {
                     setState(session.getCurrentState());
                 }
             });
@@ -66,18 +73,26 @@ public class AddAsBuddieHeaderButton {
             putValue(Action.SMALL_ICON, IconConstants.toPath(img.addGreen()));
         }
 
+        @Override
         public void actionPerformed(final ActionEvent event) {
             chatEngine.get().addNewBuddie(session.getCurrentState().getGroup().getShortName());
             NotifyUser.info("Added as buddie. Waiting buddie response");
             setEnabled(false);
         }
 
+        private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {
+            return state.getGroup().isPersonal();
+        }
+
+        private boolean isNotMe(final String groupName) {
+            return !session.getCurrentUser().getShortName().equals(groupName);
+        }
+
         private void setState(final StateAbstractDTO state) {
             final String groupName = state.getGroup().getShortName();
-            final boolean isPersonal = state.getGroup().isPersonal();
-            final boolean isLogged = session.isLogged();
-            if (isLogged && isPersonal && (!chatEngine.get().isBuddie(groupName))
-                    && (!session.getCurrentUser().getShortName().equals(groupName))) {
+            final boolean imLogged = session.isLogged();
+            final boolean isNotBuddie = !chatEngine.get().isBuddie(groupName);
+            if (imLogged && currentGroupsIsAsPerson(state) && isNotBuddie && isNotMe(groupName)) {
                 setEnabled(true);
             } else {
                 setEnabled(false);
@@ -85,15 +100,14 @@ public class AddAsBuddieHeaderButton {
         }
     }
 
-    public AddAsBuddieHeaderButton(final Provider<ChatEngine> chatEngine, final Session session,
-            final StateManager stateManager, final I18nTranslationService i18n, final IconResources img,
-            final EntityHeader entityHeader) {
-        final AddAsBuddieAction buddieAction = new AddAsBuddieAction(chatEngine, session, stateManager, i18n, img);
+    @Inject
+    public AddAsBuddieHeaderButton(final AddAsBuddieAction buddieAction, final EntityHeader entityHeader) {
         final ButtonDescriptor button = new ButtonDescriptor(buddieAction);
         button.setVisible(false);
         buddieAction.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
             public void propertyChange(final PropertyChangeEvent event) {
-                if (event.getPropertyName().equals(OldAbstractAction.ENABLED)) {
+                if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
                     button.setVisible((Boolean) event.getNewValue());
                 }
             }

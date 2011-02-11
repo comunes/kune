@@ -16,26 +16,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- \*/
-package org.ourproject.kune.workspace.client.entityheader;
+ */
+package org.ourproject.kune.workspace.client.entityheadermaxmin;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 
-public interface EntityHeader {
+public interface MaxMinWorkspaceView extends View {
 
-    void addAction(OldGuiActionDescrip descriptor);
-
-    void addWidget(View widget);
-
-    /**
-     * Refresh the logo from the group info in the client session
-     */
-    void refreshGroupLogo();
-
-    /**
-     * Reload the logo from the group reloaded from the server
-     */
-    void reloadGroupLogoImage();
+    void setMaximized(boolean maximized);
 
 }

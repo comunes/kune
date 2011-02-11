@@ -16,13 +16,27 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-package org.ourproject.kune.workspace.client.entityheader.maxmin;
+ \*/
+package cc.kune.core.client.ws.entheader;
 
-import org.ourproject.kune.platf.client.View;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
-public interface MaxMinWorkspaceView extends View {
+import com.google.gwt.user.client.ui.IsWidget;
 
-    void setMaximized(boolean maximized);
+public interface EntityHeader {
+
+    void addAction(GuiActionDescrip descriptor);
+
+    void addWidget(IsWidget widget);
+
+    /**
+     * Refresh the logo from the group info in the client session
+     */
+    void refreshGroupLogo();
+
+    /**
+     * Reload the logo from the group reloaded from the server
+     */
+    void reloadGroupLogoImage();
 
 }

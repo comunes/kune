@@ -21,10 +21,10 @@ package org.ourproject.kune.workspace.client.options;
 
 import org.ourproject.kune.platf.client.app.UserOptionsCollection;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
 import cc.kune.common.client.noti.NotifyLevelImages;
 import cc.kune.core.client.resources.CoreMessages;
+import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserOptionsView {

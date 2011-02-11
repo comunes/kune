@@ -71,9 +71,6 @@ import org.ourproject.kune.workspace.client.editor.insertlocallink.InsertLinkLoc
 import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocal;
 import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocalPanel;
 import org.ourproject.kune.workspace.client.editor.insertlocalmedia.InsertMediaLocalPresenter;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPanel;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeaderPresenter;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslator;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPanel;
 import org.ourproject.kune.workspace.client.i18n.I18nTranslatorPresenter;
@@ -97,7 +94,6 @@ import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardTrd
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePage;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePanel;
 import org.ourproject.kune.workspace.client.nohomepage.NoHomePagePresenter;
-import org.ourproject.kune.workspace.client.oldsn.other.AddAsBuddieHeaderButton;
 import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionBuddiesSummaryToolbar;
 import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionBuddiesSummaryToolbarPresenter;
 import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionGroupSummaryToolbar;
@@ -212,6 +208,7 @@ import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateTokenUtils;
 import cc.kune.core.shared.dto.UserSimpleDTO;
@@ -384,17 +381,21 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<EntityHeader>(EntityHeader.class) {
-            @Override
-            public EntityHeader create() {
-                final EntityHeaderPresenter presenter = new EntityHeaderPresenter(i(StateManager.class),
-                        i(WsThemeManager.class), i(Session.class));
-                final EntityHeaderPanel panel = new EntityHeaderPanel(i(WorkspaceSkeleton.class),
-                        p(FileDownloadUtils.class), i(Images.class), i(GuiBindingsRegister.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<EntityHeader>(EntityHeader.class) {
+        // @Override
+        // public EntityHeader create() {
+        // final EntityHeaderPresenter presenter = new
+        // EntityHeaderPresenter(i(StateManager.class),
+        // i(WsThemeManager.class), i(Session.class));
+        // final EntityHeaderPanel panel = new
+        // EntityHeaderPanel(i(WorkspaceSkeleton.class),
+        // p(FileDownloadUtils.class), i(Images.class),
+        // i(GuiBindingsRegister.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
         register(Singleton.class, new Factory<WsBackManager>(WsBackManager.class) {
             @Override
@@ -540,13 +541,16 @@ public class WorkspaceModule extends AbstractExtendedModule {
         // }
         // });
 
-        register(ApplicationComponentGroup.class, new Factory<AddAsBuddieHeaderButton>(AddAsBuddieHeaderButton.class) {
-            @Override
-            public AddAsBuddieHeaderButton create() {
-                return new AddAsBuddieHeaderButton(p(ChatEngine.class), i(Session.class), i(StateManager.class),
-                        i(I18nTranslationService.class), i(IconResources.class), i(EntityHeader.class));
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<AddAsBuddieHeaderButton>(AddAsBuddieHeaderButton.class) {
+        // @Override
+        // public AddAsBuddieHeaderButton create() {
+        // return new AddAsBuddieHeaderButton(p(ChatEngine.class),
+        // i(Session.class), i(StateManager.class),
+        // i(I18nTranslationService.class), i(IconResources.class),
+        // i(EntityHeader.class));
+        // }
+        // });
 
         // register(ApplicationComponentGroup.class, new
         // Factory<BuddiesSummary>(BuddiesSummary.class) {

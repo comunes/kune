@@ -88,6 +88,9 @@ import cc.kune.core.client.ui.footer.license.EntityLicensePanel;
 import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
+import cc.kune.core.client.ws.entheader.EntityHeader;
+import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
+import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 import cc.kune.gspace.client.WsArmorImpl;
@@ -139,6 +142,8 @@ public class CoreGinModule extends AbstractPresenterModule {
                 GroupMembersPanel.class, GroupMembersPresenter.GroupMembersProxy.class);
         bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
                 EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
+        bindPresenter(EntityHeaderPresenter.class, EntityHeaderPresenter.EntityHeaderView.class,
+                EntityHeaderPanel.class, EntityHeaderPresenter.EntityHeaderProxy.class);
 
         bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class, SignInPresenter.SignInProxy.class);
@@ -147,6 +152,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
         bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
         bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
+        bind(EntityHeader.class).to(EntityHeaderPresenter.class).in(Singleton.class);
 
         bind(UserMessagesPresenter.class).in(Singleton.class);
         bind(UserMessagesPanel.class).in(Singleton.class);

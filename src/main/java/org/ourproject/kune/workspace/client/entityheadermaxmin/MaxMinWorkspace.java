@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.entityheader.maxmin;
+package org.ourproject.kune.workspace.client.entityheadermaxmin;
 
 public interface MaxMinWorkspace {
 

@@ -17,64 +17,75 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.entityheader;
+package cc.kune.core.client.ws.entheader;
 
 import java.util.Date;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
-import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
-import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
-import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsTheme;
-
+import cc.kune.common.client.actions.ui.ActionFlowPanel;
+import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.FileConstants;
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.gspace.client.WsArmor;
 
-import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.gwtplatform.mvp.client.ViewImpl;
 
-public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderView {
+public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
     private final Provider<FileDownloadUtils> downloadProvider;
     private final EntityTextLogo entityTextLogo;
-    private final Images images;
+    private final CoreResources images;
+    private final HorizontalPanel mainPanel;
+    private final ActionFlowPanel toolbar;
     private final VerticalPanel vpanel;
-    private final ComplexToolbar toolbar;
 
-    public EntityHeaderPanel(final WorkspaceSkeleton wskel, final Provider<FileDownloadUtils> downloadProvider,
-            final Images images, final GuiBindingsRegister bindings) {
-        super();
-        super.setWidth("100%");
+    @Inject
+    public EntityHeaderPanel(final Provider<FileDownloadUtils> downloadProvider, final CoreResources images,
+            final GuiProvider bindings, final WsArmor armor) {
+        mainPanel = new HorizontalPanel();
+        mainPanel.setWidth("100%");
         this.downloadProvider = downloadProvider;
         this.images = images;
         vpanel = new VerticalPanel();
         vpanel.setWidth("100%");
-        vpanel.setHorizontalAlignment(ALIGN_RIGHT);
+        vpanel.setHorizontalAlignment(HorizontalPanel.ALIGN_RIGHT);
         entityTextLogo = new EntityTextLogo();
-        add(entityTextLogo);
-        toolbar = new ComplexToolbar(bindings);
-        toolbar.setTranspStyle();
+        mainPanel.add(entityTextLogo);
+        toolbar = new ActionFlowPanel(bindings);
         vpanel.add(toolbar);
-        add(vpanel);
-        wskel.addToEntityMainHeader(this);
+        mainPanel.add(vpanel);
+        armor.getEntityHeader().add(mainPanel);
     }
 
-    public void addAction(final OldGuiActionDescrip descriptor) {
+    @Override
+    public void addAction(final GuiActionDescrip descriptor) {
         toolbar.add(descriptor);
     }
 
-    public void addWidget(final View view) {
+    @Override
+    public void addWidget(final IsWidget view) {
         final Widget widget = (Widget) view;
         vpanel.add(widget);
     }
 
+    @Override
+    public Widget asWidget() {
+        return mainPanel;
+    }
+
+    @Override
     public void reloadImage(final GroupDTO group) {
         entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(group.getStateToken()) + "&nocache="
                 + new Date().getTime());
@@ -82,7 +93,7 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
 
     @Deprecated
     public void setFullLogo(final StateToken stateToken, final boolean clipped) {
-        clear();
+        mainPanel.clear();
         final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
         Image logo;
         if (clipped) {
@@ -92,41 +103,50 @@ public class EntityHeaderPanel extends HorizontalPanel implements EntityHeaderVi
             logo.setWidth(String.valueOf(FileConstants.LOGO_DEF_WIDTH));
             logo.setHeight(String.valueOf(FileConstants.LOGO_DEF_HEIGHT));
         }
-        add(logo);
+        mainPanel.add(logo);
     }
 
+    @Override
     public void setLargeFont() {
         entityTextLogo.setLargeFont();
     }
 
+    @Override
     public void setLogoImage(final StateToken stateToken) {
         entityTextLogo.setLogoImage(downloadProvider.get().getLogoImageUrl(stateToken));
     }
 
+    @Override
     public void setLogoImageVisible(final boolean visible) {
         entityTextLogo.setLogoVisible(visible);
     }
 
+    @Override
     public void setLogoText(final String groupName) {
         entityTextLogo.setLogoText(groupName);
     }
 
+    @Override
     public void setMediumFont() {
         entityTextLogo.setMediumFont();
     }
 
+    //
+    // @Override
+    // public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
+    // if (oldTheme != null) {
+    // entityTextLogo.removeStyleDependentName(oldTheme.toString());
+    // }
+    // entityTextLogo.addStyleDependentName(newTheme.toString());
+    // }
+
+    @Override
     public void setSmallFont() {
         entityTextLogo.setSmallFont();
     }
 
-    public void setTheme(final WsTheme oldTheme, final WsTheme newTheme) {
-        if (oldTheme != null) {
-            entityTextLogo.removeStyleDependentName(oldTheme.toString());
-        }
-        entityTextLogo.addStyleDependentName(newTheme.toString());
-    }
-
+    @Override
     public void showDefUserLogo() {
-        entityTextLogo.setLogoImage(images.personAvatarDef());
+        entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.personAvatarDef()));
     }
 }

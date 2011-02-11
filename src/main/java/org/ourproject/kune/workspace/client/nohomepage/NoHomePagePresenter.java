@@ -20,9 +20,9 @@
 package org.ourproject.kune.workspace.client.nohomepage;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateNoContentDTO;
 

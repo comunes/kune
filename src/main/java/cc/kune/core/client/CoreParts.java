@@ -1,5 +1,6 @@
 package cc.kune.core.client;
 
+import cc.kune.chat.client.AddAsBuddieHeaderButton;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
@@ -14,13 +15,15 @@ public class CoreParts {
 
     @Inject
     public CoreParts(final Session session, final Provider<GroupMembersPresenter> grouMembersPresenter,
-            final Provider<SiteUserOptionsPresenter> userOptions, final Provider<EntityLicensePresenter> licenseFooter) {
+            final Provider<SiteUserOptionsPresenter> userOptions, final Provider<EntityLicensePresenter> licenseFooter,
+            final Provider<AddAsBuddieHeaderButton> buddieButton) {
         session.onInitDataReceived(new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 grouMembersPresenter.get();
                 userOptions.get();
                 licenseFooter.get();
+                buddieButton.get();
             }
         });
     }
