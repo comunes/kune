@@ -82,8 +82,6 @@ import org.ourproject.kune.workspace.client.i18n.LanguageSelector;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPanel;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorPresenter;
 import org.ourproject.kune.workspace.client.i18n.LanguageSelectorView;
-import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePanel;
-import org.ourproject.kune.workspace.client.licensefoot.EntityLicensePresenter;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseChangeAction;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizard;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPanel;
@@ -448,16 +446,19 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
-            @Override
-            public EntityLicensePresenter create() {
-                final EntityLicensePresenter presenter = new EntityLicensePresenter(i(StateManager.class));
-                final EntityLicensePanel panel = new EntityLicensePanel(presenter, i(I18nUITranslationService.class),
-                        i(WorkspaceSkeleton.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<EntityLicensePresenter>(EntityLicensePresenter.class) {
+        // @Override
+        // public EntityLicensePresenter create() {
+        // final EntityLicensePresenter presenter = new
+        // EntityLicensePresenter(i(StateManager.class));
+        // final EntityLicensePanel panel = new EntityLicensePanel(presenter,
+        // i(I18nUITranslationService.class),
+        // i(WorkspaceSkeleton.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
         register(ApplicationComponentGroup.class, new Factory<RateIt>(RateIt.class) {
             @Override

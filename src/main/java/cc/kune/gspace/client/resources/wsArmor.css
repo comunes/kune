@@ -33,7 +33,7 @@
   -moz-border-radius-bottomleft: 10px;
   border-top-bottom-radius: 10px;
   background-color: #f7ebe3;
-  padding: 7px 10px 0px 17px;
+  /* padding: 7px 10px 0px 17px; */
   overflow: hidden;
 }
 
@@ -120,6 +120,7 @@
   border-bottom-right-radius: 7px;
   padding: 7px 7px 0 7px;
   overflow: hidden;
+  border-collapse:separate;
 }
 
 .docFooter span {
@@ -161,6 +162,7 @@
 .entityToolsSouth {
   border-top: 2px solid #FFF;
   padding: 10px;
+  border-collapse: separate;
 }
 
 .entityToolsSouth span {

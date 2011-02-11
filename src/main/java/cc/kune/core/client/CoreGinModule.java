@@ -84,6 +84,8 @@ import cc.kune.core.client.state.SessionDefault;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateManagerDefault;
+import cc.kune.core.client.ui.footer.license.EntityLicensePanel;
+import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -135,6 +137,8 @@ public class CoreGinModule extends AbstractPresenterModule {
                 NewGroupPresenter.NewGroupProxy.class);
         bindPresenter(GroupMembersPresenter.class, GroupMembersPresenter.GroupMembersView.class,
                 GroupMembersPanel.class, GroupMembersPresenter.GroupMembersProxy.class);
+        bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
+                EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
 
         bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class, SignInPresenter.SignInProxy.class);

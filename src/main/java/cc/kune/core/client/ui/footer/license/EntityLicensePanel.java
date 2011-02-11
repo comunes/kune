@@ -17,97 +17,115 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.licensefoot;
+package cc.kune.core.client.ui.footer.license;
 
-import org.ourproject.kune.platf.client.ui.SimpleToolbar;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.adamtacy.client.ui.effects.examples.Fade;
+import org.adamtacy.client.ui.effects.examples.Show;
 
 import cc.kune.common.client.ui.KuneWindowUtils;
+import cc.kune.core.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.WsArmor;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.gwtext.client.core.Ext;
-import com.gwtext.client.core.ExtElement;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ViewImpl;
 
-public class EntityLicensePanel implements EntityLicenseView {
+public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     public static final String LICENSE_LABEL = "k-elp-lic-lab";
+    private final I18nTranslationService i18n;
+    private final Element labelElement;
+    private final FlowPanel licenseBar;
     private final Image licenseImage;
     private final Label licenseLabel;
-    private final I18nTranslationService i18n;
-    private final SimpleToolbar licenseBar;
-    private final WorkspaceSkeleton ws;
-    private final ExtElement labelElement;
 
-    public EntityLicensePanel(final EntityLicensePresenter presenter, final I18nTranslationService i18n,
-            final WorkspaceSkeleton ws) {
+    @Inject
+    public EntityLicensePanel(final I18nTranslationService i18n, final WsArmor armor) {
         this.i18n = i18n;
-        this.ws = ws;
         licenseImage = new Image();
         licenseLabel = new Label("", false);
 
-        licenseBar = new SimpleToolbar();
-        licenseBar.addSpacer();
-        licenseBar.add(licenseImage, VerticalPanel.ALIGN_TOP);
+        licenseBar = new FlowPanel();
+        licenseBar.add(licenseImage);
         licenseBar.add(licenseLabel);
-
-        final ClickHandler clickListener = new ClickHandler() {
-            public void onClick(final ClickEvent event) {
-                presenter.onLicenseClick();
-            }
-        };
-
-        // licenseLabel.addClickHandler(clickListener);
-        licenseImage.addClickHandler(clickListener);
-
         licenseImage.addMouseOutHandler(new MouseOutHandler() {
+            @Override
             public void onMouseOut(final MouseOutEvent event) {
                 // fade(false);
             }
         });
         licenseImage.addMouseOverHandler(new MouseOverHandler() {
+            @Override
             public void onMouseOver(final MouseOverEvent event) {
-                fade(true);
+                show();
             }
         });
-
-        licenseLabel.addStyleName("kune-Margin-Large-l");
-        licenseLabel.setStyleName("k-elp-limg");
-        licenseImage.setStyleName("k-elp-limg");
-        ws.getEntityWorkspace().getBottomTitle().add(licenseBar);
-        labelElement = Ext.get(licenseLabel.getElement());
+        licenseImage.addStyleName("k-footer-license-img");
+        licenseLabel.addStyleName("k-footer-license-label");
+        armor.getEntityFooter().add(licenseBar);
+        labelElement = licenseLabel.getElement();
     }
 
+    @Override
+    public Widget asWidget() {
+        return null;
+    }
+
+    @Override
     public void attach() {
         licenseBar.setVisible(true);
     }
 
+    @Override
     public void detach() {
         licenseBar.setVisible(false);
     }
 
+    private void fade() {
+        final Fade fade = new Fade(labelElement);
+        fade.setDuration(.5);
+        fade.play();
+    }
+
+    @Override
+    public HasClickHandlers getImage() {
+        return licenseImage;
+    }
+
+    @Override
+    public HasClickHandlers getLabel() {
+        return licenseLabel;
+    }
+
+    @Override
     public void openWindow(final String url) {
         KuneWindowUtils.open(url);
     }
 
+    private void show() {
+        if ("0".equals(labelElement.getStyle().getOpacity())) {
+            final Show show = new Show(labelElement);
+            show.setDuration(.5);
+            show.play();
+        }
+    }
+
+    @Override
     public void showLicense(final String groupName, final LicenseDTO licenseDTO) {
         final String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
         licenseLabel.setText(licenseText);
         // KuneUiUtils.setQuickTip(licenseLabel, licenseText);
         licenseImage.setUrl(licenseDTO.getImageUrl());
-        fade(false);
-    }
-
-    private void fade(final boolean in) {
-        labelElement.setOpacity(in ? 1 : 0, true);
-        ws.getEntityWorkspace().refreshBottomTitle();
+        fade();
     }
 }
