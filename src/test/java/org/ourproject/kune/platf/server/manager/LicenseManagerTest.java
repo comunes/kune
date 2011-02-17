@@ -28,15 +28,23 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 
 import cc.kune.domain.License;
+import cc.kune.domain.finders.LicenseFinder;
 
 import com.google.inject.Inject;
 
 public class LicenseManagerTest extends PersistenceTest {
+    private License license;
+    @Inject
+    LicenseFinder licenseFinder;
     @Inject
     LicenseManager licenseManager;
-    @Inject
-    License licenseFinder;
-    private License license;
+
+    @After
+    public void close() {
+        if (getTransaction().isActive()) {
+            getTransaction().rollback();
+        }
+    }
 
     @Before
     public void insertData() {
@@ -51,12 +59,5 @@ public class LicenseManagerTest extends PersistenceTest {
     public void testLicenseCreation() {
         assertNotNull(license.getId());
         assertEquals(1, licenseFinder.getAll().size());
-    }
-
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            getTransaction().rollback();
-        }
     }
 }

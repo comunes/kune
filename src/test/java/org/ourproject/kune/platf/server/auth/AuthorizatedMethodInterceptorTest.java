@@ -33,7 +33,7 @@ import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 public class AuthorizatedMethodInterceptorTest extends IntegrationTest {
 

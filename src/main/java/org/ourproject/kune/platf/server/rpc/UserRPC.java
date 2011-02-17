@@ -48,18 +48,17 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.wideplay.warp.persist.TransactionType;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 @Singleton
 public class UserRPC implements RPC, UserService {
 
-    private final UserManager userManager;
-    private final Provider<UserSession> userSessionProvider;
     private final GroupManager groupManager;
     private final Mapper mapper;
-    private final UserInfoService userInfoService;
     private final Provider<SessionService> sessionServiceProvider;
+    private final UserInfoService userInfoService;
+    private final UserManager userManager;
+    private final Provider<UserSession> userSessionProvider;
 
     @Inject
     public UserRPC(final Provider<SessionService> sessionServiceProvider,
@@ -74,7 +73,8 @@ public class UserRPC implements RPC, UserService {
         this.mapper = mapper;
     }
 
-    @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
+    @Override
+    @Transactional(rollbackOn = DefaultException.class)
     public UserInfoDTO createUser(final UserDTO userDTO, final boolean wantPersonalHomepage) throws DefaultException {
         final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(),
                 userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
@@ -83,8 +83,9 @@ public class UserRPC implements RPC, UserService {
         return login(userDTO.getShortName(), userDTO.getPassword());
     }
 
+    @Override
     @Authenticated
-    @Transactional(type = TransactionType.READ_ONLY)
+    @Transactional
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
     public String getUserAvatarBaser64(final String userHash, final StateToken userToken) throws DefaultException {
         final UserSession userSession = getUserSession();
@@ -100,49 +101,6 @@ public class UserRPC implements RPC, UserService {
         }
     }
 
-    @Transactional(type = TransactionType.READ_ONLY)
-    public UserInfoDTO login(final String nickOrEmail, final String passwd) throws DefaultException {
-        final SessionService sessionService = sessionServiceProvider.get();
-        sessionService.getNewSession();
-        final User user = userManager.login(nickOrEmail, passwd);
-        return loginUser(user);
-    }
-
-    @Authenticated
-    @Transactional(type = TransactionType.READ_ONLY)
-    public void logout(final String userHash) throws DefaultException {
-        getUserSession().logout();
-        final SessionService sessionService = sessionServiceProvider.get();
-        sessionService.getNewSession();
-    }
-
-    @Authenticated(mandatory = false)
-    @Transactional(type = TransactionType.READ_ONLY)
-    public void onlyCheckSession(final String userHash) throws DefaultException {
-        // Do nothing @Authenticated checks user session
-    }
-
-    @Authenticated
-    @Transactional(type = TransactionType.READ_ONLY)
-    public UserInfoDTO reloadUserInfo(final String userHash) throws DefaultException {
-        final UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        return loadUserInfo(user);
-    }
-
-    @Authenticated(mandatory = true)
-    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-    @Transactional(type = TransactionType.READ_WRITE)
-    public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
-            final UserBuddiesVisibility visibility) {
-        final UserSession userSession = getUserSession();
-        final User user = userSession.getUser();
-        if (!groupToken.getGroup().equals(user.getShortName())) {
-            throw new AccessViolationException();
-        }
-        user.setBuddiesVisibility(UserBuddiesVisibility.valueOf(visibility.toString()));
-    };
-
     private UserSession getUserSession() {
         return userSessionProvider.get();
     }
@@ -150,6 +108,15 @@ public class UserRPC implements RPC, UserService {
     private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
         final UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
         return mapper.map(userInfo, UserInfoDTO.class);
+    }
+
+    @Override
+    @Transactional
+    public UserInfoDTO login(final String nickOrEmail, final String passwd) throws DefaultException {
+        final SessionService sessionService = sessionServiceProvider.get();
+        sessionService.getNewSession();
+        final User user = userManager.login(nickOrEmail, passwd);
+        return loginUser(user);
     }
 
     private UserInfoDTO loginUser(final User user) throws DefaultException {
@@ -160,6 +127,45 @@ public class UserRPC implements RPC, UserService {
         } else {
             throw new UserAuthException();
         }
+    }
+
+    @Override
+    @Authenticated
+    @Transactional
+    public void logout(final String userHash) throws DefaultException {
+        getUserSession().logout();
+        final SessionService sessionService = sessionServiceProvider.get();
+        sessionService.getNewSession();
+    };
+
+    @Override
+    @Authenticated(mandatory = false)
+    @Transactional
+    public void onlyCheckSession(final String userHash) throws DefaultException {
+        // Do nothing @Authenticated checks user session
+    }
+
+    @Override
+    @Authenticated
+    @Transactional
+    public UserInfoDTO reloadUserInfo(final String userHash) throws DefaultException {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        return loadUserInfo(user);
+    }
+
+    @Override
+    @Authenticated(mandatory = true)
+    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+    @Transactional
+    public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
+            final UserBuddiesVisibility visibility) {
+        final UserSession userSession = getUserSession();
+        final User user = userSession.getUser();
+        if (!groupToken.getGroup().equals(user.getShortName())) {
+            throw new AccessViolationException();
+        }
+        user.setBuddiesVisibility(UserBuddiesVisibility.valueOf(visibility.toString()));
     }
 
 }

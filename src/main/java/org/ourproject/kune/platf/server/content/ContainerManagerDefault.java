@@ -38,9 +38,10 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
-import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.finders.ContainerFinder;
+import cc.kune.domain.finders.ContentFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -49,25 +50,26 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContainerManagerDefault extends DefaultManager<Container, Long> implements ContainerManager {
 
-    private final Container containerFinder;
-    private final Content contentFinder;
+    private final ContainerFinder containerFinder;
+    private final ContentFinder contentFinder;
 
     @Inject
-    public ContainerManagerDefault(final Content contentFinder, final Container containerFinder,
+    public ContainerManagerDefault(final ContentFinder contentFinder, final ContainerFinder containerFinder,
             final Provider<EntityManager> provider) {
         super(provider, Container.class);
         this.contentFinder = contentFinder;
         this.containerFinder = containerFinder;
     }
 
+    @Override
     public Container createFolder(final Group group, final Container parent, final String name,
             final I18nLanguage language, final String typeId) {
         FilenameUtils.checkBasicFilename(name);
-        String newtitle = findInexistentName(parent, name);
+        final String newtitle = findInexistentName(parent, name);
         final List<Container> parentAbsolutePath = parent.getAbsolutePath();
         final List<Container> childAbsolutePath = new ArrayList<Container>();
 
-        for (Container parentRef : parentAbsolutePath) {
+        for (final Container parentRef : parentAbsolutePath) {
             childAbsolutePath.add(parentRef);
         }
         // FIXME: use
@@ -82,6 +84,7 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         return child;
     }
 
+    @Override
     public Container createRootFolder(final Group group, final String toolName, final String name, final String type) {
         final Container container = new Container(name, group, toolName);
         container.setTypeId(type);
@@ -92,15 +95,26 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     }
 
     /** Duplicate code in ContentMD **/
+    @Override
     public boolean findIfExistsTitle(final Container container, final String title) {
         return (contentFinder.findIfExistsTitle(container, title) > 0)
                 || (containerFinder.findIfExistsTitle(container, title) > 0);
     }
 
+    /** Duplicate code in ContentMD **/
+    private String findInexistentName(final Container container, final String title) {
+        String initialTitle = String.valueOf(title);
+        while (findIfExistsTitle(container, initialTitle)) {
+            initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
+        }
+        return initialTitle;
+    }
+
+    @Override
     public Container renameFolder(final Group group, final Container container, final String newName)
             throws DefaultException {
         FilenameUtils.checkBasicFilename(newName);
-        String newNameWithoutNT = FilenameUtils.chomp(newName);
+        final String newNameWithoutNT = FilenameUtils.chomp(newName);
         if (container.isRoot()) {
             throw new DefaultException("Root folder cannot be renamed");
         }
@@ -112,10 +126,12 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         return container;
     }
 
+    @Override
     public SearchResult<Container> search(final String search) {
         return this.search(search, null, null);
     }
 
+    @Override
     public SearchResult<Container> search(final String search, final Integer firstResult, final Integer maxResults) {
         final MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] { "name" }, new StandardAnalyzer());
         Query query;
@@ -127,18 +143,10 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         return super.search(query, firstResult, maxResults);
     }
 
+    @Override
     public void setAccessList(final Container container, final AccessLists accessList) {
         container.setAccessLists(accessList);
         persist(container);
-    }
-
-    /** Duplicate code in ContentMD **/
-    private String findInexistentName(final Container container, final String title) {
-        String initialTitle = String.valueOf(title);
-        while (findIfExistsTitle(container, initialTitle)) {
-            initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
-        }
-        return initialTitle;
     }
 
 }

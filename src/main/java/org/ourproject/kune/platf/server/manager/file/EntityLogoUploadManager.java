@@ -42,8 +42,7 @@ import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
-import com.wideplay.warp.persist.TransactionType;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 public class EntityLogoUploadManager extends FileUploadManagerAbstract {
 
@@ -95,7 +94,7 @@ public class EntityLogoUploadManager extends FileUploadManagerAbstract {
     @Override
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional
     protected void createUploadedFile(final String userHash, final StateToken stateToken, final String fileName,
             final FileItem file, final String typeId) throws Exception {
         final String mimeTypeS = file.getContentType();

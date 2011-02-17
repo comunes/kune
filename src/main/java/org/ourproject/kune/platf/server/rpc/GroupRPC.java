@@ -43,15 +43,14 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.wideplay.warp.persist.TransactionType;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 @Singleton
 public class GroupRPC implements RPC, GroupService {
-    private final Mapper mapper;
-    private final GroupManager groupManager;
-    private final Provider<UserSession> userSessionProvider;
     private final ContentManager contentManager;
+    private final GroupManager groupManager;
+    private final Mapper mapper;
+    private final Provider<UserSession> userSessionProvider;
 
     @Inject
     public GroupRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
@@ -62,18 +61,20 @@ public class GroupRPC implements RPC, GroupService {
         this.mapper = mapper;
     }
 
+    @Override
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional
     public void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license) {
         final User user = getUserLogged();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         groupManager.changeDefLicense(user, group, license.getShortName());
     }
 
+    @Override
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional
     public void changeGroupWsTheme(final String userHash, final StateToken groupToken, final String theme)
             throws DefaultException {
         final User user = getUserLogged();
@@ -81,17 +82,19 @@ public class GroupRPC implements RPC, GroupService {
         groupManager.changeWsTheme(user, group, theme);
     }
 
+    @Override
     @Authenticated
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional
     public GroupDTO clearGroupBackImage(final String userHash, final StateToken token) {
         final Group group = groupManager.findByShortName(token.getGroup());
         groupManager.clearGroupBackImage(group);
         return mapper.map(group, GroupDTO.class);
     }
 
+    @Override
     @Authenticated
-    @Transactional(type = TransactionType.READ_WRITE, rollbackOn = DefaultException.class)
+    @Transactional(rollbackOn = DefaultException.class)
     public StateToken createNewGroup(final String userHash, final GroupDTO groupDTO, final String publicDesc,
             final String tags, final String[] enabledTools) throws DefaultException {
         final User user = getUserLogged();
@@ -103,47 +106,12 @@ public class GroupRPC implements RPC, GroupService {
         return newGroup.getDefaultContent().getStateToken();
     };
 
+    @Override
     @Authenticated(mandatory = false)
     @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Viewer)
     public GroupDTO getGroup(final String userHash, final StateToken groupToken) {
         final Group group = groupManager.findByShortName(groupToken.getGroup());
         return mapper.map(group, GroupDTO.class);
-    }
-
-    @Authenticated
-    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-    @Transactional(type = TransactionType.READ_WRITE)
-    public GroupDTO setGroupBackImage(final String userHash, final StateToken token) {
-        final Group group = groupManager.findByShortName(token.getGroup());
-        final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
-        groupManager.setGroupBackImage(group, content);
-        return mapper.map(group, GroupDTO.class);
-    }
-
-    @Authenticated(mandatory = true)
-    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-    @Transactional(type = TransactionType.READ_WRITE)
-    public void setGroupNewMembersJoiningPolicy(final String userHash, final StateToken token,
-            final AdmissionType admissionPolicy) {
-        final Group group = groupManager.findByShortName(token.getGroup());
-        group.setAdmissionType(AdmissionType.valueOf(admissionPolicy.toString()));
-    }
-
-    @Authenticated(mandatory = true)
-    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
-    @Transactional(type = TransactionType.READ_WRITE)
-    public void setSocialNetworkVisibility(final String userHash, final StateToken token,
-            final SocialNetworkVisibility visibility) {
-        final Group group = groupManager.findByShortName(token.getGroup());
-        group.getSocialNetwork().setVisibility(SocialNetworkVisibility.valueOf(visibility.toString()));
-    }
-
-    @Authenticated
-    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
-    @Transactional(type = TransactionType.READ_WRITE)
-    public void setToolEnabled(final String userHash, final StateToken groupToken, final String toolName,
-            final boolean enabled) {
-        groupManager.setToolEnabled(getUserLogged(), groupToken.getGroup(), toolName, enabled);
     }
 
     private User getUserLogged() {
@@ -154,6 +122,46 @@ public class GroupRPC implements RPC, GroupService {
 
     private UserSession getUserSession() {
         return userSessionProvider.get();
+    }
+
+    @Override
+    @Authenticated
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
+    @Transactional
+    public GroupDTO setGroupBackImage(final String userHash, final StateToken token) {
+        final Group group = groupManager.findByShortName(token.getGroup());
+        final Content content = contentManager.find(ContentUtils.parseId(token.getDocument()));
+        groupManager.setGroupBackImage(group, content);
+        return mapper.map(group, GroupDTO.class);
+    }
+
+    @Override
+    @Authenticated(mandatory = true)
+    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+    @Transactional
+    public void setGroupNewMembersJoiningPolicy(final String userHash, final StateToken token,
+            final AdmissionType admissionPolicy) {
+        final Group group = groupManager.findByShortName(token.getGroup());
+        group.setAdmissionType(AdmissionType.valueOf(admissionPolicy.toString()));
+    }
+
+    @Override
+    @Authenticated(mandatory = true)
+    @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
+    @Transactional
+    public void setSocialNetworkVisibility(final String userHash, final StateToken token,
+            final SocialNetworkVisibility visibility) {
+        final Group group = groupManager.findByShortName(token.getGroup());
+        group.getSocialNetwork().setVisibility(SocialNetworkVisibility.valueOf(visibility.toString()));
+    }
+
+    @Override
+    @Authenticated
+    @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
+    @Transactional
+    public void setToolEnabled(final String userHash, final StateToken groupToken, final String toolName,
+            final boolean enabled) {
+        groupManager.setToolEnabled(getUserLogged(), groupToken.getGroup(), toolName, enabled);
     }
 
 }

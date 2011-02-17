@@ -17,12 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.entityheadermaxmin;
+package cc.kune.domain.finders;
 
-public interface MaxMinWorkspace {
+import cc.kune.domain.Content;
+import cc.kune.domain.Rate;
+import cc.kune.domain.User;
 
-    void maximize();
+import com.google.inject.name.Named;
+import com.google.inject.persist.finder.Finder;
 
-    void minimize();
+public interface RateFinder {
+
+    @Finder(query = "SELECT AVG(r.value) FROM Rate r WHERE r.content = :content")
+    public Double calculateRate(@Named("content") final Content content);
+
+    @Finder(query = "SELECT count(*) FROM Rate r WHERE r.content = :content")
+    public Long calculateRateNumberOfUsers(@Named("content") final Content content);
+
+    @Finder(query = "SELECT r FROM Rate r WHERE r.rater = :user AND r.content = :content")
+    public Rate find(@Named("user") final User user, @Named("content") final Content content);
 
 }

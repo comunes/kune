@@ -27,6 +27,7 @@ import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.platf.server.KunePersistenceService;
 import org.ourproject.kune.platf.server.PlatformServerModule;
 import org.ourproject.kune.platf.server.TestConstants;
+import org.ourproject.kune.platf.server.init.FinderRegistry;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.wiki.server.WikiServerModule;
 import org.waveprotocol.box.server.CoreSettings;
@@ -38,9 +39,9 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Scopes;
+import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
-import com.wideplay.warp.jpa.JpaUnit;
 
 public class IntegrationTestHelper {
 
@@ -49,19 +50,16 @@ public class IntegrationTestHelper {
         try {
             injector = Guice.createInjector(CustomSettingsBinder.bindSettings(TestConstants.WAVE_TEST_PROPFILE,
                     CoreSettings.class));
-            final PersistenceModule persistenceModule = injector.getInstance(PersistenceModule.class);
+            final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
 
-            final Injector childInjector = injector.createChildInjector(persistenceModule, new PlatformServerModule(),
-                    new DocumentServerModule(), new ChatServerModule(), new WikiServerModule(), new AbstractModule() {
+            final Injector childInjector = injector.createChildInjector(wavePersistModule,
+                    FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)),
+                    new PlatformServerModule(), new DocumentServerModule(), new ChatServerModule(),
+                    new WikiServerModule(), new AbstractModule() {
                         @Override
                         protected void configure() {
                             bindScope(SessionScoped.class, Scopes.SINGLETON);
                             bindScope(RequestScoped.class, Scopes.SINGLETON);
-                            // test: use
-                            // memory
-                            // test_db: use
-                            // mysql
-                            bindConstant().annotatedWith(JpaUnit.class).to(TestConstants.PERSISTENCE_UNIT);
                             bindConstant().annotatedWith(PropertiesFileName.class).to("kune.properties");
                             bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
                         }

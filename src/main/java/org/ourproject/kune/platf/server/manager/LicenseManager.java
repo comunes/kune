@@ -22,6 +22,7 @@ package org.ourproject.kune.platf.server.manager;
 import java.util.List;
 
 import cc.kune.domain.License;
+import cc.kune.domain.finders.LicenseFinder;
 
 public interface LicenseManager {
 
@@ -37,6 +38,6 @@ public interface LicenseManager {
 
     License persist(final License license);
 
-    void setLicenseFinder(final License licenseFinder);
+    void setLicenseFinder(final LicenseFinder licenseFinder);
 
 }

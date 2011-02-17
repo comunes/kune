@@ -335,7 +335,7 @@ public class SessionDefault implements Session {
     public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
         this.currentUserInfo = currentUserInfo;
         if (currentUserInfo != null) {
-            eventBus.fireEvent(new UserSignInEvent(currentUserInfo));
+            eventBus.fireEvent(new UserSignInEvent(this.currentUserInfo));
         } else {
             eventBus.fireEvent(new UserSignOutEvent());
         }

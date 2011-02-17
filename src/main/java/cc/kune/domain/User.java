@@ -19,7 +19,6 @@
  */
 package cc.kune.domain;
 
-import java.util.List;
 import java.util.TimeZone;
 
 import javax.persistence.Basic;
@@ -47,9 +46,6 @@ import org.hibernate.validator.Pattern;
 import cc.kune.core.shared.domain.UserBuddiesVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.utils.HasId;
-
-import com.google.inject.name.Named;
-import com.wideplay.warp.persist.dao.Finder;
 
 @Entity
 @Indexed
@@ -163,23 +159,8 @@ public class User implements HasId {
         // this.properties = properties;
     }
 
-    @Finder(query = "from User")
-    public List<User> getAll() {
-        return null;
-    }
-
     public UserBuddiesVisibility getBuddiesVisibility() {
         return buddiesVisibility;
-    }
-
-    @Finder(query = "from User where email = :email")
-    public User getByEmail(@Named("email") final String email) {
-        return null;
-    }
-
-    @Finder(query = "from User where shortName = :shortName")
-    public User getByShortName(@Named("shortName") final String shortName) {
-        return null;
     }
 
     public I18nCountry getCountry() {

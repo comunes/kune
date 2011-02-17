@@ -29,7 +29,7 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 public abstract class AbstractSocialNetworkManagerTest extends PersistenceTest {
     @Inject

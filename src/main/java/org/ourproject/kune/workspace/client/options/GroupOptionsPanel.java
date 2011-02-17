@@ -22,10 +22,10 @@ package org.ourproject.kune.workspace.client.options;
 import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
 import cc.kune.common.client.noti.NotifyLevelImages;
 import cc.kune.core.client.resources.CoreMessages;
-import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements GroupOptionsView {
@@ -48,7 +48,7 @@ public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements Grou
 
     @Override
     public void addAction(final OldGuiActionDescrip descriptor) {
-        // entityHeader.addAction(descriptor);
+        entityHeader.addAction(descriptor);
     }
 
     @Override

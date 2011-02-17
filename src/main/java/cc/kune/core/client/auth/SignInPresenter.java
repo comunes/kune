@@ -178,7 +178,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
                 public void onSuccess(final UserInfoDTO userInfoDTO) {
                     onSignIn(userInfoDTO);
                     stateManager.restorePreviousToken();
-                    // waveClientTester.doLogin(nickOrEmail, passwd);
+                    waveClientTester.doLogin(nickOrEmail, passwd);
                     getView().hide();
                     getView().unMask();
 

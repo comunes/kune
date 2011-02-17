@@ -36,8 +36,6 @@ import org.ourproject.kune.platf.server.ServerException;
 import org.ourproject.kune.rack.dock.Dock;
 import org.ourproject.kune.rack.dock.RequestMatcher;
 
-import cc.kune.wave.server.WaveStarter;
-
 import com.google.inject.Injector;
 
 public class RackServletFilter implements Filter {
@@ -72,6 +70,7 @@ public class RackServletFilter implements Filter {
     }
 
     public static final String INJECTOR_ATTRIBUTE = Injector.class.getName();
+    public static final String INJECTOR_PARENT_ATTRIBUTE = Injector.class.getName() + "Parent";
     private static final Log LOG = LogFactory.getLog(RackServletFilter.class);
     private static final String MODULE_PARAMETER = RackModule.class.getName();
     private List<Dock> docks;
@@ -128,8 +127,10 @@ public class RackServletFilter implements Filter {
         final RackBuilder builder = new RackBuilder();
         module.configure(builder);
         final Rack rack = builder.getRack();
-        final WaveStarter waveStarter = new WaveStarter();
-        final Injector waveChildInjector = waveStarter.runMain();
+        // final WaveStarter waveStarter = new WaveStarter();
+        // final Injector waveChildInjector = waveStarter.runMain();
+        final Injector waveChildInjector = (Injector) filterConfig.getServletContext().getAttribute(
+                INJECTOR_PARENT_ATTRIBUTE);
         final Injector kuneChildInjector = installInjector(filterConfig, rack, waveChildInjector);
         startContainerListeners(rack.getListeners(), kuneChildInjector);
         docks = rack.getDocks();

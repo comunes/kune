@@ -69,6 +69,80 @@
   border-bottom-width: 5px;
 }
 
+.k-entitytextlogo-border {
+  border: 2px solid #F2F2F2;
+}
+
+.k-entitytextlogo-no-border {
+  border: none;
+}
+
+.k-entitytextlogo {
+  height: 60px;
+  margin: 0 0 4px 0;
+  overflow: hidden;
+  width: 468px;
+}
+
+.k-entitytextlogo table {
+  vertical-align: middle;
+}
+
+.k-elogo-l-l {
+  font-size: 272%;
+}
+
+.k-elogo-l-m {
+  font-size: 167%;
+}
+
+.k-elogo-l-s {
+  font-size: 108%;
+}
+
+.k-entitytextlogo .gwt-Label {
+  font-weight: 700;
+  margin: 5px;
+  height: 27px;
+}
+
+.k-entitytextlogo-default .gwt-Label {
+  color: #69312F;
+}
+
+.k-entitytextlogo-green .gwt-Label {
+  color: #250;
+}
+
+.k-entitytextlogo-blue .gwt-Label {
+  color: #000080;
+}
+
+.k-entitytextlogo-grey .gwt-Label {
+  color: #1A1A1A;
+}
+
+.k-entitytextlogo-purple .gwt-Label {
+  color: #440055;
+}
+
+.k-entitytextlogo-red .gwt-Label {
+  color: #800000;
+}
+
+.k-elogo-plink {
+  color: #CCC;
+  font-size: 85%;
+  margin: 5px;
+  text-decoration: underline;
+  white-space: nowrap;
+  background-color: #FFF;
+}
+
+.k-elogop-expand {
+  background-color: transparent;
+}
+
 .k-entity-default .x-layout-split,.k-entity-default .x-layout-collapsed
   {
   background: #DD8A3D none repeat scroll 0% 50%;

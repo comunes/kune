@@ -20,7 +20,6 @@
 package cc.kune.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Basic;
@@ -50,9 +49,6 @@ import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.domain.utils.HasId;
-
-import com.google.inject.name.Named;
-import com.wideplay.warp.persist.dao.Finder;
 
 @Entity
 @Indexed
@@ -159,26 +155,6 @@ public class Group implements HasId {
         return toolsConfig.get(toolName) != null;
     }
 
-    @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid)")
-    public List<Group> findAdminInGroups(@Named("groupid") final Long groupId) {
-        return null;
-    }
-
-    @Finder(query = "FROM Group g WHERE g.shortName = :shortName")
-    public Group findByShortName(@Named("shortName") final String shortName) {
-        return null;
-    }
-
-    @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid)")
-    public List<Group> findCollabInGroups(@Named("groupid") final Long groupId) {
-        return null;
-    }
-
-    @Finder(query = "SELECT t.root.toolName FROM ToolConfiguration t WHERE t.enabled=true AND t.root.owner.id = :groupid")
-    public List<String> findEnabledTools(@Named("groupid") final Long groupId) {
-        return null;
-    }
-
     @Transient
     public AccessLists getAccessLists() {
         return getSocialNetwork().getAccessLists();
@@ -186,11 +162,6 @@ public class Group implements HasId {
 
     public AdmissionType getAdmissionType() {
         return admissionType;
-    }
-
-    @Finder(query = "FROM Group")
-    public List<Group> getAll() {
-        return null;
     }
 
     public Long getCreatedOn() {

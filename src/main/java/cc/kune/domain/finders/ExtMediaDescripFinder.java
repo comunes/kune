@@ -16,27 +16,18 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- \*/
-package cc.kune.core.client.ws.entheader;
+ */
+package cc.kune.domain.finders;
 
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.google.gwt.user.client.ui.IsWidget;
+import cc.kune.domain.ExtMediaDescrip;
 
-public interface EntityHeader {
+import com.google.inject.persist.finder.Finder;
 
-    void addAction(GuiActionDescrip descriptor);
+public interface ExtMediaDescripFinder {
 
-    void addWidget(IsWidget widget);
-
-    /**
-     * Refresh the logo from the group info in the client session
-     */
-    void refreshGroupLogo();
-
-    /**
-     * Reload the logo from the group reloaded from the server
-     */
-    void reloadGroupLogoImage();
-
+    @Finder(query = "from ExtMediaDescrip", returnAs = ArrayList.class)
+    public List<ExtMediaDescrip> getAll();
 }

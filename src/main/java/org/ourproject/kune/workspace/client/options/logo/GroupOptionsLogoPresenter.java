@@ -20,12 +20,12 @@
 package org.ourproject.kune.workspace.client.options.logo;
 
 import org.ourproject.kune.chat.client.ChatEngine;
+import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.ws.entheader.EntityHeader;
 
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;

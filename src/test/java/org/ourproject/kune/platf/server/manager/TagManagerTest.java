@@ -28,17 +28,18 @@ import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.content.ContentManager;
 
 import cc.kune.domain.Tag;
+import cc.kune.domain.finders.TagFinder;
 
 import com.google.inject.Inject;
 
 public class TagManagerTest extends PersistenceTest {
     @Inject
-    TagManager tagManager;
-    @Inject
     ContentManager contentManager;
-    @Inject
-    Tag tagFinder;
     private Tag tag;
+    @Inject
+    TagFinder tagFinder;
+    @Inject
+    TagManager tagManager;
 
     @After
     public void close() {

@@ -51,4 +51,6 @@ public interface WsArmor {
 
     void selectUserSpace();
 
+    void setFrameUrlForTesting(String url);
+
 }

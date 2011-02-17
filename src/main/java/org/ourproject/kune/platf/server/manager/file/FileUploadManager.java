@@ -47,24 +47,23 @@ import cc.kune.domain.Content;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
+import com.google.inject.persist.Transactional;
 import com.google.inject.servlet.RequestScoped;
-import com.wideplay.warp.persist.TransactionType;
-import com.wideplay.warp.persist.Transactional;
 
 @RequestScoped
 public class FileUploadManager extends FileJsonUploadManagerAbstract {
 
     private static final long serialVersionUID = -7209922761735338754L;
     @Inject
-    UserSession userSession;
+    AccessService accessService;
     @Inject
     ContentManager contentManager;
-    @Inject
-    AccessService accessService;
     @Inject
     FileManager fileManager;
     @Inject
     I18nTranslationService i18n;
+    @Inject
+    UserSession userSession;
 
     @Override
     protected void beforePostStart() {
@@ -104,7 +103,7 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
 
     @Authenticated
     @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container, mustCheckMembership = false)
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional
     Content createUploadedFileWrapped(final String userHash, final StateToken stateToken, final String fileName,
             final FileItem fileUploadItem, final String typeId) throws Exception {
         final String relDir = FileUtils.toDir(stateToken);
@@ -137,8 +136,8 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
             final User user = userSession.getUser();
             final Container container = accessService.accessToContainer(ContentUtils.parseId(stateToken.getFolder()),
                     user, AccessRol.Editor);
-            final Content content = contentManager.createContent(FileUtils.getFileNameWithoutExtension(file.getName(),
-                    extension), preview, user, container, typeId);
+            final Content content = contentManager.createContent(
+                    FileUtils.getFileNameWithoutExtension(file.getName(), extension), preview, user, container, typeId);
             content.setMimeType(basicMimeType);
             content.setFilename(file.getName());
             return content;

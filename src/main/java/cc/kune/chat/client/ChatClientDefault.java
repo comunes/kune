@@ -154,7 +154,7 @@ public class ChatClientDefault implements ChatClient {
                 eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
                     @Override
                     public void onUserSignIn(final UserSignInEvent event) {
-                        doLogin(event.getUserInfo());
+                        doLogin(session.getCurrentUserInfo());
                     }
                 });
                 eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutHandler() {

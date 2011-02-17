@@ -53,28 +53,45 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.utils.HasId;
 import cc.kune.domain.utils.HasStateToken;
 
-import com.google.inject.name.Named;
-import com.wideplay.warp.persist.dao.Finder;
-
 @Entity
 @Indexed
 @Table(name = "containers")
 public class Container implements HasId, HasStateToken {
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Container> absolutePath;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private AccessLists accessLists;
+
+    @OrderBy("createdOn DESC")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Container> childs;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ContainerTranslation> containerTranslations;
+
+    @ContainedIn
+    @OrderBy("createdOn DESC")
+    @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Content> contents;
+
+    @Basic(optional = false)
+    private Long createdOn;
+
+    @Basic(optional = true)
+    private Date deletedOn;
+
     @Id
     @GeneratedValue
     @DocumentId
     Long id;
 
+    @ManyToOne
+    private I18nLanguage language;
+
     @Column
     @Field(index = Index.TOKENIZED, store = Store.NO)
     private String name;
-
-    private String toolName;
-
-    private String typeId;
-
-    @ManyToOne
-    private I18nLanguage language;
 
     @IndexedEmbedded(depth = 1, prefix = "owner_")
     @OneToOne
@@ -87,29 +104,9 @@ public class Container implements HasId, HasStateToken {
     @JoinColumn
     private Container parent;
 
-    @OrderBy("createdOn DESC")
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Container> childs;
+    private String toolName;
 
-    @ContainedIn
-    @OrderBy("createdOn DESC")
-    @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Content> contents;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Container> absolutePath;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ContainerTranslation> containerTranslations;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private AccessLists accessLists;
-
-    @Basic(optional = false)
-    private Long createdOn;
-
-    @Basic(optional = true)
-    private Date deletedOn;
+    private String typeId;
 
     public Container() {
         this(null, null, null);
@@ -135,11 +132,6 @@ public class Container implements HasId, HasStateToken {
         // size())
         contents.size();
         contents.add(descriptor);
-    }
-
-    @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.parent = :container AND c.name LIKE :title")
-    public Long findIfExistsTitle(@Named("container") final Container container, @Named("title") final String title) {
-        return null;
     }
 
     public List<Container> getAbsolutePath() {
@@ -175,6 +167,7 @@ public class Container implements HasId, HasStateToken {
         return deletedOn;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -199,6 +192,7 @@ public class Container implements HasId, HasStateToken {
         return parent != null ? parent.getId() : null;
     }
 
+    @Override
     @Transient
     public StateToken getStateToken() {
         return new StateToken(getOwner().getShortName(), getToolName(), getId());
@@ -264,6 +258,7 @@ public class Container implements HasId, HasStateToken {
         this.deletedOn = deletedOn;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }

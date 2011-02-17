@@ -40,16 +40,15 @@ import cc.kune.domain.I18nTranslation;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.wideplay.warp.persist.TransactionType;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 @Singleton
 public class I18nRPC implements RPC, I18nService {
     private final I18nTranslationManager i18nTranslationManager;
-    private final Provider<UserSession> userSessionProvider;
-    private final Provider<HttpServletRequest> requestProvider;
     private final I18nLanguageManager languageManager;
     private final Mapper mapper;
+    private final Provider<HttpServletRequest> requestProvider;
+    private final Provider<UserSession> userSessionProvider;
 
     @Inject
     public I18nRPC(final Provider<HttpServletRequest> requestProvider, final Provider<UserSession> userSessionProvider,
@@ -62,7 +61,8 @@ public class I18nRPC implements RPC, I18nService {
         this.mapper = mapper;
     }
 
-    @Transactional(type = TransactionType.READ_ONLY)
+    @Override
+    @Transactional
     public I18nLanguageDTO getInitialLanguage(final String localeParam) {
         String initLanguage;
         I18nLanguage lang;
@@ -96,12 +96,14 @@ public class I18nRPC implements RPC, I18nService {
         return mapper.map(lang, I18nLanguageDTO.class);
     }
 
-    @Transactional(type = TransactionType.READ_ONLY)
+    @Override
+    @Transactional
     public HashMap<String, String> getLexicon(final String language) {
         return i18nTranslationManager.getLexicon(language);
     }
 
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Override
+    @Transactional
     public String getTranslation(final String userHash, final String language, final String text) {
         String translation = null;
         try {
@@ -111,13 +113,6 @@ public class I18nRPC implements RPC, I18nService {
         return translation;
     }
 
-    @Authenticated
-    @Transactional(type = TransactionType.READ_WRITE)
-    public String setTranslation(final String userHash, final String id, final String translation)
-            throws DefaultException {
-        return i18nTranslationManager.setTranslation(id, translation);
-    }
-
     @Authenticated(mandatory = false)
     private String getTranslationWrapper(final String language, final String text) {
         return i18nTranslationManager.getTranslation(language, text);
@@ -125,6 +120,14 @@ public class I18nRPC implements RPC, I18nService {
 
     private UserSession getUserSession() {
         return userSessionProvider.get();
+    }
+
+    @Override
+    @Authenticated
+    @Transactional
+    public String setTranslation(final String userHash, final String id, final String translation)
+            throws DefaultException {
+        return i18nTranslationManager.setTranslation(id, translation);
     }
 
 }

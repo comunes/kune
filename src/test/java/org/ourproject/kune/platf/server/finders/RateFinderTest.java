@@ -33,14 +33,15 @@ import org.ourproject.kune.platf.server.TestDomainHelper;
 import cc.kune.domain.Content;
 import cc.kune.domain.Rate;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.RateFinder;
 
 import com.google.inject.Inject;
 
 public class RateFinderTest extends PersistencePreLoadedDataTest {
 
-    @Inject
-    Rate rateFinder;
     private EntityManager entityManager;
+    @Inject
+    RateFinder rateFinder;
 
     @Before
     public void before() {

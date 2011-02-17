@@ -27,6 +27,7 @@ import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.gallery.server.GalleryServerModule;
 import org.ourproject.kune.platf.server.LoggerMethodInterceptor;
 import org.ourproject.kune.platf.server.PlatformServerModule;
+import org.ourproject.kune.platf.server.init.FinderRegistry;
 import org.ourproject.kune.platf.server.manager.file.EntityLogoDownloadManager;
 import org.ourproject.kune.platf.server.manager.file.EntityLogoUploadManager;
 import org.ourproject.kune.platf.server.manager.file.FileDownloadManager;
@@ -57,10 +58,10 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Module;
 import com.google.inject.Scope;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.ServletModule;
 import com.google.inject.servlet.SessionScoped;
-import com.wideplay.warp.jpa.JpaUnit;
 
 public class KuneRackModule implements RackModule {
     public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
@@ -75,8 +76,8 @@ public class KuneRackModule implements RackModule {
         configModule = new AbstractModule() {
             @Override
             public void configure() {
+                install(FinderRegistry.init(new JpaPersistModule(jpaUnit)));
                 bindInterceptor(Matchers.any(), new NotInObject(), new LoggerMethodInterceptor());
-                bindConstant().annotatedWith(JpaUnit.class).to(jpaUnit);
                 bindConstant().annotatedWith(PropertiesFileName.class).to(propertiesFileName);
                 if (sessionScope != null) {
                     bindScope(SessionScoped.class, sessionScope);
@@ -100,7 +101,7 @@ public class KuneRackModule implements RackModule {
         builder.exclude("/templates/.*");
 
         /* Wave with context '/' */
-        // builder.exclude("/*");
+        builder.exclude("/");
         builder.exclude("/attachment/.*");
         builder.exclude("/auth/signin");
         builder.exclude("/auth/signout");
@@ -114,6 +115,7 @@ public class KuneRackModule implements RackModule {
         builder.exclude("/gadgets");
         builder.exclude("/gadgets/.*");
         builder.exclude("/socket.io/*");
+        builder.exclude("/socket.io/.*]");
         builder.exclude("/socket");
         builder.exclude("/static/.*");
         builder.exclude("/webclient/.*");

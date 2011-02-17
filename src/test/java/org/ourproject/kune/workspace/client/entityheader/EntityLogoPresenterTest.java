@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.ws.entheader;
+package org.ourproject.kune.workspace.client.entityheader;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,32 +26,30 @@ import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 
 public class EntityLogoPresenterTest {
 
-    private EntityHeaderPresenter entityLogoPresenter;
-    private Session session;
     private StateManager stateManager;
+    private Session session;
+    private EntityHeaderPresenter entityLogoPresenter;
     private EntityHeaderView view;
 
     @Before
     public void before() {
         stateManager = Mockito.mock(StateManager.class);
         session = Mockito.mock(Session.class);
-        final WsThemeManager theme = Mockito.mock(WsThemeManager.class);
-        // entityLogoPresenter = new EntityHeaderPresenter(stateManager, theme,
-        // session);
+        WsThemeManager theme = Mockito.mock(WsThemeManager.class);
+        entityLogoPresenter = new EntityHeaderPresenter(stateManager, theme, session);
         view = Mockito.mock(EntityHeaderView.class);
-        // entityLogoPresenter.init(view);
+        entityLogoPresenter.init(view);
     }
 
     @Test
     public void testCommProjectNoLogo() {
-        final GroupDTO group = new GroupDTO("shortname", "longname", GroupType.COMMUNITY);
+        GroupDTO group = new GroupDTO("shortname", "longname", GroupType.COMMUNITY);
         group.setHasLogo(false);
         entityLogoPresenter.setGroupLogo(group);
         Mockito.verify(view, Mockito.never()).setLogoImageVisible(true);
@@ -63,16 +61,6 @@ public class EntityLogoPresenterTest {
     @Test
     public void testCommunityWithLogo() {
         testGroupWIthLogo(GroupType.COMMUNITY);
-    }
-
-    private void testGroupWIthLogo(final GroupType groupType) {
-        final GroupDTO group = new GroupDTO("shortname", "longname", groupType);
-        group.setHasLogo(true);
-        entityLogoPresenter.setGroupLogo(group);
-        Mockito.verify(view, Mockito.times(1)).setLogoImageVisible(true);
-        Mockito.verify(view, Mockito.never()).setLogoImageVisible(false);
-        Mockito.verify(view, Mockito.never()).showDefUserLogo();
-        Mockito.verify(view, Mockito.times(1)).setLogoImage((StateToken) Mockito.anyObject());
     }
 
     @Test
@@ -92,7 +80,7 @@ public class EntityLogoPresenterTest {
 
     @Test
     public void testPersonalProjectNoLogo() {
-        final GroupDTO group = new GroupDTO("shortname", "longname", GroupType.PERSONAL);
+        GroupDTO group = new GroupDTO("shortname", "longname", GroupType.PERSONAL);
         group.setHasLogo(false);
         entityLogoPresenter.setGroupLogo(group);
         Mockito.verify(view, Mockito.times(1)).setLogoImageVisible(true);
@@ -104,6 +92,16 @@ public class EntityLogoPresenterTest {
     @Test
     public void testProjectWithLogo() {
         testGroupWIthLogo(GroupType.PROJECT);
+    }
+
+    private void testGroupWIthLogo(GroupType groupType) {
+        GroupDTO group = new GroupDTO("shortname", "longname", groupType);
+        group.setHasLogo(true);
+        entityLogoPresenter.setGroupLogo(group);
+        Mockito.verify(view, Mockito.times(1)).setLogoImageVisible(true);
+        Mockito.verify(view, Mockito.never()).setLogoImageVisible(false);
+        Mockito.verify(view, Mockito.never()).showDefUserLogo();
+        Mockito.verify(view, Mockito.times(1)).setLogoImage((StateToken) Mockito.anyObject());
     }
 
 }

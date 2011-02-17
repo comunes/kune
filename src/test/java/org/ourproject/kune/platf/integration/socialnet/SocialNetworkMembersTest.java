@@ -34,7 +34,7 @@ import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 public class SocialNetworkMembersTest extends IntegrationTest {
     @Inject

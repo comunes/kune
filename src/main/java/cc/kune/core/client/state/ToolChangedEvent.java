@@ -22,7 +22,6 @@ package cc.kune.core.client.state;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-
 import com.google.gwt.event.shared.HasHandlers;
 
 public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandler> { 

@@ -34,19 +34,20 @@ import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.domain.Group;
+import cc.kune.domain.finders.GroupFinder;
 
 import com.google.inject.Inject;
 
 public class GroupServiceTest extends IntegrationTest {
 
     @Inject
+    GroupFinder groupFinder;
+
+    @Inject
     GroupService service;
 
     @Inject
     UserSession session;
-
-    @Inject
-    Group groupFinder;
 
     @Test
     public void createCommunity() throws Exception {

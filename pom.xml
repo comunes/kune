@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cc.kune</groupId>
   <artifactId>kune</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>0.0.7</version>
   <name>kune</name>
   <description> kune free/open/libre collaboration platform </description>
@@ -187,6 +187,10 @@
       <url>http://google-web-toolkit.googlecode.com/svn/2.1.0/gwt/maven/</url>
       <name>Google Web Toolkit Plugin Repository</name>
     </pluginRepository>
+    <pluginRepository>
+      <id>onejar-maven-plugin.googlecode.com</id>
+      <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+    </pluginRepository>
   </pluginRepositories>
   <dependencies>
     <dependency>
@@ -202,9 +206,10 @@
     </dependency>
     <!-- guice -->
     <dependency>
-      <groupId>com.google.code.guice</groupId>
+      <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <version>2.1-SNAPSHOT-r1160</version>
+      <!-- <version>2.1-SNAPSHOT-r1160</version> -->
+      <version>3.0-rc2</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.gwt.inject</groupId>
@@ -212,44 +217,49 @@
       <version>r137</version>
     </dependency>
     <dependency>
-      <groupId>com.google.code.guice</groupId>
+      <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-servlet</artifactId>
-      <version>2.0.1</version>
+      <version>3.0-rc2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject.extensions</groupId>
+      <artifactId>guice-persist</artifactId>
+      <version>3.0-rc2</version>
     </dependency>
     <dependency>
       <groupId>com.extjs</groupId>
       <artifactId>gxt</artifactId>
       <version>2.2.1</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.cobogw.gwt</groupId>
       <artifactId>cobogw</artifactId>
       <version>1.3.1</version>
     </dependency>
-<dependency>
-  <groupId>com.gwtplatform</groupId>
-  <artifactId>gwtp-all</artifactId>
-  <version>0.5</version>
-  <exclusions>
-    <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-    </exclusion>
-    <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-    </exclusion>
-    <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-    </exclusion>
-    <exclusion>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-    </exclusion>
-  </exclusions>
-</dependency>
+    <dependency>
+      <groupId>com.gwtplatform</groupId>
+      <artifactId>gwtp-all</artifactId>
+      <version>0.5</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-web</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>org.adamtacy</groupId>
       <artifactId>gwt-fx</artifactId>
@@ -395,26 +405,20 @@
       <version>3.2.3.GA</version>
     </dependency>
     <dependency>
-          <groupId>org.hibernate</groupId>
-              <artifactId>hibernate-c3p0</artifactId>
-                  <version>3.3.1.GA</version>
-                </dependency>
-                <!-- <dependency>
-      <groupId>c3p0</groupId>
-      <artifactId>c3p0</artifactId>
-      <version>0.9.1.2</version>
-      </dependency> -->
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-c3p0</artifactId>
+      <version>3.3.1.GA</version>
+    </dependency>
+    <!-- <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId>
+      <version>0.9.1.2</version> </dependency> -->
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <!-- wave use 2.5 -->
       <version>2.5</version>
     </dependency>
-    <dependency>
-      <groupId>com.wideplay</groupId>
-      <artifactId>warp-persist</artifactId>
-      <version>2.0-SNAPSHOT</version>
-    </dependency>
+    <!-- <dependency> <groupId>com.wideplay</groupId> <artifactId>warp-persist</artifactId>
+      <version>2.0-SNAPSHOT</version> </dependency> -->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
@@ -775,11 +779,23 @@
         <!-- =roo -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2-beta-5</version>
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
+          <dependencySets>
+            <dependencySet>
+              <scope>runtime</scope>
+              <unpackOptions>
+                <excludes>
+                  <exclude>**/gxt/**</exclude>
+                  <exclude>**/extjs/**</exclude>
+                  <exclude>**extjs**</exclude>
+                  <exclude>**gxt**</exclude>
+                </excludes>
+              </unpackOptions>
+            </dependencySet>
+          </dependencySets>
         </configuration>
       </plugin>
       <plugin>
@@ -916,6 +932,24 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>cc.kune.wave.server.WaveMain</mainClass>
+              <!-- <classpathPrefix>~/.m2/repository/</classpathPrefix> -->
+              <!-- <classpathLayoutType>repository</classpathLayoutType> -->
+              <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType'
+                instead. -->
+              <classpathMavenRepositoryLayout>true</classpathMavenRepositoryLayout>
+              <!-- <packageName>cc.kune.wave.server</packageName> -->
+            </manifest>
+            <manifestEntries>
+              <mode>development</mode>
+              <url>${pom.url}</url>
+            </manifestEntries>
+          </archive>
+        </configuration>
         <executions>
           <!-- <execution> -->
           <!-- <id>core</id> -->
@@ -950,21 +984,53 @@
           <!-- </includes> -->
           <!-- </configuration> -->
           <!-- </execution> -->
+          <!-- <execution> -->
+          <!-- <id>helloworldmodule</id> -->
+          <!-- <phase>package</phase> -->
+          <!-- <goals> -->
+          <!-- <goal>jar</goal> -->
+          <!-- </goals> -->
+          <!-- <configuration> -->
+          <!-- <classifier>helloworldmodule</classifier> -->
+          <!-- <includes> -->
+          <!-- <include>**/HelloWorld*</include> -->
+          <!-- </includes> -->
+          <!-- </configuration> -->
+          <!-- </execution> -->
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.dstovall</groupId>
+        <artifactId>onejar-maven-plugin</artifactId>
+        <version>1.4.4</version>
+        <executions>
           <execution>
-            <id>helloworldmodule</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
             <configuration>
-              <classifier>helloworldmodule</classifier>
-              <includes>
-                <include>**/HelloWorld*</include>
-              </includes>
+              <!-- Optional -->
+              <!-- <onejarVersion>0.97</onejarVersion> -->
+              <!-- Optional, use only if you need to include native libraries
+                (dll's) -->
+<!--              <binlibs>-->
+<!--                <fileSet>-->
+<!--                  <directory>${project.build.directory}/${project.build.finalName}</directory>-->
+<!--                  <includes>-->
+<!--                    <include>**</include>-->
+<!--                  </includes>-->
+<!--                </fileSet>-->
+<!--              </binlibs>-->
+              <!-- Optional, default is false -->
+              <attachToBuild>true</attachToBuild>
+              <!-- Optional, default is "onejar" -->
+              <classifier>onejar</classifier>
             </configuration>
+            <goals>
+              <goal>one-jar</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
+
+
       <!-- <plugin> -->
       <!-- <groupId>org.codehaus.mojo</groupId> -->
       <!-- <artifactId>selenium-maven-plugin</artifactId> -->

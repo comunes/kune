@@ -31,13 +31,12 @@ import org.ourproject.kune.gallery.server.GalleryServerToolTest;
 import org.ourproject.kune.rack.filters.rest.TestRESTMethodFinder;
 import org.ourproject.kune.rack.filters.rest.TestRESTServiceDefinition;
 import org.ourproject.kune.wiki.server.WikiServerToolTest;
+import org.ourproject.kune.workspace.client.entityheader.EntityLogoPresenterTest;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPresenterTest;
 import org.ourproject.kune.workspace.client.socialnet.RolActionTest;
 import org.ourproject.kune.workspace.client.socialnet.RolComparatorTest;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenterTest;
 import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenterTest;
-
-import cc.kune.core.client.ws.entheader.EntityLogoPresenterTest;
 
 /**
  * Rescan with :

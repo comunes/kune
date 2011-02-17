@@ -66,6 +66,10 @@ public class NotifyUser {
         eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message));
     }
 
+    public static void info(final String message, final boolean closeable) {
+        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message, closeable));
+    }
+
     public static void init(final EventBus eventBus, final I18nTranslationService i18n) {
         NotifyUser.eventBus = eventBus;
         NotifyUser.i18n = i18n;

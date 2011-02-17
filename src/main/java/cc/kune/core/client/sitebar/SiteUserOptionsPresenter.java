@@ -72,7 +72,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
         this.gotoGroupAction = gotoGroupAction;
         createActions();
         if (session.isLogged()) {
-            onUserSignIn(session.getCurrentUserInfo()); // NOPMD by vjrj on 11/02/11 3:37
+            onUserSignIn(session.getCurrentUserInfo());
         }
         session.onUserSignIn(new UserSignInHandler() {
             @Override
@@ -85,6 +85,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
             @Override
             public void onUserSignOut(final UserSignOutEvent event) {
                 menuDescriptor.setVisible(false);
+                menuDescriptor.setEnabled(false);
                 SiteUserOptionsPresenter.this.setLoggedUserName("");
             }
         });
@@ -139,6 +140,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
     private void onUserSignIn(final UserInfoDTO userInfoDTO) {
         menuDescriptor.setVisible(true);
+        menuDescriptor.setEnabled(true);
         setLoggedUserName(userInfoDTO.getShortName());
         partiMenu.clear();
         final List<GroupDTO> groupsIsAdmin = userInfoDTO.getGroupsIsAdmin();

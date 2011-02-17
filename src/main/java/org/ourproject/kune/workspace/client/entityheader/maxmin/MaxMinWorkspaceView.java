@@ -17,19 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.entityheadermaxmin;
+package org.ourproject.kune.workspace.client.entityheader.maxmin;
 
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import org.ourproject.kune.platf.client.View;
 
-public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
+public interface MaxMinWorkspaceView extends View {
 
-    private final WorkspaceSkeleton wskel;
+    void setMaximized(boolean maximized);
 
-    public MaxMinWorkspacePanel(final WorkspaceSkeleton wskel) {
-        this.wskel = wskel;
-    }
-
-    public void setMaximized(final boolean maximized) {
-        wskel.setMaximized(maximized);
-    }
 }

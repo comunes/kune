@@ -36,11 +36,13 @@ import org.ourproject.kune.platf.server.manager.UserManager;
 
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
-import cc.kune.domain.Group;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.License;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.GroupFinder;
+import cc.kune.domain.finders.LicenseFinder;
+import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 
@@ -62,21 +64,21 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
     protected I18nLanguage english;
     protected I18nCountry gb;
     @Inject
-    protected Group groupFinder;
+    protected GroupFinder groupFinder;
     @Inject
     protected GroupManager groupManager;
     @Inject
     protected I18nLanguageManager languageManager;
 
     @Inject
-    protected License licenseFinder;
+    protected LicenseFinder licenseFinder;
     @Inject
     protected LicenseManager licenseManager;
     // @Inject
     // protected PropertyGroupManager propGroupManager;
     protected User user;
     @Inject
-    protected User userFinder;
+    protected UserFinder userFinder;
     @Inject
     protected UserManager userManager;
 

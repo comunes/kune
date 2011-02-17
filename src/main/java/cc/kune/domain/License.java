@@ -19,8 +19,6 @@
  */
 package cc.kune.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,32 +27,29 @@ import javax.persistence.Table;
 
 import cc.kune.domain.utils.HasId;
 
-import com.google.inject.name.Named;
-import com.wideplay.warp.persist.dao.Finder;
-
 @Entity
 @Table(name = "licenses")
 public class License implements HasId {
+    private String description;
+
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
-    private String shortName;
-
-    @Column(unique = true)
-    private String longName;
-
-    private String description;
-
-    @Column(nullable = false)
-    private String url;
-    private boolean isCC;
-    private boolean isCopyleft;
-    private boolean isDeprecated;
-    private String rdf;
     @Column(nullable = false)
     private String imageUrl;
+
+    private boolean isCC;
+
+    private boolean isCopyleft;
+    private boolean isDeprecated;
+    @Column(unique = true)
+    private String longName;
+    private String rdf;
+    @Column(unique = true)
+    private String shortName;
+    @Column(nullable = false)
+    private String url;
 
     public License() {
         this(null, null, null, null, false, false, false, null, null);
@@ -74,60 +69,33 @@ public class License implements HasId {
         this.imageUrl = imageUrl;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
-
-    public String getLongName() {
-        return longName;
-    }
-
-    public void setLongName(final String longName) {
-        this.longName = longName;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(final String description) {
-        this.description = description;
+    @Override
+    public Long getId() {
+        return id;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(final String imageUrl) {
-        this.imageUrl = imageUrl;
+    public String getLongName() {
+        return longName;
     }
 
     public String getRdf() {
         return rdf;
     }
 
-    public void setRdf(final String rdf) {
-        this.rdf = rdf;
+    public String getShortName() {
+        return shortName;
     }
 
     public String getUrl() {
         return url;
-    }
-
-    public void setUrl(final String url) {
-        this.url = url;
     }
 
     public boolean isCC() {
@@ -154,23 +122,32 @@ public class License implements HasId {
         this.isDeprecated = isDeprecated;
     }
 
-    @Finder(query = "from License l where l.shortName = :shortName")
-    public License findByShortName(@Named("shortName") final String shortName) {
-        return null;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
-    @Finder(query = "from License")
-    public List<License> getAll() {
-        return null;
+    @Override
+    public void setId(final Long id) {
+        this.id = id;
     }
 
-    @Finder(query = "from License where isCC = true")
-    public List<License> getCC() {
-        return null;
+    public void setImageUrl(final String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    @Finder(query = "from License where isCC = false")
-    public List<License> getNotCC() {
-        return null;
+    public void setLongName(final String longName) {
+        this.longName = longName;
+    }
+
+    public void setRdf(final String rdf) {
+        this.rdf = rdf;
+    }
+
+    public void setShortName(final String shortName) {
+        this.shortName = shortName;
+    }
+
+    public void setUrl(final String url) {
+        this.url = url;
     }
 }

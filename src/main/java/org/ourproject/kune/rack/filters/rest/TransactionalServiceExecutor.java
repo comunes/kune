@@ -20,7 +20,7 @@
 package org.ourproject.kune.rack.filters.rest;
 
 import com.google.inject.Inject;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 public class TransactionalServiceExecutor {
     private final RESTMethodFinder methodFinder;

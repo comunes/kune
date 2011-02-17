@@ -23,20 +23,20 @@ import org.ourproject.kune.platf.server.init.DatabaseInitializer;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.wideplay.warp.persist.PersistenceService;
+import com.google.inject.persist.PersistService;
 
 @Singleton
 public class KunePersistenceService {
     @Inject
     DatabaseInitializer databaseInitializer;
     @Inject
-    PersistenceService persistenceService;
+    PersistService persistenceService;
 
     public void start() {
         try {
             persistenceService.start();
             databaseInitializer.initConditional();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new ServerException("Error starting persistence service", e);
         }
     }

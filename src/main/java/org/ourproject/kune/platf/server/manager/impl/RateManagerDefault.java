@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.server.manager.RateManager;
 import cc.kune.domain.Content;
 import cc.kune.domain.Rate;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.RateFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -35,26 +36,29 @@ import com.google.inject.Singleton;
 @Singleton
 public class RateManagerDefault extends DefaultManager<Rate, Long> implements RateManager {
 
-    private final Rate finder;
+    private final RateFinder finder;
 
     @Inject
-    public RateManagerDefault(final Provider<EntityManager> provider, final Rate finder) {
+    public RateManagerDefault(final Provider<EntityManager> provider, final RateFinder finder) {
         super(provider, Rate.class);
         this.finder = finder;
     }
 
+    @Override
     public Rate find(final User user, final Content content) {
         try {
             return finder.find(user, content);
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return null;
         }
     }
 
+    @Override
     public Double getRateAvg(final Content content) {
         return finder.calculateRate(content);
     }
 
+    @Override
     public Long getRateByUsers(final Content content) {
         return finder.calculateRateNumberOfUsers(content);
     }

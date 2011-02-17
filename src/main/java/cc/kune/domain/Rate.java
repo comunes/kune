@@ -29,27 +29,24 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.Range;
 
-import com.google.inject.name.Named;
-import com.wideplay.warp.persist.dao.Finder;
-
 @Entity
 @Table(name = "rates", uniqueConstraints = { @UniqueConstraint(columnNames = { "content_id", "rater_id" }) })
 public class Rate {
+    @ManyToOne
+    Content content;
+
+    @Basic(optional = false)
+    private final Long createdOn;
+
     @Id
     @GeneratedValue
     Long id;
-
-    @ManyToOne
-    Content content;
 
     @ManyToOne
     User rater;
 
     @Range(min = 0, max = 5)
     Double value;
-
-    @Basic(optional = false)
-    private final Long createdOn;
 
     public Rate() {
         this(null, null, null);
@@ -60,21 +57,6 @@ public class Rate {
         this.content = content;
         this.value = value;
         this.createdOn = System.currentTimeMillis();
-    }
-
-    @Finder(query = "SELECT AVG(r.value) FROM Rate r WHERE r.content = :content")
-    public Double calculateRate(@Named("content") final Content content) {
-        return null;
-    }
-
-    @Finder(query = "SELECT count(*) FROM Rate r WHERE r.content = :content")
-    public Long calculateRateNumberOfUsers(@Named("content") final Content content) {
-        return null;
-    }
-
-    @Finder(query = "SELECT r FROM Rate r WHERE r.rater = :user AND r.content = :content")
-    public Rate find(@Named("user") final User user, @Named("content") final Content content) {
-        return null;
     }
 
     public Content getContent() {

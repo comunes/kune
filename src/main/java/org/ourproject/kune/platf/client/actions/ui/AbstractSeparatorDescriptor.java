@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.platf.client.actions.ui;
 
-import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 
 public abstract class AbstractSeparatorDescriptor extends OldGuiActionDescrip {
 

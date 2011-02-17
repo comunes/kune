@@ -30,12 +30,13 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 
 import cc.kune.domain.User;
+import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 
 public class UserFinderTest extends PersistencePreLoadedDataTest {
     @Inject
-    User finder;
+    UserFinder finder;
 
     @Test
     public void findAll() {

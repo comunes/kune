@@ -7,6 +7,30 @@
   <persistence-unit name="development"
     transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <!-- JPA entities must be registered here -->
+    <!-- src/main/java/cc/kune/domain$ ls -1 *.java | sed 's/.java/<\/class>/g' | sed 's/^/<class>cc.kune.domain./g' -->
+    <class>cc.kune.domain.AccessLists</class>
+    <class>cc.kune.domain.BasicMimeType</class>
+    <class>cc.kune.domain.Comment</class>
+    <class>cc.kune.domain.Container</class>
+    <class>cc.kune.domain.ContainerTranslation</class>
+    <class>cc.kune.domain.Content</class>
+    <class>cc.kune.domain.ContentTranslation</class>
+    <class>cc.kune.domain.CustomProperties</class>
+    <class>cc.kune.domain.ExtMediaDescrip</class>
+    <class>cc.kune.domain.Group</class>
+    <class>cc.kune.domain.GroupList</class>
+    <class>cc.kune.domain.I18nCountry</class>
+    <class>cc.kune.domain.I18nLanguage</class>
+    <class>cc.kune.domain.I18nTranslation</class>
+    <class>cc.kune.domain.License</class>
+    <class>cc.kune.domain.Rate</class>
+    <class>cc.kune.domain.Revision</class>
+    <class>cc.kune.domain.SocialNetwork</class>
+    <class>cc.kune.domain.Tag</class>
+    <class>cc.kune.domain.TagUserContent</class>
+    <class>cc.kune.domain.ToolConfiguration</class>
+    <class>cc.kune.domain.User</class>
     <properties>
       <property name="hibernate.archive.autodetection" value="class, hbm" />
       <property name="hibernate.show_sql" value="false" />
@@ -19,7 +43,7 @@
       <property name="hibernate.connection.username" value="kune" />
       <property name="hibernate.connection.password" value="db4kune" />
 
-      <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production 
+      <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production
         (NO!, une liquibase, for instance) -->
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
       <property name="hibernate.hbm2ddl.auto" value="update" />
@@ -41,6 +65,29 @@
 
   <persistence-unit name="test_db" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <!-- JPA entities must be registered here -->
+    <class>cc.kune.domain.AccessLists</class>
+    <class>cc.kune.domain.BasicMimeType</class>
+    <class>cc.kune.domain.Comment</class>
+    <class>cc.kune.domain.Container</class>
+    <class>cc.kune.domain.ContainerTranslation</class>
+    <class>cc.kune.domain.Content</class>
+    <class>cc.kune.domain.ContentTranslation</class>
+    <class>cc.kune.domain.CustomProperties</class>
+    <class>cc.kune.domain.ExtMediaDescrip</class>
+    <class>cc.kune.domain.Group</class>
+    <class>cc.kune.domain.GroupList</class>
+    <class>cc.kune.domain.I18nCountry</class>
+    <class>cc.kune.domain.I18nLanguage</class>
+    <class>cc.kune.domain.I18nTranslation</class>
+    <class>cc.kune.domain.License</class>
+    <class>cc.kune.domain.Rate</class>
+    <class>cc.kune.domain.Revision</class>
+    <class>cc.kune.domain.SocialNetwork</class>
+    <class>cc.kune.domain.Tag</class>
+    <class>cc.kune.domain.TagUserContent</class>
+    <class>cc.kune.domain.ToolConfiguration</class>
+    <class>cc.kune.domain.User</class>
     <properties>
       <property name="hibernate.archive.autodetection" value="class, hbm" />
       <property name="hibernate.show_sql" value="false" />
@@ -71,6 +118,29 @@
 
   <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <!-- JPA entities must be registered here -->
+    <class>cc.kune.domain.AccessLists</class>
+    <class>cc.kune.domain.BasicMimeType</class>
+    <class>cc.kune.domain.Comment</class>
+    <class>cc.kune.domain.Container</class>
+    <class>cc.kune.domain.ContainerTranslation</class>
+    <class>cc.kune.domain.Content</class>
+    <class>cc.kune.domain.ContentTranslation</class>
+    <class>cc.kune.domain.CustomProperties</class>
+    <class>cc.kune.domain.ExtMediaDescrip</class>
+    <class>cc.kune.domain.Group</class>
+    <class>cc.kune.domain.GroupList</class>
+    <class>cc.kune.domain.I18nCountry</class>
+    <class>cc.kune.domain.I18nLanguage</class>
+    <class>cc.kune.domain.I18nTranslation</class>
+    <class>cc.kune.domain.License</class>
+    <class>cc.kune.domain.Rate</class>
+    <class>cc.kune.domain.Revision</class>
+    <class>cc.kune.domain.SocialNetwork</class>
+    <class>cc.kune.domain.Tag</class>
+    <class>cc.kune.domain.TagUserContent</class>
+    <class>cc.kune.domain.ToolConfiguration</class>
+    <class>cc.kune.domain.User</class>
     <properties>
       <property name="hibernate.show_sql" value="false" />
       <property name="hibernate.format_sql" value="false" />
@@ -87,4 +157,6 @@
         value="/var/lib/kune/lucene/kune_test/indexes" />
     </properties>
   </persistence-unit>
+
+
 </persistence>

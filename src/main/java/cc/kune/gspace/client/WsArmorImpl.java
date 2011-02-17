@@ -27,6 +27,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -62,6 +63,8 @@ public class WsArmorImpl extends Composite implements WsArmor {
     @UiField
     VerticalPanel entityToolsSouth;
     @UiField
+    Frame frame;
+    @UiField
     SplitLayoutPanel groupSpace;
     @UiField
     SimplePanel homeSpace;
@@ -85,7 +88,7 @@ public class WsArmorImpl extends Composite implements WsArmor {
         initWidget(uiBinder.createAndBindUi(this));
         groupSpace.setWidgetMinSize(splitEast, 150);
         tabs.setStyleName("k-spaces");
-        homeSpace.add(RootPanel.get("k-home-ini"));
+        homeSpace.add(RootPanel.get("k-home-wrapper"));
         publicSpace.add(pspace.getWidget());
         // userSpace.add(new Label("User space"));
     }
@@ -158,5 +161,11 @@ public class WsArmorImpl extends Composite implements WsArmor {
     @Override
     public void selectUserSpace() {
         tabs.selectTab(userSpace);
+    }
+
+    @Override
+    @Deprecated
+    public void setFrameUrlForTesting(final String url) {
+        frame.setUrl(url);
     }
 }

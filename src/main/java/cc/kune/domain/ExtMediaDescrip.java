@@ -19,8 +19,6 @@
  */
 package cc.kune.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,28 +29,26 @@ import org.hibernate.validator.Length;
 
 import cc.kune.domain.utils.HasId;
 
-import com.wideplay.warp.persist.dao.Finder;
-
 @Entity
 @Table(name = "ext_media_descriptors")
 public class ExtMediaDescrip implements HasId {
 
+    @Column(nullable = false)
+    private String detectRegex;
+    @Column(nullable = false)
+    @Length(max = 1000)
+    private String embedTemplate;
+    private int height;
     @Id
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
+    private String idRegex;
+    @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String siteurl;
-    @Column(nullable = false)
-    private String detectRegex;
-    @Column(nullable = false)
-    private String idRegex;
-    @Column(nullable = false)
-    @Length(max = 1000)
-    private String embedTemplate;
     private int width;
-    private int height;
 
     public ExtMediaDescrip() {
         this(null, null, null, null, null, 0, 0);
@@ -69,11 +65,6 @@ public class ExtMediaDescrip implements HasId {
         height = defHeight;
     }
 
-    @Finder(query = "from ExtMediaDescrip")
-    public List<ExtMediaDescrip> getAll() {
-        return null;
-    }
-
     public String getDetectRegex() {
         return detectRegex;
     }
@@ -86,6 +77,7 @@ public class ExtMediaDescrip implements HasId {
         return height;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -118,6 +110,7 @@ public class ExtMediaDescrip implements HasId {
         this.height = height;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }

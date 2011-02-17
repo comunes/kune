@@ -26,8 +26,7 @@ import cc.kune.domain.License;
 import cc.kune.domain.User;
 
 import com.google.inject.Inject;
-import com.wideplay.warp.persist.TransactionType;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 public class DatabaseInitializer {
     private final ContentManager contentManager;
@@ -205,7 +204,7 @@ public class DatabaseInitializer {
         }
     }
 
-    @Transactional(type = TransactionType.READ_WRITE)
+    @Transactional
     public void initDatabase() throws Exception {
         createOthers();
         createLicenses();

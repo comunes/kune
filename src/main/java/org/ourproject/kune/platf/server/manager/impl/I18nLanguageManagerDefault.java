@@ -26,6 +26,7 @@ import javax.persistence.EntityManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 
 import cc.kune.domain.I18nLanguage;
+import cc.kune.domain.finders.I18nLanguageFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -34,18 +35,20 @@ import com.google.inject.Singleton;
 @Singleton
 public class I18nLanguageManagerDefault extends DefaultManager<I18nLanguage, Long> implements I18nLanguageManager {
 
-    private final I18nLanguage finder;
+    private final I18nLanguageFinder finder;
 
     @Inject
-    public I18nLanguageManagerDefault(final Provider<EntityManager> provider, final I18nLanguage finder) {
+    public I18nLanguageManagerDefault(final Provider<EntityManager> provider, final I18nLanguageFinder finder) {
         super(provider, I18nLanguage.class);
         this.finder = finder;
     }
 
+    @Override
     public I18nLanguage findByCode(final String language) {
         return finder.findByCode(language);
     }
 
+    @Override
     public List<I18nLanguage> getAll() {
         return finder.getAll();
     }

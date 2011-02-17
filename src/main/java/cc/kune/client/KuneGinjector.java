@@ -44,7 +44,6 @@ import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.core.client.ws.CorePresenter;
-import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.pspace.client.PSpaceGinModule;
 import cc.kune.pspace.client.PSpacePresenter;
@@ -71,8 +70,6 @@ public interface KuneGinjector extends Ginjector {
     CoreParts getCoreParts();
 
     Provider<CorePresenter> getCorePresenter();
-
-    AsyncProvider<EntityHeaderPresenter> getEntityHeaderPresenter();
 
     AsyncProvider<EntityLicensePresenter> getEntityLicensePresenter();
 

@@ -4,7 +4,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>Kune</title>
 <script type="text/javascript" language="javascript"
-  src="/ws/ws.nocache.js"></script>
+    src="/ws/ws.nocache.js"></script>
 <meta name="emite.httpBase" content="/http-bind/" />
 <meta name="emite.host" content="localhost" />
 <meta name="emite.searchHost" content="search.localhost" />
@@ -25,7 +25,7 @@
 <meta name="hablar.height" content="300px" />
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="stylesheet" type="text/css"
-  href="http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css">
+    href="http://yui.yahooapis.com/2.8.0r4/build/reset/reset-min.css">
 <!-- FIXME: make something local -->
 <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
 <script>
@@ -46,32 +46,73 @@
   var __useSocketIO = true;
 </script>
 <link
-  href='http://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic'
-  rel='stylesheet' type='text/css'>
+    href='http://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic'
+    rel='stylesheet' type='text/css'>
 <!-- <link href='http://fonts.googleapis.com/css?family=Inconsolata'
   rel='stylesheet' type='text/css'> -->
 <link type="text/css" rel="stylesheet" href="gxt/css/gxt-all.css">
 <link type="text/css" rel="stylesheet" href="gxt/css/gxt-gray.css">
-<link type="text/css" rel="stylesheet" href="gxt-custom/css/gxt-op-common.css">
+<link type="text/css" rel="stylesheet"
+    href="gxt-custom/css/gxt-op-common.css">
 <link type="text/css" rel="stylesheet" href="kune-hablar.css">
 <link type="text/css" rel="stylesheet" href="kune-chat.css">
 <link type="text/css" rel="stylesheet" href="kune-common.css">
 <link type="text/css" rel="stylesheet"
-  href="fontface/ubuntufontface.css">
+    href="fontface/ubuntufontface.css">
 <link type="text/css" rel="stylesheet" href="kune-message.css">
 <link type="text/css" rel="stylesheet" href="ws.css">
 <style type="text/css">
 body {
-  background-color: white;
-  color: black;
-  font-family: 'Ubuntu', Arial;
-  font-size: small;
-  margin: 5px;
-  overflow: hidden;
+    background-color: white;
+    color: black;
+    font-family: 'Ubuntu', Arial;
+    font-size: small;
+    overflow: hidden;
+    }
+#k-home-prewrap {
+    margin-top: -22px;
+}
+
+#k-home-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 665px;
+    min-width: 320px;
+}
+
+#k-home-logo {
+float: right;
+margin-top: 50px;
+}
+
+#k-home-ini {
+clear: both;
+font-size: 28px;
+color: #69312f;
+text-align: justify;
+padding: 50px 0;
+line-height: 1.3em;
+}
+
+#k-home-ini a {
+color: #803000;
+font-weight: bold;
+}
+
+#k-home-ini strong {
+font-weight: bold;
+}
+
+
+#k-home-stats {
+font-size: 22px;
+color: #c87137;
+font-weight: bold;
 }
 
 .banner {
-  margin: 30px;
+    margin: 30px;
 }
 </style>
 <!--[if IE 6]>
@@ -84,14 +125,14 @@ body {
 <!-- Autocomplete user/pass -->
 <form method="post" action="javascript:void(0)" style="display: none">
 <input type="text" id="address" name="address" value="" /> <input
-  type="password" id="password" name="password" value="" /> <input
-  type="submit" value="Login" id="login" />
-  <input type="submit" class="wiab le button" name="signIn" id="signIn" value="Sign in">
-  </form>
+    type="password" id="password" name="password" value="" /> <input
+    type="submit" value="Login" id="login" /> <input type="submit"
+    class="wiab le button" name="signIn" id="signIn" value="Sign in">
+</form>
 <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
 <noscript>
 <div
-  style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+    style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
 Your web browser must have JavaScript enabled in order for this
 application to display correctly.</div>
 </noscript>
@@ -104,7 +145,18 @@ application to display correctly.</div>
 <!--	style="margin-right: 3px; float: left; vertical-align: top;" />kune&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />-->
 <!--<span id="kuneloading-msg">Starting...</span></div>-->
 <!--</div>-->
-<div style="heigth: 20px">&nbsp;</div>
-<div id="k-home-ini" title="test">Latest projects, bla, bla, bla</div>
+<div id="k-home-prewrap">
+<div id="k-home-wrapper">
+<div id="k-home-logo"><img src="logo-big-home.png" alt="" /></div>
+<div id="k-home-ini">Welcome! This site is a Kune node. Kune,
+which means "together" in esperanto, it's a network of interconnected
+sites like this one, where you can <strong>communicate, share, collaborate with
+others and create your web spaces easily</strong>. <a href="#signin">Join!</a>
+</div>
+<div id="k-home-stats">
+Latests groups created
+</div>
+</div>
+</div>
 </body>
 </html>

@@ -41,22 +41,21 @@ import cc.kune.core.shared.dto.InitDataDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.wideplay.warp.persist.TransactionType;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.Transactional;
 
 @Singleton
 public class SiteRPC implements RPC, SiteService {
-    private final Mapper mapper;
-    private final Provider<UserSession> userSessionProvider;
-    private final LicenseManager licenseManager;
-    private final UserManager userManager;
     private final ChatProperties chatProperties;
-    private final UserInfoService userInfoService;
+    private final I18nCountryManager countryManager;
+    private final ExtMediaDescripManager extMediaDescManager;
     private final KuneProperties kuneProperties;
     private final I18nLanguageManager languageManager;
-    private final I18nCountryManager countryManager;
+    private final LicenseManager licenseManager;
+    private final Mapper mapper;
     private final ServerToolRegistry serverToolRegistry;
-    private final ExtMediaDescripManager extMediaDescManager;
+    private final UserInfoService userInfoService;
+    private final UserManager userManager;
+    private final Provider<UserSession> userSessionProvider;
 
     // TODO: refactor: too many parameters! refactor to Facade Pattern
     @Inject
@@ -78,7 +77,8 @@ public class SiteRPC implements RPC, SiteService {
         this.extMediaDescManager = extMediaDescManager;
     }
 
-    @Transactional(type = TransactionType.READ_ONLY)
+    @Override
+    @Transactional
     public InitDataDTO getInitData(final String userHash) throws DefaultException {
         final InitData data = new InitData();
         final UserSession userSession = getUserSession();

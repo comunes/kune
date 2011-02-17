@@ -31,17 +31,18 @@ import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
 import cc.kune.domain.License;
+import cc.kune.domain.finders.LicenseFinder;
 
 import com.google.inject.Inject;
 
 public class LicenseFinderTest extends PersistenceTest {
     @Inject
-    License finder;
-    @Inject
-    DatabaseProperties properties;
+    LicenseFinder finder;
     private License license1;
     private License license2;
     private License licenseDef;
+    @Inject
+    DatabaseProperties properties;
 
     @Before
     public void addData() {
@@ -66,13 +67,13 @@ public class LicenseFinderTest extends PersistenceTest {
 
     @Test
     public void findAll() {
-        List<License> all = finder.getAll();
+        final List<License> all = finder.getAll();
         assertEquals(3, all.size());
     }
 
     @Test
     public void findById() {
-        License lic = finder.findByShortName(license1.getShortName());
+        final License lic = finder.findByShortName(license1.getShortName());
         assertNotNull(lic);
         assertEquals(license1.getShortName(), lic.getShortName());
         assertEquals(license1.getLongName(), lic.getLongName());
@@ -80,14 +81,14 @@ public class LicenseFinderTest extends PersistenceTest {
 
     @Test
     public void findCC() {
-        List<License> cc = finder.getCC();
+        final List<License> cc = finder.getCC();
         assertEquals(2, cc.size());
     }
 
     @Test
     public void findDefaultLicense() {
-        String licenseDefId = properties.getDefaultLicense();
-        License lic = finder.findByShortName(licenseDefId);
+        final String licenseDefId = properties.getDefaultLicense();
+        final License lic = finder.findByShortName(licenseDefId);
         assertNotNull(lic);
         assertEquals(licenseDef.getShortName(), lic.getShortName());
         assertEquals(licenseDef.getLongName(), lic.getLongName());
@@ -95,7 +96,7 @@ public class LicenseFinderTest extends PersistenceTest {
 
     @Test
     public void findNotCC() {
-        List<License> notCc = finder.getNotCC();
+        final List<License> notCc = finder.getNotCC();
         assertEquals(1, notCc.size());
     }
 

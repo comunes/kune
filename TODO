@@ -12,6 +12,7 @@ TODO-list for kune -*- mode: org; -*-
 
 * SHORT-TERM (URGENT)
 ** >> Delete host/room conf in ws.html
+** >> kune.properties from cmd line
 ** HelloWord with samples of extensions: sitebar, sitebar options menu, siteuseroptions, sn, ...
 ** TODO Register of "reserved words" not permitted for groups/users names (in server and in client)
 ** TODO WIAB under proxies

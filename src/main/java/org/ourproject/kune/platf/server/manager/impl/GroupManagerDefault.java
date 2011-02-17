@@ -53,6 +53,9 @@ import cc.kune.domain.License;
 import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.GroupFinder;
+import cc.kune.domain.finders.LicenseFinder;
+import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -61,19 +64,19 @@ import com.google.inject.Singleton;
 @Singleton
 public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager {
 
-    private final Group finder;
+    private final GroupFinder finder;
     private final KuneProperties kuneProperties;
-    private final License licenseFinder;
+    private final LicenseFinder licenseFinder;
     private final LicenseManager licenseManager;
     private final DatabaseProperties properties;
     private final ServerToolRegistry registry;
     private final ServerToolRegistry serverToolRegistry;
-    private final User userFinder;
+    private final UserFinder userFinder;
 
     @Inject
-    public GroupManagerDefault(final Provider<EntityManager> provider, final Group finder, final User userFinder,
-            final KuneProperties kuneProperties, final DatabaseProperties properties,
-            final ServerToolRegistry registry, final LicenseManager licenseManager, final License licenseFinder,
+    public GroupManagerDefault(final Provider<EntityManager> provider, final GroupFinder finder,
+            final UserFinder userFinder, final KuneProperties kuneProperties, final DatabaseProperties properties,
+            final ServerToolRegistry registry, final LicenseManager licenseManager, final LicenseFinder licenseFinder,
             final ServerToolRegistry serverToolRegistry) {
         super(provider, Group.class);
         this.finder = finder;

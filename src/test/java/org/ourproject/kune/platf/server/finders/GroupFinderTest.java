@@ -27,12 +27,18 @@ import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistenceTest;
 
 import cc.kune.domain.Group;
+import cc.kune.domain.finders.GroupFinder;
 
 import com.google.inject.Inject;
 
 public class GroupFinderTest extends PersistenceTest {
     @Inject
-    Group groupFinder;
+    GroupFinder groupFinder;
+
+    @After
+    public void close() {
+        closeTransaction();
+    }
 
     @Before
     public void insertData() {
@@ -44,10 +50,5 @@ public class GroupFinderTest extends PersistenceTest {
     @Test
     public void testGetAll() {
         assertEquals(2, groupFinder.getAll().size());
-    }
-
-    @After
-    public void close() {
-        closeTransaction();
     }
 }

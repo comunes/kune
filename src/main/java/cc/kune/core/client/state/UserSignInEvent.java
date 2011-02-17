@@ -23,7 +23,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
-import com.gwtplatform.mvp.client.HasEventBus;
 
 public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler> {
 
@@ -36,10 +35,6 @@ public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler>
     }
 
     private static final Type<UserSignInHandler> TYPE = new Type<UserSignInHandler>();
-
-    public static void fire(final HasEventBus source, final cc.kune.core.shared.dto.UserInfoDTO userInfo) {
-        source.fireEvent(new UserSignInEvent(userInfo));
-    }
 
     public static Type<UserSignInHandler> getType() {
         return TYPE;

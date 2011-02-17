@@ -27,8 +27,8 @@ import org.junit.Before;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import com.wideplay.warp.persist.PersistenceService;
-import com.wideplay.warp.persist.Transactional;
+import com.google.inject.persist.PersistService;
+import com.google.inject.persist.Transactional;
 
 public abstract class PersistenceTest {
     private final String persistenceUnit;
@@ -40,7 +40,7 @@ public abstract class PersistenceTest {
         // test: use memory
         // test_db: use mysql
         // Also configurable ein TestHelper
-        this("test_db", "kune.properties");
+        this(TestConstants.PERSISTENCE_UNIT, "kune.properties");
     }
 
     public PersistenceTest(final String persistenceUnit, final String propetiesFileName) {
@@ -77,7 +77,7 @@ public abstract class PersistenceTest {
     @Before
     public void prepare() {
         final Injector injector = TestHelper.create(new PlatformServerModule(), persistenceUnit, propetiesFileName);
-        final PersistenceService persistence = injector.getInstance(PersistenceService.class);
+        final PersistService persistence = injector.getInstance(PersistService.class);
         // To Debug insert breakpoint here
         persistence.start();
         injector.injectMembers(this);

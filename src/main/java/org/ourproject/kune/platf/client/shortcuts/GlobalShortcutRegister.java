@@ -19,11 +19,11 @@
  */
 package org.ourproject.kune.platf.client.shortcuts;
 
-import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.ChangebleObject;
 import org.ourproject.kune.platf.client.actions.InputMap;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.Shortcut;
 
 import com.allen_sauer.gwt.log.client.Log;

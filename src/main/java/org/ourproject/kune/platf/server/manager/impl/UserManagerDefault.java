@@ -46,6 +46,7 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.UserFinder;
 import cc.kune.domain.utils.UserBuddiesData;
 import cc.kune.wave.server.CustomUserRegistrationServlet;
 
@@ -56,7 +57,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
     private final I18nCountryManager countryManager;
-    private final User finder;
+    private final UserFinder finder;
     private final I18nTranslationService i18n;
     private final I18nLanguageManager languageManager;
     private final ChatProperties properties;
@@ -65,7 +66,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     private final XmppManager xmppManager;
 
     @Inject
-    public UserManagerDefault(final Provider<EntityManager> provider, final User finder,
+    public UserManagerDefault(final Provider<EntityManager> provider, final UserFinder finder,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
             final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n,
             final CustomUserRegistrationServlet waveUserRegister) {

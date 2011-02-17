@@ -27,6 +27,7 @@ import org.ourproject.kune.platf.server.manager.LicenseManager;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
 import cc.kune.domain.License;
+import cc.kune.domain.finders.LicenseFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -34,34 +35,39 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class LicenseManagerDefault extends DefaultManager<License, Long> implements LicenseManager {
-    private License licenseFinder;
+    private LicenseFinder licenseFinder;
     private final DatabaseProperties properties;
 
     @Inject
     public LicenseManagerDefault(final Provider<EntityManager> provider, final DatabaseProperties properties,
-            final License licenseFinder) {
+            final LicenseFinder licenseFinder) {
         super(provider, License.class);
         this.properties = properties;
         this.licenseFinder = licenseFinder;
     }
 
+    @Override
     public License findByShortName(final String shortName) {
         return licenseFinder.findByShortName(shortName);
     }
 
+    @Override
     public List<License> getAll() {
         return licenseFinder.getAll();
     }
 
+    @Override
     public List<License> getCC() {
         return licenseFinder.getCC();
     }
 
+    @Override
     public License getDefLicense() {
         final String licenseDefId = properties.getDefaultLicense();
         return licenseFinder.findByShortName(licenseDefId);
     }
 
+    @Override
     public List<License> getNotCC() {
         return licenseFinder.getNotCC();
     }
@@ -71,8 +77,9 @@ public class LicenseManagerDefault extends DefaultManager<License, Long> impleme
         return super.persist(license);
     }
 
+    @Override
     @Inject
-    public void setLicenseFinder(final License licenseFinder) {
+    public void setLicenseFinder(final LicenseFinder licenseFinder) {
         this.licenseFinder = licenseFinder;
     }
 }

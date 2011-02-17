@@ -44,6 +44,7 @@ import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import cc.kune.domain.Group;
 import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.GroupFinder;
 import cc.kune.domain.utils.ParticipationData;
 import cc.kune.domain.utils.SocialNetworkData;
 import cc.kune.domain.utils.UserBuddiesData;
@@ -55,12 +56,12 @@ import com.google.inject.Singleton;
 @Singleton
 public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, Long> implements SocialNetworkManager {
 
-    private final Group finder;
     private final AccessRightsService accessRightsService;
+    private final GroupFinder finder;
     private final UserManager userManager;
 
     @Inject
-    public SocialNetworkManagerDefault(final Provider<EntityManager> provider, final Group finder,
+    public SocialNetworkManagerDefault(final Provider<EntityManager> provider, final GroupFinder finder,
             final AccessRightsService accessRightsService, final UserManager userManager) {
         super(provider, SocialNetwork.class);
         this.finder = finder;
@@ -68,6 +69,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         this.userManager = userManager;
     }
 
+    @Override
     public void acceptJoinGroup(final User userLogged, final Group group, final Group inGroup) throws DefaultException,
             AccessViolationException {
         final SocialNetwork sn = inGroup.getSocialNetwork();
@@ -81,6 +83,12 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
+    void addAdmin(final User newAdmin, final Group group) {
+        final SocialNetwork sn = group.getSocialNetwork();
+        sn.addAdmin(newAdmin.getUserGroup());
+    }
+
+    @Override
     public void addGroupToAdmins(final User userLogged, final Group group, final Group inGroup) throws DefaultException {
         checkGroupAddingToSelf(group, inGroup);
         final SocialNetwork sn = inGroup.getSocialNetwork();
@@ -92,6 +100,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
+    @Override
     public void addGroupToCollabs(final User userLogged, final Group group, final Group inGroup)
             throws DefaultException {
         checkGroupAddingToSelf(group, inGroup);
@@ -104,6 +113,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
+    @Override
     public void addGroupToViewers(final User userLogged, final Group group, final Group inGroup)
             throws DefaultException {
         checkGroupAddingToSelf(group, inGroup);
@@ -116,6 +126,25 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
+    private void checkGroupAddingToSelf(final Group group, final Group inGroup) throws DefaultException {
+        if (group.equals(inGroup)) {
+            throwGroupMemberException(group);
+        }
+    }
+
+    private void checkGroupIsNotAlreadyAMember(final Group group, final SocialNetwork sn) throws DefaultException {
+        if (sn.isAdmin(group) || sn.isCollab(group) || sn.isViewer(group) && notEveryOneCanView(sn)) {
+            throwGroupMemberException(group);
+        }
+    }
+
+    private void checkUserLoggedIsAdmin(final User userLogged, final SocialNetwork sn) throws AccessViolationException {
+        if (!accessRightsService.get(userLogged, sn.getAccessLists()).isAdministrable()) {
+            throw new AccessViolationException();
+        }
+    }
+
+    @Override
     public void deleteMember(final User userLogged, final Group group, final Group inGroup) throws DefaultException,
             AccessViolationException {
         final SocialNetwork sn = inGroup.getSocialNetwork();
@@ -124,6 +153,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         unJoinGroup(group, inGroup);
     }
 
+    @Override
     public void denyJoinGroup(final User userLogged, final Group group, final Group inGroup) throws DefaultException {
         final SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
@@ -135,6 +165,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
+    @Override
     public ParticipationData findParticipation(final User userLogged, final Group group)
             throws AccessViolationException {
         get(userLogged, group); // check access
@@ -149,6 +180,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         return new ParticipationData(adminInGroups, collabInGroups);
     }
 
+    @Override
     public SocialNetwork get(final User petitioner, final Group group) throws AccessViolationException {
         final SocialNetwork sn = group.getSocialNetwork();
         if (!sn.getAccessLists().getViewers().includes(petitioner.getUserGroup())) {
@@ -157,18 +189,19 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         return sn;
     }
 
+    @Override
     public SocialNetworkData getSocialNetworkData(final User userLogged, final Group group) {
-        SocialNetworkData socialNetData = new SocialNetworkData();
+        final SocialNetworkData socialNetData = new SocialNetworkData();
         socialNetData.setGroupMembers(get(userLogged, group));
-        AccessRights groupRights = accessRightsService.get(userLogged, group.getAccessLists());
+        final AccessRights groupRights = accessRightsService.get(userLogged, group.getAccessLists());
         socialNetData.setGroupRights(groupRights);
         socialNetData.setUserParticipation(findParticipation(userLogged, group));
         socialNetData.setGroupMembers(get(userLogged, group));
         if (group.isPersonal()) {
-            UserBuddiesData userBuddies = userManager.getUserBuddies(group.getShortName());
-            User userGroup = userManager.findByShortname(group.getShortName());
+            final UserBuddiesData userBuddies = userManager.getUserBuddies(group.getShortName());
+            final User userGroup = userManager.findByShortname(group.getShortName());
             socialNetData.setUserBuddies(userBuddies);
-            UserBuddiesVisibility buddiesVisibility = userGroup.getBuddiesVisibility();
+            final UserBuddiesVisibility buddiesVisibility = userGroup.getBuddiesVisibility();
             socialNetData.setIsBuddiesVisible(true);
             switch (buddiesVisibility) {
             case anyone:
@@ -180,8 +213,8 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
                 }
                 break;
             case yourbuddies:
-                boolean notMe = !userLogged.equals(userGroup);
-                boolean notABuddie = !userBuddies.contains(userLogged.getShortName());
+                final boolean notMe = !userLogged.equals(userGroup);
+                final boolean notABuddie = !userBuddies.contains(userLogged.getShortName());
                 if (notMe && notABuddie) {
                     socialNetData.setIsBuddiesVisible(false);
                     socialNetData.setUserBuddies(UserBuddiesData.EMPTY);
@@ -190,7 +223,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
             }
             socialNetData.setUserBuddiesVisibility(buddiesVisibility);
         } else {
-            SocialNetworkVisibility visibility = group.getSocialNetwork().getVisibility();
+            final SocialNetworkVisibility visibility = group.getSocialNetwork().getVisibility();
             socialNetData.setIsMembersVisible(true);
             switch (visibility) {
             case anyone:
@@ -214,6 +247,23 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         return socialNetData;
     }
 
+    private boolean isClosed(final AdmissionType admissionType) {
+        return admissionType.equals(AdmissionType.Closed);
+    }
+
+    private boolean isModerated(final AdmissionType admissionType) {
+        return admissionType.equals(AdmissionType.Moderated);
+    }
+
+    private boolean isOpen(final AdmissionType admissionType) {
+        return admissionType.equals(AdmissionType.Open);
+    }
+
+    private boolean notEveryOneCanView(final SocialNetwork sn) {
+        return !sn.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE);
+    }
+
+    @Override
     public SocialNetworkRequestResult requestToJoin(final User userLogged, final Group inGroup)
             throws DefaultException, UserMustBeLoggedException {
         final SocialNetwork sn = inGroup.getSocialNetwork();
@@ -246,6 +296,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
+    @Override
     public void setAdminAsCollab(final User userLogged, final Group group, final Group inGroup) throws DefaultException {
         final SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
@@ -260,6 +311,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
+    @Override
     public void setCollabAsAdmin(final User userLogged, final Group group, final Group inGroup) throws DefaultException {
         final SocialNetwork sn = inGroup.getSocialNetwork();
         checkUserLoggedIsAdmin(userLogged, sn);
@@ -271,6 +323,15 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
         }
     }
 
+    private void throwGroupMemberException(final Group group) throws DefaultException {
+        if (group.isPersonal()) {
+            throw new AlreadyUserMemberException();
+        } else {
+            throw new AlreadyGroupMemberException();
+        }
+    }
+
+    @Override
     public void unJoinGroup(final Group groupToUnJoin, final Group inGroup) throws DefaultException {
         final SocialNetwork sn = inGroup.getSocialNetwork();
 
@@ -288,53 +349,6 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
             sn.removeCollaborator(groupToUnJoin);
         } else {
             throw new DefaultException("Person/Group is not a collaborator");
-        }
-    }
-
-    void addAdmin(final User newAdmin, final Group group) {
-        final SocialNetwork sn = group.getSocialNetwork();
-        sn.addAdmin(newAdmin.getUserGroup());
-    }
-
-    private void checkGroupAddingToSelf(final Group group, final Group inGroup) throws DefaultException {
-        if (group.equals(inGroup)) {
-            throwGroupMemberException(group);
-        }
-    }
-
-    private void checkGroupIsNotAlreadyAMember(final Group group, final SocialNetwork sn) throws DefaultException {
-        if (sn.isAdmin(group) || sn.isCollab(group) || sn.isViewer(group) && notEveryOneCanView(sn)) {
-            throwGroupMemberException(group);
-        }
-    }
-
-    private void checkUserLoggedIsAdmin(final User userLogged, final SocialNetwork sn) throws AccessViolationException {
-        if (!accessRightsService.get(userLogged, sn.getAccessLists()).isAdministrable()) {
-            throw new AccessViolationException();
-        }
-    }
-
-    private boolean isClosed(final AdmissionType admissionType) {
-        return admissionType.equals(AdmissionType.Closed);
-    }
-
-    private boolean isModerated(final AdmissionType admissionType) {
-        return admissionType.equals(AdmissionType.Moderated);
-    }
-
-    private boolean isOpen(final AdmissionType admissionType) {
-        return admissionType.equals(AdmissionType.Open);
-    }
-
-    private boolean notEveryOneCanView(final SocialNetwork sn) {
-        return !sn.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE);
-    }
-
-    private void throwGroupMemberException(final Group group) throws DefaultException {
-        if (group.isPersonal()) {
-            throw new AlreadyUserMemberException();
-        } else {
-            throw new AlreadyGroupMemberException();
         }
     }
 

@@ -34,6 +34,7 @@ import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
+import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
@@ -94,10 +95,10 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
     }
 
     /**
-     * This is not working:
+     * This was not working:
      * http://opensource.atlassian.com/projects/hibernate/browse/EJB-382
      */
-    @Test(expected = PersistenceException.class)
+    @Test(expected = UserRegistrationException.class)
     public void testUserExist() throws I18nNotFoundException {
         final User user1 = userManager.createUser("test", "test 1 name", "test1@example.com", "some password", "en",
                 "GB", "GMT");

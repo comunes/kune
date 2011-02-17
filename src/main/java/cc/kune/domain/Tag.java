@@ -34,13 +34,13 @@ import org.hibernate.search.annotations.Store;
 
 import cc.kune.domain.utils.HasId;
 
-import com.google.inject.name.Named;
-import com.wideplay.warp.persist.dao.Finder;
-
 @Entity
 @Indexed
 @Table(name = "tags")
 public class Tag implements HasId {
+
+    @Basic(optional = false)
+    private final Long createdOn;
 
     @Id
     @GeneratedValue
@@ -51,9 +51,6 @@ public class Tag implements HasId {
     @Column(unique = true)
     private String name;
 
-    @Basic(optional = false)
-    private final Long createdOn;
-
     public Tag() {
         this(null);
     }
@@ -63,15 +60,11 @@ public class Tag implements HasId {
         this.createdOn = System.currentTimeMillis();
     }
 
-    @Finder(query = "FROM Tag g WHERE g.name = :name")
-    public Tag findByTagName(@Named("name") final String tag) {
-        return null;
-    }
-
     public Long getCreatedOn() {
         return createdOn;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -80,6 +73,7 @@ public class Tag implements HasId {
         return name;
     }
 
+    @Override
     public void setId(final Long id) {
         this.id = id;
     }

@@ -17,12 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.entityheadermaxmin;
+package cc.kune.domain.finders;
 
-import org.ourproject.kune.platf.client.View;
+import java.util.ArrayList;
+import java.util.List;
 
-public interface MaxMinWorkspaceView extends View {
+import cc.kune.domain.License;
 
-    void setMaximized(boolean maximized);
+import com.google.inject.name.Named;
+import com.google.inject.persist.finder.Finder;
 
+public interface LicenseFinder {
+
+    @Finder(query = "from License l where l.shortName = :shortName")
+    public License findByShortName(@Named("shortName") final String shortName);
+
+    @Finder(query = "from License", returnAs = ArrayList.class)
+    public List<License> getAll();
+
+    @Finder(query = "from License where isCC = true", returnAs = ArrayList.class)
+    public List<License> getCC();
+
+    @Finder(query = "from License where isCC = false", returnAs = ArrayList.class)
+    public List<License> getNotCC();
 }

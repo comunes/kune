@@ -20,12 +20,12 @@
 package org.ourproject.kune.platf.client.ui.rte.basic;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.KeyStroke;
-import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
+import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.ui.GuiAddCondition;
 import org.ourproject.kune.platf.client.actions.ui.IsActionExtensible;
 import org.ourproject.kune.platf.client.actions.ui.MenuDescriptor;
+import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 
 import com.calclab.suco.client.events.Listener0;
 

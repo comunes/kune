@@ -23,8 +23,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
-import org.ourproject.kune.workspace.client.tool.ToolSelectorItem;
-import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenter;
 
 import cc.kune.core.client.state.StateManager;
 

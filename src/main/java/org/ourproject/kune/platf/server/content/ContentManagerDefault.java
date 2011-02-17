@@ -48,6 +48,10 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.Rate;
 import cc.kune.domain.Revision;
 import cc.kune.domain.User;
+import cc.kune.domain.finders.ContainerFinder;
+import cc.kune.domain.finders.ContentFinder;
+import cc.kune.domain.finders.I18nLanguageFinder;
+import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -56,17 +60,17 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContentManagerDefault extends DefaultManager<Content, Long> implements ContentManager {
 
+    private final ContainerFinder containerFinder;
+    private final ContentFinder contentFinder;
     private final FinderService finder;
-    private final User userFinder;
-    private final I18nLanguage languageFinder;
-    private final Content contentFinder;
-    private final Container containerFinder;
+    private final I18nLanguageFinder languageFinder;
     private final TagUserContentManager tagManager;
+    private final UserFinder userFinder;
 
     @Inject
-    public ContentManagerDefault(final Content contentFinder, final Container containerFinder,
-            final Provider<EntityManager> provider, final FinderService finder, final User userFinder,
-            final I18nLanguage languageFinder, final TagUserContentManager tagManager) {
+    public ContentManagerDefault(final ContentFinder contentFinder, final ContainerFinder containerFinder,
+            final Provider<EntityManager> provider, final FinderService finder, final UserFinder userFinder,
+            final I18nLanguageFinder languageFinder, final TagUserContentManager tagManager) {
         super(provider, Content.class);
         this.contentFinder = contentFinder;
         this.containerFinder = containerFinder;
@@ -76,6 +80,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         this.tagManager = tagManager;
     }
 
+    @Override
     public void addAuthor(final User user, final Long contentId, final String authorShortName) throws DefaultException {
         final Content content = finder.getContent(contentId);
         final User author = userFinder.getByShortName(authorShortName);
@@ -85,10 +90,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.addAuthor(author);
     }
 
+    @Override
     public Content createContent(final String title, final String body, final User author, final Container container,
             final String typeId) {
         FilenameUtils.checkBasicFilename(title);
-        String newtitle = findInexistentTitle(container, title);
+        final String newtitle = findInexistentTitle(container, title);
         final Content newContent = new Content();
         newContent.addAuthor(author);
         newContent.setLanguage(author.getLanguage());
@@ -102,19 +108,36 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return persist(newContent);
     }
 
+    private MultiFieldQueryParser createMultiFieldParser() {
+        final MultiFieldQueryParser parser = new MultiFieldQueryParser(DEF_GLOBAL_SEARCH_FIELDS, new StandardAnalyzer());
+        return parser;
+    }
+
+    @Override
     public boolean findIfExistsTitle(final Container container, final String title) {
         return (contentFinder.findIfExistsTitle(container, title) > 0)
                 || (containerFinder.findIfExistsTitle(container, title) > 0);
     }
 
+    private String findInexistentTitle(final Container container, final String title) {
+        String initialTitle = String.valueOf(title);
+        while (findIfExistsTitle(container, initialTitle)) {
+            initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
+        }
+        return initialTitle;
+    }
+
+    @Override
     public Double getRateAvg(final Content content) {
         return finder.getRateAvg(content);
     }
 
+    @Override
     public Long getRateByUsers(final Content content) {
         return finder.getRateByUsers(content);
     }
 
+    @Override
     public Double getRateContent(final User rater, final Content content) {
         final Rate rate = finder.getRate(rater, content);
         if (rate != null) {
@@ -124,6 +147,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         }
     }
 
+    @Override
     public RateResult rateContent(final User rater, final Long contentId, final Double value) throws DefaultException {
         final Content content = finder.getContent(contentId);
         final Rate oldRate = finder.getRate(rater, content);
@@ -134,11 +158,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             oldRate.setValue(value);
             super.persist(oldRate, Rate.class);
         }
-        Double rateAvg = getRateAvg(content);
-        Long rateByUsers = getRateByUsers(content);
+        final Double rateAvg = getRateAvg(content);
+        final Long rateByUsers = getRateByUsers(content);
         return new RateResult(rateAvg != null ? rateAvg : 0D, rateByUsers != null ? rateByUsers.intValue() : 0, value);
     }
 
+    @Override
     public void removeAuthor(final User user, final Long contentId, final String authorShortName)
             throws DefaultException {
         final Content content = finder.getContent(contentId);
@@ -149,8 +174,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         content.removeAuthor(author);
     }
 
+    @Override
     public Content renameContent(final User user, final Long contentId, final String newTitle) throws DefaultException {
-        String newTitleWithoutNL = FilenameUtils.chomp(newTitle);
+        final String newTitleWithoutNL = FilenameUtils.chomp(newTitle);
         FilenameUtils.checkBasicFilename(newTitleWithoutNL);
         final Content content = finder.getContent(contentId);
         if (findIfExistsTitle(content.getContainer(), newTitleWithoutNL)) {
@@ -160,6 +186,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return content;
     }
 
+    @Override
     public Content save(final User editor, final Content content, final String body) {
         final Revision revision = new Revision(content);
         revision.setEditor(editor);
@@ -169,10 +196,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return persist(content);
     }
 
+    @Override
     public SearchResult<Content> search(final String search) {
         return this.search(search, null, null);
     }
 
+    @Override
     public SearchResult<Content> search(final String search, final Integer firstResult, final Integer maxResults) {
         final MultiFieldQueryParser parser = createMultiFieldParser();
         Query query;
@@ -184,22 +213,25 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return super.search(query, firstResult, maxResults);
     }
 
+    @Override
     public SearchResult<Content> searchMime(final String search, final Integer firstResult, final Integer maxResults,
             final String groupShortName, final String mimetype) {
-        List<Content> list = contentFinder.findMime(groupShortName, "%" + search + "%", mimetype, firstResult,
+        final List<Content> list = contentFinder.findMime(groupShortName, "%" + search + "%", mimetype, firstResult,
                 maxResults);
-        int count = contentFinder.findMimeCount(groupShortName, "%" + search + "%", mimetype);
+        final int count = contentFinder.findMimeCount(groupShortName, "%" + search + "%", mimetype);
         return new SearchResult<Content>(count, list);
     }
 
+    @Override
     public SearchResult<?> searchMime(final String search, final Integer firstResult, final Integer maxResults,
             final String groupShortName, final String mimetype, final String mimetype2) {
-        List<Content> list = contentFinder.find2Mime(groupShortName, "%" + search + "%", mimetype, mimetype2,
+        final List<Content> list = contentFinder.find2Mime(groupShortName, "%" + search + "%", mimetype, mimetype2,
                 firstResult, maxResults);
-        int count = contentFinder.find2MimeCount(groupShortName, "%" + search + "%", mimetype, mimetype2);
+        final int count = contentFinder.find2MimeCount(groupShortName, "%" + search + "%", mimetype, mimetype2);
         return new SearchResult<Content>(count, list);
     }
 
+    @Override
     public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
             throws DefaultException {
         final Content content = finder.getContent(contentId);
@@ -211,11 +243,13 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return language;
     }
 
+    @Override
     public void setPublishedOn(final User user, final Long contentId, final Date publishedOn) throws DefaultException {
         final Content content = finder.getContent(contentId);
         content.setPublishedOn(publishedOn);
     }
 
+    @Override
     public Content setStatus(final Long contentId, final ContentStatus status) {
         final Content content = finder.getContent(contentId);
         content.setStatus(status);
@@ -234,21 +268,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         return content;
     }
 
+    @Override
     public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
         final Content content = finder.getContent(contentId);
         tagManager.setTags(user, content, tags);
-    }
-
-    private MultiFieldQueryParser createMultiFieldParser() {
-        final MultiFieldQueryParser parser = new MultiFieldQueryParser(DEF_GLOBAL_SEARCH_FIELDS, new StandardAnalyzer());
-        return parser;
-    }
-
-    private String findInexistentTitle(final Container container, final String title) {
-        String initialTitle = String.valueOf(title);
-        while (findIfExistsTitle(container, initialTitle)) {
-            initialTitle = FileUtils.getNextSequentialFileName(initialTitle);
-        }
-        return initialTitle;
     }
 }
