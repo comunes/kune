@@ -96,6 +96,12 @@
       </snapshots>
     </repository>
     <repository>
+      <id>gwtplatform.snapshot.repo</id>
+      <name>Gwtplatform snapshot repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <layout>default</layout>
+    </repository>
+    <repository>
       <id>openqa.org</id>
       <name>Openqa Release Repository</name>
       <url>http://archiva.openqa.org/repository/releases</url>
@@ -211,11 +217,11 @@
       <!-- <version>2.1-SNAPSHOT-r1160</version> -->
       <version>3.0-rc2</version>
     </dependency>
-    <dependency>
-      <groupId>com.googlecode.gwt.inject</groupId>
-      <artifactId>gin</artifactId>
-      <version>r137</version>
-    </dependency>
+    <!--    <dependency>
+<groupId>com.googlecode.gwt.inject</groupId>
+<artifactId>gin</artifactId>
+<version>gin-1.1-SNAPSHOT</version>
+</dependency>-->
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-servlet</artifactId>
@@ -241,6 +247,7 @@
       <groupId>com.gwtplatform</groupId>
       <artifactId>gwtp-all</artifactId>
       <version>0.5</version>
+<!--      <version>0.6-SNAPSHOT</version>-->
       <exclusions>
         <exclusion>
           <groupId>org.springframework</groupId>
@@ -1010,14 +1017,14 @@
               <!-- <onejarVersion>0.97</onejarVersion> -->
               <!-- Optional, use only if you need to include native libraries
                 (dll's) -->
-<!--              <binlibs>-->
-<!--                <fileSet>-->
-<!--                  <directory>${project.build.directory}/${project.build.finalName}</directory>-->
-<!--                  <includes>-->
-<!--                    <include>**</include>-->
-<!--                  </includes>-->
-<!--                </fileSet>-->
-<!--              </binlibs>-->
+              <!-- <binlibs> -->
+              <!-- <fileSet> -->
+              <!-- <directory>${project.build.directory}/${project.build.finalName}</directory> -->
+              <!-- <includes> -->
+              <!-- <include>**</include> -->
+              <!-- </includes> -->
+              <!-- </fileSet> -->
+              <!-- </binlibs> -->
               <!-- Optional, default is false -->
               <attachToBuild>true</attachToBuild>
               <!-- Optional, default is "onejar" -->

@@ -22,8 +22,8 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.FilterHolder;
-import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
 import org.jruby.rack.RackFilter;
@@ -423,17 +423,20 @@ public class CustomServerRpcProvider {
             httpServer.addConnector(connector);
         }
 
-        // final WebAppContext webContext = new WebAppContext();
-        final ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        final WebAppContext context = new WebAppContext();
+
+        // FIXME This was with previous ServletContextHandler: needed?
+        // final ServletContextHandler context = new
+        // ServletContextHandler(ServletContextHandler.SESSIONS);
+
         if (jettySessionManager != null) {
             context.getSessionHandler().setSessionManager(jettySessionManager);
         }
         context.setResourceBase(resourceBase);
         context.setContextPath(baseUrl);
-
-        // webContext.setResourceBase(resourceBase);
-        // webContext.setContextPath(baseUrl);
-        // webContext.setWar(baseUrl);
+        context.setWar(baseUrl);
+        context.setParentLoaderPriority(true);
+        context.setDescriptor("WEB-INF/web.xml");
 
         final ServletHolder httpbindHolder = new ServletHolder(ProxyServlet.class);
         httpbindHolder.setInitParameter("remotePath", "/http-bind/");
