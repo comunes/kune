@@ -21,6 +21,7 @@ package cc.kune.client;
 
 import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.ChatGinModule;
+import cc.kune.chat.client.ChatParts;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
@@ -64,6 +65,8 @@ public interface KuneGinjector extends Ginjector {
      */
 
     ChatClient getChatClient();
+
+    ChatParts getChatParts();
 
     AsyncProvider<CookiesManager> getCookiesManager();
 

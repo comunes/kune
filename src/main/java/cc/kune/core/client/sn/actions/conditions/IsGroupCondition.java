@@ -16,6 +16,6 @@ public class IsGroupCondition implements GuiAddCondition {
 
     @Override
     public boolean mustBeAdded(final GuiActionDescrip descr) {
-        return (!((GroupDTO) descr.getItem()).isPersonal());
+        return (!((GroupDTO) descr.getTarget()).isPersonal());
     }
 }

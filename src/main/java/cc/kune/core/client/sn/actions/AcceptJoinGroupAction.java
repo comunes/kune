@@ -39,7 +39,7 @@ public class AcceptJoinGroupAction extends AbstractExtendedAction {
     public void actionPerformed(final ActionEvent event) {
         NotifyUser.showProgressProcessing();
         snServiceProvider.get().acceptJoinGroup(session.getUserHash(), session.getCurrentState().getStateToken(),
-                ((GroupDTO) event.getSource()).getShortName(), new AsyncCallbackSimple<SocialNetworkDataDTO>() {
+                ((GroupDTO) event.getTarget()).getShortName(), new AsyncCallbackSimple<SocialNetworkDataDTO>() {
                     @Override
                     public void onSuccess(final SocialNetworkDataDTO result) {
                         NotifyUser.hideProgress();

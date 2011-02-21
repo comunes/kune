@@ -51,12 +51,19 @@ import com.google.gwt.user.client.Event;
  */
 public class ActionEvent {
 
+    public static final Object NO_TARGET = String.valueOf("No target");
     private final Event event;
     private final Object source;
+    private final Object target;
 
     public ActionEvent(final Object source, final Event event) {
+        this(source, NO_TARGET, event);
+    }
+
+    public ActionEvent(final Object source, final Object target, final Event event) {
         this.source = source;
         this.event = event;
+        this.target = target;
     }
 
     public Event getEvent() {
@@ -65,5 +72,9 @@ public class ActionEvent {
 
     public Object getSource() {
         return source;
+    }
+
+    public Object getTarget() {
+        return target;
     }
 }

@@ -68,7 +68,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.resumedToken = null;
         siteTokens = new HashMap<String, HistoryTokenCallback>();
         beforeStateChangeCollection = new BeforeActionCollection();
-        eventBus.addHandler(UserSignInEvent.getType(), new UserSignInEvent.UserSignInHandler() {
+        session.onUserSignIn(true, new UserSignInEvent.UserSignInHandler() {
             @Override
             public void onUserSignIn(final UserSignInEvent event) {
                 if (previousToken == null) {
@@ -79,7 +79,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                 }
             }
         });
-        eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutEvent.UserSignOutHandler() {
+        session.onUserSignOut(true, new UserSignOutEvent.UserSignOutHandler() {
             @Override
             public void onUserSignOut(final UserSignOutEvent event) {
                 reload();

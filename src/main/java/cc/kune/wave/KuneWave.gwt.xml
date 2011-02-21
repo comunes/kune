@@ -7,8 +7,6 @@
   <inherits name='com.google.gwt.user.User' />
   <inherits name="com.google.gwt.event.EventBase" />
 
-  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome' /> -->
-
   <inherits name='com.glines.socketio.client.Client' />
   <inherits name='com.google.gwt.json.JSON' />
   <inherits name='com.google.gwt.websockets.WebSockets' />

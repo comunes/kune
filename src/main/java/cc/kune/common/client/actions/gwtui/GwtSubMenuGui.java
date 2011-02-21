@@ -44,7 +44,6 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
         super.descriptor = descriptor;
         item = new MenuItem("", menu);
         iconLabel = new IconLabel("");
-        iconLabel.addTextStyleName("oc-ico-pad");
         configureItemFromProperties();
         final AbstractGwtMenuGui parentMenu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(PARENT_UI));
         final int position = descriptor.getPosition();

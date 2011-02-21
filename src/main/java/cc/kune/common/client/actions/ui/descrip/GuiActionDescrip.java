@@ -6,13 +6,6 @@ import cc.kune.common.client.actions.PropertyChangeListener;
 
 public interface GuiActionDescrip {
 
-    /**
-     * {@link #ITEM} is used to associate a {@link #AbstractGuiActionDescrip}
-     * with an object like groups, group names, users, and so on, and used to
-     * execute actions with this item as parameter
-     */
-    public static final String ITEM = "item";
-
     public static final AbstractGuiActionDescrip NO_PARENT = new NoParentGuiActionDescriptor();
 
     public static final int NO_POSITION = -1;
@@ -22,19 +15,24 @@ public interface GuiActionDescrip {
      */
     public static final String STYLES = "stylesprop";
 
+    /**
+     * {@link #TARGET} is used to associate a {@link #AbstractGuiActionDescrip}
+     * with an object like groups, group names, users, and so on, and used to
+     * execute actions against these targets
+     */
+    public static final String TARGET = "target";
+
     public static final String VISIBLE = "visibleprop";
 
-    void addPropertyChangeListener(final PropertyChangeListener listener);
-
     void add(final GuiAddCondition addCondition);
+
+    void addPropertyChangeListener(final PropertyChangeListener listener);
 
     void fire(final ActionEvent event);
 
     AbstractAction getAction();
 
     String getId();
-
-    Object getItem();
 
     Object[] getKeys();
 
@@ -46,11 +44,13 @@ public interface GuiActionDescrip {
 
     PropertyChangeListener[] getPropertyChangeListeners();
 
+    Object getTarget();
+
     Class<?> getType();
 
     Object getValue(final String key);
 
-    boolean hasItem();
+    boolean hasTarget();
 
     boolean isChild();
 
@@ -68,8 +68,6 @@ public interface GuiActionDescrip {
 
     void setId(final String id);
 
-    void setItem(final Object object);
-
     void setLocation(final String location);
 
     void setParent(final GuiActionDescrip parent);
@@ -77,6 +75,8 @@ public interface GuiActionDescrip {
     void setPosition(final int position);
 
     void setStyles(final String styles);
+
+    void setTarget(final Object object);
 
     void setVisible(final boolean visible);
 

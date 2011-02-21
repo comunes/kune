@@ -23,7 +23,7 @@ public class GotoGroupAction extends AbstractExtendedAction {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        stateManager.gotoToken(((GroupDTO) event.getSource()).getStateToken());
+        stateManager.gotoToken(((GroupDTO) event.getTarget()).getStateToken());
     }
 
 }

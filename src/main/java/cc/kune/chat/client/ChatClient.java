@@ -29,6 +29,8 @@ public interface ChatClient {
 
     void chat(XmppURI jid);
 
+    void doLogin();
+
     boolean isBuddie(String shortName);
 
     boolean isBuddie(XmppURI jid);
@@ -40,6 +42,11 @@ public interface ChatClient {
     void joinRoom(String roomName, String subject, String userAlias);
 
     void login(XmppURI uri, String passwd);
+
+    /**
+     * @return true if loggin is needed
+     */
+    boolean loginIfNecessary();
 
     void logout();
 

@@ -8,7 +8,6 @@ import cc.kune.core.client.sn.actions.DenyJoinGroupAction;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.sn.actions.GotoMemberAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
-import cc.kune.core.client.sn.actions.StartChatWithMemberAction;
 import cc.kune.core.client.sn.actions.conditions.IsAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsNotMeCondition;
@@ -26,8 +25,7 @@ public class SNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry
             final IsNotMeCondition isNotMe, final ChangeToCollabAction changeToCollabAction,
             final ChangeToAdminAction changeToAdminAction, final RemoveMemberAction removeMemberAction,
             final AcceptJoinGroupAction acceptJoinGroupAction, final DenyJoinGroupAction denyJoinGroupAction,
-            final StartChatWithMemberAction startChatWithUserAction, final GotoGroupAction gotoGroupAction,
-            final GotoMemberAction gotoMemberAction) {
+            final GotoGroupAction gotoGroupAction, final GotoMemberAction gotoMemberAction) {
         add(new Provider<MenuItemDescriptor>() {
             @Override
             public MenuItemDescriptor get() {
@@ -60,15 +58,7 @@ public class SNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry
                 return item;
             }
         });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithUserAction);
-                item.add(isNotMe);
-                item.add(isPersonCondition);
-                return item;
-            }
-        });
+
     }
 
 }

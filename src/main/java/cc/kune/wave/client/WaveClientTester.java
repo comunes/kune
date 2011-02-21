@@ -25,17 +25,14 @@ public class WaveClientTester {
     @Inject
     public WaveClientTester(final WsArmor wsarmor, final Session session) {
         this.wsarmor = wsarmor;
-        if (session.isLogged()) {
-            doLogin(session.getCurrentUserInfo().getChatName(), session.getCurrentUserInfo().getChatPassword());
-        }
-        session.onUserSignIn(new UserSignInHandler() {
+        session.onUserSignIn(true, new UserSignInHandler() {
             @Override
             public void onUserSignIn(final UserSignInEvent event) {
                 doLogin(event.getUserInfo().getChatName(), event.getUserInfo().getChatPassword());
             }
         });
 
-        session.onUserSignOut(new UserSignOutHandler() {
+        session.onUserSignOut(true, new UserSignOutHandler() {
             @Override
             public void onUserSignOut(final UserSignOutEvent event) {
                 // TODO Auto-generated method stub

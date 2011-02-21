@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@ package cc.kune.common.client.ui;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IndexedPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
@@ -31,14 +30,11 @@ import com.google.gwt.user.client.ui.Widget;
 public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidget {
 
     private final FlowPanel childPanel;
-    private final HorizontalPanel mainPanel;
 
     public FlowToolbar() {
         super();
-        mainPanel = new HorizontalPanel();
         childPanel = new FlowPanel();
-        mainPanel.add(childPanel);
-        initWidget(mainPanel);
+        initWidget(childPanel);
     }
 
     @Override
@@ -63,7 +59,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
     @Override
     public Widget addSeparator() {
         final Label emptyLabel = new Label("");
-        emptyLabel.setStyleName("ytb-sep-FIXMEEE");
+        emptyLabel.setStyleName("k-tb-sep");
         emptyLabel.addStyleName("oc-tb-sep");
         emptyLabel.addStyleName("oc-floatleft");
         this.add(emptyLabel);
@@ -139,7 +135,6 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
 
     @Override
     public void setHeight(final String height) {
-        mainPanel.setHeight(height);
         childPanel.setHeight(height);
     }
 

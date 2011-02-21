@@ -83,8 +83,8 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     }
 
     @Override
-    public Object getItem() {
-        return getValue(ITEM);
+    public Object getTarget() {
+        return getValue(TARGET);
     }
 
     /**
@@ -130,8 +130,8 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     }
 
     @Override
-    public boolean hasItem() {
-        return getValue(ITEM) != null;
+    public boolean hasTarget() {
+        return getValue(TARGET) != null;
     }
 
     @Override
@@ -171,8 +171,8 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     }
 
     @Override
-    public void setItem(final Object object) {
-        putValue(ITEM, object);
+    public void setTarget(final Object object) {
+        putValue(TARGET, object);
     }
 
     /**

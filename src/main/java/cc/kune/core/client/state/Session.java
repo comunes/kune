@@ -66,7 +66,7 @@ public interface Session {
      */
     int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
 
-    String USERHASH = "userHash";
+    String USERHASH = "k007userHash";
 
     void check(AsyncCallbackSimple<Void> callback);
 
@@ -141,15 +141,27 @@ public interface Session {
     @Deprecated
     void onInitDataReceived(Listener<InitDataDTO> listener);
 
+    /**
+     * @param fireNow
+     *            if @true the handler is fired after added if the user is
+     *            loggedin
+     * @param handler
+     */
+    void onUserSignIn(boolean fireNow, UserSignInEvent.UserSignInHandler handler);
+
     @Deprecated
     void onUserSignIn(Listener<UserInfoDTO> listener);
 
-    void onUserSignIn(UserSignInEvent.UserSignInHandler handler);
+    /**
+     * @param fireNow
+     *            if @true the handler is fired after added if the user is
+     *            loggedin
+     * @param handler
+     */
+    void onUserSignOut(boolean fireNow, UserSignOutEvent.UserSignOutHandler handler);
 
     @Deprecated
     void onUserSignOut(Listener0 listener);
-
-    void onUserSignOut(UserSignOutEvent.UserSignOutHandler handler);
 
     void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
 

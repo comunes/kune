@@ -21,6 +21,7 @@ package cc.kune.common.client.actions.ui;
 
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
+import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.bind.GuiBinding;
@@ -101,6 +102,14 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
                 }
             }
         };
+    }
+
+    protected Object getTargetObjectOfAction(final GuiActionDescrip descriptor) {
+        // If the action is associated with a item (like a Group, a
+        // group shortname, a username, etc) we pass this item to
+        // the action, if not we only pass the menuitem
+        return descriptor.hasTarget() ? descriptor.getTarget()
+                : descriptor.isChild() ? descriptor.getParent().getTarget() : ActionEvent.NO_TARGET;
     }
 
     protected abstract void setEnabled(boolean enabled);

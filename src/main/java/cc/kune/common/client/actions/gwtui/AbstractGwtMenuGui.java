@@ -75,6 +75,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.create(descriptor);
         menu = new MenuBar(true);
+        menu.setFocusOnHoverEnabled(true);
         menu.setAnimationEnabled(true);
         descriptor.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
@@ -90,8 +91,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
-                    final String id = (String) descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO);
-                    show(id);
+                    show(descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO));
                 }
             }
         });
@@ -100,7 +100,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
 
     private PopupPanel createPopup() {
         popup = new PopupPanel(true);
-        popup.addStyleName("oc-menu");
+        popup.setStyleName("oc-menu");
         popup.add(menu);
         popup.addCloseHandler(new CloseHandler<PopupPanel>() {
             @Override
@@ -109,6 +109,10 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
             }
         });
         return popup;
+    }
+
+    public void hide() {
+        popup.hide();
     }
 
     @Override

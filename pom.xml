@@ -272,16 +272,18 @@
       <artifactId>gwt-fx</artifactId>
       <version>r464</version>
     </dependency>
+		<!--
     <dependency>
       <groupId>com.jhickman.web.gwt</groupId>
       <artifactId>gwt-customuibinder</artifactId>
       <version>0.1</version>
     </dependency>
+		
     <dependency>
       <groupId>com.jhickman.web.gwt</groupId>
       <artifactId>gxt-uibinder</artifactId>
       <version>0.6</version>
-    </dependency>
+			</dependency>-->
     <!-- cc -->
     <dependency>
       <groupId>com.gwtext</groupId>
@@ -343,7 +345,7 @@
     <dependency>
       <groupId>com.calclab.emite</groupId>
       <artifactId>hablar</artifactId>
-      <version>r1694</version>
+      <version>r1697</version>
     </dependency>
     <dependency>
       <groupId>org.jivesoftware.smack</groupId>

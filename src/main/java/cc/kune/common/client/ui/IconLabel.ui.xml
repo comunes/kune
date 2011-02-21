@@ -16,10 +16,10 @@
     }
   </ui:style>
   <g:FocusPanel ui:field="self">
-    <g:HorizontalPanel styleName="{style.pad}"
-      ui:field="hp">
-    	<g:InlineLabel ui:field="icon"/>
-    	<g:InlineLabel ui:field="label" styleName="{style.label}" />
-    </g:HorizontalPanel>
+    <g:FlowPanel styleName="{style.pad}"
+      ui:field="flow">
+      <g:Image ui:field="icon"/>
+      <g:InlineLabel ui:field="label" styleName="{style.label}" />
+    </g:FlowPanel>
   </g:FocusPanel>
 </ui:UiBinder>

@@ -64,14 +64,15 @@ public class SitebarSignInLink extends ButtonDescriptor {
         // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
         setId(SITE_SIGN_IN);
         setVisible(!session.isLogged());
-        setStyles("k-no-backimage, k-btn-sitebar");
-        eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
+        setStyles("k-no-backimage, k-btn-sitebar, k-fl");
+        setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+        session.onUserSignIn(true, new UserSignInHandler() {
             @Override
             public void onUserSignIn(final UserSignInEvent event) {
                 SitebarSignInLink.this.setVisible(false);
             }
         });
-        eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutHandler() {
+        session.onUserSignOut(true, new UserSignOutHandler() {
             @Override
             public void onUserSignOut(final UserSignOutEvent event) {
                 SitebarSignInLink.this.setVisible(true);

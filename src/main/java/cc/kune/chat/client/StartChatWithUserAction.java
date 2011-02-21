@@ -1,6 +1,5 @@
-package cc.kune.core.client.sn.actions;
+package cc.kune.chat.client;
 
-import cc.kune.chat.client.ChatClient;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 

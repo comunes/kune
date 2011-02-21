@@ -32,5 +32,7 @@ public class ChatGinModule extends AbstractPresenterModule {
     protected void configure() {
         bind(ChatClient.class).to(ChatClientDefault.class).in(Singleton.class);
         bind(ChatOptions.class).in(Singleton.class);
+        bind(ChatSitebarActions.class).in(Singleton.class);
+        bind(ChatParts.class).asEagerSingleton();
     }
 }

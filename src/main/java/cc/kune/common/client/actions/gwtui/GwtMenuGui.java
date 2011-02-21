@@ -27,6 +27,7 @@ import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
@@ -41,6 +42,14 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
 
     public GwtMenuGui(final MenuDescriptor descriptor) {
         super(descriptor);
+    }
+
+    @Override
+    protected void addStyle(final String style) {
+        if (notStandAlone) {
+            iconLabel.addStyleName(style);
+            layout();
+        }
     }
 
     @Override
@@ -85,6 +94,14 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     public void setEnabled(final boolean enabled) {
         if (notStandAlone) {
             button.setVisible(enabled);
+        }
+    }
+
+    @Override
+    public void setIconResource(final ImageResource resource) {
+        if (notStandAlone) {
+            iconLabel.setIconResource(resource);
+            layout();
         }
     }
 

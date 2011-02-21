@@ -29,6 +29,8 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.resources.CoreResources;
@@ -108,14 +110,12 @@ public class SitebarActionsPresenter extends
     public void onAppStart(final AppStartEvent event) {
         final IsActionExtensible right = getView().getRightBar();
         OPTIONS_MENU.putValue(Action.NAME, i18n.t("Options"));
-        // OPTIONS_MENU.putValue(Action.SMALL_ICON, res.arrowDownBlack());
-        // OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
-        OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
+        OPTIONS_MENU.putValue(Action.SMALL_ICON, res.arrowDownSitebar());
+        OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
+        OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar, k-fl");
         OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
-        // final ToolbarSeparatorDescriptor separator = new
-        // ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
-        // final ToolbarSeparatorDescriptor separator2 = new
-        // ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
+        final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
+        final ToolbarSeparatorDescriptor separator2 = new ToolbarSeparatorDescriptor(Type.separator, RIGHT_TOOLBAR);
 
         final MenuSeparatorDescriptor menuSeparator = new MenuSeparatorDescriptor(OPTIONS_MENU);
         final AbstractExtendedAction bugsAction = new AbstractExtendedAction() {
@@ -151,12 +151,12 @@ public class SitebarActionsPresenter extends
         // aboutAction.setShortcut(shortcut);
         // shortcutReg.put(shortcut, aboutAction);
 
-        right.addAction(OPTIONS_MENU);
         right.addAction(signInLink.get());
         right.addAction(signOutLink.get());
-        // right.addAction(separator2);
+        right.addAction(separator2);
         right.addAction(newGroupLink.get());
-        // right.addAction(separator);
+        right.addAction(separator);
+        right.addAction(OPTIONS_MENU);
         right.addAction(reportBugs);
         right.addAction(gotoKuneDevSite);
         right.addAction(menuSeparator);

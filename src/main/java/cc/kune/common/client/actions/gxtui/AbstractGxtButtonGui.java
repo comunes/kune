@@ -74,7 +74,7 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
         button.addSelectionListener(new SelectionListener<ButtonEvent>() {
             @Override
             public void componentSelected(final ButtonEvent event) {
-                descriptor.fire(new ActionEvent(button, Event.as(event.getEvent())));
+                descriptor.fire(new ActionEvent(button, getTargetObjectOfAction(descriptor), Event.as(event.getEvent())));
             }
         });
         if (!descriptor.isChild()) {

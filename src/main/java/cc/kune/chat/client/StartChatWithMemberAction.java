@@ -1,6 +1,5 @@
-package cc.kune.core.client.sn.actions;
+package cc.kune.chat.client;
 
-import cc.kune.chat.client.ChatClient;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -15,7 +14,6 @@ import com.google.inject.Provider;
 
 public class StartChatWithMemberAction extends AbstractExtendedAction {
     private final Provider<ChatClient> chatClient;
-
     private final I18nTranslationService i18n;
 
     @Inject
@@ -31,7 +29,7 @@ public class StartChatWithMemberAction extends AbstractExtendedAction {
     public void actionPerformed(final ActionEvent event) {
         chatClient.get().show();
         if (chatClient.get().isLoggedIn()) {
-            chatClient.get().chat(XmppURI.jid(((GroupDTO) event.getSource()).getShortName()));
+            chatClient.get().chat(XmppURI.jid(((GroupDTO) event.getTarget()).getShortName()));
         } else {
             NotifyUser.important(i18n.t("To start a chat you need to be 'online'"));
         }

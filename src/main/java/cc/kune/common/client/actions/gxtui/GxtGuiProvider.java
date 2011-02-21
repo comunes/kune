@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
@@ -43,12 +44,14 @@ public class GxtGuiProvider {
             final Provider<GxtMenuGui> gxtMenuGui, final Provider<GxtMenuItemGui> gxtMenuItemGui,
             final Provider<GxtMenuSeparatorGui> gxtMenuSeparatorGui, final Provider<GxtPushButtonGui> gxtPushButtonGui,
             final Provider<GxtButtonGui> gxtButtonGui, final Provider<GwtIconLabelGui> gwtIconLabelGui,
-            final Provider<GxtToolbarGui> gxtToolbarGui, final Provider<GxtToolbarSeparatorGui> gxtToolbarSeparatorGui) {
+            final Provider<GxtToolbarGui> gxtToolbarGui, final Provider<GxtToolbarSeparatorGui> gxtToolbarSeparatorGui,
+            final Provider<GxtMenuTitleItemGui> gxtMenuTitleItemGui) {
 
         guiProvider.register(SubMenuDescriptor.class, gxtSubMenuGui);
         guiProvider.register(MenuDescriptor.class, gxtMenuGui);
         guiProvider.register(MenuRadioItemDescriptor.class, gxtMenuItemGui);
         guiProvider.register(MenuCheckItemDescriptor.class, gxtMenuItemGui);
+        guiProvider.register(MenuTitleItemDescriptor.class, gxtMenuTitleItemGui);
         guiProvider.register(MenuItemDescriptor.class, gxtMenuItemGui);
         guiProvider.register(MenuSeparatorDescriptor.class, gxtMenuSeparatorGui);
         guiProvider.register(PushButtonDescriptor.class, gxtPushButtonGui);

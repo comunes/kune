@@ -370,16 +370,27 @@ a:visited {
     margin-top: 2px;
 }
 
-.x-btn button {
-    font: 18px/27px 'Ubuntu', arial;
+.x-btn button,button { /* font: 18px/27px 'Ubuntu', arial; */
+
 }
 
-.k-btn-sitebar,.k-btn-sitebar button {
+.k-btn-sitebar span,.k-btn-sitebar button span,.k-sitebar button span {
+    text-decoration: underline;
+}
+
+.k-btn-sitebar,.k-btn-sitebar button,.k-sitebar button {
     font: 13px 'Ubuntu', arial;
     color: #B3B3B3;
     cursor: pointer;
-    text-decoration: underline;
     white-space: nowrap;
+    background: none;
+    border: 0px;
+    padding: 0 3px 0 0 !important;
+}
+
+.k-sitebar button:hover {
+    border: 0px;
+    background: none;
 }
 
 .k-btn-sitebar button {
@@ -800,7 +811,7 @@ a:visited {
     white-space: nowrap;
 }
 */
-.k-sn-mainpanel .x-btn button {
+.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button {
     font: 13px 'Ubuntu', arial;
     border: 2px solid #CCCCCC;
     cursor: pointer;
@@ -815,6 +826,7 @@ a:visited {
     vertical-align: middle;
     line-height: 2em !important;
     height: 26px !important;
+    font-weight: bold;
     /*
 font-size:small;
     cursor: pointer;
@@ -822,13 +834,13 @@ font-size:small;
     padding-left: 25px !important; */
 }
 
-.k-sn-mainpanel .x-btn button:hover {
+.k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover {
     border: 2px orange solid;
     background: #f0f0f0;
     color: #855585;
 }
 
-.k-sn-mainpanel .x-btn button:active {
+.k-sn-mainpanel .x-btn button:active,.k-sn-mainpanel button:active {
     border-top-color: #ffffff;
     background: #ffffff;
 }
@@ -923,6 +935,7 @@ font-size:small;
     font-size: 16px;
     color: #784421;
 }
+
 .k-footer-license-label-title {
     margin-right: 5px;
     color: #280b0b;

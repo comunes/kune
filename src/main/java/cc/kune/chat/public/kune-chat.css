@@ -1,147 +1,144 @@
 /* hablar: Examples.css */
-/* html {border: 0; padding: 0; height: 100%; width: 100%; overflow: hidden;} */
-
+    /* html {border: 0; padding: 0; height: 100%; width: 100%; overflow: hidden;} */
 #center {
-	position: absolute;
-	left: 50%;
-	top: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
 
 #playground {
-	position: absolute;
-	width: 900px;
-	height: 500px;
-	left: -450px;
-	top: -250px;
-	background-color: #e9e9e9;
-	border: 1px solid #bbbbbb;
-	padding: 5px;
+    position: absolute;
+    width: 900px;
+    height: 500px;
+    left: -450px;
+    top: -250px;
+    background-color: #e9e9e9;
+    border: 1px solid #bbbbbb;
+    padding: 5px;
 }
 
 .hablar {
-	padding: 1px;
-	background-color: #bBBBBB;
+    padding: 1px;
+    background-color: #bBBBBB;
 }
 
 #vertical_div {
-	position: absolute;
-	left: -150px;
-	width: 300px;
-	top: 5%;
-	height: 90%;
+    position: absolute;
+    left: -150px;
+    width: 300px;
+    top: 5%;
+    height: 90%;
 }
 
 #hablar_complete {
-	position: fixed; overflow: hidden;
-	left: 5px;
-	top: 5px;
-	right: 5px;
-	bottom: 5px;
-	background-color: #BBBBBB;
+    position: fixed;
+    overflow: hidden;
+    left: 5px;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    background-color: #BBBBBB;
 }
 
 #vertical_dock_div {
-	position: absolute;
-	left: -250px;
-	width: 500px;
-	top: 5%;
-	height: 90%;
+    position: absolute;
+    left: -250px;
+    width: 500px;
+    top: 5%;
+    height: 90%;
 }
 
 #horizontal_div {
-	position: absolute;
-	left: -350px;
-	width: 700px;
-	top: 15%;
-	height: 70%;
+    position: absolute;
+    left: -350px;
+    width: 700px;
+    top: 15%;
+    height: 70%;
 }
 
 /* End of hablar: Examples.css */
-
 .k-chat-icon {
-	
+    margin-top: 3px;
 }
 
 .k-chat-window {
-	background-color: #FFF;
+    background-color: #FFF;
 }
 
 .k-chat-panel {
-	margin: 5px;
-	background-color: #FFF; /* !important;*/
-	/*	kfilter: alpha(opacity =         88) !important;*/
-	/*	-moz-opacity: 0.88 !important;*/
-	/*	-khtml-opacity: 0.88 !important;*/ /*	opacity: 0.88 !important;*/
+    margin: 5px;
+    background-color: #FFF; /* !important;*/
+    /*	kfilter: alpha(opacity =         88) !important;*/
+    /*	-moz-opacity: 0.88 !important;*/
+    /*	-khtml-opacity: 0.88 !important;*/ /*	opacity: 0.88 !important;*/
 }
 
 .hablar-HablarWidget {
-	background-color: #888;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+    background-color: #888;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .gwt-Button {
-	text-shadow: 1px 1px 1px #FFFFFF;
-	font-weight: bold;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+    text-shadow: 1px 1px 1px #FFFFFF;
+    font-weight: bold;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .gwt-TextBox,.gwt-TextArea {
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .hablar-defaultBackground,.hablar-UserWidget,.hablar-defaultBordered {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
-.hablar-Header {
-/*	-webkit-border-top-right-radius: 5px;*/
-/*	-moz-border-radius-topright: 5px;*/
-/*	border-top-right-radius: 5px;*/
-/*	-webkit-border-top-left-radius: 5px;*/
-/*	-moz-border-radius-topleft: 5px;*/
-/*	border-top-left-radius: 5px;*/
+.hablar-Header { /*	-webkit-border-top-right-radius: 5px;*/
+    /*	-moz-border-radius-topright: 5px;*/
+    /*	border-top-right-radius: 5px;*/
+    /*	-webkit-border-top-left-radius: 5px;*/
+    /*	-moz-border-radius-topleft: 5px;*/
+    /*	border-top-left-radius: 5px;*/
+
 }
 
 .hablar-errorColor {
-	line-height: 2.5em;
+    line-height: 2.5em;
 }
 
 .form h2 {
-	font-size: 22px;
-	font-weight: bold;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .gwt-TabLayoutPanel,.gwt-TabLayoutPanelTab,.hablar-TabsHeaderWidget {
-	-webkit-border-top-right-radius: 5px;
-	-moz-border-radius-topright: 5px;
-	border-top-right-radius: 5px;
-	-webkit-border-top-left-radius: 5px;
-	-moz-border-radius-topleft: 5px;
-	border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
 }
 
 .hablar-ChatWidget {
-	-webkit-border-bottom-right-radius: 5px;
-	-moz-border-radius-bottomright: 5px;
-	border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  -moz-binding: url('/ws/ellipsis.xml#ellipsis');
-  width: 100%
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('/ws/ellipsis.xml#ellipsis');
+    width: 100%
 }
-
-

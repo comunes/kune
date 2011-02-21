@@ -71,9 +71,8 @@ public class KuneHablarSignals {
 
     // FIXME: move to gin
     @SuppressWarnings("deprecation")
-    public KuneHablarSignals(final Hablar hablar, final ChatClientAction action) {
+    public KuneHablarSignals(final XmppSession session, final Hablar hablar, final ChatClientAction action) {
         final HablarEventBus eventBus = hablar.getEventBus();
-        final XmppSession session = Suco.get(XmppSession.class);
         final PrivateStorageManager storageManager = Suco.get(PrivateStorageManager.class);
 
         final HasText titleDisplay = new HasText() {

@@ -21,12 +21,15 @@ package cc.kune.core.client.resources.icons;
 
 import com.google.gwt.resources.client.ImageResource;
 
+@Deprecated
 public final class IconConstants {
 
+    @Deprecated
     public static final String CSS_SUFFIX = "k-icon-";
 
-    public static final String PATH_PREFIX = "images/";
+    private static final String PATH_PREFIX = "images/";
 
+    @Deprecated
     public static String toPath(final ImageResource img) {
         return PATH_PREFIX + img.getName() + ".png";
     }

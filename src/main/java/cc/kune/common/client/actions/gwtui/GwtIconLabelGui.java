@@ -63,7 +63,8 @@ public class GwtIconLabelGui extends AbstractGuiItem {
             public void onClick(final ClickEvent event) {
                 final AbstractAction action = descriptor.getAction();
                 if (action != null) {
-                    action.actionPerformed(new ActionEvent(iconLabel, Event.as(event.getNativeEvent())));
+                    action.actionPerformed(new ActionEvent(iconLabel, getTargetObjectOfAction(descriptor),
+                            Event.as(event.getNativeEvent())));
                 }
             }
         });

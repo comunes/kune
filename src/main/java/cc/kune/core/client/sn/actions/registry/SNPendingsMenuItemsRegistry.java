@@ -8,7 +8,6 @@ import cc.kune.core.client.sn.actions.DenyJoinGroupAction;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.sn.actions.GotoPersonAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
-import cc.kune.core.client.sn.actions.StartChatWithUserAction;
 import cc.kune.core.client.sn.actions.conditions.IsAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
@@ -24,8 +23,8 @@ public class SNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistr
             final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
             final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
             final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
-            final DenyJoinGroupAction denyJoinGroupAction, final StartChatWithUserAction startChatWithUserAction,
-            final GotoGroupAction gotoGroupAction, final GotoPersonAction gotoPersonAction) {
+            final DenyJoinGroupAction denyJoinGroupAction, final GotoGroupAction gotoGroupAction,
+            final GotoPersonAction gotoPersonAction) {
         add(new Provider<MenuItemDescriptor>() {
             @Override
             public MenuItemDescriptor get() {
@@ -55,14 +54,6 @@ public class SNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistr
             public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(gotoGroupAction);
                 item.add(isGroupCondition);
-                return item;
-            }
-        });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithUserAction);
-                item.add(isPersonCondition);
                 return item;
             }
         });

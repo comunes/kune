@@ -302,23 +302,29 @@ public class SessionDefault implements Session {
     }
 
     @Override
+    public void onUserSignIn(final boolean fireNow, final UserSignInHandler handler) {
+        eventBus.addHandler(UserSignInEvent.getType(), handler);
+        if (fireNow && isLogged() && currentUserInfo != null) {
+            handler.onUserSignIn(new UserSignInEvent(currentUserInfo));
+        }
+    }
+
+    @Override
     public void onUserSignIn(final Listener<UserInfoDTO> listener) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void onUserSignIn(final UserSignInHandler handler) {
-        eventBus.addHandler(UserSignInEvent.getType(), handler);
+    public void onUserSignOut(final boolean fireNow, final UserSignOutHandler handler) {
+        eventBus.addHandler(UserSignOutEvent.getType(), handler);
+        if (fireNow && isNotLogged()) {
+            handler.onUserSignOut(new UserSignOutEvent());
+        }
     }
 
     @Override
     public void onUserSignOut(final Listener0 listener) {
         throw new NotImplementedException();
-    }
-
-    @Override
-    public void onUserSignOut(final UserSignOutHandler handler) {
-        eventBus.addHandler(UserSignOutEvent.getType(), handler);
     }
 
     @Override

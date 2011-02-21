@@ -41,7 +41,6 @@ import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
 import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.resources.icons.IconResources;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
@@ -56,7 +55,6 @@ import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.reconnect.client.SessionReconnect;
 import com.calclab.emite.xep.avatar.client.AvatarManager;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
@@ -90,7 +88,7 @@ public class ChatClientDefault implements ChatClient {
             this.eventBus = eventBus;
             this.res = res;
             res.css().ensureInjected();
-            putValue(Action.SMALL_ICON, res.chatBlink());
+            putValue(Action.SMALL_ICON, res.chat());
 
         }
 
@@ -124,17 +122,22 @@ public class ChatClientDefault implements ChatClient {
     public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n, final ChatClientAction action,
             final SitebarActionsPresenter siteActions, final Session session,
             final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions) {
+
+        // , final XmppSession xmppSession,
+        // final XmppRoster roster, final ChatManager chatManager, final
+        // RoomManager roomManager,
+        // final SessionReconnect sessionReconnect, final
+        // Provider<AvatarManager> avatarManager) {
         this.i18n = i18n;
         this.action = action;
         this.siteActions = siteActions;
         this.session = session;
         this.shorcutRegister = shorcutRegister;
         this.chatOptions = chatOptions;
-        roster = Suco.get(XmppRoster.class);
-        xmppSession = Suco.get(XmppSession.class);
-        chatManager = Suco.get(ChatManager.class);
-        roomManager = Suco.get(RoomManager.class);
-        Suco.get(SessionReconnect.class);
+        this.xmppSession = Suco.get(XmppSession.class);
+        this.roster = Suco.get(XmppRoster.class);
+        this.chatManager = Suco.get(ChatManager.class);
+        this.roomManager = Suco.get(RoomManager.class);
 
         eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
             @Override
@@ -143,21 +146,21 @@ public class ChatClientDefault implements ChatClient {
                 chatOptions.httpBase = event.getInitData().getChatHttpBase();
                 chatOptions.roomHost = event.getInitData().getChatRoomHost();
                 checkChatDomain(chatOptions.domain);
-                if (session.isLogged()) {
-                    session.check(new AsyncCallbackSimple<Void>() {
-                        @Override
-                        public void onSuccess(final Void result) {
-                            doLogin(session.getCurrentUserInfo());
-                        }
-                    });
-                }
-                eventBus.addHandler(UserSignInEvent.getType(), new UserSignInHandler() {
+                // if (session.isLogged()) {
+                // session.check(new AsyncCallbackSimple<Void>() {
+                // @Override
+                // public void onSuccess(final Void result) {
+                // doLogin();
+                // }
+                // });
+                // }
+                session.onUserSignIn(true, new UserSignInHandler() {
                     @Override
                     public void onUserSignIn(final UserSignInEvent event) {
-                        doLogin(session.getCurrentUserInfo());
+                        doLogin();
                     }
                 });
-                eventBus.addHandler(UserSignOutEvent.getType(), new UserSignOutHandler() {
+                session.onUserSignOut(true, new UserSignOutHandler() {
                     @Override
                     public void onUserSignOut(final UserSignOutEvent event) {
                         createActionIfNeeded();
@@ -255,6 +258,12 @@ public class ChatClientDefault implements ChatClient {
         return popup != null && popup.isShowing();
     }
 
+    @Override
+    public void doLogin() {
+        assert session.getCurrentUserInfo() != null;
+        doLogin(session.getCurrentUserInfo());
+    }
+
     private void doLogin(final UserInfoDTO user) {
         createActionIfNeeded();
         createDialogIfNeeded();
@@ -282,9 +291,8 @@ public class ChatClientDefault implements ChatClient {
         final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
         final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
         final Hablar hablar = widget.getHablar();
-
         HablarComplete.install(hablar, config);
-        new KuneHablarSignals(hablar, action);
+        new KuneHablarSignals(xmppSession, hablar, action);
         if (htmlConfig.hasLogger) {
             new HablarConsole(hablar);
         }
@@ -336,6 +344,15 @@ public class ChatClientDefault implements ChatClient {
     @Override
     public void login(final XmppURI uri, final String passwd) {
         xmppSession.login(uri, passwd);
+    }
+
+    @Override
+    public boolean loginIfNecessary() {
+        if (!isLoggedIn()) {
+            doLogin();
+            return true;
+        }
+        return false;
     }
 
     @Override

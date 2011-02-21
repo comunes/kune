@@ -130,7 +130,7 @@ public class GroupMembersPresenter extends
         final GuiActionDescCollection items = new GuiActionDescCollection();
         for (final Provider<MenuItemDescriptor> provider : registry) {
             final MenuItemDescriptor menuItem = provider.get();
-            menuItem.setItem(group);
+            menuItem.setTarget(group);
             items.add(menuItem);
         }
         return items;

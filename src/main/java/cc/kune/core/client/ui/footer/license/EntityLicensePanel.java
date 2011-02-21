@@ -72,8 +72,11 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
         });
         licenseImage.addStyleName("k-footer-license-img");
         licenseLabel.addStyleName("k-footer-license-label");
+        licenseLabel.setVisible(false);
         armor.getEntityFooter().add(licenseBar);
         labelElement = licenseLabel.getElement();
+        labelElement.getStyle().setOpacity(0);
+        licenseLabel.setVisible(true);
     }
 
     @Override
@@ -92,9 +95,11 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     }
 
     private void fade() {
-        final Fade fade = new Fade(labelElement);
-        fade.setDuration(.5);
-        fade.play();
+        if ("1".equals(labelElement.getStyle().getOpacity())) {
+            final Fade fade = new Fade(labelElement);
+            fade.setDuration(.5);
+            fade.play();
+        }
     }
 
     @Override

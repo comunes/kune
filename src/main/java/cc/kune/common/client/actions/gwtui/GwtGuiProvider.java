@@ -27,6 +27,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
@@ -42,12 +43,14 @@ public class GwtGuiProvider {
             final Provider<GwtMenuGui> gwtMenuGui, final Provider<GwtMenuItemGui> gwtMenuItemGui,
             final Provider<GwtMenuSeparatorGui> gwtMenuSeparatorGui, final Provider<GwtPushButtonGui> gwtPushButtonGui,
             final Provider<GwtButtonGui> gwtButtonGui, final Provider<GwtIconLabelGui> gwtIconLabelGui,
-            final Provider<GwtToolbarGui> gwtToolbarGui, final Provider<GwtToolbarSeparatorGui> gwtToolbarSeparatorGui) {
+            final Provider<GwtToolbarGui> gwtToolbarGui, final Provider<GwtToolbarSeparatorGui> gwtToolbarSeparatorGui,
+            final Provider<GwtMenuTitleItemGui> gwtMenuTitleItemGui) {
 
         guiProvider.register(SubMenuDescriptor.class, gwtSubMenuGui);
         guiProvider.register(MenuDescriptor.class, gwtMenuGui);
         guiProvider.register(MenuRadioItemDescriptor.class, gwtMenuItemGui);
         guiProvider.register(MenuCheckItemDescriptor.class, gwtMenuItemGui);
+        guiProvider.register(MenuTitleItemDescriptor.class, gwtMenuTitleItemGui);
         guiProvider.register(MenuItemDescriptor.class, gwtMenuItemGui);
         guiProvider.register(MenuSeparatorDescriptor.class, gwtMenuSeparatorGui);
         guiProvider.register(PushButtonDescriptor.class, gwtPushButtonGui);

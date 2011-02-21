@@ -31,9 +31,11 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.IconLabel;
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -67,7 +69,6 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         iconLabel = new IconLabel("");
-        iconLabel.addTextStyleName("oc-ico-pad");
         if (descriptor instanceof MenuRadioItemDescriptor) {
             final GwtCheckItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
             checkItem.setGroup(((MenuRadioItemDescriptor) descriptor).getGroup());
@@ -77,6 +78,9 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
             final GwtCheckItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
             confCheckListener((MenuItemDescriptor) descriptor, checkItem);
             item = checkItem;
+        } else if (descriptor instanceof MenuTitleItemDescriptor) {
+            item = new GwtBaseMenuItem("", true);
+            item.setStyleName("k-menuimtem-title");
         } else {
             item = new GwtBaseMenuItem("", true);
         }
@@ -89,16 +93,18 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
         item.setCommand(new Command() {
             @Override
             public void execute() {
+                getParentMenu(descriptor).hide();
                 final AbstractAction action = descriptor.getAction();
                 if (action != null) {
-                    descriptor.getAction().actionPerformed(new ActionEvent(item, Event.getCurrentEvent()));
+                    descriptor.getAction().actionPerformed(
+                            new ActionEvent(item, getTargetObjectOfAction(descriptor), Event.getCurrentEvent()));
                 }
             }
         });
         configureItemFromProperties();
 
         final int position = descriptor.getPosition();
-        final AbstractGwtMenuGui menu = ((AbstractGwtMenuGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
+        final AbstractGwtMenuGui menu = getParentMenu(descriptor);
         if (menu == null) {
             throw new UIException("To add a menu item you need to add the menu before. Item: " + descriptor);
         }
@@ -128,6 +134,10 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
         return item;
     }
 
+    private AbstractGwtMenuGui getParentMenu(final GuiActionDescrip descriptor) {
+        return ((AbstractGwtMenuGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
+    }
+
     private void layout() {
         item.setHTML(iconLabel.toString());
     }
@@ -135,6 +145,15 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     @Override
     protected void setEnabled(final boolean enabled) {
         item.setVisible(enabled);
+        item.setEnabled(enabled);
+        iconLabel.setVisible(enabled);
+        layout();
+    }
+
+    @Override
+    public void setIconResource(final ImageResource icon) {
+        iconLabel.setIconResource(icon);
+        layout();
     }
 
     @Override
@@ -167,6 +186,8 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     @Override
     public void setVisible(final boolean visible) {
         item.setVisible(visible);
+        iconLabel.setVisible(visible);
+        layout();
     }
 
     @Override

@@ -36,7 +36,6 @@
 	<classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-assisted-inject/2.0/guice-assisted-inject-2.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-persist/3.0-rc2/guice-persist-3.0-rc2.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-persist/3.0-rc2/guice-persist-3.0-rc2-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-servlet/3.0-rc2/guice-servlet-3.0-rc2.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-servlet/3.0-rc2/guice-servlet-3.0-rc2-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/jhickman/web/gwt/gwt-customuibinder/0.1/gwt-customuibinder-0.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/adamtacy/gwt-fx/r464/gwt-fx-r464.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-gin/1.0-r137/gwt-gin-1.0-r137.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/log/gwt-log/gwt-log/3.0.1/gwt-log-3.0.1.jar"/>
@@ -55,9 +54,8 @@
 	<classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-processors/0.5/gwtp-processors-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-processors/0.5/gwtp-processors-0.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-tester/0.5/gwtp-tester-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-tester/0.5/gwtp-tester-0.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/extjs/gxt/2.2.1/gxt-2.2.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/jhickman/web/gwt/gxt-uibinder/0.6/gxt-uibinder-0.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.0.20070617/h2-1.0.20070617.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/calclab/emite/hablar/r1694/hablar-r1694.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/calclab/emite/hablar/r1697/hablar-r1697.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-annotations/3.4.0.GA/hibernate-annotations-3.4.0.GA.jar" sourcepath="M2_REPO/org/hibernate/hibernate-annotations/3.4.0.GA/hibernate-annotations-3.4.0.GA-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-c3p0/3.3.1.GA/hibernate-c3p0-3.3.1.GA.jar" sourcepath="M2_REPO/org/hibernate/hibernate-c3p0/3.3.1.GA/hibernate-c3p0-3.3.1.GA-sources.jar"/>

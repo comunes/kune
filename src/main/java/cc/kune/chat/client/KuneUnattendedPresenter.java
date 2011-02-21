@@ -20,8 +20,11 @@
 package cc.kune.chat.client;
 
 import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
+import cc.kune.common.client.noti.NotifyUser;
 
+import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
+import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.signals.client.SignalPreferences;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedHandler;
@@ -42,7 +45,10 @@ public class KuneUnattendedPresenter {
                 final int unattendedChatsCount = unattendedManager.getSize();
                 if (unattendedChatsCount > 0 && active == false) {
                     active = true;
-                    action.setBlink(true);
+                    NotifyUser.info("Num: " + unattendedChatsCount, true);
+                    if (isChatPage(event.getPage().getType())) {
+                        action.setBlink(true);
+                    }
                 } else if (unattendedChatsCount == 0 && active == true) {
                     action.setBlink(false);
                     active = false;
@@ -50,5 +56,11 @@ public class KuneUnattendedPresenter {
             }
 
         });
+
     }
+
+    private boolean isChatPage(final String pageType) {
+        return pageType.equals(PairChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
+    }
+
 }

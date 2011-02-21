@@ -21,6 +21,6 @@ public class IsNotMeCondition implements GuiAddCondition {
     @Override
     public boolean mustBeAdded(final GuiActionDescrip descr) {
         return (session.isLogged() && !session.getCurrentUser().getShortName().equals(
-                ((GroupDTO) descr.getItem()).getShortName()));
+                ((GroupDTO) descr.getTarget()).getShortName()));
     }
 }

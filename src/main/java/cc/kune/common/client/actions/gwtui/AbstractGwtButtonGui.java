@@ -30,6 +30,7 @@ import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
@@ -56,6 +57,12 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     }
 
     @Override
+    protected void addStyle(final String style) {
+        iconLabel.addStyleName(style);
+        layout();
+    }
+
+    @Override
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         iconLabel = new IconLabel("");
@@ -64,7 +71,9 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
         } else {
             button = new Button();
         }
-        button.setStylePrimaryName("oc-button");
+        button.addStyleName("oc-button");
+        button.addStyleName("k-btn");
+        button.addStyleName("k-5corners");
         layout();
         // button.setEnableToggle(enableTongle);
         final String id = descriptor.getId();
@@ -83,7 +92,8 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
         button.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                descriptor.fire(new ActionEvent(button, Event.as(event.getNativeEvent())));
+                descriptor.fire(new ActionEvent(button, getTargetObjectOfAction(descriptor),
+                        Event.as(event.getNativeEvent())));
             }
         });
         super.create(descriptor);
@@ -98,6 +108,12 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     @Override
     public void setEnabled(final boolean enabled) {
         button.setEnabled(enabled);
+    }
+
+    @Override
+    public void setIconResource(final ImageResource icon) {
+        iconLabel.setIconResource(icon);
+        layout();
     }
 
     @Override
@@ -134,16 +150,12 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
 
     @Override
     public void setVisible(final boolean visible) {
-        if (!isChild) {
-            if (button.isAttached()) {
-                super.setVisible(visible);
-            }
-        }
+        button.setVisible(visible);
     }
 
     @Override
-    public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
-        return true;
+    public boolean shouldBeAdded() {
+        return !descriptor.isChild();
     }
 
 }

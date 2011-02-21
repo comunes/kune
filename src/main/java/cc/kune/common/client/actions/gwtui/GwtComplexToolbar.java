@@ -47,6 +47,7 @@ public class GwtComplexToolbar extends Composite implements IsWidget {
     }
 
     public void add(final UIObject uiObject) {
+        uiObject.addStyleName(getFlow());
         toolbar.add((Widget) uiObject);
     }
 
@@ -79,6 +80,7 @@ public class GwtComplexToolbar extends Composite implements IsWidget {
     }
 
     public void insert(final UIObject uiObject, final int position) {
+        uiObject.addStyleName(getFlow());
         toolbar.insert((Widget) uiObject, position);
     }
 

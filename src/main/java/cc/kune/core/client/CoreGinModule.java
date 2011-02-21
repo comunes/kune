@@ -185,6 +185,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(SNPendingsMenuItemsRegistry.class).in(Singleton.class);
         bind(GroupMembersActionsRegistry.class).in(Singleton.class);
 
+        bind(SiteUserOptionsPresenter.class).in(Singleton.class);
         bind(SiteUserOptions.class).to(SiteUserOptionsPresenter.class).in(Singleton.class);
         bind(SitebarNewGroupLink.class).in(Singleton.class);
         bind(SitebarSignInLink.class).in(Singleton.class);

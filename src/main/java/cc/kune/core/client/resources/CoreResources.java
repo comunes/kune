@@ -49,6 +49,9 @@ public interface CoreResources extends ClientBundle {
     @Source("arrow-down-green.png")
     ImageResource arrowDownGreen();
 
+    @Source("arrowdownsitebar.gif")
+    ImageResource arrowDownSitebar();
+
     @Source("arrow-down-white.gif")
     ImageResource arrowDownWhite();
 

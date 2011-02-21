@@ -98,8 +98,8 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
 
     @Override
     public void setContentGotoPublicUrl(final String publicUrl) {
-        frame.setUrl("about:blank");
-        // frame.setUrl(publicUrl);
+        // frame.setUrl("about:blank");
+        frame.setUrl(publicUrl);
     }
 
 }

@@ -24,13 +24,15 @@ import java.util.Iterator;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.i18n.client.HasDirection.Direction;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -42,9 +44,9 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     private static IconTitleUiBinder uiBinder = GWT.create(IconTitleUiBinder.class);
 
     @UiField
-    HorizontalPanel hp;
+    FlowPanel flow;
     @UiField
-    InlineLabel icon;
+    Image icon;
     @UiField
     InlineLabel label;
     @UiField
@@ -57,16 +59,18 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     public IconLabel(final String text) {
         initWidget(uiBinder.createAndBindUi(this));
         label.setText(text);
+        label.addStyleName("k-space-nowrap");
+        label.addStyleName("k-iconlabel-text");
     }
 
     @Override
     public void add(final Widget w) {
-        hp.add(w);
+        flow.add(w);
     }
 
     @Override
     public void addStyleName(final String style) {
-        hp.addStyleName(style);
+        flow.addStyleName(style);
     }
 
     public void addTextStyleName(final String style) {
@@ -75,7 +79,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
     @Override
     public void clear() {
-        hp.clear();
+        flow.clear();
     }
 
     public HasClickHandlers getFocus() {
@@ -94,17 +98,22 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
 
     @Override
     public Iterator<Widget> iterator() {
-        return hp.iterator();
+        return flow.iterator();
     }
 
     @Override
     public boolean remove(final Widget w) {
-        return hp.remove(w);
+        return flow.remove(w);
     }
 
     public void setIcon(final String imgCss) {
+        icon.setUrl("images/clear.gif");
         icon.setStyleName(imgCss);
         icon.addStyleName("oc-ico-pad");
+    }
+
+    public void setIconResource(final ImageResource res) {
+        icon.setResource(res);
     }
 
     public void setLabelText(final String text) {
