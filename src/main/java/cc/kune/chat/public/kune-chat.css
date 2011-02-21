@@ -61,8 +61,9 @@
     margin-top: 3px;
 }
 
-.k-chat-window {
-    background-color: #FFF;
+.k-chat-window { /* background-color: #FFF;
+    padding: 5px; */
+
 }
 
 .k-chat-panel {
@@ -74,7 +75,7 @@
 }
 
 .hablar-HablarWidget {
-    background-color: #888;
+    background-color: #F2F2F2;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -95,9 +96,9 @@
 }
 
 .hablar-defaultBackground,.hablar-UserWidget,.hablar-defaultBordered {
-    -moz-border-radius: 5px;
+    /* -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 5px; */
 }
 
 .hablar-Header { /*	-webkit-border-top-right-radius: 5px;*/
@@ -125,6 +126,10 @@
     -webkit-border-top-left-radius: 5px;
     -moz-border-radius-topleft: 5px;
     border-top-left-radius: 5px;
+}
+
+.hablar-TabsHeaderWidget {
+    margin: -1px;
 }
 
 .hablar-ChatWidget {

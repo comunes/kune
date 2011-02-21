@@ -20,6 +20,7 @@
 package cc.kune.pspace.client;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -65,10 +66,15 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
         super(eventBus, view, proxy);
         this.i18n = i18n;
         this.stateTokenUtils = stateTokenUtils;
-        eventBus.addHandler(StateChangedEvent.getType(), new StateChangedHandler() {
+        eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
             @Override
-            public void onStateChanged(final StateChangedEvent event) {
-                setState(event.getState());
+            public void onAppStart(final AppStartEvent event) {
+                eventBus.addHandler(StateChangedEvent.getType(), new StateChangedHandler() {
+                    @Override
+                    public void onStateChanged(final StateChangedEvent event) {
+                        setState(event.getState());
+                    }
+                });
             }
         });
     }

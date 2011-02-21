@@ -49,6 +49,7 @@ public class GxtToolbarSeparatorGui extends AbstractChildGuiItem {
             break;
         }
         super.create(descriptor);
+        configureItemFromProperties();
         return toolbar;
     }
 

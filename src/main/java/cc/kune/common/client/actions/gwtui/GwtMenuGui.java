@@ -37,13 +37,6 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     private IconLabel iconLabel;
     private boolean notStandAlone;
 
-    public GwtMenuGui() {
-    }
-
-    public GwtMenuGui(final MenuDescriptor descriptor) {
-        super(descriptor);
-    }
-
     @Override
     protected void addStyle(final String style) {
         if (notStandAlone) {

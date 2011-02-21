@@ -1,9 +1,12 @@
 package cc.kune.chat.client.resources;
 
 import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 
 public interface ChatResources extends ClientBundle {
+    public interface ChatIconCssResource extends CssResource {
+    }
 
     @Source("add.png")
     ImageResource add();
@@ -17,14 +20,23 @@ public interface ChatResources extends ClientBundle {
     @Source("cancel.png")
     ImageResource cancel();
 
-    @Source("chat.png")
+    @Source("e-icon.gif")
     ImageResource chat();
+
+    @Source("e-icon-a.gif")
+    ImageResource chatBlink();
 
     @Source("chat-new-message-small.png")
     ImageResource chatNewMessageSmall();
 
+    @Source("chat.png")
+    ImageResource chatNormal();
+
     @Source("chat-small.png")
     ImageResource chatSmall();
+
+    @Source("chat-icons.css")
+    ChatIconCssResource css();
 
     @Source("del.png")
     ImageResource del();

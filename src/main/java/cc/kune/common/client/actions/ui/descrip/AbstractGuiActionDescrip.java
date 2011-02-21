@@ -57,6 +57,8 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
      */
     public AbstractGuiActionDescrip(final AbstractAction action) {
         this.action = action;
+        putValue(Action.ENABLED, Boolean.TRUE);
+        putValue(VISIBLE, Boolean.TRUE);
         position = NO_POSITION;
         parent = NO_PARENT;
         addConditions = new ArrayList<GuiAddCondition>();
@@ -80,11 +82,6 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     @Override
     public String getId() {
         return id;
-    }
-
-    @Override
-    public Object getTarget() {
-        return getValue(TARGET);
     }
 
     /**
@@ -111,6 +108,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     @Override
     public int getPosition() {
         return position;
+    }
+
+    @Override
+    public Object getTarget() {
+        return getValue(TARGET);
     }
 
     @Override
@@ -162,17 +164,12 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
     @Override
     public void setEnabled(final boolean enabled) {
-        super.putValue(Action.ENABLED, enabled);
+        putValue(Action.ENABLED, enabled);
     }
 
     @Override
     public void setId(final String id) {
         this.id = id;
-    }
-
-    @Override
-    public void setTarget(final Object object) {
-        putValue(TARGET, object);
     }
 
     /**
@@ -208,6 +205,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     @Override
     public void setStyles(final String styles) {
         putValue(STYLES, styles);
+    }
+
+    @Override
+    public void setTarget(final Object object) {
+        putValue(TARGET, object);
     }
 
     @Override

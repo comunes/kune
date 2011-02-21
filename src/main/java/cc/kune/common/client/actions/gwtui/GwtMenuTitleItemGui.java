@@ -19,14 +19,6 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
-import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 
 public class GwtMenuTitleItemGui extends AbstractGwtMenuItemGui {
-    public GwtMenuTitleItemGui() {
-        super();
-    }
-
-    public GwtMenuTitleItemGui(final MenuTitleItemDescriptor descriptor) {
-        super(descriptor);
-    }
 }

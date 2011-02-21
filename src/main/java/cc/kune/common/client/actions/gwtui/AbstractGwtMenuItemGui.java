@@ -144,10 +144,8 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
 
     @Override
     protected void setEnabled(final boolean enabled) {
-        item.setVisible(enabled);
         item.setEnabled(enabled);
-        iconLabel.setVisible(enabled);
-        layout();
+        setVisible(enabled);
     }
 
     @Override

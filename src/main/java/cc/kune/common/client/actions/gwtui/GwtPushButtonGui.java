@@ -21,14 +21,16 @@ package cc.kune.common.client.actions.gwtui;
 
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
+import cc.kune.common.client.actions.ui.AbstractGuiItem;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 
 public class GwtPushButtonGui extends GwtButtonGui {
-    public GwtPushButtonGui() {
-    }
-
-    public GwtPushButtonGui(final PushButtonDescriptor btn) {
-        super(btn, true);
+    @Override
+    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+        super.descriptor = descriptor;
+        super.enableTongle = true;
+        final PushButtonDescriptor btn = (PushButtonDescriptor) descriptor;
         setPressed(btn.isPushed());
         btn.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
@@ -38,6 +40,7 @@ public class GwtPushButtonGui extends GwtButtonGui {
                 }
             }
         });
+        return this;
     }
 
 }

@@ -26,10 +26,15 @@ import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.errors.UIException;
 
+import com.google.gwt.user.client.ui.Widget;
+
 public class GwtToolbarSeparatorGui extends AbstractGuiItem {
+
+    private Widget widget;
 
     @Override
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+        super.descriptor = descriptor;
         final GwtToolbarGui toolbar = ((GwtToolbarGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
         if (toolbar == null) {
             throw new UIException("To add a toolbar separator you need to add the toolbar before. Item: " + descriptor);
@@ -37,17 +42,18 @@ public class GwtToolbarSeparatorGui extends AbstractGuiItem {
         final Type type = ((ToolbarSeparatorDescriptor) descriptor).getSeparatorType();
         switch (type) {
         case fill:
-            toolbar.addFill();
+            widget = toolbar.addFill();
             break;
         case spacer:
-            toolbar.addSpacer();
+            widget = toolbar.addSpacer();
             break;
         case separator:
-            toolbar.addSeparator();
+            widget = toolbar.addSeparator();
             break;
         default:
             break;
         }
+        configureItemFromProperties();
         return toolbar;
     }
 
@@ -65,6 +71,11 @@ public class GwtToolbarSeparatorGui extends AbstractGuiItem {
 
     @Override
     protected void setToolTipText(final String text) {
+    }
+
+    @Override
+    public void setVisible(final boolean visible) {
+        widget.setVisible(visible);
     }
 
     @Override

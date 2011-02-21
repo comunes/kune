@@ -21,7 +21,6 @@ package cc.kune.common.client.actions.gwtui;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.IconLabel;
 
@@ -31,13 +30,6 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
 
     private IconLabel iconLabel;
     private MenuItem item;
-
-    public GwtSubMenuGui() {
-    }
-
-    public GwtSubMenuGui(final AbstractGuiActionDescrip descriptor) {
-        super(descriptor);
-    }
 
     @Override
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -86,5 +78,7 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
     @Override
     public void setVisible(final boolean visible) {
         item.setVisible(visible);
+        iconLabel.setVisible(visible);
+        layout();
     }
 }

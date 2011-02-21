@@ -26,7 +26,6 @@ import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -35,13 +34,6 @@ import com.google.gwt.user.client.Event;
 
 public class GwtIconLabelGui extends AbstractGuiItem {
     private IconLabel iconLabel;
-
-    public GwtIconLabelGui() {
-    }
-
-    public GwtIconLabelGui(final IconLabelDescriptor iconLabelDescriptor) {
-        super(iconLabelDescriptor);
-    }
 
     @Override
     protected void addStyle(final String style) {
@@ -74,7 +66,7 @@ public class GwtIconLabelGui extends AbstractGuiItem {
 
     @Override
     public void setEnabled(final boolean enabled) {
-        // Not implemented
+        super.setVisible(enabled);
     }
 
     @Override

@@ -23,6 +23,8 @@ import java.util.Date;
 
 import cc.kune.chat.client.ShowChatDialogEvent.ShowChatDialogHandler;
 import cc.kune.chat.client.ToggleShowChatDialogEvent.ToggleShowChatDialogHandler;
+import cc.kune.chat.client.resources.ChatResources;
+import cc.kune.chat.client.snd.KuneSoundManager;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -34,13 +36,11 @@ import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
-import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
 import cc.kune.core.client.logs.Log;
-import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
@@ -50,7 +50,6 @@ import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.emite.browser.client.PageAssist;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
@@ -64,30 +63,32 @@ import com.calclab.hablar.HablarConfig;
 import com.calclab.hablar.console.client.HablarConsole;
 import com.calclab.hablar.core.client.Hablar;
 import com.calclab.hablar.core.client.HablarWidget;
+import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.html.client.HtmlConfig;
-import com.calclab.hablar.icons.alt.client.AltIcons;
-import com.calclab.hablar.icons.def.client.DefaultIcons;
-import com.calclab.hablar.icons.ie6gif.client.IE6GifIcons;
+import com.calclab.hablar.icons.alt.client.AltIconsBundle;
 import com.calclab.hablar.login.client.HablarLogin;
 import com.calclab.hablar.login.client.LoginConfig;
 import com.calclab.suco.client.Suco;
+import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.widget.Dialog;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 public class ChatClientDefault implements ChatClient {
 
-    public static class ChatClientAction extends AbstractExtendedAction {
+    public class ChatClientAction extends AbstractExtendedAction {
 
         private final EventBus eventBus;
-        private final IconResources res;
+        private final ChatResources res;
 
-        @Inject
-        public ChatClientAction(final EventBus eventBus, final IconResources res) {
+        public ChatClientAction(final EventBus eventBus, final ChatResources res) {
             super();
             this.eventBus = eventBus;
             this.res = res;
-            res.css().ensureInjected();
             putValue(Action.SMALL_ICON, res.chat());
 
         }
@@ -98,42 +99,48 @@ public class ChatClientDefault implements ChatClient {
         }
 
         public void setBlink(final boolean blink) {
-            putValue(Action.SMALL_ICON, blink ? res.chatBlink() : res.chat());
+            final ImageResource icon = blink ? res.chatBlink() : res.chat();
+            putValue(Action.SMALL_ICON, icon);
+            dialog.setIcon(AbstractImagePrototype.create(icon));
         }
 
     }
 
     protected static final String CHAT_CLIENT_ICON_ID = "k-chat-icon-id";
 
+    private static final String CHAT_TITLE = "Chat ;)";
+
     private final ChatClientAction action;
     protected IconLabelDescriptor chatIcon;
     private final ChatManager chatManager;
     private final ChatOptions chatOptions;
+    private final ChatResources chatResources;
+    private Dialog dialog;
+    private final EventBus eventBus;
     private final I18nTranslationService i18n;
-    private PopupTopPanel popup;
     private final RoomManager roomManager;
     private final XmppRoster roster;
     private final Session session;
     private final GlobalShortcutRegister shorcutRegister;
     private final SitebarActionsPresenter siteActions;
+
     private final XmppSession xmppSession;
 
     @Inject
-    public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n, final ChatClientAction action,
+    public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n,
             final SitebarActionsPresenter siteActions, final Session session,
-            final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions) {
+            final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions,
+            final ChatResources chatResources) {
 
-        // , final XmppSession xmppSession,
-        // final XmppRoster roster, final ChatManager chatManager, final
-        // RoomManager roomManager,
-        // final SessionReconnect sessionReconnect, final
-        // Provider<AvatarManager> avatarManager) {
+        this.eventBus = eventBus;
         this.i18n = i18n;
-        this.action = action;
+        action = new ChatClientAction(eventBus, chatResources);
         this.siteActions = siteActions;
         this.session = session;
         this.shorcutRegister = shorcutRegister;
         this.chatOptions = chatOptions;
+        this.chatResources = chatResources;
+        chatResources.css().ensureInjected();
         this.xmppSession = Suco.get(XmppSession.class);
         this.roster = Suco.get(XmppRoster.class);
         this.chatManager = Suco.get(ChatManager.class);
@@ -146,14 +153,6 @@ public class ChatClientDefault implements ChatClient {
                 chatOptions.httpBase = event.getInitData().getChatHttpBase();
                 chatOptions.roomHost = event.getInitData().getChatRoomHost();
                 checkChatDomain(chatOptions.domain);
-                // if (session.isLogged()) {
-                // session.check(new AsyncCallbackSimple<Void>() {
-                // @Override
-                // public void onSuccess(final Void result) {
-                // doLogin();
-                // }
-                // });
-                // }
                 session.onUserSignIn(true, new UserSignInHandler() {
                     @Override
                     public void onUserSignIn(final UserSignInEvent event) {
@@ -221,7 +220,7 @@ public class ChatClientDefault implements ChatClient {
             chatIcon = new IconLabelDescriptor(action);
             chatIcon.setId(CHAT_CLIENT_ICON_ID);
             chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
-            chatIcon.putValue(Action.NAME, i18n.t("Chat ;)"));
+            chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
             chatIcon.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
             final KeyStroke shortcut = Shortcut.getShortcut(false, true, true, false, Character.valueOf('C'));
             shorcutRegister.put(shortcut, action);
@@ -240,22 +239,29 @@ public class ChatClientDefault implements ChatClient {
     private void createDialog(final HablarWidget widget, final HtmlConfig htmlConfig) {
         widget.addStyleName("k-chat-panel");
         setSize(widget, htmlConfig);
-        popup.add(widget);
+        dialog.add(widget);
     }
 
     private void createDialogIfNeeded() {
-        if (popup == null) {
-            popup = new PopupTopPanel();
-            popup.setStyleName("k-popup-top-centered");
-            popup.addStyleName("k-bottom-10corners");
-            popup.addStyleName("k-box-10shadow");
-            popup.addStyleName("k-chat-window");
+        if (dialog == null) {
+            dialog = new Dialog();
+            dialog.setHeading(i18n.t(CHAT_TITLE));
+            dialog.setClosable(true);
+            dialog.setResizable(true);
+            dialog.setButtons("");
+            dialog.setBodyStyleName("k-chat-window");
+            dialog.setScrollMode(Scroll.NONE);
+            dialog.setHideOnButtonClick(true);
+            final Widget btn = (Widget) chatIcon.getValue(ParentWidget.PARENT_UI);
+            dialog.setPosition(btn.getAbsoluteLeft(), btn.getAbsoluteTop());
+            dialog.setIcon(AbstractImagePrototype.create(chatResources.chat()));
+            // dialog.getItem(0).getFocusSupport().setIgnore(true);
             initEmite();
         }
     }
 
     private boolean dialogVisible() {
-        return popup != null && popup.isShowing();
+        return dialog != null && dialog.isVisible();
     }
 
     @Override
@@ -278,21 +284,17 @@ public class ChatClientDefault implements ChatClient {
     }
 
     private void initEmite() {
-        final String icons = PageAssist.getMeta("hablar.icons");
-        if ("alt".equals(icons)) {
-            AltIcons.load();
-        } else if ("ie6".equals(icons)) {
-            IE6GifIcons.load();
-        } else {
-            DefaultIcons.load();
-        }
+        loadIcons(chatResources);
 
         final HablarConfig config = HablarConfig.getFromMeta();
         final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
+        config.dockConfig.headerSize = 0;
+        config.dockConfig.rosterWidth = 150;
+        config.dockConfig.rosterDock = "right";
         final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
         final Hablar hablar = widget.getHablar();
         HablarComplete.install(hablar, config);
-        new KuneHablarSignals(xmppSession, hablar, action);
+        new KuneHablarSignals(eventBus, xmppSession, hablar, action);
         if (htmlConfig.hasLogger) {
             new HablarConsole(hablar);
         }
@@ -300,6 +302,7 @@ public class ChatClientDefault implements ChatClient {
         if (htmlConfig.hasLogin) {
             new HablarLogin(hablar, LoginConfig.getFromMeta());
         }
+        new KuneSoundManager(eventBus, config.soundConfig);
         createDialog(widget, htmlConfig);
     }
 
@@ -341,6 +344,31 @@ public class ChatClientDefault implements ChatClient {
         }
     }
 
+    public void loadIcons(final ChatResources others) {
+        final AltIconsBundle bundle = GWT.create(AltIconsBundle.class);
+        Icons.register(Icons.BUDDY_ADD, bundle.buddyAddIcon());
+        Icons.register(Icons.BUDDY, bundle.buddyIcon());
+        Icons.register(Icons.BUDDY_DND, others.busy());
+        Icons.register(Icons.BUDDY_OFF, others.offline());
+        Icons.register(Icons.BUDDY_ON, others.online());
+        Icons.register(Icons.BUDDY_WAIT, others.away());
+        Icons.register(Icons.ADD_CHAT, bundle.chatAddIcon());
+        Icons.register(Icons.CHAT, others.xa());
+        Icons.register(Icons.CLIPBOARD, bundle.clipboardIcon());
+        Icons.register(Icons.CLOSE, bundle.closeIcon());
+        Icons.register(Icons.CONSOLE, bundle.consoleIcon());
+        Icons.register(Icons.ADD_GROUP, bundle.groupAddIcon());
+        Icons.register(Icons.GROUP_CHAT, bundle.groupChatIcon());
+        Icons.register(Icons.GROUP_CHAT_ADD, bundle.groupChatAddIcon());
+        Icons.register(Icons.LOADING, bundle.loadingIcon());
+        Icons.register(Icons.MENU, bundle.menuIcon());
+        Icons.register(Icons.MISSING_ICON, bundle.missingIcon());
+        Icons.register(Icons.NOT_CONNECTED, others.offline());
+        Icons.register(Icons.CONNECTED, others.online());
+        Icons.register(Icons.ROSTER, bundle.rosterIcon());
+        Icons.register(Icons.SEARCH, bundle.searchIcon());
+    }
+
     @Override
     public void login(final XmppURI uri, final String passwd) {
         xmppSession.login(uri, passwd);
@@ -358,7 +386,7 @@ public class ChatClientDefault implements ChatClient {
     @Override
     public void logout() {
         if (dialogVisible()) {
-            popup.hide();
+            dialog.hide();
         }
         if (isLoggedIn()) {
             xmppSession.logout();
@@ -371,11 +399,14 @@ public class ChatClientDefault implements ChatClient {
     }
 
     private void setSize(final Widget widget, final HtmlConfig htmlConfig) {
+
         if (htmlConfig.width != null) {
-            widget.setWidth(htmlConfig.width);
+            widget.setWidth("98%");
+            dialog.setWidth(htmlConfig.width);
         }
         if (htmlConfig.height != null) {
-            widget.setHeight(htmlConfig.height);
+            widget.setHeight("98%");
+            dialog.setHeight(htmlConfig.height);
         }
     }
 
@@ -388,15 +419,17 @@ public class ChatClientDefault implements ChatClient {
         if (session.isLogged()) {
             createDialogIfNeeded();
             if (show) {
-                popup.showNear((Widget) chatIcon.getValue(ParentWidget.PARENT_UI));
+                dialog.show();
+                dialog.setZIndex(0);
+                dialog.getHeader().setZIndex(0);
             } else {
-                popup.hide();
+                dialog.hide();
             }
         }
     }
 
     private void toggleShowDialog() {
-        showDialog(popup == null ? true : !popup.isShowing());
+        showDialog(dialog == null ? true : !dialogVisible());
     }
 
     private XmppURI uriFrom(final String shortName) {

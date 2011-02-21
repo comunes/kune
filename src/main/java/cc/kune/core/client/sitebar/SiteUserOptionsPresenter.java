@@ -28,12 +28,14 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
@@ -54,6 +56,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     private final I18nTranslationService i18n;
     private final IconResources img;
     private SubMenuDescriptor partiMenu;
+    private ToolbarSeparatorDescriptor separator;
     private final Session session;
     private final SitebarActionsPresenter siteOptions;
     private final StateManager stateManager;
@@ -71,17 +74,19 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
         this.siteOptions = siteOptions;
         this.gotoGroupAction = gotoGroupAction;
         createActions();
+        separator.setVisible(false);
         session.onUserSignIn(true, new UserSignInHandler() {
             @Override
             public void onUserSignIn(final UserSignInEvent event) {
                 SiteUserOptionsPresenter.this.onUserSignIn(event.getUserInfo());
+                separator.setVisible(true);
             }
         });
         session.onUserSignOut(true, new UserSignOutHandler() {
             @Override
             public void onUserSignOut(final UserSignOutEvent event) {
                 LOGGED_USER_MENU.setVisible(false);
-                LOGGED_USER_MENU.setEnabled(false);
+                separator.setVisible(false);
                 SiteUserOptionsPresenter.this.setLoggedUserName("");
             }
         });
@@ -110,9 +115,11 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
     private void createActions() {
         LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
-        LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar");
-        siteOptions.getLeftToolbar().addAction(LOGGED_USER_MENU);
-
+        LOGGED_USER_MENU.setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+        LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar, k-fl");
+        siteOptions.getRightToolbar().addAction(LOGGED_USER_MENU);
+        separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActionsPresenter.RIGHT_TOOLBAR);
+        siteOptions.getRightToolbar().addAction(separator);
         partiMenu = new SubMenuDescriptor(i18n.t("Your groups"));
         addActionImpl(partiMenu);
 

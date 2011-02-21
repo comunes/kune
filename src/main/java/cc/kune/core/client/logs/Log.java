@@ -35,4 +35,8 @@ public class Log {
         debug(message);
     }
 
+    public static void info(final String message) {
+        GWT.log(message);
+    }
+
 }

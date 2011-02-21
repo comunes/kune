@@ -148,6 +148,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     protected abstract void setToolTipText(String text);
 
     private void setVisible(final Boolean visible) {
+        // if you have problems with setVisible check if the GuiItem calls
+        // configureItemFromProperties on creation
         setVisible(visible == null ? true : visible);
     }
 

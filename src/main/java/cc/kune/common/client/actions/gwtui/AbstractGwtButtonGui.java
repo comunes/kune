@@ -39,7 +39,7 @@ import com.google.gwt.user.client.ui.ToggleButton;
 public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
 
     private ButtonBase button;
-    private final boolean enableTongle;
+    protected boolean enableTongle;
     private IconLabel iconLabel;
     private boolean isChild;
 

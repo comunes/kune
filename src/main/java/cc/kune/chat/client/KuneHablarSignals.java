@@ -37,6 +37,7 @@ import com.calclab.hablar.signals.client.unattended.UnattendedPresenter;
 import com.calclab.hablar.user.client.UserContainer;
 import com.calclab.suco.client.Suco;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasText;
 
@@ -71,8 +72,9 @@ public class KuneHablarSignals {
 
     // FIXME: move to gin
     @SuppressWarnings("deprecation")
-    public KuneHablarSignals(final XmppSession session, final Hablar hablar, final ChatClientAction action) {
-        final HablarEventBus eventBus = hablar.getEventBus();
+    public KuneHablarSignals(final EventBus eventBus, final XmppSession session, final Hablar hablar,
+            final ChatClientAction action) {
+        final HablarEventBus hablarEventBus = hablar.getEventBus();
         final PrivateStorageManager storageManager = Suco.get(PrivateStorageManager.class);
 
         final HasText titleDisplay = new HasText() {
@@ -88,11 +90,12 @@ public class KuneHablarSignals {
         };
         final SignalPreferences preferences = new SignalPreferences();
 
-        final UnattendedPagesManager manager = new UnattendedPagesManager(eventBus, BrowserFocusHandler.getInstance());
-        new BrowserFocusManager(eventBus, manager, BrowserFocusHandler.getInstance());
-        new UnattendedPresenter(eventBus, preferences, manager, titleDisplay);
-        new KuneUnattendedPresenter(eventBus, preferences, manager, action);
-        final NotificationManager notificationManager = new NotificationManager(eventBus, preferences);
+        final UnattendedPagesManager manager = new UnattendedPagesManager(hablarEventBus,
+                BrowserFocusHandler.getInstance());
+        new BrowserFocusManager(hablarEventBus, manager, BrowserFocusHandler.getInstance());
+        new UnattendedPresenter(hablarEventBus, preferences, manager, titleDisplay);
+        new KuneUnattendedPresenter(eventBus, hablarEventBus, preferences, manager, action);
+        final NotificationManager notificationManager = new NotificationManager(hablarEventBus, preferences);
 
         // notificationManager.addNotifier((BrowserPopupHablarNotifier)
         // GWT.create(BrowserPopupHablarNotifier.class),
@@ -100,7 +103,7 @@ public class KuneHablarSignals {
         notificationManager.addNotifier((KuneChatNotifier) GWT.create(KuneChatNotifier.class), true);
 
         final SignalsPreferencesPresenter preferencesPage = new SignalsPreferencesPresenter(session, storageManager,
-                eventBus, preferences, new SignalsPreferencesWidget(), notificationManager);
+                hablarEventBus, preferences, new SignalsPreferencesWidget(), notificationManager);
         hablar.addPage(preferencesPage, UserContainer.ROL);
     }
 

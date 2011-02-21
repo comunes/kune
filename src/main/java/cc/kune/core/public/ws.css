@@ -46,7 +46,7 @@ a:visited {
 }
 
 .gwt-MenuItem {
-    font-size: 80%;
+    font-size: 14px;
     margin: 1px;
     cursor: default;
 }
@@ -60,7 +60,7 @@ a:visited {
 }
 
 .gwt-Tree .gwt-TreeItem {
-    font-size: 80%;
+    font-size: 14px;
     cursor: default;
 }
 

@@ -51,17 +51,17 @@ public class GwtComplexToolbar extends Composite implements IsWidget {
         toolbar.add((Widget) uiObject);
     }
 
-    public void addFill() {
+    public Widget addFill() {
         currentFlow = FlowDir.right;
-        toolbar.addFill();
+        return toolbar.addFill();
     }
 
-    public void addSeparator() {
-        toolbar.addSeparator();
+    public Widget addSeparator() {
+        return toolbar.addSeparator();
     }
 
-    public void addSpacer() {
-        toolbar.addSpacer();
+    public Widget addSpacer() {
+        return toolbar.addSpacer();
     }
 
     private String getFlow() {

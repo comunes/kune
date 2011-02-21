@@ -1647,50 +1647,52 @@ a.x-menu-item {
 }
 
 .x-window-proxy {
-    background-color: #1f2833;
-    border-color: #18181a;
+  /*  background-color: #1f2833;
+    border-color: #18181a; */
 }
 
 .x-window-tl .x-window-header {
-    color: #fff !important;
-    font: bold 14px tahoma, arial, verdana, sans-serif;
+    font-size: 14px;
+  /*  color: #fff !important;
+    font: bold 14px tahoma, arial, verdana, sans-serif; */
 }
 
 .x-window-tc {
-    background-image: url(../images/window/top-bottom.png);
+/*    background-image: url(../images/window/top-bottom.png);*/
 }
 
 .x-window-tl {
-    background-image: url(../images/window/left-corners.png);
+/*    background-image: url(../images/window/left-corners.png);*/
 }
 
 .x-window-tr {
-    background-image: url(../images/window/right-corners.png);
+ /*   background-image: url(../images/window/right-corners.png);*/
 }
 
 .x-window-bc {
-    background-image: url(../images/window/top-bottom.png);
+   /* background-image: url(../images/window/top-bottom.png);*/
 }
 
 .x-window-bl {
-    background-image: url(../images/window/left-corners.png);
+   /* background-image: url(../images/window/left-corners.png);*/
 }
 
 .x-window-br {
-    background-image: url(../images/window/right-corners.png);
+   /* background-image: url(../images/window/right-corners.png);*/
 }
 
 .x-window-mc {
-    border-color: #18181a;
-    font: normal 14px 'Ubuntu', Arial background-color :     #1f2833;
+    font-size: 16px;
+  /*  border-color: #18181a;
+    font: normal 14px 'Ubuntu', Arial background-color :     #1f2833; */
 }
 
 .x-window-ml {
-    background-image: url(../images/window/left-right.png);
+   /* background-image: url(../images/window/left-right.png);*/
 }
 
 .x-window-mr {
-    background-image: url(../images/window/left-right.png);
+   /* background-image: url(../images/window/left-right.png); */
 }
 
 .x-window-maximized .x-window-tc {

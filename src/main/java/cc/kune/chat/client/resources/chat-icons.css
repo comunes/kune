@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+@external k-*;
+
+@sprite div .k-icon-chatBlink {
+  gwt-image: "chatBlink";
+}
+
+@sprite div .k-icon-chat {
+  gwt-image: "chat";
+}

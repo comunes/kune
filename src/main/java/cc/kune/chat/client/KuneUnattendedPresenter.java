@@ -20,15 +20,14 @@
 package cc.kune.chat.client;
 
 import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.chat.client.snd.ClickEvent;
 
-import com.calclab.hablar.chat.client.ui.PairChatPresenter;
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
-import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.signals.client.SignalPreferences;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedHandler;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
+import com.google.gwt.event.shared.EventBus;
 
 /**
  * Handles the presentation of unattended chats
@@ -36,8 +35,9 @@ import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 public class KuneUnattendedPresenter {
     private boolean active;
 
-    public KuneUnattendedPresenter(final HablarEventBus hablarEventBus, final SignalPreferences preferences,
-            final UnattendedPagesManager unattendedManager, final ChatClientAction action) {
+    public KuneUnattendedPresenter(final EventBus eventBus, final HablarEventBus hablarEventBus,
+            final SignalPreferences preferences, final UnattendedPagesManager unattendedManager,
+            final ChatClientAction action) {
         active = false;
         hablarEventBus.addHandler(UnattendedChatsChangedEvent.TYPE, new UnattendedChatsChangedHandler() {
             @Override
@@ -45,10 +45,9 @@ public class KuneUnattendedPresenter {
                 final int unattendedChatsCount = unattendedManager.getSize();
                 if (unattendedChatsCount > 0 && active == false) {
                     active = true;
-                    NotifyUser.info("Num: " + unattendedChatsCount, true);
-                    if (isChatPage(event.getPage().getType())) {
-                        action.setBlink(true);
-                    }
+                    ClickEvent.fire(eventBus);
+                    action.setBlink(true);
+
                 } else if (unattendedChatsCount == 0 && active == true) {
                     action.setBlink(false);
                     active = false;
@@ -57,10 +56,6 @@ public class KuneUnattendedPresenter {
 
         });
 
-    }
-
-    private boolean isChatPage(final String pageType) {
-        return pageType.equals(PairChatPresenter.TYPE) || pageType.equals(RoomPresenter.TYPE);
     }
 
 }

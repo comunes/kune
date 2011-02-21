@@ -30,14 +30,8 @@ public interface IconResources extends ClientBundle {
     @Source("bug.png")
     ImageResource bug();
 
-    @Source("e-icon.gif")
-    ImageResource chat();
-
-    @Source("e-icon-a.gif")
-    ImageResource chatBlink();
-
     @Source("kicon.css")
-    IconBorrarCssResource css();
+    IconCssResource css();
 
     @Source("del-green.png")
     ImageResource delGreen();

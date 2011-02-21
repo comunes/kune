@@ -21,38 +21,30 @@ package cc.kune.common.client.actions.gwtui;
 
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 
 public class GwtToolbarGui extends AbstractGuiItem implements ParentWidget {
 
     private GwtComplexToolbar toolbar;
-
-    public GwtToolbarGui() {
-    }
-
-    public GwtToolbarGui(final AbstractGuiActionDescrip descriptor) {
-        super(descriptor);
-
-    }
 
     @Override
     public void add(final UIObject uiObject) {
         toolbar.add(uiObject);
     }
 
-    public void addFill() {
-        toolbar.addFill();
+    public Widget addFill() {
+        return toolbar.addFill();
     }
 
-    public void addSeparator() {
-        toolbar.addSeparator();
+    public Widget addSeparator() {
+        return toolbar.addSeparator();
     }
 
-    public void addSpacer() {
-        toolbar.addSpacer();
+    public Widget addSpacer() {
+        return toolbar.addSpacer();
     }
 
     @Override
