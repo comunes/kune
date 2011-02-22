@@ -217,11 +217,8 @@
       <!-- <version>2.1-SNAPSHOT-r1160</version> -->
       <version>3.0-rc2</version>
     </dependency>
-    <!--    <dependency>
-<groupId>com.googlecode.gwt.inject</groupId>
-<artifactId>gin</artifactId>
-<version>gin-1.1-SNAPSHOT</version>
-</dependency>-->
+    <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId>
+      <version>gin-1.1-SNAPSHOT</version> </dependency> -->
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-servlet</artifactId>
@@ -247,7 +244,7 @@
       <groupId>com.gwtplatform</groupId>
       <artifactId>gwtp-all</artifactId>
       <version>0.5</version>
-<!--      <version>0.6-SNAPSHOT</version>-->
+      <!-- <version>0.6-SNAPSHOT</version> -->
       <exclusions>
         <exclusion>
           <groupId>org.springframework</groupId>
@@ -272,18 +269,9 @@
       <artifactId>gwt-fx</artifactId>
       <version>r464</version>
     </dependency>
-		<!--
-    <dependency>
-      <groupId>com.jhickman.web.gwt</groupId>
-      <artifactId>gwt-customuibinder</artifactId>
-      <version>0.1</version>
-    </dependency>
-		
-    <dependency>
-      <groupId>com.jhickman.web.gwt</groupId>
-      <artifactId>gxt-uibinder</artifactId>
-      <version>0.6</version>
-			</dependency>-->
+    <!-- <dependency> <groupId>com.jhickman.web.gwt</groupId> <artifactId>gwt-customuibinder</artifactId>
+      <version>0.1</version> </dependency> <dependency> <groupId>com.jhickman.web.gwt</groupId>
+      <artifactId>gxt-uibinder</artifactId> <version>0.6</version> </dependency> -->
     <!-- cc -->
     <dependency>
       <groupId>com.gwtext</groupId>
@@ -518,12 +506,6 @@
       <scope>provided</scope>
     </dependency>
     <!-- testing dependencies -->
-    <!-- <dependency> -->
-    <!-- <groupId>org.mockito</groupId> -->
-    <!-- <artifactId>mockito-all</artifactId> -->
-    <!-- <scope>test</scope> -->
-    <!-- <version>1.6</version> -->
-    <!-- </dependency> -->
     <dependency>
       <groupId>org.jukito</groupId>
       <artifactId>jukito</artifactId>
@@ -730,6 +712,46 @@
   </scm>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.1.1</version>
+        <executions>
+          <execution>
+            <phase>exec</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>cc.kune.wave.server.WaveMain</mainClass>
+          <systemProperties>
+            <systemProperty>
+              <key>wave.server.config</key>
+              <value>src/main/resources/wave-server.properties</value>
+            </systemProperty>
+            <systemProperty>
+              <key>org.eclipse.jetty.util.resource.FileResource.checkAliases</key>
+              <!-- <key>org.mortbay.util.FileResource.checkAliases</key> -->
+              <value>False</value>
+            </systemProperty>
+            <systemProperty>
+              <key>java.security.auth.login.config</key>
+              <value>src/main/resources/jaas.config</value>
+            </systemProperty>
+            <systemProperty>
+              <key>DEBUG</key>
+              <value>true</value>
+            </systemProperty>
+            <systemProperty>
+              <key>org.eclipse.jetty.util.log.DEBUG</key>
+              <value>true</value>
+            </systemProperty>
+          </systemProperties>
+          <classpathScope>runtime</classpathScope>
+        </configuration>
+      </plugin>
       <plugin>
         <!-- =roo -->
         <groupId>org.apache.maven.plugins</groupId>
