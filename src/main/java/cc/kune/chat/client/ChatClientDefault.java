@@ -30,7 +30,6 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
-import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
@@ -54,6 +53,7 @@ import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
+import com.calclab.emite.reconnect.client.SessionReconnect;
 import com.calclab.emite.xep.avatar.client.AvatarManager;
 import com.calclab.emite.xep.muc.client.Room;
 import com.calclab.emite.xep.muc.client.RoomManager;
@@ -145,6 +145,7 @@ public class ChatClientDefault implements ChatClient {
         this.roster = Suco.get(XmppRoster.class);
         this.chatManager = Suco.get(ChatManager.class);
         this.roomManager = Suco.get(RoomManager.class);
+        Suco.get(SessionReconnect.class);
 
         eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
             @Override
@@ -222,9 +223,9 @@ public class ChatClientDefault implements ChatClient {
             chatIcon.setStyles("k-no-backimage, k-btn-sitebar, k-chat-icon");
             chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
             chatIcon.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
-            final KeyStroke shortcut = Shortcut.getShortcut(false, true, true, false, Character.valueOf('C'));
+            final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
             shorcutRegister.put(shortcut, action);
-            action.setShortcut(shortcut);
+            // action.setShortcut(shortcut);
             chatIcon.setVisible(session.isLogged());
             siteActions.getLeftToolbar().addAction(
                     new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
@@ -252,8 +253,9 @@ public class ChatClientDefault implements ChatClient {
             dialog.setBodyStyleName("k-chat-window");
             dialog.setScrollMode(Scroll.NONE);
             dialog.setHideOnButtonClick(true);
-            final Widget btn = (Widget) chatIcon.getValue(ParentWidget.PARENT_UI);
-            dialog.setPosition(btn.getAbsoluteLeft(), btn.getAbsoluteTop());
+            // final Widget btn = (Widget)
+            // chatIcon.getValue(ParentWidget.PARENT_UI);
+            dialog.setPosition(118, 2);
             dialog.setIcon(AbstractImagePrototype.create(chatResources.chat()));
             // dialog.getItem(0).getFocusSupport().setIgnore(true);
             initEmite();
@@ -416,6 +418,7 @@ public class ChatClientDefault implements ChatClient {
     }
 
     private void showDialog(final boolean show) {
+        Log.info("Show dialog: " + show);
         if (session.isLogged()) {
             createDialogIfNeeded();
             if (show) {
@@ -429,6 +432,7 @@ public class ChatClientDefault implements ChatClient {
     }
 
     private void toggleShowDialog() {
+        Log.info("Toggle!");
         showDialog(dialog == null ? true : !dialogVisible());
     }
 

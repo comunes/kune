@@ -118,6 +118,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
         bind(I18nUITranslationService.class).in(Singleton.class);
         bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
+        bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
 
         // Presenters
         bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
@@ -161,7 +162,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
         bind(GxtGuiProvider.class).in(Singleton.class);
         bind(GwtGuiProvider.class).in(Singleton.class);
-        bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
+
         bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
 
         // Core App

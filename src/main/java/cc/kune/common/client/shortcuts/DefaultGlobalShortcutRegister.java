@@ -20,6 +20,7 @@
 package cc.kune.common.client.shortcuts;
 
 import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ChangeableObject;
 import cc.kune.common.client.actions.InputMap;
@@ -49,7 +50,7 @@ public class DefaultGlobalShortcutRegister extends InputMap implements GlobalSho
                     final AbstractAction action = get(Shortcut.getShortcut(event.getCtrlKey(), event.getAltKey(),
                             event.getShiftKey(), event.getShiftKey(), (char) event.getKeyCode()));
                     if (action != null) {
-                        GWT.log("Not propagating event");
+                        GWT.log("Not propagating event for action: " + action.getValue(Action.NAME));
                         nativeEvent.stopPropagation();
                         action.actionPerformed(new ActionEvent(nativeEvent.getCurrentEventTarget(), event));
                         nativeEventPrev.cancel();
@@ -57,7 +58,6 @@ public class DefaultGlobalShortcutRegister extends InputMap implements GlobalSho
                 }
             }
         };
-        enableImpl();
     }
 
     @Override
