@@ -26,8 +26,8 @@ import cc.kune.common.client.actions.ChangeableObject;
 import cc.kune.common.client.actions.InputMap;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
+import cc.kune.common.client.log.Log;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
@@ -50,7 +50,7 @@ public class DefaultGlobalShortcutRegister extends InputMap implements GlobalSho
                     final AbstractAction action = get(Shortcut.getShortcut(event.getCtrlKey(), event.getAltKey(),
                             event.getShiftKey(), event.getShiftKey(), (char) event.getKeyCode()));
                     if (action != null) {
-                        GWT.log("Not propagating event for action: " + action.getValue(Action.NAME));
+                        Log.debug("Not propagating event for action: " + action.getValue(Action.NAME));
                         nativeEvent.stopPropagation();
                         action.actionPerformed(new ActionEvent(nativeEvent.getCurrentEventTarget(), event));
                         nativeEventPrev.cancel();
@@ -80,7 +80,7 @@ public class DefaultGlobalShortcutRegister extends InputMap implements GlobalSho
     public void put(final KeyStroke keystroke, final AbstractAction action) {
         final ChangeableObject previous = super.get(keystroke);
         if (previous != null) {
-            GWT.log("Shortcut already registed by: " + previous + "(overriding)");
+            Log.info("Shortcut already registed by: " + previous + "(overriding)");
         }
         super.put(keystroke, action);
     }

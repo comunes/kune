@@ -71,7 +71,7 @@ public class GwtIconLabelGui extends AbstractGuiItem {
 
     @Override
     protected void setIconStyle(final String style) {
-        iconLabel.setLeftIcon(style);
+        iconLabel.setRightIcon(style);
     }
 
     @Override

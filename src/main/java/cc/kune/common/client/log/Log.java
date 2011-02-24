@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.logs;
+package cc.kune.common.client.log;
 
 import com.google.gwt.core.client.GWT;
 
@@ -32,15 +32,23 @@ public class Log {
     }
 
     public static void error(final String message) {
-        debug(prefix(message));
+        debug(message);
+    }
+
+    public static void error(final String message, final Throwable caught) {
+        debug(message, caught);
     }
 
     public static void info(final String message) {
-        GWT.log(prefix(message));
+        debug(message);
+    }
+
+    public static void info(final String message, final Throwable caught) {
+        debug(message, caught);
     }
 
     private static String prefix(final String message) {
-        return new StringBuffer().append("-KUNE-----").append(message).toString();
+        return new StringBuffer().append("[kune] ").append(message).toString();
     }
 
 }

@@ -119,7 +119,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
 
     @Override
     protected void setIconStyle(final String style) {
-        iconLabel.setLeftIcon(style);
+        iconLabel.setRightIcon(style);
         layout();
     }
 

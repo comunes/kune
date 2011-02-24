@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,13 +14,13 @@
    height="297mm"
    id="svg21019"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
-   sodipodi:docbase="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img"
+   inkscape:version="0.48.0 r9654"
    sodipodi:docname="icons-base.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/tmp/buttons.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   version="1.1">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -27,20 +28,21 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.8805759"
-     inkscape:cx="368.89944"
-     inkscape:cy="693.88452"
+     inkscape:zoom="1"
+     inkscape:cx="137.00004"
+     inkscape:cy="507.00023"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="1280"
-     inkscape:window-height="1001"
-     inkscape:window-x="1280"
-     inkscape:window-y="0"
+     inkscape:window-width="1278"
+     inkscape:window-height="973"
+     inkscape:window-x="0"
+     inkscape:window-y="21"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:grid-points="true"
-     inkscape:guide-points="true">
+     inkscape:guide-points="true"
+     inkscape:window-maximized="0">
     <inkscape:grid
        empspacing="1"
        empopacity="0.4"
@@ -58,6 +60,18 @@
   </sodipodi:namedview>
   <defs
      id="defs21021">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4349">
+      <stop
+         style="stop-color:#b3b3b3;stop-opacity:1;"
+         offset="0"
+         id="stop4351" />
+      <stop
+         style="stop-color:#b3b3b3;stop-opacity:0;"
+         offset="1"
+         id="stop4353" />
+    </linearGradient>
     <linearGradient
        inkscape:collect="always"
        id="linearGradient3002">
@@ -1877,6 +1891,17 @@
        y1="453.87259"
        x2="342.63214"
        y2="446.19382" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4349"
+       id="radialGradient4374"
+       cx="137.31995"
+       cy="545.46362"
+       fx="137.31995"
+       fy="545.46362"
+       r="4.9999999"
+       gradientTransform="matrix(0.91693414,0.01425781,-0.01300982,0.83667505,18.233348,87.119612)"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <metadata
      id="metadata21024">
@@ -1886,6 +1911,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2153,7 +2179,7 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+         d="m 1563.0192,677.96995 -3.3032,-5.65485 6.5488,-0.0333 z"
          transform="translate(126.81013,-429.87643)"
          inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/menu-arrow-down.png"
          inkscape:export-xdpi="90"
@@ -2218,7 +2244,7 @@
            inkscape:export-xdpi="90"
            inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
            transform="matrix(1.7115632,0,0,1.0517267,-2323.1568,-28.402137)"
-           d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+           d="m 1563.0192,677.96995 -3.3032,-5.65485 6.5488,-0.0333 z"
            inkscape:randomized="0"
            inkscape:rounded="0"
            inkscape:flatsided="true"
@@ -2267,7 +2293,7 @@
            inkscape:export-xdpi="90"
            inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
            transform="matrix(1.7115632,0,0,1.0517267,-2323.1568,-28.402137)"
-           d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+           d="m 1563.0192,677.96995 -3.3032,-5.65485 6.5488,-0.0333 z"
            inkscape:randomized="0"
            inkscape:rounded="0"
            inkscape:flatsided="true"
@@ -2316,7 +2342,7 @@
            inkscape:export-xdpi="90"
            inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
            transform="matrix(1.7115632,0,0,1.0517267,-2323.1568,-28.402134)"
-           d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+           d="m 1563.0192,677.96995 -3.3032,-5.65485 6.5488,-0.0333 z"
            inkscape:randomized="0"
            inkscape:rounded="0"
            inkscape:flatsided="true"
@@ -2365,7 +2391,7 @@
            inkscape:export-xdpi="90"
            inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/button-sitebar-arrow-down.png"
            transform="matrix(1.7115632,0,0,1.0517267,-2323.1568,-28.402134)"
-           d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z "
+           d="m 1563.0192,677.96995 -3.3032,-5.65485 6.5488,-0.0333 z"
            inkscape:randomized="0"
            inkscape:rounded="0"
            inkscape:flatsided="true"
@@ -3016,7 +3042,7 @@
        id="g14270">
       <path
          transform="matrix(0.6,0,0,0.6249999,-25.304096,101.58627)"
-         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         d="m -43,242.36218 c 0,6.62742 -5.596441,12 -12.5,12 -6.903559,0 -12.5,-5.37258 -12.5,-12 0,-6.62741 5.596441,-12 12.5,-12 6.903559,0 12.5,5.37259 12.5,12 z"
          sodipodi:ry="12"
          sodipodi:rx="12.5"
          sodipodi:cy="242.36218"
@@ -3035,7 +3061,7 @@
          sodipodi:cy="242.36218"
          sodipodi:rx="12.5"
          sodipodi:ry="12"
-         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         d="m -43,242.36218 c 0,6.62742 -5.596441,12 -12.5,12 -6.903559,0 -12.5,-5.37258 -12.5,-12 0,-6.62741 5.596441,-12 12.5,-12 6.903559,0 12.5,5.37259 12.5,12 z"
          transform="matrix(0.28,0,0,0.2916666,-44.46,180.67323)"
          inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
          inkscape:export-xdpi="90"
@@ -3152,14 +3178,14 @@
          sodipodi:cy="242.36218"
          sodipodi:rx="12.5"
          sodipodi:ry="12"
-         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         d="m -43,242.36218 c 0,6.62742 -5.596441,12 -12.5,12 -6.903559,0 -12.5,-5.37258 -12.5,-12 0,-6.62741 5.596441,-12 12.5,-12 6.903559,0 12.5,5.37259 12.5,12 z"
          transform="matrix(0.6,0,0,0.6249999,-25.304096,101.58627)" />
       <path
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/group-def-icon.png"
          transform="matrix(0.28,0,0,0.2916666,-44.46,180.67323)"
-         d="M -43 242.36218 A 12.5 12 0 1 1  -68,242.36218 A 12.5 12 0 1 1  -43 242.36218 z"
+         d="m -43,242.36218 c 0,6.62742 -5.596441,12 -12.5,12 -6.903559,0 -12.5,-5.37258 -12.5,-12 0,-6.62741 5.596441,-12 12.5,-12 6.903559,0 12.5,5.37259 12.5,12 z"
          sodipodi:ry="12"
          sodipodi:rx="12.5"
          sodipodi:cy="242.36218"
@@ -3219,7 +3245,7 @@
          sodipodi:cy="554.68896"
          sodipodi:rx="11.5"
          sodipodi:ry="11.5"
-         d="M -215 554.68896 A 11.5 11.5 0 1 1  -238,554.68896 A 11.5 11.5 0 1 1  -215 554.68896 z"
+         d="m -215,554.68896 c 0,6.35128 -5.14873,11.5 -11.5,11.5 -6.35127,0 -11.5,-5.14872 -11.5,-11.5 0,-6.35127 5.14873,-11.5 11.5,-11.5 6.35127,0 11.5,5.14873 11.5,11.5 z"
          transform="translate(835.07499,-335.32678)" />
       <text
          xml:space="preserve"
@@ -3262,7 +3288,7 @@
        id="g7072">
       <path
          transform="translate(865.07499,-335.32678)"
-         d="M -215 554.68896 A 11.5 11.5 0 1 1  -238,554.68896 A 11.5 11.5 0 1 1  -215 554.68896 z"
+         d="m -215,554.68896 c 0,6.35128 -5.14873,11.5 -11.5,11.5 -6.35127,0 -11.5,-5.14872 -11.5,-11.5 0,-6.35127 5.14873,-11.5 11.5,-11.5 6.35127,0 11.5,5.14873 11.5,11.5 z"
          sodipodi:ry="11.5"
          sodipodi:rx="11.5"
          sodipodi:cy="554.68896"
@@ -3291,7 +3317,7 @@
        id="g7077">
       <path
          transform="translate(895.07499,-335.32678)"
-         d="M -215 554.68896 A 11.5 11.5 0 1 1  -238,554.68896 A 11.5 11.5 0 1 1  -215 554.68896 z"
+         d="m -215,554.68896 c 0,6.35128 -5.14873,11.5 -11.5,11.5 -6.35127,0 -11.5,-5.14872 -11.5,-11.5 0,-6.35127 5.14873,-11.5 11.5,-11.5 6.35127,0 11.5,5.14873 11.5,11.5 z"
          sodipodi:ry="11.5"
          sodipodi:rx="11.5"
          sodipodi:cy="554.68896"
@@ -3326,7 +3352,7 @@
          sodipodi:cy="554.68896"
          sodipodi:rx="11.5"
          sodipodi:ry="11.5"
-         d="M -215 554.68896 A 11.5 11.5 0 1 1  -238,554.68896 A 11.5 11.5 0 1 1  -215 554.68896 z"
+         d="m -215,554.68896 c 0,6.35128 -5.14873,11.5 -11.5,11.5 -6.35127,0 -11.5,-5.14872 -11.5,-11.5 0,-6.35127 5.14873,-11.5 11.5,-11.5 6.35127,0 11.5,5.14873 11.5,11.5 z"
          transform="translate(925.07499,-335.32678)" />
       <text
          xml:space="preserve"
@@ -3349,7 +3375,7 @@
        id="g7087">
       <path
          transform="translate(953.07499,-335.32678)"
-         d="M -215 554.68896 A 11.5 11.5 0 1 1  -238,554.68896 A 11.5 11.5 0 1 1  -215 554.68896 z"
+         d="m -215,554.68896 c 0,6.35128 -5.14873,11.5 -11.5,11.5 -6.35127,0 -11.5,-5.14872 -11.5,-11.5 0,-6.35127 5.14873,-11.5 11.5,-11.5 6.35127,0 11.5,5.14873 11.5,11.5 z"
          sodipodi:ry="11.5"
          sodipodi:rx="11.5"
          sodipodi:cy="554.68896"
@@ -3387,11 +3413,11 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          transform="matrix(1.0090586,0,0,0.5666999,-5.5815934,146.26264)" />
       <path
          transform="matrix(-1.0090586,0,0,-0.5666999,1186.9923,552.46172)"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -3407,7 +3433,7 @@
          sodipodi:type="star" />
       <path
          transform="matrix(0,1.0090586,-0.5666999,0,793.77505,-246.75759)"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -3435,7 +3461,7 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          transform="matrix(0,1.0090586,0.5666999,0,387.80334,-243.21941)" />
     </g>
     <g
@@ -3443,7 +3469,7 @@
        id="g8085">
       <path
          transform="matrix(1.0090586,0,0,-0.5666999,34.910563,528.13723)"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -3471,7 +3497,7 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          transform="matrix(-1.0090586,0,0,0.5666999,1223.0894,167.26264)" />
       <path
          sodipodi:type="star"
@@ -3487,11 +3513,11 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          transform="matrix(0,-1.0090586,0.5666999,0,448.81872,941.94378)" />
       <path
          transform="matrix(0,1.0090586,-0.5666999,0,809.09954,-246.21941)"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -3713,7 +3739,7 @@
        transform="matrix(0.4565425,0,0,0.4565425,311.40113,199.37826)">
       <path
          transform="matrix(1.0090586,0,0,0.5666999,-5.5815934,146.26264)"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -3741,7 +3767,7 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          transform="matrix(-1.0090586,0,0,-0.5666999,1186.9923,552.46172)" />
       <path
          sodipodi:type="star"
@@ -3757,11 +3783,11 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          transform="matrix(0,1.0090586,-0.5666999,0,793.77505,-246.75759)" />
       <path
          transform="matrix(0,1.0090586,0.5666999,0,387.80334,-243.21941)"
-         d="M 589,358.38994 L 573.38751,331.34831 L 604.61249,331.3483 L 589,358.38994 z "
+         d="m 589,358.38994 -15.61249,-27.04163 31.22498,-1e-5 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -3857,11 +3883,11 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          transform="matrix(1.0940589,0,0,1.8949657,-42.944996,-312.92678)" />
       <path
          transform="matrix(1.0940589,0,0,1.8949657,-34.944996,-312.92678)"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -4169,7 +4195,7 @@
        id="g8211">
       <path
          transform="matrix(1.0940589,0,0,1.8949657,-42.944996,-312.92678)"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -4197,7 +4223,7 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          transform="matrix(1.0940589,0,0,1.8949657,-34.944996,-312.92678)" />
     </g>
     <g
@@ -4205,7 +4231,7 @@
        transform="translate(1.9896296,122.67525)">
       <path
          transform="matrix(1.0940589,0,0,1.8949657,-42.944996,-312.92678)"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -4233,7 +4259,7 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          transform="matrix(1.0940589,0,0,1.8949657,-34.944996,-312.92678)" />
     </g>
     <g
@@ -4253,11 +4279,11 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          transform="matrix(1.0940589,0,0,1.8949657,-42.944996,-312.92678)" />
       <path
          transform="matrix(1.0940589,0,0,1.8949657,-34.944996,-312.92678)"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -4289,11 +4315,11 @@
          inkscape:flatsided="true"
          inkscape:rounded="0"
          inkscape:randomized="0"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          transform="matrix(1.0940589,0,0,1.8949657,-42.944996,-312.92678)" />
       <path
          transform="matrix(1.0940589,0,0,1.8949657,-34.944996,-312.92678)"
-         d="M 535.56988,360.58118 L 528.25766,364.80289 L 528.25766,356.35946 L 535.56988,360.58118 z "
+         d="m 535.56988,360.58118 -7.31222,4.22171 0,-8.44343 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -4497,7 +4523,7 @@
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/menu-arrow-down.png"
          transform="translate(-1437.9102,-6.8473347)"
-         d="M 1563.0192,677.96995 L 1559.716,672.3151 L 1566.2648,672.28185 L 1563.0192,677.96995 z"
+         d="m 1563.0192,677.96995 -3.3032,-5.65485 6.5488,-0.0333 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -4542,7 +4568,7 @@
          sodipodi:cy="332.62314"
          sodipodi:rx="26.82268"
          sodipodi:ry="26.82268"
-         d="M 277.35793,332.62314 A 26.82268,26.82268 0 1 1 223.71257,332.62314 A 26.82268,26.82268 0 1 1 277.35793,332.62314 z"
+         d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
          transform="matrix(0.1668983,0,0,0.1668983,278.88098,515.04891)" />
       <path
          style="opacity:1;fill:#800000;fill-opacity:1;fill-rule:nonzero;stroke:#a02c2c;stroke-width:2.860111;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.37500004;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
@@ -4556,7 +4582,7 @@
          sodipodi:cy="332.62314"
          sodipodi:rx="26.82268"
          sodipodi:ry="26.82268"
-         d="M 277.35793,332.62314 A 26.82268,26.82268 0 1 1 223.71257,332.62314 A 26.82268,26.82268 0 1 1 277.35793,332.62314 z"
+         d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
          transform="matrix(8.5773407e-2,0,0,8.5773407e-2,299.20557,542.03293)" />
     </g>
     <rect
@@ -4604,7 +4630,7 @@
              sodipodi:cy="332.62314"
              sodipodi:rx="26.82268"
              sodipodi:ry="26.82268"
-             d="M 277.35793,332.62314 A 26.82268,26.82268 0 1 1 223.71257,332.62314 A 26.82268,26.82268 0 1 1 277.35793,332.62314 z"
+             d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
              transform="matrix(0.102065,0,0,0.102065,387.7515,-17.05636)" />
           <path
              sodipodi:type="arc"
@@ -4614,7 +4640,7 @@
              sodipodi:cy="332.62314"
              sodipodi:rx="26.82268"
              sodipodi:ry="26.82268"
-             d="M 277.35793,332.62314 A 26.82268,26.82268 0 1 1 223.71257,332.62314 A 26.82268,26.82268 0 1 1 277.35793,332.62314 z"
+             d="m 277.35793,332.62314 c 0,14.81376 -12.00893,26.82268 -26.82268,26.82268 -14.81376,0 -26.82268,-12.00892 -26.82268,-26.82268 0,-14.81376 12.00892,-26.82268 26.82268,-26.82268 14.81375,0 26.82268,12.00892 26.82268,26.82268 z"
              transform="matrix(5.245387e-2,0,0,5.245387e-2,400.1808,-0.554549)" />
         </g>
       </g>
@@ -4646,13 +4672,13 @@
        inkscape:transform-center-x="-156.01159"
        inkscape:transform-center-y="41.742437" />
     <image
-       y="450.82797"
-       x="330.84604"
-       id="image2972"
-       height="16"
-       width="16"
        sodipodi:absref="/home/vjrj/proyectos/dev/kune/trunk/img/icons/lock_break.png"
-       xlink:href="icons/lock_break.png" />
+       xlink:href="icons/lock_break.png"
+       width="16"
+       height="16"
+       id="image2972"
+       x="330.84604"
+       y="450.82797" />
     <use
        x="0"
        y="0"
@@ -4741,14 +4767,14 @@
          style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.04705882;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <image
-       y="432.36218"
-       x="-371"
-       id="image3958"
-       height="16"
-       width="16"
        sodipodi:absref="/home/vjrj/proyectos/dev/kune/trunk/img/icons/lock_break.png"
        xlink:href="icons/lock_break.png"
-       transform="scale(-1,1)" />
+       transform="scale(-1,1)"
+       width="16"
+       height="16"
+       id="image3958"
+       x="-371"
+       y="432.36218" />
     <g
        id="g3962"
        transform="translate(-43.509019,-21.462476)">
@@ -4790,5 +4816,539 @@
        d="M 356.90981,433.2195 C 362.64423,438.27174 365.62799,440.99217 365.62799,440.99217 L 361.71179,441.04075 L 370.01039,448.32762"
        id="path3976"
        sodipodi:nodetypes="cccc" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/group-def-icon.png"
+       ry="2.5"
+       y="524.09198"
+       x="366.44193"
+       height="13.999999"
+       width="14"
+       id="rect2884-9"
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       ry="2.5"
+       y="496.36218"
+       x="51"
+       height="13.999999"
+       width="14"
+       id="rect2884-5"
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       inkscape:connector-curvature="0"
+       style="color:#000000;fill:#aad400;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 61.950656,498.99001 -5.2833,4.75296 -1.7106,-1.96914 -2.0934,2.14668 c 1.5118,1.34043 2.6383,2.29564 3.8932,3.58472 2.1101,-1.97782 4.2716,-3.54473 6.5614,-5.03458 -0.3489,-1.48877 -0.8009,-2.51535 -1.3673,-3.48064 z"
+       id="rect4453"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect60658"
+       width="14"
+       height="13.999999"
+       x="51"
+       y="533.36218"
+       ry="6.9999995"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="6.9999995" />
+    <rect
+       rx="3.7067122"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       ry="3.7067122"
+       y="536.65546"
+       x="54.293335"
+       height="7.4134245"
+       width="7.4134245"
+       id="rect60678"
+       style="color:#000000;fill:#aad400;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect60699"
+       width="14"
+       height="13.999999"
+       x="51"
+       y="476.36218"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/unchecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect60716"
+       width="14"
+       height="13.999999"
+       x="51"
+       y="496.36218"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       sodipodi:nodetypes="ccccccc"
+       id="path60718"
+       d="m 61.950656,498.99001 -5.2833,4.75296 -1.7106,-1.96914 -2.0934,2.14668 c 1.5118,1.34043 2.6383,2.29564 3.8932,3.58472 2.1101,-1.97782 4.2716,-3.54473 6.5614,-5.03458 -0.3489,-1.48877 -0.8009,-2.51535 -1.3673,-3.48064 z"
+       style="color:#000000;fill:#aad400;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:connector-curvature="0" />
+    <rect
+       rx="6.9999995"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       ry="6.9999995"
+       y="533.36218"
+       x="51"
+       height="13.999999"
+       width="14"
+       id="rect60720"
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:#aad400;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect60722"
+       width="7.4134245"
+       height="7.4134245"
+       x="54.293335"
+       y="536.65546"
+       ry="3.7067122"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="3.7067122" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/unchecked.png"
+       ry="2.5"
+       y="476.36218"
+       x="51"
+       height="13.999999"
+       width="14"
+       id="rect60724"
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       rx="6.9999995"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/movecommons/images/icongen/radio.png"
+       ry="6.9999995"
+       y="553.36218"
+       x="51"
+       height="13.999999"
+       width="14"
+       id="rect60843"
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:#aad400;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect60845"
+       width="7.4134245"
+       height="7.4134245"
+       x="54.293335"
+       y="556.65546"
+       ry="3.7067122"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiounchecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="3.7067122" />
+    <rect
+       style="fill:#ffe6d5;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect60847"
+       width="14"
+       height="13.999999"
+       x="51"
+       y="553.36218"
+       ry="6.9999995"
+       inkscape:export-filename="/home/vjrj/proyectos/movecommons/images/icongen/radio.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="6.9999995" />
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3546"
+       width="14"
+       height="13.999999"
+       x="81"
+       y="496.36218"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       sodipodi:nodetypes="ccccccc"
+       id="path3548"
+       d="m 91.950656,498.99001 -5.2833,4.75296 -1.7106,-1.96914 -2.0934,2.14668 c 1.5118,1.34043 2.6383,2.29564 3.8932,3.58472 2.1101,-1.97782 4.2716,-3.54473 6.5614,-5.03458 -0.3489,-1.48877 -0.8009,-2.51535 -1.3673,-3.48064 z"
+       style="color:#000000;fill:#aad400;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:connector-curvature="0" />
+    <rect
+       rx="6.9999995"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       ry="6.9999995"
+       y="533.36218"
+       x="81"
+       height="13.999999"
+       width="14"
+       id="rect3550"
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="color:#000000;fill:#aad400;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3552"
+       width="7.4134245"
+       height="7.4134245"
+       x="84.293335"
+       y="536.65546"
+       ry="3.7067122"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="3.7067122" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       ry="2.5"
+       y="496.36218"
+       x="81"
+       height="13.999999"
+       width="14"
+       id="rect3556"
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       inkscape:connector-curvature="0"
+       style="color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 91.950656,498.99001 -5.2833,4.75296 -1.7106,-1.96914 -2.0934,2.14668 c 1.5118,1.34043 2.6383,2.29564 3.8932,3.58472 2.1101,-1.97782 4.2716,-3.54473 6.5614,-5.03458 -0.3489,-1.48877 -0.8009,-2.51535 -1.3673,-3.48064 z"
+       id="path3558"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="3.7067122"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       ry="3.7067122"
+       y="536.65546"
+       x="84.293335"
+       height="7.4134245"
+       width="7.4134245"
+       id="rect3562"
+       style="color:#000000;fill:#ffe6d5;fill-opacity:1;fill-rule:evenodd;stroke:#5500d4;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3564"
+       width="14"
+       height="13.999999"
+       x="81"
+       y="476.36218"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/unchecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="6.9999995"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiounchecked.png"
+       ry="6.9999995"
+       y="553.36218"
+       x="81"
+       height="13.999999"
+       width="14"
+       id="rect3570"
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       sodipodi:nodetypes="ccccccc"
+       id="path3582"
+       d="m 122.19758,498.71675 -5.61351,5.05002 -1.81751,-2.09221 -2.22424,2.28085 c 1.60629,1.4242 2.80319,2.43911 4.13653,3.80876 2.24198,-2.10143 4.53857,-3.76628 6.97148,-5.34924 -0.3707,-1.58182 -0.85095,-2.67256 -1.45275,-3.69818 z"
+       style="color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.06250000000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:none;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3588"
+       width="14"
+       height="13.999999"
+       x="111"
+       y="553.36218"
+       ry="6.9999995"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="6.9999995" />
+    <rect
+       style="fill:#fda348;fill-opacity:0.6;stroke:#d45500;stroke-width:1.50000012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3576"
+       width="10.500132"
+       height="10.499868"
+       x="112.75002"
+       y="555.112"
+       ry="5.2499342"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="5.2500658" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/unchecked.png"
+       ry="2.5"
+       y="476.36218"
+       x="111"
+       height="13.999999"
+       width="14"
+       id="rect3586"
+       style="fill:none;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <g
+       id="g7077-2"
+       transform="translate(-665.11791,335.85622)"
+       inkscape:export-filename="/tmp/comunes-v5.png"
+       inkscape:export-xdpi="111.61000"
+       inkscape:export-ydpi="111.61000">
+      <path
+         transform="matrix(0.386438,0,0,0.386438,459.7832,50.23523)"
+         d="m 544.15629,492.37067 c 0,62.80901 -50.91677,113.72577 -113.72578,113.72577 -62.80901,0 -113.72578,-50.91676 -113.72578,-113.72577 0,-62.80902 50.91677,-113.72578 113.72578,-113.72578 62.80901,0 113.72578,50.91676 113.72578,113.72578 z"
+         sodipodi:ry="113.72578"
+         sodipodi:rx="113.72578"
+         sodipodi:cy="492.37067"
+         sodipodi:cx="430.43051"
+         id="path7079"
+         style="color:#000000;fill:#84bade;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:6.25;marker:none;visibility:visible;display:block"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.350014,0,0,0.350014,475.3939,68.14733)"
+         d="m 544.15629,492.37067 c 0,62.80901 -50.91677,113.72577 -113.72578,113.72577 -62.80901,0 -113.72578,-50.91676 -113.72578,-113.72577 0,-62.80902 50.91677,-113.72578 113.72578,-113.72578 62.80901,0 113.72578,50.91676 113.72578,113.72578 z"
+         sodipodi:ry="113.72578"
+         sodipodi:rx="113.72578"
+         sodipodi:cy="492.37067"
+         sodipodi:cx="430.43051"
+         id="path7081"
+         style="color:#000000;fill:#029a00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:6.25;marker:none;visibility:visible;display:block"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.342057,0,0,0.342057,478.9016,72.06431)"
+         d="m 544.15629,492.37067 c 0,62.80901 -50.91677,113.72577 -113.72578,113.72577 -62.80901,0 -113.72578,-50.91676 -113.72578,-113.72577 0,-62.80902 50.91677,-113.72578 113.72578,-113.72578 62.80901,0 113.72578,50.91676 113.72578,113.72578 z"
+         sodipodi:ry="113.72578"
+         sodipodi:rx="113.72578"
+         sodipodi:cy="492.37067"
+         sodipodi:cx="430.43051"
+         id="path7083"
+         style="color:#000000;fill:#cf5c43;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:6.25;marker:none;visibility:visible;display:block"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.210753,0,0,0.210753,535.4274,136.7124)"
+         d="m 544.15629,492.37067 c 0,62.80901 -50.91677,113.72577 -113.72578,113.72577 -62.80901,0 -113.72578,-50.91676 -113.72578,-113.72577 0,-62.80902 50.91677,-113.72578 113.72578,-113.72578 62.80901,0 113.72578,50.91676 113.72578,113.72578 z"
+         sodipodi:ry="113.72578"
+         sodipodi:rx="113.72578"
+         sodipodi:cy="492.37067"
+         sodipodi:cx="430.43051"
+         id="path7085"
+         style="color:#000000;fill:#fea347;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:6.25;marker:none;visibility:visible;display:block"
+         sodipodi:type="arc" />
+      <path
+         transform="matrix(0.08813159,0,0,0.08813159,588.1349,197.0378)"
+         d="m 544.15629,492.37067 c 0,62.80901 -50.91677,113.72577 -113.72578,113.72577 -62.80901,0 -113.72578,-50.91676 -113.72578,-113.72577 0,-62.80902 50.91677,-113.72578 113.72578,-113.72578 62.80901,0 113.72578,50.91676 113.72578,113.72578 z"
+         sodipodi:ry="113.72578"
+         sodipodi:rx="113.72578"
+         sodipodi:cy="492.37067"
+         sodipodi:cx="430.43051"
+         id="path7087"
+         style="color:#000000;fill:#ffff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:6.25;marker:none;visibility:visible;display:block"
+         sodipodi:type="arc" />
+    </g>
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#cf5c43;fill-opacity:0.6;stroke:#cf5c43;stroke-width:3.22555614;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path4263"
+       sodipodi:cx="784.92682"
+       sodipodi:cy="841.8219"
+       sodipodi:rx="9.5390415"
+       sodipodi:ry="6.813601"
+       d="m 794.46586,841.8219 a 9.5390415,6.813601 0 1 1 -19.07808,0 9.5390415,6.813601 0 1 1 19.07808,0 z"
+       transform="matrix(0.26207038,0,0,0.36689855,-40.70607,191.49895)"
+       inkscape:export-filename="/home/vjrj/proyectos/comunes/imagenes/dot1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       transform="matrix(0.26207038,0,0,0.36689855,-40.70607,201.49895)"
+       d="m 794.46586,841.8219 a 9.5390415,6.813601 0 1 1 -19.07808,0 9.5390415,6.813601 0 1 1 19.07808,0 z"
+       sodipodi:ry="6.813601"
+       sodipodi:rx="9.5390415"
+       sodipodi:cy="841.8219"
+       sodipodi:cx="784.92682"
+       id="path4265"
+       style="color:#000000;fill:#fda348;fill-opacity:0.6;stroke:#cf5c43;stroke-width:3.22555614;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc"
+       inkscape:export-filename="/home/vjrj/proyectos/comunes/imagenes/dot2.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#ffff00;fill-opacity:0.6;stroke:#cf5c43;stroke-width:3.22555614;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path4267"
+       sodipodi:cx="784.92682"
+       sodipodi:cy="841.8219"
+       sodipodi:rx="9.5390415"
+       sodipodi:ry="6.813601"
+       d="m 794.46586,841.8219 a 9.5390415,6.813601 0 1 1 -19.07808,0 9.5390415,6.813601 0 1 1 19.07808,0 z"
+       transform="matrix(0.26207038,0,0,0.36689855,-40.70607,211.49895)"
+       inkscape:export-filename="/home/vjrj/proyectos/comunes/imagenes/dot3.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="6.9999995"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiounchecked.png"
+       ry="6.9999995"
+       y="523.36218"
+       x="111"
+       height="13.999999"
+       width="14"
+       id="rect4470"
+       style="fill:none;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       rx="5.2500658"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiounchecked.png"
+       ry="5.2499342"
+       y="525.112"
+       x="112.75002"
+       height="10.499868"
+       width="10.500132"
+       id="rect4472"
+       style="fill-opacity:0;stroke:#d45500;stroke-width:1.50000011999999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="fill:none;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4474"
+       width="14"
+       height="13.999999"
+       x="111"
+       y="496.36218"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       style="color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.0625;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 142.19758,498.71675 -5.61351,5.05002 -1.81751,-2.09221 -2.22424,2.28085 c 1.60629,1.4242 2.80319,2.43911 4.13653,3.80876 2.24198,-2.10143 4.53857,-3.76628 6.97148,-5.34924 -0.3707,-1.58182 -0.85095,-2.67256 -1.45275,-3.69818 z"
+       id="path3563"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="6.9999995"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       ry="6.9999995"
+       y="553.36218"
+       x="131"
+       height="13.999999"
+       width="14"
+       id="rect3565"
+       style="fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       rx="5.2500658"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       ry="5.2499342"
+       y="555.112"
+       x="132.75003"
+       height="10.499868"
+       width="10.500132"
+       id="rect3567"
+       style="fill:#fda348;fill-opacity:0.6;stroke:#d45500;stroke-width:1.50000012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       style="fill:none;stroke:#d45500;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3569"
+       width="14"
+       height="13.999999"
+       x="131"
+       y="476.36218"
+       ry="2.5"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/unchecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3571"
+       width="16"
+       height="15.999999"
+       x="129"
+       y="523.36218"
+       ry="7.9999995"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiounchecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="7.9999995" />
+    <rect
+       style="fill-opacity:1;stroke:#c83737;stroke-width:1.24998641000000021;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;fill:#ffffff"
+       id="rect3573"
+       width="8.7500134"
+       height="8.749794"
+       x="132.62503"
+       y="526.98706"
+       ry="4.374897"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiounchecked.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="4.3750067" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/checked.png"
+       ry="2.5"
+       y="496.36218"
+       x="131"
+       height="13.999999"
+       width="14"
+       id="rect3575"
+       style="fill:none;stroke:#c83737;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       rx="7.9999995"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       ry="7.9999995"
+       y="537.36218"
+       x="129"
+       height="15.999999"
+       width="16"
+       id="rect3577"
+       style="fill:none;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       rx="4.3750067"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/radiochecked.png"
+       ry="4.374897"
+       y="540.98706"
+       x="132.62503"
+       height="8.749794"
+       width="8.7500134"
+       id="rect3579"
+       style="fill:url(#radialGradient4374);fill-opacity:1;stroke:#c83737;stroke-width:1.24998641000000021;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
 </svg>

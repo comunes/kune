@@ -25,6 +25,7 @@ import cc.kune.chat.client.ChatParts;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
+import cc.kune.common.client.log.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.core.client.CoreGinModule;
 import cc.kune.core.client.CoreParts;
@@ -33,7 +34,6 @@ import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.NewGroupPresenter;
-import cc.kune.core.client.logs.EventBusWithLogging;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
@@ -45,6 +45,7 @@ import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.core.client.ws.CorePresenter;
+import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.pspace.client.PSpaceGinModule;
 import cc.kune.pspace.client.PSpacePresenter;
@@ -73,6 +74,8 @@ public interface KuneGinjector extends Ginjector {
     CoreParts getCoreParts();
 
     Provider<CorePresenter> getCorePresenter();
+
+    AsyncProvider<EntityHeaderPresenter> getEntityHeaderPresenter();
 
     AsyncProvider<EntityLicensePresenter> getEntityLicensePresenter();
 

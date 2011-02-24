@@ -19,6 +19,7 @@
  */
 package cc.kune.client;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 
@@ -46,7 +47,7 @@ public class KuneEntryPoint implements EntryPoint {
         GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
             @Override
             public void onUncaughtException(final Throwable e) {
-                GWT.log("Error in 'onModuleLoad()' method", e);
+                Log.error("Error in 'onModuleLoad()' method", e);
                 e.printStackTrace();
             }
         });

@@ -19,9 +19,9 @@
  */
 package cc.kune.core.client.errors;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.noti.NotifyUser;
-import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.state.Session;
@@ -29,7 +29,6 @@ import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.inject.Inject;
@@ -121,7 +120,7 @@ public class ErrorHandler {
             logException(caught, true);
             eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
                     i18n.t("Oops! Something has gone wrong with our servers. Retry later, please.")));
-            GWT.log("Other kind of exception in StateManagerDefault/processErrorException", caught);
+            Log.error("Other kind of exception in StateManagerDefault/processErrorException", caught);
         }
     }
 

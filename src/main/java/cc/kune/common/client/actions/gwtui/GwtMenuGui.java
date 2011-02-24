@@ -101,7 +101,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     @Override
     public void setIconStyle(final String style) {
         if (notStandAlone) {
-            iconLabel.setLeftIcon(style);
+            iconLabel.setRightIcon(style);
             layout();
         }
     }

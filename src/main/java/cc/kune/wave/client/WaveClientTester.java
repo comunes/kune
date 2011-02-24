@@ -1,8 +1,8 @@
 package cc.kune.wave.client;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.common.client.utils.WindowUtils;
-import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;

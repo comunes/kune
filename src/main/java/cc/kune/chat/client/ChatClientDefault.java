@@ -33,13 +33,13 @@ import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
-import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
@@ -62,7 +62,6 @@ import com.calclab.hablar.HablarComplete;
 import com.calclab.hablar.HablarConfig;
 import com.calclab.hablar.console.client.HablarConsole;
 import com.calclab.hablar.core.client.Hablar;
-import com.calclab.hablar.core.client.HablarWidget;
 import com.calclab.hablar.core.client.ui.icon.Icons;
 import com.calclab.hablar.html.client.HtmlConfig;
 import com.calclab.hablar.icons.alt.client.AltIconsBundle;
@@ -225,7 +224,7 @@ public class ChatClientDefault implements ChatClient {
             chatIcon.putValue(Action.SHORT_DESCRIPTION, i18n.t("Show/hide the chat window"));
             final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
             shorcutRegister.put(shortcut, action);
-            // action.setShortcut(shortcut);
+            action.setShortcut(shortcut);
             chatIcon.setVisible(session.isLogged());
             siteActions.getLeftToolbar().addAction(
                     new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
@@ -237,7 +236,7 @@ public class ChatClientDefault implements ChatClient {
         }
     }
 
-    private void createDialog(final HablarWidget widget, final HtmlConfig htmlConfig) {
+    private void createDialog(final KuneHablarWidget widget, final HtmlConfig htmlConfig) {
         widget.addStyleName("k-chat-panel");
         setSize(widget, htmlConfig);
         dialog.add(widget);
@@ -256,7 +255,7 @@ public class ChatClientDefault implements ChatClient {
             dialog.setCollapsible(true);
             // final Widget btn = (Widget)
             // chatIcon.getValue(ParentWidget.PARENT_UI);
-            dialog.setPosition(118, 2);
+            dialog.setPosition(118, 1);
             dialog.setIcon(AbstractImagePrototype.create(chatResources.chat()));
             // dialog.getItem(0).getFocusSupport().setIgnore(true);
             initEmite();
@@ -294,7 +293,7 @@ public class ChatClientDefault implements ChatClient {
         config.dockConfig.headerSize = 0;
         config.dockConfig.rosterWidth = 150;
         config.dockConfig.rosterDock = "right";
-        final HablarWidget widget = new HablarWidget(config.layout, config.tabHeaderSize);
+        final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
         final Hablar hablar = widget.getHablar();
         HablarComplete.install(hablar, config);
         new KuneHablarSignals(eventBus, xmppSession, hablar, action);

@@ -18,8 +18,8 @@
   <g:FocusPanel ui:field="self">
     <g:FlowPanel styleName="{style.pad}" ui:field="flow">
       <g:Image ui:field="iconLeft" />
-      <g:InlineLabel ui:field="label" styleName="{style.label}" />
       <g:Image ui:field="iconRight" />
+      <g:InlineLabel ui:field="label" styleName="{style.label}" />
     </g:FlowPanel>
   </g:FocusPanel>
 </ui:UiBinder>

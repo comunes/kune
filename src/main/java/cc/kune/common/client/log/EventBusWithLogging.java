@@ -17,11 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.init;
+package cc.kune.common.client.log;
 
 
-public interface AppStarter {
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.SimpleEventBus;
 
-    void start();
-
+public class EventBusWithLogging extends SimpleEventBus {
+    @Override
+    public void fireEvent(final GwtEvent<?> event) {
+        Log.debug(event.toDebugString() + " " + event.toString());
+        super.fireEvent(event);
+    }
 }

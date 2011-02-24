@@ -1,12 +1,12 @@
 package cc.kune.common.client.utils;
 
-import com.google.gwt.core.client.GWT;
+import cc.kune.common.client.log.Log;
 
 public abstract class OnAcceptCallback implements SimpleCallback {
 
     @Override
     public void onCancel() {
         // Do nothing
-        GWT.log("On cancel callback");
+        Log.debug("On cancel callback, do nothing");
     }
 }

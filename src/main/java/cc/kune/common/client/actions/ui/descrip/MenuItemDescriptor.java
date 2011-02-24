@@ -20,7 +20,7 @@
 package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
-import cc.kune.core.client.logs.Log;
+import cc.kune.common.client.log.Log;
 
 public class MenuItemDescriptor extends AbstractGuiActionDescrip {
 

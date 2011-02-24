@@ -25,7 +25,7 @@ import java.util.HashMap;
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.errors.NotImplementedException;
-import cc.kune.core.client.logs.Log;
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;

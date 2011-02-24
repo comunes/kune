@@ -23,10 +23,10 @@ import java.util.Collection;
 import java.util.List;
 
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;

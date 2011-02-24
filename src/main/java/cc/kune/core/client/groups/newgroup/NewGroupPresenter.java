@@ -20,11 +20,11 @@
 package cc.kune.core.client.groups.newgroup;
 
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.GroupNameInUseException;
-import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;

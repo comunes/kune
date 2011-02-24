@@ -86,7 +86,7 @@
                 </g:south>
               </g:DockLayoutPanel>
             </g:center>
-            <g:east size="200.0">
+            <g:west size="200.0">
               <g:DockLayoutPanel unit="PX"
                 styleName="{res.style.entityTools}" ui:field="splitEast">
                 <g:north size="305">
@@ -103,7 +103,7 @@
                     styleName="{res.style.entityToolsSouth}" ui:field="entityToolsSouth"></g:VerticalPanel>
                 </g:south>
               </g:DockLayoutPanel>
-            </g:east>
+            </g:west>
           </g:SplitLayoutPanel>
         </g:tab>
         <g:tab>

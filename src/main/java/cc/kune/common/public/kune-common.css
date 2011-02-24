@@ -423,6 +423,7 @@
 .k-iconlabel-text {
     vertical-align: top;
     padding-left: 3px;
+    float: left;
 }
 
 .k-menuimtem-title {
@@ -443,7 +444,7 @@
 }
 
 .k-iconlabel-right {
-    float: right;
+    float: left;
  /*   margin-left: 5px; */
 }
 

@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.auth;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.TimerWrapper;
@@ -26,7 +27,6 @@ import cc.kune.common.client.utils.TimerWrapper.Executer;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.resources.CoreMessages;

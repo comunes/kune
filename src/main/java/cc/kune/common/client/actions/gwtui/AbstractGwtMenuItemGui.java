@@ -33,7 +33,6 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.common.client.resources.CommonIconResources;
 import cc.kune.common.client.ui.IconLabel;
 
@@ -49,37 +48,34 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     private GwtBaseMenuItem item;
     private final CommonIconResources res = CommonIconResources.INSTANCE;
 
-    private void confCheckListener(final MenuItemDescriptor descriptor, final GwtCheckItem checkItem) {
+    private void confCheckListener(final MenuCheckItemDescriptor descriptor, final GwtCheckItem checkItem) {
         descriptor.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
                     final Boolean checked = (Boolean) event.getNewValue();
-                    NotifyUser.info("Check checked: " + checked);
-                    iconLabel.setRightIconResource(checked ? res.checked() : res.unChecked());
+                    setCheckedIcon(checked);
                     layout();
                 }
             }
         });
-        iconLabel.setRightIconResource(res.unChecked());
+        setCheckedIcon(descriptor.isChecked());
         iconLabel.setWidth("100%");
     }
 
-    private void confRadioCheckListener(final MenuItemDescriptor descriptor, final GwtCheckItem checkItem,
-            final String group) {
+    private void confRadioCheckListener(final MenuRadioItemDescriptor descriptor, final GwtCheckItem checkItem) {
         descriptor.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
 
                 if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
                     final Boolean checked = (Boolean) event.getNewValue();
-                    NotifyUser.info("Radio checked: " + checked);
-                    iconLabel.setRightIconResource(checked ? res.radioChecked() : res.radioUnChecked());
+                    setRadioChecked(checked);
                     layout();
                 }
             }
         });
-        iconLabel.setRightIconResource(res.radioUnChecked());
+        setRadioChecked(descriptor.isChecked());
         iconLabel.setWidth("100%");
     }
 
@@ -89,12 +85,12 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
         iconLabel = new IconLabel("");
         if (descriptor instanceof MenuRadioItemDescriptor) {
             final GwtCheckItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
-            confRadioCheckListener((MenuItemDescriptor) descriptor, checkItem,
-                    ((MenuRadioItemDescriptor) descriptor).getGroup());
+            final MenuRadioItemDescriptor radioDescrip = (MenuRadioItemDescriptor) descriptor;
+            confRadioCheckListener(radioDescrip, checkItem);
             item = checkItem;
         } else if (descriptor instanceof MenuCheckItemDescriptor) {
             final GwtCheckItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
-            confCheckListener((MenuItemDescriptor) descriptor, checkItem);
+            confCheckListener((MenuCheckItemDescriptor) descriptor, checkItem);
             item = checkItem;
         } else if (descriptor instanceof MenuTitleItemDescriptor) {
             item = new GwtBaseMenuItem("", true);
@@ -170,6 +166,10 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
         item.setHTML(iconLabel.toString());
     }
 
+    private void setCheckedIcon(final Boolean checked) {
+        iconLabel.setLeftIconResource(checked ? res.checked() : res.unChecked());
+    }
+
     @Override
     protected void setEnabled(final boolean enabled) {
         item.setEnabled(enabled);
@@ -178,14 +178,18 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
 
     @Override
     public void setIconResource(final ImageResource icon) {
-        iconLabel.setLeftIconResource(icon);
+        iconLabel.setRightIconResource(icon);
         layout();
     }
 
     @Override
     protected void setIconStyle(final String style) {
-        iconLabel.setLeftIcon(style);
+        iconLabel.setRightIcon(style);
         layout();
+    }
+
+    private void setRadioChecked(final Boolean checked) {
+        iconLabel.setLeftIconResource(checked ? res.radioChecked() : res.radioUnChecked());
     }
 
     @Override

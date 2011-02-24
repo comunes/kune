@@ -52,7 +52,6 @@ public class GroupMembersPanel extends ViewImpl implements GroupMembersView {
     Label collabsLabel;
     @UiField
     DockLayoutPanel collabsPanel;
-
     @UiField
     ScrollPanel collabsScroll;
     @UiField
@@ -146,7 +145,6 @@ public class GroupMembersPanel extends ViewImpl implements GroupMembersView {
         final ClickHandler clickHand = new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                GWT.log("Show event");
                 menu.show(thumb);
             }
         };

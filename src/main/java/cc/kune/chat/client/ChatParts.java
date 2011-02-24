@@ -17,6 +17,7 @@ public class ChatParts {
 
     @Inject
     public ChatParts(final Session session, final Provider<ChatSitebarActions> chatActionsProvider,
+            final Provider<AddAsBuddieHeaderButton> buddieButton,
             final Provider<SNAdminsMenuItemsRegistry> snAdminsRegistry,
             final Provider<SNCollabsMenuItemsRegistry> snCollabsItemsRegistry,
             final Provider<SNPendingsMenuItemsRegistry> snPendingItemsRegistry, final IsNotMeCondition isNotMe,
@@ -48,6 +49,7 @@ public class ChatParts {
                 snAdminsRegistry.get().add(startChatWithMemberItem);
                 snCollabsItemsRegistry.get().add(startChatWithMemberItem);
                 snPendingItemsRegistry.get().add(startChatWithUserItem);
+                buddieButton.get();
             }
         });
     }

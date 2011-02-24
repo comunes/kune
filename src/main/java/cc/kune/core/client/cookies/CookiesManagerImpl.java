@@ -21,9 +21,9 @@ package cc.kune.core.client.cookies;
 
 import java.util.Date;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.state.Session;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 
 public class CookiesManagerImpl implements CookiesManager {
@@ -53,6 +53,6 @@ public class CookiesManagerImpl implements CookiesManager {
         final long duration = Session.SESSION_DURATION;
         final Date expires = new Date(System.currentTimeMillis() + duration);
         Cookies.setCookie(Session.USERHASH, userHash, expires, null, "/", false);
-        GWT.log("Received hash: " + userHash, null);
+        Log.info("Received hash: " + userHash, null);
     }
 }

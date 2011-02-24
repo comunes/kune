@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.init;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;

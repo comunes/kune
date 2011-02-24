@@ -19,7 +19,7 @@
  */
 package cc.kune.common.client.errors;
 
-import com.google.gwt.core.client.GWT;
+import cc.kune.common.client.log.Log;
 
 public class NotImplementedException extends RuntimeException {
 
@@ -27,22 +27,22 @@ public class NotImplementedException extends RuntimeException {
 
     public NotImplementedException() {
         super();
-        GWT.log("NotImplementedException");
+        Log.error("NotImplementedException");
     }
 
     public NotImplementedException(final String text) {
         super(text);
-        GWT.log(text);
+        Log.error(text);
     }
 
     public NotImplementedException(final String text, final Throwable cause) {
         super(text, cause);
-        GWT.log(text, cause);
+        Log.error(text, cause);
     }
 
     public NotImplementedException(final Throwable cause) {
         super(cause);
-        GWT.log("NotImplementedException", cause);
+        Log.error("NotImplementedException", cause);
     }
 
 }

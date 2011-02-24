@@ -20,6 +20,7 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.cookies.CookiesManager;
@@ -27,7 +28,6 @@ import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.logs.Log;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.UserServiceAsync;

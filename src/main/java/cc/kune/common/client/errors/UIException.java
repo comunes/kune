@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
  */
 package cc.kune.common.client.errors;
 
-import com.google.gwt.core.client.GWT;
+import cc.kune.common.client.log.Log;
 
 public class UIException extends RuntimeException {
 
@@ -27,17 +27,17 @@ public class UIException extends RuntimeException {
 
     public UIException(final String text) {
         super(text);
-        GWT.log(text);
+        Log.error(text);
     }
 
     public UIException(final String text, final Throwable cause) {
         super(text, cause);
-        GWT.log(text, cause);
+        Log.error(text, cause);
     }
 
     public UIException(final Throwable cause) {
         super(cause);
-        GWT.log("UIException", cause);
+        Log.error("UIException", cause);
     }
 
 }
