@@ -204,7 +204,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
     @Override
     public void setStyles(final String styles) {
-        putValue(STYLES, styles);
+        putValue(Action.STYLES, styles);
     }
 
     @Override
@@ -223,5 +223,41 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
         final String tooltip = (String) getValue(Action.SHORT_DESCRIPTION);
         return "[GuiActionDescrip: " + getClass().getName() + (name == null ? "" : " " + name)
                 + (tooltip == null ? "" : " " + tooltip) + "]";
+    }
+
+    @Override
+    public GuiActionDescrip withIcon(final Object icon) {
+        super.putValue(Action.SMALL_ICON, icon);
+        return this;
+    }
+
+    @Override
+    public GuiActionDescrip withIconCls(final String icon) {
+        putValue(Action.SMALL_ICON, icon);
+        return this;
+    }
+
+    @Override
+    public GuiActionDescrip withParent(final GuiActionDescrip parent) {
+        setParent(parent);
+        return this;
+    }
+
+    @Override
+    public GuiActionDescrip withStyles(final String styles) {
+        setStyles(styles);
+        return this;
+    }
+
+    @Override
+    public GuiActionDescrip withText(final String text) {
+        putValue(Action.NAME, text);
+        return this;
+    }
+
+    @Override
+    public GuiActionDescrip withToolTip(final String tooltip) {
+        putValue(Action.SHORT_DESCRIPTION, tooltip);
+        return this;
     }
 }

@@ -5,8 +5,6 @@ import java.util.List;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.sn.actions.registry.AbstractSNMembersActionsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupMembersActionsRegistry;
@@ -41,7 +39,6 @@ public class GroupMembersPresenter extends
 
     public interface GroupMembersView extends View {
         int AVATARLABELMAXSIZE = 4;
-        // int AVATARSIZE = 32;
         int AVATARSIZE = 22;
         String NOAVATAR = "";
 
@@ -79,11 +76,9 @@ public class GroupMembersPresenter extends
 
     private final GroupMembersActionsRegistry actionsRegistry;
     private final SNAdminsMenuItemsRegistry adminsMenuItemsRegistry;
-
     private final SNCollabsMenuItemsRegistry collabsMenuItemsRegistry;
     private final Provider<FileDownloadUtils> downloadProvider;
     private final SNPendingsMenuItemsRegistry pendingsMenuItemsRegistry;
-    private final Session session;
 
     @Inject
     public GroupMembersPresenter(final EventBus eventBus, final GroupMembersView view, final GroupMembersProxy proxy,
@@ -93,13 +88,12 @@ public class GroupMembersPresenter extends
             final SNPendingsMenuItemsRegistry pendingsMenuItemsRegistry,
             final GroupMembersActionsRegistry actionsRegistry) {
         super(eventBus, view, proxy);
-        this.session = session;
         this.downloadProvider = downloadProvider;
         this.adminsMenuItemsRegistry = adminsMenuItemsRegistry;
         this.collabsMenuItemsRegistry = collabsMenuItemsRegistry;
         this.pendingsMenuItemsRegistry = pendingsMenuItemsRegistry;
         this.actionsRegistry = actionsRegistry;
-        stateManager.onStateChanged(new StateChangedEvent.StateChangedHandler() {
+        stateManager.onStateChanged(true, new StateChangedEvent.StateChangedHandler() {
             @Override
             public void onStateChanged(final StateChangedEvent event) {
                 GroupMembersPresenter.this.onStateChanged(event.getState());
@@ -110,12 +104,6 @@ public class GroupMembersPresenter extends
             @Override
             public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
                 GroupMembersPresenter.this.onStateChanged(event.getState());
-            }
-        });
-        session.onInitDataReceived(new AppStartHandler() {
-            @Override
-            public void onAppStart(final AppStartEvent event) {
-                // FIXME
             }
         });
         createActions();

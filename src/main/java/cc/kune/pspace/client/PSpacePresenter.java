@@ -21,8 +21,10 @@ package cc.kune.pspace.client;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupListDTO;
@@ -61,15 +63,16 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
     private final StateTokenUtils stateTokenUtils;
 
     @Inject
-    public PSpacePresenter(final EventBus eventBus, final PSpaceView view, final PSpaceProxy proxy,
-            final I18nTranslationService i18n, final StateTokenUtils stateTokenUtils) {
+    public PSpacePresenter(final Session session, final StateManager stateManager, final EventBus eventBus,
+            final PSpaceView view, final PSpaceProxy proxy, final I18nTranslationService i18n,
+            final StateTokenUtils stateTokenUtils) {
         super(eventBus, view, proxy);
         this.i18n = i18n;
         this.stateTokenUtils = stateTokenUtils;
-        eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
+        session.onInitDataReceived(true, new AppStartEvent.AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
-                eventBus.addHandler(StateChangedEvent.getType(), new StateChangedHandler() {
+                stateManager.onStateChanged(true, new StateChangedHandler() {
                     @Override
                     public void onStateChanged(final StateChangedEvent event) {
                         setState(event.getState());

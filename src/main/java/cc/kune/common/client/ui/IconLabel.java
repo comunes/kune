@@ -46,7 +46,9 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     @UiField
     FlowPanel flow;
     @UiField
-    Image icon;
+    Image iconLeft;
+    @UiField
+    Image iconRight;
     @UiField
     InlineLabel label;
     @UiField
@@ -106,18 +108,32 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
         return flow.remove(w);
     }
 
-    public void setIcon(final String imgCss) {
-        icon.setUrl("images/clear.gif");
-        icon.setStyleName(imgCss);
-        icon.addStyleName("oc-ico-pad");
-    }
-
-    public void setIconResource(final ImageResource res) {
-        icon.setResource(res);
-    }
-
     public void setLabelText(final String text) {
         label.setText(text);
+    }
+
+    public void setLeftIcon(final String imgCss) {
+        iconLeft.setUrl("images/clear.gif");
+        iconLeft.setStyleName(imgCss);
+        iconLeft.addStyleName("k-iconlabel-left");
+        iconLeft.addStyleName("oc-ico-pad");
+    }
+
+    public void setLeftIconResource(final ImageResource res) {
+        iconLeft.setResource(res);
+        iconRight.addStyleName("k-iconlabel-left");
+    }
+
+    public void setRightIcon(final String imgCss) {
+        iconRight.setUrl("images/clear.gif");
+        iconRight.setStyleName(imgCss);
+        iconRight.addStyleName("oc-ico-pad");
+        iconRight.addStyleName("k-iconlabel-right");
+    }
+
+    public void setRightIconResource(final ImageResource res) {
+        iconRight.setResource(res);
+        iconRight.addStyleName("k-iconlabel-right");
     }
 
     @Override

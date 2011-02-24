@@ -153,7 +153,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         if (beforeStateChangeCollection.checkBeforeAction()) {
             final HistoryTokenCallback tokenListener = siteTokens.get(historyToken != null ? historyToken.toLowerCase()
                     : historyToken);
-            Log.debug("StateManager: history token changed (" + historyToken + ")");
+            Log.debug("StateManager: on history changed (" + historyToken + ")");
             if (tokenListener == null) {
                 // Ok, normal token change
                 onHistoryChanged(new StateToken(historyToken));
@@ -182,13 +182,18 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     @Override
-    public void onStateChanged(final Listener<StateAbstractDTO> listener) {
-        throw new NotImplementedException();
+    public void onStateChanged(final boolean fireNow, final StateChangedHandler handler) {
+        eventBus.addHandler(StateChangedEvent.getType(), handler);
+        if (fireNow) {
+            if (session.getCurrentState() != null) {
+                handler.onStateChanged(new StateChangedEvent(session.getCurrentState()));
+            }
+        }
     }
 
     @Override
-    public void onStateChanged(final StateChangedHandler handler) {
-        eventBus.addHandler(StateChangedEvent.getType(), handler);
+    public void onStateChanged(final Listener<StateAbstractDTO> listener) {
+        throw new NotImplementedException();
     }
 
     @Override
@@ -203,6 +208,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void onValueChange(final ValueChangeEvent<String> event) {
+        Log.info("History event value changed: " + event.getValue());
         onHistoryChanged(event.getValue());
     }
 

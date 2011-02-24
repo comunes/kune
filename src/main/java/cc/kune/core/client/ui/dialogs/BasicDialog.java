@@ -142,7 +142,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
     public void setTitleIcon(final String icon) {
         if (TextUtils.notEmpty(icon)) {
-            title.setIcon(icon);
+            title.setLeftIcon(icon);
         }
     }
 

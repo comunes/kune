@@ -19,10 +19,11 @@
  */
 package cc.kune.common.client.actions;
 
+import com.google.gwt.resources.client.ImageResource;
 
 public abstract class AbstractExtendedAction extends AbstractAction {
-    public static final String NO_TEXT = null;
     public static final String NO_ICON = null;
+    public static final String NO_TEXT = null;
 
     public AbstractExtendedAction() {
         super();
@@ -41,5 +42,25 @@ public abstract class AbstractExtendedAction extends AbstractAction {
         super.putValue(Action.NAME, text);
         super.putValue(Action.SHORT_DESCRIPTION, tooltip);
         super.putValue(Action.SMALL_ICON, iconCls);
+    }
+
+    public AbstractExtendedAction withIcon(final ImageResource icon) {
+        super.putValue(Action.SHORT_DESCRIPTION, icon);
+        return this;
+    }
+
+    public AbstractExtendedAction withIconCls(final String icon) {
+        super.putValue(Action.SHORT_DESCRIPTION, icon);
+        return this;
+    }
+
+    public AbstractExtendedAction withText(final String text) {
+        super.putValue(Action.NAME, text);
+        return this;
+    }
+
+    public AbstractExtendedAction withToolTip(final String tooltip) {
+        super.putValue(Action.SHORT_DESCRIPTION, tooltip);
+        return this;
     }
 }

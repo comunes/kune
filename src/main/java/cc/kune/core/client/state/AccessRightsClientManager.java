@@ -33,7 +33,7 @@ public class AccessRightsClientManager {
     public AccessRightsClientManager(final EventBus eventBus, final StateManager stateManager) {
         this.eventBus = eventBus;
         this.previousRights = null;
-        stateManager.onStateChanged(new StateChangedHandler() {
+        stateManager.onStateChanged(true, new StateChangedHandler() {
 
             @Override
             public void onStateChanged(final StateChangedEvent event) {

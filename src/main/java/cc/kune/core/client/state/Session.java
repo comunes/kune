@@ -136,7 +136,7 @@ public interface Session {
 
     boolean isNotLogged();
 
-    void onInitDataReceived(AppStartEvent.AppStartHandler handler);
+    void onInitDataReceived(boolean fireNow, AppStartEvent.AppStartHandler handler);
 
     @Deprecated
     void onInitDataReceived(Listener<InitDataDTO> listener);

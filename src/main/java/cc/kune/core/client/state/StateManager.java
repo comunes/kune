@@ -47,10 +47,15 @@ public interface StateManager {
 
     void onSocialNetworkChanged(SocialNetworkChangedEvent.SocialNetworkChangedHandler handler);
 
+    /**
+     * @param fireNow
+     *            if true, fire handler with current state
+     * @param handler
+     */
+    void onStateChanged(boolean fireNow, StateChangedEvent.StateChangedHandler handler);
+
     @Deprecated
     void onStateChanged(Listener<StateAbstractDTO> listener);
-
-    void onStateChanged(StateChangedEvent.StateChangedHandler handler);
 
     @Deprecated
     void onToolChanged(Listener2<String, String> listener);

@@ -17,20 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.actions.gwtui;
+package cc.kune.common.client.resources;
 
+import com.google.gwt.resources.client.CssResource;
 
-public class GwtCheckItem extends GwtBaseMenuItem {
-
-    public void setChecked(final boolean newValue) {
-        // throw new NotImplementedException();
-    }
-
-    /*
-     * Checkbox group
-     */
-    public void setGroup(final String group) {
-        // throw new NotImplementedException();
-    }
-
+public interface CommonIconCssResource extends CssResource {
 }

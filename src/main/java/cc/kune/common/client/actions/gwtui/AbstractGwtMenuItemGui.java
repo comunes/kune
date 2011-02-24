@@ -33,6 +33,8 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.resources.CommonIconResources;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.resources.client.ImageResource;
@@ -45,24 +47,40 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
 
     private IconLabel iconLabel;
     private GwtBaseMenuItem item;
-
-    public AbstractGwtMenuItemGui() {
-    }
-
-    public AbstractGwtMenuItemGui(final MenuItemDescriptor descriptor) {
-        super(descriptor);
-
-    }
+    private final CommonIconResources res = CommonIconResources.INSTANCE;
 
     private void confCheckListener(final MenuItemDescriptor descriptor, final GwtCheckItem checkItem) {
         descriptor.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
-                    checkItem.setChecked((Boolean) event.getNewValue());
+                    final Boolean checked = (Boolean) event.getNewValue();
+                    NotifyUser.info("Check checked: " + checked);
+                    iconLabel.setRightIconResource(checked ? res.checked() : res.unChecked());
+                    layout();
                 }
             }
         });
+        iconLabel.setRightIconResource(res.unChecked());
+        iconLabel.setWidth("100%");
+    }
+
+    private void confRadioCheckListener(final MenuItemDescriptor descriptor, final GwtCheckItem checkItem,
+            final String group) {
+        descriptor.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(final PropertyChangeEvent event) {
+
+                if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
+                    final Boolean checked = (Boolean) event.getNewValue();
+                    NotifyUser.info("Radio checked: " + checked);
+                    iconLabel.setRightIconResource(checked ? res.radioChecked() : res.radioUnChecked());
+                    layout();
+                }
+            }
+        });
+        iconLabel.setRightIconResource(res.radioUnChecked());
+        iconLabel.setWidth("100%");
     }
 
     @Override
@@ -71,8 +89,8 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
         iconLabel = new IconLabel("");
         if (descriptor instanceof MenuRadioItemDescriptor) {
             final GwtCheckItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
-            checkItem.setGroup(((MenuRadioItemDescriptor) descriptor).getGroup());
-            confCheckListener((MenuItemDescriptor) descriptor, checkItem);
+            confRadioCheckListener((MenuItemDescriptor) descriptor, checkItem,
+                    ((MenuRadioItemDescriptor) descriptor).getGroup());
             item = checkItem;
         } else if (descriptor instanceof MenuCheckItemDescriptor) {
             final GwtCheckItem checkItem = createCheckItem((MenuItemDescriptor) descriptor);
@@ -96,6 +114,16 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
                 getParentMenu(descriptor).hide();
                 final AbstractAction action = descriptor.getAction();
                 if (action != null) {
+                    if (descriptor instanceof MenuRadioItemDescriptor) {
+                        final MenuRadioItemDescriptor checkItem = (MenuRadioItemDescriptor) descriptor;
+                        if (!checkItem.isChecked()) {
+                            checkItem.setChecked(true);
+                        }
+                    } else if (descriptor instanceof MenuCheckItemDescriptor) {
+                        final MenuCheckItemDescriptor checkItem = (MenuCheckItemDescriptor) descriptor;
+                        final boolean currentValue = checkItem.isChecked();
+                        checkItem.setChecked(!currentValue);
+                    }
                     descriptor.getAction().actionPerformed(
                             new ActionEvent(item, getTargetObjectOfAction(descriptor), Event.getCurrentEvent()));
                 }
@@ -106,7 +134,7 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
         final int position = descriptor.getPosition();
         final AbstractGwtMenuGui menu = getParentMenu(descriptor);
         if (menu == null) {
-            throw new UIException("To add a menu item you need to add the menu before. Item: " + descriptor);
+            throw new UIException("Warning: To add a menu item you need to add the menu before. Item: " + descriptor);
         }
         if (position == GuiActionDescrip.NO_POSITION) {
             menu.add(item);
@@ -150,13 +178,13 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
 
     @Override
     public void setIconResource(final ImageResource icon) {
-        iconLabel.setIconResource(icon);
+        iconLabel.setLeftIconResource(icon);
         layout();
     }
 
     @Override
     protected void setIconStyle(final String style) {
-        iconLabel.setIcon(style);
+        iconLabel.setLeftIcon(style);
         layout();
     }
 

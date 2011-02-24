@@ -2,24 +2,24 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style>
-    .label { /* padding-left: 4px; */
-      text-decoration: none;
+    .label {
+        text-decoration: none;
     }
 
     .label a:link {
-      text-decoration: none;
-      color: gray;
+        text-decoration: none;
+        color: gray;
     }
 
-    .pad { /* padding-left: 5px; */
-
+    .pad {
+        white-space: nowrap;
     }
   </ui:style>
   <g:FocusPanel ui:field="self">
-    <g:FlowPanel styleName="{style.pad}"
-      ui:field="flow">
-      <g:Image ui:field="icon"/>
+    <g:FlowPanel styleName="{style.pad}" ui:field="flow">
+      <g:Image ui:field="iconLeft" />
       <g:InlineLabel ui:field="label" styleName="{style.label}" />
+      <g:Image ui:field="iconRight" />
     </g:FlowPanel>
   </g:FocusPanel>
 </ui:UiBinder>

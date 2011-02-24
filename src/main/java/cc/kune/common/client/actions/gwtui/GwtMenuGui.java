@@ -93,7 +93,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     @Override
     public void setIconResource(final ImageResource resource) {
         if (notStandAlone) {
-            iconLabel.setIconResource(resource);
+            iconLabel.setLeftIconResource(resource);
             layout();
         }
     }
@@ -101,7 +101,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     @Override
     public void setIconStyle(final String style) {
         if (notStandAlone) {
-            iconLabel.setIcon(style);
+            iconLabel.setLeftIcon(style);
             layout();
         }
     }

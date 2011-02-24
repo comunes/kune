@@ -292,8 +292,11 @@ public class SessionDefault implements Session {
     }
 
     @Override
-    public void onInitDataReceived(final AppStartHandler handler) {
+    public void onInitDataReceived(final boolean fireNow, final AppStartHandler handler) {
         eventBus.addHandler(AppStartEvent.getType(), handler);
+        if (fireNow && initData != null) {
+            handler.onAppStart(new AppStartEvent(initData));
+        }
     }
 
     @Override

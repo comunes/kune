@@ -40,8 +40,9 @@ public class SiteTokenListeners {
     private final Provider<StateManager> stateManager;
 
     @Inject
-    public SiteTokenListeners(final EventBus eventBus, final Provider<StateManager> stateManager,
-            final Provider<SignIn> signIn, final Provider<Register> register, final Provider<NewGroup> newGroup,
+    public SiteTokenListeners(final Session session, final EventBus eventBus,
+            final Provider<StateManager> stateManager, final Provider<SignIn> signIn,
+            final Provider<Register> register, final Provider<NewGroup> newGroup,
             final Provider<AboutKuneDialog> aboutKuneDialog) {
         this.stateManager = stateManager;
         this.signIn = signIn;
@@ -49,7 +50,7 @@ public class SiteTokenListeners {
         this.newGroup = newGroup;
         this.aboutKuneDialog = aboutKuneDialog;
         init();
-        eventBus.addHandler(AppStartEvent.getType(), new AppStartHandler() {
+        session.onInitDataReceived(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
             }

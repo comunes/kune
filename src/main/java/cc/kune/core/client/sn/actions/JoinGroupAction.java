@@ -27,6 +27,7 @@ public class JoinGroupAction extends RolAction {
         putValue(NAME, i18n.t("Participate"));
         putValue(SHORT_DESCRIPTION, i18n.t("Request to participate in this group"));
         putValue(Action.SMALL_ICON, res.addGreen());
+        putValue(Action.STYLES, "k-sn-join");
     }
 
     @Override

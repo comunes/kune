@@ -23,7 +23,7 @@ public class ChatParts {
             final IsPersonCondition isPersonCondition,
             final Provider<StartChatWithMemberAction> startChatWithMemberAction,
             final Provider<StartChatWithUserAction> startChatWithUserAction) {
-        session.onInitDataReceived(new AppStartHandler() {
+        session.onInitDataReceived(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 chatActionsProvider.get();

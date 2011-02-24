@@ -11,11 +11,6 @@ public interface GuiActionDescrip {
     public static final int NO_POSITION = -1;
 
     /**
-     * Coma separated, styles of the Gui item
-     */
-    public static final String STYLES = "stylesprop";
-
-    /**
      * {@link #TARGET} is used to associate a {@link #AbstractGuiActionDescrip}
      * with an object like groups, group names, users, and so on, and used to
      * execute actions against these targets
@@ -79,5 +74,17 @@ public interface GuiActionDescrip {
     void setTarget(final Object object);
 
     void setVisible(final boolean visible);
+
+    GuiActionDescrip withIcon(Object icon);
+
+    GuiActionDescrip withIconCls(String icon);
+
+    GuiActionDescrip withParent(GuiActionDescrip parent);
+
+    GuiActionDescrip withStyles(String styles);
+
+    GuiActionDescrip withText(String text);
+
+    GuiActionDescrip withToolTip(String tooltip);
 
 }

@@ -17,51 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.resources.icons;
+package cc.kune.common.client.resources;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
-public interface IconResources extends ClientBundle {
+public interface CommonIconResources extends ClientBundle {
 
-    @Source("add-green.png")
-    ImageResource addGreen();
-
-    @Source("bug.png")
-    ImageResource bug();
+    public static final CommonIconResources INSTANCE = GWT.create(CommonIconResources.class);
 
     @Source("checked.png")
     ImageResource checked();
 
-    @Source("kicon.css")
-    IconCssResource css();
-
-    @Source("del-green.png")
-    ImageResource delGreen();
-
-    @Source("group-home.png")
-    ImageResource groupHome();
-
-    @Source("info.png")
-    ImageResource info();
-
-    @Source("kune-icon16.png")
-    ImageResource kuneIcon16();
-
-    @Source("language.png")
-    ImageResource language();
-
-    @Source("arrow_out.png")
-    ImageResource maximize();
-
-    @Source("arrow_in.png")
-    ImageResource minimize();
-
-    @Source("prefs.png")
-    ImageResource prefs();
-
     @Source("radiochecked.png")
-    ImageResource radiochecked();
+    ImageResource radioChecked();
 
     @Source("radiounchecked.png")
     ImageResource radioUnChecked();

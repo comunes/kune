@@ -64,7 +64,7 @@ public class EntityLicensePresenter extends
     public EntityLicensePresenter(final EventBus eventBus, final EntityLicenseView view,
             final EntityLicenseProxy proxy, final StateManager stateManager) {
         super(eventBus, view, proxy);
-        stateManager.onStateChanged(new StateChangedHandler() {
+        stateManager.onStateChanged(true, new StateChangedHandler() {
 
             @Override
             public void onStateChanged(final StateChangedEvent event) {

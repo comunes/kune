@@ -147,7 +147,7 @@ public class ChatClientDefault implements ChatClient {
         this.roomManager = Suco.get(RoomManager.class);
         Suco.get(SessionReconnect.class);
 
-        eventBus.addHandler(AppStartEvent.getType(), new AppStartEvent.AppStartHandler() {
+        session.onInitDataReceived(true, new AppStartEvent.AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 chatOptions.domain = event.getInitData().getChatDomain();
@@ -253,6 +253,7 @@ public class ChatClientDefault implements ChatClient {
             dialog.setBodyStyleName("k-chat-window");
             dialog.setScrollMode(Scroll.NONE);
             dialog.setHideOnButtonClick(true);
+            dialog.setCollapsible(true);
             // final Widget btn = (Widget)
             // chatIcon.getValue(ParentWidget.PARENT_UI);
             dialog.setPosition(118, 2);

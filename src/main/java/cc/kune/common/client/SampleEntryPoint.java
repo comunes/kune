@@ -135,7 +135,7 @@ public class SampleEntryPoint implements EntryPoint {
         view.addActions(actions);
 
         final IconLabel simpleIconLabel = new IconLabel("IconLabel (no action)");
-        simpleIconLabel.setIcon("oc-testico");
+        simpleIconLabel.setLeftIcon("oc-testico");
         simpleIconLabel.setTitle("tooltip");
 
         final VerticalPanel panel = new VerticalPanel();

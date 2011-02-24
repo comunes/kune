@@ -27,6 +27,7 @@ import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.Position;
+import cc.kune.common.client.resources.SubMenuResources;
 
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -74,7 +75,8 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     @Override
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.create(descriptor);
-        menu = new MenuBar(true);
+        menu = new MenuBar(true, SubMenuResources.INSTANCE);
+        menu.setAutoOpen(true);
         menu.setFocusOnHoverEnabled(true);
         menu.setAnimationEnabled(true);
         descriptor.addPropertyChangeListener(new PropertyChangeListener() {
@@ -112,7 +114,10 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     }
 
     public void hide() {
-        popup.hide();
+        if (popup != null) {
+            // if menu (not submenu)
+            popup.hide();
+        }
     }
 
     @Override

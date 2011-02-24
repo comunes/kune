@@ -946,3 +946,15 @@ font-size:small;
     margin: 10px 15px 0px 5px;
     cursor: pointer;
 }
+
+.k-sn-options-menu {
+    float: left;
+}
+
+.k-sn-options-menu button {
+    background-color: none;
+}
+
+.k-sn-join {
+  float:left;
+}

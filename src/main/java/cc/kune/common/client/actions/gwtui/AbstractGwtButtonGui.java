@@ -59,6 +59,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     @Override
     protected void addStyle(final String style) {
         iconLabel.addStyleName(style);
+        button.addStyleName(style);
         layout();
     }
 
@@ -112,13 +113,13 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
 
     @Override
     public void setIconResource(final ImageResource icon) {
-        iconLabel.setIconResource(icon);
+        iconLabel.setLeftIconResource(icon);
         layout();
     }
 
     @Override
     protected void setIconStyle(final String style) {
-        iconLabel.setIcon(style);
+        iconLabel.setLeftIcon(style);
         layout();
     }
 

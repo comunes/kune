@@ -34,6 +34,7 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
     @Override
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
+        super.create(descriptor);
         item = new MenuItem("", menu);
         iconLabel = new IconLabel("");
         configureItemFromProperties();
@@ -44,7 +45,6 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
         } else {
             parentMenu.insert(position, item);
         }
-        super.create(descriptor);
         descriptor.putValue(ParentWidget.PARENT_UI, this);
         return this;
     }
@@ -60,7 +60,7 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui {
 
     @Override
     public void setIconStyle(final String style) {
-        iconLabel.setIcon(style);
+        iconLabel.setLeftIcon(style);
         layout();
     }
 

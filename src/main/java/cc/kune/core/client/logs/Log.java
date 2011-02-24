@@ -24,19 +24,23 @@ import com.google.gwt.core.client.GWT;
 public class Log {
 
     public static void debug(final String message) {
-        GWT.log(message);
+        GWT.log(prefix(message));
     }
 
     public static void debug(final String message, final Throwable caught) {
-        GWT.log(message, caught);
+        GWT.log(prefix(message), caught);
     }
 
     public static void error(final String message) {
-        debug(message);
+        debug(prefix(message));
     }
 
     public static void info(final String message) {
-        GWT.log(message);
+        GWT.log(prefix(message));
+    }
+
+    private static String prefix(final String message) {
+        return new StringBuffer().append("-KUNE-----").append(message).toString();
     }
 
 }

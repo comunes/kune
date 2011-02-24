@@ -4,7 +4,7 @@ import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.core.client.sitebar.SiteUserOptions;
@@ -81,6 +81,7 @@ public class ChatSitebarActions {
     }
 
     private static final String CHAT_STATUS = "k-chat-status-group";
+    private static final String GROUP_CHAT_STATUS = "k-group-chat-status";
     private static final String NO_STATUS = null;
     private final ChatClient chatClient;
     private final I18nTranslationService i18n;
@@ -135,9 +136,10 @@ public class ChatSitebarActions {
 
     }
 
-    private MenuItemDescriptor createChatStatusAction(final ImageResource icon, final String text,
+    private MenuRadioItemDescriptor createChatStatusAction(final ImageResource icon, final String text,
             final AbstractAction action) {
-        final MenuItemDescriptor item = new MenuItemDescriptor(SiteUserOptionsPresenter.LOGGED_USER_MENU, action);
+        final MenuRadioItemDescriptor item = new MenuRadioItemDescriptor(SiteUserOptionsPresenter.LOGGED_USER_MENU,
+                action, GROUP_CHAT_STATUS);
         item.putValue(AbstractAction.NAME, text);
         item.putValue(AbstractAction.SMALL_ICON, icon);
         return item;
