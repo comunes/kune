@@ -37,15 +37,15 @@
   <!-- Inspired by Apache log4j PatternLayout: http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html -->
   <set-configuration-property name="log_pattern"
     value="%d [%-5p] %m%n" />
-  <!-- <extend-property name="locale" values="es" /> <extend-property name="locale" 
+  <!-- <extend-property name="locale" values="es" /> <extend-property name="locale"
     values="ar" /> -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
   <set-property name="user.agent" value="gecko1_8" />
-  <inherits name="com.google.gwt.wave.Wave" />
+<!--  <inherits name="com.google.gwt.wave.Wave" />-->
   <inherits name="org.ourproject.kune.ws.armor.WsArmor" />
   <!-- Specify the app entry point class. -->
   <entry-point class="org.ourproject.kune.app.client.OldKuneEntryPoint" />
-  <!-- excluding test sources for this module workaround for open issue 4454 
+  <!-- excluding test sources for this module workaround for open issue 4454
     see http://code.google.com/p/google-web-toolkit/issues/detail?id=4454 -->
   <source path='client' excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
 </module>

@@ -11,6 +11,9 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** TODO style injection: 
+   http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
+   https://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f4c4fb9b4c5bb28f
 ** >> Delete host/room conf in ws.html
 ** >> kune.properties from cmd line
 ** HelloWord with samples of extensions: sitebar, sitebar options menu, siteuseroptions, sn, ...
@@ -32,6 +35,8 @@ https://groups.google.com/group/google-gin/browse_thread/thread/203ab1725406bd44
    [ ] src/org/waveprotocol/box/server/ServerMain.java
    [ ] pom.xml dep references
 ** Update Dev Guide
+*** mvn compile && mvn gwt:compile
+*** hosted mode, whe war selection target/kune-VERSION
 *** Increase open files limit
 /etc/security/limits.conf
 #I adjusted this so kune will work with more java files

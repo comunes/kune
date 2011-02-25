@@ -373,7 +373,7 @@ public interface CoreResources extends ClientBundle {
     @Source("opentriangle.gif")
     ImageResource opentriangle();
 
-    @Source("person2-60.png")
+    @Source("unknown-60.png")
     ImageResource personAvatarDef();
 
     @Source("person-def.png")

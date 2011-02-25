@@ -13,6 +13,6 @@
   <inherits name="com.gwtextux.GwtExtUx" />
   <inherits name="com.gwtextux.UploadDialog" />
   <inherits name="com.gwtextux.ToastWindow" />
-  <inherits name="com.google.gwt.wave.Wave" />
+<!--  <inherits name="com.google.gwt.wave.Wave" />-->
   <source path='client' excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
 </module>
