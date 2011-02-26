@@ -329,7 +329,7 @@ a:visited {
 
 .gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger {
     background-color: white;
-    background: none;
+    background: url("images/spliter-top.png") no-repeat scroll center bottom white;
     cursor: col-resize;
 }
 

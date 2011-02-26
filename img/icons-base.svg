@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="137.00004"
-     inkscape:cy="507.00023"
+     inkscape:cx="71"
+     inkscape:cy="807.5"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1278"
@@ -2894,149 +2894,167 @@
            y="328.36218" />
       </g>
     </g>
-    <g
-       inkscape:export-ydpi="90"
+    <rect
+       style="color:#000000;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3602"
+       width="4.4210529"
+       height="21"
+       x="68.789474"
+       y="234.36218"
+       ry="1"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/splitter-top.png"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/vjrj/proyectos/ourproject.org/kune/svn/trunk/img/icons/splitter-vert-bar.png"
-       id="g6617">
-      <g
-         id="g6583">
-        <rect
-           y="327.36218"
-           x="429"
-           height="2"
-           width="2"
-           id="rect6439"
-           style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-        <rect
-           y="328.36218"
-           x="430"
-           height="1"
-           width="1"
-           id="rect6441"
-           style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      </g>
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g6583"
-         id="use6587"
-         transform="translate(0,5)"
-         width="744.09448"
-         height="1052.3622" />
-      <use
-         height="1052.3622"
-         width="744.09448"
-         transform="translate(0,10)"
-         id="use6589"
-         xlink:href="#g6583"
-         y="0"
-         x="0" />
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g6583"
-         id="use6591"
-         transform="translate(0,15)"
-         width="744.09448"
-         height="1052.3622" />
-      <use
-         height="1052.3622"
-         width="744.09448"
-         transform="translate(0,20)"
-         id="use6593"
-         xlink:href="#g6583"
-         y="0"
-         x="0" />
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g6583"
-         id="use6595"
-         transform="translate(0,25)"
-         width="744.09448"
-         height="1052.3622" />
-      <use
-         height="1052.3622"
-         width="744.09448"
-         transform="translate(0,30)"
-         id="use6597"
-         xlink:href="#g6583"
-         y="0"
-         x="0" />
-      <use
-         height="1052.3622"
-         width="744.09448"
-         transform="translate(0,35)"
-         id="use6599"
-         xlink:href="#g6583"
-         y="0"
-         x="0" />
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g6583"
-         id="use6601"
-         transform="translate(0,40)"
-         width="744.09448"
-         height="1052.3622" />
-      <use
-         height="1052.3622"
-         width="744.09448"
-         transform="translate(0,45)"
-         id="use6603"
-         xlink:href="#g6583"
-         y="0"
-         x="0" />
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g6583"
-         id="use6605"
-         transform="translate(0,50)"
-         width="744.09448"
-         height="1052.3622" />
-      <use
-         height="1052.3622"
-         width="744.09448"
-         transform="translate(0,55)"
-         id="use6607"
-         xlink:href="#g6583"
-         y="0"
-         x="0" />
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g6583"
-         id="use6609"
-         transform="translate(0,60)"
-         width="744.09448"
-         height="1052.3622" />
-      <use
-         height="1052.3622"
-         width="744.09448"
-         transform="translate(0,65)"
-         id="use6611"
-         xlink:href="#g6583"
-         y="0"
-         x="0" />
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g6583"
-         id="use6613"
-         transform="translate(0,70)"
-         width="744.09448"
-         height="1052.3622" />
-      <use
-         height="1052.3622"
-         width="744.09448"
-         transform="translate(0,75)"
-         id="use6615"
-         xlink:href="#g6583"
-         y="0"
-         x="0" />
+       inkscape:export-ydpi="90" />
+    <g
+       id="g6583"
+       transform="matrix(1.1052632,0,0,1.1052632,-404.26316,-126.35392)"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/splitter-top.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="fill:#999999;fill-opacity:1;stroke:none"
+         id="rect6439"
+         width="2"
+         height="2"
+         x="429"
+         y="327.36218" />
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none"
+         id="rect6441"
+         width="1"
+         height="1"
+         x="430"
+         y="328.36218" />
     </g>
+    <use
+       height="1052.3622"
+       width="744.09448"
+       transform="translate(0,5.5263158)"
+       id="use6587"
+       xlink:href="#g6583"
+       y="0"
+       x="0"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/splitter-top.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g6583"
+       id="use6589"
+       transform="translate(0,11.052632)"
+       width="744.09448"
+       height="1052.3622"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/splitter-top.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <use
+       height="1052.3622"
+       width="744.09448"
+       transform="translate(0,16.578948)"
+       id="use6591"
+       xlink:href="#g6583"
+       y="0"
+       x="0"
+       inkscape:export-filename="/home/vjrj/proyectos/dev/kune/trunk/img/icons/splitter-top.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g6583"
+       id="use6593"
+       transform="translate(-16.999997,22)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       height="1052.3622"
+       width="744.09448"
+       transform="translate(-16.999997,27)"
+       id="use6595"
+       xlink:href="#g6583"
+       y="0"
+       x="0" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g6583"
+       id="use6597"
+       transform="translate(-16.999997,32)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g6583"
+       id="use6599"
+       transform="translate(-16.999997,37)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       height="1052.3622"
+       width="744.09448"
+       transform="translate(-16.999997,42)"
+       id="use6601"
+       xlink:href="#g6583"
+       y="0"
+       x="0" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g6583"
+       id="use6603"
+       transform="translate(-16.999997,47)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       height="1052.3622"
+       width="744.09448"
+       transform="translate(-16.999997,52)"
+       id="use6605"
+       xlink:href="#g6583"
+       y="0"
+       x="0" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g6583"
+       id="use6607"
+       transform="translate(-16.999997,57)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       height="1052.3622"
+       width="744.09448"
+       transform="translate(-16.999997,62)"
+       id="use6609"
+       xlink:href="#g6583"
+       y="0"
+       x="0" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g6583"
+       id="use6611"
+       transform="translate(-16.999997,67)"
+       width="744.09448"
+       height="1052.3622" />
+    <use
+       height="1052.3622"
+       width="744.09448"
+       transform="translate(-16.999997,72)"
+       id="use6613"
+       xlink:href="#g6583"
+       y="0"
+       x="0" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g6583"
+       id="use6615"
+       transform="translate(-16.999997,77)"
+       width="744.09448"
+       height="1052.3622" />
     <g
        transform="translate(487,-9)"
        id="g14270">
@@ -4674,11 +4692,11 @@
     <image
        sodipodi:absref="/home/vjrj/proyectos/dev/kune/trunk/img/icons/lock_break.png"
        xlink:href="icons/lock_break.png"
-       width="16"
-       height="16"
-       id="image2972"
+       y="450.82797"
        x="330.84604"
-       y="450.82797" />
+       id="image2972"
+       height="16"
+       width="16" />
     <use
        x="0"
        y="0"
@@ -4769,12 +4787,12 @@
     <image
        sodipodi:absref="/home/vjrj/proyectos/dev/kune/trunk/img/icons/lock_break.png"
        xlink:href="icons/lock_break.png"
-       transform="scale(-1,1)"
-       width="16"
-       height="16"
-       id="image3958"
+       y="432.36218"
        x="-371"
-       y="432.36218" />
+       id="image3958"
+       height="16"
+       width="16"
+       transform="scale(-1,1)" />
     <g
        id="g3962"
        transform="translate(-43.509019,-21.462476)">
