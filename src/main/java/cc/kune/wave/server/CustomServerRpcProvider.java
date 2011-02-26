@@ -11,9 +11,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -21,13 +18,11 @@ import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.servlet.DefaultServlet;
-import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.util.resource.ResourceCollection;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
-import org.jruby.rack.RackFilter;
-import org.jruby.rack.RackServletContextListener;
 import org.ourproject.kune.rack.RackServletFilter;
 import org.waveprotocol.box.common.comms.WaveClientRpc.ProtocolAuthenticate;
 import org.waveprotocol.box.common.comms.WaveClientRpc.ProtocolAuthenticationResult;
@@ -55,7 +50,6 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.name.Named;
-import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Descriptors.MethodDescriptor;
 import com.google.protobuf.Message;
@@ -63,13 +57,11 @@ import com.google.protobuf.RpcCallback;
 import com.google.protobuf.Service;
 import com.google.protobuf.UnknownFieldSet;
 
-import de.spieleck.servlets.ProxyServlet;
-
 /**
  * ServerRpcProvider can provide instances of type Service over an incoming
  * network socket and service incoming RPCs to these services and their methods.
- * 
- * 
+ *
+ *
  */
 public class CustomServerRpcProvider {
     abstract class Connection implements ProtoCallback {
@@ -321,7 +313,7 @@ public class CustomServerRpcProvider {
     /**
      * Construct a new ServerRpcProvider, hosting on the specified WebSocket
      * addresses.
-     * 
+     *
      * Also accepts an ExecutorService for spawning managing threads.
      */
     public CustomServerRpcProvider(final InetSocketAddress[] httpAddresses, final Integer flashsocketPolicyPort,
@@ -359,7 +351,7 @@ public class CustomServerRpcProvider {
     /**
      * Add a servlet to the servlet registry. This servlet will be attached to
      * the specified URL pattern when the server is started up.
-     * 
+     *
      * @param urlPattern
      *            URL pattern for paths. Eg, '/foo', '/foo/*'
      * @param servlet
@@ -432,57 +424,14 @@ public class CustomServerRpcProvider {
         if (jettySessionManager != null) {
             context.getSessionHandler().setSessionManager(jettySessionManager);
         }
-        context.setResourceBase(resourceBase);
+        final ResourceCollection resources = new ResourceCollection(new String[] { "src/main/webapp", resourceBase, });
+        context.setBaseResource(resources);
         context.setContextPath(baseUrl);
-        context.setWar(baseUrl);
+
         context.setParentLoaderPriority(true);
         context.setDescriptor("WEB-INF/web.xml");
 
-        final ServletHolder httpbindHolder = new ServletHolder(ProxyServlet.class);
-        httpbindHolder.setInitParameter("remotePath", "/http-bind/");
-        httpbindHolder.setInitParameter("remotePort", "5280");
-        context.addServlet(httpbindHolder, "/http-bind/");
-
-        context.addEventListener(new ServletContextListener() {
-
-            @Override
-            public void contextDestroyed(final ServletContextEvent sce) {
-            }
-
-            @Override
-            public void contextInitialized(final ServletContextEvent sce) {
-                final ServletContext context = sce.getServletContext();
-                context.setAttribute("jruby.standalone", "true");
-                context.setAttribute("rails.root", "/WEB-INF/publicspace/");
-                context.setAttribute("files.prefix", "/WEB-INF/publicspace/public");
-                context.setAttribute("rails.env", "production");
-                context.setAttribute("jruby.max.runtimes", "1");
-                context.setAttribute("public.root", "/public/");
-            }
-        });
-
-        context.addEventListener(new RackServletContextListener());
-        // final FilterHolder rubyRack = new
-        // FilterHolder(org.jruby.rack.rails.RailsServletContextListener.class);
-        // rubyRack.setFilter(new RackFilter());
-
-        // context.getInitParameter("rails.root");
-
-        context.addFilter(RackFilter.class, "/public/*", 0);
-
-        context.addEventListener(new GuiceServletContextListener() {
-            @Override
-            protected Injector getInjector() {
-                return injector;
-            }
-        });
         context.setAttribute(RackServletFilter.INJECTOR_PARENT_ATTRIBUTE, injector);
-        final FilterHolder filterHolder = new FilterHolder(RackServletFilter.class);
-        filterHolder.setInitParameter("org.ourproject.kune.rack.RackModule",
-                "org.ourproject.kune.app.server.KuneRackModule");
-        context.addFilter(filterHolder, "/ws/*", 0);
-
-        // context.addFilter(GuiceFilter.class, "/*", 0);
 
         // Servlet where the websocket connection is served from.
         final ServletHolder wsholder = new ServletHolder(new WaveWebSocketServlet());

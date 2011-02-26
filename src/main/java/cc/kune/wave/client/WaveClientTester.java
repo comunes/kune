@@ -62,7 +62,7 @@ public class WaveClientTester {
                     final String url = WindowUtils.getLocation().getHost() + "/";
                     Log.debug("Wave client url: " + url);
                     // wsarmor.setFrameUrlForTesting(url);
-                    wsarmor.setFrameUrlForTesting("/wiiiabbb");
+                    wsarmor.setFrameUrlForTesting("/");
                 }
             });
         } catch (final RequestException e) {
