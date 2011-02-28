@@ -26,11 +26,11 @@
         </g:tab>
         <g:tab>
           <g:header size='0' />
-          <g:SimplePanel ui:field="userSpace" width="100%"
+          <g:FlowPanel ui:field="userSpace" width="100%"
             height="100%">
-            <g:Frame url="http://localhost:9898/" styleName="{style.frame}"
-              ui:field="frame" width="100%" height="100%" />
-          </g:SimplePanel>
+<!--            <g:Frame url="/" styleName="{style.frame}"-->
+<!--              ui:field="frame" width="100%" height="100%" />-->
+          </g:FlowPanel>
         </g:tab>
         <g:tab>
           <g:header size='0' />

@@ -3,6 +3,7 @@
 <module>
   <inherits name="com.google.gwt.user.User" />
   <source path="client" />
+  <public path="public" />
   <inherits name="com.google.common.base.Base" />
   <inherits name='com.google.gwt.user.User' />
   <inherits name="com.google.gwt.event.EventBase" />

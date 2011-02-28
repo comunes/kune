@@ -2,12 +2,8 @@ package cc.kune.wave.client;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.common.client.utils.WindowUtils;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.http.client.Request;
@@ -16,31 +12,19 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
 
-public class WaveClientTester {
+public class WaveClientSimpleAuthenticator {
 
-    private final WsArmor wsarmor;
+    private final WsArmor wsArmor;
 
     @Inject
-    public WaveClientTester(final WsArmor wsarmor, final Session session) {
-        this.wsarmor = wsarmor;
-        session.onUserSignIn(true, new UserSignInHandler() {
-            @Override
-            public void onUserSignIn(final UserSignInEvent event) {
-                doLogin(event.getUserInfo().getChatName(), event.getUserInfo().getChatPassword());
-            }
-        });
-
-        session.onUserSignOut(true, new UserSignOutHandler() {
-            @Override
-            public void onUserSignOut(final UserSignOutEvent event) {
-                // TODO Auto-generated method stub
-            }
-        });
+    public WaveClientSimpleAuthenticator(final WsArmor wsArmor) {
+        this.wsArmor = wsArmor;
     }
 
-    public void doLogin(final String userWithoutDomain, final String passwd) {
+    public void doLogin(final String userWithoutDomain, final String passwd, final SimpleCallback callback) {
         final RequestBuilder request = new RequestBuilder(RequestBuilder.POST, "/auth/signin");
         final StringBuffer params = new StringBuffer();
         params.append("address=");
@@ -55,14 +39,21 @@ public class WaveClientTester {
                 @Override
                 public void onError(final Request request, final Throwable exception) {
                     NotifyUser.error(exception.getStackTrace().toString(), true);
+                    callback.onCancel();
                 }
 
                 @Override
                 public void onResponseReceived(final Request request, final Response response) {
                     final String url = WindowUtils.getLocation().getHost() + "/";
                     Log.debug("Wave client url: " + url);
-                    // wsarmor.setFrameUrlForTesting(url);
-                    wsarmor.setFrameUrlForTesting("/");
+                    callback.onSuccess();
+                    // String token =
+                    // Cookies.getCookie(JETTY_SESSION_TOKEN_NAME);
+                    final ForIsWidget userSpace = wsArmor.getUserSpace();
+                    if (userSpace.getWidgetCount() > 0) {
+                        userSpace.remove(0);
+                    }
+                    userSpace.add(new WebClient());
                 }
             });
         } catch (final RequestException e) {

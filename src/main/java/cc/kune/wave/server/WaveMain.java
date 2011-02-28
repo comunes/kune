@@ -39,7 +39,6 @@ import org.waveprotocol.box.server.robots.dataapi.DataApiOAuthServlet;
 import org.waveprotocol.box.server.robots.dataapi.DataApiServlet;
 import org.waveprotocol.box.server.robots.passive.RobotsGateway;
 import org.waveprotocol.box.server.rpc.AttachmentServlet;
-import org.waveprotocol.box.server.rpc.AuthenticationServlet;
 import org.waveprotocol.box.server.rpc.FetchServlet;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
 import org.waveprotocol.box.server.waveserver.WaveBus;
@@ -124,7 +123,7 @@ public class WaveMain {
     private static void initializeServlets(final Injector injector, final CustomServerRpcProvider server) {
         server.addServlet("/attachment/*", injector.getInstance(AttachmentServlet.class));
 
-        server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));
+        server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(CustomAuthenticationServlet.class));
         server.addServlet("/auth/signout", injector.getInstance(SignOutServlet.class));
         server.addServlet("/auth/register", injector.getInstance(CustomUserRegistrationServlet.class));
 

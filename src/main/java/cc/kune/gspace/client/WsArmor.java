@@ -43,6 +43,8 @@ public interface WsArmor {
 
     ForIsWidget getSitebar();
 
+    ForIsWidget getUserSpace();
+
     void selectGroupSpace();
 
     void selectHomeSpace();
@@ -50,7 +52,4 @@ public interface WsArmor {
     void selectPublicSpace();
 
     void selectUserSpace();
-
-    void setFrameUrlForTesting(String url);
-
 }

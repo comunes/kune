@@ -21,6 +21,7 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.common.client.utils.TimerWrapper.Executer;
@@ -36,7 +37,7 @@ import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
-import cc.kune.wave.client.WaveClientTester;
+import cc.kune.wave.client.WaveClientSimpleAuthenticator;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -60,14 +61,14 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     private final Provider<Register> registerProvider;
     private final TimerWrapper timer;
     private final UserServiceAsync userService;
-    private final WaveClientTester waveClientTester;
+    private final WaveClientSimpleAuthenticator waveClientTester;
 
     @Inject
     public SignInPresenter(final EventBus eventBus, final SignInView view, final SignInProxy proxy,
             final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
             final UserServiceAsync userService, final Provider<Register> registerProvider,
             final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete,
-            final TimerWrapper timeWrapper, final WaveClientTester waveClientTester) {
+            final TimerWrapper timeWrapper, final WaveClientSimpleAuthenticator waveClientTester) {
         super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, autocomplete);
         this.eventBus = eventBus;
         this.userService = userService;
@@ -160,31 +161,41 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
             user.setShortName(nickOrEmail);
             user.setPassword(passwd);
             saveAutocompleteLoginData(nickOrEmail, passwd);
-            final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+            waveClientTester.doLogin(nickOrEmail, passwd, new SimpleCallback() {
                 @Override
-                public void onFailure(final Throwable caught) {
-                    getView().unMask();
-                    eventBus.fireEvent(new ProgressHideEvent());
-                    if (caught instanceof UserAuthException) {
-                        getView().setErrorMessage(i18n.t(CoreMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD),
-                                NotifyLevel.error);
-                    } else {
-                        getView().setErrorMessage("Error in login", NotifyLevel.error);
-                        Log.error("Other kind of exception in SignInPresenter/doLogin");
-                    }
+                public void onSuccess() {
+                    final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+                        @Override
+                        public void onFailure(final Throwable caught) {
+                            getView().unMask();
+                            eventBus.fireEvent(new ProgressHideEvent());
+                            if (caught instanceof UserAuthException) {
+                                getView().setErrorMessage(i18n.t(CoreMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD),
+                                        NotifyLevel.error);
+                            } else {
+                                getView().setErrorMessage("Error in login", NotifyLevel.error);
+                                Log.error("Other kind of exception in SignInPresenter/doLogin");
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess(final UserInfoDTO userInfoDTO) {
+                            onSignIn(userInfoDTO);
+                            stateManager.restorePreviousToken();
+                            getView().hide();
+                            getView().unMask();
+
+                        }
+                    };
+                    userService.login(user.getShortName(), user.getPassword(), callback);
                 }
 
                 @Override
-                public void onSuccess(final UserInfoDTO userInfoDTO) {
-                    onSignIn(userInfoDTO);
-                    stateManager.restorePreviousToken();
-                    waveClientTester.doLogin(nickOrEmail, passwd);
-                    getView().hide();
-                    getView().unMask();
-
+                public void onCancel() {
+                    getView().setErrorMessage("Error in login", NotifyLevel.error);
+                    Log.error("SignInPresenter/doLogin fails in Wave auth");
                 }
-            };
-            userService.login(user.getShortName(), user.getPassword(), callback);
+            });
         }
     }
 

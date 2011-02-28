@@ -44,7 +44,7 @@ public class SignInNewForm extends Composite {
 
     public SignInNewForm(final I18nTranslationService i18n) {
         initWidget(uiBinder.createAndBindUi(this));
-        nick.setFieldLabel(i18n.t("Nickname or email"));
+        nick.setFieldLabel(i18n.t("Your nickname"));
         password.setFieldLabel(i18n.t("Password"));
     }
 
