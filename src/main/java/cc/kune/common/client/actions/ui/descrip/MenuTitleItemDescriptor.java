@@ -34,6 +34,11 @@ public class MenuTitleItemDescriptor extends MenuItemDescriptor {
         putValue(Action.NAME, title);
     }
 
+    public MenuTitleItemDescriptor(final String title) {
+        super(AbstractAction.NO_ACTION);
+        putValue(Action.NAME, title);
+    }
+
     @Override
     public Class<?> getType() {
         return MenuTitleItemDescriptor.class;

@@ -5,6 +5,7 @@ import java.util.List;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.sn.actions.registry.AbstractSNMembersActionsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupMembersActionsRegistry;
@@ -113,6 +114,7 @@ public class GroupMembersPresenter extends
     private GuiActionDescCollection createMenuItems(final GroupDTO group,
             final AbstractSNMembersActionsRegistry registry) {
         final GuiActionDescCollection items = new GuiActionDescCollection();
+        items.add(new MenuTitleItemDescriptor(group.getLongName()));
         for (final Provider<MenuItemDescriptor> provider : registry) {
             final MenuItemDescriptor menuItem = provider.get();
             menuItem.setTarget(group);

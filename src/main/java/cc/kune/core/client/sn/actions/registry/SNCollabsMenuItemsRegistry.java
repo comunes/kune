@@ -50,6 +50,7 @@ public class SNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry
             public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(gotoMemberAction);
                 item.add(isPersonCondition);
+                item.add(isNotMe);
                 return item;
             }
         });
