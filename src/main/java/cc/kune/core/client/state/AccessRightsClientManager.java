@@ -21,6 +21,7 @@ package cc.kune.core.client.state;
 
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -28,16 +29,19 @@ import com.google.inject.Inject;
 public class AccessRightsClientManager {
     private final EventBus eventBus;
     private AccessRights previousRights;
+    private final Session session;
 
     @Inject
-    public AccessRightsClientManager(final EventBus eventBus, final StateManager stateManager) {
+    public AccessRightsClientManager(final EventBus eventBus, final StateManager stateManager, final Session session) {
         this.eventBus = eventBus;
+        this.session = session;
         this.previousRights = null;
         stateManager.onStateChanged(true, new StateChangedHandler() {
-
             @Override
             public void onStateChanged(final StateChangedEvent event) {
                 final AccessRights rights = event.getState().getGroupRights();
+                // NotifyUser.info("prev rights " + previousRights +
+                // " new rights: " + rights);
                 if (!rights.equals(previousRights)) {
                     AccessRightsChangedEvent.fire(eventBus, previousRights, rights);
                     previousRights = rights;
@@ -47,7 +51,11 @@ public class AccessRightsClientManager {
         });
     }
 
-    public void onRightsChanged(final AccessRightsChangedEvent.AccessRightsChangedHandler handler) {
+    public void onRightsChanged(final boolean fireNow, final AccessRightsChangedEvent.AccessRightsChangedHandler handler) {
         eventBus.addHandler(AccessRightsChangedEvent.getType(), handler);
+        final StateAbstractDTO currentState = session.getCurrentState();
+        if (fireNow && currentState != null) {
+            handler.onAccessRightsChanged(new AccessRightsChangedEvent(previousRights, currentState.getGroupRights()));
+        }
     }
 }

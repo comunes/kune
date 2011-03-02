@@ -19,8 +19,6 @@
  */
 package org.ourproject.kune.platf.server.rpc;
 
-import java.util.UUID;
-
 import org.jivesoftware.smack.util.Base64;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
@@ -75,12 +73,11 @@ public class UserRPC implements RPC, UserService {
 
     @Override
     @Transactional(rollbackOn = DefaultException.class)
-    public UserInfoDTO createUser(final UserDTO userDTO, final boolean wantPersonalHomepage) throws DefaultException {
+    public void createUser(final UserDTO userDTO, final boolean wantPersonalHomepage) throws DefaultException {
         final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(),
                 userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
                 userDTO.getTimezone().getId());
         groupManager.createUserGroup(user, wantPersonalHomepage);
-        return login(userDTO.getShortName(), userDTO.getPassword());
     }
 
     @Override
@@ -112,17 +109,18 @@ public class UserRPC implements RPC, UserService {
 
     @Override
     @Transactional
-    public UserInfoDTO login(final String nickOrEmail, final String passwd) throws DefaultException {
-        final SessionService sessionService = sessionServiceProvider.get();
-        sessionService.getNewSession();
+    public UserInfoDTO login(final String nickOrEmail, final String passwd, final String waveToken)
+            throws DefaultException {
+        // final SessionService sessionService = sessionServiceProvider.get();
+        // sessionService.getNewSession();
         final User user = userManager.login(nickOrEmail, passwd);
-        return loginUser(user);
+        return loginUser(user, waveToken);
     }
 
-    private UserInfoDTO loginUser(final User user) throws DefaultException {
+    private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
         if (user != null) {
             // Maybe use terracotta.org for http session clustering
-            getUserSession().login(user, UUID.randomUUID().toString());
+            getUserSession().login(user, waveToken);
             return loadUserInfo(user);
         } else {
             throw new UserAuthException();
@@ -134,8 +132,9 @@ public class UserRPC implements RPC, UserService {
     @Transactional
     public void logout(final String userHash) throws DefaultException {
         getUserSession().logout();
-        final SessionService sessionService = sessionServiceProvider.get();
-        sessionService.getNewSession();
+        // FIXME final SessionService sessionService =
+        // sessionServiceProvider.get();
+        // FIXME sessionService.getNewSession();
     };
 
     @Override

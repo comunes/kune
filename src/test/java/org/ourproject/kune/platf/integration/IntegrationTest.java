@@ -19,6 +19,10 @@
  */
 package org.ourproject.kune.platf.integration;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.io.IOException;
+
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
@@ -33,15 +37,18 @@ public abstract class IntegrationTest {
     DatabaseProperties properties;
     @Inject
     protected UserSession session;
+    protected String token;
     @Inject
     UserService userService;
 
-    protected String doLogin() throws DefaultException {
-        return userService.login(getSiteAdminShortName(), properties.getAdminPassword()).getUserHash();
+    protected String doLogin() throws DefaultException, IOException {
+        waveLogin();
+        return userService.login(getSiteAdminShortName(), properties.getAdminPassword(), token).getUserHash();
     }
 
-    protected String doLoginWithDummyUser() throws DefaultException {
-        return userService.login("dummy", properties.getAdminPassword()).getUserHash();
+    protected String doLoginWithDummyUser() throws DefaultException, IOException {
+        waveLogin();
+        return userService.login("dummy", properties.getAdminPassword(), token).getUserHash();
     }
 
     protected void doLogout() throws DefaultException {
@@ -62,6 +69,18 @@ public abstract class IntegrationTest {
 
     protected String getSiteAdminShortName() {
         return properties.getAdminShortName();
+    }
+
+    protected void waveLogin() throws IOException {
+        token = "somesampletoken";
+        // final ClientAuthenticator authenticator = new
+        // ClientAuthenticator("http://localhost:8080"
+        // + SessionManager.SIGN_IN_URL);
+        // final HttpCookie cookie =
+        // authenticator.authenticate("admin@localhost",
+        // "easyeasy".toCharArray());
+        // token = cookie.getValue();
+        assertNotNull(token);
     }
 
 }

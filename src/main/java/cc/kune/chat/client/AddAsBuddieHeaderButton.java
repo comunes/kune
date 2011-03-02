@@ -102,6 +102,7 @@ public class AddAsBuddieHeaderButton {
     public AddAsBuddieHeaderButton(final AddAsBuddieAction buddieAction, final EntityHeader entityHeader) {
         final ButtonDescriptor button = new ButtonDescriptor(buddieAction);
         button.setVisible(false);
+        button.setStyles("k-chat-add-as-buddie");
         buddieAction.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(final PropertyChangeEvent event) {

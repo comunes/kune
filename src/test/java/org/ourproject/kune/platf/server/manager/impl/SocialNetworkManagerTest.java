@@ -23,7 +23,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
 import org.junit.Test;
 
 import cc.kune.core.client.errors.AccessViolationException;
@@ -47,7 +46,6 @@ public class SocialNetworkManagerTest extends AbstractSocialNetworkManagerTest {
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 1);
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
-        closeTransaction();
     }
 
     @Test(expected = Exception.class)
@@ -90,7 +88,6 @@ public class SocialNetworkManagerTest extends AbstractSocialNetworkManagerTest {
         socialNetworkManager.requestToJoin(user, group);
         socialNetworkManager.addGroupToCollabs(admin, userGroup, group);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
-        closeTransaction();
     }
 
     @Test
@@ -99,19 +96,11 @@ public class SocialNetworkManagerTest extends AbstractSocialNetworkManagerTest {
         socialNetworkManager.requestToJoin(user, group);
         socialNetworkManager.addGroupToAdmins(admin, userGroup, group);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
-        closeTransaction();
     }
 
     @Test(expected = Exception.class)
     public void addViewerNotAdminFails() throws Exception {
         socialNetworkManager.addGroupToViewers(otherUser, userGroup, group);
-    }
-
-    @After
-    public void close() {
-        if (getTransaction().isActive()) {
-            rollbackTransaction();
-        }
     }
 
     @Test
@@ -126,7 +115,6 @@ public class SocialNetworkManagerTest extends AbstractSocialNetworkManagerTest {
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NOBODY);
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 0);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
-        closeTransaction();
     }
 
     @Test(expected = Exception.class)
@@ -145,7 +133,6 @@ public class SocialNetworkManagerTest extends AbstractSocialNetworkManagerTest {
         assertFalse(group.getSocialNetwork().getAccessLists().getEditors().getList().contains(userGroup));
         assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 0);
         assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
-        closeTransaction();
     }
 
     @Test(expected = AccessViolationException.class)

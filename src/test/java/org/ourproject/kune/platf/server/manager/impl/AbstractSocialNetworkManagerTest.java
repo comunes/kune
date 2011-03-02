@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.server.manager.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Before;
 import org.ourproject.kune.platf.server.PersistenceTest;
 import org.ourproject.kune.testhelper.ctx.DomainContext;
@@ -64,5 +65,10 @@ public abstract class AbstractSocialNetworkManagerTest extends PersistenceTest {
         admin = ctx.getUser("admin");
         otherUser = ctx.getUser("otheruser");
         assertSocialNetworkIsEmpty();
+    }
+
+    @After
+    public void rollback() {
+        rollbackTransaction();
     }
 }

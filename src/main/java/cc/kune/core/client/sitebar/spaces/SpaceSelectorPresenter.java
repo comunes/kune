@@ -118,7 +118,7 @@ public class SpaceSelectorPresenter extends
             getView().setGroupBtnDown(false);
             getView().setPublicBtnDown(false);
         } else {
-            signIn.get().doSignIn();
+            signIn.get().showSignInDialog();
             getView().setUserBtnDown(false);
             NotifyUser.info(i18n.t("Sign in to access to your workspace"));
         }

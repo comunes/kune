@@ -26,17 +26,17 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class GroupDTO implements IsSerializable {
 
-    private Long id;
-    private String shortName;
-    private String longName;
-    private GroupType groupType;
-    private ContentSimpleDTO defaultContent;
-    private ContentSimpleDTO groupBackImage;
-    private LicenseDTO defaultLicense;
-    private String workspaceTheme;
-    private boolean hasLogo;
-    private StateToken stateToken;
     AdmissionType admissionType;
+    private ContentSimpleDTO defaultContent;
+    private LicenseDTO defaultLicense;
+    private ContentSimpleDTO groupBackImage;
+    private GroupType groupType;
+    private boolean hasLogo;
+    private Long id;
+    private String longName;
+    private String shortName;
+    private StateToken stateToken;
+    private String workspaceTheme;
 
     public GroupDTO() {
         this(null, null, GroupType.ORGANIZATION);
@@ -131,6 +131,10 @@ public class GroupDTO implements IsSerializable {
 
     public boolean hasLogo() {
         return getHasLogo();
+    }
+
+    public boolean isNotPersonal() {
+        return !isPersonal();
     }
 
     public boolean isPersonal() {

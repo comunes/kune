@@ -38,9 +38,6 @@ public class GroupMembersPresenter extends
     }
 
     public interface GroupMembersView extends View {
-        int AVATARLABELMAXSIZE = 4;
-        int AVATARSIZE = 22;
-        String NOAVATAR = "";
 
         void addAdmin(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
                 GuiActionDescCollection menu);
@@ -99,7 +96,7 @@ public class GroupMembersPresenter extends
                 GroupMembersPresenter.this.onStateChanged(event.getState());
             }
         });
-        stateManager.onSocialNetworkChanged(new SocialNetworkChangedEvent.SocialNetworkChangedHandler() {
+        stateManager.onSocialNetworkChanged(true, new SocialNetworkChangedEvent.SocialNetworkChangedHandler() {
 
             @Override
             public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {

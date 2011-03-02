@@ -37,15 +37,15 @@ public interface StateManager {
 
     void gotoToken(String newToken);
 
-    void onGroupChanged(GroupChangedEvent.GroupChangedHandler handler);
+    void onGroupChanged(boolean fireNow, GroupChangedEvent.GroupChangedHandler handler);
 
     @Deprecated
     void onGroupChanged(Listener2<String, String> listener);
 
+    void onSocialNetworkChanged(boolean fireNow, SocialNetworkChangedEvent.SocialNetworkChangedHandler handler);
+
     @Deprecated
     void onSocialNetworkChanged(Listener<StateAbstractDTO> listener);
-
-    void onSocialNetworkChanged(SocialNetworkChangedEvent.SocialNetworkChangedHandler handler);
 
     /**
      * @param fireNow

@@ -77,7 +77,7 @@ public class EntityHeaderPresenter extends
             final StateManager stateManager, final Session session) {
         super(eventBus, view, proxy);
         this.session = session;
-        stateManager.onGroupChanged(new GroupChangedHandler() {
+        stateManager.onGroupChanged(true, new GroupChangedHandler() {
             @Override
             public void onGroupChanged(final GroupChangedEvent event) {
                 setGroupLogo(session.getCurrentState().getGroup());

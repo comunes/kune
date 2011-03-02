@@ -100,7 +100,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
                 } else {
                     // stateManager.restorePreviousToken();
                     NotifyUser.info(i18n.t(CoreMessages.REGISTER_TO_CREATE_A_GROUP));
-                    signIn.get().doSignIn();
+                    signIn.get().showSignInDialog();
                 }
             }
         });

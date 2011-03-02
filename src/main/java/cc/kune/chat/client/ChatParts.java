@@ -3,6 +3,7 @@ package cc.kune.chat.client;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 import cc.kune.core.client.sn.actions.conditions.IsNotMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
 import cc.kune.core.client.sn.actions.registry.SNAdminsMenuItemsRegistry;
@@ -22,7 +23,7 @@ public class ChatParts {
             final Provider<SNCollabsMenuItemsRegistry> snCollabsItemsRegistry,
             final Provider<SNPendingsMenuItemsRegistry> snPendingItemsRegistry, final IsNotMeCondition isNotMe,
             final IsPersonCondition isPersonCondition,
-            final Provider<StartChatWithMemberAction> startChatWithMemberAction,
+            final Provider<StartChatWithMemberAction> startChatWithMemberAction, final IsLoggedCondition isLogged,
             final Provider<StartChatWithUserAction> startChatWithUserAction) {
         session.onInitDataReceived(true, new AppStartHandler() {
             @Override
@@ -34,6 +35,7 @@ public class ChatParts {
                         final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithMemberAction.get());
                         item.add(isNotMe);
                         item.add(isPersonCondition);
+                        item.add(isLogged);
                         return item;
                     }
                 };
@@ -42,6 +44,7 @@ public class ChatParts {
                     public MenuItemDescriptor get() {
                         final MenuItemDescriptor item = new MenuItemDescriptor(startChatWithUserAction.get());
                         item.add(isNotMe);
+                        item.add(isLogged);
                         item.add(isPersonCondition);
                         return item;
                     }

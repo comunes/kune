@@ -9,18 +9,18 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class IsNotMeCondition implements GuiAddCondition {
+public class IsMeCondition implements GuiAddCondition {
 
     private final Session session;
 
     @Inject
-    public IsNotMeCondition(final Session session) {
+    public IsMeCondition(final Session session) {
         this.session = session;
     }
 
     @Override
     public boolean mustBeAdded(final GuiActionDescrip descr) {
-        return (session.isNotLogged() || (session.isLogged() && !session.getCurrentUser().getShortName().equals(
-                ((GroupDTO) descr.getTarget()).getShortName())));
+        return (session.isLogged() && session.getCurrentUser().getShortName().equals(
+                ((GroupDTO) descr.getTarget()).getShortName()));
     }
 }

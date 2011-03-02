@@ -38,7 +38,6 @@ import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.SubscriptionMode;
 import cc.kune.core.shared.dto.TimeZoneDTO;
 import cc.kune.core.shared.dto.UserDTO;
-import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -139,34 +138,35 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
                     getView().getRegisterPassword(), getView().getEmail(), language, country, timezone, null, true,
                     SubscriptionMode.manual, "blue");
             super.saveAutocompleteLoginData(getView().getShortName(), getView().getRegisterPassword());
-            final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+            final AsyncCallback<Void> callback = new AsyncCallback<Void>() {
                 @Override
                 public void onFailure(final Throwable caught) {
-                    getView().unMask();
-                    if (caught instanceof EmailAddressInUseException) {
-                        getView().setErrorMessage(i18n.t(CoreMessages.EMAIL_IN_USE), NotifyLevel.error);
-                    } else if (caught instanceof GroupNameInUseException) {
-                        getView().setErrorMessage(i18n.t(CoreMessages.NAME_IN_USE), NotifyLevel.error);
-                    } else if (caught instanceof UserRegistrationException) {
-                        getView().setErrorMessage(i18n.t("Error during registration. " + caught.getMessage()),
-                                NotifyLevel.error);
-                    } else {
-                        getView().setErrorMessage(i18n.t("Error during registration."), NotifyLevel.error);
-                        throw new UIException("Other kind of exception in user registration", caught);
-                    }
+                    onRegistrationFailure(caught);
                 }
 
                 @Override
-                public void onSuccess(final UserInfoDTO userInfoDTO) {
-                    onSignIn(userInfoDTO);
-                    stateManager.gotoToken(userInfoDTO.getHomePage());
-                    getView().hide();
-                    getView().unMask();
-                    if (wantHomepage) {
-                        showWelcolmeDialog();
-                    } else {
-                        showWelcolmeDialogNoHomepage();
-                    }
+                public void onSuccess(final Void arg0) {
+                    signInProvider.get().doSignIn(getView().getShortName(), getView().getRegisterPassword(),
+                            new AsyncCallback<Void>() {
+
+                                @Override
+                                public void onFailure(final Throwable caught) {
+                                    onRegistrationFailure(caught);
+                                }
+
+                                @Override
+                                public void onSuccess(final Void result) {
+                                    // onSignIn(userInfoDTO);
+                                    stateManager.gotoToken(session.getCurrentUserInfo().getHomePage());
+                                    getView().hide();
+                                    getView().unMask();
+                                    if (wantHomepage) {
+                                        showWelcolmeDialog();
+                                    } else {
+                                        showWelcolmeDialogNoHomepage();
+                                    }
+                                }
+                            });
                 }
 
                 private void showWelcolmeDialog() {
@@ -193,6 +193,20 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
                 }
             };
             userServiceProvider.get().createUser(user, wantHomepage, callback);
+        }
+    }
+
+    private void onRegistrationFailure(final Throwable caught) {
+        getView().unMask();
+        if (caught instanceof EmailAddressInUseException) {
+            getView().setErrorMessage(i18n.t(CoreMessages.EMAIL_IN_USE), NotifyLevel.error);
+        } else if (caught instanceof GroupNameInUseException) {
+            getView().setErrorMessage(i18n.t(CoreMessages.NAME_IN_USE), NotifyLevel.error);
+        } else if (caught instanceof UserRegistrationException) {
+            getView().setErrorMessage(i18n.t("Error during registration. " + caught.getMessage()), NotifyLevel.error);
+        } else {
+            getView().setErrorMessage(i18n.t("Error during registration."), NotifyLevel.error);
+            throw new UIException("Other kind of exception in user registration", caught);
         }
     }
 

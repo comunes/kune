@@ -953,7 +953,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
 
             @Override
             public void onHistoryToken() {
-                i(SignIn.class).doSignIn();
+                i(SignIn.class).showSignInDialog();
             }
         });
 

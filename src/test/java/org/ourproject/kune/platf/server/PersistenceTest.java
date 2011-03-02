@@ -84,7 +84,10 @@ public abstract class PersistenceTest {
     }
 
     public void rollbackTransaction() {
-        getManager().getTransaction().rollback();
+        final EntityTransaction transaction = getManager().getTransaction();
+        if (transaction.isActive()) {
+            transaction.rollback();
+        }
     }
 
 }

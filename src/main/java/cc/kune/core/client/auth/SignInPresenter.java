@@ -21,7 +21,6 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.common.client.utils.TimerWrapper.Executer;
@@ -61,47 +60,54 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     private final Provider<Register> registerProvider;
     private final TimerWrapper timer;
     private final UserServiceAsync userService;
-    private final WaveClientSimpleAuthenticator waveClientTester;
+    private final WaveClientSimpleAuthenticator waveClientAuthenticator;
 
     @Inject
     public SignInPresenter(final EventBus eventBus, final SignInView view, final SignInProxy proxy,
             final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
             final UserServiceAsync userService, final Provider<Register> registerProvider,
             final CookiesManager cookiesManager, final UserPassAutocompleteManager autocomplete,
-            final TimerWrapper timeWrapper, final WaveClientSimpleAuthenticator waveClientTester) {
+            final TimerWrapper timeWrapper, final WaveClientSimpleAuthenticator waveClientAuthenticator) {
         super(eventBus, view, proxy, session, stateManager, i18n, cookiesManager, autocomplete);
         this.eventBus = eventBus;
         this.userService = userService;
         this.registerProvider = registerProvider;
         this.timer = timeWrapper;
-        this.waveClientTester = waveClientTester;
+        this.waveClientAuthenticator = waveClientAuthenticator;
     }
 
     @Override
-    public void doSignIn() {
-        registerProvider.get().hide();
-        if (session.isLogged()) {
-            stateManager.restorePreviousToken();
-        } else {
-            eventBus.fireEvent(new ProgressShowEvent());
-            getView().show();
-            // getView().center();
-            eventBus.fireEvent(new ProgressHideEvent());
-            getView().focusOnNickname();
-            timer.configure(new Executer() {
-                @Override
-                public void execute() {
-                    final String savedLogin = autocomplete.getNickOrEmail();
-                    final String savedPasswd = autocomplete.getPassword();
-                    if (TextUtils.notEmpty(savedLogin)) {
-                        getView().setNickOrEmail(savedLogin);
-                        getView().setLoginPassword(savedPasswd);
-                        getView().focusOnPassword();
+    public void doSignIn(final String nickOrEmail, final String passwd, final AsyncCallback<Void> extCallback) {
+        final UserDTO user = new UserDTO();
+        user.setShortName(nickOrEmail);
+        user.setPassword(passwd);
+        saveAutocompleteLoginData(nickOrEmail, passwd);
+        waveClientAuthenticator.doLogin(nickOrEmail, passwd, new AsyncCallback<Void>() {
+            @Override
+            public void onFailure(final Throwable caught) {
+                Log.error("SignInPresenter/doLogin fails in Wave auth");
+                extCallback.onFailure(caught);
+            }
+
+            @Override
+            public void onSuccess(final Void arg) {
+
+                final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
+                    @Override
+                    public void onFailure(final Throwable caught) {
+                        extCallback.onFailure(caught);
                     }
-                }
-            });
-            timer.schedule(500);
-        }
+
+                    @Override
+                    public void onSuccess(final UserInfoDTO userInfoDTO) {
+                        onSignIn(userInfoDTO);
+                        extCallback.onSuccess(null);
+                    }
+                };
+                userService.login(user.getShortName(), user.getPassword(),
+                        waveClientAuthenticator.getCookieTokenValue(), callback);
+            }
+        });
     }
 
     @Override
@@ -156,52 +162,64 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
             final String nickOrEmail = getView().getNickOrEmail();
             final String passwd = getView().getLoginPassword();
+            doSignIn(nickOrEmail, passwd, new AsyncCallback<Void>() {
 
-            final UserDTO user = new UserDTO();
-            user.setShortName(nickOrEmail);
-            user.setPassword(passwd);
-            saveAutocompleteLoginData(nickOrEmail, passwd);
-            waveClientTester.doLogin(nickOrEmail, passwd, new SimpleCallback() {
                 @Override
-                public void onSuccess() {
-                    final AsyncCallback<UserInfoDTO> callback = new AsyncCallback<UserInfoDTO>() {
-                        @Override
-                        public void onFailure(final Throwable caught) {
-                            getView().unMask();
-                            eventBus.fireEvent(new ProgressHideEvent());
-                            if (caught instanceof UserAuthException) {
-                                getView().setErrorMessage(i18n.t(CoreMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD),
-                                        NotifyLevel.error);
-                            } else {
-                                getView().setErrorMessage("Error in login", NotifyLevel.error);
-                                Log.error("Other kind of exception in SignInPresenter/doLogin");
-                            }
-                        }
-
-                        @Override
-                        public void onSuccess(final UserInfoDTO userInfoDTO) {
-                            onSignIn(userInfoDTO);
-                            stateManager.restorePreviousToken();
-                            getView().hide();
-                            getView().unMask();
-
-                        }
-                    };
-                    userService.login(user.getShortName(), user.getPassword(), callback);
+                public void onFailure(final Throwable caught) {
+                    onSingInFailed(caught);
                 }
 
                 @Override
-                public void onCancel() {
-                    getView().setErrorMessage("Error in login", NotifyLevel.error);
-                    Log.error("SignInPresenter/doLogin fails in Wave auth");
+                public void onSuccess(final Void result) {
+                    stateManager.restorePreviousToken();
+                    getView().hide();
+                    getView().unMask();
                 }
             });
+        }
+    }
+
+    private void onSingInFailed(final Throwable caught) {
+        getView().unMask();
+        eventBus.fireEvent(new ProgressHideEvent());
+        if (caught instanceof UserAuthException) {
+            getView().setErrorMessage(i18n.t(CoreMessages.INCORRECT_NICKNAME_EMAIL_OR_PASSWORD), NotifyLevel.error);
+        } else {
+            getView().setErrorMessage("Error in login", NotifyLevel.error);
+            Log.error("Other kind of exception in SignInPresenter/doLogin");
         }
     }
 
     @Override
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
+    }
+
+    @Override
+    public void showSignInDialog() {
+        registerProvider.get().hide();
+        if (session.isLogged()) {
+            stateManager.restorePreviousToken();
+        } else {
+            eventBus.fireEvent(new ProgressShowEvent());
+            getView().show();
+            // getView().center();
+            eventBus.fireEvent(new ProgressHideEvent());
+            getView().focusOnNickname();
+            timer.configure(new Executer() {
+                @Override
+                public void execute() {
+                    final String savedLogin = autocomplete.getNickOrEmail();
+                    final String savedPasswd = autocomplete.getPassword();
+                    if (TextUtils.notEmpty(savedLogin)) {
+                        getView().setNickOrEmail(savedLogin);
+                        getView().setLoginPassword(savedPasswd);
+                        getView().focusOnPassword();
+                    }
+                }
+            });
+            timer.schedule(500);
+        }
     }
 
 }

@@ -68,6 +68,8 @@ import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorViewImpl;
+import cc.kune.core.client.sn.BuddiesAndParticipationPanel;
+import cc.kune.core.client.sn.BuddiesAndParticipationPresenter;
 import cc.kune.core.client.sn.GroupMembersPanel;
 import cc.kune.core.client.sn.GroupMembersPresenter;
 import cc.kune.core.client.sn.actions.registry.GroupMembersActionsRegistry;
@@ -141,6 +143,9 @@ public class CoreGinModule extends AbstractPresenterModule {
                 NewGroupPresenter.NewGroupProxy.class);
         bindPresenter(GroupMembersPresenter.class, GroupMembersPresenter.GroupMembersView.class,
                 GroupMembersPanel.class, GroupMembersPresenter.GroupMembersProxy.class);
+        bindPresenter(BuddiesAndParticipationPresenter.class,
+                BuddiesAndParticipationPresenter.BuddiesAndParticipationView.class, BuddiesAndParticipationPanel.class,
+                BuddiesAndParticipationPresenter.BuddiesAndParticipationProxy.class);
         bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
                 EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
         bindPresenter(EntityHeaderPresenter.class, EntityHeaderPresenter.EntityHeaderView.class,

@@ -10,8 +10,6 @@ import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.emite.core.client.events.StateChangedEvent;
@@ -108,32 +106,46 @@ public class ChatSitebarActions {
                 SiteUserOptionsPresenter.LOGGED_USER_MENU, i18n.t("Set your chat status"));
         userOptions.addAction(new MenuSeparatorDescriptor(SiteUserOptionsPresenter.LOGGED_USER_MENU));
         userOptions.addAction(chatActionsTitle);
-        userOptions.addAction(createChatStatusAction(res.online(), i18n.t("Available"),
-                onlineAction(NO_STATUS, Show.notSpecified, res.online())));
-        userOptions.addAction(createChatStatusAction(res.xa(), i18n.t("Available for chat"),
-                onlineAction(NO_STATUS, Show.chat, res.xa())));
-        userOptions.addAction(createChatStatusAction(res.away(), i18n.t("Away"),
-                onlineAction(NO_STATUS, Show.away, res.away())));
-        userOptions.addAction(createChatStatusAction(res.busy(), i18n.t("Busy"),
-                onlineAction(NO_STATUS, Show.dnd, res.busy())));
-        userOptions.addAction(createChatStatusAction(res.offline(), i18n.t("Sign out of chat"),
-                new ChangeOfflineStatusAction(res.offline())));
+        final MenuRadioItemDescriptor onlineItem = createChatStatusAction(res.online(), i18n.t("Available"),
+                onlineAction(NO_STATUS, Show.notSpecified, res.online()));
+        final MenuRadioItemDescriptor availableItem = createChatStatusAction(res.xa(), i18n.t("Available for chat"),
+                onlineAction(NO_STATUS, Show.chat, res.xa()));
+        final MenuRadioItemDescriptor awayItem = createChatStatusAction(res.away(), i18n.t("Away"),
+                onlineAction(NO_STATUS, Show.away, res.away()));
+        final MenuRadioItemDescriptor busyItem = createChatStatusAction(res.busy(), i18n.t("Busy"),
+                onlineAction(NO_STATUS, Show.dnd, res.busy()));
+        final MenuRadioItemDescriptor offlineItem = createChatStatusAction(res.offline(), i18n.t("Sign out of chat"),
+                new ChangeOfflineStatusAction(res.offline()));
+        userOptions.addAction(onlineItem);
+        userOptions.addAction(availableItem);
+        userOptions.addAction(awayItem);
+        userOptions.addAction(busyItem);
+        userOptions.addAction(offlineItem);
         xmppSession.addSessionStateChangedHandler(false, new StateChangedHandler() {
 
             @Override
             public void onStateChanged(final StateChangedEvent event) {
                 if (xmppSession.isReady()) {
                     presenceManager.changeOwnPresence(nextPresence);
+                    switch (nextPresence.getShow()) {
+                    case notSpecified:
+                        onlineItem.setChecked(true);
+                        break;
+                    case dnd:
+                        busyItem.setChecked(true);
+                        break;
+                    case chat:
+                        availableItem.setChecked(true);
+                        break;
+                    case away:
+                        awayItem.setChecked(true);
+                        break;
+                    }
+                } else {
+                    offlineItem.setChecked(true);
                 }
             }
         });
-        session.onUserSignIn(false, new UserSignInHandler() {
-            @Override
-            public void onUserSignIn(final UserSignInEvent event) {
-                //
-            }
-        });
-
     }
 
     private MenuRadioItemDescriptor createChatStatusAction(final ImageResource icon, final String text,

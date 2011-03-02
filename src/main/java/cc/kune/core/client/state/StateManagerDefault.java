@@ -98,7 +98,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     private void checkGroupAndToolChange(final StateAbstractDTO newState) {
-        final String previousGroup = previousToken == null ? "" : previousToken.getGroup();
+        final String previousGroup = getPreviousGroup();
         final String newGroup = newState.getStateToken().getGroup();
         final String previousTokenTool = previousToken == null ? "" : previousToken.getTool();
         final String newTokenTool = newState.getStateToken().getTool();
@@ -117,6 +117,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         resumedToken = null;
     }
 
+    private String getPreviousGroup() {
+        final String previousGroup = previousToken == null ? "" : previousToken.getGroup();
+        return previousGroup;
+    }
+
     @Override
     public void gotoToken(final StateToken newToken) {
         Log.debug("StateManager: history goto-token newItem (" + newToken + ")");
@@ -130,8 +135,13 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     @Override
-    public void onGroupChanged(final GroupChangedHandler handler) {
+    public void onGroupChanged(final boolean fireNow, final GroupChangedHandler handler) {
         eventBus.addHandler(GroupChangedEvent.getType(), handler);
+        final StateAbstractDTO currentState = session.getCurrentState();
+        if (fireNow && currentState != null) {
+            handler.onGroupChanged(new GroupChangedEvent(getPreviousGroup(), currentState.getStateToken().getGroup()));
+        }
+
     }
 
     @Override
@@ -172,22 +182,25 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     @Override
+    public void onSocialNetworkChanged(final boolean fireNow, final SocialNetworkChangedHandler handler) {
+        eventBus.addHandler(SocialNetworkChangedEvent.getType(), handler);
+        final StateAbstractDTO currentState = session.getCurrentState();
+        if (fireNow && currentState != null) {
+            handler.onSocialNetworkChanged(new SocialNetworkChangedEvent(currentState));
+        }
+    }
+
+    @Override
     public void onSocialNetworkChanged(final Listener<StateAbstractDTO> listener) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void onSocialNetworkChanged(final SocialNetworkChangedHandler handler) {
-        eventBus.addHandler(SocialNetworkChangedEvent.getType(), handler);
-    }
-
-    @Override
     public void onStateChanged(final boolean fireNow, final StateChangedHandler handler) {
         eventBus.addHandler(StateChangedEvent.getType(), handler);
-        if (fireNow) {
-            if (session.getCurrentState() != null) {
-                handler.onStateChanged(new StateChangedEvent(session.getCurrentState()));
-            }
+        final StateAbstractDTO currentState = session.getCurrentState();
+        if (fireNow && currentState != null) {
+            handler.onStateChanged(new StateChangedEvent(currentState));
         }
     }
 
@@ -219,6 +232,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
      */
     @Override
     public void reload() {
+        Log.info("Reloading state");
         onHistoryChanged(history.getToken());
     }
 

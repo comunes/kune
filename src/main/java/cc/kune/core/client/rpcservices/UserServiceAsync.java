@@ -28,11 +28,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface UserServiceAsync {
 
-    void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<UserInfoDTO> asyncCallback);
+    void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<Void> asyncCallback);
 
     void getUserAvatarBaser64(String userHash, StateToken userToken, AsyncCallback<String> asyncCallback);
 
-    void login(String nickOrEmail, String passwd, AsyncCallback<UserInfoDTO> asyncCallback);
+    void login(String nickOrEmail, String passwd, String waveCookieValue, AsyncCallback<UserInfoDTO> asyncCallback);
 
     void logout(String userHash, AsyncCallback<Void> asyncCallback);
 

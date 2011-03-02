@@ -40,6 +40,7 @@ import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
+import cc.kune.core.client.sn.BuddiesAndParticipationPresenter;
 import cc.kune.core.client.sn.GroupMembersPresenter;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
@@ -64,6 +65,8 @@ public interface KuneGinjector extends Ginjector {
      * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
      * see the GWTPlatform doc
      */
+
+    AsyncProvider<BuddiesAndParticipationPresenter> getBuddiesAndParticipationPresenter();
 
     ChatClient getChatClient();
 

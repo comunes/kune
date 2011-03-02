@@ -1,6 +1,5 @@
 package cc.kune.core.client.sn.actions;
 
-
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.client.resources.CoreResources;
@@ -32,8 +31,7 @@ public abstract class RolAction extends AbstractExtendedAction {
         this.session = session;
         this.i18n = i18n;
         this.snServiceProvider = snServiceProvider;
-        rightsManager.onRightsChanged(new AccessRightsChangedHandler() {
-
+        rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
             @Override
             public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
                 refreshStatus(rolRequired, authNeed, session.isLogged(), visibleForMembers, visibleForNonMemb,
@@ -61,5 +59,7 @@ public abstract class RolAction extends AbstractExtendedAction {
         }
         setEnabled(newEnabled);
         putValue(GuiActionDescrip.VISIBLE, newVisibility);
+        // NotifyUser.info("Set '" + getValue(Action.NAME) + "' visible: " +
+        // newVisibility, true);
     }
 }

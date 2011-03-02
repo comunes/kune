@@ -62,7 +62,7 @@ public class SiteTokenListeners {
         stateManager.get().addSiteToken(SiteCommonTokens.SIGNIN, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
-                signIn.get().doSignIn();
+                signIn.get().showSignInDialog();
             }
         });
         stateManager.get().addSiteToken(SiteCommonTokens.REGISTER, new HistoryTokenCallback() {

@@ -19,11 +19,14 @@
  */
 package cc.kune.core.client.auth;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SignIn {
 
-    void doSignIn();
+    void doSignIn(String nickOrEmail, String passwd, AsyncCallback<Void> callback);
 
     void hide();
+
+    void showSignInDialog();
 
 }

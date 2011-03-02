@@ -22,13 +22,12 @@ package org.ourproject.kune.platf.server.auth;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import cc.kune.core.client.state.Session;
-
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
+@Deprecated
 public class SessionServiceDefault implements SessionService {
 
     private final Provider<HttpServletRequest> requestProvider;
@@ -38,21 +37,16 @@ public class SessionServiceDefault implements SessionService {
         this.requestProvider = requestProvider;
     }
 
+    @Override
+    @Deprecated
     public void getNewSession() {
-        HttpSession session = getSession();
-        if (session != null) {
-            // During tests session == null
-            session.invalidate();
-        }
-        getSession(true);
+        // HttpSession session = getSession();
+        // if (session != null) {
+        // // During tests session == null
+        // session.invalidate();
+        // }
+        // getSession(true);
         setSessionExpiration();
-    }
-
-    public void setSessionExpiration() {
-        HttpSession session = getSession();
-        if (session != null) {
-            session.setMaxInactiveInterval(Session.SESSION_DURATION / 1000);
-        }
     }
 
     private HttpSession getSession() {
@@ -61,6 +55,15 @@ public class SessionServiceDefault implements SessionService {
 
     private HttpSession getSession(final boolean create) {
         return requestProvider.get().getSession(create);
+    }
+
+    @Override
+    @Deprecated
+    public void setSessionExpiration() {
+        // HttpSession session = getSession();
+        // if (session != null) {
+        // session.setMaxInactiveInterval(Session.SESSION_DURATION / 1000);
+        // }
     }
 
 }

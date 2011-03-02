@@ -31,11 +31,11 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("UserService")
 public interface UserService extends RemoteService {
 
-    UserInfoDTO createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;
+    void createUser(UserDTO user, boolean wantPersonalHomepage) throws DefaultException;
 
     String getUserAvatarBaser64(String userHash, StateToken userToken) throws DefaultException;
 
-    UserInfoDTO login(String nickOrEmail, String passwd) throws DefaultException;
+    UserInfoDTO login(String nickOrEmail, String passwd, String waveToken) throws DefaultException;
 
     void logout(String userHash) throws DefaultException;
 
