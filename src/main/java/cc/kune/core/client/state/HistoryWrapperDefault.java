@@ -23,11 +23,14 @@ import com.google.gwt.user.client.History;
 
 public class HistoryWrapperDefault implements HistoryWrapper {
 
+    @Override
     public String getToken() {
         return History.getToken();
     }
 
+    @Override
     public void newItem(final String historyToken) {
+        // NotifyUser.info("New history token: " + historyToken);
         History.newItem(historyToken);
     }
 

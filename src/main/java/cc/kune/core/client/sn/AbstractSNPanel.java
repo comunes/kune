@@ -9,7 +9,6 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.BasicThumb;
-import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 
@@ -49,6 +48,8 @@ public class AbstractSNPanel extends ViewImpl {
     FlowPanel firstCategoryFlow;
     @UiField
     Label firstCategoryLabel;
+    @UiField
+    DockLayoutPanel firstCategoryPanel;
     @UiField
     Label firstDeckLabel;
     @UiField
@@ -97,9 +98,9 @@ public class AbstractSNPanel extends ViewImpl {
         actions.clear();
     }
 
-    public BasicThumb createThumb(final GroupDTO group, final String avatarUrl, final String tooltip,
+    public BasicThumb createThumb(final String text, final String avatarUrl, final String tooltip,
             final String tooltipTitle, final GuiActionDescCollection menuitems) {
-        final BasicThumb thumb = new BasicThumb(avatarUrl, AVATARSIZE, group.getShortName(), AVATARLABELMAXSIZE, false);
+        final BasicThumb thumb = new BasicThumb(avatarUrl, AVATARSIZE, text, AVATARLABELMAXSIZE, false);
         final MenuDescriptor menu = new MenuDescriptor();
         menu.setStandalone(true);
         menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);

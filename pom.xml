@@ -542,12 +542,12 @@
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>waveinabox-server-custom</artifactId>
-      <version>0.3.6</version>
+      <version>0.3.7</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>proto-gwt</artifactId>
-      <version>0.3.1</version>
+      <version>0.3.7</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>

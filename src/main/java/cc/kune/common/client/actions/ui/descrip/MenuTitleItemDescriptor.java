@@ -24,16 +24,30 @@ import cc.kune.common.client.actions.Action;
 
 public class MenuTitleItemDescriptor extends MenuItemDescriptor {
 
-    public MenuTitleItemDescriptor(final MenuDescriptor parent) {
-        super(AbstractAction.NO_ACTION);
-        setParent(parent);
-    }
-
+    /**
+     * This GUI element only show a title (or header) in the menu, in the
+     * position you add it to the menu. Useful before a radio group, etc This is
+     * the preferred and more common used constructor.
+     * 
+     * @param parent
+     *            menu
+     * @param title
+     *            the menu title
+     */
     public MenuTitleItemDescriptor(final MenuDescriptor parent, final String title) {
-        this(parent);
+        super(AbstractAction.NO_ACTION);
         putValue(Action.NAME, title);
     }
 
+    /**
+     * This GUI element only show a title (or header) in the menu, in the
+     * position you add it to the menu. Useful before a radio group, etc You
+     * must define a menu item with its parent menu. Only use this constructor
+     * if you'll set the parent menu in the future (before render)
+     * 
+     * @param title
+     *            the menu title
+     */
     public MenuTitleItemDescriptor(final String title) {
         super(AbstractAction.NO_ACTION);
         putValue(Action.NAME, title);

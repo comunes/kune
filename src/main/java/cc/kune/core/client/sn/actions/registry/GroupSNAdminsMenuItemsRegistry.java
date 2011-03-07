@@ -11,6 +11,7 @@ import cc.kune.core.client.sn.actions.GotoYourHomePageAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
 import cc.kune.core.client.sn.actions.conditions.IsAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
+import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 import cc.kune.core.client.sn.actions.conditions.IsMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsNotMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
@@ -19,21 +20,23 @@ import cc.kune.core.client.state.Session;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class SNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
+public class GroupSNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
     @Inject
-    public SNCollabsMenuItemsRegistry(final Session session, final IsAdministrableCondition isAdministrableCondition,
-            final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
-            final IsMeCondition isMe, final IsNotMeCondition isNotMe, final ChangeToCollabAction changeToCollabAction,
-            final ChangeToAdminAction changeToAdminAction, final RemoveMemberAction removeMemberAction,
-            final AcceptJoinGroupAction acceptJoinGroupAction, final DenyJoinGroupAction denyJoinGroupAction,
-            final GotoGroupAction gotoGroupAction, final GotoMemberAction gotoMemberAction,
-            final GotoYourHomePageAction gotoYourHomePageAction) {
+    public GroupSNAdminsMenuItemsRegistry(final Session session, final IsLoggedCondition isLogged,
+            final IsAdministrableCondition isAdministrableCondition, final IsPersonCondition isPersonCondition,
+            final IsGroupCondition isGroupCondition, final IsMeCondition isMe, final IsNotMeCondition isNotMe,
+            final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
+            final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
+            final DenyJoinGroupAction denyJoinGroupAction, final GotoGroupAction gotoGroupAction,
+            final GotoMemberAction gotoMemberAction, final GotoYourHomePageAction gotoYourHomePageAction) {
         add(new Provider<MenuItemDescriptor>() {
             @Override
             public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(changeToAdminAction);
+                final MenuItemDescriptor item = new MenuItemDescriptor(changeToCollabAction);
                 item.add(isAdministrableCondition);
+                item.add(isNotMe);
+                item.add(isLogged);
                 return item;
             }
         });
@@ -42,6 +45,8 @@ public class SNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry
             public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(removeMemberAction);
                 item.add(isAdministrableCondition);
+                item.add(isNotMe);
+                item.add(isLogged);
                 return item;
             }
         });
@@ -71,7 +76,6 @@ public class SNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry
                 return item;
             }
         });
-
     }
 
 }

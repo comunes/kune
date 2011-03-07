@@ -1,12 +1,15 @@
-package cc.kune.core.client.sn.actions;
+package cc.kune.core.client.sn.actions.registry;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.sn.actions.JoinGroupAction;
+import cc.kune.core.client.sn.actions.MembersModerationMenuItem;
+import cc.kune.core.client.sn.actions.MembersVisibilityMenuItem;
+import cc.kune.core.client.sn.actions.UnJoinGroupAction;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
-import cc.kune.core.client.sn.actions.registry.GroupMembersActionsRegistry;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
@@ -27,11 +30,11 @@ public class GroupMembersConfActions {
 
     @Inject
     public GroupMembersConfActions(final StateManager stateManager, final I18nTranslationService i18n,
-            final GroupMembersActionsRegistry registry, final Provider<MembersVisibilityMenuItem> membersVisibility,
+            final GroupSNBottomActionsRegistry registry, final Provider<MembersVisibilityMenuItem> membersVisibility,
             final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
             final JoinGroupAction joinGroupAction, final IsGroupCondition isGroupCondition,
             final UnJoinGroupAction unJoinGroupAction) {
-        OPTIONS_MENU.withText(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles("k-sn-options-menu");
+        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles("k-sn-options-menu");
         final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
                 SocialNetworkVisibility.anyone);
         final MenuRadioItemDescriptor onlyMembersItem = membersVisibility.get().withVisibility(

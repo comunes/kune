@@ -40,8 +40,8 @@ import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
-import cc.kune.core.client.sn.BuddiesAndParticipationPresenter;
-import cc.kune.core.client.sn.GroupMembersPresenter;
+import cc.kune.core.client.sn.UserSNPresenter;
+import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
@@ -66,7 +66,7 @@ public interface KuneGinjector extends Ginjector {
      * see the GWTPlatform doc
      */
 
-    AsyncProvider<BuddiesAndParticipationPresenter> getBuddiesAndParticipationPresenter();
+    AsyncProvider<UserSNPresenter> getBuddiesAndParticipationPresenter();
 
     ChatClient getChatClient();
 
@@ -90,7 +90,7 @@ public interface KuneGinjector extends Ginjector {
 
     GlobalShortcutRegister getGlobalShortcutRegister();
 
-    AsyncProvider<GroupMembersPresenter> getGroupMembersPresenter();
+    AsyncProvider<GroupSNPresenter> getGroupMembersPresenter();
 
     GuiProvider getGuiProvider();
 

@@ -14,7 +14,7 @@
       <g:Label ui:field="firstDeckLabel" addStyleNames="k-sn-novisible-label" />
       <g:Label ui:field="sndDeckLabel" addStyleNames="k-sn-orphan-label" />
       <g:FlowPanel width="100%" ui:field="categoriesFlow">
-        <g:DockLayoutPanel unit="EM" width="100%"
+        <g:DockLayoutPanel unit="EM" width="100%" ui:field="firstCategoryPanel"
           addStyleNames="k-sn-adminspanel" height="80px">
           <g:north size="1.2">
             <g:FlowPanel>

@@ -47,11 +47,13 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     }
 
     protected void addStyle(final String style) {
-        super.addStyleName(style);
+        if (super.isOrWasAttached()) {
+            super.addStyleName(style);
+        }
     }
 
     protected void clearStyles() {
-        if (super.isAttached()) {
+        if (super.isOrWasAttached()) {
             super.setStyleName("");
         }
     }

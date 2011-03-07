@@ -35,6 +35,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ourproject.kune.platf.server.ServerException;
 import org.ourproject.kune.rack.dock.Dock;
 import org.ourproject.kune.rack.dock.RequestMatcher;
+import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 
 import com.google.inject.Injector;
 
@@ -69,8 +70,8 @@ public class RackServletFilter implements Filter {
         }
     }
 
-    public static final String INJECTOR_ATTRIBUTE = Injector.class.getName();
-    public static final String INJECTOR_PARENT_ATTRIBUTE = Injector.class.getName() + "Parent";
+    public static final String INJECTOR_ATTRIBUTE = Injector.class.getName() + "Child";
+    public static final String INJECTOR_PARENT_ATTRIBUTE = ServerRpcProvider.INJECTOR_ATTRIBUTE;
     private static final Log LOG = LogFactory.getLog(RackServletFilter.class);
     private static final String MODULE_PARAMETER = RackModule.class.getName();
     private List<Dock> docks;

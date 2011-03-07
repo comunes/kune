@@ -43,6 +43,7 @@ public class WaveClientSimpleAuthenticator {
                 @Override
                 public void onResponseReceived(final Request request, final Response response) {
                     callback.onSuccess(null);
+                    // Only for testing:
                     // final ForIsWidget userSpace = wsArmor.getUserSpace();
                     // if (userSpace.getWidgetCount() > 0) {
                     // userSpace.remove(0);

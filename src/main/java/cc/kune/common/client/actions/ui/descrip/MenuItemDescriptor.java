@@ -20,15 +20,31 @@
 package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
-import cc.kune.common.client.log.Log;
 
 public class MenuItemDescriptor extends AbstractGuiActionDescrip {
 
+    /**
+     * A simple menu item definition.
+     * 
+     * You must define a menu item with its parent menu. Only use this
+     * constructor if you'll set the parent menu in the future (before render)
+     * 
+     * @param action
+     */
     public MenuItemDescriptor(final AbstractAction action) {
         super(action);
-        Log.debug("You must define a menu item with its parent menu");
     }
 
+    /**
+     * 
+     * A simple menu item definition.
+     * 
+     * This is the preferred and more common used constructor.
+     * 
+     * @param parent
+     *            menu
+     * @param action
+     */
     public MenuItemDescriptor(final MenuDescriptor parent, final AbstractAction action) {
         super(action);
         setParent(parent);

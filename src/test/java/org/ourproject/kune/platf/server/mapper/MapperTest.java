@@ -325,11 +325,11 @@ public class MapperTest {
         buddies.add(user);
         budData.setBuddies(buddies);
         final SocialNetworkData snResult = new SocialNetworkData(SocialNetworkVisibility.onlymembers, sn, part,
-                UserBuddiesVisibility.onlyyou, budData, new AccessRights(false, false, true), true, true);
+                UserBuddiesVisibility.yourbuddies, budData, new AccessRights(false, false, true), true, true);
         final SocialNetworkDataDTO map = mapper.map(snResult, SocialNetworkDataDTO.class);
         assertNotNull(map);
         assertEquals(SocialNetworkVisibility.onlymembers, map.getSocialNetworkVisibility());
-        assertEquals(UserBuddiesVisibility.onlyyou, map.getUserBuddiesVisibility());
+        assertEquals(UserBuddiesVisibility.yourbuddies, map.getUserBuddiesVisibility());
         assertEquals("test", map.getGroupMembers().getAccessLists().getAdmins().getList().get(0).getShortName());
         assertEquals("test", map.getUserParticipation().getGroupsIsAdmin().get(0).getShortName());
         assertEquals("usertest", map.getUserBuddies().getBuddies().get(0).getShortName());

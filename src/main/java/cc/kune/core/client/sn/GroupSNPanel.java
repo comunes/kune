@@ -4,27 +4,27 @@ import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.BasicThumb;
-import cc.kune.core.client.sn.GroupMembersPresenter.GroupMembersView;
+import cc.kune.core.client.sn.GroupSNPresenter.GroupSNView;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 
 import com.google.inject.Inject;
 
-public class GroupMembersPanel extends AbstractSNPanel implements GroupMembersView {
+public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
     @Inject
-    public GroupMembersPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final WsArmor armor) {
+    public GroupSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final WsArmor armor) {
         super(i18n, guiProvider, armor);
         setVisible(false);
         mainTitle.setText(i18n.t("Group members"));
         mainTitle.setTitle(i18n.t("People and groups collaborating in this group"));
         firstCategoryLabel.setText(i18n.t("Admins"));
-        firstCategoryLabel.setTitle(i18n.t("People that can admin this group"));
+        firstCategoryPanel.setTitle(i18n.t("People that can admin this group"));
         sndCategoryLabel.setText(i18n.t("Collaborators"));
-        sndCategoryLabel.setTitle(i18n.t("Other people that collaborate with this group"));
+        sndCategoryPanel.setTitle(i18n.t("Other people that collaborate with this group"));
         trdCategoryLabel.setText(i18n.t("Pending"));
-        trdCategoryLabel.setTitle(i18n.t("People pending to be accepted in this group by the admins"));
+        trdCategoryPanel.setTitle(i18n.t("People pending to be accepted in this group by the admins"));
         sndDeckLabel.setText(i18n.t("This is an orphaned project, if you are interested please request to join to work on it"));
         firstDeckLabel.setText(i18n.t("The members of this group are not public"));
         bottomActionsToolbar = new ActionFlowPanel(guiProvider);
@@ -37,21 +37,21 @@ public class GroupMembersPanel extends AbstractSNPanel implements GroupMembersVi
     @Override
     public void addAdmin(final GroupDTO group, final String avatarUrl, final String tooltip, final String tooltipTitle,
             final GuiActionDescCollection menu) {
-        final BasicThumb thumb = createThumb(group, avatarUrl, tooltip, tooltipTitle, menu);
+        final BasicThumb thumb = createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle, menu);
         firstCategoryFlow.add(thumb);
     }
 
     @Override
     public void addCollab(final GroupDTO group, final String avatarUrl, final String tooltip,
             final String tooltipTitle, final GuiActionDescCollection menu) {
-        final BasicThumb thumb = createThumb(group, avatarUrl, tooltip, tooltipTitle, menu);
+        final BasicThumb thumb = createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle, menu);
         sndCategoryFlow.add(thumb);
     }
 
     @Override
     public void addPending(final GroupDTO group, final String avatarUrl, final String tooltip,
             final String tooltipTitle, final GuiActionDescCollection menu) {
-        final BasicThumb thumb = createThumb(group, avatarUrl, tooltip, tooltipTitle, menu);
+        final BasicThumb thumb = createThumb(group.getShortName(), avatarUrl, tooltip, tooltipTitle, menu);
         trdCategoryFlow.add(thumb);
     }
 

@@ -6,65 +6,46 @@ import cc.kune.core.client.sn.actions.ChangeToAdminAction;
 import cc.kune.core.client.sn.actions.ChangeToCollabAction;
 import cc.kune.core.client.sn.actions.DenyJoinGroupAction;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
-import cc.kune.core.client.sn.actions.GotoMemberAction;
-import cc.kune.core.client.sn.actions.GotoYourHomePageAction;
+import cc.kune.core.client.sn.actions.GotoPersonAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
 import cc.kune.core.client.sn.actions.conditions.IsAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
-import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
-import cc.kune.core.client.sn.actions.conditions.IsMeCondition;
-import cc.kune.core.client.sn.actions.conditions.IsNotMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsPersonCondition;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class SNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
+public class GroupSNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
     @Inject
-    public SNAdminsMenuItemsRegistry(final Session session, final IsLoggedCondition isLogged,
-            final IsAdministrableCondition isAdministrableCondition, final IsPersonCondition isPersonCondition,
-            final IsGroupCondition isGroupCondition, final IsMeCondition isMe, final IsNotMeCondition isNotMe,
+    public GroupSNPendingsMenuItemsRegistry(final Session session, final IsAdministrableCondition isAdministrableCondition,
+            final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
             final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
             final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,
             final DenyJoinGroupAction denyJoinGroupAction, final GotoGroupAction gotoGroupAction,
-            final GotoMemberAction gotoMemberAction, final GotoYourHomePageAction gotoYourHomePageAction) {
+            final GotoPersonAction gotoPersonAction) {
         add(new Provider<MenuItemDescriptor>() {
             @Override
             public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(changeToCollabAction);
+                final MenuItemDescriptor item = new MenuItemDescriptor(acceptJoinGroupAction);
                 item.add(isAdministrableCondition);
-                item.add(isNotMe);
-                item.add(isLogged);
                 return item;
             }
         });
         add(new Provider<MenuItemDescriptor>() {
             @Override
             public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(removeMemberAction);
+                final MenuItemDescriptor item = new MenuItemDescriptor(denyJoinGroupAction);
                 item.add(isAdministrableCondition);
-                item.add(isNotMe);
-                item.add(isLogged);
                 return item;
             }
         });
         add(new Provider<MenuItemDescriptor>() {
             @Override
             public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(gotoMemberAction);
+                final MenuItemDescriptor item = new MenuItemDescriptor(gotoPersonAction);
                 item.add(isPersonCondition);
-                item.add(isNotMe);
-                return item;
-            }
-        });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(gotoYourHomePageAction);
-                item.add(isPersonCondition);
-                item.add(isMe);
                 return item;
             }
         });

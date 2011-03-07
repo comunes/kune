@@ -27,14 +27,14 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class SocialNetworkDataDTO implements IsSerializable {
 
-    private SocialNetworkVisibility socialNetworkVisibility;
     private SocialNetworkDTO groupMembers;
-    private ParticipationDataDTO userParticipation;
-    private UserBuddiesVisibility userBuddiesVisibility;
-    private UserBuddiesDataDTO userBuddies;
     private AccessRights groupRights;
     private boolean isBuddiesVisible;
     private boolean isMembersVisible;
+    private SocialNetworkVisibility socialNetworkVisibility;
+    private UserBuddiesDataDTO userBuddies;
+    private UserBuddiesVisibility userBuddiesVisibility;
+    private ParticipationDataDTO userParticipation;
 
     public SocialNetworkDataDTO() {
         this(null, null, null, null, null, null, false, false);
@@ -43,7 +43,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
     public SocialNetworkDataDTO(final SocialNetworkVisibility socialNetworkVisibility,
             final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation,
             final UserBuddiesVisibility userBuddiesVisibility, final UserBuddiesDataDTO userBuddies,
-            final AccessRights  groupRights, final boolean isBuddiesVisible, final boolean isMembersVisible) {
+            final AccessRights groupRights, final boolean isBuddiesVisible, final boolean isMembersVisible) {
         this.socialNetworkVisibility = socialNetworkVisibility;
         this.groupMembers = groupMembers;
         this.userParticipation = userParticipation;
@@ -58,7 +58,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
         return groupMembers;
     }
 
-    public AccessRights  getGroupRights() {
+    public AccessRights getGroupRights() {
         return groupRights;
     }
 
@@ -136,6 +136,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
     @Override
     public String toString() {
-        return "SocialNetworkResultDTO[members: " + groupMembers + "; participation: " + userParticipation + "]";
+        return "SocialNetworkResultDTO[members: " + groupMembers + "; participation: " + userParticipation
+                + "; buddiesvisibility: " + userBuddiesVisibility + "]";
     }
 }

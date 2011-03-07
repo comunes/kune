@@ -164,7 +164,7 @@ public class UserRPC implements RPC, UserService {
         if (!groupToken.getGroup().equals(user.getShortName())) {
             throw new AccessViolationException();
         }
-        user.setBuddiesVisibility(UserBuddiesVisibility.valueOf(visibility.toString()));
+        user.setBuddiesVisibility(visibility);
     }
 
 }

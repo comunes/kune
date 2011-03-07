@@ -39,7 +39,10 @@ import org.waveprotocol.box.server.robots.dataapi.DataApiOAuthServlet;
 import org.waveprotocol.box.server.robots.dataapi.DataApiServlet;
 import org.waveprotocol.box.server.robots.passive.RobotsGateway;
 import org.waveprotocol.box.server.rpc.AttachmentServlet;
+import org.waveprotocol.box.server.rpc.AuthenticationServlet;
 import org.waveprotocol.box.server.rpc.FetchServlet;
+import org.waveprotocol.box.server.rpc.SearchServlet;
+import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
 import org.waveprotocol.box.server.waveserver.WaveBus;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
@@ -88,7 +91,7 @@ public class WaveMain {
         federationManager.startFederation();
     }
 
-    private static void initializeFrontend(final Injector injector, final CustomServerRpcProvider server,
+    private static void initializeFrontend(final Injector injector, final ServerRpcProvider server,
             final WaveBus waveBus) throws WaveServerException {
         final HashedVersionFactory hashFactory = injector.getInstance(HashedVersionFactory.class);
         final WaveletProvider provider = injector.getInstance(WaveletProvider.class);
@@ -120,14 +123,16 @@ public class WaveMain {
         waveServer.initialize();
     }
 
-    private static void initializeServlets(final Injector injector, final CustomServerRpcProvider server) {
+    private static void initializeServlets(final Injector injector, final ServerRpcProvider server) {
         server.addServlet("/attachment/*", injector.getInstance(AttachmentServlet.class));
 
-        server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(CustomAuthenticationServlet.class));
+        server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));
         server.addServlet("/auth/signout", injector.getInstance(SignOutServlet.class));
         server.addServlet("/auth/register", injector.getInstance(CustomUserRegistrationServlet.class));
 
         server.addServlet("/fetch/*", injector.getInstance(FetchServlet.class));
+
+        server.addServlet("/search/*", injector.getInstance(SearchServlet.class));
 
         server.addServlet("/robot/dataapi", injector.getInstance(DataApiServlet.class));
         server.addServlet(DataApiOAuthServlet.DATA_API_OAUTH_PATH + "/*",
@@ -144,7 +149,8 @@ public class WaveMain {
         final ServletHolder proxyServletHolder = server.addServlet("/gadgets/*", proxyServlet);
         proxyServletHolder.setInitParameter("HostHeader", gadgetServerHostname);
 
-        server.addServlet("/", injector.getInstance(CustomWaveClientServlet.class));
+        // server.addServlet("/",
+        // injector.getInstance(CustomWaveClientServlet.class));
     }
 
     public static void main(final String... args) {
@@ -179,7 +185,7 @@ public class WaveMain {
         final Injector injector = settingsInjector.createChildInjector(new ServerModule(enableFederation),
                 new RobotApiModule(), federationModule, persistenceModule);
 
-        final CustomServerRpcProvider server = injector.getInstance(CustomServerRpcProvider.class);
+        final ServerRpcProvider server = injector.getInstance(ServerRpcProvider.class);
         final WaveBus waveBus = injector.getInstance(WaveBus.class);
 
         initializeServer(injector);

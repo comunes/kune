@@ -68,14 +68,16 @@ import cc.kune.core.client.sitebar.logo.SiteLogoPresenter;
 import cc.kune.core.client.sitebar.logo.SiteLogoViewImpl;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorViewImpl;
-import cc.kune.core.client.sn.BuddiesAndParticipationPanel;
-import cc.kune.core.client.sn.BuddiesAndParticipationPresenter;
-import cc.kune.core.client.sn.GroupMembersPanel;
-import cc.kune.core.client.sn.GroupMembersPresenter;
-import cc.kune.core.client.sn.actions.registry.GroupMembersActionsRegistry;
-import cc.kune.core.client.sn.actions.registry.SNAdminsMenuItemsRegistry;
-import cc.kune.core.client.sn.actions.registry.SNCollabsMenuItemsRegistry;
-import cc.kune.core.client.sn.actions.registry.SNPendingsMenuItemsRegistry;
+import cc.kune.core.client.sn.GroupSNPanel;
+import cc.kune.core.client.sn.GroupSNPresenter;
+import cc.kune.core.client.sn.UserSNPanel;
+import cc.kune.core.client.sn.UserSNPresenter;
+import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
+import cc.kune.core.client.sn.actions.registry.GroupSNBottomActionsRegistry;
+import cc.kune.core.client.sn.actions.registry.GroupSNCollabsMenuItemsRegistry;
+import cc.kune.core.client.sn.actions.registry.GroupSNPendingsMenuItemsRegistry;
+import cc.kune.core.client.sn.actions.registry.UserSNBottomActionsRegistry;
+import cc.kune.core.client.sn.actions.registry.UserSNMenuItemsRegistry;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.ContentProvider;
 import cc.kune.core.client.state.ContentProviderDefault;
@@ -141,11 +143,10 @@ public class CoreGinModule extends AbstractPresenterModule {
                 SitebarActionsPanel.class, SitebarActionsPresenter.SitebarActionsProxy.class);
         bindPresenter(NewGroupPresenter.class, NewGroupView.class, NewGroupPanel.class,
                 NewGroupPresenter.NewGroupProxy.class);
-        bindPresenter(GroupMembersPresenter.class, GroupMembersPresenter.GroupMembersView.class,
-                GroupMembersPanel.class, GroupMembersPresenter.GroupMembersProxy.class);
-        bindPresenter(BuddiesAndParticipationPresenter.class,
-                BuddiesAndParticipationPresenter.BuddiesAndParticipationView.class, BuddiesAndParticipationPanel.class,
-                BuddiesAndParticipationPresenter.BuddiesAndParticipationProxy.class);
+        bindPresenter(GroupSNPresenter.class, GroupSNPresenter.GroupSNView.class, GroupSNPanel.class,
+                GroupSNPresenter.GroupSNProxy.class);
+        bindPresenter(UserSNPresenter.class, UserSNPresenter.UserSNView.class, UserSNPanel.class,
+                UserSNPresenter.UserSNProxy.class);
         bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
                 EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
         bindPresenter(EntityHeaderPresenter.class, EntityHeaderPresenter.EntityHeaderView.class,
@@ -192,16 +193,17 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(CoreParts.class).asEagerSingleton();
 
         // SN
-        bind(SNAdminsMenuItemsRegistry.class).in(Singleton.class);
-        bind(SNCollabsMenuItemsRegistry.class).in(Singleton.class);
-        bind(SNPendingsMenuItemsRegistry.class).in(Singleton.class);
-        bind(GroupMembersActionsRegistry.class).in(Singleton.class);
+        bind(GroupSNAdminsMenuItemsRegistry.class).in(Singleton.class);
+        bind(GroupSNCollabsMenuItemsRegistry.class).in(Singleton.class);
+        bind(GroupSNPendingsMenuItemsRegistry.class).in(Singleton.class);
+        bind(GroupSNBottomActionsRegistry.class).in(Singleton.class);
+        bind(UserSNBottomActionsRegistry.class).in(Singleton.class);
+        bind(UserSNMenuItemsRegistry.class).in(Singleton.class);
 
         bind(SiteUserOptionsPresenter.class).in(Singleton.class);
         bind(SiteUserOptions.class).to(SiteUserOptionsPresenter.class).in(Singleton.class);
         bind(SitebarNewGroupLink.class).in(Singleton.class);
         bind(SitebarSignInLink.class).in(Singleton.class);
         bind(SitebarSignOutLink.class).in(Singleton.class);
-
     }
 }

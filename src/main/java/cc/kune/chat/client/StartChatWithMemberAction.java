@@ -21,7 +21,7 @@ public class StartChatWithMemberAction extends AbstractExtendedAction {
             final Provider<ChatClient> chatClient) {
         this.i18n = i18n;
         this.chatClient = chatClient;
-        putValue(NAME, i18n.t("Start a chat with this member"));
+        putValue(NAME, i18n.t("Chat with this member"));
         putValue(Action.SMALL_ICON, res.newChat());
     }
 

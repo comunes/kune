@@ -34,7 +34,6 @@ import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.authentication.SessionManager;
 import org.waveprotocol.box.server.gxp.TopBar;
 import org.waveprotocol.box.server.gxp.WaveClientPage;
-import org.waveprotocol.box.server.rpc.BaseUrlHelper;
 import org.waveprotocol.box.server.util.RandomBase64Generator;
 import org.waveprotocol.wave.client.util.ClientFlagsBase;
 import org.waveprotocol.wave.common.bootstrap.FlagConstants;
@@ -64,7 +63,6 @@ public class CustomWaveClientServlet extends HttpServlet {
         }
     }
 
-    private final String baseUrl;
     private final String domain;
     private final SessionManager sessionManager;
     private final Boolean useSocketIO;
@@ -74,11 +72,9 @@ public class CustomWaveClientServlet extends HttpServlet {
      */
     @Inject
     public CustomWaveClientServlet(@Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
-            @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO,
-            @Named(CoreSettings.HTTP_BASE_URL) final String baseUrl, final SessionManager sessionManager) {
+            @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO, final SessionManager sessionManager) {
         this.domain = domain;
         this.useSocketIO = useSocketIO;
-        this.baseUrl = BaseUrlHelper.removeLastSlash(baseUrl);
         this.sessionManager = sessionManager;
     }
 
@@ -87,13 +83,13 @@ public class CustomWaveClientServlet extends HttpServlet {
         final ParticipantId id = sessionManager.getLoggedInUser(request.getSession(false));
 
         // Eventually, it would be nice to show users who aren't logged in the
-        // public waves.
+        // public waves.,
         // However, public waves aren't implemented yet. For now, we'll just
         // redirect users
         // who haven't signed in to the sign in page.
         // COMMENTED (vjrj)
         if (id == null) {
-            response.sendRedirect(baseUrl + sessionManager.getLoginUrl(baseUrl + "/"));
+            response.sendRedirect(sessionManager.getLoginUrl("/"));
             return;
         }
 
@@ -108,7 +104,7 @@ public class CustomWaveClientServlet extends HttpServlet {
         try {
             WaveClientPage.write(response.getWriter(), new GxpContext(request.getLocale()),
                     getSessionJson(request.getSession(false)), getClientFlags(request),
-                    TopBar.getGxpClosure(username, userDomain, baseUrl), useSocketIO, baseUrl);
+                    TopBar.getGxpClosure(username, userDomain), useSocketIO);
         } catch (final IOException e) {
             LOG.warning("Failed to write GXP for request " + request, e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

@@ -1,9 +1,9 @@
 <ui:UiBinder
     xmlns:ui="urn:ui:com.google.gwt.uibinder"
     xmlns:g='urn:import:com.google.gwt.user.client.ui'
-    xmlns:s='urn:import:org.waveprotocol.box.webclient.client'
-    xmlns:w='urn:import:org.waveprotocol.wave.client.widget.common'
-    xmlns:n='urn:import:org.waveprotocol.box.webclient.client.wavelist'>
+    xmlns:d='urn:import:org.waveprotocol.box.webclient.client'
+    xmlns:s='urn:import:org.waveprotocol.box.webclient.search'
+    xmlns:w='urn:import:org.waveprotocol.wave.client.widget.common'>
   <ui:style type="cc.kune.wave.client.WebClient.Style">
     @def rootBackground #f0f0ff;
     @def gap 5px;
@@ -55,13 +55,13 @@
     <g:center>
       <g:SplitLayoutPanel ui:field="splitPanel" stylePrimaryName="{style.splitPanel}">
         <g:south size="200">
-          <s:DebugMessagePanel ui:field="logPanel" styleName="{style.subPanel} {style.debugPanel}" />
+          <d:DebugMessagePanel ui:field="logPanel" addStyleNames="{style.subPanel} {style.debugPanel}" />
         </g:south>
         <g:west size="400">
-          <n:WaveListPanel ui:field="listPanel" styleName="{style.waveList}" />
+          <s:SearchPanelWidget ui:field="searchPanel"/>
         </g:west>
         <g:center>
-          <w:ImplPanel ui:field="contentPanel"></w:ImplPanel>
+          <w:ImplPanel ui:field="contentPanel"/>
         </g:center>
       </g:SplitLayoutPanel>
     </g:center>

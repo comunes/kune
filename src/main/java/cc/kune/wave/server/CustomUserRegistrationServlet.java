@@ -32,7 +32,6 @@ import org.waveprotocol.box.server.gxp.UserRegistrationPage;
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.rpc.AuthenticationServlet;
-import org.waveprotocol.box.server.rpc.BaseUrlHelper;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.util.logging.Log;
@@ -48,18 +47,15 @@ import com.google.inject.name.Named;
  */
 public class CustomUserRegistrationServlet extends HttpServlet {
     private final AccountStore accountStore;
-    private final String baseUrl;
     private final String domain;
 
     private final Log LOG = Log.get(CustomUserRegistrationServlet.class);
 
     @Inject
     public CustomUserRegistrationServlet(final AccountStore accountStore,
-            @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
-            @Named(CoreSettings.HTTP_BASE_URL) final String baseUrl) {
+            @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
         this.accountStore = accountStore;
         this.domain = domain;
-        this.baseUrl = BaseUrlHelper.removeLastSlash(baseUrl);
     }
 
     @Override
@@ -151,6 +147,6 @@ public class CustomUserRegistrationServlet extends HttpServlet {
             final HttpServletResponse dest) throws IOException {
         dest.setCharacterEncoding("UTF-8");
         dest.setContentType("text/html;charset=utf-8");
-        UserRegistrationPage.write(dest.getWriter(), new GxpContext(locale), domain, baseUrl, message, responseType);
+        UserRegistrationPage.write(dest.getWriter(), new GxpContext(locale), domain, message, responseType);
     }
 }

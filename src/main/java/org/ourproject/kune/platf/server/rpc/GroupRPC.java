@@ -152,7 +152,7 @@ public class GroupRPC implements RPC, GroupService {
     public void setSocialNetworkVisibility(final String userHash, final StateToken token,
             final SocialNetworkVisibility visibility) {
         final Group group = groupManager.findByShortName(token.getGroup());
-        group.getSocialNetwork().setVisibility(SocialNetworkVisibility.valueOf(visibility.toString()));
+        group.getSocialNetwork().setVisibility(visibility);
     }
 
     @Override
