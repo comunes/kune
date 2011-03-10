@@ -6,7 +6,7 @@ import cc.kune.core.client.sn.actions.ChangeToAdminAction;
 import cc.kune.core.client.sn.actions.ChangeToCollabAction;
 import cc.kune.core.client.sn.actions.DenyJoinGroupAction;
 import cc.kune.core.client.sn.actions.GotoGroupAction;
-import cc.kune.core.client.sn.actions.GotoMemberAction;
+import cc.kune.core.client.sn.actions.GotoPersonAction;
 import cc.kune.core.client.sn.actions.GotoYourHomePageAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
 import cc.kune.core.client.sn.actions.UnJoinGroupAction;
@@ -29,7 +29,7 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
             final IsMeCondition isMe, final IsNotMeCondition isNotMe, final ChangeToCollabAction changeToCollabAction,
             final ChangeToAdminAction changeToAdminAction, final RemoveMemberAction removeMemberAction,
             final AcceptJoinGroupAction acceptJoinGroupAction, final DenyJoinGroupAction denyJoinGroupAction,
-            final GotoGroupAction gotoGroupAction, final GotoMemberAction gotoMemberAction,
+            final GotoGroupAction gotoGroupAction, final GotoPersonAction gotoPersonAction,
             final UnJoinGroupAction unjoinAction, final GotoYourHomePageAction gotoYourHomePageAction) {
         add(new Provider<MenuItemDescriptor>() {
             @Override
@@ -42,7 +42,7 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
         add(new Provider<MenuItemDescriptor>() {
             @Override
             public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(gotoMemberAction);
+                final MenuItemDescriptor item = new MenuItemDescriptor(gotoPersonAction);
                 item.add(isPersonCondition);
                 item.add(isNotMe);
                 return item;

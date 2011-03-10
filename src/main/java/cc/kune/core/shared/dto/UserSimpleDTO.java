@@ -24,14 +24,14 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserSimpleDTO implements IsSerializable {
+    private I18nCountryDTO country;
+    private boolean hasLogo;
     private Long id;
+    private I18nLanguageDTO language;
     private String name;
     private String shortName;
-    private I18nLanguageDTO language;
-    private I18nCountryDTO country;
-    private TimeZoneDTO timezone;
-    private boolean hasLogo;
     private StateToken stateToken;
+    private TimeZoneDTO timezone;
 
     public UserSimpleDTO() {
         this(null, null, null, null, null);

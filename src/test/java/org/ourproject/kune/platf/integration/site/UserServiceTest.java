@@ -39,6 +39,7 @@ import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.shared.domain.UserBuddiesVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.I18nCountryDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
@@ -110,6 +111,17 @@ public class UserServiceTest extends IntegrationTest {
     public void testReloadUserInfoNotLogged() throws Exception {
         assertNull(session.getUser().getId());
         userService.reloadUserInfo("AndOldUserHash");
+    }
+
+    @Test
+    public void testSetVisibility() throws Exception {
+        assertNull(session.getUser().getId());
+        doLogin();
+        assertNotNull(session.getUser().getId());
+        for (final UserBuddiesVisibility visibility : UserBuddiesVisibility.values()) {
+            userService.setBuddiesVisibility(token, session.getUser().getStateToken(), visibility);
+            assertEquals(visibility, session.getUser().getBuddiesVisibility());
+        }
     }
 
     @Test

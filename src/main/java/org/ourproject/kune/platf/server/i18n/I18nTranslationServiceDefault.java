@@ -35,13 +35,13 @@ public class I18nTranslationServiceDefault extends I18nTranslationService {
 
     private final I18nTranslationManager translationManager;
 
-    private final Provider<UserSession> userSessionProvider;
+    // private final Provider<UserSession> userSessionProvider;
 
     @Inject
     public I18nTranslationServiceDefault(final I18nTranslationManager translationManager,
             final Provider<UserSession> userSessionProvider) {
         this.translationManager = translationManager;
-        this.userSessionProvider = userSessionProvider;
+        // this.userSessionProvider = userSessionProvider;
     }
 
     /**
@@ -57,12 +57,12 @@ public class I18nTranslationServiceDefault extends I18nTranslationService {
     public String t(final String text) {
         String language;
 
-        final UserSession userSession = userSessionProvider.get();
-        if (userSession.isUserLoggedIn()) {
-            language = userSession.getUser().getLanguage().getCode();
-        } else {
-            language = I18nTranslation.DEFAULT_LANG;
-        }
+        // final UserSession userSession = userSessionProvider.get();
+        // if (userSession.isUserLoggedIn()) {
+        // language = userSession.getUser().getLanguage().getCode();
+        // } else {
+        language = I18nTranslation.DEFAULT_LANG;
+        // }
         final String encodeText = TextUtils.escapeHtmlLight(text);
         String translation = translationManager.getTranslation(language, text);
         if (translation == UNTRANSLATED_VALUE) {

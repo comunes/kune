@@ -4,7 +4,6 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
-import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sn.actions.AddNewBuddiesAction;
 import cc.kune.core.client.sn.actions.UserSNVisibilityMenuItem;
@@ -72,7 +71,8 @@ public class UserSNConfActions {
                         onlyYou.setChecked(true);
                         break;
                     }
-                    NotifyUser.info(i18n.t("Visibility of your network is " + visibility.toString()));
+                    // NotifyUser.info(i18n.t("Visibility of your network is " +
+                    // visibility.toString()));
                 }
                 addBuddieBtn.setVisible(session.isLogged() && currentGroup.isPersonal()
                         && session.getCurrentUser().getShortName().equals(currentGroup.getShortName()));
