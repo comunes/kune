@@ -7,7 +7,7 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -18,7 +18,7 @@ public class UserSNVisibilityAction extends AbstractExtendedAction {
     private final Session session;
     private final StateManager stateManager;
     private final Provider<UserServiceAsync> userServiceAsync;
-    private UserBuddiesVisibility visibility;
+    private UserSNetVisibility visibility;
 
     @Inject
     public UserSNVisibilityAction(final Session session, final StateManager stateManager,
@@ -35,15 +35,16 @@ public class UserSNVisibilityAction extends AbstractExtendedAction {
                 session.getCurrentState().getGroup().getStateToken(), visibility, new AsyncCallbackSimple<Void>() {
                     @Override
                     public void onSuccess(final Void result) {
-                        NotifyUser.info(i18n.t("Visibility of your network changed to " + visibility.toString()));
-                        // NotifyUser.info(i18n.t("Visibility of your network changed"));
+                        // NotifyUser.info(i18n.t("Visibility of your network changed to "
+                        // + visibility.toString()));
+                        NotifyUser.info(i18n.t("Visibility of your network changed"));
                         stateManager.reload();
                     }
                 });
 
     }
 
-    public void setVisibility(final UserBuddiesVisibility visibility) {
+    public void setVisibility(final UserSNetVisibility visibility) {
         this.visibility = visibility;
     }
 

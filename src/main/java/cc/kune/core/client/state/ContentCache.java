@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,10 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.shared.domain;
+package cc.kune.core.client.state;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 
-public enum UserBuddiesVisibility implements IsSerializable {
-    anyone, yourbuddies, onlyyou
+import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+public interface ContentCache {
+
+    void cache(StateToken encodeState, StateAbstractDTO content);
+
+    void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
+
 }

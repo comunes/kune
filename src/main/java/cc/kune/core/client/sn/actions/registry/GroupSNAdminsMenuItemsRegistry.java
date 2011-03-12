@@ -33,26 +33,6 @@ public class GroupSNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegi
         add(new Provider<MenuItemDescriptor>() {
             @Override
             public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(changeToCollabAction);
-                item.add(isAdministrableCondition);
-                item.add(isNotMe);
-                item.add(isLogged);
-                return item;
-            }
-        });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(removeMemberAction);
-                item.add(isAdministrableCondition);
-                item.add(isNotMe);
-                item.add(isLogged);
-                return item;
-            }
-        });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
                 final MenuItemDescriptor item = new MenuItemDescriptor(gotoMemberAction);
                 item.add(isPersonCondition);
                 item.add(isNotMe);
@@ -76,6 +56,25 @@ public class GroupSNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegi
                 return item;
             }
         });
+        add(new Provider<MenuItemDescriptor>() {
+            @Override
+            public MenuItemDescriptor get() {
+                final MenuItemDescriptor item = new MenuItemDescriptor(changeToCollabAction);
+                item.add(isAdministrableCondition);
+                item.add(isNotMe);
+                item.add(isLogged);
+                return item;
+            }
+        });
+        add(new Provider<MenuItemDescriptor>() {
+            @Override
+            public MenuItemDescriptor get() {
+                final MenuItemDescriptor item = new MenuItemDescriptor(removeMemberAction);
+                item.add(isAdministrableCondition);
+                item.add(isNotMe);
+                item.add(isLogged);
+                return item;
+            }
+        });
     }
-
 }

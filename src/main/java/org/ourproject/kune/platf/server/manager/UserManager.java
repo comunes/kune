@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.server.manager;
 
 import org.ourproject.kune.platf.server.manager.impl.SearchResult;
+import org.waveprotocol.box.server.authentication.PasswordDigest;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.domain.User;
@@ -42,6 +43,8 @@ public interface UserManager {
      */
     User createUser(String shortName, String longName, String email, String passwd, String language, String country,
             String timezone) throws I18nNotFoundException;
+
+    void createWaveAccount(String shortName, PasswordDigest passwdDigest);
 
     /**
      * IMPORTANT: if userId == null, it returns User.UNKNOWN_USER

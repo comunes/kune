@@ -65,6 +65,7 @@ http://www.thinkplexx.com/learn/howto/maven2/debug/fixing-too-many-open-files-ma
 - 
 ** wave client integration
 *** Documentation
+**** Debug: client / server (see launch confs)
 **** Hosted Mode support for websocket
 ***** Test that websocket is supported in your GWT Hosted Mode browser:
 http://www.websockets.org/

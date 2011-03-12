@@ -24,6 +24,7 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 import cc.kune.domain.License;
 import cc.kune.domain.User;
+import cc.kune.wave.server.CustomUserRegistrationServlet;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -37,12 +38,14 @@ public class DatabaseInitializer {
     private final DatabaseProperties properties;
     private final I18nTranslationManager translationManager;
     private final UserManager userManager;
+    private final CustomUserRegistrationServlet waveUserRegister;
 
     @Inject
     public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
             final GroupManager groupManager, final LicenseManager licenseManager,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final I18nTranslationManager translationManager, final ContentManager contentManager) {
+            final I18nTranslationManager translationManager, final ContentManager contentManager,
+            final CustomUserRegistrationServlet waveUserRegister) {
         this.properties = properties;
         this.userManager = userManager;
         this.groupManager = groupManager;
@@ -51,6 +54,7 @@ public class DatabaseInitializer {
         this.countryManager = countryManager;
         this.translationManager = translationManager;
         this.contentManager = contentManager;
+        this.waveUserRegister = waveUserRegister;
     }
 
     private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
@@ -58,9 +62,9 @@ public class DatabaseInitializer {
         final String adminShortName = properties.getAdminShortName();
         final String adminEmail = properties.getAdminEmail();
         final String adminPassword = properties.getAdminPassword();
-        // FIXME:
 
         final PasswordDigest passwdDigest = new PasswordDigest(adminPassword.toCharArray());
+        userManager.createWaveAccount(adminShortName, passwdDigest);
         final User user = new User(adminShortName, adminName, adminEmail, adminPassword, passwdDigest.getDigest(),
                 passwdDigest.getSalt(), languageManager.findByCode("en"), countryManager.findByCode("GB"),
                 TimeZone.getDefault());

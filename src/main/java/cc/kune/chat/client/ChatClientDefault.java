@@ -40,6 +40,7 @@ import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStopEvent;
+import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.UserSignInEvent;
@@ -121,15 +122,14 @@ public class ChatClientDefault implements ChatClient {
     private final XmppRoster roster;
     private final Session session;
     private final GlobalShortcutRegister shorcutRegister;
-    private final SitebarActionsPresenter siteActions;
+    private final SitebarActions siteActions;
 
     private final XmppSession xmppSession;
 
     @Inject
     public ChatClientDefault(final EventBus eventBus, final I18nTranslationService i18n,
-            final SitebarActionsPresenter siteActions, final Session session,
-            final GlobalShortcutRegister shorcutRegister, final ChatOptions chatOptions,
-            final ChatResources chatResources) {
+            final SitebarActions siteActions, final Session session, final GlobalShortcutRegister shorcutRegister,
+            final ChatOptions chatOptions, final ChatResources chatResources) {
 
         this.eventBus = eventBus;
         this.i18n = i18n;

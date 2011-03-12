@@ -20,7 +20,7 @@
 package cc.kune.domain.utils;
 
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.SocialNetwork;
 
@@ -28,7 +28,7 @@ public class SocialNetworkData {
     private SocialNetworkVisibility socialNetworkVisibility;
     private SocialNetwork groupMembers;
     private ParticipationData userParticipation;
-    private UserBuddiesVisibility userBuddiesVisibility;
+    private UserSNetVisibility userBuddiesVisibility;
     private UserBuddiesData userBuddies;
     private AccessRights groupRights;
     private boolean isBuddiesVisible;
@@ -39,7 +39,7 @@ public class SocialNetworkData {
     }
 
     public SocialNetworkData(SocialNetworkVisibility socialNetworkVisibility, SocialNetwork groupMembers,
-            ParticipationData userParticipation, UserBuddiesVisibility userBuddiesVisibility,
+            ParticipationData userParticipation, UserSNetVisibility userBuddiesVisibility,
             UserBuddiesData userBuddies, AccessRights groupRights, boolean isBuddiesVisible, boolean isMembersVisible) {
         this.socialNetworkVisibility = socialNetworkVisibility;
         this.groupMembers = groupMembers;
@@ -75,7 +75,7 @@ public class SocialNetworkData {
         return userBuddies;
     }
 
-    public UserBuddiesVisibility getUserBuddiesVisibility() {
+    public UserSNetVisibility getUserBuddiesVisibility() {
         return userBuddiesVisibility;
     }
 
@@ -123,7 +123,7 @@ public class SocialNetworkData {
         this.userBuddies = userBuddies;
     }
 
-    public void setUserBuddiesVisibility(UserBuddiesVisibility userBuddiesVisibility) {
+    public void setUserBuddiesVisibility(UserSNetVisibility userBuddiesVisibility) {
         this.userBuddiesVisibility = userBuddiesVisibility;
     }
 

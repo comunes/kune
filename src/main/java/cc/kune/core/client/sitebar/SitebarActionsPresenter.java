@@ -48,7 +48,8 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class SitebarActionsPresenter extends
-        Presenter<SitebarActionsPresenter.SitebarActionsView, SitebarActionsPresenter.SitebarActionsProxy> {
+        Presenter<SitebarActionsPresenter.SitebarActionsView, SitebarActionsPresenter.SitebarActionsProxy> implements
+        SitebarActions {
 
     @ProxyCodeSplit
     public interface SitebarActionsProxy extends Proxy<SitebarActionsPresenter> {

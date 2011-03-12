@@ -19,9 +19,6 @@
  */
 package org.ourproject.kune.platf.server.manager.impl;
 
-import java.io.IOException;
-import java.net.HttpCookie;
-import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.TimeZone;
@@ -41,10 +38,7 @@ import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
-import org.waveprotocol.box.consoleclient.ClientAuthenticator;
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
-import org.waveprotocol.box.server.authentication.SessionManager;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
@@ -59,7 +53,6 @@ import cc.kune.wave.server.CustomUserRegistrationServlet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
@@ -102,10 +95,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         }
         final PasswordDigest passwdDigest = new PasswordDigest(passwd.toCharArray());
 
-        final String msg = waveUserRegister.tryCreateUser(shortName, passwdDigest);
-        if (msg != null) {
-            throw new UserRegistrationException(msg);
-        }
+        createWaveAccount(shortName, passwdDigest);
         // if (userPropGroup == null) {
         // userPropGroup = propGroupManager.find(User.PROPS_ID);
         // }
@@ -118,16 +108,24 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     }
 
     @Override
+    public void createWaveAccount(final String shortName, final PasswordDigest passwdDigest) {
+        final String msg = waveUserRegister.tryCreateUser(shortName, passwdDigest);
+        if (msg != null) {
+            throw new UserRegistrationException(msg);
+        }
+    }
+
+    @Override
     public User find(final Long userId) {
-        return userId != null ? super.find(userId) : User.UNKNOWN_USER;
+        try {
+            return finder.getById(userId);
+        } catch (final NoResultException e) {
+            return User.UNKNOWN_USER;
+        }
     }
 
     @Override
     public User findByShortname(final String shortName) {
-        return finder.getByShortName(shortName);
-    }
-
-    public User findByShortName(final String shortName) {
         return finder.getByShortName(shortName);
     }
 

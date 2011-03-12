@@ -58,6 +58,7 @@ import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
+import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.sitebar.SitebarActionsPanel;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.SitebarNewGroupLink;
@@ -79,8 +80,8 @@ import cc.kune.core.client.sn.actions.registry.GroupSNPendingsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.UserSNBottomActionsRegistry;
 import cc.kune.core.client.sn.actions.registry.UserSNMenuItemsRegistry;
 import cc.kune.core.client.state.AccessRightsClientManager;
-import cc.kune.core.client.state.ContentProvider;
-import cc.kune.core.client.state.ContentProviderDefault;
+import cc.kune.core.client.state.ContentCache;
+import cc.kune.core.client.state.ContentCacheDefault;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.client.state.HistoryWrapperDefault;
 import cc.kune.core.client.state.Session;
@@ -139,8 +140,11 @@ public class CoreGinModule extends AbstractPresenterModule {
                 SpaceSelectorViewImpl.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
         bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
                 SiteLogoPresenter.SiteLogoProxy.class);
+
         bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,
                 SitebarActionsPanel.class, SitebarActionsPresenter.SitebarActionsProxy.class);
+        bind(SitebarActions.class).to(SitebarActionsPresenter.class).in(Singleton.class);
+
         bindPresenter(NewGroupPresenter.class, NewGroupView.class, NewGroupPanel.class,
                 NewGroupPresenter.NewGroupProxy.class);
         bindPresenter(GroupSNPresenter.class, GroupSNPresenter.GroupSNView.class, GroupSNPanel.class,
@@ -183,7 +187,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(StateManagerDefault.class).in(Singleton.class);
         bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
         bind(AccessRightsClientManager.class).in(Singleton.class);
-        bind(ContentProvider.class).to(ContentProviderDefault.class).in(Singleton.class);
+        bind(ContentCache.class).to(ContentCacheDefault.class).in(Singleton.class);
         bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
         bind(PrefetchUtilities.class).in(Singleton.class);
         bind(AppStarter.class).to(AppStarterDefault.class).in(Singleton.class);

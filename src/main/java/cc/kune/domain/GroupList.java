@@ -41,15 +41,15 @@ import cc.kune.core.shared.domain.GroupListMode;
 @Table(name = "group_list")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class GroupList {
-    @OrderBy("shortName ASC")
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    List<Group> list;
-
     @Id
     @GeneratedValue
     private Long id;
 
-    @Enumerated(EnumType.ORDINAL)
+    @OrderBy("shortName ASC")
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    List<Group> list;
+
+    @Enumerated(EnumType.STRING)
     @Basic
     private GroupListMode mode;
 

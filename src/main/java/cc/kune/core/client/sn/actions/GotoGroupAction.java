@@ -5,7 +5,9 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -23,7 +25,14 @@ public class GotoGroupAction extends AbstractExtendedAction {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        stateManager.gotoToken(((GroupDTO) event.getTarget()).getStateToken());
+        StateToken token;
+        final Object target = event.getTarget();
+        if (target instanceof GroupDTO) {
+            token = ((GroupDTO) target).getStateToken();
+        } else {
+            token = ((UserSimpleDTO) target).getStateToken();
+        }
+        stateManager.gotoToken(token);
     }
 
 }

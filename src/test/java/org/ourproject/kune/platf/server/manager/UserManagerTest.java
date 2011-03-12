@@ -35,7 +35,7 @@ import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 
@@ -136,10 +136,10 @@ public class UserManagerTest extends PersistencePreLoadedDataTest {
     public void visibilityPersist() {
         user = new User("test1", "test1 name", "test@example.com", "some passwd", "somediggest".getBytes(),
                 "some salt".getBytes(), english, gb, getTimeZone());
-        for (final UserBuddiesVisibility visibility : UserBuddiesVisibility.values()) {
-            user.setBuddiesVisibility(visibility);
+        for (final UserSNetVisibility visibility : UserSNetVisibility.values()) {
+            user.setSNetVisibility(visibility);
             persist(user);
-            assertEquals(user.getBuddiesVisibility(), visibility);
+            assertEquals(user.getSNetVisibility(), visibility);
         }
     }
 

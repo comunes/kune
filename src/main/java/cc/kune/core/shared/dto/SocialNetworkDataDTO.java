@@ -20,7 +20,7 @@
 package cc.kune.core.shared.dto;
 
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -33,7 +33,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
     private boolean isMembersVisible;
     private SocialNetworkVisibility socialNetworkVisibility;
     private UserBuddiesDataDTO userBuddies;
-    private UserBuddiesVisibility userBuddiesVisibility;
+    private UserSNetVisibility userBuddiesVisibility;
     private ParticipationDataDTO userParticipation;
 
     public SocialNetworkDataDTO() {
@@ -42,7 +42,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
     public SocialNetworkDataDTO(final SocialNetworkVisibility socialNetworkVisibility,
             final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation,
-            final UserBuddiesVisibility userBuddiesVisibility, final UserBuddiesDataDTO userBuddies,
+            final UserSNetVisibility userBuddiesVisibility, final UserBuddiesDataDTO userBuddies,
             final AccessRights groupRights, final boolean isBuddiesVisible, final boolean isMembersVisible) {
         this.socialNetworkVisibility = socialNetworkVisibility;
         this.groupMembers = groupMembers;
@@ -78,7 +78,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
         return userBuddies;
     }
 
-    public UserBuddiesVisibility getUserBuddiesVisibility() {
+    public UserSNetVisibility getUserBuddiesVisibility() {
         return userBuddiesVisibility;
     }
 
@@ -126,7 +126,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
         this.userBuddies = userBuddies;
     }
 
-    public void setUserBuddiesVisibility(final UserBuddiesVisibility userBuddiesVisibility) {
+    public void setUserBuddiesVisibility(final UserSNetVisibility userBuddiesVisibility) {
         this.userBuddiesVisibility = userBuddiesVisibility;
     }
 

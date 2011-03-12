@@ -36,7 +36,7 @@ import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.shared.domain.AccessRol;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
@@ -158,13 +158,13 @@ public class UserRPC implements RPC, UserService {
     @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)
     @Transactional
     public void setBuddiesVisibility(final String userHash, final StateToken groupToken,
-            final UserBuddiesVisibility visibility) {
+            final UserSNetVisibility visibility) {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         if (!groupToken.getGroup().equals(user.getShortName())) {
             throw new AccessViolationException();
         }
-        user.setBuddiesVisibility(visibility);
+        user.setSNetVisibility(visibility);
     }
 
 }

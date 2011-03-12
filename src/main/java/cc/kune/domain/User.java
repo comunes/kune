@@ -25,6 +25,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
@@ -43,7 +45,7 @@ import org.hibernate.validator.Length;
 import org.hibernate.validator.NotNull;
 import org.hibernate.validator.Pattern;
 
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.utils.HasId;
 
@@ -61,7 +63,8 @@ public class User implements HasId {
         return !user.equals(UNKNOWN_USER);
     }
 
-    private UserBuddiesVisibility buddiesVisibility;
+    @Enumerated(EnumType.STRING)
+    private UserSNetVisibility sNetVisibility;
 
     @ManyToOne
     @NotNull
@@ -153,14 +156,14 @@ public class User implements HasId {
         this.country = country;
         this.timezone = timezone;
         // customProperties = new CustomProperties();
-        buddiesVisibility = UserBuddiesVisibility.anyone;
+        sNetVisibility = UserSNetVisibility.anyone;
         this.createdOn = System.currentTimeMillis();
         this.lastLogin = null;
         // this.properties = properties;
     }
 
-    public UserBuddiesVisibility getBuddiesVisibility() {
-        return buddiesVisibility;
+    public UserSNetVisibility getSNetVisibility() {
+        return sNetVisibility;
     }
 
     public I18nCountry getCountry() {
@@ -238,8 +241,8 @@ public class User implements HasId {
         return getUserGroup().hasLogo();
     }
 
-    public void setBuddiesVisibility(final UserBuddiesVisibility buddiesVisibility) {
-        this.buddiesVisibility = buddiesVisibility;
+    public void setSNetVisibility(final UserSNetVisibility sNetVisibility) {
+        this.sNetVisibility = sNetVisibility;
     }
 
     public void setCountry(final I18nCountry country) {

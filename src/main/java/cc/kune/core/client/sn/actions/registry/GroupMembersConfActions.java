@@ -10,6 +10,8 @@ import cc.kune.core.client.sn.actions.MembersModerationMenuItem;
 import cc.kune.core.client.sn.actions.MembersVisibilityMenuItem;
 import cc.kune.core.client.sn.actions.UnJoinGroupAction;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
+import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
@@ -29,11 +31,12 @@ public class GroupMembersConfActions {
     public static final SubMenuDescriptor VISIBILITY_SUBMENU = new SubMenuDescriptor();
 
     @Inject
-    public GroupMembersConfActions(final StateManager stateManager, final I18nTranslationService i18n,
-            final GroupSNBottomActionsRegistry registry, final Provider<MembersVisibilityMenuItem> membersVisibility,
+    public GroupMembersConfActions(final Session session, final StateManager stateManager,
+            final I18nTranslationService i18n, final GroupSNBottomActionsRegistry registry,
+            final Provider<MembersVisibilityMenuItem> membersVisibility,
             final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
-            final JoinGroupAction joinGroupAction, final IsGroupCondition isGroupCondition,
-            final UnJoinGroupAction unJoinGroupAction) {
+            final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
+            final IsGroupCondition isGroupCondition, final UnJoinGroupAction unJoinGroupAction) {
         OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles("k-sn-options-menu");
         final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
                 SocialNetworkVisibility.anyone);
@@ -57,6 +60,7 @@ public class GroupMembersConfActions {
 
         final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
         final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);
+        unJoinBtn.add(isLoggedCondition);
         registry.add(joinBtn.withStyles("k-no-backimage"));
         registry.add(unJoinBtn.withStyles("k-no-backimage"));
 
@@ -92,6 +96,7 @@ public class GroupMembersConfActions {
                     closedItem.setChecked(true);
                     break;
                 }
+                unJoinBtn.setVisible(session.isLogged());
             }
         });
     }

@@ -45,7 +45,7 @@ import com.google.inject.Inject;
 
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
     private final BeforeActionCollection beforeStateChangeCollection;
-    private final ContentProvider contentProvider;
+    private final ContentCache contentProvider;
     private final EventBus eventBus;
     private final HistoryWrapper history;
     private StateToken previousToken;
@@ -58,7 +58,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private final HashMap<String, HistoryTokenCallback> siteTokens;
 
     @Inject
-    public StateManagerDefault(final ContentProvider contentProvider, final Session session,
+    public StateManagerDefault(final ContentCache contentProvider, final Session session,
             final HistoryWrapper history, final EventBus eventBus) {
         this.eventBus = eventBus;
         this.contentProvider = contentProvider;

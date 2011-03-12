@@ -23,7 +23,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
         mainTitle.setTitle(i18n.t("This user buddies and groups where participes"));
         firstCategoryLabel.setText(i18n.t("Buddies"));
         firstCategoryPanel.setTitle(i18n.t("This user buddies"));
-        sndCategoryLabel.setText(i18n.t("and participates in"));
+        sndCategoryLabel.setText(i18n.t("Participates in"));
         sndCategoryPanel.setTitle(i18n.t("Groups in which this user participates"));
         firstDeckLabel.setText(i18n.t(CoreMessages.BUDDIES_NOT_PUBLIC));
         trdCategoryLabel.setText("NOT USED");

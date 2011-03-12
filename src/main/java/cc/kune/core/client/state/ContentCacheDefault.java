@@ -30,13 +30,13 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
-public class ContentProviderDefault implements ContentProvider {
-    private final ContentServiceAsync server;
+public class ContentCacheDefault implements ContentCache {
     private final HashMap<StateToken, StateAbstractDTO> cache;
     private final EventBus eventBus;
+    private final ContentServiceAsync server;
 
     @Inject
-    public ContentProviderDefault(final ContentServiceAsync server, final EventBus eventBus) {
+    public ContentCacheDefault(final ContentServiceAsync server, final EventBus eventBus) {
         this.server = server;
         this.eventBus = eventBus;
         this.cache = new HashMap<StateToken, StateAbstractDTO>();
@@ -44,7 +44,14 @@ public class ContentProviderDefault implements ContentProvider {
 
     @Override
     public void cache(final StateToken encodeState, final StateAbstractDTO content) {
-        cache.put(encodeState, content);
+        // Disabled by now
+        // cache.put(encodeState, content);
+    }
+
+    private StateAbstractDTO getCached(final StateToken newState) {
+        return null;
+        // Disabled by now
+        // return cache.remove(newState);
     }
 
     @Override
@@ -56,10 +63,6 @@ public class ContentProviderDefault implements ContentProvider {
         } else {
             server.getContent(user, newState, callback);
         }
-    }
-
-    private StateAbstractDTO getCached(final StateToken newState) {
-        return cache.remove(newState);
     }
 
 }

@@ -101,22 +101,25 @@ or
 
 Not verified: in Windows you need to do something similar (copy the jmagick .dll of the same version in the Windows directory)
 
-===Run jetty server===
+===Run the server for the first time ===
 
-Run jetty:
+Run the server for the first time and initialize the db:
 
- mvn jetty:run -Dliquibase.should.run=false -Dgwt.compiler.skip=true
+ mvn exec:java -Dliquibase.should.run=false
 
-Once started (and initialized the db), you should stop (Ctrl-C). In the next start the db migrator will run and insert the initial data.
+Once started for the first time the db is initialized. Then you should stop (Ctrl-C) and start the db migration process: 
+
+ ./script/liquibase-migrate.sh
+
+=== Normal kune server start (after initialization) === 
 
 After that, as a norma, you can start the server using the script:
+
  ./script/server.sh
 
-or directly (w$):
+or running:
 
- mvn jetty:run -Dorg.mortbay.util.FileResource.checkAliases=False -Dgwt.compiler.skip=true
-
-TODO: put the aliases stuff into a jetty config file
+ mvn exec:java
 
 ===Connecting to the server===
 

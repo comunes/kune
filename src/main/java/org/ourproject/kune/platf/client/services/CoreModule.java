@@ -35,7 +35,7 @@ import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
-import cc.kune.core.client.state.ContentProvider;
+import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.client.state.HistoryWrapperDefault;
 import cc.kune.core.client.state.Session;
@@ -107,9 +107,9 @@ public class CoreModule extends AbstractExtendedModule {
             public HistoryWrapper create() {
                 return new HistoryWrapperDefault();
             }
-        }, new Factory<ContentProvider>(ContentProvider.class) {
+        }, new Factory<ContentCache>(ContentCache.class) {
             @Override
-            public ContentProvider create() {
+            public ContentCache create() {
                 return null; // new
                              // ContentProviderDefault(i(ContentServiceAsync.class));
             }

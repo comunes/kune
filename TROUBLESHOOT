@@ -2,14 +2,20 @@
 
 == Server debug ==
 
-Server: debug with jetty in eclipse:
+You can debug the server running from eclipse as external tool:
+   'script/kune server via mvn with debug.launch'
+and after this the debug launch:
+   'script/kune server debug.launch'
+that connects the debugger to the port 8001 of the running server.
+
+Related: debug with jetty in eclipse:
 http://docs.codehaus.org/display/JETTY/Debugging+with+the+Maven+Jetty+Plugin+inside+Eclipse
 
 Also for different logging levels you can play with -Dorg.eclipse.jetty.util.log.DEBUG=true (or similars)
 
 == Client debug ==
 
-Client code: you can debug with gwt hosted mode in eclipse (see DEV-GUIDE for hosted mode instructions).
+You can debug the client with the eclipse launch configuration 'script/kune client -no-server.launch'.
 
 == Firebug and client log levels ==
 

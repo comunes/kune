@@ -21,6 +21,8 @@ package cc.kune.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -33,16 +35,17 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 public class SocialNetwork {
     public static final SocialNetwork EMPTY = new SocialNetwork(SocialNetworkVisibility.onlyadmins);
 
+    @OneToOne(cascade = CascadeType.ALL)
+    AccessLists accessLists;
+
     @Id
     @GeneratedValue
     Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    AccessLists accessLists;
-
-    @OneToOne(cascade = CascadeType.ALL)
     GroupList pendingCollaborators;
 
+    @Enumerated(EnumType.STRING)
     SocialNetworkVisibility visibility;
 
     public SocialNetwork() {
@@ -51,7 +54,7 @@ public class SocialNetwork {
         visibility = SocialNetworkVisibility.anyone;
     }
 
-    public SocialNetwork(SocialNetworkVisibility visibility) {
+    public SocialNetwork(final SocialNetworkVisibility visibility) {
         accessLists = new AccessLists();
         pendingCollaborators = new GroupList();
         this.visibility = visibility;
@@ -133,7 +136,7 @@ public class SocialNetwork {
         this.pendingCollaborators = pendingCollaborators;
     }
 
-    public void setVisibility(SocialNetworkVisibility visibility) {
+    public void setVisibility(final SocialNetworkVisibility visibility) {
         this.visibility = visibility;
     }
 

@@ -37,7 +37,7 @@ public class StateManagerTest {
     private static final String HASH = "someUserHash";
     private BeforeActionListener beforeChangeListener1;
     private BeforeActionListener beforeChangeListener2;
-    private ContentProvider contentProvider;
+    private ContentCache contentProvider;
     private EventBusTester eventBus;
     private GroupChangedHandler groupChangeHandler;
     private HistoryWrapper history;
@@ -49,7 +49,7 @@ public class StateManagerTest {
 
     @Before
     public void before() {
-        contentProvider = Mockito.mock(ContentProvider.class);
+        contentProvider = Mockito.mock(ContentCache.class);
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);
         eventBus = new EventBusTester();

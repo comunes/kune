@@ -36,7 +36,7 @@ import org.ourproject.kune.platf.server.state.StateContent;
 
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.CommentDTO;
@@ -325,11 +325,11 @@ public class MapperTest {
         buddies.add(user);
         budData.setBuddies(buddies);
         final SocialNetworkData snResult = new SocialNetworkData(SocialNetworkVisibility.onlymembers, sn, part,
-                UserBuddiesVisibility.yourbuddies, budData, new AccessRights(false, false, true), true, true);
+                UserSNetVisibility.yourbuddies, budData, new AccessRights(false, false, true), true, true);
         final SocialNetworkDataDTO map = mapper.map(snResult, SocialNetworkDataDTO.class);
         assertNotNull(map);
         assertEquals(SocialNetworkVisibility.onlymembers, map.getSocialNetworkVisibility());
-        assertEquals(UserBuddiesVisibility.yourbuddies, map.getUserBuddiesVisibility());
+        assertEquals(UserSNetVisibility.yourbuddies, map.getUserBuddiesVisibility());
         assertEquals("test", map.getGroupMembers().getAccessLists().getAdmins().getList().get(0).getShortName());
         assertEquals("test", map.getUserParticipation().getGroupsIsAdmin().get(0).getShortName());
         assertEquals("usertest", map.getUserBuddies().getBuddies().get(0).getShortName());

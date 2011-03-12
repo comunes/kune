@@ -41,7 +41,7 @@ import cc.kune.core.client.services.ImageUtils;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
@@ -115,7 +115,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         actionRegistry.addAction(addNewBuddiesAction);
     }
 
-    private void createSetBuddiesVisibilityAction(final String textDescription, final UserBuddiesVisibility visibility) {
+    private void createSetBuddiesVisibilityAction(final String textDescription, final UserSNetVisibility visibility) {
         final ActionToolbarMenuRadioDescriptor<UserSimpleDTO> buddiesVisibilityAction = new ActionToolbarMenuRadioDescriptor<UserSimpleDTO>(
                 AccessRolDTO.Administrator, buddiesBottom, new Listener<UserSimpleDTO>() {
                     @Override
@@ -186,9 +186,9 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
         actionRegistry.addAction(go);
 
         createAddNewBuddiesAction();
-        createSetBuddiesVisibilityAction(i18n.t("anyone"), UserBuddiesVisibility.anyone);
-        createSetBuddiesVisibilityAction(i18n.t("only your buddies"), UserBuddiesVisibility.yourbuddies);
-        createSetBuddiesVisibilityAction(i18n.t("only you"), UserBuddiesVisibility.onlyyou);
+        createSetBuddiesVisibilityAction(i18n.t("anyone"), UserSNetVisibility.anyone);
+        createSetBuddiesVisibilityAction(i18n.t("only your buddies"), UserSNetVisibility.yourbuddies);
+        createSetBuddiesVisibilityAction(i18n.t("only you"), UserSNetVisibility.onlyyou);
     }
 
     protected void setState(final StateAbstractDTO state) {

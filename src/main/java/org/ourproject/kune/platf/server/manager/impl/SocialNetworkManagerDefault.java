@@ -37,7 +37,7 @@ import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.SocialNetworkRequestResult;
@@ -201,7 +201,7 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
             final UserBuddiesData userBuddies = userManager.getUserBuddies(group.getShortName());
             final User userGroup = userManager.findByShortname(group.getShortName());
             socialNetData.setUserBuddies(userBuddies);
-            final UserBuddiesVisibility buddiesVisibility = userGroup.getBuddiesVisibility();
+            final UserSNetVisibility buddiesVisibility = userGroup.getSNetVisibility();
             socialNetData.setIsBuddiesVisible(true);
             switch (buddiesVisibility) {
             case anyone:

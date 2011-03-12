@@ -20,7 +20,7 @@
 package cc.kune.core.client.resources;
 
 public final class CoreMessages {
-    public final static String BUDDIES_NOT_PUBLIC = "The buddies and group participation of this user are not public";
+    public final static String BUDDIES_NOT_PUBLIC = "The social network of this user is not public";
     public final static String EMAIL_IN_USE = "This email address is being used by another user. Please, try with another one";
     public final static String ENT_LOGO_SELECTOR_NORMAL_TITLE = "Logo";
     public final static String ENT_LOGO_SELECTOR_PERSON_TITLE = "Avatar";

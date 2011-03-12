@@ -12,7 +12,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.UserBuddiesVisibility;
+import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -33,11 +33,11 @@ public class UserSNConfActions {
         OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles("k-sn-options-menu");
 
         final MenuRadioItemDescriptor anyoneItem = userBuddiesVisibility.get().withVisibility(
-                UserBuddiesVisibility.anyone);
+                UserSNetVisibility.anyone);
         final MenuRadioItemDescriptor onlyYourBuddiesItem = userBuddiesVisibility.get().withVisibility(
-                UserBuddiesVisibility.yourbuddies);
+                UserSNetVisibility.yourbuddies);
         final MenuRadioItemDescriptor onlyYou = userBuddiesVisibility.get().withVisibility(
-                UserBuddiesVisibility.onlyyou);
+                UserSNetVisibility.onlyyou);
         assert anyoneItem.getAction() != onlyYourBuddiesItem.getAction();
         assert anyoneItem.getAction() != onlyYou.getAction();
         registry.add(OPTIONS_MENU);
@@ -59,7 +59,7 @@ public class UserSNConfActions {
                 OPTIONS_MENU.setEnabled(administrable);
                 final GroupDTO currentGroup = state.getGroup();
                 if (currentGroup.isPersonal()) {
-                    final UserBuddiesVisibility visibility = state.getSocialNetworkData().getUserBuddiesVisibility();
+                    final UserSNetVisibility visibility = state.getSocialNetworkData().getUserBuddiesVisibility();
                     switch (visibility) {
                     case anyone:
                         anyoneItem.setChecked(true);

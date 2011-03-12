@@ -35,6 +35,9 @@ public interface UserFinder {
     @Finder(query = "from User where email = :email")
     public User getByEmail(@Named("email") final String email);
 
+    @Finder(query = "from User where id = :id")
+    public User getById(@Named("id") final Long id);
+
     @Finder(query = "from User where shortName = :shortName")
     public User getByShortName(@Named("shortName") final String shortName);
 
