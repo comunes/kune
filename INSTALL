@@ -105,7 +105,7 @@ Not verified: in Windows you need to do something similar (copy the jmagick .dll
 
 Run the server for the first time and initialize the db:
 
- mvn exec:java -Dliquibase.should.run=false
+ mvn exec:java
 
 Once started for the first time the db is initialized. Then you should stop (Ctrl-C) and start the db migration process: 
 

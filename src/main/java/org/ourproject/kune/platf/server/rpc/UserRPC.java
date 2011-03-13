@@ -19,7 +19,10 @@
  */
 package org.ourproject.kune.platf.server.rpc;
 
+import javax.servlet.http.HttpSession;
+
 import org.jivesoftware.smack.util.Base64;
+import org.json.JSONObject;
 import org.ourproject.kune.platf.server.UserSession;
 import org.ourproject.kune.platf.server.auth.ActionLevel;
 import org.ourproject.kune.platf.server.auth.Authenticated;
@@ -30,6 +33,8 @@ import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.mapper.Mapper;
 import org.ourproject.kune.platf.server.users.UserInfo;
 import org.ourproject.kune.platf.server.users.UserInfoService;
+import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.authentication.SessionManager;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
@@ -40,12 +45,15 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.core.shared.dto.WaveClientParams;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.wave.server.CustomWaveClientServlet;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import com.google.inject.persist.Transactional;
 
 @Singleton
@@ -57,18 +65,26 @@ public class UserRPC implements RPC, UserService {
     private final UserInfoService userInfoService;
     private final UserManager userManager;
     private final Provider<UserSession> userSessionProvider;
+    private final Boolean useSocketIO;
+    private final CustomWaveClientServlet waveClientServlet;
+    private final SessionManager waveSessionManager;
 
     @Inject
     public UserRPC(final Provider<SessionService> sessionServiceProvider,
             final Provider<UserSession> userSessionProvider, final UserManager userManager,
-            final GroupManager groupManager, final UserInfoService userInfoService, final Mapper mapper) {
+            @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO, final GroupManager groupManager,
+            final UserInfoService userInfoService, final Mapper mapper, final SessionManager waveSessionManager,
+            final CustomWaveClientServlet waveClientServlet) {
 
         this.sessionServiceProvider = sessionServiceProvider;
         this.userSessionProvider = userSessionProvider;
         this.userManager = userManager;
+        this.useSocketIO = useSocketIO;
         this.groupManager = groupManager;
         this.userInfoService = userInfoService;
         this.mapper = mapper;
+        this.waveSessionManager = waveSessionManager;
+        this.waveClientServlet = waveClientServlet;
     }
 
     @Override
@@ -102,6 +118,15 @@ public class UserRPC implements RPC, UserService {
         return userSessionProvider.get();
     }
 
+    @Override
+    @Authenticated(mandatory = true)
+    public WaveClientParams getWaveClientParameters(final String userHash) {
+        final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
+        final JSONObject sessionJson = waveClientServlet.getSessionJson(sessionFromToken);
+        final JSONObject clientFlags = new JSONObject(); // waveClientServlet.getClientFlags();
+        return new WaveClientParams(sessionJson.toString(), clientFlags.toString(), useSocketIO);
+    }
+
     private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
         final UserInfo userInfo = userInfoService.buildInfo(user, getUserSession().getHash());
         return mapper.map(userInfo, UserInfoDTO.class);
@@ -125,7 +150,7 @@ public class UserRPC implements RPC, UserService {
         } else {
             throw new UserAuthException();
         }
-    }
+    };
 
     @Override
     @Authenticated
@@ -135,7 +160,7 @@ public class UserRPC implements RPC, UserService {
         // FIXME final SessionService sessionService =
         // sessionServiceProvider.get();
         // FIXME sessionService.getNewSession();
-    };
+    }
 
     @Override
     @Authenticated(mandatory = false)
@@ -166,5 +191,4 @@ public class UserRPC implements RPC, UserService {
         }
         user.setSNetVisibility(visibility);
     }
-
 }

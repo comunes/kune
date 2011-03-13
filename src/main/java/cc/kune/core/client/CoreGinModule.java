@@ -101,6 +101,7 @@ import cc.kune.gspace.client.WsArmor;
 import cc.kune.gspace.client.WsArmorImpl;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
+import cc.kune.wave.client.WaveClientManager;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
@@ -194,6 +195,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
         bind(BeforeSignOut.class).in(Singleton.class);
         bind(SiteTokenListeners.class).asEagerSingleton();
+        bind(WaveClientManager.class).in(Singleton.class);
         bind(CoreParts.class).asEagerSingleton();
 
         // SN

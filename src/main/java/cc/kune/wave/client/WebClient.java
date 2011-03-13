@@ -46,7 +46,6 @@ import org.waveprotocol.box.webclient.search.SearchPresenter;
 import org.waveprotocol.box.webclient.search.SimpleSearch;
 import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.box.webclient.util.Log;
-import org.waveprotocol.box.webclient.widget.error.ErrorIndicatorPresenter;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.account.impl.ProfileManagerImpl;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
@@ -58,6 +57,8 @@ import org.waveprotocol.wave.model.id.IdGenerator;
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
+
+import cc.kune.common.client.noti.NotifyUser;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -71,7 +72,6 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 
 /**
@@ -239,12 +239,10 @@ public class WebClient extends Composite {
    * Returns <code>ws://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
-  private native String getWebSocketBaseUrl(String moduleBase) /*-{
-	return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
-}-*/;
+  private native String getWebSocketBaseUrl(String moduleBase) /*-{return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";}-*/;
 
   private native boolean useSocketIO() /*-{
-	return !!$wnd.__useSocketIO
+    return !!$wnd.__useSocketIO
 }-*/;
 
   /**
@@ -316,12 +314,13 @@ public class WebClient extends Composite {
     public void onUncaughtException(Throwable e) {
       if (!hasFired) {
         hasFired = true;
-        final ErrorIndicatorPresenter error =
-            ErrorIndicatorPresenter.create(RootPanel.get("banner"));
+      //  final ErrorIndicatorPresenter error =
+        //    ErrorIndicatorPresenter.create(RootPanel.get("banner"));
         getStackTraceAsync(e, new Accessor<SafeHtml>() {
           @Override
           public void use(SafeHtml stack) {
-            error.addDetail(stack, null);
+              NotifyUser.error("Error in wave client", true);
+          //  error.addDetail(stack, null);
           }
         });
       }

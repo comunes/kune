@@ -58,7 +58,7 @@
           <d:DebugMessagePanel ui:field="logPanel" addStyleNames="{style.subPanel} {style.debugPanel}" />
         </g:south>
         <g:west size="400">
-          <s:SearchPanelWidget ui:field="searchPanel"/>
+          <s:SearchPanelWidget ui:field="searchPanel"/> 
         </g:west>
         <g:center>
           <w:ImplPanel ui:field="contentPanel"/>

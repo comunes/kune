@@ -24,6 +24,7 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.core.shared.dto.WaveClientParams;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -44,5 +45,7 @@ public interface UserService extends RemoteService {
     UserInfoDTO reloadUserInfo(String userHash) throws DefaultException;
 
     void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility);
+
+    WaveClientParams getWaveClientParameters(String userHash);
 
 }

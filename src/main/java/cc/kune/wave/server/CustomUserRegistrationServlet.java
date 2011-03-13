@@ -42,7 +42,7 @@ import com.google.inject.name.Named;
 
 /**
  * The user registration servlet allows new users to register accounts.
- * 
+ *
  * @author josephg@gmail.com (Joseph Gentle)
  */
 public class CustomUserRegistrationServlet extends HttpServlet {
