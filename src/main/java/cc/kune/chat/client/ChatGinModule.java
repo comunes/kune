@@ -19,6 +19,10 @@
  */
 package cc.kune.chat.client;
 
+import cc.kune.chat.client.actions.AddAsBuddieHeaderButton;
+import cc.kune.chat.client.actions.ChatSitebarActions;
+import cc.kune.chat.client.actions.OpenGroupPublicChatRoomButton;
+
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
@@ -35,5 +39,6 @@ public class ChatGinModule extends AbstractPresenterModule {
         bind(ChatSitebarActions.class).in(Singleton.class);
         bind(ChatParts.class).asEagerSingleton();
         bind(AddAsBuddieHeaderButton.class).in(Singleton.class);
+        bind(OpenGroupPublicChatRoomButton.class).in(Singleton.class);
     }
 }

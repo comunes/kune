@@ -9,7 +9,7 @@ import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.sn.actions.GotoMemberAction;
 import cc.kune.core.client.sn.actions.GotoYourHomePageAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
-import cc.kune.core.client.sn.actions.conditions.IsAdministrableCondition;
+import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsMeCondition;
 import cc.kune.core.client.sn.actions.conditions.IsNotMeCondition;
@@ -22,7 +22,7 @@ import com.google.inject.Provider;
 public class GroupSNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
     @Inject
-    public GroupSNCollabsMenuItemsRegistry(final Session session, final IsAdministrableCondition isAdministrableCondition,
+    public GroupSNCollabsMenuItemsRegistry(final Session session, final IsCurrentStateAdministrableCondition isAdministrableCondition,
             final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
             final IsMeCondition isMe, final IsNotMeCondition isNotMe, final ChangeToCollabAction changeToCollabAction,
             final ChangeToAdminAction changeToAdminAction, final RemoveMemberAction removeMemberAction,

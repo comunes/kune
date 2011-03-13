@@ -5,7 +5,7 @@ import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.sn.GroupSNPresenter;
-import cc.kune.core.client.sn.actions.registry.GroupMembersConfActions;
+import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
@@ -18,7 +18,7 @@ public class CoreParts {
     @Inject
     public CoreParts(final Session session, final Provider<GroupSNPresenter> groupMembersPresenter,
             final Provider<UserSNPresenter> buddiesAndParticipationPresenter,
-            final Provider<GroupMembersConfActions> groupMembersConfActions,
+            final Provider<GroupSNConfActions> groupMembersConfActions,
             final Provider<UserSNConfActions> userSNConfActions, final Provider<SiteUserOptionsPresenter> userOptions,
             final Provider<EntityLicensePresenter> licenseFooter) {
         session.onInitDataReceived(true, new AppStartHandler() {

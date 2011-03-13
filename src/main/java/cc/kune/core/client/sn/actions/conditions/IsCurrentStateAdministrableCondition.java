@@ -11,12 +11,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class IsAdministrableCondition implements GuiAddCondition {
+public class IsCurrentStateAdministrableCondition implements GuiAddCondition {
 
     private final Session session;
 
     @Inject
-    public IsAdministrableCondition(final Session session) {
+    public IsCurrentStateAdministrableCondition(final Session session) {
         this.session = session;
     }
 

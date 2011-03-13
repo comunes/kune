@@ -130,6 +130,8 @@ public interface Session {
 
     boolean isCurrentStateAGroup();
 
+    boolean isCurrentStateAPerson();
+
     boolean isInCurrentUserSpace();
 
     boolean isLogged();

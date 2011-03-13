@@ -29,7 +29,7 @@ import org.ourproject.kune.workspace.client.oldsn.UIStatus;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
-public class RolActionTest {
+public class SNRolActionTest {
 
     private AccessRights adminRights;
     private AccessRights editorRights;

@@ -329,21 +329,23 @@ public class ChatClientDefault implements ChatClient {
     }
 
     @Override
-    public void joinRoom(final String roomName, final String userAlias) {
-        joinRoom(roomName, null, userAlias);
+    public Room joinRoom(final String roomName, final String userAlias) {
+        return joinRoom(roomName, null, userAlias);
     }
 
     @Override
-    public void joinRoom(final String roomName, final String subject, final String userAlias) {
+    public Room joinRoom(final String roomName, final String subject, final String userAlias) {
+        Room room = null;
         if (xmppSession.isReady()) {
             final XmppURI roomURI = XmppURI.uri(roomName + "@" + chatOptions.roomHost + "/" + chatOptions.username);
-            final Room room = roomManager.open(roomURI, roomManager.getDefaultHistoryOptions());
+            room = roomManager.open(roomURI, roomManager.getDefaultHistoryOptions());
             if (TextUtils.notEmpty(subject)) {
                 RoomSubject.requestSubjectChange(room, subject);
             }
         } else {
             NotifyUser.error(i18n.t("Error"), i18n.t("To join a chatroom you need to be 'online'"), true);
         }
+        return room;
     }
 
     public void loadIcons(final ChatResources others) {
@@ -396,6 +398,11 @@ public class ChatClientDefault implements ChatClient {
     }
 
     @Override
+    public XmppURI roomUriFrom(final String shortName) {
+        return XmppURI.jid(shortName + "@" + chatOptions.roomHost);
+    }
+
+    @Override
     public void setAvatar(final String photoBinary) {
         Suco.get(AvatarManager.class).setVCardAvatar(photoBinary);
     }
@@ -436,7 +443,8 @@ public class ChatClientDefault implements ChatClient {
         showDialog(dialog == null ? true : !dialogVisible());
     }
 
-    private XmppURI uriFrom(final String shortName) {
+    @Override
+    public XmppURI uriFrom(final String shortName) {
         return XmppURI.jid(shortName + "@" + chatOptions.domain);
     }
 }

@@ -1,8 +1,10 @@
 package cc.kune.core.client.sn.actions.registry;
 
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sn.actions.JoinGroupAction;
@@ -24,20 +26,21 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class GroupMembersConfActions {
+@SuppressWarnings("serial")
+public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
     public static final SubMenuDescriptor MODERATION_SUBMENU = new SubMenuDescriptor();
     public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
     public static final SubMenuDescriptor VISIBILITY_SUBMENU = new SubMenuDescriptor();
 
     @Inject
-    public GroupMembersConfActions(final Session session, final StateManager stateManager,
-            final I18nTranslationService i18n, final GroupSNBottomActionsRegistry registry,
-            final Provider<MembersVisibilityMenuItem> membersVisibility,
+    public GroupSNConfActions(final Session session, final StateManager stateManager,
+            final I18nTranslationService i18n, final Provider<MembersVisibilityMenuItem> membersVisibility,
             final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
             final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
             final IsGroupCondition isGroupCondition, final UnJoinGroupAction unJoinGroupAction) {
         OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles("k-sn-options-menu");
+        final GuiActionDescrip optionsTitle = new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
         final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
                 SocialNetworkVisibility.anyone);
         final MenuRadioItemDescriptor onlyMembersItem = membersVisibility.get().withVisibility(
@@ -47,22 +50,23 @@ public class GroupMembersConfActions {
         final MenuRadioItemDescriptor closedItem = membersModeration.get().withModeration(AdmissionType.Closed);
         final MenuRadioItemDescriptor moderatedItem = membersModeration.get().withModeration(AdmissionType.Moderated);
         final MenuRadioItemDescriptor openItem = membersModeration.get().withModeration(AdmissionType.Open);
-        registry.add(OPTIONS_MENU);
-        registry.add(VISIBILITY_SUBMENU.withText(i18n.t("Those who can view this member list")).withParent(OPTIONS_MENU));
-        registry.add(MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU));
-        registry.add(anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone")));
-        registry.add(onlyMembersItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only members")));
-        registry.add(onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only admins")));
-        registry.add(moderatedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("moderate request to join")));
-        registry.add(openItem.withParent(MODERATION_SUBMENU).withText(i18n.t("auto accept request to join")));
-        // registry.add(closedItem.withParent(MODERATION_SUBMENU).withText(
+        add(OPTIONS_MENU);
+        add(optionsTitle);
+        add(VISIBILITY_SUBMENU.withText(i18n.t("Those who can view this member list")).withParent(OPTIONS_MENU));
+        add(MODERATION_SUBMENU.withText(i18n.t("New members policy")).withParent(OPTIONS_MENU));
+        add(anyoneItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("anyone")));
+        add(onlyMembersItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only members")));
+        add(onlyAdminsItem.withParent(VISIBILITY_SUBMENU).withText(i18n.t("only admins")));
+        add(moderatedItem.withParent(MODERATION_SUBMENU).withText(i18n.t("moderate request to join")));
+        add(openItem.withParent(MODERATION_SUBMENU).withText(i18n.t("auto accept request to join")));
+        // add(closedItem.withParent(MODERATION_SUBMENU).withText(
         // i18n.t("closed for new members")));
 
         final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
         final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);
         unJoinBtn.add(isLoggedCondition);
-        registry.add(joinBtn.withStyles("k-no-backimage"));
-        registry.add(unJoinBtn.withStyles("k-no-backimage"));
+        add(joinBtn.withStyles("k-no-backimage"));
+        add(unJoinBtn.withStyles("k-no-backimage"));
 
         stateManager.onStateChanged(true, new StateChangedHandler() {
             @Override

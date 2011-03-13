@@ -74,10 +74,10 @@ import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPanel;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
-import cc.kune.core.client.sn.actions.registry.GroupSNBottomActionsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNCollabsMenuItemsRegistry;
+import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 import cc.kune.core.client.sn.actions.registry.GroupSNPendingsMenuItemsRegistry;
-import cc.kune.core.client.sn.actions.registry.UserSNBottomActionsRegistry;
+import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.core.client.sn.actions.registry.UserSNMenuItemsRegistry;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.ContentCache;
@@ -200,9 +200,9 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(GroupSNAdminsMenuItemsRegistry.class).in(Singleton.class);
         bind(GroupSNCollabsMenuItemsRegistry.class).in(Singleton.class);
         bind(GroupSNPendingsMenuItemsRegistry.class).in(Singleton.class);
-        bind(GroupSNBottomActionsRegistry.class).in(Singleton.class);
-        bind(UserSNBottomActionsRegistry.class).in(Singleton.class);
         bind(UserSNMenuItemsRegistry.class).in(Singleton.class);
+        bind(GroupSNConfActions.class).in(Singleton.class);
+        bind(UserSNConfActions.class).in(Singleton.class);
 
         bind(SiteUserOptionsPresenter.class).in(Singleton.class);
         bind(SiteUserOptions.class).to(SiteUserOptionsPresenter.class).in(Singleton.class);

@@ -17,7 +17,7 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class UnJoinGroupAction extends RolAction {
+public class UnJoinGroupAction extends SNRolAction {
 
     @Inject
     public UnJoinGroupAction(final StateManager stateManager, final Session session, final I18nTranslationService i18n,

@@ -7,7 +7,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNProxy;
 import cc.kune.core.client.sn.UserSNPresenter.UserSNView;
-import cc.kune.core.client.sn.actions.registry.UserSNBottomActionsRegistry;
+import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.core.client.sn.actions.registry.UserSNMenuItemsRegistry;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SocialNetworkChangedEvent;
@@ -67,7 +67,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
         void showBuddiesNotPublic();
     }
 
-    private final UserSNBottomActionsRegistry actionsRegistry;
+    private final UserSNConfActions confActionsRegistry;
     private final I18nTranslationService i18n;
     private final UserSNMenuItemsRegistry userMenuItemsRegistry;
 
@@ -75,11 +75,11 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     public UserSNPresenter(final EventBus eventBus, final UserSNView view, final UserSNProxy proxy,
             final I18nTranslationService i18n, final StateManager stateManager, final Session session,
             final Provider<FileDownloadUtils> downloadProvider, final UserSNMenuItemsRegistry userMenuItemsRegistry,
-            final UserSNBottomActionsRegistry actionsRegistry) {
+            final UserSNConfActions confActionsRegistry) {
         super(eventBus, view, proxy, downloadProvider);
         this.i18n = i18n;
         this.userMenuItemsRegistry = userMenuItemsRegistry;
-        this.actionsRegistry = actionsRegistry;
+        this.confActionsRegistry = confActionsRegistry;
         stateManager.onStateChanged(true, new StateChangedEvent.StateChangedHandler() {
             @Override
             public void onStateChanged(final StateChangedEvent event) {
@@ -108,7 +108,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     }
 
     private void createActions() {
-        getView().getBottomToolbar().addActions(actionsRegistry);
+        getView().getBottomToolbar().addActions(confActionsRegistry);
     }
 
     @Override

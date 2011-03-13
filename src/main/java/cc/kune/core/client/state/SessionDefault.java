@@ -240,6 +240,11 @@ public class SessionDefault implements Session {
     }
 
     @Override
+    public boolean isCurrentStateAPerson() {
+        return currentState == null ? false : currentState.getGroup().isPersonal();
+    }
+
+    @Override
     public boolean isInCurrentUserSpace() {
         if (!isLogged()) {
             return false;

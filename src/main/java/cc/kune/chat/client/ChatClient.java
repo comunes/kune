@@ -20,6 +20,7 @@
 package cc.kune.chat.client;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
+import com.calclab.emite.xep.muc.client.Room;
 
 public interface ChatClient {
 
@@ -37,9 +38,9 @@ public interface ChatClient {
 
     boolean isLoggedIn();
 
-    void joinRoom(String roomName, String userAlias);
+    Room joinRoom(String roomName, String userAlias);
 
-    void joinRoom(String roomName, String subject, String userAlias);
+    Room joinRoom(String roomName, String subject, String userAlias);
 
     void login(XmppURI uri, String passwd);
 
@@ -50,8 +51,12 @@ public interface ChatClient {
 
     void logout();
 
+    XmppURI roomUriFrom(String shortName);
+
     void setAvatar(String photoBinary);
 
     void show();
+
+    XmppURI uriFrom(String shortName);
 
 }

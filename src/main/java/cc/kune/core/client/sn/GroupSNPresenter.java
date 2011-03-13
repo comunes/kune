@@ -5,8 +5,8 @@ import java.util.List;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
-import cc.kune.core.client.sn.actions.registry.GroupSNBottomActionsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNCollabsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNPendingsMenuItemsRegistry;
 import cc.kune.core.client.state.Session;
@@ -71,7 +71,7 @@ public class GroupSNPresenter extends AbstractSNPresenter<GroupSNPresenter.Group
         void showOrphan();
     }
 
-    private final GroupSNBottomActionsRegistry actionsRegistry;
+    private final GroupSNConfActions actionsRegistry;
     private final GroupSNAdminsMenuItemsRegistry adminsMenuItemsRegistry;
     private final GroupSNCollabsMenuItemsRegistry collabsMenuItemsRegistry;
     private final GroupSNPendingsMenuItemsRegistry pendingsMenuItemsRegistry;
@@ -82,7 +82,7 @@ public class GroupSNPresenter extends AbstractSNPresenter<GroupSNPresenter.Group
             final GroupSNAdminsMenuItemsRegistry adminsMenuItemsRegistry,
             final GroupSNCollabsMenuItemsRegistry collabsMenuItemsRegistry,
             final GroupSNPendingsMenuItemsRegistry pendingsMenuItemsRegistry,
-            final GroupSNBottomActionsRegistry actionsRegistry) {
+            final GroupSNConfActions actionsRegistry) {
         super(eventBus, view, proxy, downloadProvider);
         this.adminsMenuItemsRegistry = adminsMenuItemsRegistry;
         this.collabsMenuItemsRegistry = collabsMenuItemsRegistry;

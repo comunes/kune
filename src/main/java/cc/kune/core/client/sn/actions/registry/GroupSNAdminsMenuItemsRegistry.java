@@ -9,7 +9,7 @@ import cc.kune.core.client.sn.actions.GotoGroupAction;
 import cc.kune.core.client.sn.actions.GotoMemberAction;
 import cc.kune.core.client.sn.actions.GotoYourHomePageAction;
 import cc.kune.core.client.sn.actions.RemoveMemberAction;
-import cc.kune.core.client.sn.actions.conditions.IsAdministrableCondition;
+import cc.kune.core.client.sn.actions.conditions.IsCurrentStateAdministrableCondition;
 import cc.kune.core.client.sn.actions.conditions.IsGroupCondition;
 import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 import cc.kune.core.client.sn.actions.conditions.IsMeCondition;
@@ -24,7 +24,7 @@ public class GroupSNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegi
 
     @Inject
     public GroupSNAdminsMenuItemsRegistry(final Session session, final IsLoggedCondition isLogged,
-            final IsAdministrableCondition isAdministrableCondition, final IsPersonCondition isPersonCondition,
+            final IsCurrentStateAdministrableCondition isAdministrableCondition, final IsPersonCondition isPersonCondition,
             final IsGroupCondition isGroupCondition, final IsMeCondition isMe, final IsNotMeCondition isNotMe,
             final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
             final RemoveMemberAction removeMemberAction, final AcceptJoinGroupAction acceptJoinGroupAction,

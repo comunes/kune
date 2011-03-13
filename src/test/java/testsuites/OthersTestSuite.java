@@ -33,7 +33,7 @@ import org.ourproject.kune.rack.filters.rest.TestRESTServiceDefinition;
 import org.ourproject.kune.wiki.server.WikiServerToolTest;
 import org.ourproject.kune.workspace.client.entityheader.EntityLogoPresenterTest;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPresenterTest;
-import org.ourproject.kune.workspace.client.socialnet.RolActionTest;
+import org.ourproject.kune.workspace.client.socialnet.SNRolActionTest;
 import org.ourproject.kune.workspace.client.socialnet.RolComparatorTest;
 import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenterTest;
 import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenterTest;
@@ -50,7 +50,7 @@ import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenterTest;
 @RunWith(Suite.class)
 @SuiteClasses({ ChatToolTest.class, XmppManagerTest.class, DocumentToolTest.class, DocumentServerToolTest.class,
         GalleryServerToolTest.class, WikiServerToolTest.class, EntityLogoPresenterTest.class,
-        ToolSelectorPresenterTest.class, TagsSummaryPresenterTest.class, RolActionTest.class, RolComparatorTest.class,
+        ToolSelectorPresenterTest.class, TagsSummaryPresenterTest.class, SNRolActionTest.class, RolComparatorTest.class,
         LicenseWizardPresenterTest.class, BlogServerToolTest.class, TestRESTServiceDefinition.class,
         TestRESTMethodFinder.class })
 public class OthersTestSuite {
