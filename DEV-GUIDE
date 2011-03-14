@@ -5,6 +5,7 @@
 ==How to checkout the code of kune==
 
 Our code is in the svn of ourproject.
+  http://ourproject.org/scm/?group_id=407
 
 ===Anonymous Subversion Access===
 
@@ -38,9 +39,9 @@ See this files in trunk directory:
 
 If you are interested in the db schema:
 * trunk/img/kune-hibernate-diagram-oct-08.png
-but is more easy to look in the Java classes of package org.ourproject.kune.platf.server.domain.
+but is more easy to look in the Java classes of package cc.kune.domain
 
-* [http://kune.ourproject.org/spip.php?article15 Video/presentation of kune]
+* [http://kune.ourproject.org/2009/01/status-jan09/ Video/presentation of kune]
 * trunk/img/kune-diagram-part1-0.1.png # old diagrams but a good summary
 * trunk/img/kune-diagram-part2-0.1.png 
 * trunk/img/kune-diagram-part3-0.1.png 
@@ -79,17 +80,17 @@ Here some notable dependencies of Kune. For a more detailed list of dependences 
 
 [http://code.google.com/p/google-guice/ Guice] is used in server code for [http://en.wikipedia.org/wiki/Inversion_of_Control IoC]. As they describe «Put simply, Guice alleviates the need for factories and the use of new in your Java code. Think of Guice's @Inject as the new new.».
 
-As we cannot use guice in client code, we use our other project [http://suco.googlecode.com suco] that is heavily inspired in guice.
+In the GWT client code we use [https://code.google.com/p/google-gin/ Gin], also based in Guice.
 
-For use details see the [http://google-guice.googlecode.com/files/Guice%201.0%20User%27s%20Guide.pdf Guice User's Guide].
+For use details see the [https://code.google.com/docreader/#p=google-guice&s=google-guice&t=Motivation Guice User's Guide].
 
 ====Apache OpenJPA====
 
 For db persistence, we use [http://openjpa.apache.org/ OpenJPA]. See the [http://openjpa.apache.org/docs/openjpa-0.9.0-incubating/manual/manual.html openjpa manual] for dev info.
 
-====Warp persist====
+====Guice Persist====
 
-We use [http://www.wideplay.com/guicewebextensions2 warp-persist] and [http://www.wideplay.com/dynamicfinders dynamic finders]. That is Guice + Persistence + easy db query.
+We use [https://code.google.com/p/google-guice/wiki/GuicePersist Guice-Persist] and its dynamic finders. That is Guice + Persistence + easy db query. See: UserFinder.java for a sample of finders.
 
 ====Lucene====
 
@@ -101,23 +102,18 @@ For content indexing, we use Lucene. We usually use [http://www.hibernate.org/hi
 
 ====Suco====
 
-[http://suco.googlecode.com suco] is our IoC library for GWT. For more documentation see [http://code.google.com/p/suco/w/list the suco wiki] or our HelloWorldModule class. See also our Guice section above.
+[https://code.google.com/p/google-gin/ Gin] is the IoC library that we use for GWT. For more documentation see [https://code.google.com/p/google-gin/wiki/GinTutorial the Gin tutorial]. See also our Guice section above.
 
 ====Emite====
 
-[http://emite.google.code emite] is our xmpp extensible library and client. See [http://code.google.com/p/emite/w/list the wiki] for more documentation about emite. It's a module totally independent of Kune, then you can also use emite in your website or project. Emite also uses suco for easy modularity and event handling.
+[http://emite.google.code emite] is our xmpp extensible library and client. See [http://code.google.com/p/emite/w/list the wiki] for more documentation about emite. It's a module totally independent of Kune, then you can also use emite in your website or project.
 
-====gwt-ext====
+====UI Binder====
+We use [https://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinder.html UI Binder] for GWT Widgets. Also we use [https://code.google.com/intl/en/webtoolkit/tools/download-gwtdesigner.html GWT Designer Eclipse plugin] for developing these widgets.
 
-[http://gwt-ext.com/ gwt-ext] is used for our gwt UI. See the [http://www.gwt-ext.com/demo showcase demo] for sample codes.
+====ext-gwt/gxt====
 
-====gwt-ext-ux====
-
-We use some widgets from the [http://code.google.com/p/gwt-ext-ux/ gwt-ext-ux] project (mainly the File Uploader). See the [http://www.gwt-ext.com:8080/demo-ux/ gwt-ext-ux showcase] for sample codes.
-
-====gwt-log====
-
-We use [http://gwt-log.googlecode.com/ gwt-log] as the log library for our GWT code. Also gwt-log is used in emite and suco. See [http://code.google.com/p/gwt-log/wiki/GettingStarted GettingStarted] for more details or simple use Log.info("") Log.debug("") Log.error("") etcetera in your GWT code when needed.
+[http://www.sencha.com/products/extgwt/ gxt] is used for other parts of our gwt UI (like window dialogs, grids, etc). See the [http://www.sencha.com/examples/ gxt explorer] for sample codes and [http://www.sencha.com/gxtdocs/#overview gxt docs].
 
 ===client side (Rails)===
 
@@ -203,7 +199,7 @@ http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
 
 ===GWT's Hosted Mode===
 
-For start the hosted mode, you can both execute from command line:
+FIXME (this is outdated) For start the hosted mode, you can both execute from command line:
 
  mvn gwt-maven:gwt
 
@@ -213,7 +209,7 @@ Also, you can generate a hosted mode launch configuration in eclipse. We have a 
 * kune (default classpath)
 
 If you have memory problems running the hosted mode, increase it in VM arguments:
- -Xmx512M
+ -Xmx1024M
 
 before run hosted mode compile once with:
  mvn gwt-maven:compile
@@ -251,18 +247,11 @@ More than the eclipse code preferences we try to:
 
 ==Use of mylyn in eclipse==
 
-To use mylyn and to track the kune issues from eclipse, you have to add a "Web Repository" and select "ASM (gforge" with server: http://ourproject.org. 
-In additional settings, put:
-* group_id: 407 
-* atid: 139. 
-Add a Repository Query with:
-* Query URL: ${serverUrl}/tracker/?bfunc=downloadcsv&group_id=${group_id}&atid=${atid}
-* Query Pattern: ({Id}[0-9]+?),[0-9]+,"({Type}.+?)",[0-9]+,[0-9]+,"[^"]+",[0-9]+,"({Owner}.+?)","[^"]+","[^"]+","[^"]+","({Description}.+?)","[^"]+"*
-Sync your tasks.
+We recommend to use mylyn to track the kune issues. Use the trac mylyn connector for http://kune.ourproject.org/issues/.
 
 ==Code samples==
 
-See HelloWorldModule.java to a small sample of how to extend the gwt workspace UI. 
+See HelloWorld*.java classes to a small sample of how to develop and extend the gwt workspace UI.
 
 Check also trunk/HOWTO_ADD_A_NEW_TOOL to instructions of how to add a new tool in Kune.
 
@@ -285,7 +274,7 @@ then, put good descriptions on your changes in svn commit comments.
 
 Attach the following notices to each source of the program at the begining:
 <pre>
-    (c) 2007-2008 The kune development team (see CREDITS for details)
+    (c) 2007-2011 The kune development team (see CREDITS for details)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -306,7 +295,7 @@ In Java, something like this (you can put your name instead of "kune team" if yo
 <pre>
 /*
  *
- * Copyright (C) 2007-2008 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify

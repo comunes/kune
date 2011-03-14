@@ -2,18 +2,22 @@
 
 ==Production instructions==
 
-FIXME
+With 
+  mvn package 
+an executable target/kune-VERSION.one-jar.jar is generated in target directory.
 
 ==Development instructions==
 
 ===Prerrequisites===
 
-- Install java-jdk (>=5), maven2, mysql (> 5.0) and for example eclipse
-- Install gwt 1.5.3 and follow Appendix A for maven+gwt configuration
+- Install java-jdk (>=6), maven2, mysql (> 5.0) and for example eclipse
+- Install gwt >= 2.1.1 (recommended via Eclipse GWT plugin https://code.google.com/intl/en/eclipse/docs/getting_started.html)
 
 === Wave in a Box ===
 
+Follow "Configure Your XMPP Server" from:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/code/installation
+and:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/federation/openfire-installation
 
 ===MYSQL configuration===
@@ -24,14 +28,14 @@ You have to configure mysql to support UTF8 by editing your c:\Windows\my.ini or
 
 [mysqld]
 default-character-set=utf8
-default-collation=utf8_general_ci
+default-collation=utf8_bin
 
 After this modification you have to restart the mysql database.
 
 Optionalilly, you can also configure this per table (do it after the db creation) :
 
-ALTER DATABASE kune_dev CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT COLLATE utf8_general_ci;
-ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT COLLATE utf8_general_ci;
+ALTER DATABASE kune_dev CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
+ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
 
 ====Db creation====
 
@@ -88,7 +92,7 @@ do the same with every persistence unit defined inside.
 
 ===Run openfire jabber server===
 
-Install and run a openfire jabber server (see Appendix B for proper configuration of openfire) or ejabberd.
+Install and run a openfire jabber server (see Appendix A for proper configuration of openfire) or ejabberd.
 
 ===Install jmagick===
 
@@ -125,40 +129,7 @@ or running:
 
 Open your browser and connect to http://yourIP:8080/kune
 
-===Appendix A: Configuration of maven===
-
-Example of .m2/settings.xml:
-
-<pre>
-<?xml version="1.0" encoding="UTF-8"?>
-<settings>
-   <profiles>
-     <profile>
-       <id>gwt-1.4.61</id>
-       <properties>
-         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.4.61</google.webtoolkit.home>
-         <google.webtoolkit.extrajvmargs>-Xmx512M</google.webtoolkit.extrajvmargs>
-         <!-- XstartOnFirstThread needed only on the mac -->  
-         <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->  
-      </properties>
-     </profile>
-     <profile>
-       <id>gwt-1.5.3</id>
-       <properties>
-         <google.webtoolkit.home>/usr/local/lib/gwt/gwt-linux-1.5.3</google.webtoolkit.home>
-         <google.webtoolkit.extrajvmargs>-Xmx512M</google.webtoolkit.extrajvmargs>
-         <!-- XstartOnFirstThread needed only on the mac -->  
-         <!-- <google.webtoolkit.extrajvmargs>-XstartOnFirstThread</google.webtoolkit.extrajvmargs> -->  
-      </properties>
-     </profile>
-   </profiles>
-   <activeProfiles>
-     <activeProfile>gwt-1.5.3</activeProfile>
-   </activeProfiles>
-</settings>
-</pre>
-
-===Appendix B: Configuration of Openfire xmpp server===
+===Appendix A: Configuration of Openfire xmpp server===
 
 Install openfire in your system.
 
@@ -245,10 +216,3 @@ Restart openfire.
 
 For more details:
 http://www.igniterealtime.org/builds/openfire/docs/latest/documentation/db-integration-guide.html
-
-===Appendix C: jar generation===
-
-Note: kune-core is the base for modules extension development
-
- mvn package -Dmaven.test.skip=true -o
-
