@@ -40,6 +40,7 @@ import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.wave.client.WaveClientSimpleAuthenticator;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -59,17 +60,19 @@ public class SitebarSignOutLink extends ButtonDescriptor {
         private final EventBus eventBus;
         private final Session session;
         private final Provider<UserServiceAsync> userService;
+        private final WaveClientSimpleAuthenticator waveAuth;
 
         @Inject
         public SitebarSignOutAction(final EventBus eventBus, final I18nTranslationService i18n,
                 final BeforeSignOut beforeSignOut, final Provider<UserServiceAsync> userService, final Session session,
-                final CookiesManager cookiesManager) {
+                final CookiesManager cookiesManager, final WaveClientSimpleAuthenticator waveAuth) {
             super();
             this.eventBus = eventBus;
             this.userService = userService;
             this.session = session;
             this.cookiesManager = cookiesManager;
             this.beforeSignOut = beforeSignOut;
+            this.waveAuth = waveAuth;
             putValue(Action.NAME, i18n.t("Sign out"));
         }
 
@@ -77,25 +80,28 @@ public class SitebarSignOutLink extends ButtonDescriptor {
         public void actionPerformed(final ActionEvent event) {
             eventBus.fireEvent(new ProgressShowEvent());
             if (beforeSignOut.checkBeforeAction()) {
-                userService.get().logout(session.getUserHash(), new AsyncCallback<Void>() {
+                waveAuth.doLogout(new AsyncCallback<Void>() {
                     @Override
                     public void onFailure(final Throwable caught) {
-                        eventBus.fireEvent(new ProgressHideEvent());
-                        if (caught instanceof SessionExpiredException) {
-                            clientUIsignOut();
-                        } else if (caught instanceof UserMustBeLoggedException) {
-                            clientUIsignOut();
-                        } else {
-                            throw new UIException("Other kind of exception in doLogout", caught);
-                        }
+                        onLogoutFail(caught);
                     }
 
                     @Override
-                    public void onSuccess(final Void arg0) {
-                        eventBus.fireEvent(new ProgressHideEvent());
-                        clientUIsignOut();
-                    }
+                    public void onSuccess(final Void result) {
+                        userService.get().logout(session.getUserHash(), new AsyncCallback<Void>() {
+                            @Override
+                            public void onFailure(final Throwable caught) {
+                                onLogoutFail(caught);
+                            }
 
+                            @Override
+                            public void onSuccess(final Void arg0) {
+                                eventBus.fireEvent(new ProgressHideEvent());
+                                clientUIsignOut();
+                            }
+
+                        });
+                    }
                 });
             } else {
                 eventBus.fireEvent(new ProgressHideEvent());
@@ -106,6 +112,17 @@ public class SitebarSignOutLink extends ButtonDescriptor {
             cookiesManager.removeCookie();
             session.setUserHash(null);
             session.setCurrentUserInfo(null);
+        }
+
+        private void onLogoutFail(final Throwable caught) {
+            eventBus.fireEvent(new ProgressHideEvent());
+            if (caught instanceof SessionExpiredException) {
+                clientUIsignOut();
+            } else if (caught instanceof UserMustBeLoggedException) {
+                clientUIsignOut();
+            } else {
+                throw new UIException("Other kind of exception in doLogout", caught);
+            }
         }
 
     }

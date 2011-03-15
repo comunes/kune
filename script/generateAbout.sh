@@ -17,5 +17,5 @@ VER=`grep "<version>" pom.xml | head -1 | sed 's/..version.//g'`
 #echo "--------------------------------------------------------------------------------" >> $tmp
 echo Version $VER '('$SVNVER')' >> $tmp
 
-txt2html --prepend_file bin/header.html -h 80 --preserve_indent -8 --style_url frame-def.css --infile $tmp --infile CREDITS --infile COPYRIGHT --outfile src/main/java/cc/kune/core/public/about.html
+txt2html --prepend_file script/header.html -h 80 --preserve_indent -8 --style_url frame-def.css --infile $tmp --infile CREDITS --infile COPYRIGHT --outfile src/main/java/cc/kune/core/public/about.html
 rm $tmp

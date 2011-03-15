@@ -1,5 +1,6 @@
 package cc.kune.wave.client;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.gspace.client.WsArmor;
 
@@ -46,7 +47,30 @@ public class WaveClientSimpleAuthenticator {
                 }
             });
         } catch (final RequestException e) {
-            NotifyUser.error(e.getStackTrace().toString(), true);
+            Log.error(e.getStackTrace().toString());
+        }
+    }
+
+    public void doLogout(final AsyncCallback<Void> callback) {
+        // Original: <a href=\"/auth/signout?r=/\">"
+        final RequestBuilder request = new RequestBuilder(RequestBuilder.POST, "/auth/signout");
+        try {
+            request.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            final StringBuffer params = new StringBuffer();
+            request.sendRequest(params.toString(), new RequestCallback() {
+                @Override
+                public void onError(final Request request, final Throwable exception) {
+                    NotifyUser.error(exception.getStackTrace().toString(), true);
+                    callback.onFailure(exception);
+                }
+
+                @Override
+                public void onResponseReceived(final Request request, final Response response) {
+                    callback.onSuccess(null);
+                }
+            });
+        } catch (final RequestException e) {
+            Log.error(e.getStackTrace().toString());
         }
     }
 

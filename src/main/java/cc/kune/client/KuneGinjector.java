@@ -50,6 +50,8 @@ import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.pspace.client.PSpaceGinModule;
 import cc.kune.pspace.client.PSpacePresenter;
+import cc.kune.wave.client.WaveGinModule;
+import cc.kune.wave.client.WaveParts;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
@@ -58,7 +60,7 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
-@GinModules({ CoreGinModule.class, ChatGinModule.class, PSpaceGinModule.class })
+@GinModules({ CoreGinModule.class, ChatGinModule.class, WaveGinModule.class, PSpaceGinModule.class })
 public interface KuneGinjector extends Ginjector {
 
     /*
@@ -125,4 +127,6 @@ public interface KuneGinjector extends Ginjector {
     AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
 
     AsyncProvider<UserNotifierPresenter> getUserNotifierPresenter();
+
+    WaveParts getWaveParts();
 }

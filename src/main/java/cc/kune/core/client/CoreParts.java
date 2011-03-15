@@ -9,7 +9,6 @@ import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
-import cc.kune.wave.client.WaveClientManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -21,7 +20,7 @@ public class CoreParts {
             final Provider<UserSNPresenter> buddiesAndParticipationPresenter,
             final Provider<GroupSNConfActions> groupMembersConfActions,
             final Provider<UserSNConfActions> userSNConfActions, final Provider<SiteUserOptionsPresenter> userOptions,
-            final Provider<EntityLicensePresenter> licenseFooter, final Provider<WaveClientManager> waveClientManager) {
+            final Provider<EntityLicensePresenter> licenseFooter) {
         session.onInitDataReceived(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
@@ -31,7 +30,6 @@ public class CoreParts {
                 buddiesAndParticipationPresenter.get();
                 userOptions.get();
                 licenseFooter.get();
-                waveClientManager.get();
             }
         });
     }

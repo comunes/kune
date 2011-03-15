@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import cc.kune.common.client.actions.BeforeActionListener;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.ToolChangedEvent.ToolChangedHandler;
@@ -42,6 +43,7 @@ public class StateManagerTest {
     private GroupChangedHandler groupChangeHandler;
     private HistoryWrapper history;
     private Session session;
+    private SpaceSelectorPresenter spaceSelector;
     private StateAbstractDTO state;
     private StateChangedHandler stateChangeHandler;
     private StateManagerDefault stateManager;
@@ -52,6 +54,7 @@ public class StateManagerTest {
         contentProvider = Mockito.mock(ContentCache.class);
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);
+        spaceSelector = Mockito.mock(SpaceSelectorPresenter.class);
         eventBus = new EventBusTester();
         stateManager = new StateManagerDefault(contentProvider, session, history, eventBus);
         Mockito.when(session.getUserHash()).thenReturn(HASH);
@@ -157,6 +160,10 @@ public class StateManagerTest {
         stateManager.onHistoryChanged("site.docs");
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+    }
+
+    public void getWaveToken() {
+        stateManager.onHistoryChanged("example.com/w+abcd/~/conv+root/b+45kg");
     }
 
     @SuppressWarnings("unchecked")

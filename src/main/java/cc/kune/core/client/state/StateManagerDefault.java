@@ -22,6 +22,8 @@ package cc.kune.core.client.state;
 
 import java.util.HashMap;
 
+import org.waveprotocol.box.webclient.client.HistorySupport;
+
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.errors.NotImplementedException;
@@ -57,13 +59,16 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private final Session session;
     private final HashMap<String, HistoryTokenCallback> siteTokens;
 
+    // private final SpaceSelectorPresenter spaceSelector;
+
     @Inject
-    public StateManagerDefault(final ContentCache contentProvider, final Session session,
-            final HistoryWrapper history, final EventBus eventBus) {
+    public StateManagerDefault(final ContentCache contentProvider, final Session session, final HistoryWrapper history,
+            final EventBus eventBus) {
         this.eventBus = eventBus;
         this.contentProvider = contentProvider;
         this.session = session;
         this.history = history;
+        // this.spaceSelector = spaceSelector;
         this.previousToken = null;
         this.resumedToken = null;
         siteTokens = new HashMap<String, HistoryTokenCallback>();
@@ -166,7 +171,17 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             Log.debug("StateManager: on history changed (" + historyToken + ")");
             if (tokenListener == null) {
                 // Ok, normal token change
-                onHistoryChanged(new StateToken(historyToken));
+                // Is a Wave token?
+                if (historyToken == null || HistorySupport.waveRefFromHistoryToken(historyToken) == null) {
+                    // Non wave token
+                    onHistoryChanged(new StateToken(historyToken));
+                } else {
+                    // Wave token
+                    // spaceSelector.onUserSpaceSelect();
+                    if (session.isNotLogged()) {
+                        // use r=? argument?
+                    }
+                }
             } else {
                 // token is one of #newgroup #signin #translate ...
                 if (previousToken == null) {

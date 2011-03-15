@@ -388,6 +388,24 @@ a:visited {
     padding: 0 3px 0 0 !important;
 }
 
+.k-sitebar-wave-status {
+    font: 13px 'Ubuntu', arial;
+    /* font-weight: bold; */
+    color: #B3B3B3;
+    white-space: nowrap;
+    background: none;
+    border: 0px;
+    padding: 1px 7px 0 0 !important;
+}
+
+.k-sitebar-wave-status, .k-sitebar-wave-status-online {
+  color: red;
+}
+
+.k-sitebar-wave-status, .k-sitebar-wave-status-offline {
+  color: green;
+}
+
 .k-sitebar button:hover {
     border: 0px;
     background: none;
