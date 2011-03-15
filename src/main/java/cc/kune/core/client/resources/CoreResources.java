@@ -142,6 +142,9 @@ public interface CoreResources extends ClientBundle {
     @Source("button15rblue.png")
     ImageResource button15rblue();
 
+    @Source("wave-icon.png")
+    ImageResource waveIcon();
+
     @Source("button15rdark.png")
     ImageResource button15rdark();
 

@@ -67,8 +67,7 @@ public class EntityHeaderPresenter extends
         void showDefUserLogo();
     }
 
-    private static final int LARGE_NAME_LIMIT = 20;
-
+    private static final int LARGE_NAME_LIMIT = 17;
     private static final int MEDIUM_NAME_LIMIT = 90;
     private final Session session;
 

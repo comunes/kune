@@ -160,21 +160,18 @@ this generates four classes GroupOptions (the external interface), GroupOptionsP
 
 ==Development Environment==
 
-===Prerequisite: Install maven===
+===Prerequisite: Install maven and Eclipse ===
 
-Install maven2.
+Install maven2. In debian system and derivatives "apt-get install maven2"
 
-From:
-http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN.txt
-
-Eclipse users will need to install the following plugin components:
-- Google Plugin for Eclipse (instructions at http://code.google.com/eclipse/)
-- m2eclipse Core
-- Maven Integration for WTP (in m2eclipse extras)
-  Instructions for installing the maven plugins can be found here:
-  http://m2eclipse.sonatype.org/installing-m2eclipse.html
+http://www.eclipse.org/downloads/
 
 Ensure Eclipse is configured to use Java 1.6.
+
+===Optional maven-eclipse integration ===
+
+Check:
+http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN.txt
 
 ===Prerequisite: Install kune===
 
@@ -212,7 +209,7 @@ If you have memory problems running the hosted mode, increase it in VM arguments
  -Xmx1024M
 
 before run hosted mode compile once with:
- mvn gwt-maven:compile
+ mvn compile && mvn gwt:compile
 and deploy with:
  script/deploy_gwt.sh 
 and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT). This is quite useful to put breakpoints in the server code.

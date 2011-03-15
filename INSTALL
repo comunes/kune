@@ -57,8 +57,7 @@ FLUSH PRIVILEGES;
 
 - Compile with maven:
  # (in the trunk directory)
- mvn compile -Dliquibase.should.run=false
- mvn gwt:compile
+ mvn compile -Dliquibase.should.run=false && mvn gwt:compile
 
 - Copy the target to src directory (only for test):
  ./script/deploy_gwt.sh

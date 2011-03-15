@@ -138,6 +138,13 @@ public class SitebarActionsPresenter extends
             }
         };
 
+        final AbstractExtendedAction wavePowered = new AbstractExtendedAction() {
+            @Override
+            public void actionPerformed(final ActionEvent event) {
+                KuneWindowUtils.open("http://incubator.apache.org/wave/");
+            }
+        };
+
         final MenuItemDescriptor gotoKuneDevSite = new MenuItemDescriptor(OPTIONS_MENU, new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent event) {
@@ -147,6 +154,8 @@ public class SitebarActionsPresenter extends
         gotoKuneDevSite.putValue(Action.NAME, i18n.t("kune development site"));
         gotoKuneDevSite.putValue(Action.SMALL_ICON, icons.kuneIcon16());
 
+        wavePowered.putValue(Action.NAME, i18n.t("Apache Wave powered"));
+        wavePowered.putValue(Action.SMALL_ICON, res.waveIcon());
         aboutAction.putValue(Action.NAME, i18n.t("About kune"));
         aboutAction.putValue(Action.SMALL_ICON, res.info());
         // aboutAction.setShortcut(shortcut);
@@ -161,6 +170,7 @@ public class SitebarActionsPresenter extends
         right.addAction(reportBugs);
         right.addAction(gotoKuneDevSite);
         right.addAction(menuSeparator);
+        right.addAction(new MenuItemDescriptor(OPTIONS_MENU, wavePowered));
         right.addAction(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
 
     }

@@ -278,7 +278,9 @@ public class WebClient extends Composite {
         LOG.info("History token contains invalid path: " + encodedToken);
         return;
       }
-      if (fromWaveRef.getWaveId().equals(waveRef.getWaveId())) {
+      // Kune patch
+      // if (fromWaveRef.getWaveId().equals(waveRef.getWaveId())) {
+      if (fromWaveRef == null || fromWaveRef.getWaveId().equals(waveRef.getWaveId())) {
         // History change was caused by clicking on a link, it's already
         // updated by browser.
         return;
