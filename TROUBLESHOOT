@@ -85,6 +85,11 @@ If you have some tests with error like "can not be found in source packages. Che
  Error: Problem with Eclipse plugin and UiBinder "Field xxx has no corresponding field in template file yyy.ui.xml"
 https://code.google.com/p/google-web-toolkit/issues/detail?id=4353
 
+== Too many GWT permutations? ==
+
+Compile in PRETTY mode and edit target/kune-VERSION/ws/ws.nocache.js and look for 'unflattenKeylistIntoAnswers' to see a permutation list. See:
+https://groups.google.com/group/google-web-toolkit/browse_thread/thread/ec7737c291ce4572/142590b8985b1b20?lnk=gst&q=user-agent+permutations#142590b8985b1b20
+
 === Outbound variable M2_REPO ===
 
 Set M2_REPO to eclipse in Preferences > Java > Build Path > Classpath Variable (normally to /home/youruser/.m2/repository/)

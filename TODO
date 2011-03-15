@@ -11,6 +11,20 @@ TODO-list for kune -*- mode: org; -*-
    Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** TODO WIAB History integration
+HistorySupport.java
+WaverefEncoder.java
+  /**
+   * Takes a path segment which includes the domain and wave ID,and optionally
+   * the wavelet domain + ID and the blip ID, and converts it to a waveref
+   * object. Further tokens after 5 are silently ignored. Examples of valid URI
+   * path segments are: example.com/w+abcd example.com/w+abcd/~/conv+root
+   * example.com/w+abcd/~/conv+root/b+45kg
+   *
+   * @param path The path containing the domain and wave ID.
+   * @return The corresponding WaveRef object, or null if the path was invalid.
+   * @throws InvalidWaveRefException If the path contains less than 2 tokens or 3 tokens.
+   */
 ** TODO Server side extensions configuration menu
 A way to specify the default extensions in a client of a wave server.
 ** TODO style injection: 
