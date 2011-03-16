@@ -56,6 +56,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     @ProxyCodeSplit
     public interface SignInProxy extends Proxy<SignInPresenter> {
     }
+
     private final EventBus eventBus;
     private final Provider<Register> registerProvider;
     private final TimerWrapper timer;
@@ -188,6 +189,10 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
             getView().setErrorMessage("Error in login", NotifyLevel.error);
             Log.error("Other kind of exception in SignInPresenter/doLogin");
         }
+    }
+
+    public void setErrorMessage(String message, NotifyLevel level) {
+        getView().setErrorMessage(message, level);
     }
 
     @Override

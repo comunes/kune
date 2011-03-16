@@ -25,6 +25,8 @@ import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -38,12 +40,14 @@ public class SiteTokenListeners {
     private final Provider<Register> register;
     private final Provider<SignIn> signIn;
     private final Provider<StateManager> stateManager;
+    private final EventBus eventBus;
 
     @Inject
     public SiteTokenListeners(final Session session, final EventBus eventBus,
             final Provider<StateManager> stateManager, final Provider<SignIn> signIn,
             final Provider<Register> register, final Provider<NewGroup> newGroup,
             final Provider<AboutKuneDialog> aboutKuneDialog) {
+        this.eventBus = eventBus;
         this.stateManager = stateManager;
         this.signIn = signIn;
         this.register = register;
@@ -59,6 +63,12 @@ public class SiteTokenListeners {
     }
 
     private void init() {
+        stateManager.get().addSiteToken(SiteCommonTokens.HOME, new HistoryTokenCallback() {
+            @Override
+            public void onHistoryToken() {
+                SpaceSelectEvent.fire(eventBus, Space.homeSpace);
+            }
+        });
         stateManager.get().addSiteToken(SiteCommonTokens.SIGNIN, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {

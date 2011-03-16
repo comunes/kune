@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client.auth;
 
+import cc.kune.common.client.noti.NotifyLevel;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SignIn {
@@ -28,5 +30,7 @@ public interface SignIn {
     void hide();
 
     void showSignInDialog();
+
+    void setErrorMessage(String message, NotifyLevel level);
 
 }

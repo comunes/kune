@@ -30,6 +30,8 @@ import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.SocialNetworkChangedEvent.SocialNetworkChangedHandler;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
@@ -59,8 +61,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private final Session session;
     private final HashMap<String, HistoryTokenCallback> siteTokens;
 
-    // private final SpaceSelectorPresenter spaceSelector;
-
     @Inject
     public StateManagerDefault(final ContentCache contentProvider, final Session session, final HistoryWrapper history,
             final EventBus eventBus) {
@@ -68,7 +68,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.contentProvider = contentProvider;
         this.session = session;
         this.history = history;
-        // this.spaceSelector = spaceSelector;
         this.previousToken = null;
         this.resumedToken = null;
         siteTokens = new HashMap<String, HistoryTokenCallback>();
@@ -176,6 +175,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                     // Non wave token
                     onHistoryChanged(new StateToken(historyToken));
                 } else {
+                    SpaceSelectEvent.fire(eventBus, Space.userSpace);
                     // Wave token
                     // spaceSelector.onUserSpaceSelect();
                     if (session.isNotLogged()) {

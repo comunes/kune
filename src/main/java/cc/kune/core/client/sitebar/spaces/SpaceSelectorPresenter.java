@@ -19,17 +19,18 @@
  */
 package cc.kune.core.client.sitebar.spaces;
 
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.UserSignInEvent;
+import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -38,14 +39,13 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
 public class SpaceSelectorPresenter extends
-        Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> implements
-        SpaceSelectorUiHandlers {
+        Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> {
 
     @ProxyCodeSplit
     public interface SpaceSelectorProxy extends Proxy<SpaceSelectorPresenter> {
     }
 
-    public interface SpaceSelectorView extends View, HasUiHandlers<SpaceSelectorUiHandlers> {
+    public interface SpaceSelectorView extends View {
 
         void setGroupBtnDown(boolean down);
 
@@ -60,6 +60,8 @@ public class SpaceSelectorPresenter extends
     private final I18nTranslationService i18n;
     private final Session session;
     private final Provider<SignIn> signIn;
+    private Space currentSpace;
+    private boolean nextUserSpace;
 
     @Inject
     public SpaceSelectorPresenter(final EventBus eventBus, final SpaceSelectorView view,
@@ -70,7 +72,41 @@ public class SpaceSelectorPresenter extends
         this.session = session;
         this.signIn = sigIn;
         this.i18n = i18n;
-        getView().setUiHandlers(this);
+        nextUserSpace = false;
+    }
+
+    @ProxyEvent
+    public void onUserSignIn(UserSignInEvent event) {
+        if (nextUserSpace) {
+            onUserSpaceSelect();
+            nextUserSpace = false;
+        }
+    }
+
+    @ProxyEvent
+    public void onUserSignOut(UserSignOutEvent event) {
+        if (currentSpace == Space.groupSpace)
+            onGroupSpaceSelect();
+    }
+
+    @ProxyEvent
+    public void onSpaceSelect(SpaceSelectEvent event) {
+        switch (event.getSpace()) {
+        case homeSpace:
+            onHomeSpaceSelect();
+            break;
+        case userSpace:
+            onUserSpaceSelect();
+            break;
+        case groupSpace:
+            onGroupSpaceSelect();
+            break;
+        case publicSpace:
+            onPublicSpaceSelect();
+            break;
+        default:
+            break;
+        }
     }
 
     @ProxyEvent
@@ -79,48 +115,53 @@ public class SpaceSelectorPresenter extends
         getView().setUserBtnDown(false);
         getView().setGroupBtnDown(false);
         getView().setPublicBtnDown(false);
-        onGroupSpaceSelect();
+        onHomeSpaceSelect();
     }
 
-    @Override
-    public void onGroupSpaceSelect() {
+    private void onGroupSpaceSelect() {
         armor.selectGroupSpace();
         getView().setHomeBtnDown(false);
         getView().setUserBtnDown(false);
         getView().setGroupBtnDown(true);
         getView().setPublicBtnDown(false);
+        currentSpace = Space.groupSpace;
+        nextUserSpace = false;
     }
 
-    @Override
-    public void onHomeSpaceSelect() {
+    private void onHomeSpaceSelect() {
         armor.selectHomeSpace();
         getView().setHomeBtnDown(true);
         getView().setUserBtnDown(false);
         getView().setGroupBtnDown(false);
         getView().setPublicBtnDown(false);
+        currentSpace = Space.homeSpace;
+        nextUserSpace = false;
     }
 
-    @Override
-    public void onPublicSpaceClick() {
+    private void onPublicSpaceSelect() {
         armor.selectPublicSpace();
         getView().setHomeBtnDown(false);
         getView().setUserBtnDown(false);
         getView().setGroupBtnDown(false);
         getView().setPublicBtnDown(true);
+        currentSpace = Space.publicSpace;
+        nextUserSpace = false;
     }
 
-    @Override
-    public void onUserSpaceSelect() {
+    private void onUserSpaceSelect() {
         if (session.isLogged()) {
             armor.selectUserSpace();
             getView().setHomeBtnDown(false);
             getView().setUserBtnDown(true);
             getView().setGroupBtnDown(false);
             getView().setPublicBtnDown(false);
+            currentSpace = Space.userSpace;
+            nextUserSpace = false;
         } else {
             signIn.get().showSignInDialog();
             getView().setUserBtnDown(false);
-            NotifyUser.info(i18n.t("Sign in to access to your workspace"));
+            signIn.get().setErrorMessage("Sign in to access to your workspace", NotifyLevel.info);
+            nextUserSpace = true;
         }
     }
 

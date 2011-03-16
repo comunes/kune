@@ -20,11 +20,14 @@
 package cc.kune.core.client.sitebar.spaces;
 
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
+import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -32,9 +35,9 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.gwtplatform.mvp.client.ViewImpl;
 
-public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHandlers> implements SpaceSelectorView {
+public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView {
     interface SpaceSelectorViewImplUiBinder extends UiBinder<Widget, SpaceSelectorViewImpl> {
     }
     private static SpaceSelectorViewImplUiBinder uiBinder = GWT.create(SpaceSelectorViewImplUiBinder.class);
@@ -49,9 +52,13 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
 
     @UiField
     ToggleButton userButton;
+    private final StateManager stateManager;
+    private final EventBus eventBus;
 
     @Inject
-    public SpaceSelectorViewImpl(final WsArmor armor, final I18nTranslationService i18n) {
+    public SpaceSelectorViewImpl(final WsArmor armor, final I18nTranslationService i18n, StateManager stateManager, EventBus eventBus) {
+        this.stateManager = stateManager;
+        this.eventBus = eventBus;
         armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
         homeButton.setTitle(i18n.t("Home page of this site"));
         userButton.setTitle(i18n.t("User space: Waves (docs) in which you participate"));
@@ -66,22 +73,22 @@ public class SpaceSelectorViewImpl extends ViewWithUiHandlers<SpaceSelectorUiHan
 
     @UiHandler("groupButton")
     void onGroupSpaceClick(final ClickEvent event) {
-        getUiHandlers().onGroupSpaceSelect();
-    }
+        SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+     }
 
     @UiHandler("homeButton")
     void onHomeSpaceClick(final ClickEvent event) {
-        getUiHandlers().onHomeSpaceSelect();
+        stateManager.gotoToken(SiteCommonTokens.HOME);
     }
 
     @UiHandler("publicButton")
     void onPublicSpaceClick(final ClickEvent event) {
-        getUiHandlers().onPublicSpaceClick();
+        SpaceSelectEvent.fire(eventBus, Space.publicSpace);
     }
 
     @UiHandler("userButton")
     void onUserSpaceClick(final ClickEvent event) {
-        getUiHandlers().onUserSpaceSelect();
+        SpaceSelectEvent.fire(eventBus, Space.userSpace);
     }
 
     @Override

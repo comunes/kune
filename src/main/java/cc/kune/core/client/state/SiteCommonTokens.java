@@ -21,15 +21,16 @@ package cc.kune.core.client.state;
 
 /**
  * Some common history tokens like {@link #SIGNIN} and {@link #NEWGROUP}
- * 
+ *
  */
 public final class SiteCommonTokens {
     public static final String ABOUTKUNE = "about";
-    public final static String HOME = "";
+    public final static String GROUP_HOME = "";
     public final static String NEWGROUP = "newgroup";
     public final static String REGISTER = "register";
     public final static String SIGNIN = "signin";
     public final static String TRANSLATE = "translate";
+    public final static String HOME = "home";
 
     private SiteCommonTokens() {
     }

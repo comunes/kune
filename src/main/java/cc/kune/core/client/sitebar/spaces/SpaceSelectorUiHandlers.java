@@ -28,5 +28,5 @@ public interface SpaceSelectorUiHandlers extends UiHandlers {
 
     void onGroupSpaceSelect();
 
-    void onPublicSpaceClick();
+    void onPublicSpaceSelect();
 }

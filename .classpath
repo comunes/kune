@@ -118,5 +118,10 @@
 			<attribute name="javadoc_location" value="file:/home/vjrj/bin/eclipse64-hel-new/plugins/com.google.gwt.eclipse.sdkbundle.2.1.1_2.1.1.v201012170127/gwt-2.1.1/doc/javadoc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/kune-0.0.7/WEB-INF/classes"/>
 </classpath>

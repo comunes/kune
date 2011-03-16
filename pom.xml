@@ -11,6 +11,8 @@
   <properties>
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
     <gwt.version>2.1.1</gwt.version>
+    <!-- <gwtmaven.version>2.2.0</gwtmaven.version> -->
+    <gwtmaven.version>2.1.0-1</gwtmaven.version>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -724,7 +726,7 @@
         </executions>
         <configuration>
           <mainClass>cc.kune.wave.server.WaveMain</mainClass>
-					<commandlineArgs>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8001</commandlineArgs>
+          <commandlineArgs>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8001</commandlineArgs>
           <systemProperties>
             <systemProperty>
               <key>wave.server.config</key>
@@ -903,11 +905,11 @@
         <!-- =roo -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
-        <version>2.1.0-1</version>
+        <version>${gwtmaven.version}</version>
         <configuration>
+          <compileReport>true</compileReport>
           <logLevel>INFO</logLevel>
           <style>OBF</style>
-          <soyc>false</soyc>
           <gwtVersion>${gwt.version}</gwtVersion>
           <runTarget>/ws/ws.html?log_level=DEBUG</runTarget>
           <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
@@ -930,18 +932,18 @@
             </goals>
           </execution>
         </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.google.gwt</groupId>
-                        <artifactId>gwt-dev</artifactId>
-                        <version>${gwt.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.google.gwt</groupId>
-                        <artifactId>gwt-user</artifactId>
-                        <version>${gwt.version}</version>
-                    </dependency>
-                </dependencies>
+        <dependencies>
+          <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>deb-maven-plugin</artifactId>
         <version>1.0-SNAPSHOT</version> <configuration> <description>kune free/open/libre
@@ -1121,6 +1123,18 @@
   </build>
   <reporting>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>${gwtmaven.version}</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>compile-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
