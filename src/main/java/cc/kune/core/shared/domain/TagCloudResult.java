@@ -19,6 +19,7 @@
  */
 package cc.kune.core.shared.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -29,6 +30,7 @@ public class TagCloudResult implements IsSerializable {
     private int minValue;
 
     public TagCloudResult() {
+        this(new ArrayList<TagCount>(), 0, 0);
     }
 
     public TagCloudResult(final List<TagCount> tagCountList, final int maxValue, final int minValue) {

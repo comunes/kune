@@ -34,11 +34,12 @@ public class TagsSummaryPanel extends ViewImpl implements TagsSummaryView {
 
     private final FlowPanel flowPanel;
     private final I18nTranslationService i18n;
+    private FlowPanel mainPanel;
 
     @Inject
     public TagsSummaryPanel(final I18nTranslationService i18n, final WsArmor ws) {
         this.i18n = i18n;
-        FlowPanel mainPanel = new FlowPanel();
+        mainPanel = new FlowPanel();
         flowPanel = new FlowPanel();
         flowPanel.setWidth("100%");
         Label header = new Label(i18n.t("Tags"));
@@ -74,11 +75,11 @@ public class TagsSummaryPanel extends ViewImpl implements TagsSummaryView {
 
     @Override
     public void setVisible(boolean visible) {
-        flowPanel.setVisible(visible);
+        mainPanel.setVisible(visible);
     }
 
     @Override
     public Widget asWidget() {
-        return flowPanel;
+        return mainPanel;
     }
 }

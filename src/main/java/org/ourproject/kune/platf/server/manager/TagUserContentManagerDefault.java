@@ -75,7 +75,11 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
     @Override
     public TagCloudResult getTagCloudResultByGroup(final Group group) {
-        return new TagCloudResult(getSummaryByGroup(group), getMaxCount(group), getMinCount(group));
+        try {
+            return new TagCloudResult(getSummaryByGroup(group), getMaxCount(group), getMinCount(group));
+        } catch (NoResultException e) {
+            return new TagCloudResult();
+        }
     }
 
     @Override
