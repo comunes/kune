@@ -167,11 +167,11 @@ public class SitebarActionsPresenter extends
         right.addAction(newGroupLink.get());
         right.addAction(separator);
         right.addAction(OPTIONS_MENU);
-        right.addAction(reportBugs);
         right.addAction(gotoKuneDevSite);
+        right.addAction(reportBugs);
+        right.addAction(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
         right.addAction(menuSeparator);
         right.addAction(new MenuItemDescriptor(OPTIONS_MENU, wavePowered));
-        right.addAction(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
 
     }
 

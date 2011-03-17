@@ -62,18 +62,15 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     }
 
     private int getMaxCount(final Group group) {
-        // return finder.getMaxGrouped(group);
-        return 0;
+        return finder.getMaxGrouped(group).intValue();
     }
 
     private int getMinCount(final Group group) {
-        // return finder.getMinGrouped(group);
-        return 0;
+        return finder.getMinGrouped(group).intValue();
     }
 
     private List<TagCount> getSummaryByGroup(final Group group) {
-        return new ArrayList<TagCount>();
-        // return finder.getTagsGroups(group);
+        return finder.getTagsGroups(group);
     }
 
     @Override

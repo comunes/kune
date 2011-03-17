@@ -41,10 +41,10 @@ public interface TagUserContentFinder {
     public List<Tag> findTags(@Named("user") final User user, @Named("content") final Content content);
 
     @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) ASC LIMIT 0,1")
-    public int getMaxGrouped(@Named("group") final Group group);
+    public Long getMaxGrouped(@Named("group") final Group group);
 
     @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) DESC LIMIT 0,1")
-    public int getMinGrouped(@Named("group") final Group group);
+    public Long getMinGrouped(@Named("group") final Group group);
 
     @Finder(query = "SELECT NEW cc.kune.core.shared.domain.TagCount(t.name, COUNT(tuc.content.id)) "
             + "FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group "

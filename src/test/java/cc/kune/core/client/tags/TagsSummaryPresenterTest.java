@@ -17,22 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.tags;
+package cc.kune.core.client.tags;
 
 import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.workspace.client.search.SiteSearcher;
 
+import cc.kune.core.client.state.EventBusTester;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.tags.TagsSummaryPresenter.TagsSummaryProxy;
+import cc.kune.core.client.tags.TagsSummaryPresenter.TagsSummaryView;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
 import cc.kune.core.shared.dto.StateContainerDTO;
-
-import com.calclab.suco.client.ioc.Provider;
 
 public class TagsSummaryPresenterTest {
 
@@ -44,12 +44,12 @@ public class TagsSummaryPresenterTest {
     public void before() {
         final Session session = Mockito.mock(Session.class);
         final StateManager stateManager = Mockito.mock(StateManager.class);
-        final SiteSearcher searcher = Mockito.mock(SiteSearcher.class);
-        final Provider searcherProvider = Mockito.mock(Provider.class);
-        Mockito.when(searcherProvider.get()).thenReturn(searcher);
+        // final SiteSearcher searcher = Mockito.mock(SiteSearcher.class);
+        TagsSummaryProxy proxy = Mockito.mock(TagsSummaryProxy.class);
+        // Mockito.when(searcherProvider.get()).thenReturn(searcher);
         view = Mockito.mock(TagsSummaryView.class);
-        tagsSummaryPresenter = new TagsSummaryPresenter(session, searcherProvider, stateManager);
-        tagsSummaryPresenter.init(view);
+        EventBusTester eventBus = new EventBusTester();
+        tagsSummaryPresenter = new TagsSummaryPresenter(eventBus, view, proxy, session, stateManager);
     }
 
     @Test

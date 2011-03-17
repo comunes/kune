@@ -24,13 +24,13 @@ import java.util.List;
 
 import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.tags.TagsSummary;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
 
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.tags.TagsSummary;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;

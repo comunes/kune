@@ -89,6 +89,8 @@ import cc.kune.core.client.state.SessionDefault;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateManagerDefault;
+import cc.kune.core.client.tags.TagsSummaryPanel;
+import cc.kune.core.client.tags.TagsSummaryPresenter;
 import cc.kune.core.client.ui.footer.license.EntityLicensePanel;
 import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.core.client.ws.CorePresenter;
@@ -115,7 +117,7 @@ public class CoreGinModule extends AbstractPresenterModule {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.google.gwt.inject.client.AbstractGinModule#configure()
      */
     @Override
@@ -135,16 +137,13 @@ public class CoreGinModule extends AbstractPresenterModule {
                 SpinerPresenter.SpinerProxy.class);
         bindPresenter(UserNotifierPresenter.class, UserNotifierPresenter.UserNotifierView.class,
                 UserNotifierViewImpl.class, UserNotifierProxy.class);
-
         bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
                 SpaceSelectorViewImpl.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);
         bindPresenter(SiteLogoPresenter.class, SiteLogoPresenter.SiteLogoView.class, SiteLogoViewImpl.class,
                 SiteLogoPresenter.SiteLogoProxy.class);
-
         bindPresenter(SitebarActionsPresenter.class, SitebarActionsPresenter.SitebarActionsView.class,
                 SitebarActionsPanel.class, SitebarActionsPresenter.SitebarActionsProxy.class);
         bind(SitebarActions.class).to(SitebarActionsPresenter.class).in(Singleton.class);
-
         bindPresenter(NewGroupPresenter.class, NewGroupView.class, NewGroupPanel.class,
                 NewGroupPresenter.NewGroupProxy.class);
         bindPresenter(GroupSNPresenter.class, GroupSNPresenter.GroupSNView.class, GroupSNPanel.class,
@@ -155,11 +154,15 @@ public class CoreGinModule extends AbstractPresenterModule {
                 EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
         bindPresenter(EntityHeaderPresenter.class, EntityHeaderPresenter.EntityHeaderView.class,
                 EntityHeaderPanel.class, EntityHeaderPresenter.EntityHeaderProxy.class);
-
-        bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class, SignInPresenter.SignInProxy.class);
         bindPresenter(RegisterPresenter.class, RegisterView.class, RegisterPanel.class,
                 RegisterPresenter.RegisterProxy.class);
+        bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class, UserConfirmPanel.class,
+                UserConfirmPresenter.UserConfirmProxy.class);
+        bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class, TagsSummaryPanel.class,
+                TagsSummaryPresenter.TagsSummaryProxy.class);
+
+        bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
         bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
         bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
@@ -167,8 +170,6 @@ public class CoreGinModule extends AbstractPresenterModule {
 
         bind(UserMessagesPresenter.class).in(Singleton.class);
         bind(UserMessagesPanel.class).in(Singleton.class);
-        bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class, UserConfirmPanel.class,
-                UserConfirmPresenter.UserConfirmProxy.class);
 
         // bind(MessagePanelView.class).to(MessagePanel.class);
 

@@ -329,7 +329,8 @@ a:visited {
 
 .gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger {
     background-color: white;
-    background: url("images/spliter-top.png") no-repeat scroll center bottom white;
+    background: url("images/spliter-top.png") no-repeat scroll center bottom
+        white;
     cursor: col-resize;
 }
 
@@ -398,12 +399,12 @@ a:visited {
     padding: 1px 7px 0 0 !important;
 }
 
-.k-sitebar-wave-status, .k-sitebar-wave-status-online {
-  color: red;
+.k-sitebar-wave-status,.k-sitebar-wave-status-online {
+    color: red;
 }
 
-.k-sitebar-wave-status, .k-sitebar-wave-status-offline {
-  color: green;
+.k-sitebar-wave-status,.k-sitebar-wave-status-offline {
+    color: green;
 }
 
 .k-sitebar button:hover {
@@ -974,79 +975,91 @@ font-size:small;
 }
 
 .k-sn-join {
-  float:left;
+    float: left;
 }
 
 .k-entitytextlogo-border {
-  border: 2px solid #F2F2F2;
+    border: 2px solid #F2F2F2;
 }
 
 .k-entitytextlogo-no-border {
-  border: none;
+    border: none;
 }
 
 .k-entitytextlogo {
-  height: 60px;
-  margin: 5px;
-  overflow: hidden;
-  width: 468px;
+    height: 60px;
+    margin: 5px;
+    overflow: hidden;
+    width: 468px;
 }
 
 .k-entitytextlogo table {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 .k-elogo-l-l {
-  font-size: 46px;
+    font-size: 46px;
 }
 
 .k-elogo-l-m {
-  font-size: 167%;
+    font-size: 167%;
 }
 
 .k-elogo-l-s {
-  font-size: 108%;
+    font-size: 108%;
 }
 
 .k-entitytextlogo .gwt-Label {
-  font-weight: 700;
-  margin: 5px;
-  height: 27px;
+    font-weight: 700;
+    margin: 5px;
+    height: 27px;
 }
 
 .k-entitytextlogo-default .gwt-Label {
-  color: #69312F;
+    color: #69312F;
 }
 
 .k-entitytextlogo-green .gwt-Label {
-  color: #250;
+    color: #250;
 }
 
 .k-entitytextlogo-blue .gwt-Label {
-  color: #000080;
+    color: #000080;
 }
 
 .k-entitytextlogo-grey .gwt-Label {
-  color: #1A1A1A;
+    color: #1A1A1A;
 }
 
 .k-entitytextlogo-purple .gwt-Label {
-  color: #440055;
+    color: #440055;
 }
 
 .k-entitytextlogo-red .gwt-Label {
-  color: #800000;
+    color: #800000;
 }
 
 .k-elogo-plink {
-  color: #CCC;
-  font-size: 85%;
-  margin: 5px;
-  text-decoration: underline;
-  white-space: nowrap;
-  background-color: #FFF;
+    color: #CCC;
+    font-size: 85%;
+    margin: 5px;
+    text-decoration: underline;
+    white-space: nowrap;
+    background-color: #FFF;
 }
 
 .k-elogop-expand {
-  background-color: transparent;
+    background-color: transparent;
+}
+
+.k-tsp-tag {
+    float: left;
+    padding: 3px;
+    cursor: pointer;
+    color: #5B4683;
+}
+
+.k-tsp-cloud {
+    line-height: 1.5em;
+    text-align: center;
 }

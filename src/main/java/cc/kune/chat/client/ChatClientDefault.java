@@ -292,7 +292,7 @@ public class ChatClientDefault implements ChatClient {
         final HtmlConfig htmlConfig = HtmlConfig.getFromMeta();
         config.dockConfig.headerSize = 0;
         config.dockConfig.rosterWidth = 150;
-        config.dockConfig.rosterDock = "right";
+        config.dockConfig.rosterDock = "left";
         final KuneHablarWidget widget = new KuneHablarWidget(config.layout, config.tabHeaderSize);
         final Hablar hablar = widget.getHablar();
         HablarComplete.install(hablar, config);

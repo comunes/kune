@@ -44,6 +44,7 @@ import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.tags.TagsSummaryPresenter;
 import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
@@ -107,6 +108,8 @@ public interface KuneGinjector extends Ginjector {
     ProxyFailureHandler getProxyFailureHandler();
 
     AsyncProvider<PSpacePresenter> getPSpacePresenter();
+
+    AsyncProvider<TagsSummaryPresenter> getTagsSummaryPresenter();
 
     AsyncProvider<RegisterPresenter> getRegisterPresenter();
 

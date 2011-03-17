@@ -17,18 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.tags;
+package cc.kune.core.client.tags;
 
-import org.ourproject.kune.platf.client.View;
+import cc.kune.core.shared.domain.TagCloudResult;
 
-public interface TagsSummaryView extends View {
+public interface TagsSummary {
 
-    void addTag(String name, Long count, String style);
-
-    void clear();
-
-    void expand();
-
-    void setVisible(boolean visible);
+    void setGroupTags(TagCloudResult tagCloud);
 
 }

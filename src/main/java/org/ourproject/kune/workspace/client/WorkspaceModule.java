@@ -168,9 +168,6 @@ import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPane
 import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLinkPresenter;
 import org.ourproject.kune.workspace.client.skel.ActionCntCtxToolbarPanel;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.tags.TagsSummary;
-import org.ourproject.kune.workspace.client.tags.TagsSummaryPanel;
-import org.ourproject.kune.workspace.client.tags.TagsSummaryPresenter;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.themes.WsBackManagerImpl;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
@@ -212,6 +209,7 @@ import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.tags.TagsSummary;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateTokenUtils;
 import cc.kune.core.shared.dto.UserSimpleDTO;
@@ -592,17 +590,17 @@ public class WorkspaceModule extends AbstractExtendedModule {
         // }
         // });
 
-        register(ApplicationComponentGroup.class, new Factory<TagsSummary>(TagsSummary.class) {
-            @Override
-            public TagsSummary create() {
-                final TagsSummaryPresenter presenter = new TagsSummaryPresenter(i(Session.class),
-                        p(SiteSearcher.class), i(StateManager.class));
-                final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i(I18nUITranslationService.class),
-                        i(WorkspaceSkeleton.class));
-                presenter.init(panel);
-                return presenter;
-            }
-        });
+//        register(ApplicationComponentGroup.class, new Factory<TagsSummary>(TagsSummary.class) {
+//            @Override
+//            public TagsSummary create() {
+//                final TagsSummaryPresenter presenter = new TagsSummaryPresenter(i(Session.class),
+//                        p(SiteSearcher.class), i(StateManager.class));
+//                final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i(I18nUITranslationService.class),
+//                        i(WorkspaceSkeleton.class));
+//                presenter.init(panel);
+//                return presenter;
+//            }
+//        });
 
         register(ApplicationComponentGroup.class, new Factory<NoHomePage>(NoHomePage.class) {
             @Override

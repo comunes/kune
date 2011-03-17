@@ -17,64 +17,80 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.workspace.client.tags;
+package cc.kune.core.client.tags;
 
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.search.SiteSearcher;
-import org.ourproject.kune.workspace.client.search.SiteSearcherType;
-
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateChangedEvent;
+import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.calclab.suco.client.events.Listener;
-import com.calclab.suco.client.ioc.Provider;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.EventBus;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
-public class TagsSummaryPresenter implements TagsSummary {
+public class TagsSummaryPresenter extends
+        Presenter<TagsSummaryPresenter.TagsSummaryView, TagsSummaryPresenter.TagsSummaryProxy> implements TagsSummary {
+
+    public interface TagsSummaryView extends View {
+        void addTag(String name, Long count, String style, ClickHandler clickHandler);
+
+        void clear();
+
+        void setVisible(boolean visible);
+    }
+
+    @ProxyCodeSplit
+    public interface TagsSummaryProxy extends Proxy<TagsSummaryPresenter> {
+    }
 
     private static final int MINSIZE = 11;
     private static final int MAXSIZE = 26;
 
-    private TagsSummaryView view;
-    private final Provider<SiteSearcher> searcherProvider;
-    private final Session session;
+    @Override
+    protected void revealInParent() {
+        RevealRootContentEvent.fire(this, this);
+    }
 
-    public TagsSummaryPresenter(final Session session, final Provider<SiteSearcher> searcherProvider,
+    @Inject
+    public TagsSummaryPresenter(EventBus eventBus, TagsSummaryView view, TagsSummaryProxy proxy, final Session session,
             final StateManager stateManager) {
-        this.session = session;
-        this.searcherProvider = searcherProvider;
-        stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
-            public void onEvent(final StateAbstractDTO state) {
+        super(eventBus, view, proxy);
+        stateManager.onStateChanged(true, new StateChangedHandler() {
+            @Override
+            public void onStateChanged(StateChangedEvent event) {
+                StateAbstractDTO state = event.getState();
                 if (state instanceof StateContainerDTO) {
                     setState((StateContainerDTO) state);
                 } else {
-                    view.setVisible(false);
+                    getView().setVisible(false);
                 }
             }
         });
     }
 
     public void doSearchTag(final String name) {
-        searcherProvider.get().doSearchOfType(
-                "group:" + session.getCurrentState().getGroup().getShortName() + " tag:" + name,
-                SiteSearcherType.content);
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void init(final TagsSummaryView view) {
-        this.view = view;
+        // searcherProvider.get().doSearchOfType(
+        // "group:" + session.getCurrentState().getGroup().getShortName() +
+        // " tag:" + name,
+        // SiteSearcherType.content);
+        NotifyUser.info("Searcher in development");
     }
 
     public void setGroupTags(final TagCloudResult tagCloud) {
         setCloud(tagCloud);
-        view.expand();
+        getView().setVisible(true);
     }
 
     // @PMD:REVIEWED:DefaultPackage: by vjrj on 27/05/09 3:13
@@ -82,22 +98,28 @@ public class TagsSummaryPresenter implements TagsSummary {
         if (state.getTagCloudResult() != null && state.getTagCloudResult().getTagCountList().size() > 0) {
             Log.debug(state.getTagCloudResult().toString());
             setCloud(state.getTagCloudResult());
+            getView().setVisible(true);
         } else {
-            view.setVisible(false);
+            getView().setVisible(false);
         }
     }
 
     private void setCloud(final TagCloudResult tagCloudResult) {
         // Inspired in snippet http://www.bytemycode.com/snippets/snippet/415/
-        view.clear();
+        getView().clear();
         final int max = tagCloudResult.getMaxValue();
         final int min = tagCloudResult.getMinValue();
         final int diff = max - min;
         final int step = (MAXSIZE - MINSIZE) / (diff == 0 ? 1 : diff);
         for (final TagCount tagCount : tagCloudResult.getTagCountList()) {
+            final String name = tagCount.getName();
             final int size = Math.round((MINSIZE + (tagCount.getCount().floatValue() - min) * step));
-            view.addTag(tagCount.getName(), tagCount.getCount(), "kune-ft" + size + "px");
+            getView().addTag(name, tagCount.getCount(), "kune-ft" + size + "px", new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    doSearchTag(name);
+                }
+            });
         }
-        view.setVisible(true);
     }
 }

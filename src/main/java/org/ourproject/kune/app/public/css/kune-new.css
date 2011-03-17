@@ -813,18 +813,6 @@
   overflow: hidden;
 }
 
-.k-tsp-tag {
-  float: left;
-  padding: 3px;
-  cursor: pointer;
-  color: #0000FF;
-}
-
-.k-tsp-cloud {
-  line-height: 1.5em;
-  text-align: center;
-}
-
 .k-link-icon {
   background-image: url(img/link.gif) !important;
 }
