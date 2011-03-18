@@ -26,10 +26,12 @@ import org.ourproject.kune.platf.integration.HttpServletRequestMocked;
 import org.ourproject.kune.platf.server.init.FinderRegistry;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.authentication.AccountStoreHolder;
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
+import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.wave.server.CustomSettingsBinder;
 
@@ -50,8 +52,9 @@ public abstract class TestHelper {
             final Injector injector = Guice.createInjector(CustomSettingsBinder.bindSettings(
                     TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
             final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
-            final Injector childInjector = injector.createChildInjector(wavePersistModule,
-                    FinderRegistry.init(new JpaPersistModule(persistenceUnit)), module, new Module() {
+            final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
+            final Injector childInjector = injector.createChildInjector(wavePersistModule, new ServerModule(false),
+                    federationModule, FinderRegistry.init(new JpaPersistModule(persistenceUnit)), module, new Module() {
                         @Override
                         public void configure(final Binder binder) {
                             binder.bindScope(SessionScoped.class, Scopes.SINGLETON);

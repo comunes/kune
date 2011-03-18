@@ -40,6 +40,7 @@ import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 
+import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -95,7 +96,14 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         }
         final PasswordDigest passwdDigest = new PasswordDigest(passwd.toCharArray());
 
-        createWaveAccount(shortName, passwdDigest);
+        try {
+            createWaveAccount(shortName, passwdDigest);
+        } catch (UserRegistrationException e) {
+            if (finder.getByShortName(shortName) != null)
+                throw new GroupNameInUseException();
+            else
+                throw e;
+        }
         // if (userPropGroup == null) {
         // userPropGroup = propGroupManager.find(User.PROPS_ID);
         // }

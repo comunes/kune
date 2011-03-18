@@ -4,23 +4,9 @@
 
 '''Note:''' Please edit trunk/DEV-GUIDE instead of this wiki page.
 
-==Get in touch==
-
-===Mailing lists===
-
-We use mainly two lists:
-* [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-devel kune-devel] for all development related topics
-* [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-commits kune-commits] where the svn sends the commit logs and summaries
-
-It's recommended to be subscribed to both if you want to participate in the development.
-
-===Twitter/identica===
-
-Follow @kuneproject in twitter and @kune in identica. 
-
 ==Development Environment==
 
-===Initial steps for get a Dev environment===
+===Initial steps===
 
 Install some basic tools (if don't have it). In debian and derivatives:
 
@@ -30,11 +16,11 @@ and Java 6:
 
  sudo apt-get install openjdk-6-jdk 
 
-Note: we use subversion for our code, maven for ints dependencies, and Wave in a box (WIAB) uses mercurial. Also you will need a modern browser like firefox or chromium, and some extensions to live happier:
+Note: we use subversion for our code, maven for its dependencies, and Wave In a Box (WIAB) uses mercurial. Also you will need a modern browser like firefox or chromium, and some extensions to live happier:
 
 http://ourproject.org/moin/Contributors#Recommended_Firefox_Extensions
 
-the previous page has also other more general information (texts and references) the interest for contributors.
+the previous page has also other more general information (texts and references) of interest for contributors.
 
 ===Get the code: How to checkout the Kune code===
 
@@ -60,6 +46,8 @@ The Eclipse IDE has several plugins for SVN (subversive, and subclipse) and it's
 http://www.eclipse.org/downloads/
 
 Ensure Eclipse is configured to use Java 1.6.
+
+Of course, you can use other IDEs (and please help us to improve this doc in this case).
 
 ===Optional maven-eclipse integration ===
 
@@ -89,19 +77,20 @@ From the Eclipse Marketplace (Help > Eclipse Marketplace) install:
 * Google Plugin for Eclipse https://code.google.com/intl/en/eclipse/docs/getting_started.html
 * Subversive or Subclipse
 
-====Some recomended & suggested plugins for Eclipse==== 
+====Some other recomended & suggested plugins for Eclipse==== 
 
 Also from the Marketplace:
 
+* The GWT Designer GUI Builder plugin (a great helper to work with GWT UiBinder)
 * The PMD Eclipse plugin
 * The FindBugs plugin
-* The GWT Designer GUI Builder plugin
-* The Mylyn Trac Connector (to integrate our trac issues system from http://kune.ourproject.org/issues/)
+* The Mylyn Trac Connector (to integrate our trac issues system: http://kune.ourproject.org/issues/)
 
 Also maybe it's interesting some other plugins like:
+
 * Quick Junit
 * JUnitHelper
-* AnyEditTools (for remove tabs and so on)
+* AnyEditTools (to remove tabs and so on)
 * MercurialEclipse (if you wanna play with the WIAB code)
 
 ====Other eclipse info====
@@ -115,11 +104,11 @@ Install Kune (follow the trunk/INSTALL file instructions) and run Kune for the f
 
 ===GWT's Hosted Mode===
 
-FIXME (this is outdated) For start the hosted mode, you can both execute from command line:
+To start the hosted mode, you can both execute the launch 'kune client -no-server' from your Eclipse or run from command line:
 
- mvn gwt-maven:gwt
+ mvn gwt:run
 
-Also, you can generate a hosted mode launch configuration in eclipse. We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /ws/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
+You can create a custom launch also at "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.DevMode", with this program arguments (or similar): "-noserver -out gwt-out /ws/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
 * gwt-dev-[linux|mac|windows].jar (Add External Jar and choose it from your gwt installation directory)
 * java - /kune/src/main
 * kune (default classpath)
@@ -361,3 +350,17 @@ In Java, something like this (you can put your name instead of "Kune team" if yo
  *
  */
 </pre> 
+
+==Get in touch==
+
+===Mailing lists===
+
+We use mainly two lists:
+* [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-devel kune-devel] for all development related topics
+* [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-commits kune-commits] where the svn sends the commit logs and summaries
+
+It's recommended to be subscribed to both if you want to participate in the development.
+
+===Twitter/identica===
+
+Follow @kuneproject in twitter and @kune in identica. 

@@ -31,7 +31,9 @@ import org.ourproject.kune.platf.server.init.FinderRegistry;
 import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.wiki.server.WikiServerModule;
 import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
+import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.wave.server.CustomSettingsBinder;
 
@@ -51,11 +53,11 @@ public class IntegrationTestHelper {
             injector = Guice.createInjector(CustomSettingsBinder.bindSettings(TestConstants.WAVE_TEST_PROPFILE,
                     CoreSettings.class));
             final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
-
+            final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
             final Injector childInjector = injector.createChildInjector(wavePersistModule,
                     FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)),
-                    new PlatformServerModule(), new DocumentServerModule(), new ChatServerModule(),
-                    new WikiServerModule(), new AbstractModule() {
+                    new PlatformServerModule(), new DocumentServerModule(), new ChatServerModule(), new ServerModule(
+                            false), federationModule, new WikiServerModule(), new AbstractModule() {
                         @Override
                         protected void configure() {
                             bindScope(SessionScoped.class, Scopes.SINGLETON);
