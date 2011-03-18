@@ -1,25 +1,12 @@
 =Kune developer's guide=
 
-''This is the trunk/DEV-GUIDE file (must have the same content as the [http://kune.ourproject.org/wiki/index.php?title=Kune_developer's_guide wiki page])''
+''This is the trunk/DEV-GUIDE file (must have the same content that this [http://kune.ourproject.org/wiki/index.php?title=Kune_developer's_guide wiki page])''. 
 
-==How to checkout the code of kune==
+'''Note:''' Please edit trunk/DEV-GUIDE instead of this wiki page.
 
-Our code is in the svn of ourproject.
-  http://ourproject.org/scm/?group_id=407
+==Get in touch==
 
-===Anonymous Subversion Access===
-
-This project's SVN repository can be checked out through anonymous access with the following command(s).
-
- svn checkout svn://scm.ourproject.org/svnroot/kune/trunk
-
-===Developer Subversion Access via SSH===
-
-Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute colaborator with the proper values. Enter your ourproject web password when prompted.
-
- svn checkout svn+ssh://colaborator@scm.ourproject.org/svnroot/kune/trunk
-
-== Mailing lists==
+===Mailing lists===
 
 We use mainly two lists:
 * [https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-devel kune-devel] for all development related topics
@@ -27,7 +14,126 @@ We use mainly two lists:
 
 It's recommended to be subscribed to both if you want to participate in the development.
 
-==Some relevant docs for kune development==
+===Twitter/identica===
+
+Follow @kuneproject in twitter and @kune in identica. 
+
+==Development Environment==
+
+===Initial steps for get a Dev environment===
+
+Install some basic tools (if don't have it). In debian and derivatives:
+
+ sudo apt-get install subversion maven2 mercurial 
+
+and Java 6:
+
+ sudo apt-get install openjdk-6-jdk 
+
+Note: we use subversion for our code, maven for ints dependencies, and Wave in a box (WIAB) uses mercurial. Also you will need a modern browser like firefox or chromium, and some extensions to live happier:
+
+http://ourproject.org/moin/Contributors#Recommended_Firefox_Extensions
+
+the previous page has also other more general information (texts and references) the interest for contributors.
+
+===Get the code: How to checkout the Kune code===
+
+Our code is in the svn of ourproject: 
+http://ourproject.org/scm/?group_id=407
+
+====Anonymous Subversion Access====
+
+This project's SVN repository can be checked out through anonymous access with the following command(s).
+
+ svn checkout svn://scm.ourproject.org/svnroot/kune/trunk
+
+====Developer Subversion Access via SSH====
+
+Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute colaborator with the proper values. Enter your ourproject web password when prompted.
+
+ svn checkout svn+ssh://colaborator@scm.ourproject.org/svnroot/kune/trunk
+
+The Eclipse IDE has several plugins for SVN (subversive, and subclipse) and it's hightly recomended to use it, because the get rid of file/package renaming and other refactorization.
+
+===Next step: install Eclipse===
+
+http://www.eclipse.org/downloads/
+
+Ensure Eclipse is configured to use Java 1.6.
+
+===Optional maven-eclipse integration ===
+
+Check:
+http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN.txt
+
+===Eclipse configuration===
+
+Running (in the trunk directory):
+
+ mvn eclipse:eclipse 
+
+generates .project and download necessary code jars. Then you can import the project in eclipse (File > Import > Existing Projects into Workspace). 
+
+Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/youruser/.m2/repository).
+
+===UTF 8===
+
+The charset used in Kune is UTF8. In Eclipse, check the text-file enconding in Package Explorer > Preferences > Resource > Text file encoding.
+
+Please don't send patchs in other charsets.
+
+====Some mandatory plugins for Eclipse====
+
+From the Eclipse Marketplace (Help > Eclipse Marketplace) install:
+
+* Google Plugin for Eclipse https://code.google.com/intl/en/eclipse/docs/getting_started.html
+* Subversive or Subclipse
+
+====Some recomended & suggested plugins for Eclipse==== 
+
+Also from the Marketplace:
+
+* The PMD Eclipse plugin
+* The FindBugs plugin
+* The GWT Designer GUI Builder plugin
+* The Mylyn Trac Connector (to integrate our trac issues system from http://kune.ourproject.org/issues/)
+
+Also maybe it's interesting some other plugins like:
+* Quick Junit
+* JUnitHelper
+* AnyEditTools (for remove tabs and so on)
+* MercurialEclipse (if you wanna play with the WIAB code)
+
+====Other eclipse info====
+
+Useful info about GWT and Eclipse (interesting if you have problems with number of files open or with the memory use):
+http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
+
+===Install Kune===
+
+Install Kune (follow the trunk/INSTALL file instructions) and run Kune for the first time. This will initialize the database, or configure the XMPP server, for instance.
+
+===GWT's Hosted Mode===
+
+FIXME (this is outdated) For start the hosted mode, you can both execute from command line:
+
+ mvn gwt-maven:gwt
+
+Also, you can generate a hosted mode launch configuration in eclipse. We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /ws/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
+* gwt-dev-[linux|mac|windows].jar (Add External Jar and choose it from your gwt installation directory)
+* java - /kune/src/main
+* kune (default classpath)
+
+If you have memory problems running the hosted mode, increase it in VM arguments:
+ -Xmx1024M
+
+before run hosted mode compile once with:
+ mvn compile && mvn gwt:compile
+and deploy with:
+ script/deploy_gwt.sh 
+and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT). This is quite useful to put breakpoints in the server code.
+
+==Some relevant docs for Kune development==
 
 See this files in trunk directory:
 
@@ -41,12 +147,12 @@ If you are interested in the db schema:
 * trunk/img/kune-hibernate-diagram-oct-08.png
 but is more easy to look in the Java classes of package cc.kune.domain
 
-* [http://kune.ourproject.org/2009/01/status-jan09/ Video/presentation of kune]
+* [http://kune.ourproject.org/2009/01/status-jan09/ Video/presentation of Kune]
 * trunk/img/kune-diagram-part1-0.1.png # old diagrams but a good summary
 * trunk/img/kune-diagram-part2-0.1.png 
 * trunk/img/kune-diagram-part3-0.1.png 
 
-==Languages and frameworks used in kune development==
+==Languages and frameworks used in Kune development==
 
 ===Java===
 
@@ -100,7 +206,7 @@ For content indexing, we use Lucene. We usually use [http://www.hibernate.org/hi
 
 ----
 
-====Suco====
+====GIN====
 
 [https://code.google.com/p/google-gin/ Gin] is the IoC library that we use for GWT. For more documentation see [https://code.google.com/p/google-gin/wiki/GinTutorial the Gin tutorial]. See also our Guice section above.
 
@@ -158,65 +264,10 @@ for instance:
 this generates four classes GroupOptions (the external interface), GroupOptionsPresenter (the Presenter with the business logic, the part you must test well), the GroupOptionsView (the interface to the panel, the UI code), the GroupOptionsPanel (the UI code, here all the gwt UI stuff). Also gives you in the standard output a sample code to use suco in a module to build these objects.
 * IoC: as we described before we use guice and suco for IoC. Again, see HelloWorldModule class for a very simple sample of gwt module using suco.
 
-==Development Environment==
-
-===Prerequisite: Install maven and Eclipse ===
-
-Install maven2. In debian system and derivatives "apt-get install maven2"
-
-http://www.eclipse.org/downloads/
-
-Ensure Eclipse is configured to use Java 1.6.
-
-===Optional maven-eclipse integration ===
-
-Check:
-http://google-web-toolkit.googlecode.com/svn/trunk/samples/expenses/README-MAVEN.txt
-
-===Prerequisite: Install kune===
-
-Install kune (see trunk/INSTALL file) and run kune for the first time.
-
-===Eclipse configuration===
-
-Running (in the trunk directory):
-
- mvn eclipse:eclipse 
-
-generates .project and download necessary code jars. Then you can import the project in eclipse (File > Import > Existing Projects into Workspace). 
-
-Also you have to set the variable M2_REPO (Eclipse Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case /home/youruser/.m2/repository).
-
-Is recommended that you use the PMD plugin:
-http://pmd.sourceforge.net/
-http://pmd.sourceforge.net/eclipse/
-
-Useful info about gwt and Eclipse:
-http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
-
-===GWT's Hosted Mode===
-
-FIXME (this is outdated) For start the hosted mode, you can both execute from command line:
-
- mvn gwt-maven:gwt
-
-Also, you can generate a hosted mode launch configuration in eclipse. We have a "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.GWTShell", with this program arguments (or similar): "-noserver -out gwt-out /ws/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
-* gwt-dev-[linux|mac|windows].jar (Add External Jar and choose it from your gwt installation directory)
-* java - /kune/src/main
-* kune (default classpath)
-
-If you have memory problems running the hosted mode, increase it in VM arguments:
- -Xmx1024M
-
-before run hosted mode compile once with:
- mvn compile && mvn gwt:compile
-and deploy with:
- script/deploy_gwt.sh 
-and then we run jetty (with "script/server.sh" also you can run server in debug mode, see TROUBLESHOOT). This is quite useful to put breakpoints in the server code.
 
 ==Code preferences==
 
-We use some eclipse code preferences for kune project:
+We use some eclipse code preferences for Kune project:
  dev-utils/kune.cleanup.eclipse.preferences.xml
  dev-utils/kune.formatter.eclipse.preferences.xml
 please use it if you want to contribute.
@@ -244,7 +295,7 @@ More than the eclipse code preferences we try to:
 
 ==Use of mylyn in eclipse==
 
-We recommend to use mylyn to track the kune issues. Use the trac mylyn connector for http://kune.ourproject.org/issues/.
+We recommend to use mylyn to track the Kune issues. Use the trac mylyn connector for http://kune.ourproject.org/issues/.
 
 ==Code samples==
 
@@ -271,7 +322,7 @@ then, put good descriptions on your changes in svn commit comments.
 
 Attach the following notices to each source of the program at the begining:
 <pre>
-    (c) 2007-2011 The kune development team (see CREDITS for details)
+    (c) 2007-2011 The Kune development team (see CREDITS for details)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -287,13 +338,13 @@ Attach the following notices to each source of the program at the begining:
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 </pre>
 
-In Java, something like this (you can put your name instead of "kune team" if you create new files):
+In Java, something like this (you can put your name instead of "Kune team" if you create new files):
 
 <pre>
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
- * This file is part of kune.
+ * Copyright (C) 2007-2011 The Kune development team (see CREDITS for details)
+ * This file is part of Kune.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as

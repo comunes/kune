@@ -39,7 +39,7 @@ public class SignInForm extends DefaultForm {
         super.addStyleName("kune-Margin-Large-trbl");
 
         loginNickOrEmailField = new TextField<String>();
-        loginNickOrEmailField.setFieldLabel(i18n.t("Nickname or email"));
+        loginNickOrEmailField.setFieldLabel(i18n.t("Nickname"));
         loginNickOrEmailField.setName(NICKOREMAIL_FIELD);
         loginNickOrEmailField.setWidth(DEF_SMALL_FIELD_WIDTH);
         loginNickOrEmailField.setAllowBlank(false);

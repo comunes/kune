@@ -1,24 +1,12 @@
 =INSTALL=
 
-==Production instructions==
-
-With 
-  mvn package 
-an executable target/kune-VERSION.one-jar.jar is generated in target directory.
-
-==Development instructions==
+==Development environment instructions==
 
 ===Prerrequisites===
 
-- Install java-jdk (>=6), maven2, mysql (> 5.0) and for example eclipse
-- Install gwt >= 2.1.1 (recommended via Eclipse GWT plugin https://code.google.com/intl/en/eclipse/docs/getting_started.html)
+* Install java-jdk (>=6), maven2, mysql (> 5.0) and eclipse (well, this depends on what IDE do you use for development). In debian and derivatives:
 
-=== Wave in a Box ===
-
-Follow "Configure Your XMPP Server" from:
-https://sites.google.com/a/waveprotocol.org/wave-protocol/code/installation
-and:
-https://sites.google.com/a/waveprotocol.org/wave-protocol/federation/openfire-installation
+ sudo apt-get install subversion maven2 mercurial openjdk-6-jdk mysql-server
 
 ===MYSQL configuration===
 
@@ -30,7 +18,9 @@ You have to configure mysql to support UTF8 by editing your c:\Windows\my.ini or
 default-character-set=utf8
 default-collation=utf8_bin
 
-After this modification you have to restart the mysql database.
+After this modification you have to restart the mysql database. In debian systems:
+
+/etc/init.d/mysql restart
 
 Optionalilly, you can also configure this per table (do it after the db creation) :
 
@@ -53,21 +43,15 @@ CREATE DATABASE kune_openfire;
 GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'PUT_HERE_A_DB_PASSWD';
 FLUSH PRIVILEGES;
 
+Of course, change PUT_HERE_A_DB_PASSWD with something different.
+
 ===Source code===
 
-- Compile with maven:
+See the DEVGUIDE for instructions of how to download the Kune code.
+
+Compile with maven:
  # (in the trunk directory)
  mvn compile -Dliquibase.should.run=false && mvn gwt:compile
-
-- Copy the target to src directory (only for test):
- ./script/deploy_gwt.sh
-
-====Aditional info for W$ users====
-
-If you're using windows as dev plaftorm... you will have to write your own script ;). the idea is to copy everything from target/kune-0.0.VERSIONHERE/org.ourproject.kune.app.Kune to src/main/webapp/gwt/org.ourproject.kune.app.Kune)
-
-FIXME
-Caution! windows users: you should have a symbolic link from <trunk>/src/main/rails/publicspace to <trunk>/src/main/webapp/WEB-INF/publicspace
 
 ===Configure upload directory===
 
@@ -91,7 +75,14 @@ do the same with every persistence unit defined inside.
 
 ===Run openfire jabber server===
 
-Install and run a openfire jabber server (see Appendix A for proper configuration of openfire) or ejabberd.
+Install and run a openfire jabber server (see Appendix A for proper configuration of openfire).
+
+===Wave in a Box===
+
+Follow "Configure Your XMPP Server" from:
+https://sites.google.com/a/waveprotocol.org/wave-protocol/code/installation
+and:
+https://sites.google.com/a/waveprotocol.org/wave-protocol/federation/openfire-installation
 
 ===Install jmagick===
 
@@ -128,14 +119,22 @@ or running:
 
 Open your browser and connect to http://yourIP:8080/kune
 
-===Appendix A: Configuration of Openfire xmpp server===
+==Production environment instructions==
 
-Install openfire in your system.
+With 
+  mvn package 
+an executable target/kune-VERSION.one-jar.jar is generated in target directory.
+
+==Appendix A: Configuration of Openfire xmpp server==
+
+Install openfire in your system: http://www.igniterealtime.org/downloads/index.jsp
+
+In debian and derivatives, to install the .deb its highly recomended.
 
 Currently only openfire xmpp server is supported (due database dependencies). Ejabberd support in progress.
 
 Works in most of the openfire server versions after 3.5.1.
-See emite (our xmpp software) Server Compatibility: http://code.google.com/p/emite/wiki/ServerCompatibility
+See emite (our xmpp software) Server Compatibility: https://code.google.com/p/emite/wiki/ServerAndClientsCompatibility
 
 Connect to openfire administration: http://localhost:9090/
 
