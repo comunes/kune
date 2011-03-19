@@ -65,11 +65,6 @@
       <url>http://maven.jahia.org/maven2/</url>
     </repository>
     <repository>
-      <id>ext-gxt</id>
-      <name>ext-gxt at jahia</name>
-      <url>http://maven.jahia.org/maven2/</url>
-    </repository>
-    <repository>
       <id>cobogw</id>
       <name>Cobogw repository at googlecode</name>
       <url>http://cobogw.googlecode.com/svn/maven2</url>
@@ -296,11 +291,6 @@
       <version>1.6.0</version>
     </dependency>
     <!-- utilities -->
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.14</version>
-    </dependency>
     <dependency>
       <groupId>net.sf.dozer</groupId>
       <artifactId>dozer</artifactId>
@@ -910,7 +900,7 @@
           <compileReport>true</compileReport>
           <logLevel>INFO</logLevel>
           <style>OBF</style>
-					<noServer>true</noServer>
+          <noServer>true</noServer>
           <gwtVersion>${gwt.version}</gwtVersion>
           <runTarget>/ws/ws.html?log_level=DEBUG</runTarget>
           <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
