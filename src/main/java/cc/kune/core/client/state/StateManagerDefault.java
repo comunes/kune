@@ -173,6 +173,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                 // Is a Wave token?
                 if (historyToken == null || HistorySupport.waveRefFromHistoryToken(historyToken) == null) {
                     // Non wave token
+                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
                     onHistoryChanged(new StateToken(historyToken));
                 } else {
                     SpaceSelectEvent.fire(eventBus, Space.userSpace);
@@ -188,6 +189,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                     // Starting with some token like "signin": load defContent
                     // also
                     onHistoryChanged("");
+                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
                 }
                 tokenListener.onHistoryToken();
             }

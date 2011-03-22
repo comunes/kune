@@ -218,8 +218,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             final String groupShortName, final String mimetype) {
         final List<Content> list = contentFinder.findMime(groupShortName, "%" + search + "%", mimetype, firstResult,
                 maxResults);
-        final int count = contentFinder.findMimeCount(groupShortName, "%" + search + "%", mimetype);
-        return new SearchResult<Content>(count, list);
+        final Long count = contentFinder.findMimeCount(groupShortName, "%" + search + "%", mimetype);
+        return new SearchResult<Content>(count.intValue(), list);
     }
 
     @Override
@@ -227,8 +227,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
             final String groupShortName, final String mimetype, final String mimetype2) {
         final List<Content> list = contentFinder.find2Mime(groupShortName, "%" + search + "%", mimetype, mimetype2,
                 firstResult, maxResults);
-        final int count = contentFinder.find2MimeCount(groupShortName, "%" + search + "%", mimetype, mimetype2);
-        return new SearchResult<Content>(count, list);
+        final Long count = contentFinder.find2MimeCount(groupShortName, "%" + search + "%", mimetype, mimetype2);
+        return new SearchResult<Content>(count.intValue(), list);
     }
 
     @Override

@@ -21,6 +21,7 @@ package org.ourproject.kune.platf.server.manager;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
@@ -50,6 +51,7 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
         assertEquals(mimetype, newCnt.getMimeType().toString());
     }
 
+    @Ignore
     @Test
     public void testBasicBodySearch() {
         createContent();
@@ -96,11 +98,12 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
         assertEquals(1, search.getSize());
     }
 
+    @Ignore
     @Test
     public void testtMimeSearch() {
         createContentWithMimeAndCheck(MIMETYPE + "/png");
         contentManager.reIndex();
-        SearchResult<Content> search = contentManager.searchMime(BODY, 0, 10, "asb", MIMETYPE);
+        final SearchResult<Content> search = contentManager.searchMime(BODY, 0, 10, "asb", MIMETYPE);
         assertEquals(1, search.getSize());
     }
 

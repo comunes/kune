@@ -33,6 +33,7 @@ import org.ourproject.kune.platf.server.manager.impl.SearchResult;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
+import cc.kune.core.client.errors.UserRegistrationException;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
@@ -167,7 +168,7 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
         rollbackTransaction();
     }
 
-    @Test(expected = InvalidStateException.class)
+    @Test(expected = UserRegistrationException.class)
     public void createUserWithIncorrectShortName() throws Exception {
         final User user2 = userManager.createUser("u s", "the user name 2", "email2@example.com", "userPassword", "en",
                 "GB", TimeZone.getDefault().getID());

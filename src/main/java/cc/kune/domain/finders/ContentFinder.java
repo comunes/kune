@@ -41,7 +41,7 @@ public interface ContentFinder {
             @FirstResult final int offset, @MaxResults final int limit);
 
     @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND (mimeType.mimetype=:mimetype OR mimeType.mimetype=:mimetype2) AND container.owner.shortName=:group AND deletedOn=null")
-    public int find2MimeCount(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
+    public Long find2MimeCount(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
             @Named(MIMETYPE) final String mimetype, @Named("mimetype2") final String mimetype2);
 
     @Finder(query = "SELECT count(*) from Container ctx, Content ctn where ctn.container.id = ctx.id and ctx = :container and ctn.lastRevision.title LIKE :title")
@@ -52,6 +52,6 @@ public interface ContentFinder {
             @Named(MIMETYPE) final String mimetype, @FirstResult final int offset, @MaxResults final int limit);
 
     @Finder(query = "SELECT count(id) FROM Content WHERE lastRevision.title LIKE :title AND mimeType.mimetype=:mimetype AND container.owner.shortName=:group AND deletedOn=null")
-    public int findMimeCount(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
+    public Long findMimeCount(@Named(GROUP) final String groupShortName, @Named(TITLE) final String title,
             @Named(MIMETYPE) final String mimetype);
 }

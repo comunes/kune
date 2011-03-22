@@ -75,6 +75,8 @@ public class RateFinderTest extends PersistencePreLoadedDataTest {
         user1.setCountry(gb);
         user2.setCountry(gb);
 
+        entityManager.persist(user1.getUserGroup());
+        entityManager.persist(user2.getUserGroup());
         entityManager.persist(user1);
         entityManager.persist(user2);
 
@@ -85,6 +87,7 @@ public class RateFinderTest extends PersistencePreLoadedDataTest {
 
         entityManager.persist(new Rate(user1, cd, 1.3));
         entityManager.persist(new Rate(user2, cd, 3.3));
+
         // same user and content other rate
         final Rate rateFinded = rateFinder.find(user2, cd);
         rateFinded.setValue(4.3);

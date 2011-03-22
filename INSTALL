@@ -79,10 +79,11 @@ Install and run a openfire jabber server (see Appendix A for proper configuratio
 
 ===Wave in a Box===
 
-Follow "Configure Your XMPP Server" from:
+Follow "Federation configuration" from:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/code/installation
 and:
 https://sites.google.com/a/waveprotocol.org/wave-protocol/federation/openfire-installation
+if you want to use Kune in production and federate with other Wave capable servers.
 
 ===Install jmagick===
 
@@ -124,6 +125,26 @@ Open your browser and connect to http://yourIP:8080/kune
 With 
   mvn package 
 an executable target/kune-VERSION.one-jar.jar is generated in target directory.
+
+===Apache proxy===
+
+You can configure your Apache with this kind of virtual host
+<VirtualHost *:80>
+    ServerName youkune.example.com
+
+    ProxyRequests Off
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+
+    ProxyPass / http://localhost:8080/
+    ProxyPassReverse / http://localhost:8080/
+    <Location />
+        Order allow,deny
+        Allow from all
+    </Location>
+</VirtualHost>
 
 ==Appendix A: Configuration of Openfire xmpp server==
 

@@ -38,7 +38,10 @@ import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
 import org.ourproject.kune.platf.server.manager.UserManager;
 import org.ourproject.kune.platf.server.properties.ChatProperties;
+import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
+import org.waveprotocol.box.server.persistence.AccountStore;
+import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
@@ -54,14 +57,17 @@ import cc.kune.wave.server.CustomUserRegistrationServlet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
     private final I18nCountryManager countryManager;
+    private final String domain;
     private final UserFinder finder;
     private final I18nTranslationService i18n;
     private final I18nLanguageManager languageManager;
     private final ChatProperties properties;
+    private final AccountStore waveAccountStore;
     // private final PropertiesManager propManager;
     private final CustomUserRegistrationServlet waveUserRegister;
     private final XmppManager xmppManager;
@@ -70,7 +76,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     public UserManagerDefault(final Provider<EntityManager> provider, final UserFinder finder,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
             final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n,
-            final CustomUserRegistrationServlet waveUserRegister) {
+            final CustomUserRegistrationServlet waveUserRegister, final AccountStore waveAccountStore,
+            @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
         super(provider, User.class);
         this.finder = finder;
         this.languageManager = languageManager;
@@ -79,6 +86,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         this.properties = properties;
         this.i18n = i18n;
         this.waveUserRegister = waveUserRegister;
+        this.waveAccountStore = waveAccountStore;
+        this.domain = domain;
     }
 
     @Override
@@ -98,21 +107,37 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
         try {
             createWaveAccount(shortName, passwdDigest);
-        } catch (UserRegistrationException e) {
-            if (finder.getByShortName(shortName) != null)
-                throw new GroupNameInUseException();
-            else
+        } catch (final UserRegistrationException e) {
+            try {
+                if (finder.getByShortName(shortName) != null) {
+                    throw new GroupNameInUseException();
+                } else {
+                    // Other kind of exception
+                    throw e;
+                }
+            } catch (final NoResultException e2) {
+                // Other kind of exception
                 throw e;
+            }
         }
         // if (userPropGroup == null) {
         // userPropGroup = propGroupManager.find(User.PROPS_ID);
         // }
         // final Properties userProp = new Properties(userPropGroup);
         // propManager.persist(userProp);
-        final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
-                passwdDigest.getSalt(), language, country, tz);
-        return user;
-
+        try {
+            final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
+                    passwdDigest.getSalt(), language, country, tz);
+            return user;
+        } catch (final RuntimeException e) {
+            try {
+                // Try to remove wave account
+                waveAccountStore.removeAccount(ParticipantId.of(shortName + ParticipantId.DOMAIN_PREFIX + domain));
+            } catch (final Exception e2) {
+                throw e;
+            }
+            throw e;
+        }
     }
 
     @Override
