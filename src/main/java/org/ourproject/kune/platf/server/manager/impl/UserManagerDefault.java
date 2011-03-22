@@ -20,6 +20,7 @@
 package org.ourproject.kune.platf.server.manager.impl;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -33,6 +34,7 @@ import org.apache.lucene.search.Query;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.packet.RosterPacket.ItemType;
 import org.ourproject.kune.chat.server.managers.ChatConnection;
+import org.ourproject.kune.chat.server.managers.ChatException;
 import org.ourproject.kune.chat.server.managers.XmppManager;
 import org.ourproject.kune.platf.server.manager.I18nCountryManager;
 import org.ourproject.kune.platf.server.manager.I18nLanguageManager;
@@ -178,9 +180,18 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         final UserBuddiesData buddiesData = new UserBuddiesData();
 
         final User user = finder.getByShortName(shortName);
-        final ChatConnection connection = xmppManager.login(user.getShortName() + domain, user.getPassword(), "kserver");
-        final Collection<RosterEntry> roster = xmppManager.getRoster(connection);
-        xmppManager.disconnect(connection);
+        Collection<RosterEntry> roster;
+        try {
+            final ChatConnection connection = xmppManager.login(user.getShortName() + domain, user.getPassword(),
+                    "kserver");
+            roster = xmppManager.getRoster(connection);
+            xmppManager.disconnect(connection);
+        } catch (final ChatException e) {
+            // Seems that it not possible to get the buddy list, then we follow
+            // with a empty buddy list
+            log.error("Cannot retrieve the buddie list", e);
+            roster = new HashSet<RosterEntry>();
+        }
         for (final RosterEntry entry : roster) {
             if (entry.getType().equals(ItemType.both)) {
                 // only show buddies with subscription 'both'
