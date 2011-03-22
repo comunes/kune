@@ -56,8 +56,7 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
         this.finder = finder;
     }
 
-    @Override
-    public List<Tag> find(final User user, final Content content) {
+    List<Tag> find(final User user, final Content content) {
         return finder.findTags(user, content);
     }
 
@@ -77,22 +76,22 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     public TagCloudResult getTagCloudResultByGroup(final Group group) {
         try {
             return new TagCloudResult(getSummaryByGroup(group), getMaxCount(group), getMinCount(group));
-        } catch (NoResultException e) {
+        } catch (final NoResultException e) {
             return new TagCloudResult();
         }
     }
 
     @Override
     public String getTagsAsString(final User user, final Content content) {
-        String tagConcatenated = "";
+        final StringBuffer tagConcatenated = new StringBuffer();
         if (user.getId() != null) {
             // FIXME: User must be persisted (this fails on tests)
             final List<Tag> tags = find(user, content);
             for (final Tag tag : tags) {
-                tagConcatenated += " " + tag.getName();
+                tagConcatenated.append(" ").append(tag.getName());
             }
         }
-        return tagConcatenated.replaceFirst(" ", "");
+        return tagConcatenated.toString().replaceFirst(" ", "");
     }
 
     @Override

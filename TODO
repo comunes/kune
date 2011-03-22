@@ -4,14 +4,29 @@ TODO-list for kune -*- mode: org; -*-
 #+SEQ_TODO: TODO danigb samer vjrj FEEDBACK VERIFY | FIXED CANCELED WONTFIX
 
 * Intro
+  In this file we normally write things TODO but also some notes, brainstorming, ideas, debug outputs, etc. Is fast a complement of our issues system: http://kune.ourproject.org/issues/
+   We use org-mode in emacs to easy manage this file
+
 ** Symbols
    <nick> or <n> == reported by / commented by
    nick == assigned to
-** Notes
-   Use org-mode in emacs to easy manage this file
 
 * SHORT-TERM (URGENT)
+** TODO Use Jenkins in dev machine (reoconfigure hostname and put link in web)
 ** TODO WIAB History integration
+*** Initial defpage #home
+**** u: if logged: wave list (#inbox) else: signin
+**** g: def project
+**** p: idem
+*** #example.com/w+abcd
+**** u: if logged: this wave else: signin and return to this
+**** g: equivalent group page? no, only with a button-action
+**** p: idem
+*** #site.doc.1
+**** u: if logged: wave list else signin (or also a button-action to go to open in the user-list)
+**** g: group content
+**** p: idem
+*** Some javadoc:
 HistorySupport.java
 WaverefEncoder.java
   /**
@@ -24,7 +39,7 @@ WaverefEncoder.java
    * @param path The path containing the domain and wave ID.
    * @return The corresponding WaveRef object, or null if the path was invalid.
    * @throws InvalidWaveRefException If the path contains less than 2 tokens or 3 tokens.
-   */
+     */
 ** TODO Server side extensions configuration menu
 A way to specify the default extensions in a client of a wave server.
 ** TODO style injection: 

@@ -39,7 +39,7 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
     @Inject
     TagUserContentFinder finder;
     @Inject
-    TagUserContentManager manager;
+    TagUserContentManagerDefault manager;
 
     private Tag tag;
     @Inject

@@ -19,6 +19,8 @@
  */
 package cc.kune.domain.finders;
 
+import javax.persistence.NoResultException;
+
 import org.junit.Test;
 import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
 
@@ -29,8 +31,9 @@ public class TagUserContentFinderTest extends PersistencePreLoadedDataTest {
     @Inject
     TagUserContentFinder tag;
 
-    @Test
-    public void test() {
+    @Test(expected = NoResultException.class)
+    public void testNoTags() {
         tag.getTagsGroups(groupManager.getSiteDefaultGroup());
     }
+
 }
