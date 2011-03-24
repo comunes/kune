@@ -30,7 +30,6 @@ import org.ourproject.kune.blogs.client.cnt.BlogViewerView;
 import org.ourproject.kune.blogs.client.ctx.BlogContext;
 import org.ourproject.kune.blogs.client.ctx.BlogContextPresenter;
 import org.ourproject.kune.platf.client.app.ToolGroup;
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
@@ -44,17 +43,18 @@ import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLi
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
-import org.ourproject.kune.workspace.client.tool.ToolSelector;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.tool.ToolSelector;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;

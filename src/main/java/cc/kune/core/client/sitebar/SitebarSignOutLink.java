@@ -25,6 +25,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.core.client.auth.WaveClientSimpleAuthenticator;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.SessionExpiredEvent;
@@ -40,7 +41,6 @@ import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.wave.client.WaveClientSimpleAuthenticator;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;

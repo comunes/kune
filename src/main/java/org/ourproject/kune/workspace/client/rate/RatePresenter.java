@@ -19,8 +19,8 @@
  \*/
 package org.ourproject.kune.workspace.client.rate;
 
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.dto.StateAbstractDTO;

@@ -85,27 +85,31 @@ public class SpaceSelectorPresenter extends
 
     @ProxyEvent
     public void onUserSignOut(UserSignOutEvent event) {
-        if (currentSpace == Space.groupSpace)
-            onGroupSpaceSelect();
+        if (currentSpace == Space.userSpace)
+            nextUserSpace = false;
+            onHomeSpaceSelect();
     }
 
     @ProxyEvent
     public void onSpaceSelect(SpaceSelectEvent event) {
-        switch (event.getSpace()) {
-        case homeSpace:
-            onHomeSpaceSelect();
-            break;
-        case userSpace:
-            onUserSpaceSelect();
-            break;
-        case groupSpace:
-            onGroupSpaceSelect();
-            break;
-        case publicSpace:
-            onPublicSpaceSelect();
-            break;
-        default:
-            break;
+        Space space = event.getSpace();
+        if (space != currentSpace) {
+            switch (space) {
+            case homeSpace:
+                onHomeSpaceSelect();
+                break;
+            case userSpace:
+                onUserSpaceSelect();
+                break;
+            case groupSpace:
+                onGroupSpaceSelect();
+                break;
+            case publicSpace:
+                onPublicSpaceSelect();
+                break;
+            default:
+                break;
+            }
         }
     }
 

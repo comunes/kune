@@ -19,21 +19,21 @@
  */
 package org.ourproject.kune.docs.client;
 
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
-import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
-import org.ourproject.kune.workspace.client.tool.ToolSelector;
+import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.tool.ToolSelector;
 
-public class DocumentClientTool extends FoldableAbstractClientTool {
+public class DocumentClientTool extends OldFoldableAbstractClientTool {
     public static final String NAME = "docs";
     public static final String TYPE_ROOT = NAME + "." + "root";
     public static final String TYPE_FOLDER = NAME + "." + "folder";
     public static final String TYPE_DOCUMENT = NAME + "." + "doc";
-    public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
-    public static final String TYPE_WAVE = NAME + "." + FoldableAbstractClientTool.WAVE_SUFFIX;
+    public static final String TYPE_UPLOADEDFILE = NAME + "." + OldFoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
+    public static final String TYPE_WAVE = NAME + "." + OldFoldableAbstractClientTool.WAVE_SUFFIX;
 
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,

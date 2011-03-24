@@ -57,10 +57,10 @@ public interface StateManager {
     @Deprecated
     void onStateChanged(Listener<StateAbstractDTO> listener);
 
+    void onToolChanged(boolean fireNow, ToolChangedEvent.ToolChangedHandler handler);
+
     @Deprecated
     void onToolChanged(Listener2<String, String> listener);
-
-    void onToolChanged(ToolChangedEvent.ToolChangedHandler handler);
 
     void reload();
 

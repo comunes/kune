@@ -27,9 +27,6 @@ import org.ourproject.kune.platf.client.actions.ui.SimpleGuiItem;
 import org.ourproject.kune.platf.client.app.ApplicationComponentGroup;
 import org.ourproject.kune.platf.client.app.GroupOptionsCollection;
 import org.ourproject.kune.platf.client.app.UserOptionsCollection;
-import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.registry.RenamableRegistry;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
@@ -48,7 +45,6 @@ import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCh
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
 import org.ourproject.kune.workspace.client.cnt.ActionContentToolbarPresenter;
-import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
@@ -181,8 +177,6 @@ import org.ourproject.kune.workspace.client.title.EntityTitle;
 import org.ourproject.kune.workspace.client.title.EntityTitlePanel;
 import org.ourproject.kune.workspace.client.title.EntityTitlePresenter;
 import org.ourproject.kune.workspace.client.title.RenameAction;
-import org.ourproject.kune.workspace.client.tool.ToolSelector;
-import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenter;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 import org.ourproject.kune.workspace.client.upload.FileUploaderDialog;
 import org.ourproject.kune.workspace.client.upload.FileUploaderPresenter;
@@ -195,6 +189,10 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.registry.AuthorableRegistry;
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.registry.ContentIconsRegistry;
+import cc.kune.core.client.registry.RenamableRegistry;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -590,17 +588,20 @@ public class WorkspaceModule extends AbstractExtendedModule {
         // }
         // });
 
-//        register(ApplicationComponentGroup.class, new Factory<TagsSummary>(TagsSummary.class) {
-//            @Override
-//            public TagsSummary create() {
-//                final TagsSummaryPresenter presenter = new TagsSummaryPresenter(i(Session.class),
-//                        p(SiteSearcher.class), i(StateManager.class));
-//                final TagsSummaryPanel panel = new TagsSummaryPanel(presenter, i(I18nUITranslationService.class),
-//                        i(WorkspaceSkeleton.class));
-//                presenter.init(panel);
-//                return presenter;
-//            }
-//        });
+        // register(ApplicationComponentGroup.class, new
+        // Factory<TagsSummary>(TagsSummary.class) {
+        // @Override
+        // public TagsSummary create() {
+        // final TagsSummaryPresenter presenter = new
+        // TagsSummaryPresenter(i(Session.class),
+        // p(SiteSearcher.class), i(StateManager.class));
+        // final TagsSummaryPanel panel = new TagsSummaryPanel(presenter,
+        // i(I18nUITranslationService.class),
+        // i(WorkspaceSkeleton.class));
+        // presenter.init(panel);
+        // return presenter;
+        // }
+        // });
 
         register(ApplicationComponentGroup.class, new Factory<NoHomePage>(NoHomePage.class) {
             @Override
@@ -927,14 +928,16 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(Singleton.class, new Factory<ToolSelector>(ToolSelector.class) {
-            @Override
-            public ToolSelector create() {
-                final ToolSelectorPresenter presenter = new ToolSelectorPresenter(i(StateManager.class),
-                        i(WsThemeManager.class));
-                return presenter;
-            }
-        });
+        // register(Singleton.class, new
+        // Factory<ToolSelector>(ToolSelector.class) {
+        // @Override
+        // public ToolSelector create() {
+        // final ToolSelectorPresenter presenter = new
+        // ToolSelectorPresenter(i(StateManager.class),
+        // i(WsThemeManager.class));
+        // return presenter;
+        // }
+        // });
 
         register(Singleton.class, new Factory<LanguageSelector>(LanguageSelector.class) {
             @Override

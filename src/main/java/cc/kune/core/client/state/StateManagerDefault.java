@@ -102,18 +102,16 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     private void checkGroupAndToolChange(final StateAbstractDTO newState) {
-        final String previousGroup = getPreviousGroup();
         final String newGroup = newState.getStateToken().getGroup();
-        final String previousTokenTool = previousToken == null ? "" : previousToken.getTool();
-        final String newTokenTool = newState.getStateToken().getTool();
-        final String previousToolName = previousTokenTool == null ? "" : previousTokenTool;
-        final String newToolName = newTokenTool == null ? "" : newTokenTool;
-
-        if (previousToken == null || previousToolName == null || !previousToolName.equals(newToolName)) {
-            ToolChangedEvent.fire(eventBus, previousToolName, newToolName);
-        }
+        final String previousGroup = getPreviousGroup();
         if (previousToken == null || !previousGroup.equals(newGroup)) {
             GroupChangedEvent.fire(eventBus, previousGroup, newGroup);
+        }
+        final String previousToolName = getPreviousTool();
+        final String newTokenTool = newState.getStateToken().getTool();
+        final String newToolName = newTokenTool == null ? "" : newTokenTool;
+        if (previousToken == null || previousToolName == null || !previousToolName.equals(newToolName)) {
+            ToolChangedEvent.fire(eventBus, previousToolName, newToolName);
         }
     }
 
@@ -124,6 +122,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private String getPreviousGroup() {
         final String previousGroup = previousToken == null ? "" : previousToken.getGroup();
         return previousGroup;
+    }
+
+    private String getPreviousTool() {
+        final String previousTool = previousToken == null ? "" : previousToken.getTool();
+        return previousTool;
     }
 
     @Override
@@ -227,13 +230,17 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     @Override
-    public void onToolChanged(final Listener2<String, String> listener) {
-        throw new NotImplementedException();
+    public void onToolChanged(final boolean fireNow, final ToolChangedHandler handler) {
+        eventBus.addHandler(ToolChangedEvent.getType(), handler);
+        final StateAbstractDTO currentState = session.getCurrentState();
+        if (fireNow && currentState != null) {
+            handler.onToolChanged(new ToolChangedEvent(getPreviousTool(), currentState.getStateToken().getTool()));
+        }
     }
 
     @Override
-    public void onToolChanged(final ToolChangedHandler handler) {
-        eventBus.addHandler(ToolChangedEvent.getType(), handler);
+    public void onToolChanged(final Listener2<String, String> listener) {
+        throw new NotImplementedException();
     }
 
     @Override

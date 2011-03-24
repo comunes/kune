@@ -22,15 +22,13 @@ package org;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.ourproject.kune.platf.server.finders.RateFinderTest;
-import org.ourproject.kune.platf.server.manager.GroupManagerTest;
 
 /**
  * A Test Suite to test (only) some tests that fails
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ RateFinderTest.class, GroupManagerTest.class })
+@SuiteClasses({})
 public class FaultyTestSuite {
 
 }

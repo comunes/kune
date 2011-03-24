@@ -26,14 +26,14 @@ import java.util.HashMap;
 import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
-import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 import org.ourproject.kune.workspace.client.cxt.ActionContextBottomToolbar;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.registry.ContentIconsRegistry;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.state.Session;

@@ -47,6 +47,24 @@ Archived entries from file TODO
   :ARCHIVE_OLPATH: SHORT-TERM (URGENT)/<v> better RTE/Pending
   :ARCHIVE_CATEGORY: TODO
   :END:
+* WONTFIX Use Jenkins in dev machine (reoconfigure hostname and put link in web)
+  CLOSED: [2011-03-22 mar 17:28]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-03-22 mar 17:29
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :ARCHIVE_TODO: WONTFIX
+  :END:
+* src/org/waveprotocol/box/server/gxp/ (pages) >> ./gen/org/waveprotocol/box/server/gxp/WaveClientPage.java
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-03-22 mar 17:29
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :END:
+
+
 
 
 

@@ -1063,3 +1063,27 @@ font-size:small;
     line-height: 1.5em;
     text-align: center;
 }
+
+.k-tool-panel {
+    background-color: #DEAA87;
+}
+
+.k-tool-item {
+    display: block;
+    cursor: pointer;
+}
+
+.k-tool-item-focus {
+    background-color: #d38d5f;
+}
+
+.k-tool-item-nofocus {
+}
+
+.k-tool-item-selected {
+    background-color: #C87137;
+}
+
+.k-tool-item-notselected {
+    background-color: inherits;
+}

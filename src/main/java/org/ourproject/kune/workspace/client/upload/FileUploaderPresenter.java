@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.upload;
 
-import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
+import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -48,7 +48,7 @@ public class FileUploaderPresenter implements FileUploader {
         final StateToken currentFolderStateToken = session.getCurrentStateToken().copy().clearDocument();
         if (sameContainer()) {
             view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString(),
-                    currentFolderStateToken.getTool() + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX);
+                    currentFolderStateToken.getTool() + "." + OldFoldableAbstractClientTool.UPLOADEDFILE_SUFFIX);
             return true;
         }
         if (view.hasUploadingFiles()) {
@@ -56,7 +56,7 @@ public class FileUploaderPresenter implements FileUploader {
         } else {
             currentUploadStateToken = currentFolderStateToken;
             view.setUploadParams(session.getUserHash(), currentFolderStateToken.toString(),
-                    currentFolderStateToken.getTool() + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX);
+                    currentFolderStateToken.getTool() + "." + OldFoldableAbstractClientTool.UPLOADEDFILE_SUFFIX);
             return true;
         }
     }

@@ -56,11 +56,6 @@
       </snapshots>
     </repository>
     <repository>
-      <id>mvp4g.googlecode.releases</id>
-      <name>Releases Repository for Mvp4g</name>
-      <url>http://mvp4g.googlecode.com/svn/maven2/releases/</url>
-    </repository>
-    <repository>
       <id>ext-gxt</id>
       <name>ext-gxt at jahia</name>
       <url>http://maven.jahia.org/maven2/</url>

@@ -20,9 +20,9 @@
 package org.ourproject.kune.workspace.client.title;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.registry.RenamableRegistry;
-import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 
+import cc.kune.core.client.registry.ContentIconsRegistry;
+import cc.kune.core.client.registry.RenamableRegistry;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;

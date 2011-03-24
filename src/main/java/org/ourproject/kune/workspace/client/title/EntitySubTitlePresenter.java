@@ -22,9 +22,9 @@ package org.ourproject.kune.workspace.client.title;
 import java.util.Date;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.registry.AuthorableRegistry;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;

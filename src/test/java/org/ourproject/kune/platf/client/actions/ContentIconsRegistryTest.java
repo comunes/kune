@@ -23,8 +23,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 
+import cc.kune.core.client.registry.ContentIconsRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 
 public class ContentIconsRegistryTest {

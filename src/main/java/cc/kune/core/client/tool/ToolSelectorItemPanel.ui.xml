@@ -1,0 +1,45 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+    .label {
+        text-decoration: none;
+        font-size: 22px;
+        color: white;
+        text-shadow: 1px 1px 6px grey;
+    }
+
+    .link a:link {
+        text-decoration: none;
+    }
+
+    .self {
+    }
+
+    .flow {
+        min-height: 30px;
+        padding: 5px 10px;
+
+    }
+
+    .iconLeft {
+
+    }
+
+    .iconRight {
+        float: right;
+        position: relative;
+        right: -19px;
+        top: -6px;
+    }
+  </ui:style>
+  <ui:with field='res' type='cc.kune.core.client.tool.ToolResources' />
+  <g:FocusPanel ui:field="self" stylePrimaryName="k-tool-item">
+    <g:FlowPanel styleName="{style.flow}" ui:field="flow">
+      <g:Image ui:field="iconLeft" styleName="{style.iconLeft}" />
+      <g:Image ui:field="iconRight" styleName="{style.iconRight}"
+        resource='{res.arrowRightDef}' />
+      <g:InlineLabel ui:field="label" styleName="{style.label}" />
+    </g:FlowPanel>
+  </g:FocusPanel>
+</ui:UiBinder>

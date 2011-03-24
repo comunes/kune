@@ -36,7 +36,6 @@ import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
-import cc.kune.wave.client.WaveClientSimpleAuthenticator;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -191,13 +190,14 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
         }
     }
 
-    public void setErrorMessage(String message, NotifyLevel level) {
-        getView().setErrorMessage(message, level);
-    }
-
     @Override
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
+    }
+
+    @Override
+    public void setErrorMessage(final String message, final NotifyLevel level) {
+        getView().setErrorMessage(message, level);
     }
 
     @Override

@@ -272,6 +272,7 @@ public class WebClient extends Composite {
     this.wave = wave;
     wave.load(null);
     String encodedToken = History.getToken();
+    NotifyUser.info("Open Wave: " + encodedToken + " waveRef: " + waveRef.getWaveId(), true);
     if (encodedToken != null && !encodedToken.isEmpty()) {
       WaveRef fromWaveRef = HistorySupport.waveRefFromHistoryToken(encodedToken);
       if (waveRef == null) {

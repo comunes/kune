@@ -19,29 +19,30 @@
  */
 package org.ourproject.kune.workspace.client;
 
-import org.ourproject.kune.platf.client.registry.AclEditableRegistry;
-import org.ourproject.kune.platf.client.registry.AuthorableRegistry;
-import org.ourproject.kune.platf.client.registry.CanBeHomepageRegistry;
-import org.ourproject.kune.platf.client.registry.ComentableRegistry;
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
-import org.ourproject.kune.platf.client.registry.DragableRegistry;
-import org.ourproject.kune.platf.client.registry.DropableRegistry;
-import org.ourproject.kune.platf.client.registry.EmailSubscribeAbleRegistry;
-import org.ourproject.kune.platf.client.registry.LicensableRegistry;
-import org.ourproject.kune.platf.client.registry.PublishModerableRegistry;
-import org.ourproject.kune.platf.client.registry.RateableRegistry;
-import org.ourproject.kune.platf.client.registry.RenamableRegistry;
-import org.ourproject.kune.platf.client.registry.TageableRegistry;
-import org.ourproject.kune.platf.client.registry.TranslatableRegistry;
-import org.ourproject.kune.platf.client.registry.VersionableRegistry;
-import org.ourproject.kune.platf.client.registry.XmppComentableRegistry;
-import org.ourproject.kune.platf.client.registry.XmppNotifyCapableRegistry;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
-import org.ourproject.kune.workspace.client.cnt.ContentIconsRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.oldsn.GroupActionRegistry;
 import org.ourproject.kune.workspace.client.oldsn.UserActionRegistry;
+
+import cc.kune.core.client.registry.AclEditableRegistry;
+import cc.kune.core.client.registry.AuthorableRegistry;
+import cc.kune.core.client.registry.CanBeHomepageRegistry;
+import cc.kune.core.client.registry.ComentableRegistry;
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.registry.ContentIconsRegistry;
+import cc.kune.core.client.registry.DragableRegistry;
+import cc.kune.core.client.registry.DropableRegistry;
+import cc.kune.core.client.registry.EmailSubscribeAbleRegistry;
+import cc.kune.core.client.registry.LicensableRegistry;
+import cc.kune.core.client.registry.PublishModerableRegistry;
+import cc.kune.core.client.registry.RateableRegistry;
+import cc.kune.core.client.registry.RenamableRegistry;
+import cc.kune.core.client.registry.TageableRegistry;
+import cc.kune.core.client.registry.TranslatableRegistry;
+import cc.kune.core.client.registry.VersionableRegistry;
+import cc.kune.core.client.registry.XmppComentableRegistry;
+import cc.kune.core.client.registry.XmppNotifyCapableRegistry;
 
 import com.calclab.suco.client.ioc.decorator.Singleton;
 import com.calclab.suco.client.ioc.module.Factory;

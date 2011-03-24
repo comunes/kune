@@ -19,20 +19,20 @@
  */
 package org.ourproject.kune.blogs.client;
 
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
-import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
-import org.ourproject.kune.workspace.client.tool.ToolSelector;
+import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.tool.ToolSelector;
 
-public class BlogClientTool extends FoldableAbstractClientTool {
+public class BlogClientTool extends OldFoldableAbstractClientTool {
     public static final String NAME = "blogs";
     public static final String TYPE_ROOT = NAME + "." + "root";
     public static final String TYPE_BLOG = NAME + "." + "blog";
     public static final String TYPE_POST = NAME + "." + "post";
-    public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
+    public static final String TYPE_UPLOADEDFILE = NAME + "." + OldFoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
 
     public BlogClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
             final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,

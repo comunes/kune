@@ -35,9 +35,9 @@ import org.ourproject.kune.workspace.client.entityheader.EntityLogoPresenterTest
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPresenterTest;
 import org.ourproject.kune.workspace.client.socialnet.SNRolActionTest;
 import org.ourproject.kune.workspace.client.socialnet.RolComparatorTest;
-import org.ourproject.kune.workspace.client.tool.ToolSelectorPresenterTest;
 
 import cc.kune.core.client.tags.TagsSummaryPresenterTest;
+import cc.kune.core.client.tool.ToolSelectorPresenterTest;
 
 /**
  * Rescan with :

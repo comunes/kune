@@ -100,13 +100,15 @@ http://code.google.com/p/gwt-examples/wiki/gwtEclipseFaqs
 
 ===Install Kune===
 
-Install Kune (follow the trunk/INSTALL file instructions) and run Kune for the first time. This will initialize the database, or configure the XMPP server, for instance.
+Install Kune (follow the trunk/INSTALL file instructions) and run Kune for the first time. This will initialize the database, and configure the XMPP server, for instance.
 
 ===GWT's Hosted Mode===
 
 To start the hosted mode, you can both execute the launch 'kune client -no-server' from your Eclipse or run from command line:
 
  mvn gwt:run
+
+FIXME: this part is outdated
 
 You can create a custom launch also at "Run configuration" (Run > Open Run Dialog) in eclipse with Project: "org.ourproject.kune" with Main class: "com.google.gwt.dev.DevMode", with this program arguments (or similar): "-noserver -out gwt-out /ws/?locale=en&log_level=INFO -port 8080" and in the "Classpath User Entries":
 * gwt-dev-[linux|mac|windows].jar (Add External Jar and choose it from your gwt installation directory)
@@ -253,7 +255,6 @@ for instance:
 this generates four classes GroupOptions (the external interface), GroupOptionsPresenter (the Presenter with the business logic, the part you must test well), the GroupOptionsView (the interface to the panel, the UI code), the GroupOptionsPanel (the UI code, here all the gwt UI stuff). Also gives you in the standard output a sample code to use suco in a module to build these objects.
 * IoC: as we described before we use guice and suco for IoC. Again, see HelloWorldModule class for a very simple sample of gwt module using suco.
 
-
 ==Code preferences==
 
 We use some eclipse code preferences for Kune project:
@@ -364,3 +365,7 @@ It's recommended to be subscribed to both if you want to participate in the deve
 ===Twitter/identica===
 
 Follow @kuneproject in twitter and @kune in identica. 
+
+===Jenkins Continuous Integration Server===
+
+http://ci.comunes.org

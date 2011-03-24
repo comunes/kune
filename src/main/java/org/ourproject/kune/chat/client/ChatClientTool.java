@@ -19,15 +19,15 @@
  */
 package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
-import org.ourproject.kune.workspace.client.tool.FoldableAbstractClientTool;
-import org.ourproject.kune.workspace.client.tool.ToolSelector;
+import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
 
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.tool.ToolSelector;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-public class ChatClientTool extends FoldableAbstractClientTool {
+public class ChatClientTool extends OldFoldableAbstractClientTool {
     public static final String NAME = "chats";
     public static final String TYPE_ROOT = "chat.root";
     public static final String TYPE_ROOM = "chat.room";

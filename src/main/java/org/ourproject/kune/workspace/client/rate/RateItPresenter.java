@@ -19,9 +19,9 @@
  */
 package org.ourproject.kune.workspace.client.rate;
 
-import org.ourproject.kune.platf.client.registry.ContentCapabilitiesRegistry;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;

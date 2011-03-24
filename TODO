@@ -12,7 +12,6 @@ TODO-list for kune -*- mode: org; -*-
    nick == assigned to
 
 * SHORT-TERM (URGENT)
-** TODO Use Jenkins in dev machine (reoconfigure hostname and put link in web)
 ** TODO WIAB History integration
 *** Initial defpage #home
 **** u: if logged: wave list (#inbox) else: signin
@@ -45,9 +44,9 @@ A way to specify the default extensions in a client of a wave server.
 ** TODO style injection: 
    http://www.hunlock.com/blogs/Howto_Dynamically_Insert_Javascript_And_CSS
    https://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/f4c4fb9b4c5bb28f
-** >> Delete host/room conf in ws.html
-** >> kune.properties from cmd line
-** HelloWord with samples of extensions: sitebar, sitebar options menu, siteuseroptions, sn, ...
+** TODO >> Delete host/room conf in ws.html
+** TODO >> kune.properties from cmd line
+** TODO HelloWord with samples of extensions: sitebar, sitebar options menu, siteuseroptions, sn, ...
 ** TODO Register of "reserved words" not permitted for groups/users names (in server and in client)
 ** TODO WIAB under proxies
 https://groups.google.com/group/wave-protocol/browse_thread/thread/202dee4bfdbdeee6
@@ -55,7 +54,6 @@ https://groups.google.com/group/wave-protocol/browse_thread/thread/202dee4bfdbde
 ** TODO Testing Presenters via juckito:
 https://code.google.com/p/gwt-platform/wiki/UnitTesting
 https://code.google.com/p/arcbees-hive/source/browse/test/com/arcbees/hive/client/home/blog/ui/BlogItemWidgetTest.java
-** src/org/waveprotocol/box/server/gxp/ (pages) >> ./gen/org/waveprotocol/box/server/gxp/WaveClientPage.java
 ** Use Emulate Stack Java like src/org/waveprotocol/box/webclient/WebClientDev.gwt.xml
 ** roo error
 [FelixDispatchQueue] Expected string-based content in @RooGwtMirroredFrom on cc.kune.client.managed.request.ContainerTranslationProxyObject of class [org.springframework.roo.classpath.details.annotations.ClassAttributeValue] must be an instance of class org.springframework.roo.classpath.details.annotations.StringAttributeValue
