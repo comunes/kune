@@ -28,14 +28,14 @@ import org.ourproject.kune.chat.server.managers.XmppManagerTest;
 import org.ourproject.kune.docs.DocumentToolTest;
 import org.ourproject.kune.docs.server.DocumentServerToolTest;
 import org.ourproject.kune.gallery.server.GalleryServerToolTest;
-import org.ourproject.kune.rack.filters.rest.TestRESTMethodFinder;
-import org.ourproject.kune.rack.filters.rest.TestRESTServiceDefinition;
 import org.ourproject.kune.wiki.server.WikiServerToolTest;
 import org.ourproject.kune.workspace.client.entityheader.EntityLogoPresenterTest;
 import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPresenterTest;
 import org.ourproject.kune.workspace.client.socialnet.SNRolActionTest;
 import org.ourproject.kune.workspace.client.socialnet.RolComparatorTest;
 
+import cc.kune.core.server.rack.filters.rest.TestRESTMethodFinder;
+import cc.kune.core.server.rack.filters.rest.TestRESTServiceDefinition;
 import cc.kune.gspace.client.tags.TagsSummaryPresenterTest;
 import cc.kune.gspace.client.tool.ToolSelectorPresenterTest;
 

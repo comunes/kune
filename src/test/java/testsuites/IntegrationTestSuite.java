@@ -22,17 +22,18 @@ package testsuites;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.ourproject.kune.platf.integration.DatabaseInitializationTest;
-import org.ourproject.kune.platf.integration.content.ContentCommentServiceTest;
-import org.ourproject.kune.platf.integration.content.ContentServiceAddTest;
-import org.ourproject.kune.platf.integration.content.ContentServiceGetTest;
-import org.ourproject.kune.platf.integration.content.ContentServiceSaveTest;
-import org.ourproject.kune.platf.integration.content.ContentServiceVariousTest;
-import org.ourproject.kune.platf.integration.kuneservice.GroupServiceTest;
-import org.ourproject.kune.platf.integration.site.SiteServiceTest;
-import org.ourproject.kune.platf.integration.site.UserServiceTest;
-import org.ourproject.kune.platf.integration.socialnet.SocialNetworkMembersTest;
-import org.ourproject.kune.platf.integration.socialnet.SocialNetworkServiceTest;
+
+import cc.kune.core.server.integration.DatabaseInitializationTest;
+import cc.kune.core.server.integration.content.ContentCommentServiceTest;
+import cc.kune.core.server.integration.content.ContentServiceAddTest;
+import cc.kune.core.server.integration.content.ContentServiceGetTest;
+import cc.kune.core.server.integration.content.ContentServiceSaveTest;
+import cc.kune.core.server.integration.content.ContentServiceVariousTest;
+import cc.kune.core.server.integration.kuneservice.GroupServiceTest;
+import cc.kune.core.server.integration.site.SiteServiceTest;
+import cc.kune.core.server.integration.site.UserServiceTest;
+import cc.kune.core.server.integration.socialnet.SocialNetworkMembersTest;
+import cc.kune.core.server.integration.socialnet.SocialNetworkServiceTest;
 
 /**
  * Rescan with :

@@ -24,10 +24,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.testhelper.ctx.DomainContext;
 
 import cc.kune.core.server.TestDomainHelper;
 import cc.kune.core.server.access.AccessRightsServiceDefault;
+import cc.kune.core.server.testhelper.ctx.DomainContext;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;

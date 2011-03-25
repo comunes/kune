@@ -22,7 +22,6 @@ package cc.kune.core.server;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
-import org.ourproject.kune.platf.integration.HttpServletRequestMocked;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.authentication.AccountStoreHolder;
@@ -32,6 +31,7 @@ import org.waveprotocol.box.server.persistence.PersistenceModule;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.core.server.init.FinderRegistry;
+import cc.kune.core.server.integration.HttpServletRequestMocked;
 import cc.kune.core.server.properties.PropertiesFileName;
 import cc.kune.wave.server.CustomSettingsBinder;
 

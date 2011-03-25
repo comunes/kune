@@ -27,8 +27,8 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.xmpp.ChatConnection;
 import cc.kune.core.server.xmpp.ChatException;
 import cc.kune.core.server.xmpp.Room;

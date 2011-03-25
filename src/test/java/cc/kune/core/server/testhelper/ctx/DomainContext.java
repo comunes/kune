@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.testhelper.ctx;
+package cc.kune.core.server.testhelper.ctx;
 
 import java.util.HashMap;
 import java.util.TimeZone;

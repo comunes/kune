@@ -26,11 +26,11 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.integration.content.ContentServiceIntegrationTest;
 
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.server.integration.IntegrationTestHelper;
+import cc.kune.core.server.integration.content.ContentServiceIntegrationTest;
 import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.google.inject.Inject;

@@ -30,9 +30,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.services.ImageSize;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.file.FileDownloadManager;
 import cc.kune.core.server.manager.file.FileUtils;
 import cc.kune.core.server.properties.KuneProperties;

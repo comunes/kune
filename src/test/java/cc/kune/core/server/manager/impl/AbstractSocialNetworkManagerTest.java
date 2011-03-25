@@ -23,9 +23,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
-import org.ourproject.kune.testhelper.ctx.DomainContext;
 
 import cc.kune.core.server.PersistenceTest;
+import cc.kune.core.server.testhelper.ctx.DomainContext;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 

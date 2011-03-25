@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.integration.content;
+package cc.kune.core.server.integration.content;
 
-import org.ourproject.kune.platf.integration.IntegrationTest;
 
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContentDTO;
 

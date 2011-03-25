@@ -17,19 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.integration.socialnet;
+package cc.kune.core.server.integration.socialnet;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.integration.IntegrationTest;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.errors.AlreadyUserMemberException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.SocialNetworkService;
 import cc.kune.core.server.UserSession;
+import cc.kune.core.server.integration.IntegrationTest;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 

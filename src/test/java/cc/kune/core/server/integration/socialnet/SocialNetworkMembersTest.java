@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.integration.socialnet;
+package cc.kune.core.server.integration.socialnet;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,10 +25,10 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.integration.IntegrationTest;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.server.UserSession;
+import cc.kune.core.server.integration.IntegrationTest;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.domain.Group;

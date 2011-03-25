@@ -25,14 +25,14 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.integration.IntegrationTest;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.auth.AuthorizatedMethodInterceptor;
+import cc.kune.core.server.integration.IntegrationTest;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
 

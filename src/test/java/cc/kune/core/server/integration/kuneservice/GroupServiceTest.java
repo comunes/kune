@@ -17,18 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.integration.kuneservice;
+package cc.kune.core.server.integration.kuneservice;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.integration.IntegrationTest;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.server.UserSession;
+import cc.kune.core.server.integration.IntegrationTest;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;

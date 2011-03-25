@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.integration.content;
+package cc.kune.core.server.integration.content;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -31,9 +31,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.server.DocumentServerTool;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.domain.TagCount;
 import cc.kune.core.shared.domain.utils.StateToken;

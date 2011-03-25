@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.integration.site;
+package cc.kune.core.server.integration.site;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -27,13 +27,13 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.integration.IntegrationTest;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.server.integration.IntegrationTest;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.mapper.Mapper;
 import cc.kune.core.server.properties.DatabaseProperties;

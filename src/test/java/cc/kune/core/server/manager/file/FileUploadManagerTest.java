@@ -21,11 +21,11 @@ package cc.kune.core.server.manager.file;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.integration.content.ContentServiceIntegrationTest;
 
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.server.integration.IntegrationTestHelper;
+import cc.kune.core.server.integration.content.ContentServiceIntegrationTest;
 import cc.kune.core.server.manager.file.FileUploadManager;
 
 import com.google.inject.Inject;

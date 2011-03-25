@@ -25,13 +25,13 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.ourproject.kune.platf.integration.IntegrationTest;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.AuthenticatedMethodInterceptor;
+import cc.kune.core.server.integration.IntegrationTest;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 
 public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 

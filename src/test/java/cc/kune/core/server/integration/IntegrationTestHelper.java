@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.integration;
+package cc.kune.core.server.integration;
 
 import javax.servlet.http.HttpServletRequest;
 

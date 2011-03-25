@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.platf.integration.content;
+package cc.kune.core.server.integration.content;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,11 +28,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.docs.client.DocumentClientTool;
 import org.ourproject.kune.docs.server.DocumentServerTool;
-import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 import org.ourproject.kune.wiki.server.WikiServerTool;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
+import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContainerDTO;
