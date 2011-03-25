@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.workspace.client.search;
 
-import org.ourproject.kune.platf.client.services.SearcherConstants;
 
+import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 

@@ -24,8 +24,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.server.TestDomainHelper;
 
+import cc.kune.core.server.TestDomainHelper;
 import cc.kune.core.shared.dto.StateContentDTO;
 
 public class ContentServiceSaveTest extends ContentServiceIntegrationTest {

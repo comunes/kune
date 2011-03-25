@@ -23,11 +23,11 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
-import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.properties.DatabaseProperties;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.UserService;
+import cc.kune.core.server.UserSession;
+import cc.kune.core.server.properties.DatabaseProperties;
 
 import com.google.inject.Inject;
 

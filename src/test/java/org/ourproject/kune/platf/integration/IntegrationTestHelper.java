@@ -24,17 +24,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.configuration.ConfigurationException;
 import org.ourproject.kune.chat.server.ChatServerModule;
 import org.ourproject.kune.docs.server.DocumentServerModule;
-import org.ourproject.kune.platf.server.KunePersistenceService;
-import org.ourproject.kune.platf.server.PlatformServerModule;
-import org.ourproject.kune.platf.server.TestConstants;
-import org.ourproject.kune.platf.server.init.FinderRegistry;
-import org.ourproject.kune.platf.server.properties.PropertiesFileName;
 import org.ourproject.kune.wiki.server.WikiServerModule;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
+import cc.kune.core.server.KunePersistenceService;
+import cc.kune.core.server.PlatformServerModule;
+import cc.kune.core.server.TestConstants;
+import cc.kune.core.server.init.FinderRegistry;
+import cc.kune.core.server.properties.PropertiesFileName;
 import cc.kune.wave.server.CustomSettingsBinder;
 
 import com.google.inject.AbstractModule;

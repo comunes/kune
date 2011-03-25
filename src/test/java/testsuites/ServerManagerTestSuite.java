@@ -22,21 +22,22 @@ package testsuites;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.ourproject.kune.platf.server.manager.ContentManagerTest;
-import org.ourproject.kune.platf.server.manager.GroupManagerTest;
-import org.ourproject.kune.platf.server.manager.I18nManagerTest;
-import org.ourproject.kune.platf.server.manager.LicenseManagerTest;
-import org.ourproject.kune.platf.server.manager.TagManagerTest;
-import org.ourproject.kune.platf.server.manager.TagUserContentTest;
-import org.ourproject.kune.platf.server.manager.UserManagerTest;
-import org.ourproject.kune.platf.server.manager.file.EntityLogoUploadManagerTest;
-import org.ourproject.kune.platf.server.manager.file.FileDownloadManagerTest;
-import org.ourproject.kune.platf.server.manager.file.FileManagerTest;
-import org.ourproject.kune.platf.server.manager.file.FileUploadManagerTest;
-import org.ourproject.kune.platf.server.manager.file.FileUtilsTest;
-import org.ourproject.kune.platf.server.manager.file.ImageUtilsDefaultTest;
-import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerMoreTest;
-import org.ourproject.kune.platf.server.manager.impl.SocialNetworkManagerTest;
+
+import cc.kune.core.server.manager.ContentManagerTest;
+import cc.kune.core.server.manager.GroupManagerTest;
+import cc.kune.core.server.manager.I18nManagerTest;
+import cc.kune.core.server.manager.LicenseManagerTest;
+import cc.kune.core.server.manager.TagManagerTest;
+import cc.kune.core.server.manager.TagUserContentTest;
+import cc.kune.core.server.manager.UserManagerTest;
+import cc.kune.core.server.manager.file.EntityLogoUploadManagerTest;
+import cc.kune.core.server.manager.file.FileDownloadManagerTest;
+import cc.kune.core.server.manager.file.FileManagerTest;
+import cc.kune.core.server.manager.file.FileUploadManagerTest;
+import cc.kune.core.server.manager.file.FileUtilsTest;
+import cc.kune.core.server.manager.file.ImageUtilsDefaultTest;
+import cc.kune.core.server.manager.impl.SocialNetworkManagerMoreTest;
+import cc.kune.core.server.manager.impl.SocialNetworkManagerTest;
 
 /**
  * Rescan with :

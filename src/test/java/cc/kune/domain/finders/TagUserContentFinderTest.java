@@ -22,7 +22,8 @@ package cc.kune.domain.finders;
 import javax.persistence.NoResultException;
 
 import org.junit.Test;
-import org.ourproject.kune.platf.server.PersistencePreLoadedDataTest;
+
+import cc.kune.core.server.PersistencePreLoadedDataTest;
 
 import com.google.inject.Inject;
 

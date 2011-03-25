@@ -22,17 +22,18 @@ package testsuites;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.ourproject.kune.platf.server.access.AccessRightsServiceTest;
-import org.ourproject.kune.platf.server.access.FinderTest;
-import org.ourproject.kune.platf.server.auth.AuthenticatedMethodInterceptorTest;
-import org.ourproject.kune.platf.server.auth.AuthorizatedMethodInterceptorTest;
-import org.ourproject.kune.platf.server.domain.GroupListTest;
-import org.ourproject.kune.platf.server.finders.GroupFinderTest;
-import org.ourproject.kune.platf.server.finders.LicenseFinderTest;
-import org.ourproject.kune.platf.server.finders.RateFinderTest;
-import org.ourproject.kune.platf.server.finders.UserFinderTest;
-import org.ourproject.kune.platf.server.mapper.MapperTest;
-import org.ourproject.kune.platf.server.properties.KunePropertiesTest;
+
+import cc.kune.core.server.access.AccessRightsServiceTest;
+import cc.kune.core.server.access.FinderTest;
+import cc.kune.core.server.auth.AuthenticatedMethodInterceptorTest;
+import cc.kune.core.server.auth.AuthorizatedMethodInterceptorTest;
+import cc.kune.core.server.domain.GroupListTest;
+import cc.kune.core.server.finders.GroupFinderTest;
+import cc.kune.core.server.finders.LicenseFinderTest;
+import cc.kune.core.server.finders.RateFinderTest;
+import cc.kune.core.server.finders.UserFinderTest;
+import cc.kune.core.server.mapper.MapperTest;
+import cc.kune.core.server.properties.KunePropertiesTest;
 
 /**
  * Rescan with :

@@ -25,10 +25,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.server.UserSession;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.GroupService;
+import cc.kune.core.server.UserSession;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;

@@ -13,6 +13,8 @@ http://docs.codehaus.org/display/JETTY/Debugging+with+the+Maven+Jetty+Plugin+ins
 
 Also for different logging levels you can play with -Dorg.eclipse.jetty.util.log.DEBUG=true (or similars)
 
+See also log4j.properties in src/main/resources/
+
 == Client debug ==
 
 You can debug the client with the eclipse launch configuration 'script/kune client -no-server.launch'.

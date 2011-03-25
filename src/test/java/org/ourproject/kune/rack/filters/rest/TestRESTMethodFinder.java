@@ -29,6 +29,12 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
+import cc.kune.core.server.rack.filters.rest.DefaultRESTMethodFinder;
+import cc.kune.core.server.rack.filters.rest.Parameters;
+import cc.kune.core.server.rack.filters.rest.REST;
+import cc.kune.core.server.rack.filters.rest.RESTMethod;
+import cc.kune.core.server.rack.filters.rest.RESTMethodFinder;
+
 public class TestRESTMethodFinder {
     private RESTMethodFinder finder;
     private MyTestService service;

@@ -29,6 +29,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
 
+import cc.kune.core.server.xmpp.ChatConnection;
+import cc.kune.core.server.xmpp.ChatException;
+import cc.kune.core.server.xmpp.Room;
+import cc.kune.core.server.xmpp.RoomListener;
+import cc.kune.core.server.xmpp.XmppManager;
+
 import com.google.inject.Inject;
 
 public class XmppManagerTest {

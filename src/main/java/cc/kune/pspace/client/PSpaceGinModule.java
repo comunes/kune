@@ -19,7 +19,6 @@
  */
 package cc.kune.pspace.client;
 
-
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class PSpaceGinModule extends AbstractPresenterModule {
@@ -33,6 +32,7 @@ public class PSpaceGinModule extends AbstractPresenterModule {
     protected void configure() {
         bindPresenter(PSpacePresenter.class, PSpacePresenter.PSpaceView.class, PSpacePanel.class,
                 PSpacePresenter.PSpaceProxy.class);
+        bind(PSpaceParts.class).asEagerSingleton();
     }
 
 }

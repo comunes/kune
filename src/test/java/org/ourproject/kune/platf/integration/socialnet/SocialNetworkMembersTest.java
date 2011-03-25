@@ -27,10 +27,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.platf.integration.IntegrationTest;
 import org.ourproject.kune.platf.integration.IntegrationTestHelper;
-import org.ourproject.kune.platf.server.UserSession;
-import org.ourproject.kune.platf.server.manager.GroupManager;
-import org.ourproject.kune.platf.server.manager.SocialNetworkManager;
 
+import cc.kune.core.server.UserSession;
+import cc.kune.core.server.manager.GroupManager;
+import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;

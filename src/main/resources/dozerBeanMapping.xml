@@ -9,7 +9,7 @@
   </configuration>
   <mapping>
     <class-a> cc.kune.core.shared.dto.InitDataDTO </class-a>
-    <class-b>org.ourproject.kune.platf.server.InitData</class-b>
+    <class-b>cc.kune.core.server.InitData</class-b>
     <field>
       <a>licenses</a>
       <b>licenses</b>
@@ -47,7 +47,7 @@
       <b-hint> cc.kune.domain.Group </b-hint>
     </field>
     <field
-      custom-converter="org.ourproject.kune.platf.server.mapper.GroupListModeConverter">
+      custom-converter="cc.kune.core.server.mapper.GroupListModeConverter">
       <a>mode</a>
       <b>mode</b>
     </field>
@@ -76,7 +76,7 @@
   </mapping>
   <mapping>
     <class-a>cc.kune.core.shared.dto.StateContentDTO</class-a>
-    <class-b>org.ourproject.kune.platf.server.state.StateContent</class-b>
+    <class-b>cc.kune.core.server.state.StateContent</class-b>
     <field>
       <a>authors</a>
       <b>authors</b>
@@ -86,11 +86,11 @@
   </mapping>
   <mapping>
     <class-a>cc.kune.core.shared.dto.StateContainerDTO</class-a>
-    <class-b>org.ourproject.kune.platf.server.state.StateContainer</class-b>
+    <class-b>cc.kune.core.server.state.StateContainer</class-b>
   </mapping>
   <mapping>
     <class-a>cc.kune.core.shared.dto.StateAbstractDTO</class-a>
-    <class-b>org.ourproject.kune.platf.server.state.StateAbstract</class-b>
+    <class-b>cc.kune.core.server.state.StateAbstract</class-b>
   </mapping>
 <!--  <mapping>-->
 <!--    <class-a> cc.kune.core.shared.dto.StateToken </class-a>-->
@@ -172,7 +172,7 @@
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.UserInfoDTO </class-a>
-    <class-b> org.ourproject.kune.platf.server.users.UserInfo </class-b>
+    <class-b> cc.kune.core.server.users.UserInfo </class-b>
     <field>
       <a>user</a>
       <b>user</b>
@@ -250,7 +250,7 @@
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.ToolSimpleDTO </class-a>
-    <class-b> org.ourproject.kune.platf.server.tool.ToolSimple </class-b>
+    <class-b> cc.kune.core.server.tool.ToolSimple </class-b>
   </mapping>
   <mapping>
     <class-a> cc.kune.core.shared.dto.UserBuddiesDataDTO </class-a>

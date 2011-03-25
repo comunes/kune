@@ -48,7 +48,7 @@ A way to specify the default extensions in a client of a wave server.
 ** TODO >> kune.properties from cmd line
 ** TODO HelloWord with samples of extensions: sitebar, sitebar options menu, siteuseroptions, sn, ...
 ** TODO Register of "reserved words" not permitted for groups/users names (in server and in client)
-** TODO WIAB under proxies
+** WIAB under proxies
 https://groups.google.com/group/wave-protocol/browse_thread/thread/202dee4bfdbdeee6
 ** TODO StateManager #signin while already signed in NPE
 ** TODO Testing Presenters via juckito:
