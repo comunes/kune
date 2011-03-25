@@ -25,7 +25,7 @@ import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.tool.ToolSelector;
+import cc.kune.gspace.client.tool.ToolSelector;
 
 public class GalleryClientTool extends OldFoldableAbstractClientTool {
     public static final String NAME = "gallery";

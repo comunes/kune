@@ -20,6 +20,7 @@
 package cc.kune.gspace.client;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 public interface WsArmor {
 
@@ -40,6 +41,8 @@ public interface WsArmor {
     ForIsWidget getEntityToolsNorth();
 
     ForIsWidget getEntityToolsSouth();
+
+    SimplePanel getPublicSpace();
 
     ForIsWidget getSitebar();
 

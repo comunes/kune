@@ -21,8 +21,8 @@ package org.ourproject.kune.workspace.client.editor.insertlocalmedia;
 
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.InsertMediaAbstractPresenter;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 
+import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
 

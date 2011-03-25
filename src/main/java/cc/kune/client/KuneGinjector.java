@@ -44,11 +44,12 @@ import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.tags.TagsSummaryPresenter;
-import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.tags.TagsSummaryPresenter;
+import cc.kune.gspace.client.tool.ToolSelectorPresenter;
+import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.pspace.client.PSpaceGinModule;
 import cc.kune.pspace.client.PSpacePresenter;
 import cc.kune.wave.client.WaveGinModule;
@@ -109,8 +110,6 @@ public interface KuneGinjector extends Ginjector {
 
     AsyncProvider<PSpacePresenter> getPSpacePresenter();
 
-    AsyncProvider<TagsSummaryPresenter> getTagsSummaryPresenter();
-
     AsyncProvider<RegisterPresenter> getRegisterPresenter();
 
     AsyncProvider<SignInPresenter> getSignInPresenter();
@@ -126,6 +125,10 @@ public interface KuneGinjector extends Ginjector {
     AsyncProvider<SpinerPresenter> getSpinerPresenter();
 
     StateManager getStateManager();
+
+    AsyncProvider<TagsSummaryPresenter> getTagsSummaryPresenter();
+
+    AsyncProvider<ToolSelectorPresenter> getToolSelectorPresenter();
 
     AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
 

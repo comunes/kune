@@ -21,6 +21,8 @@ package org.ourproject.kune.platf.client.ui.rte.insertimg;
 
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 
+import cc.kune.core.client.ui.utils.ContentPosition;
+
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 

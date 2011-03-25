@@ -19,40 +19,45 @@
  */
 package org.ourproject.kune.gallery.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-
 import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.core.client.cnt.FoldableContentPanel;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.inject.Inject;
 
 public class GalleryFolderContentPanel extends FoldableContentPanel implements GalleryFolderContentView {
 
     private static final int TEXT_MAX_LENGHT = 15;
     private FlowPanel flowPanel;
-    private final StateManager stateManager;
     private final Session session;
+    private final StateManager stateManager;
 
-    public GalleryFolderContentPanel(final WorkspaceSkeleton ws, final I18nTranslationService i18n,
+    @Inject
+    public GalleryFolderContentPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res,
             final StateManager stateManager, final Session session) {
-        super(ws, i18n);
+        super(ws, i18n, res);
         this.stateManager = stateManager;
         this.session = session;
     }
 
+    @Override
     public void addThumb(final StateToken token, final String title, final String imgUrl) {
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
             public void execute() {
                 final BasicThumb thumb = new BasicThumb(imgUrl, session.getImgCropsize(), title, TEXT_MAX_LENGHT, true,
                         new ClickHandler() {
+                            @Override
                             public void onClick(final ClickEvent event) {
                                 stateManager.gotoToken(token);
                             }
@@ -67,6 +72,7 @@ public class GalleryFolderContentPanel extends FoldableContentPanel implements G
         });
     }
 
+    @Override
     public void setThumbPanel() {
         if (flowPanel == null) {
             flowPanel = new FlowPanel();

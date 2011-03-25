@@ -23,8 +23,8 @@ import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.tool.ToolSelector;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
+import cc.kune.gspace.client.tool.ToolSelector;
 
 public abstract class OldFoldableAbstractClientTool extends OldAbstractClientTool {
     public static final String UPLOADEDFILE_SUFFIX = "uploaded";

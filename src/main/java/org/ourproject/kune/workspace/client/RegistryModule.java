@@ -20,11 +20,11 @@
 package org.ourproject.kune.workspace.client;
 
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
-import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.oldsn.GroupActionRegistry;
 import org.ourproject.kune.workspace.client.oldsn.UserActionRegistry;
 
+import cc.kune.core.client.cnt.ContentActionRegistry;
 import cc.kune.core.client.registry.AclEditableRegistry;
 import cc.kune.core.client.registry.AuthorableRegistry;
 import cc.kune.core.client.registry.CanBeHomepageRegistry;

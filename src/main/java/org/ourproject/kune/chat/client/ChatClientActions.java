@@ -19,19 +19,15 @@
  \*/
 package org.ourproject.kune.chat.client;
 
-import org.ourproject.kune.blogs.client.BlogClientTool;
 import org.ourproject.kune.chat.client.ctx.room.AddRoom;
-import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.gallery.client.GalleryClientTool;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
-import org.ourproject.kune.wiki.client.WikiClientTool;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
-import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 
 import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.core.client.cnt.ContentActionRegistry;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -113,16 +109,23 @@ public class ChatClientActions {
         addRoom.setToolTip(i18n.t("Create a new chat room"));
         addRoom.setMustBeAuthenticated(true);
 
-        contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_DOCUMENT);
-        contentActionRegistry.addAction(chatAbout, DocumentClientTool.TYPE_UPLOADEDFILE);
-        contentActionRegistry.addAction(chatAbout, WikiClientTool.TYPE_WIKIPAGE);
-        contentActionRegistry.addAction(chatAbout, BlogClientTool.TYPE_POST);
-        contentActionRegistry.addAction(chatAbout, WikiClientTool.TYPE_UPLOADEDFILE);
-        contentActionRegistry.addAction(chatAbout, GalleryClientTool.TYPE_UPLOADEDFILE);
-        contentActionRegistry.addAction(chatAbout, BlogClientTool.TYPE_UPLOADEDFILE);
-
-        contextActionRegistry.addAction(addRoom, ChatClientTool.TYPE_ROOT, ChatClientTool.TYPE_ROOM);
-        contentActionRegistry.addAction(joinRoom, ChatClientTool.TYPE_ROOM);
+        // contentActionRegistry.addAction(chatAbout,
+        // DocumentClientTool.TYPE_DOCUMENT);
+        // contentActionRegistry.addAction(chatAbout,
+        // DocumentClientTool.TYPE_UPLOADEDFILE);
+        // contentActionRegistry.addAction(chatAbout,
+        // WikiClientTool.TYPE_WIKIPAGE);
+        // contentActionRegistry.addAction(chatAbout, BlogClientTool.TYPE_POST);
+        // contentActionRegistry.addAction(chatAbout,
+        // WikiClientTool.TYPE_UPLOADEDFILE);
+        // contentActionRegistry.addAction(chatAbout,
+        // GalleryClientTool.TYPE_UPLOADEDFILE);
+        // contentActionRegistry.addAction(chatAbout,
+        // BlogClientTool.TYPE_UPLOADEDFILE);
+        //
+        // contextActionRegistry.addAction(addRoom, ChatClientTool.TYPE_ROOT,
+        // ChatClientTool.TYPE_ROOM);
+        // contentActionRegistry.addAction(joinRoom, ChatClientTool.TYPE_ROOM);
     }
 
     private ActionEnableCondition<StateToken> notDeleted() {

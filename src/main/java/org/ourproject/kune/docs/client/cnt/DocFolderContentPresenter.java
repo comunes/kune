@@ -20,23 +20,22 @@
 package org.ourproject.kune.docs.client.cnt;
 
 import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
-import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.core.client.cnt.ActionContentToolbar;
+import cc.kune.core.client.cnt.FoldableContentPresenter;
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.ioc.Provider;
+import com.google.inject.Provider;
 
 public class DocFolderContentPresenter extends FoldableContentPresenter implements DocFolderContent {
 
     public DocFolderContentPresenter(final StateManager stateManager, final Session session,
-            final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
+            final ActionContentToolbar toolbar, final GuiActionDescCollection actionRegistry,
             final Provider<FileDownloadUtils> downloadProvider, final I18nTranslationService i18n,
             final Provider<MediaUtils> mediaUtils) {
         super(DocumentClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n,

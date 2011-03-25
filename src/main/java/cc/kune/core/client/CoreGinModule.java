@@ -89,10 +89,6 @@ import cc.kune.core.client.state.SessionDefault;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateManagerDefault;
-import cc.kune.core.client.tags.TagsSummaryPanel;
-import cc.kune.core.client.tags.TagsSummaryPresenter;
-import cc.kune.core.client.ui.footer.license.EntityLicensePanel;
-import cc.kune.core.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.client.ws.entheader.EntityHeader;
@@ -101,6 +97,13 @@ import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 import cc.kune.gspace.client.WsArmorImpl;
+import cc.kune.gspace.client.tags.TagsSummaryPanel;
+import cc.kune.gspace.client.tags.TagsSummaryPresenter;
+import cc.kune.gspace.client.tool.ToolSelector;
+import cc.kune.gspace.client.tool.ToolSelectorPanel;
+import cc.kune.gspace.client.tool.ToolSelectorPresenter;
+import cc.kune.gspace.client.ui.footer.license.EntityLicensePanel;
+import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
 
@@ -117,7 +120,7 @@ public class CoreGinModule extends AbstractPresenterModule {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see com.google.gwt.inject.client.AbstractGinModule#configure()
      */
     @Override
@@ -161,6 +164,9 @@ public class CoreGinModule extends AbstractPresenterModule {
                 UserConfirmPresenter.UserConfirmProxy.class);
         bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class, TagsSummaryPanel.class,
                 TagsSummaryPresenter.TagsSummaryProxy.class);
+        bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
+                ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);
+        bind(ToolSelector.class).to(ToolSelectorPresenter.class).in(Singleton.class);
 
         bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);

@@ -26,7 +26,6 @@ import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFI
 
 import org.ourproject.kune.docs.client.cnt.DocumentViewer;
 import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
-import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
@@ -37,6 +36,7 @@ import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.core.client.cnt.ContentActionRegistry;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;

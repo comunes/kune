@@ -20,13 +20,13 @@
 package org.ourproject.kune.gallery.client.cnt;
 
 import org.ourproject.kune.gallery.client.GalleryClientTool;
-import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
-import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.core.client.cnt.ActionContentToolbar;
+import cc.kune.core.client.cnt.FoldableContentPresenter;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
+import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -35,16 +35,16 @@ import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.ioc.Provider;
+import com.google.inject.Provider;
 
 public class GalleryFolderContentPresenter extends FoldableContentPresenter implements GalleryFolderContent {
 
-    private GalleryFolderContentView view;
-    private final I18nTranslationService i18n;
     private final Provider<FileDownloadUtils> downloadUtils;
+    private final I18nTranslationService i18n;
+    private GalleryFolderContentView view;
 
     public GalleryFolderContentPresenter(final StateManager stateManager, final Session session,
-            final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
+            final ActionContentToolbar toolbar, final GuiActionDescCollection actionRegistry,
             final I18nTranslationService i18n, final Provider<FileDownloadUtils> downloadUtils,
             final Provider<FileDownloadUtils> downloadProvider, final Provider<MediaUtils> mediaUtils) {
         super(GalleryClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n,
@@ -61,7 +61,7 @@ public class GalleryFolderContentPresenter extends FoldableContentPresenter impl
     @Override
     protected void setState(final StateContainerDTO state) {
         if (state.getTypeId().equals(GalleryClientTool.TYPE_ROOT)) {
-            ContainerDTO rootContainer = state.getRootContainer();
+            final ContainerDTO rootContainer = state.getRootContainer();
             if (rootContainer.getChilds().size() == 0 && rootContainer.getContents().size() == 0) {
                 view.setInfo(i18n.t("This gallery has no content"));
             } else {
@@ -69,10 +69,10 @@ public class GalleryFolderContentPresenter extends FoldableContentPresenter impl
             }
         } else if (state.isType(GalleryClientTool.TYPE_ALBUM) && (state.getContainer().getContents().size() > 0)) {
             view.setThumbPanel();
-            for (ContentSimpleDTO content : state.getContainer().getContents()) {
+            for (final ContentSimpleDTO content : state.getContainer().getContents()) {
                 if (content.getMimeType().isImage()) {
-                    StateToken token = content.getStateToken();
-                    String imgUrl = downloadUtils.get().getImageResizedUrl(token, ImageSize.thumb);
+                    final StateToken token = content.getStateToken();
+                    final String imgUrl = downloadUtils.get().getImageResizedUrl(token, ImageSize.thumb);
                     view.addThumb(token, content.getTitle(), imgUrl);
                 }
             }

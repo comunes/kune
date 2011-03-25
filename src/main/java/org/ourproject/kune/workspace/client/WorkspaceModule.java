@@ -40,11 +40,8 @@ import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertlink.InsertLinkGroup;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaGroup;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
-import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
-import org.ourproject.kune.workspace.client.cnt.ActionContentToolbarPresenter;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPanel;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigatorPresenter;
@@ -203,15 +200,16 @@ import cc.kune.core.client.rpcservices.SocialNetworkService;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.tags.TagsSummary;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateTokenUtils;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.tags.TagsSummary;
 
 import com.calclab.suco.client.ioc.decorator.NoDecoration;
 import com.calclab.suco.client.ioc.decorator.Singleton;
@@ -982,16 +980,20 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        register(NoDecoration.class, new Factory<ActionContentToolbar>(ActionContentToolbar.class) {
-            @Override
-            public ActionContentToolbar create() {
-                final ActionCntCtxToolbarPanel<StateToken> tbar = new ActionCntCtxToolbarPanel<StateToken>(
-                        AbstractFoldableContentActions.CONTENT_TOPBAR, p(ActionManager.class),
-                        i(WorkspaceSkeleton.class));
-                final ActionContentToolbar toolbar = new ActionContentToolbarPresenter(tbar);
-                return toolbar;
-            }
-        });
+        // register(NoDecoration.class, new
+        // Factory<ActionContentToolbar>(ActionContentToolbar.class) {
+        // @Override
+        // public ActionContentToolbar create() {
+        // final ActionCntCtxToolbarPanel<StateToken> tbar = new
+        // ActionCntCtxToolbarPanel<StateToken>(
+        // AbstractFoldableContentActions.CONTENT_TOPBAR,
+        // p(ActionManager.class),
+        // i(WorkspaceSkeleton.class));
+        // final ActionContentToolbar toolbar = new
+        // ActionContentToolbarPresenter(tbar);
+        // return toolbar;
+        // }
+        // });
 
         register(Singleton.class, new Factory<ContentEditor>(ContentEditor.class) {
             @Override

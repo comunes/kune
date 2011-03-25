@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.wiki.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
+import cc.kune.core.client.cnt.AbstractContentView;
 
 public interface WikiFolderContentView extends AbstractContentView {
 }

@@ -32,8 +32,6 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.workspace.client.cnt.ContentActionRegistry;
-import org.ourproject.kune.workspace.client.cnt.FoldableContent;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
@@ -44,6 +42,8 @@ import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import cc.kune.common.client.utils.SchedulerManager;
+import cc.kune.core.client.cnt.ContentActionRegistry;
+import cc.kune.core.client.cnt.FoldableContent;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -164,9 +164,8 @@ public abstract class AbstractFoldableContentActions {
         renameCtn.setTextDescription(textDescription);
         renameCtn.setParentMenuTitle(parentMenuTitle);
         renameCtn.setEnableCondition(notDeleted());
-        // renameCtn.setShortcut(new ShortcutDescriptor(false, Keyboard.KEY_F2,
-        // i18n.tWithNT("F2", "The F2 Function key")));
-        contentActionRegistry.addAction(renameCtn, registerInTypes);
+
+        // contentActionRegistry.addAction(renameCtn, registerInTypes);
     }
 
     protected void createDelContainerAction(final String text, final String parentMenuTitle,
@@ -211,7 +210,7 @@ public abstract class AbstractFoldableContentActions {
         delContent.setConfirmationTitle(i18n.t("Please confirm"));
         delContent.setConfirmationText(i18n.t("Are you sure?"));
         delContent.setEnableCondition(notDefAndNotDeleted());
-        contentActionRegistry.addAction(delContent, registerInTypes);
+        // contentActionRegistry.addAction(delContent, registerInTypes);
     }
 
     protected void createDownloadActions(final String typeUploadedfile) {
@@ -238,7 +237,7 @@ public abstract class AbstractFoldableContentActions {
         downloadCtx.setTextDescription(i18n.t("Download"));
         downloadCtx.setIconUrl("images/nav/download.png");
 
-        contentActionRegistry.addAction(download, typeUploadedfile);
+        // contentActionRegistry.addAction(download, typeUploadedfile);
         contextActionRegistry.addAction(downloadCtx, typeUploadedfile);
     }
 
@@ -310,7 +309,7 @@ public abstract class AbstractFoldableContentActions {
         editContent.setIconUrl("images/content_edit.png");
         editContent.setLeftSeparator(ActionToolbarButtonSeparator.spacer);
         editContent.setEnableCondition(notDeleted());
-        contentActionRegistry.addAction(editContent, registerInTypes);
+        // contentActionRegistry.addAction(editContent, registerInTypes);
         return editContent;
     }
 
@@ -420,7 +419,7 @@ public abstract class AbstractFoldableContentActions {
         refreshCnt.setParentMenuTitle(parentMenuTitle);
         refreshCnt.setTextDescription(i18n.t("Refresh"));
         refreshCnt.setIconUrl("images/nav/refresh.png");
-        contentActionRegistry.addAction(refreshCnt, registerInTypes);
+        // contentActionRegistry.addAction(refreshCnt, registerInTypes);
         return refreshCnt;
     }
 
@@ -480,7 +479,8 @@ public abstract class AbstractFoldableContentActions {
         setAsDefGroupContent.setIconUrl("images/group-home.png");
         setAsDefGroupContent.setEnableCondition(notDefAndNotDeleted());
         setAsDefGroupContent.setParentMenuTitle(parentMenuTitle);
-        contentActionRegistry.addAction(setAsDefGroupContent, registerInTypes);
+        // contentActionRegistry.addAction(setAsDefGroupContent,
+        // registerInTypes);
         return setAsDefGroupContent;
     }
 
@@ -512,7 +512,7 @@ public abstract class AbstractFoldableContentActions {
                 return session.getContentState().getMimeType().isImage();
             }
         });
-        contentActionRegistry.addAction(setGroupBackImage, registerInTypes);
+        // contentActionRegistry.addAction(setGroupBackImage, registerInTypes);
     }
 
     protected void createSetStatusAction(final AccessRolDTO rol, final String textDescription,
@@ -536,7 +536,7 @@ public abstract class AbstractFoldableContentActions {
         action.setTextDescription(textDescription);
         action.setParentMenuTitle(PUBLICATION_MENU);
         action.setParentMenuIconUrl("images/anybody.png");
-        contentActionRegistry.addAction(action, contentsModerated);
+        // contentActionRegistry.addAction(action, contentsModerated);
     }
 
     protected void createShowDeletedItems(final String parentMenuTitle, final String... registerInTypes) {
@@ -579,7 +579,7 @@ public abstract class AbstractFoldableContentActions {
         translateContent.setToolTip(i18n.t("Translate this document to other languages"));
         translateContent.setIconUrl("images/language.gif");
         translateContent.setEnableCondition(notDeleted());
-        contentActionRegistry.addAction(translateContent, registerInTypes);
+        // contentActionRegistry.addAction(translateContent, registerInTypes);
         return translateContent;
     }
 
@@ -647,7 +647,7 @@ public abstract class AbstractFoldableContentActions {
         if (position.equals(Position.ctx)) {
             contextActionRegistry.addAction(action, registerInTypes);
         } else if (position.equals(Position.cnt)) {
-            contentActionRegistry.addAction(action, registerInTypes);
+            // contentActionRegistry.addAction(action, registerInTypes);
         }
     }
 

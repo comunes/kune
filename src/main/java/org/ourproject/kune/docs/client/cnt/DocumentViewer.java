@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.docs.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.FoldableContent;
+import cc.kune.core.client.cnt.FoldableContent;
 
 public interface DocumentViewer extends FoldableContent {
 }

@@ -19,8 +19,6 @@
  */
 package cc.kune.gspace.client;
 
-import cc.kune.pspace.client.PSpacePresenter;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -34,7 +32,6 @@ import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
 
 public class WsArmorImpl extends Composite implements WsArmor {
 
@@ -80,13 +77,11 @@ public class WsArmorImpl extends Composite implements WsArmor {
     @UiField
     FlowPanel userSpace;
 
-    @Inject
-    public WsArmorImpl(final PSpacePresenter pspace) {
+    public WsArmorImpl() {
         initWidget(uiBinder.createAndBindUi(this));
         groupSpace.setWidgetMinSize(splitEast, 150);
         tabs.setStyleName("k-spaces");
         homeSpace.add(RootPanel.get("k-home-wrapper"));
-        publicSpace.add(pspace.getWidget());
     }
 
     @Override
@@ -135,10 +130,16 @@ public class WsArmorImpl extends Composite implements WsArmor {
     }
 
     @Override
+    public SimplePanel getPublicSpace() {
+        return publicSpace;
+    }
+
+    @Override
     public ForIsWidget getSitebar() {
         return sitebar;
     }
 
+    @Override
     public ForIsWidget getUserSpace() {
         return userSpace;
     }

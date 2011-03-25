@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.blogs.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.FoldableContent;
+import cc.kune.core.client.cnt.FoldableContent;
 
 public interface BlogViewer extends FoldableContent {
 }

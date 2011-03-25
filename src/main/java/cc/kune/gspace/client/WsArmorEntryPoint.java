@@ -34,7 +34,7 @@ public class WsArmorEntryPoint implements EntryPoint {
         resources.style().ensureInjected();
 
         final RootLayoutPanel rootPanel = RootLayoutPanel.get();
-        final WsArmorImpl armor = new WsArmorImpl(null);
+        final WsArmorImpl armor = new WsArmorImpl();
         final InlineLabel icons = new InlineLabel("Icons");
         final InlineLabel login = new InlineLabel("Login");
         final InlineLabel logo = new InlineLabel("Logo");

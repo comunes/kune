@@ -20,29 +20,28 @@
 package org.ourproject.kune.chat.client.cnt;
 
 import org.ourproject.kune.chat.client.ChatClientTool;
-import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
-import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.core.client.cnt.ActionContentToolbar;
+import cc.kune.core.client.cnt.FoldableContentPresenter;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
 
-import com.calclab.suco.client.ioc.Provider;
+import com.google.inject.Provider;
 
 public class ChatRoomPresenter extends FoldableContentPresenter implements ChatRoom {
 
-    private ChatRoomView view;
     private final I18nUITranslationService i18n;
+    private ChatRoomView view;
 
     public ChatRoomPresenter(final StateManager stateManager, final Session session,
             final I18nUITranslationService i18n, final ActionContentToolbar toolbar,
-            final ActionRegistry<StateToken> actionRegistry, final Provider<FileDownloadUtils> downloadProvider,
+            final GuiActionDescCollection actionRegistry, final Provider<FileDownloadUtils> downloadProvider,
             final Provider<MediaUtils> mediaUtils) {
         super(ChatClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
         this.i18n = i18n;

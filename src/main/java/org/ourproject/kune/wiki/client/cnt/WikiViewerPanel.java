@@ -19,13 +19,16 @@
  */
 package org.ourproject.kune.wiki.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPanel;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-
+import cc.kune.core.client.cnt.FoldableContentPanel;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.WsArmor;
+
+import com.google.inject.Inject;
 
 public class WikiViewerPanel extends FoldableContentPanel implements WikiViewerView {
-    public WikiViewerPanel(final WorkspaceSkeleton ws, I18nTranslationService i18n) {
-        super(ws, i18n);
+    @Inject
+    public WikiViewerPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res) {
+        super(ws, i18n, res);
     }
 }

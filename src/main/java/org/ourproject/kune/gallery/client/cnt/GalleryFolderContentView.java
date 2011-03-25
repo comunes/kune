@@ -19,8 +19,8 @@
  */
 package org.ourproject.kune.gallery.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
 
+import cc.kune.core.client.cnt.AbstractContentView;
 import cc.kune.core.shared.domain.utils.StateToken;
 
 public interface GalleryFolderContentView extends AbstractContentView {

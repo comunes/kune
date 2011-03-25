@@ -19,29 +19,28 @@
  */
 package org.ourproject.kune.wiki.client.cnt;
 
-import org.ourproject.kune.platf.client.actions.ActionRegistry;
-import org.ourproject.kune.platf.client.ui.rte.insertmedia.abstractmedia.MediaUtils;
 import org.ourproject.kune.wiki.client.WikiClientTool;
-import org.ourproject.kune.workspace.client.cnt.ActionContentToolbar;
-import org.ourproject.kune.workspace.client.cnt.FoldableContentPresenter;
 
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.core.client.cnt.ActionContentToolbar;
+import cc.kune.core.client.cnt.FoldableContentPresenter;
 import cc.kune.core.client.services.FileDownloadUtils;
+import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.ioc.Provider;
+import com.google.inject.Provider;
 
 public class WikiFolderContentPresenter extends FoldableContentPresenter implements WikiFolderContent {
 
-    private WikiFolderContentView view;
     private final I18nTranslationService i18n;
+    private WikiFolderContentView view;
 
     public WikiFolderContentPresenter(final StateManager stateManager, final Session session,
-            final ActionContentToolbar toolbar, final ActionRegistry<StateToken> actionRegistry,
+            final ActionContentToolbar toolbar, final GuiActionDescCollection actionRegistry,
             final I18nTranslationService i18n, final Provider<FileDownloadUtils> downloadProvider,
             final Provider<MediaUtils> mediaUtils) {
         super(WikiClientTool.NAME, stateManager, session, toolbar, actionRegistry, downloadProvider, i18n, mediaUtils);
@@ -56,7 +55,7 @@ public class WikiFolderContentPresenter extends FoldableContentPresenter impleme
     @Override
     protected void setState(final StateContainerDTO state) {
         if (state.getTypeId().equals(WikiClientTool.TYPE_ROOT)) {
-            ContainerDTO rootContainer = state.getRootContainer();
+            final ContainerDTO rootContainer = state.getRootContainer();
             if (rootContainer.getChilds().size() == 0 && rootContainer.getContents().size() == 0) {
                 view.setInfo(i18n.t("This wiki has no pages."));
             } else {

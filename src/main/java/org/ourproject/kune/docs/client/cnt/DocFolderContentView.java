@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.docs.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.AbstractContentView;
+import cc.kune.core.client.cnt.AbstractContentView;
 
 public interface DocFolderContentView extends AbstractContentView {
 }

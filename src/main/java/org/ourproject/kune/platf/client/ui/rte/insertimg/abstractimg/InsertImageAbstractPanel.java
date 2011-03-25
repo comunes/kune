@@ -20,9 +20,10 @@
 package org.ourproject.kune.platf.client.ui.rte.insertimg.abstractimg;
 
 import org.ourproject.kune.platf.client.i18n.Resources;
-import org.ourproject.kune.platf.client.ui.rte.insertimg.ContentPosition;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.ImageInfo;
 import org.ourproject.kune.platf.client.ui.rte.insertimg.InsertImageDialogView;
+
+import cc.kune.core.client.ui.utils.ContentPosition;
 
 import com.gwtext.client.data.Record;
 import com.gwtext.client.data.SimpleStore;

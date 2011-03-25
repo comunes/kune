@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.wiki.client.cnt;
 
-import org.ourproject.kune.workspace.client.cnt.FoldableContent;
+import cc.kune.core.client.cnt.FoldableContent;
 
 public interface WikiViewer extends FoldableContent {
 }

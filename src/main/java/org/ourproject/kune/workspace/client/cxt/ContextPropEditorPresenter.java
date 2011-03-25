@@ -30,13 +30,13 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.client.tags.TagsSummary;
 import cc.kune.core.shared.domain.TagCloudResult;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.I18nLanguageDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
+import cc.kune.gspace.client.tags.TagsSummary;
 
 import com.calclab.suco.client.ioc.Provider;
 
