@@ -32,8 +32,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import cc.kune.core.server.manager.file.ImageUtilsDefault;
-
 /**
  * If you get a UnsatisfiedLinkError this is a problem with jmagick installation
  * (in debian, apt-get install libjmagick6-jni, and add
@@ -46,14 +44,14 @@ import cc.kune.core.server.manager.file.ImageUtilsDefault;
  */
 public class ImageUtilsDefaultTest {
 
-    private static final String IMG_PATH = "src/test/java/org/ourproject/kune/platf/server/manager/file/";
-    private static String[] images = { "orig.png", "orig.gif", "orig.jpg", "orig.tiff", "orig.pdf" };
     private static String imageDest;
+    private static String[] images = { "orig.png", "orig.gif", "orig.jpg", "orig.tiff", "orig.pdf" };
+    private static final String IMG_PATH = "src/test/java/cc/kune/core/server/manager/file/";
     private static String pdf = "orig.pdf";
 
     @AfterClass
     public static void after() {
-        File file = new File(imageDest);
+        final File file = new File(imageDest);
         file.delete();
     }
 
@@ -69,9 +67,9 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void generateIcon() throws MagickException, FileNotFoundException {
-        for (String image : images) {
+        for (final String image : images) {
             ImageUtilsDefault.createThumb(IMG_PATH + image, imageDest, 16, 16);
-            Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
+            final Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
             assertEquals(16, (int) dimension.getHeight());
             assertEquals(16, (int) dimension.getWidth());
         }
@@ -79,9 +77,9 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void generateThumb() throws MagickException, FileNotFoundException {
-        for (String image : images) {
+        for (final String image : images) {
             ImageUtilsDefault.createThumb(IMG_PATH + image, imageDest, 100, 85);
-            Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
+            final Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
             assertEquals(85, (int) dimension.getHeight());
             assertEquals(85, (int) dimension.getWidth());
         }
@@ -89,7 +87,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalHigher() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(500, 1000, 100);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(500, 1000, 100);
         assertEquals(100, proportionalDim.width);
         assertEquals(200, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -98,7 +96,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalHigherLikeSamples() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(1200, 1600, 100);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(1200, 1600, 100);
         assertEquals(100, proportionalDim.width);
         assertEquals(133, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -107,7 +105,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalHigherSame() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(20, 100, 100);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(20, 100, 100);
         assertEquals(20, proportionalDim.width);
         assertEquals(100, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -116,7 +114,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalHigherSmaller() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(20, 10, 100);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(20, 10, 100);
         assertEquals(20, proportionalDim.width);
         assertEquals(10, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -125,35 +123,35 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalToBiggerNormal() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 300, false);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 300, false);
         assertEquals(300, proportionalDim.width);
         assertEquals(150, proportionalDim.height);
     }
 
     @Test
     public void testProportionalToBiggerSame() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 600, false);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 600, false);
         assertEquals(600, proportionalDim.width);
         assertEquals(300, proportionalDim.height);
     }
 
     @Test
     public void testProportionalToBiggerSmaller() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 700, false);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 700, false);
         assertEquals(600, proportionalDim.width);
         assertEquals(300, proportionalDim.height);
     }
 
     @Test
     public void testProportionalToBiggerWider() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(300, 600, 200, false);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(300, 600, 200, false);
         assertEquals(100, proportionalDim.width);
         assertEquals(200, proportionalDim.height);
     }
 
     @Test
     public void testProportionalWider() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(1000, 500, 100);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(1000, 500, 100);
         assertEquals(200, proportionalDim.width);
         assertEquals(100, proportionalDim.height);
         assertEquals(50, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -162,7 +160,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalWiderSame() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(100, 20, 100);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(100, 20, 100);
         assertEquals(100, proportionalDim.width);
         assertEquals(20, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -171,7 +169,7 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testProportionalWiderSmaller() {
-        Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(5, 10, 100);
+        final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(5, 10, 100);
         assertEquals(5, proportionalDim.width);
         assertEquals(10, proportionalDim.height);
         assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.width, 100));
@@ -180,9 +178,9 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testResize() throws MagickException, FileNotFoundException {
-        for (String image : images) {
+        for (final String image : images) {
             assertTrue(ImageUtilsDefault.scaleImage(IMG_PATH + image, imageDest, 100, 100));
-            Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
+            final Dimension dimension = ImageUtilsDefault.getDimension(imageDest);
             assertEquals(100, (int) dimension.getHeight());
             assertEquals(100, (int) dimension.getWidth());
         }
@@ -190,9 +188,9 @@ public class ImageUtilsDefaultTest {
 
     @Test
     public void testSize() throws MagickException {
-        for (String image : images) {
+        for (final String image : images) {
             if (!image.equals(pdf)) {
-                Dimension dimension = ImageUtilsDefault.getDimension(IMG_PATH + image);
+                final Dimension dimension = ImageUtilsDefault.getDimension(IMG_PATH + image);
                 assertEquals(400, (int) dimension.getHeight());
                 assertEquals(300, (int) dimension.getWidth());
             }

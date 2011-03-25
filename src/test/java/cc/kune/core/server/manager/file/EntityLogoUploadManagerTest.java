@@ -31,14 +31,13 @@ import org.ourproject.kune.platf.integration.content.ContentServiceIntegrationTe
 
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
-import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.google.inject.Inject;
 
 public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
-    private static final String TEST_FILE = "src/test/java/org/ourproject/kune/platf/server/manager/file/orig.png";
+    private static final String TEST_FILE = "src/test/java/cc/kune/core/server/manager/file/orig.png";
     @Inject
     EntityLogoUploadManager manager;
 
@@ -50,7 +49,7 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
     @Test
     public void testCreateLogo() throws Exception {
         manager.createUploadedFile(super.getSiteDefaultContent().getStateToken(), "image/png", new File(TEST_FILE));
-        StateContainerDTO defaultContent = super.getSiteDefaultContent();
+        final StateContainerDTO defaultContent = super.getSiteDefaultContent();
         assertTrue(defaultContent.getGroup().hasLogo());
     }
 
