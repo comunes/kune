@@ -28,6 +28,7 @@ import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
+import cc.kune.core.client.actions.ActionRegistries;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.core.client.auth.RegisterPresenter;
@@ -201,6 +202,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
         bind(BeforeSignOut.class).in(Singleton.class);
         bind(SiteTokenListeners.class).asEagerSingleton();
+        bind(ActionRegistries.class).in(Singleton.class);
         bind(CoreParts.class).asEagerSingleton();
 
         // SN

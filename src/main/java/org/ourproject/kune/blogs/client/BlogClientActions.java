@@ -25,7 +25,7 @@ import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_ROOT;
 import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_UPLOADEDFILE;
 
 import org.ourproject.kune.blogs.client.cnt.BlogViewer;
-import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
+import org.ourproject.kune.workspace.client.OldAbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
@@ -47,7 +47,7 @@ import cc.kune.core.client.state.StateManager;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class BlogClientActions extends AbstractFoldableContentActions {
+public class BlogClientActions extends OldAbstractFoldableContentActions {
     public BlogClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager, final SchedulerManager deferredCommandWrapper,
             final Provider<ContentServiceAsync> contentServiceProvider,

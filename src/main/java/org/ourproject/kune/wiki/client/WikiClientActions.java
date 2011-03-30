@@ -25,7 +25,7 @@ import static org.ourproject.kune.wiki.client.WikiClientTool.TYPE_UPLOADEDFILE;
 import static org.ourproject.kune.wiki.client.WikiClientTool.TYPE_WIKIPAGE;
 
 import org.ourproject.kune.wiki.client.cnt.WikiViewer;
-import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
+import org.ourproject.kune.workspace.client.OldAbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
@@ -47,7 +47,7 @@ import cc.kune.core.client.state.StateManager;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class WikiClientActions extends AbstractFoldableContentActions {
+public class WikiClientActions extends OldAbstractFoldableContentActions {
     public WikiClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager, final SchedulerManager deferredCommandWrapper,
             final Provider<ContentServiceAsync> contentServiceProvider,

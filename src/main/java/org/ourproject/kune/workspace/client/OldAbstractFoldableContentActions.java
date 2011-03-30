@@ -69,7 +69,7 @@ import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public abstract class AbstractFoldableContentActions {
+public abstract class OldAbstractFoldableContentActions {
 
     protected enum Position {
         cnt, ctx
@@ -102,7 +102,7 @@ public abstract class AbstractFoldableContentActions {
 
     private final WsBackManager wsBackManager;
 
-    public AbstractFoldableContentActions(final Session session, final StateManager stateManager,
+    public OldAbstractFoldableContentActions(final Session session, final StateManager stateManager,
             final I18nUITranslationService i18n, final ErrorHandler errorHandler,
             final SchedulerManager deferredCommandWrapper, final Provider<GroupServiceAsync> groupServiceProvider,
             final Provider<ContentServiceAsync> contentServiceProvider,

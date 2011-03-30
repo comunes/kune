@@ -26,8 +26,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.server.DocumentServerTool;
 import org.ourproject.kune.wiki.server.WikiServerTool;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
@@ -40,6 +38,8 @@ import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.docs.client.DocumentClientTool;
+import cc.kune.docs.server.DocumentServerTool;
 
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 

@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.skel;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbarPanel;
-import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
+import org.ourproject.kune.workspace.client.OldAbstractFoldableContentActions;
 
 import com.calclab.suco.client.ioc.Provider;
 import com.google.gwt.user.client.ui.Widget;
@@ -35,13 +35,13 @@ public class ActionCntCtxToolbarPanel<T> extends ActionToolbarPanel<T> {
             final Provider<ActionManager> actionManagerProvider, final WorkspaceSkeleton ws) {
         super(actionManagerProvider);
         EntityWorkspace entityWorkspace = ws.getEntityWorkspace();
-        if (position.equals(AbstractFoldableContentActions.CONTENT_TOPBAR)) {
+        if (position.equals(OldAbstractFoldableContentActions.CONTENT_TOPBAR)) {
             wsToolbar = entityWorkspace.getContentTopBar();
-        } else if (position.equals(AbstractFoldableContentActions.CONTENT_BOTTOMBAR)) {
+        } else if (position.equals(OldAbstractFoldableContentActions.CONTENT_BOTTOMBAR)) {
             wsToolbar = entityWorkspace.getContentBottomBar();
-        } else if (position.equals(AbstractFoldableContentActions.CONTEXT_TOPBAR)) {
+        } else if (position.equals(OldAbstractFoldableContentActions.CONTEXT_TOPBAR)) {
             wsToolbar = entityWorkspace.getContextTopBar();
-        } else if (position.equals(AbstractFoldableContentActions.CONTEXT_BOTTOMBAR)) {
+        } else if (position.equals(OldAbstractFoldableContentActions.CONTEXT_BOTTOMBAR)) {
             wsToolbar = entityWorkspace.getContextBottomBar();
         }
 

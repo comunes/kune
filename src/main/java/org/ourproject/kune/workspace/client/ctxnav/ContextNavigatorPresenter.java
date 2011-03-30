@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.ctxnav;
 
-import static org.ourproject.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
+import static cc.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
 
 import java.util.HashMap;
 
@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.actions.ActionItemCollection;
 import org.ourproject.kune.platf.client.actions.ActionRegistry;
 import org.ourproject.kune.platf.client.actions.toolbar.ActionToolbar;
 import org.ourproject.kune.platf.client.ui.KuneUiUtils;
-import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
+import org.ourproject.kune.workspace.client.OldAbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cxt.ActionContextBottomToolbar;
 import org.ourproject.kune.workspace.client.title.RenameAction;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
@@ -160,8 +160,8 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         topToolbar.disableMenusAndClearButtons();
         bottomToolbar.disableMenusAndClearButtons();
         final ActionItemCollection<StateToken> itemCollection = actionsByItem.get(stateToken);
-        topToolbar.addActions(itemCollection, AbstractFoldableContentActions.CONTEXT_TOPBAR);
-        bottomToolbar.addActions(itemCollection, AbstractFoldableContentActions.CONTEXT_BOTTOMBAR);
+        topToolbar.addActions(itemCollection, OldAbstractFoldableContentActions.CONTEXT_TOPBAR);
+        bottomToolbar.addActions(itemCollection, OldAbstractFoldableContentActions.CONTEXT_BOTTOMBAR);
     }
 
     @Override

@@ -22,11 +22,10 @@ package cc.kune.wave.client;
 
 
 
-
+import org.waveprotocol.box.webclient.client.HistorySupport;
 import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
-import org.waveprotocol.box.webclient.client.HistorySupport;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.Session;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
@@ -46,6 +45,8 @@ import org.waveprotocol.box.webclient.search.SearchPresenter;
 import org.waveprotocol.box.webclient.search.SimpleSearch;
 import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.box.webclient.util.Log;
+import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
+import org.waveprotocol.box.webclient.widget.loading.LoadingIndicator;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.account.impl.ProfileManagerImpl;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
@@ -68,11 +69,12 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
+import com.google.gwt.user.client.ui.UIObject;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -82,8 +84,6 @@ public class WebClient extends Composite {
   }
 
   interface Style extends CssResource {
-    String subPanel();
-    String waveView();
   }
 
   private static final Binder BINDER = GWT.create(Binder.class);
@@ -99,10 +99,14 @@ public class WebClient extends Composite {
   Style style;
 
   @UiField
-  ImplPanel contentPanel;
+  FramedPanel waveFrame;
+
+  @UiField
+  ImplPanel waveHolder;
+  private final Element loading = new LoadingIndicator().getElement();
 
   @UiField(provided = true)
-  SearchPanelWidget searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
+  final SearchPanelWidget searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
 
   @UiField
   DebugMessagePanel logPanel;
@@ -174,7 +178,6 @@ public class WebClient extends Composite {
     // cleared.
     self.getElement().getStyle().clearPosition();
     splitPanel.setWidgetMinSize(searchPanel, 300);
-    splitPanel.setWidgetMinSize(contentPanel, 450);
 
     if (LogLevel.showDebug()) {
       logPanel.enable();
@@ -200,6 +203,9 @@ public class WebClient extends Composite {
   }
 
   private void setupWavePanel() {
+    // Hide the frame until waves start getting opened.
+    UIObject.setVisible(waveFrame.getElement(), false);
+
     // Handles opening waves.
     ClientEvents.get().addWaveSelectionEventHandler(new WaveSelectionEventHandler() {
       @Override
@@ -241,9 +247,7 @@ public class WebClient extends Composite {
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl(String moduleBase) /*-{return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";}-*/;
 
-  private native boolean useSocketIO() /*-{
-    return !!$wnd.__useSocketIO
-}-*/;
+  private native boolean useSocketIO() /*-{ return !!$wnd.__useSocketIO }-*/;
 
   /**
    */
@@ -266,11 +270,19 @@ public class WebClient extends Composite {
       wave = null;
     }
 
-    Element holder = contentPanel.getElement().appendChild(Document.get().createDivElement());
-    final StagesProvider wave = new StagesProvider(holder,
-        contentPanel, waveRef, channel, idGenerator, profiles, waveStore, isNewWave);
+    // Release the display:none.
+    UIObject.setVisible(waveFrame.getElement(), true);
+    waveHolder.getElement().appendChild(loading);
+    Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
+    StagesProvider wave = new StagesProvider(
+        holder, waveHolder, waveRef, channel, idGenerator, profiles, waveStore, isNewWave);
     this.wave = wave;
-    wave.load(null);
+    wave.load(new Command() {
+      @Override
+      public void execute() {
+        loading.removeFromParent();
+      }
+    });
     String encodedToken = History.getToken();
     NotifyUser.info("Open Wave: " + encodedToken + " waveRef: " + waveRef.getWaveId(), true);
     if (encodedToken != null && !encodedToken.isEmpty()) {
@@ -338,12 +350,13 @@ public class WebClient extends Composite {
       // javascript stack trace.
       //
       // Use minimal services here, in order to avoid the chance that reporting
-      // the error produces more errors. In particular, do not use Scheduler.
+      // the error produces more errors. In particular, do not use WIAB's
+      // scheduler to run this command.
       // Also, this code could potentially be put behind a runAsync boundary, to
       // save whatever dependencies it uses from the initial download.
-      DeferredCommand.addCommand(new Command() {
+      new Timer() {
         @Override
-        public void execute() {
+        public void run() {
           SafeHtmlBuilder stack = new SafeHtmlBuilder();
 
           Throwable error = t;
@@ -365,7 +378,7 @@ public class WebClient extends Composite {
 
           whenReady.use(stack.toSafeHtml());
         }
-      });
+      }.schedule(1);
     }
 
     private static String maybe(String value, String otherwise) {

@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.ourproject.kune.chat.server.ChatServerModule;
-import org.ourproject.kune.docs.server.DocumentServerModule;
 import org.ourproject.kune.wiki.server.WikiServerModule;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.ServerModule;
@@ -35,6 +34,7 @@ import cc.kune.core.server.PlatformServerModule;
 import cc.kune.core.server.TestConstants;
 import cc.kune.core.server.init.FinderRegistry;
 import cc.kune.core.server.properties.PropertiesFileName;
+import cc.kune.docs.server.DocumentServerModule;
 import cc.kune.wave.server.CustomSettingsBinder;
 
 import com.google.inject.AbstractModule;

@@ -3,10 +3,11 @@
     xmlns:g='urn:import:com.google.gwt.user.client.ui'
     xmlns:d='urn:import:org.waveprotocol.box.webclient.client'
     xmlns:s='urn:import:org.waveprotocol.box.webclient.search'
+    xmlns:f='urn:import:org.waveprotocol.box.webclient.widget.frame'
     xmlns:w='urn:import:org.waveprotocol.wave.client.widget.common'>
   <ui:style type="cc.kune.wave.client.WebClient.Style">
     @def rootBackground #f0f0ff;
-    @def gap 5px;
+    @def gap 10px;
     .root {
       background: rootBackground;
       position: absolute;
@@ -20,12 +21,7 @@
       position: absolute;
     }
 
-    .subPanel {
-      background: white; border: thin solid silver; border-radius: gap;
-    }
-
     .splitPanel {
-
     }
 
     @external gwt-SplitLayoutPanel-HDragger;
@@ -34,34 +30,50 @@
       background-color: rootBackground;
     }
 
-    .waveList {
-      margin-left: gap;
-    }
-
-    .waveView {
-      margin-right: gap; opacity: 0; visibility: hidden;
-      -webkit-transition: opacity 1s ease-in-out;
+    .searchPanel {
+      /*
+       * GWT's drag panel separators are already huge, so no margin needed on
+       * sides that have drag panels.
+       */
+      margin: gap 0 0 gap;
     }
 
     .debugPanel {
+      background: white;
+      border: thin solid silver;
+      border-radius: 5px;
       margin: 0 gap gap gap;
     }
 
-    .fullGap {
-      margin: gap;
+    .wavePanel {
+      /*
+       * GWT's drag panel separators are already huge, so no margin needed on
+       * sides that have drag panels.
+       */
+      margin: gap 0 0 0;
+    }
+
+    .waveHolder {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
   </ui:style>
   <g:DockLayoutPanel unit="PX" styleName="{style.root}">
     <g:center>
       <g:SplitLayoutPanel ui:field="splitPanel" stylePrimaryName="{style.splitPanel}">
         <g:south size="200">
-          <d:DebugMessagePanel ui:field="logPanel" addStyleNames="{style.subPanel} {style.debugPanel}" />
+          <d:DebugMessagePanel ui:field="logPanel" addStyleNames="{style.debugPanel}" />
         </g:south>
         <g:west size="400">
-          <s:SearchPanelWidget ui:field="searchPanel"/> 
+          <s:SearchPanelWidget ui:field="searchPanel" addStyleNames="{style.searchPanel}"/>
         </g:west>
         <g:center>
-          <w:ImplPanel ui:field="contentPanel"/>
+          <f:FramedPanel ui:field="waveFrame" addStyleNames="{style.wavePanel}">
+            <w:ImplPanel ui:field="waveHolder" addStyleNames="{style.waveHolder}"/>
+          </f:FramedPanel>
         </g:center>
       </g:SplitLayoutPanel>
     </g:center>

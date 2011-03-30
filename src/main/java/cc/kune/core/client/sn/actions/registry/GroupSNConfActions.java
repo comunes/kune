@@ -39,7 +39,8 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
             final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
             final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
             final IsGroupCondition isGroupCondition, final UnJoinGroupAction unJoinGroupAction) {
-        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles("k-sn-options-menu");
+        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles(
+                "k-sn-options-menu, k-noborder, k-nobackcolor");
         final GuiActionDescrip optionsTitle = new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
         final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
                 SocialNetworkVisibility.anyone);
@@ -65,8 +66,8 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
         final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
         final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);
         unJoinBtn.add(isLoggedCondition);
-        add(joinBtn.withStyles("k-no-backimage"));
-        add(unJoinBtn.withStyles("k-no-backimage"));
+        add(joinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
+        add(unJoinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
 
         stateManager.onStateChanged(true, new StateChangedHandler() {
             @Override

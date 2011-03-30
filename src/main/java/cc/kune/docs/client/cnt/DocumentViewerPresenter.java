@@ -17,9 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt;
+package cc.kune.docs.client.cnt;
 
-import org.ourproject.kune.docs.client.DocumentClientTool;
 
 import cc.kune.core.client.cnt.ActionContentToolbar;
 import cc.kune.core.client.cnt.ContentActionRegistry;
@@ -30,6 +29,7 @@ import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.docs.client.DocumentClientTool;
 
 import com.google.inject.Provider;
 

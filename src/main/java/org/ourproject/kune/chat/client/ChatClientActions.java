@@ -23,7 +23,7 @@ import org.ourproject.kune.chat.client.ctx.room.AddRoom;
 import org.ourproject.kune.platf.client.actions.ActionEnableCondition;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarButtonSeparator;
-import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
+import org.ourproject.kune.workspace.client.OldAbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 
 import cc.kune.common.client.utils.SchedulerManager;
@@ -64,7 +64,7 @@ public class ChatClientActions {
 
     private void createActions() {
         final ActionToolbarButtonDescriptor<StateToken> chatAbout = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
+                AccessRolDTO.Viewer, OldAbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken token) {
                         deferredWrapper.get().addCommand(new ScheduledCommand() {
@@ -85,7 +85,7 @@ public class ChatClientActions {
         chatAbout.setEnableCondition(notDeleted());
 
         final ActionToolbarButtonDescriptor<StateToken> joinRoom = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Viewer, AbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
+                AccessRolDTO.Viewer, OldAbstractFoldableContentActions.CONTENT_TOPBAR, new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken token) {
                         final ChatEngine chatEngine = chatEngineProvider.get();
@@ -99,7 +99,7 @@ public class ChatClientActions {
         joinRoom.setMustBeAuthenticated(true);
 
         final ActionToolbarButtonDescriptor<StateToken> addRoom = new ActionToolbarButtonDescriptor<StateToken>(
-                AccessRolDTO.Administrator, AbstractFoldableContentActions.CONTEXT_TOPBAR, new Listener<StateToken>() {
+                AccessRolDTO.Administrator, OldAbstractFoldableContentActions.CONTEXT_TOPBAR, new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken token) {
                         addRoomProvider.get().show();

@@ -23,10 +23,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.ourproject.kune.docs.server.DocumentServerTool;
 
 import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.core.server.manager.impl.SearchResult;
+import cc.kune.docs.server.DocumentServerTool;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Content;
 

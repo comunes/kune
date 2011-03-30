@@ -29,8 +29,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.server.DocumentServerTool;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.server.integration.IntegrationTestHelper;
@@ -43,6 +41,8 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
+import cc.kune.docs.client.DocumentClientTool;
+import cc.kune.docs.server.DocumentServerTool;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 

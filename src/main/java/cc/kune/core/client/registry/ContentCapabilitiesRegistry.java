@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.registry;
 
+import com.google.inject.Inject;
 
 public class ContentCapabilitiesRegistry {
 
@@ -40,6 +41,7 @@ public class ContentCapabilitiesRegistry {
     private final XmppComentableRegistry xmppComentable;
     private final XmppNotifyCapableRegistry xmppNotifyCapable;
 
+    @Inject
     public ContentCapabilitiesRegistry(final AuthorableRegistry authorableRegistry,
             final AclEditableRegistry aclEditableRegistry, final ContentIconsRegistry iconsRegistry,
             final CanBeHomepageRegistry canBeHomepage, final ComentableRegistry comentable,

@@ -41,6 +41,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     protected void addStyle(final String style) {
         if (notStandAlone) {
             iconLabel.addStyleName(style);
+            button.addStyleName(style);
             layout();
         }
     }

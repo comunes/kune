@@ -1,3 +1,4 @@
+// @formatter:off
 /**
  * Copyright 2010 Google Inc.
  *
@@ -45,108 +46,108 @@ import com.google.inject.name.Named;
  *
  * @author josephg@gmail.com (Joseph Gentle)
  */
-public class CustomUserRegistrationServlet extends HttpServlet {
-    private final AccountStore accountStore;
-    private final String domain;
+public final class CustomUserRegistrationServlet extends HttpServlet {
+  private final AccountStore accountStore;
+  private final String domain;
 
-    private final Log LOG = Log.get(CustomUserRegistrationServlet.class);
+  private final Log LOG = Log.get(CustomUserRegistrationServlet.class);
 
-    @Inject
-    public CustomUserRegistrationServlet(final AccountStore accountStore,
-            @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
-        this.accountStore = accountStore;
-        this.domain = domain;
+  @Inject
+  public CustomUserRegistrationServlet(final AccountStore accountStore,
+      @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
+    this.accountStore = accountStore;
+    this.domain = domain;
+  }
+
+  @Override
+  protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+    writeRegistrationPage("", AuthenticationServlet.RESPONSE_STATUS_NONE, req.getLocale(), resp);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+    req.setCharacterEncoding("UTF-8");
+    String password = req.getParameter(HttpRequestBasedCallbackHandler.PASSWORD_FIELD);
+    if (password == null) {
+      // Register the user with an empty password.
+      password = "";
+    }
+    final PasswordDigest passwordDigest = new PasswordDigest(password.toCharArray());
+    String message =
+        tryCreateUser(req.getParameter(HttpRequestBasedCallbackHandler.ADDRESS_FIELD), passwordDigest);
+    String responseType = AuthenticationServlet.RESPONSE_STATUS_SUCCESS;
+
+    if (message != null) {
+      resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+      responseType = AuthenticationServlet.RESPONSE_STATUS_FAILED;
+    } else {
+      message = "Registration complete.";
+      resp.setStatus(HttpServletResponse.SC_OK);
     }
 
-    @Override
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        writeRegistrationPage("", AuthenticationServlet.RESPONSE_STATUS_NONE, req.getLocale(), resp);
+    writeRegistrationPage(message, responseType, req.getLocale(), resp);
+  }
+
+  /**
+   * Try to create a user with the provided username and password. On error,
+   * returns a string containing an error message. On success, returns null.
+   */
+  public String tryCreateUser(String username, final PasswordDigest passwordDigest) {
+    final String message = null;
+    ParticipantId id = null;
+
+    try {
+      // First, some cleanup on the parameters.
+      if (username == null) {
+        return "Username portion of address cannot be less than 2 characters";
+      }
+      username = username.trim().toLowerCase();
+      if (username.contains(ParticipantId.DOMAIN_PREFIX)) {
+        id = ParticipantId.of(username);
+      } else {
+        id = ParticipantId.of(username + ParticipantId.DOMAIN_PREFIX + domain);
+      }
+      if (id.getAddress().indexOf("@") < 2) {
+        return "Username portion of address cannot be less than 2 characters";
+      }
+      final String[] usernameSplit = id.getAddress().split("@");
+      if (usernameSplit.length != 2 || !usernameSplit[0].matches("[\\w\\.]+")) {
+        return "Only letters (a-z), numbers (0-9), and periods (.) are allowed in Username";
+      }
+      if (!id.getDomain().equals(domain)) {
+        return "You can only create users at the " + domain + " domain";
+      }
+    } catch (final InvalidParticipantAddress e) {
+      return "Invalid username";
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        req.setCharacterEncoding("UTF-8");
-
-        final String username = req.getParameter(HttpRequestBasedCallbackHandler.ADDRESS_FIELD);
-        String passwd = req.getParameter(HttpRequestBasedCallbackHandler.PASSWORD_FIELD);
-        if (passwd == null) {
-            // Register the user with an empty password.
-            passwd = "";
-        }
-        final PasswordDigest passwordDigest = new PasswordDigest(passwd.toCharArray());
-        String message = tryCreateUser(username, passwordDigest);
-        String responseType = AuthenticationServlet.RESPONSE_STATUS_SUCCESS;
-
-        if (message != null) {
-            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            responseType = AuthenticationServlet.RESPONSE_STATUS_FAILED;
-        } else {
-            message = "Registration complete.";
-            resp.setStatus(HttpServletResponse.SC_OK);
-        }
-
-        writeRegistrationPage(message, responseType, req.getLocale(), resp);
+    try {
+      if (accountStore.getAccount(id) != null) {
+        return "Account already exists";
+      }
+    } catch (final PersistenceException e) {
+      LOG.severe("Failed to retreive account data for " + id, e);
+      return "An unexpected error occured while trying to retrieve account status";
     }
 
-    /**
-     * Try to create a user with the provided username and password. On error,
-     * returns a string containing an error message. On success, returns null.
-     */
-    public String tryCreateUser(final String username, final PasswordDigest passwordDigest) {
-        String lusername = username;
-        // final String message = null;
-        ParticipantId id = null;
-
-        try {
-            // First, some cleanup on the parameters.
-            if (lusername == null) {
-                return "Username portion of address cannot be less than 2 characters";
-            }
-            lusername = lusername.trim().toLowerCase();
-            if (lusername.contains(ParticipantId.DOMAIN_PREFIX)) {
-                id = ParticipantId.of(lusername);
-            } else {
-                id = ParticipantId.of(lusername + ParticipantId.DOMAIN_PREFIX + domain);
-            }
-            if (id.getAddress().indexOf("@") < 2) {
-                return "Username portion of address cannot be less than 2 characters";
-            }
-            final String[] usernameSplit = id.getAddress().split("@");
-            if (usernameSplit.length != 2 || !usernameSplit[0].matches("[\\w\\.]+")) {
-                return "Only letters (a-z), numbers (0-9), and periods (.) are allowed in Username";
-            }
-            if (!id.getDomain().equals(domain)) {
-                return "You can only create users at the " + domain + " domain";
-            }
-        } catch (final InvalidParticipantAddress e) {
-            return "Invalid username";
-        }
-
-        try {
-            if (accountStore.getAccount(id) != null) {
-                return "An account with this name already exists";
-            }
-        } catch (final PersistenceException e) {
-            LOG.severe("Failed to retreive account data for " + id, e);
-            return "An unexpected error occured while trying to retrieve account status";
-        }
-
-        final HumanAccountDataImpl account = new HumanAccountDataImpl(id, passwordDigest);
-        try {
-            accountStore.putAccount(account);
-        } catch (final PersistenceException e) {
-            LOG.severe("Failed to create new account for " + id, e);
-            return "An unexpected error occured while trying to create the account";
-        }
-
-        return null;
+    final HumanAccountDataImpl account =
+        new HumanAccountDataImpl(id, passwordDigest);
+    try {
+      accountStore.putAccount(account);
+    } catch (final PersistenceException e) {
+      LOG.severe("Failed to create new account for " + id, e);
+      return "An unexpected error occured while trying to create the account";
     }
 
-    private void writeRegistrationPage(final String message, final String responseType, final Locale locale,
-            final HttpServletResponse dest) throws IOException {
-        dest.setCharacterEncoding("UTF-8");
-        dest.setContentType("text/html;charset=utf-8");
-        UserRegistrationPage.write(dest.getWriter(), new GxpContext(locale), domain, message, responseType);
-    }
+    return null;
+  }
+
+  private void writeRegistrationPage(final String message, final String responseType, final Locale locale,
+      final HttpServletResponse dest) throws IOException {
+    dest.setCharacterEncoding("UTF-8");
+    dest.setContentType("text/html;charset=utf-8");
+    UserRegistrationPage.write(dest.getWriter(), new GxpContext(locale), domain, message,
+        responseType);
+  }
 }

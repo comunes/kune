@@ -86,5 +86,4 @@ public interface GuiActionDescrip {
     GuiActionDescrip withText(String text);
 
     GuiActionDescrip withToolTip(String tooltip);
-
 }

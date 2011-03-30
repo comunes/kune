@@ -24,7 +24,7 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
 
     @Inject
     public ToolSelectorPanel(final WsArmor wsArmor) {
-        wsArmor.getEntityToolsSouth().add(uiBinder.createAndBindUi(this));
+        wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
     }
 
     @Override

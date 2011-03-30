@@ -7,7 +7,7 @@ import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.core.client.sn.actions.RolAction;
+import cc.kune.core.client.actions.RolActionAutoUpdated;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
@@ -27,7 +27,7 @@ import com.calclab.emite.xep.muc.client.RoomManager;
 import com.calclab.suco.client.Suco;
 import com.google.inject.Inject;
 
-public class OpenGroupPublicChatRoomAction extends RolAction {
+public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
 
     private final ChatClient chatClient;
     private final I18nTranslationService i18n;

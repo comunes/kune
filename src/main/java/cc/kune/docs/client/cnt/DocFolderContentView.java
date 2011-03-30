@@ -17,8 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.ctx;
+package cc.kune.docs.client.cnt;
 
-public interface DocumentContext {
+import cc.kune.core.client.cnt.AbstractContentView;
 
+public interface DocFolderContentView extends AbstractContentView {
 }

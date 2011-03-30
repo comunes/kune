@@ -25,8 +25,6 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.ourproject.kune.blogs.server.BlogServerToolTest;
 import org.ourproject.kune.chat.ChatToolTest;
 import org.ourproject.kune.chat.server.managers.XmppManagerTest;
-import org.ourproject.kune.docs.DocumentToolTest;
-import org.ourproject.kune.docs.server.DocumentServerToolTest;
 import org.ourproject.kune.gallery.server.GalleryServerToolTest;
 import org.ourproject.kune.wiki.server.WikiServerToolTest;
 import org.ourproject.kune.workspace.client.entityheader.EntityLogoPresenterTest;
@@ -36,6 +34,8 @@ import org.ourproject.kune.workspace.client.socialnet.RolComparatorTest;
 
 import cc.kune.core.server.rack.filters.rest.TestRESTMethodFinder;
 import cc.kune.core.server.rack.filters.rest.TestRESTServiceDefinition;
+import cc.kune.docs.DocumentToolTest;
+import cc.kune.docs.server.DocumentServerToolTest;
 import cc.kune.gspace.client.tags.TagsSummaryPresenterTest;
 import cc.kune.gspace.client.tool.ToolSelectorPresenterTest;
 

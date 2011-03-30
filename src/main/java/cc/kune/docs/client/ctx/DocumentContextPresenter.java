@@ -17,7 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt;
+package cc.kune.docs.client.ctx;
 
-public interface DocFolderContent {
+
+public class DocumentContextPresenter {
+
 }
+// extends FoldableContextPresenter implements DocumentContext {
+// public DocumentContextPresenter(final StateManager stateManager,
+// final Provider<ContextNavigator> contextNavigatorProvider,
+// final Provider<ContextPropEditor> contextPropEditorProvider) {
+// super(DocumentClientTool.NAME, stateManager, contextNavigatorProvider,
+// contextPropEditorProvider);
+// }
+

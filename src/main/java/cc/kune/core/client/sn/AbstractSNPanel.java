@@ -30,6 +30,8 @@ public class AbstractSNPanel extends ViewImpl {
     interface AbstractSNPanelUiBinder extends UiBinder<Widget, AbstractSNPanel> {
     }
 
+    private static final String CATEG_HEIGHT = "80px";
+
     private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
     protected final ActionSimplePanel actions;
     int AVATARLABELMAXSIZE = 4;
@@ -123,5 +125,20 @@ public class AbstractSNPanel extends ViewImpl {
 
     public IsActionExtensible getBottomToolbar() {
         return bottomActionsToolbar;
+    }
+
+    public void setFirstCategoryVisible(final boolean visible) {
+        firstCategoryPanel.setVisible(visible);
+        firstCategoryPanel.setHeight(visible ? CATEG_HEIGHT : "0px");
+    }
+
+    public void setSndCategoryVisible(final boolean visible) {
+        sndCategoryPanel.setVisible(visible);
+        sndCategoryPanel.setHeight(visible ? CATEG_HEIGHT : "0px");
+    }
+
+    public void setTrdCategoryVisible(final boolean visible) {
+        trdCategoryPanel.setVisible(visible);
+        trdCategoryPanel.setHeight(visible ? CATEG_HEIGHT : "0px");
     }
 }

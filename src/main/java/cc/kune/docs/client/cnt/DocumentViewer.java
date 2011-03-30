@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt;
+package cc.kune.docs.client.cnt;
 
-import cc.kune.core.client.cnt.AbstractContentView;
+import cc.kune.core.client.cnt.FoldableContent;
 
-public interface DocFolderContentView extends AbstractContentView {
+public interface DocumentViewer extends FoldableContent {
 }

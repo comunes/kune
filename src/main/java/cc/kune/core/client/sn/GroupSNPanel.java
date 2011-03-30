@@ -67,7 +67,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
     @Override
     public void setCollabsVisible(final boolean visible) {
-        sndCategoryPanel.setVisible(visible);
+        super.setSndCategoryVisible(visible);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
     @Override
     public void setPendingVisible(final boolean visible) {
-        trdCategoryPanel.setVisible(visible);
+        super.setTrdCategoryVisible(visible);
     }
 
     @Override

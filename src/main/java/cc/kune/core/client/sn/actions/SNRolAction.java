@@ -1,5 +1,6 @@
 package cc.kune.core.client.sn.actions;
 
+import cc.kune.core.client.actions.RolActionAutoUpdated;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.SocialNetworkServiceAsync;
 import cc.kune.core.client.state.AccessRightsClientManager;
@@ -11,7 +12,7 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public abstract class SNRolAction extends RolAction {
+public abstract class SNRolAction extends RolActionAutoUpdated {
     protected final I18nTranslationService i18n;
     protected final Provider<SocialNetworkServiceAsync> snServiceProvider;
 

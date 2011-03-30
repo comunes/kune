@@ -24,7 +24,7 @@ import static org.ourproject.kune.gallery.client.GalleryClientTool.TYPE_ROOT;
 import static org.ourproject.kune.gallery.client.GalleryClientTool.TYPE_UPLOADEDFILE;
 
 import org.ourproject.kune.gallery.client.cnt.GalleryViewer;
-import org.ourproject.kune.workspace.client.AbstractFoldableContentActions;
+import org.ourproject.kune.workspace.client.OldAbstractFoldableContentActions;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
@@ -46,7 +46,7 @@ import cc.kune.core.client.state.StateManager;
 
 import com.calclab.suco.client.ioc.Provider;
 
-public class GalleryClientActions extends AbstractFoldableContentActions {
+public class GalleryClientActions extends OldAbstractFoldableContentActions {
     public GalleryClientActions(final I18nUITranslationService i18n, final ContextNavigator contextNavigator,
             final Session session, final StateManager stateManager, final SchedulerManager deferredCommandWrapper,
             final Provider<ContentServiceAsync> contentServiceProvider,

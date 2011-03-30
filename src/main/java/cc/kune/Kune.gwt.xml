@@ -6,6 +6,7 @@
   <inherits name="cc.kune.core.Core" />
   <inherits name="cc.kune.wave.KuneWave" />
   <inherits name="cc.kune.chat.Chat" />
+  <inherits name="cc.kune.docs.KuneDocs" />
   <inherits name="cc.kune.pspace.PSpace" />
   <inherits name="com.calclab.suco.Suco" />
   <inherits name="org.adamtacy.GWTEffects"></inherits>
@@ -45,11 +46,11 @@
   <inherits name="com.google.gwt.user.Debug" />
   <!-- Hardcoded locale (to override emite italian support) ===== -->
   <extend-property name="locale" values="en" />
-  <set-property name="locale" value="en"/>
+  <set-property name="locale" value="en" />
   <!-- Hardcoded log level ====================================== -->
   <!-- Turn off logging in wave -->
   <set-property name="loglevel" value="none" />
-  <!-- <set-property name="loglevel" value="debug" />-->
+  <!-- <set-property name="loglevel" value="debug" /> -->
   <!-- Entrypoint =============================================== -->
   <entry-point class="cc.kune.client.KuneEntryPoint" />
   <!-- <entry-point class="cc.kune.common.client.SampleEntryPoint" /> -->

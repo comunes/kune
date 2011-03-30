@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 import com.google.inject.Provider;
 
-@Deprecated
 public class GuiActionDescProviderCollection extends ArrayList<Provider<GuiActionDescrip>> {
 
     private static final long serialVersionUID = -7933642706229301169L;

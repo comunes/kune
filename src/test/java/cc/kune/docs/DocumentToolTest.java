@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,9 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client.cnt;
+package cc.kune.docs;
 
-import cc.kune.core.client.cnt.AbstractContentView;
+import static org.junit.Assert.assertEquals;
 
-public interface DocumentViewerView extends AbstractContentView {
+import org.junit.Test;
+
+import cc.kune.docs.client.DocumentClientTool;
+import cc.kune.docs.server.DocumentServerTool;
+
+public class DocumentToolTest {
+
+    @Test
+    public void clientAndServerSync() {
+        assertEquals(DocumentServerTool.NAME, DocumentClientTool.NAME);
+        assertEquals(DocumentServerTool.TYPE_ROOT, DocumentClientTool.TYPE_ROOT);
+        assertEquals(DocumentServerTool.TYPE_FOLDER, DocumentClientTool.TYPE_FOLDER);
+        assertEquals(DocumentServerTool.TYPE_DOCUMENT, DocumentClientTool.TYPE_DOCUMENT);
+    }
 }

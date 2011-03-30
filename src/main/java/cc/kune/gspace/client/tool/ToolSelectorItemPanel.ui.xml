@@ -5,8 +5,9 @@
     .label {
         text-decoration: none;
         font-size: 22px;
-        color: white;
+        color: white; /*
         text-shadow: 1px 1px 6px grey;
+        */
     }
 
     .link a:link {
@@ -14,12 +15,12 @@
     }
 
     .self {
+
     }
 
     .flow {
         min-height: 30px;
         padding: 5px 10px;
-
     }
 
     .iconLeft {
@@ -29,7 +30,7 @@
     .iconRight {
         float: right;
         position: relative;
-        right: -19px;
+        right: -17px;
         top: -6px;
     }
   </ui:style>

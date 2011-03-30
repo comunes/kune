@@ -28,7 +28,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.ourproject.kune.chat.server.ChatServerTool;
-import org.ourproject.kune.docs.server.DocumentServerTool;
 
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
@@ -37,6 +36,7 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.manager.LicenseManager;
+import cc.kune.docs.server.DocumentServerTool;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;

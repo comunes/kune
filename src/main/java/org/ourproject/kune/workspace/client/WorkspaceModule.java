@@ -1014,7 +1014,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public ActionContextTopToolbar create() {
                 final ActionCntCtxToolbarPanel<StateToken> panel = new ActionCntCtxToolbarPanel<StateToken>(
-                        AbstractFoldableContentActions.CONTEXT_TOPBAR, p(ActionManager.class),
+                        OldAbstractFoldableContentActions.CONTEXT_TOPBAR, p(ActionManager.class),
                         i(WorkspaceSkeleton.class));
                 final ActionContextTopToolbar toolbar = new ActionContextTopToolbar(panel);
                 return toolbar;
@@ -1025,7 +1025,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             @Override
             public ActionContextBottomToolbar create() {
                 final ActionCntCtxToolbarPanel<StateToken> panel = new ActionCntCtxToolbarPanel<StateToken>(
-                        AbstractFoldableContentActions.CONTEXT_BOTTOMBAR, p(ActionManager.class),
+                        OldAbstractFoldableContentActions.CONTEXT_BOTTOMBAR, p(ActionManager.class),
                         i(WorkspaceSkeleton.class));
                 final ActionContextBottomToolbar toolbar = new ActionContextBottomToolbar(panel);
                 return toolbar;

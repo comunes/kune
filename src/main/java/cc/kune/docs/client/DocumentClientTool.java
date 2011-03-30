@@ -17,28 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client;
-
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
-import org.ourproject.kune.workspace.client.themes.WsThemeManager;
-import org.ourproject.kune.workspace.client.tool.OldFoldableAbstractClientTool;
+package cc.kune.docs.client;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.gspace.client.tool.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.ToolSelector;
 
-public class DocumentClientTool extends OldFoldableAbstractClientTool {
-    public static final String NAME = "docs";
-    public static final String TYPE_ROOT = NAME + "." + "root";
-    public static final String TYPE_FOLDER = NAME + "." + "folder";
-    public static final String TYPE_DOCUMENT = NAME + "." + "doc";
-    public static final String TYPE_UPLOADEDFILE = NAME + "." + OldFoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
-    public static final String TYPE_WAVE = NAME + "." + OldFoldableAbstractClientTool.WAVE_SUFFIX;
+import com.google.inject.Inject;
 
+public class DocumentClientTool extends FoldableAbstractClientTool {
+    public static final String NAME = "docs";
+    public static final String TYPE_DOCUMENT = NAME + "." + "doc";
+    public static final String TYPE_FOLDER = NAME + "." + "folder";
+    public static final String TYPE_ROOT = NAME + "." + "root";
+    public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
+    public static final String TYPE_WAVE = NAME + "." + FoldableAbstractClientTool.WAVE_SUFFIX;
+
+    @Inject
     public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-            final WsThemeManager wsThemePresenter, final WorkspaceSkeleton ws,
             final ContentCapabilitiesRegistry cntCapRegistry) {
-        super(NAME, i18n.t("documents"), toolSelector, wsThemePresenter, ws, cntCapRegistry);
+        super(NAME, i18n.t("documents"), toolSelector, cntCapRegistry);
 
         // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -53,6 +52,7 @@ public class DocumentClientTool extends OldFoldableAbstractClientTool {
         registerIcons();
     }
 
+    @Override
     public String getName() {
         return NAME;
     }

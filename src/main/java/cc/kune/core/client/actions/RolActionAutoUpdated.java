@@ -1,7 +1,8 @@
-package cc.kune.core.client.sn.actions;
+package cc.kune.core.client.actions;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.core.client.sn.actions.RolComparator;
 import cc.kune.core.client.state.AccessRightsChangedEvent;
 import cc.kune.core.client.state.AccessRightsChangedEvent.AccessRightsChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
@@ -12,12 +13,18 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.inject.Inject;
 
-public abstract class RolAction extends AbstractExtendedAction {
+/**
+ * This is a RolAction (a Action that store which permissions are needed to
+ * permit its execution) but that auto refresh its status depending on the state
+ * of the application (if we are authenticated, and so on)
+ * 
+ */
+public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
     protected final Session session;
     protected final StateManager stateManager;
 
     @Inject
-    public RolAction(final StateManager stateManager, final Session session,
+    public RolActionAutoUpdated(final StateManager stateManager, final Session session,
             final AccessRightsClientManager rightsManager, final AccessRolDTO rolRequired, final boolean authNeed,
             final boolean visibleForNonMemb, final boolean visibleForMembers) {
         this.stateManager = stateManager;

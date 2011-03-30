@@ -160,7 +160,7 @@ public class WaveMain {
     server.addServlet("/auth/register", injector.getInstance(CustomUserRegistrationServlet.class));
 
     server.addServlet("/fetch/*", injector.getInstance(FetchServlet.class));
-
+    
     server.addServlet("/search/*", injector.getInstance(SearchServlet.class));
 
     server.addServlet("/robot/dataapi", injector.getInstance(DataApiServlet.class));

@@ -383,6 +383,12 @@ I am talking about, but I'm sure there is something to do.
    http://vafer.org/blog/20070918215154
    Related info:
    http://java.debian.net/building.html
+*** steps
+**** create user kune
+**** create /var/lib/kune/uploads and give permissions
+**** create /var/lib/kune/lucene
+**** deps: libjmagick6-jni, csstidy
+**** cp -a $EXTSRC/source/locale/ src/main/java/org/ourproject/kune/app/public/js/ext/source/
 ** <v> implement pubsub in emite
    http://xmpp.org/extensions/attic/jep-0060-1.6.html
    see:  svn checkout svn://anonsvn.it.su.se/su-smack su-smack

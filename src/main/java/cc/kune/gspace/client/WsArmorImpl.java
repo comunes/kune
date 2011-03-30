@@ -22,6 +22,8 @@ package cc.kune.gspace.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -82,6 +84,17 @@ public class WsArmorImpl extends Composite implements WsArmor {
         groupSpace.setWidgetMinSize(splitEast, 150);
         tabs.setStyleName("k-spaces");
         homeSpace.add(RootPanel.get("k-home-wrapper"));
+        // mainpanel.getWidgetContainerElement(splitEast).setAttribute("overflow",
+        // "visible");
+        // splitEast.getWidgetContainerElement(entityToolsCenter).setPropertyString("overflow",
+        // "visible !important");
+        // entityToolsCenter.getParent().setStyleName("k-nooverflow");
+        // groupSpace.getWidgetContainerElement(splitEast).setPropertyString("overflow",
+        // "visible !important");
+
+        DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow", "visible");
+        DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsCenter), "overflow", "visible");
+
     }
 
     @Override

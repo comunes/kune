@@ -79,7 +79,7 @@ public class ToolSelectorPresenter extends
                 ToolSelectorPresenter.this.onGroupChanged(event.getNewGroup());
             }
         });
-        stateManager.onToolChanged(true, new ToolChangedHandler() {
+        stateManager.onToolChanged(false, new ToolChangedHandler() {
             @Override
             public void onToolChanged(final ToolChangedEvent event) {
                 ToolSelectorPresenter.this.onToolChanged(event.getPreviousTool(), event.getNewTool());
@@ -116,7 +116,7 @@ public class ToolSelectorPresenter extends
 
     void onToolChanged(final String oldTool, final String newTool) {
         Log.debug("Registered tools: " + tools.keySet().toString());
-        if (!oldTool.equals("")) {
+        if (oldTool != null && !oldTool.equals("")) {
             final ToolSelectorItem tool = tools.get(oldTool);
             checkTool(tool);
             tool.setSelected(false);

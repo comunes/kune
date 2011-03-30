@@ -28,7 +28,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
         firstDeckLabel.setText(i18n.t(CoreMessages.BUDDIES_NOT_PUBLIC));
         trdCategoryLabel.setText("NOT USED");
         trdCategoryLabel.setTitle("NOT USED");
-        trdCategoryPanel.setVisible(false);
+        super.setTrdCategoryVisible(false);
         sndDeckLabel.setText("NOT USED");
         bottomActionsToolbar = new ActionFlowPanel(guiProvider);
         bottomPanel.add(bottomActionsToolbar);
@@ -61,7 +61,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
     @Override
     public void setBuddiesVisible(final boolean visible) {
-        firstCategoryPanel.setVisible(visible);
+        super.setFirstCategoryVisible(visible);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
     @Override
     public void setParticipationVisible(final boolean visible) {
-        sndCategoryPanel.setVisible(visible);
+        super.setSndCategoryVisible(visible);
     }
 
     @Override

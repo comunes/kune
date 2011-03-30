@@ -17,15 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.server;
+package cc.kune.docs.server;
 
-import static org.ourproject.kune.docs.server.DocumentServerTool.TYPE_DOCUMENT;
-import static org.ourproject.kune.docs.server.DocumentServerTool.TYPE_FOLDER;
-import static org.ourproject.kune.docs.server.DocumentServerTool.TYPE_ROOT;
-import static org.ourproject.kune.docs.server.DocumentServerTool.TYPE_UPLOADEDFILE;
+import static cc.kune.docs.server.DocumentServerTool.TYPE_DOCUMENT;
+import static cc.kune.docs.server.DocumentServerTool.TYPE_FOLDER;
+import static cc.kune.docs.server.DocumentServerTool.TYPE_ROOT;
+import static cc.kune.docs.server.DocumentServerTool.TYPE_UPLOADEDFILE;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import cc.kune.docs.server.DocumentServerTool;
 
 public class DocumentServerToolTest { // extends PersistenceTest {
 

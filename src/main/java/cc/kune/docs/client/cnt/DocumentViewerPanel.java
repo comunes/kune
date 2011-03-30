@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * Copyright (C) 2007-2009 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,21 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs;
+package cc.kune.docs.client.cnt;
 
-import static org.junit.Assert.assertEquals;
+import cc.kune.core.client.cnt.FoldableContentPanel;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.WsArmor;
 
-import org.junit.Test;
-import org.ourproject.kune.docs.client.DocumentClientTool;
-import org.ourproject.kune.docs.server.DocumentServerTool;
+import com.google.inject.Inject;
 
-public class DocumentToolTest {
+public class DocumentViewerPanel extends FoldableContentPanel implements DocumentViewerView {
 
-    @Test
-    public void clientAndServerSync() {
-        assertEquals(DocumentServerTool.NAME, DocumentClientTool.NAME);
-        assertEquals(DocumentServerTool.TYPE_ROOT, DocumentClientTool.TYPE_ROOT);
-        assertEquals(DocumentServerTool.TYPE_FOLDER, DocumentClientTool.TYPE_FOLDER);
-        assertEquals(DocumentServerTool.TYPE_DOCUMENT, DocumentClientTool.TYPE_DOCUMENT);
+    @Inject
+    public DocumentViewerPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res) {
+        super(ws, i18n, res);
     }
 }

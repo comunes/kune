@@ -17,13 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.server;
+package cc.kune.docs.client.cnt;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
+import cc.kune.core.client.cnt.FoldableContentPanel;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.gspace.client.WsArmor;
 
-public class DocumentServerModule implements Module {
-    public void configure(final Binder binder) {
-        binder.bind(DocumentServerTool.class).asEagerSingleton();
+import com.google.inject.Inject;
+
+public class DocFolderContentPanel extends FoldableContentPanel implements DocFolderContentView {
+
+    @Inject
+    public DocFolderContentPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res) {
+        super(ws, i18n, res);
+        setInfo("");
     }
 }

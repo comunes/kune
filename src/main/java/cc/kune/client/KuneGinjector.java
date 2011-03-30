@@ -47,10 +47,12 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.docs.client.DocumentGinModule;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.tool.ToolSelectorPresenter;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.pspace.client.PSpaceGinModule;
+import cc.kune.pspace.client.PSpaceParts;
 import cc.kune.pspace.client.PSpacePresenter;
 import cc.kune.wave.client.WaveGinModule;
 import cc.kune.wave.client.WaveParts;
@@ -62,7 +64,8 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
-@GinModules({ CoreGinModule.class, ChatGinModule.class, WaveGinModule.class, PSpaceGinModule.class })
+@GinModules({ KuneGinModule.class, CoreGinModule.class, ChatGinModule.class, WaveGinModule.class,
+        PSpaceGinModule.class, DocumentGinModule.class })
 public interface KuneGinjector extends Ginjector {
 
     /*
@@ -106,7 +109,11 @@ public interface KuneGinjector extends Ginjector {
 
     AsyncProvider<NewGroupPresenter> getNewGroupPresenter();
 
+    OnAppStartFactory getOnAppStartFactory();
+
     ProxyFailureHandler getProxyFailureHandler();
+
+    PSpaceParts getPSpaceParts();
 
     AsyncProvider<PSpacePresenter> getPSpacePresenter();
 

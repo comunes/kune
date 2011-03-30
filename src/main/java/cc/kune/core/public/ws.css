@@ -328,9 +328,9 @@ a:visited {
 }
 
 .gwt-SplitLayoutPanel .gwt-SplitLayoutPanel-HDragger {
-    background-color: white;
+    background-color: transparent;
     background: url("images/spliter-top.png") no-repeat scroll center bottom
-        white;
+        transparent;
     cursor: col-resize;
 }
 
@@ -881,7 +881,9 @@ font-size:small;
 }
 
 .k-sn-adminspanel {
-    background-color: #a05a2c;
+    /* background-color: #a05a2c; */
+    border-bottom:2px solid #F7EBE3;
+    border-top:2px solid #F7EBE3;
 }
 
 .k-sn-collabspanel {
@@ -1078,6 +1080,7 @@ font-size:small;
 }
 
 .k-tool-item-nofocus {
+
 }
 
 .k-tool-item-selected {
@@ -1086,4 +1089,9 @@ font-size:small;
 
 .k-tool-item-notselected {
     background-color: inherits;
+}
+
+.gwt-Button {
+    background: url("gwt/chrome/images/hborder.png") repeat-x scroll 0 -27px
+        transparent;
 }

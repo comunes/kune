@@ -21,11 +21,6 @@ package cc.kune.core.server;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ourproject.kune.blogs.server.BlogServerModule;
-import org.ourproject.kune.chat.server.ChatServerModule;
-import org.ourproject.kune.docs.server.DocumentServerModule;
-import org.ourproject.kune.gallery.server.GalleryServerModule;
-import org.ourproject.kune.wiki.server.WikiServerModule;
 
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
@@ -51,6 +46,7 @@ import cc.kune.core.server.rest.GroupJSONService;
 import cc.kune.core.server.rest.I18nTranslationJSONService;
 import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
+import cc.kune.docs.server.DocumentServerModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
@@ -143,10 +139,10 @@ public class KuneRackModule implements RackModule {
         builder.use(new ServletModule());
         builder.use(new PlatformServerModule());
         builder.use(new DocumentServerModule());
-        builder.use(new BlogServerModule());
-        builder.use(new WikiServerModule());
-        builder.use(new ChatServerModule());
-        builder.use(new GalleryServerModule());
+        // builder.use(new BlogServerModule());
+        // builder.use(new WikiServerModule());
+        // builder.use(new ChatServerModule());
+        // builder.use(new GalleryServerModule());
         builder.use(new RESTServicesModule());
         builder.use(configModule);
     }

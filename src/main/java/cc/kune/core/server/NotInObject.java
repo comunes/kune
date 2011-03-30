@@ -35,6 +35,7 @@ public class NotInObject extends AbstractMatcher<Method> {
         excluded = Arrays.asList(new String[] { "finalize", "toString", "hashCode", "getClass", "wait", "equals" });
     }
 
+    @Override
     public boolean matches(final Method method) {
         final String name = method.getName();
 

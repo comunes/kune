@@ -17,7 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.client;
+package cc.kune.docs.client.ctx;
 
-public interface DocsMessages {
+public interface DocumentContext {
+
 }

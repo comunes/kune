@@ -69,6 +69,7 @@ public class KuneEntryPoint implements EntryPoint {
         ginjector.getEventLogger();
         NotifyUser.init(ginjector.getEventBus(), ginjector.getI18n());
         ginjector.getCorePresenter().get().forceReveal();
+        ginjector.getOnAppStartFactory();
         ginjector.getStateManager();
         ginjector.getSiteTokenListeners();
         ginjector.getGwtGuiProvider();
@@ -79,6 +80,6 @@ public class KuneEntryPoint implements EntryPoint {
         ginjector.getSpacesTabPresenter();
         ginjector.getChatClient();
         ginjector.getCoreParts();
-        ginjector.getPSpacePresenter();
+        ginjector.getPSpaceParts();
     }
 }

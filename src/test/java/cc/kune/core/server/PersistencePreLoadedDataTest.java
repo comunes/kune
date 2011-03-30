@@ -25,7 +25,6 @@ import java.util.TimeZone;
 
 import org.junit.After;
 import org.junit.Before;
-import org.ourproject.kune.docs.server.DocumentServerTool;
 
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
@@ -34,6 +33,7 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.docs.server.DocumentServerTool;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.I18nCountry;

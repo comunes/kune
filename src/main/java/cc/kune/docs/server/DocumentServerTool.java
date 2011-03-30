@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.docs.server;
+package cc.kune.docs.server;
 
 import java.util.Date;
 
