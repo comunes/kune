@@ -32,7 +32,7 @@ import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
@@ -119,7 +119,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
         getView().reset();
         getView().hideMessages();
         getView().hide();
-        stateManager.gotoToken(SiteCommonTokens.REGISTER);
+        stateManager.gotoToken(SiteTokens.REGISTER);
     }
 
     @Override

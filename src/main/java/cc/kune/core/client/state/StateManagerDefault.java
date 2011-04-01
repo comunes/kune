@@ -22,15 +22,17 @@ package cc.kune.core.client.state;
 
 import java.util.HashMap;
 
-import org.waveprotocol.box.webclient.client.HistorySupport;
+import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.utils.Pair;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.SocialNetworkChangedEvent.SocialNetworkChangedHandler;
@@ -60,16 +62,19 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private StateToken resumedToken;
     private final Session session;
     private final HashMap<String, HistoryTokenCallback> siteTokens;
+    private final TokenMatcher tokenMatcher;
 
     @Inject
     public StateManagerDefault(final ContentCache contentProvider, final Session session, final HistoryWrapper history,
-            final EventBus eventBus) {
+            final TokenMatcher tokenMatcher, final EventBus eventBus) {
+        this.tokenMatcher = tokenMatcher;
         this.eventBus = eventBus;
         this.contentProvider = contentProvider;
         this.session = session;
         this.history = history;
         this.previousToken = null;
         this.resumedToken = null;
+        tokenMatcher.init(GwtWaverefEncoder.INSTANCE);
         siteTokens = new HashMap<String, HistoryTokenCallback>();
         beforeStateChangeCollection = new BeforeActionCollection();
         session.onUserSignIn(true, new UserSignInEvent.UserSignInHandler() {
@@ -165,26 +170,49 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         });
     }
 
-    void onHistoryChanged(final String historyToken) {
+    void onHistoryChanged(final String newHistoryToken) {
         // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
         if (beforeStateChangeCollection.checkBeforeAction()) {
-            final HistoryTokenCallback tokenListener = siteTokens.get(historyToken != null ? historyToken.toLowerCase()
-                    : historyToken);
-            Log.debug("StateManager: on history changed (" + historyToken + ")");
+            HistoryTokenCallback tokenListener = null;
+            if (newHistoryToken != null) {
+                final String nToken = newHistoryToken.toLowerCase();
+                tokenListener = siteTokens.get(nToken);
+            }
+            Log.debug("StateManager: on history changed (" + newHistoryToken + ")");
             if (tokenListener == null) {
-                // Ok, normal token change
-                // Is a Wave token?
-                if (historyToken == null || HistorySupport.waveRefFromHistoryToken(historyToken) == null) {
-                    // Non wave token
-                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-                    onHistoryChanged(new StateToken(historyToken));
-                } else {
-                    SpaceSelectEvent.fire(eventBus, Space.userSpace);
-                    // Wave token
-                    // spaceSelector.onUserSpaceSelect();
-                    if (session.isNotLogged()) {
-                        // use r=? argument?
+                // token is not one of #newgroup #signin #translate ...
+                final String nToken = newHistoryToken.toLowerCase();
+                if (tokenMatcher.hasRedirect(nToken)) {
+                    final Pair<String, String> redirect = tokenMatcher.getRedirect(nToken);
+                    final String firstToken = redirect.getLeft();
+                    final String sndToken = redirect.getRight();
+                    if (firstToken.equals(SiteTokens.PREVIEW)) {
+                        SpaceSelectEvent.fire(eventBus, Space.publicSpace);
+                        SpaceConfEvent.fire(eventBus, Space.groupSpace, sndToken);
+                        SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(sndToken));
+                        onHistoryChanged(new StateToken(sndToken));
                     }
+                } else if (tokenMatcher.isWaveToken(newHistoryToken)) {
+                    if (session.isLogged()) {
+                        SpaceSelectEvent.fire(eventBus, Space.userSpace);
+                    } else {
+                        history.newItem(TokenUtils.addRedirect(SiteTokens.SIGNIN, newHistoryToken));
+                    }
+                    if (previousToken == null) {
+                        // Starting application (with Wave url)
+                        onHistoryChanged(new StateToken(SiteTokens.GROUP_HOME));
+                    }
+                } else if (tokenMatcher.isGroupToken(newHistoryToken)) {
+                    SpaceConfEvent.fire(eventBus, Space.groupSpace, newHistoryToken);
+                    SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newHistoryToken));
+                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+                    onHistoryChanged(new StateToken(newHistoryToken));
+                } else {
+                    // While we don't redefine token "" as home:
+                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+                    SpaceConfEvent.fire(eventBus, Space.groupSpace, SiteTokens.GROUP_HOME);
+                    SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(SiteTokens.GROUP_HOME));
+                    onHistoryChanged(new StateToken(SiteTokens.GROUP_HOME));
                 }
             } else {
                 // token is one of #newgroup #signin #translate ...
@@ -197,7 +225,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                 tokenListener.onHistoryToken();
             }
         } else {
-            resumedToken = new StateToken(historyToken);
+            resumedToken = new StateToken(newHistoryToken);
         }
     }
 

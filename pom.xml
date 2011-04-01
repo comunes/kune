@@ -284,7 +284,7 @@
     <dependency>
       <groupId>com.allen_sauer.gwt.voices.gwt-voices</groupId>
       <artifactId>gwt-voices</artifactId>
-      <version>1.6.0</version>
+      <version>1.7.0</version>
     </dependency>
     <!-- utilities -->
     <dependency>
@@ -1069,8 +1069,6 @@
           </execution>
         </executions>
       </plugin>
-
-
       <!-- <plugin> -->
       <!-- <groupId>org.codehaus.mojo</groupId> -->
       <!-- <artifactId>selenium-maven-plugin</artifactId> -->

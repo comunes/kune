@@ -20,7 +20,7 @@
 package cc.kune.core.client.sitebar.logo;
 
 import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 
 import com.google.gwt.event.shared.EventBus;
@@ -61,7 +61,7 @@ public class SiteLogoPresenter extends Presenter<SiteLogoPresenter.SiteLogoView,
 
     @Override
     public void onClick() {
-        stateManager.gotoToken(SiteCommonTokens.GROUP_HOME);
+        stateManager.gotoToken(SiteTokens.GROUP_HOME);
     }
 
     @Override

@@ -49,7 +49,7 @@
   <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-servlet/2.1.1/gwt-servlet-2.1.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-servlet/2.1.1/gwt-servlet-2.1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/2.1.1/gwt-user-2.1.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-user/2.1.1/gwt-user-2.1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/waveprotocol/gwt-util-src/0.3.0-SNAPSHOT/gwt-util-src-0.3.0-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/voices/gwt-voices/gwt-voices/1.6.0/gwt-voices-1.6.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/allen_sauer/gwt/voices/gwt-voices/gwt-voices/1.7.0/gwt-voices-1.7.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtext/gwtext/2.0.5/gwtext-2.0.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtextux/gwtextux/0.4.0.924/gwtextux-0.4.0.924.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5.jar" sourcepath="M2_REPO/com/gwtplatform/gwtp-all/0.5/gwtp-all-0.5-sources.jar"/>

@@ -25,7 +25,7 @@ import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -55,7 +55,7 @@ public class ErrorHandler {
     }
 
     private void goHome() {
-        stateManager.gotoToken(SiteCommonTokens.GROUP_HOME);
+        stateManager.gotoToken(SiteTokens.GROUP_HOME);
     }
 
     private void logException(final Throwable caught) {

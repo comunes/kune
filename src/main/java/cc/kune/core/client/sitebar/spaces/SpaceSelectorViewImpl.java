@@ -20,17 +20,15 @@
 package cc.kune.core.client.sitebar.spaces;
 
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
-import cc.kune.core.client.state.SiteCommonTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.Widget;
@@ -41,22 +39,23 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
     interface SpaceSelectorViewImplUiBinder extends UiBinder<Widget, SpaceSelectorViewImpl> {
     }
     private static SpaceSelectorViewImplUiBinder uiBinder = GWT.create(SpaceSelectorViewImplUiBinder.class);
+    private final EventBus eventBus;
     @UiField
     ToggleButton groupButton;
     @UiField
     ToggleButton homeButton;
     @UiField
     HorizontalPanel panel;
+
     @UiField
     ToggleButton publicButton;
-
+    private final StateManager stateManager;
     @UiField
     ToggleButton userButton;
-    private final StateManager stateManager;
-    private final EventBus eventBus;
 
     @Inject
-    public SpaceSelectorViewImpl(final WsArmor armor, final I18nTranslationService i18n, StateManager stateManager, EventBus eventBus) {
+    public SpaceSelectorViewImpl(final WsArmor armor, final I18nTranslationService i18n,
+            final StateManager stateManager, final EventBus eventBus) {
         this.stateManager = stateManager;
         this.eventBus = eventBus;
         armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
@@ -71,24 +70,24 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
         return panel;
     }
 
-    @UiHandler("groupButton")
-    void onGroupSpaceClick(final ClickEvent event) {
-        SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-     }
-
-    @UiHandler("homeButton")
-    void onHomeSpaceClick(final ClickEvent event) {
-        stateManager.gotoToken(SiteCommonTokens.HOME);
+    @Override
+    public HasClickHandlers getGroupBtn() {
+        return groupButton;
     }
 
-    @UiHandler("publicButton")
-    void onPublicSpaceClick(final ClickEvent event) {
-        SpaceSelectEvent.fire(eventBus, Space.publicSpace);
+    @Override
+    public HasClickHandlers getHomeBtn() {
+        return homeButton;
     }
 
-    @UiHandler("userButton")
-    void onUserSpaceClick(final ClickEvent event) {
-        SpaceSelectEvent.fire(eventBus, Space.userSpace);
+    @Override
+    public HasClickHandlers getPublicBtn() {
+        return publicButton;
+    }
+
+    @Override
+    public HasClickHandlers getUserBtn() {
+        return userButton;
     }
 
     @Override

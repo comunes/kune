@@ -25,4 +25,6 @@ public interface HistoryWrapper {
 
     void newItem(final String historyToken);
 
+    void newItem(String historyToken, boolean issueEvent);
+
 }

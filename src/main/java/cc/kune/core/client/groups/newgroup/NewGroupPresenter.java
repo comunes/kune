@@ -30,7 +30,7 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -77,7 +77,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
         this.groupService = groupService;
         this.signIn = signIn;
 
-        stateManager.addSiteToken(SiteCommonTokens.NEWGROUP, new HistoryTokenCallback() {
+        stateManager.addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
 
             @Override
             public void onHistoryToken() {

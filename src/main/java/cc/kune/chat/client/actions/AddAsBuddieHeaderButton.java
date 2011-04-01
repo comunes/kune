@@ -65,7 +65,10 @@ public class AddAsBuddieHeaderButton {
 
                 @Override
                 public void onGroupChanged(final RosterGroupChangedEvent event) {
-                    setState(session.getCurrentState());
+                    final StateAbstractDTO currentState = session.getCurrentState();
+                    if (currentState != null) {
+                        setState(currentState);
+                    }
                 }
             });
             putValue(Action.NAME, i18n.t("Add as a buddie"));

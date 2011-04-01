@@ -203,7 +203,7 @@ import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.services.MediaUtils;
 import cc.kune.core.client.state.HistoryTokenCallback;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateTokenUtils;
@@ -948,7 +948,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
         });
 
         // Register of tokens like "signin", "newgroup", "translate" etcetera
-        i(StateManager.class).addSiteToken(SiteCommonTokens.SIGNIN, new HistoryTokenCallback() {
+        i(StateManager.class).addSiteToken(SiteTokens.SIGNIN, new HistoryTokenCallback() {
 
             @Override
             public void onHistoryToken() {
@@ -956,7 +956,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        i(StateManager.class).addSiteToken(SiteCommonTokens.REGISTER, new HistoryTokenCallback() {
+        i(StateManager.class).addSiteToken(SiteTokens.REGISTER, new HistoryTokenCallback() {
 
             @Override
             public void onHistoryToken() {
@@ -964,7 +964,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        i(StateManager.class).addSiteToken(SiteCommonTokens.NEWGROUP, new HistoryTokenCallback() {
+        i(StateManager.class).addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
 
             @Override
             public void onHistoryToken() {
@@ -972,7 +972,7 @@ public class WorkspaceModule extends AbstractExtendedModule {
             }
         });
 
-        i(StateManager.class).addSiteToken(SiteCommonTokens.TRANSLATE, new HistoryTokenCallback() {
+        i(StateManager.class).addSiteToken(SiteTokens.TRANSLATE, new HistoryTokenCallback() {
 
             @Override
             public void onHistoryToken() {

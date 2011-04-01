@@ -85,11 +85,14 @@ import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.ContentCacheDefault;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.client.state.HistoryWrapperDefault;
+import cc.kune.core.client.state.ReservedWordsRegistry;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SessionDefault;
 import cc.kune.core.client.state.SiteTokenListeners;
+import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateManagerDefault;
+import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.CoreViewImpl;
 import cc.kune.core.client.ws.entheader.EntityHeader;
@@ -130,7 +133,7 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
         bind(RootPresenter.class).asEagerSingleton();
         bind(ProxyFailureHandler.class).to(DefaultProxyFailureHandler.class).in(Singleton.class);
-        bind(I18nUITranslationService.class).in(Singleton.class);
+        s(I18nUITranslationService.class);
         bind(I18nTranslationService.class).to(I18nUITranslationService.class).in(Singleton.class);
         bind(GlobalShortcutRegister.class).to(DefaultGlobalShortcutRegister.class).in(Singleton.class);
 
@@ -175,48 +178,63 @@ public class CoreGinModule extends AbstractPresenterModule {
         bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
         bind(EntityHeader.class).to(EntityHeaderPresenter.class).in(Singleton.class);
 
-        bind(UserMessagesPresenter.class).in(Singleton.class);
-        bind(UserMessagesPanel.class).in(Singleton.class);
+        s(UserMessagesPresenter.class);
+        s(UserMessagesPanel.class);
 
         // bind(MessagePanelView.class).to(MessagePanel.class);
 
         // UI
-        bind(WsArmorImpl.class).in(Singleton.class);
+        s(WsArmorImpl.class);
         bind(WsArmor.class).to(WsArmorImpl.class).in(Singleton.class);
         bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
-        bind(GxtGuiProvider.class).in(Singleton.class);
-        bind(GwtGuiProvider.class).in(Singleton.class);
+        s(GxtGuiProvider.class);
+        s(GwtGuiProvider.class);
 
         bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
 
         // Core App
         bind(Session.class).to(SessionDefault.class).in(Singleton.class);
-        bind(ErrorHandler.class).in(Singleton.class);
-        bind(StateManagerDefault.class).in(Singleton.class);
+        s(ErrorHandler.class);
+        s(StateManagerDefault.class);
         bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
-        bind(AccessRightsClientManager.class).in(Singleton.class);
+        s(AccessRightsClientManager.class);
         bind(ContentCache.class).to(ContentCacheDefault.class).in(Singleton.class);
         bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
-        bind(PrefetchUtilities.class).in(Singleton.class);
+        s(PrefetchUtilities.class);
         bind(AppStarter.class).to(AppStarterDefault.class).in(Singleton.class);
         bind(CookiesManager.class).to(CookiesManagerImpl.class).in(Singleton.class);
-        bind(BeforeSignOut.class).in(Singleton.class);
-        bind(SiteTokenListeners.class).asEagerSingleton();
-        bind(ActionRegistries.class).in(Singleton.class);
-        bind(CoreParts.class).asEagerSingleton();
+        s(BeforeSignOut.class);
+        eagle(SiteTokenListeners.class);
+        s(SiteTokens.class);
+        s(ReservedWordsRegistry.class);
+        eagle(TokenMatcher.class);
+        s(ActionRegistries.class);
+        eagle(CoreParts.class);
 
         // SN
-        bind(GroupSNAdminsMenuItemsRegistry.class).in(Singleton.class);
-        bind(GroupSNCollabsMenuItemsRegistry.class).in(Singleton.class);
-        bind(GroupSNPendingsMenuItemsRegistry.class).in(Singleton.class);
-        bind(UserSNMenuItemsRegistry.class).in(Singleton.class);
-        bind(GroupSNConfActions.class).in(Singleton.class);
-        bind(UserSNConfActions.class).in(Singleton.class);
+        s(GroupSNAdminsMenuItemsRegistry.class);
+        s(GroupSNCollabsMenuItemsRegistry.class);
+        s(GroupSNPendingsMenuItemsRegistry.class);
+        s(UserSNMenuItemsRegistry.class);
+        s(GroupSNConfActions.class);
+        s(UserSNConfActions.class);
 
-        bind(SiteUserOptionsPresenter.class).in(Singleton.class);
-        bind(SiteUserOptions.class).to(SiteUserOptionsPresenter.class).in(Singleton.class);
-        bind(SitebarNewGroupLink.class).in(Singleton.class);
-        bind(SitebarSignInLink.class).in(Singleton.class);
-        bind(SitebarSignOutLink.class).in(Singleton.class);
+        s(SiteUserOptionsPresenter.class);
+        s(SiteUserOptions.class, SiteUserOptionsPresenter.class);
+        s(SitebarNewGroupLink.class);
+        s(SitebarSignInLink.class);
+        s(SitebarSignOutLink.class);
+    }
+
+    private void eagle(final Class<?> type) {
+        bind(type).asEagerSingleton();
+    }
+
+    private void s(final Class<?> type) {
+        bind(type).in(Singleton.class);
+    }
+
+    private <V, W> void s(final Class<V> type, final Class<? extends V> typeImpl) {
+        bind(type).to(typeImpl).in(Singleton.class);
     }
 }

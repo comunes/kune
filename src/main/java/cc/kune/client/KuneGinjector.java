@@ -44,6 +44,7 @@ import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -134,6 +135,8 @@ public interface KuneGinjector extends Ginjector {
     StateManager getStateManager();
 
     AsyncProvider<TagsSummaryPresenter> getTagsSummaryPresenter();
+
+    TokenMatcher getTokenMatcher();
 
     AsyncProvider<ToolSelectorPresenter> getToolSelectorPresenter();
 

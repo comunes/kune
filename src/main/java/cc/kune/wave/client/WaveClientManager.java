@@ -13,6 +13,7 @@ import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsonUtils;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
 
@@ -20,7 +21,7 @@ public class WaveClientManager {
     private WebClient webClient;
 
     @Inject
-    public WaveClientManager(final Session session, final StateManager stateManager,
+    public WaveClientManager(final Session session, final StateManager stateManager, final EventBus eventBus,
             final UserServiceAsync userService, final WsArmor wsArmor) {
         session.onUserSignIn(true, new UserSignInHandler() {
             @Override
@@ -39,7 +40,7 @@ public class WaveClientManager {
                             if (userSpace.getWidgetCount() > 0) {
                                 userSpace.remove(0);
                             }
-                            webClient = new WebClient();
+                            webClient = new WebClient(eventBus);
                             userSpace.add(webClient);
                         }
                     }

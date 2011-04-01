@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.sitebar.sitesign;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.state.SiteCommonTokens;
+import cc.kune.core.client.state.SiteTokens;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 
@@ -37,7 +37,7 @@ public class SiteSignInLinkPanel implements SiteSignInLinkView {
         signInHyperlink = new Hyperlink();
         signInHyperlink.ensureDebugId(SITE_SIGN_IN);
         signInHyperlink.setText(i18n.t("Sign in to collaborate"));
-        signInHyperlink.setTargetHistoryToken(SiteCommonTokens.SIGNIN);
+        signInHyperlink.setTargetHistoryToken(SiteTokens.SIGNIN);
         ws.getSiteBar().add(signInHyperlink);
         ws.getSiteBar().addSpacer();
     }

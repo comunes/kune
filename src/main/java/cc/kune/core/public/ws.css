@@ -1091,7 +1091,3 @@ font-size:small;
     background-color: inherits;
 }
 
-.gwt-Button {
-    background: url("gwt/chrome/images/hborder.png") repeat-x scroll 0 -27px
-        transparent;
-}

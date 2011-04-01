@@ -22,10 +22,10 @@ package cc.kune.wave.client;
 
 
 
-import org.waveprotocol.box.webclient.client.HistorySupport;
 import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
+import org.waveprotocol.box.webclient.client.HistorySupport;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.Session;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
@@ -60,11 +60,15 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
+import cc.kune.core.client.state.SiteTokens;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -75,6 +79,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
+import com.google.inject.Inject;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -127,11 +132,15 @@ public class WebClient extends Composite {
 
   private RemoteViewServiceMultiplexer channel;
 
+private final EventBus eventBus;
+
   /**
    * This is the entry point method.
    */
-  public WebClient() {
+  @Inject
+  public WebClient(EventBus eventBus) {
 
+    this.eventBus = eventBus;
     ErrorHandler.install();
 
     ClientEvents.get().addWaveCreationEventHandler(
@@ -284,22 +293,24 @@ public class WebClient extends Composite {
       }
     });
     String encodedToken = History.getToken();
-    NotifyUser.info("Open Wave: " + encodedToken + " waveRef: " + waveRef.getWaveId(), true);
-    if (encodedToken != null && !encodedToken.isEmpty()) {
+    // NotifyUser.info("Open Wave: " + encodedToken + " waveRef: " + waveRef.getWaveId(), true);
+    // Kune patch
+    if (encodedToken != null && !encodedToken.isEmpty() && !encodedToken.equals(SiteTokens.WAVEINBOX)) {
       WaveRef fromWaveRef = HistorySupport.waveRefFromHistoryToken(encodedToken);
       if (waveRef == null) {
         LOG.info("History token contains invalid path: " + encodedToken);
         return;
       }
-      // Kune patch
-      // if (fromWaveRef.getWaveId().equals(waveRef.getWaveId())) {
-      if (fromWaveRef == null || fromWaveRef.getWaveId().equals(waveRef.getWaveId())) {
+      if (fromWaveRef.getWaveId().equals(waveRef.getWaveId())) {
         // History change was caused by clicking on a link, it's already
         // updated by browser.
+        SpaceConfEvent.fire(eventBus, Space.userSpace, encodedToken);
         return;
       }
     }
-    History.newItem(HistorySupport.historyTokenFromWaveref(waveRef), false);
+    String tokenFromWaveref = HistorySupport.historyTokenFromWaveref(waveRef);
+    SpaceConfEvent.fire(eventBus, Space.userSpace, tokenFromWaveref);
+    History.newItem(tokenFromWaveref, false);
   }
 
   /**

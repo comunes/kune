@@ -30,8 +30,12 @@ public class HistoryWrapperDefault implements HistoryWrapper {
 
     @Override
     public void newItem(final String historyToken) {
-        // NotifyUser.info("New history token: " + historyToken);
         History.newItem(historyToken);
+    }
+
+    @Override
+    public void newItem(final String historyToken, final boolean issueEvent) {
+        History.newItem(historyToken, issueEvent);
     }
 
 }

@@ -47,6 +47,7 @@ public class StateManagerTest {
     private StateAbstractDTO state;
     private StateChangedHandler stateChangeHandler;
     private StateManagerDefault stateManager;
+    private TokenMatcher tokenMatcher;
     private ToolChangedHandler toolChangeHandler;
 
     @Before
@@ -54,9 +55,10 @@ public class StateManagerTest {
         contentProvider = Mockito.mock(ContentCache.class);
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);
+        tokenMatcher = Mockito.mock(TokenMatcher.class);
         spaceSelector = Mockito.mock(SpaceSelectorPresenter.class);
         eventBus = new EventBusTester();
-        stateManager = new StateManagerDefault(contentProvider, session, history, eventBus);
+        stateManager = new StateManagerDefault(contentProvider, session, history, tokenMatcher, eventBus);
         Mockito.when(session.getUserHash()).thenReturn(HASH);
         state = Mockito.mock(StateAbstractDTO.class);
         stateChangeHandler = Mockito.mock(StateChangedHandler.class);
@@ -231,7 +233,7 @@ public class StateManagerTest {
     @Test
     public void siteTokenFirstLoadDefContentAndFireListener() {
         final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
-        final String token = SiteCommonTokens.SIGNIN;
+        final String token = SiteTokens.SIGNIN;
         stateManager.addSiteToken(token, listener);
         stateManager.onHistoryChanged(token);
         Mockito.verify(listener, Mockito.times(1)).onHistoryToken();

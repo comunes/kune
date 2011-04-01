@@ -36,11 +36,11 @@ import com.google.inject.Singleton;
 @Singleton
 public class SiteTokenListeners {
     private final Provider<AboutKuneDialog> aboutKuneDialog;
+    private final EventBus eventBus;
     private final Provider<NewGroup> newGroup;
     private final Provider<Register> register;
     private final Provider<SignIn> signIn;
     private final Provider<StateManager> stateManager;
-    private final EventBus eventBus;
 
     @Inject
     public SiteTokenListeners(final Session session, final EventBus eventBus,
@@ -63,31 +63,37 @@ public class SiteTokenListeners {
     }
 
     private void init() {
-        stateManager.get().addSiteToken(SiteCommonTokens.HOME, new HistoryTokenCallback() {
+        stateManager.get().addSiteToken(SiteTokens.HOME, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 SpaceSelectEvent.fire(eventBus, Space.homeSpace);
             }
         });
-        stateManager.get().addSiteToken(SiteCommonTokens.SIGNIN, new HistoryTokenCallback() {
+        stateManager.get().addSiteToken(SiteTokens.WAVEINBOX, new HistoryTokenCallback() {
+            @Override
+            public void onHistoryToken() {
+                SpaceSelectEvent.fire(eventBus, Space.userSpace);
+            }
+        });
+        stateManager.get().addSiteToken(SiteTokens.SIGNIN, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 signIn.get().showSignInDialog();
             }
         });
-        stateManager.get().addSiteToken(SiteCommonTokens.REGISTER, new HistoryTokenCallback() {
+        stateManager.get().addSiteToken(SiteTokens.REGISTER, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 register.get().doRegister();
             }
         });
-        stateManager.get().addSiteToken(SiteCommonTokens.NEWGROUP, new HistoryTokenCallback() {
+        stateManager.get().addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 newGroup.get().doNewGroup();
             }
         });
-        stateManager.get().addSiteToken(SiteCommonTokens.ABOUTKUNE, new HistoryTokenCallback() {
+        stateManager.get().addSiteToken(SiteTokens.ABOUTKUNE, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 // FIXME, something to come back
