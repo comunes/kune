@@ -181,7 +181,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             Log.debug("StateManager: on history changed (" + newHistoryToken + ")");
             if (tokenListener == null) {
                 // token is not one of #newgroup #signin #translate ...
-                final String nToken = newHistoryToken.toLowerCase();
+                final String nToken = newHistoryToken != null ? newHistoryToken.toLowerCase() : null;
                 if (tokenMatcher.hasRedirect(nToken)) {
                     final Pair<String, String> redirect = tokenMatcher.getRedirect(nToken);
                     final String firstToken = redirect.getLeft();
@@ -222,6 +222,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                     onHistoryChanged("");
                     SpaceSelectEvent.fire(eventBus, Space.groupSpace);
                 }
+                // Fire the listener of this #hash token
                 tokenListener.onHistoryToken();
             }
         } else {

@@ -24,7 +24,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import cc.kune.common.client.actions.BeforeActionListener;
-import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.ToolChangedEvent.ToolChangedHandler;
@@ -33,7 +32,7 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class StateManagerTest {
+public class StateManagerDefaultTest {
 
     private static final String HASH = "someUserHash";
     private BeforeActionListener beforeChangeListener1;
@@ -43,7 +42,6 @@ public class StateManagerTest {
     private GroupChangedHandler groupChangeHandler;
     private HistoryWrapper history;
     private Session session;
-    private SpaceSelectorPresenter spaceSelector;
     private StateAbstractDTO state;
     private StateChangedHandler stateChangeHandler;
     private StateManagerDefault stateManager;
@@ -56,7 +54,6 @@ public class StateManagerTest {
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);
         tokenMatcher = Mockito.mock(TokenMatcher.class);
-        spaceSelector = Mockito.mock(SpaceSelectorPresenter.class);
         eventBus = new EventBusTester();
         stateManager = new StateManagerDefault(contentProvider, session, history, tokenMatcher, eventBus);
         Mockito.when(session.getUserHash()).thenReturn(HASH);

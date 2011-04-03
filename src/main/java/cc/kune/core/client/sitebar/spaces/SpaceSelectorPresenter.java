@@ -22,14 +22,12 @@ package cc.kune.core.client.sitebar.spaces;
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -75,7 +73,6 @@ public class SpaceSelectorPresenter extends
     private Space currentSpace;
     private String groupToken;
     private String homeToken;
-    private final I18nTranslationService i18n;
     private boolean nextUserSpace;
     private String publicToken;
     private final Session session;
@@ -83,14 +80,13 @@ public class SpaceSelectorPresenter extends
     private String userToken;
 
     @Inject
-    public SpaceSelectorPresenter(final EventBus eventBus, final SpaceSelectorView view,
-            final SpaceSelectorProxy proxy, final WsArmor armor, final Session session, final Provider<SignIn> sigIn,
-            final I18nTranslationService i18n, final HistoryWrapper history) {
+    public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
+            final SpaceSelectorView view, final SpaceSelectorProxy proxy, final WsArmor armor, final Session session,
+            final Provider<SignIn> sigIn) {
         super(eventBus, view, proxy);
         this.armor = armor;
         this.session = session;
         this.signIn = sigIn;
-        this.i18n = i18n;
         nextUserSpace = false;
         homeToken = SiteTokens.HOME;
         userToken = SiteTokens.WAVEINBOX;
@@ -99,39 +95,27 @@ public class SpaceSelectorPresenter extends
         view.getHomeBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                gotoTokenIfDifferent(history, homeToken);
+                stateManager.gotoToken(homeToken);
             }
         });
         view.getUserBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                gotoTokenIfDifferent(history, userToken);
+                stateManager.gotoToken(userToken);
             }
         });
         view.getGroupBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                gotoTokenIfDifferent(history, groupToken);
-                onGroupSpaceSelect();
+                stateManager.gotoToken(groupToken);
             }
         });
         view.getPublicBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                gotoTokenIfDifferent(history, publicToken);
-                onPublicSpaceSelect();
+                stateManager.gotoToken(publicToken);
             }
         });
-    }
-
-    private void gotoTokenIfDifferent(final HistoryWrapper history, final String token) {
-        if (!history.getToken().equals(token)) {
-            if ((new StateToken(token)).equals(session.getCurrentStateToken())) {
-                history.newItem(token, false);
-            } else {
-                history.newItem(token);
-            }
-        }
     }
 
     @ProxyEvent
