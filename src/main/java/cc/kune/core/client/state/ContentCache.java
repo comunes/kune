@@ -19,7 +19,6 @@
  */
 package cc.kune.core.client.state;
 
-
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
@@ -27,8 +26,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ContentCache {
 
-    void cache(StateToken encodeState, StateAbstractDTO content);
+    void cache(StateToken token, StateAbstractDTO content);
 
     void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
+
+    void removeContent(StateToken token);
 
 }

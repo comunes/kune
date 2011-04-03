@@ -46,7 +46,7 @@ public class SiteSearcherPresenter implements SiteSearcher {
     }
 
     public void doGoto(final String groupShortName) {
-        stateManagerProvider.get().gotoToken(groupShortName);
+        stateManagerProvider.get().gotoHistoryToken(groupShortName);
     }
 
     public void doSearch(final SiteSearcherType typeOfSearch) {

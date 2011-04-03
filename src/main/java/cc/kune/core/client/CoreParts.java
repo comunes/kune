@@ -24,7 +24,7 @@ public class CoreParts {
             final Provider<UserSNConfActions> userSNConfActions, final Provider<SiteUserOptionsPresenter> userOptions,
             final Provider<EntityLicensePresenter> licenseFooter, final Provider<TagsSummaryPresenter> tagsPresenter,
             final Provider<ToolSelector> toolSelector) {
-        session.onInitDataReceived(true, new AppStartHandler() {
+        session.onAppStart(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 groupMembersConfActions.get();

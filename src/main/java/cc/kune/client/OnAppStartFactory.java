@@ -12,7 +12,7 @@ public class OnAppStartFactory {
 
     @Inject
     public OnAppStartFactory(final Session session, final Provider<DocumentClientTool> docClientTool) {
-        session.onInitDataReceived(true, new AppStartHandler() {
+        session.onAppStart(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 docClientTool.get();

@@ -83,7 +83,7 @@ public class UserOptionsToolsConfPresenter extends EntityOptionsToolsConfPresent
     protected void gotoDifLocationIfNecessary(final String toolName) {
         if (session.getCurrentStateToken().getGroup().equals(session.getCurrentUserInfo().getShortName())
                 && session.getCurrentStateToken().getTool().equals(toolName)) {
-            stateManager.gotoToken(session.getCurrentState().getGroup().getDefaultContent().getStateToken());
+            stateManager.gotoStateToken(session.getCurrentState().getGroup().getDefaultContent().getStateToken());
         }
     }
 }

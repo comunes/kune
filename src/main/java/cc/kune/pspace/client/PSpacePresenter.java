@@ -69,7 +69,7 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
         super(eventBus, view, proxy);
         this.i18n = i18n;
         this.stateTokenUtils = stateTokenUtils;
-        session.onInitDataReceived(true, new AppStartEvent.AppStartHandler() {
+        session.onAppStart(true, new AppStartEvent.AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 stateManager.onStateChanged(true, new StateChangedHandler() {

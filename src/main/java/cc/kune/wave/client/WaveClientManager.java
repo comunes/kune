@@ -42,6 +42,8 @@ public class WaveClientManager {
                             }
                             webClient = new WebClient(eventBus);
                             userSpace.add(webClient);
+                        } else {
+                            webClient.setVisible(true);
                         }
                     }
                 });
@@ -50,12 +52,8 @@ public class WaveClientManager {
         session.onUserSignOut(true, new UserSignOutHandler() {
             @Override
             public void onUserSignOut(final UserSignOutEvent event) {
-                // While we don't find a way to logout in WebClient
-                // Garbage collector
-                // https://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/0e48c15839f9c9dc
                 if (webClient != null) {
-                    webClient.removeFromParent();
-                    webClient = null;
+                    webClient.setVisible(false);
                 }
             }
         });

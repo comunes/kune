@@ -62,7 +62,7 @@ public class TokenMatcher {
     }
 
     private String[] splitRedirect(final String token) {
-        return token.split("\\(");
+        return token.split("\\(", 2);
     }
 
 }

@@ -138,7 +138,7 @@ public interface Session {
 
     boolean isNotLogged();
 
-    void onInitDataReceived(boolean fireNow, AppStartEvent.AppStartHandler handler);
+    void onAppStart(boolean fireNow, AppStartEvent.AppStartHandler handler);
 
     @Deprecated
     void onInitDataReceived(Listener<InitDataDTO> listener);
@@ -153,6 +153,8 @@ public interface Session {
 
     @Deprecated
     void onUserSignIn(Listener<UserInfoDTO> listener);
+
+    void onUserSignInOrSignOut(boolean fireNow, UserSignInOrSignOutEvent.UserSignInOrSignOutHandler handler);
 
     /**
      * @param fireNow

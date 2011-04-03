@@ -119,7 +119,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
         getView().reset();
         getView().hideMessages();
         getView().hide();
-        stateManager.gotoToken(SiteTokens.REGISTER);
+        stateManager.gotoHistoryToken(SiteTokens.REGISTER);
     }
 
     @Override
@@ -171,7 +171,6 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
                 @Override
                 public void onSuccess(final Void result) {
-                    stateManager.restorePreviousToken();
                     getView().hide();
                     getView().unMask();
                 }

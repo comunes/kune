@@ -43,7 +43,7 @@ public class RemoveMemberAction extends AbstractExtendedAction {
                     public void onSuccess(final SocialNetworkDataDTO result) {
                         NotifyUser.hideProgress();
                         NotifyUser.info(i18n.t("Member removed"));
-                        stateManager.reload();
+                        stateManager.refreshCurrentGroupState();
                     }
                 });
     }

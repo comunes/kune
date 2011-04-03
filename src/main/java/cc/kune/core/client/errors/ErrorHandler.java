@@ -55,7 +55,7 @@ public class ErrorHandler {
     }
 
     private void goHome() {
-        stateManager.gotoToken(SiteTokens.GROUP_HOME);
+        stateManager.gotoHistoryToken(SiteTokens.GROUP_HOME);
     }
 
     private void logException(final Throwable caught) {

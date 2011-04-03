@@ -32,7 +32,7 @@ public class GotoGroupAction extends AbstractExtendedAction {
         } else {
             token = ((UserSimpleDTO) target).getStateToken();
         }
-        stateManager.gotoToken(token);
+        stateManager.gotoStateToken(token);
     }
 
 }

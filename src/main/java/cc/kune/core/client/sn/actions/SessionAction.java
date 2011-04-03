@@ -3,10 +3,8 @@ package cc.kune.core.client.sn.actions;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.UserSignInEvent;
-import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
+import cc.kune.core.client.state.UserSignInOrSignOutEvent;
+import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 
 import com.google.inject.Inject;
 
@@ -16,30 +14,28 @@ public abstract class SessionAction extends AbstractExtendedAction {
     @Inject
     public SessionAction(final Session session, final boolean authNeed) {
         this.session = session;
-        session.onUserSignIn(true, new UserSignInHandler() {
+        session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
             @Override
-            public void onUserSignIn(UserSignInEvent event) {
-                refreshStatus(authNeed, true);
-            }
-        });
-        session.onUserSignOut(true, new UserSignOutHandler() {
-            @Override
-            public void onUserSignOut(UserSignOutEvent event) {
-                refreshStatus(authNeed, false);
+            public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+                refreshStatus(authNeed, event.isLogged());
             }
         });
     }
 
     public void refreshStatus(final boolean authNeed, final boolean isLogged) {
-        boolean newVisibility = false;
-        boolean newEnabled = false;
-        if (authNeed && !isLogged) {
-            newVisibility = newEnabled = false;
+        boolean visible = false;
+        final boolean noLogged = !isLogged;
+        if (authNeed && noLogged) {
+            visible = false;
         } else {
             // Auth ok
-            newVisibility = newEnabled = true;
+            visible = true;
         }
-        setEnabled(newEnabled);
-        putValue(GuiActionDescrip.VISIBLE, newVisibility);
+        setVisible(visible);
+    }
+
+    public void setVisible(final boolean visible) {
+        setEnabled(visible);
+        putValue(GuiActionDescrip.VISIBLE, visible);
     }
 }

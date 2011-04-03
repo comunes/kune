@@ -96,6 +96,10 @@ public class NotifyUser {
         eventBus.fireEvent(new ConfirmAskEvent(title, message, i18n.t("Ok"), "", callback));
     }
 
+    public static void showProgress() {
+        eventBus.fireEvent(new ProgressShowEvent(""));
+    }
+
     public static void showProgress(final String text) {
         eventBus.fireEvent(new ProgressShowEvent(text));
     }

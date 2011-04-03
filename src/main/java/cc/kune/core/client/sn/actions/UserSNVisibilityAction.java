@@ -38,7 +38,7 @@ public class UserSNVisibilityAction extends AbstractExtendedAction {
                         // NotifyUser.info(i18n.t("Visibility of your network changed to "
                         // + visibility.toString()));
                         NotifyUser.info(i18n.t("Visibility of your network changed"));
-                        stateManager.reload();
+                        stateManager.refreshCurrentGroupState();
                     }
                 });
 

@@ -157,7 +157,7 @@ public class RegisterPresenter extends SignInAbstractPresenter<RegisterView, Reg
                                 @Override
                                 public void onSuccess(final Void result) {
                                     // onSignIn(userInfoDTO);
-                                    stateManager.gotoToken(session.getCurrentUserInfo().getHomePage());
+                                    stateManager.gotoHistoryToken(session.getCurrentUserInfo().getHomePage());
                                     getView().hide();
                                     getView().unMask();
                                     if (wantHomepage) {

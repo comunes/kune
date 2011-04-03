@@ -11,12 +11,12 @@ public class WaveParts {
 
     @Inject
     public WaveParts(final Session session, final Provider<WaveClientManager> waveClientManager,
-            final Provider<SitebarWaveStatus> waveStatus) {
-        session.onInitDataReceived(true, new AppStartHandler() {
+            final Provider<WaveStatusIndicator> waveOnlineStatus) {
+        session.onAppStart(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 waveClientManager.get();
-                waveStatus.get();
+                waveOnlineStatus.get();
             }
         });
     }

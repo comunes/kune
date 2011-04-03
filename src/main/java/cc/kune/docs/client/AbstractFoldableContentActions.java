@@ -68,7 +68,7 @@ public abstract class AbstractFoldableContentActions {
         this.fileDownloadProvider = fileDownloadProvider;
         this.foldableContent = foldableContent;
         createActions();
-        session.onInitDataReceived(true, new AppStartHandler() {
+        session.onAppStart(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 createPostSessionInitActions();

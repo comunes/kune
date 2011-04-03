@@ -177,7 +177,7 @@ public class BuddiesSummaryPresenter extends SocialNetworkPresenter implements B
                 AccessRolDTO.Viewer, new Listener<UserSimpleDTO>() {
                     @Override
                     public void onEvent(final UserSimpleDTO user) {
-                        stateManager.gotoToken(user.getShortName());
+                        stateManager.gotoHistoryToken(user.getShortName());
                     }
                 });
         go.setMustBeAuthenticated(false);

@@ -29,6 +29,8 @@ import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.utils.Pair;
+import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.spaces.Space;
@@ -57,9 +59,9 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private StateToken previousToken;
     /**
      * When a historyChanged is interrupted (for instance because you are
-     * editing something), the new token is stored here
+     * editing something), the new history token is stored here
      */
-    private StateToken resumedToken;
+    private String resumedHistoryToken;
     private final Session session;
     private final HashMap<String, HistoryTokenCallback> siteTokens;
     private final TokenMatcher tokenMatcher;
@@ -73,25 +75,35 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.session = session;
         this.history = history;
         this.previousToken = null;
-        this.resumedToken = null;
+        this.resumedHistoryToken = null;
         tokenMatcher.init(GwtWaverefEncoder.INSTANCE);
         siteTokens = new HashMap<String, HistoryTokenCallback>();
         beforeStateChangeCollection = new BeforeActionCollection();
-        session.onUserSignIn(true, new UserSignInEvent.UserSignInHandler() {
+        session.onAppStart(true, new AppStartHandler() {
+
             @Override
-            public void onUserSignIn(final UserSignInEvent event) {
-                if (previousToken == null) {
-                    // starting up
-                    reload();
-                } else {
-                    // do nothing, SigInPresent calls goto;
-                }
-            }
-        });
-        session.onUserSignOut(true, new UserSignOutEvent.UserSignOutHandler() {
-            @Override
-            public void onUserSignOut(final UserSignOutEvent event) {
-                reload();
+            public void onAppStart(final AppStartEvent event) {
+                session.onUserSignIn(true, new UserSignInEvent.UserSignInHandler() {
+                    @Override
+                    public void onUserSignIn(final UserSignInEvent event) {
+                        if (startingUp()) {
+                            processHistoryToken(history.getToken());
+                        } else {
+                            refreshCurrentGroupState();
+                        }
+                    }
+                });
+                session.onUserSignOut(true, new UserSignOutEvent.UserSignOutHandler() {
+                    @Override
+                    public void onUserSignOut(final UserSignOutEvent event) {
+                        if (startingUp()) {
+                            processHistoryToken(history.getToken());
+                        } else {
+                            // Other perms, then refresh state from server
+                            refreshCurrentGroupState();
+                        }
+                    }
+                });
             }
         });
     }
@@ -109,41 +121,43 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private void checkGroupAndToolChange(final StateAbstractDTO newState) {
         final String newGroup = newState.getStateToken().getGroup();
         final String previousGroup = getPreviousGroup();
-        if (previousToken == null || !previousGroup.equals(newGroup)) {
+        if (startingUp() || !previousGroup.equals(newGroup)) {
             GroupChangedEvent.fire(eventBus, previousGroup, newGroup);
         }
         final String previousToolName = getPreviousTool();
         final String newTokenTool = newState.getStateToken().getTool();
         final String newToolName = newTokenTool == null ? "" : newTokenTool;
-        if (previousToken == null || previousToolName == null || !previousToolName.equals(newToolName)) {
+        if (startingUp() || previousToolName == null || !previousToolName.equals(newToolName)) {
             ToolChangedEvent.fire(eventBus, previousToolName, newToolName);
         }
     }
 
-    private void clearResumedToken() {
-        resumedToken = null;
-    }
-
     private String getPreviousGroup() {
-        final String previousGroup = previousToken == null ? "" : previousToken.getGroup();
+        final String previousGroup = startingUp() ? "" : previousToken.getGroup();
         return previousGroup;
     }
 
     private String getPreviousTool() {
-        final String previousTool = previousToken == null ? "" : previousToken.getTool();
+        final String previousTool = startingUp() ? "" : previousToken.getTool();
         return previousTool;
     }
 
     @Override
-    public void gotoToken(final StateToken newToken) {
-        Log.debug("StateManager: history goto-token newItem (" + newToken + ")");
-        history.newItem(newToken.getEncoded());
+    public void gotoHistoryToken(final String token) {
+        Log.debug("StateManager: history goto-string-token newItem (" + token + ")");
+        history.newItem(token);
     }
 
     @Override
-    public void gotoToken(final String token) {
-        Log.debug("StateManager: history goto-string-token newItem (" + token + ")");
-        gotoToken(new StateToken(token));
+    public void gotoHistoryTokenButRedirectToCurrent(final String token) {
+        gotoHistoryToken(TokenUtils.addRedirect(token, history.getToken()));
+
+    }
+
+    @Override
+    public void gotoStateToken(final StateToken newToken) {
+        Log.debug("StateManager: history goto-token newItem (" + newToken + ")");
+        history.newItem(newToken.getEncoded());
     }
 
     @Override
@@ -162,72 +176,14 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     }
 
     private void onHistoryChanged(final StateToken newState) {
+        // NotifyUser.info("loading: " + newState + " because current:" +
+        // session.getCurrentStateToken());
         contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateAbstractDTO>() {
             @Override
             public void onSuccess(final StateAbstractDTO newState) {
                 setState(newState);
             }
         });
-    }
-
-    void onHistoryChanged(final String newHistoryToken) {
-        // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
-        if (beforeStateChangeCollection.checkBeforeAction()) {
-            HistoryTokenCallback tokenListener = null;
-            if (newHistoryToken != null) {
-                final String nToken = newHistoryToken.toLowerCase();
-                tokenListener = siteTokens.get(nToken);
-            }
-            Log.debug("StateManager: on history changed (" + newHistoryToken + ")");
-            if (tokenListener == null) {
-                // token is not one of #newgroup #signin #translate ...
-                final String nToken = newHistoryToken != null ? newHistoryToken.toLowerCase() : null;
-                if (tokenMatcher.hasRedirect(nToken)) {
-                    final Pair<String, String> redirect = tokenMatcher.getRedirect(nToken);
-                    final String firstToken = redirect.getLeft();
-                    final String sndToken = redirect.getRight();
-                    if (firstToken.equals(SiteTokens.PREVIEW)) {
-                        SpaceSelectEvent.fire(eventBus, Space.publicSpace);
-                        SpaceConfEvent.fire(eventBus, Space.groupSpace, sndToken);
-                        SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(sndToken));
-                        onHistoryChanged(new StateToken(sndToken));
-                    }
-                } else if (tokenMatcher.isWaveToken(newHistoryToken)) {
-                    if (session.isLogged()) {
-                        SpaceSelectEvent.fire(eventBus, Space.userSpace);
-                    } else {
-                        history.newItem(TokenUtils.addRedirect(SiteTokens.SIGNIN, newHistoryToken));
-                    }
-                    if (previousToken == null) {
-                        // Starting application (with Wave url)
-                        onHistoryChanged(new StateToken(SiteTokens.GROUP_HOME));
-                    }
-                } else if (tokenMatcher.isGroupToken(newHistoryToken)) {
-                    SpaceConfEvent.fire(eventBus, Space.groupSpace, newHistoryToken);
-                    SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newHistoryToken));
-                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-                    onHistoryChanged(new StateToken(newHistoryToken));
-                } else {
-                    // While we don't redefine token "" as home:
-                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-                    SpaceConfEvent.fire(eventBus, Space.groupSpace, SiteTokens.GROUP_HOME);
-                    SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(SiteTokens.GROUP_HOME));
-                    onHistoryChanged(new StateToken(SiteTokens.GROUP_HOME));
-                }
-            } else {
-                // token is one of #newgroup #signin #translate ...
-                if (previousToken == null) {
-                    // Starting with some token like "signin": load defContent
-                    // also
-                    onHistoryChanged("");
-                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-                }
-                // Fire the listener of this #hash token
-                tokenListener.onHistoryToken();
-            }
-        } else {
-            resumedToken = new StateToken(newHistoryToken);
-        }
     }
 
     @Override
@@ -275,7 +231,105 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     @Override
     public void onValueChange(final ValueChangeEvent<String> event) {
         Log.info("History event value changed: " + event.getValue());
-        onHistoryChanged(event.getValue());
+        processHistoryToken(event.getValue());
+    }
+
+    void processHistoryToken(final String newHistoryToken) {
+        // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
+        if (beforeStateChangeCollection.checkBeforeAction()) {
+            // There isn't a beforeStateChange listener that stops this history
+            // change
+            HistoryTokenCallback tokenListener = null;
+            if (newHistoryToken != null) {
+                final String nToken = newHistoryToken.toLowerCase();
+                tokenListener = siteTokens.get(nToken);
+            }
+            Log.debug("StateManager: on history changed (" + newHistoryToken + ")");
+            if (tokenListener == null) {
+                Log.debug("Is not a special hash");
+                // token is not one of #newgroup #signin #translate ...
+                final String nToken = newHistoryToken != null ? newHistoryToken.toLowerCase() : null;
+                if (tokenMatcher.hasRedirect(nToken)) {
+                    final Pair<String, String> redirect = tokenMatcher.getRedirect(nToken);
+                    final String firstToken = redirect.getLeft();
+                    final String sndToken = redirect.getRight();
+                    if (firstToken.equals(SiteTokens.PREVIEW)) {
+                        SpaceSelectEvent.fire(eventBus, Space.publicSpace);
+                        SpaceConfEvent.fire(eventBus, Space.groupSpace, sndToken);
+                        SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(sndToken));
+                        onHistoryChanged(new StateToken(sndToken));
+                    } else if (firstToken.equals(SiteTokens.NEWGROUP)) {
+                        siteTokens.get(SiteTokens.NEWGROUP).onHistoryToken();
+                    } else if (firstToken.equals(SiteTokens.SIGNIN)) {
+                        if (session.isLogged()) {
+                            // We are logged, then redirect:
+                            history.newItem(sndToken, false);
+                            processHistoryToken(sndToken);
+                        } else {
+                            // We have to loggin
+                            siteTokens.get(SiteTokens.SIGNIN).onHistoryToken();
+                        }
+                    }
+                } else if (tokenMatcher.isWaveToken(newHistoryToken)) {
+                    if (session.isLogged()) {
+                        SpaceSelectEvent.fire(eventBus, Space.userSpace);
+                    } else {
+                        history.newItem(TokenUtils.addRedirect(SiteTokens.SIGNIN, newHistoryToken));
+                    }
+                    if (startingUp()) {
+                        // Starting application (with Wave url)
+                        onHistoryChanged(new StateToken(SiteTokens.GROUP_HOME));
+                    }
+                } else if (tokenMatcher.isGroupToken(newHistoryToken)) {
+                    SpaceConfEvent.fire(eventBus, Space.groupSpace, newHistoryToken);
+                    SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newHistoryToken));
+                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+                    onHistoryChanged(new StateToken(newHistoryToken));
+                } else {
+                    // While we don't redefine token "" as home:
+                    SpaceConfEvent.fire(eventBus, Space.groupSpace, SiteTokens.GROUP_HOME);
+                    SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(SiteTokens.GROUP_HOME));
+                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+                    onHistoryChanged(new StateToken(SiteTokens.GROUP_HOME));
+                }
+            } else {
+                // token is one of #newgroup #signin #translate ...
+                if (startingUp()) {
+                    // Starting with some token like "signin": load defContent
+                    // also
+                    processHistoryToken("");
+                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+                }
+                // Fire the listener of this #hash token
+                tokenListener.onHistoryToken();
+            }
+        } else {
+            resumedHistoryToken = newHistoryToken;
+        }
+    }
+
+    @Override
+    public void redirectOrRestorePreviousToken() {
+        final String token = history.getToken();
+        if (tokenMatcher.hasRedirect(token)) {
+            // URL of the form signin(group.tool)
+            history.newItem(tokenMatcher.getRedirect(token).getRight());
+        } else {
+            // No redirect then restore previous token
+            restorePreviousToken();
+        }
+    }
+
+    /**
+     * <p>
+     * Reload current state (not using client cache)
+     * </p>
+     */
+    @Override
+    public void refreshCurrentGroupState() {
+        final StateToken currentStateToken = session.getCurrentStateToken();
+        contentProvider.removeContent(currentStateToken);
+        onHistoryChanged(currentStateToken);
     }
 
     /**
@@ -285,8 +339,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
      */
     @Override
     public void reload() {
-        Log.info("Reloading state");
-        onHistoryChanged(history.getToken());
+        processHistoryToken(history.getToken());
     }
 
     @Override
@@ -301,15 +354,16 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void restorePreviousToken() {
-        gotoToken(previousToken);
+        gotoStateToken(previousToken);
     }
 
     @Override
     public void resumeTokenChange() {
-        if (resumedToken != null) {
+        if (resumedHistoryToken != null) {
+            // Is this reload redundant?
             reload();
-            gotoToken(resumedToken);
-            clearResumedToken();
+            gotoHistoryToken(resumedHistoryToken);
+            resumedHistoryToken = null;
         }
     }
 
@@ -334,9 +388,16 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
+        final StateToken newToken = newState.getStateToken();
+        contentProvider.cache(newToken, newState);
+        // history.newItem(newToken.toString(), false);
         StateChangedEvent.fire(eventBus, newState);
-        eventBus.fireEvent(new ProgressHideEvent());
         checkGroupAndToolChange(newState);
-        previousToken = newState.getStateToken();
+        previousToken = newToken;
+        eventBus.fireEvent(new ProgressHideEvent());
+    }
+
+    private boolean startingUp() {
+        return previousToken == null;
     }
 }

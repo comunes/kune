@@ -84,7 +84,7 @@ public class GroupOptionsToolsConfPresenter extends EntityOptionsToolsConfPresen
         if (session.getCurrentStateToken().getTool().equals(toolName)) {
             final ContentSimpleDTO defaultContent = session.getCurrentState().getGroup().getDefaultContent();
             if (defaultContent != null) {
-                stateManager.gotoToken(defaultContent.getStateToken());
+                stateManager.gotoStateToken(defaultContent.getStateToken());
             }
         }
     }

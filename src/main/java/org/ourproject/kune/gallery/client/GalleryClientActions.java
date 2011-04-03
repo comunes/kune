@@ -30,7 +30,6 @@ import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
-import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
@@ -55,11 +54,11 @@ public class GalleryClientActions extends OldAbstractFoldableContentActions {
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
             final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
             final GalleryViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-            final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
+            final WsBackManager wsBackManager) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
                 contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
                 contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,
-                documentViewer, entityLogo, publicLink, wsBackManager);
+                documentViewer, entityLogo, wsBackManager);
     }
 
     @Override

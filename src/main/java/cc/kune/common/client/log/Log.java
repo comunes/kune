@@ -51,4 +51,8 @@ public class Log {
         return new StringBuffer().append("[kune] ").append(message).toString();
     }
 
+    public static void warn(final String message) {
+        debug(message);
+    }
+
 }

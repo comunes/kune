@@ -41,7 +41,7 @@ public class JoinGroupAction extends SNRolAction {
                         switch ((result)) {
                         case accepted:
                             NotifyUser.info(i18n.t("You are now member of this group"));
-                            stateManager.reload();
+                            stateManager.refreshCurrentGroupState();
                             break;
                         case denied:
                             NotifyUser.important(i18n.t("Sorry this is a closed group"));

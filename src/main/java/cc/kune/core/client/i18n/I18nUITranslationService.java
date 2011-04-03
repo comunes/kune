@@ -192,7 +192,10 @@ public class I18nUITranslationService extends I18nTranslationService {
      */
     @Override
     public String t(final String text) {
-        assert lexicon != null;
+        if (lexicon == null) {
+            Log.warn("i18n not initialized");
+            return text;
+        }
         final String encodeText = TextUtils.escapeHtmlLight(text);
         String translation = lexicon.get(encodeText);
         if (lexicon.containsKey(encodeText)) {

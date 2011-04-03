@@ -33,9 +33,11 @@ public interface StateManager {
 
     void addSiteToken(String token, HistoryTokenCallback historyTokenCallback);
 
-    void gotoToken(StateToken newToken);
+    void gotoHistoryToken(String newToken);
 
-    void gotoToken(String newToken);
+    void gotoHistoryTokenButRedirectToCurrent(String signin);
+
+    void gotoStateToken(StateToken newToken);
 
     void onGroupChanged(boolean fireNow, GroupChangedEvent.GroupChangedHandler handler);
 
@@ -61,6 +63,10 @@ public interface StateManager {
 
     @Deprecated
     void onToolChanged(Listener2<String, String> listener);
+
+    void redirectOrRestorePreviousToken();
+
+    void refreshCurrentGroupState();
 
     void reload();
 

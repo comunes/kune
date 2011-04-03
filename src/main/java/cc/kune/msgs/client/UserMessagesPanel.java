@@ -19,8 +19,6 @@
  */
 package cc.kune.msgs.client;
 
-import org.adamtacy.client.ui.effects.examples.SlideUp;
-
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.msgs.client.UserMessagesPresenter.UserMessagesView;
 
@@ -49,8 +47,8 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
             final boolean closeable, final CloseCallback closeCallback) {
         final UserMessage msg = new UserMessage(level, title, message, id, closeable, closeCallback);
         vp.add(msg);
-        final SlideUp anim = new SlideUp(msg.getElement());
-        anim.setDuration(.5);
-        anim.play();
+        // final SlideUp anim = new SlideUp(msg.getElement());
+        // anim.setDuration(.5);
+        // anim.play();
     }
 }

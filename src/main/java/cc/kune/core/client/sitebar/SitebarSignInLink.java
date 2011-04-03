@@ -45,13 +45,12 @@ public class SitebarSignInLink extends ButtonDescriptor {
         public SitebarSignInAction(final StateManager stateManager, final I18nTranslationService i18n) {
             super();
             this.stateManager = stateManager;
-
             putValue(Action.NAME, i18n.t("Sign in to collaborate"));
         }
 
         @Override
         public void actionPerformed(final ActionEvent event) {
-            stateManager.gotoToken(SiteTokens.SIGNIN);
+            stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.SIGNIN);
         }
 
     }

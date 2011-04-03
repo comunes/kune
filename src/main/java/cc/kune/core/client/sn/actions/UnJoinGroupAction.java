@@ -43,7 +43,7 @@ public class UnJoinGroupAction extends SNRolAction {
                             public void onSuccess(final SocialNetworkDataDTO result) {
                                 NotifyUser.hideProgress();
                                 NotifyUser.info(i18n.t("Removed as member"));
-                                stateManager.reload();
+                                stateManager.refreshCurrentGroupState();
                                 // in the future with user info:
                                 // stateManager.reloadSocialNetwork((SocialNetworkResultDTO)
                                 // result);

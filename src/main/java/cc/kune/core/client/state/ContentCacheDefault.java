@@ -20,6 +20,7 @@
 package cc.kune.core.client.state;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import cc.kune.core.client.notify.spiner.ProgressShowEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -31,27 +32,29 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
 public class ContentCacheDefault implements ContentCache {
-    private final HashMap<StateToken, StateAbstractDTO> cache;
+    private final Map<StateToken, StateAbstractDTO> cacheMap;
     private final EventBus eventBus;
     private final ContentServiceAsync server;
+    private final boolean useCache;
 
     @Inject
     public ContentCacheDefault(final ContentServiceAsync server, final EventBus eventBus) {
         this.server = server;
         this.eventBus = eventBus;
-        this.cache = new HashMap<StateToken, StateAbstractDTO>();
+        this.cacheMap = new HashMap<StateToken, StateAbstractDTO>();
+        useCache = true;
     }
 
     @Override
     public void cache(final StateToken encodeState, final StateAbstractDTO content) {
-        // Disabled by now
-        // cache.put(encodeState, content);
+        if (useCache) {
+            cacheMap.put(encodeState, content);
+        }
     }
 
     private StateAbstractDTO getCached(final StateToken newState) {
-        return null;
-        // Disabled by now
-        // return cache.remove(newState);
+        return useCache ? cacheMap.get(newState) : null;
+        // return useCache ? cache.remove(newState) : null;
     }
 
     @Override
@@ -63,6 +66,11 @@ public class ContentCacheDefault implements ContentCache {
         } else {
             server.getContent(user, newState, callback);
         }
+    }
+
+    @Override
+    public void removeContent(final StateToken token) {
+        cacheMap.remove(token);
     }
 
 }

@@ -65,7 +65,7 @@ public class UserOptionsPresenter extends AbstractTabbedDialogPresenter implemen
             @Override
             public void actionPerformed(final ActionEvent event) {
                 if (!session.isInCurrentUserSpace()) {
-                    stateManager.gotoToken(session.getCurrentUser().getStateToken());
+                    stateManager.gotoStateToken(session.getCurrentUser().getStateToken());
                 }
                 show();
             }

@@ -31,7 +31,7 @@ public class WaveGinModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
         bind(WaveClientManager.class).in(Singleton.class);
-        bind(SitebarWaveStatus.class).in(Singleton.class);
+        bind(WaveStatusIndicator.class).in(Singleton.class);
         bind(WaveParts.class).asEagerSingleton();
     }
 }

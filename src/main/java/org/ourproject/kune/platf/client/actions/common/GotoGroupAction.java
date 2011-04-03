@@ -39,6 +39,6 @@ public class GotoGroupAction extends AbstractExtendedAction {
     }
 
     public void actionPerformed(final ActionEvent event) {
-        this.stateManager.gotoToken(name);
+        this.stateManager.gotoHistoryToken(name);
     }
 }

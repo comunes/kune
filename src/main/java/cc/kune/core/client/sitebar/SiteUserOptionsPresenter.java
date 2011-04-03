@@ -137,7 +137,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     }
 
     private void goUserHome() {
-        stateManager.gotoToken(session.getCurrentUserInfo().getShortName());
+        stateManager.gotoHistoryToken(session.getCurrentUserInfo().getShortName());
     }
 
     private void onUserSignIn(final UserInfoDTO userInfoDTO) {

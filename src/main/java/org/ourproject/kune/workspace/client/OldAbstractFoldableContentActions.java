@@ -37,7 +37,6 @@ import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
-import org.ourproject.kune.workspace.client.sitebar.sitepublic.SitePublicSpaceLink;
 import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
@@ -95,7 +94,7 @@ public abstract class OldAbstractFoldableContentActions {
     protected final FoldableContent foldableContent;
     protected final Provider<GroupServiceAsync> groupServiceProvider;
     protected final I18nUITranslationService i18n;
-    private final SitePublicSpaceLink publicLink;
+
     protected final Session session;
     protected final StateManager stateManager;
     protected final Provider<ContentEditor> textEditorProvider;
@@ -110,7 +109,7 @@ public abstract class OldAbstractFoldableContentActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final Provider<ContentEditor> textEditorProvider,
             final Provider<ContextPropEditor> contextPropEditorProvider, final FoldableContent foldableContent,
-            final EntityHeader entityLogo, final SitePublicSpaceLink publicLink, final WsBackManager wsBackManager) {
+            final EntityHeader entityLogo, final WsBackManager wsBackManager) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
@@ -127,7 +126,6 @@ public abstract class OldAbstractFoldableContentActions {
         this.contextPropEditorProvider = contextPropEditorProvider;
         this.foldableContent = foldableContent;
         this.entityLogo = entityLogo;
-        this.publicLink = publicLink;
         this.wsBackManager = wsBackManager;
         createActions();
         session.onInitDataReceived(new Listener<InitDataDTO>() {
@@ -197,7 +195,7 @@ public abstract class OldAbstractFoldableContentActions {
                                     public void onSuccess(final StateContentDTO state) {
                                         session.setCurrentState(state);
                                         final StateToken parent = token.copy().clearDocument();
-                                        stateManager.gotoToken(parent);
+                                        stateManager.gotoStateToken(parent);
                                         contextNavigator.clear();
                                         contextNavigator.refreshState();
                                     }
@@ -318,7 +316,7 @@ public abstract class OldAbstractFoldableContentActions {
                 new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken token) {
-                        stateManager.gotoToken(token);
+                        stateManager.gotoStateToken(token);
                     }
                 });
         go.setMustBeAuthenticated(false);
@@ -333,7 +331,7 @@ public abstract class OldAbstractFoldableContentActions {
                 AccessRolDTO.Viewer, CONTEXT_TOPBAR, new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken token) {
-                        stateManager.gotoToken(token.getGroup());
+                        stateManager.gotoHistoryToken(token.getGroup());
                     }
                 });
         goGroupHome.setMustBeAuthenticated(false);
@@ -548,7 +546,7 @@ public abstract class OldAbstractFoldableContentActions {
                         session.getCurrentUserInfo().setShowDeletedContent(mustShow);
                         if (!mustShow && session.isCurrentStateAContent()
                                 && session.getContentState().getStatus().equals(ContentStatus.inTheDustbin)) {
-                            stateManager.gotoToken(session.getCurrentStateToken().getGroup());
+                            stateManager.gotoHistoryToken(session.getCurrentStateToken().getGroup());
                         }
                         contextNavigator.clear();
                         contextNavigator.refreshState();
@@ -657,7 +655,7 @@ public abstract class OldAbstractFoldableContentActions {
             public void onSuccess(final StateAbstractDTO state) {
                 if (session.inSameToken(stateToken)) {
                     session.setCurrentState(state);
-                    publicLink.setState(state);
+                    // publicLink.setState(state);
                     foldableContent.refreshState();
                 }
                 contextNavigator.setItemStatus(stateToken, status);

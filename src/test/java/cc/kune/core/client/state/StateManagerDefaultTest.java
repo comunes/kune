@@ -156,13 +156,13 @@ public class StateManagerDefaultTest {
     @SuppressWarnings("unchecked")
     @Test
     public void getDefGroup() {
-        stateManager.onHistoryChanged("site.docs");
+        stateManager.processHistoryToken("site.docs");
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
 
     public void getWaveToken() {
-        stateManager.onHistoryChanged("example.com/w+abcd/~/conv+root/b+45kg");
+        stateManager.processHistoryToken("example.com/w+abcd/~/conv+root/b+45kg");
     }
 
     @SuppressWarnings("unchecked")
@@ -180,9 +180,9 @@ public class StateManagerDefaultTest {
     @Test
     public void oneBeforeStateChangeListenerAddAndRemove() {
         final String newToken = confBeforeStateChangeListeners(false, false);
-        stateManager.onHistoryChanged(newToken);
+        stateManager.processHistoryToken(newToken);
         removeBeforeStateChangeListener();
-        stateManager.onHistoryChanged(newToken);
+        stateManager.processHistoryToken(newToken);
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
@@ -190,7 +190,7 @@ public class StateManagerDefaultTest {
     @Test
     public void oneBeforeStateChangeListenerFalseAndResume() {
         final String token = confBeforeStateChangeListeners(false, true);
-        stateManager.onHistoryChanged(token);
+        stateManager.processHistoryToken(token);
         Mockito.verify(history, Mockito.never()).newItem(token);
         removeBeforeStateChangeListener();
         stateManager.resumeTokenChange();
@@ -200,7 +200,7 @@ public class StateManagerDefaultTest {
     @SuppressWarnings("unchecked")
     @Test
     public void oneBeforeStateChangeListenerReturnFalse() {
-        stateManager.onHistoryChanged(confBeforeStateChangeListeners(true, false));
+        stateManager.processHistoryToken(confBeforeStateChangeListeners(true, false));
         Mockito.verify(contentProvider, Mockito.never()).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
@@ -208,7 +208,7 @@ public class StateManagerDefaultTest {
     @SuppressWarnings("unchecked")
     @Test
     public void oneBeforeStateChangeListenerReturnFalseWithTwo() {
-        stateManager.onHistoryChanged(confBeforeStateChangeListeners(false, false));
+        stateManager.processHistoryToken(confBeforeStateChangeListeners(false, false));
         Mockito.verify(contentProvider, Mockito.never()).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
@@ -216,7 +216,7 @@ public class StateManagerDefaultTest {
     @SuppressWarnings("unchecked")
     @Test
     public void oneBeforeStateChangeListenerReturnTrue() {
-        stateManager.onHistoryChanged(confBeforeStateChangeListeners(true, true));
+        stateManager.processHistoryToken(confBeforeStateChangeListeners(true, true));
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
@@ -232,7 +232,7 @@ public class StateManagerDefaultTest {
         final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
         final String token = SiteTokens.SIGNIN;
         stateManager.addSiteToken(token, listener);
-        stateManager.onHistoryChanged(token);
+        stateManager.processHistoryToken(token);
         Mockito.verify(listener, Mockito.times(1)).onHistoryToken();
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
                 (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
@@ -242,7 +242,7 @@ public class StateManagerDefaultTest {
     public void siteTokenTest() {
         final HistoryTokenCallback siteTokenListener = Mockito.mock(HistoryTokenCallback.class);
         stateManager.addSiteToken("signin", siteTokenListener);
-        stateManager.onHistoryChanged("signIn");
+        stateManager.processHistoryToken("signIn");
         Mockito.verify(siteTokenListener, Mockito.times(1)).onHistoryToken();
     }
 }

@@ -19,14 +19,12 @@
  */
 package cc.kune.core.client.sitebar.spaces;
 
-import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.core.client.auth.SignIn;
+import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
-import cc.kune.core.client.state.UserSignInEvent;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.gspace.client.WsArmor;
 
@@ -35,7 +33,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -73,21 +70,19 @@ public class SpaceSelectorPresenter extends
     private Space currentSpace;
     private String groupToken;
     private String homeToken;
-    private boolean nextUserSpace;
     private String publicToken;
     private final Session session;
-    private final Provider<SignIn> signIn;
+    private final StateManager stateManager;
     private String userToken;
 
     @Inject
     public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
-            final SpaceSelectorView view, final SpaceSelectorProxy proxy, final WsArmor armor, final Session session,
-            final Provider<SignIn> sigIn) {
+            final SpaceSelectorView view, final SpaceSelectorProxy proxy, final WsArmor armor, final Session session) {
         super(eventBus, view, proxy);
+        this.stateManager = stateManager;
         this.armor = armor;
         this.session = session;
-        this.signIn = sigIn;
-        nextUserSpace = false;
+        currentSpace = null;
         homeToken = SiteTokens.HOME;
         userToken = SiteTokens.WAVEINBOX;
         groupToken = SiteTokens.GROUP_HOME;
@@ -95,36 +90,31 @@ public class SpaceSelectorPresenter extends
         view.getHomeBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                stateManager.gotoToken(homeToken);
+                stateManager.gotoHistoryToken(homeToken);
             }
         });
         view.getUserBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                stateManager.gotoToken(userToken);
+                stateManager.gotoHistoryToken(userToken);
             }
         });
         view.getGroupBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                stateManager.gotoToken(groupToken);
+                stateManager.gotoHistoryToken(groupToken);
             }
         });
         view.getPublicBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
-                stateManager.gotoToken(publicToken);
+                stateManager.gotoHistoryToken(publicToken);
             }
         });
     }
 
     @ProxyEvent
     public void onAppStart(final AppStartEvent event) {
-        getView().setHomeBtnDown(false);
-        getView().setUserBtnDown(false);
-        getView().setGroupBtnDown(false);
-        getView().setPublicBtnDown(false);
-        onHomeSpaceSelect();
     }
 
     private void onGroupSpaceSelect() {
@@ -134,7 +124,6 @@ public class SpaceSelectorPresenter extends
         getView().setGroupBtnDown(true);
         getView().setPublicBtnDown(false);
         currentSpace = Space.groupSpace;
-        nextUserSpace = false;
     }
 
     private void onHomeSpaceSelect() {
@@ -144,7 +133,6 @@ public class SpaceSelectorPresenter extends
         getView().setGroupBtnDown(false);
         getView().setPublicBtnDown(false);
         currentSpace = Space.homeSpace;
-        nextUserSpace = false;
     }
 
     private void onPublicSpaceSelect() {
@@ -154,7 +142,6 @@ public class SpaceSelectorPresenter extends
         getView().setGroupBtnDown(false);
         getView().setPublicBtnDown(true);
         currentSpace = Space.publicSpace;
-        nextUserSpace = false;
     }
 
     @ProxyEvent
@@ -201,19 +188,11 @@ public class SpaceSelectorPresenter extends
     }
 
     @ProxyEvent
-    public void onUserSignIn(final UserSignInEvent event) {
-        if (nextUserSpace) {
-            onUserSpaceSelect();
-            nextUserSpace = false;
-        }
-    }
-
-    @ProxyEvent
     public void onUserSignOut(final UserSignOutEvent event) {
         if (currentSpace == Space.userSpace) {
-            nextUserSpace = false;
-            onHomeSpaceSelect();
+            stateManager.gotoHistoryToken(homeToken);
         }
+        userToken = SiteTokens.WAVEINBOX;
     }
 
     private void onUserSpaceSelect() {
@@ -224,12 +203,12 @@ public class SpaceSelectorPresenter extends
             getView().setGroupBtnDown(false);
             getView().setPublicBtnDown(false);
             currentSpace = Space.userSpace;
-            nextUserSpace = false;
         } else {
-            signIn.get().showSignInDialog();
+            stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, userToken));
             getView().setUserBtnDown(false);
-            signIn.get().setErrorMessage("Sign in to access to your workspace", NotifyLevel.info);
-            nextUserSpace = true;
+            NotifyUser.info("Sign in to access to your workspace");
+            // signIn.get().setErrorMessage("Sign in to access to your workspace",
+            // NotifyLevel.info);
         }
     }
 

@@ -173,14 +173,14 @@ public class SocialNetworkPresenter {
                 new Listener<GroupDTO>() {
                     @Override
                     public void onEvent(final GroupDTO groupDTO) {
-                        stateManager.gotoToken(groupDTO.getShortName());
+                        stateManager.gotoHistoryToken(groupDTO.getShortName());
                     }
                 });
         gotoMemberMenuItem = new MenuItem<GroupDTO>("images/group-home.gif", i18n.t("Visit this member homepage"),
                 new Listener<GroupDTO>() {
                     @Override
                     public void onEvent(final GroupDTO groupDTO) {
-                        stateManager.gotoToken(groupDTO.getShortName());
+                        stateManager.gotoHistoryToken(groupDTO.getShortName());
                     }
                 });
 
@@ -295,7 +295,7 @@ public class SocialNetworkPresenter {
     }
 
     public void onDoubleClick(final String groupShortName) {
-        stateManager.gotoToken(groupShortName);
+        stateManager.gotoHistoryToken(groupShortName);
     }
 
     public void removeGroupOperation(final MenuItem<GroupDTO> operation, final boolean mustBeLogged) {

@@ -146,7 +146,7 @@ public class ChatClientDefault implements ChatClient {
         this.roomManager = Suco.get(RoomManager.class);
         Suco.get(SessionReconnect.class);
 
-        session.onInitDataReceived(true, new AppStartEvent.AppStartHandler() {
+        session.onAppStart(true, new AppStartEvent.AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 chatOptions.domain = event.getInitData().getChatDomain();

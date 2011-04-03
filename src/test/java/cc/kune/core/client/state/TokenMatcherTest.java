@@ -17,6 +17,8 @@ public class TokenMatcherTest {
     private static final String REDIRECT_LINK = "example.com/w+jsdKixyHhZA";
     private static final String SIGNIN_TOKEN = "signin";
     private static final String SIGNIN_TOKEN_WITH_REDIRECT = SIGNIN_TOKEN + "(" + REDIRECT_LINK + ")";
+    private static final String SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW = SIGNIN_TOKEN + "(" + SiteTokens.PREVIEW + "("
+            + REDIRECT_LINK + "))";
     private static final String WAVE_TOKEN_SAMPLE1 = "example.com/w+abcd";
     private static final String WAVE_TOKEN_SAMPLE2 = "example.com/w+abcd/~/conv+root";
     private static final String WAVE_TOKEN_SAMPLE3 = "example.com/w+abcd/~/conv+root/b+45kg";
@@ -78,6 +80,17 @@ public class TokenMatcherTest {
         assertTrue(tokenMatcher.hasRedirect(SIGNIN_TOKEN_WITH_REDIRECT));
         assertEquals(SIGNIN_TOKEN, tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getLeft());
         assertEquals(REDIRECT_LINK, tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getRight());
+    }
+
+    @Test
+    public void shouldExtractRedirectInSignPreview() {
+        assertTrue(tokenMatcher.hasRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW));
+        assertEquals(
+                "Expected " + SIGNIN_TOKEN + " but: "
+                        + tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW).getLeft(), SIGNIN_TOKEN,
+                tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW).getLeft());
+        // assertEquals(REDIRECT_LINK,
+        // tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getRight());
     }
 
     @Test

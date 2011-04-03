@@ -181,7 +181,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
     }
 
     protected void gotoToken(final String token) {
-        stateManager.gotoToken(token);
+        stateManager.gotoHistoryToken(token);
     }
 
     protected void onItemRename(final String token, final String newName, final String oldName) {

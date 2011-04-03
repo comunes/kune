@@ -23,7 +23,6 @@ import org.ourproject.kune.platf.client.ui.noti.ConfirmationAsk;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
 import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessage;
-import org.ourproject.kune.workspace.client.sitebar.siteprogress.SiteProgress;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -35,21 +34,23 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class WorkspaceNotifyUser {
 
-    public WorkspaceNotifyUser(NotifyUser notifyUser, final I18nTranslationService i18n,
-            final SiteProgress siteProgress, final Provider<ToastMessage> toaster,
-            final Provider<WorkspaceSkeleton> ws) {
+    public WorkspaceNotifyUser(final NotifyUser notifyUser, final I18nTranslationService i18n,
+            final Provider<ToastMessage> toaster, final Provider<WorkspaceSkeleton> ws) {
         notifyUser.addProgressNotifier(new Listener<String>() {
-            public void onEvent(String message) {
-                siteProgress.showProgress(message);
+            @Override
+            public void onEvent(final String message) {
+
             }
         });
         notifyUser.addHideProgressNotifier(new Listener0() {
+            @Override
             public void onEvent() {
-                siteProgress.hideProgress();
+                // siteProgress.hideProgress();
             }
         });
         notifyUser.addNotifier(new Listener2<Level, String>() {
-            public void onEvent(Level level, String msg) {
+            @Override
+            public void onEvent(final Level level, final String msg) {
                 String title = "";
                 switch (level) {
                 case error:
@@ -69,12 +70,14 @@ public class WorkspaceNotifyUser {
             }
         });
         notifyUser.addAlerter(new Listener2<String, String>() {
-            public void onEvent(String title, String msg) {
+            @Override
+            public void onEvent(final String title, final String msg) {
                 ws.get().showAlertMessage(title, msg);
             }
         });
         notifyUser.addConfirmationAsker(new Listener<ConfirmationAsk>() {
-            public void onEvent(ConfirmationAsk ask) {
+            @Override
+            public void onEvent(final ConfirmationAsk ask) {
                 ws.get().askConfirmation(ask.getTitle(), ask.getMessage(), ask.getOnConfirmed(), ask.getOnCancel());
             }
         });

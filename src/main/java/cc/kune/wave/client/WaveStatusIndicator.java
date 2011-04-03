@@ -16,12 +16,12 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
-public class SitebarWaveStatus {
+public class WaveStatusIndicator {
 
-    public static class SitebarWaveStatusAction extends SessionAction {
+    public static class WaveStatusAction extends SessionAction {
 
         @Inject
-        public SitebarWaveStatusAction(final Session session, final I18nTranslationService i18n) {
+        public WaveStatusAction(final Session session, final I18nTranslationService i18n) {
             super(session, true);
             ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
                 @Override
@@ -31,13 +31,13 @@ public class SitebarWaveStatus {
                     case RECONNECTED:
                         putValue(Action.NAME, i18n.t("Online"));
                         putValue(AbstractAction.STYLES, "k-sitebar-wave-status, k-sitebar-wave-status-online");
+                        NotifyUser.hideProgress();
                         break;
                     case DISCONNECTED:
+                        NotifyUser.showProgress(i18n.t("Connecting"));
+                    case RECONNECTING:
                         putValue(Action.NAME, i18n.t("Offline"));
                         putValue(AbstractAction.STYLES, "k-sitebar-wave-status, k-sitebar-wave-status-offline");
-                        break;
-                    case RECONNECTING:
-                        NotifyUser.showProgress(i18n.t("Connecting"));
                         break;
                     }
                 }
@@ -48,10 +48,11 @@ public class SitebarWaveStatus {
         public void actionPerformed(final ActionEvent event) {
             // Do nothing
         }
+
     }
 
     @Inject
-    public SitebarWaveStatus(final SitebarActionsPresenter sitebar, final SitebarWaveStatusAction action) {
+    public WaveStatusIndicator(final SitebarActionsPresenter sitebar, final WaveStatusAction action) {
         final IconLabelDescriptor status = new IconLabelDescriptor(action);
         status.setPosition(0);
         sitebar.getRightToolbar().addAction(status);

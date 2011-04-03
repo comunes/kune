@@ -40,7 +40,6 @@ import org.ourproject.kune.platf.client.ui.rte.insertmedia.InsertMediaDialog;
 import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCharDialog;
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
-import org.ourproject.kune.workspace.client.sitebar.sitesign.SiteSignOutLink;
 import org.ourproject.kune.workspace.client.skel.Toolbar;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.title.EntityTitle;
@@ -69,19 +68,20 @@ public class ContentEditorPresenter extends RTESavingEditorPresenter implements 
             super(text, tooltip, icon);
         }
 
+        @Override
         public void actionPerformed(final ActionEvent actionEvent) {
             entityTitle.edit();
         }
     }
 
-    private final WorkspaceSkeleton wspace;
-    private VerticalPanel vpanel;
     private RTEditorPanel editorPanel;
-    private final SiteSignOutLink siteSignOutLink;
-    private final I18nTranslationService i18n;
     private final EntityTitle entityTitle;
-    private ComplexToolbar topbar;
+    // private final SiteSignOutLink siteSignOutLink;
+    private final I18nTranslationService i18n;
     private ComplexToolbar sndbar;
+    private ComplexToolbar topbar;
+    private VerticalPanel vpanel;
+    private final WorkspaceSkeleton wspace;
 
     public ContentEditorPresenter(final I18nTranslationService i18n, final Session session,
             final RTEImgResources imgResources, final Provider<InsertLinkDialog> insLinkDialog,
@@ -89,16 +89,16 @@ public class ContentEditorPresenter extends RTESavingEditorPresenter implements 
             final Provider<InsertImageDialog> insertImageDialog, final Provider<InsertMediaDialog> insertMediaDialog,
             final Provider<InsertTableDialog> insertTableDialog, final Provider<InsertSpecialCharDialog> insCharDialog,
             final SchedulerManager deferred, final boolean autoSave, final StateManager stateManager,
-            final SiteSignOutLink siteSignOutLink, final WorkspaceSkeleton wspace, final TimerWrapper timer,
-            final EntityTitle entityTitle) {
+            final WorkspaceSkeleton wspace, final TimerWrapper timer, final EntityTitle entityTitle) {
         super(i18n, session, imgResources, insLinkDialog, palette, editHtmlDialog, insertImageDialog,
                 insertMediaDialog, insertTableDialog, insCharDialog, deferred, autoSave, stateManager, timer);
         super.setExtended(true);
         this.i18n = i18n;
-        this.siteSignOutLink = siteSignOutLink;
+
         this.entityTitle = entityTitle;
         this.wspace = wspace;
         Window.addWindowClosingHandler(new ClosingHandler() {
+            @Override
             public void onWindowClosing(final ClosingEvent event) {
                 if (isSavePending()) {
                     event.setMessage(i18n.t("You have changes without save. Are you sure?"));
@@ -114,40 +114,6 @@ public class ContentEditorPresenter extends RTESavingEditorPresenter implements 
             }
         });
 
-    }
-
-    @Override
-    public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
-        super.edit(html, onSave, onEditCancelled);
-        final Toolbar contentTopBar = wspace.getEntityWorkspace().getContentTopBar();
-        contentTopBar.removeAll();
-        contentTopBar.add(topbar);
-        wspace.getEntityWorkspace().setContent(vpanel);
-        adjHeight(wspace.getEntityWorkspace().getContentHeight());
-        siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
-    }
-
-    public void init(final ContentEditorView view) {
-        super.init(view);
-        addContentActions();
-        vpanel = new VerticalPanel();
-        editorPanel = (RTEditorPanel) super.getEditorArea();
-        topbar = ((ComplexToolbar) super.getTopBar());
-        sndbar = ((ComplexToolbar) super.getSndBar());
-        vpanel.add(sndbar);
-        vpanel.add(editorPanel);
-        vpanel.setWidth("100%");
-    }
-
-    public void setFileMenuTitle(final String fileMenuTitleNew) {
-        super.getFileMenu().setText(fileMenuTitleNew);
-    }
-
-    @Override
-    protected void onCancelConfirmed() {
-        wspace.getEntityWorkspace().clearContent();
-        super.onCancelConfirmed();
-        siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
     }
 
     private void addContentActions() {
@@ -167,6 +133,41 @@ public class ContentEditorPresenter extends RTESavingEditorPresenter implements 
         // newHeight);
         editorPanel.adjustSize(newHeight);
         vpanel.setCellHeight(editorPanel, String.valueOf(newHeight));
+    }
+
+    @Override
+    public void edit(final String html, final Listener<String> onSave, final Listener0 onEditCancelled) {
+        super.edit(html, onSave, onEditCancelled);
+        final Toolbar contentTopBar = wspace.getEntityWorkspace().getContentTopBar();
+        contentTopBar.removeAll();
+        contentTopBar.add(topbar);
+        wspace.getEntityWorkspace().setContent(vpanel);
+        adjHeight(wspace.getEntityWorkspace().getContentHeight());
+        // siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
+    }
+
+    public void init(final ContentEditorView view) {
+        super.init(view);
+        addContentActions();
+        vpanel = new VerticalPanel();
+        editorPanel = (RTEditorPanel) super.getEditorArea();
+        topbar = ((ComplexToolbar) super.getTopBar());
+        sndbar = ((ComplexToolbar) super.getSndBar());
+        vpanel.add(sndbar);
+        vpanel.add(editorPanel);
+        vpanel.setWidth("100%");
+    }
+
+    @Override
+    protected void onCancelConfirmed() {
+        wspace.getEntityWorkspace().clearContent();
+        super.onCancelConfirmed();
+        // siteSignOutLink.addBeforeSignOut(getBeforeSavingListener());
+    }
+
+    @Override
+    public void setFileMenuTitle(final String fileMenuTitleNew) {
+        super.getFileMenu().setText(fileMenuTitleNew);
     }
 
 }

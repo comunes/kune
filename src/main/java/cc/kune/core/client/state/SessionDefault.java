@@ -30,6 +30,7 @@ import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.state.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.I18nCountryDTO;
@@ -297,7 +298,7 @@ public class SessionDefault implements Session {
     }
 
     @Override
-    public void onInitDataReceived(final boolean fireNow, final AppStartHandler handler) {
+    public void onAppStart(final boolean fireNow, final AppStartHandler handler) {
         eventBus.addHandler(AppStartEvent.getType(), handler);
         if (fireNow && initData != null) {
             handler.onAppStart(new AppStartEvent(initData));
@@ -320,6 +321,14 @@ public class SessionDefault implements Session {
     @Override
     public void onUserSignIn(final Listener<UserInfoDTO> listener) {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public void onUserSignInOrSignOut(final boolean fireNow, final UserSignInOrSignOutHandler handler) {
+        eventBus.addHandler(UserSignInOrSignOutEvent.getType(), handler);
+        if (fireNow) {
+            handler.onUserSignInOrSignOut(new UserSignInOrSignOutEvent(isLogged()));
+        }
     }
 
     @Override
@@ -353,6 +362,7 @@ public class SessionDefault implements Session {
         } else {
             eventBus.fireEvent(new UserSignOutEvent());
         }
+        eventBus.fireEvent(new UserSignInOrSignOutEvent(isLogged()));
     }
 
     @Override

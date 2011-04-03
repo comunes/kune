@@ -11,7 +11,7 @@ public class PSpaceParts {
 
     @Inject
     public PSpaceParts(final Session session, final Provider<PSpacePresenter> pspacePresenter) {
-        session.onInitDataReceived(true, new AppStartHandler() {
+        session.onAppStart(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 pspacePresenter.get();

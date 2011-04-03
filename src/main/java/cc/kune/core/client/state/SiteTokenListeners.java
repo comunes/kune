@@ -54,7 +54,7 @@ public class SiteTokenListeners {
         this.newGroup = newGroup;
         this.aboutKuneDialog = aboutKuneDialog;
         init();
-        session.onInitDataReceived(true, new AppStartHandler() {
+        session.onAppStart(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
             }

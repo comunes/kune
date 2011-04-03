@@ -59,7 +59,7 @@ public class GalleryFolderContentPanel extends FoldableContentPanel implements G
                         new ClickHandler() {
                             @Override
                             public void onClick(final ClickEvent event) {
-                                stateManager.gotoToken(token);
+                                stateManager.gotoStateToken(token);
                             }
                         });
                 thumb.setHeight("100");

@@ -65,7 +65,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
         final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
         final ButtonDescriptor unJoinBtn = new ButtonDescriptor(unJoinGroupAction);
-        unJoinBtn.add(isLoggedCondition);
+        // unJoinBtn.add(isLoggedCondition);
         add(joinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
         add(unJoinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
 

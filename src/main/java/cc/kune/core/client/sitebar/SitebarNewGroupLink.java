@@ -23,8 +23,8 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -44,7 +44,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
         @Override
         public void actionPerformed(final ActionEvent event) {
-            stateManager.gotoToken(SiteTokens.NEWGROUP);
+            stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.NEWGROUP);
         }
 
     }

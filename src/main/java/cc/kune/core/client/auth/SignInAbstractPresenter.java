@@ -64,14 +64,14 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
         getView().reset();
         getView().hideMessages();
         getView().hide();
-        stateManager.restorePreviousToken();
+        stateManager.redirectOrRestorePreviousToken();
     }
 
     public void onClose() {
         getView().reset();
         getView().hideMessages();
         if (!session.isLogged()) {
-            stateManager.restorePreviousToken();
+            stateManager.redirectOrRestorePreviousToken();
         }
     }
 
@@ -84,7 +84,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
         final I18nLanguageDTO language = userInfoDTO.getLanguage();
         i18n.changeCurrentLanguage(language.getCode());
         session.setCurrentLanguage(language);
-        stateManager.restorePreviousToken();
+        stateManager.redirectOrRestorePreviousToken();
     }
 
     protected void saveAutocompleteLoginData(final String nickOrEmail, final String password) {

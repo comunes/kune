@@ -399,12 +399,14 @@ a:visited {
     padding: 1px 7px 0 0 !important;
 }
 
-.k-sitebar-wave-status,.k-sitebar-wave-status-online {
-    color: red;
+.k-sitebar-wave-status{
+}
+.k-sitebar-wave-status-online {
+    color: green;
 }
 
-.k-sitebar-wave-status,.k-sitebar-wave-status-offline {
-    color: green;
+.k-sitebar-wave-status-offline {
+    color: red;
 }
 
 .k-sitebar button:hover {
@@ -1062,7 +1064,7 @@ font-size:small;
 }
 
 .k-tsp-cloud {
-    line-height: 1.5em;
+    line-height: 1em;
     text-align: center;
 }
 

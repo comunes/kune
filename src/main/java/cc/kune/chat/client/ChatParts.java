@@ -46,7 +46,7 @@ public class ChatParts {
             final Provider<StartChatWithThisBuddieAction> startChatWithBuddieAction,
             final Provider<OpenGroupPublicChatRoomAction> openGroupRoomAction,
             final Provider<OpenGroupPublicChatRoomButton> openGroupRoom) {
-        session.onInitDataReceived(true, new AppStartHandler() {
+        session.onAppStart(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
                 chatActionsProvider.get();

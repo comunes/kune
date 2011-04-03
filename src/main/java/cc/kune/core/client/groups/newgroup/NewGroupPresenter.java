@@ -144,12 +144,12 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     public void onCancel() {
         getView().hide();
         reset();
-        stateManager.restorePreviousToken();
+        stateManager.redirectOrRestorePreviousToken();
     }
 
     public void onClose() {
         if (mustGoToPrevious) {
-            stateManager.restorePreviousToken();
+            stateManager.redirectOrRestorePreviousToken();
         }
         reset();
     }
@@ -181,7 +181,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
                 public void onSuccess(final StateToken token) {
                     mustGoToPrevious = false;
                     getView().hide();
-                    stateManager.gotoToken(token);
+                    stateManager.gotoStateToken(token);
                     reset();
                     getView().unMask();
                 }
