@@ -64,7 +64,6 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
         getView().reset();
         getView().hideMessages();
         getView().hide();
-        stateManager.redirectOrRestorePreviousToken();
     }
 
     public void onClose() {

@@ -20,7 +20,6 @@
 package cc.kune.core.client.groups.newgroup;
 
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.log.Log;
 import cc.kune.common.client.noti.NotifyLevel;
 import cc.kune.common.client.noti.NotifyUser;
 import cc.kune.core.client.auth.SignIn;
@@ -61,7 +60,6 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     private final Provider<GroupServiceAsync> groupService;
 
     private final I18nTranslationService i18n;
-    private boolean mustGoToPrevious;
     private final Session session;
     private final Provider<SignIn> signIn;
     private final StateManager stateManager;
@@ -76,15 +74,12 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
         this.stateManager = stateManager;
         this.groupService = groupService;
         this.signIn = signIn;
-
         stateManager.addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
-
             @Override
             public void onHistoryToken() {
                 doNewGroup();
             }
         });
-        mustGoToPrevious = true;
     }
 
     @Override
@@ -135,23 +130,18 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
             @Override
             public void onClose(final CloseEvent<PopupPanel> event) {
-                Log.debug("Closing register presenter");
-                NewGroupPresenter.this.onCancel();
+                NewGroupPresenter.this.onClose();
             }
         });
     }
 
     public void onCancel() {
         getView().hide();
-        reset();
-        stateManager.redirectOrRestorePreviousToken();
     }
 
     public void onClose() {
-        if (mustGoToPrevious) {
-            stateManager.redirectOrRestorePreviousToken();
-        }
         reset();
+        stateManager.redirectOrRestorePreviousToken();
     }
 
     public void onRegister() {
@@ -179,7 +169,6 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
                 @Override
                 public void onSuccess(final StateToken token) {
-                    mustGoToPrevious = false;
                     getView().hide();
                     stateManager.gotoStateToken(token);
                     reset();
@@ -193,7 +182,6 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
     private void reset() {
         getView().clearData();
-        mustGoToPrevious = true;
     }
 
     @Override

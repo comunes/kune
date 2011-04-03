@@ -22,22 +22,6 @@ package testsuites;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.ourproject.kune.blogs.server.BlogServerToolTest;
-import org.ourproject.kune.chat.ChatToolTest;
-import org.ourproject.kune.chat.server.managers.XmppManagerTest;
-import org.ourproject.kune.gallery.server.GalleryServerToolTest;
-import org.ourproject.kune.wiki.server.WikiServerToolTest;
-import org.ourproject.kune.workspace.client.entityheader.EntityLogoPresenterTest;
-import org.ourproject.kune.workspace.client.licensewizard.LicenseWizardPresenterTest;
-import org.ourproject.kune.workspace.client.socialnet.SNRolActionTest;
-import org.ourproject.kune.workspace.client.socialnet.RolComparatorTest;
-
-import cc.kune.core.server.rack.filters.rest.TestRESTMethodFinder;
-import cc.kune.core.server.rack.filters.rest.TestRESTServiceDefinition;
-import cc.kune.docs.DocumentToolTest;
-import cc.kune.docs.server.DocumentServerToolTest;
-import cc.kune.gspace.client.tags.TagsSummaryPresenterTest;
-import cc.kune.gspace.client.tool.ToolSelectorPresenterTest;
 
 /**
  * Rescan with :
@@ -49,10 +33,16 @@ import cc.kune.gspace.client.tool.ToolSelectorPresenterTest;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ChatToolTest.class, XmppManagerTest.class, DocumentToolTest.class, DocumentServerToolTest.class,
-        GalleryServerToolTest.class, WikiServerToolTest.class, EntityLogoPresenterTest.class,
-        ToolSelectorPresenterTest.class, TagsSummaryPresenterTest.class, SNRolActionTest.class, RolComparatorTest.class,
-        LicenseWizardPresenterTest.class, BlogServerToolTest.class, TestRESTServiceDefinition.class,
-        TestRESTMethodFinder.class })
+@SuiteClasses({
+// ChatToolTest.class, XmppManagerTest.class, DocumentToolTest.class,
+// DocumentServerToolTest.class,
+// GalleryServerToolTest.class, WikiServerToolTest.class,
+// EntityLogoPresenterTest.class,
+// ToolSelectorPresenterTest.class, TagsSummaryPresenterTest.class,
+// SNRolActionTest.class, RolComparatorTest.class,
+// LicenseWizardPresenterTest.class, BlogServerToolTest.class,
+// TestRESTServiceDefinition.class,
+// TestRESTMethodFinder.class
+})
 public class OthersTestSuite {
 }

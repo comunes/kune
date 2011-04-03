@@ -23,18 +23,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import cc.kune.core.server.access.AccessRightsServiceTest;
-import cc.kune.core.server.access.FinderTest;
-import cc.kune.core.server.auth.AuthenticatedMethodInterceptorTest;
-import cc.kune.core.server.auth.AuthorizatedMethodInterceptorTest;
-import cc.kune.core.server.domain.GroupListTest;
-import cc.kune.core.server.finders.GroupFinderTest;
-import cc.kune.core.server.finders.LicenseFinderTest;
-import cc.kune.core.server.finders.RateFinderTest;
-import cc.kune.core.server.finders.UserFinderTest;
-import cc.kune.core.server.mapper.MapperTest;
-import cc.kune.core.server.properties.KunePropertiesTest;
-
 /**
  * Rescan with :
  * 
@@ -44,9 +32,14 @@ import cc.kune.core.server.properties.KunePropertiesTest;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ GroupListTest.class, AccessRightsServiceTest.class, FinderTest.class, KunePropertiesTest.class,
-        LicenseFinderTest.class, UserFinderTest.class, GroupFinderTest.class, RateFinderTest.class,
-        AuthorizatedMethodInterceptorTest.class, AuthenticatedMethodInterceptorTest.class, MapperTest.class })
+@SuiteClasses({
+// GroupListTest.class, AccessRightsServiceTest.class, FinderTest.class,
+// KunePropertiesTest.class,
+// LicenseFinderTest.class, UserFinderTest.class, GroupFinderTest.class,
+// RateFinderTest.class,
+// AuthorizatedMethodInterceptorTest.class,
+// AuthenticatedMethodInterceptorTest.class, MapperTest.class
+})
 public class ServerTestSuite {
 
 }

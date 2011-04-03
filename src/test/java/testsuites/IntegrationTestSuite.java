@@ -23,18 +23,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import cc.kune.core.server.integration.DatabaseInitializationTest;
-import cc.kune.core.server.integration.content.ContentCommentServiceTest;
-import cc.kune.core.server.integration.content.ContentServiceAddTest;
-import cc.kune.core.server.integration.content.ContentServiceGetTest;
-import cc.kune.core.server.integration.content.ContentServiceSaveTest;
-import cc.kune.core.server.integration.content.ContentServiceVariousTest;
-import cc.kune.core.server.integration.kuneservice.GroupServiceTest;
-import cc.kune.core.server.integration.site.SiteServiceTest;
-import cc.kune.core.server.integration.site.UserServiceTest;
-import cc.kune.core.server.integration.socialnet.SocialNetworkMembersTest;
-import cc.kune.core.server.integration.socialnet.SocialNetworkServiceTest;
-
 /**
  * Rescan with :
  * 
@@ -44,9 +32,13 @@ import cc.kune.core.server.integration.socialnet.SocialNetworkServiceTest;
  * 
  */
 @RunWith(Suite.class)
-@SuiteClasses({ UserServiceTest.class, SiteServiceTest.class, SocialNetworkServiceTest.class,
-        SocialNetworkMembersTest.class, DatabaseInitializationTest.class, ContentServiceAddTest.class,
-        ContentCommentServiceTest.class, ContentServiceVariousTest.class, ContentServiceGetTest.class,
-        ContentServiceSaveTest.class, GroupServiceTest.class })
+@SuiteClasses({
+// UserServiceTest.class, SiteServiceTest.class, SocialNetworkServiceTest.class,
+// SocialNetworkMembersTest.class, DatabaseInitializationTest.class,
+// ContentServiceAddTest.class,
+// ContentCommentServiceTest.class, ContentServiceVariousTest.class,
+// ContentServiceGetTest.class,
+// ContentServiceSaveTest.class, GroupServiceTest.class
+})
 public class IntegrationTestSuite {
 }

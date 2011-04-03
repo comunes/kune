@@ -313,7 +313,13 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         final String token = history.getToken();
         if (tokenMatcher.hasRedirect(token)) {
             // URL of the form signin(group.tool)
-            history.newItem(tokenMatcher.getRedirect(token).getRight());
+            final String previousToken = tokenMatcher.getRedirect(token).getRight();
+            if (previousToken.equals(SiteTokens.WAVEINBOX) && session.isNotLogged()) {
+                // signin(inbox) && cancel
+                restorePreviousToken();
+            } else {
+                history.newItem(previousToken);
+            }
         } else {
             // No redirect then restore previous token
             restorePreviousToken();
