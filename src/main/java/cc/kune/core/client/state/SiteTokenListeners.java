@@ -19,11 +19,11 @@
  */
 package cc.kune.core.client.state;
 
+import java.util.HashMap;
+
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.groups.newgroup.NewGroup;
-import cc.kune.core.client.init.AppStartEvent;
-import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
@@ -31,69 +31,58 @@ import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 
-@Singleton
-public class SiteTokenListeners {
+public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
     private final Provider<AboutKuneDialog> aboutKuneDialog;
     private final EventBus eventBus;
     private final Provider<NewGroup> newGroup;
     private final Provider<Register> register;
     private final Provider<SignIn> signIn;
-    private final Provider<StateManager> stateManager;
 
     @Inject
-    public SiteTokenListeners(final Session session, final EventBus eventBus,
-            final Provider<StateManager> stateManager, final Provider<SignIn> signIn,
+    public SiteTokenListeners(final Session session, final EventBus eventBus, final Provider<SignIn> signIn,
             final Provider<Register> register, final Provider<NewGroup> newGroup,
             final Provider<AboutKuneDialog> aboutKuneDialog) {
         this.eventBus = eventBus;
-        this.stateManager = stateManager;
         this.signIn = signIn;
         this.register = register;
         this.newGroup = newGroup;
         this.aboutKuneDialog = aboutKuneDialog;
         init();
-        session.onAppStart(true, new AppStartHandler() {
-            @Override
-            public void onAppStart(final AppStartEvent event) {
-            }
-        });
-
     }
 
     private void init() {
-        stateManager.get().addSiteToken(SiteTokens.HOME, new HistoryTokenCallback() {
+        put(SiteTokens.HOME, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 SpaceSelectEvent.fire(eventBus, Space.homeSpace);
             }
         });
-        stateManager.get().addSiteToken(SiteTokens.WAVEINBOX, new HistoryTokenCallback() {
+        put(SiteTokens.WAVEINBOX, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 SpaceSelectEvent.fire(eventBus, Space.userSpace);
             }
         });
-        stateManager.get().addSiteToken(SiteTokens.SIGNIN, new HistoryTokenCallback() {
+        put(SiteTokens.SIGNIN, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 signIn.get().showSignInDialog();
             }
         });
-        stateManager.get().addSiteToken(SiteTokens.REGISTER, new HistoryTokenCallback() {
+        put(SiteTokens.REGISTER, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 register.get().doRegister();
             }
         });
-        stateManager.get().addSiteToken(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
+        put(SiteTokens.NEWGROUP, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 newGroup.get().doNewGroup();
             }
         });
-        stateManager.get().addSiteToken(SiteTokens.ABOUTKUNE, new HistoryTokenCallback() {
+        put(SiteTokens.ABOUTKUNE, new HistoryTokenCallback() {
             @Override
             public void onHistoryToken() {
                 // FIXME, something to come back

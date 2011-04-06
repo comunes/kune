@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.rpc;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.SocialNetworkService;
 import cc.kune.core.server.UserSession;
@@ -67,6 +66,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         final Group groupToAccept = groupManager.findByShortName(groupToAcceptShortName);
         socialNetworkManager.acceptJoinGroup(userLogged, groupToAccept, group);
         return generateResponse(userLogged, group);
@@ -81,6 +81,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToAdmins(userLogged, groupToAdd, group);
         return generateResponse(userLogged, group);
@@ -95,6 +96,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToCollabs(userLogged, groupToAdd, group);
         return generateResponse(userLogged, group);
@@ -109,9 +111,17 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         final Group groupToAdd = groupManager.findByShortName(groupToAddShortName);
         socialNetworkManager.addGroupToViewers(userLogged, groupToAdd, group);
         return generateResponse(userLogged, group);
+    }
+
+    private void checkIsNotPersonalGroup(final Group group) {
+        if (group.isPersonal()) {
+            throw new DefaultException();
+        }
+        ;
     }
 
     @Override
@@ -123,6 +133,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         final Group groupToDelete = groupManager.findByShortName(groupToDeleleShortName);
         socialNetworkManager.deleteMember(userLogged, groupToDelete, group);
         return generateResponse(userLogged, group);
@@ -137,6 +148,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         final Group groupToDenyJoin = groupManager.findByShortName(groupToDenyShortName);
         socialNetworkManager.denyJoinGroup(userLogged, groupToDenyJoin, group);
         return generateResponse(userLogged, group);
@@ -171,6 +183,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User user = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         return socialNetworkManager.requestToJoin(user, group);
     }
 
@@ -183,6 +196,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         final Group groupToSetCollab = groupManager.findByShortName(groupToSetCollabShortName);
         socialNetworkManager.setAdminAsCollab(userLogged, groupToSetCollab, group);
         return generateResponse(userLogged, group);
@@ -197,6 +211,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         final Group groupToSetAdmin = groupManager.findByShortName(groupToSetAdminShortName);
         socialNetworkManager.setCollabAsAdmin(userLogged, groupToSetAdmin, group);
         return generateResponse(userLogged, group);
@@ -209,6 +224,7 @@ public class SocialNetworkRPC implements SocialNetworkService, RPC {
         final UserSession userSession = getUserSession();
         final User userLogged = userSession.getUser();
         final Group group = groupManager.findByShortName(groupToken.getGroup());
+        checkIsNotPersonalGroup(group);
         socialNetworkManager.unJoinGroup(userLogged.getUserGroup(), group);
         return generateResponse(userLogged, group);
     }

@@ -20,8 +20,6 @@
 package cc.kune.core.server;
 
 import static cc.kune.core.server.OutermostCallInterceptor.outermostCall;
-
-
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
@@ -99,6 +97,9 @@ import cc.kune.core.server.xmpp.XmppManagerDefault;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Comment;
 import cc.kune.domain.SocialNetwork;
+import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.KuneWaveManagerDefault;
+import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.matcher.Matchers;
 
@@ -131,6 +132,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(CommentManager.class).to(CommentManagerDefault.class);
         bind(FileManager.class).to(FileManagerDefault.class);
         bind(ExtMediaDescripManager.class).to(ExtMediaDescripManagerDefault.class);
+        bind(KuneWaveManager.class).to(KuneWaveManagerDefault.class);
     }
 
     private void bindRPC() {
@@ -170,6 +172,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
         bind(FileDownloadManager.class);
         bind(EntityLogoUploadManager.class);
         bind(EntityLogoDownloadManager.class);
+        bind(ParticipantUtils.class);
 
         bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
                 outermostCall(new AuthenticatedMethodInterceptor()));

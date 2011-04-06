@@ -28,6 +28,9 @@ import org.waveprotocol.box.server.authentication.AccountStoreHolder;
 import org.waveprotocol.box.server.persistence.AccountStore;
 import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
+import org.waveprotocol.box.server.robots.RobotApiModule;
+import org.waveprotocol.box.server.waveserver.WaveServerException;
+import org.waveprotocol.box.server.waveserver.WaveServerImpl;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.core.server.init.FinderRegistry;
@@ -54,7 +57,8 @@ public abstract class TestHelper {
             final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
             final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
             final Injector childInjector = injector.createChildInjector(wavePersistModule, new ServerModule(false),
-                    federationModule, FinderRegistry.init(new JpaPersistModule(persistenceUnit)), module, new Module() {
+                    new RobotApiModule(), federationModule, FinderRegistry.init(new JpaPersistModule(persistenceUnit)),
+                    module, new Module() {
                         @Override
                         public void configure(final Binder binder) {
                             binder.bindScope(SessionScoped.class, Scopes.SINGLETON);
@@ -63,6 +67,11 @@ public abstract class TestHelper {
                             binder.bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
                         }
                     });
+            try {
+                childInjector.getInstance(WaveServerImpl.class).initialize();
+            } catch (final WaveServerException e) {
+                e.printStackTrace();
+            }
             final AccountStore accountStore = childInjector.getInstance(AccountStore.class);
             accountStore.initializeAccountStore();
             AccountStoreHolder.resetForTesting();

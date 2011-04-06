@@ -27,6 +27,9 @@ import org.ourproject.kune.wiki.server.WikiServerModule;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
+import org.waveprotocol.box.server.robots.RobotApiModule;
+import org.waveprotocol.box.server.waveserver.WaveServerException;
+import org.waveprotocol.box.server.waveserver.WaveServerImpl;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.core.server.KunePersistenceService;
@@ -55,7 +58,7 @@ public class IntegrationTestHelper {
             final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
             final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
             final Injector childInjector = injector.createChildInjector(wavePersistModule,
-                    FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)),
+                    FinderRegistry.init(new JpaPersistModule(TestConstants.PERSISTENCE_UNIT)), new RobotApiModule(),
                     new PlatformServerModule(), new DocumentServerModule(), new ChatServerModule(), new ServerModule(
                             false), federationModule, new WikiServerModule(), new AbstractModule() {
                         @Override
@@ -66,6 +69,11 @@ public class IntegrationTestHelper {
                             bind(HttpServletRequest.class).to(HttpServletRequestMocked.class);
                         }
                     });
+            try {
+                childInjector.getInstance(WaveServerImpl.class).initialize();
+            } catch (final WaveServerException e) {
+                e.printStackTrace();
+            }
             return childInjector;
         } catch (final ConfigurationException e) {
             e.printStackTrace();

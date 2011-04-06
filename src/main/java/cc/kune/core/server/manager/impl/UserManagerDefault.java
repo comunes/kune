@@ -33,10 +33,8 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.packet.RosterPacket.ItemType;
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 import org.waveprotocol.box.server.persistence.AccountStore;
-import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.errors.I18nNotFoundException;
@@ -55,19 +53,21 @@ import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.domain.utils.UserBuddiesData;
 import cc.kune.wave.server.CustomUserRegistrationServlet;
+import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
     private final I18nCountryManager countryManager;
-    private final String domain;
     private final UserFinder finder;
     private final I18nTranslationService i18n;
+    private final KuneWaveManager kuneWaveManager;
     private final I18nLanguageManager languageManager;
+    private final ParticipantUtils participantUtils;
     private final ChatProperties properties;
     private final AccountStore waveAccountStore;
     // private final PropertiesManager propManager;
@@ -79,7 +79,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
             final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n,
             final CustomUserRegistrationServlet waveUserRegister, final AccountStore waveAccountStore,
-            @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
+            final KuneWaveManager kuneWaveManager, final ParticipantUtils participantUtils) {
         super(provider, User.class);
         this.finder = finder;
         this.languageManager = languageManager;
@@ -89,7 +89,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         this.i18n = i18n;
         this.waveUserRegister = waveUserRegister;
         this.waveAccountStore = waveAccountStore;
-        this.domain = domain;
+        this.kuneWaveManager = kuneWaveManager;
+        this.participantUtils = participantUtils;
     }
 
     @Override
@@ -130,11 +131,12 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         try {
             final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
                     passwdDigest.getSalt(), language, country, tz);
+            kuneWaveManager.createWave(shortName, "Test wave");
             return user;
         } catch (final RuntimeException e) {
             try {
                 // Try to remove wave account
-                waveAccountStore.removeAccount(ParticipantId.of(shortName + ParticipantId.DOMAIN_PREFIX + domain));
+                waveAccountStore.removeAccount(participantUtils.of(shortName));
             } catch (final Exception e2) {
                 throw e;
             }

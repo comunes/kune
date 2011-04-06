@@ -42,6 +42,7 @@ public class StateManagerDefaultTest {
     private GroupChangedHandler groupChangeHandler;
     private HistoryWrapper history;
     private Session session;
+    private SiteTokenListeners siteTokens;
     private StateAbstractDTO state;
     private StateChangedHandler stateChangeHandler;
     private StateManagerDefault stateManager;
@@ -54,8 +55,9 @@ public class StateManagerDefaultTest {
         session = Mockito.mock(Session.class);
         history = Mockito.mock(HistoryWrapper.class);
         tokenMatcher = Mockito.mock(TokenMatcher.class);
+        siteTokens = Mockito.mock(SiteTokenListeners.class);
         eventBus = new EventBusTester();
-        stateManager = new StateManagerDefault(contentProvider, session, history, tokenMatcher, eventBus);
+        stateManager = new StateManagerDefault(contentProvider, session, history, tokenMatcher, eventBus, siteTokens);
         Mockito.when(session.getUserHash()).thenReturn(HASH);
         state = Mockito.mock(StateAbstractDTO.class);
         stateChangeHandler = Mockito.mock(StateChangedHandler.class);
@@ -232,6 +234,7 @@ public class StateManagerDefaultTest {
         final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
         final String token = SiteTokens.SIGNIN;
         stateManager.addSiteToken(token, listener);
+        Mockito.when(siteTokens.get(SiteTokens.SIGNIN)).thenReturn(listener);
         stateManager.processHistoryToken(token);
         Mockito.verify(listener, Mockito.times(1)).onHistoryToken();
         Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
@@ -240,9 +243,10 @@ public class StateManagerDefaultTest {
 
     @Test
     public void siteTokenTest() {
-        final HistoryTokenCallback siteTokenListener = Mockito.mock(HistoryTokenCallback.class);
-        stateManager.addSiteToken("signin", siteTokenListener);
+        final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
+        stateManager.addSiteToken(SiteTokens.SIGNIN, listener);
+        Mockito.when(siteTokens.get(SiteTokens.SIGNIN)).thenReturn(listener);
         stateManager.processHistoryToken("signIn");
-        Mockito.verify(siteTokenListener, Mockito.times(1)).onHistoryToken();
+        Mockito.verify(listener, Mockito.times(1)).onHistoryToken();
     }
 }

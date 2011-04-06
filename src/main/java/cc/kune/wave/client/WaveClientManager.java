@@ -55,6 +55,9 @@ public class WaveClientManager {
                 if (webClient != null) {
                     webClient.setVisible(false);
                 }
+                setUseSocketIO(false);
+                setSessionJSON(JsonUtils.safeEval("{}"));
+                setClientFlags(JsonUtils.safeEval("{}"));
             }
         });
     }

@@ -58,7 +58,6 @@ public class AbstractSNPanel extends ViewImpl {
     FlowPanel mainPanel;
     @UiField
     Label mainTitle;
-    String NOAVATAR = "";
     @UiField
     Label sndCategoryCount;
     @UiField

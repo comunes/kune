@@ -54,7 +54,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
     protected void clearStyles() {
         if (super.isOrWasAttached()) {
-            super.setStyleName("");
+            super.setStyleName("k-none");
         }
     }
 

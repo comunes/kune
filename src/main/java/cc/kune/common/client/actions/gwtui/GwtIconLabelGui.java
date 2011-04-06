@@ -41,6 +41,11 @@ public class GwtIconLabelGui extends AbstractGuiItem {
     }
 
     @Override
+    protected void clearStyles() {
+        iconLabel.setStyleName("k-none");
+    }
+
+    @Override
     public AbstractGuiItem create(final GuiActionDescrip descriptor) {
         super.descriptor = descriptor;
         iconLabel = new IconLabel("");

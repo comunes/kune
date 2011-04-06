@@ -20,8 +20,6 @@
  */
 package cc.kune.core.client.state;
 
-import java.util.HashMap;
-
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.actions.BeforeActionCollection;
@@ -63,12 +61,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
      */
     private String resumedHistoryToken;
     private final Session session;
-    private final HashMap<String, HistoryTokenCallback> siteTokens;
+    private final SiteTokenListeners siteTokens;
     private final TokenMatcher tokenMatcher;
 
     @Inject
     public StateManagerDefault(final ContentCache contentProvider, final Session session, final HistoryWrapper history,
-            final TokenMatcher tokenMatcher, final EventBus eventBus) {
+            final TokenMatcher tokenMatcher, final EventBus eventBus, final SiteTokenListeners siteTokens) {
         this.tokenMatcher = tokenMatcher;
         this.eventBus = eventBus;
         this.contentProvider = contentProvider;
@@ -77,33 +75,25 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.previousToken = null;
         this.resumedHistoryToken = null;
         tokenMatcher.init(GwtWaverefEncoder.INSTANCE);
-        siteTokens = new HashMap<String, HistoryTokenCallback>();
+        this.siteTokens = siteTokens;
         beforeStateChangeCollection = new BeforeActionCollection();
         session.onAppStart(true, new AppStartHandler() {
 
             @Override
             public void onAppStart(final AppStartEvent event) {
-                session.onUserSignIn(true, new UserSignInEvent.UserSignInHandler() {
+                session.onUserSignIn(false, new UserSignInEvent.UserSignInHandler() {
                     @Override
                     public void onUserSignIn(final UserSignInEvent event) {
-                        if (startingUp()) {
-                            processHistoryToken(history.getToken());
-                        } else {
-                            refreshCurrentGroupState();
-                        }
+                        refreshCurrentGroupState();
                     }
                 });
-                session.onUserSignOut(true, new UserSignOutEvent.UserSignOutHandler() {
+                session.onUserSignOut(false, new UserSignOutEvent.UserSignOutHandler() {
                     @Override
                     public void onUserSignOut(final UserSignOutEvent event) {
-                        if (startingUp()) {
-                            processHistoryToken(history.getToken());
-                        } else {
-                            // Other perms, then refresh state from server
-                            refreshCurrentGroupState();
-                        }
+                        refreshCurrentGroupState();
                     }
                 });
+                processHistoryToken(history.getToken());
             }
         });
     }

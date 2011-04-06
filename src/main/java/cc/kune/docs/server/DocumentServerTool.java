@@ -21,7 +21,6 @@ package cc.kune.docs.server;
 
 import java.util.Date;
 
-
 import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 import cc.kune.core.server.content.ContainerManager;
@@ -37,80 +36,35 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.User;
+import cc.kune.wave.server.KuneWaveManager;
 
 import com.google.inject.Inject;
 
 public class DocumentServerTool implements ServerTool {
     public static final String NAME = "docs";
-    public static final String TYPE_ROOT = NAME + "." + "root";
-    public static final String TYPE_FOLDER = NAME + "." + "folder";
+    public static final String ROOT_NAME = "documents";
     public static final String TYPE_DOCUMENT = NAME + "." + "doc";
+    public static final String TYPE_FOLDER = NAME + "." + "folder";
+    public static final String TYPE_ROOT = NAME + "." + "root";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
+
     public static final String TYPE_WAVE = NAME + "." + ServerTool.WAVE_SUFFIX;
 
-    public static final String ROOT_NAME = "documents";
-
-    private final ContentManager contentManager;
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;
+    private final ContentManager contentManager;
     private final I18nTranslationService i18n;
+    private final KuneWaveManager kuneWaveManager;
 
     @Inject
     public DocumentServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-            final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
+            final ToolConfigurationManager configurationManager, final I18nTranslationService translationService,
+            final KuneWaveManager kuneWaveManager) {
         this.contentManager = contentManager;
         this.containerManager = containerManager;
         this.configurationManager = configurationManager;
         this.i18n = translationService;
-    }
-
-    public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
-        checkContainerTypeId(parentTypeId, typeId);
-    }
-
-    public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
-        checkContentTypeId(parentTypeId, typeId);
-    }
-
-    public String getName() {
-        return NAME;
-    }
-
-    public String getRootName() {
-        return ROOT_NAME;
-    }
-
-    public ServerToolTarget getTarget() {
-        return ServerToolTarget.forBoth;
-    }
-
-    public Group initGroup(final User user, final Group group) {
-        final ToolConfiguration config = new ToolConfiguration();
-        final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-        config.setRoot(rootFolder);
-        group.setToolConfig(NAME, config);
-        configurationManager.persist(config);
-        final String longName = group.getLongName();
-        final Content content = contentManager.createContent(i18n.t("About [%s]", longName), "", user, rootFolder,
-                DocumentServerTool.TYPE_DOCUMENT);
-        content.addAuthor(user);
-        content.setLanguage(user.getLanguage());
-        content.setTypeId(TYPE_DOCUMENT);
-        content.setStatus(ContentStatus.publishedOnline);
-        content.setPublishedOn(new Date());
-        group.setDefaultContent(content);
-        return group;
-    }
-
-    public void onCreateContainer(final Container container, final Container parent) {
-    }
-
-    public void onCreateContent(final Content content, final Container parent) {
-    }
-
-    @Inject
-    public void register(final ServerToolRegistry registry) {
-        registry.register(this);
+        this.kuneWaveManager = kuneWaveManager;
     }
 
     void checkContainerTypeId(final String parentTypeId, final String typeId) {
@@ -140,5 +94,64 @@ public class DocumentServerTool implements ServerTool {
         } else {
             throw new ContentNotPermittedException();
         }
+    }
+
+    @Override
+    public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
+        checkContainerTypeId(parentTypeId, typeId);
+    }
+
+    @Override
+    public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
+        checkContentTypeId(parentTypeId, typeId);
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public String getRootName() {
+        return ROOT_NAME;
+    }
+
+    @Override
+    public ServerToolTarget getTarget() {
+        return ServerToolTarget.forBoth;
+    }
+
+    @Override
+    public Group initGroup(final User user, final Group group) {
+        final ToolConfiguration config = new ToolConfiguration();
+        final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+        config.setRoot(rootFolder);
+        group.setToolConfig(NAME, config);
+        configurationManager.persist(config);
+        final String longName = group.getLongName();
+        final Content content = contentManager.createContent(i18n.t("About [%s]", longName), "", user, rootFolder,
+                DocumentServerTool.TYPE_DOCUMENT);
+        content.addAuthor(user);
+        content.setLanguage(user.getLanguage());
+        content.setTypeId(TYPE_DOCUMENT);
+        content.setStatus(ContentStatus.publishedOnline);
+        content.setPublishedOn(new Date());
+        group.setDefaultContent(content);
+        kuneWaveManager.createWave(user.getShortName(), i18n.t("About [%s]", longName));
+        return group;
+    }
+
+    @Override
+    public void onCreateContainer(final Container container, final Container parent) {
+    }
+
+    @Override
+    public void onCreateContent(final Content content, final Container parent) {
+    }
+
+    @Override
+    @Inject
+    public void register(final ServerToolRegistry registry) {
+        registry.register(this);
     }
 }

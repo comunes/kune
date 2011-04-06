@@ -20,6 +20,7 @@
 package cc.kune.pspace.client;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
@@ -93,19 +94,19 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
     }
 
     private void setContentNotPublic() {
-        getView().getTitle().setText(i18n.t("Not Published yet"));
+        getView().getTitle().setText(i18n.t("Not Published yet") + TextUtils.IN_DEVELOPMENT_P);
         getView().getDescription().setText(
                 i18n.t("This is only a preview of how this page will looks like to the general public if you want to publish it"));
     }
 
     private void setContentNotPublicable() {
-        getView().getTitle().setText(i18n.t("Not Publicable"));
+        getView().getTitle().setText(i18n.t("Not Publicable") + TextUtils.IN_DEVELOPMENT_P);
         getView().getDescription().setText(i18n.t("This page is not publicable"));
         getView().setContentGotoPublicUrl("about:blank");
     }
 
     private void setContentPublic() {
-        getView().getTitle().setText(i18n.t("Preview"));
+        getView().getTitle().setText(i18n.t("Preview") + TextUtils.IN_DEVELOPMENT_P);
         getView().getDescription().setText(
                 i18n.t("This is only a preview of how this page looks like to the general public on the web, outside this site."));
     }
@@ -115,8 +116,8 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
             final StateToken token = state.getStateToken();
             if (((StateContainerDTO) state).getAccessLists().getViewers().getMode().equals(GroupListDTO.EVERYONE)) {
                 final String publicUrl = stateTokenUtils.getPublicUrl(token);
-                getView().setContentGotoPublicUrl(publicUrl);
-                // getView().setContentGotoPublicUrl("http://www.google.com");
+                // getView().setContentGotoPublicUrl(publicUrl);
+                getView().setContentGotoPublicUrl("about:blank");
                 if (state instanceof StateContentDTO) {
                     final StateContentDTO content = (StateContentDTO) state;
                     if (content.getStatus().equals(ContentStatus.publishedOnline)) {

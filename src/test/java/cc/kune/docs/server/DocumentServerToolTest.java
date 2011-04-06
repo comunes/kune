@@ -27,15 +27,13 @@ import static cc.kune.docs.server.DocumentServerTool.TYPE_UPLOADEDFILE;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.docs.server.DocumentServerTool;
-
 public class DocumentServerToolTest { // extends PersistenceTest {
 
     private DocumentServerTool serverTool;
 
     @Before
     public void before() {
-        serverTool = new DocumentServerTool(null, null, null, null);
+        serverTool = new DocumentServerTool(null, null, null, null, null);
     }
 
     @Test

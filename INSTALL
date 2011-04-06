@@ -240,3 +240,36 @@ after that the previous values will be incorpored to Server > Server Manager > S
 
 After the section 'Run the server for the first time' you'll be able to use the password of the admin user of the kune instalation (specified in kune.properties), or other admin new users you want to register using kune and configure in the authorizedUsernames attribute.
 
+==Appendix B: Apache configuration sample==
+
+Enable this modules:
+a2enmod expires
+a2enmod proxy
+a2enmod proxy_connect
+a2enmod proxy_http
+
+<VirtualHost *:80>
+    ServerName YOURSERVERNAME
+
+    ProxyRequests Off
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+
+    <Files *.cache.*>
+        ExpiresActive On
+        ExpiresDefault "modification plus 2 years"
+    </Files>
+
+    <Files *.nocache.*>
+        ExpiresActive Off
+    </Files> 
+
+    ProxyPass / http://localhost:8080/
+    ProxyPassReverse / http://localhost:8080/
+    <Location />
+        Order allow,deny
+        Allow from all
+    </Location>
+</VirtualHost>

@@ -137,6 +137,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     }
 
     @Override
+    public void setStyleName(final String style) {
+        flow.setStyleName(style);
+    }
+
+    @Override
     public void setText(final String text) {
         label.setText(text);
     }

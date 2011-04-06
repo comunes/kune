@@ -53,7 +53,7 @@ public class WaveClientSimpleAuthenticator {
 
     public void doLogout(final AsyncCallback<Void> callback) {
         // Original: <a href=\"/auth/signout?r=/\">"
-        final RequestBuilder request = new RequestBuilder(RequestBuilder.POST, "/auth/signout");
+        final RequestBuilder request = new RequestBuilder(RequestBuilder.GET, "/auth/signout");
         try {
             request.setHeader("Content-Type", "application/x-www-form-urlencoded");
             final StringBuffer params = new StringBuffer();

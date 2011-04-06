@@ -71,7 +71,6 @@ public class KuneEntryPoint implements EntryPoint {
         ginjector.getCorePresenter().get().forceReveal();
         ginjector.getOnAppStartFactory();
         ginjector.getStateManager();
-        ginjector.getSiteTokenListeners();
         ginjector.getGwtGuiProvider();
         ginjector.getUserNotifierPresenter();
         ginjector.getSpinerPresenter();
