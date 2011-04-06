@@ -64,6 +64,7 @@ public class KuneEntryPoint implements EntryPoint {
      */
     public void onModuleLoadCont() {
         DelayedBindRegistry.bind(ginjector);
+        ginjector.getSpinerPresenter();
         ginjector.getGlobalShortcutRegister().enable();
         AsyncCallbackSimple.init(ginjector.getErrorHandler());
         ginjector.getEventLogger();

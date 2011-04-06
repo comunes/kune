@@ -47,18 +47,20 @@ public class ContentCacheDefault implements ContentCache {
 
     @Override
     public void cache(final StateToken encodeState, final StateAbstractDTO content) {
+        assert encodeState != null;
         if (useCache) {
             cacheMap.put(encodeState, content);
         }
     }
 
     private StateAbstractDTO getCached(final StateToken newState) {
+        assert newState != null;
         return useCache ? cacheMap.get(newState) : null;
-        // return useCache ? cache.remove(newState) : null;
     }
 
     @Override
     public void getContent(final String user, final StateToken newState, final AsyncCallback<StateAbstractDTO> callback) {
+        assert newState != null;
         eventBus.fireEvent(new ProgressShowEvent(""));
         final StateAbstractDTO catched = getCached(newState);
         if (catched != null) {

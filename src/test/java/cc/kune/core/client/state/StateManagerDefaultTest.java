@@ -19,15 +19,24 @@
  */
 package cc.kune.core.client.state;
 
+import static org.mockito.Matchers.anyBoolean;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import cc.kune.common.client.actions.BeforeActionListener;
+import cc.kune.core.client.init.AppStartEvent;
+import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.ToolChangedEvent.ToolChangedHandler;
+import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -57,9 +66,30 @@ public class StateManagerDefaultTest {
         tokenMatcher = Mockito.mock(TokenMatcher.class);
         siteTokens = Mockito.mock(SiteTokenListeners.class);
         eventBus = new EventBusTester();
-        stateManager = new StateManagerDefault(contentProvider, session, history, tokenMatcher, eventBus, siteTokens);
         Mockito.when(session.getUserHash()).thenReturn(HASH);
+        Mockito.doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(final InvocationOnMock invocation) throws Throwable {
+                eventBus.addHandler(UserSignInEvent.getType(), (UserSignInHandler) invocation.getArguments()[1]);
+                return null;
+            }
+        }).when(session).onUserSignIn(anyBoolean(), (UserSignInHandler) Mockito.anyObject());
+        Mockito.doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(final InvocationOnMock invocation) throws Throwable {
+                eventBus.addHandler(UserSignOutEvent.getType(), (UserSignOutHandler) invocation.getArguments()[1]);
+                return null;
+            }
+        }).when(session).onUserSignOut(anyBoolean(), (UserSignOutHandler) Mockito.anyObject());
+        Mockito.doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(final InvocationOnMock invocation) throws Throwable {
+                eventBus.addHandler(AppStartEvent.getType(), (AppStartHandler) invocation.getArguments()[1]);
+                return null;
+            }
+        }).when(session).onAppStart(anyBoolean(), (AppStartHandler) Mockito.anyObject());
         state = Mockito.mock(StateAbstractDTO.class);
+        stateManager = new StateManagerDefault(contentProvider, session, history, tokenMatcher, eventBus, siteTokens);
         stateChangeHandler = Mockito.mock(StateChangedHandler.class);
         groupChangeHandler = Mockito.mock(GroupChangedHandler.class);
         toolChangeHandler = Mockito.mock(ToolChangedHandler.class);
@@ -159,8 +189,7 @@ public class StateManagerDefaultTest {
     @Test
     public void getDefGroup() {
         stateManager.processHistoryToken("site.docs");
-        Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+        verifyGetServerContent();
     }
 
     public void getWaveToken() {
@@ -174,8 +203,7 @@ public class StateManagerDefaultTest {
         // (and the user was logged)
         Mockito.when(history.getToken()).thenReturn("");
         stateManager.reload();
-        Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+        verifyGetServerContent();
     }
 
     @SuppressWarnings("unchecked")
@@ -185,8 +213,7 @@ public class StateManagerDefaultTest {
         stateManager.processHistoryToken(newToken);
         removeBeforeStateChangeListener();
         stateManager.processHistoryToken(newToken);
-        Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+        verifyGetServerContent();
     }
 
     @Test
@@ -219,8 +246,7 @@ public class StateManagerDefaultTest {
     @Test
     public void oneBeforeStateChangeListenerReturnTrue() {
         stateManager.processHistoryToken(confBeforeStateChangeListeners(true, true));
-        Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+        verifyGetServerContent();
     }
 
     private void removeBeforeStateChangeListener() {
@@ -237,8 +263,7 @@ public class StateManagerDefaultTest {
         Mockito.when(siteTokens.get(SiteTokens.SIGNIN)).thenReturn(listener);
         stateManager.processHistoryToken(token);
         Mockito.verify(listener, Mockito.times(1)).onHistoryToken();
-        Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
-                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
+        verifyGetServerContent();
     }
 
     @Test
@@ -248,5 +273,18 @@ public class StateManagerDefaultTest {
         Mockito.when(siteTokens.get(SiteTokens.SIGNIN)).thenReturn(listener);
         stateManager.processHistoryToken("signIn");
         Mockito.verify(listener, Mockito.times(1)).onHistoryToken();
+    }
+
+    @Test
+    public void startMustLoadContent() {
+        final InitDataDTO initData = Mockito.mock(InitDataDTO.class);
+        Mockito.when(history.getToken()).thenReturn("");
+        eventBus.fireEvent(new AppStartEvent(initData));
+        verifyGetServerContent();
+    }
+
+    private void verifyGetServerContent() {
+        Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),
+                (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
     }
 }

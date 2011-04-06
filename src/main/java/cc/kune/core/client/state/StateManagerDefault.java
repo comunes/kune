@@ -78,7 +78,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         this.siteTokens = siteTokens;
         beforeStateChangeCollection = new BeforeActionCollection();
         session.onAppStart(true, new AppStartHandler() {
-
             @Override
             public void onAppStart(final AppStartEvent event) {
                 session.onUserSignIn(false, new UserSignInEvent.UserSignInHandler() {
@@ -93,7 +92,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                         refreshCurrentGroupState();
                     }
                 });
-                processHistoryToken(history.getToken());
+                processCurrentHistoryToken();
             }
         });
     }
@@ -224,6 +223,10 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         processHistoryToken(event.getValue());
     }
 
+    private void processCurrentHistoryToken() {
+        processHistoryToken(history.getToken());
+    }
+
     void processHistoryToken(final String newHistoryToken) {
         // http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
         if (beforeStateChangeCollection.checkBeforeAction()) {
@@ -288,7 +291,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
                     // Starting with some token like "signin": load defContent
                     // also
                     processHistoryToken("");
-                    SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+                    // SpaceSelectEvent.fire(eventBus, Space.groupSpace);
                 }
                 // Fire the listener of this #hash token
                 tokenListener.onHistoryToken();
@@ -324,8 +327,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     @Override
     public void refreshCurrentGroupState() {
         final StateToken currentStateToken = session.getCurrentStateToken();
-        contentProvider.removeContent(currentStateToken);
-        onHistoryChanged(currentStateToken);
+        if (currentStateToken == null) {
+            processCurrentHistoryToken();
+        } else {
+            contentProvider.removeContent(currentStateToken);
+            onHistoryChanged(currentStateToken);
+        }
     }
 
     /**

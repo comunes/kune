@@ -61,20 +61,6 @@ public class AppStarterDefault implements AppStarter {
     private void getInitData() {
         siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
             private void hideInitialPanels() {
-                // final RootPanel curtain =
-                // RootPanel.get("kuneinitialcurtain");
-                // Fade anim = new Fade(curtain.getElement());
-                // anim.setDuration(3);
-                // anim.addEffectCompletedHandler(new EffectCompletedHandler() {
-                // @Override
-                // public void onEffectCompleted(EffectCompletedEvent event) {
-                // curtain.setVisible(false);
-                // RootPanel.get("kuneloading").setVisible(false);
-                // }
-                // });
-                // anim.play();
-                // eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info,
-                // "Starting"));
             }
 
             @Override
@@ -95,9 +81,6 @@ public class AppStarterDefault implements AppStarter {
                     @Override
                     public void execute() {
                         hideInitialPanels();
-                        // eventBus.fireEvent(new
-                        // UserNotifyEvent(NotifyLevel.info, "Success",
-                        // "App Started.", true));
                     }
                 });
             }

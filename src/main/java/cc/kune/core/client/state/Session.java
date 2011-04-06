@@ -65,6 +65,7 @@ public interface Session {
      * Duration remembering login: 2 weeks
      */
     int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
+    // int SESSION_DURATION = 1000;
 
     String USERHASH = "k007userHash";
 

@@ -17,7 +17,6 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.google.wave.api.Markup;
 import com.google.wave.api.OperationQueue;
 import com.google.wave.api.OperationRequest;
 import com.google.wave.api.ProtocolVersion;
@@ -55,10 +54,16 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
         final Set<String> users = new HashSet<String>();
         users.add(user.toString());
         final Wavelet newWavelet = opQueue.createWavelet(domain, users, message);
-        final Markup markup = Markup.of(message);
-        opQueue.createChildOfBlip(newWavelet.getRootBlip());
-        opQueue.appendBlipToWavelet(newWavelet, message);
-        opQueue.appendBlipToWavelet(newWavelet, message);
+        // opQueue.appendBlipToWavelet(newWavelet, "kk2");
+        // final Markup markup = Markup.of(message);
+        // opQueue.modifyTagOfWavelet(newWavelet, "tag", "add");
+
+        // newWavelet.getRootBlip().appendMarkup(markup.getMarkup());
+        // opQueue.createChildOfBlip(newWavelet.getRootBlip());
+        // opQueue.appendBlipToWavelet(newWavelet, message);
+        // opQueue.appendBlipToWavelet(newWavelet, message);
+        // opQueue.appendMarkupToDocument(null, message)
+        // opQueue.modifyDocument(null)
         assert newWavelet.getRootBlip() != null;
         final OperationContextImpl context = new OperationContextImpl(waveletProvider,
                 converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);

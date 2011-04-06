@@ -33,8 +33,6 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
 public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, SpinerPresenter.SpinerProxy> {
 
-    private final I18nTranslationService i18n;
-
     @ProxyCodeSplit
     public interface SpinerProxy extends Proxy<SpinerPresenter> {
     }
@@ -45,26 +43,29 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
         void show(String message);
     }
 
+    private final I18nTranslationService i18n;
+
     @Inject
     public SpinerPresenter(final EventBus eventBus, final SpinerView view, final SpinerProxy proxy,
-            I18nTranslationService i18n) {
+            final I18nTranslationService i18n) {
         super(eventBus, view, proxy);
         this.i18n = i18n;
+        getView().show("");
     }
 
     @ProxyEvent
-    public void onProgressShow(ProgressShowEvent event) {
-        getView().show(event.getMessage());
-    }
-
-    @ProxyEvent
-    public void onI18nReady(I18nReadyEvent event) {
+    public void onI18nReady(final I18nReadyEvent event) {
         getView().show(i18n.t("Loading"));
     }
 
     @ProxyEvent
-    public void onProgressHide(ProgressHideEvent event) {
+    public void onProgressHide(final ProgressHideEvent event) {
         getView().fade();
+    }
+
+    @ProxyEvent
+    public void onProgressShow(final ProgressShowEvent event) {
+        getView().show(event.getMessage());
     }
 
     @Override
