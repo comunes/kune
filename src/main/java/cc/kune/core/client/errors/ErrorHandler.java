@@ -20,8 +20,8 @@
 package cc.kune.core.client.errors;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
 import cc.kune.core.client.state.Session;

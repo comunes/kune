@@ -15,8 +15,13 @@ import org.waveprotocol.box.server.waveserver.WaveletProvider.SubmitRequestListe
 import org.waveprotocol.wave.model.version.HashedVersion;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
+import cc.kune.common.client.utils.TextUtils;
+import cc.kune.core.client.errors.DefaultException;
+
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.google.wave.api.JsonRpcResponse;
+import com.google.wave.api.Markup;
 import com.google.wave.api.OperationQueue;
 import com.google.wave.api.OperationRequest;
 import com.google.wave.api.ProtocolVersion;
@@ -51,38 +56,39 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     public void createWave(final String username, final String message) {
         final ParticipantId user = participantUtils.of(username);
         final OperationQueue opQueue = new OperationQueue();
-        final Set<String> users = new HashSet<String>();
-        users.add(user.toString());
-        final Wavelet newWavelet = opQueue.createWavelet(domain, users, message);
-        // opQueue.appendBlipToWavelet(newWavelet, "kk2");
-        // final Markup markup = Markup.of(message);
-        // opQueue.modifyTagOfWavelet(newWavelet, "tag", "add");
+        final Set<String> participants = new HashSet<String>();
+        participants.add(user.toString());
+        final Wavelet newWavelet = opQueue.createWavelet(domain, participants);
+        // newWavelet.getRootBlip().append(Markup.of(message));
+        opQueue.appendMarkupToDocument(newWavelet.getRootBlip(), Markup.of(message).getMarkup());
 
-        // newWavelet.getRootBlip().appendMarkup(markup.getMarkup());
-        // opQueue.createChildOfBlip(newWavelet.getRootBlip());
-        // opQueue.appendBlipToWavelet(newWavelet, message);
-        // opQueue.appendBlipToWavelet(newWavelet, message);
-        // opQueue.appendMarkupToDocument(null, message)
-        // opQueue.modifyDocument(null)
-        assert newWavelet.getRootBlip() != null;
         final OperationContextImpl context = new OperationContextImpl(waveletProvider,
                 converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
+
         for (final OperationRequest req : opQueue.getPendingOperations()) {
             OperationUtil.executeOperation(req, operationRegistry, context, user);
             final String reqId = req.getId();
-            if (context.getResponse(reqId).isError()) {
-                LOG.error(context.getResponse(reqId).getErrorMessage());
+            final JsonRpcResponse response = context.getResponse(reqId);
+            if (response != null && response.isError()) {
+                onFailure(context.getResponse(reqId).getErrorMessage());
             }
-            OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
-                @Override
-                public void onFailure(final String arg0) {
-                    LOG.error("Wave creation failed: " + arg0);
-                }
-
-                @Override
-                public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
-                }
-            });
         }
+        OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
+            @Override
+            public void onFailure(final String arg0) {
+                KuneWaveManagerDefault.this.onFailure("Wave creation failed, onFailure: " + arg0);
+            }
+
+            @Override
+            public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
+                LOG.info("Wave creation success: " + arg1);
+            }
+        });
+    }
+
+    private void onFailure(final String message) {
+        final String errorMsg = TextUtils.notEmpty(message) ? message : "Wave operation failed";
+        LOG.error(errorMsg);
+        throw new DefaultException(errorMsg);
     }
 }

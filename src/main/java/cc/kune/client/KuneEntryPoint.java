@@ -20,7 +20,7 @@
 package cc.kune.client;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 
 import com.google.gwt.core.client.EntryPoint;

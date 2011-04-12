@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertimg;
 
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 
-import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.calclab.suco.client.events.Listener0;

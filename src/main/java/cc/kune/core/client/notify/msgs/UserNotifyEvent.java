@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.notify.msgs;
 
-import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevel;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;

@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.sitebar.spaces;
 
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
@@ -57,6 +57,8 @@ public class SpaceSelectorPresenter extends
 
         HasClickHandlers getUserBtn();
 
+        void hideTooltip();
+
         void setGroupBtnDown(boolean down);
 
         void setHomeBtnDown(boolean down);
@@ -64,6 +66,8 @@ public class SpaceSelectorPresenter extends
         void setPublicBtnDown(boolean down);
 
         void setUserBtnDown(boolean down);
+
+        void showTooltip();
     }
 
     private final WsArmor armor;
@@ -184,6 +188,7 @@ public class SpaceSelectorPresenter extends
             default:
                 break;
             }
+            // getView().hideTooltip();
         }
     }
 
@@ -215,5 +220,9 @@ public class SpaceSelectorPresenter extends
     @Override
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
+    }
+
+    public void showTooltip() {
+        getView().showTooltip();
     }
 }

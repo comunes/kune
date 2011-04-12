@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.options;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
 
-import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevel;
 
 public interface EntityOptions extends AbstractTabbedDialog {
 

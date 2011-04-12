@@ -25,7 +25,7 @@ import java.util.List;
 import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
-import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;

@@ -20,7 +20,7 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.common.client.utils.TimerWrapper.Executer;

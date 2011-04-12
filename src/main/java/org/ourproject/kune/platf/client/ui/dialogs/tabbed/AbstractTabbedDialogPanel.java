@@ -25,8 +25,8 @@ import org.ourproject.kune.platf.client.View;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultForm;
 
-import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.core.client.ui.dialogs.MessageToolbar;
 
 import com.allen_sauer.gwt.log.client.Log;

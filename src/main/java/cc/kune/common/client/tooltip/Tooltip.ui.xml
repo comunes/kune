@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+  </ui:style>
+   <g:HTMLPanel>
+  <g:HTMLPanel ui:field="tooltip"
+    addStyleNames="k-tooltip, k-3corners, k-box-3shadow">
+    <g:FlowPanel ui:field="flow">
+      <g:InlineLabel ui:field="title" />
+      <g:FlowPanel ui:field="content" />
+    </g:FlowPanel>
+  </g:HTMLPanel>
+  <g:HTMLPanel ui:field="arrowBorder" styleName="k-tooltip-arrow-border" />
+  <g:HTMLPanel ui:field="arrow" styleName="k-tooltip-arrow" />
+   </g:HTMLPanel>
+</ui:UiBinder>

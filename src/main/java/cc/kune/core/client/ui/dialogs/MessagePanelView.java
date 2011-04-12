@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.ui.dialogs;
 
-import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevel;
 
 import com.google.gwt.user.client.ui.IsWidget;
 

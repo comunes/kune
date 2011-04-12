@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -141,11 +142,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     public void setToolTipText(final String tooltip) {
         if (tooltip != null && !tooltip.isEmpty()) {
             final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-            if (key == null) {
-                button.setTitle(tooltip);
-            } else {
-                button.setTitle(tooltip + key.toString());
-            }
+            Tooltip.to(button, key == null ? tooltip : tooltip + key.toString());
         }
     }
 

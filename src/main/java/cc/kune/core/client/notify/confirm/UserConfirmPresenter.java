@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.notify.confirm;
 
-import cc.kune.common.client.noti.ConfirmAskEvent;
+import cc.kune.common.client.notify.ConfirmAskEvent;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmProxy;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmView;
 

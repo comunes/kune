@@ -1,7 +1,7 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.gspace.client.WsArmor;
 
 import com.google.gwt.http.client.Request;

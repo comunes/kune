@@ -19,7 +19,7 @@
  */
 package cc.kune.chat.client;
 
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyUser;
 
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
 

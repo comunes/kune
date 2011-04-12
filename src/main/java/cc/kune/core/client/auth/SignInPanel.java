@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.auth;
 
-import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.KuneUiUtils;

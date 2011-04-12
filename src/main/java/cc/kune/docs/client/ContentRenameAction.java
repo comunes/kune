@@ -1,7 +1,7 @@
 package cc.kune.docs.client;
 
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.shared.dto.AccessRolDTO;

@@ -21,8 +21,8 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;

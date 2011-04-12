@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.ui.gridmenu.GridGroup;
 import org.ourproject.kune.workspace.client.oldsn.toolbar.ActionGroupSummaryToolbar;
 import org.ourproject.kune.workspace.client.search.GroupLiveSearcher;
 
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;

@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.auth;
 
-import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.ui.dialogs.BasicTopDialog;
 import cc.kune.core.client.ui.dialogs.MessageToolbar;

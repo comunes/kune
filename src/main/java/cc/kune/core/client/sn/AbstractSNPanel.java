@@ -8,6 +8,7 @@ import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
@@ -91,6 +92,11 @@ public class AbstractSNPanel extends ViewImpl {
     public Widget asWidget() {
         return widget;
     }
+
+    protected void setTooltip(DockLayoutPanel panel, String title) {
+        Tooltip.to(panel, title);
+    }
+
 
     public void clear() {
         trdCategoryFlow.clear();

@@ -87,11 +87,7 @@ public class GwtIconLabelGui extends AbstractGuiItem {
     @Override
     public void setToolTipText(final String tooltip) {
         final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-        if (key == null) {
-            iconLabel.setTitle(tooltip);
-        } else {
-            iconLabel.setTitle(tooltip + key.toString());
-        }
+        iconLabel.setTooltip(key == null ? tooltip : tooltip + key.toString());
     }
 
     @Override

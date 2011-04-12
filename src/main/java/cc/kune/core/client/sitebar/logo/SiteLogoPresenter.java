@@ -61,7 +61,7 @@ public class SiteLogoPresenter extends Presenter<SiteLogoPresenter.SiteLogoView,
 
     @Override
     public void onClick() {
-        stateManager.gotoHistoryToken(SiteTokens.GROUP_HOME);
+        stateManager.gotoHistoryToken(SiteTokens.HOME);
     }
 
     @Override

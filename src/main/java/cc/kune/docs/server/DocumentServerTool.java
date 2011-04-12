@@ -137,7 +137,7 @@ public class DocumentServerTool implements ServerTool {
         content.setStatus(ContentStatus.publishedOnline);
         content.setPublishedOn(new Date());
         group.setDefaultContent(content);
-        kuneWaveManager.createWave(user.getShortName(), i18n.t("About [%s]", longName));
+        kuneWaveManager.createWave(user.getShortName(), "<h1>" + i18n.t("About [%s]" + "</h1>", longName));
         return group;
     }
 

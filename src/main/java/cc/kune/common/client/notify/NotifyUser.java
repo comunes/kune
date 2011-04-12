@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.noti;
+package cc.kune.common.client.notify;
 
 import cc.kune.common.client.utils.SimpleCallback;
 import cc.kune.core.client.notify.msgs.UserNotifyEvent;

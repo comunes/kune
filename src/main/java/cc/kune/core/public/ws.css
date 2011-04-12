@@ -342,6 +342,9 @@ a:visited {
 
 .kLoadingPanel {
     background-color: #FF9999;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-left-radius: 4px;
     -webkit-border-bottom-right-radius: 4px;
     -moz-border-radius-bottomright: 4px;
     border-bottom-right-radius: 4px;
@@ -355,6 +358,13 @@ a:visited {
     color: white;
     font-weight: bold;
     padding: 0 5px 0 5px;
+}
+
+.k-space-tooltip {
+    border-collapse: separate;
+    border-spacing: 5px;
+    vertical-align: middle;
+    line-height: 1.1em;
 }
 
 .k-space-sel {
@@ -399,8 +409,10 @@ a:visited {
     padding: 1px 7px 0 0 !important;
 }
 
-.k-sitebar-wave-status{
+.k-sitebar-wave-status {
+
 }
+
 .k-sitebar-wave-status-online {
     color: green;
 }
@@ -882,10 +894,9 @@ font-size:small;
     padding: 10px;
 }
 
-.k-sn-adminspanel {
-    /* background-color: #a05a2c; */
-    border-bottom:2px solid #F7EBE3;
-    border-top:2px solid #F7EBE3;
+.k-sn-adminspanel { /* background-color: #a05a2c; */
+    border-bottom: 2px solid #F7EBE3;
+    border-top: 2px solid #F7EBE3;
 }
 
 .k-sn-collabspanel {
@@ -1092,4 +1103,3 @@ font-size:small;
 .k-tool-item-notselected {
     background-color: inherits;
 }
-

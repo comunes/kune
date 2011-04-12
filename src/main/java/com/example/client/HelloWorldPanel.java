@@ -1,6 +1,6 @@
 package com.example.client;
 
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyUser;
 
 import com.example.client.HelloWorldPresenter.HelloWorldView;
 import com.google.gwt.core.client.GWT;

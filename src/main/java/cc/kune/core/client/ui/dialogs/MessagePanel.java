@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.ui.dialogs;
 
-import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevelImages;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;

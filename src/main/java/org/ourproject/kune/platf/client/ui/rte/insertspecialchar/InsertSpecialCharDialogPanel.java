@@ -22,7 +22,7 @@ package org.ourproject.kune.platf.client.ui.rte.insertspecialchar;
 import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 
-import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.gwtext.client.core.EventObject;

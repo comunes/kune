@@ -92,7 +92,7 @@ import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditor;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.saving.RTESavingEditorPresenter;
 
-import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.utils.SchedulerManager;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.core.client.errors.ErrorHandler;

@@ -50,8 +50,6 @@ public class EntityLicensePresenter extends
 
         HasClickHandlers getImage();
 
-        HasClickHandlers getLabel();
-
         void openWindow(String url);
 
         void showLicense(String groupName, LicenseDTO licenseDTO);
@@ -84,7 +82,6 @@ public class EntityLicensePresenter extends
             }
         };
         getView().getImage().addClickHandler(clickHandler);
-        getView().getLabel().addClickHandler(clickHandler);
     }
 
     @Override

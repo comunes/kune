@@ -20,8 +20,8 @@
 package cc.kune.core.client.groups.newgroup;
 
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.errors.GroupNameInUseException;
 import cc.kune.core.client.resources.CoreMessages;

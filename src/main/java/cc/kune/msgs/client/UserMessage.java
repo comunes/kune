@@ -24,7 +24,7 @@ import org.adamtacy.client.ui.effects.events.EffectCompletedHandler;
 import org.adamtacy.client.ui.effects.examples.Fade;
 import org.adamtacy.client.ui.effects.examples.Show;
 
-import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.msgs.client.resources.UserMessageImages;
 

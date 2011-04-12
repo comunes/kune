@@ -19,7 +19,7 @@
  */
 package cc.kune.msgs.client;
 
-import cc.kune.common.client.noti.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevel;
 
 public class UserMessagesPresenter {
 

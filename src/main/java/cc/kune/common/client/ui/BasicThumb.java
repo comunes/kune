@@ -19,6 +19,7 @@
  */
 package cc.kune.common.client.ui;
 
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.utils.TextUtils;
 
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -135,7 +136,7 @@ public class BasicThumb extends Composite {
     }
 
     public void setTooltip(final String tipTitle, final String tip) {
-        image.setTitle(tip);
-        label.setTitle(tip);
+        Tooltip.to(image, tip);
+        Tooltip.to(label, tip);
     }
 }

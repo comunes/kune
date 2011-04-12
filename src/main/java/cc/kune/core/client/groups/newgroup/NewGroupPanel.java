@@ -19,8 +19,8 @@
  */
 package cc.kune.core.client.groups.newgroup;
 
-import cc.kune.common.client.noti.NotifyLevel;
-import cc.kune.common.client.noti.NotifyLevelImages;
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.DefaultFormUtils;
@@ -79,7 +79,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
     @Inject
     public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img, final MaskWidgetView mask) {
-        dialog = new BasicTopDialog(NEWGROUP_WIZARD, CoreMessages.REGISTER_A_NEW_GROUP_TITLE, true, true, true, 450,
+        dialog = new BasicTopDialog(NEWGROUP_WIZARD, CoreMessages.REGISTER_A_NEW_GROUP_TITLE, false, true, true, 450,
                 360, "k-newgroup-icon", i18n.t("Register"), REGISTER_BUTTON, i18n.t("Cancel"), CANCEL_BUTTON, 9);
         this.i18n = i18n;
         this.mask = mask;
@@ -205,6 +205,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
         shortNameField.focus();
     }
 
+    @Override
     public HasCloseHandlers<PopupPanel> getClose() {
         return dialog.getClose();
     }

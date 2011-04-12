@@ -21,6 +21,8 @@ package cc.kune.common.client.ui;
 
 import java.util.Iterator;
 
+import cc.kune.common.client.tooltip.Tooltip;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.i18n.client.HasDirection.Direction;
@@ -149,5 +151,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     @Override
     public void setText(final String text, final Direction dir) {
         label.setText(text, dir);
+    }
+
+    public void setTooltip(final String text) {
+        Tooltip.to(label, text);
+        // Tooltip.to(iconRight, text);
+        // Tooltip.to(iconLeft, text);
     }
 }

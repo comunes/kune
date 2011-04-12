@@ -27,7 +27,7 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
-import cc.kune.common.client.noti.NotifyUser;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
