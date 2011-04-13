@@ -29,10 +29,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -50,27 +47,19 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
     HorizontalPanel panel;
     @UiField
     ToggleButton publicButton;
-    private final Tooltip tooltip;
     @UiField
     ToggleButton userButton;
 
     @Inject
     public SpaceSelectorViewImpl(final WsArmor armor, final I18nTranslationService i18n, final WsArmorResources res) {
         armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
-        final Grid grid = new Grid(4, 2);
-        grid.setWidget(0, 1, new Label(i18n.t("Home page of this site")));
-        grid.setWidget(1, 1, new Label(i18n.t("User space: it shows a list of all your documents and contents "
-                + "in which you participate")));
-        grid.setWidget(2, 1, new Label(i18n.t("Group and personal space: Where you can create "
-                + "and publish contents for your personal or group web spaces")));
-        grid.setWidget(3, 1, new Label(i18n.t("Public space: In this space you can see a preview of how the Personal o"
-                + "r Group Space looks like on the web, outside this site")));
-        grid.setWidget(0, 0, new Image(res.homeSpaceEnabled()));
-        grid.setWidget(1, 0, new Image(res.userSpaceEnabled()));
-        grid.setWidget(2, 0, new Image(res.groupSpaceEnabled()));
-        grid.setWidget(3, 0, new Image(res.publicSpaceEnabled()));
-        grid.addStyleName("k-space-tooltip");
-        tooltip = Tooltip.to(panel, grid);
+        Tooltip.to(homeButton, i18n.t("Your home page in this site"));
+        Tooltip.to(userButton, i18n.t("User space: it shows a list of all your documents and contents "
+                + "in which you participate"));
+        Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
+                + "and publish contents for your personal or group web spaces"));
+        Tooltip.to(publicButton, i18n.t("Public space: In this space you can see a preview of how the Personal o"
+                + "r Group Space looks like on the web, outside this site"));
     }
 
     @Override
@@ -99,11 +88,6 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
     }
 
     @Override
-    public void hideTooltip() {
-        tooltip.hide();
-    }
-
-    @Override
     public void setGroupBtnDown(final boolean down) {
         groupButton.setDown(down);
     }
@@ -121,10 +105,5 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
     @Override
     public void setUserBtnDown(final boolean down) {
         userButton.setDown(down);
-    }
-
-    @Override
-    public void showTooltip() {
-        tooltip.show();
     }
 }

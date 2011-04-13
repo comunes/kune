@@ -57,8 +57,6 @@ public class SpaceSelectorPresenter extends
 
         HasClickHandlers getUserBtn();
 
-        void hideTooltip();
-
         void setGroupBtnDown(boolean down);
 
         void setHomeBtnDown(boolean down);
@@ -66,8 +64,6 @@ public class SpaceSelectorPresenter extends
         void setPublicBtnDown(boolean down);
 
         void setUserBtnDown(boolean down);
-
-        void showTooltip();
     }
 
     private final WsArmor armor;
@@ -220,9 +216,5 @@ public class SpaceSelectorPresenter extends
     @Override
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
-    }
-
-    public void showTooltip() {
-        getView().showTooltip();
     }
 }

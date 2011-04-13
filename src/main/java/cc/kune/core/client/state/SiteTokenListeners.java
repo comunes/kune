@@ -27,7 +27,6 @@ import cc.kune.core.client.groups.newgroup.NewGroup;
 import cc.kune.core.client.sitebar.AboutKuneDialog;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
-import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -39,18 +38,16 @@ public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
     private final Provider<NewGroup> newGroup;
     private final Provider<Register> register;
     private final Provider<SignIn> signIn;
-    private final Provider<SpaceSelectorPresenter> spaceSelector;
 
     @Inject
     public SiteTokenListeners(final Session session, final EventBus eventBus, final Provider<SignIn> signIn,
             final Provider<Register> register, final Provider<NewGroup> newGroup,
-            final Provider<AboutKuneDialog> aboutKuneDialog, final Provider<SpaceSelectorPresenter> spaceSelector) {
+            final Provider<AboutKuneDialog> aboutKuneDialog) {
         this.eventBus = eventBus;
         this.signIn = signIn;
         this.register = register;
         this.newGroup = newGroup;
         this.aboutKuneDialog = aboutKuneDialog;
-        this.spaceSelector = spaceSelector;
         init();
     }
 
@@ -59,7 +56,6 @@ public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
             @Override
             public void onHistoryToken() {
                 SpaceSelectEvent.fire(eventBus, Space.homeSpace);
-                // spaceSelector.get().showTooltip();
             }
         });
         put(SiteTokens.WAVEINBOX, new HistoryTokenCallback() {

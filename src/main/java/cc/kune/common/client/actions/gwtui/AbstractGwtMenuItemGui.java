@@ -34,6 +34,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.resources.CommonIconResources;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.resources.client.ImageResource;
@@ -209,7 +210,9 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem {
     @Override
     protected void setToolTipText(final String text) {
         if (text != null) {
-            item.setTitle(text);
+            final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
+            Tooltip.to(iconLabel, key == null ? text : text + key.toString());
+            layout();
         }
     }
 

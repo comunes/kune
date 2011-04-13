@@ -29,12 +29,15 @@ public class TimerWrapper {
         void execute();
     }
 
+    private boolean isScheduled;
     private Timer timer;
 
     public TimerWrapper() {
+        isScheduled = false;
     }
 
     public void cancel() {
+        isScheduled = false;
         timer.cancel();
     }
 
@@ -42,9 +45,14 @@ public class TimerWrapper {
         timer = new Timer() {
             @Override
             public void run() {
+                isScheduled = false;
                 onTime.execute();
             }
         };
+    }
+
+    public boolean isScheduled() {
+        return isScheduled;
     }
 
     public void run() {
@@ -52,10 +60,12 @@ public class TimerWrapper {
     }
 
     public void schedule(final int delayMillis) {
+        isScheduled = true;
         timer.schedule(delayMillis);
     }
 
     public void scheduleRepeating(final int delayMillis) {
+        isScheduled = true;
         timer.scheduleRepeating(delayMillis);
     }
 }

@@ -1,6 +1,8 @@
 package cc.kune.common.client.tooltip;
 
 import cc.kune.common.client.utils.TextUtils;
+import cc.kune.common.client.utils.TimerWrapper;
+import cc.kune.common.client.utils.TimerWrapper.Executer;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -10,7 +12,6 @@ import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -50,9 +51,8 @@ public class Tooltip extends PopupPanel {
     FlowPanel content;
     @UiField
     FlowPanel flow;
-    private final boolean isOver;
     private Widget ofWidget;
-    private final Timer timer;
+    private final TooltipTimers timers;
     @UiField
     InlineLabel title;
     @UiField
@@ -62,14 +62,21 @@ public class Tooltip extends PopupPanel {
         super.add(uiBinder.createAndBindUi(this));
         super.setAutoHideEnabled(false);
         super.setAnimationEnabled(false);
-        isOver = false;
-        timer = new Timer() {
-
+        final TimerWrapper overTimer = new TimerWrapper();
+        overTimer.configure(new Executer() {
             @Override
-            public void run() {
+            public void execute() {
+                show();
+            }
+        });
+        final TimerWrapper outTimer = new TimerWrapper();
+        outTimer.configure(new Executer() {
+            @Override
+            public void execute() {
                 hide();
             }
-        };
+        });
+        timers = new TooltipTimers(overTimer, outTimer);
     }
 
     protected int getHeight() {
@@ -85,7 +92,7 @@ public class Tooltip extends PopupPanel {
         content.add(widget);
     }
 
-    private void setText(final String text) {
+    public void setText(final String text) {
         content.clear();
         content.add(new Label(text));
     }
@@ -140,14 +147,13 @@ public class Tooltip extends PopupPanel {
         ofWidget.addDomHandler(new MouseOverHandler() {
             @Override
             public void onMouseOver(final MouseOverEvent event) {
-                timer.cancel();
-                show();
+                timers.onOver();
             }
         }, MouseOverEvent.getType());
         ofWidget.addDomHandler(new MouseOutHandler() {
             @Override
             public void onMouseOut(final MouseOutEvent event) {
-                timer.schedule(750);
+                timers.onOut();
             }
         }, MouseOutEvent.getType());
     }

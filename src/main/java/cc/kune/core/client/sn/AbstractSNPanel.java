@@ -93,11 +93,6 @@ public class AbstractSNPanel extends ViewImpl {
         return widget;
     }
 
-    protected void setTooltip(DockLayoutPanel panel, String title) {
-        Tooltip.to(panel, title);
-    }
-
-
     public void clear() {
         trdCategoryFlow.clear();
         firstCategoryFlow.clear();
@@ -140,6 +135,10 @@ public class AbstractSNPanel extends ViewImpl {
     public void setSndCategoryVisible(final boolean visible) {
         sndCategoryPanel.setVisible(visible);
         sndCategoryPanel.setHeight(visible ? CATEG_HEIGHT : "0px");
+    }
+
+    protected void setTooltip(final Widget widget, final String title) {
+        Tooltip.to(widget, title);
     }
 
     public void setTrdCategoryVisible(final boolean visible) {

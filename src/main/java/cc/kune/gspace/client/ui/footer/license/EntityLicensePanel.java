@@ -38,6 +38,7 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     private final I18nTranslationService i18n;
     private final FlowPanel licenseBar;
     private final Image licenseImage;
+    private final Tooltip tooltip;
 
     @Inject
     public EntityLicensePanel(final I18nTranslationService i18n, final WsArmor armor) {
@@ -48,6 +49,7 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
         licenseBar.add(licenseImage);
         licenseImage.addStyleName("k-footer-license-img");
         armor.getEntityFooter().add(licenseBar);
+        tooltip = Tooltip.to(licenseImage, ".");
     }
 
     @Override
@@ -80,6 +82,6 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
         final String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
         // KuneUiUtils.setQuickTip(licenseLabel, licenseText);
         licenseImage.setUrl(licenseDTO.getImageUrl());
-        Tooltip.to(licenseImage, licenseText);
+        tooltip.setText(licenseText);
     }
 }

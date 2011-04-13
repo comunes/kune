@@ -23,6 +23,7 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -118,8 +119,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     @Override
     public void setToolTipText(final String tooltip) {
         if (notStandAlone) {
-            // button.setTooltip(tooltip);
-            button.setTitle(tooltip);
+            Tooltip.to(button, tooltip);
         }
     }
 
