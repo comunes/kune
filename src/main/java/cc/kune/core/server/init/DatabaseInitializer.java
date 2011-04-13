@@ -14,6 +14,7 @@ import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.manager.impl.ContentConstants;
 import cc.kune.core.server.properties.DatabaseProperties;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.GroupType;
@@ -24,7 +25,7 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 import cc.kune.domain.License;
 import cc.kune.domain.User;
-import cc.kune.wave.server.CustomUserRegistrationServlet;
+import cc.kune.wave.server.KuneWaveManager;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
@@ -33,19 +34,19 @@ public class DatabaseInitializer {
     private final ContentManager contentManager;
     private final I18nCountryManager countryManager;
     private final GroupManager groupManager;
+    private final KuneWaveManager kuneWaveManager;
     private final I18nLanguageManager languageManager;
     private final LicenseManager licenseManager;
     private final DatabaseProperties properties;
     private final I18nTranslationManager translationManager;
     private final UserManager userManager;
-    private final CustomUserRegistrationServlet waveUserRegister;
 
     @Inject
     public DatabaseInitializer(final DatabaseProperties properties, final UserManager userManager,
             final GroupManager groupManager, final LicenseManager licenseManager,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
             final I18nTranslationManager translationManager, final ContentManager contentManager,
-            final CustomUserRegistrationServlet waveUserRegister) {
+            final KuneWaveManager kuneWaveManager) {
         this.properties = properties;
         this.userManager = userManager;
         this.groupManager = groupManager;
@@ -54,7 +55,7 @@ public class DatabaseInitializer {
         this.countryManager = countryManager;
         this.translationManager = translationManager;
         this.contentManager = contentManager;
-        this.waveUserRegister = waveUserRegister;
+        this.kuneWaveManager = kuneWaveManager;
     }
 
     private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
@@ -86,30 +87,10 @@ public class DatabaseInitializer {
         groupManager.reIndex();
 
         final Content defaultContent = siteGroup.getDefaultContent();
-        contentManager.save(user, defaultContent, "<img src=\"http://kune.ourproject.org/kimages/logo-header.png\" "
-                + "align=\"right\">This a initial demo of " + "<a href=\"http://kune.ourproject.org\">kune</a>."
-                + "<br><div style=\"text-align: right;\"><br></div>"
-                + "Kune is currently under initial development.<br>"
-                + "<br>To test it, <a href=\"#signin\">sign in registering an user</a>, "
-                + "but take into account that:<br><ul><li>kune is not optimized yet, "
-                + "then the initial load and other operations maybe are slow.</li>"
-                + "<li>Don\'t use passwords that you are using in other sites "
-                + "(kune isn\'t secure yet storing passwords).</li>"
-                + "<li>The site is divided in two main areas: the public " + "space and the workspace:</li><ul>"
-                + "<li>The workspace is the most important part of kune, "
-                + "because is where users collaborate and communicates which each others. "
-                + "This part is the most dynamic and we are using modern "
-                + "(and sometimes experimental) web technologies to improve the end user "
-                + "experience. I heavily under development.<br></li>"
-                + "<li>The public space is currently lest developed. "
-                + "Our main goal is to offer customs and configurable styles "
-                + "for groups/users contents.</li></ul></ul><font size=\"4\"><br>"
-                + "We need your feedback<br><br></font>Please help us to improve this software "
-                + "reporting <a href=\"http://kune.ourproject.org/issues/\">bugs and/or "
-                + "suggestions</a>. Also you <a href=\"#translate\">help us to translate it</a> "
-                + "into other languages.<br><br>Thank you,<br>" + "<br>--<br><span style=\"font-style: italic;\">"
-                + "The kune development team</span><br><br>");
-        contentManager.renameContent(user, defaultContent.getId(), "Welcome to kune demo");
+        final String waveId = kuneWaveManager.createWave(
+                ContentConstants.INITIAL_CONTENT.replaceAll("\\[%s\\]", siteName), user.getShortName());
+        contentManager.save(user, defaultContent, waveId);
+
         contentManager.setStatus(defaultContent.getId(), ContentStatus.publishedOnline);
     }
 

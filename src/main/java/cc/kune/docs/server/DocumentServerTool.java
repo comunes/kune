@@ -36,7 +36,6 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.User;
-import cc.kune.wave.server.KuneWaveManager;
 
 import com.google.inject.Inject;
 
@@ -48,23 +47,18 @@ public class DocumentServerTool implements ServerTool {
     public static final String TYPE_ROOT = NAME + "." + "root";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
 
-    public static final String TYPE_WAVE = NAME + "." + ServerTool.WAVE_SUFFIX;
-
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;
     private final ContentManager contentManager;
     private final I18nTranslationService i18n;
-    private final KuneWaveManager kuneWaveManager;
 
     @Inject
     public DocumentServerTool(final ContentManager contentManager, final ContainerManager containerManager,
-            final ToolConfigurationManager configurationManager, final I18nTranslationService translationService,
-            final KuneWaveManager kuneWaveManager) {
+            final ToolConfigurationManager configurationManager, final I18nTranslationService translationService) {
         this.contentManager = contentManager;
         this.containerManager = containerManager;
         this.configurationManager = configurationManager;
         this.i18n = translationService;
-        this.kuneWaveManager = kuneWaveManager;
     }
 
     void checkContainerTypeId(final String parentTypeId, final String typeId) {
@@ -81,10 +75,9 @@ public class DocumentServerTool implements ServerTool {
     }
 
     void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE) || typeId.equals(TYPE_WAVE)) {
+        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE)) {
             // ok valid content
             if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
-                    || (typeId.equals(TYPE_WAVE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
                     || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
                 // ok
             } else {
@@ -137,7 +130,6 @@ public class DocumentServerTool implements ServerTool {
         content.setStatus(ContentStatus.publishedOnline);
         content.setPublishedOn(new Date());
         group.setDefaultContent(content);
-        kuneWaveManager.createWave(user.getShortName(), "<h1>" + i18n.t("About [%s]" + "</h1>", longName));
         return group;
     }
 

@@ -43,6 +43,7 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.properties.ChatProperties;
+import cc.kune.core.server.properties.DatabaseProperties;
 import cc.kune.core.server.xmpp.ChatConnection;
 import cc.kune.core.server.xmpp.ChatException;
 import cc.kune.core.server.xmpp.XmppManager;
@@ -62,13 +63,15 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class UserManagerDefault extends DefaultManager<User, Long> implements UserManager {
+
+    private final ChatProperties chatProperties;
     private final I18nCountryManager countryManager;
+    private final DatabaseProperties databaseProperties;
     private final UserFinder finder;
     private final I18nTranslationService i18n;
     private final KuneWaveManager kuneWaveManager;
     private final I18nLanguageManager languageManager;
     private final ParticipantUtils participantUtils;
-    private final ChatProperties properties;
     private final AccountStore waveAccountStore;
     // private final PropertiesManager propManager;
     private final CustomUserRegistrationServlet waveUserRegister;
@@ -77,20 +80,22 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     @Inject
     public UserManagerDefault(final Provider<EntityManager> provider, final UserFinder finder,
             final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-            final XmppManager xmppManager, final ChatProperties properties, final I18nTranslationService i18n,
+            final XmppManager xmppManager, final ChatProperties chatProperties, final I18nTranslationService i18n,
             final CustomUserRegistrationServlet waveUserRegister, final AccountStore waveAccountStore,
-            final KuneWaveManager kuneWaveManager, final ParticipantUtils participantUtils) {
+            final KuneWaveManager kuneWaveManager, final ParticipantUtils participantUtils,
+            final DatabaseProperties databaseProperties) {
         super(provider, User.class);
         this.finder = finder;
         this.languageManager = languageManager;
         this.countryManager = countryManager;
         this.xmppManager = xmppManager;
-        this.properties = properties;
+        this.chatProperties = chatProperties;
         this.i18n = i18n;
         this.waveUserRegister = waveUserRegister;
         this.waveAccountStore = waveAccountStore;
         this.kuneWaveManager = kuneWaveManager;
         this.participantUtils = participantUtils;
+        this.databaseProperties = databaseProperties;
     }
 
     @Override
@@ -131,7 +136,9 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         try {
             final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
                     passwdDigest.getSalt(), language, country, tz);
-            kuneWaveManager.createWave(shortName, "Test wave");
+            kuneWaveManager.createWave(
+                    ContentConstants.WELCOME_WAVE_CONTENT.replaceAll("\\[%s\\]",
+                            databaseProperties.getDefaultSiteName()), databaseProperties.getAdminShortName(), shortName);
             return user;
         } catch (final RuntimeException e) {
             try {
@@ -178,7 +185,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         // two db at the same time). This compromise solution is server
         // independent.
         // In the future cache this.
-        final String domain = "@" + properties.getDomain();
+        final String domain = "@" + chatProperties.getDomain();
         final UserBuddiesData buddiesData = new UserBuddiesData();
 
         final User user = finder.getByShortName(shortName);
@@ -231,10 +238,10 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
             if (user.getLastLogin() == null) {
                 xmppManager.sendMessage(
                         user.getShortName(),
-                        i18n.t("This is the chat window. \n"
-                                + "\n"
-                                + "Here you can communicate with other users of this site but also with other users with compatible accounts (like gmail accounts). \n"
-                                + "\n" + "Just add some buddie and start to chat."));
+                        i18n.t("This is the chat window. "
+                                + ""
+                                + "Here you can communicate with other users of this site but also with other users with compatible accounts (like gmail accounts). "
+                                + "" + "Just add some buddie and start to chat."));
             }
             user.setLastLogin(System.currentTimeMillis());
             return user;

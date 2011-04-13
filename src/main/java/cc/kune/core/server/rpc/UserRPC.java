@@ -35,6 +35,7 @@ import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
 import cc.kune.core.server.auth.Authorizated;
 import cc.kune.core.server.auth.SessionService;
+import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.mapper.Mapper;
@@ -46,9 +47,11 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.WaveClientParams;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.wave.server.CustomWaveClientServlet;
+import cc.kune.wave.server.KuneWaveManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -59,7 +62,10 @@ import com.google.inject.persist.Transactional;
 @Singleton
 public class UserRPC implements RPC, UserService {
 
+    private final ContentManager contentManager;
     private final GroupManager groupManager;
+    private final I18nTranslationService i18n;
+    private final KuneWaveManager kuneWaveManager;
     private final Mapper mapper;
     private final Provider<SessionService> sessionServiceProvider;
     private final UserInfoService userInfoService;
@@ -74,7 +80,8 @@ public class UserRPC implements RPC, UserService {
             final Provider<UserSession> userSessionProvider, final UserManager userManager,
             @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO, final GroupManager groupManager,
             final UserInfoService userInfoService, final Mapper mapper, final SessionManager waveSessionManager,
-            final CustomWaveClientServlet waveClientServlet) {
+            final CustomWaveClientServlet waveClientServlet, final I18nTranslationService i18n,
+            final KuneWaveManager kuneWaveManager, final ContentManager contentManager) {
 
         this.sessionServiceProvider = sessionServiceProvider;
         this.userSessionProvider = userSessionProvider;
@@ -85,6 +92,9 @@ public class UserRPC implements RPC, UserService {
         this.mapper = mapper;
         this.waveSessionManager = waveSessionManager;
         this.waveClientServlet = waveClientServlet;
+        this.i18n = i18n;
+        this.kuneWaveManager = kuneWaveManager;
+        this.contentManager = contentManager;
     }
 
     @Override
@@ -93,7 +103,10 @@ public class UserRPC implements RPC, UserService {
         final User user = userManager.createUser(userDTO.getShortName(), userDTO.getName(), userDTO.getEmail(),
                 userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
                 userDTO.getTimezone().getId());
-        groupManager.createUserGroup(user, wantPersonalHomepage);
+        final Group userGroup = groupManager.createUserGroup(user, wantPersonalHomepage);
+        final String waveId = kuneWaveManager.createWave("<h1>" + i18n.t("[%s] Bio", userDTO.getName()) + "</h1>"
+                + i18n.t("This user has not written its biography yet"), user.getShortName());
+        contentManager.save(user, userGroup.getDefaultContent(), waveId);
     }
 
     @Override

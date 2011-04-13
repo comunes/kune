@@ -41,7 +41,7 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
-public class UserManagerTest extends PersistencePreLoadedDataTest {
+public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     @Inject
     Group groupFinder;
 

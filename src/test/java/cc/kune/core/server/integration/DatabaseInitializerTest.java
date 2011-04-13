@@ -45,39 +45,23 @@ import cc.kune.domain.ToolConfiguration;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
-public class DatabaseInitializationTest {
+public class DatabaseInitializerTest {
     @Inject
-    GroupManager groupManager;
-    @Inject
-    LicenseManager licenseManager;
-    @Inject
-    I18nTranslationManager transManager;
-    @Inject
-    I18nLanguageManager languageManager;
-    @Inject
-    I18nCountryManager countryManager;
+    ContainerManager containerManager;
     @Inject
     ContentManager contentManager;
     @Inject
-    ContainerManager containerManager;
-
+    I18nCountryManager countryManager;
     private Group defaultGroup;
+    @Inject
+    GroupManager groupManager;
+    @Inject
+    I18nLanguageManager languageManager;
+    @Inject
+    LicenseManager licenseManager;
 
-    /**
-     * If this test fails, see database configuration in INSTALL (the collation
-     * part) and http://dev.mysql.com/doc/refman/5.0/en/case-sensitivity.html
-     * 
-     * Title must be created as something like `title` varchar(255) collate
-     * utf8_bin default NULL
-     * 
-     */
-    @Test
-    public void caseSensitive() {
-        final Content defaultContent = defaultGroup.getDefaultContent();
-        assertTrue(contentManager.findIfExistsTitle(defaultContent.getContainer(), "Welcome to kune demo"));
-        assertTrue(!contentManager.findIfExistsTitle(defaultContent.getContainer(), "welcome to kune Demo"));
-        assertTrue(!contentManager.findIfExistsTitle(defaultContent.getContainer(), "Welcome to kune demo "));
-    }
+    @Inject
+    I18nTranslationManager transManager;
 
     @Transactional
     @Before

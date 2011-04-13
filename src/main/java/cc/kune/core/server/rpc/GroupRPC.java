@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.rpc;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.server.UserSession;
@@ -36,9 +35,11 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.LicenseDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.wave.server.KuneWaveManagerDefault;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -49,16 +50,21 @@ import com.google.inject.persist.Transactional;
 public class GroupRPC implements RPC, GroupService {
     private final ContentManager contentManager;
     private final GroupManager groupManager;
+    private final I18nTranslationService i18n;
+    private final KuneWaveManagerDefault kuneWaveManager;
     private final Mapper mapper;
     private final Provider<UserSession> userSessionProvider;
 
     @Inject
     public GroupRPC(final Provider<UserSession> userSessionProvider, final GroupManager groupManager,
-            final ContentManager contentManager, final Mapper mapper) {
+            final ContentManager contentManager, final Mapper mapper, final KuneWaveManagerDefault kuneWaveManager,
+            final I18nTranslationService i18n) {
         this.userSessionProvider = userSessionProvider;
         this.groupManager = groupManager;
         this.contentManager = contentManager;
         this.mapper = mapper;
+        this.kuneWaveManager = kuneWaveManager;
+        this.i18n = i18n;
     }
 
     @Override
@@ -100,9 +106,10 @@ public class GroupRPC implements RPC, GroupService {
         final User user = getUserLogged();
         final Group group = mapper.map(groupDTO, Group.class);
         final Group newGroup = groupManager.createGroup(group, user);
-        final Long defContentId = newGroup.getDefaultContent().getId();
-        contentManager.save(user, newGroup.getDefaultContent(), publicDesc);
-        contentManager.setTags(user, defContentId, tags);
+        final String waveId = kuneWaveManager.createWave("<h1>" + i18n.t("About [%s]", groupDTO.getLongName())
+                + "</h1>" + publicDesc, user.getShortName());
+        contentManager.save(user, newGroup.getDefaultContent(), waveId);
+        // contentManager.setTags(user, defContentId, tags);
         return newGroup.getDefaultContent().getStateToken();
     };
 

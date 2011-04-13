@@ -1,5 +1,7 @@
 package cc.kune.wave.server;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.IOException;
 
 import org.junit.Before;
@@ -25,6 +27,6 @@ public class KuneWaveManagerDefaultTest extends IntegrationTest {
     @Test
     public void createWave() throws DefaultException, IOException {
         doLogin();
-        manager.createWave(getSiteAdminShortName(), "testing");
+        assertNotNull(manager.createWave("testing", getSiteAdminShortName()));
     }
 }

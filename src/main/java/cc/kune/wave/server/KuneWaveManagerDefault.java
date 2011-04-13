@@ -20,8 +20,9 @@ import cc.kune.core.client.errors.DefaultException;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.google.wave.api.Blip;
+import com.google.wave.api.JsonRpcConstant.ParamsProperty;
 import com.google.wave.api.JsonRpcResponse;
-import com.google.wave.api.Markup;
 import com.google.wave.api.OperationQueue;
 import com.google.wave.api.OperationRequest;
 import com.google.wave.api.ProtocolVersion;
@@ -36,7 +37,6 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     private final String domain;
     private final OperationServiceRegistry operationRegistry;
     private final ParticipantUtils participantUtils;
-
     private final WaveletProvider waveletProvider;
 
     @Inject
@@ -53,24 +53,43 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     }
 
     @Override
-    public void createWave(final String username, final String message) {
-        final ParticipantId user = participantUtils.of(username);
-        final OperationQueue opQueue = new OperationQueue();
+    public String createWave(final String message, final String... participantArray) {
+        String newWaveId = null;
         final Set<String> participants = new HashSet<String>();
-        participants.add(user.toString());
+        for (final String participant : participantArray) {
+            participants.add(participantUtils.of(participant).toString());
+        }
+        final ParticipantId user = participantUtils.of(participantArray[0]);
+        final OperationQueue opQueue = new OperationQueue();
         final Wavelet newWavelet = opQueue.createWavelet(domain, participants);
-        // newWavelet.getRootBlip().append(Markup.of(message));
-        opQueue.appendMarkupToDocument(newWavelet.getRootBlip(), Markup.of(message).getMarkup());
-
+        // opQueue.appendMarkupToDocument(newWavelet.getRootBlip(),
+        // Markup.of(message).getMarkup());
+        // opQueue.appendBlipToWavelet(newWavelet,
+        // Markup.of(message).getMarkup());
+        //
+        final Blip rootBlip = newWavelet.getRootBlip();
+        // rootBlip.append(Markup.of(message));
+        rootBlip.append(new com.google.wave.api.Markup("<b>kk</b>"));
+        // opQueue.modifyDocument(rootBlip).addParameter(
+        // Parameter.of(ParamsProperty.MODIFY_ACTION, ModifyHow.INSERT_AFTER));
         final OperationContextImpl context = new OperationContextImpl(waveletProvider,
                 converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
-
         for (final OperationRequest req : opQueue.getPendingOperations()) {
             OperationUtil.executeOperation(req, operationRegistry, context, user);
             final String reqId = req.getId();
             final JsonRpcResponse response = context.getResponse(reqId);
-            if (response != null && response.isError()) {
-                onFailure(context.getResponse(reqId).getErrorMessage());
+            if (response != null) {
+                if (response.isError()) {
+                    onFailure(context.getResponse(reqId).getErrorMessage());
+                } else {
+                    final Object responseWaveId = response.getData().get(ParamsProperty.WAVE_ID);
+                    if (responseWaveId != null) {
+                        // This is serialized use
+                        // ApiIdSerializer.instance().deserialiseWaveId (see
+                        // WaveService)
+                        newWaveId = (String) responseWaveId;
+                    }
+                }
             }
         }
         OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
@@ -84,6 +103,7 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
                 LOG.info("Wave creation success: " + arg1);
             }
         });
+        return newWaveId;
     }
 
     private void onFailure(final String message) {
