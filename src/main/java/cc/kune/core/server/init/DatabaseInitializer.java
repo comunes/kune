@@ -5,6 +5,8 @@ import java.util.TimeZone;
 import javax.persistence.NoResultException;
 
 import org.waveprotocol.box.server.authentication.PasswordDigest;
+import org.waveprotocol.wave.model.waveref.WaveRef;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.content.ContentManager;
@@ -87,9 +89,9 @@ public class DatabaseInitializer {
         groupManager.reIndex();
 
         final Content defaultContent = siteGroup.getDefaultContent();
-        final String waveId = kuneWaveManager.createWave(
+        final WaveRef waveId = kuneWaveManager.createWave(
                 ContentConstants.INITIAL_CONTENT.replaceAll("\\[%s\\]", siteName), user.getShortName());
-        contentManager.save(user, defaultContent, waveId);
+        contentManager.save(user, defaultContent, JavaWaverefEncoder.encodeToUriPathSegment(waveId));
 
         contentManager.setStatus(defaultContent.getId(), ContentStatus.publishedOnline);
     }

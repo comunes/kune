@@ -6,6 +6,10 @@ import cc.kune.common.client.utils.TimerWrapper.Executer;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
@@ -69,14 +73,17 @@ public class Tooltip extends PopupPanel {
                 show();
             }
         });
-        final TimerWrapper outTimer = new TimerWrapper();
-        outTimer.configure(new Executer() {
+        final Executer hideExecuter = new Executer() {
             @Override
             public void execute() {
                 hide();
             }
-        });
-        timers = new TooltipTimers(overTimer, outTimer);
+        };
+        final TimerWrapper outTimer = new TimerWrapper();
+        final TimerWrapper securityTimer = new TimerWrapper();
+        outTimer.configure(hideExecuter);
+        securityTimer.configure(hideExecuter);
+        timers = new TooltipTimers(overTimer, outTimer, securityTimer);
     }
 
     protected int getHeight() {
@@ -150,6 +157,18 @@ public class Tooltip extends PopupPanel {
                 timers.onOver();
             }
         }, MouseOverEvent.getType());
+        ofWidget.addDomHandler(new FocusHandler() {
+            @Override
+            public void onFocus(final FocusEvent event) {
+                // timers.onOver();
+            }
+        }, FocusEvent.getType());
+        ofWidget.addDomHandler(new BlurHandler() {
+            @Override
+            public void onBlur(final BlurEvent event) {
+                timers.onOut();
+            }
+        }, BlurEvent.getType());
         ofWidget.addDomHandler(new MouseOutHandler() {
             @Override
             public void onMouseOut(final MouseOutEvent event) {

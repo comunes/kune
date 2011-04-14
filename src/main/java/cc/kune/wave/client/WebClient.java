@@ -132,6 +132,18 @@ public class WebClient extends Composite {
 
   private RemoteViewServiceMultiplexer channel;
 
+  public RemoteViewServiceMultiplexer getChannel() {
+    return channel;
+}
+
+  public IdGenerator getIdGenerator() {
+    return idGenerator;
+}
+
+  public ProfileManager getProfiles() {
+    return profiles;
+}
+
 private final EventBus eventBus;
 
   /**
@@ -254,9 +266,13 @@ private final EventBus eventBus;
    * Returns <code>ws://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
-  private native String getWebSocketBaseUrl(String moduleBase) /*-{return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";}-*/;
+  private native String getWebSocketBaseUrl(String moduleBase) /*-{
+	return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+}-*/;
 
-  private native boolean useSocketIO() /*-{ return !!$wnd.__useSocketIO }-*/;
+  private native boolean useSocketIO() /*-{
+	return !!$wnd.__useSocketIO
+}-*/;
 
   /**
    */

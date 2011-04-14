@@ -13,7 +13,6 @@ import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.UserSNetVisibility;
-import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -30,8 +29,8 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
     public UserSNConfActions(final Session session, final StateManager stateManager, final I18nTranslationService i18n,
             final Provider<UserSNVisibilityMenuItem> userBuddiesVisibility, final CoreResources res,
             final IsGroupCondition isGroupCondition, final AddNewBuddiesAction addNewBuddiesAction) {
-        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles("k-sn-options-menu");
-
+        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles(
+                "k-sn-options-menu, k-noborder, k-nobackcolor");
         final MenuRadioItemDescriptor anyoneItem = userBuddiesVisibility.get().withVisibility(UserSNetVisibility.anyone);
         final MenuRadioItemDescriptor onlyYourBuddiesItem = userBuddiesVisibility.get().withVisibility(
                 UserSNetVisibility.yourbuddies);

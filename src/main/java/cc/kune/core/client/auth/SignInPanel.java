@@ -21,6 +21,7 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
+import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.KuneUiUtils;
 import cc.kune.core.client.ui.dialogs.MessageToolbar;
@@ -119,6 +120,11 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     @Override
     public void setNickOrEmail(final String nickOrEmail) {
         signInForm.setNickOrEmail(nickOrEmail);
+    }
+
+    @Override
+    public void setOnPasswordReturn(final OnAcceptCallback onAcceptCallback) {
+        signInForm.setOnPasswordReturn(onAcceptCallback);
     }
 
     @Override

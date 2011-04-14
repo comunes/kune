@@ -27,21 +27,21 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.User;
 
-
 public class StateContent extends StateContainer {
 
-    private String documentId;
-    private int version;
+    private List<User> authors;
     private String content;
     private AccessRights contentRights;
-    private ContentStatus status;
-    private Double rate;
-    private Integer rateByUsers;
     private Double currentUserRate;
+    private String documentId;
     private BasicMimeType mimeType;
     private Date publishedOn;
+    private Double rate;
+    private Integer rateByUsers;
+    private ContentStatus status;
     private String tags;
-    private List<User> authors;
+    private int version;
+    private String waveRef;
 
     public StateContent() {
     }
@@ -94,52 +94,60 @@ public class StateContent extends StateContainer {
         return version;
     }
 
-    public void setAuthors(List<User> authors) {
+    public String getWaveRef() {
+        return waveRef;
+    }
+
+    public void setAuthors(final List<User> authors) {
         this.authors = authors;
     }
 
-    public void setContent(String content) {
+    public void setContent(final String content) {
         this.content = content;
     }
 
-    public void setContentRights(AccessRights contentRights) {
+    public void setContentRights(final AccessRights contentRights) {
         this.contentRights = contentRights;
     }
 
-    public void setCurrentUserRate(Double currentUserRate) {
+    public void setCurrentUserRate(final Double currentUserRate) {
         this.currentUserRate = currentUserRate;
     }
 
-    public void setDocumentId(String documentId) {
+    public void setDocumentId(final String documentId) {
         this.documentId = documentId;
     }
 
-    public void setMimeType(BasicMimeType mimeType) {
+    public void setMimeType(final BasicMimeType mimeType) {
         this.mimeType = mimeType;
     }
 
-    public void setPublishedOn(Date publishedOn) {
+    public void setPublishedOn(final Date publishedOn) {
         this.publishedOn = publishedOn;
     }
 
-    public void setRate(Double rate) {
+    public void setRate(final Double rate) {
         this.rate = rate;
     }
 
-    public void setRateByUsers(Integer rateByUsers) {
+    public void setRateByUsers(final Integer rateByUsers) {
         this.rateByUsers = rateByUsers;
     }
 
-    public void setStatus(ContentStatus status) {
+    public void setStatus(final ContentStatus status) {
         this.status = status;
     }
 
-    public void setTags(String tags) {
+    public void setTags(final String tags) {
         this.tags = tags;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(final int version) {
         this.version = version;
+    }
+
+    public void setWaveRef(final String waveRef) {
+        this.waveRef = waveRef;
     }
 
     @Override

@@ -38,6 +38,8 @@ public interface WsArmorResources extends ClientBundle {
 
         String docSubheader();
 
+        String docSubheaderArrow();
+
         String docSubheaderLeft();
 
         String entityFooter();

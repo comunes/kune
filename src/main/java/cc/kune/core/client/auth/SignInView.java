@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client.auth;
 
+import cc.kune.common.client.utils.OnAcceptCallback;
+
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
 public interface SignInView extends SignInAbstractView {
@@ -38,6 +40,8 @@ public interface SignInView extends SignInAbstractView {
     void setLoginPassword(String password);
 
     void setNickOrEmail(String nickOrEmail);
+
+    void setOnPasswordReturn(OnAcceptCallback onAcceptCallback);
 
     void validate();
 

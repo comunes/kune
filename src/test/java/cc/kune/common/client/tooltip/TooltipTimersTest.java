@@ -11,6 +11,7 @@ import cc.kune.common.client.utils.TimerWrapper;
 public class TooltipTimersTest {
     private TimerWrapper hideTimer;
     protected boolean hideTimerScheduled = false;
+    private TimerWrapper securityTimer;
     private TimerWrapper showTimer;
     protected boolean showTimerScheduled = false;
     private TooltipTimers timers;
@@ -19,7 +20,8 @@ public class TooltipTimersTest {
     public void before() {
         showTimer = Mockito.mock(TimerWrapper.class);
         hideTimer = Mockito.mock(TimerWrapper.class);
-        timers = new TooltipTimers(showTimer, hideTimer);
+        securityTimer = Mockito.mock(TimerWrapper.class);
+        timers = new TooltipTimers(showTimer, hideTimer, securityTimer);
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(final InvocationOnMock invocation) throws Throwable {

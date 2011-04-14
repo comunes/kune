@@ -8,7 +8,7 @@ public class TooltipPosition {
 
     public static final int ARROW_DEF_MARGIN = 10;
     public static final int ARROW_SIZE = 7;
-    public static final int TOOLTIP_DISTANCE = 7;
+    public static final int TOOLTIP_DISTANCE = 12;
 
     private int arrowLeft;
     private ArrowPosition arrowPosition;

@@ -19,11 +19,11 @@
  */
 package cc.kune.core.client.cnt;
 
+import org.waveprotocol.wave.model.waveref.WaveRef;
+
 import com.google.gwt.user.client.ui.Widget;
 
 public interface AbstractContentView {
-
-    public void setRawContent(final String content);
 
     void attach();
 
@@ -36,6 +36,10 @@ public interface AbstractContentView {
     void setInfoMessage(String text);
 
     void setNoPreview();
+
+    public void setRawContent(final String content);
+
+    void setEditableWaveContent(WaveRef waveRef, boolean isNewWave);
 
     void setWidgetAsContent(final Widget widget, boolean setDefMargins);
 

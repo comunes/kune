@@ -25,7 +25,8 @@ import com.google.inject.Provider;
 public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
     @Inject
-    public UserSNMenuItemsRegistry(final Session session, final IsCurrentStateAdministrableCondition isAdministrableCondition,
+    public UserSNMenuItemsRegistry(final Session session,
+            final IsCurrentStateAdministrableCondition isAdministrableCondition,
             final IsPersonCondition isPersonCondition, final IsGroupCondition isGroupCondition,
             final IsLoggedCondition isLoggedCondition, final IsMeCondition isMe, final IsNotMeCondition isNotMe,
             final ChangeToCollabAction changeToCollabAction, final ChangeToAdminAction changeToAdminAction,
@@ -50,14 +51,16 @@ public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
                 return item;
             }
         });
-        add(new Provider<MenuItemDescriptor>() {
-            @Override
-            public MenuItemDescriptor get() {
-                final MenuItemDescriptor item = new MenuItemDescriptor(unjoinAction);
-                item.add(isLoggedCondition);
-                item.add(isGroupCondition);
-                return item;
-            }
-        });
+        // This doesn't works, because its unregister from current state not
+        // from target group
+        // add(new Provider<MenuItemDescriptor>() {
+        // @Override
+        // public MenuItemDescriptor get() {
+        // final MenuItemDescriptor item = new MenuItemDescriptor(unjoinAction);
+        // item.add(isLoggedCondition);
+        // item.add(isGroupCondition);
+        // return item;
+        // }
+        // });
     }
 }

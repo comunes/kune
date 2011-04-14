@@ -25,6 +25,8 @@ import org.jivesoftware.smack.util.Base64;
 import org.json.JSONObject;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.authentication.SessionManager;
+import org.waveprotocol.wave.model.waveref.WaveRef;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
@@ -104,9 +106,9 @@ public class UserRPC implements RPC, UserService {
                 userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
                 userDTO.getTimezone().getId());
         final Group userGroup = groupManager.createUserGroup(user, wantPersonalHomepage);
-        final String waveId = kuneWaveManager.createWave("<h1>" + i18n.t("[%s] Bio", userDTO.getName()) + "</h1>"
+        final WaveRef waveId = kuneWaveManager.createWave("<h1>" + i18n.t("[%s] Bio", userDTO.getName()) + "</h1>"
                 + i18n.t("This user has not written its biography yet"), user.getShortName());
-        contentManager.save(user, userGroup.getDefaultContent(), waveId);
+        contentManager.save(user, userGroup.getDefaultContent(), JavaWaverefEncoder.encodeToUriPathSegment(waveId));
     }
 
     @Override

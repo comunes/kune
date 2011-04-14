@@ -49,8 +49,7 @@
                     </g:FlowPanel>
                     <g:FlowPanel width="100%" height="60px"
                       styleName="{res.style.docSubheader}" ui:field="docSubheader">
-                      <g:Image resource='{res.defThemeDocArrowDown}'
-                        styleName='{res.style.docHeaderArrow}' />
+                        <g:HTMLPanel ui:field="arrow" styleName="{res.style.docSubheaderArrow}" />
                     </g:FlowPanel>
                   </g:VerticalPanel>
                 </g:north>

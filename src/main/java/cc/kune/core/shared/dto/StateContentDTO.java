@@ -30,18 +30,19 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateContentDTO extends StateContainerDTO implements IsSerializable {
 
-    private String documentId;
-    private int version;
+    private List<UserSimpleDTO> authors;
     private String content;
     private AccessRights contentRights;
-    private ContentStatus status;
-    private Double rate;
-    private Integer rateByUsers;
     private Double currentUserRate;
+    private String documentId;
     private BasicMimeTypeDTO mimeType;
     private Date publishedOn;
+    private Double rate;
+    private Integer rateByUsers;
+    private ContentStatus status;
     private String tags;
-    private List<UserSimpleDTO> authors;
+    private int version;
+    private String waveRef;
 
     public StateContentDTO() {
     }
@@ -92,6 +93,10 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
 
     public int getVersion() {
         return version;
+    }
+
+    public String getWaveRef() {
+        return waveRef;
     }
 
     public void setAuthors(final List<UserSimpleDTO> authors) {
@@ -146,6 +151,10 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
 
     public void setVersion(final int version) {
         this.version = version;
+    }
+
+    public void setWaveRef(final String waveRef) {
+        this.waveRef = waveRef;
     }
 
     @Override

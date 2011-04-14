@@ -27,6 +27,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
+import cc.kune.wave.client.WaveClientManager;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -44,8 +45,8 @@ public class GalleryFolderContentPanel extends FoldableContentPanel implements G
 
     @Inject
     public GalleryFolderContentPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res,
-            final StateManager stateManager, final Session session) {
-        super(ws, i18n, res);
+            final StateManager stateManager, final Session session, final WaveClientManager waveClientManager) {
+        super(ws, i18n, res, waveClientManager);
         this.stateManager = stateManager;
         this.session = session;
     }

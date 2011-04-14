@@ -62,6 +62,10 @@ public class WaveClientManager {
         });
     }
 
+    public WebClient getWebClient() {
+        return webClient;
+    }
+
     private native void setClientFlags(JavaScriptObject object) /*-{
 		$wnd.__client_flags = object;
     }-*/;

@@ -170,3 +170,23 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+/* Derived from: from http://jonrohan.me/guide/css/creating-triangles-in-css/ */
+.docSubheaderArrow {
+    border-color: #C87137 transparent transparent transparent;
+    border-style: solid;
+    border-width: 7px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: 47px;
+    left: 36px;
+}
+
+/* IE6 */
+.docSubheaderArrow {
+    _border-left-color: pink;
+    _border-bottom-color: pink;
+    _border-right-color: pink;
+    _filter: literal("chroma(color=pink)");
+}

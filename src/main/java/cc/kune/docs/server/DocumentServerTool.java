@@ -46,6 +46,7 @@ public class DocumentServerTool implements ServerTool {
     public static final String TYPE_FOLDER = NAME + "." + "folder";
     public static final String TYPE_ROOT = NAME + "." + "root";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
+    public static final String TYPE_WAVE = NAME + "." + ServerTool.WAVE_SUFFIX;
 
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;
@@ -75,9 +76,10 @@ public class DocumentServerTool implements ServerTool {
     }
 
     void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE)) {
+        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE) || typeId.equals(TYPE_WAVE)) {
             // ok valid content
             if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
+                    || (typeId.equals(TYPE_WAVE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
                     || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
                 // ok
             } else {
@@ -123,10 +125,10 @@ public class DocumentServerTool implements ServerTool {
         configurationManager.persist(config);
         final String longName = group.getLongName();
         final Content content = contentManager.createContent(i18n.t("About [%s]", longName), "", user, rootFolder,
-                DocumentServerTool.TYPE_DOCUMENT);
+                DocumentServerTool.TYPE_WAVE);
         content.addAuthor(user);
         content.setLanguage(user.getLanguage());
-        content.setTypeId(TYPE_DOCUMENT);
+        content.setTypeId(TYPE_WAVE);
         content.setStatus(ContentStatus.publishedOnline);
         content.setPublishedOn(new Date());
         group.setDefaultContent(content);

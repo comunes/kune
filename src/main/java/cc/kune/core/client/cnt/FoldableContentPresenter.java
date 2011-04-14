@@ -19,7 +19,10 @@
  */
 package cc.kune.core.client.cnt;
 
+import org.waveprotocol.box.webclient.client.HistorySupport;
+
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.services.MediaUtils;
@@ -91,10 +94,12 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
 
     protected void setContent(final StateContentDTO state) {
         final String typeId = state.getTypeId();
+        NotifyUser.info(typeId);
         if (typeId.equals(getUploadType())) {
             setUploadedContent(state);
         } else if (typeId.equals(getWaveType())) {
-            // setWaveContent(state);
+            setNormalContent(state);
+            // setWaveContent(state.getContent());
         } else {
             setNormalContent(state);
         }
@@ -177,6 +182,10 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
 
     public void setUploadType(final String uploadType) {
         this.uploadType = uploadType;
+    }
+
+    private void setWaveContent(final String id) {
+        view.setEditableWaveContent(HistorySupport.waveRefFromHistoryToken(id), false);
     }
 
     public void setWaveType(final String waveType) {

@@ -21,6 +21,7 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.common.client.utils.TimerWrapper.Executer;
@@ -128,6 +129,12 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
         getView().getFirstBtn().addClickHandler(new ClickHandler() {
             @Override
             public void onClick(final ClickEvent event) {
+                onFormSignIn();
+            }
+        });
+        getView().setOnPasswordReturn(new OnAcceptCallback() {
+            @Override
+            public void onSuccess() {
                 onFormSignIn();
             }
         });

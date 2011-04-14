@@ -19,6 +19,8 @@
  */
 package cc.kune.core.client.ui;
 
+import cc.kune.common.client.tooltip.Tooltip;
+
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 
@@ -34,7 +36,8 @@ public class DefaultFormUtils {
         fieldSet.add(radio);
 
         if (radioTip != null) {
-            radio.setTitle(radioTip);
+            Tooltip.to(radio, radioTip);
+            // radio.setTitle(radioTip);
             radio.setBoxLabel(radioLabel);
             // radio.setBoxLabel(KuneUiUtils.genQuickTipLabel(radioLabel, null,
             // radioTip));

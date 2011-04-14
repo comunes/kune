@@ -23,12 +23,14 @@ import cc.kune.core.client.cnt.FoldableContentPanel;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
+import cc.kune.wave.client.WaveClientManager;
 
 import com.google.inject.Inject;
 
 public class BlogViewerPanel extends FoldableContentPanel implements BlogViewerView {
     @Inject
-    public BlogViewerPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res) {
-        super(ws, i18n, res);
+    public BlogViewerPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res,
+            final WaveClientManager waveClientManager) {
+        super(ws, i18n, res, waveClientManager);
     }
 }

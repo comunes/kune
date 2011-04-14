@@ -19,28 +19,56 @@
  */
 package cc.kune.core.client.cnt;
 
+import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
+import org.waveprotocol.box.webclient.client.SimpleWaveStore;
+import org.waveprotocol.box.webclient.client.StagesProvider;
+import org.waveprotocol.box.webclient.search.WaveStore;
+import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
+import org.waveprotocol.box.webclient.widget.loading.LoadingIndicator;
+import org.waveprotocol.wave.client.account.ProfileManager;
+import org.waveprotocol.wave.client.widget.common.ImplPanel;
+import org.waveprotocol.wave.model.id.IdGenerator;
+import org.waveprotocol.wave.model.waveref.WaveRef;
+
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.WsArmor;
+import cc.kune.wave.client.WaveClientManager;
+import cc.kune.wave.client.WebClient;
 
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public abstract class FoldableContentPanel extends AbstractContentPanel implements AbstractContentView {
 
     private static final String DEF_CONTENT_MARGINS_STYLE = "kune-Margin-7-trbl";
+    private final RemoteViewServiceMultiplexer channel;
     private final I18nTranslationService i18n;
+    private final IdGenerator idGenerator;
+    private final Element loading = new LoadingIndicator().getElement();
     private final IconLabel messageLabel;
     private final FlowPanel messagePanel;
+    private final ProfileManager profiles;
+    /** The wave panel, if a wave is open. */
+    private StagesProvider wave;
+    private final FramedPanel waveFrame;
+    private final ImplPanel waveHolder;
+    private final WaveStore waveStore = new SimpleWaveStore();
 
-    public FoldableContentPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res) {
+    public FoldableContentPanel(final WsArmor ws, final I18nTranslationService i18n, final CoreResources res,
+            final WaveClientManager waveClientManager) {
         super(ws);
         this.i18n = i18n;
         messageLabel = new IconLabel("");
@@ -50,6 +78,13 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         messagePanel.add(messageLabel);
         messagePanel.addStyleName("k-preview-msg");
         messagePanel.addStyleName("kune-Margin-7-b");
+        waveFrame = new FramedPanel();
+        waveHolder = new ImplPanel("");
+        waveFrame.add(waveHolder);
+        final WebClient webClient = waveClientManager.getWebClient();
+        channel = webClient.getChannel();
+        profiles = webClient.getProfiles();
+        idGenerator = webClient.getIdGenerator();
     }
 
     private VerticalPanel createMessageVp(final boolean showMsg) {
@@ -134,6 +169,31 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
         final HTML html = new HTML(content);
         setDefStyle(html);
         setContent(html);
+    }
+
+    @Override
+    public void setEditableWaveContent(final WaveRef waveRef, final boolean isNewWave) {
+        Log.info("FCPanel.setWave()");
+
+        if (wave != null) {
+            wave.destroy();
+            wave = null;
+        }
+
+        // Release the display:none.
+        UIObject.setVisible(waveFrame.getElement(), true);
+        waveHolder.getElement().appendChild(loading);
+        final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
+        final StagesProvider wave = new StagesProvider(holder, waveHolder, waveRef, channel, idGenerator, profiles,
+                waveStore, isNewWave);
+        this.wave = wave;
+        wave.load(new Command() {
+            @Override
+            public void execute() {
+                loading.removeFromParent();
+            }
+        });
+        setWidgetAsContent(waveFrame, false);
     }
 
     @Override

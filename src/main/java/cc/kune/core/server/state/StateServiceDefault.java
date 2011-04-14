@@ -19,19 +19,24 @@
  */
 package cc.kune.core.server.state;
 
+import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
+import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.docs.server.DocumentServerTool;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.License;
 import cc.kune.domain.Revision;
 import cc.kune.domain.User;
+import cc.kune.wave.server.KuneWaveManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -39,26 +44,34 @@ import com.google.inject.Singleton;
 @Singleton
 public class StateServiceDefault implements StateService {
 
+    private final ContentManager contentManager;
+    private final GroupManager groupManager;
+    private final I18nTranslationService i18n;
+    private final KuneWaveManager kuneWaveManager;
     private final AccessRightsService rightsService;
     private final SocialNetworkManager socialNetworkManager;
-    private final GroupManager groupManager;
     private final TagUserContentManager tagManager;
-    private final ContentManager contentManager;
-    private final I18nTranslationService i18n;
 
     @Inject
-    public StateServiceDefault(GroupManager groupManager, SocialNetworkManager socialNetworkManager,
-            ContentManager contentManager, TagUserContentManager tagManager, AccessRightsService rightsService,
-            I18nTranslationService i18n) {
+    public StateServiceDefault(final GroupManager groupManager, final SocialNetworkManager socialNetworkManager,
+            final ContentManager contentManager, final TagUserContentManager tagManager,
+            final AccessRightsService rightsService, final I18nTranslationService i18n,
+            final KuneWaveManager kuneWaveManager) {
         this.groupManager = groupManager;
         this.socialNetworkManager = socialNetworkManager;
         this.contentManager = contentManager;
         this.tagManager = tagManager;
         this.rightsService = rightsService;
         this.i18n = i18n;
+        this.kuneWaveManager = kuneWaveManager;
     }
 
-    public StateContainer create(User userLogged, Container container) {
+    private Container calculateRootContainer(final Container container) {
+        return container.isRoot() ? container : container.getAbsolutePath().get(0);
+    }
+
+    @Override
+    public StateContainer create(final User userLogged, final Container container) {
         final StateContainer state = new StateContainer();
         state.setTitle(container.getName());
         state.setTypeId(container.getTypeId());
@@ -67,14 +80,16 @@ public class StateServiceDefault implements StateService {
         state.setRootContainer(calculateRootContainer(container));
         state.setLicense(container.getOwner().getDefaultLicense());
         state.setAccessLists(container.getAccessLists());
-        Group group = container.getOwner();
+        final Group group = container.getOwner();
         setCommon(state, userLogged, group, container);
         return state;
     }
 
-    public StateContent create(User userLogged, Content content) {
-        StateContent state = new StateContent();
-        state.setTypeId(content.getTypeId());
+    @Override
+    public StateContent create(final User userLogged, final Content content) {
+        final StateContent state = new StateContent();
+        final String typeId = content.getTypeId();
+        state.setTypeId(typeId);
         state.setMimeType(content.getMimeType());
         state.setDocumentId(content.getId().toString());
         state.setLanguage(content.getLanguage());
@@ -83,15 +98,25 @@ public class StateServiceDefault implements StateService {
         state.setTags(tagManager.getTagsAsString(userLogged, content));
         state.setStatus(content.getStatus());
         state.setStateToken(content.getStateToken());
-        Revision revision = content.getLastRevision();
+        final Revision revision = content.getLastRevision();
         state.setTitle(revision.getTitle());
         state.setVersion(content.getVersion());
-        char[] text = revision.getBody();
-        state.setContent(text == null ? null : new String(text));
-        Container container = content.getContainer();
+        final char[] text = revision.getBody();
+        final String textBody = text == null ? null : new String(text);
+        if (typeId.equals(DocumentServerTool.TYPE_WAVE)) {
+            state.setWaveRef(textBody);
+            try {
+                state.setContent(kuneWaveManager.fetchWavelet(JavaWaverefEncoder.decodeWaveRefFromPath(textBody)).getRootBlip().getContent());
+            } catch (final InvalidWaveRefException e) {
+                throw new DefaultException("Error retriving Wave");
+            }
+        } else {
+            state.setContent(textBody);
+        }
+        final Container container = content.getContainer();
         state.setRootContainer(calculateRootContainer(container));
-        License license = content.getLicense();
-        Group group = container.getOwner();
+        final License license = content.getLicense();
+        final Group group = container.getOwner();
         state.setLicense(license == null ? group.getDefaultLicense() : license);
         state.setContentRights(rightsService.get(userLogged, content.getAccessLists()));
         state.setAccessLists(content.getAccessLists());
@@ -100,17 +125,18 @@ public class StateServiceDefault implements StateService {
             state.setCurrentUserRate(contentManager.getRateContent(userLogged, content));
         }
         // FIXME: user RateResult
-        Double rateAvg = contentManager.getRateAvg(content);
+        final Double rateAvg = contentManager.getRateAvg(content);
         state.setRate(rateAvg != null ? rateAvg : 0D);
-        Long rateByUsers = contentManager.getRateByUsers(content);
+        final Long rateByUsers = contentManager.getRateByUsers(content);
         state.setRateByUsers(rateByUsers != null ? rateByUsers.intValue() : 0);
         return state;
     }
 
-    public StateNoContent createNoHome(User userLogged, String groupShortName) {
-        Group group = groupManager.findByShortName(groupShortName);
+    @Override
+    public StateNoContent createNoHome(final User userLogged, final String groupShortName) {
+        final Group group = groupManager.findByShortName(groupShortName);
         assert (group.isPersonal());
-        StateNoContent state = new StateNoContent();
+        final StateNoContent state = new StateNoContent();
         state.setGroup(group);
         state.setEnabledTools(groupManager.findEnabledTools(group.getId()));
         setSocialNetwork(state, userLogged, group);
@@ -119,11 +145,8 @@ public class StateServiceDefault implements StateService {
         return state;
     }
 
-    private Container calculateRootContainer(Container container) {
-        return container.isRoot() ? container : container.getAbsolutePath().get(0);
-    }
-
-    private void setCommon(StateContainer state, User userLogged, Group group, Container container) {
+    private void setCommon(final StateContainer state, final User userLogged, final Group group,
+            final Container container) {
         state.setToolName(container.getToolName());
         state.setGroup(group);
         state.setContainer(container);
@@ -133,7 +156,7 @@ public class StateServiceDefault implements StateService {
         setSocialNetwork(state, userLogged, group);
     }
 
-    private void setSocialNetwork(StateAbstract state, User userLogged, Group group) {
+    private void setSocialNetwork(final StateAbstract state, final User userLogged, final Group group) {
         state.setSocialNetworkData(socialNetworkManager.getSocialNetworkData(userLogged, group));
     }
 }

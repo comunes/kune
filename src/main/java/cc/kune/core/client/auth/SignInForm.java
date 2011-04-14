@@ -19,6 +19,7 @@
  \*/
 package cc.kune.core.client.auth;
 
+import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
@@ -34,6 +35,7 @@ public class SignInForm extends DefaultForm {
 
     private final TextField<String> loginNickOrEmailField;
     private final TextField<String> loginPassField;
+    private OnAcceptCallback onAcceptCallback;
 
     public SignInForm(final I18nTranslationService i18n) {
         super.addStyleName("kune-Margin-Large-trbl");
@@ -61,8 +63,7 @@ public class SignInForm extends DefaultForm {
             @Override
             public void handleEvent(final FieldEvent fe) {
                 if (fe.getEvent().getKeyCode() == 13) {
-                    // Window.alert("SignInForm");
-                    // presenter.onFormSignIn();
+                    onAcceptCallback.onSuccess();
                 }
             }
         });
@@ -95,5 +96,9 @@ public class SignInForm extends DefaultForm {
 
     public void setNickOrEmail(final String nickOrEmail) {
         loginNickOrEmailField.setValue(nickOrEmail);
+    }
+
+    public void setOnPasswordReturn(final OnAcceptCallback onAcceptCallback) {
+        this.onAcceptCallback = onAcceptCallback;
     }
 }
