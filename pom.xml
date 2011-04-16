@@ -545,7 +545,6 @@
       <artifactId>guava-gwt</artifactId>
       <version>r07</version>
     </dependency>
-    <!-- From here necessary as .java not included in waveinabox-serve.jar -->
     <dependency>
       <groupId>org.waveprotocol</groupId>
       <artifactId>box-src</artifactId>
@@ -596,7 +595,6 @@
       <artifactId>communication-src</artifactId>
       <version>0.3.0-SNAPSHOT</version>
     </dependency>
-    <!-- to here -->
     <dependency>
       <groupId>net.sourceforge.findbugs</groupId>
       <artifactId>jsr-305</artifactId>

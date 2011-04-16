@@ -46,6 +46,7 @@ import org.waveprotocol.box.server.rpc.FetchServlet;
 import org.waveprotocol.box.server.rpc.SearchServlet;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
+import org.waveprotocol.box.server.rpc.UserRegistrationServlet;
 import org.waveprotocol.box.server.waveserver.WaveBus;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveletProvider;
@@ -55,9 +56,11 @@ import org.waveprotocol.wave.federation.FederationTransport;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 import org.waveprotocol.wave.federation.xmpp.XmppFederationModule;
 import org.waveprotocol.wave.model.version.HashedVersionFactory;
+import org.waveprotocol.wave.model.wave.ParticipantIdUtil;
 import org.waveprotocol.wave.util.logging.Log;
 import org.waveprotocol.wave.util.settings.SettingsBinder;
 
+import com.google.gwt.logging.server.RemoteLoggingServiceImpl;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -112,10 +115,16 @@ public class WaveMain {
     ServerRpcProvider server = injector.getInstance(ServerRpcProvider.class);
     WaveBus waveBus = injector.getInstance(WaveBus.class);
 
-    initializeServer(injector);
+    String domain =
+      injector.getInstance(Key.get(String.class, Names.named(CoreSettings.WAVE_SERVER_DOMAIN)));
+    if (!ParticipantIdUtil.isDomainAddress(ParticipantIdUtil.makeDomainAddress(domain))) {
+      throw new WaveServerException("Invalid wave domain: " + domain);
+    }
+
+    initializeServer(injector, domain);
     initializeServlets(injector, server);
     initializeRobots(injector, waveBus);
-    initializeFrontend(injector, server, waveBus);
+    initializeFrontend(injector, server, waveBus, domain);
     initializeFederation(injector);
 
     LOG.info("Starting server");
@@ -133,12 +142,11 @@ public class WaveMain {
     return federationModule;
   }
 
-  private static void initializeServer(Injector injector) throws PersistenceException,
-      WaveServerException {
+  private static void initializeServer(Injector injector, String waveDomain)
+      throws PersistenceException, WaveServerException {
     AccountStore accountStore = injector.getInstance(AccountStore.class);
     accountStore.initializeAccountStore();
-    AccountStoreHolder.init(accountStore,
-        injector.getInstance(Key.get(String.class, Names.named(CoreSettings.WAVE_SERVER_DOMAIN))));
+    AccountStoreHolder.init(accountStore, waveDomain);
 
     // Initialize the SignerInfoStore.
     CertPathStore certPathStore = injector.getInstance(CertPathStore.class);
@@ -157,10 +165,10 @@ public class WaveMain {
     server.addServlet(SessionManager.SIGN_IN_URL,
         injector.getInstance(AuthenticationServlet.class));
     server.addServlet("/auth/signout", injector.getInstance(SignOutServlet.class));
-    server.addServlet("/auth/register", injector.getInstance(CustomUserRegistrationServlet.class));
+    server.addServlet("/auth/register", injector.getInstance(UserRegistrationServlet.class));
 
     server.addServlet("/fetch/*", injector.getInstance(FetchServlet.class));
-    
+
     server.addServlet("/search/*", injector.getInstance(SearchServlet.class));
 
     server.addServlet("/robot/dataapi", injector.getInstance(DataApiServlet.class));
@@ -172,14 +180,19 @@ public class WaveMain {
 
     String gadgetServerHostname =injector.getInstance(Key.get(String.class,
         Names.named(CoreSettings.GADGET_SERVER_HOSTNAME)));
+    int gadgetServerPort =
+        injector.getInstance(Key.get(int.class, Names.named(CoreSettings.GADGET_SERVER_PORT)));
+    String gadgetServerPath =
+        injector.getInstance(Key.get(String.class, Names.named(CoreSettings.GADGET_SERVER_PATH)));
     ProxyServlet.Transparent proxyServlet =
-        new ProxyServlet.Transparent("/gadgets", "http", gadgetServerHostname, injector
-            .getInstance(Key.get(int.class, Names.named(CoreSettings.GADGET_SERVER_PORT))),
-            "/gadgets");
+        new ProxyServlet.Transparent("/gadgets", "http", gadgetServerHostname,gadgetServerPort,
+            gadgetServerPath);
     ServletHolder proxyServletHolder = server.addServlet("/gadgets/*", proxyServlet);
     proxyServletHolder.setInitParameter("HostHeader", gadgetServerHostname);
 
-    //  server.addServlet("/", injector.getInstance(CustomWaveClientServlet.class));
+    server.addServlet("/webclient/remote_logging",
+        injector.getInstance(RemoteLoggingServiceImpl.class));
+    // server.addServlet("/", injector.getInstance(WaveClientServlet.class));
   }
 
   private static void initializeRobots(Injector injector, WaveBus waveBus) {
@@ -188,10 +201,12 @@ public class WaveMain {
   }
 
   private static void initializeFrontend(Injector injector, ServerRpcProvider server,
-      WaveBus waveBus) throws WaveServerException {
+      WaveBus waveBus, String waveDomain) throws WaveServerException {
     HashedVersionFactory hashFactory = injector.getInstance(HashedVersionFactory.class);
+
     WaveletProvider provider = injector.getInstance(WaveletProvider.class);
-    ClientFrontend frontend = ClientFrontendImpl.create(hashFactory, provider, waveBus);
+    ClientFrontend frontend =
+        ClientFrontendImpl.create(hashFactory, provider, waveBus, waveDomain);
 
     ProtocolWaveClientRpc.Interface rpcImpl = WaveClientRpcImpl.create(frontend, false);
     server.registerService(ProtocolWaveClientRpc.newReflectiveService(rpcImpl));

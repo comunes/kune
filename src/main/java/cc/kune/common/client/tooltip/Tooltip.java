@@ -64,6 +64,7 @@ public class Tooltip extends PopupPanel {
 
     public Tooltip() {
         super.add(uiBinder.createAndBindUi(this));
+        super.setStyleName("k-tooltip-no-chrome");
         super.setAutoHideEnabled(false);
         super.setAnimationEnabled(false);
         final TimerWrapper overTimer = new TimerWrapper();

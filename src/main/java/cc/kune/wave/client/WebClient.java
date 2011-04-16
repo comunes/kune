@@ -22,6 +22,9 @@ package cc.kune.wave.client;
 
 
 
+import java.util.Date;
+import java.util.logging.Logger;
+
 import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
@@ -94,6 +97,10 @@ public class WebClient extends Composite {
   private static final Binder BINDER = GWT.create(Binder.class);
 
   static Log LOG = Log.get(WebClient.class);
+  // Use of GWT logging is only intended for sending exception reports to the
+  // server, nothing else in the client should use java.util.logging.
+  // Please also see WebClientDemo.gwt.xml.
+  private static final Logger REMOTE_LOG = Logger.getLogger("REMOTE_LOG");
 
   private final ProfileManager profiles = new ProfileManagerImpl();
 
@@ -363,6 +370,7 @@ private final EventBus eventBus;
           public void use(SafeHtml stack) {
               NotifyUser.error("Error in wave client", true);
           //  error.addDetail(stack, null);
+            REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
           }
         });
       }
@@ -388,6 +396,8 @@ private final EventBus eventBus;
 
           Throwable error = t;
           while (error != null) {
+            String token = String.valueOf((new Date()).getTime());
+            stack.appendHtmlConstant("Token:  " + token + "<br> ");
             stack.appendEscaped(String.valueOf(error.getMessage())).appendHtmlConstant("<br>");
             for (StackTraceElement elt : error.getStackTrace()) {
               stack.appendHtmlConstant("  ")

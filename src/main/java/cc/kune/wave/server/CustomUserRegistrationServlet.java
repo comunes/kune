@@ -39,6 +39,7 @@ import org.waveprotocol.wave.util.logging.Log;
 
 import com.google.gxp.base.GxpContext;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
@@ -46,6 +47,7 @@ import com.google.inject.name.Named;
  *
  * @author josephg@gmail.com (Joseph Gentle)
  */
+@Singleton
 public final class CustomUserRegistrationServlet extends HttpServlet {
   private final AccountStore accountStore;
   private final String domain;
@@ -53,20 +55,20 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
   private final Log LOG = Log.get(CustomUserRegistrationServlet.class);
 
   @Inject
-  public CustomUserRegistrationServlet(final AccountStore accountStore,
-      @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
+  public CustomUserRegistrationServlet(AccountStore accountStore,
+      @Named(CoreSettings.WAVE_SERVER_DOMAIN) String domain) {
     this.accountStore = accountStore;
     this.domain = domain;
   }
 
   @Override
-  protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     writeRegistrationPage("", AuthenticationServlet.RESPONSE_STATUS_NONE, req.getLocale(), resp);
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     req.setCharacterEncoding("UTF-8");
     String password = req.getParameter(HttpRequestBasedCallbackHandler.PASSWORD_FIELD);
     if (password == null) {
@@ -100,7 +102,7 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
     try {
       // First, some cleanup on the parameters.
       if (username == null) {
-        return "Username portion of address cannot be less than 2 characters";
+        return "Username portion of address cannot be empty";
       }
       username = username.trim().toLowerCase();
       if (username.contains(ParticipantId.DOMAIN_PREFIX)) {
@@ -108,8 +110,8 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
       } else {
         id = ParticipantId.of(username + ParticipantId.DOMAIN_PREFIX + domain);
       }
-      if (id.getAddress().indexOf("@") < 2) {
-        return "Username portion of address cannot be less than 2 characters";
+      if (id.getAddress().indexOf("@") < 1) {
+        return "Username portion of address cannot be empty";
       }
       final String[] usernameSplit = id.getAddress().split("@");
       if (usernameSplit.length != 2 || !usernameSplit[0].matches("[\\w\\.]+")) {

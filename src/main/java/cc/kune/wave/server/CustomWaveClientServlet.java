@@ -54,6 +54,7 @@ import com.google.inject.name.Named;
  *
  * @author kalman@google.com (Benjamin Kalman)
  */
+@SuppressWarnings("serial")
 @Singleton
 public class CustomWaveClientServlet extends HttpServlet {
 

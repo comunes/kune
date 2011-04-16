@@ -1,24 +1,43 @@
 #!/bin/bash
 
-PARAMS=$#
-JAR=$1
-GROUP=$2
-ARTIFACT=$3
-VER=$4
-USER=$5
+usage() {
+    echo "Use: $0 -j <jar> -g <group> -a <artifact> -v <version> [-s (for source)]"
+    echo "$0 -j target/emite-0.4.6-emiteuimodule.jar -g com.calclab.emite -a emite -v 0.4.6"
+}
 
-# CORRECT PARAMS ###############################################################
+while getopts “hg:a:v:j:s” OPTION
+do
+    case $OPTION in
+	h)
+            usage
+            exit 1
+            ;;
+	g)
+	    GROUP=$OPTARG
+	    ;;
+	a)
+	    ARTIFACT=$OPTARG
+	    ;;
+	v)
+	    VER=$OPTARG
+	    ;;
+	j)
+	    JAR=$OPTARG
+	    ;;
+	s)
+            SOURCE='-Dclassifier=sources'
+            ;;
+	?)
+            usage
+            exit
+            ;;
+    esac
+done	
 
-if [ $PARAMS -lt 4 ]
+if [[ -z $GROUP ]] || [[ -z $ARTIFACT ]] || [[ -z $VER ]] || [[ -z $JAR ]] 
 then
-  echo "Use: $0 <jar> <group> <artifact> <version> <username>"
-  echo "$0 target/emite-0.4.6-emiteuimodule.jar com.calclab.emite emite 0.4.6 [luther]"
-  exit
+    usage
+    exit 1
 fi
 
-if [ $PARAMS -gt 4 ]
-then
-  EXTRA=$USER@
-fi
-
-mvn deploy:deploy-file -DgroupId=$2 -DartifactId=$3 -Dversion=$4 -Dpackaging=jar -Dfile=$1 -Durl=scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/ -DrepositoryId=kune.ourproject.org
+mvn deploy:deploy-file -DgroupId=$GROUP -DartifactId=$ARTIFACT -Dversion=$VER $SOURCE -Dpackaging=jar -Dfile=$JAR -Durl=scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/ -DrepositoryId=kune.ourproject.org
