@@ -161,7 +161,7 @@ public class Tooltip extends PopupPanel {
         ofWidget.addDomHandler(new FocusHandler() {
             @Override
             public void onFocus(final FocusEvent event) {
-                // timers.onOver();
+                timers.onOut();
             }
         }, FocusEvent.getType());
         ofWidget.addDomHandler(new BlurHandler() {

@@ -146,7 +146,7 @@ public abstract class FoldableContentPresenter extends AbstractContentPresenter 
 
     private void setToolbar(final GuiActionDescCollection collection) {
         // toolbar.disableMenusAndClearButtons();
-        toolbar.addActions(collection);
+        toolbar.addAll(collection);
         toolbar.attach();
     }
 

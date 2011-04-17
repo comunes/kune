@@ -28,7 +28,7 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class StateContentDTO extends StateContainerDTO implements IsSerializable {
+public class StateContentDTO extends StateContainerDTO implements IsSerializable, HasContent {
 
     private List<UserSimpleDTO> authors;
     private String content;

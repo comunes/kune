@@ -3,6 +3,7 @@ package cc.kune.common.client.actions.ui.descrip;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
+import cc.kune.gspace.client.actions.perspective.ActionPerspective;
 
 public interface GuiActionDescrip {
 
@@ -46,6 +47,8 @@ public interface GuiActionDescrip {
     Object getValue(final String key);
 
     boolean hasTarget();
+
+    void in(Class<? extends ActionPerspective> clazz);
 
     boolean isChild();
 

@@ -55,6 +55,6 @@ public class WaveStatusIndicator {
     public WaveStatusIndicator(final SitebarActionsPresenter sitebar, final WaveStatusAction action) {
         final IconLabelDescriptor status = new IconLabelDescriptor(action);
         status.setPosition(0);
-        sitebar.getRightToolbar().addAction(status);
+        sitebar.getRightToolbar().add(status);
     }
 }

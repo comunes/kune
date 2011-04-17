@@ -226,13 +226,13 @@ public class ChatClientDefault implements ChatClient {
             shorcutRegister.put(shortcut, action);
             action.setShortcut(shortcut);
             chatIcon.setVisible(session.isLogged());
-            siteActions.getLeftToolbar().addAction(
+            siteActions.getLeftToolbar().add(
                     new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-            siteActions.getLeftToolbar().addAction(
+            siteActions.getLeftToolbar().add(
                     new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-            siteActions.getLeftToolbar().addAction(
+            siteActions.getLeftToolbar().add(
                     new ToolbarSeparatorDescriptor(Type.spacer, SitebarActionsPresenter.LEFT_TOOLBAR));
-            siteActions.getLeftToolbar().addAction(chatIcon);
+            siteActions.getLeftToolbar().add(chatIcon);
         }
     }
 

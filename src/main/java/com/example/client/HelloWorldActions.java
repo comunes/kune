@@ -34,7 +34,7 @@ public class HelloWorldActions {
         final ButtonDescriptor siteBarBtn = new ButtonDescriptor(sharedAction);
         siteBarBtn.withText("HWorld!").withIcon(coreResources.info());
         // FIXME setParent as in siteUsOp
-        sitebarActions.getLeftToolbar().addAction(siteBarBtn);
+        sitebarActions.getLeftToolbar().add(siteBarBtn);
 
         // Other action in the sitebar options menu
 

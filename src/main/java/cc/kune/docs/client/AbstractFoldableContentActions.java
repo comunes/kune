@@ -19,54 +19,25 @@
  */
 package cc.kune.docs.client;
 
-import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
-import cc.kune.common.client.utils.SchedulerManager;
-import cc.kune.core.client.cnt.FoldableContent;
-import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.rpcservices.GroupServiceAsync;
-import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 
-import com.google.inject.Provider;
-
 public abstract class AbstractFoldableContentActions {
-
-    public static final ToolbarDescriptor CONTENT_BOTTOMBAR = new ToolbarDescriptor();
-    public static final ToolbarDescriptor CONTENT_TOPBAR = new ToolbarDescriptor();
-    public static final ToolbarDescriptor CONTEXT_BOTTOMBAR = new ToolbarDescriptor();
-    public static final ToolbarDescriptor CONTEXT_TOPBAR = new ToolbarDescriptor();
 
     private static final String PUBLICATION_MENU = "Publication";
 
-    protected final Provider<ContentServiceAsync> contentServiceProvider;
-    protected final SchedulerManager deferredCommandWrapper;
-    protected final ErrorHandler errorHandler;
-    protected final Provider<FileDownloadUtils> fileDownloadProvider;
-    protected final FoldableContent foldableContent;
-    protected final Provider<GroupServiceAsync> groupServiceProvider;
     protected final I18nUITranslationService i18n;
     protected final Session session;
     protected final StateManager stateManager;
 
     public AbstractFoldableContentActions(final Session session, final StateManager stateManager,
-            final I18nUITranslationService i18n, final ErrorHandler errorHandler,
-            final SchedulerManager deferredCommandWrapper, final Provider<GroupServiceAsync> groupServiceProvider,
-            final Provider<ContentServiceAsync> contentServiceProvider,
-            final Provider<FileDownloadUtils> fileDownloadProvider, final FoldableContent foldableContent) {
+            final I18nUITranslationService i18n) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
-        this.errorHandler = errorHandler;
-        this.deferredCommandWrapper = deferredCommandWrapper;
-        this.groupServiceProvider = groupServiceProvider;
-        this.contentServiceProvider = contentServiceProvider;
-        this.fileDownloadProvider = fileDownloadProvider;
-        this.foldableContent = foldableContent;
         createActions();
         session.onAppStart(true, new AppStartHandler() {
             @Override

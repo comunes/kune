@@ -4,43 +4,43 @@
   <ui:with field='img' type='cc.kune.core.client.resources.CoreResources' />
   <ui:style>
     .main {
-    	
+
     }
-    
+
     .flow {
-    	position: absolute;
-    	/* left: 40%; 
-    	top: 40%; 
-    	height: auto; */
-    	border: solid 1px #ccc;
-    	-moz-border-radius: 10px;
-    	-webkit-border-radius: 10px;
-    	border-radius: 10px;
-    	background-color: white;
-    	padding: 3px;
+      position: absolute;
+      /* left: 40%;
+      top: 40%;
+      height: auto; */
+      border: solid 1px #ccc;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      background-color: white;
+      padding: 3px;
     }
-    
+
     .icon {
-    	width: 35px;
-    	height: 35px;
-    	margin-right: 3px;
-    	float: left;
-    	vertical-align: top;
+      width: 35px;
+      height: 35px;
+      margin-right: 3px;
+      float: left;
+      vertical-align: top;
     }
-    
+
     .label {
-    	float: left;
-    	font-size: 16px;
-    	color: #808080;
-    	line-height: 1.9em;
-    	padding: 0 5px 0 1px;
+      float: left;
+      font-size: 16px;
+      color: #808080;
+      line-height: 1.9em;
+      padding: 0 5px 0 1px;
     }
   </ui:style>
   <g:SimplePanel ui:field="mainPanel" styleName='{style.main}'>
     <g:FlowPanel ui:field="flow" styleName='{style.flow}'>
       <g:Image ui:field="icon" styleName='{style.icon}'
-        resource="{img.kuneAnimGray}" />
+        resource="{img.kuneAnimG}" />
       <g:Label ui:field="label" styleName='{style.label}' />
     </g:FlowPanel>
   </g:SimplePanel>
-</ui:UiBinder> 
+</ui:UiBinder>

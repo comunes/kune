@@ -40,39 +40,33 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
     public void add(final GuiActionDescCollection descriptors) {
         for (final GuiActionDescrip descriptor : descriptors) {
-            addAction(descriptor);
-        }
-    }
-
-    public void add(final GuiActionDescrip... descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
-            addAction(descriptor);
+            add(descriptor);
         }
     }
 
     @Override
-    public void addAction(final GuiActionDescrip descriptor) {
+    public void add(final GuiActionDescrip... descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
+            add(descriptor);
+        }
+    }
+
+    @Override
+    public void add(final GuiActionDescrip descriptor) {
         getGuiItems().add(descriptor);
         beforeAddWidget(descriptor);
     }
 
-    @Override
-    public void addActions(final GuiActionDescCollection descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
-            addAction(descriptor);
-        }
-    }
-
-    @Override
-    public void addActions(final GuiActionDescrip... descriptors) {
-        for (final GuiActionDescrip descriptor : descriptors) {
-            addAction(descriptor);
-        }
-    }
-
     public void addActions(final List<GuiActionDescrip> descriptors) {
         for (final GuiActionDescrip descriptor : descriptors) {
-            addAction(descriptor);
+            add(descriptor);
+        }
+    }
+
+    @Override
+    public void addAll(final GuiActionDescCollection descriptors) {
+        for (final GuiActionDescrip descriptor : descriptors) {
+            add(descriptor);
         }
     }
 

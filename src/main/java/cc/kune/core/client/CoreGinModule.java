@@ -103,9 +103,6 @@ import cc.kune.gspace.client.WsArmor;
 import cc.kune.gspace.client.WsArmorImpl;
 import cc.kune.gspace.client.tags.TagsSummaryPanel;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
-import cc.kune.gspace.client.tool.ToolSelector;
-import cc.kune.gspace.client.tool.ToolSelectorPanel;
-import cc.kune.gspace.client.tool.ToolSelectorPresenter;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePanel;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.msgs.client.UserMessagesPanel;
@@ -168,9 +165,6 @@ public class CoreGinModule extends AbstractPresenterModule {
                 UserConfirmPresenter.UserConfirmProxy.class);
         bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class, TagsSummaryPanel.class,
                 TagsSummaryPresenter.TagsSummaryProxy.class);
-        bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
-                ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);
-        bind(ToolSelector.class).to(ToolSelectorPresenter.class).in(Singleton.class);
 
         bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);

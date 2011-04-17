@@ -8,9 +8,6 @@ import cc.kune.core.client.sn.UserSNPresenter;
 import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.core.client.state.Session;
-import cc.kune.gspace.client.tags.TagsSummaryPresenter;
-import cc.kune.gspace.client.tool.ToolSelector;
-import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -21,9 +18,7 @@ public class CoreParts {
     public CoreParts(final Session session, final Provider<GroupSNPresenter> groupMembersPresenter,
             final Provider<UserSNPresenter> buddiesAndParticipationPresenter,
             final Provider<GroupSNConfActions> groupMembersConfActions,
-            final Provider<UserSNConfActions> userSNConfActions, final Provider<SiteUserOptionsPresenter> userOptions,
-            final Provider<EntityLicensePresenter> licenseFooter, final Provider<TagsSummaryPresenter> tagsPresenter,
-            final Provider<ToolSelector> toolSelector) {
+            final Provider<UserSNConfActions> userSNConfActions, final Provider<SiteUserOptionsPresenter> userOptions) {
         session.onAppStart(true, new AppStartHandler() {
             @Override
             public void onAppStart(final AppStartEvent event) {
@@ -32,9 +27,6 @@ public class CoreParts {
                 groupMembersPresenter.get();
                 buddiesAndParticipationPresenter.get();
                 userOptions.get();
-                licenseFooter.get();
-                tagsPresenter.get();
-                toolSelector.get();
             }
         });
     }

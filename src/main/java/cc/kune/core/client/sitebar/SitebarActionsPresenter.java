@@ -90,6 +90,7 @@ public class SitebarActionsPresenter extends
         init();
     }
 
+    @Override
     public IsActionExtensible getLeftToolbar() {
         return getView().getLeftBar();
     }
@@ -98,20 +99,21 @@ public class SitebarActionsPresenter extends
         return OPTIONS_MENU;
     }
 
+    @Override
     public IsActionExtensible getRightToolbar() {
         return getView().getRightBar();
     }
 
     private void init() {
-        getView().getLeftBar().addAction(LEFT_TOOLBAR);
-        getView().getRightBar().addAction(RIGHT_TOOLBAR);
+        getView().getLeftBar().add(LEFT_TOOLBAR);
+        getView().getRightBar().add(RIGHT_TOOLBAR);
     }
 
     @ProxyEvent
     public void onAppStart(final AppStartEvent event) {
         final IsActionExtensible right = getView().getRightBar();
         OPTIONS_MENU.putValue(Action.NAME, i18n.t("Options"));
-        OPTIONS_MENU.putValue(Action.SMALL_ICON, res.arrowDownSitebar());
+        OPTIONS_MENU.putValue(Action.SMALL_ICON, res.arrowdownsitebar());
         OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
         OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar, k-fl");
         OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
@@ -161,17 +163,17 @@ public class SitebarActionsPresenter extends
         // aboutAction.setShortcut(shortcut);
         // shortcutReg.put(shortcut, aboutAction);
 
-        right.addAction(signInLink.get());
-        right.addAction(signOutLink.get());
-        right.addAction(separator2);
-        right.addAction(newGroupLink.get());
-        right.addAction(separator);
-        right.addAction(OPTIONS_MENU);
-        right.addAction(gotoKuneDevSite);
-        right.addAction(reportBugs);
-        right.addAction(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
-        right.addAction(menuSeparator);
-        right.addAction(new MenuItemDescriptor(OPTIONS_MENU, wavePowered));
+        right.add(signInLink.get());
+        right.add(signOutLink.get());
+        right.add(separator2);
+        right.add(newGroupLink.get());
+        right.add(separator);
+        right.add(OPTIONS_MENU);
+        right.add(gotoKuneDevSite);
+        right.add(reportBugs);
+        right.add(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
+        right.add(menuSeparator);
+        right.add(new MenuItemDescriptor(OPTIONS_MENU, wavePowered));
 
     }
 

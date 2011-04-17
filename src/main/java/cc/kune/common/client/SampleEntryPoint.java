@@ -132,7 +132,7 @@ public class SampleEntryPoint implements EntryPoint {
                 menuItem2, menuItem, iconLabelDescr, submenu, menuItem3, menuItem4, menu2, iconLabelNoAct, menuItem5);
 
         final ActionFlowPanel view = new ActionFlowPanel(ginjector.getGuiProvider());
-        view.addActions(actions);
+        view.addAll(actions);
 
         final IconLabel simpleIconLabel = new IconLabel("IconLabel (no action)");
         simpleIconLabel.setRightIcon("oc-testico");

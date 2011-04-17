@@ -147,6 +147,6 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
     @Override
     public void showDefUserLogo() {
-        entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.personAvatarDef()));
+        entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.unknown60()));
     }
 }

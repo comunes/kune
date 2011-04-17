@@ -30,7 +30,7 @@ public interface IsActionExtensible {
      * @param action
      *            the action
      */
-    void addAction(GuiActionDescrip action);
+    void add(GuiActionDescrip action);
 
     /**
      * Adds some action descriptions
@@ -38,7 +38,7 @@ public interface IsActionExtensible {
      * @param actions
      *            the actions
      */
-    void addActions(GuiActionDescCollection actions);
+    void addAll(GuiActionDescCollection actions);
 
     /**
      * Adds some action descriptions
@@ -46,6 +46,6 @@ public interface IsActionExtensible {
      * @param action
      *            the action
      */
-    void addActions(GuiActionDescrip... actions);
+    void add(GuiActionDescrip... actions);
 
 }

@@ -43,6 +43,9 @@ public interface CoreResources extends ClientBundle {
     @Source("anybody.png")
     ImageResource anybody();
 
+    @Source("arrowdown.png")
+    ImageResource arrowdown();
+
     @Source("arrow-down-black.gif")
     ImageResource arrowDownBlack();
 
@@ -50,7 +53,10 @@ public interface CoreResources extends ClientBundle {
     ImageResource arrowDownGreen();
 
     @Source("arrowdownsitebar.gif")
-    ImageResource arrowDownSitebar();
+    ImageResource arrowdownsitebar();
+
+    @Source("arrowdownsquarewhite.gif")
+    ImageResource arrowdownsquarewhite();
 
     @Source("arrow-down-white.gif")
     ImageResource arrowDownWhite();
@@ -141,9 +147,6 @@ public interface CoreResources extends ClientBundle {
 
     @Source("button15rblue.png")
     ImageResource button15rblue();
-
-    @Source("wave-icon.png")
-    ImageResource waveIcon();
 
     @Source("button15rdark.png")
     ImageResource button15rdark();
@@ -238,9 +241,6 @@ public interface CoreResources extends ClientBundle {
     @Source("button-help-light.png")
     ImageResource buttonHelpLight();
 
-    @Source("arrowdown.gif")
-    ImageResource buttonSitebarArrowDown();
-
     @Source("by80x15.png")
     ImageResource by80x15();
 
@@ -265,8 +265,14 @@ public interface CoreResources extends ClientBundle {
     @Source("cancel-32.png")
     ImageResource cancel32();
 
+    @Source("charfontname.png")
+    ImageResource charfontname();
+
     @Source("clear.png")
     ImageResource clear();
+
+    @Source("content_edit.png")
+    ImageResource contentEdit();
 
     @Source("copyleft.png")
     ImageResource copyleft();
@@ -289,20 +295,26 @@ public interface CoreResources extends ClientBundle {
     @Source("emblem-system.png")
     ImageResource emblemSystem();
 
+    @Source("emite-room.png")
+    ImageResource emiteRoom();
+
     @Source("error.png")
     ImageResource error();
 
     @Source("everybody.png")
     ImageResource everybody();
 
+    @Source("folder-go-up.gif")
+    ImageResource folderGoUp();
+
+    @Source("folderpathmenu.gif")
+    ImageResource folderpathmenu();
+
+    @Source("fontheight.png")
+    ImageResource fontheight();
+
     @Source("fullscreen.png")
     ImageResource fullscreen();
-
-    @Source("loading_gadget.gif")
-    ImageResource gadgetLoading();
-
-    @Source("loading_gadget_small.gif")
-    ImageResource gadgetLoadingSmall();
 
     @Source("gnu-fdl.gif")
     ImageResource gnuFdl();
@@ -329,7 +341,7 @@ public interface CoreResources extends ClientBundle {
     ImageResource kuneAnim();
 
     @Source("kune-anim-g.gif")
-    ImageResource kuneAnimGray();
+    ImageResource kuneAnimG();
 
     @Source("kune-close.png")
     ImageResource kuneClose();
@@ -339,6 +351,9 @@ public interface CoreResources extends ClientBundle {
 
     @Source("kune-help-translation-icon.png")
     ImageResource kuneHelpTranslationIcon();
+
+    @Source("kuneicon16.gif")
+    ImageResource kuneicon16();
 
     @Source("kune-icon16.png")
     ImageResource kuneIcon16();
@@ -358,6 +373,12 @@ public interface CoreResources extends ClientBundle {
     @Source("language.png")
     ImageResource language();
 
+    @Source("loading_gadget.gif")
+    ImageResource loadingGadget();
+
+    @Source("loading_gadget_small.gif")
+    ImageResource loadingGadgetSmall();
+
     @Source("loading-spiner.gif")
     ImageResource loadingSpiner();
 
@@ -376,11 +397,14 @@ public interface CoreResources extends ClientBundle {
     @Source("opentriangle.gif")
     ImageResource opentriangle();
 
-    @Source("unknown-60.png")
-    ImageResource personAvatarDef();
+    @Source("person2-60.png")
+    ImageResource person260();
 
     @Source("person-def.png")
     ImageResource personDef();
+
+    @Source("prefs.png")
+    ImageResource prefs();
 
     @Source("remove.png")
     ImageResource remove();
@@ -456,4 +480,11 @@ public interface CoreResources extends ClientBundle {
 
     @Source("triangle.gif")
     ImageResource triangle();
+
+    @Source("unknown-60.png")
+    ImageResource unknown60();
+
+    @Source("wave-icon.png")
+    ImageResource waveIcon();
+
 }

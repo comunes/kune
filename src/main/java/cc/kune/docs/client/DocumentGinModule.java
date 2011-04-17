@@ -8,6 +8,8 @@ public class DocumentGinModule extends AbstractPresenterModule {
     @Override
     protected void configure() {
         bind(DocumentClientTool.class).in(Singleton.class);
+        bindPresenter(DocsViewerPresenter.class, DocsViewerPresenter.DocsViewerView.class, DocsViewerPanel.class,
+                DocsViewerPresenter.DocsViewerProxy.class);
     }
 
 }

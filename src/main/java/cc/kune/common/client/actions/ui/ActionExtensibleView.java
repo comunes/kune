@@ -25,6 +25,6 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 public interface ActionExtensibleView extends IsWidget {
 
-    void addAction(GuiActionDescrip descriptor);
+    void add(GuiActionDescrip descriptor);
 
 }

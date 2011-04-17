@@ -24,17 +24,17 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class StateContainerDTO extends StateAbstractDTO implements IsSerializable {
+public class StateContainerDTO extends StateAbstractDTO implements IsSerializable, HasContent {
 
-    private I18nLanguageDTO language;
-    private String typeId;
-    private String toolName;
-    private ContainerDTO container;
-    private ContainerDTO rootContainer;
-    private AccessRights containerRights;
-    private LicenseDTO license;
-    private TagCloudResult tagCloudResult;
     private AccessListsDTO accessLists;
+    private ContainerDTO container;
+    private AccessRights containerRights;
+    private I18nLanguageDTO language;
+    private LicenseDTO license;
+    private ContainerDTO rootContainer;
+    private TagCloudResult tagCloudResult;
+    private String toolName;
+    private String typeId;
 
     public StateContainerDTO() {
     }
@@ -71,6 +71,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         return toolName;
     }
 
+    @Override
     public String getTypeId() {
         return typeId;
     }
@@ -111,6 +112,7 @@ public class StateContainerDTO extends StateAbstractDTO implements IsSerializabl
         this.toolName = toolName;
     }
 
+    @Override
     public void setTypeId(final String typeId) {
         this.typeId = typeId;
     }

@@ -44,7 +44,7 @@ public class CoreViewImpl extends ViewImpl implements CorePresenter.CoreView {
      *            the body
      */
     @Inject
-    public CoreViewImpl(final WsArmorImpl armor, StateManagerDefault stateManager) {
+    public CoreViewImpl(final WsArmorImpl armor, final StateManagerDefault stateManager) {
         this.armor = armor;
         GWT.<CoreResources> create(CoreResources.class).css().ensureInjected();
         GWT.<WsArmorResources> create(WsArmorResources.class).style().ensureInjected();

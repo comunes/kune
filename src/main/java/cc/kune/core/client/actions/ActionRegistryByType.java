@@ -2,11 +2,14 @@ package cc.kune.core.client.actions;
 
 import java.util.HashMap;
 
+import javax.annotation.Nullable;
+
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescProviderCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.shared.domain.utils.AccessRights;
+import cc.kune.gspace.client.actions.perspective.ActionPerspective;
 
 import com.google.inject.Provider;
 
@@ -49,19 +52,39 @@ public class ActionRegistryByType {
         return actionColl;
     }
 
+    public GuiActionDescCollection getCurrentActions(final Object targetItem, final boolean isLogged,
+            final AccessRights rights) {
+        return getCurrentActions(targetItem, GENERIC, isLogged, rights, null);
+    }
+
+    public GuiActionDescCollection getCurrentActions(final Object targetItem, final boolean isLogged,
+            final AccessRights rights, @Nullable final Class<?> clazz) {
+        return getCurrentActions(targetItem, GENERIC, isLogged, rights, clazz);
+    }
+
     public GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
             final boolean isLogged, final AccessRights rights) {
-        final GuiActionDescCollection collection = new GuiActionDescCollection();
+        return getCurrentActions(targetItem, typeId, isLogged, rights, null);
+    }
 
+    public GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
+            final boolean isLogged, final AccessRights rights, @Nullable final Class<?> clazz) {
+        final GuiActionDescCollection collection = new GuiActionDescCollection();
         for (final Provider<GuiActionDescrip> descripProv : getActions(typeId)) {
             final GuiActionDescrip descrip = descripProv.get();
             final AbstractAction action = descrip.getAction();
-            if (action instanceof RolAction) {
-                if (mustAdd((RolAction) action, isLogged, rights)) {
+            final Object perspective = descrip.getValue(ActionPerspective.KEY);
+            if (clazz != null && clazz != perspective) {
+                // Not this perspective, then don't add this action
+            } else {
+                // Any perspective it's ok (==null) or same perspective -> add
+                if (action instanceof RolAction) {
+                    if (mustAdd((RolAction) action, isLogged, rights)) {
+                        add(collection, descrip, targetItem);
+                    }
+                } else {
                     add(collection, descrip, targetItem);
                 }
-            } else {
-                add(collection, descrip, targetItem);
             }
         }
         return collection;

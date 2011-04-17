@@ -232,7 +232,7 @@ public class ImageUtils {
             return img.buttonHelpLight();
         }
         case buttonSitebarArrowDown: {
-            return img.buttonSitebarArrowDown();
+            return img.arrowdownsquarewhite();
         }
         case by80x15: {
             return img.by80x15();

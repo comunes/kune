@@ -99,7 +99,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
     private void addActionImpl(final GuiActionDescrip descriptor) {
         descriptor.setParent(LOGGED_USER_MENU);
-        siteOptions.getRightToolbar().addAction(descriptor);
+        siteOptions.getRightToolbar().add(descriptor);
     }
 
     private void addPartipation(final GroupDTO group) {
@@ -110,16 +110,16 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
         participant.putValue(Action.NAME, group.getLongName());
         participant.putValue(Action.SMALL_ICON, logoImageUrl);
         participant.setParent(partiMenu);
-        siteOptions.getRightToolbar().addAction(participant);
+        siteOptions.getRightToolbar().add(participant);
     }
 
     private void createActions() {
         LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
         LOGGED_USER_MENU.setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
         LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar, k-fl");
-        siteOptions.getRightToolbar().addAction(LOGGED_USER_MENU);
+        siteOptions.getRightToolbar().add(LOGGED_USER_MENU);
         separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActionsPresenter.RIGHT_TOOLBAR);
-        siteOptions.getRightToolbar().addAction(separator);
+        siteOptions.getRightToolbar().add(separator);
         partiMenu = new SubMenuDescriptor(i18n.t("Your groups"));
         addActionImpl(partiMenu);
 

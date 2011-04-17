@@ -20,11 +20,17 @@
 package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.Action;
 
 public class ButtonDescriptor extends AbstractGuiActionDescrip {
 
     public ButtonDescriptor(final AbstractAction action) {
         super(action);
+    }
+
+    public ButtonDescriptor(final String text, final AbstractAction action) {
+        this(action);
+        putValue(Action.NAME, text);
     }
 
     @Override

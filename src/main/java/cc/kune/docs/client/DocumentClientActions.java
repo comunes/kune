@@ -23,30 +23,14 @@ import static cc.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
 import static cc.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
 import static cc.kune.docs.client.DocumentClientTool.TYPE_ROOT;
 import static cc.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
-
-
-import cc.kune.common.client.utils.SchedulerManager;
-import cc.kune.core.client.cnt.ContentActionRegistry;
-import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.i18n.I18nUITranslationService;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.rpcservices.GroupServiceAsync;
-import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.docs.client.cnt.DocumentViewer;
-
-import com.google.inject.Provider;
 
 public class DocumentClientActions extends AbstractFoldableContentActions {
     public DocumentClientActions(final I18nUITranslationService i18n, final Session session,
-            final StateManager stateManager, final SchedulerManager deferredCommandWrapper,
-            final Provider<ContentServiceAsync> contentServiceProvider,
-            final Provider<GroupServiceAsync> groupServiceProvider, final ContentActionRegistry contentActionRegistry,
-            final Provider<FileDownloadUtils> fileDownloadProvider, final DocumentViewer docViewer,
-            final ErrorHandler errorHandler) {
-        super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
-                contentServiceProvider, fileDownloadProvider, docViewer);
+            final StateManager stateManager) {
+        super(session, stateManager, i18n);
     }
 
     @Override

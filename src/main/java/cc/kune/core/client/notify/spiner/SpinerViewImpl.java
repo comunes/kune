@@ -58,7 +58,7 @@ public class SpinerViewImpl extends PopupViewWithUiHandlers<UiHandlers> implemen
         widget = uiBinder.createAndBindUi(this);
         popup = new PopupPanel(false, false);
         popup.add(widget);
-        popup.setPopupPosition(200, 0);
+        popup.setPopupPosition(190, 0);
         popup.setStyleName("k-spiner-popup");
         popup.show();
     }

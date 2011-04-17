@@ -39,7 +39,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
             final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
             final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
             final IsGroupCondition isGroupCondition, final UnJoinGroupAction unJoinGroupAction) {
-        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles(
+        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
                 "k-sn-options-menu, k-noborder, k-nobackcolor");
         final GuiActionDescrip optionsTitle = new MenuTitleItemDescriptor(i18n.t("Options")).withParent(OPTIONS_MENU);
         final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(

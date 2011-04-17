@@ -80,7 +80,7 @@ public class DatabaseInitializerTest {
     @Test
     public void testDefaultDocumentContent() {
         final Content content = defaultGroup.getDefaultContent();
-        assertEquals(DocumentServerTool.TYPE_DOCUMENT, content.getTypeId());
+        assertEquals(DocumentServerTool.TYPE_WAVE, content.getTypeId());
         final Container rootDocFolder = content.getContainer();
         assertEquals(true, rootDocFolder.isRoot());
     }

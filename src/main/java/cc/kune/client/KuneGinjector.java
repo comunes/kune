@@ -48,10 +48,10 @@ import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.docs.client.DocsGinjector;
 import cc.kune.docs.client.DocumentGinModule;
-import cc.kune.gspace.client.tags.TagsSummaryPresenter;
-import cc.kune.gspace.client.tool.ToolSelectorPresenter;
-import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
+import cc.kune.gspace.client.GSpaceGinModule;
+import cc.kune.gspace.client.GSpaceGinjector;
 import cc.kune.pspace.client.PSpaceGinModule;
 import cc.kune.pspace.client.PSpaceParts;
 import cc.kune.pspace.client.PSpacePresenter;
@@ -66,8 +66,8 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, ChatGinModule.class, WaveGinModule.class,
-        PSpaceGinModule.class, DocumentGinModule.class })
-public interface KuneGinjector extends Ginjector {
+        PSpaceGinModule.class, GSpaceGinModule.class, DocumentGinModule.class })
+public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector {
 
     /*
      * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
@@ -87,8 +87,6 @@ public interface KuneGinjector extends Ginjector {
     Provider<CorePresenter> getCorePresenter();
 
     AsyncProvider<EntityHeaderPresenter> getEntityHeaderPresenter();
-
-    AsyncProvider<EntityLicensePresenter> getEntityLicensePresenter();
 
     ErrorHandler getErrorHandler();
 
@@ -134,11 +132,7 @@ public interface KuneGinjector extends Ginjector {
 
     StateManager getStateManager();
 
-    AsyncProvider<TagsSummaryPresenter> getTagsSummaryPresenter();
-
     TokenMatcher getTokenMatcher();
-
-    AsyncProvider<ToolSelectorPresenter> getToolSelectorPresenter();
 
     AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
 

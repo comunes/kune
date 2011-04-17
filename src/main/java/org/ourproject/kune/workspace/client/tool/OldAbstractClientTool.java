@@ -22,9 +22,9 @@ package org.ourproject.kune.workspace.client.tool;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeManager;
 
-import cc.kune.gspace.client.tool.ToolSelector;
-import cc.kune.gspace.client.tool.ToolSelectorItemPanel;
-import cc.kune.gspace.client.tool.ToolSelectorItemPresenter;
+import cc.kune.gspace.client.tool.selector.ToolSelector;
+import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
+import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
 
 public abstract class OldAbstractClientTool implements OldClientTool {
 

@@ -117,7 +117,7 @@ public class GroupSNPresenter extends AbstractSNPresenter<GroupSNPresenter.Group
     }
 
     private void createActions() {
-        getView().getBottomToolbar().addActions(actionsRegistry);
+        getView().getBottomToolbar().addAll(actionsRegistry);
     }
 
     @Override

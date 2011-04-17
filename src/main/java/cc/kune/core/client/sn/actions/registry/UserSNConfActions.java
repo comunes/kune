@@ -29,7 +29,7 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
     public UserSNConfActions(final Session session, final StateManager stateManager, final I18nTranslationService i18n,
             final Provider<UserSNVisibilityMenuItem> userBuddiesVisibility, final CoreResources res,
             final IsGroupCondition isGroupCondition, final AddNewBuddiesAction addNewBuddiesAction) {
-        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowDownSitebar()).withStyles(
+        OPTIONS_MENU.withToolTip(i18n.t("Options")).withIcon(res.arrowdownsitebar()).withStyles(
                 "k-sn-options-menu, k-noborder, k-nobackcolor");
         final MenuRadioItemDescriptor anyoneItem = userBuddiesVisibility.get().withVisibility(UserSNetVisibility.anyone);
         final MenuRadioItemDescriptor onlyYourBuddiesItem = userBuddiesVisibility.get().withVisibility(

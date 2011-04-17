@@ -25,18 +25,18 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 public abstract class AbstractActionExtensiblePresenter implements IsActionExtensible {
 
     @Override
-    public abstract void addAction(final GuiActionDescrip descriptor);
+    public abstract void add(final GuiActionDescrip descriptor);
 
     public void addActionCollection(final GuiActionDescCollection descriptors) {
         for (final GuiActionDescrip descriptor : descriptors) {
-            addAction(descriptor);
+            add(descriptor);
         }
     }
 
     @Override
-    public void addActions(final GuiActionDescrip... descriptors) {
+    public void add(final GuiActionDescrip... descriptors) {
         for (final GuiActionDescrip descriptor : descriptors) {
-            addAction(descriptor);
+            add(descriptor);
         }
     }
 

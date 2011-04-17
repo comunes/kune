@@ -108,7 +108,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     }
 
     private void createActions() {
-        getView().getBottomToolbar().addActions(confActionsRegistry);
+        getView().getBottomToolbar().addAll(confActionsRegistry);
     }
 
     @Override
