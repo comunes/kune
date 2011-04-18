@@ -25,6 +25,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class ContentViewerSelector {
 
+    private ContentViewer currentView;
     private final HashMap<String, ContentViewer> defViewsRegister;
     private final Session session;
     private final StateManager stateManager;
@@ -36,6 +37,12 @@ public class ContentViewerSelector {
         this.session = session;
         viewsRegister = new HashMap<String, List<ContentViewer>>();
         defViewsRegister = new HashMap<String, ContentViewer>();
+    }
+
+    private void detachCurrent() {
+        if (currentView != null) {
+            currentView.detach();
+        }
     }
 
     public void init() {
@@ -50,6 +57,7 @@ public class ContentViewerSelector {
                             setContent((HasContent) state);
                         } else {
                             // NoContent
+                            detachCurrent();
                         }
                     }
                 });
@@ -78,8 +86,10 @@ public class ContentViewerSelector {
     }
 
     private void setContent(final ContentViewer view, final HasContent state) {
+        detachCurrent();
         view.setContent(state);
         view.attach();
+        currentView = view;
     }
 
     public void setContent(@Nonnull final HasContent state) {

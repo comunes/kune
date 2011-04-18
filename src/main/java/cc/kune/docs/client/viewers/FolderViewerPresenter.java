@@ -3,6 +3,7 @@ package cc.kune.docs.client.viewers;
 import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.IconsRegistry;
@@ -23,6 +24,7 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsClientTool;
 import cc.kune.docs.client.actions.DocsClientActions;
 import cc.kune.gspace.client.actions.perspective.MenuPerspective;
+import cc.kune.gspace.client.actions.perspective.ViewPerspective;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 
@@ -89,7 +91,7 @@ public class FolderViewerPresenter extends
 
     private void addItem(final String title, final String contentTypeId, final BasicMimeTypeDTO mimeType,
             final ContentStatus status, final StateToken stateToken, final StateToken parentStateToken,
-            final AccessRights rights, final boolean isNodeSelected) {
+            final AccessRights rights) {
         final Object icon = getIcon(stateToken, contentTypeId, mimeType);
         final String tooltip = getTooltip(stateToken, mimeType);
         final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken), genId(parentStateToken), icon,
@@ -99,9 +101,9 @@ public class FolderViewerPresenter extends
                         session.isLogged(), rights, MenuPerspective.class));
         if (status.equals(ContentStatus.inTheDustbin) && !session.getShowDeletedContent()) {
             // Don't show
+            NotifyUser.info("Deleted, don't show");
         } else {
             getView().addItem(item, new DoubleClickHandler() {
-
                 @Override
                 public void onDoubleClick(final DoubleClickEvent event) {
                     stateManager.gotoStateToken(stateToken);
@@ -116,17 +118,15 @@ public class FolderViewerPresenter extends
     }
 
     private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
+        NotifyUser.info("Size: " + container.getContents().size() + " siblings: " + container.getChilds().size());
+        for (final ContentSimpleDTO content : container.getContents()) {
+            addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
+                    content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights());
+        }
         for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
             addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatus.publishedOnline,
                     siblingFolder.getStateToken(),
-                    siblingFolder.getStateToken().copy().setFolder(siblingFolder.getParentFolderId()), containerRights,
-                    false);
-        }
-        for (final ContentSimpleDTO content : container.getContents()) {
-            // content.getTitle()
-            addItem(content.getStateToken().toString(), content.getTypeId(), content.getMimeType(),
-                    content.getStatus(), content.getStateToken(), content.getStateToken().copy().clearDocument(),
-                    content.getRights(), false);
+                    siblingFolder.getStateToken().copy().setFolder(siblingFolder.getParentFolderId()), containerRights);
         }
     }
 
@@ -140,9 +140,7 @@ public class FolderViewerPresenter extends
     }
 
     private Object getIcon(final StateToken token, final String contentTypeId, final BasicMimeTypeDTO mimeType) {
-        if (contentTypeId.equals(DocsClientTool.TYPE_FOLDER)) {
-            return null;
-        } else if (!useGenericImageIcon && mimeType != null && mimeType.getType().equals("image")) {
+        if (!useGenericImageIcon && mimeType != null && mimeType.getType().equals("image")) {
             return downloadUtilsProvider.get().getImageResizedUrl(token, ImageSize.ico);
         } else {
             return iconsRegistry.getContentTypeIcon(contentTypeId, mimeType);
@@ -154,7 +152,7 @@ public class FolderViewerPresenter extends
             // Used for previews
             return null;
         } else {
-            return i18n.t("Double click to open");
+            return null; // i18n.t("Double click to open");
         }
     }
 
@@ -167,11 +165,11 @@ public class FolderViewerPresenter extends
     public void setContent(@Nonnull final HasContent state) {
         getView().clear();
         final StateContainerDTO stateContainer = (StateContainerDTO) state;
+        getView().setContainer(stateContainer);
         final AccessRights rights = stateContainer.getContainerRights();
         final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContainer.getGroup(),
-                stateContainer.getTypeId(), session.isLogged(), rights);
+                stateContainer.getTypeId(), session.isLogged(), rights, ViewPerspective.class);
         getView().setActions(actions);
-        getView().setContainer(stateContainer);
         createChildItems(stateContainer.getContainer(), stateContainer.getContainerRights());
         // view.setEditable(rights.isEditable());
     }

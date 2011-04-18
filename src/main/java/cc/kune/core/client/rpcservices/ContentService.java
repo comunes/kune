@@ -53,8 +53,6 @@ public interface ContentService extends RemoteService {
 
     StateContainerDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
 
-    StateContentDTO addWave(String userHash, StateToken parentToken, String waveFileType, String waveId);
-
     StateContentDTO delContent(String userHash, StateToken token) throws DefaultException;
 
     StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;

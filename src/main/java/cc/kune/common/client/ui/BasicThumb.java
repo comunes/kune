@@ -23,7 +23,9 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.utils.TextUtils;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
@@ -43,6 +45,7 @@ public class BasicThumb extends Composite {
     private final Image image;
     private final Label label;
     private boolean onOverLabel;
+    private final VerticalPanel panel;
 
     public BasicThumb(final Object imageRef, final int imgSize, final String text, final int textMaxLenght,
             final boolean crop) {
@@ -63,7 +66,7 @@ public class BasicThumb extends Composite {
             final boolean crop, final ClickHandler clickHandler) {
         super();
         onOverLabel = false;
-        final VerticalPanel vpanel = new VerticalPanel();
+        panel = new VerticalPanel();
         if (imageRef instanceof String) {
             final String imageUrl = (String) imageRef;
             if (imgSize == NOSIZE) {
@@ -78,21 +81,23 @@ public class BasicThumb extends Composite {
             }
         } else if (imageRef instanceof ImageResource) {
             image = new Image((ImageResource) imageRef);
+            image.setPixelSize(imgSize, imgSize);
         } else {
             // This should not happen
             image = new Image();
+            image.setPixelSize(imgSize, imgSize);
             Log.info("Unrecognized icon of BasicThumb: " + imageRef);
         }
         final String title = textMaxLenght == NOSIZE ? text : TextUtils.ellipsis(text, textMaxLenght);
         label = new Label(title);
-        vpanel.add(image);
-        vpanel.add(label);
-        vpanel.addStyleName("k-basic-thumb");
-        vpanel.addStyleName("kune-Margin-Mini-trbl");
-        vpanel.addStyleName("k-pointer");
-        vpanel.addStyleName("k-floatleft");
-        vpanel.setCellHorizontalAlignment(label, VerticalPanel.ALIGN_CENTER);
-        if (clickHandler instanceof ClickHandler) {
+        panel.add(image);
+        panel.add(label);
+        panel.addStyleName("k-basic-thumb");
+        panel.addStyleName("kune-Margin-Mini-trbl");
+        panel.addStyleName("k-pointer");
+        panel.addStyleName("k-floatleft");
+        panel.setCellHorizontalAlignment(label, VerticalPanel.ALIGN_CENTER);
+        if (clickHandler != null) {
             addClickHandlerImpl(clickHandler);
         }
         image.addMouseOverHandler(new MouseOverHandler() {
@@ -113,7 +118,7 @@ public class BasicThumb extends Composite {
                 }
             }
         });
-        initWidget(vpanel);
+        initWidget(panel);
     }
 
     public BasicThumb(final Object imageRef, final String thumText, final ClickHandler clickHandler) {
@@ -129,8 +134,7 @@ public class BasicThumb extends Composite {
     }
 
     private void addClickHandlerImpl(final ClickHandler clickHandler) {
-        label.addClickHandler(clickHandler);
-        image.addClickHandler(clickHandler);
+        panel.addDomHandler(clickHandler, ClickEvent.getType());
     }
 
     public void addDoubleClickHandler(final DoubleClickHandler clickHandler) {
@@ -138,8 +142,7 @@ public class BasicThumb extends Composite {
     }
 
     private void addDoubleClickHandlerImpl(final DoubleClickHandler clickHandler) {
-        label.addDoubleClickHandler(clickHandler);
-        image.addDoubleClickHandler(clickHandler);
+        panel.addDomHandler(clickHandler, DoubleClickEvent.getType());
     }
 
     public void setLabelVisible(final boolean visible) {

@@ -319,6 +319,7 @@
     vertical-align: middle;
     background-color: #F2F2F2;
     white-space: nowrap;
+    margin-right: 3px;
 }
 
 .oc-button:hover {

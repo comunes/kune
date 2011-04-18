@@ -23,6 +23,8 @@ import java.util.Date;
 
 import javax.persistence.NoResultException;
 
+import org.waveprotocol.wave.model.waveref.WaveRef;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.ContentNotFoundException;
@@ -68,6 +70,7 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.wave.server.KuneWaveManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -83,6 +86,7 @@ public class ContentRPC implements ContentService, RPC {
     private final CreationService creationService;
     private final FinderService finderService;
     private final GroupManager groupManager;
+    private final KuneWaveManager kuneWaveManager;
     private final Mapper mapper;
     private final AccessRightsService rightsService;
     private final StateService stateService;
@@ -96,7 +100,7 @@ public class ContentRPC implements ContentService, RPC {
             final StateService stateService, final CreationService creationService, final GroupManager groupManager,
             final XmppManager xmppManager, final ContentManager contentManager,
             final ContainerManager containerManager, final TagUserContentManager tagManager,
-            final CommentManager commentManager, final Mapper mapper) {
+            final CommentManager commentManager, final Mapper mapper, final KuneWaveManager kuneWaveManager) {
         this.finderService = finderService;
         this.userSessionProvider = userSessionProvider;
         this.accessService = accessService;
@@ -110,6 +114,7 @@ public class ContentRPC implements ContentService, RPC {
         this.tagManager = tagManager;
         this.commentManager = commentManager;
         this.mapper = mapper;
+        this.kuneWaveManager = kuneWaveManager;
     }
 
     @Override
@@ -154,7 +159,8 @@ public class ContentRPC implements ContentService, RPC {
     public StateContentDTO addContent(final String userHash, final StateToken parentToken, final String title,
             final String typeId) throws DefaultException {
         final String body = "";
-        return createContent(parentToken, title, typeId, body);
+        final WaveRef waveRef = kuneWaveManager.createWave(body, getCurrentUser().getShortName());
+        return createContent(parentToken, title, typeId, JavaWaverefEncoder.encodeToUriPathSegment(waveRef));
     }
 
     @Override
@@ -199,15 +205,6 @@ public class ContentRPC implements ContentService, RPC {
         // throw new GroupNotFoundException();
         // }
         return null;
-    }
-
-    @Override
-    @Authenticated
-    @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
-    @Transactional
-    public StateContentDTO addWave(final String userHash, final StateToken parentToken, final String typeId,
-            final String waveId) throws DefaultException {
-        return createContent(parentToken, "Wave embeded test", typeId, waveId);
     }
 
     private StateContentDTO createContent(final StateToken parentToken, final String title, final String typeId,

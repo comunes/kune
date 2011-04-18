@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ChangeableObject;
+import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.gspace.client.actions.perspective.ActionPerspective;
 
 /**
@@ -52,7 +53,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     /**
      * Instantiates a new abstract ui action descriptor. This is used for
      * describe UI button, menus, menu items and so on
-     *
+     * 
      * @param action
      *            the action
      */
@@ -88,7 +89,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     /**
      * Gets the location, a string used to group actions with locations (top
      * bar, bottom bar, user bar...).
-     *
+     * 
      * @return the location
      */
     @Override
@@ -103,7 +104,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
     /**
      * Gets the position.
-     *
+     * 
      * @return the position
      */
     @Override
@@ -138,13 +139,14 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     }
 
     @Override
-    public boolean isChild() {
-        return !parent.equals(NO_PARENT);
+    public GuiActionDescrip in(final Class<? extends ActionPerspective> clazz) {
+        putValue(ActionPerspective.KEY, clazz);
+        return this;
     }
 
     @Override
-    public void in(Class<? extends ActionPerspective> clazz) {
-        putValue(ActionPerspective.KEY, clazz);
+    public boolean isChild() {
+        return !parent.equals(NO_PARENT);
     }
 
     @Override
@@ -182,7 +184,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
      * If we have several toolbars, we can group with the "location" string key
      * actions that must be in the same location (ex: top bar, bottom bar, and
      * so on).
-     *
+     * 
      * @param location
      *            the new location
      */
@@ -199,7 +201,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     /**
      * Sets the position (where the UI element will be positioned, for instance
      * in a toolbar or in a menu).
-     *
+     * 
      * @param position
      *            the new position
      */
@@ -246,6 +248,12 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     @Override
     public GuiActionDescrip withParent(final GuiActionDescrip parent) {
         setParent(parent);
+        return this;
+    }
+
+    @Override
+    public GuiActionDescrip withShortcut(final KeyStroke shortcut) {
+        putValue(Action.ACCELERATOR_KEY, shortcut);
         return this;
     }
 

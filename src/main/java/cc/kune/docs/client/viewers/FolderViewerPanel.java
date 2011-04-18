@@ -5,6 +5,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.docs.client.viewers.FolderViewerPresenter.FolderViewerView;
 import cc.kune.gspace.client.GSpaceArmor;
@@ -16,6 +17,8 @@ import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -31,8 +34,8 @@ public class FolderViewerPanel extends ViewImpl implements FolderViewerView {
 
     private final GSpaceArmor gsArmor;
 
-    int ICONLABELMAXSIZE = 10;
-    int ICONSIZE = 40;
+    int ICONLABELMAXSIZE = 20;
+    int ICONSIZE = 100;
     private final Widget widget;
 
     @Inject
@@ -54,12 +57,7 @@ public class FolderViewerPanel extends ViewImpl implements FolderViewerView {
 
     @Override
     public void attach() {
-        // Duplicate code in DocViewerPanel
         final ForIsWidget docContainer = gsArmor.getDocContainer();
-        final int widgetCount = docContainer.getWidgetCount();
-        for (int i = 0; i < widgetCount; i++) {
-            docContainer.remove(i);
-        }
         docContainer.add(widget);
     }
 
@@ -67,6 +65,8 @@ public class FolderViewerPanel extends ViewImpl implements FolderViewerView {
     public void clear() {
         flow.clear();
         gsArmor.getSubheaderToolbar().clear();
+        UiUtils.clear(gsArmor.getDocContainer());
+        UiUtils.clear(gsArmor.getDocHeader());
     }
 
     public BasicThumb createThumb(final String text, final Object icon, final String tooltip,
@@ -97,7 +97,6 @@ public class FolderViewerPanel extends ViewImpl implements FolderViewerView {
 
     @Override
     public void detach() {
-        widget.removeFromParent();
         clear();
     }
 
@@ -109,6 +108,8 @@ public class FolderViewerPanel extends ViewImpl implements FolderViewerView {
 
     @Override
     public void setContainer(final StateContainerDTO state) {
+        gsArmor.getDocContainer().add(new HTML("<b>Note:</b> This GUI is provisional<br/>"));
+        gsArmor.getDocHeader().add(new InlineLabel(state.getTitle()));
     }
 
 }

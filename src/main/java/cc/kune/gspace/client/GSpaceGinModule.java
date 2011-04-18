@@ -19,9 +19,13 @@
  */
 package cc.kune.gspace.client;
 
+import cc.kune.gspace.client.tags.TagsSummaryPanel;
+import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
+import cc.kune.gspace.client.ui.footer.license.EntityLicensePanel;
+import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
@@ -35,6 +39,12 @@ public class GSpaceGinModule extends AbstractPresenterModule {
      */
     @Override
     protected void configure() {
+        bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
+                EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
+        bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class, TagsSummaryPanel.class,
+                TagsSummaryPresenter.TagsSummaryProxy.class);
+        bind(GSpaceArmorImpl.class).in(Singleton.class);
+        bind(GSpaceArmor.class).to(GSpaceArmorImpl.class).in(Singleton.class);
         bind(GSpaceParts.class).asEagerSingleton();
         bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
                 ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);

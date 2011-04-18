@@ -215,7 +215,7 @@ private final EventBus eventBus;
           }
         };
     Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
-    SearchPresenter searchUi = SearchPresenter.create(search, searchPanel, selectHandler);
+    SearchPresenter.create(search, searchPanel, selectHandler);
   }
 
   private void setupWavePanel() {

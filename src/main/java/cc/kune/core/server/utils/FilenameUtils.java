@@ -30,13 +30,13 @@ public class FilenameUtils {
      * 
      * @param filename
      */
-    public static void checkBasicFilename(String filename) {
-        if (filename.length() == 0 || filename.equals(".") || filename.equals("..")) {
+    public static void checkBasicFilename(final String filename) {
+        if (filename == null || filename.length() == 0 || filename.equals(".") || filename.equals("..")) {
             throw new NameNotPermittedException();
         }
     }
 
-    public static String chomp(String filename) {
+    public static String chomp(final String filename) {
         return StringUtils.chomp(filename);
     }
 }

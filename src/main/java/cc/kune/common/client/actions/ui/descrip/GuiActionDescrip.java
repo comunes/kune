@@ -2,6 +2,7 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.gspace.client.actions.perspective.ActionPerspective;
 
@@ -48,7 +49,7 @@ public interface GuiActionDescrip {
 
     boolean hasTarget();
 
-    void in(Class<? extends ActionPerspective> clazz);
+    GuiActionDescrip in(Class<? extends ActionPerspective> clazz);
 
     boolean isChild();
 
@@ -83,6 +84,8 @@ public interface GuiActionDescrip {
     GuiActionDescrip withIconCls(String icon);
 
     GuiActionDescrip withParent(GuiActionDescrip parent);
+
+    GuiActionDescrip withShortcut(KeyStroke keystroke);
 
     GuiActionDescrip withStyles(String styles);
 

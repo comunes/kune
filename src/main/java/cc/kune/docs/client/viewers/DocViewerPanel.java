@@ -19,6 +19,7 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.docs.client.viewers.DocViewerPresenter.DocViewerView;
 import cc.kune.gspace.client.GSpaceArmor;
@@ -34,6 +35,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -49,6 +51,7 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
     private RemoteViewServiceMultiplexer channel;
     @UiField
     DeckPanel deck;
+    private final GSpaceArmor gsArmor;
     private IdGenerator idGenerator;
     private final Element loading = new LoadingIndicator().getElement();
     @UiField
@@ -63,11 +66,10 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
     ImplPanel waveHolder;
     private final WaveStore waveStore = new SimpleWaveStore();
     private final Widget widget;
-    private final GSpaceArmor wsArmor;
 
     @Inject
     public DocViewerPanel(final GSpaceArmor wsArmor, final WaveClientManager waveClientManager) {
-        this.wsArmor = wsArmor;
+        this.gsArmor = wsArmor;
         this.waveClientManager = waveClientManager;
         widget = uiBinder.createAndBindUi(this);
     }
@@ -79,17 +81,20 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
 
     @Override
     public void attach() {
-        final ForIsWidget docContainer = wsArmor.getDocContainer();
-        final int widgetCount = docContainer.getWidgetCount();
-        for (int i = 0; i < widgetCount; i++) {
-            docContainer.remove(i);
-        }
+        final ForIsWidget docContainer = gsArmor.getDocContainer();
         docContainer.add(widget);
+    }
+
+    public void clear() {
+        onlyViewPanel.setHTML("");
+        gsArmor.getSubheaderToolbar().clear();
+        UiUtils.clear(gsArmor.getDocContainer());
+        UiUtils.clear(gsArmor.getDocHeader());
     }
 
     @Override
     public void detach() {
-        widget.removeFromParent();
+        clear();
     }
 
     private WaveRef getWaveRef(final String waveRefS) {
@@ -114,12 +119,15 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
 
     @Override
     public void setActions(final GuiActionDescCollection actions) {
-        wsArmor.getSubheaderToolbar().clear();
-        wsArmor.getSubheaderToolbar().addAll(actions);
+        gsArmor.getSubheaderToolbar().clear();
+        gsArmor.getSubheaderToolbar().addAll(actions);
     }
 
     @Override
     public void setContent(final StateContentDTO state) {
+        final ForIsWidget docHeader = gsArmor.getDocHeader();
+        UiUtils.clear(docHeader);
+        docHeader.add(new InlineLabel(state.getTitle()));
         final boolean editable = state.getContentRights().isEditable();
         if (editable) {
             // initWaveClientIfNeeded();

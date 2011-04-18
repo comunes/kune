@@ -100,12 +100,6 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.GSpaceArmor;
-import cc.kune.gspace.client.GSpaceArmorImpl;
-import cc.kune.gspace.client.tags.TagsSummaryPanel;
-import cc.kune.gspace.client.tags.TagsSummaryPresenter;
-import cc.kune.gspace.client.ui.footer.license.EntityLicensePanel;
-import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
 import cc.kune.msgs.client.UserMessagesPanel;
 import cc.kune.msgs.client.UserMessagesPresenter;
 
@@ -155,8 +149,6 @@ public class CoreGinModule extends AbstractPresenterModule {
                 GroupSNPresenter.GroupSNProxy.class);
         bindPresenter(UserSNPresenter.class, UserSNPresenter.UserSNView.class, UserSNPanel.class,
                 UserSNPresenter.UserSNProxy.class);
-        bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
-                EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
         bindPresenter(EntityHeaderPresenter.class, EntityHeaderPresenter.EntityHeaderView.class,
                 EntityHeaderPanel.class, EntityHeaderPresenter.EntityHeaderProxy.class);
         bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class, SignInPresenter.SignInProxy.class);
@@ -164,8 +156,6 @@ public class CoreGinModule extends AbstractPresenterModule {
                 RegisterPresenter.RegisterProxy.class);
         bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class, UserConfirmPanel.class,
                 UserConfirmPresenter.UserConfirmProxy.class);
-        bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class, TagsSummaryPanel.class,
-                TagsSummaryPresenter.TagsSummaryProxy.class);
 
         bind(UserPassAutocompleteManager.class).to(UserPassAutocompleteManagerImpl.class).in(Singleton.class);
         bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
@@ -178,8 +168,6 @@ public class CoreGinModule extends AbstractPresenterModule {
         // bind(MessagePanelView.class).to(MessagePanel.class);
 
         // UI
-        s(GSpaceArmorImpl.class);
-        bind(GSpaceArmor.class).to(GSpaceArmorImpl.class).in(Singleton.class);
         bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
         s(GxtGuiProvider.class);
         s(GwtGuiProvider.class);

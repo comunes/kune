@@ -36,20 +36,23 @@ import com.google.inject.Provider;
 public class DocsClientActions extends AbstractFoldableContentActions {
 
     final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-
-    final String[] containers = { TYPE_ROOT, TYPE_FOLDER, };
+    final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
     final String[] containersNoRoot = { TYPE_FOLDER };
     final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WAVE };
     final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
 
-    private final Provider<DocsGoUpBtn> docsGoUp;
-
     @Inject
     public DocsClientActions(final I18nUITranslationService i18n, final Session session,
             final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-            final Provider<DocsGoUpBtn> docsGoUp) {
+            final Provider<FolderGoUpBtn> folderGoUp, final Provider<NewDocBtn> newDocBtn,
+            final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenContentBtn> openContentBtn) {
         super(session, stateManager, i18n, registry);
-        this.docsGoUp = docsGoUp;
+        actionsRegistry.addAction(folderGoUp, contents);
+        actionsRegistry.addAction(folderGoUp, containersNoRoot);
+        actionsRegistry.addAction(newDocBtn, containers);
+        actionsRegistry.addAction(newFolderBtn, containers);
+        actionsRegistry.addAction(openContentBtn, contents);
+        actionsRegistry.addAction(openContentBtn, containersNoRoot);
     }
 
     @Override
@@ -103,7 +106,5 @@ public class DocsClientActions extends AbstractFoldableContentActions {
     @Override
     protected void createPostSessionInitActions() {
         // super.createUploadMediaAction(TYPE_GALLERY);
-        actionsRegistry.addAction(docsGoUp, contents);
-        actionsRegistry.addAction(docsGoUp, containersNoRoot);
     }
 }

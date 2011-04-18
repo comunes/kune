@@ -10,6 +10,7 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.docs.client.DocsClientTool;
 import cc.kune.docs.client.actions.DocsClientActions;
+import cc.kune.gspace.client.actions.perspective.ViewPerspective;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 
@@ -31,6 +32,8 @@ public class DocViewerPresenter extends Presenter<DocViewerPresenter.DocViewerVi
     public interface DocViewerView extends View {
 
         void attach();
+
+        void clear();
 
         void detach();
 
@@ -69,10 +72,11 @@ public class DocViewerPresenter extends Presenter<DocViewerPresenter.DocViewerVi
 
     @Override
     public void setContent(@Nonnull final HasContent state) {
+        getView().clear();
         final StateContentDTO stateContent = (StateContentDTO) state;
         final AccessRights rights = stateContent.getContentRights();
         final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContent.getGroup(),
-                stateContent.getTypeId(), session.isLogged(), rights);
+                stateContent.getTypeId(), session.isLogged(), rights, ViewPerspective.class);
         getView().setActions(actions);
         getView().setContent(stateContent);
     }

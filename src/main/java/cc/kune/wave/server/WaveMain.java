@@ -114,7 +114,7 @@ public class WaveMain {
 
     ServerRpcProvider server = injector.getInstance(ServerRpcProvider.class);
     WaveBus waveBus = injector.getInstance(WaveBus.class);
-
+    
     String domain =
       injector.getInstance(Key.get(String.class, Names.named(CoreSettings.WAVE_SERVER_DOMAIN)));
     if (!ParticipantIdUtil.isDomainAddress(ParticipantIdUtil.makeDomainAddress(domain))) {
@@ -168,7 +168,7 @@ public class WaveMain {
     server.addServlet("/auth/register", injector.getInstance(UserRegistrationServlet.class));
 
     server.addServlet("/fetch/*", injector.getInstance(FetchServlet.class));
-
+    
     server.addServlet("/search/*", injector.getInstance(SearchServlet.class));
 
     server.addServlet("/robot/dataapi", injector.getInstance(DataApiServlet.class));
@@ -189,7 +189,7 @@ public class WaveMain {
             gadgetServerPath);
     ServletHolder proxyServletHolder = server.addServlet("/gadgets/*", proxyServlet);
     proxyServletHolder.setInitParameter("HostHeader", gadgetServerHostname);
-
+    
     server.addServlet("/webclient/remote_logging",
         injector.getInstance(RemoteLoggingServiceImpl.class));
     // server.addServlet("/", injector.getInstance(WaveClientServlet.class));
@@ -203,7 +203,7 @@ public class WaveMain {
   private static void initializeFrontend(Injector injector, ServerRpcProvider server,
       WaveBus waveBus, String waveDomain) throws WaveServerException {
     HashedVersionFactory hashFactory = injector.getInstance(HashedVersionFactory.class);
-
+   
     WaveletProvider provider = injector.getInstance(WaveletProvider.class);
     ClientFrontend frontend =
         ClientFrontendImpl.create(hashFactory, provider, waveBus, waveDomain);
