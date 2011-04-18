@@ -29,8 +29,6 @@ import cc.kune.core.client.registry.AclEditableRegistry;
 import cc.kune.core.client.registry.AuthorableRegistry;
 import cc.kune.core.client.registry.CanBeHomepageRegistry;
 import cc.kune.core.client.registry.ComentableRegistry;
-import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.registry.ContentIconsRegistry;
 import cc.kune.core.client.registry.DragableRegistry;
 import cc.kune.core.client.registry.DropableRegistry;
 import cc.kune.core.client.registry.EmailSubscribeAbleRegistry;
@@ -162,25 +160,33 @@ public class RegistryModule extends AbstractExtendedModule {
             }
         });
 
-        register(Singleton.class, new Factory<ContentIconsRegistry>(ContentIconsRegistry.class) {
-            @Override
-            public ContentIconsRegistry create() {
-                return new ContentIconsRegistry();
-            }
-        });
+        // register(Singleton.class, new
+        // Factory<IconsRegistry>(IconsRegistry.class) {
+        // @Override
+        // public IconsRegistry create() {
+        // return new IconsRegistry();
+        // }
+        // });
 
-        register(Singleton.class, new Factory<ContentCapabilitiesRegistry>(ContentCapabilitiesRegistry.class) {
-            @Override
-            public ContentCapabilitiesRegistry create() {
-                return new ContentCapabilitiesRegistry(i(AuthorableRegistry.class), i(AclEditableRegistry.class),
-                        i(ContentIconsRegistry.class), i(CanBeHomepageRegistry.class), i(ComentableRegistry.class),
-                        i(DragableRegistry.class), i(DropableRegistry.class), i(EmailSubscribeAbleRegistry.class),
-                        i(LicensableRegistry.class), i(PublishModerableRegistry.class), i(RateableRegistry.class),
-                        i(TageableRegistry.class), i(RenamableRegistry.class), i(TranslatableRegistry.class),
-                        i(VersionableRegistry.class), i(XmppComentableRegistry.class),
-                        i(XmppNotifyCapableRegistry.class));
-            }
-        });
+        // register(Singleton.class, new
+        // Factory<ContentCapabilitiesRegistry>(ContentCapabilitiesRegistry.class)
+        // {
+        // @Override
+        // public ContentCapabilitiesRegistry create() {
+        // return new ContentCapabilitiesRegistry(i(AuthorableRegistry.class),
+        // i(AclEditableRegistry.class),
+        // i(OldIconsRegistry.class), i(CanBeHomepageRegistry.class),
+        // i(ComentableRegistry.class),
+        // i(DragableRegistry.class), i(DropableRegistry.class),
+        // i(EmailSubscribeAbleRegistry.class),
+        // i(LicensableRegistry.class), i(PublishModerableRegistry.class),
+        // i(RateableRegistry.class),
+        // i(TageableRegistry.class), i(RenamableRegistry.class),
+        // i(TranslatableRegistry.class),
+        // i(VersionableRegistry.class), i(XmppComentableRegistry.class),
+        // i(XmppNotifyCapableRegistry.class));
+        // }
+        // });
 
         register(Singleton.class, new Factory<ContextActionRegistry>(ContextActionRegistry.class) {
             @Override

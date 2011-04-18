@@ -21,23 +21,26 @@ package cc.kune.docs.client;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.resources.nav.NavResources;
 import cc.kune.gspace.client.tool.old.FoldableAbstractClientTool;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
-public class DocumentClientTool extends FoldableAbstractClientTool {
+public class DocsClientTool extends FoldableAbstractClientTool {
     public static final String NAME = "docs";
     public static final String TYPE_DOCUMENT = NAME + "." + "doc";
     public static final String TYPE_FOLDER = NAME + "." + "folder";
     public static final String TYPE_ROOT = NAME + "." + "root";
     public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
     public static final String TYPE_WAVE = NAME + "." + FoldableAbstractClientTool.WAVE_SUFFIX;
+    private final NavResources navResources;
 
     @Inject
-    public DocumentClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
-            final ContentCapabilitiesRegistry cntCapRegistry) {
+    public DocsClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+            final ContentCapabilitiesRegistry cntCapRegistry, final NavResources navResources) {
         super(NAME, i18n.t("documents"), toolSelector, cntCapRegistry);
+        this.navResources = navResources;
 
         // registerAclEditableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
         registerAuthorableTypes(TYPE_DOCUMENT, TYPE_UPLOADEDFILE);
@@ -58,8 +61,9 @@ public class DocumentClientTool extends FoldableAbstractClientTool {
     }
 
     private void registerIcons() {
-        registerContentTypeIcon(TYPE_FOLDER, "images/nav/folder.png");
-        registerContentTypeIcon(TYPE_DOCUMENT, "images/nav/page.png");
+        registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
+        registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
+        registerContentTypeIcon(TYPE_WAVE, navResources.page());
         registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     }
 

@@ -2,7 +2,7 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -16,10 +16,10 @@ import com.google.inject.Inject;
 
 public class WaveClientSimpleAuthenticator {
 
-    private final WsArmor wsArmor;
+    private final GSpaceArmor wsArmor;
 
     @Inject
-    public WaveClientSimpleAuthenticator(final WsArmor wsArmor) {
+    public WaveClientSimpleAuthenticator(final GSpaceArmor wsArmor) {
         this.wsArmor = wsArmor;
     }
 

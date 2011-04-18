@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.pspace.client.PSpacePresenter.PSpaceView;
 
 import com.google.gwt.core.client.GWT;
@@ -65,7 +65,7 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
     private final Widget widget;
 
     @Inject
-    public PSpacePanel(final GuiProvider guiProvider, final CoreResources res, final WsArmor wsArmor) {
+    public PSpacePanel(final GuiProvider guiProvider, final CoreResources res, final GSpaceArmor wsArmor) {
         widget = uiBinder.createAndBindUi(this);
         actionPanel = new ActionFlowPanel(guiProvider);
         actionPanelContainer.add(actionPanel);

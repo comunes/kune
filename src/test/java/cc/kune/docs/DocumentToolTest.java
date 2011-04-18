@@ -23,16 +23,16 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import cc.kune.docs.client.DocumentClientTool;
+import cc.kune.docs.client.DocsClientTool;
 import cc.kune.docs.server.DocumentServerTool;
 
 public class DocumentToolTest {
 
     @Test
     public void clientAndServerSync() {
-        assertEquals(DocumentServerTool.NAME, DocumentClientTool.NAME);
-        assertEquals(DocumentServerTool.TYPE_ROOT, DocumentClientTool.TYPE_ROOT);
-        assertEquals(DocumentServerTool.TYPE_FOLDER, DocumentClientTool.TYPE_FOLDER);
-        assertEquals(DocumentServerTool.TYPE_DOCUMENT, DocumentClientTool.TYPE_DOCUMENT);
+        assertEquals(DocumentServerTool.NAME, DocsClientTool.NAME);
+        assertEquals(DocumentServerTool.TYPE_ROOT, DocsClientTool.TYPE_ROOT);
+        assertEquals(DocumentServerTool.TYPE_FOLDER, DocsClientTool.TYPE_FOLDER);
+        assertEquals(DocumentServerTool.TYPE_DOCUMENT, DocsClientTool.TYPE_DOCUMENT);
     }
 }

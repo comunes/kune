@@ -22,7 +22,7 @@ package cc.kune.core.client.sitebar.spaces;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.resources.WsArmorResources;
 
 import com.google.gwt.core.client.GWT;
@@ -51,7 +51,7 @@ public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView
     ToggleButton userButton;
 
     @Inject
-    public SpaceSelectorViewImpl(final WsArmor armor, final I18nTranslationService i18n, final WsArmorResources res) {
+    public SpaceSelectorViewImpl(final GSpaceArmor armor, final I18nTranslationService i18n, final WsArmorResources res) {
         armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
         Tooltip.to(homeButton, i18n.t("Your home page in this site"));
         Tooltip.to(userButton, i18n.t("User space: it shows a list of all your documents and contents "

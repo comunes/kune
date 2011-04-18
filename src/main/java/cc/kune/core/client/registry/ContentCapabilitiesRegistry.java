@@ -30,7 +30,7 @@ public class ContentCapabilitiesRegistry {
     private final DragableRegistry dragable;
     private final DropableRegistry dropable;
     private final EmailSubscribeAbleRegistry emailSubscribeAble;
-    private final ContentIconsRegistry iconsRegistry;
+    private final IconsRegistry iconsRegistry;
     private final LicensableRegistry licensable;
     private final PublishModerableRegistry publishModerable;
     private final RateableRegistry rateable;
@@ -43,7 +43,7 @@ public class ContentCapabilitiesRegistry {
 
     @Inject
     public ContentCapabilitiesRegistry(final AuthorableRegistry authorableRegistry,
-            final AclEditableRegistry aclEditableRegistry, final ContentIconsRegistry iconsRegistry,
+            final AclEditableRegistry aclEditableRegistry, final IconsRegistry iconsRegistry,
             final CanBeHomepageRegistry canBeHomepage, final ComentableRegistry comentable,
             final DragableRegistry dragable, final DropableRegistry dropable,
             final EmailSubscribeAbleRegistry emailSubscribeAble, final LicensableRegistry licensable,
@@ -102,7 +102,7 @@ public class ContentCapabilitiesRegistry {
         return emailSubscribeAble;
     }
 
-    public ContentIconsRegistry getIconsRegistry() {
+    public IconsRegistry getIconsRegistry() {
         return iconsRegistry;
     }
 

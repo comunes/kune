@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.title;
 
 import org.ourproject.kune.platf.client.View;
 
-import cc.kune.core.client.registry.ContentIconsRegistry;
+import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.client.registry.RenamableRegistry;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -35,20 +35,21 @@ import com.calclab.suco.client.events.Listener2;
 
 public class EntityTitlePresenter implements EntityTitle {
 
-    private EntityTitleView view;
-    private final Session session;
-    private final ContentIconsRegistry iconsRegistry;
+    private final IconsRegistry iconsRegistry;
     private final RenamableRegistry renamableContentRegistry;
     private final RenameAction renameAction;
+    private final Session session;
+    private EntityTitleView view;
 
     public EntityTitlePresenter(final StateManager stateManager, final Session session,
-            final ContentIconsRegistry iconsRegistry, RenamableRegistry renamableContentRegistry,
-            RenameAction renameAction) {
+            final IconsRegistry iconsRegistry, final RenamableRegistry renamableContentRegistry,
+            final RenameAction renameAction) {
         this.session = session;
         this.iconsRegistry = iconsRegistry;
         this.renamableContentRegistry = renamableContentRegistry;
         this.renameAction = renameAction;
         stateManager.onStateChanged(new Listener<StateAbstractDTO>() {
+            @Override
             public void onEvent(final StateAbstractDTO state) {
                 if (state instanceof StateContentDTO) {
                     setState((StateContentDTO) state);
@@ -63,6 +64,24 @@ public class EntityTitlePresenter implements EntityTitle {
         addRenameListeners();
     }
 
+    private void addRenameListeners() {
+        final Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
+            @Override
+            public void onEvent(final StateToken token, final String newName) {
+                view.setContentTitle(newName);
+            }
+        };
+        final Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
+            @Override
+            public void onEvent(final StateToken token, final String oldName) {
+                view.setContentTitle(oldName);
+            }
+        };
+        renameAction.onSuccess(onSuccess);
+        renameAction.onFail(onFail);
+    }
+
+    @Override
     public void edit() {
         view.edit();
     }
@@ -75,32 +94,18 @@ public class EntityTitlePresenter implements EntityTitle {
         this.view = view;
     }
 
-    /**
-     * Used renaming from context
-     */
-    public void setContentTitle(final String title) {
-        view.setContentTitle(title);
-        view.setContentTitleVisible(true);
-    }
-
     protected void onTitleRename(final String oldName, final String newName) {
         final StateToken token = session.getCurrentState().getStateToken();
         renameAction.rename(token, oldName, newName);
     }
 
-    private void addRenameListeners() {
-        Listener2<StateToken, String> onSuccess = new Listener2<StateToken, String>() {
-            public void onEvent(StateToken token, String newName) {
-                view.setContentTitle(newName);
-            }
-        };
-        Listener2<StateToken, String> onFail = new Listener2<StateToken, String>() {
-            public void onEvent(StateToken token, String oldName) {
-                view.setContentTitle(oldName);
-            }
-        };
-        renameAction.onSuccess(onSuccess);
-        renameAction.onFail(onFail);
+    /**
+     * Used renaming from context
+     */
+    @Override
+    public void setContentTitle(final String title) {
+        view.setContentTitle(title);
+        view.setContentTitleVisible(true);
     }
 
     private void setContentTitle(final String title, final boolean editable) {
@@ -119,17 +124,19 @@ public class EntityTitlePresenter implements EntityTitle {
     }
 
     private void setState(final StateContainerDTO state) {
-        setContentTitle(state.getTitle(), state.getContainerRights().isEditable()
-                && renamableContentRegistry.contains(state.getContainer().getTypeId()));
-        final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), null);
+        setContentTitle(
+                state.getTitle(),
+                state.getContainerRights().isEditable()
+                        && renamableContentRegistry.contains(state.getContainer().getTypeId()));
+        final String contentTypeIcon = (String) iconsRegistry.getContentTypeIcon(state.getTypeId(), null);
         setIcon(contentTypeIcon);
         view.setContentTitleVisible(true);
     }
 
     private void setState(final StateContentDTO state) {
-        setContentTitle(state.getTitle(), state.getContentRights().isEditable()
-                && renamableContentRegistry.contains(state.getTypeId()));
-        final String contentTypeIcon = iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
+        setContentTitle(state.getTitle(),
+                state.getContentRights().isEditable() && renamableContentRegistry.contains(state.getTypeId()));
+        final String contentTypeIcon = (String) iconsRegistry.getContentTypeIcon(state.getTypeId(), state.getMimeType());
         setIcon(contentTypeIcon);
         view.setContentTitleVisible(true);
     }

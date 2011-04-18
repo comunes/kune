@@ -49,7 +49,7 @@ import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsGinjector;
-import cc.kune.docs.client.DocumentGinModule;
+import cc.kune.docs.client.DocsGinModule;
 import cc.kune.gspace.client.GSpaceGinModule;
 import cc.kune.gspace.client.GSpaceGinjector;
 import cc.kune.pspace.client.PSpaceGinModule;
@@ -66,7 +66,7 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, ChatGinModule.class, WaveGinModule.class,
-        PSpaceGinModule.class, GSpaceGinModule.class, DocumentGinModule.class })
+        PSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class })
 public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector {
 
     /*

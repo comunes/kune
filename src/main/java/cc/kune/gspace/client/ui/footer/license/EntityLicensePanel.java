@@ -23,7 +23,7 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -41,7 +41,7 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     private final Tooltip tooltip;
 
     @Inject
-    public EntityLicensePanel(final I18nTranslationService i18n, final WsArmor armor) {
+    public EntityLicensePanel(final I18nTranslationService i18n, final GSpaceArmor armor) {
         this.i18n = i18n;
         licenseImage = new Image();
 

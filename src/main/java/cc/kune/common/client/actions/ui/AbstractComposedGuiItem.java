@@ -78,9 +78,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
             if (binding == null) {
                 throw new UIException("Unknown binding for: " + descrip);
             } else {
-                // Log.debug("Creating: " + descrip);
                 final AbstractGuiItem item = binding.create(descrip);
-                // Log.debug("Adding: " + descrip);
                 if (binding.shouldBeAdded()) {
                     if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
                         addWidget(item);
@@ -90,6 +88,11 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
                 }
             }
         }
+    }
+
+    @Override
+    public void clear() {
+        getGuiItems().clear();
     }
 
     public GuiActionDescCollection getGuiItems() {

@@ -1,6 +1,6 @@
 package cc.kune.gspace.client.tool.selector;
 
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView;
 
@@ -23,7 +23,7 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
     FlowPanel flow;
 
     @Inject
-    public ToolSelectorPanel(final WsArmor wsArmor) {
+    public ToolSelectorPanel(final GSpaceArmor wsArmor) {
         wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
     }
 

@@ -28,7 +28,7 @@ import cc.kune.common.client.shortcuts.DefaultGlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
-import cc.kune.core.client.actions.ActionRegistries;
+import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.auth.Register;
 import cc.kune.core.client.auth.RegisterPanel;
 import cc.kune.core.client.auth.RegisterPresenter;
@@ -57,6 +57,7 @@ import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sitebar.SitebarActions;
@@ -99,8 +100,8 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.WsArmor;
-import cc.kune.gspace.client.WsArmorImpl;
+import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.GSpaceArmorImpl;
 import cc.kune.gspace.client.tags.TagsSummaryPanel;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePanel;
@@ -174,12 +175,11 @@ public class CoreGinModule extends AbstractPresenterModule {
 
         s(UserMessagesPresenter.class);
         s(UserMessagesPanel.class);
-
         // bind(MessagePanelView.class).to(MessagePanel.class);
 
         // UI
-        s(WsArmorImpl.class);
-        bind(WsArmor.class).to(WsArmorImpl.class).in(Singleton.class);
+        s(GSpaceArmorImpl.class);
+        bind(GSpaceArmor.class).to(GSpaceArmorImpl.class).in(Singleton.class);
         bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
         s(GxtGuiProvider.class);
         s(GwtGuiProvider.class);
@@ -202,7 +202,8 @@ public class CoreGinModule extends AbstractPresenterModule {
         s(SiteTokens.class);
         s(ReservedWordsRegistry.class);
         eagle(TokenMatcher.class);
-        s(ActionRegistries.class);
+        s(ActionRegistryByType.class);
+        s(ContentCapabilitiesRegistry.class);
         eagle(CoreParts.class);
 
         // SN

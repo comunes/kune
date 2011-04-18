@@ -30,7 +30,7 @@ import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -53,7 +53,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
     @Inject
     public EntityHeaderPanel(final Provider<FileDownloadUtils> downloadProvider, final CoreResources images,
-            final GuiProvider bindings, final WsArmor armor) {
+            final GuiProvider bindings, final GSpaceArmor armor) {
         mainPanel = new HorizontalPanel();
         mainPanel.setWidth("100%");
         this.downloadProvider = downloadProvider;

@@ -23,12 +23,12 @@ import java.util.ArrayList;
 
 import com.google.inject.Provider;
 
-public class GuiActionDescProviderCollection extends ArrayList<Provider<GuiActionDescrip>> {
+public class GuiActionDescProviderCollection extends ArrayList<Provider<? extends GuiActionDescrip>> {
 
     private static final long serialVersionUID = -7933642706229301169L;
 
-    public void add(final Provider<GuiActionDescrip>... descriptors) {
-        for (final Provider<GuiActionDescrip> descriptor : descriptors) {
+    public void add(final Provider<? extends GuiActionDescrip>... descriptors) {
+        for (final Provider<? extends GuiActionDescrip> descriptor : descriptors) {
             super.add(descriptor);
         }
     }

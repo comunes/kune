@@ -8,7 +8,7 @@ import cc.kune.core.client.sn.UserSNPresenter.UserSNView;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
@@ -16,7 +16,7 @@ import com.google.inject.Inject;
 public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
     @Inject
-    public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final WsArmor armor) {
+    public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final GSpaceArmor armor) {
         super(i18n, guiProvider, armor);
         setVisible(false);
         mainTitle.setText(i18n.t("His/her network:"));

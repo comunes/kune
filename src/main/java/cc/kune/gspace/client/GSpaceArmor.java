@@ -19,10 +19,12 @@
  */
 package cc.kune.gspace.client;
 
+import cc.kune.common.client.actions.ui.IsActionExtensible;
+
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-public interface WsArmor {
+public interface GSpaceArmor {
 
     ForIsWidget getDocContainer();
 
@@ -42,9 +44,15 @@ public interface WsArmor {
 
     ForIsWidget getEntityToolsSouth();
 
+    IsActionExtensible getFooterToolbar();
+
+    IsActionExtensible getHeaderToolbar();
+
     SimplePanel getPublicSpace();
 
     ForIsWidget getSitebar();
+
+    IsActionExtensible getSubheaderToolbar();
 
     ForIsWidget getUserSpace();
 

@@ -11,7 +11,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -83,7 +83,7 @@ public class AbstractSNPanel extends ViewImpl {
     ScrollPanel trdCategoryScroll;
     protected final Widget widget;
 
-    public AbstractSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final WsArmor armor) {
+    public AbstractSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final GSpaceArmor armor) {
         widget = uiBinder.createAndBindUi(this);
         actions = new ActionSimplePanel(guiProvider);
     }

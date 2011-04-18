@@ -30,7 +30,7 @@ import org.ourproject.kune.workspace.client.upload.FileUploaderView;
 
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.docs.client.DocumentClientTool;
+import cc.kune.docs.client.DocsClientTool;
 
 public class FileUploaderPresenterTest {
 
@@ -53,7 +53,7 @@ public class FileUploaderPresenterTest {
         Mockito.when(session.getCurrentStateToken()).thenReturn(new StateToken("group.docs.1.1"));
         assertTrue(presenter.checkFolderChange());
         Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.docs.1",
-                DocumentClientTool.TYPE_UPLOADEDFILE);
+                DocsClientTool.TYPE_UPLOADEDFILE);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class FileUploaderPresenterTest {
         Mockito.when(session.getCurrentStateToken()).thenReturn(new StateToken("group.docs.1"));
         assertTrue(presenter.checkFolderChange());
         Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.docs.1",
-                DocumentClientTool.TYPE_UPLOADEDFILE);
+                DocsClientTool.TYPE_UPLOADEDFILE);
     }
 
     @Test
@@ -72,9 +72,9 @@ public class FileUploaderPresenterTest {
         Mockito.when(session.getCurrentStateToken()).thenReturn(new StateToken("group.docs.2"));
         assertTrue(presenter.checkFolderChange());
         Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.docs.1",
-                DocumentClientTool.TYPE_UPLOADEDFILE);
+                DocsClientTool.TYPE_UPLOADEDFILE);
         Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.docs.2",
-                DocumentClientTool.TYPE_UPLOADEDFILE);
+                DocsClientTool.TYPE_UPLOADEDFILE);
     }
 
     @Test
@@ -85,9 +85,9 @@ public class FileUploaderPresenterTest {
         Mockito.when(session.getCurrentStateToken()).thenReturn(new StateToken("group.docs.2"));
         assertFalse(presenter.checkFolderChange());
         Mockito.verify(view, Mockito.times(1)).setUploadParams(SOMEUSER_HASH, "group.docs.1",
-                DocumentClientTool.TYPE_UPLOADEDFILE);
+                DocsClientTool.TYPE_UPLOADEDFILE);
         Mockito.verify(view, Mockito.never()).setUploadParams(SOMEUSER_HASH, "group.docs.2",
-                DocumentClientTool.TYPE_UPLOADEDFILE);
+                DocsClientTool.TYPE_UPLOADEDFILE);
     }
 
     @Test
@@ -97,6 +97,6 @@ public class FileUploaderPresenterTest {
         Mockito.when(session.getCurrentStateToken()).thenReturn(new StateToken("group.docs.1"));
         assertTrue(presenter.checkFolderChange());
         Mockito.verify(view, Mockito.times(2)).setUploadParams(SOMEUSER_HASH, "group.docs.1",
-                DocumentClientTool.TYPE_UPLOADEDFILE);
+                DocsClientTool.TYPE_UPLOADEDFILE);
     }
 }

@@ -23,7 +23,7 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -37,7 +37,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
     private final ActionSimplePanel toolbarRight;
 
     @Inject
-    public SitebarActionsPanel(final WsArmor armor, final ActionSimplePanel toolbarRight,
+    public SitebarActionsPanel(final GSpaceArmor armor, final ActionSimplePanel toolbarRight,
             final ActionSimplePanel toolbarLeft, final I18nTranslationService i18n,
             final Provider<AboutKuneDialog> aboutPanel) {
         this.toolbarRight = toolbarRight;

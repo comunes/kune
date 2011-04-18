@@ -20,19 +20,27 @@
 package cc.kune.core.client.registry;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 
-public class ContentIconsRegistry {
-    private final HashMap<String, String> contentTypesIcons;
+public class IconsRegistry {
+    private final Map<String, Object> contentTypesIcons;
 
-    public ContentIconsRegistry() {
-        contentTypesIcons = new HashMap<String, String>();
+    public IconsRegistry() {
+        contentTypesIcons = new HashMap<String, Object>();
     }
 
-    public String getContentTypeIcon(final String typeId) {
-        final String icon = contentTypesIcons.get(typeId);
-        return icon == null ? "" : icon;
+    private String concatenate(final String typeId, final BasicMimeTypeDTO mimeType) {
+        if (mimeType != null) {
+            return typeId + "|" + mimeType;
+        } else {
+            return typeId;
+        }
+    }
+
+    public Object getContentTypeIcon(final String typeId) {
+        return contentTypesIcons.get(typeId);
     }
 
     /**
@@ -44,9 +52,9 @@ public class ContentIconsRegistry {
      * @param mimeType
      * @return
      */
-    public String getContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType) {
-        String icon = getContentTypeIcon(concatenate(typeId, mimeType));
-        if (icon.equals("")) {
+    public Object getContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType) {
+        Object icon = getContentTypeIcon(concatenate(typeId, mimeType));
+        if (icon == null) {
             if (mimeType == null) {
                 return getContentTypeIcon(typeId);
             }
@@ -57,22 +65,14 @@ public class ContentIconsRegistry {
         if (subtype != null && subtype.length() > 0) {
             icon = getContentTypeIcon(typeId, new BasicMimeTypeDTO(mimeType.getType()));
         }
-        return icon.equals("") ? getContentTypeIcon(typeId) : icon;
+        return icon == null ? getContentTypeIcon(typeId) : icon;
     }
 
-    public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType, final String iconUrl) {
-        registerContentTypeIcon(concatenate(typeId, mimeType), iconUrl);
+    public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType, final Object icon) {
+        registerContentTypeIcon(concatenate(typeId, mimeType), icon);
     }
 
-    public void registerContentTypeIcon(final String contentTypeId, final String iconUrl) {
-        contentTypesIcons.put(contentTypeId, iconUrl);
-    }
-
-    private String concatenate(final String typeId, final BasicMimeTypeDTO mimeType) {
-        if (mimeType != null) {
-            return typeId + "|" + mimeType;
-        } else {
-            return typeId;
-        }
+    public void registerContentTypeIcon(final String contentTypeId, final Object icon) {
+        contentTypesIcons.put(contentTypeId, icon);
     }
 }

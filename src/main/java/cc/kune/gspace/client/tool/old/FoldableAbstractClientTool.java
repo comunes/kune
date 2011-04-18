@@ -19,7 +19,6 @@
  */
 package cc.kune.gspace.client.tool.old;
 
-
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.gspace.client.tool.selector.ToolSelector;
@@ -52,8 +51,8 @@ public abstract class FoldableAbstractClientTool extends AbstractClientTool {
         contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(typeId, mimeType, iconUrl);
     }
 
-    public void registerContentTypeIcon(final String contentTypeId, final String iconUrl) {
-        contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(contentTypeId, iconUrl);
+    public void registerContentTypeIcon(final String contentTypeId, final Object icon) {
+        contentCapabilitiesRegistry.getIconsRegistry().registerContentTypeIcon(contentTypeId, icon);
     }
 
     protected void registerDragableTypes(final String... typeIds) {

@@ -41,8 +41,14 @@ public class GwtSimpleGuiItem extends AbstractComposedGuiItem {
     }
 
     @Override
+    public void clear() {
+        super.clear();
+        bar.clear();
+    }
+
+    @Override
     protected void insertWidget(final AbstractGuiItem item, final int position) {
-        int count = bar.getWidgetCount();
+        final int count = bar.getWidgetCount();
         bar.insert(item, count < position ? count : position);
     }
 

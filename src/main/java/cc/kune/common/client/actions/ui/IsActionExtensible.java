@@ -35,17 +35,19 @@ public interface IsActionExtensible {
     /**
      * Adds some action descriptions
      * 
+     * @param action
+     *            the action
+     */
+    void add(GuiActionDescrip... actions);
+
+    /**
+     * Adds some action descriptions
+     * 
      * @param actions
      *            the actions
      */
     void addAll(GuiActionDescCollection actions);
 
-    /**
-     * Adds some action descriptions
-     * 
-     * @param action
-     *            the action
-     */
-    void add(GuiActionDescrip... actions);
+    void clear();
 
 }

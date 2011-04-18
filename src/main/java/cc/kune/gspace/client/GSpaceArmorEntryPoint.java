@@ -27,14 +27,14 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 @Deprecated
-public class WsArmorEntryPoint implements EntryPoint {
+public class GSpaceArmorEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
         final WsArmorResources resources = GWT.create(WsArmorResources.class);
         resources.style().ensureInjected();
 
         final RootLayoutPanel rootPanel = RootLayoutPanel.get();
-        final WsArmorImpl armor = new WsArmorImpl();
+        final GSpaceArmorImpl armor = new GSpaceArmorImpl(null);
         final InlineLabel icons = new InlineLabel("Icons");
         final InlineLabel login = new InlineLabel("Login");
         final InlineLabel logo = new InlineLabel("Logo");
@@ -55,7 +55,6 @@ public class WsArmorEntryPoint implements EntryPoint {
         armor.getDocFooter().add(new InlineLabel("Tags:"));
         armor.getEntityFooter().add(new InlineLabel("Rate it:"));
         rootPanel.add(armor);
-
     }
 
 }

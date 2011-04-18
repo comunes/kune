@@ -31,11 +31,11 @@ public class ActionRegistryByType {
         collection.add(descrip);
     }
 
-    public void addAction(final Provider<GuiActionDescrip> action) {
+    public void addAction(final Provider<? extends GuiActionDescrip> action) {
         addAction(action, GENERIC);
     }
 
-    public void addAction(final Provider<GuiActionDescrip> action, final String... typeIds) {
+    public void addAction(final Provider<? extends GuiActionDescrip> action, final String... typeIds) {
         assert action != null;
         for (final String typeId : typeIds) {
             final GuiActionDescProviderCollection actionColl = getActions(typeId);
@@ -70,7 +70,7 @@ public class ActionRegistryByType {
     public GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
             final boolean isLogged, final AccessRights rights, @Nullable final Class<?> clazz) {
         final GuiActionDescCollection collection = new GuiActionDescCollection();
-        for (final Provider<GuiActionDescrip> descripProv : getActions(typeId)) {
+        for (final Provider<? extends GuiActionDescrip> descripProv : getActions(typeId)) {
             final GuiActionDescrip descrip = descripProv.get();
             final AbstractAction action = descrip.getAction();
             final Object perspective = descrip.getValue(ActionPerspective.KEY);

@@ -26,7 +26,7 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -66,7 +66,7 @@ public class SpaceSelectorPresenter extends
         void setUserBtnDown(boolean down);
     }
 
-    private final WsArmor armor;
+    private final GSpaceArmor armor;
     private Space currentSpace;
     private String groupToken;
     private String homeToken;
@@ -77,7 +77,7 @@ public class SpaceSelectorPresenter extends
 
     @Inject
     public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
-            final SpaceSelectorView view, final SpaceSelectorProxy proxy, final WsArmor armor, final Session session) {
+            final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor, final Session session) {
         super(eventBus, view, proxy);
         this.stateManager = stateManager;
         this.armor = armor;

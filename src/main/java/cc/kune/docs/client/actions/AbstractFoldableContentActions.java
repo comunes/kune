@@ -17,8 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.docs.client;
+package cc.kune.docs.client.actions;
 
+import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
@@ -29,15 +30,17 @@ public abstract class AbstractFoldableContentActions {
 
     private static final String PUBLICATION_MENU = "Publication";
 
+    protected final ActionRegistryByType actionsRegistry;
     protected final I18nUITranslationService i18n;
     protected final Session session;
     protected final StateManager stateManager;
 
     public AbstractFoldableContentActions(final Session session, final StateManager stateManager,
-            final I18nUITranslationService i18n) {
+            final I18nUITranslationService i18n, final ActionRegistryByType actionsRegistry) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;
+        this.actionsRegistry = actionsRegistry;
         createActions();
         session.onAppStart(true, new AppStartHandler() {
             @Override

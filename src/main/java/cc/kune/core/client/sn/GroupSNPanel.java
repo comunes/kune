@@ -8,14 +8,14 @@ import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.core.client.sn.GroupSNPresenter.GroupSNView;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.inject.Inject;
 
 public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
     @Inject
-    public GroupSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final WsArmor armor) {
+    public GroupSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final GSpaceArmor armor) {
         super(i18n, guiProvider, armor);
         setVisible(false);
         mainTitle.setText(i18n.t("Group members"));

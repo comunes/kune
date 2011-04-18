@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
@@ -57,22 +57,24 @@ public class ContentViewerSelector {
         });
     }
 
-    public void register(final String typeId, final ContentViewer view) {
-        Log.info("Registered " + typeId + " with class " + ContentViewer.class);
-        register(typeId, view, false);
+    public void register(@Nonnull final ContentViewer view, final boolean isDefault, @Nonnull final String... typeIds) {
+        for (final String typeId : typeIds) {
+            List<ContentViewer> list = viewsRegister.get(typeId);
+            if (list == null) {
+                list = new ArrayList<ContentViewer>();
+            }
+            if (!list.contains(view)) {
+                list.add(view);
+            }
+            if (isDefault) {
+                defViewsRegister.put(typeId, view);
+            }
+        }
     }
 
-    public void register(@Nonnull final String typeId, @Nonnull final ContentViewer view, final boolean isDefault) {
-        List<ContentViewer> list = viewsRegister.get(typeId);
-        if (list == null) {
-            list = new ArrayList<ContentViewer>();
-        }
-        if (!list.contains(view)) {
-            list.add(view);
-        }
-        if (isDefault) {
-            defViewsRegister.put(typeId, view);
-        }
+    public void register(final String typeId, final ContentViewer view) {
+        Log.info("Registered " + typeId + " with class " + ContentViewer.class);
+        register(view, false, typeId);
     }
 
     private void setContent(final ContentViewer view, final HasContent state) {
@@ -89,7 +91,7 @@ public class ContentViewerSelector {
             if (viewsList != null && !viewsList.isEmpty()) {
                 setContent(viewsList.get(0), state);
             } else {
-                throw new UIException("Unsupported typeId: " + typeId);
+                NotifyUser.error("Unsupported typeId: " + typeId);
             }
         } else {
             setContent(defView, state);

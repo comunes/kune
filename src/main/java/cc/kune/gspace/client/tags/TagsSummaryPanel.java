@@ -20,7 +20,7 @@
 package cc.kune.gspace.client.tags;
 
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView;
 
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -37,7 +37,7 @@ public class TagsSummaryPanel extends ViewImpl implements TagsSummaryView {
     private FlowPanel mainPanel;
 
     @Inject
-    public TagsSummaryPanel(final I18nTranslationService i18n, final WsArmor ws) {
+    public TagsSummaryPanel(final I18nTranslationService i18n, final GSpaceArmor ws) {
         this.i18n = i18n;
         mainPanel = new FlowPanel();
         flowPanel = new FlowPanel();

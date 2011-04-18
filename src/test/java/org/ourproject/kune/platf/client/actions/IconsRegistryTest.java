@@ -24,21 +24,21 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.core.client.registry.ContentIconsRegistry;
+import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 
-public class ContentIconsRegistryTest {
+public class IconsRegistryTest {
 
     private static final String CONTENT_TYPE_TEST = "somecontenttype";
     private static final String ICON = "someicon";
-    private static final String OTHERICON = "othericon";
     private static final String JUSTANOTHERICON = "justanothericon";
+    private static final String OTHERICON = "othericon";
 
-    private ContentIconsRegistry reg;
+    private IconsRegistry reg;
 
     @Before
     public void before() {
-        reg = new ContentIconsRegistry();
+        reg = new IconsRegistry();
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ContentIconsRegistryTest {
         final BasicMimeTypeDTO mimeType = new BasicMimeTypeDTO("image/png");
         reg.registerContentTypeIcon(CONTENT_TYPE_TEST, mimeType, ICON);
         assertEquals(ICON, reg.getContentTypeIcon(CONTENT_TYPE_TEST, mimeType));
-        assertEquals("", reg.getContentTypeIcon(CONTENT_TYPE_TEST));
+        assertEquals(null, reg.getContentTypeIcon(CONTENT_TYPE_TEST));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ContentIconsRegistryTest {
     @Test
     public void testNoResult() {
         reg.registerContentTypeIcon(CONTENT_TYPE_TEST, new BasicMimeTypeDTO("text", "plain"), ICON);
-        assertEquals("", reg.getContentTypeIcon(CONTENT_TYPE_TEST, new BasicMimeTypeDTO("text", "rtf")));
+        assertEquals(null, reg.getContentTypeIcon(CONTENT_TYPE_TEST, new BasicMimeTypeDTO("text", "rtf")));
     }
 
     @Test

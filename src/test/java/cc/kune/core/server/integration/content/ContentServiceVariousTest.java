@@ -41,7 +41,7 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
-import cc.kune.docs.client.DocumentClientTool;
+import cc.kune.docs.client.DocsClientTool;
 import cc.kune.docs.server.DocumentServerTool;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
@@ -102,7 +102,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final String oldTitle = "some title";
         String newTitle = "folder new name";
         final StateContainerDTO newState = contentService.addFolder(session.getHash(), defaultContent.getStateToken(),
-                oldTitle, DocumentClientTool.TYPE_FOLDER);
+                oldTitle, DocsClientTool.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 
@@ -207,7 +207,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final String oldTitle = "some title";
         String newTitle = "folder new name";
         final StateContainerDTO newState = contentService.addFolder(session.getHash(), folder.getStateToken(),
-                oldTitle, DocumentClientTool.TYPE_FOLDER);
+                oldTitle, DocsClientTool.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 

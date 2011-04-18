@@ -19,6 +19,9 @@
  */
 package cc.kune.gspace.client;
 
+import cc.kune.common.client.actions.ui.ActionFlowPanel;
+import cc.kune.common.client.actions.ui.IsActionExtensible;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -34,10 +37,12 @@ import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
-public class WsArmorImpl extends Composite implements WsArmor {
+public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
 
-    interface WsArmorImplUiBinder extends UiBinder<Widget, WsArmorImpl> {
+    interface WsArmorImplUiBinder extends UiBinder<Widget, GSpaceArmorImpl> {
     }
 
     private static WsArmorImplUiBinder uiBinder = GWT.create(WsArmorImplUiBinder.class);
@@ -60,8 +65,10 @@ public class WsArmorImpl extends Composite implements WsArmor {
     VerticalPanel entityToolsNorth;
     @UiField
     VerticalPanel entityToolsSouth;
+    private final ActionFlowPanel footerToolbar;
     @UiField
     SplitLayoutPanel groupSpace;
+    private final ActionFlowPanel headerToolbar;
     @UiField
     SimplePanel homeSpace;
     @UiField
@@ -74,27 +81,26 @@ public class WsArmorImpl extends Composite implements WsArmor {
     DockLayoutPanel splitCenter;
     @UiField
     DockLayoutPanel splitEast;
+    private final ActionFlowPanel subheaderToolbar;
     @UiField
     TabLayoutPanel tabs;
     @UiField
     FlowPanel userSpace;
 
-    public WsArmorImpl() {
+    @Inject
+    public GSpaceArmorImpl(final Provider<ActionFlowPanel> toolbarProv) {
         initWidget(uiBinder.createAndBindUi(this));
         groupSpace.setWidgetMinSize(splitEast, 150);
         tabs.setStyleName("k-spaces");
         homeSpace.add(RootPanel.get("k-home-wrapper"));
-        // mainpanel.getWidgetContainerElement(splitEast).setAttribute("overflow",
-        // "visible");
-        // splitEast.getWidgetContainerElement(entityToolsCenter).setPropertyString("overflow",
-        // "visible !important");
-        // entityToolsCenter.getParent().setStyleName("k-nooverflow");
-        // groupSpace.getWidgetContainerElement(splitEast).setPropertyString("overflow",
-        // "visible !important");
-
         DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow", "visible");
         DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsCenter), "overflow", "visible");
-
+        footerToolbar = toolbarProv.get();
+        headerToolbar = toolbarProv.get();
+        subheaderToolbar = toolbarProv.get();
+        getDocHeader().add(headerToolbar);
+        getDocSubheader().add(subheaderToolbar);
+        getDocFooter().add(footerToolbar);
     }
 
     @Override
@@ -143,6 +149,16 @@ public class WsArmorImpl extends Composite implements WsArmor {
     }
 
     @Override
+    public IsActionExtensible getFooterToolbar() {
+        return footerToolbar;
+    }
+
+    @Override
+    public IsActionExtensible getHeaderToolbar() {
+        return headerToolbar;
+    }
+
+    @Override
     public SimplePanel getPublicSpace() {
         return publicSpace;
     }
@@ -150,6 +166,11 @@ public class WsArmorImpl extends Composite implements WsArmor {
     @Override
     public ForIsWidget getSitebar() {
         return sitebar;
+    }
+
+    @Override
+    public IsActionExtensible getSubheaderToolbar() {
+        return subheaderToolbar;
     }
 
     @Override

@@ -19,7 +19,7 @@
  */
 package cc.kune.core.client.cnt;
 
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -28,7 +28,7 @@ public abstract class AbstractContentPanel {
     private Widget widget;
     private final ForIsWidget ws;
 
-    public AbstractContentPanel(final WsArmor ws) {
+    public AbstractContentPanel(final GSpaceArmor ws) {
         this.ws = ws.getDocContainer();
     }
 

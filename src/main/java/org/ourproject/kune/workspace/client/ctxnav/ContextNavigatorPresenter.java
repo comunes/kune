@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.ctxnav;
 
-import static cc.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
+import static cc.kune.docs.client.DocsClientTool.TYPE_FOLDER;
 
 import java.util.HashMap;
 
@@ -33,7 +33,7 @@ import org.ourproject.kune.workspace.client.title.RenameAction;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.registry.ContentIconsRegistry;
+import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.state.Session;
@@ -58,23 +58,23 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class ContextNavigatorPresenter implements ContextNavigator {
 
-    private ContextNavigatorView view;
-    private final StateManager stateManager;
-    private final Session session;
-    private final I18nTranslationService i18n;
-    private final HashMap<StateToken, ActionItemCollection<StateToken>> actionsByItem;
-    private boolean editOnNextStateChange;
-    private final ContentIconsRegistry contentIconsRegistry;
     private final ActionRegistry<StateToken> actionRegistry;
-    private final ActionToolbar<StateToken> topToolbar;
-    private final Provider<FileDownloadUtils> downloadUtilsProvider;
-    private final boolean useGenericImageIcon;
-    private final ContentCapabilitiesRegistry capabilitiesRegistry;
-    private final RenameAction renameAction;
+    private final HashMap<StateToken, ActionItemCollection<StateToken>> actionsByItem;
     private final ActionContextBottomToolbar bottomToolbar;
+    private final ContentCapabilitiesRegistry capabilitiesRegistry;
+    private final IconsRegistry contentIconsRegistry;
+    private final Provider<FileDownloadUtils> downloadUtilsProvider;
+    private boolean editOnNextStateChange;
+    private final I18nTranslationService i18n;
+    private final RenameAction renameAction;
+    private final Session session;
+    private final StateManager stateManager;
+    private final ActionToolbar<StateToken> topToolbar;
+    private final boolean useGenericImageIcon;
+    private ContextNavigatorView view;
 
     public ContextNavigatorPresenter(final StateManager stateManager, final Session session,
-            final I18nTranslationService i18n, final ContentIconsRegistry contentIconsRegistry,
+            final I18nTranslationService i18n, final IconsRegistry contentIconsRegistry,
             final ContentCapabilitiesRegistry capabilitiesRegistry, final ActionToolbar<StateToken> toolbar,
             final ActionContextBottomToolbar bottomToolbar, final ActionRegistry<StateToken> actionRegistry,
             final Provider<FileDownloadUtils> downloadUtilsProvider, final boolean useGenericImageIcon,
@@ -105,87 +105,6 @@ public class ContextNavigatorPresenter implements ContextNavigator {
                 }
             }
         });
-    }
-
-    @Override
-    public void attach() {
-        // FIXME At the moment detach (removeFromParent) destroy the gwt-ext
-        // TreePanel and the widget must be recreated (cannot be attached again
-        // like in gwt)
-        topToolbar.attach();
-        bottomToolbar.attach();
-    }
-
-    @Override
-    public void clear() {
-        topToolbar.clear();
-        bottomToolbar.clear();
-        view.clear();
-        actionsByItem.clear();
-    }
-
-    @Override
-    public void detach() {
-        view.detach();
-        topToolbar.detach();
-        bottomToolbar.detach();
-    }
-
-    @Override
-    public void editItem(final StateToken stateToken) {
-        view.editItem(genId(stateToken));
-    }
-
-    public void init(final ContextNavigatorView view) {
-        this.view = view;
-        addListeners();
-    }
-
-    @Override
-    public boolean isSelected(final StateToken stateToken) {
-        return view.isSelected(genId(stateToken));
-    }
-
-    @Override
-    public void refreshState() {
-        final StateAbstractDTO currentState = session.getCurrentState();
-        if (currentState instanceof StateContainerDTO) {
-            setState((StateContainerDTO) currentState, true);
-        }
-    }
-
-    @Override
-    public void selectItem(final StateToken stateToken) {
-        view.selectItem(genId(stateToken));
-        topToolbar.disableMenusAndClearButtons();
-        bottomToolbar.disableMenusAndClearButtons();
-        final ActionItemCollection<StateToken> itemCollection = actionsByItem.get(stateToken);
-        topToolbar.addActions(itemCollection, OldAbstractFoldableContentActions.CONTEXT_TOPBAR);
-        bottomToolbar.addActions(itemCollection, OldAbstractFoldableContentActions.CONTEXT_BOTTOMBAR);
-    }
-
-    @Override
-    public void setEditOnNextStateChange(final boolean edit) {
-        editOnNextStateChange = edit;
-    }
-
-    @Override
-    public void setItemStatus(final StateToken stateToken, final ContentStatus status) {
-        clear();
-        refreshState();
-    }
-
-    @Override
-    public void setState(final StateContainerDTO state, final boolean select) {
-        setStateContainer(state, select);
-    }
-
-    protected void gotoToken(final String token) {
-        stateManager.gotoHistoryToken(token);
-    }
-
-    protected void onItemRename(final String token, final String newName, final String oldName) {
-        renameAction.rename(new StateToken(token), oldName, newName);
     }
 
     private ActionItemCollection<StateToken> addItem(final String title, final String contentTypeId,
@@ -241,6 +160,23 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         renameAction.onFail(onFail);
     }
 
+    @Override
+    public void attach() {
+        // FIXME At the moment detach (removeFromParent) destroy the gwt-ext
+        // TreePanel and the widget must be recreated (cannot be attached again
+        // like in gwt)
+        topToolbar.attach();
+        bottomToolbar.attach();
+    }
+
+    @Override
+    public void clear() {
+        topToolbar.clear();
+        bottomToolbar.clear();
+        view.clear();
+        actionsByItem.clear();
+    }
+
     private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
         for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
             addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatus.publishedOnline,
@@ -269,6 +205,18 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         }
     }
 
+    @Override
+    public void detach() {
+        view.detach();
+        topToolbar.detach();
+        bottomToolbar.detach();
+    }
+
+    @Override
+    public void editItem(final StateToken stateToken) {
+        view.editItem(genId(stateToken));
+    }
+
     private String genId(final StateToken token) {
         return "k-cnav-" + token.toString().replace(StateToken.SEPARATOR, "-");
     }
@@ -279,7 +227,7 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         } else if (!useGenericImageIcon && mimeType != null && mimeType.getType().equals("image")) {
             return downloadUtilsProvider.get().getImageResizedUrl(token, ImageSize.ico);
         } else {
-            return contentIconsRegistry.getContentTypeIcon(contentTypeId, mimeType);
+            return (String) contentIconsRegistry.getContentTypeIcon(contentTypeId, mimeType);
         }
     }
 
@@ -290,6 +238,42 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         } else {
             return null;
         }
+    }
+
+    protected void gotoToken(final String token) {
+        stateManager.gotoHistoryToken(token);
+    }
+
+    public void init(final ContextNavigatorView view) {
+        this.view = view;
+        addListeners();
+    }
+
+    @Override
+    public boolean isSelected(final StateToken stateToken) {
+        return view.isSelected(genId(stateToken));
+    }
+
+    protected void onItemRename(final String token, final String newName, final String oldName) {
+        renameAction.rename(new StateToken(token), oldName, newName);
+    }
+
+    @Override
+    public void refreshState() {
+        final StateAbstractDTO currentState = session.getCurrentState();
+        if (currentState instanceof StateContainerDTO) {
+            setState((StateContainerDTO) currentState, true);
+        }
+    }
+
+    @Override
+    public void selectItem(final StateToken stateToken) {
+        view.selectItem(genId(stateToken));
+        topToolbar.disableMenusAndClearButtons();
+        bottomToolbar.disableMenusAndClearButtons();
+        final ActionItemCollection<StateToken> itemCollection = actionsByItem.get(stateToken);
+        topToolbar.addActions(itemCollection, OldAbstractFoldableContentActions.CONTEXT_TOPBAR);
+        bottomToolbar.addActions(itemCollection, OldAbstractFoldableContentActions.CONTEXT_BOTTOMBAR);
     }
 
     private void selectOrEditNode(final boolean select, final StateToken stateToken) {
@@ -306,10 +290,26 @@ public class ContextNavigatorPresenter implements ContextNavigator {
         }
     }
 
+    @Override
+    public void setEditOnNextStateChange(final boolean edit) {
+        editOnNextStateChange = edit;
+    }
+
+    @Override
+    public void setItemStatus(final StateToken stateToken, final ContentStatus status) {
+        clear();
+        refreshState();
+    }
+
     private void setItemText(final StateToken stateToken, final String name) {
         if (view.isAttached()) {
             view.setItemText(genId(stateToken), name);
         }
+    }
+
+    @Override
+    public void setState(final StateContainerDTO state, final boolean select) {
+        setStateContainer(state, select);
     }
 
     private void setStateContainer(final StateContainerDTO state, final boolean select) {

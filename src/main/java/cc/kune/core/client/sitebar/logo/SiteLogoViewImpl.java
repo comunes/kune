@@ -20,7 +20,7 @@
 package cc.kune.core.client.sitebar.logo;
 
 import cc.kune.core.client.sitebar.logo.SiteLogoPresenter.SiteLogoView;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -43,7 +43,7 @@ public class SiteLogoViewImpl extends ViewWithUiHandlers<SiteLogoUiHandlers> imp
     Image logo;
 
     @Inject
-    public SiteLogoViewImpl(final WsArmor armor) {
+    public SiteLogoViewImpl(final GSpaceArmor armor) {
         armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
     }
 

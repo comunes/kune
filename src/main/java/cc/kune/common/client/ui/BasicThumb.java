@@ -19,14 +19,17 @@
  */
 package cc.kune.common.client.ui;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.utils.TextUtils;
 
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -41,25 +44,44 @@ public class BasicThumb extends Composite {
     private final Label label;
     private boolean onOverLabel;
 
-    public BasicThumb(final String imageUrl, final int imgSize, final String text, final int textMaxLenght,
+    public BasicThumb(final Object imageRef, final int imgSize, final String text, final int textMaxLenght,
             final boolean crop) {
-        this(imageUrl, imgSize, text, textMaxLenght, crop, null);
+        this(imageRef, imgSize, text, textMaxLenght, crop, null);
     }
 
-    public BasicThumb(final String imageUrl, final int imgSize, final String text, final int textMaxLenght,
+    /**
+     * 
+     * @param imageRef
+     *            This can be a ImageResource or a String Url
+     * @param imgSize
+     * @param text
+     * @param textMaxLenght
+     * @param crop
+     * @param clickHandler
+     */
+    public BasicThumb(final Object imageRef, final int imgSize, final String text, final int textMaxLenght,
             final boolean crop, final ClickHandler clickHandler) {
         super();
         onOverLabel = false;
         final VerticalPanel vpanel = new VerticalPanel();
-        if (imgSize == NOSIZE) {
-            image = new Image(imageUrl);
-        } else {
-            if (crop) {
-                image = new Image(imageUrl, 0, 0, imgSize, imgSize);
-            } else {
+        if (imageRef instanceof String) {
+            final String imageUrl = (String) imageRef;
+            if (imgSize == NOSIZE) {
                 image = new Image(imageUrl);
-                image.setPixelSize(imgSize, imgSize);
+            } else {
+                if (crop) {
+                    image = new Image(imageUrl, 0, 0, imgSize, imgSize);
+                } else {
+                    image = new Image(imageUrl);
+                    image.setPixelSize(imgSize, imgSize);
+                }
             }
+        } else if (imageRef instanceof ImageResource) {
+            image = new Image((ImageResource) imageRef);
+        } else {
+            // This should not happen
+            image = new Image();
+            Log.info("Unrecognized icon of BasicThumb: " + imageRef);
         }
         final String title = textMaxLenght == NOSIZE ? text : TextUtils.ellipsis(text, textMaxLenght);
         label = new Label(title);
@@ -94,12 +116,12 @@ public class BasicThumb extends Composite {
         initWidget(vpanel);
     }
 
-    public BasicThumb(final String imageUrl, final String thumText, final ClickHandler clickHandler) {
-        this(imageUrl, NOSIZE, thumText, NOSIZE, false, clickHandler);
+    public BasicThumb(final Object imageRef, final String thumText, final ClickHandler clickHandler) {
+        this(imageRef, NOSIZE, thumText, NOSIZE, false, clickHandler);
     }
 
-    public BasicThumb(final String imageUrl, final String text, final int textMaxLenght, final ClickHandler clickHandler) {
-        this(imageUrl, NOSIZE, text, textMaxLenght, false, clickHandler);
+    public BasicThumb(final Object imageRef, final String text, final int textMaxLenght, final ClickHandler clickHandler) {
+        this(imageRef, NOSIZE, text, textMaxLenght, false, clickHandler);
     }
 
     public void addClickHandler(final ClickHandler clickHandler) {
@@ -109,6 +131,15 @@ public class BasicThumb extends Composite {
     private void addClickHandlerImpl(final ClickHandler clickHandler) {
         label.addClickHandler(clickHandler);
         image.addClickHandler(clickHandler);
+    }
+
+    public void addDoubleClickHandler(final DoubleClickHandler clickHandler) {
+        addDoubleClickHandlerImpl(clickHandler);
+    }
+
+    private void addDoubleClickHandlerImpl(final DoubleClickHandler clickHandler) {
+        label.addDoubleClickHandler(clickHandler);
+        image.addDoubleClickHandler(clickHandler);
     }
 
     public void setLabelVisible(final boolean visible) {
@@ -128,11 +159,8 @@ public class BasicThumb extends Composite {
     }
 
     public void setTooltip(final String tip) {
-        // DOM.setElementAttribute(thumbImg.getElement(), "qtip", tip);
-        image.setTitle(tip);
-        label.setTitle(tip);
-        // KuneUiUtils.setQuickTip(thumbImg, tip);
-        // KuneUiUtils.setQuickTip(thumbLabel, tip);
+        Tooltip.to(image, tip);
+        Tooltip.to(label, tip);
     }
 
     public void setTooltip(final String tipTitle, final String tip) {

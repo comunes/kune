@@ -1,4 +1,4 @@
-package cc.kune.docs.client;
+package cc.kune.docs.client.viewers;
 
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
@@ -20,8 +20,8 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.docs.client.DocsViewerPresenter.DocsViewerView;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.docs.client.viewers.DocViewerPresenter.DocViewerView;
+import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.wave.client.WaveClientManager;
 import cc.kune.wave.client.WebClient;
 
@@ -40,8 +40,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-public class DocsViewerPanel extends ViewImpl implements DocsViewerView {
-    interface DocsViewerPanelUiBinder extends UiBinder<Widget, DocsViewerPanel> {
+public class DocViewerPanel extends ViewImpl implements DocViewerView {
+    interface DocsViewerPanelUiBinder extends UiBinder<Widget, DocViewerPanel> {
     }
 
     private static DocsViewerPanelUiBinder uiBinder = GWT.create(DocsViewerPanelUiBinder.class);
@@ -63,10 +63,10 @@ public class DocsViewerPanel extends ViewImpl implements DocsViewerView {
     ImplPanel waveHolder;
     private final WaveStore waveStore = new SimpleWaveStore();
     private final Widget widget;
-    private final WsArmor wsArmor;
+    private final GSpaceArmor wsArmor;
 
     @Inject
-    public DocsViewerPanel(final WsArmor wsArmor, final WaveClientManager waveClientManager) {
+    public DocViewerPanel(final GSpaceArmor wsArmor, final WaveClientManager waveClientManager) {
         this.wsArmor = wsArmor;
         this.waveClientManager = waveClientManager;
         widget = uiBinder.createAndBindUi(this);
@@ -114,6 +114,8 @@ public class DocsViewerPanel extends ViewImpl implements DocsViewerView {
 
     @Override
     public void setActions(final GuiActionDescCollection actions) {
+        wsArmor.getSubheaderToolbar().clear();
+        wsArmor.getSubheaderToolbar().addAll(actions);
     }
 
     @Override

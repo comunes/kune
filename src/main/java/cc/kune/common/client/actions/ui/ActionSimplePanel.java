@@ -40,7 +40,9 @@ public class ActionSimplePanel extends AbstractComposedGuiItem implements Action
         bar.add(item);
     }
 
+    @Override
     public void clear() {
+        super.clear();
         bar.clear();
     }
 

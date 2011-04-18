@@ -21,7 +21,7 @@ package cc.kune.core.client.cnt;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.bind.GuiProvider;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
@@ -31,7 +31,7 @@ public class ActionContentToolbarImpl extends ActionFlowPanel implements ActionC
     private final ForIsWidget wsToolbar;
 
     @Inject
-    public ActionContentToolbarImpl(final GuiProvider guiProvider, final WsArmor wsArmor) {
+    public ActionContentToolbarImpl(final GuiProvider guiProvider, final GSpaceArmor wsArmor) {
         super(guiProvider);
         this.wsToolbar = wsArmor.getDocSubheader();
     }

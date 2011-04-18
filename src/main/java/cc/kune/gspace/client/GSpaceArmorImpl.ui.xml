@@ -1,5 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+xmlns:co="urn:import:cc.kune.core.client"
   xmlns:kp="urn:import:cc.kune.pspace.client" xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:with field='res'
     type='cc.kune.gspace.client.resources.WsArmorResources' />

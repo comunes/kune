@@ -9,7 +9,7 @@ import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.UserSignOutEvent;
 import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.WaveClientParams;
-import cc.kune.gspace.client.WsArmor;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsonUtils;
@@ -22,7 +22,7 @@ public class WaveClientManager {
 
     @Inject
     public WaveClientManager(final Session session, final StateManager stateManager, final EventBus eventBus,
-            final UserServiceAsync userService, final WsArmor wsArmor) {
+            final UserServiceAsync userService, final GSpaceArmor wsArmor) {
         session.onUserSignIn(true, new UserSignInHandler() {
             @Override
             public void onUserSignIn(final UserSignInEvent event) {

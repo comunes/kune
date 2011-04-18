@@ -17,30 +17,43 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package cc.kune.docs.client;
+package cc.kune.docs.client.actions;
 
-import static cc.kune.docs.client.DocumentClientTool.TYPE_DOCUMENT;
-import static cc.kune.docs.client.DocumentClientTool.TYPE_FOLDER;
-import static cc.kune.docs.client.DocumentClientTool.TYPE_ROOT;
-import static cc.kune.docs.client.DocumentClientTool.TYPE_UPLOADEDFILE;
+import static cc.kune.docs.client.DocsClientTool.TYPE_DOCUMENT;
+import static cc.kune.docs.client.DocsClientTool.TYPE_FOLDER;
+import static cc.kune.docs.client.DocsClientTool.TYPE_ROOT;
+import static cc.kune.docs.client.DocsClientTool.TYPE_UPLOADEDFILE;
+import static cc.kune.docs.client.DocsClientTool.TYPE_WAVE;
+import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 
-public class DocumentClientActions extends AbstractFoldableContentActions {
-    public DocumentClientActions(final I18nUITranslationService i18n, final Session session,
-            final StateManager stateManager) {
-        super(session, stateManager, i18n);
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
+public class DocsClientActions extends AbstractFoldableContentActions {
+
+    final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+
+    final String[] containers = { TYPE_ROOT, TYPE_FOLDER, };
+    final String[] containersNoRoot = { TYPE_FOLDER };
+    final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WAVE };
+    final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+
+    private final Provider<DocsGoUpBtn> docsGoUp;
+
+    @Inject
+    public DocsClientActions(final I18nUITranslationService i18n, final Session session,
+            final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
+            final Provider<DocsGoUpBtn> docsGoUp) {
+        super(session, stateManager, i18n, registry);
+        this.docsGoUp = docsGoUp;
     }
 
     @Override
     protected void createActions() {
-        final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-        final String[] containers = { TYPE_ROOT, TYPE_FOLDER, };
-        final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-        final String[] containersNoRoot = { TYPE_FOLDER };
-        final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-
         // final String parentMenuTitle = i18n.t("File");
         // final String parentMenuTitleCtx = i18n.t("Folder");
         //
@@ -90,5 +103,7 @@ public class DocumentClientActions extends AbstractFoldableContentActions {
     @Override
     protected void createPostSessionInitActions() {
         // super.createUploadMediaAction(TYPE_GALLERY);
+        actionsRegistry.addAction(docsGoUp, contents);
+        actionsRegistry.addAction(docsGoUp, containersNoRoot);
     }
 }
