@@ -6,6 +6,7 @@
     .wavePanel {
         margin: 0 0 0 0;
     }
+
     .waveHolder {
         position: absolute;
         top: 0;
@@ -15,11 +16,13 @@
     }
   </ui:style>
   <g:HTMLPanel width="100%" height="100%">
-   <g:DeckPanel ui:field="deck" addStyleNames="k-doc-content-deck">
-<!--     <f:FramedPanel ui:field="waveFrame" addStyleNames="{style.wavePanel}"> -->
-<!--     </f:FramedPanel> -->
-      <w:ImplPanel ui:field="waveHolder" addStyleNames="{style.waveHolder}" />
-    <g:InlineHTML ui:field="onlyViewPanel" />
-   </g:DeckPanel>
+    <g:DeckPanel ui:field="deck" addStyleNames="k-doc-content-deck">
+      <!-- <f:FramedPanel ui:field="waveFrame" addStyleNames="{style.wavePanel}"> -->
+      <!-- </f:FramedPanel> -->
+      <!-- <w:ImplPanel ui:field="waveHolder" addStyleNames="{style.waveHolder}"
+        /> -->
+      <g:InlineHTML ui:field="delete" />
+      <g:InlineHTML ui:field="onlyViewPanel" />
+    </g:DeckPanel>
   </g:HTMLPanel>
 </ui:UiBinder>

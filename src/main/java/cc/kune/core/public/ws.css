@@ -844,7 +844,7 @@ a:visited {
     white-space: nowrap;
 }
 */
-.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button {
+.k-sn-mainpanel .x-btn button,.k-sn-mainpanel button, button.k-button {
     font: 13px 'Ubuntu', arial;
     border: 2px solid #CCCCCC;
     cursor: pointer;
@@ -858,7 +858,7 @@ a:visited {
     border-radius: 6px;
     vertical-align: middle;
     line-height: 2em !important;
-    height: 26px !important;
+    /* height: 26px !important; */
     font-weight: bold;
     /*
 font-size:small;
@@ -867,13 +867,14 @@ font-size:small;
     padding-left: 25px !important; */
 }
 
-.k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover {
+.k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover, .k-button button:hover {
     border: 2px orange solid;
     background: #f0f0f0;
     color: #855585;
 }
 
-.k-sn-mainpanel .x-btn button:active,.k-sn-mainpanel button:active {
+.k-sn-mainpanel .x-btn button:active,.k-sn-mainpanel button:active, .k-button
+     button:active {
     border-top-color: #ffffff;
     background: #ffffff;
 }

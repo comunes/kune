@@ -73,7 +73,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
         } else {
             button = new Button();
         }
-        button.addStyleName("oc-button");
+        button.addStyleName("k-button");
         button.addStyleName("k-btn");
         button.addStyleName("k-5corners");
         layout();

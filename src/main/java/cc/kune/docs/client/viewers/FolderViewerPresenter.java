@@ -118,15 +118,18 @@ public class FolderViewerPresenter extends
     }
 
     private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
-        NotifyUser.info("Size: " + container.getContents().size() + " siblings: " + container.getChilds().size());
-        for (final ContentSimpleDTO content : container.getContents()) {
-            addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
-                    content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights());
-        }
-        for (final ContainerSimpleDTO siblingFolder : container.getChilds()) {
-            addItem(siblingFolder.getName(), siblingFolder.getTypeId(), null, ContentStatus.publishedOnline,
-                    siblingFolder.getStateToken(),
-                    siblingFolder.getStateToken().copy().setFolder(siblingFolder.getParentFolderId()), containerRights);
+        if (container.getContents().size() + container.getChilds().size() == 0) {
+            // FIXME
+        } else {
+            for (final ContentSimpleDTO content : container.getContents()) {
+                addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
+                        content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights());
+            }
+            for (final ContainerSimpleDTO childFolder : container.getChilds()) {
+                addItem(childFolder.getName(), childFolder.getTypeId(), null, ContentStatus.publishedOnline,
+                        childFolder.getStateToken(),
+                        childFolder.getStateToken().copy().setFolder(childFolder.getParentFolderId()), containerRights);
+            }
         }
     }
 

@@ -46,6 +46,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
@@ -74,6 +76,7 @@ public class Content implements HasStateToken {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<User> authors;
 
+    @Fetch(FetchMode.JOIN)
     @ContainedIn
     @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Comment> comments;

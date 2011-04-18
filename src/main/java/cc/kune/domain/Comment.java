@@ -38,6 +38,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -48,22 +50,31 @@ import org.hibernate.search.annotations.Store;
 @Table(name = "comment")
 public class Comment {
 
-    @Id
-    @GeneratedValue
-    @DocumentId
-    private Long id;
+    @IndexedEmbedded
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<User> abuseInformers;
+
+    @IndexedEmbedded
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private User author;
+
+    @Fetch(FetchMode.JOIN)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Comment> childs;
 
     @ManyToOne
     @JoinColumn
     @IndexedEmbedded
     private Content content;
 
-    @Basic(optional = false)
-    private Long publishedOn;
+    @Id
+    @GeneratedValue
+    @DocumentId
+    private Long id;
 
     @IndexedEmbedded
-    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private User author;
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<User> negativeVoters;
 
     // Parent/Child pattern:
     // http://www.hibernate.org/hib_docs/reference/en/html/example-parentchild.html
@@ -72,20 +83,12 @@ public class Comment {
     @JoinColumn
     private Comment parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Comment> childs;
-
     @IndexedEmbedded
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<User> positiveVoters;
 
-    @IndexedEmbedded
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private List<User> negativeVoters;
-
-    @IndexedEmbedded
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private List<User> abuseInformers;
+    @Basic(optional = false)
+    private Long publishedOn;
 
     @Field(index = Index.TOKENIZED, store = Store.NO)
     private String text;

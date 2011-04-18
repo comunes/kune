@@ -63,7 +63,7 @@ public class SitebarSignInLink extends ButtonDescriptor {
         // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
         setId(SITE_SIGN_IN);
         setVisible(!session.isLogged());
-        setStyles("k-no-backimage, k-btn-sitebar, k-fl");
+        setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
         setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
         session.onUserSignIn(true, new UserSignInHandler() {
             @Override

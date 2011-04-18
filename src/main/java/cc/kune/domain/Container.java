@@ -41,6 +41,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -63,6 +65,7 @@ public class Container implements HasId, HasStateToken {
     @OneToOne(cascade = CascadeType.ALL)
     private AccessLists accessLists;
 
+    @Fetch(FetchMode.JOIN)
     @OrderBy("createdOn DESC")
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Container> childs;
@@ -70,6 +73,7 @@ public class Container implements HasId, HasStateToken {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ContainerTranslation> containerTranslations;
 
+    @Fetch(FetchMode.JOIN)
     @ContainedIn
     @OrderBy("createdOn DESC")
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

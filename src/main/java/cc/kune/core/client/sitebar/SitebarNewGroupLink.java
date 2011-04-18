@@ -52,7 +52,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
     @Inject
     public SitebarNewGroupLink(final SitebarNewGroupAction action) {
         super(action);
-        setStyles("k-no-backimage, k-btn-sitebar, k-fl");
+        setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
         setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
     }
 }
