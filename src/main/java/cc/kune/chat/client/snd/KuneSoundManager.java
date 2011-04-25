@@ -10,9 +10,9 @@ public class KuneSoundManager {
 
     public KuneSoundManager(final EventBus eventBus, final SoundSignalsConfig soundConfig) {
         this.soundConfig = soundConfig;
-        eventBus.addHandler(ClickEvent.getType(), new ClickEvent.ClickHandler() {
+        eventBus.addHandler(SndClickEvent.getType(), new SndClickEvent.SndClickHandler() {
             @Override
-            public void onClick(final ClickEvent event) {
+            public void onClick(final SndClickEvent event) {
                 createSoundManagerIfNeeded();
                 soundManager.play();
             }

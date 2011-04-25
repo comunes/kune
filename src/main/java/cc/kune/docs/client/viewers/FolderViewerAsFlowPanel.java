@@ -5,9 +5,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.BasicThumb;
-import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.docs.client.viewers.FolderViewerPresenter.FolderViewerView;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
@@ -18,55 +16,37 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.InlineLabel;
-import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.ViewImpl;
 
-public class FolderViewerPanel extends ViewImpl implements FolderViewerView {
-    interface FolderViewerPanelUiBinder extends UiBinder<Widget, FolderViewerPanel> {
+public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
+    interface FolderViewerAsFlowPanelUiBinder extends UiBinder<Widget, FolderViewerAsFlowPanel> {
     }
-    private static FolderViewerPanelUiBinder uiBinder = GWT.create(FolderViewerPanelUiBinder.class);
+    private static FolderViewerAsFlowPanelUiBinder uiBinder = GWT.create(FolderViewerAsFlowPanelUiBinder.class);
 
     @UiField
     FlowPanel flow;
-
-    private final GSpaceArmor gsArmor;
-
     int ICONLABELMAXSIZE = 20;
     int ICONSIZE = 100;
-    private final Widget widget;
 
     @Inject
-    public FolderViewerPanel(final GSpaceArmor wsArmor) {
-        this.gsArmor = wsArmor;
+    public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor) {
+        super(gsArmor);
         widget = uiBinder.createAndBindUi(this);
     }
 
     @Override
-    public void addItem(final FolderItemDescriptor item, final DoubleClickHandler doubleClickHandler) {
+    public void addItem(final FolderItemDescriptor item, final ClickHandler clickHandler,
+            final DoubleClickHandler doubleClickHandler) {
+        // In this viewer we don't use the clickHandler from the presenter
         flow.add(createThumb(item.getText(), item.getIcon(), item.getTooltip(), "", item.getActionCollection(),
                 doubleClickHandler));
     }
 
     @Override
-    public Widget asWidget() {
-        return widget;
-    }
-
-    @Override
-    public void attach() {
-        final ForIsWidget docContainer = gsArmor.getDocContainer();
-        docContainer.add(widget);
-    }
-
-    @Override
     public void clear() {
         flow.clear();
-        gsArmor.getSubheaderToolbar().clear();
-        UiUtils.clear(gsArmor.getDocContainer());
-        UiUtils.clear(gsArmor.getDocHeader());
+        super.clear();
     }
 
     public BasicThumb createThumb(final String text, final Object icon, final String tooltip,
@@ -85,7 +65,6 @@ public class FolderViewerPanel extends ViewImpl implements FolderViewerView {
                 menu.show(thumb);
             }
         };
-
         thumb.addClickHandler(clickHand);
         thumb.addDoubleClickHandler(doubleClickHandler);
         gsArmor.getSubheaderToolbar().add(menu);
@@ -96,20 +75,9 @@ public class FolderViewerPanel extends ViewImpl implements FolderViewerView {
     }
 
     @Override
-    public void detach() {
-        clear();
-    }
-
-    @Override
-    public void setActions(final GuiActionDescCollection actions) {
-        gsArmor.getSubheaderToolbar().clear();
-        gsArmor.getSubheaderToolbar().addAll(actions);
-    }
-
-    @Override
     public void setContainer(final StateContainerDTO state) {
+        super.setContainer(state);
         gsArmor.getDocContainer().add(new HTML("<b>Note:</b> This GUI is provisional<br/>"));
-        gsArmor.getDocHeader().add(new InlineLabel(state.getTitle()));
     }
 
 }

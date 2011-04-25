@@ -28,6 +28,8 @@ import cc.kune.gspace.client.actions.perspective.ViewPerspective;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -49,7 +51,7 @@ public class FolderViewerPresenter extends
 
     public interface FolderViewerView extends View {
 
-        void addItem(FolderItemDescriptor item, DoubleClickHandler handler);
+        void addItem(FolderItemDescriptor item, ClickHandler clickHandler, DoubleClickHandler doubleClickHandler);
 
         void attach();
 
@@ -103,7 +105,12 @@ public class FolderViewerPresenter extends
             // Don't show
             NotifyUser.info("Deleted, don't show");
         } else {
-            getView().addItem(item, new DoubleClickHandler() {
+            getView().addItem(item, new ClickHandler() {
+                @Override
+                public void onClick(final ClickEvent event) {
+                    stateManager.gotoStateToken(stateToken);
+                }
+            }, new DoubleClickHandler() {
                 @Override
                 public void onDoubleClick(final DoubleClickEvent event) {
                     stateManager.gotoStateToken(stateToken);
@@ -121,14 +128,16 @@ public class FolderViewerPresenter extends
         if (container.getContents().size() + container.getChilds().size() == 0) {
             // FIXME
         } else {
-            for (final ContentSimpleDTO content : container.getContents()) {
-                addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
-                        content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights());
-            }
+            // Folders
             for (final ContainerSimpleDTO childFolder : container.getChilds()) {
                 addItem(childFolder.getName(), childFolder.getTypeId(), null, ContentStatus.publishedOnline,
                         childFolder.getStateToken(),
                         childFolder.getStateToken().copy().setFolder(childFolder.getParentFolderId()), containerRights);
+            }
+            // Other contents (docs, etc)
+            for (final ContentSimpleDTO content : container.getContents()) {
+                addItem(content.getTitle(), content.getTypeId(), content.getMimeType(), content.getStatus(),
+                        content.getStateToken(), content.getStateToken().copy().clearDocument(), content.getRights());
             }
         }
     }
@@ -155,7 +164,7 @@ public class FolderViewerPresenter extends
             // Used for previews
             return null;
         } else {
-            return null; // i18n.t("Double click to open");
+            return i18n.t("Double click to open");
         }
     }
 

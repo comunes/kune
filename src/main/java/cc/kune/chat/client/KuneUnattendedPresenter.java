@@ -20,7 +20,7 @@
 package cc.kune.chat.client;
 
 import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
-import cc.kune.chat.client.snd.ClickEvent;
+import cc.kune.chat.client.snd.SndClickEvent;
 
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.signals.client.SignalPreferences;
@@ -45,7 +45,7 @@ public class KuneUnattendedPresenter {
                 final int unattendedChatsCount = unattendedManager.getSize();
                 if (unattendedChatsCount > 0 && active == false) {
                     active = true;
-                    ClickEvent.fire(eventBus);
+                    SndClickEvent.fire(eventBus);
                     action.setBlink(true);
 
                 } else if (unattendedChatsCount == 0 && active == true) {

@@ -3,7 +3,7 @@ package cc.kune.docs.client;
 import cc.kune.docs.client.actions.DocsClientActions;
 import cc.kune.docs.client.viewers.DocViewerPanel;
 import cc.kune.docs.client.viewers.DocViewerPresenter;
-import cc.kune.docs.client.viewers.FolderViewerPanel;
+import cc.kune.docs.client.viewers.FolderViewerAsTablePanel;
 import cc.kune.docs.client.viewers.FolderViewerPresenter;
 
 import com.google.inject.Singleton;
@@ -18,7 +18,7 @@ public class DocsGinModule extends AbstractPresenterModule {
         bindPresenter(DocViewerPresenter.class, DocViewerPresenter.DocViewerView.class, DocViewerPanel.class,
                 DocViewerPresenter.DocViewerProxy.class);
         bindPresenter(FolderViewerPresenter.class, FolderViewerPresenter.FolderViewerView.class,
-                FolderViewerPanel.class, FolderViewerPresenter.FolderViewerProxy.class);
+                FolderViewerAsTablePanel.class, FolderViewerPresenter.FolderViewerProxy.class);
     }
 
 }
