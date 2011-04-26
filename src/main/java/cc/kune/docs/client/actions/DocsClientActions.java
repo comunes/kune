@@ -45,14 +45,18 @@ public class DocsClientActions extends AbstractFoldableContentActions {
     public DocsClientActions(final I18nUITranslationService i18n, final Session session,
             final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
             final Provider<FolderGoUpBtn> folderGoUp, final Provider<NewDocBtn> newDocBtn,
-            final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenContentBtn> openContentBtn) {
+            final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenContentMenuItem> openContentMenuItem,
+            final Provider<DelContentMenuItem> delContentMenuItem,
+        final Provider<DelFolderMenuItem> delFolderMenuItem) {
         super(session, stateManager, i18n, registry);
         actionsRegistry.addAction(folderGoUp, contents);
         actionsRegistry.addAction(folderGoUp, containersNoRoot);
         actionsRegistry.addAction(newDocBtn, containers);
         actionsRegistry.addAction(newFolderBtn, containers);
-        actionsRegistry.addAction(openContentBtn, contents);
-        actionsRegistry.addAction(openContentBtn, containersNoRoot);
+        actionsRegistry.addAction(openContentMenuItem, contents);
+        actionsRegistry.addAction(openContentMenuItem, containersNoRoot);
+        actionsRegistry.addAction(delContentMenuItem, contents);
+        actionsRegistry.addAction(delFolderMenuItem, containersNoRoot);
     }
 
     @Override

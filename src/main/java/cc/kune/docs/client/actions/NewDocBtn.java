@@ -18,12 +18,12 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsClientTool;
-import cc.kune.gspace.client.actions.perspective.ViewPerspective;
+import cc.kune.gspace.client.actions.perspective.ViewActionsGroup;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class NewDocBtn extends ButtonDescriptor {
+public class NewDocBtn extends ButtonDescriptor implements ViewActionsGroup {
 
     public static class NewDocAction extends RolAction {
 
@@ -46,14 +46,16 @@ public class NewDocBtn extends ButtonDescriptor {
 
         @Override
         public void actionPerformed(final ActionEvent event) {
-            stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
             NotifyUser.showProgressProcessing();
+            stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
             contentService.get().addContent(session.getUserHash(), session.getCurrentStateToken(),
                     i18n.t("New document"), DocsClientTool.TYPE_WAVE, new AsyncCallbackSimple<StateContentDTO>() {
                         @Override
                         public void onSuccess(final StateContentDTO state) {
+                            stateManager.setRetrievedStateAndGo(state);
+                            NotifyUser.hideProgress();
+                            // stateManager.refreshCurrentGroupState();
                             // contextNavigator.setEditOnNextStateChange(true);
-                            stateManager.setRetrievedState(state);
                         }
                     });
             cache.removeContent(session.getCurrentStateToken());
@@ -68,7 +70,7 @@ public class NewDocBtn extends ButtonDescriptor {
         shorcutReg.put(shortcut, action);
         this.withText(i18n.t("New document")).withToolTip(
                 "Create a New Document here. This document will be a new 'Page' in the public web if you publish it").withIcon(
-                res.pageAdd()).in(ViewPerspective.class).withShortcut(shortcut).withStyles("k-def-docbtn");
+                res.pageAdd()).in(ViewActionsGroup.class).withShortcut(shortcut).withStyles("k-def-docbtn");
     }
 
 }

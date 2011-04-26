@@ -33,7 +33,7 @@ import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
 import org.ourproject.kune.platf.client.services.AbstractExtendedModule;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.hello.HelloWorldModule.HelloWorldPanel.HelloWorldPresenter;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
@@ -194,7 +194,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
 
         public void showMessage() {
             // i18n use with parameters
-            NotifyUser.info(i18n.t("Hello [%s]!", "world"));
+            OldNotifyUser.info(i18n.t("Hello [%s]!", "world"));
         }
     }
 
@@ -216,9 +216,9 @@ public class HelloWorldModule extends AbstractExtendedModule {
 
         public void actionPerformed(final ActionEvent actionEvent) {
             if (actionEvent.getEvent().getCtrlKey()) {
-                NotifyUser.info("Hello world action fired with ctrl key pressed");
+                OldNotifyUser.info("Hello world action fired with ctrl key pressed");
             } else {
-                NotifyUser.info("Hello world action fired");
+                OldNotifyUser.info("Hello world action fired");
             }
         }
     }
@@ -298,7 +298,7 @@ public class HelloWorldModule extends AbstractExtendedModule {
         i(GlobalShortcutRegister.class).put(Shortcut.getShortcut(true, Character.valueOf('S')),
                 new AbstractExtendedAction() {
                     public void actionPerformed(final ActionEvent event) {
-                        NotifyUser.info("Global Ctrl+S pressed");
+                        OldNotifyUser.info("Global Ctrl+S pressed");
                     }
                 });
 

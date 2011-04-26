@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.sitebar.sitesearch;
 
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.AbstractToolbar;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -72,7 +72,7 @@ public class SiteSearchPanel implements SiteSearchView {
         });
         searchButton.addClickHandler(new ClickHandler() {
             public void onClick(final ClickEvent event) {
-                NotifyUser.showProgressProcessing();
+                OldNotifyUser.showProgressProcessing();
                 presenter.doSearch(searchTextBox.getText());
             }
         });
@@ -80,7 +80,7 @@ public class SiteSearchPanel implements SiteSearchView {
             public void onKeyUp(final KeyUpEvent event) {
                 if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
                     if (searchTextBox.getText().length() > 0) {
-                        NotifyUser.showProgressProcessing();
+                        OldNotifyUser.showProgressProcessing();
                         presenter.doSearch(searchTextBox.getText());
                     }
                 }

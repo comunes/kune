@@ -8,9 +8,9 @@ import org.mockito.Mockito;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.shared.domain.utils.AccessRights;
-import cc.kune.gspace.client.actions.perspective.ActionPerspective;
-import cc.kune.gspace.client.actions.perspective.EditPerspective;
-import cc.kune.gspace.client.actions.perspective.ViewPerspective;
+import cc.kune.gspace.client.actions.perspective.ActionsGroup;
+import cc.kune.gspace.client.actions.perspective.EditActionsGroup;
+import cc.kune.gspace.client.actions.perspective.ViewActionsGroup;
 
 import com.google.inject.Provider;
 
@@ -37,19 +37,19 @@ public class ActionRegistryByTypeTest {
 
     @Test
     public void testDontGetCurrentActionsOfOtherPerspective() {
-        Mockito.when(action.getValue(ActionPerspective.KEY)).thenReturn(ViewPerspective.class);
-        assertEquals(0, actionRegistryByType.getCurrentActions(null, false, allRights, EditPerspective.class).size());
+        Mockito.when(action.getValue(ActionsGroup.KEY)).thenReturn(ViewActionsGroup.class);
+        assertEquals(0, actionRegistryByType.getCurrentActions(null, false, allRights, EditActionsGroup.class).size());
     }
 
     @Test
     public void testGetCurrentActions() {
-        Mockito.when(action.getValue(ActionPerspective.KEY)).thenReturn(null);
+        Mockito.when(action.getValue(ActionsGroup.KEY)).thenReturn(null);
         assertEquals(1, actionRegistryByType.getCurrentActions(null, false, allRights, null).size());
     }
 
     @Test
     public void testGetCurrentActionsOfPerspective() {
-        Mockito.when(action.getValue(ActionPerspective.KEY)).thenReturn(EditPerspective.class);
-        assertEquals(1, actionRegistryByType.getCurrentActions(null, false, allRights, EditPerspective.class).size());
+        Mockito.when(action.getValue(ActionsGroup.KEY)).thenReturn(EditActionsGroup.class);
+        assertEquals(1, actionRegistryByType.getCurrentActions(null, false, allRights, EditActionsGroup.class).size());
     }
 }

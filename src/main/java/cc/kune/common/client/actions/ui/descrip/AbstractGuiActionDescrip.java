@@ -27,7 +27,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ChangeableObject;
 import cc.kune.common.client.actions.KeyStroke;
-import cc.kune.gspace.client.actions.perspective.ActionPerspective;
+import cc.kune.gspace.client.actions.perspective.ActionsGroup;
 
 /**
  * The Class AbstractUIActionDescriptor.
@@ -139,8 +139,8 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     }
 
     @Override
-    public GuiActionDescrip in(final Class<? extends ActionPerspective> clazz) {
-        putValue(ActionPerspective.KEY, clazz);
+    public GuiActionDescrip in(final Class<? extends ActionsGroup> clazz) {
+        putValue(ActionsGroup.KEY, clazz);
         return this;
     }
 

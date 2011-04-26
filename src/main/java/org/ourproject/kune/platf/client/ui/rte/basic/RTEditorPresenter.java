@@ -47,7 +47,7 @@ import org.ourproject.kune.platf.client.actions.ui.OldMenuItemDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.PushButtonDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.ToolbarSeparatorDescriptor;
 import org.ourproject.kune.platf.client.actions.ui.ToolbarSeparatorDescriptor.Type;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.platf.client.ui.rte.edithtml.EditHtmlDialog;
@@ -135,7 +135,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
                     final String author = session.isLogged() ? session.getCurrentUser().getShortName()
                             : i18n.t("anonymous user");
                     if (view.isAnythingSelected()) {
-                        NotifyUser.askConfirmation(i18n.t("Insert a comment"),
+                        OldNotifyUser.askConfirmation(i18n.t("Insert a comment"),
                                 i18n.t("Include the selected text in the comment?"), new Listener0() {
                                     @Override
                                     public void onEvent() {
@@ -453,7 +453,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
 
         @Override
         public void actionPerformed(final ActionEvent actionEvent) {
-            NotifyUser.showProgressLoading();
+            OldNotifyUser.showProgressLoading();
             if (insCharListener == null) {
                 insCharListener = new Listener<String>() {
                     @Override
@@ -468,7 +468,7 @@ public class RTEditorPresenter extends AbstractActionExtensiblePresenter impleme
             insCharDialog.setOnInsertSpecialChar(insCharListener);
             insCharDialog.show();
             hideLinkCtxMenu();
-            NotifyUser.hideProgress();
+            OldNotifyUser.hideProgress();
         }
     }
 

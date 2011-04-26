@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.rate;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -94,12 +94,12 @@ public class RateItPresenter implements RateIt {
         isRating = true;
         final Double newValue = Math.abs(starClicked + 1d - currentRate) < 0.01 ? currentRate - 0.5d : starClicked + 1d;
         setRatePanel(newValue);
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         final StateAbstractDTO currentState = session.getCurrentState();
         contentServiceProvider.get().rateContent(session.getUserHash(), currentState.getStateToken(), newValue,
                 new AsyncCallbackSimple<RateResult>() {
                     public void onSuccess(final RateResult result) {
-                        NotifyUser.hideProgress();
+                        OldNotifyUser.hideProgress();
                         // NotifyUser.info(i18n.t("Content rated"));
                         if (currentState.getStateToken().equals(session.getCurrentStateToken())) {
                             session.getContentState().setRate(result);

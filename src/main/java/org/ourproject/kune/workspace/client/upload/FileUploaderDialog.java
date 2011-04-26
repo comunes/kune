@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.upload;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.common.client.utils.TextUtils;
@@ -59,7 +59,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
     public void destroy() {
         if (hasUploadingFiles()) {
             dialog.stopUpload();
-            NotifyUser.important(i18n.t("Upload cancelled after signing out"));
+            OldNotifyUser.important(i18n.t("Upload cancelled after signing out"));
         }
         if (dialog != null) {
             dialog.destroy();
@@ -138,7 +138,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
             public boolean onBeforeAdd(final UploadDialog source, final String filename) {
                 final boolean mustAdd = presenter.checkFolderChange();
                 if (!mustAdd) {
-                    NotifyUser.important(i18n.t("Please, wait until current uploads are finished to upload new files into another location"));
+                    OldNotifyUser.important(i18n.t("Please, wait until current uploads are finished to upload new files into another location"));
                 }
                 return mustAdd;
             }
@@ -151,7 +151,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
             @Override
             public void onUploadComplete(final UploadDialog source) {
                 if (!dialog.isVisible()) {
-                    NotifyUser.info(i18n.t("Upload completed"));
+                    OldNotifyUser.info(i18n.t("Upload completed"));
                     traybarButton.destroy();
                     traybarButton = null;
                 }
@@ -170,7 +170,7 @@ public class FileUploaderDialog extends AbstractUploader implements FileUploader
 
             private void showError() {
                 if (!dialog.isVisible()) {
-                    NotifyUser.veryImportant(i18n.t("Error uploading"));
+                    OldNotifyUser.veryImportant(i18n.t("Error uploading"));
                 }
             }
 

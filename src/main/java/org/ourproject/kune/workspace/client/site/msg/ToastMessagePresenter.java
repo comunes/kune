@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.site.msg;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser.Level;
 
 public class ToastMessagePresenter implements ToastMessage {
 

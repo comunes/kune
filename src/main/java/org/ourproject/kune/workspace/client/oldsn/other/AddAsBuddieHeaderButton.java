@@ -27,7 +27,7 @@ import org.ourproject.kune.platf.client.actions.ActionEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
 import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
 import cc.kune.core.client.resources.icons.IconConstants;
@@ -68,7 +68,7 @@ public class AddAsBuddieHeaderButton {
 
         public void actionPerformed(final ActionEvent event) {
             chatEngine.get().addNewBuddie(session.getCurrentState().getGroup().getShortName());
-            NotifyUser.info("Added as buddie. Waiting buddie response");
+            OldNotifyUser.info("Added as buddie. Waiting buddie response");
             setEnabled(false);
         }
 

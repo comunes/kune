@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.licensewizard;
 import java.util.List;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFirstFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardFrdFormView;
 import org.ourproject.kune.workspace.client.licensewizard.pages.LicenseWizardSndFormView;
@@ -120,7 +120,7 @@ public class LicenseWizardPresenter implements LicenseWizard {
             }
         } else if (in(sndForm)) {
             licenseShortName = "by-sa" + ccVers;
-            NotifyUser.error("Programatic error in LicenseWizardPresenter");
+            OldNotifyUser.error("Programatic error in LicenseWizardPresenter");
         } else {
             licenseShortName = frdForm.getSelectedLicense();
         }

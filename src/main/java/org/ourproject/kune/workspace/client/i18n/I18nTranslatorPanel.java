@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.i18n;
 import org.ourproject.kune.platf.client.services.Images;
 import org.ourproject.kune.platf.client.ui.AbstractSearcherPanel;
 import org.ourproject.kune.platf.client.ui.dialogs.BasicDialog;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.search.SiteBottomTrayButton;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -309,10 +309,10 @@ public class I18nTranslatorPanel extends AbstractSearcherPanel implements I18nTr
     }
 
     private void setLanguage(final String language) {
-        NotifyUser.showProgressLoading();
+        OldNotifyUser.showProgressLoading();
         query(unTransStore, unTransGrid, language);
         query(transStore, transGrid, language);
-        NotifyUser.hideProgress();
+        OldNotifyUser.hideProgress();
     }
 
     private String[] splitNT(final String textWithNT) {

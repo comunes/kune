@@ -15,7 +15,7 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsClientTool;
-import cc.kune.gspace.client.actions.perspective.ViewPerspective;
+import cc.kune.gspace.client.actions.perspective.ViewActionsGroup;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -43,14 +43,15 @@ public class NewFolderBtn extends ButtonDescriptor {
 
         @Override
         public void actionPerformed(final ActionEvent event) {
-            stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
             NotifyUser.showProgressProcessing();
+            stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
             contentService.get().addFolder(session.getUserHash(), session.getCurrentStateToken(), i18n.t("New folder"),
                     DocsClientTool.TYPE_FOLDER, new AsyncCallbackSimple<StateContainerDTO>() {
                         @Override
                         public void onSuccess(final StateContainerDTO state) {
                             // contextNavigator.setEditOnNextStateChange(true);
-                            stateManager.setRetrievedState(state);
+                            stateManager.setRetrievedStateAndGo(state);
+                            NotifyUser.hideProgress();
                         }
                     });
             cache.removeContent(session.getCurrentStateToken());
@@ -63,6 +64,6 @@ public class NewFolderBtn extends ButtonDescriptor {
         super(action);
         this.withText(i18n.t("New folder")).withToolTip(
                 i18n.t("Create a new folder here. A folder will be a 'section' in the public web")).withIcon(
-                res.folderAdd()).in(ViewPerspective.class).withStyles("k-def-docbtn");
+                res.folderAdd()).in(ViewActionsGroup.class).withStyles("k-def-docbtn");
     }
 }

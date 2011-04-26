@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.title;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 
 import cc.kune.core.client.errors.NameInUseException;
 import cc.kune.core.client.errors.NameNotPermittedException;
@@ -60,26 +60,26 @@ public class RenameAction {
 
     public void rename(final StateToken token, final String oldName, final String newName) {
         if (!newName.equals(oldName)) {
-            NotifyUser.showProgress(i18n.t("Renaming"));
+            OldNotifyUser.showProgress(i18n.t("Renaming"));
             final AsyncCallback<StateAbstractDTO> asyncCallback = new AsyncCallback<StateAbstractDTO>() {
                 @Override
                 public void onFailure(final Throwable caught) {
-                    NotifyUser.hideProgress();
+                    OldNotifyUser.hideProgress();
                     if (caught instanceof NameInUseException) {
-                        NotifyUser.error(i18n.tWithNT("This name already exists",
+                        OldNotifyUser.error(i18n.tWithNT("This name already exists",
                                 "It is used when a file or a folder with the same name already exists"));
                     } else if (caught instanceof NameNotPermittedException) {
-                        NotifyUser.error(i18n.tWithNT("This name is not permitted",
+                        OldNotifyUser.error(i18n.tWithNT("This name is not permitted",
                                 "It is used when a file or a folder does not have a permitted name"));
                     } else {
-                        NotifyUser.error(i18n.t("Error renaming"));
+                        OldNotifyUser.error(i18n.t("Error renaming"));
                     }
                     // onFail.fire(token, oldName);
                 }
 
                 @Override
                 public void onSuccess(final StateAbstractDTO state) {
-                    NotifyUser.hideProgress();
+                    OldNotifyUser.hideProgress();
                     session.setCurrentState(state);
                     // onSuccess.fire(token, state.getTitle());
                 }

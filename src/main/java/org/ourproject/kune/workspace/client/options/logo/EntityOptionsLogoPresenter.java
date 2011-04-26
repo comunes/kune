@@ -21,7 +21,7 @@ package org.ourproject.kune.workspace.client.options.logo;
 
 import org.ourproject.kune.chat.client.ChatEngine;
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 import org.ourproject.kune.workspace.client.options.EntityOptions;
 
@@ -64,7 +64,7 @@ public abstract class EntityOptionsLogoPresenter implements GroupOptionsLogo, Us
     }
 
     public void onSubmitFailed(final int httpStatus, final String responseText) {
-        NotifyUser.error("Error setting the logo: " + responseText);
+        OldNotifyUser.error("Error setting the logo: " + responseText);
     }
 
     protected abstract void setState();

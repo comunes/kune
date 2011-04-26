@@ -39,6 +39,8 @@ public interface StateManager {
 
     void gotoStateToken(StateToken newToken);
 
+    void gotoStateToken(StateToken token, boolean useCache);
+
     void onGroupChanged(boolean fireNow, GroupChangedEvent.GroupChangedHandler handler);
 
     @Deprecated
@@ -79,6 +81,8 @@ public interface StateManager {
     void resumeTokenChange();
 
     void setRetrievedState(StateAbstractDTO state);
+
+    void setRetrievedStateAndGo(StateAbstractDTO state);
 
     void setSocialNetwork(SocialNetworkDataDTO socialNet);
 

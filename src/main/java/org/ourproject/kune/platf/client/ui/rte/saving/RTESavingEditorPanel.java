@@ -21,7 +21,7 @@ package org.ourproject.kune.platf.client.ui.rte.saving;
 
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPanel;
 import org.ourproject.kune.platf.client.ui.rte.basic.RTEditorPresenter;
 
@@ -38,7 +38,7 @@ public class RTESavingEditorPanel extends RTEditorPanel implements RTESavingEdit
 
     public void askConfirmation(final String confirmationTitle, final String confirmationText,
             final Listener0 onConfirm, final Listener0 onCancel) {
-        NotifyUser.askConfirmation(confirmationTitle, confirmationText, onConfirm, onCancel);
+        OldNotifyUser.askConfirmation(confirmationTitle, confirmationText, onConfirm, onCancel);
     }
 
 }

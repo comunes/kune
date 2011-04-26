@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.ctxnav;
 import org.ourproject.kune.platf.client.actions.ActionItem;
 import org.ourproject.kune.platf.client.actions.ActionManager;
 import org.ourproject.kune.platf.client.actions.MenuItemsContainer;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
 import cc.kune.core.shared.domain.ContentStatus;
@@ -244,7 +244,7 @@ public class ContextNavigatorPanel implements ContextNavigatorView {
             public boolean doBeforeNodeDrop(final TreePanel treePanel, final TreeNode target, final DragData dragData,
                     final String point, final DragDrop source, final TreeNode dropNode,
                     final DropNodeCallback dropNodeCallback) {
-                NotifyUser.info("Drag & drop of contents in development");
+                OldNotifyUser.info("Drag & drop of contents in development");
                 return false;
             }
 

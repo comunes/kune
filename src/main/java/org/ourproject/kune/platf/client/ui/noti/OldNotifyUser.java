@@ -35,7 +35,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * 
  */
 @Deprecated
-public class NotifyUser {
+public class OldNotifyUser {
 
     public enum Level {
         error, important, info, veryImportant,
@@ -146,13 +146,13 @@ public class NotifyUser {
         // ON_NOTIFY.fire(Level.veryImportant, message);
     }
 
-    private NotifyUser() {
+    private OldNotifyUser() {
     }
 
-    public NotifyUser(final I18nTranslationService i18n, final Images images) {
+    public OldNotifyUser(final I18nTranslationService i18n, final Images images) {
         this();
-        NotifyUser.i18n = i18n;
-        NotifyUser.images = images;
+        OldNotifyUser.i18n = i18n;
+        OldNotifyUser.images = images;
     }
 
     public void addAlerter(final Listener2<String, String> listener) {

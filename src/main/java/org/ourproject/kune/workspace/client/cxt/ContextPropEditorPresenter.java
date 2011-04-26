@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.cxt;
 import java.util.Date;
 import java.util.List;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.title.EntitySubTitle;
 
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -62,12 +62,12 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void addAuthor(final String authorShortName) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().addAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
                 new AsyncCallbackSimple<Void>() {
                     public void onSuccess(final Void result) {
-                        NotifyUser.hideProgress();
+                        OldNotifyUser.hideProgress();
                         stateManager.reload();
                     }
                 });
@@ -82,12 +82,12 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void delAuthor(final String authorShortName) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().removeAuthor(session.getUserHash(), currentState.getStateToken(), authorShortName,
                 new AsyncCallbackSimple<Void>() {
                     public void onSuccess(final Void result) {
-                        NotifyUser.hideProgress();
+                        OldNotifyUser.hideProgress();
                         stateManager.reload();
                     }
                 });
@@ -98,12 +98,12 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void doChangeLanguage(final String langCode) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setLanguage(session.getUserHash(), currentState.getStateToken(), langCode,
                 new AsyncCallbackSimple<I18nLanguageDTO>() {
                     public void onSuccess(final I18nLanguageDTO lang) {
-                        NotifyUser.hideProgress();
+                        OldNotifyUser.hideProgress();
                     }
                 });
     }
@@ -113,12 +113,12 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void setPublishedOn(final Date publishedOn) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setPublishedOn(session.getUserHash(), currentState.getStateToken(), publishedOn,
                 new AsyncCallbackSimple<Void>() {
                     public void onSuccess(final Void result) {
-                        NotifyUser.hideProgress();
+                        OldNotifyUser.hideProgress();
                         entitySubTitle.setContentDate(publishedOn);
                     }
                 });
@@ -179,13 +179,13 @@ public class ContextPropEditorPresenter implements ContextPropEditor {
     }
 
     public void setTags(final String tagsString) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         final StateContainerDTO currentState = session.getContentState();
         contentServiceProvider.get().setTags(session.getUserHash(), currentState.getStateToken(), tagsString,
                 new AsyncCallbackSimple<TagCloudResult>() {
                     public void onSuccess(final TagCloudResult result) {
                         tagsSummaryProvider.get().setGroupTags(result);
-                        NotifyUser.hideProgress();
+                        OldNotifyUser.hideProgress();
                     }
                 });
     }

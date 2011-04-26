@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.options.pscape;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 import org.ourproject.kune.workspace.client.themes.WsThemeSelector;
@@ -96,7 +96,7 @@ public class EntityOptionsPublicSpaceConfPanel extends Panel implements EntityOp
         final Panel stylesPanel = new Panel();
         final ClickHandler clickHandler = new ClickHandler() {
             public void onClick(final ClickEvent event) {
-                NotifyUser.info(TextUtils.IN_DEVELOPMENT_P);
+                OldNotifyUser.info(TextUtils.IN_DEVELOPMENT_P);
             }
         };
         for (int i = 1; i <= 6; i++) {

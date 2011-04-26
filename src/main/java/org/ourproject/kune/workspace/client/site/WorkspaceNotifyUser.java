@@ -20,8 +20,8 @@
 package org.ourproject.kune.workspace.client.site;
 
 import org.ourproject.kune.platf.client.ui.noti.ConfirmationAsk;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser.Level;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser.Level;
 import org.ourproject.kune.workspace.client.site.msg.ToastMessage;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -34,7 +34,7 @@ import com.calclab.suco.client.ioc.Provider;
 
 public class WorkspaceNotifyUser {
 
-    public WorkspaceNotifyUser(final NotifyUser notifyUser, final I18nTranslationService i18n,
+    public WorkspaceNotifyUser(final OldNotifyUser notifyUser, final I18nTranslationService i18n,
             final Provider<ToastMessage> toaster, final Provider<WorkspaceSkeleton> ws) {
         notifyUser.addProgressNotifier(new Listener<String>() {
             @Override

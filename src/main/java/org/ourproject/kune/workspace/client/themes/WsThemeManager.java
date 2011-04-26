@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.workspace.client.themes;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
@@ -66,7 +66,7 @@ public class WsThemeManager {
     }
 
     public void changeTheme(final StateToken token, final WsTheme newTheme) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), token, newTheme.getName(),
                 new AsyncCallbackSimple<Void>() {
                     @Override
@@ -74,19 +74,19 @@ public class WsThemeManager {
                         if (session.getCurrentState().getStateToken().getGroup().equals(token.getGroup())) {
                             setTheme(newTheme);
                         }
-                        NotifyUser.hideProgress();
+                        OldNotifyUser.hideProgress();
                     }
                 });
     }
 
     protected void onChangeGroupWsTheme(final WsTheme newTheme) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), session.getCurrentState().getStateToken(),
                 newTheme.getName(), new AsyncCallbackSimple<Void>() {
                     @Override
                     public void onSuccess(final Void result) {
                         setTheme(newTheme);
-                        NotifyUser.hideProgress();
+                        OldNotifyUser.hideProgress();
                     }
                 });
     }

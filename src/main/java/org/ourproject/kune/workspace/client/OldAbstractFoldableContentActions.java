@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.actions.ActionToolbarMenuDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarMenuRadioDescriptor;
 import org.ourproject.kune.platf.client.actions.ActionToolbarPosition;
 import org.ourproject.kune.platf.client.actions.RadioMustBeChecked;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.ctxnav.ContextNavigator;
 import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
@@ -172,7 +172,7 @@ public abstract class OldAbstractFoldableContentActions {
                 AccessRolDTO.Administrator, CONTENT_TOPBAR, new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken token) {
-                        NotifyUser.info("Sorry, in development");
+                        OldNotifyUser.info("Sorry, in development");
                     }
                 });
         delContainer.setParentMenuTitle(parentMenuTitle);
@@ -245,7 +245,7 @@ public abstract class OldAbstractFoldableContentActions {
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken stateToken) {
-                        NotifyUser.showProgressProcessing();
+                        OldNotifyUser.showProgressProcessing();
                         session.check(new AsyncCallbackSimple<Void>() {
                             @Override
                             public void onSuccess(final Void result) {
@@ -256,16 +256,16 @@ public abstract class OldAbstractFoldableContentActions {
                                 editor.edit(session.getContentState().getContent(), new Listener<String>() {
                                     @Override
                                     public void onEvent(final String html) {
-                                        NotifyUser.showProgressSaving();
+                                        OldNotifyUser.showProgressSaving();
                                         contentServiceProvider.get().save(session.getUserHash(), stateToken, html,
                                                 new AsyncCallback<Void>() {
                                                     @Override
                                                     public void onFailure(final Throwable caught) {
-                                                        NotifyUser.hideProgress();
+                                                        OldNotifyUser.hideProgress();
                                                         if (caught instanceof SessionExpiredException) {
                                                             errorHandler.doSessionExpired();
                                                         } else {
-                                                            NotifyUser.error(i18n.t("Error saving document. Retrying..."));
+                                                            OldNotifyUser.error(i18n.t("Error saving document. Retrying..."));
                                                             errorHandler.process(caught);
                                                             editor.onSaveFailed();
                                                         }
@@ -273,7 +273,7 @@ public abstract class OldAbstractFoldableContentActions {
 
                                                     @Override
                                                     public void onSuccess(final Void param) {
-                                                        NotifyUser.hideProgress();
+                                                        OldNotifyUser.hideProgress();
                                                         session.getContentState().setContent(html);
                                                         editor.onSavedSuccessful();
                                                     }
@@ -298,7 +298,7 @@ public abstract class OldAbstractFoldableContentActions {
                                     }
                                 });
                                 editor.setFileMenuTitle(fileMenuTitle);
-                                NotifyUser.hideProgress();
+                                OldNotifyUser.hideProgress();
                             }
                         });
                     }
@@ -356,13 +356,13 @@ public abstract class OldAbstractFoldableContentActions {
                 new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken stateToken) {
-                        NotifyUser.showProgressProcessing();
+                        OldNotifyUser.showProgressProcessing();
                         contentServiceProvider.get().addFolder(session.getUserHash(), stateToken, defaultName,
                                 contentTypeId, new AsyncCallbackSimple<StateContainerDTO>() {
                                     @Override
                                     public void onSuccess(final StateContainerDTO state) {
                                         contextNavigator.setEditOnNextStateChange(true);
-                                        stateManager.setRetrievedState(state);
+                                        stateManager.setRetrievedStateAndGo(state);
                                     }
                                 });
                     }
@@ -381,14 +381,14 @@ public abstract class OldAbstractFoldableContentActions {
                 AccessRolDTO.Editor, CONTEXT_TOPBAR, new Listener0() {
                     @Override
                     public void onEvent() {
-                        NotifyUser.showProgressProcessing();
+                        OldNotifyUser.showProgressProcessing();
                         contentServiceProvider.get().addContent(session.getUserHash(),
                                 session.getCurrentState().getStateToken(), description, typeId,
                                 new AsyncCallbackSimple<StateContentDTO>() {
                                     @Override
                                     public void onSuccess(final StateContentDTO state) {
                                         contextNavigator.setEditOnNextStateChange(true);
-                                        stateManager.setRetrievedState(state);
+                                        stateManager.setRetrievedStateAndGo(state);
                                     }
                                 });
                     }
@@ -461,14 +461,14 @@ public abstract class OldAbstractFoldableContentActions {
                 new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken token) {
-                        NotifyUser.showProgressProcessing();
+                        OldNotifyUser.showProgressProcessing();
                         contentServiceProvider.get().setAsDefaultContent(session.getUserHash(), token,
                                 new AsyncCallbackSimple<ContentSimpleDTO>() {
                                     @Override
                                     public void onSuccess(final ContentSimpleDTO defContent) {
                                         session.getCurrentState().getGroup().setDefaultContent(defContent);
-                                        NotifyUser.hideProgress();
-                                        NotifyUser.info(i18n.t("Content selected as the group homepage"));
+                                        OldNotifyUser.hideProgress();
+                                        OldNotifyUser.info(i18n.t("Content selected as the group homepage"));
                                     }
                                 });
                     }
@@ -569,7 +569,7 @@ public abstract class OldAbstractFoldableContentActions {
                 AccessRolDTO.Editor, CONTENT_TOPBAR, new Listener<StateToken>() {
                     @Override
                     public void onEvent(final StateToken stateToken) {
-                        NotifyUser.important(i18n.t("Sorry, this functionality is currently in development"));
+                        OldNotifyUser.important(i18n.t("Sorry, this functionality is currently in development"));
                     }
                 });
         translateContent.setParentMenuTitle(fileMenuTitle);

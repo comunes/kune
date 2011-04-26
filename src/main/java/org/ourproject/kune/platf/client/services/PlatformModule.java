@@ -26,7 +26,7 @@ import org.ourproject.kune.platf.client.app.ToolGroup;
 import org.ourproject.kune.platf.client.i18n.Resources;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
 import org.ourproject.kune.platf.client.ui.QuickTipsHelper;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalette;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePanel;
 import org.ourproject.kune.platf.client.ui.palette.ColorWebSafePalettePresenter;
@@ -292,10 +292,10 @@ public class PlatformModule extends AbstractExtendedModule {
             }
         });
 
-        register(ApplicationComponentGroup.class, new Factory<NotifyUser>(NotifyUser.class) {
+        register(ApplicationComponentGroup.class, new Factory<OldNotifyUser>(OldNotifyUser.class) {
             @Override
-            public NotifyUser create() {
-                return new NotifyUser(i(I18nTranslationService.class), i(Images.class));
+            public OldNotifyUser create() {
+                return new OldNotifyUser(i(I18nTranslationService.class), i(Images.class));
             }
         });
 

@@ -22,7 +22,7 @@ package org.ourproject.kune.workspace.client.search;
 import java.util.HashMap;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 
 import cc.kune.core.client.state.StateManager;
 
@@ -59,11 +59,11 @@ public class SiteSearcherPresenter implements SiteSearcher {
     }
 
     public void doSearch(final String text) {
-        NotifyUser.showProgressLoading();
+        OldNotifyUser.showProgressLoading();
         searchHistory.put(text, null);
         view.search(text, currentSearch);
         view.show();
-        NotifyUser.hideProgress();
+        OldNotifyUser.hideProgress();
     }
 
     public void doSearchOfType(final String text, final SiteSearcherType typeOfSearch) {

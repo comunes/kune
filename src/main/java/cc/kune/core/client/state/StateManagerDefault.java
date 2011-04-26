@@ -51,7 +51,7 @@ import com.google.inject.Inject;
 
 public class StateManagerDefault implements StateManager, ValueChangeHandler<String> {
     private final BeforeActionCollection beforeStateChangeCollection;
-    private final ContentCache contentProvider;
+    private final ContentCache contentCache;
     private final EventBus eventBus;
     private final HistoryWrapper history;
     private StateToken previousToken;
@@ -69,7 +69,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             final TokenMatcher tokenMatcher, final EventBus eventBus, final SiteTokenListeners siteTokens) {
         this.tokenMatcher = tokenMatcher;
         this.eventBus = eventBus;
-        this.contentProvider = contentProvider;
+        this.contentCache = contentProvider;
         this.session = session;
         this.history = history;
         this.previousToken = null;
@@ -133,7 +133,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void gotoHistoryToken(final String token) {
-        Log.debug("StateManager: history goto-string-token newItem (" + token + ")");
+        Log.debug("StateManager: history goto-string-token :" + token);
         history.newItem(token);
     }
 
@@ -145,8 +145,16 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void gotoStateToken(final StateToken newToken) {
-        Log.debug("StateManager: history goto-token newItem (" + newToken + ")");
+        Log.debug("StateManager: history goto-token: " + newToken + ", previous: " + previousToken);
         history.newItem(newToken.getEncoded());
+    }
+
+    @Override
+    public void gotoStateToken(final StateToken token, final boolean useCache) {
+        if (!useCache) {
+            contentCache.removeContent(token);
+        }
+        gotoStateToken(token);
     }
 
     @Override
@@ -167,7 +175,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     private void onHistoryChanged(final StateToken newState) {
         // NotifyUser.info("loading: " + newState + " because current:" +
         // session.getCurrentStateToken());
-        contentProvider.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateAbstractDTO>() {
+        contentCache.getContent(session.getUserHash(), newState, new AsyncCallbackSimple<StateAbstractDTO>() {
             @Override
             public void onSuccess(final StateAbstractDTO newState) {
                 setState(newState);
@@ -330,7 +338,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         if (currentStateToken == null) {
             processCurrentHistoryToken();
         } else {
-            contentProvider.removeContent(currentStateToken);
+            contentCache.removeContent(currentStateToken);
             onHistoryChanged(currentStateToken);
         }
     }
@@ -372,7 +380,12 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void setRetrievedState(final StateAbstractDTO newState) {
-        contentProvider.cache(newState.getStateToken(), newState);
+        contentCache.cache(newState.getStateToken(), newState);
+    }
+
+    @Override
+    public void setRetrievedStateAndGo(final StateAbstractDTO newState) {
+        setRetrievedState(newState);
         // setState(newState);
         history.newItem(newState.getStateToken().toString());
     }
@@ -392,7 +405,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     void setState(final StateAbstractDTO newState) {
         session.setCurrentState(newState);
         final StateToken newToken = newState.getStateToken();
-        contentProvider.cache(newToken, newState);
+        contentCache.cache(newToken, newState);
         // history.newItem(newToken.toString(), false);
         StateChangedEvent.fire(eventBus, newState);
         checkGroupAndToolChange(newState);

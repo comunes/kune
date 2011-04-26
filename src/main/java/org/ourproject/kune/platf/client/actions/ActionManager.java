@@ -19,7 +19,7 @@
  \*/
 package org.ourproject.kune.platf.client.actions;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 
 import com.calclab.suco.client.events.Listener0;
 
@@ -32,7 +32,7 @@ public class ActionManager {
         final ActionDescriptor<?> action = actionItem.getAction();
         final Object item = actionItem.getItem();
         if (action.mustBeConfirmed()) {
-            NotifyUser.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Listener0() {
+            OldNotifyUser.askConfirmation(action.getConfirmationTitle(), action.getConfirmationText(), new Listener0() {
                 public void onEvent() {
                     fire(action, item);
                 }

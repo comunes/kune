@@ -9,7 +9,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescProviderCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.shared.domain.utils.AccessRights;
-import cc.kune.gspace.client.actions.perspective.ActionPerspective;
+import cc.kune.gspace.client.actions.perspective.ActionsGroup;
 
 import com.google.inject.Provider;
 
@@ -67,14 +67,16 @@ public class ActionRegistryByType {
         return getCurrentActions(targetItem, typeId, isLogged, rights, null);
     }
 
-    public GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
+    public <T> GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
             final boolean isLogged, final AccessRights rights, @Nullable final Class<?> clazz) {
         final GuiActionDescCollection collection = new GuiActionDescCollection();
         for (final Provider<? extends GuiActionDescrip> descripProv : getActions(typeId)) {
             final GuiActionDescrip descrip = descripProv.get();
+            // Log.info("Class " +
+            // descripProv.getClass().getAnnotations().toString());
             final AbstractAction action = descrip.getAction();
-            final Object perspective = descrip.getValue(ActionPerspective.KEY);
-            if (clazz != null && clazz != perspective) {
+            final Object actionGroup = descrip.getValue(ActionsGroup.KEY);
+            if (clazz != null && !clazz.equals(actionGroup)) {
                 // Not this perspective, then don't add this action
             } else {
                 // Any perspective it's ok (==null) or same perspective -> add

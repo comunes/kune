@@ -31,7 +31,7 @@ import org.ourproject.kune.platf.client.actions.ui.ComplexToolbar;
 import org.ourproject.kune.platf.client.actions.ui.GuiBindingsRegister;
 import org.ourproject.kune.platf.client.actions.ui.OldGuiActionDescrip;
 import org.ourproject.kune.platf.client.shortcuts.GlobalShortcutRegister;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.FontSize;
 import org.ourproject.kune.platf.client.ui.rte.RichTextArea.Formatter;
@@ -173,7 +173,7 @@ public class RTEditorPanel extends Composite implements RTEditorView, FocusHandl
         // + selection.getRangeAt(0).toHTML();
         // NotifyUser.info(info);
         final String info = "range count: " + getFstRange().getCommonAncestorContainer().getFirstChild().getNodeName();
-        NotifyUser.info(info);
+        OldNotifyUser.info(info);
     }
 
     public String getSelectionText() {

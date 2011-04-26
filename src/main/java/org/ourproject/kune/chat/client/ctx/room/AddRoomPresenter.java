@@ -20,7 +20,7 @@
 package org.ourproject.kune.chat.client.ctx.room;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -45,14 +45,14 @@ public class AddRoomPresenter implements AddRoom {
     }
 
     public void addRoom(String roomName) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         final String groupShortName = session.getCurrentState().getGroup().getShortName();
         contentServiceProvider.get().addRoom(session.getUserHash(),
                 session.getContainerState().getRootContainer().getStateToken(), groupShortName + "-" + roomName,
                 new AsyncCallbackSimple<StateContainerDTO>() {
                     public void onSuccess(final StateContainerDTO state) {
-                        stateManager.setRetrievedState(state);
-                        NotifyUser.hideProgress();
+                        stateManager.setRetrievedStateAndGo(state);
+                        OldNotifyUser.hideProgress();
                     }
                 });
     }

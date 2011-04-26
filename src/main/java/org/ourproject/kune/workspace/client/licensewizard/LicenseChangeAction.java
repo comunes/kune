@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.licensewizard;
 
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -47,11 +47,11 @@ public class LicenseChangeAction {
     }
 
     public void changeLicense(final StateToken token, final LicenseDTO license, final Listener0 onSuccess) {
-        NotifyUser.showProgressProcessing();
+        OldNotifyUser.showProgressProcessing();
         groupService.get().changeDefLicense(session.getUserHash(), token, license, new AsyncCallback<Void>() {
             public void onFailure(final Throwable caught) {
-                NotifyUser.hideProgress();
-                NotifyUser.error(i18n.t("Error changing default group license"));
+                OldNotifyUser.hideProgress();
+                OldNotifyUser.error(i18n.t("Error changing default group license"));
             }
 
             public void onSuccess(final Void result) {

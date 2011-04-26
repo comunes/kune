@@ -3,7 +3,7 @@ package cc.kune.docs.client.viewers;
 import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
-import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.IconsRegistry;
@@ -23,8 +23,8 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsClientTool;
 import cc.kune.docs.client.actions.DocsClientActions;
-import cc.kune.gspace.client.actions.perspective.MenuPerspective;
-import cc.kune.gspace.client.actions.perspective.ViewPerspective;
+import cc.kune.gspace.client.actions.perspective.MenuActionsGroup;
+import cc.kune.gspace.client.actions.perspective.ViewActionsGroup;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 
@@ -94,16 +94,17 @@ public class FolderViewerPresenter extends
     private void addItem(final String title, final String contentTypeId, final BasicMimeTypeDTO mimeType,
             final ContentStatus status, final StateToken stateToken, final StateToken parentStateToken,
             final AccessRights rights) {
+        Log.info("Adding item: " + title);
         final Object icon = getIcon(stateToken, contentTypeId, mimeType);
         final String tooltip = getTooltip(stateToken, mimeType);
         final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken), genId(parentStateToken), icon,
                 title, tooltip, status, stateToken, capabilitiesRegistry.isDragable(contentTypeId)
                         && rights.isAdministrable(), capabilitiesRegistry.isDropable(contentTypeId)
                         && rights.isAdministrable(), actionsRegistry.getCurrentActions(stateToken, contentTypeId,
-                        session.isLogged(), rights, MenuPerspective.class));
+                        session.isLogged(), rights, MenuActionsGroup.class));
         if (status.equals(ContentStatus.inTheDustbin) && !session.getShowDeletedContent()) {
             // Don't show
-            NotifyUser.info("Deleted, don't show");
+            // NotifyUser.info("Deleted, don't show");
         } else {
             getView().addItem(item, new ClickHandler() {
                 @Override
@@ -168,6 +169,10 @@ public class FolderViewerPresenter extends
         }
     }
 
+    public void refreshState() {
+        setContent((HasContent) session.getCurrentState());
+    }
+
     @Override
     protected void revealInParent() {
         RevealRootContentEvent.fire(this, this);
@@ -175,12 +180,13 @@ public class FolderViewerPresenter extends
 
     @Override
     public void setContent(@Nonnull final HasContent state) {
+        Log.info("Set content in FolderViewer");
         getView().clear();
         final StateContainerDTO stateContainer = (StateContainerDTO) state;
         getView().setContainer(stateContainer);
         final AccessRights rights = stateContainer.getContainerRights();
         final GuiActionDescCollection actions = actionsRegistry.getCurrentActions(stateContainer.getGroup(),
-                stateContainer.getTypeId(), session.isLogged(), rights, ViewPerspective.class);
+                stateContainer.getTypeId(), session.isLogged(), rights, ViewActionsGroup.class);
         getView().setActions(actions);
         createChildItems(stateContainer.getContainer(), stateContainer.getContainerRights());
         // view.setEditable(rights.isEditable());

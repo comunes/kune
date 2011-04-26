@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.options.logo;
 
 import org.ourproject.kune.platf.client.ui.dialogs.DefaultFormUtils;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.options.EntityOptionsView;
 import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
 
@@ -101,7 +101,7 @@ public abstract class EntityOptionsLogoPanel extends FormPanel implements Entity
         final FieldListenerAdapter changeListener = new FieldListenerAdapter() {
             @Override
             public void onChange(final Field field, final Object newVal, final Object oldVal) {
-                NotifyUser.info("change");
+                OldNotifyUser.info("change");
                 // setEnableFileField();
             }
         };

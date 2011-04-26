@@ -20,7 +20,7 @@
 package org.ourproject.kune.workspace.client.i18n;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.noti.NotifyUser;
+import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
@@ -53,25 +53,25 @@ public class I18nTranslatorPresenter implements I18nTranslator {
     }
 
     public void doShowTranslator() {
-        NotifyUser.showProgressLoading();
+        OldNotifyUser.showProgressLoading();
         if (session.isLogged()) {
             view.show();
         } else {
-            NotifyUser.info(i18n.t("Sign in or register to help with the translation"));
+            OldNotifyUser.info(i18n.t("Sign in or register to help with the translation"));
         }
-        NotifyUser.hideProgress();
+        OldNotifyUser.hideProgress();
     }
 
     public void doTranslation(final String id, final String trKey, final String translation) {
-        NotifyUser.showProgressSaving();
+        OldNotifyUser.showProgressSaving();
         i18nService.setTranslation(session.getUserHash(), id, translation, new AsyncCallback<String>() {
             public void onFailure(final Throwable caught) {
-                NotifyUser.hideProgress();
-                NotifyUser.error(i18n.t("Server error saving the translation"));
+                OldNotifyUser.hideProgress();
+                OldNotifyUser.error(i18n.t("Server error saving the translation"));
             }
 
             public void onSuccess(final String result) {
-                NotifyUser.hideProgress();
+                OldNotifyUser.hideProgress();
                 i18n.setTranslationAfterSave(trKey, result);
             }
         });
