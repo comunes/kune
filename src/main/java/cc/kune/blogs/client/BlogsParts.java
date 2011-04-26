@@ -1,14 +1,14 @@
-package cc.kune.docs.client;
+package cc.kune.blogs.client;
 
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class DocsParts {
+public class BlogsParts {
 
     @Inject
-    public DocsParts(final Session session, final Provider<DocsClientTool> clientTool) {
+    public BlogsParts(final Session session, final Provider<BlogsClientTool> clientTool) {
         clientTool.get();
     }
 }

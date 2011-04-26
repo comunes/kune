@@ -17,13 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package cc.kune.docs.client.actions;
+package cc.kune.blogs.client.actions;
 
-import static cc.kune.docs.client.DocsClientTool.TYPE_DOCUMENT;
-import static cc.kune.docs.client.DocsClientTool.TYPE_FOLDER;
-import static cc.kune.docs.client.DocsClientTool.TYPE_ROOT;
-import static cc.kune.docs.client.DocsClientTool.TYPE_UPLOADEDFILE;
-import static cc.kune.docs.client.DocsClientTool.TYPE_WAVE;
+import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_BLOG;
+import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_POST;
+import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_ROOT;
+import static org.ourproject.kune.blogs.client.BlogClientTool.TYPE_UPLOADEDFILE;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
@@ -35,25 +34,25 @@ import cc.kune.gspace.client.actions.ActionGroups;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class DocsClientActions extends AbstractFoldableToolActions {
+public class BlogsClientActions extends AbstractFoldableToolActions {
 
-    final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-    final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
-    final String[] containersNoRoot = { TYPE_FOLDER };
-    final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WAVE };
-    final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+    final String[] all = { TYPE_ROOT, TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
+    final String[] containers = { TYPE_ROOT, TYPE_BLOG };
+    final String[] containersNoRoot = { TYPE_BLOG };
+    final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
+    final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
 
     @Inject
-    public DocsClientActions(final I18nUITranslationService i18n, final Session session,
+    public BlogsClientActions(final I18nUITranslationService i18n, final Session session,
             final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-            final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewDocBtn> newDocBtn,
-            final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenDocMenuItem> openContentMenuItem,
-            final Provider<DelDocMenuItem> delContentMenuItem, final Provider<DelFolderMenuItem> delFolderMenuItem) {
+            final Provider<GoParentBlogBtn> folderGoUp, final Provider<NewPostBtn> newDocBtn,
+            final Provider<NewBlogBtn> newFolderBtn, final Provider<OpenBlogMenuItem> openContentMenuItem,
+            final Provider<DelPostMenuItem> delContentMenuItem, final Provider<DelBlogMenuItem> delFolderMenuItem) {
         super(session, stateManager, i18n, registry);
         actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
         actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
-        actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containers);
-        actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, containers);
+        actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containersNoRoot);
+        actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, TYPE_ROOT);
         actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
         actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
         actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);

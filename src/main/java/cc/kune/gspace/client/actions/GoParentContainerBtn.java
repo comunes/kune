@@ -1,4 +1,4 @@
-package cc.kune.docs.client.actions;
+package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
@@ -16,15 +16,15 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
-public class FolderGoUpBtn extends ButtonDescriptor {
+public class GoParentContainerBtn extends ButtonDescriptor {
 
-    public static class FolderGoUpAction extends AbstractExtendedAction {
+    public static class GoParentContainerAction extends AbstractExtendedAction {
 
         private final Session session;
         private final StateManager stateManager;
 
         @Inject
-        public FolderGoUpAction(final Session session, final StateManager stateManager) {
+        public GoParentContainerAction(final Session session, final StateManager stateManager) {
             this.session = session;
             this.stateManager = stateManager;
         }
@@ -46,8 +46,7 @@ public class FolderGoUpBtn extends ButtonDescriptor {
 
     }
 
-    @Inject
-    public FolderGoUpBtn(final I18nTranslationService i18n, final FolderGoUpAction action, final CoreResources res) {
+    public GoParentContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action, final CoreResources res) {
         super(action);
         this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.folderGoUp());
     }

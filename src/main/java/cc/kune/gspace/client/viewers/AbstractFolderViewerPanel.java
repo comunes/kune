@@ -1,11 +1,11 @@
-package cc.kune.docs.client.viewers;
+package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.client.viewers.FolderViewerPresenter.FolderViewerView;
 import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;

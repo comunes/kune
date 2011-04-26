@@ -19,6 +19,8 @@
  */
 package cc.kune.client;
 
+import cc.kune.blogs.client.BlogsGinModule;
+import cc.kune.blogs.client.BlogsGinjector;
 import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.ChatGinModule;
 import cc.kune.chat.client.ChatParts;
@@ -48,8 +50,8 @@ import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.client.DocsGinjector;
 import cc.kune.docs.client.DocsGinModule;
+import cc.kune.docs.client.DocsGinjector;
 import cc.kune.gspace.client.GSpaceGinModule;
 import cc.kune.gspace.client.GSpaceGinjector;
 import cc.kune.pspace.client.PSpaceGinModule;
@@ -66,8 +68,8 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 
 @GinModules({ KuneGinModule.class, CoreGinModule.class, ChatGinModule.class, WaveGinModule.class,
-        PSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class })
-public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector {
+        PSpaceGinModule.class, GSpaceGinModule.class, DocsGinModule.class, BlogsGinModule.class })
+public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector, BlogsGinjector {
 
     /*
      * You have to add here all the GWTPresenters (as Provider or AsyncProvider)

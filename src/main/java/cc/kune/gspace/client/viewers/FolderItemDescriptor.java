@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package cc.kune.docs.client.viewers;
+package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.shared.domain.ContentStatus;

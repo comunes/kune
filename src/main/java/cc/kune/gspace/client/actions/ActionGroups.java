@@ -1,4 +1,4 @@
-package cc.kune.gspace.client.actions.perspective;
+package cc.kune.gspace.client.actions;
 
 /**
  * A group of actions that must be grouped and showed in some perspective (on

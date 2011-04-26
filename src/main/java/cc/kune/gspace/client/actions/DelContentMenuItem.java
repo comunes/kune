@@ -1,4 +1,4 @@
-package cc.kune.docs.client.actions;
+package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
@@ -15,7 +15,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.client.viewers.FolderViewerPresenter;
+import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -78,7 +78,6 @@ public class DelContentMenuItem extends MenuItemDescriptor {
 
     }
 
-    @Inject
     public DelContentMenuItem(final I18nTranslationService i18n, final DelContentAction action, final CoreResources res) {
         super(action);
         this.withText(i18n.t("Delete")).withIcon(res.cancel());

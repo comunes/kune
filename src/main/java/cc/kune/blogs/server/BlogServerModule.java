@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.blogs.server;
+package cc.kune.blogs.server;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;

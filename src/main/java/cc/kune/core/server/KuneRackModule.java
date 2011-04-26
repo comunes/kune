@@ -22,6 +22,7 @@ package cc.kune.core.server;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cc.kune.blogs.server.BlogServerModule;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
@@ -139,7 +140,7 @@ public class KuneRackModule implements RackModule {
         builder.use(new ServletModule());
         builder.use(new PlatformServerModule());
         builder.use(new DocumentServerModule());
-        // builder.use(new BlogServerModule());
+        builder.use(new BlogServerModule());
         // builder.use(new WikiServerModule());
         // builder.use(new ChatServerModule());
         // builder.use(new GalleryServerModule());

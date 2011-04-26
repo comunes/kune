@@ -17,16 +17,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package org.ourproject.kune.blogs.server;
+package cc.kune.blogs.server;
 
-import static org.ourproject.kune.blogs.server.BlogServerTool.TYPE_BLOG;
-import static org.ourproject.kune.blogs.server.BlogServerTool.TYPE_POST;
-import static org.ourproject.kune.blogs.server.BlogServerTool.TYPE_ROOT;
-import static org.ourproject.kune.blogs.server.BlogServerTool.TYPE_UPLOADEDFILE;
+import static cc.kune.blogs.server.BlogServerTool.TYPE_BLOG;
+import static cc.kune.blogs.server.BlogServerTool.TYPE_POST;
+import static cc.kune.blogs.server.BlogServerTool.TYPE_ROOT;
+import static cc.kune.blogs.server.BlogServerTool.TYPE_UPLOADEDFILE;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import cc.kune.blogs.server.BlogServerTool;
 import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 

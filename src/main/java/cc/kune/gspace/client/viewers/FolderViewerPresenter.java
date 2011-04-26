@@ -1,7 +1,8 @@
-package cc.kune.docs.client.viewers;
+package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
+import cc.kune.blogs.client.BlogsClientTool;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -21,8 +22,7 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsClientTool;
-import cc.kune.docs.client.actions.DocsClientActions;
-import cc.kune.gspace.client.actions.perspective.ActionGroups;
+import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 
@@ -77,7 +77,7 @@ public class FolderViewerPresenter extends
     public FolderViewerPresenter(final EventBus eventBus, final FolderViewerView view, final FolderViewerProxy proxy,
             final Session session, final StateManager stateManager, final I18nTranslationService i18n,
             final ContentViewerSelector viewerSelector, final ActionRegistryByType actionsRegistry,
-            final DocsClientActions actions, final Provider<FileDownloadUtils> downloadUtilsProvider,
+            final Provider<FileDownloadUtils> downloadUtilsProvider,
             final ContentCapabilitiesRegistry capabilitiesRegistry) {
         super(eventBus, view, proxy);
         this.session = session;
@@ -88,6 +88,7 @@ public class FolderViewerPresenter extends
         this.capabilitiesRegistry = capabilitiesRegistry;
         iconsRegistry = capabilitiesRegistry.getIconsRegistry();
         viewerSelector.register(this, true, DocsClientTool.TYPE_ROOT, DocsClientTool.TYPE_FOLDER);
+        viewerSelector.register(this, true, BlogsClientTool.TYPE_ROOT, BlogsClientTool.TYPE_BLOG);
         useGenericImageIcon = false;
     }
 

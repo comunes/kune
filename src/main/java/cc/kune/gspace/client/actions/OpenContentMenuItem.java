@@ -1,4 +1,4 @@
-package cc.kune.docs.client.actions;
+package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
@@ -28,7 +28,6 @@ public class OpenContentMenuItem extends MenuItemDescriptor {
 
     }
 
-    @Inject
     public OpenContentMenuItem(final I18nTranslationService i18n, final OpenContentAction action, final NavResources res) {
         super(action);
         this.withText(i18n.t("Open")).withIcon(res.go());

@@ -1,4 +1,4 @@
-package cc.kune.docs.client.viewers;
+package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.actions.gxtui.AbstractGxtMenuGui;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;

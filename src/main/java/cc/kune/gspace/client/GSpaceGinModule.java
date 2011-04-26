@@ -26,6 +26,10 @@ import cc.kune.gspace.client.tool.selector.ToolSelectorPanel;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePanel;
 import cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter;
+import cc.kune.gspace.client.viewers.DocViewerPanel;
+import cc.kune.gspace.client.viewers.DocViewerPresenter;
+import cc.kune.gspace.client.viewers.FolderViewerAsTablePanel;
+import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
@@ -49,6 +53,10 @@ public class GSpaceGinModule extends AbstractPresenterModule {
         bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
                 ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);
         bind(ToolSelector.class).to(ToolSelectorPresenter.class).in(Singleton.class);
+        bindPresenter(DocViewerPresenter.class, DocViewerPresenter.DocViewerView.class, DocViewerPanel.class,
+                DocViewerPresenter.DocViewerProxy.class);
+        bindPresenter(FolderViewerPresenter.class, FolderViewerPresenter.FolderViewerView.class,
+                FolderViewerAsTablePanel.class, FolderViewerPresenter.FolderViewerProxy.class);
     }
 
 }

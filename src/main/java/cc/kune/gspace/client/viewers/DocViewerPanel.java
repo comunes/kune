@@ -1,10 +1,10 @@
-package cc.kune.docs.client.viewers;
+package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.docs.client.viewers.DocViewerPresenter.DocViewerView;
 import cc.kune.gspace.client.GSpaceArmor;
+import cc.kune.gspace.client.viewers.DocViewerPresenter.DocViewerView;
 import cc.kune.wave.client.WaveClientManager;
 
 import com.google.gwt.core.client.GWT;

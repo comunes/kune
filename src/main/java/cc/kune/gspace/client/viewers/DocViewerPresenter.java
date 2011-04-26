@@ -1,7 +1,9 @@
-package cc.kune.docs.client.viewers;
+package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
+import cc.kune.blogs.client.BlogsClientTool;
+import cc.kune.blogs.client.actions.BlogsClientActions;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.state.Session;
@@ -10,7 +12,7 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.docs.client.DocsClientTool;
 import cc.kune.docs.client.actions.DocsClientActions;
-import cc.kune.gspace.client.actions.perspective.ActionGroups;
+import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 
@@ -48,11 +50,13 @@ public class DocViewerPresenter extends Presenter<DocViewerPresenter.DocViewerVi
     @Inject
     public DocViewerPresenter(final EventBus eventBus, final DocViewerView view, final DocViewerProxy proxy,
             final Session session, final ContentViewerSelector viewerSelector,
-            final ActionRegistryByType actionsRegistry, final DocsClientActions actions) {
+            final ActionRegistryByType actionsRegistry, final DocsClientActions docsActions,
+            final BlogsClientActions blogActions) {
         super(eventBus, view, proxy);
         this.session = session;
         this.actionsRegistry = actionsRegistry;
         viewerSelector.register(this, true, DocsClientTool.TYPE_WAVE);
+        viewerSelector.register(this, true, BlogsClientTool.TYPE_POST);
     }
 
     @Override
