@@ -15,7 +15,6 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsClientTool;
-import cc.kune.gspace.client.actions.perspective.ViewActionsGroup;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -64,6 +63,6 @@ public class NewFolderBtn extends ButtonDescriptor {
         super(action);
         this.withText(i18n.t("New folder")).withToolTip(
                 i18n.t("Create a new folder here. A folder will be a 'section' in the public web")).withIcon(
-                res.folderAdd()).in(ViewActionsGroup.class).withStyles("k-def-docbtn");
+                res.folderAdd()).withStyles("k-def-docbtn");
     }
 }

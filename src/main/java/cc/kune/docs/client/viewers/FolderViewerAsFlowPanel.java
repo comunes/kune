@@ -6,6 +6,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.BasicThumb;
 import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.core.client.GWT;
@@ -30,8 +31,8 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
     int ICONSIZE = 100;
 
     @Inject
-    public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor) {
-        super(gsArmor);
+    public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n) {
+        super(gsArmor, i18n);
         widget = uiBinder.createAndBindUi(this);
     }
 

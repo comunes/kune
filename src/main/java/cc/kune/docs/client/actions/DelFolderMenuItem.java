@@ -14,7 +14,6 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.viewers.FolderViewerPresenter;
-import cc.kune.gspace.client.actions.perspective.MenuActionsGroup;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -64,7 +63,7 @@ public class DelFolderMenuItem extends MenuItemDescriptor {
     @Inject
     public DelFolderMenuItem(final I18nTranslationService i18n, final DelFolderAction action, final CoreResources res) {
         super(action);
-        this.withText(i18n.t("Delete")).withIcon(res.cancel()).in(MenuActionsGroup.class);
+        this.withText(i18n.t("Delete")).withIcon(res.cancel());
     }
 
 }

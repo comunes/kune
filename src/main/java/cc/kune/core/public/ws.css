@@ -1109,3 +1109,8 @@ font-size:small;
 .k-def-docbtn span {
     font-size: 13px !important;
 }
+
+.k-empty-msg {
+    font-size: 16px;
+    font-style: italic;
+}

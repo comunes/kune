@@ -1,7 +1,9 @@
 package cc.kune.core.client.actions;
 
 import java.util.HashMap;
+import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import cc.kune.common.client.actions.AbstractAction;
@@ -9,18 +11,20 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescProviderCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.shared.domain.utils.AccessRights;
-import cc.kune.gspace.client.actions.perspective.ActionsGroup;
 
 import com.google.inject.Provider;
 
 /**
- * A registry of actions by content type (doc, post, etc)
+ * A registry of actions by content type (doc, post, etc) and grouped (some
+ * actions for some toolbar, etc)
  * 
  */
 public class ActionRegistryByType {
-    private static final String GENERIC = "kgenacts";
+    private static final String GENERIC_GROUP_ACTION = "kgengroup";
+    private static final String GENERIC_TYPE_ID = "kgentype";
+    private static final String KEY_SEPARATOR = "-";
 
-    private final HashMap<String, GuiActionDescProviderCollection> actions;
+    private final Map<String, GuiActionDescProviderCollection> actions;
 
     public ActionRegistryByType() {
         actions = new HashMap<String, GuiActionDescProviderCollection>();
@@ -32,34 +36,44 @@ public class ActionRegistryByType {
     }
 
     public void addAction(final Provider<? extends GuiActionDescrip> action) {
-        addAction(action, GENERIC);
+        addAction(GENERIC_GROUP_ACTION, action, GENERIC_TYPE_ID);
     }
 
-    public void addAction(final Provider<? extends GuiActionDescrip> action, final String... typeIds) {
-        assert action != null;
+    public void addAction(@Nonnull final String actionsGroupId, final Provider<? extends GuiActionDescrip> action) {
+        addAction(actionsGroupId, action, GENERIC_TYPE_ID);
+    }
+
+    public void addAction(@Nonnull final String actionsGroupId,
+            final @Nonnull Provider<? extends GuiActionDescrip> action, @Nonnull final String... typeIds) {
         for (final String typeId : typeIds) {
-            final GuiActionDescProviderCollection actionColl = getActions(typeId);
+            final GuiActionDescProviderCollection actionColl = getActions(actionsGroupId, typeId);
             actionColl.add(action);
+            actions.put(genKey(actionsGroupId, typeId), actionColl);
         }
     }
 
-    private GuiActionDescProviderCollection getActions(final String typeId) {
-        GuiActionDescProviderCollection actionColl = actions.get(typeId);
+    private String genKey(final String actionsGroupId, final String typeId) {
+        return actionsGroupId + KEY_SEPARATOR + typeId;
+    }
+
+    private GuiActionDescProviderCollection getActions(final String actionsGroupId, final String typeId) {
+        final String key = genKey(actionsGroupId, typeId);
+        GuiActionDescProviderCollection actionColl = actions.get(key);
         if (actionColl == null) {
             actionColl = new GuiActionDescProviderCollection();
-            actions.put(typeId, actionColl);
+            actions.put(key, actionColl);
         }
         return actionColl;
     }
 
     public GuiActionDescCollection getCurrentActions(final Object targetItem, final boolean isLogged,
             final AccessRights rights) {
-        return getCurrentActions(targetItem, GENERIC, isLogged, rights, null);
+        return getCurrentActions(targetItem, GENERIC_TYPE_ID, isLogged, rights, null);
     }
 
     public GuiActionDescCollection getCurrentActions(final Object targetItem, final boolean isLogged,
-            final AccessRights rights, @Nullable final Class<?> clazz) {
-        return getCurrentActions(targetItem, GENERIC, isLogged, rights, clazz);
+            final AccessRights rights, @Nullable final String actionsGroup) {
+        return getCurrentActions(targetItem, GENERIC_TYPE_ID, isLogged, rights, actionsGroup);
     }
 
     public GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
@@ -68,25 +82,17 @@ public class ActionRegistryByType {
     }
 
     public <T> GuiActionDescCollection getCurrentActions(final Object targetItem, final String typeId,
-            final boolean isLogged, final AccessRights rights, @Nullable final Class<?> clazz) {
+            final boolean isLogged, final AccessRights rights, @Nullable final String actionsGroupId) {
         final GuiActionDescCollection collection = new GuiActionDescCollection();
-        for (final Provider<? extends GuiActionDescrip> descripProv : getActions(typeId)) {
+        for (final Provider<? extends GuiActionDescrip> descripProv : getActions(actionsGroupId, typeId)) {
             final GuiActionDescrip descrip = descripProv.get();
-            // Log.info("Class " +
-            // descripProv.getClass().getAnnotations().toString());
             final AbstractAction action = descrip.getAction();
-            final Object actionGroup = descrip.getValue(ActionsGroup.KEY);
-            if (clazz != null && !clazz.equals(actionGroup)) {
-                // Not this perspective, then don't add this action
-            } else {
-                // Any perspective it's ok (==null) or same perspective -> add
-                if (action instanceof RolAction) {
-                    if (mustAdd((RolAction) action, isLogged, rights)) {
-                        add(collection, descrip, targetItem);
-                    }
-                } else {
+            if (action instanceof RolAction) {
+                if (mustAdd((RolAction) action, isLogged, rights)) {
                     add(collection, descrip, targetItem);
                 }
+            } else {
+                add(collection, descrip, targetItem);
             }
         }
         return collection;

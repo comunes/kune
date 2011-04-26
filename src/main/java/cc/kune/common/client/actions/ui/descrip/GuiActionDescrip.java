@@ -4,7 +4,6 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.PropertyChangeListener;
-import cc.kune.gspace.client.actions.perspective.ActionsGroup;
 
 public interface GuiActionDescrip {
 
@@ -48,8 +47,6 @@ public interface GuiActionDescrip {
     Object getValue(final String key);
 
     boolean hasTarget();
-
-    GuiActionDescrip in(Class<? extends ActionsGroup> clazz);
 
     boolean isChild();
 

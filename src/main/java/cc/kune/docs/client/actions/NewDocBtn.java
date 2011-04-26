@@ -18,12 +18,11 @@ import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.docs.client.DocsClientTool;
-import cc.kune.gspace.client.actions.perspective.ViewActionsGroup;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class NewDocBtn extends ButtonDescriptor implements ViewActionsGroup {
+public class NewDocBtn extends ButtonDescriptor {
 
     public static class NewDocAction extends RolAction {
 
@@ -70,7 +69,7 @@ public class NewDocBtn extends ButtonDescriptor implements ViewActionsGroup {
         shorcutReg.put(shortcut, action);
         this.withText(i18n.t("New document")).withToolTip(
                 "Create a New Document here. This document will be a new 'Page' in the public web if you publish it").withIcon(
-                res.pageAdd()).in(ViewActionsGroup.class).withShortcut(shortcut).withStyles("k-def-docbtn");
+                res.pageAdd()).withShortcut(shortcut).withStyles("k-def-docbtn");
     }
 
 }

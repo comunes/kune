@@ -29,6 +29,7 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.gspace.client.actions.perspective.ActionGroups;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -46,17 +47,16 @@ public class DocsClientActions extends AbstractFoldableContentActions {
             final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
             final Provider<FolderGoUpBtn> folderGoUp, final Provider<NewDocBtn> newDocBtn,
             final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenContentMenuItem> openContentMenuItem,
-            final Provider<DelContentMenuItem> delContentMenuItem,
-        final Provider<DelFolderMenuItem> delFolderMenuItem) {
+            final Provider<DelContentMenuItem> delContentMenuItem, final Provider<DelFolderMenuItem> delFolderMenuItem) {
         super(session, stateManager, i18n, registry);
-        actionsRegistry.addAction(folderGoUp, contents);
-        actionsRegistry.addAction(folderGoUp, containersNoRoot);
-        actionsRegistry.addAction(newDocBtn, containers);
-        actionsRegistry.addAction(newFolderBtn, containers);
-        actionsRegistry.addAction(openContentMenuItem, contents);
-        actionsRegistry.addAction(openContentMenuItem, containersNoRoot);
-        actionsRegistry.addAction(delContentMenuItem, contents);
-        actionsRegistry.addAction(delFolderMenuItem, containersNoRoot);
+        actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
+        actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
+        actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containers);
+        actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, containers);
+        actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
+        actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
+        actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
+        actionsRegistry.addAction(ActionGroups.MENUITEM, delFolderMenuItem, containersNoRoot);
     }
 
     @Override

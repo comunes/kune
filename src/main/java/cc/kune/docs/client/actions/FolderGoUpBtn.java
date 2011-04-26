@@ -13,7 +13,6 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.actions.perspective.ViewActionsGroup;
 
 import com.google.inject.Inject;
 
@@ -42,7 +41,7 @@ public class FolderGoUpBtn extends ButtonDescriptor {
                 stateToken = container.getStateToken().copy().setFolder(container.getParentFolderId());
             }
             stateManager.gotoStateToken(stateToken);
-            NotifyUser.hideProgress();
+            // NotifyUser.hideProgress();
         }
 
     }
@@ -50,8 +49,7 @@ public class FolderGoUpBtn extends ButtonDescriptor {
     @Inject
     public FolderGoUpBtn(final I18nTranslationService i18n, final FolderGoUpAction action, final CoreResources res) {
         super(action);
-        this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.folderGoUp()).in(
-                ViewActionsGroup.class);
+        this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.folderGoUp());
     }
 
 }

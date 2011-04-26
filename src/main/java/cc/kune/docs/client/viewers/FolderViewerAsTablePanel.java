@@ -35,15 +35,13 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     FlexTable flex;
 
     private final GuiProvider guiProvider;
-    private final I18nTranslationService i18n;
     private final CoreResources res;
     protected FolderItemWidget selected;
 
     @Inject
     public FolderViewerAsTablePanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
             final GuiProvider guiProvider, final CoreResources res) {
-        super(gsArmor);
-        this.i18n = i18n;
+        super(gsArmor, i18n);
         this.guiProvider = guiProvider;
         this.res = res;
         widget = uiBinder.createAndBindUi(this);
@@ -104,4 +102,5 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     public void setContainer(final StateContainerDTO state) {
         super.setContainer(state);
     }
+
 }
