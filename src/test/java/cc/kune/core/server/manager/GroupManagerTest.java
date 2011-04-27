@@ -42,10 +42,12 @@ import cc.kune.domain.User;
 
 public class GroupManagerTest extends PersistencePreLoadedDataTest {
 
+    private static final String PUBLIC_DESCRIP = "Some public descrip";
+
     @Test
     public void createdGroupShoudHaveValidSocialNetwork() throws Exception {
         final Group group = new Group("short", "longName", defLicense, GroupType.PROJECT);
-        groupManager.createGroup(group, user);
+        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
         final SocialNetwork socialNetwork = group.getSocialNetwork();
         final AccessLists lists = socialNetwork.getAccessLists();
         assertTrue(lists.getAdmins().includes(user.getUserGroup()));
@@ -58,7 +60,7 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
     public void createGroup() throws Exception {
         final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
-        groupManager.createGroup(group, user);
+        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
         final Group otherGroup = groupManager.findByShortName("ysei");
 
         assertEquals(group.getLongName(), otherGroup.getLongName());
@@ -70,7 +72,7 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
     public void createGroupAndSearch() throws Exception, ParseException {
         final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
-        groupManager.createGroup(group, user);
+        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
         groupManager.reIndex();
         final SearchResult<Group> result = groupManager.search("ysei");
         assertEquals(1, result.getSize());
@@ -82,12 +84,12 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
     public void createGroupWithExistingLongName() throws Exception {
         final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
-        groupManager.createGroup(group, user);
+        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
 
         final Group group2 = new Group("ysei2", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
         group2.setDefaultLicense(defLicense);
-        groupManager.createGroup(group2, user);
+        groupManager.createGroup(group2, user, PUBLIC_DESCRIP);
 
         rollbackTransaction();
     }
@@ -96,11 +98,11 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
     public void createGroupWithExistingShortName() throws Exception {
         final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
                 GroupType.PROJECT);
-        groupManager.createGroup(group, user);
+        groupManager.createGroup(group, user, PUBLIC_DESCRIP);
 
         final Group group2 = new Group("ysei", "Yellow Submarine Environmental Initiative 2", defLicense,
                 GroupType.PROJECT);
-        groupManager.createGroup(group2, user);
+        groupManager.createGroup(group2, user, PUBLIC_DESCRIP);
 
         rollbackTransaction();
     }
@@ -108,7 +110,7 @@ public class GroupManagerTest extends PersistencePreLoadedDataTest {
     private void createTestGroup(final int number) throws Exception {
         final Group g = new Group("ysei" + number, "Yellow Submarine Environmental Initiative " + number, defLicense,
                 GroupType.PROJECT);
-        groupManager.createGroup(g, user);
+        groupManager.createGroup(g, user, PUBLIC_DESCRIP);
     }
 
     @Test(expected = EmailAddressInUseException.class)

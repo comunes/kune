@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.manager;
 
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Ignore;
@@ -26,7 +28,6 @@ import org.junit.Test;
 
 import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.core.server.manager.impl.SearchResult;
-import cc.kune.docs.server.DocumentServerTool;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Content;
 
@@ -37,14 +38,12 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
     private static final String TITLE = "title";
 
     private void createContent() {
-        final Content cnt = contentManager.createContent(TITLE, BODY, user, container,
-                DocumentServerTool.TYPE_UPLOADEDFILE);
+        final Content cnt = contentManager.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
         persist(cnt);
     }
 
     private void createContentWithMimeAndCheck(final String mimetype) {
-        final Content cnt = contentManager.createContent(TITLE, BODY, user, container,
-                DocumentServerTool.TYPE_UPLOADEDFILE);
+        final Content cnt = contentManager.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
         cnt.setMimeType(new BasicMimeType(mimetype));
         persist(cnt);
         final Content newCnt = contentManager.find(cnt.getId());
@@ -113,8 +112,7 @@ public class ContentManagerTest extends PersistencePreLoadedDataTest {
      */
     @Test
     public void testUTF8Persist() {
-        final Content cnt = contentManager.createContent("汉语/漢語", "汉语/漢語", user, container,
-                DocumentServerTool.TYPE_DOCUMENT);
+        final Content cnt = contentManager.createContent("汉语/漢語", "汉语/漢語", user, container, TYPE_DOCUMENT);
         final Content newCnt = contentManager.find(cnt.getId());
         assertEquals("汉语/漢語", newCnt.getTitle());
     }

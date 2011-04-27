@@ -21,7 +21,6 @@ package org.ourproject.kune.wiki.server;
 
 import java.util.Date;
 
-
 import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 import cc.kune.core.server.content.ContainerManager;
@@ -30,6 +29,7 @@ import cc.kune.core.server.manager.ToolConfigurationManager;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.tool.ServerToolTarget;
+import cc.kune.core.shared.ToolConstants;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -44,16 +44,16 @@ import com.google.inject.Inject;
 
 public class WikiServerTool implements ServerTool {
     public static final String NAME = "wiki";
-    public static final String TYPE_ROOT = NAME + "." + "root";
-    public static final String TYPE_FOLDER = NAME + "." + "folder";
-    public static final String TYPE_WIKIPAGE = NAME + "." + "wikipage";
-    public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
-
     public static final String ROOT_NAME = "wiki";
+    public static final String TYPE_FOLDER = NAME + "." + "folder";
+    public static final String TYPE_ROOT = NAME + "." + "root";
+    public static final String TYPE_UPLOADEDFILE = NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
-    private final ContentManager contentManager;
+    public static final String TYPE_WIKIPAGE = NAME + "." + "wikipage";
+
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;
+    private final ContentManager contentManager;
     private final I18nTranslationService i18n;
 
     @Inject
@@ -63,58 +63,6 @@ public class WikiServerTool implements ServerTool {
         this.containerManager = containerManager;
         this.configurationManager = configurationManager;
         this.i18n = translationService;
-    }
-
-    public void checkTypesBeforeContainerCreation(String parentTypeId, String typeId) {
-        checkContainerTypeId(parentTypeId, typeId);
-    }
-
-    public void checkTypesBeforeContentCreation(String parentTypeId, String typeId) {
-        checkContentTypeId(parentTypeId, typeId);
-    }
-
-    public String getName() {
-        return NAME;
-    }
-
-    public String getRootName() {
-        return ROOT_NAME;
-    }
-
-    public ServerToolTarget getTarget() {
-        return ServerToolTarget.forBoth;
-    }
-
-    public Group initGroup(final User user, final Group group) {
-        final ToolConfiguration config = new ToolConfiguration();
-        final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
-        setContainerWikiAcl(rootFolder);
-        config.setRoot(rootFolder);
-        group.setToolConfig(NAME, config);
-        configurationManager.persist(config);
-        final Content descriptor = contentManager.createContent(i18n.t("Wiki page sample"), "", user, rootFolder,
-                WikiServerTool.TYPE_WIKIPAGE);
-        descriptor.addAuthor(user);
-        descriptor.setLanguage(user.getLanguage());
-        descriptor.setTypeId(TYPE_WIKIPAGE);
-        descriptor.setStatus(ContentStatus.publishedOnline);
-        contentManager.save(user, descriptor,
-                i18n.t("This is only a wiki page sample. You can edit or rename it, as any other user."));
-        return group;
-    }
-
-    public void onCreateContainer(final Container container, final Container parent) {
-        setContainerWikiAcl(container);
-    }
-
-    public void onCreateContent(final Content content, final Container parent) {
-        content.setStatus(ContentStatus.publishedOnline);
-        content.setPublishedOn(new Date());
-    }
-
-    @Inject
-    public void register(final ServerToolRegistry registry) {
-        registry.register(this);
     }
 
     void checkContainerTypeId(final String parentTypeId, final String typeId) {
@@ -133,7 +81,7 @@ public class WikiServerTool implements ServerTool {
     void checkContentTypeId(final String parentTypeId, final String typeId) {
         if (typeId.equals(TYPE_WIKIPAGE) || typeId.equals(TYPE_UPLOADEDFILE)) {
             // ok valid content
-            boolean parentIsFolderOrRoot = parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER);
+            final boolean parentIsFolderOrRoot = parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER);
             if ((typeId.equals(TYPE_UPLOADEDFILE) && parentIsFolderOrRoot)
                     || (typeId.equals(TYPE_WIKIPAGE) && parentIsFolderOrRoot)) {
                 // ok
@@ -145,8 +93,69 @@ public class WikiServerTool implements ServerTool {
         }
     }
 
+    @Override
+    public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
+        checkContainerTypeId(parentTypeId, typeId);
+    }
+
+    @Override
+    public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
+        checkContentTypeId(parentTypeId, typeId);
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public String getRootName() {
+        return ROOT_NAME;
+    }
+
+    @Override
+    public ServerToolTarget getTarget() {
+        return ServerToolTarget.forBoth;
+    }
+
+    @Override
+    public Group initGroup(final User user, final Group group, final Object... otherVars) {
+        final ToolConfiguration config = new ToolConfiguration();
+        final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
+        setContainerWikiAcl(rootFolder);
+        config.setRoot(rootFolder);
+        group.setToolConfig(NAME, config);
+        configurationManager.persist(config);
+        final Content descriptor = contentManager.createContent(i18n.t("Wiki page sample"), "", user, rootFolder,
+                WikiServerTool.TYPE_WIKIPAGE);
+        descriptor.addAuthor(user);
+        descriptor.setLanguage(user.getLanguage());
+        descriptor.setTypeId(TYPE_WIKIPAGE);
+        descriptor.setStatus(ContentStatus.publishedOnline);
+        contentManager.save(user, descriptor,
+                i18n.t("This is only a wiki page sample. You can edit or rename it, as any other user."));
+        return group;
+    }
+
+    @Override
+    public void onCreateContainer(final Container container, final Container parent) {
+        setContainerWikiAcl(container);
+    }
+
+    @Override
+    public void onCreateContent(final Content content, final Container parent) {
+        content.setStatus(ContentStatus.publishedOnline);
+        content.setPublishedOn(new Date());
+    }
+
+    @Override
+    @Inject
+    public void register(final ServerToolRegistry registry) {
+        registry.register(this);
+    }
+
     private void setContainerWikiAcl(final Container container) {
-        AccessLists wikiAcl = new AccessLists();
+        final AccessLists wikiAcl = new AccessLists();
         wikiAcl.getAdmins().setMode(GroupListMode.NORMAL);
         wikiAcl.getAdmins().add(container.getOwner());
         wikiAcl.getEditors().setMode(GroupListMode.EVERYONE);

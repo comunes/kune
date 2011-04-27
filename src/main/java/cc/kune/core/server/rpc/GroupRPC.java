@@ -19,9 +19,6 @@
  */
 package cc.kune.core.server.rpc;
 
-import org.waveprotocol.wave.model.waveref.WaveRef;
-import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.server.UserSession;
@@ -108,10 +105,9 @@ public class GroupRPC implements RPC, GroupService {
             final String tags, final String[] enabledTools) throws DefaultException {
         final User user = getUserLogged();
         final Group group = mapper.map(groupDTO, Group.class);
-        final Group newGroup = groupManager.createGroup(group, user);
-        final WaveRef waveId = kuneWaveManager.createWave("<h1>" + i18n.t("About [%s]", groupDTO.getLongName())
-                + "</h1>" + publicDesc, user.getShortName());
-        contentManager.save(user, newGroup.getDefaultContent(), JavaWaverefEncoder.encodeToUriPathSegment(waveId));
+        final Group newGroup = groupManager.createGroup(group, user, publicDesc);
+        // This is necessary?
+        contentManager.save(user, newGroup.getDefaultContent());
         // contentManager.setTags(user, defContentId, tags);
         return newGroup.getDefaultContent().getStateToken();
     };

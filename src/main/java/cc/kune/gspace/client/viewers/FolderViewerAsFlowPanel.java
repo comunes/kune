@@ -23,12 +23,11 @@ import com.google.inject.Inject;
 public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
     interface FolderViewerAsFlowPanelUiBinder extends UiBinder<Widget, FolderViewerAsFlowPanel> {
     }
+    private static final int ICONLABELMAXSIZE = 20;
+    private static final int ICONSIZE = 100;
     private static FolderViewerAsFlowPanelUiBinder uiBinder = GWT.create(FolderViewerAsFlowPanelUiBinder.class);
-
     @UiField
     FlowPanel flow;
-    int ICONLABELMAXSIZE = 20;
-    int ICONSIZE = 100;
 
     @Inject
     public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n) {

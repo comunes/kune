@@ -54,7 +54,7 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
         putValue(Action.NAME, i18n.t("Group's public room"));
         putValue(Action.SHORT_DESCRIPTION, i18n.t("Enter to this group public chat room"));
         putValue(Action.SMALL_ICON, res.groupChat());
-        setInviteMembers(false);
+        setInviteMembersImpl(false);
     }
 
     @Override
@@ -103,6 +103,10 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
     }
 
     public void setInviteMembers(final boolean inviteMembers) {
+        setInviteMembersImpl(inviteMembers);
+    }
+
+    private void setInviteMembersImpl(final boolean inviteMembers) {
         this.inviteMembers = inviteMembers;
     }
 

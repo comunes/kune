@@ -1,13 +1,16 @@
 package cc.kune.wave.server;
 
+import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import com.google.wave.api.Wavelet;
 
 public interface KuneWaveManager {
 
-    WaveRef createWave(String message, String... participants);
+    WaveRef createWave(String message, ParticipantId participants);
 
-    Wavelet fetchWavelet(WaveRef waveRef);
+    WaveRef createWave(String title, String message, ParticipantId... participantsArray);
+
+    Wavelet fetchWavelet(WaveRef waveRef, String author);
 
 }

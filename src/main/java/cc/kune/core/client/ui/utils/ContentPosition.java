@@ -35,11 +35,11 @@ public class ContentPosition {
     public static final String RIGHT = "right";
     private static I18nTranslationService i18n;
     private static Object[][] positionObjs;
-    public static final String[][] positions = { new String[] { LEFT }, new String[] { CENTER }, new String[] { RIGHT } };
+    public static final String[][] POSITIONS = { new String[] { LEFT }, new String[] { CENTER }, new String[] { RIGHT } };
 
     public synchronized static Object[][] getPositions() {
         if (positionObjs == null) {
-            final String[][] values = positions;
+            final String[][] values = POSITIONS;
             positionObjs = new Object[values.length][1];
             int i = 0;
             for (final String[] position : values) {

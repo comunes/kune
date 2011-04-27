@@ -25,8 +25,6 @@ import org.jivesoftware.smack.util.Base64;
 import org.json.JSONObject;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.authentication.SessionManager;
-import org.waveprotocol.wave.model.waveref.WaveRef;
-import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
@@ -53,7 +51,6 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.wave.server.CustomWaveClientServlet;
-import cc.kune.wave.server.KuneWaveManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -67,7 +64,6 @@ public class UserRPC implements RPC, UserService {
     private final ContentManager contentManager;
     private final GroupManager groupManager;
     private final I18nTranslationService i18n;
-    private final KuneWaveManager kuneWaveManager;
     private final Mapper mapper;
     private final Provider<SessionService> sessionServiceProvider;
     private final UserInfoService userInfoService;
@@ -83,8 +79,7 @@ public class UserRPC implements RPC, UserService {
             @Named(CoreSettings.USE_SOCKETIO) final Boolean useSocketIO, final GroupManager groupManager,
             final UserInfoService userInfoService, final Mapper mapper, final SessionManager waveSessionManager,
             final CustomWaveClientServlet waveClientServlet, final I18nTranslationService i18n,
-            final KuneWaveManager kuneWaveManager, final ContentManager contentManager) {
-
+            final ContentManager contentManager) {
         this.sessionServiceProvider = sessionServiceProvider;
         this.userSessionProvider = userSessionProvider;
         this.userManager = userManager;
@@ -95,7 +90,6 @@ public class UserRPC implements RPC, UserService {
         this.waveSessionManager = waveSessionManager;
         this.waveClientServlet = waveClientServlet;
         this.i18n = i18n;
-        this.kuneWaveManager = kuneWaveManager;
         this.contentManager = contentManager;
     }
 
@@ -106,9 +100,9 @@ public class UserRPC implements RPC, UserService {
                 userDTO.getPassword(), userDTO.getLanguage().getCode(), userDTO.getCountry().getCode(),
                 userDTO.getTimezone().getId());
         final Group userGroup = groupManager.createUserGroup(user, wantPersonalHomepage);
-        final WaveRef waveId = kuneWaveManager.createWave("<h1>" + i18n.t("[%s] Bio", userDTO.getName()) + "</h1>"
-                + i18n.t("This user has not written its biography yet"), user.getShortName());
-        contentManager.save(user, userGroup.getDefaultContent(), JavaWaverefEncoder.encodeToUriPathSegment(waveId));
+        // Is this necessary? try to remove (used when we were setting the def
+        // content
+        contentManager.save(user, userGroup.getDefaultContent());
     }
 
     @Override

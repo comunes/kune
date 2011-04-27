@@ -19,6 +19,13 @@
  */
 package cc.kune.docs.server;
 
+import static cc.kune.docs.shared.DocsConstants.NAME;
+import static cc.kune.docs.shared.DocsConstants.ROOT_NAME;
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
+
 import java.util.Date;
 
 import cc.kune.core.client.errors.ContainerNotPermittedException;
@@ -31,6 +38,7 @@ import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.i18n.I18nTranslationService;
+import cc.kune.docs.shared.DocsConstants;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -40,14 +48,6 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 
 public class DocumentServerTool implements ServerTool {
-    public static final String NAME = "docs";
-    public static final String ROOT_NAME = "documents";
-    public static final String TYPE_DOCUMENT = NAME + "." + "doc";
-    public static final String TYPE_FOLDER = NAME + "." + "folder";
-    public static final String TYPE_ROOT = NAME + "." + "root";
-    public static final String TYPE_UPLOADEDFILE = NAME + "." + ServerTool.UPLOADEDFILE_SUFFIX;
-    public static final String TYPE_WAVE = NAME + "." + ServerTool.WAVE_SUFFIX;
-
     private final ToolConfigurationManager configurationManager;
     private final ContainerManager containerManager;
     private final ContentManager contentManager;
@@ -76,10 +76,9 @@ public class DocumentServerTool implements ServerTool {
     }
 
     void checkContentTypeId(final String parentTypeId, final String typeId) {
-        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE) || typeId.equals(TYPE_WAVE)) {
+        if (typeId.equals(TYPE_DOCUMENT) || typeId.equals(TYPE_UPLOADEDFILE)) {
             // ok valid content
             if ((typeId.equals(TYPE_DOCUMENT) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
-                    || (typeId.equals(TYPE_WAVE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))
                     || (typeId.equals(TYPE_UPLOADEDFILE) && (parentTypeId.equals(TYPE_ROOT) || parentTypeId.equals(TYPE_FOLDER)))) {
                 // ok
             } else {
@@ -117,18 +116,18 @@ public class DocumentServerTool implements ServerTool {
     }
 
     @Override
-    public Group initGroup(final User user, final Group group) {
+    public Group initGroup(final User user, final Group group, final Object... otherVars) {
         final ToolConfiguration config = new ToolConfiguration();
         final Container rootFolder = containerManager.createRootFolder(group, NAME, ROOT_NAME, TYPE_ROOT);
         config.setRoot(rootFolder);
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
-        final String longName = group.getLongName();
-        final Content content = contentManager.createContent(i18n.t("About [%s]", longName), "", user, rootFolder,
-                DocumentServerTool.TYPE_WAVE);
+        final String title = (String) otherVars[0];
+        final String body = (String) otherVars[1];
+        final Content content = contentManager.createContent(title, body, user, rootFolder, DocsConstants.TYPE_DOCUMENT);
         content.addAuthor(user);
         content.setLanguage(user.getLanguage());
-        content.setTypeId(TYPE_WAVE);
+        content.setTypeId(TYPE_DOCUMENT);
         content.setStatus(ContentStatus.publishedOnline);
         content.setPublishedOn(new Date());
         group.setDefaultContent(content);

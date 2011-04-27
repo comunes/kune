@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.integration.content;
 
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -38,8 +39,7 @@ import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.docs.client.DocsClientTool;
-import cc.kune.docs.server.DocumentServerTool;
+import cc.kune.docs.shared.DocsConstants;
 
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
@@ -54,7 +54,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, Exception {
         defaultContent = getSiteDefaultContent();
         contentService.addContent(session.getHash(), defaultContent.getContainer().getStateToken(), "a name",
-                DocumentServerTool.TYPE_DOCUMENT);
+                TYPE_DOCUMENT);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
         final String title = "New Content Title";
         final StateContentDTO added = contentService.addContent(session.getHash(),
-                defaultContent.getContainer().getStateToken(), title, DocumentServerTool.TYPE_DOCUMENT);
+                defaultContent.getContainer().getStateToken(), title, TYPE_DOCUMENT);
         assertNotNull(added);
         final List<ContentSimpleDTO> contents = added.getContainer().getContents();
         assertEquals(title, added.getTitle());
@@ -93,7 +93,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         final ContainerDTO parent = defaultContent.getContainer();
         final String title = "folder name";
         final StateContainerDTO newState = contentService.addFolder(session.getHash(), parent.getStateToken(), title,
-                DocsClientTool.TYPE_FOLDER);
+                DocsConstants.TYPE_FOLDER);
         assertNotNull(newState);
         assertNotNull(newState.getGroupMembers());
         assertNotNull(newState.getParticipation());
@@ -127,11 +127,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         final ContainerDTO parent = defaultContent.getContainer();
         final String title = "folder name";
         final StateContainerDTO newState = contentService.addFolder(session.getHash(), parent.getStateToken(), title,
-                DocsClientTool.TYPE_FOLDER);
+                DocsConstants.TYPE_FOLDER);
         assertNotNull(newState);
 
         final StateContainerDTO newState2 = contentService.addFolder(session.getHash(), parent.getStateToken(), title,
-                DocsClientTool.TYPE_FOLDER);
+                DocsConstants.TYPE_FOLDER);
         assertNotNull(newState2);
 
         final ContainerDTO parentAgain = getSiteDefaultContent().getContainer();

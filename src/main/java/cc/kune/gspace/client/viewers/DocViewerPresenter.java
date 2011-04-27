@@ -2,16 +2,16 @@ package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
-import cc.kune.blogs.client.BlogsClientTool;
 import cc.kune.blogs.client.actions.BlogsClientActions;
+import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.docs.client.DocsClientTool;
 import cc.kune.docs.client.actions.DocsClientActions;
+import cc.kune.docs.shared.DocsConstants;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
@@ -55,8 +55,8 @@ public class DocViewerPresenter extends Presenter<DocViewerPresenter.DocViewerVi
         super(eventBus, view, proxy);
         this.session = session;
         this.actionsRegistry = actionsRegistry;
-        viewerSelector.register(this, true, DocsClientTool.TYPE_WAVE);
-        viewerSelector.register(this, true, BlogsClientTool.TYPE_POST);
+        viewerSelector.register(this, true, DocsConstants.TYPE_DOCUMENT);
+        viewerSelector.register(this, true, BlogsConstants.TYPE_POST);
     }
 
     @Override

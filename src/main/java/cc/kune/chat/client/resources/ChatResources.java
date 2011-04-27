@@ -87,7 +87,7 @@ public interface ChatResources extends ClientBundle {
     ImageResource unavailable();
 
     @Source("user_add.png")
-    ImageResource user_add();
+    ImageResource userAdd();
 
     @Source("xa.png")
     ImageResource xa();

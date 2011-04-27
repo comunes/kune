@@ -19,6 +19,8 @@
  */
 package cc.kune.core.server.integration;
 
+import static cc.kune.docs.shared.DocsConstants.NAME;
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -36,7 +38,6 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
 import cc.kune.core.server.manager.LicenseManager;
-import cc.kune.docs.server.DocumentServerTool;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -80,7 +81,7 @@ public class DatabaseInitializerTest {
     @Test
     public void testDefaultDocumentContent() {
         final Content content = defaultGroup.getDefaultContent();
-        assertEquals(DocumentServerTool.TYPE_WAVE, content.getTypeId());
+        assertEquals(TYPE_DOCUMENT, content.getTypeId());
         final Container rootDocFolder = content.getContainer();
         assertEquals(true, rootDocFolder.isRoot());
     }
@@ -95,7 +96,7 @@ public class DatabaseInitializerTest {
     @Test
     public void testToolConfiguration() {
         assertNotNull(defaultGroup);
-        final ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(DocumentServerTool.NAME);
+        final ToolConfiguration docToolConfig = defaultGroup.getToolConfiguration(NAME);
         assertNotNull(docToolConfig);
         assertTrue(docToolConfig.isEnabled());
         final ToolConfiguration chatToolConfig = defaultGroup.getToolConfiguration(ChatServerTool.NAME);

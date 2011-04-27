@@ -19,10 +19,10 @@
  */
 package cc.kune.docs.server;
 
-import static cc.kune.docs.server.DocumentServerTool.TYPE_DOCUMENT;
-import static cc.kune.docs.server.DocumentServerTool.TYPE_FOLDER;
-import static cc.kune.docs.server.DocumentServerTool.TYPE_ROOT;
-import static cc.kune.docs.server.DocumentServerTool.TYPE_UPLOADEDFILE;
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 
 import org.junit.Before;
 import org.junit.Test;

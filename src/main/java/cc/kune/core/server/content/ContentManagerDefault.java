@@ -28,7 +28,10 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.Query;
+import org.waveprotocol.wave.model.waveref.WaveRef;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
+import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.NameInUseException;
@@ -42,6 +45,7 @@ import cc.kune.core.server.manager.impl.ServerManagerException;
 import cc.kune.core.server.utils.FilenameUtils;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.RateResult;
+import cc.kune.docs.shared.DocsConstants;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.I18nLanguage;
@@ -52,6 +56,8 @@ import cc.kune.domain.finders.ContainerFinder;
 import cc.kune.domain.finders.ContentFinder;
 import cc.kune.domain.finders.I18nLanguageFinder;
 import cc.kune.domain.finders.UserFinder;
+import cc.kune.wave.server.KuneWaveManager;
+import cc.kune.wave.server.ParticipantUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -63,14 +69,17 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     private final ContainerFinder containerFinder;
     private final ContentFinder contentFinder;
     private final FinderService finder;
+    private final KuneWaveManager kuneWaveManager;
     private final I18nLanguageFinder languageFinder;
+    private final ParticipantUtils participantUtils;
     private final TagUserContentManager tagManager;
     private final UserFinder userFinder;
 
     @Inject
     public ContentManagerDefault(final ContentFinder contentFinder, final ContainerFinder containerFinder,
             final Provider<EntityManager> provider, final FinderService finder, final UserFinder userFinder,
-            final I18nLanguageFinder languageFinder, final TagUserContentManager tagManager) {
+            final I18nLanguageFinder languageFinder, final TagUserContentManager tagManager,
+            final KuneWaveManager kuneWaveManager, final ParticipantUtils participantUtils) {
         super(provider, Content.class);
         this.contentFinder = contentFinder;
         this.containerFinder = containerFinder;
@@ -78,6 +87,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         this.userFinder = userFinder;
         this.languageFinder = languageFinder;
         this.tagManager = tagManager;
+        this.kuneWaveManager = kuneWaveManager;
+        this.participantUtils = participantUtils;
     }
 
     @Override
@@ -93,6 +104,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     @Override
     public Content createContent(final String title, final String body, final User author, final Container container,
             final String typeId) {
+        String contentBody;
         FilenameUtils.checkBasicFilename(title);
         final String newtitle = findInexistentTitle(container, title);
         final Content newContent = new Content();
@@ -103,7 +115,14 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         newContent.setContainer(container);
         final Revision revision = new Revision(newContent);
         revision.setTitle(newtitle);
-        revision.setBody(body);
+        // Duplicate in StateServiceDefault
+        if ((typeId.equals(DocsConstants.TYPE_DOCUMENT)) || (typeId.equals(BlogsConstants.TYPE_POST))) {
+            final WaveRef waveRef = kuneWaveManager.createWave(title, body, participantUtils.of(author.getShortName()));
+            contentBody = JavaWaverefEncoder.encodeToUriPathSegment(waveRef);
+        } else {
+            contentBody = body;
+        }
+        revision.setBody(contentBody);
         newContent.addRevision(revision);
         return persist(newContent);
     }
@@ -184,6 +203,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         }
         content.getLastRevision().setTitle(newTitleWithoutNL);
         return content;
+    }
+
+    @Override
+    public Content save(final User editor, final Content content) {
+        return persist(content);
     }
 
     @Override

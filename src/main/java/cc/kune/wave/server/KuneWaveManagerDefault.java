@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.box.server.CoreSettings;
@@ -40,6 +42,8 @@ import com.google.wave.api.impl.WaveletData;
 public class KuneWaveManagerDefault implements KuneWaveManager {
     public static final Log LOG = LogFactory.getLog(KuneWaveManagerDefault.class);
 
+    private static final String NO_TITLE = "";
+
     private final ConversationUtil conversationUtil;
     private final EventDataConverterManager converterManager;
     private final String domain;
@@ -61,14 +65,20 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     }
 
     @Override
-    public WaveRef createWave(final String message, final String... participantArray) {
+    public WaveRef createWave(final String message, final ParticipantId participant) {
+        return createWave(NO_TITLE, message, participant);
+    }
+
+    @Override
+    public WaveRef createWave(@Nonnull final String title, final String message,
+            @Nonnull final ParticipantId... participantsArray) {
         String newWaveId = null;
         String newWaveletId = null;
         final Set<String> participants = new HashSet<String>();
-        for (final String participant : participantArray) {
-            participants.add(participantUtils.of(participant).toString());
+        for (final ParticipantId participant : participantsArray) {
+            participants.add(participant.toString());
         }
-        final ParticipantId user = participantUtils.of(participantArray[0]);
+        final ParticipantId user = participantsArray[0];
         final OperationQueue opQueue = new OperationQueue();
         final Wavelet newWavelet = opQueue.createWavelet(domain, participants);
         final Blip rootBlip = newWavelet.getRootBlip();
@@ -118,14 +128,14 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     }
 
     @Override
-    public Wavelet fetchWavelet(final WaveRef waveName) {
+    public Wavelet fetchWavelet(final WaveRef waveName, final String author) {
         Wavelet wavelet = null;
         final OperationQueue opQueue = new OperationQueue();
         opQueue.fetchWavelet(waveName.getWaveId(), waveName.getWaveletId());
         final OperationContextImpl context = new OperationContextImpl(waveletProvider,
                 converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
         final OperationRequest request = opQueue.getPendingOperations().get(0);
-        OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.getSuperAdmin());
+        OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.of(author));
         final String reqId = request.getId();
         final JsonRpcResponse response = context.getResponse(reqId);
         if (response != null) {

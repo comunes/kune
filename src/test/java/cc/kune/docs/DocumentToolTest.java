@@ -19,20 +19,23 @@
  */
 package cc.kune.docs;
 
+import static cc.kune.docs.shared.DocsConstants.NAME;
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import cc.kune.docs.client.DocsClientTool;
-import cc.kune.docs.server.DocumentServerTool;
+import cc.kune.docs.shared.DocsConstants;
 
 public class DocumentToolTest {
 
     @Test
     public void clientAndServerSync() {
-        assertEquals(DocumentServerTool.NAME, DocsClientTool.NAME);
-        assertEquals(DocumentServerTool.TYPE_ROOT, DocsClientTool.TYPE_ROOT);
-        assertEquals(DocumentServerTool.TYPE_FOLDER, DocsClientTool.TYPE_FOLDER);
-        assertEquals(DocumentServerTool.TYPE_DOCUMENT, DocsClientTool.TYPE_DOCUMENT);
+        assertEquals(NAME, DocsConstants.NAME);
+        assertEquals(TYPE_ROOT, DocsConstants.TYPE_ROOT);
+        assertEquals(TYPE_FOLDER, DocsConstants.TYPE_FOLDER);
+        assertEquals(TYPE_DOCUMENT, DocsConstants.TYPE_DOCUMENT);
     }
 }

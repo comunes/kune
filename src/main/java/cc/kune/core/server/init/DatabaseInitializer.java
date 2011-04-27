@@ -5,8 +5,6 @@ import java.util.TimeZone;
 import javax.persistence.NoResultException;
 
 import org.waveprotocol.box.server.authentication.PasswordDigest;
-import org.waveprotocol.wave.model.waveref.WaveRef;
-import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.content.ContentManager;
@@ -83,17 +81,15 @@ public class DatabaseInitializer {
         final License defaultLicense = licenseManager.findByShortName(defaultLicenseId);
 
         final Group siteGroup = new Group(siteShortName, siteName, defaultLicense, GroupType.PROJECT);
-        groupManager.createGroup(siteGroup, user);
+        groupManager.createGroup(siteGroup, user, ContentConstants.INITIAL_CONTENT.replaceAll("\\[%s\\]", siteName));
+
+        final Content defaultContent = siteGroup.getDefaultContent();
+        contentManager.setStatus(defaultContent.getId(), ContentStatus.publishedOnline);
+        contentManager.save(user, defaultContent);
 
         userManager.reIndex();
         groupManager.reIndex();
 
-        final Content defaultContent = siteGroup.getDefaultContent();
-        final WaveRef waveId = kuneWaveManager.createWave(
-                ContentConstants.INITIAL_CONTENT.replaceAll("\\[%s\\]", siteName), user.getShortName());
-        contentManager.save(user, defaultContent, JavaWaverefEncoder.encodeToUriPathSegment(waveId));
-
-        contentManager.setStatus(defaultContent.getId(), ContentStatus.publishedOnline);
     }
 
     private void createLicenses() {

@@ -19,6 +19,11 @@
  */
 package cc.kune.blogs.client;
 
+import static cc.kune.blogs.shared.BlogsConstants.NAME;
+import static cc.kune.blogs.shared.BlogsConstants.TYPE_BLOG;
+import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
+import static cc.kune.blogs.shared.BlogsConstants.TYPE_ROOT;
+import static cc.kune.blogs.shared.BlogsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
@@ -29,11 +34,6 @@ import com.google.inject.Inject;
 
 public class BlogsClientTool extends FoldableAbstractClientTool {
 
-    public static final String NAME = "blogs";
-    public static final String TYPE_BLOG = NAME + "." + "blog";
-    public static final String TYPE_POST = NAME + "." + "post";
-    public static final String TYPE_ROOT = NAME + "." + "root";
-    public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
     private final NavResources navResources;
 
     @Inject

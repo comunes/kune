@@ -21,7 +21,7 @@ public class ParticipantUtils {
     public ParticipantUtils(@Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
             final DatabaseProperties databaseProperties) throws InvalidParticipantAddress {
         this.domain = domain;
-        superAdmin = of(databaseProperties.getAdminShortName());
+        superAdmin = ofImpl(databaseProperties.getAdminShortName());
     }
 
     public ParticipantId getSuperAdmin() {
@@ -29,6 +29,10 @@ public class ParticipantUtils {
     }
 
     public ParticipantId of(final String username) {
+        return ofImpl(username);
+    }
+
+    private ParticipantId ofImpl(final String username) {
         try {
             if (username.contains(ParticipantId.DOMAIN_PREFIX)) {
                 return ParticipantId.of(username);

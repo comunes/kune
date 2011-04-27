@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.workspace.client.ctxnav;
 
-import static cc.kune.docs.client.DocsClientTool.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
 
 import java.util.HashMap;
 

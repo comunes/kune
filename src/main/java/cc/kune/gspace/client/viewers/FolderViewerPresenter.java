@@ -2,7 +2,7 @@ package cc.kune.gspace.client.viewers;
 
 import javax.annotation.Nonnull;
 
-import cc.kune.blogs.client.BlogsClientTool;
+import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
@@ -21,7 +21,7 @@ import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.client.DocsClientTool;
+import cc.kune.docs.shared.DocsConstants;
 import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
@@ -87,8 +87,8 @@ public class FolderViewerPresenter extends
         this.downloadUtilsProvider = downloadUtilsProvider;
         this.capabilitiesRegistry = capabilitiesRegistry;
         iconsRegistry = capabilitiesRegistry.getIconsRegistry();
-        viewerSelector.register(this, true, DocsClientTool.TYPE_ROOT, DocsClientTool.TYPE_FOLDER);
-        viewerSelector.register(this, true, BlogsClientTool.TYPE_ROOT, BlogsClientTool.TYPE_BLOG);
+        viewerSelector.register(this, true, DocsConstants.TYPE_ROOT, DocsConstants.TYPE_FOLDER);
+        viewerSelector.register(this, true, BlogsConstants.TYPE_ROOT, BlogsConstants.TYPE_BLOG);
         useGenericImageIcon = false;
     }
 

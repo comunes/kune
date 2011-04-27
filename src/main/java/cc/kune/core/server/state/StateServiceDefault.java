@@ -19,6 +19,9 @@
  */
 package cc.kune.core.server.state;
 
+import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
@@ -29,7 +32,6 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.TagUserContentManager;
 import cc.kune.core.shared.i18n.I18nTranslationService;
-import cc.kune.docs.server.DocumentServerTool;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -103,10 +105,11 @@ public class StateServiceDefault implements StateService {
         state.setVersion(content.getVersion());
         final char[] text = revision.getBody();
         final String textBody = text == null ? null : new String(text);
-        if (typeId.equals(DocumentServerTool.TYPE_WAVE)) {
+        if (typeId.equals(TYPE_DOCUMENT) || (typeId.equals(TYPE_POST))) {
             state.setWaveRef(textBody);
             try {
-                state.setContent(kuneWaveManager.fetchWavelet(JavaWaverefEncoder.decodeWaveRefFromPath(textBody)).getRootBlip().getContent());
+                state.setContent(kuneWaveManager.fetchWavelet(JavaWaverefEncoder.decodeWaveRefFromPath(textBody),
+                        content.getAuthors().get(0).getShortName()).getRootBlip().getContent());
             } catch (final InvalidWaveRefException e) {
                 throw new DefaultException("Error retriving Wave");
             }

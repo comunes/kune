@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server.integration.content;
 
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -41,8 +42,7 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
-import cc.kune.docs.client.DocsClientTool;
-import cc.kune.docs.server.DocumentServerTool;
+import cc.kune.docs.shared.DocsConstants;
 
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
@@ -64,6 +64,24 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         contentService.addAuthor(getHash(), defaultContent.getStateToken(), authorShortName);
         final List<UserSimpleDTO> authors4 = getSiteDefaultContent().getAuthors();
         assertEquals(1, authors4.size());
+    }
+
+    private void checkResult(final TagCloudResult cloudResult) {
+        assertNotNull(cloudResult.getTagCountList());
+        final List<TagCount> summaryTags = cloudResult.getTagCountList();
+        assertEquals(3, summaryTags.size());
+
+        TagCount tagResult = summaryTags.get(0);
+        assertEquals("afoo2", tagResult.getName());
+        assertEquals(1, (long) tagResult.getCount());
+
+        tagResult = summaryTags.get(1);
+        assertEquals("bfoo", tagResult.getName());
+        assertEquals(1, (long) tagResult.getCount());
+
+        tagResult = summaryTags.get(2);
+        assertEquals("cfoa", tagResult.getName());
+        assertEquals(1, (long) tagResult.getCount());
     }
 
     @Test
@@ -102,7 +120,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final String oldTitle = "some title";
         String newTitle = "folder new name";
         final StateContainerDTO newState = contentService.addFolder(session.getHash(), defaultContent.getStateToken(),
-                oldTitle, DocsClientTool.TYPE_FOLDER);
+                oldTitle, DocsConstants.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 
@@ -188,7 +206,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         defaultContent = getSiteDefaultContent();
 
         final StateContainerDTO added = contentService.addContent(session.getHash(), defaultContent.getStateToken(),
-                "New Content Title", DocumentServerTool.TYPE_DOCUMENT);
+                "New Content Title", TYPE_DOCUMENT);
         assertNotNull(added);
 
         final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(),
@@ -207,7 +225,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
         final String oldTitle = "some title";
         String newTitle = "folder new name";
         final StateContainerDTO newState = contentService.addFolder(session.getHash(), folder.getStateToken(),
-                oldTitle, DocsClientTool.TYPE_FOLDER);
+                oldTitle, DocsConstants.TYPE_FOLDER);
 
         final ContainerDTO newFolder = newState.getContainer();
 
@@ -223,24 +241,6 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
                 newState.getStateToken());
 
         assertEquals(newTitle, folderAgain.getContainer().getName());
-    }
-
-    private void checkResult(final TagCloudResult cloudResult) {
-        assertNotNull(cloudResult.getTagCountList());
-        final List<TagCount> summaryTags = cloudResult.getTagCountList();
-        assertEquals(3, summaryTags.size());
-
-        TagCount tagResult = summaryTags.get(0);
-        assertEquals("afoo2", tagResult.getName());
-        assertEquals(1, (long) tagResult.getCount());
-
-        tagResult = summaryTags.get(1);
-        assertEquals("bfoo", tagResult.getName());
-        assertEquals(1, (long) tagResult.getCount());
-
-        tagResult = summaryTags.get(2);
-        assertEquals("cfoa", tagResult.getName());
-        assertEquals(1, (long) tagResult.getCount());
     }
 
 }

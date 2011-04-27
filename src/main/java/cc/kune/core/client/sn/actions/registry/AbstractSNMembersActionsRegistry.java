@@ -8,4 +8,8 @@ import com.google.inject.Provider;
 
 @SuppressWarnings("serial")
 public abstract class AbstractSNMembersActionsRegistry extends ArrayList<Provider<MenuItemDescriptor>> {
+
+    public AbstractSNMembersActionsRegistry() {
+        super();
+    }
 }

@@ -19,6 +19,7 @@
  */
 package cc.kune.core.server;
 
+import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
 import static org.junit.Assert.assertEquals;
 
 import java.util.TimeZone;
@@ -33,7 +34,6 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.UserManager;
-import cc.kune.docs.server.DocumentServerTool;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.I18nCountry;
@@ -116,7 +116,7 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
         content.setLanguage(english);
         contentManager.persist(content);
         container = new Container();
-        container.setTypeId(DocumentServerTool.TYPE_FOLDER);
+        container.setTypeId(TYPE_FOLDER);
         containerManager.persist(container);
     }
 }

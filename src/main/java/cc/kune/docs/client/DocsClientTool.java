@@ -19,6 +19,11 @@
  */
 package cc.kune.docs.client;
 
+import static cc.kune.docs.shared.DocsConstants.NAME;
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.nav.NavResources;
@@ -28,12 +33,7 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 import com.google.inject.Inject;
 
 public class DocsClientTool extends FoldableAbstractClientTool {
-    public static final String NAME = "docs";
-    public static final String TYPE_DOCUMENT = NAME + "." + "doc";
-    public static final String TYPE_FOLDER = NAME + "." + "folder";
-    public static final String TYPE_ROOT = NAME + "." + "root";
-    public static final String TYPE_UPLOADEDFILE = NAME + "." + FoldableAbstractClientTool.UPLOADEDFILE_SUFFIX;
-    public static final String TYPE_WAVE = NAME + "." + FoldableAbstractClientTool.WAVE_SUFFIX;
+
     private final NavResources navResources;
 
     @Inject
@@ -63,7 +63,6 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     private void registerIcons() {
         registerContentTypeIcon(TYPE_FOLDER, navResources.folder());
         registerContentTypeIcon(TYPE_DOCUMENT, navResources.page());
-        registerContentTypeIcon(TYPE_WAVE, navResources.page());
         registerUploadTypesAndMimes(TYPE_UPLOADEDFILE);
     }
 

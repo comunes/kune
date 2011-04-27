@@ -95,7 +95,7 @@ public final class CustomUserRegistrationServlet extends HttpServlet {
    * Try to create a user with the provided username and password. On error,
    * returns a string containing an error message. On success, returns null.
    */
-  public String tryCreateUser(String username, final PasswordDigest passwordDigest) {
+  public String tryCreateUser(String username, final PasswordDigest passwordDigest) { // NOPMD by vjrj on 27/04/11 8:36
     final String message = null;
     ParticipantId id = null;
 

@@ -31,13 +31,12 @@ public class AbstractSNPanel extends ViewImpl {
     interface AbstractSNPanelUiBinder extends UiBinder<Widget, AbstractSNPanel> {
     }
 
-    private static final String CATEG_HEIGHT = "80px";
-
+    private final static int AVATARLABELMAXSIZE = 4;
+    private final static int AVATARSIZE = 22;
+    private final static String CATEG_HEIGHT = "80px";
     private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
-    protected final ActionSimplePanel actions;
-    int AVATARLABELMAXSIZE = 4;
 
-    int AVATARSIZE = 22;
+    protected final ActionSimplePanel actions;
     ActionFlowPanel bottomActionsToolbar;
     @UiField
     FlowPanel bottomPanel;

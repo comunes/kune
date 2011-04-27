@@ -63,6 +63,7 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
@@ -96,7 +97,7 @@ public class WebClient extends Composite {
 
   private static final Binder BINDER = GWT.create(Binder.class);
 
-  static Log LOG = Log.get(WebClient.class);
+  static final Log LOG = Log.get(WebClient.class);
   // Use of GWT logging is only intended for sending exception reports to the
   // server, nothing else in the client should use java.util.logging.
   // Please also see WebClientDemo.gwt.xml.
@@ -157,7 +158,7 @@ private final EventBus eventBus;
           public void onCreateRequest(WaveCreationEvent event) {
             LOG.info("WaveCreationEvent received");
             if (channel == null) {
-              throw new RuntimeException("Spaghetti attack.  Create occured before login");
+              throw new DefaultException("Spaghetti attack.  Create occured before login");
             }
 
             openWave(WaveRef.of(idGenerator.newWaveId()), true);

@@ -21,7 +21,6 @@ package cc.kune.core.server.content;
 
 import java.util.Date;
 
-
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.Manager;
 import cc.kune.core.server.manager.impl.SearchResult;
@@ -61,6 +60,8 @@ public interface ContentManager extends Manager<Content, Long> {
     void removeAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
     Content renameContent(User user, Long contentId, String newName) throws DefaultException;
+
+    Content save(User user, Content content);
 
     Content save(User editor, Content content, String body);
 

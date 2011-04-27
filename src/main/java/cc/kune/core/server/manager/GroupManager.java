@@ -21,7 +21,6 @@ package cc.kune.core.server.manager;
 
 import java.util.List;
 
-
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.EmailAddressInUseException;
 import cc.kune.core.client.errors.GroupNameInUseException;
@@ -39,7 +38,8 @@ public interface GroupManager extends Manager<Group, Long> {
 
     void clearGroupBackImage(Group group);
 
-    Group createGroup(Group group, User user) throws GroupNameInUseException, UserMustBeLoggedException;
+    Group createGroup(Group group, User user, String publicDescrip) throws GroupNameInUseException,
+            UserMustBeLoggedException;
 
     Group createUserGroup(User user) throws GroupNameInUseException, EmailAddressInUseException;
 

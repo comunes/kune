@@ -89,7 +89,8 @@ public abstract class FoldableContentPanel extends AbstractContentPanel implemen
     }
 
     @Override
-    public void setEditableWaveContent(final WaveRef waveRef, final boolean isNewWave) {
+    public void setEditableWaveContent(final WaveRef waveRef, final boolean isNewWave) { // NOPMD by vjrj on 27/04/11 8:40
+        // FIXME
     }
 
     // public void setWave(final String waveId, final Listener0 onLoaded) {

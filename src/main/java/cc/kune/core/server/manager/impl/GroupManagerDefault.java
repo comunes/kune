@@ -46,6 +46,7 @@ import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.dto.GroupType;
+import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -65,6 +66,7 @@ import com.google.inject.Singleton;
 public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager {
 
     private final GroupFinder finder;
+    private final I18nTranslationService i18n;
     private final KuneProperties kuneProperties;
     private final LicenseFinder licenseFinder;
     private final LicenseManager licenseManager;
@@ -77,7 +79,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     public GroupManagerDefault(final Provider<EntityManager> provider, final GroupFinder finder,
             final UserFinder userFinder, final KuneProperties kuneProperties, final DatabaseProperties properties,
             final ServerToolRegistry registry, final LicenseManager licenseManager, final LicenseFinder licenseFinder,
-            final ServerToolRegistry serverToolRegistry) {
+            final ServerToolRegistry serverToolRegistry, final I18nTranslationService i18n) {
         super(provider, Group.class);
         this.finder = finder;
         this.userFinder = userFinder;
@@ -87,6 +89,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         this.licenseManager = licenseManager;
         this.licenseFinder = licenseFinder;
         this.serverToolRegistry = serverToolRegistry;
+        this.i18n = i18n;
     }
 
     @Override
@@ -110,8 +113,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
 
     @Override
-    public Group createGroup(final Group group, final User user) throws GroupNameInUseException,
-            UserMustBeLoggedException {
+    public Group createGroup(final Group group, final User user, final String publicDescrip)
+            throws GroupNameInUseException, UserMustBeLoggedException {
         final String defaultSiteWorkspaceTheme = kuneProperties.get(KuneProperties.WS_THEMES_DEF);
         if (User.isKnownUser(user)) {
             if (group.getGroupType().equals(GroupType.COMMUNITY)) {
@@ -128,7 +131,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
             group.setDefaultLicense(license);
             group.setWorkspaceTheme(defaultSiteWorkspaceTheme);
             initSocialNetwork(group, user.getUserGroup());
-            initGroup(user, group, serverToolRegistry.getToolsForGroupsKeys());
+            final String title = i18n.t("About [%s]", group.getLongName());
+            initGroup(user, group, serverToolRegistry.getToolsForGroupsKeys(), title, publicDescrip);
             return group;
         } else {
             throw new UserMustBeLoggedException();
@@ -160,9 +164,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         userGroup.setDefaultContent(null);
         user.setUserGroup(userGroup);
         initSocialNetwork(userGroup, userGroup);
+
+        final String title = i18n.t("[%s] Bio", user.getName());
+        final String body = "<h1>" + title + "</h1>" + i18n.t("This user has not written its biography yet");
         try {
             initGroup(user, userGroup, wantPersonalHomepage ? serverToolRegistry.getToolsForUserKeys()
-                    : ServerToolRegistry.emptyToolList);
+                    : ServerToolRegistry.emptyToolList, title, body);
             super.persist(user, User.class);
         } catch (final PersistenceException e) {
             if (e.getCause() instanceof ConstraintViolationException) {
@@ -204,8 +211,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         return findByShortName(shortName);
     }
 
-    private void initGroup(final User user, final Group group, final Collection<String> toolsToEnable)
-            throws GroupNameInUseException {
+    private void initGroup(final User user, final Group group, final Collection<String> toolsToEnable,
+            final Object... vars) throws GroupNameInUseException {
         try {
             persist(group);
         } catch (final IllegalStateException e) {
@@ -218,7 +225,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
         }
         for (final ServerTool tool : registry.all()) {
             if (toolsToEnable.contains(tool.getName())) {
-                tool.initGroup(user, group);
+                tool.initGroup(user, group, vars);
             }
         }
     }

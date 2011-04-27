@@ -19,11 +19,10 @@
  \*/
 package cc.kune.docs.client.actions;
 
-import static cc.kune.docs.client.DocsClientTool.TYPE_DOCUMENT;
-import static cc.kune.docs.client.DocsClientTool.TYPE_FOLDER;
-import static cc.kune.docs.client.DocsClientTool.TYPE_ROOT;
-import static cc.kune.docs.client.DocsClientTool.TYPE_UPLOADEDFILE;
-import static cc.kune.docs.client.DocsClientTool.TYPE_WAVE;
+import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_FOLDER;
+import static cc.kune.docs.shared.DocsConstants.TYPE_ROOT;
+import static cc.kune.docs.shared.DocsConstants.TYPE_UPLOADEDFILE;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
@@ -40,7 +39,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
     final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
     final String[] containersNoRoot = { TYPE_FOLDER };
-    final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE, TYPE_WAVE };
+    final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
     final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
 
     @Inject

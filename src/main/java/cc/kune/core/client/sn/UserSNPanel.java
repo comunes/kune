@@ -18,7 +18,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     @Inject
     public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final GSpaceArmor armor) {
         super(i18n, guiProvider, armor);
-        setVisible(false);
+        setVisibleImpl(false);
         mainTitle.setText(i18n.t("His/her network:"));
         mainTitle.setTitle(i18n.t("This user buddies and groups where participes"));
         firstCategoryLabel.setText(i18n.t("Buddies"));
@@ -76,6 +76,10 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
     @Override
     public void setVisible(final boolean visible) {
+        setVisibleImpl(visible);
+    }
+
+    private void setVisibleImpl(final boolean visible) {
         mainPanel.setVisible(visible);
     }
 

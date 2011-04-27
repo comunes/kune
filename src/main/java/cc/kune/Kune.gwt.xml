@@ -3,7 +3,7 @@
 <module rename-to="ws">
   <inherits name="com.google.gwt.user.User" />
   <inherits name='com.google.gwt.logging.Logging' />
-  <inherits name="cc.kune.core.Core" />
+  <inherits name="cc.kune.core.KuneCore" />
   <inherits name="cc.kune.wave.KuneWave" />
   <inherits name="cc.kune.chat.KuneChat" />
   <inherits name="cc.kune.docs.KuneDocs" />

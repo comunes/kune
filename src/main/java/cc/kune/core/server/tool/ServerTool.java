@@ -19,7 +19,6 @@
  */
 package cc.kune.core.server.tool;
 
-
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -33,10 +32,6 @@ import cc.kune.domain.User;
  */
 public interface ServerTool {
 
-    /* Same constant in client */
-    public static final String UPLOADEDFILE_SUFFIX = "uploaded";
-    public static final String WAVE_SUFFIX = "wave";
-
     void checkTypesBeforeContainerCreation(String parentTypeId, String typeId);
 
     void checkTypesBeforeContentCreation(String parentTypeId, String typeId);
@@ -47,7 +42,7 @@ public interface ServerTool {
 
     ServerToolTarget getTarget();
 
-    Group initGroup(User user, Group group);
+    Group initGroup(User user, Group group, Object... vars);
 
     void onCreateContainer(Container container, Container parent);
 

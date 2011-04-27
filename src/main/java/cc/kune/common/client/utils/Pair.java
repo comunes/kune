@@ -19,7 +19,7 @@ package cc.kune.common.client.utils;
  * @param <L>
  * @param <R>
  */
-public class Pair<L, R> {
+public final class Pair<L, R> {
     public static <L, R> Pair<L, R> create(final L l, final R r) {
         return new Pair<L, R>(l, r);
     }

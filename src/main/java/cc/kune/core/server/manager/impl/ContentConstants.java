@@ -1,6 +1,6 @@
 package cc.kune.core.server.manager.impl;
 
-public class ContentConstants {
+public final class ContentConstants {
 
     public static final String INITIAL_CONTENT = "<span style=\"font-weight: bold;\">Welcome to [%s]</span><br/>"
             + "    <br/>" + "    This site is powered by <a target=\"_blank\""
@@ -166,6 +166,8 @@ public class ContentConstants {
             + "    In the Inbox you have your list of waves, the ones you created or"
             + "    the ones others shared with you. You can use the search box to"
             + "    search through all your waves, using specific keywords.<br/>";
+
+    public static final String WELCOME_WAVE_CONTENT_TITLE = "Welcome to [%s]";
 
     private ContentConstants() {
     }

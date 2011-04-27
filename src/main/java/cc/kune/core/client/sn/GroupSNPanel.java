@@ -17,7 +17,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
     @Inject
     public GroupSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider, final GSpaceArmor armor) {
         super(i18n, guiProvider, armor);
-        setVisible(false);
+        setVisibleImpl(false);
         mainTitle.setText(i18n.t("Group members"));
         Tooltip.to(mainTitle, i18n.t("People and groups collaborating in this group"));
         firstCategoryLabel.setText(i18n.t("Admins"));
@@ -83,6 +83,10 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
     @Override
     public void setVisible(final boolean visible) {
+        setVisibleImpl(visible);
+    }
+
+    private void setVisibleImpl(final boolean visible) {
         mainPanel.setVisible(visible);
     }
 

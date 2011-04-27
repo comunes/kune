@@ -137,8 +137,11 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
             final User user = new User(shortName, longName, email, passwd, passwdDigest.getDigest(),
                     passwdDigest.getSalt(), language, country, tz);
             kuneWaveManager.createWave(
+                    ContentConstants.WELCOME_WAVE_CONTENT_TITLE.replaceAll("\\[%s\\]",
+                            databaseProperties.getDefaultSiteName()),
                     ContentConstants.WELCOME_WAVE_CONTENT.replaceAll("\\[%s\\]",
-                            databaseProperties.getDefaultSiteName()), databaseProperties.getAdminShortName(), shortName);
+                            databaseProperties.getDefaultSiteName()),
+                    participantUtils.of(databaseProperties.getAdminShortName()), participantUtils.of(shortName));
             return user;
         } catch (final RuntimeException e) {
             try {
