@@ -1,0 +1,1 @@
+UPDATE `contents` SET typeId='docs.doc' WHERE typeId='docs.wave';
