@@ -19,9 +19,9 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertspecialchar;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogView;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogView;
 
-public interface InsertSpecialCharDialogView extends AbstractTabbedDialogView {
+public interface InsertSpecialCharDialogView extends OldAbstractTabbedDialogView {
 
     int HEIGHT = 315;
 

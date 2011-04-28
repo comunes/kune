@@ -19,11 +19,11 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertspecialchar;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialog;
 
 import com.calclab.suco.client.events.Listener;
 
-public interface InsertSpecialCharDialog extends AbstractTabbedDialog {
+public interface InsertSpecialCharDialog extends OldAbstractTabbedDialog {
 
     String DEF_LABEL = "Click on a character below to insert it into the document.";
 

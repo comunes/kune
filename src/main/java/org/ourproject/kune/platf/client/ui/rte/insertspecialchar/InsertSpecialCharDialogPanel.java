@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertspecialchar;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 
 import cc.kune.common.client.notify.NotifyLevelImages;
@@ -29,7 +29,7 @@ import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-public class InsertSpecialCharDialogPanel extends AbstractTabbedDialogPanel implements InsertSpecialCharDialogView {
+public class InsertSpecialCharDialogPanel extends OldAbstractTabbedDialogPanel implements InsertSpecialCharDialogView {
 
     private static final String INSERT_SPECIAL_CHAR_DIALOG = "iscdp-dial";
     private static final String INSERT_SPECIAL_CHAR_DIALOG_ERROR_ID = "iscdp-err";

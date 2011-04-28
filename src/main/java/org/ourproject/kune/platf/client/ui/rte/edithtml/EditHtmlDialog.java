@@ -19,12 +19,12 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.edithtml;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialog;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
-public interface EditHtmlDialog extends AbstractTabbedDialog {
+public interface EditHtmlDialog extends OldAbstractTabbedDialog {
 
     String getHtml();
 

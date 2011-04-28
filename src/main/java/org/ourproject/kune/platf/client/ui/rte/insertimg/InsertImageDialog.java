@@ -19,12 +19,12 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertimg;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialog;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
-public interface InsertImageDialog extends AbstractTabbedDialog {
+public interface InsertImageDialog extends OldAbstractTabbedDialog {
 
     void fireOnInsertImage(ImageInfo imageInfo);
 

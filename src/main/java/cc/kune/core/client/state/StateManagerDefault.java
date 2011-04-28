@@ -365,7 +365,9 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
     @Override
     public void restorePreviousToken() {
-        gotoStateToken(previousToken);
+        if (previousToken != null) {
+            gotoStateToken(previousToken);
+        }
     }
 
     @Override

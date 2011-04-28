@@ -1,6 +1,6 @@
 package cc.kune.core.client.sitebar;
 
-import cc.kune.core.client.ui.dialogs.BasicTopDialog;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.core.client.GWT;
@@ -30,8 +30,8 @@ public class AboutKuneDialog {
 
     @Inject
     public AboutKuneDialog(final I18nTranslationService i18n) {
-        dialog = new BasicTopDialog(ABOUT_KUNE_ID, i18n.t("About Kune"), true, true, false, 400, 400, "", i18n.t("Ok"),
-                ABOUT_KUNE_BTN_ID, 1);
+        dialog = new BasicTopDialog.Builder(ABOUT_KUNE_ID, true, true).title(i18n.t("About Kune")).autoscroll(false).firstButtonTitle(
+                i18n.t("Ok")).firstButtonId(ABOUT_KUNE_BTN_ID).tabIndexStart(1).build();
         dialog.getInnerPanel().add(BINDER.createAndBindUi(this));
         dialog.getFirstBtn().addClickHandler(new ClickHandler() {
             @Override

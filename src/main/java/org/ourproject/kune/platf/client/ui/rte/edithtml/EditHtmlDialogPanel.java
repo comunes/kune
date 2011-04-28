@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.edithtml;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogPanel;
 import org.ourproject.kune.platf.client.ui.rte.img.RTEImgResources;
 
 import cc.kune.common.client.notify.NotifyLevel;
@@ -31,7 +31,7 @@ import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-public class EditHtmlDialogPanel extends AbstractTabbedDialogPanel implements EditHtmlDialogView {
+public class EditHtmlDialogPanel extends OldAbstractTabbedDialogPanel implements EditHtmlDialogView {
 
     public static final String EDIG_HTML_DIALOG_ERROR_ID = "ehtml-dialgo-error";
     public static final String EDIT_HTML_DIALOG = "ehtml-dialog";

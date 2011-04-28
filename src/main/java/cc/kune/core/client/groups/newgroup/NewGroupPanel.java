@@ -22,10 +22,11 @@ package cc.kune.core.client.groups.newgroup;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
+import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.DefaultFormUtils;
-import cc.kune.core.client.ui.dialogs.BasicTopDialog;
-import cc.kune.core.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
@@ -79,8 +80,13 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
     @Inject
     public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img, final MaskWidgetView mask) {
-        dialog = new BasicTopDialog(NEWGROUP_WIZARD, CoreMessages.REGISTER_A_NEW_GROUP_TITLE, false, true, true, 450,
-                360, "k-newgroup-icon", i18n.t("Register"), REGISTER_BUTTON, i18n.t("Cancel"), CANCEL_BUTTON, 9);
+        final Builder builder = new BasicTopDialog.Builder(NEWGROUP_WIZARD, false, true).autoscroll(true).height(
+                "360px");
+        builder.icon("k-newgroup-icon");
+        builder.firstButtonTitle(i18n.t("Register")).firstButtonId(REGISTER_BUTTON);
+        builder.sndButtonTitle(i18n.t("Cancel")).sndButtonId(CANCEL_BUTTON);
+        builder.tabIndexStart(9);
+        dialog = builder.build();
         this.i18n = i18n;
         this.mask = mask;
         // Field.setMsgTarget("side");

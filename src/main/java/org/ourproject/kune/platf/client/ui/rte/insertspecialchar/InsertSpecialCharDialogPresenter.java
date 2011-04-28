@@ -19,11 +19,11 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertspecialchar;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogPresenter;
 
 import com.calclab.suco.client.events.Listener;
 
-public class InsertSpecialCharDialogPresenter extends AbstractTabbedDialogPresenter implements InsertSpecialCharDialog {
+public class InsertSpecialCharDialogPresenter extends OldAbstractTabbedDialogPresenter implements InsertSpecialCharDialog {
 
     private Listener<String> onInsertSpecialChar;
 

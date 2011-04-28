@@ -38,9 +38,21 @@ public class TextUtils {
     // Original regexp from http://snippets.dzone.com/posts/show/452
     public static final String URL_REGEXP = "((ftp|http|https|mailto):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?)";
 
+    public static String br() {
+        return "<br/>";
+    }
+
+    public static String brbr() {
+        return "<br/><br/>";
+    }
+
     public static String ellipsis(final String text, final int length) {
         return text == null ? "" : length <= 0 ? text : text.length() > length ? text.substring(0, length - 3) + "..."
                 : text;
+    }
+
+    public static boolean empty(final String string) {
+        return !notEmpty(string);
     }
 
     /**

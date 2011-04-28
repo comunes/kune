@@ -20,9 +20,9 @@
 package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
 import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogView;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogView;
 
-public interface InsertLinkDialogView extends AbstractTabbedDialogView, View {
+public interface InsertLinkDialogView extends OldAbstractTabbedDialogView, View {
 
     int HEIGHT = 350;
 

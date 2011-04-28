@@ -29,6 +29,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.gspace.client.style.GSpaceBackManager;
 
 import com.calclab.suco.client.events.Listener2;
 import com.calclab.suco.client.ioc.Provider;
@@ -40,10 +41,10 @@ public class WsThemeManager {
     private final Provider<GroupServiceAsync> groupServiceProvider;
     private WsTheme previousTheme;
     private final Session session;
-    private final WsBackManager wsBackManager;
+    private final GSpaceBackManager wsBackManager;
 
     public WsThemeManager(final Session session, final Provider<GroupServiceAsync> groupServiceProvider,
-            final StateManager stateManager, final WsBackManager wsBackManager) {
+            final StateManager stateManager, final GSpaceBackManager wsBackManager) {
         this.session = session;
         this.groupServiceProvider = groupServiceProvider;
         this.wsBackManager = wsBackManager;

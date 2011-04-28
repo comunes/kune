@@ -25,26 +25,17 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 
 public class DefaultFormUtils {
-
     public static Radio createRadio(final FieldSet fieldSet, final String radioLabel, final String radioFieldName,
             final String radioTip, final String id) {
         final Radio radio = new Radio();
         radio.setName(radioFieldName);
-        // radio.setAutoCreate(true);
         radio.setHideLabel(true);
         radio.setId(id);
         fieldSet.add(radio);
 
         if (radioTip != null) {
             Tooltip.to(radio, radioTip);
-            // radio.setTitle(radioTip);
             radio.setBoxLabel(radioLabel);
-            // radio.setBoxLabel(KuneUiUtils.genQuickTipLabel(radioLabel, null,
-            // radioTip));
-            // ToolTip tooltip = new ToolTip();
-            // tooltip.setHtml(radioTip);
-            // tooltip.setWidth(250);
-            // tooltip.applyTo(radio);
         } else {
             radio.setBoxLabel(radioLabel);
         }

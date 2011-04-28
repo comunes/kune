@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertmedia;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogPanel;
 
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -29,7 +29,7 @@ import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-public class InsertMediaDialogPanel extends AbstractTabbedDialogPanel implements InsertMediaDialogView {
+public class InsertMediaDialogPanel extends OldAbstractTabbedDialogPanel implements InsertMediaDialogView {
 
     private static final String INSERT_MEDIA_DIALOG = "k-imdp-dialog";
     private static final String INSERT_MEDIA_DIALOG_ERROR_ID = "k-imdp-dialog-err";

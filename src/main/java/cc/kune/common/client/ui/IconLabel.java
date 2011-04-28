@@ -60,6 +60,11 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
         this("");
     }
 
+    public IconLabel(final ImageResource imgRes, final String text) {
+        this(text);
+        iconLeft.setResource(imgRes);
+    }
+
     public IconLabel(final String text) {
         initWidget(uiBinder.createAndBindUi(this));
         label.setText(text);

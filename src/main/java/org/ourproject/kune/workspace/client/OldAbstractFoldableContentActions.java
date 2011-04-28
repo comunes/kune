@@ -37,7 +37,6 @@ import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
-import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import cc.kune.common.client.utils.SchedulerManager;
@@ -61,6 +60,7 @@ import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.gspace.client.style.GSpaceBackManager;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
@@ -99,7 +99,7 @@ public abstract class OldAbstractFoldableContentActions {
     protected final StateManager stateManager;
     protected final Provider<ContentEditor> textEditorProvider;
 
-    private final WsBackManager wsBackManager;
+    private final GSpaceBackManager wsBackManager;
 
     public OldAbstractFoldableContentActions(final Session session, final StateManager stateManager,
             final I18nUITranslationService i18n, final ErrorHandler errorHandler,
@@ -109,7 +109,7 @@ public abstract class OldAbstractFoldableContentActions {
             final ContentActionRegistry contentActionRegistry, final ContextActionRegistry contextActionRegistry,
             final Provider<FileDownloadUtils> fileDownloadProvider, final Provider<ContentEditor> textEditorProvider,
             final Provider<ContextPropEditor> contextPropEditorProvider, final FoldableContent foldableContent,
-            final EntityHeader entityLogo, final WsBackManager wsBackManager) {
+            final EntityHeader entityLogo, final GSpaceBackManager wsBackManager) {
         this.session = session;
         this.stateManager = stateManager;
         this.i18n = i18n;

@@ -21,10 +21,10 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
+import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.KuneUiUtils;
-import cc.kune.core.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.extjs.gxt.ui.client.widget.VerticalPanel;

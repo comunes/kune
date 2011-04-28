@@ -1,0 +1,179 @@
+/*
+ *
+ * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+package cc.kune.common.client.ui.dialogs.tabbed;
+
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyLevelImages;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog;
+import cc.kune.common.client.ui.dialogs.MessageToolbar;
+
+import com.google.gwt.event.logical.shared.HasCloseHandlers;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Widget;
+
+public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogView {
+    private BasicTopDialog dialog;
+    private final String dialogId;
+    private final String errorLabelId;
+    private final String firstBtnId;
+    private final String firstBtnTitle;
+    private final int height;
+    private String iconCls;
+    private final NotifyLevelImages images;
+    private MessageToolbar messageErrorBar;
+    private final int minHeight;
+    private final int minWidth;
+    private final boolean modal;
+    private final String sndBtnId;
+    private final String sndBtnTitle;
+    private DecoratedTabPanel tabPanel;
+    private String title;
+    private final int width;
+
+    public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width, final int height,
+            final int minWidth, final int minHeight, final boolean modal, final NotifyLevelImages images,
+            final String errorLabelId, final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
+            final String sndBtnId) {
+        this.dialogId = dialogId;
+        this.title = title;
+        this.width = width;
+        this.height = height;
+        this.modal = modal;
+        this.images = images;
+        this.errorLabelId = errorLabelId;
+        // Not used:
+        this.minWidth = minWidth;
+        this.minHeight = minHeight;
+        this.firstBtnTitle = firstBtnTitle;
+        this.firstBtnId = firstBtnId;
+        this.sndBtnTitle = sndBtnTitle;
+        this.sndBtnId = sndBtnId;
+    }
+
+    @Override
+    public void activateTab(final int index) {
+        createDialogIfNecessary();
+        tabPanel.selectTab(index);
+    }
+
+    @Override
+    public void addTab(final IsWidget view, final IsWidget tabWidget) {
+        createDialogIfNecessary();
+        tabPanel.add(view, tabWidget);
+    }
+
+    @Override
+    public void createAndShow() {
+        show();
+        setFirstTabActive();
+    }
+
+    private void createDialog() {
+        dialog = new BasicTopDialog.Builder(dialogId, true, modal).autoscroll(true).width(width).height(height).icon(
+                iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(dialogId).sndButtonTitle(
+                sndBtnTitle).build();
+        messageErrorBar = new MessageToolbar(images, errorLabelId);
+        tabPanel = new DecoratedTabPanel();
+        dialog.getInnerPanel().add(tabPanel);
+    }
+
+    private void createDialogIfNecessary() {
+        if (dialog == null) {
+            createDialog();
+        }
+    }
+
+    @Override
+    public void destroy() {
+        if (dialog != null) {
+            dialog.removeFromParent();
+            dialog = null;
+        }
+    }
+
+    public HasCloseHandlers<?> getClose() {
+        return dialog.getClose();
+    }
+
+    public Widget getWidget() {
+        return dialog;
+    }
+
+    @Override
+    public void hide() {
+        if (dialog != null) {
+            if (dialog.isVisible()) {
+                dialog.hide();
+            }
+        }
+    }
+
+    @Override
+    public void hideMessages() {
+        if (dialog != null) {
+            messageErrorBar.hideErrorMessage();
+        }
+    }
+
+    @Override
+    public void insertTab(final IsWidget tab, final IsWidget tabTitle, final int index) {
+        createDialogIfNecessary();
+        tabPanel.insert(tab, tabTitle, index);
+    }
+
+    public boolean isVisible() {
+        createDialogIfNecessary();
+        return dialog.isVisible();
+    }
+
+    @Override
+    public void setErrorMessage(final String message, final NotifyLevel level) {
+        messageErrorBar.setErrorMessage(message, level);
+    }
+
+    public void setFirstTabActive() {
+        tabPanel.selectTab(0);
+    }
+
+    public void setIcon(final ImageResource icon) {
+        dialog.setTitleIcon(icon);
+    }
+
+    public void setIconCls(final String iconCls) {
+        this.iconCls = iconCls;
+        if (dialog != null) {
+            dialog.setTitleIcon(iconCls);
+        }
+    }
+
+    public void setTitle(final String title) {
+        this.title = title;
+        if (dialog != null) {
+            dialog.setTitle(title);
+        }
+    }
+
+    public void show() {
+        createDialogIfNecessary();
+        dialog.showCentered();
+    }
+}

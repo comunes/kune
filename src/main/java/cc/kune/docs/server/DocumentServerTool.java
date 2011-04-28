@@ -122,8 +122,11 @@ public class DocumentServerTool implements ServerTool {
         config.setRoot(rootFolder);
         group.setToolConfig(NAME, config);
         configurationManager.persist(config);
-        final String title = (String) otherVars[0];
-        final String body = (String) otherVars[1];
+
+        final boolean hasVars = otherVars.length >= 2;
+        final String title = hasVars ? (String) otherVars[0] : i18n.t("Document sample");
+        final String body = hasVars ? (String) otherVars[1] : i18n.t("This is only a sample of document");
+
         final Content content = contentManager.createContent(title, body, user, rootFolder, DocsConstants.TYPE_DOCUMENT);
         content.addAuthor(user);
         content.setLanguage(user.getLanguage());

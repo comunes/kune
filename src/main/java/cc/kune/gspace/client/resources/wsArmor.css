@@ -45,7 +45,7 @@
 
 .entityHeader span {
     font-size: 56px;
-    margin-left: 15px;
+  /*  margin-left: 15px; */
     color: #550000;
     font-weight: bold;
     font: 'UbuntuBold', Arial;

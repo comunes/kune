@@ -22,8 +22,9 @@ package cc.kune.core.client.auth;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
-import cc.kune.core.client.ui.dialogs.BasicTopDialog;
-import cc.kune.core.client.ui.dialogs.MessageToolbar;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
+import cc.kune.common.client.ui.dialogs.MessageToolbar;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -47,8 +48,14 @@ public abstract class SignInAbstractPanel extends ViewImpl {
             final int heigth, final String icon, final String firstButtonTitle, final String firstButtonId,
             final String cancelButtonTitle, final String cancelButtonId, final NotifyLevelImages images,
             final String errorLabelId, final int tabIndexStart) {
-        dialog = new BasicTopDialog(dialogId, title, autohide, modal, autoscroll, width, heigth, icon,
-                firstButtonTitle, firstButtonId, cancelButtonTitle, cancelButtonId, tabIndexStart);
+
+        final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(autoscroll);
+        builder.width(width).height(heigth);
+        builder.icon(icon);
+        builder.firstButtonTitle(firstButtonTitle).firstButtonId(firstButtonId);
+        builder.sndButtonTitle(cancelButtonTitle).sndButtonId(cancelButtonId);
+        builder.tabIndexStart(tabIndexStart);
+        dialog = builder.build();
         this.i18n = i18n;
         this.images = images;
         this.errorLabelId = errorLabelId;

@@ -19,14 +19,14 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertimg;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogPresenter;
 
 import cc.kune.core.client.ui.utils.ContentPosition;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
-public class InsertImageDialogPresenter extends AbstractTabbedDialogPresenter implements InsertImageDialog {
+public class InsertImageDialogPresenter extends OldAbstractTabbedDialogPresenter implements InsertImageDialog {
 
     private Listener<ImageInfo> onCreateListener;
     private ImageInfo imageInfo;

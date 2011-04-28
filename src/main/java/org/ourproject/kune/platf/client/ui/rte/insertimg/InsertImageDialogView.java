@@ -19,9 +19,9 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertimg;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogView;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogView;
 
-public interface InsertImageDialogView extends AbstractTabbedDialogView {
+public interface InsertImageDialogView extends OldAbstractTabbedDialogView {
 
     int HEIGHT = 350;
 

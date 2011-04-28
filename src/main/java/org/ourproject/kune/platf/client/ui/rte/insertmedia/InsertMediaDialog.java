@@ -19,12 +19,12 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertmedia;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialog;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialog;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
-public interface InsertMediaDialog extends AbstractTabbedDialog {
+public interface InsertMediaDialog extends OldAbstractTabbedDialog {
 
     void fireOnInsertMedia(String html);
 

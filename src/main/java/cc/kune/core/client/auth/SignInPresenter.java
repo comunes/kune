@@ -139,9 +139,9 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
             }
         });
         getView().getSecondBtn().addClickHandler(new ClickHandler() {
-
             @Override
             public void onClick(final ClickEvent event) {
+                Log.debug("On cancel signin presenter");
                 onCancel();
             }
         });
@@ -149,7 +149,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
             @Override
             public void onClose(final CloseEvent<PopupPanel> event) {
-                Log.debug("Closing register presenter");
+                Log.debug("Closing signin presenter");
                 SignInPresenter.this.onClose();
             }
         });

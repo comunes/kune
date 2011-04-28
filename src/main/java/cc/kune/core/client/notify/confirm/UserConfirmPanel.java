@@ -20,9 +20,9 @@
 package cc.kune.core.client.notify.confirm;
 
 import cc.kune.common.client.notify.ConfirmAskEvent;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmView;
-import cc.kune.core.client.ui.dialogs.BasicTopDialog;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -44,7 +44,8 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
 
     @Inject
     public UserConfirmPanel(final I18nTranslationService i18n) {
-        dialog = new BasicTopDialog(DIALOG_ID, "", false, true, false, 100, 100, "", "", OK_ID, "", CANCEL_ID, 1);
+        dialog = new BasicTopDialog.Builder(DIALOG_ID, false, true).autoscroll(false).width(100).height(100).firstButtonId(
+                OK_ID).sndButtonId(CANCEL_ID).tabIndexStart(1).build();
         askLabel = new Label();
         askLabel.addStyleName("k-userconfirm-label");
         dialog.getInnerPanel().add(askLabel);

@@ -19,12 +19,12 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.edithtml;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogPresenter;
 
 import com.calclab.suco.client.events.Listener;
 import com.calclab.suco.client.events.Listener0;
 
-public class EditHtmlDialogPresenter extends AbstractTabbedDialogPresenter implements EditHtmlDialog {
+public class EditHtmlDialogPresenter extends OldAbstractTabbedDialogPresenter implements EditHtmlDialog {
 
     private Listener<String> updateListener;
     private Listener0 cancelListener;

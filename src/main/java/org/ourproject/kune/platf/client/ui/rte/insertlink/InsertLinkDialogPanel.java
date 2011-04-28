@@ -19,7 +19,7 @@
  */
 package org.ourproject.kune.platf.client.ui.rte.insertlink;
 
-import org.ourproject.kune.platf.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
+import org.ourproject.kune.platf.client.ui.dialogs.tabbed.OldAbstractTabbedDialogPanel;
 
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -29,7 +29,7 @@ import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
-public class InsertLinkDialogPanel extends AbstractTabbedDialogPanel implements InsertLinkDialogView {
+public class InsertLinkDialogPanel extends OldAbstractTabbedDialogPanel implements InsertLinkDialogView {
     public static final String TEXT_EDT_INSERT_DIALOG = "k-ted-iep-dialog";
     public static final String TEXT_EDT_INSERT_DIALOG_ERROR_ID = "k-ted-iep-dialog-err";
     private final InsertLinkGroup textEditorInsertElementGroup;

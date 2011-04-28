@@ -1114,3 +1114,11 @@ font-size:small;
     font-size: 16px;
     font-style: italic;
 }
+
+button.k-ent-header-btn {
+  margin: 10px !important;
+}
+
+.k-ent-header-btn * {
+  font-size: 13px !important;
+}

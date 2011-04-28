@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client;
 
+import cc.kune.client.ExtendedGinModule;
 import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.actions.gxtui.GxtGuiProvider;
 import cc.kune.common.client.actions.ui.bind.DefaultGuiProvider;
@@ -107,12 +108,11 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.DefaultProxyFailureHandler;
 import com.gwtplatform.mvp.client.RootPresenter;
-import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.client.proxy.ProxyFailureHandler;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
-public class CoreGinModule extends AbstractPresenterModule {
+public class CoreGinModule extends ExtendedGinModule {
 
     /*
      * (non-Javadoc)
@@ -209,15 +209,4 @@ public class CoreGinModule extends AbstractPresenterModule {
         s(SitebarSignOutLink.class);
     }
 
-    private void eagle(final Class<?> type) {
-        bind(type).asEagerSingleton();
-    }
-
-    private void s(final Class<?> type) {
-        bind(type).in(Singleton.class);
-    }
-
-    private <V, W> void s(final Class<V> type, final Class<? extends V> typeImpl) {
-        bind(type).to(typeImpl).in(Singleton.class);
-    }
 }

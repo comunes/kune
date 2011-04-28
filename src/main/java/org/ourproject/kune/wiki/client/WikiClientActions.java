@@ -31,7 +31,6 @@ import org.ourproject.kune.workspace.client.cxt.ContextActionRegistry;
 import org.ourproject.kune.workspace.client.cxt.ContextPropEditor;
 import org.ourproject.kune.workspace.client.editor.ContentEditor;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
-import org.ourproject.kune.workspace.client.themes.WsBackManager;
 import org.ourproject.kune.workspace.client.upload.FileUploader;
 
 import cc.kune.common.client.utils.SchedulerManager;
@@ -43,6 +42,7 @@ import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.services.FileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.gspace.client.style.GSpaceBackManager;
 
 import com.calclab.suco.client.ioc.Provider;
 
@@ -55,7 +55,7 @@ public class WikiClientActions extends OldAbstractFoldableContentActions {
             final Provider<FileDownloadUtils> fileDownloadProvider, final EntityHeader entityLogo,
             final Provider<ContentEditor> textEditorProvider, final ErrorHandler errorHandler,
             final WikiViewer documentViewer, final Provider<ContextPropEditor> contextProvEditorProvider,
-            final WsBackManager wsBackManager) {
+            final GSpaceBackManager wsBackManager) {
         super(session, stateManager, i18n, errorHandler, deferredCommandWrapper, groupServiceProvider,
                 contentServiceProvider, fileUploaderProvider, contextNavigator, contentActionRegistry,
                 contextActionRegistry, fileDownloadProvider, textEditorProvider, contextProvEditorProvider,

@@ -118,5 +118,5 @@
   <classpathentry kind="var" path="M2_REPO/com/thoughtworks/xstream/xstream/1.2.2/xstream-1.2.2.jar" sourcepath="M2_REPO/com/thoughtworks/xstream/xstream/1.2.2/xstream-1.2.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/xwiki/platform/xwiki-web-gwt-dom/2.3-rc-1/xwiki-web-gwt-dom-2.3-rc-1.jar" sourcepath="M2_REPO/org/xwiki/platform/xwiki-web-gwt-dom/2.3-rc-1/xwiki-web-gwt-dom-2.3-rc-1-sources.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+  <classpathentry kind="src" path=".apt_generated" including="**/*.java"/>  <classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 </classpath>
