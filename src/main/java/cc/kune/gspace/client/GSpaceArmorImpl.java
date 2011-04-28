@@ -42,159 +42,161 @@ import com.google.inject.Provider;
 
 public class GSpaceArmorImpl extends Composite implements GSpaceArmor {
 
-    interface WsArmorImplUiBinder extends UiBinder<Widget, GSpaceArmorImpl> {
-    }
+  interface WsArmorImplUiBinder extends UiBinder<Widget, GSpaceArmorImpl> {
+  }
 
-    private static WsArmorImplUiBinder uiBinder = GWT.create(WsArmorImplUiBinder.class);
+  private static WsArmorImplUiBinder uiBinder = GWT.create(WsArmorImplUiBinder.class);
 
-    @UiField
-    VerticalPanel docContainer;
-    @UiField
-    FlowPanel docFooter;
-    @UiField
-    FlowPanel docHeader;
-    @UiField
-    FlowPanel docSubheader;
-    @UiField
-    FlowPanel entityFooter;
-    @UiField
-    FlowPanel entityHeader;
-    @UiField
-    VerticalPanel entityToolsCenter;
-    @UiField
-    VerticalPanel entityToolsNorth;
-    @UiField
-    VerticalPanel entityToolsSouth;
-    private final ActionFlowPanel footerToolbar;
-    @UiField
-    SplitLayoutPanel groupSpace;
-    private final ActionFlowPanel headerToolbar;
-    @UiField
-    SimplePanel homeSpace;
-    @UiField
-    DockLayoutPanel mainpanel;
-    @UiField
-    SimplePanel publicSpace;
-    @UiField
-    FlowPanel sitebar;
-    @UiField
-    DockLayoutPanel splitCenter;
-    @UiField
-    DockLayoutPanel splitEast;
-    private final ActionFlowPanel subheaderToolbar;
-    @UiField
-    TabLayoutPanel tabs;
-    @UiField
-    FlowPanel userSpace;
+  @UiField
+  VerticalPanel docContainer;
+  @UiField
+  FlowPanel docFooter;
+  @UiField
+  FlowPanel docHeader;
+  @UiField
+  FlowPanel docSubheader;
+  @UiField
+  FlowPanel entityFooter;
+  @UiField
+  FlowPanel entityHeader;
+  @UiField
+  VerticalPanel entityToolsCenter;
+  @UiField
+  VerticalPanel entityToolsNorth;
+  @UiField
+  VerticalPanel entityToolsSouth;
+  private final ActionFlowPanel footerToolbar;
+  @UiField
+  SplitLayoutPanel groupSpace;
+  private final ActionFlowPanel headerToolbar;
+  @UiField
+  SimplePanel homeSpace;
+  @UiField
+  DockLayoutPanel mainpanel;
+  @UiField
+  SimplePanel publicSpace;
+  @UiField
+  FlowPanel sitebar;
+  @UiField
+  DockLayoutPanel splitCenter;
+  @UiField
+  DockLayoutPanel splitEast;
+  private final ActionFlowPanel subheaderToolbar;
+  @UiField
+  TabLayoutPanel tabs;
+  @UiField
+  FlowPanel userSpace;
 
-    @Inject
-    public GSpaceArmorImpl(final Provider<ActionFlowPanel> toolbarProv) {
-        initWidget(uiBinder.createAndBindUi(this));
-        groupSpace.setWidgetMinSize(splitEast, 150);
-        tabs.setStyleName("k-spaces");
-        homeSpace.add(RootPanel.get("k-home-wrapper"));
-        DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow", "visible");
-        DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsCenter), "overflow", "visible");
-        footerToolbar = toolbarProv.get();
-        headerToolbar = toolbarProv.get();
-        subheaderToolbar = toolbarProv.get();
-        getDocHeader().add(headerToolbar);
-        getDocSubheader().add(subheaderToolbar);
-        getDocFooter().add(footerToolbar);
-    }
+  @Inject
+  public GSpaceArmorImpl(final Provider<ActionFlowPanel> toolbarProv) {
+    initWidget(uiBinder.createAndBindUi(this));
+    groupSpace.setWidgetMinSize(splitEast, 150);
+    tabs.setStyleName("k-spaces");
+    homeSpace.add(RootPanel.get("k-home-wrapper"));
+    DOM.setStyleAttribute((Element) groupSpace.getWidgetContainerElement(splitEast), "overflow",
+        "visible");
+    DOM.setStyleAttribute((Element) splitEast.getWidgetContainerElement(entityToolsCenter), "overflow",
+        "visible");
+    footerToolbar = toolbarProv.get();
+    headerToolbar = toolbarProv.get();
+    subheaderToolbar = toolbarProv.get();
+    getDocHeader().add(headerToolbar);
+    getDocSubheader().add(subheaderToolbar);
+    getDocFooter().add(footerToolbar);
+  }
 
-    @Override
-    public ForIsWidget getDocContainer() {
-        return docContainer;
-    }
+  @Override
+  public ForIsWidget getDocContainer() {
+    return docContainer;
+  }
 
-    @Override
-    public ForIsWidget getDocFooter() {
-        return docFooter;
-    }
+  @Override
+  public ForIsWidget getDocFooter() {
+    return docFooter;
+  }
 
-    @Override
-    public ForIsWidget getDocHeader() {
-        return docHeader;
-    }
+  @Override
+  public ForIsWidget getDocHeader() {
+    return docHeader;
+  }
 
-    @Override
-    public ForIsWidget getDocSubheader() {
-        return docSubheader;
-    }
+  @Override
+  public ForIsWidget getDocSubheader() {
+    return docSubheader;
+  }
 
-    @Override
-    public ForIsWidget getEntityFooter() {
-        return entityFooter;
-    }
+  @Override
+  public ForIsWidget getEntityFooter() {
+    return entityFooter;
+  }
 
-    @Override
-    public ForIsWidget getEntityHeader() {
-        return entityHeader;
-    }
+  @Override
+  public ForIsWidget getEntityHeader() {
+    return entityHeader;
+  }
 
-    @Override
-    public ForIsWidget getEntityToolsCenter() {
-        return entityToolsCenter;
-    }
+  @Override
+  public ForIsWidget getEntityToolsCenter() {
+    return entityToolsCenter;
+  }
 
-    @Override
-    public ForIsWidget getEntityToolsNorth() {
-        return entityToolsNorth;
-    }
+  @Override
+  public ForIsWidget getEntityToolsNorth() {
+    return entityToolsNorth;
+  }
 
-    @Override
-    public ForIsWidget getEntityToolsSouth() {
-        return entityToolsSouth;
-    }
+  @Override
+  public ForIsWidget getEntityToolsSouth() {
+    return entityToolsSouth;
+  }
 
-    @Override
-    public IsActionExtensible getFooterToolbar() {
-        return footerToolbar;
-    }
+  @Override
+  public IsActionExtensible getFooterToolbar() {
+    return footerToolbar;
+  }
 
-    @Override
-    public IsActionExtensible getHeaderToolbar() {
-        return headerToolbar;
-    }
+  @Override
+  public IsActionExtensible getHeaderToolbar() {
+    return headerToolbar;
+  }
 
-    @Override
-    public SimplePanel getPublicSpace() {
-        return publicSpace;
-    }
+  @Override
+  public SimplePanel getPublicSpace() {
+    return publicSpace;
+  }
 
-    @Override
-    public ForIsWidget getSitebar() {
-        return sitebar;
-    }
+  @Override
+  public ForIsWidget getSitebar() {
+    return sitebar;
+  }
 
-    @Override
-    public IsActionExtensible getSubheaderToolbar() {
-        return subheaderToolbar;
-    }
+  @Override
+  public IsActionExtensible getSubheaderToolbar() {
+    return subheaderToolbar;
+  }
 
-    @Override
-    public ForIsWidget getUserSpace() {
-        return userSpace;
-    }
+  @Override
+  public ForIsWidget getUserSpace() {
+    return userSpace;
+  }
 
-    @Override
-    public void selectGroupSpace() {
-        tabs.selectTab(groupSpace);
-    }
+  @Override
+  public void selectGroupSpace() {
+    tabs.selectTab(groupSpace);
+  }
 
-    @Override
-    public void selectHomeSpace() {
-        tabs.selectTab(homeSpace);
-    }
+  @Override
+  public void selectHomeSpace() {
+    tabs.selectTab(homeSpace);
+  }
 
-    @Override
-    public void selectPublicSpace() {
-        tabs.selectTab(publicSpace);
-    }
+  @Override
+  public void selectPublicSpace() {
+    tabs.selectTab(publicSpace);
+  }
 
-    @Override
-    public void selectUserSpace() {
-        tabs.selectTab(userSpace);
-    }
+  @Override
+  public void selectUserSpace() {
+    tabs.selectTab(userSpace);
+  }
 }

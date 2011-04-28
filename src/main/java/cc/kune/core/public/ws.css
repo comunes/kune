@@ -1127,3 +1127,8 @@ button.k-ent-header-btn {
 .k-ent-header-btn * {
   font-size: 13px !important;
 }
+
+table.k-folder-viewer {
+    border: 5px solid #FFF;
+    border-collapse: separate;
+}

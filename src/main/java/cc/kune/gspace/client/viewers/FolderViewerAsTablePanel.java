@@ -47,6 +47,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     this.guiProvider = guiProvider;
     this.res = res;
     widget = uiBinder.createAndBindUi(this);
+    widget.addStyleName("k-folder-viewer");
   }
 
   @Override

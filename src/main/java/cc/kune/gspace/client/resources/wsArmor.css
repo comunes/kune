@@ -123,8 +123,8 @@
   -webkit-border-top-right-radius: 7px;
   -moz-border-radius-topright: 7px;
   border-top-right-radius: 7px;
-  padding: 5px;
 }
+.docEditor div { overflow-y: visible; }
 
 .docFooter {
   border-left: 1px solid #959595;

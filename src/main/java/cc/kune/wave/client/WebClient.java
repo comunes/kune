@@ -262,9 +262,13 @@ private final EventBus eventBus;
    * Returns <code>ws://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
-  private native String getWebSocketBaseUrl(String moduleBase) /*-{return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";}-*/;
+  public native static String getWebSocketBaseUrl(String moduleBase) /*-{
+		return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+  }-*/;
 
-  private native boolean useSocketIO() /*-{ return !!$wnd.__useSocketIO }-*/;
+  public native static boolean useSocketIO() /*-{
+		return !!$wnd.__useSocketIO
+  }-*/;
 
   /**
    */
