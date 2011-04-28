@@ -41,96 +41,96 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOptionsToolsConfView {
-    private final HashMap<String, CheckBox> fields;
-    private final I18nTranslationService i18n;
-    private final IconLabel tabTitle;
+  private final HashMap<String, CheckBox> fields;
+  private final I18nTranslationService i18n;
+  private final IconLabel tabTitle;
 
-    public EntityOptionsToolsConfPanel(final I18nTranslationService i18n, final CoreResources res) {
-        tabTitle = new IconLabel(res.kunePreferences(), i18n.t("Tools"));
-        this.i18n = i18n;
-        super.setHeight(EntityOptionsView.HEIGHT);
-        super.setFrame(true);
-        super.add(new HiddenField());
-        super.getFormPanel().setLabelWidth(20);
-        fields = new HashMap<String, CheckBox>();
-    }
+  public EntityOptionsToolsConfPanel(final I18nTranslationService i18n, final CoreResources res) {
+    tabTitle = new IconLabel(res.kunePreferences(), i18n.t("Tools"));
+    this.i18n = i18n;
+    super.setHeight(EntityOptionsView.HEIGHT);
+    super.setWidth(EntityOptionsView.WIDTH);
+    super.setFrame(true);
+    super.add(new HiddenField());
+    super.getFormPanel().setLabelWidth(20);
+    fields = new HashMap<String, CheckBox>();
+  }
 
-    @Override
-    public void add(final ToolSimpleDTO tool, final ClickHandler handler) {
-        final CheckBox checkbox = new CheckBox();
-        checkbox.setFieldLabel(tool.getRootName());
-        checkbox.setValue(false);
-        checkbox.addListener(Events.Change, new Listener<BaseEvent>() {
-            @Override
-            public void handleEvent(final BaseEvent be) {
-                handler.onClick(null);
-                // presenter.onCheck(tool, checked);
-            }
-        });
-        super.add(checkbox);
-        fields.put(tool.getName(), checkbox);
-        doLayoutIfNeeded();
-    }
+  @Override
+  public void add(final ToolSimpleDTO tool, final ClickHandler handler) {
+    final CheckBox checkbox = new CheckBox();
+    checkbox.setFieldLabel(tool.getRootName());
+    checkbox.setValue(false);
+    checkbox.addListener(Events.Change, new Listener<BaseEvent>() {
+      @Override
+      public void handleEvent(final BaseEvent be) {
+        handler.onClick(null);
+        // presenter.onCheck(tool, checked);
+      }
+    });
+    super.add(checkbox);
+    fields.put(tool.getName(), checkbox);
+    doLayoutIfNeeded();
+  }
 
-    @Override
-    public Widget asWidget() {
-        return super.getFormPanel();
-    }
+  @Override
+  public Widget asWidget() {
+    return super.getFormPanel();
+  }
 
-    @Override
-    public void clear() {
-        super.getFormPanel().removeAll();
-        fields.clear();
-        final Label label = new Label();
-        label.setText(i18n.t("Here you can select the tools used:"));// +
-                                                                     // "<br/><br/>");
-        super.add(label);
-    }
+  @Override
+  public void clear() {
+    super.getFormPanel().removeAll();
+    fields.clear();
+    final Label label = new Label();
+    label.setText(i18n.t("Here you can select the tools used:"));
+    super.add(label);
+  }
 
-    private void doLayoutIfNeeded() {
-        if (super.getFormPanel().isRendered()) {
-            super.getFormPanel().layout();
-        }
+  private void doLayoutIfNeeded() {
+    if (super.getFormPanel().isRendered()) {
+      super.getFormPanel().layout();
     }
+  }
 
-    @Override
-    public IsWidget getTabTitle() {
-        return tabTitle;
-    }
+  @Override
+  public IsWidget getTabTitle() {
+    return tabTitle;
+  }
 
-    private CheckBox getTool(final String tool) {
-        final CheckBox field = fields.get(tool);
-        if (field == null) {
-            Log.error("Field " + tool + " not found in EOTCP");
-        }
-        return field;
+  private CheckBox getTool(final String tool) {
+    final CheckBox field = fields.get(tool);
+    if (field == null) {
+      Log.error("Field " + tool + " not found in EOTCP");
     }
+    return field;
+  }
 
-    @Override
-    public boolean isChecked(final String tool) {
-        final CheckBox field = getTool(tool);
-        return field.getValue();
-    }
+  @Override
+  public boolean isChecked(final String tool) {
+    final CheckBox field = getTool(tool);
+    return field.getValue();
+  }
 
-    @Override
-    public void setChecked(final String tool, final boolean checked) {
-        final CheckBox field = getTool(tool);
-        field.setValue(checked);
-    }
+  @Override
+  public void setChecked(final String tool, final boolean checked) {
+    final CheckBox field = getTool(tool);
+    field.setValue(checked);
+  }
 
-    @Override
-    public void setEnabled(final String tool, final boolean enabled) {
-        final CheckBox field = getTool(tool);
-        if (enabled) {
-            field.enable();
-        } else {
-            field.disable();
-        }
+  @Override
+  public void setEnabled(final String tool, final boolean enabled) {
+    final CheckBox field = getTool(tool);
+    if (enabled) {
+      field.enable();
+    } else {
+      field.disable();
     }
+  }
 
-    @Override
-    public void setTooltip(final String tool, final String tip) {
-        final CheckBox field = getTool(tool);
-        Tooltip.to(field, tip);
-    }
+  @Override
+  public void setTooltip(final String tool, final String tip) {
+    final CheckBox field = getTool(tool);
+    Tooltip.to(field, tip);
+  }
 }

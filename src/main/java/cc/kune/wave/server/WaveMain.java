@@ -124,7 +124,7 @@ public class WaveMain {
     initializeServer(injector, domain);
     initializeServlets(injector, server);
     initializeRobots(injector, waveBus);
-    initializeFrontend(injector, server, waveBus, domain);
+    initializeFrontend(injector, server, waveBus);
     initializeFederation(injector);
 
     LOG.info("Starting server");
@@ -201,12 +201,12 @@ public class WaveMain {
   }
 
   private static void initializeFrontend(Injector injector, ServerRpcProvider server,
-      WaveBus waveBus, String waveDomain) throws WaveServerException {
+      WaveBus waveBus) throws WaveServerException {
     HashedVersionFactory hashFactory = injector.getInstance(HashedVersionFactory.class);
    
     WaveletProvider provider = injector.getInstance(WaveletProvider.class);
     ClientFrontend frontend =
-        ClientFrontendImpl.create(hashFactory, provider, waveBus, waveDomain);
+        ClientFrontendImpl.create(hashFactory, provider, waveBus);
 
     ProtocolWaveClientRpc.Interface rpcImpl = WaveClientRpcImpl.create(frontend, false);
     server.registerService(ProtocolWaveClientRpc.newReflectiveService(rpcImpl));

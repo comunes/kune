@@ -5,7 +5,7 @@ usage() {
     echo "$0 -j target/emite-0.4.6-emiteuimodule.jar -g com.calclab.emite -a emite -v 0.4.6"
 }
 
-PACKAGING=jar
+PACKAGING='jar'
 
 while getopts “hg:a:v:j:s” OPTION
 do
@@ -27,7 +27,7 @@ do
 	    JAR=$OPTARG
 	    ;;
 	s)
-            PACKAGING=java-source
+            PACKAGING='java-source -DgeneratePom=false'
             ;;
 	?)
             usage
@@ -47,5 +47,5 @@ mvn deploy:deploy-file -DgroupId=$GROUP \
 	-Dversion=$VER \
 	-Dpackaging=$PACKAGING \
 	-Dfile=$JAR \
-  -DrepositoryId=kune.ourproject.org \
-	-Durl=scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/ 	
+	-Durl=scpexe://kune.ourproject.org/home/groups/kune/htdocs/mavenrepo/ \
+	-DrepositoryId=kune.ourproject.org

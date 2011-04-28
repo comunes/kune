@@ -103,7 +103,7 @@ public class WebClient extends Composite {
   // Please also see WebClientDemo.gwt.xml.
   private static final Logger REMOTE_LOG = Logger.getLogger("REMOTE_LOG");
 
-  private final ProfileManager profiles = new ProfileManagerImpl();
+  private final ProfileManager profiles = new ProfileManagerImpl(Session.get().getDomain());
 
   @UiField
   SplitLayoutPanel splitPanel;
@@ -262,13 +262,9 @@ private final EventBus eventBus;
    * Returns <code>ws://yourhost[:port]/</code>.
    */
   // XXX check formatting wrt GPE
-  public native static String getWebSocketBaseUrl(String moduleBase) /*-{
-	return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
-}-*/;
+  private native String getWebSocketBaseUrl(String moduleBase) /*-{return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";}-*/;
 
-  public native static boolean useSocketIO() /*-{
-	return !!$wnd.__useSocketIO
-}-*/;
+  private native boolean useSocketIO() /*-{ return !!$wnd.__useSocketIO }-*/;
 
   /**
    */

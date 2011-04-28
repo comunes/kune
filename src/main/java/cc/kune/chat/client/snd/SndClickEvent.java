@@ -7,7 +7,7 @@ import com.google.gwt.event.shared.HasHandlers;
 
 public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
-    public interface HasClickHandlers extends HasHandlers {
+    public interface HasSndClickHandlers extends HasHandlers {
         HandlerRegistration addSndClickHandler(SndClickHandler handler);
     }
 

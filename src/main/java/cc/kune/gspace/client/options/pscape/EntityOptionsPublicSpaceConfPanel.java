@@ -41,92 +41,95 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class EntityOptionsPublicSpaceConfPanel extends VerticalPanel implements EntityOptionsPublicSpaceConfView {
+public class EntityOptionsPublicSpaceConfPanel extends VerticalPanel implements
+    EntityOptionsPublicSpaceConfView {
 
-    private final Image backImage;
-    private final Button clearBtn;
-    private final Label currentBackLabel;
-    private final FileDownloadUtils downUtils;
-    private final Label noBackLabel;
-    private final IconLabel tabTitle;
+  private final Image backImage;
+  private final Button clearBtn;
+  private final Label currentBackLabel;
+  private final FileDownloadUtils downUtils;
+  private final Label noBackLabel;
+  private final IconLabel tabTitle;
 
-    public EntityOptionsPublicSpaceConfPanel(final I18nTranslationService i18n, final FileDownloadUtils downUtils,
-            final CoreResources res) {
-        this.downUtils = downUtils;
-        tabTitle = new IconLabel(res.themeChoose(), i18n.t("Style"));
-        // super.setIconCls("k-colors-icon");
-        // super.setAutoScroll(true);
-        // super.setBorder(false);
-        super.setHeight(String.valueOf(EntityOptionsView.HEIGHT));
-        // super.setFrame(true);
-        // super.setPaddings(10);
+  public EntityOptionsPublicSpaceConfPanel(final I18nTranslationService i18n,
+      final FileDownloadUtils downUtils, final CoreResources res) {
+    this.downUtils = downUtils;
+    tabTitle = new IconLabel(res.themeChoose(), i18n.t("Style"));
+    // super.setIconCls("k-colors-icon");
+    // super.setAutoScroll(true);
+    // super.setBorder(false);
+    super.setHeight(String.valueOf(EntityOptionsView.HEIGHT));
+    super.setWidth(String.valueOf(EntityOptionsView.WIDTH));
+    // super.setFrame(true);
+    // super.setPaddings(10);
 
-        final HorizontalPanel wsHP = new HorizontalPanel();
-        final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));
-        // final Widget toolbarWsChange = (Widget) wsSelector.getView();
-        // toolbarWsChange.addStyleName("kune-Margin-Medium-l");
-        wsHP.add(wsThemeInfo);
-        // wsHP.add(toolbarWsChange);
-        add(wsHP);
-        final VerticalPanel backPanel = new VerticalPanel();
-        currentBackLabel = new Label(i18n.t("Current background image: "));
-        noBackLabel = new Label(i18n.t("Also you can upload any image and select it later as background."));
-        backImage = new Image();
-        backImage.addStyleName("kune-Margin-Medium-trbl");
-        noBackLabel.addStyleName("kune-Margin-Medium-tb");
-        clearBtn = new Button(i18n.t("Clear"));
-        Tooltip.to(clearBtn, i18n.t("Remove current background image"));
-        backPanel.add(noBackLabel);
-        backPanel.add(currentBackLabel);
-        backPanel.add(backImage);
-        backPanel.add(clearBtn);
-        add(backPanel);
-        final Label wsInfo = new Label(i18n.t("Select and configure the public space theme of this group:"));
-        wsInfo.addStyleName("kune-Margin-Medium-tb");
-        add(wsInfo);
+    final HorizontalPanel wsHP = new HorizontalPanel();
+    final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));
+    // final Widget toolbarWsChange = (Widget) wsSelector.getView();
+    // toolbarWsChange.addStyleName("kune-Margin-Medium-l");
+    wsHP.add(wsThemeInfo);
+    // wsHP.add(toolbarWsChange);
+    add(wsHP);
+    final VerticalPanel backPanel = new VerticalPanel();
+    currentBackLabel = new Label(i18n.t("Current background image: "));
+    noBackLabel = new Label(i18n.t("Also you can upload any image and select it later as background."));
+    backImage = new Image();
+    backImage.addStyleName("kune-Margin-Medium-trbl");
+    noBackLabel.addStyleName("kune-Margin-Medium-tb");
+    clearBtn = new Button(i18n.t("Clear"));
+    Tooltip.to(clearBtn, i18n.t("Remove current background image"));
+    backPanel.add(noBackLabel);
+    backPanel.add(currentBackLabel);
+    backPanel.add(backImage);
+    backPanel.add(clearBtn);
+    add(backPanel);
+    final Label wsInfo = new Label(i18n.t("Select and configure the public space theme of this group:"));
+    wsInfo.addStyleName("kune-Margin-Medium-tb");
+    add(wsInfo);
 
-        final VerticalPanel stylesPanel = new VerticalPanel();
-        final ClickHandler clickHandler = new ClickHandler() {
+    final VerticalPanel stylesPanel = new VerticalPanel();
+    final ClickHandler clickHandler = new ClickHandler() {
 
-            @Override
-            public void onClick(final ClickEvent event) {
-                NotifyUser.info(TextUtils.IN_DEVELOPMENT_P);
-            }
-        };
-        for (int i = 1; i <= 6; i++) {
-            final BasicThumb thumb = new BasicThumb("images/styles/styl" + i + ".png", "Style " + i, clickHandler);
-            thumb.setTooltip(i18n.t("Click to select and configure this theme"));
-            add(thumb);
-        }
-        add(stylesPanel);
-        setBackImageVisibleImpl(false);
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.info(TextUtils.IN_DEVELOPMENT_P);
+      }
+    };
+    for (int i = 1; i <= 6; i++) {
+      final BasicThumb thumb = new BasicThumb("images/styles/styl" + i + ".png", "Style " + i,
+          clickHandler);
+      thumb.setTooltip(i18n.t("Click to select and configure this theme"));
+      add(thumb);
     }
+    add(stylesPanel);
+    setBackImageVisibleImpl(false);
+  }
 
-    @Override
-    public void clearBackImage() {
-        setBackImageVisibleImpl(false);
-    }
+  @Override
+  public void clearBackImage() {
+    setBackImageVisibleImpl(false);
+  }
 
-    @Override
-    public HasClickHandlers getClearBtn() {
-        return clearBtn;
-    }
+  @Override
+  public HasClickHandlers getClearBtn() {
+    return clearBtn;
+  }
 
-    @Override
-    public IsWidget getTabTitle() {
-        return tabTitle;
-    }
+  @Override
+  public IsWidget getTabTitle() {
+    return tabTitle;
+  }
 
-    @Override
-    public void setBackImage(final StateToken token) {
-        backImage.setUrl(downUtils.getImageResizedUrl(token, ImageSize.thumb));
-        setBackImageVisibleImpl(true);
-    }
+  @Override
+  public void setBackImage(final StateToken token) {
+    backImage.setUrl(downUtils.getImageResizedUrl(token, ImageSize.thumb));
+    setBackImageVisibleImpl(true);
+  }
 
-    private void setBackImageVisibleImpl(final boolean visible) {
-        backImage.setVisible(visible);
-        currentBackLabel.setVisible(visible);
-        clearBtn.setVisible(visible);
-        noBackLabel.setVisible(!visible);
-    }
+  private void setBackImageVisibleImpl(final boolean visible) {
+    backImage.setVisible(visible);
+    currentBackLabel.setVisible(visible);
+    clearBtn.setVisible(visible);
+    noBackLabel.setVisible(!visible);
+  }
 }

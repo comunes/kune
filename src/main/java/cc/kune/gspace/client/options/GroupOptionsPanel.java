@@ -26,44 +26,52 @@ import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements GroupOptionsView {
 
-    public static final String GROUP_OP_PANEL_ID = "k-gop-diagpan";
-    public static final String GROUP_OPTIONS_ERROR_ID = "k-gop-err-mess";
-    private final EntityHeader entityHeader;
-    private final GroupOptionsCollection entityPreferencesGroup;
+  public static final String GROUP_OP_PANEL_ID = "k-gop-diagpan";
+  public static final String GROUP_OPTIONS_ERROR_ID = "k-gop-err-mess";
+  private final EntityHeader entityHeader;
+  private final GroupOptionsCollection entityPreferencesGroup;
 
-    @Inject
-    public GroupOptionsPanel(final EntityHeader entityHeader, final I18nTranslationService i18n,
-            final NotifyLevelImages images, final GroupOptionsCollection entityOptionsGroup) {
-        super(GROUP_OP_PANEL_ID, "", 400, HEIGHT + 80, 400, HEIGHT + 80, false, images, GROUP_OPTIONS_ERROR_ID,
-                i18n.t("Close"), null, null, null);
-        this.entityHeader = entityHeader;
-        this.entityPreferencesGroup = entityOptionsGroup;
-        super.setIconCls("k-options-icon");
-        super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE));
-    }
+  @Inject
+  public GroupOptionsPanel(final EntityHeader entityHeader, final I18nTranslationService i18n,
+      final NotifyLevelImages images, final GroupOptionsCollection entityOptionsGroup) {
+    super(GROUP_OP_PANEL_ID, "", WIDTH, HEIGHT + 80, WIDTH, HEIGHT + 80, false, images,
+        GROUP_OPTIONS_ERROR_ID, i18n.t("Close"), null, null, null);
+    this.entityHeader = entityHeader;
+    this.entityPreferencesGroup = entityOptionsGroup;
+    super.setIconCls("k-options-icon");
+    super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE));
+  }
 
-    @Override
-    public void addAction(final GuiActionDescrip descriptor) {
-        entityHeader.addAction(descriptor);
-    }
+  @Override
+  public void addAction(final GuiActionDescrip descriptor) {
+    entityHeader.addAction(descriptor);
+  }
 
-    @Override
-    public Widget asWidget() {
-        return super.getWidget();
-    }
+  @Override
+  public Widget asWidget() {
+    return super.getWidget();
+  }
 
-    @Override
-    public void createAndShow() {
-        createAndShowItImpl();
-    }
+  @Override
+  public void createAndShow() {
+    createAndShowItImpl();
+  }
 
-    private void createAndShowItImpl() {
-        entityPreferencesGroup.createAll();
-        super.createAndShow();
-    }
+  private void createAndShowItImpl() {
+    super.getFirstBtn().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        hide();
+      }
+    });
+    entityPreferencesGroup.createAll();
+    super.createAndShow();
+  }
 }
