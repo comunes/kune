@@ -28,8 +28,6 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.core.client.auth.WaveClientSimpleAuthenticator;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.ErrorHandler;
-import cc.kune.core.client.errors.SessionExpiredEvent;
-import cc.kune.core.client.errors.SessionExpiredEvent.SessionExpiredHandler;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.notify.spiner.ProgressHideEvent;
@@ -49,110 +47,99 @@ import com.google.inject.Provider;
 
 public class SitebarSignOutLink extends ButtonDescriptor {
 
-    public static class BeforeSignOut extends BeforeActionCollection {
-        private static final long serialVersionUID = 2326033703822323868L;
-    }
+  public static class BeforeSignOut extends BeforeActionCollection {
+    private static final long serialVersionUID = 2326033703822323868L;
+  }
 
-    public static class SitebarSignOutAction extends AbstractExtendedAction {
+  public static class SitebarSignOutAction extends AbstractExtendedAction {
 
-        private final BeforeSignOut beforeSignOut;
-        private final CookiesManager cookiesManager;
-        private final EventBus eventBus;
-        private final Session session;
-        private final Provider<UserServiceAsync> userService;
-        private final WaveClientSimpleAuthenticator waveAuth;
-
-        @Inject
-        public SitebarSignOutAction(final EventBus eventBus, final I18nTranslationService i18n,
-                final BeforeSignOut beforeSignOut, final Provider<UserServiceAsync> userService, final Session session,
-                final CookiesManager cookiesManager, final WaveClientSimpleAuthenticator waveAuth) {
-            super();
-            this.eventBus = eventBus;
-            this.userService = userService;
-            this.session = session;
-            this.cookiesManager = cookiesManager;
-            this.beforeSignOut = beforeSignOut;
-            this.waveAuth = waveAuth;
-            putValue(Action.NAME, i18n.t("Sign out"));
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            eventBus.fireEvent(new ProgressShowEvent());
-            if (beforeSignOut.checkBeforeAction()) {
-                waveAuth.doLogout(new AsyncCallback<Void>() {
-                    @Override
-                    public void onFailure(final Throwable caught) {
-                        onLogoutFail(caught);
-                    }
-
-                    @Override
-                    public void onSuccess(final Void result) {
-                        userService.get().logout(session.getUserHash(), new AsyncCallback<Void>() {
-                            @Override
-                            public void onFailure(final Throwable caught) {
-                                onLogoutFail(caught);
-                            }
-
-                            @Override
-                            public void onSuccess(final Void arg0) {
-                                eventBus.fireEvent(new ProgressHideEvent());
-                                clientUIsignOut();
-                            }
-
-                        });
-                    }
-                });
-            } else {
-                eventBus.fireEvent(new ProgressHideEvent());
-            }
-        }
-
-        public void clientUIsignOut() {
-            cookiesManager.removeCookie();
-            session.setUserHash(null);
-            session.setCurrentUserInfo(null);
-        }
-
-        private void onLogoutFail(final Throwable caught) {
-            eventBus.fireEvent(new ProgressHideEvent());
-            if (caught instanceof SessionExpiredException) {
-                clientUIsignOut();
-            } else if (caught instanceof UserMustBeLoggedException) {
-                clientUIsignOut();
-            } else {
-                throw new UIException("Other kind of exception in doLogout", caught);
-            }
-        }
-
-    }
-    public static final String SITE_SIGN_OUT = "k-ssolp-lb";
+    private final BeforeSignOut beforeSignOut;
+    private final CookiesManager cookiesManager;
+    private final EventBus eventBus;
+    private final Session session;
+    private final Provider<UserServiceAsync> userService;
+    private final WaveClientSimpleAuthenticator waveAuth;
 
     @Inject
-    public SitebarSignOutLink(final SitebarSignOutAction action, final EventBus eventBus,
-            final ErrorHandler errorHandler, final Session session) {
-        super(action);
-        setId(SITE_SIGN_OUT);
-        setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
-        setVisible(session.isLogged());
-        setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
-        session.onUserSignIn(true, new UserSignInHandler() {
-            @Override
-            public void onUserSignIn(final UserSignInEvent event) {
-                SitebarSignOutLink.this.setVisible(true);
-            }
-        });
-        session.onUserSignOut(true, new UserSignOutHandler() {
-            @Override
-            public void onUserSignOut(final UserSignOutEvent event) {
-                SitebarSignOutLink.this.setVisible(false);
-            }
-        });
-        eventBus.addHandler(SessionExpiredEvent.getType(), new SessionExpiredHandler() {
-            @Override
-            public void onSessionExpired(final SessionExpiredEvent event) {
-                action.clientUIsignOut();
-            }
-        });
+    public SitebarSignOutAction(final EventBus eventBus, final I18nTranslationService i18n,
+        final BeforeSignOut beforeSignOut, final Provider<UserServiceAsync> userService,
+        final Session session, final CookiesManager cookiesManager,
+        final WaveClientSimpleAuthenticator waveAuth) {
+      super();
+      this.eventBus = eventBus;
+      this.userService = userService;
+      this.session = session;
+      this.cookiesManager = cookiesManager;
+      this.beforeSignOut = beforeSignOut;
+      this.waveAuth = waveAuth;
+      putValue(Action.NAME, i18n.t("Sign out"));
     }
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      eventBus.fireEvent(new ProgressShowEvent());
+      if (beforeSignOut.checkBeforeAction()) {
+        waveAuth.doLogout(new AsyncCallback<Void>() {
+          @Override
+          public void onFailure(final Throwable caught) {
+            onLogoutFail(caught);
+          }
+
+          @Override
+          public void onSuccess(final Void result) {
+            userService.get().logout(session.getUserHash(), new AsyncCallback<Void>() {
+              @Override
+              public void onFailure(final Throwable caught) {
+                onLogoutFail(caught);
+              }
+
+              @Override
+              public void onSuccess(final Void arg0) {
+                eventBus.fireEvent(new ProgressHideEvent());
+                session.signOut();
+              }
+
+            });
+          }
+        });
+      } else {
+        eventBus.fireEvent(new ProgressHideEvent());
+      }
+    }
+
+    private void onLogoutFail(final Throwable caught) {
+      eventBus.fireEvent(new ProgressHideEvent());
+      if (caught instanceof SessionExpiredException) {
+        session.signOut();
+      } else if (caught instanceof UserMustBeLoggedException) {
+        session.signOut();
+      } else {
+        throw new UIException("Other kind of exception in doLogout", caught);
+      }
+    }
+
+  }
+  public static final String SITE_SIGN_OUT = "k-ssolp-lb";
+
+  @Inject
+  public SitebarSignOutLink(final SitebarSignOutAction action, final EventBus eventBus,
+      final ErrorHandler errorHandler, final Session session) {
+    super(action);
+    setId(SITE_SIGN_OUT);
+    setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
+    setVisible(session.isLogged());
+    setStyles("k-no-backimage, k-btn-sitebar, k-fl, k-noborder, k-nobackcolor");
+    session.onUserSignIn(true, new UserSignInHandler() {
+      @Override
+      public void onUserSignIn(final UserSignInEvent event) {
+        SitebarSignOutLink.this.setVisible(true);
+      }
+    });
+    session.onUserSignOut(true, new UserSignOutHandler() {
+      @Override
+      public void onUserSignOut(final UserSignOutEvent event) {
+        SitebarSignOutLink.this.setVisible(false);
+      }
+    });
+  }
 }

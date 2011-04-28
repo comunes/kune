@@ -61,121 +61,121 @@ import com.calclab.suco.client.events.Listener0;
 
 public interface Session {
 
-    /**
-     * Duration remembering login: 2 weeks
-     */
-    int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
-    // int SESSION_DURATION = 1000;
+  /**
+   * Duration remembering login: 2 weeks
+   */
+  int SESSION_DURATION = 1000 * 60 * 60 * 24 * 14;
+  // int SESSION_DURATION = 1000;
 
-    String USERHASH = "k007userHash";
+  String USERHASH = "k007userHash";
 
-    void check(AsyncCallbackSimple<Void> callback);
+  void check(AsyncCallbackSimple<Void> callback);
 
-    StateContainerDTO getContainerState();
+  StateContainerDTO getContainerState();
 
-    StateContentDTO getContentState();
+  StateContentDTO getContentState();
 
-    List<I18nCountryDTO> getCountries();
+  List<I18nCountryDTO> getCountries();
 
-    Object[][] getCountriesArray();
+  Object[][] getCountriesArray();
 
-    String getCurrentCCversion();
+  String getCurrentCCversion();
 
-    String getCurrentGroupShortName();
+  String getCurrentGroupShortName();
 
-    I18nLanguageDTO getCurrentLanguage();
+  I18nLanguageDTO getCurrentLanguage();
 
-    StateAbstractDTO getCurrentState();
+  StateAbstractDTO getCurrentState();
 
-    StateToken getCurrentStateToken();
+  StateToken getCurrentStateToken();
 
-    UserSimpleDTO getCurrentUser();
+  UserSimpleDTO getCurrentUser();
 
-    UserInfoDTO getCurrentUserInfo();
+  UserInfoDTO getCurrentUserInfo();
 
-    LicenseDTO getDefLicense();
+  LicenseDTO getDefLicense();
 
-    String getGalleryPermittedExtensions();
+  String getGalleryPermittedExtensions();
 
-    Collection<ToolSimpleDTO> getGroupTools();
+  Collection<ToolSimpleDTO> getGroupTools();
 
-    int getImgCropsize();
+  int getImgCropsize();
 
-    int getImgIconsize();
+  int getImgIconsize();
 
-    int getImgResizewidth();
+  int getImgResizewidth();
 
-    int getImgThumbsize();
+  int getImgThumbsize();
 
-    InitDataDTO getInitData();
+  InitDataDTO getInitData();
 
-    List<I18nLanguageSimpleDTO> getLanguages();
+  List<I18nLanguageSimpleDTO> getLanguages();
 
-    Object[][] getLanguagesArray();
+  Object[][] getLanguagesArray();
 
-    List<LicenseDTO> getLicenses();
+  List<LicenseDTO> getLicenses();
 
-    boolean getShowDeletedContent();
+  boolean getShowDeletedContent();
 
-    String getSiteUrl();
+  String getSiteUrl();
 
-    Object[][] getTimezones();
+  Object[][] getTimezones();
 
-    String getUserHash();
+  String getUserHash();
 
-    Collection<ToolSimpleDTO> getUserTools();
+  Collection<ToolSimpleDTO> getUserTools();
 
-    boolean inSameToken(StateToken token);
+  boolean inSameToken(StateToken token);
 
-    boolean isCurrentStateAContent();
+  boolean isCurrentStateAContent();
 
-    boolean isCurrentStateAGroup();
+  boolean isCurrentStateAGroup();
 
-    boolean isCurrentStateAPerson();
+  boolean isCurrentStateAPerson();
 
-    boolean isInCurrentUserSpace();
+  boolean isInCurrentUserSpace();
 
-    boolean isLogged();
+  boolean isLogged();
 
-    boolean isNotLogged();
+  boolean isNotLogged();
 
-    void onAppStart(boolean fireNow, AppStartEvent.AppStartHandler handler);
+  void onAppStart(boolean fireNow, AppStartEvent.AppStartHandler handler);
 
-    @Deprecated
-    void onInitDataReceived(Listener<InitDataDTO> listener);
+  @Deprecated
+  void onInitDataReceived(Listener<InitDataDTO> listener);
 
-    /**
-     * @param fireNow
-     *            if @true the handler is fired after added if the user is
-     *            loggedin
-     * @param handler
-     */
-    void onUserSignIn(boolean fireNow, UserSignInEvent.UserSignInHandler handler);
+  /**
+   * @param fireNow
+   *          if @true the handler is fired after added if the user is loggedin
+   * @param handler
+   */
+  void onUserSignIn(boolean fireNow, UserSignInEvent.UserSignInHandler handler);
 
-    @Deprecated
-    void onUserSignIn(Listener<UserInfoDTO> listener);
+  @Deprecated
+  void onUserSignIn(Listener<UserInfoDTO> listener);
 
-    void onUserSignInOrSignOut(boolean fireNow, UserSignInOrSignOutEvent.UserSignInOrSignOutHandler handler);
+  void onUserSignInOrSignOut(boolean fireNow, UserSignInOrSignOutEvent.UserSignInOrSignOutHandler handler);
 
-    /**
-     * @param fireNow
-     *            if @true the handler is fired after added if the user is
-     *            loggedin
-     * @param handler
-     */
-    void onUserSignOut(boolean fireNow, UserSignOutEvent.UserSignOutHandler handler);
+  /**
+   * @param fireNow
+   *          if @true the handler is fired after added if the user is loggedin
+   * @param handler
+   */
+  void onUserSignOut(boolean fireNow, UserSignOutEvent.UserSignOutHandler handler);
 
-    @Deprecated
-    void onUserSignOut(Listener0 listener);
+  @Deprecated
+  void onUserSignOut(Listener0 listener);
 
-    void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
+  void setCurrentLanguage(final I18nLanguageDTO currentLanguage);
 
-    void setCurrentState(final StateAbstractDTO currentState);
+  void setCurrentState(final StateAbstractDTO currentState);
 
-    void setCurrentUserInfo(UserInfoDTO currentUserInfo);
+  void setCurrentUserInfo(UserInfoDTO currentUserInfo);
 
-    void setInitData(InitDataDTO initData);
+  void setInitData(InitDataDTO initData);
 
-    void setUserHash(String userHash);
+  void setUserHash(String userHash);
+
+  void signOut();
 
 }

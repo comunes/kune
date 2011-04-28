@@ -25,6 +25,7 @@ import java.util.List;
 import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.cookies.CookiesManager;
+import cc.kune.core.client.errors.SessionExpiredEvent;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.init.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -53,325 +54,340 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class SessionDefault implements Session {
-    private Object[][] countriesArray;
-    private I18nLanguageDTO currentLanguage;
-    private StateAbstractDTO currentState;
-    private UserInfoDTO currentUserInfo;
-    private final EventBus eventBus;
-    private InitDataDTO initData;
-    private Object[][] languagesArray;
-    private Object[][] timezonesArray;
-    private String userHash;
-    private final Provider<UserServiceAsync> userServiceProvider;
+  private final CookiesManager cookieManager;
+  private Object[][] countriesArray;
+  private I18nLanguageDTO currentLanguage;
+  private StateAbstractDTO currentState;
+  private UserInfoDTO currentUserInfo;
+  private final EventBus eventBus;
+  private InitDataDTO initData;
+  private Object[][] languagesArray;
+  private Object[][] timezonesArray;
+  private String userHash;
+  private final Provider<UserServiceAsync> userServiceProvider;
 
-    @Inject
-    public SessionDefault(final CookiesManager cookieManager, final Provider<UserServiceAsync> userServiceProvider,
-            final EventBus eventBus) {
-        this.eventBus = eventBus;
-        this.userHash = cookieManager.getCurrentCookie();
-        this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
-        this.userServiceProvider = userServiceProvider;
-        languagesArray = null;
-    }
+  @Inject
+  public SessionDefault(final CookiesManager cookieManager,
+      final Provider<UserServiceAsync> userServiceProvider, final EventBus eventBus) {
+    this.cookieManager = cookieManager;
+    this.eventBus = eventBus;
+    this.userHash = cookieManager.getCurrentCookie();
+    this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
+    this.userServiceProvider = userServiceProvider;
+    languagesArray = null;
+    eventBus.addHandler(SessionExpiredEvent.getType(), new SessionExpiredEvent.SessionExpiredHandler() {
+      @Override
+      public void onSessionExpired(final SessionExpiredEvent event) {
+        signOut();
+      }
+    });
+  }
 
-    @Override
-    public void check(final AsyncCallbackSimple<Void> callback) {
-        Log.debug("Checking session (userhash: " + getUserHash() + ")");
-        userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
-    }
+  @Override
+  public void check(final AsyncCallbackSimple<Void> callback) {
+    Log.debug("Checking session (userhash: " + getUserHash() + ")");
+    userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
+  }
 
-    @Override
-    public StateContainerDTO getContainerState() {
-        return (StateContainerDTO) currentState;
-    }
+  @Override
+  public StateContainerDTO getContainerState() {
+    return (StateContainerDTO) currentState;
+  }
 
-    @Override
-    public StateContentDTO getContentState() {
-        return (StateContentDTO) currentState;
-    }
+  @Override
+  public StateContentDTO getContentState() {
+    return (StateContentDTO) currentState;
+  }
 
-    @Override
-    public List<I18nCountryDTO> getCountries() {
-        return initData.getCountries();
-    }
+  @Override
+  public List<I18nCountryDTO> getCountries() {
+    return initData.getCountries();
+  }
 
-    @Override
-    public Object[][] getCountriesArray() {
-        if (countriesArray == null) {
-            countriesArray = mapCountries();
-        }
-        return countriesArray;
+  @Override
+  public Object[][] getCountriesArray() {
+    if (countriesArray == null) {
+      countriesArray = mapCountries();
     }
+    return countriesArray;
+  }
 
-    @Override
-    public String getCurrentCCversion() {
-        return initData.getCurrentCCversion();
-    }
+  @Override
+  public String getCurrentCCversion() {
+    return initData.getCurrentCCversion();
+  }
 
-    @Override
-    public String getCurrentGroupShortName() {
-        return currentState == null ? null : currentState.getStateToken().getGroup();
-    }
+  @Override
+  public String getCurrentGroupShortName() {
+    return currentState == null ? null : currentState.getStateToken().getGroup();
+  }
 
-    @Override
-    public I18nLanguageDTO getCurrentLanguage() {
-        return currentLanguage;
-    }
+  @Override
+  public I18nLanguageDTO getCurrentLanguage() {
+    return currentLanguage;
+  }
 
-    @Override
-    public StateAbstractDTO getCurrentState() {
-        return currentState;
-    }
+  @Override
+  public StateAbstractDTO getCurrentState() {
+    return currentState;
+  }
 
-    @Override
-    public StateToken getCurrentStateToken() {
-        return currentState == null ? null : currentState.getStateToken();
-    }
+  @Override
+  public StateToken getCurrentStateToken() {
+    return currentState == null ? null : currentState.getStateToken();
+  }
 
-    @Override
-    public UserSimpleDTO getCurrentUser() {
-        return currentUserInfo == null ? null : currentUserInfo.getUser();
-    }
+  @Override
+  public UserSimpleDTO getCurrentUser() {
+    return currentUserInfo == null ? null : currentUserInfo.getUser();
+  }
 
-    @Override
-    public UserInfoDTO getCurrentUserInfo() {
-        return currentUserInfo;
-    }
+  @Override
+  public UserInfoDTO getCurrentUserInfo() {
+    return currentUserInfo;
+  }
 
-    @Override
-    public LicenseDTO getDefLicense() {
-        return initData.getDefaultLicense();
-    }
+  @Override
+  public LicenseDTO getDefLicense() {
+    return initData.getDefaultLicense();
+  }
 
-    @Override
-    public String getGalleryPermittedExtensions() {
-        return initData.getGalleryPermittedExtensions();
-    }
+  @Override
+  public String getGalleryPermittedExtensions() {
+    return initData.getGalleryPermittedExtensions();
+  }
 
-    @Override
-    public Collection<ToolSimpleDTO> getGroupTools() {
-        return initData.getGroupTools();
-    }
+  @Override
+  public Collection<ToolSimpleDTO> getGroupTools() {
+    return initData.getGroupTools();
+  }
 
-    @Override
-    public int getImgCropsize() {
-        return initData.getImgCropsize();
-    }
+  @Override
+  public int getImgCropsize() {
+    return initData.getImgCropsize();
+  }
 
-    @Override
-    public int getImgIconsize() {
-        return initData.getImgIconsize();
-    }
+  @Override
+  public int getImgIconsize() {
+    return initData.getImgIconsize();
+  }
 
-    @Override
-    public int getImgResizewidth() {
-        return initData.getImgResizewidth();
-    }
+  @Override
+  public int getImgResizewidth() {
+    return initData.getImgResizewidth();
+  }
 
-    @Override
-    public int getImgThumbsize() {
-        return initData.getImgThumbsize();
-    }
+  @Override
+  public int getImgThumbsize() {
+    return initData.getImgThumbsize();
+  }
 
-    @Override
-    public InitDataDTO getInitData() {
-        return initData;
-    }
+  @Override
+  public InitDataDTO getInitData() {
+    return initData;
+  }
 
-    @Override
-    public List<I18nLanguageSimpleDTO> getLanguages() {
-        return initData.getLanguages();
-    }
+  @Override
+  public List<I18nLanguageSimpleDTO> getLanguages() {
+    return initData.getLanguages();
+  }
 
-    @Override
-    public Object[][] getLanguagesArray() {
-        if (languagesArray == null) {
-            languagesArray = mapLangs();
-        }
-        return languagesArray;
+  @Override
+  public Object[][] getLanguagesArray() {
+    if (languagesArray == null) {
+      languagesArray = mapLangs();
     }
+    return languagesArray;
+  }
 
-    @Override
-    public List<LicenseDTO> getLicenses() {
-        return initData.getLicenses();
-    }
+  @Override
+  public List<LicenseDTO> getLicenses() {
+    return initData.getLicenses();
+  }
 
-    @Override
-    public boolean getShowDeletedContent() {
-        return currentUserInfo == null ? false : currentUserInfo.getShowDeletedContent();
-    }
+  @Override
+  public boolean getShowDeletedContent() {
+    return currentUserInfo == null ? false : currentUserInfo.getShowDeletedContent();
+  }
 
-    @Override
-    public String getSiteUrl() {
-        final String baseURL = GWT.getModuleBaseURL();
-        return baseURL.substring(0, baseURL.lastIndexOf("/" + GWT.getModuleName()));
-    }
+  @Override
+  public String getSiteUrl() {
+    final String baseURL = GWT.getModuleBaseURL();
+    return baseURL.substring(0, baseURL.lastIndexOf("/" + GWT.getModuleName()));
+  }
 
-    @Override
-    public Object[][] getTimezones() {
-        if (timezonesArray == null) {
-            mapTimezones();
-        }
-        return timezonesArray;
+  @Override
+  public Object[][] getTimezones() {
+    if (timezonesArray == null) {
+      mapTimezones();
     }
+    return timezonesArray;
+  }
 
-    @Override
-    public String getUserHash() {
-        return userHash;
-    }
+  @Override
+  public String getUserHash() {
+    return userHash;
+  }
 
-    @Override
-    public Collection<ToolSimpleDTO> getUserTools() {
-        return initData.getUserTools();
-    }
+  @Override
+  public Collection<ToolSimpleDTO> getUserTools() {
+    return initData.getUserTools();
+  }
 
-    @Override
-    public boolean inSameToken(final StateToken token) {
-        return getCurrentStateToken().equals(token);
-    }
+  @Override
+  public boolean inSameToken(final StateToken token) {
+    return getCurrentStateToken().equals(token);
+  }
 
-    @Override
-    public boolean isCurrentStateAContent() {
-        return currentState instanceof StateContentDTO;
-    }
+  @Override
+  public boolean isCurrentStateAContent() {
+    return currentState instanceof StateContentDTO;
+  }
 
-    @Override
-    public boolean isCurrentStateAGroup() {
-        return currentState == null ? false : !currentState.getGroup().isPersonal();
-    }
+  @Override
+  public boolean isCurrentStateAGroup() {
+    return currentState == null ? false : !currentState.getGroup().isPersonal();
+  }
 
-    @Override
-    public boolean isCurrentStateAPerson() {
-        return currentState == null ? false : currentState.getGroup().isPersonal();
-    }
+  @Override
+  public boolean isCurrentStateAPerson() {
+    return currentState == null ? false : currentState.getGroup().isPersonal();
+  }
 
-    @Override
-    public boolean isInCurrentUserSpace() {
-        if (!isLogged()) {
-            return false;
-        }
-        if (getCurrentStateToken().getGroup().equals(getCurrentUser().getShortName())) {
-            return true;
-        }
-        return false;
+  @Override
+  public boolean isInCurrentUserSpace() {
+    if (!isLogged()) {
+      return false;
     }
+    if (getCurrentStateToken().getGroup().equals(getCurrentUser().getShortName())) {
+      return true;
+    }
+    return false;
+  }
 
-    @Override
-    public boolean isLogged() {
-        return userHash != null;
-    }
+  @Override
+  public boolean isLogged() {
+    return userHash != null;
+  }
 
-    @Override
-    public boolean isNotLogged() {
-        return !isLogged();
-    }
+  @Override
+  public boolean isNotLogged() {
+    return !isLogged();
+  }
 
-    private Object[][] mapCountries() {
-        assert initData != null;
-        final Object[][] objs = new Object[initData.getCountries().size()][1];
-        int i = 0;
-        for (final I18nCountryDTO country : initData.getCountries()) {
-            final Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
-            objs[i++] = obj;
-        }
-        return objs;
+  private Object[][] mapCountries() {
+    assert initData != null;
+    final Object[][] objs = new Object[initData.getCountries().size()][1];
+    int i = 0;
+    for (final I18nCountryDTO country : initData.getCountries()) {
+      final Object[] obj = new Object[] { country.getCode(), country.getEnglishName() };
+      objs[i++] = obj;
     }
+    return objs;
+  }
 
-    private Object[][] mapLangs() {
-        assert initData != null;
-        final Object[][] objs = new Object[initData.getLanguages().size()][1];
-        int i = 0;
-        for (final I18nLanguageSimpleDTO language : initData.getLanguages()) {
-            final Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
-            objs[i++] = obj;
-        }
-        return objs;
+  private Object[][] mapLangs() {
+    assert initData != null;
+    final Object[][] objs = new Object[initData.getLanguages().size()][1];
+    int i = 0;
+    for (final I18nLanguageSimpleDTO language : initData.getLanguages()) {
+      final Object[] obj = new Object[] { language.getCode(), language.getEnglishName() };
+      objs[i++] = obj;
     }
+    return objs;
+  }
 
-    private void mapTimezones() {
-        assert initData != null;
-        timezonesArray = new Object[initData.getTimezones().length][1];
-        for (int i = 0; i < getTimezones().length; i++) {
-            final Object[] obj = new Object[] { initData.getTimezones()[i] };
-            timezonesArray[i] = obj;
-        }
+  private void mapTimezones() {
+    assert initData != null;
+    timezonesArray = new Object[initData.getTimezones().length][1];
+    for (int i = 0; i < getTimezones().length; i++) {
+      final Object[] obj = new Object[] { initData.getTimezones()[i] };
+      timezonesArray[i] = obj;
     }
+  }
 
-    @Override
-    public void onAppStart(final boolean fireNow, final AppStartHandler handler) {
-        eventBus.addHandler(AppStartEvent.getType(), handler);
-        if (fireNow && initData != null) {
-            handler.onAppStart(new AppStartEvent(initData));
-        }
+  @Override
+  public void onAppStart(final boolean fireNow, final AppStartHandler handler) {
+    eventBus.addHandler(AppStartEvent.getType(), handler);
+    if (fireNow && initData != null) {
+      handler.onAppStart(new AppStartEvent(initData));
     }
+  }
 
-    @Override
-    public void onInitDataReceived(final Listener<InitDataDTO> listener) {
-        throw new NotImplementedException();
-    }
+  @Override
+  public void onInitDataReceived(final Listener<InitDataDTO> listener) {
+    throw new NotImplementedException();
+  }
 
-    @Override
-    public void onUserSignIn(final boolean fireNow, final UserSignInHandler handler) {
-        eventBus.addHandler(UserSignInEvent.getType(), handler);
-        if (fireNow && isLogged() && currentUserInfo != null) {
-            handler.onUserSignIn(new UserSignInEvent(currentUserInfo));
-        }
+  @Override
+  public void onUserSignIn(final boolean fireNow, final UserSignInHandler handler) {
+    eventBus.addHandler(UserSignInEvent.getType(), handler);
+    if (fireNow && isLogged() && currentUserInfo != null) {
+      handler.onUserSignIn(new UserSignInEvent(currentUserInfo));
     }
+  }
 
-    @Override
-    public void onUserSignIn(final Listener<UserInfoDTO> listener) {
-        throw new NotImplementedException();
-    }
+  @Override
+  public void onUserSignIn(final Listener<UserInfoDTO> listener) {
+    throw new NotImplementedException();
+  }
 
-    @Override
-    public void onUserSignInOrSignOut(final boolean fireNow, final UserSignInOrSignOutHandler handler) {
-        eventBus.addHandler(UserSignInOrSignOutEvent.getType(), handler);
-        if (fireNow) {
-            handler.onUserSignInOrSignOut(new UserSignInOrSignOutEvent(isLogged()));
-        }
+  @Override
+  public void onUserSignInOrSignOut(final boolean fireNow, final UserSignInOrSignOutHandler handler) {
+    eventBus.addHandler(UserSignInOrSignOutEvent.getType(), handler);
+    if (fireNow) {
+      handler.onUserSignInOrSignOut(new UserSignInOrSignOutEvent(isLogged()));
     }
+  }
 
-    @Override
-    public void onUserSignOut(final boolean fireNow, final UserSignOutHandler handler) {
-        eventBus.addHandler(UserSignOutEvent.getType(), handler);
-        if (fireNow && isNotLogged()) {
-            handler.onUserSignOut(new UserSignOutEvent());
-        }
+  @Override
+  public void onUserSignOut(final boolean fireNow, final UserSignOutHandler handler) {
+    eventBus.addHandler(UserSignOutEvent.getType(), handler);
+    if (fireNow && isNotLogged()) {
+      handler.onUserSignOut(new UserSignOutEvent());
     }
+  }
 
-    @Override
-    public void onUserSignOut(final Listener0 listener) {
-        throw new NotImplementedException();
-    }
+  @Override
+  public void onUserSignOut(final Listener0 listener) {
+    throw new NotImplementedException();
+  }
 
-    @Override
-    public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
-        this.currentLanguage = currentLanguage;
-    }
+  @Override
+  public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
+    this.currentLanguage = currentLanguage;
+  }
 
-    @Override
-    public void setCurrentState(final StateAbstractDTO currentState) {
-        this.currentState = currentState;
-    }
+  @Override
+  public void setCurrentState(final StateAbstractDTO currentState) {
+    this.currentState = currentState;
+  }
 
-    @Override
-    public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
-        this.currentUserInfo = currentUserInfo;
-        if (currentUserInfo != null) {
-            eventBus.fireEvent(new UserSignInEvent(this.currentUserInfo));
-        } else {
-            eventBus.fireEvent(new UserSignOutEvent());
-        }
-        eventBus.fireEvent(new UserSignInOrSignOutEvent(isLogged()));
+  @Override
+  public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
+    this.currentUserInfo = currentUserInfo;
+    if (currentUserInfo != null) {
+      eventBus.fireEvent(new UserSignInEvent(this.currentUserInfo));
+    } else {
+      eventBus.fireEvent(new UserSignOutEvent());
     }
+    eventBus.fireEvent(new UserSignInOrSignOutEvent(isLogged()));
+  }
 
-    @Override
-    public void setInitData(final InitDataDTO initData) {
-        this.initData = initData;
-    }
+  @Override
+  public void setInitData(final InitDataDTO initData) {
+    this.initData = initData;
+  }
 
-    @Override
-    public void setUserHash(final String userHash) {
-        this.userHash = userHash;
-    }
+  @Override
+  public void setUserHash(final String userHash) {
+    this.userHash = userHash;
+  }
+
+  @Override
+  public void signOut() {
+    cookieManager.removeCookie();
+    setUserHash(null);
+    setCurrentUserInfo(null);
+  }
 }
