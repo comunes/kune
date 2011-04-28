@@ -8,18 +8,19 @@
     @external .k-folderitem-focus-noselected;
     @external .k-folderitem-focus-nofocused;
     .k-folderitem-focus {
-        background-color: none;
+      background-color: none;
     }
 
     .k-folderitem-focus-focused {
-        background-color: #F2F5FD;
+      background-color: #F2F5FD;
     }
 
     .k-folderitem-focus-selected {
-        background-color: #E3E9FF;
+      background-color: #E3E9FF;
     }
 
     .k-folderitem-focus-noselected {
+
     }
 
     .k-folderitem-focus-nofocused {
@@ -27,23 +28,27 @@
     }
 
     .flow {
-        cursor: pointer;
-        border-bottom: 1px solid #F3F3F3;
-        line-height: 1.3em;
-        height: 28px;
+      cursor: pointer;
+      border-bottom: 1px solid #F3F3F3;
+      line-height: 1.3em;
+      height: 28px;
     }
 
     .title {
-        font-size: 16px;
-        margin-left: 5px;
+      margin-left: 5px;
+      color: #A05A2C;
+      font-size: 19px;
+      line-height: 1.3em;
+      -moz-user-select: none;
+      -khtml-user-select: none;
     }
 
     .icon {
-        margin: 5px;
+      margin: 5px;
     }
 
     .menu {
-        float: right;
+      float: right;
     }
   </ui:style>
   <g:FocusPanel ui:field="focusPanel" styleName="{style.k-folderitem-focus}">

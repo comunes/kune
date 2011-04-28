@@ -38,121 +38,121 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class BasicDialog extends Composite implements BasicDialogView {
 
-    interface BasicDialogUiBinder extends UiBinder<Widget, BasicDialog> {
-    }
-    private static BasicDialogUiBinder uiBinder = GWT.create(BasicDialogUiBinder.class);
-    @UiField
-    VerticalPanel bottomPanel;
-    @UiField
-    FlowPanel btnPanel;
-    @UiField
-    Button firstBtn;
-    @UiField
-    Button secondBtn;
-    @UiField
-    IconLabel title;
-    @UiField
-    VerticalPanel vp;
+  interface BasicDialogUiBinder extends UiBinder<Widget, BasicDialog> {
+  }
+  private static BasicDialogUiBinder uiBinder = GWT.create(BasicDialogUiBinder.class);
+  @UiField
+  VerticalPanel bottomPanel;
+  @UiField
+  FlowPanel btnPanel;
+  @UiField
+  Button firstBtn;
+  @UiField
+  Button secondBtn;
+  @UiField
+  IconLabel title;
+  @UiField
+  VerticalPanel vp;
 
-    public BasicDialog() {
-        initWidget(uiBinder.createAndBindUi(this));
-    }
+  public BasicDialog() {
+    initWidget(uiBinder.createAndBindUi(this));
+  }
 
-    public void ensureDebugIdFirstBtn(final String id) {
-        if (id != null && id.length() > 0) {
-            firstBtn.ensureDebugId(id);
-        }
+  public void ensureDebugIdFirstBtn(final String id) {
+    if (id != null && id.length() > 0) {
+      firstBtn.ensureDebugId(id);
     }
+  }
 
-    public void ensureDebugIdSecondBtn(final String id) {
-        if (id != null && id.length() > 0) {
-            secondBtn.ensureDebugId(id);
-        }
+  public void ensureDebugIdSecondBtn(final String id) {
+    if (id != null && id.length() > 0) {
+      secondBtn.ensureDebugId(id);
     }
+  }
 
-    @Override
-    public ForIsWidget getBottomPanel() {
-        return bottomPanel;
-    }
+  @Override
+  public ForIsWidget getBottomPanel() {
+    return bottomPanel;
+  }
 
-    @Override
-    public HasClickHandlers getFirstBtn() {
-        return firstBtn;
-    }
+  @Override
+  public HasClickHandlers getFirstBtn() {
+    return firstBtn;
+  }
 
-    @Override
-    public HasText getFirstBtnText() {
-        return firstBtn;
-    }
+  @Override
+  public HasText getFirstBtnText() {
+    return firstBtn;
+  }
 
-    @Override
-    public ForIsWidget getInnerPanel() {
-        return vp;
-    }
+  @Override
+  public ForIsWidget getInnerPanel() {
+    return vp;
+  }
 
-    @Override
-    public HasClickHandlers getSecondBtn() {
-        return secondBtn;
-    }
+  @Override
+  public HasClickHandlers getSecondBtn() {
+    return secondBtn;
+  }
 
-    @Override
-    public HasText getSecondBtnText() {
-        return secondBtn;
-    }
+  @Override
+  public HasText getSecondBtnText() {
+    return secondBtn;
+  }
 
-    @Override
-    public HasDirectionalText getTitleText() {
-        return title;
-    }
+  @Override
+  public HasDirectionalText getTitleText() {
+    return title;
+  }
 
-    public void setFirstBtnId(final String id) {
-        firstBtn.ensureDebugId(id);
-    }
+  public void setFirstBtnId(final String id) {
+    firstBtn.ensureDebugId(id);
+  }
 
-    public void setFirstBtnTabIndex(final int index) {
-        firstBtn.setTabIndex(index);
-    }
+  public void setFirstBtnTabIndex(final int index) {
+    firstBtn.setTabIndex(index);
+  }
 
-    @Override
-    public void setFirstBtnTitle(final String title) {
-        firstBtn.setTitle(title);
-    }
+  @Override
+  public void setFirstBtnTitle(final String title) {
+    firstBtn.setTitle(title);
+  }
 
-    @Override
-    public void setFirstBtnVisible(final boolean visible) {
-        firstBtn.setVisible(visible);
-    }
+  @Override
+  public void setFirstBtnVisible(final boolean visible) {
+    firstBtn.setVisible(visible);
+  }
 
-    public void setSecondBtnId(final String id) {
-        secondBtn.ensureDebugId(id);
-    }
+  public void setSecondBtnId(final String id) {
+    secondBtn.ensureDebugId(id);
+  }
 
-    public void setSecondBtnTabIndex(final int index) {
-        secondBtn.setTabIndex(index);
-    }
+  public void setSecondBtnTabIndex(final int index) {
+    secondBtn.setTabIndex(index);
+  }
 
-    @Override
-    public void setSecondBtnTitle(final String title) {
-        secondBtn.setTitle(title);
-    }
+  @Override
+  public void setSecondBtnTitle(final String title) {
+    secondBtn.setTitle(title);
+  }
 
-    @Override
-    public void setSecondBtnVisible(final boolean visible) {
-        secondBtn.setVisible(visible);
-    }
+  @Override
+  public void setSecondBtnVisible(final boolean visible) {
+    secondBtn.setVisible(visible);
+  }
 
-    public void setTitleIcon(final ImageResource img) {
-        title.setLeftIconResource(img);
-    }
+  public void setTitleIcon(final ImageResource img) {
+    title.setLeftIconResource(img);
+  }
 
-    public void setTitleIcon(final String icon) {
-        if (TextUtils.notEmpty(icon)) {
-            title.setLeftIcon(icon);
-        }
+  public void setTitleIcon(final String icon) {
+    if (TextUtils.notEmpty(icon)) {
+      title.setLeftIcon(icon);
     }
+  }
 
-    public void setTitleId(final String id) {
-        title.ensureDebugId(id);
-    }
+  public void setTitleId(final String id) {
+    title.ensureDebugId(id);
+  }
 
 }

@@ -19,7 +19,8 @@
  */
 package cc.kune.core.client.sitebar.spaces;
 
-import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.init.AppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
@@ -33,6 +34,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -72,16 +74,19 @@ public class SpaceSelectorPresenter extends
     private String homeToken;
     private String publicToken;
     private final Session session;
+    private final Provider<SignIn> signIn;
     private final StateManager stateManager;
     private String userToken;
 
     @Inject
     public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
-            final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor, final Session session) {
+            final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
+            final Session session, final Provider<SignIn> signIn) {
         super(eventBus, view, proxy);
         this.stateManager = stateManager;
         this.armor = armor;
         this.session = session;
+        this.signIn = signIn;
         currentSpace = null;
         homeToken = SiteTokens.HOME;
         userToken = SiteTokens.WAVEINBOX;
@@ -205,11 +210,10 @@ public class SpaceSelectorPresenter extends
             getView().setPublicBtnDown(false);
             currentSpace = Space.userSpace;
         } else {
+            signIn.get().setErrorMessage("Sign in to access to your workspace", NotifyLevel.info);
             stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGNIN, userToken));
             getView().setUserBtnDown(false);
-            NotifyUser.info("Sign in to access to your workspace");
-            // signIn.get().setErrorMessage("Sign in to access to your workspace",
-            // NotifyLevel.info);
+            // NotifyUser.info("Sign in to access to your workspace");
         }
     }
 

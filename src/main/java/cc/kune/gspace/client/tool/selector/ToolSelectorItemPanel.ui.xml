@@ -3,15 +3,15 @@
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style>
     .label {
-        text-decoration: none;
-        font-size: 22px;
-        color: white; /*
-        text-shadow: 1px 1px 6px grey;
-        */
+      text-decoration: none;
+      font-size: 22px;
+      color: white; /*
+            text-shadow: 1px 1px 6px grey;
+            */
     }
 
     .link a:link {
-        text-decoration: none;
+      text-decoration: none;
     }
 
     .self {
@@ -19,8 +19,10 @@
     }
 
     .flow {
-        min-height: 30px;
-        padding: 5px 10px;
+      min-height: 30px;
+      padding: 5px 10px;
+      -moz-user-select: none;
+      -khtml-user-select: none;
     }
 
     .iconLeft {
@@ -28,13 +30,14 @@
     }
 
     .iconRight {
-        float: right;
-        position: relative;
-        right: -17px;
-        top: -6px;
+      float: right;
+      position: relative;
+      right: -17px;
+      top: -6px;
     }
   </ui:style>
-  <ui:with field='res' type='cc.kune.gspace.client.tool.selector.ToolResources' />
+  <ui:with field='res'
+    type='cc.kune.gspace.client.tool.selector.ToolResources' />
   <g:FocusPanel ui:field="self" stylePrimaryName="k-tool-item">
     <g:FlowPanel styleName="{style.flow}" ui:field="flow">
       <g:Image ui:field="iconLeft" styleName="{style.iconLeft}" />

@@ -12,7 +12,7 @@
     }
 
     .pad {
-        white-space: nowrap;
+        /* white-space: nowrap; */
     }
   </ui:style>
   <g:FocusPanel ui:field="self">

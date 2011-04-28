@@ -60,7 +60,7 @@ xmlns:co="urn:import:cc.kune.core.client"
                     <g:west size="10">
                       <g:SimplePanel />
                     </g:west>
-                    <g:east size="15">
+                    <g:east size="10">
                       <g:SimplePanel />
                     </g:east>
                     <g:center>

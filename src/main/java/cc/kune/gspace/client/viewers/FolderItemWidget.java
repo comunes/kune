@@ -26,91 +26,91 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class FolderItemWidget extends Composite implements HasText {
 
-    interface FolderItemWidgetUiBinder extends UiBinder<Widget, FolderItemWidget> {
-    }
+  interface FolderItemWidgetUiBinder extends UiBinder<Widget, FolderItemWidget> {
+  }
 
-    private static FolderItemWidgetUiBinder uiBinder = GWT.create(FolderItemWidgetUiBinder.class);
+  private static FolderItemWidgetUiBinder uiBinder = GWT.create(FolderItemWidgetUiBinder.class);
 
-    @UiField
-    FlowPanel flow;
-    @UiField
-    FocusPanel focusPanel;
-    @UiField
-    Image icon;
-    @UiField
-    SimplePanel menu;
-    @UiField
-    InlineLabel title;
+  @UiField
+  FlowPanel flow;
+  @UiField
+  FocusPanel focusPanel;
+  @UiField
+  Image icon;
+  @UiField
+  SimplePanel menu;
+  @UiField
+  InlineLabel title;
 
-    public FolderItemWidget(final ImageResource iconResource, final String title) {
-        initWidget(uiBinder.createAndBindUi(this));
-        this.title.setText(title);
-        icon.setResource(iconResource);
-    }
+  public FolderItemWidget(final ImageResource iconResource, final String title) {
+    initWidget(uiBinder.createAndBindUi(this));
+    this.title.setText(title);
+    icon.setResource(iconResource);
+  }
 
-    private void clearFocusStyles() {
-        focusPanel.removeStyleDependentName("nofocused");
-        focusPanel.removeStyleDependentName("focused");
-    }
+  private void clearFocusStyles() {
+    focusPanel.removeStyleDependentName("nofocused");
+    focusPanel.removeStyleDependentName("focused");
+  }
 
-    HasClickHandlers getRowClick() {
-        return focusPanel;
-    }
+  HasClickHandlers getRowClick() {
+    return focusPanel;
+  }
 
-    HasDoubleClickHandlers getRowDoubleClick() {
-        return focusPanel;
-    }
+  HasDoubleClickHandlers getRowDoubleClick() {
+    return focusPanel;
+  }
 
-    HasAllFocusHandlers getRowFocus() {
-        return focusPanel;
-    }
+  HasAllFocusHandlers getRowFocus() {
+    return focusPanel;
+  }
 
-    HasAllMouseHandlers getRowMouse() {
-        return focusPanel;
-    }
+  HasAllMouseHandlers getRowMouse() {
+    return focusPanel;
+  }
 
-    @Override
-    public String getText() {
-        return title.getText();
-    }
+  @Override
+  public String getText() {
+    return title.getText();
+  }
 
-    @UiHandler("focusPanel")
-    public void onBlur(final BlurEvent event) {
-        clearFocusStyles();
-        focusPanel.addStyleDependentName("nofocused");
-    }
+  @UiHandler("focusPanel")
+  public void onBlur(final BlurEvent event) {
+    clearFocusStyles();
+    focusPanel.addStyleDependentName("nofocused");
+  }
 
-    @UiHandler("focusPanel")
-    public void onFocus(final FocusEvent event) {
-        clearFocusStyles();
-        focusPanel.addStyleDependentName("focused");
-    }
+  @UiHandler("focusPanel")
+  public void onFocus(final FocusEvent event) {
+    clearFocusStyles();
+    focusPanel.addStyleDependentName("focused");
+  }
 
-    @UiHandler("focusPanel")
-    public void onOut(final MouseOutEvent event) {
-        clearFocusStyles();
-        focusPanel.addStyleDependentName("nofocused");
-    }
+  @UiHandler("focusPanel")
+  public void onOut(final MouseOutEvent event) {
+    clearFocusStyles();
+    focusPanel.addStyleDependentName("nofocused");
+  }
 
-    @UiHandler("focusPanel")
-    public void onOver(final MouseOverEvent event) {
-        clearFocusStyles();
-        focusPanel.addStyleDependentName("focused");
-    }
+  @UiHandler("focusPanel")
+  public void onOver(final MouseOverEvent event) {
+    clearFocusStyles();
+    focusPanel.addStyleDependentName("focused");
+  }
 
-    public void setMenu(final ActionSimplePanel toolbar) {
-        menu.add(toolbar);
-    }
+  public void setMenu(final ActionSimplePanel toolbar) {
+    menu.add(toolbar);
+  }
 
-    public void setSelect(final boolean selected) {
-        clearFocusStyles();
-        focusPanel.removeStyleDependentName(selected ? "noselected" : "selected");
-        focusPanel.addStyleDependentName(selected ? "selected" : "noselected");
-    }
+  public void setSelect(final boolean selected) {
+    clearFocusStyles();
+    focusPanel.removeStyleDependentName(selected ? "noselected" : "selected");
+    focusPanel.addStyleDependentName(selected ? "selected" : "noselected");
+  }
 
-    @Override
-    public void setText(final String text) {
-        title.setText(text);
-    }
+  @Override
+  public void setText(final String text) {
+    title.setText(text);
+  }
 
 }

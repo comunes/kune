@@ -8,522 +8,527 @@
 }
 
 .k-floatleft,.k-fl {
-    float: left;
+  float: left;
 }
 
 .k-floatright,.k-fr {
-    float: right;
+  float: right;
 }
 
 .k-pointer {
-    cursor: pointer;
-    cursor: hand;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .k-opacity80 {
-    kfilter: alpha(opacity =                                         80);
-    -moz-opacity: 0.80;
-    -khtml-opacity: 0.80;
-    opacity: 0.80;
+  kfilter: alpha(opacity =                                           80);
+  -moz-opacity: 0.80;
+  -khtml-opacity: 0.80;
+  opacity: 0.80;
 }
 
 .k-opacity90 {
-    kfilter: alpha(opacity =                                         90);
-    -moz-opacity: 0.90;
-    -khtml-opacity: 0.90;
-    opacity: 0.90;
+  kfilter: alpha(opacity =                                           90);
+  -moz-opacity: 0.90;
+  -khtml-opacity: 0.90;
+  opacity: 0.90;
 }
 
 .k-opacity95 {
-    kfilter: alpha(opacity =                                         95);
-    -moz-opacity: 0.95;
-    -khtml-opacity: 0.95;
-    opacity: 0.95;
+  kfilter: alpha(opacity =                                           95);
+  -moz-opacity: 0.95;
+  -khtml-opacity: 0.95;
+  opacity: 0.95;
 }
 
 .gwt-PopupPanelGlass {
-    background-color: #f7ebe3 !important;
-    kfilter: alpha(opacity =                                         68)
-        !important;
-    -moz-opacity: 0.68 !important;
-    -khtml-opacity: 0.68 !important;
-    opacity: 0.68 !important;
+  background-color: #f7ebe3 !important;
+  kfilter: alpha(opacity =                                           68)
+    !important;
+  -moz-opacity: 0.68 !important;
+  -khtml-opacity: 0.68 !important;
+  opacity: 0.68 !important;
 }
 
 .k-box-3shadow {
-    -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
 
 .k-box-5shadow {
-    -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
 .k-box-10shadow {
-    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .k-bottom-5corners {
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-bottom-right-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .k-bottom-10corners {
-    -webkit-border-bottom-right-radius: 10px;
-    -moz-border-radius-bottomright: 10px;
-    border-bottom-right-radius: 10px;
-    -webkit-border-bottom-left-radius: 10px;
-    -moz-border-radius-bottomleft: 10px;
-    border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .k-top-5corners {
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-right-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-left-radius: 5px;
 }
 
 .k-top-10corners {
-    -webkit-border-top-right-radius: 10px;
-    -moz-border-radius-topright: 10px;
-    border-top-right-radius: 10px;
-    -webkit-border-top-left-radius: 10px;
-    -moz-border-radius-topleft: 10px;
-    border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-left-radius: 10px;
 }
 
 .k-2corners {
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 
 .k-3corners {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .k-5corners {
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .k-10corners {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 
 .k-dialog-outerp {
-    background-color: #552200;
-    border-top: 4px solid #000;
-    padding: 22px 4px 3px 4px;
+  background-color: #552200;
+  border-top: 4px solid #000;
+  padding: 22px 4px 3px 4px;
 }
 
 .k-dialog-title span {
-    color: #552200;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0 0 0 6px;
+  color: #552200;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 0 6px;
 }
 
 .k-dialog-innerp {
-    background-color: #FFFFFF;
-    border: solid 1px #F2F2F2;
-    margin: 34px 16px 20px 16px;
+  background-color: #FFFFFF;
+  border: solid 1px #F2F2F2;
+  margin: 34px 16px 20px 16px;
 }
 
 .k-dialog-btn-area {
-    padding: 0 15px 15px 15px;
-    margin-bottom: 30px;
+  padding: 0 15px 15px 15px;
+  margin-bottom: 30px;
 }
 
 .k-dialog-btn-area div {
-    margin: 10px
+  margin: 10px
 }
 
 .k-dialog-innerp table {
-    margin: 5px;
+  margin: 5px;
 }
 
 .k-dialog-btn {
-    text-shadow: 1px 1px 1px #FFFFFF;
-    font-weight: bold;
-    -moz-user-select: none;
-    -khtml-user-select: none;
+  text-shadow: 1px 1px 1px #FFFFFF;
+  font-weight: bold;
+  -moz-user-select: none;
+  -khtml-user-select: none;
 }
 
 .k-dialog-firstBtn {
-    float: left;
+  float: left;
 }
 
 .k-dialog-secondBtn {
-    float: right;
+  float: right;
 }
 
 .k-z100000 {
-    z-index: 100000;
+  z-index: 100000;
 }
 
 .k-z10000 {
-    z-index: 10000;
+  z-index: 10000;
 }
 
 .k-z1000 {
-    z-index: 1000;
+  z-index: 1000;
 }
 
 .oc-user-msg {
-    background-color: #FFCC00;
-    padding: 3px;
+  background-color: #FFCC00;
+  padding: 3px;
 }
 
 .oc-user-msg-popup {
-    padding: 0px;
-    border: 0px;
+  padding: 0px;
+  border: 0px;
 }
 
 .oc-floatleft {
-    float: left;
+  float: left;
 }
 
 .oc-floatright {
-    float: right;
+  float: right;
 }
 
 .x-toolbar {
-    background: none !important;
-    border-color: transparent !important;
+  background: none !important;
+  border-color: transparent !important;
 }
 
 .oc-testico {
-    background-image: url(images/ico.png) !important;
-    -moz-background-clip: border;
-    -moz-background-inline-policy: continuous;
-    -moz-background-origin: padding;
-    background-attachment: scroll;
-    background-color: transparent;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    height: 16px;
-    widows: 16px;
+  background-image: url(images/ico.png) !important;
+  -moz-background-clip: border;
+  -moz-background-inline-policy: continuous;
+  -moz-background-origin: padding;
+  background-attachment: scroll;
+  background-color: transparent;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  height: 16px;
+  widows: 16px;
 }
 
 .oc-tb-spacer {
-    margin: 2px;
-    width: 2px;
+  margin: 2px;
+  width: 2px;
 }
 
 .oc-tb-bottom-line {
-    border-bottom-color: rgb(208, 208, 208);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+  border-bottom-color: rgb(208, 208, 208);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
 .oc-blank-toolbar {
-    background: #FFF none repeat scroll 0% 50%;
+  background: #FFF none repeat scroll 0% 50%;
 }
 
 .oc-tb-sep {
-    padding-top: 4px;
-    padding-left: 5px;
+  padding-top: 4px;
+  padding-left: 5px;
 }
 
 .oc-transp .x-panel-body {
-    background: transparent;
+  background: transparent;
 }
 
 .oc-menu {
-    cursor: default;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border: 1 px solid #BBBBBB;
-    font: 16px 'Ubuntu', arial;
-    /* font-weight: bold; */
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-bottom-right-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-bottom-left-radius: 5px;
-    background-color: #280b0b;
+  cursor: default;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border: 1 px solid #BBBBBB;
+  font: 16px 'Ubuntu', arial;
+  /* font-weight: bold; */
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #280b0b;
 }
 
 .gwt-PopupPanel .oc-menu {
-    border: 2px solid #552200;
-    background-color: #280b0b;
+  border: 2px solid #552200;
+  background-color: #280b0b;
 }
 
 .oc-menu .gwt-MenuBar-vertical,.gwt-MenuBar-vertical {
-    background-color: #280b0b;
-    border: 2px solid #552200;
-    padding: 3px;
-    font: 16px 'Ubuntu', arial;
-    color: white;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-bottom-right-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-bottom-left-radius: 5px;
-    kfilter: alpha(opacity =                 90);
-    -moz-opacity: 0.90;
-    -khtml-opacity: 0.90;
-    opacity: 0.90;
+  background-color: #280b0b;
+  border: 2px solid #552200;
+  padding: 3px;
+  font: 16px 'Ubuntu', arial;
+  color: white;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+  kfilter: alpha(opacity =                   90);
+  -moz-opacity: 0.90;
+  -khtml-opacity: 0.90;
+  opacity: 0.90;
 }
 
 .gwt-MenuBar .gwt-MenuItem-selected {
-    background-color: #c87137 !important;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+  background-color: #c87137 !important;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .gwt-MenuBar .gwt-MenuItem {
-    padding: 4px 4px 3px !important;
+  padding: 4px 4px 3px !important;
+}
+
+.oc-noselect {
+  -moz-user-select: none;
+  -khtml-user-select: none;
 }
 
 .oc-menu .gwt-MenuItem {
-    cursor: pointer;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    /* background-color: #c87137; */
-    color: white;
+  cursor: pointer;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  /* background-color: #c87137; */
+  color: white;
 }
 
 .oc-button {
-    padding: 2px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    text-decoration: none;
-    vertical-align: middle;
-    background-color: #F2F2F2;
-    white-space: nowrap;
-    margin-right: 3px;
+  padding: 2px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  text-decoration: none;
+  vertical-align: middle;
+  background-color: #F2F2F2;
+  white-space: nowrap;
+  margin-right: 3px;
 }
 
 .oc-button:hover {
-    border: 2px orange solid;
-    background: #f0f0f0;
-    color: #855585;
+  border: 2px orange solid;
+  background: #f0f0f0;
+  color: #855585;
 }
 
 .oc-button:active {
-    border-top-color: #ffffff;
-    background: #ffffff;
+  border-top-color: #ffffff;
+  background: #ffffff;
 }
 
 #oc-mshortcut {
-    position: absolute;
-    right: 10px;
+  position: absolute;
+  right: 10px;
 }
 
 #oc-mshortcut-hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 #oc-mshortcut a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .oc-user-msg {
-    background-color: #FFCC00;
-    padding: 3px;
+  background-color: #FFCC00;
+  padding: 3px;
 }
 
 .oc-user-msg-popup {
-    padding: 0px;
-    border: 0px;
+  padding: 0px;
+  border: 0px;
 }
 
 .oc-floatleft {
-    float: left;
+  float: left;
 }
 
 .oc-floatright {
-    float: right;
+  float: right;
 }
 
 .x-toolbar {
-    background: none !important;
-    border-color: transparent !important;
+  background: none !important;
+  border-color: transparent !important;
 }
 
 .oc-testico {
-    background-image: url(images/ico.png) !important;
-    -moz-background-clip: border;
-    -moz-background-inline-policy: continuous;
-    -moz-background-origin: padding;
-    background-attachment: scroll;
-    background-color: transparent;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    height: 16px;
-    widows: 16px;
+  background-image: url(images/ico.png) !important;
+  -moz-background-clip: border;
+  -moz-background-inline-policy: continuous;
+  -moz-background-origin: padding;
+  background-attachment: scroll;
+  background-color: transparent;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  height: 16px;
+  widows: 16px;
 }
 
 .oc-ico-pad { /* padding-right: 20px; */
-    white-space: normal;
+  white-space: normal;
 }
 
 .oc-tb-spacer {
-    margin: 2px;
-    width: 2px;
+  margin: 2px;
+  width: 2px;
 }
 
 .oc-tb-bottom-line {
-    border-bottom-color: rgb(208, 208, 208);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+  border-bottom-color: rgb(208, 208, 208);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
 .oc-blank-toolbar {
-    background: #FFF none repeat scroll 0% 50%;
+  background: #FFF none repeat scroll 0% 50%;
 }
 
 .oc-tb-sep {
-    padding-top: 4px;
-    padding-left: 5px;
+  padding-top: 4px;
+  padding-left: 5px;
 }
 
 .oc-transp .x-panel-body {
-    background: transparent;
+  background: transparent;
 }
 
 #oc-mshortcut {
-    position: absolute;
-    right: 10px;
+  position: absolute;
+  right: 10px;
 }
 
 #oc-mshortcut-hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 #oc-mshortcut a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .k-no-backimage,.k-no-backimage td {
-    background-image: none;
+  background-image: none;
 }
 
 .k-nobackcolor {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .k-noborder {
-    border: 0px !important;
+  border: 0px !important;
 }
 
 .k-space-nowrap {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .k-iconlabel-text {
-    vertical-align: top;
-    padding-left: 3px;
-    float: left;
+  vertical-align: top;
+  padding-left: 3px;
+  float: left;
 }
 
 .k-menuimtem-title {
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 2px 3px 2px 0;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 2px 3px 2px 0;
 }
 
 .k-tb-sep {
-    border-left: 1px solid #B3B3B3;
-    height: 10px;
-    margin-top: 4px;
+  border-left: 1px solid #B3B3B3;
+  height: 10px;
+  margin-top: 4px;
 }
 
 .k-iconlabel-left {
-    float: left;
+  float: left;
 }
 
 .k-iconlabel-right {
-    float: left;
-    /*   margin-left: 5px; */
+  float: left;
+  /*   margin-left: 5px; */
 }
 
 .gwt-MenuBar-vertical .subMenuIcon-selected {
-    background: none repeat scroll 0 0 #808080;
+  background: none repeat scroll 0 0 #808080;
 }
 
 .gwt-Button {
-    background: url("images/hborder.png") repeat-x scroll 0 -27px
-        transparent;
+  background: url("images/hborder.png") repeat-x scroll 0 -27px
+    transparent;
 }
 
 /* tooltips, adaptation of http://jonrohan.me/guide/css/creating-triangles-in-css/ */
 .k-tooltip {
-    background-color: #FEFFF1;
-    border: 2px solid #666666;
-    line-height: 1.3em;
-    padding: 5px;
+  background-color: #FEFFF1;
+  border: 2px solid #666666;
+  line-height: 1.3em;
+  padding: 5px;
 }
 
 .k-tooltip-arrow-border {
-    border-style: solid;
-    border-width: 7px;
-    height: 0;
-    width: 0;
-    position: absolute;
+  border-style: solid;
+  border-width: 7px;
+  height: 0;
+  width: 0;
+  position: absolute;
 }
 
 .k-tooltip-arrow-border-n {
-    border-color: transparent transparent #666666 transparent;
+  border-color: transparent transparent #666666 transparent;
 }
 
 .k-tooltip-arrow-border-s {
-    border-color: #666666 transparent transparent transparent;
+  border-color: #666666 transparent transparent transparent;
 }
 
 .k-tooltip-arrow {
-    border-style: solid;
-    border-width: 7px;
-    height: 0;
-    width: 0;
-    position: absolute;
+  border-style: solid;
+  border-width: 7px;
+  height: 0;
+  width: 0;
+  position: absolute;
 }
 
 .k-tooltip-arrow-n {
-    border-color: transparent transparent #FEFFF1 transparent;
+  border-color: transparent transparent #FEFFF1 transparent;
 }
 
 .k-tooltip-arrow-s {
-    border-color: #FEFFF1 transparent transparent transparent;
+  border-color: #FEFFF1 transparent transparent transparent;
 }
 
 /* IE6 */
 .k-tooltip-arrow {
-    _border-left-color: pink;
-    _border-bottom-color: pink;
-    _border-right-color: pink;
-    _filter: chroma(color =       pink);
+  _border-left-color: pink;
+  _border-bottom-color: pink;
+  _border-right-color: pink;
+  _filter: chroma(color =         pink);
 }
 
 /* end tooltip */

@@ -36,74 +36,77 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class SpaceSelectorViewImpl extends ViewImpl implements SpaceSelectorView {
-    interface SpaceSelectorViewImplUiBinder extends UiBinder<Widget, SpaceSelectorViewImpl> {
-    }
-    private static SpaceSelectorViewImplUiBinder uiBinder = GWT.create(SpaceSelectorViewImplUiBinder.class);
-    @UiField
-    ToggleButton groupButton;
-    @UiField
-    ToggleButton homeButton;
-    @UiField
-    HorizontalPanel panel;
-    @UiField
-    ToggleButton publicButton;
-    @UiField
-    ToggleButton userButton;
+  interface SpaceSelectorViewImplUiBinder extends UiBinder<Widget, SpaceSelectorViewImpl> {
+  }
+  private static SpaceSelectorViewImplUiBinder uiBinder = GWT.create(SpaceSelectorViewImplUiBinder.class);
+  @UiField
+  ToggleButton groupButton;
+  @UiField
+  ToggleButton homeButton;
+  @UiField
+  HorizontalPanel panel;
+  @UiField
+  ToggleButton publicButton;
+  @UiField
+  ToggleButton userButton;
 
-    @Inject
-    public SpaceSelectorViewImpl(final GSpaceArmor armor, final I18nTranslationService i18n, final WsArmorResources res) {
-        armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
-        Tooltip.to(homeButton, i18n.t("Your home page in this site"));
-        Tooltip.to(userButton, i18n.t("User space: it shows a list of all your documents and contents "
-                + "in which you participate"));
-        Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
-                + "and publish contents for your personal or group web spaces"));
-        Tooltip.to(publicButton, i18n.t("Public space: In this space you can see a preview of how the Personal o"
-                + "r Group Space looks like on the web, outside this site"));
-    }
+  @Inject
+  public SpaceSelectorViewImpl(final GSpaceArmor armor, final I18nTranslationService i18n,
+      final WsArmorResources res) {
+    armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
+    homeButton.setVisible(false);
+    Tooltip.to(homeButton, i18n.t("Your home page in this site"));
+    Tooltip.to(userButton, i18n.t("User space: it shows a list of all your documents and contents "
+        + "in which you participate"));
+    Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
+        + "and publish contents for your personal or group web spaces"));
+    Tooltip.to(publicButton,
+        i18n.t("Public space: In this space you can see a preview of how the Personal o"
+            + "r Group Space looks like on the web, outside this site"));
+  }
 
-    @Override
-    public Widget asWidget() {
-        return panel;
-    }
+  @Override
+  public Widget asWidget() {
+    return panel;
+  }
 
-    @Override
-    public HasClickHandlers getGroupBtn() {
-        return groupButton;
-    }
+  @Override
+  public HasClickHandlers getGroupBtn() {
+    return groupButton;
+  }
 
-    @Override
-    public HasClickHandlers getHomeBtn() {
-        return homeButton;
-    }
+  @Override
+  public HasClickHandlers getHomeBtn() {
+    return homeButton;
+  }
 
-    @Override
-    public HasClickHandlers getPublicBtn() {
-        return publicButton;
-    }
+  @Override
+  public HasClickHandlers getPublicBtn() {
+    return publicButton;
+  }
 
-    @Override
-    public HasClickHandlers getUserBtn() {
-        return userButton;
-    }
+  @Override
+  public HasClickHandlers getUserBtn() {
+    return userButton;
+  }
 
-    @Override
-    public void setGroupBtnDown(final boolean down) {
-        groupButton.setDown(down);
-    }
+  @Override
+  public void setGroupBtnDown(final boolean down) {
+    groupButton.setDown(down);
+  }
 
-    @Override
-    public void setHomeBtnDown(final boolean down) {
-        homeButton.setDown(down);
-    }
+  @Override
+  public void setHomeBtnDown(final boolean down) {
+    homeButton.setDown(down);
+  }
 
-    @Override
-    public void setPublicBtnDown(final boolean down) {
-        publicButton.setDown(down);
-    }
+  @Override
+  public void setPublicBtnDown(final boolean down) {
+    publicButton.setDown(down);
+  }
 
-    @Override
-    public void setUserBtnDown(final boolean down) {
-        userButton.setDown(down);
-    }
+  @Override
+  public void setUserBtnDown(final boolean down) {
+    userButton.setDown(down);
+  }
 }

@@ -5,6 +5,7 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.ui.BasicThumb;
+import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
@@ -21,63 +22,64 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
-    interface FolderViewerAsFlowPanelUiBinder extends UiBinder<Widget, FolderViewerAsFlowPanel> {
-    }
-    private static final int ICONLABELMAXSIZE = 20;
-    private static final int ICONSIZE = 100;
-    private static FolderViewerAsFlowPanelUiBinder uiBinder = GWT.create(FolderViewerAsFlowPanelUiBinder.class);
-    @UiField
-    FlowPanel flow;
+  interface FolderViewerAsFlowPanelUiBinder extends UiBinder<Widget, FolderViewerAsFlowPanel> {
+  }
+  private static final int ICONLABELMAXSIZE = 20;
+  private static final int ICONSIZE = 100;
+  private static FolderViewerAsFlowPanelUiBinder uiBinder = GWT.create(FolderViewerAsFlowPanelUiBinder.class);
+  @UiField
+  FlowPanel flow;
 
-    @Inject
-    public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n) {
-        super(gsArmor, i18n);
-        widget = uiBinder.createAndBindUi(this);
-    }
+  @Inject
+  public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
+      final ContentCapabilitiesRegistry capabilitiesRegistry) {
+    super(gsArmor, i18n, capabilitiesRegistry);
+    widget = uiBinder.createAndBindUi(this);
+  }
 
-    @Override
-    public void addItem(final FolderItemDescriptor item, final ClickHandler clickHandler,
-            final DoubleClickHandler doubleClickHandler) {
-        // In this viewer we don't use the clickHandler from the presenter
-        flow.add(createThumb(item.getText(), item.getIcon(), item.getTooltip(), "", item.getActionCollection(),
-                doubleClickHandler));
-    }
+  @Override
+  public void addItem(final FolderItemDescriptor item, final ClickHandler clickHandler,
+      final DoubleClickHandler doubleClickHandler) {
+    // In this viewer we don't use the clickHandler from the presenter
+    flow.add(createThumb(item.getText(), item.getIcon(), item.getTooltip(), "",
+        item.getActionCollection(), doubleClickHandler));
+  }
 
-    @Override
-    public void clear() {
-        flow.clear();
-        super.clear();
-    }
+  @Override
+  public void clear() {
+    flow.clear();
+    super.clear();
+  }
 
-    public BasicThumb createThumb(final String text, final Object icon, final String tooltip,
-            final String tooltipTitle, final GuiActionDescCollection menuitems,
-            final DoubleClickHandler doubleClickHandler) {
-        final BasicThumb thumb = new BasicThumb(icon, ICONSIZE, text, ICONLABELMAXSIZE, false);
-        final MenuDescriptor menu = new MenuDescriptor();
-        menu.setStandalone(true);
-        menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
-        for (final GuiActionDescrip item : menuitems) {
-            item.setParent(menu);
-        }
-        final ClickHandler clickHand = new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                menu.show(thumb);
-            }
-        };
-        thumb.addClickHandler(clickHand);
-        thumb.addDoubleClickHandler(doubleClickHandler);
-        gsArmor.getSubheaderToolbar().add(menu);
-        gsArmor.getSubheaderToolbar().addAll(menuitems);
-        thumb.setTooltip(tooltipTitle, tooltip);
-        thumb.setLabelVisible(true);
-        return thumb;
+  public BasicThumb createThumb(final String text, final Object icon, final String tooltip,
+      final String tooltipTitle, final GuiActionDescCollection menuitems,
+      final DoubleClickHandler doubleClickHandler) {
+    final BasicThumb thumb = new BasicThumb(icon, ICONSIZE, text, ICONLABELMAXSIZE, false);
+    final MenuDescriptor menu = new MenuDescriptor();
+    menu.setStandalone(true);
+    menu.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
+    for (final GuiActionDescrip item : menuitems) {
+      item.setParent(menu);
     }
+    final ClickHandler clickHand = new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        menu.show(thumb);
+      }
+    };
+    thumb.addClickHandler(clickHand);
+    thumb.addDoubleClickHandler(doubleClickHandler);
+    gsArmor.getSubheaderToolbar().add(menu);
+    gsArmor.getSubheaderToolbar().addAll(menuitems);
+    thumb.setTooltip(tooltipTitle, tooltip);
+    thumb.setLabelVisible(true);
+    return thumb;
+  }
 
-    @Override
-    public void setContainer(final StateContainerDTO state) {
-        super.setContainer(state);
-        gsArmor.getDocContainer().add(new HTML("<b>Note:</b> This GUI is provisional<br/>"));
-    }
+  @Override
+  public void setContainer(final StateContainerDTO state) {
+    super.setContainer(state);
+    gsArmor.getDocContainer().add(new HTML("<b>Note:</b> This GUI is provisional<br/>"));
+  }
 
 }

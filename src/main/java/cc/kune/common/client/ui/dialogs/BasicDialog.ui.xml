@@ -13,9 +13,9 @@
     </g:SimplePanel>
     <g:FlowPanel ui:field="btnPanel" addStyleNames="k-dialog-btn-area">
       <g:Button ui:field="firstBtn"
-        addStyleNames="k-dialog-btn, k-dialog-firstBtn, k-5corners " />
+        addStyleNames="k-dialog-btn, k-dialog-firstBtn, k-5corners, k-button " />
       <g:Button ui:field="secondBtn"
-        addStyleNames="k-dialog-btn,k-dialog-secondBtn, k-5corners" />
+        addStyleNames="k-dialog-btn,k-dialog-secondBtn, k-5corners, k-button" />
     </g:FlowPanel>
   </g:VerticalPanel>
 </ui:UiBinder>

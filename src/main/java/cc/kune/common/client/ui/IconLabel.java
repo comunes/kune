@@ -40,127 +40,129 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class IconLabel extends Composite implements HasWidgets, HasDirectionalText {
 
-    interface IconTitleUiBinder extends UiBinder<Widget, IconLabel> {
+  interface IconTitleUiBinder extends UiBinder<Widget, IconLabel> {
+  }
+
+  private static IconTitleUiBinder uiBinder = GWT.create(IconTitleUiBinder.class);
+
+  @UiField
+  FlowPanel flow;
+  @UiField
+  Image iconLeft;
+  @UiField
+  Image iconRight;
+  @UiField
+  InlineLabel label;
+  @UiField
+  FocusPanel self;
+
+  public IconLabel() {
+    this("");
+  }
+
+  public IconLabel(final ImageResource imgRes, final String text) {
+    this(text);
+    if (imgRes != null) {
+      iconLeft.setResource(imgRes);
     }
+  }
 
-    private static IconTitleUiBinder uiBinder = GWT.create(IconTitleUiBinder.class);
+  public IconLabel(final String text) {
+    initWidget(uiBinder.createAndBindUi(this));
+    label.setText(text);
+    label.addStyleName("k-space-nowrap");
+    label.addStyleName("k-iconlabel-text");
+  }
 
-    @UiField
-    FlowPanel flow;
-    @UiField
-    Image iconLeft;
-    @UiField
-    Image iconRight;
-    @UiField
-    InlineLabel label;
-    @UiField
-    FocusPanel self;
+  @Override
+  public void add(final Widget w) {
+    flow.add(w);
+  }
 
-    public IconLabel() {
-        this("");
-    }
+  @Override
+  public void addStyleName(final String style) {
+    flow.addStyleName(style);
+  }
 
-    public IconLabel(final ImageResource imgRes, final String text) {
-        this(text);
-        iconLeft.setResource(imgRes);
-    }
+  public void addTextStyleName(final String style) {
+    label.addStyleName(style);
+  }
 
-    public IconLabel(final String text) {
-        initWidget(uiBinder.createAndBindUi(this));
-        label.setText(text);
-        label.addStyleName("k-space-nowrap");
-        label.addStyleName("k-iconlabel-text");
-    }
+  @Override
+  public void clear() {
+    flow.clear();
+  }
 
-    @Override
-    public void add(final Widget w) {
-        flow.add(w);
-    }
+  public HasClickHandlers getFocus() {
+    return self;
+  }
 
-    @Override
-    public void addStyleName(final String style) {
-        flow.addStyleName(style);
-    }
+  @Override
+  public String getText() {
+    return label.getText();
+  }
 
-    public void addTextStyleName(final String style) {
-        label.addStyleName(style);
-    }
+  @Override
+  public Direction getTextDirection() {
+    return label.getTextDirection();
+  }
 
-    @Override
-    public void clear() {
-        flow.clear();
-    }
+  @Override
+  public Iterator<Widget> iterator() {
+    return flow.iterator();
+  }
 
-    public HasClickHandlers getFocus() {
-        return self;
-    }
+  @Override
+  public boolean remove(final Widget w) {
+    return flow.remove(w);
+  }
 
-    @Override
-    public String getText() {
-        return label.getText();
-    }
+  public void setLabelText(final String text) {
+    label.setText(text);
+  }
 
-    @Override
-    public Direction getTextDirection() {
-        return label.getTextDirection();
-    }
+  public void setLeftIcon(final String imgCss) {
+    iconLeft.setUrl("images/clear.gif");
+    iconLeft.setStyleName(imgCss);
+    iconLeft.addStyleName("k-iconlabel-left");
+    iconLeft.addStyleName("oc-ico-pad");
+  }
 
-    @Override
-    public Iterator<Widget> iterator() {
-        return flow.iterator();
-    }
+  public void setLeftIconResource(final ImageResource res) {
+    iconLeft.setResource(res);
+    iconLeft.addStyleName("k-iconlabel-left");
+  }
 
-    @Override
-    public boolean remove(final Widget w) {
-        return flow.remove(w);
-    }
+  public void setRightIcon(final String imgCss) {
+    iconRight.setUrl("images/clear.gif");
+    iconRight.setStyleName(imgCss);
+    iconRight.addStyleName("oc-ico-pad");
+    iconRight.addStyleName("k-iconlabel-right");
+  }
 
-    public void setLabelText(final String text) {
-        label.setText(text);
-    }
+  public void setRightIconResource(final ImageResource res) {
+    iconRight.setResource(res);
+    iconRight.addStyleName("k-iconlabel-right");
+  }
 
-    public void setLeftIcon(final String imgCss) {
-        iconLeft.setUrl("images/clear.gif");
-        iconLeft.setStyleName(imgCss);
-        iconLeft.addStyleName("k-iconlabel-left");
-        iconLeft.addStyleName("oc-ico-pad");
-    }
+  @Override
+  public void setStyleName(final String style) {
+    flow.setStyleName(style);
+  }
 
-    public void setLeftIconResource(final ImageResource res) {
-        iconLeft.setResource(res);
-        iconLeft.addStyleName("k-iconlabel-left");
-    }
+  @Override
+  public void setText(final String text) {
+    label.setText(text);
+  }
 
-    public void setRightIcon(final String imgCss) {
-        iconRight.setUrl("images/clear.gif");
-        iconRight.setStyleName(imgCss);
-        iconRight.addStyleName("oc-ico-pad");
-        iconRight.addStyleName("k-iconlabel-right");
-    }
+  @Override
+  public void setText(final String text, final Direction dir) {
+    label.setText(text, dir);
+  }
 
-    public void setRightIconResource(final ImageResource res) {
-        iconRight.setResource(res);
-        iconRight.addStyleName("k-iconlabel-right");
-    }
-
-    @Override
-    public void setStyleName(final String style) {
-        flow.setStyleName(style);
-    }
-
-    @Override
-    public void setText(final String text) {
-        label.setText(text);
-    }
-
-    @Override
-    public void setText(final String text, final Direction dir) {
-        label.setText(text, dir);
-    }
-
-    public void setTooltip(final String text) {
-        Tooltip.to(label, text);
-        // Tooltip.to(iconRight, text);
-        // Tooltip.to(iconLeft, text);
-    }
+  public void setTooltip(final String text) {
+    Tooltip.to(label, text);
+    // Tooltip.to(iconRight, text);
+    // Tooltip.to(iconLeft, text);
+  }
 }
