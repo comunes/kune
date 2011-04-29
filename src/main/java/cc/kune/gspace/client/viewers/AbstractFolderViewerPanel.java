@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public abstract class AbstractFolderViewerPanel extends ViewImpl implements FolderViewerView {
+  private final ContentCapabilitiesRegistry capabilitiesRegistry;
   private final ContentTitleWidget contentTitle;
   private final InlineLabel emptyLabel;
   protected final GSpaceArmor gsArmor;
@@ -25,6 +26,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
       final ContentCapabilitiesRegistry capabilitiesRegistry) {
     this.gsArmor = gsArmor;
     this.i18n = i18n;
+    this.capabilitiesRegistry = capabilitiesRegistry;
     emptyLabel = new InlineLabel(i18n.t("This folder is empty."));
     emptyLabel.setStyleName("k-empty-msg");
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
@@ -66,7 +68,8 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
 
   @Override
   public void setContainer(final StateContainerDTO state) {
-    contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getContainerRights().isEditable());
+    contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getContainerRights().isEditable()
+        && capabilitiesRegistry.isRenamable(state.getTypeId()));
   }
 
   @Override

@@ -75,12 +75,16 @@ public class EditableLabel extends Composite implements HasEditHandler {
 
   @UiHandler("label")
   void onMouseOut(final MouseOutEvent event) {
-    label.removeStyleDependentName("high");
+    if (editable) {
+      label.removeStyleDependentName("high");
+    }
   }
 
   @UiHandler("label")
   void onMouseOver(final MouseOverEvent event) {
-    label.addStyleDependentName("high");
+    if (editable) {
+      label.addStyleDependentName("high");
+    }
   }
 
   public void setEditable(final boolean editable) {

@@ -49,6 +49,7 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
 
   private static DocsViewerPanelUiBinder uiBinder = GWT.create(DocsViewerPanelUiBinder.class);
 
+  private final ContentCapabilitiesRegistry capabilitiesRegistry;
   private RemoteViewServiceMultiplexer channel;
   private final ContentTitleWidget contentTitle;
   @UiField
@@ -66,12 +67,14 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   @UiField
   ImplPanel waveHolder;
   private final WaveStore waveStore = new SimpleWaveStore();
+
   private final Widget widget;
 
   @Inject
   public DocViewerPanel(final GSpaceArmor wsArmor,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n) {
     this.gsArmor = wsArmor;
+    this.capabilitiesRegistry = capabilitiesRegistry;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
   }
@@ -134,7 +137,8 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   @Override
   public void setContent(final StateContentDTO state) {
     final boolean editable = state.getContentRights().isEditable();
-    contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable);
+    contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable
+        && capabilitiesRegistry.isRenamable(state.getTypeId()));
     if (editable) {
       initWaveClientIfNeeded();
       setEditableWaveContent(state.getWaveRef(), false);
