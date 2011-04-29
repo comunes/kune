@@ -22,6 +22,7 @@ package cc.kune.gspace.client.options;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -46,7 +47,7 @@ public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements Grou
     this.entityHeader = entityHeader;
     this.entityPreferencesGroup = entityOptionsGroup;
     super.setIconCls("k-options-icon");
-    super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE));
+    super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE) + TextUtils.IN_DEVELOPMENT_P);
   }
 
   @Override

@@ -114,6 +114,7 @@ public class BasicTopDialog extends BasicDialog {
       this.width = width;
       return this;
     }
+
   }
 
   private final PopupTopPanel popup;
@@ -132,6 +133,7 @@ public class BasicTopDialog extends BasicDialog {
     super.setSecondBtnText(builder.sndButtonTitle);
     super.setSecondBtnId(builder.sndButtonId);
     super.setSecondBtnTabIndex(builder.tabIndexStart + 1);
+    super.getTitleText().setText(builder.title);
     super.setSize(builder.width, builder.height);
   }
 

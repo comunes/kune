@@ -21,6 +21,7 @@ package cc.kune.gspace.client.options;
 
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel;
+import cc.kune.common.client.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.shared.i18n.I18nTranslationService;
@@ -44,7 +45,7 @@ public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserO
         USER_OPTIONS_ERROR_ID, i18n.t("Close"), null, null, null);
     this.userPreferencesGroup = userOptionsGroup;
     super.setIconCls("k-options-icon");
-    super.setTitle(i18n.t(CoreMessages.USER_OPTIONS_DIALOG_TITLE));
+    super.setTitle(i18n.t(CoreMessages.USER_OPTIONS_DIALOG_TITLE) + TextUtils.IN_DEVELOPMENT_P);
   }
 
   @Override

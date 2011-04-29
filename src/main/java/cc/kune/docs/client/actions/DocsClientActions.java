@@ -30,36 +30,42 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ActionGroups;
+import cc.kune.gspace.client.actions.RefreshContentBtn;
+import cc.kune.gspace.client.actions.SetAsHomePageMenuItem;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class DocsClientActions extends AbstractFoldableToolActions {
 
-    final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-    final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
-    final String[] containersNoRoot = { TYPE_FOLDER };
-    final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
-    final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+  final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+  final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
+  final String[] containersNoRoot = { TYPE_FOLDER };
+  final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+  final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
 
-    @Inject
-    public DocsClientActions(final I18nUITranslationService i18n, final Session session,
-            final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-            final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewDocBtn> newDocBtn,
-            final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenDocMenuItem> openContentMenuItem,
-            final Provider<DelDocMenuItem> delContentMenuItem, final Provider<DelFolderMenuItem> delFolderMenuItem) {
-        super(session, stateManager, i18n, registry);
-        actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
-        actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
-        actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containers);
-        actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, containers);
-        actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
-        actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
-        actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
-        actionsRegistry.addAction(ActionGroups.MENUITEM, delFolderMenuItem, containersNoRoot);
-    }
+  @Inject
+  public DocsClientActions(final I18nUITranslationService i18n, final Session session,
+      final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
+      final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewDocBtn> newDocBtn,
+      final Provider<NewFolderBtn> newFolderBtn, final Provider<OpenDocMenuItem> openContentMenuItem,
+      final Provider<DelDocMenuItem> delContentMenuItem,
+      final Provider<DelFolderMenuItem> delFolderMenuItem, final Provider<RefreshContentBtn> refresh,
+      final Provider<SetAsHomePageMenuItem> setAsHomePage) {
+    super(session, stateManager, i18n, registry);
+    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, contents);
+    actionsRegistry.addAction(ActionGroups.VIEW, folderGoUp, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.VIEW, newDocBtn, containers);
+    actionsRegistry.addAction(ActionGroups.VIEW, newFolderBtn, containers);
+    actionsRegistry.addAction(ActionGroups.VIEW, refresh, all);
+    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.MENUITEM, openContentMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.MENUITEM, delContentMenuItem, contents);
+    actionsRegistry.addAction(ActionGroups.MENUITEM, delFolderMenuItem, containersNoRoot);
+    actionsRegistry.addAction(ActionGroups.MENUITEM, setAsHomePage, contents);
+  }
 
-    @Override
-    protected void createPostSessionInitActions() {
-    }
+  @Override
+  protected void createPostSessionInitActions() {
+  }
 }

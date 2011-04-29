@@ -91,7 +91,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   private void createDialog() {
     dialog = new BasicTopDialog.Builder(dialogId, true, modal).autoscroll(true).width(width).height(
         height).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonId(
-        dialogId).sndButtonTitle(sndBtnTitle).build();
+        dialogId).sndButtonTitle(sndBtnTitle).title(title).build();
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     tabPanel = new DecoratedTabPanel();
     dialog.getInnerPanel().add(tabPanel);
@@ -181,7 +181,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
   public void setTitle(final String title) {
     this.title = title;
     if (dialog != null) {
-      dialog.setTitle(title);
+      dialog.getTitleText().setText(title);
     }
   }
 
