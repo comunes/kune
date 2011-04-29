@@ -98,7 +98,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   @Override
   public void clear() {
-    flex.clear();
+    flex.removeAllRows();
     super.clear();
   }
 

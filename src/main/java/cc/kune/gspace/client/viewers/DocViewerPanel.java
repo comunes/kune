@@ -20,11 +20,9 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
@@ -34,14 +32,11 @@ import cc.kune.wave.client.WebClient;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -55,18 +50,15 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   private static DocsViewerPanelUiBinder uiBinder = GWT.create(DocsViewerPanelUiBinder.class);
 
   private RemoteViewServiceMultiplexer channel;
+  private final ContentTitleWidget contentTitle;
   @UiField
   DeckPanel deck;
-  private final EditableLabel editableTitle;
   private final GSpaceArmor gsArmor;
-  private final IconsRegistry iconRegistry;
   private IdGenerator idGenerator;
   private final Element loading = new LoadingIndicator().getElement();
   @UiField
   InlineHTML onlyViewPanel;
   private ProfileManager profiles;
-  private final FlowPanel title;
-  private final Image titleIcon;
   /** The wave panel, if a wave is open. */
   private StagesProvider wave;
   @UiField
@@ -80,14 +72,8 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   public DocViewerPanel(final GSpaceArmor wsArmor,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n) {
     this.gsArmor = wsArmor;
-    this.iconRegistry = capabilitiesRegistry.getIconsRegistry();
     widget = uiBinder.createAndBindUi(this);
-    title = new FlowPanel();
-    titleIcon = new Image();
-    editableTitle = new EditableLabel();
-    editableTitle.setTooltip(i18n.t("Click to edit"));
-    title.add(titleIcon);
-    title.add(editableTitle);
+    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
   }
 
   @Override
@@ -116,7 +102,7 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
 
   @Override
   public HasEditHandler getEditTitle() {
-    return editableTitle;
+    return contentTitle.getEditableTitle();
   }
 
   private WaveRef getWaveRef(final String waveRefS) {
@@ -148,7 +134,7 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   @Override
   public void setContent(final StateContentDTO state) {
     final boolean editable = state.getContentRights().isEditable();
-    setTitle(state, editable);
+    contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable);
     if (editable) {
       initWaveClientIfNeeded();
       setEditableWaveContent(state.getWaveRef(), false);
@@ -165,7 +151,7 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
 
   @Override
   public void setEditableTitle(final String title) {
-    editableTitle.setText(title);
+    contentTitle.setText(title);
   }
 
   private void setEditableWaveContent(final String waveRefS, final boolean isNewWave) {
@@ -191,18 +177,4 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
     });
   }
 
-  private void setTitle(final StateContentDTO state, final boolean editable) {
-    final ForIsWidget docHeader = gsArmor.getDocHeader();
-    UiUtils.clear(docHeader);
-    final ImageResource resource = (ImageResource) iconRegistry.getContentTypeIcon(state.getTypeId(),
-        state.getMimeType());
-    final boolean hasIcon = resource != null;
-    if (hasIcon) {
-      titleIcon.setResource(resource);
-    }
-    titleIcon.setVisible(hasIcon);
-    editableTitle.setText(state.getTitle());
-    editableTitle.setEditable(editable);
-    docHeader.add(title);
-  }
 }

@@ -20,6 +20,7 @@
 package cc.kune.gspace.client;
 
 import cc.kune.client.ExtendedGinModule;
+import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.GroupOptionsCollection;
 import cc.kune.gspace.client.options.GroupOptionsPanel;
@@ -80,54 +81,56 @@ import com.google.inject.Singleton;
 
 public class GSpaceGinModule extends ExtendedGinModule {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.google.gwt.inject.client.AbstractGinModule#configure()
-     */
-    @Override
-    protected void configure() {
-        bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
-                EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
-        bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class, TagsSummaryPanel.class,
-                TagsSummaryPresenter.TagsSummaryProxy.class);
-        bind(GSpaceArmorImpl.class).in(Singleton.class);
-        bind(GSpaceArmor.class).to(GSpaceArmorImpl.class).in(Singleton.class);
-        bind(GSpaceParts.class).asEagerSingleton();
-        bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
-                ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);
-        bind(ToolSelector.class).to(ToolSelectorPresenter.class).in(Singleton.class);
-        bindPresenter(DocViewerPresenter.class, DocViewerPresenter.DocViewerView.class, DocViewerPanel.class,
-                DocViewerPresenter.DocViewerProxy.class);
-        bindPresenter(FolderViewerPresenter.class, FolderViewerPresenter.FolderViewerView.class,
-                FolderViewerAsTablePanel.class, FolderViewerPresenter.FolderViewerProxy.class);
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
+  @Override
+  protected void configure() {
+    bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,
+        EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
+    bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class,
+        TagsSummaryPanel.class, TagsSummaryPresenter.TagsSummaryProxy.class);
+    bind(GSpaceArmorImpl.class).in(Singleton.class);
+    bind(GSpaceArmor.class).to(GSpaceArmorImpl.class).in(Singleton.class);
+    bind(GSpaceParts.class).asEagerSingleton();
+    bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
+        ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);
+    bind(ToolSelector.class).to(ToolSelectorPresenter.class).in(Singleton.class);
+    bindPresenter(DocViewerPresenter.class, DocViewerPresenter.DocViewerView.class,
+        DocViewerPanel.class, DocViewerPresenter.DocViewerProxy.class);
+    bindPresenter(FolderViewerPresenter.class, FolderViewerPresenter.FolderViewerView.class,
+        FolderViewerAsTablePanel.class, FolderViewerPresenter.FolderViewerProxy.class);
 
-        s(GroupOptions.class, GroupOptionsPresenter.class);
-        s(GroupOptionsView.class, GroupOptionsPanel.class);
-        s(UserOptions.class, UserOptionsPresenter.class);
-        s(UserOptionsView.class, UserOptionsPanel.class);
+    s(GroupOptions.class, GroupOptionsPresenter.class);
+    s(GroupOptionsView.class, GroupOptionsPanel.class);
+    s(UserOptions.class, UserOptionsPresenter.class);
+    s(UserOptionsView.class, UserOptionsPanel.class);
 
-        s(UserOptionsCollection.class);
-        s(GroupOptionsCollection.class);
+    s(UserOptionsCollection.class);
+    s(GroupOptionsCollection.class);
 
-        s(GroupOptionsDefLicense.class, GroupOptionsDefLicensePresenter.class);
-        s(GroupOptionsDefLicenseView.class, GroupOptionsDefLicensePanel.class);
-        s(GroupOptionsPublicSpaceConf.class, GroupOptionsPublicSpaceConfPresenter.class);
-        s(GroupOptionsPublicSpaceConfView.class, GroupOptionsPublicSpaceConfPanel.class);
-        s(GroupOptionsLogo.class, GroupOptionsLogoPresenter.class);
-        s(GroupOptionsLogoView.class, GroupOptionsLogoPanel.class);
-        s(GroupOptionsToolsConf.class, GroupOptionsToolsConfPresenter.class);
-        s(GroupOptionsToolsConfView.class, GroupOptionsToolsConfPanel.class);
+    s(GroupOptionsDefLicense.class, GroupOptionsDefLicensePresenter.class);
+    s(GroupOptionsDefLicenseView.class, GroupOptionsDefLicensePanel.class);
+    s(GroupOptionsPublicSpaceConf.class, GroupOptionsPublicSpaceConfPresenter.class);
+    s(GroupOptionsPublicSpaceConfView.class, GroupOptionsPublicSpaceConfPanel.class);
+    s(GroupOptionsLogo.class, GroupOptionsLogoPresenter.class);
+    s(GroupOptionsLogoView.class, GroupOptionsLogoPanel.class);
+    s(GroupOptionsToolsConf.class, GroupOptionsToolsConfPresenter.class);
+    s(GroupOptionsToolsConfView.class, GroupOptionsToolsConfPanel.class);
 
-        s(UserOptionsDefLicense.class, UserOptionsDefLicensePresenter.class);
-        s(UserOptionsDefLicenseView.class, UserOptionsDefLicensePanel.class);
-        s(UserOptionsPublicSpaceConf.class, UserOptionsPublicSpaceConfPresenter.class);
-        s(UserOptionsPublicSpaceConfView.class, UserOptionsPublicSpaceConfPanel.class);
-        s(UserOptionsLogo.class, UserOptionsLogoPresenter.class);
-        s(UserOptionsLogoView.class, UserOptionsLogoPanel.class);
-        s(UserOptionsToolsConf.class, UserOptionsToolsConfPresenter.class);
-        s(UserOptionsToolsConfView.class, UserOptionsToolsConfPanel.class);
+    s(UserOptionsDefLicense.class, UserOptionsDefLicensePresenter.class);
+    s(UserOptionsDefLicenseView.class, UserOptionsDefLicensePanel.class);
+    s(UserOptionsPublicSpaceConf.class, UserOptionsPublicSpaceConfPresenter.class);
+    s(UserOptionsPublicSpaceConfView.class, UserOptionsPublicSpaceConfPanel.class);
+    s(UserOptionsLogo.class, UserOptionsLogoPresenter.class);
+    s(UserOptionsLogoView.class, UserOptionsLogoPanel.class);
+    s(UserOptionsToolsConf.class, UserOptionsToolsConfPresenter.class);
+    s(UserOptionsToolsConfView.class, UserOptionsToolsConfPanel.class);
 
-        s(GSpaceBackManager.class, GSpaceBackManagerImpl.class);
-    }
+    s(GSpaceBackManager.class, GSpaceBackManagerImpl.class);
+
+    s(RenameAction.class);
+  }
 }
