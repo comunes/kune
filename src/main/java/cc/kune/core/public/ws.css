@@ -17,6 +17,10 @@ body.fontface {
   font: 'Ubuntu', Arial;
 }
 
+div, span {
+  outline: 0 none;
+}
+
 /*
 a {
     color: darkblue;
@@ -375,6 +379,7 @@ a:visited {
 .k-space-sel-btn {
   padding: 0 1px 0 1px;
   margin: 0 0 -2px;
+  outline: 0 none;
 }
 
 .k-sitebar-logo {
@@ -862,6 +867,7 @@ a:visited {
   border-radius: 5px;
   vertical-align: middle;
   line-height: 2em !important;
+  outline: 0 none;
   /* height: 26px !important; */
   font-weight: bold;
   /*
@@ -873,11 +879,13 @@ font-size:small;
 
 .k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover,button.k-button:hover  {
   border: 2px orange solid;
+  outline: 0 none;
   /* background: #f0f0f0; */
 }
 
 .k-sn-mainpanel .x-btn button:hover span,.k-sn-mainpanel button:hover span,button.k-button:hover span {
   color: brown !important;
+  outline: 0 none;
 }
 
 .k-sn-mainpanel .x-btn button:active,.k-sn-mainpanel button:active,button.k-button:active {
@@ -1093,6 +1101,7 @@ font-size:small;
 .k-tool-item {
   display: block;
   cursor: pointer;
+  outline: 0 none;
 }
 
 .k-tool-item-focus {

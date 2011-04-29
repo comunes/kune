@@ -63,12 +63,19 @@
   left: 10px;
 }
 
-.docHeader span {
+.docHeader span,.docHeader input {
   color: #FFF;
   font-size: 26px;
   font-weight: bold;
   margin-left: 15px;
   font: 'UbuntuBold', Arial;
+  line-height: 1.3em;
+}
+
+.docHeader input {
+  float: left;
+  width: 95% !important;
+  color: black !important;
 }
 
 .docHeader img {
@@ -124,7 +131,10 @@
   -moz-border-radius-topright: 7px;
   border-top-right-radius: 7px;
 }
-.docEditor div { overflow-y: visible; }
+
+.docEditor div {
+  overflow-y: visible;
+}
 
 .docFooter {
   border-left: 1px solid #959595;

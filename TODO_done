@@ -63,6 +63,76 @@ Archived entries from file TODO
   :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
   :ARCHIVE_CATEGORY: TODO
   :END:
+* TODO WIAB History integration
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-04-28 jue 23:50
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :ARCHIVE_TODO: TODO
+  :END:
+** Initial defpage #home
+*** u: if logged: wave list (#inbox) else: signin
+*** g: def project
+*** p: idem
+** #example.com/w+abcd
+*** u: if logged: this wave else: signin and return to this
+*** g: equivalent group page? no, only with a button-action
+*** p: idem
+** #site.doc.1
+*** u: if logged: wave list else signin (or also a button-action to go to open in the user-list)
+*** g: group content
+*** p: idem
+** Some javadoc:
+HistorySupport.java
+WaverefEncoder.java
+  /**
+   * Takes a path segment which includes the domain and wave ID,and optionally
+   * the wavelet domain + ID and the blip ID, and converts it to a waveref
+   * object. Further tokens after 5 are silently ignored. Examples of valid URI
+   * path segments are: example.com/w+abcd example.com/w+abcd/~/conv+root
+   * example.com/w+abcd/~/conv+root/b+45kg
+   *
+   * @param path The path containing the domain and wave ID.
+   * @return The corresponding WaveRef object, or null if the path was invalid.
+   * @throws InvalidWaveRefException If the path contains less than 2 tokens or 3 tokens.
+     */
+* TODO WIAB History integration
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-04-28 jue 23:50
+  :ARCHIVE_FILE: ~/proyectos/dev/kune/trunk/TODO
+  :ARCHIVE_OLPATH: SHORT-TERM (URGENT)
+  :ARCHIVE_CATEGORY: TODO
+  :ARCHIVE_TODO: TODO
+  :END:
+** Initial defpage #home
+*** u: if logged: wave list (#inbox) else: signin
+*** g: def project
+*** p: idem
+** #example.com/w+abcd
+*** u: if logged: this wave else: signin and return to this
+*** g: equivalent group page? no, only with a button-action
+*** p: idem
+** #site.doc.1
+*** u: if logged: wave list else signin (or also a button-action to go to open in the user-list)
+*** g: group content
+*** p: idem
+** Some javadoc:
+HistorySupport.java
+WaverefEncoder.java
+  /**
+   * Takes a path segment which includes the domain and wave ID,and optionally
+   * the wavelet domain + ID and the blip ID, and converts it to a waveref
+   * object. Further tokens after 5 are silently ignored. Examples of valid URI
+   * path segments are: example.com/w+abcd example.com/w+abcd/~/conv+root
+   * example.com/w+abcd/~/conv+root/b+45kg
+   *
+   * @param path The path containing the domain and wave ID.
+   * @return The corresponding WaveRef object, or null if the path was invalid.
+   * @throws InvalidWaveRefException If the path contains less than 2 tokens or 3 tokens.
+     */
+
+
 
 
 

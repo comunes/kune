@@ -140,33 +140,31 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.of(author));
     final String reqId = request.getId();
     final JsonRpcResponse response = context.getResponse(reqId);
-    if (response != null) {
-      if (response.isError()) {
-        onFailure(context.getResponse(reqId).getErrorMessage());
-      } else {
-        // Duplicate code from WaveService
-        final WaveletData waveletData = (WaveletData) response.getData().get(ParamsProperty.WAVELET_DATA);
-        final Map<String, Blip> blips = new HashMap<String, Blip>();
-        final Map<String, BlipThread> threads = new HashMap<String, BlipThread>();
-        wavelet = Wavelet.deserialize(opQueue, blips, threads, waveletData);
+    if (response != null && response.isError()) {
+      onFailure(context.getResponse(reqId).getErrorMessage());
+    } else {
+      // Duplicate code from WaveService
+      final WaveletData waveletData = (WaveletData) response.getData().get(ParamsProperty.WAVELET_DATA);
+      final Map<String, Blip> blips = new HashMap<String, Blip>();
+      final Map<String, BlipThread> threads = new HashMap<String, BlipThread>();
+      wavelet = Wavelet.deserialize(opQueue, blips, threads, waveletData);
 
-        // Deserialize threads.
-        @SuppressWarnings("unchecked")
-        final Map<String, BlipThread> tempThreads = (Map<String, BlipThread>) response.getData().get(
-            ParamsProperty.THREADS);
-        for (final Map.Entry<String, BlipThread> entry : tempThreads.entrySet()) {
-          final BlipThread thread = entry.getValue();
-          threads.put(entry.getKey(),
-              new BlipThread(thread.getId(), thread.getLocation(), thread.getBlipIds(), blips));
-        }
+      // Deserialize threads.
+      @SuppressWarnings("unchecked")
+      final Map<String, BlipThread> tempThreads = (Map<String, BlipThread>) response.getData().get(
+          ParamsProperty.THREADS);
+      for (final Map.Entry<String, BlipThread> entry : tempThreads.entrySet()) {
+        final BlipThread thread = entry.getValue();
+        threads.put(entry.getKey(),
+            new BlipThread(thread.getId(), thread.getLocation(), thread.getBlipIds(), blips));
+      }
 
-        // Deserialize blips.
-        @SuppressWarnings("unchecked")
-        final Map<String, BlipData> blipDatas = (Map<String, BlipData>) response.getData().get(
-            ParamsProperty.BLIPS);
-        for (final Map.Entry<String, BlipData> entry : blipDatas.entrySet()) {
-          blips.put(entry.getKey(), Blip.deserialize(opQueue, wavelet, entry.getValue()));
-        }
+      // Deserialize blips.
+      @SuppressWarnings("unchecked")
+      final Map<String, BlipData> blipDatas = (Map<String, BlipData>) response.getData().get(
+          ParamsProperty.BLIPS);
+      for (final Map.Entry<String, BlipData> entry : blipDatas.entrySet()) {
+        blips.put(entry.getKey(), Blip.deserialize(opQueue, wavelet, entry.getValue()));
       }
     }
     return wavelet;
@@ -176,5 +174,32 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     final String errorMsg = TextUtils.notEmpty(message) ? message : "Wave operation failed";
     LOG.error(errorMsg);
     throw new DefaultException(errorMsg);
+  }
+
+  @Override
+  public void setTitle(final WaveRef waveName, final String title, final String author) {
+    final Wavelet wavelet = fetchWavelet(waveName, author);
+    final OperationQueue opQueue = new OperationQueue();
+    opQueue.setTitleOfWavelet(wavelet, title);
+    final OperationContextImpl context = new OperationContextImpl(waveletProvider,
+        converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
+    final OperationRequest request = opQueue.getPendingOperations().get(0);
+    OperationUtil.executeOperation(request, operationRegistry, context, participantUtils.of(author));
+    final String reqId = request.getId();
+    final JsonRpcResponse response = context.getResponse(reqId);
+    if (response != null && response.isError()) {
+      onFailure(context.getResponse(reqId).getErrorMessage());
+    }
+    OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
+      @Override
+      public void onFailure(final String arg0) {
+        KuneWaveManagerDefault.this.onFailure("Wave set title failed, onFailure: " + arg0);
+      }
+
+      @Override
+      public void onSuccess(final int arg0, final HashedVersion arg1, final long arg2) {
+        LOG.info("Wave set title success: " + arg1);
+      }
+    });
   }
 }

@@ -23,6 +23,7 @@
       padding: 5px 10px;
       -moz-user-select: none;
       -khtml-user-select: none;
+      outline: 0;
     }
 
     .iconLeft {

@@ -19,9 +19,6 @@
  */
 package cc.kune.core.server.state;
 
-import static cc.kune.blogs.shared.BlogsConstants.TYPE_POST;
-import static cc.kune.docs.shared.DocsConstants.TYPE_DOCUMENT;
-
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
@@ -105,7 +102,7 @@ public class StateServiceDefault implements StateService {
     state.setVersion(content.getVersion());
     final char[] text = revision.getBody();
     final String textBody = text == null ? null : new String(text);
-    if (typeId.equals(TYPE_DOCUMENT) || (typeId.equals(TYPE_POST))) {
+    if (content.isWave()) {
       state.setWaveRef(textBody);
       try {
         final Wavelet wavelet = kuneWaveManager.fetchWavelet(

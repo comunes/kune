@@ -54,8 +54,10 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.validator.NotNull;
 
+import cc.kune.blogs.shared.BlogsConstants;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.docs.shared.DocsConstants;
 import cc.kune.domain.utils.HasStateToken;
 
 @Entity
@@ -64,278 +66,283 @@ import cc.kune.domain.utils.HasStateToken;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Content implements HasStateToken {
 
-    public static final String GROUP = "group";
-    public static final String MIMETYPE = "mimetype";
-    public static final Content NO_CONTENT = new Content();
-    public static final String TITLE = "title";
+  public static final String GROUP = "group";
+  public static final String MIMETYPE = "mimetype";
+  public static final Content NO_CONTENT = new Content();
+  public static final String TITLE = "title";
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private AccessLists accessLists;
+  @OneToOne(cascade = CascadeType.ALL)
+  private AccessLists accessLists;
 
-    @IndexedEmbedded
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private List<User> authors;
+  @IndexedEmbedded
+  @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+  private List<User> authors;
 
-    @Fetch(FetchMode.JOIN)
-    @ContainedIn
-    @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Comment> comments;
+  @Fetch(FetchMode.JOIN)
+  @ContainedIn
+  @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private Set<Comment> comments;
 
-    @ManyToOne
-    @JoinColumn
-    @IndexedEmbedded
-    private Container container;
+  @ManyToOne
+  @JoinColumn
+  @IndexedEmbedded
+  private Container container;
 
-    @Basic(optional = false)
-    private Long createdOn;
+  @Basic(optional = false)
+  private Long createdOn;
 
-    @Basic(optional = true)
-    private Date deletedOn;
+  @Basic(optional = true)
+  private Date deletedOn;
 
-    /**
-     * filename if is an uploaded content
-     */
-    private String filename;
+  /**
+   * filename if is an uploaded content
+   */
+  private String filename;
 
-    @Id
-    @DocumentId
-    @GeneratedValue
-    // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
-    private Long id;
+  @Id
+  @DocumentId
+  @GeneratedValue
+  // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
+  private Long id;
 
-    @IndexedEmbedded
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    private I18nLanguage language;
+  @IndexedEmbedded
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+  private I18nLanguage language;
 
-    @IndexedEmbedded
-    @OneToOne(cascade = { CascadeType.ALL })
-    private Revision lastRevision;
+  @IndexedEmbedded
+  @OneToOne(cascade = { CascadeType.ALL })
+  private Revision lastRevision;
 
-    @OneToOne
-    private License license;
+  @OneToOne
+  private License license;
 
-    @IndexedEmbedded
-    @Embedded
-    private BasicMimeType mimeType;
+  @IndexedEmbedded
+  @Embedded
+  private BasicMimeType mimeType;
 
-    @Basic(optional = true)
-    private Date publishedOn;
+  @Basic(optional = true)
+  private Date publishedOn;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ContentStatus status;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private ContentStatus status;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ContentTranslation> translations;
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<ContentTranslation> translations;
 
-    // @NotNull??
-    private String typeId;
+  // @NotNull??
+  private String typeId;
 
-    @Version
-    private int version;
+  @Version
+  private int version;
 
-    public Content() {
-        translations = new ArrayList<ContentTranslation>();
-        authors = new ArrayList<User>();
-        comments = new HashSet<Comment>();
-        createdOn = System.currentTimeMillis();
-        lastRevision = new Revision(this);
-        accessLists = null;
-        status = ContentStatus.editingInProgress;
+  public Content() {
+    translations = new ArrayList<ContentTranslation>();
+    authors = new ArrayList<User>();
+    comments = new HashSet<Comment>();
+    createdOn = System.currentTimeMillis();
+    lastRevision = new Revision(this);
+    accessLists = null;
+    status = ContentStatus.editingInProgress;
+  }
+
+  public void addAuthor(final User user) {
+    if (!this.authors.contains(user)) {
+      this.authors.add(user);
     }
+  }
 
-    public void addAuthor(final User user) {
-        if (!this.authors.contains(user)) {
-            this.authors.add(user);
-        }
-    }
+  public void addComment(final Comment comment) {
+    // FIXME: something related with lazy initialization (workaround using
+    // size())
+    comments.size();
+    comments.add(comment);
+  }
 
-    public void addComment(final Comment comment) {
-        // FIXME: something related with lazy initialization (workaround using
-        // size())
-        comments.size();
-        comments.add(comment);
+  public void addRevision(final Revision revision) {
+    if (lastRevision == null) {
+      lastRevision = revision;
+    } else {
+      revision.setPrevious(lastRevision);
+      lastRevision = revision;
     }
+  }
 
-    public void addRevision(final Revision revision) {
-        if (lastRevision == null) {
-            lastRevision = revision;
-        } else {
-            revision.setPrevious(lastRevision);
-            lastRevision = revision;
-        }
-    }
+  @Transient
+  public AccessLists getAccessLists() {
+    return hasAccessList() ? accessLists : getContainer().getAccessLists();
+  }
 
-    @Transient
-    public AccessLists getAccessLists() {
-        return hasAccessList() ? accessLists : getContainer().getAccessLists();
-    }
+  public List<User> getAuthors() {
+    return authors;
+  }
 
-    public List<User> getAuthors() {
-        return authors;
-    }
+  public Set<Comment> getComments() {
+    return comments;
+  }
 
-    public Set<Comment> getComments() {
-        return comments;
-    }
+  public Container getContainer() {
+    return container;
+  }
 
-    public Container getContainer() {
-        return container;
-    }
+  public Long getCreatedOn() {
+    return createdOn;
+  }
 
-    public Long getCreatedOn() {
-        return createdOn;
-    }
+  public Date getDeletedOn() {
+    return deletedOn;
+  }
 
-    public Date getDeletedOn() {
-        return deletedOn;
-    }
+  public String getFilename() {
+    return filename;
+  }
 
-    public String getFilename() {
-        return filename;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public I18nLanguage getLanguage() {
+    return language;
+  }
 
-    public I18nLanguage getLanguage() {
-        return language;
-    }
+  public Revision getLastRevision() {
+    return lastRevision;
+  }
 
-    public Revision getLastRevision() {
-        return lastRevision;
-    }
+  public License getLicense() {
+    return license;
+  }
 
-    public License getLicense() {
-        return license;
-    }
+  public BasicMimeType getMimeType() {
+    return mimeType;
+  }
 
-    public BasicMimeType getMimeType() {
-        return mimeType;
-    }
+  public Group getOwner(final Group group) {
+    return container.getOwner();
+  }
 
-    public Group getOwner(final Group group) {
-        return container.getOwner();
-    }
+  public Date getPublishedOn() {
+    return publishedOn;
+  }
 
-    public Date getPublishedOn() {
-        return publishedOn;
-    }
+  @Override
+  @Transient
+  public StateToken getStateToken() {
+    return getContainer().getStateToken().copy().setDocument(getId());
+  }
 
-    @Override
-    @Transient
-    public StateToken getStateToken() {
-        return getContainer().getStateToken().copy().setDocument(getId());
-    }
+  @Transient
+  public String getStateTokenEncoded() {
+    return getStateToken().getEncoded();
+  }
 
-    @Transient
-    public String getStateTokenEncoded() {
-        return getStateToken().getEncoded();
-    }
+  public ContentStatus getStatus() {
+    return status;
+  }
 
-    public ContentStatus getStatus() {
-        return status;
-    }
+  public String getTitle() {
+    return lastRevision.getTitle();
+  }
 
-    public String getTitle() {
-        return lastRevision.getTitle();
-    }
+  public List<ContentTranslation> getTranslations() {
+    return translations;
+  }
 
-    public List<ContentTranslation> getTranslations() {
-        return translations;
-    }
+  public String getTypeId() {
+    return typeId;
+  }
 
-    public String getTypeId() {
-        return typeId;
-    }
+  public int getVersion() {
+    return version;
+  }
 
-    public int getVersion() {
-        return version;
-    }
+  @Transient
+  public boolean hasAccessList() {
+    return accessLists != null;
+  }
 
-    @Transient
-    public boolean hasAccessList() {
-        return accessLists != null;
-    }
+  @Transient
+  public boolean isWave() {
+    return (typeId.equals(DocsConstants.TYPE_DOCUMENT)) || (typeId.equals(BlogsConstants.TYPE_POST));
+  }
 
-    public void removeAuthor(final User user) {
-        this.authors.remove(user);
-    }
+  public void removeAuthor(final User user) {
+    this.authors.remove(user);
+  }
 
-    public void setAccessLists(final AccessLists accessLists) {
-        this.accessLists = accessLists;
-    }
+  public void setAccessLists(final AccessLists accessLists) {
+    this.accessLists = accessLists;
+  }
 
-    public void setAuthors(final List<User> authors) {
-        this.authors = authors;
-    }
+  public void setAuthors(final List<User> authors) {
+    this.authors = authors;
+  }
 
-    public void setComments(final Set<Comment> comments) {
-        this.comments = comments;
-    }
+  public void setComments(final Set<Comment> comments) {
+    this.comments = comments;
+  }
 
-    public void setContainer(final Container container) {
-        this.container = container;
-    }
+  public void setContainer(final Container container) {
+    this.container = container;
+  }
 
-    public void setCreatedOn(final Long createdOn) {
-        this.createdOn = createdOn;
-    }
+  public void setCreatedOn(final Long createdOn) {
+    this.createdOn = createdOn;
+  }
 
-    public void setDeletedOn(final Date date) {
-        this.deletedOn = date;
-    }
+  public void setDeletedOn(final Date date) {
+    this.deletedOn = date;
+  }
 
-    public void setFilename(final String filename) {
-        this.filename = filename;
-    }
+  public void setFilename(final String filename) {
+    this.filename = filename;
+  }
 
-    // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
+  public void setLanguage(final I18nLanguage language) {
+    this.language = language;
+  }
 
-    public void setLastRevision(final Revision revision) {
-        this.lastRevision = revision;
-    }
+  public void setLastRevision(final Revision revision) {
+    this.lastRevision = revision;
+  }
 
-    public void setLicense(final License license) {
-        this.license = license;
-    }
+  public void setLicense(final License license) {
+    this.license = license;
+  }
 
-    public void setMimeType(final BasicMimeType mimeType) {
-        this.mimeType = mimeType;
-    }
+  public void setMimeType(final BasicMimeType mimeType) {
+    this.mimeType = mimeType;
+  }
 
-    public void setPublishedOn(final Date publishedOn) {
-        this.publishedOn = publishedOn;
-    }
+  public void setPublishedOn(final Date publishedOn) {
+    this.publishedOn = publishedOn;
+  }
 
-    public void setStatus(final ContentStatus status) {
-        this.status = status;
-    }
+  public void setStatus(final ContentStatus status) {
+    this.status = status;
+  }
 
-    public void setTranslations(final List<ContentTranslation> translations) {
-        this.translations = translations;
-    }
+  public void setTranslations(final List<ContentTranslation> translations) {
+    this.translations = translations;
+  }
 
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
+  public void setTypeId(final String typeId) {
+    this.typeId = typeId;
+  }
 
-    public void setVersion(final int version) {
-        this.version = version;
-    }
+  public void setVersion(final int version) {
+    this.version = version;
+  }
 
-    @Override
-    public String toString() {
-        return "Content[(" + getStateTokenEncoded() + "): " + getTitle() + "]";
-    }
+  @Override
+  public String toString() {
+    return "Content[(" + getStateTokenEncoded() + "): " + getTitle() + "]";
+  }
 
 }

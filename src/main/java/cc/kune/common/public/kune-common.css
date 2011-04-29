@@ -618,3 +618,19 @@
 }
 
 /* End tabbar */
+
+.k-editableLabel {
+  font-weight: bold;
+  padding: 3px
+}
+
+.k-editableLabel-high {
+  font-weight: bold;
+  background-color: #FFFBC1;
+  color: black !important;
+}
+
+.k-editableLabel-high span {
+  background-color: #FFFBC1;
+  color: black !important;
+}

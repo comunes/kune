@@ -3,19 +3,23 @@
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style>
     .label {
-        text-decoration: none;
+      text-decoration: none;
     }
 
     .label a:link {
-        text-decoration: none;
-        color: gray;
+      text-decoration: none;
+      color: gray;
     }
 
-    .pad {
-        /* white-space: nowrap; */
+    .pad { /* white-space: nowrap; */
+      outline: 0 none;
+    }
+
+    .self {
+      outline: 0 none;
     }
   </ui:style>
-  <g:FocusPanel ui:field="self">
+  <g:FocusPanel styleName="{style.self}" ui:field="self" >
     <g:FlowPanel styleName="{style.pad}" ui:field="flow">
       <g:Image ui:field="iconLeft" />
       <g:Image ui:field="iconRight" />
