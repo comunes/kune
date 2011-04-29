@@ -21,31 +21,30 @@ package cc.kune.common.client.ui.dialogs;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.HasDirectionalText;
-import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 
 public interface BasicDialogView {
 
-    ForIsWidget getBottomPanel();
+  ForIsWidget getBottomPanel();
 
-    HasClickHandlers getFirstBtn();
+  HasClickHandlers getFirstBtn();
 
-    HasText getFirstBtnText();
+  ForIsWidget getInnerPanel();
 
-    ForIsWidget getInnerPanel();
+  HasClickHandlers getSecondBtn();
 
-    HasClickHandlers getSecondBtn();
+  HasDirectionalText getTitleText();
 
-    HasText getSecondBtnText();
+  void setFirstBtnText(String text);
 
-    HasDirectionalText getTitleText();
+  void setFirstBtnTitle(String title);
 
-    void setFirstBtnTitle(String title);
+  void setFirstBtnVisible(boolean visible);
 
-    void setFirstBtnVisible(boolean visible);
+  void setSecondBtnText(String text);
 
-    void setSecondBtnTitle(String title);
+  void setSecondBtnTitle(String title);
 
-    void setSecondBtnVisible(boolean visible);
+  void setSecondBtnVisible(boolean visible);
 
 }

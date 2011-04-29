@@ -31,7 +31,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
-import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -81,22 +80,12 @@ public class BasicDialog extends Composite implements BasicDialogView {
   }
 
   @Override
-  public HasText getFirstBtnText() {
-    return firstBtn;
-  }
-
-  @Override
   public ForIsWidget getInnerPanel() {
     return vp;
   }
 
   @Override
   public HasClickHandlers getSecondBtn() {
-    return secondBtn;
-  }
-
-  @Override
-  public HasText getSecondBtnText() {
     return secondBtn;
   }
 
@@ -111,6 +100,12 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   public void setFirstBtnTabIndex(final int index) {
     firstBtn.setTabIndex(index);
+  }
+
+  @Override
+  public void setFirstBtnText(final String text) {
+    firstBtn.setText(text);
+    firstBtn.setVisible(TextUtils.notEmpty(text));
   }
 
   @Override
@@ -129,6 +124,12 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   public void setSecondBtnTabIndex(final int index) {
     secondBtn.setTabIndex(index);
+  }
+
+  @Override
+  public void setSecondBtnText(final String text) {
+    secondBtn.setText(text);
+    secondBtn.setVisible(TextUtils.notEmpty(text));
   }
 
   @Override
