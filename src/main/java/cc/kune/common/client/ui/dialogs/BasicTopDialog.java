@@ -19,7 +19,6 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.common.client.utils.TextUtils;
 
@@ -203,15 +202,9 @@ public class BasicTopDialog extends BasicDialog {
       }
     }
     if (newWidth != null) {
-      NotifyUser.info(newWidth);
-      // popup.setWidth(newWidth);
-      // super.setWidth(newWidth);
       super.setInnerWidth(newWidth);
     }
     if (newHeight != null) {
-      NotifyUser.info(newHeight);
-      // popup.setHeight(newHeight);
-      // super.setHeight(newHeight);
       super.setInnerHeight(newHeight);
     }
   }
