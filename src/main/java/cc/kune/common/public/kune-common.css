@@ -138,17 +138,17 @@
   color: #552200;
   font-size: 20px;
   font-weight: bold;
-  margin: 0 0 0 6px;
+  margin: 0 0 0 0px;
 }
 
 .k-dialog-innerp {
   background-color: #FFFFFF;
   border: solid 1px #F2F2F2;
-  margin: 0px 4px 10px;
+  margin: 34px 16px 20px 16px;
 }
 
 .k-dialog-btn-area {
-  padding: 0 5px 5px 5px;
+  padding: 0 15px 15px 15px;
   margin-bottom: 30px;
 }
 
@@ -633,4 +633,8 @@
 .k-editableLabel-high span {
   background-color: #FFFBC1;
   color: black !important;
+}
+
+.k-btn-min {
+  min-width: 19px !important;
 }

@@ -7,7 +7,6 @@ import org.waveprotocol.box.webclient.client.SimpleWaveStore;
 import org.waveprotocol.box.webclient.client.StagesProvider;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
 import org.waveprotocol.box.webclient.search.WaveStore;
-import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.box.webclient.widget.loading.LoadingIndicator;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.account.impl.ProfileManagerImpl;
@@ -44,147 +43,141 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 public class DocViewerPanel extends ViewImpl implements DocViewerView {
-    interface DocsViewerPanelUiBinder extends UiBinder<Widget, DocViewerPanel> {
+  interface DocsViewerPanelUiBinder extends UiBinder<Widget, DocViewerPanel> {
+  }
+
+  private static DocsViewerPanelUiBinder uiBinder = GWT.create(DocsViewerPanelUiBinder.class);
+
+  private final ContentCapabilitiesRegistry capabilitiesRegistry;
+  private RemoteViewServiceMultiplexer channel;
+  private final ContentTitleWidget contentTitle;
+  @UiField
+  DeckPanel deck;
+  private final GSpaceArmor gsArmor;
+  private IdGenerator idGenerator;
+  private final Element loading = new LoadingIndicator().getElement();
+  @UiField
+  InlineHTML onlyViewPanel;
+  private ProfileManager profiles;
+  /** The wave panel, if a wave is open. */
+  private StagesProvider wave;
+  @UiField
+  ImplPanel waveHolder;
+  private final WaveStore waveStore = new SimpleWaveStore();
+
+  private final Widget widget;
+
+  @Inject
+  public DocViewerPanel(final GSpaceArmor wsArmor,
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n) {
+    this.gsArmor = wsArmor;
+    this.capabilitiesRegistry = capabilitiesRegistry;
+    widget = uiBinder.createAndBindUi(this);
+    contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+  }
+
+  @Override
+  public Widget asWidget() {
+    return widget;
+  }
+
+  @Override
+  public void attach() {
+    final ForIsWidget docContainer = gsArmor.getDocContainer();
+    docContainer.add(widget);
+  }
+
+  @Override
+  public void clear() {
+    onlyViewPanel.setHTML("");
+    gsArmor.getSubheaderToolbar().clear();
+    UiUtils.clear(gsArmor.getDocContainer());
+    UiUtils.clear(gsArmor.getDocHeader());
+  }
+
+  @Override
+  public void detach() {
+    clear();
+  }
+
+  @Override
+  public HasEditHandler getEditTitle() {
+    return contentTitle.getEditableTitle();
+  }
+
+  private WaveRef getWaveRef(final String waveRefS) {
+    try {
+      return GwtWaverefEncoder.decodeWaveRefFromPath(waveRefS);
+    } catch (final InvalidWaveRefException e) {
+      throw new UIException("Invalid waveref: " + waveRefS);
+    }
+  }
+
+  private void initWaveClientIfNeeded() {
+    if (channel == null) {
+      final WaveWebSocketClient webSocket = new WaveWebSocketClient(WebClient.useSocketIO(),
+          WebClient.getWebSocketBaseUrl(GWT.getModuleBaseURL()));
+      webSocket.connect();
+      channel = new RemoteViewServiceMultiplexer(webSocket,
+          new ParticipantId(Session.get().getAddress()).getAddress());
+      profiles = new ProfileManagerImpl(Session.get().getDomain());
+      idGenerator = ClientIdGenerator.create();
+    }
+  }
+
+  @Override
+  public void setActions(final GuiActionDescCollection actions) {
+    gsArmor.getSubheaderToolbar().clear();
+    gsArmor.getSubheaderToolbar().addAll(actions);
+  }
+
+  @Override
+  public void setContent(final StateContentDTO state) {
+    final boolean editable = state.getContentRights().isEditable();
+    setTitle(state, editable);
+    onlyViewPanel.setHTML(SafeHtmlUtils.fromTrustedString(state.getContent()));
+    deck.showWidget(1);
+  }
+
+  @Override
+  public void setEditableContent(final StateContentDTO state) {
+    setTitle(state, true);
+    initWaveClientIfNeeded();
+    setEditableWaveContent(state.getWaveRef(), false);
+    deck.showWidget(0);
+  }
+
+  @Override
+  public void setEditableTitle(final String title) {
+    contentTitle.setText(title);
+  }
+
+  private void setEditableWaveContent(final String waveRefS, final boolean isNewWave) {
+    final WaveRef waveRef = getWaveRef(waveRefS);
+
+    if (wave != null) {
+      wave.destroy();
+      wave = null;
     }
 
-    private static DocsViewerPanelUiBinder uiBinder = GWT.create(DocsViewerPanelUiBinder.class);
+    // Release the display:none.
+    // UIObject.setVisible(waveFrame.getElement(), true);
+    waveHolder.getElement().appendChild(loading);
+    final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
+    final StagesProvider wave = new StagesProvider(holder, waveHolder, waveRef, channel, idGenerator,
+        profiles, waveStore, isNewWave);
+    this.wave = wave;
+    wave.load(new Command() {
+      @Override
+      public void execute() {
+        loading.removeFromParent();
+      }
+    });
+  }
 
-    private final ContentCapabilitiesRegistry capabilitiesRegistry;
-    private RemoteViewServiceMultiplexer channel;
-    private final ContentTitleWidget contentTitle;
-    @UiField
-    DeckPanel deck;
-    private final GSpaceArmor gsArmor;
-    private IdGenerator idGenerator;
-    private final Element loading = new LoadingIndicator().getElement();
-    @UiField
-    InlineHTML onlyViewPanel;
-    private ProfileManager profiles;
-    /** The wave panel, if a wave is open. */
-    private StagesProvider wave;
-    @UiField
-    FramedPanel waveFrame;
-    @UiField
-    ImplPanel waveHolder;
-    private final WaveStore waveStore = new SimpleWaveStore();
-
-    private final Widget widget;
-
-    @Inject
-    public DocViewerPanel(final GSpaceArmor wsArmor, final ContentCapabilitiesRegistry capabilitiesRegistry,
-            final I18nTranslationService i18n) {
-        this.gsArmor = wsArmor;
-        this.capabilitiesRegistry = capabilitiesRegistry;
-        widget = uiBinder.createAndBindUi(this);
-        contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
-    }
-
-    @Override
-    public Widget asWidget() {
-        return widget;
-    }
-
-    @Override
-    public void attach() {
-        final ForIsWidget docContainer = gsArmor.getDocContainer();
-        docContainer.add(widget);
-    }
-
-    @Override
-    public void clear() {
-        onlyViewPanel.setHTML("");
-        gsArmor.getSubheaderToolbar().clear();
-        UiUtils.clear(gsArmor.getDocContainer());
-        UiUtils.clear(gsArmor.getDocHeader());
-    }
-
-    @Override
-    public void detach() {
-        clear();
-    }
-
-    @Override
-    public HasEditHandler getEditTitle() {
-        return contentTitle.getEditableTitle();
-    }
-
-    private WaveRef getWaveRef(final String waveRefS) {
-        try {
-            return GwtWaverefEncoder.decodeWaveRefFromPath(waveRefS);
-        } catch (final InvalidWaveRefException e) {
-            throw new UIException("Invalid waveref: " + waveRefS);
-        }
-    }
-
-    private void initWaveClientIfNeeded() {
-        if (channel == null) {
-            final WaveWebSocketClient webSocket = new WaveWebSocketClient(WebClient.useSocketIO(),
-                    WebClient.getWebSocketBaseUrl(GWT.getModuleBaseURL()));
-            webSocket.connect();
-            channel = new RemoteViewServiceMultiplexer(webSocket,
-                    new ParticipantId(Session.get().getAddress()).getAddress());
-            profiles = new ProfileManagerImpl(Session.get().getDomain());
-            idGenerator = ClientIdGenerator.create();
-        }
-    }
-
-    @Override
-    public void setActions(final GuiActionDescCollection actions) {
-        gsArmor.getSubheaderToolbar().clear();
-        gsArmor.getSubheaderToolbar().addAll(actions);
-    }
-
-    @Override
-    public void setContent(final StateContentDTO state) {
-        final boolean editable = state.getContentRights().isEditable();
-        setTitle(state, editable);
-        onlyViewPanel.setHTML(SafeHtmlUtils.fromTrustedString(state.getContent()));
-        deck.showWidget(1);
-    }
-
-    @Override
-    public void setEditableContent(final StateContentDTO state) {
-        setTitle(state, true);
-        initWaveClientIfNeeded();
-        setEditableWaveContent(state.getWaveRef(), false);
-        deck.showWidget(0);
-        // waveHolder.clear();
-        // waveHolder.add(new Label(state.getContent()
-        // + " (but here goes the Wave editor -we are testing it-)"));
-        // onlyViewPanel.setHTML(SafeHtmlUtils.fromTrustedString(state.getContent()));
-    }
-
-    @Override
-    public void setEditableTitle(final String title) {
-        contentTitle.setText(title);
-    }
-
-    private void setEditableWaveContent(final String waveRefS, final boolean isNewWave) {
-        final WaveRef waveRef = getWaveRef(waveRefS);
-
-        if (wave != null) {
-            wave.destroy();
-            wave = null;
-        }
-
-        // Release the display:none.
-        // UIObject.setVisible(waveFrame.getElement(), true);
-        waveHolder.getElement().appendChild(loading);
-        final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-        final StagesProvider wave = new StagesProvider(holder, waveHolder, waveRef, channel, idGenerator, profiles,
-                waveStore, isNewWave);
-        this.wave = wave;
-        wave.load(new Command() {
-            @Override
-            public void execute() {
-                loading.removeFromParent();
-            }
-        });
-    }
-
-    private void setTitle(final StateContentDTO state, final boolean editable) {
-        contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable
-                && capabilitiesRegistry.isRenamable(state.getTypeId()));
-    }
+  private void setTitle(final StateContentDTO state, final boolean editable) {
+    contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable
+        && capabilitiesRegistry.isRenamable(state.getTypeId()));
+  }
 
 }

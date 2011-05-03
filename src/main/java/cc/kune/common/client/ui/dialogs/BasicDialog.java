@@ -118,6 +118,14 @@ public class BasicDialog extends Composite implements BasicDialogView {
     firstBtn.setVisible(visible);
   }
 
+  public void setInnerHeight(final String height) {
+    vp.setHeight(height);
+  }
+
+  public void setInnerWidth(final String width) {
+    vp.setWidth(width);
+  }
+
   public void setSecondBtnId(final String id) {
     secondBtn.ensureDebugId(id);
   }

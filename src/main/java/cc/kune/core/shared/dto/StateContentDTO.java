@@ -30,145 +30,154 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class StateContentDTO extends StateContainerDTO implements IsSerializable, HasContent {
 
-    private List<UserSimpleDTO> authors;
-    private String content;
-    private AccessRights contentRights;
-    private Double currentUserRate;
-    private String documentId;
-    private boolean isParticipant;
-    private BasicMimeTypeDTO mimeType;
-    private Date publishedOn;
-    private Double rate;
-    private Integer rateByUsers;
-    private ContentStatus status;
-    private String tags;
-    private int version;
-    private String waveRef;
+  private List<UserSimpleDTO> authors;
+  private String content;
+  private AccessRights contentRights;
+  private Double currentUserRate;
+  private String documentId;
+  private boolean isParticipant;
+  private BasicMimeTypeDTO mimeType;
+  private Date publishedOn;
+  private Double rate;
+  private Integer rateByUsers;
+  private ContentStatus status;
+  private String tags;
+  private int version;
+  private String waveRef;
 
-    public StateContentDTO() {
-    }
+  public StateContentDTO() {
+  }
 
-    public List<UserSimpleDTO> getAuthors() {
-        return authors;
-    }
+  public List<UserSimpleDTO> getAuthors() {
+    return authors;
+  }
 
-    public String getContent() {
-        return content;
-    }
+  public String getContent() {
+    return content;
+  }
 
-    public AccessRights getContentRights() {
-        return contentRights;
-    }
+  public AccessRights getContentRights() {
+    return contentRights;
+  }
 
-    public Double getCurrentUserRate() {
-        return currentUserRate;
-    }
+  public Double getCurrentUserRate() {
+    return currentUserRate;
+  }
 
-    public String getDocumentId() {
-        return documentId;
-    }
+  public String getDocumentId() {
+    return documentId;
+  }
 
-    public BasicMimeTypeDTO getMimeType() {
-        return mimeType;
-    }
+  public boolean getIsParticipant() {
+    return isParticipant;
+  }
 
-    public Date getPublishedOn() {
-        return publishedOn;
-    }
+  public BasicMimeTypeDTO getMimeType() {
+    return mimeType;
+  }
 
-    public Double getRate() {
-        return rate;
-    }
+  public Date getPublishedOn() {
+    return publishedOn;
+  }
 
-    public Integer getRateByUsers() {
-        return rateByUsers;
-    }
+  public Double getRate() {
+    return rate;
+  }
 
-    public ContentStatus getStatus() {
-        return status;
-    }
+  public Integer getRateByUsers() {
+    return rateByUsers;
+  }
 
-    public String getTags() {
-        return tags;
-    }
+  public ContentStatus getStatus() {
+    return status;
+  }
 
-    public int getVersion() {
-        return version;
-    }
+  public String getTags() {
+    return tags;
+  }
 
-    public String getWaveRef() {
-        return waveRef;
-    }
+  public int getVersion() {
+    return version;
+  }
 
-    public boolean isParticipant() {
-        return isParticipant;
-    }
+  public String getWaveRef() {
+    return waveRef;
+  }
 
-    public void setAuthors(final List<UserSimpleDTO> authors) {
-        this.authors = authors;
-    }
+  public boolean isParticipant() {
+    return isParticipant;
+  }
 
-    public void setContent(final String content) {
-        this.content = content;
-    }
+  public boolean isWave() {
+    return waveRef != null;
+  }
 
-    public void setContentRights(final AccessRights contentRights) {
-        this.contentRights = contentRights;
-    }
+  public void setAuthors(final List<UserSimpleDTO> authors) {
+    this.authors = authors;
+  }
 
-    public void setCurrentUserRate(final Double currentUserRate) {
-        this.currentUserRate = currentUserRate;
-    }
+  public void setContent(final String content) {
+    this.content = content;
+  }
 
-    public void setDocumentId(final String documentId) {
-        this.documentId = documentId;
-    }
+  public void setContentRights(final AccessRights contentRights) {
+    this.contentRights = contentRights;
+  }
 
-    void setIsParticipant(final boolean isParticipant) {
-        this.isParticipant = isParticipant;
-    }
+  public void setCurrentUserRate(final Double currentUserRate) {
+    this.currentUserRate = currentUserRate;
+  }
 
-    public void setMimeType(final BasicMimeTypeDTO mimeType) {
-        this.mimeType = mimeType;
-    }
+  public void setDocumentId(final String documentId) {
+    this.documentId = documentId;
+  }
 
-    public void setPublishedOn(final Date publishedOn) {
-        this.publishedOn = publishedOn;
-    }
+  public void setIsParticipant(final boolean isParticipant) {
+    this.isParticipant = isParticipant;
+  }
 
-    public void setRate(final Double rate) {
-        this.rate = rate;
-    }
+  public void setMimeType(final BasicMimeTypeDTO mimeType) {
+    this.mimeType = mimeType;
+  }
 
-    public void setRate(final RateResult result) {
-        setRate(result.getRate());
-        setRateByUsers(result.getRateByUsers());
-        setCurrentUserRate(result.getCurrentUserRate());
-    }
+  public void setPublishedOn(final Date publishedOn) {
+    this.publishedOn = publishedOn;
+  }
 
-    public void setRateByUsers(final Integer rateByUsers) {
-        this.rateByUsers = rateByUsers;
-    }
+  public void setRate(final Double rate) {
+    this.rate = rate;
+  }
 
-    public void setStatus(final ContentStatus status) {
-        this.status = status;
-    }
+  public void setRate(final RateResult result) {
+    setRate(result.getRate());
+    setRateByUsers(result.getRateByUsers());
+    setCurrentUserRate(result.getCurrentUserRate());
+  }
 
-    public void setTags(final String tags) {
-        this.tags = tags;
-    }
+  public void setRateByUsers(final Integer rateByUsers) {
+    this.rateByUsers = rateByUsers;
+  }
 
-    public void setVersion(final int version) {
-        this.version = version;
-    }
+  public void setStatus(final ContentStatus status) {
+    this.status = status;
+  }
 
-    public void setWaveRef(final String waveRef) {
-        this.waveRef = waveRef;
-    }
+  public void setTags(final String tags) {
+    this.tags = tags;
+  }
 
-    @Override
-    public String toString() {
-        return "StateDTO[" + getStateToken() + "/" + getTypeId() + (mimeType != null ? "-" + mimeType : "") + "]";
-    }
+  public void setVersion(final int version) {
+    this.version = version;
+  }
+
+  public void setWaveRef(final String waveRef) {
+    this.waveRef = waveRef;
+  }
+
+  @Override
+  public String toString() {
+    return "StateDTO[" + getStateToken() + "/" + getTypeId() + (mimeType != null ? "-" + mimeType : "")
+        + "]";
+  }
 
 }

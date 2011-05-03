@@ -27,109 +27,61 @@ import com.google.gwt.user.client.ui.UIObject;
 
 public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
 
-    private String height;
-    private boolean showCentered = true;
-    protected UIObject showNearObject;
-    private String width;
+  private boolean showCentered = true;
+  protected UIObject showNearObject;
 
-    public AbstractAtBorderPopupPanel() {
-        super(false, false);
-    }
+  public AbstractAtBorderPopupPanel() {
+    super(false, false);
+  }
 
-    public AbstractAtBorderPopupPanel(final boolean autohide) {
-        this(autohide, false);
-    }
+  public AbstractAtBorderPopupPanel(final boolean autohide) {
+    this(autohide, false);
+  }
 
-    public AbstractAtBorderPopupPanel(final boolean autohide, final boolean modal) {
-        super(autohide, modal);
-        setGlassEnabled(modal);
-        init();
-    }
+  public AbstractAtBorderPopupPanel(final boolean autohide, final boolean modal) {
+    super(autohide, modal);
+    setGlassEnabled(modal);
+    init();
+  }
 
-    private String calculatePercent(final int currentSize, final String percent) {
-        return String.valueOf(currentSize * Integer.valueOf(percent.replace("%", "")) / 100) + "px";
-    }
+  public void defaultStyle() {
+    addStyleName("k-opacity90");
+    addStyleName("k-box-10shadow");
+  }
 
-    public void defaultStyle() {
-        addStyleName("k-opacity90");
-        addStyleName("k-box-10shadow");
-    }
-
-    private void init() {
-        setSizes();
-        Window.addResizeHandler(new ResizeHandler() {
-            @Override
-            public void onResize(final ResizeEvent event) {
-                setSizeWithListener(event.getWidth(), event.getHeight());
-                if (isShowing()) {
-                    if (showCentered) {
-                        setCenterPositionImpl();
-                    } else {
-                        showRelativeImpl();
-                    }
-                }
-            }
-        });
-    }
-
-    public void setCenterPosition() {
-        setCenterPositionImpl();
-    }
-
-    protected abstract void setCenterPositionImpl();
-
-    @Override
-    public void setHeight(final String height) {
-        this.height = height;
-        setSizes();
-    }
-
-    @Override
-    public void setSize(final String width, final String height) {
-        this.width = width;
-        this.height = height;
-        setSizes();
-    }
-
-    private void setSizes() {
-        setSizeWithListener(Window.getClientWidth(), Window.getClientHeight());
-    }
-
-    private void setSizeWithListener(final int windowWidth, final int windowHeight) {
-        if (width != null) {
-            if (width.contains("%")) {
-                calculatePercent(windowWidth, width);
-            } else {
-                super.setWidth(width);
-            }
+  private void init() {
+    Window.addResizeHandler(new ResizeHandler() {
+      @Override
+      public void onResize(final ResizeEvent event) {
+        if (isShowing()) {
+          if (showCentered) {
+            setCenterPositionImpl();
+          } else {
+            showRelativeImpl();
+          }
         }
-        if (height != null) {
-            if (height.contains("%")) {
-                calculatePercent(windowHeight, height);
-            } else {
-                super.setHeight(height);
-            }
-        }
-    }
+      }
+    });
+  }
 
-    @Override
-    public void setWidth(final String width) {
-        this.width = width;
-        setSizes();
-    }
+  public void setCenterPosition() {
+    setCenterPositionImpl();
+  }
 
-    public void showCentered() {
-        showCentered = true;
-        setCenterPositionImpl();
-    }
+  protected abstract void setCenterPositionImpl();
 
-    public void showNear(final UIObject object) {
-        this.showNearObject = object;
-        showCentered = false;
-        showRelativeImpl();
-    }
+  public void showCentered() {
+    showCentered = true;
+    setCenterPositionImpl();
+  }
 
-    private void showRelativeImpl() {
-        showRelativeTo(showNearObject);
-    }
+  public void showNear(final UIObject object) {
+    this.showNearObject = object;
+    showCentered = false;
+    showRelativeImpl();
+  }
+
+  private void showRelativeImpl() {
+    showRelativeTo(showNearObject);
+  }
 }

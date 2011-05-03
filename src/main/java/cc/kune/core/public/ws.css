@@ -17,7 +17,7 @@ body.fontface {
   font: 'Ubuntu', Arial;
 }
 
-div, span {
+div,span {
   outline: 0 none;
 }
 
@@ -870,6 +870,10 @@ a:visited {
   outline: 0 none;
   /* height: 26px !important; */
   font-weight: bold;
+  width: auto !IMPORTANT;
+  width: 50px;
+  min-width: 50px;
+  "
   /*
 font-size:small;
     cursor: pointer;
@@ -877,18 +881,21 @@ font-size:small;
     padding-left: 25px !important; */
 }
 
-.k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover,button.k-button:hover  {
+.k-sn-mainpanel .x-btn button:hover,.k-sn-mainpanel button:hover,button.k-button:hover
+  {
   border: 2px orange solid;
   outline: 0 none;
   /* background: #f0f0f0; */
 }
 
-.k-sn-mainpanel .x-btn button:hover span,.k-sn-mainpanel button:hover span,button.k-button:hover span {
+.k-sn-mainpanel .x-btn button:hover span,.k-sn-mainpanel button:hover span,button.k-button:hover span
+  {
   color: brown !important;
   outline: 0 none;
 }
 
-.k-sn-mainpanel .x-btn button:active,.k-sn-mainpanel button:active,button.k-button:active {
+.k-sn-mainpanel .x-btn button:active,.k-sn-mainpanel button:active,button.k-button:active
+  {
   border-top-color: #ffffff;
   background: #ffffff;
 }
@@ -1138,6 +1145,6 @@ button.k-ent-header-btn {
 }
 
 table.k-folder-viewer {
-    border: 5px solid #FFF;
-    border-collapse: separate;
+  border: 5px solid #FFF;
+  border-collapse: separate;
 }
