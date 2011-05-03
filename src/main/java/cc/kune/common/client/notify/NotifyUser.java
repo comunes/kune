@@ -88,6 +88,10 @@ public class NotifyUser {
 
     }
 
+    public static void logError(final String message) {
+        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.log, message));
+    }
+
     public static void showAlertMessage(final String title, final String message) {
         showAlertMessage(title, message, onOk);
     }

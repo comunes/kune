@@ -20,8 +20,6 @@ public class AboutKuneDialog {
     public static final String ABOUT_KUNE_BTN_ID = "kune-about-button-diag";
     public static final String ABOUT_KUNE_ID = "kune-about-diag";
     private static final Binder BINDER = GWT.create(Binder.class);
-
-    public static final String SITE_OPTIONS_MENU = "kune-sop-om";
     private final BasicTopDialog dialog;
     @UiField
     FlowPanel flow;
@@ -31,7 +29,7 @@ public class AboutKuneDialog {
     @Inject
     public AboutKuneDialog(final I18nTranslationService i18n) {
         dialog = new BasicTopDialog.Builder(ABOUT_KUNE_ID, true, true).title(i18n.t("About Kune")).autoscroll(false).firstButtonTitle(
-                i18n.t("Ok")).firstButtonId(ABOUT_KUNE_BTN_ID).tabIndexStart(1).build();
+                i18n.t("Ok")).firstButtonId(ABOUT_KUNE_BTN_ID).tabIndexStart(1).height("70%").build();
         dialog.getInnerPanel().add(BINDER.createAndBindUi(this));
         dialog.getFirstBtn().addClickHandler(new ClickHandler() {
             @Override

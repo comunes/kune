@@ -35,6 +35,7 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
     private AccessRights contentRights;
     private Double currentUserRate;
     private String documentId;
+    private boolean isParticipant;
     private BasicMimeTypeDTO mimeType;
     private Date publishedOn;
     private Double rate;
@@ -99,6 +100,10 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
         return waveRef;
     }
 
+    public boolean isParticipant() {
+        return isParticipant;
+    }
+
     public void setAuthors(final List<UserSimpleDTO> authors) {
         this.authors = authors;
     }
@@ -117,6 +122,10 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
 
     public void setDocumentId(final String documentId) {
         this.documentId = documentId;
+    }
+
+    void setIsParticipant(final boolean isParticipant) {
+        this.isParticipant = isParticipant;
     }
 
     public void setMimeType(final BasicMimeTypeDTO mimeType) {

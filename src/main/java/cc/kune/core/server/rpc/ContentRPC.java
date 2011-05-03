@@ -169,6 +169,17 @@ public class ContentRPC implements ContentService, RPC {
 
     @Override
     @Authenticated
+    @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
+    @Transactional
+    public void addParticipant(final String userHash, final StateToken token, final String participant)
+            throws DefaultException {
+        final Long contentId = ContentUtils.parseId(token.getDocument());
+        final User user = getCurrentUser();
+        contentManager.addParticipant(user, contentId, participant);
+    }
+
+    @Override
+    @Authenticated
     @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
     @Transactional
     public StateContainerDTO addRoom(final String userHash, final StateToken parentToken, final String roomName)

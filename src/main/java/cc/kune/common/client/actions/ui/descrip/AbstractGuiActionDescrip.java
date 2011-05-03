@@ -239,6 +239,12 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     }
 
     @Override
+    public GuiActionDescrip withId(final String id) {
+        setId(id);
+        return this;
+    }
+
+    @Override
     public GuiActionDescrip withParent(final GuiActionDescrip parent) {
         setParent(parent);
         return this;

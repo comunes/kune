@@ -80,6 +80,8 @@ public interface GuiActionDescrip {
 
     GuiActionDescrip withIconCls(String icon);
 
+    GuiActionDescrip withId(String id);
+
     GuiActionDescrip withParent(GuiActionDescrip parent);
 
     GuiActionDescrip withShortcut(KeyStroke keystroke);

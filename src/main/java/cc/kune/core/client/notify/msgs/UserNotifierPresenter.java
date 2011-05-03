@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.notify.msgs;
 
+import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierProxy;
 import cc.kune.core.client.notify.msgs.UserNotifierPresenter.UserNotifierView;
 
@@ -46,8 +47,10 @@ public class UserNotifierPresenter extends Presenter<UserNotifierView, UserNotif
     }
 
     @ProxyEvent
-    public void onUserNotify(UserNotifyEvent event) {
-        getView().notify(event);
+    public void onUserNotify(final UserNotifyEvent event) {
+        if (event.getLevel() != NotifyLevel.log) {
+            getView().notify(event);
+        }
     }
 
     @Override

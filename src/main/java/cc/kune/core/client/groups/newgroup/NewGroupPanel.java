@@ -89,7 +89,6 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
         dialog = builder.build();
         this.i18n = i18n;
         this.mask = mask;
-        // Field.setMsgTarget("side");
         form = createNewGroupInitialDataForm();
 
         messageErrorBar = new MessageToolbar(img, ERROR_MSG_BAR);

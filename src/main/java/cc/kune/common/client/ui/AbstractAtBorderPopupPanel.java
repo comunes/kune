@@ -27,8 +27,10 @@ import com.google.gwt.user.client.ui.UIObject;
 
 public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
 
+    private String height;
     private boolean showCentered = true;
     protected UIObject showNearObject;
+    private String width;
 
     public AbstractAtBorderPopupPanel() {
         super(false, false);
@@ -44,15 +46,21 @@ public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
         init();
     }
 
+    private String calculatePercent(final int currentSize, final String percent) {
+        return String.valueOf(currentSize * Integer.valueOf(percent.replace("%", "")) / 100) + "px";
+    }
+
     public void defaultStyle() {
         addStyleName("k-opacity90");
         addStyleName("k-box-10shadow");
     }
 
     private void init() {
+        setSizes();
         Window.addResizeHandler(new ResizeHandler() {
             @Override
             public void onResize(final ResizeEvent event) {
+                setSizeWithListener(event.getWidth(), event.getHeight());
                 if (isShowing()) {
                     if (showCentered) {
                         setCenterPositionImpl();
@@ -69,6 +77,46 @@ public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
     }
 
     protected abstract void setCenterPositionImpl();
+
+    @Override
+    public void setHeight(final String height) {
+        this.height = height;
+        setSizes();
+    }
+
+    @Override
+    public void setSize(final String width, final String height) {
+        this.width = width;
+        this.height = height;
+        setSizes();
+    }
+
+    private void setSizes() {
+        setSizeWithListener(Window.getClientWidth(), Window.getClientHeight());
+    }
+
+    private void setSizeWithListener(final int windowWidth, final int windowHeight) {
+        if (width != null) {
+            if (width.contains("%")) {
+                calculatePercent(windowWidth, width);
+            } else {
+                super.setWidth(width);
+            }
+        }
+        if (height != null) {
+            if (height.contains("%")) {
+                calculatePercent(windowHeight, height);
+            } else {
+                super.setHeight(height);
+            }
+        }
+    }
+
+    @Override
+    public void setWidth(final String width) {
+        this.width = width;
+        setSizes();
+    }
 
     public void showCentered() {
         showCentered = true;

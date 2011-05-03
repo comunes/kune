@@ -59,6 +59,7 @@ import cc.kune.core.client.notify.msgs.UserNotifierViewImpl;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.notify.spiner.SpinerViewImpl;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sitebar.SitebarActions;
@@ -207,6 +208,8 @@ public class CoreGinModule extends ExtendedGinModule {
         s(SitebarNewGroupLink.class);
         s(SitebarSignInLink.class);
         s(SitebarSignOutLink.class);
+
+        s(ErrorsDialog.class);
     }
 
 }

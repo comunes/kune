@@ -20,5 +20,5 @@
 package cc.kune.common.client.notify;
 
 public enum NotifyLevel {
-    info, important, veryImportant, error
+    error, important, info, log, veryImportant
 }

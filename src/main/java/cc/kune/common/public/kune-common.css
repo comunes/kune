@@ -144,11 +144,11 @@
 .k-dialog-innerp {
   background-color: #FFFFFF;
   border: solid 1px #F2F2F2;
-  margin: 34px 16px 20px 16px;
+  margin: 0px 4px 10px;
 }
 
 .k-dialog-btn-area {
-  padding: 0 15px 15px 15px;
+  padding: 0 5px 5px 5px;
   margin-bottom: 30px;
 }
 

@@ -9,7 +9,8 @@ import com.google.inject.Inject;
 public class GoParentBlogBtn extends GoParentContainerBtn {
 
     @Inject
-    public GoParentBlogBtn(final I18nTranslationService i18n, final GoParentContainerAction action, final CoreResources res) {
+    public GoParentBlogBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
+            final CoreResources res) {
         super(i18n, action, res);
     }
 

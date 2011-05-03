@@ -26,7 +26,7 @@ import org.adamtacy.client.ui.effects.examples.Show;
 
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.utils.TextUtils;
-import cc.kune.msgs.client.resources.UserMessageImages;
+import cc.kune.msgs.client.resources.UserMessageImagesUtil;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -108,22 +108,7 @@ public class UserMessage extends Composite implements HasText {
             };
             time.schedule(fadeMills);
         }
-        switch (level) {
-        case error:
-            icon.setResource(UserMessageImages.INST.error());
-            break;
-        case important:
-            icon.setResource(UserMessageImages.INST.important());
-            break;
-        case info:
-            icon.setResource(UserMessageImages.INST.info());
-            break;
-        case veryImportant:
-            icon.setResource(UserMessageImages.INST.warning());
-            break;
-        default:
-            break;
-        }
+        icon.setResource(UserMessageImagesUtil.getIcon(level));
         final Show anim = new Show(this.getElement());
         anim.setDuration(0.5);
         anim.play();

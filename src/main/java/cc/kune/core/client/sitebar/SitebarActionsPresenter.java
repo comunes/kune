@@ -54,6 +54,7 @@ public class SitebarActionsPresenter extends
     @ProxyCodeSplit
     public interface SitebarActionsProxy extends Proxy<SitebarActionsPresenter> {
     }
+
     public interface SitebarActionsView extends View {
 
         IsActionExtensible getLeftBar();
@@ -61,11 +62,14 @@ public class SitebarActionsPresenter extends
         IsActionExtensible getRightBar();
 
         void showAboutDialog();
-    }
 
+        void showErrorDialog();
+    }
     public static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
+
     public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
     public static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
+    public static final String SITE_OPTIONS_MENU = "kune-sop-om";
 
     private final I18nTranslationService i18n;
     private final IconResources icons;
@@ -105,6 +109,7 @@ public class SitebarActionsPresenter extends
     }
 
     private void init() {
+        OPTIONS_MENU.withId(SITE_OPTIONS_MENU);
         getView().getLeftBar().add(LEFT_TOOLBAR);
         getView().getRightBar().add(RIGHT_TOOLBAR);
     }
@@ -131,8 +136,13 @@ public class SitebarActionsPresenter extends
         bugsAction.putValue(Action.SMALL_ICON, icons.bug());
         final MenuItemDescriptor reportBugs = new MenuItemDescriptor(OPTIONS_MENU, bugsAction);
 
-        // final KeyStroke shortcut = Shortcut.getShortcut(true, true, false,
-        // false, Character.valueOf('K'));
+        final AbstractExtendedAction errorAction = new AbstractExtendedAction() {
+            @Override
+            public void actionPerformed(final ActionEvent event) {
+                getView().showErrorDialog();
+            }
+        };
+
         final AbstractExtendedAction aboutAction = new AbstractExtendedAction() {
             @Override
             public void actionPerformed(final ActionEvent event) {
@@ -146,7 +156,6 @@ public class SitebarActionsPresenter extends
                 KuneWindowUtils.open("http://incubator.apache.org/wave/");
             }
         };
-
         final MenuItemDescriptor gotoKuneDevSite = new MenuItemDescriptor(OPTIONS_MENU, new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent event) {
@@ -160,6 +169,8 @@ public class SitebarActionsPresenter extends
         wavePowered.putValue(Action.SMALL_ICON, res.waveIcon());
         aboutAction.putValue(Action.NAME, i18n.t("About kune"));
         aboutAction.putValue(Action.SMALL_ICON, res.info());
+        errorAction.putValue(Action.NAME, i18n.t("Errors info"));
+        errorAction.putValue(Action.SMALL_ICON, res.important());
         // aboutAction.setShortcut(shortcut);
         // shortcutReg.put(shortcut, aboutAction);
 
@@ -171,10 +182,10 @@ public class SitebarActionsPresenter extends
         right.add(OPTIONS_MENU);
         right.add(gotoKuneDevSite);
         right.add(reportBugs);
+        right.add(new MenuItemDescriptor(OPTIONS_MENU, errorAction));
         right.add(new MenuItemDescriptor(OPTIONS_MENU, aboutAction));
         right.add(menuSeparator);
         right.add(new MenuItemDescriptor(OPTIONS_MENU, wavePowered));
-
     }
 
     @Override

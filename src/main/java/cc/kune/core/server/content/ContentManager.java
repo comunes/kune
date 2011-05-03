@@ -45,6 +45,8 @@ public interface ContentManager extends Manager<Content, Long> {
 
     void addAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
+    void addParticipant(User user, Long contentId, String participant);
+
     Content createContent(String title, String body, User author, Container container, String typeId);
 
     boolean findIfExistsTitle(Container container, String title);

@@ -46,9 +46,10 @@ public class GoParentContainerBtn extends ButtonDescriptor {
 
     }
 
-    public GoParentContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action, final CoreResources res) {
+    public GoParentContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
+            final CoreResources res) {
         super(action);
-        this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.folderGoUp());
+        this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.folderGoUp()).withStyles("k-fl");
     }
 
 }

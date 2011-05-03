@@ -4,18 +4,11 @@
   xmlns:g='urn:import:com.google.gwt.user.client.ui'>
   <ui:style>
     .panel {
-    }
-
-    .frame {
-        border: 0px;
-        margin: 0px;
-        width: 100%;
         background-color: #F2F2F2;
     }
   </ui:style>
-
-  <g:FlowPanel styleName="{style.panel}" ui:field="flow">
-      <g:Frame styleName="{style.frame}" url="about.html"
-        ui:field="frame" />
-  </g:FlowPanel>
+<g:ScrollPanel>
+  <g:VerticalPanel styleName="{style.panel}" ui:field="panel">
+  </g:VerticalPanel>
+</g:ScrollPanel>
 </ui:UiBinder>

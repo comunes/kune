@@ -25,6 +25,7 @@ package cc.kune.wave.client;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import org.apache.jasper.compiler.ErrorDispatcher;
 import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
@@ -64,6 +65,7 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.errors.DefaultException;
+import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.SiteTokens;
@@ -263,12 +265,12 @@ private final EventBus eventBus;
    */
   // XXX check formatting wrt GPE
   public native static String getWebSocketBaseUrl(String moduleBase) /*-{
-		return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
-  }-*/;
+	return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+}-*/;
 
   public native static boolean useSocketIO() /*-{
-		return !!$wnd.__useSocketIO
-  }-*/;
+	return !!$wnd.__useSocketIO
+}-*/;
 
   /**
    */
@@ -345,7 +347,7 @@ private final EventBus eventBus;
     }
 
     public static void install() {
-      GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
+    GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
     }
 
     @Override
@@ -357,9 +359,11 @@ private final EventBus eventBus;
         getStackTraceAsync(e, new Accessor<SafeHtml>() {
           @Override
           public void use(SafeHtml stack) {
-              NotifyUser.error("Error in wave client", true);
+              NotifyUser.error("Oops! Something has gone wrong. Please contact the site admins with <em>more details</em>", true);
           //  error.addDetail(stack, null);
-            REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
+            String message = stack.asString().replace("<br>", "\n");
+            REMOTE_LOG.severe(message);
+            NotifyUser.logError(message);
           }
         });
       }
