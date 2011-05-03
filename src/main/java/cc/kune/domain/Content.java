@@ -74,6 +74,7 @@ public class Content implements HasStateToken {
   @OneToOne(cascade = CascadeType.ALL)
   private AccessLists accessLists;
 
+  @Fetch(FetchMode.JOIN)
   @IndexedEmbedded
   @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   private List<User> authors;
@@ -106,6 +107,7 @@ public class Content implements HasStateToken {
   private Long id;
 
   @IndexedEmbedded
+  @Fetch(FetchMode.JOIN)
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   private I18nLanguage language;

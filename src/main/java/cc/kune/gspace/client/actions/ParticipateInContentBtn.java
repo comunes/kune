@@ -13,7 +13,6 @@ import cc.kune.core.client.sn.actions.conditions.IsNotParticipantOfCurrentStateC
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
-import cc.kune.core.shared.dto.HasContent;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
@@ -39,12 +38,12 @@ public class ParticipateInContentBtn extends ButtonDescriptor {
     @Override
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.showProgressProcessing();
-      stateManager.gotoStateToken(((HasContent) session.getCurrentState()).getContainer().getStateToken());
       contentService.get().addParticipant(session.getUserHash(), session.getCurrentStateToken(),
           session.getCurrentUser().getShortName(), new AsyncCallbackSimple<Void>() {
             @Override
             public void onSuccess(final Void arg) {
               NotifyUser.hideProgress();
+              stateManager.gotoStateToken(session.getCurrentStateToken());
             }
           });
     }

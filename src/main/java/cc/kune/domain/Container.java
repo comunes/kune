@@ -59,240 +59,242 @@ import cc.kune.domain.utils.HasStateToken;
 @Indexed
 @Table(name = "containers")
 public class Container implements HasId, HasStateToken {
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Container> absolutePath;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private AccessLists accessLists;
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private List<Container> absolutePath;
 
-    @Fetch(FetchMode.JOIN)
-    @OrderBy("createdOn DESC")
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Container> childs;
+  @OneToOne(cascade = CascadeType.ALL)
+  private AccessLists accessLists;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ContainerTranslation> containerTranslations;
+  @Fetch(FetchMode.JOIN)
+  @OrderBy("createdOn DESC")
+  @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private Set<Container> childs;
 
-    @Fetch(FetchMode.JOIN)
-    @ContainedIn
-    @OrderBy("createdOn DESC")
-    @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Content> contents;
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<ContainerTranslation> containerTranslations;
 
-    @Basic(optional = false)
-    private Long createdOn;
+  @Fetch(FetchMode.JOIN)
+  @ContainedIn
+  @OrderBy("createdOn DESC")
+  @OneToMany(mappedBy = "container", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private Set<Content> contents;
 
-    @Basic(optional = true)
-    private Date deletedOn;
+  @Basic(optional = false)
+  private Long createdOn;
 
-    @Id
-    @GeneratedValue
-    @DocumentId
-    Long id;
+  @Basic(optional = true)
+  private Date deletedOn;
 
-    @ManyToOne
-    private I18nLanguage language;
+  @Id
+  @GeneratedValue
+  @DocumentId
+  Long id;
 
-    @Column
-    @Field(index = Index.TOKENIZED, store = Store.NO)
-    private String name;
+  @ManyToOne
+  private I18nLanguage language;
 
-    @IndexedEmbedded(depth = 1, prefix = "owner_")
-    @OneToOne
-    private Group owner;
+  @Column
+  @Field(index = Index.TOKENIZED, store = Store.NO)
+  private String name;
 
-    // Parent/Child pattern:
-    // http://www.hibernate.org/hib_docs/reference/en/html/example-parentchild.html
-    // http://www.researchkitchen.co.uk/blog/archives/57
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private Container parent;
+  @IndexedEmbedded(depth = 1, prefix = "owner_")
+  @OneToOne
+  private Group owner;
 
-    private String toolName;
+  // Parent/Child pattern:
+  // http://www.hibernate.org/hib_docs/reference/en/html/example-parentchild.html
+  // http://www.researchkitchen.co.uk/blog/archives/57
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn
+  private Container parent;
 
-    private String typeId;
+  private String toolName;
 
-    public Container() {
-        this(null, null, null);
-    }
+  private String typeId;
 
-    public Container(final String title, final Group group, final String toolName) {
-        this.name = title;
-        owner = group;
-        this.toolName = toolName;
-        this.contents = new HashSet<Content>();
-        this.childs = new HashSet<Container>();
-        this.absolutePath = new ArrayList<Container>();
-        this.createdOn = System.currentTimeMillis();
-    }
+  public Container() {
+    this(null, null, null);
+  }
 
-    public void addChild(final Container child) {
-        child.setParent(this);
-        childs.add(child);
-    }
+  public Container(final String title, final Group group, final String toolName) {
+    this.name = title;
+    owner = group;
+    this.toolName = toolName;
+    this.contents = new HashSet<Content>();
+    this.childs = new HashSet<Container>();
+    this.absolutePath = new ArrayList<Container>();
+    this.createdOn = System.currentTimeMillis();
+  }
 
-    public void addContent(final Content descriptor) {
-        // FIXME: something related with lazy initialization (workaround using
-        // size())
-        contents.size();
-        contents.add(descriptor);
-    }
+  public void addChild(final Container child) {
+    child.setParent(this);
+    childs.add(child);
+  }
 
-    public List<Container> getAbsolutePath() {
-        return absolutePath;
-    }
+  public void addContent(final Content descriptor) {
+    // FIXME: something related with lazy initialization (workaround using
+    // size())
+    contents.size();
+    contents.add(descriptor);
+  }
 
-    @Transient
-    public AccessLists getAccessLists() {
-        return hasAccessList() ? accessLists : isRoot() ? getOwner().getAccessLists() : getParent().getAccessLists();
-    }
+  public List<Container> getAbsolutePath() {
+    return absolutePath;
+  }
 
-    public List<ContainerTranslation> getAliases() {
-        return containerTranslations;
-    }
+  @Transient
+  public AccessLists getAccessLists() {
+    return hasAccessList() ? accessLists : isRoot() ? getOwner().getAccessLists()
+        : getParent().getAccessLists();
+  }
 
-    public Set<Container> getChilds() {
-        return childs;
-    }
+  public List<ContainerTranslation> getAliases() {
+    return containerTranslations;
+  }
 
-    public List<ContainerTranslation> getContainerTranslations() {
-        return containerTranslations;
-    }
+  public Set<Container> getChilds() {
+    return childs;
+  }
 
-    public Set<Content> getContents() {
-        return contents;
-    }
+  public List<ContainerTranslation> getContainerTranslations() {
+    return containerTranslations;
+  }
 
-    public Long getCreatedOn() {
-        return createdOn;
-    }
+  public Set<Content> getContents() {
+    return contents;
+  }
 
-    public Date getDeletedOn() {
-        return deletedOn;
-    }
+  public Long getCreatedOn() {
+    return createdOn;
+  }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+  public Date getDeletedOn() {
+    return deletedOn;
+  }
 
-    public I18nLanguage getLanguage() {
-        return language;
-    }
+  @Override
+  public Long getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public I18nLanguage getLanguage() {
+    return language;
+  }
 
-    public Group getOwner() {
-        return owner;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public Container getParent() {
-        return parent;
-    }
+  public Group getOwner() {
+    return owner;
+  }
 
-    public Long getParentFolderId() {
-        return parent != null ? parent.getId() : null;
-    }
+  public Container getParent() {
+    return parent;
+  }
 
-    @Override
-    @Transient
-    public StateToken getStateToken() {
-        return new StateToken(getOwner().getShortName(), getToolName(), getId());
-    }
+  public Long getParentFolderId() {
+    return parent != null ? parent.getId() : null;
+  }
 
-    @Transient
-    public String getStateTokenEncoded() {
-        return getStateToken().getEncoded();
-    }
+  @Override
+  @Transient
+  public StateToken getStateToken() {
+    return new StateToken(getOwner().getShortName(), getToolName(), getId());
+  }
 
-    public String getToolName() {
-        return toolName;
-    }
+  @Transient
+  public String getStateTokenEncoded() {
+    return getStateToken().getEncoded();
+  }
 
-    public String getTypeId() {
-        return typeId;
-    }
+  public String getToolName() {
+    return toolName;
+  }
 
-    @Transient
-    public boolean hasAccessList() {
-        return accessLists != null;
-    }
+  public String getTypeId() {
+    return typeId;
+  }
 
-    @Transient
-    public boolean isLeaf() {
-        return childs.size() == 0 && contents.size() == 0;
-    }
+  @Transient
+  public boolean hasAccessList() {
+    return accessLists != null;
+  }
 
-    @Transient
-    public boolean isRoot() {
-        return parent == null;
-    }
+  @Transient
+  public boolean isLeaf() {
+    return childs.size() == 0 && contents.size() == 0;
+  }
 
-    public void setAbsolutePath(final List<Container> absolutePath) {
-        this.absolutePath = absolutePath;
-    }
+  @Transient
+  public boolean isRoot() {
+    return parent == null;
+  }
 
-    public void setAccessLists(final AccessLists accessLists) {
-        this.accessLists = accessLists;
-    }
+  public void setAbsolutePath(final List<Container> absolutePath) {
+    this.absolutePath = absolutePath;
+  }
 
-    public void setAliases(final List<ContainerTranslation> containerTranslations) {
-        this.containerTranslations = containerTranslations;
-    }
+  public void setAccessLists(final AccessLists accessLists) {
+    this.accessLists = accessLists;
+  }
 
-    public void setChilds(final Set<Container> childs) {
-        this.childs = childs;
-    }
+  public void setAliases(final List<ContainerTranslation> containerTranslations) {
+    this.containerTranslations = containerTranslations;
+  }
 
-    public void setContainerTranslations(final List<ContainerTranslation> containerTranslations) {
-        this.containerTranslations = containerTranslations;
-    }
+  public void setChilds(final Set<Container> childs) {
+    this.childs = childs;
+  }
 
-    public void setContents(final HashSet<Content> contents) {
-        this.contents = contents;
-    }
+  public void setContainerTranslations(final List<ContainerTranslation> containerTranslations) {
+    this.containerTranslations = containerTranslations;
+  }
 
-    public void setCreatedOn(final Long createdOn) {
-        this.createdOn = createdOn;
-    }
+  public void setContents(final HashSet<Content> contents) {
+    this.contents = contents;
+  }
 
-    public void setDeletedOn(final Date deletedOn) {
-        this.deletedOn = deletedOn;
-    }
+  public void setCreatedOn(final Long createdOn) {
+    this.createdOn = createdOn;
+  }
 
-    @Override
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setDeletedOn(final Date deletedOn) {
+    this.deletedOn = deletedOn;
+  }
 
-    public void setLanguage(final I18nLanguage language) {
-        this.language = language;
-    }
+  @Override
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setName(final String name) {
-        this.name = name;
-    }
+  public void setLanguage(final I18nLanguage language) {
+    this.language = language;
+  }
 
-    public void setOwner(final Group owner) {
-        this.owner = owner;
-    }
+  public void setName(final String name) {
+    this.name = name;
+  }
 
-    public void setParent(final Container parent) {
-        this.parent = parent;
-    }
+  public void setOwner(final Group owner) {
+    this.owner = owner;
+  }
 
-    public void setToolName(final String toolName) {
-        this.toolName = toolName;
-    }
+  public void setParent(final Container parent) {
+    this.parent = parent;
+  }
 
-    public void setTypeId(final String typeId) {
-        this.typeId = typeId;
-    }
+  public void setToolName(final String toolName) {
+    this.toolName = toolName;
+  }
 
-    @Override
-    public String toString() {
-        return "Container[(" + getStateTokenEncoded() + "): " + getName() + "]";
-    }
+  public void setTypeId(final String typeId) {
+    this.typeId = typeId;
+  }
+
+  @Override
+  public String toString() {
+    return "Container[(" + getStateTokenEncoded() + "): " + getName() + "]";
+  }
 }

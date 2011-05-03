@@ -35,103 +35,107 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import cc.kune.core.shared.domain.GroupListMode;
 
 @Entity
 @Table(name = "group_list")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class GroupList {
-    @Id
-    @GeneratedValue
-    private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    @OrderBy("shortName ASC")
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    List<Group> list;
+  @Fetch(FetchMode.JOIN)
+  @OrderBy("shortName ASC")
+  @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+  List<Group> list;
 
-    @Enumerated(EnumType.STRING)
-    @Basic
-    private GroupListMode mode;
+  @Enumerated(EnumType.STRING)
+  @Basic
+  private GroupListMode mode;
 
-    public GroupList() {
-        this(new ArrayList<Group>());
-        this.mode = GroupListMode.NORMAL;
+  public GroupList() {
+    this(new ArrayList<Group>());
+    this.mode = GroupListMode.NORMAL;
+  }
+
+  public GroupList(final List<Group> list) {
+    this.list = list;
+  }
+
+  public void add(final Group group) {
+    // No group duplicate
+    // TODO: Get this outside Domain?
+    if (!list.contains(group)) {
+      list.add(group);
     }
-
-    public GroupList(final List<Group> list) {
-        this.list = list;
+    // TODO: Get this outside Domain?
+    if (getMode() == GroupListMode.NOBODY) {
+      setMode(GroupListMode.NORMAL);
     }
+  }
 
-    public void add(final Group group) {
-        // No group duplicate
-        // TODO: Get this outside Domain?
-        if (!list.contains(group)) {
-            list.add(group);
-        }
-        // TODO: Get this outside Domain?
-        if (getMode() == GroupListMode.NOBODY) {
-            setMode(GroupListMode.NORMAL);
-        }
+  public boolean checkIfIncludes(final Group group, final List<Group> list, final GroupListMode mode) {
+    switch (mode) {
+    case NOBODY:
+      return false;
+    case EVERYONE:
+      return true;
+    default:
+      return list.contains(group);
     }
+  }
 
-    public boolean checkIfIncludes(final Group group, final List<Group> list, final GroupListMode mode) {
-        switch (mode) {
-        case NOBODY:
-            return false;
-        case EVERYONE:
-            return true;
-        default:
-            return list.contains(group);
-        }
-    }
+  public ArrayList<Group> duplicate() {
+    return new ArrayList<Group>(list);
+  }
 
-    public ArrayList<Group> duplicate() {
-        return new ArrayList<Group>(list);
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public List<Group> getList() {
+    return list;
+  }
 
-    public List<Group> getList() {
-        return list;
-    }
+  public GroupListMode getMode() {
+    return mode;
+  }
 
-    public GroupListMode getMode() {
-        return mode;
-    }
+  public boolean includes(final Group group) {
+    return checkIfIncludes(group, this.list, mode);
+  }
 
-    public boolean includes(final Group group) {
-        return checkIfIncludes(group, this.list, mode);
-    }
+  public boolean isEmpty() {
+    return list.size() == 0;
+  }
 
-    public boolean isEmpty() {
-        return list.size() == 0;
+  public void remove(final Group group) {
+    list.remove(group);
+    // TODO: Get this outside Domain?
+    if (list.isEmpty()) {
+      setMode(GroupListMode.NOBODY);
     }
+  }
 
-    public void remove(final Group group) {
-        list.remove(group);
-        // TODO: Get this outside Domain?
-        if (list.isEmpty()) {
-            setMode(GroupListMode.NOBODY);
-        }
-    }
+  public void setId(final Long id) {
+    this.id = id;
+  }
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+  public void setList(final List<Group> list) {
+    this.list = list;
+  }
 
-    public void setList(final List<Group> list) {
-        this.list = list;
-    }
+  public void setMode(final GroupListMode mode) {
+    this.mode = mode;
+  }
 
-    public void setMode(final GroupListMode mode) {
-        this.mode = mode;
-    }
-
-    @Override
-    public String toString() {
-        return "GroupList[(" + mode + "): " + list + "]";
-    }
+  @Override
+  public String toString() {
+    return "GroupList[(" + mode + "): " + list + "]";
+  }
 
 }

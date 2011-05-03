@@ -22,6 +22,8 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
+import cc.kune.core.client.state.UserSignOutEvent;
+import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
@@ -69,11 +71,18 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
 
   @Inject
   public DocViewerPanel(final GSpaceArmor wsArmor,
-      final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n) {
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
+      final cc.kune.core.client.state.Session session) {
     this.gsArmor = wsArmor;
     this.capabilitiesRegistry = capabilitiesRegistry;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+    session.onUserSignOut(true, new UserSignOutHandler() {
+      @Override
+      public void onUserSignOut(final UserSignOutEvent event) {
+        channel = null;
+      }
+    });
   }
 
   @Override
