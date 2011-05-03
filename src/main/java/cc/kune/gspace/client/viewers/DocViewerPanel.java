@@ -22,12 +22,11 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.state.UserSignOutEvent;
-import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 import cc.kune.gspace.client.GSpaceArmor;
 import cc.kune.gspace.client.viewers.DocViewerPresenter.DocViewerView;
+import cc.kune.wave.client.WaveClientManager;
 import cc.kune.wave.client.WebClient;
 
 import com.google.gwt.core.client.GWT;
@@ -48,6 +47,8 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   interface DocsViewerPanelUiBinder extends UiBinder<Widget, DocViewerPanel> {
   }
 
+  private static final RemoteViewServiceMultiplexer NO_CHANNEL = null;
+
   private static DocsViewerPanelUiBinder uiBinder = GWT.create(DocsViewerPanelUiBinder.class);
 
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
@@ -63,26 +64,23 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   private ProfileManager profiles;
   /** The wave panel, if a wave is open. */
   private StagesProvider wave;
+  private final WaveClientManager waveClient;
   @UiField
   ImplPanel waveHolder;
+
   private final WaveStore waveStore = new SimpleWaveStore();
 
   private final Widget widget;
 
   @Inject
-  public DocViewerPanel(final GSpaceArmor wsArmor,
-      final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
-      final cc.kune.core.client.state.Session session) {
+  public DocViewerPanel(final GSpaceArmor wsArmor, final WaveClientManager waveClient,
+      final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n) {
     this.gsArmor = wsArmor;
+    this.waveClient = waveClient;
     this.capabilitiesRegistry = capabilitiesRegistry;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
-    session.onUserSignOut(true, new UserSignOutHandler() {
-      @Override
-      public void onUserSignOut(final UserSignOutEvent event) {
-        channel = null;
-      }
-    });
+    loading.addClassName("kune-Margin-40-tb");
   }
 
   @Override
@@ -151,7 +149,6 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   @Override
   public void setEditableContent(final StateContentDTO state) {
     setTitle(state, true);
-    initWaveClientIfNeeded();
     setEditableWaveContent(state.getWaveRef(), false);
     deck.showWidget(0);
   }
@@ -168,6 +165,8 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
       wave.destroy();
       wave = null;
     }
+
+    initWaveClientIfNeeded();
 
     // Release the display:none.
     // UIObject.setVisible(waveFrame.getElement(), true);
@@ -187,6 +186,17 @@ public class DocViewerPanel extends ViewImpl implements DocViewerView {
   private void setTitle(final StateContentDTO state, final boolean editable) {
     contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
+  }
+
+  @Override
+  public void signIn() {
+    // Do nothing (now)
+    // initWaveClientIfNeeded();
+  }
+
+  @Override
+  public void signOut() {
+    channel = NO_CHANNEL;
   }
 
 }

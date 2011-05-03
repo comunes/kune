@@ -11,6 +11,10 @@ import cc.kune.common.client.ui.EditEvent.EditHandler;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.UserSignInEvent;
+import cc.kune.core.client.state.UserSignInEvent.UserSignInHandler;
+import cc.kune.core.client.state.UserSignOutEvent;
+import cc.kune.core.client.state.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.HasContent;
@@ -58,6 +62,10 @@ public class DocViewerPresenter extends
     void setEditableContent(StateContentDTO state);
 
     void setEditableTitle(String title);
+
+    void signIn();
+
+    void signOut();
   }
 
   private final ActionRegistryByType actionsRegistry;
@@ -76,6 +84,20 @@ public class DocViewerPresenter extends
     this.renameAction = renameAction;
     viewerSelector.register(this, true, DocsConstants.TYPE_DOCUMENT);
     viewerSelector.register(this, true, BlogsConstants.TYPE_POST);
+    session.onUserSignOut(true, new UserSignOutHandler() {
+      @Override
+      public void onUserSignOut(final UserSignOutEvent event) {
+        getView().signOut();
+      }
+    });
+    session.onUserSignIn(true, new UserSignInHandler() {
+
+      @Override
+      public void onUserSignIn(final UserSignInEvent event) {
+        getView().signIn();
+      }
+    });
+
   }
 
   @Override

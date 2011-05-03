@@ -25,7 +25,6 @@ package cc.kune.wave.client;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import org.apache.jasper.compiler.ErrorDispatcher;
 import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
@@ -265,12 +264,12 @@ private final EventBus eventBus;
    */
   // XXX check formatting wrt GPE
   public native static String getWebSocketBaseUrl(String moduleBase) /*-{
-	return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
-}-*/;
+		return "ws" + /:\/\/[^\/]+/.exec(moduleBase)[0] + "/";
+  }-*/;
 
   public native static boolean useSocketIO() /*-{
-	return !!$wnd.__useSocketIO
-}-*/;
+		return !!$wnd.__useSocketIO
+  }-*/;
 
   /**
    */
@@ -418,5 +417,17 @@ private final EventBus eventBus;
     private static String maybe(int value, String otherwise) {
       return value != -1 ? String.valueOf(value) : otherwise;
     }
+  }
+
+  public WaveWebSocketClient getWebSocket() {
+    return websocket;
+  }
+
+  public RemoteViewServiceMultiplexer getChannel() {
+    return channel;
+  }
+
+  public ProfileManager getProfiles() {
+    return profiles;
   }
 }

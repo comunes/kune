@@ -4,11 +4,11 @@
   xmlns:g='urn:import:com.google.gwt.user.client.ui'>
   <ui:style>
     .panel {
-        background-color: #F2F2F2;
+      background-color: #F2F2F2;
     }
   </ui:style>
-<g:ScrollPanel>
-  <g:VerticalPanel styleName="{style.panel}" ui:field="panel">
-  </g:VerticalPanel>
-</g:ScrollPanel>
+  <g:ScrollPanel ui:field="scroll">
+    <g:VerticalPanel styleName="{style.panel}" ui:field="panel">
+    </g:VerticalPanel>
+  </g:ScrollPanel>
 </ui:UiBinder>

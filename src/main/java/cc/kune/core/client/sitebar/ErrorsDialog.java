@@ -14,6 +14,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -29,6 +30,8 @@ public class ErrorsDialog {
   private final BasicTopDialog dialog;
   @UiField
   VerticalPanel panel;
+  @UiField
+  ScrollPanel scroll;
 
   @Inject
   public ErrorsDialog(final I18nTranslationService i18n, final EventBus eventBus) {
@@ -40,6 +43,8 @@ public class ErrorsDialog {
         i18n.t("Please copy/paste this info to report problems"));
     dialog.getInnerPanel().add(subTitle);
     dialog.getInnerPanel().add(BINDER.createAndBindUi(this));
+    scroll.setHeight("400px");
+    scroll.setAlwaysShowScrollBars(true);
     dialog.getFirstBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
