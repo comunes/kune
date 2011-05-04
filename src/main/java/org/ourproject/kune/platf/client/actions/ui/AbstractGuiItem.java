@@ -25,7 +25,7 @@ import org.ourproject.kune.platf.client.actions.OldAbstractAction;
 import org.ourproject.kune.platf.client.actions.PropertyChangeEvent;
 import org.ourproject.kune.platf.client.actions.PropertyChangeListener;
 
-import cc.kune.core.client.resources.icons.IconConstants;
+import cc.kune.core.client.resources.IconConstants;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Composite;

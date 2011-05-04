@@ -22,50 +22,51 @@ package cc.kune.core.client.resources.icons;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
+@Deprecated
 public interface IconResources extends ClientBundle {
 
-    @Source("add-green.png")
-    ImageResource addGreen();
+  @Source("add-green.png")
+  ImageResource addGreen();
 
-    @Source("bug.png")
-    ImageResource bug();
+  @Source("bug.png")
+  ImageResource bug();
 
-    @Source("checked.png")
-    ImageResource checked();
+  @Source("checked.png")
+  ImageResource checked();
 
-    @Source("kicon.css")
-    IconCssResource css();
+  @Source("kicon.css")
+  IconCssResource css();
 
-    @Source("del-green.png")
-    ImageResource delGreen();
+  @Source("del-green.png")
+  ImageResource delGreen();
 
-    @Source("group-home.png")
-    ImageResource groupHome();
+  @Source("group-home.png")
+  ImageResource groupHome();
 
-    @Source("info.png")
-    ImageResource info();
+  @Source("info.png")
+  ImageResource info();
 
-    @Source("kune-icon16.png")
-    ImageResource kuneIcon16();
+  @Source("kune-icon16.png")
+  ImageResource kuneIcon16();
 
-    @Source("language.png")
-    ImageResource language();
+  @Source("language.png")
+  ImageResource language();
 
-    @Source("arrow_out.png")
-    ImageResource maximize();
+  @Source("arrow_out.png")
+  ImageResource maximize();
 
-    @Source("arrow_in.png")
-    ImageResource minimize();
+  @Source("arrow_in.png")
+  ImageResource minimize();
 
-    @Source("prefs.png")
-    ImageResource prefs();
+  @Source("prefs.png")
+  ImageResource prefs();
 
-    @Source("radiochecked.png")
-    ImageResource radiochecked();
+  @Source("radiochecked.png")
+  ImageResource radiochecked();
 
-    @Source("radiounchecked.png")
-    ImageResource radioUnChecked();
+  @Source("radiounchecked.png")
+  ImageResource radioUnChecked();
 
-    @Source("unchecked.png")
-    ImageResource unChecked();
+  @Source("unchecked.png")
+  ImageResource unChecked();
 }

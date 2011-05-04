@@ -16,9 +16,24 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- \*/
-package cc.kune.core.client.sitebar.search;
+ */
+package cc.kune.core.client.resources;
 
-public interface SiteSearch {
+import com.google.gwt.resources.client.ImageResource;
 
+@Deprecated
+public final class IconConstants {
+
+    @Deprecated
+    public static final String CSS_SUFFIX = "k-icon-";
+
+    private static final String PATH_PREFIX = "images/";
+
+    @Deprecated
+    public static String toPath(final ImageResource img) {
+        return PATH_PREFIX + img.getName() + ".png";
+    }
+
+    private IconConstants() {
+    }
 }

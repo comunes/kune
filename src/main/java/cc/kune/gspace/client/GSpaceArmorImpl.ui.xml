@@ -12,8 +12,8 @@ xmlns:co="urn:import:cc.kune.core.client"
   </ui:style>
   <g:DockLayoutPanel ui:field="mainpanel" styleName='{res.style.mainPanel}'
     unit="PX">
-    <g:north size="22">
-      <g:FlowPanel ui:field="sitebar" height="22px"
+    <g:north size="23">
+      <g:FlowPanel ui:field="sitebar" height="23px"
         styleName='{res.style.siteBar}'>
       </g:FlowPanel>
     </g:north>

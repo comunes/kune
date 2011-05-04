@@ -1,9 +1,46 @@
 @CHARSET "UTF-8";
+@external k-icon-info,k-icon-language,k-icon-kuneIcon16,k-icon-bug,k-icon-prefs,k-icon-groupHome,k-icon-addGreen,k-icon-maximize,k-icon-minimize,k-*;
 
-/* @sprite */ 
+/* @sprite */
 .loadingSpiner {
-	/* Unused 
-	gwt-image: 'loadingSpiner';
-	*/
-	margin-top: 2px;
+  /* Unused
+  gwt-image: 'loadingSpiner';
+  */
+  margin-top: 2px;
+}
+
+@sprite div .k-icon-info {
+  gwt-image: "info";
+}
+
+@sprite div .k-icon-language {
+  gwt-image: "language";
+}
+
+@sprite div .k-icon-kuneIcon16 {
+  gwt-image: "kuneIcon16";
+}
+
+@sprite div .k-icon-bug {
+  gwt-image: "bug";
+}
+
+@sprite div .k-icon-prefs {
+  gwt-image: "prefs";
+}
+
+@sprite div .k-icon-groupHome {
+  gwt-image: "groupHome";
+}
+
+@sprite div .k-icon-addGreen {
+  gwt-image: "addGreen";
+}
+
+@sprite div .k-icon-maximize {
+  gwt-image: "maximize";
+}
+
+@sprite div .k-icon-minimize {
+  gwt-image: "minimize";
 }

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
+ * opyright (C) 2007-2011 The kune development team (see CREDITS for details)
  * This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -34,102 +34,107 @@ import com.google.gwt.user.client.ui.Label;
 
 public class GwtMenuGui extends AbstractGwtMenuGui {
 
-    private Button button;
-    private IconLabel iconLabel;
-    private boolean notStandAlone;
+  private Button button;
+  private IconLabel iconLabel;
+  private boolean notStandAlone;
 
-    @Override
-    protected void addStyle(final String style) {
-        if (notStandAlone) {
-            iconLabel.addStyleName(style);
-            button.addStyleName(style);
-            layout();
+  @Override
+  protected void addStyle(final String style) {
+    if (notStandAlone) {
+      iconLabel.addStyleName(style);
+      button.addStyleName(style);
+      layout();
+    }
+  }
+
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    descriptor.putValue(ParentWidget.PARENT_UI, this);
+    // Standalone menus are menus without and associated button in a toolbar
+    // (sometimes, a menu showed in a grid, or other special widgets)
+    notStandAlone = !((MenuDescriptor) descriptor).isStandalone();
+    if (notStandAlone) {
+      button = new Button();
+      button.setStylePrimaryName("oc-button");
+      iconLabel = new IconLabel("");
+      final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
+      if (rightIcon != null) {
+        iconLabel.setRightIconResource(rightIcon);
+        iconLabel.addRightIconStyle("k-fr");
+      }
+      button.addClickHandler(new ClickHandler() {
+        @Override
+        public void onClick(final ClickEvent event) {
+          show(button);
         }
+      });
+      final String id = descriptor.getId();
+      if (id != null) {
+        button.ensureDebugId(id);
+      }
+      if (!descriptor.isChild()) {
+        initWidget(button);
+      } else {
+        child = button;
+      }
+    } else {
+      initWidget(new Label());
     }
+    super.create(descriptor);
+    configureItemFromProperties();
+    return this;
+  }
 
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        descriptor.putValue(ParentWidget.PARENT_UI, this);
-        // Standalone menus are menus without and associated button in a toolbar
-        // (sometimes, a menu showed in a grid, or other special widgets)
-        notStandAlone = !((MenuDescriptor) descriptor).isStandalone();
-        if (notStandAlone) {
-            button = new Button();
-            button.setStylePrimaryName("oc-button");
-            iconLabel = new IconLabel("");
-            button.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(final ClickEvent event) {
-                    show(button);
-                }
-            });
-            final String id = descriptor.getId();
-            if (id != null) {
-                button.ensureDebugId(id);
-            }
-            if (!descriptor.isChild()) {
-                initWidget(button);
-            } else {
-                child = button;
-            }
-        } else {
-            initWidget(new Label());
-        }
-        super.create(descriptor);
-        configureItemFromProperties();
-        return this;
-    }
+  private void layout() {
+    button.setHTML(iconLabel.getElement().getInnerHTML());
+  }
 
-    private void layout() {
-        button.setHTML(iconLabel.getElement().getInnerHTML());
+  @Override
+  public void setEnabled(final boolean enabled) {
+    if (notStandAlone) {
+      button.setVisible(enabled);
     }
+  }
 
-    @Override
-    public void setEnabled(final boolean enabled) {
-        if (notStandAlone) {
-            button.setVisible(enabled);
-        }
+  @Override
+  public void setIconResource(final ImageResource resource) {
+    if (notStandAlone) {
+      iconLabel.setLeftIconResource(resource);
+      layout();
     }
+  }
 
-    @Override
-    public void setIconResource(final ImageResource resource) {
-        if (notStandAlone) {
-            iconLabel.setLeftIconResource(resource);
-            layout();
-        }
+  @Override
+  public void setIconStyle(final String style) {
+    if (notStandAlone) {
+      iconLabel.setRightIcon(style);
+      layout();
     }
+  }
 
-    @Override
-    public void setIconStyle(final String style) {
-        if (notStandAlone) {
-            iconLabel.setRightIcon(style);
-            layout();
-        }
+  @Override
+  public void setText(final String text) {
+    if (notStandAlone) {
+      iconLabel.setText(text);
+      layout();
     }
+  }
 
-    @Override
-    public void setText(final String text) {
-        if (notStandAlone) {
-            iconLabel.setText(text);
-            layout();
-        }
+  @Override
+  public void setToolTipText(final String tooltip) {
+    if (notStandAlone) {
+      Tooltip.to(button, tooltip);
     }
+  }
 
-    @Override
-    public void setToolTipText(final String tooltip) {
-        if (notStandAlone) {
-            Tooltip.to(button, tooltip);
-        }
+  @Override
+  public void setVisible(final boolean visible) {
+    if (notStandAlone) {
+      button.setVisible(visible);
+    } else {
+      // button.setVisible(visible);
     }
-
-    @Override
-    public void setVisible(final boolean visible) {
-        if (notStandAlone) {
-            button.setVisible(visible);
-        } else {
-            // button.setVisible(visible);
-        }
-    }
+  }
 
 }

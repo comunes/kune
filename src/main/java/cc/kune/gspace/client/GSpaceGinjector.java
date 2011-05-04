@@ -1,5 +1,6 @@
 package cc.kune.gspace.client;
 
+import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter;
@@ -12,17 +13,19 @@ import com.google.gwt.inject.client.Ginjector;
 
 public interface GSpaceGinjector extends Ginjector {
 
-    ContentViewerSelector getContentViewerSelector();
+  ContentViewerSelector getContentViewerSelector();
 
-    AsyncProvider<DocViewerPresenter> getDocsViewerPresenter();
+  AsyncProvider<DocViewerPresenter> getDocsViewerPresenter();
 
-    AsyncProvider<EntityLicensePresenter> getEntityLicensePresenter();
+  AsyncProvider<EntityLicensePresenter> getEntityLicensePresenter();
 
-    AsyncProvider<FolderViewerPresenter> getFolderViewerPresenter();
+  AsyncProvider<FolderViewerPresenter> getFolderViewerPresenter();
 
-    GSpaceParts getGSpaceParts();
+  GSpaceParts getGSpaceParts();
 
-    AsyncProvider<TagsSummaryPresenter> getTagsSummaryPresenter();
+  AsyncProvider<SitebarSearchPresenter> getSitebarSearchPresenter();
 
-    AsyncProvider<ToolSelectorPresenter> getToolSelectorPresenter();
+  AsyncProvider<TagsSummaryPresenter> getTagsSummaryPresenter();
+
+  AsyncProvider<ToolSelectorPresenter> getToolSelectorPresenter();
 }

@@ -61,7 +61,7 @@ import org.ourproject.kune.platf.client.ui.rte.insertspecialchar.InsertSpecialCh
 import org.ourproject.kune.platf.client.ui.rte.inserttable.InsertTableDialog;
 
 import cc.kune.common.client.utils.SchedulerManager;
-import cc.kune.core.client.resources.icons.IconConstants;
+import cc.kune.core.client.resources.IconConstants;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.i18n.I18nTranslationService;
 

@@ -28,7 +28,7 @@ import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.core.client.resources.icons.IconResources;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
@@ -45,76 +45,76 @@ import com.google.inject.Inject;
 
 public class AddAsBuddieHeaderButton {
 
-    public static class AddAsBuddieAction extends AbstractExtendedAction {
-        private final ChatClient chatEngine;
-        private final Session session;
-
-        @Inject
-        public AddAsBuddieAction(final ChatClient chatEngine, final Session session, final StateManager stateManager,
-                final I18nTranslationService i18n, final IconResources img) {
-            super();
-            this.chatEngine = chatEngine;
-            this.session = session;
-            stateManager.onStateChanged(true, new StateChangedHandler() {
-                @Override
-                public void onStateChanged(final StateChangedEvent event) {
-                    setState(event.getState());
-                }
-            });
-            Suco.get(XmppRoster.class).addRosterGroupChangedHandler(new RosterGroupChangedHandler() {
-
-                @Override
-                public void onGroupChanged(final RosterGroupChangedEvent event) {
-                    final StateAbstractDTO currentState = session.getCurrentState();
-                    if (currentState != null) {
-                        setState(currentState);
-                    }
-                }
-            });
-            putValue(Action.NAME, i18n.t("Add as a buddie"));
-            putValue(Action.SMALL_ICON, img.addGreen());
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-            chatEngine.addNewBuddie(session.getCurrentState().getGroup().getShortName());
-            NotifyUser.info("Added as buddie. Waiting buddie response");
-            setEnabled(false);
-        }
-
-        private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {
-            return state.getGroup().isPersonal();
-        }
-
-        private boolean isNotMe(final String groupName) {
-            return !session.getCurrentUser().getShortName().equals(groupName);
-        }
-
-        private void setState(final StateAbstractDTO state) {
-            final String groupName = state.getGroup().getShortName();
-            final boolean imLogged = session.isLogged();
-            final boolean isNotBuddie = !chatEngine.isBuddie(groupName);
-            if (imLogged && currentGroupsIsAsPerson(state) && isNotBuddie && isNotMe(groupName)) {
-                setEnabled(true);
-            } else {
-                setEnabled(false);
-            }
-        }
-    }
+  public static class AddAsBuddieAction extends AbstractExtendedAction {
+    private final ChatClient chatEngine;
+    private final Session session;
 
     @Inject
-    public AddAsBuddieHeaderButton(final AddAsBuddieAction buddieAction, final EntityHeader entityHeader) {
-        final ButtonDescriptor button = new ButtonDescriptor(buddieAction);
-        button.setVisible(false);
-        button.setStyles("k-chat-add-as-buddie");
-        buddieAction.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(final PropertyChangeEvent event) {
-                if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
-                    button.setVisible((Boolean) event.getNewValue());
-                }
-            }
-        });
-        entityHeader.addAction(button);
+    public AddAsBuddieAction(final ChatClient chatEngine, final Session session,
+        final StateManager stateManager, final I18nTranslationService i18n, final CoreResources img) {
+      super();
+      this.chatEngine = chatEngine;
+      this.session = session;
+      stateManager.onStateChanged(true, new StateChangedHandler() {
+        @Override
+        public void onStateChanged(final StateChangedEvent event) {
+          setState(event.getState());
+        }
+      });
+      Suco.get(XmppRoster.class).addRosterGroupChangedHandler(new RosterGroupChangedHandler() {
+
+        @Override
+        public void onGroupChanged(final RosterGroupChangedEvent event) {
+          final StateAbstractDTO currentState = session.getCurrentState();
+          if (currentState != null) {
+            setState(currentState);
+          }
+        }
+      });
+      putValue(Action.NAME, i18n.t("Add as a buddie"));
+      putValue(Action.SMALL_ICON, img.addGreen());
     }
+
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      chatEngine.addNewBuddie(session.getCurrentState().getGroup().getShortName());
+      NotifyUser.info("Added as buddie. Waiting buddie response");
+      setEnabled(false);
+    }
+
+    private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {
+      return state.getGroup().isPersonal();
+    }
+
+    private boolean isNotMe(final String groupName) {
+      return !session.getCurrentUser().getShortName().equals(groupName);
+    }
+
+    private void setState(final StateAbstractDTO state) {
+      final String groupName = state.getGroup().getShortName();
+      final boolean imLogged = session.isLogged();
+      final boolean isNotBuddie = !chatEngine.isBuddie(groupName);
+      if (imLogged && currentGroupsIsAsPerson(state) && isNotBuddie && isNotMe(groupName)) {
+        setEnabled(true);
+      } else {
+        setEnabled(false);
+      }
+    }
+  }
+
+  @Inject
+  public AddAsBuddieHeaderButton(final AddAsBuddieAction buddieAction, final EntityHeader entityHeader) {
+    final ButtonDescriptor button = new ButtonDescriptor(buddieAction);
+    button.setVisible(false);
+    button.setStyles("k-chat-add-as-buddie");
+    buddieAction.addPropertyChangeListener(new PropertyChangeListener() {
+      @Override
+      public void propertyChange(final PropertyChangeEvent event) {
+        if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
+          button.setVisible((Boolean) event.getNewValue());
+        }
+      }
+    });
+    entityHeader.addAction(button);
+  }
 }

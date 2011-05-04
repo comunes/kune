@@ -30,7 +30,7 @@ import org.ourproject.kune.platf.client.actions.ui.ButtonDescriptor;
 import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
 import org.ourproject.kune.workspace.client.entityheader.EntityHeader;
 
-import cc.kune.core.client.resources.icons.IconConstants;
+import cc.kune.core.client.resources.IconConstants;
 import cc.kune.core.client.resources.icons.IconResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;

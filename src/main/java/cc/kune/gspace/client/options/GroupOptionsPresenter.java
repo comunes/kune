@@ -24,7 +24,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
-import cc.kune.core.client.resources.icons.IconResources;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.StateChangedEvent;
 import cc.kune.core.client.state.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManager;
@@ -34,51 +34,51 @@ import cc.kune.core.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 
 public class GroupOptionsPresenter extends AbstractTabbedDialogPresenter implements GroupOptions {
-    public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
-    private final I18nTranslationService i18n;
-    private final IconResources img;
-    private ButtonDescriptor prefsItem;
-    private GroupOptionsView view;
+  public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
+  private final I18nTranslationService i18n;
+  private final CoreResources img;
+  private ButtonDescriptor prefsItem;
+  private GroupOptionsView view;
 
-    @Inject
-    public GroupOptionsPresenter(final StateManager stateManager, final I18nTranslationService i18n,
-            final IconResources img, final GroupOptionsView view) {
-        this.i18n = i18n;
-        this.img = img;
-        stateManager.onStateChanged(true, new StateChangedHandler() {
-            @Override
-            public void onStateChanged(final StateChangedEvent event) {
-                final StateAbstractDTO state = event.getState();
-                if (!state.getGroup().isPersonal() && state.getGroupRights().isAdministrable()) {
-                    prefsItem.setVisible(true);
-                } else {
-                    view.hide();
-                    prefsItem.setVisible(false);
-                }
-            }
-        });
-        init(view);
-    }
+  @Inject
+  public GroupOptionsPresenter(final StateManager stateManager, final I18nTranslationService i18n,
+      final CoreResources img, final GroupOptionsView view) {
+    this.i18n = i18n;
+    this.img = img;
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        final StateAbstractDTO state = event.getState();
+        if (!state.getGroup().isPersonal() && state.getGroupRights().isAdministrable()) {
+          prefsItem.setVisible(true);
+        } else {
+          view.hide();
+          prefsItem.setVisible(false);
+        }
+      }
+    });
+    init(view);
+  }
 
-    private void createActions() {
-        final AbstractExtendedAction groupPrefsAction = new AbstractExtendedAction() {
-            @Override
-            public void actionPerformed(final ActionEvent event) {
-                show();
-            }
-        };
-        groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
-        groupPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
-        prefsItem = new ButtonDescriptor(groupPrefsAction);
-        prefsItem.withStyles("k-ent-header-btn");
-        prefsItem.setId(GROUP_OPTIONS_ICON);
-        prefsItem.setVisible(false);
-        view.addAction(prefsItem);
-    }
+  private void createActions() {
+    final AbstractExtendedAction groupPrefsAction = new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        show();
+      }
+    };
+    groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
+    groupPrefsAction.putValue(Action.SMALL_ICON, img.prefs());
+    prefsItem = new ButtonDescriptor(groupPrefsAction);
+    prefsItem.withStyles("k-ent-header-btn");
+    prefsItem.setId(GROUP_OPTIONS_ICON);
+    prefsItem.setVisible(false);
+    view.addAction(prefsItem);
+  }
 
-    private void init(final GroupOptionsView view) {
-        super.init(view);
-        this.view = view;
-        createActions();
-    }
+  private void init(final GroupOptionsView view) {
+    super.init(view);
+    this.view = view;
+    createActions();
+  }
 }
