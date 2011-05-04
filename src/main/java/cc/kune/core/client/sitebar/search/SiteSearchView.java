@@ -17,11 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.workspace.client.sitebar.sitesearch;
+package cc.kune.core.client.sitebar.search;
 
-import org.ourproject.kune.platf.client.View;
-
-public interface SiteSearchView extends View {
+public interface SiteSearchView {
 
     void clearSearchText();
 

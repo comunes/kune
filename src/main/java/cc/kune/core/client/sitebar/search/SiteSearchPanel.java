@@ -17,12 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.workspace.client.sitebar.sitesearch;
+package cc.kune.core.client.sitebar.search;
 
-import org.ourproject.kune.platf.client.services.Images;
-import org.ourproject.kune.platf.client.ui.AbstractToolbar;
-import org.ourproject.kune.platf.client.ui.noti.OldNotifyUser;
-import org.ourproject.kune.workspace.client.skel.WorkspaceSkeleton;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.gspace.client.GSpaceArmor;
 
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -33,54 +32,57 @@ import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.inject.Inject;
 
 public class SiteSearchPanel implements SiteSearchView {
     private static final int SEARCH_TEXT_HEIGHT = 15;
-    private static final int SEARCH_TEXT_WIDTH_SMALL = 120;
     private static final int SEARCH_TEXT_WIDTH_BIG = 180;
+    private static final int SEARCH_TEXT_WIDTH_SMALL = 120;
     public static final String SITE_SEARCH_BUTTON = "kune-ssp-searchbt";
     public static final String SITE_SEARCH_TEXTBOX = "kune-ssp-tbox";
 
     private final PushButton searchButton;
     private final TextBox searchTextBox;
-    private final AbstractToolbar siteBar;
 
-    public SiteSearchPanel(final SiteSearchPresenter presenter, final WorkspaceSkeleton ws, final Images img) {
-        siteBar = ws.getSiteBar();
-        siteBar.addSpacer();
-        searchButton = new PushButton(img.kuneSearchIco().createImage(), img.kuneSearchIcoPush().createImage());
+    @Inject
+    public SiteSearchPanel(final SiteSearchPresenter presenter, final GSpaceArmor gs, final CoreResources img) {
+        searchButton = new PushButton(new Image(img.kuneSearchIco()), new Image(img.kuneSearchIcoPush()));
         searchButton.ensureDebugId(SITE_SEARCH_BUTTON);
         searchTextBox = new TextBox();
         searchTextBox.ensureDebugId(SITE_SEARCH_TEXTBOX);
 
-        siteBar.add(searchButton);
-        siteBar.addSpacer();
-        siteBar.add(searchTextBox);
+        gs.getSitebar().add(searchButton);
+        gs.getSitebar().add(searchTextBox);
 
         setTextSearchSmallImpl();
         searchTextBox.addBlurHandler(new BlurHandler() {
+            @Override
             public void onBlur(final BlurEvent event) {
                 presenter.onSearchLostFocus(searchTextBox.getText());
             }
         });
         searchTextBox.addFocusHandler(new FocusHandler() {
+            @Override
             public void onFocus(final FocusEvent event) {
                 presenter.onSearchFocus();
             }
         });
         searchButton.addClickHandler(new ClickHandler() {
+            @Override
             public void onClick(final ClickEvent event) {
-                OldNotifyUser.showProgressProcessing();
+                NotifyUser.showProgressProcessing();
                 presenter.doSearch(searchTextBox.getText());
             }
         });
         searchTextBox.addKeyUpHandler(new KeyUpHandler() {
+            @Override
             public void onKeyUp(final KeyUpEvent event) {
                 if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
                     if (searchTextBox.getText().length() > 0) {
-                        OldNotifyUser.showProgressProcessing();
+                        NotifyUser.showProgressProcessing();
                         presenter.doSearch(searchTextBox.getText());
                     }
                 }
@@ -88,10 +90,12 @@ public class SiteSearchPanel implements SiteSearchView {
         });
     }
 
+    @Override
     public void clearSearchText() {
         searchTextBox.setText("");
     }
 
+    @Override
     public void selectSearchText() {
         searchTextBox.selectAll();
     }
@@ -100,14 +104,17 @@ public class SiteSearchPanel implements SiteSearchView {
         searchTextBox.setText(text);
     }
 
+    @Override
     public void setTextSearch(final String text) {
         searchTextBox.setText(text);
     }
 
+    @Override
     public void setTextSearchBig() {
         searchTextBox.setPixelSize(SEARCH_TEXT_WIDTH_BIG, 15);
     }
 
+    @Override
     public void setTextSearchSmall() {
         setTextSearchSmallImpl();
     }

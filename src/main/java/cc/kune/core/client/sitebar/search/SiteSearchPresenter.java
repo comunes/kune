@@ -17,33 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  \*/
-package org.ourproject.kune.workspace.client.sitebar.sitesearch;
-
-import org.ourproject.kune.platf.client.View;
-import org.ourproject.kune.workspace.client.search.SiteSearcher;
+package cc.kune.core.client.sitebar.search;
 
 import cc.kune.core.shared.i18n.I18nTranslationService;
 
-import com.calclab.suco.client.ioc.Provider;
+import com.google.inject.Inject;
 
 public class SiteSearchPresenter implements SiteSearch {
 
-    private SiteSearchView view;
-    private final Provider<SiteSearcher> provider;
     private final String defaultSearchText;
+    private SiteSearchView view;
 
-    public SiteSearchPresenter(final Provider<SiteSearcher> provider, I18nTranslationService i18n) {
-        this.provider = provider;
+    @Inject
+    public SiteSearchPresenter(final I18nTranslationService i18n) {
         defaultSearchText = i18n.t("Search");
     }
 
     public void doSearch(final String termToSearch) {
-        provider.get().doSearch(termToSearch);
+        // provider.get().doSearch(termToSearch);
         view.setTextSearchSmall();
-    }
-
-    public View getView() {
-        return view;
     }
 
     public void init(final SiteSearchView view) {
