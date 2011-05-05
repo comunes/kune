@@ -4,6 +4,8 @@
   <ui:style>
     .label {
       text-decoration: none;
+      display: table-cell;
+      float: left;
     }
 
     .label a:link {
@@ -11,19 +13,27 @@
       color: gray;
     }
 
-    .pad { /* white-space: nowrap; */
+    .flow { /* white-space: nowrap; */
       outline: 0 none;
+      display: table-row;
+    }
+
+    .tcell {
+      display: table-cell;
     }
 
     .self {
       outline: 0 none;
+      display: table;
     }
   </ui:style>
-  <g:FocusPanel styleName="{style.self}" ui:field="self" >
-    <g:FlowPanel styleName="{style.pad}" ui:field="flow">
-      <g:Image ui:field="iconLeft" />
-      <g:Image ui:field="iconRight" />
-      <g:InlineLabel ui:field="label" styleName="{style.label}" />
+  <g:HTMLPanel>
+  <g:FocusPanel styleName="{style.self}" ui:field="self">
+    <g:FlowPanel styleName="{style.flow}" ui:field="flow">
+      <g:Image ui:field="iconLeft" styleName="{style.tcell}" />
+      <g:Image ui:field="iconRight" styleName="{style.tcell}" />
+      <g:Label ui:field="label" styleName="{style.label}" />
     </g:FlowPanel>
   </g:FocusPanel>
+  </g:HTMLPanel>
 </ui:UiBinder>

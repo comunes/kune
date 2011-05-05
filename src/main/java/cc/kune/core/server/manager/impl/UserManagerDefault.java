@@ -211,7 +211,8 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
                 if (index > 0) {
                     // local user
                     try {
-                        final User buddie = finder.getByShortName(entry.getUser().substring(0, index));
+                        String username = entry.getUser().substring(0, index);
+                        final User buddie = finder.getByShortName(username);
                         buddiesData.getBuddies().add(buddie);
                     } catch (final NoResultException e) {
                         // No existent buddie, skip

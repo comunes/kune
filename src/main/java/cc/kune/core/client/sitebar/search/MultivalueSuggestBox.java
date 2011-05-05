@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.core.client.sitebar.search.SitebarSearchPanel.OnExactMatch;
 import cc.kune.core.shared.SearcherConstants;
 
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -291,7 +292,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
         // if there were no suggestions, then it's an invalid value
         updateFormFeedback(FormFeedback.ERROR, "Invalid: " + m_query);
 
-      } else if (totSize == 1) {
+      } else if (false && totSize == 1) {
+        // Patch to show always the suggestions
         // it's an exact match, so do not bother with showing suggestions,
         final Option o = optResults.getOptions()[0];
         final String displ = o.getName();
@@ -300,7 +302,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
         // mfield.setText(getFullReplaceText(displ, m_request.getQuery()));
 
         Log.info("RestSuggestCallback.success! exact match found for displ = " + displ);
-
+        // onExactMatch.onExactMatch(o.getValue());
         // it's valid!
         updateFormFeedback(FormFeedback.VALID, null);
 
@@ -472,6 +474,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   private final String mrestEndpointUrl;
   private final Map<String, String> mvalueMap;
 
+  // private final OnExactMatch onExactMatch;
+
   /**
    * Constructor.
    * 
@@ -480,10 +484,13 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
    *          (for query), indexFrom and indexTo
    * @param isMultivalued
    *          - true for allowing multiple values
+   * @param onExactMatch
    */
-  public MultivalueSuggestBox(final String restEndpointUrl, final boolean isMultivalued) {
+  public MultivalueSuggestBox(final String restEndpointUrl, final boolean isMultivalued,
+      final OnExactMatch onExactMatch) {
     mrestEndpointUrl = restEndpointUrl;
     misMultivalued = isMultivalued;
+    // this.onExactMatch = onExactMatch;
 
     final FlowPanel panel = new FlowPanel();
     TextBoxBase textfield;
@@ -550,6 +557,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
             putValue(option.getName(), option.getValue());
             Log.info("extactMatchFound ! exact match found for displ = " + displayValue);
 
+            // onExactMatch.onExactMatch(option.getValue());
             // and replace the text
             final String text = mfield.getText();
             final String[] keys = text.split(DISPLAY_SEPARATOR.trim());
@@ -803,9 +811,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   private void queryOptions(final String query, final int from, final int to,
       final OptionQueryCallback callback) {
     final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, URL.encode(mrestEndpointUrl
-        // Falta limit
         + "?" + SearcherConstants.QUERY_PARAM + "=" + query + "&" + SearcherConstants.START_PARAM + "="
-        + from + "&indexTo=" + to));
+        + from + "&" + SearcherConstants.LIMIT_PARAM + "=" + PAGE_SIZE));
 
     // Set our headers
     builder.setHeader("Accept", "application/json");

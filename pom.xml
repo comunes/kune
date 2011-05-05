@@ -908,6 +908,8 @@
             <module>${project.groupId}.Kune</module>
           </modules>
           <copyWebapp>true</copyWebapp>
+          <soyc>false</soyc>
+          <extraJvmArgs>-Xmx1024m -Xss1024k</extraJvmArgs>
         </configuration>
         <executions>
           <execution>

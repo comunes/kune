@@ -134,11 +134,11 @@
   padding: 22px 4px 3px 4px;
 }
 
-.k-dialog-title span {
+.k-dialog-title div {
   color: #552200;
   font-size: 20px;
   font-weight: bold;
-  margin: 0 0 0 0px;
+  margin: 5px 0 5px 10px;
 }
 
 .k-dialog-innerp {
@@ -271,7 +271,7 @@
 }
 
 .oc-menu .gwt-MenuBar-vertical,.gwt-MenuBar-vertical {
-  background-color: #280b0b;
+  background-color: #704f4f;
   border: 2px solid #552200;
   padding: 3px;
   font: 16px 'Ubuntu', arial;

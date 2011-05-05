@@ -36,80 +36,81 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public abstract class SignInAbstractPanel extends ViewImpl {
 
-    private final BasicTopDialog dialog;
-    protected final String errorLabelId;
-    protected final I18nTranslationService i18n;
-    protected final NotifyLevelImages images;
-    private final MaskWidgetView mask;
-    protected MessageToolbar messageErrorBar;
+  private final BasicTopDialog dialog;
+  protected final String errorLabelId;
+  protected final I18nTranslationService i18n;
+  protected final NotifyLevelImages images;
+  private final MaskWidgetView mask;
+  protected MessageToolbar messageErrorBar;
 
-    public SignInAbstractPanel(final String dialogId, final MaskWidgetView mask, final I18nTranslationService i18n,
-            final String title, final boolean autohide, final boolean modal, final boolean autoscroll, final int width,
-            final int heigth, final String icon, final String firstButtonTitle, final String firstButtonId,
-            final String cancelButtonTitle, final String cancelButtonId, final NotifyLevelImages images,
-            final String errorLabelId, final int tabIndexStart) {
+  public SignInAbstractPanel(final String dialogId, final MaskWidgetView mask,
+      final I18nTranslationService i18n, final String title, final boolean autohide,
+      final boolean modal, final boolean autoscroll, final int width, final int heigth,
+      final String icon, final String firstButtonTitle, final String firstButtonId,
+      final String cancelButtonTitle, final String cancelButtonId, final NotifyLevelImages images,
+      final String errorLabelId, final int tabIndexStart) {
 
-        final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(autoscroll);
-        builder.width(width).height(heigth);
-        builder.icon(icon);
-        builder.firstButtonTitle(firstButtonTitle).firstButtonId(firstButtonId);
-        builder.sndButtonTitle(cancelButtonTitle).sndButtonId(cancelButtonId);
-        builder.tabIndexStart(tabIndexStart);
-        dialog = builder.build();
-        this.i18n = i18n;
-        this.images = images;
-        this.errorLabelId = errorLabelId;
-        this.mask = mask;
+    final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal).autoscroll(autoscroll);
+    builder.width(width).height(heigth).title(title);
+    builder.icon(icon);
+    builder.firstButtonTitle(firstButtonTitle).firstButtonId(firstButtonId);
+    builder.sndButtonTitle(cancelButtonTitle).sndButtonId(cancelButtonId);
+    builder.tabIndexStart(tabIndexStart);
+    dialog = builder.build();
+    this.i18n = i18n;
+    this.images = images;
+    this.errorLabelId = errorLabelId;
+    this.mask = mask;
+  }
+
+  @Override
+  public Widget asWidget() {
+    return dialog;
+  }
+
+  public HasCloseHandlers<PopupPanel> getClose() {
+    return dialog.getClose();
+  }
+
+  public HasClickHandlers getFirstBtn() {
+    return dialog.getFirstBtn();
+  }
+
+  public ForIsWidget getInnerPanel() {
+    return dialog.getInnerPanel();
+  }
+
+  public HasClickHandlers getSecondBtn() {
+    return dialog.getSecondBtn();
+  }
+
+  public void hide() {
+    if (dialog.isVisible()) {
+      dialog.hide();
     }
+  }
 
-    @Override
-    public Widget asWidget() {
-        return dialog;
-    }
+  public void hideMessages() {
+    messageErrorBar.hideErrorMessage();
+  }
 
-    public HasCloseHandlers<PopupPanel> getClose() {
-        return dialog.getClose();
-    }
+  public void mask(final String message) {
+    mask.mask(dialog);
+  }
 
-    public HasClickHandlers getFirstBtn() {
-        return dialog.getFirstBtn();
-    }
+  public void maskProcessing() {
+    mask.mask(dialog, i18n.t("Processing"));
+  }
 
-    public ForIsWidget getInnerPanel() {
-        return dialog.getInnerPanel();
-    }
+  public void setErrorMessage(final String message, final NotifyLevel level) {
+    messageErrorBar.setErrorMessage(message, level);
+  }
 
-    public HasClickHandlers getSecondBtn() {
-        return dialog.getSecondBtn();
-    }
+  public void show() {
+    dialog.showCentered();
+  }
 
-    public void hide() {
-        if (dialog.isVisible()) {
-            dialog.hide();
-        }
-    }
-
-    public void hideMessages() {
-        messageErrorBar.hideErrorMessage();
-    }
-
-    public void mask(final String message) {
-        mask.mask(dialog);
-    }
-
-    public void maskProcessing() {
-        mask.mask(dialog, i18n.t("Processing"));
-    }
-
-    public void setErrorMessage(final String message, final NotifyLevel level) {
-        messageErrorBar.setErrorMessage(message, level);
-    }
-
-    public void show() {
-        dialog.showCentered();
-    }
-
-    public void unMask() {
-        mask.unMask();
-    }
+  public void unMask() {
+    mask.unMask();
+  }
 }

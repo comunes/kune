@@ -381,11 +381,11 @@ a:visited {
   font: inherit;
 }
 
-.k-btn-sitebar span,.k-btn-sitebar button span,.k-sitebar button span {
+k-btn-sitebar button spin,.k-sitebar button spin, .k-btn-sitebar div, .k-btn-sitebar span,.k-btn-sitebar button span,.k-sitebar button span {
   text-decoration: underline;
 }
 
-.k-btn-sitebar,.k-btn-sitebar button,.k-sitebar button {
+.k-btn-sitebar,.k-btn-sitebar button,.k-sitebar button, .k-btn-sitebar div,.k-btn-sitebar button div,.k-sitebar button div {
   font: 13px 'Ubuntu', arial;
   color: #B3B3B3;
   cursor: pointer;
@@ -1167,6 +1167,7 @@ table.k-folder-viewer {
 
 .gwt-SuggestBoxPopup .item-selected {
   background: #cdcdcd;
+  cursor: pointer;
 }
 
 .gwt-SuggestBoxPopup .suggestPopupContent {

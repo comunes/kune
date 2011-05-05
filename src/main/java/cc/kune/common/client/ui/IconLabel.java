@@ -35,7 +35,7 @@ import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 public class IconLabel extends Composite implements HasWidgets, HasDirectionalText {
@@ -52,7 +52,7 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   @UiField
   Image iconRight;
   @UiField
-  InlineLabel label;
+  Label label;
   @UiField
   FocusPanel self;
 

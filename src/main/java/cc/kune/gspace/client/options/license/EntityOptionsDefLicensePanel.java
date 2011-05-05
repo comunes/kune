@@ -37,49 +37,50 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class EntityOptionsDefLicensePanel extends Composite implements EntityOptionsDefLicenseView {
 
-    private final Button change;
-    private final Image licenseImage;
-    private final IconLabel tabTitle;
+  private final Button change;
+  private final Image licenseImage;
+  private final IconLabel tabTitle;
 
-    public EntityOptionsDefLicensePanel(final I18nTranslationService i18n, final CoreResources res) {
-        tabTitle = new IconLabel(res.copyleft(), i18n.t("License"));
-        final VerticalPanel vp = new VerticalPanel();
-        final Label intro = new Label();
-        intro.setWordWrap(true);
-        intro.setText(i18n.t("This is the default license for all the contents of this group (you can also select another different license per content):"));
-        vp.add(intro);
-        licenseImage = new Image();
-        vp.add(licenseImage);
-        licenseImage.addStyleName("kune-pointer");
-        change = new Button(i18n.t("Change"));
-        initWidget(vp);
-        super.setHeight(String.valueOf(EntityOptionsView.HEIGHT));
-        super.setWidth(String.valueOf(EntityOptionsView.WIDTH));
-    }
+  public EntityOptionsDefLicensePanel(final I18nTranslationService i18n, final CoreResources res) {
+    tabTitle = new IconLabel(res.copyleft(), i18n.t("License"));
+    tabTitle.setHeight("22px");
+    final VerticalPanel vp = new VerticalPanel();
+    final Label intro = new Label();
+    intro.setWordWrap(true);
+    intro.setText(i18n.t("This is the default license for all the contents of this group (you can also select another different license per content):"));
+    vp.add(intro);
+    licenseImage = new Image();
+    vp.add(licenseImage);
+    licenseImage.addStyleName("kune-pointer");
+    change = new Button(i18n.t("Change"));
+    initWidget(vp);
+    super.setHeight(String.valueOf(EntityOptionsView.HEIGHT));
+    super.setWidth(String.valueOf(EntityOptionsView.WIDTH));
+  }
 
-    @Override
-    public HasClickHandlers getChange() {
-        return change;
-    }
+  @Override
+  public HasClickHandlers getChange() {
+    return change;
+  }
 
-    @Override
-    public HasClickHandlers getLicenseImage() {
-        return licenseImage;
-    }
+  @Override
+  public HasClickHandlers getLicenseImage() {
+    return licenseImage;
+  }
 
-    @Override
-    public IsWidget getTabTitle() {
-        return tabTitle;
-    }
+  @Override
+  public IsWidget getTabTitle() {
+    return tabTitle;
+  }
 
-    @Override
-    public void openWindow(final String url) {
-        KuneWindowUtils.open(url);
-    }
+  @Override
+  public void openWindow(final String url) {
+    KuneWindowUtils.open(url);
+  }
 
-    @Override
-    public void setLicense(final LicenseDTO defaultLicense) {
-        licenseImage.setUrl(defaultLicense.getImageUrl());
-        Tooltip.to(licenseImage, defaultLicense.getLongName());
-    }
+  @Override
+  public void setLicense(final LicenseDTO defaultLicense) {
+    licenseImage.setUrl(defaultLicense.getImageUrl());
+    Tooltip.to(licenseImage, defaultLicense.getLongName());
+  }
 }

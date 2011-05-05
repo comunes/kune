@@ -33,66 +33,67 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Event;
 
 public class GwtIconLabelGui extends AbstractGuiItem {
-    private IconLabel iconLabel;
+  private IconLabel iconLabel;
 
-    @Override
-    protected void addStyle(final String style) {
-        iconLabel.addStyleName(style);
+  @Override
+  protected void addStyle(final String style) {
+    iconLabel.addStyleName(style);
+  }
+
+  @Override
+  protected void clearStyles() {
+    iconLabel.setStyleName("k-none");
+  }
+
+  @Override
+  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    super.descriptor = descriptor;
+    iconLabel = new IconLabel("");
+    descriptor.putValue(ParentWidget.PARENT_UI, this);
+    final String id = descriptor.getId();
+    if (id != null) {
+      iconLabel.ensureDebugId(id);
     }
-
-    @Override
-    protected void clearStyles() {
-        iconLabel.setStyleName("k-none");
-    }
-
-    @Override
-    public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-        super.descriptor = descriptor;
-        iconLabel = new IconLabel("");
-        descriptor.putValue(ParentWidget.PARENT_UI, this);
-        final String id = descriptor.getId();
-        if (id != null) {
-            iconLabel.ensureDebugId(id);
+    initWidget(iconLabel);
+    iconLabel.getFocus().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        final AbstractAction action = descriptor.getAction();
+        if (action != null) {
+          action.actionPerformed(new ActionEvent(iconLabel, getTargetObjectOfAction(descriptor),
+              Event.as(event.getNativeEvent())));
         }
-        initWidget(iconLabel);
-        iconLabel.getFocus().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-                final AbstractAction action = descriptor.getAction();
-                if (action != null) {
-                    action.actionPerformed(new ActionEvent(iconLabel, getTargetObjectOfAction(descriptor),
-                            Event.as(event.getNativeEvent())));
-                }
-            }
-        });
-        configureItemFromProperties();
-        return this;
-    }
+      }
+    });
+    configureItemFromProperties();
+    return this;
+  }
 
-    @Override
-    public void setEnabled(final boolean enabled) {
-        super.setVisible(enabled);
-    }
+  @Override
+  public void setEnabled(final boolean enabled) {
+    super.setVisible(enabled);
+  }
 
-    @Override
-    protected void setIconStyle(final String style) {
-        iconLabel.setRightIcon(style);
-    }
+  @Override
+  protected void setIconStyle(final String style) {
+    iconLabel.setRightIcon(style);
+    iconLabel.addRightIconStyle("k-fl");
+  }
 
-    @Override
-    public void setText(final String text) {
-        iconLabel.setText(text);
-    }
+  @Override
+  public void setText(final String text) {
+    iconLabel.setText(text);
+  }
 
-    @Override
-    public void setToolTipText(final String tooltip) {
-        final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
-        iconLabel.setTooltip(key == null ? tooltip : tooltip + key.toString());
-    }
+  @Override
+  public void setToolTipText(final String tooltip) {
+    final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
+    iconLabel.setTooltip(key == null ? tooltip : tooltip + key.toString());
+  }
 
-    @Override
-    public boolean shouldBeAdded() {
-        return true;
-    }
+  @Override
+  public boolean shouldBeAdded() {
+    return true;
+  }
 
 }

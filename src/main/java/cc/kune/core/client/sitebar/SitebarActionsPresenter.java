@@ -119,7 +119,7 @@ public class SitebarActionsPresenter extends
     OPTIONS_MENU.putValue(Action.NAME, i18n.t("Options"));
     OPTIONS_MENU.putValue(Action.SMALL_ICON, res.arrowdownsitebar());
     OPTIONS_MENU.setParent(RIGHT_TOOLBAR);
-    OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar, k-fl");
+    OPTIONS_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION, AbstractGxtMenuGui.MenuPosition.bl);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         RIGHT_TOOLBAR);
