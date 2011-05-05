@@ -116,7 +116,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
   private void createActions() {
     LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
     LOGGED_USER_MENU.setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
-    LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar, k-fl");
+    LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     LOGGED_USER_MENU.setRightIcon(res.arrowdownsitebar());
     siteOptions.getRightToolbar().add(LOGGED_USER_MENU);
     separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActionsPresenter.RIGHT_TOOLBAR);

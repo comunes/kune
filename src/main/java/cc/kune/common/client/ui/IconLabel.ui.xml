@@ -5,7 +5,7 @@
     .label {
       text-decoration: none;
       display: table-cell;
-      float: left;
+      /* float: left; */
     }
 
     .label a:link {

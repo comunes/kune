@@ -43,6 +43,7 @@ public class GwtIconLabelGui extends AbstractGuiItem {
   @Override
   protected void clearStyles() {
     iconLabel.setStyleName("k-none");
+    iconLabel.setStyleName("k-table");
   }
 
   @Override

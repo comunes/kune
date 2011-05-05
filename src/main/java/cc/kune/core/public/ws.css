@@ -1192,3 +1192,15 @@ table.k-folder-viewer {
 }
 
 /* end of suggestbox */
+
+.k-table {
+  display: table;
+}
+
+.k-table-row {
+  display: table-row;
+}
+
+.k-table-cell {
+  display: table-cell;
+}
