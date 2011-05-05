@@ -30,10 +30,10 @@ import cc.kune.gspace.client.options.EntityOptionsView;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class EntityOptionsDefLicensePanel extends Composite implements EntityOptionsDefLicenseView {
 
@@ -43,19 +43,20 @@ public class EntityOptionsDefLicensePanel extends Composite implements EntityOpt
 
   public EntityOptionsDefLicensePanel(final I18nTranslationService i18n, final CoreResources res) {
     tabTitle = new IconLabel(res.copyleft(), i18n.t("License"));
-    tabTitle.setHeight("22px");
-    final VerticalPanel vp = new VerticalPanel();
+    final FlowPanel flow = new FlowPanel();
     final Label intro = new Label();
     intro.setWordWrap(true);
     intro.setText(i18n.t("This is the default license for all the contents of this group (you can also select another different license per content):"));
-    vp.add(intro);
+    flow.add(intro);
     licenseImage = new Image();
-    vp.add(licenseImage);
+    flow.add(licenseImage);
     licenseImage.addStyleName("kune-pointer");
     change = new Button(i18n.t("Change"));
-    initWidget(vp);
-    super.setHeight(String.valueOf(EntityOptionsView.HEIGHT));
-    super.setWidth(String.valueOf(EntityOptionsView.WIDTH));
+    initWidget(flow);
+    flow.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
+    flow.setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
+    flow.addStyleName("k-overflow-y-auto");
+    flow.addStyleName("k-tab-panel");
   }
 
   @Override

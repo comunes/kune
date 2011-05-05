@@ -138,7 +138,7 @@
   color: #552200;
   font-size: 20px;
   font-weight: bold;
-  margin: 5px 0 5px 10px;
+  margin: 10px 0 10px 10px;
 }
 
 .k-dialog-innerp {
@@ -154,10 +154,6 @@
 
 .k-dialog-btn-area div {
   margin: 10px
-}
-
-.k-dialog-innerp table {
-  margin: 5px;
 }
 
 .k-dialog-btn {
@@ -638,4 +634,20 @@
 
 .k-btn-min {
   min-width: 19px !important;
+}
+
+.k-overflow-y-scroll {
+  overflow-y: scroll;
+}
+.k-overflow-y-auto {
+  overflow-y: auto;
+}
+.k-overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.k-tab-panel {
+    padding: 10px;
+    background-color: #F2F0F0;
+    border: 1px solid #D0D0D0;
 }

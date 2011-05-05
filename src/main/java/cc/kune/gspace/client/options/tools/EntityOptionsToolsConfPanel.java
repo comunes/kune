@@ -48,12 +48,14 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
   public EntityOptionsToolsConfPanel(final I18nTranslationService i18n, final CoreResources res) {
     tabTitle = new IconLabel(res.kunePreferences(), i18n.t("Tools"));
     this.i18n = i18n;
-    super.setHeight(EntityOptionsView.HEIGHT);
+    // super.setHeight(EntityOptionsView.HEIGHT);
     super.setWidth(EntityOptionsView.WIDTH);
     super.setFrame(true);
     super.add(new HiddenField());
     super.getFormPanel().setLabelWidth(20);
     fields = new HashMap<String, CheckBox>();
+    super.addStyleName("k-overflow-y-auto");
+    // super.addStyleName("k-tab-panel");
   }
 
   @Override
@@ -65,7 +67,6 @@ public class EntityOptionsToolsConfPanel extends DefaultForm implements EntityOp
       @Override
       public void handleEvent(final BaseEvent be) {
         handler.onClick(null);
-        // presenter.onCheck(tool, checked);
       }
     });
     super.add(checkbox);

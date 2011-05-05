@@ -4,10 +4,9 @@
   <g:VerticalPanel spacing="12"
     addStyleNames="k-dialog-outerp, k-bottom-10corners">
     <g:SimplePanel>
-      <g:VerticalPanel addStyleNames="k-dialog-innerp, k-3corners"
-        spacing="10">
-        <k:IconLabel ui:field="title" addStyleNames="k-dialog-title" />
-          <g:VerticalPanel ui:field="vp" />
+      <g:VerticalPanel addStyleNames="k-dialog-innerp, k-3corners">
+        <k:IconLabel ui:field="title" addStyleNames="k-dialog-title, " />
+          <g:FlowPanel ui:field="vp" addStyleNames="kune-Margin-Medium-trbl" />
         <g:VerticalPanel ui:field="bottomPanel" width="100%"></g:VerticalPanel>
       </g:VerticalPanel>
     </g:SimplePanel>

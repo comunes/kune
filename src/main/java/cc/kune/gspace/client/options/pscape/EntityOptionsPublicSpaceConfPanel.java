@@ -35,13 +35,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class EntityOptionsPublicSpaceConfPanel extends VerticalPanel implements
+public class EntityOptionsPublicSpaceConfPanel extends FlowPanel implements
     EntityOptionsPublicSpaceConfView {
 
   private final Image backImage;
@@ -55,13 +56,8 @@ public class EntityOptionsPublicSpaceConfPanel extends VerticalPanel implements
       final FileDownloadUtils downUtils, final CoreResources res) {
     this.downUtils = downUtils;
     tabTitle = new IconLabel(res.themeChoose(), i18n.t("Style"));
-    // super.setIconCls("k-colors-icon");
-    // super.setAutoScroll(true);
-    // super.setBorder(false);
-    super.setHeight(String.valueOf(EntityOptionsView.HEIGHT));
-    super.setWidth(String.valueOf(EntityOptionsView.WIDTH));
-    // super.setFrame(true);
-    // super.setPaddings(10);
+    super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
+    super.setWidth(String.valueOf(EntityOptionsView.WIDTH) + "px");
 
     final HorizontalPanel wsHP = new HorizontalPanel();
     final Label wsThemeInfo = new Label(i18n.t("Change this workspace theme:"));
@@ -92,7 +88,7 @@ public class EntityOptionsPublicSpaceConfPanel extends VerticalPanel implements
 
       @Override
       public void onClick(final ClickEvent event) {
-        NotifyUser.info(TextUtils.IN_DEVELOPMENT_P);
+        NotifyUser.info(TextUtils.IN_DEVELOPMENT);
       }
     };
     for (int i = 1; i <= 6; i++) {
@@ -103,6 +99,8 @@ public class EntityOptionsPublicSpaceConfPanel extends VerticalPanel implements
     }
     add(stylesPanel);
     setBackImageVisibleImpl(false);
+    super.addStyleName("k-overflow-y-auto");
+    super.addStyleName("k-tab-panel");
   }
 
   @Override

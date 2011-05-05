@@ -51,7 +51,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
   @UiField
   IconLabel title;
   @UiField
-  VerticalPanel vp;
+  FlowPanel vp;
 
   public BasicDialog() {
     initWidget(uiBinder.createAndBindUi(this));

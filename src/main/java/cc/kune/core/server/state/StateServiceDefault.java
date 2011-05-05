@@ -19,8 +19,6 @@
  */
 package cc.kune.core.server.state;
 
-import java.sql.Date;
-
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
@@ -110,13 +108,14 @@ public class StateServiceDefault implements StateService {
       try {
         final Wavelet wavelet = kuneWaveManager.fetchWavelet(
             JavaWaverefEncoder.decodeWaveRefFromPath(waveId), content.getAuthors().get(0).getShortName());
-        state.setContent(wavelet.getRootBlip().getContent());
+        final String currentContent = wavelet.getRootBlip().getContent();
+        state.setContent(currentContent);
         // Well we "cache" the last modified time of waves in db (w'll find
-        // another way to
-        // do it better in the future with db persitence of waves)
+        // another way to do it better in the future with db persitence of
+        // waves)
         contentManager.setModifiedOn(content, wavelet.getLastModifiedTime());
+        // contentManager.save(userLogged, content, currentContent);
         state.setTitle(wavelet.getTitle());
-        state.setModifiedOn(new Date(wavelet.getLastModifiedTime()));
         state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveManager.isParticipant(wavelet,
             userLogged.getShortName()) : false);
       } catch (final InvalidWaveRefException e) {

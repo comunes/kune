@@ -22,6 +22,7 @@ package cc.kune.core.server.access;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -74,6 +75,15 @@ public class FinderTest {
     Mockito.when(contentManager.find(1L)).thenReturn(descriptor);
 
     finder.getContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
+  }
+
+  @Before
+  public void createSession() {
+    this.groupManager = Mockito.mock(GroupManager.class);
+    this.containerManager = Mockito.mock(ContainerManager.class);
+    this.contentManager = Mockito.mock(ContentManager.class);
+    this.rateManager = Mockito.mock(RateManager.class);
+    this.finder = new FinderServiceDefault(groupManager, containerManager, contentManager, rateManager);
   }
 
   @Test

@@ -94,6 +94,7 @@ public abstract class AbstractTabbedDialogPanel implements AbstractTabbedDialogV
         dialogId).sndButtonTitle(sndBtnTitle).title(title).build();
     messageErrorBar = new MessageToolbar(images, errorLabelId);
     tabPanel = new DecoratedTabPanel();
+    tabPanel.getDeckPanel().setSize(String.valueOf(width), String.valueOf(height));
     dialog.getInnerPanel().add(tabPanel);
   }
 
